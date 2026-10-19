@@ -354,7 +354,7 @@ lessons:
   covers: [reproduceerbaarheid-en-open-science#1, reproduceerbaarheid-en-open-science#2, reproduceerbaarheid-en-open-science#3]
   requires: [repro-guided-report, res-experiment-log, data-provenance]
   introduces: [c:open-artifact]
-  uses: [c:license]
+  uses: [c:license, c:hash, c:device, c:gpu, py:str, py:encode-decode, c:code-version, p:experiment-log, c:json-lines, c:checkpoint, c:seed, c:run, c:reproduction, c:paper, p:reproduction-report, c:negative-result, p:repro-kit, c:data-provenance, c:accuracy, c:module, c:package, py:hashlib, py:sorted, py:dict, py:for, py:append, py:def, py:return, py:import, py:print, py:comment, py:underscore-name, py:string-literal, q:predict, q:choice, q:exercise-with-check, q:run-cell]
   needs: any
 
 - id: repro-own-choose

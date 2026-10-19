@@ -1,0 +1,33 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: res-share-work
+minutes: 35
+title:
+  en: "Sharing your work so others can repeat it"
+  nl: "Je werk delen zodat anderen het kunnen herhalen"
+goal:
+  en: "put your reproduction together as an open artifact: code, settings, seeds, versions, logs and report, with a license, a README and checksums, so that someone else can run it again."
+  nl: "je reproductie samenvoegen tot een open artefact: code, instellingen, seeds, versies, logboeken en verslag, met een licentie, een README en checksums, zodat iemand anders hem opnieuw kan draaien."
+summary:
+  - en: "An open artifact holds all that is needed to run the work again: the code, the settings and seeds, the versions it ran with, the data or how to make it, and a script to start."
+    nl: "Een open artefact bevat alles wat nodig is om het werk opnieuw te draaien: de code, de instellingen en seeds, de versies waarmee het draaide, de data of hoe je die maakt, en een script om te beginnen."
+  - en: "What is not yours to hand out gets a link, and secrets stay out; a license says what others may do with the rest."
+    nl: "Wat niet van jou is om uit te delen, krijgt een link, en geheimen blijven erbuiten; een licentie zegt wat anderen met de rest mogen."
+  - en: "A checksum of every file, all 64 hex digits of its SHA-256, shows whoever gets the folder whether a file changed on the way."
+    nl: "Een checksum van elk bestand, alle 64 hextekens van zijn SHA-256, laat wie de map krijgt zien of er onderweg een bestand veranderde."
+can_now:
+  - en: "give every file of a folder a checksum that others can check"
+    nl: "elk bestand van een map een checksum geven die anderen kunnen controleren"
+    by: checksums
+  - en: "decide what goes into a shared folder, what gets a link, and what stays out"
+    nl: "beslissen wat in een gedeelde map komt, wat een link krijgt, en wat erbuiten blijft"
+    by: what-goes
+  - en: "choose a license that lets others rerun and share your code"
+    nl: "een licentie kiezen waarmee anderen je code opnieuw kunnen draaien en delen"
+    by: license
+further_reading:
+  - en: "Joelle Pineau and others (2021), *Improving Reproducibility in Machine Learning Research*, JMLR 22: the checklist, with what to share"
+    nl: "Joelle Pineau en anderen (2021), *Improving Reproducibility in Machine Learning Research*, JMLR 22: de checklist, met wat je deelt"
+  - en: "The Turing Way Community (2022), *The Turing Way: A handbook for reproducible, ethical and collaborative research*, Zenodo: the chapters on reproducibility and licensing"
+    nl: "The Turing Way Community (2022), *The Turing Way: A handbook for reproducible, ethical and collaborative research*, Zenodo: de hoofdstukken over reproduceerbaarheid en licenties"
