@@ -1,0 +1,36 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: repro-guided-report
+minutes: 45
+title:
+  en: "Guided reproduction 7: write the report"
+  nl: "Begeleide reproductie 7: schrijf het verslag"
+goal:
+  en: "write a reproduction report: the claim, the setup, every result including the negative ones, the differences with the paper, and what you could not check."
+  nl: "een reproductierapport schrijven: de claim, de opzet, elk resultaat met de negatieve erbij, de verschillen met de paper, en wat je niet kon controleren."
+summary:
+  - en: "A reproduction report has five parts, always in the same order: the claim, the setup, the results, the differences with the paper, and what you could not check."
+    nl: "Een reproductierapport heeft vijf delen, altijd in dezelfde volgorde: de claim, de opzet, de resultaten, de verschillen met de paper, en wat je niet kon controleren."
+  - en: "Every run you planned goes into the results, with the rule you fixed before: picking the runs that suit the claim moves the number."
+    nl: "Elke run die je plande, komt in de resultaten, met de regel die je vooraf vastlegde: de runs uitkiezen die bij de claim passen, verschuift het getal."
+  - en: "A negative result is a result: write it with its budget, \"not within 12,000 steps\", never as \"never\"."
+    nl: "Een negatief resultaat is een resultaat: schrijf het met zijn budget, \"not within 12,000 steps\", nooit als \"nooit\"."
+can_now:
+  - en: "give every run a row in the results table, also the ones that did not get there"
+    nl: "elke run een rij geven in de tabel met resultaten, ook de runs die er niet kwamen"
+    by: result-rows
+  - en: "write a report with the same five sections every time"
+    nl: "een verslag schrijven met elke keer dezelfde vijf secties"
+    by: report
+  - en: "say what your reproduction could not check"
+    nl: "zeggen wat je reproductie niet kon controleren"
+    by: not-checked
+  - en: "give a verdict that follows from your results"
+    nl: "een oordeel geven dat uit je resultaten volgt"
+    by: verdict
+further_reading:
+  - en: "Nicolas Rougier and others (2017), *Sustainable computational science: the ReScience initiative*, PeerJ Computer Science 3:e142: a journal that publishes reproductions of computational research"
+    nl: "Nicolas Rougier en anderen (2017), *Sustainable computational science: the ReScience initiative*, PeerJ Computer Science 3:e142: een tijdschrift dat reproducties van computationeel onderzoek publiceert"
+  - en: "Joelle Pineau and others (2021), *Improving Reproducibility in Machine Learning Research*, JMLR 22: what a report of a machine learning result should say"
+    nl: "Joelle Pineau en anderen (2021), *Improving Reproducibility in Machine Learning Research*, JMLR 22: wat een verslag van een resultaat in machine learning moet zeggen"

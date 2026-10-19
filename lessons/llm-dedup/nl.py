@@ -131,10 +131,10 @@ def text_idea():
         | **deduplicatie** | | kopieën uit een dataset verwijderen, exacte kopieën en near-duplicates, zodat een model niet vaak dezelfde tekst ziet | |
         | **near-duplicate** | | een document dat bijna gelijk is aan een ander, zoals dezelfde melding met een andere naam; zoeken naar exacte kopieën vindt het niet | |
         | **shingling** | | een document knippen in al zijn overlappende reeksen van $k$ woorden, zijn shingles | `shingles(text, 5)` |
-        | **Jaccard similarity** | | de overlap van twee sets: de items die ze delen gedeeld door al hun verschillende items samen; 1 voor dezelfde set, 0 voor sets zonder een gedeeld item | `len(a & b) / len(a \| b)` |
+        | **Jaccard similarity** | | de overlap van twee sets: de items die ze delen gedeeld door al hun verschillende items samen; 1 voor dezelfde set, 0 voor sets zonder een gedeeld item | <code>len(a &amp; b) / len(a &#124; b)</code> |
         | **MinHash** | | een signature van een document: voor elk van veel hashfuncties het kleinste getal dat hij aan een shingle geeft; twee signatures zijn op ongeveer zoveel plekken gelijk als de documenten overlappen | `minhash(hashes, a, b)` |
         | **locality-sensitive hashing** | | items die op elkaar lijken met grote kans in dezelfde bucket stoppen, zodat je alleen items in dezelfde bucket hoeft te vergelijken; hier: banding van de signatures | |
-        | `&`, `\|`, `-` op sets | | `a & b` is de set van de items in beide sets, `a \| b` van de items in minstens één, `a - b` van de items in `a` maar niet in `b` | `{1, 2} & {2, 3}` geeft `{2}` |
+        | `&`, <code>&#124;</code>, `-` op sets | | `a & b` is de set van de items in beide sets, <code>a &#124; b</code> van de items in minstens één, `a - b` van de items in `a` maar niet in `b` | `{1, 2} & {2, 3}` geeft `{2}` |
         | **outer product** | | een tabel van elk getal van de ene array keer elk getal van de andere: rij `r`, kolom `c` bevat `h[r] * a[c]` | `np.outer(h, a)` |
         | $\bmod$ | modulo | de rest na delen: $10 \bmod 3 = 1$ | `10 % 3` |
         """),

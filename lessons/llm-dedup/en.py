@@ -131,10 +131,10 @@ def text_idea():
         | **deduplication** | | removing copies from a dataset, exact copies and near-duplicates, so that a model does not see the same text many times | |
         | **near-duplicate** | | a document that is almost the same as another, such as the same notice with another name; a check for exact copies does not find it | |
         | **shingling** | | cutting a document into all its overlapping runs of $k$ words, its shingles | `shingles(text, 5)` |
-        | **Jaccard similarity** | | the overlap of two sets: the items they share divided by all their different items together; 1 for the same set, 0 for sets without a shared item | `len(a & b) / len(a \| b)` |
+        | **Jaccard similarity** | | the overlap of two sets: the items they share divided by all their different items together; 1 for the same set, 0 for sets without a shared item | <code>len(a &amp; b) / len(a &#124; b)</code> |
         | **MinHash** | | a signature of a document: for each of many hash functions, the smallest number it gives a shingle; two signatures agree in about as many places as the documents overlap | `minhash(hashes, a, b)` |
         | **locality-sensitive hashing** | | putting similar items in the same bucket with a high chance, so that only items in the same bucket need to be compared; here, banding the signatures | |
-        | `&`, `\|`, `-` on sets | | `a & b` is the set of the items in both sets, `a \| b` of the items in at least one, `a - b` of the items in `a` but not in `b` | `{1, 2} & {2, 3}` gives `{2}` |
+        | `&`, <code>&#124;</code>, `-` on sets | | `a & b` is the set of the items in both sets, <code>a &#124; b</code> of the items in at least one, `a - b` of the items in `a` but not in `b` | `{1, 2} & {2, 3}` gives `{2}` |
         | **outer product** | | a table of every number of one array times every number of another: row `r`, column `c` holds `h[r] * a[c]` | `np.outer(h, a)` |
         | $\bmod$ | mod | the remainder after dividing: $10 \bmod 3 = 1$ | `10 % 3` |
         """),

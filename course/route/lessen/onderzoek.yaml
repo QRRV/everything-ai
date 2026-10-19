@@ -342,8 +342,8 @@ lessons:
   idea: "Write a short reproduction report: claim, setup, result, differences and what you could not check, including negative results; the kit gets the report template."
   covers: [papers-reproduceren#6, resultaten-opschrijven-en-presenteren#0, resultaten-opschrijven-en-presenteren#7]
   requires: [repro-guided-compare]
-  introduces: [p:reproduction-report]
-  uses: [p:repro-kit]
+  introduces: [p:reproduction-report, c:negative-result]
+  uses: [p:repro-kit, p:reproduction-plan, p:redraw-a-figure, p:experiment-log, p:import-own-code, c:undocumented-detail, c:cherry-picking, c:ablation-grid, c:ablation, c:paired-bootstrap, c:bootstrap, c:confidence-interval, c:median, c:seed, c:run, c:grokking, c:reproduction, c:paper, c:accuracy, c:validation-set, c:train-fraction, c:generalization, c:weight-decay, c:adamw, c:learning-rate, c:batch-size, c:warmup, c:embedding, c:decoder-only-transformer, c:rmsnorm, c:swiglu, c:rope, c:modular-arithmetic, c:experiment, c:module, v:log-scale, py:dict, py:list, py:append, py:def, py:return, py:for, py:if, py:import, py:f-string, py:is-none, py:and-operator, py:comparison, py:str-join, py:string-literal, py:print, py:comment, py:underscore-name, q:predict, q:choice, q:explain, q:exercise-with-check, q:run-cell]
   needs: any
 
 - id: res-share-work
