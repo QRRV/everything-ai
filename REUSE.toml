@@ -118,6 +118,12 @@ SPDX-FileCopyrightText = "2026 Everything AI contributors (answers written by th
 SPDX-License-Identifier = "CC-BY-4.0"
 
 [[annotations]]
+path = "data/course-seeds.jsonl"
+precedence = "override"
+SPDX-FileCopyrightText = "2026 Everything AI contributors"
+SPDX-License-Identifier = "CC-BY-4.0"
+
+[[annotations]]
 path = "data/course-ablation.jsonl"
 precedence = "override"
 SPDX-FileCopyrightText = "2026 Everything AI contributors"

@@ -328,10 +328,10 @@ lessons:
   idea: "Compare your numbers with the paper over several seeds with a paired bootstrap, and hunt for undocumented details when they differ; the kit gets the comparison."
   covers: [papers-reproduceren#4, papers-reproduceren#5]
   requires: [repro-guided-ablation, res-significance]
-  uses: [p:repro-kit]
-  compute_minutes: 10
-  fallback: [recorded]
-  needs: gpu8
+  introduces: [c:undocumented-detail]
+  uses: [p:repro-kit, p:reproduction-plan, p:redraw-a-figure, c:ablation-grid, c:ablation, c:paired-bootstrap, c:bootstrap, c:confidence-interval, c:median, c:statistically-significant, c:seed, c:run, c:run-to-run-variance, c:grokking, c:reproduction, c:paper, c:accuracy, c:validation-set, c:train-fraction, c:weight-decay, c:experiment, p:experiment-log, c:logarithm, v:log-scale, c:token, c:loss, c:embedding, c:decoder-only-transformer, c:rmsnorm, c:swiglu, c:rope, c:module, p:import-own-code, py:dict, py:list, py:append, py:def, py:return, py:for, py:if, py:import, py:comprehension, py:f-string, py:math-module, py:is-none, py:or-operator, q:predict, q:choice, q:exercise-with-check, q:run-cell]
+  data: [course-seeds]
+  needs: any
 
 - id: repro-guided-report
   title: "Guided reproduction 7: write the report"

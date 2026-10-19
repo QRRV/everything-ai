@@ -1,0 +1,33 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: repro-guided-compare
+minutes: 50
+title:
+  en: "Guided reproduction 6: does it match the paper?"
+  nl: "Begeleide reproductie 6: klopt het met de paper?"
+goal:
+  en: "compare your reproduction with a claim of the paper over several seeds, with a paired bootstrap, and line up your setup with the paper's to find what it does not say."
+  nl: "je reproductie over meerdere seeds vergelijken met een claim van de paper, met een gepaarde bootstrap, en je opzet naast die van de paper leggen om te vinden wat hij niet zegt."
+summary:
+  - en: "Pair the runs by seed: the same seed gives the same split, starting weights and batches, so a pair differs in the one setting you changed."
+    nl: "Koppel de runs op seed: dezelfde seed geeft dezelfde splitsing, beginwaarden en batches, dus verschilt een paar alleen in de ene instelling die je veranderde."
+  - en: "Compare moments as logs, and give the mean with its paired bootstrap interval; with one seed, the interval cannot see any spread."
+    nl: "Vergelijk momenten als logaritmen, en geef het gemiddelde met zijn interval uit de gepaarde bootstrap; met één seed ziet het interval geen spreiding."
+  - en: "A number matches the paper's only with the same setup: sort every detail into what the paper says, what it does not say, and what you do differently on purpose."
+    nl: "Een getal klopt met dat van de paper alleen bij dezelfde opzet: deel elk detail in bij wat de paper zegt, wat hij niet zegt, en wat jij bewust anders doet."
+can_now:
+  - en: "compare two settings over seeds, paired, with an interval"
+    nl: "twee instellingen over seeds vergelijken, gepaard, met een interval"
+    by: compare
+  - en: "find the details a paper does not give"
+    nl: "de details vinden die een paper niet geeft"
+    by: details
+  - en: "say how far your reproduction agrees with the paper"
+    nl: "zeggen in hoeverre je reproductie met de paper overeenkomt"
+    by: agrees
+further_reading:
+  - en: "Alethea Power and others (2022), *Grokking: Generalization Beyond Overfitting on Small Algorithmic Datasets*, arXiv:2201.02177: section 3.3 and Appendix A.1"
+    nl: "Alethea Power en anderen (2022), *Grokking: Generalization Beyond Overfitting on Small Algorithmic Datasets*, arXiv:2201.02177: paragraaf 3.3 en bijlage A.1"
+  - en: "Joelle Pineau and others (2021), *Improving Reproducibility in Machine Learning Research*, JMLR 22: the ML reproducibility checklist"
+    nl: "Joelle Pineau en anderen (2021), *Improving Reproducibility in Machine Learning Research*, JMLR 22: de checklist voor reproduceerbaarheid in ML"
