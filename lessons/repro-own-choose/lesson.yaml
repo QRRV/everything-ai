@@ -1,0 +1,28 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: repro-own-choose
+minutes: 40
+title:
+  en: "Your reproduction 1: choose a paper"
+  nl: "Je reproductie 1: kies een paper"
+goal:
+  en: "choose the paper of your own reproduction, from the course's list or one of your own, that fits your computer and your time, and say why."
+  nl: "de paper van je eigen reproductie kiezen, van de lijst van de course of een eigen, die past bij je computer en je tijd, en zeggen waarom."
+summary:
+  - en: "Every paper on the course's list has a claim you can show false, data you may use, and a core result estimated to fit an evening or a night on the recommended spec."
+    nl: "Elke paper op de lijst van de course heeft een claim die je kunt weerleggen, data die je mag gebruiken, en een kernresultaat waarvan de schatting in een avond of een nacht past op de aanbevolen specs."
+  - en: "What your computer has, and the hours you have, decide which of them fit; a paper of your own has to pass the same checks."
+    nl: "Wat je computer heeft, en de uren die je hebt, bepalen welke ervan passen; een eigen paper moet dezelfde checks halen."
+  - en: "Your choice goes into your project, as work/projects/own/paper.json, for the lessons of your reproduction."
+    nl: "Je keuze gaat in je project, als work/projects/own/paper.json, voor de lessen van je reproductie."
+can_now:
+  - en: "tell whether a paper fits your computer and your time"
+    nl: "zeggen of een paper past bij je computer en je tijd"
+    by: fits
+  - en: "say why the paper you chose is one you can reproduce"
+    nl: "zeggen waarom de paper die je koos er een is die je kunt reproduceren"
+    by: why-this
+further_reading:
+  - en: "Joelle Pineau and others (2021), *Improving Reproducibility in Machine Learning Research*, JMLR 22: the reproducibility program of NeurIPS 2019, with its code policy, its checklist and the ML Reproducibility Challenge"
+    nl: "Joelle Pineau en anderen (2021), *Improving Reproducibility in Machine Learning Research*, JMLR 22: het reproduceerbaarheidsprogramma van NeurIPS 2019, met zijn regels voor code, zijn checklist en de ML Reproducibility Challenge"

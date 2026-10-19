@@ -365,7 +365,9 @@ lessons:
   project: repro
   idea: "Choose a paper from the course list, or one of your own that passes the same checks, in the spirit of the ML Reproducibility Challenge."
   covers: [een-reproduceerbare-paper-kiezen#3]
-  requires: [repro-guided-report]
+  requires: [repro-guided-report, res-share-work]
+  introduces: [py:list-index]
+  uses: [p:choose-a-reproducible-paper, p:repro-kit, p:reproduction-report, c:reproduction, c:falsifiable, c:ml-reproducibility-challenge, c:cherry-picking, c:paper, c:license, c:gpu, c:transformer, c:seed, c:run, c:overfitting, c:accuracy, c:loss, c:module, py:list, py:dict, py:comparison, py:and-operator, py:bool, py:def, py:return, py:print, py:comment, py:underscore-name, py:string-literal, q:predict, q:choice, q:explain, q:exercise-with-check, q:run-cell]
   needs: any
 
 - id: repro-own-claim
@@ -418,7 +420,7 @@ lessons:
   needs: rec
 
 - id: repro-own-ablation
-  title: "Your reproduction 6: ablation and comparison"
+  title: "Your reproduction 6: the ablation"
   level: expert
   module: own-reproduction
   kind: project
@@ -432,7 +434,7 @@ lessons:
 
 - id: repro-own-compare
   tak: onderzoek
-  title: "Own reproduction: compare with the paper"
+  title: "Your reproduction 7: compare with the paper"
   level: expert
   module: own-reproduction
   kind: project
@@ -444,7 +446,7 @@ lessons:
   needs: any
 
 - id: repro-own-report
-  title: "Your reproduction 7: report and share"
+  title: "Your reproduction 8: report and share"
   level: expert
   module: own-reproduction
   kind: project
