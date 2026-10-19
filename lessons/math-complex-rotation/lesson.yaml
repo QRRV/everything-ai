@@ -1,0 +1,28 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: math-complex-rotation
+minutes: 40
+title:
+  en: "Rotating vectors and complex numbers"
+  nl: "Vectoren draaien en complexe getallen"
+goal:
+  en: "turn 2D vectors by multiplying with complex numbers of length 1, write those numbers with Euler's formula, and show that turned dot products depend on the angles only through their difference."
+  nl: "2D-vectoren draaien door ze te vermenigvuldigen met complexe getallen met lengte 1, die getallen schrijven met de formule van Euler, en laten zien dat bij gedraaide inproducten alleen het verschil van de hoeken telt."
+summary:
+  - en: "A complex number $a + bi$ is the point $(a, b)$ in the plane, with $i^2 = -1$; multiplying two of them multiplies their lengths and adds their angles."
+    nl: "Een complex getal $a + bi$ is het punt $(a, b)$ in het vlak, met $i^2 = -1$; bij het vermenigvuldigen van twee ervan worden hun lengtes vermenigvuldigd en hun hoeken opgeteld."
+  - en: "Euler's formula, $e^{i\\theta} = \\cos\\theta + i\\sin\\theta$, is the number of length 1 at angle $\\theta$; multiplying by it turns a point by $\\theta$, counterclockwise, as a rotation matrix does."
+    nl: "De formule van Euler, $e^{i\\theta} = \\cos\\theta + i\\sin\\theta$, is het getal met lengte 1 bij hoek $\\theta$; ermee vermenigvuldigen draait een punt over $\\theta$, tegen de klok in, net als een rotatiematrix."
+  - en: "The dot product of complex vectors conjugates the second one, so turning $\\mathbf{u}$ by $\\alpha$ and $\\mathbf{v}$ by $\\beta$ multiplies each term by $e^{i(\\alpha - \\beta)}$: of the angles, only the difference counts."
+    nl: "Het inproduct van complexe vectoren neemt de geconjugeerde van de tweede, dus $\\mathbf{u}$ draaien over $\\alpha$ en $\\mathbf{v}$ over $\\beta$ vermenigvuldigt elke term met $e^{i(\\alpha - \\beta)}$: van de hoeken telt alleen het verschil."
+can_now:
+  - en: "turn the pairs of a real vector, each by its own angle, with complex numbers"
+    nl: "de paren van een reële vector draaien, elk over zijn eigen hoek, met complexe getallen"
+    by: rotate-pairs
+  - en: "tell which turns of a query and a key keep their dot product the same"
+    nl: "zeggen welke draaiingen van een query en een key hun inproduct gelijk laten"
+    by: relative
+  - en: "show that turning two real vectors pair by pair changes their dot product only through the differences of the angles"
+    nl: "laten zien dat bij twee reële vectoren die je paar voor paar draait, alleen de verschillen van de hoeken tellen voor hun inproduct"
+    by: real-dot

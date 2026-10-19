@@ -1,0 +1,29 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+# termen:allow transpose
+id: attn-transformer-block
+minutes: 30
+title:
+  en: "The transformer block"
+  nl: "Het transformer block"
+goal:
+  en: "build a transformer block, causal multi-head attention and an MLP, each with layer normalization and a residual connection, for a mini-batch of texts, into your project."
+  nl: "een transformer block bouwen, causale multi-head attention en een MLP, elk met layer normalization en een residual connection, voor een mini-batch van teksten, in je project."
+summary:
+  - en: "A transformer block has two parts: multi-head causal attention, then an MLP from d to 4d and back to d numbers; each reads a normalized copy of its input and adds its result to it."
+    nl: "Een transformer block heeft twee delen: multi-head causale attention, dan een MLP van d naar 4d en terug naar d getallen; elk leest een genormaliseerde kopie van zijn input en telt zijn uitkomst erbij op."
+  - en: "Because every part adds and never replaces, the vector of every token runs straight through all blocks: the residual stream. Only attention lets the tokens of a text exchange information."
+    nl: "Omdat elk deel optelt en nooit vervangt, loopt de vector van elk token rechtdoor door alle blocks: de residual stream. Alleen attention laat de tokens van een tekst informatie uitwisselen."
+  - en: "On a mini-batch of shape (B, n, d), attention uses `k.transpose(1, 2)`, columns `q[:, :, a:b]` and axis 2, so every text compares only its own tokens. One block of GPT-2's size has about 7.1 million parameters, two thirds of them in the MLP."
+    nl: "Op een mini-batch met shape (B, n, d) gebruikt attention `k.transpose(1, 2)`, kolommen `q[:, :, a:b]` en axis 2, zodat elke tekst alleen zijn eigen tokens vergelijkt. Eén block van de grootte van GPT-2 heeft ongeveer 7,1 miljoen parameters, twee derde daarvan in het MLP."
+can_now:
+  - en: "explain why attention is the only part of a transformer block that mixes tokens"
+    nl: "uitleggen waarom attention het enige deel van een transformer block is dat tokens mengt"
+    by: no-attention
+  - en: "write multi-head causal attention for a mini-batch of texts"
+    nl: "multi-head causale attention schrijven voor een mini-batch van teksten"
+    by: causal-self-attention
+  - en: "build a pre-norm transformer block as a PyTorch module"
+    nl: "een pre-norm transformer block bouwen als PyTorch-module"
+    by: block

@@ -1,0 +1,37 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+# termen:allow exaggerated safety, harms
+id: llm-safety-eval
+minutes: 35
+title:
+  en: "Red-team your own chat model"
+  nl: "Red teaming van je eigen chat model"
+goal:
+  en: "test what a chat model does with harmful requests, jailbreaks of them and harmless requests that sound alarming, and measure how often it refuses each kind, by itself and with a filter in front."
+  nl: "testen wat een chat model doet met schadelijke verzoeken, jailbreaks daarvan en onschuldige verzoeken die alarmerend klinken, en meten hoe vaak het elke soort weigert, alleen en met een filter ervoor."
+summary:
+  - en: "Red teaming is trying on purpose to make a model do what it should not. A red-team set needs harmful requests, jailbreaks of them, and harmless requests that sound like them, so that both going along and over-refusal show."
+    nl: "Red teaming is met opzet proberen een model te laten doen wat het niet moet. Een set voor red teaming heeft schadelijke verzoeken nodig, jailbreaks daarvan, en onschuldige verzoeken die erop lijken, zodat zowel meegaan als over-refusal zichtbaar wordt."
+  - en: "A refusal is roughly verifiable by how an answer starts; a check that looks anywhere counts stories in which someone is sorry. Whether an answer that goes along is harmful, a person still has to read."
+    nl: "Een weigering is ruwweg te controleren aan hoe een antwoord begint; een check die overal kijkt, telt verhalen mee waarin iemand sorry zegt. Of een antwoord dat meegaat schadelijk is, moet nog steeds een mens lezen."
+  - en: "The course's models never refuse: they were never taught to. The lesson's filter of 11 words stops 14 of the 20 harmful requests, also 4 of the 20 harmless ones, and none of the jailbreaks."
+    nl: "De modellen van de course weigeren nooit: dat is ze nooit geleerd. Het filter van 11 woorden van de les houdt 14 van de 20 schadelijke verzoeken tegen, ook 4 van de 20 onschuldige, en geen enkele jailbreak."
+can_now:
+  - en: "check whether an answer starts with a refusal"
+    nl: "controleren of een antwoord met een weigering begint"
+    by: refuses
+  - en: "build a filter of words and see what it stops"
+    nl: "een filter van woorden bouwen en zien wat het tegenhoudt"
+    by: blocked
+  - en: "measure the refusal rate of each kind of request"
+    nl: "het weigerpercentage van elke soort verzoek meten"
+    by: refusal-rate
+  - en: "say why a red-team test needs harmless requests too"
+    nl: "zeggen waarom red teaming ook onschuldige verzoeken nodig heeft"
+    by: why-harmless
+further_reading:
+  - en: "Paul Röttger and others, *XSTest: A Test Suite for Identifying Exaggerated Safety Behaviours in Large Language Models* (2024)"
+    nl: "Paul Röttger en anderen, *XSTest: A Test Suite for Identifying Exaggerated Safety Behaviours in Large Language Models* (2024)"
+  - en: "Deep Ganguli and others, *Red Teaming Language Models to Reduce Harms: Methods, Scaling Behaviors, and Lessons Learned* (2022)"
+    nl: "Deep Ganguli en anderen, *Red Teaming Language Models to Reduce Harms: Methods, Scaling Behaviors, and Lessons Learned* (2022)"

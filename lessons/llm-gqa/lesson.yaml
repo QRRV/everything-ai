@@ -1,0 +1,33 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: llm-gqa
+minutes: 30
+title:
+  en: "Grouped-query attention"
+  nl: "Grouped-query attention"
+goal:
+  en: "write grouped-query attention, in which groups of query heads share one key and one value head, and say what it saves."
+  nl: "grouped-query attention schrijven, waarin groepen query heads één key- en één value-head delen, en zeggen wat het bespaart."
+summary:
+  - en: "Multi-query attention gives all query heads one key head and one value head; grouped-query attention gives each group of query heads next to each other one."
+    nl: "Multi-query attention geeft alle query heads één key head en één value head; grouped-query attention geeft er één aan elke groep query heads naast elkaar."
+  - en: "Query head i uses key and value head int(i / (h / g)); with g = h this is multi-head attention, with g = 1 multi-query attention."
+    nl: "Query head i gebruikt key- en value-head int(i / (h / g)); met g = h is dit multi-head attention, met g = 1 multi-query attention."
+  - en: "It keeps h / g times fewer keys and values while generating, at about the quality of multi-head attention; the scores and weighted sums take as many FLOPs as before."
+    nl: "Het bewaart h / g keer minder keys en values tijdens het genereren, bij ongeveer de kwaliteit van multi-head attention; de scores en gewogen sommen kosten evenveel FLOPs als eerst."
+can_now:
+  - en: "write grouped-query attention for any number of groups"
+    nl: "grouped-query attention schrijven voor elk aantal groepen"
+    by: gqa
+  - en: "say which query heads share a key and value head"
+    nl: "zeggen welke query heads een key- en value-head delen"
+    by: share
+  - en: "explain why the keys and values are shared and not the queries"
+    nl: "uitleggen waarom de keys en values gedeeld worden en niet de queries"
+    by: why-keys
+further_reading:
+  - en: "Noam Shazeer (2019), *Fast Transformer Decoding: One Write-Head is All You Need*, arXiv:1911.02150"
+    nl: "Noam Shazeer (2019), *Fast Transformer Decoding: One Write-Head is All You Need*, arXiv:1911.02150"
+  - en: "Joshua Ainslie and others (2023), *GQA: Training Generalized Multi-Query Transformer Models from Multi-Head Checkpoints*, EMNLP 2023"
+    nl: "Joshua Ainslie en anderen (2023), *GQA: Training Generalized Multi-Query Transformer Models from Multi-Head Checkpoints*, EMNLP 2023"

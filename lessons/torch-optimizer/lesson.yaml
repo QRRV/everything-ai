@@ -1,0 +1,28 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: torch-optimizer
+minutes: 20
+title:
+  en: "Let the optimizer take the step"
+  nl: "Laat de optimizer de stap zetten"
+goal:
+  en: "train a network with an optimizer: `torch.optim.SGD` made from `net.parameters()`, with `opt.zero_grad()` and `opt.step()` around `loss.backward()`."
+  nl: "een netwerk trainen met een optimizer: `torch.optim.SGD` gemaakt van `net.parameters()`, met `opt.zero_grad()` en `opt.step()` rond `loss.backward()`."
+summary:
+  - en: "An optimizer takes the update step for the parameters you gave it when you made it: `opt = torch.optim.SGD(net.parameters(), lr=0.1)`."
+    nl: "Een optimizer zet de update-stap voor de parameters die je hem gaf toen je hem maakte: `opt = torch.optim.SGD(net.parameters(), lr=0.1)`."
+  - en: "`opt.zero_grad()` sets every `.grad` to `None`, and `opt.step()` moves every parameter with a `.grad` against its slope: each step is the forward pass, `opt.zero_grad()`, `loss.backward()` and `opt.step()`."
+    nl: "`opt.zero_grad()` zet elke `.grad` op `None`, en `opt.step()` schuift elke parameter met een `.grad` tegen zijn helling in: elke stap is de forward pass, `opt.zero_grad()`, `loss.backward()` en `opt.step()`."
+  - en: "An optimizer keeps the parameters it was made with: a new network needs a new optimizer."
+    nl: "Een optimizer houdt de parameters waarmee hij gemaakt is: een nieuw netwerk heeft een nieuwe optimizer nodig."
+can_now:
+  - en: "say why a new network needs a new optimizer"
+    nl: "zeggen waarom een nieuw netwerk een nieuwe optimizer nodig heeft"
+    by: stale
+  - en: "write the training loop with `opt.zero_grad()`, `loss.backward()` and `opt.step()`"
+    nl: "de training loop schrijven met `opt.zero_grad()`, `loss.backward()` en `opt.step()`"
+    by: loop
+  - en: "write a function that trains any network and gives back its losses"
+    nl: "een functie schrijven die elk netwerk traint en zijn losses teruggeeft"
+    by: train

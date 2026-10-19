@@ -1,0 +1,28 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: py-generators
+minutes: 15
+title:
+  en: "Generators: producing values one at a time"
+  nl: "Generators: waarden één voor één maken"
+goal:
+  en: "write a generator function with `yield`, and ask it for its values with `for`, `next` and `list`."
+  nl: "een generator function schrijven met `yield`, en hem om zijn waarden vragen met `for`, `next` en `list`."
+summary:
+  - en: "A function with `yield` gives a generator when you call it; nothing in it runs until you ask for a value."
+    nl: "Een functie met `yield` geeft een generator als je hem aanroept; er draait niets van tot je om een waarde vraagt."
+  - en: "Each `yield` hands out one value and pauses the function; `for` asks for the next value each round, `next(g)` for one, `list(g)` for all."
+    nl: "Elke `yield` geeft één waarde af en pauzeert de functie; `for` vraagt elke ronde om de volgende waarde, `next(g)` om één, `list(g)` om allemaal."
+  - en: "A generator is used up after one pass; call the function again for a new one."
+    nl: "Een generator is op na één keer doorlopen; roep de functie opnieuw aan voor een nieuwe."
+can_now:
+  - en: "write a generator function that hands out values one at a time with `yield`"
+    nl: "een generator function schrijven die met `yield` waarden één voor één afgeeft"
+    by: squares
+  - en: "say when the code in a generator runs"
+    nl: "zeggen wanneer de code in een generator draait"
+    by: when-runs
+  - en: "write a generator function that keeps a list between two values, and hands out batches"
+    nl: "een generator function schrijven die een lijst bijhoudt tussen twee waarden, en batches afgeeft"
+    by: batches

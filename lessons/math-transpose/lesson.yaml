@@ -1,0 +1,28 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: math-transpose
+minutes: 15
+title:
+  en: "Flipping a matrix: the transpose"
+  nl: "Een matrix omklappen: de getransponeerde"
+goal:
+  en: "swap the rows and columns of a matrix with .T, and use that to make two shapes fit."
+  nl: "de rijen en kolommen van een matrix wisselen met .T, en zo twee shapes laten passen."
+summary:
+  - en: 'The transpose $\mathbf{A}^\top$ has the rows and columns swapped: the first row becomes the first column, and shape (n, m) becomes (m, n). In code `A.T`.'
+    nl: 'In de getransponeerde $\mathbf{A}^\top$ zijn rijen en kolommen gewisseld: de eerste rij wordt de eerste kolom, en shape (n, m) wordt (m, n). In code `A.T`.'
+  - en: 'With the weights of several models as rows of $\mathbf{W}$, $\mathbf{X}\mathbf{W}^\top$ gives every prediction of every model at once: in code `X @ W.T`.'
+    nl: 'Met de weights van meerdere modellen als rijen van $\mathbf{W}$ geeft $\mathbf{X}\mathbf{W}^\top$ elke voorspelling van elk model tegelijk: in code `X @ W.T`.'
+  - en: "On an array with one number in its shape, such as (3,), `.T` changes nothing."
+    nl: "Op een array met één getal in zijn shape, zoals (3,), verandert `.T` niets."
+can_now:
+  - en: "say the shape of a product with a transpose"
+    nl: "de shape van een product met een getransponeerde zeggen"
+    by: gram
+  - en: "make two shapes fit with .T"
+    nl: "twee shapes laten passen met .T"
+    by: two-models
+  - en: "transpose a list of rows in plain Python"
+    nl: "een lijst van rijen transponeren in gewoon Python"
+    by: transpose-lists

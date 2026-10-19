@@ -1,0 +1,25 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: ml-overfitting
+minutes: 15
+title:
+  en: "Overfitting and underfitting"
+  nl: "Overfitting en underfitting"
+goal:
+  en: "tell underfitting and overfitting apart by the MSE on the training set and on the test set, and say which way to change the capacity of a model."
+  nl: "underfitting en overfitting uit elkaar houden aan de MSE op de training set en op de test set, en zeggen welke kant je de capaciteit van een model op moet veranderen."
+summary:
+  - en: "The capacity of a model is how complex the patterns are that it can follow, here the degree of a polynomial: `np.polyfit(x, y, d)` fits it, `np.polyval(w, x)` works it out."
+    nl: "De capaciteit van een model is hoe ingewikkeld de patronen zijn die het kan volgen, hier de graad van een polynoom: `np.polyfit(x, y, d)` vindt zijn weights, `np.polyval(w, x)` rekent hem uit."
+  - en: "Underfitting: high MSE on the training set and on the test set. Overfitting: low training MSE, much higher test MSE, because the model follows the noise."
+    nl: "Underfitting: een hoge MSE op de training set en op de test set. Overfitting: een lage training-MSE en een veel hogere test-MSE, omdat het model de ruis volgt."
+  - en: "More capacity always lowers the training MSE; the test MSE goes down and then up again. On new data, no model gets below the noise."
+    nl: "Meer capaciteit verlaagt de training-MSE altijd; de test-MSE daalt en stijgt dan weer. Op nieuwe data komt geen model onder de ruis."
+can_now:
+  - en: "tell from the training and test MSE whether a model overfits"
+    nl: "aan de training- en test-MSE zien of een model overfit"
+    by: which-overfits
+  - en: "work out the test MSE of a curve fitted on the training set"
+    nl: "de test-MSE uitrekenen van een curve die van de training set geleerd heeft"
+    by: test-mse

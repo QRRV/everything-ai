@@ -1,0 +1,28 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: res-reading-claims
+minutes: 20
+title:
+  en: "Reading AI claims critically"
+  nl: "AI-claims kritisch lezen"
+goal:
+  en: "check a claim about AI by finding what was measured, against what, and what the claim says beyond the measurement."
+  nl: "een claim over AI controleren door te zoeken wat er gemeten is, waartegen, en wat de claim meer zegt dan de meting."
+summary:
+  - en: "A benchmark is a fixed set of test tasks with a fixed way of scoring; a score on it says how a model does on those tasks, not in general."
+    nl: "Een benchmark is een vaste set testtaken met een vaste manier van scoren; een score erop zegt hoe een model het op die taken doet, niet in het algemeen."
+  - en: "A score, a paper and a press release say different things: the press release is the shortest, the surest and the furthest from the measurement."
+    nl: "Een score, een paper en een persbericht zeggen elk iets anders: het persbericht is het kortst, het stelligst en het verst van de meting."
+  - en: "To check a claim: what exactly is claimed, what was measured, against what, and what does the claim say that the measurement does not show?"
+    nl: "Om een claim te controleren: wat wordt er precies beweerd, wat is er gemeten, waartegen, en wat zegt de claim dat de meting niet laat zien?"
+can_now:
+  - en: "tell a measurement from a claim that goes beyond it"
+    nl: "een meting onderscheiden van een claim die verder gaat"
+    by: measured
+  - en: "say what to ask when a benchmark score jumps"
+    nl: "zeggen welke vraag je stelt als een benchmarkscore omhoogspringt"
+    by: contamination
+  - en: "check a claim about AI with the four steps"
+    nl: "een claim over AI controleren met de vier stappen"
+    by: check-claim

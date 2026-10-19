@@ -1,0 +1,28 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: cnn-channels-pooling
+minutes: 20
+title:
+  en: "Channels and pooling"
+  nl: "Channels en pooling"
+goal:
+  en: "write a convolutional layer with many filters over many input channels, count its weights, and shrink its output with max pooling."
+  nl: "een convolutional layer schrijven met veel filters over veel input channels, zijn weights tellen, en zijn output kleiner maken met max pooling."
+summary:
+  - en: "A filter covers all input channels, so it has C_in × k × k weights; a layer of C_out filters makes C_out output channels and has C_out × C_in × k × k weights. 64 filters of 3 by 3 on a color photo have 1,728."
+    nl: "Een filter dekt alle input channels, dus het heeft C_in × k × k weights; een layer van C_out filters maakt C_out output channels en heeft C_out × C_in × k × k weights. 64 filters van 3 bij 3 op een kleurenfoto hebben er 1.728."
+  - en: "Max pooling cuts every channel into blocks next to each other and keeps the largest number of each; pooling of 2 by 2 halves the width and height and has no weights."
+    nl: "Max pooling knipt elk channel in blokken naast elkaar en houdt van elk het grootste getal; pooling van 2 bij 2 halveert de breedte en de hoogte en heeft geen weights."
+  - en: "Filters mix channels; pooling works on every channel on its own."
+    nl: "Filters mengen channels; pooling werkt op elk channel apart."
+can_now:
+  - en: "count the weights of a convolutional layer with channels"
+    nl: "de weights van een convolutional layer met channels tellen"
+    by: weights
+  - en: "write a convolution with many input and output channels"
+    nl: "een convolutie schrijven met veel input en output channels"
+    by: conv-channels
+  - en: "write max pooling"
+    nl: "max pooling schrijven"
+    by: max-pool

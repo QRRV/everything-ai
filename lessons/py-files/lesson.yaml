@@ -1,0 +1,28 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: py-files
+minutes: 15
+title:
+  en: "Reading a text file"
+  nl: "Een tekstbestand lezen"
+goal:
+  en: "open a text file with `with` and `open`, read it all at once or line by line, and drop the newline of each line with `strip`."
+  nl: "een tekstbestand openen met `with` en `open`, het in één keer of regel voor regel lezen, en met `strip` het regeleinde van elke regel weghalen."
+summary:
+  - en: "`with open(path) as f:` opens the file at `path` for the indented lines under it, and closes it after them."
+    nl: "`with open(path) as f:` opent het bestand op `path` voor de ingesprongen regels eronder, en sluit het daarna."
+  - en: "`f.read()` gives the whole file as one string; `for line in f:` goes through it one line at a time."
+    nl: "`f.read()` geeft het hele bestand als één string; `for line in f:` gaat het regel voor regel langs."
+  - en: "Each line ends with a newline, `\\n`, except perhaps the last; `line.strip()` drops it, so `print` and `len` see only the text."
+    nl: "Elke regel eindigt met een regeleinde, `\\n`, behalve soms de laatste; `line.strip()` haalt het weg, zodat `print` en `len` alleen de tekst zien."
+can_now:
+  - en: "count the lines of a text file"
+    nl: "de regels van een tekstbestand tellen"
+    by: count-lines
+  - en: "say why a line from a file is one character longer than you see"
+    nl: "zeggen waarom een regel uit een bestand één teken langer is dan je ziet"
+    by: newline
+  - en: "go through a file line by line and pick lines with `strip` and `if`"
+    nl: "een bestand regel voor regel langsgaan en regels kiezen met `strip` en `if`"
+    by: long-items

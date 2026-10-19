@@ -1,0 +1,28 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: ml-embeddings-idea
+minutes: 15
+title:
+  en: "Embeddings: meaning as coordinates"
+  nl: "Embeddings: betekenis als coördinaten"
+goal:
+  en: "read an embedding map of handwritten digits, made by the course's digit reader, and find the image most like another one with cosine similarity."
+  nl: "een embedding map van handgeschreven cijfers lezen, gemaakt door het cijfermodel van de course, en met cosine similarity het plaatje vinden dat het meest op een ander lijkt."
+summary:
+  - en: "An embedding is a list of numbers that a model gives a thing, so that things that are alike get numbers that are alike; one-hot vectors do not do that, and pixels only a little."
+    nl: "Een embedding is een lijst getallen die een model aan iets geeft, zodat dingen die op elkaar lijken getallen krijgen die op elkaar lijken; one-hot-vectoren doen dat niet, en pixels maar een klein beetje."
+  - en: "The course's digit reader gives every image 2 numbers. On the map, every digit gets its own direction: two images of the same digit have a cosine similarity of 0.95 on average, of different digits −0.11."
+    nl: "Het cijfermodel van de course geeft elk plaatje 2 getallen. Op de kaart krijgt elk cijfer zijn eigen richting: twee plaatjes van hetzelfde cijfer hebben gemiddeld een cosine similarity van 0,95, van verschillende cijfers −0,11."
+  - en: "To find the thing most like another one, compare its embedding with every other embedding and keep the largest cosine similarity: the direction counts, not the length."
+    nl: "Om het ding te vinden dat het meest op een ander lijkt, vergelijk je zijn embedding met elke andere embedding en houd je de grootste cosine similarity: de richting telt, niet de lengte."
+can_now:
+  - en: "say why two embeddings in the same direction are alike, however long they are"
+    nl: "zeggen waarom twee embeddings in dezelfde richting op elkaar lijken, hoe lang ze ook zijn"
+    by: same-direction
+  - en: "find the row of a table of embeddings most like a given row"
+    nl: "de rij van een tabel met embeddings vinden die het meest op een gegeven rij lijkt"
+    by: most-similar
+  - en: "read on an embedding map which things a model finds alike"
+    nl: "op een embedding map aflezen welke dingen een model op elkaar vindt lijken"
+    by: most-like-4

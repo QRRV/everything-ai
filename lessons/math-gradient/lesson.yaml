@@ -1,0 +1,28 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: math-gradient
+minutes: 15
+title:
+  en: "Two parameters: the gradient"
+  nl: "Twee parameters: de gradient"
+goal:
+  en: "measure the slope of the loss for each parameter, put them together as the gradient, and read a contour plot."
+  nl: "de helling van de loss voor elke parameter meten, ze samenvoegen tot de gradient, en een contourplot lezen."
+summary:
+  - en: "A partial derivative is the slope of the loss for one parameter, while the others stay as they are."
+    nl: "Een partiële afgeleide is de helling van de loss voor één parameter, terwijl de andere blijven zoals ze zijn."
+  - en: 'The gradient is the list of all partial derivatives, $\nabla \mathcal{L} = \left(\frac{\partial \mathcal{L}}{\partial w}, \frac{\partial \mathcal{L}}{\partial b}\right)$; it points uphill.'
+    nl: 'De gradient is de lijst van alle partiële afgeleiden, $\nabla \mathcal{L} = \left(\frac{\partial \mathcal{L}}{\partial w}, \frac{\partial \mathcal{L}}{\partial b}\right)$; hij wijst bergop.'
+  - en: "On a contour plot, each line joins places with the same loss; where the lines lie close together, the loss changes fast."
+    nl: "Op een contourplot verbindt elke lijn plekken met dezelfde loss; waar de lijnen dicht bij elkaar liggen, verandert de loss snel."
+can_now:
+  - en: "say from the gradient which way each parameter lowers the loss"
+    nl: "aan de gradient zien welke kant elke parameter de loss verlaagt"
+    by: two-ways
+  - en: "measure the gradient of a loss in code"
+    nl: "de gradient van een loss in code meten"
+    by: gradient
+  - en: "read on a contour plot where the loss changes fastest"
+    nl: "op een contourplot zien waar de loss het snelst verandert"
+    by: steepest

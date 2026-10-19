@@ -1,0 +1,31 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: gpt-train-bpe
+minutes: 20
+title:
+  en: "Project: your GPT on your own tokens"
+  nl: "Project: je GPT op je eigen tokens"
+goal:
+  en: "make your tokenizer fast enough for 5 MB of stories, and train your GPT on its tokens."
+  nl: "je tokenizer snel genoeg maken voor 5 MB aan verhalen, en je GPT trainen op zijn tokens."
+summary:
+  - en: "Your train_pre_bpe goes through all 1,082,711 pieces of the first 90% of the stories in every round. Counting every different piece once, 7,598 of them, with how often it occurs, gives the same 1,000 merge rules in 14 seconds instead of 21 minutes."
+    nl: "Je train_pre_bpe gaat in elke ronde langs alle 1.082.711 stukken van de eerste 90% van de verhalen. Elk verschillend stuk één keer tellen, 7.598 stuks, met hoe vaak het voorkomt, geeft dezelfde 1.000 merge rules in 14 seconden in plaats van 21 minuten."
+  - en: "encode_fast encodes every different piece once and keeps its ids in a dict: caching. A token of these stories holds 3.4 characters on average."
+    nl: "encode_fast encodeert elk verschillend stuk één keer en bewaart zijn ids in een dict: caching. Een token van deze verhalen bevat gemiddeld 3,4 tekens."
+  - en: "Compare per character: loss per token × tokens ÷ characters. With about as many steps, the GPT on tokens predicts the stories better than the GPT on characters, 0.74 against 0.98 per character on the CPU plan, and its stories hang together better."
+    nl: "Vergelijk per teken: loss per token × tokens ÷ tekens. Met ongeveer evenveel stappen voorspelt de GPT op tokens de verhalen beter dan de GPT op tekens, 0,74 tegen 0,98 per teken met het CPU-plan, en zijn verhalen hangen beter samen."
+can_now:
+  - en: "train BPE on every different piece once, with how often it occurs"
+    nl: "BPE trainen op elk verschillend stuk één keer, met hoe vaak het voorkomt"
+    by: train-bpe-fast
+  - en: "encode a long text with every different piece encoded once"
+    nl: "een lange tekst encoderen met elk verschillend stuk één keer geëncodeerd"
+    by: encode-fast
+  - en: "compare the loss of a GPT on tokens with one on characters, per character"
+    nl: "de loss van een GPT op tokens vergelijken met die van een GPT op tekens, per teken"
+    by: per-char
+further_reading:
+  - en: "Ronen Eldan and Yuanzhi Li (2023), *TinyStories: How Small Can Language Models Be and Still Speak Coherent English?*, arXiv:2305.07759"
+    nl: "Ronen Eldan en Yuanzhi Li (2023), *TinyStories: How Small Can Language Models Be and Still Speak Coherent English?*, arXiv:2305.07759"

@@ -1,0 +1,28 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: prob-expectation
+minutes: 15
+title:
+  en: "Expected value and variance"
+  nl: "Verwachtingswaarde en variantie"
+goal:
+  en: "work out what an outcome that depends on chance gives on average, and how far the results spread around that average."
+  nl: "uitrekenen wat een uitkomst die van het toeval afhangt gemiddeld oplevert, en hoe ver de uitkomsten rond dat gemiddelde schommelen."
+summary:
+  - en: 'The expected value $\mathbb{E}[X]$ is the long-run average: each value times its probability, added up.'
+    nl: 'De verwachtingswaarde $\mathbb{E}[X]$ is het gemiddelde op de lange duur: elke waarde keer zijn kans, opgeteld.'
+  - en: 'The variance $\mathrm{Var}(X)$ is the squared distance to the expected value, weighted by probability; its square root is the standard deviation.'
+    nl: 'De variantie $\mathrm{Var}(X)$ is de gekwadrateerde afstand tot de verwachtingswaarde, gewogen met de kans; de wortel eruit is de standaardafwijking.'
+  - en: "Two bets can have the same expected value and a very different spread."
+    nl: "Twee gokken kunnen dezelfde verwachtingswaarde en een heel andere spreiding hebben."
+can_now:
+  - en: "work out an expected value by hand"
+    nl: "een verwachtingswaarde met de hand uitrekenen"
+    by: game
+  - en: "write the expected value as a function"
+    nl: "de verwachtingswaarde als functie schrijven"
+    by: expected
+  - en: "work out a variance with NumPy"
+    nl: "een variantie uitrekenen met NumPy"
+    by: variance

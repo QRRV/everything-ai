@@ -1,0 +1,31 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: py-project-letter-counts
+minutes: 20
+title:
+  en: "Project: which letters does a book use?"
+  nl: "Project: welke letters gebruikt een boek?"
+goal:
+  en: "count every letter and every pair of letters in a book, keep both functions in your project, and draw the letters as a bar chart."
+  nl: "elke letter en elk paar letters in een boek tellen, beide functies in je project bewaren, en de letters tekenen als staafdiagram."
+summary:
+  - en: "Counting is a loop with a dictionary: a key that is there gets 1 more, a new key starts at 1; `.lower()` makes capitals count as small letters."
+    nl: "Tellen is een loop met een dictionary: een key die er al is, krijgt er 1 bij, een nieuwe key begint bij 1; `.lower()` laat hoofdletters tellen als kleine letters."
+  - en: "A pair is a slice of two characters next to each other, `text[i:i + 2]`; it counts only when both are letters."
+    nl: "Een paar is een slice van twee tekens naast elkaar, `text[i:i + 2]`; het telt alleen als beide letters zijn."
+  - en: "Your project `llm` now has `letters.py` and `pairs.py`; the pair counts become your first language model in a later lesson."
+    nl: "Je project `llm` heeft nu `letters.py` en `pairs.py`; de paartellingen worden in een latere les je eerste language model."
+can_now:
+  - en: "count the letters of a text in a dictionary"
+    nl: "de letters van een tekst tellen in een dictionary"
+    by: count-letters
+  - en: "count the pairs of letters next to each other"
+    nl: "de paren letters naast elkaar tellen"
+    by: count-pairs
+  - en: "use your own module on a whole book, and draw what it counted"
+    nl: "je eigen module gebruiken op een heel boek, en tekenen wat hij telde"
+    by: letter-chart
+further_reading:
+  - en: "The book of this lesson: *Tiny Shakespeare*, from [karpathy/char-rnn](https://github.com/karpathy/char-rnn/tree/master/data/tinyshakespeare) by Andrej Karpathy (2015); the plays are in the public domain. See `data/README.md` in the course folder."
+    nl: "Het boek van deze les: *Tiny Shakespeare*, uit [karpathy/char-rnn](https://github.com/karpathy/char-rnn/tree/master/data/tinyshakespeare) van Andrej Karpathy (2015); de toneelstukken zijn vrij van rechten (public domain). Zie `data/README.md` in de map van de course."

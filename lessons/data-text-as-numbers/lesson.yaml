@@ -1,0 +1,28 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: data-text-as-numbers
+minutes: 15
+title:
+  en: "Text is a sequence of numbers"
+  nl: "Tekst is een rij getallen"
+goal:
+  en: "turn a text into a list of numbers with `ord` and back with `chr`, and say why one character can take more than one byte in UTF-8."
+  nl: "een tekst met `ord` omzetten in een lijst getallen en met `chr` weer terug, en zeggen waarom één teken in UTF-8 meer dan één byte kan kosten."
+summary:
+  - en: "Unicode gives every character its own number, its code point: `ord(\"a\")` gives `97`, and `chr(97)` gives `\"a\"` back."
+    nl: "Unicode geeft elk teken een eigen nummer, zijn code point: `ord(\"a\")` geeft `97`, en `chr(97)` geeft `\"a\"` terug."
+  - en: "`[ord(ch) for ch in text]` turns a text into a list of code points; `\"\".join([chr(n) for n in codes])` makes the text again."
+    nl: "`[ord(ch) for ch in text]` maakt van een tekst een lijst code points; `\"\".join([chr(n) for n in codes])` maakt er weer de tekst van."
+  - en: "A character encoding stores characters as bytes, whole numbers from 0 to 255. In UTF-8 a plain letter takes one byte and `é` takes two, so `\"café\".encode(\"utf-8\")` has 5 bytes."
+    nl: "Een character encoding slaat tekens op als bytes, gehele getallen van 0 tot en met 255. In UTF-8 kost een gewone letter één byte en `é` twee, dus `\"café\".encode(\"utf-8\")` heeft 5 bytes."
+can_now:
+  - en: "say how many bytes a text takes in UTF-8"
+    nl: "zeggen hoeveel bytes een tekst in UTF-8 kost"
+    by: bytes
+  - en: "turn a text into the code points of its characters"
+    nl: "een tekst omzetten in de code points van zijn tekens"
+    by: codes
+  - en: "turn a list of code points back into text"
+    nl: "een lijst code points weer omzetten in tekst"
+    by: decode

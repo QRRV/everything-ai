@@ -1,0 +1,28 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: torch-gpu
+minutes: 20
+title:
+  en: "Why AI uses GPUs, and the same code on yours"
+  nl: "Waarom AI GPU's gebruikt, en dezelfde code op de jouwe"
+goal:
+  en: "say what the lines that choose and use a device do on any computer, and write code that moves a model and its data to a GPU when there is one."
+  nl: "zeggen wat de regels die een device kiezen en gebruiken doen op elke computer, en code schrijven die een model en zijn data naar een GPU verplaatst als die er is."
+summary:
+  - en: "A forward pass costs about 2 FLOPs per weight per example, a training step about 6; they are independent of each other, so a GPU with thousands of simple cores does many at once."
+    nl: "Een forward pass kost ongeveer 2 FLOPs per weight per voorbeeld, een trainingsstap ongeveer 6; ze staan los van elkaar, dus een GPU met duizenden eenvoudige cores doet er veel tegelijk."
+  - en: "Choose the device once, move the model before making the optimizer, move every mini-batch, and bring results back with `.item()`."
+    nl: "Kies het device één keer, verplaats het model voordat je de optimizer maakt, verplaats elke mini-batch, en haal resultaten terug met `.item()`."
+  - en: "On a computer without a GPU, the same code runs on the CPU; a forgotten `.to(device)` only shows on a GPU."
+    nl: "Op een computer zonder GPU draait dezelfde code op de CPU; een vergeten `.to(device)` merk je pas op een GPU."
+can_now:
+  - en: "say what the device lines do on a computer without a GPU"
+    nl: "zeggen wat de regels met device doen op een computer zonder GPU"
+    by: no-gpu
+  - en: "move a model and its data to a device before it predicts"
+    nl: "een model en zijn data naar een device verplaatsen voordat het voorspelt"
+    by: predict-device
+  - en: "tell what moves to the device and what does not"
+    nl: "zeggen wat er naar het device gaat en wat niet"
+    by: what-moves

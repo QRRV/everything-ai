@@ -1,0 +1,31 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: nn-micrograd-value
+minutes: 30
+title:
+  en: "Build your own autograd: a Value that remembers"
+  nl: "Bouw je eigen autograd: een Value die onthoudt"
+goal:
+  en: "build a Value that remembers where it came from and with what local gradient, and get the slopes of a calculation with it."
+  nl: "een Value bouwen die onthoudt waar hij vandaan komt en met welke local gradient, en er de hellingen van een berekening mee krijgen."
+summary:
+  - en: "Autograd builds the computational graph while it calculates. Your `Value` holds `data`, `grad` and `parents`: the values it came from, each with its local gradient."
+    nl: "Autograd bouwt de computational graph terwijl het rekent. Je `Value` heeft `data`, `grad` en `parents`: de waarden waar hij vandaan komt, elk met zijn local gradient."
+  - en: "`__add__`, `__mul__` and `relu` make a new `Value` and fill in its parents; `backward_step` passes `grad` back to each parent, times its local gradient, and adds it."
+    nl: "`__add__`, `__mul__` en `relu` maken een nieuwe `Value` en vullen zijn ouders in; `backward_step` geeft `grad` terug aan elke ouder, keer zijn local gradient, en telt het op."
+  - en: "The backward steps must run from the loss back, so that each value passes its slope on only once it has all of it."
+    nl: "De backward steps moeten vanaf de loss terug lopen, zodat elke waarde zijn helling pas doorgeeft als hij hem helemaal heeft."
+can_now:
+  - en: "explain why the order of the backward steps matters"
+    nl: "uitleggen waarom de volgorde van de backward steps uitmaakt"
+    by: order
+  - en: "write a Value class that remembers its parents and passes slopes back"
+    nl: "een Value-class schrijven die zijn ouders onthoudt en hellingen teruggeeft"
+    by: value
+  - en: "get the slopes of a loss with your own Value"
+    nl: "de hellingen van een loss krijgen met je eigen Value"
+    by: student
+further_reading:
+  - en: "Andrej Karpathy, [micrograd](https://github.com/karpathy/micrograd): a tiny autograd engine in about a hundred lines of Python, MIT license (read in October 2026)"
+    nl: "Andrej Karpathy, [micrograd](https://github.com/karpathy/micrograd): een piepkleine autograd-engine in ongeveer honderd regels Python, MIT-licentie (gelezen in oktober 2026)"

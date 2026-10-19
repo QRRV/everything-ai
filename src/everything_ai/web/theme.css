@@ -1,0 +1,145 @@
+/* Everything AI: course theme for marimo 0.25.1 (style guide 1.0, 2026-10-10).
+   Load after kleuren.css (colour tokens) and fonts.css (bundled fonts).
+   Colour is for concepts only: everything in this file that is not a concept is ink and grey. */
+
+:root {
+  --ea-font-prose: "Source Serif var", "Source Serif 4", Georgia, serif;
+  --ea-font-ui: "Inter var", Inter, system-ui, sans-serif;
+  --ea-font-code: "JetBrains Mono var", "JetBrains Mono", ui-monospace, monospace;
+  --ea-measure: 40rem;            /* prose column: about 70 characters */
+  --ea-radius: 8px;
+  --ea-radius-small: 5px;
+  --ea-ease: cubic-bezier(0.2, 0, 0, 1);
+
+  /* hand the tokens to marimo */
+  --marimo-text-font: var(--ea-font-ui);    /* marimo's own buttons and labels; prose gets its font below */
+  --marimo-heading-font: var(--ea-font-ui);
+  --marimo-monospace-font: var(--ea-font-code);
+  --background: var(--ea-page);
+  --foreground: var(--ea-ink);
+  --muted-foreground: var(--ea-ink-3);
+  --border: var(--ea-line);
+}
+:root.dark, .dark {
+  --background: var(--ea-page);
+  --foreground: var(--ea-ink);
+  --muted-foreground: var(--ea-ink-3);
+  --border: var(--ea-line);
+}
+body, #root, #App { background: var(--ea-page) !important; color: var(--ea-ink); }
+
+/* ---------- prose ---------- */
+.markdown { color: var(--ea-ink); font-feature-settings: "kern", "liga"; }
+.markdown p, .markdown li, .markdown .paragraph { font-family: var(--ea-font-prose); font-size: 1.125rem; line-height: 1.65; max-width: var(--ea-measure); }
+.markdown .paragraph { display: block; }
+.markdown h1, .markdown h2, .markdown h3 { font-family: var(--ea-font-ui); color: var(--ea-ink); max-width: var(--ea-measure); }
+.markdown h1 { font-size: 2.25rem; line-height: 1.15; font-weight: 720; letter-spacing: -0.022em; margin: 0.2rem 0 0.6rem; }
+.markdown h2 { font-size: 1.5rem; line-height: 1.25; font-weight: 650; letter-spacing: -0.012em; margin-top: 2.6rem; }
+.markdown h3 { font-size: 1.125rem; line-height: 1.35; font-weight: 620; margin-top: 1.8rem; }
+.markdown strong { font-weight: 650; }
+.markdown a { color: inherit; text-decoration: underline; text-decoration-color: var(--ea-axis); text-underline-offset: 0.18em; text-decoration-thickness: 1px; }
+.markdown a:hover { text-decoration-color: currentColor; }
+.markdown code { font-family: var(--ea-font-code); font-size: 0.86em; font-variant-ligatures: none; background: var(--ea-inset); border-radius: 4px; padding: 0.08em 0.32em; }
+.markdown pre code { padding: 0; }   /* a fenced block starts at its edge, not at the padding of inline code */
+.markdown .katex { font-size: 1.06em; }
+/* display formulas sit centred in the text column, not in the full cell */
+/* a formula wider than a phone scrolls on its own instead of being cut off */
+.ea-formula { max-width: var(--ea-measure); margin: 1.1rem 0; font-size: 1.125rem; overflow-x: auto; overflow-y: hidden; }
+.ea-formula marimo-tex { display: block; }
+
+/* numbers that change while you drag must not make the line jump */
+.ea-num, .markdown .ea-num { font-variant-numeric: tabular-nums; }
+
+/* concept colour in prose: colour plus weight, never colour alone */
+.c-data, .c-param, .c-pred, .c-residual, .c-loss, .c-grad, .c-hyper, .c-hidden { font-weight: 600; }
+
+/* ---------- lesson header ---------- */
+.ea-kicker { font-family: var(--ea-font-ui); font-size: 0.78rem; font-weight: 550; letter-spacing: 0.07em; text-transform: uppercase; color: var(--ea-ink-3); }
+.ea-kicker .ea-level { color: var(--ea-ink); }
+.ea-goal { font-family: var(--ea-font-prose); font-size: 1.2rem; line-height: 1.55; color: var(--ea-ink-2); max-width: var(--ea-measure); }
+
+/* ---------- captions and asides ---------- */
+.ea-caption, .markdown p.ea-caption { font-family: var(--ea-font-ui); font-size: 0.875rem; line-height: 1.5; color: var(--ea-ink-2); max-width: var(--ea-measure); margin-top: 0.5rem; }
+
+/* ---------- callouts: "let op", hard lesson, simplification ---------- */
+.ea-note { font-family: var(--ea-font-ui); font-size: 0.95rem; line-height: 1.55; color: var(--ea-ink); background: var(--ea-inset);
+  border-radius: var(--ea-radius); padding: 0.8rem 1rem 0.85rem 2.6rem; max-width: var(--ea-measure); position: relative; }
+.ea-note > .ea-icon { position: absolute; left: 0.95rem; top: 0.95rem; width: 1.05rem; height: 1.05rem; color: var(--ea-ink-2); }
+.ea-note b { font-weight: 650; }
+.ea-note code { font-family: var(--ea-font-code); font-size: 0.86em; font-variant-ligatures: none; }
+.ea-note ul { margin: 0.4em 0 0; padding-left: 1.25em; list-style: disc; }
+.ea-note li + li { margin-top: 0.3em; }
+
+/* ---------- widget task: one short assignment per widget ---------- */
+.ea-task { font-family: var(--ea-font-ui); font-size: 0.95rem; line-height: 1.5; max-width: var(--ea-measure); display: flex; gap: 0.6rem; align-items: baseline; }
+.ea-task .ea-label { font-size: 0.72rem; font-weight: 650; letter-spacing: 0.07em; text-transform: uppercase; color: var(--ea-page); background: var(--ea-ink); border-radius: 4px; padding: 0.15rem 0.45rem; flex: none; }
+
+/* ---------- checks: the state word first, an icon, never a status colour ---------- */
+.ea-check { font-family: var(--ea-font-ui); font-size: 0.95rem; line-height: 1.55; color: var(--ea-ink); max-width: var(--ea-measure);
+  border: 1px solid var(--ea-line); border-radius: var(--ea-radius); padding: 0.75rem 1rem 0.8rem 2.75rem; position: relative; background: var(--ea-page); }
+.ea-check > .ea-icon { position: absolute; left: 0.95rem; top: 0.86rem; width: 1.15rem; height: 1.15rem; color: var(--ea-ink-2); }
+.ea-check .ea-state { font-weight: 680; }
+.ea-check code { font-family: var(--ea-font-code); font-size: 0.86em; font-variant-ligatures: none; overflow-wrap: anywhere; }   /* a long value without spaces wraps instead of running out of the box */
+.ea-check--empty { border-style: dashed; color: var(--ea-ink-2); }
+.ea-check--empty > .ea-icon { color: var(--ea-ink-3); }
+.ea-check--ok { border-color: var(--ea-ink); box-shadow: inset 3px 0 0 var(--ea-ink); }
+.ea-check--ok > .ea-icon { color: var(--ea-ink); }
+.ea-check--code, .ea-check--broken, .ea-check--slow { background: var(--ea-inset); border-color: transparent; }
+.ea-check pre { font-family: var(--ea-font-code); font-size: 0.82rem; background: var(--ea-page); border-radius: var(--ea-radius-small); padding: 0.45rem 0.6rem; margin: 0.45rem 0 0.2rem; white-space: pre-wrap; }
+@media (prefers-reduced-motion: no-preference) {
+  .ea-check--ok > .ea-icon path.ea-tick { stroke-dasharray: 20; stroke-dashoffset: 20; animation: ea-draw 360ms var(--ea-ease) 80ms forwards; }
+}
+@keyframes ea-draw { to { stroke-dashoffset: 0; } }
+
+/* ---------- hints: a row of steps, the solution last ---------- */
+.ea-hints { font-family: var(--ea-font-ui); font-size: 0.95rem; max-width: var(--ea-measure); margin-top: 0.6rem; }
+.markdown .ea-hints details { background: transparent !important; border: 0 !important; border-top: 1px solid var(--ea-line) !important; border-radius: 0 !important; box-shadow: none !important; padding: 0.55rem 0 !important; margin: 0 !important; }
+.markdown .ea-hints details:last-child { border-bottom: 1px solid var(--ea-line) !important; }
+.markdown .ea-hints summary { cursor: pointer; font-weight: 600; color: var(--ea-ink-2); list-style: none; padding: 0 !important; }
+.markdown .ea-hints summary::-webkit-details-marker, .markdown .ea-hints summary::marker { display: none; content: ""; }
+.markdown .ea-hints summary::before { content: "+"; display: inline-block; width: 1.2rem; color: var(--ea-ink-3); font-weight: 500; background: none !important; transform: none !important; position: static !important; border: 0 !important; height: auto !important; margin: 0 !important; }
+.markdown .ea-hints details[open] summary::before { content: "−"; }
+.markdown .ea-hints details p { margin: 0.35rem 0 0.1rem 1.2rem; line-height: 1.55; font-family: var(--ea-font-ui); font-size: 0.95rem; }
+
+/* ---------- tables in text: narrow, left aligned, hairlines ---------- */
+.markdown tbody tr, .markdown tbody tr:nth-child(even) { background: transparent !important; }
+.markdown table { font-family: var(--ea-font-ui); font-size: 0.92rem; border-collapse: collapse; width: auto; max-width: var(--ea-measure); margin: 0.8rem 0; }
+.markdown th, .markdown td { text-align: left !important; padding: 0.42rem 1.1rem 0.42rem 0; border-bottom: 1px solid var(--ea-line); vertical-align: top; }
+.markdown th { font-weight: 600; color: var(--ea-ink-2); border-bottom-color: var(--ea-axis); }
+.markdown td.ea-r, .markdown th.ea-r { text-align: right !important; font-variant-numeric: tabular-nums; }
+
+/* ---------- controls take the colour of the concept they set ----------
+   marimo draws its widgets in shadow DOM; custom properties cross that border, class names do not.
+   Default controls are ink, so a plain slider never looks like a prediction (blue). */
+/* Controls. Course controls (ea.Slider and friends, anywidget) take the colour of
+   the concept they set from --ea-* tokens. marimo's own inputs live in a shadow
+   root that re-declares --primary/--accent on every element in dark mode, so only
+   their light-mode blue can be neutralised from here (marimo 0.25.1). */
+:root { --color-blue-500: var(--ea-ink-2); --color-blue-300: var(--ea-line); }
+
+/* ---------- code: structure in weight and grey, never a role hue ----------
+   marimo 0.25.1 gives CodeMirror generated class names, different per theme. This map is pinned to that
+   version and checked by the screenshot test; see the style guide, chapter 5. */
+.cm-content { font-variant-ligatures: none; font-feature-settings: "calt" 0, "liga" 0; }   /* `>=` stays two signs, never ≥ */
+.console-output-area { font-variant-ligatures: none; font-feature-settings: "calt" 0, "liga" 0; }   /* the same in what a cell prints: `<|` stays two signs */
+:root:not(.dark) .ͼ73 { color: var(--ea-ink) !important; font-weight: 600; }          /* keywords */
+:root:not(.dark) :is(.ͼ7a, .ͼ77) { color: var(--ea-ink-2) !important; font-weight: 400; } /* operators, punctuation */
+:root:not(.dark) :is(.ͼ6y, .ͼ7c, .ͼ7b, .ͼ74, .ͼ70, .ͼ71) { color: var(--ea-ink) !important; } /* names, calls, numbers */
+:root:not(.dark) :is(.ͼ6z, .ͼ78, .ͼ79) { color: var(--ea-ink-2) !important; }      /* strings, html */
+:root:not(.dark) .ͼ6x { color: var(--ea-ink-3) !important; }                         /* comments */
+.dark .ͼ6l { color: var(--ea-ink) !important; font-weight: 600; }
+.dark :is(.ͼ6s, .ͼ6p) { color: var(--ea-ink-2) !important; font-weight: 400; }
+.dark :is(.ͼ6g, .ͼ6u, .ͼ6t, .ͼ6m, .ͼ6i, .ͼ6j) { color: var(--ea-ink) !important; }
+.dark :is(.ͼ6h, .ͼ6q, .ͼ6r) { color: var(--ea-ink-2) !important; }
+.dark .ͼ6f { color: var(--ea-ink-3) !important; }
+.mo-cm-reactive-reference { color: inherit !important; text-decoration: underline dotted var(--ea-ink-3); text-underline-offset: 3px; }
+
+/* buttons and focus: ink, not a hue */
+button:focus-visible, [role="slider"]:focus-visible, a:focus-visible, summary:focus-visible { outline: 2px solid var(--ea-ink) !important; outline-offset: 2px; }
+
+/* ---------- edit mode reads like a document (relies on marimo 0.25 class names; screenshot-tested) ---------- */
+.marimo-cell .cm.opacity-20 { display: none; }
+.marimo-cell:has(.cm.opacity-20) { border-color: transparent !important; box-shadow: none !important; background: transparent !important; }
+.marimo-cell:has(.cm.opacity-20) .output-area { border-top: none !important; }
+
+@media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation-duration: 1ms !important; transition-duration: 1ms !important; } }

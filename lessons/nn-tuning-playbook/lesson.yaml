@@ -1,0 +1,33 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: nn-tuning-playbook
+minutes: 30
+title:
+  en: "A tuning playbook"
+  nl: "Een draaiboek voor tunen"
+goal:
+  en: "find a learning rate with an LR range test, and choose its value in a small sweep, one setting at a time."
+  nl: "een learning rate vinden met een LR range test, en de waarde kiezen in een kleine sweep, één instelling tegelijk."
+summary:
+  - en: "An LR range test is one short run in which the learning rate grows by the same factor every step, from far too small to far too large."
+    nl: "Een LR range test is één korte run waarin de learning rate elke stap met dezelfde factor groeit, van veel te klein tot veel te groot."
+  - en: "Smooth its losses with a running average corrected as in Adam; a good learning rate lies from a tenth of the lowest point up to it."
+    nl: "Strijk de losses glad met een lopend gemiddelde, gecorrigeerd zoals in Adam; een goede learning rate ligt van een tiende van het laagste punt tot dat punt."
+  - en: "Sweep a few values an equal factor apart in that range, keep the one with the lowest validation loss, and change one setting at a time."
+    nl: "Sweep een paar waarden die een gelijke factor uit elkaar liggen in dat bereik, houd die met de laagste validation loss, en verander één instelling tegelijk."
+can_now:
+  - en: "make the learning rates of a range test"
+    nl: "de learning rates van een range test maken"
+    by: lr-range
+  - en: "read a range test with a corrected running average"
+    nl: "een range test aflezen met een gecorrigeerd lopend gemiddelde"
+    by: range-pick
+  - en: "choose the values of a sweep"
+    nl: "de waarden van een sweep kiezen"
+    by: sweep-values
+further_reading:
+  - en: "Leslie N. Smith (2017), *Cyclical Learning Rates for Training Neural Networks*, WACV 2017, arXiv:1506.01186"
+    nl: "Leslie N. Smith (2017), *Cyclical Learning Rates for Training Neural Networks*, WACV 2017, arXiv:1506.01186"
+  - en: "Varun Godbole and others (2023), *Deep Learning Tuning Playbook*, github.com/google-research/tuning_playbook"
+    nl: "Varun Godbole en anderen (2023), *Deep Learning Tuning Playbook*, github.com/google-research/tuning_playbook"

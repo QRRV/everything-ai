@@ -1,0 +1,28 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: torch-loss-curves
+minutes: 25
+title:
+  en: "Reading loss curves"
+  nl: "Loss curves lezen"
+goal:
+  en: "measure the training loss and the validation loss after every epoch, draw them together, and tell from the curves whether a model is still learning, overfitting or stuck."
+  nl: "na elke epoch de training loss en de validation loss meten, ze samen tekenen, en aan de curves zien of een model nog leert, overfit of vastzit."
+summary:
+  - en: "After every epoch, measure the loss on the training examples and on a validation set, in eval mode and without a graph; draw both, training solid and validation dashed, on a log scale when they come close to 0."
+    nl: "Meet na elke epoch de loss op de trainingsvoorbeelden en op een validation set, in eval mode en zonder graaf; teken ze allebei, training doorgetrokken en validation gestippeld, op een logaritmische schaal als ze dicht bij 0 komen."
+  - en: "Both still falling: still learning. Training falling and validation rising: overfitting, and the best model is the one of the epoch with the lowest validation loss. Both high and flat: stuck."
+    nl: "Allebei nog dalend: leert nog. Training dalend en validation stijgend: overfitting, en het beste model is dat van de epoch met de laagste validation loss. Allebei hoog en vlak: zit vast."
+  - en: "Both curves jump a little from epoch to epoch: read the trend over several epochs, and remember that the curves are one run."
+    nl: "Beide curves springen een beetje van epoch tot epoch: lees de trend over meerdere epochs, en onthoud dat de curves één run zijn."
+can_now:
+  - en: "tell from train and validation curves whether a model overfits, and which epoch to keep"
+    nl: "aan train- en validation-curves zien of een model overfit, en welke epoch je bewaart"
+    by: diagnose
+  - en: "measure the training loss and the validation loss after every epoch"
+    nl: "na elke epoch de training loss en de validation loss meten"
+    by: curves
+  - en: "choose a remedy that fits the curves"
+    nl: "een oplossing kiezen die bij de curves past"
+    by: remedy

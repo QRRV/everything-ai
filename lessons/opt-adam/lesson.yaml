@@ -1,0 +1,28 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: opt-adam
+minutes: 25
+title:
+  en: "Adam"
+  nl: "Adam"
+goal:
+  en: "divide each parameter's momentum by the root of the average of its squared gradients, so that every parameter gets steps of about the learning rate, and write Adam yourself."
+  nl: "het momentum van elke parameter delen door de wortel uit het gemiddelde van zijn gekwadrateerde gradients, zodat elke parameter stappen van ongeveer de learning rate krijgt, en Adam zelf schrijven."
+summary:
+  - en: "Adam keeps $m$, an average of the gradients, and $s$, an average of their squares, corrects both for their start at 0, and steps by $\\eta \\hat{m} / (\\sqrt{\\hat{s}} + \\varepsilon)$."
+    nl: "Adam houdt $m$ bij, een gemiddelde van de gradients, en $s$, een gemiddelde van hun kwadraten, corrigeert allebei voor hun begin op 0, en stapt met $\\eta \\hat{m} / (\\sqrt{\\hat{s}} + \\varepsilon)$."
+  - en: "Where a gradient keeps its sign, each step is about $\\eta$, whether the gradient is 0.01 or 10; the usual numbers are $\\eta = 0.001$, $\\beta_1 = 0.9$, $\\beta_2 = 0.999$."
+    nl: "Waar een gradient zijn teken houdt, is elke stap ongeveer $\\eta$, of de gradient nu 0,01 is of 10; de gebruikelijke getallen zijn $\\eta = 0{,}001$, $\\beta_1 = 0{,}9$, $\\beta_2 = 0{,}999$."
+  - en: "With pixels from 0 to 255 instead of 0 to 1, Adam at 0.001 still read 80% of the test digits after one epoch, where SGD at 0.1 stayed at 10%."
+    nl: "Met pixels van 0 tot 255 in plaats van 0 tot 1 las Adam bij 0,001 na één epoch nog 80% van de testcijfers goed, waar SGD bij 0,1 op 10% bleef."
+can_now:
+  - en: "work out Adam's first step"
+    nl: "de eerste stap van Adam uitrekenen"
+    by: first-step
+  - en: "work out the steps of Adam for a list of gradients"
+    nl: "de stappen van Adam uitrekenen voor een lijst gradients"
+    by: adam-steps
+  - en: "write Adam as an optimizer for PyTorch"
+    nl: "Adam schrijven als optimizer voor PyTorch"
+    by: adam-optimizer

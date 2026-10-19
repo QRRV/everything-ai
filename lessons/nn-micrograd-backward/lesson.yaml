@@ -1,0 +1,28 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: nn-micrograd-backward
+minutes: 30
+title:
+  en: "The full backward pass, in the right order"
+  nl: "De volledige backward pass, in de goede volgorde"
+goal:
+  en: "find a topological order of a graph with a recursive function, and run the whole backward pass with one call."
+  nl: "met een recursieve functie een topologische ordening van een graaf vinden, en de hele backward pass met één aanroep doen."
+summary:
+  - en: "In a topological order, every value comes after the values it was made from. A recursive function finds one: skip what is in `seen`, do the parents first, then append the value."
+    nl: "In een topologische ordening komt elke waarde na de waarden waaruit hij gemaakt is. Een recursieve functie vindt er een: sla over wat in `seen` zit, doe eerst de ouders, en voeg dan de waarde toe."
+  - en: "The backward pass sets the `grad` of the loss to 1 and goes through that order backwards, so each value passes its slope on only once it has all of it."
+    nl: "De backward pass zet de `grad` van de loss op 1 en loopt die ordening achterstevoren door, zodat elke waarde zijn helling pas doorgeeft als hij hem helemaal heeft."
+  - en: "With `seen`, every value is in the list once: its backward step runs once, and a large graph does not take forever."
+    nl: "Met `seen` staat elke waarde één keer in de lijst: zijn backward step draait één keer, en een grote graaf duurt niet eindeloos."
+can_now:
+  - en: "recognize a topological order of a graph"
+    nl: "een topologische ordening van een graaf herkennen"
+    by: topo
+  - en: "write a backward pass that finds its own order, with recursion"
+    nl: "een backward pass schrijven die zelf zijn volgorde vindt, met recursie"
+    by: backward
+  - en: "get all the slopes of a neuron with one call"
+    nl: "alle hellingen van een neuron krijgen met één aanroep"
+    by: neuron

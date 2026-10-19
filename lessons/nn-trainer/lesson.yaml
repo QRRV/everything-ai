@@ -1,0 +1,28 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: nn-trainer
+minutes: 25
+title:
+  en: "A reusable training loop"
+  nl: "Een herbruikbare training loop"
+goal:
+  en: "write one trainer, with gradient accumulation, clipping, a schedule, evaluation, a log and the best checkpoint, and import it in every project from now on."
+  nl: "één trainer schrijven, met gradient accumulation, clippen, een schedule, evalueren, een logboek en het beste checkpoint, en die vanaf nu in elk project importeren."
+summary:
+  - en: "Gradient accumulation divides the loss of each of $k$ mini-batches by $k$ before `backward()`, and takes a step after every $k$: the gradients add up to those of one mini-batch of $k$ times as many examples. Four mini-batches of 16 gave the gradient of one of 64, up to rounding."
+    nl: "Gradient accumulation deelt de loss van elk van $k$ mini-batches door $k$ vóór `backward()`, en zet na elke $k$ een stap: de gradients tellen op tot die van één mini-batch met $k$ keer zoveel voorbeelden. Vier mini-batches van 16 gaven de gradient van één van 64, op afronding na."
+  - en: "A trainer trains every epoch with accumulation, clipping and a schedule, then measures the loss on the validation set, writes a line in the log, and saves the parameters when the validation loss is the lowest so far."
+    nl: "Een trainer traint elke epoch met accumulation, clippen en een schedule, meet daarna de loss op de validation set, schrijft een regel in het logboek, en slaat de parameters op als de validation loss de laagste tot nu toe is."
+  - en: "With 8 epochs of AdamW, warmup and cosine decay, the trainer took the MLP for digits to a validation loss of 0.27 and 915 of the 1,000 test digits right."
+    nl: "Met 8 epochs AdamW, warmup en cosine decay bracht de trainer het MLP voor cijfers naar een validation loss van 0,27 en 915 van de 1.000 testcijfers goed."
+can_now:
+  - en: "say why each loss is divided by $k$ with gradient accumulation"
+    nl: "zeggen waarom je bij gradient accumulation elke loss door $k$ deelt"
+    by: why-divide
+  - en: "train one epoch with gradient accumulation, clipping and a schedule"
+    nl: "één epoch trainen met gradient accumulation, clippen en een schedule"
+    by: train-epoch
+  - en: "write a trainer that evaluates, keeps a log and saves the best parameters"
+    nl: "een trainer schrijven die evalueert, een logboek bijhoudt en de beste parameters opslaat"
+    by: trainer

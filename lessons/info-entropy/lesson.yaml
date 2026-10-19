@@ -1,0 +1,28 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: info-entropy
+minutes: 25
+title:
+  en: "Entropy: average surprise"
+  nl: "Entropie: gemiddelde verrassing"
+goal:
+  en: "measure surprise in bits, work out the entropy of a distribution, and say what it means for the number of yes-or-no questions and for compressing a text."
+  nl: "verrassing meten in bits, de entropie van een verdeling uitrekenen, en zeggen wat die betekent voor het aantal ja-of-neevragen en voor het comprimeren van een tekst."
+summary:
+  - en: "An outcome with probability p carries −log₂ p bits of surprise. A bit is the answer to one fair yes-or-no question; with the natural log the unit is the nat, about 1.44 bits."
+    nl: "Een uitkomst met kans p draagt −log₂ p bits verrassing. Een bit is het antwoord op één eerlijke ja-of-neevraag; met de natuurlijke log is de eenheid de nat, ongeveer 1,44 bits."
+  - en: "Entropy is the expected surprise, $H(p) = -\\sum_i p_i \\log_2 p_i$: 0 when one outcome is sure, and largest, log₂ K, when all K outcomes are equally likely."
+    nl: "Entropie is de verwachte verrassing, $H(p) = -\\sum_i p_i \\log_2 p_i$: 0 als één uitkomst zeker is, en het grootst, log₂ K, als alle K uitkomsten even waarschijnlijk zijn."
+  - en: "No code that codes each symbol on its own can use fewer bits per symbol on average than the entropy; a code that uses context, as gzip does, can go lower."
+    nl: "Geen code die elk symbool apart codeert, kan gemiddeld minder bits per symbool gebruiken dan de entropie; een code die context gebruikt, zoals gzip, kan lager uitkomen."
+can_now:
+  - en: "say which distribution is the most uncertain"
+    nl: "zeggen welke verdeling het onzekerst is"
+    by: most-entropy
+  - en: "write the entropy of a distribution as a function"
+    nl: "de entropie van een verdeling als functie schrijven"
+    by: entropy
+  - en: "work out the least number of bits a frequency-based code needs for a text"
+    nl: "uitrekenen hoeveel bits een code op basis van frequenties minstens nodig heeft voor een tekst"
+    by: min-bits

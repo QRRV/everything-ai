@@ -1,0 +1,37 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: rnn-lstm
+minutes: 30
+title:
+  en: "LSTM and GRU"
+  nl: "LSTM en GRU"
+goal:
+  en: "take one step of an LSTM in NumPy, and explain how its gates let information and gradients survive over long sequences."
+  nl: "één stap van een LSTM zetten in NumPy, en uitleggen hoe zijn gates informatie en gradients over lange rijen laten overleven."
+summary:
+  - en: "An LSTM carries a cell state next to its hidden state, and three gates, vectors between 0 and 1 from a sigmoid, decide what it forgets, what it adds and what it shows."
+    nl: "Een LSTM neemt naast zijn hidden state een cell state mee, en drie gates, vectoren tussen 0 en 1 uit een sigmoid, beslissen wat hij vergeet, wat hij toevoegt en wat hij laat zien."
+  - en: "Back along the cell state, each step multiplies the gradient by the forget gate only; where it is near 1, the gradient reaches far back."
+    nl: "Terug langs de cell state vermenigvuldigt elke stap de gradient alleen met de forget gate; waar die dicht bij 1 ligt, reikt de gradient ver terug."
+  - en: "A GRU has no cell state and two gates, an update gate and a reset gate, and a quarter fewer weights."
+    nl: "Een GRU heeft geen cell state en twee gates, een update gate en een reset gate, en een kwart minder weights."
+can_now:
+  - en: "write one step of an LSTM, in PyTorch's order of the gates"
+    nl: "één stap van een LSTM schrijven, in de volgorde van de gates van PyTorch"
+    by: lstm-step
+  - en: "say what a forget gate of 0 does to the cell state"
+    nl: "zeggen wat een forget gate van 0 met de cell state doet"
+    by: forget-zero
+  - en: "read the update gate of a GRU"
+    nl: "de update gate van een GRU lezen"
+    by: gru-copy
+further_reading:
+  - en: "Sepp Hochreiter and Jürgen Schmidhuber (1997), *Long Short-Term Memory*, Neural Computation 9(8)"
+    nl: "Sepp Hochreiter en Jürgen Schmidhuber (1997), *Long Short-Term Memory*, Neural Computation 9(8)"
+  - en: "Felix A. Gers, Jürgen Schmidhuber and Fred Cummins (2000), *Learning to Forget: Continual Prediction with LSTM*, Neural Computation 12(10)"
+    nl: "Felix A. Gers, Jürgen Schmidhuber en Fred Cummins (2000), *Learning to Forget: Continual Prediction with LSTM*, Neural Computation 12(10)"
+  - en: "Kyunghyun Cho and others (2014), *Learning Phrase Representations using RNN Encoder-Decoder for Statistical Machine Translation*, EMNLP 2014, arXiv:1406.1078"
+    nl: "Kyunghyun Cho en anderen (2014), *Learning Phrase Representations using RNN Encoder-Decoder for Statistical Machine Translation*, EMNLP 2014, arXiv:1406.1078"
+  - en: "Rafal Jozefowicz, Wojciech Zaremba and Ilya Sutskever (2015), *An Empirical Exploration of Recurrent Network Architectures*, ICML 2015"
+    nl: "Rafal Jozefowicz, Wojciech Zaremba en Ilya Sutskever (2015), *An Empirical Exploration of Recurrent Network Architectures*, ICML 2015"

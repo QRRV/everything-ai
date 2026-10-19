@@ -1,0 +1,28 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: nn-deep-net-project
+minutes: 30
+title:
+  en: "Project: make a deep network train"
+  nl: "Project: een diep netwerk laten trainen"
+goal:
+  en: "find out with the overfit test whether a network can learn at all, and make a 10-layer MLP train well with He initialization, batch normalization, residual connections and your Trainer."
+  nl: "met de overfit-test uitzoeken of een netwerk überhaupt kan leren, en een MLP van 10 layers goed laten trainen met He initialization, batch normalization, residual connections en je Trainer."
+summary:
+  - en: "Overfit one batch first: a network that cannot learn 64 examples by heart has a problem in the network, its start or the training step, and more data or epochs will not help."
+    nl: "Overfit eerst één batch: een netwerk dat 64 voorbeelden niet uit het hoofd kan leren, heeft een probleem in het netwerk, zijn start of de trainingsstap, en meer data of epochs helpen dan niet."
+  - en: "With the starting weights of nn.Linear and SGD, 10 layers read 105 of 1,000 test images of Fashion-MNIST right, for 5 seeds: the signal fades layer after layer, and it says \"trouser\" for every image."
+    nl: "Met de startgewichten van nn.Linear en SGD lezen 10 layers 105 van de 1.000 testplaatjes van Fashion-MNIST goed, voor 5 seeds: het signaal vervaagt layer na layer, en het zegt bij elk plaatje \"broek\"."
+  - en: "He initialization, batch normalization and residual connections each make it train; all three with AdamW, warmup and cosine decay read 838 to 850 right, more than an MLP with one hidden layer."
+    nl: "He initialization, batch normalization en residual connections laten het elk trainen; alle drie samen met AdamW, warmup en cosine decay lezen er 838 tot 850 goed, meer dan een MLP met één hidden layer."
+can_now:
+  - en: "say what it means when a network cannot overfit one batch"
+    nl: "zeggen wat het betekent als een netwerk één batch niet kan overfitten"
+    by: overfit-first
+  - en: "write the overfit test for any model"
+    nl: "de overfit-test schrijven voor elk model"
+    by: overfit
+  - en: "build a deep MLP with He initialization, batch normalization and residual connections as options"
+    nl: "een diep MLP bouwen met He initialization, batch normalization en residual connections als keuze"
+    by: deep-mlp

@@ -1,0 +1,28 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: ml-gradient-descent-1d
+minutes: 15
+title:
+  en: "Rolling downhill: gradient descent"
+  nl: "Bergaf rollen: gradient descent"
+goal:
+  en: "find the bottom of the loss with gradient descent: step against the slope, by the learning rate times the slope, again and again."
+  nl: "de bodem van de loss vinden met gradient descent: stap tegen de helling in, met de learning rate keer de helling, steeds opnieuw."
+summary:
+  - en: 'An update step moves a parameter against the slope: $w_\text{new} = w - \eta \cdot \mathcal{L}''(w)$.'
+    nl: 'Een update-stap schuift een parameter tegen de helling in: $w_\text{new} = w - \eta \cdot \mathcal{L}''(w)$.'
+  - en: 'The learning rate $\eta$ is a small number you choose yourself; it sets how big the steps are.'
+    nl: 'De learning rate $\eta$ is een klein getal dat je zelf kiest; hij bepaalt hoe groot de stappen zijn.'
+  - en: "Near the bottom the slope gets smaller, so the steps do too; repeat until the parameter hardly changes."
+    nl: "Bij de bodem wordt de helling kleiner, en de stappen dus ook; herhaal tot de parameter bijna niet meer verandert."
+can_now:
+  - en: "work out one update step by hand"
+    nl: "één update-stap met de hand uitrekenen"
+    by: one-step
+  - en: "write gradient descent for a parameter as a loop"
+    nl: "gradient descent voor een parameter als loop schrijven"
+    by: descend-b
+  - en: "explain why the steps get smaller near the bottom"
+    nl: "uitleggen waarom de stappen bij de bodem kleiner worden"
+    by: why-smaller

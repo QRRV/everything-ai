@@ -1,0 +1,31 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: llm-chat-template
+minutes: 30
+title:
+  en: "Chat templates"
+  nl: "Chat templates"
+goal:
+  en: "write a conversation in a real chat template, and say what goes wrong, without an error, with a wrong one."
+  nl: "een gesprek in een echte chat template schrijven, en zeggen wat er zonder foutmelding misgaat met een verkeerde."
+summary:
+  - en: "A chat template writes a conversation as the one text a chat model learned: special tokens around every message, with its role; every model family has its own."
+    nl: "Een chat template schrijft een gesprek als de ene tekst die een chat model leerde: special tokens rond elk bericht, met zijn rol; elke modelfamilie heeft een eigen."
+  - en: "For an answer the text ends with the generation prompt, the opening of the assistant's turn; the loop stops at the model's end-of-turn token."
+    nl: "Voor een antwoord eindigt de tekst met de generation prompt, de opening van de beurt van de assistant; de loop stopt bij het end-of-turn-token van het model."
+  - en: "A wrong template, special tokens as plain text, a missing generation prompt or a wrong stop token give no error, only a worse model; what users type must stay plain text."
+    nl: "Een verkeerde template, special tokens als gewone tekst, een ontbrekende generation prompt of een verkeerd stoptoken geven geen foutmelding, alleen een slechter model; wat gebruikers typen moet gewone tekst blijven."
+can_now:
+  - en: "write a conversation in the chat template of a real model"
+    nl: "een gesprek in de chat template van een echt model schrijven"
+    by: gemma-text
+  - en: "say why special tokens in what users type are a danger"
+    nl: "zeggen waarom special tokens in wat gebruikers typen een gevaar zijn"
+    by: fake-turn
+  - en: "explain why a wrong template gives no error but a worse model"
+    nl: "uitleggen waarom een verkeerde template geen foutmelding geeft maar een slechter model"
+    by: no-error
+further_reading:
+  - en: "Hugging Face, *Chat templates*, the documentation of `apply_chat_template` in Transformers"
+    nl: "Hugging Face, *Chat templates*, de documentatie van `apply_chat_template` in Transformers"

@@ -1,0 +1,28 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: math-matrix-multiply
+minutes: 15
+title:
+  en: "A whole batch at once: matrix multiplication"
+  nl: "Een hele batch tegelijk: matrixvermenigvuldiging"
+goal:
+  en: "make the predictions for many examples at once with @, and say from two shapes whether they fit."
+  nl: "de voorspellingen voor veel voorbeelden tegelijk maken met @, en aan twee shapes zien of ze passen."
+summary:
+  - en: 'With the examples as the rows of a matrix, $\hat{\mathbf{y}} = \mathbf{X}\mathbf{w} + b$ gives every prediction at once: in code `X @ w + b`.'
+    nl: 'Met de voorbeelden als rijen van een matrix geeft $\hat{\mathbf{y}} = \mathbf{X}\mathbf{w} + b$ elke voorspelling tegelijk: in code `X @ w + b`.'
+  - en: "Each number of a matrix multiplication is the dot product of a row of the first with a column of the second."
+    nl: "Elk getal van een matrixvermenigvuldiging is het inproduct van een rij van de eerste met een kolom van de tweede."
+  - en: "The shape rule: (n, k) @ (k, m) gives (n, m); the inner numbers must be equal."
+    nl: "De shape-regel: (n, k) @ (k, m) geeft (n, m); de binnenste getallen moeten gelijk zijn."
+can_now:
+  - en: "say the shape of a matrix multiplication"
+    nl: "de shape van een matrixvermenigvuldiging zeggen"
+    by: result-shape
+  - en: "make the predictions for all examples at once with @"
+    nl: "met @ de voorspellingen voor alle voorbeelden tegelijk maken"
+    by: all-grades
+  - en: "write the shape rule as a function"
+    nl: "de shape-regel als functie schrijven"
+    by: shape-rule

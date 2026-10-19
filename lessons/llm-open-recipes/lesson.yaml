@@ -1,0 +1,34 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: llm-open-recipes
+minutes: 40
+title:
+  en: "Reading an open training recipe"
+  nl: "Een open trainingsrecept lezen"
+goal:
+  en: "read a fully open training recipe end to end, work out its model, tokens, batch and schedule from its settings, and run a few hundred steps of it with what you built."
+  nl: "een volledig open trainingsrecept van begin tot eind lezen, uit zijn instellingen het model, de tokens, de batch en het schema afleiden, en er een paar honderd stappen van draaien met wat je zelf bouwde."
+summary:
+  - en: "nanochat publishes its code, data and settings, and one script runs it all: download the data, train and evaluate the tokenizer, pretrain, evaluate, fine-tune for chat. The best entry on its leaderboard beat GPT-2's score in 1.65 hours on 8 H100 GPUs."
+    nl: "nanochat publiceert zijn code, data en instellingen, en één script doet alles: de data downloaden, de tokenizer trainen en evalueren, pretrainen, evalueren, fine-tunen voor chat. De beste inzending op zijn leaderboard versloeg de score van GPT-2 in 1,65 uur op 8 H100-GPU's."
+  - en: "One knob, the depth, sizes the run: the width is 64 times the depth rounded up to a multiple of 128, the scaling parameters about 12 L d² + V d, the tokens a fixed number times those parameters, and the batch grows as a power law of the tokens."
+    nl: "Eén knop, de diepte, bepaalt de maat van de run: de breedte is 64 keer de diepte, naar boven afgerond op een veelvoud van 128, de scaling-parameters ongeveer 12 L d² + V d, de tokens een vast getal keer die parameters, en de batch groeit als een machtswet van de tokens."
+  - en: "nanochat's learning rate rises for 40 steps, stays at its peak, and falls in a straight line over the last 65% to 5% of the peak: a warmdown."
+    nl: "De learning rate van nanochat stijgt 40 stappen lang, blijft op zijn piek, en daalt over de laatste 65% in een rechte lijn naar 5% van de piek: een warmdown."
+can_now:
+  - en: "say which parts of a modern recipe's model you built, and which are new"
+    nl: "zeggen welke onderdelen van het model van een modern recept je zelf bouwde, en welke nieuw zijn"
+    by: features
+  - en: "work out a model's width, heads and parameters from its depth, as nanochat does"
+    nl: "de breedte, de heads en de parameters van een model uit zijn diepte afleiden, zoals nanochat doet"
+    by: size
+  - en: "write a schedule with warmup, plateau and warmdown"
+    nl: "een schema met warmup, plateau en warmdown schrijven"
+    by: lr-multiplier
+  - en: "say why an open recipe names the commit of every result"
+    nl: "zeggen waarom een open recept de commit van elk resultaat noemt"
+    by: recipe
+further_reading:
+  - en: "Andrej Karpathy, *nanochat*, github.com/karpathy/nanochat: runs/speedrun.sh, scripts/base_train.py and nanochat/gpt.py, and dev/LEADERBOARD.md"
+    nl: "Andrej Karpathy, *nanochat*, github.com/karpathy/nanochat: runs/speedrun.sh, scripts/base_train.py en nanochat/gpt.py, en dev/LEADERBOARD.md"

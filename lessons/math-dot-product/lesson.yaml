@@ -1,0 +1,28 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: math-dot-product
+minutes: 15
+title:
+  en: "Many features: the dot product"
+  nl: "Veel features: het inproduct"
+goal:
+  en: "work out the dot product of a weight vector and a feature vector, by hand, with NumPy and with a loop, and use it for a prediction."
+  nl: "het inproduct van een vector met weights en een vector met features uitrekenen, met de hand, met NumPy en met een loop, en het gebruiken voor een voorspelling."
+summary:
+  - en: "The dot product multiplies the numbers in the same place of two vectors and adds up the products: one number."
+    nl: "Het inproduct vermenigvuldigt de getallen op dezelfde plek van twee vectoren en telt de producten op: één getal."
+  - en: 'A model with $d$ features predicts $\hat{y} = \mathbf{w} \cdot \mathbf{x} + b$: the weighted sum of its features, plus the bias term.'
+    nl: 'Een model met $d$ features voorspelt $\hat{y} = \mathbf{w} \cdot \mathbf{x} + b$: de gewogen som van zijn features, plus de bias term.'
+  - en: "In NumPy, `np.dot(w, x)` does it at once; `w * x` only multiplies, without adding up."
+    nl: "In NumPy doet `np.dot(w, x)` het in één keer; `w * x` vermenigvuldigt alleen, zonder op te tellen."
+can_now:
+  - en: "work out a dot product by hand"
+    nl: "een inproduct met de hand uitrekenen"
+    by: by-hand
+  - en: "make a prediction with many features and np.dot"
+    nl: "een voorspelling maken met veel features en np.dot"
+    by: grade
+  - en: "write the dot product as a loop"
+    nl: "het inproduct als loop schrijven"
+    by: dot-loop

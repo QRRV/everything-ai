@@ -1,0 +1,28 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: ml-workflow
+minutes: 20
+title:
+  en: "The machine learning workflow"
+  nl: "De workflow van machine learning"
+goal:
+  en: "run a project in the right order, from the question and the metric to the data, a baseline and a model, and go round again where it falls short."
+  nl: "een project in de goede volgorde doorlopen, van de vraag en de metric naar de data, een baseline en een model, en een nieuwe ronde maken waar het tekortschiet."
+summary:
+  - en: "A project starts with a question: what should the model decide, and does a fixed rule already do it? Then you need no machine learning."
+    nl: "Een project begint met een vraag: wat moet het model beslissen, en doet een vaste regel dat al? Dan heb je geen machine learning nodig."
+  - en: "Agree on the metric and the goal before you train, from what each mistake costs; then the data, a baseline and a model, chosen on the validation set."
+    nl: "Spreek de metric en het doel af vóór je traint, vanuit wat elke fout kost; dan de data, een baseline en een model, gekozen op de validation set."
+  - en: "Look at what the model gets wrong, go back to the step that holds it back, and go round again. Only at the end, measure once on the test set."
+    nl: "Kijk wat het model fout doet, ga terug naar de stap die het tegenhoudt, en maak nog een ronde. Pas aan het eind meet je één keer op de test set."
+can_now:
+  - en: "tell when a fixed rule is enough and machine learning is not needed"
+    nl: "zien wanneer een vaste regel genoeg is en machine learning niet nodig is"
+    by: need-ml
+  - en: "put the work of a project in the steps of the workflow"
+    nl: "het werk van een project bij de stappen van de workflow zetten"
+    by: steps
+  - en: "choose a model by the metric agreed on beforehand"
+    nl: "een model kiezen met de metric die vooraf is afgesproken"
+    by: pick-model

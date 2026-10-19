@@ -1,0 +1,38 @@
+# Display names the route data does not carry in both languages: modules (chapters), keyed by the `module`
+# field in route/lessen/*.yaml, and the example goal routes in route/routes.yaml.
+# English is written first; the Dutch reads as Dutch. AI jargon stays English in both.
+modules:
+  start: {en: "Start", nl: "Start"}
+  python: {en: "Python", nl: "Python"}
+  numpy: {en: "NumPy", nl: "NumPy"}
+  data: {en: "Data", nl: "Data"}
+  first-model: {en: "Your first model", nl: "Je eerste model"}
+  classification: {en: "Classification", nl: "Classificatie"}
+  generalization: {en: "Generalization", nl: "Generalisatie"}
+  neural-networks: {en: "Neural networks", nl: "Neural networks"}
+  pytorch: {en: "PyTorch", nl: "PyTorch"}
+  building-blocks: {en: "Building blocks", nl: "Bouwstenen"}
+  lm-basis: {en: "Language models", nl: "Language models"}
+  research-basis: {en: "Research", nl: "Onderzoek"}
+  math-formal: {en: "Math, formally", nl: "Wiskunde, formeel"}
+  training: {en: "Training", nl: "Training"}
+  lm-neural: {en: "A neural language model", nl: "Een neural language model"}
+  tokenizer: {en: "Your tokenizer", nl: "Je tokenizer"}
+  gpt: {en: "Your GPT", nl: "Je GPT"}
+  research-reading: {en: "Reading research", nl: "Onderzoek lezen"}
+  research-experiments: {en: "Experiments", nl: "Experimenten"}
+  systems: {en: "Systems", nl: "Systemen"}
+  modern-llm: {en: "A modern LLM", nl: "Een modern LLM"}
+  pretraining: {en: "Pretraining", nl: "Pretraining"}
+  scaling: {en: "Scaling", nl: "Schalen"}
+  evaluation: {en: "Evaluation", nl: "Evaluatie"}
+  post-training: {en: "Post-training", nl: "Post-training"}
+  research-reproduction: {en: "Reproducing research", nl: "Onderzoek nabouwen"}
+  guided-reproduction: {en: "A guided reproduction", nl: "Een begeleide reproductie"}
+  own-reproduction: {en: "Your own reproduction", nl: "Je eigen reproductie"}
+
+goals:
+  doel-attention: {en: "I want to understand attention", nl: "Ik wil attention snappen"}
+  doel-eigen-gpt: {en: "I want my own GPT as fast as possible", nl: "Ik wil zo snel mogelijk mijn eigen GPT"}
+  doel-eerste-cnn: {en: "I want to train my first CNN", nl: "Ik wil mijn eerste CNN trainen"}
+  doel-dpo: {en: "I want to understand and apply DPO", nl: "Ik wil DPO begrijpen en toepassen"}

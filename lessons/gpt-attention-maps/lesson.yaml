@@ -1,0 +1,35 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: gpt-attention-maps
+minutes: 30
+title:
+  en: "What does your GPT look at?"
+  nl: "Waar kijkt je GPT naar?"
+goal:
+  en: "draw the attention weights of every head as a heatmap, measure what each head looks at, and find heads with a job of their own."
+  nl: "de attention weights van elke head als heatmap tekenen, meten waar elke head naar kijkt, en heads met een eigen taak vinden."
+summary:
+  - en: "An attention heatmap draws a head's weights: a row for every position that looks, a column for every position it looks at; the causal mask leaves the upper triangle empty."
+    nl: "Een attention-heatmap tekent de weights van een head: een rij voor elke positie die kijkt, een kolom voor elke positie waar ze naar kijkt; de causal mask laat de bovenste driehoek leeg."
+  - en: "Heads take on jobs of their own: a previous-token head puts most of its weight on the character just before; another head looks back at the new line where the line starts."
+    nl: "Heads krijgen elk een eigen taak: een previous-token head legt het grootste deel van zijn weight op het teken vlak ervoor; een andere head kijkt terug naar de nieuwe regel waar de regel begint."
+  - en: "A heatmap shows where a head takes from, not how much the prediction depends on it; an experiment, such as switching the head off, says that."
+    nl: "Een heatmap laat zien waar een head van neemt, niet hoeveel de voorspelling ervan afhangt; een experiment, zoals de head uitzetten, zegt dat."
+can_now:
+  - en: "measure how much a head looks at the character just before"
+    nl: "meten hoeveel een head naar het teken vlak ervoor kijkt"
+    by: previous-score
+  - en: "measure how much a head looks at some characters, and compare it with an even spread"
+    nl: "meten hoeveel een head naar bepaalde tekens kijkt, en dat vergelijken met een gelijke verdeling"
+    by: share-on
+  - en: "say what an attention heatmap does and does not tell you"
+    nl: "zeggen wat een attention-heatmap wel en niet vertelt"
+    by: not-explanation
+further_reading:
+  - en: "Kevin Clark, Urvashi Khandelwal, Omer Levy and Christopher D. Manning (2019), *What Does BERT Look At? An Analysis of BERT's Attention*, BlackboxNLP 2019, arXiv:1906.04341"
+    nl: "Kevin Clark, Urvashi Khandelwal, Omer Levy en Christopher D. Manning (2019), *What Does BERT Look At? An Analysis of BERT's Attention*, BlackboxNLP 2019, arXiv:1906.04341"
+  - en: "Sarthak Jain and Byron C. Wallace (2019), *Attention is not Explanation*, NAACL 2019, arXiv:1902.10186"
+    nl: "Sarthak Jain en Byron C. Wallace (2019), *Attention is not Explanation*, NAACL 2019, arXiv:1902.10186"
+  - en: "Catherine Olsson and others (2022), *In-context Learning and Induction Heads*, Transformer Circuits Thread, arXiv:2209.11895"
+    nl: "Catherine Olsson en anderen (2022), *In-context Learning and Induction Heads*, Transformer Circuits Thread, arXiv:2209.11895"

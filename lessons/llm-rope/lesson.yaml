@@ -1,0 +1,33 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: llm-rope
+minutes: 35
+title:
+  en: "Rotary position embeddings (RoPE)"
+  nl: "Rotary position embeddings (RoPE)"
+goal:
+  en: "apply RoPE to queries and keys in PyTorch, and explain why the attention scores then depend only on the distance between tokens."
+  nl: "RoPE toepassen op queries en keys in PyTorch, en uitleggen waarom de attention scores dan alleen van de afstand tussen tokens afhangen."
+summary:
+  - en: "RoPE reads a query or key as pairs and turns pair j at place t by t times its speed, base to the power −2j/d, the speeds of the sinusoids."
+    nl: "RoPE leest een query of key als paren en draait paar j op plek t over t maal zijn snelheid, base tot de macht −2j/d, de snelheden van de sinussen."
+  - en: "The dot product of a turned query and key depends only on the difference of their places, so the scores see distances, not places."
+    nl: "Het inproduct van een gedraaide query en key hangt alleen af van het verschil van hun plekken, dus de scores zien afstanden, geen plekken."
+  - en: "It goes in every attention layer, on queries and keys only, with no parameters and nothing added at the input."
+    nl: "Het zit in elke attention-layer, alleen op queries en keys, zonder parameters en zonder iets bij de input op te tellen."
+can_now:
+  - en: "write rope for queries and keys of any shape"
+    nl: "rope schrijven voor queries en keys van elke shape"
+    by: rope
+  - en: "say where RoPE brings the place of a token in"
+    nl: "zeggen waar RoPE de plek van een token binnenbrengt"
+    by: where
+  - en: "explain why RoPE leaves the values alone"
+    nl: "uitleggen waarom RoPE de values met rust laat"
+    by: not-the-values
+further_reading:
+  - en: "Jianlin Su and others (2021), *RoFormer: Enhanced Transformer with Rotary Position Embedding*, arXiv:2104.09864"
+    nl: "Jianlin Su en anderen (2021), *RoFormer: Enhanced Transformer with Rotary Position Embedding*, arXiv:2104.09864"
+  - en: "Shouyuan Chen and others (2023), *Extending Context Window of Large Language Models via Positional Interpolation*, arXiv:2306.15595"
+    nl: "Shouyuan Chen en anderen (2023), *Extending Context Window of Large Language Models via Positional Interpolation*, arXiv:2306.15595"

@@ -1,0 +1,28 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: prob-conditional
+minutes: 15
+title:
+  en: "Conditional probability"
+  nl: "Voorwaardelijke kans"
+goal:
+  en: "work out the probability of an event given something you already know, by counting only among those cases."
+  nl: "de kans op een gebeurtenis uitrekenen gegeven iets wat je al weet, door alleen onder die gevallen te tellen."
+summary:
+  - en: '$P(A \mid B)$, "P of A given B", is the probability of $A$ among only the cases where $B$ happened: how often both happened, divided by how often $B$ happened.'
+    nl: '$P(A \mid B)$, "de kans op A gegeven B", is de kans op $A$ als je alleen kijkt naar de gevallen waarin $B$ gebeurde: hoe vaak allebei gebeurden, gedeeld door hoe vaak $B$ gebeurde.'
+  - en: "Knowing something changes a probability: P(rain | clouds) can be far above P(rain)."
+    nl: "Iets weten verandert een kans: P(regen | wolken) kan ver boven P(regen) liggen."
+  - en: '$P(A \mid B)$ is not $P(B \mid A)$: the condition decides which cases you count among.'
+    nl: '$P(A \mid B)$ is niet $P(B \mid A)$: de voorwaarde bepaalt onder welke gevallen je telt.'
+can_now:
+  - en: "work out a conditional probability from counts"
+    nl: "een voorwaardelijke kans uit tellingen uitrekenen"
+    by: studied
+  - en: "write a conditional probability as a function"
+    nl: "een voorwaardelijke kans als functie schrijven"
+    by: p-given
+  - en: "tell P(A | B) and P(B | A) apart"
+    nl: "P(A | B) en P(B | A) uit elkaar houden"
+    by: test-both-ways

@@ -1,0 +1,28 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: rl-what-is-rl
+minutes: 20
+title:
+  en: "Learning from rewards"
+  nl: "Leren van rewards"
+goal:
+  en: "name the agent, the environment, the actions and the rewards of a task, and work out the discounted return of a list of rewards."
+  nl: "de agent, de environment, de actions en de rewards van een taak benoemen, en de verdisconteerde return van een lijst rewards uitrekenen."
+summary:
+  - en: "In reinforcement learning an agent chooses actions in an environment, which gives back a new situation and a reward: a number for how good that step was."
+    nl: "In reinforcement learning kiest een agent actions in een environment, die een nieuwe situatie en een reward teruggeeft: een getal voor hoe goed die stap was."
+  - en: "The agent tries to make the return as large as possible: the sum of all rewards from now on, each step later multiplied once more by the discount factor γ."
+    nl: "De agent probeert de return zo groot mogelijk te maken: de som van alle rewards vanaf nu, elke stap later één keer extra vermenigvuldigd met de discount factor γ."
+  - en: "With γ close to 1 the agent is patient; with γ = 0 only the next reward counts."
+    nl: "Met γ dicht bij 1 is de agent geduldig; met γ = 0 telt alleen de volgende reward."
+can_now:
+  - en: "name the agent, the environment, an action and the reward of a task"
+    nl: "de agent, de environment, een action en de reward van een taak benoemen"
+    by: parts
+  - en: "work out the return of a list of rewards with a discount factor"
+    nl: "de return van een lijst rewards uitrekenen met een discount factor"
+    by: discounted-return
+  - en: "say what an agent with γ = 0 chooses"
+    nl: "zeggen wat een agent met γ = 0 kiest"
+    by: gamma-zero

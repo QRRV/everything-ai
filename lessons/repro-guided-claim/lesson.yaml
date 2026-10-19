@@ -1,0 +1,31 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: repro-guided-claim
+minutes: 100
+title:
+  en: "Guided reproduction 1: read the paper and pick the claim"
+  nl: "Begeleide reproductie 1: lees de paper en kies de claim"
+goal:
+  en: "read the grokking paper, choose the one claim you test, and put in code, before any run, when a run shows it and when it does not."
+  nl: "de grokking-paper lezen, de ene claim kiezen die je toetst, en vóór elke run in code vastleggen wanneer een run hem laat zien en wanneer niet."
+summary:
+  - en: "Grokking: a small transformer on a table of sums gets its training sums right early and the other sums only much later."
+    nl: "Grokking: een kleine transformer op een tabel van sommen heeft zijn trainingssommen vroeg goed en de andere sommen pas veel later."
+  - en: "A reproduction tests one claim, made measurable: an accuracy counts at 99%, and validation must get there at a step at least 10 times as late as training."
+    nl: "Een reproductie toetst één claim, meetbaar gemaakt: een accuracy telt bij 99%, en de validatie moet daar komen op een stap die minstens 10 keer zo laat is als bij de training."
+  - en: "Every outcome of a run is named before any run, so that a failed reproduction is a result too."
+    nl: "Elke uitkomst van een run is benoemd vóór elke run, zodat een mislukte reproductie ook een resultaat is."
+can_now:
+  - en: "choose the claim of a paper that a reproduction tests"
+    nl: "de claim van een paper kiezen die een reproductie toetst"
+    by: which-claim
+  - en: "write a reproduction plan in code that judges every run"
+    nl: "een reproductieplan in code schrijven dat elke run beoordeelt"
+    by: verdict
+  - en: "explain why the plan comes before the first run"
+    nl: "uitleggen waarom het plan vóór de eerste run komt"
+    by: why-before
+further_reading:
+  - en: "Alethea Power and others (2022), *Grokking: Generalization Beyond Overfitting on Small Algorithmic Datasets*, arXiv:2201.02177"
+    nl: "Alethea Power en anderen (2022), *Grokking: Generalization Beyond Overfitting on Small Algorithmic Datasets*, arXiv:2201.02177"

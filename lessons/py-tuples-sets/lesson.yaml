@@ -1,0 +1,28 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: py-tuples-sets
+minutes: 15
+title:
+  en: "Tuples, sets and sorting"
+  nl: "Tuples, sets en sorteren"
+goal:
+  en: "know that a tuple keeps values together and cannot change, keep each value once in a set, and put values in order with `sorted`."
+  nl: "weten dat een tuple waarden bij elkaar houdt en niet kan veranderen, elke waarde één keer bewaren in een set, en waarden op volgorde zetten met `sorted`."
+summary:
+  - en: "A tuple, `point = (3, 4)`, keeps values in order and cannot change. `point[0]` reads a value; `x, y = point` gives each value its own name."
+    nl: "Een tuple, `point = (3, 4)`, houdt waarden op volgorde en kan niet veranderen. `point[0]` leest een waarde; `x, y = point` geeft elke waarde een eigen naam."
+  - en: "`set(words)` keeps each value once, in no fixed order; `len(set(words))` counts the different values."
+    nl: "In `set(words)` staat elke waarde één keer, zonder vaste volgorde; `len(set(words))` telt de verschillende waarden."
+  - en: "`sorted(...)` gives a new list in order and leaves the original as it was. Sort first, then slice: `sorted(scores)[:3]` gives the three smallest."
+    nl: "`sorted(...)` geeft een nieuwe lijst op volgorde en laat het origineel zoals het was. Eerst sorteren, dan een slice: `sorted(scores)[:3]` geeft de drie kleinste."
+can_now:
+  - en: "keep each value once with a set, and put the values in order"
+    nl: "elke waarde één keer bewaren met een set, en de waarden op volgorde zetten"
+    by: unique
+  - en: "say what happens when you try to change a tuple"
+    nl: "zeggen wat er gebeurt als je een tuple probeert te veranderen"
+    by: tuple-change
+  - en: "find the smallest few values by sorting and slicing"
+    nl: "de kleinste paar waarden vinden met sorteren en een slice"
+    by: podium

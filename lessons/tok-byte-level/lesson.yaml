@@ -1,0 +1,28 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: tok-byte-level
+minutes: 30
+title:
+  en: "Byte-level BPE"
+  nl: "Byte-level BPE"
+goal:
+  en: "run byte pair encoding on the bytes of UTF-8, with new ids from 256 on, and turn ids back into text, so your tokenizer takes any text."
+  nl: "byte pair encoding draaien op de bytes van UTF-8, met nieuwe ids vanaf 256, en ids weer tekst maken, zodat je tokenizer elke tekst aankan."
+summary:
+  - en: "Byte-level BPE starts from the bytes of a text in UTF-8, ids 0 to 255; all 256 are in the vocabulary from the start, so any text in any language can be tokenized."
+    nl: "Byte-level BPE begint bij de bytes van een tekst in UTF-8, ids 0 tot en met 255; alle 256 staan vanaf het begin in de vocabulary, dus elke tekst in elke taal kan getokeniseerd worden."
+  - en: "Every merge rule gets a new id from 256 on; the rules are a dictionary from a pair of ids to its new id. GPT-2 has 256 bytes, 50,000 rules and one special token."
+    nl: "Elke merge rule krijgt een nieuw id vanaf 256; de regels zijn een dictionary van een paar ids naar zijn nieuwe id. GPT-2 heeft 256 bytes, 50.000 regels en één special token."
+  - en: "To decode, every new id gets the bytes of both halves of its pair, in the order the rules were learned; the bytes are decoded as UTF-8 with errors=\"replace\", since a token can be part of a character."
+    nl: "Om te decoderen krijgt elk nieuw id de bytes van beide helften van zijn paar, in de volgorde waarin de regels geleerd zijn; de bytes worden gedecodeerd als UTF-8 met errors=\"replace\", omdat een token een deel van een teken kan zijn."
+can_now:
+  - en: "count the tokens in the vocabulary of a byte-level BPE"
+    nl: "de tokens in de vocabulary van een byte-level BPE tellen"
+    by: vocab-size
+  - en: "learn merge rules on the bytes of a text, with new ids"
+    nl: "merge rules leren op de bytes van een tekst, met nieuwe ids"
+    by: train-byte-bpe
+  - en: "decode ids into text through the bytes of every token"
+    nl: "ids decoderen tot tekst via de bytes van elk token"
+    by: decode

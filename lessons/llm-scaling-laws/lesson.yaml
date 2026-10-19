@@ -1,0 +1,35 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: llm-scaling-laws
+minutes: 35
+title:
+  en: "Scaling laws"
+  nl: "Scaling laws"
+goal:
+  en: "fit a scaling law through the losses of a few runs, with a floor, and say how far you can trust what it predicts."
+  nl: "een scaling law door de losses van een paar runs fitten, met een bodem, en zeggen hoe ver je zijn voorspelling kunt vertrouwen."
+summary:
+  - en: "The loss of language models falls as a power law in the parameters, the training tokens and the compute: a straight line on a log-log plot."
+    nl: "De loss van language models daalt als een machtswet in de parameters, de trainingstokens en de compute: een rechte lijn op een log-log plot."
+  - en: "Fit it with a straight line through the logs: np.polyfit gives the exponent as the slope, and the log of a as the intercept."
+    nl: "Fit hem met een rechte lijn door de logs: np.polyfit geeft de exponent als helling, en de log van a als snijpunt."
+  - en: "No model gets below a floor E; only the loss above it is a power law, so the curve flattens, and a straight line through small runs predicts too low a loss for big ones."
+    nl: "Geen model komt onder een bodem E; alleen de loss erboven is een machtswet, dus de kromme vlakt af, en een rechte lijn door kleine runs voorspelt voor grote een te lage loss."
+can_now:
+  - en: "fit a power law with a floor through the losses of a few runs"
+    nl: "een machtswet met een bodem door de losses van een paar runs fitten"
+    by: fit-power-law
+  - en: "choose sizes for the runs of a fit"
+    nl: "groottes kiezen voor de runs van een fit"
+    by: which-runs
+  - en: "explain why the loss has a floor, and what that means for bigger models"
+    nl: "uitleggen waarom de loss een bodem heeft, en wat dat betekent voor grotere modellen"
+    by: why-floor
+further_reading:
+  - en: "Jared Kaplan and others (2020), *Scaling Laws for Neural Language Models*, arXiv:2001.08361"
+    nl: "Jared Kaplan en anderen (2020), *Scaling Laws for Neural Language Models*, arXiv:2001.08361"
+  - en: "Jordan Hoffmann and others (2022), *Training Compute-Optimal Large Language Models*, arXiv:2203.15556"
+    nl: "Jordan Hoffmann en anderen (2022), *Training Compute-Optimal Large Language Models*, arXiv:2203.15556"
+  - en: "OpenAI (2023), *GPT-4 Technical Report*, arXiv:2303.08774"
+    nl: "OpenAI (2023), *GPT-4 Technical Report*, arXiv:2303.08774"

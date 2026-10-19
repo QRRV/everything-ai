@@ -1,0 +1,28 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: res-seeds-variance
+minutes: 25
+title:
+  en: "One run is not a result: seeds and variance"
+  nl: "Eén run is geen resultaat: seeds en variantie"
+goal:
+  en: "train the same setup with several seeds, and report the mean, the spread and a 95% bootstrap interval of the mean."
+  nl: "dezelfde opzet met meerdere seeds trainen, en het gemiddelde, de spreiding en een 95%-bootstrapinterval van het gemiddelde rapporteren."
+summary:
+  - en: "With only another seed, the same run ends at another number: the starting weights and the order of the mini-batches change."
+    nl: "Met alleen een andere seed eindigt dezelfde run op een ander getal: de beginwaarden van de weights en de volgorde van de mini-batches veranderen."
+  - en: "Report a setting with several seeds: the mean, the lowest and the highest run, and a 95% bootstrap interval of the mean."
+    nl: "Rapporteer een instelling met meerdere seeds: het gemiddelde, de laagste en de hoogste run, en een 95%-bootstrapinterval van het gemiddelde."
+  - en: "A difference between two settings that is smaller than the noise between seeds says nothing yet."
+    nl: "Een verschil tussen twee instellingen dat kleiner is dan de ruis tussen seeds, zegt nog niets."
+can_now:
+  - en: "sum up the runs of several seeds as a mean with a bootstrap interval"
+    nl: "de runs van meerdere seeds samenvatten als een gemiddelde met een bootstrapinterval"
+    by: seed-summary
+  - en: "say whether a difference is bigger than the noise between seeds"
+    nl: "zeggen of een verschil groter is dan de ruis tussen seeds"
+    by: overlap
+  - en: "report a result with its seeds, its spread and its interval"
+    nl: "een resultaat rapporteren met zijn seeds, zijn spreiding en zijn interval"
+    by: report

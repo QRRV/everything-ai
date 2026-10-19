@@ -1,0 +1,28 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: ml-residuals
+minutes: 15
+title:
+  en: "How wrong is one prediction?"
+  nl: "Hoe ver zit één voorspelling ernaast?"
+goal:
+  en: "work out the residual of a prediction, for one example and for many at once, and read from its sign which way the model is off."
+  nl: "het residu van een voorspelling uitrekenen, voor één voorbeeld en voor veel tegelijk, en aan het teken zien naar welke kant het model ernaast zit."
+summary:
+  - en: "The residual of one example is the label minus the prediction: y − ŷ."
+    nl: "Het residu van één voorbeeld is het label min de voorspelling: y − ŷ."
+  - en: "A positive residual means the model predicted too low, a negative one too high, and 0 exactly right."
+    nl: "Een positief residu betekent dat het model te laag voorspelde, een negatief te hoog, en 0 precies goed."
+  - en: "With arrays, `y - (w * x + b)` gives the residuals of all examples at once; mind the brackets."
+    nl: "Met arrays geeft `y - (w * x + b)` de residuen van alle voorbeelden tegelijk; let op de haakjes."
+can_now:
+  - en: "work out the residual of one prediction"
+    nl: "het residu van één voorspelling uitrekenen"
+    by: one-residual
+  - en: "work out the residuals of many examples at once"
+    nl: "de residuen van veel voorbeelden tegelijk uitrekenen"
+    by: residuals
+  - en: "find the example a model predicts too low by the most"
+    nl: "het voorbeeld vinden dat een model het verst te laag voorspelt"
+    by: too-low

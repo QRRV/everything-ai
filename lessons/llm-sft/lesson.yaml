@@ -1,0 +1,36 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: llm-sft
+minutes: 60
+title:
+  en: "Project: teach your model to follow instructions (SFT)"
+  nl: "Project: leer je model instructies volgen (SFT)"
+goal:
+  en: "fine-tune your model on instructions with a good answer, with the loss only on the answer, and measure how much more often it does what it is asked."
+  nl: "je model finetunen op instructies met een goed antwoord, met de loss alleen op het antwoord, en meten hoeveel vaker het doet wat er gevraagd wordt."
+summary:
+  - en: "Supervised fine-tuning, SFT, trains a pretrained model on examples of an instruction and a good answer, written in one template: the same next-token training as pretraining, with other data, fewer steps and a lower learning rate."
+    nl: "Supervised fine-tuning, SFT, traint een gepretraind model op voorbeelden van een instructie met een goed antwoord, geschreven in één template: dezelfde next-token-training als bij pretraining, met andere data, minder stappen en een lagere learning rate."
+  - en: "Loss masking gives the tokens of the instruction, and the padding of a batch, the label -100, which F.cross_entropy skips: only the answer and its end-of-text count. That end-of-text teaches the model to stop."
+    nl: "Loss masking geeft de tokens van de instructie, en de padding van een batch, het label -100, dat F.cross_entropy overslaat: alleen het antwoord en zijn end-of-text tellen. Dat end-of-text leert het model stoppen."
+  - en: "A program can check an instruction such as \"a story with the words kite and park\". After 1,000 steps of SFT, the course's model of the capstone's demo run used every requested word in 29 of 100 test instructions, against 9 before."
+    nl: "Een programma kan een instructie als \"een verhaal met de woorden kite en park\" nakijken. Na 1.000 stappen SFT gebruikte het model van de demorun van de capstone van de course elk gevraagd woord in 29 van 100 testinstructies, tegen 9 ervoor."
+can_now:
+  - en: "build an example for SFT whose loss counts only the answer"
+    nl: "een voorbeeld voor SFT maken waarvan de loss alleen het antwoord telt"
+    by: sft-example
+  - en: "put examples of different lengths in one batch, shifted and padded"
+    nl: "voorbeelden van verschillende lengte in één batch zetten, verschoven en aangevuld"
+    by: sft-batch
+  - en: "check with a program whether an answer does what the instruction asks"
+    nl: "met een programma nakijken of een antwoord doet wat de instructie vraagt"
+    by: words-used
+  - en: "say why every answer in the data ends with an end-of-text token"
+    nl: "zeggen waarom elk antwoord in de data eindigt met een end-of-text-token"
+    by: no-end
+further_reading:
+  - en: "Long Ouyang and others, *Training language models to follow instructions with human feedback* (2022): InstructGPT, which starts with supervised fine-tuning on answers written by people"
+    nl: "Long Ouyang en anderen, *Training language models to follow instructions with human feedback* (2022): InstructGPT, dat begint met supervised fine-tuning op antwoorden die mensen schreven"
+  - en: "Jason Wei and others, *Finetuned Language Models Are Zero-Shot Learners* (2021): instruction tuning on many tasks written as instructions"
+    nl: "Jason Wei en anderen, *Finetuned Language Models Are Zero-Shot Learners* (2021): instruction tuning op veel taken, geschreven als instructies"

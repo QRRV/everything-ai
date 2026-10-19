@@ -1,0 +1,120 @@
+# Papers for the reproduction finale. One guided paper that everyone does, then a list the learner picks from.
+# Compute numbers are estimates until measured on the reference machine (RTX 3060 12 GB); "measured: false" until then.
+# A paper only stays on the list if its core claim reproduces within the course budget:
+# mandatory steps within 15 min each on the recommended spec, the full reproduction within one evening or one night.
+# needs: the hardware the paper's own reproduction asks for (any, gpu8, rec); the list always has papers that run on a CPU.
+# Format: FORMAT.md.
+
+guided:
+  id: grokking
+  title: "Grokking: Generalization Beyond Overfitting on Small Algorithmic Datasets"
+  authors: "Power, Burda, Edwards, Babuschkin, Misra"
+  year: 2022
+  ref: "arXiv:2201.02177"
+  claim_nl: "Een klein transformer-netwerk op modulair rekenen haalt eerst 100% op de trainingsdata en pas veel later, plotseling, ook op de validatiedata; weight decay maakt die sprong veel waarschijnlijker."
+  why_nl: "Klein genoeg voor elke recommended-spec-pc, gebruikt het GPT-project dat de leerling al heeft, synthetische data zonder licentievragen, en een verrassend resultaat met één duidelijke figuur."
+  tak: onderzoek
+  builds_on: [llm-modern-gpt]
+  data: [synthetic-modular-arithmetic]
+  figure_to_reproduce_nl: "Train- en validatie-accuracy tegen het aantal stappen, logaritmische x-as"
+  ablation_nl: "Weight decay aan en uit; trainingsfractie 30%, 50% en 70%"
+  compute: {estimate: "ongeveer 2 tot 5 minuten per run op een RTX 3060: een transformer van 2 lagen en minder dan 1M parameters, tot 10.000 à 50.000 stappen; de ablation is 6 runs, die naast elkaar op één GPU passen omdat elk model zo klein is", measured: false}
+
+own_choice:
+- id: induction-heads
+  title: "In-context Learning and Induction Heads"
+  authors: "Olsson et al. (Anthropic)"
+  year: 2022
+  ref: "arXiv:2209.11895"
+  claim_nl: "Tijdens het trainen ontstaan in een klein transformer-netwerk 'induction heads', precies op het moment dat de loss een knik maakt en in-context learning verschijnt."
+  tak: verantwoord
+  builds_on: [gpt-train-bpe, attn-multi-head]
+  data: [tinystories]
+  needs: gpu8
+  compute: {estimate: "1 tot 2 uur voor een paar kleine modellen", measured: false}
+
+- id: emergence-mirage
+  title: "Are Emergent Abilities of Large Language Models a Mirage?"
+  authors: "Schaeffer, Miranda, Koyejo"
+  year: 2023
+  ref: "arXiv:2304.15004"
+  claim_nl: "Een vaardigheid lijkt plotseling te ontstaan bij grotere modellen door de keuze van de maat; met een vloeiende maat groeit ze geleidelijk."
+  tak: taal
+  builds_on: [llm-fit-scaling-law, llm-eval-base]
+  data: [tinystories]
+  note_nl: "Met de eigen modellen van verschillende grootte uit de scaling-law-les; Pythia kan, met een ethiekopmerking over The Pile."
+  needs: rec
+  compute: {estimate: "een avond", measured: false}
+
+- id: reversal-curse
+  title: "The Reversal Curse: LLMs trained on \"A is B\" fail to learn \"B is A\""
+  authors: "Berglund et al."
+  year: 2023
+  ref: "arXiv:2309.12288"
+  claim_nl: "Een model dat leert 'A is B' weet daarna niet vanzelf 'B is A'."
+  tak: taal
+  builds_on: [llm-lora, llm-eval-base]
+  data: [synthetic-fictional-facts, model-qwen3-0.6b-base]
+  needs: rec
+  compute: {estimate: "1 tot 2 uur met LoRA", measured: false}
+
+- id: lora-rank
+  title: "LoRA: Low-Rank Adaptation of Large Language Models"
+  authors: "Hu et al."
+  year: 2021
+  ref: "arXiv:2106.09685"
+  claim_nl: "Fine-tunen met een update van heel lage rang (1 tot 8) werkt bijna even goed als hogere rang of volledig fine-tunen."
+  tak: taal
+  builds_on: [llm-lora, llm-sft]
+  data: [model-qwen3-0.6b-base, oasst]
+  needs: rec
+  compute: {estimate: "een avond voor een rang-sweep", measured: false}
+
+- id: random-labels
+  title: "Understanding Deep Learning Requires Rethinking Generalization"
+  authors: "Zhang, Bengio, Hardt, Recht, Vinyals"
+  year: 2017
+  ref: "arXiv:1611.03530"
+  claim_nl: "Een gewoon neuraal netwerk kan zelfs willekeurige labels foutloos uit het hoofd leren, dus klassieke maten voor capaciteit verklaren niet waarom het generaliseert."
+  tak: dl-verdieping
+  builds_on: [cnn-pytorch, nn-dropout]
+  data: [fashion-mnist]
+  needs: gpu8
+  compute: {estimate: "1 tot 3 uur", measured: false}
+
+- id: lottery-ticket
+  title: "The Lottery Ticket Hypothesis: Finding Sparse, Trainable Neural Networks"
+  authors: "Frankle, Carbin"
+  year: 2019
+  ref: "arXiv:1803.03635"
+  claim_nl: "In een groot netwerk zit een klein subnetwerk dat, vanaf dezelfde startgewichten opnieuw getraind, even goed wordt."
+  tak: dl-verdieping
+  builds_on: [nn-deep-net-project, nn-initialization]
+  data: [fashion-mnist]
+  needs: any
+  compute: {estimate: "1 tot 2 uur voor enkele snoeirondes", measured: false}
+
+- id: dropout
+  title: "Dropout: A Simple Way to Prevent Neural Networks from Overfitting"
+  authors: "Srivastava, Hinton, Krizhevsky, Sutskever, Salakhutdinov"
+  year: 2014
+  ref: "JMLR 15(56):1929-1958"
+  claim_nl: "Dropout verlaagt de testfout van een flink netwerk duidelijk, en werkt beter naarmate het netwerk groter is."
+  tak: stam
+  builds_on: [nn-dropout, nn-deep-net-project]
+  data: [fashion-mnist]
+  needs: any
+  compute: {estimate: "minder dan een uur", measured: false}
+
+- id: resnet-degradation
+  title: "Deep Residual Learning for Image Recognition (the degradation experiment)"
+  authors: "He, Zhang, Ren, Sun"
+  year: 2015
+  ref: "arXiv:1512.03385"
+  claim_nl: "Een dieper gewoon netwerk krijgt een hogere trainingsfout dan een ondieper; met residual connections niet."
+  tak: beeld
+  builds_on: [cnn-pytorch, nn-residual]
+  data: [fashion-mnist, cifar-10-download-only]
+  note_nl: "Op Fashion-MNIST met gewone en residual netwerken van 20 en 32 lagen; CIFAR-10 en 56 lagen als optionele nachtrun."
+  needs: gpu8
+  compute: {estimate: "1 tot 2 uur op Fashion-MNIST; een nacht voor CIFAR-10", measured: false}

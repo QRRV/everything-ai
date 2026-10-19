@@ -1,0 +1,28 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: nn-layernorm
+minutes: 25
+title:
+  en: "Layer normalization"
+  nl: "Layer normalization"
+goal:
+  en: "standardize each example over its own features, see why the LayerNorm goes at the start of each block (pre-norm), and write a pre-norm block in PyTorch."
+  nl: "elk voorbeeld standaardiseren over zijn eigen features, zien waarom de LayerNorm aan het begin van elk block komt (pre-norm), en een pre-norm block schrijven in PyTorch."
+summary:
+  - en: "Layer normalization takes the mean and variance over the features of each example, not over the batch: no running averages, the same in train and eval mode, and fine for a batch of one."
+    nl: "Layer normalization neemt het gemiddelde en de variantie over de features van elk voorbeeld, niet over de batch: geen running averages, hetzelfde in train en eval mode, en goed voor een batch van één."
+  - en: "Post-norm gives $\\mathrm{LN}(x + f(x))$; pre-norm gives $x + f(\\mathrm{LN}(x))$ and keeps the direct path clean, with one more LayerNorm before the output."
+    nl: "Post-norm geeft $\\mathrm{LN}(x + f(x))$; pre-norm geeft $x + f(\\mathrm{LN}(x))$ en houdt de directe weg schoon, met nog één LayerNorm vóór de output."
+  - en: "With 30 blocks and a learning rate of 0.3, the pre-norm network read 78% of the test digits after one epoch; the post-norm one stayed at the loss of guessing."
+    nl: "Met 30 blocks en een learning rate van 0,3 las het pre-norm-netwerk na één epoch 78% van de testcijfers goed; het post-norm-netwerk bleef op de loss van gokken."
+can_now:
+  - en: "explain why LayerNorm works for a batch of one and BatchNorm does not"
+    nl: "uitleggen waarom LayerNorm werkt voor een batch van één en BatchNorm niet"
+    by: batch-of-one
+  - en: "write layer normalization of a batch by hand"
+    nl: "layer normalization van een batch met de hand schrijven"
+    by: layer-norm
+  - en: "write a pre-norm block with a residual connection in PyTorch"
+    nl: "een pre-norm block met een residual connection schrijven in PyTorch"
+    by: pre-norm-block

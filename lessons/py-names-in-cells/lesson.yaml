@@ -1,0 +1,28 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: py-names-in-cells
+minutes: 12
+title:
+  en: "Names in a notebook: one name, one cell"
+  nl: "Namen in een notebook: één naam, één cel"
+goal:
+  en: "use a name from another cell, keep names that only one cell needs inside it with `_`, and fix it when marimo says a name is made in two cells."
+  nl: "een naam uit een andere cel gebruiken, namen die maar één cel nodig heeft met `_` in die cel houden, en oplossen dat een naam in twee cellen wordt gemaakt."
+summary:
+  - en: "A cell makes a name when it gives it a value with `=`. Other cells may use that name; marimo runs them again when it changes."
+    nl: "Een cel maakt een naam als hij die een waarde geeft met `=`. Andere cellen mogen die naam gebruiken; marimo voert ze opnieuw uit als die naam verandert."
+  - en: "One name, one cell: if two cells make the same name, marimo does not run them, and says which name it is."
+    nl: "Eén naam, één cel: maken twee cellen dezelfde naam, dan voert marimo ze niet uit, en zegt marimo om welke naam het gaat."
+  - en: "A name that starts with `_` stays inside its own cell, so it never clashes with a name in another cell."
+    nl: "Een naam die met `_` begint, blijft in zijn eigen cel, dus botst hij nooit met een naam in een andere cel."
+can_now:
+  - en: "use a name that another cell makes"
+    nl: "een naam gebruiken die een andere cel maakt"
+    by: trip_cost
+  - en: "say which cells can share a notebook"
+    nl: "zeggen welke cellen samen in een notebook kunnen"
+    by: cell-pairs
+  - en: "fix a name that two cells make"
+    nl: "oplossen dat een naam in twee cellen wordt gemaakt"
+    by: fix

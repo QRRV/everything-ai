@@ -1,0 +1,28 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: ml-one-hot
+minutes: 15
+title:
+  en: "One-hot vectors for classes"
+  nl: "One-hot-vectoren voor klassen"
+goal:
+  en: "turn classes into one-hot vectors, by hand and with NumPy, and count the classes in a list of labels."
+  nl: "klassen omzetten in one-hot-vectoren, met de hand en met NumPy, en de klassen in een lijst labels tellen."
+summary:
+  - en: "A one-hot vector gives each of the K classes its own place: a 1 at the place of the class, 0 everywhere else. No order and no amounts come along."
+    nl: "Een one-hot-vector geeft elk van de K klassen een eigen plek: een 1 op de plek van de klasse, overal anders 0. Er komt geen volgorde en geen hoeveelheid mee."
+  - en: "`np.eye(K)[labels]` makes the one-hot vectors of all labels at once; `.argmax(axis=1)` gives the classes back."
+    nl: "`np.eye(K)[labels]` maakt de one-hot-vectoren van alle labels tegelijk; `.argmax(axis=1)` geeft de klassen terug."
+  - en: "Adding up one-hot vectors per column counts how often each class appears."
+    nl: "Door one-hot-vectoren per kolom op te tellen, tel je hoe vaak elke klasse voorkomt."
+can_now:
+  - en: "say how long a one-hot vector is"
+    nl: "zeggen hoe lang een one-hot-vector is"
+    by: how-long
+  - en: "make the one-hot vector of a label by hand"
+    nl: "met de hand de one-hot-vector van een label maken"
+    by: one-hot
+  - en: "make one-hot vectors with NumPy and count classes with them"
+    nl: "one-hot-vectoren maken met NumPy en er klassen mee tellen"
+    by: count-classes

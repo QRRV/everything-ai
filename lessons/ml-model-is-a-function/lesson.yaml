@@ -1,0 +1,28 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: ml-model-is-a-function
+minutes: 15
+title:
+  en: "A model is a function with parameters"
+  nl: "Een model is een functie met parameters"
+goal:
+  en: "write a model as a Python function, and say what its parameters, the weight and the bias term, do to its predictions."
+  nl: "een model schrijven als Python-functie, en zeggen wat de parameters, de weight en de bias term, met de voorspellingen doen."
+summary:
+  - en: "A model is a function: the features go in, a prediction comes out. With one feature, the simplest model is a line: ŷ = w · x + b."
+    nl: "Een model is een functie: de features gaan erin, een voorspelling komt eruit. Met één feature is het eenvoudigste model een lijn: ŷ = w · x + b."
+  - en: "The weight w is how much the prediction goes up when the feature goes up by 1; the bias term b is added once. Together they are the parameters."
+    nl: "De weight w is hoeveel de voorspelling stijgt als de feature 1 groter wordt; de bias term b tel je één keer op. Samen zijn het de parameters."
+  - en: "With more features, each feature gets its own weight, and there is one bias term."
+    nl: "Met meer features krijgt elke feature een eigen weight, en is er één bias term."
+can_now:
+  - en: "say what the weight of a model tells you"
+    nl: "zeggen wat de weight van een model je vertelt"
+    by: weight-meaning
+  - en: "choose the parameters of a model for a known rule"
+    nl: "de parameters van een model kiezen voor een bekende regel"
+    by: taxi
+  - en: "write a model with two features as a function"
+    nl: "een model met twee features als functie schrijven"
+    by: two-features

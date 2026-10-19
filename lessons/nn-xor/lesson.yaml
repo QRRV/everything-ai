@@ -1,0 +1,33 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: nn-xor
+minutes: 20
+title:
+  en: "What one neuron cannot learn"
+  nl: "Wat één neuron niet kan leren"
+goal:
+  en: "tell which tasks one neuron can learn, see why it cannot learn XOR, and write one step of the perceptron."
+  nl: "zien welke taken één neuron kan leren, begrijpen waarom het XOR niet kan leren, en één stap van het perceptron schrijven."
+summary:
+  - en: "Two classes are linearly separable when one straight line splits them; one neuron can only learn such classes."
+    nl: "Twee klassen zijn lineair scheidbaar als één rechte lijn ze splitst; één neuron kan alleen zulke klassen leren."
+  - en: "XOR, 1 for exactly one 1, is not linearly separable: a neuron that fires for (1, 0) and (0, 1) but not for (0, 0) also fires for (1, 1)."
+    nl: "XOR, 1 bij precies één 1, is niet lineair scheidbaar: een neuron dat vuurt bij (1, 0) en (0, 1) maar niet bij (0, 0), vuurt ook bij (1, 1)."
+  - en: "The perceptron moves its weights by `lr * (y - pred) * x` after each mistake; it stops only when one line splits the classes."
+    nl: "Het perceptron verschuift zijn weights met `lr * (y - pred) * x` na elke fout; het stopt alleen als één lijn de klassen splitst."
+can_now:
+  - en: "tell whether one straight line can split the classes of a task"
+    nl: "zeggen of één rechte lijn de klassen van een taak kan splitsen"
+    by: one-line
+  - en: "write one step of the perceptron"
+    nl: "één stap van het perceptron schrijven"
+    by: perceptron-step
+  - en: "explain why one neuron cannot compute XOR"
+    nl: "uitleggen waarom één neuron XOR niet kan uitrekenen"
+    by: follows
+further_reading:
+  - en: "Frank Rosenblatt (1958), *The perceptron: a probabilistic model for information storage and organization in the brain*, Psychological Review 65(6), 386–408"
+    nl: "Frank Rosenblatt (1958), *The perceptron: a probabilistic model for information storage and organization in the brain*, Psychological Review 65(6), 386–408"
+  - en: "Marvin Minsky and Seymour Papert (1969), *Perceptrons: An Introduction to Computational Geometry*, MIT Press"
+    nl: "Marvin Minsky en Seymour Papert (1969), *Perceptrons: An Introduction to Computational Geometry*, MIT Press"

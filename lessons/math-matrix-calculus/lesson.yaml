@@ -1,0 +1,28 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: math-matrix-calculus
+minutes: 25
+title:
+  en: "Gradients of matrix expressions: follow the shapes"
+  nl: "Gradients van matrixuitdrukkingen: volg de shapes"
+goal:
+  en: "say what shape the gradient for a matrix has, and find the gradients of a layer Y = XWᵀ and of linear models with the mean squared error by following the shapes."
+  nl: "zeggen welke shape de gradient naar een matrix heeft, en de gradients van een layer Y = XWᵀ en van lineaire modellen met de mean squared error vinden door de shapes te volgen."
+summary:
+  - en: "The gradient of the loss for a matrix has the shape of that matrix: one partial derivative per number, in its place."
+    nl: "De gradient van de loss naar een matrix heeft de shape van die matrix: één partiële afgeleide per getal, op zijn plek."
+  - en: "For $\\mathbf{Y} = \\mathbf{X}\\mathbf{W}^\\top$ with $\\mathbf{G}$ the gradient for $\\mathbf{Y}$: $\\frac{\\partial \\mathcal{L}}{\\partial \\mathbf{W}} = \\mathbf{G}^\\top \\mathbf{X}$ and $\\frac{\\partial \\mathcal{L}}{\\partial \\mathbf{X}} = \\mathbf{G}\\mathbf{W}$. In code `G.T @ X` and `G @ W`."
+    nl: "Voor $\\mathbf{Y} = \\mathbf{X}\\mathbf{W}^\\top$ met $\\mathbf{G}$ de gradient naar $\\mathbf{Y}$: $\\frac{\\partial \\mathcal{L}}{\\partial \\mathbf{W}} = \\mathbf{G}^\\top \\mathbf{X}$ en $\\frac{\\partial \\mathcal{L}}{\\partial \\mathbf{X}} = \\mathbf{G}\\mathbf{W}$. In code `G.T @ X` en `G @ W`."
+  - en: "For the mean squared error of a linear model, with $\\mathbf{r} = \\mathbf{y} - \\mathbf{X}\\mathbf{w}$, the gradient for $\\mathbf{w}$ is $-\\frac{2}{n}\\mathbf{X}^\\top \\mathbf{r}$. The shapes tell you which product and which transpose."
+    nl: "Voor de mean squared error van een lineair model, met $\\mathbf{r} = \\mathbf{y} - \\mathbf{X}\\mathbf{w}$, is de gradient naar $\\mathbf{w}$ gelijk aan $-\\frac{2}{n}\\mathbf{X}^\\top \\mathbf{r}$. De shapes vertellen je welk product en welke getransponeerde."
+can_now:
+  - en: "choose the product that gives the gradient for the input of a layer"
+    nl: "het product kiezen dat de gradient naar de input van een layer geeft"
+    by: grad-x
+  - en: "write the gradient of the mean squared error for the weights of two linear models at once"
+    nl: "de gradient van de mean squared error naar de weights van twee lineaire modellen tegelijk schrijven"
+    by: grad-two
+  - en: "work out both gradients of a layer Y = X @ W.T"
+    nl: "beide gradients van een layer Y = X @ W.T uitrekenen"
+    by: layer-grads

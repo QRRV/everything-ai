@@ -1,0 +1,31 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: torch-pretrained
+minutes: 15
+title:
+  en: "Using a pretrained model"
+  nl: "Een pretrained model gebruiken"
+goal:
+  en: "pick a pretrained model by its model card, download it from a model hub, and load it safely into a model of its class."
+  nl: "een pretrained model kiezen aan de hand van zijn model card, het downloaden van een model hub, en het veilig laden in een model van zijn class."
+summary:
+  - en: "A model hub such as Hugging Face keeps trained models in repositories: the course's digit reader is QRRV/everything-ai-qmnist-cnn, with model.pt, its state_dict, and README.md, its model card."
+    nl: "Een model hub zoals Hugging Face bewaart getrainde modellen in repositories: de cijferlezer van de course is QRRV/everything-ai-qmnist-cnn, met model.pt, zijn state_dict, en README.md, zijn model card."
+  - en: "The model card tells what the model does, its class and size, its training data and their license, its own license, how well it does and its limits: read it before you use the model."
+    nl: "De model card vertelt wat het model doet, zijn class en grootte, zijn training data en hun licentie, zijn eigen licentie, hoe goed het is en zijn grenzen: lees hem voordat je het model gebruikt."
+  - en: "torch.load(path, weights_only=True), a new model of the class on the card, load_state_dict and eval mode: without any training of your own, the digit reader reads 929 of 1,000 test digits right."
+    nl: "torch.load(path, weights_only=True), een nieuw model van de class op de card, load_state_dict en eval mode: zonder zelf te trainen leest de cijferlezer 929 van de 1.000 testcijfers goed."
+can_now:
+  - en: "pick a pretrained model for a task by its model card"
+    nl: "een pretrained model voor een taak kiezen aan de hand van zijn model card"
+    by: pick-model
+  - en: "load a pretrained model into a model of its class"
+    nl: "een pretrained model laden in een model van zijn class"
+    by: load-reader
+  - en: "load a file from someone else safely"
+    nl: "een bestand van iemand anders veilig laden"
+    by: safe-load
+further_reading:
+  - en: "Margaret Mitchell and others (2019), *Model Cards for Model Reporting*, FAT* 2019, arXiv:1810.03993"
+    nl: "Margaret Mitchell en anderen (2019), *Model Cards for Model Reporting*, FAT* 2019, arXiv:1810.03993"

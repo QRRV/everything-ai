@@ -1,0 +1,33 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: res-paper-anatomy
+minutes: 20
+title:
+  en: "The anatomy of a machine learning paper"
+  nl: "De anatomie van een paper over machine learning"
+goal:
+  en: "find what you need in a paper by going to the part that answers your question, and know that the settings are often in the appendix."
+  nl: "vinden wat je zoekt in een paper door naar het deel te gaan dat je vraag beantwoordt, en weten dat de instellingen vaak in de appendix staan."
+summary:
+  - en: "Abstract, introduction, related work, method, experiments, conclusion and appendix each answer their own question; the names differ, the questions stay."
+    nl: "Abstract, introductie, related work, methode, experimenten, conclusie en appendix beantwoorden elk hun eigen vraag; de namen verschillen, de vragen blijven."
+  - en: "The list of contributions at the end of the introduction says what the rest of the paper has to back up."
+    nl: "De lijst met bijdragen aan het eind van de introductie zegt wat de rest van de paper moet onderbouwen."
+  - en: "The main text has a page limit, so the settings you need to rebuild an experiment are often only in the appendix, or in the code."
+    nl: "De hoofdtekst heeft een paginalimiet, dus de instellingen die je nodig hebt om een experiment na te bouwen, staan vaak alleen in de appendix, of in de code."
+can_now:
+  - en: "say which part of a paper a piece of text comes from"
+    nl: "zeggen uit welk deel van een paper een stuk tekst komt"
+    by: where
+  - en: "say where a paper shows whether it compared fairly"
+    nl: "zeggen waar een paper laat zien of hij eerlijk vergeleek"
+    by: fair-baselines
+  - en: "list what you need to rebuild a result, and where to find each part"
+    nl: "opsommen wat je nodig hebt om een resultaat na te bouwen, en waar je elk deel vindt"
+    by: repro-list
+further_reading:
+  - en: "Joelle Pineau, Philippe Vincent-Lamarre, Koustuv Sinha, Vincent Larivière, Alina Beygelzimer, Florence d'Alché-Buc, Emily Fox and Hugo Larochelle (2021), *Improving Reproducibility in Machine Learning Research (A Report from the NeurIPS 2019 Reproducibility Program)*, JMLR 22(164): what papers need to say so that others can rebuild their results"
+    nl: "Joelle Pineau, Philippe Vincent-Lamarre, Koustuv Sinha, Vincent Larivière, Alina Beygelzimer, Florence d'Alché-Buc, Emily Fox en Hugo Larochelle (2021), *Improving Reproducibility in Machine Learning Research (A Report from the NeurIPS 2019 Reproducibility Program)*, JMLR 22(164): wat papers moeten vermelden zodat anderen hun resultaten kunnen nabouwen"
+  - en: "Sashank J. Reddi, Satyen Kale and Sanjiv Kumar (2018), *On the Convergence of Adam and Beyond*, ICLR 2018: the paper that found the mistake in Adam's proof"
+    nl: "Sashank J. Reddi, Satyen Kale en Sanjiv Kumar (2018), *On the Convergence of Adam and Beyond*, ICLR 2018: de paper die de fout in het bewijs van Adam vond"

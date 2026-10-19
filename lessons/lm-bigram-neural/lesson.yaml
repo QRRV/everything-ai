@@ -1,0 +1,30 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: lm-bigram-neural
+minutes: 35
+title:
+  en: "Project: the same bigram model, learned with gradient descent"
+  nl: "Project: hetzelfde bigram-model, geleerd met gradient descent"
+goal:
+  en: "learn the bigram table with a one-layer network on one-hot characters, with cross-entropy and gradient descent in PyTorch, and keep both functions in your project."
+  nl: "de bigram-tabel leren met een netwerk van één layer op one-hot tekens, met cross-entropy en gradient descent in PyTorch, en beide functies in je project bewaren."
+summary:
+  - en: "A one-hot row times the weight table W picks one row of W: the logits of the next character. Softmax of W, row by row, is the network's table of probabilities."
+    nl: "Een one-hot-rij maal de tabel met weights W kiest één rij van W: de logits van het volgende teken. Softmax van W, rij voor rij, is de tabel met kansen van het netwerk."
+  - en: "Gradient descent on the cross-entropy, starting from W = 0, learns about the same table as counting; its loss cannot get below the NLL of the counted table on the same pairs."
+    nl: "Gradient descent op de cross-entropy, vanaf W = 0, leert ongeveer dezelfde tabel als tellen; de loss kan niet onder de NLL van de getelde tabel op dezelfde paren komen."
+  - en: "A penalty on large weights keeps the probabilities closer to even, as add-k smoothing did with the counts."
+    nl: "Een straf op grote weights houdt de kansen dichter bij gelijk verdeeld, zoals add-k smoothing deed met de tellingen."
+  - en: "Your project `llm` now has `bigram_net.py` with `loss_of` and `bigram_train.py` with `train`."
+    nl: "Je project `llm` heeft nu `bigram_net.py` met `loss_of` en `bigram_train.py` met `train`."
+can_now:
+  - en: "say what a one-hot row times a weight table gives"
+    nl: "zeggen wat een one-hot-rij maal een tabel met weights geeft"
+    by: one-hot-row
+  - en: "work out the loss of a table of logits on pairs of characters"
+    nl: "de loss van een tabel met logits op paren tekens uitrekenen"
+    by: loss-of
+  - en: "learn a bigram table with gradient descent and a penalty"
+    nl: "een bigram-tabel leren met gradient descent en een straf"
+    by: train

@@ -1,0 +1,28 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: lm-tokens-outside
+minutes: 15
+title:
+  en: "Tokens: how real LLMs chop up text"
+  nl: "Tokens: hoe echte LLM's tekst opknippen"
+goal:
+  en: "see how a real tokenizer cuts text into subword tokens from a fixed vocabulary, and count tokens with tiktoken."
+  nl: "zien hoe een echte tokenizer tekst knipt in subword-tokens uit een vaste vocabulary, en tokens tellen met tiktoken."
+summary:
+  - en: "A tokenizer cuts a text into tokens and gives each its token ID, from a fixed vocabulary: 50,257 tokens for GPT-2. A common word is one token, often with the space before it; a rarer word falls into subwords, such as \"un\", \"bel\", \"iev\" and \"able\"."
+    nl: "Een tokenizer knipt een tekst in tokens en geeft elk zijn token ID, uit een vaste vocabulary: 50.257 tokens voor GPT-2. Een veelgebruikt woord is één token, vaak met de spatie ervoor; een zeldzamer woord valt uiteen in subwords, zoals \"un\", \"bel\", \"iev\" en \"able\"."
+  - en: "GPT-2 made its vocabulary from text that was almost all English: \"Tokenization is surprisingly important.\" is 6 tokens, and the same sentence in Dutch 15."
+    nl: "GPT-2 maakte zijn vocabulary uit bijna alleen Engelse tekst: \"Tokenization is surprisingly important.\" is 6 tokens, en dezelfde zin in het Nederlands 15."
+  - en: "With tiktoken, `tiktoken.get_encoding(\"gpt2\")` gives GPT-2's tokenizer; `encode` gives the token IDs of a text, `decode` the text back."
+    nl: "Met tiktoken geeft `tiktoken.get_encoding(\"gpt2\")` de tokenizer van GPT-2; `encode` geeft de token IDs van een tekst, `decode` de tekst terug."
+can_now:
+  - en: "say why \"the\" and \" the\" are two different tokens"
+    nl: "zeggen waarom \"the\" en \" the\" twee verschillende tokens zijn"
+    by: space
+  - en: "cut a text into its tokens with a ready-made tokenizer"
+    nl: "een tekst in zijn tokens knippen met een kant-en-klare tokenizer"
+    by: pieces
+  - en: "count how many tokens a text costs per word, in English and in Dutch"
+    nl: "tellen hoeveel tokens een tekst per woord kost, in het Engels en in het Nederlands"
+    by: tokens-per-word

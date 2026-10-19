@@ -1,0 +1,33 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: res-choose-paper
+minutes: 30
+title:
+  en: "Choosing a paper you can reproduce"
+  nl: "Een paper kiezen die je kunt nabouwen"
+goal:
+  en: "choose a claim you can reproduce: it fits your compute, its code and data are there, it is small and testable, and you know its cost before you start."
+  nl: "een claim kiezen die je kunt nabouwen: hij past in je compute, de code en data zijn er, hij is klein en toetsbaar, en je kent de kosten voordat je begint."
+summary:
+  - en: "Estimate one run with 6ND and the reproduction as runs × seeds; a day of a laptop is about 10^16 FLOPs, a week of one GPU about 10^20."
+    nl: "Schat één run met 6ND en de reproductie als runs × seeds; een dag van een laptop is ongeveer 10^16 FLOPs, een week van één GPU ongeveer 10^20."
+  - en: "Check for code, data, checkpoints and settings: data you cannot get rules a paper out; missing code you can write."
+    nl: "Kijk of er code, data, checkpoints en instellingen zijn: data die je niet kunt krijgen sluit een paper uit; ontbrekende code kun je schrijven."
+  - en: "Choose a small, falsifiable claim: one sentence, the figure it rests on, and the result that would show it false."
+    nl: "Kies een kleine, falsifieerbare claim: één zin, de figuur waar hij op rust, en het resultaat dat zou laten zien dat hij niet klopt."
+can_now:
+  - en: "tell a good first reproduction from one for later"
+    nl: "een goede eerste reproductie onderscheiden van een voor later"
+    by: first-repro
+  - en: "pick the claim a reproduction can show to be false"
+    nl: "de claim kiezen die een reproductie kan onderuithalen"
+    by: falsifiable
+  - en: "write a plan for a reproduction, with its cost"
+    nl: "een plan voor een reproductie schrijven, met de kosten"
+    by: my-plan
+further_reading:
+  - en: "Odd Erik Gundersen and Sigbjørn Kjensmo (2018), *State of the Art: Reproducibility in Artificial Intelligence*, AAAI 2018"
+    nl: "Odd Erik Gundersen en Sigbjørn Kjensmo (2018), *State of the Art: Reproducibility in Artificial Intelligence*, AAAI 2018"
+  - en: "Joelle Pineau and others (2021), *Improving Reproducibility in Machine Learning Research (A Report from the NeurIPS 2019 Reproducibility Program)*, JMLR 22"
+    nl: "Joelle Pineau en anderen (2021), *Improving Reproducibility in Machine Learning Research (A Report from the NeurIPS 2019 Reproducibility Program)*, JMLR 22"

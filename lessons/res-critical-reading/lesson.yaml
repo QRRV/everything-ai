@@ -1,0 +1,34 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: res-critical-reading
+minutes: 40
+title:
+  en: "Critical reading: claims versus evidence"
+  nl: "Kritisch lezen: claims tegen bewijs"
+goal:
+  en: "check whether a paper's experiments carry its claims: the baselines, the noise between seeds and what was selected, and write the claim the evidence does carry."
+  nl: "controleren of de experimenten van een paper zijn claims dragen: de baselines, de ruis tussen seeds en wat er geselecteerd is, en de claim opschrijven die het bewijs wél draagt."
+summary:
+  - en: "Put every claim of the abstract next to the result that should carry it; a claim that says more than its result is an overclaim."
+    nl: "Zet elke claim uit het abstract naast het resultaat dat hem moet dragen; een claim die meer zegt dan zijn resultaat is een overclaim."
+  - en: "Check the baselines (present, strong, tuned as carefully) and the noise (seeds per method, a gap bigger than their spread)."
+    nl: "Controleer de baselines (aanwezig, sterk, even zorgvuldig getuned) en de ruis (seeds per methode, een verschil dat groter is dan hun spreiding)."
+  - en: "Check the selection: the best of n equally good variants beats one baseline run n / (n + 1) of the time, so what was tried and not reported matters."
+    nl: "Controleer de selectie: de beste van n even goede varianten verslaat één run van de baseline in n / (n + 1) van de gevallen, dus telt wat geprobeerd is en niet gemeld."
+can_now:
+  - en: "find the claims in an abstract that go further than its results"
+    nl: "de claims in een abstract vinden die verder gaan dan de resultaten"
+    by: overclaims
+  - en: "simulate how often the best of several equal variants wins by chance"
+    nl: "simuleren hoe vaak de beste van een paar gelijke varianten toevallig wint"
+    by: fake-wins
+  - en: "say which evidence to ask for when a gap is smaller than the noise"
+    nl: "zeggen om welk bewijs je vraagt als een verschil kleiner is dan de ruis"
+    by: first-ask
+  - en: "write the claim that a paper's evidence does carry, and what to ask for first"
+    nl: "de claim opschrijven die het bewijs van een paper wél draagt, en waar je eerst om vraagt"
+    by: carried-claim
+further_reading:
+  - en: "Zachary Lipton and Jacob Steinhardt (2018), *Troubling Trends in Machine Learning Scholarship*, arXiv:1807.03341: four habits of machine learning papers, among them speculation written as explanation, and gains put down to a new method that came from tuning"
+    nl: "Zachary Lipton en Jacob Steinhardt (2018), *Troubling Trends in Machine Learning Scholarship*, arXiv:1807.03341: vier gewoonten van papers in machine learning, waaronder speculatie die als verklaring wordt opgeschreven, en winst die aan een nieuwe methode wordt toegeschreven maar uit tuning kwam"

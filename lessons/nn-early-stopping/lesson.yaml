@@ -1,0 +1,28 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: nn-early-stopping
+minutes: 25
+title:
+  en: "Early stopping"
+  nl: "Early stopping"
+goal:
+  en: "stop training once the validation loss has not improved for `patience` epochs, and keep the checkpoint of the best epoch."
+  nl: "stoppen met trainen zodra de validation loss `patience` epochs lang niet is verbeterd, en het checkpoint van de beste epoch bewaren."
+summary:
+  - en: "After every epoch: at a new lowest validation loss, save a checkpoint and set the count back to 0; otherwise count, and stop with `break` when the count reaches the patience."
+    nl: "Na elke epoch: bij een nieuwe laagste validation loss een checkpoint opslaan en de telling op 0 zetten; anders tellen, en stoppen met `break` als de telling de patience bereikt."
+  - en: "The model you keep is the checkpoint of the best epoch, not the model at the stop."
+    nl: "Het model dat je bewaart, is het checkpoint van de beste epoch, niet het model bij de stop."
+  - en: "The patience is a hyperparameter: too small, and a jump by chance stops training too early; too large, and you train epochs that do not help."
+    nl: "De patience is een hyperparameter: is hij te klein, dan stopt een sprong door toeval het trainen te vroeg; is hij te groot, dan train je epochs die niet helpen."
+can_now:
+  - en: "say which model early stopping keeps, and why"
+    nl: "zeggen welk model early stopping bewaart, en waarom"
+    by: which-model
+  - en: "write a training loop that stops by itself and keeps the best checkpoint"
+    nl: "een training loop schrijven die vanzelf stopt en het beste checkpoint bewaart"
+    by: early-stop
+  - en: "choose a patience that fits how much the validation loss jumps"
+    nl: "een patience kiezen die past bij hoeveel de validation loss springt"
+    by: patience

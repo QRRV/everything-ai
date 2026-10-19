@@ -1,0 +1,28 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: data-pandas
+minutes: 15
+title:
+  en: "Tables with pandas"
+  nl: "Tabellen met pandas"
+goal:
+  en: "read a table from a CSV file with pandas, take its columns by name, and keep the rows you want with a mask."
+  nl: "met pandas een tabel uit een CSV-bestand lezen, de kolommen bij hun naam pakken, en met een mask de rijen overhouden die je wilt."
+summary:
+  - en: "A DataFrame is a table with named columns, each of one type, and a row per example; `pd.read_csv(path)` reads one from a CSV file."
+    nl: "Een DataFrame is een tabel met kolommen met een naam, elk van één type, en een rij per voorbeeld; `pd.read_csv(path)` leest er een uit een CSV-bestand."
+  - en: "`df[\"temp\"]` gives one column, a Series; a list of names, `df[[\"day\", \"temp\"]]`, gives a smaller DataFrame."
+    nl: "`df[\"temp\"]` geeft één kolom, een Series; een lijst namen, `df[[\"day\", \"temp\"]]`, geeft een kleiner DataFrame."
+  - en: "A mask on a column selects whole rows: `df[df[\"rain\"] > 0]`; the selected rows keep their old row labels."
+    nl: "Een mask op een kolom selecteert hele rijen: `df[df[\"rain\"] > 0]`; de geselecteerde rijen behouden hun oude rijlabels."
+can_now:
+  - en: "take several columns of a DataFrame by their names"
+    nl: "een paar kolommen van een DataFrame bij hun naam pakken"
+    by: two-columns
+  - en: "keep the rows of a table that meet a condition"
+    nl: "de rijen van een tabel overhouden die aan een voorwaarde voldoen"
+    by: windy
+  - en: "read a CSV file and give back one column of the rows you want"
+    nl: "een CSV-bestand lezen en één kolom van de gewenste rijen teruggeven"
+    by: warm-days

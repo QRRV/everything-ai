@@ -1,0 +1,31 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: lm-base-vs-chat
+minutes: 20
+title:
+  en: "Base model or chat model?"
+  nl: "Base model of chat model?"
+goal:
+  en: "say what turns a base model into a chat model, give each message of a conversation its role, and write a conversation out, turn after turn, as the one text a model continues."
+  nl: "zeggen wat van een base model een chat model maakt, elk bericht in een gesprek zijn rol geven, en een gesprek beurt na beurt uitschrijven als de ene tekst die een model verder schrijft."
+summary:
+  - en: "A base model only learned next-token prediction on a lot of text: it continues any text, a question too, with what tends to come next. A chat model is a base model trained further on conversations, so that after a question the likely text is an answer."
+    nl: "Een base model heeft alleen next-token prediction geleerd op heel veel tekst: het schrijft elke tekst verder, ook een vraag, met wat er meestal volgt. Een chat model is een base model dat verder getraind is op gesprekken, zodat na een vraag de waarschijnlijke tekst een antwoord is."
+  - en: "Each message has a role: `system` (instructions from whoever runs the model), `user` (the person) or `assistant` (the model). In code, a conversation is a list of dictionaries with a `\"role\"` and a `\"content\"`."
+    nl: "Elk bericht heeft een rol: `system` (instructies van wie het model inzet), `user` (de persoon) of `assistant` (het model). In code is een gesprek een lijst dictionaries met een `\"role\"` en een `\"content\"`."
+  - en: "The model gets one text: each message after the marker of its role, ending with the marker of the assistant. It keeps nothing between turns: the whole conversation goes in again, with its own earlier answers as `assistant` messages."
+    nl: "Het model krijgt één tekst: elk bericht na de markering van zijn rol, met aan het eind de markering van `assistant`. Het onthoudt niets tussen beurten: het hele gesprek gaat er opnieuw in, met zijn eigen eerdere antwoorden als `assistant`-berichten."
+can_now:
+  - en: "say what turns a base model into a chat model"
+    nl: "zeggen wat van een base model een chat model maakt"
+    by: base-to-chat
+  - en: "say which role a message in a conversation has"
+    nl: "zeggen welke rol een bericht in een gesprek heeft"
+    by: role-of
+  - en: "write a conversation out as the one text a model continues"
+    nl: "een gesprek uitschrijven als de ene tekst die een model verder schrijft"
+    by: as-text
+  - en: "add an answer and a new question to a conversation for the next turn"
+    nl: "een antwoord en een nieuwe vraag aan een gesprek toevoegen voor de volgende beurt"
+    by: next-turn

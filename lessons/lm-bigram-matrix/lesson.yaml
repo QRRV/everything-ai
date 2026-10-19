@@ -1,0 +1,30 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: lm-bigram-matrix
+minutes: 30
+title:
+  en: "The bigram table as a matrix of probabilities"
+  nl: "De bigram-tabel als matrix van kansen"
+goal:
+  en: "put the bigram counts in a matrix, turn every row into a probability distribution with one line of NumPy, and read the matrix as a heatmap."
+  nl: "de bigram-tellingen in een matrix zetten, elke rij met één regel NumPy een kansverdeling maken, en de matrix als heatmap lezen."
+summary:
+  - en: "The count matrix N has a row and a column for every character: N[i, j] is how often chars[j] comes after chars[i]."
+    nl: "De telmatrix N heeft een rij en een kolom voor elk teken: N[i, j] is hoe vaak chars[j] na chars[i] komt."
+  - en: "Dividing every row by its sum, N / N.sum(axis=1, keepdims=True), makes row i the probability distribution of the character after chars[i]. A row adds up to 1, a column need not."
+    nl: "Elke rij delen door haar som, N / N.sum(axis=1, keepdims=True), maakt van rij i de kansverdeling van het teken na chars[i]. Een rij telt op tot 1, een kolom niet per se."
+  - en: "A heatmap shows a matrix as a grid of squares, coloured more strongly where the number is larger."
+    nl: "Een heatmap laat een matrix zien als een rooster van vakjes, feller gekleurd waar het getal groter is."
+  - en: "Your project `llm` now has `bigram_matrix.py` with `bigram_matrix` and `bigram_rows.py` with `to_probs`."
+    nl: "Je project `llm` heeft nu `bigram_matrix.py` met `bigram_matrix` en `bigram_rows.py` met `to_probs`."
+can_now:
+  - en: "read a heatmap of a bigram matrix: a row is what comes after a character"
+    nl: "een heatmap van een bigram-matrix lezen: een rij is wat er na een teken komt"
+    by: space-column
+  - en: "put bigram counts in a count matrix"
+    nl: "bigram-tellingen in een telmatrix zetten"
+    by: bigram-matrix
+  - en: "turn every row of a count matrix into a probability distribution"
+    nl: "elke rij van een telmatrix een kansverdeling maken"
+    by: to-probs

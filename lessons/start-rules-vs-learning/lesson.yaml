@@ -1,0 +1,28 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: start-rules-vs-learning
+minutes: 15
+title:
+  en: "Writing rules versus learning from examples"
+  nl: "Regels schrijven of leren van voorbeelden"
+goal:
+  en: "explain how a computer can find a rule in examples, and find the best rule of a kind yourself, the way the computer does."
+  nl: "uitleggen hoe een computer een regel in voorbeelden kan vinden, en zelf de beste regel van een soort vinden, zoals de computer dat doet."
+summary:
+  - en: "You can write a rule yourself, or give the computer examples and let it find the rule. The second way is learning from data."
+    nl: "Je kunt een regel zelf schrijven, of de computer voorbeelden geven en hem de regel laten vinden. Die tweede manier heet leren van data."
+  - en: "The computer's recipe here: try every rule of one kind, count each rule's mistakes on the examples, and keep the rule with the fewest."
+    nl: "Het recept van de computer hier: probeer elke regel van één soort, tel per regel de fouten op de voorbeelden, en houd de regel met de minste over."
+  - en: "Other examples give another rule, with the same recipe. A rule does not have to be perfect: some examples fit no rule of the kind."
+    nl: "Andere voorbeelden geven een andere regel, met hetzelfde recept. Een regel hoeft niet perfect te zijn: sommige voorbeelden passen in geen enkele regel van de soort."
+can_now:
+  - en: "find the rule with the fewest mistakes on a set of examples"
+    nl: "de regel met de minste fouten op een stel voorbeelden vinden"
+    by: neighbour
+  - en: "say what changes when a computer learns a rule from other examples"
+    nl: "zeggen wat er verandert als een computer een regel uit andere voorbeelden leert"
+    by: what-changed
+  - en: "explain why learning from examples beats writing rules for a task like spam"
+    nl: "uitleggen waarom leren van voorbeelden het wint van regels schrijven bij een taak als spam"
+    by: why-learn

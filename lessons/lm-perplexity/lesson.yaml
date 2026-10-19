@@ -1,0 +1,28 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: lm-perplexity
+minutes: 20
+title:
+  en: "Perplexity"
+  nl: "Perplexity"
+goal:
+  en: "turn the average loss of a language model into its perplexity, the number of tokens it is choosing between, and compare models with different tokens, per character."
+  nl: "van de gemiddelde loss van een language model zijn perplexity maken, het aantal tokens waartussen het kiest, en modellen met verschillende tokens per teken vergelijken."
+summary:
+  - en: "Perplexity is e to the power of the average NLL: 1 divided by the geometric mean of the probabilities of the tokens that really came. Every token at probability 1/65 gives exactly 65; always sure and right gives 1."
+    nl: "Perplexity is e tot de macht van de gemiddelde NLL: 1 gedeeld door het meetkundig gemiddelde van de kansen op de tokens die echt kwamen. Elk token met kans 1/65 geeft precies 65; altijd zeker en gelijk geeft 1."
+  - en: "The counted bigram model of Tiny Shakespeare has an average NLL of 2.45 on the text it counted: a perplexity of 11.6."
+    nl: "Het getelde bigram-model van Tiny Shakespeare heeft een gemiddelde NLL van 2,45 op de tekst die het telde: een perplexity van 11,6."
+  - en: "Perplexity is per token: models with different tokens are compared per character, with the total NLL spread over the characters of the same unseen text."
+    nl: "Perplexity is per token: modellen met verschillende tokens vergelijk je per teken, met de totale NLL verdeeld over de tekens van dezelfde onbekende tekst."
+can_now:
+  - en: "say why two perplexities with different tokens cannot be compared as they are"
+    nl: "zeggen waarom je twee perplexities met verschillende tokens niet zomaar kunt vergelijken"
+    by: compare
+  - en: "compute the perplexity from the probabilities of the tokens that really came"
+    nl: "de perplexity berekenen uit de kansen op de tokens die echt kwamen"
+    by: perplexity
+  - en: "turn an average NLL per token into a perplexity per character"
+    nl: "een gemiddelde NLL per token omzetten in een perplexity per teken"
+    by: char-perplexity

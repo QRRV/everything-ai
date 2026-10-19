@@ -1,0 +1,31 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: torch-frozen-features
+minutes: 15
+title:
+  en: "A pretrained network as feature extractor"
+  nl: "Een pretrained netwerk als feature extractor"
+goal:
+  en: "freeze the layers of a pretrained network, give it a new last layer, and train only that layer on a few labeled examples of a new task."
+  nl: "de layers van een pretrained netwerk bevriezen, het een nieuwe laatste layer geven, en alleen die layer trainen op een paar gelabelde voorbeelden van een nieuwe taak."
+summary:
+  - en: "The layers before the last turn an image into features; p.requires_grad = False freezes them, so the optimizer leaves them as they are."
+    nl: "De layers voor de laatste maken van een afbeelding features; p.requires_grad = False bevriest ze, zodat de optimizer ze laat zoals ze zijn."
+  - en: "nn.Identity() passes the 64 hidden numbers on, and a new nn.Linear(64, 10) is the only part that learns: 650 numbers instead of 52,000."
+    nl: "nn.Identity() geeft de 64 verborgen getallen door, en een nieuwe nn.Linear(64, 10) is het enige deel dat leert: 650 getallen in plaats van 52.000."
+  - en: "With 100 labeled digits of a noisy scanner, the frozen digit reader with a new last layer reads 860 to 883 of 1,000 right, a network from scratch 629 to 669; for clothes, the digit features do worse than scratch."
+    nl: "Met 100 gelabelde cijfers van een scanner met ruis leest de bevroren cijferlezer met een nieuwe laatste layer er 860 tot 883 van de 1.000 goed, een netwerk vanaf nul 629 tot 669; voor kleding doen de features van cijfers het slechter dan vanaf nul."
+can_now:
+  - en: "freeze a pretrained network and give it a new last layer"
+    nl: "een pretrained netwerk bevriezen en het een nieuwe laatste layer geven"
+    by: new-head
+  - en: "say why frozen parameters do not change, whatever the optimizer gets"
+    nl: "zeggen waarom bevroren parameters niet veranderen, wat de optimizer ook krijgt"
+    by: same-optimizer
+  - en: "say when borrowed features help, and when they do not"
+    nl: "zeggen wanneer geleende features helpen, en wanneer niet"
+    by: clothes
+further_reading:
+  - en: "Jason Yosinski, Jeff Clune, Yoshua Bengio and Hod Lipson (2014), *How transferable are features in deep neural networks?*, NeurIPS 2014, arXiv:1411.1792"
+    nl: "Jason Yosinski, Jeff Clune, Yoshua Bengio en Hod Lipson (2014), *How transferable are features in deep neural networks?*, NeurIPS 2014, arXiv:1411.1792"

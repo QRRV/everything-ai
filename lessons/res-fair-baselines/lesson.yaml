@@ -1,0 +1,31 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: res-fair-baselines
+minutes: 25
+title:
+  en: "Fair comparisons"
+  nl: "Eerlijke vergelijkingen"
+goal:
+  en: "give a baseline the same data, compute, seeds and tuning effort as your own method, and see how much of a difference unequal tuning alone makes."
+  nl: "een baseline dezelfde data, compute, seeds en tuning effort geven als je eigen methode, en zien hoeveel verschil ongelijk tunen alleen al maakt."
+summary:
+  - en: "A fair comparison gives the baseline the same data and split, the same compute, the same seeds and the same tuning effort as your own method."
+    nl: "Een eerlijke vergelijking geeft de baseline dezelfde data en splitsing, dezelfde compute, dezelfde seeds en dezelfde tuning effort als je eigen methode."
+  - en: "Take each method at its own best setting, by the mean over the seeds, chosen on the validation set."
+    nl: "Neem elke methode bij zijn eigen beste instelling, op het gemiddelde over de seeds, gekozen op de validation set."
+  - en: "In the course's runs, the tuned 4-layer GPT looked 0.62 better than the untuned 2-layer GPT; with both tuned the same way, only 0.002."
+    nl: "In de runs van de course leek de getunede GPT met 4 layers 0,62 beter dan de ongetunede met 2 layers; met allebei op dezelfde manier getuned nog maar 0,002."
+can_now:
+  - en: "pick the best setting of a method by its mean over the seeds"
+    nl: "de beste instelling van een methode kiezen op het gemiddelde over de seeds"
+    by: best-setting
+  - en: "tell a fair comparison from one that favours your own method"
+    nl: "een eerlijke vergelijking onderscheiden van een die je eigen methode bevoordeelt"
+    by: fair
+  - en: "say what makes a published comparison unfair, and what to ask for"
+    nl: "zeggen wat een gepubliceerde vergelijking oneerlijk maakt, en waar je om vraagt"
+    by: review-claim
+further_reading:
+  - en: "Gábor Melis, Chris Dyer and Phil Blunsom (2018), *On the State of the Art of Evaluation in Neural Language Models*, ICLR 2018: an older kind of language model, tuned in the same way as newer ones, beats them"
+    nl: "Gábor Melis, Chris Dyer en Phil Blunsom (2018), *On the State of the Art of Evaluation in Neural Language Models*, ICLR 2018: een ouder soort language model, op dezelfde manier getuned als nieuwere, verslaat ze"

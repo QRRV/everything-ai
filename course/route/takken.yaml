@@ -1,0 +1,238 @@
+# The 18 branches (takken) of the course grid. Every map topic gets exactly one home branch:
+# first the branch whose "domains" list holds the topic's domain, then the "overrides" below win.
+# A lesson has its own "tak" field; it may cover topics whose home is another branch (a cross-branch lesson).
+# Status: main-route = part of the first route that gets built; later = shown on the map as "komt nog".
+# build_order is a proposal for Quinn, not a decision.
+# rest_after (main-route branches only): after which branch the rest of this branch is built, the topics the main
+#   route does not cover and no earlier branch has built ahead. Also a proposal.
+# Format: FORMAT.md.
+
+takken:
+
+- id: stam
+  title: "Foundations: math, Python, data, machine learning and deep learning"
+  title_nl: "Fundament: wiskunde, Python, data, machine learning en deep learning"
+  domains: [D2, D3, D11]
+  status: main-route
+  build_order: 1
+  rest_after: toepassingen
+  project: {id: nn, title_nl: "Je eigen neurale netwerk: van één neuron met de hand tot een diep netwerk in PyTorch"}
+  final: nn-deep-net-project
+
+- id: taal
+  title: "Language, NLP and large language models"
+  title_nl: "Taal, NLP en large language models"
+  domains: [D15, D16]
+  status: main-route
+  build_order: 1
+  rest_after: rl
+  project: {id: llm, title_nl: "Je eigen LLM: van letters tellen tot een gepretraind en nagetraind model"}
+  final: llm-dpo
+
+- id: onderzoek
+  title: "Research skills and the frontier"
+  title_nl: "Onderzoeksvaardigheden en de frontier"
+  domains: [D27]
+  status: main-route
+  build_order: 1
+  rest_after: toepassingen
+  project: {id: repro, title_nl: "Een paper nabouwen: eerst begeleid, daarna een eigen keuze"}
+  final: repro-own-report
+
+- id: beeld
+  title: "Computer vision and all CNN families"
+  title_nl: "Computer vision en alle CNN-families"
+  domains: [D13]
+  status: later
+  build_order: 2
+  project: {id: cnn, title_nl: "Je eigen CNN groeit: LeNet, VGG-blokken, ResNet, daarna detectie en segmentatie"}
+  final_nl: "Een eigen ResNet op CIFAR-10 of Fashion-MNIST met Grad-CAM, en een kleine U-Net of detector"
+
+- id: generatief
+  title: "Generative models and multimodal AI"
+  title_nl: "Generatieve modellen en multimodale AI"
+  domains: [D12]
+  status: later
+  build_order: 3
+  project: {id: gen, title_nl: "Je eigen generator: autoencoder, VAE, GAN en ten slotte een diffusiemodel"}
+  final_nl: "Een klasse-geconditioneerd diffusiemodel dat je zelf traint op Fashion-MNIST of CIFAR-10"
+
+- id: rl
+  title: "Reinforcement learning"
+  title_nl: "Reinforcement learning"
+  domains: [D18]
+  status: later
+  build_order: 4
+  project: {id: agent, title_nl: "Je eigen agent: bandit, tabel-Q-learning, DQN en PPO"}
+  final_nl: "Een PPO-agent die je vanaf nul schrijft en traint in een Gymnasium-omgeving"
+
+- id: bouwen
+  title: "Building with AI: prompts, RAG and agents"
+  title_nl: "Bouwen met AI: prompts, RAG en agents"
+  domains: [D17]
+  status: later
+  build_order: 5
+  project: {id: app, title_nl: "Je eigen assistent op een lokaal open model: prompts, RAG, tools en evals"}
+  final_nl: "Een agent met retrieval en tools, met een eigen evaluatieset en foutanalyse"
+  note_nl: "Geen API-sleutels en geen internet nodig: de API-oefeningen praten met een lokale server (Ollama of llama.cpp, met een OpenAI-compatibele API) en een open model met een permissieve licentie. Betaalde API's komen alleen als uitleg of als optionele verdieping."
+
+- id: verantwoord
+  title: "Responsible and safe AI: ethics, fairness, explainability, privacy, security and alignment"
+  title_nl: "Verantwoorde en veilige AI: ethiek, fairness, uitlegbaarheid, privacy, security en alignment"
+  domains: [D24, D25]
+  status: later
+  build_order: 6
+  project: {id: audit, title_nl: "Je eigen modellen doorlichten: bias, uitleg, privacy, aanvallen en interpretability"}
+  final_nl: "Een audit van je eigen LLM en classifier, inclusief een sparse autoencoder op je eigen model"
+
+- id: klassiek-ml
+  title: "Classical machine learning"
+  title_nl: "Klassieke machine learning"
+  domains: [D10]
+  status: later
+  build_order: 7
+  project: {id: tabular, title_nl: "Tabulaire data: bomen, ensembles, gradient boosting, clustering en tijdreeksen"}
+  final_nl: "Een complete pijplijn op een tabulaire dataset, eerlijk vergeleken met een neuraal netwerk"
+
+- id: dl-verdieping
+  title: "Deep learning in depth: more architectures and theory"
+  title_nl: "Deep learning in de diepte: meer architecturen en theorie"
+  domains: []
+  status: later
+  build_order: 8
+  project: {id: arch, title_nl: "Je GPT-code uitbreiden met andere bouwstenen: GNN, state-space-laag, mixture of experts"}
+  final_nl: "Een eigen vergelijking van twee architecturen op dezelfde taak, met seeds en ablation"
+
+- id: spraak
+  title: "Speech, audio and music"
+  title_nl: "Spraak, audio en muziek"
+  domains: [D14]
+  status: later
+  build_order: 9
+  project: {id: audio, title_nl: "Van geluidsgolf naar spectrogram, een audioclassifier en een kleine spraakherkenner"}
+  final_nl: "Een eigen CTC-spraakherkenner op een kleine dataset met een vrije licentie"
+
+- id: systemen
+  title: "ML systems, hardware and MLOps"
+  title_nl: "ML-systemen, hardware en MLOps"
+  domains: [D23]
+  status: later
+  build_order: 10
+  project: {id: ops, title_nl: "Je eigen model meten, versnellen, serveren en bewaken"}
+  final_nl: "Je eigen LLM als lokale dienst, met metingen van snelheid en geheugen"
+
+- id: onzekerheid
+  title: "Uncertainty, probabilistic models and causality"
+  title_nl: "Onzekerheid, probabilistische modellen en causaliteit"
+  domains: [D6]
+  status: later
+  build_order: 11
+  project: {id: prob, title_nl: "Een Bayesiaans netwerk, probabilistisch programmeren en een causale analyse"}
+  final_nl: "Een causaal effect schatten op echte data en laten zien waarom correlatie misleidt"
+
+- id: klassieke-ai
+  title: "Search, logic, planning and optimization"
+  title_nl: "Zoeken, logica, planning en optimalisatie"
+  domains: [D4, D5, D7]
+  status: later
+  build_order: 12
+  project: {id: solver, title_nl: "Je eigen zoeker en planner: A*, een SAT-solver, een planner en een genetisch algoritme"}
+  final_nl: "Een spel-AI met Monte Carlo tree search"
+
+- id: multi-agent
+  title: "Multi-agent systems and game theory"
+  title_nl: "Multi-agentsystemen en speltheorie"
+  domains: [D8]
+  status: later
+  build_order: 13
+  project: {id: games, title_nl: "Spellen, veilingen en agents die met elkaar onderhandelen"}
+  final_nl: "Een toernooi van eigen agents, met een analyse in speltheorie"
+
+- id: robotica
+  title: "Robotics and embodied AI"
+  title_nl: "Robotica en embodied AI"
+  domains: [D19]
+  status: later
+  build_order: 14
+  project: {id: robot, title_nl: "Een gesimuleerde robotarm: kinematica, regeling en leren"}
+  final_nl: "Een gesimuleerde robotarm die een voorwerp leert oppakken"
+
+- id: mens
+  title: "People and society: philosophy, cognition, interaction and law"
+  title_nl: "Mens en maatschappij: filosofie, cognitie, interactie en recht"
+  domains: [D1, D9, D22, D26]
+  status: later
+  build_order: 15
+  project: {id: society, title_nl: "Weinig code: je eigen AI-toepassing toetsen aan de AI Act en aan wat we weten over mensen"}
+  final_nl: "Een onderbouwde analyse van één AI-toepassing: werking, risico's, wetgeving en effect op mensen"
+
+- id: toepassingen
+  title: "AI in science and in industry"
+  title_nl: "AI in de wetenschap en in sectoren"
+  domains: [D20, D21]
+  status: later
+  build_order: 16
+  project: {id: domain, title_nl: "Kies een vakgebied en pas de course toe op echte data uit dat vakgebied"}
+  final_nl: "Een eigen project in één vakgebied, van vraag tot resultaat"
+
+# Topics whose home is another branch than their domain's default. Keys are map topic ids.
+overrides:
+  # D1: the definition of AI opens the course
+  definities-en-framings: stam
+  # D2: advanced theory maths goes with the branch that needs it
+  d2-analyse-en-functionaalanalyse: dl-verdieping
+  d2-kansrekening-voor-theorie: dl-verdieping
+  d2-geavanceerde-informatietheorie: dl-verdieping
+  d2-optimalisatie-voor-ml-gevorderd: dl-verdieping
+  d2-stochastische-processen-en-monte-carlo: onzekerheid
+  d2-bayesiaanse-en-geavanceerde-statistiek: onzekerheid
+  # D3: data engineering and documentation
+  data-engineering-voor-ml: systemen
+  d3-opslag-en-data-loading-voor-training: systemen
+  datakwaliteit-versiebeheer-en-feature-stores: systemen
+  data-op-webschaal: taal
+  datasetdocumentatie: verantwoord
+  privacybewuste-dataverwerking: verantwoord
+  labelen-en-annotatie: klassiek-ml
+  weinig-labels-synthetische-data-en-data-centric-ai: klassiek-ml
+  # D10: the first-model topics are part of the trunk
+  wat-ml-is: stam
+  de-ml-workflow: stam
+  loss-en-empirical-risk-minimization: stam
+  baselines-en-error-analysis: stam
+  lineaire-regressie-en-uitbreidingen: stam
+  lineaire-classificatie: stam
+  evaluatie-en-modelselectie: stam
+  d10-evaluatiemetrics: stam
+  learning-theory: dl-verdieping
+  d10-geavanceerde-learning-theory: dl-verdieping
+  # D11: CNN families live in beeld; other architectures and theory in dl-verdieping
+  d11-cnn-architecturen: beeld
+  vision-transformers: beeld
+  seq2seq-en-encoderdecoder: taal
+  multi-gpu-overzicht: systemen
+  graph-neural-networks: dl-verdieping
+  d11-graph-neural-networks-verdieping: dl-verdieping
+  state-space-modellen-en-hybrides: dl-verdieping
+  mixture-of-experts: dl-verdieping
+  historische-en-alternatieve-architecturen: dl-verdieping
+  d11-boltzmann-machines-en-vroege-generatieve-modellen: generatief
+  d11-spiking-netwerken-en-reservoir-computing: dl-verdieping
+  continuous-depth-en-impliciete-modellen: dl-verdieping
+  kolmogorovarnold-networks: dl-verdieping
+  inductive-bias-symmetrie-en-equivariantie: dl-verdieping
+  neural-architecture-search: dl-verdieping
+  theorie-expressiviteit-en-loss-landscapes: dl-verdieping
+  theorie-generalisatiepuzzels: dl-verdieping
+  scaling-gedrag: dl-verdieping
+  representatiefenomenen-en-synthese: dl-verdieping
+  efficientie: dl-verdieping
+  # D12: representation learning is deep learning in depth; transfer and embeddings are trunk
+  representatieleren: dl-verdieping
+  d12-multi-task-learning: dl-verdieping
+  self-supervised-learning: dl-verdieping
+  metric-learning-en-semi-supervised-leren: dl-verdieping
+  low-shot-meta-en-continual-learning: dl-verdieping
+  transfer-learning-en-fine-tuning: stam
+  embeddings-en-similariteit: stam
+  vision-foundation-models: beeld

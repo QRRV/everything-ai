@@ -1,0 +1,28 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: ml-fit-by-hand
+minutes: 15
+title:
+  en: "Fitting a line by hand"
+  nl: "Een lijn passen met de hand"
+goal:
+  en: "find the parameter with the lowest loss by moving it step by step, with a slider and in code."
+  nl: "de parameter met de laagste loss vinden door hem stap voor stap te verschuiven, met een slider en in code."
+summary:
+  - en: "The loss depends on the parameters: another w or b moves the line, and changes the loss."
+    nl: "De loss hangt af van de parameters: een andere w of b verschuift de lijn, en verandert de loss."
+  - en: "For one parameter, the loss is a valley; its lowest point gives the line that fits the examples best."
+    nl: "Voor één parameter is de loss een dal; het laagste punt geeft de lijn die het best bij de voorbeelden past."
+  - en: "By hand: move the parameter a little; if the loss goes down, keep going; stop where every step makes it go up."
+    nl: "Met de hand: verschuif de parameter een beetje; gaat de loss omlaag, ga dan door; stop waar elke stap hem laat stijgen."
+can_now:
+  - en: "find the bias term with the lowest loss with a slider"
+    nl: "met een slider de bias term met de laagste loss vinden"
+    by: best-b
+  - en: "say which way to move a parameter from two losses"
+    nl: "uit twee losses zeggen welke kant je een parameter op schuift"
+    by: direction
+  - en: "write a function that tries values and keeps the one with the lowest loss"
+    nl: "een functie schrijven die waarden probeert en die met de laagste loss houdt"
+    by: search

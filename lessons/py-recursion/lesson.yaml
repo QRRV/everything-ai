@@ -1,0 +1,28 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: py-recursion
+minutes: 15
+title:
+  en: "A function that calls itself"
+  nl: "Een functie die zichzelf aanroept"
+goal:
+  en: "write a function that calls itself on a smaller piece, with a base case that stops it."
+  nl: "een functie schrijven die zichzelf aanroept met een kleiner stuk, met een basisgeval dat hem stopt."
+summary:
+  - en: "Recursion: a function calls itself, each time on a smaller piece, such as `n - 1` or `text[1:]`."
+    nl: "Recursie: een functie roept zichzelf aan, elke keer met een kleiner stuk, zoals `n - 1` of `text[1:]`."
+  - en: "The base case is the smallest case; the function answers it without calling itself, and that stops the calls."
+    nl: "Het basisgeval is het kleinste geval; de functie beantwoordt het zonder zichzelf aan te roepen, en dat stopt de aanroepen."
+  - en: "Without a base case, or when the calls never get smaller, the function never stops, and Python gives up with an error."
+    nl: "Zonder basisgeval, of als de aanroepen nooit kleiner worden, stopt de functie nooit, en geeft Python het op met een foutmelding."
+can_now:
+  - en: "write a function on numbers that calls itself"
+    nl: "een functie op getallen schrijven die zichzelf aanroept"
+    by: factorial
+  - en: "follow the calls of a function that calls itself"
+    nl: "de aanroepen volgen van een functie die zichzelf aanroept"
+    by: sum-four
+  - en: "write a function on a text that calls itself"
+    nl: "een functie op een tekst schrijven die zichzelf aanroept"
+    by: reverse

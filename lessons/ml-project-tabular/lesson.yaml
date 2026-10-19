@@ -1,0 +1,31 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: ml-project-tabular
+minutes: 35
+title:
+  en: "Project: predict something real, end to end"
+  nl: "Project: voorspel iets echts, van begin tot eind"
+goal:
+  en: "run the whole workflow on the Palmer penguins with scikit-learn, from the question to one number on the test set, and write down what you found."
+  nl: "de hele workflow doorlopen op de Palmer-pinguïns met scikit-learn, van de vraag tot één getal op de test set, en opschrijven wat je vond."
+summary:
+  - en: "The workflow on a real table: question and label, metric and goal, the data split with a seed, a baseline, and a model chosen on the validation set."
+    nl: "De workflow op een echte tabel: vraag en label, metric en doel, de data gesplitst met een seed, een baseline, en een model gekozen op de validation set."
+  - en: "Standardize with the mean and standard deviation of the training set only, also for the validation set and the test set."
+    nl: "Standaardiseer alleen met het gemiddelde en de standaardafwijking van de training set, ook voor de validation set en de test set."
+  - en: "Look at the examples the model gets wrong; measure once on the test set at the end, and report that number next to the baseline."
+    nl: "Kijk naar de voorbeelden die het model fout doet; meet aan het eind één keer op de test set, en meld dat getal naast de baseline."
+can_now:
+  - en: "train and measure a scikit-learn classifier on standardized features"
+    nl: "een classifier van scikit-learn trainen en meten op gestandaardiseerde features"
+    by: model
+  - en: "find the examples a model gets wrong"
+    nl: "de voorbeelden vinden die een model fout doet"
+    by: mistakes
+  - en: "choose a stand-in label when the label you want is not in the data"
+    nl: "een vervangend label kiezen als het label dat je wilt niet in de data staat"
+    by: proxy
+  - en: "write down what a project found, for the people who asked the question"
+    nl: "opschrijven wat een project opleverde, voor wie de vraag stelde"
+    by: report

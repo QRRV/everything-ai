@@ -1,0 +1,28 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: rnn-memory-idea
+minutes: 25
+title:
+  en: "Recurrence: a network with memory"
+  nl: "Recurrentie: een netwerk met geheugen"
+goal:
+  en: "read a sequence with a recurrent network in NumPy, step by step, and say what its hidden state keeps of what it has read."
+  nl: "een rij in NumPy stap voor stap lezen met een recurrent neural network, en zeggen wat zijn hidden state bewaart van wat het gelezen heeft."
+summary:
+  - en: "A recurrent neural network reads a sequence one step at a time and carries a hidden state, a summary of what it has read so far, from step to step."
+    nl: "Een recurrent neural network leest een rij stap voor stap en neemt een hidden state, een samenvatting van wat het tot nu toe gelezen heeft, mee van stap naar stap."
+  - en: "Every step: `h = np.tanh(W_x @ x + W_h @ h + b)`, with the same weights at every step and a hidden state that starts at zeros."
+    nl: "Elke stap: `h = np.tanh(W_x @ x + W_h @ h + b)`, met dezelfde weights bij elke stap en een hidden state die begint bij nullen."
+  - en: "The hidden state has the same size at every step, so what came long ago fades; `W_h` all zeros means no memory at all."
+    nl: "De hidden state is bij elke stap even groot, dus vervaagt wat lang geleden kwam; `W_h` vol nullen betekent helemaal geen geheugen."
+can_now:
+  - en: "say how big the hidden state is after a long sequence"
+    nl: "zeggen hoe groot de hidden state is na een lange rij"
+    by: size
+  - en: "write a recurrent network that reads a sequence of any length"
+    nl: "een recurrent neural network schrijven dat een rij van elke lengte leest"
+    by: rnn
+  - en: "say what the hidden state depends on when it gets no memory"
+    nl: "zeggen waar de hidden state van afhangt als hij geen geheugen krijgt"
+    by: no-memory

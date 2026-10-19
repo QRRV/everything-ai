@@ -1,0 +1,28 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: py-if
+minutes: 15
+title:
+  en: "Making choices: if and else"
+  nl: "Keuzes maken: if en else"
+goal:
+  en: "compare two values, and let a program run some lines only when a condition is `True`, with `if` and `else`."
+  nl: "twee waarden vergelijken, en een programma sommige regels alleen laten uitvoeren als een voorwaarde `True` is, met `if` en `else`."
+summary:
+  - en: "A comparison such as `3 < 5` gives a bool: `True` or `False`. Equal to is `==`; one `=` gives a name a value."
+    nl: "Een vergelijking zoals `3 < 5` geeft een bool: `True` of `False`. Gelijk aan is `==`; één `=` geeft een naam een waarde."
+  - en: "`if condition:` runs the indented lines under it only when the condition is `True`; `else:` runs its lines when it is `False`."
+    nl: "`if voorwaarde:` voert de ingesprongen regels eronder alleen uit als de voorwaarde `True` is; `else:` voert zijn regels uit als hij `False` is."
+  - en: "Lines that are not indented run in both cases. Lines under the same `if` need the same number of spaces in front."
+    nl: "Regels die niet inspringen, draaien in beide gevallen. Regels onder dezelfde `if` hebben evenveel spaties ervoor nodig."
+can_now:
+  - en: "let a program show one of two lines, with `if` and `else`"
+    nl: "een programma met `if` en `else` één van twee regels laten zien"
+    by: below-zero
+  - en: "say what a comparison gives on the edge, such as `7 > 7`"
+    nl: "zeggen wat een vergelijking op de grens geeft, zoals `7 > 7`"
+    by: boundary
+  - en: "give a name a value that depends on a condition"
+    nl: "een naam een waarde geven die afhangt van een voorwaarde"
+    by: ticket

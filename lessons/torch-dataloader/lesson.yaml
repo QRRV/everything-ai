@@ -1,0 +1,28 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: torch-dataloader
+minutes: 25
+title:
+  en: "Datasets and DataLoaders"
+  nl: "Datasets en DataLoaders"
+goal:
+  en: "write a Dataset with `__len__` and `__getitem__`, and train with a DataLoader that makes shuffled mini-batches every epoch."
+  nl: "een Dataset schrijven met `__len__` en `__getitem__`, en trainen met een DataLoader die elke epoch geshufflede mini-batches maakt."
+summary:
+  - en: "A Dataset knows how many examples there are, `__len__`, and gives example `i`, `__getitem__`; `TensorDataset(X, y)` is one for data in tensors."
+    nl: "Een Dataset weet hoeveel voorbeelden er zijn, `__len__`, en geeft voorbeeld `i`, `__getitem__`; `TensorDataset(X, y)` is er een voor data in tensors."
+  - en: "A DataLoader makes mini-batches from a Dataset; each loop over it is an epoch, and with `shuffle=True` every epoch has a new random order."
+    nl: "Een DataLoader maakt mini-batches van een Dataset; elke loop eroverheen is een epoch, en met `shuffle=True` heeft elke epoch een nieuwe willekeurige volgorde."
+  - en: "Shuffling keeps sorted data from filling mini-batches with one kind of example, so each step's slope is a fair estimate."
+    nl: "Shuffling voorkomt dat gesorteerde data mini-batches vult met één soort voorbeeld, zodat de helling van elke stap een eerlijke schatting is."
+can_now:
+  - en: "say what shuffling changes from one epoch to the next"
+    nl: "zeggen wat shuffling van epoch tot epoch verandert"
+    by: reshuffle
+  - en: "write a Dataset with `__len__` and `__getitem__`"
+    nl: "een Dataset schrijven met `__len__` en `__getitem__`"
+    by: digits
+  - en: "train with a DataLoader that shuffles"
+    nl: "trainen met een DataLoader die shufflet"
+    by: shuffled

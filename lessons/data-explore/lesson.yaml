@@ -1,0 +1,28 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: data-explore
+minutes: 15
+title:
+  en: "Asking questions of data"
+  nl: "Vragen stellen aan data"
+goal:
+  en: "explore a new table before you build anything with it: its summary, its missing values, and the values of its text columns."
+  nl: "een nieuwe tabel verkennen voordat je er iets mee bouwt: de samenvatting, de ontbrekende waarden, en de waarden van de tekstkolommen."
+summary:
+  - en: "Exploratory data analysis asks every new dataset what is in it, what is missing and what is strange, before any model."
+    nl: "Bij exploratory data analysis vraag je bij elke nieuwe dataset wat erin zit, wat er ontbreekt en wat vreemd is, nog vóór er een model is."
+  - en: "`df.describe()` summarizes each column of numbers; `count` shows what is missing, and `min` and `max` show values that cannot be."
+    nl: "`df.describe()` vat elke kolom met getallen samen; `count` laat zien wat er ontbreekt, en `min` en `max` laten waarden zien die niet kunnen."
+  - en: "`df.isna().sum()` counts the missing values per column, `df.isna().mean()` gives their fraction, and `df[column].value_counts()` counts how often each value appears."
+    nl: "`df.isna().sum()` telt de ontbrekende waarden per kolom, `df.isna().mean()` geeft het deel ervan, en `df[column].value_counts()` telt hoe vaak elke waarde voorkomt."
+can_now:
+  - en: "recognize a value that cannot be right, such as an error code"
+    nl: "een waarde herkennen die niet kan kloppen, zoals een foutcode"
+    by: error-code
+  - en: "work out the fraction of missing values in each column of a table"
+    nl: "het deel ontbrekende waarden in elke kolom van een tabel uitrekenen"
+    by: missing
+  - en: "count how often each value of a column appears"
+    nl: "tellen hoe vaak elke waarde van een kolom voorkomt"
+    by: counts

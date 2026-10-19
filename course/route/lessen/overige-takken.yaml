@@ -1,0 +1,244 @@
+# Main-route lessons whose home branch is another branch than stam, taal or onderzoek.
+# Each lesson keeps its own "tak"; the branch continues from it when it is built.
+# Planning data; the map: key below names the map version. Format: ../FORMAT.md.
+map: v2.2
+lessons:
+
+# --- beeld ----------------------------------------------------------------------
+- id: data-images-as-arrays
+  tak: beeld
+  title: "An image is a grid of numbers"
+  level: basis
+  module: data
+  idea: "A grayscale image is a 2D array of brightness values; a color image has three channels; matplotlib reads and shows it, and slices and masks work on it."
+  covers: [beelden-als-data#0, beelden-als-data#4]
+  requires: [np-indexing, np-axis, py-plotting, py-files]
+  introduces: [c:pixel, c:channel, c:grayscale-image, py:imread-imshow, v:image-as-array]
+  uses: [py:keyword-argument, c:file-path, py:np-array, c:array, c:shape, c:dtype, c:matrix, py:np-indexing, py:boolean-mask, py:slicing, py:indexing, py:plot, py:import, py:import-as, py:list, py:len, py:comparison, py:float, py:def, py:return, py:print, py:comment, py:variable, py:underscore-name, q:predict, q:choice, q:exercise-with-check, q:run-cell]
+  mentions: [c:mlp, c:model]
+  warns: [channel]
+  ladder: [numpy]
+  needs: any
+
+# --- verantwoord ------------------------------------------------------------------
+- id: rai-bias-in-data
+  tak: verantwoord
+  title: "Who is in the data, and who is missing?"
+  level: basis
+  module: generalization
+  idea: "A model learns the gaps and prejudices in its data; ask who could be harmed and who is missing before you trust a score."
+  covers: [waarom-ai-ethiek#0, bronnen-van-bias#1]
+  requires: [ml-workflow]
+  introduces: [c:harm, c:stakeholder, c:data-bias]
+  warns: [bias]
+  uses: [p:ml-workflow, c:accuracy, c:metric, c:test-set, c:model, c:training, c:label, c:example, c:feature, c:prediction, c:class, v:confusion-matrix, c:mean, c:loss, c:baseline, c:bias-term, s:b, s:n-examples, py:dict, py:len, py:dataframe, py:pandas-select-filter, py:value-counts, py:import, py:import-as, py:list, py:append, py:for, py:comparison, py:arithmetic, py:float, py:int, py:print, py:comment, py:variable, py:underscore-name, q:predict, q:choice, q:exercise-with-check, q:run-cell]
+  data: []
+  needs: any
+
+# --- rl ---------------------------------------------------------------------------
+- id: rl-what-is-rl
+  tak: rl
+  title: "Learning from rewards"
+  level: basis
+  module: building-blocks
+  idea: "In reinforcement learning an agent acts in an environment and learns from rewards; it maximizes the discounted sum of future rewards, the return."
+  covers: [wat-rl-is#0, wat-rl-is#1, agentraamwerk#0]
+  requires: [ml-kinds-of-learning]
+  introduces: [c:agent, c:environment, c:action, c:reward, c:return, c:discount]
+  uses: [c:reinforcement-learning, c:supervised-learning, c:unsupervised-learning, c:label, c:example, py:for, py:range, py:def, py:return, py:list, py:print, py:comment, py:variable, py:underscore-name, py:arithmetic, py:float, q:predict, q:choice, q:exercise-with-check, q:run-cell]
+  mentions: [c:model, c:language-model, c:token]
+  warns: [agent, return]
+  needs: any
+
+# --- bouwen -----------------------------------------------------------------------
+- id: start-your-own-assistant
+  tak: bouwen
+  title: "Learning with your own AI assistant"
+  level: basis
+  module: start
+  idea: "You can point your own AI assistant at this course; ask it to explain and hint, not to hand you answers, and check what it says."
+  covers: [ai-ondersteund-programmeren#0]
+  requires: [start-how-this-course-works, start-using-ai-tools]
+  introduces: [p:learn-with-an-assistant, c:agents-md]
+  uses: [p:verify-ai-output, q:choice, q:predict]
+  needs: any
+
+# --- systemen ---------------------------------------------------------------------
+- id: torch-gpu
+  tak: systemen
+  title: "Why AI uses GPUs, and the same code on yours"
+  level: basis
+  module: pytorch
+  idea: "A GPU does thousands of simple calculations at once; moving the model and data to it with .to(device) makes training much faster, and the code still runs on a CPU."
+  covers: [compute-geletterdheid#0, compute-geletterdheid#1, gpu-programmeren#0]
+  requires: [torch-mlp-digits]
+  introduces: [c:gpu, py:to-device]
+  uses: [c:flops, c:device, py:torch-tensor, py:nn-module, py:nn-linear, py:torch-relu, py:forward-method, py:manual-seed, py:item, py:np-load, py:dataloader, py:tensor-dataset, py:torch-optim, py:optimizer-step, py:zero-grad, py:backward, py:model-eval, py:model-train, py:no-grad, py:nn-cross-entropy-loss, c:mlp, c:hidden-layer, c:mini-batch, c:epoch, c:loss, c:learning-rate, c:optimizer, c:forward-pass, c:backward-pass, c:weight, c:bias-term, c:package, c:module, p:import-own-code, py:init-method, py:inheritance, py:super, py:class, py:def, py:return, py:for, py:if, py:bool, py:import, py:print, py:comment, py:keyword-argument, py:tuple, q:predict, q:choice, q:exercise-with-check, q:run-cell]
+  ladder: [torch]
+  needs: any
+
+- id: sys-memory-roofline
+  tak: systemen
+  title: "Memory or compute: what limits your GPU?"
+  level: expert
+  module: systems
+  idea: "Moving data from GPU memory is often slower than calculating with it; the roofline shows whether an operation is limited by memory or by compute."
+  covers: [gpu-architectuur-geheugen-en-roofline#0, gpu-architectuur-geheugen-en-roofline#3]
+  requires: [torch-gpu, gpt-count]
+  introduces: [c:memory-hierarchy, c:arithmetic-intensity, c:roofline, c:bandwidth, c:ridge-point, c:memory-bound, c:compute-bound]
+  uses: [c:gpu, c:device, py:to-device, c:flops-per-token, c:parameter-count, c:flops, c:matrix-multiplication, py:nn-linear, c:layernorm, c:softmax, c:relu, c:residual-connection, c:mlp, c:batch-size, c:token, c:gpt, c:vocabulary, c:float32, py:def, py:return, py:if, py:print, py:comment, q:predict, q:choice, q:explain, q:exercise-with-check, q:run-cell]
+  ladder: [python, torch]
+  needs: any
+
+- id: sys-number-formats
+  tak: systemen
+  title: "Fewer bits: FP32, FP16 and BF16"
+  level: expert
+  module: systems
+  idea: "16-bit numbers halve memory and speed up tensor cores; BF16 keeps the range of FP32 at lower precision."
+  covers: [getalformaten#0]
+  requires: [num-floats-stability, sys-memory-roofline]
+  introduces: [c:fp16, c:bf16, c:tf32, c:int8, c:mantissa, c:numerical-precision, c:number-range, c:tensor-core, py:torch-dtype]
+  uses: [c:floating-point, c:overflow, c:underflow, c:float32, c:memory-bound, c:roofline, c:bandwidth, c:gpu, c:gradient, c:weight, c:exponent, c:dtype, c:matrix-multiplication, py:torch-tensor, py:math-module, py:abs, py:for, py:list, py:def, py:return, py:import, py:print, py:comment, q:predict, q:choice, q:explain, q:exercise-with-check, q:run-cell]
+  mentions: [c:quantization, c:bit]
+  warns: [precision]
+  ladder: [python, torch]
+  needs: any
+
+- id: sys-mixed-precision
+  tak: systemen
+  title: "Mixed-precision training"
+  level: expert
+  module: systems
+  idea: "Compute in BF16 where it is safe and keep the master weights in FP32; autocast does this for you."
+  covers: [precisie-en-geheugenbesparing#0]
+  requires: [sys-number-formats, nn-trainer]
+  introduces: [c:mixed-precision, py:autocast, c:master-weights, c:loss-scaling, py:grad-scaler]
+  uses: [c:bf16, c:fp16, c:float32, py:forward-hook, c:tensor-core, c:mantissa, c:number-range, c:underflow, c:overflow, c:weight, c:gradient, c:optimizer, c:adamw, c:exponential-moving-average, c:model-parameter, c:learning-rate, c:sgd, c:activation-function, c:relu, c:convolution, c:logarithm, c:logit, c:forward-pass, c:backward-pass, c:cross-entropy, c:softmax, c:mlp, c:epoch, c:mini-batch, c:accuracy, c:test-set, c:gpu, c:device, py:torch-tensor, py:nn-linear, py:nn-init, py:torch-randn, py:manual-seed, py:torch-optim, py:optimizer-step, py:zero-grad, py:backward, py:item, py:float, py:bool, py:with, py:def, py:return, py:import-as, py:print, py:comment, py:underscore-name, py:lambda, q:predict, q:choice, q:explain, q:exercise-with-check, q:run-cell]
+  ladder: [torch]
+  compute_minutes: 5
+  fallback: [cpu]
+  needs: gpu8
+
+- id: sys-memory-accounting
+  tak: systemen
+  title: "Where the memory goes"
+  level: expert
+  module: systems
+  idea: "Weights, gradients, optimizer states and activations each take memory; add them up before a run to know if it fits."
+  covers: [compute-en-kostenramingen#2, transfer-en-full-fine-tuning#1]
+  requires: [sys-mixed-precision, opt-adam]
+  introduces: [c:optimizer-state, c:activation-memory, py:saved-tensors-hooks]
+  uses: [c:weight, c:gradient, c:model-parameter, c:parameter-count, c:optimizer, c:sgd, c:momentum, c:adam, c:adamw, c:mixed-precision, c:master-weights, c:bf16, c:float32, c:byte, c:gpu, c:mini-batch, c:batch-size, c:gradient-accumulation, c:forward-pass, c:backward-pass, c:mlp, c:relu, c:attention-score, c:context-window, c:transformer-block, c:gpt, c:token, c:tensor, py:autocast, py:nn-linear, py:torch-randn, py:set, py:dict, py:with, py:lambda, py:scientific-notation, py:float, py:arithmetic, py:if, py:def, py:return, py:import, py:print, py:comment, py:underscore-name, q:predict, q:choice, q:explain, q:exercise-with-check, q:run-cell]
+  mentions: [py:numel, c:fine-tuning]
+  needs: any
+
+- id: sys-compute-6nd
+  tak: systemen
+  title: "Estimating training compute: the 6ND rule"
+  level: expert
+  module: systems
+  idea: "Training costs about 6 FLOPs per parameter per token, so compute is roughly 6 times parameters times tokens; divide by your GPU's speed to get the time."
+  covers: [compute-en-kostenramingen#0, compute-en-kostenramingen#1]
+  requires: [gpt-count, gpt-train-chars, sys-memory-roofline, sys-memory-accounting]
+  introduces: [c:six-nd-rule, c:gpu-hour]
+  uses: [c:flops-per-token, c:flops, c:parameter-count, c:model-parameter, c:token, c:run, c:epoch, c:attention, c:context-window, c:gpu, c:bf16, c:float32, c:mixed-precision, c:forward-pass, c:backward-pass, c:gradient, c:optimizer, c:adamw, c:mini-batch, c:gpt, c:memory-bound, c:checkpoint, py:def, py:return, py:print, py:comment, py:underscore-name, py:scientific-notation, py:arithmetic, py:float, q:predict, q:choice, q:explain, q:exercise-with-check, q:run-cell]
+  mentions: [c:mfu, c:throughput]
+  needs: any
+
+- id: sys-profiling-mfu
+  tak: systemen
+  title: "Profiling: tokens per second and MFU"
+  level: expert
+  module: systems
+  idea: "Measure tokens per second and the fraction of the GPU's peak you use (MFU); the profiler shows where the time goes."
+  covers: [profiling-en-prestatiemetrics#0, profiling-en-prestatiemetrics#1, profiling-en-prestatiemetrics#2, profiling-en-prestatiemetrics#3]
+  requires: [sys-compute-6nd, sys-memory-roofline]
+  introduces: [c:throughput, c:mfu, c:hfu, py:torch-profiler, py:cuda-synchronize]
+  uses: [c:six-nd-rule, c:flops, c:flops-per-token, c:parameter-count, c:model-parameter, c:token, c:gpu, c:memory-bound, c:compute-bound, c:ridge-point, c:roofline, c:mixed-precision, c:mlp, c:relu, c:adamw, c:optimizer, c:forward-pass, c:backward-pass, c:gpt, c:mini-batch, c:batch-size, c:training-loop, c:loss, c:cross-entropy, py:nn-linear, py:torch-randn, py:manual-seed, py:torch-optim, py:zero-grad, py:backward, py:optimizer-step, py:item, py:with, py:for, py:range, py:if, py:comprehension, py:def, py:return, py:print, py:comment, py:underscore-name, py:import, q:predict, q:choice, q:explain, q:exercise-with-check, q:run-cell]
+  mentions: [c:operator-fusion]
+  ladder: [torch]
+  compute_minutes: 3
+  fallback: [cpu]
+  needs: gpu8
+
+- id: sys-triton-kernel
+  tak: systemen
+  title: "Write your own GPU kernel"
+  level: expert
+  module: systems
+  idea: "In Triton you write a fused softmax kernel in Python that reads the data once instead of several times, and you measure the speed-up."
+  covers: [gpu-programmeren#1, gpu-programmeren#2, kernels-fusie-en-compilers#0, capstone-zelf-een-kleine-llm-bouwen-en-trainen#2]
+  requires: [sys-profiling-mfu, num-floats-stability]
+  introduces: [c:gpu-kernel, c:operator-fusion, py:triton, c:cuda, c:thread-block]
+  uses: [c:gpu, c:memory-bound, c:bandwidth, c:roofline, c:flops, c:softmax, c:log-sum-exp, c:overflow, c:relu, c:tensor, c:shape, c:float32, py:torch-randn, py:manual-seed, py:decorator, py:keyword-argument, py:tuple, py:def, py:return, py:print, py:comment, py:underscore-name, py:import, q:predict, q:choice, q:explain, q:exercise-with-check, q:run-cell]
+  warns: [kernel]
+  compute_minutes: 3
+  fallback: [cpu]
+  needs: nvidia-linux
+
+- id: sys-flash-attention
+  tak: systemen
+  title: "Online softmax and FlashAttention"
+  level: expert
+  module: systems
+  idea: "Computing softmax in blocks with a running maximum lets attention run without ever storing the full score matrix."
+  covers: [kernels-fusie-en-compilers#3, kernels-fusie-en-compilers#4]
+  requires: [sys-triton-kernel, attn-causal-mask]
+  introduces: [c:online-softmax, c:flash-attention]
+  uses: [c:attention-weights, c:scaled-dot-product-attention, c:query, c:key, c:value, c:softmax, c:log-sum-exp, c:causal-mask, c:attention-head, c:token, c:language-model, c:memory-hierarchy, c:memory-bound, c:bandwidth, c:gpu-kernel, c:operator-fusion, c:float32, c:overflow, c:backward-pass, c:matrix-multiplication, c:gpu, py:torch-tensor, py:item, py:math-module, py:matmul-operator, py:slicing, py:range-step, py:for, py:tuple, py:list, py:comprehension, py:def, py:return, py:print, py:comment, py:underscore-name, py:import, q:predict, q:choice, q:exercise-with-check, q:run-cell]
+  ladder: [torch]
+  needs: any
+
+- id: sys-torch-compile
+  tak: systemen
+  title: "Letting a compiler fuse operations"
+  level: expert
+  module: systems
+  idea: "torch.compile traces your model and fuses operations automatically; measure when it helps and when it does not."
+  covers: [kernels-fusie-en-compilers#1]
+  requires: [sys-triton-kernel]
+  introduces: [py:torch-compile, c:graph-break, py:torch-where]
+  uses: [c:gpu-kernel, c:operator-fusion, c:memory-bound, c:bandwidth, c:flops, c:gpu, c:cuda, py:triton, py:cuda-synchronize, c:computational-graph, c:shape, c:dtype, c:float32, c:relu, py:torch-relu, py:torch-tensor, py:item, py:if, py:math-module, py:print, py:def, py:return, py:comment, py:underscore-name, py:import, q:predict, q:choice, q:exercise-with-check, q:run-cell]
+  ladder: [torch]
+  needs: any
+
+- id: sys-gradient-checkpointing
+  tak: systemen
+  title: "Gradient checkpointing"
+  level: expert
+  module: systems
+  idea: "Throw activations away in the forward pass and recompute them in the backward pass: less memory for some extra compute."
+  covers: [precisie-en-geheugenbesparing#1]
+  requires: [sys-memory-accounting]
+  introduces: [c:gradient-checkpointing, py:torch-checkpoint]
+  mentions: [py:numel]
+  uses: [c:activation-memory, py:saved-tensors-hooks, c:optimizer-state, c:weight, c:gradient, c:batch-size, c:forward-pass, c:backward-pass, c:flops, c:layer, c:relu, c:transformer-block, c:dropout, c:mixed-precision, c:gradient-accumulation, c:checkpoint, c:float32, c:byte, c:matrix-multiplication, c:transpose, py:torch-tensor, py:nn-linear, py:math-module, py:range-step, py:slicing, py:lambda, py:for, py:list, py:comprehension, py:dict, py:def, py:return, py:print, py:comment, py:underscore-name, py:import, q:predict, q:choice, q:exercise-with-check, q:run-cell]
+  ladder: [torch]
+  needs: any
+
+- id: llm-model-card
+  tak: systemen
+  title: "A model card for your model"
+  level: expert
+  module: post-training
+  idea: "Write down what your model is for, what it was trained on, how it scored and where it fails, with the license of model and data."
+  covers: [documentatie-platforms-en-llmops#0]
+  requires: [llm-eval-chat, data-provenance, llm-safety-eval]
+  introduces: [p:write-a-model-card, c:intended-use, c:metadata, c:yaml]
+  uses: [c:license, c:consent, c:model-card, c:model-hub, c:datasheet, c:data-provenance, c:red-teaming, c:jailbreak, c:over-refusal, p:verifiable-eval, c:verifiable-instruction, c:clean-subset, c:contamination, c:test-set, c:benchmark, c:chat-model, c:fine-tuning, c:dpo, s:beta-kl, c:lora, c:adapter, c:instruction-tuning, c:base-model, c:language-model, c:preference-pair, c:bpe, c:merge-rule, c:vocabulary, c:token, c:model-parameter, c:learning-rate, c:mini-batch, c:update-step, c:newline, py:def, py:return, py:for, py:if, py:or-operator, py:comparison, py:bool, py:list, py:append, py:dict, py:tuple, py:str-join, py:f-string, py:string-literal, py:arithmetic, py:float, py:indexing, py:print, py:comment, py:underscore-name, q:predict, q:choice, q:exercise-with-check, q:run-cell]
+  data: [model-course-capstone, model-course-sft, model-course-dpo, course-dpo-answers, course-eval-chat, course-red-team-prompts, course-red-team-answers, model-course-qmnist-cnn, cosmopedia, tinystories]
+  needs: any
+
+- id: llm-safety-eval
+  tak: verantwoord
+  title: "Red-team your own chat model"
+  level: expert
+  module: post-training
+  idea: "Before you share a chat model you test what it does with harmful requests: a small red-team set measures how often it goes along, and a set of harmless requests measures how often it refuses for no reason."
+  covers: [red-teaming-provenance-en-securitykaders#0, aanvallen-op-llm-applicaties#2]
+  requires: [llm-eval-chat]
+  introduces: [c:red-teaming, c:jailbreak, c:over-refusal, py:startswith]
+  uses: [p:verifiable-eval, c:verifiable-instruction, c:chat-model, c:adapter, c:benchmark, c:reward-hacking, c:instruction-tuning, c:dpo, c:base-model, c:language-model, c:fine-tuning, c:preference-pair, c:sampling, c:seed, py:def, py:return, py:for, py:if, py:bool, py:comparison, py:list, py:tuple, py:set, py:dict, py:comprehension, py:lower, py:split, py:strip-chars, py:endswith, py:or-operator, py:range, py:len, py:string-literal, py:augmented-assignment, py:arithmetic, py:float, py:indexing, py:slicing, py:print, py:comment, py:underscore-name, q:predict, q:choice, q:exercise-with-check, q:run-cell]
+  data: [course-red-team-prompts, course-red-team-answers, model-course-capstone, model-course-sft, model-course-dpo]
+  needs: any

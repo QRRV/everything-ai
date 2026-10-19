@@ -1,0 +1,28 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: gpt-generate
+minutes: 30
+title:
+  en: "Generate text with your GPT"
+  nl: "Tekst genereren met je GPT"
+goal:
+  en: "let your trained GPT write, with the sampling loop of your bigram model and one line changed."
+  nl: "je getrainde GPT laten schrijven, met de sampling-loop van je bigram-model en één regel anders."
+summary:
+  - en: "A GPT writes as the bigram model did: the probabilities of the next character, a character drawn with them, added to the text, and again. Only the probabilities come from the GPT, which reads the last block characters."
+    nl: "Een GPT schrijft zoals het bigram-model: de kansen op het volgende teken, een teken dat ermee getrokken wordt, achter de tekst gezet, en opnieuw. Alleen de kansen komen van de GPT, die de laatste block tekens leest."
+  - en: "Of the logits at every place of the window, only those of the last place are about the next character; divided by the temperature and through softmax they give its probabilities."
+    nl: "Van de logits op elke plek van het venster gaan alleen die van de laatste plek over het volgende teken; gedeeld door de temperature en door softmax geven ze de kansen erop."
+  - en: "Every new character costs a forward pass over the whole window, without a graph: writing needs no gradients."
+    nl: "Elk nieuw teken kost een forward pass over het hele venster, zonder graaf: schrijven heeft geen gradients nodig."
+can_now:
+  - en: "say how many forward passes writing a text costs"
+    nl: "zeggen hoeveel forward passes het schrijven van een tekst kost"
+    by: passes
+  - en: "get the probabilities of the next token from a GPT, at any temperature"
+    nl: "de kansen op het volgende token uit een GPT halen, bij elke temperature"
+    by: gpt-probs
+  - en: "let a GPT write, one drawn token at a time"
+    nl: "een GPT laten schrijven, één getrokken token per keer"
+    by: gpt-generate

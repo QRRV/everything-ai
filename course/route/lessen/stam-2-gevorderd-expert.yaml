@@ -1,0 +1,619 @@
+# Lessons whose home branch is "stam" (the shared foundation), levels gevorderd and expert.
+# Planning data; the map: key below names the map version. Format: ../FORMAT.md.
+tak: stam
+map: v2.2
+lessons:
+
+# ===================== gevorderd: mathematics, formally =====================
+- id: math-derivative-rules
+  title: "Derivative rules"
+  level: gevorderd
+  module: math-formal
+  idea: "A few rules (power, product, exp, log and the chain rule) give the exact derivative of any formula you build from them."
+  covers: [calculus#1]
+  requires: [math-chain-rule, math-exp-log]
+  introduces: [c:derivative-rules, c:product-rule]
+  uses: [c:derivative, c:slope-formula, c:power-rule, c:chain-rule, s:d-derivative, c:finite-difference, c:exponent, c:logarithm, s:exp, s:log, py:import-as, py:variable, py:def, py:return, py:arithmetic, py:float, py:print, py:comment, py:underscore-name, q:predict, q:choice, q:exercise-with-check, q:run-cell]
+  ladder: [python]
+  needs: any
+
+- id: math-partial-derivatives
+  title: "Partial derivatives and the gradient, formally"
+  level: gevorderd
+  module: math-formal
+  idea: "A partial derivative holds all other variables fixed; the gradient collects them, and the multivariable chain rule adds up the paths."
+  covers: [calculus#3]
+  requires: [math-derivative-rules, math-gradient]
+  introduces: [c:multivariable-chain-rule]
+  uses: [s:partial, s:nabla, c:partial-derivative, c:gradient, c:derivative, c:derivative-rules, c:chain-rule, c:power-rule, s:d-derivative, c:finite-difference, c:exponent, c:logarithm, s:exp, s:log, c:loss, c:gradient-descent, c:training, c:model-parameter, py:import-as, py:def, py:return, py:list, py:arithmetic, py:float, py:print, py:comment, py:variable, py:underscore-name, q:predict, q:choice, q:exercise-with-check, q:run-cell]
+  needs: any
+
+- id: math-matrix-calculus
+  title: "Gradients of matrix expressions: follow the shapes"
+  level: gevorderd
+  module: math-formal
+  idea: "The gradient of a loss with respect to a matrix has the same shape as that matrix; the shapes tell you which product and which transpose you need."
+  covers: [calculus#5]
+  requires: [math-partial-derivatives, math-transpose, nn-forward-numpy]
+  introduces: [c:matrix-calculus]
+  uses: [c:gradient, c:partial-derivative, c:multivariable-chain-rule, c:chain-rule, s:partial, c:finite-difference, c:matrix, c:vector, c:shape, c:shape-rule, c:transpose, s:transpose-t, c:matrix-multiplication, py:matmul-operator, s:x-matrix, c:loss, s:l-loss, c:mean-squared-error, s:sigma-sum, s:n-examples, c:residual, c:label, c:prediction, c:example, c:weight, c:feature, c:layer, c:forward-pass, v:shape-notation, py:np-array, py:np-indexing, py:np-sum, py:float, py:len, py:import-as, py:def, py:return, py:list, py:arithmetic, py:print, py:comment, py:underscore-name, q:predict, q:choice, q:exercise-with-check, q:run-cell]
+  ladder: [numpy]
+  needs: any
+
+- id: math-matrix-rank
+  title: "Rank: how many directions a matrix has"
+  level: gevorderd
+  module: math-formal
+  idea: "The rank of a matrix is the number of independent directions in it; a d×d matrix written as a d×r matrix times an r×d matrix has rank at most r and needs only 2·d·r numbers."
+  covers: [lineaire-algebra#5]
+  requires: [math-matrix-multiply, math-transpose]
+  introduces: [c:matrix-rank, c:low-rank, c:linear-independence, py:np-linalg-matrix-rank]
+  uses: [c:matrix, c:vector, c:shape, c:matrix-multiplication, py:matmul-operator, c:transpose, c:weight, py:np-array, py:nested-list, py:list, py:indexing, py:np-indexing, py:slicing, py:variable, py:import-as, py:def, py:return, py:for, py:range, py:len, py:arithmetic, py:print, py:comment, py:underscore-name, q:predict, q:choice, q:exercise-with-check, q:run-cell]
+  ladder: [numpy]
+  needs: any
+
+- id: prob-distributions
+  title: "Common distributions"
+  level: gevorderd
+  module: math-formal
+  idea: "Bernoulli for yes or no, categorical for one of many classes, normal for measurements: three distributions you meet everywhere in deep learning."
+  covers: [kansrekening#3]
+  requires: [prob-expectation, ml-softmax]
+  introduces: [c:bernoulli-distribution, c:categorical-distribution, c:normal-distribution, c:probability-density, s:normal-dist, s:mu, s:sigma-std]
+  uses: [c:probability-distribution, c:probability, s:p-prob, c:softmax, s:k-classes, c:expected-value, c:variance, c:standard-deviation, c:mean, c:class, c:classification, c:exponent, s:exp, c:seed, v:histogram, py:random-module, py:math-module, py:np-mean, py:np-std, py:boolean-mask, py:value-counts, py:isna, py:dataframe, py:pandas-select-filter, py:len, py:import, py:import-as, py:def, py:return, py:arithmetic, py:float, py:print, py:underscore-name, q:predict, q:choice, q:exercise-with-check, q:run-cell]
+  ladder: [numpy]
+  data: [palmer-penguins]
+  needs: any
+
+- id: info-entropy
+  title: "Entropy: average surprise"
+  level: gevorderd
+  module: math-formal
+  idea: "Entropy is the expected surprise of a distribution, measured in bits; no code that codes one symbol at a time can do better on average."
+  covers: [informatietheorie#0, informatietheorie#1]
+  requires: [ml-log-loss, prob-expectation]
+  introduces: [c:entropy, c:bit, c:nat]
+  uses: [c:surprise, c:expected-value, c:log-loss, c:logarithm, s:log, c:probability, c:probability-distribution, py:np-array, py:np-sum, py:boolean-mask, py:dict, py:for, py:if, py:len, py:list, py:append, py:import-as, py:def, py:return, py:arithmetic, py:print, py:comment, py:underscore-name, q:predict, q:choice, q:exercise-with-check, q:run-cell]
+  ladder: [numpy]
+  data: [tiny-shakespeare, palmer-penguins]
+  needs: any
+
+- id: info-cross-entropy-kl
+  title: "Cross-entropy and KL divergence"
+  level: gevorderd
+  module: math-formal
+  idea: "Cross-entropy is the surprise when you expect distribution q but the truth is p; KL divergence is the extra surprise above the entropy of p."
+  covers: [informatietheorie#2, informatietheorie#3]
+  requires: [info-entropy, ml-cross-entropy]
+  introduces: [c:kl-divergence]
+  uses: [c:cross-entropy, c:entropy, c:bit, c:nat, c:surprise, c:expected-value, c:probability, c:probability-distribution, c:logarithm, s:log, s:sigma-sum, c:one-hot, c:loss, c:training, py:np-array, py:np-sum, py:boolean-mask, py:for, py:range, py:len, py:import-as, py:def, py:return, py:arithmetic, py:print, py:comment, py:underscore-name, q:predict, q:choice, q:exercise-with-check, q:run-cell]
+  ladder: [numpy]
+  data: [palmer-penguins]
+  needs: any
+
+- id: stats-mle
+  title: "Maximum likelihood"
+  level: gevorderd
+  module: math-formal
+  idea: "Choosing parameters that make the data most likely is the same as minimizing the cross-entropy, which is why we train on it."
+  covers: [statistiek#3]
+  requires: [info-cross-entropy-kl, lm-nll]
+  introduces: [c:maximum-likelihood, s:theta, s:pi-product, s:argmax, py:np-inf]
+  uses: [c:likelihood, c:negative-log-likelihood, c:cross-entropy, c:kl-divergence, c:entropy, c:nat, c:logarithm, s:log, c:probability, c:model-parameter, c:bigram, c:loss, c:training, c:example, c:mean, c:surprise, c:class, s:sigma-sum, py:np-array, py:np-mean, py:np-argmax, py:np-argmin, py:for, py:if, py:comparison, py:indexing, py:list, py:append, py:import-as, py:def, py:return, py:arithmetic, py:print, py:comment, py:underscore-name, q:predict, q:choice, q:exercise-with-check, q:run-cell]
+  ladder: [numpy]
+  needs: any
+
+- id: num-floats-stability
+  title: "Floating point and the log-sum-exp trick"
+  level: gevorderd
+  module: math-formal
+  idea: "Computers store numbers with limited precision, which is why exp of a big logit overflows; the subtract-the-maximum trick from softmax also gives a stable log-sum-exp."
+  covers: [numerieke-wiskunde#0, numerieke-wiskunde#3]
+  requires: [ml-cross-entropy, math-exp-log]
+  introduces: [c:floating-point, c:overflow, c:underflow, c:log-sum-exp]
+  uses: [p:subtract-max-before-exp, c:softmax, s:z-logits, c:logit, c:cross-entropy, c:loss, c:model, c:probability, c:class, c:classification, c:exponent, s:exp, c:logarithm, s:log, s:sigma-sum, s:l-loss, c:training, c:mean, c:array, c:vector, py:float, py:np-array, py:np-sum, py:min-max, py:indexing, py:np-indexing, py:def, py:return, py:import, py:import-as, py:arithmetic, py:comparison, py:bool, py:print, py:comment, py:underscore-name, q:predict, q:choice, q:exercise-with-check, q:run-cell]
+  mentions: [c:language-model, c:gpu, c:bit, c:float32, c:fp16, py:abs]
+  ladder: [numpy]
+  needs: any
+
+- id: stats-bootstrap
+  title: "How sure is a number? Confidence intervals and the bootstrap"
+  level: gevorderd
+  module: math-formal
+  idea: "Resample your results many times; the spread of the resampled means gives a confidence interval without formulas."
+  covers: [statistiek#5]
+  requires: [prob-expectation, np-random, stats-describe]
+  introduces: [c:confidence-interval, c:bootstrap, c:standard-error, c:statistical-sample, c:with-replacement, c:resample]
+  uses: [c:mean, c:standard-deviation, c:quantile, c:median, c:random-number-generator, py:np-random-generator, c:seed, c:probability, c:array, py:np-array, py:np-quantile, py:for, py:range, py:list, py:append, py:def, py:return, py:import-as, py:arithmetic, py:print, py:comment, py:underscore-name, q:predict, q:choice, q:exercise-with-check, q:run-cell]
+  mentions: [c:model, c:accuracy, c:example, c:test-set]
+  ladder: [numpy]
+  data: [palmer-penguins]
+  needs: any
+
+# ===================== gevorderd: training deep networks =====================
+- id: nn-gradient-check
+  title: "Gradient checking"
+  level: gevorderd
+  module: training
+  idea: "Compare the gradient from backprop with a finite-difference estimate; if they disagree, your backward pass has a bug."
+  covers: [numerieke-wiskunde#7]
+  requires: [nn-micrograd-train, math-slope]
+  introduces: [q:gradient-check, c:gradient-checking, c:central-difference, c:relative-error, py:scientific-notation, py:lambda, py:np-abs]
+  uses: [c:finite-difference, c:derivative, c:gradient, c:backward-pass, c:backpropagation, c:chain-rule, c:loss, s:l-loss, c:relu, c:neuron, c:weight, c:model-parameter, c:training, s:partial, py:np-array, py:np-zeros, py:np-maximum, py:np-indexing, py:matmul-operator, py:for, py:range, py:len, py:def, py:return, py:import-as, py:arithmetic, py:comparison, py:print, py:comment, py:underscore-name, q:predict, q:choice, q:exercise-with-check, q:run-cell]
+  mentions: [c:layer, c:floating-point]
+  ladder: [numpy]
+  needs: any
+
+- id: nn-backprop-tensors
+  title: "Backprop through whole layers by hand"
+  level: gevorderd
+  module: training
+  kind: project
+  project: nn
+  idea: "Write the backward pass of a two-layer MLP with softmax and cross-entropy in NumPy, matrix by matrix, and check it against PyTorch."
+  covers: [backpropagation-en-computational-graphs#1]
+  requires: [nn-gradient-check, math-matrix-calculus, nn-forward-numpy, ml-digits-linear, torch-autograd, torch-batches, torch-mlp-digits]
+  introduces: [c:elementwise-product, s:odot]
+  uses: [c:backpropagation, c:backward-pass, c:forward-pass, c:gradient, c:local-gradient, c:chain-rule, c:mlp, c:hidden-layer, c:layer, c:relu, c:softmax, c:cross-entropy, c:softmax-cross-entropy-gradient, c:one-hot, c:logit, c:loss, c:mini-batch, c:weight, c:bias-term, c:model-parameter, c:gradient-checking, c:relative-error, c:transpose, c:matrix, c:matrix-multiplication, c:matrix-calculus, c:identity-matrix, c:axis, c:broadcasting, c:shape, c:tensor, c:autograd, c:training, c:epoch, c:learning-rate, c:accuracy, c:test-set, c:probability, c:class, c:label, c:example, s:w-matrix, s:transpose-t, s:eta, s:sigma-sum, s:l-loss, s:n-examples, py:np-array, py:np-indexing, py:torch-tensor, py:keyword-argument, py:tuple, py:len, py:min-max, py:np-maximum, py:np-sum, py:matmul-operator, py:keepdims, py:requires-grad, py:backward, py:grad-attribute, py:torch-relu, py:def, py:return, py:import-as, py:print, py:comment, py:underscore-name, q:predict, q:choice, q:exercise-with-check, q:run-cell]
+  ladder: [numpy, torch]
+  data: [qmnist]
+  needs: any
+
+- id: nn-vanishing-exploding
+  title: "Vanishing and exploding gradients"
+  level: gevorderd
+  module: training
+  idea: "In a deep network the backward pass multiplies many factors; if they are small the gradient vanishes, if large it explodes."
+  covers: [backpropagation-en-computational-graphs#2]
+  requires: [nn-backprop-tensors, ml-sigmoid]
+  introduces: [c:vanishing-gradient, c:exploding-gradient, c:saturation]
+  uses: [c:sigmoid-slope, c:backward-pass, c:forward-pass, c:gradient, c:chain-rule, c:local-gradient, c:sigmoid, c:relu, c:activation-function, c:layer, c:weight, c:gradient-descent, c:learning-rate, c:loss, c:training, py:np-array, py:np-maximum, py:np-mean, py:np-abs, py:matmul-operator, py:reversed, py:for, py:range, py:list, py:append, py:scientific-notation, py:len, py:indexing, py:float, py:np-zeros, py:def, py:return, py:import-as, py:print, py:comment, py:underscore-name, q:predict, q:choice, q:exercise-with-check, q:run-cell]
+  mentions: [c:overflow, c:he-init]
+  ladder: [numpy]
+  needs: any
+
+- id: nn-initialization
+  title: "Initialization"
+  level: gevorderd
+  module: training
+  idea: "Random starting weights with the right spread keep the signal the same size layer after layer; Xavier and He tell you the spread."
+  covers: [initialisatie-en-parametrisatie#0, initialisatie-en-parametrisatie#1]
+  requires: [nn-vanishing-exploding, prob-distributions]
+  introduces: [c:initialization, c:xavier-init, c:he-init, c:symmetry-breaking, py:nn-init, py:torch-randn]
+  uses: [c:weight, c:bias-term, c:variance, s:var, c:standard-deviation, s:sigma-std, c:normal-distribution, s:normal-dist, c:relu, c:activation-function, c:layer, c:neuron, c:hidden-layer, c:mlp, c:vanishing-gradient, c:exploding-gradient, c:saturation, c:gradient, c:backward-pass, c:forward-pass, c:training, py:nn-linear, py:manual-seed, py:no-grad, py:torch-relu, py:if, py:with, py:item, c:tensor, py:random-module, py:for, py:range, py:list, py:append, py:def, py:return, py:import, py:print, py:comment, py:underscore-name, q:predict, q:choice, q:exercise-with-check, q:run-cell]
+  mentions: [c:tanh]
+  ladder: [torch]
+  needs: any
+
+- id: nn-activation-stats
+  title: "Looking inside a training run"
+  level: gevorderd
+  module: training
+  idea: "Activation histograms and gradient sizes per layer show where a training run goes wrong, such as dead neurons, where the loss only shows that it does."
+  covers: [generalisatie-trainingsdynamiek-en-hpo#2]
+  requires: [nn-initialization, torch-loss-curves]
+  introduces: [c:dead-neuron, v:activation-histogram, py:forward-hook]
+  uses: [c:relu, c:neuron, c:layer, c:hidden-layer, c:mlp, c:activation-function, c:gradient, c:backward-pass, c:forward-pass, c:partial-derivative, c:loss, c:cross-entropy, c:learning-rate, c:epoch, c:mini-batch, c:weight, c:bias-term, c:test-set, c:validation-set, c:overfitting, c:training, c:accuracy, c:tensor, c:sigmoid, c:saturation, c:vanishing-gradient, c:exploding-gradient, c:he-init, c:initialization, c:variance, v:histogram, c:bin, s:eta, s:sigma-sum, s:h-hidden, py:torch-tensor, py:torch-randn, py:nn-module, py:nn-linear, py:torch-relu, py:forward-method, py:manual-seed, py:item, py:np-load, py:dataloader, py:tensor-dataset, py:torch-optim, py:optimizer-step, py:zero-grad, py:backward, py:no-grad, py:nn-cross-entropy-loss, py:grad-attribute, py:dim, py:np-abs, py:np-mean, py:dict, py:list, py:append, py:for, py:def, py:return, py:class, py:init-method, py:inheritance, py:super, py:keyword-argument, py:with, py:comparison, py:bool, py:float, py:import, py:import-as, py:print, py:comment, py:underscore-name, q:predict, q:choice, q:exercise-with-check, q:run-cell]
+  ladder: [torch]
+  needs: any
+
+- id: nn-batchnorm
+  title: "Batch normalization"
+  level: gevorderd
+  module: training
+  idea: "Standardise each feature over the batch inside the network, then let the network rescale it; deep networks train much more easily."
+  covers: [normalisatielagen#0]
+  requires: [nn-activation-stats, ml-feature-scaling]
+  introduces: [c:batchnorm, s:gamma-scale, s:beta-shift, s:epsilon]
+  uses: [c:standardization, c:feature-scaling, c:mean, c:variance, c:standard-deviation, s:mu, s:sigma-sum, s:sigma-std, c:mini-batch, c:neuron, c:layer, c:hidden-layer, c:mlp, c:relu, c:dead-neuron, c:he-init, c:initialization, c:learning-rate, c:epoch, c:loss, c:training, c:test-set, c:accuracy, c:gradient-descent, c:weight, c:bias-term, c:model-parameter, c:tensor, c:divergence, v:loss-curve, py:torch-tensor, py:torch-randn, py:nn-module, py:nn-linear, py:torch-relu, py:forward-method, py:init-method, py:inheritance, py:super, py:class, py:manual-seed, py:model-eval, py:model-train, py:no-grad, py:dim, py:dataloader, py:def, py:return, py:import, py:print, py:comment, py:underscore-name, py:with, q:predict, q:choice, q:exercise-with-check, q:run-cell]
+  ladder: [torch]
+  needs: any
+
+- id: nn-layernorm
+  title: "Layer normalization"
+  level: gevorderd
+  module: training
+  idea: "Standardise each example over its own features instead of over the batch; transformers use this, usually before each sub-layer (pre-norm)."
+  covers: [normalisatielagen#1]
+  requires: [nn-batchnorm, nn-residual]
+  introduces: [c:layernorm, c:pre-norm, c:post-norm, py:keepdim]
+  uses: [c:batchnorm, c:residual-connection, c:standardization, c:mean, c:variance, c:standard-deviation, s:mu, s:sigma-sum, s:var, s:gamma-scale, s:beta-shift, s:epsilon, c:feature, c:example, c:mini-batch, c:layer, c:mlp, c:relu, c:gradient, c:learning-rate, c:epoch, c:loss, c:training, c:test-set, c:accuracy, c:tensor, v:loss-curve, py:keepdims, py:dim, py:torch-tensor, py:torch-randn, py:nn-module, py:nn-linear, py:torch-relu, py:forward-method, py:init-method, py:inheritance, py:super, py:class, py:manual-seed, py:no-grad, py:slicing, py:def, py:return, py:import, py:print, py:comment, py:underscore-name, py:with, q:predict, q:choice, q:exercise-with-check, q:run-cell]
+  mentions: [c:transformer]
+  ladder: [torch]
+  needs: any
+
+- id: nn-residual
+  title: "Residual connections"
+  level: gevorderd
+  module: training
+  idea: "Add a layer's input to its output, so the gradient has a direct path backwards and very deep networks still train."
+  covers: [residuals-embeddings-en-conditioning#0]
+  requires: [nn-vanishing-exploding, nn-batchnorm]
+  introduces: [c:residual-connection]
+  uses: [c:vanishing-gradient, c:exploding-gradient, c:saturation, c:gradient, c:backward-pass, c:forward-pass, c:chain-rule, c:derivative, c:sigmoid, c:sigmoid-slope, c:relu, c:layer, c:hidden-layer, c:neuron, c:mlp, c:weight, c:loss, c:learning-rate, c:epoch, c:training, c:test-set, c:accuracy, c:residual, v:log-scale, s:partial, s:d-derivative, py:nn-module, py:nn-linear, py:torch-relu, py:forward-method, py:init-method, py:inheritance, py:super, py:class, py:manual-seed, py:torch-randn, py:for, py:range, py:reversed, py:list, py:append, py:indexing, py:len, py:def, py:return, py:import, py:import-as, py:print, py:comment, py:underscore-name, q:predict, q:choice, q:exercise-with-check, q:run-cell]
+  warns: [residual]
+  ladder: [torch]
+  needs: any
+
+- id: opt-momentum
+  title: "Momentum"
+  level: gevorderd
+  module: training
+  idea: "Momentum steps by a running sum of the gradients, so steps speed up along a steady slope while gradients that keep changing sign, as across a narrow valley, largely cancel."
+  covers: [optimizers#1]
+  requires: [torch-optimizer, prob-expectation, ml-feature-scaling]
+  introduces: [c:momentum, c:exponential-moving-average, py:zeros-like, s:beta-momentum]
+  uses: [c:gradient-descent, c:gradient, c:learning-rate, c:loss, c:optimizer, c:update-step, c:model-parameter, c:weight, c:feature-scaling, c:standardization, c:expected-value, c:probability, c:partial-derivative, v:contour-plot, s:eta, s:w, s:partial, py:torch-optim, py:optimizer-step, py:zero-grad, py:no-grad, py:backward, py:grad-attribute, py:requires-grad, py:torch-tensor, py:matmul-operator, py:np-array, py:np-zeros, py:class, py:init-method, py:self, py:method, py:with, py:none, py:augmented-assignment, py:for, py:range, py:len, py:indexing, py:list, py:append, py:if, py:def, py:return, py:import, py:import-as, py:print, py:comment, py:underscore-name, q:predict, q:choice, q:exercise-with-check, q:run-cell]
+  ladder: [numpy, torch]
+  needs: any
+
+- id: opt-adam
+  title: "Adam"
+  level: gevorderd
+  module: training
+  idea: "Adam also keeps a running average of each parameter's squared gradient and divides the step by its root, so every parameter gets a step size that fits it."
+  covers: [optimizers#1]
+  requires: [opt-momentum, torch-mlp-digits, math-log-scales]
+  introduces: [c:adam, s:beta-coeff]
+  uses: [c:momentum, c:exponential-moving-average, c:gradient-descent, c:gradient, c:learning-rate, c:optimizer, c:update-step, c:model-parameter, c:weight, c:layer, c:hidden-layer, c:mlp, c:epoch, c:test-set, c:accuracy, c:feature-scaling, c:mean, c:standard-deviation, s:eta, s:w, v:log-scale, py:torch-optim, py:optimizer-step, py:zero-grad, py:no-grad, py:backward, py:grad-attribute, py:requires-grad, py:torch-tensor, py:zeros-like, py:matmul-operator, py:np-array, py:np-zeros, py:class, py:init-method, py:self, py:method, py:with, py:none, py:augmented-assignment, py:for, py:range, py:len, py:indexing, py:list, py:append, py:def, py:return, py:import, py:import-as, py:print, py:comment, py:underscore-name, q:predict, q:choice, q:exercise-with-check, q:run-cell]
+  mentions: [s:epsilon, c:transformer, c:l2-regularization, py:scientific-notation]
+  ladder: [numpy, torch]
+  needs: any
+
+- id: opt-adamw
+  title: "AdamW: weight decay done right"
+  level: gevorderd
+  module: training
+  idea: "A weight penalty in the loss gets rescaled by Adam like any gradient; AdamW shrinks the weights directly instead, which is why it is the default for transformers."
+  covers: [optimizers#1]
+  requires: [opt-adam, ml-regularization, nn-layernorm]
+  introduces: [c:adamw, c:decoupled-weight-decay, c:parameter-group]
+  uses: [c:weight-decay, c:adam, c:l2-regularization, c:regularization, c:momentum, c:exponential-moving-average, c:gradient, c:learning-rate, c:optimizer, c:update-step, c:weight, c:bias-term, c:model-parameter, c:batchnorm, c:layernorm, s:lambda-reg, s:eta, s:w, s:beta-coeff, s:gamma-scale, s:beta-shift, py:torch-optim, py:nn-module, py:nn-linear, py:dict, py:list, py:append, py:for, py:range, py:if, py:np-array, py:np-zeros, py:def, py:return, py:import, py:import-as, py:print, py:comment, py:underscore-name, q:predict, q:choice, q:exercise-with-check, q:run-cell]
+  mentions: [c:transformer]
+  ladder: [torch]
+  needs: any
+
+- id: opt-lr-schedules
+  title: "Learning-rate schedules"
+  level: gevorderd
+  module: training
+  idea: "Start with a short warmup, then let the learning rate decay, for example along a cosine."
+  covers: [learning-rate-schedules#0, learning-rate-schedules#1, learning-rate-schedules#2]
+  requires: [opt-adamw, torch-loss-curves]
+  introduces: [c:lr-schedule, c:warmup, c:cosine-decay]
+  uses: [c:learning-rate, c:adamw, c:adam, c:parameter-group, c:residual-connection, c:dead-neuron, c:relu, c:sgd, c:optimizer, c:update-step, c:mini-batch, c:noise, c:gradient, c:weight, c:loss, c:training, c:epoch, c:mlp, c:test-set, c:accuracy, c:overfitting, c:regularization, c:validation-set, c:weight-decay, s:eta, s:lambda-reg, py:math-module, py:torch-optim, py:optimizer-step, py:class, py:init-method, py:self, py:method, py:dict, py:list, py:for, py:if, py:def, py:return, py:import, py:print, py:comment, py:underscore-name, v:loss-curve, q:predict, q:choice, q:exercise-with-check, q:run-cell]
+  mentions: [c:transformer]
+  ladder: [torch]
+  needs: any
+
+- id: opt-gradient-clipping
+  title: "Gradient clipping"
+  level: gevorderd
+  module: training
+  idea: "If the gradient's norm is above a limit, scale it down; one bad batch can then no longer wreck training."
+  covers: [optimizers#4]
+  requires: [nn-vanishing-exploding, opt-adam, math-norms-cosine]
+  introduces: [c:gradient-clipping, s:clip-norm, py:clip-grad-norm]
+  uses: [c:norm, c:cosine-similarity, c:vector, c:gradient, c:exploding-gradient, c:layer, c:weight, c:bias-term, c:mini-batch, c:epoch, c:loss, c:training, c:learning-rate, c:sgd, c:adam, c:optimizer, c:update-step, c:mlp, c:test-set, c:accuracy, c:model-parameter, s:eta, v:log-scale, v:loss-curve, py:torch-optim, py:optimizer-step, py:zero-grad, py:backward, py:item, py:nn-linear, py:np-array, py:np-sum, py:list, py:for, py:if, py:def, py:return, py:import, py:import-as, py:print, py:comment, py:underscore-name, q:predict, q:choice, q:exercise-with-check, q:run-cell]
+  mentions: [c:language-model, c:overfitting, c:dropout]
+  ladder: [torch]
+  needs: any
+
+- id: nn-dropout
+  title: "Dropout"
+  level: gevorderd
+  module: training
+  idea: "During training, randomly switch off part of the neurons, so the network cannot lean on any single one."
+  covers: [regularisatie#2]
+  requires: [ml-regularization, torch-eval-mode, torch-mlp-digits]
+  introduces: [c:dropout, c:dropout-mask, s:p-dropout, py:nn-dropout, py:torch-rand-like]
+  uses: [c:overfitting, c:regularization, c:l2-regularization, c:noise, c:neuron, c:hidden-layer, c:layer, c:mlp, c:relu, c:activation-function, c:weight, c:training, c:epoch, c:mini-batch, c:sgd, c:learning-rate, c:loss, c:test-set, c:train-set, c:forward-pass, c:tensor, c:module, c:inference, py:model-eval, py:model-train, py:nn-module, py:nn-linear, py:torch-relu, py:init-method, py:forward-method, py:inheritance, py:super, py:class, py:self, py:manual-seed, py:torch-tensor, py:np-array, py:np-zeros, py:np-random-generator, py:if, py:bool, py:for, py:range, py:def, py:return, py:import, py:import-as, py:print, py:comment, py:underscore-name, q:predict, q:choice, q:exercise-with-check, q:run-cell]
+  mentions: [c:transformer, c:language-model, c:pretrained-model]
+  ladder: [torch]
+  needs: any
+
+- id: nn-embedding-layer
+  title: "Embedding layers"
+  level: gevorderd
+  module: training
+  idea: "An embedding layer is a trainable lookup table: each id gets a vector, and training moves similar things close together."
+  covers: [residuals-embeddings-en-conditioning#1, token-embeddings-en-output-head#0]
+  requires: [torch-nn-module, ml-embeddings-idea, lm-bigram-neural, math-log-scales]
+  introduces: [c:embedding-layer, py:nn-embedding, c:embedding-matrix, s:vocab]
+  uses: [v:log-scale, c:embedding, c:one-hot, c:bigram, c:logit, c:loss, c:negative-log-likelihood, c:gradient, c:gradient-descent, c:learning-rate, c:backward-pass, c:model-parameter, c:cosine-similarity, c:layer, c:tensor, c:shape, c:language-model, c:optimizer, s:eta, py:nn-module, py:nn-linear, py:init-method, py:forward-method, py:inheritance, py:super, py:class, py:self, py:manual-seed, py:torch-tensor, py:backward, py:grad-attribute, py:np-array, py:np-zeros, py:np-indexing, py:matmul-operator, py:for, py:range, py:len, py:def, py:return, py:import, py:print, py:comment, py:underscore-name, q:predict, q:choice, q:exercise-with-check, q:run-cell]
+  mentions: [c:transformer, c:token, c:parameter-count, c:vocabulary]
+  ladder: [numpy, torch]
+  needs: any
+
+- id: nn-trainer
+  title: "A reusable training loop"
+  level: gevorderd
+  module: training
+  kind: project
+  project: nn
+  idea: "Turn your loop into a trainer with evaluation, logging, checkpoints, clipping, a schedule and gradient accumulation; every later project uses it."
+  covers: [d11-de-trainingslus#5, d11-de-trainingslus#6]
+  requires: [opt-lr-schedules, opt-gradient-clipping, torch-checkpoints, opt-adamw, nn-dropout]
+  introduces: [c:gradient-accumulation, py:modulo, py:or-operator, py:is-none]
+  uses: [c:gradient, c:mini-batch, c:batch-size, c:epoch, c:loss, c:cross-entropy, c:logit, c:shape, c:tensor, c:learning-rate, c:optimizer, c:sgd, c:adamw, c:warmup, c:cosine-decay, c:lr-schedule, c:gradient-clipping, c:norm, c:validation-set, c:test-set, c:accuracy, c:checkpoint, c:dropout, c:mlp, c:model-parameter, c:forward-pass, c:backward-pass, c:update-step, c:training-loop, v:loss-curve, py:torch-optim, py:optimizer-step, py:zero-grad, py:backward, py:item, py:nn-linear, py:no-grad, py:model-eval, py:model-train, py:torch-save, py:state-dict, py:clip-grad-norm, py:dataloader, py:manual-seed, py:torch-randn, py:slicing, py:abs, py:class, py:self, py:init-method, py:method, py:dict, py:list, py:append, py:none, py:with, py:math-module, py:float, py:comparison, py:len, py:for, py:range, py:if, py:def, py:return, py:import, py:import-as, py:print, py:comment, py:underscore-name, q:predict, q:choice, q:exercise-with-check, q:run-cell]
+  mentions: [c:batchnorm, c:language-model, c:vocabulary]
+  ladder: [torch]
+  needs: any
+
+- id: nn-deep-net-project
+  title: "Project: make a deep network train"
+  level: gevorderd
+  module: training
+  kind: project
+  project: nn
+  idea: "A 10-layer MLP on Fashion-MNIST fails at first; check that it can overfit one batch, then fix it step by step with initialization, normalization, residuals, AdamW and a schedule."
+  covers: [multilayer-perceptron#2]
+  requires: [nn-trainer, nn-batchnorm, nn-residual, nn-dropout]
+  introduces: [p:overfit-one-batch, py:nn-modulelist]
+  uses: [c:mlp, c:layer, c:hidden-layer, c:relu, c:initialization, c:he-init, c:batchnorm, c:residual-connection, c:vanishing-gradient, c:gradient, c:loss, c:cross-entropy, c:logit, c:mini-batch, c:epoch, c:sgd, c:adamw, c:warmup, c:cosine-decay, c:learning-rate, c:test-set, c:accuracy, c:seed, c:overfitting, c:model-parameter, c:training-loop, c:standardization, py:nn-module, py:nn-linear, py:nn-init, py:class, py:self, py:init-method, py:forward-method, py:super, py:torch-optim, py:optimizer-step, py:zero-grad, py:backward, py:item, py:manual-seed, py:list, py:append, py:for, py:range, py:len, py:if, py:bool, py:none, py:is-none, py:torch-relu, py:def, py:return, py:indexing, py:import, py:print, py:comment, py:underscore-name, q:predict, q:choice, q:exercise-with-check, q:run-cell]
+  mentions: [c:hyperparameter, p:lr-range-test]
+  ladder: [torch]
+  data: [fashion-mnist]
+  needs: any
+
+- id: nn-tuning-playbook
+  title: "A tuning playbook"
+  level: gevorderd
+  module: training
+  idea: "Find a good learning rate with a range test, then change one hyperparameter at a time in a small sweep."
+  covers: [generalisatie-trainingsdynamiek-en-hpo#3]
+  requires: [nn-trainer, opt-adam]
+  introduces: [p:lr-range-test, c:lr-range-test, c:hyperparameter-sweep]
+  uses: [c:learning-rate, c:hyperparameter, c:divergence, c:loss, c:validation-set, c:mini-batch, c:sgd, c:momentum, c:adam, c:exponential-moving-average, s:beta-coeff, c:epoch, c:mlp, v:log-scale, py:for, py:range, py:len, py:append, py:list, py:is-none, py:or-operator, py:def, py:return, py:print, py:comment, py:underscore-name, q:predict, q:choice, q:exercise-with-check, q:run-cell, py:if, py:comparison, py:none, py:tuple, py:arithmetic, c:gradient, c:overfitting, c:hidden-layer, c:neuron, c:model-parameter, c:batch-size, c:optimizer]
+  needs: any
+
+# ===================== gevorderd: building blocks, formally =====================
+- id: cnn-conv-formal
+  title: "Convolution in detail: kernel size, stride and padding"
+  level: gevorderd
+  module: building-blocks
+  idea: "Kernel size, stride and padding decide the output shape; stacking layers grows the receptive field."
+  covers: [convolutionele-netwerken#1]
+  requires: [cnn-convolution-idea]
+  introduces: [c:kernel-size, c:stride, c:padding, c:receptive-field, py:floor-division]
+  mentions: [c:hyperparameter]
+  uses: [c:convolution, c:filter, c:feature-map, c:locality, c:weight-sharing, c:layer, c:weight, c:shape, c:matrix, py:np-array, py:tuple, py:np-zeros, py:np-indexing, py:slicing, py:np-sum, py:for, py:range, py:len, py:def, py:return, py:print, py:comment, py:underscore-name, py:import-as, py:arithmetic, q:predict, q:choice, q:exercise-with-check, q:run-cell]
+  warns: [kernel]
+  ladder: [numpy]
+  needs: any
+
+- id: cnn-channels-pooling
+  title: "Channels and pooling"
+  level: gevorderd
+  module: building-blocks
+  idea: "Each filter makes its own output channel, and pooling shrinks the image while keeping the strongest signals."
+  covers: [convolutionele-netwerken#1]
+  requires: [cnn-conv-formal]
+  introduces: [c:output-channel, c:pooling]
+  uses: [c:channel, c:convolution, c:filter, c:feature-map, c:kernel-size, c:stride, c:padding, c:weight, c:bias-term, c:layer, c:shape, py:np-array, py:np-zeros, py:np-indexing, py:slicing, py:np-sum, py:floor-division, py:for, py:range, py:len, py:def, py:return, py:print, py:comment, py:underscore-name, py:import-as, q:predict, q:choice, q:exercise-with-check, q:run-cell]
+  ladder: [numpy]
+  needs: any
+
+- id: cnn-conv-numpy
+  title: "Convolution as one big matrix multiplication"
+  level: gevorderd
+  module: building-blocks
+  idea: "Cut the image into patches (im2col) and a convolution becomes a single matrix multiplication, which is how GPUs compute it."
+  covers: [convolutionele-netwerken#6]
+  requires: [cnn-channels-pooling, math-matrix-multiply, ml-digits-linear]
+  introduces: [c:im2col, c:patch]
+  uses: [c:convolution, c:filter, c:channel, c:output-channel, c:kernel-size, c:stride, c:padding, c:weight, c:layer, c:shape, c:dot-product, c:matrix-multiplication, c:shape-rule, c:transpose, s:transpose-t, s:w-matrix, py:np-array, py:np-reshape, py:matmul-operator, py:np-indexing, py:slicing, py:list, py:append, py:for, py:range, py:len, py:def, py:return, py:print, py:comment, py:underscore-name, py:import-as, q:predict, q:choice, q:exercise-with-check, q:run-cell]
+  mentions: [c:gpu]
+  ladder: [numpy]
+  needs: any
+
+- id: cnn-pytorch
+  tak: beeld
+  title: "Project: your first CNN"
+  level: gevorderd
+  module: building-blocks
+  kind: project
+  project: cnn
+  idea: "A small CNN with nn.Conv2d beats your deep MLP on Fashion-MNIST with far fewer parameters; the Beeld branch continues this project."
+  covers: [beeldclassificatie#3]
+  requires: [cnn-conv-numpy, nn-deep-net-project]
+  introduces: [py:nn-conv2d, py:nn-maxpool2d, py:numel]
+  uses: [c:convolution, c:filter, c:channel, c:output-channel, c:feature-map, c:pooling, c:kernel-size, c:padding, c:receptive-field, c:im2col, c:patch, c:locality, c:weight-sharing, c:mlp, c:layer, c:relu, c:logit, c:softmax, c:cross-entropy, c:mini-batch, c:epoch, c:learning-rate, c:warmup, c:test-set, c:seed, c:model-parameter, c:weight, c:bias-term, c:shape, c:he-init, c:batchnorm, c:residual-connection, p:overfit-one-batch, py:nn-module, py:nn-linear, py:class, py:self, py:init-method, py:forward-method, py:super, py:manual-seed, py:tuple, py:for, py:len, py:def, py:return, py:print, py:comment, py:underscore-name, py:import, q:predict, q:choice, q:exercise-with-check, q:run-cell]
+  ladder: [torch]
+  data: [fashion-mnist]
+  needs: any
+
+- id: cnn-lenet
+  tak: beeld
+  title: "LeNet-5, the CNN that read checks"
+  level: gevorderd
+  module: building-blocks
+  kind: project
+  project: cnn
+  idea: "Rebuild LeNet-5, the network that read handwritten checks in the 1990s, and compare it with your own CNN: most later CNNs are the same blocks, stacked deeper."
+  covers: [d11-cnn-architecturen#0]
+  requires: [cnn-pytorch]
+  introduces: [c:lenet, py:nn-avgpool2d, py:torch-tanh]
+  uses: [c:convolution, c:filter, c:channel, c:output-channel, c:feature-map, c:pooling, c:kernel-size, c:padding, c:mlp, c:layer, c:relu, c:logit, c:softmax, c:cross-entropy, c:mini-batch, c:epoch, c:learning-rate, c:warmup, c:test-set, c:seed, c:model-parameter, c:weight, c:bias-term, c:shape, py:nn-conv2d, py:nn-maxpool2d, py:nn-module, py:nn-linear, py:class, py:self, py:init-method, py:forward-method, py:super, py:manual-seed, py:print, py:comment, py:underscore-name, py:import, q:predict, q:choice, q:exercise-with-check, q:run-cell]
+  mentions: [c:tanh]
+  ladder: [torch]
+  data: [fashion-mnist]
+  needs: any
+
+- id: cnn-vgg-blocks
+  tak: beeld
+  title: "VGG: deeper with small filters"
+  level: gevorderd
+  module: building-blocks
+  kind: project
+  project: cnn
+  idea: "Stacks of small 3×3 convolutions see as far as one large filter with fewer parameters; you build VGG blocks and measure what depth does: on small images it stops helping soon, and a plain network that is too deep stops learning."
+  covers: [d11-cnn-architecturen#1]
+  requires: [cnn-lenet]
+  introduces: [c:vgg-block, c:vgg]
+  uses: [c:convolution, c:filter, c:channel, c:output-channel, c:feature-map, c:pooling, c:kernel-size, c:padding, c:receptive-field, c:layer, c:relu, c:logit, c:mini-batch, c:epoch, c:learning-rate, c:warmup, c:test-set, c:seed, c:model-parameter, c:weight, c:bias-term, c:shape, c:he-init, c:residual-connection, c:lenet, py:nn-conv2d, py:nn-maxpool2d, py:nn-modulelist, py:nn-module, py:nn-linear, py:nn-init, py:class, py:self, py:init-method, py:forward-method, py:super, py:manual-seed, py:item, py:for, py:range, py:def, py:return, py:print, py:comment, py:underscore-name, py:import, q:predict, q:choice, q:exercise-with-check, q:run-cell]
+  ladder: [torch]
+  data: [fashion-mnist]
+  needs: any
+
+- id: cnn-resnet
+  tak: beeld
+  title: "ResNet: depth that keeps working"
+  level: gevorderd
+  module: building-blocks
+  kind: project
+  project: cnn
+  idea: "With residual connections a CNN can go much deeper: a small ResNet beats a plain network of the same depth on Fashion-MNIST."
+  covers: [d11-cnn-architecturen#1]
+  requires: [cnn-vgg-blocks, nn-residual]
+  introduces: [c:resnet, c:residual-block]
+  uses: [c:residual-connection, c:he-init, c:convolution, c:filter, c:channel, c:output-channel, c:feature-map, c:pooling, c:kernel-size, c:padding, c:stride, c:layer, c:relu, c:logit, c:gradient, c:batchnorm, c:mini-batch, c:epoch, c:learning-rate, c:warmup, c:test-set, c:seed, c:model-parameter, c:weight, c:bias-term, c:shape, c:vgg-block, c:vgg, py:nn-conv2d, py:nn-maxpool2d, py:nn-modulelist, py:nn-module, py:nn-linear, py:no-grad, py:class, py:self, py:init-method, py:forward-method, py:super, py:manual-seed, py:item, py:for, py:range, py:range-step, py:def, py:return, py:print, py:comment, py:underscore-name, py:import, q:predict, q:choice, q:exercise-with-check, q:run-cell]
+  mentions: [c:transformer]
+  ladder: [torch]
+  data: [fashion-mnist]
+  needs: any
+
+- id: rnn-vanilla
+  title: "A recurrent network and backprop through time"
+  level: gevorderd
+  module: building-blocks
+  idea: "Unroll the recurrent network over the sequence and backprop through all steps; long sequences make gradients vanish."
+  covers: [recurrente-netwerken#1]
+  requires: [rnn-memory-idea, nn-backprop-tensors, nn-vanishing-exploding]
+  introduces: [c:bptt]
+  uses: [c:recurrent-network, c:hidden-state, c:tanh, py:np-tanh, c:backward-pass, c:forward-pass, c:computational-graph, c:chain-rule, c:derivative, c:gradient, c:vanishing-gradient, c:exploding-gradient, c:activation-function, c:layer, c:weight, c:bias-term, c:loss, c:label, c:training, c:matrix, c:matrix-multiplication, c:elementwise-product, s:odot, s:partial, s:sigma-sum, s:h-hidden, s:x, s:b, py:math-module, py:import, py:torch-tensor, py:requires-grad, py:backward, py:grad-attribute, py:for, py:range, py:range-step, py:list, py:append, py:indexing, py:float, py:len, py:def, py:return, py:print, py:comment, py:underscore-name, q:predict, q:choice, q:exercise-with-check, q:run-cell]
+  ladder: [torch]
+  needs: any
+
+- id: rnn-lstm
+  title: "LSTM and GRU"
+  level: gevorderd
+  module: building-blocks
+  idea: "Gates decide what a recurrent cell keeps, forgets and outputs, which lets information survive over long sequences."
+  covers: [recurrente-netwerken#2]
+  requires: [rnn-vanilla, ml-sigmoid]
+  introduces: [c:lstm, c:gru, c:cell-state, c:gate, py:nn-lstm]
+  uses: [c:recurrent-network, c:hidden-state, c:bptt, c:training, c:probability, c:tanh, py:np-tanh, c:sigmoid, s:sigma-sigmoid, py:np-exp, c:elementwise-product, s:odot, c:gradient, c:vanishing-gradient, c:weight, c:bias-term, c:vector, c:matrix, c:shape, c:matrix-multiplication, py:matmul-operator, py:np-array, py:slicing, py:math-module, py:import, py:import-as, py:def, py:return, py:tuple, py:len, py:float, py:print, py:comment, py:underscore-name, s:h-hidden, s:x, s:b, q:predict, q:choice, q:exercise-with-check, q:run-cell]
+  mentions: [c:transformer]
+  ladder: [torch]
+  needs: any
+
+- id: attn-scores
+  title: "Attention weights from dot products"
+  level: gevorderd
+  module: building-blocks
+  idea: "Score every pair of positions with a dot product, turn each row of scores into weights with softmax, and take the weighted average."
+  covers: [attention-en-transformers#1]
+  requires: [attn-idea, math-matrix-multiply, num-floats-stability]
+  introduces: [c:attention-weights, c:attention-score]
+  uses: [c:attention, c:transformer, c:embedding, c:dot-product, c:matrix-multiplication, c:shape-rule, c:transpose, c:softmax, c:overflow, c:underflow, c:log-sum-exp, c:axis, c:broadcasting, c:matrix, c:shape, c:vector, s:x-matrix, s:softmax, s:d-features, py:keyword-argument, py:min-max, py:nested-list, p:subtract-max-before-exp, s:transpose-t, s:exp, s:sigma-sum, py:np-array, py:matmul-operator, py:keepdims, py:np-sum, py:np-indexing, py:def, py:return, py:print, py:comment, py:underscore-name, py:import-as, q:predict, q:choice, q:exercise-with-check, q:run-cell]
+  mentions: [c:token, c:language-model, c:layer]
+  ladder: [numpy]
+  needs: any
+
+- id: attn-qkv
+  title: "Queries, keys and values"
+  level: gevorderd
+  module: building-blocks
+  idea: "Three learned projections give each position a query (what I look for), a key (what I offer) and a value (what I pass on)."
+  covers: [attention-en-transformers#1]
+  requires: [attn-scores, math-transpose, torch-nn-module]
+  introduces: [c:query, c:key, c:value, c:self-attention, py:torch-softmax]
+  uses: [c:attention, c:attention-weights, c:attention-score, c:embedding, c:dot-product, c:matrix-multiplication, c:transpose, c:softmax, c:weight, c:layer, c:shape, c:vector, c:matrix, s:x-matrix, s:w-matrix, s:transpose-t, py:np-array, py:matmul-operator, py:keepdims, py:np-sum, py:nn-module, py:nn-linear, py:class, py:self, py:init-method, py:forward-method, py:super, py:manual-seed, py:torch-tensor, py:dim, py:dict, py:keyword-argument, py:tuple, py:def, py:return, py:print, py:comment, py:underscore-name, py:import, py:import-as, q:predict, q:choice, q:exercise-with-check, q:run-cell]
+  mentions: [c:token, c:language-model]
+  warns: [key, value]
+  ladder: [numpy, torch]
+  needs: any
+
+- id: attn-scale
+  title: "Scaling the scores"
+  level: gevorderd
+  module: building-blocks
+  idea: "Dot products grow with the key size; dividing the scores by its square root keeps softmax from saturating, so the gradients keep flowing."
+  covers: [attention-en-transformers#1]
+  requires: [attn-qkv, prob-expectation, nn-vanishing-exploding]
+  introduces: [c:scaled-dot-product-attention]
+  uses: [c:saturation, c:variance, c:standard-deviation, c:expected-value, c:gradient, c:vanishing-gradient, c:attention, c:attention-weights, c:attention-score, c:query, c:key, c:value, c:self-attention, c:dot-product, c:softmax, c:sigmoid, c:transformer, c:one-hot, c:seed, s:transpose-t, py:np-array, py:np-random-generator, py:np-std, py:np-sum, py:keepdims, py:matmul-operator, py:math-module, py:torch-tensor, py:torch-softmax, py:dim, py:keyword-argument, py:tuple, py:def, py:return, py:print, py:comment, py:underscore-name, py:import, py:import-as, q:predict, q:choice, q:exercise-with-check, q:run-cell]
+  mentions: [c:language-model]
+  ladder: [numpy, torch]
+  needs: any
+
+- id: attn-causal-mask
+  title: "The causal mask"
+  level: gevorderd
+  module: building-blocks
+  idea: "A language model may not peek at the future: setting the scores of later positions to minus infinity before softmax gives them weight zero."
+  covers: [decoder-only-transformer-in-detail#1]
+  requires: [attn-scale, lm-what-is-a-language-model]
+  introduces: [c:causal-mask, py:torch-tril, py:masked-fill]
+  uses: [c:language-model, c:next-token-prediction, c:token, c:attention, c:attention-weights, c:attention-score, c:scaled-dot-product-attention, c:query, c:key, c:value, c:self-attention, c:softmax, c:transformer, c:saturation, c:matrix, c:shape, py:torch-tensor, py:torch-softmax, py:boolean-mask, py:comparison, py:bool, py:float, py:math-module, py:matmul-operator, py:dim, py:tuple, py:def, py:return, py:print, py:comment, py:underscore-name, py:import, q:predict, q:choice, q:exercise-with-check, q:run-cell]
+  mentions: [c:decoder, c:gpt]
+  ladder: [torch]
+  needs: any
+
+- id: attn-multi-head
+  title: "Multi-head attention"
+  level: gevorderd
+  module: building-blocks
+  idea: "Several smaller attention heads in parallel can each look for a different kind of relation."
+  covers: [attention-en-transformers#2]
+  requires: [attn-causal-mask]
+  introduces: [c:attention-head, c:multi-head-attention, c:output-projection, py:torch-cat]
+  uses: [c:causal-mask, c:scaled-dot-product-attention, c:self-attention, c:attention, c:attention-weights, c:attention-score, c:query, c:key, c:value, c:softmax, c:transformer, c:matrix, c:shape, c:weight, c:bias-term, py:torch-tensor, py:torch-softmax, py:torch-tril, py:masked-fill, py:nn-module, py:nn-linear, py:class, py:self, py:init-method, py:forward-method, py:super, py:manual-seed, py:slicing, py:list, py:append, py:for, py:range, py:int, py:comprehension, py:math-module, py:matmul-operator, py:dim, py:keyword-argument, py:tuple, py:def, py:return, py:print, py:comment, py:underscore-name, py:import, q:predict, q:choice, q:exercise-with-check, q:run-cell]
+  ladder: [torch]
+  needs: any
+
+- id: attn-positions
+  title: "Telling attention where things are"
+  level: gevorderd
+  module: building-blocks
+  idea: "Attention by itself ignores order; adding a position embedding, fixed sinusoids or learned vectors, gives it back."
+  covers: [attention-en-transformers#3, positionele-codering#0, positionele-codering#1]
+  requires: [attn-multi-head, nn-embedding-layer, lm-tokens-outside]
+  introduces: [c:positional-encoding, c:sinusoidal-positional-encoding, c:learned-position-embedding, py:torch-arange]
+  uses: [c:attention, c:multi-head-attention, c:self-attention, c:causal-mask, c:output-projection, c:scaled-dot-product-attention, c:softmax, c:embedding, c:embedding-layer, c:token, c:token-id, c:vocabulary, c:transformer, c:model-parameter, c:shape, c:seed, py:nn-embedding, py:nn-module, py:class, py:self, py:init-method, py:forward-method, py:super, py:torch-tensor, py:torch-softmax, py:no-grad, py:manual-seed, py:len, py:np-zeros, py:math-module, py:range, py:range-step, py:with, py:np-indexing, py:arithmetic, py:list, py:for, py:matmul-operator, py:dim, py:keyword-argument, py:def, py:return, py:print, py:comment, py:underscore-name, py:import, q:predict, q:choice, q:exercise-with-check, q:run-cell]
+  mentions: [c:gpt, c:context-window, c:layernorm, c:residual-connection, c:transformer-block, c:mlp]
+  ladder: [torch]
+  needs: any
+
+- id: attn-transformer-block
+  title: "The transformer block"
+  level: gevorderd
+  module: building-blocks
+  kind: project
+  project: llm
+  idea: "Attention and an MLP, each with layer norm and a residual connection, form one block; the residual stream runs through all blocks."
+  covers: [attention-en-transformers#4]
+  requires: [attn-positions, nn-layernorm, nn-residual, nn-hidden-layer, lm-mlp-context]
+  introduces: [c:transformer-block, c:residual-stream, py:torch-transpose]
+  uses: [c:multi-head-attention, c:attention-head, c:causal-mask, c:output-projection, c:scaled-dot-product-attention, c:self-attention, c:attention, c:attention-score, c:attention-weights, c:query, c:key, c:value, c:softmax, c:positional-encoding, c:learned-position-embedding, c:layernorm, c:pre-norm, c:post-norm, c:residual-connection, c:mlp, c:relu, c:hidden-layer, c:mini-batch, c:shape, c:matrix, c:transpose, c:model-parameter, c:weight, c:bias-term, c:transformer, c:token, c:embedding, c:seed, py:nn-module, py:nn-linear, py:torch-relu, py:torch-softmax, py:torch-cat, py:torch-tril, py:masked-fill, py:torch-randn, py:torch-tensor, py:class, py:self, py:init-method, py:forward-method, py:super, py:manual-seed, py:no-grad, py:with, py:slicing, py:list, py:append, py:for, py:range, py:int, py:math-module, py:matmul-operator, py:dim, py:keyword-argument, py:tuple, py:def, py:return, py:print, py:comment, py:underscore-name, py:import, q:predict, q:choice, q:exercise-with-check, q:run-cell]
+  mentions: [c:gpt, c:gelu, c:tokenizer]
+  ladder: [torch]
+  needs: any
+
+# ===================== expert =====================
+- id: math-complex-rotation
+  title: "Rotating vectors and complex numbers"
+  level: expert
+  module: math-formal
+  idea: "Rotating a 2D vector is multiplying by a complex number of length 1, e to the power i times the angle."
+  covers: [complexe-getallen#0, complexe-getallen#1, complexe-getallen#2]
+  requires: [math-transpose, math-exp-log]
+  introduces: [c:complex-number, c:rotation, c:euler-formula, c:complex-plane, c:polar-form, c:complex-conjugate, c:rotation-matrix, c:root-of-unity, c:conjugate-transpose, s:imaginary-unit, py:complex, py:np-angle, py:np-conj, py:np-sin-cos, py:slice-step]
+  uses: [c:matrix, c:transpose, s:transpose-t, c:vector, c:dot-product, c:matrix-multiplication, s:exp, py:np-exp, py:np-dot, py:math-module, py:np-array, py:slicing, py:for, py:list, py:append, py:def, py:return, py:import-as, py:print, py:comment, q:predict, q:choice, q:explain, q:exercise-with-check, q:run-cell]
+  mentions: [c:query, c:key, c:token, c:language-model]
+  ladder: [python, numpy]
+  needs: any
+
+- id: llm-rmsnorm
+  title: "RMSNorm"
+  level: expert
+  module: modern-llm
+  idea: "RMSNorm drops the mean subtraction of layer norm and only rescales; it is cheaper and works as well in LLMs."
+  covers: [normalisatielagen#2]
+  requires: [nn-layernorm, gpt-assemble]
+  introduces: [c:rmsnorm, c:root-mean-square]
+  uses: [c:layernorm, c:pre-norm, c:residual-stream, c:gpt, c:transformer-block, c:attention, c:mlp, c:output-head, c:feature, c:mean, c:variance, c:standard-deviation, c:bias-term, c:model-parameter, c:validation-set, c:mini-batch, c:token, c:softmax, s:gamma-scale, s:beta-shift, s:epsilon, py:nn-module, py:nn-parameter, py:keepdim, py:nn-linear, py:torch-randn, py:manual-seed, py:class, py:init-method, py:self, py:def, py:return, py:print, py:comment, py:underscore-name, py:import, q:predict, q:choice, q:explain, q:exercise-with-check, q:run-cell]
+  mentions: [c:gpu-kernel]
+  ladder: [torch]
+  needs: any

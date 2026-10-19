@@ -1,0 +1,28 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: start-your-own-assistant
+minutes: 12
+title:
+  en: "Learning with your own AI assistant"
+  nl: "Leren met je eigen AI-assistent"
+goal:
+  en: "ask your own AI assistant for help that keeps the thinking with you, and let the lesson's check decide whether your answer is right."
+  nl: "je eigen AI-assistent om hulp vragen waarbij jij blijft denken, en de check van de les laten beslissen of je antwoord goed is."
+summary:
+  - en: "Open your assistant in the course folder, or tell it which lesson and exercise you are on. AGENTS.md tells it how to help you without giving the answers away."
+    nl: "Open je assistent in de map van de course, of zeg bij welke les en oefening je bent. AGENTS.md vertelt hem hoe hij je helpt zonder de antwoorden voor te zeggen."
+  - en: "Ask for an example, a hint or a question back, not for the answer: then the last step stays yours."
+    nl: "Vraag om een voorbeeld, een hint of een vraag terug, niet om het antwoord: dan blijft de laatste stap van jou."
+  - en: "Check what it says, and let the check in the lesson decide whether your answer is right."
+    nl: "Controleer wat hij zegt, en laat de check in de les beslissen of je antwoord goed is."
+can_now:
+  - en: "ask an assistant for help that keeps the thinking with you"
+    nl: "een assistent om hulp vragen waarbij jij blijft denken"
+    by: ask-kinds
+  - en: "go by the check when an assistant says something else"
+    nl: "op de check afgaan als een assistent iets anders zegt"
+    by: trust-check
+  - en: "get an assistant to explain with only what you have learned"
+    nl: "een assistent laten uitleggen met alleen wat je al kent"
+    by: new-word

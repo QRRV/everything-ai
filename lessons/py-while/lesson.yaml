@@ -1,0 +1,28 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: py-while
+minutes: 15
+title:
+  en: "Repeating until something happens: while"
+  nl: "Herhalen tot er iets gebeurt: while"
+goal:
+  en: "repeat code with `while` as long as a condition is `True`, make sure the loop stops, and stop a loop early with `break`."
+  nl: "code herhalen met `while` zolang een voorwaarde `True` is, zorgen dat de loop stopt, en een loop eerder stoppen met `break`."
+summary:
+  - en: "`while condition:` runs its indented lines again and again, and checks the condition before every round."
+    nl: "`while voorwaarde:` voert zijn ingesprongen regels steeds opnieuw uit, en controleert de voorwaarde vóór elke ronde."
+  - en: "Something in the loop must change what the condition looks at, or the loop never stops."
+    nl: "Iets in de loop moet veranderen waar de voorwaarde naar kijkt, anders stopt de loop nooit."
+  - en: "`break`, under an `if`, stops a loop at once, also a `for` loop; the program goes on after the loop."
+    nl: "`break`, onder een `if`, stopt een loop meteen, ook een `for`-loop; het programma gaat verder na de loop."
+can_now:
+  - en: "repeat until a value is reached, with `while`"
+    nl: "herhalen tot een waarde bereikt is, met `while`"
+    by: double
+  - en: "say what a loop with `break` shows"
+    nl: "zeggen wat een loop met `break` laat zien"
+    by: break
+  - en: "stop a loop at the first item that fits, with `break`"
+    nl: "een loop stoppen bij het eerste item dat past, met `break`"
+    by: first-long

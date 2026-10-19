@@ -1,0 +1,28 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: torch-checkpoints
+minutes: 25
+title:
+  en: "Saving and loading a model"
+  nl: "Een model opslaan en laden"
+goal:
+  en: "save the parameters of a model with `torch.save(model.state_dict(), path)`, load them with `load_state_dict`, and keep the model of the best epoch while training goes on."
+  nl: "de parameters van een model opslaan met `torch.save(model.state_dict(), path)`, ze laden met `load_state_dict`, en het model van de beste epoch bewaren terwijl het trainen doorgaat."
+summary:
+  - en: "`model.state_dict()` is a dictionary with every parameter by name; `torch.save` writes it to a file and `torch.load` reads it back."
+    nl: "`model.state_dict()` is een dictionary met elke parameter per naam; `torch.save` schrijft hem naar een bestand en `torch.load` leest hem terug."
+  - en: "`load_state_dict` copies the tensors into a model of the same class and sizes; the code of the class stays in your own files."
+    nl: "`load_state_dict` kopieert de tensors naar een model van dezelfde class en grootte; de code van de class blijft in je eigen bestanden."
+  - en: "A state_dict holds the model's own tensors, not a copy: to keep one moment, write it to a file. A checkpoint to train on later also holds the epoch and `opt.state_dict()`."
+    nl: "Een state_dict bevat de eigen tensors van het model, geen kopie: schrijf hem naar een bestand om één moment te bewaren. Een checkpoint om later verder te trainen bevat ook de epoch en `opt.state_dict()`."
+can_now:
+  - en: "say what a saved state_dict holds, and what it does not"
+    nl: "zeggen wat een opgeslagen state_dict bevat, en wat niet"
+    by: what-saved
+  - en: "keep the parameters of the best epoch in a file and load them back"
+    nl: "de parameters van de beste epoch in een bestand bewaren en ze weer laden"
+    by: best-epoch
+  - en: "say what goes into a checkpoint to train on later"
+    nl: "zeggen wat er in een checkpoint hoort om later verder te trainen"
+    by: checkpoint

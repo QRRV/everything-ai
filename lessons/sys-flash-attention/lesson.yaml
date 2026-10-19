@@ -1,0 +1,35 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: sys-flash-attention
+minutes: 35
+title:
+  en: "Online softmax and FlashAttention"
+  nl: "Online softmax en FlashAttention"
+goal:
+  en: "work out attention a block of keys at a time with an online softmax, merge two partial results, and explain why FlashAttention is faster."
+  nl: "attention uitrekenen met één block keys per keer en een online softmax, twee deeluitkomsten samenvoegen, en uitleggen waarom FlashAttention sneller is."
+summary:
+  - en: "An online softmax keeps a running maximum m, a running sum ℓ of e^(s − m) and a running output o; when a block brings a larger maximum, ℓ and o are multiplied by e^(m − m')."
+    nl: "Een online softmax houdt een lopend maximum m bij, een lopende som ℓ van e^(s − m) en een lopende output o; als een block een groter maximum meebrengt, worden ℓ en o vermenigvuldigd met e^(m − m')."
+  - en: "FlashAttention does this in one fused kernel with blocks in shared memory: the n × n score matrix never reaches GPU memory, and causal blocks above the diagonal are skipped."
+    nl: "FlashAttention doet dit in één fused kernel met blocks in shared memory: de n × n-matrix met scores komt nooit in het GPU-geheugen, en causale blocks boven de diagonaal worden overgeslagen."
+  - en: "Two partial states merge by rescaling both to the larger maximum; without a mask, FlashAttention computes as much as stored attention, and is faster because it moves less data."
+    nl: "Twee deelstates worden samengevoegd door ze allebei naar het grootste maximum te schalen; zonder mask rekent FlashAttention evenveel als bewaarde attention, en is het sneller omdat het minder data verplaatst."
+can_now:
+  - en: "write attention for one query with an online softmax"
+    nl: "attention voor één query schrijven met een online softmax"
+    by: online-attention
+  - en: "merge two partial results of an online softmax"
+    nl: "twee deeluitkomsten van een online softmax samenvoegen"
+    by: merge
+  - en: "say why FlashAttention is faster"
+    nl: "zeggen waarom FlashAttention sneller is"
+    by: why-faster
+further_reading:
+  - en: "Maxim Milakov and Natalia Gimelshein (2018), *Online normalizer calculation for softmax*, arXiv:1805.02867"
+    nl: "Maxim Milakov en Natalia Gimelshein (2018), *Online normalizer calculation for softmax*, arXiv:1805.02867"
+  - en: "Tri Dao, Daniel Y. Fu, Stefano Ermon, Atri Rudra and Christopher Ré (2022), *FlashAttention: Fast and Memory-Efficient Exact Attention with IO-Awareness*, NeurIPS 2022, arXiv:2205.14135"
+    nl: "Tri Dao, Daniel Y. Fu, Stefano Ermon, Atri Rudra en Christopher Ré (2022), *FlashAttention: Fast and Memory-Efficient Exact Attention with IO-Awareness*, NeurIPS 2022, arXiv:2205.14135"
+  - en: "Tri Dao (2023), *FlashAttention-2: Faster Attention with Better Parallelism and Work Partitioning*, arXiv:2307.08691"
+    nl: "Tri Dao (2023), *FlashAttention-2: Faster Attention with Better Parallelism and Work Partitioning*, arXiv:2307.08691"

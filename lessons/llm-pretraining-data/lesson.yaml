@@ -1,0 +1,36 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: llm-pretraining-data
+minutes: 30
+title:
+  en: "Where pretraining data comes from"
+  nl: "Waar de data voor pretraining vandaan komt"
+goal:
+  en: "say what a pretraining corpus is made of, what that decides about a model, and which texts may go into a model you share."
+  nl: "zeggen waaruit een pretraining corpus bestaat, wat dat over een model beslist, en welke teksten in een model mogen dat je deelt."
+summary:
+  - en: "A pretraining corpus joins many sources: web pages from Common Crawl, by far the most, then code, papers, books, encyclopedias, forums and text written by models. In Dolma, web pages are 81% of 3 trillion tokens."
+    nl: "Een pretraining corpus voegt veel bronnen samen: webpagina's uit Common Crawl, verreweg het meest, dan code, papers, boeken, encyclopedieën, forums en tekst die modellen schreven. In Dolma zijn webpagina's 81% van 3 biljoen tokens."
+  - en: "A model knows what is in its corpus, and its sources decide whether you may share it: is the text itself open, who wrote it, was it copied lawfully, and did its maker opt out?"
+    nl: "Een model weet wat in zijn corpus staat, en zijn bronnen beslissen of je het mag delen: is de tekst zelf open, wie schreef hem, is hij rechtmatig gekopieerd, en gaf de maker een opt-out?"
+  - en: "Open weights are not open source: open-source AI also gives its code and enough information about its data to build a similar model, under terms that let anyone use, study, change and share it."
+    nl: "Open weights zijn geen open source: open-source AI geeft ook zijn code en genoeg informatie over zijn data om een vergelijkbaar model te bouwen, onder voorwaarden die iedereen laten gebruiken, bestuderen, aanpassen en delen."
+can_now:
+  - en: "decide which texts may go into a model you share"
+    nl: "beslissen welke teksten in een model mogen dat je deelt"
+    by: where
+  - en: "work out how much of a corpus falls under each license"
+    nl: "uitrekenen hoeveel van een corpus onder elke licentie valt"
+    by: by-license
+  - en: "tell open weights from open-source AI"
+    nl: "open weights onderscheiden van open-source AI"
+    by: open-weights
+  - en: "say what an opt-out means for text and data mining in the EU"
+    nl: "zeggen wat een opt-out betekent voor tekst- en datamining in de EU"
+    by: opt-out
+further_reading:
+  - en: "Luca Soldaini and others (2024), *Dolma: an Open Corpus of Three Trillion Tokens for Language Model Pretraining Research*, ACL 2024"
+    nl: "Luca Soldaini en anderen (2024), *Dolma: an Open Corpus of Three Trillion Tokens for Language Model Pretraining Research*, ACL 2024"
+  - en: "Guilherme Penedo and others (2024), *The FineWeb Datasets: Decanting the Web for the Finest Text Data at Scale*, NeurIPS 2024"
+    nl: "Guilherme Penedo en anderen (2024), *The FineWeb Datasets: Decanting the Web for the Finest Text Data at Scale*, NeurIPS 2024"

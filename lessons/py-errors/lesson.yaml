@@ -1,0 +1,28 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: py-errors
+minutes: 15
+title:
+  en: "Reading error messages and finding bugs"
+  nl: "Foutmeldingen lezen en bugs vinden"
+goal:
+  en: "read a traceback from the bottom up, find the line and the kind of error, and find a bug without an error by testing small pieces."
+  nl: "een traceback van onder naar boven lezen, de regel en de soort fout vinden, en een bug zonder foutmelding vinden door kleine stukjes te testen."
+summary:
+  - en: "A traceback ends with the kind of error and Python's explanation; one step up is the line where it happened, and above that the call that led there."
+    nl: "Een traceback eindigt met de soort fout en de uitleg van Python; één stap hoger staat de regel waar het gebeurde, en daarboven de aanroep die ertoe leidde."
+  - en: "The line in a traceback is where Python noticed the problem; the mistake itself can be earlier. A `print` just above shows the values."
+    nl: "De regel in een traceback is waar Python het probleem merkte; de fout zelf kan eerder zitten. Een `print` net erboven laat de waarden zien."
+  - en: "No error does not mean right: test a function with small inputs whose answer you know, also unusual ones."
+    nl: "Geen foutmelding betekent niet dat het klopt: test een functie met kleine invoer waarvan je het antwoord weet, ook ongewone."
+can_now:
+  - en: "fix a bug with the help of a traceback"
+    nl: "een bug oplossen met behulp van een traceback"
+    by: total
+  - en: "say what went wrong from the last line of a traceback"
+    nl: "aan de laatste regel van een traceback zien wat er misging"
+    by: traceback
+  - en: "find a bug without an error by testing small pieces"
+    nl: "een bug zonder foutmelding vinden door kleine stukjes te testen"
+    by: passed

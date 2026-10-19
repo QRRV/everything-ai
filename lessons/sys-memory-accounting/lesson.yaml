@@ -1,0 +1,31 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: sys-memory-accounting
+minutes: 30
+title:
+  en: "Where the memory goes"
+  nl: "Waar het geheugen heen gaat"
+goal:
+  en: "add up the memory of a training run, weights, gradients, optimizer state and activations, and know before you start whether it fits."
+  nl: "het geheugen van een trainingsrun optellen, weights, gradients, optimizer state en activations, en vóór je begint weten of hij past."
+summary:
+  - en: "Training keeps four parts in memory: the weights, their gradients, the optimizer state and the activations that the forward pass keeps for the backward pass."
+    nl: "Trainen houdt vier delen in het geheugen: de weights, hun gradients, de optimizer state en de activations die de forward pass bewaart voor de backward pass."
+  - en: "With AdamW the first three take 4 + 4 + 8 = 16 bytes per parameter, in FP32 and in mixed precision: 112 GB for 7 billion parameters."
+    nl: "Met AdamW nemen de eerste drie 4 + 4 + 8 = 16 bytes per parameter, in FP32 en in mixed precision: 112 GB voor 7 miljard parameters."
+  - en: "The activations grow with the batch, the window length, the number of layers and the width; `saved_tensors_hooks` measures them, and a smaller batch with gradient accumulation shrinks them."
+    nl: "De activations groeien met de batch, de lengte van het venster, het aantal layers en de breedte; `saved_tensors_hooks` meet ze, en een kleinere batch met gradient accumulation maakt ze kleiner."
+can_now:
+  - en: "add up the memory of a training run in GB"
+    nl: "het geheugen van een trainingsrun optellen in GB"
+    by: training-gb
+  - en: "say whether fully fine-tuning a model fits on a GPU"
+    nl: "zeggen of een model helemaal finetunen op een GPU past"
+    by: fine-tune
+  - en: "choose what to change when a run runs out of memory, and what it costs"
+    nl: "kiezen wat je verandert als een run geen geheugen meer heeft, en wat het kost"
+    by: out-of-memory
+further_reading:
+  - en: "Samyam Rajbhandari and others (2020), *ZeRO: Memory Optimizations Toward Training Trillion Parameter Models*, SC20: the 16 bytes per parameter of mixed-precision training with Adam, there counted as 2 + 2 + 12, with 16-bit weights and gradients and the FP32 copy in the optimizer state, and how to split them over GPUs"
+    nl: "Samyam Rajbhandari en anderen (2020), *ZeRO: Memory Optimizations Toward Training Trillion Parameter Models*, SC20: de 16 bytes per parameter van mixed-precision training met Adam, daar geteld als 2 + 2 + 12, met 16-bits weights en gradients en de FP32-kopie in de optimizer state, en hoe je ze over GPU's verdeelt"

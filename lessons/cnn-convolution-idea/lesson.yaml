@@ -1,0 +1,28 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: cnn-convolution-idea
+minutes: 25
+title:
+  en: "Convolution: one small filter slides over the image"
+  nl: "Convolutie: één klein filter schuift over de afbeelding"
+goal:
+  en: "slide a small filter over an image in NumPy, and read the feature map it makes, such as the edges of a handwritten digit."
+  nl: "een klein filter in NumPy over een afbeelding schuiven, en de feature map lezen die het maakt, zoals de randen van een handgeschreven cijfer."
+summary:
+  - en: "A convolution slides a filter of k by k over an image and, at every place, adds up the pixels times the weights: `(img[r:r + k, c:c + k] * K).sum()`."
+    nl: "Een convolutie schuift een filter van k bij k over een afbeelding en telt op elke plek de pixels keer de weights op: `(img[r:r + k, c:c + k] * K).sum()`."
+  - en: "An image of H by W gives a feature map of H - k + 1 by W - k + 1, large where the image looks like the filter."
+    nl: "Een afbeelding van H bij W geeft een feature map van H - k + 1 bij W - k + 1, groot waar de afbeelding op het filter lijkt."
+  - en: "Weight sharing: the same few weights at every place. Locality: each output depends only on a small piece of the image."
+    nl: "Weight sharing: dezelfde paar weights op elke plek. Locality: elke output hangt alleen af van een klein stuk van de afbeelding."
+can_now:
+  - en: "say how many weights a filter uses for a whole feature map"
+    nl: "zeggen hoeveel weights een filter voor een hele feature map gebruikt"
+    by: weights
+  - en: "write a convolution for a filter of any size"
+    nl: "een convolutie schrijven voor een filter van elke grootte"
+    by: convolve
+  - en: "choose a filter for an edge in a given direction"
+    nl: "een filter kiezen voor een rand in een gegeven richting"
+    by: which-filter

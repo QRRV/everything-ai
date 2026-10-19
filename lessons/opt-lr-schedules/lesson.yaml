@@ -1,0 +1,28 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: opt-lr-schedules
+minutes: 25
+title:
+  en: "Learning-rate schedules"
+  nl: "Learning-rate schedules"
+goal:
+  en: "start training with a short warmup and let the learning rate decay along a cosine, and see why a deep network that gets stuck at a fixed learning rate trains well with that schedule."
+  nl: "het trainen beginnen met een korte warmup en de learning rate langs een cosinus laten dalen, en zien waarom een diep netwerk dat bij een vaste learning rate vastloopt met die schedule goed traint."
+summary:
+  - en: "A learning-rate schedule changes the learning rate during training: small at the start, where the random weights make large steps dangerous, and small again at the end, where the noise of the mini-batches keeps the weights bouncing around the bottom."
+    nl: "Een learning-rate schedule verandert de learning rate tijdens het trainen: klein aan het begin, waar grote stappen vanaf willekeurige weights gevaarlijk zijn, en weer klein aan het eind, waar de ruis van de mini-batches de weights rond de bodem laat stuiteren."
+  - en: "Warmup climbs evenly from almost 0 to the peak, $\\eta_{\\max}(t + 1)/W$; cosine decay then falls to the minimum along half a cosine. A residual MLP that got stuck with AdamW at a learning rate of 0.03, reading 131 of 1,000 test digits, read 827 with warmup, and 869 with warmup and cosine decay."
+    nl: "Warmup loopt gelijkmatig op van bijna 0 naar de piek, $\\eta_{\\max}(t + 1)/W$; cosine decay zakt daarna langs een halve cosinusgolf naar het minimum. Een MLP met residual connections dat met AdamW bij learning rate 0,03 vastliep en 131 van de 1.000 testcijfers goed las, las er met warmup 827 goed, en met warmup en cosine decay 869."
+  - en: "In PyTorch, a scheduler sets `group[\"lr\"]` in every parameter group of the optimizer, and you call `scheduler.step()` after every `opt.step()`."
+    nl: "In PyTorch zet een scheduler `group[\"lr\"]` in elke parameter group van de optimizer, en roep je `scheduler.step()` aan na elke `opt.step()`."
+can_now:
+  - en: "say why the learning rate is made small toward the end of training"
+    nl: "zeggen waarom de learning rate tegen het eind van het trainen klein wordt gemaakt"
+    by: why-decay
+  - en: "work out the learning rate of a warmup and cosine schedule at any step"
+    nl: "de learning rate van een schedule met warmup en cosinus bij elke stap uitrekenen"
+    by: lr-at
+  - en: "write a scheduler that sets the learning rate of an optimizer before every step"
+    nl: "een scheduler schrijven die vóór elke stap de learning rate van een optimizer zet"
+    by: warmup-cosine

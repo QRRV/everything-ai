@@ -1,0 +1,30 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: lm-sampling
+minutes: 30
+title:
+  en: "Sampling: let the model write"
+  nl: "Sampling: laat het model schrijven"
+goal:
+  en: "let your bigram model write text, one character at a time, by always taking the most likely character or by drawing one, and keep both functions in your project."
+  nl: "je bigram-model tekst laten schrijven, één teken tegelijk, door steeds het waarschijnlijkste teken te nemen of er een te trekken, en beide functies in je project bewaren."
+summary:
+  - en: "Autoregressive generation: look up the row of the last character, choose the next character from it, add it to the text, and repeat."
+    nl: "Autoregressive generation: zoek de rij van het laatste teken op, kies daaruit het volgende teken, voeg het aan de tekst toe, en herhaal."
+  - en: "Greedy decoding always takes the most likely character, np.argmax(P[i]): the same text every time, and it can get stuck in a loop, such as \"the the the\"."
+    nl: "Greedy decoding neemt altijd het waarschijnlijkste teken, np.argmax(P[i]): elke keer dezelfde tekst, en het kan in een kringetje ronddraaien, zoals \"the the the\"."
+  - en: "Sampling draws the next character with the probabilities of the row, rng.choice(len(chars), p=P[i]). With the same seed, the model writes the same text again."
+    nl: "Sampling trekt het volgende teken met de kansen van de rij, rng.choice(len(chars), p=P[i]). Met dezelfde seed schrijft het model dezelfde tekst opnieuw."
+  - en: "Your project `llm` now has `greedy.py` with `greedy` and `sampling.py` with `generate`."
+    nl: "Je project `llm` heeft nu `greedy.py` met `greedy` en `sampling.py` met `generate`."
+can_now:
+  - en: "write the line that draws the next character with a model's probabilities"
+    nl: "de regel schrijven die het volgende teken trekt met de kansen van een model"
+    by: draw-line
+  - en: "let a model write with greedy decoding"
+    nl: "een model laten schrijven met greedy decoding"
+    by: greedy
+  - en: "let a model write by sampling, one character at a time"
+    nl: "een model laten schrijven door te samplen, één teken tegelijk"
+    by: generate

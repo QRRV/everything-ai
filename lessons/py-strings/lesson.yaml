@@ -1,0 +1,28 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: py-strings
+minutes: 15
+title:
+  en: "Text: strings"
+  nl: "Tekst: strings"
+goal:
+  en: "count the characters of a string with `len`, pick one character by its index, and build new text with an f-string."
+  nl: "de tekens van een string tellen met `len`, één teken pakken met zijn index, en nieuwe tekst maken met een f-string."
+summary:
+  - en: "A string is a row of characters; a space counts too. `len(word)` gives the number of characters."
+    nl: "Een string is een rij tekens; ook een spatie telt mee. `len(word)` geeft het aantal tekens."
+  - en: "Python counts places from 0: `word[0]` is the first character, and `word[-1]` the last."
+    nl: "Python telt plekken vanaf 0: `word[0]` is het eerste teken, en `word[-1]` het laatste."
+  - en: "In an f-string, `f\"...\"`, Python fills in the value of each name or calculation between braces `{ }`."
+    nl: "In een f-string, `f\"...\"`, vult Python de waarde in van elke naam of berekening tussen accolades `{ }`."
+can_now:
+  - en: "pick a character from a string by its index"
+    nl: "een teken uit een string pakken met zijn index"
+    by: initials
+  - en: "say how many characters a string has, spaces included"
+    nl: "zeggen hoeveel tekens een string heeft, spaties meegeteld"
+    by: spaces
+  - en: "build new text with an f-string"
+    nl: "nieuwe tekst maken met een f-string"
+    by: caption

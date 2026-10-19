@@ -1,0 +1,28 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: math-chain-rule
+minutes: 15
+title:
+  en: "Rates multiply: the chain rule"
+  nl: "Snelheden vermenigvuldigen: de kettingregel"
+goal:
+  en: "find the slope of a function built in steps, such as the loss of one example, by multiplying the slopes of the steps."
+  nl: "de helling vinden van een functie die in stappen is gebouwd, zoals de loss van één voorbeeld, door de hellingen van de stappen te vermenigvuldigen."
+summary:
+  - en: 'The chain rule: $\frac{dy}{dx} = \frac{dy}{du} \cdot \frac{du}{dx}$. The slope of a function built in steps is the product of the slopes of the steps.'
+    nl: 'De kettingregel: $\frac{dy}{dx} = \frac{dy}{du} \cdot \frac{du}{dx}$. De helling van een functie die in stappen is gebouwd, is het product van de hellingen van de stappen.'
+  - en: 'Work out the outer slope at the inner value, not at $x$.'
+    nl: 'Reken de buitenste helling uit bij de binnenste waarde, niet bij $x$.'
+  - en: 'For the loss $(y - w \cdot x)^2$ of one example, the slope with respect to $w$ is $2r \cdot (-x)$, with the residual $r = y - w \cdot x$.'
+    nl: 'Voor de loss $(y - w \cdot x)^2$ van één voorbeeld is de helling naar $w$ gelijk aan $2r \cdot (-x)$, met het residu $r = y - w \cdot x$.'
+can_now:
+  - en: "find the slope of a power of a line with the chain rule"
+    nl: "met de kettingregel de helling van een macht van een lijn vinden"
+    by: nested
+  - en: "write the slope of the loss of one example as a function"
+    nl: "de helling van de loss van één voorbeeld als functie schrijven"
+    by: loss-slope
+  - en: "find the slope of the loss with respect to the bias term"
+    nl: "de helling van de loss naar de bias term vinden"
+    by: slope-b

@@ -1,0 +1,28 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: np-vectorization
+minutes: 15
+title:
+  en: "Calculating without loops"
+  nl: "Rekenen zonder loops"
+goal:
+  en: "calculate with whole arrays at once, with a number or with a second array, instead of a loop."
+  nl: "rekenen met hele arrays tegelijk, met een getal of met een tweede array, in plaats van met een loop."
+summary:
+  - en: "A calculation on an array, such as `prices * 1.1`, works on every number at once and gives a new array of the same shape: that is vectorization."
+    nl: "Een berekening op een array, zoals `prices * 1.1`, werkt op elk getal tegelijk en geeft een nieuwe array met dezelfde shape: dat is vectorisatie."
+  - en: "With two arrays of the same shape, the numbers in the same place go together."
+    nl: "Bij twee arrays met dezelfde shape gaan de getallen op dezelfde plek samen."
+  - en: "On a list, `*` and `+` repeat and join; make an array first. Without a loop, the code is shorter and many times faster."
+    nl: "Op een lijst herhaalt `*` de lijst en plakt `+` lijsten aan elkaar; maak eerst een array. Zonder loop is de code korter en vele malen sneller."
+can_now:
+  - en: "say what `+` does with two arrays"
+    nl: "zeggen wat `+` doet met twee arrays"
+    by: add-arrays
+  - en: "change every number of an array with one calculation"
+    nl: "elk getal van een array veranderen met één berekening"
+    by: new-prices
+  - en: "calculate with two arrays, number by number, without a loop"
+    nl: "met twee arrays rekenen, getal voor getal, zonder loop"
+    by: speeds

@@ -1,0 +1,31 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: res-formula-to-code
+minutes: 35
+title:
+  en: "From formula to code"
+  nl: "Van formule naar code"
+goal:
+  en: "turn a formula from a paper into code: decode its notation, give every symbol a tensor with a shape, and check the code by hand and against an implementation."
+  nl: "een formule uit een paper omzetten in code: de notatie ontcijferen, elk teken een tensor met een shape geven, en de code met de hand en tegen een implementatie controleren."
+summary:
+  - en: "Decode a formula symbol by symbol, with the text around it: the same letter, such as ε, can mean something else in another paper."
+    nl: "Ontcijfer een formule teken voor teken, met de tekst eromheen: dezelfde letter, zoals ε, kan in een andere paper iets anders betekenen."
+  - en: "Give every symbol a tensor with a shape and add the batch axis; note what the formula leaves open, such as the mean or the sum over the batch."
+    nl: "Geef elk teken een tensor met een shape en voeg de batch-as toe; noteer wat de formule openlaat, zoals het gemiddelde of de som over de batch."
+  - en: "Check the code on a toy example you work out by hand, and against an implementation you trust with torch.allclose."
+    nl: "Controleer de code op een toy-voorbeeld dat je met de hand uitrekent, en met torch.allclose tegen een implementatie die je vertrouwt."
+can_now:
+  - en: "write a loss from a paper's formula as code"
+    nl: "een loss uit de formule van een paper als code schrijven"
+    by: smoothed-loss
+  - en: "tell from how your code and a reference differ where they part ways"
+    nl: "uit het verschil tussen je code en een referentie afleiden waar ze uiteenlopen"
+    by: factor-four
+  - en: "explain why a hand-worked toy example adds to a check against an implementation"
+    nl: "uitleggen wat een met de hand uitgerekend toy-voorbeeld toevoegt aan een controle tegen een implementatie"
+    by: why-toy
+further_reading:
+  - en: "Christian Szegedy and others (2016), *Rethinking the Inception Architecture for Computer Vision*, CVPR 2016, section 7"
+    nl: "Christian Szegedy en anderen (2016), *Rethinking the Inception Architecture for Computer Vision*, CVPR 2016, sectie 7"

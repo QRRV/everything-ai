@@ -1,0 +1,28 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: res-hypothesis-control
+minutes: 25
+title:
+  en: "Change one thing at a time"
+  nl: "Eén ding tegelijk veranderen"
+goal:
+  en: "test what one change does: compare a variant that differs in exactly one setting with a control run, with the same seed."
+  nl: "toetsen wat één verandering doet: een variant die in precies één instelling verschilt vergelijken met een control run, met dezelfde seed."
+summary:
+  - en: "The control run is your setup without the change; a variant differs from it in exactly one setting, the experimental variable."
+    nl: "De control run is je opzet zonder de verandering; een variant verschilt daarvan in precies één instelling, de experimentele variabele."
+  - en: "If a variant changes two settings, a difference in the result has two possible causes, and you cannot tell them apart."
+    nl: "Verandert een variant twee instellingen, dan heeft een verschil in het resultaat twee mogelijke oorzaken, en kun je die niet uit elkaar houden."
+  - en: "Give the control and the variant the same seed, so that both start from the same random numbers; one run per setting is still one roll of the dice."
+    nl: "Geef de control en de variant dezelfde seed, zodat ze met dezelfde willekeurige getallen beginnen; één run per instelling blijft één worp met de dobbelsteen."
+can_now:
+  - en: "make a variant that differs from the control in one setting, without changing the control"
+    nl: "een variant maken die in één instelling van de control verschilt, zonder de control te veranderen"
+    by: one-change
+  - en: "see when a comparison changed two things at once"
+    nl: "zien wanneer een vergelijking twee dingen tegelijk veranderde"
+    by: confound
+  - en: "design an experiment with a control run, a variant and a result that could prove you wrong"
+    nl: "een experiment ontwerpen met een control run, een variant en een uitkomst die je ongelijk kan geven"
+    by: design

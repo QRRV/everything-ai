@@ -1,0 +1,28 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: py-plotting
+minutes: 15
+title:
+  en: "Drawing numbers: line, scatter and bar charts"
+  nl: "Getallen tekenen: lijngrafiek, scatter plot en staafdiagram"
+goal:
+  en: "draw a list of numbers as a line chart or a bar chart with Matplotlib, with a title and axis labels, and choose when a scatter plot fits better."
+  nl: "met Matplotlib een lijst getallen tekenen als lijngrafiek of staafdiagram, met titel en aslabels, en kiezen wanneer een scatter plot beter past."
+summary:
+  - en: "`import matplotlib.pyplot as plt` brings in pyplot under the short name `plt`."
+    nl: "`import matplotlib.pyplot as plt` haalt pyplot binnen onder de korte naam `plt`."
+  - en: "`plt.plot(x, y)` draws a line through points in order, `plt.scatter(x, y)` loose points, `plt.bar(names, heights)` a bar per name; x and y are lists of the same length."
+    nl: "`plt.plot(x, y)` trekt een lijn door punten op volgorde, `plt.scatter(x, y)` tekent losse punten, `plt.bar(names, heights)` een staaf per naam; x en y zijn even lange lijsten."
+  - en: "`plt.title`, `plt.xlabel` and `plt.ylabel` say what the reader sees; `plt.show()` shows the chart."
+    nl: "`plt.title`, `plt.xlabel` en `plt.ylabel` zeggen wat de lezer ziet; `plt.show()` laat de grafiek zien."
+can_now:
+  - en: "draw a line chart with a title and axis labels"
+    nl: "een lijngrafiek tekenen met een titel en aslabels"
+    by: temps-line
+  - en: "choose the kind of chart that fits the numbers"
+    nl: "de soort grafiek kiezen die bij de getallen past"
+    by: which-chart
+  - en: "draw a bar chart to compare separate things"
+    nl: "een staafdiagram tekenen om losse dingen te vergelijken"
+    by: minutes-bar

@@ -1,0 +1,31 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: res-how-research-is-published
+minutes: 20
+title:
+  en: "Kinds of papers and where they appear"
+  nl: "Soorten papers en waar ze verschijnen"
+goal:
+  en: "tell from its abstract and first page what a paper adds and where it appeared, and say what to check for that kind of paper."
+  nl: "aan het abstract en de eerste pagina zien wat een paper toevoegt en waar hij verscheen, en zeggen wat je bij die soort paper controleert."
+summary:
+  - en: "Most papers add one of six things: a method, an empirical analysis, a theoretical result, a benchmark or dataset, a position, or a reproduction. Each kind needs its own evidence."
+    nl: "De meeste papers voegen een van zes dingen toe: een methode, een empirische analyse, een theoretisch resultaat, een benchmark of dataset, een standpunt of een reproductie. Elke soort vraagt zijn eigen bewijs."
+  - en: "A paper appears on arXiv, at a workshop, at a conference or in a journal; in machine learning the big conferences count as much as journals."
+    nl: "Een paper verschijnt op arXiv, op een workshop, op een conferentie of in een tijdschrift; in machine learning tellen de grote conferenties net zo zwaar als tijdschriften."
+  - en: "The venue says how much checking a paper had, not whether it is right: look for the evidence its kind needs."
+    nl: "De venue zegt hoeveel controle een paper kreeg, niet of hij klopt: zoek het bewijs dat zijn soort nodig heeft."
+can_now:
+  - en: "say what kind of contribution a paper makes"
+    nl: "zeggen wat voor soort bijdrage een paper levert"
+    by: kinds
+  - en: "say what a venue tells you about the checking a paper had"
+    nl: "zeggen wat een venue je vertelt over de controle die een paper kreeg"
+    by: venue
+  - en: "place a new paper: its kind, its venue and what to check first"
+    nl: "een nieuwe paper plaatsen: zijn soort, zijn venue en wat je eerst controleert"
+    by: place-paper
+further_reading:
+  - en: "Zachary C. Lipton and Jacob Steinhardt (2018), *Troubling Trends in Machine Learning Scholarship*, arXiv 1807.03341: a position paper about how papers in machine learning are written"
+    nl: "Zachary C. Lipton en Jacob Steinhardt (2018), *Troubling Trends in Machine Learning Scholarship*, arXiv 1807.03341: een position paper over hoe papers in machine learning geschreven worden"

@@ -1,0 +1,28 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: nn-activation-stats
+minutes: 25
+title:
+  en: "Looking inside a training run"
+  nl: "In een trainingsrun kijken"
+goal:
+  en: "look inside a network with forward hooks, find dead neurons and layers that get no gradient, and tell where a stuck training run goes wrong."
+  nl: "met forward hooks in een netwerk kijken, dead neurons en layers zonder gradient vinden, en zien waar een vastgelopen trainingsrun misgaat."
+summary:
+  - en: "A dead neuron has a $z$ of 0 or below for every example: ReLU always gives 0, its slope is 0, and no gradient reaches its weights, so they stop changing."
+    nl: "Een dead neuron heeft bij elk voorbeeld een $z$ van 0 of lager: ReLU geeft altijd 0, zijn helling is 0, en er komt geen gradient bij zijn weights, dus die veranderen niet meer."
+  - en: "`layer.register_forward_hook(keep)` calls `keep(module, inputs, output)` every time the layer runs; hooks run in the model's order, and `handle.remove()` takes one off."
+    nl: "`layer.register_forward_hook(keep)` roept `keep(module, inputs, output)` aan elke keer dat de layer draait; hooks draaien in de volgorde van het model, en `handle.remove()` haalt er een af."
+  - en: "After one epoch with a learning rate of 2.0, the third hidden layer was completely dead and every hidden layer got a gradient of 0; with 0.3, 2 of its 128 neurons were dead."
+    nl: "Na één epoch met een learning rate van 2,0 was de derde hidden layer helemaal dead en kreeg elke hidden layer een gradient van 0; met 0,3 waren 2 van zijn 128 neuronen dead."
+can_now:
+  - en: "explain why a dead neuron stops learning"
+    nl: "uitleggen waarom een dead neuron niet meer leert"
+    by: what-dead-means
+  - en: "work out the share of dead neurons in a layer"
+    nl: "het deel dead neurons in een layer uitrekenen"
+    by: dead-share
+  - en: "measure every layer of a model with forward hooks, and take them off again"
+    nl: "elke layer van een model meten met forward hooks, en ze er weer af halen"
+    by: dead-per-layer

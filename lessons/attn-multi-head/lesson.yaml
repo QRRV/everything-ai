@@ -1,0 +1,28 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: attn-multi-head
+minutes: 25
+title:
+  en: "Multi-head attention"
+  nl: "Multi-head attention"
+goal:
+  en: "run several causal attention heads side by side on their own columns of the queries, keys and values, and mix their outputs with an output projection."
+  nl: "meerdere causale attention heads naast elkaar draaien op hun eigen kolommen van de queries, keys en values, en hun outputs mengen met een output-projectie."
+summary:
+  - en: "Multi-head attention splits the d columns of Q, K and V into h heads of d / h; every head has its own causal scaled attention, so its own softmax and its own weights."
+    nl: "Multi-head attention verdeelt de d kolommen van Q, K en V over h heads van d / h; elke head heeft zijn eigen causale geschaalde attention, dus zijn eigen softmax en zijn eigen weights."
+  - en: "The outputs of the heads go side by side again, n by d, and an output projection from d to d mixes them."
+    nl: "De outputs van de heads komen weer naast elkaar, n bij d, en een output-projectie van d naar d mengt ze."
+  - en: "Splitting adds no parameters: the heads are blocks of the same matrices of d by d. The smallest GPT-2 has d = 768 in 12 heads of 64."
+    nl: "Opsplitsen voegt geen parameters toe: de heads zijn blokken van dezelfde matrices van d bij d. De kleinste GPT-2 heeft d = 768 in 12 heads van 64."
+can_now:
+  - en: "count the parameters of the matrices of multi-head attention"
+    nl: "de parameters van de matrices van multi-head attention tellen"
+    by: head-weights
+  - en: "run attention heads on their own columns and put their outputs side by side"
+    nl: "attention heads op hun eigen kolommen draaien en hun outputs naast elkaar zetten"
+    by: multi-head
+  - en: "write multi-head attention as a PyTorch module"
+    nl: "multi-head attention schrijven als PyTorch-module"
+    by: multi-head-module

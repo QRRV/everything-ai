@@ -1,0 +1,28 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: math-matrix-rank
+minutes: 25
+title:
+  en: "Rank: how many directions a matrix has"
+  nl: "Rang: hoeveel richtingen een matrix heeft"
+goal:
+  en: "tell the rank of a small matrix, build a matrix of rank at most r from two thin matrices or from r pieces, and count how many numbers that saves."
+  nl: "de rang van een kleine matrix zien, een matrix met rang hooguit r bouwen uit twee dunne matrices of uit r stukken, en tellen hoeveel getallen dat bespaart."
+summary:
+  - en: "The rank of a matrix is its number of independent rows, which is also its number of independent columns: how many directions it really has. In code `np.linalg.matrix_rank(A)`."
+    nl: "De rang van een matrix is zijn aantal onafhankelijke rijen, dat ook zijn aantal onafhankelijke kolommen is: hoeveel richtingen hij echt heeft. In code `np.linalg.matrix_rank(A)`."
+  - en: "A (d, r) matrix times an (r, d) matrix gives a (d, d) matrix of rank at most r: the sum of r pieces, each a column times a row, of rank at most 1."
+    nl: "Een (d, r)-matrix keer een (r, d)-matrix geeft een (d, d)-matrix met rang hooguit r: de som van r stukken, elk een kolom keer een rij, met rang hooguit 1."
+  - en: "A low-rank matrix stored as two thin matrices needs 2 · d · r numbers instead of d · d."
+    nl: "Een low-rank matrix, bewaard als twee dunne matrices, heeft 2 · d · r getallen nodig in plaats van d · d."
+can_now:
+  - en: "tell the rank of a small matrix by looking for rows that are combinations of others"
+    nl: "de rang van een kleine matrix zien door rijen te zoeken die combinaties van andere zijn"
+    by: rank-3
+  - en: "count the numbers of two thin matrices for a matrix of any shape"
+    nl: "de getallen van twee dunne matrices tellen voor een matrix van elke shape"
+    by: thin-numbers
+  - en: "build a low-rank matrix as a sum of pieces, each a column times a row"
+    nl: "een low-rank matrix bouwen als som van stukken, elk een kolom keer een rij"
+    by: from-pieces

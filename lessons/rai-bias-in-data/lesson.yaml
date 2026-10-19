@@ -1,0 +1,31 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: rai-bias-in-data
+minutes: 20
+title:
+  en: "Who is in the data, and who is missing?"
+  nl: "Wie staat er in de data, en wie ontbreekt?"
+goal:
+  en: "ask who a model could harm and who is missing from its data, and measure its score per group before you trust it."
+  nl: "vragen wie door een model schade kan oplopen en wie er in de data ontbreekt, en de score per groep meten voordat je hem vertrouwt."
+summary:
+  - en: "Harm is a bad effect of an AI system on people; its stakeholders are everyone with an interest in it or affected by it, including the people it decides about."
+    nl: "Schade is een slecht effect van een AI-systeem op mensen; de stakeholders zijn iedereen die er belang bij heeft of erdoor geraakt wordt, ook de mensen over wie het beslist."
+  - en: "Data bias is a skew in a dataset. It can come from who is in the data, from who gave the labels, and from the past the data records; a model learns it."
+    nl: "Data bias is scheefheid in een dataset. Die kan komen van wie in de data staat, van wie de labels gaf, en van het verleden dat de data vastlegt; een model neemt die over."
+  - en: "An overall score weighs each group by its size, so a small group hardly counts: measure per group too, and write it down next to the score."
+    nl: "Een totaalscore weegt elke groep naar zijn grootte, dus een kleine groep telt nauwelijks mee: meet ook per groep, en schrijf het op naast de score."
+can_now:
+  - en: "measure a model's score per group"
+    nl: "de score van een model per groep meten"
+    by: per-accent
+  - en: "tell where a skew in data comes from"
+    nl: "zeggen waar scheefheid in data vandaan komt"
+    by: sources
+  - en: "name the stakeholders of an AI system"
+    nl: "de stakeholders van een AI-systeem noemen"
+    by: stakeholders
+further_reading:
+  - en: "Buolamwini and Gebru (2018), [*Gender Shades: Intersectional Accuracy Disparities in Commercial Gender Classification*](https://proceedings.mlr.press/v81/buolamwini18a.html), Proceedings of Machine Learning Research 81 (FAT* 2018)"
+    nl: "Buolamwini en Gebru (2018), [*Gender Shades: Intersectional Accuracy Disparities in Commercial Gender Classification*](https://proceedings.mlr.press/v81/buolamwini18a.html), Proceedings of Machine Learning Research 81 (FAT* 2018)"

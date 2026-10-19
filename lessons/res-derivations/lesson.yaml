@@ -1,0 +1,31 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: res-derivations
+minutes: 35
+title:
+  en: "Following a derivation"
+  nl: "Een afleiding volgen"
+goal:
+  en: "work through a derivation line by line, fill in the steps a paper skips, and check every line with numbers."
+  nl: "een afleiding regel voor regel doorwerken, de stappen invullen die een paper overslaat, en elke regel met getallen controleren."
+summary:
+  - en: "He initialization rests on four lines; the two that the paper gives one sentence each follow from writing out the variance, Var[X] = E[X²] − (E[X])², and from the symmetry of y around 0."
+    nl: "He initialization rust op vier regels; de twee die de paper elk één zin geeft, volgen uit het uitschrijven van de variantie, Var[X] = E[X²] − (E[X])², en uit de symmetrie van y rond 0."
+  - en: "After a ReLU, inputs do not have mean 0, so what counts is E[x²], not Var[x]."
+    nl: "Na een ReLU hebben inputs geen gemiddelde 0, dus telt E[x²], niet Var[x]."
+  - en: "Check a line with numbers: on samples that meet the assumptions both sides agree; break one assumption, and you see which line it holds up."
+    nl: "Controleer een regel met getallen: op samples die aan de aannames voldoen zijn beide kanten gelijk; breek één aanname, en je ziet welke regel erop rust."
+can_now:
+  - en: "check a line of a derivation with samples"
+    nl: "een regel van een afleiding met samples controleren"
+    by: line2-sides
+  - en: "fill in a skipped step and check both of its sides"
+    nl: "een overgeslagen stap invullen en beide kanten ervan controleren"
+    by: line3-sides
+  - en: "name the assumption a line of a derivation rests on"
+    nl: "de aanname noemen waar een regel van een afleiding op rust"
+    by: assumption
+further_reading:
+  - en: "Kaiming He, Xiangyu Zhang, Shaoqing Ren and Jian Sun (2015), *Delving Deep into Rectifiers: Surpassing Human-Level Performance on ImageNet Classification*, ICCV 2015, arXiv:1502.01852, section 2.2"
+    nl: "Kaiming He, Xiangyu Zhang, Shaoqing Ren en Jian Sun (2015), *Delving Deep into Rectifiers: Surpassing Human-Level Performance on ImageNet Classification*, ICCV 2015, arXiv:1502.01852, paragraaf 2.2"

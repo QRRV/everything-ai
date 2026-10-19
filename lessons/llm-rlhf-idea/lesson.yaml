@@ -1,0 +1,33 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: llm-rlhf-idea
+minutes: 35
+title:
+  en: "RLHF: learning from human preferences"
+  nl: "RLHF: leren van menselijke voorkeuren"
+goal:
+  en: "say how a reward model and reinforcement learning with a KL penalty turn preferences into a better model, and work out the best policy for a given reward."
+  nl: "zeggen hoe een reward model en reinforcement learning met een KL penalty voorkeuren omzetten in een beter model, en de beste policy voor een gegeven reward uitrekenen."
+summary:
+  - en: "RLHF trains a reward model on preference pairs, with the Bradley-Terry loss, and then pushes the SFT model towards answers with more reward, with reinforcement learning."
+    nl: "RLHF traint een reward model op preference pairs, met de loss van Bradley-Terry, en duwt dan het SFT-model met reinforcement learning naar antwoorden met meer reward."
+  - en: "A KL penalty, beta times the log-probability of the policy minus that of the frozen reference model, is taken off the reward: it holds the policy near the model it started as."
+    nl: "Een KL penalty, beta keer de log-kans van de policy min die van het bevroren reference model, gaat van de reward af: die houdt de policy dicht bij het model waarmee hij begon."
+  - en: "The best policy is the reference model with every answer weighted by e to its reward over beta, and scaled so that it adds up to 1. With a beta that is too small, the policy goes to answers that game the reward model: reward hacking."
+    nl: "De beste policy is het reference model met elk antwoord gewogen met e tot zijn reward gedeeld door beta, en daarna herschaald zodat het optelt tot 1. Met een te kleine beta gaat de policy naar antwoorden die het reward model bespelen: reward hacking."
+can_now:
+  - en: "take the KL penalty off the reward of an answer"
+    nl: "de KL penalty van de reward van een antwoord aftrekken"
+    by: penalized-reward
+  - en: "work out the best policy for a reference model, rewards and a beta"
+    nl: "de beste policy uitrekenen voor een reference model, rewards en een beta"
+    by: best-policy
+  - en: "say why a beta that is too small leads to reward hacking"
+    nl: "zeggen waarom een te kleine beta tot reward hacking leidt"
+    by: small-beta
+further_reading:
+  - en: "Long Ouyang and others, *Training language models to follow instructions with human feedback* (2022): the reward model, and PPO with a KL penalty from the SFT model"
+    nl: "Long Ouyang en anderen, *Training language models to follow instructions with human feedback* (2022): het reward model, en PPO met een KL penalty ten opzichte van het SFT-model"
+  - en: "Rafael Rafailov and others, *Direct Preference Optimization: Your Language Model is Secretly a Reward Model* (2023), section 4: the best policy of the KL-constrained aim"
+    nl: "Rafael Rafailov en anderen, *Direct Preference Optimization: Your Language Model is Secretly a Reward Model* (2023), paragraaf 4: de beste policy van het doel met de KL penalty"

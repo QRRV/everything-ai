@@ -1,0 +1,28 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: lm-bigram-counts
+minutes: 30
+title:
+  en: "A bigram model by counting"
+  nl: "Een bigram-model door te tellen"
+goal:
+  en: "count every pair of characters in a text, turn the counts into the probabilities of the next character, and keep both functions in your project."
+  nl: "elk paar tekens in een tekst tellen, van de tellingen de kansen op het volgende teken maken, en beide functies in je project bewaren."
+summary:
+  - en: "A bigram is two tokens next to each other. Counting every bigram of a text, spaces, capitals and signs too, gives a bigram model: P(b | a) is count(ab) divided by how many pairs start with a."
+    nl: "Een bigram is twee tokens naast elkaar. Elk bigram van een tekst tellen, ook spaties, hoofdletters en leestekens, geeft een bigram-model: P(b | a) is count(ab) gedeeld door hoeveel paren met a beginnen."
+  - en: "The Markov assumption: the model only looks at the last token. An n-gram model looks at the last n - 1 tokens."
+    nl: "De Markov-aanname: het model kijkt alleen naar het laatste token. Een n-gram-model kijkt naar de laatste n - 1 tokens."
+  - en: "Your project `llm` now has `bigrams.py` with `count_bigrams` and `bigram_model.py` with `bigram_probs`."
+    nl: "Je project `llm` heeft nu `bigrams.py` met `count_bigrams` en `bigram_model.py` met `bigram_probs`."
+can_now:
+  - en: "say what a bigram model looks at"
+    nl: "zeggen waar een bigram-model naar kijkt"
+    by: markov
+  - en: "count every bigram of a text"
+    nl: "elk bigram van een tekst tellen"
+    by: count-bigrams
+  - en: "turn bigram counts into the probabilities of the next character"
+    nl: "van bigramtellingen de kansen op het volgende teken maken"
+    by: bigram-probs

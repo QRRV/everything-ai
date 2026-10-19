@@ -1,0 +1,31 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: sys-memory-roofline
+minutes: 40
+title:
+  en: "Memory or compute: what limits your GPU?"
+  nl: "Geheugen of compute: wat remt je GPU af?"
+goal:
+  en: "work out the arithmetic intensity of an operation, place it on the roofline of a GPU, and estimate its time and what limits it."
+  nl: "de arithmetic intensity van een bewerking uitrekenen, haar op de roofline van een GPU plaatsen, en schatten hoe lang ze duurt en wat haar begrenst."
+summary:
+  - en: "A GPU keeps data at several levels, from registers to GPU memory; reading GPU memory at about 1 TB/s is often slower than calculating with what was read."
+    nl: "Een GPU bewaart data op meerdere niveaus, van registers tot GPU-geheugen; GPU-geheugen lezen met ongeveer 1 TB/s is vaak trager dan rekenen met wat er gelezen is."
+  - en: "Arithmetic intensity is FLOPs per byte moved; the roofline caps the FLOP/s at intensity times bandwidth, and at the peak. Left of the ridge point an operation is memory-bound, right of it compute-bound."
+    nl: "Arithmetic intensity is FLOPs per verplaatste byte; de roofline begrenst de FLOP/s op intensity maal geheugenbandbreedte, en op de piek. Links van het ridge point is een bewerking memory-bound, rechts ervan compute-bound."
+  - en: "Element-wise operations and LayerNorm are memory-bound; a linear layer gets a higher intensity with more tokens per batch, up to about d/4."
+    nl: "Elementsgewijze bewerkingen en LayerNorm zijn memory-bound; een lineaire layer krijgt een hogere intensity met meer tokens per batch, tot ongeveer d/4."
+can_now:
+  - en: "estimate the time of an operation from its FLOPs, its bytes and a GPU's specifications"
+    nl: "de tijd van een bewerking schatten uit haar FLOPs, haar bytes en de specificaties van een GPU"
+    by: roofline-time
+  - en: "say which parts of a network wait for memory"
+    nl: "zeggen welke delen van een netwerk op het geheugen wachten"
+    by: memory-bound
+  - en: "explain why bigger batches help, and where that stops"
+    nl: "uitleggen waarom grotere batches helpen, en waar dat ophoudt"
+    by: batch
+further_reading:
+  - en: "Samuel Williams, Andrew Waterman and David Patterson (2009), *Roofline: An Insightful Visual Performance Model for Multicore Architectures*, Communications of the ACM 52(4): the paper that introduced the roofline"
+    nl: "Samuel Williams, Andrew Waterman en David Patterson (2009), *Roofline: An Insightful Visual Performance Model for Multicore Architectures*, Communications of the ACM 52(4): de paper die de roofline introduceerde"

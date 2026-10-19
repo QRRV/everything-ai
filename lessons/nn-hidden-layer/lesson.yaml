@@ -1,0 +1,28 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: nn-hidden-layer
+minutes: 25
+title:
+  en: "A hidden layer and ReLU"
+  nl: "Een hidden layer en ReLU"
+goal:
+  en: "work out what a network with one hidden layer gives, see why its activation function must not be a straight line, and choose weights that compute XOR."
+  nl: "uitrekenen wat een netwerk met één hidden layer geeft, zien waarom de activation function geen rechte lijn mag zijn, en weights kiezen die XOR uitrekenen."
+summary:
+  - en: "A hidden layer is a group of neurons between the inputs and the output; the output neuron sees their outputs $\\mathbf{h}$ as its inputs."
+    nl: "Een hidden layer is een groep neuronen tussen de inputs en de output; het output-neuron ziet hun outputs $\\mathbf{h}$ als zijn inputs."
+  - en: "Without an activation function, layers collapse into one weighted sum plus a bias term. ReLU, $\\max(0, z)$, bends at 0 and is the usual choice for hidden layers."
+    nl: "Zonder activation function vallen layers samen tot één gewogen som plus een bias term. ReLU, $\\max(0, z)$, knikt bij 0 en is de gewone keuze voor hidden layers."
+  - en: "Three neurons compute XOR: two hidden neurons draw two lines, and the output neuron fires between them."
+    nl: "Drie neuronen rekenen XOR uit: twee hidden neurons trekken twee lijnen, en het output-neuron vuurt ertussen."
+can_now:
+  - en: "explain why a hidden layer needs an activation function"
+    nl: "uitleggen waarom een hidden layer een activation function nodig heeft"
+    by: collapse
+  - en: "work out the output of a network with a hidden layer with ReLU"
+    nl: "de output uitrekenen van een netwerk met een hidden layer met ReLU"
+    by: forward
+  - en: "choose output weights so that a network computes XOR"
+    nl: "output-weights kiezen zodat een netwerk XOR uitrekent"
+    by: output-weights

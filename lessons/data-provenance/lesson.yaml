@@ -1,0 +1,28 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: data-provenance
+minutes: 15
+title:
+  en: "Where does this data come from?"
+  nl: "Waar komt deze data vandaan?"
+goal:
+  en: "read what a license allows, and write down in a datasheet where a dataset comes from, under which license, with whose consent and what it does not cover."
+  nl: "lezen wat een licentie toestaat, en in een datasheet opschrijven waar een dataset vandaan komt, onder welke licentie, met wiens toestemming en wat hij niet dekt."
+summary:
+  - en: "Data provenance is where a dataset comes from: who made it, from what, when, and under which license and consent."
+    nl: "Dataherkomst is waar een dataset vandaan komt: wie hem maakte, waaruit, wanneer, en onder welke licentie en toestemming."
+  - en: "A license says what you may do with data: CC0 allows anything, CC BY asks you to name the maker, and without a license you ask before you share or build on it."
+    nl: "Een licentie zegt wat je met data mag: CC0 staat alles toe, CC BY vraagt je de maker te noemen, en zonder licentie vraag je het voordat je deelt of erop voortbouwt."
+  - en: "A datasheet keeps the answers next to the data: source, when, license, consent and limits."
+    nl: "Een datasheet bewaart de antwoorden naast de data: bron, wanneer, licentie, toestemming en beperkingen."
+can_now:
+  - en: "read what a license such as CC BY allows"
+    nl: "lezen wat een licentie als CC BY toestaat"
+    by: cc-by
+  - en: "write a datasheet for a dataset"
+    nl: "een datasheet voor een dataset schrijven"
+    by: station-card
+  - en: "check which questions a datasheet leaves open"
+    nl: "nagaan welke vragen een datasheet openlaat"
+    by: missing-fields

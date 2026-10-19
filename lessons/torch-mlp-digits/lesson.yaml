@@ -1,0 +1,28 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: torch-mlp-digits
+minutes: 35
+title:
+  en: "Project: an MLP that reads handwritten digits"
+  nl: "Project: een MLP dat handgeschreven cijfers leest"
+goal:
+  en: "build an MLP for the handwritten digits as a PyTorch module, train it with `nn.CrossEntropyLoss` and a DataLoader, and measure it on test digits, in your project."
+  nl: "een MLP voor de handgeschreven cijfers bouwen als PyTorch-module, het trainen met `nn.CrossEntropyLoss` en een DataLoader, en het meten op testcijfers, in je project."
+summary:
+  - en: "An MLP for the digits has a hidden layer, `nn.Linear(784, 64)` with ReLU, and an output layer, `nn.Linear(64, 10)`, that gives 10 logits per image."
+    nl: "Een MLP voor de cijfers heeft een hidden layer, `nn.Linear(784, 64)` met ReLU, en een output layer, `nn.Linear(64, 10)`, die 10 logits per afbeelding geeft."
+  - en: "`nn.CrossEntropyLoss()` gets the logits and the labels as int64, and does the softmax itself: the model ends without softmax."
+    nl: "`nn.CrossEntropyLoss()` krijgt de logits en de labels als int64, en doet de softmax zelf: het model eindigt zonder softmax."
+  - en: "The predicted digit is the one with the largest logit, `argmax(dim=1)`; measured in eval mode without a graph, the MLP reads about 930 of 1,000 test digits right, against 890 for the linear classifier."
+    nl: "Het voorspelde cijfer is dat met de grootste logit, `argmax(dim=1)`; gemeten in eval mode zonder graaf leest het MLP ongeveer 930 van de 1.000 testcijfers goed, tegen 890 voor de lineaire classifier."
+can_now:
+  - en: "say what `nn.CrossEntropyLoss` gets: logits and whole-number labels"
+    nl: "zeggen wat `nn.CrossEntropyLoss` krijgt: logits en labels als gehele getallen"
+    by: loss-input
+  - en: "write an MLP for the digits as an `nn.Module`"
+    nl: "een MLP voor de cijfers schrijven als `nn.Module`"
+    by: digits-mlp
+  - en: "write a training loop with `nn.CrossEntropyLoss` that gives back the loss of each epoch"
+    nl: "een training loop schrijven met `nn.CrossEntropyLoss` die de loss van elke epoch teruggeeft"
+    by: fit-torch

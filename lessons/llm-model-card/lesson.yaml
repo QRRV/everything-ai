@@ -1,0 +1,33 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: llm-model-card
+minutes: 35
+title:
+  en: "A model card for your model"
+  nl: "Een model card voor je model"
+goal:
+  en: "write the model card of a chat model from the files of its runs and the scores of its tests: what it is for and what not, its data and training, how well it does, its limits and its licenses, with a header the hub reads."
+  nl: "de model card van een chat model schrijven uit de bestanden van zijn runs en de scores van zijn tests: waarvoor het is en waarvoor niet, zijn data en training, hoe goed het het doet, zijn beperkingen en zijn licenties, met een header die de hub leest."
+summary:
+  - en: "A model card comes with a model and says what it is for and what not, what it was trained on, how it was tested and with what results, and where it fails. On Hugging Face it is the README.md of the model, with a header of metadata in YAML."
+    nl: "Een model card hoort bij een model en zegt waarvoor het is en waarvoor niet, waarop het getraind is, hoe het getest is en met welke uitkomst, en waar het tekortschiet. Op Hugging Face is het de README.md van het model, met een header van metadata in YAML."
+  - en: "Everything on a card comes from a run's file or a test: a number names its test and its count, with the clean subset next to it."
+    nl: "Alles op een card komt uit het bestand van een run of uit een test: een getal noemt zijn test en zijn aantal, met de schone subset ernaast."
+  - en: "The limits are findings of the tests: what the last training step made worse, what is still too weak, and what was not tested. Of 32,111 cards on the hub, 15.4% had a section on evaluation and 17.4% one on limitations, against 74.3% on training."
+    nl: "De beperkingen zijn bevindingen van de tests: wat de laatste trainingsstap slechter maakte, wat nog te zwak is, en wat niet getest is. Van 32.111 cards op de hub had 15,4% een sectie over evaluatie en 17,4% een over beperkingen, tegen 74,3% over training."
+can_now:
+  - en: "write the header of a model card that the hub reads"
+    nl: "de header van een model card schrijven die de hub leest"
+    by: card-header
+  - en: "find the limits of a model in its scores"
+    nl: "de beperkingen van een model in zijn scores vinden"
+    by: limits
+  - en: "report a score with its test, its count and its clean subset"
+    nl: "een score geven met zijn test, zijn aantal en zijn schone subset"
+    by: how-well
+further_reading:
+  - en: "Margaret Mitchell and others, *Model Cards for Model Reporting* (2019)"
+    nl: "Margaret Mitchell en anderen, *Model Cards for Model Reporting* (2019)"
+  - en: "Weixin Liang and others, *What's documented in AI? Systematic Analysis of 32K AI Model Cards* (2024)"
+    nl: "Weixin Liang en anderen, *What's documented in AI? Systematic Analysis of 32K AI Model Cards* (2024)"

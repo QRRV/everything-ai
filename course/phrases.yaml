@@ -1,0 +1,173 @@
+# Fixed phrases of the course itself: the words every lesson shows in the same place.
+# The lesson template (course/sjabloon/lessjabloon.md) defines the blocks and the
+# check states; this file fixes their wording in both languages, so that the app,
+# the checks and every lesson say the same thing. The Dutch wording follows the
+# template; the English is the matching fixed form.
+# Placeholders in braces ({n}, {total}) are filled in by the app.
+phrases:
+
+# --- states of a check (template 4.1) ---------------------------------------
+- id: check-empty
+  group: check
+  en: Nothing to check yet
+  nl: Nog niets ingevuld
+- id: check-code-error
+  group: check
+  en: Error in your code
+  nl: Fout in je code
+- id: check-not-yet
+  group: check
+  en: Not yet
+  nl: Nog niet
+- id: check-almost
+  group: check
+  en: Almost
+  nl: Bijna
+- id: check-correct
+  group: check
+  en: Correct
+  nl: Goed
+- id: check-too-slow
+  group: check
+  en: Too slow
+  nl: Te traag
+- id: check-broken
+  group: check
+  en: This check is broken. That is a mistake in the course, not in your code. Please report it.
+  nl: Deze check is stuk. Dat is een fout in de course, niet in jouw code. Meld het alsjeblieft.
+- id: exercise-done
+  group: check
+  en: This exercise is done.
+  nl: Deze oefening is af.
+
+# --- blocks of a lesson (template 2.1) --------------------------------------
+- id: block-place
+  group: block
+  en: "Lesson {n} of {total}"
+  nl: "Les {n} van {total}"
+- id: block-back-at
+  group: block
+  en: "You were at exercise {n}."
+  nl: "Je was bij oefening {n}."
+- id: block-goal
+  group: block
+  en: "After this lesson you can …"
+  nl: "Na deze les kun je …"
+- id: block-needs
+  group: block
+  en: What you need
+  nl: Wat je nodig hebt
+- id: block-prerequisites
+  group: block
+  en: Before you start
+  nl: Voorkennis
+- id: block-entry-check
+  group: block
+  en: Quick check
+  nl: Instapcheck
+- id: block-tough
+  group: block
+  en: This one is tough; doing it twice is normal.
+  nl: Dit is een pittige; twee keer doen is normaal.
+- id: block-why
+  group: block
+  en: Why this matters
+  nl: Waarom
+- id: block-everyday
+  group: block
+  en: An everyday example
+  nl: Een voorbeeld uit het dagelijks leven
+- id: block-guess
+  group: block
+  en: Guess first
+  nl: Gok eerst
+- id: block-new-words
+  group: block
+  en: New words and symbols
+  nl: Nieuwe woorden en tekens
+- id: block-idea
+  group: block
+  en: The idea
+  nl: Het idee
+- id: block-recipe
+  group: block
+  en: Recipe
+  nl: Recept
+- id: block-worked-example
+  group: block
+  en: Worked example
+  nl: Uitgewerkt voorbeeld
+- id: block-rung-up
+  group: block
+  en: One rung up
+  nl: Een trede hoger
+- id: block-exercise
+  group: block
+  en: Exercise
+  nl: Oefening
+- id: block-another
+  group: block
+  en: Give me another one
+  nl: Geef me er nog een
+- id: block-further
+  group: block
+  en: Going further
+  nl: Verder
+- id: block-connections
+  group: block
+  en: How this connects
+  nl: Samenhang
+- id: block-summary
+  group: block
+  en: Summary
+  nl: Samenvatting
+- id: block-you-can-now
+  group: block
+  en: "You can now:"
+  nl: "Je kunt nu:"
+- id: block-look-back
+  group: block
+  en: Looking back
+  nl: Terugblik
+- id: block-further-reading
+  group: block
+  en: Further reading
+  nl: Verder lezen
+- id: block-report
+  group: block
+  en: Report a problem
+  nl: Meld iets
+- id: block-previous
+  group: block
+  en: Previous lesson
+  nl: Vorige les
+- id: block-next
+  group: block
+  en: Next lesson
+  nl: Volgende les
+- id: hint
+  group: block
+  en: "Hint {n}"
+  nl: "Hint {n}"
+- id: solution
+  group: block
+  en: Show the solution
+  nl: Toon de oplossing
+- id: watch-out
+  group: block
+  en: Watch out
+  nl: Let op
+
+# --- course levels -----------------------------------------------------------
+- id: level-basis
+  group: level
+  en: basics
+  nl: basis
+- id: level-gevorderd
+  group: level
+  en: intermediate
+  nl: gevorderd
+- id: level-expert
+  group: level
+  en: expert
+  nl: expert

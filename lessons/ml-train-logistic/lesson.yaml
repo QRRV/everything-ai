@@ -1,0 +1,28 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: ml-train-logistic
+minutes: 20
+title:
+  en: "Training logistic regression"
+  nl: "Logistische regressie trainen"
+goal:
+  en: "train logistic regression with gradient descent, with your own function for the slopes of the log loss, in your project."
+  nl: "logistische regressie trainen met gradient descent, met je eigen functie voor de hellingen van de log loss, in je project."
+summary:
+  - en: "Gradient descent trains any model whose slopes you can work out: the same loop that trained linear regression trains logistic regression."
+    nl: "Gradient descent traint elk model waarvan je de hellingen kunt uitrekenen: dezelfde loop die lineaire regressie trainde, traint logistische regressie."
+  - en: "The slopes of the log loss for all examples at once: `grad_w = (p - y) @ X / n` and `grad_b = (p - y).mean()`, with the probabilities `p` from the sigmoid."
+    nl: "De hellingen van de log loss voor alle voorbeelden tegelijk: `grad_w = (p - y) @ X / n` en `grad_b = (p - y).mean()`, met de kansen `p` uit de sigmoid."
+  - en: "Your project `nn` now has `logistic_gradients.py` with `log_loss_gradients`, and `logistic.py` with `fit`, which trains with it."
+    nl: "Je project `nn` heeft nu `logistic_gradients.py` met `log_loss_gradients`, en `logistic.py` met `fit`, die ermee traint."
+can_now:
+  - en: "take one step of gradient descent by hand"
+    nl: "met de hand één stap gradient descent zetten"
+    by: one-step
+  - en: "work out every slope of the log loss at once"
+    nl: "elke helling van de log loss tegelijk uitrekenen"
+    by: log-loss-gradients
+  - en: "train logistic regression with your own code"
+    nl: "logistische regressie trainen met je eigen code"
+    by: fit-logistic

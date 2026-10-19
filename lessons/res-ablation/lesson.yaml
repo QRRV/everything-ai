@@ -1,0 +1,31 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: res-ablation
+minutes: 30
+title:
+  en: "Ablation: what happens if you take a part out?"
+  nl: "Ablation: wat gebeurt er als je een deel weghaalt?"
+goal:
+  en: "take one part out of your GPT, train it again in the same way, and say what the difference shows and what it does not."
+  nl: "één deel uit je GPT halen, hem op dezelfde manier opnieuw trainen, en zeggen wat het verschil laat zien en wat niet."
+summary:
+  - en: "An ablation takes one part out of a model, trains it again in exactly the same way, and measures how much worse it gets; papers show several as a table."
+    nl: "Een ablation haalt één deel uit een model, traint het op precies dezelfde manier opnieuw en meet hoeveel slechter het wordt; papers zetten er meerdere in één tabel."
+  - en: "A part comes out with fewer changes than a rewrite: set its numbers to 0, and freeze it so training cannot learn them back."
+    nl: "Een deel haal je eruit zonder het model te herschrijven: zet zijn getallen op 0, en bevries het zodat trainen ze niet terug kan leren."
+  - en: "An ablation shows what a part adds in this setup, with this model, data and training; one run per row is one roll of the dice."
+    nl: "Een ablation laat zien wat een deel toevoegt in deze opzet, met dit model, deze data en dit trainen; één run per rij is één worp met de dobbelsteen."
+can_now:
+  - en: "take the position embedding out of a GPT, and keep it out while it trains"
+    nl: "de position embedding uit een GPT halen, en eruit houden terwijl hij traint"
+    by: no-positions
+  - en: "read an ablation table"
+    nl: "een ablation-tabel lezen"
+    by: table
+  - en: "say what an ablation shows, and what it does not"
+    nl: "zeggen wat een ablation laat zien, en wat niet"
+    by: what-it-shows
+further_reading:
+  - en: "Adi Haviv, Ori Ram, Ofir Press, Peter Izsak and Omer Levy (2022), *Transformer Language Models without Positional Encodings Still Learn Positional Information*, Findings of EMNLP 2022: language models with a causal mask and no positions come close to those with them, and still learn where each token stands"
+    nl: "Adi Haviv, Ori Ram, Ofir Press, Peter Izsak en Omer Levy (2022), *Transformer Language Models without Positional Encodings Still Learn Positional Information*, Findings of EMNLP 2022: language models met een causal mask en zonder posities komen in de buurt van die met posities, en leren toch waar elk token staat"

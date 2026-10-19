@@ -1,0 +1,28 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: nn-backprop-tensors
+minutes: 30
+title:
+  en: "Backprop through whole layers by hand"
+  nl: "Backprop door hele layers met de hand"
+goal:
+  en: "write the backward pass of a two-layer MLP with softmax and cross-entropy in NumPy, matrix by matrix, and check it against PyTorch."
+  nl: "de backward pass van een MLP met twee layers, softmax en cross-entropy in NumPy schrijven, matrix voor matrix, en hem controleren met PyTorch."
+summary:
+  - en: "The gradient for the logits is `G2 = (P - Y) / n`; a linear layer gives its weights `G.T @ X`, its input `G @ W` and its bias terms the sum of `G` over the examples."
+    nl: "De gradient voor de logits is `G2 = (P - Y) / n`; een lineaire layer geeft zijn weights `G.T @ X`, zijn input `G @ W` en zijn bias terms de som van `G` over de voorbeelden."
+  - en: "Back through a ReLU, the gradient passes where its input was above 0: `G1 = dH * (Z1 > 0)`. So the backward pass keeps what the forward pass made."
+    nl: "Terug door een ReLU gaat de gradient door waar de input boven 0 lag: `G1 = dH * (Z1 > 0)`. Daarom bewaart de backward pass wat de forward pass maakte."
+  - en: "These products are what `loss.backward()` does: your gradients agree with PyTorch's up to rounding, and train the MLP for the digits in NumPy alone."
+    nl: "Deze producten zijn wat `loss.backward()` doet: je gradients komen op afronding na overeen met die van PyTorch, en trainen het MLP voor de cijfers met alleen NumPy."
+can_now:
+  - en: "explain why the gradient of a bias term is a sum over the examples"
+    nl: "uitleggen waarom de gradient van een bias term een som over de voorbeelden is"
+    by: bias-sum
+  - en: "write the backward pass of one linear layer"
+    nl: "de backward pass van één lineaire layer schrijven"
+    by: linear-backward
+  - en: "write the backward pass of a two-layer MLP, and check it against PyTorch"
+    nl: "de backward pass van een MLP met twee layers schrijven, en hem controleren met PyTorch"
+    by: mlp-gradients

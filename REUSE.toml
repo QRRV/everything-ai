@@ -1,0 +1,160 @@
+# Licences of files that cannot carry their own header. See https://reuse.software.
+# Text and figures: CC-BY-SA-4.0. Lesson code: MIT-0. The app: MIT. Bundled fonts: OFL-1.1.
+version = 1
+
+[[annotations]]
+path = ["course/**", "docs/**", "lessons/**/*.yaml", "lessons/**/*.md", "lessons/**/*.txt", "lessons/**/*.csv", "lessons/**/*.png", "README.md", "README.nl.md", "AGENTS.md", "CLAUDE.md"]
+precedence = "aggregate"
+SPDX-FileCopyrightText = "2026 Everything AI contributors"
+SPDX-License-Identifier = "CC-BY-SA-4.0"
+
+[[annotations]]
+path = ["src/everything_ai/web/kleuren.css", "src/everything_ai/web/theme.css", "src/everything_ai/tokens.json",
+        "pyproject.toml", "uv.lock", ".python-version", ".gitignore", "REUSE.toml"]
+precedence = "aggregate"
+SPDX-FileCopyrightText = "2026 Everything AI contributors"
+SPDX-License-Identifier = "MIT"
+
+[[annotations]]
+path = "src/everything_ai/web/fonts.css"
+precedence = "override"
+SPDX-FileCopyrightText = [
+    "2016 The Inter Project Authors (https://github.com/rsms/inter)",
+    "2014-2023 Adobe (http://www.adobe.com/), with Reserved Font Name 'Source'",
+    "2020 The JetBrains Mono Project Authors (https://github.com/JetBrains/JetBrainsMono)",
+]
+SPDX-License-Identifier = "OFL-1.1"
+
+[[annotations]]
+path = "docs/**/*.py"
+precedence = "override"
+SPDX-FileCopyrightText = "2026 Everything AI contributors"
+SPDX-License-Identifier = "MIT"
+
+# Extracts of third-party texts, kept only in the private development repository. Not ours to license.
+[[annotations]]
+path = "docs/onderzoek/**/bronnen/**"
+precedence = "override"
+SPDX-FileCopyrightText = "Their respective authors; each file names its source"
+SPDX-License-Identifier = "LicenseRef-Third-Party-Excerpts"
+
+# Datasets the course hosts itself (data/README.md says where each comes from).
+[[annotations]]
+path = "data/tiny-shakespeare.txt"
+precedence = "override"
+SPDX-FileCopyrightText = "William Shakespeare (public domain); collected by Andrej Karpathy for char-rnn"
+SPDX-License-Identifier = "LicenseRef-Public-Domain"
+
+[[annotations]]
+path = "data/qmnist-small.npz"
+precedence = "override"
+SPDX-FileCopyrightText = "Copyright (c) Facebook, Inc. and its affiliates. All rights reserved. (QMNIST; a subset made for Everything AI)"
+SPDX-License-Identifier = "BSD-3-Clause"
+
+[[annotations]]
+path = "data/penguins.csv"
+precedence = "override"
+SPDX-FileCopyrightText = "Kristen B. Gorman and the Palmer Station Antarctica LTER; compiled by Allison M. Horst, Alison P. Hill and Kristen B. Gorman (palmerpenguins)"
+SPDX-License-Identifier = "CC0-1.0"
+
+[[annotations]]
+path = ["data/course-qmnist-cnn.pt", "data/course-qmnist-cnn.md"]
+precedence = "override"
+SPDX-FileCopyrightText = "2026 Everything AI contributors (trained on QMNIST, Copyright (c) Facebook, Inc. and its affiliates)"
+SPDX-License-Identifier = "CC-BY-4.0"
+
+[[annotations]]
+path = ["data/course-gpt-chars.pt", "data/course-gpt-chars.json"]
+precedence = "override"
+SPDX-FileCopyrightText = "2026 Everything AI contributors (trained on Tiny Shakespeare, public domain)"
+SPDX-License-Identifier = "CC-BY-4.0"
+
+[[annotations]]
+path = "data/tinystories-small.txt"
+precedence = "override"
+SPDX-FileCopyrightText = "2023 Ronen Eldan and Yuanzhi Li (TinyStories; a subset made for Everything AI)"
+SPDX-License-Identifier = "CDLA-Sharing-1.0"
+
+[[annotations]]
+path = "data/story-cloze.json"
+precedence = "override"
+SPDX-FileCopyrightText = "2024 Hugging Face (stories of Cosmopedia; questions made from them for Everything AI)"
+SPDX-License-Identifier = "Apache-2.0"
+
+[[annotations]]
+path = ["data/course-gpt-bpe.pt", "data/course-gpt-bpe.json"]
+precedence = "override"
+SPDX-FileCopyrightText = "2026 Everything AI contributors (trained on stories of Cosmopedia by Hugging Face, Apache-2.0)"
+SPDX-License-Identifier = "CC-BY-4.0"
+
+[[annotations]]
+path = ["data/course-modern-gpt.pt", "data/course-modern-gpt.json"]
+precedence = "override"
+SPDX-FileCopyrightText = "2026 Everything AI contributors (trained on stories of Cosmopedia by Hugging Face, Apache-2.0)"
+SPDX-License-Identifier = "CC-BY-4.0"
+
+[[annotations]]
+path = ["data/course-capstone.pt", "data/course-capstone.json"]
+precedence = "override"
+SPDX-FileCopyrightText = "2026 Everything AI contributors (trained on stories of Cosmopedia by Hugging Face, Apache-2.0)"
+SPDX-License-Identifier = "CC-BY-4.0"
+
+[[annotations]]
+path = ["data/course-sft.pt", "data/course-sft.json"]
+precedence = "override"
+SPDX-FileCopyrightText = "2026 Everything AI contributors (trained on stories of Cosmopedia by Hugging Face, Apache-2.0)"
+SPDX-License-Identifier = "CC-BY-4.0"
+
+[[annotations]]
+path = "data/course-red-team-prompts.json"
+precedence = "override"
+SPDX-FileCopyrightText = "2026 Everything AI contributors"
+SPDX-License-Identifier = "CC-BY-SA-4.0"
+
+[[annotations]]
+path = "data/course-red-team-answers.json"
+precedence = "override"
+SPDX-FileCopyrightText = "2026 Everything AI contributors (answers written by the course's models, trained on stories of Cosmopedia by Hugging Face, Apache-2.0)"
+SPDX-License-Identifier = "CC-BY-4.0"
+
+[[annotations]]
+path = "data/course-ablation.jsonl"
+precedence = "override"
+SPDX-FileCopyrightText = "2026 Everything AI contributors"
+SPDX-License-Identifier = "CC-BY-4.0"
+
+[[annotations]]
+path = "data/course-grokking.jsonl"
+precedence = "override"
+SPDX-FileCopyrightText = "2026 Everything AI contributors"
+SPDX-License-Identifier = "CC-BY-4.0"
+
+[[annotations]]
+path = "data/course-eval-chat.json"
+precedence = "override"
+SPDX-FileCopyrightText = "2026 Everything AI contributors (answers written by the course's models, trained on stories of Cosmopedia by Hugging Face, Apache-2.0)"
+SPDX-License-Identifier = "CC-BY-4.0"
+
+[[annotations]]
+path = ["data/course-dpo-answers.json", "data/course-dpo.pt", "data/course-dpo.json"]
+precedence = "override"
+SPDX-FileCopyrightText = "2026 Everything AI contributors (answers written by the course's SFT model, and adapters trained on them; that model was trained on stories of Cosmopedia by Hugging Face, Apache-2.0)"
+SPDX-License-Identifier = "CC-BY-4.0"
+
+[[annotations]]
+path = "data/fashion-mnist-small.npz"
+precedence = "override"
+SPDX-FileCopyrightText = "2017 Zalando SE (Fashion-MNIST; a subset made for Everything AI)"
+SPDX-License-Identifier = "MIT"
+
+[[annotations]]
+path = "data/gpt2-tokenizer/**"
+precedence = "override"
+SPDX-FileCopyrightText = "2019 OpenAI (GPT-2)"
+SPDX-License-Identifier = "MIT"
+
+[[annotations]]
+path = "data/README.md"
+precedence = "aggregate"
+SPDX-FileCopyrightText = "2026 Everything AI contributors"
+SPDX-License-Identifier = "CC-BY-SA-4.0"

@@ -1,0 +1,31 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: sys-number-formats
+minutes: 35
+title:
+  en: "Fewer bits: FP32, FP16 and BF16"
+  nl: "Minder bits: FP32, FP16 en BF16"
+goal:
+  en: "read what the exponent and mantissa bits of FP32, FP16, BF16 and TF32 decide, work out the step between two numbers of a format, and choose a format to train in."
+  nl: "lezen wat de exponent- en mantissebits van FP32, FP16, BF16 en TF32 bepalen, de stap tussen twee getallen van een formaat uitrekenen, en een formaat kiezen om in te trainen."
+summary:
+  - en: "A float is a sign, an exponent and a mantissa: the exponent bits set the range, the mantissa bits the numerical precision; between two powers of 2, m mantissa bits make 2^m equal steps."
+    nl: "Een float is een teken, een exponent en een mantisse: de exponentbits bepalen het bereik, de mantissebits de numerieke precisie; tussen twee machten van 2 maken m mantissebits 2^m gelijke stappen."
+  - en: "FP16 keeps more digits but overflows above 65,504; BF16 keeps the range of FP32 with fewer digits, and is the usual format to train in. Tensor cores make 16-bit matrix multiplications many times faster."
+    nl: "FP16 houdt meer cijfers maar loopt boven 65.504 over; BF16 houdt het bereik van FP32 met minder cijfers, en is het gebruikelijke formaat om in te trainen. Tensor cores maken matrixvermenigvuldigingen in 16 bits vele malen sneller."
+  - en: "Near x the step is 2^(floor(log2 |x|) − m); an update smaller than half a step is lost, as when 0.001 is added to 1.0 in BF16."
+    nl: "Bij x is de stap 2^(floor(log2 |x|) − m); een update kleiner dan een halve stap gaat verloren, zoals als je 0,001 bij 1,0 optelt in BF16."
+can_now:
+  - en: "work out the step between two numbers of a floating-point format"
+    nl: "de stap tussen twee getallen van een floating-point-formaat uitrekenen"
+    by: spacing
+  - en: "choose a 16-bit format for training, and say why"
+    nl: "een 16-bits formaat kiezen om mee te trainen, en zeggen waarom"
+    by: format
+  - en: "explain why a small update can be lost in BF16, and how to keep it"
+    nl: "uitleggen waarom een kleine update in BF16 verloren kan gaan, en hoe je hem bewaart"
+    by: lost-update
+further_reading:
+  - en: "Dhiraj Kalamkar and others (2019), *A Study of BFLOAT16 for Deep Learning Training*, arXiv:1905.12322: BF16 trains a range of networks as well as FP32"
+    nl: "Dhiraj Kalamkar en anderen (2019), *A Study of BFLOAT16 for Deep Learning Training*, arXiv:1905.12322: BF16 traint uiteenlopende netwerken even goed als FP32"

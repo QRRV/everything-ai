@@ -1,0 +1,25 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: ml-hyperparameters
+minutes: 15
+title:
+  en: "Parameters and hyperparameters"
+  nl: "Parameters en hyperparameters"
+goal:
+  en: "tell the parameters that training learns from the hyperparameters you choose yourself, and see why the training loss cannot choose a hyperparameter."
+  nl: "de parameters die het trainen leert onderscheiden van de hyperparameters die je zelf kiest, en zien waarom de training-loss geen hyperparameter kan kiezen."
+summary:
+  - en: "A parameter is a number in the model that training adjusts, such as a weight or the bias term. A hyperparameter is a setting you choose before training, such as the learning rate, the number of steps or the degree."
+    nl: "Een parameter is een getal in het model dat het trainen aanpast, zoals een weight of de bias term. Een hyperparameter is een instelling die je vóór het trainen kiest, zoals de learning rate, het aantal stappen of de graad."
+  - en: "Hyperparameters go into the training code next to the data, parameters come out: `w, b = fit(x, y, lr, steps)`. Change a hyperparameter, and the parameters come out different."
+    nl: "Hyperparameters gaan naast de data de trainingscode in, parameters komen eruit: `w, b = fit(x, y, lr, steps)`. Verander je een hyperparameter, dan komen de parameters er anders uit."
+  - en: "On the training set more capacity always looks better, so you choose hyperparameters by comparing models on examples they did not train on."
+    nl: "Op de training set ziet meer capaciteit er altijd beter uit, dus kies je hyperparameters door modellen te vergelijken op voorbeelden waarop ze niet trainden."
+can_now:
+  - en: "say of a number in a model whether training learns it or you choose it"
+    nl: "van een getal in een model zeggen of het trainen het leert of jij het kiest"
+    by: who-sets
+  - en: "train a model with several values of a hyperparameter and see what each value does to training"
+    nl: "een model trainen met een paar waarden van een hyperparameter en zien wat elke waarde met het trainen doet"
+    by: three-rates

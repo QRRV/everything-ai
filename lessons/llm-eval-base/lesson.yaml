@@ -1,0 +1,31 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: llm-eval-base
+minutes: 40
+title:
+  en: "Evaluating your base model"
+  nl: "Je base model evalueren"
+goal:
+  en: "score a base model on text it never saw, token by token, and compare models with different tokenizers in bits per byte."
+  nl: "een base model token voor token scoren op tekst die het nooit zag, en modellen met verschillende tokenizers vergelijken in bits per byte."
+summary:
+  - en: "A base model is tested on how well it predicts text it never saw: the loss of every token, each predicted from the tokens before it in a window as long as the ones the model trained on."
+    nl: "Een base model test je op hoe goed het tekst voorspelt die het nooit zag: de loss van elk token, elk voorspeld uit de tokens ervoor in een venster zo lang als die waarop het model trainde."
+  - en: "A loss or perplexity per token depends on the tokenizer: bigger tokens make each prediction harder. Bits per byte, the total loss in bits divided by the bytes of the text in UTF-8, is the same unit for every tokenizer."
+    nl: "Een loss of perplexity per token hangt af van de tokenizer: grotere tokens maken elke voorspelling moeilijker. Bits per byte, de totale loss in bits gedeeld door de bytes van de tekst in UTF-8, is voor elke tokenizer dezelfde eenheid."
+  - en: "On 400 stories of TinyStories that it never saw, the model of the course's run of the capstone has a perplexity of 6.2 per token against 11.1 for GPT-2 small; per byte, GPT-2 is better: 0.862 bits against 0.918."
+    nl: "Op 400 verhalen uit TinyStories die het nooit zag, heeft het model van de run van de course uit de capstone een perplexity van 6,2 per token tegen 11,1 voor GPT-2 small; per byte is GPT-2 beter: 0,862 bits tegen 0,918."
+can_now:
+  - en: "score every token of a text with a model, in windows of its own length"
+    nl: "elk token van een tekst scoren met een model, in vensters van zijn eigen lengte"
+    by: token-losses
+  - en: "turn losses per token into bits per byte"
+    nl: "losses per token omrekenen naar bits per byte"
+    by: bits-per-byte
+  - en: "say which of two models with different tokenizers predicts a text better"
+    nl: "zeggen welk van twee modellen met verschillende tokenizers een tekst beter voorspelt"
+    by: which-better
+further_reading:
+  - en: "Leo Gao and others, *The Pile: An 800GB Dataset of Diverse Text for Language Modeling* (2020): bits per byte as a measure that does not depend on the tokenizer"
+    nl: "Leo Gao en anderen, *The Pile: An 800GB Dataset of Diverse Text for Language Modeling* (2020): bits per byte als maat die niet van de tokenizer afhangt"

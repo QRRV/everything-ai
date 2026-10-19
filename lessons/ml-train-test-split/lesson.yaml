@@ -1,0 +1,28 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: ml-train-test-split
+minutes: 15
+title:
+  en: "Will it work on new data? Training and test sets"
+  nl: "Werkt het op nieuwe data? Training set en test set"
+goal:
+  en: "split your examples into a training set and a test set after shuffling them, and measure on the test set how well a model does on new data."
+  nl: "je voorbeelden na het schudden splitsen in een training set en een test set, en op de test set meten hoe goed een model het doet op nieuwe data."
+summary:
+  - en: "Generalization is how well a model works on examples it did not see. A low loss on the training set does not show it: a model that remembers every example gets 0 there."
+    nl: "Generalisatie is hoe goed een model werkt op voorbeelden die het niet zag. Een lage loss op de training set laat dat niet zien: een model dat elk voorbeeld onthoudt, krijgt daar 0."
+  - en: "Shuffle the positions first, `order = rng.permutation(n)`, then train on about 80% of them, `sizes[order[:32]]`, and keep the rest as a test set, `sizes[order[32:]]`."
+    nl: "Schud eerst de posities, `order = rng.permutation(n)`, train dan op ongeveer 80% ervan, `sizes[order[:32]]`, en houd de rest als test set, `sizes[order[32:]]`."
+  - en: "Measure the loss on the test set once, at the end: that is your estimate for new data. A test set that helped you choose is no longer honest."
+    nl: "Meet de loss op de test set één keer, aan het eind: dat is je schatting voor nieuwe data. Een test set die je hielp kiezen, is niet meer eerlijk."
+can_now:
+  - en: "say why you shuffle before you split"
+    nl: "zeggen waarom je schudt voordat je splitst"
+    by: sorted
+  - en: "split examples into a training set and a test set"
+    nl: "voorbeelden splitsen in een training set en een test set"
+    by: split
+  - en: "compare the loss of a model on the training set and on the test set"
+    nl: "de loss van een model op de training set en op de test set vergelijken"
+    by: two-mse

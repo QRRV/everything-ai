@@ -1,0 +1,28 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: start-map-of-ai
+minutes: 12
+title:
+  en: "The map of AI and how this course is organized"
+  nl: "De kaart van AI en hoe deze course in elkaar zit"
+goal:
+  en: "find your way on the map of the course: tell a branch, a level and a route apart, and pick a route that fits your goal."
+  nl: "je weg vinden op de kaart van de course: een tak, een niveau en een route uit elkaar houden, en een route kiezen die bij je doel past."
+summary:
+  - en: "AI is a big field. The course lays it out as a map: a foundation that every branch grows from, branches for the areas of AI, and three levels."
+    nl: "AI is een groot vakgebied. De course brengt het in kaart: een fundament waar elke tak uit groeit, takken voor de deelgebieden van AI, en drie niveaus."
+  - en: "A level says how advanced a lesson is: basics, intermediate or expert. No lesson is locked."
+    nl: "Een niveau zegt hoe gevorderd een les is: basis, gevorderd of expert. Geen enkele les zit op slot."
+  - en: "A route is an order of lessons. The main route goes through the foundation, language and research; a goal route takes only the lessons your goal builds on."
+    nl: "Een route is een volgorde van lessen. De hoofdroute gaat door het fundament, taal en onderzoek; een doelroute bevat alleen de lessen waar jouw doel op voortbouwt."
+can_now:
+  - en: "pick a route that fits your goal"
+    nl: "een route kiezen die bij je doel past"
+    by: pick-route
+  - en: "say whether something is a branch, a level or a route"
+    nl: "zeggen of iets een tak, een niveau of een route is"
+    by: kinds
+  - en: "explain how the branches hang together"
+    nl: "uitleggen hoe de takken met elkaar samenhangen"
+    by: foundation

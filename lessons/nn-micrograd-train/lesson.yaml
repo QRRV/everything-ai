@@ -1,0 +1,28 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: nn-micrograd-train
+minutes: 30
+title:
+  en: "Training your MLP: the training loop"
+  nl: "Je MLP trainen: de training loop"
+goal:
+  en: "train an MLP with your own project, in a training loop of four steps: forward and loss, zero the gradients, backward, and step."
+  nl: "een MLP trainen met je eigen project, in een training loop van vier stappen: forward en loss, gradients op nul, backward, en stap."
+summary:
+  - en: "A training loop repeats four steps: the loss of the model on all examples, zeroing the gradients, the backward pass, and a step of every parameter against its slope."
+    nl: "Een training loop herhaalt vier stappen: de loss van het model op alle voorbeelden, de gradients op nul zetten, de backward pass, en een stap van elke parameter tegen zijn helling in."
+  - en: "Zeroing the gradients sets every `grad` to 0 before `backward`, because the slopes add up: without it, each step would move by the slopes of all the steps before it too."
+    nl: "Vóór `backward` gaan de gradients op nul, elke `grad` op 0, omdat de hellingen optellen: zonder zou elke stap ook schuiven met de hellingen van alle stappen ervoor."
+  - en: "The mean squared error works with your `Value`: `y_pred + Value(-y)` is the residual with its sign flipped, which has the same square, and the mean is the sum times `Value(1 / n)`."
+    nl: "De mean squared error werkt met je `Value`: `y_pred + Value(-y)` is het residu met het teken omgedraaid, met hetzelfde kwadraat, en het gemiddelde is de som keer `Value(1 / n)`."
+can_now:
+  - en: "put the steps of the training loop in the right order"
+    nl: "de stappen van de training loop in de goede volgorde zetten"
+    by: order
+  - en: "write the loss of a model as a Value"
+    nl: "de loss van een model schrijven als een Value"
+    by: mse
+  - en: "write a training loop that trains an MLP"
+    nl: "een training loop schrijven die een MLP traint"
+    by: train

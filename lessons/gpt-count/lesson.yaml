@@ -1,0 +1,28 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: gpt-count
+minutes: 25
+title:
+  en: "Counting parameters and FLOPs per token"
+  nl: "Parameters en FLOPs per token tellen"
+goal:
+  en: "count where the parameters of your GPT sit, and how many FLOPs it takes to read one token and to train on it."
+  nl: "tellen waar de parameters van je GPT zitten, en hoeveel FLOPs het kost om één token te lezen en om erop te trainen."
+summary:
+  - en: "A GPT has |𝒱|·d parameters in its table of tokens, block·d in its table of places, 12d² + 10d in every block, and 2d + d·|𝒱| + |𝒱| at the end; for a big d, N ≈ 12·L·d² + 2·|𝒱|·d."
+    nl: "Een GPT heeft |𝒱|·d parameters in zijn tabel van tokens, block·d in zijn tabel van plekken, 12d² + 10d in elk block, en 2d + d·|𝒱| + |𝒱| aan het eind; bij een grote d is N ≈ 12·L·d² + 2·|𝒱|·d."
+  - en: "Reading one token costs about 2N FLOPs, and attention about 2·L·n·d more for a text of n tokens; training on it costs about three times that, as the backward pass costs about twice the forward pass."
+    nl: "Eén token lezen kost ongeveer 2N FLOPs, en attention ongeveer 2·L·n·d meer voor een tekst van n tokens; erop trainen kost ongeveer drie keer zoveel, omdat de backward pass ongeveer twee keer zoveel kost als de forward pass."
+  - en: "For short texts the parameters decide what a token costs; for long texts attention takes over: with the other sizes of GPT-2 and a window of 32,768 tokens, it is over 60% of the work."
+    nl: "Bij korte teksten bepalen de parameters wat een token kost; bij lange teksten neemt attention het over: met de andere maten van GPT-2 en een venster van 32.768 tokens is het meer dan 60% van het werk."
+can_now:
+  - en: "estimate the FLOPs of one token through a model"
+    nl: "de FLOPs van één token door een model schatten"
+    by: forward-flops
+  - en: "count the parameters of a GPT from its sizes"
+    nl: "de parameters van een GPT tellen uit zijn maten"
+    by: gpt-params
+  - en: "count the FLOPs of training on one token, attention included"
+    nl: "de FLOPs van het trainen op één token tellen, attention erbij"
+    by: train-flops

@@ -1,0 +1,33 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: lm-weight-tying
+minutes: 25
+title:
+  en: "Weight tying"
+  nl: "Weight tying"
+goal:
+  en: "tie the output head of a language model to its embedding, and say what that saves and why it can help."
+  nl: "de output head van een language model aan zijn embedding koppelen, en zeggen wat dat bespaart en waarom het kan helpen."
+summary:
+  - en: "The embedding and the output head both keep a table of shape (vocab, d); weight tying uses one for both, so the logit of a token is the dot product with its own embedding."
+    nl: "De embedding en de output head bewaren allebei een tabel met shape (vocab, d); weight tying gebruikt er één voor beide, zodat de logit van een token het inproduct met zijn eigen embedding is."
+  - en: "In PyTorch, `self.head.weight = self.tok.weight` ties them: one parameter, counted once, whose gradient is the sum from both ends."
+    nl: "In PyTorch koppelt `self.head.weight = self.tok.weight` ze: één parameter, één keer geteld, waarvan de gradient de som van beide kanten is."
+  - en: "Tying saves almost a quarter of GPT-2 small, less in larger models, and lets the row of a rare token learn at every step."
+    nl: "Weight tying bespaart bijna een kwart van GPT-2 small, minder in grotere modellen, en laat de rij van een zeldzaam token bij elke stap leren."
+can_now:
+  - en: "work out the logits of a tied head"
+    nl: "de logits van een gekoppelde head uitrekenen"
+    by: tied-logits
+  - en: "tie the head of a model to its embedding in PyTorch"
+    nl: "de head van een model in PyTorch aan zijn embedding koppelen"
+    by: tied-lm
+  - en: "say which rows of the embedding and the head get a gradient"
+    nl: "zeggen welke rijen van de embedding en de head een gradient krijgen"
+    by: rows-grad
+further_reading:
+  - en: "Ofir Press and Lior Wolf (2017), *Using the Output Embedding to Improve Language Models*, EACL 2017, arXiv:1608.05859"
+    nl: "Ofir Press en Lior Wolf (2017), *Using the Output Embedding to Improve Language Models*, EACL 2017, arXiv:1608.05859"
+  - en: "Hakan Inan, Khashayar Khosravi and Richard Socher (2017), *Tying Word Vectors and Word Classifiers: A Loss Framework for Language Modeling*, ICLR 2017, arXiv:1611.01462"
+    nl: "Hakan Inan, Khashayar Khosravi en Richard Socher (2017), *Tying Word Vectors and Word Classifiers: A Loss Framework for Language Modeling*, ICLR 2017, arXiv:1611.01462"

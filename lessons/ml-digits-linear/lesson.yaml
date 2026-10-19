@@ -1,0 +1,28 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: ml-digits-linear
+minutes: 30
+title:
+  en: "Project: a linear classifier for handwritten digits"
+  nl: "Project: een lineaire classifier voor handgeschreven cijfers"
+goal:
+  en: "train softmax regression on 6,000 handwritten digits with your own functions for its slopes and its loop, and judge it by its accuracy, a baseline and a confusion matrix."
+  nl: "softmax-regressie trainen op 6000 handgeschreven cijfers, met je eigen functies voor de hellingen en de loop, en het model beoordelen met de accuracy, een baseline en een confusion matrix."
+summary:
+  - en: "Softmax regression gives every class its own row of weights in `W` and its own bias term: the logits are `X @ W.T + b`, and softmax along each row turns them into probabilities."
+    nl: "Softmax-regressie geeft elke klasse een eigen rij weights in `W` en een eigen bias term: de logits zijn `X @ W.T + b`, en softmax langs elke rij maakt er kansen van."
+  - en: "Its slopes are `diff.T @ X / n` and `diff.mean(axis=0)`, with `diff = P - np.eye(K)[y]`: the probabilities minus the one-hot labels."
+    nl: "De hellingen zijn `diff.T @ X / n` en `diff.mean(axis=0)`, met `diff = P - np.eye(K)[y]`: de kansen min de one-hot labels."
+  - en: "The same loop as for logistic regression trains it. On the digits it reads 890 of 1,000 new images right; always saying the most common digit gets 126."
+    nl: "Dezelfde loop als bij logistische regressie traint het model. Op de cijfers leest het 890 van 1000 nieuwe beelden goed; altijd het meest voorkomende cijfer zeggen haalt er 126."
+can_now:
+  - en: "say how many numbers softmax regression learns"
+    nl: "zeggen hoeveel getallen softmax-regressie leert"
+    by: how-many
+  - en: "work out the slopes of the cross-entropy for softmax regression"
+    nl: "de hellingen van de cross-entropy voor softmax-regressie uitrekenen"
+    by: cross-entropy-gradients
+  - en: "train a classifier for ten digits with your own functions"
+    nl: "een classifier voor tien cijfers trainen met je eigen functies"
+    by: fit-softmax

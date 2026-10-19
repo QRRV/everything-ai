@@ -1,0 +1,28 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: torch-tensors
+minutes: 20
+title:
+  en: "PyTorch tensors"
+  nl: "Tensors in PyTorch"
+goal:
+  en: "make tensors in PyTorch and calculate with them as with NumPy arrays: with float32, `dim`, `keepdim` and `.item()`, and say where a tensor lives."
+  nl: "tensors maken in PyTorch en ermee rekenen zoals met NumPy-arrays: met float32, `dim`, `keepdim` en `.item()`, en zeggen waar een tensor staat."
+summary:
+  - en: "A tensor is PyTorch's array: a grid of numbers with any number of axes. It calculates as NumPy does, with `@`, broadcasting and methods such as `.mean()`, where an axis is called `dim`."
+    nl: "Een tensor is de array van PyTorch: een rooster van getallen met een willekeurig aantal axes. Hij rekent zoals NumPy, met `@`, broadcasting en methods zoals `.mean()`, waarbij een axis `dim` heet."
+  - en: "Floats are float32 by default: 32 bits, about 7 digits. Whole numbers are int64, and their mean stops PyTorch: make them floats first. A summary such as `t.mean()` is a tensor with no axes; `.item()` turns it into a Python number."
+    nl: "Floats zijn standaard float32: 32 bits, ongeveer 7 cijfers. Gehele getallen zijn int64, en hun gemiddelde laat PyTorch stoppen: maak er eerst floats van. Een samenvatting zoals `t.mean()` is een tensor zonder axes; `.item()` maakt er een Python-getal van."
+  - en: "Every tensor lives on a device: the CPU, or a GPU. The tensors of one calculation must be on the same device."
+    nl: "Elke tensor staat op een device: de CPU, of een GPU. De tensors van één berekening moeten op hetzelfde device staan."
+can_now:
+  - en: "say what happens when two tensors on different devices meet"
+    nl: "zeggen wat er gebeurt als twee tensors op verschillende devices elkaar tegenkomen"
+    by: same-device
+  - en: "work out a loss with tensors and give it back as a Python number"
+    nl: "een loss uitrekenen met tensors en hem teruggeven als Python-getal"
+    by: loss
+  - en: "take away each row's own mean, with float32, `dim` and `keepdim`"
+    nl: "het eigen gemiddelde van elke rij aftrekken, met float32, `dim` en `keepdim`"
+    by: centered

@@ -1,0 +1,28 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: ml-feature-scaling
+minutes: 15
+title:
+  en: "Why gradient descent likes scaled features"
+  nl: "Waarom gradient descent van geschaalde features houdt"
+goal:
+  en: "standardize features with very different units, so that gradient descent trains fast with one learning rate, and predict for a new example."
+  nl: "features met heel verschillende eenheden standaardiseren, zodat gradient descent snel traint met één learning rate, en voorspellen voor een nieuw voorbeeld."
+summary:
+  - en: "Features of very different sizes stretch the loss landscape into a long, narrow valley: no single learning rate suits every weight."
+    nl: "Features van heel verschillende grootte rekken het loss landscape uit tot een lang, smal dal: geen enkele learning rate past bij elke weight."
+  - en: "Standardization takes off each feature's mean and divides by its standard deviation: `(X - X.mean(axis=0)) / X.std(axis=0)`. Afterwards, every feature has mean 0 and standard deviation 1."
+    nl: "Standaardisatie trekt van elke feature zijn gemiddelde af en deelt door zijn standaardafwijking: `(X - X.mean(axis=0)) / X.std(axis=0)`. Daarna heeft elke feature gemiddelde 0 en standaardafwijking 1."
+  - en: "A new example is standardized with the mean and standard deviation of the training data."
+    nl: "Een nieuw voorbeeld standaardiseer je met het gemiddelde en de standaardafwijking van de training data."
+can_now:
+  - en: "work out a standardized value"
+    nl: "een gestandaardiseerde waarde uitrekenen"
+    by: z-value
+  - en: "standardize every feature of a dataset at once"
+    nl: "elke feature van een dataset tegelijk standaardiseren"
+    by: standardize
+  - en: "predict for a new example with a model trained on standardized features"
+    nl: "voorspellen voor een nieuw voorbeeld met een model dat op gestandaardiseerde features getraind is"
+    by: predict-new

@@ -1,0 +1,28 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: ml-sigmoid
+minutes: 15
+title:
+  en: "From score to probability: the sigmoid"
+  nl: "Van score naar kans: de sigmoid"
+goal:
+  en: "turn any score, a logit, into a probability between 0 and 1 with the sigmoid, and find the logit back from a probability."
+  nl: "met de sigmoid van elke score, een logit, een kans tussen 0 en 1 maken, en uit een kans de logit terugvinden."
+summary:
+  - en: 'The sigmoid $\sigma(z) = 1 / (1 + e^{-z})$ turns any number into one between 0 and 1: `1 / (1 + np.exp(-z))`. $\sigma(0) = 0.5$, and a higher $z$ gives a higher probability.'
+    nl: 'De sigmoid $\sigma(z) = 1 / (1 + e^{-z})$ maakt van elk getal een getal tussen 0 en 1: `1 / (1 + np.exp(-z))`. $\sigma(0) = 0{,}5$, en een hogere $z$ geeft een hogere kans.'
+  - en: "The score that goes in is the logit. Above 0, the probability is above 0.5."
+    nl: "De score die erin gaat, is de logit. Boven 0 is de kans boven 0,5."
+  - en: 'The way back: the logit of a probability $p$ is $\log(p / (1 - p))$, the log of the odds.'
+    nl: 'De weg terug: de logit van een kans $p$ is $\log(p / (1 - p))$, de log van de odds.'
+can_now:
+  - en: "work out the probability that a logit gives"
+    nl: "uitrekenen welke kans een logit geeft"
+    by: minus-two
+  - en: "write the sigmoid as a function"
+    nl: "de sigmoid als functie schrijven"
+    by: sigmoid
+  - en: "find the logit of a probability"
+    nl: "de logit van een kans vinden"
+    by: back-to-logit

@@ -1,0 +1,32 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+# termen:allow generalization
+id: repro-guided-build
+minutes: 60
+title:
+  en: "Guided reproduction 2: build the model and the data"
+  nl: "Begeleide reproductie 2: bouw het model en de data"
+goal:
+  en: "make the data of the grokking paper, take every setting of its model and optimizer from the paper, and build your ModernGPT with them, writing down where it differs."
+  nl: "de data van de grokking-paper maken, elke instelling van zijn model en optimizer uit de paper halen, en je ModernGPT ermee bouwen, met opgeschreven waar hij afwijkt."
+summary:
+  - en: "The data is the table of a + b modulo 97: 9,409 equations of five tokens each, shuffled with a seed and split by the training data fraction."
+    nl: "De data is de tabel van a + b modulo 97: 9.409 vergelijkingen van elk vijf tokens, geschud met een seed en gesplitst volgens de training data fraction."
+  - en: "Every setting comes from the place in the paper that gives it, written next to it; where the paper is silent, your choice is a deviation, and you write it down."
+    nl: "Elke instelling komt van de plek in de paper die hem geeft, en die staat ernaast; waar de paper zwijgt, is je keuze een afwijking, en die schrijf je op."
+  - en: "The delay the claim is about shows near the smallest fraction that still generalizes; with much more data, training and validation track each other."
+    nl: "De vertraging waar de claim over gaat, zie je bij de kleinste fraction die nog generaliseert; met veel meer data lopen training en validatie gelijk op."
+can_now:
+  - en: "make the data of a paper as it describes it, split with a seed"
+    nl: "de data van een paper maken zoals die hem beschrijft, gesplitst met een seed"
+    by: dataset
+  - en: "choose the setting in which a claim can show"
+    nl: "de instelling kiezen waarin een claim zichtbaar kan worden"
+    by: which-fraction
+  - en: "take every setting from a paper, with where it stands"
+    nl: "elke instelling uit een paper halen, met waar hij staat"
+    by: settings
+further_reading:
+  - en: "Alethea Power and others, *Grokking: Generalization Beyond Overfitting on Small Algorithmic Datasets* (2022), Appendix A.1"
+    nl: "Alethea Power en anderen, *Grokking: Generalization Beyond Overfitting on Small Algorithmic Datasets* (2022), Appendix A.1"

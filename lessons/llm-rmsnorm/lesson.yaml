@@ -1,0 +1,31 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: llm-rmsnorm
+minutes: 30
+title:
+  en: "RMSNorm"
+  nl: "RMSNorm"
+goal:
+  en: "write RMSNorm, layer normalization without the mean, and say what it keeps, what it drops and what it saves."
+  nl: "RMSNorm schrijven, layer normalization zonder het gemiddelde, en zeggen wat het houdt, wat het laat vallen en wat het bespaart."
+summary:
+  - en: "RMSNorm divides each row by its root mean square, the square root of the mean of its squares plus eps, and multiplies each feature by a learned gamma that starts at 1."
+    nl: "RMSNorm deelt elke rij door zijn root mean square, de wortel uit het gemiddelde van zijn kwadraten plus eps, en vermenigvuldigt elke feature met een geleerde gamma die bij 1 begint."
+  - en: "It keeps layer normalization's indifference to the size of its input and drops the centering: no mean, no beta, one number to compute per row instead of two."
+    nl: "Het houdt de ongevoeligheid van layer normalization voor de grootte van zijn input en laat het centreren vallen: geen gemiddelde, geen beta, één getal per rij om te berekenen in plaats van twee."
+  - en: "Llama and most current LLMs use it in the places of layer normalization, and train about as well; whether it is faster depends on a fused kernel."
+    nl: "Llama en de meeste huidige LLM's gebruiken het op de plekken van layer normalization, en trainen ongeveer even goed; of het sneller is, hangt af van een samengevoegde kernel."
+can_now:
+  - en: "write RMSNorm as a module of PyTorch"
+    nl: "RMSNorm schrijven als module van PyTorch"
+    by: rmsnorm
+  - en: "say what replacing layer normalization by RMSNorm saves in parameters"
+    nl: "zeggen wat het vervangen van layer normalization door RMSNorm aan parameters bespaart"
+    by: betas
+  - en: "explain why a model loses little without the mean"
+    nl: "uitleggen waarom een model weinig verliest zonder het gemiddelde"
+    by: why-no-mean
+further_reading:
+  - en: "Biao Zhang and Rico Sennrich (2019), *Root Mean Square Layer Normalization*, NeurIPS 2019"
+    nl: "Biao Zhang en Rico Sennrich (2019), *Root Mean Square Layer Normalization*, NeurIPS 2019"

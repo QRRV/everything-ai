@@ -1,0 +1,28 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: prob-bayes
+minutes: 20
+title:
+  en: "Bayes' rule"
+  nl: "De regel van Bayes"
+goal:
+  en: "turn P(B | A) into P(A | B) with Bayes' rule, and say why a positive test for a rare illness is often a false alarm."
+  nl: "met de regel van Bayes P(B | A) omdraaien tot P(A | B), en zeggen waarom een positieve test voor een zeldzame ziekte vaak vals alarm is."
+summary:
+  - en: "Bayes' rule: P(A | B) = P(B | A) · P(A) / P(B). It updates the prior P(A) with the evidence B into the posterior P(A | B)."
+    nl: "De regel van Bayes: P(A | B) = P(B | A) · P(A) / P(B). Hij werkt de prior P(A) met het bewijs B bij tot de posterior P(A | B)."
+  - en: "The law of total probability gives P(B) as the sum of the ways B can happen: P(B | A) · P(A) + P(B | not A) · P(not A)."
+    nl: "De wet van de totale kans geeft P(B) als de som van de manieren waarop B kan gebeuren: P(B | A) · P(A) + P(B | niet A) · P(niet A)."
+  - en: "Forgetting the prior is the base-rate fallacy: for something rare, even a good test gives mostly false alarms."
+    nl: "De prior vergeten is de base-rate fallacy: bij iets zeldzaams geeft zelfs een goede test vooral vals alarm."
+can_now:
+  - en: "say what evidence that is just as likely with A as without it does to a probability"
+    nl: "zeggen wat bewijs dat met en zonder A even vaak voorkomt, met een kans doet"
+    by: no-news
+  - en: "write Bayes' rule as a function"
+    nl: "de regel van Bayes als functie schrijven"
+    by: bayes
+  - en: "use a posterior as the prior for the next evidence"
+    nl: "een posterior gebruiken als prior voor het volgende bewijs"
+    by: second-test

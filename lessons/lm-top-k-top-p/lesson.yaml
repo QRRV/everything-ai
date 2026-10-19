@@ -1,0 +1,28 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: lm-top-k-top-p
+minutes: 25
+title:
+  en: "Top-k and top-p sampling"
+  nl: "Top-k en top-p sampling"
+goal:
+  en: "cut off the unlikely characters before you draw: keep the k most likely, or as few of the most likely as together hold probability p."
+  nl: "de onwaarschijnlijke tekens afsnijden voordat je trekt: houd de k waarschijnlijkste, of zo weinig mogelijk van de waarschijnlijkste, die samen kans p bevatten."
+summary:
+  - en: "Top-k sampling keeps only the k most likely tokens; the rest get probability 0, and the kept ones are divided by their sum."
+    nl: "Top-k sampling houdt alleen de k waarschijnlijkste tokens; de rest krijgt kans 0, en de tokens die overblijven worden gedeeld door hun som."
+  - en: "Top-p sampling keeps the most likely tokens, as few as possible, that together hold at least probability p. How many it keeps depends on how spread out the row is."
+    nl: "Top-p sampling houdt de waarschijnlijkste tokens, zo weinig mogelijk, die samen minstens kans p bevatten. Hoeveel het er houdt, hangt af van hoe verspreid de rij is."
+  - en: "Both only cut; a temperature reshapes. They are often used together: first the temperature, then top-p."
+    nl: "Beide snijden alleen af; een temperature verandert de vorm. Ze worden vaak samen gebruikt: eerst de temperature, dan top-p."
+can_now:
+  - en: "say which tokens top-p keeps in a row"
+    nl: "zeggen welke tokens top-p in een rij houdt"
+    by: keeps
+  - en: "keep only the k most likely probabilities of a row"
+    nl: "alleen de k waarschijnlijkste kansen van een rij houden"
+    by: top-k
+  - en: "keep the most likely probabilities until they hold at least p"
+    nl: "de waarschijnlijkste kansen houden tot ze samen minstens p bevatten"
+    by: top-p

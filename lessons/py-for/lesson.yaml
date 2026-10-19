@@ -1,0 +1,28 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: py-for
+minutes: 15
+title:
+  en: "Repeating: for loops"
+  nl: "Herhalen: for-loops"
+goal:
+  en: "run the same lines for every item of a list or a `range`, keep a total or a count, and use an `if` inside a loop."
+  nl: "dezelfde regels uitvoeren voor elk item van een lijst of een `range`, een totaal of een telling bijhouden, en een `if` in een loop gebruiken."
+summary:
+  - en: "`for temp in temps:` runs the indented lines once for every item; each round, `temp` gets the next item."
+    nl: "`for temp in temps:` voert de ingesprongen regels één keer uit voor elk item; elke ronde krijgt `temp` het volgende item."
+  - en: "A name that keeps count starts before the loop, such as `total = 0`, and gets a new value in each round: `total = total + temp`."
+    nl: "Een naam die iets bijhoudt, begint vóór de loop, zoals `total = 0`, en krijgt elke ronde een nieuwe waarde: `total = total + temp`."
+  - en: "`range(1, 4)` gives 1, 2 and 3, up to, not including, the stop. Lines after the loop, at the left edge, run once."
+    nl: "`range(1, 4)` geeft 1, 2 en 3, tot, maar niet met, de stop. Regels na de loop, helemaal links, draaien één keer."
+can_now:
+  - en: "add up all items of a list in a loop"
+    nl: "alle items van een lijst optellen in een loop"
+    by: total
+  - en: "say which numbers a `range` gives"
+    nl: "zeggen welke getallen een `range` geeft"
+    by: range
+  - en: "count the items that meet a condition, with an `if` inside a loop"
+    nl: "de items tellen die aan een voorwaarde voldoen, met een `if` in een loop"
+    by: frost

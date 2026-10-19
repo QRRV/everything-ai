@@ -1,0 +1,28 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: tok-bpe
+minutes: 30
+title:
+  en: "Byte pair encoding: build your own tokenizer"
+  nl: "Byte pair encoding: bouw je eigen tokenizer"
+goal:
+  en: "learn the merge rules of byte pair encoding from a text, and merge pairs of tokens, as the first part of your own tokenizer."
+  nl: "de merge rules van byte pair encoding leren uit een tekst, en paren van tokens samenvoegen, als eerste deel van je eigen tokenizer."
+summary:
+  - en: "Byte pair encoding starts with the characters of a text, counts every pair of neighboring tokens, and merges the most frequent pair into a new token; then it counts again, once for every new token."
+    nl: "Byte pair encoding begint met de tekens van een tekst, telt elk paar naburige tokens, en voegt het vaakst voorkomende paar samen tot een nieuw token; daarna telt het opnieuw, één keer voor elk nieuw token."
+  - en: "Each merged pair is a merge rule. A tokenizer applies its merge rules in the order it learned them, so the same text always gets the same tokens."
+    nl: "Elk samengevoegd paar is een merge rule. Een tokenizer past zijn merge rules toe in de volgorde waarin hij ze leerde, dus dezelfde tekst krijgt altijd dezelfde tokens."
+  - en: "Frequent pieces become one token and rare words stay in pieces; with 100 rules learned from Shakespeare, a token holds about 1.6 characters, and GPT-2 learned 50,000 rules."
+    nl: "Vaak voorkomende stukken worden één token en zeldzame woorden blijven in stukken; met 100 regels geleerd uit Shakespeare bevat een token ongeveer 1,6 tekens, en GPT-2 leerde 50.000 regels."
+can_now:
+  - en: "apply merge rules in the order they were learned"
+    nl: "merge rules toepassen in de volgorde waarin ze geleerd zijn"
+    by: order
+  - en: "merge a pair of tokens everywhere in a list of tokens"
+    nl: "een paar tokens overal samenvoegen in een lijst van tokens"
+    by: merge
+  - en: "learn the merge rules of byte pair encoding from a text"
+    nl: "de merge rules van byte pair encoding leren uit een tekst"
+    by: train-bpe

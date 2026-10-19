@@ -1,0 +1,31 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: attn-scale
+minutes: 25
+title:
+  en: "Scaling the scores"
+  nl: "De scores schalen"
+goal:
+  en: "explain and measure why attention scores grow like the square root of the key length, and divide them by it so the model keeps learning."
+  nl: "uitleggen en meten waarom attention scores groeien als de wortel uit de lengte van de keys, en ze door die wortel delen, zodat het model blijft leren."
+summary:
+  - en: "The dot product of a random query and key of d_k numbers with spread 1 has variance d_k, so its scores spread about √d_k: 8 for 64 numbers."
+    nl: "Het inproduct van een willekeurige query en key van d_k getallen met spreiding 1 heeft variantie d_k, dus de scores spreiden ongeveer √d_k: 8 bij 64 getallen."
+  - en: "Large scores make the softmax saturate: almost one-hot, with a gradient close to 0, so the model hardly learns where to look."
+    nl: "Grote scores laten de softmax verzadigen: bijna one-hot, met een gradient dicht bij 0, dus het model leert nauwelijks waar het moet kijken."
+  - en: "Scaled dot-product attention divides the scores by √d_k before the softmax: softmax(Q Kᵀ / √d_k) V. Dividing by d_k would flatten the weights instead."
+    nl: "Scaled dot-product attention deelt de scores vóór de softmax door √d_k: softmax(Q Kᵀ / √d_k) V. Delen door d_k zou de weights juist vlak maken."
+can_now:
+  - en: "say what dividing the scores by too much does to the attention weights"
+    nl: "zeggen wat te veel delen met de attention weights doet"
+    by: divide-too-much
+  - en: "measure how far the dot products of random vectors spread"
+    nl: "meten hoe ver de inproducten van willekeurige vectoren spreiden"
+    by: score-spread
+  - en: "write scaled dot-product attention"
+    nl: "scaled dot-product attention schrijven"
+    by: scaled-attention
+further_reading:
+  - en: "Ashish Vaswani, Noam Shazeer, Niki Parmar, Jakob Uszkoreit, Llion Jones, Aidan N. Gomez, Łukasz Kaiser and Illia Polosukhin (2017), *Attention Is All You Need*, NeurIPS 30, section 3.2.1 and footnote 4"
+    nl: "Ashish Vaswani, Noam Shazeer, Niki Parmar, Jakob Uszkoreit, Llion Jones, Aidan N. Gomez, Łukasz Kaiser en Illia Polosukhin (2017), *Attention Is All You Need*, NeurIPS 30, paragraaf 3.2.1 en voetnoot 4"

@@ -1,0 +1,28 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: py-comprehensions
+minutes: 15
+title:
+  en: "Building lists and dictionaries in one line"
+  nl: "Lijsten en dictionaries bouwen in één regel"
+goal:
+  en: "build a new list from an old one in one line with a comprehension, keep only some items with an `if`, and read a comprehension that builds a dictionary."
+  nl: "met een comprehension in één regel een nieuwe lijst maken van een oude, met een `if` alleen sommige items houden, en een comprehension lezen die een dictionary bouwt."
+summary:
+  - en: "`[len(word) for word in words]` builds a new list: for each item, what is in front of `for`."
+    nl: "`[len(word) for word in words]` bouwt een nieuwe lijst: voor elk item wat er vóór `for` staat."
+  - en: "An `if` at the end keeps only some items: `[t for t in temps if t > 20]`."
+    nl: "Een `if` aan het eind houdt alleen sommige items: `[t for t in temps if t > 20]`."
+  - en: "With curly braces, and a key and a value in front, a comprehension builds a dictionary: `{w: len(w) for w in words}`."
+    nl: "Met accolades, en vooraan een key en een waarde, bouwt een comprehension een dictionary: `{w: len(w) for w in words}`."
+can_now:
+  - en: "build a new list from an old one in one line"
+    nl: "in één regel een nieuwe lijst maken van een oude"
+    by: lengths
+  - en: "read a comprehension that builds a dictionary"
+    nl: "een comprehension lezen die een dictionary bouwt"
+    by: dict-comp
+  - en: "keep only some items with an `if` at the end"
+    nl: "met een `if` aan het eind alleen sommige items houden"
+    by: passed

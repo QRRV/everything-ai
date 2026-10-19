@@ -1,0 +1,34 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: repro-guided-ablation
+minutes: 55
+title:
+  en: "Guided reproduction 5: the ablation"
+  nl: "Begeleide reproductie 5: de ablation"
+goal:
+  en: "find out which settings the jump of your reproduction needs, by running every combination of weight decay on and off and three fractions of the table, and reading each run with your plan."
+  nl: "uitzoeken welke instellingen de sprong van je reproductie nodig heeft, door elke combinatie van weight decay aan en uit en drie delen van de tabel te draaien, en elke run met je plan te lezen."
+summary:
+  - en: "An ablation grid runs every combination of a few values of each setting you change; the number of runs is those numbers multiplied."
+    nl: "Een ablation grid draait elke combinatie van een paar waarden van elke instelling die je verandert; het aantal runs is die aantallen met elkaar vermenigvuldigd."
+  - en: "Each line of the experiment log keeps the values its run changes, so that the grid reads back as a table, and a stopped grid goes on where it stopped."
+    nl: "Elke regel van het logboek bewaart de waarden die zijn run verandert, zodat het grid terug te lezen is als tabel, en een gestopt grid verdergaat waar het stopte."
+  - en: "A result holds within its budget: \"not reached\" is not \"never\", and with one seed per combination, a close call is no conclusion."
+    nl: "Een resultaat geldt binnen zijn budget: \"not reached\" is niet \"nooit\", en met één seed per combinatie is een nipte uitslag geen conclusie."
+can_now:
+  - en: "make every combination of a few values of some settings"
+    nl: "elke combinatie maken van een paar waarden van een paar instellingen"
+    by: grid
+  - en: "run an ablation grid into one experiment log, and go on where it stopped"
+    nl: "een ablation grid in één experimentlogboek draaien, en verdergaan waar het stopte"
+    by: run-grid
+  - en: "draw the moments of a claim against a setting, as a paper does"
+    nl: "de momenten van een claim tegen een instelling tekenen, zoals een paper dat doet"
+    by: figure
+  - en: "say what an ablation shows within its budget, and what it does not"
+    nl: "zeggen wat een ablation binnen zijn budget laat zien, en wat niet"
+    by: what-shows
+further_reading:
+  - en: "Alethea Power and others (2022), *Grokking: Generalization Beyond Overfitting on Small Algorithmic Datasets*, arXiv:2201.02177: Figure 1 (center), Figure 2 (left), section 3.3 and Appendix A.1.2"
+    nl: "Alethea Power en anderen (2022), *Grokking: Generalization Beyond Overfitting on Small Algorithmic Datasets*, arXiv:2201.02177: Figuur 1 (midden), Figuur 2 (links), paragraaf 3.3 en bijlage A.1.2"

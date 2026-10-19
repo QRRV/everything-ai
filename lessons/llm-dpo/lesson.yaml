@@ -1,0 +1,36 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: llm-dpo
+minutes: 60
+title:
+  en: "Project: DPO, preferences without a reward model"
+  nl: "Project: DPO, voorkeuren zonder reward model"
+goal:
+  en: "make preference pairs with a checker, train your SFT model on them with DPO through LoRA adapters, with the adapters switched off as the reference model, and measure what it gained."
+  nl: "preference pairs maken met een checker, je SFT-model er met DPO op trainen via LoRA-adapters, met de adapters uitgeschakeld als reference model, en meten wat het won."
+summary:
+  - en: "A checker turns a few answers to every instruction into preference pairs: every answer that passes against every one that fails. Instructions whose answers all pass, or all fail, give none."
+    nl: "Een checker maakt van een paar antwoorden op elke instructie preference pairs: elk antwoord dat slaagt tegen elk antwoord dat zakt. Instructies waarvan alle antwoorden slagen, of alle zakken, geven er geen."
+  - en: "With LoRA the reference model comes for free: switch every adapter off, and the policy is the SFT model again, without a second copy in memory."
+    nl: "Met LoRA krijg je het reference model cadeau: zet elke adapter uit, en de policy is weer het SFT-model, zonder een tweede kopie in het geheugen."
+  - en: "One pass of DPO raised by far the number of test instructions whose answer uses every requested word; the rejected answers fell much further than the chosen ones moved, as the loss only asks for the margin."
+    nl: "Eén ronde DPO verhoogde flink het aantal testinstructies waarvan het antwoord elk gevraagd woord gebruikt; de afgewezen antwoorden zakten veel verder dan de gekozen antwoorden bewogen, want de loss vraagt alleen om de marge."
+can_now:
+  - en: "make preference pairs from the verdicts of a checker on the answers to many instructions"
+    nl: "preference pairs maken uit de oordelen van een checker over de antwoorden op veel instructies"
+    by: dpo-pairs
+  - en: "work out the log-probability of an answer under the reference model by switching the adapters off"
+    nl: "de log-kans van een antwoord onder het reference model uitrekenen door de adapters uit te zetten"
+    by: reference-logprob
+  - en: "take one step of DPO on a batch of preference pairs"
+    nl: "één stap DPO zetten op een batch preference pairs"
+    by: dpo-step
+  - en: "say why the reference model needs the adapters off, although they start at zero"
+    nl: "zeggen waarom het reference model de adapters uit nodig heeft, al beginnen ze bij nul"
+    by: why-off
+further_reading:
+  - en: "Rafael Rafailov and others, *Direct Preference Optimization: Your Language Model is Secretly a Reward Model* (2023), section 6: DPO on sentiment, summaries and dialogue"
+    nl: "Rafael Rafailov en anderen, *Direct Preference Optimization: Your Language Model is Secretly a Reward Model* (2023), paragraaf 6: DPO op sentiment, samenvattingen en dialogen"
+  - en: "Edward Hu and others, *LoRA: Low-Rank Adaptation of Large Language Models* (2021)"
+    nl: "Edward Hu en anderen, *LoRA: Low-Rank Adaptation of Large Language Models* (2021)"

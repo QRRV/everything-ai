@@ -1,0 +1,28 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: nn-residual
+minutes: 25
+title:
+  en: "Residual connections"
+  nl: "Residual connections"
+goal:
+  en: "add a block's input to its output, see why the gradient then keeps its size through many blocks, and write such a block in PyTorch."
+  nl: "de input van een block optellen bij zijn output, zien waarom de gradient dan door veel blocks even groot blijft, en zo'n block schrijven in PyTorch."
+summary:
+  - en: "A residual connection gives $y = x + f(x)$: the block only learns a change, and with $f(x) = 0$ it passes its input on unchanged."
+    nl: "Een residual connection geeft $y = x + f(x)$: het block leert alleen een verandering, en met $f(x) = 0$ geeft het zijn input ongewijzigd door."
+  - en: "On the way back, each block multiplies the gradient by $1 + f'$ instead of $f'$, so it no longer vanishes: in 10 sigmoid layers, 1.79 comes back instead of 0.00000035."
+    nl: "Op de terugweg vermenigvuldigt elk block de gradient met $1 + f'$ in plaats van $f'$, dus hij verdwijnt niet meer: in 10 sigmoid-layers komt er 1,79 terug in plaats van 0,00000035."
+  - en: "In an MLP with 10 blocks, the gradient was about as large in the first block as in the last, and after one epoch it read 84% of the test digits instead of guessing."
+    nl: "In een MLP met 10 blocks was de gradient in het eerste block ongeveer even groot als in het laatste, en na één epoch las het 84% van de testcijfers goed in plaats van te gokken."
+can_now:
+  - en: "explain why an extra block with a residual connection seldom makes a network worse"
+    nl: "uitleggen waarom een extra block met een residual connection een netwerk zelden slechter maakt"
+    by: why-harmless
+  - en: "work out the gradient through a chain with residual connections"
+    nl: "de gradient uitrekenen door een keten met residual connections"
+    by: residual-chain
+  - en: "write a block with a residual connection in PyTorch"
+    nl: "een block met een residual connection schrijven in PyTorch"
+    by: residual-block

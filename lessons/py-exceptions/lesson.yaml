@@ -1,0 +1,28 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: py-exceptions
+minutes: 15
+title:
+  en: "Catching and raising errors"
+  nl: "Fouten opvangen en zelf een fout geven"
+goal:
+  en: "catch an error you expect with `try` and `except`, and let your own function refuse a wrong input with `raise`."
+  nl: "een fout die je verwacht opvangen met `try` en `except`, en je eigen functie een verkeerde invoer laten weigeren met `raise`."
+summary:
+  - en: "Under `try:` go the lines that might fail; under `except ValueError:` what happens when they stop with that kind of error. After it, the program goes on."
+    nl: "Onder `try:` staan de regels die mis kunnen gaan; onder `except ValueError:` wat er gebeurt als ze met die soort fout stoppen. Daarna gaat het programma verder."
+  - en: "Always name the error kind after `except`: a bare `except:` also hides typos and other bugs. Keep the `try` small."
+    nl: "Noem altijd de soort fout na `except`: een kale `except:` verstopt ook typefouten en andere bugs. Houd de `try` klein."
+  - en: "`raise ValueError(\"what is wrong\")` stops your function with an error of your own, with a message that says what is wrong."
+    nl: "`raise ValueError(\"wat er mis is\")` stopt je functie met een eigen fout, met een melding die zegt wat er mis is."
+can_now:
+  - en: "catch a ValueError with `try` and `except`"
+    nl: "een ValueError opvangen met `try` en `except`"
+    by: safe-int
+  - en: "say what happens when a raised error is caught"
+    nl: "zeggen wat er gebeurt als een eigen fout wordt opgevangen"
+    by: raise-caught
+  - en: "raise your own error with a clear message"
+    nl: "een eigen fout geven met een duidelijke melding"
+    by: average

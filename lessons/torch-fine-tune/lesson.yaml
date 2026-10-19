@@ -1,0 +1,31 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: torch-fine-tune
+minutes: 15
+title:
+  en: "Reusing a trained network: freeze, then fine-tune"
+  nl: "Een getraind netwerk hergebruiken: eerst bevriezen, dan finetunen"
+goal:
+  en: "fine-tune a pretrained network in two phases: first only a new last layer, then every layer with a learning rate ten times smaller."
+  nl: "een pretrained netwerk finetunen in twee fases: eerst alleen een nieuwe laatste layer, dan elke layer met een learning rate die tien keer zo klein is."
+summary:
+  - en: "Phase 1 trains only a new last layer on frozen features; phase 2 unfreezes every parameter with p.requires_grad = True and trains them all on, with a learning rate about ten times smaller."
+    nl: "Fase 1 traint alleen een nieuwe laatste layer op bevroren features; fase 2 ontdooit elke parameter met p.requires_grad = True en traint ze allemaal door, met een learning rate die ongeveer tien keer zo klein is."
+  - en: "On 100 labeled digits of the old scanner, the fine-tuned digit reader reads 879 to 893 of 1,000 right, phase 1 alone 860 to 883: 3 to 26 more on every seed."
+    nl: "Op 100 gelabelde cijfers van de oude scanner leest de cijferlezer na fine-tuning er 879 tot 893 van de 1.000 goed, fase 1 alleen 860 tot 883: bij elke seed 3 tot 26 meer."
+  - en: "Skip phase 1, and the borrowed layers follow the errors of a random last layer: 747 to 844. Keep the learning rate of phase 1, and on most seeds they move too far: 776 to 883."
+    nl: "Sla fase 1 over, en de geleende layers volgen de fouten van een willekeurige laatste layer: 747 tot 844. Houd de learning rate van fase 1, en bij de meeste seeds gaan ze te ver: 776 tot 883."
+can_now:
+  - en: "fine-tune a pretrained network in two phases"
+    nl: "een pretrained netwerk finetunen in twee fases"
+    by: fine-tune
+  - en: "say why phase 2 needs a smaller learning rate"
+    nl: "zeggen waarom fase 2 een kleinere learning rate nodig heeft"
+    by: big-lr
+  - en: "say how the number of examples changes the gap between starting from scratch and borrowed features"
+    nl: "zeggen hoe het aantal voorbeelden het verschil verandert tussen vanaf nul beginnen en geleende features"
+    by: more-digits
+further_reading:
+  - en: "Ananya Kumar, Aditi Raghunathan, Robbie Jones, Tengyu Ma and Percy Liang (2022), *Fine-Tuning can Distort Pretrained Features and Underperform Out-of-Distribution*, ICLR 2022, arXiv:2202.10054"
+    nl: "Ananya Kumar, Aditi Raghunathan, Robbie Jones, Tengyu Ma en Percy Liang (2022), *Fine-Tuning can Distort Pretrained Features and Underperform Out-of-Distribution*, ICLR 2022, arXiv:2202.10054"

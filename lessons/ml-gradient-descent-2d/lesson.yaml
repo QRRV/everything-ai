@@ -1,0 +1,28 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: ml-gradient-descent-2d
+minutes: 15
+title:
+  en: "Fitting w and b with gradient descent"
+  nl: "w en b passen met gradient descent"
+goal:
+  en: "fit w and b together with gradient descent: measure both slopes, then move each against its own slope."
+  nl: "w en b samen passen met gradient descent: meet beide hellingen, en schuif dan elk tegen zijn eigen helling in."
+summary:
+  - en: "Gradient descent with two parameters does an update step for each, with the same learning rate."
+    nl: "Gradient descent met twee parameters doet een update-stap voor elke parameter, met dezelfde learning rate."
+  - en: "Measure both slopes first, at the same w and b; only then move both."
+    nl: "Meet eerst beide hellingen, bij dezelfde w en b; schuif ze pas daarna allebei op."
+  - en: "The loss landscape is the loss drawn over the parameters; in a long, narrow valley, gradient descent first goes down to the floor, then slowly along it."
+    nl: "Het loss landscape is de loss getekend boven de parameters; in een lang, smal dal gaat gradient descent eerst omlaag naar de bodem, en dan langzaam langs de bodem."
+can_now:
+  - en: "work out one update step for two parameters by hand"
+    nl: "één update-stap voor twee parameters met de hand uitrekenen"
+    by: one-update
+  - en: "write gradient descent for w and b as a loop"
+    nl: "gradient descent voor w en b als loop schrijven"
+    by: descend-wb
+  - en: "explain the path of gradient descent across a loss landscape"
+    nl: "de weg van gradient descent over een loss landscape uitleggen"
+    by: valley-floor

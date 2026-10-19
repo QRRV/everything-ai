@@ -1,0 +1,28 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: attn-causal-mask
+minutes: 20
+title:
+  en: "The causal mask"
+  nl: "De causal mask"
+goal:
+  en: "hide the future of every position in attention, so a language model can learn next-token prediction from every place of a text at once."
+  nl: "de toekomst van elke positie verbergen in attention, zodat een language model next-token prediction van elke plek van een tekst tegelijk kan leren."
+summary:
+  - en: "Without a mask, position i takes from position i + 1, the token it has to predict: training becomes copying, and when the model writes there is no next token yet."
+    nl: "Zonder mask neemt positie i van positie i + 1, het token dat ze moet voorspellen: trainen wordt overnemen, en als het model schrijft, is er nog geen volgend token."
+  - en: "The causal mask sets every score of a later position to minus infinity before the softmax: e to the power of minus infinity is 0, so those weights are exactly 0, and every row still adds up to 1."
+    nl: "De causal mask zet elke score van een latere positie vóór de softmax op min oneindig: e tot de macht min oneindig is 0, dus die weights zijn precies 0, en elke rij telt nog op tot 1."
+  - en: "In PyTorch: the future is torch.tril(torch.ones(n, n)) == 0, and S.masked_fill(future, float(\"-inf\")) hides it; of n × n weights, n(n − 1)/2 are 0."
+    nl: "In PyTorch: de toekomst is torch.tril(torch.ones(n, n)) == 0, en S.masked_fill(future, float(\"-inf\")) verbergt hem; van n × n weights zijn er n(n − 1)/2 gelijk aan 0."
+can_now:
+  - en: "explain why the mask uses minus infinity and not 0"
+    nl: "uitleggen waarom de mask min oneindig gebruikt en niet 0"
+    by: minus-infinity
+  - en: "make the mask of the future for n positions"
+    nl: "de mask van de toekomst maken voor n posities"
+    by: future-mask
+  - en: "write causal attention"
+    nl: "causale attention schrijven"
+    by: causal-attention

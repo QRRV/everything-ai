@@ -1,0 +1,35 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: rnn-vanilla
+minutes: 30
+title:
+  en: "A recurrent network and backprop through time"
+  nl: "Een recurrent neural network en backprop through time"
+goal:
+  en: "work out the gradient of a recurrent network's weight by going back through every step, and explain why the gradient from far back vanishes."
+  nl: "de gradient voor de weight van een recurrent neural network uitrekenen door terug te gaan door elke stap, en uitleggen waarom de gradient van ver terug verdwijnt."
+summary:
+  - en: "Backpropagation through time unrolls a recurrent network over the steps of a sequence: a deep network with the same weights in every layer, and the backward pass goes back through it."
+    nl: "Backpropagation through time rolt een recurrent neural network uit over de stappen van een rij: een diep netwerk met dezelfde weights in elke layer, en de backward pass gaat er terug doorheen."
+  - en: "The weights are used at every step, so their gradient is the sum of the parts of all steps."
+    nl: "De weights worden bij elke stap gebruikt, dus hun gradient is de som van de delen van alle stappen."
+  - en: "Every step back multiplies the gradient by a weight times the slope of tanh; over many steps it vanishes, so a plain recurrent network hardly learns from inputs far back."
+    nl: "Elke stap terug vermenigvuldigt de gradient met een weight maal de helling van tanh; over veel stappen verdwijnt hij, dus een gewoon recurrent neural network leert nauwelijks van inputs ver terug."
+can_now:
+  - en: "write backpropagation through time for a recurrent network with one weight"
+    nl: "backpropagation through time schrijven voor een recurrent neural network met één weight"
+    by: bptt
+  - en: "say why the gradient of a shared weight is a sum over the steps"
+    nl: "zeggen waarom de gradient van een gedeelde weight een som over de stappen is"
+    by: shared-grad
+  - en: "explain why a plain recurrent network forgets what it read long ago"
+    nl: "uitleggen waarom een gewoon recurrent neural network vergeet wat het lang geleden las"
+    by: long-text
+further_reading:
+  - en: "Paul J. Werbos (1990), *Backpropagation Through Time: What It Does and How to Do It*, Proceedings of the IEEE 78(10)"
+    nl: "Paul J. Werbos (1990), *Backpropagation Through Time: What It Does and How to Do It*, Proceedings of the IEEE 78(10)"
+  - en: "Yoshua Bengio, Patrice Simard and Paolo Frasconi (1994), *Learning Long-Term Dependencies with Gradient Descent is Difficult*, IEEE Transactions on Neural Networks 5(2)"
+    nl: "Yoshua Bengio, Patrice Simard en Paolo Frasconi (1994), *Learning Long-Term Dependencies with Gradient Descent is Difficult*, IEEE Transactions on Neural Networks 5(2)"
+  - en: "Razvan Pascanu, Tomas Mikolov and Yoshua Bengio (2013), *On the Difficulty of Training Recurrent Neural Networks*, ICML 2013, arXiv:1211.5063"
+    nl: "Razvan Pascanu, Tomas Mikolov en Yoshua Bengio (2013), *On the Difficulty of Training Recurrent Neural Networks*, ICML 2013, arXiv:1211.5063"

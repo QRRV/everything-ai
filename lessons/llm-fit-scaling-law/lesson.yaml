@@ -1,0 +1,38 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: llm-fit-scaling-law
+minutes: 60
+title:
+  en: "Project: fit your own scaling law"
+  nl: "Project: je eigen scaling law fitten"
+goal:
+  en: "train four small versions of your ModernGPT, fit a scaling law with a floor you pick yourself through their losses, predict the loss of a bigger one, and only then train it."
+  nl: "vier kleine versies van je ModernGPT trainen, door hun losses een scaling law fitten met een bodem die je zelf kiest, de loss van een groter model voorspellen, en het pas dan trainen."
+summary:
+  - en: "A family of models comes from one knob, here the depth: every size trains on the same data, with the same schedule and seed, so only the size differs."
+    nl: "Een familie van modellen komt uit één knop, hier de diepte: elke grootte traint op dezelfde data, met hetzelfde schema en dezelfde seed, zodat alleen de grootte verschilt."
+  - en: "Nobody gives you the floor of your own runs: try floors, and keep the one that makes the logs of the loss above it the straightest line against the logs of the size."
+    nl: "Niemand geeft je de bodem van je eigen runs: probeer bodems, en houd de bodem waarbij de logs van de loss erboven de rechtste lijn vormen tegen de logs van de grootte."
+  - en: "Through the course's four small runs, a floor of 1.5 gives the straightest line, and the law predicts 2.290 for the model of 3.14 million parameters, which reached 2.321: a little too low, most likely because on the same data the big model gets the fewest tokens per parameter. Without a floor, the line predicts 2.256, further off."
+    nl: "Door de vier kleine runs van de course geeft een bodem van 1,5 de rechtste lijn, en de wet voorspelt 2,290 voor het model van 3,14 miljoen parameters, dat 2,321 haalde: iets te laag, waarschijnlijk omdat het grote model op dezelfde data de minste tokens per parameter krijgt. Zonder bodem voorspelt de lijn 2,256, nog verder ernaast."
+  - en: "A run of N parameters on D tokens costs about 6ND FLOPs; Chinchilla found the lowest loss for a given compute at about 20 tokens per parameter, so parameters and tokens each grow with the square root of the compute."
+    nl: "Een run van N parameters op D tokens kost ongeveer 6ND FLOPs; Chinchilla vond voor een gegeven compute de laagste loss bij ongeveer 20 tokens per parameter, dus parameters en tokens groeien elk met de wortel van de compute."
+can_now:
+  - en: "find the floor that makes your own runs the straightest line on a log-log plot"
+    nl: "de bodem vinden waarbij je eigen runs de rechtste lijn op een log-log plot vormen"
+    by: best-floor
+  - en: "predict the loss of a bigger model from a law fitted through small ones"
+    nl: "de loss van een groter model voorspellen met een wet die door kleine modellen gefit is"
+    by: predict
+  - en: "split a compute budget into compute-optimal parameters and tokens"
+    nl: "een compute budget verdelen in compute-optimal parameters en tokens"
+    by: compute-optimal
+  - en: "say why a law of small runs can miss a big run that is trained differently"
+    nl: "zeggen waarom een wet van kleine runs een grote run kan missen die anders getraind is"
+    by: why-low
+further_reading:
+  - en: "OpenAI, *GPT-4 Technical Report* (2023), section 3: predictable scaling"
+    nl: "OpenAI, *GPT-4 Technical Report* (2023), sectie 3: predictable scaling"
+  - en: "Jordan Hoffmann and others, *Training Compute-Optimal Large Language Models* (2022): the Chinchilla paper"
+    nl: "Jordan Hoffmann en anderen, *Training Compute-Optimal Large Language Models* (2022): de paper van Chinchilla"

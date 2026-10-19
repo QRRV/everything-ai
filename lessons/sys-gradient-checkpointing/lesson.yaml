@@ -1,0 +1,31 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: sys-gradient-checkpointing
+minutes: 30
+title:
+  en: "Gradient checkpointing"
+  nl: "Gradient checkpointing"
+goal:
+  en: "run a network in checkpointed segments, measure the activations it keeps, and choose the segment length."
+  nl: "een netwerk in segmenten met checkpoints draaien, de activations meten die het bewaart, en de lengte van de segmenten kiezen."
+summary:
+  - en: "Gradient checkpointing keeps only the input of every segment in the forward pass, and runs each segment again in the backward pass to get its activations back."
+    nl: "Gradient checkpointing bewaart in de forward pass alleen de input van elk segment, en draait elk segment in de backward pass opnieuw om zijn activations terug te krijgen."
+  - en: "With segments of k of n layers, memory is about ⌈n / k⌉ + k layers of activations, least near k = √n; every layer's forward pass runs once more, about a third more FLOPs."
+    nl: "Met segmenten van k van n layers is het geheugen ongeveer ⌈n / k⌉ + k layers aan activations, het minst bij ongeveer k = √n; de forward pass van elke layer draait één keer extra, ongeveer een derde meer FLOPs."
+  - en: "In PyTorch, `checkpoint(fn, x, use_reentrant=False)` from `torch.utils.checkpoint` runs a segment that way."
+    nl: "In PyTorch draait `checkpoint(fn, x, use_reentrant=False)` uit `torch.utils.checkpoint` een segment zo."
+can_now:
+  - en: "run a stack of layers in checkpointed segments, and measure what the forward pass keeps"
+    nl: "een stapel layers in segmenten met checkpoints draaien, en meten wat de forward pass bewaart"
+    by: checkpointed
+  - en: "choose the segment length with the least activation memory"
+    nl: "de lengte van een segment kiezen met het minste geheugen voor activations"
+    by: best-k
+  - en: "say what the segment length changes, and what it does not"
+    nl: "zeggen wat de lengte van een segment verandert, en wat niet"
+    by: same-compute
+further_reading:
+  - en: "Tianqi Chen, Bing Xu, Chiyuan Zhang and Carlos Guestrin (2016), *Training Deep Nets with Sublinear Memory Cost*, arXiv:1604.06174"
+    nl: "Tianqi Chen, Bing Xu, Chiyuan Zhang en Carlos Guestrin (2016), *Training Deep Nets with Sublinear Memory Cost*, arXiv:1604.06174"

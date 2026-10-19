@@ -1,0 +1,40 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: llm-dedup
+minutes: 40
+title:
+  en: "Removing duplicates with MinHash"
+  nl: "Dubbele tekst weghalen met MinHash"
+goal:
+  en: "find the near-duplicates in thousands of web pages with shingles, MinHash signatures and banding, without comparing every pair."
+  nl: "de near-duplicates in duizenden webpagina's vinden met shingles, MinHash-signatures en banding, zonder elk paar te vergelijken."
+summary:
+  - en: "A model that sees a text many times learns it by heart. In C4, one sentence of 61 words was there more than 60,000 times; after deduplication, models copied text word for word ten times less often."
+    nl: "Een model dat een tekst vaak ziet, leert hem uit het hoofd. In C4 stond één zin van 61 woorden er meer dan 60.000 keer in; na deduplicatie namen modellen tien keer minder vaak tekst woord voor woord over."
+  - en: "Two pages are compared as sets of shingles, their runs of 5 words: their overlap, the Jaccard similarity, is the shingles they share divided by all their shingles together."
+    nl: "Twee pagina's vergelijk je als sets van shingles, hun reeksen van 5 woorden: hun overlap, de Jaccard similarity, is het aantal shingles dat ze delen gedeeld door al hun shingles samen."
+  - en: "A MinHash signature keeps, for each of 128 hash functions, the smallest number it gives a shingle. Two signatures agree in about as many places as the pages overlap."
+    nl: "Een MinHash-signature houdt voor elk van 128 hashfuncties het kleinste getal dat hij aan een shingle geeft. Twee signatures zijn op ongeveer zoveel plekken gelijk als de pagina's overlappen."
+  - en: "Banding puts pages that agree in a whole band in the same bucket: of 5,614 pages, 594 pairs to compare instead of 15.8 million, and 74 pages that can go."
+    nl: "Banding stopt pagina's die in een hele band gelijk zijn in dezelfde bucket: van 5.614 pagina's 594 paren om te vergelijken in plaats van 15,8 miljoen, en 74 pagina's die weg kunnen."
+can_now:
+  - en: "cut a text into shingles of k words"
+    nl: "een tekst knippen in shingles van k woorden"
+    by: shingles
+  - en: "compute a MinHash signature in plain Python"
+    nl: "een MinHash-signature uitrekenen in gewone Python"
+    by: minhash
+  - en: "compute many signatures at once with NumPy"
+    nl: "veel signatures tegelijk uitrekenen met NumPy"
+    by: signature
+  - en: "say why a corpus should not hold the same text many times"
+    nl: "zeggen waarom een corpus niet vaak dezelfde tekst mag bevatten"
+    by: memorize
+further_reading:
+  - en: "Katherine Lee and others (2022), *Deduplicating Training Data Makes Language Models Better*, ACL 2022, arXiv:2107.06499"
+    nl: "Katherine Lee en anderen (2022), *Deduplicating Training Data Makes Language Models Better*, ACL 2022, arXiv:2107.06499"
+  - en: "Andrei Broder (1997), *On the resemblance and containment of documents*: where MinHash comes from"
+    nl: "Andrei Broder (1997), *On the resemblance and containment of documents*: waar MinHash vandaan komt"
+  - en: "Jure Leskovec, Anand Rajaraman and Jeffrey Ullman, *Mining of Massive Datasets*, chapter 3 on finding similar items, free at mmds.org"
+    nl: "Jure Leskovec, Anand Rajaraman en Jeffrey Ullman, *Mining of Massive Datasets*, hoofdstuk 3 over het vinden van items die op elkaar lijken, gratis op mmds.org"

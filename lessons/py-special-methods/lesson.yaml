@@ -1,0 +1,28 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: py-special-methods
+minutes: 15
+title:
+  en: "Special methods: making + and print work on your objects"
+  nl: "Special methods: + en print laten werken op je eigen objecten"
+goal:
+  en: "give your own class `__add__`, `__str__` and `__call__`, so that `+`, `print` and calling work on its objects."
+  nl: "je eigen class `__add__`, `__str__` en `__call__` geven, zodat `+`, `print` en aanroepen werken op zijn objecten."
+summary:
+  - en: "A special method has two underscores on each side of its name, and Python calls it for you: `a + b` runs `a.__add__(b)`, with `self` as `a` and `other` as `b`."
+    nl: "Een special method heeft twee lage streepjes aan elke kant van zijn naam, en Python roept hem voor je aan: `a + b` voert `a.__add__(b)` uit, met `self` als `a` en `other` als `b`."
+  - en: "`__str__` gives back the text that `print` and an f-string show; it uses `return`, not `print`."
+    nl: "`__str__` geeft de tekst terug die `print` en een f-string laten zien; hij gebruikt `return`, niet `print`."
+  - en: "`__call__` lets you call an object like a function: `double(21)` runs `double.__call__(21)`."
+    nl: "Met `__call__` roep je een object aan als een functie: `double(21)` voert `double.__call__(21)` uit."
+can_now:
+  - en: "give your own class `+` and a text for `print`"
+    nl: "je eigen class `+` en een tekst voor `print` geven"
+    by: vec
+  - en: "say which object is `self` and which is `other` in `a + b`"
+    nl: "zeggen welk object `self` is en welk `other` in `a + b`"
+    by: add-order
+  - en: "make an object that you call like a function"
+    nl: "een object maken dat je aanroept als een functie"
+    by: line

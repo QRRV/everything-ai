@@ -1,0 +1,28 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: nn-embedding-layer
+minutes: 25
+title:
+  en: "Embedding layers"
+  nl: "Embedding layers"
+goal:
+  en: "give every id a short learned row of numbers with nn.Embedding, see why only the looked-up rows learn, and build the bigram model with an embedding layer."
+  nl: "elke id een korte geleerde rij getallen geven met nn.Embedding, zien waarom alleen de opgezochte rijen leren, en het bigram-model met een embedding layer bouwen."
+summary:
+  - en: "An embedding layer is a learned table, the embedding matrix: for every id it looks up one row of d numbers, which is what a one-hot vector times the table gives, without the work."
+    nl: "Een embedding layer is een geleerde tabel, de embedding matrix: voor elke id zoekt hij één rij van d getallen op, wat een one-hot-vector keer de tabel ook geeft, zonder het werk."
+  - en: "On the way back, only the rows that were looked up get a gradient, and a row looked up at several places gets all their gradients added up."
+    nl: "Op de terugweg krijgen alleen de opgezochte rijen een gradient, en een rij die op meerdere plekken werd opgezocht, krijgt al hun gradients opgeteld."
+  - en: "On all character pairs of Tiny Shakespeare, a bigram model with 16 numbers per character came within 0.002 of the table of 65 × 65, with half the parameters; the nearest characters to `.` were other punctuation."
+    nl: "Op alle paren tekens van Tiny Shakespeare kwam een bigram-model met 16 getallen per teken tot op 0,002 bij de tabel van 65 × 65, met de helft van de parameters; de tekens die het dichtst bij `.` lagen, waren andere leestekens."
+can_now:
+  - en: "say why an embedding layer looks rows up instead of multiplying by one-hot vectors"
+    nl: "zeggen waarom een embedding layer rijen opzoekt in plaats van met one-hot-vectoren te vermenigvuldigen"
+    by: why-lookup
+  - en: "take a step of gradient descent on an embedding table by hand"
+    nl: "met de hand een stap gradient descent zetten op een embedding-tabel"
+    by: sgd-step
+  - en: "build a model with nn.Embedding and nn.Linear"
+    nl: "een model bouwen met nn.Embedding en nn.Linear"
+    by: char-bigram

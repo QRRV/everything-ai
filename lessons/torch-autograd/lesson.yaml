@@ -1,0 +1,28 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: torch-autograd
+minutes: 25
+title:
+  en: "PyTorch autograd does what your Value did"
+  nl: "PyTorch-autograd doet wat jouw Value deed"
+goal:
+  en: "let PyTorch work out the slopes of a loss, with `requires_grad`, `loss.backward()` and `.grad`, and take a training step inside `torch.no_grad()`."
+  nl: "PyTorch de hellingen van een loss laten uitrekenen, met `requires_grad`, `loss.backward()` en `.grad`, en een trainingsstap zetten binnen `torch.no_grad()`."
+summary:
+  - en: "A tensor made with `requires_grad=True` records every calculation with it: each result remembers how it was made, in its `grad_fn`, as your `Value` did with `parents`."
+    nl: "Een tensor gemaakt met `requires_grad=True` neemt elke berekening ermee op: elke uitkomst onthoudt hoe hij gemaakt is, in zijn `grad_fn`, zoals je `Value` dat deed met `parents`."
+  - en: "`loss.backward()` walks the graph back from the loss and puts the slope of every leaf tensor in its `.grad`, in its shape. The tensors in between keep none."
+    nl: "`loss.backward()` loopt de graaf terug vanaf de loss en zet de helling van elke leaf tensor in zijn `.grad`, in zijn shape. De tensors ertussen houden er geen."
+  - en: "`.grad` adds up, so set it to `None` before each backward pass; take the step with `-=` inside `with torch.no_grad():`, so that it is not recorded."
+    nl: "`.grad` telt op, dus zet hem op `None` vóór elke backward pass; zet de stap met `-=` binnen `with torch.no_grad():`, zodat hij niet wordt opgenomen."
+can_now:
+  - en: "get the slopes of a neuron with autograd"
+    nl: "de hellingen van een neuron krijgen met autograd"
+    by: neuron
+  - en: "say why a step needs `torch.no_grad()`"
+    nl: "zeggen waarom een stap `torch.no_grad()` nodig heeft"
+    by: step
+  - en: "write a training loop with `.grad = None`, `loss.backward()` and a step inside `torch.no_grad()`"
+    nl: "een training loop schrijven met `.grad = None`, `loss.backward()` en een stap binnen `torch.no_grad()`"
+    by: train

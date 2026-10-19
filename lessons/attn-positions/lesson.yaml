@@ -1,0 +1,31 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: attn-positions
+minutes: 25
+title:
+  en: "Telling attention where things are"
+  nl: "Attention laten weten waar alles staat"
+goal:
+  en: "add a vector for every place to the token embeddings, as fixed sinusoids or as a learned table, so attention can see the order of the words."
+  nl: "een vector voor elke plek optellen bij de token-embeddings, als vaste sinusoïden of als geleerde tabel, zodat attention de volgorde van de woorden kan zien."
+summary:
+  - en: "Attention compares contents, not places: without position information, swapping two words only swaps their new vectors."
+    nl: "Attention vergelijkt inhoud, geen plekken: zonder informatie over plekken wisselen, als je twee woorden verwisselt, alleen hun nieuwe vectoren mee van plek."
+  - en: "Positional encoding adds a vector for every place to the embedding of the token there, so the same token at another place gets another vector."
+    nl: "Positional encoding telt een vector voor elke plek op bij de embedding van het token dat er staat, zodat hetzelfde token op een andere plek een andere vector krijgt."
+  - en: "Sinusoidal positions are fixed sine and cosine waves, slower in later columns; GPT-2 learns its positions instead, as a table of 1,024 rows, so it reads at most 1,024 tokens at once."
+    nl: "Sinusoidal positional encoding bestaat uit vaste sinus- en cosinusgolven, trager in latere kolommen; GPT-2 leert zijn posities in plaats daarvan, als tabel van 1.024 rijen, dus het leest hooguit 1.024 tokens tegelijk."
+can_now:
+  - en: "explain why a learned position table limits how long a text can be"
+    nl: "uitleggen waarom een geleerde tabel van posities beperkt hoe lang een tekst kan zijn"
+    by: too-long
+  - en: "compute sinusoidal positions with sine and cosine"
+    nl: "sinusoidal positional encoding berekenen met sinus en cosinus"
+    by: sinusoids
+  - en: "add learned position embeddings to token embeddings in a PyTorch module"
+    nl: "geleerde position embeddings optellen bij token-embeddings in een PyTorch-module"
+    by: tokens-and-positions
+further_reading:
+  - en: "Ashish Vaswani, Noam Shazeer, Niki Parmar, Jakob Uszkoreit, Llion Jones, Aidan N. Gomez, Łukasz Kaiser and Illia Polosukhin (2017), *Attention Is All You Need*, NeurIPS 30, section 3.5"
+    nl: "Ashish Vaswani, Noam Shazeer, Niki Parmar, Jakob Uszkoreit, Llion Jones, Aidan N. Gomez, Łukasz Kaiser en Illia Polosukhin (2017), *Attention Is All You Need*, NeurIPS 30, paragraaf 3.5"

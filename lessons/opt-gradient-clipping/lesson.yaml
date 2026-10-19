@@ -1,0 +1,28 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: opt-gradient-clipping
+minutes: 20
+title:
+  en: "Gradient clipping"
+  nl: "Gradient clipping"
+goal:
+  en: "make a gradient that is too large shorter before the step, by the norm of all its numbers together, so that one bad mini-batch can no longer wreck a training run."
+  nl: "een te grote gradient vóór de stap korter maken, op de norm van al zijn getallen samen, zodat één slechte mini-batch een training niet meer kan verpesten."
+summary:
+  - en: "One mini-batch with pixels from 0 to 255 instead of from 0 to 1 gave a gradient norm of 146 instead of about 1, and the MLP read 405 test digits right instead of 865 after one epoch."
+    nl: "Eén mini-batch met pixels van 0 tot 255 in plaats van 0 tot 1 gaf een gradient met norm 146 in plaats van ongeveer 1, en het MLP las na één epoch 405 testcijfers goed in plaats van 865."
+  - en: "Gradient clipping multiplies all numbers of the gradient by $c / \\lVert \\mathbf{g} \\rVert$ when its norm is above the limit $c$: the step keeps its direction and gets norm $c$. With $c = 5$, the same epoch read 870 right."
+    nl: "Gradient clipping vermenigvuldigt alle getallen van de gradient met $c / \\lVert \\mathbf{g} \\rVert$ als zijn norm boven de grens $c$ ligt: de stap houdt zijn richting en krijgt norm $c$. Met $c = 5$ las dezelfde epoch er 870 goed."
+  - en: "In PyTorch, `torch.nn.utils.clip_grad_norm_` goes between `loss.backward()` and `opt.step()`, and gives back the norm before clipping, to log."
+    nl: "In PyTorch komt `torch.nn.utils.clip_grad_norm_` tussen `loss.backward()` en `opt.step()`, en geeft hij de norm vóór het clippen terug, om bij te houden."
+can_now:
+  - en: "say why clipping by norm is better than cutting off each number"
+    nl: "zeggen waarom clippen op de norm beter is dan elk getal afkappen"
+    by: keeps-direction
+  - en: "clip a list of gradients by their norm together"
+    nl: "een lijst gradients clippen op hun norm samen"
+    by: clip-grads
+  - en: "put gradient clipping at the right place in a training step"
+    nl: "gradient clipping op de goede plek in een trainingsstap zetten"
+    by: train-step

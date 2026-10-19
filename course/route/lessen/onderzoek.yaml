@@ -1,0 +1,467 @@
+# Lessons whose home branch is "onderzoek" (research skills). All levels.
+# Planning data; the map: key below names the map version. Format: ../FORMAT.md. The running project "repro" is the finale.
+tak: onderzoek
+map: v2.2
+lessons:
+
+# ===================== basis =====================
+- id: res-what-is-a-paper
+  title: "What a paper, a preprint and peer review are"
+  level: basis
+  module: research-basis
+  idea: "Research is shared as papers; a preprint is not yet reviewed, and peer review is a check by other researchers, not a guarantee."
+  covers: [d27-wetenschappelijke-geletterdheid#0]
+  requires: [start-ai-ml-genai]
+  introduces: [c:paper, c:preprint, c:peer-review]
+  uses: [c:artificial-intelligence, c:machine-learning, c:deep-learning, c:generative-ai, q:predict, q:choice, q:explain]
+  mentions: [c:transformer, c:model, c:benchmark]
+  warns: [paper]
+  needs: any
+
+- id: res-reading-claims
+  title: "Reading AI claims critically"
+  level: basis
+  module: research-basis
+  idea: "A press release, a paper and a benchmark score say different things; ask what was measured, against which baseline."
+  covers: [d27-wetenschappelijke-geletterdheid#1]
+  requires: [res-what-is-a-paper, ml-baselines]
+  introduces: [c:benchmark, q:check-a-claim]
+  uses: [c:baseline, c:paper, c:preprint, c:peer-review, c:accuracy, c:test-set, c:train-set, c:model-parameter, c:class, c:model, c:training, q:predict, q:choice, q:explain, q:exercise-with-check]
+  mentions: [c:contamination, c:language-model, c:experiment]
+  needs: any
+
+- id: res-figure-and-table
+  title: "Reading an abstract, a figure and a results table"
+  level: basis
+  module: research-basis
+  idea: "Read the caption, the axes and the units first, then the claim; a results table compares rows under the same conditions."
+  covers: [d27-wetenschappelijke-geletterdheid#2]
+  requires: [res-reading-claims, torch-loss-curves]
+  introduces: [q:read-a-figure, c:abstract, c:caption]
+  uses: [c:paper, c:benchmark, c:accuracy, c:metric, c:test-set, c:training, c:loss, v:loss-curve, v:train-val-curves, c:validation-set, c:epoch, v:log-scale, v:bar-chart, c:mean, c:seed, py:list, py:tuple, py:for, py:if, py:comparison, py:none, py:variable, py:float, py:string-literal, py:print, py:comment, q:predict, q:choice, q:exercise-with-check, q:explain]
+  needs: any
+
+- id: res-research-cycle
+  title: "How research works: question, hypothesis, experiment"
+  level: basis
+  module: research-basis
+  idea: "Research starts with a question, turns it into a hypothesis you can test, and an experiment that could prove you wrong."
+  covers: [d27-hoe-ai-onderzoek-werkt#0]
+  requires: [res-what-is-a-paper]
+  introduces: [c:hypothesis, c:experiment]
+  uses: [c:paper, c:preprint, c:peer-review, c:generative-ai, c:artificial-intelligence, q:predict, q:choice, q:explain, q:exercise-with-check]
+  needs: any
+
+# ===================== gevorderd =====================
+- id: res-how-research-is-published
+  title: "Kinds of papers and where they appear"
+  level: gevorderd
+  module: research-reading
+  idea: "A paper contributes a method, an analysis, a benchmark or a reproduction, and appears at a conference, in a journal or on arXiv."
+  covers: [d27-hoe-ai-onderzoek-werkt#1, d27-hoe-ai-onderzoek-werkt#2]
+  requires: [res-research-cycle, res-reading-claims]
+  introduces: [c:contribution-type, c:venue]
+  uses: [c:paper, c:preprint, c:peer-review, c:benchmark, c:hypothesis, c:experiment, c:baseline, c:learning-rate, c:validation-set, c:loss, c:seed, c:accuracy, c:test-set, c:label, c:example, c:classification, c:missing-value, c:mean, c:model, c:training, c:hyperparameter, q:check-a-claim, q:predict, q:choice, q:explain, q:exercise-with-check]
+  mentions: [c:abstract, c:transformer, c:language-model, c:contamination, c:reproduction]
+  data: []
+  needs: any
+
+- id: res-find-papers
+  title: "Finding papers"
+  level: gevorderd
+  module: research-reading
+  idea: "Search arXiv and Semantic Scholar, follow citations both ways, and start from a survey or reading list."
+  covers: [literatuur-zoeken-en-bijhouden#0, literatuur-zoeken-en-bijhouden#1, literatuur-zoeken-en-bijhouden#2]
+  requires: [res-how-research-is-published]
+  introduces: [p:literature-search]
+  uses: [c:paper, c:preprint, c:peer-review, c:contribution-type, c:venue, c:missing-value, c:mean, c:model, c:generative-ai, py:dict, py:list, py:append, py:for, py:if, py:comparison, py:bool, py:def, py:return, py:sorted, py:set, py:print, py:comment, py:string-literal, py:underscore-name, q:predict, q:choice, q:explain, q:exercise-with-check, q:run-cell]
+  mentions: [c:abstract, c:transformer, c:language-model]
+  ladder: [python]
+  data: []
+  needs: any
+
+- id: res-paper-anatomy
+  title: "The anatomy of a machine learning paper"
+  level: gevorderd
+  module: research-reading
+  idea: "Abstract, introduction, method, experiments and appendix each answer a different question; the details you need are often in the appendix."
+  covers: [papers-lezen#0]
+  requires: [res-find-papers, res-figure-and-table]
+  introduces: [v:paper-structure]
+  uses: [c:paper, c:abstract, c:preprint, c:peer-review, c:contribution-type, c:venue, p:literature-search, c:baseline, c:metric, c:accuracy, c:test-set, c:validation-set, c:mlp, c:relu, c:softmax, c:optimizer, c:sgd, c:learning-rate, c:batch-size, c:epoch, c:seed, c:convergence, c:hyperparameter, c:model-parameter, c:experiment, c:model, c:training, c:train-set, c:mean, c:standard-deviation, c:neuron, c:hidden-layer, c:pixel, c:vector, py:method, py:append, q:predict, q:choice, q:explain, q:exercise-with-check]
+  mentions: [c:adam, c:transformer]
+  data: []
+  needs: any
+
+- id: res-three-pass
+  title: "Reading a paper in three passes"
+  level: gevorderd
+  module: research-reading
+  idea: "First skim for the claim, then read for the method, then go through the details until you could rebuild it; practised on the transformer paper you already built."
+  covers: [papers-lezen#1]
+  requires: [res-paper-anatomy, gpt-assemble]
+  introduces: [p:three-pass-reading]
+  uses: [c:paper, c:abstract, c:contribution-type, v:paper-structure, q:read-a-figure, c:transformer, c:transformer-block, c:gpt, c:attention, c:causal-mask, c:layernorm, c:pre-norm, c:post-norm, c:residual-connection, c:dropout, c:embedding, c:softmax, c:mlp, c:learning-rate, c:warmup, c:lr-schedule, c:output-head, c:test-set, c:preprint, q:predict, q:choice, q:explain, q:exercise-with-check]
+  mentions: [c:encoder-decoder, c:weight-tying]
+  data: []
+  needs: any
+
+- id: res-hypothesis-control
+  title: "Change one thing at a time"
+  level: gevorderd
+  module: research-experiments
+  idea: "An experiment compares runs that differ in exactly one thing, against a control, so you know what caused the difference."
+  covers: [experimenten-ontwerpen-en-ablaties#0]
+  requires: [res-research-cycle, gpt-train-chars]
+  introduces: [c:control-run, c:independent-variable]
+  uses: [c:hypothesis, c:experiment, c:run, c:seed, c:learning-rate, c:warmup, c:validation-set, c:loss, c:training, c:epoch, c:mini-batch, c:batch-size, c:context-window, c:gpt, c:transformer-block, c:model-parameter, c:hyperparameter, c:baseline, py:dict, py:list, py:for, py:if, py:comparison, py:bool, py:def, py:return, py:append, py:print, py:comment, py:string-literal, py:underscore-name, q:predict, q:choice, q:explain, q:exercise-with-check, q:run-cell]
+  ladder: [python]
+  data: [tiny-shakespeare]
+  compute_minutes: 2
+  needs: any
+
+- id: res-ablation
+  title: "Ablation: what happens if you take a part out?"
+  level: gevorderd
+  module: research-experiments
+  kind: project
+  project: llm
+  idea: "Remove one part of your GPT, such as the position embedding, retrain and measure; that is how papers show which parts matter."
+  covers: [experimenten-ontwerpen-en-ablaties#1]
+  requires: [res-hypothesis-control, gpt-train-chars]
+  introduces: [c:ablation]
+  uses: [c:control-run, c:independent-variable, c:run, c:seed, c:validation-set, c:loss, c:epoch, c:gpt, c:learned-position-embedding, c:causal-mask, c:transformer-block, c:mlp, c:layernorm, c:attention, c:token, c:embedding, c:logit, c:optimizer, c:model-parameter, c:checkpoint, c:gpu, c:device, py:no-grad, py:requires-grad, py:slicing, py:torch-tensor, py:import, py:def, py:print, py:comment, py:underscore-name, q:predict, q:choice, q:explain, q:exercise-with-check, q:run-cell]
+  mentions: [c:freezing]
+  ladder: [torch]
+  data: [tiny-shakespeare]
+  compute_minutes: 8
+  fallback: [cpu]
+  needs: gpu8
+
+- id: res-seeds-variance
+  title: "One run is not a result: seeds and variance"
+  level: gevorderd
+  module: research-experiments
+  idea: "The same experiment with another seed gives another number; you train a small version of your GPT with five seeds and report the spread with a confidence interval."
+  covers: [experimenten-ontwerpen-en-ablaties#2]
+  requires: [res-ablation, stats-bootstrap]
+  introduces: [c:run-to-run-variance]
+  uses: [c:seed, c:confidence-interval, c:bootstrap, c:resample, c:with-replacement, c:quantile, c:mean, c:run, c:control-run, c:ablation, c:warmup, c:validation-set, c:loss, c:epoch, c:mini-batch, c:gpt, c:random-number-generator, c:noise, c:learning-rate, c:paper, c:weight, c:experiment, py:np-random-generator, py:np-quantile, py:np-mean, py:len, py:tuple, py:keyword-argument, py:for, py:range, py:list, py:append, py:def, py:return, py:import-as, py:print, py:comment, py:underscore-name, q:predict, q:choice, q:explain, q:exercise-with-check, q:run-cell]
+  ladder: [numpy]
+  data: [tiny-shakespeare]
+  compute_minutes: 3
+  needs: any
+
+- id: res-experiment-log
+  title: "Keeping an experiment log"
+  level: gevorderd
+  module: research-experiments
+  idea: "Log every run with its settings, code version, seed and result, so you can always find out what you did."
+  covers: [experimenten-ontwerpen-en-ablaties#3, ontwikkelomgeving-tracking-en-reproduceerbaarheid#2]
+  requires: [res-seeds-variance]
+  introduces: [p:experiment-log, c:json, c:json-lines, c:hash, c:code-version, py:json, py:open-write, py:hashlib]
+  uses: [c:run, c:seed, c:run-to-run-variance, c:control-run, c:ablation, c:validation-set, c:loss, c:checkpoint, c:gpt, c:learning-rate, c:warmup, c:layer, c:mini-batch, c:weight, c:experiment, c:baseline, c:file-path, c:newline, py:dict, py:open, py:with, py:method, py:def, py:return, py:for, py:if, py:bool, py:comparison, py:list, py:tuple, py:append, py:comprehension, py:len, py:slicing, py:str, py:string-literal, py:import, py:print, py:comment, py:underscore-name, q:predict, q:choice, q:explain, q:exercise-with-check, q:run-cell]
+  ladder: [python]
+  needs: any
+
+- id: res-fair-baselines
+  title: "Fair comparisons"
+  level: gevorderd
+  module: research-experiments
+  idea: "Give the baseline the same tuning effort, data and compute as your own method, or the comparison means nothing."
+  covers: [evaluatiemethodologie#0]
+  requires: [res-seeds-variance, ml-baselines]
+  introduces: [c:fair-comparison, c:tuning-effort]
+  uses: [c:baseline, c:hyperparameter, c:learning-rate, c:validation-set, c:test-set, c:train-set, c:accuracy, c:seed, c:run, c:run-to-run-variance, c:control-run, c:mean, c:epoch, c:layer, c:gpt, c:loss, c:language-model, c:paper, py:dict, py:for, py:if, py:none, py:comparison, py:list, py:indexing, py:return, py:def, py:np-mean, py:import-as, py:print, py:comment, py:underscore-name, q:predict, q:choice, q:explain, q:exercise-with-check, q:run-cell]
+  ladder: [numpy]
+  needs: any
+
+- id: res-significance
+  title: "Is the difference real?"
+  level: gevorderd
+  module: research-experiments
+  idea: "A paired bootstrap or a permutation test tells you whether a difference between two models could just be noise."
+  covers: [evaluatiemethodologie#1]
+  requires: [res-fair-baselines, stats-bootstrap]
+  introduces: [c:paired-bootstrap, c:permutation-test, c:null-hypothesis, c:p-value, c:statistically-significant]
+  uses: [c:bootstrap, c:resample, c:with-replacement, c:confidence-interval, c:quantile, c:mean, c:seed, c:run, c:run-to-run-variance, c:warmup, c:learning-rate, c:layer, c:gpt, c:validation-set, c:loss, c:epoch, c:mini-batch, c:weight, c:fair-comparison, c:tuning-effort, c:baseline, c:random-number-generator, c:paper, py:np-array, py:np-mean, py:np-quantile, py:np-random-generator, py:np-abs, py:abs, py:len, py:comparison, c:vectorization, py:slicing, py:for, py:range, py:list, py:append, py:def, py:return, py:import-as, py:print, py:comment, py:underscore-name, q:predict, q:choice, q:explain, q:exercise-with-check, q:run-cell]
+  ladder: [numpy]
+  needs: any
+
+- id: res-figures
+  title: "Figures that show something"
+  level: gevorderd
+  module: research-experiments
+  idea: "One message per figure, labeled axes with units, spread over seeds shown, and the comparison you want people to see side by side."
+  covers: [resultaten-opschrijven-en-presenteren#2]
+  requires: [res-significance, py-plotting, res-figure-and-table]
+  introduces: [p:make-a-clear-figure, py:plt-legend]
+  uses: [py:plot, v:line-plot, v:scatter-plot, v:bar-chart, v:log-scale, py:import-as, py:keyword-argument, py:list, py:len, py:string-literal, py:comment, py:underscore-name, c:seed, c:run, c:run-to-run-variance, c:mean, c:warmup, c:learning-rate, c:layer, c:gpt, c:validation-set, c:loss, c:epoch, c:paper, c:caption, c:fair-comparison, c:p-value, q:predict, q:choice, q:explain, q:exercise-with-check, q:run-cell]
+  ladder: [python]
+  needs: any
+
+# ===================== expert =====================
+- id: res-formula-to-code
+  title: "From formula to code"
+  level: expert
+  module: research-reproduction
+  idea: "Decode the notation, write each symbol as a tensor with a shape, and check the code on a toy example you can compute by hand."
+  covers: [wiskunde-in-papers-lezen#0, wiskunde-in-papers-lezen#1, wiskunde-in-papers-lezen#2]
+  requires: [res-three-pass, math-matrix-calculus]
+  introduces: [p:formula-to-code, c:label-smoothing, c:kronecker-delta, c:toy-example, py:torch-allclose, py:torch-eye]
+  uses: [c:paper, c:cross-entropy, c:one-hot, c:softmax, c:logit, c:label, c:probability-distribution, c:batch-size, c:shape, c:gradient-checking, c:transformer, s:sigma-sum, py:nn-cross-entropy-loss, py:math-module, py:torch-tensor, py:dim, py:def, py:return, py:print, py:import, py:comment, py:underscore-name, q:predict, q:choice, q:explain, q:exercise-with-check, q:run-cell]
+  needs: any
+
+- id: res-derivations
+  title: "Following a derivation"
+  level: expert
+  module: research-reproduction
+  idea: "Work through a derivation line by line, filling in the step the authors skipped, and check it numerically."
+  covers: [wiskunde-in-papers-lezen#3]
+  requires: [res-formula-to-code]
+  introduces: [p:check-a-derivation-numerically, c:derivation, py:np-var]
+  uses: [c:variance, c:expected-value, c:normal-distribution, c:initialization, c:he-init, c:relu, c:weight, c:layer, c:bias-term, c:shape, c:paper, py:np-array, py:np-mean, py:np-std, py:np-sum, py:np-maximum, py:np-random-generator, py:tuple, py:def, py:return, py:print, py:comment, py:underscore-name, py:import-as, q:predict, q:choice, q:exercise-with-check, q:run-cell]
+  ladder: [numpy]
+  needs: any
+
+- id: res-critical-reading
+  title: "Critical reading: claims versus evidence"
+  level: expert
+  module: research-reproduction
+  idea: "Check whether the experiments really support the claim: missing baselines, one seed, a cherry-picked metric."
+  covers: [papers-lezen#7]
+  requires: [res-three-pass, res-fair-baselines]
+  introduces: [q:find-the-overclaim, c:overclaim, c:strong-baseline, c:cherry-picking]
+  uses: [c:paper, c:abstract, c:baseline, c:fair-comparison, c:tuning-effort, c:run-to-run-variance, c:seed, c:validation-set, c:metric, c:layernorm, c:gpt, c:learning-rate, c:normal-distribution, c:dropout, c:accuracy, py:np-random-generator, py:np-mean, c:axis, py:boolean-mask, py:def, py:return, py:import, py:comment, q:predict, q:choice, q:explain, q:check-a-claim, q:exercise-with-check]
+  needs: any
+
+- id: res-choose-paper
+  title: "Choosing a paper you can reproduce"
+  level: expert
+  module: research-reproduction
+  idea: "Pick a small, testable claim that fits your compute budget, with code or data available, and estimate the cost before you start."
+  covers: [een-reproduceerbare-paper-kiezen#0, een-reproduceerbare-paper-kiezen#1, een-reproduceerbare-paper-kiezen#2]
+  requires: [res-critical-reading, sys-compute-6nd]
+  introduces: [p:choose-a-reproducible-paper, c:reproduction, c:falsifiable, c:ml-reproducibility-challenge]
+  uses: [c:paper, c:overclaim, c:flops, c:seed, c:baseline, c:gpu, c:checkpoint, c:dropout, c:batchnorm, c:learning-rate, c:weight-decay, c:validation-set, c:accuracy, c:transformer, c:gpt, py:for, py:print, py:comment, py:underscore-name, q:predict, q:choice, q:explain, q:run-cell]
+  needs: any
+
+- id: repro-guided-claim
+  title: "Guided reproduction 1: read the paper and pick the claim"
+  level: expert
+  module: guided-reproduction
+  kind: project
+  project: repro
+  idea: "Together we read the grokking paper and write down the one claim we will test, and how we would know it failed; the plan goes into the first part of your reproduction kit."
+  covers: [een-reproduceerbare-paper-kiezen#2]
+  requires: [res-choose-paper]
+  introduces: [p:reproduction-plan, p:repro-kit, c:grokking]
+  uses: [c:paper, c:reproduction, c:falsifiable, c:overfitting, c:generalization, c:accuracy, c:validation-set, c:weight-decay, c:transformer, c:seed, py:modulo, py:for, py:range, py:len, py:if, py:break, py:none, py:is-none, py:def, py:return, py:print, py:comment, py:underscore-name, q:predict, q:choice, q:explain, q:exercise-with-check, q:run-cell]
+  data: [paper-grokking]
+  needs: any
+
+- id: repro-guided-build
+  title: "Guided reproduction 2: build the model and the data"
+  level: expert
+  module: guided-reproduction
+  kind: project
+  project: repro
+  idea: "Generate the modular arithmetic data and adapt your GPT to the paper's setup, checking every setting against the paper."
+  covers: [papers-reproduceren#1]
+  requires: [repro-guided-claim, llm-modern-gpt, res-formula-to-code]
+  introduces: [c:modular-arithmetic, c:train-fraction, c:deviation, py:random-shuffle]
+  uses: [p:repro-kit, p:reproduction-plan, c:grokking, c:paper, c:reproduction, c:transformer, c:decoder-only-transformer, c:transformer-block, c:layer, c:attention, c:attention-head, c:query, c:key, c:learned-position-embedding, c:mlp, c:matrix, c:rope, c:rmsnorm, c:swiglu, c:embedding, c:token, c:vocabulary, c:logit, c:loss, c:cross-entropy, c:accuracy, c:generalization, c:train-set, c:validation-set, c:shuffling, c:run, c:shape, c:logarithm, c:parameter-count, c:optimizer, c:weight-decay, c:adamw, c:learning-rate, c:warmup, c:mini-batch, c:batch-size, c:seed, c:hyperparameter, c:model-parameter, py:def, py:return, py:for, py:range, py:list, py:append, py:tuple, py:modulo, py:slicing, py:int, py:import, py:random-module, py:dict, py:print, py:comment, py:underscore-name, py:len, py:arithmetic, py:float, py:scientific-notation, q:predict, q:choice, q:exercise-with-check, q:run-cell, c:grouped-query-attention, c:multi-query-attention]
+  data: [paper-grokking, synthetic-modular-arithmetic]
+  needs: any
+
+- id: repro-guided-sanity
+  title: "Guided reproduction 3: sanity checks"
+  level: expert
+  module: guided-reproduction
+  kind: project
+  project: repro
+  idea: "Overfit one batch and compare shapes and a first loss with what the paper implies, before any long run; the kit gets a sanity check you can point at any model."
+  covers: [papers-reproduceren#3]
+  requires: [repro-guided-build, nn-gradient-check, nn-deep-net-project]
+  introduces: [c:sanity-check]
+  uses: [p:overfit-one-batch, p:repro-kit, p:reproduction-plan, c:grokking, c:reproduction, c:paper, c:modular-arithmetic, c:train-fraction, c:deviation, c:loss, c:cross-entropy, c:logit, c:logarithm, c:probability, c:token, c:vocabulary, c:shape, c:mini-batch, c:batch-size, c:training-loop, c:optimizer, c:adamw, c:weight-decay, c:learning-rate, c:initialization, c:validation-set, c:train-set, c:accuracy, c:transformer, c:attention, c:seed, c:run, py:def, py:return, py:for, py:range, py:list, py:append, py:dict, py:tuple, py:import, py:math-module, py:len, py:print, py:comment, py:underscore-name, py:torch-tensor, py:no-grad, py:nn-cross-entropy-loss, py:zero-grad, py:backward, py:optimizer-step, py:item, q:predict, q:choice, q:exercise-with-check, q:run-cell]
+  needs: any
+
+- id: repro-guided-figure
+  title: "Guided reproduction 4: reproduce the key figure"
+  level: expert
+  module: guided-reproduction
+  kind: project
+  project: repro
+  idea: "Train long enough to see validation accuracy jump long after training accuracy, and redraw the figure from your own logs; the kit gets a multi-seed runner and a logger."
+  covers: [resultaten-opschrijven-en-presenteren#2]
+  requires: [repro-guided-sanity, res-figures, res-experiment-log]
+  introduces: [p:redraw-a-figure]
+  uses: [p:repro-kit, p:reproduction-plan, c:sanity-check, c:grokking, c:reproduction, c:paper, c:accuracy, c:seed, c:run, c:run-to-run-variance, c:validation-set, c:train-set, c:train-fraction, c:generalization, c:overfitting, c:modular-arithmetic, c:token, c:logit, c:adamw, c:weight-decay, c:warmup, c:lr-schedule, c:mini-batch, c:random-number-generator, c:experiment, p:experiment-log, c:json, c:json-lines, py:json, c:file-path, py:open, py:with, v:log-scale, v:line-plot, v:train-val-curves, c:logarithm, py:plot, py:plt-legend, p:make-a-clear-figure, c:caption, c:device, c:gpu, c:module, c:package, p:import-own-code, py:no-grad, py:item, py:to-device, py:while, py:set, py:lambda, py:dict, py:list, py:append, py:def, py:return, py:for, py:if, py:import, py:f-string, py:float, q:predict, q:choice, q:explain, q:exercise-with-check, q:run-cell]
+  data: [course-grokking]
+  compute_minutes: 5
+  fallback: [cpu, recorded]
+  needs: gpu8
+
+- id: repro-guided-ablation
+  title: "Guided reproduction 5: the ablation"
+  level: expert
+  module: guided-reproduction
+  kind: project
+  project: repro
+  idea: "Turn weight decay off and on and vary the training fraction: which part is needed for the jump? The six small runs take a few minutes each on one GPU."
+  covers: [experimenten-ontwerpen-en-ablaties#1]
+  requires: [repro-guided-figure, res-ablation]
+  introduces: [c:ablation-grid]
+  uses: [p:repro-kit, p:reproduction-plan, p:redraw-a-figure, c:ablation, c:control-run, c:warmup, c:grokking, c:reproduction, c:paper, c:accuracy, c:seed, c:run, c:run-to-run-variance, c:validation-set, c:train-set, c:train-fraction, c:generalization, c:weight-decay, c:adamw, c:experiment, p:experiment-log, c:json, c:json-lines, py:json, py:open, py:with, v:log-scale, v:line-plot, py:plot, py:plt-legend, p:make-a-clear-figure, c:device, c:gpu, c:module, p:import-own-code, py:dict, py:list, py:append, py:def, py:return, py:for, py:if, py:import, py:comprehension, py:f-string, q:predict, q:choice, q:explain, q:exercise-with-check, q:run-cell]
+  data: [course-ablation]
+  compute_minutes: 15
+  fallback: [recorded]
+  needs: gpu8
+
+- id: repro-guided-compare
+  title: "Guided reproduction 6: does it match the paper?"
+  level: expert
+  module: guided-reproduction
+  kind: project
+  project: repro
+  idea: "Compare your numbers with the paper over several seeds with a paired bootstrap, and hunt for undocumented details when they differ; the kit gets the comparison."
+  covers: [papers-reproduceren#4, papers-reproduceren#5]
+  requires: [repro-guided-ablation, res-significance]
+  uses: [p:repro-kit]
+  compute_minutes: 10
+  fallback: [recorded]
+  needs: gpu8
+
+- id: repro-guided-report
+  title: "Guided reproduction 7: write the report"
+  level: expert
+  module: guided-reproduction
+  kind: project
+  project: repro
+  idea: "Write a short reproduction report: claim, setup, result, differences and what you could not check, including negative results; the kit gets the report template."
+  covers: [papers-reproduceren#6, resultaten-opschrijven-en-presenteren#0, resultaten-opschrijven-en-presenteren#7]
+  requires: [repro-guided-compare]
+  introduces: [p:reproduction-report]
+  uses: [p:repro-kit]
+  needs: any
+
+- id: res-share-work
+  title: "Sharing your work so others can repeat it"
+  level: expert
+  module: guided-reproduction
+  idea: "Publish code, settings, seeds and checkpoints with a license, so someone else can rerun your reproduction."
+  covers: [reproduceerbaarheid-en-open-science#1, reproduceerbaarheid-en-open-science#2, reproduceerbaarheid-en-open-science#3]
+  requires: [repro-guided-report, res-experiment-log, data-provenance]
+  introduces: [c:open-artifact]
+  uses: [c:license]
+  needs: any
+
+- id: repro-own-choose
+  title: "Your reproduction 1: choose a paper"
+  level: expert
+  module: own-reproduction
+  kind: project
+  project: repro
+  idea: "Choose a paper from the course list, or one of your own that passes the same checks, in the spirit of the ML Reproducibility Challenge."
+  covers: [een-reproduceerbare-paper-kiezen#3]
+  requires: [repro-guided-report]
+  needs: any
+
+- id: repro-own-claim
+  title: "Your reproduction 2: claim and plan"
+  level: expert
+  module: own-reproduction
+  kind: project
+  project: repro
+  idea: "Write down the claim, the experiment, the compute estimate and what would count as a failed reproduction, in the plan format of your kit; a check reviews the plan."
+  covers: [een-reproduceerbare-paper-kiezen#0, een-reproduceerbare-paper-kiezen#2]
+  requires: [repro-own-choose]
+  uses: [p:repro-kit]
+  needs: any
+
+- id: repro-own-build
+  title: "Your reproduction 3: build it"
+  level: expert
+  module: own-reproduction
+  kind: project
+  project: repro
+  idea: "Implement the method and the data from the paper with as little help as you need."
+  covers: [papers-reproduceren#1]
+  requires: [repro-own-claim]
+  uses: [p:repro-kit]
+  needs: any
+
+- id: repro-own-sanity
+  title: "Your reproduction 4: sanity checks"
+  level: expert
+  module: own-reproduction
+  kind: project
+  project: repro
+  idea: "Run the sanity checks of your kit on your own model before any long run."
+  covers: [papers-reproduceren#3]
+  requires: [repro-own-build]
+  uses: [p:repro-kit]
+  needs: any
+
+- id: repro-own-figure
+  title: "Your reproduction 5: the main result"
+  level: expert
+  module: own-reproduction
+  kind: project
+  project: repro
+  idea: "Reproduce the main figure or table of the paper over several seeds, with the runner and logger of your kit."
+  covers: [papers-reproduceren#4]
+  requires: [repro-own-sanity]
+  uses: [p:repro-kit]
+  compute_minutes: paper
+  needs: rec
+
+- id: repro-own-ablation
+  title: "Your reproduction 6: ablation and comparison"
+  level: expert
+  module: own-reproduction
+  kind: project
+  project: repro
+  idea: "Run one ablation that tests which part of the method the result depends on."
+  covers: [experimenten-ontwerpen-en-ablaties#1]
+  requires: [repro-own-figure]
+  uses: [p:repro-kit]
+  compute_minutes: paper
+  needs: rec
+
+- id: repro-own-compare
+  tak: onderzoek
+  title: "Own reproduction: compare with the paper"
+  level: expert
+  module: own-reproduction
+  kind: project
+  project: repro
+  idea: "Test with the comparison from your kit whether the difference between your numbers and the paper's is real, and look for the reason when it is."
+  covers: [papers-reproduceren#5]
+  requires: [repro-own-ablation]
+  uses: [p:repro-kit, c:paired-bootstrap]
+  needs: any
+
+- id: repro-own-report
+  title: "Your reproduction 7: report and share"
+  level: expert
+  module: own-reproduction
+  kind: project
+  project: repro
+  idea: "Write the report with the template of your kit, publish code and results, and tell the authors what you found."
+  covers: [papers-reproduceren#6]
+  requires: [repro-own-compare, res-share-work]
+  uses: [p:repro-kit]
+  needs: any
+
+- id: res-whats-next
+  title: "Where to go next"
+  level: expert
+  module: own-reproduction
+  idea: "Back to the map: every other branch now builds on what you know, and the course shows where each one connects."
+  covers: [onderzoeksvragen-kiezen#0]
+  requires: [repro-own-report, start-map-of-ai]
+  introduces: [c:attach-point]
+  uses: [c:course-branch]
+  needs: any

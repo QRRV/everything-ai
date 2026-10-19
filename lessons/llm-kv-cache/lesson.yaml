@@ -1,0 +1,33 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: llm-kv-cache
+minutes: 35
+title:
+  en: "The KV cache"
+  nl: "De KV cache"
+goal:
+  en: "write one step of attention with a KV cache, and count what the cache costs in memory."
+  nl: "één stap van attention met een KV cache schrijven, en tellen wat de cache aan geheugen kost."
+summary:
+  - en: "With the causal mask, the keys and values of earlier tokens stay the same when the text grows; the KV cache keeps them, so that a step only sends the new token through the model."
+    nl: "Door de causal mask blijven de keys en values van eerdere tokens gelijk als de tekst groeit; de KV cache bewaart ze, zodat een stap alleen het nieuwe token door het model stuurt."
+  - en: "A step adds the new key and value at the end of the cache and compares the new query with every key in it, without a mask; the outcome is the same as without a cache."
+    nl: "Een stap zet de nieuwe key en value aan het eind van de cache en vergelijkt de nieuwe query met elke key erin, zonder mask; de uitkomst is dezelfde als zonder cache."
+  - en: "The cache takes 2 × layers × key and value heads × d_head × tokens × texts × bytes per number, and grows with every token; grouped-query attention makes it smaller."
+    nl: "De cache neemt 2 × layers × key- en value-heads × d_head × tokens × teksten × bytes per getal in, en groeit met elk token; grouped-query attention maakt hem kleiner."
+can_now:
+  - en: "write one step of attention with a KV cache"
+    nl: "één stap van attention met een KV cache schrijven"
+    by: attend-step
+  - en: "count the memory of a KV cache"
+    nl: "het geheugen van een KV cache tellen"
+    by: kv-gb
+  - en: "say how many texts fit next to a model on a GPU"
+    nl: "zeggen hoeveel teksten naast een model op een GPU passen"
+    by: fits
+further_reading:
+  - en: "Reiner Pope and others (2022), *Efficiently Scaling Transformer Inference*, arXiv:2211.05102"
+    nl: "Reiner Pope en anderen (2022), *Efficiently Scaling Transformer Inference*, arXiv:2211.05102"
+  - en: "Woosuk Kwon and others (2023), *Efficient Memory Management for Large Language Model Serving with PagedAttention*, arXiv:2309.06180"
+    nl: "Woosuk Kwon en anderen (2023), *Efficient Memory Management for Large Language Model Serving with PagedAttention*, arXiv:2309.06180"

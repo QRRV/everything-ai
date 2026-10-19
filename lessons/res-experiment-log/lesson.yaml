@@ -1,0 +1,34 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: res-experiment-log
+minutes: 30
+title:
+  en: "Keeping an experiment log"
+  nl: "Een experimentlogboek bijhouden"
+goal:
+  en: "write every run to a log, with its code version, all its settings, its seed and its result, and find runs back in it."
+  nl: "elke run in een logboek schrijven, met zijn codeversie, al zijn instellingen, zijn seed en zijn resultaat, en er runs in terugvinden."
+summary:
+  - en: "An experiment log has one line per run: the code version, all settings, the seed and the result. The code that trains writes it, right after the run."
+    nl: "Een experimentlogboek heeft één regel per run: de codeversie, alle instellingen, de seed en het resultaat. De code die traint schrijft hem, direct na de run."
+  - en: "Each line is one JSON line, added to the end of the file with \"a\"; a line that is there is never changed."
+    nl: "Elke regel is één JSON-regel, met \"a\" aan het eind van het bestand toegevoegd; een regel die er staat verander je nooit."
+  - en: "The code version is a hash of the code: with the same settings and seed, a run with another version may differ because of the code."
+    nl: "De codeversie is een hash van de code: met dezelfde instellingen en seed kan een run met een andere versie verschillen door de code."
+can_now:
+  - en: "add a run as one JSON line to the end of a log"
+    nl: "een run als één JSON-regel aan het eind van een logboek toevoegen"
+    by: log-run
+  - en: "find the runs with some settings back in a log"
+    nl: "de runs met bepaalde instellingen terugvinden in een logboek"
+    by: find-runs
+  - en: "say which settings a line needs"
+    nl: "zeggen welke instellingen een regel nodig heeft"
+    by: all-settings
+  - en: "say what another code version means for two runs with the same settings and seed"
+    nl: "zeggen wat een andere codeversie betekent voor twee runs met dezelfde instellingen en seed"
+    by: code-version
+further_reading:
+  - en: "Peter Henderson, Riashat Islam, Philip Bachman, Joelle Pineau, Doina Precup and David Meger (2018), *Deep Reinforcement Learning that Matters*, AAAI 2018: the same algorithms with the same settings in several public implementations, with clearly different results"
+    nl: "Peter Henderson, Riashat Islam, Philip Bachman, Joelle Pineau, Doina Precup en David Meger (2018), *Deep Reinforcement Learning that Matters*, AAAI 2018: dezelfde algoritmen met dezelfde instellingen in meerdere openbare implementaties, met duidelijk verschillende resultaten"

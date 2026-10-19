@@ -1,0 +1,28 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: lm-smoothing
+minutes: 25
+title:
+  en: "Pairs you never saw: smoothing"
+  nl: "Paren die je nooit zag: smoothing"
+goal:
+  en: "give every pair a little probability with add-k smoothing, so that new text no longer gets an infinite NLL, and choose k on text the model did not count."
+  nl: "elk paar een beetje kans geven met add-k smoothing, zodat nieuwe tekst geen oneindige NLL meer krijgt, en k kiezen op tekst die het model niet telde."
+summary:
+  - en: "A pair with count 0 gets probability 0, and one such pair makes the NLL of a text infinite: counted on 90% of the plays, the last 10% gets an infinite NLL."
+    nl: "Een paar met telling 0 krijgt kans 0, en één zo'n paar maakt de NLL van een tekst oneindig: geteld op 90% van de toneelstukken krijgt de laatste 10% een oneindige NLL."
+  - en: "Add-k smoothing adds k to every count before dividing by the row sums; with k = 1 it is Laplace smoothing. No pair has probability 0 any more."
+    nl: "Add-k smoothing telt k bij elke telling op voordat je door de rijsommen deelt; met k = 1 heet het Laplace smoothing. Geen enkel paar heeft dan nog kans 0."
+  - en: "Smoothing makes the NLL on the counted text a little worse; choose k on text the model did not count."
+    nl: "Smoothing maakt de NLL op de getelde tekst iets slechter; kies k op tekst die het model niet telde."
+can_now:
+  - en: "work out the probability add-k smoothing gives to a pair that never came"
+    nl: "de kans uitrekenen die add-k smoothing geeft aan een paar dat nooit voorkwam"
+    by: unseen-prob
+  - en: "smooth a count matrix with add-k smoothing"
+    nl: "add-k smoothing toepassen op een telmatrix"
+    by: smooth
+  - en: "choose k on text the model did not count"
+    nl: "k kiezen op tekst die het model niet telde"
+    by: pick-k

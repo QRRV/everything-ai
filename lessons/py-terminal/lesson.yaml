@@ -1,0 +1,28 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: py-terminal
+minutes: 15
+title:
+  en: "The terminal: running a script"
+  nl: "De terminal: een script uitvoeren"
+goal:
+  en: "open a terminal, go to the course folder, and run a script with `uv run python`."
+  nl: "een terminal openen, naar de map van de course gaan, en een script uitvoeren met `uv run python`."
+summary:
+  - en: "A long job runs as a script, a `.py` file you start from the terminal; the lesson stays free in the meantime."
+    nl: "Een lange klus draait als script, een `.py`-bestand dat je vanuit de terminal start; de les blijft ondertussen vrij."
+  - en: "`cd` goes to the course folder; `uv run python` and a path from there runs a script with the course's own Python."
+    nl: "`cd` gaat naar de map van de course; `uv run python` met een pad vanaf daar voert een script uit met de eigen Python van de course."
+  - en: "What the script prints appears in the terminal; when the `$` (on a Mac often `%`) is back, it is done, and Ctrl+C stops it sooner."
+    nl: "Wat het script print, verschijnt in de terminal; is de `$` (op een Mac vaak `%`) terug, dan is het klaar, en Ctrl+C stopt het eerder."
+can_now:
+  - en: "choose the command that runs a script from the course folder"
+    nl: "het commando kiezen dat een script uitvoert vanuit de map van de course"
+    by: which-command
+  - en: "run a script in a second terminal and read what it prints"
+    nl: "een script uitvoeren in een tweede terminal en lezen wat het print"
+    by: dice-result
+  - en: "write your own short script, and run it"
+    nl: "een eigen kort script schrijven, en uitvoeren"
+    by: countdown

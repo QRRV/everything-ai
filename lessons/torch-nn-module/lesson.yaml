@@ -1,0 +1,28 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: torch-nn-module
+minutes: 25
+title:
+  en: "Layers as modules: nn.Linear"
+  nl: "Layers als modules: nn.Linear"
+goal:
+  en: "build a network as a class on `nn.Module`, with `nn.Linear` layers and a `forward`, and train it through `net.parameters()`."
+  nl: "een netwerk bouwen als class op `nn.Module`, met `nn.Linear`-layers en een `forward`, en het trainen via `net.parameters()`."
+summary:
+  - en: "`nn.Linear(n_inputs, n_outputs)` is a layer: its `weight` has a row per neuron, shape (outputs, inputs), so for examples in the rows of `X` it works out X Wᵀ + b."
+    nl: "`nn.Linear(n_inputs, n_outputs)` is een layer: zijn `weight` heeft een rij per neuron, shape (outputs, inputs), dus voor voorbeelden in de rijen van `X` rekent hij X Wᵀ + b uit."
+  - en: "Your own model is a class on `nn.Module`: `__init__` calls `super().__init__()` and makes the layers as attributes, `forward` says what happens to `x`, and `net(X)` runs it."
+    nl: "Je eigen model is een class op `nn.Module`: `__init__` roept `super().__init__()` aan en maakt de layers als attributen, `forward` zegt wat er met `x` gebeurt, en `net(X)` voert het uit."
+  - en: "`net.parameters()` gives the `weight` and `bias` tensors of every layer, so a training step loops over them, as over `parameters()` of your own `MLP`; only layers that are attributes are found."
+    nl: "`net.parameters()` geeft de `weight`- en `bias`-tensors van elke layer, dus een trainingsstap loopt eroverheen, zoals over `parameters()` van je eigen `MLP`; alleen layers die attributen zijn, worden gevonden."
+can_now:
+  - en: "say what shape comes out of an `nn.Linear` layer"
+    nl: "zeggen welke shape er uit een `nn.Linear`-layer komt"
+    by: output-shape
+  - en: "write a network as a class on `nn.Module`"
+    nl: "een netwerk schrijven als class op `nn.Module`"
+    by: net
+  - en: "train an `nn.Module` with a loop over `net.parameters()`"
+    nl: "een `nn.Module` trainen met een loop over `net.parameters()`"
+    by: train

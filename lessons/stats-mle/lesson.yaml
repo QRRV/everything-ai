@@ -1,0 +1,28 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: stats-mle
+minutes: 25
+title:
+  en: "Maximum likelihood"
+  nl: "Maximum likelihood"
+goal:
+  en: "choose the parameters that make the data most likely, and explain why that is the same as training on the cross-entropy loss."
+  nl: "de parameters kiezen die de data het waarschijnlijkst maken, en uitleggen waarom dat hetzelfde is als trainen op de cross-entropy-loss."
+summary:
+  - en: "Maximum likelihood chooses the parameters that make the data most likely: $\\hat{\\theta} = \\arg\\max_\\theta \\prod_i p_\\theta(x_i)$."
+    nl: "Maximum likelihood kiest de parameters die de data het waarschijnlijkst maken: $\\hat{\\theta} = \\arg\\max_\\theta \\prod_i p_\\theta(x_i)$."
+  - en: "The same parameters give the lowest average negative log-likelihood, which is the cross-entropy between the data and the model: training on the cross-entropy loss is maximum likelihood."
+    nl: "Dezelfde parameters geven de laagste gemiddelde negative log-likelihood, en dat is de cross-entropy tussen de data en het model: trainen op de cross-entropy-loss is maximum likelihood."
+  - en: "For a coin the estimate is the share of heads, for classes the share of each class; with little data it fits the accidents too."
+    nl: "Bij een munt is de schatting het aandeel kop, bij klassen het aandeel van elke klasse; met weinig data past ze ook bij de toevalligheden."
+can_now:
+  - en: "explain why models minimize the average negative log-likelihood instead of maximizing a product"
+    nl: "uitleggen waarom modellen de gemiddelde negative log-likelihood minimaliseren in plaats van een product te maximaliseren"
+    by: why-log
+  - en: "write the average negative log-likelihood of yes-or-no data"
+    nl: "de gemiddelde negative log-likelihood van ja-of-nee-data schrijven"
+    by: avg-nll
+  - en: "find the maximum likelihood estimate by trying a grid of values"
+    nl: "de maximum-likelihoodschatting vinden door een grid van waarden te proberen"
+    by: best-p

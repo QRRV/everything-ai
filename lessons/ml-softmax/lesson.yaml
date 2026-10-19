@@ -1,0 +1,28 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: ml-softmax
+minutes: 15
+title:
+  en: "Many classes: softmax"
+  nl: "Veel klassen: softmax"
+goal:
+  en: "turn the logits of many classes into probabilities with softmax, safely for big logits, and see that with two classes it is the sigmoid."
+  nl: "met softmax van de logits van veel klassen kansen maken, veilig bij grote logits, en zien dat het bij twee klassen de sigmoid is."
+summary:
+  - en: 'Softmax takes $e$ to the power of each logit and divides by their sum: the probabilities are all positive and add up to 1, and the biggest logit gets the biggest one.'
+    nl: 'Softmax neemt $e$ tot de macht van elke logit en deelt door hun som: de kansen zijn allemaal positief en samen 1, en de grootste logit krijgt de grootste.'
+  - en: "Only the differences between logits count, so take the largest logit off first: `e = np.exp(z - z.max())`, then `e / e.sum()`. Then `np.exp` never gets too big."
+    nl: "Alleen de verschillen tussen logits tellen, dus haal eerst de grootste logit eraf: `e = np.exp(z - z.max())`, dan `e / e.sum()`. Dan wordt `np.exp` nooit te groot."
+  - en: "With two classes and the logits $z$ and 0, softmax gives the sigmoid of $z$."
+    nl: "Met twee klassen en de logits $z$ en 0 geeft softmax de sigmoid van $z$."
+can_now:
+  - en: "say what adding the same number to all logits does to softmax"
+    nl: "zeggen wat het optellen van hetzelfde getal bij alle logits met softmax doet"
+    by: add-ten
+  - en: "write softmax as a function that is safe for big logits"
+    nl: "softmax als functie schrijven die veilig is bij grote logits"
+    by: softmax
+  - en: "show that softmax with two classes is the sigmoid"
+    nl: "laten zien dat softmax bij twee klassen de sigmoid is"
+    by: two-classes

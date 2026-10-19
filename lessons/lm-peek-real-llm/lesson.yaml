@@ -1,0 +1,31 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: lm-peek-real-llm
+minutes: 15
+title:
+  en: "Look inside a real LLM's next-token probabilities"
+  nl: "Kijk in de kansen van een echt LLM op het volgende token"
+goal:
+  en: "load GPT-2, a real language model, and read its probabilities for the next token after a text of your own."
+  nl: "GPT-2 laden, een echt language model, en zijn kansen op het volgende token lezen na een tekst van jezelf."
+summary:
+  - en: "GPT-2 small, an open model by OpenAI from 2019 with 124 million parameters, turns a text of t tokens into logits of shape (t, 50257): a row per position, a logit per token of its vocabulary."
+    nl: "GPT-2 small, een open model van OpenAI uit 2019 met 124 miljoen parameters, maakt van een tekst van t tokens logits met shape (t, 50257): een rij per positie, een logit per token van zijn vocabulary."
+  - en: "The softmax of the last row, torch.softmax(logits[-1], dim=0), is the next-token distribution: a row as in your bigram table, but computed anew from all the tokens before."
+    nl: "De softmax van de laatste rij, torch.softmax(logits[-1], dim=0), is de kansverdeling van het volgende token: een rij zoals in je bigram-tabel, maar telkens opnieuw berekend uit alle tokens ervoor."
+  - en: "torch.topk gives the most likely tokens. After \"The capital of France is\", GPT-2 puts \" the\" first, with 0.085, and \" Paris\" fifth, with 0.032: it continues text, it does not answer questions."
+    nl: "torch.topk geeft de waarschijnlijkste tokens. Na \"The capital of France is\" zet GPT-2 \" the\" voorop, met 0,085, en \" Paris\" op de vijfde plaats, met 0,032: het schrijft tekst verder, het beantwoordt geen vragen."
+can_now:
+  - en: "turn the logits of a language model into its next-token distribution"
+    nl: "de logits van een language model omzetten in zijn kansverdeling van het volgende token"
+    by: next-probs
+  - en: "list the most likely next tokens as pieces of text, with their probabilities"
+    nl: "de waarschijnlijkste volgende tokens geven als stukken tekst, met hun kansen"
+    by: top-tokens
+  - en: "say why GPT-2 and a bigram table differ after the same last token"
+    nl: "zeggen waarom GPT-2 en een bigram-tabel verschillen na hetzelfde laatste token"
+    by: context
+further_reading:
+  - en: "Alec Radford, Jeffrey Wu, Rewon Child, David Luan, Dario Amodei and Ilya Sutskever (2019), *Language Models are Unsupervised Multitask Learners*, OpenAI: the paper of GPT-2"
+    nl: "Alec Radford, Jeffrey Wu, Rewon Child, David Luan, Dario Amodei en Ilya Sutskever (2019), *Language Models are Unsupervised Multitask Learners*, OpenAI: de paper van GPT-2"

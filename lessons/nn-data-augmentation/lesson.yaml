@@ -1,0 +1,29 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+# termen:allow verschuiving, verschuivingen
+id: nn-data-augmentation
+minutes: 25
+title:
+  en: "Data augmentation"
+  nl: "Data augmentation"
+goal:
+  en: "make new training examples from the ones you have, with random shifts in a Dataset, and see the overfitting shrink."
+  nl: "nieuwe trainingsvoorbeelden maken van de voorbeelden die je hebt, met willekeurige verschuivingen in een Dataset, en de overfitting zien krimpen."
+summary:
+  - en: "Data augmentation changes training examples at random in ways that keep the label, such as a shift of a pixel, anew every time an example is used."
+    nl: "Data augmentation verandert trainingsvoorbeelden willekeurig op manieren waarbij het label blijft kloppen, zoals een verschuiving van een pixel, elke keer opnieuw als een voorbeeld gebruikt wordt."
+  - en: "It goes in the `__getitem__` of a Dataset, for the training set only; `torch.roll` shifts an image along its rows and columns."
+    nl: "Die hoort in de `__getitem__` van een Dataset, alleen voor de training set; `torch.roll` verschuift een afbeelding langs zijn rijen en kolommen."
+  - en: "With shifts of up to 1 pixel, the lowest validation loss of the MLP on 1,000 digits falls from 0.41 to 0.24 in one run: the model can hardly learn exact pixels by heart."
+    nl: "Met verschuivingen van hooguit 1 pixel daalt de laagste validation loss van het MLP op 1.000 cijfers in één run van 0,41 naar 0,24: het model kan nauwelijks precieze pixels uit het hoofd leren."
+can_now:
+  - en: "say which sets get the random changes, and why"
+    nl: "zeggen welke sets de willekeurige veranderingen krijgen, en waarom"
+    by: where
+  - en: "write a Dataset that shifts every example at random"
+    nl: "een Dataset schrijven die elk voorbeeld willekeurig verschuift"
+    by: shifted
+  - en: "tell changes that keep a label from changes that break it"
+    nl: "veranderingen waarbij het label blijft kloppen onderscheiden van veranderingen die het breken"
+    by: keeps-label

@@ -1,0 +1,1549 @@
+# Lessons whose home branch is "stam" (the shared foundation), level basis.
+# Planning data; the map: key below names the map version. Format: ../FORMAT.md. Titles are English working titles.
+tak: stam
+map: v2.2
+lessons:
+
+# --- module start -----------------------------------------------------------
+- id: start-how-this-course-works
+  title: "How a lesson works"
+  level: basis
+  module: start
+  idea: "You read a short explanation, run code, predict what happens, try an exercise, and a check tells you why your answer is right or wrong."
+  covers: [notebooks#0]
+  introduces: [q:run-cell, q:predict, q:exercise-with-check, p:scratchpad, p:restart-lesson, q:choice, q:explain]
+  needs: any
+
+- id: start-ai-ml-genai
+  title: "AI, machine learning, deep learning and generative AI"
+  level: basis
+  module: start
+  idea: "These four words are nested circles: generative AI is a kind of deep learning, which is a kind of machine learning, which is one way to build AI."
+  covers: [definities-en-framings#0, wat-ml-is#1]
+  requires: [start-how-this-course-works]
+  introduces: [c:artificial-intelligence, c:machine-learning, c:deep-learning, c:generative-ai]
+  needs: any
+
+- id: start-rules-vs-learning
+  title: "Writing rules versus learning from examples"
+  level: basis
+  module: start
+  idea: "Instead of writing the rules yourself, you show the computer examples and let it find the rule."
+  covers: [wat-ml-is#0]
+  requires: [start-ai-ml-genai]
+  introduces: [c:learning-from-data]
+  mentions: [c:example]
+  needs: any
+
+- id: start-map-of-ai
+  title: "The map of AI and how this course is organized"
+  level: basis
+  module: start
+  idea: "AI is a large field; the course shows the whole map, a shared trunk, branches per area and three levels, and you choose a route through it."
+  covers: [definities-en-framings#2]
+  requires: [start-ai-ml-genai]
+  introduces: [c:course-branch, c:course-level, c:course-route]
+  uses: [q:choice, q:predict]
+  mentions: [c:model, c:paper, c:attention, c:gpt]
+  needs: any
+
+- id: start-using-ai-tools
+  tak: bouwen
+  title: "Using AI tools with your eyes open"
+  level: basis
+  module: start
+  idea: "A chat assistant is a language model behind an interface: it can explain, draft and code, but it also states wrong things with confidence, so you check what matters."
+  covers: [ai-geletterdheid-voor-gebruikers#0, ai-geletterdheid-voor-gebruikers#4, ai-geletterdheid-voor-gebruikers#5]
+  requires: [start-ai-ml-genai]
+  introduces: [c:ai-assistant, p:verify-ai-output]
+  uses: [q:choice, q:predict, q:explain]
+  mentions: [c:model, c:language-model]
+  needs: any
+
+- id: start-short-history
+  title: "A short history of AI"
+  level: basis
+  module: start
+  idea: "AI went through waves of hope and winters; deep learning and then large language models are the latest wave."
+  covers: [geschiedenis#2, geschiedenis#4, geschiedenis#5, geschiedenis#6, geschiedenis#7, geschiedenis#8]
+  requires: [start-ai-ml-genai]
+  introduces: [c:ai-winter]
+  uses: [q:choice, q:predict]
+  mentions: [c:model, c:language-model, c:perceptron, c:backpropagation, c:gpu, c:neuron, c:layer]
+  needs: any
+
+# --- module python ----------------------------------------------------------
+- id: py-first-program
+  title: "Your first program"
+  level: basis
+  module: python
+  idea: "A program is a list of instructions that runs from top to bottom; print shows a result."
+  covers: [python#0]
+  requires: [start-how-this-course-works]
+  introduces: [c:program, py:print, py:string-literal, py:comment]
+  uses: [q:run-cell, q:predict, q:choice, q:exercise-with-check]
+  ladder: [python]
+  needs: any
+
+- id: py-variables
+  title: "Variables and numbers"
+  level: basis
+  module: python
+  idea: "A variable is a name for a value; Python calculates with whole numbers and decimal numbers, including powers with **."
+  covers: [python#0]
+  requires: [py-first-program]
+  introduces: [py:variable, py:int, py:float, py:arithmetic]
+  uses: [py:print, py:string-literal, py:comment, q:predict, q:choice, q:exercise-with-check, p:scratchpad]
+  mentions: [c:artificial-intelligence]
+  ladder: [python]
+  needs: any
+
+- id: py-names-in-cells
+  title: "Names in a notebook: one name, one cell"
+  level: basis
+  module: python
+  idea: "In a notebook every name belongs to exactly one cell; helper names that start with _ stay inside their own cell, so they never clash with yours."
+  covers: [notebooks#1]
+  requires: [py-variables]
+  introduces: [c:marimo, p:one-name-one-cell, py:underscore-name]
+  uses: [py:variable, py:arithmetic, py:print, py:comment, q:predict, q:choice, q:exercise-with-check, q:run-cell]
+  ladder: [python]
+  needs: any
+
+- id: py-strings
+  title: "Text: strings"
+  level: basis
+  module: python
+  idea: "A string is a sequence of characters you can measure, index and build with f-strings."
+  covers: [python#0]
+  requires: [py-names-in-cells]
+  introduces: [py:str, py:f-string, py:len, py:indexing]
+  uses: [py:print, py:string-literal, py:comment, py:variable, py:arithmetic, py:underscore-name, q:predict, q:choice, q:exercise-with-check, q:run-cell]
+  mentions: [c:ai-assistant]
+  ladder: [python]
+  needs: any
+
+- id: py-if
+  title: "Making choices: if and else"
+  level: basis
+  module: python
+  idea: "A comparison gives True or False, and if runs code only when the condition is True."
+  covers: [python#0]
+  requires: [py-variables]
+  introduces: [py:bool, py:comparison, py:if]
+  uses: [py:print, py:string-literal, py:comment, py:variable, py:int, py:float, py:arithmetic, q:predict, q:choice, q:exercise-with-check, p:scratchpad]
+  ladder: [python]
+  needs: any
+
+- id: py-lists
+  title: "Lists"
+  level: basis
+  module: python
+  idea: "A list holds many values in order; you can index, slice and grow it."
+  covers: [python#1]
+  requires: [py-strings]
+  introduces: [py:list, py:slicing, py:append]
+  uses: [py:indexing, py:len, py:f-string, py:str, py:print, py:string-literal, py:comment, py:variable, py:underscore-name, q:predict, q:choice, q:exercise-with-check, q:run-cell]
+  mentions: [py:for, py:method]
+  ladder: [python]
+  needs: any
+
+- id: py-for
+  title: "Repeating: for loops"
+  level: basis
+  module: python
+  idea: "A for loop runs the same code once for every item in a list or range."
+  covers: [python#0]
+  requires: [py-lists, py-if]
+  introduces: [py:for, py:range]
+  uses: [py:list, py:append, py:indexing, py:slicing, py:if, py:comparison, py:bool, py:f-string, py:print, py:string-literal, py:comment, py:variable, py:arithmetic, py:underscore-name, q:predict, q:choice, q:exercise-with-check, q:run-cell]
+  ladder: [python]
+  needs: any
+
+- id: py-while
+  title: "Repeating until something happens: while"
+  level: basis
+  module: python
+  idea: "A while loop repeats until its condition becomes False, and break stops it early."
+  covers: [python#0]
+  requires: [py-for]
+  introduces: [py:while, py:break]
+  uses: [py:for, py:range, py:list, py:if, py:comparison, py:bool, py:len, py:f-string, py:print, py:variable, py:arithmetic, py:underscore-name, q:predict, q:choice, q:exercise-with-check, q:run-cell]
+  ladder: [python]
+  needs: any
+
+- id: py-functions
+  title: "Functions"
+  level: basis
+  module: python
+  idea: "A function puts code under a name, takes arguments and returns a result."
+  covers: [python#0]
+  requires: [py-for]
+  introduces: [py:def, py:return, c:function-argument, py:none]
+  uses: [py:for, py:range, py:list, py:if, py:comparison, py:bool, py:len, py:str, py:string-literal, py:f-string, py:print, py:comment, py:variable, py:int, py:float, py:arithmetic, py:underscore-name, q:predict, q:choice, q:exercise-with-check, q:run-cell]
+  warns: [parameter]
+  ladder: [python]
+  needs: any
+
+- id: py-recursion
+  title: "A function that calls itself"
+  level: basis
+  module: python
+  idea: "A recursive function solves a problem by calling itself on a smaller piece, with a base case that stops it."
+  covers: [python#0]
+  requires: [py-functions]
+  introduces: [py:recursion]
+  uses: [py:def, py:return, c:function-argument, py:if, py:comparison, py:slicing, py:indexing, py:str, py:print, py:arithmetic, py:underscore-name, q:predict, q:choice, q:exercise-with-check, q:run-cell]
+  ladder: [python]
+  needs: any
+
+- id: py-dicts
+  title: "Dictionaries"
+  level: basis
+  module: python
+  idea: "A dictionary looks up a value by its key, like a word in a dictionary."
+  covers: [python#1]
+  requires: [py-for]
+  introduces: [py:dict]
+  warns: [key]
+  uses: [py:for, py:if, py:comparison, py:bool, py:list, py:indexing, py:len, py:int, py:float, py:f-string, py:print, py:string-literal, py:comment, py:variable, py:arithmetic, py:underscore-name, q:predict, q:choice, q:exercise-with-check, q:run-cell]
+  ladder: [python]
+  needs: any
+
+- id: py-tuples-sets
+  title: "Tuples, sets and sorting"
+  level: basis
+  module: python
+  idea: "A tuple is a fixed group of values, a set keeps each value once, and sorted puts values in order."
+  covers: [python#1]
+  requires: [py-lists]
+  introduces: [py:tuple, py:set, py:sorted]
+  mentions: [py:none]
+  uses: [py:list, py:indexing, py:slicing, py:len, py:append, py:str, py:string-literal, py:f-string, py:print, py:comment, py:variable, py:int, py:float, py:underscore-name, q:predict, q:choice, q:exercise-with-check, q:run-cell]
+  ladder: [python]
+  needs: any
+
+- id: py-comprehensions
+  title: "Building lists and dictionaries in one line"
+  level: basis
+  module: python
+  idea: "A comprehension builds a new list or dictionary from an old one in a single readable line."
+  covers: [python#5]
+  requires: [py-dicts, py-tuples-sets]
+  introduces: [py:comprehension]
+  uses: [py:for, py:dict, py:if, py:comparison, py:bool, py:list, py:append, py:indexing, py:str, py:set, py:sorted, py:len, py:print, py:string-literal, py:comment, py:variable, py:int, py:float, py:arithmetic, py:underscore-name, q:predict, q:choice, q:exercise-with-check, q:run-cell]
+  ladder: [python]
+  needs: any
+
+- id: py-errors
+  title: "Reading error messages and finding bugs"
+  level: basis
+  module: python
+  idea: "A traceback tells you where and why the program stopped; read it from the bottom up and test small pieces."
+  covers: [python#3]
+  requires: [py-functions]
+  introduces: [c:traceback, c:bug, q:find-the-bug]
+  uses: [py:def, py:return, c:function-argument, py:for, py:if, py:comparison, py:bool, py:list, py:indexing, py:len, py:print, py:comment, py:variable, py:int, py:float, py:arithmetic, py:underscore-name, q:predict, q:choice, q:exercise-with-check, q:run-cell]
+  ladder: [python]
+  needs: any
+
+- id: py-exceptions
+  title: "Catching and raising errors"
+  level: basis
+  module: python
+  idea: "try and except let a program handle an expected problem, and raise signals one yourself."
+  covers: [python#3]
+  requires: [py-errors]
+  introduces: [py:try-except, py:raise, py:int-conversion]
+  uses: [c:traceback, py:def, py:return, py:none, py:str, c:function-argument, py:for, py:if, py:comparison, py:bool, py:list, py:len, py:f-string, py:print, py:string-literal, py:comment, py:variable, py:int, py:float, py:arithmetic, py:underscore-name, q:predict, q:choice, q:exercise-with-check, q:run-cell]
+  ladder: [python]
+  needs: any
+
+- id: py-files
+  title: "Reading a text file"
+  level: basis
+  module: python
+  idea: "open reads a file from disk, and with makes sure it is closed again."
+  covers: [python#3]
+  requires: [py-strings, py-for]
+  introduces: [py:open, py:with, py:strip, c:file-path, c:newline]
+  uses: [py:for, py:if, py:comparison, py:list, py:int, py:str, py:len, py:indexing, py:print, py:string-literal, py:comment, py:variable, py:arithmetic, py:underscore-name, q:predict, q:choice, q:exercise-with-check, q:run-cell]
+  ladder: [python]
+  needs: any
+
+- id: py-imports
+  title: "Using code from modules"
+  level: basis
+  module: python
+  idea: "import brings in ready-made code such as math and random, so you do not write everything yourself."
+  covers: [python#6]
+  requires: [py-functions]
+  introduces: [py:import, py:math-module, py:random-module, c:module, c:seed]
+  uses: [py:def, py:return, py:none, c:function-argument, py:for, py:range, py:list, py:append, py:str, py:float, py:int, py:arithmetic, py:f-string, py:print, py:comment, py:variable, py:underscore-name, q:predict, q:choice, q:exercise-with-check, q:run-cell]
+  ladder: [python]
+  needs: any
+
+- id: py-own-modules
+  title: "Your own module: keeping project code in a file"
+  level: basis
+  module: python
+  idea: "Code you want to reuse goes in your own .py file, which later lessons import; this is how your projects grow."
+  covers: [ontwikkelomgeving-tracking-en-reproduceerbaarheid#0]
+  requires: [py-imports]
+  introduces: [c:package, p:import-own-code]
+  uses: [py:import, py:math-module, c:module, py:def, py:return, c:function-argument, py:for, py:list, py:len, py:float, py:arithmetic, py:print, py:comment, py:variable, q:predict, q:choice, q:exercise-with-check, q:run-cell]
+  mentions: [c:language-model]
+  ladder: [python]
+  needs: any
+
+- id: py-classes
+  title: "Classes and objects"
+  level: basis
+  module: python
+  idea: "A class bundles data and the functions that work on it; each object made from it has its own data."
+  covers: [python#5]
+  requires: [py-functions, py-dicts]
+  introduces: [py:class, py:self, py:method, py:init-method]
+  uses: [py:def, py:return, py:none, c:function-argument, py:dict, py:for, py:range, py:if, py:bool, py:list, py:append, py:len, py:str, py:f-string, py:print, py:comment, py:variable, py:int, py:arithmetic, py:underscore-name, q:predict, q:choice, q:exercise-with-check, q:run-cell]
+  mentions: [c:layer, c:model]
+  ladder: [python]
+  needs: any
+
+- id: py-special-methods
+  title: "Special methods: making + and print work on your objects"
+  level: basis
+  module: python
+  idea: "Methods with double underscores, like __add__ and __call__, tell Python what +, print and calling do with your object."
+  covers: [python#5]
+  requires: [py-classes]
+  introduces: [py:dunder-method, py:call-method]
+  uses: [py:class, py:self, py:method, py:init-method, py:def, py:return, py:none, c:function-argument, py:list, py:str, py:f-string, py:print, py:comment, py:variable, py:int, py:float, py:arithmetic, py:underscore-name, q:predict, q:choice, q:exercise-with-check, q:run-cell]
+  mentions: [c:model]
+  ladder: [python]
+  needs: any
+
+- id: py-inheritance
+  title: "Building on another class"
+  level: basis
+  module: python
+  idea: "A subclass reuses everything of its parent class and adds or changes a little; super() calls the parent."
+  covers: [python#5]
+  requires: [py-classes]
+  introduces: [py:inheritance, py:super]
+  uses: [py:class, py:self, py:method, py:init-method, py:def, py:return, py:none, c:function-argument, py:list, py:bool, py:str, py:f-string, py:print, py:comment, py:variable, py:int, py:float, py:arithmetic, py:underscore-name, q:predict, q:choice, q:exercise-with-check, q:run-cell]
+  mentions: [c:model, c:layer, py:nn-module]
+  ladder: [python]
+  needs: any
+
+- id: py-generators
+  title: "Generators: producing values one at a time"
+  level: basis
+  module: python
+  idea: "A generator uses yield to hand out values one by one, so you never hold all of them in memory."
+  covers: [python#5]
+  requires: [py-functions]
+  introduces: [py:yield, py:iterator]
+  uses: [py:def, py:return, py:none, c:function-argument, py:for, py:range, py:list, py:append, py:len, py:if, py:comparison, py:bool, py:str, py:string-literal, py:print, py:comment, py:variable, py:int, py:arithmetic, py:underscore-name, q:predict, q:choice, q:exercise-with-check, q:run-cell]
+  mentions: [c:model, c:mini-batch]
+  ladder: [python]
+  needs: any
+
+- id: py-decorators
+  title: "Decorators"
+  level: basis
+  module: python
+  idea: "A line starting with @ above a function wraps that function in extra behavior."
+  covers: [python#5]
+  requires: [py-functions, py-files]
+  introduces: [py:decorator]
+  uses: [py:with, py:open, py:def, py:return, py:none, c:function-argument, py:if, py:comparison, py:list, py:len, py:str, py:string-literal, py:print, py:comment, py:variable, py:int, py:float, py:arithmetic, py:underscore-name, q:predict, q:choice, q:exercise-with-check, q:run-cell]
+  mentions: [c:relu, py:no-grad]
+  warns: ["@"]
+  ladder: [python]
+  needs: any
+
+- id: py-plotting
+  title: "Drawing numbers: line, scatter and bar charts"
+  level: basis
+  module: python
+  idea: "A plot turns a list of numbers into a picture you can read at a glance."
+  covers: [eda-en-visualisatie#5]
+  requires: [py-lists, py-imports]
+  introduces: [py:plot, v:line-plot, v:scatter-plot, v:bar-chart]
+  uses: [py:import, py:list, py:len, py:str, py:string-literal, py:int, py:print, py:comment, py:variable, py:underscore-name, q:predict, q:choice, q:exercise-with-check, q:run-cell]
+  mentions: [c:loss, c:model]
+  ladder: [python]
+  needs: any
+
+- id: py-project-letter-counts
+  title: "Project: which letters does a book use?"
+  level: basis
+  module: python
+  kind: project
+  project: llm
+  idea: "Count every letter and every pair of letters in a public-domain book and plot the result; the pair counts come back as your first language model."
+  covers: [eda-en-visualisatie#0]
+  requires: [py-comprehensions, py-files, py-own-modules, py-plotting]
+  introduces: [q:mini-project, py:lower, py:and-operator]
+  uses: [py:dict, py:open, py:with, c:file-path, v:bar-chart, py:plot, py:import, c:module, c:package, p:import-own-code, py:sorted, py:comprehension, py:list, py:indexing, py:slicing, py:len, py:range, py:for, py:if, py:bool, py:def, py:return, py:str, py:string-literal, py:print, py:comment, py:variable, py:arithmetic, py:underscore-name, q:predict, q:choice, q:exercise-with-check, q:run-cell]
+  mentions: [c:model, c:language-model, c:bigram, c:tokenizer, c:neural-language-model, c:gpt, c:pretrained-model, c:instruction-tuning]
+  ladder: [python]
+  data: [tiny-shakespeare]
+  needs: any
+
+- id: py-terminal
+  title: "The terminal: running a script"
+  level: basis
+  module: python
+  idea: "Long jobs run as a script from the terminal instead of inside a notebook."
+  covers: [python#4]
+  requires: [py-own-modules, py-files]
+  introduces: [c:terminal, c:script, p:run-script]
+  uses: [c:program, py:import, py:random-module, c:module, c:package, c:seed, c:file-path, py:for, py:range, py:if, py:comparison, py:arithmetic, py:f-string, py:print, py:string-literal, py:comment, py:variable, q:predict, q:choice, q:exercise-with-check]
+  mentions: [c:model, c:loss]
+  needs: any
+
+# --- module numpy and data ---------------------------------------------------
+- id: np-arrays
+  title: "From lists to arrays: shape and dtype"
+  level: basis
+  module: numpy
+  idea: "A NumPy array is a grid of numbers of one type; its shape says how many numbers it has along each direction."
+  covers: [numpy-en-scipy#0, lineaire-algebra#0]
+  requires: [py-lists, py-imports, py-tuples-sets]
+  introduces: [py:np-array, c:array, c:shape, c:dtype, c:vector, c:matrix, py:import-as, py:nested-list]
+  uses: [py:import, c:module, py:str, py:list, py:indexing, py:slicing, py:tuple, py:int, py:float, py:def, py:return, py:f-string, py:print, py:comment, py:variable, py:underscore-name, q:predict, q:choice, q:exercise-with-check, q:run-cell]
+  mentions: [c:mlp, c:pixel]
+  ladder: [numpy]
+  needs: any
+
+- id: np-indexing
+  title: "Selecting parts of an array"
+  level: basis
+  module: numpy
+  idea: "Indexing, slicing and boolean masks select rows, columns or the values that meet a condition."
+  covers: [numpy-en-scipy#0]
+  requires: [np-arrays]
+  introduces: [py:np-indexing, py:boolean-mask]
+  uses: [py:np-array, c:array, c:shape, c:dtype, c:vector, c:matrix, py:import, py:list, py:indexing, py:slicing, py:comparison, py:bool, py:for, py:len, py:def, py:return, py:print, py:comment, py:variable, py:underscore-name, q:predict, q:choice, q:exercise-with-check, q:run-cell]
+  mentions: [c:example, c:feature, c:prediction, c:test-set]
+  ladder: [numpy]
+  needs: any
+
+- id: np-vectorization
+  title: "Calculating without loops"
+  level: basis
+  module: numpy
+  idea: "Arithmetic on whole arrays at once is shorter and much faster than a Python loop."
+  covers: [numpy-en-scipy#1]
+  requires: [np-arrays, py-for]
+  introduces: [c:vectorization, py:np-arange]
+  uses: [py:np-array, c:array, c:shape, py:for, py:range, py:list, py:append, py:arithmetic, py:float, py:import, py:def, py:return, py:print, py:comment, py:variable, py:underscore-name, q:predict, q:choice, q:exercise-with-check, q:run-cell]
+  mentions: [c:model]
+  ladder: [python, numpy]
+  needs: any
+
+- id: np-axis
+  title: "Sums and means along an axis"
+  level: basis
+  module: numpy
+  idea: "sum, mean and argmax can work over the whole array or along one axis, such as per row."
+  covers: [numpy-en-scipy#0]
+  requires: [np-arrays]
+  introduces: [c:axis, py:np-sum, py:np-mean, py:np-argmax, c:mean, py:keyword-argument]
+  uses: [py:np-array, c:array, c:shape, c:matrix, c:vector, py:import, py:import-as, py:nested-list, py:tuple, py:indexing, py:for, py:len, py:list, py:arithmetic, py:float, py:def, py:return, py:print, py:comment, py:variable, py:underscore-name, q:predict, q:choice, q:exercise-with-check, q:run-cell]
+  mentions: [c:model, c:prediction, c:example]
+  ladder: [numpy]
+  needs: any
+
+- id: np-broadcasting
+  title: "Broadcasting"
+  level: basis
+  module: numpy
+  idea: "NumPy stretches a smaller array to match a bigger one when their shapes are compatible."
+  covers: [numpy-en-scipy#1]
+  requires: [np-vectorization, np-axis]
+  introduces: [c:broadcasting, py:keepdims]
+  uses: [py:np-array, c:array, c:shape, c:matrix, c:vector, c:vectorization, c:axis, py:np-sum, py:np-mean, c:mean, py:tuple, py:import, py:for, py:list, py:arithmetic, py:def, py:return, py:print, py:comment, py:variable, py:underscore-name, q:predict, q:choice, q:exercise-with-check, q:run-cell]
+  mentions: [c:model, c:mini-batch, c:example]
+  ladder: [numpy]
+  needs: any
+
+- id: np-random
+  title: "Random numbers and seeds"
+  level: basis
+  module: numpy
+  idea: "A random generator with a fixed seed gives the same 'random' numbers every run, so results can be repeated."
+  covers: [numpy-en-scipy#2, numerieke-wiskunde#2]
+  requires: [np-arrays, py-imports, np-axis]
+  introduces: [py:np-random-generator, c:random-number-generator]
+  uses: [c:seed, py:random-module, py:keyword-argument, py:np-array, c:array, c:shape, c:dtype, c:vector, c:matrix, py:tuple, py:import, py:import-as, py:list, py:str, py:float, py:none, c:function-argument, py:def, py:return, py:print, py:comment, py:variable, py:underscore-name, q:predict, q:choice, q:exercise-with-check, q:run-cell]
+  mentions: [c:model, c:example, c:paper, c:language-model]
+  ladder: [numpy]
+  needs: any
+
+- id: data-pandas
+  title: "Tables with pandas"
+  level: basis
+  module: data
+  idea: "A DataFrame is a table with named columns; you select columns and filter rows."
+  covers: [dataframes#0]
+  requires: [np-indexing, py-files]
+  introduces: [py:dataframe, py:pandas-select-filter, c:csv, c:library]
+  uses: [py:np-array, c:array, c:shape, c:dtype, py:boolean-mask, py:np-indexing, c:file-path, py:import, py:import-as, py:list, py:comparison, py:bool, py:def, py:return, py:print, py:comment, py:variable, py:underscore-name, py:string-literal, q:predict, q:choice, q:exercise-with-check, q:run-cell]
+  mentions: [c:example]
+  ladder: [numpy]
+  needs: any
+
+- id: stats-describe
+  title: "Describing data: mean, median and spread"
+  level: basis
+  module: data
+  idea: "A few numbers and a histogram summarize a whole column: where the middle is and how spread out it is."
+  covers: [statistiek#0]
+  requires: [np-axis, np-vectorization, py-plotting]
+  introduces: [c:median, c:outlier, c:standard-deviation, c:quantile, v:histogram, c:bin, py:np-median, py:np-std, py:np-quantile, py:min-max, py:plt-hist]
+  uses: [c:mean, py:np-mean, py:np-sum, py:np-array, c:array, c:vectorization, py:plot, v:bar-chart, py:range, py:keyword-argument, py:import, py:import-as, py:list, py:float, py:arithmetic, py:def, py:return, py:print, py:comment, py:variable, py:underscore-name, q:predict, q:choice, q:exercise-with-check, q:run-cell]
+  mentions: [c:model, c:training]
+  ladder: [numpy]
+  needs: any
+
+- id: data-explore
+  title: "Asking questions of data"
+  level: basis
+  module: data
+  idea: "Before modeling, look at the data: what is in it, what is missing, what is strange."
+  covers: [eda-en-visualisatie#2]
+  requires: [data-pandas, stats-describe]
+  introduces: [p:exploratory-data-analysis, c:missing-value, py:pandas-describe, py:isna, py:value-counts]
+  uses: [py:keyword-argument, py:comparison, py:bool, py:np-sum, py:np-mean, py:min-max, c:shape, c:file-path, py:dataframe, py:pandas-select-filter, c:csv, py:boolean-mask, c:mean, c:median, c:standard-deviation, c:quantile, c:outlier, py:import, py:import-as, py:def, py:return, py:print, py:comment, py:variable, py:underscore-name, py:string-literal, q:predict, q:choice, q:exercise-with-check, q:run-cell]
+  mentions: [c:model]
+  ladder: [numpy]
+  needs: any
+
+- id: data-provenance
+  title: "Where does this data come from?"
+  level: basis
+  module: data
+  idea: "Every dataset has a source, a license and limits; you write them down before you use it."
+  covers: [datasetdocumentatie#0, datasetdocumentatie#1]
+  requires: [data-explore, py-dicts]
+  introduces: [c:data-provenance, c:license, c:consent, c:datasheet]
+  uses: [py:dict, py:for, py:if, py:comparison, py:bool, py:append, py:list, py:def, py:return, py:print, py:f-string, py:comment, py:variable, py:underscore-name, py:string-literal, py:isna, c:missing-value, q:predict, q:choice, q:exercise-with-check, q:run-cell]
+  mentions: [c:model, c:training, c:model-card]
+  data: []
+  needs: any
+
+# --- module first model --------------------------------------------------------
+- id: ml-vocabulary
+  title: "Examples, features and labels"
+  level: basis
+  module: first-model
+  idea: "Each example has features (what you know) and a label (what you want to predict); training uses examples with labels, inference predicts new ones."
+  covers: [wat-ml-is#2]
+  requires: [start-rules-vs-learning, data-explore]
+  introduces: [c:example, c:feature, c:label, c:training, c:inference, py:iloc]
+  uses: [py:bool, py:comparison, py:none, py:indexing, c:function-argument, c:file-path, py:np-sum, py:dataframe, py:pandas-select-filter, py:isna, c:missing-value, c:csv, c:shape, py:boolean-mask, py:import, py:import-as, py:def, py:return, py:print, py:comment, py:variable, py:underscore-name, py:string-literal, py:list, q:predict, q:choice, q:exercise-with-check, q:run-cell]
+  mentions: [c:model, c:language-model, c:prediction]
+  warns: [feature, label, inference]
+  ladder: [numpy]
+  needs: any
+
+- id: ml-model-is-a-function
+  title: "A model is a function with parameters"
+  level: basis
+  module: first-model
+  idea: "A model turns features into a prediction; its parameters, such as the weight w and the bias b in w*x + b, decide which prediction."
+  covers: [notatie-en-wiskundig-redeneren#0]
+  requires: [ml-vocabulary, py-functions, py-plotting]
+  introduces: [c:model, c:model-parameter, c:prediction, s:y-hat, s:w, s:b, c:weight, c:bias-term, s:y, s:x]
+  uses: [c:feature, c:label, c:example, c:training, py:def, py:return, c:function-argument, py:np-array, c:array, py:list, c:vectorization, py:plot, v:scatter-plot, v:line-plot, py:import, py:import-as, py:arithmetic, py:float, py:print, py:comment, py:variable, py:underscore-name, q:predict, q:choice, q:exercise-with-check, q:run-cell]
+  warns: [parameter, bias]
+  ladder: [python, numpy]
+  needs: any
+
+- id: ml-residuals
+  title: "How wrong is one prediction?"
+  level: basis
+  module: first-model
+  idea: "The residual is the difference between the true value and the prediction for one example."
+  covers: [lineaire-regressie-en-uitbreidingen#0]
+  requires: [ml-model-is-a-function]
+  introduces: [c:residual, py:np-argmin]
+  uses: [c:model, c:model-parameter, c:prediction, c:weight, c:bias-term, s:y, s:y-hat, s:w, s:b, s:x, c:label, c:feature, c:example, py:np-array, c:array, c:vectorization, py:np-argmax, py:def, py:return, py:import, py:import-as, py:arithmetic, py:print, py:comment, py:variable, py:underscore-name, q:predict, q:choice, q:exercise-with-check, q:run-cell]
+  warns: [residual, error]
+  ladder: [python, numpy]
+  needs: any
+
+- id: ml-mse-loss
+  title: "One number for how wrong: the loss"
+  level: basis
+  module: first-model
+  idea: "The loss summarizes all residuals in one number; mean squared error squares them and takes the mean."
+  covers: [loss-en-empirical-risk-minimization#1, notatie-en-wiskundig-redeneren#1]
+  requires: [ml-residuals, np-axis, np-vectorization]
+  introduces: [c:loss, c:mean-squared-error, s:sigma-sum, s:n-examples, s:l-loss]
+  uses: [c:residual, c:model, c:model-parameter, c:prediction, c:label, c:example, s:y, s:y-hat, c:vectorization, c:mean, py:np-array, c:array, py:np-mean, py:np-sum, py:list, py:append, py:for, py:range, py:len, py:indexing, py:arithmetic, py:float, py:def, py:return, py:import, py:import-as, py:print, py:comment, py:variable, py:underscore-name, q:predict, q:choice, q:explain, q:exercise-with-check, q:run-cell]
+  warns: [cost, error]
+  ladder: [python, numpy]
+  needs: any
+
+- id: ml-fit-by-hand
+  title: "Fitting a line by hand"
+  level: basis
+  module: first-model
+  idea: "Move w and b with sliders and watch the loss; the best line is the lowest point of the loss."
+  covers: [optimalisatie#0]
+  requires: [ml-mse-loss]
+  introduces: [q:slider-task, v:loss-vs-parameter]
+  uses: [c:loss, c:mean-squared-error, s:l-loss, s:sigma-sum, s:n-examples, c:model, c:model-parameter, c:weight, c:bias-term, c:prediction, c:residual, c:training, c:label, c:example, s:w, s:b, s:x, s:y, py:np-array, c:array, py:np-mean, py:np-argmin, py:list, py:append, py:for, py:indexing, py:arithmetic, py:float, py:def, py:return, py:import, py:import-as, py:print, py:comment, py:variable, py:underscore-name, q:predict, q:choice, q:exercise-with-check, q:run-cell]
+  ladder: [python, numpy]
+  needs: any
+
+- id: math-slope
+  title: "The derivative as a slope"
+  level: basis
+  module: first-model
+  idea: "The derivative tells how fast the loss changes when you nudge a parameter; you can measure it by nudging a tiny bit."
+  covers: [calculus#0]
+  requires: [ml-fit-by-hand]
+  introduces: [c:derivative, c:finite-difference, s:d-derivative]
+  uses: [c:loss, s:l-loss, c:mean-squared-error, c:model-parameter, c:weight, c:bias-term, c:residual, s:w, s:b, q:slider-task, v:loss-vs-parameter, py:np-array, c:array, py:np-mean, py:def, py:return, py:if, py:comparison, py:for, py:arithmetic, py:float, py:import, py:import-as, py:print, py:comment, py:variable, py:underscore-name, q:predict, q:choice, q:exercise-with-check, q:run-cell]
+  ladder: [python, numpy]
+  needs: any
+
+- id: math-slope-formulas
+  title: "Slope formulas you can trust"
+  level: basis
+  module: first-model
+  idea: "Nudging x², x³ and a·x shows that their slopes follow short formulas (2x, 3x², a); a formula gives the exact slope at once, and nudging checks it."
+  covers: [calculus#0]
+  requires: [math-slope]
+  introduces: [c:slope-formula, c:power-rule]
+  uses: [c:finite-difference, c:derivative, s:d-derivative, c:loss, c:weight, c:model-parameter, q:slider-task, py:def, py:return, py:arithmetic, py:float, py:print, py:comment, py:variable, py:underscore-name, q:predict, q:choice, q:exercise-with-check, q:run-cell]
+  ladder: [python]
+  needs: any
+
+- id: ml-gradient-descent-1d
+  title: "Rolling downhill: gradient descent"
+  level: basis
+  module: first-model
+  idea: "Take a small step against the slope, again and again, and you end up at the bottom of the loss."
+  covers: [optimalisatie#1, optimizers#0]
+  requires: [math-slope]
+  introduces: [c:gradient-descent, c:learning-rate, c:update-step, s:eta]
+  uses: [c:model, c:residual, c:derivative, s:d-derivative, c:finite-difference, c:loss, s:l-loss, c:mean-squared-error, c:model-parameter, c:weight, c:bias-term, s:w, s:b, q:slider-task, v:loss-vs-parameter, py:np-array, c:array, py:np-mean, py:def, py:return, py:for, py:range, py:arithmetic, py:float, py:import, py:import-as, py:print, py:comment, py:variable, py:underscore-name, q:predict, q:choice, q:explain, q:exercise-with-check, q:run-cell]
+  mentions: [c:gradient, c:language-model]
+  ladder: [python, numpy]
+  needs: any
+
+- id: ml-learning-rate
+  title: "Too small, too big: the learning rate"
+  level: basis
+  module: first-model
+  idea: "With a small learning rate training crawls, with a big one it overshoots and diverges; the loss curve shows which."
+  covers: [optimalisatie#1]
+  requires: [ml-gradient-descent-1d]
+  introduces: [c:convergence, c:divergence, v:loss-curve, py:abs]
+  uses: [c:learning-rate, s:eta, c:gradient-descent, c:update-step, c:loss, c:mean-squared-error, c:model-parameter, c:weight, s:w, s:b, q:slider-task, v:loss-vs-parameter, py:plot, py:np-array, c:array, py:np-mean, py:list, py:append, py:indexing, py:def, py:return, py:for, py:range, py:comparison, py:bool, py:arithmetic, py:float, py:import, py:import-as, py:print, py:comment, py:variable, py:underscore-name, q:predict, q:choice, q:exercise-with-check, q:run-cell]
+  ladder: [python, numpy]
+  needs: any
+
+- id: math-gradient
+  title: "Two parameters: the gradient"
+  level: basis
+  module: first-model
+  idea: "With several parameters you measure a slope per parameter; together they form the gradient, which points uphill."
+  covers: [calculus#0]
+  requires: [ml-learning-rate]
+  introduces: [c:partial-derivative, c:gradient, s:partial, s:nabla, v:contour-plot]
+  uses: [c:derivative, c:finite-difference, c:loss, s:l-loss, c:mean-squared-error, c:model-parameter, c:weight, c:bias-term, s:w, s:b, c:gradient-descent, c:learning-rate, c:convergence, c:divergence, py:np-array, c:array, py:np-mean, py:list, py:def, py:return, py:arithmetic, py:float, py:import, py:import-as, py:print, py:comment, py:variable, py:underscore-name, q:predict, q:choice, q:exercise-with-check, q:run-cell]
+  ladder: [python, numpy]
+  needs: any
+
+- id: ml-gradient-descent-2d
+  title: "Fitting w and b with gradient descent"
+  level: basis
+  module: first-model
+  idea: "Gradient descent moves w and b together, downhill across the loss landscape."
+  covers: [optimalisatie#1]
+  requires: [math-gradient]
+  introduces: [c:loss-landscape]
+  uses: [c:gradient, c:partial-derivative, s:partial, v:contour-plot, c:gradient-descent, c:learning-rate, s:eta, c:update-step, c:finite-difference, c:loss, s:l-loss, c:residual, c:feature, c:prediction, c:mean-squared-error, c:model, c:model-parameter, c:weight, c:bias-term, s:w, s:b, py:np-array, c:array, py:np-mean, py:list, py:def, py:return, py:for, py:range, py:arithmetic, py:float, py:import, py:import-as, py:print, py:comment, py:variable, py:underscore-name, q:predict, q:choice, q:exercise-with-check, q:run-cell]
+  warns: [loss-landscape]
+  ladder: [python, numpy]
+  needs: any
+
+- id: math-dot-product
+  title: "Many features: the dot product"
+  level: basis
+  module: first-model
+  idea: "A weighted sum of many features is a dot product of two vectors."
+  covers: [lineaire-algebra#2]
+  requires: [np-vectorization, ml-model-is-a-function]
+  introduces: [c:dot-product, py:np-dot, s:dot, s:d-features]
+  uses: [c:vector, c:shape, py:np-array, c:array, c:vectorization, py:np-sum, c:feature, c:example, c:weight, c:bias-term, c:model, c:model-parameter, c:prediction, s:w, s:b, s:x, s:y-hat, py:list, py:indexing, py:for, py:range, py:len, py:def, py:return, py:arithmetic, py:float, py:import, py:import-as, py:print, py:comment, py:variable, py:underscore-name, q:predict, q:choice, q:exercise-with-check, q:run-cell]
+  ladder: [python, numpy]
+  needs: any
+
+- id: math-matrix-multiply
+  title: "A whole batch at once: matrix multiplication"
+  level: basis
+  module: first-model
+  idea: "Multiplying a matrix of examples by a weight vector or matrix does all dot products at once; the shapes must fit."
+  covers: [lineaire-algebra#1]
+  requires: [math-dot-product]
+  introduces: [c:matrix-multiplication, py:matmul-operator, c:shape-rule, s:x-matrix]
+  uses: [c:dot-product, py:np-dot, s:d-features, c:vector, c:matrix, c:shape, py:np-array, c:array, py:nested-list, py:tuple, py:indexing, c:feature, c:example, c:weight, c:bias-term, c:model, c:prediction, s:w, s:b, s:y-hat, py:def, py:return, py:if, py:comparison, py:bool, py:arithmetic, py:float, py:import, py:import-as, py:print, py:comment, py:variable, py:underscore-name, q:predict, q:choice, q:exercise-with-check, q:run-cell]
+  mentions: [c:layer]
+  warns: ["@"]
+  ladder: [python, numpy]
+  needs: any
+
+- id: math-transpose
+  title: "Flipping a matrix: the transpose"
+  level: basis
+  module: first-model
+  idea: "The transpose swaps rows and columns, which is often what makes two shapes fit."
+  covers: [lineaire-algebra#1]
+  requires: [math-matrix-multiply]
+  introduces: [c:transpose, s:transpose-t]
+  uses: [c:matrix-multiplication, py:matmul-operator, c:shape-rule, s:x-matrix, c:dot-product, c:vector, c:matrix, c:shape, py:np-array, c:array, py:nested-list, py:list, py:append, py:indexing, py:len, py:for, py:range, c:feature, c:example, c:weight, c:bias-term, c:model, c:prediction, s:w, py:def, py:return, py:arithmetic, py:float, py:import, py:import-as, py:print, py:comment, py:variable, py:underscore-name, q:predict, q:choice, q:exercise-with-check, q:run-cell]
+  mentions: [c:layer]
+  ladder: [python, numpy]
+  needs: any
+
+- id: math-norms-cosine
+  title: "Length, distance and cosine similarity"
+  level: basis
+  module: first-model
+  idea: "A norm measures how long a vector is; cosine similarity measures whether two vectors point the same way."
+  covers: [lineaire-algebra#2]
+  requires: [math-dot-product]
+  introduces: [c:norm, c:distance, c:cosine-similarity, s:norm-bars, py:np-linalg-norm]
+  uses: [c:dot-product, py:np-dot, s:dot, s:d-features, s:x, c:vector, py:np-array, c:array, py:list, py:indexing, py:len, py:for, py:range, py:def, py:return, py:arithmetic, py:float, py:import, py:import-as, py:print, py:comment, py:variable, py:underscore-name, q:predict, q:choice, q:exercise-with-check, q:run-cell]
+  ladder: [python, numpy]
+  needs: any
+
+- id: math-chain-rule
+  title: "Rates multiply: the chain rule"
+  level: basis
+  module: first-model
+  idea: "If b changes 3 times as fast as a, and c changes 2 times as fast as b, then c changes 6 times as fast as a; with this rule you get the slope of a loss such as (w·x − y)² without nudging."
+  covers: [backpropagation-en-computational-graphs#0]
+  requires: [math-slope-formulas]
+  introduces: [c:chain-rule]
+  uses: [c:slope-formula, c:power-rule, c:derivative, s:d-derivative, c:finite-difference, c:loss, s:l-loss, v:loss-vs-parameter, c:residual, c:model, c:prediction, s:y-hat, c:weight, c:bias-term, c:example, c:feature, c:label, py:tuple, c:model-parameter, s:w, s:b, s:x, s:y, q:slider-task, py:def, py:return, py:arithmetic, py:float, py:print, py:comment, py:variable, py:underscore-name, q:predict, q:choice, q:exercise-with-check, q:run-cell]
+  mentions: [c:mlp]
+  ladder: [python]
+  needs: any
+
+- id: ml-linear-regression-numpy
+  title: "Linear regression on many features"
+  level: basis
+  module: first-model
+  kind: project
+  project: nn
+  idea: "The slope formulas and the chain rule give the gradient of the MSE for every weight at once; vectorised in NumPy, the same gradient descent now trains on any number of features."
+  covers: [lineaire-regressie-en-uitbreidingen#0]
+  requires: [math-matrix-multiply, ml-gradient-descent-2d, math-chain-rule, py-own-modules]
+  introduces: [c:linear-regression, py:np-zeros]
+  uses: [c:matrix-multiplication, py:matmul-operator, c:shape-rule, s:x-matrix, c:dot-product, c:chain-rule, c:gradient, c:partial-derivative, s:partial, c:gradient-descent, c:learning-rate, s:eta, c:update-step, c:finite-difference, c:loss, s:l-loss, c:mean-squared-error, s:sigma-sum, s:n-examples, c:residual, c:model, c:prediction, s:y-hat, c:weight, c:bias-term, c:feature, c:example, c:label, c:model-parameter, c:training, c:mean, s:w, s:b, s:x, s:y, s:d-features, c:vector, c:matrix, c:shape, py:np-array, c:array, py:np-mean, py:np-indexing, c:package, c:module, p:import-own-code, v:scatter-plot, py:import, py:import-as, py:def, py:return, py:for, py:range, py:len, py:tuple, py:list, py:nested-list, py:arithmetic, py:float, py:print, py:comment, py:variable, py:underscore-name, q:predict, q:choice, q:exercise-with-check, q:run-cell]
+  mentions: [c:mlp]
+  ladder: [numpy]
+  needs: any
+
+- id: ml-feature-scaling
+  title: "Why gradient descent likes scaled features"
+  level: basis
+  module: first-model
+  idea: "Features on very different scales stretch the loss landscape; standardising them makes descent fast and stable."
+  covers: [feature-engineering#0]
+  requires: [ml-linear-regression-numpy, stats-describe, np-broadcasting]
+  introduces: [c:standardization, c:feature-scaling]
+  uses: [c:linear-regression, c:gradient-descent, c:learning-rate, c:divergence, s:eta, c:loss-landscape, c:dot-product, py:keyword-argument, py:tuple, v:contour-plot, c:loss, c:mean-squared-error, c:residual, c:mean, c:standard-deviation, py:np-mean, py:np-std, c:axis, c:broadcasting, c:matrix-multiplication, py:matmul-operator, py:np-zeros, c:model, c:prediction, c:weight, c:bias-term, c:feature, c:example, c:label, s:w, s:b, s:x, py:np-array, c:array, c:shape, py:def, py:return, py:for, py:range, py:len, py:arithmetic, py:float, py:import, py:import-as, py:print, py:comment, py:variable, py:underscore-name, q:predict, q:choice, q:exercise-with-check, q:run-cell]
+  mentions: [c:batchnorm]
+  ladder: [numpy]
+  needs: any
+
+- id: ml-sklearn
+  title: "The same model with scikit-learn"
+  level: basis
+  module: first-model
+  idea: "scikit-learn gives every model the same two steps, fit and predict, so you can swap models easily."
+  covers: [scikit-learn#0]
+  requires: [ml-linear-regression-numpy, data-pandas, py-dicts]
+  introduces: [py:sklearn-fit-predict]
+  uses: [c:linear-regression, c:learning-rate, c:update-step, py:np-zeros, py:matmul-operator, c:shape, c:package, py:dict, py:import-as, py:for, py:range, py:tuple, py:return, py:string-literal, py:float, c:library, py:dataframe, py:pandas-select-filter, c:mean-squared-error, c:loss, c:residual, c:model, c:model-parameter, c:prediction, c:weight, c:bias-term, c:feature, c:example, c:label, c:training, c:mean, py:np-mean, c:array, py:import, py:list, py:print, py:comment, py:variable, py:underscore-name, q:predict, q:choice, q:exercise-with-check, q:run-cell]
+  ladder: [numpy]
+  needs: any
+
+# --- module classification and probability --------------------------------------
+- id: prob-basics
+  title: "Probability: counting how often"
+  level: basis
+  module: classification
+  idea: "A probability is how often something happens out of all tries; a distribution lists the probabilities of all outcomes and they add up to 1."
+  covers: [kansrekening#0]
+  requires: [np-axis, py-dicts]
+  introduces: [c:probability, c:probability-distribution, s:p-prob]
+  uses: [py:dict, py:for, py:range, py:if, py:comparison, py:len, py:list, py:append, py:random-module, c:seed, py:import, py:def, py:return, py:arithmetic, py:float, py:int, py:str, py:print, py:comment, py:variable, py:underscore-name, q:predict, q:choice, q:exercise-with-check, q:run-cell]
+  mentions: [c:language-model, c:model]
+  ladder: [python]
+  needs: any
+
+- id: prob-conditional
+  title: "Conditional probability"
+  level: basis
+  module: classification
+  idea: "P(A | B) is the probability of A among only the cases where B happened."
+  covers: [kansrekening#1]
+  requires: [prob-basics]
+  introduces: [c:conditional-probability, s:p-given]
+  uses: [c:probability, c:probability-distribution, s:p-prob, py:tuple, py:dict, py:list, py:for, py:if, py:comparison, py:len, py:append, py:def, py:return, py:arithmetic, py:float, py:int, py:str, py:print, py:comment, py:variable, py:underscore-name, q:predict, q:choice, q:exercise-with-check, q:run-cell]
+  mentions: [c:model]
+  ladder: [python]
+  needs: any
+
+- id: prob-expectation
+  title: "Expected value and variance"
+  level: basis
+  module: classification
+  idea: "The expected value is the long-run average; the variance is the squared difference from it, weighted by probability, and its square root says how far results typically lie from it."
+  covers: [kansrekening#2]
+  requires: [prob-basics, stats-describe]
+  introduces: [c:expected-value, c:variance, s:e-expectation, s:var]
+  uses: [c:probability, c:probability-distribution, s:p-prob, c:mean, c:standard-deviation, py:dict, py:for, py:range, py:random-module, c:seed, py:np-array, c:array, py:np-sum, py:import, py:import-as, py:def, py:return, py:arithmetic, py:float, py:int, py:print, py:comment, py:variable, py:underscore-name, q:predict, q:choice, q:exercise-with-check, q:run-cell]
+  mentions: [c:loss]
+  ladder: [python, numpy]
+  needs: any
+
+- id: prob-bayes
+  title: "Bayes' rule"
+  level: basis
+  module: classification
+  idea: "Bayes' rule turns P(B | A) into P(A | B): it updates a belief with new evidence."
+  covers: [kansrekening#1, onzekerheid-kwantificeren#1, onzekerheid-kwantificeren#2]
+  requires: [prob-conditional]
+  introduces: [c:bayes-rule, c:prior, c:posterior, c:law-of-total-probability, c:base-rate-fallacy]
+  uses: [c:conditional-probability, s:p-given, c:probability, s:p-prob, py:def, py:return, py:arithmetic, py:float, py:print, py:comment, py:variable, py:underscore-name, q:predict, q:choice, q:exercise-with-check, q:run-cell]
+  needs: any
+
+- id: ml-kinds-of-learning
+  title: "Kinds of learning"
+  level: basis
+  module: classification
+  idea: "Supervised learning has labels, unsupervised learning has none, self-supervised learning makes labels from the data itself, and reinforcement learning learns from rewards."
+  covers: [wat-ml-is#3]
+  requires: [ml-vocabulary]
+  introduces: [c:supervised-learning, c:unsupervised-learning, c:self-supervised-learning, c:reinforcement-learning]
+  uses: [c:example, c:feature, c:label, c:training, c:inference, py:for, py:range, py:len, py:list, py:append, py:tuple, py:indexing, py:def, py:return, py:arithmetic, py:str, py:string-literal, py:print, py:comment, py:variable, py:underscore-name, q:predict, q:choice, q:exercise-with-check, q:run-cell]
+  mentions: [c:reward, c:language-model, c:model, c:prediction]
+  ladder: [python]
+  needs: any
+
+- id: ml-classification
+  title: "Classification: predicting a class"
+  level: basis
+  module: classification
+  idea: "Regression predicts a number, classification predicts which class an example belongs to."
+  covers: [wat-ml-is#2]
+  requires: [ml-kinds-of-learning]
+  introduces: [c:classification, c:regression-task, c:class]
+  uses: [c:supervised-learning, c:unsupervised-learning, c:self-supervised-learning, c:reinforcement-learning, c:label, c:feature, c:example, c:mean, c:csv, c:missing-value, c:file-path, c:function-argument, py:import, py:import-as, py:dataframe, py:pandas-select-filter, py:value-counts, py:min-max, py:for, py:if, py:comparison, py:bool, py:list, py:append, py:def, py:return, py:str, py:string-literal, py:float, py:int, py:print, py:comment, py:variable, py:underscore-name, q:predict, q:choice, q:exercise-with-check, q:run-cell]
+  mentions: [c:reward, c:language-model, c:probability, c:model, c:prediction]
+  warns: [regression, class]
+  ladder: [python]
+  needs: any
+
+- id: math-exp-log
+  title: "Exponents and logarithms"
+  level: basis
+  module: classification
+  idea: "exp grows faster and faster; log is its inverse and turns multiplying into adding."
+  covers: [notatie-en-wiskundig-redeneren#2]
+  requires: [py-plotting, np-vectorization]
+  introduces: [c:exponent, c:logarithm, s:exp, s:log, py:np-exp]
+  uses: [c:array, c:vectorization, py:np-array, py:np-arange, py:plot, v:line-plot, py:import, py:import-as, py:list, py:for, py:range, py:len, py:indexing, py:def, py:return, py:arithmetic, py:float, py:int, py:print, py:comment, py:variable, py:underscore-name, q:predict, q:choice, q:exercise-with-check, q:run-cell]
+  mentions: [c:probability, c:classification, c:model]
+  ladder: [python, numpy]
+  needs: any
+
+- id: math-log-scales
+  title: "Log scales and power laws"
+  level: basis
+  module: classification
+  idea: "On a log scale equal steps are equal factors; a power law becomes a straight line on a log-log plot."
+  covers: [notatie-en-wiskundig-redeneren#3]
+  requires: [math-exp-log]
+  introduces: [v:log-scale, v:log-log-plot, c:power-law]
+  uses: [c:exponent, c:logarithm, s:log, py:plot, v:line-plot, py:np-array, py:np-arange, c:array, c:vectorization, py:import, py:import-as, py:list, py:arithmetic, py:float, py:int, py:print, py:comment, py:variable, py:underscore-name, q:predict, q:choice, q:exercise-with-check, q:run-cell]
+  mentions: [c:language-model, c:model-parameter]
+  data: [tiny-shakespeare]
+  ladder: [numpy]
+  needs: any
+
+- id: ml-sigmoid
+  title: "From score to probability: the sigmoid"
+  level: basis
+  module: classification
+  idea: "The sigmoid squeezes any score, called a logit, into a probability between 0 and 1."
+  covers: [activaties-en-loss-functions#0]
+  requires: [math-exp-log, prob-basics, ml-classification]
+  introduces: [c:sigmoid, c:logit, c:odds, s:sigma-sigmoid]
+  uses: [c:exponent, c:logarithm, s:exp, s:log, c:probability, c:classification, c:class, c:label, c:feature, c:array, c:vectorization, py:np-array, py:boolean-mask, py:import, py:import-as, py:def, py:return, py:arithmetic, py:float, py:int, py:print, py:comment, py:variable, py:underscore-name, q:predict, q:choice, q:exercise-with-check, q:run-cell]
+  mentions: [c:model]
+  warns: [logit]
+  ladder: [python, numpy]
+  needs: any
+
+- id: ml-logistic-regression
+  title: "Logistic regression and the decision boundary"
+  level: basis
+  module: classification
+  idea: "A dot product plus a sigmoid gives a probability per class; the line where it is 0.5 is the decision boundary."
+  covers: [lineaire-classificatie#0]
+  requires: [ml-sigmoid, math-dot-product]
+  introduces: [c:logistic-regression, c:decision-boundary]
+  uses: [c:sigmoid, c:logit, s:sigma-sigmoid, s:exp, c:dot-product, py:np-dot, s:dot, c:model, c:model-parameter, c:weight, c:bias-term, c:prediction, s:y-hat, s:w, s:b, s:x, c:vector, c:feature, c:example, c:label, c:classification, c:regression-task, c:class, c:probability, c:array, c:vectorization, py:np-array, py:list, py:comparison, py:bool, py:boolean-mask, py:indexing, py:import, py:import-as, py:def, py:return, py:arithmetic, py:float, py:int, py:print, py:comment, py:variable, py:underscore-name, q:predict, q:choice, q:exercise-with-check, q:run-cell]
+  mentions: [c:training, c:mlp]
+  warns: [regression]
+  ladder: [numpy]
+  needs: any
+
+- id: ml-log-loss
+  title: "Scoring probabilities with the log: log loss"
+  level: basis
+  module: classification
+  idea: "Log loss punishes a confident wrong probability much more than an unsure one; minus the log of a probability measures surprise."
+  covers: [activaties-en-loss-functions#4]
+  requires: [ml-logistic-regression, ml-mse-loss]
+  introduces: [c:log-loss, c:surprise]
+  uses: [c:loss, c:mean-squared-error, s:sigma-sum, s:n-examples, s:l-loss, c:residual, c:logistic-regression, c:decision-boundary, c:sigmoid, c:logit, c:logarithm, s:log, c:probability, c:label, c:class, c:classification, c:prediction, s:y-hat, s:y, c:weight, c:bias-term, c:feature, c:example, c:array, c:vectorization, py:np-array, py:np-mean, py:import, py:import-as, py:def, py:return, py:if, py:comparison, py:arithmetic, py:float, py:int, py:print, py:comment, py:variable, py:underscore-name, q:predict, q:choice, q:exercise-with-check, q:run-cell]
+  mentions: [c:training, c:cross-entropy, c:language-model, c:gradient]
+  ladder: [python, numpy]
+  needs: any
+
+- id: ml-log-loss-gradient
+  title: "The gradient of log loss"
+  level: basis
+  module: classification
+  idea: "Chaining the slope of the log (1/p) with the slope of the sigmoid (p·(1 − p)) collapses the gradient of log loss to (p − y)·x; a nudging check confirms it."
+  covers: [calculus#0]
+  requires: [ml-log-loss, math-chain-rule, math-gradient]
+  introduces: [c:sigmoid-slope, c:log-loss-gradient]
+  uses: [c:chain-rule, c:finite-difference, c:derivative, s:d-derivative, c:partial-derivative, s:partial, c:gradient, c:log-loss, c:surprise, c:loss, s:l-loss, c:logistic-regression, c:sigmoid, s:sigma-sigmoid, c:logit, c:logarithm, s:log, c:dot-product, py:np-dot, c:weight, c:bias-term, c:feature, c:example, c:label, c:prediction, s:y-hat, s:y, s:x, s:w, s:b, c:probability, c:array, c:vectorization, py:np-array, py:np-mean, py:indexing, py:import, py:import-as, py:def, py:return, py:arithmetic, py:float, py:int, py:print, py:comment, py:variable, py:underscore-name, q:predict, q:choice, q:exercise-with-check, q:run-cell]
+  mentions: [c:gradient-descent, c:training, c:mean-squared-error, c:derivative-rules]
+  ladder: [python, numpy]
+  hard: true
+  needs: any
+
+- id: ml-train-logistic
+  title: "Training logistic regression"
+  level: basis
+  module: classification
+  kind: project
+  project: nn
+  idea: "Gradient descent with the gradient (p − y)·x trains a classifier exactly as it trained the line."
+  covers: [lineaire-classificatie#0]
+  requires: [ml-log-loss, ml-gradient-descent-2d, ml-linear-regression-numpy, ml-log-loss-gradient]
+  introduces: [p:train-with-gradient-descent]
+  uses: [c:logistic-regression, c:decision-boundary, c:log-loss, c:log-loss-gradient, c:sigmoid, c:logit, c:gradient-descent, c:learning-rate, s:eta, c:update-step, c:gradient, c:partial-derivative, s:partial, c:linear-regression, c:matrix-multiplication, py:np-zeros, c:loss, v:loss-curve, c:weight, c:bias-term, c:feature, c:example, c:label, c:prediction, s:y-hat, c:array, py:np-array, py:np-mean, py:import, py:import-as, py:def, py:return, py:for, py:range, py:tuple, py:arithmetic, py:float, py:int, py:print, py:comment, py:variable, py:underscore-name, c:package, c:module, p:import-own-code, py:matmul-operator, py:len, c:mean-squared-error, c:residual, c:model, c:model-parameter, c:training, c:probability, c:class, c:classification, c:dot-product, c:mean, c:shape, c:matrix, s:sigma-sum, s:n-examples, s:l-loss, s:x-matrix, s:w, s:b, s:x, s:y, py:list, py:nested-list, q:predict, q:choice, q:exercise-with-check, q:run-cell]
+  mentions: [c:mlp, c:one-hot]
+  ladder: [numpy]
+  needs: any
+
+- id: ml-one-hot
+  title: "One-hot vectors for classes"
+  level: basis
+  module: classification
+  idea: "A class becomes a vector of zeros with a single 1 at the position of that class."
+  covers: [representatieleren#0, feature-engineering#1]
+  requires: [np-indexing, ml-classification]
+  introduces: [c:one-hot, c:identity-matrix]
+  uses: [c:class, c:classification, c:label, c:vector, c:matrix, c:array, c:shape, py:np-array, py:np-indexing, py:np-argmax, py:np-sum, c:axis, py:keyword-argument, py:list, py:append, py:for, py:range, py:if, py:comparison, py:def, py:return, py:indexing, py:import, py:import-as, py:int, py:float, py:str, py:print, py:comment, py:variable, py:underscore-name, q:predict, q:choice, q:exercise-with-check, q:run-cell]
+  mentions: [c:model, c:probability, c:softmax]
+  ladder: [python, numpy]
+  needs: any
+
+- id: ml-softmax
+  title: "Many classes: softmax"
+  level: basis
+  module: classification
+  idea: "Softmax turns a vector of logits into probabilities that are all positive and add up to 1; subtracting the largest logit first changes nothing and keeps exp from overflowing."
+  covers: [activaties-en-loss-functions#3]
+  requires: [ml-sigmoid, np-axis]
+  introduces: [c:softmax, p:subtract-max-before-exp, s:softmax, s:z-logits, s:k-classes]
+  uses: [c:logit, c:sigmoid, s:sigma-sigmoid, c:exponent, s:exp, c:probability, c:class, c:classification, c:vector, c:array, c:vectorization, py:np-array, py:np-sum, py:min-max, c:axis, py:keyword-argument, py:def, py:return, py:import, py:import-as, py:list, py:arithmetic, py:float, py:int, py:print, py:comment, py:variable, py:underscore-name, q:predict, q:choice, q:exercise-with-check, q:run-cell]
+  mentions: [c:model, c:language-model, c:cross-entropy, c:log-loss]
+  ladder: [python, numpy]
+  needs: any
+
+- id: ml-cross-entropy
+  title: "Cross-entropy loss for many classes"
+  level: basis
+  module: classification
+  idea: "Cross-entropy is the log loss for many classes: minus the log of the probability given to the right class."
+  covers: [activaties-en-loss-functions#4]
+  requires: [ml-softmax, ml-log-loss, ml-one-hot]
+  introduces: [c:cross-entropy]
+  uses: [c:softmax, s:k-classes, s:z-logits, c:mean, c:logit, c:exponent, s:exp, c:log-loss, c:surprise, c:loss, c:one-hot, c:logarithm, s:log, s:sigma-sum, s:y-hat, s:y, s:l-loss, c:probability, c:label, c:class, c:classification, c:example, c:vector, c:matrix, c:array, c:axis, py:np-array, py:np-indexing, py:np-sum, py:np-mean, py:keyword-argument, py:def, py:return, py:import, py:import-as, py:list, py:indexing, py:arithmetic, py:float, py:int, py:print, py:comment, py:variable, py:underscore-name, q:predict, q:choice, q:exercise-with-check, q:run-cell]
+  mentions: [c:model, c:language-model, c:training, c:gradient, c:gradient-descent]
+  ladder: [numpy]
+  needs: any
+
+- id: ml-softmax-gradient
+  title: "The gradient of softmax with cross-entropy"
+  level: basis
+  module: classification
+  idea: "For softmax followed by cross-entropy, the gradient on the logits is the predicted probabilities minus the one-hot target, the same pattern as for log loss; you check it by nudging each logit."
+  covers: [calculus#0]
+  requires: [ml-cross-entropy, ml-log-loss-gradient]
+  introduces: [c:softmax-cross-entropy-gradient]
+  uses: [c:log-loss-gradient, c:finite-difference, c:cross-entropy, c:softmax, s:k-classes, s:z-logits, c:identity-matrix, p:subtract-max-before-exp, py:len, py:bool, c:one-hot, c:logit, c:exponent, s:exp, c:logarithm, s:log, c:log-loss, c:surprise, c:loss, s:l-loss, c:chain-rule, c:derivative, c:partial-derivative, s:partial, c:gradient, c:gradient-descent, c:dot-product, c:weight, c:bias-term, c:feature, c:example, c:label, c:class, c:probability, s:y-hat, s:y, s:x, s:w, s:b, c:vector, c:array, py:np-array, py:np-indexing, py:np-sum, py:min-max, py:def, py:return, py:for, py:range, py:comparison, py:import, py:import-as, py:list, py:indexing, py:arithmetic, py:float, py:int, py:print, py:comment, py:variable, py:underscore-name, q:predict, q:choice, q:exercise-with-check, q:run-cell]
+  mentions: [c:model, c:training]
+  ladder: [numpy]
+  hard: true
+  needs: any
+
+# --- module generalization -----------------------------------------------------
+- id: ml-train-test-split
+  title: "Will it work on new data? Training and test sets"
+  level: basis
+  module: generalization
+  idea: "A model is only useful if it works on examples it has not seen, so you hold back a test set."
+  covers: [evaluatie-en-modelselectie#0]
+  requires: [ml-linear-regression-numpy, np-random]
+  introduces: [c:generalization, c:train-set, c:test-set]
+  uses: [c:linear-regression, c:mean-squared-error, c:residual, c:loss, c:gradient-descent, c:learning-rate, s:eta, c:weight, c:bias-term, c:feature, c:example, c:label, c:prediction, c:model, c:training, c:random-number-generator, py:np-random-generator, c:seed, py:np-array, py:np-indexing, py:np-mean, py:np-arange, c:array, c:vector, py:len, py:for, py:range, py:tuple, py:import, py:import-as, py:arithmetic, py:float, py:int, py:print, py:comment, py:variable, py:underscore-name, q:predict, q:choice, q:exercise-with-check, q:run-cell]
+  mentions: [c:overfitting, c:underfitting]
+  ladder: [numpy]
+  needs: any
+
+- id: ml-overfitting
+  title: "Overfitting and underfitting"
+  level: basis
+  module: generalization
+  idea: "A model that is too flexible learns the noise in the training set; one that is too simple misses the pattern."
+  covers: [evaluatie-en-modelselectie#2]
+  requires: [ml-train-test-split]
+  introduces: [c:overfitting, c:underfitting, c:model-capacity, c:polynomial, c:noise, py:np-polyfit]
+  uses: [c:generalization, c:train-set, c:test-set, c:mean-squared-error, c:residual, c:loss, c:linear-regression, c:feature, c:weight, c:bias-term, c:example, c:prediction, c:model, c:training, c:gradient-descent, c:random-number-generator, py:np-random-generator, py:np-array, py:np-indexing, py:slicing, py:np-mean, c:array, s:w, s:b, s:x, s:y, v:scatter-plot, v:line-plot, py:for, py:list, py:import, py:import-as, py:arithmetic, py:float, py:int, py:print, py:comment, py:variable, py:underscore-name, q:predict, q:choice, q:explain, q:exercise-with-check, q:run-cell]
+  mentions: [c:hyperparameter, c:learning-rate]
+  ladder: [numpy]
+  needs: any
+
+- id: ml-hyperparameters
+  title: "Parameters and hyperparameters"
+  level: basis
+  module: generalization
+  idea: "Parameters are learned from the data; hyperparameters, such as the learning rate or the number of steps, are settings you choose yourself."
+  covers: [evaluatie-en-modelselectie#5]
+  requires: [ml-learning-rate, ml-overfitting]
+  introduces: [c:hyperparameter]
+  warns: [parameter]
+  uses: [c:model-parameter, c:function-argument, py:keyword-argument, c:polynomial, py:np-polyfit, c:noise, c:learning-rate, s:eta, c:gradient-descent, c:update-step, c:model-capacity, c:overfitting, c:underfitting, c:train-set, c:test-set, c:generalization, c:mean-squared-error, c:residual, c:loss, c:linear-regression, c:weight, c:bias-term, c:feature, c:example, c:model, c:training, c:random-number-generator, py:np-random-generator, py:np-array, py:np-indexing, py:np-mean, py:def, py:return, py:for, py:range, py:list, py:append, py:tuple, py:import, py:import-as, py:arithmetic, py:float, py:int, py:print, py:comment, py:variable, py:underscore-name, q:predict, q:choice, q:explain, q:exercise-with-check, q:run-cell]
+  mentions: [c:validation-set]
+  ladder: [numpy]
+  needs: any
+
+- id: ml-validation-set
+  title: "Choosing hyperparameters: the validation set"
+  level: basis
+  module: generalization
+  idea: "Choose hyperparameters on a separate validation set, never on the test set, or the test score stops being an honest estimate."
+  covers: [evaluatie-en-modelselectie#5]
+  requires: [ml-hyperparameters]
+  introduces: [c:validation-set]
+  uses: [c:hyperparameter, c:model-parameter, c:train-set, c:test-set, c:generalization, c:overfitting, c:model-capacity, c:polynomial, c:mean-squared-error, c:residual, c:loss, c:model, c:training, c:example, c:random-number-generator, py:np-random-generator, py:np-array, py:np-indexing, py:np-mean, py:np-argmin, py:np-polyfit, py:for, py:list, py:append, py:tuple, py:indexing, py:slicing, py:import, py:import-as, py:arithmetic, py:float, py:int, py:print, py:comment, py:variable, py:underscore-name, q:predict, q:choice, q:exercise-with-check, q:run-cell]
+  mentions: [c:regularization, c:weight-decay]
+  ladder: [numpy]
+  needs: any
+
+- id: ml-regularization
+  title: "Regularization and weight decay"
+  level: basis
+  module: generalization
+  idea: "Adding a penalty for large weights to the loss keeps a model simpler and helps it generalize."
+  covers: [evaluatie-en-modelselectie#4, regularisatie#0]
+  requires: [ml-validation-set, ml-gradient-descent-2d]
+  introduces: [c:regularization, c:weight-decay, c:l2-regularization, s:lambda-reg]
+  uses: [c:hyperparameter, c:validation-set, c:train-set, c:overfitting, c:underfitting, c:generalization, c:linear-regression, c:mean-squared-error, s:sigma-sum, s:n-examples, s:l-loss, c:residual, c:loss, c:gradient-descent, c:gradient, c:partial-derivative, c:learning-rate, s:eta, c:update-step, c:weight, c:bias-term, c:feature, c:example, c:label, c:prediction, s:y-hat, s:y, s:w, s:b, c:model, c:training, c:matrix-multiplication, py:matmul-operator, c:random-number-generator, py:np-random-generator, py:np-array, py:np-zeros, py:np-indexing, py:np-mean, py:np-sum, c:array, c:matrix, c:shape, py:def, py:return, py:for, py:range, py:list, py:tuple, py:import, py:import-as, py:arithmetic, py:float, py:int, py:print, py:comment, py:variable, py:underscore-name, q:predict, q:choice, q:exercise-with-check, q:run-cell]
+  mentions: [c:metric]
+  ladder: [numpy]
+  needs: any
+
+- id: ml-loss-vs-metric
+  title: "The loss you train on and the metric you report"
+  level: basis
+  module: generalization
+  idea: "You train on a loss that has a gradient, and you judge the model on a metric people care about, such as accuracy."
+  covers: [loss-en-empirical-risk-minimization#0]
+  requires: [ml-validation-set, ml-cross-entropy]
+  introduces: [c:metric, c:accuracy]
+  uses: [c:loss, c:cross-entropy, c:log-loss, c:sigmoid, c:probability, c:class, c:classification, c:label, c:prediction, c:one-hot, c:validation-set, c:test-set, c:training, c:gradient-descent, c:gradient, c:weight, c:bias-term, c:model, c:example, py:np-array, py:np-argmax, py:np-mean, py:np-sum, c:axis, py:keyword-argument, py:bool, py:comparison, py:for, py:list, py:import, py:import-as, py:arithmetic, py:float, py:int, py:print, py:comment, py:variable, py:underscore-name, s:sigma-sigmoid, s:b, s:x, c:identity-matrix, py:np-indexing, c:mean, c:logarithm, q:predict, q:choice, q:exercise-with-check, q:run-cell]
+  mentions: [c:precision, c:recall]
+  ladder: [numpy]
+  needs: any
+
+- id: ml-confusion-matrix
+  title: "Beyond accuracy: precision and recall"
+  level: basis
+  module: generalization
+  idea: "A confusion matrix shows which classes get mixed up; precision and recall tell different stories when classes are unbalanced."
+  covers: [d10-evaluatiemetrics#0, d10-evaluatiemetrics#1]
+  requires: [ml-loss-vs-metric]
+  introduces: [v:confusion-matrix, c:precision, c:recall, c:true-positive, c:false-positive, c:false-negative, c:true-negative, c:decision-threshold]
+  warns: [precision]
+  uses: [c:metric, c:accuracy, c:classification, c:class, c:label, c:prediction, c:probability, c:validation-set, c:matrix, c:array, s:k-classes, py:np-array, py:np-zeros, py:np-sum, py:np-indexing, py:comparison, py:bool, py:for, py:range, py:len, py:indexing, py:tuple, py:import, py:import-as, py:arithmetic, py:float, py:int, py:print, py:comment, py:variable, py:underscore-name, q:predict, q:choice, q:exercise-with-check, q:run-cell]
+  mentions: [c:baseline]
+  ladder: [numpy]
+  needs: any
+
+- id: ml-baselines
+  title: "Always beat a simple baseline"
+  level: basis
+  module: generalization
+  idea: "Before trusting a score, compare it with a dumb baseline such as always predicting the most common class."
+  covers: [baselines-en-error-analysis#0]
+  requires: [ml-loss-vs-metric]
+  introduces: [c:baseline]
+  uses: [c:metric, c:accuracy, c:mean-squared-error, c:residual, c:loss, c:gradient-descent, c:probability, c:train-set, c:test-set, c:linear-regression, c:regression-task, c:classification, c:class, c:label, c:prediction, c:model, c:example, c:feature, c:training, c:one-hot, c:identity-matrix, c:mean, c:axis, c:random-number-generator, c:seed, py:np-random-generator, py:np-array, py:np-argmax, py:np-argmin, py:np-mean, py:np-sum, py:np-indexing, py:slicing, py:comparison, py:bool, py:keyword-argument, py:tuple, py:import, py:import-as, py:arithmetic, py:float, py:int, py:print, py:comment, py:variable, py:underscore-name, q:predict, q:choice, q:exercise-with-check, q:run-cell]
+  ladder: [numpy]
+  needs: any
+
+- id: ml-digits-linear
+  title: "Project: a linear classifier for handwritten digits"
+  level: basis
+  module: generalization
+  kind: project
+  project: nn
+  idea: "Softmax regression in NumPy reads handwritten digits better than a baseline, and you see which digits it confuses."
+  covers: [beeldclassificatie#2]
+  requires: [ml-cross-entropy, ml-confusion-matrix, ml-baselines, ml-train-logistic, data-images-as-arrays, ml-softmax-gradient, math-transpose, np-broadcasting]
+  introduces: [c:softmax-regression, s:w-matrix, py:np-load, py:np-reshape]
+  uses: [c:softmax, s:softmax, s:z-logits, s:k-classes, p:subtract-max-before-exp, c:cross-entropy, c:softmax-cross-entropy-gradient, c:one-hot, c:identity-matrix, c:transpose, s:transpose-t, c:broadcasting, py:keepdims, c:axis, c:logistic-regression, c:log-loss, c:gradient-descent, c:learning-rate, s:eta, c:update-step, c:gradient, c:partial-derivative, s:partial, p:train-with-gradient-descent, c:baseline, c:accuracy, c:metric, v:confusion-matrix, c:train-set, c:test-set, c:pixel, c:grayscale-image, py:imread-imshow, c:matrix-multiplication, py:matmul-operator, c:dot-product, py:np-zeros, c:loss, c:weight, c:bias-term, c:feature, c:example, c:label, c:prediction, s:y-hat, c:probability, c:logit, c:class, c:classification, c:model, c:training, c:array, c:shape, c:matrix, c:mean, py:np-array, py:np-sum, py:np-mean, py:np-argmax, c:package, c:module, p:import-own-code, s:sigma-sum, s:n-examples, s:l-loss, s:x-matrix, s:w, s:b, s:x, s:y, py:import, py:import-as, py:def, py:return, py:for, py:range, py:tuple, py:list, py:nested-list, py:len, py:keyword-argument, py:indexing, py:arithmetic, py:float, py:int, py:print, py:comment, py:variable, py:underscore-name, q:predict, q:choice, q:exercise-with-check, q:run-cell]
+  mentions: [c:mlp, c:hidden-layer]
+  ladder: [numpy]
+  data: [qmnist]
+  needs: any
+
+- id: ml-workflow
+  title: "The machine learning workflow"
+  level: basis
+  module: generalization
+  idea: "A project goes from question to metric, data, baseline and model, and then round again."
+  covers: [de-ml-workflow#0, de-ml-workflow#2, de-ml-workflow#3, de-ml-workflow#4, de-ml-workflow#5]
+  requires: [ml-baselines, ml-confusion-matrix, data-provenance]
+  introduces: [p:ml-workflow]
+  uses: [c:metric, c:precision, c:recall, c:decision-threshold, c:false-positive, c:true-positive, v:confusion-matrix, c:prediction, c:accuracy, c:baseline, c:mean-squared-error, c:train-set, c:validation-set, c:test-set, c:license, c:data-provenance, c:model, c:training, c:example, c:feature, c:label, c:classification, c:class, c:probability, c:logistic-regression, c:mean, py:np-array, py:np-mean, py:np-sum, py:boolean-mask, py:comparison, py:bool, py:if, py:for, py:range, py:len, py:list, py:indexing, py:none, py:import, py:import-as, py:arithmetic, py:float, py:int, py:string-literal, py:print, py:comment, py:variable, py:underscore-name, q:predict, q:choice, q:exercise-with-check, q:run-cell]
+  data: []
+  needs: any
+
+- id: ml-project-tabular
+  title: "Project: predict something real, end to end"
+  level: basis
+  module: generalization
+  kind: review
+  idea: "Run the whole workflow on a real table, the Palmer penguins, with scikit-learn and write down what you found."
+  covers: [de-ml-workflow#1, baselines-en-error-analysis#1]
+  requires: [ml-workflow, ml-sklearn, ml-feature-scaling]
+  uses: [p:ml-workflow, py:sklearn-fit-predict, c:standardization, c:feature-scaling, c:logistic-regression, c:softmax, c:classification, c:class, c:label, c:feature, c:example, c:prediction, c:model, c:training, c:baseline, c:metric, c:accuracy, c:train-set, c:validation-set, c:test-set, c:seed, c:random-number-generator, py:np-random-generator, c:missing-value, py:isna, py:dataframe, py:pandas-select-filter, c:csv, c:library, c:data-provenance, c:license, c:datasheet, c:mean, c:standard-deviation, py:np-mean, py:np-array, py:comparison, py:bool, py:list, py:indexing, py:slicing, py:import, py:import-as, py:arithmetic, py:float, py:int, py:print, py:comment, py:variable, py:underscore-name, q:predict, q:choice, q:explain, q:exercise-with-check, q:run-cell]
+  data: [palmer-penguins]
+  needs: any
+
+# --- module neural networks (basis) ---------------------------------------------
+- id: nn-neuron
+  title: "A neuron"
+  level: basis
+  module: neural-networks
+  idea: "A neuron is a weighted sum plus a bias, passed through an activation function; logistic regression is one neuron."
+  covers: [wat-een-neuraal-netwerk-is#0, lineaire-modellen-als-netwerk-en-de-perceptron#1]
+  requires: [ml-logistic-regression, ml-linear-regression-numpy]
+  introduces: [c:neuron, c:activation-function]
+  uses: [c:logistic-regression, c:linear-regression, c:decision-boundary, c:sigmoid, s:sigma-sigmoid, c:logit, c:dot-product, c:weight, c:bias-term, c:feature, c:prediction, s:y-hat, s:w, s:b, s:x, c:model, c:probability, c:training, py:np-array, py:def, py:return, py:if, py:comparison, py:for, py:list, py:append, py:nested-list, py:import, py:import-as, py:arithmetic, py:float, py:int, py:print, py:comment, py:variable, py:underscore-name, p:scratchpad, q:predict, q:choice, q:exercise-with-check, q:run-cell]
+  data: []
+  needs: any
+
+- id: nn-xor
+  title: "What one neuron cannot learn"
+  level: basis
+  module: neural-networks
+  idea: "A single neuron draws one straight boundary, so it cannot learn XOR, the limit of the perceptron that Minsky and Papert made famous."
+  covers: [multilayer-perceptron#1, lineaire-modellen-als-netwerk-en-de-perceptron#0, lineaire-modellen-als-netwerk-en-de-perceptron#2]
+  requires: [nn-neuron]
+  introduces: [c:linear-separability, c:perceptron]
+  uses: [c:neuron, c:activation-function, c:decision-boundary, c:weight, c:bias-term, c:prediction, c:label, c:example, c:class, c:classification, c:training, c:learning-rate, s:eta, s:w, s:b, s:x, s:y, s:y-hat, c:dot-product, c:sigmoid, py:np-array, py:np-zeros, py:def, py:return, py:if, py:comparison, py:for, py:range, py:list, py:append, py:nested-list, py:tuple, py:import, py:import-as, py:arithmetic, py:float, py:int, py:print, py:comment, py:variable, py:underscore-name, q:predict, q:choice, q:exercise-with-check, q:run-cell]
+  data: []
+  needs: any
+
+- id: nn-hidden-layer
+  title: "A hidden layer and ReLU"
+  level: basis
+  module: neural-networks
+  idea: "Stacking neurons in a hidden layer with a non-linear activation such as ReLU lets the network bend its boundary."
+  covers: [multilayer-perceptron#0, activaties-en-loss-functions#1]
+  requires: [nn-xor]
+  introduces: [c:hidden-layer, c:layer, c:relu, c:leaky-relu, c:mlp, s:h-hidden]
+  uses: [c:neuron, c:activation-function, c:linear-separability, c:perceptron, c:decision-boundary, c:weight, c:bias-term, c:sigmoid, c:gradient-descent, c:dot-product, c:feature, c:prediction, s:w, s:b, s:x, s:y-hat, py:np-array, py:def, py:return, py:if, py:comparison, py:for, py:range, py:len, py:list, py:append, py:nested-list, py:indexing, py:min-max, py:import, py:import-as, py:arithmetic, py:float, py:int, py:print, py:comment, py:variable, py:underscore-name, p:scratchpad, q:predict, q:choice, q:exercise-with-check, q:run-cell]
+  data: []
+  needs: any
+
+- id: nn-forward-numpy
+  title: "The forward pass in NumPy, with shapes"
+  level: basis
+  module: neural-networks
+  idea: "A forward pass is matrix multiply, add bias, activation, repeated per layer; writing the shape next to each step keeps you right."
+  covers: [multilayer-perceptron#0]
+  requires: [nn-hidden-layer, math-matrix-multiply, math-transpose, np-broadcasting]
+  introduces: [c:forward-pass, v:shape-notation, py:np-maximum]
+  uses: [c:hidden-layer, c:layer, c:relu, s:h-hidden, c:neuron, c:activation-function, c:weight, c:bias-term, c:matrix-multiplication, py:matmul-operator, c:shape-rule, s:x-matrix, c:transpose, s:transpose-t, c:broadcasting, c:vectorization, c:shape, c:matrix, c:vector, c:array, c:dot-product, c:example, c:prediction, c:finite-difference, s:b, s:x, s:y-hat, s:n-examples, py:np-array, py:np-dot, py:tuple, py:list, py:nested-list, py:min-max, py:import, py:import-as, py:def, py:return, py:print, py:comment, py:variable, py:underscore-name, q:predict, q:choice, q:exercise-with-check, q:run-cell]
+  data: []
+  ladder: [numpy]
+  needs: any
+
+- id: nn-why-backprop
+  title: "Too many weights to nudge one by one"
+  level: basis
+  module: neural-networks
+  idea: "Measuring each slope by nudging costs one forward pass per weight; with millions of weights we need a smarter way."
+  covers: [numerieke-wiskunde#1, wat-een-neuraal-netwerk-is#1]
+  requires: [nn-forward-numpy, math-gradient]
+  introduces: [c:flops, c:big-o, s:big-o]
+  uses: [c:finite-difference, c:forward-pass, c:model-parameter, c:example, s:n-examples, c:gradient, c:gradient-descent, c:learning-rate, c:loss, c:weight, c:bias-term, c:layer, c:neuron, c:hidden-layer, c:shape, s:eta, py:def, py:return, py:for, py:range, py:len, py:indexing, py:list, py:arithmetic, py:print, py:comment, py:variable, py:underscore-name, q:predict, q:choice, q:exercise-with-check, q:run-cell]
+  mentions: [c:language-model, c:floating-point, c:backpropagation]
+  data: []
+  needs: any
+
+- id: nn-backward-by-hand
+  title: "Backpropagation by hand on a tiny graph"
+  level: basis
+  module: neural-networks
+  idea: "Write the calculation as a graph, then walk it backwards, multiplying local slopes, to get every gradient in one pass."
+  covers: [backpropagation-en-computational-graphs#0]
+  requires: [nn-why-backprop, math-chain-rule]
+  introduces: [c:backpropagation, c:computational-graph, c:local-gradient, c:backward-pass, v:computational-graph]
+  uses: [c:chain-rule, c:partial-derivative, s:partial, c:gradient, c:forward-pass, c:finite-difference, c:big-o, c:loss, c:residual, c:prediction, c:weight, c:bias-term, c:relu, c:neuron, c:activation-function, s:w, s:b, s:x, s:y-hat, py:if, py:comparison, py:def, py:return, py:arithmetic, py:print, py:list, py:variable, py:comment, py:underscore-name, q:predict, q:choice, q:exercise-with-check, q:run-cell]
+  data: []
+  ladder: [python]
+  needs: any
+
+- id: nn-micrograd-value
+  title: "Build your own autograd: a Value that remembers"
+  level: basis
+  module: neural-networks
+  kind: project
+  project: nn
+  idea: "A Value object stores a number, where it came from and its gradient; +, * and relu build the graph, and each operation knows its own local slope."
+  covers: [minimale-frameworks#0]
+  requires: [nn-backward-by-hand, py-special-methods]
+  introduces: [c:autograd]
+  uses: [c:slope-formula, c:backpropagation, c:computational-graph, c:local-gradient, c:backward-pass, c:forward-pass, c:relu, c:gradient-descent, c:loss, c:residual, c:weight, c:bias-term, s:partial, py:class, py:self, py:method, py:init-method, py:dunder-method, py:tuple, py:list, py:for, py:if, py:comparison, py:import, py:def, py:return, py:arithmetic, py:print, py:variable, py:comment, py:underscore-name, q:predict, q:choice, q:exercise-with-check, q:run-cell]
+  data: []
+  ladder: [python]
+  needs: any
+
+- id: nn-micrograd-backward
+  title: "The full backward pass, in the right order"
+  level: basis
+  module: neural-networks
+  kind: project
+  project: nn
+  idea: "Sort the graph so every node comes after its inputs, then run the backward steps in reverse order."
+  covers: [minimale-frameworks#0]
+  requires: [nn-micrograd-value, py-recursion, py-tuples-sets]
+  introduces: [c:topological-order, py:set-add, py:reversed]
+  uses: [c:autograd, c:backpropagation, c:computational-graph, c:local-gradient, c:backward-pass, c:forward-pass, c:relu, c:hidden-layer, c:gradient-descent, c:loss, c:weight, c:bias-term, c:neuron, py:recursion, py:set, py:tuple, py:class, py:self, py:method, py:init-method, py:dunder-method, py:list, py:append, py:for, py:if, py:import, py:def, py:return, py:arithmetic, py:print, py:variable, py:comment, py:underscore-name, q:predict, q:choice, q:exercise-with-check, q:run-cell]
+  data: []
+  ladder: [python]
+  needs: any
+
+- id: nn-micrograd-mlp
+  title: "Neurons, layers and an MLP on top of your Value"
+  level: basis
+  module: neural-networks
+  kind: project
+  project: nn
+  idea: "Your Value class is enough to build neurons, layers and a whole MLP."
+  covers: [minimale-frameworks#0]
+  requires: [nn-micrograd-backward, nn-hidden-layer, py-inheritance]
+  introduces: [py:random-uniform]
+  warns: [module]
+  uses: [c:autograd, c:topological-order, c:backpropagation, c:neuron, c:layer, c:hidden-layer, c:mlp, c:relu, c:weight, c:bias-term, c:model-parameter, c:forward-pass, c:module, p:import-own-code, py:keyword-argument, c:mean-squared-error, c:loss, py:class, py:self, py:method, py:init-method, py:dunder-method, py:call-method, py:inheritance, py:random-module, c:seed, py:list, py:append, py:for, py:range, py:len, py:if, py:import, py:def, py:return, py:arithmetic, py:print, py:variable, py:comment, py:underscore-name, q:predict, q:choice, q:exercise-with-check, q:run-cell]
+  data: []
+  ladder: [python]
+  needs: any
+
+- id: nn-micrograd-train
+  title: "Training your MLP: the training loop"
+  level: basis
+  module: neural-networks
+  kind: project
+  project: nn
+  idea: "Forward, loss, backward, step, zero the gradients, repeat: this loop trains every network in the course."
+  covers: [d11-de-trainingslus#1]
+  requires: [nn-micrograd-mlp, ml-mse-loss, ml-gradient-descent-2d]
+  introduces: [c:training-loop, c:zero-grad]
+  uses: [c:mean-squared-error, c:loss, c:residual, c:mean, c:gradient-descent, c:learning-rate, s:eta, s:partial, c:mlp, c:relu, c:neuron, c:layer, c:autograd, c:backward-pass, c:forward-pass, py:class, py:method, py:dunder-method, py:list, py:append, py:for, py:range, py:len, py:import, py:def, py:return, py:arithmetic, py:random-module, c:seed, py:nested-list, py:print, py:variable, py:comment, py:underscore-name, q:predict, q:choice, q:exercise-with-check, q:run-cell]
+  data: []
+  ladder: [python]
+  needs: any
+
+# --- module pytorch ----------------------------------------------------------------
+- id: torch-tensors
+  title: "PyTorch tensors"
+  level: basis
+  module: pytorch
+  idea: "A tensor is PyTorch's array: it works like NumPy and can live on a GPU."
+  covers: [tensors-en-autograd#0, frameworks#0]
+  requires: [np-broadcasting, nn-micrograd-train]
+  introduces: [py:torch-tensor, c:tensor, c:device, c:float32, py:dim, py:item]
+  uses: [c:array, c:shape, c:dtype, c:axis, c:broadcasting, py:keepdims, py:np-array, c:matrix, c:vector, c:matrix-multiplication, py:matmul-operator, c:mean-squared-error, c:loss, c:residual, c:weight, c:bias-term, c:prediction, c:example, c:label, c:mean, c:mlp, c:autograd, s:y-hat, s:x-matrix, s:n-examples, py:np-sum, py:np-mean, py:list, py:nested-list, py:float, py:method, py:import, py:import-as, py:print, py:comment, py:variable, py:underscore-name, q:predict, q:choice, q:exercise-with-check, q:run-cell]
+  mentions: [c:gpu]
+  warns: [tensor]
+  ladder: [torch, numpy]
+  needs: any
+
+- id: torch-autograd
+  title: "PyTorch autograd does what your Value did"
+  level: basis
+  module: pytorch
+  idea: "requires_grad and backward compute the same gradients as your own Value class, for whole tensors at once."
+  covers: [tensors-en-autograd#1]
+  requires: [torch-tensors, nn-micrograd-backward, py-decorators]
+  introduces: [py:requires-grad, py:backward, py:grad-attribute, py:no-grad, py:grad-fn, c:leaf-tensor, py:torch-relu, py:augmented-assignment]
+  uses: [c:autograd, c:computational-graph, c:backward-pass, c:forward-pass, c:local-gradient, c:chain-rule, c:gradient, c:gradient-descent, c:learning-rate, c:training-loop, c:zero-grad, c:loss, c:mean-squared-error, c:neuron, c:relu, c:weight, c:bias-term, c:linear-regression, c:tensor, py:torch-tensor, py:item, py:decorator, py:with, py:matmul-operator, py:for, py:range, py:list, py:none, py:import, py:print, py:comment, py:variable, py:underscore-name, s:y-hat, s:partial, q:predict, q:choice, q:exercise-with-check, q:run-cell]
+  ladder: [torch]
+  needs: any
+
+- id: torch-nn-module
+  title: "Layers as modules: nn.Linear"
+  level: basis
+  module: pytorch
+  idea: "nn.Module holds parameters and a forward method; nn.Linear is one layer. Note that PyTorch computes x W^T + b."
+  covers: [frameworks#0]
+  requires: [torch-autograd, py-inheritance, py-special-methods, math-transpose]
+  introduces: [py:nn-module, py:nn-linear, c:convention-xwt-plus-b, py:nn-parameter, py:forward-method, py:manual-seed]
+  uses: [py:requires-grad, py:backward, py:grad-attribute, py:no-grad, py:torch-relu, py:torch-tensor, c:tensor, c:leaf-tensor, c:layer, c:hidden-layer, c:neuron, c:weight, c:bias-term, c:relu, c:mlp, c:forward-pass, c:training-loop, c:zero-grad, c:loss, c:mean-squared-error, c:learning-rate, c:seed, c:shape, c:example, c:model, c:prediction, py:item, py:def, py:return, c:transpose, s:transpose-t, s:x-matrix, py:matmul-operator, py:class, py:init-method, py:inheritance, py:super, py:method, py:self, py:dunder-method, py:call-method, py:import, py:with, py:for, py:range, py:list, py:none, py:print, py:comment, py:variable, py:underscore-name, q:predict, q:choice, q:exercise-with-check, q:run-cell]
+  mentions: [c:language-model]
+  warns: [module]
+  ladder: [torch]
+  needs: any
+
+- id: torch-optimizer
+  title: "Let the optimizer take the step"
+  level: basis
+  module: pytorch
+  idea: "torch.optim does the update step and zeroing for you, the same rule you wrote by hand."
+  covers: [d11-de-trainingslus#1]
+  requires: [torch-nn-module, ml-gradient-descent-1d]
+  introduces: [py:torch-optim, py:optimizer-step, py:zero-grad, c:optimizer]
+  uses: [py:nn-module, py:nn-linear, py:forward-method, py:manual-seed, py:nn-parameter, py:requires-grad, py:backward, py:grad-attribute, py:no-grad, py:torch-relu, py:item, py:torch-tensor, c:tensor, c:gradient-descent, c:update-step, c:learning-rate, c:training-loop, c:zero-grad, c:loss, c:mean-squared-error, c:hidden-layer, c:relu, py:class, py:def, py:return, py:list, py:append, py:for, py:range, py:import, py:print, py:comment, py:variable, py:underscore-name, py:none, py:with, py:augmented-assignment, py:keyword-argument, py:method, py:init-method, py:super, py:self, py:indexing, py:float, c:forward-pass, c:backward-pass, c:layer, c:neuron, c:weight, c:bias-term, c:model-parameter, c:seed, c:shape, c:derivative, c:gradient, s:w, s:eta, s:partial, s:l-loss, q:predict, q:choice, q:exercise-with-check, q:run-cell]
+  mentions: [c:sgd, c:adam]
+  ladder: [torch]
+  needs: any
+
+- id: torch-batches
+  title: "Mini-batches and epochs"
+  level: basis
+  module: pytorch
+  idea: "Instead of all examples per step you use a small random batch; one pass over all data is an epoch."
+  covers: [d11-de-trainingslus#0]
+  requires: [torch-optimizer, py-generators]
+  introduces: [c:mini-batch, c:batch-size, c:epoch, c:iteration, c:sgd, py:range-step]
+  uses: [py:torch-optim, py:optimizer-step, py:zero-grad, c:optimizer, py:nn-linear, py:manual-seed, py:backward, py:item, py:torch-tensor, c:tensor, c:gradient-descent, c:learning-rate, c:training-loop, c:loss, c:mean-squared-error, c:linear-regression, c:weight, c:bias-term, c:example, c:label, py:yield, py:iterator, py:for, py:range, py:slicing, py:len, py:list, py:append, py:def, py:import, py:print, py:comment, py:variable, py:underscore-name, py:tuple, py:return, py:none, py:grad-attribute, s:y-hat, s:y, s:l-loss, s:sigma-sum, s:n-examples, v:loss-curve, c:update-step, q:predict, q:choice, q:exercise-with-check, q:run-cell]
+  mentions: [c:shuffling]
+  ladder: [torch]
+  needs: any
+
+- id: torch-dataloader
+  title: "Datasets and DataLoaders"
+  level: basis
+  module: pytorch
+  idea: "A Dataset hands out single examples and a DataLoader shuffles them into batches."
+  covers: [d11-de-trainingslus#2]
+  requires: [torch-batches, ml-digits-linear]
+  introduces: [py:dataset, py:dataloader, c:shuffling, py:tensor-dataset, py:len-getitem]
+  uses: [py:np-load, c:pixel, py:tuple, py:keyword-argument, py:indexing, py:iterator, c:float32, c:gradient, c:class, c:mini-batch, c:batch-size, c:epoch, c:iteration, c:sgd, py:torch-optim, py:optimizer-step, py:zero-grad, py:nn-linear, py:manual-seed, py:backward, py:item, py:torch-tensor, c:tensor, c:dtype, c:shape, c:axis, c:loss, c:mean-squared-error, c:label, c:example, py:class, py:init-method, py:inheritance, py:dunder-method, py:yield, py:np-array, py:import, py:import-as, py:for, py:range, py:len, py:list, py:def, py:return, py:print, py:comment, py:variable, py:underscore-name, q:predict, q:choice, q:exercise-with-check, q:run-cell]
+  ladder: [torch]
+  data: [qmnist]
+  needs: any
+
+- id: torch-eval-mode
+  title: "Training mode and evaluation mode"
+  level: basis
+  module: pytorch
+  idea: "model.eval() and no_grad switch a model from learning to just predicting."
+  covers: [d11-de-trainingslus#3]
+  requires: [torch-dataloader]
+  introduces: [py:model-eval, py:model-train]
+  uses: [py:no-grad, py:requires-grad, c:inference, c:computational-graph, py:nn-module, py:nn-linear, py:torch-relu, c:hidden-layer, c:relu, c:neuron, c:layer, c:module, c:mlp, py:dataloader, py:tensor-dataset, py:torch-optim, py:optimizer-step, py:zero-grad, py:backward, py:item, py:manual-seed, py:torch-tensor, c:tensor, c:mini-batch, c:epoch, c:sgd, c:mean-squared-error, c:loss, c:training-loop, c:forward-pass, c:backward-pass, c:gradient, c:optimizer, c:prediction, c:example, c:label, py:with, py:class, py:init-method, py:inheritance, py:super, py:def, py:return, py:for, py:range, py:print, py:import, py:comment, py:underscore-name, py:list, py:bool, py:indexing, s:x, s:y, q:predict, q:choice, q:exercise-with-check, q:run-cell]
+  mentions: [c:dropout]
+  warns: [inference]
+  ladder: [torch]
+  needs: any
+
+- id: torch-mlp-digits
+  title: "Project: an MLP that reads handwritten digits"
+  level: basis
+  module: pytorch
+  kind: project
+  project: nn
+  idea: "Your first real network in PyTorch beats your linear classifier from before."
+  covers: [d11-de-trainingslus#1]
+  requires: [torch-eval-mode, ml-digits-linear, nn-hidden-layer]
+  introduces: [py:nn-cross-entropy-loss]
+  uses: [py:nn-module, py:nn-linear, py:torch-relu, py:forward-method, py:manual-seed, py:torch-tensor, py:item, py:dim, c:float32, c:tensor, py:np-load, py:dataloader, py:tensor-dataset, py:torch-optim, py:optimizer-step, py:zero-grad, py:backward, py:model-eval, py:model-train, py:no-grad, py:np-argmax, py:nn-parameter, c:computational-graph, c:mlp, c:hidden-layer, c:relu, c:neuron, c:logit, c:softmax, c:cross-entropy, c:softmax-regression, c:accuracy, c:baseline, c:train-set, c:test-set, c:pixel, c:mini-batch, c:epoch, c:shuffling, c:sgd, c:optimizer, c:gradient, c:learning-rate, c:training-loop, c:loss, c:weight, c:bias-term, c:class, c:classification, c:example, c:label, c:package, c:module, p:import-own-code, py:init-method, py:inheritance, py:super, py:class, py:def, py:return, py:for, py:range, py:import, py:print, py:comment, py:len, py:list, py:indexing, py:slicing, py:comparison, py:keyword-argument, py:float, s:y-hat, s:n-examples, s:l-loss, s:sigma-sum, s:eta, v:loss-curve, q:predict, q:choice, q:exercise-with-check, q:run-cell]
+  mentions: [c:dropout]
+  ladder: [torch]
+  data: [qmnist]
+  needs: any
+
+- id: torch-loss-curves
+  title: "Reading loss curves"
+  level: basis
+  module: pytorch
+  idea: "Training and validation loss side by side show whether a model is still learning, overfitting or stuck."
+  covers: [generalisatie-trainingsdynamiek-en-hpo#0, generalisatie-trainingsdynamiek-en-hpo#1]
+  requires: [torch-mlp-digits, ml-overfitting, math-log-scales]
+  introduces: [v:train-val-curves, q:diagnose-a-curve]
+  uses: [c:validation-set, c:overfitting, c:underfitting, v:log-scale, v:loss-curve, c:divergence, c:learning-rate, c:train-set, c:generalization, c:loss, c:cross-entropy, c:epoch, c:mini-batch, c:mlp, c:hidden-layer, c:relu, c:optimizer, c:update-step, c:package, c:module, p:import-own-code, py:nn-module, py:nn-linear, py:torch-relu, py:forward-method, py:manual-seed, py:torch-tensor, py:item, py:np-load, py:np-argmin, py:dataloader, py:tensor-dataset, py:torch-optim, py:optimizer-step, py:zero-grad, py:backward, py:model-eval, py:model-train, py:no-grad, py:nn-cross-entropy-loss, py:plot, py:min-max, py:append, py:list, py:indexing, py:slicing, py:init-method, py:inheritance, py:super, py:class, py:def, py:for, py:range, py:import, py:print, py:comment, py:keyword-argument, v:line-plot, s:eta, q:predict, q:choice, q:exercise-with-check, q:run-cell]
+  mentions: [c:early-stopping, c:checkpoint]
+  ladder: [torch]
+  needs: any
+
+- id: nn-early-stopping
+  title: "Early stopping"
+  level: basis
+  module: pytorch
+  idea: "Stop training, and keep the best checkpoint, once the validation loss stops improving."
+  covers: [regularisatie#1]
+  requires: [torch-loss-curves, torch-checkpoints, py-while]
+  introduces: [c:early-stopping]
+  uses: [c:checkpoint, py:state-dict, py:torch-save, py:break, py:if, py:comparison, py:augmented-assignment, c:validation-set, v:train-val-curves, v:log-scale, c:overfitting, c:hyperparameter, c:test-set, c:epoch, c:mini-batch, c:loss, c:learning-rate, c:mlp, c:package, c:module, p:import-own-code, py:nn-module, py:nn-linear, py:torch-relu, py:forward-method, py:manual-seed, py:torch-tensor, py:item, py:np-load, py:dataloader, py:tensor-dataset, py:torch-optim, py:optimizer-step, py:zero-grad, py:backward, py:model-eval, py:model-train, py:no-grad, py:nn-cross-entropy-loss, c:cross-entropy, c:optimizer, c:hidden-layer, c:relu, c:tensor, c:float32, py:tuple, py:with, py:float, py:arithmetic, py:min-max, py:append, py:list, py:indexing, py:slicing, py:init-method, py:inheritance, py:super, py:class, py:def, py:return, py:for, py:range, py:import, py:print, py:comment, py:keyword-argument, s:eta, q:predict, q:choice, q:exercise-with-check, q:run-cell]
+  ladder: [torch]
+  needs: any
+
+- id: nn-data-augmentation
+  title: "Data augmentation"
+  level: basis
+  module: pytorch
+  idea: "Small changes to training images that keep the label, such as a shift, give the model more varied examples for free."
+  covers: [regularisatie#3]
+  requires: [torch-loss-curves, data-images-as-arrays]
+  introduces: [c:data-augmentation, py:torch-roll]
+  uses: [py:dataset, py:dataloader, py:len-getitem, py:tensor-dataset, py:random-module, c:pixel, c:grayscale-image, v:image-as-array, py:np-reshape, py:np-load, py:np-argmin, c:overfitting, c:validation-set, c:test-set, c:train-set, c:label, c:example, v:train-val-curves, c:epoch, c:mini-batch, c:loss, c:mlp, c:axis, py:nn-module, py:nn-linear, py:torch-relu, py:forward-method, py:manual-seed, py:torch-tensor, py:item, py:torch-optim, py:optimizer-step, py:zero-grad, py:backward, py:model-eval, py:model-train, py:no-grad, py:nn-cross-entropy-loss, py:init-method, py:inheritance, py:super, py:class, py:def, py:return, py:for, py:range, py:list, py:append, py:indexing, py:slicing, py:import, py:print, py:comment, py:keyword-argument, py:tuple, q:predict, q:choice, q:exercise-with-check, q:run-cell]
+  ladder: [torch]
+  needs: any
+
+- id: torch-checkpoints
+  title: "Saving and loading a model"
+  level: basis
+  module: pytorch
+  idea: "A checkpoint stores the parameters, so you can stop training and pick it up later or share the model."
+  covers: [d11-de-trainingslus#4]
+  requires: [torch-mlp-digits, torch-loss-curves]
+  introduces: [py:state-dict, py:torch-save, c:checkpoint]
+  uses: [py:nn-module, py:nn-linear, py:torch-relu, py:forward-method, py:manual-seed, py:torch-tensor, py:item, py:dim, c:float32, c:tensor, py:np-load, py:dataloader, py:tensor-dataset, py:torch-optim, py:optimizer-step, py:zero-grad, py:backward, py:model-eval, py:model-train, py:no-grad, py:nn-cross-entropy-loss, py:np-argmax, c:mlp, c:hidden-layer, c:optimizer, c:epoch, c:mini-batch, c:validation-set, v:train-val-curves, c:overfitting, c:accuracy, c:test-set, c:loss, c:learning-rate, c:package, c:module, p:import-own-code, py:dict, py:for, py:tuple, py:list, py:min-max, py:append, py:indexing, py:slicing, py:if, py:comparison, py:init-method, py:inheritance, py:super, py:class, py:def, py:return, py:range, py:import, py:print, py:comment, py:keyword-argument, s:eta, q:predict, q:choice, q:exercise-with-check, q:run-cell]
+  mentions: [c:early-stopping]
+  ladder: [torch]
+  needs: any
+
+- id: torch-pretrained
+  title: "Using a pretrained model"
+  level: basis
+  module: pytorch
+  idea: "A model hub offers networks someone else trained; you load one, a small digit reader the course trained on QMNIST, and check its license and training data on its model card."
+  covers: [pretrained-modellen-via-hubs#0, pretrained-modellen-via-hubs#1]
+  requires: [torch-checkpoints, data-provenance]
+  introduces: [c:pretrained-model, c:model-hub, c:model-card, py:weights-only]
+  uses: [py:state-dict, py:torch-save, py:model-eval, py:no-grad, c:license, c:datasheet, c:data-provenance, c:accuracy, c:test-set, c:model-parameter, c:class, py:class, py:dict, py:len, py:import, py:print, py:def, py:return, py:comment, py:underscore-name, q:predict, q:choice, q:exercise-with-check, q:run-cell]
+  mentions: [c:convolution, c:dropout]
+  ladder: [torch]
+  data: [model-course-qmnist-cnn]
+  needs: any
+
+- id: torch-frozen-features
+  title: "A pretrained network as feature extractor"
+  level: basis
+  module: pytorch
+  idea: "Keep a trained network's layers frozen and train only a new last layer: with few labeled examples of data like the old, such as digits from a noisy scanner, borrowed features beat starting from scratch; for clothes they do not."
+  covers: [transfer-learning-en-fine-tuning#0]
+  requires: [torch-pretrained, torch-loss-curves]
+  introduces: [c:transfer-learning, c:freezing, c:feature-extractor, py:nn-identity, py:named-parameters]
+  uses: [c:pretrained-model, py:requires-grad, c:overfitting, c:feature, c:layer, c:logit, c:model-parameter, c:test-set, py:nn-linear, py:nn-module, py:state-dict, py:model-eval, py:no-grad, py:for, py:import, py:print, py:def, py:return, py:comment, py:underscore-name, q:predict, q:choice, q:exercise-with-check, q:run-cell]
+  mentions: [c:adam, c:convolution, py:modulo]
+  ladder: [torch]
+  data: [model-course-qmnist-cnn, qmnist]
+  needs: any
+
+- id: torch-fine-tune
+  title: "Reusing a trained network: freeze, then fine-tune"
+  level: basis
+  module: pytorch
+  idea: "First train only a new last layer on the frozen features, then unfreeze every layer and train on with a learning rate ten times smaller: the borrowed features adapt a little to the new data; skip the first phase or keep the large learning rate, and they get worse."
+  covers: [transfer-learning-en-fine-tuning#1]
+  requires: [torch-frozen-features]
+  introduces: [c:fine-tuning]
+  uses: [c:pretrained-model, c:freezing, c:feature-extractor, c:transfer-learning, py:requires-grad, py:nn-identity, c:learning-rate, c:divergence, c:overfitting, c:validation-set, v:loss-curve, c:loss, c:train-set, c:feature, c:layer, c:model-parameter, c:test-set, c:gradient, c:epoch, py:nn-linear, py:nn-module, py:for, py:import, py:print, py:def, py:comment, py:underscore-name, q:predict, q:choice, q:exercise-with-check, q:run-cell]
+  mentions: [c:adam, c:convolution]
+  ladder: [torch]
+  data: [model-course-qmnist-cnn, qmnist, fashion-mnist]
+  needs: any
+
+# --- module building blocks (intuition) -------------------------------------------
+- id: ml-embeddings-idea
+  title: "Embeddings: meaning as coordinates"
+  level: basis
+  module: building-blocks
+  idea: "An embedding gives every word, image or sound a list of numbers so that similar things lie close together; you plot embeddings of handwritten digits, made by the course's digit model, and measure closeness with cosine similarity."
+  covers: [embeddings-en-similariteit#0, embeddings-en-similariteit#1]
+  requires: [math-norms-cosine, ml-one-hot, py-plotting, torch-mlp-digits]
+  introduces: [c:embedding, v:embedding-map]
+  uses: [c:one-hot, c:cosine-similarity, c:norm, c:distance, c:dot-product, c:vector, c:class, c:label, c:model, c:mlp, c:test-set, c:train-set, c:pixel, v:scatter-plot, py:np-array, py:np-dot, py:np-linalg-norm, py:np-indexing, py:for, py:range, py:len, py:if, py:def, py:return, py:print, py:import-as, py:comment, py:underscore-name, q:predict, q:choice, q:exercise-with-check, q:run-cell]
+  mentions: [c:language-model, c:seed]
+  warns: [embedding]
+  ladder: [numpy]
+  data: [model-course-qmnist-cnn, qmnist]
+  needs: any
+
+- id: cnn-convolution-idea
+  title: "Convolution: one small filter slides over the image"
+  level: basis
+  module: building-blocks
+  idea: "Instead of one weight per pixel, a small filter slides over the image and reuses its weights everywhere; it finds edges by hand in NumPy."
+  covers: [convolutionele-netwerken#0]
+  requires: [data-images-as-arrays, nn-forward-numpy]
+  introduces: [c:convolution, c:filter, c:feature-map, c:weight-sharing, c:locality]
+  uses: [c:pixel, c:grayscale-image, v:image-as-array, py:imread-imshow, py:plot, py:keyword-argument, py:np-zeros, py:np-indexing, py:slicing, py:indexing, py:np-sum, py:min-max, py:np-array, py:nested-list, c:array, c:matrix, c:shape, c:vectorization, c:neuron, c:weight, c:hidden-layer, c:matrix-multiplication, py:for, py:range, py:def, py:return, py:len, py:tuple, py:import, py:import-as, py:arithmetic, py:int, py:float, py:print, py:comment, py:variable, py:underscore-name, s:sigma-sum, q:predict, q:choice, q:exercise-with-check, q:run-cell]
+  warns: [kernel, filter]
+  ladder: [python, numpy]
+  data: [qmnist]
+  needs: any
+
+- id: rnn-memory-idea
+  title: "Recurrence: a network with memory"
+  level: basis
+  module: building-blocks
+  idea: "A recurrent network reads a sequence step by step and carries a hidden state, its memory, from one step to the next."
+  covers: [recurrente-netwerken#0]
+  requires: [nn-forward-numpy, data-text-as-numbers]
+  introduces: [c:recurrent-network, c:hidden-state, c:tanh, py:np-tanh]
+  uses: [c:weight, c:bias-term, c:activation-function, c:sigmoid, c:layer, c:training, c:reinforcement-learning, c:vector, c:matrix, c:shape, c:dot-product, c:matrix-multiplication, v:shape-notation, s:h-hidden, s:x, s:b, py:matmul-operator, py:np-array, py:np-zeros, py:import, py:import-as, c:code-point, py:ord-chr, py:comprehension, py:dict, py:for, py:def, py:return, py:print, py:list, py:nested-list, py:tuple, py:str, py:float, py:variable, py:comment, py:len, q:predict, q:choice, q:exercise-with-check, q:run-cell]
+  warns: [state]
+  ladder: [numpy]
+  needs: any
+
+- id: attn-idea
+  title: "Attention: every word looks at the others"
+  level: basis
+  module: building-blocks
+  idea: "Attention lets each position take a weighted average of all other positions, with weights that depend on how well they match."
+  covers: [attention-en-transformers#0, neurale-nlp#4]
+  requires: [nn-forward-numpy, ml-softmax, ml-embeddings-idea, cnn-convolution-idea, rnn-memory-idea]
+  introduces: [c:attention, c:transformer]
+  uses: [c:embedding, c:transpose, c:dot-product, c:softmax, c:vector, c:matrix-multiplication, c:shape, c:mlp, c:layer, c:logit, c:probability, c:recurrent-network, c:convolution, py:list, py:np-array, py:np-sum, py:matmul-operator, py:np-indexing, py:print, py:import-as, py:def, py:return, py:comment, py:underscore-name, q:predict, q:choice, q:exercise-with-check, q:run-cell]
+  mentions: [c:language-model, c:attention-weights]
+  warns: [attention]
+  ladder: [numpy]
+  needs: any

@@ -1,0 +1,33 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: llm-swiglu
+minutes: 30
+title:
+  en: "Modern MLP blocks: GELU, SiLU and SwiGLU"
+  nl: "Moderne MLP's: GELU, SiLU en SwiGLU"
+goal:
+  en: "write SwiGLU, the gated MLP of modern LLMs, and say why it has a smaller hidden width than a classic MLP."
+  nl: "SwiGLU schrijven, het gated MLP van moderne LLM's, en zeggen waarom het een kleinere hidden breedte heeft dan een klassiek MLP."
+summary:
+  - en: "GELU and SiLU are smooth versions of ReLU: no corner at 0, a small dip below 0, and a slope for negative inputs, so a small gradient still gets through."
+    nl: "GELU en SiLU zijn gladde versies van ReLU: geen knik bij 0, een kleine duik onder 0, en een helling bij negatieve inputs, zodat er nog een kleine gradient doorkomt."
+  - en: "SwiGLU multiplies SiLU of a gate by an up value, number by number, and takes the product back to d with a third layer; Llama's layers have no bias."
+    nl: "SwiGLU vermenigvuldigt SiLU van een gate getal voor getal met een up-waarde, en brengt het product met een derde layer terug naar d; de layers van Llama hebben geen bias."
+  - en: "With three matrices instead of two, a hidden width of 8/3 d keeps the parameters and FLOPs of a classic MLP of 4d."
+    nl: "Met drie matrices in plaats van twee houdt een hidden breedte van 8/3 d de parameters en FLOPs van een klassiek MLP van 4d."
+can_now:
+  - en: "write SwiGLU as a module of PyTorch"
+    nl: "SwiGLU schrijven als module van PyTorch"
+    by: swiglu
+  - en: "choose the hidden width of SwiGLU for a given number of parameters"
+    nl: "de hidden breedte van SwiGLU kiezen bij een gegeven aantal parameters"
+    by: hidden-size
+  - en: "explain what the gate adds, and what it costs"
+    nl: "uitleggen wat de gate toevoegt, en wat het kost"
+    by: what-the-gate-adds
+further_reading:
+  - en: "Noam Shazeer (2020), *GLU Variants Improve Transformer*, arXiv:2002.05202"
+    nl: "Noam Shazeer (2020), *GLU Variants Improve Transformer*, arXiv:2002.05202"
+  - en: "Dan Hendrycks and Kevin Gimpel (2016), *Gaussian Error Linear Units (GELUs)*, arXiv:1606.08415"
+    nl: "Dan Hendrycks en Kevin Gimpel (2016), *Gaussian Error Linear Units (GELUs)*, arXiv:1606.08415"

@@ -1,0 +1,36 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: llm-lora
+minutes: 60
+title:
+  en: "Project: LoRA, fine-tuning with a low-rank update"
+  nl: "Project: LoRA, finetunen met een low-rank update"
+goal:
+  en: "freeze your model and fine-tune only a small low-rank update of each of its weight matrices, merge that update back in, and compare it with full SFT."
+  nl: "je model bevriezen en alleen een kleine low-rank update van elk van zijn weight matrices finetunen, die update terug samenvoegen, en hem vergelijken met full fine-tuning."
+summary:
+  - en: "LoRA keeps a weight matrix W frozen and learns a correction B @ A of rank at most r: A of r rows, B of r columns. B starts at zero, so the model starts exactly as it was; the update is scaled by alpha / r."
+    nl: "LoRA houdt een weight matrix W bevroren en leert een correctie B @ A van rang hooguit r: A met r rijen, B met r kolommen. B begint op nul, dus begint het model precies zoals het was; de update wordt geschaald met alpha / r."
+  - en: "Only A and B learn, so the optimizer keeps its two numbers for far fewer parameters, and the adapters fit in a small file. Merged into W, the update costs nothing when the model writes; switched off, the model is the one you started with."
+    nl: "Alleen A en B leren, dus houdt de optimizer zijn twee getallen bij voor veel minder parameters, en passen de adapters in een klein bestand. Samengevoegd in W kost de update niets als het model schrijft; uitgezet is het model weer het model waarmee je begon."
+  - en: "On the course's model of the capstone's demo run, LoRA of rank 8 on every linear layer of the blocks trained 43,776 numbers, against all 575,337 of the model for full SFT, and did 35 of 100 test instructions, against 29 for full SFT."
+    nl: "Op het model uit de demorun van de capstone van de course trainde LoRA van rang 8 op elke linear layer van de blocks 43.776 getallen, tegen alle 575.337 van het model bij full fine-tuning, en deed het 35 van 100 testinstructies goed, tegen 29 voor full fine-tuning."
+can_now:
+  - en: "write a linear layer with a frozen weight and a low-rank update that starts at zero"
+    nl: "een linear layer schrijven met een bevroren weight en een low-rank update die op nul begint"
+    by: lora-linear
+  - en: "put adapters around every linear layer of a model and freeze the rest"
+    nl: "adapters rond elke linear layer van een model zetten en de rest bevriezen"
+    by: add-lora
+  - en: "merge a low-rank update into one weight matrix"
+    nl: "een low-rank update samenvoegen in één weight matrix"
+    by: merge-lora
+  - en: "say why B starts at zero and A does not"
+    nl: "zeggen waarom B op nul begint en A niet"
+    by: why-zero
+further_reading:
+  - en: "Edward Hu and others, *LoRA: Low-Rank Adaptation of Large Language Models* (2021)"
+    nl: "Edward Hu en anderen, *LoRA: Low-Rank Adaptation of Large Language Models* (2021)"
+  - en: "Tim Dettmers and others, *QLoRA: Efficient Finetuning of Quantized LLMs* (2023): LoRA on every linear layer of the blocks, on a model stored in 4 bits"
+    nl: "Tim Dettmers en anderen, *QLoRA: Efficient Finetuning of Quantized LLMs* (2023): LoRA op elke linear layer van de blocks, op een model dat in 4 bits is opgeslagen"

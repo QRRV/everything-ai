@@ -1,0 +1,28 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: data-images-as-arrays
+minutes: 15
+title:
+  en: "An image is a grid of numbers"
+  nl: "Een afbeelding is een rooster van getallen"
+goal:
+  en: "read an image as an array and show it, cut out a part with slices, and take one channel to count its pixels with a mask."
+  nl: "een afbeelding als array lezen en laten zien, er een deel uit knippen met slices, en één channel eruit halen om zijn pixels te tellen met een mask."
+summary:
+  - en: "A grayscale image is a 2D array with one brightness per pixel; a color image is a 3D array, `(rows, columns, 3)`, with red, green and blue per pixel."
+    nl: "Een grijswaardenbeeld is een 2D-array met één helderheid per pixel; een kleurenbeeld is een 3D-array, `(rijen, kolommen, 3)`, met rood, groen en blauw per pixel."
+  - en: "`plt.imread` reads an image file as an array, and `plt.imshow` shows an array as an image; add `cmap=\"gray\"` for one channel."
+    nl: "`plt.imread` leest een afbeeldingsbestand als array, en `plt.imshow` laat een array zien als afbeelding; zet er `cmap=\"gray\"` bij voor één channel."
+  - en: "Row 0 is at the top; a part is a slice, rows first, `img[top:bottom, left:right]`, and a channel is `img[:, :, c]`; a mask on a channel picks pixels, such as `red[red > 0.9]`."
+    nl: "Rij 0 staat bovenaan; een deel is een slice, de rijen eerst, `img[boven:onder, links:rechts]`, en een channel is `img[:, :, c]`; een mask op een channel kiest pixels, zoals `red[red > 0.9]`."
+can_now:
+  - en: "give the shape of a color image"
+    nl: "de shape van een kleurenbeeld geven"
+    by: color-shape
+  - en: "cut a part out of an image with slices"
+    nl: "een deel uit een afbeelding knippen met slices"
+    by: sun
+  - en: "take one channel of a color image, and count its pixels with a mask"
+    nl: "één channel uit een kleurenbeeld halen, en zijn pixels tellen met een mask"
+    by: red-pixels

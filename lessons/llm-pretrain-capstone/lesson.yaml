@@ -1,0 +1,35 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: llm-pretrain-capstone
+minutes: 75
+title:
+  en: "Capstone: pretrain your own small LLM"
+  nl: "Capstone: je eigen kleine LLM pretrainen"
+goal:
+  en: "measure your computer, size a model for a time budget with your compute_optimal, pretrain it with your own step, measure its MFU, and let it write stories."
+  nl: "je computer meten, met je compute_optimal een model kiezen voor een tijdsbudget, het pretrainen met je eigen stap, zijn MFU meten, en het verhalen laten schrijven."
+summary:
+  - en: "A time budget is a compute budget: a probe of a few steps gives the FLOP/s of this computer, and times the seconds of the run that is the compute."
+    nl: "Een tijdsbudget is een compute budget: een proefmeting van een paar stappen geeft de FLOP/s van deze computer, en keer de seconden van de run is dat de compute."
+  - en: "compute_optimal turns the compute into parameters at 20 tokens per parameter; the run takes the nearest model of the family, and spends the whole budget on it."
+    nl: "compute_optimal rekent de compute om in parameters bij 20 tokens per parameter; de run neemt het dichtstbijzijnde model van de familie, en besteedt er het hele budget aan."
+  - en: "Each step sets the learning rate of the schedule, runs under autocast in BF16 only where the probe found that faster, and clips the gradients to a norm of 1."
+    nl: "Elke stap zet de learning rate van het schema, draait alleen onder autocast in BF16 waar de proefmeting dat sneller vond, en clipt de gradients op een norm van 1."
+  - en: "On the course's CPU, with 2 threads, the plan was depth 3, 575,337 parameters, on 19.2 million tokens. The run took 19 minutes instead of 15, at an MFU of 23%, and reached a validation loss of 1.83 per token, against 2.32 for the bigger model of depth 6 of the scaling law, which saw far fewer tokens."
+    nl: "Op de CPU van de course, met 2 threads, werd het plan diepte 3, 575.337 parameters, op 19,2 miljoen tokens. De run duurde 19 minuten in plaats van 15, bij een MFU van 23%, en haalde een validation loss van 1,83 per token, tegen 2,32 voor het grotere model met diepte 6 uit de scaling law, dat veel minder tokens zag."
+can_now:
+  - en: "plan a run that spends a time budget compute-optimally"
+    nl: "een run plannen die een tijdsbudget compute-optimal besteedt"
+    by: plan-run
+  - en: "write a pretraining step with a schedule, mixed precision where it pays off, and gradient clipping"
+    nl: "een pretrainingstap schrijven met een schema, mixed precision waar dat loont, en gradient clipping"
+    by: pretrain-step
+  - en: "say why a run measures whether BF16 is faster before it uses it"
+    nl: "zeggen waarom een run meet of BF16 sneller is voordat hij het gebruikt"
+    by: why-measure
+further_reading:
+  - en: "Ronen Eldan and Yuanzhi Li, *TinyStories: How Small Can Language Models Be and Still Speak Coherent English?* (2023)"
+    nl: "Ronen Eldan en Yuanzhi Li, *TinyStories: How Small Can Language Models Be and Still Speak Coherent English?* (2023)"
+  - en: "Jordan Hoffmann and others, *Training Compute-Optimal Large Language Models* (2022): the Chinchilla paper"
+    nl: "Jordan Hoffmann en anderen, *Training Compute-Optimal Large Language Models* (2022): de paper van Chinchilla"

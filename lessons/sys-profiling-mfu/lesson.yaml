@@ -1,0 +1,33 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: sys-profiling-mfu
+minutes: 40
+title:
+  en: "Profiling: tokens per second and MFU"
+  nl: "Profiling: tokens per seconde en MFU"
+goal:
+  en: "measure the tokens per second and the MFU of a training run truthfully, and find with the profiler where its time goes."
+  nl: "de tokens per seconde en de MFU van een trainingsrun eerlijk meten, en met de profiler vinden waar zijn tijd heen gaat."
+summary:
+  - en: "Time a run after skipping its first steps, over several steps, and on a GPU with `torch.cuda.synchronize()` before you start and before you stop the clock: Python runs ahead of the GPU."
+    nl: "Meet een run nadat je zijn eerste stappen hebt overgeslagen, over meerdere stappen, en op een GPU met `torch.cuda.synchronize()` voordat je de klok start en voordat je hem stopt: Python loopt voor de GPU uit."
+  - en: "MFU is tokens per second times the FLOPs per token, divided by the peak; HFU also counts the FLOPs computed twice, so it is never lower."
+    nl: "MFU is tokens per seconde maal de FLOPs per token, gedeeld door de piek; HFU telt ook de dubbel berekende FLOPs mee, en is dus nooit lager."
+  - en: "`torch.profiler.profile` shows which operations take the time: matrix multiplications are what a GPU is good at; many small operations wait for memory."
+    nl: "`torch.profiler.profile` laat zien welke bewerkingen de tijd nemen: matrixvermenigvuldigingen zijn waar een GPU goed in is; veel kleine bewerkingen wachten op het geheugen."
+can_now:
+  - en: "measure the tokens per second of a training run"
+    nl: "de tokens per seconde van een trainingsrun meten"
+    by: tokens-per-second
+  - en: "tell MFU and HFU apart"
+    nl: "MFU en HFU uit elkaar houden"
+    by: hfu
+  - en: "choose what to change when the MFU is low, and check that it helped"
+    nl: "kiezen wat je verandert als de MFU laag is, en nagaan of het hielp"
+    by: low-mfu
+further_reading:
+  - en: "Aakanksha Chowdhery and others (2022), *PaLM: Scaling Language Modeling with Pathways*, section 4.1: where MFU and HFU come from"
+    nl: "Aakanksha Chowdhery en anderen (2022), *PaLM: Scaling Language Modeling with Pathways*, paragraaf 4.1: waar MFU en HFU vandaan komen"
+  - en: "The PyTorch documentation, *PyTorch Profiler*: recording operations on the CPU and the GPU"
+    nl: "De documentatie van PyTorch, *PyTorch Profiler*: bewerkingen vastleggen op de CPU en de GPU"

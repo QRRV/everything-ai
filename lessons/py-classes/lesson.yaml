@@ -1,0 +1,28 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: py-classes
+minutes: 15
+title:
+  en: "Classes and objects"
+  nl: "Classes en objecten"
+goal:
+  en: "write a class with `__init__` and methods that work on the object's own data through `self`, and make and use objects of it."
+  nl: "een class schrijven met `__init__` en methods die via `self` op de eigen data van het object werken, en er objecten van maken en gebruiken."
+summary:
+  - en: "A class is a plan: `class Account:`. Calling it, `Account(\"Ada\")`, makes an object and runs `__init__`, which gives it its starting data."
+    nl: "Een class is een plan: `class Account:`. Roep je hem aan, `Account(\"Ada\")`, dan maak je een object en draait `__init__`, die het object zijn begindata geeft."
+  - en: "Every method gets the object as `self`; `self.balance` is that object's own data, so each object keeps its own."
+    nl: "Elke method krijgt het object als `self`; `self.balance` is de eigen data van dat object, dus houdt elk object zijn eigen data."
+  - en: "With a dot, you call a method, `a.deposit(50)`, or read an attribute, `a.balance`."
+    nl: "Met een punt roep je een method aan, `a.deposit(50)`, of lees je een attribute, `a.balance`."
+can_now:
+  - en: "write a class with `__init__` and a method that changes the object's data"
+    nl: "een class schrijven met `__init__` en een method die de data van het object verandert"
+    by: counter
+  - en: "say why two objects of one class keep their own data"
+    nl: "zeggen waarom twee objecten van één class hun eigen data houden"
+    by: two-objects
+  - en: "give each object its own list, and methods that use it"
+    nl: "elk object een eigen lijst geven, en methods die hem gebruiken"
+    by: playlist

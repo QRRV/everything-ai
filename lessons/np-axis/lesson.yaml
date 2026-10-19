@@ -1,0 +1,28 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: np-axis
+minutes: 15
+title:
+  en: "Sums and means along an axis"
+  nl: "Sommen en gemiddelden langs een axis"
+goal:
+  en: "summarize an array with `.sum()`, `.mean()` and `.argmax()`, for the whole array or along one axis: one result per row or per column."
+  nl: "een array samenvatten met `.sum()`, `.mean()` en `.argmax()`, voor de hele array of langs één axis: één uitkomst per rij of per kolom."
+summary:
+  - en: "`.sum()`, `.mean()` and `.argmax()` without an axis give one number for the whole array; `.argmax()` gives the index of the largest number."
+    nl: "`.sum()`, `.mean()` en `.argmax()` zonder axis geven één getal voor de hele array; `.argmax()` geeft de index van het grootste getal."
+  - en: "`axis=0` goes down the rows and leaves one number per column; `axis=1` goes along each row and leaves one number per row."
+    nl: "`axis=0` gaat langs de rijen omlaag en laat één getal per kolom over; `axis=1` gaat langs elke rij en laat één getal per rij over."
+  - en: "Check with the shape: a `(3, 4)` matrix gives 4 numbers with `axis=0`, and 3 with `axis=1`."
+    nl: "Controleer het met de shape: een matrix met shape `(3, 4)` geeft 4 getallen met `axis=0`, en 3 met `axis=1`."
+can_now:
+  - en: "choose the axis for one result per row"
+    nl: "de axis kiezen voor één uitkomst per rij"
+    by: week-totals
+  - en: "take the mean of each row of a matrix"
+    nl: "het gemiddelde van elke rij van een matrix nemen"
+    by: day-means
+  - en: "find the index of the highest score in each row, as a model's prediction"
+    nl: "de index van de hoogste score in elke rij vinden, als voorspelling van een model"
+    by: predictions

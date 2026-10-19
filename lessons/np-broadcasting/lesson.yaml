@@ -1,0 +1,28 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: np-broadcasting
+minutes: 15
+title:
+  en: "Broadcasting"
+  nl: "Broadcasting"
+goal:
+  en: "calculate with two arrays of different shapes, when their shapes fit, and keep a summary as a column with keepdims."
+  nl: "rekenen met twee arrays met verschillende shapes, als hun shapes passen, en een samenvatting als kolom houden met keepdims."
+summary:
+  - en: "Broadcasting: NumPy stretches each length 1, or missing length, to the other length, without copying anything, and then calculates number by number."
+    nl: "Broadcasting: NumPy rekt elke lengte 1, of lengte die ontbreekt, uit tot de andere lengte, zonder iets te kopiëren, en rekent dan getal voor getal."
+  - en: "Shapes fit when, lined up on the right, each pair is the same or one of the two is 1; a missing length counts as 1."
+    nl: "Shapes passen als elk paar, rechts uitgelijnd, gelijk is of een van de twee 1 is; een lengte die ontbreekt, telt als 1."
+  - en: "One number per row needs a column, shape `(rows, 1)`: `keepdims=True` keeps a summary's axis with length 1."
+    nl: "Eén getal per rij heeft een kolom nodig, shape `(rijen, 1)`: `keepdims=True` laat de axis van een samenvatting staan, met lengte 1."
+can_now:
+  - en: "say whether two shapes fit"
+    nl: "zeggen of twee shapes passen"
+    by: which-fits
+  - en: "take one number per column away from a whole matrix"
+    nl: "één getal per kolom van een hele matrix aftrekken"
+    by: centered
+  - en: "divide every row by its own total, with a column made by keepdims"
+    nl: "elke rij delen door zijn eigen totaal, met een kolom gemaakt door keepdims"
+    by: shares

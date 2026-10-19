@@ -1,0 +1,70 @@
+[project]
+name = "everything-ai"
+version = "0.1.0"
+description = "An interactive course about all of AI, from your first line of Python to your own LLM. Runs on your own computer."
+readme = "README.md"
+license = "MIT"
+# One Python for everyone. Newer uv versions pick 3.15 by default, which PyTorch does not support yet.
+requires-python = "==3.13.*"
+dependencies = [
+  "marimo==0.25.1",
+  "anywidget==0.11.0",
+  "numpy==2.5.3",
+  "pyyaml==6.0.3",
+  "matplotlib==3.11.2",
+  "pandas==3.0.6",
+  "scikit-learn==1.9.1",
+  "torch==2.14.1",                   # fixed: 2.15 (28 Oct) drops older cards and changes CUDA (docs/techniek/installatie)
+  "tiktoken==0.14.0",
+]
+
+[project.scripts]
+everything-ai = "everything_ai.cli:main"
+
+# marimo loads this middleware into its server: it serves the start page next to the lessons.
+[project.entry-points."marimo.server.asgi.middleware"]
+everything-ai = "everything_ai.server:MIDDLEWARE"
+
+[dependency-groups]
+dev = ["pytest==8.4.2"]
+
+[build-system]
+requires = ["uv_build>=0.11,<0.14"]
+build-backend = "uv_build"
+
+[tool.uv]
+required-version = ">=0.11"
+python-preference = "only-managed"   # never a Python from the system, Homebrew, the Store or Anaconda
+cache-dir = ".uv-cache"              # cache on the same drive as .venv, so files are shared instead of copied
+# Windows learners use WSL2, so only Linux and macOS on Apple silicon are locked.
+environments = [
+  "sys_platform == 'darwin' and platform_machine == 'arm64'",
+  "sys_platform == 'linux' and platform_machine == 'x86_64'",
+  "sys_platform == 'linux' and platform_machine == 'aarch64'",
+]
+required-environments = [
+  "sys_platform == 'darwin' and platform_machine == 'arm64'",
+  "sys_platform == 'linux' and platform_machine == 'x86_64'",
+  "sys_platform == 'linux' and platform_machine == 'aarch64'",
+]
+
+# Settings for every lesson. The theme is not set here: the start page sets it (system, light or dark).
+[tool.marimo.runtime]
+auto_instantiate = true              # run the lesson when it opens (marimo 0.25 does not by default)
+on_cell_change = "autorun"
+
+[tool.marimo.display]
+default_width = "medium"
+custom_css = ["src/everything_ai/web/fonts.css", "src/everything_ai/web/kleuren.css", "src/everything_ai/web/theme.css", "src/everything_ai/web/lesson.css"]
+
+[tool.marimo.ai]
+enabled = false                      # marimo's AI buttons need your own API key; the course hides them
+
+[tool.marimo.completion]
+copilot = false
+
+[tool.marimo.package_management]
+manager = "uv"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

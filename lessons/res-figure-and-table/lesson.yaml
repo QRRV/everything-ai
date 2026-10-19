@@ -1,0 +1,28 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: res-figure-and-table
+minutes: 20
+title:
+  en: "Reading an abstract, a figure and a results table"
+  nl: "Een abstract, een figuur en een resultatentabel lezen"
+goal:
+  en: "read a figure in a fixed order: caption, axes, what is compared, then the claim; and compare only the rows of a results table that were measured the same way."
+  nl: "een figuur in een vaste volgorde lezen: bijschrift, assen, wat er vergeleken wordt, dan de claim; en alleen de rijen van een resultatentabel vergelijken die op dezelfde manier gemeten zijn."
+summary:
+  - en: "The abstract is the paper's claim in one paragraph; the figures and the results table hold the measurements to check it."
+    nl: "Het abstract is de claim van de paper in één alinea; de figuren en de resultatentabel bevatten de metingen om hem te controleren."
+  - en: "Read a figure in order: the caption, the axes with their units, scale and start, what is compared, and only then the claim."
+    nl: "Lees een figuur op volgorde: het bijschrift, de assen met hun eenheid, schaal en begin, wat er vergeleken wordt, en pas dan de claim."
+  - en: "Only rows of a results table measured under the same conditions can be compared; one run can differ from the next by chance."
+    nl: "Alleen rijen van een resultatentabel die onder dezelfde omstandigheden gemeten zijn, kun je vergelijken; één run kan door toeval van de volgende verschillen."
+can_now:
+  - en: "read how many times a value changed on a log scale"
+    nl: "aflezen hoeveel keer een waarde veranderde op een logaritmische schaal"
+    by: times-smaller
+  - en: "find the best row of a results table among the rows measured the same way"
+    nl: "de beste rij van een resultatentabel vinden onder de rijen die op dezelfde manier gemeten zijn"
+    by: fair-best
+  - en: "say what an abstract claims and where to check it"
+    nl: "zeggen wat een abstract beweert en waar je het controleert"
+    by: abstract

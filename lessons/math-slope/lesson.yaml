@@ -1,0 +1,28 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: math-slope
+minutes: 15
+title:
+  en: "The derivative as a slope"
+  nl: "De afgeleide als helling"
+goal:
+  en: "measure the slope of the loss for a parameter with a tiny step, and read from its sign which way the loss goes down."
+  nl: "de helling van de loss voor een parameter meten met een heel klein stapje, en aan het teken zien welke kant de loss op daalt."
+summary:
+  - en: "The derivative of the loss for a parameter says how fast the loss changes when you change that parameter a tiny bit: the slope of the loss there."
+    nl: "De afgeleide van de loss voor een parameter zegt hoe snel de loss verandert als je die parameter een heel klein beetje verandert: de helling van de loss daar."
+  - en: "A finite difference measures it: (loss(w + h) − loss(w)) / h, with a tiny h such as 0.001."
+    nl: "Een eindige differentie meet hem: (loss(w + h) − loss(w)) / h, met een heel kleine h zoals 0,001."
+  - en: "A positive slope means a smaller parameter lowers the loss; a negative slope, a bigger one; near 0, you are near the lowest point."
+    nl: "Een positieve helling betekent dat een kleinere parameter de loss verlaagt; een negatieve, een grotere; dicht bij 0 sta je dicht bij het laagste punt."
+can_now:
+  - en: "say from the sign of the slope which way to move a parameter"
+    nl: "aan het teken van de helling zien welke kant je een parameter op schuift"
+    by: which-way
+  - en: "measure the slope of the loss with a finite difference"
+    nl: "de helling van de loss meten met een eindige differentie"
+    by: slope-b
+  - en: "take one step downhill with the slope"
+    nl: "met de helling één stap bergaf zetten"
+    by: next-w

@@ -1,0 +1,28 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: py-decorators
+minutes: 15
+title:
+  en: "Decorators"
+  nl: "Decorators"
+goal:
+  en: "write a decorator that wraps a function in a new one, and put it above a `def` with `@`."
+  nl: "een decorator schrijven die een functie in een nieuwe functie inpakt, en hem met `@` boven een `def` zetten."
+summary:
+  - en: "A function is a value: without parentheses, its name is the function itself, and you can pass it to another function."
+    nl: "Een functie is een waarde: zonder haakjes is zijn naam de functie zelf, en kun je hem aan een andere functie geven."
+  - en: "A decorator gets a function `fn`, makes a `wrapper` that calls `fn` and adds something, and ends with `return wrapper`."
+    nl: "Een decorator krijgt een functie `fn`, maakt een `wrapper` die `fn` aanroept en er iets aan toevoegt, en eindigt met `return wrapper`."
+  - en: "`@loud` above `def hello` means `hello = loud(hello)`: from then on, `hello` stands for the new function."
+    nl: "`@loud` boven `def hello` betekent `hello = loud(hello)`: vanaf dan staat `hello` voor de nieuwe functie."
+can_now:
+  - en: "finish a decorator whose wrapper changes what a function gives back"
+    nl: "een decorator afmaken waarvan de wrapper verandert wat een functie teruggeeft"
+    by: plus-ten
+  - en: "say what `@` above a `def` stands for"
+    nl: "zeggen waar `@` boven een `def` voor staat"
+    by: same-as
+  - en: "write a decorator from scratch, with an inner function and `return wrapper`"
+    nl: "een decorator vanaf nul schrijven, met een functie erin en `return wrapper`"
+    by: no-negatives

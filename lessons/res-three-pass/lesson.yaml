@@ -1,0 +1,33 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: res-three-pass
+minutes: 30
+title:
+  en: "Reading a paper in three passes"
+  nl: "Een paper lezen in drie rondes"
+goal:
+  en: "read a paper in three passes, each deeper than the one before, and decide after each pass whether to go on."
+  nl: "een paper in drie rondes lezen, elk dieper dan de vorige, en na elke ronde beslissen of je doorgaat."
+summary:
+  - en: "The first pass, 5 to 10 minutes, answers the five Cs: category, context, correctness, contributions and clarity, and whether to read on."
+    nl: "De eerste ronde, 5 tot 10 minuten, beantwoordt de vijf C's: category, context, correctness, contributions en clarity, en of je verder leest."
+  - en: "The second pass reads the whole text and every figure and table, but puts off proofs and formulas you do not follow yet."
+    nl: "De tweede ronde leest de hele tekst en elke figuur en tabel, maar stelt bewijzen en formules die je nog niet volgt uit."
+  - en: "The third pass goes through every detail as if you were to rebuild the work, and finds the choices and assumptions the paper does not spell out."
+    nl: "De derde ronde gaat door elk detail alsof je het werk zou nabouwen, en vindt de keuzes en aannames die de paper niet uitspelt."
+can_now:
+  - en: "say which pass a reading task belongs to"
+    nl: "zeggen bij welke ronde een leestaak hoort"
+    by: which-pass
+  - en: "keep going in the second pass when a formula stops you"
+    nl: "doorlezen in de tweede ronde als een formule je tegenhoudt"
+    by: stuck
+  - en: "compare a paper's model with your own, section by section"
+    nl: "het model van een paper paragraaf voor paragraaf vergelijken met je eigen model"
+    by: differences
+further_reading:
+  - en: "S. Keshav (2007), *How to Read a Paper*, ACM SIGCOMM Computer Communication Review 37(3): the three passes in two pages"
+    nl: "S. Keshav (2007), *How to Read a Paper*, ACM SIGCOMM Computer Communication Review 37(3): de drie rondes in twee pagina's"
+  - en: "Ashish Vaswani, Noam Shazeer, Niki Parmar, Jakob Uszkoreit, Llion Jones, Aidan N. Gomez, Łukasz Kaiser and Illia Polosukhin (2017), *Attention Is All You Need*, NeurIPS 30"
+    nl: "Ashish Vaswani, Noam Shazeer, Niki Parmar, Jakob Uszkoreit, Llion Jones, Aidan N. Gomez, Łukasz Kaiser en Illia Polosukhin (2017), *Attention Is All You Need*, NeurIPS 30"

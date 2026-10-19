@@ -1,0 +1,28 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: py-variables
+minutes: 15
+title:
+  en: "Variables and numbers"
+  nl: "Variabelen en getallen"
+goal:
+  en: "give a value a name with `=`, calculate with whole numbers and decimal numbers, and show the result with `print`."
+  nl: "een waarde een naam geven met `=`, rekenen met gehele getallen en kommagetallen, en de uitkomst laten zien met `print`."
+summary:
+  - en: "A variable is a name for a value. `price = 2.5` gives the name `price` the value 2.5; a later `price = 5` gives it a new value."
+    nl: "Een variabele is een naam voor een waarde. `price = 2.5` geeft de naam `price` de waarde 2.5; een latere `price = 5` geeft hem een nieuwe waarde."
+  - en: "An int is a whole number, a float a number with a decimal point. Python always writes a point, never a comma."
+    nl: "Een int is een geheel getal, een float een kommagetal. Python schrijft altijd een punt, nooit een komma."
+  - en: "You calculate with `+`, `-`, `*`, `/` and `**` (to the power of). Dividing with `/` always gives a float, and `*` and `/` go before `+` and `-`."
+    nl: "Je rekent met `+`, `-`, `*`, `/` en `**` (tot de macht). Delen met `/` geeft altijd een float, en `*` en `/` gaan vóór `+` en `-`."
+can_now:
+  - en: "give numbers a name and calculate with those names"
+    nl: "getallen een naam geven en met die namen rekenen"
+    by: coffee
+  - en: "calculate a power with `**`"
+    nl: "een macht uitrekenen met `**`"
+    by: lock
+  - en: "say what dividing with `/` gives"
+    nl: "zeggen wat delen met `/` oplevert"
+    by: divide

@@ -1,0 +1,28 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: torch-batches
+minutes: 25
+title:
+  en: "Mini-batches and epochs"
+  nl: "Mini-batches en epochs"
+goal:
+  en: "train with mini-batches: a generator that hands out the data a few examples at a time, an update step per mini-batch, and epochs that each pass over all the data once."
+  nl: "trainen met mini-batches: een generator die de data een paar voorbeelden tegelijk geeft, een update-stap per mini-batch, en epochs die elk één keer over alle data gaan."
+summary:
+  - en: "A mini-batch is a small group of examples for one update step, an iteration; an epoch is one pass over all the data, with n / B iterations, rounded up."
+    nl: "Een mini-batch is een kleine groep voorbeelden voor één update-stap, een iteratie; een epoch is één keer over alle data, met n / B iteraties, naar boven afgerond."
+  - en: "The slopes of a mini-batch are an estimate of the slopes over all the data; gradient descent with them is stochastic gradient descent, SGD."
+    nl: "De hellingen van een mini-batch zijn een schatting van de hellingen over alle data; gradient descent daarmee is stochastic gradient descent, SGD."
+  - en: "A generator with `range(0, len(X), size)` hands out the batches; training loops over the epochs and, inside that, over the mini-batches."
+    nl: "Een generator met `range(0, len(X), size)` geeft de batches; trainen loopt over de epochs en daarbinnen over de mini-batches."
+can_now:
+  - en: "say how many iterations an epoch has, and how big the last mini-batch is"
+    nl: "zeggen hoeveel iteraties een epoch heeft, en hoe groot de laatste mini-batch is"
+    by: last-batch
+  - en: "write a generator that hands out mini-batches"
+    nl: "een generator schrijven die mini-batches geeft"
+    by: batches
+  - en: "train over epochs and mini-batches with an optimizer"
+    nl: "trainen over epochs en mini-batches met een optimizer"
+    by: epochs

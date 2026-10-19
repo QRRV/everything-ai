@@ -1,0 +1,31 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: sys-mixed-precision
+minutes: 35
+title:
+  en: "Mixed-precision training"
+  nl: "Mixed-precision training"
+goal:
+  en: "train with the calculations in BF16 and the master weights in FP32, with autocast, and say when FP16 needs loss scaling."
+  nl: "trainen met de berekeningen in BF16 en de master weights in FP32, met autocast, en zeggen wanneer FP16 loss scaling nodig heeft."
+summary:
+  - en: "Mixed precision keeps the weights in FP32, as the master weights, and the optimizer's averages too, and does the matrix multiplications of the forward and backward pass in BF16."
+    nl: "Mixed precision houdt de weights in FP32, als de master weights, en de gemiddelden van de optimizer ook, en doet de matrixvermenigvuldigingen van de forward en backward pass in BF16."
+  - en: "Put the forward pass and the loss inside `torch.autocast(device_type, dtype=torch.bfloat16)`; `backward()` and the step stay outside, and the model is never converted."
+    nl: "Zet de forward pass en de loss binnen `torch.autocast(device_type, dtype=torch.bfloat16)`; `backward()` en de stap blijven erbuiten, en het model wordt nooit omgezet."
+  - en: "FP16 needs loss scaling, so that small gradients do not become 0; `torch.amp.GradScaler` does it. BF16 has the range of FP32 and needs none."
+    nl: "FP16 heeft loss scaling nodig, zodat kleine gradients geen 0 worden; `torch.amp.GradScaler` doet dat. BF16 heeft het bereik van FP32 en heeft het niet nodig."
+can_now:
+  - en: "write a training step in mixed precision with autocast"
+    nl: "een trainingsstap in mixed precision schrijven met autocast"
+    by: train-step
+  - en: "say which numbers stay in FP32"
+    nl: "zeggen welke getallen in FP32 blijven"
+    by: what-stays
+  - en: "explain why FP16 needs loss scaling and BF16 does not"
+    nl: "uitleggen waarom FP16 loss scaling nodig heeft en BF16 niet"
+    by: scaling
+further_reading:
+  - en: "Paulius Micikevicius and others (2018), *Mixed Precision Training*, ICLR 2018: FP32 master weights, FP16 calculations and loss scaling"
+    nl: "Paulius Micikevicius en anderen (2018), *Mixed Precision Training*, ICLR 2018: master weights in FP32, berekeningen in FP16 en loss scaling"

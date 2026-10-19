@@ -1,0 +1,28 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: math-partial-derivatives
+minutes: 25
+title:
+  en: "Partial derivatives and the gradient, formally"
+  nl: "Partiële afgeleiden en de gradient, formeel"
+goal:
+  en: "write partial derivatives and the gradient as exact formulas, and add up the paths when a value reaches the output along several of them."
+  nl: "partiële afgeleiden en de gradient als precieze formules schrijven, en de paden optellen als een waarde de output langs meerdere paden bereikt."
+summary:
+  - en: "A partial derivative holds every other variable fixed: treat the others as numbers, and use the derivative rules. The gradient lists all partial derivatives, in the order of the variables."
+    nl: "Een partiële afgeleide houdt elke andere variabele vast: behandel de andere als getallen, en gebruik de differentieerregels. De gradient zet alle partiële afgeleiden op een rij, in de volgorde van de variabelen."
+  - en: "The multivariable chain rule: $\\frac{dz}{dt} = \\frac{\\partial z}{\\partial u} \\cdot \\frac{du}{dt} + \\frac{\\partial z}{\\partial v} \\cdot \\frac{dv}{dt}$. Along one path multiply, across paths add."
+    nl: "De multivariabele kettingregel: $\\frac{dz}{dt} = \\frac{\\partial z}{\\partial u} \\cdot \\frac{du}{dt} + \\frac{\\partial z}{\\partial v} \\cdot \\frac{dv}{dt}$. Langs één pad vermenigvuldigen, tussen paden optellen."
+  - en: "The product rule is one case of the multivariable chain rule, for z = u · v."
+    nl: "De productregel is één geval van de multivariabele kettingregel, voor z = u · v."
+can_now:
+  - en: "work out a partial derivative with the other variable held fixed"
+    nl: "een partiële afgeleide uitrekenen met de andere variabele vastgehouden"
+    by: partial-y
+  - en: "write the gradient of a function of two variables as formulas"
+    nl: "de gradient van een functie van twee variabelen als formules schrijven"
+    by: gradient-formula
+  - en: "add the paths along which a value reaches the output"
+    nl: "de paden optellen waarlangs een waarde de output bereikt"
+    by: two-paths

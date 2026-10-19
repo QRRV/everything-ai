@@ -1,0 +1,28 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: stats-describe
+minutes: 15
+title:
+  en: "Describing data: mean, median and spread"
+  nl: "Data beschrijven: gemiddelde, mediaan en spreiding"
+goal:
+  en: "describe a column of numbers with its mean, median, standard deviation and quantiles."
+  nl: "een kolom getallen beschrijven met het gemiddelde, de mediaan, de standaardafwijking en kwantielen."
+summary:
+  - en: "The median is the middle value once you sort the values; one outlier pulls the mean, but hardly moves the median."
+    nl: "De mediaan is de middelste waarde als je ze sorteert; één uitschieter trekt aan het gemiddelde, maar verschuift de mediaan nauwelijks."
+  - en: "The standard deviation, `x.std()`, is how far the values typically lie from the mean: the square root of the mean of the squared distances."
+    nl: "De standaardafwijking, `x.std()`, is hoe ver de waarden doorgaans van het gemiddelde af liggen: de wortel uit het gemiddelde van de gekwadrateerde afstanden."
+  - en: "A quantile, `np.quantile(x, 0.9)`, is the value below which a part of the values lies; a histogram, `plt.hist(x, bins=...)`, shows how many values fall in each bin."
+    nl: "Een kwantiel, `np.quantile(x, 0.9)`, is de waarde waaronder een deel van de waarden ligt; een histogram, `plt.hist(x, bins=...)`, laat zien hoeveel waarden er in elke bin vallen."
+can_now:
+  - en: "choose between the mean and the median to describe the middle"
+    nl: "kiezen tussen het gemiddelde en de mediaan om het midden te beschrijven"
+    by: typical-house
+  - en: "find the value below which a given part of the data lies"
+    nl: "de waarde vinden waaronder een bepaald deel van de data ligt"
+    by: slow-trips
+  - en: "work out the standard deviation step by step"
+    nl: "de standaardafwijking stap voor stap uitrekenen"
+    by: spread

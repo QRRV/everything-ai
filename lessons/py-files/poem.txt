@@ -1,0 +1,4 @@
+Roses are red,
+violets are blue,
+a program can read
+this poem for you.

@@ -1,0 +1,28 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: lm-hallucination
+minutes: 20
+title:
+  en: "Why language models make things up"
+  nl: "Waarom language models dingen verzinnen"
+goal:
+  en: "explain why a language model can write fluent, sure text that is false, say what a knowledge cutoff means, and check a model's lines against a source."
+  nl: "uitleggen waarom een language model vloeiende, zekere tekst kan schrijven die onwaar is, zeggen wat een knowledge cutoff betekent, en de regels van een model nakijken in een bron."
+summary:
+  - en: "A hallucination is output that sounds fluent and sure but is false or made up. A language model gives likely text, and nothing in next-token prediction checks whether it is true."
+    nl: "Een hallucinatie is output die vloeiend en zeker klinkt, maar onwaar of verzonnen is. Een language model geeft waarschijnlijke tekst, en niets in next-token prediction controleert of die waar is."
+  - en: "How sure a model is says nothing about whether it is right: the course's model was as sure of the lines of Romeo it made up as of real ones."
+    nl: "Hoe zeker een model is, zegt niets over of het klopt: het model van de course was net zo zeker van de regels van Romeo die het verzon als van echte."
+  - en: "A model knows nothing after its knowledge cutoff, unless it is given that information, yet it still writes likely text about it, and a small change in the prompt that should not matter can change its answer. Check what matters against a source you trust."
+    nl: "Een model weet niets van na zijn knowledge cutoff, tenzij het die informatie krijgt, en toch schrijft het er waarschijnlijke tekst over, en een kleine aanpassing in de prompt die er niet toe zou moeten doen, kan zijn antwoord veranderen. Kijk wat ertoe doet na in een bron die je vertrouwt."
+can_now:
+  - en: "say what a model can do with a question about something after its knowledge cutoff"
+    nl: "zeggen wat een model kan doen met een vraag over iets van na zijn knowledge cutoff"
+    by: cutoff
+  - en: "work out which share of a model's lines a source really has"
+    nl: "uitrekenen welk deel van de regels van een model echt in een bron staat"
+    by: found-share
+  - en: "explain why a model can be sure of a line it made up"
+    nl: "uitleggen waarom een model zeker kan zijn van een regel die het verzon"
+    by: sure-not-true

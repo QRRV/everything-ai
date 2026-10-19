@@ -1,0 +1,28 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: nn-why-backprop
+minutes: 20
+title:
+  en: "Too many weights to nudge one by one"
+  nl: "Te veel weights om één voor één op te schuiven"
+goal:
+  en: "count what a calculation costs in FLOPs, say how that grows with big-O notation, and see why measuring every slope by moving each parameter is too slow for a network."
+  nl: "tellen wat een berekening kost in FLOPs, met de grote-O-notatie zeggen hoe dat groeit, en zien waarom elke helling meten door elke parameter te verschuiven te traag is voor een netwerk."
+summary:
+  - en: "FLOPs count the additions and multiplications a calculation needs. One forward pass costs about 2 FLOPs per weight."
+    nl: "FLOPs tellen de optellingen en vermenigvuldigingen die een berekening nodig heeft. Eén forward pass kost ongeveer 2 FLOPs per weight."
+  - en: "Measuring every slope by moving takes one forward pass where you are and one per parameter: about $2N^2$ FLOPs for $N$ parameters."
+    nl: "Elke helling meten door te verschuiven kost één forward pass waar je bent en één per parameter: ongeveer $2N^2$ FLOPs bij $N$ parameters."
+  - en: "Big-O notation says how the cost grows and leaves out constant factors: a forward pass is $O(N)$, every slope by moving $O(N^2)$."
+    nl: "De grote-O-notatie zegt hoe de kosten groeien en laat constante factoren weg: een forward pass is $O(N)$, elke helling door te verschuiven $O(N^2)$."
+can_now:
+  - en: "count the FLOPs of a forward pass from the sizes of the layers"
+    nl: "de FLOPs van een forward pass tellen uit de grootte van de layers"
+    by: forward-flops
+  - en: "say whether a calculation grows like N or like N²"
+    nl: "zeggen of een berekening groeit zoals N of zoals N²"
+    by: growth
+  - en: "work out how much longer a calculation takes when a network grows"
+    nl: "uitrekenen hoeveel langer een berekening duurt als een netwerk groeit"
+    by: bigger

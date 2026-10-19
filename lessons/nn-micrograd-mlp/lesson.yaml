@@ -1,0 +1,28 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: nn-micrograd-mlp
+minutes: 30
+title:
+  en: "Neurons, layers and an MLP on top of your Value"
+  nl: "Neuronen, layers en een MLP bovenop je Value"
+goal:
+  en: "build a neuron, a layer and an MLP as classes on top of your own Value, and let each of them give back its parameters."
+  nl: "een neuron, een layer en een MLP bouwen als classes bovenop je eigen Value, en elk ervan zijn parameters laten teruggeven."
+summary:
+  - en: "A `Neuron` works out ReLU of its bias term plus its weighted inputs, or that sum itself in the output layer; a `Layer` calls its neurons on the same inputs; an `MLP` passes the outputs of each layer on to the next."
+    nl: "Een `Neuron` rekent ReLU uit van zijn bias term plus zijn gewogen inputs, of in de output layer die som zelf; een `Layer` roept zijn neuronen aan op dezelfde inputs; een `MLP` geeft de outputs van elke layer door aan de volgende."
+  - en: "`parameters()` gives back every `Value` training may change. A layer of $m$ neurons with $n$ inputs has $m \\cdot (n + 1)$ of them."
+    nl: "`parameters()` geeft elke `Value` terug die trainen mag veranderen. Een layer van $m$ neuronen met $n$ inputs heeft er $m \\cdot (n + 1)$."
+  - en: "The weights start at random numbers between −1 and 1, so the neurons of a layer start out different and can learn different things."
+    nl: "De weights beginnen bij willekeurige getallen tussen −1 en 1, zodat de neuronen van een layer verschillend beginnen en verschillende dingen kunnen leren."
+can_now:
+  - en: "count the parameters of an MLP"
+    nl: "de parameters van een MLP tellen"
+    by: size
+  - en: "write a neuron as a class that gives back its output and its parameters"
+    nl: "een neuron schrijven als class die zijn output en zijn parameters teruggeeft"
+    by: neuron
+  - en: "build layers and an MLP of any size from that neuron"
+    nl: "layers en een MLP van elke grootte bouwen uit dat neuron"
+    by: mlp

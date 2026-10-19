@@ -1,0 +1,28 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: lm-model-families
+minutes: 15
+title:
+  en: "Encoders, decoders and the GPT line"
+  nl: "Encoders, decoders en de GPT-lijn"
+goal:
+  en: "tell encoders, decoders and encoder-decoders apart by which tokens a token may look at, and know what each is made for."
+  nl: "encoders, decoders en encoder-decoders uit elkaar houden aan de tokens waar een token naar mag kijken, en weten waarvoor elk gemaakt is."
+summary:
+  - en: "In an encoder, such as BERT, every token looks at all tokens: it reads a whole text, to classify it or to find things in it."
+    nl: "In een encoder, zoals BERT, kijkt elk token naar alle tokens: hij leest een hele tekst, om die te classificeren of er iets in te vinden."
+  - en: "In a decoder, such as GPT, every token looks only at itself and the tokens before it, so it can learn next-token prediction and write text one token at a time. GPT-1, -2 and -3 grew from 117 million to 175 billion parameters."
+    nl: "In een decoder, zoals GPT, kijkt elk token alleen naar zichzelf en de tokens ervoor, zodat hij next-token prediction kan leren en tekst kan schrijven, één token tegelijk. GPT-1, -2 en -3 groeiden van 117 miljoen naar 175 miljard parameters."
+  - en: "An encoder-decoder, such as T5 and the first transformer, reads the input with an encoder and writes the output with a decoder that also looks at the whole input."
+    nl: "Een encoder-decoder, zoals T5 en de eerste transformer, leest de input met een encoder en schrijft de output met een decoder die ook naar de hele input kijkt."
+can_now:
+  - en: "pick the family that is made for a task"
+    nl: "de familie kiezen die voor een taak gemaakt is"
+    by: family
+  - en: "say which tokens a token may look at, in an encoder and in a decoder"
+    nl: "zeggen naar welke tokens een token mag kijken, in een encoder en in een decoder"
+    by: can-see
+  - en: "say what the decoder of an encoder-decoder looks at while it translates"
+    nl: "zeggen waar de decoder van een encoder-decoder naar kijkt als hij vertaalt"
+    by: translate

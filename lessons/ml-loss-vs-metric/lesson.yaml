@@ -1,0 +1,28 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: ml-loss-vs-metric
+minutes: 15
+title:
+  en: "The loss you train on and the metric you report"
+  nl: "De loss waarop je traint en de metric die je meldt"
+goal:
+  en: "work out the accuracy of a classifier, and say why you train on a loss but report a metric."
+  nl: "de accuracy van een classifier uitrekenen, en zeggen waarom je op een loss traint maar een metric meldt."
+summary:
+  - en: "A metric says how good a model is in terms people care about. Accuracy is the share of examples a classifier gets right: `np.mean(probs.argmax(axis=1) == labels)`."
+    nl: "Een metric zegt hoe goed een model is, gemeten op een manier die mensen belangrijk vinden. Accuracy is het deel van de voorbeelden dat een classifier goed heeft: `np.mean(probs.argmax(axis=1) == labels)`."
+  - en: "Accuracy only changes when an example crosses to another class, so its slope is 0 almost everywhere: gradient descent trains on the loss instead."
+    nl: "Accuracy verandert alleen als een voorbeeld naar een andere klasse overgaat, dus zijn helling is bijna overal 0: gradient descent traint daarom op de loss."
+  - en: "Loss and metric can move apart: a model can become surer of its right answers without one prediction changing. Choose and report with the metric that matters."
+    nl: "Loss en metric kunnen uit elkaar lopen: een model kan zekerder worden van zijn goede antwoorden zonder dat er één voorspelling verandert. Kies en meld met de metric die ertoe doet."
+can_now:
+  - en: "say why gradient descent does not train on accuracy"
+    nl: "zeggen waarom gradient descent niet op accuracy traint"
+    by: no-slope
+  - en: "work out the accuracy of a classifier"
+    nl: "de accuracy van een classifier uitrekenen"
+    by: accuracy
+  - en: "choose between models by the metric that matters"
+    nl: "tussen modellen kiezen met de metric die ertoe doet"
+    by: which-model

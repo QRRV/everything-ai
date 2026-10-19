@@ -1,0 +1,28 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: attn-scores
+minutes: 25
+title:
+  en: "Attention weights from dot products"
+  nl: "Attention weights uit inproducten"
+goal:
+  en: "compute attention for all words of a sentence at once: the scores X Xᵀ, a softmax of every row without overflow, and the new vectors A X."
+  nl: "attention voor alle woorden van een zin tegelijk uitrekenen: de scores X Xᵀ, een softmax van elke rij zonder overflow, en de nieuwe vectoren A X."
+summary:
+  - en: "With one embedding per row of X, the attention scores are S = X Xᵀ, the dot product of every word with every word: a matrix of n by n."
+    nl: "Met één embedding per rij van X zijn de attention scores S = X Xᵀ, het inproduct van elk woord met elk woord: een matrix van n bij n."
+  - en: "The attention weights A are the softmax of every row of S, so each row adds up to 1; the new vectors are H = A X. S is symmetric, A is not."
+    nl: "De attention weights A zijn de softmax van elke rij van S, dus elke rij telt op tot 1; de nieuwe vectoren zijn H = A X. S is symmetrisch, A niet."
+  - en: "Subtract the largest score of every row before the softmax: the weights stay the same, and e to the power of a large score can no longer overflow to inf and turn the weights into nan."
+    nl: "Trek vóór de softmax de grootste score van elke rij af: de weights blijven gelijk, en e tot de macht van een grote score kan niet meer overlopen tot inf en de weights nan maken."
+can_now:
+  - en: "explain why the attention weights are not symmetric while the scores are"
+    nl: "uitleggen waarom de attention weights niet symmetrisch zijn en de scores wel"
+    by: symmetric
+  - en: "write a softmax of every row of a matrix, without overflow"
+    nl: "een softmax van elke rij van een matrix schrijven, zonder overflow"
+    by: softmax-rows
+  - en: "compute attention for all words of a sentence at once with two matrix multiplications"
+    nl: "attention voor alle woorden van een zin tegelijk uitrekenen met twee matrixvermenigvuldigingen"
+    by: self-attention

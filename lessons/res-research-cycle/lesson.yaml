@@ -1,0 +1,28 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: res-research-cycle
+minutes: 20
+title:
+  en: "How research works: question, hypothesis, experiment"
+  nl: "Hoe onderzoek werkt: vraag, hypothese, experiment"
+goal:
+  en: "follow the research cycle from a question to a hypothesis that a test could prove wrong, and design an experiment that changes one thing at a time."
+  nl: "de onderzoekscyclus volgen van een vraag naar een hypothese die een test kan weerleggen, en een experiment ontwerpen dat één ding tegelijk verandert."
+summary:
+  - en: "Research goes round in a cycle: a question, a hypothesis, an experiment, and a paper, whose result raises new questions."
+    nl: "Onderzoek gaat rond in een cyclus: een vraag, een hypothese, een experiment, en een paper, waarvan de uitkomst nieuwe vragen oproept."
+  - en: "A hypothesis is a precise answer you expect, stated so that a test could prove it wrong. Say before the experiment which result would do that."
+    nl: "Een hypothese is een precies antwoord dat je verwacht, zo geformuleerd dat een test het kan weerleggen. Zeg vóór het experiment welke uitkomst dat zou doen."
+  - en: "An experiment changes one thing, keeps everything else the same, and measures. A result that agrees with the hypothesis does not prove it for good."
+    nl: "Een experiment verandert één ding, houdt al het andere gelijk, en meet. Een uitkomst die met de hypothese klopt, bewijst haar niet voorgoed."
+can_now:
+  - en: "place the sentences of a study in the steps of the research cycle"
+    nl: "de zinnen van een onderzoek bij de stappen van de onderzoekscyclus zetten"
+    by: cycle-steps
+  - en: "tell a hypothesis that a test could prove wrong from one that no result can"
+    nl: "een hypothese die een test kan weerleggen onderscheiden van een die geen uitkomst kan weerleggen"
+    by: testable
+  - en: "design an experiment for a hypothesis"
+    nl: "een experiment ontwerpen voor een hypothese"
+    by: design

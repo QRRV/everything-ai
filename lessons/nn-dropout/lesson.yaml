@@ -1,0 +1,28 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: nn-dropout
+minutes: 25
+title:
+  en: "Dropout"
+  nl: "Dropout"
+goal:
+  en: "switch off a random part of the neurons in every training step, scale the rest so nothing changes on average, and see that a network then overfits less."
+  nl: "bij elke trainingsstap een willekeurig deel van de neuronen uitzetten, de rest zo schalen dat er gemiddeld niets verandert, en zien dat een netwerk dan minder overfit."
+summary:
+  - en: "In train mode, dropout sets each number of a layer's output to 0 with chance $p$ and divides the rest by $1 - p$, so that on average each number stays as large as in eval mode, where dropout does nothing."
+    nl: "In train mode zet dropout elk getal van de output van een layer op 0 met kans $p$ en deelt het de rest door $1 - p$, zodat elk getal gemiddeld even groot blijft als in eval mode, waar dropout niets doet."
+  - en: "An MLP trained for 100 epochs on 500 digits read 819 test digits right without dropout and 840 with dropout 0.5; its test loss ended at 0.60 instead of 0.67."
+    nl: "Een MLP dat 100 epochs op 500 cijfers trainde, las zonder dropout 819 testcijfers goed en met dropout 0,5 er 840; zijn test loss eindigde op 0,60 in plaats van 0,67."
+  - en: "Dropout goes after the activation of a hidden layer, never on the output: 0.5 for wide hidden layers, 0.1 in transformers, and often none when pretraining large language models."
+    nl: "Dropout komt na de activation van een hidden layer, nooit op de output: 0,5 voor brede hidden layers, 0,1 in transformers, en vaak geen bij het pretrainen van grote language models."
+can_now:
+  - en: "say why dropout makes a network overfit less"
+    nl: "zeggen waarom dropout een netwerk minder laat overfitten"
+    by: why-it-helps
+  - en: "write a dropout layer that drops and scales in train mode only"
+    nl: "een dropout layer schrijven die alleen in train mode getallen laat vallen en schaalt"
+    by: own-dropout
+  - en: "put dropout in the right places of an MLP"
+    nl: "dropout op de goede plekken in een MLP zetten"
+    by: dropout-mlp

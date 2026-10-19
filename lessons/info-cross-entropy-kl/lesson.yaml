@@ -1,0 +1,28 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: info-cross-entropy-kl
+minutes: 25
+title:
+  en: "Cross-entropy and KL divergence"
+  nl: "Cross-entropy en KL-divergentie"
+goal:
+  en: "work out the cross-entropy when you expect one distribution and the truth is another, split it into the entropy and the KL divergence, and say what training with the cross-entropy loss lowers."
+  nl: "de cross-entropy uitrekenen als je de ene verdeling verwacht en de waarheid een andere is, die splitsen in de entropie en de KL-divergentie, en zeggen wat trainen met de cross-entropy-loss verlaagt."
+summary:
+  - en: "The cross-entropy $H(p, q) = -\\sum_i p_i \\log_2 q_i$ is the expected surprise when the truth is p and you expect q; it is never below the entropy H(p)."
+    nl: "De cross-entropy $H(p, q) = -\\sum_i p_i \\log_2 q_i$ is de verwachte verrassing als de waarheid p is en jij q verwacht; ze is nooit lager dan de entropie H(p)."
+  - en: "The KL divergence $D_{\\mathrm{KL}}(p \\,\\|\\, q) = H(p, q) - H(p)$ is the extra surprise: 0 only when q is p, never negative, and not the same in both directions."
+    nl: "De KL-divergentie $D_{\\mathrm{KL}}(p \\,\\|\\, q) = H(p, q) - H(p)$ is de extra verrassing: alleen 0 als q gelijk is aan p, nooit negatief, en niet in beide richtingen hetzelfde."
+  - en: "Training with the cross-entropy loss lowers the KL divergence between the data and the model, because the entropy of the data does not change."
+    nl: "Trainen met de cross-entropy-loss verlaagt de KL-divergentie tussen de data en het model, omdat de entropie van de data niet verandert."
+can_now:
+  - en: "say when the cross-entropy equals the entropy"
+    nl: "zeggen wanneer de cross-entropy gelijk is aan de entropie"
+    by: when-equal
+  - en: "write the cross-entropy of two distributions as a function"
+    nl: "de cross-entropy van twee verdelingen als functie schrijven"
+    by: cross-entropy
+  - en: "write the KL divergence as a function"
+    nl: "de KL-divergentie als functie schrijven"
+    by: kl

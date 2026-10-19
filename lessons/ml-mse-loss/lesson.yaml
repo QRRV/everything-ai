@@ -1,0 +1,30 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: ml-mse-loss
+minutes: 15
+title:
+  en: "One number for how wrong: the loss"
+  nl: "Eén getal voor hoe ver je ernaast zit: de loss"
+goal:
+  en: "work out the mean squared error of a model, in plain Python and with NumPy, and say why it squares the residuals."
+  nl: "de mean squared error van een model uitrekenen, in gewone Python en met NumPy, en zeggen waarom hij de residuen kwadrateert."
+summary:
+  - en: "The loss is one number for how far a model is off over all examples together; lower is better."
+    nl: "De loss is één getal voor hoe ver een model er over alle voorbeelden samen naast zit; lager is beter."
+  - en: 'The mean squared error squares each residual and takes the mean: $\mathcal{L} = \frac{1}{n}\sum_{i=1}^{n}(y_i - \hat{y}_i)^2$.'
+    nl: 'De mean squared error kwadrateert elk residu en neemt het gemiddelde: $\mathcal{L} = \frac{1}{n}\sum_{i=1}^{n}(y_i - \hat{y}_i)^2$.'
+  - en: "Squaring stops plus and minus from cancelling out, and makes a big miss count extra."
+    nl: "Door te kwadrateren vallen plus en min niet meer tegen elkaar weg, en telt een grote misser extra zwaar."
+  - en: "In NumPy it is one line: `((y - y_pred) ** 2).mean()`."
+    nl: "In NumPy is het één regel: `((y - y_pred) ** 2).mean()`."
+can_now:
+  - en: "work out the mean squared error step by step"
+    nl: "de mean squared error stap voor stap uitrekenen"
+    by: mse-temps
+  - en: "write the mean squared error as a function with NumPy"
+    nl: "de mean squared error als functie met NumPy schrijven"
+    by: mse
+  - en: "explain why the residuals are squared"
+    nl: "uitleggen waarom de residuen gekwadrateerd worden"
+    by: why-square

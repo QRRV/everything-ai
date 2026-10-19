@@ -1,0 +1,28 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: nn-neuron
+minutes: 20
+title:
+  en: "A neuron"
+  nl: "Een neuron"
+goal:
+  en: "work out what a neuron gives: a weighted sum of its inputs plus a bias term, through an activation function, and see that logistic regression is one neuron."
+  nl: "uitrekenen wat een neuron geeft: een gewogen som van zijn inputs plus een bias term, door een activation function, en zien dat logistische regressie één neuron is."
+summary:
+  - en: "A neuron works out $z = \\mathbf{w} \\cdot \\mathbf{x} + b$ and puts it through an activation function: $\\hat{y} = f(z)$."
+    nl: "Een neuron rekent $z = \\mathbf{w} \\cdot \\mathbf{x} + b$ uit en haalt het door een activation function: $\\hat{y} = f(z)$."
+  - en: "With no activation function a neuron is linear regression; with the sigmoid, logistic regression; and with a step, it fires or not."
+    nl: "Zonder activation function is een neuron lineaire regressie; met de sigmoid logistische regressie; en met een stap vuurt het of niet."
+  - en: "A neuron draws one straight line through its inputs: the weights set its direction, the bias term where it lies."
+    nl: "Een neuron trekt één rechte lijn door zijn inputs: de weights bepalen de richting, de bias term waar hij ligt."
+can_now:
+  - en: "choose the activation function that fits a task"
+    nl: "de activation function kiezen die bij een taak past"
+    by: which-activation
+  - en: "write a neuron with a step as a function"
+    nl: "een neuron met een stap als functie schrijven"
+    by: step-neuron
+  - en: "choose the weights and bias term of a neuron for a task"
+    nl: "de weights en de bias term van een neuron kiezen voor een taak"
+    by: one-corner

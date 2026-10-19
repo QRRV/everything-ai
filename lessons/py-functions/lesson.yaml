@@ -1,0 +1,28 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: py-functions
+minutes: 15
+title:
+  en: "Functions"
+  nl: "Functies"
+goal:
+  en: "put code under a name with `def`, hand it arguments, give a result back with `return`, and call it with different values."
+  nl: "code een eigen naam geven met `def`, er argumenten aan meegeven, een uitkomst teruggeven met `return` en de functie aanroepen met verschillende waarden."
+summary:
+  - en: "`def name(arguments):` starts a function; its indented lines run only when you call it, such as `name(5)`."
+    nl: "`def naam(argumenten):` begint een functie; de ingesprongen regels draaien pas als je hem aanroept, zoals `naam(5)`."
+  - en: "`return` gives the result back to where the function was called, and ends the function. Without `return`, a function gives back `None`."
+    nl: "`return` geeft de uitkomst terug aan de plek waar de functie werd aangeroepen, en beëindigt de functie. Zonder `return` geeft een functie `None` terug."
+  - en: "`print` only shows a value; `return` hands it back, so you can keep it in a name. Names made inside a function stay inside it."
+    nl: "`print` laat een waarde alleen zien; `return` geeft hem terug, zodat je hem onder een naam kunt bewaren. Namen die je binnen een functie maakt, blijven daarbinnen."
+can_now:
+  - en: "write a function with arguments that gives back a result"
+    nl: "een functie met argumenten schrijven die een uitkomst teruggeeft"
+    by: area
+  - en: "tell `print` and `return` apart"
+    nl: "`print` en `return` uit elkaar houden"
+    by: none
+  - en: "write a function with a loop inside, that works for any list"
+    nl: "een functie met een loop erin schrijven, die voor elke lijst werkt"
+    by: count-long

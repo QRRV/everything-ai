@@ -1,0 +1,31 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: cnn-resnet
+minutes: 30
+title:
+  en: "ResNet: depth that keeps working"
+  nl: "ResNet: diepte die blijft werken"
+goal:
+  en: "build the residual block of a CNN, say what happens where the shapes change, and train a network as deep as the VGG network that did not learn."
+  nl: "het residual block van een CNN bouwen, zeggen wat er gebeurt waar de shapes veranderen, en een netwerk trainen dat even diep is als het VGG-netwerk dat niet leerde."
+summary:
+  - en: "A residual block of a CNN gives back x + f(x), with f two convolutions of 3 by 3 from C to C channels with padding 1 and a ReLU between them, so that f(x) has the shape of x."
+    nl: "Een residual block van een CNN geeft x + f(x) terug, met f twee convoluties van 3 bij 3 van C naar C channels met padding 1 en een ReLU ertussen, zodat f(x) de shape van x heeft."
+  - en: "Plain blocks wash out the differences between images at the start; residual blocks pass the image on, whatever the starting weights. Where the channels or size change, ResNet puts a convolution of 1 by 1 with stride 2 on the residual connection."
+    nl: "Gewone blokken wassen in het begin de verschillen tussen afbeeldingen weg; residual blocks geven de afbeelding door, wat de beginweights ook zijn. Waar de channels of de grootte veranderen, zet ResNet een convolutie van 1 bij 1 met stride 2 op de residual connection."
+  - en: "With 19 layers with weights and PyTorch's own starting values, a plain network reads 105 of 1,000 test images right, one kind for every image; with residual blocks, 876 to 895 over 5 seeds, more than SmallCNN with every seed."
+    nl: "Met 19 layers met weights en de eigen beginwaarden van PyTorch leest een gewoon netwerk 105 van de 1.000 testafbeeldingen goed, één soort voor elke afbeelding; met residual blocks 876 tot 895 over 5 seeds, bij elke seed meer dan SmallCNN."
+can_now:
+  - en: "say why x + f(x) needs the same shape on both sides"
+    nl: "zeggen waarom x + f(x) aan beide kanten dezelfde shape nodig heeft"
+    by: res-shape
+  - en: "build the residual block of a CNN in PyTorch"
+    nl: "het residual block van een CNN bouwen in PyTorch"
+    by: res-block
+  - en: "work out what a convolution of 1 by 1 with stride 2 does on a residual connection"
+    nl: "uitrekenen wat een convolutie van 1 bij 1 met stride 2 doet op een residual connection"
+    by: res-projection
+further_reading:
+  - en: "Kaiming He, Xiangyu Zhang, Shaoqing Ren and Jian Sun (2016), *Deep Residual Learning for Image Recognition*, CVPR 2016, arXiv:1512.03385, sections 3 and 4.1"
+    nl: "Kaiming He, Xiangyu Zhang, Shaoqing Ren en Jian Sun (2016), *Deep Residual Learning for Image Recognition*, CVPR 2016, arXiv:1512.03385, paragraaf 3 en 4.1"

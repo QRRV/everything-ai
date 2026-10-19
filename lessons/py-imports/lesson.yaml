@@ -1,0 +1,28 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: py-imports
+minutes: 15
+title:
+  en: "Using code from modules"
+  nl: "Code uit modules gebruiken"
+goal:
+  en: "bring in a module with `import`, use what is in it with a dot, and make random picks repeatable with `random.seed`."
+  nl: "een module binnenhalen met `import`, gebruiken wat erin zit met een punt en toeval herhaalbaar maken met `random.seed`."
+summary:
+  - en: "`import math` brings in a module; `math.sqrt(16)` and `math.pi` use what is in it, with the module's name and a dot."
+    nl: "`import math` haalt een module binnen; `math.sqrt(16)` en `math.pi` gebruiken wat erin zit, met de naam van de module en een punt."
+  - en: "`from math import pi` brings in one name, so you can write `pi` without `math.`."
+    nl: "`from math import pi` haalt één naam binnen, zodat je `pi` zonder `math.` kunt schrijven."
+  - en: "`random.randint(1, 6)` includes 6, and `random.choice(items)` picks an item; after `random.seed(...)`, the same seed gives the same numbers again."
+    nl: "Bij `random.randint(1, 6)` doet 6 zelf mee, en `random.choice(items)` kiest een item; na `random.seed(...)` geeft dezelfde seed weer dezelfde getallen."
+can_now:
+  - en: "use a value from the module `math`"
+    nl: "een waarde uit de module `math` gebruiken"
+    by: circle
+  - en: "say why a name from a module needs the module's name in front"
+    nl: "zeggen waarom een naam uit een module de naam van de module ervoor nodig heeft"
+    by: import-name
+  - en: "make a random pick repeatable with a seed"
+    nl: "een willekeurige keuze herhaalbaar maken met een seed"
+    by: pick

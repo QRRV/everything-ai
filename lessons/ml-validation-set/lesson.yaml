@@ -1,0 +1,28 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: ml-validation-set
+minutes: 15
+title:
+  en: "Choosing hyperparameters: the validation set"
+  nl: "Hyperparameters kiezen: de validation set"
+goal:
+  en: "choose a hyperparameter on a validation set, and keep the test set for one honest score at the end."
+  nl: "een hyperparameter kiezen op een validation set, en de test set bewaren voor één eerlijke score aan het eind."
+summary:
+  - en: "Three sets: the training set learns the parameters, the validation set chooses the hyperparameters, and the test set measures the chosen model once, at the end."
+    nl: "Drie sets: de training set leert de parameters, de validation set kiest de hyperparameters, en de test set meet het gekozen model één keer, aan het eind."
+  - en: "For each value: train on the training set, measure on the validation set, and keep the value with the lowest validation loss: `degrees[np.argmin(val_mses)]`."
+    nl: "Voor elke waarde: train op de training set, meet op de validation set, en houd de waarde met de laagste validation-loss: `degrees[np.argmin(val_mses)]`."
+  - en: "A set that helped you choose gives a score that is too optimistic, so only the test set, used once, gives an honest one."
+    nl: "Een set die je hielp kiezen, geeft een te optimistische score, dus alleen de test set, één keer gebruikt, geeft een eerlijke."
+can_now:
+  - en: "say why the test set must not choose a hyperparameter"
+    nl: "zeggen waarom de test set geen hyperparameter mag kiezen"
+    by: test-to-choose
+  - en: "choose a hyperparameter by its loss on the validation set"
+    nl: "een hyperparameter kiezen aan de hand van zijn loss op de validation set"
+    by: choose-degree
+  - en: "say what the test set is for once everything is chosen"
+    nl: "zeggen waar de test set voor is als alles gekozen is"
+    by: test-at-end

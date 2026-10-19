@@ -1,0 +1,31 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: sys-torch-compile
+minutes: 30
+title:
+  en: "Letting a compiler fuse operations"
+  nl: "Een compiler operaties laten samenvoegen"
+goal:
+  en: "say what torch.compile does at the first call and after it, remove graph breaks, and work out when compiling pays off."
+  nl: "zeggen wat torch.compile bij de eerste aanroep en daarna doet, graph breaks weghalen, en uitrekenen wanneer compileren loont."
+summary:
+  - en: "torch.compile traces a function with Dynamo into a graph with guards, and Inductor fuses its operations into kernels: Triton on an NVIDIA GPU, C++ on a CPU."
+    nl: "torch.compile traceert een functie met Dynamo tot een graaf met guards, en Inductor voegt de operaties samen tot kernels: Triton op een NVIDIA-GPU, C++ op een CPU."
+  - en: "A print, .item() or an if on a tensor breaks the graph; torch._dynamo.explain counts the breaks without compiling."
+    nl: "Een print, .item() of een if op een tensor breekt de graaf; torch._dynamo.explain telt de breuken zonder te compileren."
+  - en: "The first call compiles, and it compiles again when a guard fails, such as with a new shape; compiling pays off after ⌈t_compile / (t_eager − t_compiled)⌉ calls."
+    nl: "De eerste aanroep compileert, en er wordt opnieuw gecompileerd als een guard faalt, zoals bij een nieuwe shape; compileren verdient zich terug na ⌈t_compile / (t_eager − t_compiled)⌉ aanroepen."
+can_now:
+  - en: "work out after how many calls compiling pays off"
+    nl: "uitrekenen na hoeveel aanroepen compileren loont"
+    by: break-even
+  - en: "rewrite a function so that it traces as one graph"
+    nl: "een functie zo omschrijven dat hij als één graaf getraceerd wordt"
+    by: one-graph
+  - en: "say which code gains from torch.compile"
+    nl: "zeggen welke code wint met torch.compile"
+    by: when-compile
+further_reading:
+  - en: "Jason Ansel and others (2024), *PyTorch 2: Faster Machine Learning Through Dynamic Python Bytecode Transformation and Graph Compilation*, ASPLOS 2024"
+    nl: "Jason Ansel en anderen (2024), *PyTorch 2: Faster Machine Learning Through Dynamic Python Bytecode Transformation and Graph Compilation*, ASPLOS 2024"

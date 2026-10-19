@@ -1,0 +1,28 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: nn-forward-numpy
+minutes: 25
+title:
+  en: "The forward pass in NumPy, with shapes"
+  nl: "De forward pass in NumPy, met shapes"
+goal:
+  en: "work out a forward pass for all examples at once with NumPy, and follow the shape of every step from layer to layer."
+  nl: "een forward pass voor alle voorbeelden tegelijk uitrekenen met NumPy, en de shape van elke stap volgen van layer tot layer."
+summary:
+  - en: "A forward pass sends the inputs through a network, layer by layer: multiply by the weights, add the bias terms, and apply the activation function."
+    nl: "Een forward pass stuurt de inputs door een netwerk, layer voor layer: vermenigvuldigen met de weights, de bias terms erbij optellen, en de activation function toepassen."
+  - en: "With the examples as the rows of $\\mathbf{X}$ and one row of weights per neuron in $\\mathbf{W}$, a whole layer is $\\mathrm{ReLU}(\\mathbf{X}\\mathbf{W}^\\top + \\mathbf{b})$: in code, `np.maximum(0, X @ W.T + b)`."
+    nl: "Met de voorbeelden als rijen van $\\mathbf{X}$ en één rij weights per neuron in $\\mathbf{W}$ is een hele layer $\\mathrm{ReLU}(\\mathbf{X}\\mathbf{W}^\\top + \\mathbf{b})$: in code `np.maximum(0, X @ W.T + b)`."
+  - en: "Write the shape next to each step. A square weight matrix fits both ways round, so test with layers of different sizes."
+    nl: "Schrijf de shape naast elke stap. Een vierkante weight-matrix past op allebei de manieren, dus test met layers van verschillende grootte."
+can_now:
+  - en: "follow the shapes of the weights and outputs through a network"
+    nl: "de shapes van de weights en outputs door een netwerk volgen"
+    by: shapes
+  - en: "write a forward pass for all examples at once in NumPy"
+    nl: "een forward pass voor alle voorbeelden tegelijk schrijven in NumPy"
+    by: forward
+  - en: "choose a test that shows a weight matrix the wrong way round"
+    nl: "een test kiezen die een omgekeerde weight-matrix laat zien"
+    by: test-sizes

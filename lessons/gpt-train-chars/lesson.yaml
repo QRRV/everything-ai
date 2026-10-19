@@ -1,0 +1,30 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: gpt-train-chars
+minutes: 40
+title:
+  en: "Project: train your GPT on a book"
+  nl: "Project: je GPT op een boek trainen"
+goal:
+  en: "train your GPT on the characters of Tiny Shakespeare in one run, with your Trainer, on a GPU when there is one, and keep its best parameters."
+  nl: "je GPT in één run trainen op de tekens van Tiny Shakespeare, met je Trainer, op een GPU als die er is, en zijn beste parameters bewaren."
+summary:
+  - en: "A run is one training from start to end, with fixed settings and a fixed seed: the characters as tokens, the first 90% of the ids to train on and the last 10% to validate on, mini-batches of windows on the device, your GPT and your Trainer."
+    nl: "Een run is één training van begin tot eind, met vaste instellingen en een vaste seed: de tekens als tokens, de eerste 90% van de ids om op te trainen en de laatste 10% om op te valideren, mini-batches van vensters op het device, je GPT en je Trainer."
+  - en: "With the same windows in every epoch, a big GPT learns them by heart; windows that start at another place of the book in every epoch give it new examples from the same text."
+    nl: "Met elke epoch dezelfde vensters leert een grote GPT ze uit zijn hoofd; vensters die elke epoch op een andere plek in het boek beginnen, geven hem nieuwe voorbeelden uit dezelfde tekst."
+  - en: "The whole book fits on the device at once, so no mini-batch has to move during training; tensors that forward makes along the way, such as the causal mask, must be made on the device too."
+    nl: "Het hele boek past in één keer op het device, dus hoeft tijdens het trainen geen mini-batch te verhuizen; tensors die forward onderweg maakt, zoals de causal mask, moeten ook op het device gemaakt worden."
+  - en: "The checkpoint keeps the parameters with the lowest validation loss: when the GPT starts to learn its training windows by heart, the validation loss goes up again, and the checkpoint stays at its best."
+    nl: "Het checkpoint bewaart de parameters met de laagste validation loss: als de GPT zijn trainingsvensters uit het hoofd begint te leren, gaat de validation loss weer omhoog, en blijft het checkpoint bij zijn beste."
+can_now:
+  - en: "say which parameters a checkpoint keeps"
+    nl: "zeggen welke parameters een checkpoint bewaart"
+    by: best-epoch
+  - en: "make mini-batches to train and to validate on, on a device"
+    nl: "mini-batches maken om op te trainen en te valideren, op een device"
+    by: gpt-loaders
+  - en: "set up a run of a GPT with a Trainer"
+    nl: "een run van een GPT opzetten met een Trainer"
+    by: gpt-run

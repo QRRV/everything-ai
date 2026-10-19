@@ -1,0 +1,28 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: nn-vanishing-exploding
+minutes: 25
+title:
+  en: "Vanishing and exploding gradients"
+  nl: "Vanishing en exploding gradients"
+goal:
+  en: "explain why the gradient of a deep network can shrink or grow layer after layer on the way back, and measure it per layer."
+  nl: "uitleggen waarom de gradient van een diep netwerk op de terugweg layer na layer kan krimpen of groeien, en hem per layer meten."
+summary:
+  - en: "On the way back, every layer multiplies the gradient by a factor: its weight times the slope of its activation function. Many factors below 1 make it vanish, many above 1 make it explode."
+    nl: "Op de terugweg vermenigvuldigt elke layer de gradient met een factor: zijn weight keer de helling van zijn activation function. Veel factoren onder 1 laten hem verdwijnen, veel boven 1 laten hem exploderen."
+  - en: "The slope of the sigmoid, $\\sigma(z)(1 - \\sigma(z))$, is at most 0.25 and almost 0 where it saturates: ten sigmoid layers leave less than a millionth."
+    nl: "De helling van de sigmoid, $\\sigma(z)(1 - \\sigma(z))$, is hooguit 0,25 en bijna 0 waar hij verzadigd is: tien sigmoid-layers laten minder dan een miljoenste over."
+  - en: "With ReLU, the spread of the weights decides: too small and the gradient shrinks, too large and it grows. Measure its size per layer to see which."
+    nl: "Bij ReLU beslist de spreiding van de weights: te klein en de gradient krimpt, te groot en hij groeit. Meet zijn grootte per layer om te zien welke van de twee."
+can_now:
+  - en: "tell exploding gradients from other causes of a loss of nan"
+    nl: "exploding gradients onderscheiden van andere oorzaken van een loss van nan"
+    by: nan-loss
+  - en: "follow a gradient back through a chain of sigmoid layers"
+    nl: "een gradient terug volgen door een keten van sigmoid-layers"
+    by: chain-gradient
+  - en: "measure the size of the gradient per layer of a deep ReLU network"
+    nl: "de grootte van de gradient per layer van een diep ReLU-netwerk meten"
+    by: relu-sizes

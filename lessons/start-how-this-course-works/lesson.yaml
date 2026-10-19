@@ -1,0 +1,28 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: start-how-this-course-works
+minutes: 10
+title:
+  en: "How a lesson works"
+  nl: "Zo werkt een les"
+goal:
+  en: "run a code cell, do an exercise with a check, and find your way around any lesson."
+  nl: "een codecel uitvoeren, een oefening met een check maken, en je weg vinden in elke les."
+summary:
+  - en: "Every lesson has the same five parts: the top, *Why*, *The idea*, *Your turn* and the wrap-up."
+    nl: "Elke les heeft dezelfde vijf delen: de kop, *Waarom*, *Het idee*, *Zelf doen* en de afronding."
+  - en: "You run a code cell with **Shift + Enter**. Its result appears right under the code."
+    nl: "Je voert een codecel uit met **Shift + Enter**. De uitkomst verschijnt direct onder de code."
+  - en: "A check looks at the outcome of your answer, not at how you wrote it, and tells you what to do next."
+    nl: "Een check kijkt naar de uitkomst van je antwoord, niet naar hoe je het schreef, en zegt wat je nu doet."
+can_now:
+  - en: "do an exercise with a check"
+    nl: "een oefening met een check maken"
+    by: sum
+  - en: "find the part of a lesson where you practise"
+    nl: "het deel van een les vinden waar je oefent"
+    by: parts
+  - en: "say in your own words what a check does"
+    nl: "in je eigen woorden zeggen wat een check doet"
+    by: check-does

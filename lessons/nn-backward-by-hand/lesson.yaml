@@ -1,0 +1,28 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: nn-backward-by-hand
+minutes: 25
+title:
+  en: "Backpropagation by hand on a tiny graph"
+  nl: "Backpropagation met de hand op een kleine graaf"
+goal:
+  en: "write a calculation as a computational graph, walk it backwards with local gradients, and get every slope in one pass."
+  nl: "een berekening als computational graph schrijven, er met local gradients achteruit doorheen lopen, en elke helling in één keer krijgen."
+summary:
+  - en: "A computational graph has one node per value, with arrows from the values that go into it. The forward pass works out every value and keeps it."
+    nl: "Een computational graph heeft één node per waarde, met pijlen vanaf de waarden die erin gaan. De forward pass rekent elke waarde uit en bewaart hem."
+  - en: "The backward pass starts at the loss with slope 1 and walks back: the slope of an input is the slope after it times the local gradient between them."
+    nl: "De backward pass begint bij de loss met helling 1 en loopt terug: de helling van een input is de helling erna keer de local gradient ertussen."
+  - en: "Backpropagation reuses every slope it has, so it gives all of them for about the cost of a forward pass. Where a value goes into more than one node, the slopes that come back add up."
+    nl: "Backpropagation hergebruikt elke helling die het al heeft, dus het geeft ze allemaal voor ongeveer de kosten van een forward pass. Waar een waarde in meer dan één node gaat, tellen de hellingen die terugkomen op."
+can_now:
+  - en: "work out the backward pass through a neuron with ReLU and a squared loss"
+    nl: "de backward pass uitrekenen door een neuron met ReLU en een kwadratische loss"
+    by: backward
+  - en: "add up the slopes of a value that goes into more than one node"
+    nl: "de hellingen optellen van een waarde die in meer dan één node gaat"
+    by: branch
+  - en: "check slopes from the backward pass by moving a parameter"
+    nl: "hellingen uit de backward pass controleren door een parameter te verschuiven"
+    by: check

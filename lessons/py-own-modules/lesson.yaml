@@ -1,0 +1,28 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: py-own-modules
+minutes: 15
+title:
+  en: "Your own module: keeping project code in a file"
+  nl: "Je eigen module: projectcode in een bestand bewaren"
+goal:
+  en: "keep a function in a module of your own, in your project folder, and import it from a package where you need it."
+  nl: "een functie bewaren in een eigen module, in je projectmap, en hem uit een package binnenhalen waar je hem nodig hebt."
+summary:
+  - en: "A module of your own is a `.py` file; a package is a folder of modules with an `__init__.py` in it."
+    nl: "Een eigen module is een `.py`-bestand; een package is een map met modules en een `__init__.py` erin."
+  - en: "In the course, your packages live in `work/projects/`, and Python looks there when you import: `from tools import stats` finds `work/projects/tools/stats.py`."
+    nl: "In de course staan je packages in `work/projects/`, en daar kijkt Python als je iets binnenhaalt: `from tools import stats` vindt `work/projects/tools/stats.py`."
+  - en: "Some checks save your code there when it is right, so later lessons can import it: that is how your project grows."
+    nl: "Sommige checks bewaren je code daar als hij klopt, zodat latere lessen hem kunnen binnenhalen: zo groeit je project."
+can_now:
+  - en: "write a function that a check keeps as a module in your project"
+    nl: "een functie schrijven die een check als module in je project bewaart"
+    by: mean
+  - en: "write the import line for a module in a package"
+    nl: "de importregel schrijven voor een module in een package"
+    by: import-line
+  - en: "use a function from your own module"
+    nl: "een functie uit je eigen module gebruiken"
+    by: use-stats

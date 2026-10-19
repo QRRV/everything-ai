@@ -1,0 +1,28 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: torch-eval-mode
+minutes: 20
+title:
+  en: "Training mode and evaluation mode"
+  nl: "Train mode en eval mode"
+goal:
+  en: "predict with a trained network: `model.eval()`, the predictions inside `torch.no_grad()`, and `model.train()` before training on."
+  nl: "voorspellen met een getraind netwerk: `model.eval()`, de voorspellingen binnen `torch.no_grad()`, en `model.train()` voordat je verder traint."
+summary:
+  - en: "Every module has a switch, `model.training`: `model.eval()` sets it to eval mode, `model.train()` back to train mode. Layers such as dropout read it; most layers calculate the same in both."
+    nl: "Elke module heeft een schakelaar, `model.training`: `model.eval()` zet hem in eval mode, `model.train()` terug in train mode. Layers zoals dropout lezen hem; de meeste layers rekenen in beide hetzelfde."
+  - en: "Inside `with torch.no_grad():` PyTorch records no graph: a prediction needs no slopes, so it saves the memory and time."
+    nl: "Binnen `with torch.no_grad():` neemt PyTorch geen graaf op: een voorspelling heeft geen hellingen nodig, dus bespaart dat geheugen en tijd."
+  - en: "The two switches are independent, and a prediction uses both; switch back with `model.train()` before training on."
+    nl: "De twee schakelaars staan los van elkaar, en een voorspelling gebruikt ze allebei; zet terug met `model.train()` voordat je verder traint."
+can_now:
+  - en: "say what `model.eval()` does and what `torch.no_grad()` does"
+    nl: "zeggen wat `model.eval()` doet en wat `torch.no_grad()` doet"
+    by: two-switches
+  - en: "measure the loss of a network in eval mode, without a graph"
+    nl: "de loss van een netwerk meten in eval mode, zonder graaf"
+    by: evaluate
+  - en: "tell which lines belong to training and which to predicting"
+    nl: "zeggen welke regels bij trainen horen en welke bij voorspellen"
+    by: when

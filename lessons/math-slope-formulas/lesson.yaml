@@ -1,0 +1,28 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: math-slope-formulas
+minutes: 15
+title:
+  en: "Slope formulas you can trust"
+  nl: "Hellingsformules die je kunt vertrouwen"
+goal:
+  en: "give the exact slope of x², x³ and a·x, and of any power of x with the power rule, and check a slope formula by measuring."
+  nl: "de precieze helling van x², x³ en a·x geven, en van elke macht van x met de machtsregel, en een hellingsformule controleren door te meten."
+summary:
+  - en: 'A slope formula gives the exact slope at every $x$ at once: $x^2$ has the slope $2x$, $x^3$ the slope $3x^2$, and a line $a \cdot x$ the slope $a$.'
+    nl: 'Een hellingsformule geeft meteen de precieze helling bij elke $x$: $x^2$ heeft de helling $2x$, $x^3$ de helling $3x^2$, en een lijn $a \cdot x$ de helling $a$.'
+  - en: 'The power rule: $x^n$ has the slope $n \cdot x^{n-1}$.'
+    nl: 'De machtsregel: $x^n$ heeft de helling $n \cdot x^{n-1}$.'
+  - en: "Measuring with a tiny step is close, not exact; it is a good check of a formula."
+    nl: "Meten met een heel klein stapje is dichtbij, niet precies; het is een goede controle van een formule."
+can_now:
+  - en: "give the slope formula of a power of x"
+    nl: "de hellingsformule van een macht van x geven"
+    by: x4
+  - en: "write the power rule as a function"
+    nl: "de machtsregel als functie schrijven"
+    by: power
+  - en: "check a slope formula by measuring"
+    nl: "een hellingsformule controleren door te meten"
+    by: claim

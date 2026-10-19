@@ -1,0 +1,37 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: start-short-history
+minutes: 13
+title:
+  en: "A short history of AI"
+  nl: "Een korte geschiedenis van AI"
+goal:
+  en: "tell the story of AI in waves, say what an AI winter is, and explain why deep learning only took off around 2012."
+  nl: "het verhaal van AI in golven vertellen, zeggen wat een AI-winter is, en uitleggen waarom deep learning pas rond 2012 doorbrak."
+summary:
+  - en: "AI goes in waves: big promises and a lot of money, then an AI winter when the promises do not come true. The best-known winters came in the 1970s and in the late 1980s."
+    nl: "AI gaat in golven: grote beloften en veel geld, en dan een AI-winter als de beloften niet uitkomen. De bekendste winters vielen in de jaren zeventig en eind jaren tachtig."
+  - en: "Two ways took turns: rules written by people until the 1990s, then learning from examples."
+    nl: "Twee manieren wisselden elkaar af: tot in de jaren negentig vooral regels van mensen, daarna leren van voorbeelden."
+  - en: "Neural networks are an old idea. Deep learning took off around 2012, when much more data, fast GPUs and better ways to let networks learn came together."
+    nl: "Neural networks zijn een oud idee. Deep learning brak rond 2012 door, toen veel meer data, snelle GPU's en betere manieren om netwerken te laten leren samenkwamen."
+can_now:
+  - en: "say whether a system from the history of AI used rules from people or learned from examples"
+    nl: "zeggen of een systeem uit de geschiedenis van AI regels van mensen gebruikte of leerde van voorbeelden"
+    by: rules-or-learning
+  - en: "say what an AI winter is"
+    nl: "zeggen wat een AI-winter is"
+    by: winter
+  - en: "explain why deep learning only took off around 2012"
+    nl: "uitleggen waarom deep learning pas rond 2012 doorbrak"
+    by: why-2012
+further_reading:
+  - en: "[History of artificial intelligence](https://en.wikipedia.org/wiki/History_of_artificial_intelligence), Wikipedia (read in October 2026)"
+    nl: "[History of artificial intelligence](https://en.wikipedia.org/wiki/History_of_artificial_intelligence), Engelstalige Wikipedia (gelezen in oktober 2026)"
+  - en: "Sources, in the order of the lesson: McCarthy, Minsky, Rochester and Shannon (1955), *A Proposal for the Dartmouth Summer Research Project on Artificial Intelligence*; Rosenblatt (1958), *The perceptron*, Psychological Review 65(6); Weizenbaum (1966), *ELIZA*, Communications of the ACM 9(1); Lighthill (1973), *Artificial Intelligence: A General Survey*, Science Research Council"
+    nl: "Bronnen, in de volgorde van de les: McCarthy, Minsky, Rochester en Shannon (1955), *A Proposal for the Dartmouth Summer Research Project on Artificial Intelligence*; Rosenblatt (1958), *The perceptron*, Psychological Review 65(6); Weizenbaum (1966), *ELIZA*, Communications of the ACM 9(1); Lighthill (1973), *Artificial Intelligence: A General Survey*, Science Research Council"
+  - en: "McDermott (1982), *R1: A rule-based configurer of computer systems*, Artificial Intelligence 19(1); Rumelhart, Hinton and Williams (1986), *Learning representations by back-propagating errors*, Nature 323; LeCun and others (1989), *Backpropagation applied to handwritten zip code recognition*, Neural Computation 1(4); Krizhevsky, Sutskever and Hinton (2012), *ImageNet classification with deep convolutional neural networks*, NeurIPS"
+    nl: "McDermott (1982), *R1: A rule-based configurer of computer systems*, Artificial Intelligence 19(1); Rumelhart, Hinton en Williams (1986), *Learning representations by back-propagating errors*, Nature 323; LeCun en anderen (1989), *Backpropagation applied to handwritten zip code recognition*, Neural Computation 1(4); Krizhevsky, Sutskever en Hinton (2012), *ImageNet classification with deep convolutional neural networks*, NeurIPS"
+  - en: "Haigh (2023), *There Was No 'First AI Winter'*, Communications of the ACM 66(12); [The History of the Electric Car](https://www.energy.gov/articles/history-electric-car), US Department of Energy (2014); the weekly users of ChatGPT as OpenAI reported them at its DevDay, October 2025"
+    nl: "Haigh (2023), *There Was No 'First AI Winter'*, Communications of the ACM 66(12); [The History of the Electric Car](https://www.energy.gov/articles/history-electric-car), US Department of Energy (2014); het aantal wekelijkse gebruikers van ChatGPT zoals OpenAI dat meldde op DevDay, oktober 2025"

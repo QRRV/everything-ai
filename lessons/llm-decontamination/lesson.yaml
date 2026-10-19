@@ -1,0 +1,39 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+# termen:allow memorization
+id: llm-decontamination
+minutes: 40
+title:
+  en: "Keeping test data out of training data"
+  nl: "Testdata uit de training data houden"
+goal:
+  en: "find test questions in training data with n-grams, remove them before training, and report the score on the clean subset after training."
+  nl: "testvragen in training data vinden met n-grams, ze voor het trainen weghalen, en na het trainen de score op de clean subset rapporteren."
+summary:
+  - en: "When test questions, or their answers, are in the training data, a test score measures memory, not skill: contamination. GPT-3 found whole benchmarks in its training data."
+    nl: "Als testvragen, of hun antwoorden, in de training data zitten, meet een testscore geheugen, geen vaardigheid: contaminatie. GPT-3 vond hele benchmarks in zijn training data."
+  - en: "A question is flagged when more than a share of its n-grams, its runs of words without capitals and punctuation, occur in the training data. GPT-3 flagged on one shared n-gram, of 13 words for most benchmarks."
+    nl: "Een vraag wordt gemarkeerd als meer dan een deel van zijn n-grams, zijn reeksen woorden zonder hoofdletters en leestekens, in de training data voorkomt. GPT-3 markeerde op één gedeeld n-gram, van 13 woorden bij de meeste benchmarks."
+  - en: "A small n flags common phrases: with n = 5, 423 of 500 questions look contaminated, with n = 13 none. Before training, decontamination removes what shares an n-gram with a test question."
+    nl: "Een kleine n markeert gewone zinsdelen: met n = 5 lijken 423 van de 500 vragen besmet, met n = 13 geen enkele. Voor het trainen haalt decontaminatie weg wat een n-gram deelt met een testvraag."
+  - en: "After training, the score on the clean subset next to the score on all questions shows what a leak did: a look-up model that learned 50 copied questions scored 32% instead of 24%."
+    nl: "Na het trainen laat de score op de clean subset naast de score op alle vragen zien wat een lek deed: een look-up model dat 50 gekopieerde vragen leerde, haalde 32% in plaats van 24%."
+can_now:
+  - en: "cut a test question into n-grams of its cleaned words"
+    nl: "een testvraag knippen in n-grams van zijn opgeschoonde woorden"
+    by: ngrams
+  - en: "flag the test questions that are in the training data"
+    nl: "de testvragen markeren die in de training data zitten"
+    by: flag
+  - en: "report the score on all questions and on the clean subset"
+    nl: "de score op alle vragen en op de clean subset rapporteren"
+    by: report
+  - en: "say what you can still do when you find contamination after training"
+    nl: "zeggen wat je nog kunt doen als je na het trainen contaminatie vindt"
+    by: after-training
+further_reading:
+  - en: "Tom Brown and others (2020), *Language Models are Few-Shot Learners*, arXiv:2005.14165, section 4 and appendix C on contamination"
+    nl: "Tom Brown en anderen (2020), *Language Models are Few-Shot Learners*, arXiv:2005.14165, paragraaf 4 en bijlage C over contaminatie"
+  - en: "Nicholas Carlini and others (2023), *Quantifying Memorization Across Neural Language Models*, ICLR 2023, arXiv:2202.07646"
+    nl: "Nicholas Carlini en anderen (2023), *Quantifying Memorization Across Neural Language Models*, ICLR 2023, arXiv:2202.07646"

@@ -1,0 +1,28 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: py-first-program
+minutes: 13
+title:
+  en: "Your first program"
+  nl: "Je eerste programma"
+goal:
+  en: "write a program that shows lines of text with `print`, in the order you want, and see when Python reads something as text and when as a word it must already know."
+  nl: "een programma schrijven dat met `print` regels tekst laat zien, in de volgorde die je wilt, en zien wanneer Python iets als tekst leest en wanneer als een woord dat het al moet kennen."
+summary:
+  - en: "A program is a list of instructions. Python carries them out one by one, from top to bottom."
+    nl: "Een programma is een lijst instructies. Python voert ze een voor een uit, van boven naar beneden."
+  - en: "`print(\"...\")` puts the text between the quotes on a new line under the cell. One `print`, one line."
+    nl: "`print(\"...\")` zet de tekst tussen de aanhalingstekens op een nieuwe regel onder de cel. Eén `print`, één regel."
+  - en: "Text between quotes is a string, which Python shows exactly as it is. Without quotes, Python looks for a word it must already know, like `print`. A line that starts with `#` is a comment, which Python skips."
+    nl: "Tekst tussen aanhalingstekens is een string, en die laat Python precies zo zien. Zonder aanhalingstekens zoekt Python een woord dat het al moet kennen, zoals `print`. Een regel die met `#` begint, is commentaar: Python slaat die over."
+can_now:
+  - en: "write a program that shows lines of text"
+    nl: "een programma schrijven dat regels tekst laat zien"
+    by: tools
+  - en: "put instructions in the order in which they should run"
+    nl: "instructies in de volgorde zetten waarin ze moeten draaien"
+    by: countdown
+  - en: "tell text in quotes from a word Python must already know"
+    nl: "tekst tussen aanhalingstekens onderscheiden van een woord dat Python al moet kennen"
+    by: quotes

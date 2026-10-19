@@ -1,0 +1,28 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: cnn-conv-formal
+minutes: 20
+title:
+  en: "Convolution in detail: kernel size, stride and padding"
+  nl: "Convolutie in detail: kernel size, stride en padding"
+goal:
+  en: "compute the output size of a convolution from its kernel size, stride and padding, write a convolution with all three, and see how stacked layers grow the receptive field."
+  nl: "de grootte van de output van een convolutie berekenen uit zijn kernel size, stride en padding, een convolutie met alle drie schrijven, en zien hoe gestapelde layers het receptive field laten groeien."
+summary:
+  - en: "An image of n by n, with kernel size k, stride s and padding p, gives an output of ⌊(n + 2p − k) / s⌋ + 1 by the same; in Python `(n + 2 * p - k) // s + 1`. With k = 3, p = 1 and s = 1, the size stays the same."
+    nl: "Een afbeelding van n bij n, met kernel size k, stride s en padding p, geeft een output van ⌊(n + 2p − k) / s⌋ + 1 bij hetzelfde; in Python `(n + 2 * p - k) // s + 1`. Met k = 3, p = 1 en s = 1 blijft de grootte gelijk."
+  - en: "Padding puts a frame of zeros around the image, so the filter also fits at the edge; the stride makes the filter skip places."
+    nl: "Padding zet een rand van nullen rond de afbeelding, zodat het filter ook aan de rand past; de stride laat het filter plekken overslaan."
+  - en: "Three stacked layers of 3 by 3 at stride 1 give a receptive field of 7 by 7; after a stride of 2, every 3 by 3 layer adds 4 instead of 2, and each further stride of 2 doubles that again."
+    nl: "Drie gestapelde layers van 3 bij 3 met stride 1 geven een receptive field van 7 bij 7; na een stride van 2 voegt elke layer van 3 bij 3 er 4 toe in plaats van 2, en elke volgende stride van 2 verdubbelt dat weer."
+can_now:
+  - en: "work out the receptive field of a few stacked layers, also with a stride"
+    nl: "het receptive field van een paar gestapelde layers uitrekenen, ook met een stride"
+    by: receptive
+  - en: "compute the output size of a convolution"
+    nl: "de grootte van de output van een convolutie berekenen"
+    by: out-size
+  - en: "write a convolution with stride and padding in NumPy"
+    nl: "een convolutie met stride en padding schrijven in NumPy"
+    by: conv2d

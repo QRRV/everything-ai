@@ -1,0 +1,4 @@
+These files are short extracts of texts by others (tables of contents, syllabi, topic lists),
+kept for research on what the course should cover. Each file names its source and URL.
+They are not licensed by Everything AI, stay in the private development repository, and are
+left out of every public release.

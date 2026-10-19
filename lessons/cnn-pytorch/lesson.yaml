@@ -1,0 +1,28 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: cnn-pytorch
+minutes: 30
+title:
+  en: "Project: your first CNN"
+  nl: "Project: je eerste CNN"
+goal:
+  en: "build a small CNN in PyTorch with nn.Conv2d and nn.MaxPool2d, count its parameters, and train it with your own Trainer against your deep MLP."
+  nl: "een klein CNN bouwen in PyTorch met nn.Conv2d en nn.MaxPool2d, zijn parameters tellen, en het met je eigen Trainer trainen tegen je diepe MLP."
+summary:
+  - en: "nn.Conv2d(c_in, c_out, k, padding=p) holds c_out filters of shape (c_in, k, k) with a bias term each, and works on a mini-batch of shape (B, C, H, W); nn.MaxPool2d(2) halves the height and width."
+    nl: "nn.Conv2d(c_in, c_out, k, padding=p) bevat c_out filters met shape (c_in, k, k), elk met een bias term, en werkt op een mini-batch met shape (B, C, H, W); nn.MaxPool2d(2) halveert de hoogte en breedte."
+  - en: "SmallCNN: two blocks of convolution, ReLU and pooling take an image of 28 by 28 to 16 channels of 7 by 7; one row of 784 numbers per image goes to the output head."
+    nl: "SmallCNN: twee blokken van convolutie, ReLU en pooling maken van een afbeelding van 28 bij 28 16 channels van 7 bij 7; één rij van 784 getallen per afbeelding gaat naar de output head."
+  - en: "With 9,098 parameters, a ninth of the deep MLP's 85,194, it reads more test images right: 864 to 879 of 1,000 over 5 seeds, against 845 to 863, after 5 epochs with the same Trainer."
+    nl: "Met 9.098 parameters, een negende van de 85.194 van het diepe MLP, leest het meer testafbeeldingen goed: 864 tot 879 van de 1.000 over 5 seeds, tegen 845 tot 863, na 5 epochs met dezelfde Trainer."
+can_now:
+  - en: "work out the shape that comes out of a convolutional layer and pooling"
+    nl: "uitrekenen welke shape er uit een convolutional layer en pooling komt"
+    by: shape-after
+  - en: "build a CNN in PyTorch with nn.Conv2d and nn.MaxPool2d"
+    nl: "een CNN bouwen in PyTorch met nn.Conv2d en nn.MaxPool2d"
+    by: small-cnn
+  - en: "count the parameters of a model"
+    nl: "de parameters van een model tellen"
+    by: count-params

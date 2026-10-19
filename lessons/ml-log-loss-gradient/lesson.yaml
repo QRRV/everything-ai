@@ -1,0 +1,28 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: ml-log-loss-gradient
+minutes: 20
+title:
+  en: "The gradient of log loss"
+  nl: "De gradient van log loss"
+goal:
+  en: "derive with the chain rule that the gradient of the log loss of logistic regression is (ŷ − y)·x, and work it out for many examples."
+  nl: "met de kettingregel afleiden dat de gradient van de log loss van logistische regressie (ŷ − y)·x is, en hem uitrekenen voor veel voorbeelden."
+summary:
+  - en: 'The slope of the sigmoid is $\sigma(z)(1 - \sigma(z))$; the slope of $\log(p)$ is $1/p$. Chained with the slope of the loss, almost everything cancels: $\hat{y} - y$ is left.'
+    nl: 'De helling van de sigmoid is $\sigma(z)(1 - \sigma(z))$; de helling van $\log(p)$ is $1/p$. Met de kettingregel aan de helling van de loss gekoppeld valt bijna alles weg: $\hat{y} - y$ blijft over.'
+  - en: 'The gradient of the log loss for a weight is $(\hat{y} - y)\, x_j$, for the bias term $\hat{y} - y$; for many examples, the mean: `np.mean((p - y) * x)`.'
+    nl: 'De gradient van de log loss voor een weight is $(\hat{y} - y)\, x_j$, voor de bias term $\hat{y} - y$; bij veel voorbeelden het gemiddelde: `np.mean((p - y) * x)`.'
+  - en: "A nudge of a tiny h checks the formula: the change in the loss divided by h comes out close to it."
+    nl: "Een duwtje van een piepkleine h controleert de formule: de verandering van de loss gedeeld door h komt er dicht bij uit."
+can_now:
+  - en: "work out the slope of the log loss for one weight"
+    nl: "de helling van de log loss voor één weight uitrekenen"
+    by: not-spam-slope
+  - en: "write the gradient of one example as a function"
+    nl: "de gradient van één voorbeeld als functie schrijven"
+    by: one-gradient
+  - en: "work out the gradient of the mean log loss over many examples"
+    nl: "de gradient van de gemiddelde log loss over veel voorbeelden uitrekenen"
+    by: mean-gradient

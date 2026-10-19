@@ -1,0 +1,28 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: attn-idea
+minutes: 15
+title:
+  en: "Attention: every word looks at the others"
+  nl: "Attention: elk woord kijkt naar de andere"
+goal:
+  en: "work out the new vector of a word after attention: the softmax of its dot products with all words as weights, and the weighted average of their embeddings."
+  nl: "de nieuwe vector van een woord na attention uitrekenen: de softmax van zijn inproducten met alle woorden als weights, en het gewogen gemiddelde van hun embeddings."
+summary:
+  - en: "An embedding gives a word the same list of numbers in every sentence; with attention, every word takes a weighted average of the embeddings of all words, so its new vector depends on the sentence."
+    nl: "Een embedding geeft een woord in elke zin één lijst getallen; met attention neemt elk woord een gewogen gemiddelde van de embeddings van alle woorden, zodat zijn nieuwe vector van de zin afhangt."
+  - en: "The attention weights are the softmax of the dot products: words that match best count most, and the weights add up to 1, so the new vector is an average."
+    nl: "De attention weights zijn de softmax van de inproducten: woorden die het best passen, tellen het meest mee, en de weights tellen op tot 1, zodat de nieuwe vector een gemiddelde is."
+  - en: "A transformer, the network behind almost every large language model, is made of layers of attention, each followed by a small MLP."
+    nl: "Een transformer, het netwerk achter bijna elk groot language model, bestaat uit layers attention, elk gevolgd door een klein MLP."
+can_now:
+  - en: "say why attention weights that add up to 1 give an average"
+    nl: "zeggen waarom attention weights die optellen tot 1 een gemiddelde geven"
+    by: weights-sum
+  - en: "work out the new vector of a word after attention"
+    nl: "de nieuwe vector van een woord na attention uitrekenen"
+    by: attend
+  - en: "tell a transformer from a recurrent network and a convolution"
+    nl: "een transformer onderscheiden van een recurrent neural network en een convolutie"
+    by: transformer

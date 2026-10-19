@@ -1,0 +1,28 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: attn-qkv
+minutes: 25
+title:
+  en: "Queries, keys and values"
+  nl: "Queries, keys en values"
+goal:
+  en: "give every word a learned query, key and value, and compute self-attention with them, in NumPy and as a PyTorch module."
+  nl: "elk woord een geleerde query, key en value geven, en daarmee self-attention uitrekenen, in NumPy en als PyTorch-module."
+summary:
+  - en: "Self-attention makes three vectors from every embedding, with three learned matrices: a query (what the word looks for), a key (what it offers to be found by) and a value (what it passes on)."
+    nl: "Self-attention maakt van elke embedding drie vectoren, met drie geleerde matrices: een query (waar het woord naar zoekt), een key (waarmee het gevonden kan worden) en een value (wat het doorgeeft)."
+  - en: "The new vectors are softmax(Q Kᵀ) V, with the softmax along every row; as a query and a key come from different matrices, a word can look for a word unlike itself."
+    nl: "De nieuwe vectoren zijn softmax(Q Kᵀ) V, met de softmax langs elke rij; omdat een query en een key uit verschillende matrices komen, kan een woord zoeken naar een woord dat er niet op lijkt."
+  - en: "Unlike a Python dict, attention gives a weighted average of all values, with weights from how well each key matches the query."
+    nl: "Anders dan een Python-dict geeft attention een gewogen gemiddelde van alle values, met weights die zeggen hoe goed elke key bij de query past."
+can_now:
+  - en: "work out the length of the new vectors from the shapes of the three matrices"
+    nl: "de lengte van de nieuwe vectoren uitrekenen uit de shapes van de drie matrices"
+    by: value-shape
+  - en: "compute self-attention with queries, keys and values in NumPy"
+    nl: "self-attention met queries, keys en values uitrekenen in NumPy"
+    by: qkv-attention
+  - en: "write self-attention as a PyTorch module with three learned matrices"
+    nl: "self-attention schrijven als PyTorch-module met drie geleerde matrices"
+    by: self-attention-module

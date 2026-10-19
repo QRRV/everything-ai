@@ -1,0 +1,28 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: lm-what-is-a-language-model
+minutes: 20
+title:
+  en: "A language model predicts the next token"
+  nl: "Een language model voorspelt het volgende token"
+goal:
+  en: "say what a language model gives back, make the training examples of a text for next-token prediction, and look up how sure a model is of each next token."
+  nl: "zeggen wat een language model teruggeeft, de trainingsvoorbeelden van een tekst maken voor next-token prediction, en opzoeken hoe zeker een model is van elk volgend token."
+summary:
+  - en: "A language model gives, for the text so far, a probability for every possible next token: P(next token | text so far). Together they add up to 1."
+    nl: "Een language model geeft voor de tekst tot nu toe een kans voor elk mogelijk volgend token: P(volgend token | tekst tot nu toe). Samen tellen ze op tot 1."
+  - en: "In next-token prediction the text gives its own labels: every place `i` from 1 on is an example, with input `text[:i]` and label `text[i]`, so a text of n tokens gives n - 1 examples."
+    nl: "Bij next-token prediction geeft de tekst zijn eigen labels: elke plek `i` vanaf 1 is een voorbeeld, met input `text[:i]` en label `text[i]`, dus een tekst van n tokens geeft n - 1 voorbeelden."
+  - en: "A good language model gives the token that really comes next a high probability."
+    nl: "Een goed language model geeft het token dat echt volgt een hoge kans."
+can_now:
+  - en: "say what the probabilities of a language model add up to"
+    nl: "zeggen hoeveel de kansen van een language model samen zijn"
+    by: add-up
+  - en: "make the training examples of a text for next-token prediction"
+    nl: "de trainingsvoorbeelden van een tekst maken voor next-token prediction"
+    by: examples
+  - en: "look up the probability a model gives each token that really comes next"
+    nl: "de kans opzoeken die een model geeft aan elk token dat echt volgt"
+    by: real-probs

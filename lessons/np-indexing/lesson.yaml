@@ -1,0 +1,28 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: np-indexing
+minutes: 20
+title:
+  en: "Selecting parts of an array"
+  nl: "Delen van een array kiezen"
+goal:
+  en: "take one number, a row, a column or a part out of an array, and pick the numbers that meet a condition with a boolean mask."
+  nl: "één getal, een rij, een kolom of een deel uit een array halen, en de getallen die aan een voorwaarde voldoen kiezen met een boolean mask."
+summary:
+  - en: "`m[row, column]` is one number, `m[row]` a row and `m[:, column]` a column; the row comes first, and both start at 0."
+    nl: "`m[rij, kolom]` is één getal, `m[rij]` een rij en `m[:, kolom]` een kolom; de rij komt eerst, en allebei beginnen ze bij 0."
+  - en: "A slice takes a part of a direction, as with a list: `m[0, 1:3]`."
+    nl: "Een slice pakt een deel van een richting, net als bij een lijst: `m[0, 1:3]`."
+  - en: "A comparison on an array gives a boolean mask; `m[m > 2]` keeps the numbers where it is `True`, row by row, as a vector."
+    nl: "Een vergelijking op een array geeft een boolean mask; `m[m > 2]` kiest de getallen waar het mask `True` is, rij voor rij, als vector."
+can_now:
+  - en: "take a part of a row with a slice"
+    nl: "een deel van een rij pakken met een slice"
+    by: which-part
+  - en: "take a column out of an array in your own code"
+    nl: "een kolom uit een array halen in je eigen code"
+    by: wednesdays
+  - en: "pick the numbers that meet a condition with a boolean mask"
+    nl: "de getallen die aan een voorwaarde voldoen kiezen met een boolean mask"
+    by: wet-days

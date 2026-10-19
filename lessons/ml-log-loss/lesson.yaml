@@ -1,0 +1,28 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: ml-log-loss
+minutes: 15
+title:
+  en: "Scoring probabilities with the log: log loss"
+  nl: "Kansen scoren met de log: log loss"
+goal:
+  en: "work out the log loss of predicted probabilities, and say why it punishes a confident mistake much harder than the squared residual does."
+  nl: "de log loss van voorspelde kansen uitrekenen, en zeggen waarom die een zekere fout veel harder straft dan het gekwadrateerde residu."
+summary:
+  - en: "The surprise of an outcome with probability $p$ is $-\\log(p)$: 0 for a sure outcome, and without limit as $p$ goes to 0."
+    nl: "De verrassing van een uitkomst met kans $p$ is $-\\log(p)$: 0 bij een zekere uitkomst, en zonder grens als $p$ naar 0 gaat."
+  - en: "The log loss is the mean surprise of what really happened: `-np.mean(y * np.log(p) + (1 - y) * np.log(1 - p))`."
+    nl: "De log loss is de gemiddelde verrassing van wat er echt gebeurde: `-np.mean(y * np.log(p) + (1 - y) * np.log(1 - p))`."
+  - en: "A probability of 0.01 for what happened costs 4.6, where the squared residual stays below 1: log loss punishes confident mistakes hardest."
+    nl: "Een kans van 0,01 op wat er gebeurde kost 4,6, terwijl het gekwadrateerde residu onder 1 blijft: log loss straft zekere fouten het hardst."
+can_now:
+  - en: "work out the log loss of one example"
+    nl: "de log loss van één voorbeeld uitrekenen"
+    by: not-spam
+  - en: "write the log loss of one example as a function, for both labels"
+    nl: "de log loss van één voorbeeld als functie schrijven, voor beide labels"
+    by: one-loss
+  - en: "work out the mean log loss of many examples with NumPy"
+    nl: "de gemiddelde log loss van veel voorbeelden uitrekenen met NumPy"
+    by: mean-loss

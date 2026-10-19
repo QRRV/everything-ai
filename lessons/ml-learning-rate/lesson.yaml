@@ -1,0 +1,28 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: ml-learning-rate
+minutes: 15
+title:
+  en: "Too small, too big: the learning rate"
+  nl: "Te klein, te groot: de learning rate"
+goal:
+  en: "read from a loss curve whether a learning rate is too small, well chosen or too big, and choose one yourself."
+  nl: "uit een loss curve lezen of een learning rate te klein, goed gekozen of te groot is, en er zelf een kiezen."
+summary:
+  - en: "Too small a learning rate makes the loss go down slowly; well chosen, it drops fast and then settles: training converges."
+    nl: "Met een te kleine learning rate daalt de loss langzaam; goed gekozen daalt hij snel en komt dan tot rust: de training convergeert."
+  - en: "Too big a learning rate makes the steps jump over the bottom; much too big, and the loss grows every step: training diverges."
+    nl: "Met een te grote learning rate springen de stappen over de bodem heen; veel te groot, en de loss groeit elke stap: de training divergeert."
+  - en: "The loss curve, the loss after each step, shows which it is."
+    nl: "De loss curve, de loss na elke stap, laat zien welke het is."
+can_now:
+  - en: "tell from a run's losses that the learning rate is too small"
+    nl: "aan de losses van een run zien dat de learning rate te klein is"
+    by: too-small
+  - en: "find the biggest learning rate that still converges quickly"
+    nl: "de grootste learning rate vinden die nog snel convergeert"
+    by: pick-lr
+  - en: "say in code whether a run has converged"
+    nl: "in code zeggen of een run geconvergeerd is"
+    by: converged

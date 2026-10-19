@@ -1,0 +1,28 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: lm-temperature
+minutes: 25
+title:
+  en: "Temperature: bolder or safer text"
+  nl: "Temperature: gedurfder of veiliger tekst"
+goal:
+  en: "divide the logits by a temperature before softmax, and choose a temperature for safer or bolder text."
+  nl: "de logits door een temperature delen vóór de softmax, en een temperature kiezen voor veiliger of gedurfder tekst."
+summary:
+  - en: "The logits of a bigram model are the logarithms of its probabilities: z = np.log(p). Softmax of them gives p back."
+    nl: "De logits van een bigram-model zijn de logaritmen van zijn kansen: z = np.log(p). Softmax daarvan geeft p terug."
+  - en: "The temperature τ divides the logits before softmax. Below 1, the likely characters get more likely and the text safer; close to 0, sampling becomes greedy decoding. Above 1, the probabilities get closer to equal and the text bolder."
+    nl: "De temperature τ deelt de logits vóór de softmax. Onder 1 worden de waarschijnlijke tekens waarschijnlijker en de tekst veiliger; dicht bij 0 wordt sampling greedy decoding. Boven 1 komen de kansen dichter bij elkaar en wordt de tekst gedurfder."
+  - en: "A character with probability 0 stays at 0 at every temperature."
+    nl: "Een teken met kans 0 blijft 0 bij elke temperature."
+can_now:
+  - en: "choose a temperature for safer or bolder text"
+    nl: "een temperature kiezen voor veiliger of gedurfder tekst"
+    by: pick-tau
+  - en: "work out probabilities at a temperature"
+    nl: "kansen bij een temperature uitrekenen"
+    by: with-temperature
+  - en: "say why a temperature cannot make an unseen character possible"
+    nl: "zeggen waarom een temperature een teken dat nooit kwam niet mogelijk maakt"
+    by: never-seen

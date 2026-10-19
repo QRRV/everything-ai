@@ -1,0 +1,9 @@
+# Your own work: lesson copies, progress and settings. Never in git, never overwritten by an update.
+/work/
+/.marimo.toml
+.venv/
+.uv-cache/
+__pycache__/
+*.pyc
+.pytest_cache/
+__marimo__/

@@ -1,0 +1,33 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: llm-data-pipeline
+minutes: 40
+title:
+  en: "Project: a pretraining data pipeline"
+  nl: "Project: een datapipeline voor pretraining"
+goal:
+  en: "encode a corpus once into token shards, and read windows for training from them with a Dataset and np.memmap."
+  nl: "een corpus één keer coderen naar token shards, en er met een Dataset en np.memmap vensters uit lezen om op te trainen."
+summary:
+  - en: "Encoding a corpus again for every run costs hours, and its ids do not fit in memory: nanoGPT's OpenWebText is about 9 billion ids, 17 GB. So a pipeline encodes once and writes the ids to files."
+    nl: "Een corpus voor elke run opnieuw coderen kost uren, en zijn ids passen niet in het geheugen: OpenWebText van nanoGPT is zo'n 9 miljard ids, 17 GB. Daarom codeert een pipeline één keer en schrijft hij de ids naar bestanden."
+  - en: "Ids are stored in the smallest type that holds them: np.uint16, 2 bytes, for up to 65,536 different ids, else np.uint32; in token shards of a fixed number of ids, as bare bytes."
+    nl: "Ids worden opgeslagen in het kleinste type dat ze bevat: np.uint16, 2 bytes, voor hooguit 65.536 verschillende ids, anders np.uint32; in token shards van een vast aantal ids, als kale bytes."
+  - en: "np.memmap opens a shard without reading it; a Dataset lists the start of every window in every shard, and reads a window and the id after it only when a DataLoader asks for it."
+    nl: "np.memmap opent een shard zonder hem te lezen; een Dataset houdt het begin van elk venster in elke shard bij, en leest een venster en de id erna pas als een DataLoader erom vraagt."
+can_now:
+  - en: "write token ids to shards in the smallest type"
+    nl: "token-ids in het kleinste type naar shards schrijven"
+    by: write-shards
+  - en: "read windows of ids from shards on the disk with a Dataset"
+    nl: "met een Dataset vensters van ids uit shards op de schijf lezen"
+    by: token-windows
+  - en: "say why a large corpus is stored as many shards"
+    nl: "zeggen waarom een groot corpus in veel shards staat"
+    by: why-shards
+further_reading:
+  - en: "Andrej Karpathy, *nanoGPT*, github.com/karpathy/nanoGPT: data/openwebtext/prepare.py writes the token ids with np.memmap, and train.py reads its batches from them"
+    nl: "Andrej Karpathy, *nanoGPT*, github.com/karpathy/nanoGPT: data/openwebtext/prepare.py schrijft de token-ids met np.memmap, en train.py leest zijn batches eruit"
+  - en: "NumPy, *numpy.memmap*, in the NumPy reference"
+    nl: "NumPy, *numpy.memmap*, in de NumPy reference"

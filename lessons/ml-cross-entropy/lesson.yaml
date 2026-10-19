@@ -1,0 +1,28 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: ml-cross-entropy
+minutes: 15
+title:
+  en: "Cross-entropy loss for many classes"
+  nl: "Cross-entropy-loss voor veel klassen"
+goal:
+  en: "measure how good the probabilities of a model for many classes are with cross-entropy, for one example and for many at once, and see that with two classes it is log loss."
+  nl: "met cross-entropy meten hoe goed de kansen van een model voor veel klassen zijn, voor één voorbeeld en voor veel tegelijk, en zien dat het bij twee klassen log loss is."
+summary:
+  - en: 'Cross-entropy is minus the log of the probability the model gives the right class: $-\sum_k y_k \log(\hat{y}_k) = -\log(\hat{y}_c)$. A probability of 1 costs 0; the smaller it is, the more it costs.'
+    nl: 'Cross-entropy is min de log van de kans die het model aan de goede klasse geeft: $-\sum_k y_k \log(\hat{y}_k) = -\log(\hat{y}_c)$. Een kans van 1 kost 0; hoe kleiner hij is, hoe meer het kost.'
+  - en: "For many examples: `-(onehot * np.log(probs)).sum(axis=1).mean()`. The one-hot rows keep only the log of the right class in each row."
+    nl: "Voor veel voorbeelden: `-(onehot * np.log(probs)).sum(axis=1).mean()`. De one-hot-rijen houden in elke rij alleen de log van de goede klasse over."
+  - en: "A model that gives all $K$ classes the same probability has a cross-entropy of $\\log(K)$. With two classes, cross-entropy is log loss."
+    nl: "Een model dat alle $K$ klassen dezelfde kans geeft, heeft een cross-entropy van $\\log(K)$. Met twee klassen is cross-entropy log loss."
+can_now:
+  - en: "say what cross-entropy a model gets that has no idea"
+    nl: "zeggen welke cross-entropy een model krijgt dat geen idee heeft"
+    by: no-idea
+  - en: "work out the cross-entropy of one example from its probabilities and its label"
+    nl: "de cross-entropy van één voorbeeld uitrekenen uit zijn kansen en zijn label"
+    by: cross-entropy
+  - en: "work out the mean cross-entropy of many examples with one-hot labels"
+    nl: "de gemiddelde cross-entropy van veel voorbeelden uitrekenen met one-hot-labels"
+    by: batch-loss

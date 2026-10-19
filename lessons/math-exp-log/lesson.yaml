@@ -1,0 +1,28 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: math-exp-log
+minutes: 15
+title:
+  en: "Exponents and logarithms"
+  nl: "Exponenten en logaritmen"
+goal:
+  en: "work with powers, e and exp, and use the logarithm to find an exponent and to turn a product into a sum."
+  nl: "rekenen met machten, e en exp, en met de logaritme een exponent vinden en van een product een som maken."
+summary:
+  - en: "The exponent says how many times a number is multiplied by itself: $2^3 = 8$. $e^x$, `np.exp(x)`, is always positive and grows faster and faster."
+    nl: "De exponent zegt hoe vaak een getal met zichzelf wordt vermenigvuldigd: $2^3 = 8$. $e^x$, `np.exp(x)`, is altijd positief en groeit steeds sneller."
+  - en: 'The logarithm gives the exponent: $\log_2(8) = 3$. In this course log means base e, `np.log`, the inverse of exp.'
+    nl: 'De logaritme geeft de exponent: $\log_2(8) = 3$. In deze course betekent log grondtal e, `np.log`, het omgekeerde van exp; op school heet die ln.'
+  - en: 'The log turns multiplying into adding: $\log(a \cdot b) = \log(a) + \log(b)$. A sum of logs stays workable where a product of tiny numbers becomes 0.'
+    nl: 'De log maakt van vermenigvuldigen optellen: $\log(a \cdot b) = \log(a) + \log(b)$. Een som van logs blijft bruikbaar waar een product van piepkleine getallen 0 wordt.'
+can_now:
+  - en: "say where exp and log are positive or negative"
+    nl: "zeggen waar exp en log positief of negatief zijn"
+    by: negative
+  - en: "find an exponent with a logarithm"
+    nl: "een exponent vinden met een logaritme"
+    by: folds
+  - en: "work out the log of a product as a sum of logs"
+    nl: "de log van een product uitrekenen als een som van logs"
+    by: log-product

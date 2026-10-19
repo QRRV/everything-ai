@@ -1,0 +1,33 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: llm-eval-multiple-choice
+minutes: 35
+title:
+  en: "Scoring multiple-choice questions with log-likelihood"
+  nl: "Meerkeuzevragen scoren met log-likelihood"
+goal:
+  en: "test a base model on multiple-choice questions by the log-probability it gives each option, and make that score fair for long and common options."
+  nl: "een base model testen op meerkeuzevragen met de log-kans die het elke optie geeft, en die score eerlijk maken voor lange en gewone opties."
+summary:
+  - en: "A base model cannot answer a question, but it can score each option: the sum of the log-probabilities of its tokens after the context. Many benchmarks test base models that way."
+    nl: "Een base model kan geen vraag beantwoorden, maar het kan elke optie scoren: de som van de log-kansen van haar tokens na de context. Veel benchmarks testen base models zo."
+  - en: "The plain sum favours short options and common words. Per token or per byte takes away the length; subtracting the log-probability of the option after a neutral start keeps only what the context adds."
+    nl: "De gewone som bevoordeelt korte opties en gewone woorden. Per token of per byte neemt de lengte weg; de log-kans van de optie na een neutraal begin ervan aftrekken houdt alleen over wat de context toevoegt."
+  - en: "On 500 story-cloze questions, where guessing gets 125, the course's run of the capstone gets 138 right with the plain sum, 151 per token, 156 per byte and 220 against the option on its own."
+    nl: "Op 500 story-cloze-vragen, waar gokken er 125 haalt, haalt de run van de course uit de capstone er 138 goed met de gewone som, 151 per token, 156 per byte en 220 vergeleken met de optie op zich."
+can_now:
+  - en: "score an answer option with a base model"
+    nl: "een antwoordoptie scoren met een base model"
+    by: option-logprob
+  - en: "pick the option the context raises most"
+    nl: "de optie kiezen die de context het meest verhoogt"
+    by: best-option
+  - en: "say why the plain sum of log-probabilities favours short options"
+    nl: "zeggen waarom de gewone som van log-kansen korte opties bevoordeelt"
+    by: why-short
+further_reading:
+  - en: "Tom Brown and others, *Language Models are Few-Shot Learners* (2020), section 2.4: how GPT-3 scores multiple-choice tasks"
+    nl: "Tom Brown en anderen, *Language Models are Few-Shot Learners* (2020), sectie 2.4: hoe GPT-3 meerkeuzetaken scoort"
+  - en: "Rowan Zellers and others, *HellaSwag: Can a Machine Really Finish Your Sentence?* (2019)"
+    nl: "Rowan Zellers en anderen, *HellaSwag: Can a Machine Really Finish Your Sentence?* (2019)"

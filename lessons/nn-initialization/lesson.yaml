@@ -1,0 +1,28 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: nn-initialization
+minutes: 25
+title:
+  en: "Initialization"
+  nl: "Initialisatie"
+goal:
+  en: "choose the spread of the starting weights so that the signal keeps its size layer after layer, by He or by Xavier, and set it in PyTorch."
+  nl: "de spreiding van de beginweights zo kiezen dat het signaal layer na layer even groot blijft, volgens He of Xavier, en die instellen in PyTorch."
+summary:
+  - en: "Starting weights are random so that the neurons of a layer start different; equal starting weights keep them copies of each other."
+    nl: "Beginweights zijn willekeurig, zodat de neuronen van een layer verschillend beginnen; gelijke beginweights houden ze kopieën van elkaar."
+  - en: "A neuron adds up $n_\\text{in}$ inputs, so $\\mathrm{Var}(z) = n_\\text{in} \\mathrm{Var}(w) \\mathrm{Var}(x)$: He takes $\\sigma = \\sqrt{2/n_\\text{in}}$ for ReLU, Xavier $\\sigma = \\sqrt{2/(n_\\text{in} + n_\\text{out})}$ for tanh."
+    nl: "Een neuron telt $n_\\text{in}$ inputs op, dus $\\mathrm{Var}(z) = n_\\text{in} \\mathrm{Var}(w) \\mathrm{Var}(x)$: He neemt $\\sigma = \\sqrt{2/n_\\text{in}}$ voor ReLU, Xavier $\\sigma = \\sqrt{2/(n_\\text{in} + n_\\text{out})}$ voor tanh."
+  - en: "In PyTorch: `nn.init.kaiming_normal_(layer.weight, nonlinearity=\"relu\")` and `nn.init.zeros_(layer.bias)`. With He, 20 ReLU layers keep the signal; with Xavier it fades."
+    nl: "In PyTorch: `nn.init.kaiming_normal_(layer.weight, nonlinearity=\"relu\")` en `nn.init.zeros_(layer.bias)`. Met He houden 20 ReLU-layers het signaal; met Xavier dooft het uit."
+can_now:
+  - en: "work out the He spread for a ReLU layer"
+    nl: "de He-spreiding voor een ReLU-layer uitrekenen"
+    by: he-512
+  - en: "write the spread of the starting weights by He or by Xavier"
+    nl: "de spreiding van de beginweights volgens He of Xavier schrijven"
+    by: init-std
+  - en: "give the layers of a network He starting weights in PyTorch"
+    nl: "de layers van een netwerk He-beginweights geven in PyTorch"
+    by: he-init

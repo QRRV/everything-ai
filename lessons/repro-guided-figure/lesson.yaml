@@ -1,0 +1,37 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: repro-guided-figure
+minutes: 60
+title:
+  en: "Guided reproduction 4: reproduce the key figure"
+  nl: "Begeleide reproductie 4: reproduceer de belangrijkste figuur"
+goal:
+  en: "train your reproduction long enough to see validation accuracy jump long after training accuracy, over several seeds, and draw the paper's figure again from your own logs."
+  nl: "je reproductie lang genoeg trainen om de validation accuracy lang na de training accuracy te zien springen, over meerdere seeds, en de figuur van de paper opnieuw tekenen uit je eigen logboeken."
+summary:
+  - en: "To redraw a figure is to draw the paper's figure again from your own logs, with the same quantities on the same kind of axes, so that the two can lie side by side."
+    nl: "Een figuur opnieuw tekenen is de figuur van de paper nog eens tekenen uit je eigen logboeken, met dezelfde grootheden op dezelfde soort assen, zodat de twee naast elkaar kunnen liggen."
+  - en: "A logger measures what the figure needs after chosen steps, spread evenly on its log axis; a multi-seed runner keeps one line per run in an experiment log, and runs no seed twice."
+    nl: "Een logger meet na gekozen stappen wat de figuur nodig heeft, gelijk verdeeld over zijn logaritmische as; een multi-seed runner bewaart één regel per run in een logboek, en draait geen seed twee keer."
+  - en: "Read your figure against the paper's: the plateau at about 30% is the mirror cells of addition, which division does not have, and a difference for your report."
+    nl: "Lees je figuur naast die van de paper: het plateau op ongeveer 30% zijn de spiegelcellen van optellen, die delen niet heeft, en een verschil voor je verslag."
+can_now:
+  - en: "choose the steps a run logs, evenly spread on a log axis"
+    nl: "de stappen kiezen waarop een run logt, gelijk verdeeld over een logaritmische as"
+    by: log-steps
+  - en: "log the accuracy on all training and all validation data during a run"
+    nl: "tijdens een run de accuracy op alle trainings- en alle validatiedata loggen"
+    by: run-seed
+  - en: "run one experiment over several seeds into one experiment log, and go on where it stopped"
+    nl: "één experiment over meerdere seeds in één logboek draaien, en verdergaan waar het stopte"
+    by: run-seeds
+  - en: "redraw a paper's figure of training curves from your own logs"
+    nl: "een figuur van trainingslijnen uit een paper opnieuw tekenen uit je eigen logboeken"
+    by: figure
+  - en: "explain a difference between your figure and the paper's from your data"
+    nl: "een verschil tussen jouw figuur en die van de paper uit je data verklaren"
+    by: plateau
+further_reading:
+  - en: "Alethea Power and others (2022), *Grokking: Generalization Beyond Overfitting on Small Algorithmic Datasets*, arXiv:2201.02177: Figure 1 and Appendix A.1"
+    nl: "Alethea Power en anderen (2022), *Grokking: Generalization Beyond Overfitting on Small Algorithmic Datasets*, arXiv:2201.02177: Figuur 1 en bijlage A.1"

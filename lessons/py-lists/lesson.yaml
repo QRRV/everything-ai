@@ -1,0 +1,28 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: py-lists
+minutes: 15
+title:
+  en: "Lists"
+  nl: "Lijsten"
+goal:
+  en: "keep many values in a list, take one item or a slice of it, and add an item at the end with `append`."
+  nl: "veel waarden in een lijst bewaren, er één item of een slice uit pakken, en achteraan een item toevoegen met `append`."
+summary:
+  - en: "A list keeps values in order: `scores = [7, 9, 4]`. `scores[0]` is the first item, `scores[-1]` the last, and `len(scores)` the number of items."
+    nl: "Een lijst houdt waarden op volgorde: `scores = [7, 9, 4]`. `scores[0]` is het eerste item, `scores[-1]` het laatste, en `len(scores)` het aantal items."
+  - en: "A slice `scores[start:stop]` is a piece of the list; the item at `stop` is not included. `scores[:2]` gives the first two."
+    nl: "Een slice `scores[start:stop]` is een stuk van de lijst; het item op `stop` hoort er niet bij. `scores[:2]` geeft de eerste twee."
+  - en: "`scores.append(5)` adds an item at the end. It changes the list itself, so it goes on a line of its own."
+    nl: "`scores.append(5)` voegt achteraan een item toe. Het verandert de lijst zelf, dus het staat op een eigen regel."
+can_now:
+  - en: "take a piece of a list with a slice"
+    nl: "een stuk van een lijst pakken met een slice"
+    by: top
+  - en: "read a slice that counts from the end"
+    nl: "een slice lezen die vanaf het eind telt"
+    by: last-two
+  - en: "add an item at the end of a list"
+    nl: "achteraan een lijst een item toevoegen"
+    by: cart

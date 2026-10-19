@@ -1,0 +1,28 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: num-floats-stability
+minutes: 25
+title:
+  en: "Floating point and the log-sum-exp trick"
+  nl: "Floating point en de log-sum-exp-truc"
+goal:
+  en: "explain why a computer rounds numbers and where exp overflows, and work out the log-sum-exp and the cross-entropy loss without overflow."
+  nl: "uitleggen waarom een computer getallen afrondt en waar exp overloopt, en de log-sum-exp en de cross-entropy-loss uitrekenen zonder overflow."
+summary:
+  - en: "A float keeps about 16 significant digits times a power of 2: almost every number is rounded, so compare floats with a small margin, not with `==`."
+    nl: "Een float bewaart ongeveer 16 significante cijfers keer een macht van 2: bijna elk getal wordt afgerond, dus vergelijk floats met een kleine marge, niet met `==`."
+  - en: "A result above about 1.8 · 10³⁰⁸ becomes `inf` (overflow), one too close to 0 becomes 0 (underflow): `np.exp(710)` is `inf`, `np.exp(-746)` is 0."
+    nl: "Een uitkomst boven ongeveer 1,8 · 10³⁰⁸ wordt `inf` (overflow), een die te dicht bij 0 ligt wordt 0 (underflow): `np.exp(710)` is `inf`, `np.exp(-746)` is 0."
+  - en: "The log-sum-exp is worked out as $m + \\log \\sum_k e^{z_k - m}$, with $m$ the largest value, and the cross-entropy loss straight from the logits as $\\mathrm{LSE}(\\mathbf{z}) - z_c$."
+    nl: "De log-sum-exp reken je uit als $m + \\log \\sum_k e^{z_k - m}$, met $m$ de grootste waarde, en de cross-entropy-loss rechtstreeks uit de logits als $\\mathrm{LSE}(\\mathbf{z}) - z_c$."
+can_now:
+  - en: "say when exp of a number gives 0 in a computer"
+    nl: "zeggen wanneer exp van een getal in een computer 0 geeft"
+    by: underflow
+  - en: "write a log-sum-exp that does not overflow"
+    nl: "een log-sum-exp schrijven die niet overloopt"
+    by: logsumexp
+  - en: "work out the cross-entropy loss straight from the logits"
+    nl: "de cross-entropy-loss rechtstreeks uit de logits uitrekenen"
+    by: ce-from-logits

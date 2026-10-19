@@ -1,0 +1,33 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: sys-triton-kernel
+minutes: 45
+title:
+  en: "Write your own GPU kernel"
+  nl: "Je eigen GPU kernel schrijven"
+goal:
+  en: "write a fused softmax as a GPU kernel in Triton, one program per row, and explain why fusing makes a memory-bound operation faster."
+  nl: "een samengevoegde softmax schrijven als GPU kernel in Triton, één programma per rij, en uitleggen waarom samenvoegen een memory-bound bewerking sneller maakt."
+summary:
+  - en: "A GPU kernel runs as a grid of many copies, each on its own piece of the data; in Triton you write what one program does with one block, and `tl.program_id` says which program it is."
+    nl: "Een GPU kernel draait als een grid van heel veel kopieën, elk op een eigen stuk van de data; in Triton schrijf je wat één programma met één block doet, en `tl.program_id` zegt welk programma het is."
+  - en: "`tl.load` and `tl.store` read and write the places of a block, with a mask for the places past the end of the data; the numbers in between stay on the chip."
+    nl: "`tl.load` en `tl.store` lezen en schrijven de plekken van een block, met een mask voor de plekken voorbij het eind van de data; de getallen daartussen blijven op de chip."
+  - en: "Operator fusion puts several operations in one kernel: a fused softmax reads the matrix once and writes it once, instead of 5 reads and 3 writes, and so runs up to about 4 times as fast."
+    nl: "Operator fusion zet meerdere bewerkingen in één kernel: een samengevoegde softmax leest de matrix één keer en schrijft hem één keer, in plaats van 5 keer lezen en 3 keer schrijven, en draait daardoor tot ongeveer 4 keer zo snel."
+can_now:
+  - en: "write a GPU kernel in Triton that works on the rows of a matrix"
+    nl: "een GPU kernel in Triton schrijven die op de rijen van een matrix werkt"
+    by: softmax-kernel
+  - en: "say how many programs a launch starts and what the mask turns off"
+    nl: "zeggen hoeveel programma's een launch start en wat de mask uitzet"
+    by: grid
+  - en: "explain why a fused kernel is faster for a memory-bound operation, and where that stops"
+    nl: "uitleggen waarom een samengevoegde kernel sneller is voor een memory-bound bewerking, en waar dat ophoudt"
+    by: why-fused
+further_reading:
+  - en: "Philippe Tillet, H. T. Kung and David Cox (2019), *Triton: An Intermediate Language and Compiler for Tiled Neural Network Computations*, MAPL 2019"
+    nl: "Philippe Tillet, H. T. Kung en David Cox (2019), *Triton: An Intermediate Language and Compiler for Tiled Neural Network Computations*, MAPL 2019"
+  - en: "The Triton documentation, tutorial *Fused Softmax*: the same kernel, measured on a GPU"
+    nl: "De documentatie van Triton, tutorial *Fused Softmax*: dezelfde kernel, gemeten op een GPU"

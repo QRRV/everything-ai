@@ -1,0 +1,28 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: py-inheritance
+minutes: 15
+title:
+  en: "Building on another class"
+  nl: "Voortbouwen op een andere class"
+goal:
+  en: "build a subclass on a parent class, override one of its methods, and call the parent's `__init__` with `super()`."
+  nl: "een subclass laten voortbouwen op een parent class, een van zijn methods overschrijven, en de `__init__` van de parent class aanroepen met `super()`."
+summary:
+  - en: "`class Dog(Pet):` builds `Dog` on `Pet`: a `Dog` gets every method of `Pet`."
+    nl: "`class Dog(Pet):` laat `Dog` voortbouwen op `Pet`: een `Dog` krijgt elke method van `Pet`."
+  - en: "A method with the same name in the subclass overrides the parent's: Python looks in the object's own class first, then in the parent class."
+    nl: "Een method met dezelfde naam in de subclass overschrijft die van de parent class: Python kijkt eerst in de eigen class van het object, dan in de parent class."
+  - en: "A subclass with its own `__init__` runs the parent's first, with `super().__init__(...)`, and then sets what is new."
+    nl: "Een subclass met een eigen `__init__` voert eerst die van de parent class uit, met `super().__init__(...)`, en zet daarna wat nieuw is."
+can_now:
+  - en: "override one method in a subclass, so that the parent's methods use the new version"
+    nl: "één method in een subclass overschrijven, zodat de methods van de parent class de nieuwe versie gebruiken"
+    by: greeter
+  - en: "say which version of a method runs for an object of a subclass"
+    nl: "zeggen welke versie van een method draait voor een object van een subclass"
+    by: which-switch
+  - en: "give a subclass its own `__init__` that calls the parent's with `super()`"
+    nl: "een subclass een eigen `__init__` geven die die van de parent class aanroept met `super()`"
+    by: savings

@@ -1,0 +1,31 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: cnn-lenet
+minutes: 25
+title:
+  en: "LeNet-5, the CNN that read checks"
+  nl: "LeNet-5, het CNN dat cheques las"
+goal:
+  en: "rebuild LeNet-5 in PyTorch, work out its shapes and where its parameters are, and train it against your SmallCNN."
+  nl: "LeNet-5 nabouwen in PyTorch, zijn shapes uitrekenen en zien waar zijn parameters zitten, en het trainen tegen je SmallCNN."
+summary:
+  - en: "LeNet-5 (LeCun and others, 1998): two blocks of a convolution of 5 by 5, tanh and average pooling take an image of 28 by 28 with padding 2 to 16 channels of 5 by 5; one row of 400 numbers goes through linear layers to 120, 84 and 10."
+    nl: "LeNet-5 (LeCun en anderen, 1998): twee blokken van een convolutie van 5 bij 5, tanh en average pooling maken van een afbeelding van 28 bij 28, met padding 2, 16 channels van 5 bij 5; één rij van 400 getallen gaat door linear layers naar 120, 84 en 10."
+  - en: "Of its 61,706 parameters, 48,120 are in fc1: a weight for every number of the row and every neuron. The two convolutions together have 2,572."
+    nl: "Van zijn 61.706 parameters zitten er 48.120 in fc1: een weight voor elk getal van de rij en elk neuron. De twee convoluties hebben er samen 2.572."
+  - en: "With almost 7 times the parameters, it reads fewer test images right than SmallCNN after 5 epochs: 828 to 852 of 1,000 over 5 seeds, against 864 to 879; with ReLU and max pooling, 845 to 866."
+    nl: "Met bijna 7 keer zoveel parameters leest het na 5 epochs minder testafbeeldingen goed dan SmallCNN: 828 tot 852 van de 1.000 over 5 seeds, tegen 864 tot 879; met ReLU en max pooling 845 tot 866."
+can_now:
+  - en: "work out what the first linear layer of a CNN needs for another size of image"
+    nl: "uitrekenen wat de eerste linear layer van een CNN nodig heeft bij een andere afbeeldingsgrootte"
+    by: lenet-shape
+  - en: "rebuild a CNN from a paper in PyTorch"
+    nl: "een CNN uit een paper nabouwen in PyTorch"
+    by: lenet5
+  - en: "say where the parameters of a CNN are"
+    nl: "zeggen waar de parameters van een CNN zitten"
+    by: where-params
+further_reading:
+  - en: "Yann LeCun, Léon Bottou, Yoshua Bengio and Patrick Haffner (1998), *Gradient-Based Learning Applied to Document Recognition*, Proceedings of the IEEE 86 (11), section II"
+    nl: "Yann LeCun, Léon Bottou, Yoshua Bengio en Patrick Haffner (1998), *Gradient-Based Learning Applied to Document Recognition*, Proceedings of the IEEE 86 (11), paragraaf II"

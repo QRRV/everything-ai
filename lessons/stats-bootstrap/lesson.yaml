@@ -1,0 +1,28 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: stats-bootstrap
+minutes: 25
+title:
+  en: "How sure is a number? Confidence intervals and the bootstrap"
+  nl: "Hoe zeker is een getal? Betrouwbaarheidsintervallen en de bootstrap"
+goal:
+  en: "find out how much a number from your data could move by chance, with the bootstrap, and give it as a confidence interval."
+  nl: "met de bootstrap uitzoeken hoeveel een getal uit je data door toeval kan verschuiven, en dat als betrouwbaarheidsinterval geven."
+summary:
+  - en: "A number from a sample varies from sample to sample; its standard error is how much. For a mean it is about the standard deviation of the data divided by √n: four times the data halves it."
+    nl: "Een getal uit een steekproef varieert van steekproef tot steekproef; de standaardfout zegt hoeveel. Voor een gemiddelde is die ongeveer de standaardafwijking van de data gedeeld door √n: vier keer zoveel data halveert hem."
+  - en: "The bootstrap draws resamples from your own data, with replacement, and works the number out again a few thousand times; the spread of those numbers is the standard error."
+    nl: "De bootstrap trekt resamples uit je eigen data, met teruglegging, en rekent het getal een paar duizend keer opnieuw uit; de spreiding van die getallen is de standaardfout."
+  - en: "The 0.025 and 0.975 quantiles of the resampled numbers give a 95% confidence interval: 87 of 100 test examples right gives about 0.80 to 0.93."
+    nl: "Het 0,025- en het 0,975-kwantiel van de geresamplede getallen geven een 95%-betrouwbaarheidsinterval: 87 van de 100 testvoorbeelden goed geeft ongeveer 0,80 tot 0,93."
+can_now:
+  - en: "say how the width of an interval changes with more data"
+    nl: "zeggen hoe de breedte van een interval verandert met meer data"
+    by: more-data
+  - en: "write the bootstrap of a mean"
+    nl: "de bootstrap van een gemiddelde schrijven"
+    by: boot-means
+  - en: "read a confidence interval off the bootstrap means"
+    nl: "een betrouwbaarheidsinterval aflezen van de bootstrap-gemiddelden"
+    by: interval

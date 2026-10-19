@@ -1,0 +1,28 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: tok-pre-tokenization
+minutes: 30
+title:
+  en: "Pre-tokenization"
+  nl: "Pre-tokenization"
+goal:
+  en: "cut a text into words, signs and spaces with a regular expression, and run byte-level BPE inside those pieces only, so that no token crosses from one word into the next."
+  nl: "een tekst in woorden, leestekens en witruimte knippen met een reguliere expressie, en byte-level BPE alleen binnen die stukken draaien, zodat geen token van het ene woord in het volgende loopt."
+summary:
+  - en: "Pre-tokenization cuts a text into pieces before BPE; BPE then counts and merges inside every piece only, and a new text is encoded piece by piece."
+    nl: "Pre-tokenization knipt een tekst in stukken vóór BPE; BPE telt en voegt dan alleen binnen elk stuk samen, en een nieuwe tekst wordt stuk voor stuk geëncodeerd."
+  - en: "The pieces come from a regular expression: re.findall(r\" ?\\w+| ?[^\\w\\s]+|\\s+\", text) gives words with the space before them, runs of signs, and white space."
+    nl: "De stukken komen uit een reguliere expressie: re.findall(r\" ?\\w+| ?[^\\w\\s]+|\\s+\", text) geeft woorden met de spatie ervoor, reeksen leestekens, en witruimte."
+  - en: "Without pre-tokenization, about half of the first 100 new tokens on Shakespeare hold the end of a word or sign and the white space after it; with it, none do, at about the same number of tokens."
+    nl: "Zonder pre-tokenization bevat ongeveer de helft van de eerste 100 nieuwe tokens op Shakespeare het eind van een woord of leesteken en de witruimte erna; met pre-tokenization geen enkele, bij ongeveer evenveel tokens."
+can_now:
+  - en: "read what a simple regular expression cuts a text into"
+    nl: "lezen in welke stukken een eenvoudige reguliere expressie een tekst knipt"
+    by: findall
+  - en: "count pairs of ids inside pieces, and never across two pieces"
+    nl: "paren ids tellen binnen stukken, en nooit over twee stukken heen"
+    by: chunk-pair-counts
+  - en: "train byte-level BPE with pre-tokenization"
+    nl: "byte-level BPE met pre-tokenization trainen"
+    by: train-pre-bpe

@@ -1,0 +1,28 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: np-arrays
+minutes: 15
+title:
+  en: "From lists to arrays: shape and dtype"
+  nl: "Van lijsten naar arrays: shape en dtype"
+goal:
+  en: "make a vector and a matrix with NumPy, and read their shape and dtype."
+  nl: "een vector en een matrix maken met NumPy, en hun shape en dtype aflezen."
+summary:
+  - en: "A NumPy array is a grid of numbers of one type; `np.array` makes one from a list, or from a list of lists with one inner list per row."
+    nl: "Een NumPy-array is een rooster van getallen van één type; `np.array` maakt er een van een lijst, of van een lijst van lijsten met één binnenste lijst per rij."
+  - en: "A vector goes in one direction and a matrix in two; `.shape` says how many numbers there are in each direction, first the rows, then the columns."
+    nl: "Een vector gaat in één richting en een matrix in twee; `.shape` zegt hoeveel getallen er in elke richting zijn, eerst de rijen, dan de kolommen."
+  - en: "`.dtype` is the one type all numbers share: one float makes the whole array `float64`."
+    nl: "`.dtype` is het ene type dat alle getallen delen: één float maakt de hele array `float64`."
+can_now:
+  - en: "read the shape of an array: first the rows, then the columns"
+    nl: "de shape van een array aflezen: eerst de rijen, dan de kolommen"
+    by: shape-of
+  - en: "turn a table into a NumPy array"
+    nl: "een tabel omzetten in een NumPy-array"
+    by: rain
+  - en: "read the shape and the dtype of an array in your own code"
+    nl: "de shape en het dtype van een array aflezen in je eigen code"
+    by: describe

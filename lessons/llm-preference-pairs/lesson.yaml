@@ -1,0 +1,36 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: llm-preference-pairs
+minutes: 40
+title:
+  en: "Preference pairs and the Bradley-Terry model"
+  nl: "Preference pairs en het Bradley-Terry model"
+goal:
+  en: "turn the verdicts of a checker into preference pairs, and fit a score to every model from which answers were preferred."
+  nl: "de oordelen van een checker omzetten in preference pairs, en elk model een score geven uit welke antwoorden de voorkeur kregen."
+summary:
+  - en: "A preference pair is an instruction with a chosen and a rejected answer, from people or from a checker. A checker gives one only where it tells two answers apart; two passes or two fails say nothing."
+    nl: "Een preference pair is een instructie met een gekozen en een afgewezen antwoord, van mensen of van een checker. Een checker geeft er alleen een waar hij twee antwoorden uit elkaar houdt; twee keer geslaagd of twee keer gezakt zegt niets."
+  - en: "The Bradley-Terry model gives every player a score: the probability that a is preferred to b is the sigmoid of their difference. Only differences count, and the odds multiply along a chain."
+    nl: "Het Bradley-Terry model geeft elke speler een score: de kans dat a de voorkeur krijgt boven b is de sigmoid van hun verschil. Alleen verschillen tellen, en de odds vermenigvuldigen langs een keten."
+  - en: "The scores are fitted by making the mean of -log P(winner preferred) small: the cross-entropy of the outcomes, the loss a reward model is trained with."
+    nl: "De scores worden gefit door het gemiddelde van -log P(winnaar krijgt de voorkeur) klein te maken: de cross-entropy van de uitkomsten, de loss waarmee een reward model wordt getraind."
+can_now:
+  - en: "turn two scores into the probability that one is preferred"
+    nl: "twee scores omzetten in de kans dat de ene de voorkeur krijgt"
+    by: bt-prob
+  - en: "make preference pairs from the verdicts of a checker"
+    nl: "preference pairs maken uit de oordelen van een checker"
+    by: make-pairs
+  - en: "measure how well scores fit the comparisons"
+    nl: "meten hoe goed scores bij de vergelijkingen passen"
+    by: bt-loss
+  - en: "say why only the differences of the scores count"
+    nl: "zeggen waarom alleen de verschillen van de scores tellen"
+    by: shift
+further_reading:
+  - en: "Ralph Bradley and Milton Terry, *Rank Analysis of Incomplete Block Designs: I. The Method of Paired Comparisons* (1952)"
+    nl: "Ralph Bradley en Milton Terry, *Rank Analysis of Incomplete Block Designs: I. The Method of Paired Comparisons* (1952)"
+  - en: "Wei-Lin Chiang and others, *Chatbot Arena: An Open Platform for Evaluating LLMs by Human Preference* (2024)"
+    nl: "Wei-Lin Chiang en anderen, *Chatbot Arena: An Open Platform for Evaluating LLMs by Human Preference* (2024)"

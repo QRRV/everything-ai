@@ -1,0 +1,28 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: opt-momentum
+minutes: 25
+title:
+  en: "Momentum"
+  nl: "Momentum"
+goal:
+  en: "step by a sum of the gradients so far, so that gradient descent speeds up along a valley while the gradients across it largely cancel, and write an optimizer with momentum."
+  nl: "stappen met een som van de gradients tot nu toe, zodat gradient descent in de lengte van een dal versnelt terwijl de gradients dwars erop elkaar grotendeels opheffen, en een optimizer met momentum schrijven."
+summary:
+  - en: "Momentum keeps $v \\leftarrow \\beta v + g$ and steps by $w \\leftarrow w - \\eta v$, with $v$ starting at 0 and $\\beta$ usually 0.9."
+    nl: "Momentum houdt $v \\leftarrow \\beta v + g$ bij en stapt met $w \\leftarrow w - \\eta v$, met $v$ beginnend op 0 en $\\beta$ meestal 0,9."
+  - en: "Along a steady slope, $v$ grows to $g/(1 - \\beta)$, 10 times $g$; where the gradient keeps changing sign, it stays at about $g/(1 + \\beta)$."
+    nl: "Op een gelijkmatige helling groeit $v$ tot $g/(1 - \\beta)$, 10 keer $g$; waar de gradient steeds van teken wisselt, blijft hij rond $g/(1 + \\beta)$."
+  - en: "In a valley 100 times as steep across as along, momentum needed 94 steps where plain gradient descent needed 283 at a learning rate close to its best."
+    nl: "In een dal dat dwars 100 keer zo steil is als in de lengte, had momentum 94 stappen nodig, waar gewone gradient descent er met een learning rate dicht bij zijn beste 283 nodig had."
+can_now:
+  - en: "work out how large momentum's v gets along and across a valley"
+    nl: "uitrekenen hoe groot de v van momentum wordt in de lengte van een dal en dwars erop"
+    by: zigzag
+  - en: "work out the steps of momentum for a list of gradients"
+    nl: "de stappen van momentum uitrekenen voor een lijst gradients"
+    by: momentum-steps
+  - en: "write an optimizer with momentum for PyTorch"
+    nl: "een optimizer met momentum schrijven voor PyTorch"
+    by: momentum-sgd

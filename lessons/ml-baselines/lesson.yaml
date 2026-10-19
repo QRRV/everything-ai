@@ -1,0 +1,28 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: ml-baselines
+minutes: 15
+title:
+  en: "Always beat a simple baseline"
+  nl: "Versla altijd een eenvoudige baseline"
+goal:
+  en: "compare a model with a baseline, the most common class or the mean label of the training set, and say what a score means."
+  nl: "een model vergelijken met een baseline, de meest voorkomende klasse of het gemiddelde label van de training set, en zeggen wat een score betekent."
+summary:
+  - en: "A baseline is a simple prediction to compare a model with: always the most common class of the training set, or always its mean label."
+    nl: "Een baseline is een eenvoudige voorspelling om een model mee te vergelijken: altijd de meest voorkomende klasse van de training set, of altijd het gemiddelde label."
+  - en: "Take the baseline from the training set and measure it on the same test set, with the same metric, as the model."
+    nl: "Haal de baseline uit de training set en meet hem op dezelfde test set, met dezelfde metric, als het model."
+  - en: "A score only means something next to its baseline: a model that does not beat it has not shown that it learned anything."
+    nl: "Een score betekent pas iets naast zijn baseline: een model dat hem niet verslaat, heeft niet laten zien dat het iets geleerd heeft."
+can_now:
+  - en: "tell whether an accuracy beats the most common class"
+    nl: "zeggen of een accuracy de meest voorkomende klasse verslaat"
+    by: rare-disease
+  - en: "work out the accuracy of the most-common-class baseline"
+    nl: "de accuracy van de baseline met de meest voorkomende klasse uitrekenen"
+    by: majority
+  - en: "work out the MSE of the mean-label baseline"
+    nl: "de MSE van de baseline met het gemiddelde label uitrekenen"
+    by: mean-baseline

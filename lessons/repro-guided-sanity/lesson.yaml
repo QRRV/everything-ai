@@ -1,0 +1,34 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: repro-guided-sanity
+minutes: 50
+title:
+  en: "Guided reproduction 3: sanity checks"
+  nl: "Begeleide reproductie 3: sanity checks"
+goal:
+  en: "check a model before any long run: the shapes, the loss before training, and whether it can learn one batch by heart, each against the number that the setup gives you in advance."
+  nl: "een model controleren vóór elke lange run: de vormen, de loss vóór de training, en of het één batch uit het hoofd kan leren, elk tegen het getal dat de opzet je vooraf geeft."
+summary:
+  - en: "A sanity check is a quick test that should obviously pass before you trust a long run; three of them take about a minute, against hours for a run that turns out broken."
+    nl: "Een sanity check is een snelle test die vanzelfsprekend moet slagen voordat je een lange run vertrouwt; drie ervan kosten samen ongeveer een minuut, tegen uren voor een run die kapot blijkt."
+  - en: "The shapes follow from the settings, the loss before training is about ln of the vocabulary, and on one batch alone the loss should go to almost 0."
+    nl: "De vormen volgen uit de instellingen, de loss vóór de training is ongeveer ln van de vocabulary, en op één batch alleen hoort de loss naar bijna 0 te gaan."
+  - en: "When a check fails, the loss where it stops often says why: a model that sees only a cannot get below the loss best_loss works out."
+    nl: "Als een check mislukt, zegt de loss waar hij blijft steken vaak waarom: een model dat alleen a ziet, kan niet onder de loss komen die best_loss uitrekent."
+can_now:
+  - en: "work out the lowest loss a model can reach with what it sees"
+    nl: "de laagste loss uitrekenen die een model kan halen met wat het ziet"
+    by: best-loss
+  - en: "make a model learn one batch by heart, and keep its loss at every step"
+    nl: "een model één batch uit het hoofd laten leren, en de loss van elke stap bewaren"
+    by: overfit
+  - en: "tell from a failed sanity check where the bug is"
+    nl: "aan een mislukte sanity check zien waar de fout zit"
+    by: which-bug
+  - en: "run the sanity checks of your kit on any model before a long run"
+    nl: "de sanity checks van je kit vóór een lange run op elk model loslaten"
+    by: sanity
+further_reading:
+  - en: "Andrej Karpathy, *A Recipe for Training Neural Networks* (2019): \"verify loss @ init\" and \"overfit one batch\""
+    nl: "Andrej Karpathy, *A Recipe for Training Neural Networks* (2019): \"verify loss @ init\" en \"overfit one batch\""

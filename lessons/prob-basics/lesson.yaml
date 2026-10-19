@@ -1,0 +1,28 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: prob-basics
+minutes: 15
+title:
+  en: "Probability: counting how often"
+  nl: "Kans: tellen hoe vaak"
+goal:
+  en: "work out a probability by counting, and turn counts into a probability distribution."
+  nl: "een kans uitrekenen door te tellen, en tellingen omzetten in een kansverdeling."
+summary:
+  - en: 'A probability is how often something happens, out of all tries: $P(A)$ = how often $A$ happened / number of tries. It lies between 0 and 1.'
+    nl: 'Een kans is hoe vaak iets gebeurt, op het totale aantal pogingen: $P(A)$ = hoe vaak $A$ gebeurde / aantal pogingen. Hij ligt tussen 0 en 1.'
+  - en: "A probability distribution lists every outcome with its probability; together they add up to 1."
+    nl: "Een kansverdeling zet elke uitkomst op een rij met zijn kans; samen zijn ze 1."
+  - en: "A probability counted from tries is an estimate: more tries make it better."
+    nl: "Een kans die je uit pogingen telt, is een schatting: meer pogingen maken hem beter."
+can_now:
+  - en: "work out a probability from counts"
+    nl: "een kans uitrekenen uit tellingen"
+    by: marbles
+  - en: "turn counts into a distribution"
+    nl: "tellingen omzetten in een kansverdeling"
+    by: distribution
+  - en: "estimate a probability from tries"
+    nl: "een kans schatten uit pogingen"
+    by: estimate

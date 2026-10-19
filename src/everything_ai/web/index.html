@@ -1,0 +1,40 @@
+<!doctype html>
+<!-- SPDX-FileCopyrightText: 2026 Everything AI contributors -->
+<!-- SPDX-License-Identifier: MIT -->
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Everything AI</title>
+  <script>
+    // Set the theme before anything is drawn, so the page never flashes the wrong colours.
+    (function () {
+      try {
+        var t = localStorage.getItem("ea-theme") || "system";
+        var dark = t === "dark" || (t === "system" && matchMedia("(prefers-color-scheme: dark)").matches);
+        document.documentElement.classList.toggle("dark", dark);
+      } catch (e) {}
+    })();
+  </script>
+  <link rel="stylesheet" href="/course/static/fonts.css">
+  <link rel="stylesheet" href="/course/static/kleuren.css">
+  <link rel="stylesheet" href="/course/static/app.css">
+</head>
+<body>
+  <header class="top">
+    <a class="wordmark" href="/">Everything AI</a>
+    <div class="switches">
+      <div class="seg" role="group" id="lang-switch" aria-label="Language">
+        <button type="button" data-lang="en">EN</button><button type="button" data-lang="nl">NL</button>
+      </div>
+      <div class="seg" role="group" id="theme-switch">
+        <button type="button" data-theme="system"></button><button type="button" data-theme="light"></button><button type="button" data-theme="dark"></button>
+      </div>
+    </div>
+  </header>
+  <main id="app" aria-busy="true">
+    <p class="loading">…</p>
+  </main>
+  <script src="/course/static/app.js"></script>
+</body>
+</html>

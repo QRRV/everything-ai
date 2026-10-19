@@ -1,0 +1,28 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: opt-adamw
+minutes: 25
+title:
+  en: "AdamW: weight decay done right"
+  nl: "AdamW: weight decay zoals het hoort"
+goal:
+  en: "see why an L2 penalty inside Adam regularizes each weight by the size of its gradients and not by lambda alone, and shrink the weights apart from the gradient, as AdamW does, only for the weight matrices."
+  nl: "zien waarom een L2-straf binnen Adam elke weight regulariseert afhankelijk van de grootte van zijn gradients, en niet alleen van lambda, en de weights los van de gradient laten krimpen, zoals AdamW doet, alleen voor de weight-matrices."
+summary:
+  - en: "Inside Adam, an L2 penalty is divided by $\\sqrt{\\hat{s}}$ like the rest of the gradient: a weight without a gradient of its own went to almost 0 in about 200 steps, whether $\\lambda$ was 0.01 or 0.0001."
+    nl: "Binnen Adam wordt een L2-straf net als de rest van de gradient gedeeld door $\\sqrt{\\hat{s}}$: een weight zonder eigen gradient ging in ongeveer 200 stappen naar bijna 0, of $\\lambda$ nu 0,01 was of 0,0001."
+  - en: "AdamW first shrinks every weight by the fraction $\\eta\\lambda$, then takes Adam's step with the gradient of the loss alone: decoupled weight decay."
+    nl: "AdamW laat eerst elke weight krimpen met de fractie $\\eta\\lambda$, en zet dan de stap van Adam met alleen de gradient van de loss: decoupled weight decay."
+  - en: "In PyTorch, `torch.optim.AdamW` with two parameter groups gives weight decay to the weight matrices only, not to bias terms and normalization layers."
+    nl: "In PyTorch geeft `torch.optim.AdamW` met twee parameter groups alleen de weight-matrices weight decay, niet de bias terms en normalization layers."
+can_now:
+  - en: "tell what weight_decay does in torch.optim.Adam and in torch.optim.AdamW"
+    nl: "zeggen wat weight_decay doet in torch.optim.Adam en in torch.optim.AdamW"
+    by: weight-decay-arg
+  - en: "work out where a weight goes under AdamW"
+    nl: "uitrekenen waar een weight onder AdamW naartoe gaat"
+    by: adamw-path
+  - en: "give weight decay to the weight matrices only, with parameter groups"
+    nl: "alleen de weight-matrices weight decay geven, met parameter groups"
+    by: param-groups

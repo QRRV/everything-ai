@@ -1,0 +1,31 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: res-find-papers
+minutes: 25
+title:
+  en: "Finding papers"
+  nl: "Papers vinden"
+goal:
+  en: "find the papers for a question: start from a survey, search with more than one term, and follow citations backward and forward."
+  nl: "de papers voor een vraag vinden: begin bij een survey, zoek met meer dan één zoekterm, en volg citaties achteruit en vooruit."
+summary:
+  - en: "There are three ways in: a survey or a reading list, a search with more than one term on Semantic Scholar, Google Scholar or arXiv, and following citations."
+    nl: "Er zijn drie ingangen: een survey of een leeslijst, een zoektocht met meer dan één zoekterm op Semantic Scholar, Google Scholar of arXiv, en citaties volgen."
+  - en: "Backward, the references of a paper lead to older work; forward, the papers that cite it lead to newer work, which only a search engine that keeps track of citations can show."
+    nl: "Achteruit leiden de referenties van een paper naar ouder werk; vooruit leiden de papers die hem citeren naar nieuwer werk, en dat kan alleen een zoekmachine laten zien die citaties bijhoudt."
+  - en: "Look up every paper you did not find yourself: chatbots can invent references."
+    nl: "Zoek elke paper op die je niet zelf gevonden hebt: chatbots kunnen referenties verzinnen."
+can_now:
+  - en: "follow citations backward and forward in a citation graph"
+    nl: "citaties achteruit en vooruit volgen in een citatiegraaf"
+    by: one-round
+  - en: "choose the direction that finds the papers you need"
+    nl: "de richting kiezen die de papers vindt die je nodig hebt"
+    by: direction
+  - en: "plan a literature search for a question"
+    nl: "een zoektocht naar literatuur voor een vraag plannen"
+    by: plan-search
+further_reading:
+  - en: "Claes Wohlin (2014), *Guidelines for Snowballing in Systematic Literature Studies and a Replication in Software Engineering*, EASE 2014: how to follow citations both ways, step by step"
+    nl: "Claes Wohlin (2014), *Guidelines for Snowballing in Systematic Literature Studies and a Replication in Software Engineering*, EASE 2014: hoe je citaties stap voor stap beide kanten op volgt"

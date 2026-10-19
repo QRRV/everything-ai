@@ -1,0 +1,28 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: nn-batchnorm
+minutes: 25
+title:
+  en: "Batch normalization"
+  nl: "Batch normalization"
+goal:
+  en: "standardize the z's of every neuron over the mini-batch inside a network, rescale them with a learned gamma and beta, and use BatchNorm in PyTorch with the right mode."
+  nl: "de z's van elk neuron binnen een netwerk standaardiseren over de mini-batch, ze herschalen met een geleerde gamma en beta, en BatchNorm in PyTorch gebruiken in de goede mode."
+summary:
+  - en: "Batch normalization standardizes each neuron's $z$'s over the mini-batch, $\\hat{z} = (z - \\mu_B)/\\sqrt{\\sigma_B^2 + \\varepsilon}$, and then gives $\\gamma \\hat{z} + \\beta$, with $\\gamma$ and $\\beta$ learned."
+    nl: "Batch normalization standaardiseert de $z$'s van elk neuron over de mini-batch, $\\hat{z} = (z - \\mu_B)/\\sqrt{\\sigma_B^2 + \\varepsilon}$, en geeft dan $\\gamma \\hat{z} + \\beta$, met $\\gamma$ en $\\beta$ geleerd."
+  - en: "During training it keeps running averages of the mean and variance; in eval mode, after `model.eval()`, it uses those, so that each answer no longer depends on the batch."
+    nl: "Tijdens het trainen houdt het running averages bij van het gemiddelde en de variantie; in eval mode, na `model.eval()`, gebruikt het die, zodat een antwoord niet meer van de batch afhangt."
+  - en: "With an `nn.BatchNorm1d` between every hidden layer and its ReLU, an MLP with 10 hidden layers read 89% of the test digits after one epoch instead of 16%."
+    nl: "Met een `nn.BatchNorm1d` tussen elke hidden layer en zijn ReLU las een MLP met 10 hidden layers na één epoch 89% van de testcijfers goed in plaats van 16%."
+can_now:
+  - en: "explain why a network with BatchNorm needs eval mode for testing"
+    nl: "uitleggen waarom een netwerk met BatchNorm eval mode nodig heeft om te testen"
+    by: eval-mode
+  - en: "write batch normalization of a batch by hand"
+    nl: "batch normalization van een batch met de hand schrijven"
+    by: batch-norm
+  - en: "put BatchNorm in an MLP in PyTorch"
+    nl: "BatchNorm in een MLP zetten in PyTorch"
+    by: bn-mlp

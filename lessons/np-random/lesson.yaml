@@ -1,0 +1,28 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: np-random
+minutes: 15
+title:
+  en: "Random numbers and seeds"
+  nl: "Willekeurige getallen en seeds"
+goal:
+  en: "make random numbers with a NumPy random number generator, and repeat them exactly with a seed."
+  nl: "willekeurige getallen maken met een random number generator van NumPy, en ze precies herhalen met een seed."
+summary:
+  - en: "`np.random.default_rng(seed)` makes a random number generator; the same seed gives the same numbers, in the same order."
+    nl: "`np.random.default_rng(seed)` maakt een random number generator; dezelfde seed geeft dezelfde getallen, in dezelfde volgorde."
+  - en: "`rng.integers(low, high, size=n)` gives whole numbers up to, but not including, `high`; `rng.random` gives floats from 0 to 1; `rng.permutation` gives a random order."
+    nl: "`rng.integers(low, high, size=n)` geeft gehele getallen tot `high`, en `high` zelf doet niet mee; `rng.random` geeft floats van 0 tot 1; `rng.permutation` geeft een willekeurige volgorde."
+  - en: "An RNG keeps going with each call; make it again with the same seed to start over. One seed shows one run, not how much results vary."
+    nl: "Een RNG gaat bij elke vraag verder; maak hem opnieuw met dezelfde seed om opnieuw te beginnen. Eén seed laat één run zien, niet hoeveel uitkomsten verschillen."
+can_now:
+  - en: "choose the numbers for rng.integers so that the last one is included"
+    nl: "de getallen voor rng.integers zo kiezen dat het laatste meedoet"
+    by: one-number
+  - en: "make random numbers that anyone can repeat with the same seed"
+    nl: "willekeurige getallen maken die iedereen met dezelfde seed kan herhalen"
+    by: rolls
+  - en: "put a list in a random order that is the same for the same seed"
+    nl: "een lijst in een willekeurige volgorde zetten die gelijk is voor dezelfde seed"
+    by: shuffled

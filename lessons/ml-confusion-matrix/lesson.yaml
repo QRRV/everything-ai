@@ -1,0 +1,28 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: ml-confusion-matrix
+minutes: 20
+title:
+  en: "Beyond accuracy: precision and recall"
+  nl: "Meer dan accuracy: precision en recall"
+goal:
+  en: "count the cells of a confusion matrix, work out precision and recall, and see how the decision threshold trades one for the other."
+  nl: "de vakjes van een confusion matrix tellen, precision en recall uitrekenen, en zien hoe de decision threshold de een tegen de ander inruilt."
+summary:
+  - en: "A confusion matrix counts, for each true class (row), how often each class was predicted (column); the right predictions lie on the diagonal."
+    nl: "Een confusion matrix telt voor elke echte klasse (rij) hoe vaak elke klasse voorspeld werd (kolom); de goede voorspellingen liggen op de diagonaal."
+  - en: "Precision is $TP / (TP + FP)$: of what the model calls positive, the share that really is positive. Recall is $TP / (TP + FN)$: of what is positive, the share it finds."
+    nl: "Precision is $TP / (TP + FP)$: van wat het model positief noemt, het deel dat echt positief is. Recall is $TP / (TP + FN)$: van wat positief is, het deel dat het vindt."
+  - en: "With a rare class, accuracy can look good for a model that finds nothing. A higher decision threshold lowers recall and usually raises precision."
+    nl: "Bij een zeldzame klasse kan accuracy er goed uitzien voor een model dat niets vindt. Een hogere decision threshold verlaagt recall en verhoogt meestal precision."
+can_now:
+  - en: "see from recall that a model finds none of a rare class"
+    nl: "aan recall zien dat een model niets vindt van een zeldzame klasse"
+    by: never-spam
+  - en: "work out precision and recall from predictions and labels"
+    nl: "precision en recall uitrekenen uit voorspellingen en labels"
+    by: precision-recall
+  - en: "count a confusion matrix for several classes"
+    nl: "een confusion matrix tellen voor meer klassen"
+    by: matrix

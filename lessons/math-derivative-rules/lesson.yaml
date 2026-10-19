@@ -1,0 +1,28 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: math-derivative-rules
+minutes: 25
+title:
+  en: "Derivative rules"
+  nl: "Differentieerregels"
+goal:
+  en: "find the exact derivative of a formula built from sums, products, powers, eˣ and log, with the product rule and the chain rule, and check it with a tiny step."
+  nl: "de precieze afgeleide vinden van een formule die is gebouwd uit sommen, producten, machten, eˣ en log, met de productregel en de kettingregel, en die controleren met een kleine stap."
+summary:
+  - en: "The product rule: $(f \\cdot g)' = f' \\cdot g + f \\cdot g'$. The derivative of a product is not the product of the derivatives."
+    nl: "De productregel: $(f \\cdot g)' = f' \\cdot g + f \\cdot g'$. De afgeleide van een product is niet het product van de afgeleiden."
+  - en: "$(e^x)' = e^x$ and $(\\log x)' = \\frac{1}{x}$. With the chain rule: $(e^{g(x)})' = e^{g(x)} \\cdot g'(x)$ and $(\\log g(x))' = \\frac{g'(x)}{g(x)}$."
+    nl: "$(e^x)' = e^x$ en $(\\log x)' = \\frac{1}{x}$. Met de kettingregel: $(e^{g(x)})' = e^{g(x)} \\cdot g'(x)$ en $(\\log g(x))' = \\frac{g'(x)}{g(x)}$."
+  - en: "To find a derivative, start at the last step of the formula, use its rule, and work inwards; a tiny step checks the result."
+    nl: "Om een afgeleide te vinden, begin je bij de laatste stap van de formule, gebruik je de regel daarvan en werk je naar binnen; een kleine stap controleert het resultaat."
+can_now:
+  - en: "find the derivative of e to the power of an inner part"
+    nl: "de afgeleide vinden van e tot de macht van een binnenste deel"
+    by: exp-3x
+  - en: "find the derivative of a product with the product rule"
+    nl: "de afgeleide van een product vinden met de productregel"
+    by: product
+  - en: "find the derivative of a log of an inner part with the chain rule"
+    nl: "de afgeleide van een log van een binnenste deel vinden met de kettingregel"
+    by: softplus

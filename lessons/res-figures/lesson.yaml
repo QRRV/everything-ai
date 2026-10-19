@@ -1,0 +1,28 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: res-figures
+minutes: 25
+title:
+  en: "Figures that show something"
+  nl: "Figuren die iets laten zien"
+goal:
+  en: "draw a result as a figure with one message, labelled axes, every run shown and the comparison side by side, and write its caption."
+  nl: "een resultaat tekenen als figuur met één boodschap, benoemde assen, elke run zichtbaar en de vergelijking naast elkaar, en het bijschrift schrijven."
+summary:
+  - en: "A clear figure has one message, in its title or the first sentence of its caption; each axis says what it shows, with its unit if it has one."
+    nl: "Een duidelijke figuur heeft één boodschap, in de titel of de eerste zin van het bijschrift; elke as zegt wat hij laat zien, met de eenheid als die er is."
+  - en: "Show every run or the spread over seeds, and put what you compare side by side on one axis with one scale; bars start at 0."
+    nl: "Laat elke run of de spreiding over seeds zien, en zet wat je vergelijkt naast elkaar op één as met één schaal; staven beginnen bij 0."
+  - en: "Name each group on the axis or in a legend: `label=\"...\"` on each plot and `plt.legend()`."
+    nl: "Benoem elke groep op de as of in een legenda: `label=\"...\"` bij elke plot en `plt.legend()`."
+can_now:
+  - en: "draw every run of two settings side by side, with a title and labelled axes"
+    nl: "elke run van twee instellingen naast elkaar tekenen, met een titel en benoemde assen"
+    by: seed-points
+  - en: "tell a fair figure from a misleading one"
+    nl: "een eerlijke figuur onderscheiden van een misleidende"
+    by: fair-figure
+  - en: "write a caption that says what a figure shows"
+    nl: "een bijschrift schrijven dat zegt wat een figuur laat zien"
+    by: caption

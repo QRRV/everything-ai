@@ -1,0 +1,28 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: ml-regularization
+minutes: 20
+title:
+  en: "Regularization and weight decay"
+  nl: "Regularisatie en weight decay"
+goal:
+  en: "add an L2 penalty for large weights to the loss, work out its slopes, and see how it keeps a model with many features from fitting the noise."
+  nl: "een L2-straf voor grote weights bij de loss optellen, de hellingen ervan uitrekenen, en zien hoe die een model met veel features ervan weerhoudt de ruis te volgen."
+summary:
+  - en: "L2 regularization adds $\\lambda$ times the sum of the squared weights to the loss: `lam * np.sum(w ** 2)`. The bias term is left out."
+    nl: "L2-regularisatie telt $\\lambda$ keer de som van de gekwadrateerde weights op bij de loss: `lam * np.sum(w ** 2)`. De bias term blijft erbuiten."
+  - en: "Each slope for a weight gets `2 * lam * w` extra, so every step shrinks each weight by the factor $1 - 2\\eta\\lambda$: weight decay."
+    nl: "Elke helling voor een weight krijgt `2 * lam * w` erbij, dus elke stap krimpt elke weight met de factor $1 - 2\\eta\\lambda$: weight decay."
+  - en: "$\\lambda$ is a hyperparameter: 0 is plain regression, too large pushes every weight to almost 0. Choose it on the validation set."
+    nl: "$\\lambda$ is een hyperparameter: 0 is gewone regressie, te groot duwt elke weight naar bijna 0. Kies hem op de validation set."
+can_now:
+  - en: "say what a very large λ does to a model"
+    nl: "zeggen wat een heel grote λ met een model doet"
+    by: big-lambda
+  - en: "work out the loss with an L2 penalty"
+    nl: "de loss met een L2-straf uitrekenen"
+    by: penalty-loss
+  - en: "work out the slopes with weight decay"
+    nl: "de hellingen met weight decay uitrekenen"
+    by: decay-gradients

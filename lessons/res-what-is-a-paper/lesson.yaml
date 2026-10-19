@@ -1,0 +1,28 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: res-what-is-a-paper
+minutes: 15
+title:
+  en: "What a paper, a preprint and peer review are"
+  nl: "Wat een paper, een preprint en peer review zijn"
+goal:
+  en: "tell a preprint from a paper that passed peer review and from a text about research, and say what peer review does and does not guarantee."
+  nl: "een preprint onderscheiden van een paper die door peer review kwam en van een tekst over onderzoek, en zeggen wat peer review wel en niet garandeert."
+summary:
+  - en: "A paper reports a piece of research: question, method, results, and how it relates to earlier work."
+    nl: "Een paper doet verslag van een onderzoek: vraag, methode, resultaten, en hoe het zich verhoudt tot eerder werk."
+  - en: "A preprint is put online by its own authors, often on arXiv, before or without peer review: nobody has checked it yet."
+    nl: "Een preprint zetten de auteurs zelf online, vaak op arXiv, vóór of zonder peer review: niemand heeft hem nog gecontroleerd."
+  - en: "Peer review by a few researchers catches many mistakes, but is no guarantee; a result that others repeat is the strongest."
+    nl: "Peer review door een paar onderzoekers vangt veel fouten af, maar is geen garantie; een resultaat dat anderen herhalen, is het sterkst."
+can_now:
+  - en: "tell a preprint, a reviewed paper and a text about research apart"
+    nl: "een preprint, een paper met peer review en een tekst over onderzoek uit elkaar houden"
+    by: kinds
+  - en: "say what \"published on arXiv\" means"
+    nl: "zeggen wat \"gepubliceerd op arXiv\" betekent"
+    by: on-arxiv
+  - en: "ask the right questions before you believe a study in the news"
+    nl: "de goede vragen stellen voordat je een onderzoek uit het nieuws gelooft"
+    by: check-claim

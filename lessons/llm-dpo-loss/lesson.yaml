@@ -1,0 +1,31 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: llm-dpo-loss
+minutes: 40
+title:
+  en: "DPO: preferences without a reward model"
+  nl: "DPO: voorkeuren zonder reward model"
+goal:
+  en: "derive the DPO loss from the best policy of RLHF, and compute it from the log-probabilities of a policy and a reference model."
+  nl: "de loss van DPO afleiden uit de beste policy van RLHF, en hem uitrekenen uit de log-kansen van een policy en een reference model."
+summary:
+  - en: "Turned around, the best policy of RLHF says that every policy stands for a reward: beta times the log of how much more likely it makes an answer than the reference model does, plus beta log Z(x)."
+    nl: "Omgedraaid zegt de beste policy van RLHF dat elke policy voor een reward staat: beta keer de log van hoeveel waarschijnlijker hij een antwoord maakt dan het reference model, plus beta log Z(x)."
+  - en: "In the Bradley-Terry probability of a pair, beta log Z(x) drops out, as it is the same for both answers. The DPO loss is minus the log of the sigmoid of beta times the margin: what the chosen answer gained on the reference model, minus what the rejected one gained."
+    nl: "In de kans van Bradley-Terry voor een paar valt beta log Z(x) weg, want die is voor beide antwoorden gelijk. De loss van DPO is min de log van de sigmoid van beta keer de marge: wat het gekozen antwoord won op het reference model, min wat het afgewezen antwoord won."
+  - en: "The log-probability of an answer is the sum of those of its tokens, each from the row of logits before it. The loss only asks for the margin: the rejected answer can fall far more than the chosen one rises."
+    nl: "De log-kans van een antwoord is de som van die van zijn tokens, elk uit de rij logits ervoor. De loss vraagt alleen om de marge: het afgewezen antwoord kan veel verder zakken dan het gekozen antwoord stijgt."
+can_now:
+  - en: "work out the log-probability of an answer from the logits of a language model"
+    nl: "de log-kans van een antwoord uitrekenen uit de logits van een language model"
+    by: answer-logprob
+  - en: "compute the DPO loss of a batch of preference pairs"
+    nl: "de loss van DPO uitrekenen voor een batch preference pairs"
+    by: dpo-loss
+  - en: "say why DPO needs no reward model"
+    nl: "zeggen waarom DPO geen reward model nodig heeft"
+    by: no-z
+further_reading:
+  - en: "Rafael Rafailov and others, *Direct Preference Optimization: Your Language Model is Secretly a Reward Model* (2023), sections 4 and 5: the loss, what its gradient does, and why it optimizes the same aim as RLHF"
+    nl: "Rafael Rafailov en anderen, *Direct Preference Optimization: Your Language Model is Secretly a Reward Model* (2023), paragrafen 4 en 5: de loss, wat zijn gradient doet, en waarom hij hetzelfde doel optimaliseert als RLHF"

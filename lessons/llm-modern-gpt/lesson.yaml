@@ -1,0 +1,41 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: llm-modern-gpt
+minutes: 45
+title:
+  en: "Project: upgrade your GPT to a modern LLM"
+  nl: "Project: je GPT een modern LLM maken"
+goal:
+  en: "put RMSNorm, SwiGLU, RoPE, grouped-query attention and a KV cache into your GPT, and measure what each change does."
+  nl: "RMSNorm, SwiGLU, RoPE, grouped-query attention en een KV cache in je GPT zetten, en meten wat elke verandering doet."
+summary:
+  - en: "A ModernGPT is your GPT with four parts swapped: RMSNorm for layer normalization, SwiGLU with a hidden size of 8d/3 for the MLP, RoPE in every attention for the table of places, and fewer key and value heads than query heads."
+    nl: "Een ModernGPT is je GPT met vier onderdelen verwisseld: RMSNorm voor layer normalization, SwiGLU met een hidden size van 8d/3 voor de MLP, RoPE in elke attention voor de tabel van plekken, en minder key en value heads dan query heads."
+  - en: "RoPE turns every head on its own. With a KV cache, a new token stands at the place after the keys in the cache, so rope gets a start."
+    nl: "RoPE draait elke head apart. Met een KV cache staat een nieuw token op de plek na de keys in de cache, dus rope krijgt een start."
+  - en: "The course added the changes one by one, three runs each on the CPU plan: RMSNorm leaves the loss as it was, SwiGLU lowers it by 0.07, RoPE by 0.18, and grouped-query attention raises it by 0.016 while it halves the KV cache."
+    nl: "De course voegde de veranderingen één voor één toe, met drie runs elk op het CPU-plan: RMSNorm laat de loss zoals hij was, SwiGLU verlaagt hem met 0,07, RoPE met 0,18, en grouped-query attention verhoogt hem met 0,016 terwijl het de KV cache halveert."
+  - en: "On the GPU plan, with 10 million parameters on the same stories, the ModernGPT learns faster but overfits after 8 epochs, and its best loss, 2.04, stays above the 1.97 of the GPT on tokens: measure a change in the setting you train in."
+    nl: "Met het GPU-plan, met 10 miljoen parameters op dezelfde verhalen, leert de ModernGPT sneller maar gaat hij na 8 epochs overfitten, en blijft zijn beste loss, 2,04, boven de 1,97 van de GPT op tokens: meet een verandering in de opzet waarin je traint."
+can_now:
+  - en: "bring parts you wrote in separate lessons together in your project"
+    nl: "onderdelen die je in losse lessen schreef samenbrengen in je project"
+    by: parts
+  - en: "write attention with RoPE on every head, grouped-query attention and a KV cache"
+    nl: "attention schrijven met RoPE op elke head, grouped-query attention en een KV cache"
+    by: modern-attention
+  - en: "build a GPT without a table of places, with RMSNorm and SwiGLU"
+    nl: "een GPT bouwen zonder tabel van plekken, met RMSNorm en SwiGLU"
+    by: modern-gpt
+  - en: "write with a KV cache: the start once, then one token per step"
+    nl: "schrijven met een KV cache: de start één keer, daarna één token per stap"
+    by: generate
+  - en: "weigh a change by what it saves, not only by its loss"
+    nl: "een verandering wegen naar wat hij bespaart, niet alleen naar zijn loss"
+    by: gqa-why
+further_reading:
+  - en: "Hugo Touvron and others (2023), *LLaMA: Open and Efficient Foundation Language Models*, arXiv:2302.13971"
+    nl: "Hugo Touvron en anderen (2023), *LLaMA: Open and Efficient Foundation Language Models*, arXiv:2302.13971"
+  - en: "Joshua Ainslie and others (2023), *GQA: Training Generalized Multi-Query Transformer Models from Multi-Head Checkpoints*, EMNLP 2023"
+    nl: "Joshua Ainslie en anderen (2023), *GQA: Training Generalized Multi-Query Transformer Models from Multi-Head Checkpoints*, EMNLP 2023"

@@ -1,0 +1,31 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: res-significance
+minutes: 30
+title:
+  en: "Is the difference real?"
+  nl: "Is het verschil echt?"
+goal:
+  en: "test whether a difference between two settings could be chance, with a permutation test and a paired bootstrap over the same seeds."
+  nl: "toetsen of een verschil tussen twee instellingen toeval kan zijn, met een permutatietoets en een gepaarde bootstrap over dezelfde seeds."
+summary:
+  - en: "Give both settings the same seeds and compare them pair by pair: what the two runs of a seed share falls away."
+    nl: "Geef beide instellingen dezelfde seeds en vergelijk ze paar voor paar: wat de twee runs van een seed gemeen hebben, valt weg."
+  - en: "A permutation test flips the signs of the differences at random and takes the mean each time; the p-value is the share of those means at least as far from 0 as yours. With $n$ pairs, p cannot go below $2/2^n$."
+    nl: "Een permutatietoets draait de tekens van de verschillen willekeurig om en neemt elke keer het gemiddelde; de p-waarde is het deel van die gemiddelden dat minstens zo ver van 0 ligt als het jouwe. Met $n$ paren kan p niet onder $2/2^n$ komen."
+  - en: "Without warmup, the small GPT ended lower for all ten seeds, by 0.006 (p = 0.002): chance alone explains that badly, and still the difference is small."
+    nl: "Zonder warmup eindigde de kleine GPT bij alle tien seeds lager, met 0,006 (p = 0,002): toeval alleen verklaart dat slecht, en toch is het verschil klein."
+can_now:
+  - en: "compute a paired bootstrap interval of a difference"
+    nl: "een gepaard bootstrapinterval van een verschil berekenen"
+    by: paired-bootstrap
+  - en: "say what a large p-value with few seeds does and does not show"
+    nl: "zeggen wat een grote p-waarde met weinig seeds wel en niet laat zien"
+    by: three-seeds
+  - en: "report a difference with its interval, its p-value and its seeds"
+    nl: "een verschil rapporteren met zijn interval, zijn p-waarde en zijn seeds"
+    by: report
+further_reading:
+  - en: "Taylor Berg-Kirkpatrick, David Burkett and Dan Klein (2012), *An Empirical Investigation of Statistical Significance in NLP*, EMNLP-CoNLL 2012: the paired bootstrap for two systems on the same test examples, and how often a small gain is significant"
+    nl: "Taylor Berg-Kirkpatrick, David Burkett en Dan Klein (2012), *An Empirical Investigation of Statistical Significance in NLP*, EMNLP-CoNLL 2012: de gepaarde bootstrap voor twee systemen op dezelfde testvoorbeelden, en hoe vaak een kleine winst significant is"

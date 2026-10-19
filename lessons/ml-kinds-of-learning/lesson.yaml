@@ -1,0 +1,28 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: ml-kinds-of-learning
+minutes: 15
+title:
+  en: "Kinds of learning"
+  nl: "Soorten leren"
+goal:
+  en: "tell supervised, unsupervised, self-supervised and reinforcement learning apart by where the right answers come from."
+  nl: "supervised, unsupervised, self-supervised en reinforcement learning uit elkaar houden aan waar de goede antwoorden vandaan komen."
+summary:
+  - en: "In supervised learning, a model learns from examples with labels that people gave them; in unsupervised learning, there are no labels, and it looks for structure."
+    nl: "Bij supervised learning leert een model van voorbeelden met labels die mensen eraan gaven; bij unsupervised learning zijn er geen labels, en zoekt het structuur."
+  - en: "Self-supervised learning makes its labels from the data itself, such as the next word; language models learn this way."
+    nl: "Self-supervised learning maakt zijn labels uit de data zelf, zoals het volgende woord; language models leren zo."
+  - en: "Reinforcement learning has no examples with answers: the model tries actions and learns from the rewards it gets."
+    nl: "Reinforcement learning heeft geen voorbeelden met antwoorden: het model probeert acties en leert van de rewards die het krijgt."
+can_now:
+  - en: "recognize a task with labels from people as supervised learning"
+    nl: "een taak met labels van mensen herkennen als supervised learning"
+    by: spam-kind
+  - en: "say for a task which of the four kinds of learning it is"
+    nl: "bij een taak zeggen welke van de vier soorten leren het is"
+    by: kinds
+  - en: "make training pairs from text, each word with the next word as its label"
+    nl: "trainingsparen maken uit tekst, elk woord met het volgende woord als label"
+    by: word-pairs

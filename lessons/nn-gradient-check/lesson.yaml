@@ -1,0 +1,28 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: nn-gradient-check
+minutes: 25
+title:
+  en: "Gradient checking"
+  nl: "Gradient checking"
+goal:
+  en: "check a backward pass you wrote yourself against the slope you measure by nudging each parameter up and down."
+  nl: "een backward pass die je zelf schreef controleren met de helling die je meet door elke parameter omhoog en omlaag te duwen."
+summary:
+  - en: "The central difference $(\\mathcal{L}(w_j + h) - \\mathcal{L}(w_j - h)) / 2h$ estimates the slope of each parameter; its error shrinks with $h^2$, and $h = 10^{-5}$ is a good choice."
+    nl: "De centrale differentie $(\\mathcal{L}(w_j + h) - \\mathcal{L}(w_j - h)) / 2h$ schat de helling van elke parameter; de fout ervan krimpt met $h^2$, en $h = 10^{-5}$ is een goede keuze."
+  - en: "The relative error $|a - n| / \\max(|a|, |n|)$ compares backprop with the estimate whatever the size of the gradient: below about $10^{-7}$ they agree, above about $10^{-3}$ there is a bug."
+    nl: "De relatieve fout $|a - n| / \\max(|a|, |n|)$ vergelijkt backprop met de schatting, hoe groot de gradient ook is: onder ongeveer $10^{-7}$ zijn ze het eens, boven ongeveer $10^{-3}$ zit er een bug."
+  - en: "A wrong backward pass rarely crashes; a gradient check, once, on a small network, catches it. A ReLU input near 0 can give a false alarm."
+    nl: "Een verkeerde backward pass crasht zelden; gradient checking, één keer, op een klein netwerk, vangt hem. Een ReLU-input dicht bij 0 kan vals alarm geven."
+can_now:
+  - en: "read off the relative errors which gradient is wrong"
+    nl: "aan de relatieve fouten aflezen welke gradient niet klopt"
+    by: which-bug
+  - en: "estimate a gradient with central differences"
+    nl: "een gradient schatten met centrale differenties"
+    by: numerical-grad
+  - en: "compare a gradient from backprop with its estimate"
+    nl: "een gradient uit backprop vergelijken met zijn schatting"
+    by: relative-error

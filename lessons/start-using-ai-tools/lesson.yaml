@@ -1,0 +1,28 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: start-using-ai-tools
+minutes: 14
+title:
+  en: "Using AI tools with your eyes open"
+  nl: "AI-tools gebruiken met open ogen"
+goal:
+  en: "say what an AI assistant is and what it is good at, and decide which parts of its answer you check, and how."
+  nl: "zeggen wat een AI-assistent is en waar hij goed in is, en bepalen welke delen van zijn antwoord je controleert, en hoe."
+summary:
+  - en: "The language model inside an AI assistant writes the answer word by word, each time picking a likely next word. Likely is not the same as true."
+    nl: "Het language model in een AI-assistent schrijft het antwoord woord voor woord, en kiest steeds een waarschijnlijk volgend woord. Waarschijnlijk is niet hetzelfde als waar."
+  - en: "It is good at explaining, examples, drafts and ideas. With rare facts, numbers, dates, sources and anything where a mistake costs a lot, you watch out: it often sounds just as sure when it is wrong."
+    nl: "Hij is goed in uitleggen, voorbeelden, eerste versies en ideeën. Bij zeldzame feiten, getallen, datums, bronnen en alles waarbij een fout veel kost, let je op: ook als hij ernaast zit, klinkt hij vaak even zeker."
+  - en: "Check what matters: decide what you will do with the answer, pick out the facts that depends on, and check those at a source you trust."
+    nl: "Controleer wat ertoe doet: bedenk wat je met het antwoord gaat doen, haal de feiten eruit waar dat van afhangt, en controleer die bij een bron die je vertrouwt."
+can_now:
+  - en: "pick out the parts of an answer that you need to check"
+    nl: "de delen van een antwoord aanwijzen die je moet controleren"
+    by: what-to-check
+  - en: "check a claim at a source you trust"
+    nl: "een bewering controleren bij een bron die je vertrouwt"
+    by: how-check
+  - en: "explain why an assistant can be wrong and still sound sure"
+    nl: "uitleggen waarom een assistent ernaast kan zitten en toch zeker klinkt"
+    by: why-sure

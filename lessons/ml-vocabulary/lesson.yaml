@@ -1,0 +1,28 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: ml-vocabulary
+minutes: 15
+title:
+  en: "Examples, features and labels"
+  nl: "Voorbeelden, features en labels"
+goal:
+  en: "describe a machine learning task with examples, features and a label, and tell the examples for training from the ones for inference."
+  nl: "een taak in machine learning beschrijven met voorbeelden, features en een label, en de voorbeelden voor training onderscheiden van die voor inference."
+summary:
+  - en: "An example is one row of the table; its features are what you know beforehand, and its label is the right answer you want to predict."
+    nl: "Een voorbeeld is één rij van de tabel; de features zijn wat je van tevoren weet, en het label is het goede antwoord dat je wilt voorspellen."
+  - en: "A feature must be known at the moment you predict: something that is only known afterwards cannot be a feature."
+    nl: "Een feature moet bekend zijn op het moment dat je voorspelt: iets wat pas achteraf bekend is, kan geen feature zijn."
+  - en: "In training, a model learns from examples with a label; in inference, it predicts the label of new examples, such as the rows where `df[label].isna()`."
+    nl: "Bij training leert een model van voorbeelden met een label; bij inference voorspelt het model het label van nieuwe voorbeelden, zoals de rijen waar `df[label].isna()`."
+can_now:
+  - en: "say what the label of a task is"
+    nl: "zeggen wat het label van een taak is"
+    by: spam-label
+  - en: "choose the features that are known at the moment you predict"
+    nl: "de features kiezen die bekend zijn op het moment dat je voorspelt"
+    by: features
+  - en: "find the examples that a trained model has to predict"
+    nl: "de voorbeelden vinden die een getraind model moet voorspellen"
+    by: to-predict

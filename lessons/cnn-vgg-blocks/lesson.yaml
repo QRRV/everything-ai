@@ -1,0 +1,31 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: cnn-vgg-blocks
+minutes: 30
+title:
+  en: "VGG: deeper with small filters"
+  nl: "VGG: dieper met kleine filters"
+goal:
+  en: "count how many weights a stack of small convolutions saves against one large one, build a VGG block in PyTorch, and measure what depth does for your CNN."
+  nl: "tellen hoeveel weights een stapel kleine convoluties bespaart tegenover één grote, een VGG block bouwen in PyTorch, en meten wat diepte doet voor je CNN."
+summary:
+  - en: "n convolutions of 3 by 3 see a piece 2n + 1 wide, as one convolution of 2n + 1 would, with fewer weights: three of 3 by 3 have 27C², one of 7 by 7 has 49C²; and a ReLU after each."
+    nl: "n convoluties van 3 bij 3 zien een stuk van 2n + 1 breed, zoals één convolutie van 2n + 1 zou doen, met minder weights: drie van 3 bij 3 hebben er 27C², één van 7 bij 7 heeft er 49C²; en na elk een ReLU."
+  - en: "A VGG block: n convolutions of 3 by 3 with padding 1 and a ReLU each, then max pooling of 2 by 2; in an nn.ModuleList, so that PyTorch sees them."
+    nl: "Een VGG block: n convoluties van 3 bij 3 met padding 1 en elk een ReLU, dan max pooling van 2 bij 2; in een nn.ModuleList, zodat PyTorch ze ziet."
+  - en: "On 6,000 images of Fashion-MNIST, depth did not help: 1 or 2 convolutions per block did best, and with 8 per block no run learned, until He initialization."
+    nl: "Op 6.000 afbeeldingen van Fashion-MNIST hielp diepte niet: 1 of 2 convoluties per blok deden het best, en met 8 per blok leerde geen enkele run, tot He initialization."
+can_now:
+  - en: "work out what goes into the output head after a number of blocks"
+    nl: "uitrekenen wat er na een aantal blokken de output head in gaat"
+    by: vgg-shape
+  - en: "count the parameters of a stack of small convolutions against one large one"
+    nl: "de parameters tellen van een stapel kleine convoluties tegen één grote"
+    by: stack-params
+  - en: "build a VGG block in PyTorch"
+    nl: "een VGG block bouwen in PyTorch"
+    by: vgg-block
+further_reading:
+  - en: "Karen Simonyan and Andrew Zisserman (2015), *Very Deep Convolutional Networks for Large-Scale Image Recognition*, ICLR 2015, arXiv:1409.1556, sections 2 and 3"
+    nl: "Karen Simonyan en Andrew Zisserman (2015), *Very Deep Convolutional Networks for Large-Scale Image Recognition*, ICLR 2015, arXiv:1409.1556, paragraaf 2 en 3"

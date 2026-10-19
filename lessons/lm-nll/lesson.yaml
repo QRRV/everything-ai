@@ -1,0 +1,28 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: lm-nll
+minutes: 25
+title:
+  en: "How good is a language model?"
+  nl: "Hoe goed is een language model?"
+goal:
+  en: "measure how well a language model predicts real text with the average negative log-likelihood, and compute it for a text."
+  nl: "meten hoe goed een language model echte tekst voorspelt met de gemiddelde negative log-likelihood, en die voor een tekst uitrekenen."
+summary:
+  - en: "The likelihood of a text is the probabilities the model gave to every next character that really came, multiplied. For a long text that is too small to store, so you add up their logs instead."
+    nl: "De likelihood van een tekst is het product van de kansen die het model gaf aan elk volgend teken dat echt kwam. Voor een lange tekst is dat te klein om te bewaren, dus tel je in plaats daarvan hun logs op."
+  - en: "The average negative log-likelihood is the mean surprise per character: lower is better. A model that knows nothing gets log 65, about 4.17; the bigram model of the plays gets about 2.45 on the plays."
+    nl: "De gemiddelde negative log-likelihood is de gemiddelde verrassing per teken: lager is beter. Een model dat niets weet, haalt log 65, ongeveer 4,17; het bigram-model van de toneelstukken haalt ongeveer 2,45 op de toneelstukken."
+  - en: "One pair with probability 0 makes the NLL of a whole text infinite."
+    nl: "Eén paar met kans 0 maakt de NLL van een hele tekst oneindig."
+can_now:
+  - en: "work out the average NLL of a short text by hand"
+    nl: "de gemiddelde NLL van een korte tekst met de hand uitrekenen"
+    by: by-hand
+  - en: "compute the average NLL of a text under a table of bigram probabilities"
+    nl: "de gemiddelde NLL van een tekst uitrekenen met een tabel van bigram-kansen"
+    by: nll
+  - en: "say which text surprises a model most, and why"
+    nl: "zeggen welke tekst een model het meest verrast, en waarom"
+    by: most-surprising

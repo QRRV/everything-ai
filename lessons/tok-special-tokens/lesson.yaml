@@ -1,0 +1,28 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: tok-special-tokens
+minutes: 25
+title:
+  en: "Pre-tokenization and special tokens"
+  nl: "Pre-tokenization en special tokens"
+goal:
+  en: "give your tokenizer an end-of-text token with an id of its own, and encode and decode texts with it, so documents can be put after each other for training."
+  nl: "je tokenizer een end-of-text-token geven met een eigen id, en er teksten mee encoderen en decoderen, zodat documenten voor het trainen achter elkaar kunnen."
+summary:
+  - en: "A special token has an id of its own that normal text never turns into; end-of-text gets the first free id, after the 256 bytes and the merge rules, 50,256 in GPT-2."
+    nl: "Een special token heeft een eigen id dat gewone tekst nooit wordt; end-of-text krijgt het eerste vrije id, na de 256 bytes en de merge rules, 50.256 in GPT-2."
+  - en: "To encode, the tokenizer cuts a text at every end-of-text, encodes every part with pre-tokenization and the merge rules, and puts the id of end-of-text between the parts; decoding does the reverse."
+    nl: "Om te encoderen knipt de tokenizer een tekst bij elke end-of-text, encodeert elk deel met pre-tokenization en de merge rules, en zet het id van end-of-text tussen de delen; decoderen doet het omgekeerde."
+  - en: "End-of-text goes between documents in training data, so the model learns where a text ends; as normal text, its 13 characters would be 12 tokens that mean nothing of the kind."
+    nl: "End-of-text staat in de training data tussen documenten, zodat het model leert waar een tekst eindigt; als gewone tekst zouden zijn 13 tekens 12 tokens zijn die niets van dien aard betekenen."
+can_now:
+  - en: "explain why a special token needs an id that nothing else has"
+    nl: "uitleggen waarom een special token een id nodig heeft dat niets anders heeft"
+    by: end-id
+  - en: "encode a text with end-of-text into ids"
+    nl: "een tekst met end-of-text encoderen tot ids"
+    by: encode
+  - en: "decode ids with end-of-text back into text"
+    nl: "ids met end-of-text weer decoderen tot tekst"
+    by: decode

@@ -1,0 +1,28 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: prob-distributions
+minutes: 25
+title:
+  en: "Common distributions"
+  nl: "Veelgebruikte verdelingen"
+goal:
+  en: "choose between the Bernoulli, categorical and normal distribution for a kind of outcome, estimate their parameters from data, write the normal density, and check data against the bell curve."
+  nl: "kiezen tussen de Bernoulli-, categorische en normale verdeling voor een soort uitkomst, hun parameters uit data schatten, de normale dichtheid schrijven, en data controleren met de klokvorm."
+summary:
+  - en: "Bernoulli for one yes-or-no outcome, with probability p; categorical for one of K classes, as a classifier's output; normal, 𝒩(μ, σ²), for measurements around a mean."
+    nl: "Bernoulli voor één uitkomst ja of nee, met kans p; categorisch voor één uit K klassen, zoals de output van een classifier; normaal, 𝒩(μ, σ²), voor metingen rond een gemiddelde."
+  - en: "The normal density is $p(x) = \\frac{1}{\\sigma\\sqrt{2\\pi}} e^{-\\frac{(x-\\mu)^2}{2\\sigma^2}}$. A density is not a probability: the area under it over a range is."
+    nl: "De normale dichtheid is $p(x) = \\frac{1}{\\sigma\\sqrt{2\\pi}} e^{-\\frac{(x-\\mu)^2}{2\\sigma^2}}$. Een dichtheid is geen kans: de oppervlakte eronder over een bereik wel."
+  - en: "About 68% of a normal distribution lies within one standard deviation of the mean, and about 95% within two; a histogram shows whether data fits."
+    nl: "Ongeveer 68% van een normale verdeling ligt binnen één standaardafwijking van het gemiddelde, en ongeveer 95% binnen twee; een histogram laat zien of data past."
+can_now:
+  - en: "say which distribution describes a classifier's output"
+    nl: "zeggen welke verdeling de output van een classifier beschrijft"
+    by: which
+  - en: "write the density of the normal distribution as a function"
+    nl: "de dichtheid van de normale verdeling als functie schrijven"
+    by: density
+  - en: "check how much of the data lies within k standard deviations of the mean"
+    nl: "nagaan hoeveel van de data binnen k standaardafwijkingen van het gemiddelde ligt"
+    by: share-within

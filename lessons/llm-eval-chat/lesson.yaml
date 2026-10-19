@@ -1,0 +1,34 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: llm-eval-chat
+minutes: 40
+title:
+  en: "Did post-training help?"
+  nl: "Heeft post-training geholpen?"
+goal:
+  en: "test instruction following with checks a program can verify, of more than one kind, on held-out prompts, and compare a model before and after SFT and DPO."
+  nl: "instructies volgen testen met checks die een programma kan controleren, van meer dan één soort, op held-out prompts, en een model voor en na SFT en DPO vergelijken."
+summary:
+  - en: "A verifiable instruction is one a short program can check: use a word, leave a word out, write at most so many sentences. The check is the same for every answer and every model, so a fair comparison needs no judge."
+    nl: "Een verifieerbare instructie is er een die een kort programma kan controleren: gebruik een woord, laat een woord weg, schrijf hooguit zoveel zinnen. De check is voor elk antwoord en elk model dezelfde, dus een eerlijke vergelijking heeft geen beoordelaar nodig."
+  - en: "Prompts with a template are held out by the part that varies: the clean subset is the prompts whose words, in any order, were never a training instruction."
+    nl: "Prompts met een sjabloon zijn held out door het deel dat varieert: de schone subset zijn de prompts waarvan de woorden, in welke volgorde ook, nooit een trainingsinstructie waren."
+  - en: "SFT and DPO raised the kind of instruction they trained on, and DPO made *without the word* worse; no model read *at most N sentences*. Post-training taught one kind of instruction and its checker, not to follow instructions."
+    nl: "SFT en DPO verhoogden de soort instructie waarop ze trainden, en DPO maakte *zonder het woord* slechter; geen model las *hooguit N zinnen*. Post-training leerde één soort instructie en zijn checker, niet instructies volgen."
+can_now:
+  - en: "check that an answer leaves a word out"
+    nl: "controleren dat een antwoord een woord weglaat"
+    by: avoids
+  - en: "count the sentences of an answer by a fixed rule"
+    nl: "de zinnen van een antwoord tellen met een vaste regel"
+    by: sentences
+  - en: "make the clean subset of prompts with a template"
+    nl: "de schone subset maken van prompts met een sjabloon"
+    by: held-out
+  - en: "say why a score on the instructions a model trained on does not show that it follows instructions"
+    nl: "zeggen waarom een score op de instructies waarop een model trainde niet laat zien dat het instructies volgt"
+    by: why-not
+further_reading:
+  - en: "Jeffrey Zhou and others, *Instruction-Following Evaluation for Large Language Models* (2023): IFEval, 25 kinds of verifiable instructions in 541 prompts"
+    nl: "Jeffrey Zhou en anderen, *Instruction-Following Evaluation for Large Language Models* (2023): IFEval, 25 soorten verifieerbare instructies in 541 prompts"

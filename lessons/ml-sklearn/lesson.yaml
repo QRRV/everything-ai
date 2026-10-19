@@ -1,0 +1,28 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: ml-sklearn
+minutes: 15
+title:
+  en: "The same model with scikit-learn"
+  nl: "Hetzelfde model met scikit-learn"
+goal:
+  en: "train and use a model with scikit-learn's two steps, fit and predict, and swap it for another model."
+  nl: "een model trainen en gebruiken met de twee stappen van scikit-learn, fit en predict, en het wisselen voor een ander model."
+summary:
+  - en: "Every model in scikit-learn works with the same steps: make it, `model.fit(X, y)` to learn, and `model.predict(X_new)` to predict."
+    nl: "Elk model in scikit-learn werkt met dezelfde stappen: maak het, `model.fit(X, y)` om te leren, en `model.predict(X_new)` om te voorspellen."
+  - en: "`X` is a table with one column per feature, also for a single feature: `df[[\"area\"]]`."
+    nl: "`X` is een tabel met één kolom per feature, ook bij één feature: `df[[\"area\"]]`."
+  - en: "A linear model keeps its weights in `coef_` and its bias term in `intercept_`. A model that always predicts the mean shows whether the features help."
+    nl: "Een lineair model bewaart zijn weights in `coef_` en zijn bias term in `intercept_`. Een model dat altijd het gemiddelde voorspelt, laat zien of de features helpen."
+can_now:
+  - en: "say what predict gives"
+    nl: "zeggen wat predict geeft"
+    by: predict-shape
+  - en: "train a LinearRegression on a table"
+    nl: "een LinearRegression op een tabel trainen"
+    by: fit-students
+  - en: "swap a model for another one with the same two steps"
+    nl: "een model wisselen voor een ander met dezelfde twee stappen"
+    by: mean-model

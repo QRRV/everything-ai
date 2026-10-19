@@ -1,0 +1,28 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: math-log-scales
+minutes: 15
+title:
+  en: "Log scales and power laws"
+  nl: "Logaritmische schalen en machtswetten"
+goal:
+  en: "draw and read a chart with a log scale, and find the exponent of a power law from a log-log plot."
+  nl: "een grafiek met een logaritmische schaal tekenen en lezen, en de exponent van een machtswet vinden uit een log-log plot."
+summary:
+  - en: 'On a log scale, equal steps are equal factors: 1, 10, 100, 1000. `plt.yscale("log")` and `plt.xscale("log")` set it, `plt.loglog(x, y)` sets both.'
+    nl: 'Op een logaritmische schaal zijn gelijke stappen gelijke factoren: 1, 10, 100, 1000. `plt.yscale("log")` en `plt.xscale("log")` zetten hem aan, `plt.loglog(x, y)` allebei.'
+  - en: "Growth by the same factor per step is a straight line with only the y-axis on a log scale."
+    nl: "Groei met dezelfde factor per stap is een rechte lijn met alleen de y-as op een logaritmische schaal."
+  - en: 'A power law $y = a \cdot x^k$ is a straight line on a log-log plot, and its slope is the exponent $k$. Words in a text follow one: $k \approx -1$.'
+    nl: 'Een machtswet $y = a \cdot x^k$ is een rechte lijn op een log-log plot, en de helling is de exponent $k$. Woorden in een tekst volgen er een: $k \approx -1$.'
+can_now:
+  - en: "read a log scale in factors"
+    nl: "een logaritmische schaal in factoren lezen"
+    by: halfway
+  - en: "draw a log-log plot"
+    nl: "een log-log plot tekenen"
+    by: zipf-plot
+  - en: "find the exponent of a power law from two points"
+    nl: "de exponent van een machtswet vinden uit twee punten"
+    by: zipf-exponent

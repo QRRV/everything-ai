@@ -1,0 +1,31 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: lm-mlp-context
+minutes: 25
+title:
+  en: "A neural language model that looks further back"
+  nl: "Een neural language model dat verder terugkijkt"
+goal:
+  en: "build Bengio's neural language model: the embeddings of the last k tokens side by side, a hidden layer and an output head, and see what a longer context window brings."
+  nl: "het neural language model van Bengio bouwen: de embeddings van de laatste k tokens naast elkaar, een hidden layer en een output head, en zien wat een langer context window oplevert."
+summary:
+  - en: "The model looks up the embeddings of the k tokens before a place, glues them side by side into one vector of k · d numbers, and gives them to an MLP whose output head has one logit for every token of the vocabulary."
+    nl: "Het model zoekt de embeddings op van de k tokens vóór een plek, plakt ze naast elkaar tot één vector van k · d getallen, en geeft die aan een MLP waarvan de output head één logit heeft voor elk token van de vocabulary."
+  - en: "On Tiny Shakespeare, after 1,000 steps, 3 characters of context bring the loss on unseen text from about 2.5 to 2.2; 8 characters bring nothing more with this much training: the MLP has to learn every place of the window on its own."
+    nl: "Op Tiny Shakespeare brengen 3 tekens context na 1.000 stappen de loss op onbekende tekst van ongeveer 2,5 naar 2,2; 8 tekens brengen met zoveel training niets meer: het MLP moet elke plek van het venster los leren."
+  - en: "The window is fixed: the model cannot see anything before it, however much text there is."
+    nl: "Het venster ligt vast: het model kan niets zien van wat ervoor komt, hoeveel tekst er ook is."
+can_now:
+  - en: "say which tokens a model with a context window of k can use"
+    nl: "zeggen welke tokens een model met een context window van k kan gebruiken"
+    by: window
+  - en: "make the training examples of a context window"
+    nl: "de trainingsvoorbeelden van een context window maken"
+    by: contexts
+  - en: "build a neural language model with an embedding layer, a hidden layer and an output head"
+    nl: "een neural language model bouwen met een embedding layer, een hidden layer en een output head"
+    by: mlp-lm
+further_reading:
+  - en: "Yoshua Bengio, Réjean Ducharme, Pascal Vincent and Christian Jauvin (2003), *A Neural Probabilistic Language Model*, Journal of Machine Learning Research 3, 1137–1155"
+    nl: "Yoshua Bengio, Réjean Ducharme, Pascal Vincent en Christian Jauvin (2003), *A Neural Probabilistic Language Model*, Journal of Machine Learning Research 3, 1137–1155"

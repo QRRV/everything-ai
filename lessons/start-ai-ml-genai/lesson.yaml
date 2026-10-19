@@ -1,0 +1,28 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: start-ai-ml-genai
+minutes: 12
+title:
+  en: "AI, machine learning, deep learning and generative AI"
+  nl: "AI, machine learning, deep learning en generatieve AI"
+goal:
+  en: "tell AI, machine learning, deep learning and generative AI apart, and place a system in the smallest circle it fits in."
+  nl: "AI, machine learning, deep learning en generatieve AI uit elkaar houden, en een systeem in de kleinste cirkel zetten waar het in past."
+summary:
+  - en: "The four words are circles inside each other: generative AI lies inside deep learning, which lies inside machine learning, which lies inside AI."
+    nl: "De vier woorden zijn cirkels in elkaar: generatieve AI ligt binnen deep learning, dat binnen machine learning ligt, dat weer binnen AI ligt."
+  - en: "Machine learning is the part of AI where the computer finds the rules in examples, instead of people writing them."
+    nl: "Machine learning is het deel van AI waarin de computer de regels in voorbeelden vindt, in plaats van dat mensen ze opschrijven."
+  - en: "Three questions place a system: who made the rules, is it a neural network with many layers, and does it make something new?"
+    nl: "Drie vragen plaatsen een systeem: wie maakte de regels, is het een neural network met veel layers, en maakt het iets nieuws?"
+can_now:
+  - en: "place an AI system in the smallest circle it fits in"
+    nl: "een AI-systeem in de kleinste cirkel zetten waar het in past"
+    by: circles
+  - en: "say how the four circles lie inside each other"
+    nl: "zeggen hoe de vier cirkels in elkaar liggen"
+    by: inside
+  - en: "ask the questions that tell you what kind of AI a system is"
+    nl: "de vragen stellen waarmee je ontdekt wat voor AI een systeem is"
+    by: ask

@@ -1,0 +1,28 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: ml-classification
+minutes: 15
+title:
+  en: "Classification: predicting a class"
+  nl: "Classificatie: een klasse voorspellen"
+goal:
+  en: "tell regression from classification by the label, and turn a number into classes."
+  nl: "regressie en classificatie uit elkaar houden aan de hand van het label, en een getal omzetten in klassen."
+summary:
+  - en: "In regression the label is a number, such as a price: values in between make sense, and close is almost right."
+    nl: "Bij regressie is het label een getal, zoals een prijs: waarden ertussen hebben betekenis, en dichtbij is bijna goed."
+  - en: "In classification the label is one of a fixed set of answers, the classes: a prediction is right or wrong."
+    nl: "Bij classificatie is het label een van een vaste set antwoorden, de klassen: een voorspelling is goed of fout."
+  - en: "Classes written as numbers stay classes: two cats (0) and two birds (2) have a mean of 1, but there is no dog. To describe classes, count them with `.value_counts()`."
+    nl: "Klassen die als getallen geschreven zijn, blijven klassen: twee katten (0) en twee vogels (2) hebben gemiddeld 1, maar er is geen hond. Klassen beschrijf je door ze te tellen met `.value_counts()`."
+can_now:
+  - en: "tell whether a task is regression or classification"
+    nl: "zeggen of een taak regressie of classificatie is"
+    by: which-regression
+  - en: "explain why classes written as numbers are still classes"
+    nl: "uitleggen waarom klassen die als getallen geschreven zijn, toch klassen zijn"
+    by: class-numbers
+  - en: "turn a number label into classes with a threshold"
+    nl: "een getal als label met een grens omzetten in klassen"
+    by: delay-classes

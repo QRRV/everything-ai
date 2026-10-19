@@ -1,0 +1,28 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: math-norms-cosine
+minutes: 15
+title:
+  en: "Length, distance and cosine similarity"
+  nl: "Lengte, afstand en cosine similarity"
+goal:
+  en: "work out how long a vector is, how far apart two vectors are, and whether they point the same way."
+  nl: "uitrekenen hoe lang een vector is, hoe ver twee vectoren uit elkaar liggen, en of ze dezelfde kant op wijzen."
+summary:
+  - en: 'The norm $\lVert \mathbf{x} \rVert$ is the length of a vector: the square root of the sum of its squares. In code `np.linalg.norm(x)`.'
+    nl: 'De norm $\lVert \mathbf{x} \rVert$ is de lengte van een vector: de wortel uit de som van zijn kwadraten. In code `np.linalg.norm(x)`.'
+  - en: 'The distance between two vectors is the norm of their difference, $\lVert \mathbf{a} - \mathbf{b} \rVert$.'
+    nl: 'De afstand tussen twee vectoren is de norm van hun verschil, $\lVert \mathbf{a} - \mathbf{b} \rVert$.'
+  - en: "The cosine similarity is the dot product divided by the two norms: 1 for the same direction, 0 at right angles, −1 for opposite directions. Length does not count."
+    nl: "De cosine similarity is het inproduct gedeeld door de twee normen: 1 bij dezelfde richting, 0 als ze haaks staan, −1 bij tegengestelde richtingen. De lengte telt niet mee."
+can_now:
+  - en: "work out the norm of a vector"
+    nl: "de norm van een vector uitrekenen"
+    by: norm
+  - en: "work out the cosine similarity of two vectors"
+    nl: "de cosine similarity van twee vectoren uitrekenen"
+    by: cosine
+  - en: "write the distance between two vectors as a function"
+    nl: "de afstand tussen twee vectoren als functie schrijven"
+    by: distance-loop

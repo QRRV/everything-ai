@@ -1,0 +1,28 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: ml-logistic-regression
+minutes: 15
+title:
+  en: "Logistic regression and the decision boundary"
+  nl: "Logistische regressie en de decision boundary"
+goal:
+  en: "let logistic regression turn the features of an example into a probability of a class, and find where its decision boundary lies."
+  nl: "logistische regressie de features van een voorbeeld laten omzetten in een kans op een klasse, en vinden waar de decision boundary ligt."
+summary:
+  - en: 'Logistic regression: the logit is the dot product of the weights and the features, plus the bias term, and the sigmoid turns it into a probability: $\hat{y} = \sigma(\mathbf{w} \cdot \mathbf{x} + b)$.'
+    nl: 'Logistische regressie: de logit is het inproduct van de weights en de features, plus de bias term, en de sigmoid maakt er een kans van: $\hat{y} = \sigma(\mathbf{w} \cdot \mathbf{x} + b)$.'
+  - en: "The decision boundary lies where the logit is 0 and the probability 0.5; with two features it is a straight line. The weights tilt it, the bias term moves it."
+    nl: "De decision boundary ligt waar de logit 0 is en de kans 0,5; met twee features is het een rechte lijn. De weights kantelen hem, de bias term verschuift hem."
+  - en: "Despite its name, logistic regression does classification."
+    nl: "Ondanks de naam doet logistische regressie classificatie."
+can_now:
+  - en: "tell whether an example lies on the decision boundary"
+    nl: "zeggen of een voorbeeld op de decision boundary ligt"
+    by: on-boundary
+  - en: "work out the probability logistic regression gives an example"
+    nl: "uitrekenen welke kans logistische regressie een voorbeeld geeft"
+    by: probability
+  - en: "find a point on the decision boundary"
+    nl: "een punt op de decision boundary vinden"
+    by: hours-needed

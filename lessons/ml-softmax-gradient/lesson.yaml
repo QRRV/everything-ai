@@ -1,0 +1,28 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: ml-softmax-gradient
+minutes: 20
+title:
+  en: "The gradient of softmax with cross-entropy"
+  nl: "De gradient van softmax met cross-entropy"
+goal:
+  en: "derive with the chain rule that the slopes of the cross-entropy for the logits are the probabilities minus the one-hot label, work them out, and check one by changing its logit by a tiny step."
+  nl: "met de kettingregel afleiden dat de hellingen van de cross-entropy voor de logits de kansen min het one-hot-label zijn, ze uitrekenen, en er één controleren door zijn logit een heel klein stapje te veranderen."
+summary:
+  - en: "With softmax, the cross-entropy of one example is $-z_c + \\log S$, where $S$ is the sum softmax divides by. Its slope for the logit $z_k$ is $\\hat{y}_k - y_k$: the probabilities minus the one-hot label."
+    nl: "Met softmax is de cross-entropy van één voorbeeld $-z_c + \\log S$, met $S$ de som waardoor softmax deelt. Zijn helling voor de logit $z_k$ is $\\hat{y}_k - y_k$: de kansen min het one-hot-label."
+  - en: "The right class gets a negative slope, so gradient descent raises its logit; every other class gets its probability, so its logit goes down. The slopes add up to 0."
+    nl: "De goede klasse krijgt een negatieve helling, dus gradient descent verhoogt zijn logit; elke andere klasse krijgt zijn kans, dus zijn logit gaat omlaag. Samen zijn de hellingen 0."
+  - en: "In code: `softmax(z) - np.eye(len(z))[label]`. A tiny step `h` on one logit measures the same slope."
+    nl: "In code: `softmax(z) - np.eye(len(z))[label]`. Een heel klein stapje `h` aan één logit meet dezelfde helling."
+can_now:
+  - en: "say which way gradient descent moves each logit"
+    nl: "zeggen welke kant gradient descent elke logit op schuift"
+    by: one-step
+  - en: "work out the gradient of softmax with cross-entropy for the logits"
+    nl: "de gradient van softmax met cross-entropy voor de logits uitrekenen"
+    by: logit-gradient
+  - en: "check one slope by changing its logit by a tiny step"
+    nl: "één helling controleren door zijn logit een heel klein stapje te veranderen"
+    by: nudge

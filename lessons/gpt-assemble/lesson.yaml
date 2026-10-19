@@ -1,0 +1,28 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: gpt-assemble
+minutes: 30
+title:
+  en: "Assemble your GPT"
+  nl: "Je GPT in elkaar zetten"
+goal:
+  en: "assemble a GPT from embeddings of tokens and places, a stack of your transformer blocks, layer normalization and an output head, and cut a text into its training examples."
+  nl: "een GPT in elkaar zetten uit embeddings van tokens en plekken, een stapel van je transformer blocks, layer normalization en een output head, en een tekst in zijn trainingsvoorbeelden knippen."
+summary:
+  - en: "A GPT is a decoder-only transformer: token embeddings plus place embeddings, a stack of causal transformer blocks, a last layer normalization and an output head from d to the size of the vocabulary."
+    nl: "Een GPT is een decoder-only transformer: token-embeddings plus plek-embeddings, een stapel causale transformer blocks, een laatste layer normalization en een output head van d naar de grootte van de vocabulary."
+  - en: "Its logits have shape (B, n, vocab): a score for every possible next token at every place, so one window of block tokens gives block training examples at once, with the same window one further as targets."
+    nl: "Zijn logits hebben shape (B, n, vocab): een score voor elk mogelijk volgend token op elke plek, dus één venster van block tokens geeft block trainingsvoorbeelden tegelijk, met hetzelfde venster één verder als targets."
+  - en: "Before any training, the loss is close to that of guessing evenly: about ln 65 = 4.17 for the 65 characters of Tiny Shakespeare."
+    nl: "Vóór het trainen ligt de loss dicht bij die van gelijkmatig gokken: ongeveer ln 65 = 4,17 voor de 65 tekens van Tiny Shakespeare."
+can_now:
+  - en: "give the shape of the logits of a GPT"
+    nl: "de shape van de logits van een GPT geven"
+    by: logit-shape
+  - en: "assemble a GPT as a PyTorch module from your transformer blocks"
+    nl: "een GPT als PyTorch-module in elkaar zetten uit je transformer blocks"
+    by: gpt
+  - en: "cut a list of token ids into the training examples of a GPT"
+    nl: "een lijst token-ids in de trainingsvoorbeelden van een GPT knippen"
+    by: gpt-examples

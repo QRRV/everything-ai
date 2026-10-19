@@ -1,0 +1,38 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: llm-quality-filter
+minutes: 40
+title:
+  en: "Cleaning text: quality filters"
+  nl: "Tekst opschonen: quality filters"
+goal:
+  en: "clean raw web pages with the rules of C4 and Gopher, and score what is left with a small classifier."
+  nl: "ruwe webpagina's opschonen met de regels van C4 en Gopher, en wat overblijft een score geven met een kleine classifier."
+summary:
+  - en: "Raw web pages are mostly menus, buttons, notices and lists. C4 keeps only the lines that end a sentence and have at least 5 words: on 8,690 raw pages, a third of the text."
+    nl: "Ruwe webpagina's zijn vooral menu's, knoppen, meldingen en lijsten. C4 houdt alleen de regels die een zin afsluiten en minstens 5 woorden hebben: op 8.690 ruwe pagina's een derde van de tekst."
+  - en: "Page rules, such as those of Gopher, throw out pages that are too short or too long, have odd words, no stop words or too few letters: cheap, readable and blunt."
+    nl: "Paginafilters, zoals die van Gopher, gooien pagina's weg die te kort of te lang zijn, vreemde woorden hebben, geen stop words of te weinig letters: goedkoop, leesbaar en grof."
+  - en: "A classifier on a few features per page learns what its good examples look like, and scores the rest: it catches spam in long lines, and it also rejects good text in another style."
+    nl: "Een classifier op een paar features per pagina leert hoe zijn goede voorbeelden eruitzien, en geeft de rest een score: hij vangt spam in lange regels, en wijst ook goede tekst in een andere stijl af."
+can_now:
+  - en: "clean a web page line by line, with the rules of C4"
+    nl: "een webpagina regel voor regel opschonen, met de filters van C4"
+    by: clean-lines
+  - en: "throw out pages with the rules of Gopher"
+    nl: "pagina's weggooien met de regels van Gopher"
+    by: keep-page
+  - en: "describe a page with features for a quality classifier"
+    nl: "een pagina beschrijven met features voor een quality classifier"
+    by: features
+  - en: "say what a quality classifier learns, and what it gets wrong"
+    nl: "zeggen wat een quality classifier leert, en wat hij verkeerd doet"
+    by: bias
+further_reading:
+  - en: "Colin Raffel and others (2020), *Exploring the Limits of Transfer Learning with a Unified Text-to-Text Transformer*, JMLR, section 2.2 on C4"
+    nl: "Colin Raffel en anderen (2020), *Exploring the Limits of Transfer Learning with a Unified Text-to-Text Transformer*, JMLR, paragraaf 2.2 over C4"
+  - en: "Jack Rae and others (2021), *Scaling Language Models: Methods, Analysis & Insights from Training Gopher*, arXiv:2112.11446, appendix A on its filters"
+    nl: "Jack Rae en anderen (2021), *Scaling Language Models: Methods, Analysis & Insights from Training Gopher*, arXiv:2112.11446, bijlage A over zijn filters"
+  - en: "Jesse Dodge and others (2021), *Documenting Large Webtext Corpora: A Case Study on the Colossal Clean Crawled Corpus*, EMNLP 2021"
+    nl: "Jesse Dodge en anderen (2021), *Documenting Large Webtext Corpora: A Case Study on the Colossal Clean Crawled Corpus*, EMNLP 2021"

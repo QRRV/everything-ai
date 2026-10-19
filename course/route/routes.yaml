@@ -1,0 +1,306 @@
+# Routes are ordered lists of lesson ids. A lesson belongs to one branch (tak) but can appear in many routes.
+# "extra: true" marks an optional (verdieping) step in this route; every other step is core (kern) for this route.
+# Format: FORMAT.md.
+
+routes:
+
+- id: hoofdroute
+  title: "From zero to your own LLM and a reproduced paper"
+  title_nl: "Van nul tot je eigen LLM en een nagebouwde paper"
+  status: first-to-build
+  milestones:
+    - after: res-research-cycle
+      en: "Basis done: you built your own autograd, trained a neural network on handwritten digits and wrote a language model that predicts letters."
+      nl: "Basis af: je hebt je eigen autograd gebouwd, een neural network op handgeschreven cijfers getraind en een language model gemaakt dat letters voorspelt."
+    - after: res-figures
+      en: "Gevorderd done: you built a GPT from scratch, trained it on text with your own tokenizer, and ran your first ablation."
+      nl: "Gevorderd af: je hebt een GPT vanaf nul gebouwd, op tekst getraind met je eigen tokenizer, en je eerste ablation gedaan."
+    - after: res-whats-next
+      en: "Expert done: you pretrained and post-trained your own LLM and reproduced a paper on your own."
+      nl: "Expert af: je hebt je eigen LLM gepretraind, er post-training op gedaan en zelfstandig een paper nagebouwd."
+  steps:
+  # ---------- basis ----------
+  - start-how-this-course-works
+  - start-ai-ml-genai
+  - start-rules-vs-learning
+  - start-map-of-ai
+  - start-using-ai-tools
+  - {id: start-short-history, extra: true}
+  - {id: start-your-own-assistant, extra: true}
+  - py-first-program
+  - py-variables
+  - py-names-in-cells
+  - py-strings
+  - py-if
+  - py-lists
+  - py-for
+  - py-while
+  - py-functions
+  - py-recursion
+  - py-dicts
+  - py-tuples-sets
+  - py-comprehensions
+  - py-errors
+  - {id: py-exceptions, extra: true}
+  - py-files
+  - py-imports
+  - py-own-modules
+  - py-classes
+  - py-special-methods
+  - py-inheritance
+  - py-generators
+  - py-decorators
+  - py-plotting
+  - py-project-letter-counts
+  - {id: py-terminal, extra: true}
+  - np-arrays
+  - np-indexing
+  - np-vectorization
+  - np-axis
+  - np-broadcasting
+  - np-random
+  - data-images-as-arrays
+  - data-text-as-numbers
+  - data-pandas
+  - stats-describe
+  - data-explore
+  - data-provenance
+  - ml-vocabulary
+  - ml-model-is-a-function
+  - ml-residuals
+  - ml-mse-loss
+  - ml-fit-by-hand
+  - math-slope
+  - math-slope-formulas
+  - ml-gradient-descent-1d
+  - ml-learning-rate
+  - math-gradient
+  - ml-gradient-descent-2d
+  - math-dot-product
+  - math-matrix-multiply
+  - math-transpose
+  - math-norms-cosine
+  - math-chain-rule
+  - ml-linear-regression-numpy
+  - ml-feature-scaling
+  - ml-sklearn
+  - prob-basics
+  - prob-conditional
+  - prob-expectation
+  - {id: prob-bayes, extra: true}
+  - ml-kinds-of-learning
+  - ml-classification
+  - math-exp-log
+  - math-log-scales
+  - ml-sigmoid
+  - ml-logistic-regression
+  - ml-log-loss
+  - ml-log-loss-gradient
+  - ml-train-logistic
+  - ml-one-hot
+  - ml-softmax
+  - ml-cross-entropy
+  - ml-softmax-gradient
+  - ml-train-test-split
+  - ml-overfitting
+  - ml-hyperparameters
+  - ml-validation-set
+  - ml-regularization
+  - ml-loss-vs-metric
+  - ml-confusion-matrix
+  - ml-baselines
+  - ml-digits-linear
+  - ml-workflow
+  - ml-project-tabular
+  - rai-bias-in-data
+  - nn-neuron
+  - nn-xor
+  - nn-hidden-layer
+  - nn-forward-numpy
+  - nn-why-backprop
+  - nn-backward-by-hand
+  - nn-micrograd-value
+  - nn-micrograd-backward
+  - nn-micrograd-mlp
+  - nn-micrograd-train
+  - torch-tensors
+  - torch-autograd
+  - torch-nn-module
+  - torch-optimizer
+  - torch-batches
+  - torch-dataloader
+  - torch-eval-mode
+  - torch-mlp-digits
+  - torch-gpu
+  - torch-loss-curves
+  - torch-checkpoints
+  - nn-early-stopping
+  - nn-data-augmentation
+  - torch-pretrained
+  - torch-frozen-features
+  - torch-fine-tune
+  - ml-embeddings-idea
+  - cnn-convolution-idea
+  - rnn-memory-idea
+  - attn-idea
+  - rl-what-is-rl
+  - lm-what-is-a-language-model
+  - lm-tokens-outside
+  - lm-bigram-counts
+  - lm-bigram-matrix
+  - lm-sampling
+  - lm-temperature
+  - {id: lm-top-k-top-p, extra: true}
+  - lm-nll
+  - lm-smoothing
+  - lm-bigram-neural
+  - lm-base-vs-chat
+  - lm-hallucination
+  - {id: lm-model-families, extra: true}
+  - {id: lm-peek-real-llm, extra: true}
+  - res-what-is-a-paper
+  - res-reading-claims
+  - res-figure-and-table
+  - res-research-cycle
+  # ---------- gevorderd ----------
+  - math-derivative-rules
+  - math-partial-derivatives
+  - math-matrix-calculus
+  - math-matrix-rank
+  - prob-distributions
+  - info-entropy
+  - info-cross-entropy-kl
+  - stats-mle
+  - num-floats-stability
+  - stats-bootstrap
+  - nn-gradient-check
+  - nn-backprop-tensors
+  - nn-vanishing-exploding
+  - nn-initialization
+  - nn-activation-stats
+  - nn-batchnorm
+  - nn-residual
+  - nn-layernorm
+  - opt-momentum
+  - opt-adam
+  - opt-adamw
+  - opt-lr-schedules
+  - opt-gradient-clipping
+  - nn-dropout
+  - nn-embedding-layer
+  - nn-trainer
+  - nn-deep-net-project
+  - {id: nn-tuning-playbook, extra: true}
+  - lm-mlp-context
+  - lm-perplexity
+  - cnn-conv-formal
+  - cnn-channels-pooling
+  - cnn-conv-numpy
+  - cnn-pytorch
+  - {id: cnn-lenet, extra: true}
+  - {id: cnn-vgg-blocks, extra: true}
+  - {id: cnn-resnet, extra: true}
+  - {id: rnn-vanilla, extra: true}
+  - {id: rnn-lstm, extra: true}
+  - attn-scores
+  - attn-qkv
+  - attn-scale
+  - attn-causal-mask
+  - attn-multi-head
+  - attn-positions
+  - attn-transformer-block
+  - tok-bpe
+  - tok-byte-level
+  - tok-pre-tokenization
+  - tok-special-tokens
+  - gpt-assemble
+  - gpt-count
+  - gpt-train-chars
+  - gpt-generate
+  - gpt-train-bpe
+  - {id: lm-weight-tying, extra: true}
+  - {id: gpt-attention-maps, extra: true}
+  - res-how-research-is-published
+  - res-find-papers
+  - res-paper-anatomy
+  - res-three-pass
+  - res-hypothesis-control
+  - res-ablation
+  - res-seeds-variance
+  - res-experiment-log
+  - res-fair-baselines
+  - res-significance
+  - res-figures
+  # ---------- expert ----------
+  - math-complex-rotation
+  - sys-memory-roofline
+  - sys-number-formats
+  - sys-mixed-precision
+  - sys-memory-accounting
+  - sys-compute-6nd
+  - sys-profiling-mfu
+  - sys-triton-kernel
+  - {id: sys-flash-attention, extra: true}
+  - {id: sys-torch-compile, extra: true}
+  - {id: sys-gradient-checkpointing, extra: true}
+  - llm-rmsnorm
+  - llm-swiglu
+  - llm-rope
+  - llm-gqa
+  - llm-kv-cache
+  - llm-modern-gpt
+  - llm-pretraining-data
+  - llm-quality-filter
+  - llm-dedup
+  - llm-decontamination
+  - llm-data-pipeline
+  - llm-open-recipes
+  - llm-scaling-laws
+  - llm-fit-scaling-law
+  - llm-pretrain-capstone
+  - {id: llm-overnight-gpt2, extra: true}
+  - llm-eval-base
+  - {id: llm-eval-multiple-choice, extra: true}
+  - llm-chat-template
+  - llm-sft
+  - llm-lora
+  - llm-preference-pairs
+  - llm-rlhf-idea
+  - llm-dpo-loss
+  - llm-dpo
+  - {id: llm-rlvr, extra: true}
+  - llm-eval-chat
+  - llm-safety-eval
+  - llm-model-card
+  - {id: llm-same-on-open-model, extra: true}
+  - {id: llm-open-recipe-full-run, extra: true}
+  - {id: llm-quantize, extra: true}
+  - res-formula-to-code
+  - {id: res-derivations, extra: true}
+  - res-critical-reading
+  - res-choose-paper
+  - repro-guided-claim
+  - repro-guided-build
+  - repro-guided-sanity
+  - repro-guided-figure
+  - repro-guided-ablation
+  - repro-guided-compare
+  - repro-guided-report
+  - res-share-work
+  - repro-own-choose
+  - repro-own-claim
+  - repro-own-build
+  - repro-own-sanity
+  - repro-own-figure
+  - repro-own-ablation
+  - repro-own-compare
+  - repro-own-report
+  - res-whats-next
+
+# Goal routes are computed, not written: the smallest set of lessons a goal needs, in route order.
+# The checker prints these as examples; the app can compute any of them on demand.
+goals:
+- {id: doel-attention, goal: attn-multi-head, title_nl: "Ik wil attention snappen"}
+- {id: doel-eigen-gpt, goal: gpt-generate, title_nl: "Ik wil zo snel mogelijk mijn eigen GPT"}
+- {id: doel-eerste-cnn, goal: cnn-pytorch, title_nl: "Ik wil mijn eerste CNN trainen"}
+- {id: doel-dpo, goal: llm-dpo, title_nl: "Ik wil DPO begrijpen en toepassen"}

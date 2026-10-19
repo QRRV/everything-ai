@@ -1,0 +1,33 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: cnn-conv-numpy
+minutes: 25
+title:
+  en: "Convolution as one big matrix multiplication"
+  nl: "Convolutie als één grote matrixvermenigvuldiging"
+goal:
+  en: "rewrite a convolutional layer as one matrix multiplication: write every patch as a row with im2col, and multiply that matrix with the filters as rows."
+  nl: "een convolutional layer herschrijven als één matrixvermenigvuldiging: elke patch met im2col als één rij schrijven, en die matrix vermenigvuldigen met de filters als rijen."
+summary:
+  - en: "Every output number of a convolution is the dot product of a patch, C_in · k · k numbers, and one filter. im2col writes every patch as one row of P, place after place; the filters as rows are W, and out = W Pᵀ, of shape (C_out, m²), reshaped into C_out channels of m by m."
+    nl: "Elk getal van de output van een convolutie is het inproduct van een patch, C_in · k · k getallen, en één filter. im2col schrijft elke patch als één rij van P, plek na plek; de filters als rijen zijn W, en out = W Pᵀ, met shape (C_out, m²), omgevormd tot C_out channels van m bij m."
+  - en: "One big matrix multiplication is much faster than a loop over every output number: NumPy and GPUs are built for it."
+    nl: "Eén grote matrixvermenigvuldiging is veel sneller dan een loop over elk getal van de output: NumPy en GPU's zijn ervoor gemaakt."
+  - en: "im2col costs memory: a pixel lands in up to k² patches, so for 3 by 3 filters P is about 9 times the input."
+    nl: "im2col kost geheugen: een pixel komt in hooguit k² patches terecht, dus voor filters van 3 bij 3 is P ongeveer 9 keer de input."
+can_now:
+  - en: "work out the shapes of a convolution written as a matrix multiplication"
+    nl: "de shapes uitrekenen van een convolutie die als matrixvermenigvuldiging is geschreven"
+    by: shape
+  - en: "write im2col: every patch of an input as one row"
+    nl: "im2col schrijven: elke patch van een input als één rij"
+    by: patches
+  - en: "compute a convolutional layer with one matrix multiplication"
+    nl: "een convolutional layer uitrekenen met één matrixvermenigvuldiging"
+    by: conv-matmul
+further_reading:
+  - en: "Kumar Chellapilla, Sidd Puri and Patrice Simard (2006), *High Performance Convolutional Neural Networks for Document Processing*, Tenth International Workshop on Frontiers in Handwriting Recognition"
+    nl: "Kumar Chellapilla, Sidd Puri en Patrice Simard (2006), *High Performance Convolutional Neural Networks for Document Processing*, Tenth International Workshop on Frontiers in Handwriting Recognition"
+  - en: "Sharan Chetlur and others (2014), *cuDNN: Efficient Primitives for Deep Learning*, arXiv:1410.0759"
+    nl: "Sharan Chetlur en anderen (2014), *cuDNN: Efficient Primitives for Deep Learning*, arXiv:1410.0759"

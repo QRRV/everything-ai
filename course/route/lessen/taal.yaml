@@ -1,0 +1,796 @@
+# Lessons whose home branch is "taal" (language and LLMs). All levels.
+# Planning data; the map: key below names the map version. Format: ../FORMAT.md. The running project "llm" grows through these lessons.
+tak: taal
+map: v2.2
+lessons:
+
+# ===================== basis =====================
+- id: data-text-as-numbers
+  title: "Text is a sequence of numbers"
+  level: basis
+  module: data
+  idea: "Every character has a number (Unicode); a text becomes a list of integers a computer can calculate with."
+  covers: [tekstverwerking#0]
+  requires: [py-strings, py-comprehensions, py-functions, py-files]
+  introduces: [c:unicode, c:code-point, c:character-encoding, c:utf-8, c:byte, py:ord-chr, py:encode-decode, py:str-join]
+  uses: [py:open, py:str, py:len, py:indexing, py:list, py:comprehension, py:for, py:append, py:def, py:return, py:int, py:print, py:comment, py:variable, py:underscore-name, py:string-literal, q:predict, q:choice, q:exercise-with-check, q:run-cell]
+  mentions: [c:model, c:language-model, py:keyword-argument]
+  ladder: [python]
+  needs: any
+
+- id: lm-what-is-a-language-model
+  title: "A language model predicts the next token"
+  level: basis
+  module: lm-basis
+  idea: "A language model gives, for every possible next token, the probability that it comes next; the text itself provides the labels."
+  covers: [klassieke-taalmodellen#0, pretraining-doelen-en-databronnen#1]
+  requires: [prob-conditional, data-text-as-numbers, ml-kinds-of-learning, ml-model-is-a-function]
+  introduces: [c:language-model, c:next-token-prediction, c:token]
+  uses: [c:self-supervised-learning, c:conditional-probability, c:probability, c:probability-distribution, c:model, c:prediction, c:feature, c:label, c:example, c:model-parameter, py:str, py:indexing, py:slicing, py:len, py:range, py:for, py:list, py:append, py:tuple, py:dict, py:def, py:return, py:print, py:comment, py:underscore-name, py:variable, py:string-literal, c:training, q:predict, q:choice, q:exercise-with-check, q:run-cell]
+  data: [tiny-shakespeare]
+  warns: [token]
+  needs: any
+
+- id: lm-tokens-outside
+  title: "Tokens: how real LLMs chop up text"
+  level: basis
+  module: lm-basis
+  idea: "Real models split text into subword tokens from a fixed vocabulary; you count tokens with a ready-made tokenizer."
+  covers: [subword-tokenisatie#0, subword-tokenisatie#1]
+  requires: [lm-what-is-a-language-model]
+  introduces: [c:tokenizer, c:vocabulary, c:subword, c:token-id, py:tiktoken, py:split]
+  uses: [c:token, c:language-model, c:next-token-prediction, c:example, c:label, c:probability, c:byte, c:utf-8, py:encode-decode, py:float, py:arithmetic, py:import, py:str, py:string-literal, py:list, py:for, py:append, py:comprehension, py:len, py:def, py:return, py:print, py:comment, py:underscore-name, q:predict, q:choice, q:exercise-with-check, q:run-cell]
+  ladder: [python]
+  data: [tokenizer-gpt2-mit]
+  needs: any
+
+- id: lm-bigram-counts
+  title: "A bigram model by counting"
+  level: basis
+  module: lm-basis
+  kind: project
+  project: llm
+  idea: "Count how often each character follows each other character; those counts already make a language model."
+  covers: [klassieke-taalmodellen#1]
+  requires: [lm-what-is-a-language-model, py-project-letter-counts]
+  introduces: [c:bigram, c:n-gram, c:markov-assumption]
+  uses: [c:language-model, c:token, c:next-token-prediction, c:conditional-probability, c:probability, c:probability-distribution, s:p-prob, s:p-given, c:newline, py:dict, py:str, py:lower, py:slicing, py:indexing, py:len, py:range, py:for, py:if, py:list, py:def, py:return, py:print, py:comment, py:underscore-name, p:import-own-code, q:predict, q:choice, q:exercise-with-check, q:run-cell]
+  ladder: [python]
+  data: [tiny-shakespeare]
+  needs: any
+
+- id: lm-bigram-matrix
+  title: "The bigram table as a matrix of probabilities"
+  level: basis
+  module: lm-basis
+  kind: project
+  project: llm
+  idea: "Put the counts in a matrix and divide each row by its sum: row i is the probability distribution of the next character after character i."
+  covers: [klassieke-taalmodellen#1]
+  requires: [lm-bigram-counts, np-broadcasting]
+  introduces: [v:heatmap]
+  uses: [c:bigram, c:language-model, c:token, c:probability, c:probability-distribution, c:conditional-probability, c:matrix, c:array, c:shape, c:axis, c:broadcasting, c:newline, py:np-array, py:np-sum, py:np-indexing, py:keepdims, py:keyword-argument, py:import-as, py:nested-list, py:set, py:sorted, py:dict, py:str, py:indexing, py:list, py:append, py:for, py:if, py:def, py:return, py:print, py:comment, py:underscore-name, p:import-own-code, q:predict, q:choice, q:exercise-with-check, q:run-cell]
+  ladder: [python, numpy]
+  data: [tiny-shakespeare]
+  needs: any
+
+- id: lm-sampling
+  title: "Sampling: let the model write"
+  level: basis
+  module: lm-basis
+  kind: project
+  project: llm
+  idea: "Draw the next character from its probabilities, append it, and repeat; greedy decoding always takes the most likely one."
+  covers: [klassieke-taalmodellen#2, autoregressieve-generatie-en-sampling#0]
+  requires: [lm-bigram-matrix, np-random, py-while]
+  introduces: [c:sampling, c:autoregressive-generation, c:greedy-decoding]
+  uses: [c:seed, c:random-number-generator, py:np-random-generator, c:language-model, c:token, c:next-token-prediction, c:probability, c:probability-distribution, c:bigram, c:matrix, c:array, py:np-array, py:np-indexing, py:np-argmax, py:keyword-argument, py:import, py:import-as, py:while, py:comparison, py:bool, py:dict, py:list, py:nested-list, py:str, py:string-literal, py:indexing, py:slicing, py:len, py:range, py:for, py:arithmetic, py:float, py:variable, py:def, py:return, py:print, py:comment, py:underscore-name, p:import-own-code, q:predict, q:choice, q:exercise-with-check, q:run-cell]
+  ladder: [numpy]
+  data: [tiny-shakespeare]
+  needs: any
+
+- id: lm-temperature
+  title: "Temperature: bolder or safer text"
+  level: basis
+  module: lm-basis
+  idea: "Dividing the logits by a temperature before softmax makes the distribution sharper (below 1) or flatter (above 1)."
+  covers: [autoregressieve-generatie-en-sampling#1]
+  requires: [lm-sampling, ml-softmax]
+  introduces: [c:temperature, s:tau-temp]
+  uses: [c:logit, c:softmax, s:softmax, s:z-logits, s:k-classes, p:subtract-max-before-exp, c:logarithm, s:log, s:exp, c:sampling, c:greedy-decoding, c:probability, c:probability-distribution, c:bigram, c:language-model, c:seed, c:random-number-generator, c:array, c:matrix, py:np-random-generator, py:np-array, py:np-sum, py:min-max, py:len, py:indexing, py:keyword-argument, py:import-as, py:for, py:list, py:arithmetic, py:float, py:variable, py:def, py:return, py:print, py:comment, py:underscore-name, q:predict, q:choice, q:exercise-with-check, q:run-cell]
+  data: [tiny-shakespeare]
+  warns: [temperature]
+  ladder: [numpy]
+  needs: any
+
+- id: lm-top-k-top-p
+  title: "Top-k and top-p sampling"
+  level: basis
+  module: lm-basis
+  idea: "Only sample from the k most likely tokens, or from the smallest set that covers probability p, to cut off nonsense."
+  covers: [autoregressieve-generatie-en-sampling#2, autoregressieve-generatie-en-sampling#3]
+  requires: [lm-temperature]
+  introduces: [c:top-k, c:top-p]
+  uses: [c:sampling, c:temperature, c:logit, c:greedy-decoding, c:probability, c:probability-distribution, c:language-model, c:token, c:bigram, c:seed, c:random-number-generator, c:array, py:np-random-generator, py:np-array, py:np-sum, py:boolean-mask, py:sorted, py:len, py:indexing, py:keyword-argument, py:import-as, py:for, py:if, py:break, py:comparison, py:bool, py:arithmetic, py:float, py:variable, py:list, py:def, py:return, py:print, py:comment, py:underscore-name, q:predict, q:choice, q:exercise-with-check, q:run-cell]
+  data: [tiny-shakespeare]
+  ladder: [numpy]
+  needs: any
+
+- id: lm-nll
+  title: "How good is a language model?"
+  level: basis
+  module: lm-basis
+  idea: "The average negative log-likelihood of real text says how surprised the model is by it; lower is better."
+  covers: [informatietheorie#0]
+  requires: [lm-bigram-matrix, ml-log-loss]
+  introduces: [c:likelihood, c:negative-log-likelihood]
+  uses: [c:surprise, c:log-loss, c:logarithm, s:log, c:exponent, s:sigma-sum, c:probability, c:probability-distribution, c:conditional-probability, s:p-given, c:prediction, c:language-model, c:bigram, c:mean, py:arithmetic, py:variable, py:float, py:np-array, py:np-indexing, py:dict, py:str, py:indexing, py:len, py:range, py:for, py:def, py:return, py:print, py:comment, py:underscore-name, py:import-as, q:predict, q:choice, q:exercise-with-check, q:run-cell]
+  data: [tiny-shakespeare]
+  ladder: [numpy]
+  needs: any
+
+- id: lm-smoothing
+  title: "Pairs you never saw: smoothing"
+  level: basis
+  module: lm-basis
+  idea: "A pair with count zero gets probability zero and an infinite loss; adding a small count to everything fixes that."
+  covers: []
+  requires: [lm-nll]
+  introduces: [c:smoothing, c:laplace-smoothing]
+  uses: [c:negative-log-likelihood, c:likelihood, c:surprise, c:logarithm, s:log, c:mean, c:bigram, c:probability, c:probability-distribution, c:conditional-probability, s:p-given, c:language-model, c:matrix, c:axis, c:broadcasting, v:bar-chart, py:np-array, py:np-sum, py:keepdims, py:keyword-argument, py:np-indexing, py:nested-list, py:dict, py:list, py:str, py:indexing, py:len, py:range, py:for, py:arithmetic, py:float, py:variable, py:def, py:return, py:print, py:comment, py:underscore-name, py:import-as, q:predict, q:choice, q:exercise-with-check, q:run-cell]
+  data: [tiny-shakespeare]
+  ladder: [numpy]
+  needs: any
+
+- id: lm-bigram-neural
+  title: "Project: the same bigram model, learned with gradient descent"
+  level: basis
+  module: lm-basis
+  kind: project
+  project: llm
+  idea: "A one-layer network on one-hot characters, trained with cross-entropy in PyTorch, learns the same table you counted; regularization plays the role of smoothing."
+  covers: [activaties-en-loss-functions#4]
+  requires: [lm-smoothing, torch-optimizer, ml-one-hot, ml-cross-entropy, ml-regularization, lm-sampling]
+  ladder: [torch]
+  uses: [c:bigram, c:one-hot, c:identity-matrix, c:logit, c:softmax, c:cross-entropy, c:negative-log-likelihood, c:surprise, c:smoothing, c:regularization, s:lambda-reg, c:weight, c:layer, c:loss, s:l-loss, v:loss-curve, c:probability, c:probability-distribution, c:language-model, c:sampling, c:seed, c:mean, c:matrix, c:shape, s:x-matrix, c:gradient-descent, c:learning-rate, c:optimizer, c:training-loop, c:zero-grad, c:tensor, c:matrix-multiplication, py:matmul-operator, py:np-indexing, py:dim, py:with, py:keyword-argument, py:list, py:tuple, py:import-as, py:torch-tensor, py:requires-grad, py:backward, py:no-grad, py:torch-optim, py:optimizer-step, py:zero-grad, py:item, py:np-zeros, py:import, py:for, py:range, py:def, py:return, py:print, py:comment, py:underscore-name, p:import-own-code, q:predict, q:choice, q:exercise-with-check, q:run-cell]
+  data: [tiny-shakespeare]
+  needs: any
+
+- id: lm-base-vs-chat
+  title: "Base model or chat model?"
+  level: basis
+  module: lm-basis
+  idea: "A base model only continues text; a chat model was trained further to answer as an assistant, with system, user and assistant roles."
+  covers: [base-vs-chat-en-chat-templates#0, base-vs-chat-en-chat-templates#1]
+  requires: [lm-what-is-a-language-model]
+  introduces: [c:base-model, c:chat-model, c:message-role]
+  uses: [c:language-model, c:next-token-prediction, c:token, c:probability, c:training, c:label, c:self-supervised-learning, c:seed, c:newline, py:dict, py:list, py:nested-list, py:append, py:str, py:string-literal, py:for, py:def, py:return, py:print, py:comment, py:underscore-name, py:variable, py:len, py:indexing, q:predict, q:choice, q:exercise-with-check, q:run-cell]
+  data: [tiny-shakespeare]
+  needs: any
+
+- id: lm-hallucination
+  title: "Why language models make things up"
+  level: basis
+  module: lm-basis
+  idea: "A language model produces likely text, not checked facts; it can sound sure and still be wrong, and it knows nothing after its knowledge cutoff."
+  covers: [d16-hallucinatie-en-sycophancy#0, gedrag-en-beperkingen#1]
+  requires: [lm-sampling, lm-base-vs-chat]
+  introduces: [c:hallucination, c:knowledge-cutoff, c:prompt-sensitivity]
+  uses: [c:language-model, c:chat-model, c:base-model, c:next-token-prediction, c:token, c:probability, c:mean, c:training, c:seed, c:sampling, py:for, py:range, py:if, py:bool, py:list, py:append, py:dict, py:str, py:string-literal, py:len, py:arithmetic, py:float, py:def, py:return, py:print, py:comment, py:underscore-name, py:variable, q:predict, q:choice, q:exercise-with-check, q:run-cell]
+  warns: [hallucination]
+  data: [tiny-shakespeare]
+  needs: any
+
+- id: lm-model-families
+  title: "Encoders, decoders and the GPT line"
+  level: basis
+  module: lm-basis
+  idea: "Encoders such as BERT read a whole text, decoders such as GPT write the next token, encoder-decoders such as T5 do both."
+  covers: [pretrained-encoders-en-encoderdecoders#1, de-gpt-lijn#0]
+  requires: [attn-idea, lm-what-is-a-language-model]
+  introduces: [c:encoder, c:decoder, c:encoder-decoder]
+  uses: [c:attention, c:transformer, c:token, c:language-model, c:next-token-prediction, c:label, c:model-parameter, c:vector, c:mlp, c:layer, c:recurrent-network, c:classification, c:character-encoding, py:list, py:for, py:range, py:len, py:slicing, py:indexing, py:print, py:comment, py:underscore-name, py:def, py:return, py:if, py:comparison, py:bool, py:string-literal, q:predict, q:choice, q:exercise-with-check, q:run-cell]
+  mentions: [c:gpt, c:attention-weights]
+  needs: any
+
+- id: lm-peek-real-llm
+  title: "Look inside a real LLM's next-token probabilities"
+  level: basis
+  module: lm-basis
+  idea: "Load GPT-2 small, an open model with 124 million parameters, and print its probabilities for the next token after any text: the same idea as your bigram table, but the row is computed anew from every token before."
+  covers: [het-modellandschap#0]
+  requires: [lm-tokens-outside, torch-pretrained, ml-softmax, lm-bigram-matrix, lm-bigram-neural]
+  introduces: [v:next-token-distribution, py:torch-topk]
+  uses: [c:language-model, c:next-token-prediction, c:token, c:token-id, c:vocabulary, c:tokenizer, py:tiktoken, c:bigram, c:logit, c:softmax, c:probability, c:probability-distribution, c:pretrained-model, c:model-hub, c:model-card, c:model-parameter, c:shape, c:tensor, c:sampling, c:license, py:range, py:append, py:tuple, py:item, py:indexing, py:list, py:with, py:no-grad, py:torch-tensor, py:dim, py:def, py:return, py:for, py:import, py:print, py:comment, py:underscore-name, py:float, py:int, py:len, py:keyword-argument, q:predict, q:choice, q:exercise-with-check, q:run-cell]
+  mentions: [py:torch-softmax, py:repr, c:transformer, c:transformer-block, c:context-window]
+  ladder: [torch]
+  data: [model-gpt2-mit, tokenizer-gpt2-mit]
+  needs: any
+
+# ===================== gevorderd =====================
+- id: tok-bpe
+  title: "Byte pair encoding: build your own tokenizer"
+  level: gevorderd
+  module: tokenizer
+  kind: project
+  project: llm
+  idea: "Start from characters and keep merging the most frequent pair into a new token until the vocabulary is big enough."
+  covers: [subword-tokenisatie#2]
+  requires: [lm-tokens-outside, py-dicts, py-comprehensions, lm-bigram-counts, py-while]
+  introduces: [c:bpe, c:merge-rule, py:tuple-key]
+  uses: [c:tokenizer, c:vocabulary, c:token, c:subword, c:bigram, py:dict, py:tuple, py:list, py:append, py:while, py:for, py:range, py:len, py:if, py:indexing, py:and-operator, py:str, py:none, py:comparison, py:def, py:return, py:print, py:comment, py:underscore-name, py:import, q:predict, q:choice, q:exercise-with-check, q:run-cell]
+  mentions: [c:gpt, c:byte-level-bpe, c:pre-tokenization, c:language-model]
+  ladder: [python]
+  needs: any
+
+- id: tok-byte-level
+  title: "Byte-level BPE"
+  level: gevorderd
+  module: tokenizer
+  kind: project
+  project: llm
+  idea: "Working on UTF-8 bytes instead of characters lets you tokenize any text, in any language or with emoji."
+  covers: [subword-tokenisatie#3]
+  requires: [tok-bpe, data-text-as-numbers]
+  introduces: [c:byte-level-bpe, py:bytes-from-list, py:decode-errors]
+  uses: [c:bpe, c:merge-rule, c:tokenizer, c:vocabulary, c:token, c:token-id, c:byte, c:utf-8, c:unicode, c:code-point, py:encode-decode, py:ord-chr, py:tuple-key, py:dict, py:tuple, py:list, py:append, py:while, py:for, py:range, py:len, py:if, py:indexing, py:str, py:none, py:comparison, py:keyword-argument, py:comprehension, py:def, py:return, py:print, py:comment, py:underscore-name, py:import, q:predict, q:choice, q:exercise-with-check, q:run-cell]
+  mentions: [c:gpt, c:pre-tokenization, c:special-token]
+  ladder: [python]
+  needs: any
+
+- id: tok-pre-tokenization
+  title: "Pre-tokenization"
+  level: gevorderd
+  module: tokenizer
+  kind: project
+  project: llm
+  idea: "Split text into words, numbers and punctuation first, with a regular expression, so that merges never cross a word boundary."
+  covers: [subword-tokenisatie#4]
+  requires: [tok-byte-level]
+  introduces: [c:pre-tokenization, c:regular-expression, py:re-findall, py:raw-string]
+  uses: [c:byte-level-bpe, c:bpe, c:merge-rule, c:tokenizer, c:vocabulary, c:token, c:token-id, c:byte, c:utf-8, py:encode-decode, py:decode-errors, py:tuple-key, py:dict, py:tuple, py:list, py:comprehension, py:append, py:for, py:range, py:len, py:if, py:indexing, py:str, py:none, py:comparison, py:import, py:def, py:return, py:print, py:comment, py:underscore-name, q:predict, q:choice, q:exercise-with-check, q:run-cell]
+  mentions: [c:gpt, c:special-token]
+  ladder: [python]
+  needs: any
+
+- id: tok-special-tokens
+  title: "Pre-tokenization and special tokens"
+  level: gevorderd
+  module: tokenizer
+  kind: project
+  project: llm
+  idea: "Reserve special tokens, such as end-of-text, that never come out of normal text; they mark where one document stops and the next begins."
+  covers: [subword-tokenisatie#4]
+  requires: [tok-pre-tokenization]
+  introduces: [c:special-token, c:end-of-text, py:split-sep]
+  uses: [c:pre-tokenization, c:regular-expression, c:byte-level-bpe, c:bpe, c:merge-rule, c:tokenizer, c:vocabulary, c:token, c:token-id, c:byte, c:utf-8, c:language-model, py:re-findall, py:raw-string, py:encode-decode, py:decode-errors, py:str-join, py:split, py:import-as, py:dict, py:tuple, py:tuple-key, py:list, py:append, py:for, py:range, py:len, py:if, py:indexing, py:str, py:comparison, py:import, py:def, py:return, py:print, py:comment, py:underscore-name, q:predict, q:choice, q:exercise-with-check, q:run-cell]
+  mentions: [c:gpt, c:embedding, c:transformer-block, c:output-head]
+  ladder: [python]
+  needs: any
+
+- id: lm-mlp-context
+  title: "A neural language model that looks further back"
+  level: gevorderd
+  module: lm-neural
+  kind: project
+  project: llm
+  idea: "Embed the last few tokens, glue the embeddings together and let an MLP give one logit per vocabulary token: Bengio's neural language model, which can only look back a fixed number of tokens."
+  covers: [neurale-nlp#1, token-embeddings-en-output-head#1, token-embeddings-en-output-head#2]
+  requires: [lm-bigram-neural, nn-embedding-layer, nn-trainer, lm-tokens-outside]
+  introduces: [c:context-window, c:neural-language-model, c:output-head]
+  uses: [c:vocabulary, c:embedding-matrix, c:embedding, c:embedding-layer, c:token, c:language-model, c:next-token-prediction, c:bigram, c:logit, c:softmax, c:cross-entropy, c:mlp, c:hidden-layer, c:relu, c:layer, c:shape, c:tensor, c:mini-batch, c:training-loop, c:validation-set, c:seed, c:loss, c:model-parameter, c:weight, py:nn-embedding, py:nn-linear, py:nn-module, py:class, py:self, py:init-method, py:forward-method, py:super, py:manual-seed, py:torch-tensor, py:list, py:append, py:slicing, py:for, py:range, py:len, py:def, py:return, py:print, py:comment, py:underscore-name, py:import, q:predict, q:choice, q:exercise-with-check, q:run-cell]
+  mentions: [c:recurrent-network, c:attention]
+  ladder: [torch]
+  data: [tiny-shakespeare]
+  needs: any
+
+- id: lm-perplexity
+  title: "Perplexity"
+  level: gevorderd
+  module: lm-neural
+  idea: "Perplexity is e to the power of the average loss: the number of tokens the model is effectively choosing between."
+  covers: [klassieke-taalmodellen#4]
+  requires: [lm-nll, info-cross-entropy-kl, lm-tokens-outside]
+  introduces: [c:perplexity]
+  uses: [c:negative-log-likelihood, c:likelihood, c:cross-entropy, c:entropy, c:kl-divergence, c:language-model, c:token, c:tokenizer, c:bigram, c:probability, c:surprise, c:mean, c:logarithm, s:l-loss, c:exponent, c:nat, s:exp, s:sigma-sum, s:p-given, py:np-array, py:np-mean, py:comprehension, py:list, py:range, py:len, py:indexing, py:def, py:return, py:print, py:comment, py:underscore-name, py:import-as, q:predict, q:choice, q:exercise-with-check, q:run-cell]
+  ladder: [numpy]
+  data: [tiny-shakespeare]
+  needs: any
+
+- id: gpt-assemble
+  title: "Assemble your GPT"
+  level: gevorderd
+  module: gpt
+  kind: project
+  project: llm
+  idea: "Embeddings, a stack of transformer blocks with causal attention, and an output head make a decoder-only transformer: a GPT."
+  covers: [decoder-only-transformer-in-detail#0, decoder-only-transformer-in-detail#2]
+  requires: [attn-transformer-block, lm-mlp-context, nn-deep-net-project]
+  introduces: [c:decoder-only-transformer, c:gpt]
+  uses: [c:output-head, c:transformer-block, c:residual-stream, c:transformer, c:causal-mask, c:multi-head-attention, c:positional-encoding, c:learned-position-embedding, c:embedding, c:embedding-layer, c:layernorm, c:logit, c:cross-entropy, c:token, c:token-id, c:vocabulary, c:mini-batch, c:shape, c:seed, c:model-parameter, c:next-token-prediction, py:nn-module, py:nn-modulelist, py:nn-embedding, py:nn-linear, py:torch-arange, py:torch-tensor, py:no-grad, py:with, py:manual-seed, py:class, py:self, py:init-method, py:forward-method, py:super, py:comprehension, py:range-step, py:slicing, py:list, py:append, py:for, py:range, py:len, py:tuple, py:def, py:return, py:print, py:comment, py:underscore-name, py:import, q:predict, q:choice, q:exercise-with-check, q:run-cell]
+  mentions: [c:tokenizer, c:flops-per-token]
+  ladder: [torch]
+  needs: any
+
+- id: gpt-count
+  title: "Counting parameters and FLOPs per token"
+  level: gevorderd
+  module: gpt
+  idea: "Count where the parameters of your GPT sit and how many calculations one token costs: about 2 FLOPs per parameter forward."
+  covers: [decoder-only-transformer-in-detail#4]
+  requires: [gpt-assemble, nn-why-backprop]
+  introduces: [c:parameter-count, c:flops-per-token]
+  uses: [c:flops, c:gpt, c:transformer-block, c:attention, c:query, c:key, c:value, c:causal-mask, c:context-window, c:output-projection, c:layernorm, s:gamma-scale, s:beta-shift, c:mlp, c:embedding, c:vocabulary, c:token, c:output-head, c:model-parameter, c:weight, c:bias-term, c:gradient, c:matrix, c:forward-pass, c:backward-pass, c:training, c:mini-batch, py:def, py:return, py:arithmetic, py:tuple, py:print, py:comment, py:underscore-name, q:predict, q:choice, q:exercise-with-check, q:run-cell]
+  mentions: [c:weight-tying]
+  needs: any
+
+- id: gpt-train-chars
+  title: "Project: train your GPT on a book"
+  level: gevorderd
+  module: gpt
+  kind: project
+  project: llm
+  idea: "Train your GPT character by character on a public-domain text; about 10M parameters in some 8 minutes on the recommended GPU, a 1M version on a CPU."
+  covers: [decoder-only-transformer-in-detail#0]
+  requires: [gpt-assemble, nn-trainer, torch-gpu, gpt-count]
+  introduces: [c:run]
+  uses: [c:gpt, c:decoder-only-transformer, c:causal-mask, c:learned-position-embedding, c:tensor, py:np-indexing, py:manual-seed, c:token, c:token-id, c:vocabulary, c:context-window, c:next-token-prediction, c:validation-set, c:overfitting, c:checkpoint, c:epoch, c:mini-batch, c:shuffling, c:seed, c:loss, c:cross-entropy, c:learning-rate, c:adamw, c:warmup, c:cosine-decay, c:gradient-clipping, c:gpu, c:device, c:flops, c:flops-per-token, c:parameter-count, c:model-parameter, c:forward-pass, py:to-device, py:tensor-dataset, py:dataloader, py:torch-tensor, py:sorted, py:set, py:dict, py:list, py:append, py:slicing, py:int, py:tuple, py:keyword-argument, py:for, py:range, py:len, py:def, py:return, py:import, py:print, py:comment, py:underscore-name, q:predict, q:choice, q:exercise-with-check, q:run-cell]
+  ladder: [torch]
+  data: [tiny-shakespeare]
+  compute_minutes: 8
+  fallback: [cpu]
+  needs: gpu8
+
+- id: gpt-generate
+  title: "Generate text with your GPT"
+  level: gevorderd
+  module: gpt
+  kind: project
+  project: llm
+  idea: "Your sampling loop from the bigram model works unchanged on your GPT, and the text is suddenly much better."
+  covers: [autoregressieve-generatie-en-sampling#0]
+  requires: [gpt-train-chars, lm-temperature]
+  uses: [c:autoregressive-generation, c:sampling, c:temperature, s:tau-temp, c:computational-graph, c:greedy-decoding, c:softmax, c:logit, c:probability-distribution, c:random-number-generator, c:seed, c:gpt, c:context-window, c:learned-position-embedding, c:token-id, c:vocabulary, c:bigram, c:language-model, c:checkpoint, c:forward-pass, c:validation-set, c:loss, c:gradient, c:shape, c:tensor, py:no-grad, py:torch-softmax, py:torch-tensor, py:np-random-generator, py:dict, py:list, py:append, py:slicing, py:while, py:for, py:range, py:len, py:def, py:return, py:import, py:print, py:comment, py:underscore-name, q:predict, q:choice, q:exercise-with-check, q:run-cell]
+  mentions: [c:kv-cache]
+  ladder: [torch]
+  data: [tiny-shakespeare, model-course-gpt-chars]
+  needs: any
+
+- id: gpt-train-bpe
+  title: "Project: your GPT on your own tokens"
+  level: gevorderd
+  module: gpt
+  kind: project
+  project: llm
+  idea: "Make your BPE tokenizer fast by counting and encoding every different piece once, train it on short stories, and train your GPT on its tokens; compare its loss per character, and its stories, with the character version."
+  covers: [subword-tokenisatie#2]
+  requires: [gpt-generate, tok-special-tokens]
+  introduces: [c:caching, c:characters-per-token]
+  uses: [c:gpt, c:token, c:token-id, c:vocabulary, c:context-window, c:bpe, c:merge-rule, c:pre-tokenization, c:end-of-text, c:special-token, c:byte-level-bpe, c:utf-8, c:tokenizer, c:validation-set, c:checkpoint, c:epoch, c:mini-batch, c:loss, c:cross-entropy, c:temperature, c:sampling, c:run, c:gpu, c:device, c:parameter-count, c:regular-expression, py:dict, py:list, py:append, py:for, py:range, py:len, py:if, py:def, py:return, py:import, py:print, py:comment, py:underscore-name, py:sorted, py:comprehension, py:re-findall, py:split-sep, py:tuple, py:tuple-key, py:keyword-argument, c:byte, c:logit, c:softmax, c:embedding, q:predict, q:choice, q:exercise-with-check, q:run-cell]
+  mentions: [py:repr]
+  ladder: [torch]
+  data: [tinystories, model-course-gpt-bpe]
+  reference_data: [cosmopedia]
+  compute_minutes: 12
+  fallback: [cpu, checkpoint]
+  needs: gpu8
+
+- id: lm-weight-tying
+  title: "Weight tying"
+  level: gevorderd
+  module: gpt
+  idea: "Using the embedding matrix also as the output head saves parameters and often helps a little."
+  covers: [token-embeddings-en-output-head#3]
+  requires: [gpt-assemble]
+  introduces: [c:weight-tying]
+  uses: [c:embedding, c:embedding-layer, c:output-head, c:gpt, c:vocabulary, c:token, c:token-id, c:logit, c:dot-product, c:transpose, c:matrix-multiplication, c:shape, c:model-parameter, c:bias-term, c:weight-sharing, c:convolution, c:filter, c:gradient, c:softmax, c:cross-entropy, c:softmax-cross-entropy-gradient, c:optimizer, c:language-model, c:loss, py:nn-embedding, py:nn-linear, py:nn-module, py:nn-parameter, py:nn-cross-entropy-loss, py:torch-tensor, py:torch-transpose, py:matmul-operator, py:requires-grad, py:backward, py:grad-attribute, py:class, py:self, py:init-method, py:forward-method, py:super, py:import, py:def, py:return, py:print, py:comment, py:underscore-name, q:predict, q:choice, q:exercise-with-check, q:run-cell]
+  ladder: [torch]
+  needs: any
+
+- id: gpt-attention-maps
+  title: "What does your GPT look at?"
+  level: gevorderd
+  module: gpt
+  idea: "Plot the attention weights of each head as a heatmap and find heads that look at the previous token or at the start of the line."
+  covers: [uitlegbaarheid-voor-llms#2]
+  requires: [gpt-train-chars]
+  introduces: [v:attention-heatmap, c:previous-token-head]
+  uses: [v:heatmap, c:attention-weights, c:attention-head, c:multi-head-attention, c:causal-mask, c:softmax, c:value, c:gpt, c:transformer-block, c:token, c:mean, c:checkpoint, py:list, py:nested-list, py:indexing, py:slicing, py:for, py:range, py:len, py:if, py:comprehension, py:arithmetic, py:float, py:def, py:return, py:print, py:comment, py:underscore-name, q:predict, q:choice, q:exercise-with-check, q:run-cell]
+  ladder: [python]
+  data: [tiny-shakespeare, model-course-gpt-chars]
+  needs: any
+
+# ===================== expert =====================
+- id: llm-swiglu
+  title: "Modern MLP blocks: GELU, SiLU and SwiGLU"
+  level: expert
+  module: modern-llm
+  idea: "Smooth activations and a gated MLP (SwiGLU) replace ReLU in modern LLMs."
+  covers: [activaties-en-loss-functions#2, decoder-only-transformer-in-detail#3]
+  requires: [gpt-assemble]
+  introduces: [c:gelu, c:silu, c:swiglu, c:gated-linear-unit]
+  uses: [c:mlp, c:relu, c:sigmoid, c:normal-distribution, c:activation-function, c:elementwise-product, c:transformer-block, c:attention, c:gpt, c:token, c:gradient, c:model-parameter, c:flops, c:bias-term, c:tanh, s:odot, s:sigma-sigmoid, s:h-hidden, s:x, s:w-matrix, py:no-grad, py:nn-module, py:nn-linear, py:torch-relu, py:torch-tensor, py:requires-grad, py:backward, py:grad-attribute, py:manual-seed, py:torch-randn, py:class, py:init-method, py:self, py:for, py:def, py:return, py:print, py:comment, py:underscore-name, py:import, q:predict, q:choice, q:explain, q:exercise-with-check, q:run-cell]
+  ladder: [torch]
+  needs: any
+
+- id: llm-rope
+  title: "Rotary position embeddings (RoPE)"
+  level: expert
+  module: modern-llm
+  idea: "RoPE rotates queries and keys by an angle that depends on the position, so attention scores depend on relative distance."
+  covers: [positionele-codering#2]
+  requires: [math-complex-rotation, attn-positions, gpt-assemble]
+  introduces: [c:rope, py:ellipsis-index, py:none-index, py:torch-sin-cos]
+  uses: [py:zeros-like, py:np-sin-cos, c:broadcasting, c:rotation, c:complex-number, c:positional-encoding, c:sinusoidal-positional-encoding, c:learned-position-embedding, c:attention, c:query, c:key, c:value, c:attention-score, c:attention-weights, c:attention-head, c:dot-product, c:gpt, c:token, c:model-parameter, c:context-window, c:tensor, c:shape, py:torch-arange, py:slice-step, py:torch-tensor, py:torch-randn, py:manual-seed, py:def, py:return, py:print, py:comment, py:underscore-name, py:import, q:predict, q:choice, q:explain, q:exercise-with-check, q:run-cell]
+  ladder: [numpy, torch]
+  needs: any
+
+- id: llm-gqa
+  title: "Grouped-query attention"
+  level: expert
+  module: modern-llm
+  idea: "Let several query heads share one key and value head; it saves memory with little loss in quality."
+  covers: [attention-varianten#0, attention-varianten#1]
+  requires: [attn-multi-head, gpt-assemble]
+  introduces: [c:multi-query-attention, c:grouped-query-attention]
+  uses: [c:multi-head-attention, c:attention-head, c:query, c:key, c:value, c:attention-score, c:causal-mask, c:scaled-dot-product-attention, c:softmax, c:gpt, c:token, c:model-parameter, c:flops, c:checkpoint, py:torch-cat, py:torch-tril, py:masked-fill, py:torch-randn, py:slicing, py:for, py:range, py:int, py:def, py:return, py:print, py:comment, py:underscore-name, py:import, q:predict, q:choice, q:explain, q:exercise-with-check, q:run-cell]
+  ladder: [torch]
+  needs: any
+
+- id: llm-kv-cache
+  title: "The KV cache"
+  level: expert
+  module: modern-llm
+  idea: "When generating, store the keys and values of earlier tokens instead of recomputing them; then count how much memory that costs."
+  covers: [kv-cache#0, kv-cache#1]
+  requires: [gpt-generate, llm-gqa, sys-memory-accounting]
+  introduces: [c:kv-cache]
+  uses: [c:key, c:value, c:query, c:attention-head, c:attention-score, c:causal-mask, c:scaled-dot-product-attention, c:softmax, c:autoregressive-generation, c:forward-pass, c:context-window, c:learned-position-embedding, c:grouped-query-attention, c:multi-head-attention, c:byte, c:bf16, c:float32, c:gpu, c:gpt, c:token, c:layer, c:mlp, c:flops, c:memory-bound, c:model-parameter, c:batch-size, c:tensor, c:shape, py:torch-cat, py:torch-randn, py:torch-softmax, py:torch-transpose, py:math-module, py:tuple, py:for, py:range, py:print, py:def, py:return, py:import, py:comment, py:underscore-name, q:predict, q:choice, q:exercise-with-check, q:run-cell]
+  ladder: [torch]
+  needs: any
+
+- id: llm-modern-gpt
+  title: "Project: upgrade your GPT to a modern LLM"
+  level: expert
+  module: modern-llm
+  kind: project
+  project: llm
+  idea: "Swap in RMSNorm, SwiGLU, RoPE and grouped-query attention and add a KV cache; check that each change keeps the loss as good or better."
+  covers: [decoder-only-transformer-in-detail#3]
+  requires: [gpt-train-bpe, llm-rmsnorm, llm-swiglu, llm-rope, llm-gqa, llm-kv-cache]
+  uses: [c:rmsnorm, c:swiglu, c:rope, c:grouped-query-attention, c:multi-query-attention, c:multi-head-attention, c:kv-cache, c:attention-head, c:query, c:key, c:value, c:attention-score, c:causal-mask, c:attention, c:residual-stream, c:pre-norm, c:layernorm, c:mlp, c:relu, c:transformer-block, c:output-head, c:learned-position-embedding, c:rotation, c:embedding, c:gpt, c:token, c:token-id, c:vocabulary, c:context-window, c:tokenizer, c:merge-rule, c:greedy-decoding, c:autoregressive-generation, c:temperature, c:logit, c:validation-set, c:loss, c:epoch, c:mini-batch, c:seed, c:run, c:checkpoint, c:gpu, c:device, c:parameter-count, c:model-parameter, c:bias-term, c:flops, c:dot-product, c:shape, c:tensor, c:weight, py:nn-module, py:nn-linear, py:nn-embedding, py:nn-modulelist, py:torch-cat, py:torch-tensor, py:torch-arange, py:torch-randn, py:manual-seed, py:no-grad, py:with, py:class, py:init-method, py:self, py:forward-method, py:super, py:inheritance, py:dict, py:list, py:append, py:for, py:range, py:len, py:if, py:none, py:is-none, py:def, py:return, py:keyword-argument, py:slicing, py:int, py:np-argmax, py:import, py:print, py:comment, py:underscore-name, q:predict, q:choice, q:exercise-with-check, q:run-cell]
+  ladder: [torch]
+  data: [tinystories, model-course-modern-gpt]
+  reference_data: [cosmopedia]
+  compute_minutes: 12
+  fallback: [cpu, checkpoint]
+  needs: gpu8
+
+- id: llm-pretraining-data
+  title: "Where pretraining data comes from"
+  level: expert
+  module: pretraining
+  idea: "LLMs learn from web pages, books, code and papers; where data comes from decides what a model knows and which rights and licenses apply."
+  covers: [pretraining-doelen-en-databronnen#0, auteursrecht-en-ip#4]
+  requires: [data-provenance, gpt-train-bpe]
+  introduces: [c:pretraining-corpus, c:common-crawl, c:synthetic-data, c:text-and-data-mining, c:opt-out, c:open-weights, c:open-source-ai]
+  uses: [c:license, c:consent, c:data-provenance, c:datasheet, c:language-model, c:gpt, c:token, c:tokenizer, c:model-parameter, c:model, c:training, c:weight, py:dict, py:list, py:for, py:if, py:arithmetic, py:variable, py:float, py:string-literal, py:def, py:return, py:print, py:comment, py:underscore-name, q:predict, q:choice, q:exercise-with-check, q:run-cell]
+  mentions: [c:knowledge-cutoff]
+  needs: any
+
+- id: llm-quality-filter
+  title: "Cleaning text: quality filters"
+  level: expert
+  module: pretraining
+  idea: "Simple rules and a small classifier throw out spam, boilerplate and broken text before training."
+  covers: [datacuratie-en-mixtures#0, data-op-webschaal#3, capstone-zelf-een-kleine-llm-bouwen-en-trainen#4]
+  requires: [llm-pretraining-data, ml-logistic-regression]
+  introduces: [c:quality-filter, c:stop-word, py:endswith, py:isalpha]
+  uses: [c:pretraining-corpus, c:common-crawl, c:logistic-regression, c:sigmoid, c:feature, c:label, c:class, c:probability, c:language-model, c:gpt, c:token, c:bias-term, c:weight, c:gradient-descent, py:str, py:split, py:split-sep, py:strip, py:lower, py:str-join, py:f-string, py:set, py:set-add, py:tuple, py:min-max, py:list, py:append, py:for, py:if, py:comparison, py:bool, py:and-operator, py:or-operator, py:len, py:arithmetic, py:def, py:return, py:print, py:comment, py:underscore-name, py:string-literal, py:np-array, q:predict, q:choice, q:exercise-with-check, q:run-cell]
+  data: [c4-noclean-sample-download-only, tinystories]
+  needs: any
+
+- id: llm-dedup
+  title: "Removing duplicates with MinHash"
+  level: expert
+  module: pretraining
+  idea: "MinHash finds near-identical documents quickly, so the model does not learn the same text many times."
+  covers: [data-op-webschaal#2]
+  requires: [llm-quality-filter, py-tuples-sets]
+  introduces: [c:deduplication, c:near-duplicate, c:shingling, c:jaccard-similarity, c:minhash, c:locality-sensitive-hashing, py:set-operators, py:np-outer]
+  uses: [c:pretraining-corpus, c:common-crawl, c:quality-filter, c:language-model, c:training, c:probability, c:mean, c:axis, c:matrix, c:array, py:set, py:set-add, py:str-join, py:lower, py:split, py:range, py:slicing, py:len, py:for, py:if, py:comparison, py:bool, py:min-max, py:modulo, py:arithmetic, py:def, py:return, py:print, py:comment, py:underscore-name, py:import-as, py:np-array, py:np-mean, py:keyword-argument, py:list, py:append, py:indexing, py:string-literal, q:predict, q:choice, q:exercise-with-check, q:run-cell]
+  mentions: [c:hash]
+  ladder: [python, numpy]
+  data: [c4-noclean-sample-download-only]
+  needs: any
+
+- id: llm-decontamination
+  title: "Keeping test data out of training data"
+  level: expert
+  module: pretraining
+  idea: "If benchmark questions sit in the training data, a test score measures memory, not skill; remove them first."
+  covers: [datacuratie-en-mixtures#2]
+  requires: [llm-dedup, ml-train-test-split, res-reading-claims]
+  introduces: [c:contamination, c:decontamination, c:clean-subset, py:strip-chars]
+  uses: [c:n-gram, c:false-positive, c:benchmark, py:sorted, c:test-set, c:train-set, c:generalization, c:pretraining-corpus, c:near-duplicate, c:shingling, c:accuracy, c:language-model, c:gpt, c:token, c:model-parameter, c:training, c:probability, py:set, py:set-add, py:set-operators, py:str-join, py:lower, py:split, py:strip, py:range, py:slicing, py:len, py:for, py:if, py:comparison, py:bool, py:none, py:arithmetic, py:def, py:return, py:print, py:comment, py:underscore-name, py:list, py:append, py:indexing, py:string-literal, py:tuple, q:predict, q:choice, q:exercise-with-check, q:run-cell]
+  data: [synthetic-story-cloze, tinystories]
+  needs: any
+
+- id: llm-data-pipeline
+  title: "Project: a pretraining data pipeline"
+  level: expert
+  module: pretraining
+  kind: project
+  project: llm
+  idea: "Tokenize the cleaned stories once into a file of token ids and stream random windows from it during training."
+  covers: [d3-opslag-en-data-loading-voor-training#0]
+  requires: [llm-decontamination, tok-special-tokens, torch-dataloader]
+  introduces: [c:token-shard, py:np-memmap, py:np-tofile, py:tempfile]
+  uses: [c:token, c:token-id, c:tokenizer, c:end-of-text, c:special-token, c:vocabulary, c:bpe, c:merge-rule, c:gpt, c:context-window, c:embedding, c:mini-batch, c:epoch, c:shuffling, c:dtype, c:array, c:tensor, c:file-path, c:pretraining-corpus, c:training, c:language-model, py:np-array, py:np-indexing, py:slicing, py:dataset, py:dataloader, py:len-getitem, py:class, py:self, py:init-method, py:torch-tensor, py:import, py:import-as, py:list, py:append, py:tuple, py:for, py:range, py:range-step, py:if, py:comparison, py:len, py:arithmetic, py:f-string, py:def, py:return, py:print, py:comment, py:underscore-name, py:string-literal, py:comprehension, py:none, py:indexing, q:predict, q:choice, q:exercise-with-check, q:run-cell]
+  ladder: [numpy, torch]
+  data: [tinystories]
+  needs: any
+
+- id: llm-open-recipes
+  title: "Reading an open training recipe"
+  level: expert
+  module: pretraining
+  idea: "Fully open projects such as nanochat publish data, code and settings; you read one recipe end to end, size a run by its rules, train a few hundred steps of it with what you built, and map each phase onto what you built yourself."
+  covers: [volledig-open-pretraining-recepten#2, pretraining-doelen-en-databronnen#3, papers-reproduceren#0]
+  requires: [llm-data-pipeline, llm-modern-gpt]
+  introduces: [c:training-recipe, c:warmdown]
+  uses: [c:warmup, c:cosine-decay, c:learning-rate, c:lr-schedule, c:tokenizer, c:bpe, c:special-token, c:token, c:vocabulary, c:gpt, c:transformer-block, c:attention, c:rope, c:rmsnorm, c:swiglu, c:grouped-query-attention, c:mlp, c:relu, c:optimizer, c:adamw, c:benchmark, c:model-parameter, c:batch-size, c:mini-batch, c:token-shard, c:loss, c:validation-set, c:training, c:language-model, py:np-memmap, py:dataset, py:dataloader, py:math-module, py:import, py:def, py:return, py:if, py:comparison, py:arithmetic, py:print, py:comment, py:underscore-name, c:power-law, c:layernorm, c:output-head, c:context-window, c:byte-level-bpe, c:end-of-text, c:epoch, c:characters-per-token, c:gpu, c:run, c:query, c:key, c:numerical-precision, c:exponent, py:tuple, q:predict, q:choice, q:exercise-with-check, q:run-cell]
+  mentions: [c:fine-tuning, c:scaling-law]
+  data: [nanochat-code, tinystories]
+  compute_minutes: 5
+  needs: any
+
+- id: llm-scaling-laws
+  title: "Scaling laws"
+  level: expert
+  module: scaling
+  idea: "Loss falls as a power law in model size, data and compute: a straight line on a log-log plot."
+  covers: [scaling-laws-en-compute#0, scaling-gedrag#0]
+  requires: [math-log-scales, sys-compute-6nd]
+  introduces: [c:scaling-law, c:intercept]
+  uses: [c:power-law, v:log-log-plot, v:log-scale, c:logarithm, c:exponent, c:slope-formula, c:loss, c:language-model, c:model-parameter, c:token, c:flops, c:gpt, c:run, c:probability, py:np-polyfit, py:np-array, py:tuple, py:import, py:def, py:return, py:print, py:comment, py:underscore-name, q:predict, q:choice, q:explain, q:exercise-with-check, q:run-cell]
+  needs: any
+
+- id: llm-fit-scaling-law
+  title: "Project: fit your own scaling law"
+  level: expert
+  module: scaling
+  kind: project
+  project: llm
+  idea: "Train four small versions of your model for a few minutes each, fit a power law and predict the loss of a bigger one before you train it."
+  covers: [scaling-laws-en-compute#1, scaling-laws-en-compute#2, capstone-zelf-een-kleine-llm-bouwen-en-trainen#3]
+  requires: [llm-scaling-laws, llm-modern-gpt, llm-data-pipeline, llm-open-recipes]
+  introduces: [c:compute-optimal]
+  uses: [c:scaling-law, c:power-law, c:intercept, v:log-log-plot, v:log-scale, v:loss-vs-parameter, c:logarithm, c:exponent, c:slope-formula, c:loss, c:validation-set, c:model-parameter, c:parameter-count, c:token, c:flops, c:gpt, c:run, c:training, c:language-model, c:training-recipe, c:token-shard, c:epoch, c:mini-batch, c:adamw, c:warmup, c:warmdown, c:lr-schedule, c:seed, c:context-window, c:attention-head, c:query, c:grouped-query-attention, c:mean, c:mean-squared-error, c:six-nd-rule, c:broadcasting, c:gpu, py:np-polyfit, py:np-array, py:np-mean, py:none, py:is-none, py:or-operator, py:import, py:import-as, py:def, py:return, py:for, py:if, py:comparison, py:arithmetic, py:tuple, py:list, py:print, py:comment, py:underscore-name, py:scientific-notation, q:predict, q:choice, q:exercise-with-check, q:run-cell]
+  ladder: [torch]
+  data: [tinystories]
+  reference_data: []
+  compute_minutes: 5
+  needs: any
+
+- id: llm-pretrain-capstone
+  title: "Capstone: pretrain your own small LLM"
+  level: expert
+  module: scaling
+  kind: project
+  project: llm
+  idea: "Measure your computer, size a model for 15 minutes of it with your compute_optimal, pretrain it with mixed precision where that is faster, measure its MFU, and let it write stories; the course's own model, trained for hours with the same code, is the fallback."
+  covers: [capstone-zelf-een-kleine-llm-bouwen-en-trainen#0, capstone-zelf-een-kleine-llm-bouwen-en-trainen#1]
+  requires: [llm-fit-scaling-law, llm-open-recipes, sys-mixed-precision, sys-profiling-mfu]
+  introduces: [c:time-budget, c:probe-run]
+  uses: [c:compute-optimal, c:scaling-law, c:six-nd-rule, c:flops, c:model-parameter, c:parameter-count, c:token, c:gpt, c:run, c:training, c:language-model, c:pretraining-corpus, c:token-shard, c:mini-batch, c:batch-size, c:epoch, c:adamw, c:optimizer, c:warmup, c:warmdown, c:lr-schedule, c:learning-rate, c:mixed-precision, py:autocast, c:gradient-clipping, py:clip-grad-norm, c:throughput, c:mfu, c:loss, c:cross-entropy, c:validation-set, c:checkpoint, c:temperature, c:sampling, c:tokenizer, c:merge-rule, c:bpe, c:end-of-text, c:context-window, c:gpu, c:seed, c:gradient, c:backward-pass, c:forward-pass, c:logit, c:tensor, c:dtype, c:float32, c:bf16, c:master-weights, c:training-loop, c:training-recipe, c:shape, c:device, c:sgd, c:matrix-multiplication, py:import-as, py:keyword-argument, py:forward-hook, py:lambda, py:manual-seed, py:torch-randn, py:torch-dtype, py:bool, py:float, py:comprehension, py:zero-grad, py:backward, py:optimizer-step, py:item, py:with, py:for, py:if, py:comparison, py:arithmetic, py:abs, py:dict, py:tuple, py:none, py:is-none, py:or-operator, py:int, py:import, py:def, py:return, py:print, py:comment, py:underscore-name, py:scientific-notation, py:nn-linear, py:torch-optim, py:list, py:indexing, py:string-literal, q:predict, q:choice, q:exercise-with-check, q:run-cell]
+  ladder: [torch]
+  data: [tinystories, model-course-capstone]
+  reference_data: [cosmopedia]
+  compute_minutes: 15
+  fallback: [checkpoint]
+  needs: any
+
+- id: llm-overnight-gpt2
+  title: "Optional night run: a GPT-2-size model"
+  level: expert
+  module: scaling
+  kind: project
+  project: llm
+  idea: "Scale the same code to 124M parameters and let it train overnight; the course checkpoint is the fallback."
+  covers: [capstone-zelf-een-kleine-llm-bouwen-en-trainen#1]
+  requires: [llm-pretrain-capstone]
+  ladder: [torch]
+  data: [cosmopedia, fineweb-edu-sample-download-only]
+  reference_data: [cosmopedia]
+  compute_minutes: 720
+  needs: rec
+
+- id: llm-open-recipe-full-run
+  title: "Run a full open recipe"
+  level: expert
+  module: post-training
+  kind: project
+  project: llm
+  idea: "Run the smallest nanochat recipe end to end, from tokenizer to chat model, over a few days on your own GPU; you can stop after any phase."
+  covers: [volledig-open-pretraining-recepten#2]
+  requires: [llm-pretrain-capstone, llm-open-recipes, llm-sft]
+  ladder: [torch]
+  data: [nanochat-code, fineweb-edu-sample-download-only]
+  reference_data: []
+  compute_minutes: 1800
+  needs: rec
+
+- id: llm-eval-base
+  title: "Evaluating your base model"
+  level: expert
+  module: evaluation
+  idea: "Perplexity depends on the tokenizer; bits per byte lets you compare models with different tokenizers."
+  covers: [intrinsieke-evaluatie-metrics-en-klassieke-benchmarks#0]
+  requires: [llm-pretrain-capstone, lm-perplexity, lm-base-vs-chat]
+  introduces: [c:bits-per-byte]
+  uses: [c:perplexity, c:loss, c:nat, c:bit, c:byte, c:utf-8, c:tokenizer, c:token, c:base-model, c:chat-model, c:language-model, c:cross-entropy, c:negative-log-likelihood, c:logarithm, c:context-window, c:validation-set, c:gpt, c:model-parameter, c:vocabulary, c:end-of-text, c:logit, c:pretraining-corpus, c:surprise, c:mean, c:mini-batch, c:token-shard, s:sigma-sum, s:exp, s:log, py:no-grad, py:with, py:model-eval, py:keyword-argument, py:tuple, py:encode-decode, py:torch-tensor, py:for, py:range-step, py:slicing, py:list, py:len, py:def, py:return, py:import, py:import-as, py:math-module, py:comment, py:underscore-name, py:print, py:string-literal, py:item, py:augmented-assignment, py:indexing, q:predict, q:choice, q:exercise-with-check, q:run-cell]
+  ladder: [torch]
+  data: [tinystories, model-course-capstone, model-gpt2-mit, tokenizer-gpt2-mit]
+  needs: any
+
+- id: llm-eval-multiple-choice
+  title: "Scoring multiple-choice questions with log-likelihood"
+  level: expert
+  module: evaluation
+  idea: "Let the model score each answer option and pick the most likely one; this is how many benchmarks test base models."
+  covers: [intrinsieke-evaluatie-metrics-en-klassieke-benchmarks#2]
+  requires: [llm-eval-base]
+  introduces: [p:log-likelihood-scoring]
+  uses: [c:likelihood, c:negative-log-likelihood, c:logarithm, c:probability, c:conditional-probability, s:p-prob, s:p-given, s:log, c:softmax, c:log-sum-exp, c:logit, c:tensor, c:mean, c:token, c:tokenizer, c:base-model, c:language-model, c:context-window, c:end-of-text, c:benchmark, c:bits-per-byte, c:byte, c:utf-8, c:model-parameter, c:contamination, c:decontamination, py:torch-softmax, py:no-grad, py:with, py:dim, py:keyword-argument, py:torch-tensor, py:item, py:for, py:range, py:if, py:comparison, py:list, py:len, py:indexing, py:slicing, py:float, py:def, py:return, py:import, py:comment, py:underscore-name, py:print, py:string-literal, py:dict, py:arithmetic, py:augmented-assignment, q:predict, q:choice, q:exercise-with-check, q:run-cell]
+  data: [synthetic-story-cloze, tinystories, model-course-capstone]
+  needs: any
+
+- id: llm-chat-template
+  title: "Chat templates"
+  level: expert
+  module: post-training
+  idea: "A chat template wraps every message in special tokens that mark its role; a wrong template quietly breaks a chat model."
+  covers: [base-vs-chat-en-chat-templates#2, base-vs-chat-en-chat-templates#4]
+  requires: [tok-special-tokens, lm-base-vs-chat]
+  introduces: [c:chat-template, c:generation-prompt, c:end-of-turn-token, py:repr]
+  uses: [c:special-token, c:end-of-text, c:base-model, c:chat-model, c:message-role, c:tokenizer, c:token, c:token-id, c:language-model, py:tiktoken, py:dict, py:list, py:slicing, py:len, py:if, py:bool, py:for, py:str, py:def, py:return, py:print, py:comment, py:underscore-name, q:predict, q:choice, q:explain, q:exercise-with-check, q:run-cell]
+  needs: any
+
+- id: llm-sft
+  title: "Project: teach your model to follow instructions (SFT)"
+  level: expert
+  module: post-training
+  kind: project
+  project: llm
+  idea: "Fine-tune your model on instructions with a good answer, with the loss only on the answer and its end-of-text; a check a program can do counts how much more often it does what is asked."
+  covers: [supervised-fine-tuning#0, supervised-fine-tuning#3, capstone-zelf-een-kleine-llm-bouwen-en-trainen#5]
+  requires: [llm-chat-template, llm-pretrain-capstone, torch-fine-tune]
+  introduces: [c:instruction-tuning, c:loss-masking, c:sequence-padding]
+  uses: [c:fine-tuning, c:pretrained-model, c:base-model, c:chat-model, c:chat-template, c:generation-prompt, c:end-of-turn-token, c:end-of-text, c:special-token, c:message-role, c:token, c:token-id, c:tokenizer, c:vocabulary, c:next-token-prediction, c:language-model, c:pretraining-corpus, c:cross-entropy, c:loss, c:label, c:logit, c:gradient, c:learning-rate, c:lr-schedule, c:adamw, c:mini-batch, c:batch-size, c:tensor, c:shape, c:device, c:seed, c:checkpoint, c:test-set, c:temperature, c:sampling, py:nn-cross-entropy-loss, py:torch-tensor, py:torch-randn, py:manual-seed, py:item, py:min-max, py:comprehension, py:strip-chars, py:lower, py:split, py:set, py:set-add, py:list, py:append, py:slicing, py:indexing, py:tuple, py:len, py:arithmetic, py:bool, py:for, py:if, py:string-literal, py:import-as, py:def, py:return, py:print, py:comment, py:underscore-name, q:predict, q:choice, q:exercise-with-check, q:run-cell]
+  ladder: [torch]
+  data: [tinystories, synthetic-story-prompts, model-course-capstone, model-course-sft]
+  reference_data: [cosmopedia]
+  compute_minutes: 6
+  fallback: [checkpoint]
+  needs: any
+
+- id: llm-lora
+  title: "Project: LoRA, fine-tuning with a low-rank update"
+  level: expert
+  module: post-training
+  kind: project
+  project: llm
+  idea: "Freeze the model and learn a small low-rank correction per weight matrix; it needs far less memory and gives almost the same result."
+  covers: [peft-lora-en-qlora#0, peft-lora-en-qlora#1]
+  requires: [llm-sft, math-matrix-calculus, math-matrix-rank]
+  introduces: [c:lora, c:adapter]
+  uses: [c:low-rank, c:matrix-rank, c:matrix-calculus, c:fine-tuning, c:freezing, c:instruction-tuning, c:loss-masking, c:sequence-padding, c:adamw, c:optimizer, c:optimizer-state, c:learning-rate, c:gradient, c:backward-pass, c:forward-pass, c:weight, c:bias-term, c:layer, c:matrix-multiplication, c:transpose, c:shape, c:tensor, c:model-parameter, c:parameter-count, c:checkpoint, c:attention, c:query, c:key, c:value, c:mlp, c:swiglu, c:embedding, c:logit, c:gpu, c:device, c:seed, c:test-set, py:nn-parameter, py:requires-grad, py:no-grad, py:nn-linear, py:nn-module, py:class, py:init-method, py:forward-method, py:super, py:self, py:torch-randn, py:torch-transpose, py:matmul-operator, py:np-linalg-matrix-rank, py:manual-seed, py:named-parameters, py:state-dict, py:list, py:for, py:if, py:bool, py:return, py:def, py:print, py:comment, py:underscore-name, py:import, py:import-as, py:tuple, py:augmented-assignment, py:arithmetic, py:is-none, py:none, q:predict, q:choice, q:exercise-with-check, q:run-cell]
+  ladder: [torch]
+  data: [tinystories, synthetic-story-prompts, model-course-capstone]
+  reference_data: [cosmopedia]
+  compute_minutes: 6
+  fallback: [checkpoint]
+  needs: any
+
+- id: llm-preference-pairs
+  title: "Preference pairs and the Bradley-Terry model"
+  level: expert
+  module: post-training
+  idea: "People, or a checker, say which of two answers is better; the Bradley-Terry model turns that into a probability with a sigmoid."
+  covers: [preferentiedata-en-reward-models#0, preferentiedata-en-reward-models#1]
+  requires: [llm-sft, llm-lora, ml-sigmoid]
+  introduces: [c:preference-pair, c:bradley-terry, s:succ-preferred]
+  uses: [c:sigmoid, c:logit, c:odds, c:logarithm, c:cross-entropy, c:loss, c:gradient-descent, c:learning-rate, c:probability, c:instruction-tuning, c:fine-tuning, c:lora, c:base-model, c:chat-model, c:test-set, c:mean, s:sigma-sigmoid, s:log, s:exp, s:p-prob, py:math-module, py:dict, py:comprehension, py:for, py:range, py:append, py:tuple, py:list, py:bool, py:and-operator, py:if, py:def, py:return, py:print, py:comment, py:underscore-name, py:import, py:len, py:arithmetic, py:augmented-assignment, py:string-literal, py:float, q:predict, q:choice, q:exercise-with-check, q:run-cell]
+  mentions: [c:reward-model, c:dpo]
+  data: [synthetic-story-prompts]
+  needs: any
+
+- id: llm-rlhf-idea
+  title: "RLHF: learning from human preferences"
+  level: expert
+  module: post-training
+  idea: "A reward model learns the preferences, and reinforcement learning pushes the model towards higher reward while a KL penalty keeps it close to where it started."
+  covers: [rlhf#0]
+  requires: [llm-preference-pairs, rl-what-is-rl, info-cross-entropy-kl]
+  introduces: [c:rlhf, c:reward-model, c:policy, c:reference-model, c:kl-penalty, c:reward-hacking, s:pi-policy, s:beta-kl]
+  uses: [c:reward, c:return, c:discount, c:agent, c:reinforcement-learning, c:kl-divergence, c:surprise, c:nat, c:expected-value, c:mean, c:probability-distribution, c:conditional-probability, s:p-given, c:preference-pair, c:bradley-terry, c:instruction-tuning, c:fine-tuning, c:freezing, c:language-model, c:probability, c:softmax, c:exponent, c:logarithm, c:loss, s:exp, s:log, py:math-module, py:list, py:for, py:append, py:return, py:def, py:print, py:comment, py:underscore-name, py:import, py:arithmetic, py:comprehension, py:tuple, q:predict, q:choice, q:exercise-with-check, q:run-cell]
+  mentions: [c:dpo]
+  needs: any
+
+- id: llm-dpo-loss
+  title: "DPO: preferences without a reward model"
+  level: expert
+  module: post-training
+  idea: "DPO turns the Bradley-Terry probability of a preference pair into a loss on how much more likely your model makes the better answer than a frozen reference model does; no reward model and no RL loop."
+  covers: [dpo-en-varianten#0]
+  requires: [llm-rlhf-idea]
+  introduces: [c:dpo, py:torch-log-softmax, py:logsigmoid]
+  uses: [c:bradley-terry, c:kl-divergence, c:reference-model, c:policy, c:reward-model, c:rlhf, c:kl-penalty, c:reward, c:preference-pair, c:instruction-tuning, c:reinforcement-learning, c:fine-tuning, c:freezing, c:lora, c:adapter, c:sigmoid, c:softmax, c:logit, c:logarithm, c:cross-entropy, c:loss, c:loss-masking, c:probability, c:conditional-probability, c:token, c:token-id, c:vocabulary, c:language-model, c:next-token-prediction, c:nat, c:mean, c:mini-batch, c:derivative, c:gradient, c:update-step, c:adamw, c:tensor, c:underflow, s:pi-policy, s:beta-kl, s:sigma-sigmoid, s:log, s:exp, s:p-given, py:torch-tensor, py:torch-randn, py:manual-seed, py:requires-grad, py:backward, py:grad-attribute, py:item, py:float, py:dim, py:indexing, py:slicing, py:for, py:range, py:len, py:arithmetic, py:tuple, py:list, py:comprehension, py:math-module, py:import, py:import-as, py:def, py:return, py:print, py:comment, py:underscore-name, q:predict, q:choice, q:exercise-with-check, q:run-cell]
+  ladder: [torch]
+  needs: any
+
+- id: llm-dpo
+  title: "Project: DPO, preferences without a reward model"
+  level: expert
+  module: post-training
+  kind: project
+  project: llm
+  idea: "Train DPO on your story model: a checker builds the preference pairs from whether the requested words appear, and the reference model is your model with the LoRA adapter switched off."
+  covers: [dpo-en-varianten#2]
+  requires: [llm-dpo-loss, llm-lora]
+  introduces: [c:on-policy, c:off-policy, py:torch-stack]
+  uses: [c:dpo, c:reference-model, c:policy, c:lora, c:adapter, c:preference-pair, c:instruction-tuning, c:fine-tuning, c:freezing, c:reward-hacking, c:kl-penalty, c:loss, c:nat, c:logarithm, c:gradient, c:adamw, c:optimizer, c:learning-rate, c:mini-batch, c:update-step, c:test-set, c:token, c:token-id, c:end-of-text, c:language-model, c:model-parameter, c:parameter-count, c:mean, c:reward, c:rlhf, c:layer, c:transformer-block, c:low-rank, c:matrix-rank, c:matrix-multiplication, c:transpose, c:tensor, c:shape, c:training-loop, s:beta-kl, s:log, py:torch-tensor, py:no-grad, py:backward, py:zero-grad, py:optimizer-step, py:item, py:float, py:named-parameters, py:requires-grad, py:grad-attribute, py:manual-seed, py:indexing, py:slicing, py:matmul-operator, py:torch-transpose, py:set, py:strip-chars, py:lower, py:split, py:string-literal, py:arithmetic, py:dict, py:list, py:tuple, py:append, py:comprehension, py:bool, py:for, py:range, py:import, py:def, py:return, py:print, py:comment, py:underscore-name, q:predict, q:choice, q:exercise-with-check, q:run-cell]
+  ladder: [torch]
+  data: [tinystories, synthetic-story-prompts, course-dpo-answers, model-course-sft, model-course-dpo]
+  reference_data: [course-dpo-answers]
+  compute_minutes: 8
+  fallback: [checkpoint]
+  needs: any
+
+- id: llm-rlvr
+  title: "Reinforcement learning with verifiable rewards"
+  level: expert
+  module: post-training
+  idea: "When a program can check the answer, that check can be the reward; this is how reasoning models are trained."
+  covers: [rl-met-verifieerbare-beloningen#0, rl-met-verifieerbare-beloningen#1]
+  requires: [llm-dpo]
+  introduces: [c:verifiable-reward]
+  compute_minutes: 30
+  needs: rec
+
+- id: llm-eval-chat
+  title: "Did post-training help?"
+  level: expert
+  module: post-training
+  idea: "Measure instruction following with checks a program can verify, before and after SFT and DPO, on held-out prompts."
+  covers: [capability-benchmarks#8]
+  requires: [llm-dpo, llm-decontamination]
+  introduces: [p:verifiable-eval, c:verifiable-instruction]
+  uses: [c:benchmark, c:clean-subset, c:contamination, c:decontamination, c:n-gram, c:instruction-tuning, c:dpo, c:preference-pair, c:reward-model, c:lora, c:adapter, c:base-model, c:language-model, c:fine-tuning, c:reward-hacking, c:test-set, c:token, c:sampling, c:seed, c:temperature, c:mean, py:def, py:return, py:for, py:if, py:and-operator, py:bool, py:comparison, py:set, py:set-add, py:tuple, py:tuple-key, py:sorted, py:list, py:comprehension, py:lower, py:split, py:strip-chars, py:string-literal, py:augmented-assignment, py:indexing, py:slicing, py:dict, py:split-sep, py:print, py:comment, py:underscore-name, py:import, q:predict, q:choice, q:exercise-with-check, q:run-cell]
+  data: [synthetic-story-prompts, tinystories, course-eval-chat, model-course-capstone, model-course-sft, model-course-dpo]
+  reference_data: [course-dpo-answers]
+  needs: any
+
+- id: llm-same-on-open-model
+  title: "The same steps on an open model"
+  level: expert
+  module: post-training
+  idea: "Apply LoRA SFT and DPO to a small open-license model with an open instruction and preference dataset."
+  covers: [peft-lora-en-qlora#0]
+  requires: [llm-lora, llm-dpo]
+  introduces: [p:adapt-an-open-model]
+  ladder: [torch]
+  data: [model-qwen3-0.6b-base, oasst, helpsteer2]
+  compute_minutes: 45
+  needs: rec
+
+- id: llm-quantize
+  title: "Running a model in fewer bits"
+  level: expert
+  module: post-training
+  idea: "Storing your model's weights in 8 or 4 bits makes it smaller and faster to run, at a small cost in quality that you measure."
+  covers: [quantization-en-compressie#0]
+  requires: [sys-number-formats, llm-pretrain-capstone]
+  introduces: [c:quantization]
+  needs: any

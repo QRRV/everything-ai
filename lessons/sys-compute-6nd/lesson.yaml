@@ -1,0 +1,33 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: sys-compute-6nd
+minutes: 30
+title:
+  en: "Estimating training compute: the 6ND rule"
+  nl: "Trainingscompute schatten: de 6ND-vuistregel"
+goal:
+  en: "estimate the FLOPs, the time and the GPU hours of a training run before you start it, and read back from a report how much of the peak a run reached."
+  nl: "de FLOPs, de tijd en de GPU-uren van een trainingsrun schatten voordat je hem start, en uit een verslag terugrekenen hoeveel van de piek een run haalde."
+summary:
+  - en: "Training a model of N parameters on D tokens costs about 6ND FLOPs: 2 per parameter per token forward, 4 backward. D counts every token trained on, epochs included."
+    nl: "Een model van N parameters trainen op D tokens kost ongeveer 6ND FLOPs: 2 per parameter per token forward, 4 backward. D telt elk token waarop getraind wordt, epochs meegeteld."
+  - en: "The time is 6ND divided by the peak of the GPUs in your number format, the part of it a run reaches, about 30 to 50% for large runs, and the number of GPUs."
+    nl: "De tijd is 6ND gedeeld door de piek van de GPU's in je getalformaat, het deel ervan dat een run haalt, ongeveer 30 tot 50% bij grote runs, en het aantal GPU's."
+  - en: "Time times GPUs gives GPU hours, and GPU hours times the price the bill; backwards, the rule says what fits in a budget."
+    nl: "Tijd maal GPU's geeft GPU-uren, en GPU-uren maal de prijs de rekening; teruggerekend zegt de regel wat er in een budget past."
+can_now:
+  - en: "estimate the time of a training run in hours"
+    nl: "de tijd van een trainingsrun schatten in uren"
+    by: train-hours
+  - en: "say how many tokens fit in a budget of GPUs and time"
+    nl: "zeggen hoeveel tokens er in een budget van GPU's en tijd passen"
+    by: budget
+  - en: "explain why a run can take longer than the 6ND estimate"
+    nl: "uitleggen waarom een run langer kan duren dan de schatting met 6ND"
+    by: too-optimistic
+further_reading:
+  - en: "Jared Kaplan and others (2020), *Scaling Laws for Neural Language Models*, section 2.1: where the 6ND rule comes from"
+    nl: "Jared Kaplan en anderen (2020), *Scaling Laws for Neural Language Models*, paragraaf 2.1: waar de 6ND-vuistregel vandaan komt"
+  - en: "Hugo Touvron and others (2023), *Llama 2: Open Foundation and Fine-Tuned Chat Models*, table 2: the GPU hours of the worked example"
+    nl: "Hugo Touvron en anderen (2023), *Llama 2: Open Foundation and Fine-Tuned Chat Models*, tabel 2: de GPU-uren van het uitgewerkte voorbeeld"

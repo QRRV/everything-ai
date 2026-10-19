@@ -1,0 +1,28 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: ml-linear-regression-numpy
+minutes: 20
+title:
+  en: "Linear regression on many features"
+  nl: "Lineaire regressie met veel features"
+goal:
+  en: "work out every slope of the MSE at once with the chain rule, and train a linear model on many features with your own code."
+  nl: "elke helling van de MSE tegelijk uitrekenen met de kettingregel, en met je eigen code een lineair model op veel features trainen."
+summary:
+  - en: 'Linear regression predicts $\hat{\mathbf{y}} = \mathbf{X}\mathbf{w} + b$ and finds $\mathbf{w}$ and $b$ by making the mean squared error as small as possible.'
+    nl: 'Lineaire regressie voorspelt $\hat{\mathbf{y}} = \mathbf{X}\mathbf{w} + b$ en vindt $\mathbf{w}$ en $b$ door de mean squared error zo klein mogelijk te maken.'
+  - en: "With the residuals r = y − ŷ, the chain rule gives every slope at once: `grad_w = -2 * (r @ X) / n` and `grad_b = -2 * r.mean()`."
+    nl: "Met de residuen r = y − ŷ geeft de kettingregel elke helling tegelijk: `grad_w = -2 * (r @ X) / n` en `grad_b = -2 * r.mean()`."
+  - en: "Your project `nn` now has `gradients.py` with `mse_gradients`, and `linear.py` with `fit`, which trains with it."
+    nl: "Je project `nn` heeft nu `gradients.py` met `mse_gradients`, en `linear.py` met `fit`, die ermee traint."
+can_now:
+  - en: "say how many slopes r @ X gives"
+    nl: "zeggen hoeveel hellingen r @ X geeft"
+    by: slope-shape
+  - en: "work out every slope of the MSE at once"
+    nl: "elke helling van de MSE tegelijk uitrekenen"
+    by: mse-gradients
+  - en: "train a linear model on many features with your own code"
+    nl: "met je eigen code een lineair model op veel features trainen"
+    by: fit
