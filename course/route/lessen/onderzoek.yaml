@@ -379,7 +379,8 @@ lessons:
   idea: "Write down the claim, the experiment, the compute estimate and what would count as a failed reproduction, in the plan format of your kit; a check reviews the plan."
   covers: [een-reproduceerbare-paper-kiezen#0, een-reproduceerbare-paper-kiezen#2]
   requires: [repro-own-choose]
-  uses: [p:repro-kit]
+  introduces: [c:effect-size, c:preregistration]
+  uses: [p:repro-kit, p:reproduction-plan, p:choose-a-reproducible-paper, c:reproduction, c:falsifiable, c:cherry-picking, c:paper, c:seed, c:run, c:run-to-run-variance, c:noise, c:median, c:outlier, c:floating-point, c:accuracy, c:loss, c:dropout, c:gpu, c:module, c:json, c:negative-result, py:np-median, py:np-mean, py:list, py:dict, py:range, py:for, py:if, py:append, py:len, py:comparison, py:or-operator, py:def, py:return, py:import, py:string-literal, py:comment, py:underscore-name, py:print, q:predict, q:choice, q:explain, q:exercise-with-check, q:run-cell]
   needs: any
 
 - id: repro-own-build

@@ -1,0 +1,29 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+# termen:allow preregistration
+id: repro-own-claim
+minutes: 60
+title:
+  en: "Your reproduction 2: claim and plan"
+  nl: "Je reproductie 2: claim en plan"
+goal:
+  en: "write the plan of your own reproduction before any run: the claim as a comparison, the experiment, its cost, and the rule that says when it did not reproduce."
+  nl: "het plan van je eigen reproductie opschrijven vóór de eerste run: de claim als vergelijking, het experiment, wat het kost, en de regel die zegt wanneer hij niet reproduceert."
+summary:
+  - en: "A claim compares two settings that differ in one thing; per seed, the gain is how far the claim's setting is ahead, and the median gain decides."
+    nl: "Een claim vergelijkt twee settings die in één ding verschillen; per seed is de winst hoe ver de setting van de claim voorligt, en de mediaan van de winsten beslist."
+  - en: "The plan says how big that gain must be to count, an effect size above the noise between seeds, and with which seeds: runs added afterwards do not count."
+    nl: "Het plan zegt hoe groot die winst moet zijn om te tellen, een effectgrootte boven de ruis tussen seeds, en met welke seeds: runs die je achteraf toevoegt, tellen niet."
+  - en: "Written down before any run, as work/projects/own/plan.json with its rule in work/projects/own/plan.py, the plan can fail, and that is what makes a success mean something."
+    nl: "Vóór de eerste run opgeschreven, als work/projects/own/plan.json met de regel in work/projects/own/plan.py, kan het plan falen, en dat geeft een succes betekenis."
+can_now:
+  - en: "decide from the runs of two settings over planned seeds whether they support a claim"
+    nl: "uit de runs van twee settings over geplande seeds beslissen of ze een claim steunen"
+    by: verdict
+  - en: "write a plan for a reproduction that a reviewer would not send back"
+    nl: "een plan voor een reproductie schrijven dat een reviewer niet terugstuurt"
+    by: plan
+further_reading:
+  - en: "Brian A. Nosek and others (2018), *The preregistration revolution*, PNAS 115(11): why writing down the plan before the data matters, and how it is done"
+    nl: "Brian A. Nosek en anderen (2018), *The preregistration revolution*, PNAS 115(11): waarom het plan opschrijven vóór de data ertoe doet, en hoe dat gaat"
