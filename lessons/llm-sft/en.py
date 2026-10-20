@@ -339,17 +339,21 @@ def tune_button_cell():
 def demo_tune(box_batch, box_example, box_words, result_batch, result_example, result_words, tune_button):
     tuned = None
     _note = None
+    _live = None
     if not all(_r.state == "correct" for _r in (result_example, result_batch, result_words)):
         _note = "*Finish exercises 1 to 3 first: the demo fine-tunes with your `sft_example` and `sft_batch`, and counts with your `words_used`.*"
     elif tune_button.value:
+        _live = L.live({"title": "Your run: the loss of every step", "x": "step", "y": "loss",
+                        "alt": f"The loss of every step of your run so far, in grey, and its mean over the last {max(1, C.STEPS // 50)} steps as the thicker line."}, C.STEPS, low=0.0)
+
         def _progress(_p):
             if _p["phase"] == "pairs":
-                mo.output.replace(mo.md(f"**{C.number(_p['pairs'], 0, L.lang)} examples** · the model answers the instructions …"))
+                _live.line(f"**{C.number(_p['pairs'], 0, L.lang)} examples** · the model answers the instructions …")
             elif _p["phase"] in ("before", "after"):
                 _when = "Before SFT" if _p["phase"] == "before" else "After SFT"
-                mo.output.replace(mo.md(f"**{_when}** · instruction {_p['done']} of {_p['total']} · every word used: {_p['used']}"))
+                _live.line(f"**{_when}** · instruction {_p['done']} of {_p['total']} · every word used: {_p['used']}")
             else:
-                mo.output.replace(mo.md(f"**Step {C.number(_p['step'], 0, L.lang)} of {C.number(_p['steps'], 0, L.lang)}** · loss {C.number(_p['loss'], 3, L.lang)} · {C.number(_p['seconds'] / 60, 1, L.lang)} minutes"))
+                _live.extend(_p["fresh"], f"**Step {C.number(_p['step'], 0, L.lang)} of {C.number(_p['steps'], 0, L.lang)}** · loss {C.number(_p['loss'], 3, L.lang)} · {C.number(_p['seconds'] / 60, 1, L.lang)} minutes")
         _r = C.run(run_code(box_example.value).names["sft_example"], run_code(box_batch.value).names["sft_batch"],
                    run_code(box_words.value).names["words_used"], _progress)
         if _r == "run":
@@ -366,7 +370,10 @@ def demo_tune(box_batch, box_example, box_words, result_batch, result_example, r
             _note = "*The loss is no longer a number: the training ran off. Is the learning rate of your `pretrain_step` the one it is given?*"
         else:
             tuned = _r
-    mo.output.replace(mo.md(_note)) if _note else mo.output.clear()
+    if _note and _live is not None:
+        _live.line(_note)   # a run that stops early keeps its chart, with the note under it
+    else:
+        mo.output.replace(mo.md(_note)) if _note else mo.output.clear()
     return (tuned,)
 
 
@@ -386,6 +393,43 @@ def demo_result(tuned):
         mo.md(("The first of these instructions that the model did after SFT and not before: " if _example.get("better") else "The first of these instructions: ") + f"*{C.instruction(_example['words']).splitlines()[0]}*\n\nBefore SFT:\n\n" + C.P.quote(_example["before"] or "…")),
         mo.md("After SFT:\n\n" + C.P.quote(_example["after"] or "…")),
     ])
+    return
+
+
+@app.cell(hide_code=True)
+def text_replay():
+    mo.md(f"""
+    ### Your run, step by step
+
+    While the button fine-tunes your model, it lets your model answer the first test instruction six times: before the first step, and after every {C.number(C.STEPS // C.SNAPSHOTS, 0, L.lang)} steps. Here you go through those moments: the loss along the run, with a dashed line at the moment you choose, and what your model wrote then.
+    """)
+    return
+
+
+@app.cell(hide_code=True)
+def replay_cell(tuned):
+    _run = tuned if tuned is not None else C.saved()
+    if _run is None:
+        _out = mo.md("*Once you have fine-tuned your model, you can go through its run here.*")
+    elif not _run.get("snapshots"):
+        _out = mo.md("*Your saved run has no moments to go through: it was made before the lesson kept them. Fine-tune your model again to go through its run here.*")
+    else:
+        _labels = {"title": "The loss along your run", "x": "step", "y": "loss", "lang": L.lang,
+                   "alt": "The loss of your run, the mean of every 50 steps, with a dashed line at the chosen moment.",
+                   "start": "Before the first step", "after": "After {step} steps", "used": "every word used", "not_used": "not every word used",
+                   "stopped": "stopped by itself", "not_stopped": "did not stop by itself"}
+        _out = L.explore("replay", "step", lambda _v: C.replay_frame(_run, int(_v), _labels), start=_run["snapshots"][-1]["step"],
+                         values=[_s["step"] for _s in _run["snapshots"]], role="",
+                         task=f"At which moments does your model's answer to *{C.instruction(_run['snapshots'][0].get('words') or C.tests()[0]).splitlines()[0]}* use every word asked for, and stop by itself?")
+    _out
+    return
+
+
+@app.cell(hide_code=True)
+def text_replay_after():
+    mo.md(f"""
+    At every moment, the model draws the tokens of its answer with the same seed, so what changes from one moment to the next is only the model: what the steps in between taught it. Whether this one answer uses the word asked for can still come and go: a slightly different model draws another token somewhere, and from there the story goes another way. One answer is one draw; that is why the table above counts the answers to {C.TESTS} instructions.
+    """)
     return
 
 

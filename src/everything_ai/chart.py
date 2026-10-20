@@ -20,7 +20,7 @@ _CLIPS = itertools.count()   # every clip path on a page needs its own id
 def _colour(role: str) -> str:
     if role in _ROLES:
         return f"var(--ea-{role})"
-    return {"ink": "var(--ea-ink)", "ink-2": "var(--ea-ink-2)", "ink-3": "var(--ea-ink-3)"}[role]
+    return {"ink": "var(--ea-ink)", "ink-2": "var(--ea-ink-2)", "ink-3": "var(--ea-ink-3)", "axis": "var(--ea-axis)"}[role]
 
 
 def ticks(lo: float, hi: float, n: int = 5) -> list[float]:

@@ -508,9 +508,10 @@ def run_plan(plan: dict, step_fn, show) -> dict | str:
 
 
 def quote(story: str) -> str:
-    """A story as a quote in Markdown, with nothing in it that Markdown or KaTeX would read as a sign."""
+    """A story as a quote in Markdown, with nothing in it that Markdown or KaTeX would read as a sign, and no spaces in
+    front of a line that would make it code."""
     safe = re.sub(r"([\\`*_$<>#\[\]|])", r"\\\1", story.strip())
-    return "\n>\n".join("> " + part for part in re.split(r"\n+", safe) if part.strip())
+    return "\n>\n".join("> " + part.strip() for part in re.split(r"\n+", safe) if part.strip())
 
 
 def course_info() -> dict:

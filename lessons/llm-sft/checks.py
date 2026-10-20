@@ -228,12 +228,17 @@ def rate(model, merges: dict, words_used, encode_fast, decode, show, phase: str)
             "seconds": time.perf_counter() - start}
 
 
+SNAPSHOTS = 5   # moments of the run, after the start, at which tune lets the model answer: for the replay of the run
+
+
 def tune(model, examples: list, sft_batch, step_fn, end_id: int, show, steps: int | None = None, seed: int = 0,
-         lr: float | None = None) -> dict | str:
+         lr: float | None = None, snap=None) -> dict | str:
     """Fine-tune `model` on `examples` with the learner's sft_batch and pretrain_step for `steps` steps (STEPS when
     None): AdamW on the parameters that need a gradient, at `lr` (LR when None) times the schedule of
     llm-open-recipes, mini-batches of BATCH examples in a shuffled order, from the start again when they run out.
-    `show` hears a step every second. "batch" when sft_batch stops with an error, "run" when pretrain_step does,
+    `show` hears a step every second, with every (step, loss) since it last heard ("fresh"), for a live chart. With
+    `snap(step, model)`, the model answers before the first step and after every steps / SNAPSHOTS steps, for the
+    replay of the run ("snapshots"). "batch" when sft_batch stops with an error, "run" when pretrain_step does,
     "memory" when the device runs out of it, "diverged" when the loss is no number."""
     import torch
     steps = STEPS if steps is None else steps
@@ -246,7 +251,10 @@ def tune(model, examples: list, sft_batch, step_fn, end_id: int, show, steps: in
     random.Random(seed).shuffle(order)
     plan = P.saved_plan()
     mixed = bool(plan and plan.get("mixed") and plan.get("device") == w["device"])
-    losses, recent, seconds, last_show = [], [], 0.0, time.perf_counter()
+    losses, recent, fresh, seconds, last_show = [], [], [], 0.0, time.perf_counter()
+    marks = {round(steps * k / SNAPSHOTS) for k in range(1, SNAPSHOTS + 1)}
+    snapshots = [] if snap is None else [snap(0, model)]
+    model.train()
     for step in range(steps):
         start = time.perf_counter()
         chosen = [examples[order[(step * batch + k) % len(order)]] for k in range(batch)]
@@ -264,14 +272,19 @@ def tune(model, examples: list, sft_batch, step_fn, end_id: int, show, steps: in
         P._sync(w["device"])
         seconds += time.perf_counter() - start
         recent.append(loss)
+        fresh.append((step + 1, loss))
+        if snap is not None and step + 1 in marks:
+            snapshots.append(snap(step + 1, model))
+            model.train()
         if (step + 1) % 50 == 0 or step + 1 == steps:
             losses.append({"step": step + 1, "loss": sum(recent) / len(recent)})
             recent = []
         if time.perf_counter() - last_show > 1 or step + 1 == steps:
-            show({"phase": "train", "step": step + 1, "steps": steps, "loss": loss, "seconds": seconds})
-            last_show = time.perf_counter()
+            show({"phase": "train", "step": step + 1, "steps": steps, "loss": loss, "seconds": seconds, "fresh": fresh})
+            fresh, last_show = [], time.perf_counter()
     model.eval()
-    return {"steps": steps, "seconds": seconds, "losses": losses, "device": w["device"], "name": w["name"], "mixed": mixed}
+    return {"steps": steps, "seconds": seconds, "losses": losses, "device": w["device"], "name": w["name"], "mixed": mixed,
+            "snapshots": snapshots}
 
 
 def run(sft_example, sft_batch, words_used, show) -> dict | str:
@@ -300,8 +313,20 @@ def run(sft_example, sft_batch, words_used, show) -> dict | str:
     before = rate(model, merges, words_used, t["encode_fast"], t["decode"], show, "before")
     if isinstance(before, str):
         return before
+    words = list(tests()[0])
+    asked = t["encode_fast"](instruction(words), merges)
+
+    def snap(step, m):   # the first test instruction, as rate answers it: the same seed at every moment
+        ids, ended = answer(m, asked, end, seed=0)
+        text = t["decode"](ids, merges)
+        try:
+            used = bool(words_used(text, list(words)))   # a copy, as in rate: a words_used may empty the list it gets
+        except Exception:
+            used = False
+        return {"step": step, "words": list(words), "text": text, "ended": ended, "used": used}
+
     torch.manual_seed(0)
-    tuned = tune(model, examples, sft_batch, t["pretrain_step"], end, show)
+    tuned = tune(model, examples, sft_batch, t["pretrain_step"], end, show, snap=snap)
     if isinstance(tuned, str):
         return tuned
     after = rate(model, merges, words_used, t["encode_fast"], t["decode"], show, "after")
@@ -322,11 +347,41 @@ def save(result: dict, info: dict) -> None:
     torch.save({k: v.detach().cpu() for k, v in result["model"].state_dict().items()}, folder / f"{NAME}.pt")
     keep = {"sizes": info["sizes"], "merges": info["merges"], "base": result["source"], "params": result["params"],
             "pairs": result["pairs"], "steps": result["steps"], "lr": LR, "seconds": round(result["seconds"], 1),
-            "device": result["device"], "losses": result["losses"],
+            "device": result["device"], "losses": result["losses"], "snapshots": result.get("snapshots", []),
             **{when: {k: result[when][k] for k in ("used", "stopped", "total")} for when in ("before", "after")},
             "example": example(result["before"], result["after"]),
             "hits": {when: "".join("1" if h else "0" for h in result[when]["hits"]) for when in ("before", "after")}}
     (folder / f"{NAME}.json").write_text(json.dumps(keep, indent=1) + "\n", encoding="utf-8")
+
+
+def replay_frame(run: dict, step: int, labels: dict) -> tuple:
+    """One moment of a run, for the replay of the run (L.explore): the loss along the run, the mean of every 50 steps,
+    with a line at `step`; and what the model wrote at that moment to the first test instruction. `labels`: title,
+    x, y, alt, lang (for the numbers), and the words of the sentence under it: "after" ({step}), "start", "used",
+    "not_used", "stopped", "not_stopped"."""
+    from everything_ai import chart
+    snap = next(s for s in run["snapshots"] if s["step"] == step)
+    xs, ys = [l["step"] for l in run["losses"]], [l["loss"] for l in run["losses"]]
+    p = chart.Panel((0, run["steps"]), (0, math.ceil(max(ys) * 2) / 2), title=labels["title"], xlabel=labels["x"], ylabel=labels["y"])
+    p.line(xs, ys, "loss", 2.2)
+    p.line([step, step], [0, math.ceil(max(ys) * 2) / 2], "ink-2", 1.2, dashed=True)
+    done = [(x, y) for x, y in zip(xs, ys) if x <= step]
+    if done:
+        p.points([done[-1][0]], [done[-1][1]], "loss", r=4)
+    svg = chart.figure([p], alt=labels["alt"], width=360, height=220)
+    when = labels["start"] if step == 0 else labels["after"].format(step=number(step, 0, labels.get("lang", "en")))
+    verdict = f"{labels['used'] if snap['used'] else labels['not_used']}; {labels['stopped'] if snap['ended'] else labels['not_stopped']}"
+    return svg, f"**{when}** · {verdict}\n\n{written(snap['text'])}"
+
+
+def written(text: str) -> str:
+    """What a model wrote, in Markdown for the sentence under a picture: every line in italics on its own line, in the
+    serif of a quote (<i>, as play.Explore writes it), with nothing in it that Markdown or KaTeX would read as a sign,
+    and no spaces in front that would make it code: also no link from an address (: and .), no ^superscript^ and
+    no ++key++."""
+    signs = {"&": "&amp;", "<": "&lt;", ">": "&gt;", **{c: f"&#{ord(c)};" for c in "\\`*_$[]|~#^+:."}}
+    lines = ["".join(signs.get(c, c) for c in line.strip()) for line in text.split("\n") if line.strip()]
+    return "  \n".join(f"<i>{line}</i>" for line in lines) or "…"
 
 
 def example(before: dict, after: dict) -> dict:

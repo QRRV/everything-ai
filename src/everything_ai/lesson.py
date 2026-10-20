@@ -190,6 +190,12 @@ class Lesson:
     def note(self, text: str) -> mo.Html:
         return mo.Html(style.note(_inline(text)))
 
+    def live(self, labels: dict, steps: int, role: str = "loss", **kw):
+        """A chart that grows while the demo trains (live.Live), in this lesson's language: give it every step with
+        `.add(step, value, text)`, and a line of progress alone with `.line(text)`."""
+        from everything_ai import live
+        return live.Live(labels, steps, role=role, lang=self.lang, **kw)
+
     def course_versions(self) -> mo.Html:
         """A note when a project module this lesson builds on is missing or broken, so the lesson uses the course's
         version for now (template 1.3): which file, and which lesson to go back to. Nothing when all are yours."""
