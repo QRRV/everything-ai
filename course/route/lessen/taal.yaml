@@ -755,9 +755,11 @@ lessons:
   idea: "When a program can check the answer, that check can be the reward; this is how reasoning models are trained."
   covers: [rl-met-verifieerbare-beloningen#0, rl-met-verifieerbare-beloningen#1]
   requires: [llm-dpo]
-  introduces: [c:verifiable-reward]
-  compute_minutes: 30
-  needs: rec
+  introduces: [c:verifiable-reward, c:grpo, c:advantage-function, c:expert-iteration]
+  uses: [c:reward, c:policy, c:reference-model, c:kl-penalty, c:reward-hacking, s:beta-kl, c:preference-pair, c:dpo, c:lora, c:instruction-tuning, c:negative-log-likelihood, c:temperature, c:mean, c:loss, c:gradient, py:torch-stack, py:torch-log-softmax, py:def, py:return, py:list, py:comprehension, py:for, py:range, py:indexing, py:len, py:print, py:comment, py:underscore-name, q:predict, q:choice, q:explain, q:exercise-with-check, q:run-cell]
+  ladder: [torch]
+  compute_minutes: 7
+  needs: any
 
 - id: llm-eval-chat
   title: "Did post-training help?"

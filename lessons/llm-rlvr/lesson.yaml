@@ -1,0 +1,39 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+# termen:allow Limits
+id: llm-rlvr
+minutes: 40
+title:
+  en: "Reinforcement learning with verifiable rewards"
+  nl: "Reinforcement learning met verifiable rewards"
+goal:
+  en: "train your model with GRPO on a reward a program gives, with the advantage of every answer in its group, and measure what the run raised and what it took down."
+  nl: "je model trainen met GRPO op een reward die een programma geeft, met de advantage van elk antwoord in zijn groep, en meten wat de run verhoogde en wat hij liet zakken."
+summary:
+  - en: "A verifiable reward is one a program gives by checking the answer: a word left out, tests that pass, a result that is right. It needs no reward model and no people, and it can check every new answer while the model learns."
+    nl: "Een verifiable reward is er een die een programma geeft door het antwoord te controleren: een woord weggelaten, tests die slagen, een uitkomst die klopt. Er is geen reward model en geen mens voor nodig, en hij kan elk nieuw antwoord controleren terwijl het model leert."
+  - en: "GRPO lets the model write a group of answers to every instruction and gives each its advantage, its reward minus the group's mean; the loss, minus advantage times the mean log-probability of each answer, makes the better answers more likely and the worse ones less."
+    nl: "GRPO laat het model een groep antwoorden op elke instructie schrijven en geeft elk zijn advantage, zijn reward min het gemiddelde van de groep; de loss, min advantage maal de gemiddelde log-kans van elk antwoord, maakt de betere antwoorden waarschijnlijker en de slechtere minder."
+  - en: "The course's run left the word out far more often on words it never trained on, and used requested words far less: a run raises what its program checks, and can take down what it does not. Guard the reward, and measure more than you reward."
+    nl: "De run van de course liet het woord veel vaker weg bij woorden waarop hij nooit trainde, en gebruikte gevraagde woorden veel minder: een run verhoogt wat zijn programma controleert, en kan laten zakken wat het niet controleert. Bewaak de reward, en meet meer dan je beloont."
+can_now:
+  - en: "work out the advantages of a group of answers"
+    nl: "de advantages van een groep antwoorden uitrekenen"
+    by: advantages
+  - en: "write the loss of GRPO for a group"
+    nl: "de loss van GRPO voor een groep schrijven"
+    by: policy-loss
+  - en: "say how a verifiable reward can be hacked, and guard it"
+    nl: "zeggen hoe een verifiable reward gehackt kan worden, en hem bewaken"
+    by: hack
+  - en: "explain what a run with one reward can take down, and what to do about it"
+    nl: "uitleggen wat een run met één reward kan laten zakken, en wat je eraan doet"
+    by: trade
+further_reading:
+  - en: "Nathan Lambert and others (2024), *Tülu 3: Pushing Frontiers in Open Language Model Post-Training*: the open recipe that named RLVR, with rewards for maths answers and for instructions a program can check"
+    nl: "Nathan Lambert en anderen (2024), *Tülu 3: Pushing Frontiers in Open Language Model Post-Training*: het open recept dat RLVR zijn naam gaf, met rewards voor antwoorden op wiskunde en voor instructies die een programma kan controleren"
+  - en: "Zhihong Shao and others (2024), *DeepSeekMath: Pushing the Limits of Mathematical Reasoning in Open Language Models*: the paper that introduced GRPO"
+    nl: "Zhihong Shao en anderen (2024), *DeepSeekMath: Pushing the Limits of Mathematical Reasoning in Open Language Models*: de paper die GRPO introduceerde"
+  - en: "Eric Zelikman, Yuhuai Wu, Jesse Mu and Noah Goodman (2022), *STaR: Bootstrapping Reasoning With Reasoning*, NeurIPS: keeping the model's own reasoning that reaches the right answer, and fine-tuning on it"
+    nl: "Eric Zelikman, Yuhuai Wu, Jesse Mu en Noah Goodman (2022), *STaR: Bootstrapping Reasoning With Reasoning*, NeurIPS: de eigen redeneringen van het model bewaren die bij het goede antwoord uitkomen, en erop finetunen"
