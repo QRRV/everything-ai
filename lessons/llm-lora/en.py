@@ -330,9 +330,11 @@ def text_demo():
         mo.md(f"""
         ### Fine-tune your model with LoRA
 
-        The button does what the demo of [Project: teach your model to follow instructions (SFT)](/course/open/llm-sft?lang=en) did, with your `sft_example`, `sft_batch` and `pretrain_step`, but on your model of [Capstone: pretrain your own small LLM](/course/open/llm-pretrain-capstone?lang=en) with your `add_lora` of the rank you choose and alpha twice the rank: {C.number(C.STEPS, 0, L.lang)} steps at a learning rate of {C.number(C.LR, 3, L.lang)}, five times that of full SFT, because the update starts at zero and has few numbers. Then the model answers the same {C.T.TESTS} test instructions, counted with your `words_used`, and your `merge_lora` merges every adapter, to compare the logits. On the course's CPU, with one thread, rank {_r} took about {round((_m['seconds'] + _m['other_seconds']) / 60)} minutes for its model of the capstone's demo run; the course's own model, about five times as big, takes about half an hour on two threads. The adapters are kept in `work/projects/llm/lora.pt`.
+        The button does what the demo of [Project: teach your model to follow instructions (SFT)](/course/open/llm-sft?lang=en) did, with your `sft_example`, `sft_batch` and `pretrain_step`, but on your model of [Capstone: pretrain your own small LLM](/course/open/llm-pretrain-capstone?lang=en) with your `add_lora` of the rank you choose and alpha twice the rank: {C.number(C.STEPS, 0, L.lang)} steps at a learning rate of {C.number(C.LR, 3, L.lang)}, five times that of full SFT, because the update starts at zero and has few numbers. Then the model answers the same {C.T.TESTS} test instructions, counted with your `words_used`, and your `merge_lora` merges every adapter, to compare the logits. On the course's CPU, with one thread, rank {_r} took about {round((_m['seconds'] + _m['other_seconds']) / 60)} minutes for its model of the capstone's demo run; the course's own model, about five times as big, takes up to about ten minutes on two threads, at rank 16. The adapters are kept in `work/projects/llm/lora.pt`.
 
         On a CPU, and with a model this small, a step of LoRA is not faster than one of full SFT: the backward pass still goes through every layer. LoRA saves memory, and file size: the optimizer keeps its two numbers only for what learns.
+
+        While it trains, the chart shows the loss of every step, with your run of full SFT on the same model dashed beside it, if you have done one.
         """),
         L.course_versions(),
     ])
@@ -351,16 +353,21 @@ def rank_cell():
 def demo_lora(box_add, box_layer, box_merge, lora_button, rank_pick, result_add, result_layer, result_merge):
     adapted = None
     _note = None
+    _live = None
     if not all(_r.state == "correct" for _r in (result_layer, result_add, result_merge)):
         _note = "*Finish exercises 1 to 3 first: the demo fine-tunes with your `LoRALinear` and `add_lora`, and merges with your `merge_lora`.*"
     elif lora_button.value:
+        _live = L.live({"title": "Your LoRA run: the loss of every step", "x": "step", "y": "loss",
+                        "alt": f"The loss of every step of your LoRA run so far, in grey, and its mean over the last {max(1, C.STEPS // 50)} steps as the thicker line; dashed, the loss of your run of full SFT on the same model, if you have done one."}, C.STEPS, low=0.0)
+
         def _progress(_p):
             if _p["phase"] == "pairs":
-                mo.output.replace(mo.md(f"**{C.number(_p['pairs'], 0, L.lang)} examples** · adapters of rank {rank_pick.value} …"))
+                _live.reference(_p["full"], "full SFT")
+                _live.line(f"**{C.number(_p['pairs'], 0, L.lang)} examples** · adapters of rank {rank_pick.value} …")
             elif _p["phase"] == "after":
-                mo.output.replace(mo.md(f"**After LoRA** · instruction {_p['done']} of {_p['total']} · every word used: {_p['used']}"))
+                _live.line(f"**After LoRA** · instruction {_p['done']} of {_p['total']} · every word used: {_p['used']}")
             else:
-                mo.output.replace(mo.md(f"**Step {C.number(_p['step'], 0, L.lang)} of {C.number(_p['steps'], 0, L.lang)}** · loss {C.number(_p['loss'], 3, L.lang)} · {C.number(_p['seconds'] / 60, 1, L.lang)} minutes"))
+                _live.extend(_p["fresh"], f"**Step {C.number(_p['step'], 0, L.lang)} of {C.number(_p['steps'], 0, L.lang)}** · loss {C.number(_p['loss'], 3, L.lang)} · {C.number(_p['seconds'] / 60, 1, L.lang)} minutes")
         _r = C.run(rank_pick.value, _progress)
         if _r == "run":
             _note = "*The demo stops with an error. Do your modules in `work/projects/llm/` still pass their checks? Delete a file you changed, and check its exercise again.*"
@@ -372,7 +379,10 @@ def demo_lora(box_add, box_layer, box_merge, lora_button, rank_pick, result_add,
             _note = "*The loss is no longer a number: the training ran off. Try a lower rank, or press the button again.*"
         else:
             adapted = _r
-    mo.output.replace(mo.md(_note)) if _note else mo.output.clear()
+    if _note and _live is not None and _live.xs:
+        _live.line(_note)   # a run that stops after its first step keeps its chart, with the note under it
+    else:
+        mo.output.replace(mo.md(_note)) if _note else mo.output.clear()
     return (adapted,)
 
 
@@ -394,6 +404,44 @@ def demo_result(adapted):
     mo.md(f"The answers of {_whose} to {_run['after']['total']} held-out instructions{_before}:\n\n"
           "| | numbers that learn | numbers AdamW keeps | every word used |\n|---|---|---|---|\n" + "\n".join(_rows) + _stand
           + f"\n\n{_sft}{_gap}{_size}")
+    return
+
+
+@app.cell(hide_code=True)
+def text_replay():
+    mo.md(f"""
+    ### Your LoRA run, step by step
+
+    As in the project on SFT, the button lets your model answer the first test instruction six times while it trains: before the first step and after every {C.number(C.T.STEPS // C.T.SNAPSHOTS, 0, L.lang)} steps. Here you go through those moments: the loss along the run, with a dashed line at the moment you choose, and what your model wrote then. If you have done full SFT on the same model, that run is beside it as a thin dashed curve.
+    """)
+    return
+
+
+@app.cell(hide_code=True)
+def replay_cell(adapted):
+    _run = adapted if adapted is not None else C.saved()
+    if _run is None:
+        _out = mo.md("*Once you have fine-tuned your model with LoRA, you can go through its run here.*")
+    elif not _run.get("snapshots"):
+        _out = mo.md("*Your saved run has no moments to go through: it was made before the lesson kept them. Fine-tune with LoRA again to go through its run here.*")
+    else:
+        _labels = {"title": "The loss along your LoRA run", "x": "step", "y": "loss", "lang": L.lang, "reference": "full SFT",
+                   "alt": "The loss of your LoRA run, the mean of every 50 steps, with a dashed line at the chosen moment, and thin and dashed the loss of your run of full SFT on the same model, if you have done one.",
+                   "start": "Before the first step", "after": "After {step} steps", "used": "every word used", "not_used": "not every word used",
+                   "stopped": "stopped by itself", "not_stopped": "did not stop by itself"}
+        _full = C.full_sft_losses(_run.get("base", _run.get("source")))
+        _out = L.explore("replay", "step", lambda _v: C.T.replay_frame(_run, int(_v), _labels, _full), start=_run["snapshots"][-1]["step"],
+                         values=[_s["step"] for _s in _run["snapshots"]], role="",
+                         task=f"At which moments does your model's answer to *{C.T.instruction(_run['snapshots'][0].get('words') or C.T.tests()[0]).splitlines()[0]}* use every word asked for, and stop by itself?")
+    _out
+    return
+
+
+@app.cell(hide_code=True)
+def text_replay_after():
+    mo.md(f"""
+    As in the project on SFT, whether this one answer uses every word can come and go from one moment to the next: one answer is one draw. The thin dashed curve, if it is there, is your full SFT: with every number of the model free to move, it usually fits its examples more closely, and its loss ends lower than that of LoRA. That does not by itself mean that the model's own stories use the words more often: that is what the table above counts, on {C.T.TESTS} held-out instructions.
+    """)
     return
 
 

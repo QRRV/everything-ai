@@ -287,6 +287,24 @@ def tune(model, examples: list, sft_batch, step_fn, end_id: int, show, steps: in
             "snapshots": snapshots}
 
 
+def snapper(merges: dict, words_used, encode_fast, decode):
+    """For the replay of a run: snap(step, model), which lets the model answer the first test instruction as rate
+    answers it, with the same seed at every moment, and says whether the answer used every word and stopped by itself."""
+    end = 256 + len(merges)
+    words = list(tests()[0])
+    asked = encode_fast(instruction(words), merges)
+
+    def snap(step, model):
+        ids, ended = answer(model, asked, end, seed=0)
+        text = decode(ids, merges)
+        try:
+            used = bool(words_used(text, list(words)))   # a copy, as in rate: a words_used may empty the list it gets
+        except Exception:
+            used = False
+        return {"step": step, "words": list(words), "text": text, "ended": ended, "used": used}
+    return snap
+
+
 def run(sft_example, sft_batch, words_used, show) -> dict | str:
     """The demo: instructions for the stories, the model's answers to the held-out instructions before SFT, SFT,
     and its answers after; then the model is kept in work/projects/llm/sft.pt. A string when it stops: "run",
@@ -313,20 +331,8 @@ def run(sft_example, sft_batch, words_used, show) -> dict | str:
     before = rate(model, merges, words_used, t["encode_fast"], t["decode"], show, "before")
     if isinstance(before, str):
         return before
-    words = list(tests()[0])
-    asked = t["encode_fast"](instruction(words), merges)
-
-    def snap(step, m):   # the first test instruction, as rate answers it: the same seed at every moment
-        ids, ended = answer(m, asked, end, seed=0)
-        text = t["decode"](ids, merges)
-        try:
-            used = bool(words_used(text, list(words)))   # a copy, as in rate: a words_used may empty the list it gets
-        except Exception:
-            used = False
-        return {"step": step, "words": list(words), "text": text, "ended": ended, "used": used}
-
     torch.manual_seed(0)
-    tuned = tune(model, examples, sft_batch, t["pretrain_step"], end, show, snap=snap)
+    tuned = tune(model, examples, sft_batch, t["pretrain_step"], end, show, snap=snapper(merges, words_used, t["encode_fast"], t["decode"]))
     if isinstance(tuned, str):
         return tuned
     after = rate(model, merges, words_used, t["encode_fast"], t["decode"], show, "after")
@@ -354,17 +360,24 @@ def save(result: dict, info: dict) -> None:
     (folder / f"{NAME}.json").write_text(json.dumps(keep, indent=1) + "\n", encoding="utf-8")
 
 
-def replay_frame(run: dict, step: int, labels: dict) -> tuple:
+def replay_frame(run: dict, step: int, labels: dict, reference: list | None = None) -> tuple:
     """One moment of a run, for the replay of the run (L.explore): the loss along the run, the mean of every 50 steps,
     with a line at `step`; and what the model wrote at that moment to the first test instruction. `labels`: title,
     x, y, alt, lang (for the numbers), and the words of the sentence under it: "after" ({step}), "start", "used",
-    "not_used", "stopped", "not_stopped"."""
-    from everything_ai import chart
+    "not_used", "stopped", "not_stopped". With `reference`, another run's loss as (step, loss), it is drawn thin and
+    dashed beside it, with labels["reference"] at its end, on the side away from this run."""
+    from everything_ai import chart, live
     snap = next(s for s in run["snapshots"] if s["step"] == step)
     xs, ys = [l["step"] for l in run["losses"]], [l["loss"] for l in run["losses"]]
-    p = chart.Panel((0, run["steps"]), (0, math.ceil(max(ys) * 2) / 2), title=labels["title"], xlabel=labels["x"], ylabel=labels["y"])
+    top = math.ceil(max(ys + [v for _, v in reference or []]) * 2) / 2
+    p = chart.Panel((0, run["steps"]), (0, top), title=labels["title"], xlabel=labels["x"], ylabel=labels["y"])
+    if reference:
+        p.line([x for x, _ in reference], [v for _, v in reference], "ink-2", 1.4, dashed=True)
+        above = ys[-1] < reference[-1][1]   # its name on the side away from this run
+        at_x, at_y = live.name_at(reference, labels["reference"], above, run["steps"], (0, top))
+        p.text(at_x - 0.03 * run["steps"], at_y, labels["reference"], "ink-2", "end")   # clear of the line at the last moment
     p.line(xs, ys, "loss", 2.2)
-    p.line([step, step], [0, math.ceil(max(ys) * 2) / 2], "ink-2", 1.2, dashed=True)
+    p.line([step, step], [0, top], "ink-2", 1.2, dashed=True)
     done = [(x, y) for x, y in zip(xs, ys) if x <= step]
     if done:
         p.points([done[-1][0]], [done[-1][1]], "loss", r=4)

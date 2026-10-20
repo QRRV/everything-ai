@@ -330,9 +330,11 @@ def text_demo():
         mo.md(f"""
         ### Finetune je model met LoRA
 
-        De knop doet wat de demo van [Project: leer je model instructies volgen (SFT)](/course/open/llm-sft?lang=nl) deed, met je `sft_example`, `sft_batch` en `pretrain_step`, maar op je model uit [Capstone: je eigen kleine LLM pretrainen](/course/open/llm-pretrain-capstone?lang=nl) met je `add_lora` van de rang die je kiest en alfa twee keer de rang: {C.number(C.STEPS, 0, L.lang)} stappen met een learning rate van {C.number(C.LR, 3, L.lang)}, vijf keer die van full fine-tuning, omdat de update op nul begint en weinig getallen heeft. Dan beantwoordt het model dezelfde {C.T.TESTS} testinstructies, geteld met je `words_used`, en voegt je `merge_lora` elke adapter samen, om de logits te vergelijken. Op de CPU van de course, met één thread, duurde rang {_r} ongeveer {round((_m['seconds'] + _m['other_seconds']) / 60)} minuten voor haar model uit de demorun van de capstone; het eigen model van de course, ongeveer vijf keer zo groot, doet er op twee threads ongeveer een halfuur over. De adapters worden bewaard in `work/projects/llm/lora.pt`.
+        De knop doet wat de demo van [Project: leer je model instructies volgen (SFT)](/course/open/llm-sft?lang=nl) deed, met je `sft_example`, `sft_batch` en `pretrain_step`, maar op je model uit [Capstone: je eigen kleine LLM pretrainen](/course/open/llm-pretrain-capstone?lang=nl) met je `add_lora` van de rang die je kiest en alfa twee keer de rang: {C.number(C.STEPS, 0, L.lang)} stappen met een learning rate van {C.number(C.LR, 3, L.lang)}, vijf keer die van full fine-tuning, omdat de update op nul begint en weinig getallen heeft. Dan beantwoordt het model dezelfde {C.T.TESTS} testinstructies, geteld met je `words_used`, en voegt je `merge_lora` elke adapter samen, om de logits te vergelijken. Op de CPU van de course, met één thread, duurde rang {_r} ongeveer {round((_m['seconds'] + _m['other_seconds']) / 60)} minuten voor haar model uit de demorun van de capstone; het eigen model van de course, ongeveer vijf keer zo groot, doet er op twee threads tot ongeveer tien minuten over, bij rang 16. De adapters worden bewaard in `work/projects/llm/lora.pt`.
 
         Op een CPU, en met een model dat zo klein is, is een stap LoRA niet sneller dan een stap full fine-tuning: de backward pass gaat nog door elke layer. LoRA spaart geheugen, en bestandsgrootte: de optimizer houdt zijn twee getallen alleen bij voor wat leert.
+
+        Tijdens het trainen laat de grafiek de loss van elke stap zien, met je run van full fine-tuning op hetzelfde model gestippeld ernaast, als je die hebt gedaan.
         """),
         L.course_versions(),
     ])
@@ -351,16 +353,21 @@ def rank_cell():
 def demo_lora(box_add, box_layer, box_merge, lora_button, rank_pick, result_add, result_layer, result_merge):
     adapted = None
     _note = None
+    _live = None
     if not all(_r.state == "correct" for _r in (result_layer, result_add, result_merge)):
         _note = "*Maak eerst oefening 1 tot en met 3 af: de demo finetunet met je `LoRALinear` en `add_lora`, en voegt samen met je `merge_lora`.*"
     elif lora_button.value:
+        _live = L.live({"title": "Je LoRA-run: de loss van elke stap", "x": "stap", "y": "loss",
+                        "alt": f"De loss van elke stap van je LoRA-run tot nu toe, in grijs, en als dikkere lijn het gemiddelde over de laatste {max(1, C.STEPS // 50)} stappen; gestippeld de loss van je run van full fine-tuning op hetzelfde model, als je die hebt gedaan."}, C.STEPS, low=0.0)
+
         def _progress(_p):
             if _p["phase"] == "pairs":
-                mo.output.replace(mo.md(f"**{C.number(_p['pairs'], 0, L.lang)} voorbeelden** · adapters van rang {rank_pick.value} …"))
+                _live.reference(_p["full"], "full fine-tuning")
+                _live.line(f"**{C.number(_p['pairs'], 0, L.lang)} voorbeelden** · adapters van rang {rank_pick.value} …")
             elif _p["phase"] == "after":
-                mo.output.replace(mo.md(f"**Na LoRA** · instructie {_p['done']} van {_p['total']} · elk woord gebruikt: {_p['used']}"))
+                _live.line(f"**Na LoRA** · instructie {_p['done']} van {_p['total']} · elk woord gebruikt: {_p['used']}")
             else:
-                mo.output.replace(mo.md(f"**Stap {C.number(_p['step'], 0, L.lang)} van {C.number(_p['steps'], 0, L.lang)}** · loss {C.number(_p['loss'], 3, L.lang)} · {C.number(_p['seconds'] / 60, 1, L.lang)} minuten"))
+                _live.extend(_p["fresh"], f"**Stap {C.number(_p['step'], 0, L.lang)} van {C.number(_p['steps'], 0, L.lang)}** · loss {C.number(_p['loss'], 3, L.lang)} · {C.number(_p['seconds'] / 60, 1, L.lang)} minuten")
         _r = C.run(rank_pick.value, _progress)
         if _r == "run":
             _note = "*De demo stopt met een fout. Slagen je modules in `work/projects/llm/` nog voor hun checks? Verwijder een bestand dat je veranderde, en check zijn oefening opnieuw.*"
@@ -372,7 +379,10 @@ def demo_lora(box_add, box_layer, box_merge, lora_button, rank_pick, result_add,
             _note = "*De loss is geen getal meer: de training is ontspoord. Probeer een lagere rang, of druk opnieuw op de knop.*"
         else:
             adapted = _r
-    mo.output.replace(mo.md(_note)) if _note else mo.output.clear()
+    if _note and _live is not None and _live.xs:
+        _live.line(_note)   # a run that stops after its first step keeps its chart, with the note under it
+    else:
+        mo.output.replace(mo.md(_note)) if _note else mo.output.clear()
     return (adapted,)
 
 
@@ -394,6 +404,44 @@ def demo_result(adapted):
     mo.md(f"De antwoorden van {_whose} op {_run['after']['total']} achtergehouden instructies{_before}:\n\n"
           "| | getallen die leren | getallen die AdamW bijhoudt | elk woord gebruikt |\n|---|---|---|---|\n" + "\n".join(_rows) + _stand
           + f"\n\n{_sft}{_gap}{_size}")
+    return
+
+
+@app.cell(hide_code=True)
+def text_replay():
+    mo.md(f"""
+    ### Je LoRA-run, stap voor stap
+
+    Net als in het project over SFT laat de knop je model tijdens het trainen zes keer de eerste testinstructie beantwoorden: voor de eerste stap en na elke {C.number(C.T.STEPS // C.T.SNAPSHOTS, 0, L.lang)} stappen. Hier ga je door die momenten: de loss tijdens de run, met een gestippelde lijn op het moment dat je kiest, en wat je model toen schreef. Heb je full fine-tuning op hetzelfde model gedaan, dan staat die run er als dunne gestippelde curve naast.
+    """)
+    return
+
+
+@app.cell(hide_code=True)
+def replay_cell(adapted):
+    _run = adapted if adapted is not None else C.saved()
+    if _run is None:
+        _out = mo.md("*Als je je model met LoRA hebt gefinetuned, kun je hier door zijn run gaan.*")
+    elif not _run.get("snapshots"):
+        _out = mo.md("*Je bewaarde run heeft geen momenten om door te gaan: hij is gemaakt voordat de les ze bewaarde. Finetune opnieuw met LoRA om hier door zijn run te gaan.*")
+    else:
+        _labels = {"title": "De loss tijdens je LoRA-run", "x": "stap", "y": "loss", "lang": L.lang, "reference": "full fine-tuning",
+                   "alt": "De loss van je LoRA-run, het gemiddelde van elke 50 stappen, met een gestippelde lijn op het gekozen moment, en dun en gestippeld de loss van je run van full fine-tuning op hetzelfde model, als je die hebt gedaan.",
+                   "start": "Voor de eerste stap", "after": "Na {step} stappen", "used": "elk woord gebruikt", "not_used": "niet elk woord gebruikt",
+                   "stopped": "zelf gestopt", "not_stopped": "niet zelf gestopt"}
+        _full = C.full_sft_losses(_run.get("base", _run.get("source")))
+        _out = L.explore("replay", "stap", lambda _v: C.T.replay_frame(_run, int(_v), _labels, _full), start=_run["snapshots"][-1]["step"],
+                         values=[_s["step"] for _s in _run["snapshots"]], role="",
+                         task=f"Op welke momenten gebruikt het antwoord van je model op *{C.T.instruction(_run['snapshots'][0].get('words') or C.T.tests()[0]).splitlines()[0]}* elk gevraagd woord, en stopt het zelf?")
+    _out
+    return
+
+
+@app.cell(hide_code=True)
+def text_replay_after():
+    mo.md(f"""
+    Net als in het project over SFT kan het van moment tot moment komen en gaan of dit ene antwoord elk woord gebruikt: één antwoord is één trekking. De dunne gestippelde curve, als die er is, is je full fine-tuning: omdat elk getal van het model mag bewegen, past het model zich meestal beter aan de voorbeelden aan, en eindigt de loss lager dan die van LoRA. Dat betekent nog niet dat de eigen verhalen van het model de woorden vaker gebruiken: dat telt de tabel hierboven, op {C.T.TESTS} achtergehouden instructies.
+    """)
     return
 
 

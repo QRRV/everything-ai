@@ -328,17 +328,23 @@ def button_cell():
 def demo_dpo(dpo_button, result_pairs, result_reference, result_step):
     trained = None
     _note = None
+    _live = None
     _k = C.RANK   # the rank of the adapters
     if not all(_r.state == "correct" for _r in (result_pairs, result_reference, result_step)):
         _note = "*Maak eerst oefening 1 tot en met 3 af: de demo traint met je `dpo_pairs`, `reference_logprob` en `dpo_step`.*"
     elif dpo_button.value:
+        _live = L.live({"title": "Je DPO-run: de loss van elke stap", "x": "stap", "y": "loss",
+                        "alt": "De loss van DPO van elke stap van je run tot nu toe, in grijs, en als dikkere lijn het gemiddelde over de laatste stappen; gestippeld ln 2, de loss aan het begin."}, C.MEASURED["yours"]["steps"], low=0.0)
+
         def _progress(_p):
             if _p["phase"] == "pairs":
-                mo.output.replace(mo.md(f"**{C.number(_p['pairs'], 0, L.lang)} paren** uit {C.number(_p['instructions'], 0, L.lang)} instructies · adapters van rang {_k} …"))
+                _live.steps = _p["steps"]   # known once the pairs are made
+                _live.reference(C.ln2_line(_p["steps"]), "ln 2")
+                _live.line(f"**{C.number(_p['pairs'], 0, L.lang)} paren** uit {C.number(_p['instructions'], 0, L.lang)} instructies · adapters van rang {_k} …")
             elif _p["phase"] == "after":
-                mo.output.replace(mo.md(f"**Na DPO** · instructie {_p['done']} van {_p['total']} · elk woord gebruikt: {_p['used']}"))
+                _live.line(f"**Na DPO** · instructie {_p['done']} van {_p['total']} · elk woord gebruikt: {_p['used']}")
             else:
-                mo.output.replace(mo.md(f"**Stap {C.number(_p['step'], 0, L.lang)} van {C.number(_p['steps'], 0, L.lang)}** · loss {C.number(_p['loss'], 3, L.lang)} · {C.number(_p['seconds'] / 60, 1, L.lang)} minuten"))
+                _live.extend(_p["fresh"], f"**Stap {C.number(_p['step'], 0, L.lang)} van {C.number(_p['steps'], 0, L.lang)}** · loss {C.number(_p['loss'], 3, L.lang)} · {C.number(_p['seconds'] / 60, 1, L.lang)} minuten")
         _r = C.run(_progress)
         _note = {
             "run": "*De demo stopt met een fout. Slagen je modules in `work/projects/llm/` nog voor hun checks? Verwijder een bestand dat je veranderde, en check zijn oefening opnieuw.*",
@@ -349,7 +355,10 @@ def demo_dpo(dpo_button, result_pairs, result_reference, result_step):
             "diverged": "*De loss is geen getal meer: de training is ontspoord. Druk opnieuw op de knop.*",
         }.get(_r) if isinstance(_r, str) else None
         trained = None if isinstance(_r, str) else _r
-    mo.output.replace(mo.md(_note)) if _note else mo.output.clear()
+    if _note and _live is not None and _live.xs:
+        _live.line(_note)   # a run that stops after its first step keeps its chart, with the note under it
+    else:
+        mo.output.replace(mo.md(_note)) if _note else mo.output.clear()
     return (trained,)
 
 
@@ -366,9 +375,9 @@ def demo_result(trained):
               f"| | elk woord gebruikt |\n|---|---|\n| SFT | **{_run['before']['used']}** van {_run['before']['total']} |\n"
               f"| SFT en DPO | **{_run['after']['used']}** van {_run['after']['total']} |\n\n"
               f"{C.number(_run['pairs'], 0, L.lang)} paren, {C.number(_run['steps'], 0, L.lang)} stappen. Ten opzichte van het reference model bewogen de gekozen antwoorden van de eerste {C.MOVED} paren gemiddeld {C.signed(_run['moved']['chosen'], 1, L.lang)} nats, de afgewezen antwoorden {C.signed(_run['moved']['rejected'], 1, L.lang)}.{_stand}"),
-        mo.Html(C.losses_picture(_run["losses"], _run["every"], {"title": "De loss van DPO tijdens de run", "x": "stap", "y": "loss", "lang": L.lang,
-                                                  "alt": f"De loss van DPO tijdens de run: van 0,693 naar ongeveer {C.number(sum(_run['losses'][-5:]) / len(_run['losses'][-5:]), 2, L.lang)}."})),
-        mo.md(("**" + ("Een testinstructie die het na DPO deed en ervoor niet" if _ex["better"] else "De eerste testinstructie") + f"**: *{C.T.instruction(_ex['words']).splitlines()[0]}*\n\n> {_after}")),
+        *([] if _run.get("snapshots") else [mo.Html(C.losses_picture(_run["losses"], _run["every"], {"title": "De loss van DPO tijdens de run", "x": "stap", "y": "loss", "lang": L.lang,
+                                                  "alt": f"De loss van DPO tijdens de run: van 0,693 naar ongeveer {C.number(sum(_run['losses'][-5:]) / len(_run['losses'][-5:]), 2, L.lang)}."}))]),
+        mo.md(("**" + ("Een testinstructie die het na DPO deed en ervoor niet" if _ex["better"] else "De eerste testinstructie") + f"**: *{C.T.instruction(_ex['words']).splitlines()[0]}*\n\n" + C.T.P.quote(_after))),
     ])
     return
 
@@ -378,6 +387,44 @@ def text_after_demo():
     _y, _c = C.MEASURED["yours"], C.MEASURED["course"]
     mo.md(f"""
     Met DPO ging het model van de demorun van de course van {_y['before']['used']} naar {_y['after']['used']} van de {C.T.TESTS} testinstructies waarvan het antwoord elk gevraagd woord gebruikte; het eigen SFT-model van de course van {_c['before']['used']} naar {_c['after']['used']}. De paren vragen nooit om deze testinstructies, en de checker is dezelfde die ze telt: DPO leerde het model wat `words_used` beloont. Dat moet het hier ook leren, maar daarom is een check die je kunt bespelen een risico, zoals reward hacking liet zien in [RLHF: leren van menselijke voorkeuren](/course/open/llm-rlhf-idea?lang=nl).
+    """)
+    return
+
+
+@app.cell(hide_code=True)
+def text_replay():
+    mo.md(f"""
+    ### Je DPO-run, stap voor stap
+
+    Net als in het project over SFT laat de knop je model tijdens DPO zes keer de eerste testinstructie beantwoorden: voor de eerste stap, en daarna nog vijf keer, gelijkmatig verdeeld over de {C.number(C.MEASURED['yours']['steps'], 0, L.lang)} stappen van de run. Hier ga je door die momenten: de loss van DPO tijdens de run, met ln 2 en het moment dat je kiest als gestippelde lijnen, en wat je model toen schreef.
+    """)
+    return
+
+
+@app.cell(hide_code=True)
+def replay_cell(trained):
+    _run = C.keep(trained) if trained is not None else C.saved()
+    if _run is None:
+        _out = mo.md("*Als je je model met DPO hebt getraind, kun je hier door zijn run gaan.*")
+    elif not _run.get("snapshots"):
+        _out = mo.md("*Je bewaarde run heeft geen momenten om door te gaan: hij is gemaakt voordat de les ze bewaarde. Train opnieuw met DPO om hier door zijn run te gaan.*")
+    else:
+        _labels = {"title": "De loss van DPO tijdens je run", "x": "stap", "y": "loss", "lang": L.lang, "reference": "ln 2",
+                   "alt": "De loss van DPO tijdens je run, het gemiddelde van vijf gemeten stappen, met ln 2 gestippeld en een gestippelde lijn op het gekozen moment.",
+                   "start": "Voor de eerste stap", "after": "Na {step} stappen", "used": "elk woord gebruikt", "not_used": "niet elk woord gebruikt",
+                   "stopped": "zelf gestopt", "not_stopped": "niet zelf gestopt"}
+        _replay = C.replay_run(_run)
+        _out = L.explore("replay", "stap", lambda _v: C.T.replay_frame(_replay, int(_v), _labels, C.ln2_line(_run["steps"])), start=_run["snapshots"][-1]["step"],
+                         values=[_s["step"] for _s in _run["snapshots"]], role="",
+                         task=f"Op welke momenten gebruikt het antwoord van je model op *{C.T.instruction(_run['snapshots'][0].get('words') or C.T.tests()[0]).splitlines()[0]}* elk gevraagd woord, en stopt het zelf?")
+    _out
+    return
+
+
+@app.cell(hide_code=True)
+def text_replay_after():
+    mo.md(f"""
+    Voor de eerste stap is `B` nog nul, dus het eerste moment is het antwoord van het SFT-model zelf. De paren vragen nooit om deze instructie: ze lieten het model alleen bij andere instructies zien welk van twee antwoorden elk gevraagd woord gebruikt, volgens je `words_used`. Gebruikt een later moment het woord wel, dan zie je die voorkeur ook bij deze instructie doorwerken. Net als in het project over SFT blijft één antwoord één trekking: de tabel hierboven telt de antwoorden op {C.T.TESTS} instructies.
     """)
     return
 

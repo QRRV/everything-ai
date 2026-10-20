@@ -328,17 +328,23 @@ def button_cell():
 def demo_dpo(dpo_button, result_pairs, result_reference, result_step):
     trained = None
     _note = None
+    _live = None
     _k = C.RANK   # the rank of the adapters
     if not all(_r.state == "correct" for _r in (result_pairs, result_reference, result_step)):
         _note = "*Finish exercises 1 to 3 first: the demo trains with your `dpo_pairs`, `reference_logprob` and `dpo_step`.*"
     elif dpo_button.value:
+        _live = L.live({"title": "Your DPO run: the loss of every step", "x": "step", "y": "loss",
+                        "alt": "The DPO loss of every step of your run so far, in grey, and its mean over the last steps as the thicker line; dashed, ln 2, the loss at the start."}, C.MEASURED["yours"]["steps"], low=0.0)
+
         def _progress(_p):
             if _p["phase"] == "pairs":
-                mo.output.replace(mo.md(f"**{C.number(_p['pairs'], 0, L.lang)} pairs** from {C.number(_p['instructions'], 0, L.lang)} instructions · adapters of rank {_k} …"))
+                _live.steps = _p["steps"]   # known once the pairs are made
+                _live.reference(C.ln2_line(_p["steps"]), "ln 2")
+                _live.line(f"**{C.number(_p['pairs'], 0, L.lang)} pairs** from {C.number(_p['instructions'], 0, L.lang)} instructions · adapters of rank {_k} …")
             elif _p["phase"] == "after":
-                mo.output.replace(mo.md(f"**After DPO** · instruction {_p['done']} of {_p['total']} · every word used: {_p['used']}"))
+                _live.line(f"**After DPO** · instruction {_p['done']} of {_p['total']} · every word used: {_p['used']}")
             else:
-                mo.output.replace(mo.md(f"**Step {C.number(_p['step'], 0, L.lang)} of {C.number(_p['steps'], 0, L.lang)}** · loss {C.number(_p['loss'], 3, L.lang)} · {C.number(_p['seconds'] / 60, 1, L.lang)} minutes"))
+                _live.extend(_p["fresh"], f"**Step {C.number(_p['step'], 0, L.lang)} of {C.number(_p['steps'], 0, L.lang)}** · loss {C.number(_p['loss'], 3, L.lang)} · {C.number(_p['seconds'] / 60, 1, L.lang)} minutes")
         _r = C.run(_progress)
         _note = {
             "run": "*The demo stops with an error. Do your modules in `work/projects/llm/` still pass their checks? Delete a file you changed, and check its exercise again.*",
@@ -349,7 +355,10 @@ def demo_dpo(dpo_button, result_pairs, result_reference, result_step):
             "diverged": "*The loss is no longer a number: the training ran off. Press the button again.*",
         }.get(_r) if isinstance(_r, str) else None
         trained = None if isinstance(_r, str) else _r
-    mo.output.replace(mo.md(_note)) if _note else mo.output.clear()
+    if _note and _live is not None and _live.xs:
+        _live.line(_note)   # a run that stops after its first step keeps its chart, with the note under it
+    else:
+        mo.output.replace(mo.md(_note)) if _note else mo.output.clear()
     return (trained,)
 
 
@@ -366,9 +375,9 @@ def demo_result(trained):
               f"| | every word used |\n|---|---|\n| SFT | **{_run['before']['used']}** of {_run['before']['total']} |\n"
               f"| SFT and DPO | **{_run['after']['used']}** of {_run['after']['total']} |\n\n"
               f"{C.number(_run['pairs'], 0, L.lang)} pairs, {C.number(_run['steps'], 0, L.lang)} steps. Against the reference model, the chosen answers of the first {C.MOVED} pairs moved {C.signed(_run['moved']['chosen'], 1, L.lang)} nats on average, the rejected ones {C.signed(_run['moved']['rejected'], 1, L.lang)}.{_stand}"),
-        mo.Html(C.losses_picture(_run["losses"], _run["every"], {"title": "The DPO loss along the run", "x": "step", "y": "loss", "lang": L.lang,
-                                                  "alt": f"The DPO loss along the run: from 0.693 to about {C.number(sum(_run['losses'][-5:]) / len(_run['losses'][-5:]), 2, L.lang)}."})),
-        mo.md(("**" + ("A test instruction it did after DPO and not before" if _ex["better"] else "The first test instruction") + f"**: *{C.T.instruction(_ex['words']).splitlines()[0]}*\n\n> {_after}")),
+        *([] if _run.get("snapshots") else [mo.Html(C.losses_picture(_run["losses"], _run["every"], {"title": "The DPO loss along the run", "x": "step", "y": "loss", "lang": L.lang,
+                                                  "alt": f"The DPO loss along the run: from 0.693 to about {C.number(sum(_run['losses'][-5:]) / len(_run['losses'][-5:]), 2, L.lang)}."}))]),
+        mo.md(("**" + ("A test instruction it did after DPO and not before" if _ex["better"] else "The first test instruction") + f"**: *{C.T.instruction(_ex['words']).splitlines()[0]}*\n\n" + C.T.P.quote(_after))),
     ])
     return
 
@@ -378,6 +387,44 @@ def text_after_demo():
     _y, _c = C.MEASURED["yours"], C.MEASURED["course"]
     mo.md(f"""
     For the course's model of the demo run, DPO took the test instructions whose answer used every requested word from {_y['before']['used']} to {_y['after']['used']} of {C.T.TESTS}; for the course's own SFT model, from {_c['before']['used']} to {_c['after']['used']}. The pairs never ask for these test instructions, and the checker is the same one that counts them: DPO taught the model what `words_used` rewards. That is what it should learn here, but it is also why a check that can be gamed is a risk, as reward hacking showed in [RLHF: learning from human preferences](/course/open/llm-rlhf-idea?lang=en).
+    """)
+    return
+
+
+@app.cell(hide_code=True)
+def text_replay():
+    mo.md(f"""
+    ### Your DPO run, step by step
+
+    As in the project on SFT, the button lets your model answer the first test instruction six times while DPO trains: before the first step, and five more times, spread evenly over the run's {C.number(C.MEASURED['yours']['steps'], 0, L.lang)} steps. Here you go through those moments: the DPO loss along the run, with ln 2 and the moment you choose as dashed lines, and what your model wrote then.
+    """)
+    return
+
+
+@app.cell(hide_code=True)
+def replay_cell(trained):
+    _run = C.keep(trained) if trained is not None else C.saved()
+    if _run is None:
+        _out = mo.md("*Once you have trained your model with DPO, you can go through its run here.*")
+    elif not _run.get("snapshots"):
+        _out = mo.md("*Your saved run has no moments to go through: it was made before the lesson kept them. Train with DPO again to go through its run here.*")
+    else:
+        _labels = {"title": "The DPO loss along your run", "x": "step", "y": "loss", "lang": L.lang, "reference": "ln 2",
+                   "alt": "The DPO loss of your run, the mean of five measured steps, with ln 2 dashed and a dashed line at the chosen moment.",
+                   "start": "Before the first step", "after": "After {step} steps", "used": "every word used", "not_used": "not every word used",
+                   "stopped": "stopped by itself", "not_stopped": "did not stop by itself"}
+        _replay = C.replay_run(_run)
+        _out = L.explore("replay", "step", lambda _v: C.T.replay_frame(_replay, int(_v), _labels, C.ln2_line(_run["steps"])), start=_run["snapshots"][-1]["step"],
+                         values=[_s["step"] for _s in _run["snapshots"]], role="",
+                         task=f"At which moments does your model's answer to *{C.T.instruction(_run['snapshots'][0].get('words') or C.T.tests()[0]).splitlines()[0]}* use every word asked for, and stop by itself?")
+    _out
+    return
+
+
+@app.cell(hide_code=True)
+def text_replay_after():
+    mo.md(f"""
+    Before the first step, `B` is still zero, so the first moment is the answer of the SFT model itself. The pairs never ask for this instruction: they only showed the model, on other instructions, which of two answers uses every word asked for, by your `words_used`. A later moment that does use the word shows that preference carrying over to this instruction too. As in the project on SFT, one answer is still one draw: the table above counts the answers to {C.T.TESTS} instructions.
     """)
     return
 

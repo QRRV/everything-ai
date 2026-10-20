@@ -102,7 +102,7 @@ def run(rank: int, show) -> dict | str:
         examples = [t["sft_example"](list(prompt), list(answer), end) for _, prompt, answer in made]
     except Exception:
         return "run"
-    show({"phase": "pairs", "pairs": len(examples)})
+    show({"phase": "pairs", "pairs": len(examples), "full": full_sft_losses(source)})
     try:
         probe = torch.tensor([examples[0][0][:16]])
         with torch.no_grad():
@@ -116,7 +116,8 @@ def run(rank: int, show) -> dict | str:
     if not same or trainable(model) == 0:
         return "lora"
     n_train = trainable(model)
-    tuned = T.tune(model, examples, t["sft_batch"], t["pretrain_step"], end, show, lr=LR)
+    tuned = T.tune(model, examples, t["sft_batch"], t["pretrain_step"], end, show, lr=LR,
+                   snap=T.snapper(merges, t["words_used"], t["encode_fast"], t["decode"]))
     if isinstance(tuned, str):
         return "run" if tuned == "batch" else tuned
     after = T.rate(model, merges, t["words_used"], t["encode_fast"], t["decode"], show, "after")
@@ -157,18 +158,20 @@ def _merged(model, merge_lora):
 
 def save(result: dict) -> None:
     """The adapters, A and B of every LoRALinear, in work/projects/llm/lora.pt, and the run in lora.json: also, for
-    every test instruction in order, 1 when the answer used every word and 0 when not."""
+    every test instruction in order, 1 when the answer used every word and 0 when not, and the answers along the run
+    for its replay."""
     import torch
     folder = projects.folder() / "llm"
     folder.mkdir(parents=True, exist_ok=True)
     adapters = {k: v.detach().cpu() for k, v in result["model"].state_dict().items() if k.endswith((".A", ".B"))}
     torch.save(adapters, folder / f"{NAME}.pt")
+    result["bytes"] = (folder / f"{NAME}.pt").stat().st_size   # also for the table right after the run
     keep = {"base": result["source"], "rank": result["rank"], "alpha": result["alpha"], "params": result["params"],
             "trainable": result["trainable"], "layers": result["layers"], "steps": result["steps"], "lr": LR,
             "seconds": round(result["seconds"], 1), "device": result["device"], "losses": result["losses"],
             "after": {k: result["after"][k] for k in ("used", "stopped", "total")}, "gap": result["gap"],
             "hits": "".join("1" if h else "0" for h in result["after"]["hits"]),
-            "bytes": (folder / f"{NAME}.pt").stat().st_size}
+            "bytes": result["bytes"], "snapshots": result.get("snapshots", [])}
     (folder / f"{NAME}.json").write_text(json.dumps(keep, indent=1) + "\n", encoding="utf-8")
 
 
@@ -179,6 +182,15 @@ def saved() -> dict | None:
     except (OSError, ValueError):
         return None
     return info if (folder / f"{NAME}.pt").is_file() else None
+
+
+def full_sft_losses(source: str) -> list:
+    """The loss of the learner's run of llm-sft, the mean of every 50 steps as (step, loss), when it fine-tuned the
+    model this run fine-tunes: for the live chart, to hold LoRA against. Empty when there is no such run."""
+    mine = T.saved()
+    if mine is None or mine.get("base") != source:
+        return []
+    return [(l["step"], l["loss"]) for l in mine.get("losses", [])]
 
 
 def full_sft(base: str | None = None) -> dict:

@@ -106,7 +106,7 @@ def run(show) -> dict | str:
         return "pairs"
     if not _pairs_ok(pairs) or not pairs:
         return "pairs"
-    show({"phase": "pairs", "pairs": len(pairs), "instructions": len(made)})   # before the ids: encoding them takes a while
+    show({"phase": "pairs", "pairs": len(pairs), "instructions": len(made), "steps": math.ceil(len(pairs) / BATCH)})   # before the ids: encoding them takes a while
     ended = {a: e for it in made for a, e in zip(it["answers"], it["ended"])}
     data = examples(pairs, merges, t["encode_fast"], ended)
     try:
@@ -115,12 +115,21 @@ def run(show) -> dict | str:
     except Exception:
         return "lora"
     w = T.P.where()
-    model.to(w["device"]).train()
+    model.to(w["device"])
+    snap = T.snapper(merges, t["words_used"], t["encode_fast"], t["decode"])   # for the replay of the run
+    try:
+        snapshots = [snap(0, model)]
+    except torch.OutOfMemoryError:
+        return "memory"
+    except Exception:
+        return "run"
+    model.train()
     opt = torch.optim.AdamW([p for p in model.parameters() if p.requires_grad], lr=LR, weight_decay=0.0)
     order = list(range(len(data)))
     random.Random(0).shuffle(order)
     steps = math.ceil(len(data) / BATCH)
-    losses, start, last = [], time.perf_counter(), 0.0
+    marks = {round(steps * k / T.SNAPSHOTS) for k in range(1, T.SNAPSHOTS + 1)}
+    losses, fresh, start, last = [], [], time.perf_counter(), 0.0
     try:
         for step in range(steps):
             batch = [data[i] for i in order[step * BATCH:(step + 1) * BATCH]]
@@ -131,11 +140,16 @@ def run(show) -> dict | str:
             if not math.isfinite(loss):
                 return "diverged"
             losses.append(loss)
+            fresh.append((step + 1, loss))
+            if step + 1 in marks:
+                snapshots.append(snap(step + 1, model))
+                model.train()
             now = time.perf_counter()
             if now - last > 1 or step == steps - 1:
                 last = now
                 show({"phase": "steps", "step": step + 1, "steps": steps, "loss": sum(losses[-25:]) / len(losses[-25:]),
-                      "seconds": now - start})
+                      "seconds": now - start, "fresh": fresh})
+                fresh = []
     except torch.OutOfMemoryError:
         return "memory"
     except Exception:
@@ -156,7 +170,7 @@ def run(show) -> dict | str:
     if isinstance(after, str):
         return "run"
     result = {"model": model, "source": source, "sft_sha256": sft_sha256(source), "pairs": len(data), "instructions": len(made),
-              "steps": steps, "moved": moved,
+              "steps": steps, "moved": moved, "snapshots": snapshots,
               "seconds": seconds, "device": w["name"], "losses": losses, "after": after, "before": before(source),
               "trainable": sum(p.numel() for p in model.parameters() if p.requires_grad)}
     save(result)
@@ -197,7 +211,7 @@ def keep(result: dict) -> dict:
             "after": {k: result["after"][k] for k in ("used", "stopped", "total")},
             "before": {k: result["before"][k] for k in ("used", "total")},
             "hits": "".join("1" if h else "0" for h in result["after"]["hits"]),
-            "example": example(result["before"]["hits"], result["after"])}
+            "example": example(result["before"]["hits"], result["after"]), "snapshots": result.get("snapshots", [])}
 
 
 def example(before_hits: str, after: dict) -> dict:
@@ -244,6 +258,21 @@ def load(source: str | None = None) -> tuple:
         where, info, state = "course", course_info(), (paths.ROOT / COURSE).with_suffix(".pt")
     model.load_state_dict({k: v.float() for k, v in torch.load(state, map_location="cpu", weights_only=True).items()}, strict=False)
     return model.eval(), {**sft_info, "dpo": info}, where
+
+
+def ln2_line(steps: int) -> list:
+    """ln 2 across a run of `steps` steps, as (step, loss): the DPO loss at the start, before the policy prefers any
+    answer."""
+    return [(0, math.log(2)), (steps, math.log(2))]
+
+
+def replay_run(run: dict) -> dict:
+    """A run as dpo.json keeps it, in the form T.replay_frame draws: its loss of every `every`th step as the mean of the
+    last five, as losses_picture draws it, at the step it was taken."""
+    ls, every = run["losses"], run["every"]
+    smooth = [sum(ls[max(0, i - 4):i + 1]) / len(ls[max(0, i - 4):i + 1]) for i in range(len(ls))]
+    return {"steps": run["steps"], "snapshots": run["snapshots"],
+            "losses": [{"step": 1 + i * every, "loss": v} for i, v in enumerate(smooth)]}
 
 
 def losses_picture(losses: list, every: int, labels: dict) -> str:
