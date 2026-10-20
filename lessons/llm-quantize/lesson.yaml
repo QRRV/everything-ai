@@ -1,0 +1,34 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+# termen:allow Matrix Multiplication
+id: llm-quantize
+minutes: 35
+title:
+  en: "Running a model in fewer bits"
+  nl: "Een model draaien in minder bits"
+goal:
+  en: "store the weights of your model in 8, 4 or fewer bits with a scale per group, and measure what that saves in memory and costs in loss."
+  nl: "de weights van je model opslaan in 8, 4 of minder bits met een schaal per groep, en meten wat dat aan geheugen bespaart en aan loss kost."
+summary:
+  - en: "Quantization stores every weight as a whole number q from −q_max to q_max, with q_max = 2^(b−1) − 1, and a scale per group: the largest |w| of the group divided by q_max; the model computes with q times the scale."
+    nl: "Quantization slaat elke weight op als een heel getal q van −q_max tot q_max, met q_max = 2^(b−1) − 1, en een schaal per groep: de grootste |w| van de groep gedeeld door q_max; het model rekent met q maal de schaal."
+  - en: "A scale per small group keeps one large weight from stretching the grid for all the others; for groups of 32, a 16-bit scale adds half a bit per weight."
+    nl: "Een schaal per kleine groep voorkomt dat één grote weight het rooster voor alle andere oprekt; bij groepen van 32 voegt een schaal van 16 bits een halve bit per weight toe."
+  - en: "In 4 bits a model takes about a quarter of the memory of BF16 and writes faster, because writing is memory-bound; what it costs, you measure as its loss on text it never trained on."
+    nl: "In 4 bits neemt een model ongeveer een kwart van het geheugen van BF16 in en schrijft het sneller, omdat schrijven memory-bound is; wat het kost, meet je als zijn loss op tekst waarop het nooit trainde."
+can_now:
+  - en: "store a matrix of weights in fewer bits, with a scale per group"
+    nl: "een matrix weights opslaan in minder bits, met een schaal per groep"
+    by: quantize
+  - en: "work out how much memory a model takes in fewer bits"
+    nl: "uitrekenen hoeveel geheugen een model in minder bits inneemt"
+    by: memory
+  - en: "explain why a model in fewer bits writes faster"
+    nl: "uitleggen waarom een model in minder bits sneller schrijft"
+    by: faster
+further_reading:
+  - en: "Tim Dettmers, Mike Lewis, Younes Belkada and Luke Zettlemoyer (2022), *LLM.int8(): 8-bit Matrix Multiplication for Transformers at Scale*, NeurIPS: large models have a few very large features, and keeping those in 16 bits lets the rest go to 8"
+    nl: "Tim Dettmers, Mike Lewis, Younes Belkada en Luke Zettlemoyer (2022), *LLM.int8(): 8-bit Matrix Multiplication for Transformers at Scale*, NeurIPS: grote modellen hebben een paar heel grote features, en die in 16 bits houden zodat de rest in 8 bits kan"
+  - en: "Elias Frantar, Saleh Ashkboos, Torsten Hoefler and Dan Alistarh (2023), *GPTQ: Accurate Post-Training Quantization for Generative Pre-trained Transformers*, ICLR: rounding a layer's weights one by one, and adjusting those not yet rounded to make up for each error, so that 3 and 4 bits cost less"
+    nl: "Elias Frantar, Saleh Ashkboos, Torsten Hoefler en Dan Alistarh (2023), *GPTQ: Accurate Post-Training Quantization for Generative Pre-trained Transformers*, ICLR: de weights van een layer één voor één afronden, en de nog niet afgeronde bijstellen om elke fout goed te maken, zodat 3 en 4 bits minder kosten"

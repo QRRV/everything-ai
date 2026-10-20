@@ -792,5 +792,7 @@ lessons:
   idea: "Storing your model's weights in 8 or 4 bits makes it smaller and faster to run, at a small cost in quality that you measure."
   covers: [quantization-en-compressie#0]
   requires: [sys-number-formats, llm-pretrain-capstone]
-  introduces: [c:quantization]
+  introduces: [c:quantization, c:quantization-scale, c:quantization-group, py:torch-round, py:torch-clamp, py:torch-amax]
+  uses: [c:bf16, c:fp16, c:float32, c:int8, c:mantissa, c:number-range, c:memory-bound, c:bandwidth, c:roofline, c:byte, c:weight, c:matrix, c:token, c:loss, c:validation-set, c:tensor, py:torch-tensor, py:torch-reshape, py:keepdim, py:dim, py:def, py:return, py:list, py:comprehension, py:for, py:min-max, py:abs, py:print, py:comment, py:underscore-name, q:predict, q:choice, q:explain, q:exercise-with-check, q:run-cell]
+  ladder: [torch]
   needs: any
