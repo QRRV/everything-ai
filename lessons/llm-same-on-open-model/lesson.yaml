@@ -1,0 +1,35 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: llm-same-on-open-model
+minutes: 45
+title:
+  en: "The same steps on an open model"
+  nl: "Dezelfde stappen op een open model"
+goal:
+  en: "load an open model into code with its exact details, find which of its tokens it learned, and train it with your own LoRA, SFT and DPO on open data."
+  nl: "een open model in code laden met zijn precieze details, nagaan welke van zijn tokens het leerde, en het trainen met je eigen LoRA, SFT en DPO op open data."
+summary:
+  - en: "An open model is a config.json with its sizes, a file of weights under names, a tokenizer and a license. Loading it is renaming every tensor of the file to a name of your code, and checking every shape."
+    nl: "Een open model is een config.json met zijn maten, een bestand met weights onder namen, een tokenizer en een licentie. Het laden is elke tensor uit het bestand een naam uit je code geven, en elke shape controleren."
+  - en: "Qwen3 has the parts of your ModernGPT with other sizes and three details: QK-norm, its own layout of RoPE and weight tying. A wrong detail gives no error, only a far higher loss."
+    nl: "Qwen3 heeft de onderdelen van je ModernGPT met andere maten en drie details: QK-norm, een eigen indeling van RoPE en weight tying. Een verkeerd detail geeft geen foutmelding, alleen een veel hogere loss."
+  - en: "A base model may never have learned the special tokens of its family's chat template; with the output layer frozen, such a token can never win. End with a token it knows, and the same steps work: in the course's run, SFT taught Qwen3 to answer and to stop, and DPO moved it towards what people prefer, but also made fewer answers stop."
+    nl: "Een base model heeft de special tokens van de chat template van zijn familie misschien nooit getraind; met de output layer bevroren kan zo'n token nooit winnen. Eindig met een token dat het kent, en dezelfde stappen werken: in de run van de course leerde SFT Qwen3 antwoorden en stoppen, en schoof DPO het op naar wat mensen verkiezen, maar daarna hielden ook minder antwoorden uit zichzelf op."
+can_now:
+  - en: "load the weights of an open model into your own code by their names"
+    nl: "de weights van een open model in je eigen code laden aan de hand van hun namen"
+    by: rename
+  - en: "work out from a config.json what LoRA trains on a model"
+    nl: "uit een config.json uitrekenen wat LoRA op een model traint"
+    by: lora-parameters
+  - en: "say why a base model may not learn to stop at the end token of its chat template"
+    nl: "zeggen waarom een base model misschien niet leert te stoppen bij het eindtoken van zijn chat template"
+    by: end-id
+further_reading:
+  - en: "Qwen Team (2025), *Qwen3 Technical Report*, arXiv:2505.09388: the models, QK-norm, and pretraining on about 36 trillion tokens"
+    nl: "Qwen Team (2025), *Qwen3 Technical Report*, arXiv:2505.09388: de modellen, QK-norm, en pretraining op ongeveer 36 biljoen tokens"
+  - en: "Andreas Köpf and others (2023), *OpenAssistant Conversations: Democratizing Large Language Model Alignment*, NeurIPS Datasets and Benchmarks: how OASST1 was written and ranked by volunteers"
+    nl: "Andreas Köpf en anderen (2023), *OpenAssistant Conversations: Democratizing Large Language Model Alignment*, NeurIPS Datasets and Benchmarks: hoe vrijwilligers OASST1 schreven en rangschikten"
+  - en: "Zhilin Wang and others (2024), *HelpSteer2-Preference: Complementing Ratings with Preferences*, arXiv:2410.01257: the pairs of HelpSteer2 and the strength of each preference"
+    nl: "Zhilin Wang en anderen (2024), *HelpSteer2-Preference: Complementing Ratings with Preferences*, arXiv:2410.01257: de paren van HelpSteer2 en de sterkte van elke voorkeur"

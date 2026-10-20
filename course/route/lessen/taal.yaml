@@ -778,13 +778,17 @@ lessons:
   title: "The same steps on an open model"
   level: expert
   module: post-training
+  kind: project
+  project: llm
   idea: "Apply LoRA SFT and DPO to a small open-license model with an open instruction and preference dataset."
   covers: [peft-lora-en-qlora#0]
-  requires: [llm-lora, llm-dpo]
-  introduces: [p:adapt-an-open-model]
+  requires: [llm-lora, llm-dpo, lm-weight-tying]
+  introduces: [p:adapt-an-open-model, c:model-config, c:qk-norm, c:untrained-token]
+  uses: [c:open-weights, c:license, c:model-hub, c:base-model, c:chat-template, c:generation-prompt, c:end-of-turn-token, c:special-token, c:end-of-text, c:tokenizer, c:vocabulary, c:token, c:token-id, c:embedding, c:weight-tying, c:logit, c:rmsnorm, c:rope, c:swiglu, c:grouped-query-attention, c:kv-cache, c:transformer-block, c:layer, c:tensor, c:shape, c:model-parameter, c:parameter-count, c:lora, c:adapter, c:low-rank, c:freezing, c:fine-tuning, c:instruction-tuning, c:loss-masking, c:dpo, c:reference-model, c:policy, c:preference-pair, c:loss, c:gradient, c:learning-rate, c:optimizer, c:test-set, py:def, py:return, py:dict, py:list, py:tuple, py:for, py:if, py:split-sep, py:str-join, py:slicing, py:indexing, py:append, py:comparison, py:arithmetic, py:string-literal, py:print, py:comment, py:underscore-name, q:predict, q:choice, q:explain, q:exercise-with-check, q:run-cell]
   ladder: [torch]
-  data: [model-qwen3-0.6b-base, oasst, helpsteer2]
-  compute_minutes: 45
+  data: [model-qwen3-0.6b-base, oasst, helpsteer2, course-open-model]
+  reference_data: [course-open-model]
+  compute_minutes: 20
   needs: rec
 
 - id: llm-quantize

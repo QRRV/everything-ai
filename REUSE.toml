@@ -160,6 +160,30 @@ SPDX-FileCopyrightText = "2019 OpenAI (GPT-2)"
 SPDX-License-Identifier = "MIT"
 
 [[annotations]]
+path = "data/qwen3-0.6b-base.json"
+precedence = "override"
+SPDX-FileCopyrightText = "2024 Alibaba Cloud (Qwen3-0.6B-Base: its config and the header of its weights file)"
+SPDX-License-Identifier = "Apache-2.0"
+
+[[annotations]]
+path = "data/oasst-short.json"
+precedence = "override"
+SPDX-FileCopyrightText = "2023 LAION and the OpenAssistant contributors (OpenAssistant Conversations, OASST1; a subset made for Everything AI)"
+SPDX-License-Identifier = "Apache-2.0"
+
+[[annotations]]
+path = "data/helpsteer2-short.json"
+precedence = "override"
+SPDX-FileCopyrightText = "2024 NVIDIA Corporation (HelpSteer2; a subset made for Everything AI)"
+SPDX-License-Identifier = "CC-BY-4.0"
+
+[[annotations]]
+path = "data/course-open-model.json"
+precedence = "override"
+SPDX-FileCopyrightText = "2026 Everything AI contributors (the course's run; answers written by Qwen3-0.6B-Base of Alibaba Cloud, Apache-2.0, after SFT on OASST1, Apache-2.0, and DPO on HelpSteer2 of NVIDIA, CC-BY-4.0; with three questions of OASST1 by LAION and the OpenAssistant contributors, Apache-2.0)"
+SPDX-License-Identifier = "CC-BY-4.0"
+
+[[annotations]]
 path = "data/README.md"
 precedence = "aggregate"
 SPDX-FileCopyrightText = "2026 Everything AI contributors"

@@ -20,8 +20,10 @@ bronnen:
    note_nl: "De eerste 20 MB van een shard van C4 van vóór het opschonen (allenai/c4, en.noclean, vastgelegd op commit en SHA-256 in hub.PINNED): ruwe webpagina's om quality filters op te oefenen. FineWeb is al gefilterd, dus te schoon daarvoor. Leerlingen downloaden het zelf; de course host er niets van en traint er geen model op dat ze deelt."}
 - {id: fineweb-sample-download-only, kind: text, license: "ODC-By-1.0 plus Common Crawl terms", hosting: download, checkpoints: false,
    note_nl: "Een kleine ruwe webstaal om kwaliteitsfilters en deduplicatie op te oefenen; er wordt geen model op getraind dat de course verspreidt."}
-- {id: oasst, kind: sft, license: "Apache-2.0", hosting: rehost}
-- {id: helpsteer2, kind: preference, license: "CC-BY-4.0", hosting: rehost}
+- {id: oasst, kind: sft, license: "Apache-2.0", hosting: rehost,
+   note_nl: "data/oasst-short.json: korte Engelse vragen met het antwoord dat mensen het beste vonden, voor llm-same-on-open-model."}
+- {id: helpsteer2, kind: preference, license: "CC-BY-4.0", hosting: rehost,
+   note_nl: "data/helpsteer2-short.json: korte paren met één beurt en een duidelijke voorkeur, voor llm-same-on-open-model."}
 - {id: qmnist, kind: image, license: "BSD-3-Clause", hosting: rehost,
    note_nl: "Handgeschreven cijfers met een duidelijke licentie; MNIST zelf mag alleen gedownload worden."}
 - {id: fashion-mnist, kind: image, license: "MIT", hosting: rehost,
@@ -46,6 +48,8 @@ bronnen:
    note_nl: "Het model van llm-sft: model-course-capstone, door de course met dezelfde code als de les gefinetuned op instructies voor verhalen voor jonge kinderen uit shard 5 van Cosmopedia, elk met een of twee van zijn zelfstandige naamwoorden als gevraagde woorden. Vangnet voor de lessen na llm-sft, voor wie zelf geen model finetunede (besluit 7)."}
 - {id: model-course-dpo, kind: model, license: "CC-BY-4.0 (the course; trained on answers of model-course-sft)", hosting: rehost,
    note_nl: "De adapters van llm-dpo: LoRA van rang 8 op model-course-sft, door de course met dezelfde code als de les getraind met DPO op de preference pairs uit course-dpo-answers. Vangnet voor de lessen na llm-dpo, voor wie zelf geen DPO draaide (besluit 7)."}
+- {id: course-open-model, kind: text, license: "CC-BY-4.0 (the course; written by Qwen3-0.6B-Base, Apache-2.0, after SFT on OASST1, Apache-2.0, and DPO on HelpSteer2, CC-BY-4.0)", hosting: rehost,
+   note_nl: "De run van de course van llm-same-on-open-model, met wat hij mat en de antwoorden van het model op drie vragen. data/course-open-model.json, gemaakt met data/tools/train_course_open_model.py. De course deelt geen adapters van Qwen3: de les meet en toont alleen."}
 - {id: course-dpo-answers, kind: text, license: "CC-BY-4.0 (the course; written by model-course-sft)", hosting: rehost,
    note_nl: "Vier antwoorden van model-course-sft op elk van 1.000 instructies met gevraagde woorden, uit verhalen voor jonge kinderen van shard 5 van Cosmopedia die het SFT-model niet zag; geen enkele is een testinstructie van llm-sft. data/course-dpo-answers.json, gemaakt met data/tools/make_course_dpo_answers.py."}
 - {id: course-eval-chat, kind: text, license: "CC-BY-4.0 (the course; written by model-course-capstone, model-course-sft and model-course-dpo)", hosting: rehost,

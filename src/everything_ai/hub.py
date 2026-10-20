@@ -39,6 +39,22 @@ PINNED = {
         "sha256": "248dfc3911869ec493c76e65bf2fcf7f615828b0254c12b473182f0f81d3a707",
         "size": 548_105_171,
     },
+    # Qwen3-0.6B-Base, an open model, and its tokenizer: llm-same-on-open-model (course/route/bronnen.yaml)
+    ("Qwen/Qwen3-0.6B-Base", "model.safetensors"): {
+        "revision": "da87bfb608c14b7cf20ba1ce41287e8de496c0cd",
+        "sha256": "cd2a512003e2f9f3cd3c32a9c3573f820bb28c940f73c57b1ddaa983d9223eba",
+        "size": 1_192_135_096,
+    },
+    ("Qwen/Qwen3-0.6B-Base", "vocab.json"): {
+        "revision": "da87bfb608c14b7cf20ba1ce41287e8de496c0cd",
+        "sha256": "ca10d7e9fb3ed18575dd1e277a2579c16d108e32f27439684afa0e10b1440910",
+        "size": 2_776_833,
+    },
+    ("Qwen/Qwen3-0.6B-Base", "tokenizer_config.json"): {
+        "revision": "da87bfb608c14b7cf20ba1ce41287e8de496c0cd",
+        "sha256": "3c04ed3ca964ea2f6b2b5faf0dc4d31aec1cb1e8b4bcf63f402d295046b422b5",
+        "size": 9_678,
+    },
     # the first 20 MB of a shard of C4 before its cleaning: raw web pages for llm-quality-filter (course/route/bronnen.yaml)
     ("datasets/allenai/c4", "en.noclean/c4-train.00000-of-07168.json.gz"): {
         "revision": "1588ec454efa1a09f29cd18ddd04fe05fc8653a2",
