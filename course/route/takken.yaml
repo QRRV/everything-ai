@@ -3,6 +3,8 @@
 # A lesson has its own "tak" field; it may cover topics whose home is another branch (a cross-branch lesson).
 # Status: main-route = part of the first route that gets built; later = shown on the map as "komt nog".
 # build_order is a proposal for Quinn, not a decision.
+# attach (later branches only): the attach points, main-route lessons this branch connects to, in route order.
+#   The branch can begin after the first; its later lessons build on the others too. Also a proposal.
 # rest_after (main-route branches only): after which branch the rest of this branch is built, the topics the main
 #   route does not cover and no earlier branch has built ahead. Also a proposal.
 # Format: FORMAT.md.
@@ -16,7 +18,7 @@ takken:
   status: main-route
   build_order: 1
   rest_after: toepassingen
-  project: {id: nn, title_nl: "Je eigen neurale netwerk: van één neuron met de hand tot een diep netwerk in PyTorch"}
+  project: {id: nn, title: "Your own neural network: from one neuron by hand to a deep network in PyTorch", title_nl: "Je eigen neurale netwerk: van één neuron met de hand tot een diep netwerk in PyTorch"}
   final: nn-deep-net-project
 
 - id: taal
@@ -26,7 +28,7 @@ takken:
   status: main-route
   build_order: 1
   rest_after: rl
-  project: {id: llm, title_nl: "Je eigen LLM: van letters tellen tot een gepretraind en nagetraind model"}
+  project: {id: llm, title: "Your own LLM: from counting letters to a pretrained and post-trained model", title_nl: "Je eigen LLM: van letters tellen tot een gepretraind en nagetraind model"}
   final: llm-dpo
 
 - id: onderzoek
@@ -36,7 +38,7 @@ takken:
   status: main-route
   build_order: 1
   rest_after: toepassingen
-  project: {id: repro, title_nl: "Een paper nabouwen: eerst begeleid, daarna een eigen keuze"}
+  project: {id: repro, title: "Reproducing a paper: guided first, then one of your own choice", title_nl: "Een paper nabouwen: eerst begeleid, daarna een eigen keuze"}
   final: repro-own-report
 
 - id: beeld
@@ -45,7 +47,8 @@ takken:
   domains: [D13]
   status: later
   build_order: 2
-  project: {id: cnn, title_nl: "Je eigen CNN groeit: LeNet, VGG-blokken, ResNet, daarna detectie en segmentatie"}
+  project: {id: cnn, title: "Your own CNN grows: LeNet, VGG blocks, ResNet, then detection and segmentation", title_nl: "Je eigen CNN groeit: LeNet, VGG-blokken, ResNet, daarna detectie en segmentatie"}
+  attach: [cnn-convolution-idea, cnn-pytorch]
   final_nl: "Een eigen ResNet op CIFAR-10 of Fashion-MNIST met Grad-CAM, en een kleine U-Net of detector"
 
 - id: generatief
@@ -54,7 +57,8 @@ takken:
   domains: [D12]
   status: later
   build_order: 3
-  project: {id: gen, title_nl: "Je eigen generator: autoencoder, VAE, GAN en ten slotte een diffusiemodel"}
+  project: {id: gen, title: "Your own generator: autoencoder, VAE, GAN and finally a diffusion model", title_nl: "Je eigen generator: autoencoder, VAE, GAN en ten slotte een diffusiemodel"}
+  attach: [torch-mlp-digits, prob-distributions]
   final_nl: "Een klasse-geconditioneerd diffusiemodel dat je zelf traint op Fashion-MNIST of CIFAR-10"
 
 - id: rl
@@ -63,7 +67,8 @@ takken:
   domains: [D18]
   status: later
   build_order: 4
-  project: {id: agent, title_nl: "Je eigen agent: bandit, tabel-Q-learning, DQN en PPO"}
+  project: {id: agent, title: "Your own agent: bandit, tabular Q-learning, DQN and PPO", title_nl: "Je eigen agent: bandit, tabel-Q-learning, DQN en PPO"}
+  attach: [rl-what-is-rl, llm-rlhf-idea]
   final_nl: "Een PPO-agent die je vanaf nul schrijft en traint in een Gymnasium-omgeving"
 
 - id: bouwen
@@ -72,7 +77,8 @@ takken:
   domains: [D17]
   status: later
   build_order: 5
-  project: {id: app, title_nl: "Je eigen assistent op een lokaal open model: prompts, RAG, tools en evals"}
+  project: {id: app, title: "Your own assistant on a local open model: prompts, RAG, tools and evals", title_nl: "Je eigen assistent op een lokaal open model: prompts, RAG, tools en evals"}
+  attach: [start-using-ai-tools, llm-chat-template]
   final_nl: "Een agent met retrieval en tools, met een eigen evaluatieset en foutanalyse"
   note_nl: "Geen API-sleutels en geen internet nodig: de API-oefeningen praten met een lokale server (Ollama of llama.cpp, met een OpenAI-compatibele API) en een open model met een permissieve licentie. Betaalde API's komen alleen als uitleg of als optionele verdieping."
 
@@ -82,7 +88,8 @@ takken:
   domains: [D24, D25]
   status: later
   build_order: 6
-  project: {id: audit, title_nl: "Je eigen modellen doorlichten: bias, uitleg, privacy, aanvallen en interpretability"}
+  project: {id: audit, title: "Auditing your own models: bias, explanations, privacy, attacks and interpretability", title_nl: "Je eigen modellen doorlichten: bias, uitleg, privacy, aanvallen en interpretability"}
+  attach: [rai-bias-in-data, llm-safety-eval]
   final_nl: "Een audit van je eigen LLM en classifier, inclusief een sparse autoencoder op je eigen model"
 
 - id: klassiek-ml
@@ -91,7 +98,8 @@ takken:
   domains: [D10]
   status: later
   build_order: 7
-  project: {id: tabular, title_nl: "Tabulaire data: bomen, ensembles, gradient boosting, clustering en tijdreeksen"}
+  project: {id: tabular, title: "Tabular data: trees, ensembles, gradient boosting, clustering and time series", title_nl: "Tabulaire data: bomen, ensembles, gradient boosting, clustering en tijdreeksen"}
+  attach: [ml-project-tabular, res-fair-baselines]
   final_nl: "Een complete pijplijn op een tabulaire dataset, eerlijk vergeleken met een neuraal netwerk"
 
 - id: dl-verdieping
@@ -100,7 +108,8 @@ takken:
   domains: []
   status: later
   build_order: 8
-  project: {id: arch, title_nl: "Je GPT-code uitbreiden met andere bouwstenen: GNN, state-space-laag, mixture of experts"}
+  project: {id: arch, title: "Extending your GPT code with other building blocks: GNN, state-space layer, mixture of experts", title_nl: "Je GPT-code uitbreiden met andere bouwstenen: GNN, state-space-laag, mixture of experts"}
+  attach: [nn-deep-net-project, llm-modern-gpt]
   final_nl: "Een eigen vergelijking van twee architecturen op dezelfde taak, met seeds en ablation"
 
 - id: spraak
@@ -109,7 +118,8 @@ takken:
   domains: [D14]
   status: later
   build_order: 9
-  project: {id: audio, title_nl: "Van geluidsgolf naar spectrogram, een audioclassifier en een kleine spraakherkenner"}
+  project: {id: audio, title: "From sound wave to spectrogram, an audio classifier and a small speech recognizer", title_nl: "Van geluidsgolf naar spectrogram, een audioclassifier en een kleine spraakherkenner"}
+  attach: [torch-pretrained, cnn-pytorch, math-complex-rotation]
   final_nl: "Een eigen CTC-spraakherkenner op een kleine dataset met een vrije licentie"
 
 - id: systemen
@@ -118,7 +128,8 @@ takken:
   domains: [D23]
   status: later
   build_order: 10
-  project: {id: ops, title_nl: "Je eigen model meten, versnellen, serveren en bewaken"}
+  project: {id: ops, title: "Measuring, speeding up, serving and monitoring your own model", title_nl: "Je eigen model meten, versnellen, serveren en bewaken"}
+  attach: [torch-gpu, sys-profiling-mfu]
   final_nl: "Je eigen LLM als lokale dienst, met metingen van snelheid en geheugen"
 
 - id: onzekerheid
@@ -127,7 +138,8 @@ takken:
   domains: [D6]
   status: later
   build_order: 11
-  project: {id: prob, title_nl: "Een Bayesiaans netwerk, probabilistisch programmeren en een causale analyse"}
+  project: {id: prob, title: "A Bayesian network, probabilistic programming and a causal analysis", title_nl: "Een Bayesiaans netwerk, probabilistisch programmeren en een causale analyse"}
+  attach: [prob-expectation, stats-bootstrap]
   final_nl: "Een causaal effect schatten op echte data en laten zien waarom correlatie misleidt"
 
 - id: klassieke-ai
@@ -136,7 +148,8 @@ takken:
   domains: [D4, D5, D7]
   status: later
   build_order: 12
-  project: {id: solver, title_nl: "Je eigen zoeker en planner: A*, een SAT-solver, een planner en een genetisch algoritme"}
+  project: {id: solver, title: "Your own search and planner: A*, a SAT solver, a planner and a genetic algorithm", title_nl: "Je eigen zoeker en planner: A*, een SAT-solver, een planner en een genetisch algoritme"}
+  attach: [py-tuples-sets, prob-expectation]
   final_nl: "Een spel-AI met Monte Carlo tree search"
 
 - id: multi-agent
@@ -145,7 +158,8 @@ takken:
   domains: [D8]
   status: later
   build_order: 13
-  project: {id: games, title_nl: "Spellen, veilingen en agents die met elkaar onderhandelen"}
+  project: {id: games, title: "Games, auctions and agents that negotiate with each other", title_nl: "Spellen, veilingen en agents die met elkaar onderhandelen"}
+  attach: [prob-expectation, rl-what-is-rl]
   final_nl: "Een toernooi van eigen agents, met een analyse in speltheorie"
 
 - id: robotica
@@ -154,7 +168,8 @@ takken:
   domains: [D19]
   status: later
   build_order: 14
-  project: {id: robot, title_nl: "Een gesimuleerde robotarm: kinematica, regeling en leren"}
+  project: {id: robot, title: "A simulated robot arm: kinematics, control and learning", title_nl: "Een gesimuleerde robotarm: kinematica, regeling en leren"}
+  attach: [math-matrix-multiply, rl-what-is-rl, math-complex-rotation]
   final_nl: "Een gesimuleerde robotarm die een voorwerp leert oppakken"
 
 - id: mens
@@ -163,7 +178,8 @@ takken:
   domains: [D1, D9, D22, D26]
   status: later
   build_order: 15
-  project: {id: society, title_nl: "Weinig code: je eigen AI-toepassing toetsen aan de AI Act en aan wat we weten over mensen"}
+  project: {id: society, title: "Little code: testing your own AI application against the AI Act and against what we know about people", title_nl: "Weinig code: je eigen AI-toepassing toetsen aan de AI Act en aan wat we weten over mensen"}
+  attach: [start-using-ai-tools, rai-bias-in-data]
   final_nl: "Een onderbouwde analyse van één AI-toepassing: werking, risico's, wetgeving en effect op mensen"
 
 - id: toepassingen
@@ -172,7 +188,8 @@ takken:
   domains: [D20, D21]
   status: later
   build_order: 16
-  project: {id: domain, title_nl: "Kies een vakgebied en pas de course toe op echte data uit dat vakgebied"}
+  project: {id: domain, title: "Pick a field and apply the course to real data from that field", title_nl: "Kies een vakgebied en pas de course toe op echte data uit dat vakgebied"}
+  attach: [ml-workflow, res-research-cycle]
   final_nl: "Een eigen project in één vakgebied, van vraag tot resultaat"
 
 # Topics whose home is another branch than their domain's default. Keys are map topic ids.

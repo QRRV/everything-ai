@@ -10,10 +10,10 @@ routes:
   status: first-to-build
   milestones:
     - after: res-research-cycle
-      en: "Basis done: you built your own autograd, trained a neural network on handwritten digits and wrote a language model that predicts letters."
+      en: "Basics done: you built your own autograd, trained a neural network on handwritten digits and wrote a language model that predicts letters."
       nl: "Basis af: je hebt je eigen autograd gebouwd, een neural network op handgeschreven cijfers getraind en een language model gemaakt dat letters voorspelt."
     - after: res-figures
-      en: "Gevorderd done: you built a GPT from scratch, trained it on text with your own tokenizer, and ran your first ablation."
+      en: "Intermediate done: you built a GPT from scratch, trained it on text with your own tokenizer, and ran your first ablation."
       nl: "Gevorderd af: je hebt een GPT vanaf nul gebouwd, op tekst getraind met je eigen tokenizer, en je eerste ablation gedaan."
     - after: res-whats-next
       en: "Expert done: you pretrained and post-trained your own LLM and reproduced a paper on your own."

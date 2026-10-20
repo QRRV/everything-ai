@@ -1,0 +1,34 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+# termen:allow Robustness
+id: res-whats-next
+minutes: 25
+title:
+  en: "Where to go next"
+  nl: "Waar nu heen"
+goal:
+  en: "find where each branch of the course grows out of the main route, and turn your reproduction into a question of your own: an ablation, new data or a robustness test."
+  nl: "vinden waar elke tak van de course uit de hoofdroute groeit, en van je reproductie een eigen vraag maken: een ablation, nieuwe data of een robuustheidstest."
+summary:
+  - en: "Every branch still to come grows out of the main route at its attach points, the lessons it builds on; it can begin after the first, and most branches can begin after the basics."
+    nl: "Elke tak die nog komt, groeit uit de hoofdroute bij zijn aanhaakpunten, de lessen waarop hij voortbouwt; hij kan na het eerste beginnen, en de meeste takken kunnen na de basis beginnen."
+  - en: "A reproduction grows into a question of your own when you change one thing about the paper: an ablation takes a part away, new data tries the claim elsewhere, a robustness test disturbs what the model is tested on."
+    nl: "Een reproductie groeit uit tot een eigen vraag als je één ding aan de paper verandert: een ablation haalt een deel weg, nieuwe data probeert de claim ergens anders, een robuustheidstest verstoort waarop het model getest wordt."
+  - en: "Change one thing at a time, and write the rule down before you run it: then whatever you find has one cause."
+    nl: "Verander één ding tegelijk, en schrijf de regel op voordat je draait: dan heeft wat je vindt één oorzaak."
+can_now:
+  - en: "say what kind of change a next question makes"
+    nl: "zeggen wat voor verandering een volgende vraag maakt"
+    by: kinds
+  - en: "find the branches you can begin from the lessons you have done"
+    nl: "de takken vinden waaraan je kunt beginnen, uit de lessen die je hebt gedaan"
+    by: can-begin
+  - en: "write the next question for a paper you reproduced"
+    nl: "de volgende vraag schrijven voor een paper die je hebt nagebouwd"
+    by: next-question
+further_reading:
+  - en: "Dan Hendrycks and Thomas Dietterich (2019), *Benchmarking Neural Network Robustness to Common Corruptions and Perturbations*, ICLR: robustness tests of image classifiers, with noise, blur, weather and more at five strengths"
+    nl: "Dan Hendrycks en Thomas Dietterich (2019), *Benchmarking Neural Network Robustness to Common Corruptions and Perturbations*, ICLR: robuustheidstests van beeldclassifiers, met ruis, onscherpte, weer en meer in vijf sterktes"
+  - en: "D. Sculley, Jasper Snoek, Alex Wiltschko and Ali Rahimi (2018), *Winner's Curse? On Pace, Progress, and Empirical Rigor*, ICLR workshop: why the field needs ablations, robustness tests and careful comparisons as much as new methods"
+    nl: "D. Sculley, Jasper Snoek, Alex Wiltschko en Ali Rahimi (2018), *Winner's Curse? On Pace, Progress, and Empirical Rigor*, ICLR-workshop: waarom het vakgebied ablations, robuustheidstests en zorgvuldige vergelijkingen net zo hard nodig heeft als nieuwe methodes"

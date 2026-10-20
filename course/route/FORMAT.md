@@ -66,7 +66,7 @@ A route has an `id`, titles, `milestones` (shown when a learner passes a step) a
 
 ## Branches: `takken.yaml`
 
-Each branch has an id, titles, the map domains it owns by default, a `status` (`main-route` or `later`), a proposed `build_order`, its running `project` and its final project. `overrides` moves single topics to another branch than their domain's default. A main-route branch has `rest_after`: the branch after which the rest of it is built (what the main route does not cover and no earlier branch has built ahead).
+Each branch has an id, titles, the map domains it owns by default, a `status` (`main-route` or `later`), a proposed `build_order`, its running `project` (an id with an English `title` and a Dutch `title_nl`) and its final project. A later branch has `attach`: its attach points, the lessons of the main route it connects to, in route order. The branch can begin after the first one; its later lessons build on the others too. Like `build_order`, a proposal. `overrides` moves single topics to another branch than their domain's default. A main-route branch has `rest_after`: the branch after which the rest of it is built (what the main route does not cover and no earlier branch has built ahead).
 
 ## Papers and sources
 
@@ -88,7 +88,7 @@ Errors (the route is not valid until these are gone):
 10. A core step of a route never requires an extra step of that route.
 11. The main route never goes down a level.
 12. Every map topic has a home branch; overrides name existing topics and branches.
-13. Every `data` and `reference_data` id is in `bronnen.yaml`; papers and branch finals point to existing lessons; goals are in the main route; every own-choice paper has `needs` and a compute estimate, and at least one runs on a CPU.
+13. Every `data` and `reference_data` id is in `bronnen.yaml`; papers and branch finals point to existing lessons; goals are in the main route; every project has a `title` and a `title_nl`; every later branch has `attach` points, core steps of the main route in route order, and a main-route branch has none; every own-choice paper has `needs` and a compute estimate, and at least one runs on a CPU.
 14. `kind`, `project`, `minutes`, `compute_minutes`, `fallback`, `hard`, `goal` and `look_back` have valid values; `kind: project` has a `project` and the other way round; a core step of the main route computes at most 15 minutes; a core step of the main route that needs a GPU has a `fallback` (unless its time depends on the chosen paper); `look_back` points into the `requires` chain.
 15. A project step that trains on data with `checkpoints: false` has `reference_data` with data the course may train its handed-out checkpoints on, or `[]`.
 

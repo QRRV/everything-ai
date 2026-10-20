@@ -470,6 +470,6 @@ lessons:
   idea: "Back to the map: every other branch now builds on what you know, and the course shows where each one connects."
   covers: [onderzoeksvragen-kiezen#0]
   requires: [repro-own-report, start-map-of-ai]
-  introduces: [c:attach-point]
-  uses: [c:course-branch]
+  introduces: [c:attach-point, c:robustness-test]
+  uses: [c:course-branch, c:course-level, c:course-route, c:ablation, c:reproduction, c:paper, c:preregistration, c:seed, c:run, c:dropout, c:noise, c:test-set, c:negative-result, p:reproduction-plan, p:reproduction-report, py:dict, py:list, py:for, py:if, py:append, py:indexing, py:def, py:return, py:comment, py:string-literal, q:predict, q:choice, q:explain, q:exercise-with-check, q:run-cell]
   needs: any
