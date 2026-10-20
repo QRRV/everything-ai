@@ -1,0 +1,28 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: repro-own-compare
+minutes: 45
+title:
+  en: "Your reproduction 7: compare with the paper"
+  nl: "Je reproductie 7: vergelijk met de paper"
+goal:
+  en: "test with the comparison of your kit whether the difference between your gain and the paper's is more than your seeds explain, in the unit the claim is about, and name what could explain it."
+  nl: "met de vergelijking van je kit testen of het verschil tussen jouw winst en die van de paper meer is dan je seeds verklaren, in de eenheid waar de claim over gaat, en noemen wat het kan verklaren."
+summary:
+  - en: "The mean gain of your seeds with a bootstrap interval, against the paper's one number: outside the interval, your seeds do not explain the difference; with three seeds, it is clear only when the number lies well outside."
+    nl: "De gemiddelde winst van je seeds met een bootstrap-interval, tegen het ene getal van de paper: buiten het interval verklaren je seeds het verschil niet; met drie seeds is het pas duidelijk als het getal er ver buiten ligt."
+  - en: "In points and as a share of the metric without the method, the same runs can differ from the paper in opposite directions: say which unit the claim is about, and give both."
+    nl: "In punten en als aandeel van de metric zonder de methode kunnen dezelfde runs in tegengestelde richting van de paper verschillen: zeg over welke eenheid de claim gaat, en geef beide."
+  - en: "A real difference sends you to the setups: the data, the network, the training and the measurement; a reason stays a guess until a run tests it."
+    nl: "Een echt verschil stuurt je naar de opzetten: de data, het netwerk, de training en de meting; een reden blijft een gok tot een run hem test."
+can_now:
+  - en: "test whether a paper's number lies outside the interval of your own seeds"
+    nl: "testen of een getal van een paper buiten het interval van je eigen seeds ligt"
+    by: vs-paper
+  - en: "find a paper's own numbers and say what they are of"
+    nl: "de eigen getallen van een paper vinden en zeggen waar ze van zijn"
+    by: paper-numbers
+further_reading:
+  - en: "Nitish Srivastava and others (2014), *Dropout: A Simple Way to Prevent Neural Networks from Overfitting*: its results on MNIST, in the text and in Table 2"
+    nl: "Nitish Srivastava en anderen (2014), *Dropout: A Simple Way to Prevent Neural Networks from Overfitting*: zijn resultaten op MNIST, in de tekst en in Table 2"

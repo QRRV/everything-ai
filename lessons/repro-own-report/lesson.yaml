@@ -1,0 +1,33 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+# termen:allow Reproducibility
+# termen:allow median
+id: repro-own-report
+minutes: 60
+title:
+  en: "Your reproduction 8: report and share"
+  nl: "Je reproductie 8: verslag en delen"
+goal:
+  en: "write the report of your reproduction with the template of your kit, its Results from your own runs, publish it with your code and logs and a manifest of their SHA-256, and tell the authors what you found."
+  nl: "het verslag van je reproductie schrijven met het sjabloon van je kit, met zijn Results uit je eigen runs, het publiceren met je code en logboeken en een manifest van hun SHA-256, en de auteurs vertellen wat je vond."
+summary:
+  - en: "A report says what you tested, how, what held, what differed and what you did not check; its Results come from your kit, so that every number can be found again in your logs."
+    nl: "Een verslag zegt wat je testte, hoe, wat hield, wat verschilde en wat je niet controleerde; zijn Results komen uit je kit, zodat elk getal in je logboeken terug te vinden is."
+  - en: "Numbers go in at the precision their metric has: a test error over 1000 pictures has one decimal, and the rest of a float is noise."
+    nl: "Getallen gaan erin met de precisie die hun metric heeft: een testfout over 1000 afbeeldingen heeft één decimaal, en de rest van een float is ruis."
+  - en: "Code, plan, budget, logs and report go public with a manifest of their SHA-256; the authors get a short, kind and specific message with the link."
+    nl: "Code, plan, budget, logboeken en verslag worden openbaar met een manifest van hun SHA-256; de auteurs krijgen een kort, vriendelijk en precies bericht met de link."
+can_now:
+  - en: "write a table in Markdown at the precision of its numbers"
+    nl: "een tabel in Markdown schrijven met de precisie van zijn getallen"
+    by: table
+  - en: "write the report of a reproduction, with its Results from your own runs"
+    nl: "het verslag van een reproductie schrijven, met zijn Results uit je eigen runs"
+    by: report
+  - en: "tell the authors of a paper what your reproduction found"
+    nl: "de auteurs van een paper vertellen wat je reproductie vond"
+    by: to-authors
+further_reading:
+  - en: "Koustuv Sinha and others (2021), *ML Reproducibility Challenge 2020*, ReScience C: the editorial of a yearly challenge whose reports are reproductions like yours, reviewed in the open and the best of them published"
+    nl: "Koustuv Sinha en anderen (2021), *ML Reproducibility Challenge 2020*, ReScience C: het editorial van een jaarlijkse challenge waarvan de verslagen reproducties zijn zoals de jouwe, openlijk beoordeeld en de beste ervan gepubliceerd"

@@ -446,7 +446,8 @@ lessons:
   idea: "Test with the comparison from your kit whether the difference between your numbers and the paper's is real, and look for the reason when it is."
   covers: [papers-reproduceren#5]
   requires: [repro-own-ablation]
-  uses: [p:repro-kit, c:paired-bootstrap]
+  introduces: [c:relative-gain]
+  uses: [p:repro-kit, p:reproduction-plan, c:paired-bootstrap, c:bootstrap, c:confidence-interval, c:undocumented-detail, c:ablation, c:reproduction, c:paper, c:seed, c:run, c:run-to-run-variance, c:median, c:test-set, c:dropout, c:json, c:resample, c:with-replacement, c:quantile, c:mean, c:metric, c:overfitting, py:np-random-generator, py:np-quantile, py:np-mean, py:dict, py:list, py:append, py:zip, py:comprehension, py:def, py:return, py:for, py:if, py:import, py:import-as, py:comment, py:print, py:comparison, py:or-operator, py:range, py:len, py:float, py:bool, py:underscore-name, q:predict, q:choice, q:explain, q:exercise-with-check, q:run-cell]
   needs: any
 
 - id: repro-own-report
@@ -458,7 +459,8 @@ lessons:
   idea: "Write the report with the template of your kit, publish code and results, and tell the authors what you found."
   covers: [papers-reproduceren#6]
   requires: [repro-own-compare, res-share-work]
-  uses: [p:repro-kit]
+  introduces: [c:manifest]
+  uses: [p:repro-kit, p:reproduction-plan, p:experiment-log, p:reproduction-report, c:hash, c:ablation, c:ablation-share, c:relative-gain, c:bootstrap, c:confidence-interval, c:median, c:budget-ladder, c:preregistration, c:open-artifact, c:negative-result, c:newline, py:hashlib, c:license, c:reproduction, c:paper, c:seed, c:run, c:floating-point, py:float, c:dropout, c:test-set, py:str, py:str-join, py:comprehension, py:list, py:append, py:for, py:def, py:return, py:comment, py:print, py:string-literal, py:len, q:predict, q:choice, q:explain, q:exercise-with-check, q:run-cell]
   needs: any
 
 - id: res-whats-next
