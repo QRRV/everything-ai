@@ -295,47 +295,88 @@ def demo_button_cell():
 
 @app.cell(hide_code=True)
 def demo_train(box_advantages, box_loss, demo_button, result_advantages, result_loss):
+    trained = None
     if result_advantages.state != "correct" or result_loss.state != "correct":
         _out = mo.md("*Maak eerst `advantages` en `policy_loss` goed in oefening 1 en 2: de run traint ermee.*")
     elif not demo_button.value:
         _out = mo.md("*Druk op de knop om je model te trainen.*")
     else:
+        _live = L.live({"title": "Je run: gemiddelde reward per stap", "x": "stap", "y": "gemiddelde reward",
+                        "alt": "De gemiddelde reward van elke stap van je run tot nu toe, als lijn in inkt met een stip bij elke stap; gestippeld de run van de course op zijn model, bij dezelfde stappen."}, C.steps(), role="ink", low=0.0, high=1.0)
+        _live.reference(list(enumerate(R["rewards"][:C.steps()], 1)), "de run van de course")
+
         def _show(_d):
             if _d["phase"] == "measure":
-                mo.output.replace(mo.md(f"**Bezig met meten:** {_d['done']} van {_d['total']} …"))
+                _live.line(f"**Bezig met meten:** {_d['done']} van {_d['total']} …")
+            elif _d["phase"] == "start":
+                _live.line(f"**Bezig met trainen:** stap 1 van {_d['steps']} …")
             else:
-                mo.output.replace(mo.md(f"**Stap {_d['step']} van {_d['steps']}:** gemiddelde reward {C.number(_d['reward'], 2, 'nl')}, {_d['seconds']:.0f} s"))
+                _live.extend(_d["fresh"], f"**Stap {_d['step']} van {_d['steps']}:** gemiddelde reward {C.number(_d['reward'], 2, 'nl')}, {_d['seconds']:.0f} s")
 
         _r = C.run(run_code(box_advantages.value).names["advantages"], run_code(box_loss.value).names["policy_loss"], _show)
+        trained = None if isinstance(_r, str) else _r
         if _r == "run":
-            _out = mo.md("*Het laden of draaien van je model stopt met een fout. Slagen je modules in `work/projects/llm/` nog voor hun checks? Verwijder een bestand dat je veranderde, en check zijn oefening opnieuw.*")
+            _out = _live.stopped("*Het laden of draaien van je model stopt met een fout. Slagen je modules in `work/projects/llm/` nog voor hun checks? Verwijder een bestand dat je veranderde, en check zijn oefening opnieuw.*")
         elif _r == "advantages":
-            _out = mo.md("*Je `advantages` stopt met een fout op een groep van de run, of geeft niet voor elk antwoord een getal.*")
+            _out = _live.stopped("*Je `advantages` stopt met een fout op een groep van de run, of geeft niet voor elk antwoord een getal.*")
         elif _r == "loss":
-            _out = mo.md("*Je `policy_loss` stopt met een fout op een groep van de run, of geeft niet één getal met een gradient.*")
+            _out = _live.stopped("*Je `policy_loss` stopt met een fout op een groep van de run, of geeft niet één getal met een gradient.*")
         elif _r == "memory":
-            _out = mo.md("*Het apparaat had niet genoeg geheugen.*")
+            _out = _live.stopped("*Het apparaat had niet genoeg geheugen.*")
         else:
             _b, _a = _r["before"], _r["after"]
             _out = mo.vstack([
-                mo.Html(C.rewards_picture(_r["rewards"], {"title": "Jouw run: gemiddelde reward per stap", "x": "stap", "y": "gemiddelde reward",
-                                                          "course": "gestreept: de run van de course", "alt": "De gemiddelde reward van elke stap van jouw run, met de run van de course van 25 stappen als een gestreepte lijn."},
+                mo.Html(C.rewards_picture(_r["rewards"], {"title": "Je run: gemiddelde reward per stap", "x": "stap", "y": "gemiddelde reward",
+                                                          "course": "gestippeld: de run van de course", "alt": "De gemiddelde reward van elke stap van je run, met de run van de course van 25 stappen als een gestippelde lijn."},
                                           course=R["rewards"])),
                 mo.md(f"**{'Je model' if _r['source'] == 'yours' else 'Het model van de course'}**, {_r['steps']} stappen op {_r['device']}, {_r['seconds']:.0f} s:\n\n"
                       f"| instructies waarop de run nooit trainde | ervoor | erna |\n|---|---|---|\n"
                       f"| zonder het woord: weggelaten | {_b['without']} van {_b['total']} | {_a['without']} van {_a['total']} |\n"
                       f"| met woorden: elk woord gebruikt | {_b['with']} van {_b['total']} | {_a['with']} van {_a['total']} |"),
-                mo.md("**Drie antwoorden van de laatste stap**, op *zonder het woord: " + _r["samples"][0][0] + "*:\n\n" + "\n".join(
-                    f"- reward {_s[2]:g}, advantage {C.number(_s[3], 3, 'nl')}: {C.excerpt(_s[1], 160)}" for _s in _r["samples"])),
             ])
     _out
-    return
+    return (trained,)
 
 
 @app.cell(hide_code=True)
 def text_after_demo():
     mo.md(rf"""
-    **Je run lezen.** In {C.STEPS['cpu']} stappen verschuift *zonder* maar een beetje, en op {C.MEASURE} instructies kan een verschil van een of twee toeval zijn; *met woorden* kan al omlaaggaan. Met het model van de course op een CPU zijn je stappen de eerste {C.STEPS['cpu']} van de course, dus ligt je lijn op de gestreepte. De run slaat het model niet op: je model uit het DPO-project blijft zoals het was.
+    **Je run lezen.** In {C.STEPS['cpu']} stappen verschuift *zonder* maar een beetje, en op {C.MEASURE} instructies kan een verschil van een of twee toeval zijn; *met woorden* kan al omlaaggaan. Met het model van de course op een CPU zijn je stappen de eerste {C.STEPS['cpu']} van de course, dus ligt je lijn op de gestippelde. De run slaat het model niet op: je model uit het DPO-project blijft zoals het was.
+    """)
+    return
+
+
+@app.cell(hide_code=True)
+def text_replay():
+    mo.md(r"""
+    ### Je run, stap voor stap
+
+    Bij elke stap bewaart de run de groep antwoorden op de eerste instructie van die stap: welke reward elk antwoord kreeg, en wat je `advantages` ervan maakte. Hier ga je door de stappen: de gemiddelde reward van elke stap, met een lijn bij de stap die je kiest; ernaast de advantage van elk antwoord van de groep van die stap als een staaf omhoog of omlaag vanaf nul; en daaronder het begin van elk antwoord.
+    """)
+    return
+
+
+@app.cell(hide_code=True)
+def replay_cell(trained):
+    _run = trained if trained is not None else C.saved()
+    if _run is None or not _run.get("groups"):
+        _out = mo.md("*Als je je model met GRPO hebt getraind, kun je hier door zijn run gaan.*")
+    else:
+        _labels = {"run": "Je run: gemiddelde reward per stap", "run_x": "stap", "run_y": "gemiddelde reward",
+                   "title": "Stap {step}: de groep van één instructie", "x": "antwoord", "y": "advantage", "lang": L.lang,
+                   "alt": "De gemiddelde reward van elke stap van je run, met een gestippelde lijn bij de gekozen stap; en de advantage van elk antwoord van de groep van die stap, als een staaf omhoog of omlaag vanaf nul.",
+                   "step": "Stap {step}", "mean": "gemiddelde reward van de groep", "reward": "reward", "advantage": "advantage"}
+        _out = L.explore("replay", "stap", lambda _v: C.group_frame(_run, int(_v), _labels), start=C.replay_start(_run),
+                         values=[_g["step"] for _g in _run["groups"]], role="",
+                         task="Welke antwoorden van een groep krijgen een positieve advantage, en tot hoeveel tellen de advantages van een groep samen op?")
+    _out
+    return
+
+
+@app.cell(hide_code=True)
+def text_replay_after():
+    mo.md(r"""
+    De antwoorden met een reward boven het gemiddelde van de groep krijgen een positieve advantage, die eronder een negatieve, en in elke groep tellen de advantages samen op tot nul: de stap maakt die erboven waarschijnlijker en die eronder minder waarschijnlijk, sterker naarmate ze verder van het gemiddelde liggen. Een groep waarin elk antwoord dezelfde reward krijgt, heeft overal een advantage van nul: daar leert de stap niets van. GRPO leert alleen van groepen waarin sommige antwoorden het beter doen dan andere.
     """)
     return
 

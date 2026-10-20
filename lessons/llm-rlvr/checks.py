@@ -6,6 +6,7 @@ The demo trains the learner's model of llm-dpo (or the course's) with GRPO on in
 word, with a program as its reward, and measures it before and after on instructions it never trained on: without a
 word, and with words, the kind of instruction DPO trained it on."""
 import importlib.util
+import json
 import math
 import random
 import time
@@ -32,6 +33,7 @@ LR = 2e-3                 # AdamW on the adapters
 STEPS = {"cpu": 10, "gpu": 25}   # steps of the demo: with its two measures, on a CPU about seven minutes with 2 threads
 GUARD = 3                 # sentences a story needs at least, so that an empty or one-line story earns nothing
 MEASURE = 20              # instructions of each kind the demo measures on, before and after
+NAME = "rlvr"             # the run, not the model, in work/projects/llm/rlvr.json: for the replay of the run
 _AVOIDS = run_code(E._A).names["avoids"]
 _SENTENCES = run_code(E._S).names["sentences"]
 
@@ -142,7 +144,8 @@ def run(advantages, policy_loss, show, steps: int | None = None) -> dict | str:
     params = [p for p in model.parameters() if p.requires_grad]
     opt = torch.optim.AdamW(params, lr=LR, weight_decay=0.0)
     rng = random.Random(0)
-    rewards, samples, start = [], [], time.perf_counter()
+    rewards, groups, start = [], [], time.perf_counter()
+    show({"phase": "start", "steps": steps})   # the first step takes a while: its answers are drawn first
     for step in range(steps):
         opt.zero_grad()
         got = []
@@ -160,8 +163,10 @@ def run(advantages, policy_loss, show, steps: int | None = None) -> dict | str:
                 adv = None
             if adv is None:
                 return "advantages"
-            if step == steps - 1 and i == 0:
-                samples = [(w, t["decode"]([j for j in ids if j != end], merges), rr, a) for ids, rr, a in zip(outs[:3], r, adv)]
+            if i == 0:   # the group of the step's first instruction, for the replay of the run
+                groups.append({"step": step + 1, "word": w, "answers": [
+                    {"text": excerpt(t["decode"]([j for j in ids if j != end], merges), 160), "reward": rr, "advantage": a}
+                    for ids, rr, a in zip(outs, r, adv)]})
             if not any(adv):
                 continue
             model.train()
@@ -178,13 +183,86 @@ def run(advantages, policy_loss, show, steps: int | None = None) -> dict | str:
         opt.step()
         model.eval()
         rewards.append(sum(got) / len(got))
-        show({"phase": "train", "step": step + 1, "steps": steps, "reward": rewards[-1], "seconds": time.perf_counter() - start})
+        show({"phase": "train", "step": step + 1, "steps": steps, "reward": rewards[-1], "seconds": time.perf_counter() - start,
+              "fresh": [(step + 1, rewards[-1])]})
     try:
         after = measure(model, merges, t["encode_fast"], t["decode"], t["words_used"], show)
     except Exception:
         return "run"
-    return {"source": where, "device": device["name"], "steps": steps, "rewards": rewards, "before": before, "after": after,
-            "samples": samples, "seconds": time.perf_counter() - begin}
+    result = {"source": where, "device": device["name"], "steps": steps, "rewards": rewards, "before": before, "after": after,
+              "groups": groups, "seconds": time.perf_counter() - begin}
+    save(result)
+    return result
+
+
+def steps() -> int:
+    """The steps the demo takes on this device."""
+    return STEPS[P.where()["kind"]]
+
+
+def save(result: dict) -> None:
+    """The run in work/projects/llm/rlvr.json, for its replay: not the model, which stays as it was."""
+    folder = projects.folder() / "llm"
+    folder.mkdir(parents=True, exist_ok=True)
+    (folder / f"{NAME}.json").write_text(json.dumps(result, indent=1) + "\n", encoding="utf-8")
+
+
+def saved() -> dict | None:
+    try:
+        return json.loads((projects.folder() / "llm" / f"{NAME}.json").read_text(encoding="utf-8"))
+    except (OSError, ValueError):
+        return None
+
+
+def group_frame(run: dict, step: int, labels: dict) -> tuple:
+    """One step of a run, for its replay (L.explore): the mean reward of every step of the run, in ink, with a dashed
+    line at `step` (template, block 9); beside it the advantage of every answer of the group of the step's first
+    instruction as a bar from zero, in ink; and under them the group's mean reward, the instruction, and every answer
+    with its reward and its advantage, exact: with rewards of 0 or 1, the mean and the advantages of a group of 8 are
+    eighths, so that the advantages shown add up to 0 as the ones the run used. `labels`: run (the title of the
+    run's chart), run_x, run_y, title ({step}), x, y, alt, lang, and "step" ({step}), "mean", "reward", "advantage"."""
+    from everything_ai import chart
+    g = next(x for x in run["groups"] if x["step"] == step)
+    lang = labels.get("lang", "en")
+    n, rewards = len(g["answers"]), run["rewards"]
+    r = chart.Panel((0.5, len(rewards) + 0.5), (0, 1), title=labels["run"], xlabel=labels["run_x"],
+                    ylabel=labels["run_y"], yticks=[0, 0.25, 0.5, 0.75, 1])
+    r.line([step, step], [0, 1], "ink-2", 1.2, dashed=True)
+    r.line(list(range(1, len(rewards) + 1)), rewards, "ink", 2.0)
+    r.points(list(range(1, len(rewards) + 1)), rewards, "ink", r=2.5)
+    r.points([step], [rewards[step - 1]], "ink", r=4)
+    p = chart.Panel((0.5, n + 0.5), (-1, 1), title=labels["title"].format(step=step), xlabel=labels["x"], ylabel=labels["y"],
+                    xticks=list(range(1, n + 1)), yticks=[-1, -0.5, 0, 0.5, 1])
+    p.line([0.5, n + 0.5], [0, 0], "ink-3", 1.0)
+    for k, a in enumerate(g["answers"], 1):
+        if abs(a["advantage"]) > 1e-9:
+            p.rect(k - 0.3, 0, k + 0.3, max(-1.0, min(1.0, a["advantage"])), "ink")
+    svg = chart.figure([r, p], alt=labels["alt"], width=330, height=220)
+    rows = "  \n".join(f"**{k}** · {labels['reward']} {a['reward']:g} · {labels['advantage']} {signed(a['advantage'], 3, lang)} · "
+                       f"{T.written(a['text'])}" for k, a in enumerate(g["answers"], 1))   # its number, as under its bar
+    mean = sum(a["reward"] for a in g["answers"]) / n
+    said = (f"**{labels['step'].format(step=step)}** · {labels['mean']} {short(mean, 3, lang)} · "
+            f"*{prompt(g['word']).splitlines()[0]}*\n\n{rows}")
+    return svg, said
+
+
+def short(x: float, digits: int, lang: str) -> str:
+    """A number to `digits` decimals (at least 1), without the zeros at the end: 0.375, 0.25, 0.5, 0."""
+    return number(x, max(1, digits), lang).rstrip("0").rstrip(".,")
+
+
+def signed(x: float, digits: int, lang: str) -> str:
+    """A number with its sign, + or a real minus, and 0 without one, to `digits` decimals without the zeros at the end."""
+    if round(x, digits) == 0:
+        return "0"
+    return ("+" if x > 0 else "") + short(x, digits, lang).replace("-", "\u2212")
+
+
+def replay_start(run: dict) -> int:
+    """Where the replay of a run starts: at the last step whose group has answers that did better than others, so
+    that its bars show what an advantage does before you touch the slider; at the last step if no group has."""
+    mixed = [g["step"] for g in run["groups"] if len({a["reward"] for a in g["answers"]}) > 1]
+    return (mixed or [run["groups"][-1]["step"]])[-1]
 
 
 def rewards_picture(rewards: list, labels: dict, course: list | None = None) -> str:

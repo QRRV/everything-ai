@@ -29,6 +29,7 @@ class Live:
         self.xs: list = []
         self.ys: list = []
         self.others: list = []
+        self.above: list = []   # what shows above the chart, such as the finished chart of an earlier part of the demo
         self._sides: dict = {}
         self.text = ""
         self._last = 0.0
@@ -63,8 +64,13 @@ class Live:
         self.text = text
         self.show()
 
+    def stopped(self, note: str):
+        """What a cell shows when its run stops early and the cell gives its output itself: the chart so far, when the
+        run took a step, with `note` under it."""
+        return mo.vstack([*self.above, mo.Html(self.picture()), mo.md(note)] if self.xs else [*self.above, mo.md(note)])
+
     def show(self) -> None:
-        parts = [mo.Html(self.picture())] if self.xs or self.others else []
+        parts = [*self.above] + ([mo.Html(self.picture())] if self.xs or self.others else [])
         if self.text:
             parts.append(mo.md(self.text))
         mo.output.replace(mo.vstack(parts) if parts else mo.md(""))
@@ -96,6 +102,8 @@ class Live:
         if len(self.xs) > 1:
             p.line(self.xs, self.ys, "axis", 0.8)                      # every step, thin and light grey
             p.line(self.xs, mean, self.role, 2.4)                       # its mean over the last steps, in its role
+        if self.xs and self.steps <= 50:
+            p.points(self.xs, mean, self.role, r=2.5)                   # a run of few steps: a dot at every step
         if self.xs:
             p.points([self.xs[-1]], [mean[-1]], self.role, r=3.5)       # where the run is now
         svg = chart.figure([p], alt=self.labels["alt"], width=360, height=240)

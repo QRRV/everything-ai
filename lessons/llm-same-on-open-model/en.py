@@ -322,7 +322,7 @@ def text_demo():
 
         The demo loads Qwen3 with your `rename`, puts adapters of rank {_k} on it with your `add_lora`, and trains them with SFT on OASST1: questions with the answer people ranked best. It merges them with your `merge_lora`, and trains new adapters with your `dpo_step` on HelpSteer2: two answers, of which people said which was better. It measures on held-out questions and pairs before and after.
 
-        On a GPU it takes the course's steps: {C.SFT['steps']['gpu']} of SFT on {C.SFT['batch']['gpu']} questions and {C.DPO['steps']['gpu']} of DPO on {C.DPO['batch']['gpu']} pairs. On a CPU it takes {C.SFT['steps']['cpu']} and {C.DPO['steps']['cpu']}, on {C.SFT['batch']['cpu']} at a time: about {C.number(R['cpu']['minutes'], 0, 'en')} minutes and {C.number(R['cpu']['memory_gb'], 0, 'en')} GB, and so few steps of DPO stay at chance ({R['cpu']['dpo']['agree']} of {R['cpu']['dpo']['pairs']} held-out pairs). The run does not keep the model.
+        On a GPU it takes the course's steps: {C.SFT['steps']['gpu']} of SFT on {C.SFT['batch']['gpu']} questions and {C.DPO['steps']['gpu']} of DPO on {C.DPO['batch']['gpu']} pairs. On a CPU it takes {C.SFT['steps']['cpu']} and {C.DPO['steps']['cpu']}, on {C.SFT['batch']['cpu']} at a time: about {C.number(R['cpu']['minutes'], 0, 'en')} minutes and {C.number(R['cpu']['memory_gb'], 0, 'en')} GB, and so few steps of DPO stay at chance ({R['cpu']['dpo']['agree']} of {R['cpu']['dpo']['pairs']} held-out pairs). The run does not keep the model. While it trains, a chart shows the loss of every step of SFT, and then a second one under it shows that of DPO, with ln 2 dashed: the loss DPO starts at. The charts stay after the run. With so few questions in a step, the loss of a step jumps up and down; what SFT taught, the table under the charts measures on held-out questions.
         """),
         L.course_versions(),
     ])
@@ -368,16 +368,29 @@ def demo_train(box_rename, result_rename, train_button):
     else:
         _phases = {"base": "Qwen3-0.6B-Base answers", "sft": "After SFT, it answers", "dpo": "After DPO, it answers", "agree": "Pairs measured"}
 
+        _lives = {}   # the live chart of SFT, and of DPO once it starts
+
         def _show(_d):
+            _now = _lives.get("dpo") or _lives.get("sft")
             if _d["phase"] == "load":
                 mo.output.replace(mo.md("**Loading Qwen3** and measuring it …"))
             elif "step" in _d:
-                mo.output.replace(mo.md(f"**{_d['phase'].upper()}, step {_d['step']} of {_d['steps']}:** loss {C.number(_d['loss'], 3, 'en')}, {_d['seconds']:.0f} s"))
+                if _d["phase"] not in _lives:
+                    _lives[_d["phase"]] = L.live({"title": f"{_d['phase'].upper()}: the loss of every step", "x": "step", "y": "loss",
+                                                  "alt": f"The loss of every step of {_d['phase'].upper()} so far" + ("; dashed, ln 2, the loss at the start." if _d["phase"] == "dpo" else ".")},
+                                                 _d["steps"], low=0.0)
+                    if _d["phase"] == "dpo":
+                        _lives["dpo"].reference(C.DP.ln2_line(_d["steps"]), "ln 2")
+                        _lives["dpo"].above = [mo.Html(_lives["sft"].picture())] if "sft" in _lives else []
+                _lives[_d["phase"]].add(_d["step"], _d["loss"], f"**{_d['phase'].upper()}, step {_d['step']} of {_d['steps']}:** loss {C.number(_d['loss'], 3, 'en')}, {_d['seconds']:.0f} s")
+            elif _now is not None:
+                _now.line(f"**{_phases[_d['phase']]}** {_d['done']} of {_d['total']} …")
             else:
                 mo.output.replace(mo.md(f"**{_phases[_d['phase']]}** {_d['done']} of {_d['total']} …"))
 
         _r = C.run(run_code(box_rename.value).names["rename"], _show)
-        _out = mo.md({
+        _charts = [mo.Html(_lives[_p].picture()) for _p in ("sft", "dpo") if _p in _lives]   # they stay after the run
+        _out = mo.vstack(_charts + ([mo.md({
             "names": "*Your `rename` does not give every tensor of the file a name of the model, with the same shape. Does it still pass its check?*",
             "run": "*Loading Qwen3, or one of your modules in `work/projects/llm/`, stops with an error. Do your modules still pass their checks? Delete a file you changed, and check its exercise again.*",
             "lora": "*Your `add_lora` stops with an error on Qwen3, or leaves nothing to train. Does it still pass its check in the lesson about LoRA?*",
@@ -385,7 +398,7 @@ def demo_train(box_rename, result_rename, train_button):
             "merge": "*Your `merge_lora` stops with an error on Qwen3. Does it still pass its check in the lesson about LoRA?*",
             "dpo": "*Your `dpo_step`, `answer_logprob` or `reference_logprob` stops with an error on Qwen3, or gives no number. Do they still pass their checks?*",
             "memory": "*The memory of your device is full. Close other programs, and press the button again.*",
-        }[_r]) if isinstance(_r, str) else mo.md("")
+        }[_r])] if isinstance(_r, str) else []))
         trained = None if isinstance(_r, str) else _r
     _out
     return (trained,)

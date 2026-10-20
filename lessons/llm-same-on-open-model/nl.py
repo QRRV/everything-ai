@@ -322,7 +322,7 @@ def text_demo():
 
         De demo laadt Qwen3 met je `rename`, zet er met je `add_lora` adapters van rang {_k} op, en traint die met SFT op OASST1: vragen met het antwoord dat mensen het beste vonden. Hij voegt ze samen met je `merge_lora`, en traint nieuwe adapters met je `dpo_step` op HelpSteer2: twee antwoorden, waarvan mensen zeiden welk beter was. Ervoor en erna meet hij op apart gehouden vragen en paren.
 
-        Op een GPU doet hij de stappen van de course: {C.SFT['steps']['gpu']} stappen SFT op {C.SFT['batch']['gpu']} vragen en {C.DPO['steps']['gpu']} stappen DPO op {C.DPO['batch']['gpu']} paren. Op een CPU doet hij er {C.SFT['steps']['cpu']} en {C.DPO['steps']['cpu']}, op {C.SFT['batch']['cpu']} tegelijk: ongeveer {C.number(R['cpu']['minutes'], 0, 'nl')} minuten en {C.number(R['cpu']['memory_gb'], 0, 'nl')} GB, en zo weinig stappen DPO blijven op toeval ({R['cpu']['dpo']['agree']} van de {R['cpu']['dpo']['pairs']} apart gehouden paren). De run bewaart het model niet.
+        Op een GPU doet hij de stappen van de course: {C.SFT['steps']['gpu']} stappen SFT op {C.SFT['batch']['gpu']} vragen en {C.DPO['steps']['gpu']} stappen DPO op {C.DPO['batch']['gpu']} paren. Op een CPU doet hij er {C.SFT['steps']['cpu']} en {C.DPO['steps']['cpu']}, op {C.SFT['batch']['cpu']} tegelijk: ongeveer {C.number(R['cpu']['minutes'], 0, 'nl')} minuten en {C.number(R['cpu']['memory_gb'], 0, 'nl')} GB, en zo weinig stappen DPO blijven op toeval ({R['cpu']['dpo']['agree']} van de {R['cpu']['dpo']['pairs']} apart gehouden paren). De run bewaart het model niet. Tijdens het trainen laat een grafiek de loss van elke stap van SFT zien, en daarna een tweede eronder die van DPO, met ln 2 gestippeld: de loss waarmee DPO begint. De grafieken blijven na de run staan. Met zo weinig vragen per stap springt de loss van een stap op en neer; wat SFT leerde, meet de tabel onder de grafieken op apart gehouden vragen.
         """),
         L.course_versions(),
     ])
@@ -368,16 +368,29 @@ def demo_train(box_rename, result_rename, train_button):
     else:
         _phases = {"base": "Qwen3-0.6B-Base antwoordt", "sft": "Na SFT antwoordt het", "dpo": "Na DPO antwoordt het", "agree": "Paren gemeten"}
 
+        _lives = {}   # de live grafiek van SFT, en van DPO zodra die begint
+
         def _show(_d):
+            _now = _lives.get("dpo") or _lives.get("sft")
             if _d["phase"] == "load":
                 mo.output.replace(mo.md("**Qwen3 laden** en meten …"))
             elif "step" in _d:
-                mo.output.replace(mo.md(f"**{_d['phase'].upper()}, stap {_d['step']} van {_d['steps']}:** loss {C.number(_d['loss'], 3, 'nl')}, {_d['seconds']:.0f} s"))
+                if _d["phase"] not in _lives:
+                    _lives[_d["phase"]] = L.live({"title": f"{_d['phase'].upper()}: de loss van elke stap", "x": "stap", "y": "loss",
+                                                  "alt": f"De loss van elke stap van {_d['phase'].upper()} tot nu toe" + ("; gestippeld ln 2, de loss aan het begin." if _d["phase"] == "dpo" else ".")},
+                                                 _d["steps"], low=0.0)
+                    if _d["phase"] == "dpo":
+                        _lives["dpo"].reference(C.DP.ln2_line(_d["steps"]), "ln 2")
+                        _lives["dpo"].above = [mo.Html(_lives["sft"].picture())] if "sft" in _lives else []
+                _lives[_d["phase"]].add(_d["step"], _d["loss"], f"**{_d['phase'].upper()}, stap {_d['step']} van {_d['steps']}:** loss {C.number(_d['loss'], 3, 'nl')}, {_d['seconds']:.0f} s")
+            elif _now is not None:
+                _now.line(f"**{_phases[_d['phase']]}:** {_d['done']} van {_d['total']} …")
             else:
                 mo.output.replace(mo.md(f"**{_phases[_d['phase']]}:** {_d['done']} van {_d['total']} …"))
 
         _r = C.run(run_code(box_rename.value).names["rename"], _show)
-        _out = mo.md({
+        _charts = [mo.Html(_lives[_p].picture()) for _p in ("sft", "dpo") if _p in _lives]   # they stay after the run
+        _out = mo.vstack(_charts + ([mo.md({
             "names": "*Je `rename` geeft niet elke tensor uit het bestand een naam van het model, met dezelfde shape. Slaagt hij nog voor zijn check?*",
             "run": "*Het laden van Qwen3, of een van je modules in `work/projects/llm/`, stopt met een fout. Slagen je modules nog voor hun checks? Verwijder een bestand dat je veranderde, en check zijn oefening opnieuw.*",
             "lora": "*Je `add_lora` stopt met een fout op Qwen3, of laat niets over om te trainen. Slaagt hij nog voor zijn check in de les over LoRA?*",
@@ -385,7 +398,7 @@ def demo_train(box_rename, result_rename, train_button):
             "merge": "*Je `merge_lora` stopt met een fout op Qwen3. Slaagt hij nog voor zijn check in de les over LoRA?*",
             "dpo": "*Je `dpo_step`, `answer_logprob` of `reference_logprob` stopt met een fout op Qwen3, of geeft geen getal. Slagen ze nog voor hun checks?*",
             "memory": "*Het geheugen van je apparaat is vol. Sluit andere programma's, en druk opnieuw op de knop.*",
-        }[_r]) if isinstance(_r, str) else mo.md("")
+        }[_r])] if isinstance(_r, str) else []))
         trained = None if isinstance(_r, str) else _r
     _out
     return (trained,)

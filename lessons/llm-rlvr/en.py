@@ -294,26 +294,34 @@ def demo_button_cell():
 
 @app.cell(hide_code=True)
 def demo_train(box_advantages, box_loss, demo_button, result_advantages, result_loss):
+    trained = None
     if result_advantages.state != "correct" or result_loss.state != "correct":
         _out = mo.md("*Make `advantages` and `policy_loss` right in exercises 1 and 2 first: the run trains with them.*")
     elif not demo_button.value:
         _out = mo.md("*Press the button to train your model.*")
     else:
+        _live = L.live({"title": "Your run: mean reward per step", "x": "step", "y": "mean reward",
+                        "alt": "The mean reward of every step of your run so far, as a line in ink with a dot at every step; dashed, the course's run on its model, at the same steps."}, C.steps(), role="ink", low=0.0, high=1.0)
+        _live.reference(list(enumerate(R["rewards"][:C.steps()], 1)), "the course's run")
+
         def _show(_d):
             if _d["phase"] == "measure":
-                mo.output.replace(mo.md(f"**Measuring** {_d['done']} of {_d['total']} …"))
+                _live.line(f"**Measuring** {_d['done']} of {_d['total']} …")
+            elif _d["phase"] == "start":
+                _live.line(f"**Training** · step 1 of {_d['steps']} …")
             else:
-                mo.output.replace(mo.md(f"**Step {_d['step']} of {_d['steps']}:** mean reward {C.number(_d['reward'], 2, 'en')}, {_d['seconds']:.0f} s"))
+                _live.extend(_d["fresh"], f"**Step {_d['step']} of {_d['steps']}:** mean reward {C.number(_d['reward'], 2, 'en')}, {_d['seconds']:.0f} s")
 
         _r = C.run(run_code(box_advantages.value).names["advantages"], run_code(box_loss.value).names["policy_loss"], _show)
+        trained = None if isinstance(_r, str) else _r
         if _r == "run":
-            _out = mo.md("*Loading or running your model stops with an error. Do your modules in `work/projects/llm/` still pass their checks? Delete a file you changed, and check its exercise again.*")
+            _out = _live.stopped("*Loading or running your model stops with an error. Do your modules in `work/projects/llm/` still pass their checks? Delete a file you changed, and check its exercise again.*")
         elif _r == "advantages":
-            _out = mo.md("*Your `advantages` stops with an error on a group of the run, or does not give a number for every answer.*")
+            _out = _live.stopped("*Your `advantages` stops with an error on a group of the run, or does not give a number for every answer.*")
         elif _r == "loss":
-            _out = mo.md("*Your `policy_loss` stops with an error on a group of the run, or does not give one number with a gradient.*")
+            _out = _live.stopped("*Your `policy_loss` stops with an error on a group of the run, or does not give one number with a gradient.*")
         elif _r == "memory":
-            _out = mo.md("*The device ran out of memory.*")
+            _out = _live.stopped("*The device ran out of memory.*")
         else:
             _b, _a = _r["before"], _r["after"]
             _out = mo.vstack([
@@ -324,17 +332,50 @@ def demo_train(box_advantages, box_loss, demo_button, result_advantages, result_
                       f"| instructions the run never trained on | before | after |\n|---|---|---|\n"
                       f"| without the word: left out | {_b['without']} of {_b['total']} | {_a['without']} of {_a['total']} |\n"
                       f"| with words: every word used | {_b['with']} of {_b['total']} | {_a['with']} of {_a['total']} |"),
-                mo.md("**Three answers of the last step**, to *without the word: " + _r["samples"][0][0] + "*:\n\n" + "\n".join(
-                    f"- reward {_s[2]:g}, advantage {C.number(_s[3], 3, 'en')}: {C.excerpt(_s[1], 160)}" for _s in _r["samples"])),
             ])
     _out
-    return
+    return (trained,)
 
 
 @app.cell(hide_code=True)
 def text_after_demo():
     mo.md(rf"""
     **Reading your run.** In {C.STEPS['cpu']} steps *without* moves only a little, and on {C.MEASURE} instructions a change of one or two can be chance; *with words* can already go down. With the course's model on a CPU, your steps are the course's first {C.STEPS['cpu']}, so your line lies on the dashed one. The run does not save the model: your model of the DPO project stays as it was.
+    """)
+    return
+
+
+@app.cell(hide_code=True)
+def text_replay():
+    mo.md(r"""
+    ### Your run, step by step
+
+    At every step, the run keeps the group of answers to the step's first instruction: what each answer got as its reward, and what your `advantages` made of it. Here you go through the steps: the mean reward of every step, with a line at the step you chose; beside it the advantage of every answer of that step's group as a bar up or down from zero; and under them the beginning of every answer.
+    """)
+    return
+
+
+@app.cell(hide_code=True)
+def replay_cell(trained):
+    _run = trained if trained is not None else C.saved()
+    if _run is None or not _run.get("groups"):
+        _out = mo.md("*Once you have trained your model with GRPO, you can go through its run here.*")
+    else:
+        _labels = {"run": "Your run: mean reward per step", "run_x": "step", "run_y": "mean reward",
+                   "title": "Step {step}: the group of one instruction", "x": "answer", "y": "advantage", "lang": L.lang,
+                   "alt": "The mean reward of every step of your run, with a dashed line at the chosen step; and the advantage of every answer of the group of that step, as a bar up or down from zero.",
+                   "step": "Step {step}", "mean": "mean reward of the group", "reward": "reward", "advantage": "advantage"}
+        _out = L.explore("replay", "step", lambda _v: C.group_frame(_run, int(_v), _labels), start=C.replay_start(_run),
+                         values=[_g["step"] for _g in _run["groups"]], role="",
+                         task="Which answers of a group get a positive advantage, and what do the advantages of a group add up to?")
+    _out
+    return
+
+
+@app.cell(hide_code=True)
+def text_replay_after():
+    mo.md(r"""
+    The answers with a reward above the group's mean get a positive advantage, those below it a negative one, and in every group the advantages add up to zero: the step makes the ones above the mean more likely and the ones below less likely, the more so the further they are from the mean. A group in which every answer gets the same reward has an advantage of zero everywhere: the step learns nothing from it. GRPO learns only from groups in which some answers do better than others.
     """)
     return
 
