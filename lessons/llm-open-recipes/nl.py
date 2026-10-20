@@ -315,7 +315,7 @@ def text_demo():
         mo.md(f"""
         ### Een paar honderd stappen van het recept
 
-        De knop hieronder traint je ModernGPT met wat deze les uit nanochat las: de grootte van diepte {C.DEPTH} volgens de regel van nanochat, een breedte van {_dim} met {_heads} heads, en je `lr_multiplier` met de standaardwaarden van nanochat, een warmup van {C.SCHEDULE['warmup']} stappen en een warmdown over de laatste {round(100 * C.SCHEDULE['warmdown'])}% naar {round(100 * C.SCHEDULE['final'])}% van de piek, {C.STEPS} stappen lang, met {C.BATCH} vensters van {C.BLOCK} tokens. Hij leest de vensters met je `TokenWindows` uit de shards van [Project: een datapipeline voor pretraining](/course/open/llm-data-pipeline?lang=nl), en houdt de laatste shard apart om op te valideren. De optimizer is AdamW, met een piek van {C.number(C.PEAK, 3, L.lang)}, niet Muon. Op de computer van de course, op zijn CPU, duurde de run ongeveer {round(C.MEASURED['seconds'] / 60)} minuten, op 2 threads; op een GPU gaat het veel sneller.
+        De knop hieronder traint je ModernGPT met wat deze les uit nanochat las: de grootte van diepte {C.DEPTH} volgens de regel van nanochat, een breedte van {_dim} met {_heads} heads, en je `lr_multiplier` met de standaardwaarden van nanochat, een warmup van {C.SCHEDULE['warmup']} stappen en een warmdown over de laatste {round(100 * C.SCHEDULE['warmdown'])}% naar {round(100 * C.SCHEDULE['final'])}% van de piek, {C.STEPS} stappen lang, met {C.BATCH} vensters van {C.BLOCK} tokens. Hij leest de vensters met je `TokenWindows` uit de shards van [Project: een datapipeline voor pretraining](/course/open/llm-data-pipeline?lang=nl), en houdt de laatste shard apart om op te valideren. De optimizer is AdamW, met een piek van {C.number(C.PEAK, 3, L.lang)}, niet Muon. Op de computer van de course, op zijn CPU, duurde de run ongeveer {round(C.MEASURED['seconds'] / 60)} minuten, op 2 threads; op een GPU gaat het veel sneller. Tijdens het trainen laat een grafiek de loss van elke stap zien, met de run van de course gestippeld ernaast.
         """),
         L.course_versions(),
     ])
@@ -341,11 +341,16 @@ def demo_train(train_button, box_lr, result_lr):
     elif not train_button.value:
         _out = mo.vstack([mo.md("*Druk op de knop om de run te starten. Tot dan de run van de course:*"), _course, mo.md(_verdict)])
     else:
+        _live = L.live({"title": "Je run: de training loss van elke stap", "x": "stap", "y": "loss per token",
+                        "alt": "De training loss bij elke stap van je run tot nu toe, in grijs, en als dikkere lijn het gemiddelde over de laatste 10 stappen; gestippeld de run van de course."}, C.STEPS, window=10)
+        _live.reference(C.course_curve(), "de run van de course", role="loss")
+        _live.line(f"**Bezig met trainen** · stap 1 van {C.STEPS} …")   # de run van de course staat er vanaf de druk op de knop
+
         def _progress(_p):
-            mo.output.replace(mo.md(f"**Stap {_p['step']} van {_p['steps']}** · training loss {C.number(_p['loss'], 2, L.lang)} per token · {round(_p['seconds'])} s"))
+            _live.extend(_p["fresh"], f"**Stap {_p['step']} van {_p['steps']}** · training loss {C.number(_p['loss'], 2, L.lang)} per token · {round(_p['seconds'])} s")
         _r = C.run(run_code(box_lr.value).names["lr_multiplier"], _progress)
         if _r == "run":
-            _out = mo.md("*De run stopt met een fout. Komen je modules in `work/projects/llm/` nog door hun checks? Verwijder een bestand dat je veranderde, en check de oefening ervan opnieuw.*")
+            _out = _live.stopped("*De run stopt met een fout. Komen je modules in `work/projects/llm/` nog door hun checks? Verwijder een bestand dat je veranderde, en check de oefening ervan opnieuw.*")
         else:
             _on = "de CPU" if _r["device"] == "cpu" else "de GPU"
             _out = mo.vstack([

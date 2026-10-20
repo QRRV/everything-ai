@@ -64,8 +64,9 @@ def speedrun() -> dict:
 def run(lr_multiplier, show) -> dict | str:
     """The demo: the learner's ModernGPT at nanochat's size for DEPTH, trained for STEPS steps of BATCH windows of
     BLOCK tokens of the shards of llm-data-pipeline (written first with the course's versions when they are missing),
-    with AdamW at PEAK times the learner's lr_multiplier. `show` gets the step and the loss every 10 steps. "run" when a
-    module of the learner stops with an error; else the losses, and the validation loss per token and per character."""
+    with AdamW at PEAK times the learner's lr_multiplier. `show` gets the step and the loss every 10 steps, and the loss
+    of each of those steps ("fresh"). "run" when a module of the learner stops with an error; else the losses, and the
+    validation loss per token and per character."""
     import numpy as np
     import torch
     from torch.utils.data import DataLoader
@@ -110,7 +111,8 @@ def run(lr_multiplier, show) -> dict | str:
         opt.step()
         losses.append(loss.item())
         if step % 10 == 9:
-            show({"step": step + 1, "steps": STEPS, "loss": sum(losses[-10:]) / 10, "seconds": time.perf_counter() - start})
+            show({"step": step + 1, "steps": STEPS, "loss": sum(losses[-10:]) / 10, "seconds": time.perf_counter() - start,
+                  "fresh": list(zip(range(step - 8, step + 2), losses[-10:]))})   # its last 10 steps, for the live chart
     model.eval()
     total, count = 0.0, 0
     with torch.no_grad():
@@ -161,6 +163,11 @@ def schedule_picture(labels: dict) -> str:
     return chart.with_decimal_comma(svg) if labels.get("lang") == "nl" else svg
 
 
+def course_curve() -> list:
+    """The course's run as (step, loss): the mean of every 10 steps, at the last of them, as curve_picture draws it."""
+    return [(10 * (k + 1), v) for k, v in enumerate(MEASURED["curve"])]
+
+
 def curve_picture(curves: list, labels: dict) -> str:
     """The training loss per token, averaged over every 10 steps: `curves` is a list of (values, dashed), the learner's
     run solid and the course's dashed."""
@@ -177,7 +184,7 @@ def curve_picture(curves: list, labels: dict) -> str:
 
 # --- measured: the course's run of the demo with its own versions and merge rules, on the CPU, 2 threads ---
 # Its validation loss per token and per character, the seconds, the parameters, and the training loss every 10 steps.
-MEASURED = {"val": 2.415, "per_char": 0.823, "seconds": 232, "params": 3791849,
+MEASURED = {"val": 2.4149, "per_char": 0.823, "seconds": 232, "params": 3791849,
             "curve": [6.943, 5.392, 4.328, 3.798, 3.614, 3.502, 3.327, 3.244, 3.255, 3.177, 3.059, 3.036, 2.978, 2.923, 2.867,
                       2.853, 2.791, 2.748, 2.757, 2.691, 2.638, 2.553, 2.605, 2.576, 2.499, 2.517, 2.438, 2.445, 2.467, 2.449]}
 # The course's GPT on tokens of gpt-train-bpe, CPU plan, seed 0: 10 epochs, its best validation loss per character.

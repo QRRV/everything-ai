@@ -315,7 +315,7 @@ def text_demo():
         mo.md(f"""
         ### A few hundred steps of the recipe
 
-        The button below trains your ModernGPT with what this lesson read from nanochat: the size of depth {C.DEPTH} by nanochat's rule, a width of {_dim} with {_heads} heads, and your `lr_multiplier` with nanochat's defaults, a warmup of {C.SCHEDULE['warmup']} steps and a warmdown over the last {round(100 * C.SCHEDULE['warmdown'])}% to {round(100 * C.SCHEDULE['final'])}% of the peak, for {C.STEPS} steps of {C.BATCH} windows of {C.BLOCK} tokens. It reads the windows with your `TokenWindows` from the shards of [Project: a pretraining data pipeline](/course/open/llm-data-pipeline?lang=en), and holds the last shard back to validate on. The optimizer is AdamW, at a peak of {C.number(C.PEAK, 3, L.lang)}, not Muon. On the course's computer, on its CPU, the run took about {round(C.MEASURED['seconds'] / 60)} minutes, on 2 threads; on a GPU, it is much faster.
+        The button below trains your ModernGPT with what this lesson read from nanochat: the size of depth {C.DEPTH} by nanochat's rule, a width of {_dim} with {_heads} heads, and your `lr_multiplier` with nanochat's defaults, a warmup of {C.SCHEDULE['warmup']} steps and a warmdown over the last {round(100 * C.SCHEDULE['warmdown'])}% to {round(100 * C.SCHEDULE['final'])}% of the peak, for {C.STEPS} steps of {C.BATCH} windows of {C.BLOCK} tokens. It reads the windows with your `TokenWindows` from the shards of [Project: a pretraining data pipeline](/course/open/llm-data-pipeline?lang=en), and holds the last shard back to validate on. The optimizer is AdamW, at a peak of {C.number(C.PEAK, 3, L.lang)}, not Muon. On the course's computer, on its CPU, the run took about {round(C.MEASURED['seconds'] / 60)} minutes, on 2 threads; on a GPU, it is much faster. While it trains, a chart shows the loss of every step, with the course's run dashed beside it.
         """),
         L.course_versions(),
     ])
@@ -341,11 +341,16 @@ def demo_train(train_button, box_lr, result_lr):
     elif not train_button.value:
         _out = mo.vstack([mo.md("*Press the button to start the run. Until then, the course's run:*"), _course, mo.md(_verdict)])
     else:
+        _live = L.live({"title": "Your run: the training loss of every step", "x": "step", "y": "loss per token",
+                        "alt": "The training loss of every step of your run so far, in grey, and its mean over the last 10 steps as the thicker line; dashed, the course's run."}, C.STEPS, window=10)
+        _live.reference(C.course_curve(), "the course's run", role="loss")
+        _live.line(f"**Training** · step 1 of {C.STEPS} …")   # the course's run shows from the press of the button
+
         def _progress(_p):
-            mo.output.replace(mo.md(f"**Step {_p['step']} of {_p['steps']}** · training loss {C.number(_p['loss'], 2, L.lang)} per token · {round(_p['seconds'])} s"))
+            _live.extend(_p["fresh"], f"**Step {_p['step']} of {_p['steps']}** · training loss {C.number(_p['loss'], 2, L.lang)} per token · {round(_p['seconds'])} s")
         _r = C.run(run_code(box_lr.value).names["lr_multiplier"], _progress)
         if _r == "run":
-            _out = mo.md("*The run stops with an error. Do your modules in `work/projects/llm/` still pass their checks? Delete a file you changed, and check its exercise again.*")
+            _out = _live.stopped("*The run stops with an error. Do your modules in `work/projects/llm/` still pass their checks? Delete a file you changed, and check its exercise again.*")
         else:
             _on = "the CPU" if _r["device"] == "cpu" else "the GPU"
             _out = mo.vstack([

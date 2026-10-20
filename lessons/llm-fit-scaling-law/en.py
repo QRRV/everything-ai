@@ -275,7 +275,7 @@ def text_demo_small():
         mo.md(f"""
         ### Your four small models
 
-        The button below trains your ModernGPT at depths {', '.join(str(_d) for _d in C.SMALL[:-1])} and {C.SMALL[-1]}: one epoch each over the training shards, mini-batches of {C.BATCH} windows of {C.BLOCK} tokens, AdamW with the warmup, plateau and warmdown of [Reading an open training recipe](/course/open/llm-open-recipes?lang=en), seed 0, and the last shard to validate on. The runs are kept in `work/projects/llm/{C.RUNS}`. On the course's computer, on 2 CPU threads, the four took about {round(sum(_r['seconds'] for _r in _m['small']) / 60)} minutes together; a GPU is much faster. Until you train your own, the course's runs stand in.
+        The button below trains your ModernGPT at depths {', '.join(str(_d) for _d in C.SMALL[:-1])} and {C.SMALL[-1]}: one epoch each over the training shards, mini-batches of {C.BATCH} windows of {C.BLOCK} tokens, AdamW with the warmup, plateau and warmdown of [Reading an open training recipe](/course/open/llm-open-recipes?lang=en), seed 0, and the last shard to validate on. The runs are kept in `work/projects/llm/{C.RUNS}`. On the course's computer, on 2 CPU threads, the four took about {round(sum(_r['seconds'] for _r in _m['small']) / 60)} minutes together; a GPU is much faster. Until you train your own, the course's runs stand in. While each model trains, a chart shows its training loss at every step, with the smaller models trained before it dashed beside it; the chart of the last model stays above the table. Once you have trained all four, the run of depth {C.BIG} further down shows them dashed beside it too.
         """),
         L.course_versions(),
     ])
@@ -292,22 +292,34 @@ def small_button_cell():
 @app.cell(hide_code=True)
 def demo_small(small_button):
     _failed = False
+    _kept = []   # the chart of the last depth, with the depths before it dashed: it stays above the table
     if small_button.value:
+        _done = []   # the curves of the depths trained before, dashed beside the one that trains now
+        _now = {}    # the live chart of the depth that trains now
+
         def _progress(_p):
-            mo.output.replace(mo.md(f"**Depth {_p['depth']}** · step {_p['step']} of {_p['steps']} · loss {C.number(_p['loss'], 2, L.lang)} per token · {round(_p['seconds'])} s"))
+            if _now.get("depth") != _p["depth"]:
+                _now["depth"], _now["live"] = _p["depth"], L.live({"title": f"Depth {_p['depth']}: the training loss of every step", "x": "step", "y": "loss per token",
+                                                                  "alt": f"The training loss of every step of depth {_p['depth']} so far, in grey, and its mean over the last 10 steps as the thicker line{'; dashed, the smaller models trained before it' if _done else ''}."}, _p["steps"], window=10)
+                for _c in _done:
+                    _now["live"].reference(_c, "", role="loss")
+            _now["live"].extend(_p["fresh"], f"**Depth {_p['depth']}** · step {_p['step']} of {_p['steps']} · loss {C.number(_p['loss'], 2, L.lang)} per token · {round(_p['seconds'])} s")
         for _depth in C.SMALL:
             _r = C.train(_depth, _progress)
             if _r == "run":
                 _failed = True
                 break
             C.save_run(_r)
+            _done.append(_r["curve"])
+        if _now:
+            _kept = [mo.Html(_now["live"].picture())]
     _saved = C.saved_runs()
     _mine = all(_d in _saved for _d in C.SMALL)
     small_runs = [_saved[_d] for _d in C.SMALL] if _mine else C.MEASURED["small"]
     _whose = "Your runs" if _mine else "The course's runs, until you train your own"
     _rows = "\n".join(f"| {_r['depth']} | {C.number(_r['params'], 0, L.lang)} | {C.number(_r['tokens'] / _r['params'], 1, L.lang)} | {C.number(_r['val'], 3, L.lang)} |" for _r in small_runs)
     _note = [mo.md("*The run stops with an error. Do your modules in `work/projects/llm/` still pass their checks? Delete a file you changed, and check its exercise again.*")] if _failed else []
-    mo.vstack(_note + [mo.md(f"{_whose}:\n\n| depth | parameters | tokens per parameter | validation loss per token |\n|---|---|---|---|\n{_rows}")])
+    mo.vstack(_note + _kept + [mo.md(f"{_whose}:\n\n| depth | parameters | tokens per parameter | validation loss per token |\n|---|---|---|---|\n{_rows}")])
     return (small_runs,)
 
 
@@ -337,8 +349,17 @@ def demo_big(big_button, law_floor, law_prediction, small_runs):
     _m = C.MEASURED
     _failed = False
     if big_button.value:
+        _now = {}   # the live chart, made at the first step: then the run knows its steps
+
         def _progress(_p):
-            mo.output.replace(mo.md(f"**Depth {_p['depth']}** · step {_p['step']} of {_p['steps']} · loss {C.number(_p['loss'], 2, L.lang)} per token · {round(_p['seconds'])} s"))
+            if not _now:
+                _runs = C.saved_runs()
+                _curves = [_runs[_d]["curve"] for _d in C.SMALL if "curve" in _runs.get(_d, {})]   # none for the course's runs, or for older runs saved without a curve
+                _now["live"] = L.live({"title": f"Depth {_p['depth']}: the training loss of every step", "x": "step", "y": "loss per token",
+                                       "alt": f"The training loss of every step of depth {_p['depth']} so far, in grey, and its mean over the last 10 steps as the thicker line{'; dashed, your small models' if _curves else ''}."}, _p["steps"], window=10)
+                for _c in _curves:
+                    _now["live"].reference(_c, "", role="loss")
+            _now["live"].extend(_p["fresh"], f"**Depth {_p['depth']}** · step {_p['step']} of {_p['steps']} · loss {C.number(_p['loss'], 2, L.lang)} per token · {round(_p['seconds'])} s")
         _r = C.train(C.BIG, _progress)
         if _r == "run":
             _failed = True

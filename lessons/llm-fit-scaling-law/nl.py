@@ -275,7 +275,7 @@ def text_demo_small():
         mo.md(f"""
         ### Je vier kleine modellen
 
-        De knop hieronder traint je ModernGPT met diepte {', '.join(str(_d) for _d in C.SMALL[:-1])} en {C.SMALL[-1]}: elk één epoch over de training shards, mini-batches van {C.BATCH} vensters van {C.BLOCK} tokens, AdamW met de warmup, het plateau en de warmdown uit [Een open trainingsrecept lezen](/course/open/llm-open-recipes?lang=nl), seed 0, en de laatste shard om op te valideren. De runs worden bewaard in `work/projects/llm/{C.RUNS}`. Op de computer van de course, op 2 CPU-threads, duurden de vier samen ongeveer {round(sum(_r['seconds'] for _r in _m['small']) / 60)} minuten; een GPU is veel sneller. Tot je je eigen runs traint, nemen die van de course hun plaats in.
+        De knop hieronder traint je ModernGPT met diepte {', '.join(str(_d) for _d in C.SMALL[:-1])} en {C.SMALL[-1]}: elk één epoch over de training shards, mini-batches van {C.BATCH} vensters van {C.BLOCK} tokens, AdamW met de warmup, het plateau en de warmdown uit [Een open trainingsrecept lezen](/course/open/llm-open-recipes?lang=nl), seed 0, en de laatste shard om op te valideren. De runs worden bewaard in `work/projects/llm/{C.RUNS}`. Op de computer van de course, op 2 CPU-threads, duurden de vier samen ongeveer {round(sum(_r['seconds'] for _r in _m['small']) / 60)} minuten; een GPU is veel sneller. Tot je je eigen runs traint, nemen die van de course hun plaats in. Terwijl elk model traint, laat een grafiek de training loss van elke stap zien, met de kleinere modellen die al klaar zijn als gestippelde lijnen erbij; de grafiek van het laatste model blijft boven de tabel staan. Heb je alle vier getraind, dan laat de run van diepte {C.BIG} verderop ze ook gestippeld zien.
         """),
         L.course_versions(),
     ])
@@ -292,22 +292,34 @@ def small_button_cell():
 @app.cell(hide_code=True)
 def demo_small(small_button):
     _failed = False
+    _kept = []   # the chart of the last depth, with the depths before it dashed: it stays above the table
     if small_button.value:
+        _done = []   # the curves of the depths trained before, dashed beside the one that trains now
+        _now = {}    # the live chart of the depth that trains now
+
         def _progress(_p):
-            mo.output.replace(mo.md(f"**Diepte {_p['depth']}** · stap {_p['step']} van {_p['steps']} · loss {C.number(_p['loss'], 2, L.lang)} per token · {round(_p['seconds'])} s"))
+            if _now.get("depth") != _p["depth"]:
+                _now["depth"], _now["live"] = _p["depth"], L.live({"title": f"Diepte {_p['depth']}: de training loss van elke stap", "x": "stap", "y": "loss per token",
+                                                                  "alt": f"De training loss bij elke stap van diepte {_p['depth']} tot nu toe, in grijs, en als dikkere lijn het gemiddelde over de laatste 10 stappen{'; gestippeld de kleinere modellen die al klaar zijn' if _done else ''}."}, _p["steps"], window=10)
+                for _c in _done:
+                    _now["live"].reference(_c, "", role="loss")
+            _now["live"].extend(_p["fresh"], f"**Diepte {_p['depth']}** · stap {_p['step']} van {_p['steps']} · loss {C.number(_p['loss'], 2, L.lang)} per token · {round(_p['seconds'])} s")
         for _depth in C.SMALL:
             _r = C.train(_depth, _progress)
             if _r == "run":
                 _failed = True
                 break
             C.save_run(_r)
+            _done.append(_r["curve"])
+        if _now:
+            _kept = [mo.Html(_now["live"].picture())]
     _saved = C.saved_runs()
     _mine = all(_d in _saved for _d in C.SMALL)
     small_runs = [_saved[_d] for _d in C.SMALL] if _mine else C.MEASURED["small"]
     _whose = "Je runs" if _mine else "De runs van de course, tot je je eigen traint"
     _rows = "\n".join(f"| {_r['depth']} | {C.number(_r['params'], 0, L.lang)} | {C.number(_r['tokens'] / _r['params'], 1, L.lang)} | {C.number(_r['val'], 3, L.lang)} |" for _r in small_runs)
     _note = [mo.md("*De run stopt met een fout. Komen je modules in `work/projects/llm/` nog door hun checks? Verwijder een bestand dat je veranderde, en check de oefening ervan opnieuw.*")] if _failed else []
-    mo.vstack(_note + [mo.md(f"{_whose}:\n\n| diepte | parameters | tokens per parameter | validation loss per token |\n|---|---|---|---|\n{_rows}")])
+    mo.vstack(_note + _kept + [mo.md(f"{_whose}:\n\n| diepte | parameters | tokens per parameter | validation loss per token |\n|---|---|---|---|\n{_rows}")])
     return (small_runs,)
 
 
@@ -337,8 +349,17 @@ def demo_big(big_button, law_floor, law_prediction, small_runs):
     _m = C.MEASURED
     _failed = False
     if big_button.value:
+        _now = {}   # the live chart, made at the first step: then the run knows its steps
+
         def _progress(_p):
-            mo.output.replace(mo.md(f"**Diepte {_p['depth']}** · stap {_p['step']} van {_p['steps']} · loss {C.number(_p['loss'], 2, L.lang)} per token · {round(_p['seconds'])} s"))
+            if not _now:
+                _runs = C.saved_runs()
+                _curves = [_runs[_d]["curve"] for _d in C.SMALL if "curve" in _runs.get(_d, {})]   # none for the course's runs, or for older runs saved without a curve
+                _now["live"] = L.live({"title": f"Diepte {_p['depth']}: de training loss van elke stap", "x": "stap", "y": "loss per token",
+                                       "alt": f"De training loss bij elke stap van diepte {_p['depth']} tot nu toe, in grijs, en als dikkere lijn het gemiddelde over de laatste 10 stappen{'; gestippeld je kleine modellen' if _curves else ''}."}, _p["steps"], window=10)
+                for _c in _curves:
+                    _now["live"].reference(_c, "", role="loss")
+            _now["live"].extend(_p["fresh"], f"**Diepte {_p['depth']}** · stap {_p['step']} van {_p['steps']} · loss {C.number(_p['loss'], 2, L.lang)} per token · {round(_p['seconds'])} s")
         _r = C.train(C.BIG, _progress)
         if _r == "run":
             _failed = True

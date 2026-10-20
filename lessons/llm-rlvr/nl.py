@@ -303,7 +303,7 @@ def demo_train(box_advantages, box_loss, demo_button, result_advantages, result_
     else:
         _live = L.live({"title": "Je run: gemiddelde reward per stap", "x": "stap", "y": "gemiddelde reward",
                         "alt": "De gemiddelde reward van elke stap van je run tot nu toe, als lijn in inkt met een stip bij elke stap; gestippeld de run van de course op zijn model, bij dezelfde stappen."}, C.steps(), role="ink", low=0.0, high=1.0)
-        _live.reference(list(enumerate(R["rewards"][:C.steps()], 1)), "de run van de course")
+        _live.reference(list(enumerate(R["rewards"][:C.steps()], 1)), "de run van de course", role="ink")
 
         def _show(_d):
             if _d["phase"] == "measure":

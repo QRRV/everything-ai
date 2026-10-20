@@ -51,13 +51,15 @@ class Live:
             self._last = now
             self.show()
 
-    def reference(self, points: list, label: str) -> None:
+    def reference(self, points: list, label: str, role: str = "ink-2") -> None:
         """Another run to hold this one against, such as the course's or an earlier run of yours, as (x, value): drawn
-        thin and dashed in ink-2, with its name at its end, on the side away from this run; its values count for the
-        y-axis too."""
+        thin and dashed, with its name at its end, on the side away from this run; its values count for the y-axis
+        too. Its `role` is ink-2 for a line the run is measured against, such as ln 2; for another run of the same
+        thing, the role of this run (style guide 1.3: the same role keeps its colour, the line style tells them apart).
+        An empty `label` draws no name, for several runs that the text under the chart names together."""
         points = [(x, y) for x, y in points if math.isfinite(y)]
         if points:
-            self.others.append((points, label))
+            self.others.append((points, label, role))
 
     def line(self, text: str) -> None:
         """Only the line of progress changes, such as while the run measures before or after it trains."""
@@ -85,7 +87,7 @@ class Live:
     def picture(self) -> str:
         """The run so far as SVG; also for a test, or for the chart that stays after the run."""
         mean = self.means()
-        every = self.ys + [v for points, _ in self.others for _, v in points]
+        every = self.ys + [v for points, _, _ in self.others for _, v in points]
         low = self.low if self.low is not None else min(every)
         high = self.high if self.high is not None else max(every)
         if high - low < 1e-9:
@@ -93,12 +95,14 @@ class Live:
         pad = 0.06 * (high - low)
         y = (low - pad if self.low is None else low, high + pad if self.high is None else high)
         p = chart.Panel((0, self.steps), y, title=self.labels["title"], xlabel=self.labels["x"], ylabel=self.labels["y"])
-        for points, label in self.others:                               # the runs to hold this one against
-            p.line([x for x, _ in points], [v for _, v in points], "ink-2", 1.4, dashed=True)
+        for points, label, role in self.others:                         # the runs to hold this one against
+            p.line([x for x, _ in points], [v for _, v in points], role, 1.4, dashed=True)
+            if not label:
+                continue
             above = self._sides.get(label, bool(self.xs) and mean[-1] < points[-1][1])   # the side away from this run,
             if len(self.xs) >= max(1, self.steps // 10):                 # fixed after a tenth of the run, so that the
                 self._sides.setdefault(label, above)                        # name does not jump while the lines are close
-            p.text(*name_at(points, label, above, self.steps, y), label, "ink-2", "end")
+            p.text(*name_at(points, label, above, self.steps, y), label, role, "end")
         if len(self.xs) > 1:
             p.line(self.xs, self.ys, "axis", 0.8)                      # every step, thin and light grey
             p.line(self.xs, mean, self.role, 2.4)                       # its mean over the last steps, in its role
@@ -112,8 +116,12 @@ class Live:
 
 def name_at(points: list, label: str, above: bool, steps: float, y: tuple) -> tuple:
     """Where the name of another run goes, as (x, y) for words that end at its last point: above or below every point
-    of it under the name (about 0.03 of the x-axis a letter), so that its own line does not cross it, and inside `y`."""
+    of it under the name (about 0.03 of the x-axis a letter), so that its own line does not cross it, and inside `y`.
+    Below a line that ends at the bottom of the chart there is no room, so its name then goes above it."""
     h = y[1] - y[0]
     under = [v for x, v in points if x >= points[-1][0] - 0.03 * len(label) * steps]
-    at = max(under) + 0.07 * h if above else min(under) - 0.1 * h
+    up, down = max(under) + 0.07 * h, min(under) - 0.1 * h
+    if not above and down < y[0] + 0.05 * h and up <= y[1] - 0.05 * h:
+        above = True
+    at = up if above else down
     return points[-1][0], min(max(at, y[0] + 0.05 * h), y[1] - 0.05 * h)

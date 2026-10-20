@@ -365,17 +365,19 @@ def replay_frame(run: dict, step: int, labels: dict, reference: list | None = No
     with a line at `step`; and what the model wrote at that moment to the first test instruction. `labels`: title,
     x, y, alt, lang (for the numbers), and the words of the sentence under it: "after" ({step}), "start", "used",
     "not_used", "stopped", "not_stopped". With `reference`, another run's loss as (step, loss), it is drawn thin and
-    dashed beside it, with labels["reference"] at its end, on the side away from this run."""
+    dashed beside it, with labels["reference"] at its end, on the side away from this run, in the role
+    labels["reference_role"] (ink-2 when it has none)."""
     from everything_ai import chart, live
     snap = next(s for s in run["snapshots"] if s["step"] == step)
     xs, ys = [l["step"] for l in run["losses"]], [l["loss"] for l in run["losses"]]
     top = math.ceil(max(ys + [v for _, v in reference or []]) * 2) / 2
     p = chart.Panel((0, run["steps"]), (0, top), title=labels["title"], xlabel=labels["x"], ylabel=labels["y"])
     if reference:
-        p.line([x for x, _ in reference], [v for _, v in reference], "ink-2", 1.4, dashed=True)
+        role = labels.get("reference_role", "ink-2")   # another run of the same loss keeps the loss's colour
+        p.line([x for x, _ in reference], [v for _, v in reference], role, 1.4, dashed=True)
         above = ys[-1] < reference[-1][1]   # its name on the side away from this run
         at_x, at_y = live.name_at(reference, labels["reference"], above, run["steps"], (0, top))
-        p.text(at_x - 0.03 * run["steps"], at_y, labels["reference"], "ink-2", "end")   # clear of the line at the last moment
+        p.text(at_x - 0.03 * run["steps"], at_y, labels["reference"], role, "end")   # clear of the line at the last moment
     p.line(xs, ys, "loss", 2.2)
     p.line([step, step], [0, top], "ink-2", 1.2, dashed=True)
     done = [(x, y) for x, y in zip(xs, ys) if x <= step]

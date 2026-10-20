@@ -362,7 +362,7 @@ def demo_lora(box_add, box_layer, box_merge, lora_button, rank_pick, result_add,
 
         def _progress(_p):
             if _p["phase"] == "pairs":
-                _live.reference(_p["full"], "full SFT")
+                _live.reference(_p["full"], "full SFT", role="loss")
                 _live.line(f"**{C.number(_p['pairs'], 0, L.lang)} examples** · adapters of rank {rank_pick.value} …")
             elif _p["phase"] == "after":
                 _live.line(f"**After LoRA** · instruction {_p['done']} of {_p['total']} · every word used: {_p['used']}")
@@ -425,7 +425,7 @@ def replay_cell(adapted):
     elif not _run.get("snapshots"):
         _out = mo.md("*Your saved run has no moments to go through: it was made before the lesson kept them. Fine-tune with LoRA again to go through its run here.*")
     else:
-        _labels = {"title": "The loss along your LoRA run", "x": "step", "y": "loss", "lang": L.lang, "reference": "full SFT",
+        _labels = {"title": "The loss along your LoRA run", "x": "step", "y": "loss", "lang": L.lang, "reference": "full SFT", "reference_role": "loss",
                    "alt": "The loss of your LoRA run, the mean of every 50 steps, with a dashed line at the chosen moment, and thin and dashed the loss of your run of full SFT on the same model, if you have done one.",
                    "start": "Before the first step", "after": "After {step} steps", "used": "every word used", "not_used": "not every word used",
                    "stopped": "stopped by itself", "not_stopped": "did not stop by itself"}

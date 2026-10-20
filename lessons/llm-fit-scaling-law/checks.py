@@ -78,8 +78,10 @@ def _shards(tools) -> tuple | str:
 def train(depth: int, show) -> dict | str:
     """One run: the learner's ModernGPT of `depth` blocks, WIDTH * depth wide with a head per HEAD, one epoch of BATCH
     windows of BLOCK tokens over the training shards, AdamW at PEAK times multiplier(), seed 0. `show` gets the step
-    every 10 steps. "run" when a module of the learner stops with an error; else its parameters, its tokens, its
-    validation loss per token on the last shard, and the seconds."""
+    every 10 steps and at the last one, with the loss of each step since the one before ("fresh"). "run" when a
+    module of the learner stops with an error; else its parameters, its tokens, its validation loss per token on the
+    last shard, the seconds, and its training loss as the mean of every 10 steps at the last of them ("curve", for
+    the live chart of a later run)."""
     import torch
     from torch.utils.data import DataLoader
     ran = run_code("from llm.modern_gpt import ModernGPT\nfrom llm.token_windows import TokenWindows")
@@ -96,6 +98,7 @@ def train(depth: int, show) -> dict | str:
     opt = torch.optim.AdamW(model.parameters(), lr=PEAK, weight_decay=0.1)
     loader = DataLoader(train_ds, batch_size=BATCH, shuffle=True, generator=torch.Generator().manual_seed(0))
     steps, start = len(loader), time.perf_counter()
+    losses = []
     model.train()
     for step, (xb, yb) in enumerate(loader):
         for group in opt.param_groups:
@@ -107,8 +110,11 @@ def train(depth: int, show) -> dict | str:
         loss.backward()
         torch.nn.utils.clip_grad_norm_(model.parameters(), 1.0)
         opt.step()
-        if step % 10 == 9:
-            show({"depth": depth, "step": step + 1, "steps": steps, "loss": loss.item(), "seconds": time.perf_counter() - start})
+        losses.append(loss.item())
+        if step % 10 == 9 or step == steps - 1:
+            shown = step - step % 10   # the steps since the last report, for the live chart
+            show({"depth": depth, "step": step + 1, "steps": steps, "loss": losses[-1], "seconds": time.perf_counter() - start,
+                  "fresh": list(zip(range(shown + 1, step + 2), losses[shown:]))})
     model.eval()
     total, count = 0.0, 0
     with torch.no_grad():
@@ -117,8 +123,9 @@ def train(depth: int, show) -> dict | str:
                 logits = model(xb.to(device))
             total += torch.nn.functional.cross_entropy(logits.reshape(-1, logits.shape[-1]), yb.to(device).reshape(-1), reduction="sum").item()
             count += yb.numel()
+    curve = [[min(k + 10, steps), sum(losses[k:k + 10]) / len(losses[k:k + 10])] for k in range(0, steps, 10)]
     return {"depth": depth, "params": sum(p.numel() for p in model.parameters()), "tokens": len(train_ds) * BLOCK,
-            "val": total / count, "seconds": time.perf_counter() - start, "device": device}
+            "val": total / count, "seconds": time.perf_counter() - start, "device": device, "curve": curve}
 
 
 def saved_runs() -> dict:

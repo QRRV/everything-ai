@@ -362,7 +362,7 @@ def demo_lora(box_add, box_layer, box_merge, lora_button, rank_pick, result_add,
 
         def _progress(_p):
             if _p["phase"] == "pairs":
-                _live.reference(_p["full"], "full fine-tuning")
+                _live.reference(_p["full"], "full fine-tuning", role="loss")
                 _live.line(f"**{C.number(_p['pairs'], 0, L.lang)} voorbeelden** · adapters van rang {rank_pick.value} …")
             elif _p["phase"] == "after":
                 _live.line(f"**Na LoRA** · instructie {_p['done']} van {_p['total']} · elk woord gebruikt: {_p['used']}")
@@ -425,7 +425,7 @@ def replay_cell(adapted):
     elif not _run.get("snapshots"):
         _out = mo.md("*Je bewaarde run heeft geen momenten om door te gaan: hij is gemaakt voordat de les ze bewaarde. Finetune opnieuw met LoRA om hier door zijn run te gaan.*")
     else:
-        _labels = {"title": "De loss tijdens je LoRA-run", "x": "stap", "y": "loss", "lang": L.lang, "reference": "full fine-tuning",
+        _labels = {"title": "De loss tijdens je LoRA-run", "x": "stap", "y": "loss", "lang": L.lang, "reference": "full fine-tuning", "reference_role": "loss",
                    "alt": "De loss van je LoRA-run, het gemiddelde van elke 50 stappen, met een gestippelde lijn op het gekozen moment, en dun en gestippeld de loss van je run van full fine-tuning op hetzelfde model, als je die hebt gedaan.",
                    "start": "Voor de eerste stap", "after": "Na {step} stappen", "used": "elk woord gebruikt", "not_used": "niet elk woord gebruikt",
                    "stopped": "zelf gestopt", "not_stopped": "niet zelf gestopt"}
