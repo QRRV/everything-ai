@@ -417,7 +417,8 @@ lessons:
   idea: "Reproduce the main figure or table of the paper over several seeds, with the runner and logger of your kit."
   covers: [papers-reproduceren#4]
   requires: [repro-own-sanity]
-  uses: [p:repro-kit]
+  introduces: [c:budget-ladder, py:sorted-key]
+  uses: [p:repro-kit, p:experiment-log, p:redraw-a-figure, p:reproduction-plan, c:contract, c:reproduction, c:paper, c:seed, c:run, c:run-to-run-variance, c:median, c:test-set, c:dropout, c:lr-schedule, c:json, c:json-lines, c:file-path, v:log-scale, py:json, py:open, py:open-write, py:with, py:tuple, py:sorted, py:lambda, py:comprehension, py:keyword-argument, py:dict, py:list, py:append, py:def, py:return, py:for, py:if, py:none, py:is-none, py:import, py:comment, py:print, py:string-literal, py:comparison, q:predict, q:choice, q:explain, q:exercise-with-check, q:run-cell]
   compute_minutes: paper
   needs: rec
 
@@ -430,7 +431,8 @@ lessons:
   idea: "Run one ablation that tests which part of the method the result depends on."
   covers: [experimenten-ontwerpen-en-ablaties#1]
   requires: [repro-own-figure]
-  uses: [p:repro-kit]
+  introduces: [c:ablation-share, py:zip]
+  uses: [p:repro-kit, p:experiment-log, p:reproduction-plan, c:ablation, c:control-run, c:ablation-grid, c:budget-ladder, c:contract, c:reproduction, c:paper, c:seed, c:run, c:run-to-run-variance, c:median, c:test-set, c:dropout, c:accuracy, p:import-own-code, py:dict, py:tuple, py:list, py:append, py:comprehension, py:def, py:return, py:for, py:if, py:none, py:import, py:import-as, py:np-median, py:comment, py:print, py:string-literal, py:comparison, q:predict, q:choice, q:explain, q:exercise-with-check, q:run-cell]
   compute_minutes: paper
   needs: rec
 

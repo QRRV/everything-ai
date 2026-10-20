@@ -1,0 +1,28 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: repro-own-ablation
+minutes: 45
+title:
+  en: "Your reproduction 6: the ablation"
+  nl: "Je reproductie 6: de ablation"
+goal:
+  en: "take one part out of the method of your claim, run it over the seeds of your plan at your budget, and say by a rule fixed first whether your result depends on that part."
+  nl: "één deel uit de methode van je claim weghalen, het over de seeds van je plan bij je budget draaien, en met een vooraf vastgelegde regel zeggen of je resultaat van dat deel afhangt."
+summary:
+  - en: "An ablation is the setting of the claim with one part of its method taken out and all the rest the same; the claim's runs are its control runs."
+    nl: "Een ablation is de setting van de claim met één deel van zijn methode weggehaald en al het andere hetzelfde; de runs van de claim zijn de control runs van de ablation."
+  - en: "The share it keeps is its median gain over the other setting, seed by seed, against the claim's; below one half, the result depends on that part."
+    nl: "Het aandeel dat hij houdt, is zijn winst op de andere setting in de mediaan, seed voor seed, tegen die van de claim; onder de helft hangt het resultaat van dat deel af."
+  - en: "When parts work together, the shares of their ablations do not add up: an ablation says what a part is needed for, not how much of the gain is its own."
+    nl: "Als delen samenwerken, tellen de aandelen van hun ablations niet op: een ablation zegt waarvoor een deel nodig is, niet hoeveel van de winst van hemzelf is."
+can_now:
+  - en: "add an ablation to an experiment as one more setting, without changing the experiment"
+    nl: "een ablation als extra setting aan een experiment toevoegen, zonder het experiment te veranderen"
+    by: ablation
+  - en: "work out how much of a gain an ablation keeps, seed by seed"
+    nl: "uitrekenen hoeveel van een winst een ablation houdt, seed voor seed"
+    by: kept
+further_reading:
+  - en: "Nitish Srivastava and others (2014), *Dropout: A Simple Way to Prevent Neural Networks from Overfitting*: the paper of the course's experiment, with dropout at the input and in the hidden layers"
+    nl: "Nitish Srivastava en anderen (2014), *Dropout: A Simple Way to Prevent Neural Networks from Overfitting*: de paper van het experiment van de course, met dropout bij de input en in de hidden layers"

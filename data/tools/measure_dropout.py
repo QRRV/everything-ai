@@ -6,7 +6,9 @@ of BUDGETS steps, every run a run of its own, on one thread. From the course fol
 
     uv run python data/tools/measure_dropout.py
 
-prints RUNS and SHORT_RUN as lessons/repro-own-build/checks.py has them."""
+prints RUNS and SHORT_RUN as lessons/repro-own-build/checks.py has them. With --ablation, it measures the two ablations of
+repro-own-ablation instead, at the longest budget: dropout in the hidden layers only, and at the input only, and prints
+their runs as ABLATIONS in lessons/repro-own-ablation/checks.py has them."""
 import importlib.util
 import os
 import sys
@@ -25,7 +27,12 @@ def main():
     spec = importlib.util.spec_from_file_location("build_checks", paths.LESSONS / "repro-own-build" / "checks.py")
     C = importlib.util.module_from_spec(spec)
     spec.loader.exec_module(C)
-    run = run_code(C.E).names["run"]
+    names = run_code(C.E).names
+    run = names["run"]
+    if "--ablation" in sys.argv:
+        names["SETTINGS"].update({"no-input": (0.0, 0.5), "no-hidden": (0.2, 0.0)})   # the dict make_model reads
+        print({s: [run(s, seed, C.BUDGETS[-1]) for seed in C.SEEDS] for s in ("no-input", "no-hidden")})
+        return
     runs = {steps: {s: [run(s, seed, steps) for seed in C.SEEDS] for s in C.SETTINGS} for steps in C.BUDGETS}
     print(runs)
     print({s: run(s, 0, C.STEPS) for s in C.SETTINGS})   # SHORT_RUN

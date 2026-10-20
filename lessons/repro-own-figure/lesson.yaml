@@ -1,0 +1,32 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+# termen:allow Reproducibility
+id: repro-own-figure
+minutes: 60
+title:
+  en: "Your reproduction 5: the main result"
+  nl: "Je reproductie 5: het hoofdresultaat"
+goal:
+  en: "run the main result of your plan with your kit: every seed, both settings and a ladder of budgets into one experiment log that a stop cannot spoil, and read the paper's figure and your plan's verdict from it."
+  nl: "het hoofdresultaat van je plan draaien met je kit: elke seed, beide settings en een ladder van budgetten in één logboek dat een stop niet kan bederven, en daaruit de figuur van de paper en het oordeel van je plan lezen."
+summary:
+  - en: "The budget of the main run comes first, from the paper and the hours of the plan, and is written down before any run: choosing it after a look at the results is choosing the answer."
+    nl: "Het budget van de hoofdrun komt eerst, op basis van de paper en de uren van het plan, en wordt opgeschreven vóór elke run: wie het kiest na een blik op de resultaten, kiest het antwoord."
+  - en: "The budget and its halvings, each a run of its own, draw the figure as training goes on, for less than twice the cost of the budget alone."
+    nl: "Het budget en zijn halveringen, elk een eigen run, tekenen de figuur naarmate de training vordert, voor minder dan twee keer de kosten van het budget alleen."
+  - en: "One line of JSON per run, written right after it, named by its setting, seed and steps: a stop costs the run that was going, and every number comes from a line anyone can read again."
+    nl: "Eén regel JSON per run, meteen erna geschreven, genoemd naar zijn setting, seed en stappen: een stop kost de run die bezig was, en elk getal komt uit een regel die iedereen opnieuw kan lezen."
+can_now:
+  - en: "run every seed, budget and setting of a plan into one experiment log that goes on where it stopped"
+    nl: "elke seed, elk budget en elke setting van een plan in één logboek draaien dat verdergaat waar het stopte"
+    by: run-plan
+  - en: "read the runs of one budget from a log the way the rule of a plan takes them"
+    nl: "de runs van één budget uit een logboek lezen zoals de regel van een plan ze neemt"
+    by: results-at
+  - en: "fix the budget of a main result before any run, from the paper and the hours you have"
+    nl: "het budget van een hoofdresultaat vastleggen vóór elke run, op basis van de paper en de uren die je hebt"
+    by: budget
+further_reading:
+  - en: "Joelle Pineau and others (2021), *Improving Reproducibility in Machine Learning Research*: the reproducibility checklist of NeurIPS, among them the number of runs and how the results were summarized"
+    nl: "Joelle Pineau en anderen (2021), *Improving Reproducibility in Machine Learning Research*: de reproduceerbaarheidschecklist van NeurIPS, waaronder het aantal runs en hoe de resultaten zijn samengevat"
