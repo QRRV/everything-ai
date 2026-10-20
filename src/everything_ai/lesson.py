@@ -365,13 +365,13 @@ class Lesson:
         w._ea_key = key
         return mo.ui.anywidget(w)
 
-    def explore(self, key: str, label: str, frame, start: float, low: float, high: float, step: float,
-                role: str = "param", task: str | None = None):
+    def explore(self, key: str, label: str, frame, start: float, low: float | None = None, high: float | None = None,
+                step: float | None = None, role: str = "param", task: str | None = None, values: list | None = None):
         """A slider with a picture that follows it at once (play.Explore): `frame(v)` gives, for every stop of the
         slider, the picture as SVG text (from chart.figure) and the sentence under it in Markdown, as in the lesson's
         text, so code and formulas work there too; they are drawn once, up front. In Dutch the numbers along the axes
-        get a decimal comma. With `task`, the block opens with it. Where you left it is kept, as with L.slider; L.check
-        takes the block itself."""
+        get a decimal comma. With `task`, the block opens with it. The stops are low to high in steps of step, or the
+        `values` given. Where you left it is kept, as with L.slider; L.check takes the block itself."""
         value = progress.saved_answer(self.id, key)
         if not isinstance(value, (int, float)):
             value = start
@@ -383,7 +383,7 @@ class Lesson:
             return chart.with_decimal_comma(svg) if nl else svg, _inline(said) if said else said
 
         labels = {"name": label} | ({"task_kick": self.w["task"], "task": _inline(task)} if task else {})
-        w = play.Explore(drawn, low=low, high=high, step=step, value=value, role=role, labels=labels, decimal="," if nl else ".")
+        w = play.Explore(drawn, low=low, high=high, step=step, values=values, value=value, role=role, labels=labels, decimal="," if nl else ".")
         w.observe(lambda change: progress.record_answer(self.id, key, w.value), names="index")
         w._ea_key = key
         return mo.ui.anywidget(w)

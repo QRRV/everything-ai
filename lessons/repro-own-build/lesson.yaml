@@ -1,0 +1,29 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+# termen:allow Reproducibility
+id: repro-own-build
+minutes: 60
+title:
+  en: "Your reproduction 3: build it"
+  nl: "Je reproductie 3: bouw het"
+goal:
+  en: "build the experiment of your plan as one function, run(setting, seed, steps), that keeps the contract of your kit, with as little help as you need."
+  nl: "het experiment van je plan bouwen als één functie, run(setting, seed, steps), die het contract van je kit houdt, met zo weinig hulp als je nodig hebt."
+summary:
+  - en: "One function runs both settings of the plan: they share all code but the one thing the plan changes."
+    nl: "Eén functie draait beide settings van het plan: ze delen alle code behalve het ene ding dat het plan verandert."
+  - en: "The seed sets everything random in a run, and the order of the batches has a generator of its own, so both settings of a seed see the same batches."
+    nl: "De seed legt alles vast wat willekeurig is in een run, en de volgorde van de batches heeft een eigen generator, zodat beide settings van een seed dezelfde batches zien."
+  - en: "The contract of the kit: one number, the same twice, and the steps, the seed and the setting each change it. A run of 20 steps shows that the code keeps it, not yet anything about the claim."
+    nl: "Het contract van de kit: één getal, twee keer hetzelfde, en de stappen, de seed en de setting veranderen het elk. Een run van 20 stappen laat zien dat de code het houdt, nog niets over de claim."
+can_now:
+  - en: "check whether a run keeps the contract of the kit"
+    nl: "controleren of een run het contract van de kit houdt"
+    by: contract
+  - en: "build an experiment for both settings of a plan, with every random choice set by the seed"
+    nl: "een experiment bouwen voor beide settings van een plan, met elke willekeurige keuze vastgelegd door de seed"
+    by: experiment
+further_reading:
+  - en: "PyTorch documentation, *Reproducibility*: what torch.manual_seed sets, and what else it takes on a GPU"
+    nl: "PyTorch-documentatie, *Reproducibility*: wat torch.manual_seed zet, en wat er op een GPU nog meer voor nodig is"

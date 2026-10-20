@@ -219,8 +219,8 @@ PLANS = {
         "metric": {"en": "the largest rise between two neighbouring model sizes, as a share of the whole rise from the smallest model to the largest, from 0 to 1",
                    "nl": "de grootste stijging tussen twee naburige modelgroottes, als deel van de hele stijging van het kleinste model tot het grootste, van 0 tot 1"},
         "settings": {"en": ["a continuous metric", "exact match"], "nl": ["een continue metric", "exact match"]},
-        "setup": {"en": "the same models of several sizes, from llm-fit-scaling-law, on the same task, up to a size where exact match rises above 0: below that, its rise is 0 and has no share; only the metric differs",
-                  "nl": "dezelfde modellen van verschillende grootte, uit llm-fit-scaling-law, op dezelfde taak, tot een grootte waarbij exact match boven 0 komt: daaronder is de stijging 0 en heeft ze geen deel; alleen de metric verschilt"},
+        "setup": {"en": "the same models of several sizes, trained with the code of llm-fit-scaling-law, one set for each seed, on the same task, up to a size where exact match rises above 0: below that, its rise is 0 and has no share; only the metric differs",
+                  "nl": "dezelfde modellen van verschillende grootte, getraind met de code van llm-fit-scaling-law, één set per seed, op dezelfde taak, tot een grootte waarbij exact match boven 0 komt: daaronder is de stijging 0 en heeft ze geen deel; alleen de metric verschilt"},
         "direction": "lower", "at_least": 0.2},
     "reversal-curse": {
         "shown_in": {"en": "Figure 4: the log-probability of the right name and of a random one, asked the other way round",

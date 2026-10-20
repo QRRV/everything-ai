@@ -1,0 +1,28 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: repro-own-sanity
+minutes: 45
+title:
+  en: "Your reproduction 4: sanity checks"
+  nl: "Je reproductie 4: sanity checks"
+goal:
+  en: "point the sanity checks of your kit at your own experiment, before any long run: the shape of the logits, the first loss, and one batch learned by heart."
+  nl: "de sanity checks van je kit op je eigen experiment richten, vóór elke lange run: de vorm van de logits, de eerste loss, en één batch uit het hoofd geleerd."
+summary:
+  - en: "The checks of the guided reproduction work for any model whose logits have the shape of its labels and then K numbers: a classifier, and a model of text with a row for each place."
+    nl: "De checks van de begeleide reproductie werken voor elk model waarvan de logits de vorm van zijn labels hebben en dan K getallen: een classifier, en een model van tekst met een rij voor elke plek."
+  - en: "A model from scratch has a first loss of about ln K; much higher means starting weights that are too large, much lower an answer that leaks. A trained model starts lower, so that check is for models from scratch only."
+    nl: "Een model vanaf nul heeft een eerste loss van ongeveer ln K; veel hoger betekent te grote startwaarden, veel lager een antwoord dat lekt. Een getraind model begint lager, dus die check is alleen voor modellen vanaf nul."
+  - en: "A model that cannot learn one small batch by heart will not learn the data either: a minute of checks before hours of runs."
+    nl: "Een model dat één kleine batch niet uit het hoofd kan leren, leert de data ook niet: een minuut checks vóór uren aan runs."
+can_now:
+  - en: "check any model for the shape of its logits, its first loss and whether it can learn"
+    nl: "elk model controleren op de vorm van zijn logits, zijn eerste loss en of het kan leren"
+    by: sanity
+  - en: "put your own experiment through those checks, and know what each failure points to"
+    nl: "je eigen experiment door die checks halen, en weten waar elke fout op wijst"
+    by: sanity-run
+further_reading:
+  - en: "Andrej Karpathy (2019), *A Recipe for Training Neural Networks*: the checks before a long run, among them the loss at init and overfitting one batch"
+    nl: "Andrej Karpathy (2019), *A Recipe for Training Neural Networks*: de checks vóór een lange run, waaronder de loss bij de start en één batch overfitten"

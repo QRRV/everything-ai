@@ -334,7 +334,7 @@ lessons:
   idea: "Turn your loop into a trainer with evaluation, logging, checkpoints, clipping, a schedule and gradient accumulation; every later project uses it."
   covers: [d11-de-trainingslus#5, d11-de-trainingslus#6]
   requires: [opt-lr-schedules, opt-gradient-clipping, torch-checkpoints, opt-adamw, nn-dropout]
-  introduces: [c:gradient-accumulation, py:modulo, py:or-operator, py:is-none]
+  introduces: [c:gradient-accumulation, py:modulo, py:or-operator, py:is-none, py:torch-reshape]
   uses: [c:gradient, c:mini-batch, c:batch-size, c:epoch, c:loss, c:cross-entropy, c:logit, c:shape, c:tensor, c:learning-rate, c:optimizer, c:sgd, c:adamw, c:warmup, c:cosine-decay, c:lr-schedule, c:gradient-clipping, c:norm, c:validation-set, c:test-set, c:accuracy, c:checkpoint, c:dropout, c:mlp, c:model-parameter, c:forward-pass, c:backward-pass, c:update-step, c:training-loop, v:loss-curve, py:torch-optim, py:optimizer-step, py:zero-grad, py:backward, py:item, py:nn-linear, py:no-grad, py:model-eval, py:model-train, py:torch-save, py:state-dict, py:clip-grad-norm, py:dataloader, py:manual-seed, py:torch-randn, py:slicing, py:abs, py:class, py:self, py:init-method, py:method, py:dict, py:list, py:append, py:none, py:with, py:math-module, py:float, py:comparison, py:len, py:for, py:range, py:if, py:def, py:return, py:import, py:import-as, py:print, py:comment, py:underscore-name, q:predict, q:choice, q:exercise-with-check, q:run-cell]
   mentions: [c:batchnorm, c:language-model, c:vocabulary]
   ladder: [torch]

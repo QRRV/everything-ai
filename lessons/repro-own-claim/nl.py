@@ -364,7 +364,7 @@ def explain_why_number():
     explain_why_number_cell = L.explain(
         "why-number",
         question="Waarom koos je het getal achter *minstens* in je plan? En wat zou het doen als je het pas na je runs koos?",
-        model_answer="**Het getal:** lager met minstens 0,5 procentpunt testfout. Als twee seeds van hetzelfde netwerk ongeveer 0,3 procentpunt verschillen, laat een kleiner getal ruis de claim steunen; de paper noemt een duidelijk lagere testfout zijn resultaat, en een half procentpunt op een fout van ongeveer 11% is het minste dat ik nog zo zou noemen. **Achteraf:** met mijn runs voor me kon ik een getal kiezen net onder de mediaan die ik kreeg, en dan steunde elke uitkomst de claim. Nu ik het vooraf opschrijf, kan mijn regel falen, en daardoor betekent het iets als hij dat niet doet.",
+        model_answer="**Het getal:** lager met minstens 0,5 procentpunt testfout. Als twee seeds van hetzelfde netwerk 0,3 tot 0,5 procentpunt verschillen, laat een kleiner getal ruis de claim steunen; de paper noemt een duidelijk lagere testfout zijn resultaat, en een half procentpunt op een fout van ongeveer 13% is het minste dat ik nog zo zou noemen. **Achteraf:** met mijn runs voor me kon ik een getal kiezen net onder de mediaan die ik kreeg, en dan steunde elke uitkomst de claim. Nu ik het vooraf opschrijf, kan mijn regel falen, en daardoor betekent het iets als hij dat niet doet.",
         points=[
             "je noemt je getal, in de eenheden van je metric",
             "je legt het naast hoeveel twee seeds verschillen",

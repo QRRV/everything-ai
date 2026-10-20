@@ -364,7 +364,7 @@ def explain_why_number():
     explain_why_number_cell = L.explain(
         "why-number",
         question="Why did you choose the number of *at least* in your plan? And what would choosing it after your runs do?",
-        model_answer="**The number:** lower by at least 0.5 points of test error. If two seeds of the same network differ by about 0.3 points, a smaller number lets noise support the claim; the paper calls a clearly lower test error its result, and half a point on an error of about 11% is the least I would still call that. **Afterwards:** with my runs in front of me, I could pick a number just below the median I got, and every outcome would support the claim. Written down now, my rule can fail, and that makes it mean something when it does not.",
+        model_answer="**The number:** lower by at least 0.5 points of test error. If two seeds of the same network differ by 0.3 to 0.5 points, a smaller number lets noise support the claim; the paper calls a clearly lower test error its result, and half a point on an error of about 13% is the least I would still call that. **Afterwards:** with my runs in front of me, I could pick a number just below the median I got, and every outcome would support the claim. Written down now, my rule can fail, and that makes it mean something when it does not.",
         points=[
             "you give your number, in the units of your metric",
             "you compare it with how much two seeds differ",

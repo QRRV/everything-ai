@@ -601,7 +601,12 @@ class Explore(anywidget.AnyWidget):
         return Array.from(node.childNodes, spoken).join("");
       };
       const digits = model.get("digits");
-      const show = v => Number(v).toFixed(digits).replace("-", "−").replace(".", dec);
+      // a whole number of five digits or more with a separator, as the text writes it: 12,800, or 12.800 in Dutch;
+      // four digits without one, 3200
+      const show = v => {
+        const s = Number(v).toFixed(digits).replace(".", dec);
+        return (digits === 0 && Math.abs(v) >= 10000 ? s.replace(/\B(?=(\d{3})+(?!\d))/g, dec === "," ? "." : ",") : s).replace("-", "−");
+      };
       let shown = -1;
       function draw() {
         const i = model.get("index"), f = model.get("frames")[i];
@@ -636,7 +641,8 @@ class Explore(anywidget.AnyWidget):
         const [svg, [x0, x1, lo, hi, log]] = axis(), r = svg.getBoundingClientRect();
         const t = ((ev.clientX - r.left) / r.width * svg.viewBox.baseVal.width - x0) / (x1 - x0);
         const v = log ? 10 ** (Math.log10(lo) + t * (Math.log10(hi) - Math.log10(lo))) : lo + t * (hi - lo);
-        let best = 0; values.forEach((w, j) => { if (Math.abs(w - v) < Math.abs(values[best] - v)) best = j; });
+        const far = w => log ? Math.abs(Math.log10(w) - Math.log10(v)) : Math.abs(w - v);   // on a log axis, as far as it looks
+        let best = 0; values.forEach((w, j) => { if (far(w) < far(values[best])) best = j; });
         go(best);
       }
       const down = ev => { if (ev.button !== 0 || !ev.target.classList.contains("ea-zone")) return; pic.setPointerCapture(ev.pointerId); pic.classList.add("ea-dragging"); pick(ev); };
@@ -694,20 +700,28 @@ class Explore(anywidget.AnyWidget):
     MOST = 241   # every frame is drawn up front and sent at once: more stops would make the lesson slow to open
     WIDEST = {1: 460, 2: 330}   # px of a chart.figure panel, alone or two side by side: its text stays 11 px at 700 px
 
-    def __init__(self, frame, *, low: float, high: float, step: float, value: float | None = None, **kw):
+    def __init__(self, frame, *, low: float | None = None, high: float | None = None, step: float | None = None,
+                 values: list | None = None, value: float | None = None, **kw):
         """`frame(v)` gives the picture at the value v, as SVG text, and the sentence under it, as HTML: a pair, or
-        the picture alone. With a task, the labels also give task_kick and task."""
+        the picture alone. The stops are low to high in steps of step, or the `values` given, from small to large,
+        such as budgets that double. With a task, the labels also give task_kick and task."""
         super().__init__(**kw)
         _need(self, self.LABELS + (("task_kick",) if self.labels.get("task") else ()))
-        n = round((high - low) / step)
-        if not math.isclose(low + n * step, high, abs_tol=step * 1e-6):
-            raise ValueError(f"Explore needs a step that fits the range a whole number of times: {step} does not fit {low} to {high}")
-        if not 1 <= n < self.MOST:
-            raise ValueError(f"Explore draws every stop up front: give it 2 to {self.MOST} stops, not {n + 1}")
-        decimals = [max(0, -Decimal(str(x)).normalize().as_tuple().exponent) for x in (low, step)]   # 0.25 has two, 5 none
+        if values is not None:
+            if not 2 <= len(values) <= self.MOST or list(values) != sorted(set(values)):
+                raise ValueError(f"Explore needs 2 to {self.MOST} values, each larger than the one before: {values}")
+            stops = list(values)
+        else:
+            n = round((high - low) / step)
+            if not math.isclose(low + n * step, high, abs_tol=step * 1e-6):
+                raise ValueError(f"Explore needs a step that fits the range a whole number of times: {step} does not fit {low} to {high}")
+            if not 1 <= n < self.MOST:
+                raise ValueError(f"Explore draws every stop up front: give it 2 to {self.MOST} stops, not {n + 1}")
+            stops = [low, step]
+        decimals = [max(0, -Decimal(str(x)).normalize().as_tuple().exponent) for x in stops]   # 0.25 has two, 5 none
         if max(decimals) > 6:
-            raise ValueError(f"Explore shows its values with at most 6 decimals: {low} and {step} need more")
-        self.values = [round(low + i * step, 10) for i in range(n + 1)]
+            raise ValueError(f"Explore shows its values with at most 6 decimals: {', '.join(map(str, stops))} need more")
+        self.values = list(values) if values is not None else [round(low + i * step, 10) for i in range(n + 1)]
         self.digits = max(decimals)
         self.frames = [[f, ""] if isinstance(f, str) else list(f) for f in map(frame, self.values)]
         widths = [int(w) for w in re.findall(r"<svg [^>]*max-width:(\d+)px", self.frames[0][0])]
@@ -715,7 +729,7 @@ class Explore(anywidget.AnyWidget):
             raise ValueError(f"Explore shows {len(widths)} chart(s) of {max(widths)} px: in a play block one chart is at most "
                              f"{self.WIDEST[1]} px wide and two side by side at most {self.WIDEST[2]} px each, or their text "
                              "gets smaller than 11 px in a window of 700 px")
-        self.value = low if value is None else value
+        self.value = self.values[0] if value is None else value
 
     @property
     def value(self) -> float:
