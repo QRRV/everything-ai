@@ -306,7 +306,7 @@ def text_demo():
     mo.md(f"""
     ### Wat je project nu kan
 
-    De knop gebruikt je project. Met je `VGGBlock` bouwt hij netwerken van twee blokken, van 1 naar {C.WIDTHS[0]} channels en van {C.WIDTHS[0]} naar {C.WIDTHS[1]}, zoals je SmallCNN, met {", ".join(str(n) for n in C.DEPTHS[:-1])} en {C.DEPTHS[-1]} convoluties per blok. Met 1 per blok is het je SmallCNN, met dezelfde beginwaarden. Hij traint elk met je Trainer: {C.EPOCHS} epochs op de 6.000 trainingsafbeeldingen, een learning rate van {C.number(C.LR, 2, L.lang)} met een warmup van één epoch, elk één run, met seed 0, en telt de parameters met je `count_params`. Waar een module van jou ontbreekt of stuk is, springt die van de course in. Het werkt zodra oefening 3 af is, en duurt een à twee minuten.
+    De knop gebruikt je project. Met je `VGGBlock` bouwt hij netwerken van twee blokken, van 1 naar {C.WIDTHS[0]} channels en van {C.WIDTHS[0]} naar {C.WIDTHS[1]}, zoals je SmallCNN, met {", ".join(str(n) for n in C.DEPTHS[:-1])} en {C.DEPTHS[-1]} convoluties per blok. Met 1 per blok is het je SmallCNN, met dezelfde beginwaarden. Hij traint elk met je Trainer: {C.EPOCHS} epochs op de 6.000 trainingsafbeeldingen, een learning rate van {C.number(C.LR, 2, L.lang)} met een warmup van één epoch, elk één run, met seed 0, en telt de parameters met je `count_params`. Waar een module van jou ontbreekt of stuk is, springt die van de course in. Het werkt zodra oefening 3 af is, en duurt een à twee minuten. Terwijl elk netwerk traint, laat een grafiek zijn validation loss na elke epoch zien, met de netwerken die al klaar zijn als gestippelde lijnen erbij; de grafiek van het laatste, met {C.DEPTHS[-1]} per blok, blijft boven de tabel staan.
     """)
     return
 
@@ -324,23 +324,42 @@ def demo_depth(depth_button, result_block):
     if not depth_button.value:
         _out = mo.md("*Druk op de knop om de vier netwerken te trainen.*")
     else:
-        _result = C.demo()
+        _done, _now = [], {}   # the curves of the networks trained before; the live chart of the one that trains now
+
+        def _progress(_p):
+            if _now.get("run") != _p["run"]:
+                if "live" in _now:
+                    _done.append(list(zip(_now["live"].xs, _now["live"].ys)))
+                _now["run"], _now["live"] = _p["run"], L.live({"title": f"{_p['run']} convoluties per blok: de validation loss" if _p["run"] > 1 else "1 convolutie per blok: de validation loss", "x": "epoch", "y": "validation loss",
+                                                              "alt": f"De validation loss na elke epoch tot nu toe van het netwerk met {_p['run']} per blok{'; gestippeld de netwerken die al klaar zijn' if _done else ''}."}, _p["epochs"], low=0.0)
+                for _c in _done:
+                    _now["live"].reference(_c, "", role="loss")
+            if "val_loss" in _p:
+                _now["live"].add(_p["epoch"], _p["val_loss"], f"**{_p['run']} per blok** · epoch {_p['epoch']} van {_p['epochs']} · validation loss {C.number(_p['val_loss'], 3, L.lang)}")
+            else:
+                _now["live"].line(f"**{_p['run']} per blok** · epoch {_p['epoch']} van {_p['epochs']} · batch {_p['batch']} van {_p['batches']}")
+
+        _result = C.demo(_progress)
         if _result is None:
             _out = mo.md("*Maak eerst oefening 3 af: dan staat je `VGGBlock` in je project, en gebruikt deze cel hem.*")
         elif isinstance(_result, str):
-            _out = mo.md({
+            _note = {
                 "slow": "*Je project doet er hier te lang over: meer dan vijf minuten om één netwerk te trainen, op een computer die niet met ander werk bezig is. Doet je `VGGBlock` of je Trainer meer werk dan nodig is, zoals een loop die te vaak draait?*",
                 "vgg": "*Je `VGGBlock` in `work/projects/cnn/vgg.py` stopt met een fout, bij het maken van de netwerken. Heb je zijn bestand veranderd? Verwijder het, en check oefening 3 opnieuw: de check bewaart je code dan weer.*",
                 "trainer": "*Trainen met je Trainer in `work/projects/nn/trainer.py`, of tellen met je `count_params` in `work/projects/cnn/count.py`, stopt met een fout. Heb je een van die bestanden veranderd? Verwijder het, en check zijn oefening opnieuw.*",
-            }[_result])
+            }[_result]
+            _out = _now["live"].stopped(_note) if "live" in _now else mo.md(_note)   # a run that stops keeps its chart so far
         else:
             _rows = "\n".join(f"| {n} | {2 * n + 1} | {C.grouped(p, L.lang)} | {right} |" for n, p, right in _result["rows"])
             _who = "" if not _result["stand_ins"] else "\n\nDe versie van de course sprong in voor " + ", ".join(f"`{m}`" for m in _result["stand_ins"]) + ", zoals de melding bij *Waar je project staat* zegt."
-            _out = mo.md(f"""| convoluties per blok | layers met weights | parameters | goed |
+            _pic = [mo.Html(C.curves_picture(_result["curves"], {"title": f"{C.DEPTHS[-1]} convoluties per blok: de validation loss", "x": "epoch", "y": "validation loss",
+                                                                 "alt": f"De validation loss na elke epoch van het netwerk met {C.DEPTHS[-1]} per blok; gestippeld die met {', '.join(str(n) for n in C.DEPTHS[:-2])} en {C.DEPTHS[-2]} per blok."}, L.lang))] if all(_result["curves"].get(n) for n in C.DEPTHS) else []   # none from a fit that gives no history
+            _says = " De grafiek laat de validation loss van je vier netwerken na elke epoch zien: doorgetrokken die met 8 per blok, gestippeld die met 1, 2 en 4." if _pic else ""
+            _out = mo.vstack(_pic + [mo.md(f"""| convoluties per blok | layers met weights | parameters | goed |
 |---|---|---|---|
 {_rows}
 
-Over 5 seeds, met de code van de course: 864 tot 879 goed met 1 per blok, 859 tot 883 met 2, 832 tot 869 met 4, en 105 in elke run met 8: één soort voor elke afbeelding.{_who}""")
+Over 5 seeds, met de code van de course: 864 tot 879 goed met 1 per blok, 859 tot 883 met 2, 832 tot 869 met 4, en 105 in elke run met 8: één soort voor elke afbeelding.{_says}{_who}""")])
     _out
     return
 

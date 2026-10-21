@@ -3,22 +3,24 @@
 """Checks of the project lesson cnn-vgg-blocks: the VGG block of Simonyan and Zisserman (2014), n convolutions of 3 by
 3 with a ReLU each and then max pooling, saved in the learner's project (work/projects/cnn/vgg.py) when right; and the
 parameters of a stack of small filters against one large filter that sees as far. The picture compares those two; the
-demo builds networks of two blocks from the learner's VGGBlock, with 1 to 4 convolutions per block, and trains each
-with their Trainer."""
+demo builds networks of two blocks from the learner's VGGBlock, with 1, 2, 4 and 8 convolutions per block, and trains
+each with their Trainer."""
 import functools
+import math
 import re
 
 import numpy as np
 import torch   # imported once, when the lesson opens: the first import takes longer than a check may
 from torch.utils.data import DataLoader, TensorDataset
 
-from everything_ai import paths, projects
+from everything_ai import live, paths, projects
 from everything_ai.check import ClassBox, FunctionBox, Mistake, Timeout, run_code, same_value, with_time_limit
 
 # The demo trains with the learner's Trainer of nn-trainer and counts with their count_params of cnn-pytorch; where one
 # is missing or broken, the course's version stands in (template 1.3).
-projects.builds_on(("nn", "train_epoch", "nn-trainer", "train-epoch"), ("nn", "trainer", "nn-trainer", "trainer"),
-                   ("cnn", "count", "cnn-pytorch", "count-params"))
+BUILDS_ON = (("nn", "train_epoch", "nn-trainer", "train-epoch"), ("nn", "trainer", "nn-trainer", "trainer"),
+             ("cnn", "count", "cnn-pytorch", "count-params"))
+projects.builds_on(*BUILDS_ON)
 
 DATA = "data/fashion-mnist-small.npz"   # 6,000 training and 1,000 test images of Fashion-MNIST: see data/README.md
 EPOCHS, LR = 5, 0.01
@@ -287,7 +289,7 @@ CASES = [
 ] + [("vgg-block", code, "wrong", key) for key, code in _V_WRONG.items()]
 
 
-# --- the demo: networks of two VGG blocks, from 1 to 4 convolutions per block ------------------------------------------------
+# --- the demo: networks of two VGG blocks, with 1, 2, 4 and 8 convolutions per block -----------------------------------
 
 def _saved(module: str) -> bool:
     return (projects.folder() / "cnn" / f"{module}.py").exists()
@@ -315,11 +317,12 @@ def _network(VGGBlock, n: int):
     return VGGNet()
 
 
-def _demo():
+def _demo(show=None):
     """For the demo: None when vgg.py is not in the project yet; "vgg" when a network of the learner's VGGBlock stops
     with an error; "trainer" when the Trainer or count_params does; "slow" when a training run takes too long; else a
     dict with, per number of convolutions per block, the parameters and the test images read right, one run each,
-    seed 0, and the modules the course's versions stood in for."""
+    seed 0, their validation loss after every epoch ("curves"), and the modules the course's versions stood in for.
+    `show` hears every run while it trains (live.follow), named by its number of convolutions per block."""
     if not _saved("vgg"):
         return None
     run = run_code("from cnn.vgg import VGGBlock")
@@ -333,14 +336,18 @@ def _demo():
     stand_ins = [f"{package}/{module}.py" for package, module, _, _ in projects.stand_ins()]
     X, y, X_test, y_test = fashion()
 
-    def train(model):
+    def train(model, n):
         torch.manual_seed(1)
         loader = DataLoader(TensorDataset(X, y), batch_size=64, shuffle=True)
         val = DataLoader(TensorDataset(X_test, y_test), batch_size=500)
-        Trainer(model, loader, val, epochs=EPOCHS, lr=LR, warmup=len(loader), max_norm=1.0).fit()
+        trainer = Trainer(model, loader, val, epochs=EPOCHS, lr=LR, warmup=len(loader), max_norm=1.0)
+        if show is not None:
+            live.follow(trainer, show, n)
+        history = trainer.fit()
+        curves[n] = [float(h["val_loss"]) for h in history or []]
         return _accuracy(model, X_test, y_test)
 
-    rows = []
+    rows, curves = [], {}
     for n in DEPTHS:
         try:
             torch.manual_seed(0)
@@ -352,12 +359,12 @@ def _demo():
         except Exception:
             return "trainer"
         try:
-            rows.append((n, params, with_time_limit(lambda: train(model), 300)))
+            rows.append((n, params, with_time_limit(lambda: train(model, n), 300)))
         except Timeout:
             return "slow"
         except Exception:
             return "trainer"
-    return {"rows": rows, "stand_ins": stand_ins}
+    return {"rows": rows, "curves": curves, "stand_ins": stand_ins}
 
 
 _DEMO_RUNS: dict = {}
@@ -372,10 +379,21 @@ def _project_texts() -> tuple:
     return tuple(texts)
 
 
-def demo():
-    """The demo's result, worked out once for the project files as they are."""
+def curves_picture(curves: dict, labels: dict, lang: str) -> str:
+    """The validation loss after every epoch of the networks of the demo, as the live chart of the last one ends: the
+    deepest as the run, in the colour of loss, and the others thin and dashed beside it, without names."""
+    run = live.Live(labels, EPOCHS, lang=lang, low=0.0)
+    for n in DEPTHS[:-1]:
+        run.reference(list(enumerate(curves.get(n, []), 1)), "", role="loss")
+    points = [(x, v) for x, v in enumerate(curves.get(DEPTHS[-1], []), 1) if math.isfinite(v)]
+    run.xs, run.ys = [x for x, _ in points], [v for _, v in points]
+    return run.picture()
+
+
+def demo(show=None):
+    """The demo's result, worked out once for the project files as they are; `show` hears the runs when they train."""
     key = _project_texts()
     if key not in _DEMO_RUNS:
         _DEMO_RUNS.clear()
-        _DEMO_RUNS[key] = _demo()
+        _DEMO_RUNS[key] = _demo(show)
     return _DEMO_RUNS[key]

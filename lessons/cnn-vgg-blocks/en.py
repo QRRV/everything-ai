@@ -306,7 +306,7 @@ def text_demo():
     mo.md(f"""
     ### What your project can do now
 
-    The button uses your project. With your `VGGBlock`, it builds networks of two blocks, from 1 to {C.WIDTHS[0]} channels and from {C.WIDTHS[0]} to {C.WIDTHS[1]}, as your SmallCNN, with {", ".join(str(n) for n in C.DEPTHS[:-1])} and {C.DEPTHS[-1]} convolutions per block. With 1 per block, it is your SmallCNN, with the same starting values. It trains each with your Trainer: {C.EPOCHS} epochs on the 6,000 training images, a learning rate of {C.number(C.LR, 2, L.lang)} with a warmup of one epoch, one run each, with seed 0, and counts the parameters with your `count_params`. Where a module of yours is missing or broken, the course's stands in. It works once exercise 3 is done, and takes one to two minutes.
+    The button uses your project. With your `VGGBlock`, it builds networks of two blocks, from 1 to {C.WIDTHS[0]} channels and from {C.WIDTHS[0]} to {C.WIDTHS[1]}, as your SmallCNN, with {", ".join(str(n) for n in C.DEPTHS[:-1])} and {C.DEPTHS[-1]} convolutions per block. With 1 per block, it is your SmallCNN, with the same starting values. It trains each with your Trainer: {C.EPOCHS} epochs on the 6,000 training images, a learning rate of {C.number(C.LR, 2, L.lang)} with a warmup of one epoch, one run each, with seed 0, and counts the parameters with your `count_params`. Where a module of yours is missing or broken, the course's stands in. It works once exercise 3 is done, and takes one to two minutes. While each network trains, a chart shows its validation loss after every epoch, with the networks trained before it dashed beside it; the chart of the last, with {C.DEPTHS[-1]} per block, stays above the table.
     """)
     return
 
@@ -324,23 +324,42 @@ def demo_depth(depth_button, result_block):
     if not depth_button.value:
         _out = mo.md("*Press the button to train the four networks.*")
     else:
-        _result = C.demo()
+        _done, _now = [], {}   # the curves of the networks trained before; the live chart of the one that trains now
+
+        def _progress(_p):
+            if _now.get("run") != _p["run"]:
+                if "live" in _now:
+                    _done.append(list(zip(_now["live"].xs, _now["live"].ys)))
+                _now["run"], _now["live"] = _p["run"], L.live({"title": f"{_p['run']} convolutions per block: the validation loss" if _p["run"] > 1 else "1 convolution per block: the validation loss", "x": "epoch", "y": "validation loss",
+                                                              "alt": f"The validation loss after every epoch so far of the network with {_p['run']} per block{'; dashed, the networks trained before it' if _done else ''}."}, _p["epochs"], low=0.0)
+                for _c in _done:
+                    _now["live"].reference(_c, "", role="loss")
+            if "val_loss" in _p:
+                _now["live"].add(_p["epoch"], _p["val_loss"], f"**{_p['run']} per block** · epoch {_p['epoch']} of {_p['epochs']} · validation loss {C.number(_p['val_loss'], 3, L.lang)}")
+            else:
+                _now["live"].line(f"**{_p['run']} per block** · epoch {_p['epoch']} of {_p['epochs']} · batch {_p['batch']} of {_p['batches']}")
+
+        _result = C.demo(_progress)
         if _result is None:
             _out = mo.md("*Finish exercise 3 first: then your `VGGBlock` is in your project, and this cell uses it.*")
         elif isinstance(_result, str):
-            _out = mo.md({
+            _note = {
                 "slow": "*Your project takes too long here: more than five minutes to train one network, on a computer that is not busy with other work. Does your `VGGBlock` or your Trainer do more work than it needs, such as a loop that runs too often?*",
                 "vgg": "*Your `VGGBlock` in `work/projects/cnn/vgg.py` stops with an error, while the networks are made. Did you change its file? Delete it, and check exercise 3 again: its check then saves your code again.*",
                 "trainer": "*Training with your Trainer in `work/projects/nn/trainer.py`, or counting with your `count_params` in `work/projects/cnn/count.py`, stops with an error. Did you change one of those files? Delete it, and check its exercise again.*",
-            }[_result])
+            }[_result]
+            _out = _now["live"].stopped(_note) if "live" in _now else mo.md(_note)   # a run that stops keeps its chart so far
         else:
             _rows = "\n".join(f"| {n} | {2 * n + 1} | {C.grouped(p, L.lang)} | {right} |" for n, p, right in _result["rows"])
             _who = "" if not _result["stand_ins"] else "\n\nThe course's version stood in for " + ", ".join(f"`{m}`" for m in _result["stand_ins"]) + ", as the note under *Where your project stands* says."
-            _out = mo.md(f"""| convolutions per block | layers with weights | parameters | right |
+            _pic = [mo.Html(C.curves_picture(_result["curves"], {"title": f"{C.DEPTHS[-1]} convolutions per block: the validation loss", "x": "epoch", "y": "validation loss",
+                                                                 "alt": f"The validation loss after every epoch of the network with {C.DEPTHS[-1]} per block; dashed, those with {', '.join(str(n) for n in C.DEPTHS[:-2])} and {C.DEPTHS[-2]} per block."}, L.lang))] if all(_result["curves"].get(n) for n in C.DEPTHS) else []   # none from a fit that gives no history
+            _says = " The chart shows the validation loss of your four networks after every epoch: solid, the one with 8 per block; dashed, those with 1, 2 and 4." if _pic else ""
+            _out = mo.vstack(_pic + [mo.md(f"""| convolutions per block | layers with weights | parameters | right |
 |---|---|---|---|
 {_rows}
 
-Over 5 seeds, with the course's code: 864 to 879 right with 1 per block, 859 to 883 with 2, 832 to 869 with 4, and 105 in every run with 8: one kind for every image.{_who}""")
+Over 5 seeds, with the course's code: 864 to 879 right with 1 per block, 859 to 883 with 2, 832 to 869 with 4, and 105 in every run with 8: one kind for every image.{_says}{_who}""")])
     _out
     return
 

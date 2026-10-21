@@ -360,7 +360,7 @@ def text_demo():
     mo.md(rf"""
     ### Wat je project nu kan
 
-    De knop traint het grid met je kit: je `run_grid` met je `grid` en je `run_seed`, op je ModernGPT met je data en je instellingen, weight decay 1 en 0 bij 30%, 50% en 90%, elk {C.number(C.STEPS, 0, L.lang)} stappen, in je experimentlogboek `work/projects/repro/ablation.jsonl`. Je ziet elke run terwijl hij traint. Op een GPU duren de zes runs elk een paar minuten; op de CPU van de course, met één thread, samen ongeveer {C.number(6 * C.STEPS * C.SECONDS_PER_STEP / 3600, 1, L.lang)} uur. Sluit je de les halverwege, dan blijven de runs die klaar zijn in je logboek staan; de volgende druk op de knop gaat verder met de andere. Terwijl hij traint, wacht de rest van deze les: je kunt verder lezen, of in een andere les werken. Waar een onderdeel van je kit ontbreekt of kapot is, springt de versie van de course in.
+    De knop traint het grid met je kit: je `run_grid` met je `grid` en je `run_seed`, op je ModernGPT met je data en je instellingen, weight decay 1 en 0 bij 30%, 50% en 90%, elk {C.number(C.STEPS, 0, L.lang)} stappen, in je experimentlogboek `work/projects/repro/ablation.jsonl`. Een grafiek laat elke run zien terwijl hij traint: zijn validation accuracy, met zijn training accuracy gestreept, op een logaritmische as van de stappen zoals in de figuur hierboven, en in de titel de weight decay en het deel van de tabel van de run. Op een GPU duren de zes runs elk een paar minuten; op de CPU van de course, met één thread, samen ongeveer {C.number(6 * C.STEPS * C.SECONDS_PER_STEP / 3600, 1, L.lang)} uur. Sluit je de les halverwege, dan blijven de runs die klaar zijn in je logboek staan; de volgende druk op de knop gaat verder met de andere. Terwijl hij traint, wacht de rest van deze les: je kunt verder lezen, of in een andere les werken. Waar een onderdeel van je kit ontbreekt of kapot is, springt de versie van de course in.
     """)
     return
 
@@ -384,14 +384,22 @@ def demo_train(train_button, result_grid, result_run_grid):
     elif len(C.my_runs() or []) >= 6:
         _out = mo.md("*De zes runs van het grid staan al in je logboek, dus slaat je `run_grid` ze over. Wil je ze opnieuw trainen, verwijder dan `work/projects/repro/ablation.jsonl`.*")
     else:
-        _starts = []
+        _kept = [(_l["weight_decay"], _l["fraction"]) for _l in C.my_runs() or []]
+        _todo = [(_wd, _f) for _wd in C.CHANGES["weight_decay"] for _f in C.CHANGES["fraction"] if (_wd, _f) not in _kept]   # wat deze druk traint, in de volgorde van het grid
+        _starts, _lives = [], {}   # when each run of this press started; its live chart
 
         def _progress(_log):
             _step, _now = _log["step"][-1], _time.perf_counter()
             if _step == 1:   # de eerste gelogde stap van een nieuwe run
                 _starts.append(_now)
-            _spent = _now - _starts[-1]
-            mo.output.replace(mo.md(f"**Run {len(_starts)} van deze druk op de knop, stap {C.number(_step, 0, L.lang)} van {C.number(C.STEPS, 0, L.lang)}** · {C.number(_spent / 60, 1, L.lang)} minuten · training {C.number(100 * _log['train'][-1], 1, L.lang)}%, validatie {C.number(100 * _log['val'][-1], 1, L.lang)}%"))
+            _spent, _n = _now - _starts[-1], len(_starts)
+            if _n not in _lives:   # zijn instellingen; geen alleen als je run_grid een run traint die al in het logboek staat
+                _title = f"Weight decay {C.number(_todo[_n - 1][0], 0, L.lang)} bij {round(100 * _todo[_n - 1][1])}% van de tabel" if _n <= len(_todo) else f"Run {_n} van deze druk op de knop"
+                _lives[_n] = L.live({"title": _title, "x": "stap", "y": "accuracy", "alt": f"{_title}: de validation accuracy tot nu toe, op een logaritmische as van de stappen; gestreept de training accuracy."},
+                                    C.STEPS, role="ink", low=0.0, high=1.15, window=1, xlog=True)   # ruimte boven 1 voor de naam van de lijn van training
+            _live, _of = _lives[_n], f" van {len(_todo)}" if _n <= len(_todo) else ""
+            _live.reference(list(zip(_log["step"], _log["train"])), "training", role="ink")   # it grows with the run
+            _live.extend(list(zip(_log["step"][len(_live.xs):], _log["val"][len(_live.xs):])), f"**Run {_n}{_of} bij deze druk op de knop, stap {C.number(_step, 0, L.lang)} van {C.number(C.STEPS, 0, L.lang)}** · {C.number(_spent / 60, 1, L.lang)} minuten · training {C.number(100 * _log['train'][-1], 1, L.lang)}%, validatie {C.number(100 * _log['val'][-1], 1, L.lang)}%")
 
         _r = C.demo(_progress)
         if _r is None:

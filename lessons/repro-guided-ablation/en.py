@@ -360,7 +360,7 @@ def text_demo():
     mo.md(rf"""
     ### What your project can do now
 
-    The button trains the grid with your kit: your `run_grid` with your `grid` and your `run_seed`, on your ModernGPT with your data and your settings, weight decay 1 and 0 at 30%, 50% and 90%, {C.number(C.STEPS, 0, L.lang)} steps each, into your experiment log `work/projects/repro/ablation.jsonl`. You see each run while it trains. On a GPU the six runs take a few minutes each; on the course's CPU, with one thread, about {C.number(6 * C.STEPS * C.SECONDS_PER_STEP / 3600, 1, L.lang)} hours together. Close the lesson halfway, and the runs that are done stay in your log; the next press goes on with the others. While it trains, the rest of this lesson waits: you can read on, or work in another lesson. Where a part of your kit is missing or broken, the course's version stands in.
+    The button trains the grid with your kit: your `run_grid` with your `grid` and your `run_seed`, on your ModernGPT with your data and your settings, weight decay 1 and 0 at 30%, 50% and 90%, {C.number(C.STEPS, 0, L.lang)} steps each, into your experiment log `work/projects/repro/ablation.jsonl`. A chart shows each run while it trains: its validation accuracy, with its training accuracy dashed, on a log scale of the steps as in the figure above, and the run's weight decay and fraction in its title. On a GPU the six runs take a few minutes each; on the course's CPU, with one thread, about {C.number(6 * C.STEPS * C.SECONDS_PER_STEP / 3600, 1, L.lang)} hours together. Close the lesson halfway, and the runs that are done stay in your log; the next press goes on with the others. While it trains, the rest of this lesson waits: you can read on, or work in another lesson. Where a part of your kit is missing or broken, the course's version stands in.
     """)
     return
 
@@ -384,14 +384,22 @@ def demo_train(train_button, result_grid, result_run_grid):
     elif len(C.my_runs() or []) >= 6:
         _out = mo.md("*The six runs of the grid are in your experiment log already, so your `run_grid` skips them. To train them again, delete `work/projects/repro/ablation.jsonl`.*")
     else:
-        _starts = []
+        _kept = [(_l["weight_decay"], _l["fraction"]) for _l in C.my_runs() or []]
+        _todo = [(_wd, _f) for _wd in C.CHANGES["weight_decay"] for _f in C.CHANGES["fraction"] if (_wd, _f) not in _kept]   # what this press trains, in the order of the grid
+        _starts, _lives = [], {}   # when each run of this press started; its live chart
 
         def _progress(_log):
             _step, _now = _log["step"][-1], _time.perf_counter()
             if _step == 1:   # the first logged step of a new run
                 _starts.append(_now)
-            _spent = _now - _starts[-1]
-            mo.output.replace(mo.md(f"**Run {len(_starts)} of this press, step {C.number(_step, 0, L.lang)} of {C.number(C.STEPS, 0, L.lang)}** · {C.number(_spent / 60, 1, L.lang)} minutes · training {C.number(100 * _log['train'][-1], 1, L.lang)}%, validation {C.number(100 * _log['val'][-1], 1, L.lang)}%"))
+            _spent, _n = _now - _starts[-1], len(_starts)
+            if _n not in _lives:   # its settings; none only when your run_grid trains a run that is in the log already
+                _title = f"Weight decay {C.number(_todo[_n - 1][0], 0, L.lang)} at {round(100 * _todo[_n - 1][1])}% of the table" if _n <= len(_todo) else f"Run {_n} of this press"
+                _lives[_n] = L.live({"title": _title, "x": "step", "y": "accuracy", "alt": f"{_title}: the validation accuracy so far, on a log scale of the steps; dashed, the training accuracy."},
+                                    C.STEPS, role="ink", low=0.0, high=1.15, window=1, xlog=True)   # room above 1 for the name of the training line
+            _live, _of = _lives[_n], f" of {len(_todo)}" if _n <= len(_todo) else ""
+            _live.reference(list(zip(_log["step"], _log["train"])), "training", role="ink")   # it grows with the run
+            _live.extend(list(zip(_log["step"][len(_live.xs):], _log["val"][len(_live.xs):])), f"**Run {_n}{_of} in this press, step {C.number(_step, 0, L.lang)} of {C.number(C.STEPS, 0, L.lang)}** · {C.number(_spent / 60, 1, L.lang)} minutes · training {C.number(100 * _log['train'][-1], 1, L.lang)}%, validation {C.number(100 * _log['val'][-1], 1, L.lang)}%")
 
         _r = C.demo(_progress)
         if _r is None:
