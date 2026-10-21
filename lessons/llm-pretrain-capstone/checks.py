@@ -43,6 +43,7 @@ FOLDER = "tokens_capstone"      # the shards of the run, in work/projects/llm/
 NAME = "capstone"               # the run's model in work/projects/llm/: capstone.pt, with capstone.json
 COURSE = "data/course-capstone"  # the course's model, .pt and .json
 START, LENGTH, TAU = "Once upon a time", 200, 0.8
+SNAP = 60                       # tokens of the story the model writes at every evaluation, for the replay of the run
 DOWNLOAD_LINE = {
     "en": "Works on every computer. The first 200 MB of the training stories of TinyStories are downloaded once from Hugging Face when you click their button in the lesson; after that, the lesson works without a connection. The exercises work without them too.",
     "nl": "Werkt op elke computer. De eerste 200 MB van de trainingsverhalen van TinyStories worden één keer gedownload van Hugging Face als je in de les op de knop ervoor klikt; daarna werkt de les zonder verbinding. De oefeningen werken ook zonder.",
@@ -300,11 +301,12 @@ class _Orders:
 
 
 def train(depth: int, tokens: int, step_fn, mixed: bool, show, *, train_windows=None, val_windows=None,
-          vocab: int = B.VOCAB, seed: int = 0, state_file=None, save_every: int = 0) -> dict | str:
+          vocab: int = B.VOCAB, seed: int = 0, state_file=None, save_every: int = 0, snap=None) -> dict | str:
     """Pretrain the learner's ModernGPT of `depth` for `tokens` tokens with their pretrain_step: AdamW at PEAK times
     the schedule of llm-open-recipes, mini-batches of BATCH windows, the validation loss on QUICK windows EVALS times and
     on all at the end. `show` hears every step that ends a second and every evaluation. With `state_file`, the model, the
-    optimizer and the step are kept there every `save_every` steps, and a run starts again from it. "run" when a module
+    optimizer and the step are kept there every `save_every` steps, and a run starts again from it. With `snap(model)`,
+    every evaluation also keeps what the model writes then ("story"), for the replay of the run. "run" when a module
     of the learner stops with an error; else the model and what the run measured."""
     import torch
     ran = run_code("from llm.modern_gpt import ModernGPT\nfrom llm.token_windows import TokenWindows")
@@ -367,6 +369,11 @@ def train(depth: int, tokens: int, step_fn, mixed: bool, show, *, train_windows=
             val = _loss(model, val_windows, w["device"], mixed, QUICK)
             history.append({"step": step, "tokens": step * batch * BLOCK, "train": sum(recent) / len(recent), "val": val,
                             "seconds": seconds})
+            if snap is not None:   # what the model writes now; its own random numbers, so the training is the same
+                try:
+                    history[-1]["story"] = snap(model)
+                except Exception:
+                    history[-1]["story"] = None
             recent = []
             show({"phase": "eval", **history[-1], "steps": steps})
         elif time.perf_counter() - last_show > 1:
@@ -383,8 +390,8 @@ def train(depth: int, tokens: int, step_fn, mixed: bool, show, *, train_windows=
             "mfu": tps * flops_per_token(params, depth) / top, **w, "mixed": mixed}
 
 
-def write(model, merges: dict, encode, decode, seed: int = 0, start: str = START) -> str:
-    """A story of LENGTH tokens from `start`, drawn at temperature TAU with the model's caches, as in
+def write(model, merges: dict, encode, decode, seed: int = 0, start: str = START, length: int | None = None) -> str:
+    """A story of LENGTH tokens (or `length`) from `start`, drawn at temperature TAU with the model's caches, as in
     llm-modern-gpt; it ends early at an end-of-text."""
     import torch
     end_id = 256 + len(merges)
@@ -397,7 +404,7 @@ def write(model, merges: dict, encode, decode, seed: int = 0, start: str = START
     with torch.no_grad():
         with _on(device.type):
             logits = model(torch.tensor([ids], device=device), caches)
-        for _ in range(LENGTH):
+        for _ in range(LENGTH if length is None else length):
             p = torch.softmax(logits[0, -1].double().cpu() / TAU, dim=0)
             j = int(torch.multinomial(p, 1, generator=g))
             if j == end_id:
@@ -490,14 +497,15 @@ def run_plan(plan: dict, step_fn, show) -> dict | str:
     """Pretrain the plan with the learner's step, going on from a state the same plan left; then let the model write
     and keep it. A string when it stops: "data", "merges", "memory", "run" or "diverged"."""
     state = projects.folder() / "llm" / STATE
-    result = train(plan["depth"], plan["tokens"], step_fn, plan["mixed"], show, state_file=state,
-                   save_every=max(1, plan["steps"] // EVALS))
-    if isinstance(result, str):
-        return result
     tok = D.tokenizer()
     tools = run_code("from llm.encode import encode\nfrom llm.decode import decode")
     if tools.error is not None:
         return "run"
+    result = train(plan["depth"], plan["tokens"], step_fn, plan["mixed"], show, state_file=state,
+                   save_every=max(1, plan["steps"] // EVALS),
+                   snap=lambda m: write(m, tok["merges"], tools.names["encode"], tools.names["decode"], length=SNAP))
+    if isinstance(result, str):
+        return result
     try:
         story = write(result["model"], tok["merges"], tools.names["encode"], tools.names["decode"])
     except Exception:
@@ -512,6 +520,49 @@ def quote(story: str) -> str:
     front of a line that would make it code."""
     safe = re.sub(r"([\\`*_$<>#\[\]|])", r"\\\1", story.strip())
     return "\n>\n".join("> " + part.strip() for part in re.split(r"\n+", safe) if part.strip())
+
+
+def written(text: str) -> str:
+    """What a model wrote, in Markdown for the sentence under a picture: every line in italics on its own line, in the
+    serif of a quote (<i>, as play.Explore writes it), with nothing in it that Markdown or KaTeX would read as a sign,
+    and no spaces in front that would make it code: also no link from an address (: and .), no ^superscript^ and
+    no ++key++."""
+    signs = {"&": "&amp;", "<": "&lt;", ">": "&gt;", **{c: f"&#{ord(c)};" for c in "\\`*_$[]|~#^+:."}}
+    lines = ["".join(signs.get(c, c) for c in line.strip()) for line in text.split("\n") if line.strip()]
+    return "  \n".join(f"<i>{line}</i>" for line in lines) or "…"
+
+
+def moments(history: list) -> list:
+    """The evaluations of a run at which the model wrote something, for its replay. A run evaluates every
+    steps // EVALS steps and at its last step, so that last evaluation can come a few steps after the one before
+    (4,690 and 4,696 in the course's run): the model has hardly changed and writes the same. Then the one before is
+    left out, so that the replay ends with the model the run keeps, whose story the lesson shows in full."""
+    ks = [k for k, e in enumerate(history) if e.get("story") is not None]
+    if len(ks) > 2:
+        gap = history[1]["step"] - history[0]["step"]   # of the run, also when a story is missing in between
+        if history[ks[-1]]["step"] - history[ks[-2]]["step"] < gap / 2:   # the last comes less than half a gap later
+            del ks[-2]
+    return ks
+
+
+def replay_frame(history: list, k: int, labels: dict) -> tuple:
+    """One evaluation of a run, for its replay (L.explore): the validation loss against the tokens seen, on a log scale,
+    as curve_picture draws it, with a dashed line at evaluation `k`; and what the model wrote then, from START.
+    `labels`: title, x, y, alt, lang, and "after" ({tokens}, in millions), "val"."""
+    from everything_ai import chart
+    e = history[k]
+    xs, ys = [h["tokens"] for h in history], [h["val"] for h in history]
+    low, high = math.floor(min(ys) * 4 - 0.5) / 4, math.ceil(max(ys) * 4 + 0.5) / 4
+    left, right = 10 ** math.floor(math.log10(min(xs))), 10 ** math.ceil(math.log10(max(xs)))   # whole decades
+    p = chart.Panel((left, right), (low, high), title=labels["title"], xlabel=labels["x"], ylabel=labels["y"], xlog=True)
+    p.line(xs, ys, "loss", 2.2)
+    p.line([e["tokens"], e["tokens"]], [low, high], "ink-2", 1.2, dashed=True)
+    p.points([e["tokens"]], [e["val"]], "loss", r=4)
+    svg = chart.figure([p], alt=labels["alt"], width=360, height=220)
+    lang = labels.get("lang", "en")
+    said = (f"**{labels['after'].format(tokens=number(e['tokens'] / 1e6, 1, lang))}** · {labels['val']} {number(e['val'], 3, lang)}"
+            f"\n\n{written(e['story'])}")
+    return svg, said
 
 
 def course_info() -> dict:
@@ -538,24 +589,36 @@ def curve_picture(runs: list, reference: float, labels: dict) -> str:
     return chart.with_decimal_comma(svg) if labels.get("lang") == "nl" else svg
 
 
-# --- measured: the course's run of the demos with its own versions and merge rules, on the CPU, 2 threads ---
+# --- measured: the course's run of the demos with its own versions and merge rules, on the CPU, 2 threads; the stories
+# of the run come from the same plan run again with run_plan's snap, with the same losses at every evaluation ---
 MEASURED = {
     "data": {"stories": 244110, "ids": 67962215, "chars": 199331945, "seconds": 201.4},
     "measure": {"tps_fp32": 3914, "tps_bf16": 1839, "flops": 73778578974.06494, "probe_params": 3141801},
     "plan": {"depth": 3, "params": 575337, "tokens": 19235312, "steps": 4696},
     "run": {"depth": 3, "params": 575337, "tokens": 19234816, "steps": 4696, "batch": 16, "val": 1.8338, "seconds": 1134.7, "tps": 16951, "peak": 284770000000.0, "mfu": 0.2318, "device": "cpu", "name": "CPU",
             "history": [
-                {"step": 469, "tokens": 1921024, "train": 3.3041, "val": 2.6295, "seconds": 112.8},
-                {"step": 938, "tokens": 3842048, "train": 2.446, "val": 2.345, "seconds": 223.1},
-                {"step": 1407, "tokens": 5763072, "train": 2.2704, "val": 2.2341, "seconds": 339.1},
-                {"step": 1876, "tokens": 7684096, "train": 2.1701, "val": 2.1239, "seconds": 449.4},
-                {"step": 2345, "tokens": 9605120, "train": 2.0919, "val": 2.076, "seconds": 565.1},
-                {"step": 2814, "tokens": 11526144, "train": 2.0382, "val": 2.0218, "seconds": 680.5},
-                {"step": 3283, "tokens": 13447168, "train": 1.9868, "val": 1.9793, "seconds": 794.6},
-                {"step": 3752, "tokens": 15368192, "train": 1.9427, "val": 1.9337, "seconds": 907.2},
-                {"step": 4221, "tokens": 17289216, "train": 1.9017, "val": 1.8917, "seconds": 1019.9},
-                {"step": 4690, "tokens": 19210240, "train": 1.8689, "val": 1.8604, "seconds": 1133.3},
-                {"step": 4696, "tokens": 19234816, "train": 1.8687, "val": 1.8599, "seconds": 1134.7},
+                {"step": 469, "tokens": 1921024, "train": 3.3041, "val": 2.6295, "seconds": 112.8,
+                 "story": "Once upon a time, in a small town, there was a little boy named Tim. Tom was a little girl who loved to fur. He loved other room and play with his friends.\nOne day, Tom saw a new toy in the yard. \"May"},
+                {"step": 938, "tokens": 3842048, "train": 2.446, "val": 2.345, "seconds": 223.1,
+                 "story": "Once upon a time, there was a little boy named Tim. Tim had a toy boy named Tim.\nOne day, Tim and his friend, Sue, Sue, came. They played together with their toys toys. Tim and Sue was"},
+                {"step": 1407, "tokens": 5763072, "train": 2.2704, "val": 2.2341, "seconds": 339.1,
+                 "story": "Once upon a time, there was a little boy named Tim. Tim had a toy car. Tim was very safe for a big boy. He had a fragile in.\nOne day, Tim saw a new toy car named Brown. \"W"},
+                {"step": 1876, "tokens": 7684096, "train": 2.1701, "val": 2.1239, "seconds": 449.4,
+                 "story": "Once upon a time, together, there was a happy cat who loved to play in the sun. The cat and the garden were very happy.\nOne day, the cat met a cat. It was a big, shiny thing. The cat was cat"},
+                {"step": 2345, "tokens": 9605120, "train": 2.0919, "val": 2.076, "seconds": 565.1,
+                 "story": "Once upon a time, there was a little boy named Tim. Tim had a toy car named Bobo.\nOne day, a big boy named Tim saw his toy car in the fox. He wanted to play in the ground. He saw a small cat"},
+                {"step": 2814, "tokens": 11526144, "train": 2.0382, "val": 2.0218, "seconds": 680.5,
+                 "story": "Once upon a time, together, there was a happy cat who loved to play in the sand.\nOne sunny day, the cat went to the sandwiches. The sand cat and the boy was wet and in the sky. It was big and small. The"},
+                {"step": 3283, "tokens": 13447168, "train": 1.9868, "val": 1.9793, "seconds": 794.6,
+                 "story": "Once upon a time, there was a little boy named Tim. Tim had a toy boy named Tim.\nOne day, Tim saw a small boy named Tim. He wanted to play with it. His mom said, \"No, what is it,\" said the"},
+                {"step": 3752, "tokens": 15368192, "train": 1.9427, "val": 1.9337, "seconds": 907.2,
+                 "story": "Once upon a time, there was a little boy named Tim. Tim had a toy boy named Tim.\nOne day, Tim went to the park to play. He saw his friend, Sam, sending the boy named Tim. Tim saw a cat"},
+                {"step": 4221, "tokens": 17289216, "train": 1.9017, "val": 1.8917, "seconds": 1019.9,
+                 "story": "Once upon a time, there was a little boy named Tim. Tim had a toy boy named Tim.\nOne day, Tim saw a little boy named Tim. Tim wanted to play with the boy, so he thought, \"Max, can I have water"},
+                {"step": 4690, "tokens": 19210240, "train": 1.8689, "val": 1.8604, "seconds": 1133.3,
+                 "story": "Once upon a time, there was a little boy named Tim. Tim had a toy bear named Lily. They would play together every day.\nOne day, Tim saw a big, funny cat. It was a hard day, but a big anxious! \"Let"},
+                {"step": 4696, "tokens": 19234816, "train": 1.8687, "val": 1.8599, "seconds": 1134.7,
+                 "story": "Once upon a time, there was a little boy named Tim. Tim had a toy bear named Lily. They would play together every day.\nOne day, Tim saw a big, funny cat. It was a hard day, but a big anxious! \"Let"},
             ]},
     "story": "Once upon a time, there was a little boy named Tim. Tim had a toy bear named Lily. They would play together every day.\nOne day, Tim saw a big, funny cat. It was a hard day, but a big anxious! \"Let's play in the park!\" Tim thought about it and played with the big ball. He liked to explore it and Ziggy would stay on it. From that day on, When it was time to go home, Lily saw a big picture of a big box. They played together all day long and had lots of fun.",
 }

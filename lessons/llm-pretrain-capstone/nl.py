@@ -424,6 +424,46 @@ def demo_result(trained):
 
 
 @app.cell(hide_code=True)
+def text_replay():
+    mo.md(f"""
+    ### De run, meting voor meting
+
+    Elke keer dat de run zijn validation loss meet, laat hij het model ook schrijven: {C.SNAP} tokens vanaf *{C.START}*, telkens getrokken met dezelfde seed. Hier ga je door die momenten: de validation loss tijdens de run, met een gestreepte lijn op het moment dat je kiest, en wat het model toen schreef.
+    """)
+    return
+
+
+@app.cell(hide_code=True)
+def replay_cell(trained):
+    _info = trained if trained is not None else C.saved()
+    _mine = _info is not None and bool(C.moments(_info["history"]))
+    _run = _info if _mine else C.MEASURED["run"]
+    _whose = "je run" if _mine else "de run van de course"
+    if _mine:
+        _note = ""
+    elif _info is not None:
+        _note = "*Je bewaarde run is gemaakt voordat de les bijhield wat het model schreef, dus hier neemt de run van de course zijn plaats in. Pretrain opnieuw om door je eigen run te gaan.*"
+    else:
+        _note = "*Tot je je eigen model pretraint, ga je hier door de run van de course.*"
+    _labels = {"title": f"Validation loss tijdens {_whose}", "x": "geziene tokens", "y": "validation loss per token", "lang": L.lang,
+               "alt": f"De validation loss van {_whose} tegen de geziene tokens, op een logschaal, met een gestreepte lijn op het gekozen moment.",
+               "after": "Na {tokens} miljoen tokens", "val": "validation loss"}
+    _ks = C.moments(_run["history"])   # numbered from 1 on the slider
+    _block = L.explore("replay", "meting", lambda _v: C.replay_frame(_run["history"], _ks[int(_v) - 1], _labels), start=len(_ks), values=list(range(1, len(_ks) + 1)), role="",
+                       task="Schrijft het model bij de eerste meting al zinnen? Wat gaat daar nog mis dat bij de laatste goed gaat?")
+    mo.vstack([mo.md(_note), _block]) if _note else _block
+    return
+
+
+@app.cell(hide_code=True)
+def text_replay_after():
+    mo.md(f"""
+    In de run van de course (je eigen model schrijft andere verhalen) schrijft het model al zinnen vanaf de eerste meting, na {C.number(C.MEASURED['run']['history'][0]['tokens'] / 1e6, 1, L.lang)} miljoen tokens: namen, *One day*, het begin van wat iemand zegt. Daarna daalt de validation loss steeds langzamer, van {C.number(C.MEASURED['run']['history'][0]['val'], 2, L.lang)} naar {C.number(C.MEASURED['run']['history'][-1]['val'], 2, L.lang)}, en wat dat oplevert, zie je minder snel: of het verhaal klopt. Eerst wordt Tim Tom, die dan een meisje is; aan het eind heeft Tim een speelgoedbeer die Lily heet, en spelen ze samen. Daartussen schrijft het model meer dan eens *Tim had a toy boy named Tim*: elk moment is één trekking, en een iets ander model slaat ergens een andere weg in. De loss telt {C.number(C.QUICK * C.BLOCK, 0, L.lang)} tokens van de validatieverhalen tegelijk, in {C.QUICK} vensters; één verhaal van {C.SNAP} tokens laat één weg zien.
+    """)
+    return
+
+
+@app.cell(hide_code=True)
 def text_exercise_measure():
     mo.md(r"""
     ### Oefening 3. Waarom meten?

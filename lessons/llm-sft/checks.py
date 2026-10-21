@@ -389,14 +389,7 @@ def replay_frame(run: dict, step: int, labels: dict, reference: list | None = No
     return svg, f"**{when}** · {verdict}\n\n{written(snap['text'])}"
 
 
-def written(text: str) -> str:
-    """What a model wrote, in Markdown for the sentence under a picture: every line in italics on its own line, in the
-    serif of a quote (<i>, as play.Explore writes it), with nothing in it that Markdown or KaTeX would read as a sign,
-    and no spaces in front that would make it code: also no link from an address (: and .), no ^superscript^ and
-    no ++key++."""
-    signs = {"&": "&amp;", "<": "&lt;", ">": "&gt;", **{c: f"&#{ord(c)};" for c in "\\`*_$[]|~#^+:."}}
-    lines = ["".join(signs.get(c, c) for c in line.strip()) for line in text.split("\n") if line.strip()]
-    return "  \n".join(f"<i>{line}</i>" for line in lines) or "…"
+written = P.written   # what a model wrote, safe in the sentence under a picture (llm-pretrain-capstone)
 
 
 def example(before: dict, after: dict) -> dict:

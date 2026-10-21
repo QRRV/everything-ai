@@ -424,6 +424,46 @@ def demo_result(trained):
 
 
 @app.cell(hide_code=True)
+def text_replay():
+    mo.md(f"""
+    ### The run, measurement by measurement
+
+    Every time the run measures its validation loss, it also lets the model write: {C.SNAP} tokens from *{C.START}*, drawn with the same seed each time. Here you go through those moments: the validation loss along the run, with a dashed line at the moment you choose, and what the model wrote then.
+    """)
+    return
+
+
+@app.cell(hide_code=True)
+def replay_cell(trained):
+    _info = trained if trained is not None else C.saved()
+    _mine = _info is not None and bool(C.moments(_info["history"]))
+    _run = _info if _mine else C.MEASURED["run"]
+    _whose = "your run" if _mine else "the course's run"
+    if _mine:
+        _note = ""
+    elif _info is not None:
+        _note = "*Your saved run was made before the lesson kept what the model wrote, so the course's run stands in here. Pretrain again to go through your own.*"
+    else:
+        _note = "*Until you pretrain your own model, you go through the course's run here.*"
+    _labels = {"title": f"Validation loss during {_whose}", "x": "tokens seen", "y": "validation loss per token", "lang": L.lang,
+               "alt": f"The validation loss of {_whose} against the tokens seen, on a log scale, with a dashed line at the chosen moment.",
+               "after": "After {tokens} million tokens", "val": "validation loss"}
+    _ks = C.moments(_run["history"])   # numbered from 1 on the slider
+    _block = L.explore("replay", "measurement", lambda _v: C.replay_frame(_run["history"], _ks[int(_v) - 1], _labels), start=len(_ks), values=list(range(1, len(_ks) + 1)), role="",
+                       task="Does the model already write sentences at the first measurement? What still goes wrong there that goes right at the last?")
+    mo.vstack([mo.md(_note), _block]) if _note else _block
+    return
+
+
+@app.cell(hide_code=True)
+def text_replay_after():
+    mo.md(f"""
+    In the course's run (your own model writes other stories), the model writes sentences from the first measurement on, after {C.number(C.MEASURED['run']['history'][0]['tokens'] / 1e6, 1, L.lang)} million tokens: names, *One day*, the start of what someone says. After that the validation loss falls ever more slowly, from {C.number(C.MEASURED['run']['history'][0]['val'], 2, L.lang)} to {C.number(C.MEASURED['run']['history'][-1]['val'], 2, L.lang)}, and what it buys is harder to see: whether the story holds together. At first Tim becomes Tom, who is then a little girl; at the end Tim has a toy bear named Lily, and they play together. In between, the model writes *Tim had a toy boy named Tim* more than once: every moment is one draw, and a slightly different model takes another turn somewhere. The loss counts {C.number(C.QUICK * C.BLOCK, 0, L.lang)} tokens of the validation stories at once, in {C.QUICK} windows; one story of {C.SNAP} tokens shows one path.
+    """)
+    return
+
+
+@app.cell(hide_code=True)
 def text_exercise_measure():
     mo.md(r"""
     ### Exercise 3. Why measure?
