@@ -394,6 +394,30 @@ class Lesson:
         w._ea_key = key
         return mo.ui.anywidget(w)
 
+    def plane(self, key: str, x: str, y: str, frame, xs: list, ys: list, start: tuple, role: str = "param",
+              task: str | None = None, count=None, count_values: list | None = None, labels: dict | None = None):
+        """A dot to drag over a plane of two values, with a picture that follows it at once (play.Plane): the value
+        named `x` left to right over `xs`, the value named `y` bottom to top over `ys`. `frame(x, y)` gives the picture
+        and the sentence under it, as for L.explore, drawn once, up front. With `count(x, y)`, a whole number at every
+        point, a button colours the plane by it; `labels` then give its "show" and "hide" and the word before its
+        legend, "count". Where you left the dot is kept."""
+        value = progress.saved_answer(self.id, key)
+        if not (isinstance(value, list) and len(value) == 2 and all(isinstance(v, (int, float)) for v in value)):
+            value = start
+        nl = self.lang == "nl"
+
+        def drawn(a, b):
+            out = frame(a, b)
+            svg, said = (out, "") if isinstance(out, str) else out
+            return chart.with_decimal_comma(svg) if nl else svg, _inline(said) if said else said
+
+        names = {"name": f"{x}, {y}", "x": x, "y": y} | (labels or {}) | ({"task_kick": self.w["task"], "task": _inline(task)} if task else {})
+        w = play.Plane(drawn, xs=xs, ys=ys, value=tuple(value), count=count, count_values=count_values, role=role,
+                       labels=names, decimal="," if nl else ".")
+        w.observe(lambda change: progress.record_answer(self.id, key, list(w.value)), names="index")
+        w._ea_key = key
+        return mo.ui.anywidget(w)
+
     def saved(self, name: str, default=None):
         """What you set last time in an exercise that is not code, such as a slider or a sort."""
         value = progress.saved_answer(self.id, name)
@@ -406,7 +430,7 @@ class Lesson:
         ex = self.exercise(name)
         if isinstance(getattr(value, "widget", None), widgets.Sort):
             value = dict(value.widget.value)
-        elif isinstance(getattr(value, "widget", None), (widgets.Slider, play.Explore)):
+        elif isinstance(getattr(value, "widget", None), (widgets.Slider, play.Explore, play.Plane)):
             value = value.widget.value
         try:
             result = ex.check(value) if inputs is None else ex.check(value, inputs)

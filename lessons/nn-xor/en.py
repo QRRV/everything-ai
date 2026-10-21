@@ -130,44 +130,30 @@ def text_idea():
         """),
         L.watch_out("XOR is not hard for a computer: `x1 != x2` does it. It is hard for one neuron, because a neuron can only draw one straight line."),
         mo.md(r"""
-        Try it yourself. The sliders set the second weight and the bias term of a neuron with a step; its first weight is 1. The filled dots are the inputs XOR gives 1, the open dots the ones it gives 0. A <span class="c-loss">purple ring</span> marks each input the neuron gets wrong. Can you get no rings at all?
+        Try it yourself. In the field, the <span class="c-param">orange point</span> sets the second weight $w_2$ (left to right) and the bias term $b$ (bottom to top) of a neuron with a step; its first weight is 1. Drag the point, or use the arrow keys. In the picture, the filled dots are the inputs XOR gives 1, the open dots the ones it gives 0, and a <span class="c-loss">purple ring</span> marks each input the neuron gets wrong.
         """),
     ])
     return
 
 
 @app.cell(hide_code=True)
-def slider_w2_cell():
-    slider_w2 = L.slider("w2", "w₂", start=1, low=-2, high=2, step=0.1, role="param")
-    slider_w2
-    return (slider_w2,)
-
-
-@app.cell(hide_code=True)
-def slider_b_cell():
-    slider_b = L.slider("bias", "b", start=-0.5, low=-2, high=1, step=0.1, role="param")
-    slider_b
-    return (slider_b,)
-
-
-@app.cell(hide_code=True)
-def picture_xor(slider_b, slider_w2):
-    _w2 = round(slider_w2.widget.value, 1)
-    _b = round(slider_b.widget.value, 1)
-    _wrong = C.mistakes(_w2, _b)
-    _which = ", ".join(str(_c) for _c in C.wrong_corners(_w2, _b))
-    mo.vstack([
-        mo.Html(C.picture(_w2, _b, {"title": "XOR and one straight line",
-                                    "alt": f"The four corners of the square: (0, 1) and (1, 0) filled, (0, 0) and (1, 1) open, and the line where z = 0 of a neuron with the weights 1 and {L.number(_w2, 1)} and the bias term {L.number(_b, 1)}. A ring marks each corner the neuron gets wrong: {_which}."})),
-        mo.md(f"""With $w_2$ = {L.number(_w2, 1)} and $b$ = {L.number(_b, 1)}, the neuron gets <span class="c-loss ea-num">{_wrong}</span> of the 4 inputs wrong."""),
-    ])
+def plane_xor():
+    def _frame(_w2, _b):
+        _which = ", ".join(str(_c) for _c in C.wrong_corners(_w2, _b))
+        return (C.picture(_w2, _b, {"title": "XOR and one straight line",
+                                     "alt": f"The four corners of the square: (0, 1) and (1, 0) filled, (0, 0) and (1, 1) open, and the line where z = 0 of a neuron with the weights 1 and {L.number(_w2, 1)} and the bias term {L.number(_b, 1)}. A ring marks each corner the neuron gets wrong: {_which}."}),
+                f"""With $w_2$ = {L.number(_w2, 1)} and $b$ = {L.number(_b, 1)}, the neuron gets <span class="c-loss ea-num">{C.mistakes(_w2, _b)}</span> of the 4 inputs wrong.""")
+    _plane = L.plane("w2-bias", "w₂", "b", _frame, [round(-2 + 0.1 * _i, 1) for _i in range(41)],
+                     [round(-2 + 0.1 * _j, 1) for _j in range(31)], start=(1, -0.5), task="Can you get no rings at all?",
+                     count=C.mistakes, count_values=[0, 1, 2, 3], labels={"show": "Colour every point by its mistakes", "hide": "Hide the colours", "count": "wrong:"})
+    _plane
     return
 
 
 @app.cell(hide_code=True)
 def text_recipe():
     mo.md(r"""
-    However you set the sliders, at least one ring stays.
+    Wherever you put the point, at least one ring stays. The button shows this for every point at once: no part of the field is without colour.
 
     ### Recipe
 
@@ -235,7 +221,7 @@ def text_exercise_line():
 
     ### Exercise 1. One line or not?
 
-    Six tasks on two inputs, each 0 or 1. Put each one in a group: one straight line can split its 1s from its 0s, or no straight line can. Draw the four corners if it helps, or use the sliders.
+    Six tasks on two inputs, each 0 or 1. Put each one in a group: one straight line can split its 1s from its 0s, or no straight line can. Draw the four corners if it helps, or use the field above.
     """)
     return
 

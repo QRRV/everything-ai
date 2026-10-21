@@ -2,10 +2,11 @@
 # SPDX-License-Identifier: MIT
 """The course's building blocks to play with an idea (decision 1.10): gradient descent that you start and steer, a
 training run that you replay, a tokenizer that splits what you type, the table of equations that a small model learns
-from, and a picture that follows a slider at once. Python computes what the lesson teaches; the widget shows it and
-moves it (docs/ontwerp/wat-maakt-uitleg-mooi.md). Drawn only with the course's tokens, so light and dark both work, and all
-code ships with the course. A lesson gives each its own task and its labels in its own language: a building block
-replaces a still picture that shows the same, it is not added on top (lessjabloon, block 9)."""
+from, a picture that follows a slider at once, and one that follows a dot you drag over a plane of two values. Python
+computes what the lesson teaches; the widget shows it and moves it (docs/ontwerp/wat-maakt-uitleg-mooi.md). Drawn only
+with the course's tokens, so light and dark both work, and all code ships with the course. A lesson gives each its own
+task and its labels in its own language: a building block replaces a still picture that shows the same, it is not
+added on top (lessjabloon, block 9)."""
 from __future__ import annotations
 
 import math
@@ -739,3 +740,209 @@ class Explore(anywidget.AnyWidget):
     @value.setter
     def value(self, v: float) -> None:
         self.index = min(range(len(self.values)), key=lambda i: abs(self.values[i] - v))
+
+
+class Plane(anywidget.AnyWidget):
+    """A picture that follows a dot you drag over a plane of two values, at once: the first value left to right, the
+    second bottom to top, also with the arrow keys. Python draws the picture and the sentence under it for every point
+    of the grid, once, as Explore does for one slider; the widget flips between them and gives the point back to Python
+    when you pause. With `count`, a button colours every point of the plane by a whole number from Python, such as how
+    many inputs a neuron gets wrong there, in the colour of `count_role`: the whole plane at a glance. For the lessons
+    where two sliders move one picture: L.plane makes one."""
+
+    _esm = _SVG + r"""
+    function render({ model, el }) {
+      const L = model.get("labels"), dec = model.get("decimal"), role = model.get("role");
+      const xs = model.get("xs"), ys = model.get("ys"), nx = xs.length, ny = ys.length, counts = model.get("counts");
+      const root = el_("div", "ea-w ea-play ea-plane", el);
+      root.style.setProperty("--c", role ? `var(--ea-${role})` : "var(--ea-ink-2)"); root.style.setProperty("--ct", role ? `var(--ea-${role}-text)` : "var(--ea-ink)");
+      root.style.setProperty("--cc", `var(--ea-${model.get("count_role")})`);
+      if (L.task) { const task = el_("p", "ea-task", root); el_("span", "ea-kick", task, L.task_kick); task.insertAdjacentHTML("beforeend", L.task); }
+      const row = el_("div", "ea-plane-row", root), left = el_("div", "ea-plane-left", row), right = el_("div", "ea-plane-right", row);
+      const W = 236, H = 236, x0 = 40, x1 = 226, y0 = 8, y1 = 194;   // the square of the plane, with room for the ticks and names
+      const svg = mk("svg", { viewBox: `0 0 ${W} ${H}`, class: "ea-plane-svg", tabindex: 0, role: "slider", "aria-label": L.name,
+                              "aria-valuemin": 0, "aria-valuemax": nx * ny - 1 }, left);   // the point's number; aria-valuetext says its two values
+      const pic = el_("div", "ea-pic", right), said = el_("div", "ea-said", right);
+      const heard = el_("div", "ea-heard", root); heard.setAttribute("aria-live", "polite");
+      const X = i => x0 + i / Math.max(1, nx - 1) * (x1 - x0), Y = j => y1 - j / Math.max(1, ny - 1) * (y1 - y0);
+      const at = (vals, v) => vals.reduce((best, w, k) => Math.abs(w - v) < Math.abs(vals[best] - v) ? k : best, 0);
+      const show = (v, digits) => Number(v).toFixed(digits).replace(".", dec).replace("-", "−");
+      const shades = mk("g", {}, svg);
+      mk("rect", { x: x0, y: y0, width: x1 - x0, height: y1 - y0, class: "ea-plane-box" }, svg);
+      for (const v of model.get("xticks")) { const t = mk("text", { x: X(at(xs, v)), y: y1 + 16, "text-anchor": "middle" }, svg); t.textContent = show(v, model.get("xtick_digits")); }
+      for (const v of model.get("yticks")) { const t = mk("text", { x: x0 - 8, y: Y(at(ys, v)) + 4, "text-anchor": "end" }, svg); t.textContent = show(v, model.get("ytick_digits")); }
+      const nameX = mk("text", { x: (x0 + x1) / 2, y: H - 2, "text-anchor": "middle", class: "ea-plane-name" }, svg); nameX.textContent = L.x;
+      const nameY = mk("text", { x: 6, y: (y0 + y1) / 2 + 5, class: "ea-plane-name" }, svg); nameY.textContent = L.y;
+      const cross = mk("path", { class: "ea-plane-cross" }, svg);
+      const dot = mk("circle", { r: 7, class: "ea-plane-dot" }, svg);
+      let lit = false;
+      if (counts.length) {
+        const btn = el_("button", "ea-quiet", left, L.show), legend = el_("div", "ea-plane-legend", left);
+        const vals = model.get("count_values"), lo = Math.min(...vals), hi = Math.max(...vals);
+        const shade = v => hi > lo ? (v - lo) / (hi - lo) : 1;
+        btn.addEventListener("click", () => {
+          lit = !lit; btn.textContent = lit ? L.hide : L.show; shades.innerHTML = ""; legend.innerHTML = "";
+          if (!lit) return;
+          // one rect for each run of the same count in a row, in a solid colour with crisp edges: see-through rects
+          // that overlap by a hair drew darker lines, smoothed edges lighter ones
+          const w = (x1 - x0) / Math.max(1, nx - 1), h = (y1 - y0) / Math.max(1, ny - 1);
+          for (let j = 0; j < ny; j++) for (let i = 0, e; i < nx; i = e + 1) {
+            const v = counts[j * nx + i]; e = i; while (e + 1 < nx && counts[j * nx + e + 1] === v) e++;
+            const xa = Math.max(x0, X(i) - w / 2), xb = Math.min(x1, X(e) + w / 2), ya = Math.max(y0, Y(j) - h / 2), yb = Math.min(y1, Y(j) + h / 2);
+            const run = mk("rect", { x: xa, y: ya, width: xb - xa + (e < nx - 1 ? 0.3 : 0), height: yb - ya + (j > 0 ? 0.3 : 0), class: "ea-plane-shade" }, shades);
+            run.style.setProperty("--o", shade(v));
+          }
+          el_("span", "", legend, L.count);
+          for (const v of vals) { const s = el_("span", "ea-plane-swatch", legend); s.style.setProperty("--o", shade(v)); el_("span", "", legend, String(v)); }
+        });
+      }
+      let shown = -1;
+      function draw() {
+        const k = model.get("index"), i = k % nx, j = Math.floor(k / nx), f = model.get("frames")[k];
+        dot.setAttribute("cx", X(i)); dot.setAttribute("cy", Y(j));
+        cross.setAttribute("d", `M${x0} ${Y(j)}H${X(i)}V${y1}`);
+        svg.setAttribute("aria-valuenow", k); svg.setAttribute("aria-valuetext", `${L.x} ${show(xs[i], model.get("x_digits"))}, ${L.y} ${show(ys[j], model.get("y_digits"))}`);
+        if (k !== shown) { pic.innerHTML = f[0]; said.innerHTML = f[1]; shown = k; }
+      }
+      const spoken = node => {   // a formula said once, as its MathML says it, as in Explore
+        if (node.nodeType === 3) return node.textContent;
+        if (node.nodeType !== 1 || ["annotation", "style", "script"].includes(node.localName) || node.getAttribute("aria-hidden") === "true") return "";
+        if (node.localName === "marimo-tex") {
+          const m = node.shadowRoot && node.shadowRoot.querySelector(".katex-mathml");
+          return m ? spoken(m) : node.textContent.replace(/\|\|[(\[]|\|\|[)\]]/g, "");
+        }
+        return Array.from(node.childNodes, spoken).join("");
+      };
+      let wait = null, saying = null;
+      const say = (tries = 0) => {   // once KaTeX has drawn the formulas in the sentence, or after half a second
+        clearTimeout(saying); saying = null;
+        const drawing = [...said.querySelectorAll("marimo-tex")].some(t => !(t.shadowRoot && t.shadowRoot.querySelector(".katex-mathml")));
+        if (drawing && tries < 10) { saying = setTimeout(() => say(tries + 1), 50); return; }
+        heard.textContent = spoken(said);
+      };
+      const send = () => { clearTimeout(wait); wait = null; model.save_changes(); say(); };
+      function go(i, j) {
+        i = Math.max(0, Math.min(nx - 1, i)); j = Math.max(0, Math.min(ny - 1, j));
+        const k = j * nx + i; if (k === model.get("index")) return;
+        model.set("index", k); draw(); clearTimeout(wait); clearTimeout(saying); saying = null; wait = setTimeout(send, 150);
+      }
+      function pick(ev) {
+        const r = svg.getBoundingClientRect(), sx = (ev.clientX - r.left) / r.width * W, sy = (ev.clientY - r.top) / r.height * H;
+        go(Math.round((sx - x0) / (x1 - x0) * (nx - 1)), Math.round((y1 - sy) / (y1 - y0) * (ny - 1)));
+      }
+      svg.addEventListener("pointerdown", ev => { if (ev.button !== 0) return; svg.setPointerCapture(ev.pointerId); pick(ev); });
+      svg.addEventListener("pointermove", ev => { if (svg.hasPointerCapture(ev.pointerId)) pick(ev); });
+      const up = ev => { if (svg.hasPointerCapture(ev.pointerId)) svg.releasePointerCapture(ev.pointerId); if (wait) send(); };
+      svg.addEventListener("pointerup", up); svg.addEventListener("pointercancel", up);
+      svg.addEventListener("keydown", ev => {
+        const step = ev.shiftKey ? 5 : 1, k = model.get("index"), i = k % nx, j = Math.floor(k / nx);
+        const to = { ArrowLeft: [i - step, j], ArrowRight: [i + step, j], ArrowUp: [i, j + step], ArrowDown: [i, j - step],
+                     Home: [0, j], End: [nx - 1, j], PageUp: [i, ny - 1], PageDown: [i, 0] }[ev.key];
+        if (!to) return;
+        ev.preventDefault(); go(...to);
+      });
+      const redraw = () => { shown = -1; draw(); };
+      model.on("change:index", draw); model.on("change:frames", redraw);
+      draw();
+      return () => { if (wait) send(); clearTimeout(saying); model.off("change:index", draw); model.off("change:frames", redraw); };
+    }
+    export default { render };
+    """
+    _css = _PLAY_CSS + r"""
+.ea-plane .ea-pic figure { margin: 0.2rem 0 0.4rem !important; }
+.ea-plane .ea-said { color: var(--ea-ink); min-height: 1.6rem; }
+.ea-plane .ea-heard { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+.ea-plane .ea-said i, .ea-plane .ea-task i { font-family: "Source Serif var", "Source Serif 4", Georgia, serif; font-size: 1.08em; }
+.ea-plane .ea-num { font-variant-numeric: tabular-nums; }
+.ea-plane .c-data { color: var(--ea-data-text); font-weight: 600; }
+.ea-plane .c-param { color: var(--ea-param-text); font-weight: 600; }
+.ea-plane .c-pred { color: var(--ea-pred-text); font-weight: 600; }
+.ea-plane .c-residual { color: var(--ea-residual-text); font-weight: 600; }
+.ea-plane .c-loss { color: var(--ea-loss-text); font-weight: 600; }
+.ea-plane .c-grad { color: var(--ea-grad-text); font-weight: 600; }
+.ea-plane .c-hyper { color: var(--ea-hyper-text); font-weight: 600; }
+.ea-plane .ea-plane-row { display: flex; flex-wrap: wrap; gap: 0.6rem 1.2rem; align-items: flex-start; }
+.ea-plane .ea-plane-left { flex: 0 0 15rem; max-width: 15rem; }
+.ea-plane .ea-plane-right { flex: 1 1 19rem; min-width: 0; }
+.ea-plane .ea-plane-svg { touch-action: none; cursor: crosshair; user-select: none; }
+.ea-plane .ea-plane-svg:focus-visible { outline: 2px solid var(--ea-ink); outline-offset: 3px; border-radius: 4px; }
+.ea-plane .ea-plane-box { fill: none; stroke: var(--ea-axis); stroke-width: 1; }
+.ea-plane svg .ea-plane-name { font-family: "Source Serif var", "Source Serif 4", Georgia, serif; font-style: italic; font-size: 15px; font-weight: 600; fill: var(--ct); }
+.ea-plane .ea-plane-cross { fill: none; stroke: var(--c); stroke-width: 1; stroke-dasharray: 3 3; opacity: 0.7; }
+.ea-plane .ea-plane-dot { fill: var(--c); stroke: var(--ea-page); stroke-width: 2; }
+.ea-plane .ea-plane-shade { fill: color-mix(in srgb, var(--cc) calc(var(--o) * 100%), var(--ea-page)); shape-rendering: crispEdges; }
+.ea-plane .ea-plane-legend { font-size: 0.85rem; color: var(--ea-ink-2); margin-top: 0.35rem; min-height: 1.2rem; display: flex; flex-wrap: wrap; align-items: center; gap: 0.15rem 0.3rem; }
+.ea-plane .ea-plane-swatch { display: inline-block; width: 0.85rem; height: 0.85rem; border-radius: 2px; margin-left: 0.35rem; border: 1px solid var(--ea-line);
+  background: color-mix(in srgb, var(--cc) calc(var(--o) * 100%), var(--ea-page)); }
+.ea-plane button { margin-top: 0.4rem; }
+"""
+    labels = traitlets.Dict({}).tag(sync=True)
+    decimal = traitlets.Unicode(".").tag(sync=True)
+    role = traitlets.Unicode("param").tag(sync=True)
+    xs = traitlets.List([]).tag(sync=True)
+    ys = traitlets.List([]).tag(sync=True)
+    x_digits = traitlets.Int(1).tag(sync=True)
+    y_digits = traitlets.Int(1).tag(sync=True)
+    xticks = traitlets.List([]).tag(sync=True)
+    yticks = traitlets.List([]).tag(sync=True)
+    xtick_digits = traitlets.Int(0).tag(sync=True)
+    ytick_digits = traitlets.Int(0).tag(sync=True)
+    index = traitlets.Int(0).tag(sync=True)
+    frames = traitlets.List([]).tag(sync=True)
+    counts = traitlets.List([]).tag(sync=True)
+    count_values = traitlets.List([]).tag(sync=True)
+    count_role = traitlets.Unicode("loss").tag(sync=True)
+
+    LABELS = ("name", "x", "y")
+    MOST = 1271   # every frame is drawn up front and sent at once, as in Explore: 41 × 31 points
+
+    def __init__(self, frame, *, xs: list, ys: list, value: tuple | None = None, count=None, count_values: list | None = None,
+                 count_role: str = "loss", **kw):
+        """`frame(x, y)` gives the picture at the point, as SVG text, and the sentence under it, as HTML: a pair, or the
+        picture alone. `xs` and `ys` are the stops of the two values, each from small to large. With `count(x, y)`, a
+        whole number at every point, the button colours the plane by it; `count_values` are the numbers its legend
+        shows (by default those that occur), and labels then also give show, hide and count."""
+        super().__init__(**kw)
+        _need(self, self.LABELS + (("task_kick",) if self.labels.get("task") else ()) + (("show", "hide", "count") if count else ()))
+        for name, stops in (("xs", xs), ("ys", ys)):
+            if len(stops) < 2 or list(stops) != sorted(set(stops)):
+                raise ValueError(f"Plane needs 2 or more {name}, each larger than the one before: {stops}")
+        if len(xs) * len(ys) > self.MOST:
+            raise ValueError(f"Plane draws every point up front: give it at most {self.MOST} points, not {len(xs) * len(ys)}")
+        digits = lambda stops: max(max(0, -Decimal(str(v)).normalize().as_tuple().exponent) for v in stops)
+        self.xs, self.ys = list(xs), list(ys)
+        self.x_digits, self.y_digits = digits(xs), digits(ys)
+        if max(self.x_digits, self.y_digits) > 6:
+            raise ValueError("Plane shows its values with at most 6 decimals")
+        self.xticks, self.yticks = _ticks(xs), _ticks(ys)
+        self.xtick_digits, self.ytick_digits = digits(self.xticks), digits(self.yticks)
+        self.frames = [[f, ""] if isinstance(f, str) else list(f) for f in (frame(x, y) for y in ys for x in xs)]
+        widths = [int(w) for w in re.findall(r"<svg [^>]*max-width:(\d+)px", self.frames[0][0])]
+        if widths and max(widths) > Explore.WIDEST[1]:
+            raise ValueError(f"Plane shows a chart of {max(widths)} px beside the plane: at most {Explore.WIDEST[1]} px")
+        if count is not None:
+            self.counts = [int(count(x, y)) for y in ys for x in xs]
+            self.count_values = list(count_values) if count_values is not None else sorted(set(self.counts))
+            if count_role not in ("loss", "param", "pred", "data", "residual", "grad", "hyper"):
+                raise ValueError(f"Plane colours its counts in a role of the course, not {count_role}")
+            self.count_role = count_role
+        self.value = (xs[0], ys[0]) if value is None else value
+
+    @property
+    def value(self) -> tuple:
+        """The point the dot is at: (x, y)."""
+        return self.xs[self.index % len(self.xs)], self.ys[self.index // len(self.xs)]
+
+    @value.setter
+    def value(self, v: tuple) -> None:
+        i = min(range(len(self.xs)), key=lambda k: abs(self.xs[k] - v[0]))
+        j = min(range(len(self.ys)), key=lambda k: abs(self.ys[k] - v[1]))
+        self.index = j * len(self.xs) + i
+
+
+def _ticks(stops: list) -> list:
+    """The ticks along an axis of the plane: the whole numbers that are stops, when there are 2 to 7 of them, else its
+    ends and middle stop. Every tick is a stop, so the widget draws it where its value is."""
+    whole = [float(v) for v in range(math.ceil(stops[0] - 1e-9), math.floor(stops[-1] + 1e-9) + 1)
+             if any(abs(s - v) < 1e-9 for s in stops)]
+    return whole if 2 <= len(whole) <= 7 else [stops[0], stops[len(stops) // 2], stops[-1]]

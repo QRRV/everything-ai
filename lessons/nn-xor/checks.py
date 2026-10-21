@@ -2,7 +2,7 @@
 # SPDX-License-Identifier: CC-BY-SA-4.0 AND MIT-0
 """Checks of the lesson nn-xor: sorting tasks on two inputs into those one straight line can split and those it
 cannot, one update step of the perceptron, and the argument why no neuron fires for XOR. And the picture: the four
-corners of XOR with the line of a neuron whose weight and bias term move on sliders, and its mistakes."""
+corners of XOR with the line of a neuron whose weight and bias term move in a field (L.plane), and its mistakes."""
 import math
 import re
 
@@ -13,7 +13,7 @@ XOR = [0, 1, 1, 0]
 
 
 def fires(w2: float, b: float, w1: float = 1.0) -> list[int]:
-    # z rounded: the sliders move in tenths, and a corner exactly on the line (z = 0) must not fire by float noise
+    # z rounded: the field moves in tenths, and a corner exactly on the line (z = 0) must not fire by float noise
     return [1 if round(w1 * x1 + w2 * x2 + b, 9) > 0 else 0 for x1, x2 in CORNERS]
 
 
@@ -107,8 +107,8 @@ EXERCISES = {
         nudge={
             "and": {"en": "Only (1, 1) is a 1. Can a line cut off that one corner?", "nl": "Alleen (1, 1) is een 1. Kan een lijn die ene hoek afsnijden?"},
             "or": {"en": "Only (0, 0) is a 0. Can a line cut off that one corner?", "nl": "Alleen (0, 0) is een 0. Kan een lijn die ene hoek afsnijden?"},
-            "xor": {"en": "The 1s sit on one diagonal, the 0s on the other. Try it with the sliders.",
-                    "nl": "De enen liggen op de ene diagonaal, de nullen op de andere. Probeer het met de sliders."},
+            "xor": {"en": "The 1s sit on one diagonal, the 0s on the other. Try it in the field above.",
+                    "nl": "De enen liggen op de ene diagonaal, de nullen op de andere. Probeer het in het veld hierboven."},
             "nand": {"en": "Only (1, 1) is a 0. Can a line cut off that one corner?", "nl": "Alleen (1, 1) is een 0. Kan een lijn die ene hoek afsnijden?"},
             "first": {"en": "The 1s are the right side of the square. Is there a line between left and right?",
                       "nl": "De enen zijn de rechterkant van het vierkant. Past er een lijn tussen links en rechts?"},

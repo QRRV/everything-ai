@@ -130,44 +130,30 @@ def text_idea():
         """),
         L.watch_out("XOR is niet moeilijk voor een computer: `x1 != x2` doet het. Het is moeilijk voor één neuron, omdat een neuron maar één rechte lijn kan trekken."),
         mo.md(r"""
-        Probeer het zelf. De sliders zetten de tweede weight en de bias term van een neuron met een stap; de eerste weight is 1. De gevulde stippen zijn de inputs waar XOR 1 geeft, de open stippen die waar het 0 geeft. Een <span class="c-loss">paarse ring</span> markeert elke input die het neuron fout heeft. Krijg je alle ringen weg?
+        Probeer het zelf. In het veld zet het <span class="c-param">oranje punt</span> de tweede weight $w_2$ (van links naar rechts) en de bias term $b$ (van onder naar boven) van een neuron met een stap; de eerste weight is 1. Sleep het punt, of gebruik de pijltjestoetsen. In het plaatje zijn de gevulde stippen de inputs waar XOR 1 geeft, de open stippen die waar het 0 geeft, en een <span class="c-loss">paarse ring</span> markeert elke input die het neuron fout heeft.
         """),
     ])
     return
 
 
 @app.cell(hide_code=True)
-def slider_w2_cell():
-    slider_w2 = L.slider("w2", "w₂", start=1, low=-2, high=2, step=0.1, role="param")
-    slider_w2
-    return (slider_w2,)
-
-
-@app.cell(hide_code=True)
-def slider_b_cell():
-    slider_b = L.slider("bias", "b", start=-0.5, low=-2, high=1, step=0.1, role="param")
-    slider_b
-    return (slider_b,)
-
-
-@app.cell(hide_code=True)
-def picture_xor(slider_b, slider_w2):
-    _w2 = round(slider_w2.widget.value, 1)
-    _b = round(slider_b.widget.value, 1)
-    _wrong = C.mistakes(_w2, _b)
-    _which = ", ".join(str(_c) for _c in C.wrong_corners(_w2, _b))
-    mo.vstack([
-        mo.Html(C.picture(_w2, _b, {"title": "XOR en één rechte lijn",
-                                    "alt": f"De vier hoeken van het vierkant: (0, 1) en (1, 0) gevuld, (0, 0) en (1, 1) open, en de lijn waar z = 0 van een neuron met de weights 1 en {L.number(_w2, 1)} en de bias term {L.number(_b, 1)}. Een ring markeert elke hoek die het neuron fout heeft: {_which}."})),
-        mo.md(f"""Met $w_2$ = {L.number(_w2, 1)} en $b$ = {L.number(_b, 1)} heeft het neuron <span class="c-loss ea-num">{_wrong}</span> van de 4 inputs fout."""),
-    ])
+def plane_xor():
+    def _frame(_w2, _b):
+        _which = ", ".join(str(_c) for _c in C.wrong_corners(_w2, _b))
+        return (C.picture(_w2, _b, {"title": "XOR en één rechte lijn",
+                                     "alt": f"De vier hoeken van het vierkant: (0, 1) en (1, 0) gevuld, (0, 0) en (1, 1) open, en de lijn waar z = 0 van een neuron met de weights 1 en {L.number(_w2, 1)} en de bias term {L.number(_b, 1)}. Een ring markeert elke hoek die het neuron fout heeft: {_which}."}),
+                f"""Met $w_2$ = {L.number(_w2, 1)} en $b$ = {L.number(_b, 1)} heeft het neuron <span class="c-loss ea-num">{C.mistakes(_w2, _b)}</span> van de 4 inputs fout.""")
+    _plane = L.plane("w2-bias", "w₂", "b", _frame, [round(-2 + 0.1 * _i, 1) for _i in range(41)],
+                     [round(-2 + 0.1 * _j, 1) for _j in range(31)], start=(1, -0.5), task="Krijg je alle ringen weg?",
+                     count=C.mistakes, count_values=[0, 1, 2, 3], labels={"show": "Kleur elk punt naar het aantal fouten", "hide": "Verberg de kleuren", "count": "fout:"})
+    _plane
     return
 
 
 @app.cell(hide_code=True)
 def text_recipe():
     mo.md(r"""
-    Hoe je de sliders ook zet, er blijft minstens één ring over.
+    Waar je het punt ook zet, er blijft minstens één ring over. De knop laat dat voor elk punt tegelijk zien: geen stukje van het veld blijft zonder kleur.
 
     ### Recept
 
@@ -235,7 +221,7 @@ def text_exercise_line():
 
     ### Oefening 1. Eén lijn of niet?
 
-    Zes taken met twee inputs, elk 0 of 1. Zet elke taak in een groep: één rechte lijn kan de enen van de nullen scheiden, of geen rechte lijn kan dat. Teken de vier hoeken als dat helpt, of gebruik de sliders.
+    Zes taken met twee inputs, elk 0 of 1. Zet elke taak in een groep: één rechte lijn kan de enen van de nullen scheiden, of geen rechte lijn kan dat. Teken de vier hoeken als dat helpt, of gebruik het veld hierboven.
     """)
     return
 
