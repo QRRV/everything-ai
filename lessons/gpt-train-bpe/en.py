@@ -398,7 +398,50 @@ The course's GPT on characters wrote, from the same start:
 
 > {_chars['story'].replace(chr(10), chr(10) + '> ')}"""),
         ])
+    trained_run = _result
     _out
+    return (trained_run,)
+
+
+@app.cell(hide_code=True)
+def text_replay():
+    mo.md(f"""
+    ### The run, epoch by epoch
+
+    After every epoch, the run lets your GPT write {C.SNAP} tokens from *{C.START}*, drawn with the same seed each time. Here you go through those moments: the losses after every epoch, with a dashed line at the epoch you choose, and what the GPT wrote then.
+    """)
+    return
+
+
+@app.cell(hide_code=True)
+def replay_cell(trained_run):
+    _run = trained_run if isinstance(trained_run, dict) else C.last_run()
+    _mine = _run is not None and len(C.moments(_run)) >= 2   # the slider needs two moments
+    if _mine:
+        _note = ""
+    elif _run is not None and "snapshots" in _run:
+        _note = "*Your run kept what your GPT wrote after one epoch at most: too little to go through, so the course's run of the CPU plan stands in here. Train again without stopping to go through your own.*"
+    elif _run is not None:
+        _note = "*Your saved run was made before the lesson kept what the GPT wrote, so the course's run of the CPU plan stands in here. Train again to go through your own.*"
+    else:
+        _note = "*Until you train your own GPT, you go through the course's run of the CPU plan here.*"
+    if not _mine:
+        _run = C.course_run(C.REFERENCE["cpu"][0])
+    _labels = {"title": "Your run" if _mine else "The course's run", "x": "epoch", "y": "loss per token", "lang": L.lang, "guess": "guessing evenly",
+               "train": "training", "val": "validation", "after": "After epoch {epoch}", "said_val": "validation loss",
+               "alt": "The training and validation loss after every epoch, with a dashed line at the chosen epoch."}
+    _k = C.moments(_run)
+    _block = L.explore("replay", "epoch", lambda _v: C.replay_frame(_run, int(_v), _labels), start=_k[-1], values=_k, role="",
+                       task="After which epoch does the GPT stop making up words that do not exist?")
+    mo.vstack([mo.md(_note), _block]) if _note else _block
+    return
+
+
+@app.cell(hide_code=True)
+def text_replay_after():
+    mo.md(f"""
+    In the course's run (your own GPT may write other stories), the GPT writes sentences with names and with what people say from the first epoch on, but it also makes up words: *adventally* after epoch 1, *fationhone* after epoch 3, *hiddench* after epoch 7. A token is often a piece of a word, so the GPT can glue pieces together that do not belong together. Every moment is one draw of {C.SNAP} tokens: after epoch 4, it happens to make up none. From epoch 8 on, every word exists: the *legle* at the end of epoch 8 is where the {C.SNAP} tokens run out, and *legless* starts with the same three tokens. Meanwhile, the validation loss falls only a little more: from {C.number(C.REFERENCE['cpu'][0]['history'][7][2], 2, L.lang)} after epoch 8 to {C.number(C.REFERENCE['cpu'][0]['history'][9][2], 2, L.lang)} after epoch 10. Whether the story makes sense is another matter: Tim goes to the park with his mom and his mom.
+    """)
     return
 
 

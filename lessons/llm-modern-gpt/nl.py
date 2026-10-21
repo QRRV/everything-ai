@@ -444,6 +444,48 @@ def demo_train(train_button, result_gpt):
 
 
 @app.cell(hide_code=True)
+def text_replay():
+    mo.md(f"""
+    ### De run, epoch voor epoch
+
+    Na elke epoch laat de run je ModernGPT {C.B.SNAP} tokens schrijven vanaf *{C.B.START}*, telkens getrokken met dezelfde seed. Hier ga je door die momenten: de losses na elke epoch, met een gestippelde lijn bij de epoch die je kiest, en wat de ModernGPT toen schreef.
+    """)
+    return
+
+
+@app.cell(hide_code=True)
+def replay_cell(trained_run):
+    _run = trained_run if isinstance(trained_run, dict) else C.last_run()
+    _mine = _run is not None and len(C.B.moments(_run)) > 1
+    if _mine:
+        _note = ""
+    elif _run is None:
+        _note = "*Tot je je eigen ModernGPT traint, ga je hier door de run van de course met het CPU-plan.*"
+    elif "snapshots" not in _run:
+        _note = "*Je bewaarde run is gemaakt voordat de les bijhield wat de ModernGPT schreef, dus hier neemt de run van de course met het CPU-plan zijn plaats in. Train opnieuw om door je eigen run te gaan.*"
+    else:
+        _note = "*Je run bewaarde maar na minder dan twee epochs wat je ModernGPT schreef, te weinig om doorheen te gaan, dus hier neemt de run van de course met het CPU-plan zijn plaats in. Laat een nieuwe run langer lopen om door je eigen run te gaan.*"
+    if not _mine:
+        _run = C.B.course_run(C.runs("gqa")[0])
+    _labels = {"title": "Jouw run" if _mine else "De run van de course", "x": "epoch", "y": "loss per token", "lang": L.lang, "guess": "gelijk gokken",
+               "train": "training", "val": "validatie", "after": "Na epoch {epoch}", "said_val": "validation loss",
+               "alt": "De training loss en validation loss na elke epoch, met een gestippelde lijn bij de gekozen epoch."}
+    _k = C.B.moments(_run)
+    _block = L.explore("replay", "epoch", lambda _v: C.B.replay_frame(_run, int(_v), _labels), start=_k[-1], values=_k, role="",
+                       task="Na welke epoch sluiten de zinnen van de ModernGPT op elkaar aan?")
+    mo.vstack([mo.md(_note), _block]) if _note else _block
+    return
+
+
+@app.cell(hide_code=True)
+def text_replay_after():
+    mo.md(f"""
+    In de run van de course (je eigen ModernGPT schrijft misschien andere verhalen) verzint de ModernGPT na epoch 5 nog een woord (*velir*). Vanaf epoch 8 is elke zin goed Engels, en na epoch 9 en 10 sluiten de zinnen ook op elkaar aan: Tim gaat graag met zijn moeder naar het park, en op een dag maakt hij een wandeling in het park. Die twee verhalen beginnen hetzelfde: het model verandert steeds minder, dus een trekking met dezelfde seed slaat langer dezelfde weg in. De GPT op tokens van de course in [Project: je GPT op je eigen tokens](/course/open/gpt-train-bpe?lang=nl) sloot zijn {len(C.runs('gpt')[0]['history'])} epochs af met een validation loss van {C.number(C.runs('gpt')[0]['best'], 2, L.lang)}; de ModernGPT zit daar na epoch 4 al onder, op {C.number(C.runs('gqa')[0]['history'][3][2], 2, L.lang)}.
+    """)
+    return
+
+
+@app.cell(hide_code=True)
 def text_exercise_generate():
     mo.vstack([
         mo.md(r"""

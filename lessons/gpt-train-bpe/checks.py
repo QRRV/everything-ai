@@ -56,6 +56,7 @@ PLANS = {"gpu": {"sizes": (384, 6, 6, 256), "batch": 64, "epochs": 20},
          "cpu": {"sizes": (128, 4, 5, 128), "batch": 32, "epochs": 10}}
 START = "Once upon a time"
 LENGTH = 150   # tokens of the story the trained GPT writes
+SNAP = 50      # tokens of the story it writes after every epoch, for the replay of the run
 TAU = 0.8      # its temperature, as in gpt-generate
 
 # The pieces of the first 90% of the stories, the text the tokenizer trains on (tests/test_lessons.py checks them):
@@ -74,11 +75,23 @@ SPEEDUP = round(NAIVE_SECONDS / FAST_SECONDS / 10) * 10
 CHARS_PER_TOKEN = 3.382   # all stories, with the course's tokenizer
 # The course's runs of the demo's train with its own solutions, one thread, PyTorch 2.14.1: per run its seed, minutes,
 # best validation loss per token and per character, and the loss after every epoch (epoch, training, validation).
-# The GPU plan ran on the course's CPU, with 4 threads: nearly the numbers of a GPU, only slower.
+# The GPU plan ran on the course's CPU, with 4 threads: nearly the numbers of a GPU, only slower. The run of seed 0 on the
+# CPU plan was recorded again with what its GPT wrote after every epoch (snapper), with the same losses: its snapshots.
 REFERENCE = {
     "cpu": [
         {"seed": 0, "minutes": 34.9, "best": 2.4808, "best_epoch": 10, "best_per_char": 0.7371, "val_tokens": 147860, "val_chars": 497664,
-         "history": [(1, 4.7366, 3.6671), (2, 3.3982, 3.1972), (3, 3.0491, 2.9572), (4, 2.8306, 2.7916), (5, 2.6778, 2.6853), (6, 2.5548, 2.5963), (7, 2.4704, 2.534), (8, 2.4048, 2.4999), (9, 2.3663, 2.483), (10, 2.3465, 2.4808)]},
+         "history": [(1, 4.7366, 3.6671), (2, 3.3982, 3.1972), (3, 3.0491, 2.9572), (4, 2.8306, 2.7916), (5, 2.6778, 2.6853), (6, 2.5548, 2.5963), (7, 2.4704, 2.534), (8, 2.4048, 2.4999), (9, 2.3663, 2.483), (10, 2.3465, 2.4808)],
+         "snapshots": [
+          {"epoch": 1, "text": "Once upon a time, there was a small town. Tom had an idea! From he looked up with his mom.\n\"Mom I will his adventally.\"\nTim said, \"Lily and Lily put them. I can you to began to go, Sue"},
+          {"epoch": 2, "text": "Once upon a time, there was a small town. It was so excited! It was so happy that he had to soupen and be here about day. He had a great time to for him about the sun. He said, \"Max, what"},
+          {"epoch": 3, "text": "Once upon a time, there was a smellailing sort! \nAmy was walking in the fationhone. This squirrel played with the dog, and his friends were excited for the other. They all played together and all day long"},
+          {"epoch": 4, "text": "Once upon a time, there was a white cat named Max. Max. Max was very happy butterfly. He loved to play with its tail and see what was. One day, Max found a big tree. He was very excited. He was playing"},
+          {"epoch": 5, "text": "Once upon a time, there was a boy named Tim. Tim liked to side. One day, Tim saw a bounad on the grass with his toy car.\nTim wanted to help him find a ball. He asked his mom, \"Tim,"},
+          {"epoch": 6, "text": "Once upon a time, there was a girl named Mia. Mia liked to selfish the brace. One day, she found a big bag that could take it. The rock was very unulift. Lily wanted to play with the toys, but"},
+          {"epoch": 7, "text": "Once upon a time, there was a girl named Mia. Mia liked to a garden. One day, she saw a hiddench in pretty grass. She wanted to play with it, but she decided to put it on the car in the door.\n"},
+          {"epoch": 8, "text": "Once upon a time, there was a girl named Mia. Mia liked to a book. One day, she saw a harmless on something called her that she was a spill. She thought it was a very special thing from a legle"},
+          {"epoch": 9, "text": "Once upon a time, there was a little boy named Tim. Tim loved the bug. One day, he wanted to to play with his friends. When Spot would run, he saw a big pet tree and wanted to play with it. He rolled all"},
+          {"epoch": 10, "text": "Once upon a time, there was a little boy named Tim. Tim loved the storm. He would look for the wins and laugh until they would say anything.\nOne day, Tim got to the park with his mom and his mom. Tim"}]},
         {"seed": 1, "minutes": 34.3, "best": 2.4858, "best_epoch": 10, "best_per_char": 0.7386, "val_tokens": 147860, "val_chars": 497664,
          "history": [(1, 4.7322, 3.6772), (2, 3.4084, 3.2128), (3, 3.055, 2.9588), (4, 2.837, 2.7973), (5, 2.6754, 2.6796), (6, 2.5613, 2.6004), (7, 2.4704, 2.5397), (8, 2.4076, 2.5045), (9, 2.3656, 2.4887), (10, 2.3473, 2.4858)]},
         {"seed": 2, "minutes": 33.9, "best": 2.4652, "best_epoch": 10, "best_per_char": 0.7324, "val_tokens": 147860, "val_chars": 497664,
@@ -153,9 +166,10 @@ def pieces_picture(labels: dict) -> str:
             f'<title>{html.escape(text_)}</title>' + "".join(parts) + "</svg></figure>")
 
 
-def history_picture(history: list, labels: dict, epochs: int | None = None) -> str:
+def history_picture(history: list, labels: dict, epochs: int | None = None, mark: int | None = None) -> str:
     """The loss per token of the run after every epoch: training solid, validation dashed and open, as in
-    gpt-train-chars; a grey line at the loss of guessing evenly among the 1,257 ids."""
+    gpt-train-chars; a grey line at the loss of guessing evenly among the 1,257 ids. With `mark`, a dashed line at that
+    epoch, for the replay of the run."""
     from everything_ai import chart
     n = max(epochs or 0, history[-1]["epoch"], 2)
     xs = [hist["epoch"] for hist in history]
@@ -164,6 +178,8 @@ def history_picture(history: list, labels: dict, epochs: int | None = None) -> s
     panel = chart.Panel((0.5, n + 0.5), (math.floor(low * 2 - 0.4) / 2, 8.0), title=labels["title"], xlabel=labels["x"], ylabel=labels["y"])
     panel.line([0.5, n + 0.5], [guess] * 2, "ink-3", 1, dashed=True)
     panel.text(n + 0.4, guess + 0.3, labels["guess"], "ink-3", "end")
+    if mark is not None:   # under the losses, and below the key and the grey line's name, so it crosses no text
+        panel.line([mark, mark], [math.floor(low * 2 - 0.4) / 2, 5.8], "ink-2", 1.2, dashed=True)
     panel.line(xs, [hist["train_loss"] for hist in history], "loss", 2.4)
     panel.points(xs, [hist["train_loss"] for hist in history], "loss")
     panel.line(xs, [hist["val_loss"] for hist in history], "loss", 1.6, dashed=True)
@@ -525,9 +541,12 @@ def _tools(own: bool) -> dict | str:
     return run.names
 
 
-def write(model, merges: dict, block: int, seed: int = 0, decode=None, encode=None) -> str:
-    """A story of LENGTH tokens from START, drawn with the probabilities of `model` at temperature TAU, as in
-    gpt-generate; it ends early at an end-of-text. With the learner's encode and decode when given."""
+def write(model, merges: dict, block: int, seed: int = 0, decode=None, encode=None, length: int = LENGTH) -> str:
+    """A story of `length` tokens from START, drawn with the probabilities of `model` at temperature TAU, as in
+    gpt-generate; it ends early at an end-of-text. With the learner's encode and decode when given. On the device of
+    the model, which is left in the mode it was in: during a run, the training goes on as before. The tensors the GPT
+    makes itself, such as its places, go to that device too, as in the trainer (T._OnDevice); its numbers come to the
+    CPU before they become float64, which an Apple GPU does not have."""
     import numpy as np
     tools = None if decode and encode else _tools(False)
     decode = decode or tools["decode"]
@@ -535,16 +554,69 @@ def write(model, merges: dict, block: int, seed: int = 0, decode=None, encode=No
     end_id = 256 + len(merges)
     rng = np.random.default_rng(seed)
     ids = encode(START, merges)
+    device, was = next(model.parameters()).device, model.training
     model.eval()
-    with torch.no_grad():
-        for _ in range(LENGTH):
-            logits = model(torch.tensor([ids[-block:]]))[0, -1].double()
-            p = torch.softmax(logits / TAU, dim=0).numpy()
-            j = int(rng.choice(len(p), p=p / p.sum()))
-            if j == end_id:
-                break
-            ids.append(j)
+    try:
+        with torch.no_grad(), torch.device(device):
+            for _ in range(length):
+                logits = model(torch.tensor([ids[-block:]], device=device))[0, -1].cpu().double()
+                p = torch.softmax(logits / TAU, dim=0).numpy()
+                j = int(rng.choice(len(p), p=p / p.sum()))
+                if j == end_id:
+                    break
+                ids.append(j)
+    finally:
+        model.train(was)
     return decode(ids, merges)
+
+
+def written(text: str) -> str:
+    """What a model wrote, in Markdown for the sentence under a picture: every line in italics on its own line, in the
+    serif of a quote (<i>, as play.Explore writes it), with nothing in it that Markdown or KaTeX would read as a sign,
+    and no spaces in front that would make it code: also no link from an address (: and .), no ^superscript^ and
+    no ++key++."""
+    signs = {"&": "&amp;", "<": "&lt;", ">": "&gt;", **{c: f"&#{ord(c)};" for c in "\\`*_$[]|~#^+:."}}
+    lines = ["".join(signs.get(c, c) for c in line.strip()) for line in text.split("\n") if line.strip()]
+    return "  \n".join(f"<i>{line}</i>" for line in lines) or "…"
+
+
+def snapper(trainer, model, merges: dict, block: int, seed: int, decode, encode):
+    """What the GPT writes after every epoch of a run, for its replay: `snap()` lets it write SNAP tokens once the
+    Trainer has one more epoch in its history, and keeps them in `snap.kept` with the epoch. Its own random numbers,
+    so the training stays the same; a story that fails keeps None and the run goes on."""
+    def snap():
+        while len(snap.kept) < len(trainer.history):
+            try:
+                text_ = write(model, merges, block, seed, decode, encode, length=SNAP)
+            except Exception:
+                text_ = None
+            snap.kept.append({"epoch": int(trainer.history[len(snap.kept)]["epoch"]), "text": text_})
+    snap.kept = []
+    return snap
+
+
+def course_run(ref: dict) -> dict:
+    """A run of the course's (REFERENCE) in the form train gives a run, for its replay: the history as dicts."""
+    return {"epochs": len(ref["history"]), "snapshots": ref.get("snapshots") or [],
+            "history": [{"epoch": e, "train_loss": tr, "val_loss": va} for e, tr, va in ref["history"]]}
+
+
+def moments(run: dict) -> list:
+    """The epochs of a run after which the GPT wrote something, for its replay."""
+    return [s["epoch"] for s in run.get("snapshots") or [] if s.get("text") is not None]
+
+
+def replay_frame(run: dict, epoch: int, labels: dict) -> tuple:
+    """One epoch of a run, for its replay (L.explore): the losses after every epoch as history_picture draws them, with
+    a dashed line at `epoch`; and what the GPT wrote after it, from START. `labels`: those of history_picture, and
+    "after" ({epoch}) and "said_val", the name of the validation loss in the sentence."""
+    history = run["history"]
+    svg = history_picture(history, labels, run.get("epochs"), mark=epoch)
+    snap = next(s for s in run["snapshots"] if s["epoch"] == epoch)
+    val = next(h["val_loss"] for h in history if h["epoch"] == epoch)
+    lang = labels.get("lang", "en")
+    said = f"**{labels['after'].format(epoch=epoch)}** · {labels['said_val']} {number(val, 2, lang)}"
+    return svg, f"{said}\n\n{written(snap['text'])}"
 
 
 def train(show, seed: int = 0, epochs: int | None = None) -> dict | str | None:
@@ -586,8 +658,10 @@ def train(show, seed: int = 0, epochs: int | None = None) -> dict | str | None:
     steps = len(trainer.train_loader)
     windows = len(getattr(trainer.train_loader, "dataset", [])) or steps * p["batch"]
     state = {"step": 0, "shown": 0.0, "start": time.time()}
+    snap = snapper(trainer, model, merges, block, seed, tools["decode"], tools["encode"])
 
     def step():
+        snap()   # the epoch before has ended: what the GPT writes now
         state["step"] += 1
         now = time.time()
         if now - state["shown"] >= 2 or state["step"] == 1:
@@ -609,6 +683,8 @@ def train(show, seed: int = 0, epochs: int | None = None) -> dict | str | None:
         return "memory" if "out of memory" in str(e).lower() else "run"
     except Exception:
         return "run"
+    snap()   # after the last epoch, or after a stop: an epoch in the history without a story has had no step since it
+    #          ended, so the model is still the one at its end
     history = [{k: int(v) if k == "epoch" else float(v) for k, v in hist.items()} for hist in trainer.history]
     if not history or not fresh.exists():
         fresh.unlink(missing_ok=True)
@@ -620,7 +696,7 @@ def train(show, seed: int = 0, epochs: int | None = None) -> dict | str | None:
               "params": p["params"], "seed": seed, "stopped": stopped, "minutes": (time.time() - start) / 60,
               "history": history, "merges": [[a, b] for (a, b) in merges], "stand_ins": stand_ins,
               "tokens": len(ids), "chars": len(text()), "val_tokens": val_tokens, "val_chars": val_chars,
-              "best": best["val_loss"], "best_epoch": best["epoch"],
+              "best": best["val_loss"], "best_epoch": best["epoch"], "snapshots": snap.kept,
               "best_per_char": per_char(best["val_loss"], val_tokens, val_chars)}
     try:
         model = tools["GPT"](VOCAB, d, h, n_layers, block)

@@ -444,6 +444,48 @@ def demo_train(train_button, result_gpt):
 
 
 @app.cell(hide_code=True)
+def text_replay():
+    mo.md(f"""
+    ### The run, epoch by epoch
+
+    After every epoch, the run lets your ModernGPT write {C.B.SNAP} tokens from *{C.B.START}*, drawn with the same seed each time. Here you go through those moments: the losses after every epoch, with a dashed line at the epoch you choose, and what the ModernGPT wrote then.
+    """)
+    return
+
+
+@app.cell(hide_code=True)
+def replay_cell(trained_run):
+    _run = trained_run if isinstance(trained_run, dict) else C.last_run()
+    _mine = _run is not None and len(C.B.moments(_run)) > 1
+    if _mine:
+        _note = ""
+    elif _run is None:
+        _note = "*Until you train your own ModernGPT, you go through the course's run of the CPU plan here.*"
+    elif "snapshots" not in _run:
+        _note = "*Your saved run was made before the lesson kept what the ModernGPT wrote, so the course's run of the CPU plan stands in here. Train again to go through your own.*"
+    else:
+        _note = "*Your run kept what your ModernGPT wrote after fewer than two epochs, too few to go through, so the course's run of the CPU plan stands in here. Let a new run go on longer to go through your own.*"
+    if not _mine:
+        _run = C.B.course_run(C.runs("gqa")[0])
+    _labels = {"title": "Your run" if _mine else "The course's run", "x": "epoch", "y": "loss per token", "lang": L.lang, "guess": "guessing evenly",
+               "train": "training", "val": "validation", "after": "After epoch {epoch}", "said_val": "validation loss",
+               "alt": "The training and validation loss after every epoch, with a dashed line at the chosen epoch."}
+    _k = C.B.moments(_run)
+    _block = L.explore("replay", "epoch", lambda _v: C.B.replay_frame(_run, int(_v), _labels), start=_k[-1], values=_k, role="",
+                       task="After which epoch do the ModernGPT's sentences follow from each other?")
+    mo.vstack([mo.md(_note), _block]) if _note else _block
+    return
+
+
+@app.cell(hide_code=True)
+def text_replay_after():
+    mo.md(f"""
+    In the course's run (your own ModernGPT may write other stories), the ModernGPT still makes up a word after epoch 5 (*velir*). From epoch 8 on every sentence is correct English, and after epochs 9 and 10 the sentences also follow from each other: Tim loves to go to the park with his mom, and one day he goes for a walk in the park. Those two stories start the same way: the model changes less and less, so a draw with the same seed takes the same turns for longer. The course's GPT on tokens of [Project: your GPT on your own tokens](/course/open/gpt-train-bpe?lang=en) ended its {len(C.runs('gpt')[0]['history'])} epochs at a validation loss of {C.number(C.runs('gpt')[0]['best'], 2, L.lang)}; the ModernGPT is already below that after epoch 4, at {C.number(C.runs('gqa')[0]['history'][3][2], 2, L.lang)}.
+    """)
+    return
+
+
+@app.cell(hide_code=True)
 def text_exercise_generate():
     mo.vstack([
         mo.md(r"""

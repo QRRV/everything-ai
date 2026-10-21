@@ -522,14 +522,7 @@ def quote(story: str) -> str:
     return "\n>\n".join("> " + part.strip() for part in re.split(r"\n+", safe) if part.strip())
 
 
-def written(text: str) -> str:
-    """What a model wrote, in Markdown for the sentence under a picture: every line in italics on its own line, in the
-    serif of a quote (<i>, as play.Explore writes it), with nothing in it that Markdown or KaTeX would read as a sign,
-    and no spaces in front that would make it code: also no link from an address (: and .), no ^superscript^ and
-    no ++key++."""
-    signs = {"&": "&amp;", "<": "&lt;", ">": "&gt;", **{c: f"&#{ord(c)};" for c in "\\`*_$[]|~#^+:."}}
-    lines = ["".join(signs.get(c, c) for c in line.strip()) for line in text.split("\n") if line.strip()]
-    return "  \n".join(f"<i>{line}</i>" for line in lines) or "…"
+written = B.written   # what a model wrote, safe in the sentence under a picture (gpt-train-bpe)
 
 
 def moments(history: list) -> list:

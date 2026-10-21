@@ -398,7 +398,50 @@ De GPT van de course op tekens schreef, met hetzelfde begin:
 
 > {_chars['story'].replace(chr(10), chr(10) + '> ')}"""),
         ])
+    trained_run = _result
     _out
+    return (trained_run,)
+
+
+@app.cell(hide_code=True)
+def text_replay():
+    mo.md(f"""
+    ### De run, epoch voor epoch
+
+    Na elke epoch laat de run je GPT {C.SNAP} tokens schrijven vanaf *{C.START}*, telkens getrokken met dezelfde seed. Hier ga je door die momenten: de losses na elke epoch, met een gestippelde lijn bij de epoch die je kiest, en wat de GPT toen schreef.
+    """)
+    return
+
+
+@app.cell(hide_code=True)
+def replay_cell(trained_run):
+    _run = trained_run if isinstance(trained_run, dict) else C.last_run()
+    _mine = _run is not None and len(C.moments(_run)) >= 2   # de slider heeft twee momenten nodig
+    if _mine:
+        _note = ""
+    elif _run is not None and "snapshots" in _run:
+        _note = "*In je run is wat je GPT schreef hooguit na één epoch bewaard: te weinig om doorheen te gaan, dus hier neemt de run van de course met het CPU-plan zijn plaats in. Train opnieuw zonder te stoppen om door je eigen run te gaan.*"
+    elif _run is not None:
+        _note = "*Je bewaarde run is gemaakt voordat de les bijhield wat de GPT schreef, dus hier neemt de run van de course met het CPU-plan zijn plaats in. Train opnieuw om door je eigen run te gaan.*"
+    else:
+        _note = "*Tot je je eigen GPT traint, ga je hier door de run van de course met het CPU-plan.*"
+    if not _mine:
+        _run = C.course_run(C.REFERENCE["cpu"][0])
+    _labels = {"title": "Jouw run" if _mine else "De run van de course", "x": "epoch", "y": "loss per token", "lang": L.lang, "guess": "gelijk gokken",
+               "train": "training", "val": "validatie", "after": "Na epoch {epoch}", "said_val": "validation loss",
+               "alt": "De training loss en validation loss na elke epoch, met een gestippelde lijn bij de gekozen epoch."}
+    _k = C.moments(_run)
+    _block = L.explore("replay", "epoch", lambda _v: C.replay_frame(_run, int(_v), _labels), start=_k[-1], values=_k, role="",
+                       task="Na welke epoch verzint de GPT geen woorden meer die niet bestaan?")
+    mo.vstack([mo.md(_note), _block]) if _note else _block
+    return
+
+
+@app.cell(hide_code=True)
+def text_replay_after():
+    mo.md(f"""
+    In de run van de course (je eigen GPT schrijft misschien andere verhalen) schrijft de GPT vanaf de eerste epoch zinnen met namen en met wat mensen zeggen, maar hij verzint ook woorden: *adventally* na epoch 1, *fationhone* na epoch 3, *hiddench* na epoch 7. Een token is vaak een stuk van een woord, dus de GPT kan stukken aan elkaar plakken die niet bij elkaar horen. Elk moment is één trekking van {C.SNAP} tokens: na epoch 4 verzint hij toevallig geen enkel woord. Vanaf epoch 8 bestaat elk woord: bij de *legle* aan het eind van epoch 8 zijn de {C.SNAP} tokens op, en *legless* begint met dezelfde drie tokens. De validation loss daalt intussen nog maar een beetje: van {C.number(C.REFERENCE['cpu'][0]['history'][7][2], 2, L.lang)} na epoch 8 naar {C.number(C.REFERENCE['cpu'][0]['history'][9][2], 2, L.lang)} na epoch 10. Of het verhaal klopt, is iets anders: Tim gaat naar het park met zijn moeder en zijn moeder.
+    """)
     return
 
 

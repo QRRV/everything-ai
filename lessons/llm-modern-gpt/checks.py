@@ -582,6 +582,8 @@ CHANGES = ["gpt", "rms", "swiglu", "rope", "gqa"]
 # with seeds 0, 1 and 2, and the ModernGPT on the GPU plan with seed 0, which ran on the course's CPU with 3 threads.
 # Per run its seed, minutes, parameters, best validation loss per token and per character, and the loss after every
 # epoch (epoch, training, validation). "gpt" is the GPT of gpt-train-bpe: its runs are in that lesson.
+# The ModernGPT of seed 0 on the CPU plan (gqa) was recorded again with what it wrote after every epoch (snapper of
+# gpt-train-bpe), with the same losses: its snapshots.
 REFERENCE = {
     "cpu": {
         "rms": [
@@ -610,7 +612,18 @@ REFERENCE = {
         ],
         "gqa": [
             {"seed": 0, "minutes": 49.7, "params": 1225577, "best": 2.2415, "best_epoch": 10, "best_per_char": 0.666,
-             "history": [(1, 4.2851, 3.183), (2, 2.9237, 2.7532), (3, 2.5787, 2.521), (4, 2.3754, 2.4085), (5, 2.2601, 2.341), (6, 2.1636, 2.2976), (7, 2.0969, 2.266), (8, 2.0397, 2.2494), (9, 2.0018, 2.242), (10, 1.9795, 2.2415)]},
+             "history": [(1, 4.2851, 3.183), (2, 2.9237, 2.7532), (3, 2.5787, 2.521), (4, 2.3754, 2.4085), (5, 2.2601, 2.341), (6, 2.1636, 2.2976), (7, 2.0969, 2.266), (8, 2.0397, 2.2494), (9, 2.0018, 2.242), (10, 1.9795, 2.2415)],
+             "snapshots": [
+              {"epoch": 1, "text": "Once upon a time, there was a boy named Tim. Tim liked to turten time, but he was not a fight. It was con what he wanted to do. He wanted to help himself.\nTim went to the warm and came to make"},
+              {"epoch": 2, "text": "Once upon a time, there was a boy named Tim. Tim liked to a long. He had no friends. He was wise for his mom where how he could make it. They all played with his boat and had fun.\nOne day, Tim and Sue"},
+              {"epoch": 3, "text": "Once upon a time, there was a smelly boy named Tom.\nTom and Sam were playing with the big, scary dog. They shared even more knocked in the clumser. Tom and Sue were very surprised. They had fun"},
+              {"epoch": 4, "text": "Once upon a time, there was a smart dog named Spot. Spot was very selfish. He loved to play with his friends. From that day on, Spot and Max felt very happy to laugh.\nOne day, Spot was playing in the"},
+              {"epoch": 5, "text": "Once upon a time, there was a bald man who loved to eat velir. One day, he noticed a little bird where people came to life! They were very sad and angry.\nThe spider thought, \"I know"},
+              {"epoch": 6, "text": "Once upon a time, there was a little boy named Tim. Tim loved to wear an air in the front of paper until him happened. One day, Tim saw a big rock on the ground. He wanted to slide down the rock and"},
+              {"epoch": 7, "text": "Once upon a time, there was a kitten named Tom. Tom and Sam big went to play with all the his friends. They liked to swing high in the sky.\nOne day, Tom found a big box in the park. He was very happy and"},
+              {"epoch": 8, "text": "Once upon a time, there was a little boy named Tim. Tim loved to read books. One day, he saw a big red balloon near his house. He was very sad.\nTim decided to help his mom. \"What's wr"},
+              {"epoch": 9, "text": "Once upon a time, there was a little boy named Tim. Tim loved to go to the park with his mom.\nOne day, Tim was going for a walk in the park. He saw a girl named Sue. Sue was sad and asked, \"Did"},
+              {"epoch": 10, "text": "Once upon a time, there was a little boy named Tim. Tim loved to go to the park with his mom.\nOne day, Tim was going for a walk in the park. He saw a toy snake with a cabin on it. He thought"}]},
             {"seed": 1, "minutes": 49.0, "params": 1225577, "best": 2.2456, "best_epoch": 10, "best_per_char": 0.6672,
              "history": [(1, 4.2776, 3.1658), (2, 2.9067, 2.7426), (3, 2.5711, 2.5209), (4, 2.3784, 2.4097), (5, 2.2515, 2.3414), (6, 2.1646, 2.2959), (7, 2.0925, 2.2687), (8, 2.039, 2.2514), (9, 1.9942, 2.246), (10, 1.9762, 2.2456)]},
             {"seed": 2, "minutes": 42.7, "params": 1225577, "best": 2.2397, "best_epoch": 10, "best_per_char": 0.6654,
@@ -756,8 +769,10 @@ def train(show, seed: int = 0, epochs: int | None = None, make=None) -> dict | s
         return "run"
     steps = len(trainer.train_loader)
     state = {"step": 0, "shown": 0.0, "start": time.time()}
+    snap = B.snapper(trainer, model, merges, block, seed, tools["decode"], tools["encode"])
 
     def step():
+        snap()   # the epoch before has ended: what the GPT writes now
         state["step"] += 1
         now = time.time()
         if now - state["shown"] >= 2 or state["step"] == 1:
@@ -780,6 +795,8 @@ def train(show, seed: int = 0, epochs: int | None = None, make=None) -> dict | s
         return "memory" if "out of memory" in str(e).lower() else "run"
     except Exception:
         return "run"
+    snap()   # after the last epoch, or after a stop: an epoch in the history without a story has had no step since it
+    #          ended, so the model is still the one at its end
     history = [{k: int(v) if k == "epoch" else float(v) for k, v in hist.items()} for hist in trainer.history]
     if not history or not fresh.exists():
         fresh.unlink(missing_ok=True)
@@ -791,7 +808,7 @@ def train(show, seed: int = 0, epochs: int | None = None, make=None) -> dict | s
               "epochs": epochs, "params": p["params"], "seed": seed, "stopped": stopped, "minutes": (time.time() - start) / 60,
               "history": history, "merges": [[a, b] for (a, b) in merges], "stand_ins": stand_ins,
               "tokens": len(ids), "chars": len(B.text()), "val_tokens": val_tokens, "val_chars": val_chars,
-              "best": best["val_loss"], "best_epoch": best["epoch"],
+              "best": best["val_loss"], "best_epoch": best["epoch"], "snapshots": snap.kept,
               "best_per_char": B.per_char(best["val_loss"], val_tokens, val_chars)}
     try:
         model = make(tools, p)
