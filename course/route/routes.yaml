@@ -273,6 +273,7 @@ routes:
   - llm-safety-eval
   - llm-model-card
   - {id: llm-same-on-open-model, extra: true}
+  - {id: llm-reasoning-idea, extra: true}
   - {id: llm-open-recipe-full-run, extra: true}
   - {id: llm-quantize, extra: true}
   - res-formula-to-code

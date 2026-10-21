@@ -1,0 +1,46 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: llm-reasoning-idea
+minutes: 45
+title:
+  en: "How an LLM reasons: written steps and test-time compute"
+  nl: "Hoe een LLM redeneert: tussenstappen en test-time compute"
+goal:
+  en: "get steps out of a model with worked examples, read its final answer with a program, and tell voting from pass@k."
+  nl: "een model zijn tussenstappen laten schrijven met uitgewerkte voorbeelden, zijn eindantwoord met een programma lezen, en stemmen van pass@k onderscheiden."
+summary:
+  - en: "One token is one forward pass. Writing steps before the answer gives a model more computation for a question and smaller problems: with four worked examples, Qwen3-0.6B-Base got about half of the course's GSM8K questions right, against a few without the steps."
+    nl: "Eén token is één forward pass. Tussenstappen vóór het antwoord geven een model meer rekenwerk voor een vraag en kleinere problemen: met vier uitgewerkte voorbeelden had Qwen3-0.6B-Base ongeveer de helft van de GSM8K-vragen van de course goed, tegen een paar zonder de stappen."
+  - en: "Voting and pass@k spend more samples: voting takes the answer that comes most often, pass@k counts whether any is right, and needs a check that knows the answer."
+    nl: "Stemmen en pass@k besteden meer samples: stemmen neemt het antwoord dat het vaakst komt, pass@k telt of er één goed is, en heeft een check nodig die het antwoord kent."
+  - en: "The rules of the checker and the number of questions decide what a score means, and written steps need not be the real reason for an answer."
+    nl: "De regels van de checker en het aantal vragen bepalen wat een score betekent, en tussenstappen hoeven niet de echte reden voor een antwoord te zijn."
+can_now:
+  - en: "write a few-shot prompt with worked steps"
+    nl: "een few-shot prompt met uitgewerkte stappen schrijven"
+    by: few-shot-prompt
+  - en: "read a model's final answer with a program, and say how its rules change a score"
+    nl: "het eindantwoord van een model met een programma lezen, en zeggen hoe de regels een score veranderen"
+    by: read-answer
+  - en: "take a majority vote over sampled answers, and tell it from pass@k"
+    nl: "stemmen over gesamplede antwoorden, en dat van pass@k onderscheiden"
+    by: majority-vote
+  - en: "explain why written steps help, and why they need not be the reason for the answer"
+    nl: "uitleggen waarom tussenstappen helpen, en waarom ze niet de reden voor het antwoord hoeven te zijn"
+    by: faithful
+further_reading:
+  - en: "Jason Wei and others (2022), *Chain-of-Thought Prompting Elicits Reasoning in Large Language Models*, arXiv:2201.11903: worked steps in the prompt"
+    nl: "Jason Wei en anderen (2022), *Chain-of-Thought Prompting Elicits Reasoning in Large Language Models*, arXiv:2201.11903: uitgewerkte stappen in de prompt"
+  - en: "Takeshi Kojima and others (2022), *Large Language Models are Zero-Shot Reasoners*, arXiv:2205.11916: \"Let's think step by step\""
+    nl: "Takeshi Kojima en anderen (2022), *Large Language Models are Zero-Shot Reasoners*, arXiv:2205.11916: \"Let's think step by step\""
+  - en: "Xuezhi Wang and others (2022), *Self-Consistency Improves Chain of Thought Reasoning in Language Models*, arXiv:2203.11171: voting over chains of thought"
+    nl: "Xuezhi Wang en anderen (2022), *Self-Consistency Improves Chain of Thought Reasoning in Language Models*, arXiv:2203.11171: stemmen over chains of thought"
+  - en: "Karl Cobbe and others (2021), *Training Verifiers to Solve Math Word Problems*, arXiv:2110.14168: GSM8K, and a verifier that picks the best of many answers"
+    nl: "Karl Cobbe en anderen (2021), *Training Verifiers to Solve Math Word Problems*, arXiv:2110.14168: GSM8K, en een verifier die het beste van veel antwoorden kiest"
+  - en: "Guhao Feng and others (2023), *Towards Revealing the Mystery behind Chain of Thought: A Theoretical Perspective*, arXiv:2305.15408: why a model of fixed depth needs the steps"
+    nl: "Guhao Feng en anderen (2023), *Towards Revealing the Mystery behind Chain of Thought: A Theoretical Perspective*, arXiv:2305.15408: waarom een model van vaste diepte de stappen nodig heeft"
+  - en: "Miles Turpin and others (2023), *Language Models Don't Always Say What They Think*, arXiv:2305.04388, and Tamera Lanham and others (2023), *Measuring Faithfulness in Chain-of-Thought Reasoning*, arXiv:2307.13702: whether the steps are the reason"
+    nl: "Miles Turpin en anderen (2023), *Language Models Don't Always Say What They Think*, arXiv:2305.04388, en Tamera Lanham en anderen (2023), *Measuring Faithfulness in Chain-of-Thought Reasoning*, arXiv:2307.13702: of de stappen de reden zijn"
+  - en: "Charlie Snell and others (2024), *Scaling LLM Test-Time Compute Optimally can be More Effective than Scaling Model Parameters*, arXiv:2408.03314: how to spend test-time compute"
+    nl: "Charlie Snell en anderen (2024), *Scaling LLM Test-Time Compute Optimally can be More Effective than Scaling Model Parameters*, arXiv:2408.03314: hoe je test-time compute besteedt"

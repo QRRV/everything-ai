@@ -184,6 +184,18 @@ SPDX-FileCopyrightText = "2026 Everything AI contributors (the course's run; ans
 SPDX-License-Identifier = "CC-BY-4.0"
 
 [[annotations]]
+path = "data/gsm8k-sample.jsonl"
+precedence = "override"
+SPDX-FileCopyrightText = "Copyright (c) 2021 OpenAI (GSM8K, grade-school-math; a subset made for Everything AI)"
+SPDX-License-Identifier = "MIT"
+
+[[annotations]]
+path = "data/course-reasoning-qwen.json"
+precedence = "override"
+SPDX-FileCopyrightText = "2026 Everything AI contributors (the course's run; answers written by Qwen3-0.6B-Base of Alibaba Cloud, Apache-2.0, to questions of GSM8K, Copyright (c) 2021 OpenAI, MIT)"
+SPDX-License-Identifier = "CC-BY-4.0"
+
+[[annotations]]
 path = "data/README.md"
 precedence = "aggregate"
 SPDX-FileCopyrightText = "2026 Everything AI contributors"

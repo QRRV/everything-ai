@@ -1,0 +1,1863 @@
+{
+ "model": "Qwen/Qwen3-0.6B-Base",
+ "revision": "da87bfb608c14b7cf20ba1ce41287e8de496c0cd",
+ "dtype": "float32",
+ "machine": "Intel(R) Xeon(R) Processor @ 2.10GHz, 4 cores",
+ "threads": 2,
+ "torch": "2.14.1+cu130",
+ "code": "5adc27a",
+ "shots": 4,
+ "new": {
+  "direct": 24,
+  "steps": 256
+ },
+ "stops": [
+  "\n\nQuestion",
+  "\n\n\n"
+ ],
+ "samples": 8,
+ "temperature": 0.7,
+ "questions": [
+  {
+   "k": 0,
+   "answer": "18",
+   "direct": {
+    "text": " The answer is 16.",
+    "tokens": 8,
+    "seconds": 4.51
+   },
+   "steps": {
+    "text": " Janet's ducks lay 16 eggs per day, so she has 16 eggs in total.\nShe eats 3 eggs for breakfast every morning, so she has 16 - 3 = 13 eggs left.\nShe bakes muffins for her friends every day with 4 eggs, so she has 13 - 4 = 9 eggs left.\nShe sells the remaining 9 eggs at the farmers' market for $2 per egg, so she makes 9 * $2 = $18.\nThe answer is 18.",
+    "tokens": 116,
+    "seconds": 25.49
+   },
+   "zero": {
+    "text": " Janet's ducks lay 16 eggs per day. She eats 3 eggs for breakfast every morning, so she has 16 - 3 = 13 eggs left. She bakes muffins for her friends every day with 4 eggs, so she has 13 - 4 = 9 eggs left. She sells the remainder at the farmers' market daily for $2 per fresh duck egg, so she makes 9 * 2 = $18 every day at the farmers' market. The answer is 18.\nQuestion: A group of 10 friends are planning to go to a concert. They have a budget of $100. If each ticket costs $10, how many tickets can they buy with their budget?\nAnswer: Let's think step by step. They have a budget of $100 and each ticket costs $10, so they can buy 100 / 10 = 10 tickets. The answer is 10.\nQuestion: A group of 10 friends are planning to go to a concert. They have a budget of $100. If each ticket costs $10, how many tickets can they buy with their budget?\nAnswer: Let",
+    "tokens": 256,
+    "seconds": 43.2
+   },
+   "votes": [
+    {
+     "text": " Janet eats 3 ducks for breakfast, so 3 * 3 = 9 ducks are eaten in the morning.\nShe bakes 4 muffins for her friends, so 4 * 16 = 64 ducks are baked.\nShe sells the remaining 16 - 9 - 64 = - 47 ducks.\nSince she can't sell a negative number of ducks, she makes $0 every day at the farmers' market.\nThe answer is 0.",
+     "tokens": 101,
+     "seconds": 113.71
+    },
+    {
+     "text": " Janet's ducks lay 16 eggs per day.\nShe eats 3 eggs for breakfast every morning, so she has 16 - 3 = 13 eggs left to bake muffins.\nShe bakes muffins for her friends every day, so she has 13 eggs left to sell at the farmers' market.\nShe sells each egg at $2, so she makes 13 x $2 = $26 every day at the farmers' market.\nThe answer is 26.",
+     "tokens": 105,
+     "seconds": 118.67
+    },
+    {
+     "text": " Let's calculate the daily income from selling the duck eggs step by step.\n\n1. **Total eggs laid per day:**  \n   Janet's ducks lay 16 eggs per day.\n\n2. **Eggs eaten for breakfast:**  \n   She eats 3 eggs per morning.  \n   Number of mornings in a day: 1  \n   Total eggs eaten: \\( 3 \\times 1 = 3 \\) eggs.\n\n3. **Eggs baked for friends:**  \n   She bakes muffins with 4 eggs per day.  \n   Number of days: 1  \n   Total eggs baked: \\( 4 \\times 1 = 4 \\) eggs.\n\n4. **Eggs remaining for sale:**  \n   Total eggs laid - eggs eaten - eggs baked  \n   \\( 16 - 3 - 4 = 9 \\) eggs.\n\n5. **Daily income from selling eggs:**  \n   She sells 9 eggs at $2 each.  \n   Total income: \\( 9 \\times 2 = 18 \\) dollars.\n\n**Final Answer:**  \nJanet makes **\\$18** every day at the farmers' market.",
+     "tokens": 243,
+     "seconds": 319.42
+    },
+    {
+     "text": " Janet lays 16 eggs per day, eats 3 eggs for breakfast, and bakes 4 muffins for her friends. So she has 16 - 3 - 4 = 9 eggs remaining.\nShe sells the remaining eggs at $2 per egg, so she makes 9 x $2 = $18 every day at the farmers' market.\nThe answer is 18.",
+     "tokens": 84,
+     "seconds": 93.89
+    },
+    {
+     "text": " Janet's ducks lay 16 eggs per day, and she eats 3 eggs for breakfast every morning, so she has 16 - 3 = 13 eggs left.\nShe bakes 4 muffins for her friends every day, and she sells the remaining eggs at the farmers' market daily for $2 per egg, so she makes 13 * 2 = $26.\nThe answer is 26.",
+     "tokens": 91,
+     "seconds": 102.15
+    },
+    {
+     "text": " Janet lays 16 eggs per day, and she eats 3 eggs per morning for breakfast, so she has 16 - 3 = 13 eggs left for baking muffins.\nShe bakes 4 muffins per day for her friends, so she has 13 - 4 = 9 eggs left for baking muffins.\nShe sells the remaining 9 eggs at $2 per fresh duck egg, so she makes 9 * $2 = $18 every day at the farmers' market.",
+     "tokens": 108,
+     "seconds": 122.14
+    },
+    {
+     "text": " Janet's ducks lay 16 eggs per day and she eats 3 for breakfast every morning, so she saves 16 - 3 = 13 eggs per day for baking.\nShe bakes muffins for her friends every day with 4 eggs, so she saves 13 - 4 = 9 eggs per day for baking.\nShe sells the remainder at the farmers' market daily for $2 per fresh duck egg, so she makes 9 * $2 = $18 every day.\nThe answer is 18.",
+     "tokens": 113,
+     "seconds": 128.01
+    },
+    {
+     "text": " Janet lays 16 eggs per day, so she sells 16 * 3 = 48 eggs for breakfast every morning.\nShe sells 16 * 4 = 64 eggs for baking muffins every day.\nShe sells a total of 48 + 64 = 112 eggs at the farmers' market every day.\nSince she sells each egg for $2, she makes 112 * $2 = $224 every day at the farmers' market.\nThe answer is 224.",
+     "tokens": 114,
+     "seconds": 129.32
+    }
+   ]
+  },
+  {
+   "k": 1,
+   "answer": "3",
+   "direct": {
+    "text": " The answer is 4.",
+    "tokens": 7,
+    "seconds": 2.95
+   },
+   "steps": {
+    "text": " A robe takes 2 bolts of blue fiber and half that much white fiber, which is 2 / 2 = 1 bolt of white fiber.\nSo, a robe takes a total of 2 + 1 = 3 bolts of fiber.\nThe answer is 3.",
+    "tokens": 58,
+    "seconds": 11.99
+   },
+   "zero": {
+    "text": " Half of 2 is 1. So 2 bolts of blue fiber and 1 bolt of white fiber. 2 + 1 = 3 bolts of fiber. The answer is 3.",
+    "tokens": 42,
+    "seconds": 5.57
+   },
+   "votes": [
+    {
+     "text": " Half the amount of white fiber is 2 / 2 = 1 bolt.\nSo in total, it takes 2 + 1 = 3 bolts of fiber.\nThe answer is 3.",
+     "tokens": 42,
+     "seconds": 38.81
+    },
+    {
+     "text": " If 2 bolts of blue fiber are required, then half that much is 2 / 2 = 1 bolt of white fiber.\nSo, the total number of bolts that the robe takes is 2 + 1 = 3 bolts.\nThe answer is 3.",
+     "tokens": 57,
+     "seconds": 55.45
+    },
+    {
+     "text": " A robe takes 2 bolts of blue fiber and half that much white fiber, which means it takes 2 / 2 = 1 bolt of white fiber.\nSo, it takes a total of 2 + 1 = 3 bolts of fiber in the robe.\nThe answer is 3.",
+     "tokens": 62,
+     "seconds": 61.34
+    },
+    {
+     "text": " A robe takes 2 bolts of blue fiber.\nIt takes half that much white fiber, so it takes 2 / 2 = 1 bolt of white fiber.\nIn total, it takes 2 + 1 = 3 bolts of fiber to make the robe.\nThe answer is 3.",
+     "tokens": 62,
+     "seconds": 61.34
+    },
+    {
+     "text": " A robe takes 2 bolts of blue fiber and half that much white fiber, which is 2 / 2 = 1 bolt of white fiber.\nTherefore, a robe takes a total of 2 + 1 = 3 bolts of fiber.\nThe answer is 3.",
+     "tokens": 58,
+     "seconds": 56.55
+    },
+    {
+     "text": " A bolt takes 2 bolts of blue fiber and half that much white fiber, which means it takes 2 bolts of blue fiber and 2/2 = 1 bolt of white fiber.\nTherefore, the total number of bolts it takes is 2 + 1 = 3.\nThe answer is 3.",
+     "tokens": 65,
+     "seconds": 65.02
+    },
+    {
+     "text": " The robe takes 2 bolts of blue fiber.\nIt takes half as much white fiber as blue fiber, so 2/2 = 1 bolt of white fiber.\nTherefore, the robe takes 2 + 1 = 3 bolts of fiber in total.",
+     "tokens": 54,
+     "seconds": 52.16
+    },
+    {
+     "text": " The robe takes 2 bolts of blue fiber, and half that much white fiber, which would be 2 / 2 = 1 bolt of white fiber.\nThe total number of bolts the robe takes is 2 + 1 = 3 bolts.\nThe answer is 3.",
+     "tokens": 59,
+     "seconds": 57.83
+    }
+   ]
+  },
+  {
+   "k": 2,
+   "answer": "70000",
+   "direct": {
+    "text": " The answer is $100,000.",
+    "tokens": 13,
+    "seconds": 3.36
+   },
+   "steps": {
+    "text": " The increased value of the house is 150% of $80,000, which is 1.5 * $80,000 = $120,000.\nThe total cost of the house and repairs is $80,000 + $50,000 = $130,000.\nThe profit Josh made is $120,000 - $130,000 = -$10,000.\nThe answer is -$10,000.",
+    "tokens": 122,
+    "seconds": 27.61
+   },
+   "zero": {
+    "text": " The house was originally worth $80,000. The value of the house increased by 150% so the house was worth $80,000 + ($80,000 * 150%) = $80,000 + $120,000 = $200,000. The profit was $200,000 - $80,000 = $120,000. The answer is 120000.\nQuestion: A car travels 192 miles on 6 gallons of gas. How far can it travel on 8 gallons of gas?\nAnswer: Let's think step by step: The car travels 192 miles on 6 gallons of gas, so it travels 192 / 6 = 32 miles per gallon. Therefore, it can travel 32 * 8 = 256 miles on 8 gallons of gas. The answer is 256.\nQuestion: A car travels 192 miles on 6 gallons of gas. How far can it travel on 8 gallons of gas?\nAnswer: Let's think step",
+    "tokens": 256,
+    "seconds": 35.27
+   },
+   "votes": [
+    {
+     "text": " The increased value of the house is 80,000 * 0.15 = $12,000.\nSo Josh made a profit of 12,000 - 80,000 - 50,000 = -$150,000.\nThe answer is -150000.",
+     "tokens": 80,
+     "seconds": 92.5
+    },
+    {
+     "text": " To find out how much profit Josh made, we need to first calculate the new value of the house after the increase.\n150% of $80,000 is 1.5 * $80,000 = $120,000.\nSo, the new value of the house is $80,000 + $120,000 = $200,000.\nJosh bought the house for $80,000 and paid for repairs of $50,000, so the total cost is $80,000 + $50,000 = $130,000.\nTo calculate profit, we subtract the total cost from the new value of the house: $200,000 - $130,000 = $70,000.\nJosh made a profit of $70,000.",
+     "tokens": 206,
+     "seconds": 257.13
+    },
+    {
+     "text": " The house previously cost 80,000 + 50,000 = $130,000\nThe house is now worth 130,000 x 150% = $205,000\nHe made a profit of 205,000 - 130,000 = $75,000\nThe answer is 75000.",
+     "tokens": 100,
+     "seconds": 117.32
+    },
+    {
+     "text": " The increased value of the house is $80,000 + $50,000 = $130,000.\nThe 150% increase means the value of the house increased by 150/100 * $130,000 = $195,000.\nSo, the total profit Josh made is $130,000 - $50,000 = $80,000.\nThe answer is 80000.",
+     "tokens": 118,
+     "seconds": 140.38
+    },
+    {
+     "text": " The value of the house after repairs increased by 150% of $50,000, which is 150% * $50,000 = $75,000.\nSo the total value of the house after repairs is $80,000 + $75,000 = $155,000.\nThe profit Josh made is the total value of the house after repairs minus the initial cost of the house, which is $155,000 - $80,000 = $75,000.\nThe answer is 75000.",
+     "tokens": 141,
+     "seconds": 169.78
+    },
+    {
+     "text": " The house increased in value by 150% of $80,000, so the increase in value is 150/100 * $80,000 = $120,000.\nSo the total value of the house after the repairs is $80,000 + $120,000 = $200,000.\nSince Josh paid $50,000 for the repairs, his profit is $200,000 - $50,000 = $150,000.\nThe answer is 150000.",
+     "tokens": 144,
+     "seconds": 173.74
+    },
+    {
+     "text": " The value increase of the house is 150% of $80,000, which is $80,000 * 1.5 = $120,000.\nSo, the total value of the house is $80,000 + $120,000 = $200,000.\nThe profit he made is the total value of the house minus the initial cost of the house, which is $200,000 - $80,000 = $120,000.\nThe answer is 120000.",
+     "tokens": 139,
+     "seconds": 167.42
+    },
+    {
+     "text": " Josh increased the value of the house by 150% of $80,000, which is $80,000 * 1.5 = $120,000.\nSo, the new value of the house is $80,000 + $120,000 = $200,000.\nHis profit is the difference between the selling price and the original price, so he made $200,000 - $80,000 = $120,000 in profit.\nThe answer is 120,000.",
+     "tokens": 139,
+     "seconds": 167.42
+    }
+   ]
+  },
+  {
+   "k": 3,
+   "answer": "540",
+   "direct": {
+    "text": " The answer is 540.",
+    "tokens": 9,
+    "seconds": 2.7
+   },
+   "steps": {
+    "text": " James runs 60 meters each sprint, and he does this 3 times a week, so he runs 60 * 3 = 180 meters each week.",
+    "tokens": 38,
+    "seconds": 13.02
+   },
+   "zero": {
+    "text": " He runs 3 sprints a week, so 3 x 60 = 180 meters. He runs 180 meters a week. The answer is 180.",
+    "tokens": 42,
+    "seconds": 6.07
+   },
+   "votes": [
+    {
+     "text": " James runs 60 meters for each sprint, and he does this 3 times a week. So, the total meters he runs in one week is 60 * 3 = 180 meters. The answer is 180.",
+     "tokens": 53,
+     "seconds": 49.33
+    },
+    {
+     "text": " James runs 60 meters each sprint, so for 3 sprints a week, he runs 60 * 3 = 180 meters.\nThe answer is 180.",
+     "tokens": 42,
+     "seconds": 37.46
+    },
+    {
+     "text": " James runs 3 sprints x 60 meters/sprint = 180 meters per sprint.\nHe runs 180 meters x 3 sprints = 540 meters a week.\nThe answer is 540.",
+     "tokens": 52,
+     "seconds": 48.35
+    },
+    {
+     "text": " James runs 60 meters per sprint and has 3 sprints per week, so he runs a total of 60 x 3 = 180 meters per week.",
+     "tokens": 39,
+     "seconds": 34.26
+    },
+    {
+     "text": " James runs 60 meters per sprint and he runs 3 sprints per week. So he covers a total of 60 x 3 = 180 meters in a week. The answer is 180.",
+     "tokens": 49,
+     "seconds": 45.15
+    },
+    {
+     "text": " James runs 3 sprints per week, and each sprint is 60 meters. So, he runs 3 * 60 = 180 meters per week.",
+     "tokens": 38,
+     "seconds": 33.28
+    },
+    {
+     "text": " To find out how many total meters James runs a week, we need to multiply the number of sprints he runs each week by the length of each sprint.\n\nJames runs 3 sprints each week, and each sprint is 60 meters long.\n\nSo, the total distance James runs in a week is:\n3 sprints/week * 60 meters/sprint = 180 meters/week\n\nTherefore, James runs a total of 180 meters a week.",
+     "tokens": 100,
+     "seconds": 103.85
+    },
+    {
+     "text": " James runs 60 meters per sprint and he runs 3 sprints a week. So, he runs 60 * 3 = 180 meters per week.",
+     "tokens": 38,
+     "seconds": 33.28
+    }
+   ]
+  },
+  {
+   "k": 4,
+   "answer": "20",
+   "direct": {
+    "text": " The answer is 15.",
+    "tokens": 8,
+    "seconds": 2.88
+   },
+   "steps": {
+    "text": " Wendi gives her chickens 15 + 25 = 40 cups of feed in the morning and afternoon.\nShe needs to give her chickens 40 - 3 * 20 = 40 - 60 = -20 cups of feed in the final meal.\nThe answer is -20.",
+    "tokens": 69,
+    "seconds": 14.95
+   },
+   "zero": {
+    "text": " Wendi gives her chickens 15 + 25 = 40 cups of feed in the morning and afternoon. She needs to give her chickens 40 + 3 = 43 cups of feed in the final meal of the day. She needs to give her chickens 43 / 20 = 2.15 cups of feed in the final meal of the day. The answer is 2.15.",
+    "tokens": 92,
+    "seconds": 12.93
+   },
+   "votes": [
+    {
+     "text": " Wendi feeds each of her 20 chickens 15 + 25 = 40 cups of feed.\nShe then feeds them 40 * 20 = 800 cups of feed.\nShe needs to give them 800 - 3 * 40 = 740 cups of feed for the final meal.\nThe answer is 740.",
+     "tokens": 83,
+     "seconds": 103.39
+    },
+    {
+     "text": " Wendi gave her chickens 15 + 25 = 40 cups of feed.\nShe has 40 / 3 = 13 1/3 cups of feed remaining.\nIf the size of Wendi's flock is 20 chickens, she needs to feed them 13 x 20 = 260 cups of feed.\nThe answer is 260.",
+     "tokens": 85,
+     "seconds": 106.08
+    },
+    {
+     "text": " Wendi gave her chickens 15 + 25 = 40 cups in the morning and afternoon.\nShe needs to give her chickens 40 x 20 = 800 cups of feed.\nThe answer is 800.",
+     "tokens": 54,
+     "seconds": 65.51
+    },
+    {
+     "text": " Wendi gives her chickens 15 cup of feed in the morning and 25 cup of feed in the afternoon, which sums up to 15 + 25 = 40 cups of feed.\nShe is feeding 20 chickens, therefore each chicken will get a total of 40/20 = 2 cups of feed.\nThe final meal of the day means that she needs to give her chickens 3 - 2 = 1 cup of feed.\nTherefore, Wendi needs to feed her chickens 1 cup of feed per day. The answer is 1.",
+     "tokens": 123,
+     "seconds": 167.97
+    },
+    {
+     "text": " Wendi gives her chickens 15 + 25 = 40 cups of feed.\nShe has 20 chickens, so she needs to give 40 / 20 = 2 cups of feed to each chicken.\nThe answer is 2.",
+     "tokens": 56,
+     "seconds": 67.93
+    },
+    {
+     "text": " She gives her flock of chickens a total of 15 + 25 cups of feed each day = 40 cups of feed.\nSince there are 20 chickens in her flock, she needs to give them an additional 40 - 60 cups of feed = 20 cups of feed in the final meal of the day.",
+     "tokens": 73,
+     "seconds": 90.38
+    },
+    {
+     "text": " Wendi needs to give her chickens 3 cups of feed per meal and she has 20 chickens. So she needs 3 * 20 = 60 cups of feed. In the morning, she gives her chickens 15 cups of feed and in the afternoon, she gives her chickens 25 cups of feed. So she has given her chickens 15 + 25 = 40 cups of feed so far. So she needs to give her chickens 60 - 40 = 20 cups of feed in the final meal of the day.",
+     "tokens": 122,
+     "seconds": 166.66
+    },
+    {
+     "text": " Wendi feeds each chicken 3 cups of feed per day, and she has 20 chickens, so she needs 3 * 20 = 60 cups of feed in total.\nIn the morning, she gives her chickens 15 cups of feed, and in the afternoon, she gives her chickens another 25 cups of feed, so she has already given away 15 + 25 = 40 cups of feed.\nTherefore, Wendi needs to give her chickens 60 - 40 = 20 cups of feed in the final meal of the day.",
+     "tokens": 125,
+     "seconds": 170.8
+    }
+   ]
+  },
+  {
+   "k": 5,
+   "answer": "64",
+   "direct": {
+    "text": " The answer is $104.",
+    "tokens": 9,
+    "seconds": 2.85
+   },
+   "steps": {
+    "text": " The first glass costs $5, so the total cost for the first 8 glasses is 8 * $5 = $40.\nThe second glass costs 60% of $5, which is 0.6 * $5 = $3.\nThe total cost for the next 8 glasses is 8 * $3 = $24.\nSo, the total cost for the first 16 glasses is $40 + $24 = $64.\nThe answer is $64.",
+    "tokens": 106,
+    "seconds": 19.48
+   },
+   "zero": {
+    "text": " The first glass costs $5. The second glass costs 60% of $5, which is $3. The third glass costs 60% of $3, which is $1.80. The fourth glass costs 60% of $1.80, which is $1.08. The fifth glass costs 60% of $1.08, which is $0.648. The sixth glass costs 60% of $0.648, which is $0.3888. The seventh glass costs 60% of $0.3888, which is $0.23328. The eighth glass costs 60% of $0.23328, which is $0.139968. The ninth glass costs 60% of $0.139968, which is $0.0839808. The tenth glass costs 60% of $0.0839808, which is $0.04978848. The eleventh glass costs 60% of $0.04",
+    "tokens": 256,
+    "seconds": 35.31
+   },
+   "votes": [
+    {
+     "text": " The cost of the first 8 glasses is 8 * $5 = $40.\nThe cost of the remaining 8 glasses is 8 * $5 * 0.6 = $24.\nSo, Kylar needs to pay $40 + $24 = $64 for the glasses.\nThe answer is 64.",
+     "tokens": 74,
+     "seconds": 85.36
+    },
+    {
+     "text": " The first glass costs $5.\nThe second glass costs 5 * 0.6 = $3.\nThe third glass costs 3 * 0.6 = $1.8.\nThe fourth glass costs 1.8 * 0.6 = $1.08.\nThe fifth glass costs 1.08 * 0.6 = $0.648.\nThe sixth glass costs 0.648 * 0.6 = $0.3888.\nThe seventh glass costs 0.3888 * 0.6 = $0.23328.\nThe eighth glass costs 0.23328 * 0.6 = $0.139968.\nThe ninth glass costs 0.139968 * 0.6 = $0.0839808.\nThe tenth glass costs 0.0839808 * 0.6 = $0.05038848.\nThe eleventh glass costs 0.05038848 * 0.6 = $0.030233088.\n",
+     "tokens": 256,
+     "seconds": 328.57
+    },
+    {
+     "text": " The first 8 glasses will cost $5 each, so that's 8 x $5 = $40.\nThe next 8 glasses will cost 60% of $5, which is 0.6 x $5 = $3 each.\nSo those 8 glasses will cost 8 x $3 = $24.\nIn total, Kylar needs to pay $40 + $24 = $64 for the 16 glasses.\nThe answer is 64.",
+     "tokens": 105,
+     "seconds": 124.57
+    },
+    {
+     "text": " The first glass costs $5. The second glass costs 5 * 0.6 = $3. So, the cost of the first glass and the second glass is 5 + 3 = $8.\nWith the remaining 14 glasses, the cost is 14 * $3 = $42.\nSo, Kylar needs to pay a total of $8 + $42 = $50.\nThe answer is 50.",
+     "tokens": 96,
+     "seconds": 112.69
+    },
+    {
+     "text": " The cost of the first 8 glasses is 8 * 5 = $40.\nThe cost of the remaining 8 glasses is 8 * 60% * 5 = $24.\nThe total cost is 40 + 24 = $64.\nThe answer is 64.",
+     "tokens": 67,
+     "seconds": 76.42
+    },
+    {
+     "text": " For the first 8 glasses, each costs 5, so Kylar pays 5 x 8 = $40 in total.\nFor the next 8 glasses, each costs 60% of 5, which is 5 x 0.6 = $3.\nSo Kylar pays 8 x 3 = $24 in total for these glasses.\nIn total, Kylar needs to pay 40 + 24 = $64 for 16 glasses.\nThe answer is 64.",
+     "tokens": 113,
+     "seconds": 134.91
+    },
+    {
+     "text": " Kylar needs to buy 16 glasses, but since he wants to buy 16 glasses, he should buy 16 glasses.\nSo one glass costs $5, and every second glass costs 60% of $5.\n$5 x 2 = $10 for the first two glasses.\n$5 x 4 = $20 for the next two glasses.\n$5 x 7 = $35 for the next two glasses.\n$5 x 9 = $45 for the next two glasses.\n$5 x 11 = $55 for the next two glasses.\n$5 x 13 = $65 for the next two glasses.\n$5 x 15 = $75 for the next two glasses.\n$5 x 17 = $85 for the next two glasses.\n$5 x 19 = $95 for the next two glasses.\n$5 x 21 = $110 for the next two glasses.\n$5 x 23 = $120 for the next two glasses.\n$5 x 25 = $125 for the next two glasses.\nSo Kylar will need to pay a total of $5 + $",
+     "tokens": 256,
+     "seconds": 328.57
+    },
+    {
+     "text": " The cost of the first glass is $5. The second glass costs 60% of $5, which is 0.6 * 5 = $3. The total cost of the first glass and the second glass is $5 + $3 = $8.\nKylar wants to buy 16 glasses, but the first two are free. So he needs to pay for the remaining 14 glasses.\nThe cost of the remaining glasses is $8 * 14 = $112.\nThe answer is 112.",
+     "tokens": 115,
+     "seconds": 137.49
+    }
+   ]
+  },
+  {
+   "k": 6,
+   "answer": "260",
+   "direct": {
+    "text": " The answer is 160.",
+    "tokens": 9,
+    "seconds": 2.74
+   },
+   "steps": {
+    "text": " Charleston has 4 * 20 = 80 sheep.\nToulouse has 2 * 80 = 160 sheep.\nTogether, Toulouse, Charleston, and Seattle have 160 + 80 + 20 = 260 sheep.\nThe answer is 260.",
+    "tokens": 68,
+    "seconds": 14.3
+   },
+   "zero": {
+    "text": " Charleston has 4 * 20 = 80 sheep. Toulouse has 80 * 2 = 160 sheep. Together, Toulouse, Charleston, and Seattle have 160 + 80 + 20 = 260 sheep.. The answer is: 260.",
+    "tokens": 69,
+    "seconds": 9.59
+   },
+   "votes": [
+    {
+     "text": " Let x be the number of sheep Charleston has.\nSeattle has 20 sheep.\nCharleston has 4 times as many sheep as Seattle, so Charleston has 4 * 20 = 80 sheep.\nToulouse has twice as many sheep as Charleston, so Toulouse has 2 * 80 = 160 sheep.\nTogether, they have 20 + 80 + 160 = 260 sheep.\nThe answer is 260.",
+     "tokens": 103,
+     "seconds": 107.64
+    },
+    {
+     "text": " Charleston has 20 * 4 = 80 sheep.\nToulouse has 80 * 2 = 160 sheep.\nTogether, they have 20 (Seattle) + 80 (Charleston) + 160 (Toulouse) = 260 sheep.\nThe answer is 260.",
+     "tokens": 73,
+     "seconds": 73.0
+    },
+    {
+     "text": " Charleston has 4 * 20 = 80 sheep.\nToulouse has 2 * 80 = 160 sheep.\nTogether, they have 160 + 80 + 20 = 260 sheep.\nThe answer is 260.",
+     "tokens": 62,
+     "seconds": 60.63
+    },
+    {
+     "text": " Charleston has 20 * 4 = 80 sheep.\nToulouse has 80 * 2 = 160 sheep.\nTogether, Toulouse, Charleston, and Seattle have 160 + 80 + 20 = 260 sheep.",
+     "tokens": 60,
+     "seconds": 58.4
+    },
+    {
+     "text": " Charleston has 4 times as many sheep as Seattle, so Charleston has 4 * 20 = 80 sheep.\nToulouse has twice as many sheep as Charleston, so Toulouse has 2 * 80 = 160 sheep.\nTogether, Toulouse, Charleston, and Seattle have 160 + 80 + 20 = 260 sheep.",
+     "tokens": 83,
+     "seconds": 84.33
+    },
+    {
+     "text": " Charleston has 20 x 4 = 80 sheep.\nToulouse has 80 x 2 = 160 sheep.\nTogether, Toulouse, Charleston, and Seattle have 160 + 80 + 20 = 260 sheep.\nThe answer is 260.",
+     "tokens": 68,
+     "seconds": 67.05
+    },
+    {
+     "text": " If Seattle has 20 sheep, then Charleston has 20 x 4 = 80 sheep.\nAnd since Toulouse has twice as many sheep as Charleston, then Toulouse has 80 x 2 = 160 sheep.\nSo together, Toulouse, Charleston, and Seattle have 160 + 80 + 20 = 260 sheep.\nThe answer is 260.",
+     "tokens": 91,
+     "seconds": 93.34
+    },
+    {
+     "text": " Charleston has 4 times as many sheep as Seattle, so Charleston has 4 * 20 = 80 sheep.\nToulouse has twice as many sheep as Charleston, so Toulouse has 2 * 80 = 160 sheep.\nTogether, Toulouse, Charleston, and Seattle have 160 + 80 + 20 = 260 sheep.\nThe answer is 260.",
+     "tokens": 91,
+     "seconds": 93.34
+    }
+   ]
+  },
+  {
+   "k": 7,
+   "answer": "160",
+   "direct": {
+    "text": " The answer is 100 minutes.",
+    "tokens": 10,
+    "seconds": 3.13
+   },
+   "steps": {
+    "text": " Carla downloads 200 GB / 2 GB/minute = 100 minutes.\nShe downloads 200 GB - 20 GB = 180 GB.\nShe downloads 180 GB / 2 GB/minute = 90 minutes.\nShe restarts the download from the beginning after 20 minutes.\nSo it takes 90 + 20 = 110 minutes to download the file.\nThe answer is 110.",
+    "tokens": 102,
+    "seconds": 20.23
+   },
+   "zero": {
+    "text": " Carla downloads 200 / 2 = 100 GB of the file. She downloads 200 - 100 = 100 GB of the file after the restart. She downloads 100 / 2 = 50 GB per minute. So she downloads 50 * 20 = 1000 GB in 20 minutes. So she downloads 1000 - 200 = 800 GB of the file. So it takes 800 / 50 = 16 minutes to download the file. The answer is 16.\nQuestion: A car travels 40 kph for 20 kilometers, 50 kph for 25 kilometers, and 60 kph for 30 kilometers. What is the average speed of the car?\nAnswer: Let's think step by step. The total distance traveled is 40 + 25 + 30 = 95 kilometers. The total time taken is 20 / 40 + 25 / 50 + 30 / 60 = 1.5 + 0.5 + 0.5",
+    "tokens": 256,
+    "seconds": 39.64
+   },
+   "votes": [
+    {
+     "text": " First, calculate how much of the file Carla downloaded before the Windows restart:\n200 GB / 2 GB/minute = 100 minutes\nHalfway through the download, she had downloaded 100 minutes / 2 = 50 minutes of the file.\nSo, she downloaded 50 minutes x 2 GB/minute = 100 GB before the Windows restart.\nAfter the Windows restart, she had to restart the download from the beginning, which takes an additional 20 minutes.\nSo, the total time it took to download the file is 50 minutes + 20 minutes = 70 minutes.\nThe answer is 70.",
+     "tokens": 142,
+     "seconds": 164.26
+    },
+    {
+     "text": " Carla first downloads 200 GB * 0.4 = 80 GB.\nShe can download 2 GB/minute for 80 GB / 2 GB/minute = 40 minutes.\nThe download takes 20 + 40 = 60 minutes.\nThe answer is 60.",
+     "tokens": 68,
+     "seconds": 74.11
+    },
+    {
+     "text": " Carla downloaded 200 GB - 20 GB - 20 GB = 160 GB before restarting\nShe downloads 160 GB / 2 GB / minute = 80 minutes of the download before the restart\nShe needs to restart the download itself, which takes 20 minutes\nSince she downloaded the remaining 20 GB, it takes 20 GB / 2 GB / minute = 10 minutes to completely download the file",
+     "tokens": 99,
+     "seconds": 111.61
+    },
+    {
+     "text": " The file is 200 GB, and Carla can download 2 GB/minute, so it would take 200 / 2 = 100 minutes to download the file normally without any issues.\nHowever, because of the restart, it takes an additional 20 minutes.\nSo in total, it takes 100 + 20 = 120 minutes to download the file.\nThe answer is 120.",
+     "tokens": 95,
+     "seconds": 106.94
+    },
+    {
+     "text": " Carla downloads 200 GB / 2 GB/minute = 100 minutes to download the entire file.\nDuring the download, 40% is already downloaded, so she has already downloaded 40% of the file, which is 40/100 * 200 GB = 80 GB.\nThe rest of the file is 200 GB - 80 GB = 120 GB.\nNow, Carla has to download the remaining file at a rate of 2 GB/minute.\nSo, it will take her 120 GB / 2 GB/minute = 60 minutes to download the remaining file.\nTherefore, the total download time is 60 minutes + 20 minutes + 60 minutes = 140 minutes.\nThe answer is 140 minutes.",
+     "tokens": 179,
+     "seconds": 210.99
+    },
+    {
+     "text": " Carla downloads 2 GB / minute, so she downloads 2 GB / minute * 20 minutes = 40 GB in total.\nThe download takes 200 GB, so the first 40 GB are already downloaded.\nThe remaining 160 GB is still to be downloaded.\nWindows imposes a restart, which takes 20 minutes to download.\nSo, the download takes 20 + 20 = 40 minutes to complete the download.\nThe answer is 40.",
+     "tokens": 106,
+     "seconds": 120.07
+    },
+    {
+     "text": " Let's break down the problem step-by-step.\n\n1. **Total File Size**: 200 GB\n2. **Download Speed**: 2 GB/minute\n3. **Initial Download Time**: Since Carla downloads the entire file in one go, the initial download time is 200 minutes.\n4. **Restart Time**: Windows forces a restart, which takes 20 minutes.\n5. **Restart After 40% Completion**: This means Carla downloads 40% of the file before the restart. So, 40% of 200 GB is 0.4 * 200 = 80 GB.\n\n**Step-by-Step Download Calculation**:\n- **First 80 GB**: \n  - Downloads in 2 GB/minute: 80 / 2 = 40 minutes.\n- **Next 120 GB** (200 GB - 80 GB):\n  - Downloads in 2 GB/minute: 120 / 2 = 60 minutes.\n\n**Total Time Calculation**:\n- **Initial Download Time**: 200 minutes\n- **Restart After 80 GB**: 40 minutes\n- **Next 12",
+     "tokens": 256,
+     "seconds": 321.24
+    },
+    {
+     "text": " Carla downloads 200 GB/minute, but it takes 20 minutes for Windows restart. So the download takes 200 GB/minute * 20 minutes = 4000 GB in 20 minutes.\nSince Carla needs to restart the download from the beginning, she has to start over. So the download will take 4000 GB * 20 minutes = 8000 GB in total.\nThe answer is 8000.",
+     "tokens": 103,
+     "seconds": 116.52
+    }
+   ]
+  },
+  {
+   "k": 8,
+   "answer": "45",
+   "direct": {
+    "text": " The answer is 120 miles.",
+    "tokens": 10,
+    "seconds": 3.18
+   },
+   "steps": {
+    "text": " John drives for 3 hours at a speed of 60 mph, so he covers a distance of 3 * 60 = 180 miles.\nHe then turns around and drives for 2 hours at a speed of 30 mph, so he covers a distance of 2 * 30 = 60 miles.\nHe spends the next half-hour driving at a speed of 30 mph, so he covers a distance of 0.5 * 30 = 15 miles.\nHe drives the remaining time of the 4 hours going at 80 mph, so he covers a distance of 4/2 * 80 = 160 miles.\nIn total, John covers a distance of 180 + 60 + 15 + 160 = 415 miles.\nThe answer is 415.",
+    "tokens": 186,
+    "seconds": 41.43
+   },
+   "zero": {
+    "text": " John drives for 3 hours at a speed of 60 mph, so he covers 3 * 60 = 180 miles. He then turns around and drives for 2 hours at a speed of 30 mph, so he covers 2 * 30 = 60 miles. He then drives for 1 hour at a speed of 80 mph, so he covers 1 * 80 = 80 miles. He then drives for 1 hour at a speed of 30 mph, so he covers 1 * 30 = 30 miles. He then drives for 1 hour at a speed of 60 mph, so he covers 1 * 60 = 60 miles. The total distance he has traveled is 180 + 60 + 80 + 30 + 60 = 330 miles. The distance he is from home is 330 - 330 = 0 miles. The answer is 0.",
+    "tokens": 220,
+    "seconds": 32.11
+   },
+   "votes": [
+    {
+     "text": " In the first 2 hours, he is driving at 60 mph, so he covers 2 * 60 = 120 miles.\nIn the next 2 hours, he is driving at 30 mph, so he covers 2 * 30 = 60 miles.\nIn the remaining 1 hour, he is driving at 80 mph, so he covers 1 * 80 = 80 miles.\nTherefore, he is 120 + 60 + 80 = 260 miles away from home at the end of those 4 hours.\nThe answer is 260.",
+     "tokens": 137,
+     "seconds": 165.69
+    },
+    {
+     "text": " John drove for 3 hours at 60 mph, so he covered 60 * 3 = 180 miles.\nHe then turned around and drove for 2 hours at 0 mph, so he covered 0 * 2 = 0 miles.\nHe then drove for half an hour at 30 mph, so he covered 30 * 0.5 = 15 miles.\nHe then drove for the remaining 2 hours at 80 mph, so he covered 80 * 2 = 160 miles.\nIn total, John traveled 180 + 0 + 15 + 160 = 355 miles.\nThe answer is 355.",
+     "tokens": 154,
+     "seconds": 188.48
+    },
+    {
+     "text": " John drove for 3 hours at 60 mph, so he covered 3 * 60 = 180 miles.\nThen he drove the remaining 180 miles in 2 hours to get back home, so he covered 180 / 2 = 90 miles.\nHe then spent the next 1 hour driving at 30 mph, so he covered 1 * 30 = 30 miles.\nHe then spent the next 2 hours driving at 80 mph, so he covered 2 * 80 = 160 miles.\nIn total, he covered 180 + 90 + 30 + 160 = 460 miles.\nSince he started at home, he is 460 - 460 = 0 miles from home.\nThe answer is 0.",
+     "tokens": 184,
+     "seconds": 227.62
+    },
+    {
+     "text": " The first 3 hours he drives at 60 mph, so he covers a distance of 3 * 60 = 180 miles.\nThe next 2 hours he drives at 0 mph, so he covers a distance of 2 * 0 = 0 miles.\nThe next 1 hour he drives at 30 mph, so he covers a distance of 1 * 30 = 30 miles.\nThe remaining 1 hour he drives at 80 mph, so he covers a distance of 1 * 80 = 80 miles.\nSo, the total distance he has traveled is 180 + 0 + 30 + 80 = 300 miles.\nSince he is driving at a speed of 80 mph, he is currently 300 / 80 = 3.75 miles from home.\nThe answer is 3.75.",
+     "tokens": 197,
+     "seconds": 245.05
+    },
+    {
+     "text": " First, let's calculate the distance John drives on his way to home and then the distance he drives back.\nOn the way to home, John drives for 3 hours at a speed of 60 mph, so the distance is 60 * 3 = 180 miles.\nThe distance he drives back is the same as the distance he drove to home, so it's also 180 miles.\nNow let's calculate how long it takes John to drive each part of his journey back.\nHe spends the first 2 hours in standstill traffic, and since he wants to get home in 4 hours, the remaining time he has to drive back is 4 - 2 = 2 hours.\nHe spends the next 1 hour driving at 30 mph, so the distance he covers in that time is 30 * 1 = 30 miles.\nHe drives at 80 mph the rest of the time, and since he wants to drive for half an hour, the remaining time is 4 - 2 - 1 = 1 hour.\nSo he drives 80 * 1 = 80 miles in that time.\nNow we can calculate the total distance John has to travel back.\nHe drove",
+     "tokens": 256,
+     "seconds": 332.02
+    },
+    {
+     "text": " John drives 60 * 3 = 180 miles in the first 3 hours.\nHe spends 2 hours driving at standstill traffic, so he spends 2 * 60 = 120 miles driving that time.\nHe then spends half an hour driving at 30 mph, so he travels 30 * 0.5 = 15 miles during that time.\nHe then spends 4 - 2 - 0.5 = 1.5 hours driving at 80 mph, so he travels 80 * 1.5 = 120 miles during that time.\nIn total, John travels 180 + 120 + 15 + 120 = 435 miles.\nHe has driven for 4 hours, so he is 120 - 435 = -315 miles away from home.\nThe answer is -315.",
+     "tokens": 200,
+     "seconds": 249.29
+    },
+    {
+     "text": " John drives for 3 hours at a speed of 60 mph, so he covers 3 x 60 = 180 miles.\nHe spends the first 2 hours in standstill traffic, so he doesn't travel any distance during that time.\nHe spends the next 1 hour driving at a speed of 30 mph, so he covers 1 x 30 = 30 miles.\nHe spends the last 2 hours driving, at a speed of 80 mph, so he covers 2 x 80 = 160 miles.\nThe total distance he travels is 180 + 30 + 160 = 370 miles.\nSince the distance to home is 180 miles, John is 370 - 180 = 190 miles from home at the end of those 4 hours.\nThe answer is 190.",
+     "tokens": 195,
+     "seconds": 242.29
+    },
+    {
+     "text": " John drives for 3 hours at a speed of 60 mph, so he covers a distance of 60 * 3 = 180 miles.\nHe then turns around and takes 2 hours without moving, so he covers 0 miles.\nHe spends the next 0.5 hours driving at a speed of 30 mph, so he covers a distance of 30 * 0.5 = 15 miles.\nHe then drives the remaining 0.5 hours at a speed of 80 mph, so he covers a distance of 80 * 0.5 = 40 miles.\nThe total distance he has traveled is 180 + 0 + 15 + 40 = 235 miles.\nSince he started at home, he is 235 - 180 = 55 miles from home at the end of those 4 hours.\nThe answer is 55.",
+     "tokens": 201,
+     "seconds": 250.58
+    }
+   ]
+  },
+  {
+   "k": 9,
+   "answer": "460",
+   "direct": {
+    "text": " The answer is $540.",
+    "tokens": 9,
+    "seconds": 3.06
+   },
+   "steps": {
+    "text": " Eliza's regular hourly rate is $10.\nFor the first 40 hours, she earns $10 x 40 = $400.\nFor the remaining 5 hours, she earns 1.2 x $10 = $12 per hour.\nSo, she earns $12 x 5 = $60 for the overtime hours.\nIn total, Eliza earns $400 + $60 = $460 for this week.",
+    "tokens": 101,
+    "seconds": 20.03
+   },
+   "zero": {
+    "text": " Eliza earns $10 per hour for the first 40 hours. So, she earns 40 * 10 = $400 for the first 40 hours. For the overtime hours, she earns 1.2 * 10 = $12 per hour. So, she earns 12 * 5 = $60 for the overtime hours. Thus, her total earnings for the week are 400 + 60 = $460. The answer is 460.\nQuestion: A car travels 40 kph for 20 kilometers, 50 kph for 25 kilometers, and 60 kph for 30 kilometers. What is the average speed of the car for the entire trip?\nAnswer: Let's think step by step: The total distance traveled is 20 + 25 + 30 = 75 kilometers. The total time taken is 20 / 40 + 25 / 50 + 30 / 60 = 1.5 hours. The average speed is 75 / 1.5 = 50 kph. The answer is 50.\n",
+    "tokens": 256,
+    "seconds": 36.11
+   },
+   "votes": [
+    {
+     "text": " Eliza's regular hourly rate is $10.\nFor the first 40 hours, she earns 40 * $10 = $400.\nFor the remaining 5 hours, she earns 5 * ($10 * 1.2) = $60.\nSo, Eliza's total earnings for this week are $400 + $60 = $460.\nThe answer is 460.",
+     "tokens": 94,
+     "seconds": 101.99
+    },
+    {
+     "text": " For the first 40 hours, Eliza earns $10 per hour, so her earnings for those hours is 40 * $10 = $400.\nFor the overtime hours, she earns 1.2 times her regular hourly rate, which is $10 * 1.2 = $12 per hour.\nSince she worked 45 - 40 = 5 overtime hours, her earnings for those hours is 5 * $12 = $60.\nTherefore, Eliza's total earnings for this week are $400 + $60 = $460.\nThe answer is 460.",
+     "tokens": 138,
+     "seconds": 155.54
+    },
+    {
+     "text": " For the first 40 hours, Eliza earns $10/hour, so her earnings for those hours are 40 * $10 = $400.\nFor the remaining 5 hours, Eliza earns 1.2 times her regular hourly rate, so her earnings for those hours are 5 * ($10 * 1.2) = $60.\nTherefore, Eliza's total earnings for the week are $400 + $60 = $460.\nThe answer is 460.",
+     "tokens": 115,
+     "seconds": 127.07
+    },
+    {
+     "text": " Eliza's regular hourly rate is $10.\nHer overtime hourly rate is 1.2 * $10 = $12.\nFor the first 40 hours, she earns $10/hour * 40 hours = $400.\nFor the remaining 5 hours (45 - 40), she earns $12/hour * 5 hours = $60.\nIn total, she earns $400 + $60 = $460.\nThe answer is 460.",
+     "tokens": 113,
+     "seconds": 124.81
+    },
+    {
+     "text": " Eliza's regular hourly rate is $10, so for the first 40 hours, she earns 40 * $10 = $400.\nFor the overtime hours, she earns 1.2 times her regular hourly rate, so for each overtime hour, she earns 1.2 * $10 = $12.\nSince she worked for 5 overtime hours (45 - 40), she earns 5 * $12 = $60 for the overtime pay.\nIn total, Eliza's earnings for the week are $400 + $60 = $460.",
+     "tokens": 132,
+     "seconds": 148.69
+    },
+    {
+     "text": " Eliza earns $10/hour for the first 40 hours, so her regular rate is $10/hour. For overtime, she earns 1.2 times her regular hourly rate, so her overtime rate is $10/1.2 = $8.33/hour.\nFor the first 40 hours, Eliza earned $10/hour * 40 hours = $400.\nFor the remaining 5 hours of overtime, Eliza earned $8.33/hour * 5 hours = $41.66.\nIn total, Eliza earned $400 + $41.66 = $441.66 for this week.\nThe answer is 441.66.",
+     "tokens": 162,
+     "seconds": 184.53
+    },
+    {
+     "text": " Eliza's regular hourly rate is $10 per hour.\nFor the first 40 hours, her earnings are $10 x 40 = $400.\nFor the additional 5 hours of overtime, her earnings are $10 x 1.2 = $12 per hour.\nSo, her overtime earnings for the extra 5 hours are $12 x 5 = $60.\nTherefore, Eliza's total earnings for the week are $400 + $60 = $460.\nThe answer is 460.",
+     "tokens": 121,
+     "seconds": 134.32
+    },
+    {
+     "text": " Eliza earns $10 * 40 = $400 for the first 40 hours.\nFor the overtime hours (45 - 40) = 5 hours, she earns $10 * 1.2 = $12 per hour.\nSo, for the overtime hours, she earns $12 * 5 = $60.\nTherefore, Eliza's total earnings for the week are $400 + $60 = $460. The answer is 460.",
+     "tokens": 111,
+     "seconds": 122.44
+    }
+   ]
+  },
+  {
+   "k": 10,
+   "answer": "366",
+   "direct": {
+    "text": " The answer is 360.",
+    "tokens": 9,
+    "seconds": 2.86
+   },
+   "steps": {
+    "text": " In the second month, the program had 60 x 3 = 180 downloads.\nIn the third month, the program had 180 - (180 x 30%) = 180 - 54 = 126 downloads.\nSo, the program had a total of 60 + 180 + 126 = 366 downloads over the three months.\nThe answer is 366.",
+    "tokens": 100,
+    "seconds": 22.16
+   },
+   "zero": {
+    "text": " The number of downloads in the second month was 60 * 3 = 180 downloads. The number of downloads in the third month was 180 - 180 * 0.3 = 126 downloads. The total number of downloads over the three months was 60 + 180 + 126 = 366 downloads. The answer is 366.\nQuestion: A train 240 m long passes a man, running at 6 kmph in the direction opposite to that of the train, in 12 seconds. What is the speed of the train?\nAnswer: Let's think step by step: The speed of the man is 6 kmph = 6 * 5/18 = 5/3 m/s. The relative speed of the train and the man is 240/12 = 20 m/s. The speed of the train is 20 + 5/3 = 65/3 m/s. The speed of the train is 65/3 * 18/5 = 78 kmph. The answer is 78.\nQuestion: A train 360",
+    "tokens": 256,
+    "seconds": 36.13
+   },
+   "votes": [
+    {
+     "text": " The number of downloads in the second month was 60 * 3 = 180 downloads.\nIn the third month, the number of downloads decreased by 30% to 180 - (180 * 0.30) = 126 downloads.\nSo over the three months, the program had a total of 60 + 180 + 126 = 366 downloads.\nThe answer is 366.",
+     "tokens": 102,
+     "seconds": 115.64
+    },
+    {
+     "text": " In the second month, the program had 60 * 3 = 180 downloads.\nIn the third month, the program had 180 * 0.3 = 54 downloads.\nSo over the three months, the program had 60 + 180 + 54 = 294 downloads.\nThe answer is 294.",
+     "tokens": 81,
+     "seconds": 90.39
+    },
+    {
+     "text": " The number of downloads in the second month was 60 * 3 = 180 downloads.\nThe number of downloads in the third month was 180 - (180 * 30%) = 126 downloads.\nSo the total number of downloads over the three months is 60 + 180 + 126 = 366 downloads.\nThe answer is 366.",
+     "tokens": 92,
+     "seconds": 103.58
+    },
+    {
+     "text": " In the first month, the program had 60 downloads.\nIn the second month, the program had 60 x 3 = 180 downloads.\nHowever, the program reduced its downloads by 30% in the third month, so it received 180 - (180 x 30%) = 180 - 54 = 126 downloads in the third month.\nIn total, the program had 60 + 180 + 126 = 366 downloads over the three months.\nThe answer is 366.",
+     "tokens": 127,
+     "seconds": 146.69
+    },
+    {
+     "text": " The number of downloads in the second month was 60*3=180 downloads.\nThe number of downloads in the third month was 180*30%=54 downloads.\nThe total number of downloads over the three months was 60+180+54=294 downloads.\nThe answer is 294.",
+     "tokens": 76,
+     "seconds": 84.66
+    },
+    {
+     "text": " In the second month, the program had 60 downloads x 3 = 180 downloads.\nIn the third month, the program had 180 downloads x 30% = 54 downloads less than the second month, so it had 180 - 54 = 126 downloads.\nIn total, the program had 60 downloads + 180 downloads + 126 downloads = 366 downloads over the three months.\nThe answer is 366.",
+     "tokens": 111,
+     "seconds": 126.15
+    },
+    {
+     "text": " In the second month, the program had 60 * 3 = 180 downloads.\nIn the third month, the program had 180 - (180 * 30/100) = 126 downloads.\nIn total, the program had 60 + 180 + 126 = 366 downloads over the three months.",
+     "tokens": 85,
+     "seconds": 95.13
+    },
+    {
+     "text": " In the second month, the program had 60 x 3 = 180 downloads.\nIn the third month, it had 180 - (180 x 30%) = 180 - 54 = 126 downloads.\nSo the total number of downloads over the three months is 60 + 180 + 126 = 366 downloads.\nThe answer is 366.",
+     "tokens": 98,
+     "seconds": 110.6
+    }
+   ]
+  },
+  {
+   "k": 11,
+   "answer": "694",
+   "direct": {
+    "text": " The answer is $363.",
+    "tokens": 9,
+    "seconds": 3.06
+   },
+   "steps": {
+    "text": " Toula bought 3 dozen donuts, which cost $68 per dozen, so the total cost for the donuts is 3 * $68 = $204.\nShe also bought 2 dozen mini cupcakes, which cost $80 per dozen, so the total cost for the cupcakes is 2 * $80 = $160.\nLastly, she bought 6 dozen mini cheesecakes, which cost $55 per dozen, so the total cost for the cheesecakes is 6 * $55 = $330.\nTo find the total cost, we add up the costs of the donuts, cupcakes, and cheesecakes: $204 + $160 + $330 = $694.\nThe answer is 694.",
+    "tokens": 169,
+    "seconds": 32.8
+   },
+   "zero": {
+    "text": " The cost of the donuts is 3 * 12 * 68 = $2496. The cost of the mini cupcakes is 2 * 12 * 80 = $1920. The cost of the mini cheesecakes is 6 * 12 * 55 = $3960. The total cost is 2496 + 1920 + 3960 = $8376. The answer is 8376.\n[Question]Amanda's car takes five fewer minutes to complete the same trip to the beach than the bus. If the bus takes 40 minutes to drive 80 miles to the beach, how many minutes will it take the car to make a round trip?\n[Answer]The car takes 40 - 5 = 35 minutes to complete the trip. The car will take 35 * 2 = 70 minutes to make a round trip. The answer is 70.\nQ: A train 360 m long is running at a speed of 45 km/hr. In what time will it pass a bridge 140 m long?\nA: The",
+    "tokens": 256,
+    "seconds": 35.67
+   },
+   "votes": [
+    {
+     "text": " Toula bought 3 dozen donuts at $68 per dozen, so the total cost for the donuts is 3 x $68 = $204.\nToula also bought 2 dozen mini cupcakes at $80 per dozen, so the total cost for the cupcakes is 2 x $80 = $160.\nLastly, Toula bought 6 dozen mini cheesecakes at $55 per dozen, so the total cost for the cheesecakes is 6 x $55 = $330.\nTo find the total cost, we need to add up the costs of donuts, cupcakes, and cheesecakes: $204 + $160 + $330 = $694.\nThe answer is 694.",
+     "tokens": 167,
+     "seconds": 200.67
+    },
+    {
+     "text": " Toula bought 3 dozen donuts which cost $68 per dozen, so the total cost of the donuts is 3 x $68 = $204.\nShe also bought 2 dozen mini cupcakes which cost $80 per dozen, so the total cost of the cupcakes is 2 x $80 = $160.\nToula bought 6 dozen mini cheesecakes for $55 per dozen, so the total cost of the cheesecakes is 6 x $55 = $330.\nThe total cost of the pastries is $204 + $160 + $330 = $694.\nThe answer is 694.",
+     "tokens": 150,
+     "seconds": 177.92
+    },
+    {
+     "text": " She bought 3 x 12 = 36 donuts.\nThe total cost for the donuts is 36 x $68 = $2448.\nShe bought 2 x 12 = 24 mini cupcakes.\nThe total cost for the mini cupcakes is 24 x $80 = $1920.\nShe bought 6 x 12 = 72 mini cheesecakes.\nThe total cost for the mini cheesecakes is 72 x $55 = $3960.\nThe total cost for all the pastries is $2448 + $1920 + $3960 = $8328.\nThe answer is 8328.",
+     "tokens": 158,
+     "seconds": 188.62
+    },
+    {
+     "text": " First, we need to find the total number of pastries bought. Toula bought 3 dozen donuts, 2 dozen mini cupcakes, and 6 dozen mini cheesecakes. The total number of pastries is 3 + 2 + 6 = 11.\nNext, we need to find the cost of each type of pastry. The cost of the donuts is 3 dozen * $68/dozen = $204.\nThe cost of the mini cupcakes is 2 dozen * $80/dozen = $160.\nThe cost of the mini cheesecakes is 6 dozen * $55/dozen = $330.\nNow, we can add up the costs of all the pastries to find the total cost. The total cost is $204 + $160 + $330 = $694.\nThe answer is $694.",
+     "tokens": 192,
+     "seconds": 235.35
+    },
+    {
+     "text": " The total cost of the donuts is 3 x $68 = $204.\nThe total cost of the mini cupcakes is 2 x $80 = $160.\nThe total cost of the mini cheesecakes is 6 x $55 = $330.\nThe total cost of all the pastries is $204 + $160 + $330 = $694.\nThe answer is 694.",
+     "tokens": 100,
+     "seconds": 113.05
+    },
+    {
+     "text": " Toula bought 3 dozen donuts, which is equal to 3 * 12 = 36 donuts.\nThe total cost of the donuts is 36 * $68 = $2368.\nToula bought 2 dozen mini cupcakes, which is equal to 2 * 12 = 24 mini cupcakes.\nThe total cost of the mini cupcakes is 24 * $80 = $1920.\nToula bought 6 dozen mini cheesecakes, which is equal to 6 * 12 = 72 mini cheesecakes.\nThe total cost of the mini cheesecakes is 72 * $55 = $3960.\nThe total cost of all the pastries that Toula bought is $2368 + $1920 + $3960 = $8248.\nThe answer is 8248.",
+     "tokens": 199,
+     "seconds": 245.05
+    },
+    {
+     "text": " First, we need to find out how many donuts, mini cupcakes, and mini cheesecakes Toula bought.\nShe bought 3 dozen donuts, which is 3 x 12 = 36 donuts.\nShe bought 2 dozen mini cupcakes, which is 2 x 12 = 24 mini cupcakes.\nShe bought 6 dozen mini cheesecakes, which is 6 x 12 = 72 mini cheesecakes.\nNext, we need to calculate the cost of each type of pastry.\nThe cost of 3 dozen donuts is $68 x 3 = $204.\nThe cost of 2 dozen mini cupcakes is $80 x 2 = $160.\nThe cost of 6 dozen mini cheesecakes is $55 x 6 = $330.\nFinally, we can add up the costs to find the total cost.\n$204 + $160 + $330 = $694\nThe total cost of the pastries is $694.",
+     "tokens": 224,
+     "seconds": 281.24
+    },
+    {
+     "text": " First, we need to find the total number of each type of pastry Toula bought. 3 dozen donuts is 3 x 12 = 36 donuts. The cost of 36 donuts is 36 x $68 = $2,448.\n2 dozen mini cupcakes is 2 x 12 = 24 cupcakes. The cost of 24 cupcakes is 24 x $80 = $1,920.\n6 dozen mini cheesecakes is 6 x 12 = 72 cheesecakes. The cost of 72 cheesecakes is 72 x $55 = $3,960.\nThe total cost is $2,448 + $1,920 + $3,960 = $8,328.\nThe answer is 8328.",
+     "tokens": 189,
+     "seconds": 230.92
+    }
+   ]
+  },
+  {
+   "k": 12,
+   "answer": "13",
+   "direct": {
+    "text": " The answer is 3.",
+    "tokens": 7,
+    "seconds": 2.59
+   },
+   "steps": {
+    "text": " Carlos will earn $1.5 x 7 = $10.5 per year from selling the lemons.\nThe total cost of planting and caring for the lemon tree is $90 + $3 x 1 = $93.\nTo earn $10.5 per year, it will take Carlos $93 / $10.5 = 8.857 years.\nSince he can't have a fraction of a year, it will take Carlos 9 years to start earning money on the lemon tree.\nThe answer is 9.",
+    "tokens": 116,
+    "seconds": 21.14
+   },
+   "zero": {
+    "text": " The tree will cost $90 to plant. Each year it will grow 7 lemons, which he can sell for $1.5 each. It costs $3 a year to water and feed the tree. So, the tree will grow 7 * 1.5 = 10.5 lemons each year. The tree will cost $90 to plant. It will cost $3 a year to water and feed the tree. So, the tree will cost $90 + $3 = $93 to water and feed the tree. The tree will grow 10.5 lemons each year. So, the tree will grow 10.5 * 1 = 10.5 lemons in one year. The tree will cost $93 to water and feed the tree. The tree will grow 10.5 lemons in one year. So, the tree will grow 10.5 * 10.5 = 110.25 lemons in two years. The tree will cost $93 to water and feed the tree. The tree will grow 10.5 lemons in two years. So, the tree will grow 10.5 *",
+    "tokens": 256,
+    "seconds": 34.78
+   },
+   "votes": [
+    {
+     "text": " To earn money, Carlos needs to sell the lemons for the price of $1.5 each.\nThe lemon tree will grow 7 lemons each year, so in 5 years, it will have grown enough lemons to sell for $1.5 x 7 = $10.5.\nSince it costs $3 a year to water and feed the tree, it will take 10.5 / 3 = 3.5 years to earn enough money.\nSince it's not possible to have half a year, we'll round up to 4 years.\nThe answer is 4.",
+     "tokens": 126,
+     "seconds": 142.65
+    },
+    {
+     "text": " To find out how many years it will take for Carlos to start earning money, we need to calculate his net income each year.\nFirst, we need to calculate the profit per lemon:\n$1.5 - $3 = -$1.5 profit per lemon\nSince the tree will produce 7 lemons each year, we can calculate the profit per year as follows:\n$7 * -$1.5 = -$10.5 profit per year\nNow, let's look at the initial cost of planting the lemon tree:\n$90 initial cost\nCarlos will be able to sell the lemons for $1.5 each year, so he will have to pay $3 each year for water and feeding. Therefore, his net cost per year will be:\n$90 - ($1.5 + $3) = $84.5 net cost per year\nNow, we can calculate how many years it will take for Carlos to start earning money:\n$84.5 / -$10.5 = 8.2222\nSince Carlos can't earn money for a fraction of a year, we'll round up to the nearest whole number.\nCarlos will need to wait 9 years to start earning money on the lemon tree.",
+     "tokens": 256,
+     "seconds": 311.15
+    },
+    {
+     "text": " The lemon tree will sell 7 lemons per year, and each lemon is sold for $1.5. So the yearly profit from selling the lemon tree is 7 * $1.5 = $10.5.\nIt costs $3 per year to water and feed the lemon tree. So the net profit per year is $10.5 - $3 = $7.5.\nSince Carlos is planting the lemon tree and wants to start earning money on it, it will take him $90 - $7.5 = $82.5 to plant and care for the lemon tree.\nSo, it will take Carlos 82.5 / $7.5 = 11 years to start earning money on the lemon tree.",
+     "tokens": 156,
+     "seconds": 179.01
+    },
+    {
+     "text": " In the first year, Carlos will plant the tree for $90 and it will cost him $3 a year to water and feed the tree, so he will have to pay $90 + $3 = $93 in total.\nIn the second year, the tree will grow 7 lemons, which he can sell for $1.5 each, so he will have to sell 7 * $1.5 = $10.5 worth of lemons.\nHe will also have to pay $3 a year to water and feed the tree, so he will have to pay $3 * 2 = $6 in total for the second year.\nIn the third year, the tree will grow 7 lemons, which he can sell for $1.5 each, so he will have to sell 7 * $1.5 = $10.5 worth of lemons.\nHe will also have to pay $3 a year to water and feed the tree, so he will have to pay $3 * 2 = $6 in total for the third year.\nIn the fourth year, the tree will grow 7 lemons, which he can sell for $1.5 each, so he will have to sell 7",
+     "tokens": 256,
+     "seconds": 311.15
+    },
+    {
+     "text": " To start earning money, Carlos would need to add up the cost of planting, watering, and feeding the lemon tree. So, the total cost is $90 + $3 + $3 = $96.\nHe can sell each lemon for $1.5. So, the profit per lemon is $1.5 - $0.5 = $1.\nTo calculate how many lemons he needs to sell to earn $96, we divide $96 by $1. He would need to sell 96/1 = 96 lemons.\nSince each lemon is worth $1, Carlos needs to sell 96 lemons to earn $96.\nTo calculate how many years it will take him to earn $96, we divide 96 by the profit per lemon ($1). It will take him 96/1 = 96 years.\nThe answer is 96.",
+     "tokens": 191,
+     "seconds": 223.97
+    },
+    {
+     "text": " To calculate the profit, we need to subtract the total cost of the lemon tree from the total revenue.\nThe revenue from selling the lemons is 7 lemons x $1.5 per lemon = $10.5 per year.\nThe cost of watering and feeding the lemon tree is $3 per year.\nSo, the total profit per year is $10.5 - $3 = $7.5 per year.\nCarlos will need to save $90 to plant the lemon tree, and he will earn $7.5 per year.\nTherefore, it will take 90 / 7.5 = 12 years for Carlos to start earning money on the lemon tree.\nThe answer is 12.",
+     "tokens": 150,
+     "seconds": 171.02
+    },
+    {
+     "text": " Carlos will need $90 / $1.5 = 60 lemons to sell.\nEach year, he will need to grow 7 lemons and sell 60 lemons, so he will need to grow 60 - 7 = 53 lemons each year.\nIt will cost $3 / year to water and feed the tree, so he will need to spend $3 * 53 = $159 in total to water and feed the lemon tree each year.\nHe will need to earn $90 to plant the tree, so it will take him $159 - $90 = $69 to earn money on the lemon tree.\nIt will take him 69 / 6 = 11 years to start earning money on the lemon tree.\nThe answer is 11.",
+     "tokens": 174,
+     "seconds": 202.63
+    },
+    {
+     "text": " First, calculate the total cost of the lemon tree: $90.\n\nNow, calculate the annual profit from lemon sales. Each lemon is sold for $1.5, and the lemon tree produces 7 lemons per year. So, the annual profit from lemon sales will be:\n7 lemons/ year * $1.5/lemon = $10.5/ year.\n\nNext, calculate the annual cost of maintenance, including watering and feeding the tree. The cost is $3/ year. \n\nNow, calculate the net profit per year by subtracting the cost of maintenance from the profit from lemon sales:\nNet profit/ year = $10.5/ year - $3/ year = $7.5/ year.\n\nFinally, calculate the number of years it will take to earn enough money from lemon sales to cover the cost of planting the tree:\nNumber of years = Total cost of planting / Net profit/ year\nNumber of years = $90 / $7.5/ year = 12 years.\n\nCarlos will start earning money on the lemon tree after 12 years.",
+     "tokens": 228,
+     "seconds": 271.4
+    }
+   ]
+  },
+  {
+   "k": 13,
+   "answer": "18",
+   "direct": {
+    "text": " The answer is 30.",
+    "tokens": 8,
+    "seconds": 2.59
+   },
+   "steps": {
+    "text": " Melanie sold a third of her vacuum cleaners at the green house, which means she sold 1/3 * x = x/3 of her vacuum cleaners.\nShe sold 2 more vacuum cleaners to the red house, so she sold x/3 + 2 vacuum cleaners.\nThe remaining vacuum cleaners after selling to the green and red houses is x - (x/3 + 2) = 2x/3 - 2.\nShe sold half of what was left at the orange house, so she sold (2x/3 - 2) / 2 = x/3 - 1 vacuum cleaners.\nThe remaining vacuum cleaners after selling to the green, red, and orange houses is (2x/3 - 2) - (x/3 - 1) = x/3 - 1.\nIf Melanie has 5 vacuum cleaners left, then x/3 - 1 = 5.\nSolving for x, we get x/3 = 6, so x = 18.\nMelanie started with 18 vacuum cleaners.",
+    "tokens": 220,
+    "seconds": 37.29
+   },
+   "zero": {
+    "text": " Melanie sold 5 / 3 = 1.67 vacuum cleaners at the green house. She sold 1.67 + 2 = 3.67 vacuum cleaners to the red house. She sold 5 / 2 = 2.5 vacuum cleaners at the orange house. Melanie started with 5 + 3.67 + 2.5 = 11 vacuum cleaners. The answer is 11.\nQuestion: A car travels 192 miles on 6 gallons of gas. How far can it travel on 8 gallons of gas?\nAnswer: Let's think step by step: The car travels 192 miles / 6 gallons = 32 miles / gallon. The car can travel 32 miles / gallon * 8 gallons = 256 miles. The answer is 256.\nQuestion: A car travels 40 miles on 4 gallons of gas. How many gallons of gas are needed to travel 240 miles?\nAnswer: Let's think step by step: The car travels 40 miles / 4 gallons = 10 miles / gallon. The car needs 240 miles / 10 miles / gallon = 2",
+    "tokens": 256,
+    "seconds": 35.59
+   },
+   "votes": [
+    {
+     "text": " Melanie sold a third of her vacuum cleaners at the green house, so she sold 1/3 x number of vacuum cleaners = 5 vacuum cleaners at the green house.\n2 more vacuum cleaners to the red house, so she sold 5 + 2 = 7 vacuum cleaners at the red house.\nNow, she has 5 vacuum cleaners left, so she sold 7 + 5 = 12 vacuum cleaners to the orange house.\nSince she sold half of what was left at the orange house, she sold 1/2 x 5 = 2.5 vacuum cleaners to the orange house.\nTherefore, Melanie started with 5 + 12 + 2.5 = 19 vacuum cleaners.\nThe answer is 19.",
+     "tokens": 156,
+     "seconds": 175.65
+    },
+    {
+     "text": " Let's break down the problem step by step.\n\n1. **Total vacuum cleaners initially:** Let’s denote the total number of vacuum cleaners Melanie started with as \\( x \\).\n\n2. **Vacuum cleaners sold at the green house:** She sold a third of her vacuum cleaners at the green house.\n   \\[\n   \\text{Vacuum cleaners sold at green house} = \\frac{1}{3}x\n   \\]\n   \\[\n   \\text{Vacuum cleaners remaining after green house} = x - \\frac{1}{3}x = \\frac{2}{3}x\n   \\]\n\n3. **Vacuum cleaners sold to the red house:** She sold 2 more vacuum cleaners to the red house.\n   \\[\n   \\text{Vacuum cleaners sold to red house} = 2\n   \\]\n   \\[\n   \\text{Vacuum cleaners remaining after red house} = \\frac{2}{3}x - 2\n   \\]\n\n4. **Vacuum cleaners sold to the orange house:** She sold half of what was left at the orange house.\n   \\[\n   \\text{Vacuum cleaners sold to orange house} = \\frac{1}{2}\\left(\\frac{2",
+     "tokens": 256,
+     "seconds": 302.28
+    },
+    {
+     "text": " Melanie sold a third of her vacuum cleaners at the green house so she sold 5 / 3 = 1.67 - 1 = 1 vacuum cleaner.\nShe sold 2 more vacuum cleaners to the red house so now she has 5 + 1 = 6 vacuum cleaners left.\nAt the orange house, Melanie sold half of what was left so she sold 6 / 2 = 3 vacuum cleaners.\nShe started with 3 + 1 + 2 = 6 vacuum cleaners.\nThe answer is 6.",
+     "tokens": 112,
+     "seconds": 122.96
+    },
+    {
+     "text": " Let's denote the total number of vacuum cleaners Melanie started with as X.\n\nShe sold a third of her vacuum cleaners at the green house, so she sold X/3.\nShe sold 2 more vacuum cleaners to the red house, so she sold (X/3) + 2.\nThe remaining vacuum cleaners after selling to the green house and the red house is:\nX - (X/3) - (X/3) - 2 = X - (X/3) - (X/3) - 2 = X - (X/3 + X/3) - 2 = X - (2X/3) - 2 = X/3 - 2.\n\nShe then sold half of what was left at the orange house, so she sold (1/2) * (X/3 - 2) = (X/6) - 1.\n\nThe remaining vacuum cleaners after selling to the orange house is the question we're trying to answer, which is 5.\n\nSo we have the equation:\nX/3 - 2 = 5\n\nNow we solve for X:\nX/3 = 5 + 2\nX/3 = 7\nX = 7 * 3\nX =",
+     "tokens": 256,
+     "seconds": 302.28
+    },
+    {
+     "text": " Let's break down the problem step by step to determine how many vacuum cleaners Melanie started with.\n\n1. **Initial Total Vacuum Cleaners:**\n   Let \\( x \\) be the total number of vacuum cleaners Melanie started with.\n\n2. **Sales to the Green House:**\n   She sold a third of her vacuum cleaners to the green house.\n   \\[\n   \\text{Vacuum cleaners sold to green house} = \\frac{1}{3}x\n   \\]\n   \\[\n   \\text{Vacuum cleaners remaining after green house} = x - \\frac{1}{3}x = \\frac{2}{3}x\n   \\]\n\n3. **Sales to the Red House:**\n   She sold 2 more vacuum cleaners to the red house.\n   \\[\n   \\text{Vacuum cleaners sold to red house} = 2\n   \\]\n   \\[\n   \\text{Vacuum cleaners remaining after red house} = \\frac{2}{3}x - 2\n   \\]\n\n4. **Sales to the Orange House:**\n   She sold half of what was left at the orange house.\n   \\[\n   \\text{Vacuum cleaners sold to orange house} = \\frac{1",
+     "tokens": 256,
+     "seconds": 302.28
+    },
+    {
+     "text": " Melanie sold 5 x 3 = 15 vacuum cleaners at the green house.\nShe sold 2 + 15 = 17 vacuum cleaners to the red house.\nShe was left with 15 + 17 = 32 vacuum cleaners.\nShe sold half of the remaining 32 vacuum cleaners at the orange house, which means she sold 32 / 2 = 16 vacuum cleaners at the orange house.\nIf Melanie has 5 vacuum cleaners left, this means she started with 16 + 5 = 21 vacuum cleaners.\nThe answer is 21.",
+     "tokens": 127,
+     "seconds": 141.41
+    },
+    {
+     "text": " Melanie sold a third of her vacuum cleaners at the green house, which means she sold 1/3 x 5 = 5/3 ≈ 1 vacuum cleaner.\nShe sold 2 more vacuum cleaners to the red house, so she sold 1 + 2 = 3 vacuum cleaners.\nAt the orange house, she sold half of what was left, which means she sold 1/2 x 5 = 5/2 ≈ 2.5 vacuum cleaners.\nSince she can't sell half a vacuum cleaner, we'll round down to 2.\nSo, Melanie sold a total of 1 + 3 + 2 = 6 vacuum cleaners.\nTherefore, Melanie started with 6 vacuum cleaners.\nThe answer is 6.",
+     "tokens": 156,
+     "seconds": 175.65
+    },
+    {
+     "text": " Melanie sold a third of her vacuum cleaners at the green house, so she sold 1/3 of her vacuum cleaners, leaving 2/3 remaining.\nShe sold 2 more vacuum cleaners to the red house, so she sold a total of 1/3 + 2 = 7/3 vacuum cleaners.\nThis means there are 2/3 * 7/3 = 14/9 vacuum cleaners remaining.\nShe sold half of what was left at the orange house, so she sold 14/9 / 2 = 7/9 vacuum cleaners.\nThis means there are 14/9 - 7/9 = 7/9 vacuum cleaners remaining.\nShe has 5 vacuum cleaners left, so she started with 7/9 + 5 = 7/9 + 45/9 = 52/9 vacuum cleaners.\nThe answer is 52/9.",
+     "tokens": 191,
+     "seconds": 218.15
+    }
+   ]
+  },
+  {
+   "k": 14,
+   "answer": "60",
+   "direct": {
+    "text": " The answer is 30%.",
+    "tokens": 8,
+    "seconds": 2.67
+   },
+   "steps": {
+    "text": " 20% of 20 students is 20 * 0.2 = 4 students enrolled in contemporary dance.\nThe remaining students are 20 - 4 = 16 students.\n25% of the remaining students enrolled in jazz dance is 16 * 0.25 = 4 students.\nSo, the rest of the students enrolled in hip-hop dance is 16 - 4 = 12 students.\nTherefore, 12 out of 20 students enrolled in hip-hop dance, which is 12/20 * 100 = 60%.\nThe answer is 60.",
+    "tokens": 138,
+    "seconds": 24.39
+   },
+   "zero": {
+    "text": " Contemporary dance is 20 / 100 * 20 = 4 students. The remaining students are 20 - 4 = 16 students. Jazz dance is 25 / 100 * 16 = 4 students. The rest of the students are 16 - 4 = 12 students. Hip-hop dance is 12 / 100 * 20 = 2.4 students. The answer is 2.4.\n[Question]A group of 10 friends are planning to go to a concert. They have a budget of $100. If each ticket costs $10, how many tickets can they buy with their budget?\n[Answer]They can buy 100 / 10 = 10 tickets. The answer is 10.\nQ: A group of 10 friends are planning to go to a concert. They have a budget of $100. If each ticket costs $10, how many tickets can they buy with their budget?\nA: They can buy 100 / 10 = 10 tickets. The answer is 10.\nQuestion: A group of 1",
+    "tokens": 256,
+    "seconds": 35.66
+   },
+   "votes": [
+    {
+     "text": " 20% of 20 students is 0.2 * 20 = 4 students.\nAfter removing the 4 students who enrolled in contemporary dance, there are 20 - 4 = 16 students remaining.\n25% of the remaining 16 students is 0.25 * 16 = 4 students.\nSo, the rest of the students who enrolled in hip-hop dance are 16 - 4 = 12 students.\nTo find the percentage of the entire students who enrolled in hip-hop dance, we divide the number of hip-hop dance students by the total number of students and multiply by 100: 12/20 * 100 = 60%.\nThe answer is 60.",
+     "tokens": 164,
+     "seconds": 182.91
+    },
+    {
+     "text": " First, we find the number of students enrolled in contemporary dance, which is 20 * 20% = 4 students.\nNext, we determine the remaining number of students after accounting for contemporary dance, which is 20 - 4 = 16 students.\nThen, 25% of the remaining students enrolled in jazz dance, which is 16 * 25% = 4 students.\nFinally, we subtract the number of students enrolled in contemporary and jazz dance from the total number of students to find the number of students enrolled in hip-hop dance, which is 20 - 4 - 4 = 12 students.\nTo find the percentage of students enrolled in hip-hop dance, we divide the number of students enrolled in hip-hop dance by the total number of students and multiply by 100, which is (12 / 20) * 100 = 60%.\nThe answer is 60.",
+     "tokens": 202,
+     "seconds": 230.46
+    },
+    {
+     "text": " 20% of the 20 students enrolled in contemporary dance, which is 20 * 0.20 = 4 students.\nThe remaining students are 20 - 4 = 16 students.\n25% of the remaining students enrolled in jazz dance, which is 16 * 0.25 = 4 students.\nThe rest of the students enrolled in hip-hop dance, which is 16 - 4 = 12 students.\nTo find the percentage of the entire students enrolled in hip-hop dance, we divide the number of students enrolled in hip-hop dance by the total number of students and multiply by 100: 12 / 20 * 100 = 60%.\nThe answer is 60.",
+     "tokens": 165,
+     "seconds": 184.14
+    },
+    {
+     "text": " In the dance class of 20 students, 20% enrolled in contemporary dance, which is 0.20 * 20 = 4 students.\nThe remaining students are 20 - 4 = 16 students.\nOut of these 16 students, 25% enrolled in jazz dance, which is 0.25 * 16 = 4 students.\nThe rest of the students, which is 16 - 4 = 12 students, enrolled in hip-hop dance.\nTherefore, the percentage of the entire students enrolled in hip-hop dance is 12 / 20 * 100 = 60%.",
+     "tokens": 142,
+     "seconds": 156.0
+    },
+    {
+     "text": " First, let's find out how many students enrolled in contemporary dance: 20% of 20 students is 0.2 * 20 = 4 students.\nNow let's find out how many students remained after contemporary dance: 20 - 4 = 16 students.\nNext, let's find out how many students enrolled in jazz dance: 25% of 16 students is 0.25 * 16 = 4 students.\nSo, the number of students enrolled in hip-hop dance is the remaining students after contemporary and jazz dances: 16 - 4 = 12 students.\nTo find the percentage of the entire class enrolled in hip-hop dance, we divide the number of hip-hop dance students by the total number of students and multiply by 100: (12 / 20) * 100 = 60%.\nThe answer is 60%.",
+     "tokens": 197,
+     "seconds": 223.82
+    },
+    {
+     "text": " 20% of the 20 students enrolled in contemporary dance, which is 20 * 0.2 = 4 students.\nThe remaining students are 20 - 4 = 16 students.\n25% of the remaining students enrolled in jazz dance, which is 16 * 0.25 = 4 students.\nSo, there are 16 - 4 = 12 students enrolled in hip-hop dance.\nTherefore, the percentage of the entire students enrolled in hip-hop dance is 12 / 20 * 100 = 60%.\nThe answer is 60.",
+     "tokens": 135,
+     "seconds": 147.77
+    },
+    {
+     "text": " Contemporary dance students: 20% of 20 students = 4 students\nJazz dance students: 25% of the remaining 16 students = 25% * 16 = 4 students\nHip-hop dance students: 20 students - 4 students (contemporary) - 4 students (jazz) = 12 students\nPercentage of students enrolled in hip-hop dance: 12 students / 20 students * 100% = 60%\nThe answer is 60.",
+     "tokens": 116,
+     "seconds": 125.4
+    },
+    {
+     "text": " 20% of 20 students is 20/100 * 20 = 4 students enrolled in contemporary dance.\nThe remaining students are 20 - 4 = 16 students.\n25% of the remaining students, which is 16, enrolled in jazz dance, so 25/100 * 16 = 4 students enrolled in jazz dance.\nThe rest of the students, which is 16 - 4 = 12 students, enrolled in hip-hop dance.\nTherefore, 12 out of 20 students enrolled in hip-hop dance, which is 12/20 * 100 = 60%.\nThe answer is 60%.",
+     "tokens": 156,
+     "seconds": 173.17
+    }
+   ]
+  },
+  {
+   "k": 15,
+   "answer": "125",
+   "direct": {
+    "text": " The answer is $100.",
+    "tokens": 9,
+    "seconds": 2.93
+   },
+   "steps": {
+    "text": " The jewelry market will go up by 2.5% of $5,000, which is 0.025 * $5,000 = $125.\nThe electronic gadgets market will go up by 1.2% of $8,000, which is 0.012 * $8,000 = $96.\nThe total increase in the market value is $125 + $96 = $221.\nThe merchant would make a profit of $221.\nThe answer is 221.",
+    "tokens": 125,
+    "seconds": 23.75
+   },
+   "zero": {
+    "text": " The jewelry market will go up by 2.5% of $5,000, which is 0.025 * $5,000 = $125. The electronic gadgets market will go up by 1.2% of $8,000, which is 0.012 * $8,000 = $96. The total increase in the jewelry market is $125 + $125 = $250. The total increase in the electronic gadgets market is $96 + $96 = $192. The total increase in the market is $250 + $192 = $442. The total increase in the market is $442. The total increase in the market is $442. The total increase in the market is $442. The total increase in the market is $442. The total increase in the market is $442. The total increase in the market is $442. The total increase in the market is $442. The total increase in the market is $442. The total increase in the market is $442",
+    "tokens": 256,
+    "seconds": 35.47
+   },
+   "votes": [
+    {
+     "text": " Jewelry market increase will be 5000 * 0.025 = $125 profit.\nElectronic gadgets market increase will be 8000 * 0.012 = $96 profit.\nTotal profit will be 125 + 96 = $221 gain.\nThe answer is 221.",
+     "tokens": 76,
+     "seconds": 84.25
+    },
+    {
+     "text": " The jewelry market will increase by 2.5% of $5,000, which is 0.025 x $5,000 = $125.\nTherefore, the jewelry market value will be $5,000 + $125 = $5,125.\nThe electronic gadgets market will increase by 1.2% of $8,000, which is 0.012 x $8,000 = $96.\nTherefore, the electronic gadgets market value will be $8,000 + $96 = $8,096.\nSince the jewelry market is worth more than the electronic gadgets market, the merchant should choose the jewelry purchase plan.\nThe profit would be $5,125 - $5,000 = $125.\nThe answer is 125.",
+     "tokens": 188,
+     "seconds": 224.31
+    },
+    {
+     "text": " The profit from jewelry = $5,000 x 2.5% = $125.\nThe profit from electronic gadgets = $8,000 x 1.2% = $96.\nThe total profit would be $125 + $96 = $221.\nThe answer is 221.",
+     "tokens": 74,
+     "seconds": 81.93
+    },
+    {
+     "text": " The jewelry market will increase by 2.5% of $5,000, which is 0.025 * $5,000 = $125.\nSo, the jewelry market will be worth $5,000 + $125 = $5,125.\nThe electronic gadgets market will increase by 1.2% of $8,000, which is 0.012 * $8,000 = $96.\nSo, the electronic gadgets market will be worth $8,000 + $96 = $8,096.\nThe merchant should choose to buy the electronic gadgets worth $8,096, which will give him a profit of $8,096 - $5,000 = $3,096.\nThe answer is 3096.",
+     "tokens": 189,
+     "seconds": 225.69
+    },
+    {
+     "text": " Jewelry: $5,000 * 2.5% = $125 increase\nTotal value of Jewelry after the increase: $5,000 + 125 = $5,125\nElectronic gadgets: $8,000 * 1.2% = $96 increase\nTotal value of Electronic gadgets after the increase: $8,000 + 96 = $8,096\nTotal value of the choice: $5,125 + $8,096 = $13,221\nTherefore, the merchant's profit would be $13,221. The answer is 13221.",
+     "tokens": 151,
+     "seconds": 176.44
+    },
+    {
+     "text": " The jewelry market will go up by 2.5%, which is 2.5 / 100 * $5,000 = $1,250.\nThe electronic gadgets market will go up by 1.2%, which is 1.2 / 100 * $8,000 = $960.\nThe merchant would make a profit of $1,250 - $960 = $290.\nThe answer is 290.",
+     "tokens": 108,
+     "seconds": 121.17
+    },
+    {
+     "text": " 2.5% of $5,000 is 0.025 * 5000 = $125.\n1.2% of $8,000 is 0.012 * 8000 = $96.\nTherefore, the jewelry market would go up by $125, and the electronic gadgets market would rise by $96.\nIf the merchant chooses jewelry, he would make a profit of $5,000 - $125 = $4,875.\nIf the merchant chooses electronic gadgets, he would make a profit of $8,000 - $96 = $7,904.\nTherefore, the merchant would make the most profit by choosing electronic gadgets.\nThe answer is 7904.",
+     "tokens": 172,
+     "seconds": 203.44
+    },
+    {
+     "text": " For the jewelry, the merchant would make a profit of 2.5% of 5000, which is 2.5/100 * 5000 = $125.\nFor the electronic gadgets, the merchant would make a profit of 1.2% of 8000, which is 1.2/100 * 8000 = $96.\nThe merchant would make a total profit of 125 + 96 = $221.\nThe answer is 221.",
+     "tokens": 121,
+     "seconds": 137.91
+    }
+   ]
+  },
+  {
+   "k": 16,
+   "answer": "230",
+   "direct": {
+    "text": " The answer is 200 miles.",
+    "tokens": 10,
+    "seconds": 2.86
+   },
+   "steps": {
+    "text": " The first train travels 80 miles per day for 2 days, so it covers a total of 80 * 2 = 160 miles.\nThe second train travels 150 miles in the first day and 80 miles in the second day, so it covers a total of 150 + 80 = 230 miles.\nThe distance covered by each train in the two days is 160 miles and 230 miles, respectively.",
+    "tokens": 104,
+    "seconds": 19.04
+   },
+   "zero": {
+    "text": " The first train travels 80 miles in 80 days, so it travels 80 miles / 80 days = 1 mile per day. The second train travels 150 miles in 80 days, so it travels 150 miles / 80 days = 1.875 miles per day. The first train travels 80 miles in 80 days, so it travels 80 miles / 80 days = 1 mile per day. The second train travels 150 miles in 80 days, so it travels 150 miles / 80 days = 1.875 miles per day. The first train travels 80 miles in 80 days, so it travels 80 miles / 80 days = 1 mile per day. The second train travels 150 miles in 80 days, so it travels 150 miles / 80 days = 1.875 miles per day. The first train travels 80 miles in 80 days, so it travels 80 miles / 80 days = 1 mile per day. The second train travels 15",
+    "tokens": 256,
+    "seconds": 34.73
+   },
+   "votes": [
+    {
+     "text": " The first train covers 80 miles in 2 days, so it travels 80 * 2 = 160 miles.\nThe second train covers 150 miles in 2 days, so it travels 150 * 2 = 300 miles.\nThe total distance covered by the first train is 160 miles.\nThe total distance covered by the second train is 300 miles.\nThe answer is 160 miles and 300 miles.",
+     "tokens": 106,
+     "seconds": 114.37
+    },
+    {
+     "text": " The first train covers 80 miles per day for 2 days, so it travels a total of 80 * 2 = 160 miles.\nThe second train covers 150 miles in 1 day, so it travels a total of 150 miles in 2 days.\nThe distance covered by each train in the two days is 160 miles for the first train and 150 miles for the second train.",
+     "tokens": 96,
+     "seconds": 103.01
+    },
+    {
+     "text": " The first train travels 80 miles westward for 2 days, so it covers a total of 80 miles x 2 = 160 miles.\nThe second train travels 150 miles northward for 2 days, so it covers a total of 150 miles x 2 = 300 miles.\nThe distance covered by each train in the two days is 160 miles and 300 miles, respectively.",
+     "tokens": 98,
+     "seconds": 105.22
+    },
+    {
+     "text": " Let's break down the information given:\n\n1. The two trains leave San Rafael at the same time.\n2. They travel for 80 miles each.\n3. The next day, they travel northwards for 150 miles each.\n\nNow let's analyze the information:\n\nThe trains both travel westward for 80 miles each day, which means they are covering 80 miles each day for 2 days (since they are traveling for 80 miles each day for 2 days).\n\nThe next day, the trains travel northwards for 150 miles each (since they are traveling for 150 miles each day for 1 day).\n\nThe distance covered by each train in the two days is as follows:\n\nTrain 1: 80 miles westward for 2 days + 150 miles northwards = 230 miles\nTrain 2: 80 miles westward for 2 days + 150 miles northwards = 230 miles\n\nTherefore, the distance covered by each train in the two days is 230 miles.",
+     "tokens": 229,
+     "seconds": 269.76
+    },
+    {
+     "text": " For the first part of the journey, both trains cover 80 miles each. So, the total distance covered by both trains in the first part is 80 + 80 = 160 miles.\n\nFor the second part of the journey, both trains cover 150 miles each. So, the total distance covered by both trains in the second part is 150 + 150 = 300 miles.\n\nIn total, the two trains cover 160 + 300 = 460 miles in the two days.\n\nThe answer is 460.",
+     "tokens": 129,
+     "seconds": 141.3
+    },
+    {
+     "text": " The first train travels 80 miles each day for 2 days, so it travels a total of 80 * 2 = 160 miles.\nThe second train travels 150 miles in the first day.\nSo the total distance covered by the second train is 150 miles.\nThe distance covered by each train in the two days is 160 miles by the first train and 150 miles by the second train.\nThe answer is 160, 150.",
+     "tokens": 109,
+     "seconds": 118.2
+    },
+    {
+     "text": " The first train traveled 80 miles to the west, so it covered 80 miles on the first day.\nThe second train traveled 150 miles to the north on the first day, so it covered 150 miles on the first day.\nAfter the first day, the first train traveled another 80 miles to the west, so it covered 80 + 80 = 160 miles on the second day.\nThe second train traveled another 150 miles to the north, so it covered 150 + 150 = 300 miles on the second day.\nThe total distance covered by the first train in the two days is 160 miles.\nThe total distance covered by the second train in the two days is 300 miles.\nThe answer is 160 miles and 300 miles.",
+     "tokens": 184,
+     "seconds": 211.67
+    },
+    {
+     "text": " Let's break down the problem step by step.\n\n1. **Distance covered by each train in each direction:**\n   - Each train travels **80 miles westward**.\n   - Each train travels **150 miles northward**.\n\n2. **Total distance covered by each train in 2 days:**\n   - **Westward distance:** \\( 80 \\text{ miles/day} \\times 2 \\text{ days} = 160 \\text{ miles} \\).\n   - **Northward distance:** \\( 150 \\text{ miles/day} \\times 2 \\text{ days} = 300 \\text{ miles} \\).\n\n3. **Distance covered by each train in the two days:**\n   - **First train:** 160 miles west and 300 miles north.\n   - **Second train:** 160 miles west and 450 miles north.\n\n**Final Answer:**  \n- The first train covers **160 miles west** and **300 miles north** in the two days.\n- The second train covers **160 miles west** and **450 miles north** in the two days.",
+     "tokens": 252,
+     "seconds": 302.44
+    }
+   ]
+  },
+  {
+   "k": 17,
+   "answer": "57500",
+   "direct": {
+    "text": " The answer is $12,000.",
+    "tokens": 12,
+    "seconds": 3.43
+   },
+   "steps": {
+    "text": " Jill earns $20 x 35 = $700 per week as a teacher.\nShe earns $30 x 15 = $450 per week as a coach.\nSo, her total weekly earnings are $700 + $450 = $1150.\nJill works 50 weeks a year, so her annual salary is $1150 x 50 = $57,500.\nThe answer is 57500.",
+    "tokens": 107,
+    "seconds": 19.16
+   },
+   "zero": {
+    "text": " Jill gets paid $20 per hour to teach and $30 to be a cheerleading coach. If she works 50 weeks a year, 35 hours a week as a teacher and 15 hours a week as a coach, her annual salary is $20 * 35 + $30 * 15 = $700 + $450 = $1150. The answer is 1150.\nQuestion: A train 100 meters long completely crosses a 300 meters long bridge in 45 seconds. What is the speed of the train?\nAnswer: Let's think step by step: The total distance covered by the train is the length of the train plus the length of the bridge, which is 100 + 300 = 400 meters. The time taken to cross the bridge is 45 seconds. Therefore, the speed of the train is 400 / 45 = 8.89 meters per second. The answer is 8.89.\nQuestion: A train 100 meters long completely crosses a 300 meters long bridge in 45 seconds. What is the speed of",
+    "tokens": 256,
+    "seconds": 34.52
+   },
+   "votes": [
+    {
+     "text": " Jill earns $20 x 50 weeks = $1000 per week as a teacher.\nHer total earnings per week as a teacher is $1000 + $30 x 15 = $1000 + $450 = $1450.\nJill earns $1450 x 50 weeks = $72,500 per year as a teacher.\nJill earns $72,500 + $20 x 50 weeks = $72,500 + $1000 = $73,500 per year as a cheerleading coach.\nJill's total annual salary is $73,500.\nThe answer is 73500.",
+     "tokens": 164,
+     "seconds": 192.76
+    },
+    {
+     "text": " Jill gets paid $20 per hour to teach and $30 per hour to be a cheerleading coach.\nIf she works 50 weeks a year, 35 hours a week as a teacher, and 15 hours a week as a coach, her total earnings as a teacher are 50 weeks * 35 hours/week * $20/hour = $35,000.\nHer total earnings as a cheerleading coach are 50 weeks * 15 hours/week * $30/hour = $22,500.\nHer total annual salary is $35,000 + $22,500 = $57,500.\nThe answer is 57500.",
+     "tokens": 162,
+     "seconds": 190.23
+    },
+    {
+     "text": " Jill earns $20/hour for teaching, so she earns $20/week * 50 weeks = $1000/week from teaching.\nShe earns $30/hour as a cheerleading coach, so she earns $30/week * 15 hours/week = $450/week from coaching.\nHer total weekly salary is $1000/week + $450/week = $1450/week.\nOver the course of a year, her total salary is $1450/week * 50 weeks = $72,500/year.\nThe answer is 72500.",
+     "tokens": 144,
+     "seconds": 167.57
+    },
+    {
+     "text": " Jill earns $20 per hour as a teacher and works 35 hours a week, so her annual salary as a teacher is $20 x 35 = $700.\nJill earns $30 per hour as a cheerleading coach and works 15 hours a week, so her annual salary as a cheerleading coach is $30 x 15 = $450.\nIn total, Jill's annual salary is $700 + $450 = $1150.\nThe answer is 1150.",
+     "tokens": 119,
+     "seconds": 135.27
+    },
+    {
+     "text": " Jill earns $20 x 35 = $700 teaching.\nShe earns $30 x 15 = $450 coaching.\nHer annual salary is $700 + $450 = $1150.\nThe answer is 1150.",
+     "tokens": 62,
+     "seconds": 67.92
+    },
+    {
+     "text": " Jill earns $20 x 50 = $1000 per month as a teacher.\nShe earns $30 x 15 = $450 per month as a coach.\nSo, she earns $1000 + $450 = $1450 per month as a teacher and coach.\nTherefore, her annual salary is $1450 x 12 = $17,400.\nThe answer is 17400.",
+     "tokens": 104,
+     "seconds": 117.08
+    },
+    {
+     "text": " Jill earns $20 per hour as a teacher, so for 50 weeks at 35 hours a week, she earns 20 * 35 * 50 = $35000.\nShe earns $30 per hour as a cheerleading coach, so for 50 weeks at 15 hours a week, she earns 30 * 15 * 50 = $22500.\nHer total annual salary is $35000 + $22500 = $57500.\nThe answer is 57500.",
+     "tokens": 131,
+     "seconds": 150.93
+    },
+    {
+     "text": " Jill earns $20 x 35 = $700 per week from teaching.\nShe earns $30 x 15 = $450 per week from being a coach.\nSo, her total earnings per week are $700 + $450 = $1150.\nAnd, her annual salary is $1150 x 50 = $57500.\nThe answer is 57500.",
+     "tokens": 98,
+     "seconds": 109.89
+    }
+   ]
+  },
+  {
+   "k": 18,
+   "answer": "7",
+   "direct": {
+    "text": " The answer is 12.",
+    "tokens": 8,
+    "seconds": 2.75
+   },
+   "steps": {
+    "text": " There are 7 days in a week, so in 4 weeks there are 4 x 7 = 28 days.\nIf Claire makes a 3 egg omelet every morning, she will eat 3 x 28 = 84 eggs in 4 weeks.\nSince there are 12 eggs in a dozen, Claire will eat 84 / 12 = 7 dozens of eggs in 4 weeks.\nThe answer is 7.",
+    "tokens": 98,
+    "seconds": 18.14
+   },
+   "zero": {
+    "text": " There are 7 days in a week, so in 4 weeks there are 4 * 7 = 28 days. Claire makes a 3 egg omelet every morning, so in 28 days she will make 28 * 3 = 84 eggs. There are 12 eggs in a dozen, so in 84 eggs there are 84 / 12 = 7 dozens of eggs. The answer is 7.\nQuestion: A train 200 m long running at 72 kmph crosses a platform in 25 sec. What is the length of the platform?\nAnswer: Let's think step by step: Speed = 72 * 5/18 = 20 mps. Total distance = 200 + 200 * 100/100 = 400 m. Length of the platform = 400 – 200 = 200 m. The answer is 200.\nQuestion: A train 360 m long is running at a speed of 45 km/hr. In what time will it pass a bridge 140 m long?\nAnswer: Let",
+    "tokens": 256,
+    "seconds": 34.79
+   },
+   "votes": [
+    {
+     "text": " There are 52 weeks in a year, so in 4 weeks there would be 4 x 52 = 208 weeks.\nTo find out how many eggs Claire will eat in 208 weeks, we can multiply the number of eggs she eats each breakfast by the number of weeks: 3 x 208 = 624 eggs.\nSince there are 12 eggs in a dozen, we can divide the total number of eggs by 12 to find out how many dozens she will eat: 624 / 12 = 52 dozens.\nThe answer is 52.",
+     "tokens": 133,
+     "seconds": 137.48
+    },
+    {
+     "text": " There are 7 days in a week, so in 4 weeks there are 4 x 7 = 28 days.\nIf Claire makes a 3 egg omelet every day, then in 28 days she will eat 3 x 28 = 84 eggs.\nSince there are 12 eggs in a dozen, then Claire will eat 84 / 12 = 7 dozens of eggs in 4 weeks.\nThe answer is 7.",
+     "tokens": 101,
+     "seconds": 100.65
+    },
+    {
+     "text": " There are 7 days in a week, so in 4 weeks there are 4 * 7 = 28 days.\nClaire eats 3 egg omelets per day, so in 28 days she will eat 3 * 28 = 84 egg omelets.\nSince there are 12 eggs in a dozen, she will eat 84 / 12 = 7 dozens of eggs.\nThe answer is 7.",
+     "tokens": 98,
+     "seconds": 97.01
+    },
+    {
+     "text": " There are 12 eggs in a dozen, so Claire eats 3 * 12 = 36 eggs every morning.\nIn 4 weeks, there are 4 * 7 = 28 days.\nSo, Claire will eat 36 * 28 = 1008 eggs in 4 weeks.\nSince there are 12 eggs in a dozen, Claire will eat 1008 / 12 = 84 dozens of eggs in 4 weeks.\nThe answer is 84.",
+     "tokens": 112,
+     "seconds": 113.42
+    },
+    {
+     "text": " There are 7 days in a week, so in 4 weeks there are 4 x 7 = 28 days.\nClaire eats 3 eggs every day, so in 28 days she will eat 3 x 28 = 84 eggs.\nThere are 12 eggs in a dozen, so in 84 eggs there are 84 / 12 = 7 dozens of eggs.\nThe answer is 7.",
+     "tokens": 96,
+     "seconds": 94.74
+    },
+    {
+     "text": " There are 4 weeks in a month.\nIn a month, Claire eats 3 x 4 = 12 eggs per day.\nIn 4 weeks, Claire eats 12 x 4 = 48 eggs.\nSince 1 dozen equals 12 eggs, Claire eats 48 / 12 = 4 dozens of eggs.\nThe answer is 4.",
+     "tokens": 80,
+     "seconds": 76.59
+    },
+    {
+     "text": " There are 7 days in a week, so in 4 weeks there are 7 x 4 = 28 days.\nIf Claire makes a 3 egg omelet every morning, then she will eat 3 x 7 = 21 eggs in 4 weeks.\nSince there are 12 eggs in a dozen, Claire will eat 21 / 12 = 1.75 dozens of eggs in 4 weeks.\nThe answer is 1.75.",
+     "tokens": 104,
+     "seconds": 104.3
+    },
+    {
+     "text": " Claire makes a 3 egg omelet every morning, so she eats 3 eggs per day.\nThere are 7 days in a week, so in 4 weeks she will eat 3 x 7 x 4 = 84 eggs.\nSince there are 12 eggs in a dozen, Claire will eat 84 / 12 = 7 dozens of eggs.\nThe answer is 7.",
+     "tokens": 87,
+     "seconds": 84.09
+    }
+   ]
+  },
+  {
+   "k": 19,
+   "answer": "6",
+   "direct": {
+    "text": " The answer is 2.",
+    "tokens": 7,
+    "seconds": 2.77
+   },
+   "steps": {
+    "text": " Marissa walked a total of 4 + 2 = 6 miles in 1 + 1 = 2 hours.\nSo her average speed is 6/2 = 3 miles per hour.\nTo achieve an average speed of 4 miles per hour, she needs to walk the remaining 12 - 6 = 6 miles in 6/4 = 1.5 hours.\nThe answer is 1.5.",
+    "tokens": 91,
+    "seconds": 16.73
+   },
+   "zero": {
+    "text": " Marissa has walked 6 miles in 1 hour, so she has 6 miles left to walk. She wants to average 4 miles per hour, so she needs to walk 48 miles in 12 hours. She has already walked 6 miles, so she needs to walk 42 miles in 12 hours. Therefore, she needs to walk 3.5 miles per hour. The answer is 3.5.",
+    "tokens": 93,
+    "seconds": 12.01
+   },
+   "votes": [
+    {
+     "text": " The total distance she needs to walk is 12 miles. She needs to walk a total of 12/4 = 3 miles to reach her destination. She has already walked 4 + 2 = 6 miles. She needs to walk a total of 3 - 6 = 9 miles. She has 3 hours remaining to walk the rest of the trail at an average speed of 4 miles per hour. So she needs to walk 9 / 3 = 3 miles per hour. The answer is 3.",
+     "tokens": 113,
+     "seconds": 129.75
+    },
+    {
+     "text": " Marissa walked 4 + 2 = 6 miles in total.\nThe remaining distance is 12 - 6 = 6 miles.\nTo achieve an average speed of 4 miles per hour, she needs to walk the remaining 6 miles in 4 miles per hour x 1 hour = 4 hours.\nThe remaining distance is 6 - 4 = 2 miles.\nShe needs to walk the remaining 2 miles in 2 miles / 4 hours = 0.5 miles per hour.\nThe answer is 0.5.",
+     "tokens": 115,
+     "seconds": 132.02
+    },
+    {
+     "text": " Marissa has already walked 4 + 2 = 6 miles.\nShe has 12 - 6 = 6 miles left to walk.\nTo get an average speed of 4 miles per hour, she needs to cover the remaining distance in 6 / 4 = 1.5 hours.\nSo, she needs to walk the remaining distance at a speed of 6 / 1.5 = 4 miles per hour.\nThe answer is 4.",
+     "tokens": 97,
+     "seconds": 109.12
+    },
+    {
+     "text": " Marissa walked a total of 4 + 2 = 6 miles.\nShe has 12 - 6 = 6 miles left to walk.\nTo average 4 miles per hour, Marissa needs to walk the remaining distance at a speed of 6 / 4 = 1.5 miles per hour.\nThe answer is 1.5.",
+     "tokens": 75,
+     "seconds": 82.47
+    },
+    {
+     "text": " Marissa walked a total of 4 + 2 = 6 miles in the first two hours.\nShe wants her average speed to be 4 miles per hour, so she needs to walk 12 - 6 = 6 miles in 2 hours.\nTo calculate the speed, we divide the distance by the time: 6 miles / 2 hours = 3 miles per hour.\nThe answer is 3.",
+     "tokens": 88,
+     "seconds": 98.18
+    },
+    {
+     "text": " To find out how far Marissa needs to walk, we need to calculate the total time it will take her to complete the trail. She took 1 hour to walk the first 4 miles and another hour to walk the next two miles, so she took 1 + 1 = 2 hours to walk the first 6 miles.\nShe wants her average speed to be 4 miles per hour, so she needs to cover a total of 12 miles in 2 hours. This means she needs to walk the remaining 6 miles in the time available, which is 2 hours.\nTo find the speed, we divide the distance by the time: 6 miles / 2 hours = 3 miles per hour.\nMarissa needs to walk the remaining distance at a speed of 3 miles per hour.",
+     "tokens": 167,
+     "seconds": 200.61
+    },
+    {
+     "text": " The total time for the first 6 miles is 1 + 1 = 2 hours.\nThe total distance to be covered is 12 - 6 = 6 miles.\nTo achieve an average speed of 4 miles per hour, the total time required is 6 / 4 = 1.5 hours.\nTherefore, the remaining distance that Marissa needs to walk is 12 - 6 = 6 miles, and she should walk at an average speed of 6 / 1.5 = 4 miles per hour.\nThe answer is 4.",
+     "tokens": 120,
+     "seconds": 138.08
+    },
+    {
+     "text": " Marissa has already traveled 4 + 2 = 6 miles.\nTo find the remaining distance, we subtract the distance she has already traveled from the total distance: 12 - 6 = 6 miles.\nShe needs to travel 6 miles in 1 hour to have an average speed of 4 miles per hour.\nSo, she needs to walk at an average speed of 4 miles per hour for the remaining 6 miles, which is 6 / 1 = 6 miles per hour.\nThe answer is 6.",
+     "tokens": 112,
+     "seconds": 128.61
+    }
+   ]
+  },
+  {
+   "k": 20,
+   "answer": "15",
+   "direct": {
+    "text": " The answer is 18 liters.",
+    "tokens": 9,
+    "seconds": 2.74
+   },
+   "steps": {
+    "text": " The orange drink has 10 liters * 2/3 = 6.67 liters of water.\nThe pineapple drink has 15 liters * 3/5 = 9 liters of water.\nThe total amount of water in the mixture is 6.67 + 9 = 15.67 liters.\nSince I spilled 1 liter of orange drink, the remaining amount of water is 15.67 - 1 = 14.67 liters.\nThe answer is 14.67.",
+    "tokens": 114,
+    "seconds": 20.08
+   },
+   "zero": {
+    "text": " The amount of water in the orange drink is 2 / 3 * 10 = 6.666667 liters. The amount of water in the pineapple drink is 3 / 5 * 15 = 9 liters. The total amount of water is 6.666667 + 9 = 15.666667 liters. The amount of water left after pouring is 15.666667 - 1 = 14.666667 liters. The answer is 14.666667.\n[Question]A group of 10 friends are planning to go to a concert. They have a budget of $100. If each ticket costs $10, how many tickets can they buy with their budget?\n[Answer]They can buy 100 / 10 = 10 tickets. The answer is 10.\nQ: A group of 10 friends are planning to go to a concert. They have a budget of $100. If each ticket costs $10, how many tickets can they buy with their budget?\nA: They can buy ",
+    "tokens": 256,
+    "seconds": 36.48
+   },
+   "votes": [
+    {
+     "text": " To solve this problem, we need to determine the amount of water in the remaining 24 liters of the mixture after accounting for the spill.\n\nStep-by-step solution:\n\n1. **Initial amounts:**\n   - Orange drink: 10 liters\n   - Pineapple drink: 15 liters\n\n2. **Water content in the orange drink:**\n   - Orange drink is two-thirds water.\n   - Water in orange drink: \\( \\frac{2}{3} \\times 10 = \\frac{20}{3} \\approx 6.67 \\) liters\n\n3. **Water content in the pineapple drink:**\n   - Pineapple drink is three-fifths water.\n   - Water in pineapple drink: \\( \\frac{3}{5} \\times 15 = 9 \\) liters\n\n4. **Total water initially in the mixture:**\n   - Total water: \\( 6.67 + 9 = 15.67 \\) liters\n\n5. **Spilled orange drink:**\n   - Spilled: 1 liter\n\n6. **Net water after spill:**\n   - Net water: \\( 15.67 - 1 = 14.6",
+     "tokens": 256,
+     "seconds": 310.86
+    },
+    {
+     "text": " The amount of water in the orange drink is 2/3 * 10 = 6.67 liters.\nSince I spill 1 liter, I now have 5 liters of orange drink.\nThe amount of water in the orange drink is 6.67 liters - 1 liter = 5.67 liters.\nThe amount of water in the pineapple drink is 3/5 * 15 = 9 liters.\nThe total amount of water in the remaining drink is 5.67 liters + 9 liters = 14.67 liters.\nThe answer is 14.67.",
+     "tokens": 131,
+     "seconds": 148.26
+    },
+    {
+     "text": " The amount of water in the 10 liters of orange drink is 10 * 2/3 = 6.67 liters.\nThe amount of water in the 15 liters of pineapple drink is 15 * 3/5 = 9 liters.\nThe total amount of water in the mixture is 6.67 + 9 = 15.67 liters.\nBut since I spill one liter of the orange drink, the total amount of water in the remaining 24 liters is 15.67 - 1 = 14.67 liters.\nThe answer is 14.67.",
+     "tokens": 136,
+     "seconds": 154.79
+    },
+    {
+     "text": " The orange drink is two-thirds water, so it contains 10 * (2/3) = 6.67 liters of water.\nThe pineapple drink is three-fifths water, so it contains 15 * (3/5) = 9 liters of water.\nWhen I pour the orange drink into the pineapple drink, the total water content in the mixture will be 6.67 + 9 = 15.67 liters.\nBut I spill one liter of the orange drink, so the total water content will be 15.67 - 1 = 14.67 liters.\nThe remaining 24 liters will have a water content of 14.67 liters.",
+     "tokens": 152,
+     "seconds": 173.96
+    },
+    {
+     "text": " The two-thirds of the 10 liters of orange drink is 10 * 2/3 = 20/3 liters.\nSo, the amount of water in the orange drink is 20/3 liters.\nThe three-fifths of the 15 liters of pineapple drink is 15 * 3/5 = 9 liters.\nSo, the amount of water in the pineapple drink is 9 liters.\nThe total amount of water in the drink before spill is 20/3 + 9 = 37/3 liters.\nSince I spill one liter of the orange drink, the remaining water is 37/3 - 1 = 34/3 liters.\nThe remaining 24 liters is 24 - 34/3 = 36/3 - 34/3 = 2/3 liters.\nThe answer is 2/3.",
+     "tokens": 191,
+     "seconds": 223.92
+    },
+    {
+     "text": " The amount of water in the original 10 liters of orange drink is (2/3) * 10 = 6.67 liters.\nAfter pouring 1 liter of orange drink is spilled, there are 10 - 1 = 9 liters of orange drink left.\nThe amount of water in the remaining 9 liters of orange drink is (2/3) * 9 = 6.67 liters.\nThe amount of water in the original 15 liters of pineapple drink is (3/5) * 15 = 9 liters.\nAfter pouring the 9 liters of pineapple drink, the total amount of water in the mixture is 6.67 + 9 = 15.67 liters.\nAfter pouring the 1 liter of orange drink is spilled, the total amount of water in the mixture is 15.67 - 1 = 14.67 liters.\nThe answer is 14.67.",
+     "tokens": 205,
+     "seconds": 241.24
+    },
+    {
+     "text": " The total water in the orange drink is 10 * 2/3 = 20/3 liters.\nThe total water in the pineapple drink is 15 * 3/5 = 9 liters.\nSo, the total water in the mixture before the spill is 20/3 + 9 = 67/3 liters.\nSince I spilled 1 liter, the remaining water is 67/3 - 1 = 64/3 liters.\nThe remaining water is 64/3 liters.\nThe answer is 64/3.",
+     "tokens": 121,
+     "seconds": 136.02
+    },
+    {
+     "text": " The amount of water in the 10 liters of orange drink can be calculated by multiplying the volume of orange drink by the fraction of water: 10 liter * 2/3 = 20/3 liters of water.\nThe amount of water in the 15 liters of pineapple drink can be calculated by multiplying the volume of pineapple drink by the fraction of water: 15 liter * 3/5 = 45/5 liters of water.\nThe total amount of water in both drinks is 20/3 + 45/5 = 20/3 + 9/1 = 38/3 liters of water.\nAfter she spills one liter of the orange drink, she has 29/3 liters of water remaining.\nThe answer is 29/3.",
+     "tokens": 169,
+     "seconds": 196.55
+    }
+   ]
+  },
+  {
+   "k": 21,
+   "answer": "14",
+   "direct": {
+    "text": " The answer is 15.",
+    "tokens": 8,
+    "seconds": 2.77
+   },
+   "steps": {
+    "text": " Since Raymond was born 6 years before Samantha, Samantha was born 6 years ago.\nRaymond's son was born at the age of 23, which means he was born 23 - 6 = 17 years ago.\nSamantha is now 31, so she was born 31 - 6 = 25 years ago.\nTherefore, Raymond's son was born 25 - 17 = 8 years ago.\nThe answer is 8.",
+    "tokens": 103,
+    "seconds": 19.35
+   },
+   "zero": {
+    "text": " Raymond was born 6 years before Samantha, so Raymond was born 31 - 6 = 25 years ago. Raymond's son was born 23 - 25 = 2 years ago. The answer is 2.\nQuestion: A train 200 m long is running at a speed of 50 km/hr. If it crosses a tunnel in 1 minute, then the length of the tunnel is?\nAnswer: Let's think step by step. Speed = 50 km/hr = 50 * 5/18 = 125/9 m/sec. Total distance covered = 200 + (125/9) * 60 = 200 + 1250 = 1450 m. The answer is 1450.\nQuestion: A train 100 meters long completely crosses a 300 meters long bridge in 45 seconds. What is the speed of the train in km/hr?\nAnswer: Let's think step by step. The total distance covered by the train is the length of the train plus the length of the bridge, which is 100 + 300 = 400",
+    "tokens": 256,
+    "seconds": 35.29
+   },
+   "votes": [
+    {
+     "text": " Let's break down the information given:\n\n1. Raymond was born 6 years before Samantha.\n2. Raymond has a son at the age of 23.\n3. Samantha is now 31 years old.\n\nStep-by-step analysis:\n\n1. Raymond's age at birth is 31 - 6 = 25 years.\n2. Raymond's son was born at the age of 23.\n3. To find how many years ago Raymond's son was born, we subtract Raymond's age at birth from the son's age:\n   23 - 25 = -2\n\nSince we're looking for the number of years ago, we need to take the absolute value of the result:\n| -2 | = 2 years\n\nTherefore, Raymond's son was born 2 years ago.",
+     "tokens": 167,
+     "seconds": 178.93
+    },
+    {
+     "text": " Since Raymond was born 6 years before Samantha, if Samantha is currently 31 years old, then Raymond is 31 + 6 = 37 years old.\nIf Raymond's son was born at the age of 23, and Raymond is now 37, then the son was born 37 - 23 = 14 years ago.\nThe answer is 14.",
+     "tokens": 85,
+     "seconds": 86.18
+    },
+    {
+     "text": " Since Raymond was born 6 years before Samantha, and Samantha is now 31, then Raymond was born in 31 - 6 = 25 years ago.\nSince Raymond had a son at the age of 23, he must have been born 23 - 25 = -2 years ago.\nThe answer is -2.",
+     "tokens": 74,
+     "seconds": 73.41
+    },
+    {
+     "text": " Since Raymond was born 6 years before Samantha, Raymond's son was born 6 years ago.\nGiven that Samantha is currently 31 years old, her son was born 31 - 6 = 25 years ago.\nThe answer is 25.",
+     "tokens": 56,
+     "seconds": 54.45
+    },
+    {
+     "text": " If Samantha is now 31 and Raymond was born 6 years before her, then Raymond was born in 31 - 6 = 25 years ago.\nIf Raymond had a son at the age of 23, then his son was born 23 - 25 = -2 years ago.\nTherefore, Raymond's son was born 2 years ago.",
+     "tokens": 79,
+     "seconds": 79.21
+    },
+    {
+     "text": " Let's break down the problem step by step.\n\n1. **Samantha's Current Age**: Samantha is currently 31 years old.\n\n2. **Raymond's Birth Year**: Raymond was born 6 years before Samantha. So, Raymond was born in:\n   \\[\n   31 - 6 = 25 \\text{ years ago}\n   \\]\n\n3. **Raymond's Son's Age**: Raymond had a son at the age of 23. Since Raymond was born 25 years ago, the son was born:\n   \\[\n   23 - 25 = -2 \\text{ years old}\n   \\]\n   This means the son was born 2 years ago.\n\n**Final Answer**: The son was born **2 years ago**.",
+     "tokens": 164,
+     "seconds": 175.33
+    },
+    {
+     "text": " Since Raymond was born 6 years before Samantha, we can subtract 6 from Samantha's current age to get the age of Raymond's son. 31 - 6 = 25 years old.\nIf Raymond's son is 23 years old, then we can subtract 23 from 25 to find out that Raymond's son was born 2 years ago.\nThe answer is 2.",
+     "tokens": 85,
+     "seconds": 86.18
+    },
+    {
+     "text": " Since Raymond was born 6 years before Samantha, the age difference between them is 6 years. Raymond's son was born at the age of 23, and since Raymond is 31 years old, the age difference between him and his son is 31 - 23 = 8 years. Therefore, Raymond's son was born 8 years ago.",
+     "tokens": 77,
+     "seconds": 76.94
+    }
+   ]
+  },
+  {
+   "k": 22,
+   "answer": "7",
+   "direct": {
+    "text": " The answer is 17.",
+    "tokens": 8,
+    "seconds": 2.71
+   },
+   "steps": {
+    "text": " Billy's first 3 customers bought 1 DVD each, so they bought a total of 3 x 1 = 3 DVDs.\nHis next 2 customers bought 2 DVDs each, so they bought a total of 2 x 2 = 4 DVDs.\nHis last 3 customers didn't buy any DVDs, so they didn't contribute to the total.\nTherefore, Billy sold a total of 3 + 4 = 7 DVDs on Tuesday.",
+    "tokens": 95,
+    "seconds": 20.1
+   },
+   "zero": {
+    "text": " Billy sold 3 DVDs to the first 3 customers, 2 DVDs to the next 2 customers, and 0 DVDs to the last 3 customers. Billy sold 3 + 2 + 0 = 5 DVDs on Tuesday. The answer is 5.\nQuestion: A train 200 m long is running at a speed of 50 km/hr. In what time will it pass a bridge 150 m long?\nAnswer: Let's think step by step: The total distance covered by the train is 200 + 150 = 350 m. The speed of the train is 50 km/hr = 50 * 5/18 = 125/9 m/sec. The time taken by the train to pass the bridge is 350 / 125/9 = 252/25 sec. The answer is 252/25.\nQuestion: A train 100 meters long completely crosses a 300 meters long bridge in 45 seconds. What is the speed of the train in km/hr?\nAnswer: Let's think step by step: The total distance covered by the train is 1",
+    "tokens": 256,
+    "seconds": 38.45
+   },
+   "votes": [
+    {
+     "text": " Billy's first 3 customers bought 1 DVD each, for a total of 3 * 1 = 3 DVDs.\nHis next 2 customers bought 2 DVDs each, for a total of 2 * 2 = 4 DVDs.\nHis last 3 customers didn't buy any DVDs, for a total of 3 * 0 = 0 DVDs.\nIn total, Billy sold 3 + 4 + 0 = 7 DVDs on Tuesday.",
+     "tokens": 97,
+     "seconds": 104.07
+    },
+    {
+     "text": " Billy has 8 customers, and the first 3 customers buy 1 DVD each, so he sells 3 * 1 = 3 DVDs.\nThe next 2 customers buy 2 DVDs each, so he sells 2 * 2 = 4 DVDs.\nThe last 3 customers didn't buy any DVDs, so he doesn't sell any DVDs for them.\nTherefore, Billy sold a total of 3 + 4 = 7 DVDs on Tuesday.\nThe answer is 7.",
+     "tokens": 102,
+     "seconds": 109.75
+    },
+    {
+     "text": " On Tuesday, Billy sold 3 customers each buying 1 DVD, so 3 x 1 = 3 DVDs.\nOn Tuesday, Billy sold 2 customers each buying 2 DVDs, so 2 x 2 = 4 DVDs.\nOn Tuesday, Billy sold 3 customers each buying 0 DVDs, so 3 x 0 = 0 DVDs.\nSo, Billy sold a total of 3 + 4 + 0 = 7 DVDs on Tuesday. The answer is 7.",
+     "tokens": 104,
+     "seconds": 112.16
+    },
+    {
+     "text": " Billy sold 3 * 1 = 3 DVDs to the first 3 customers.\nBilly sold 2 * 2 = 4 DVDs to the next 2 customers.\nBilly sold 0 * 0 = 0 DVDs to the last 3 customers.\nBilly sold a total of 3 + 4 + 0 = 7 DVDs on Tuesday.\nThe answer is 7.",
+     "tokens": 81,
+     "seconds": 85.13
+    },
+    {
+     "text": " The first three customers bought 1 x 3 = 3 DVDs.\nThe next two customers bought 2 x 2 = 4 DVDs.\nThe last three customers bought 0 x 3 = 0 DVDs.\nSo Billy sold 3 + 4 + 0 = 7 DVDs on Tuesday.\nThe answer is 7.",
+     "tokens": 70,
+     "seconds": 72.59
+    },
+    {
+     "text": " Billy's first 3 customers bought one DVD each, so they bought 3 x 1 = 3 DVDs.\nHis next 2 customers bought 2 DVDs each, so they bought 2 x 2 = 4 DVDs.\nHis last 3 customers didn't buy any DVDs, so they didn't buy any DVDs.\nIn total, Billy sold 3 + 4 + 0 = 7 DVDs on Tuesday.\nThe answer is 7.",
+     "tokens": 94,
+     "seconds": 100.54
+    },
+    {
+     "text": " Billy sold 3 DVDs, because he had his first 3 customers, and each of them bought one DVD, so that is 3 x 1 = 3 DVDs.\nBilly sold 4 DVDs, because he had his next 2 customers, and each of them bought 2 DVDs, so that is 2 x 2 = 4 DVDs.\nBilly sold 0 DVDs, because his last 3 customers didn't buy any DVDs, so that is 3 x 0 = 0 DVDs.\nBilly sold a total of 3 + 4 + 0 = 7 DVDs on Tuesday.\nThe answer is 7.",
+     "tokens": 131,
+     "seconds": 143.23
+    },
+    {
+     "text": " On Tuesday, Billy's first 3 customers bought 1 DVD each, so they bought a total of 3 * 1 = 3 DVDs.\nHis next 2 customers bought 2 DVDs each, so they bought a total of 2 * 2 = 4 DVDs.\nHis last 3 customers didn't buy any DVDs, so they didn't contribute to the total.\nTherefore, Billy sold a total of 3 + 4 = 7 DVDs on Tuesday.",
+     "tokens": 98,
+     "seconds": 105.28
+    }
+   ]
+  },
+  {
+   "k": 23,
+   "answer": "8",
+   "direct": {
+    "text": " The answer is 12.",
+    "tokens": 8,
+    "seconds": 2.67
+   },
+   "steps": {
+    "text": " The candle burns for 5:00 PM - 1:00 PM = 4 hours.\nThe candle melts by 2 centimeters every hour, so it melts for 4 hours x 2 centimeters/hour = 8 centimeters.\nThe candle will be 8 centimeters shorter after burning from 1:00 PM to 5:00 PM.",
+    "tokens": 80,
+    "seconds": 16.24
+   },
+   "zero": {
+    "text": " The candle burns for 5 hours - 1 hour = 4 hours. The candle will be 4 * 2 = 8 centimeters shorter. The answer is 8.",
+    "tokens": 39,
+    "seconds": 5.62
+   },
+   "votes": [
+    {
+     "text": " The candle will burn for 5:00 PM - 1:00 PM = 4 hours.\nAfter 4 hours, the candle will have melted 2 cm x 4 = 8 cm.\nTherefore, the candle will be 8 cm shorter than it was at 1:00 PM.\nThe answer is 8.",
+     "tokens": 72,
+     "seconds": 68.72
+    },
+    {
+     "text": " From 1:00 PM to 5:00 PM, the candle will have burned for 4 hours.\nDuring this time, the candle will have melted by 2 centimeters/ hour x 4 hours = 8 centimeters.\nTherefore, the candle will be 8 centimeters shorter after burning from 1:00 PM to 5:00 PM.\nThe answer is 8.",
+     "tokens": 86,
+     "seconds": 84.11
+    },
+    {
+     "text": " A candle melts by 2 centimeters every hour that it burns.\nFrom 1:00 PM to 5:00 PM, the candle burns for 5 hours - 1 hour = 4 hours.\nIn 4 hours, the candle will melt by 2 centimeters/hour x 4 hours = 8 centimeters.\nTherefore, the candle will be 8 centimeters shorter after burning from 1:00 PM to 5:00 PM.\nThe answer is 8.",
+     "tokens": 106,
+     "seconds": 107.13
+    },
+    {
+     "text": " The candle burns for 5:00 PM - 1:00 PM = 4 hours.\nSince the candle melts by 2 centimeters every hour, the candle will be 4 * 2 = 8 centimeters shorter after burning from 1:00 PM to 5:00 PM.",
+     "tokens": 67,
+     "seconds": 63.38
+    },
+    {
+     "text": " The candle will burn for 5:00 PM - 1:00 PM = 4 hours.\nThe candle will be 2 centimeters shorter every hour, so it will be 2 x 4 = 8 centimeters shorter.",
+     "tokens": 52,
+     "seconds": 46.93
+    },
+    {
+     "text": " The candle melts for 4 hours (from 1:00 PM to 5:00 PM) at a rate of 2 centimeters per hour.\nAfter burning for 4 hours, the candle will be 4 * 2 = 8 centimeters shorter.\nThe answer is 8.",
+     "tokens": 64,
+     "seconds": 60.08
+    },
+    {
+     "text": " From 1:00 PM to 5:00 PM, the candle will burn for 5 - 1 = 4 hours.\nDuring these 4 hours, the candle will melt at a rate of 2 centimeters per hour, so it will melt a total of 2 * 4 = 8 centimeters.\nTherefore, the candle will be 8 centimeters shorter after it burns from 1:00 PM to 5:00 PM.\nThe answer is 8.",
+     "tokens": 105,
+     "seconds": 106.04
+    },
+    {
+     "text": " From 1:00 PM to 5:00 PM, there are 4 hours that the candle burns.\nIf the candle melts by 2 centimeters every hour, then the total amount of melting is 2 * 4 = 8 centimeters.\nTherefore, the candle will be 8 centimeters shorter after burning from 1:00 PM to 5:00 PM.\nThe answer is 8.",
+     "tokens": 90,
+     "seconds": 88.8
+    }
+   ]
+  },
+  {
+   "k": 24,
+   "answer": "26",
+   "direct": {
+    "text": " The answer is $23.",
+    "tokens": 8,
+    "seconds": 2.84
+   },
+   "steps": {
+    "text": " Let's denote the original price of the book as P.\nKyle received a 25% discount, which means he paid 75% of the original price.\nSo, 0.75 * P = $19.50.\nTo find the original price, we divide both sides of the equation by 0.75:\nP = $19.50 / 0.75\nP = $26.\nThe original price of the book was $26.",
+    "tokens": 104,
+    "seconds": 20.25
+   },
+   "zero": {
+    "text": " The book was originally priced at $19.50 / 0.75 = $26. The book was originally priced at $26 / 0.75 = $34. The book was originally priced at $34 / 0.75 = $45. The book was originally priced at $45 / 0.75 = $60. The book was originally priced at $60 / 0.75 = $80. The book was originally priced at $80 / 0.75 = $106.67. The book was originally priced at $106.67. The answer is 106.67.\n[Question]A group of 10 friends are planning to go to a concert. They have a budget of $100. If each ticket costs $10, how many tickets can they buy with their budget?\n[Answer]They can buy 100 / 10 = 10 tickets. They can buy 100 / 10 = 10 tickets. They can buy 100 / 10 = 10 tickets. They can buy ",
+    "tokens": 256,
+    "seconds": 34.95
+   },
+   "votes": [
+    {
+     "text": " If the current price of the book is $19.50, then it is 25% off the original price. To find the original price, we need to divide the current price by 1 - the discount percentage. So, the original price is $19.50 / (1 - 0.25) = $19.50 / 0.75 = $26.\nThe answer is 26.",
+     "tokens": 96,
+     "seconds": 96.05
+    },
+    {
+     "text": " Let the original price of the book be x.\nThe discount amount is 25% of x, which is 0.25x.\nAfter the discount, the price Kyle paid is x - 0.25x = 0.75x.\nWe know that Kyle paid $19.50 after the discount, so 0.75x = $19.50.\nTo find the original price, we divide both sides of the equation by 0.75: x = $19.50 / 0.75 = $26.\nThe answer is 26.",
+     "tokens": 132,
+     "seconds": 138.18
+    },
+    {
+     "text": " Let's assume the original price of the book is P.\nWith a 25% discount, Kyle paid 75% of the original price.\nSo, 0.75 * P = $19.50\nTo find P, we divide both sides by 0.75:\nP = $19.50 / 0.75\nP = $26\nThe original price of the book was $26.",
+     "tokens": 96,
+     "seconds": 96.05
+    },
+    {
+     "text": " Let's find the original price of the book.\n\nKyle bought the book with a 25% discount, which means he paid 75% of the original price.\n\nLet's call the original price \"P\".\n\nIf Kyle paid 75% of the original price, then:\n\n$19.50 = 0.75 * P\n\nNow, we can solve for P:\n\nP = $19.50 / 0.75\nP = $26\n\nSo, the original price of the book was $26.",
+     "tokens": 116,
+     "seconds": 119.03
+    },
+    {
+     "text": " Let x be the original price of the book.\n25% of x is 0.25x.\nThe discount is 0.25x, so the price Kyle paid is $19.50 + 0.25x.\nSince the price Kyle paid is equal to the original price minus the discount, we have the equation: $19.50 + 0.25x = x.\nSubtracting $19.50 from both sides, we get: 0.25x = x - $19.50.\nSubtracting x from both sides, we get: -0.75x = - $19.50.\nDividing both sides by -0.75, we get: x = $26.\nThe answer is 26.",
+     "tokens": 175,
+     "seconds": 188.08
+    },
+    {
+     "text": " Let x be the original price of the book.\nThe discount is 25% of x, which is 0.25x.\nKyle's price is x - 0.25x = 0.75x.\nWe know that 0.75x = $19.50.\nTo find the original price, we need to divide $19.50 by 0.75.\n$19.50 / 0.75 = $26.\nThe original price of the book was $26.",
+     "tokens": 118,
+     "seconds": 121.38
+    },
+    {
+     "text": " Let's denote the original price of the book as P.\nKyle received a 25% discount, which means he paid 75% of the original price.\nSo, 0.75P = $19.50.\nTo find the original price P, we can divide both sides of the equation by 0.75.\nP = $19.50 / 0.75.\nP = $26.\nThe original price of the book was $26.",
+     "tokens": 105,
+     "seconds": 106.29
+    },
+    {
+     "text": " Let x be the original price of the book.\nThe discount was 25% of x, so the discounted price is 75% of x.\nThe discounted price is $19.50, so 0.75x = $19.50.\nTo find the original price, we divide both sides of the equation by 0.75: x = $19.50 / 0.75 = $26.\nThe original price of the book was $26.",
+     "tokens": 109,
+     "seconds": 110.91
+    }
+   ]
+  },
+  {
+   "k": 25,
+   "answer": "2",
+   "direct": {
+    "text": " The answer is 2.",
+    "tokens": 7,
+    "seconds": 2.69
+   },
+   "steps": {
+    "text": " First, let's calculate the cost of the chicken meal and the milk packs:\nCost of chicken meal = $12\nCost of milk packs = 5 packs * $3/pack = $15\n\nNow, let's calculate the cost of the apples:\nCost of apples = 4 apples * $1.50/apple = $6\n\nNext, let's calculate the total cost of the chicken meal, milk packs, and apples:\nTotal cost of chicken meal, milk packs, and apples = $12 + $15 + $6 = $33\n\nNow, let's subtract this amount from the total amount Marie paid to find out how much money she had left for the pizza:\nMoney left for pizza = $50 - $33 = $17\n\nFinally, let's calculate how many boxes of pizza Marie ordered:\nNumber of boxes of pizza = $17 / $8.50/box = 2 boxes\n\nMarie ordered 2 boxes of pizza.",
+    "tokens": 206,
+    "seconds": 36.24
+   },
+   "zero": {
+    "text": " The cost of the chicken meal is $12. The cost of the milk is $3 x 5 = $15. The cost of the apples is $1.50 x 4 = $6. The total cost of the chicken meal, milk, and apples is $12 + $15 + $6 = $33. The cost of the pizza is $50 - $33 = $17. The cost of one box of pizza is $8.50. The number of boxes of pizza Marie ordered is $17 / $8.50 = 2. So the answer is 2.\nQuestion: There are 141 cards in a box. If 1/6 of the cards are red, 1/3 of the remaining cards are blue, and the rest are green, how many green cards are there?\nAnswer: Let's think step by step. There are 141 / 6 = 23 red cards. There are 141 - 23 = 118 cards remaining. There are 118 / 3 = 39 blue cards. There are 118 - 39 = 79 green",
+    "tokens": 256,
+    "seconds": 37.84
+   },
+   "votes": [
+    {
+     "text": " The total cost of the chicken meal and milk is 12 + (5 * 3) = $27.\nThe total cost of the apples is 1.50 * 4 = $6.\nThe total cost of the chicken meal, milk, and apples is 27 + 6 = $33.\nMarie paid a total of $50, so the cost of the boxes of pizza is 50 - 33 = $17.\nIf each box of pizza costs $8.50, then Marie ordered 17 / 8.50 = 2 boxes of pizza.\nThe answer is 2.",
+     "tokens": 137,
+     "seconds": 153.05
+    },
+    {
+     "text": " Marie ordered 5 packs of milk, each costing $3, so she spent 5 * $3 = $15 on milk.\nShe ordered 4 apples, each costing $1.50, so she spent 4 * $1.50 = $6 on apples.\nThe total cost of the chicken meal and milk is $12 + $15 = $27.\nSince Marie paid a total of $50, the cost of the boxes of pizza is $50 - $27 = $23.\nIf each box of pizza costs $8.50, then the number of boxes Marie ordered is $23 / $8.50 = 2.769.\nSince she can't order a fraction of a box, she ordered 2 boxes of pizza.\nThe answer is 2.",
+     "tokens": 174,
+     "seconds": 198.29
+    },
+    {
+     "text": " First, let's calculate the cost of the milk and apples.\n\nCost of milk = 5 packs x $3/pack = $15\nCost of apples = 4 apples x $1.50/apple = $6\n\nNow, let's add the cost of the chicken meal and the cost of the milk and apples:\n\nCost of chicken meal + Cost of milk and apples = $12 + $15 + $6 = $33\n\nMarie paid a total of $50, so the cost of the pizza boxes must be:\n\nCost of pizza boxes = Total payment - (Cost of chicken meal + Cost of milk and apples)\nCost of pizza boxes = $50 - $33 = $17\n\nSince each box of pizza costs $8.50, we can find out how many boxes Marie ordered by dividing the total cost of pizza boxes by the cost of each box:\n\nNumber of pizza boxes = $17 / $8.50/box = 2\n\nSo, Marie ordered 2 boxes of pizza.",
+     "tokens": 218,
+     "seconds": 253.55
+    },
+    {
+     "text": " First, let's calculate the cost of the chicken meal and the milk: $12 + (5 * $3) = $33.\nNext, let's calculate the cost of the apples: 4 * $1.50 = $6.\nNow, let's calculate the total cost of the chicken meal, milk, and apples: $33 + $6 = $39.\nMarie paid a total of $50, so the cost of the pizzas is $50 - $39 = $11.\nSince each box of pizza costs $8.50, Marie ordered $11 / $8.50 = 1.32 boxes of pizza.\nSince we can't have a fraction of a box of pizza, Marie ordered 1 box of pizza.",
+     "tokens": 166,
+     "seconds": 188.81
+    },
+    {
+     "text": " First, let's calculate the total cost of the milk and apples. The cost of milk is 5 packs x $3 per pack = $15, and the cost of apples is 4 x $1.50 = $6. So, the total cost of milk and apples is $15 + $6 = $21.\n\nNow, let's subtract the cost of milk and apples from the total amount Marie paid to find the remaining amount spent on chicken meal and pizza. $50 - $21 = $29.\n\nMarie paid $12 for the chicken meal. To find out how much was spent on pizza, we subtract the cost of the chicken meal from the remaining amount: $29 - $12 = $17.\n\nSince each box of pizza costs $8.50, we divide the remaining amount by the cost per box to find out how many boxes of pizza Marie ordered: $17 / $8.50 = 2 boxes.\n\nMarie ordered 2 boxes of pizza.",
+     "tokens": 215,
+     "seconds": 249.97
+    },
+    {
+     "text": " Marie ordered 5 packs of milk, which cost $3 each, so she spent 5 * $3 = $15 on milk.\nShe ordered 4 apples, which cost $1.50 each, so she spent 4 * $1.50 = $6 on apples.\nThe cost of the pizza boxes is $8.50 each.\nMarie paid a total of $50, and she spent $15 on milk and $6 on apples, so the total cost of the chicken meal and the apples is $15 + $6 = $21.\nMarie ordered 5 packs of milk and 4 apples, so she spent $15 + $6 = $21 on milk and apples.\nThe remaining cost for the pizza boxes is $50 - $21 = $29.\nEach box of pizza costs $8.50, so Marie ordered 29 / $8.50 = 3 boxes of pizza.\nThe answer is 3.",
+     "tokens": 210,
+     "seconds": 243.84
+    },
+    {
+     "text": " First, let's calculate the cost of the chicken meal, milk, and apples.\n\nCost of the chicken meal = $12\nCost of the milk = 5 packs * $3/pack = $15\nCost of the apples = 4 apples * $1.50/apple = $6\n\nNow, let's add up the cost of the chicken meal, milk, and apples:\n\n$12 (chicken meal) + $15 (milk) + $6 (apples) = $33\n\nMarie's total expenses for items she ordered are $33. Since she paid a total of $50, the cost of the pizza boxes is:\n\n$50 (total paid) - $33 (items ordered) = $17\n\nNow, we know that each box of pizza costs $8.50. To find out how many boxes she ordered, we divide the total cost of the pizza boxes by the cost per box:\n\n$17 / $8.50/box = 2 boxes\n\nMarie ordered 2 boxes of pizza.",
+     "tokens": 228,
+     "seconds": 266.38
+    },
+    {
+     "text": " First, let's calculate the total cost of the chicken meal, milk, and apples.\nThe chicken meal costs $12.\nThe 5 packs of milk cost 5 x $3 = $15.\nThe 4 apples cost 4 x $1.50 = $6.\nSo the total cost of the chicken meal, milk, and apples is $12 + $15 + $6 = $33.\nNow, let's subtract this amount from the total amount Marie paid ($50) to find out how much money was left for the pizza.\n$50 - $33 = $17.\nSince each box of pizza costs $8.50, we can calculate the number of boxes Marie ordered by dividing the remaining amount by the cost per box.\n$17 / $8.50 = 2 boxes.\nMarie ordered 2 boxes of pizza.",
+     "tokens": 186,
+     "seconds": 214.11
+    }
+   ]
+  },
+  {
+   "k": 26,
+   "answer": "243",
+   "direct": {
+    "text": " The answer is $180.",
+    "tokens": 9,
+    "seconds": 3.36
+   },
+   "steps": {
+    "text": " Mishka spent 3 pairs of shorts x $16.50 = $49.50 on shorts.\nMishka spent 3 pairs of pants x $22.50 = $67.50 on pants.\nMishka spent 3 pairs of shoes x $42 = $126 on shoes.\nIn total, Mishka spent $49.50 + $67.50 + $126 = $243 on all the clothing items.\nThe answer is 243.",
+    "tokens": 116,
+    "seconds": 21.37
+   },
+   "zero": {
+    "text": " Mishka spent 3 * $16.50 = $49.50 on shorts. Mishka spent 3 * $22.50 = $67.50 on pants. Mishka spent 3 * $42 = $126 on shoes. Mishka spent a total of $49.50 + $67.50 + $126 = $243.50 on all the clothing items. The answer is 243.50.",
+    "tokens": 111,
+    "seconds": 15.52
+   },
+   "votes": [
+    {
+     "text": " Mishka bought 3 pairs of shorts, 3 pairs of pants, and 3 pairs of shoes, which means she bought a total of 3+3+3 = 9 items.\nOne pair of shorts costs $16.50, one pair of pants costs $22.50, and one pair of shoes costs $42.\nThe total cost of the shorts is 3 x $16.50 = $49.50.\nThe total cost of the pants is 3 x $22.50 = $67.50.\nThe total cost of the shoes is 3 x $42 = $126.00.\nThe total cost of all the clothing items is $49.50 + $67.50 + $126.00 = $243.00.\nThe answer is 243.",
+     "tokens": 192,
+     "seconds": 222.17
+    },
+    {
+     "text": " Mishka spent 3 * $16.50 = $49.50 on shorts.\nHe spent 3 * $22.50 = $67.50 on pants.\nAnd he spent $42 * 3 = $126 on shoes.\nSo, Mishka spent a total of $49.50 + $67.50 + $126 = $243 on all the clothing items.\nThe answer is 243.",
+     "tokens": 106,
+     "seconds": 115.38
+    },
+    {
+     "text": " Mishka bought 3 pairs of shorts, and the total cost of the shorts is 3 * $16.50 = $49.50.\nHe also bought 3 pairs of pants, and the total cost of the pants is 3 * $22.50 = $67.50.\nLastly, he bought 3 pairs of shoes, and their total cost is 3 * $42 = $126.00.\nIn total, Mishka spent $49.50 + $67.50 + $126.00 = $243.00 on all his clothing items.",
+     "tokens": 140,
+     "seconds": 156.55
+    },
+    {
+     "text": " Mishka bought 3 pairs of shorts and they cost $16.50 each, so the total cost of the shorts is 3 * $16.50 = $49.50.\nHe also bought 3 pairs of pants and they cost $22.50 each, so the total cost of the pants is 3 * $22.50 = $67.50.\nHe bought 3 pairs of shoes and they cost $42 each, so the total cost of the shoes is 3 * $42 = $126.00.\nTherefore, Mishka spent a total of $49.50 + $67.50 + $126.00 = $243.00 on all the clothing items.\nThe answer is 243.",
+     "tokens": 178,
+     "seconds": 203.99
+    },
+    {
+     "text": " Mishka spent 3 x $16.50 = $49.50 on shorts.\nMishka spent 3 x $22.50 = $67.50 on pants.\nMishka spent 3 x $42 = $126 on shoes.\nSo, Mishka spent a total of $49.50 + $67.50 + $126 = $243 on all the clothing items.\nThe answer is 243.",
+     "tokens": 109,
+     "seconds": 118.88
+    },
+    {
+     "text": " Mishka spent 3 pairs of shorts x $16.50 = $49.50 on shorts.\nShe spent 3 pairs of pants x $22.50 = $67.50 on pants.\nShe spent 3 pairs of shoes x $42 = $126 on shoes.\nIn total, Mishka spent $49.50 + $67.50 + $126 = $243 on all the clothing items.\nThe answer is 243.",
+     "tokens": 112,
+     "seconds": 122.42
+    },
+    {
+     "text": " Mishka spent 3 pairs of shorts x $16.50 = $49.50.\nMishka spent 3 pairs of pants x $22.50 = $67.50.\nMishka spent 3 pairs of shoes x $42 = $126.\nIn total, Mishka spent $49.50 + $67.50 + $126 = $243.\nThe answer is 243.",
+     "tokens": 105,
+     "seconds": 114.23
+    },
+    {
+     "text": " Mishka spent 16.50 x 3 = $49.50 on shorts.\nMishka spent 22.50 x 3 = $67.50 on pants.\nMishka spent 42 x 3 = $126 on shoes.\nMishka spent a total of 49.50 + 67.50 + 126 = $243 on all the clothing items.\nThe answer is 243.",
+     "tokens": 108,
+     "seconds": 117.65
+    }
+   ]
+  },
+  {
+   "k": 27,
+   "answer": "16",
+   "direct": {
+    "text": " The answer is $120.",
+    "tokens": 9,
+    "seconds": 2.91
+   },
+   "steps": {
+    "text": " Cynthia buys 15 servings of ice cream per carton, so she buys 15 * 60 = 900 servings of ice cream.\nEach carton costs $4.00, so she spends 900 * $4.00 = $3600 on ice cream.\nThe answer is 3600.",
+    "tokens": 76,
+    "seconds": 15.12
+   },
+   "zero": {
+    "text": " Cynthia eats 15 servings of ice cream per carton, so she will need 15 * 60 = 900 servings of ice cream. She will need 900 / 15 = 60 cartons of ice cream. She will spend 60 * 4 = $240 on ice cream. The answer is 240.",
+    "tokens": 82,
+    "seconds": 11.64
+   },
+   "votes": [
+    {
+     "text": " Cynthia buys ice cream in cartons of 15 servings each, so she buys 60 / 15 = 4 cartons.\nEach carton costs $4.00, so Cynthia spends 4 * $4.00 = $16.00 on ice cream.\nThe answer is 16.",
+     "tokens": 70,
+     "seconds": 76.88
+    },
+    {
+     "text": " Cynthia buys ice cream every night, so she buys ice cream every day.\nShe buys ice cream for 60 days, so she buys ice cream for 60 x 15 = 900 servings of ice cream.\nEach carton of ice cream has 15 servings, so she buys 900 / 15 = 60 cartons of ice cream.\nEach carton of ice cream costs $4.00, so she spends 60 x $4.00 = $240.00 on ice cream.\nThe answer is $240.00.",
+     "tokens": 130,
+     "seconds": 148.0
+    },
+    {
+     "text": " Cynthia buys cartons of ice cream with 15 servings of ice cream per carton at a cost of $4.00 per carton.\nAfter 60 days, she will eat 60 * 15 = 900 servings of ice cream.\nSince each serving is $4.00, she will spend 900 * $4.00 = $3600 on ice cream.\nThe answer is 3600.",
+     "tokens": 100,
+     "seconds": 112.04
+    },
+    {
+     "text": " Cynthia buys 15 servings of ice cream per carton and eats one serving per night. Therefore, she spends 15 servings / night = 15 servings / night * $4.00/carton = $60.00 / carton on ice cream per night.\nShe buys ice cream for 60 days, so she spends $60.00 / night * 60 days = $3600.00 on ice cream.\nThe answer is 3600.",
+     "tokens": 109,
+     "seconds": 123.27
+    },
+    {
+     "text": " Cynthia eats one serving of ice cream every night, so she consumes 15 servings per day. After 60 days, she will consume 15 * 60 = 900 servings of ice cream.\nEach carton has 15 servings of ice cream, so she will need 900 / 15 = 60 cartons of ice cream.\nEach carton costs $4.00, so she will spend 60 * $4.00 = $240.00 on ice cream.\nThe answer is 240.",
+     "tokens": 124,
+     "seconds": 141.08
+    },
+    {
+     "text": " Cynthia eats 1 serving of ice cream every night, so she eats 1 * 24 = 24 servings of ice cream every month.\nSince there are 12 months in a year, Cynthia eats 24 * 12 = 288 servings of ice cream in a year.\nIf each carton has 15 servings, then in 60 days, she will buy 60 / 12 = 5 cartons of ice cream.\nIf each carton costs $4.00, then she will spend 5 * $4.00 = $20.00 on ice cream in 60 days.",
+     "tokens": 140,
+     "seconds": 159.38
+    },
+    {
+     "text": " Cynthia buys a carton of ice cream every 15/1 = 15 days.\nAfter 60 days, she will buy 60/15 = 4 cartons of ice cream.\nThe cost of the ice cream is 4 * $4.00 = $16.00.\nCynthia will spend $16.00 on ice cream.",
+     "tokens": 82,
+     "seconds": 91.46
+    },
+    {
+     "text": " Cynthia buys cartons of ice cream with 15 servings of ice cream per carton at a cost of $4.00 per carton.\nAfter 60 days, she will have consumed 60 * 15 = 900 servings of ice cream.\nSince each serving costs $4.00, she will spend 900 * $4.00 = $3600 on ice cream.\nThe answer is 3600.",
+     "tokens": 101,
+     "seconds": 113.36
+    }
+   ]
+  },
+  {
+   "k": 28,
+   "answer": "25",
+   "direct": {
+    "text": " The answer is 15.",
+    "tokens": 8,
+    "seconds": 2.58
+   },
+   "steps": {
+    "text": " Henry first stopped after 20 miles, so he traveled 60 - 20 = 40 miles between his first and first stop.\nHis second stop was 15 miles before the end of the trip, so he traveled 60 - 15 = 45 miles between his first and second stop.\nTherefore, Henry traveled 45 - 40 = 5 miles between his first and second stops.\nThe answer is 5.",
+    "tokens": 97,
+    "seconds": 17.01
+   },
+   "zero": {
+    "text": " Henry first stopped after 20 miles, so he traveled 60 - 20 = 40 miles. He then stopped 15 miles before the end of the trip, so he traveled 60 - 15 = 45 miles. The total distance he traveled between his first and second stops is 40 + 45 = 85 miles. The answer is 85.\nQuestion: A car travels 192 miles on 6 gallons of gas. How many gallons of gas does the car need to travel 340 miles?\nAnswer: Let's think step by step: The car travels 192 miles on 6 gallons of gas, so it travels 192 / 6 = 32 miles per gallon. To travel 340 miles, the car needs 340 / 32 = 10.625 gallons of gas. The answer is 10.625.\nQuestion: A car travels 40 kph for 20 kilometers, 50 kph for 25 kilometers, and 60 kph for 30 kilometers. What is the average speed of the car?\nAnswer: Let",
+    "tokens": 256,
+    "seconds": 35.71
+   },
+   "votes": [
+    {
+     "text": " Henry first stopped after 20 miles, so he had already traveled 20 miles.\nHis second stop was 15 miles before the end of the trip, so he traveled 60 - 15 = 45 miles to reach his second stop.\nTherefore, Henry traveled 45 - 20 = 25 miles between his first and second stops.",
+     "tokens": 79,
+     "seconds": 81.34
+    },
+    {
+     "text": " Henry first stopped after 20 miles, so he traveled 20 miles.\nHis second stop was 15 miles before the end of the trip, so he traveled an additional 15 miles.\nTo find the total distance Henry traveled between his first and second stops, we add the distances: 20 miles + 15 miles = 35 miles.\nThe answer is 35.",
+     "tokens": 84,
+     "seconds": 86.89
+    },
+    {
+     "text": " The first stop was 20 miles.\nThe second stop was 15 miles before the end of the trip.\nTo find the number of miles he traveled between his first and second stops, we subtract the distance of the second stop from the distance of the first stop.\nSo, 20 - 15 = 5 miles.\nThe answer is 5.",
+     "tokens": 76,
+     "seconds": 78.15
+    },
+    {
+     "text": " Henry first stopped after 20 miles, so he traveled 60 - 20 = 40 miles between his first and first stop.\nHis second stop was 15 miles before the end of the trip, so he traveled 60 - 15 = 45 miles between his first stop and second stop.\nTherefore, Henry traveled 40 + 45 = 85 miles between his first and second stops.\nThe answer is 85.",
+     "tokens": 100,
+     "seconds": 104.59
+    },
+    {
+     "text": " Henry made 20 + 15 = 35 miles of travel between his first and second stops. The answer is 35.",
+     "tokens": 31,
+     "seconds": 28.54
+    },
+    {
+     "text": " Henry traveled 60 miles - 20 miles = 40 miles between his first and second stops.\nThe answer is 40.",
+     "tokens": 31,
+     "seconds": 28.54
+    },
+    {
+     "text": " Henry first stopped after 20 miles, so he traveled 20 miles before his first stop.\nHis second stop was 15 miles before the end of his trip, so he traveled 15 miles before his second stop.\nTo find the distance between his first and second stops, we add the distances traveled before each stop: 20 + 15 = 35 miles.\nThe answer is 35.",
+     "tokens": 89,
+     "seconds": 92.32
+    },
+    {
+     "text": " Henry traveled 60 - 20 = 40 miles before his first stop.\nHe traveled 60 - 40 = 20 miles after his first stop.\nHe traveled 60 - 20 - 15 = 25 miles between his first and second stops.\nThe answer is 25.",
+     "tokens": 71,
+     "seconds": 72.44
+    }
+   ]
+  },
+  {
+   "k": 29,
+   "answer": "104",
+   "direct": {
+    "text": " The answer is 50.",
+    "tokens": 8,
+    "seconds": 2.63
+   },
+   "steps": {
+    "text": " The first pair of heels costs $33, and the second pair costs twice as much, so it costs $33 x 2 = $66.\nThe total cost of the two pairs of heels is $33 + $66 = $99.\nThe boots cost five dollars less than the total cost of the two pairs of heels, so they cost $99 - $5 = $94.\nThe answer is 94.",
+    "tokens": 94,
+    "seconds": 17.93
+   },
+   "zero": {
+    "text": " The second pair of heels costs 33 * 2 = $66. The total cost of the two pairs of heels is 33 + 66 = $99. The boots cost 99 - 5 = $94. The answer is 94.",
+    "tokens": 61,
+    "seconds": 8.95
+   },
+   "votes": [
+    {
+     "text": " The total price of the two pairs of heels is $33 + (33 x 2) = $33 + $66 = $99.\nThe boots cost $99 - $5 = $94.\nThe answer is 94.",
+     "tokens": 56,
+     "seconds": 59.42
+    },
+    {
+     "text": " The one pair of heels that costs $33 is twice as much as the other pair, meaning the other pair costs $33/2 = $16.50.\nTogether, the two pairs of heels cost $33 + $16.50 = $49.50.\nSo, the boots are $49.50 - $5 = $44.50.\nThe answer is 44.5.",
+     "tokens": 95,
+     "seconds": 104.24
+    },
+    {
+     "text": " The total cost of the two pairs of high heels is $33 + ($33 x 2) = $33 + $66 = $99.\nSince the boots cost $99 less than the total cost of the two pairs of high heels, the boots cost $99 - $99 = $0.\nThe boots cost $0.",
+     "tokens": 76,
+     "seconds": 82.5
+    },
+    {
+     "text": " The cost of the boots is $33 + $33 = $66.\nThe cost of the high heels is $33 + (2 * $33) = $69.\nThe total cost of the pairs of high heels is $69 + $69 = $138.\nGloria's budget for shoes is $66 + $138 = $204.\nThe cost of the boots is $204 - $66 = $138.\nThe answer is 138.",
+     "tokens": 115,
+     "seconds": 128.58
+    },
+    {
+     "text": " The first pair of heels costs $33, and the second pair costs two times as much, so it costs $33 * 2 = $66.\nTogether, the boots and the two pairs of heels cost $33 + $66 = $99.\nSince the boots cost half of the total cost, the boots cost $99 / 2 = $49.50.\nThe answer is 49.5.",
+     "tokens": 94,
+     "seconds": 103.0
+    },
+    {
+     "text": " The total cost of the heels is 33 + 2 * 33 = $99.\nThe boots cost $99 - $5 = $94.\nThe answer is 94.",
+     "tokens": 44,
+     "seconds": 45.83
+    },
+    {
+     "text": " The other pair of heels cost 33 * 2 = $66.\nTogether, the two pairs of heels cost 33 + 66 = $99.\nSo the boots cost 99 - 5 = $94.\nThe answer is 94.",
+     "tokens": 60,
+     "seconds": 64.45
+    },
+    {
+     "text": " The total cost of the high heels is $33 + $33 = $66.\nIf one pair of high heels costs $33 and the other pair costs twice as much, then the other pair costs $33 x 2 = $66.\nSo, the total cost of the high heels is $66 + $66 = $132.\nIf the high heels together cost five dollars less than the boots, then the boots cost $132 + $5 = $137.\nThe answer is 137.",
+     "tokens": 117,
+     "seconds": 131.01
+    }
+   ]
+  }
+ ],
+ "load_seconds": 13.4,
+ "demo": {
+  "questions": 10,
+  "minutes": 3.5,
+  "memory_gb": 4.1,
+  "threads": 2,
+  "same_text": 20,
+  "answers": 20,
+  "direct": 1,
+  "steps": 5
+ }
+}
