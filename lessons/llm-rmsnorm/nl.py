@@ -228,7 +228,7 @@ def text_demo():
     mo.md(r"""
     ### LayerNorm tegen je RMSNorm
 
-    De knop traint je `GPT` uit [Je GPT in elkaar zetten](/course/open/gpt-assemble?lang=nl) twee keer op Tiny Shakespeare, met dezelfde start en dezelfde 400 mini-batches: één keer zoals hij is, en één keer met je `RMSNorm` op de plek van elke `nn.LayerNorm`. Een kleine GPT, 2 blocks met $d = 64$, op de CPU: het duurt ongeveer een minuut. Waar een module van jou ontbreekt, springt de versie van de course in. Hij werkt zodra oefening 1 goed is.
+    De knop traint je `GPT` uit [Je GPT in elkaar zetten](/course/open/gpt-assemble?lang=nl) twee keer op Tiny Shakespeare, met dezelfde start en dezelfde 400 mini-batches: één keer zoals hij is, en één keer met je `RMSNorm` op de plek van elke `nn.LayerNorm`. Een kleine GPT, 2 blocks met $d = 64$, op de CPU: het duurt ongeveer een minuut. Waar een module van jou ontbreekt, springt de versie van de course in. Hij werkt zodra oefening 1 goed is. Tijdens het trainen laat een grafiek de training loss van elke stap zien: eerst met LayerNorm, dan met je RMSNorm, met daarnaast gestippeld de run met LayerNorm. De laatste grafiek blijft boven de tabel staan.
     """)
     return
 
@@ -247,16 +247,33 @@ def demo_train(box_rms, result_rms, train_button):
     elif not train_button.value:
         _out = mo.md("*Druk op de knop om te trainen.*")
     else:
-        _m = C.demo(box_rms.value)
+        _now = {}   # the live chart of each run, made at its first steps
+
+        def _progress(_p):
+            if _p["run"] not in _now:
+                _rms = _p["run"] == "rms"
+                _now[_p["run"]] = L.live({"title": "Je RMSNorm: de training loss van elke stap" if _rms else "LayerNorm: de training loss van elke stap", "x": "stap", "y": "loss",
+                                          "alt": "De training loss van elke stap van de run met je RMSNorm tot nu toe, in grijs, en als dikkere lijn het gemiddelde over de laatste 10 stappen; gestippeld hetzelfde gemiddelde van de run met LayerNorm." if _rms else "De training loss van elke stap van de run met LayerNorm tot nu toe, in grijs, en als dikkere lijn het gemiddelde over de laatste 10 stappen."}, _p["steps"], window=10)
+                if _rms and "layer" in _now:
+                    _now["rms"].reference(list(zip(_now["layer"].xs, _now["layer"].means())), "LayerNorm", role="loss")
+            _who = "LayerNorm" if _p["run"] == "layer" else "Je RMSNorm"
+            _now[_p["run"]].extend(_p["fresh"], f"**{_who}** · stap {_p['step']} van {_p['steps']}")
+
+        _m = C.demo(box_rms.value, _progress)
+        _last = _now.get("rms") or _now.get("layer")   # a run that stops keeps its chart so far
         if _m == "error":
-            _out = mo.md("*Het trainen stopte met een fout: werkt je GPT uit [Je GPT in elkaar zetten](/course/open/gpt-assemble?lang=nl) nog?*")
+            _out = _last.stopped("*Het trainen stopte met een fout: werkt je GPT uit [Je GPT in elkaar zetten](/course/open/gpt-assemble?lang=nl) nog?*") if _last else mo.md("*Het trainen stopte met een fout: werkt je GPT uit [Je GPT in elkaar zetten](/course/open/gpt-assemble?lang=nl) nog?*")
         elif _m == "norms":
             _out = mo.md("*Je GPT heeft geen `nn.LayerNorm` om te vervangen: gebruikt hij `nn.LayerNorm`, zoals in [Je GPT in elkaar zetten](/course/open/gpt-assemble?lang=nl)?*")
         else:
             _n = lambda _x, _d=0: C.number(_x, _d, L.lang)
             _l, _r = _m["layer"], _m["rms"]
             _stand = (" De versie van de course sprong in voor: " + ", ".join(f"`{_s}`" for _s in _m["stand_ins"]) + ".") if _m["stand_ins"] else ""
-            _out = mo.md(f"""
+            _pic = [mo.Html(_now["rms"].picture())] if "rms" in _now else []   # the RMSNorm run, LayerNorm dashed
+            if _pic and "layer" in _now and _now["rms"].xs and _now["rms"].xs == _now["layer"].xs:   # both with every step a number
+                _gap = max(abs(_a - _b) for _a, _b in zip(_now["rms"].means(), _now["layer"].means()))   # rounded up below
+                _pic.append(mo.md(f"In de grafiek liggen de twee runs op elkaar: hun gemiddelden over 10 stappen lagen nooit meer dan {_n(_gap + 0.0005, 3)} uit elkaar, dus de dikke lijn van je RMSNorm bedekt de gestippelde van LayerNorm." if _gap < 0.01 else f"In de grafiek lagen de gemiddelden over 10 stappen van de twee runs hooguit {_n(_gap + 0.0005, 3)} uit elkaar."))
+            _out = mo.vstack(_pic + [mo.md(f"""
     | | LayerNorm | je RMSNorm |
     |---|---|---|
     | validation loss | {_n(_l['val_loss'], 3)} | {_n(_r['val_loss'], 3)} |
@@ -264,7 +281,7 @@ def demo_train(box_rms, result_rms, train_button):
     | seconden | {_n(_l['seconds'], 1)} | {_n(_r['seconds'], 1)} |
 
     Je RMSNorm verving {_r['swapped']} normalization layers, en het model verloor daarmee {_n(_l['params'] - _r['params'])} parameters. In de eigen runs van de course met seeds 0, 1 en 2 eindigde RMSNorm hooguit 0,014 lager en hooguit 0,001 hoger, terwijl de loss van layer normalization door de seed alleen al meer dan 0,02 verschilde: een verschil van die grootte is ruis. De seconden verschillen weinig: de normalisaties zijn maar een klein deel van het werk, en een normalisatie die je zelf schreef, in een paar bewerkingen van PyTorch, is niet sneller dan de samengevoegde `nn.LayerNorm`.{_stand}
-    """)
+    """)])
     _out
     return
 

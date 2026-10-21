@@ -304,7 +304,7 @@ def text_demo():
     mo.md(f"""
     ### Wat je project nu kan
 
-    De knop gebruikt je project. Hij bouwt twee netwerken van dezelfde diepte: een convolutie van 1 naar 8 channels, {C.BLOCKS} blokken van 8 channels, pooling, een convolutie naar 16 channels, {C.BLOCKS} blokken van 16 channels, pooling, en de output head: 19 layers met weights. In het ene is elk blok gewoon, twee convoluties met elk een ReLU erna; in het andere is elk blok je `ResBlock`. Allebei beginnen ze met dezelfde weights. Hij traint elk met je Trainer: {C.EPOCHS} epochs op de 6.000 trainingsafbeeldingen, een learning rate van {C.number(C.LR, 2, L.lang)} met een warmup van één epoch, elk één run, met seed 0, en telt de parameters met je `count_params`. Waar een module van jou ontbreekt of stuk is, springt die van de course in. Het werkt zodra oefening 2 af is, en duurt ongeveer anderhalve minuut.
+    De knop gebruikt je project. Hij bouwt twee netwerken van dezelfde diepte: een convolutie van 1 naar 8 channels, {C.BLOCKS} blokken van 8 channels, pooling, een convolutie naar 16 channels, {C.BLOCKS} blokken van 16 channels, pooling, en de output head: 19 layers met weights. In het ene is elk blok gewoon, twee convoluties met elk een ReLU erna; in het andere is elk blok je `ResBlock`. Allebei beginnen ze met dezelfde weights. Hij traint elk met je Trainer: {C.EPOCHS} epochs op de 6.000 trainingsafbeeldingen, een learning rate van {C.number(C.LR, 2, L.lang)} met een warmup van één epoch, elk één run, met seed 0, en telt de parameters met je `count_params`. Waar een module van jou ontbreekt of stuk is, springt die van de course in. Het werkt zodra oefening 2 af is, en duurt ongeveer anderhalve minuut. Tijdens het trainen laat een grafiek de validation loss na elke epoch zien: eerst van het gewone netwerk, dan van het jouwe, met het gewone gestippeld ernaast. Gokken uit 10 soorten geeft een loss van $\\ln 10 \\approx 2{{,}}30$.
     """)
     return
 
@@ -322,18 +322,36 @@ def demo_resnet(train_button, result_block):
     if not train_button.value:
         _out = mo.md("*Druk op de knop om beide netwerken te trainen.*")
     else:
-        _result = C.demo()
+        _now = {}   # the live chart of each network, made at its first report
+
+        def _progress(_p):
+            if _p["run"] not in _now:
+                _res = _p["run"] == "residual"
+                _now[_p["run"]] = L.live({"title": "Het netwerk van je residual blocks: de validation loss" if _res else "Het gewone netwerk: de validation loss", "x": "epoch", "y": "validation loss",
+                                          "alt": "De validation loss van het netwerk van je residual blocks na elke epoch tot nu toe; gestippeld die van het gewone netwerk." if _res else "De validation loss van het gewone netwerk na elke epoch tot nu toe."}, _p["epochs"], low=0.0)
+                if _res and "plain" in _now:
+                    _now["residual"].reference(list(zip(_now["plain"].xs, _now["plain"].ys)), "gewoon", role="loss")
+            _who = "Het gewone netwerk" if _p["run"] == "plain" else "Het netwerk van je residual blocks"
+            if "val_loss" in _p:
+                _now[_p["run"]].add(_p["epoch"], _p["val_loss"], f"**{_who}** · epoch {_p['epoch']} van {_p['epochs']} · validation loss {C.number(_p['val_loss'], 3, L.lang)}")
+            else:
+                _now[_p["run"]].line(f"**{_who}** · epoch {_p['epoch']} van {_p['epochs']} · batch {_p['batch']} van {_p['batches']}")
+
+        _result = C.demo(_progress)
         if _result is None:
             _out = mo.md("*Maak eerst oefening 2 af: dan staat je `ResBlock` in je project, en gebruikt deze cel hem.*")
         elif isinstance(_result, str):
-            _out = mo.md({
+            _note = {
                 "slow": "*Je project doet er hier te lang over: meer dan vier minuten om één netwerk te trainen. Doet je `ResBlock` of je Trainer meer werk dan nodig is, zoals een loop die te vaak draait?*",
                 "resnet": "*Je `ResBlock` in `work/projects/cnn/resnet.py` stopt met een fout, bij het maken of trainen van het netwerk. Heb je zijn bestand veranderd? Verwijder het, en check oefening 2 opnieuw: de check bewaart je code dan weer.*",
                 "trainer": "*Trainen met je Trainer in `work/projects/nn/trainer.py`, of tellen met je `count_params` in `work/projects/cnn/count.py`, stopt met een fout. Heb je een van die bestanden veranderd? Verwijder het, en check zijn oefening opnieuw.*",
-            }[_result])
+            }[_result]
+            _last = _now.get("residual") or _now.get("plain")   # a run that stops keeps its chart so far
+            _out = _last.stopped(_note) if _last else mo.md(_note)
         else:
             _who = "" if not _result["stand_ins"] else " De versie van de course sprong in voor " + ", ".join(f"`{m}`" for m in _result["stand_ins"]) + ", zoals de melding bij *Waar je project staat* zegt."
-            _out = mo.md(f"""Van de 1.000 testafbeeldingen leest het gewone netwerk er **{_result['plain']}** goed, en dat van je residual blocks **{_result['residual']}**, allebei met {C.grouped(_result['params_residual'], L.lang)} parameters, geteld met je `count_params`. Over 5 seeds, met de code van de course: het gewone netwerk elke keer 105, en dat met residual connections 876 tot 895, bij elke seed meer dan je SmallCNN.{_who}""")
+            _pic = [mo.Html(C.curves_picture(_result["curves"], {"title": "Validation loss na elke epoch", "x": "epoch", "y": "validation loss", "plain": "gewoon", "alt": "De validation loss van het netwerk van je residual blocks na elke epoch, en gestippeld die van het gewone netwerk."}, L.lang))] if _result.get("curves") else []
+            _out = mo.vstack(_pic + [mo.md(f"""Van de 1.000 testafbeeldingen leest het gewone netwerk er **{_result['plain']}** goed, en dat van je residual blocks **{_result['residual']}**, allebei met {C.grouped(_result['params_residual'], L.lang)} parameters, geteld met je `count_params`. Over 5 seeds, met de code van de course: het gewone netwerk elke keer 105, en dat met residual connections 876 tot 895, bij elke seed meer dan je SmallCNN. De grafiek laat de validation loss van allebei na elke epoch zien, die van het gewone netwerk gestippeld.{_who}""")])
     _out
     return
 

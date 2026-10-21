@@ -11,8 +11,9 @@ import numpy as np
 from everything_ai import paths, projects
 from everything_ai.check import ClassBox, Mistake, run_code, with_time_limit
 
-projects.builds_on(("llm", "attention", "attn-transformer-block", "causal-self-attention"),
-                   ("llm", "block", "attn-transformer-block", "block"), ("llm", "gpt", "gpt-assemble", "gpt"))
+BUILDS_ON = (("llm", "attention", "attn-transformer-block", "causal-self-attention"),
+             ("llm", "block", "attn-transformer-block", "block"), ("llm", "gpt", "gpt-assemble", "gpt"))
+projects.builds_on(*BUILDS_ON)
 
 
 def number(x: float, digits: int, lang: str) -> str:
@@ -61,9 +62,10 @@ def _swap(model, RMSNorm) -> int:
     return count
 
 
-def _run(GPT, RMSNorm, ids, n_chars: int, seed: int = 0) -> dict:
+def _run(GPT, RMSNorm, ids, n_chars: int, seed: int = 0, show=None, name: str = "") -> dict:
     """Train one small GPT on the first 90% of the ids for STEPS mini-batches, the same ones for every run, and give
-    its validation loss on the last 10%, its parameters, its norms swapped and its seconds."""
+    its validation loss on the last 10%, its parameters, its norms swapped and its seconds. `show` hears every 10
+    steps the loss of each of them ("fresh"), with the run's `name`, for a live chart."""
     import torch
     import torch.nn.functional as F
     torch.manual_seed(seed)
@@ -75,8 +77,8 @@ def _run(GPT, RMSNorm, ids, n_chars: int, seed: int = 0) -> dict:
     train, val = ids[:cut], ids[cut:]
     T = s["block"]
     g = torch.Generator().manual_seed(seed)
-    start = time.perf_counter()
-    for _ in range(STEPS):
+    start, fresh = time.perf_counter(), []
+    for step in range(STEPS):
         i = torch.randint(0, len(train) - T - 1, (BATCH,), generator=g)
         x = torch.stack([train[j:j + T] for j in i])
         y = torch.stack([train[j + 1:j + T + 1] for j in i])
@@ -84,6 +86,10 @@ def _run(GPT, RMSNorm, ids, n_chars: int, seed: int = 0) -> dict:
         opt.zero_grad()
         loss.backward()
         opt.step()
+        fresh.append((step + 1, loss.item()))
+        if show is not None and (step % 10 == 9 or step == STEPS - 1):
+            show({"run": name, "step": step + 1, "steps": STEPS, "fresh": fresh})
+            fresh = []
     seconds = time.perf_counter() - start
     with torch.no_grad():
         g = torch.Generator().manual_seed(1)
@@ -94,9 +100,10 @@ def _run(GPT, RMSNorm, ids, n_chars: int, seed: int = 0) -> dict:
     return {"val_loss": val_loss, "params": sum(p.numel() for p in model.parameters()), "swapped": swapped, "seconds": seconds}
 
 
-def demo(code: str) -> dict | str:
-    """The learner's GPT trained twice, with its layer norms and with the learner's RMSNorm in their place. "norms" when
-    their GPT has no nn.LayerNorm to swap, "error" when something stops with an error."""
+def demo(code: str, show=None) -> dict | str:
+    """The learner's GPT trained twice, with its layer norms and with the learner's RMSNorm in their place; `show`
+    hears the steps of both runs, "layer" and then "rms". "norms" when their GPT has no nn.LayerNorm to swap, "error"
+    when something stops with an error."""
     import torch
     yours = run_code(code)
     if yours.error is not None or "RMSNorm" not in yours.names:
@@ -111,7 +118,11 @@ def demo(code: str) -> dict | str:
         chars = sorted(set(book))
         index = {ch: i for i, ch in enumerate(chars)}
         ids = torch.tensor([index[ch] for ch in book])
-        runs = with_time_limit(lambda: [_run(GPT, None, ids, len(chars)), _run(GPT, RMSNorm, ids, len(chars))], 600)
+        s = SIZES   # a GPT without nn.LayerNorm has nothing to swap: say so before a minute of training, and a chart of "your RMSNorm" without it
+        if not any(isinstance(m, torch.nn.LayerNorm) for m in GPT(len(chars), s["d"], s["heads"], s["layers"], s["block"]).modules()):
+            return "norms"
+        runs = with_time_limit(lambda: [_run(GPT, None, ids, len(chars), show=show, name="layer"),
+                                        _run(GPT, RMSNorm, ids, len(chars), show=show, name="rms")], 600)
     except Exception:
         return "error"
     finally:

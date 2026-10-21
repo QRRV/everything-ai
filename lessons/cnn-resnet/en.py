@@ -304,7 +304,7 @@ def text_demo():
     mo.md(f"""
     ### What your project can do now
 
-    The button uses your project. It builds two networks of the same depth: a convolution from 1 to 8 channels, {C.BLOCKS} blocks of 8 channels, pooling, a convolution to 16 channels, {C.BLOCKS} blocks of 16 channels, pooling, and the output head: 19 layers with weights. In the one, every block is plain, two convolutions with a ReLU after each; in the other, every block is your `ResBlock`. Both start from the same weights. It trains each with your Trainer: {C.EPOCHS} epochs on the 6,000 training images, a learning rate of {C.number(C.LR, 2, L.lang)} with a warmup of one epoch, one run each, with seed 0, and counts the parameters with your `count_params`. Where a module of yours is missing or broken, the course's stands in. It works once exercise 2 is done, and takes about a minute and a half.
+    The button uses your project. It builds two networks of the same depth: a convolution from 1 to 8 channels, {C.BLOCKS} blocks of 8 channels, pooling, a convolution to 16 channels, {C.BLOCKS} blocks of 16 channels, pooling, and the output head: 19 layers with weights. In the one, every block is plain, two convolutions with a ReLU after each; in the other, every block is your `ResBlock`. Both start from the same weights. It trains each with your Trainer: {C.EPOCHS} epochs on the 6,000 training images, a learning rate of {C.number(C.LR, 2, L.lang)} with a warmup of one epoch, one run each, with seed 0, and counts the parameters with your `count_params`. Where a module of yours is missing or broken, the course's stands in. It works once exercise 2 is done, and takes about a minute and a half. While it trains, a chart shows the validation loss after every epoch: first of the plain network, then of yours, with the plain one dashed beside it. Guessing among 10 kinds gives a loss of $\\ln 10 \\approx 2.30$.
     """)
     return
 
@@ -322,18 +322,36 @@ def demo_resnet(train_button, result_block):
     if not train_button.value:
         _out = mo.md("*Press the button to train both networks.*")
     else:
-        _result = C.demo()
+        _now = {}   # the live chart of each network, made at its first report
+
+        def _progress(_p):
+            if _p["run"] not in _now:
+                _res = _p["run"] == "residual"
+                _now[_p["run"]] = L.live({"title": "Your residual network: the validation loss" if _res else "The plain network: the validation loss", "x": "epoch", "y": "validation loss",
+                                          "alt": "The validation loss of the network of your residual blocks after every epoch so far; dashed, that of the plain network." if _res else "The validation loss of the plain network after every epoch so far."}, _p["epochs"], low=0.0)
+                if _res and "plain" in _now:
+                    _now["residual"].reference(list(zip(_now["plain"].xs, _now["plain"].ys)), "plain", role="loss")
+            _who = "The plain network" if _p["run"] == "plain" else "Your residual network"
+            if "val_loss" in _p:
+                _now[_p["run"]].add(_p["epoch"], _p["val_loss"], f"**{_who}** · epoch {_p['epoch']} of {_p['epochs']} · validation loss {C.number(_p['val_loss'], 3, L.lang)}")
+            else:
+                _now[_p["run"]].line(f"**{_who}** · epoch {_p['epoch']} of {_p['epochs']} · batch {_p['batch']} of {_p['batches']}")
+
+        _result = C.demo(_progress)
         if _result is None:
             _out = mo.md("*Finish exercise 2 first: then your `ResBlock` is in your project, and this cell uses it.*")
         elif isinstance(_result, str):
-            _out = mo.md({
+            _note = {
                 "slow": "*Your project takes too long here: more than four minutes to train one network. Does your `ResBlock` or your Trainer do more work than it needs, such as a loop that runs too often?*",
                 "resnet": "*Your `ResBlock` in `work/projects/cnn/resnet.py` stops with an error, while the network is made or trained. Did you change its file? Delete it, and check exercise 2 again: its check then saves your code again.*",
                 "trainer": "*Training with your Trainer in `work/projects/nn/trainer.py`, or counting with your `count_params` in `work/projects/cnn/count.py`, stops with an error. Did you change one of those files? Delete it, and check its exercise again.*",
-            }[_result])
+            }[_result]
+            _last = _now.get("residual") or _now.get("plain")   # a run that stops keeps its chart so far
+            _out = _last.stopped(_note) if _last else mo.md(_note)
         else:
             _who = "" if not _result["stand_ins"] else " The course's version stood in for " + ", ".join(f"`{m}`" for m in _result["stand_ins"]) + ", as the note under *Where your project stands* says."
-            _out = mo.md(f"""Of the 1,000 test images, the plain network reads **{_result['plain']}** right, and the one of your residual blocks **{_result['residual']}**, both with {C.grouped(_result['params_residual'], L.lang)} parameters, counted with your `count_params`. Over 5 seeds, with the course's code: 105 every time plain, and 876 to 895 residual, more than your SmallCNN with every seed.{_who}""")
+            _pic = [mo.Html(C.curves_picture(_result["curves"], {"title": "Validation loss after every epoch", "x": "epoch", "y": "validation loss", "plain": "plain", "alt": "The validation loss of the network of your residual blocks after every epoch, and dashed that of the plain network."}, L.lang))] if _result.get("curves") else []
+            _out = mo.vstack(_pic + [mo.md(f"""Of the 1,000 test images, the plain network reads **{_result['plain']}** right, and the one of your residual blocks **{_result['residual']}**, both with {C.grouped(_result['params_residual'], L.lang)} parameters, counted with your `count_params`. Over 5 seeds, with the course's code: 105 every time plain, and 876 to 895 residual, more than your SmallCNN with every seed. The chart shows the validation loss of both after every epoch, the plain network's dashed.{_who}""")])
     _out
     return
 

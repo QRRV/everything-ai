@@ -12,13 +12,14 @@ import numpy as np
 import torch   # imported once, when the lesson opens: the first import takes longer than a check may
 from torch.utils.data import DataLoader, TensorDataset
 
-from everything_ai import paths, projects
+from everything_ai import live, paths, projects
 from everything_ai.check import ClassBox, Mistake, Timeout, run_code, with_time_limit
 
 # The demo trains with the learner's Trainer of nn-trainer and counts with their count_params of cnn-pytorch; where one
 # is missing or broken, the course's version stands in (template 1.3).
-projects.builds_on(("nn", "train_epoch", "nn-trainer", "train-epoch"), ("nn", "trainer", "nn-trainer", "trainer"),
-                   ("cnn", "count", "cnn-pytorch", "count-params"))
+BUILDS_ON = (("nn", "train_epoch", "nn-trainer", "train-epoch"), ("nn", "trainer", "nn-trainer", "trainer"),
+             ("cnn", "count", "cnn-pytorch", "count-params"))
+projects.builds_on(*BUILDS_ON)
 
 DATA = "data/fashion-mnist-small.npz"   # 6,000 training and 1,000 test images of Fashion-MNIST: see data/README.md
 EPOCHS, LR = 5, 0.01
@@ -244,11 +245,12 @@ def _accuracy(model, X, y) -> int:
         return int((model(X).argmax(dim=1) == y).sum())
 
 
-def _demo():
+def _demo(show=None):
     """For the demo: None when resnet.py is not in the project yet; "resnet" when a network of the learner's ResBlock
     stops with an error; "trainer" when the Trainer or count_params does; "slow" when a training run takes too long;
     else a dict with the parameters and the test images read right of the plain and the residual network, one run each,
-    seed 0, and the modules the course's versions stood in for."""
+    seed 0, their validation loss after every epoch ("curves"), and the modules the course's versions stood in for.
+    `show` hears both runs while they train (live.follow), "plain" and then "residual"."""
     if not _saved("resnet"):
         return None
     run = run_code("from cnn.resnet import ResBlock")
@@ -262,14 +264,18 @@ def _demo():
     stand_ins = [f"{package}/{module}.py" for package, module, _, _ in projects.stand_ins()]
     X, y, X_test, y_test = fashion()
 
-    def train(model):
+    def train(model, name):
         torch.manual_seed(1)
         loader = DataLoader(TensorDataset(X, y), batch_size=64, shuffle=True)
         val = DataLoader(TensorDataset(X_test, y_test), batch_size=500)
-        Trainer(model, loader, val, epochs=EPOCHS, lr=LR, warmup=len(loader), max_norm=1.0).fit()
+        trainer = Trainer(model, loader, val, epochs=EPOCHS, lr=LR, warmup=len(loader), max_norm=1.0)
+        if show is not None:
+            live.follow(trainer, show, name)
+        history = trainer.fit()
+        out["curves"][name] = [float(h["val_loss"]) for h in history or []]
         return _accuracy(model, X_test, y_test)
 
-    out = {}
+    out = {"curves": {}}
     for name, Block in (("plain", _PlainBlock), ("residual", ResBlock)):
         try:
             torch.manual_seed(0)
@@ -281,7 +287,7 @@ def _demo():
         except Exception:
             return "trainer"
         try:
-            out[name] = with_time_limit(lambda: train(model), 240)
+            out[name] = with_time_limit(lambda: train(model, name), 240)
         except Timeout:
             return "slow"
         except Exception:
@@ -301,10 +307,20 @@ def _project_texts() -> tuple:
     return tuple(texts)
 
 
-def demo():
-    """The demo's result, worked out once for the project files as they are."""
+def curves_picture(curves: dict, labels: dict, lang: str) -> str:
+    """The validation loss after every epoch of both networks of the demo: the residual one as the run, in the colour
+    of loss, and the plain one thin and dashed beside it, named labels["plain"]."""
+    run = live.Live(labels, EPOCHS, lang=lang, low=0.0)   # from 0, as the chart while it trains
+    run.reference(list(enumerate(curves.get("plain", []), 1)), labels["plain"], role="loss")
+    run.ys = list(curves.get("residual", []))
+    run.xs = list(range(1, len(run.ys) + 1))
+    return run.picture()
+
+
+def demo(show=None):
+    """The demo's result, worked out once for the project files as they are; `show` hears the runs when they train."""
     key = _project_texts()
     if key not in _DEMO_RUNS:
         _DEMO_RUNS.clear()
-        _DEMO_RUNS[key] = _demo()
+        _DEMO_RUNS[key] = _demo(show)
     return _DEMO_RUNS[key]

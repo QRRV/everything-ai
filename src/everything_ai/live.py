@@ -117,11 +117,47 @@ class Live:
 def name_at(points: list, label: str, above: bool, steps: float, y: tuple) -> tuple:
     """Where the name of another run goes, as (x, y) for words that end at its last point: above or below every point
     of it under the name (about 0.03 of the x-axis a letter), so that its own line does not cross it, and inside `y`.
-    Below a line that ends at the bottom of the chart there is no room, so its name then goes above it."""
+    Below a line that ends at the bottom of the chart there is no room, so its name then goes above it; above a line
+    that ends at the top, below it."""
     h = y[1] - y[0]
     under = [v for x, v in points if x >= points[-1][0] - 0.03 * len(label) * steps]
     up, down = max(under) + 0.07 * h, min(under) - 0.1 * h
     if not above and down < y[0] + 0.05 * h and up <= y[1] - 0.05 * h:
         above = True
+    elif above and up > y[1] - 0.05 * h and down >= y[0] + 0.05 * h:
+        above = False
     at = up if above else down
     return points[-1][0], min(max(at, y[0] + 0.05 * h), y[1] - 0.05 * h)
+
+
+def follow(trainer, show, name: str, every: int = 50) -> None:
+    """Let `show` hear a run of the learner's Trainer of nn-trainer while it fits, without changing their code: after
+    every epoch its validation loss ({"run": name, "epoch", "epochs", "val_loss"}), and every `every` batches how far
+    the epoch is ({"run", "epoch", "epochs", "batch", "batches"}). This wraps self.train_loader, which their fit walks
+    once an epoch, and self.evaluate, on this one trainer. An epoch counts from its first batch, and its validation loss
+    is the first evaluate after it: one before the first epoch, or a second in the same epoch, is not heard, and a fit
+    that measures without self.evaluate only shows how far each epoch is."""
+    evaluate, loader, epoch, heard = trainer.evaluate, trainer.train_loader, [0], [0]
+
+    def evaluated(*args, **kwargs):
+        loss = evaluate(*args, **kwargs)
+        if heard[0] < epoch[0]:
+            heard[0] = epoch[0]
+            show({"run": name, "epoch": epoch[0], "epochs": trainer.epochs, "val_loss": float(loss)})
+        return loss
+
+    class Counted:   # the loader as it is, also for len() and its other attributes, telling how far an epoch is
+        def __len__(self):
+            return len(loader)
+
+        def __getattr__(self, key):
+            return getattr(loader, key)
+
+        def __iter__(self):
+            epoch[0] += 1
+            for i, batch in enumerate(loader, 1):
+                if i % every == 0:
+                    show({"run": name, "epoch": epoch[0], "epochs": trainer.epochs, "batch": i, "batches": len(loader)})
+                yield batch
+
+    trainer.evaluate, trainer.train_loader = evaluated, Counted()

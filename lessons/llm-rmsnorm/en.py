@@ -228,7 +228,7 @@ def text_demo():
     mo.md(r"""
     ### LayerNorm against your RMSNorm
 
-    The button trains your `GPT` from [Assemble your GPT](/course/open/gpt-assemble?lang=en) twice on Tiny Shakespeare, with the same start and the same 400 mini-batches: once as it is, and once with your `RMSNorm` in the place of every `nn.LayerNorm`. A small GPT, 2 blocks of $d = 64$, on the CPU: it takes about a minute. Where a module of yours is missing, the course's version stands in. It works once exercise 1 is right.
+    The button trains your `GPT` from [Assemble your GPT](/course/open/gpt-assemble?lang=en) twice on Tiny Shakespeare, with the same start and the same 400 mini-batches: once as it is, and once with your `RMSNorm` in the place of every `nn.LayerNorm`. A small GPT, 2 blocks of $d = 64$, on the CPU: it takes about a minute. Where a module of yours is missing, the course's version stands in. It works once exercise 1 is right. While it trains, a chart shows the training loss of every step: first with LayerNorm, then with your RMSNorm, the LayerNorm run dashed beside it. The last chart stays above the table.
     """)
     return
 
@@ -247,16 +247,33 @@ def demo_train(box_rms, result_rms, train_button):
     elif not train_button.value:
         _out = mo.md("*Press the button to train.*")
     else:
-        _m = C.demo(box_rms.value)
+        _now = {}   # the live chart of each run, made at its first steps
+
+        def _progress(_p):
+            if _p["run"] not in _now:
+                _rms = _p["run"] == "rms"
+                _now[_p["run"]] = L.live({"title": "RMSNorm: the training loss of every step" if _rms else "LayerNorm: the training loss of every step", "x": "step", "y": "loss",
+                                          "alt": "The training loss of every step of the run with your RMSNorm so far, in grey, and its mean over the last 10 steps as the thicker line; dashed, the same mean of the run with LayerNorm." if _rms else "The training loss of every step of the run with LayerNorm so far, in grey, and its mean over the last 10 steps as the thicker line."}, _p["steps"], window=10)
+                if _rms and "layer" in _now:
+                    _now["rms"].reference(list(zip(_now["layer"].xs, _now["layer"].means())), "LayerNorm", role="loss")
+            _who = "LayerNorm" if _p["run"] == "layer" else "Your RMSNorm"
+            _now[_p["run"]].extend(_p["fresh"], f"**{_who}** · step {_p['step']} of {_p['steps']}")
+
+        _m = C.demo(box_rms.value, _progress)
+        _last = _now.get("rms") or _now.get("layer")   # a run that stops keeps its chart so far
         if _m == "error":
-            _out = mo.md("*The training stopped with an error: does your GPT of [Assemble your GPT](/course/open/gpt-assemble?lang=en) still work?*")
+            _out = _last.stopped("*The training stopped with an error: does your GPT of [Assemble your GPT](/course/open/gpt-assemble?lang=en) still work?*") if _last else mo.md("*The training stopped with an error: does your GPT of [Assemble your GPT](/course/open/gpt-assemble?lang=en) still work?*")
         elif _m == "norms":
             _out = mo.md("*Your GPT has no `nn.LayerNorm` to swap: does it use `nn.LayerNorm`, as in [Assemble your GPT](/course/open/gpt-assemble?lang=en)?*")
         else:
             _n = lambda _x, _d=0: C.number(_x, _d, L.lang)
             _l, _r = _m["layer"], _m["rms"]
             _stand = (" The course's version stood in for: " + ", ".join(f"`{_s}`" for _s in _m["stand_ins"]) + ".") if _m["stand_ins"] else ""
-            _out = mo.md(f"""
+            _pic = [mo.Html(_now["rms"].picture())] if "rms" in _now else []   # the RMSNorm run, LayerNorm dashed
+            if _pic and "layer" in _now and _now["rms"].xs and _now["rms"].xs == _now["layer"].xs:   # both with every step a number
+                _gap = max(abs(_a - _b) for _a, _b in zip(_now["rms"].means(), _now["layer"].means()))   # rounded up below
+                _pic.append(mo.md(f"In the chart, the two runs lie on top of each other: their means over 10 steps were never more than {_n(_gap + 0.0005, 3)} apart, so the thick line of your RMSNorm hides the dashed one of LayerNorm." if _gap < 0.01 else f"In the chart, the means over 10 steps of the two runs were at most {_n(_gap + 0.0005, 3)} apart."))
+            _out = mo.vstack(_pic + [mo.md(f"""
     | | LayerNorm | your RMSNorm |
     |---|---|---|
     | validation loss | {_n(_l['val_loss'], 3)} | {_n(_r['val_loss'], 3)} |
@@ -264,7 +281,7 @@ def demo_train(box_rms, result_rms, train_button):
     | seconds | {_n(_l['seconds'], 1)} | {_n(_r['seconds'], 1)} |
 
     Your RMSNorm replaced {_r['swapped']} normalization layers, and the model lost {_n(_l['params'] - _r['params'])} parameters with them. In the course's own runs with seeds 0, 1 and 2, RMSNorm ended at most 0.014 lower and at most 0.001 higher, while the seed alone moved layer normalization's loss by more than 0.02: a difference of that size is noise. The seconds differ little: the norms are only a small part of the work, and a norm you wrote yourself, in a few PyTorch operations, is no faster than the fused `nn.LayerNorm`.{_stand}
-    """)
+    """)])
     _out
     return
 
