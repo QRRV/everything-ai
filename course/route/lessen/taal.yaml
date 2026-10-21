@@ -810,6 +810,26 @@ lessons:
   needs: any
   look_back: lm-temperature
 
+- id: llm-reasoning-from-scratch
+  title: "Project: a model that writes its steps, from scratch"
+  level: expert
+  module: post-training
+  kind: project
+  project: llm
+  idea: "Train the same small model from scratch twice on multiplication, once on the answer alone and once on the answer with its steps written out: with steps it learns 3-digit products and without them it hardly does, and neither handles longer numbers than it saw."
+  covers: [experimenten-ontwerpen-en-ablaties#6]
+  requires: [llm-reasoning-idea, llm-sft, res-fair-baselines]
+  introduces: [p:train-with-written-steps, c:length-generalization]
+  uses: [c:chain-of-thought, c:test-time-compute, c:loss-masking, c:sequence-padding, c:end-of-text, c:synthetic-data, c:fair-comparison, c:tuning-effort, c:control-run, c:run-to-run-variance, c:seed, c:accuracy, c:test-set, c:train-set, c:generalization, c:kv-cache, c:greedy-decoding, c:reinforcement-learning, c:cross-entropy, c:loss, c:adamw, c:learning-rate, c:lr-schedule, c:warmup, c:warmdown, c:weight-decay, c:gradient-clipping, c:mini-batch, c:batch-size, c:checkpoint, c:probe-run, c:parameter-count, c:token, c:token-id, c:vocabulary, c:forward-pass, c:gpu, c:pass-at-k, c:sampling, c:majority-voting, c:reasoning-model, c:grouped-query-attention, py:def, py:return, py:for, py:range, py:if, py:list, py:append, py:len, py:str, py:ord-chr, py:f-string, py:str-join, py:split-sep, py:indexing, py:reversed, py:comprehension, py:isdigit, py:is-none, py:none, py:arithmetic, py:print, py:comment, py:underscore-name, py:slicing, q:predict, q:choice, q:explain, q:exercise-with-check, q:run-cell]
+  mentions: [c:verifiable-reward, c:grpo]
+  ladder: [torch]
+  data: [synthetic-multiplication, course-reasoning-runs, model-course-arith-steps, model-course-arith-plain]
+  reference_data: [synthetic-multiplication]
+  compute_minutes: 10         # the demo of the CPU plan, measured on the course's CPU with 2 threads (both runs and their measuring)
+  fallback: [cpu, checkpoint]
+  needs: any
+  look_back: res-seeds-variance
+
 - id: llm-quantize
   title: "Running a model in fewer bits"
   level: expert

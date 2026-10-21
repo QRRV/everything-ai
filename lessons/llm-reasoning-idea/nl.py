@@ -545,7 +545,7 @@ def text_connections():
     mo.md(rf"""
     ## Afronding
 
-    **Samenhang.** [Hoe onderzoek werkt](/course/open/res-research-cycle?lang=nl) gebruikte het experiment van Kojima als voorbeeld; hier zie je waarom het werkt. Je checker is een programma zoals die van [Heeft post-training geholpen?](/course/open/llm-eval-chat?lang=nl), en DeepSeek-R1 is met zulke checkers getraind.
+    **Samenhang.** [Hoe onderzoek werkt](/course/open/res-research-cycle?lang=nl) gebruikte het experiment van Kojima als voorbeeld; hier zie je waarom het werkt. Je checker is een programma zoals die van [Heeft post-training geholpen?](/course/open/llm-eval-chat?lang=nl), en DeepSeek-R1 is met zulke checkers getraind. In [Project: van nul een model dat zijn tussenstappen schrijft](/course/open/llm-reasoning-from-scratch?lang=nl) train je van nul een klein model dat zijn eigen tussenstappen schrijft, op data waarvan je elk voorbeeld zelf kiest.
 
     **Grenzen.** Redactiesommen zijn maar een klein deel van redeneren, en 30 vragen geven een standaardfout van ongeveer 9 punten. GSM8K kan in de pretraining van Qwen3 hebben gezeten (contaminatie), en dat kan de course niet nagaan. Een aanwijzing dat tekst in deze vorm erin zat: zonder enig voorbeeld schrijven {C.ZERO_STYLE['phrase']} van zijn {S['n']} zero-shot antwoorden toch *The answer is*. Namen en scores van modellen verouderen snel: deze zijn van oktober 2026; de eigen getallen van de les komen uit de run van de course.
     """)

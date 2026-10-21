@@ -196,6 +196,12 @@ SPDX-FileCopyrightText = "2026 Everything AI contributors (the course's run; ans
 SPDX-License-Identifier = "CC-BY-4.0"
 
 [[annotations]]
+path = ["data/course-reasoning-runs.json", "data/course-arith-steps.pt", "data/course-arith-plain.pt"]
+precedence = "override"
+SPDX-FileCopyrightText = "2026 Everything AI contributors (the course's runs and models, trained on multiplications made by the course's code)"
+SPDX-License-Identifier = "CC-BY-4.0"
+
+[[annotations]]
 path = "data/README.md"
 precedence = "aggregate"
 SPDX-FileCopyrightText = "2026 Everything AI contributors"

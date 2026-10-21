@@ -545,7 +545,7 @@ def text_connections():
     mo.md(rf"""
     ## Wrap-up
 
-    **How this connects.** [How research works](/course/open/res-research-cycle?lang=en) used Kojima's experiment as an example; here is why it works. Your checker is a program like those of [Did post-training help?](/course/open/llm-eval-chat?lang=en), and DeepSeek-R1 was trained with such checkers.
+    **How this connects.** [How research works](/course/open/res-research-cycle?lang=en) used Kojima's experiment as an example; here is why it works. Your checker is a program like those of [Did post-training help?](/course/open/llm-eval-chat?lang=en), and DeepSeek-R1 was trained with such checkers. In [Project: a model that writes its steps, from scratch](/course/open/llm-reasoning-from-scratch?lang=en) you train a small model from scratch to write its own steps, on data where you control every example.
 
     **Limits.** Word problems are a narrow part of reasoning, and 30 questions give about 9 points of standard error. GSM8K may have been in Qwen3's pretraining (contamination), which the course cannot check. A hint that text in this form was: without any example, {C.ZERO_STYLE['phrase']} of its {S['n']} zero-shot answers still write *The answer is*. Names and scores of models age fast: these are as of October 2026; the lesson's own numbers are the course's run.
     """)

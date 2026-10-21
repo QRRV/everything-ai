@@ -1,0 +1,40 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: llm-reasoning-from-scratch
+minutes: 50
+title:
+  en: "Project: a model that writes its steps, from scratch"
+  nl: "Project: van nul een model dat zijn tussenstappen schrijft"
+goal:
+  en: "train the same small model from scratch on multiplications with and without written steps, check its answers with a program, and say what the comparison shows and what it does not."
+  nl: "hetzelfde kleine model van nul trainen op vermenigvuldigingen met en zonder uitgeschreven tussenstappen, de antwoorden met een programma nakijken, en zeggen wat de vergelijking laat zien en wat niet."
+summary:
+  - en: "The format of the training data decides what a small model can learn: trained on the answers with their steps written out, the course's model of 0.7 million parameters gets most products of two 3-digit numbers right; trained on the answers alone, for as many steps, hardly any."
+    nl: "De vorm van de training data bepaalt wat een klein model kan leren: getraind op de antwoorden met hun tussenstappen uitgeschreven, heeft het model van de course van 0,7 miljoen parameters de meeste producten van twee getallen van 3 cijfers goed; getraind op alleen de antwoorden, evenveel stappen, bijna geen."
+  - en: "Steps cost: more tokens to train on for every example, and more tokens to write for every answer, test-time compute that a simpler question may not need."
+    nl: "Tussenstappen kosten iets: meer tokens om op te trainen per voorbeeld, en meer tokens om te schrijven per antwoord, test-time compute die een eenvoudiger vraag misschien niet nodig heeft."
+  - en: "The model learns the lengths it saw, not a method for any length: on 4-digit numbers it mostly writes the plan of a 3-digit product, and gets none right. Small transformers rarely handle longer inputs than in training: length generalization is an open problem."
+    nl: "Het model leert de lengtes die het zag, geen methode voor elke lengte: bij getallen van 4 cijfers schrijft het meestal het plan van een product van 3 cijfers, en heeft het er geen goed. Kleine transformers kunnen zelden langere invoer aan dan in de training: length generalization is een open probleem."
+can_now:
+  - en: "write training data with the steps of a computation"
+    nl: "training data schrijven met de stappen van een berekening"
+    by: steps-answer
+  - en: "check a model's answers with a program, also when they are broken"
+    nl: "de antwoorden van een model met een programma nakijken, ook als ze kapot zijn"
+    by: read-product
+  - en: "explain why a model fails on longer inputs than it saw"
+    nl: "uitleggen waarom een model faalt op langere invoer dan het zag"
+    by: longer
+  - en: "say what a comparison of two formats shows, and what it does not"
+    nl: "zeggen wat een vergelijking van twee vormen laat zien, en wat niet"
+    by: fair
+further_reading:
+  - en: "Maxwell Nye and others (2021), *Show Your Work: Scratchpads for Intermediate Computation with Language Models*, arXiv:2112.00114: training a model to write its steps before the answer"
+    nl: "Maxwell Nye en anderen (2021), *Show Your Work: Scratchpads for Intermediate Computation with Language Models*, arXiv:2112.00114: een model trainen om zijn stappen vóór het antwoord te schrijven"
+  - en: "Nayoung Lee and others (2023), *Teaching Arithmetic to Small Transformers*, arXiv:2307.03381: how the format of the data decides what a small transformer learns, and why it does not reach longer numbers"
+    nl: "Nayoung Lee en anderen (2023), *Teaching Arithmetic to Small Transformers*, arXiv:2307.03381: hoe de vorm van de data bepaalt wat een kleine transformer leert, en waarom hij geen langere getallen haalt"
+  - en: "Yuntian Deng, Yejin Choi and Stuart Shieber (2024), *From Explicit CoT to Implicit CoT: Learning to Internalize CoT Step by Step*, arXiv:2405.14838: multiplication with and without steps, and leaving the steps out bit by bit"
+    nl: "Yuntian Deng, Yejin Choi en Stuart Shieber (2024), *From Explicit CoT to Implicit CoT: Learning to Internalize CoT Step by Step*, arXiv:2405.14838: vermenigvuldigen met en zonder stappen, en de stappen beetje bij beetje weglaten"
+  - en: "Sean McLeish and others (2024), *Transformers Can Do Arithmetic with the Right Embeddings*, arXiv:2405.17399, and Yongchao Zhou and others (2024), *Transformers Can Achieve Length Generalization But Not Robustly*, arXiv:2402.09371: longer numbers than in training"
+    nl: "Sean McLeish en anderen (2024), *Transformers Can Do Arithmetic with the Right Embeddings*, arXiv:2405.17399, en Yongchao Zhou en anderen (2024), *Transformers Can Achieve Length Generalization But Not Robustly*, arXiv:2402.09371: langere getallen dan in de training"
