@@ -10,16 +10,17 @@ import time
 
 import torch
 
-from everything_ai import paths, projects
+from everything_ai import live, paths, projects
 from everything_ai.check import FunctionBox, Mistake, run_code
 
 # The runs use the learner's GPT of gpt-assemble, with their Block and attention, their gpt_examples, their Trainer of
 # nn-trainer and their gpt_loaders of gpt-train-chars; where one is missing or broken, the course's version stands in.
-projects.builds_on(("llm", "attention", "attn-transformer-block", "causal-self-attention"),
-                   ("llm", "block", "attn-transformer-block", "block"), ("llm", "gpt", "gpt-assemble", "gpt"),
-                   ("llm", "gpt_data", "gpt-assemble", "gpt-examples"),
-                   ("nn", "train_epoch", "nn-trainer", "train-epoch"), ("nn", "trainer", "nn-trainer", "trainer"),
-                   ("llm", "gpt_loaders", "gpt-train-chars", "gpt-loaders"))
+BUILDS_ON = (("llm", "attention", "attn-transformer-block", "causal-self-attention"),
+             ("llm", "block", "attn-transformer-block", "block"), ("llm", "gpt", "gpt-assemble", "gpt"),
+             ("llm", "gpt_data", "gpt-assemble", "gpt-examples"),
+             ("nn", "train_epoch", "nn-trainer", "train-epoch"), ("nn", "trainer", "nn-trainer", "trainer"),
+             ("llm", "gpt_loaders", "gpt-train-chars", "gpt-loaders"))
+projects.builds_on(*BUILDS_ON)
 
 DATA = "data/tiny-shakespeare.txt"
 PART = 0.25   # the runs train on the first quarter of the book, so that one run takes well under a minute on a CPU
@@ -80,10 +81,11 @@ class _Counted:
             yield batch
 
 
-def run(settings: dict, show=None) -> list | str:
+def run(settings: dict, show=None, hear=None) -> list | str:
     """Train one run of the small GPT with these settings, on the CPU, and give back its history: a dict per epoch
     with epoch, train_loss and val_loss. "run" when the learner's code stops with an error, "stopped" after the stop
-    button of marimo (a KeyboardInterrupt). `show` gets how far the run is, as a share from 0 to 1, about every second."""
+    button of marimo (a KeyboardInterrupt). `show` gets how far the run is, as a share from 0 to 1, about every second;
+    `hear` gets the validation loss after every epoch and how far an epoch is, for a live chart (live.follow)."""
     imports = run_code("from llm.gpt import GPT\nfrom llm.gpt_loaders import gpt_loaders\nfrom nn.trainer import Trainer")
     if imports.error is not None:
         return "run"
@@ -109,6 +111,8 @@ def run(settings: dict, show=None) -> list | str:
                 show(state["step"] / steps)
 
         trainer.train_loader = _Counted(trainer.train_loader, step)
+        if hear is not None:
+            live.follow(trainer, hear, "")
         history = trainer.fit()
     except KeyboardInterrupt:   # the stop button of marimo
         return "stopped"

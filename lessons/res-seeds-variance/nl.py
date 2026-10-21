@@ -230,7 +230,7 @@ def text_demo():
     mo.md(r"""
     ### Je GPT met vijf seeds
 
-    De knop traint de kleine GPT uit [Eén ding tegelijk veranderen](/course/open/res-hypothesis-control?lang=nl) vijf keer, met seeds 0 tot en met 4, met jouw `GPT`, `gpt_loaders` en `Trainer` op de CPU: een halve tot een hele minuut per run, dus samen een paar minuten. De rest van de les wacht terwijl hij traint, en de stopknop van de cel maakt er een eind aan. <!-- termen:ok -->
+    De knop traint de kleine GPT uit [Eén ding tegelijk veranderen](/course/open/res-hypothesis-control?lang=nl) vijf keer, met seeds 0 tot en met 4, met jouw `GPT`, `gpt_loaders` en `Trainer` op de CPU: een halve tot een hele minuut per run, dus samen een paar minuten. De rest van de les wacht terwijl hij traint, en de stopknop van de cel maakt er een eind aan. Intussen laat een grafiek de validation loss na elke epoch zien, voor elke seed om de beurt, met de runs van de eerdere seeds gestippeld ernaast. De vijf eindigen dicht bij elkaar, maar niet op hetzelfde getal; het plaatje na de runs zoomt in op waar ze eindigen. <!-- termen:ok -->
     """)
     return
 
@@ -247,11 +247,26 @@ def demo_seeds(box_summary, result_summary, seeds_button):
     if not seeds_button.value:
         _out = mo.md("*Druk op de knop om de vijf runs te starten.*")
     else:
-        _runs = C.run_seeds(lambda _i, _share: mo.output.replace(mo.md(f"*Bezig met seed {_i} van 0 tot en met 4: {round(100 * _share)}%*")))
-        if _runs == "stopped":
-            _out = mo.md("*Je hebt de runs gestopt. Druk op de knop om opnieuw te beginnen.*")
-        elif isinstance(_runs, str):
-            _out = mo.md("*Een run stopt met een fout. Komen je modules in `work/projects/llm/` en `work/projects/nn/` nog door hun checks? Verwijder een bestand dat je veranderde, en controleer zijn oefening opnieuw.*")
+        _done, _now = [], {}   # the curves of the seeds before; the live chart of the seed that trains now
+
+        def _hear(_i, _e):
+            if _now.get("seed") != _i:
+                if "live" in _now:
+                    _done.append(list(zip(_now["live"].xs, _now["live"].ys)))
+                _now["seed"], _now["live"] = _i, L.live({"title": f"Seed {_i}: de validation loss", "x": "epoch", "y": "validation loss",
+                                                          "alt": f"De validation loss na elke epoch tot nu toe van de run met seed {_i}{'; gestippeld de runs van de eerdere seeds' if _done else ''}."}, _e["epochs"])
+                for _c in _done:
+                    _now["live"].reference(_c, "", role="loss")
+            if "val_loss" in _e:
+                _now["live"].add(_e["epoch"], _e["val_loss"], f"**Seed {_i}** · epoch {_e['epoch']} van {_e['epochs']} · validation loss {C.number(_e['val_loss'], 3, L.lang)}")
+            else:
+                _now["live"].line(f"**Seed {_i}** · epoch {_e['epoch']} van {_e['epochs']} · batch {_e['batch']} van {_e['batches']}")
+
+        mo.output.replace(mo.md("*Seed 0 · begint …*"))   # until the first batches of seed 0
+        _runs = C.run_seeds(None, _hear)
+        if isinstance(_runs, str):
+            _note = "*Je hebt de runs gestopt. Druk op de knop om opnieuw te beginnen.*" if _runs == "stopped" else "*Een run stopt met een fout. Komen je modules in `work/projects/llm/` en `work/projects/nn/` nog door hun checks? Verwijder een bestand dat je veranderde, en controleer zijn oefening opnieuw.*"
+            _out = _now["live"].stopped(_note) if "live" in _now else mo.md(_note)   # runs that stop keep their chart so far
         else:
             _summary, _yours = C.summary_of(box_summary.value if result_summary.state == "correct" else None)
             _mean, _low, _high = _summary(_runs, 10000, 0)

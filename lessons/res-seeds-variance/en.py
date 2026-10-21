@@ -230,7 +230,7 @@ def text_demo():
     mo.md(r"""
     ### Your GPT with five seeds
 
-    The button trains the small GPT of [Change one thing at a time](/course/open/res-hypothesis-control?lang=en) five times, with seeds 0 to 4, with your `GPT`, `gpt_loaders` and `Trainer` on the CPU: about half a minute to a minute per run, so a few minutes in all. The rest of the lesson waits while it trains, and the cell's stop button ends it.
+    The button trains the small GPT of [Change one thing at a time](/course/open/res-hypothesis-control?lang=en) five times, with seeds 0 to 4, with your `GPT`, `gpt_loaders` and `Trainer` on the CPU: about half a minute to a minute per run, so a few minutes in all. The rest of the lesson waits while it trains, and the cell's stop button ends it. Meanwhile a chart shows the validation loss after every epoch, of each seed in turn, with the runs of the earlier seeds dashed beside it. The five end close together, but not at the same number; the picture after the runs zooms in on where they end.
     """)
     return
 
@@ -247,11 +247,26 @@ def demo_seeds(box_summary, result_summary, seeds_button):
     if not seeds_button.value:
         _out = mo.md("*Press the button to start the five runs.*")
     else:
-        _runs = C.run_seeds(lambda _i, _share: mo.output.replace(mo.md(f"*Training seed {_i} of 0 to 4: {round(100 * _share)}%*")))
-        if _runs == "stopped":
-            _out = mo.md("*You stopped the runs. Press the button to start again.*")
-        elif isinstance(_runs, str):
-            _out = mo.md("*A run stops with an error. Do your modules in `work/projects/llm/` and `work/projects/nn/` still pass their checks? Delete a file you changed, and check its exercise again.*")
+        _done, _now = [], {}   # the curves of the seeds before; the live chart of the seed that trains now
+
+        def _hear(_i, _e):
+            if _now.get("seed") != _i:
+                if "live" in _now:
+                    _done.append(list(zip(_now["live"].xs, _now["live"].ys)))
+                _now["seed"], _now["live"] = _i, L.live({"title": f"Seed {_i}: the validation loss", "x": "epoch", "y": "validation loss",
+                                                          "alt": f"The validation loss after every epoch so far of the run with seed {_i}{'; dashed, the runs of the earlier seeds' if _done else ''}."}, _e["epochs"])
+                for _c in _done:
+                    _now["live"].reference(_c, "", role="loss")
+            if "val_loss" in _e:
+                _now["live"].add(_e["epoch"], _e["val_loss"], f"**Seed {_i}** · epoch {_e['epoch']} of {_e['epochs']} · validation loss {C.number(_e['val_loss'], 3, L.lang)}")
+            else:
+                _now["live"].line(f"**Seed {_i}** · epoch {_e['epoch']} of {_e['epochs']} · batch {_e['batch']} of {_e['batches']}")
+
+        mo.output.replace(mo.md("*Seed 0 · starting …*"))   # until the first batches of seed 0
+        _runs = C.run_seeds(None, _hear)
+        if isinstance(_runs, str):
+            _note = "*You stopped the runs. Press the button to start again.*" if _runs == "stopped" else "*A run stops with an error. Do your modules in `work/projects/llm/` and `work/projects/nn/` still pass their checks? Delete a file you changed, and check its exercise again.*"
+            _out = _now["live"].stopped(_note) if "live" in _now else mo.md(_note)   # runs that stop keep their chart so far
         else:
             _summary, _yours = C.summary_of(box_summary.value if result_summary.state == "correct" else None)
             _mean, _low, _high = _summary(_runs, 10000, 0)

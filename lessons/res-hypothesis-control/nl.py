@@ -230,7 +230,7 @@ def text_demo():
     mo.md(r"""
     ### Stap 4: draai het experiment
 
-    Kies de instelling die verandert; de control run heeft een learning rate van 0,001, een warmup van 100 stappen en 2 layers. De knop traint de control run van het uitgewerkte voorbeeld, en daarna de variant die jouw `one_change` ervan maakt: twee runs van een kleine GPT van ongeveer 110.000 parameters (210.000 met 4 layers), met jouw `GPT`, `gpt_loaders` en `Trainer`, op het eerste kwart van Tiny Shakespeare, op de CPU. Elke run duurt ongeveer een halve tot een hele minuut, een variant met 4 layers ongeveer twee keer zo lang. Terwijl hij traint, wacht de rest van de les; de stopknop van de cel maakt er een eind aan.
+    Kies de instelling die verandert; de control run heeft een learning rate van 0,001, een warmup van 100 stappen en 2 layers. De knop traint de control run van het uitgewerkte voorbeeld, en daarna de variant die jouw `one_change` ervan maakt: twee runs van een kleine GPT van ongeveer 110.000 parameters (210.000 met 4 layers), met jouw `GPT`, `gpt_loaders` en `Trainer`, op het eerste kwart van Tiny Shakespeare, op de CPU. Elke run duurt ongeveer een halve tot een hele minuut, een variant met 4 layers ongeveer twee keer zo lang. Terwijl hij traint, wacht de rest van de les; de stopknop van de cel maakt er een eind aan. Intussen laat een grafiek de validation loss na elke epoch zien: eerst van de control run, dan van de variant, met de control run gestippeld ernaast.
     """)
     return
 
@@ -258,14 +258,30 @@ def demo_experiment(box_change, change_choice, result_change, run_button):
         if _differ != [_name]:
             _out = mo.md(f"*De variant verschilt van de control in {', '.join(f'`{_d}`' for _d in _differ) or 'niets'}, niet alleen in `{_name}`. Kijk oefening 1 nog eens na.*")
         else:
-            _runs = []
-            for _which, _settings in (("de control run", C.CONTROL), ("de variant", _variant)):
-                _h = C.run(_settings, lambda _share, _w=_which: mo.output.replace(mo.md(f"*Bezig met {_w}: {round(100 * _share)}%*")))
+            _runs, _lives = [], {}   # the live chart of each run, made at its first report
+
+            def _hear(_e, _k):
+                if _k not in _lives:
+                    _lives[_k] = L.live({"title": ("De control run: de validation loss", "De variant: de validation loss")[_k], "x": "epoch", "y": "validation loss",
+                                         "alt": ("De validation loss van de control run na elke epoch tot nu toe.", "De validation loss van de variant na elke epoch tot nu toe; gestippeld die van de control run.")[_k]}, _e["epochs"])
+                    if _k == 1 and 0 in _lives:
+                        _lives[1].reference(list(zip(_lives[0].xs, _lives[0].ys)), "control", role="loss")
+                _who = ("De control run", "De variant")[_k]
+                if "val_loss" in _e:
+                    _lives[_k].add(_e["epoch"], _e["val_loss"], f"**{_who}** · epoch {_e['epoch']} van {_e['epochs']} · validation loss {C.number(_e['val_loss'], 3, L.lang)}")
+                else:
+                    _lives[_k].line(f"**{_who}** · epoch {_e['epoch']} van {_e['epochs']} · batch {_e['batch']} van {_e['batches']}")
+
+            mo.output.replace(mo.md("*De control run · begint …*"))   # until the first batches of the control run
+            for _k, _settings in enumerate((C.CONTROL, _variant)):
+                _h = C.run(_settings, hear=lambda _e, _k=_k: _hear(_e, _k))
                 if isinstance(_h, str):
                     break
                 _runs.append(_h)
             if len(_runs) < 2:
-                _out = mo.md("*Je stopte het experiment voordat beide runs klaar waren. Druk op de knop om het opnieuw te starten.*" if _h == "stopped" else "*Een run stopt met een fout. Komen je modules in `work/projects/llm/` en `work/projects/nn/` nog door hun checks? Verwijder een bestand dat je veranderde, en controleer zijn oefening opnieuw.*")
+                _note = "*Je stopte het experiment voordat beide runs klaar waren. Druk op de knop om het opnieuw te starten.*" if _h == "stopped" else "*Een run stopt met een fout. Komen je modules in `work/projects/llm/` en `work/projects/nn/` nog door hun checks? Verwijder een bestand dat je veranderde, en controleer zijn oefening opnieuw.*"
+                _last = next((_lives[_j] for _j in (1, 0) if _j in _lives and _lives[_j].xs), None)   # a run that stops keeps its chart so far
+                _out = _last.stopped(_note) if _last else mo.md(_note)
             else:
                 _c, _v = _runs[0][-1]["val_loss"], _runs[1][-1]["val_loss"]
                 _ref = C.REFERENCE.get(f"{_name}={_value}")

@@ -31,15 +31,17 @@ SEEDS = [0, 1, 2, 3, 4]
 REFERENCE = {"control": [2.3902, 2.3924, 2.4174, 2.3938, 2.4012], "warmup=0": [2.3866, 2.3841, 2.4115, 2.3916, 2.3962]}
 
 
-def run_seeds(show=None) -> list | str:
+def run_seeds(show=None, hear=None) -> list | str:
     """The control run of res-hypothesis-control with each seed of SEEDS, with the learner's modules: the validation
     loss after the last epoch of each. "run" when a run stops with an error, "stopped" when the stop button ended it.
-    `show` gets (which seed, share of that run done) about every second."""
+    `show` gets (which seed, share of that run done) about every second; `hear` gets (which seed, what live.follow
+    heard), for a live chart."""
     out = []
     for i, seed in enumerate(SEEDS):
         settings = dict(CONTROL)
         settings["seed"] = seed
-        h = H.run(settings, None if show is None else (lambda share, i=i: show(i, share)))
+        h = H.run(settings, None if show is None else (lambda share, i=i: show(i, share)),
+                  None if hear is None else (lambda heard, i=i: hear(i, heard)))
         if isinstance(h, str):
             return h
         out.append(h[-1]["val_loss"])

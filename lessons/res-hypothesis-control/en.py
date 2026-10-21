@@ -230,7 +230,7 @@ def text_demo():
     mo.md(r"""
     ### Step 4: run the experiment
 
-    Pick the setting to change; the control run has a learning rate of 0.001, a warmup of 100 steps and 2 layers. The button trains the control run of the worked example, and then the variant that your `one_change` makes of it: two runs of a small GPT of about 110,000 parameters (210,000 with 4 layers), with your `GPT`, `gpt_loaders` and `Trainer`, on the first quarter of Tiny Shakespeare, on the CPU. Each run takes about half a minute to a minute, a variant with 4 layers about twice as long. While it trains, the rest of the lesson waits; the stop button of the cell ends it.
+    Pick the setting to change; the control run has a learning rate of 0.001, a warmup of 100 steps and 2 layers. The button trains the control run of the worked example, and then the variant that your `one_change` makes of it: two runs of a small GPT of about 110,000 parameters (210,000 with 4 layers), with your `GPT`, `gpt_loaders` and `Trainer`, on the first quarter of Tiny Shakespeare, on the CPU. Each run takes about half a minute to a minute, a variant with 4 layers about twice as long. While it trains, the rest of the lesson waits; the stop button of the cell ends it. Meanwhile a chart shows the validation loss after every epoch: first of the control run, then of the variant, with the control run dashed beside it.
     """)
     return
 
@@ -258,14 +258,30 @@ def demo_experiment(box_change, change_choice, result_change, run_button):
         if _differ != [_name]:
             _out = mo.md(f"*The variant differs from the control in {', '.join(f'`{_d}`' for _d in _differ) or 'nothing'}, not in `{_name}` alone. Check exercise 1 again.*")
         else:
-            _runs = []
-            for _which, _settings in (("the control run", C.CONTROL), ("the variant", _variant)):
-                _h = C.run(_settings, lambda _share, _w=_which: mo.output.replace(mo.md(f"*Training {_w}: {round(100 * _share)}%*")))
+            _runs, _lives = [], {}   # the live chart of each run, made at its first report
+
+            def _hear(_e, _k):
+                if _k not in _lives:
+                    _lives[_k] = L.live({"title": ("The control run: the validation loss", "The variant: the validation loss")[_k], "x": "epoch", "y": "validation loss",
+                                         "alt": ("The validation loss of the control run after every epoch so far.", "The validation loss of the variant after every epoch so far; dashed, that of the control run.")[_k]}, _e["epochs"])
+                    if _k == 1 and 0 in _lives:
+                        _lives[1].reference(list(zip(_lives[0].xs, _lives[0].ys)), "control", role="loss")
+                _who = ("The control run", "The variant")[_k]
+                if "val_loss" in _e:
+                    _lives[_k].add(_e["epoch"], _e["val_loss"], f"**{_who}** · epoch {_e['epoch']} of {_e['epochs']} · validation loss {C.number(_e['val_loss'], 3, L.lang)}")
+                else:
+                    _lives[_k].line(f"**{_who}** · epoch {_e['epoch']} of {_e['epochs']} · batch {_e['batch']} of {_e['batches']}")
+
+            mo.output.replace(mo.md("*The control run · starting …*"))   # until the first batches of the control run
+            for _k, _settings in enumerate((C.CONTROL, _variant)):
+                _h = C.run(_settings, hear=lambda _e, _k=_k: _hear(_e, _k))
                 if isinstance(_h, str):
                     break
                 _runs.append(_h)
             if len(_runs) < 2:
-                _out = mo.md("*You stopped the experiment before both runs were done. Press the button to start it again.*" if _h == "stopped" else "*A run stops with an error. Do your modules in `work/projects/llm/` and `work/projects/nn/` still pass their checks? Delete a file you changed, and check its exercise again.*")
+                _note = "*You stopped the experiment before both runs were done. Press the button to start it again.*" if _h == "stopped" else "*A run stops with an error. Do your modules in `work/projects/llm/` and `work/projects/nn/` still pass their checks? Delete a file you changed, and check its exercise again.*"
+                _last = next((_lives[_j] for _j in (1, 0) if _j in _lives and _lives[_j].xs), None)   # a run that stops keeps its chart so far
+                _out = _last.stopped(_note) if _last else mo.md(_note)
             else:
                 _c, _v = _runs[0][-1]["val_loss"], _runs[1][-1]["val_loss"]
                 _ref = C.REFERENCE.get(f"{_name}={_value}")
