@@ -149,7 +149,7 @@ takken:
   status: later
   build_order: 12
   project: {id: solver, title: "Your own search and planner: A*, a SAT solver, a planner and a genetic algorithm", title_nl: "Je eigen zoeker en planner: A*, een SAT-solver, een planner en een genetisch algoritme"}
-  attach: [py-tuples-sets, prob-expectation]
+  attach: [py-tuples-sets, prob-expectation, search-astar]
   final_nl: "Een spel-AI met Monte Carlo tree search"
 
 - id: multi-agent

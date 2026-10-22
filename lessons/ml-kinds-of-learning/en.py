@@ -320,7 +320,7 @@ def text_connections():
     mo.md(r"""
     ## Wrap-up
 
-    **How this connects.** In [Examples, features and labels](/course/open/ml-vocabulary?lang=en), every example to learn from had a label; now you know that the label can come from people, from the data itself, or not exist at all, and that a model can also learn from rewards. The language model you build later in the course learns self-supervised, from pairs like the ones in exercise 3. Reinforcement learning gets its own branch of the course after the main route. In the next lesson, *Classification: predicting a class*, you look at supervised learning whose label is a class instead of a number.
+    **How this connects.** In [Examples, features and labels](/course/open/ml-vocabulary?lang=en), every example to learn from had a label; now you know that the label can come from people, from the data itself, or not exist at all, and that a model can also learn from rewards. The language model you build later in the course learns self-supervised, from pairs like the ones in exercise 3. Reinforcement learning comes back later in the main route, in *Learning from rewards*. In the next lesson, *Classification: predicting a class*, you look at supervised learning whose label is a class instead of a number.
     """)
     return
 

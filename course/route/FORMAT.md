@@ -31,7 +31,7 @@ lessons:
 
 | field | required | meaning |
 |---|---|---|
-| `id` | yes | Stable id in English kebab-case, never a number. Never renamed once lessons exist; the app stores progress by it. Prefix shows the subject (`py-`, `np-`, `ml-`, `nn-`, `torch-`, `cnn-`, `attn-`, `lm-`, `tok-`, `gpt-`, `llm-`, `sys-`, `res-`, `repro-`, `math-`, `prob-`, `stats-`, `info-`, `opt-`, `data-`, `rai-`, `rl-`, `start-`). |
+| `id` | yes | Stable id in English kebab-case, never a number. Never renamed once lessons exist; the app stores progress by it. Prefix shows the subject (`py-`, `np-`, `ml-`, `nn-`, `torch-`, `cnn-`, `attn-`, `lm-`, `tok-`, `gpt-`, `llm-`, `sys-`, `res-`, `repro-`, `math-`, `prob-`, `stats-`, `info-`, `opt-`, `data-`, `rai-`, `rl-`, `search-`, `start-`). |
 | `tak` | yes (or from the file) | Home branch, one of the ids in `takken.yaml`. |
 | `title` | yes | English title. The Dutch title is written with the lesson. |
 | `level` | yes | `basis`, `gevorderd` or `expert`. |

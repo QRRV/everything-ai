@@ -319,7 +319,7 @@ def text_connections():
     mo.md(r"""
     ## Afronding
 
-    **Samenhang.** [Soorten leren](/course/open/ml-kinds-of-learning?lang=nl) noemde reinforcement learning leren van rewards; nu ken je de onderdelen. Een agent handelt in een environment, en niet de volgende reward telt, maar de return: alle rewards vanaf nu, de latere verdisconteerd met $\gamma$. Welke action tot een grote return leidt, moet de agent leren, door te proberen. In de volgende les, *Een language model voorspelt het volgende token*, zie je hoe een model leert van alleen tekst, zonder rewards en zonder labels die mensen schreven.
+    **Samenhang.** [Soorten leren](/course/open/ml-kinds-of-learning?lang=nl) noemde reinforcement learning leren van rewards; nu ken je de onderdelen. Een agent handelt in een environment, en niet de volgende reward telt, maar de return: alle rewards vanaf nu, de latere verdisconteerd met $\gamma$. Welke action tot een grote return leidt, moet de agent leren, door te proberen. In de volgende les, *Een doolhof doorzoeken: breadth-first search*, kent een agent zijn environment, en plant hij zijn actions voordat hij ze uitvoert: hij zoekt.
     """)
     return
 

@@ -320,7 +320,7 @@ def text_connections():
     mo.md(r"""
     ## Afronding
 
-    **Samenhang.** In [Voorbeelden, features en labels](/course/open/ml-vocabulary?lang=nl) had elk voorbeeld om van te leren een label; nu weet je dat het label van mensen kan komen, uit de data zelf, of helemaal niet bestaat, en dat een model ook kan leren van rewards. Het language model dat je later in de course bouwt, leert self-supervised, van paren zoals die in oefening 3. Reinforcement learning krijgt na de hoofdroute een eigen tak in de course. In de volgende les, *Classificatie: een klasse voorspellen*, kijk je naar supervised learning waarbij het label een klasse is in plaats van een getal.
+    **Samenhang.** In [Voorbeelden, features en labels](/course/open/ml-vocabulary?lang=nl) had elk voorbeeld om van te leren een label; nu weet je dat het label van mensen kan komen, uit de data zelf, of helemaal niet bestaat, en dat een model ook kan leren van rewards. Het language model dat je later in de course bouwt, leert self-supervised, van paren zoals die in oefening 3. Reinforcement learning komt later in de hoofdroute terug, in *Leren van rewards*. In de volgende les, *Classificatie: een klasse voorspellen*, kijk je naar supervised learning waarbij het label een klasse is in plaats van een getal.
     """)
     return
 

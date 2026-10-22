@@ -66,6 +66,36 @@ lessons:
   warns: [agent, return]
   needs: any
 
+# --- klassieke-ai -----------------------------------------------------------------
+- id: search-bfs
+  tak: klassieke-ai
+  title: "Searching a maze: breadth-first search"
+  level: basis
+  module: agents
+  idea: "Write a task down as states, actions, a goal test and a path cost; breadth-first search takes the oldest path from a queue first, so the first path that reaches the goal is a shortest one."
+  covers: [probleemformulering-en-zoekinfrastructuur#0, probleemformulering-en-zoekinfrastructuur#2, ongeinformeerd-zoeken#0]
+  requires: [rl-what-is-rl, nn-micrograd-backward, py-while]
+  introduces: [c:search-problem, c:state, c:goal-test, c:path-cost, c:search-frontier, c:expand, c:queue, c:breadth-first-search, py:deque]
+  uses: [c:agent, c:environment, c:action, c:reward, c:artificial-intelligence, c:computational-graph, py:def, py:return, py:none, py:for, py:if, py:while, py:list, py:nested-list, py:append, py:tuple, py:set, py:set-add, py:indexing, py:len, py:comparison, py:bool, py:import, py:string-literal, py:str, py:arithmetic, py:print, py:comment, py:underscore-name, py:variable, q:predict, q:choice, q:exercise-with-check, q:run-cell]
+  warns: [state]
+  data: []
+  ladder: [python]
+  needs: any
+
+- id: search-astar
+  tak: klassieke-ai
+  title: "A*: search with a sense of direction"
+  level: basis
+  module: agents
+  idea: "A* takes from a priority queue the path with the smallest f = g + h, its steps so far plus an estimate of the steps still to go; with an estimate that never says too much and changes by at most 1 per step, as in a maze, it still finds a shortest path, but expands fewer states."
+  covers: [heuristisch-zoeken#1]
+  requires: [search-bfs]
+  introduces: [c:heuristic-function, c:informed-search, c:uninformed-search, c:priority-queue, c:a-star-search, py:heapq, s:g-path-cost, s:h-heuristic, s:f-astar]
+  uses: [c:search-problem, c:state, c:goal-test, c:path-cost, c:search-frontier, c:expand, c:queue, c:breadth-first-search, py:deque, c:action, py:abs, py:def, py:return, py:none, py:for, py:if, py:while, py:list, py:append, py:tuple, py:set, py:set-add, py:indexing, py:len, py:comparison, py:import, py:string-literal, py:str, py:arithmetic, py:print, py:comment, py:underscore-name, py:variable, q:predict, q:choice, q:exercise-with-check, q:run-cell]
+  data: []
+  ladder: [python]
+  needs: any
+
 # --- bouwen -----------------------------------------------------------------------
 - id: start-your-own-assistant
   tak: bouwen

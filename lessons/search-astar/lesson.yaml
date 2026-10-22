@@ -1,0 +1,35 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: search-astar
+minutes: 15
+title:
+  en: "A*: search with a sense of direction"
+  nl: "A*: zoeken met richtinggevoel"
+goal:
+  en: "turn breadth-first search into A* with a priority queue and f = g + h, and say why it expands fewer states but still finds a shortest path."
+  nl: "van breadth-first search A* maken met een prioriteitswachtrij en f = g + h, en zeggen waarom hij minder states uitbreidt en toch een kortste pad vindt."
+summary:
+  - en: "A heuristic h estimates the steps from a state to the goal; in a maze, the rows apart plus the columns apart, which never says more than the real number of steps."
+    nl: "Een heuristiek h schat de stappen van een state naar het doel; in een doolhof het aantal rijen plus het aantal kolommen ertussen, en dat zegt nooit meer dan het echte aantal stappen."
+  - en: "A* takes out of a priority queue (`heapq`) the path with the smallest f = g + h: its steps so far plus the estimate of the steps still to go."
+    nl: "A* pakt uit een prioriteitswachtrij (`heapq`) het pad met de kleinste f = g + h: zijn stappen tot nu toe plus de schatting van de stappen die nog komen."
+  - en: "Because this h never says too much, and one step changes it by at most 1, the first path to the goal is still a shortest one; states far off to the side get a large f and never come out, so A* expands fewer states than breadth-first search."
+    nl: "Omdat deze h nooit te veel zegt, en één stap hem hooguit 1 verandert, is het eerste pad naar het doel nog steeds een kortste; states ver opzij krijgen een grote f en komen er nooit uit, dus A* breidt minder states uit dan breadth-first search."
+can_now:
+  - en: "turn breadth-first search into A* with a priority queue and f = g + h"
+    nl: "van breadth-first search A* maken met een prioriteitswachtrij en f = g + h"
+    by: astar
+  - en: "work out f = g + h for a path"
+    nl: "f = g + h uitrekenen voor een pad"
+    by: f-value
+  - en: "say why h may never say more than the real number of steps"
+    nl: "zeggen waarom h nooit meer mag zeggen dan het echte aantal stappen"
+    by: too-large
+further_reading:
+  - en: "Peter E. Hart, Nils J. Nilsson and Bertram Raphael (1968), *A Formal Basis for the Heuristic Determination of Minimum Cost Paths*, IEEE Transactions on Systems Science and Cybernetics 4 (2), 100–107"
+    nl: "Peter E. Hart, Nils J. Nilsson en Bertram Raphael (1968), *A Formal Basis for the Heuristic Determination of Minimum Cost Paths*, IEEE Transactions on Systems Science and Cybernetics 4 (2), 100–107"
+  - en: "Stuart Russell and Peter Norvig (2020), *Artificial Intelligence: A Modern Approach*, 4th edition, Pearson, section 3.5"
+    nl: "Stuart Russell en Peter Norvig (2020), *Artificial Intelligence: A Modern Approach*, 4e editie, Pearson, paragraaf 3.5"
+  - en: "Amit Patel (2014), *Introduction to the A\\* Algorithm*, Red Blob Games, an interactive page with the same steps from breadth-first search to A\\*"
+    nl: "Amit Patel (2014), *Introduction to the A\\* Algorithm*, Red Blob Games, een interactieve pagina met dezelfde stappen van breadth-first search naar A\\*"

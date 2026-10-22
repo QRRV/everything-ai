@@ -319,7 +319,7 @@ def text_connections():
     mo.md(r"""
     ## Wrap-up
 
-    **How this connects.** [Kinds of learning](/course/open/ml-kinds-of-learning?lang=en) named reinforcement learning as learning from rewards; now you know its parts. An agent acts in an environment, and it is not the next reward that counts, but the return: all the rewards from now on, with later ones discounted by $\gamma$. Which action leads to a large return is what the agent has to learn, by trying. In the next lesson, *A language model predicts the next token*, you see how a model learns from text alone, with no rewards and no labels written by people.
+    **How this connects.** [Kinds of learning](/course/open/ml-kinds-of-learning?lang=en) named reinforcement learning as learning from rewards; now you know its parts. An agent acts in an environment, and it is not the next reward that counts, but the return: all the rewards from now on, with later ones discounted by $\gamma$. Which action leads to a large return is what the agent has to learn, by trying. In the next lesson, *Searching a maze: breadth-first search*, an agent that knows its environment plans its actions before it takes them: it searches.
     """)
     return
 

@@ -142,6 +142,80 @@ def route_grid(rows: list[str], cols: list[str], counts: dict[tuple[int, int], i
     return _svg(W, H, title or ", ".join(rows), "".join(parts))
 
 
+def maze_grids(panels: list[dict], *, alt: str, cell: int = 30) -> mo.Html:
+    """Mazes as grids of cells, one panel per maze, side by side; in a narrow window, such as beside an editor, they go
+    one below the other before their text gets too small, as chart.figure does. Each panel is a dict:
+      rows      the maze as strings: '#' is a wall, any other sign a cell you can walk on; 'S' and 'G' are written in
+                their cell, the start and the goal
+      title     the words above the panel (optional)
+      done      cells (row, column) with a grey fill, a step of the data colour: the states a search expanded
+      frontier  cells with a dashed ring: the states on the frontier
+      numbers   {cell: text} written in the cell, in the text colour of `role` ("loss" for steps, "pred" for estimates)
+      path      the cells of a path, drawn as a line through their middles
+      mark      one cell with a thick ink ring: the state just expanded
+      index     True: the row numbers on the left and the column numbers on top, as the code counts them
+    Walls are data, grey; the path is ink. `alt` says what the figure shows, for a screen reader."""
+    def at(r, c, left, top):
+        return left + c * cell, top + r * cell
+
+    size = max(11, round(cell * 0.4))   # the text in a cell
+    svgs, widest = [], 0
+    for p in panels:
+        rows = p["rows"]
+        left = 18 if p.get("index") else 1
+        top = (24 if p.get("title") else 0) + (16 if p.get("index") else 1)
+        W, H = left + len(rows[0]) * cell + 1, top + len(rows) * cell + 2
+        widest = max(widest, W)
+        done, frontier, numbers = set(p.get("done", ())), set(p.get("frontier", ())), p.get("numbers", {})
+        tone = f"var(--ea-{p['role']}-text)" if p.get("role") else "var(--ea-ink)"
+        parts = []
+        if p.get("title"):
+            parts.append(f'<text x="1" y="15" style="font-size:13.5px;font-weight:600;fill:var(--ea-ink)">{html.escape(p["title"])}</text>')
+        if p.get("index"):
+            for c in range(len(rows[0])):
+                x, _ = at(0, c, left, top)
+                parts.append(f'<text x="{x + cell / 2:.1f}" y="{top - 4}" style="font-size:11px;fill:var(--ea-ink-3);text-anchor:middle">{c}</text>')
+            for r in range(len(rows)):
+                _, y = at(r, 0, left, top)
+                parts.append(f'<text x="{left - 5}" y="{y + cell / 2 + 4:.1f}" style="font-size:11px;fill:var(--ea-ink-3);text-anchor:end">{r}</text>')
+        for r, row in enumerate(rows):
+            for c, sign in enumerate(row):
+                x, y = at(r, c, left, top)
+                if sign == "#":
+                    parts.append(f'<rect x="{x}" y="{y}" width="{cell}" height="{cell}" style="fill:var(--ea-data);stroke:var(--ea-data);stroke-width:1"/>')
+                    continue
+                fill = "color-mix(in srgb, var(--ea-data) 30%, var(--ea-page))" if (r, c) in done else "var(--ea-page)"
+                parts.append(f'<rect x="{x}" y="{y}" width="{cell}" height="{cell}" style="fill:{fill};stroke:var(--ea-line);stroke-width:1"/>')
+                if (r, c) in frontier:
+                    parts.append(f'<rect x="{x + 3}" y="{y + 3}" width="{cell - 6}" height="{cell - 6}" rx="3" '
+                                 f'style="fill:none;stroke:var(--ea-ink-2);stroke-width:1.4;stroke-dasharray:3 2.5"/>')
+        path = p.get("path") or []
+        if len(path) > 1:
+            points = " ".join(f"{at(r, c, left, top)[0] + cell / 2:.1f},{at(r, c, left, top)[1] + cell / 2:.1f}" for r, c in path)
+            parts.append(f'<polyline points="{points}" style="fill:none;stroke:var(--ea-ink);stroke-width:{max(2.5, cell / 10):.1f};'
+                         f'stroke-linecap:round;stroke-linejoin:round;opacity:0.85"/>')
+        if p.get("mark") is not None:
+            x, y = at(*p["mark"], left, top)
+            parts.append(f'<rect x="{x + 1.5}" y="{y + 1.5}" width="{cell - 3}" height="{cell - 3}" style="fill:none;stroke:var(--ea-ink);stroke-width:2.6"/>')
+        halo = "paint-order:stroke;stroke:var(--ea-page);stroke-width:3px;stroke-linejoin:round"
+        for r, row in enumerate(rows):
+            for c, sign in enumerate(row):
+                x, y = at(r, c, left, top)
+                if sign in "SG":
+                    parts.append(f'<text x="{x + cell / 2:.1f}" y="{y + cell / 2 + size * 0.36:.1f}" style="font-size:{size + 1}px;'
+                                 f'font-weight:700;fill:var(--ea-ink);text-anchor:middle;{halo}">{sign}</text>')
+                elif (r, c) in numbers:
+                    parts.append(f'<text x="{x + cell / 2:.1f}" y="{y + cell / 2 + size * 0.36:.1f}" style="font-size:{size}px;'
+                                 f'font-weight:600;fill:{tone};text-anchor:middle;{halo}">{html.escape(str(numbers[(r, c)]))}</text>')
+        # its smallest text is 11 px: the panel never shrinks, and in a narrow window it goes below the one before
+        svgs.append(f'<svg viewBox="0 0 {W} {H}" aria-hidden="true" style="flex:1 1 0;min-width:min(100%,{W}px);'
+                    f'max-width:{W}px;height:auto;{_FONT};font-variant-numeric:tabular-nums">{"".join(parts)}</svg>')
+    gap = 16
+    return mo.Html(f'<figure class="ea-figure" role="img" aria-label="{html.escape(alt)}" style="margin:0.25rem 0 0.75rem;'
+                   f'max-width:min(100%,{widest * len(panels) + gap * (len(panels) - 1)}px);display:flex;flex-wrap:wrap;'
+                   f'gap:0.5rem {gap}px;align-items:flex-start">{"".join(svgs)}</figure>')
+
+
 def next_word_bars(prefix: str, options: list[tuple[str, float]], *, picked: int | None = 0, picked_label: str = "",
                    title: str = "") -> mo.Html:
     """What a language model sees after some text: a bar per possible next word, as long as how likely

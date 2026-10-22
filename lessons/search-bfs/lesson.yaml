@@ -1,0 +1,33 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: search-bfs
+minutes: 15
+title:
+  en: "Searching a maze: breadth-first search"
+  nl: "Een doolhof doorzoeken: breadth-first search"
+goal:
+  en: "write a task down as a search problem, and find a shortest path through a maze with breadth-first search."
+  nl: "een taak opschrijven als search problem, en met breadth-first search een kortste pad door een doolhof vinden."
+summary:
+  - en: "A search problem has states, a start state, the actions in each state, a goal test and a path cost; a solution is a path from the start to a goal."
+    nl: "Een search problem heeft states, een start, de actions in elke state, een goal test en een path cost; een oplossing is een pad van de start naar een doel."
+  - en: "A search keeps a frontier of paths it found; breadth-first search takes the oldest one out first, from the front of a queue (`popleft()`), and puts every path that is one action longer at the back."
+    nl: "Een search houdt een frontier bij van paden die hij vond; breadth-first search pakt het oudste eerst, van voren uit een wachtrij (`popleft()`), en zet elk pad dat één action langer is achteraan."
+  - en: "So it tries the paths in order of their number of steps, and the first path that ends in the goal is a shortest one; the price is that it expands every state closer to the start than the goal, in every direction."
+    nl: "Zo probeert hij de paden op volgorde van hun aantal stappen, en het eerste pad dat in het doel eindigt, is een kortste; de prijs is dat hij elke state uitbreidt die dichter bij de start ligt dan het doel, in elke richting."
+can_now:
+  - en: "find a shortest path through a maze with breadth-first search"
+    nl: "met breadth-first search een kortste pad door een doolhof vinden"
+    by: bfs
+  - en: "write a task down as states, actions, a goal test and a path cost"
+    nl: "een taak opschrijven als states, actions, een goal test en een path cost"
+    by: formulation
+  - en: "say why taking the oldest path first gives a shortest path"
+    nl: "zeggen waarom het oudste pad eerst pakken een kortste pad geeft"
+    by: newest
+further_reading:
+  - en: "Edward F. Moore (1959), *The shortest path through a maze*, Proceedings of an International Symposium on the Theory of Switching, Part II, Harvard University Press"
+    nl: "Edward F. Moore (1959), *The shortest path through a maze*, Proceedings of an International Symposium on the Theory of Switching, Part II, Harvard University Press"
+  - en: "Stuart Russell and Peter Norvig (2020), *Artificial Intelligence: A Modern Approach*, 4th edition, Pearson, sections 3.1 to 3.4"
+    nl: "Stuart Russell en Peter Norvig (2020), *Artificial Intelligence: A Modern Approach*, 4e editie, Pearson, paragraaf 3.1 tot en met 3.4"

@@ -146,6 +146,8 @@ routes:
   - rnn-memory-idea
   - attn-idea
   - rl-what-is-rl
+  - search-bfs
+  - search-astar
   - lm-what-is-a-language-model
   - lm-tokens-outside
   - lm-bigram-counts

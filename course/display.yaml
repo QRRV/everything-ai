@@ -12,6 +12,7 @@ modules:
   neural-networks: {en: "Neural networks", nl: "Neural networks"}
   pytorch: {en: "PyTorch", nl: "PyTorch"}
   building-blocks: {en: "Building blocks", nl: "Bouwstenen"}
+  agents: {en: "Agents", nl: "Agents"}
   lm-basis: {en: "Language models", nl: "Language models"}
   research-basis: {en: "Research", nl: "Onderzoek"}
   math-formal: {en: "Math, formally", nl: "Wiskunde, formeel"}

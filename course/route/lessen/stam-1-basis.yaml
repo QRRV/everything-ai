@@ -52,7 +52,7 @@ lessons:
   title: "Using AI tools with your eyes open"
   level: basis
   module: start
-  idea: "A chat assistant is a language model behind an interface: it can explain, draft and code, but it also states wrong things with confidence, so you check what matters."
+  idea: "A chat assistant is a language model behind an interface: it can explain, draft and code, but it also says wrong things with confidence, so you check what matters."
   covers: [ai-geletterdheid-voor-gebruikers#0, ai-geletterdheid-voor-gebruikers#4, ai-geletterdheid-voor-gebruikers#5]
   requires: [start-ai-ml-genai]
   introduces: [c:ai-assistant, p:verify-ai-output]
