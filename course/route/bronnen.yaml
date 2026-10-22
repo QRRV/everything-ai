@@ -28,7 +28,7 @@ bronnen:
    note_nl: "Handgeschreven cijfers met een duidelijke licentie; MNIST zelf mag alleen gedownload worden."}
 - {id: fashion-mnist, kind: image, license: "MIT", hosting: rehost,
    note_nl: "Kleine grijze plaatjes van kleding, schoenen en tassen in 10 soorten, van Zalando: moeilijker dan cijfers, en de course host een deel van 7.000 plaatjes zelf."}
-- {id: cifar-10-download-only, kind: image, license: "no license stated", hosting: download,
+- {id: cifar-10-download-only, kind: image, license: "no license stated", hosting: download, checkpoints: false,
    note_nl: "Alleen downloaden, nooit zelf hosten; ethiekopmerking over 80M Tiny Images."}
 - {id: palmer-penguins, kind: tabular, license: "CC0-1.0", hosting: rehost,
    note_nl: "344 pinguins, drie soorten, met ontbrekende waarden: klein genoeg voor de CPU en echt genoeg voor de hele workflow."}

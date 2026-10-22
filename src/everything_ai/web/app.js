@@ -21,7 +21,8 @@ const T = {
     workingTitles: "", doneCount: "{d} of {t} done", ofBuilt: "{b} of {t} lessons ready",
     mapTitle: "The whole map",
     mapSub: "All of AI in 18 branches. The main route comes first; every other branch builds on it and opens here as soon as it is ready.",
-    inRoute: "in the main route", later: "coming soon", newVersion: "a new version of this lesson is ready: start over to get it",
+    inRoute: "in the main route", later: "coming soon", lessonsIn: "{n} lessons in the main route, the rest coming soon",
+    lessonIn: "1 lesson in the main route, the rest coming soon", newVersion: "a new version of this lesson is ready: start over to get it",
     footer: "Text and figures CC BY-SA 4.0 · lesson code MIT-0 · app MIT", agents: "Learning with your own AI assistant? Point it at AGENTS.md in the course folder.",
     themes: { system: "System", light: "Light", dark: "Dark" }, themeLabel: "Theme", langLabel: "Language",
     allDone: "You finished every lesson that is ready. New lessons appear here as soon as they are built.",
@@ -42,7 +43,8 @@ const T = {
     workingTitles: "Lessen die nog komen, staan er met hun Engelse werktitel.", doneCount: "{d} van {t} af", ofBuilt: "{b} van {t} lessen klaar",
     mapTitle: "De hele kaart",
     mapSub: "Alles van AI in 18 takken. De hoofdroute komt eerst; elke andere tak bouwt erop voort en gaat hier open zodra hij klaar is.",
-    inRoute: "in de hoofdroute", later: "komt nog", newVersion: "er is een nieuwe versie van deze les: begin opnieuw om die te krijgen",
+    inRoute: "in de hoofdroute", later: "komt nog", lessonsIn: "{n} lessen in de hoofdroute, de rest komt nog",
+    lessonIn: "1 les in de hoofdroute, de rest komt nog", newVersion: "er is een nieuwe versie van deze les: begin opnieuw om die te krijgen",
     footer: "Tekst en figuren CC BY-SA 4.0 · lescode MIT-0 · app MIT", agents: "Leer je met je eigen AI-assistent? Wijs hem op AGENTS.md in de map van de course.",
     themes: { system: "Systeem", light: "Licht", dark: "Donker" }, themeLabel: "Thema", langLabel: "Taal",
     allDone: "Je hebt elke les gedaan die klaar is. Nieuwe lessen verschijnen hier zodra ze gebouwd zijn.",
@@ -231,8 +233,11 @@ function renderRoute() {
 }
 
 function renderMap() {
+  const built = {};   // lessons of a later branch that the main route already has, by their branch
+  for (const l of S.route) if (l.built && l.tak) built[l.tak] = (built[l.tak] || 0) + 1;
   const cards = S.branches.slice().sort((a, b) => a.order - b.order || 0).map((b) => {
-    const st = b.status === "main-route" ? t("inRoute") : t("later");
+    const n = built[b.id] || 0;
+    const st = b.status === "main-route" ? t("inRoute") : n > 1 ? t("lessonsIn", { n }) : n === 1 ? t("lessonIn") : t("later");
     return `<li class="branch ${b.status === "main-route" ? "now" : "later"}"><span class="b-title">${esc(b.title[lang()])}</span>
       <span class="b-state">${esc(st)}</span></li>`;
   });
