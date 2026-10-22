@@ -112,6 +112,12 @@ class Panel:
         self.marks.append(("group", list(xs), list(ys), k, r))
         return self
 
+    def area(self, xs, ys, role: str = "ink-3"):
+        """The area between a line and the bottom of the chart, as a light wash without an outline, such as the area
+        under a curve. Draw the line itself on top of it."""
+        self.marks.append(("area", list(xs), list(ys), role))
+        return self
+
     def rect(self, x0, y0, x1, y1, role: str = "loss"):
         """A rectangle between two corners, as a light wash with an outline in the role's colour."""
         self.marks.append(("rect", x0, y0, x1, y1, role))
@@ -239,6 +245,12 @@ def _panel(p: Panel, index: int, left: float, width: float, height: float) -> st
                     pts = ([(0, -1.35), (-1.2, 0.8), (1.2, 0.8)] if k == 1 else [(0, -1.35), (1.35, 0), (0, 1.35), (-1.35, 0)])
                     corners = " ".join(f"{cx + u * r:.1f},{cy + v * r:.1f}" for u, v in pts)
                     body.append(f'<polygon points="{corners}" {look}/>')
+        elif kind == "area":
+            _, xs, ys, role = mark
+            pts = [(X(a), Y(b)) for a, b in zip(xs, ys) if drawn(a, b)]
+            if pts:
+                corners = " ".join(f"{a:.1f},{b:.1f}" for a, b in pts) + f" {pts[-1][0]:.1f},{B:.1f} {pts[0][0]:.1f},{B:.1f}"
+                body.append(f'<polygon points="{corners}" style="fill:{_colour(role)};fill-opacity:0.18;stroke:none"/>')
         elif kind == "rect":
             _, a0, b0, a1, b1, role = mark
             xa, xb, ya, yb = sorted((X(a0), X(a1))) + sorted((Y(b0), Y(b1)))

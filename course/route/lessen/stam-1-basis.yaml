@@ -1110,6 +1110,31 @@ lessons:
   introduces: [v:confusion-matrix, c:precision, c:recall, c:true-positive, c:false-positive, c:false-negative, c:true-negative, c:decision-threshold]
   warns: [precision]
   uses: [c:metric, c:accuracy, c:classification, c:class, c:label, c:prediction, c:probability, c:validation-set, c:matrix, c:array, s:k-classes, py:np-array, py:np-zeros, py:np-sum, py:np-indexing, py:comparison, py:bool, py:for, py:range, py:len, py:indexing, py:tuple, py:import, py:import-as, py:arithmetic, py:float, py:int, py:print, py:comment, py:variable, py:underscore-name, q:predict, q:choice, q:exercise-with-check, q:run-cell]
+  ladder: [numpy]
+  needs: any
+
+- id: ml-f1-score
+  title: "Precision and recall in one number: the F1 score"
+  level: basis
+  module: generalization
+  idea: "When one class is rare, accuracy can rank a model that finds nothing above one that finds most of it; the F1 score, the harmonic mean of precision and recall, is only high when both are, so it ranks them the right way."
+  covers: [d10-evaluatiemetrics#0, d10-evaluatiemetrics#1, onevenwichtige-data#0]
+  requires: [ml-confusion-matrix]
+  introduces: [c:f1-score, c:harmonic-mean, c:class-imbalance]
+  uses: [c:precision, c:recall, c:true-positive, c:false-positive, c:false-negative, c:true-negative, v:confusion-matrix, c:decision-threshold, c:metric, c:accuracy, c:mean, c:logistic-regression, c:classification, c:class, c:label, c:prediction, c:probability, c:model, c:training, c:example, c:validation-set, c:array, py:np-array, py:np-sum, py:comparison, py:if, py:none, py:for, py:list, py:tuple, py:string-literal, py:f-string, py:import, py:import-as, py:arithmetic, py:float, py:int, py:print, py:comment, py:variable, py:underscore-name, q:predict, q:choice, q:exercise-with-check, q:run-cell]
+  ladder: [numpy]
+  data: [qmnist]
+  needs: any
+
+- id: ml-roc-auc
+  title: "Every threshold at once: the ROC curve and AUC"
+  level: basis
+  module: generalization
+  idea: "Move the decision threshold over every value and plot recall, the true positive rate, against the false positive rate: the ROC curve. The area under it, the AUC, is the share of pairs of a positive and a negative example that the scores put in the right order: one number for the ranking, whatever the threshold."
+  covers: [d10-evaluatiemetrics#2]
+  requires: [ml-f1-score]
+  introduces: [c:roc-curve, c:roc-auc, c:false-positive-rate, c:precision-recall-curve]
+  uses: [c:recall, c:precision, c:f1-score, c:class-imbalance, c:decision-threshold, c:true-positive, c:false-positive, c:false-negative, c:true-negative, v:confusion-matrix, c:metric, c:classification, c:class, c:label, c:prediction, c:probability, c:model, c:example, c:array, v:line-plot, py:np-array, py:np-sum, py:comparison, py:bool, py:for, py:len, py:list, py:tuple, py:import, py:import-as, py:arithmetic, py:float, py:int, py:print, py:comment, py:variable, py:underscore-name, q:predict, q:choice, q:exercise-with-check, q:run-cell]
   mentions: [c:baseline]
   ladder: [numpy]
   needs: any

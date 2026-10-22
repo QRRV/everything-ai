@@ -332,7 +332,7 @@ def text_connections():
     mo.md(r"""
     ## Wrap-up
 
-    **How this connects.** In [The loss you train on and the metric you report](/course/open/ml-loss-vs-metric?lang=en) accuracy was the metric; the confusion matrix shows what lies behind it, and precision and recall show what it hides when one class is rare. The decision threshold is one more setting you choose on the validation set. In the next lesson, *Always beat a simple baseline*, you compare a model with the simplest rule you can think of, such as always predicting the most common class. And in the project with handwritten digits, a confusion matrix of ten classes shows which digits your model mixes up.
+    **How this connects.** In [The loss you train on and the metric you report](/course/open/ml-loss-vs-metric?lang=en) accuracy was the metric; the confusion matrix shows what lies behind it, and precision and recall show what it hides when one class is rare. The decision threshold is one more setting you choose on the validation set. In the next lesson, *Precision and recall in one number: the F1 score*, you put the two in one number that stays honest when one class is rare. And in the project with handwritten digits, a confusion matrix of ten classes shows which digits your model mixes up.
     """)
     return
 

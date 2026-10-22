@@ -110,6 +110,8 @@ routes:
   - ml-regularization
   - ml-loss-vs-metric
   - ml-confusion-matrix
+  - ml-f1-score
+  - ml-roc-auc
   - ml-baselines
   - ml-digits-linear
   - ml-workflow

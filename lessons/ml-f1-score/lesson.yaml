@@ -1,0 +1,28 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: ml-f1-score
+minutes: 15
+title:
+  en: "Precision and recall in one number: the F1 score"
+  nl: "Precision en recall in één getal: de F1 score"
+goal:
+  en: "work out the F1 score of a classifier, and say why it does not mislead when one class is rare while accuracy does."
+  nl: "de F1 score van een classifier uitrekenen, en zeggen waarom die niet misleidt als één klasse zeldzaam is, en accuracy wel."
+summary:
+  - en: "The F1 score is the harmonic mean of precision and recall, $2PR / (P + R)$: it stays close to the smaller of the two, so it is only high when both are."
+    nl: "De F1 score is het harmonisch gemiddelde van precision en recall, $2PR / (P + R)$: hij blijft dicht bij de kleinste van de twee, dus hij is alleen hoog als ze allebei hoog zijn."
+  - en: "From the counts, $F_1 = 2\\,TP / (2\\,TP + FP + FN)$. The true negatives are not in it, so the many examples of a common class cannot make a model look good; a model that never predicts the rare class gets 0."
+    nl: "Uit de aantallen is $F_1 = 2\\,TP / (2\\,TP + FP + FN)$. De true negatives zitten er niet in, dus de vele voorbeelden van een veelvoorkomende klasse kunnen een model niet beter laten lijken; een model dat de zeldzame klasse nooit voorspelt, krijgt 0."
+  - en: "With class imbalance, accuracy can rank a model that finds nothing above one that finds almost everything; compare models, or thresholds on the validation set, by F1 instead."
+    nl: "Bij class imbalance kan accuracy een model dat niets vindt hoger zetten dan een model dat bijna alles vindt; vergelijk modellen, of thresholds op de validation set, dan met F1."
+can_now:
+  - en: "say why F1 stays close to the smaller of precision and recall"
+    nl: "zeggen waarom F1 dicht bij de kleinste van precision en recall blijft"
+    by: lopsided
+  - en: "work out the F1 score from the predictions and labels of a classifier"
+    nl: "de F1 score uitrekenen uit de voorspellingen en labels van een classifier"
+    by: f1
+  - en: "say why accuracy misleads when one class is rare, and F1 does not"
+    nl: "zeggen waarom accuracy misleidt als één klasse zeldzaam is, en F1 niet"
+    by: rare-pick

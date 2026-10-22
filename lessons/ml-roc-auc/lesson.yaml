@@ -1,0 +1,28 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: ml-roc-auc
+minutes: 15
+title:
+  en: "Every threshold at once: the ROC curve and AUC"
+  nl: "Alle thresholds tegelijk: de ROC curve en AUC"
+goal:
+  en: "work out the points of the ROC curve of a classifier, one threshold at a time, and its AUC as the share of pairs it puts in the right order."
+  nl: "de punten van de ROC curve van een classifier uitrekenen, threshold voor threshold, en zijn AUC als het deel van de paren dat hij in de goede volgorde zet."
+summary:
+  - en: "The ROC curve plots the true positive rate, which is recall, against the false positive rate, $FP / (FP + TN)$, for every decision threshold: from (0, 0), where nothing is called positive, to (1, 1), where everything is."
+    nl: "De ROC curve zet de true positive rate, en dat is recall, uit tegen de false positive rate, $FP / (FP + TN)$, voor elke decision threshold: van (0, 0), waar niets positief genoemd wordt, tot (1, 1), waar alles positief genoemd wordt."
+  - en: "The AUC is the area under it: the share of pairs of a positive and a negative example in which the positive one gets the higher score, a tie counting half. 0.5 is guessing, 1 is perfect."
+    nl: "De AUC is de oppervlakte eronder: het deel van de paren van een positief en een negatief voorbeeld waarin het positieve de hogere score krijgt, waarbij een gelijke stand half telt. 0,5 is gokken, 1 is perfect."
+  - en: "The AUC only depends on the order of the scores, not on a threshold, so it compares models before you choose a threshold. With a rare class, look at the precision-recall curve as well."
+    nl: "De AUC hangt alleen af van de volgorde van de scores, niet van een threshold, dus hij vergelijkt modellen voordat je een threshold kiest. Bij een zeldzame klasse kijk je ook naar de precision-recall curve."
+can_now:
+  - en: "work out the true and the false positive rate at a threshold"
+    nl: "de true en de false positive rate bij een threshold uitrekenen"
+    by: rates
+  - en: "work out the AUC by counting pairs"
+    nl: "de AUC uitrekenen door paren te tellen"
+    by: auc
+  - en: "say why the AUC does not depend on a threshold"
+    nl: "zeggen waarom de AUC niet van een threshold afhangt"
+    by: order

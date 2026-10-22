@@ -332,7 +332,7 @@ def text_connections():
     mo.md(r"""
     ## Afronding
 
-    **Samenhang.** In [De loss waarop je traint en de metric die je meldt](/course/open/ml-loss-vs-metric?lang=nl) was accuracy de metric; de confusion matrix laat zien wat erachter zit, en precision en recall laten zien wat hij verbergt als één klasse zeldzaam is. De decision threshold is nog een instelling die je op de validation set kiest. In de volgende les, *Versla altijd een eenvoudige baseline*, vergelijk je een model met de eenvoudigste regel die je kunt bedenken, zoals altijd de meest voorkomende klasse voorspellen. En in het project met handgeschreven cijfers laat een confusion matrix van tien klassen zien welke cijfers je model door elkaar haalt.
+    **Samenhang.** In [De loss waarop je traint en de metric die je meldt](/course/open/ml-loss-vs-metric?lang=nl) was accuracy de metric; de confusion matrix laat zien wat erachter zit, en precision en recall laten zien wat hij verbergt als één klasse zeldzaam is. De decision threshold is nog een instelling die je op de validation set kiest. In de volgende les, *Precision en recall in één getal: de F1 score*, vat je die twee samen in één getal dat eerlijk blijft als één klasse zeldzaam is. En in het project met handgeschreven cijfers laat een confusion matrix van tien klassen zien welke cijfers je model door elkaar haalt.
     """)
     return
 
