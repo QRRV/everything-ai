@@ -306,7 +306,7 @@ def text_connections():
     mo.md(r"""
     ## Afronding
 
-    **Samenhang.** In [Parameters en hyperparameters](/course/open/ml-hyperparameters?lang=nl) zag je dat de training-loss geen hyperparameter kan kiezen; de validation set kan dat wel. In [Overfitting en underfitting](/course/open/ml-overfitting?lang=nl) liet de test-MSE het patroon zien; nu blijft de test set verzegeld terwijl je kiest, dus is zijn ene score aan het eind eerlijk. In de volgende les, *Regularisatie en weight decay*, houd je een flexibel model op een andere manier in toom: door grote weights iets te laten kosten.
+    **Samenhang.** In [Parameters en hyperparameters](/course/open/ml-hyperparameters?lang=nl) zag je dat de training-loss geen hyperparameter kan kiezen; de validation set kan dat wel. In [Overfitting en underfitting](/course/open/ml-overfitting?lang=nl) liet de test-MSE het patroon zien; nu blijft de test set verzegeld terwijl je kiest, dus is zijn ene score aan het eind eerlijk. In de volgende les, *Vraag het de buren: k-nearest neighbors*, leer je een classifier kennen waarvan de hyperparameter het aantal buren is dat hij raadpleegt, en die kies je op dezelfde manier.
     """)
     return
 

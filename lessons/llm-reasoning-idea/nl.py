@@ -119,7 +119,7 @@ def text_idea():
 
         **Test-time compute.** Stappen schrijven kost meer rekenwerk tijdens het antwoorden, en meerdere antwoorden ook. In de run van de course was een antwoord gemiddeld {C.number(S['tokens']['direct'], 1, 'nl')} tokens direct en {C.number(S['tokens']['steps'], 0, 'nl')} met stappen, en {C.SAMPLES} samples samen {C.number(C.SAMPLES * S['tokens']['sample'], 0, 'nl')}: op de CPU van de course ongeveer {C.number(S['seconds']['direct'], 0, 'nl')} s, {C.number(S['seconds']['steps'], 0, 'nl')} s en {C.number(S['seconds']['votes'] / 60, 0, 'nl')} minuten per vraag.
 
-        **Stemmen en pass@k.** Sample $k$ antwoorden bij een temperature boven 0, lees van elk het eindgetal, en neem het getal dat het vaakst komt: majority voting, bij chains of thought ook self-consistency genoemd. Pass@k vraagt iets anders: is er *minstens één* van de $k$ goed? Daarvoor is een check nodig die het antwoord kent, hier het goede antwoord uit GSM8K; stemmen heeft er geen nodig.
+        **Stemmen en pass@k.** Sample $k$ antwoorden bij een temperature boven 0, lees van elk het eindgetal, en neem het getal dat het vaakst komt: majority voting, dezelfde stemming als in [Vraag het de buren: k-nearest neighbors](/course/open/ml-knn?lang=nl), bij chains of thought ook self-consistency genoemd. Pass@k vraagt iets anders: is er *minstens één* van de $k$ goed? Daarvoor is een check nodig die het antwoord kent, hier het goede antwoord uit GSM8K; stemmen heeft er geen nodig.
 
         ### Nieuwe woorden en tekens
 
@@ -129,7 +129,6 @@ def text_idea():
         | **few-shot prompting** | een paar uitgewerkte voorbeelden in de prompt, vóór de echte vraag |
         | **zero-shot prompting** | de vraag of een instructie, zonder voorbeelden |
         | **test-time compute** | het rekenwerk dat een model besteedt terwijl het antwoordt |
-        | **majority voting** | van een paar samples het eindantwoord nemen dat het vaakst komt |
         | **pass@k**, $k$ | of minstens één van $k$ antwoorden goed is, volgens een check die het antwoord kent |
         | **reasoning model** | een model dat, meestal met reinforcement learning, getraind is om een lange chain of thought te schrijven voordat het antwoordt |
         | **faithfulness** | of de uitgeschreven stappen de echte reden voor het antwoord zijn |

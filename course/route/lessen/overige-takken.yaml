@@ -20,6 +20,22 @@ lessons:
   ladder: [numpy]
   needs: any
 
+# --- klassiek-ml -----------------------------------------------------------------
+- id: ml-knn
+  tak: klassiek-ml
+  title: "Ask the neighbors: k-nearest neighbors"
+  level: basis
+  module: generalization
+  idea: "A new example gets the class that most of its k nearest training examples have; k is a hyperparameter, chosen on the validation set."
+  covers: [instance-based-leren-en-naive-bayes#0]
+  requires: [ml-validation-set, math-norms-cosine, ml-feature-scaling, ml-logistic-regression, math-log-scales]
+  introduces: [c:k-nearest-neighbors, c:majority-voting, py:np-argsort, py:np-unique]
+  uses: [c:distance, c:norm, py:np-linalg-norm, c:standardization, c:feature-scaling, c:mean, c:standard-deviation, c:hyperparameter, c:model-parameter, c:validation-set, c:train-set, c:test-set, c:overfitting, c:underfitting, c:classification, c:class, c:decision-boundary, c:label, c:feature, c:example, c:prediction, c:model, c:training, v:scatter-plot, v:log-scale, c:random-number-generator, py:np-random-generator, c:seed, c:csv, py:dataframe, py:pandas-select-filter, py:isna, py:np-array, py:np-indexing, py:np-argmax, py:np-argmin, py:np-mean, py:np-std, py:keyword-argument, c:axis, c:broadcasting, c:array, py:slicing, py:indexing, py:tuple, py:def, py:return, py:for, py:range, py:len, py:if, py:comparison, py:list, py:append, py:import, py:import-as, py:arithmetic, py:float, py:int, py:string-literal, py:print, py:comment, py:variable, py:underscore-name, q:predict, q:choice, q:exercise-with-check, q:run-cell]
+  mentions: [c:cross-validation]
+  ladder: [numpy]
+  data: [palmer-penguins]
+  needs: any
+
 # --- verantwoord ------------------------------------------------------------------
 - id: rai-bias-in-data
   tak: verantwoord

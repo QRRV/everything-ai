@@ -1060,6 +1060,20 @@ lessons:
   ladder: [numpy]
   needs: any
 
+- id: ml-cross-validation
+  title: "Choosing more reliably: cross-validation"
+  level: basis
+  module: generalization
+  idea: "One validation set is small, so the hyperparameter it chooses depends on which examples land in it; cross-validation lets every fold of the examples take one turn as the validation set and adds up the mistakes of all folds."
+  covers: [evaluatie-en-modelselectie#1]
+  requires: [ml-knn]
+  introduces: [c:cross-validation, c:fold, py:np-concatenate]
+  uses: [c:k-nearest-neighbors, c:majority-voting, c:distance, py:np-linalg-norm, py:np-argsort, py:np-unique, c:standardization, c:mean, c:standard-deviation, c:hyperparameter, c:validation-set, c:train-set, c:test-set, c:model, c:training, c:example, c:class, c:label, c:feature, c:prediction, c:polynomial, py:np-polyfit, c:mean-squared-error, c:residual, c:loss, v:line-plot, v:log-scale, c:random-number-generator, py:np-random-generator, c:seed, c:csv, py:dataframe, py:pandas-select-filter, py:isna, py:np-array, py:np-indexing, py:np-argmin, py:np-argmax, py:np-mean, py:np-std, py:np-sum, py:keyword-argument, c:axis, c:broadcasting, c:array, py:slicing, py:indexing, py:tuple, py:def, py:return, py:for, py:range, py:len, py:if, py:comparison, py:list, py:append, py:import, py:import-as, py:arithmetic, py:float, py:int, py:string-literal, py:print, py:comment, py:variable, py:underscore-name, q:predict, q:choice, q:exercise-with-check, q:run-cell]
+  mentions: [c:regularization, c:weight-decay]
+  ladder: [numpy]
+  data: [palmer-penguins]
+  needs: any
+
 - id: ml-regularization
   title: "Regularization and weight decay"
   level: basis

@@ -1,0 +1,28 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: ml-cross-validation
+minutes: 15
+title:
+  en: "Choosing more reliably: cross-validation"
+  nl: "Betrouwbaarder kiezen: cross-validation"
+goal:
+  en: "choose a hyperparameter with 5-fold cross-validation, and say why that is more reliable than one validation set."
+  nl: "een hyperparameter kiezen met cross-validation over 5 folds, en zeggen waarom dat betrouwbaarder is dan één validation set."
+summary:
+  - en: "One validation set is small: which examples land in it is luck, and so is the hyperparameter it chooses."
+    nl: "Eén validation set is klein: welke voorbeelden erin komen, is toeval, en de hyperparameter die hij kiest dus ook."
+  - en: "Cross-validation cuts the examples outside the test set into folds; each fold is the validation set once while the others train, and the mistakes of all folds are added up."
+    nl: "Cross-validation snijdt de voorbeelden buiten de test set in folds; elke fold is één keer de validation set terwijl de andere trainen, en de fouten van alle folds worden opgeteld."
+  - en: "Then train once more on all of them with the chosen value, and measure once on the test set."
+    nl: "Train daarna nog één keer op allemaal met de gekozen waarde, en meet één keer op de test set."
+can_now:
+  - en: "say why cross-validation chooses more reliably than one validation set"
+    nl: "zeggen waarom cross-validation betrouwbaarder kiest dan één validation set"
+    by: why-reliable
+  - en: "cut the examples into folds and let each one be the validation set once"
+    nl: "de voorbeelden in folds snijden en elke fold één keer de validation set laten zijn"
+    by: folds
+  - en: "say what to do after cross-validation has chosen"
+    nl: "zeggen wat je doet als cross-validation gekozen heeft"
+    by: after-cv

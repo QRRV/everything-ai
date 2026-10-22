@@ -119,7 +119,7 @@ def text_idea():
 
         **Test-time compute.** Writing steps spends more computation while answering, and so do several answers. In the course's run an answer was {C.number(S['tokens']['direct'], 1, 'en')} tokens direct and {C.number(S['tokens']['steps'], 0, 'en')} with steps on average, and {C.SAMPLES} samples {C.number(C.SAMPLES * S['tokens']['sample'], 0, 'en')} together: on the course's CPU about {C.number(S['seconds']['direct'], 0, 'en')} s, {C.number(S['seconds']['steps'], 0, 'en')} s and {C.number(S['seconds']['votes'] / 60, 0, 'en')} minutes per question.
 
-        **Voting and pass@k.** Sample $k$ answers at a temperature above 0, read the final number of each, and take the one that comes most often: majority voting, for chains of thought also called self-consistency. Pass@k asks something else: is *any* of the $k$ right? That needs a check that knows the answer, here the answer key; voting needs none.
+        **Voting and pass@k.** Sample $k$ answers at a temperature above 0, read the final number of each, and take the one that comes most often: majority voting, the same vote as in [Ask the neighbors: k-nearest neighbors](/course/open/ml-knn?lang=en), for chains of thought also called self-consistency. Pass@k asks something else: is *any* of the $k$ right? That needs a check that knows the answer, here the answer key; voting needs none.
 
         ### New words and symbols
 
@@ -129,7 +129,6 @@ def text_idea():
         | **few-shot prompting** | a few worked examples in the prompt, before the real question |
         | **zero-shot prompting** | the question or an instruction, without examples |
         | **test-time compute** | the computation a model spends while it answers |
-        | **majority voting** | taking the final answer that comes most often among several samples |
         | **pass@k**, $k$ | whether at least one of $k$ answers is right, by a check that knows the answer |
         | **reasoning model** | a model trained, mostly with reinforcement learning, to write a long chain of thought before it answers |
         | **faithfulness** | whether the written steps are the real reason for the answer |

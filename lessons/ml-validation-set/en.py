@@ -305,7 +305,7 @@ def text_connections():
     mo.md(r"""
     ## Wrap-up
 
-    **How this connects.** In [Parameters and hyperparameters](/course/open/ml-hyperparameters?lang=en) you saw that the training loss cannot choose a hyperparameter; the validation set can. In [Overfitting and underfitting](/course/open/ml-overfitting?lang=en) the test MSE showed the pattern; now the test set stays sealed while you choose, so its one score at the end is honest. In the next lesson, *Regularization and weight decay*, you keep a flexible model in check another way: by making large weights cost something.
+    **How this connects.** In [Parameters and hyperparameters](/course/open/ml-hyperparameters?lang=en) you saw that the training loss cannot choose a hyperparameter; the validation set can. In [Overfitting and underfitting](/course/open/ml-overfitting?lang=en) the test MSE showed the pattern; now the test set stays sealed while you choose, so its one score at the end is honest. In the next lesson, *Ask the neighbors: k-nearest neighbors*, you meet a classifier whose hyperparameter is how many neighbors it asks, and you choose it the same way.
     """)
     return
 

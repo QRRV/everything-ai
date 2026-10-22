@@ -798,9 +798,9 @@ lessons:
   module: post-training
   idea: "A transformer does the same fixed work for every token; letting it write steps before its answer, or sample several answers and vote, spends more computation at answer time and often answers better, without changing a weight."
   covers: [reasoning-modellen-en-test-time-compute#0, reasoning-modellen-en-test-time-compute#2, reasoning-modellen-en-test-time-compute#3, prompt-basis#2]
-  requires: [llm-eval-chat, res-research-cycle, stats-bootstrap]
-  introduces: [c:chain-of-thought, c:few-shot-prompting, c:zero-shot-prompting, c:test-time-compute, c:majority-voting, c:pass-at-k, c:reasoning-model, c:faithfulness, py:isdigit]
-  uses: [p:verifiable-eval, c:base-model, c:open-weights, c:license, c:model-hub, c:token, c:forward-pass, c:transformer-block, c:transformer, c:attention, c:sampling, c:greedy-decoding, c:temperature, c:reinforcement-learning, c:benchmark, c:contamination, c:test-set, c:accuracy, c:standard-error, c:experiment, c:floating-point, c:gpu, py:def, py:return, py:if, py:for, py:append, py:and-operator, py:or-operator, py:dict, py:list, py:str, py:string-literal, py:indexing, py:str-join, py:split, py:split-sep, py:strip-chars, py:reversed, py:repr, py:is-none, py:none, py:bool, py:comparison, py:print, py:comment, py:underscore-name, q:predict, q:choice, q:explain, q:exercise-with-check, q:run-cell]
+  requires: [llm-eval-chat, res-research-cycle, stats-bootstrap, ml-knn]
+  introduces: [c:chain-of-thought, c:few-shot-prompting, c:zero-shot-prompting, c:test-time-compute, c:pass-at-k, c:reasoning-model, c:faithfulness, py:isdigit]
+  uses: [c:majority-voting, p:verifiable-eval, c:base-model, c:open-weights, c:license, c:model-hub, c:token, c:forward-pass, c:transformer-block, c:transformer, c:attention, c:sampling, c:greedy-decoding, c:temperature, c:reinforcement-learning, c:benchmark, c:contamination, c:test-set, c:accuracy, c:standard-error, c:experiment, c:floating-point, c:gpu, py:def, py:return, py:if, py:for, py:append, py:and-operator, py:or-operator, py:dict, py:list, py:str, py:string-literal, py:indexing, py:str-join, py:split, py:split-sep, py:strip-chars, py:reversed, py:repr, py:is-none, py:none, py:bool, py:comparison, py:print, py:comment, py:underscore-name, q:predict, q:choice, q:explain, q:exercise-with-check, q:run-cell]
   mentions: [c:verifiable-reward]
   ladder: [python]
   data: [model-qwen3-0.6b-base, gsm8k-sample, course-reasoning-qwen]

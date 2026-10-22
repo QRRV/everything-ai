@@ -1,0 +1,28 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: ml-knn
+minutes: 15
+title:
+  en: "Ask the neighbors: k-nearest neighbors"
+  nl: "Vraag het de buren: k-nearest neighbors"
+goal:
+  en: "classify a new example by the vote of its k nearest training examples, and choose k on the validation set."
+  nl: "een nieuw voorbeeld classificeren met de stemmen van zijn k dichtstbijzijnde voorbeelden uit de training set, en k kiezen op de validation set."
+summary:
+  - en: "k-nearest neighbors works out the distance from a new example to every training example, takes the k nearest, and lets them vote: the class most of them have wins."
+    nl: "k-nearest neighbors rekent de afstand uit van een nieuw voorbeeld tot elk voorbeeld uit de training set, neemt de k dichtstbijzijnde, en laat ze stemmen: de klasse die de meesten hebben, wint."
+  - en: "k is a hyperparameter: with k = 1 every single training example decides for the examples around it, with a very large k the most common class always wins. Choose it on the validation set."
+    nl: "k is een hyperparameter: met k = 1 beslist elk los voorbeeld uit de training set voor de voorbeelden eromheen, met een heel grote k wint altijd de klasse die het vaakst voorkomt. Kies hem op de validation set."
+  - en: "The distance adds up the squared differences in all features, so standardize them first, with the mean and standard deviation of the training set."
+    nl: "De afstand telt de kwadraten van de verschillen in alle features op, dus standaardiseer ze eerst, met het gemiddelde en de standaardafwijking van de training set."
+can_now:
+  - en: "write k-NN: distances, the k nearest, and their vote"
+    nl: "k-NN schrijven: afstanden, de k dichtstbijzijnde, en hun stemming"
+    by: knn-predict
+  - en: "choose k by the mistakes on the validation set"
+    nl: "k kiezen aan de hand van de fouten op de validation set"
+    by: choose-k
+  - en: "say why k = 1 is perfect on the training set and still not the best choice"
+    nl: "zeggen waarom k = 1 perfect is op de training set en toch niet de beste keuze"
+    by: k1-train

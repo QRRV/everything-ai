@@ -105,6 +105,8 @@ routes:
   - ml-overfitting
   - ml-hyperparameters
   - ml-validation-set
+  - ml-knn
+  - ml-cross-validation
   - ml-regularization
   - ml-loss-vs-metric
   - ml-confusion-matrix
