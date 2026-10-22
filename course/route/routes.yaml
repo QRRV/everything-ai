@@ -64,6 +64,8 @@ routes:
   - data-pandas
   - stats-describe
   - data-explore
+  - data-groupby
+  - data-merge
   - data-provenance
   - ml-vocabulary
   - ml-model-is-a-function

@@ -309,7 +309,7 @@ def text_connections():
     mo.md(r"""
     ## Wrap-up
 
-    **How this connects.** In [Tables with pandas](/course/open/data-pandas?lang=en) you read a table and selected rows from it; now you ask it questions. In [Describing data: mean, median and spread](/course/open/stats-describe?lang=en) you summarized one column; `describe` does that for every column of numbers at once. Later in the course, the data a model trains on is checked like this first, and missing values and codes such as -999 are dealt with before a model sees them. In the next lesson, *Where does this data come from?*, you ask the questions that no table answers: who made the data, how, and what you may do with it.
+    **How this connects.** In [Tables with pandas](/course/open/data-pandas?lang=en) you read a table and selected rows from it; now you ask it questions. In [Describing data: mean, median and spread](/course/open/stats-describe?lang=en) you summarized one column; `describe` does that for every column of numbers at once. Later in the course, the data a model trains on is checked like this first, and missing values and codes such as -999 are dealt with before a model sees them. In the next lesson, *One number per group: groupby*, you summarize a table per group, such as the mean body mass of each species of penguin.
     """)
     return
 

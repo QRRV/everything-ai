@@ -521,6 +521,33 @@ lessons:
   ladder: [numpy]
   needs: any
 
+- id: data-groupby
+  title: "One number per group: groupby"
+  level: basis
+  module: data
+  idea: "groupby splits the rows of a table into groups by the values of one column, computes one number per group and combines them; a mean per group hides how many values it rests on and what else differs between the groups."
+  covers: [dataframes#1]
+  requires: [data-explore]
+  introduces: [py:groupby, py:pandas-agg]
+  uses: [py:dataframe, py:pandas-select-filter, py:value-counts, py:pandas-describe, c:missing-value, c:csv, c:file-path, py:boolean-mask, c:mean, c:median, py:min-max, py:list, py:import, py:import-as, py:def, py:return, py:print, py:comment, py:variable, py:underscore-name, py:string-literal, q:predict, q:choice, q:exercise-with-check, q:run-cell]
+  mentions: [c:model, c:class]
+  ladder: [numpy]
+  data: [palmer-penguins]
+  needs: any
+
+- id: data-merge
+  title: "Two tables into one: merge"
+  level: basis
+  module: data
+  idea: "merge puts the rows of two tables side by side where a key column matches; an inner join drops a row without a match, a left join keeps it with missing values, and a key that appears twice doubles its row, so you count the rows before and after."
+  covers: [dataframes#1]
+  requires: [data-groupby, py-dicts]
+  introduces: [c:join, py:pandas-merge]
+  uses: [py:groupby, py:dict, py:dataframe, py:pandas-select-filter, py:value-counts, c:missing-value, c:csv, c:file-path, py:len, py:arithmetic, py:keyword-argument, py:import, py:import-as, py:def, py:return, py:print, py:comment, py:variable, py:underscore-name, py:string-literal, q:predict, q:choice, q:exercise-with-check, q:run-cell]
+  ladder: [numpy]
+  data: [palmer-penguins]
+  needs: any
+
 - id: data-provenance
   title: "Where does this data come from?"
   level: basis

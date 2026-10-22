@@ -1,0 +1,28 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: data-merge
+minutes: 15
+title:
+  en: "Two tables into one: merge"
+  nl: "Twee tabellen samenvoegen: merge"
+goal:
+  en: "combine two tables with merge on a column they share, choose between an inner and a left join, and count the rows before and after."
+  nl: "twee tabellen met merge samenvoegen op een kolom die ze delen, kiezen tussen een inner en een left join, en de rijen ervoor en erna tellen."
+summary:
+  - en: "`pd.merge(weather, sales, on=\"day\")` puts the rows of two tables side by side where the key, `day`, is the same: one row for every pair of rows that match."
+    nl: "`pd.merge(weather, sales, on=\"day\")` zet de rijen van twee tabellen naast elkaar waar de key, `day`, gelijk is: één rij voor elk paar rijen dat bij elkaar past."
+  - en: "An inner join, the default, leaves out a row without a match; a left join, `how=\"left\"`, keeps every row of the left table and fills in `NaN`."
+    nl: "Een inner join, wat merge vanzelf doet, laat een rij zonder match weg; een left join, `how=\"left\"`, houdt elke rij van de linkertabel en vult `NaN` in."
+  - en: "A key that is in the right table twice gives its row twice, and a key written another way finds no match: count the rows before and after every merge."
+    nl: "Een key die twee keer in de rechtertabel staat, geeft zijn rij twee keer, en een key die anders geschreven is, vindt geen match: tel de rijen voor en na elke merge."
+can_now:
+  - en: "combine two tables on a key and keep every row of the first"
+    nl: "twee tabellen samenvoegen op een key en elke rij van de eerste houden"
+    by: week-2
+  - en: "count how many rows a merge adds"
+    nl: "tellen hoeveel rijen een merge erbij doet"
+    by: extra-rows
+  - en: "find out why a merge lost rows"
+    nl: "uitzoeken waarom een merge rijen kwijtraakte"
+    by: fewer-rows

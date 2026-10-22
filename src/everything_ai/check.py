@@ -269,7 +269,8 @@ def _same_table(pd, a, b, rel: float) -> bool:
     def values(v):
         v = v.tolist() if hasattr(v, "tolist") and not isinstance(v, (str, list)) else v
         v = list(v) if isinstance(v, tuple) else v
-        return [None if not isinstance(x, (list, tuple)) and pd.isna(x) else x for x in v] if isinstance(v, list) else v
+        # only a single value can be missing: a Series inside a tuple, such as (means, counts), stays as it is
+        return [None if pd.api.types.is_scalar(x) and pd.isna(x) else x for x in v] if isinstance(v, list) else v
 
     if isinstance(a, pd.DataFrame) or isinstance(b, pd.DataFrame):
         if not (isinstance(a, pd.DataFrame) and isinstance(b, pd.DataFrame)) or a.shape != b.shape:

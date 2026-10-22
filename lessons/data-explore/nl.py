@@ -309,7 +309,7 @@ def text_connections():
     mo.md(r"""
     ## Afronding
 
-    **Samenhang.** In [Tabellen met pandas](/course/open/data-pandas?lang=nl) las je een tabel en selecteerde je er rijen uit; nu stel je hem vragen. In [Data beschrijven: gemiddelde, mediaan en spreiding](/course/open/stats-describe?lang=nl) vatte je één kolom samen; `describe` doet dat voor elke kolom met getallen tegelijk. Later in de course wordt de data waarop een model traint eerst zo bekeken, en worden ontbrekende waarden en codes zoals -999 aangepakt voordat een model ze ziet. In de volgende les, *Waar komt deze data vandaan?*, stel je de vragen die geen tabel beantwoordt: wie maakte de data, hoe, en wat mag je ermee?
+    **Samenhang.** In [Tabellen met pandas](/course/open/data-pandas?lang=nl) las je een tabel en selecteerde je er rijen uit; nu stel je hem vragen. In [Data beschrijven: gemiddelde, mediaan en spreiding](/course/open/stats-describe?lang=nl) vatte je één kolom samen; `describe` doet dat voor elke kolom met getallen tegelijk. Later in de course wordt de data waarop een model traint eerst zo bekeken, en worden ontbrekende waarden en codes zoals -999 aangepakt voordat een model ze ziet. In de volgende les, *Eén getal per groep: groupby*, vat je een tabel per groep samen, zoals het gemiddelde lichaamsgewicht van elke soort pinguïn.
     """)
     return
 

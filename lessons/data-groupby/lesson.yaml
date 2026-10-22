@@ -1,0 +1,28 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: data-groupby
+minutes: 15
+title:
+  en: "One number per group: groupby"
+  nl: "Eén getal per groep: groupby"
+goal:
+  en: "split a table into groups with groupby, work out one number per group, and read what such a summary leaves out."
+  nl: "een tabel met groupby in groepen splitsen, per groep één getal uitrekenen, en lezen wat zo'n samenvatting weglaat."
+summary:
+  - en: "`df.groupby(\"species\")[\"body_mass_g\"].mean()` splits the rows by their value in `species`, takes the mean of `body_mass_g` in each group, and combines the means into one Series: split-apply-combine."
+    nl: "`df.groupby(\"species\")[\"body_mass_g\"].mean()` splitst de rijen op hun waarde in `species`, neemt in elke groep het gemiddelde van `body_mass_g`, en voegt de gemiddelden samen tot één Series: split-apply-combine."
+  - en: "`.count()` counts the values per group, without the missing ones; `.size()` counts the rows; `.agg([\"mean\", \"count\"])` gives several numbers per group at once."
+    nl: "`.count()` telt de waarden per groep, zonder de ontbrekende; `.size()` telt de rijen; `.agg([\"mean\", \"count\"])` geeft meerdere getallen per groep tegelijk."
+  - en: "A mean per group hides how many values it rests on and what else differs between the groups: Biscoe's mean is higher because the Gentoos live there, not because penguins weigh more on Biscoe."
+    nl: "Een gemiddelde per groep verbergt op hoeveel waarden het rust en wat er verder verschilt tussen de groepen: het gemiddelde van Biscoe is hoger omdat de Gentoos daar wonen, niet omdat pinguïns op Biscoe meer wegen."
+can_now:
+  - en: "work out one number for each group of a table"
+    nl: "voor elke groep van een tabel één getal uitrekenen"
+    by: per-sky
+  - en: "give the count next to each mean, so you can see what it rests on"
+    nl: "de telling naast elk gemiddelde zetten, zodat je ziet waarop het rust"
+    by: summary
+  - en: "recognize a group summary that says little, such as the mean of a group of one"
+    nl: "een samenvatting per groep herkennen die weinig zegt, zoals het gemiddelde van een groep van één"
+    by: one-day
