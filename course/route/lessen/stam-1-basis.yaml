@@ -548,6 +548,20 @@ lessons:
   data: [palmer-penguins]
   needs: any
 
+- id: data-missing-values
+  title: "Gaps in a table: dropna and fillna"
+  level: basis
+  module: data
+  idea: "A gap is left out with dropna or filled in with fillna: a value you know, or a guess such as the mean or the median, after a missing-indicator column marks where it was; each choice changes the numbers, and a filled-in mean shrinks the spread."
+  covers: [feature-engineering#2]
+  requires: [data-merge, stats-describe]
+  introduces: [py:na-values, py:dropna, py:fillna, c:imputation, py:pandas-new-column, c:missing-indicator]
+  uses: [c:missing-value, py:isna, py:pandas-describe, py:dataframe, py:pandas-select-filter, py:pandas-merge, c:join, c:csv, c:file-path, c:mean, c:median, c:standard-deviation, c:axis, py:keyword-argument, py:dict, py:list, py:bool, py:f-string, py:string-literal, py:import, py:import-as, py:def, py:return, py:print, py:comment, py:variable, py:underscore-name, q:predict, q:choice, q:exercise-with-check, q:run-cell]
+  mentions: [c:model]
+  ladder: [numpy]
+  data: [palmer-penguins]
+  needs: any
+
 - id: data-provenance
   title: "Where does this data come from?"
   level: basis
@@ -1096,9 +1110,22 @@ lessons:
   requires: [ml-knn]
   introduces: [c:cross-validation, c:fold, py:np-concatenate]
   uses: [c:k-nearest-neighbors, c:majority-voting, c:distance, py:np-linalg-norm, py:np-argsort, py:np-unique, c:standardization, c:mean, c:standard-deviation, c:hyperparameter, c:validation-set, c:train-set, c:test-set, c:model, c:training, c:example, c:class, c:label, c:feature, c:prediction, c:polynomial, py:np-polyfit, c:mean-squared-error, c:residual, c:loss, v:line-plot, v:log-scale, c:random-number-generator, py:np-random-generator, c:seed, c:csv, py:dataframe, py:pandas-select-filter, py:isna, py:np-array, py:np-indexing, py:np-argmin, py:np-argmax, py:np-mean, py:np-std, py:np-sum, py:keyword-argument, c:axis, c:broadcasting, c:array, py:slicing, py:indexing, py:tuple, py:def, py:return, py:for, py:range, py:len, py:if, py:comparison, py:list, py:append, py:import, py:import-as, py:arithmetic, py:float, py:int, py:string-literal, py:print, py:comment, py:variable, py:underscore-name, q:predict, q:choice, q:exercise-with-check, q:run-cell]
-  mentions: [c:regularization, c:weight-decay]
   ladder: [numpy]
   data: [palmer-penguins]
+  needs: any
+
+- id: ml-bias-variance
+  title: "Will more data help? Bias, variance and learning curves"
+  level: basis
+  module: generalization
+  idea: "A model that is too simple misses the pattern in the same way on every training set (bias), one that is too flexible gives a different fit on every training set (variance), and its learning curve, the training and validation MSE against the number of training examples, shows which of the two it has, and so whether more data would help."
+  covers: [evaluatie-en-modelselectie#2]
+  requires: [ml-cross-validation, prob-expectation]
+  introduces: [c:statistical-bias, c:bias-variance-trade-off, c:learning-curve]
+  warns: [bias]
+  uses: [c:variance, c:expected-value, c:probability, c:cross-validation, c:k-nearest-neighbors, c:model-capacity, c:overfitting, c:underfitting, c:noise, c:polynomial, py:np-polyfit, c:mean-squared-error, c:residual, c:loss, c:train-set, c:validation-set, c:test-set, c:generalization, c:bias-term, c:model-parameter, c:weight, c:model, c:training, c:example, c:prediction, c:mean, c:random-number-generator, py:np-random-generator, c:seed, py:np-array, py:np-indexing, py:slicing, py:np-mean, c:array, v:line-plot, v:log-scale, v:loss-curve, py:for, py:list, py:append, py:tuple, py:import, py:import-as, py:arithmetic, py:float, py:int, py:print, py:comment, py:variable, py:underscore-name, q:predict, q:choice, q:exercise-with-check, q:run-cell]
+  mentions: [c:data-bias, c:regularization, c:weight-decay]
+  ladder: [numpy]
   needs: any
 
 - id: ml-regularization
@@ -1175,6 +1202,18 @@ lessons:
   requires: [ml-loss-vs-metric]
   introduces: [c:baseline]
   uses: [c:metric, c:accuracy, c:mean-squared-error, c:residual, c:loss, c:gradient-descent, c:probability, c:train-set, c:test-set, c:linear-regression, c:regression-task, c:classification, c:class, c:label, c:prediction, c:model, c:example, c:feature, c:training, c:one-hot, c:identity-matrix, c:mean, c:axis, c:random-number-generator, c:seed, py:np-random-generator, py:np-array, py:np-argmax, py:np-argmin, py:np-mean, py:np-sum, py:np-indexing, py:slicing, py:comparison, py:bool, py:keyword-argument, py:tuple, py:import, py:import-as, py:arithmetic, py:float, py:int, py:print, py:comment, py:variable, py:underscore-name, q:predict, q:choice, q:exercise-with-check, q:run-cell]
+  ladder: [numpy]
+  needs: any
+
+- id: ml-regression-metrics
+  title: "How far off? MAE, RMSE and R²"
+  level: basis
+  module: generalization
+  idea: "The MSE is in the square of the label's unit; the MAE and the RMSE say in that unit how far off a model typically is, the RMSE counting large misses more, and R² says what share of the variance of the labels the model explains, against always predicting their mean."
+  covers: [d10-evaluatiemetrics#4]
+  requires: [ml-baselines, prob-expectation]
+  introduces: [c:mean-absolute-error, c:root-mean-squared-error, c:coefficient-of-determination, s:abs]
+  uses: [c:baseline, c:metric, c:loss, c:mean-squared-error, c:residual, c:variance, c:expected-value, c:probability, c:standard-deviation, s:var, s:sigma-sum, s:n-examples, s:y, s:y-hat, c:linear-regression, c:regression-task, c:train-set, c:test-set, c:training, c:model, c:example, c:feature, c:label, c:prediction, c:weight, c:bias-term, c:mean, c:random-number-generator, py:np-random-generator, py:np-array, py:np-indexing, py:slicing, py:np-mean, py:np-std, py:abs, py:math-module, c:array, py:tuple, py:list, py:import, py:import-as, py:arithmetic, py:float, py:int, py:print, py:comment, py:variable, py:underscore-name, q:predict, q:choice, q:exercise-with-check, q:run-cell]
   ladder: [numpy]
   needs: any
 

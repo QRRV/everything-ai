@@ -313,7 +313,7 @@ def text_connections():
     mo.md(r"""
     ## Afronding
 
-    **Samenhang.** In [De loss waarop je traint en de metric die je meldt](/course/open/ml-loss-vs-metric?lang=nl) koos je de metric om te melden; een baseline geeft dat getal betekenis. In [Werkt het op nieuwe data? Training set en test set](/course/open/ml-train-test-split?lang=nl) werd de lijn gemeten op nieuwe huizen; nu weet je ook dat hij de eenvoudigste regel verslaat. In de volgende les, *Project: een lineaire classifier voor handgeschreven cijfers*, train je een model op echte plaatjes, en het eerste wat je controleert, is of het beter doet dan altijd het meest voorkomende cijfer gokken.
+    **Samenhang.** In [De loss waarop je traint en de metric die je meldt](/course/open/ml-loss-vs-metric?lang=nl) koos je de metric om te melden; een baseline geeft dat getal betekenis. In [Werkt het op nieuwe data? Training set en test set](/course/open/ml-train-test-split?lang=nl) werd de lijn gemeten op nieuwe huizen; nu weet je ook dat hij de eenvoudigste regel verslaat. In de volgende les, *Hoe ver ernaast? MAE, RMSE en R²*, maak je van de MSE van de lijn een getal in euro's, en van zijn vergelijking met een gemiddelde één getal zonder eenheid.
     """)
     return
 

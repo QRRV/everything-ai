@@ -340,7 +340,7 @@ def text_connections():
     mo.md(r"""
     ## Afronding
 
-    **Samenhang.** In [Hyperparameters kiezen: de validation set](/course/open/ml-validation-set?lang=nl) koos één validation set de graad; cross-validation laat elk voorbeeld een keer aan de beurt komen, en koos ook graad 2. In [Vraag het de buren: k-nearest neighbors](/course/open/ml-knn?lang=nl) won k = 15 op 68 pinguïns; over alle 274 zijn k = 9 tot 41 ongeveer even goed, en is k = 1 in elke schudbeurt slechter. In de volgende les, *Regularisatie en weight decay*, houd je een flexibel model op een andere manier in toom: door grote weights iets te laten kosten. Hoeveel ze kosten, is weer een hyperparameter, die je op dezelfde manier kiest.
+    **Samenhang.** In [Hyperparameters kiezen: de validation set](/course/open/ml-validation-set?lang=nl) koos één validation set de graad; cross-validation laat elk voorbeeld een keer aan de beurt komen, en koos ook graad 2. In [Vraag het de buren: k-nearest neighbors](/course/open/ml-knn?lang=nl) won k = 15 op 68 pinguïns; over alle 274 zijn k = 9 tot 41 ongeveer even goed, en is k = 1 in elke schudbeurt slechter. In de volgende les, *Helpt meer data? Bias, variantie en learning curves*, blijkt dat ook het model zelf verandert als er andere voorbeelden in de training set komen, en zie je wanneer meer voorbeelden zouden helpen.
     """)
     return
 

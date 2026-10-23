@@ -20,6 +20,22 @@ lessons:
   ladder: [numpy]
   needs: any
 
+# --- onzekerheid ------------------------------------------------------------------
+- id: data-two-columns
+  tak: onzekerheid
+  title: "Two columns together: an association is not a cause"
+  level: basis
+  module: data
+  idea: "A scatter plot shows whether two columns move together: up, down, not at all, or in a curve; moving together is not causing, because a third column, a confounder, can drive both and can even turn the direction around within every group (Simpson's paradox)."
+  covers: [causaliteit-basis#0, causaliteit-basis#1, eda-en-visualisatie#2]
+  requires: [data-groupby, data-merge, py-plotting]
+  introduces: [c:association, c:causality, c:confounder, c:simpsons-paradox]
+  uses: [v:scatter-plot, py:plot, py:groupby, py:dataframe, py:pandas-select-filter, py:boolean-mask, py:comparison, c:mean, c:median, c:csv, c:file-path, py:list, py:import, py:import-as, py:print, py:comment, py:variable, py:underscore-name, py:string-literal, q:predict, q:choice, q:exercise-with-check, q:run-cell]
+  mentions: [c:model]
+  ladder: [numpy]
+  data: [palmer-penguins]
+  needs: any
+
 # --- klassiek-ml -----------------------------------------------------------------
 - id: ml-knn
   tak: klassiek-ml

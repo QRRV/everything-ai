@@ -1,0 +1,28 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: ml-regression-metrics
+minutes: 15
+title:
+  en: "How far off? MAE, RMSE and R²"
+  nl: "Hoe ver ernaast? MAE, RMSE en R²"
+goal:
+  en: "work out the MAE, the RMSE and R² of a model that predicts numbers, and say which one fits what you want to know."
+  nl: "de MAE, de RMSE en R² uitrekenen van een model dat getallen voorspelt, en zeggen welke past bij wat je wilt weten."
+summary:
+  - en: "The MAE is the mean of the residuals without their sign, `np.mean(abs(residuals))`; the RMSE is the square root of the MSE. Both are in the unit of the label: how far off a model typically is."
+    nl: "De MAE is het gemiddelde van de residuen zonder hun teken, `np.mean(abs(residuals))`; de RMSE is de wortel uit de MSE. Allebei zijn ze in de eenheid van het label: hoe ver een model meestal ernaast zit."
+  - en: "The RMSE squares first, so large misses count more: one far-off example raises it much more than the MAE. Report the MAE when every unit off costs the same, the RMSE when large misses are much worse."
+    nl: "De RMSE kwadrateert eerst, dus grote missers tellen zwaarder: één voorbeeld ver ernaast verhoogt hem veel meer dan de MAE. Meld de MAE als elke eenheid ernaast evenveel kost, de RMSE als grote missers veel erger zijn."
+  - en: "R² is 1 minus the MSE divided by the variance of the labels: the share of that variance the model explains. 1 is perfect, 0 no better than always predicting their mean, below 0 worse; put the MAE or RMSE next to it."
+    nl: "R² is 1 min de MSE gedeeld door de variantie van de labels: het deel van die variantie dat het model verklaart. 1 is perfect, 0 niet beter dan altijd hun gemiddelde voorspellen, onder 0 slechter; zet de MAE of de RMSE ernaast."
+can_now:
+  - en: "work out the MAE and the RMSE of a model"
+    nl: "de MAE en de RMSE van een model uitrekenen"
+    by: mae-rmse
+  - en: "work out R² from the MSE and the variance of the labels"
+    nl: "R² uitrekenen uit de MSE en de variantie van de labels"
+    by: r2
+  - en: "choose the metric that fits the cost of a miss"
+    nl: "de metric kiezen die past bij wat een misser kost"
+    by: which-metric

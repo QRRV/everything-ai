@@ -340,7 +340,7 @@ def text_connections():
     mo.md(r"""
     ## Wrap-up
 
-    **How this connects.** In [Choosing hyperparameters: the validation set](/course/open/ml-validation-set?lang=en) one validation set chose the degree; cross-validation lets every example take a turn, and chose degree 2 as well. In [Ask the neighbors: k-nearest neighbors](/course/open/ml-knn?lang=en) k = 15 won on 68 penguins; over all 274, k = 9 to 41 are about as good, and k = 1 is worse in every shuffle. In the next lesson, *Regularization and weight decay*, you keep a flexible model in check another way: by making large weights cost something. How much they cost is one more hyperparameter, chosen the same way.
+    **How this connects.** In [Choosing hyperparameters: the validation set](/course/open/ml-validation-set?lang=en) one validation set chose the degree; cross-validation lets every example take a turn, and chose degree 2 as well. In [Ask the neighbors: k-nearest neighbors](/course/open/ml-knn?lang=en) k = 15 won on 68 penguins; over all 274, k = 9 to 41 are about as good, and k = 1 is worse in every shuffle. In the next lesson, *Will more data help? Bias, variance and learning curves*, the examples in the training set turn out to change the model itself, and you see when more examples would help.
     """)
     return
 

@@ -328,7 +328,7 @@ def text_connections():
     mo.md(r"""
     ## Wrap-up
 
-    **How this connects.** In [Dictionaries](/course/open/py-dicts?lang=en) you looked up a value by its key; a merge looks up each row of the left table in the right one, and finds one row, none or several. In [One number per group: groupby](/course/open/data-groupby?lang=en), `size` counted the rows per group; here it finds a key that is in a table twice. In [Asking questions of data](/course/open/data-explore?lang=en), `Sunny` and `sunny` were one sky written two ways; in a merge, that loses a row without a word. In the next lesson, *Where does this data come from?*, you ask who made a dataset and what you may do with it.
+    **How this connects.** In [Dictionaries](/course/open/py-dicts?lang=en) you looked up a value by its key; a merge looks up each row of the left table in the right one, and finds one row, none or several. In [One number per group: groupby](/course/open/data-groupby?lang=en), `size` counted the rows per group; here it finds a key that is in a table twice. In [Asking questions of data](/course/open/data-explore?lang=en), `Sunny` and `sunny` were one sky written two ways; in a merge, that loses a row without a word. In the next lesson, *Gaps in a table: dropna and fillna*, you decide what to do with the `NaN` a left join leaves: drop it, or fill something in.
     """)
     return
 

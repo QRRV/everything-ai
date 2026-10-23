@@ -1,0 +1,28 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: data-two-columns
+minutes: 15
+title:
+  en: "Two columns together: an association is not a cause"
+  nl: "Twee kolommen samen: een verband is geen oorzaak"
+goal:
+  en: "read in a scatter plot how two columns move together, and look per group for a third column that drives both, before you call one the cause of the other."
+  nl: "in een scatter plot lezen hoe twee kolommen samen bewegen, en per groep zoeken naar een derde kolom die ze allebei stuurt, voordat je de ene de oorzaak van de andere noemt."
+summary:
+  - en: "Two columns are associated when they move together: a scatter plot shows a cloud that goes up to the right (positive), down (negative), no way at all, or bends."
+    nl: "Tussen twee kolommen is een verband als ze samen bewegen: een scatter plot laat een wolk zien die omhooggaat naar rechts (positief), omlaag (negatief), geen kant op, of een bocht maakt."
+  - en: "An association is not a cause: a confounder, a third column such as the temperature or the species, can drive both."
+    nl: "Een verband is geen oorzaak: een confounder, een derde kolom zoals de temperatuur of de soort, kan ze allebei sturen."
+  - en: "A confounder can even turn a direction around: within each species of penguin a longer bill goes with a deeper one, over all penguins with a shallower one. That is Simpson's paradox."
+    nl: "Een confounder kan een richting zelfs omdraaien: binnen elke soort pinguïn hoort een langere snavel bij een hogere, over alle pinguïns samen bij een lagere. Dat is de paradox van Simpson."
+can_now:
+  - en: "draw two columns of one group as a scatter plot"
+    nl: "twee kolommen van één groep tekenen als scatter plot"
+    by: chinstraps
+  - en: "name a third column that makes two columns move together"
+    nl: "een derde kolom noemen die twee kolommen samen laat bewegen"
+    by: rescues
+  - en: "look per group at where two columns lie, to find a confounder"
+    nl: "per groep kijken waar twee kolommen liggen, om een confounder te vinden"
+    by: per-species

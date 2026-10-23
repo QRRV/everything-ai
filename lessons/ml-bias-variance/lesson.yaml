@@ -1,0 +1,28 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: ml-bias-variance
+minutes: 15
+title:
+  en: "Will more data help? Bias, variance and learning curves"
+  nl: "Helpt meer data? Bias, variantie en learning curves"
+goal:
+  en: "tell bias from variance by the fits of one model on many training sets, and work out a learning curve that shows whether more training examples would help."
+  nl: "bias en variantie uit elkaar houden aan de fits van één model op veel training sets, en een learning curve uitrekenen die laat zien of meer trainingsvoorbeelden zouden helpen."
+summary:
+  - en: "Bias: the fits of a model miss the pattern in the same way on every training set, as a straight line through temperatures that rise and fall. Variance: they differ a lot from one training set to the next, because the model also follows the noise."
+    nl: "Bias: de fits van een model missen het patroon op elke training set op dezelfde manier, zoals een rechte lijn door temperaturen die stijgen en dalen. Variantie: ze verschillen veel van de ene training set tot de andere, omdat het model ook de ruis volgt."
+  - en: "More capacity lowers the bias and raises the variance: the bias-variance trade-off. More training examples lower the variance, never the bias."
+    nl: "Meer capaciteit verlaagt de bias en verhoogt de variantie: de bias-variance trade-off. Meer trainingsvoorbeelden verlagen de variantie, nooit de bias."
+  - en: "A learning curve plots the MSE on the first n training examples and on the validation set against n. Close together and high: high bias, give the model more capacity. Far apart with the validation MSE still falling: high variance, more examples help."
+    nl: "Een learning curve zet de MSE op de eerste n trainingsvoorbeelden en op de validation set uit tegen n. Dicht bij elkaar en hoog: hoge bias, geef het model meer capaciteit. Ver uit elkaar, met een validation-MSE die nog daalt: hoge variantie, meer voorbeelden helpen."
+can_now:
+  - en: "tell from the fits on many training sets whether a model has high bias or high variance"
+    nl: "aan de fits op veel training sets zien of een model een hoge bias of een hoge variantie heeft"
+    by: bias-or-variance
+  - en: "work out a learning curve: the training and validation MSE for a growing number of training examples"
+    nl: "een learning curve uitrekenen: de training- en validation-MSE voor een groeiend aantal trainingsvoorbeelden"
+    by: learning-curve
+  - en: "read from a learning curve whether more training examples would help"
+    nl: "aan een learning curve aflezen of meer trainingsvoorbeelden zouden helpen"
+    by: more-data

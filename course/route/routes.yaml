@@ -66,6 +66,8 @@ routes:
   - data-explore
   - data-groupby
   - data-merge
+  - data-missing-values
+  - data-two-columns
   - data-provenance
   - ml-vocabulary
   - ml-model-is-a-function
@@ -109,12 +111,14 @@ routes:
   - ml-validation-set
   - ml-knn
   - ml-cross-validation
+  - ml-bias-variance
   - ml-regularization
   - ml-loss-vs-metric
   - ml-confusion-matrix
   - ml-f1-score
   - ml-roc-auc
   - ml-baselines
+  - ml-regression-metrics
   - ml-digits-linear
   - ml-workflow
   - ml-project-tabular

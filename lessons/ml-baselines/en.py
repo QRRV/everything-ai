@@ -313,7 +313,7 @@ def text_connections():
     mo.md(r"""
     ## Wrap-up
 
-    **How this connects.** In [The loss you train on and the metric you report](/course/open/ml-loss-vs-metric?lang=en) you chose the metric to report; a baseline gives that number a meaning. In [Will it work on new data? Training and test sets](/course/open/ml-train-test-split?lang=en) the line was measured on new houses; now you also know it beats the simplest rule. In the next lesson, *Project: a linear classifier for handwritten digits*, you train a model on real images, and the first thing to check is whether it beats always guessing the most common digit.
+    **How this connects.** In [The loss you train on and the metric you report](/course/open/ml-loss-vs-metric?lang=en) you chose the metric to report; a baseline gives that number a meaning. In [Will it work on new data? Training and test sets](/course/open/ml-train-test-split?lang=en) the line was measured on new houses; now you also know it beats the simplest rule. In the next lesson, *How far off? MAE, RMSE and R²*, you turn the MSE of the line into a number in euros, and its comparison with a mean into one number without a unit.
     """)
     return
 

@@ -328,7 +328,7 @@ def text_connections():
     mo.md(r"""
     ## Afronding
 
-    **Samenhang.** In [Dictionaries](/course/open/py-dicts?lang=nl) zocht je een waarde op via zijn key; een merge zoekt elke rij van de linkertabel op in de rechter, en vindt één rij, geen enkele of meerdere. In [Eén getal per groep: groupby](/course/open/data-groupby?lang=nl) telde `size` de rijen per groep; hier vindt hij een key die twee keer in een tabel staat. In [Vragen stellen aan data](/course/open/data-explore?lang=nl) waren `Sunny` en `sunny` één lucht op twee manieren geschreven; in een merge kost dat een rij, zonder iets te zeggen. In de volgende les, *Waar komt deze data vandaan?*, vraag je wie een dataset maakte en wat je ermee mag.
+    **Samenhang.** In [Dictionaries](/course/open/py-dicts?lang=nl) zocht je een waarde op via zijn key; een merge zoekt elke rij van de linkertabel op in de rechter, en vindt één rij, geen enkele of meerdere. In [Eén getal per groep: groupby](/course/open/data-groupby?lang=nl) telde `size` de rijen per groep; hier vindt hij een key die twee keer in een tabel staat. In [Vragen stellen aan data](/course/open/data-explore?lang=nl) waren `Sunny` en `sunny` één lucht op twee manieren geschreven; in een merge kost dat een rij, zonder iets te zeggen. In de volgende les, *Gaten in een tabel: dropna en fillna*, beslis je wat je doet met de `NaN` die een left join achterlaat: weglaten, of iets invullen.
     """)
     return
 

@@ -1,0 +1,28 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: data-missing-values
+minutes: 15
+title:
+  en: "Gaps in a table: dropna and fillna"
+  nl: "Gaten in een tabel: dropna en fillna"
+goal:
+  en: "deal with the missing values of a table: drop them or fill them in, mark them in a missing-indicator column, and say what your choice does to the numbers."
+  nl: "de ontbrekende waarden van een tabel aanpakken: ze weglaten of invullen, ze markeren in een missing-indicatorkolom, en zeggen wat je keuze met de getallen doet."
+summary:
+  - en: "`pd.read_csv(path, na_values=[-999])` reads a code as missing; `df.dropna()` leaves out every row with a gap, `df.dropna(axis=\"columns\")` every column with one."
+    nl: "`pd.read_csv(path, na_values=[-999])` leest een code als ontbrekend; `df.dropna()` laat elke rij met een gat weg, `df.dropna(axis=\"columns\")` elke kolom met een gat."
+  - en: "`fillna` fills in a value you know, such as 0 ice creams on a closed day, or a guess, the mean or the median of the column: imputation. Mark the gaps first, in a missing-indicator column such as `df[\"temp_missing\"] = df[\"temp\"].isna()`."
+    nl: "`fillna` vult een waarde in die je weet, zoals 0 ijsjes op een dag dat het kraampje dicht was, of een gok, het gemiddelde of de mediaan van de kolom: imputatie. Markeer de gaten eerst, in een missing-indicatorkolom zoals `df[\"temp_missing\"] = df[\"temp\"].isna()`."
+  - en: "Each choice changes the numbers: dropping leaves fewer rows, and filling in with the mean keeps the mean but shrinks the standard deviation."
+    nl: "Elke keuze verandert de getallen: weglaten laat minder rijen over, en invullen met het gemiddelde houdt het gemiddelde gelijk maar maakt de standaardafwijking kleiner."
+can_now:
+  - en: "fill in the gaps of a column with its median"
+    nl: "de gaten van een kolom invullen met zijn mediaan"
+    by: filled
+  - en: "mark the gaps in a missing-indicator column before you fill them in"
+    nl: "de gaten markeren in een missing-indicatorkolom voordat je ze invult"
+    by: fill-flag
+  - en: "fill in a value you know when you know why it is missing"
+    nl: "een waarde invullen die je weet, als je weet waarom hij ontbreekt"
+    by: discount
