@@ -15,6 +15,7 @@ from __future__ import annotations
 import ast
 import contextlib
 import copy
+import importlib
 import inspect
 import io
 import math
@@ -22,6 +23,7 @@ import re
 import signal
 import sys
 import textwrap
+import time
 import traceback
 import types
 import warnings
@@ -30,6 +32,7 @@ from typing import Any, Callable
 
 MISSING = object()            # what a check cell passes when the exercise's name does not exist
 TIME_LIMIT = 2.0              # seconds the learner's code gets per test case
+_AGAIN = 0.05                 # seconds after which the alarm of a time limit comes again (with_time_limit)
 
 Text = dict  # {"en": "...", "nl": "..."}; may contain {placeholders} filled in per check
 
@@ -73,28 +76,67 @@ class Timeout(Exception):
     pass
 
 
+def _warm_up_torch() -> None:
+    """What PyTorch does only once, the first time code makes an optimizer: it imports torch._dynamo then, about 1.5
+    seconds and 900 modules, because torch.optim marks add_param_group, zero_grad and its update functions to be left
+    alone by dynamo (torch._disable_dynamo), and that mark imports it the first time one of them runs. Done here,
+    before the clock starts."""
+    if "torch._dynamo" in sys.modules:
+        return
+    try:
+        importlib.import_module("torch._dynamo")
+    except Timeout:   # the limit of a with_time_limit around this one
+        raise
+    except Exception:   # code that needs it then stops with the same error, within its limit
+        pass
+
+
 def with_time_limit(fn, seconds: float = TIME_LIMIT):
     """Run fn, stopping it after `seconds`. Works where the lesson runs in the main thread
     (marimo edit, the tests); elsewhere it runs without a limit. Meanwhile PyTorch, if it is loaded, calculates with
     one thread: the small models of a check are as fast that way, and on a busy computer several threads that wait
-    for each other can make a check ten times slower than its time limit allows."""
+    for each other can make a check ten times slower than its time limit allows. What PyTorch does once, for the first
+    optimizer, happens before the clock starts (_warm_up_torch): it made the course's own training loops too slow on a
+    busy computer, and a Timeout halfway through it left modules half made, so every optimizer after it failed.
+
+    The alarm raises Timeout wherever Python is at that moment. When that is in a finalizer that the garbage collector
+    runs, such as a __del__ or a weakref callback, Python only prints "Exception ignored", and fn goes on. So the alarm
+    comes again every _AGAIN seconds until fn stops, and fn that ends after a Timeout it did not pass on is too slow
+    all the same. A limit within another one, such as run_code's within the limit of a demo, ends no later than the
+    outer one, and the outer one goes on when it ends."""
+    timed_out = done = False
+
     def _raise(*_):
+        nonlocal timed_out
+        if done:   # an alarm on its way as fn ended: the clean-up below runs to its end
+            return
+        timed_out = True
         raise Timeout()
     torch = sys.modules.get("torch")
+    if torch is not None:
+        _warm_up_torch()
     threads = torch.get_num_threads() if torch is not None else 1
     if threads > 1:
         torch.set_num_threads(1)
     try:
         try:
+            outer, outer_again = signal.getitimer(signal.ITIMER_REAL)   # what is left of a limit around this one
+            start = time.monotonic()
             old = signal.signal(signal.SIGALRM, _raise)
         except (ValueError, AttributeError):   # not the main thread, or no SIGALRM
             return fn()
-        signal.setitimer(signal.ITIMER_REAL, seconds)
+        signal.setitimer(signal.ITIMER_REAL, min(seconds, outer) if outer else seconds, _AGAIN)
         try:
-            return fn()
+            value = fn()
         finally:
+            done = True
             signal.setitimer(signal.ITIMER_REAL, 0)
             signal.signal(signal.SIGALRM, old)
+            if outer:   # the limit around this one goes on where it was; when it has passed, its alarm comes at once
+                signal.setitimer(signal.ITIMER_REAL, max(outer - (time.monotonic() - start), 0.001), outer_again)
+        if timed_out:   # its Timeout got lost on the way, or fn caught it itself: it ran past its limit
+            raise Timeout()
+        return value
     finally:
         if threads > 1:
             torch.set_num_threads(threads)
