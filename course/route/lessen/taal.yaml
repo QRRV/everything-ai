@@ -713,8 +713,8 @@ lessons:
   idea: "A reward model learns the preferences, and reinforcement learning pushes the model towards higher reward while a KL penalty keeps it close to where it started."
   covers: [rlhf#0]
   requires: [llm-preference-pairs, rl-what-is-rl, info-cross-entropy-kl]
-  introduces: [c:rlhf, c:reward-model, c:policy, c:reference-model, c:kl-penalty, c:reward-hacking, s:pi-policy, s:beta-kl]
-  uses: [c:reward, c:return, c:discount, c:agent, c:reinforcement-learning, c:kl-divergence, c:surprise, c:nat, c:expected-value, c:mean, c:probability-distribution, c:conditional-probability, s:p-given, c:preference-pair, c:bradley-terry, c:instruction-tuning, c:fine-tuning, c:freezing, c:language-model, c:probability, c:softmax, c:exponent, c:logarithm, c:loss, s:exp, s:log, py:math-module, py:list, py:for, py:append, py:return, py:def, py:print, py:comment, py:underscore-name, py:import, py:arithmetic, py:comprehension, py:tuple, q:predict, q:choice, q:exercise-with-check, q:run-cell]
+  introduces: [c:rlhf, c:reward-model, c:reference-model, c:kl-penalty, c:reward-hacking, s:beta-kl]
+  uses: [c:policy, s:pi-policy, c:reward, c:return, c:discount, c:agent, c:reinforcement-learning, c:kl-divergence, c:surprise, c:nat, c:expected-value, c:mean, c:probability-distribution, c:conditional-probability, s:p-given, c:preference-pair, c:bradley-terry, c:instruction-tuning, c:fine-tuning, c:freezing, c:language-model, c:probability, c:softmax, c:exponent, c:logarithm, c:loss, s:exp, s:log, py:math-module, py:list, py:for, py:append, py:return, py:def, py:print, py:comment, py:underscore-name, py:import, py:arithmetic, py:comprehension, py:tuple, q:predict, q:choice, q:exercise-with-check, q:run-cell]
   mentions: [c:dpo]
   needs: any
 

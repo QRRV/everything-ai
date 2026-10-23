@@ -216,6 +216,234 @@ def maze_grids(panels: list[dict], *, alt: str, cell: int = 30) -> mo.Html:
                    f'gap:0.5rem {gap}px;align-items:flex-start">{"".join(svgs)}</figure>')
 
 
+def _board(board: str, x: float, y: float, cell: float, new: int | None = None, index: bool = False) -> str:
+    """One tic-tac-toe board of 3 by 3 squares, its top left corner at (x, y): X and O in ink, the square just played
+    with a grey fill, and with `index` the number of each empty square in grey, as the code counts them."""
+    parts, size = [], max(11, round(cell * 0.78))
+    for i, sign in enumerate(board):
+        sx, sy = x + (i % 3) * cell, y + (i // 3) * cell
+        fill = "color-mix(in srgb, var(--ea-data) 30%, var(--ea-page))" if i == new else "var(--ea-page)"
+        parts.append(f'<rect x="{sx:.1f}" y="{sy:.1f}" width="{cell}" height="{cell}" style="fill:{fill};stroke:var(--ea-line);stroke-width:1"/>')
+        if sign in "XO":
+            parts.append(f'<text x="{sx + cell / 2:.1f}" y="{sy + cell / 2 + size * 0.36:.1f}" style="font-size:{size}px;'
+                         f'font-weight:600;fill:var(--ea-ink);text-anchor:middle">{sign}</text>')
+        elif index:
+            parts.append(f'<text x="{sx + cell / 2:.1f}" y="{sy + cell / 2 + 4:.1f}" style="font-size:11px;'
+                         f'fill:var(--ea-ink-3);text-anchor:middle">{i}</text>')
+    return "".join(parts)
+
+
+def boards(panels: list[dict], *, alt: str, cell: int = 30) -> mo.Html:
+    """Tic-tac-toe boards side by side; in a narrow window they go one below the other before their text gets too
+    small, as maze_grids does. Each panel is a dict:
+      board   9 signs, row by row: X, O, or '.' for an empty square
+      title   the words above the board (optional)
+      index   True: the number of each empty square in it, as the code counts them, 0 to 8 row by row
+      new     the square just played, with a grey fill (optional)
+    X and O are ink, the lines grey: no role colours. `alt` says what the figure shows, for a screen reader."""
+    svgs, widest = [], 0
+    for p in panels:
+        top = 22 if p.get("title") else 1
+        W, H = max(3 * cell + 2, 8 * len(p.get("title", ""))), top + 3 * cell + 2
+        widest = max(widest, W)
+        parts = []
+        if p.get("title"):
+            parts.append(f'<text x="1" y="15" style="font-size:13.5px;font-weight:600;fill:var(--ea-ink)">{html.escape(p["title"])}</text>')
+        parts.append(_board(p["board"], 1, top, cell, p.get("new"), p.get("index", False)))
+        svgs.append(f'<svg viewBox="0 0 {W} {H}" aria-hidden="true" style="flex:0 1 auto;width:{W}px;max-width:100%;'
+                    f'height:auto;{_FONT}">{"".join(parts)}</svg>')
+    gap = 20
+    return mo.Html(f'<figure class="ea-figure" role="img" aria-label="{html.escape(alt)}" style="margin:0.25rem 0 0.75rem;'
+                   f'max-width:min(100%,{widest * len(panels) + gap * (len(panels) - 1)}px);display:flex;flex-wrap:wrap;'
+                   f'gap:0.5rem {gap}px;align-items:flex-start">{"".join(svgs)}</figure>')
+
+
+def game_tree(nodes: list[dict], rows: list[str], *, alt: str, cell: int = 15, slot: int = 64) -> mo.Html:
+    """A game tree, top down. Each node is a dict:
+      parent  the index of its parent in `nodes`, or None for the top; a child comes after its parent, and the
+              children of one node are drawn left to right in the order they come
+      board   a position of tic-tac-toe, 9 signs row by row, drawn as a small board (optional)
+      text    the words in a box, for a node without a board (optional)
+      name    a small label above the node, such as the move that leads to it (optional)
+      new     the square just played, with a grey fill (optional)
+      value   the text under the node, such as "+1", in bold ink; "?" in grey, for a value not known yet
+      ring    "mark": a thick ink ring, the node whose value just came back; "wait": a dashed ring, a call that waits
+              for the values below it
+      chosen  True: the line from its parent is thick, the move the player there takes
+    Every node without children gets a slot of `slot` px of its own; a parent sits above the middle of its children.
+    `rows` are the words on the left of each level, such as "X to move". Lines are grey, signs and values ink: no role
+    colours. `alt` says what the figure shows, for a screen reader."""
+    kids = {i: [] for i in range(len(nodes))}
+    depth = {}
+    for i, n in enumerate(nodes):
+        if n.get("parent") is None:
+            depth[i] = 0
+        else:
+            kids[n["parent"]].append(i)
+            depth[i] = depth[n["parent"]] + 1
+    xs, order = {}, []
+
+    def place(i):
+        if not kids[i]:
+            xs[i] = len(order) * slot + slot / 2
+            order.append(i)
+        else:
+            for k in kids[i]:
+                place(k)
+            xs[i] = (xs[kids[i][0]] + xs[kids[i][-1]]) / 2
+    for i in range(len(nodes)):
+        if depth[i] == 0:
+            place(i)
+    left = max(0, round(max((len(r) for r in rows), default=0) * 6.4)) + 10   # room for the words of each level
+    shape = 3 * cell   # a board, or a box of the same width
+    box_h = 22
+    has_board = any(n.get("board") for n in nodes)
+    node_h = shape if has_board else box_h
+    named = any(n.get("name") for n in nodes)
+    below = 22 if any(n.get("value") for n in nodes) else 4   # room under a node for its value, clear of a ring
+    level_h = node_h + below + 28 + (14 if named else 0)
+    top = 4 + (14 if named else 0)
+    W = left + len(order) * slot
+    H = top + (max(depth.values()) + 1) * level_h - 26
+    parts = []
+
+    def y_of(i):
+        return top + depth[i] * level_h
+
+    for d, words in enumerate(rows):
+        parts.append(f'<text x="0" y="{top + d * level_h + node_h / 2 + 4:.1f}" style="font-size:11.5px;fill:var(--ea-ink-2)">'
+                     f'{html.escape(words)}</text>')
+    for i, n in enumerate(nodes):   # the lines first, so that the boards lie on top
+        if n.get("parent") is None:
+            continue
+        p = n["parent"]
+        x1, y1 = left + xs[p], y_of(p) + node_h + below
+        x2, y2 = left + xs[i], y_of(i) - (14 if n.get("name") else 3)
+        wide, ink = ("2.6", "var(--ea-ink)") if n.get("chosen") else ("1.2", "var(--ea-ink-3)")
+        parts.append(f'<line x1="{x1:.1f}" y1="{y1:.1f}" x2="{x2:.1f}" y2="{y2:.1f}" style="stroke:{ink};stroke-width:{wide};stroke-linecap:round"/>')
+    for i, n in enumerate(nodes):
+        cx, y = left + xs[i], y_of(i)
+        x = cx - shape / 2
+        if n.get("board"):
+            parts.append(_board(n["board"], x, y, cell, n.get("new")))
+        else:
+            parts.append(f'<rect x="{x:.1f}" y="{y:.1f}" width="{shape}" height="{box_h}" rx="4" style="fill:var(--ea-page);stroke:var(--ea-ink-3);stroke-width:1"/>')
+            if n.get("text"):
+                parts.append(f'<text x="{cx:.1f}" y="{y + box_h / 2 + 4.5:.1f}" style="font-size:13px;font-weight:600;'
+                             f'fill:var(--ea-ink);text-anchor:middle">{html.escape(n["text"])}</text>')
+        if n.get("name"):
+            parts.append(f'<text x="{cx:.1f}" y="{y - 4:.1f}" style="font-size:11px;fill:var(--ea-ink-2);text-anchor:middle">'
+                         f'{html.escape(n["name"])}</text>')
+        ring = n.get("ring")
+        if ring:
+            style = ("stroke:var(--ea-ink);stroke-width:2.6" if ring == "mark"
+                     else "stroke:var(--ea-ink-2);stroke-width:1.4;stroke-dasharray:3 2.5")
+            parts.append(f'<rect x="{x - 4:.1f}" y="{y - 4:.1f}" width="{shape + 8}" height="{node_h + 8}" rx="4" style="fill:none;{style}"/>')
+        value = n.get("value", "")
+        if value:
+            known = value != "?"
+            look = "font-weight:700;fill:var(--ea-ink)" if known else "fill:var(--ea-ink-3)"
+            parts.append(f'<text x="{cx:.1f}" y="{y + node_h + 19:.1f}" style="font-size:13px;{look};text-anchor:middle">'
+                         f'{html.escape(value)}</text>')
+    return mo.Html(f'<figure class="ea-figure" role="img" aria-label="{html.escape(alt)}" style="margin:0.25rem 0 0.75rem;'
+                   f'max-width:min(100%,{W}px)"><svg viewBox="0 0 {W} {H:.0f}" aria-hidden="true" style="width:100%;height:auto;'
+                   f'{_FONT};font-variant-numeric:tabular-nums">{"".join(parts)}</svg></figure>')
+
+
+# where a triangle of each action sits in its cell, as (x, y) from the middle, in parts of half a cell
+_TOWARDS = {"up": (0, -1), "down": (0, 1), "left": (-1, 0), "right": (1, 0)}
+
+
+def grid_world(panels: list[dict], *, alt: str, cell: int = 50, decimal: str = ".") -> mo.Html:
+    """Grid worlds of reinforcement learning, one panel per world, side by side; in a narrow window they go one below
+    the other before their text gets too small, as maze_grids does. Each panel is a dict:
+      rows      the world as strings: '.' a cell to stand on, 'S' the start, 'G' the goal and 'X' a pit; the goal and a
+                pit show their reward, +1 and −1, the start a small S in its corner
+      title     the words above the panel (optional)
+      values    {cell: number} written in the middle of the cell with two decimals, in the text colour of `role`
+                ("pred" for the values of value iteration, "param" for what Q-learning learned)
+      arrows    {cell: [actions]}: for each action ("up", "down", "left", "right") a small ink triangle at that side of
+                the cell, the action of the policy there
+      path      the cells of an episode, drawn as a line through each cell a little below its number; a step that
+                stayed in its cell, into the edge, shows as a dot
+      mark      one cell with a thick ink ring, such as where the agent is
+      index     True: the row numbers on the left and the column numbers on top, as the code counts them
+    Pits are data, a grey fill; the goal has a light grey one. `decimal` is the decimal mark: "," in Dutch. `alt` says
+    what the figure shows, for a screen reader."""
+    size = max(11, round(cell * 0.25))   # the text in a cell: a number of 4 signs leaves room for a triangle each side
+    halo = "paint-order:stroke;stroke:var(--ea-page);stroke-width:3px;stroke-linejoin:round"
+    svgs, widest = [], 0
+    for p in panels:
+        rows = p["rows"]
+        left = 18 if p.get("index") else 1
+        top = (24 if p.get("title") else 0) + (16 if p.get("index") else 1)
+        W, H = left + len(rows[0]) * cell + 1, top + len(rows) * cell + 2
+        widest = max(widest, W)
+        values, arrows = p.get("values", {}), p.get("arrows", {})
+        tone = f"var(--ea-{p['role']}-text)" if p.get("role") else "var(--ea-ink)"
+        parts = []
+        if p.get("title"):
+            parts.append(f'<text x="1" y="15" style="font-size:13.5px;font-weight:600;fill:var(--ea-ink)">{html.escape(p["title"])}</text>')
+        if p.get("index"):
+            for c in range(len(rows[0])):
+                parts.append(f'<text x="{left + c * cell + cell / 2:.1f}" y="{top - 4}" style="font-size:11px;fill:var(--ea-ink-3);text-anchor:middle">{c}</text>')
+            for r in range(len(rows)):
+                parts.append(f'<text x="{left - 5}" y="{top + r * cell + cell / 2 + 4:.1f}" style="font-size:11px;fill:var(--ea-ink-3);text-anchor:end">{r}</text>')
+        for r, row in enumerate(rows):
+            for c, sign in enumerate(row):
+                x, y = left + c * cell, top + r * cell
+                fill = {"X": "var(--ea-data)", "G": "var(--ea-data-wash)"}.get(sign, "var(--ea-page)")
+                parts.append(f'<rect x="{x}" y="{y}" width="{cell}" height="{cell}" style="fill:{fill};stroke:var(--ea-line);stroke-width:1"/>')
+        path = p.get("path") or []
+        low = cell * 0.28   # the way runs a little below the middle of each cell, so that it does not cross the number
+        if len(path) > 1:
+            points = " ".join(f"{left + c * cell + cell / 2:.1f},{top + r * cell + cell / 2 + low:.1f}" for r, c in path)
+            parts.append(f'<polyline points="{points}" style="fill:none;stroke:var(--ea-ink);stroke-width:{max(2.0, cell / 18):.1f};'
+                         f'stroke-linecap:round;stroke-linejoin:round;opacity:0.45"/>')
+        for a, b in zip(path, path[1:]):
+            if a == b:   # into the edge: the agent stayed where it was
+                parts.append(f'<circle cx="{left + a[1] * cell + cell / 2:.1f}" cy="{top + a[0] * cell + cell / 2 + low:.1f}" r="{max(3.0, cell / 12):.1f}" '
+                             f'style="fill:var(--ea-ink);opacity:0.45"/>')
+        if p.get("mark") is not None:
+            r, c = p["mark"]
+            parts.append(f'<rect x="{left + c * cell + 1.5}" y="{top + r * cell + 1.5}" width="{cell - 3}" height="{cell - 3}" '
+                         f'style="fill:none;stroke:var(--ea-ink);stroke-width:2.6"/>')
+        for r, row in enumerate(rows):
+            for c, sign in enumerate(row):
+                x, y = left + c * cell, top + r * cell
+                mx, my = x + cell / 2, y + cell / 2
+                if sign in "GX":
+                    words = "+1" if sign == "G" else "−1"
+                    ink = "var(--ea-ink)" if sign == "G" else "var(--ea-page)"
+                    parts.append(f'<text x="{mx:.1f}" y="{my + size * 0.36:.1f}" style="font-size:{size + 1}px;font-weight:700;'
+                                 f'fill:{ink};text-anchor:middle">{words}</text>')
+                    continue
+                if sign == "S":
+                    parts.append(f'<text x="{x + 4}" y="{y + 12}" style="font-size:11px;font-weight:700;fill:var(--ea-ink-2)">S</text>')
+                for action in arrows.get((r, c), ()):
+                    dx, dy = _TOWARDS[action]
+                    tip = (mx + dx * (cell / 2 - 2), my + dy * (cell / 2 - 2))
+                    base = (mx + dx * (cell / 2 - 8), my + dy * (cell / 2 - 8))
+                    side = (dy * 4.5, dx * 4.5)
+                    corners = [tip, (base[0] + side[0], base[1] + side[1]), (base[0] - side[0], base[1] - side[1])]
+                    parts.append('<polygon points="' + " ".join(f"{px:.1f},{py:.1f}" for px, py in corners)
+                                 + '" style="fill:var(--ea-ink-2)"/>')
+                if (r, c) in values:
+                    text = f"{values[(r, c)]:.2f}"
+                    if float(text) == 0:
+                        text = text.lstrip("-")
+                    text = text.replace("-", "−").replace(".", decimal)
+                    parts.append(f'<text x="{mx:.1f}" y="{my + size * 0.36:.1f}" style="font-size:{size}px;font-weight:600;'
+                                 f'fill:{tone};text-anchor:middle;{halo}">{text}</text>')
+        # its smallest text is 11 px: the panel never shrinks, and in a narrow window it goes below the one before
+        svgs.append(f'<svg viewBox="0 0 {W} {H}" aria-hidden="true" style="flex:1 1 0;min-width:min(100%,{W}px);'
+                    f'max-width:{W}px;height:auto;{_FONT};font-variant-numeric:tabular-nums">{"".join(parts)}</svg>')
+    gap = 16
+    return mo.Html(f'<figure class="ea-figure" role="img" aria-label="{html.escape(alt)}" style="margin:0.25rem 0 0.75rem;'
+                   f'max-width:min(100%,{widest * len(panels) + gap * (len(panels) - 1)}px);display:flex;flex-wrap:wrap;'
+                   f'gap:0.5rem {gap}px;align-items:flex-start">{"".join(svgs)}</figure>')
+
+
 def next_word_bars(prefix: str, options: list[tuple[str, float]], *, picked: int | None = 0, picked_label: str = "",
                    title: str = "") -> mo.Html:
     """What a language model sees after some text: a bar per possible next word, as long as how likely

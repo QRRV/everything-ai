@@ -1,0 +1,33 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: search-minimax
+minutes: 15
+title:
+  en: "Winning a game: minimax"
+  nl: "Een spel winnen: minimax"
+goal:
+  en: "write minimax for tic-tac-toe: a function that calls itself and gives every position the value the player to move can force."
+  nl: "minimax schrijven voor boter-kaas-en-eieren: een functie die zichzelf aanroept en elke positie de waarde geeft die de speler aan zet kan afdwingen."
+summary:
+  - en: "A game where two players take turns is a search problem with an opponent. The game tree holds every position you can reach from one position, move by move; each level is one player's turn."
+    nl: "Een spel waarin twee spelers om de beurt een zet doen, is een search problem met een tegenstander. De game tree bevat elke positie die je vanuit één positie kunt bereiken, zet voor zet; elk niveau is de beurt van één speler."
+  - en: "A game that is over is worth +1 when X won, −1 when O won and 0 for a draw. Minimax gives every other position the largest value of its moves when X is to move, and the smallest when O is: the value the player to move can force when the other plays their best too."
+    nl: "Een afgelopen spel is +1 waard als X won, −1 als O won en 0 bij gelijkspel. Minimax geeft elke andere positie de grootste waarde van haar zetten als X aan zet is, en de kleinste als O aan zet is: de waarde die de speler aan zet kan afdwingen als de ander ook zijn best speelt."
+  - en: "Minimax calls itself on the position after each move, down to the games that are over. On the empty board that is 549,946 calls, and the value is 0: with best play, tic-tac-toe is a draw. Chess has far too many positions for that, so a chess program looks only a few moves ahead and estimates."
+    nl: "Minimax roept zichzelf aan op de positie na elke zet, tot aan de afgelopen spellen. Op het lege bord zijn dat 549.946 aanroepen, en de waarde is 0: met de beste zetten eindigt boter-kaas-en-eieren in gelijkspel. Schaken heeft daarvoor veel te veel posities, dus een schaakprogramma kijkt maar een paar zetten vooruit en schat."
+can_now:
+  - en: "write minimax, a function that calls itself to give every position its value"
+    nl: "minimax schrijven, een functie die zichzelf aanroept om elke positie haar waarde te geven"
+    by: minimax
+  - en: "work out the value of a small game tree by hand"
+    nl: "met de hand de waarde van een kleine game tree uitrekenen"
+    by: small-tree
+  - en: "say why a chess program cannot search to the end of the game"
+    nl: "zeggen waarom een schaakprogramma niet tot het eind van de partij kan zoeken"
+    by: chess
+further_reading:
+  - en: "Stuart Russell and Peter Norvig (2020), *Artificial Intelligence: A Modern Approach*, 4th edition, Pearson, chapter 5, *Adversarial Search and Games*"
+    nl: "Stuart Russell en Peter Norvig (2020), *Artificial Intelligence: A Modern Approach*, 4e editie, Pearson, hoofdstuk 5, *Adversarial Search and Games*"
+  - en: "Claude E. Shannon (1950), *Programming a Computer for Playing Chess*, Philosophical Magazine 41 (314), 256–275: an early plan for a chess program that looks a few moves ahead and estimates"
+    nl: "Claude E. Shannon (1950), *Programming a Computer for Playing Chess*, Philosophical Magazine 41 (314), 256–275: een vroeg plan voor een schaakprogramma dat een paar zetten vooruitkijkt en schat"

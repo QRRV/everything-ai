@@ -111,7 +111,7 @@ def text_idea():
 
     **Het reward model** geeft elk antwoord $y$ op een instructie $x$ een score $r(x, y)$. Het wordt getraind op preference pairs met de loss van het Bradley-Terry model: het gekozen antwoord moet hoger scoren dan het afgewezen.
 
-    **De policy** is het language model dat leert, $\pi$: hier niet het getal 3,14…, maar de gewone letter voor een policy in reinforcement learning. Het **reference model** $\pi_{\text{ref}}$ is het model waarmee het begint, het SFT-model, bevroren. RLHF maakt de verwachte reward min $\beta$ keer de KL-divergentie $D_{\mathrm{KL}}(\pi \,\|\, \pi_{\text{ref}})$ zo groot mogelijk. De log is hier de natuurlijke, zoals in de log-kansen van een language model, dus de KL-divergentie is in nats, niet in bits. Voor één antwoord is de reward min die **KL penalty**:
+    De policy $\pi$ uit [Leren van rewards](/course/open/rl-what-is-rl?lang=nl) is hier het language model dat leert: bij een instructie $x$ geeft hij elk antwoord $y$ een kans $\pi(y \mid x)$, en zijn log-kans heet in code `logp`. Het **reference model** $\pi_{\text{ref}}$ is het model waarmee het begint, het SFT-model, bevroren. RLHF maakt de verwachte reward min $\beta$ keer de KL-divergentie $D_{\mathrm{KL}}(\pi \,\|\, \pi_{\text{ref}})$ zo groot mogelijk. De log is hier de natuurlijke, zoals in de log-kansen van een language model, dus de KL-divergentie is in nats, niet in bits. Voor één antwoord is de reward min die **KL penalty**:
     """)
     return
 
@@ -149,7 +149,6 @@ def text_idea_after():
     |---|---|---|
     | **RLHF** | reinforcement learning from human feedback: een reward model van voorkeuren, en daarna reinforcement learning met zijn scores | |
     | **reward model** | een model dat elk antwoord een score geeft, getraind op preference pairs | `reward`, `rewards` |
-    | **policy**, $\pi$ | het model dat leert: bij een instructie een kans voor elk antwoord | `logp` |
     | **reference model**, $\pi_{\text{ref}}$ | het bevroren model waarmee de policy begint | `ref`, `logp_ref` |
     | **KL penalty** | $\beta$ keer de log-kans van de policy min die van het reference model, afgetrokken van de reward | `beta * (logp - logp_ref)` |
     | $\beta$ | beta: hoe zwaar de straf weegt | `beta` |

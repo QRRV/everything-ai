@@ -395,7 +395,7 @@ def text_connections():
     mo.md(r"""
     ## Wrap-up
 
-    **How this connects.** With $h$ = 0, $f$ is just $g$, and A\* takes the paths in order of their number of steps, as [breadth-first search](/course/open/search-bfs?lang=en) does. Search comes back in a branch still to come, *Search, logic, planning and optimization*, whose project is your own search and planner. In the next lesson, *A language model predicts the next token*, a model learns from text alone which token comes next.
+    **How this connects.** With $h$ = 0, $f$ is just $g$, and A\* takes the paths in order of their number of steps, as [breadth-first search](/course/open/search-bfs?lang=en) does. Search comes back in a branch still to come, *Search, logic, planning and optimization*, whose project is your own search and planner. In the next lesson, *Winning a game: minimax*, an opponent moves too, and a path is no longer enough: you need a move for every answer.
     """)
     return
 

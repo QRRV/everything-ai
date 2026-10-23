@@ -1,0 +1,35 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: rl-value-iteration
+minutes: 15
+title:
+  en: "When steps can slip: value iteration"
+  nl: "Als stappen kunnen uitglijden: value iteration"
+goal:
+  en: "write a task whose steps can slip down as a Markov decision process, and find the best action in every state with value iteration."
+  nl: "een taak waarin stappen kunnen uitglijden opschrijven als Markov decision process, en met value iteration in elke state de beste action vinden."
+summary:
+  - en: "A Markov decision process has states, actions, a discount factor and a transition function: for every state and action, what can happen, with its probability and its reward. What happens next depends only on the state and the action: the Markov in the name."
+    nl: "Een Markov decision process heeft states, actions, een discount factor en een transition function: voor elke state en action wat er kan gebeuren, met zijn kans en zijn reward. Wat er daarna gebeurt, hangt alleen af van de state en de action: de Markov in de naam."
+  - en: "The Bellman equation: Q(s, a) adds up p · (r + γ V(s′)) over the outcomes of a, and V(s) is the largest Q(s, a). Value iteration starts at V = 0 and uses it as an update for every state, round after round, until the values hardly change."
+    nl: "De Bellman equation: Q(s, a) telt p · (r + γ V(s′)) op over de uitkomsten van a, en V(s) is de grootste Q(s, a). Value iteration begint bij V = 0 en gebruikt hem als update voor elke state, ronde na ronde, tot de waarden bijna niet meer veranderen."
+  - en: "In every state, the best policy takes the action with the largest Q. Where a step can slip into a pit, it can choose a longer, safer way than the shortest path."
+    nl: "In elke state neemt de beste policy de action met de grootste Q. Waar een stap in een kuil kan glijden, kan hij een langere, veiligere weg kiezen dan het kortste pad."
+can_now:
+  - en: "work out the values of an MDP and its policy with value iteration"
+    nl: "met value iteration de waarden van een MDP en zijn policy uitrekenen"
+    by: value-iteration
+  - en: "say why the best action compares Q-values, not the values of the neighbors"
+    nl: "zeggen waarom de beste action Q-values vergelijkt, en niet de waarden van de buren"
+    by: neighbor
+  - en: "tell whether a state says enough for an MDP"
+    nl: "zeggen of een state genoeg zegt voor een MDP"
+    by: markov
+further_reading:
+  - en: "Richard S. Sutton and Andrew G. Barto (2018), *Reinforcement Learning: An Introduction*, 2nd edition, MIT Press, chapter 3 and section 4.4; free at incompleteideas.net"
+    nl: "Richard S. Sutton en Andrew G. Barto (2018), *Reinforcement Learning: An Introduction*, 2e editie, MIT Press, hoofdstuk 3 en paragraaf 4.4; gratis op incompleteideas.net"
+  - en: "Stuart Russell and Peter Norvig (2020), *Artificial Intelligence: A Modern Approach*, 4th edition, Pearson, sections 17.1 and 17.2"
+    nl: "Stuart Russell en Peter Norvig (2020), *Artificial Intelligence: A Modern Approach*, 4e editie, Pearson, paragraaf 17.1 en 17.2"
+  - en: "Richard Bellman (1957), *Dynamic Programming*, Princeton University Press"
+    nl: "Richard Bellman (1957), *Dynamic Programming*, Princeton University Press"

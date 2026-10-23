@@ -113,6 +113,8 @@ def text_idea():
         1. de agent ziet de situatie waarin hij zit en kiest een **action**;
         2. de environment verandert, en geeft de nieuwe situatie terug en een **reward**: een getal dat zegt hoe goed die stap was.
 
+        Hoe de agent kiest, is zijn **policy** $\pi$, hier niet het getal 3,14… maar de gebruikelijke letter voor een policy: voor elke situatie een action, of een kans voor elke action.
+
         De rewards zijn de enige terugkoppeling: niemand zegt welke action goed was geweest. De *reward-hypothese* zegt dat elk doel zo te schrijven is: zoveel mogelijk reward halen, bij elkaar opgeteld.
 
         De agent probeert niet de grootste volgende reward te halen, maar de grootste **return**: de som van alle rewards vanaf nu. Latere rewards tellen minder. Voor een spel van $T$ stappen, met reward $r_1$ na de eerste stap, $r_2$ na de tweede, enzovoort:
@@ -128,6 +130,7 @@ def text_idea():
         | **agent** | | wat in reinforcement learning leert en kiest: kiest actions en krijgt rewards | |
         | **environment** | | alles buiten de agent: krijgt de action, en geeft de nieuwe situatie en een reward terug | |
         | **action** | | één keuze van de agent bij een stap, zoals een zet in een spel | |
+        | **policy**, $\pi$ | pi | hoe de agent kiest: voor elke situatie een action, of een kans voor elke action | |
         | **reward** | | een getal van de environment na elke stap: hoe goed die stap was | `r` |
         | **return** | | de som van de rewards vanaf nu, latere verdisconteerd: wat de agent zo groot mogelijk probeert te maken | `G` |
         | **discount factor** | | een getal van 0 tot en met 1: een reward één stap later telt $\gamma$ keer zo zwaar | `gamma` |

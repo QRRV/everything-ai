@@ -111,7 +111,7 @@ def text_idea():
 
     **The reward model** gives every answer $y$ to an instruction $x$ a score $r(x, y)$. It is trained on preference pairs with the loss of the Bradley-Terry model: the chosen answer should score higher than the rejected one.
 
-    **The policy** is the language model that learns, $\pi$: here not the number 3.14…, but the usual letter for a policy in reinforcement learning. The **reference model** $\pi_{\text{ref}}$ is the model it starts from, the SFT model, kept frozen. RLHF makes the expected reward minus $\beta$ times the KL divergence $D_{\mathrm{KL}}(\pi \,\|\, \pi_{\text{ref}})$ as large as it can. The log is the natural one here, as in the log-probabilities of a language model, so the KL divergence is in nats, not bits. For one answer, the reward minus that **KL penalty** is:
+    The policy $\pi$ of [Learning from rewards](/course/open/rl-what-is-rl?lang=en) is here the language model that learns: for an instruction $x$, it gives every answer $y$ a probability $\pi(y \mid x)$, and its log-probability is `logp` in code. The **reference model** $\pi_{\text{ref}}$ is the model it starts from, the SFT model, kept frozen. RLHF makes the expected reward minus $\beta$ times the KL divergence $D_{\mathrm{KL}}(\pi \,\|\, \pi_{\text{ref}})$ as large as it can. The log is the natural one here, as in the log-probabilities of a language model, so the KL divergence is in nats, not bits. For one answer, the reward minus that **KL penalty** is:
     """)
     return
 
@@ -149,7 +149,6 @@ def text_idea_after():
     |---|---|---|
     | **RLHF** | reinforcement learning from human feedback: a reward model of preferences, then reinforcement learning against it | |
     | **reward model** | a model that gives every answer a score, trained on preference pairs | `reward`, `rewards` |
-    | **policy**, $\pi$ | the model that learns: for an instruction, a probability for every answer | `logp` |
     | **reference model**, $\pi_{\text{ref}}$ | the frozen model the policy starts from | `ref`, `logp_ref` |
     | **KL penalty** | $\beta$ times the log-probability of the policy minus that of the reference model, taken off the reward | `beta * (logp - logp_ref)` |
     | $\beta$ | beta: how much the penalty weighs | `beta` |

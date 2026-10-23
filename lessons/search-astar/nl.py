@@ -395,7 +395,7 @@ def text_connections():
     mo.md(r"""
     ## Afronding
 
-    **Samenhang.** Met $h$ = 0 is $f$ gewoon $g$, en pakt A\* de paden op volgorde van hun aantal stappen, zoals [breadth-first search](/course/open/search-bfs?lang=nl). Zoeken komt terug in een tak die nog komt, *Zoeken, logica, planning en optimalisatie*, met als project je eigen zoeker en planner. In de volgende les, *Een language model voorspelt het volgende token*, leert een model van alleen tekst welk token er volgt.
+    **Samenhang.** Met $h$ = 0 is $f$ gewoon $g$, en pakt A\* de paden op volgorde van hun aantal stappen, zoals [breadth-first search](/course/open/search-bfs?lang=nl). Zoeken komt terug in een tak die nog komt, *Zoeken, logica, planning en optimalisatie*, met als project je eigen zoeker en planner. In de volgende les, *Een spel winnen: minimax*, zet een tegenstander ook, en is een pad niet meer genoeg: je hebt een zet nodig voor elk antwoord.
     """)
     return
 

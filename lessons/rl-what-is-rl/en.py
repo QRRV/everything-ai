@@ -113,6 +113,8 @@ def text_idea():
         1. the agent sees the situation it is in and chooses an **action**;
         2. the environment changes, and gives back the new situation and a **reward**: a number that says how good that step was.
 
+        How the agent chooses is its **policy** $\pi$, here not the number 3.14… but the usual letter for a policy: for every situation an action, or a probability for each action.
+
         The rewards are the only feedback: nobody says which action would have been right. The *reward hypothesis* says that every goal can be put this way: get as much reward as possible, in total.
 
         The agent does not try to get the largest next reward, but the largest **return**: the sum of all the rewards from now on. Later rewards count less. For a game of $T$ steps, with reward $r_1$ after the first step, $r_2$ after the second, and so on:
@@ -128,6 +130,7 @@ def text_idea():
         | **agent** | | the learner in reinforcement learning: it chooses actions and gets rewards | |
         | **environment** | | everything outside the agent: it takes the action, and gives back the new situation and a reward | |
         | **action** | | one choice of the agent at a step, such as a move in a game | |
+        | **policy**, $\pi$ | pi | how the agent chooses: for every situation an action, or a probability for each action | |
         | **reward** | | a number from the environment after every step: how good that step was | `r` |
         | **return** | | the sum of the rewards from now on, later ones discounted: what the agent tries to make as large as possible | `G` |
         | **discount factor** | | a number from 0 to 1: a reward one step later counts $\gamma$ times as much | `gamma` |

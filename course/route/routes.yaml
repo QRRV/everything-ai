@@ -152,6 +152,9 @@ routes:
   - rl-what-is-rl
   - search-bfs
   - search-astar
+  - search-minimax
+  - rl-value-iteration
+  - rl-q-learning
   - lm-what-is-a-language-model
   - lm-tokens-outside
   - lm-bigram-counts

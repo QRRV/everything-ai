@@ -1,0 +1,33 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: rl-q-learning
+minutes: 15
+title:
+  en: "Learning from your own steps: Q-learning"
+  nl: "Leren van je eigen stappen: Q-learning"
+goal:
+  en: "let an agent that does not know the transition function learn Q(s, a) from its own steps with Q-learning, exploring with ε-greedy."
+  nl: "een agent die de transition function niet kent, met Q-learning Q(s, a) laten leren van zijn eigen stappen, en met ε-greedy laten exploreren."
+summary:
+  - en: "Q-learning keeps a Q-table and, after every step, moves Q(s, a) a step η towards the target r + γ max Q(s′, a′); over many steps it averages the outcomes, as the Bellman equation does with their probabilities, without knowing them."
+    nl: "Q-learning houdt een Q-table bij en schuift na elke stap Q(s, a) een stap η op naar het target r + γ max Q(s′, a′); over veel stappen middelt het zo de uitkomsten, zoals de Bellman equation doet met hun kansen, zonder ze te kennen."
+  - en: "ε-greedy takes a random action with probability ε, exploration, and otherwise the one with the largest Q, exploitation. Without exploration, the agent in GRID does not find the goal."
+    nl: "ε-greedy neemt met kans ε een willekeurige action, exploration, en anders die met de grootste Q, exploitation. Zonder exploration vindt de agent in GRID het doel niet."
+  - en: "An episode runs from the start until the task ends or a limit of steps; over the episodes the return grows, and the agent learns nearly the policy of value iteration."
+    nl: "Een episode loopt van de start tot de taak voorbij is of tot een maximum aantal stappen; over de episodes groeit de return, en leert de agent bijna de policy van value iteration."
+can_now:
+  - en: "update a Q-value after one step with Q-learning"
+    nl: "na één stap een Q-value bijwerken met Q-learning"
+    by: update
+  - en: "choose an action ε-greedy"
+    nl: "een action ε-greedy kiezen"
+    by: choose
+  - en: "say why an agent has to explore"
+    nl: "zeggen waarom een agent moet exploreren"
+    by: no-exploring
+further_reading:
+  - en: "Richard S. Sutton and Andrew G. Barto (2018), *Reinforcement Learning: An Introduction*, 2nd edition, MIT Press, sections 2.2 and 6.5; free at incompleteideas.net"
+    nl: "Richard S. Sutton en Andrew G. Barto (2018), *Reinforcement Learning: An Introduction*, 2e editie, MIT Press, paragraaf 2.2 en 6.5; gratis op incompleteideas.net"
+  - en: "Christopher J. C. H. Watkins and Peter Dayan (1992), *Q-learning*, Machine Learning 8, 279–292"
+    nl: "Christopher J. C. H. Watkins en Peter Dayan (1992), *Q-learning*, Machine Learning 8, 279–292"

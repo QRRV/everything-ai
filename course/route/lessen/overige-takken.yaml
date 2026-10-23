@@ -60,10 +60,40 @@ lessons:
   idea: "In reinforcement learning an agent acts in an environment and learns from rewards; it maximizes the discounted sum of future rewards, the return."
   covers: [wat-rl-is#0, wat-rl-is#1, agentraamwerk#0]
   requires: [ml-kinds-of-learning]
-  introduces: [c:agent, c:environment, c:action, c:reward, c:return, c:discount]
+  introduces: [c:agent, c:environment, c:action, c:reward, c:return, c:discount, c:policy, s:pi-policy]
   uses: [c:reinforcement-learning, c:supervised-learning, c:unsupervised-learning, c:label, c:example, py:for, py:range, py:def, py:return, py:list, py:print, py:comment, py:variable, py:underscore-name, py:arithmetic, py:float, q:predict, q:choice, q:exercise-with-check, q:run-cell]
   mentions: [c:model, c:language-model, c:token]
   warns: [agent, return]
+  needs: any
+
+- id: rl-value-iteration
+  tak: rl
+  title: "When steps can slip: value iteration"
+  level: basis
+  module: agents
+  idea: "When an action can slip, write the task down as a Markov decision process; the Bellman equation gives every state the best return you can expect from it, value iteration finds those values round by round from zero, and the policy takes in every state the action with the largest Q."
+  covers: [mdp-s-bellman-en-pomdp-s#0, mdp-s-bellman-en-pomdp-s#1, dynamic-programming#2]
+  requires: [search-astar, prob-expectation]
+  introduces: [c:markov-decision-process, c:transition-function, c:value-function, c:action-value-function, c:bellman-equation, c:value-iteration, s:v-q-functions, py:round]
+  uses: [c:policy, s:pi-policy, c:agent, c:environment, c:action, c:reward, c:return, c:discount, c:state, c:a-star-search, c:search-frontier, s:h-heuristic, c:expected-value, c:probability, s:sigma-sum, py:dict, py:for, py:range, py:list, py:append, py:tuple, py:indexing, py:def, py:return, py:import, py:import-as, py:np-argmax, py:min-max, py:arithmetic, py:float, py:int, py:print, py:comment, py:underscore-name, py:variable, py:string-literal, q:predict, q:choice, q:exercise-with-check, q:run-cell]
+  warns: [value]
+  data: []
+  ladder: [python, numpy]
+  needs: any
+
+- id: rl-q-learning
+  tak: rl
+  title: "Learning from your own steps: Q-learning"
+  level: basis
+  module: agents
+  idea: "Without the transition function, an agent learns Q(s, a) from its own steps: Q-learning moves each Q a step towards the reward plus the discounted best Q where it landed, and ε-greedy makes it explore with a random action now and then, so that the return per episode grows."
+  covers: [temporal-difference-learning#1, exploratie#0]
+  requires: [rl-value-iteration, np-random]
+  introduces: [c:q-learning, c:q-table, c:exploitation, c:exploration, c:epsilon-greedy, c:episode, s:epsilon-explore]
+  uses: [c:agent, c:environment, c:action, c:reward, c:return, c:discount, c:state, c:markov-decision-process, c:transition-function, c:action-value-function, c:bellman-equation, c:value-iteration, c:policy, s:v-q-functions, c:expected-value, c:probability, c:mean, c:learning-rate, s:eta, c:gradient-descent, c:random-number-generator, py:np-random-generator, c:seed, py:dict, py:for, py:range, py:list, py:append, py:tuple, py:indexing, py:if, py:comparison, py:bool, py:break, py:def, py:return, py:import, py:import-as, py:np-argmax, py:min-max, py:round, py:arithmetic, py:float, py:int, py:print, py:comment, py:underscore-name, py:variable, py:string-literal, q:predict, q:choice, q:exercise-with-check, q:run-cell]
+  mentions: [c:language-model, c:token]
+  data: []
+  ladder: [python, numpy]
   needs: any
 
 # --- klassieke-ai -----------------------------------------------------------------
@@ -92,6 +122,21 @@ lessons:
   requires: [search-bfs]
   introduces: [c:heuristic-function, c:informed-search, c:uninformed-search, c:priority-queue, c:a-star-search, py:heapq, s:g-path-cost, s:h-heuristic, s:f-astar]
   uses: [c:search-problem, c:state, c:goal-test, c:path-cost, c:search-frontier, c:expand, c:queue, c:breadth-first-search, py:deque, c:action, py:abs, py:def, py:return, py:none, py:for, py:if, py:while, py:list, py:append, py:tuple, py:set, py:set-add, py:indexing, py:len, py:comparison, py:import, py:string-literal, py:str, py:arithmetic, py:print, py:comment, py:underscore-name, py:variable, q:predict, q:choice, q:exercise-with-check, q:run-cell]
+  data: []
+  ladder: [python]
+  needs: any
+
+- id: search-minimax
+  tak: klassieke-ai
+  title: "Winning a game: minimax"
+  level: basis
+  module: agents
+  idea: "In a game where two players take turns, minimax gives every position the value the player to move can force: a finished game is worth +1, 0 or −1, X takes the largest value of its moves and O the smallest, and the function calls itself down the game tree to the finished games."
+  covers: [spellen-als-zoekprobleem#1, spellen-als-zoekprobleem#2]
+  requires: [search-astar, py-recursion]
+  introduces: [c:game-tree, c:minimax]
+  uses: [c:state, c:action, c:search-problem, c:breadth-first-search, c:a-star-search, py:recursion, py:def, py:return, py:none, py:for, py:range, py:if, py:list, py:append, py:tuple, py:indexing, py:slicing, py:len, py:comparison, py:bool, py:str, py:string-literal, py:min-max, py:arithmetic, py:print, py:comment, py:underscore-name, py:variable, q:predict, q:choice, q:exercise-with-check, q:run-cell]
+  warns: [value]
   data: []
   ladder: [python]
   needs: any
