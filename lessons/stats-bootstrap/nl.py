@@ -109,7 +109,7 @@ def text_idea():
 
         Een getal dat je uit data uitrekent, zoals een gemiddelde of een accuracy, komt uit je **steekproef**: de voorbeelden die je toevallig hebt. Een andere steekproef van dezelfde soort geeft een net iets ander getal. Hoeveel het van steekproef tot steekproef varieert, is de **standaardfout**: de standaardafwijking die het getal over veel steekproeven zou hebben.
 
-        Je hebt maar één steekproef. De **bootstrap** maakt er nieuwe van: trek $n$ waarden uit je $n$ waarden **met teruglegging**, zodat een waarde twee keer of helemaal niet getrokken kan worden, en reken het getal opnieuw uit. Zo'n **resample** is even groot als je data en lijkt erop, maar wijkt een beetje af, zoals een andere steekproef zou doen. Doe dat een paar duizend keer, en de spreiding van de getallen die je krijgt laat zien hoeveel je getal door toeval beweegt.
+        Je hebt maar één steekproef. De bootstrap uit [Veel bomen stemmen: het random forest](/course/open/ml-random-forest?lang=nl) maakt er nieuwe van: trek $n$ waarden uit je $n$ waarden met teruglegging, zodat een waarde twee keer of helemaal niet getrokken kan worden, en reken het getal opnieuw uit. Zo'n **resample** is even groot als je data en lijkt erop, maar wijkt een beetje af, zoals een andere steekproef zou doen. Doe dat een paar duizend keer, en de spreiding van de getallen die je krijgt laat zien hoeveel je getal door toeval beweegt.
 
         Een **betrouwbaarheidsinterval** geeft dat als een bereik. Het 95%-interval van de bootstrap loopt van het 0,025-kwantiel tot het 0,975-kwantiel van de geresamplede getallen: de middelste 95%, met aan elke kant 2,5% eraf. Op deze manier gemaakt vangt het interval de echte waarde, die eindeloos veel data zou geven, in ongeveer 95 van elke 100 steekproeven.
 
@@ -125,8 +125,6 @@ def text_idea():
         |---|---|---|---|
         | **steekproef** | | de voorbeelden die je toevallig hebt, uit alle voorbeelden die er hadden kunnen zijn | `x` |
         | **standaardfout**, $\mathrm{SE}$ | standaardfout | hoeveel een getal uit een steekproef van steekproef tot steekproef varieert: de standaardafwijking ervan over veel steekproeven | `means.std()` |
-        | **bootstrap** | | nieuwe steekproeven maken door met teruglegging uit je eigen data te trekken, om te zien hoeveel een getal varieert | |
-        | **met teruglegging** | | elke waarde gaat terug nadat hij getrokken is, dus hij kan opnieuw getrokken worden | `rng.choice(x, size=len(x))` |
         | **resample** | | zo'n nieuwe steekproef, even groot als de data | |
         | **betrouwbaarheidsinterval** | | een bereik rond een getal dat, op deze manier gemaakt, de echte waarde vangt in een gegeven deel van de steekproeven, zoals 95% | `np.quantile(means, [0.025, 0.975])` |
         | `rng.choice(x, size=n)` | | `n` waarden met teruglegging getrokken uit `x` | |
@@ -312,7 +310,7 @@ def text_connections():
     mo.md(r"""
     ## Afronding
 
-    **Samenhang.** De standaardafwijking uit [Verwachtingswaarde en variantie](/course/open/prob-expectation?lang=nl) zegt hoe ver waarden van hun gemiddelde liggen; de standaardfout zegt hoe ver een gemiddelde, of elk ander getal uit een steekproef, van het echte kan liggen. De random number generator uit [Willekeurige getallen en seeds](/course/open/np-random?lang=nl) trekt de resamples, en de kwantielen uit [Data beschrijven: gemiddelde, mediaan en spreiding](/course/open/stats-describe?lang=nl) geven het interval. Geef vanaf nu bij elk getal dat je meet ook zijn interval: een verschil tussen twee modellen telt pas als het groter is dan toeval. De bootstrap komt terug in *Eén run is geen resultaat: seeds en variantie* en *Is het verschil echt?*. In de volgende les, *Gradient checking*, controleer je de gradients van een netwerk met de helling van de loss zelf.
+    **Samenhang.** De standaardafwijking uit [Verwachtingswaarde en variantie](/course/open/prob-expectation?lang=nl) zegt hoe ver waarden van hun gemiddelde liggen; de standaardfout zegt hoe ver een gemiddelde, of elk ander getal uit een steekproef, van het echte kan liggen. In [Veel bomen stemmen: het random forest](/course/open/ml-random-forest?lang=nl) gaf de bootstrap elke boom zijn eigen voorbeelden; hier laten dezelfde trekkingen zien hoeveel een getal varieert. De random number generator uit [Willekeurige getallen en seeds](/course/open/np-random?lang=nl) trekt de resamples, en de kwantielen uit [Data beschrijven: gemiddelde, mediaan en spreiding](/course/open/stats-describe?lang=nl) geven het interval. Geef vanaf nu bij elk getal dat je meet ook zijn interval: een verschil tussen twee modellen telt pas als het groter is dan toeval. De bootstrap komt terug in *Eén run is geen resultaat: seeds en variantie* en *Is het verschil echt?*. In de volgende les, *Gradient checking*, controleer je de gradients van een netwerk met de helling van de loss zelf.
     """)
     return
 

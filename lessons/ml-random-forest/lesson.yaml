@@ -1,0 +1,35 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: ml-random-forest
+minutes: 15
+title:
+  en: "Many trees vote: the random forest"
+  nl: "Veel bomen stemmen: het random forest"
+goal:
+  en: "draw a bootstrap sample, let many trees vote, and explain why the vote of a random forest varies far less than one tree."
+  nl: "een bootstrap-steekproef trekken, veel bomen laten stemmen, en uitleggen waarom de stemming van een random forest veel minder varieert dan één boom."
+summary:
+  - en: "A random forest grows many deep trees, each on a bootstrap sample of the training set, drawn with replacement, and with a few random features per split; for a new example, the class most trees say wins."
+    nl: "Een random forest laat veel diepe bomen groeien, elk op een bootstrap-steekproef uit de training set, getrokken met teruglegging, en met een paar willekeurige features per splitsing; voor een nieuw voorbeeld wint de klasse die de meeste bomen zeggen."
+  - en: "Different trees get different examples wrong, so in the vote most mistakes are outvoted: on the penguins, ten forests of one tree get 2 to 8 of 68 wrong, ten forests of 100 trees all get 3 wrong. The variance of the mistakes falls as trees are added."
+    nl: "Elke boom vergist zich in andere voorbeelden, dus bij de stemming worden de meeste fouten weggestemd: op de pinguïns hebben tien forests van één boom 2 tot 8 van 68 fout, tien forests van 100 bomen hebben er allemaal 3 fout. De variantie van de fouten daalt als er bomen bijkomen."
+  - en: "The random features make the trees differ more, so that their mistakes overlap less: the vote can only outvote mistakes that most trees do not share."
+    nl: "De willekeurige features laten de bomen meer verschillen, zodat hun fouten minder overlappen: de stemming kan alleen fouten wegstemmen die de meeste bomen niet delen."
+can_now:
+  - en: "draw the positions of a bootstrap sample with replacement"
+    nl: "de posities van een bootstrap-steekproef trekken met teruglegging"
+    by: bootstrap
+  - en: "let the trees of a forest vote, penguin by penguin"
+    nl: "de bomen van een forest laten stemmen, pinguïn voor pinguïn"
+    by: vote
+  - en: "say why the splits of a random forest look at a few random features"
+    nl: "zeggen waarom de splitsingen van een random forest naar een paar willekeurige features kijken"
+    by: random-features
+further_reading:
+  - en: "Leo Breiman (2001), *Random Forests*, Machine Learning 45, 5–32: the paper that introduced them"
+    nl: "Leo Breiman (2001), *Random Forests*, Machine Learning 45, 5–32: het artikel waarin ze werden voorgesteld"
+  - en: "Gareth James, Daniela Witten, Trevor Hastie, Robert Tibshirani and Jonathan Taylor (2023), *An Introduction to Statistical Learning with Applications in Python*, Springer, chapter 8.2, on bagging and random forests"
+    nl: "Gareth James, Daniela Witten, Trevor Hastie, Robert Tibshirani en Jonathan Taylor (2023), *An Introduction to Statistical Learning with Applications in Python*, Springer, hoofdstuk 8.2, over bagging en random forests"
+  - en: "Francis Galton (1907), *Vox Populi*, Nature 75, 450–451: the 787 guesses of the weight of an ox"
+    nl: "Francis Galton (1907), *Vox Populi*, Nature 75, 450–451: de 787 gokken naar het gewicht van een os"

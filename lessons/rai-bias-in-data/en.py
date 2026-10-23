@@ -305,7 +305,7 @@ def text_connections():
     mo.md(r"""
     ## Wrap-up
 
-    **How this connects.** In [Where does this data come from?](/course/open/data-provenance?lang=en) you wrote down the limits of a dataset, who or what is missing; in [The machine learning workflow](/course/open/ml-workflow?lang=en) you looked at what a model gets wrong in step 6. Here you also ask for whom it goes wrong, and who is not in the data at all. These questions come back whenever a model decides about people. In the next lesson, *A neuron*, you take the first step towards neural networks.
+    **How this connects.** In [Where does this data come from?](/course/open/data-provenance?lang=en) you wrote down the limits of a dataset, who or what is missing; in [The machine learning workflow](/course/open/ml-workflow?lang=en) you looked at what a model gets wrong in step 6. Here you also ask for whom it goes wrong, and who is not in the data at all. These questions come back whenever a model decides about people. In the next lesson, *Question after question: the decision tree*, you meet a model that predicts with one question after another, as a flowchart does.
     """)
     return
 

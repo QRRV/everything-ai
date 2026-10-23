@@ -79,7 +79,7 @@ def text_why():
     mo.md(r"""
     ## Why this matters
 
-    Often you know a probability the wrong way round. The maker of a medical test says how often it is positive for people who are ill: P(positive | ill). But someone with a positive test wants to know P(ill | positive). A spam filter learns how often spam mails contain "free", and needs P(spam | free). In [Conditional probability](/course/open/prob-conditional?lang=en) you had a table with every count, and could count both ways. Usually there is no such table, only a few probabilities. Bayes' rule turns them around.
+    Often you know a probability the wrong way round. The maker of a medical test says how often it is positive for people who are ill: P(positive | ill). But someone with a positive test wants to know P(ill | positive), and there is no table of counts to count it the other way, as in [Conditional probability](/course/open/prob-conditional?lang=en): only a few probabilities. Bayes' rule turns them around.
 
     **An everyday example.** A doctor knows how an illness shows: most people who have it get a fever. A patient comes in with a fever, and the doctor has to reason the other way round: how likely is the illness, now that there is a fever?
     """)
@@ -90,7 +90,7 @@ def text_why():
 def predict_test():
     guess_test = L.guess(
         "test",
-        question="An illness is rare: 1 in 1,000 people has it. A test for it is positive for 99% of the people who are ill, and wrongly positive for 1% of the healthy people. You test positive. How likely do you think it is that you are ill?",
+        question="An illness is rare: 1 in 1000 people has it. A test for it is positive for 99% of the people who are ill, and wrongly positive for 1% of the healthy people. You test positive. How likely do you think it is that you are ill?",
         options={
             "high": "About 99%: the test is right 99 times in 100",
             "half": "About 50%",
@@ -133,17 +133,34 @@ def text_idea():
         """),
         L.watch_out("Forgetting the prior is a common mistake, called the **base-rate fallacy**: a test that is right 99 times in 100 makes a positive result sound 99% sure. But when the illness is rare, most positive results are false alarms. The prior, how common the illness is, belongs in the calculation: on top, and in P(B)."),
         mo.md(r"""
-        The picture: the positive tests of 100,000 people, for the illness of the guess. The filled part comes from people who are ill.
+        The play block: 100,000 people and the test of the guess. The top bar is all of them, the bottom bar their positive tests, and the filled part is the people who are ill. Move the slider: it sets how many of the 100,000 are ill, and the test stays the same. The counts are rounded to whole people.
         """),
-        mo.Html(C.picture({"title": "Who tests positive?", "ill": "ill", "healthy": "healthy", "total": "{n} positive tests",
-                           "alt": "One bar for the 1,098 positive tests of 100,000 people. A small part on the left, 99 tests or 9%, comes from people who are ill; the large rest, 999 tests or 91%, from healthy people."}, L.lang)),
     ])
+    return
+
+
+@app.cell(hide_code=True)
+def explore_prior_cell():
+    _labels = {"title": "Who is ill, before and after a positive test?", "everyone": "All 100,000 people",
+               "positive": "Their {pos} positive tests", "ill": "ill: {ill} ({share})", "healthy": "healthy: {healthy}",
+               "true_pos": "from ill people: {true_pos} ({posterior})", "false_pos": "from healthy people: {false_pos} ({false_share})",
+               "alt": "Two bars. Of all 100,000 people, {ill} are ill, {share}. Of their {pos} positive tests, {true_pos} come from people who are ill, {posterior}, and {false_pos} from healthy people."}
+
+    def _frame(_ill):
+        _said = "**{ill}** of the 100,000 people are ill, 1 in {one_in}: of the {pos} positive tests, {true_pos} come from people who are ill, <span class=\"ea-num\">{posterior}</span>."
+        return C.bars(_ill, _labels, L.lang), _said.format(**C.frame(_ill, L.lang))
+
+    _explore = L.explore("prior", "ill per 100,000", _frame, start=100, values=C.ILL, role="",
+                         task="Find how many of the 100,000 people must be ill before half of the positive tests come from people who are ill.")
+    _explore
     return
 
 
 @app.cell(hide_code=True)
 def text_recipe():
     mo.md(r"""
+    At 1000 of the 100,000, 1 in 100, half of the positive tests come from people who are ill: 990 people who are ill test positive, and 990 healthy people too. Below that, the false alarms among the many healthy people outnumber the right results; above it, the right results win. The test never changed: the prior alone moved the posterior, from about 1% at 1 in 10,000 to 99% at 1 in 2.
+
     ### Recipe
 
     To turn P(B | A) into P(A | B):
@@ -298,7 +315,7 @@ def text_connections():
     mo.md(r"""
     ## Wrap-up
 
-    **How this connects.** [Conditional probability](/course/open/prob-conditional?lang=en) showed that P(A | B) is not P(B | A); Bayes' rule turns one into the other, with the prior P(A) and the law of total probability for P(B). A belief that is updated with evidence becomes the prior for the next evidence. Classic spam filters work this way, word by word. In the next lesson, *Kinds of learning*, you tell the kinds of learning apart by where the right answers come from.
+    **How this connects.** [Conditional probability](/course/open/prob-conditional?lang=en) showed that P(A | B) is not P(B | A); Bayes' rule turns one into the other, with the prior P(A) and the law of total probability for P(B). A belief that is updated with evidence becomes the prior for the next evidence. Classic spam filters work this way, word by word: with *Show extra lessons* on, you build one in *Spam or not: naive Bayes*, after *Pairs you never saw: smoothing*. In the next lesson, *Kinds of learning*, you tell the kinds of learning apart by where the right answers come from.
     """)
     return
 

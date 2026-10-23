@@ -9,6 +9,7 @@ modules:
   first-model: {en: "Your first model", nl: "Je eerste model"}
   classification: {en: "Classification", nl: "Classificatie"}
   generalization: {en: "Generalization", nl: "Generalisatie"}
+  more-models: {en: "More models", nl: "Meer modellen"}
   neural-networks: {en: "Neural networks", nl: "Neural networks"}
   pytorch: {en: "PyTorch", nl: "PyTorch"}
   building-blocks: {en: "Building blocks", nl: "Bouwstenen"}

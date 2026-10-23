@@ -305,7 +305,7 @@ def text_connections():
     mo.md(r"""
     ## Afronding
 
-    **Samenhang.** In [Waar komt deze data vandaan?](/course/open/data-provenance?lang=nl) schreef je de grenzen van een dataset op, wie of wat er ontbreekt; in [De workflow van machine learning](/course/open/ml-workflow?lang=nl) keek je in stap 6 naar wat een model fout heeft. Hier vraag je ook bij wie het misgaat, en wie er helemaal niet in de data staat. Deze vragen komen terug zodra een model over mensen beslist. In de volgende les, *Een neuron*, zet je de eerste stap naar neural networks.
+    **Samenhang.** In [Waar komt deze data vandaan?](/course/open/data-provenance?lang=nl) schreef je de grenzen van een dataset op, wie of wat er ontbreekt; in [De workflow van machine learning](/course/open/ml-workflow?lang=nl) keek je in stap 6 naar wat een model fout heeft. Hier vraag je ook bij wie het misgaat, en wie er helemaal niet in de data staat. Deze vragen komen terug zodra een model over mensen beslist. In de volgende les, *Vraag na vraag: de beslisboom*, leer je een model kennen dat voorspelt met de ene vraag na de andere, zoals een stroomschema.
     """)
     return
 

@@ -1,0 +1,33 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: lm-naive-bayes
+minutes: 15
+title:
+  en: "Spam or not: naive Bayes"
+  nl: "Spam of niet: naive Bayes"
+goal:
+  en: "sort short messages into spam and ok with naive Bayes: count the words of each class, smooth the counts with Laplace smoothing, and add the logs of P(class) and of P(word | class) for every word."
+  nl: "korte berichten met naive Bayes in spam en ok indelen: de woorden van elke klasse tellen, Laplace smoothing op de tellingen toepassen, en de logs van P(klasse) en van P(woord | klasse) voor elk woord optellen."
+summary:
+  - en: "Naive Bayes gives a text the class with the highest P(class) · P(w₁ | class) · … · P(wₙ | class): Bayes' rule, with the naive assumption that the words are independent of each other within a class."
+    nl: "Naive Bayes geeft een tekst de klasse met de hoogste P(klasse) · P(w₁ | klasse) · … · P(wₙ | klasse): de regel van Bayes, met de naïeve aanname dat de woorden binnen een klasse onafhankelijk van elkaar zijn."
+  - en: "Every probability comes from counts in the training texts: P(class) is the share of the texts of that class, and P(w | class) is (count + 1) / (words of the class + V), with Laplace smoothing. A word that is in no training text is left out."
+    nl: "Elke kans komt uit tellingen in de trainingsteksten: P(klasse) is het aandeel van de teksten van die klasse, en P(w | klasse) is (telling + 1) / (woorden van de klasse + V), met Laplace smoothing. Een woord dat in geen enkele trainingstekst staat, valt weg."
+  - en: "The product of many small probabilities becomes 0 in the computer, so you add their logs. On the course's 20 test messages, the filter sorts 19 right."
+    nl: "Het product van veel kleine kansen wordt 0 in de computer, dus tel je hun logs op. Van de 20 testberichten van de course deelt het filter er 19 goed in."
+can_now:
+  - en: "work out P(word | class) with Laplace smoothing"
+    nl: "P(woord | klasse) uitrekenen met Laplace smoothing"
+    by: unseen-word
+  - en: "write the log score of a class for a message"
+    nl: "de log score van een klasse voor een bericht schrijven"
+    by: log-score
+  - en: "say what the naive assumption does with words that come together"
+    nl: "zeggen wat de naïeve aanname doet met woorden die samen voorkomen"
+    by: naive
+further_reading:
+  - en: "Daniel Jurafsky and James H. Martin, [*Speech and Language Processing*](https://web.stanford.edu/~jurafsky/slp3/), 3rd edition, draft of 19 August 2026: the web appendix on naive Bayes (Appendix B)"
+    nl: "Daniel Jurafsky en James H. Martin, [*Speech and Language Processing*](https://web.stanford.edu/~jurafsky/slp3/), 3e editie, conceptversie van 19 augustus 2026: de webbijlage over naive Bayes (bijlage B)"
+  - en: "scikit-learn, [*User Guide*, section 1.9: Naive Bayes](https://scikit-learn.org/stable/modules/naive_bayes.html), version 1.9: `MultinomialNB(alpha=1)` sorts the course's messages exactly as the filter of this lesson does (read in October 2026)"
+    nl: "scikit-learn, [*User Guide*, paragraaf 1.9: Naive Bayes](https://scikit-learn.org/stable/modules/naive_bayes.html), versie 1.9: `MultinomialNB(alpha=1)` deelt de berichten van de course precies zo in als het filter van deze les (gelezen in oktober 2026)"

@@ -112,6 +112,12 @@ SPDX-FileCopyrightText = "2026 Everything AI contributors"
 SPDX-License-Identifier = "CC-BY-SA-4.0"
 
 [[annotations]]
+path = "data/course-spam-messages.json"
+precedence = "override"
+SPDX-FileCopyrightText = "2026 Everything AI contributors"
+SPDX-License-Identifier = "CC-BY-SA-4.0"
+
+[[annotations]]
 path = "data/course-red-team-answers.json"
 precedence = "override"
 SPDX-FileCopyrightText = "2026 Everything AI contributors (answers written by the course's models, trained on stories of Cosmopedia by Hugging Face, Apache-2.0)"

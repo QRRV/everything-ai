@@ -99,7 +99,7 @@ takken:
   status: later
   build_order: 7
   project: {id: tabular, title: "Tabular data: trees, ensembles, gradient boosting, clustering and time series", title_nl: "Tabulaire data: bomen, ensembles, gradient boosting, clustering en tijdreeksen"}
-  attach: [ml-project-tabular, res-fair-baselines]
+  attach: [ml-project-tabular, ml-random-forest, res-fair-baselines]
   final_nl: "Een complete pijplijn op een tabulaire dataset, eerlijk vergeleken met een neuraal netwerk"
 
 - id: dl-verdieping

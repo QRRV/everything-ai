@@ -305,7 +305,7 @@ def text_connections():
     mo.md(r"""
     ## Afronding
 
-    **Samenhang.** De NLL uit [Hoe goed is een language model?](/course/open/lm-nll?lang=nl) werd oneindig voor elke tekst met een paar dat het model nooit zag; add-k smoothing geeft elk paar een beetje kans, en de NLL op nieuwe tekst laat zien welke k het best werkt. In de volgende les, *Project: hetzelfde bigram-model, geleerd met gradient descent*, leert je model deze tabel in plaats van haar te tellen, en zie je wat daar de plaats van k inneemt.
+    **Samenhang.** De NLL uit [Hoe goed is een language model?](/course/open/lm-nll?lang=nl) werd oneindig voor elke tekst met een paar dat het model nooit zag; add-k smoothing geeft elk paar een beetje kans, en de NLL op nieuwe tekst laat zien welke k het best werkt. Met *Toon verdieping* aan komt eerst *Spam of niet: naive Bayes*: daar maken woordtellingen met Laplace smoothing en de regel van Bayes samen een spamfilter. In de volgende les van de hoofdroute, *Project: hetzelfde bigram-model, geleerd met gradient descent*, leert je model deze tabel in plaats van haar te tellen, en zie je wat daar de plaats van k inneemt.
     """)
     return
 

@@ -78,7 +78,7 @@ def text_why():
     mo.md(r"""
     ## Waarom
 
-    Vaak ken je een kans precies andersom. De maker van een medische test zegt hoe vaak die positief is bij mensen die ziek zijn: P(positief | ziek). Maar wie een positieve test heeft, wil P(ziek | positief) weten. Een spamfilter leert hoe vaak spammails "free" bevatten, en heeft P(spam | free) nodig. In [Voorwaardelijke kans](/course/open/prob-conditional?lang=nl) had je een tabel met elke telling, en kon je beide kanten op tellen. Meestal is er zo'n tabel niet, alleen een paar kansen. De regel van Bayes draait ze om.
+    Vaak ken je een kans precies andersom. De maker van een medische test zegt hoe vaak die positief is bij mensen die ziek zijn: P(positief | ziek). Maar wie een positieve test heeft, wil P(ziek | positief) weten, en er is geen tabel met tellingen om andersom te tellen, zoals in [Voorwaardelijke kans](/course/open/prob-conditional?lang=nl): alleen een paar kansen. De regel van Bayes draait ze om.
 
     **Een voorbeeld uit het dagelijks leven.** Een arts weet hoe een ziekte zich laat zien: de meeste mensen die hem hebben, krijgen koorts. Er komt iemand binnen met koorts, en de arts moet andersom redeneren: hoe waarschijnlijk is de ziekte, nu er koorts is?
     """)
@@ -89,13 +89,13 @@ def text_why():
 def predict_test():
     guess_test = L.guess(
         "test",
-        question="Een ziekte is zeldzaam: 1 op de 1.000 mensen heeft hem. Een test ervoor is positief bij 99% van de mensen die ziek zijn, en ten onrechte positief bij 1% van de gezonde mensen. Je test positief. Hoe waarschijnlijk denk je dat het is dat je ziek bent?",
+        question="Een ziekte is zeldzaam: 1 op de 1000 mensen heeft hem. Een test ervoor is positief bij 99% van de mensen die ziek zijn, en ten onrechte positief bij 1% van de gezonde mensen. Je test positief. Hoe waarschijnlijk denk je dat het is dat je ziek bent?",
         options={
             "high": "Ongeveer 99%: de test heeft 99 van de 100 keer gelijk",
             "half": "Ongeveer 50%",
             "right": "Ongeveer 9%",
         },
-        reveal=f"**Ongeveer 9%.** Stel je 100.000 mensen voor. {C.count(C.tested()[0], L.lang)} zijn ziek, en {C.count(C.tested()[1], L.lang)} van hen testen positief. {C.count(C.tested()[2], L.lang)} zijn gezond, en 1% van hen, {C.count(C.tested()[3], L.lang)}, testen ook positief. Van de {C.count(C.tested()[1] + C.tested()[3], L.lang)} positieve tests komen er maar {C.count(C.tested()[1], L.lang)} van mensen die ziek zijn: ongeveer 9%. De ziekte is zo zeldzaam dat de paar keer vals alarm bij de vele gezonde mensen talrijker is dan de goede uitslagen bij de weinige zieken. Het is hetzelfde effect als in oefening 3 van [Voorwaardelijke kans](/course/open/prob-conditional?lang=nl), nu uitgerekend uit kansen in plaats van tellingen.",
+        reveal=f"**Ongeveer 9%.** Stel je 100.000 mensen voor. {C.count(C.tested()[0], L.lang)} zijn ziek, en {C.count(C.tested()[1], L.lang)} van hen testen positief. {C.count(C.tested()[2], L.lang)} zijn gezond, en 1% van hen, {C.count(C.tested()[3], L.lang)}, testen ook positief. Van de {C.count(C.tested()[1] + C.tested()[3], L.lang)} positieve tests komen er maar {C.count(C.tested()[1], L.lang)} van mensen die ziek zijn: ongeveer 9%. De ziekte is zo zeldzaam dat er bij de vele gezonde mensen meer vals alarm is dan er goede uitslagen zijn bij de weinige zieken. Het is hetzelfde effect als in oefening 3 van [Voorwaardelijke kans](/course/open/prob-conditional?lang=nl), nu uitgerekend uit kansen in plaats van tellingen.",
     )
     guess_test
     return (guess_test,)
@@ -130,19 +130,36 @@ def text_idea():
         | **wet van de totale kans** | | P(B) als de som van de manieren waarop B kan gebeuren: met A, en zonder A | `p_b` |
         | P(niet A) | P van niet A | de kans dat A niet gebeurt: 1 − P(A) | `p_not_a` |
         """),
-        L.watch_out("De prior vergeten is een veelgemaakte fout, de **base-rate fallacy**: een test die 99 van de 100 keer gelijk heeft, daardoor lijkt een positieve uitslag 99% zeker. Maar als de ziekte zeldzaam is, zijn de meeste positieve uitslagen vals alarm. De prior, hoe vaak de ziekte voorkomt, hoort in de berekening: bovenaan, en in P(B)."),
+        L.watch_out("De prior vergeten is een veelgemaakte fout, de **base-rate fallacy**: bij een test die 99 van de 100 keer gelijk heeft, lijkt een positieve uitslag 99% zeker. Maar als de ziekte zeldzaam is, zijn de meeste positieve uitslagen vals alarm. De prior, hoe vaak de ziekte voorkomt, hoort in de berekening: bovenaan, en in P(B)."),
         mo.md(r"""
-        De figuur: de positieve tests van 100.000 mensen, voor de ziekte uit de gok. Het gevulde deel komt van mensen die ziek zijn.
+        Het speelblok: 100.000 mensen en de test uit de gok. De bovenste balk is iedereen, de onderste zijn hun positieve tests, en het gevulde deel zijn de mensen die ziek zijn. Schuif met de slider: hij zet hoeveel van de 100.000 er ziek zijn, en de test blijft dezelfde. De aantallen zijn afgerond op hele mensen.
         """),
-        mo.Html(C.picture({"title": "Wie test positief?", "ill": "ziek", "healthy": "gezond", "total": "{n} positieve tests",
-                           "alt": "Eén balk voor de 1.098 positieve tests van 100.000 mensen. Een klein deel links, 99 tests of 9%, komt van mensen die ziek zijn; de grote rest, 999 tests of 91%, van gezonde mensen."}, L.lang)),
     ])
+    return
+
+
+@app.cell(hide_code=True)
+def explore_prior_cell():
+    _labels = {"title": "Wie is ziek, voor en na een positieve test?", "everyone": "Alle 100.000 mensen",
+               "positive": "Hun {pos} positieve tests", "ill": "ziek: {ill} ({share})", "healthy": "gezond: {healthy}",
+               "true_pos": "van zieke mensen: {true_pos} ({posterior})", "false_pos": "van gezonde mensen: {false_pos} ({false_share})",
+               "alt": "Twee balken. Van alle 100.000 mensen zijn er {ill} ziek, {share}. Van hun {pos} positieve tests komen er {true_pos} van mensen die ziek zijn, {posterior}, en {false_pos} van gezonde mensen."}
+
+    def _frame(_ill):
+        _said = "**{ill}** van de 100.000 mensen zijn ziek, 1 op de {one_in}: van de {pos} positieve tests komen er {true_pos} van mensen die ziek zijn, <span class=\"ea-num\">{posterior}</span>."
+        return C.bars(_ill, _labels, L.lang), _said.format(**C.frame(_ill, L.lang))
+
+    _explore = L.explore("prior", "ziek per 100.000", _frame, start=100, values=C.ILL, role="",
+                         task="Zoek hoeveel van de 100.000 mensen ziek moeten zijn voordat de helft van de positieve tests van mensen komt die ziek zijn.")
+    _explore
     return
 
 
 @app.cell(hide_code=True)
 def text_recipe():
     mo.md(r"""
+    Bij 1000 van de 100.000, 1 op de 100, komt de helft van de positieve tests van mensen die ziek zijn: 990 mensen die ziek zijn testen positief, en 990 gezonde mensen ook. Bij minder zieken zijn er onder de vele gezonde mensen meer valse alarmen dan goede uitslagen; bij meer zieken winnen de goede uitslagen. De test veranderde niet: alleen de prior verschoof de posterior, van ongeveer 1% bij 1 op de 10.000 tot 99% bij 1 op de 2.
+
     ### Recept
 
     Om P(B | A) om te draaien tot P(A | B):
@@ -297,7 +314,7 @@ def text_connections():
     mo.md(r"""
     ## Afronding
 
-    **Samenhang.** [Voorwaardelijke kans](/course/open/prob-conditional?lang=nl) liet zien dat P(A | B) niet P(B | A) is; de regel van Bayes maakt van de een de ander, met de prior P(A) en de wet van de totale kans voor P(B). Een inschatting die met bewijs is bijgewerkt, wordt de prior voor het volgende bewijs. Klassieke spamfilters werken zo, woord voor woord. In de volgende les, *Soorten leren*, onderscheid je de soorten leren aan de hand van waar de goede antwoorden vandaan komen.
+    **Samenhang.** [Voorwaardelijke kans](/course/open/prob-conditional?lang=nl) liet zien dat P(A | B) niet P(B | A) is; de regel van Bayes maakt van de een de ander, met de prior P(A) en de wet van de totale kans voor P(B). Een inschatting die met bewijs is bijgewerkt, wordt de prior voor het volgende bewijs. Klassieke spamfilters werken zo, woord voor woord: met *Toon verdieping* aan bouw je er zelf een in *Spam of niet: naive Bayes*, na *Paren die je nooit zag: smoothing*. In de volgende les, *Soorten leren*, onderscheid je de soorten leren aan de hand van waar de goede antwoorden vandaan komen.
     """)
     return
 

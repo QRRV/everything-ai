@@ -122,9 +122,9 @@ lessons:
   module: math-formal
   idea: "Resample your results many times; the spread of the resampled means gives a confidence interval without formulas."
   covers: [statistiek#5]
-  requires: [prob-expectation, np-random, stats-describe]
-  introduces: [c:confidence-interval, c:bootstrap, c:standard-error, c:statistical-sample, c:with-replacement, c:resample]
-  uses: [c:mean, c:standard-deviation, c:quantile, c:median, c:random-number-generator, py:np-random-generator, c:seed, c:probability, c:array, py:np-array, py:np-quantile, py:for, py:range, py:list, py:append, py:def, py:return, py:import-as, py:arithmetic, py:print, py:comment, py:underscore-name, q:predict, q:choice, q:exercise-with-check, q:run-cell]
+  requires: [prob-expectation, np-random, stats-describe, ml-random-forest]
+  introduces: [c:confidence-interval, c:standard-error, c:statistical-sample, c:resample]
+  uses: [c:bootstrap, c:with-replacement, c:mean, c:standard-deviation, c:quantile, c:median, c:random-number-generator, py:np-random-generator, c:seed, c:probability, c:array, py:np-array, py:np-quantile, py:for, py:range, py:list, py:append, py:def, py:return, py:import-as, py:arithmetic, py:print, py:comment, py:underscore-name, q:predict, q:choice, q:exercise-with-check, q:run-cell]
   mentions: [c:model, c:accuracy, c:example, c:test-set]
   ladder: [numpy]
   data: [palmer-penguins]

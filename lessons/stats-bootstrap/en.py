@@ -109,7 +109,7 @@ def text_idea():
 
         A number you work out from data, such as a mean or an accuracy, comes from your **sample**: the examples you happen to have. Another sample of the same kind gives a slightly different number. How much it varies from sample to sample is its **standard error**: the standard deviation the number would have over many samples.
 
-        You have only one sample. The **bootstrap** makes new ones from it: draw $n$ values from your $n$ values **with replacement**, so that a value can come twice or not at all, and work out the number again. Such a **resample** is as large as your data and looks like it, but differs a little, as another sample would. Do that a few thousand times, and the spread of the numbers you get shows how much your number moves by chance.
+        You have only one sample. The bootstrap of [Many trees vote: the random forest](/course/open/ml-random-forest?lang=en) makes new ones from it: draw $n$ values from your $n$ values with replacement, so that a value can come twice or not at all, and work out the number again. Such a **resample** is as large as your data and looks like it, but differs a little, as another sample would. Do that a few thousand times, and the spread of the numbers you get shows how much your number moves by chance.
 
         A **confidence interval** gives that as a range. The 95% interval of the bootstrap runs from the 0.025 quantile to the 0.975 quantile of the resampled numbers: the middle 95%, with 2.5% cut off at each side. Made this way, the interval catches the true value, the one endless data would give, in about 95 of every 100 samples.
 
@@ -125,8 +125,6 @@ def text_idea():
         |---|---|---|---|
         | **sample** | | the examples you happen to have, out of all there could be | `x` |
         | **standard error**, $\mathrm{SE}$ | standard error | how much a number from a sample varies from sample to sample: its standard deviation over many samples | `means.std()` |
-        | **bootstrap** | | making new samples by drawing from your own data with replacement, to see how much a number varies | |
-        | **with replacement** | | each value goes back after it is drawn, so it can come again | `rng.choice(x, size=len(x))` |
         | **resample** | | one such new sample, as large as the data | |
         | **confidence interval** | | a range around a number that, made this way, catches the true value in a given share of samples, such as 95% | `np.quantile(means, [0.025, 0.975])` |
         | `rng.choice(x, size=n)` | | `n` values drawn from `x` with replacement | |
@@ -312,7 +310,7 @@ def text_connections():
     mo.md(r"""
     ## Wrap-up
 
-    **How this connects.** The standard deviation of [Expected value and variance](/course/open/prob-expectation?lang=en) says how far values lie from their mean; the standard error says how far a mean, or any number from a sample, could lie from the true one. The random number generator of [Random numbers and seeds](/course/open/np-random?lang=en) draws the resamples, and the quantiles of [Describing data: mean, median and spread](/course/open/stats-describe?lang=en) give the interval. From here on, give every number you measure together with its interval: a difference between two models only counts when it is larger than chance. The bootstrap comes back in *One run is not a result: seeds and variance* and *Is the difference real?*. In the next lesson, *Gradient checking*, you check the gradients of a network against the slope of the loss itself.
+    **How this connects.** The standard deviation of [Expected value and variance](/course/open/prob-expectation?lang=en) says how far values lie from their mean; the standard error says how far a mean, or any number from a sample, could lie from the true one. In [Many trees vote: the random forest](/course/open/ml-random-forest?lang=en) the bootstrap gave each tree its own training examples; here the same draws show how much a number varies. The random number generator of [Random numbers and seeds](/course/open/np-random?lang=en) draws the resamples, and the quantiles of [Describing data: mean, median and spread](/course/open/stats-describe?lang=en) give the interval. From here on, give every number you measure together with its interval: a difference between two models only counts when it is larger than chance. The bootstrap comes back in *One run is not a result: seeds and variance* and *Is the difference real?*. In the next lesson, *Gradient checking*, you check the gradients of a network against the slope of the loss itself.
     """)
     return
 

@@ -344,7 +344,7 @@ def text_connections():
     mo.md(r"""
     ## Afronding
 
-    **Samenhang.** In [Kans: tellen hoe vaak](/course/open/prob-basics?lang=nl) maakte je kansverdelingen; de verwachtingswaarde is hun gemiddelde op de lange duur, en de variantie meet hoe ver uitkomsten daaromheen schommelen. De wortel eruit is de standaardafwijking uit [Data beschrijven: gemiddelde, mediaan en spreiding](/course/open/stats-describe?lang=nl), gewogen met de kansen. Later in de course is een loss een verwachtingswaarde: het gemiddelde over alle voorbeelden die een model zou kunnen zien. In de volgende les, *Soorten leren*, houd je de soorten leren uit elkaar aan waar de goede antwoorden vandaan komen. Met *Toon verdieping* aan komt eerst *De regel van Bayes*: die draait een voorwaardelijke kans om.
+    **Samenhang.** In [Kans: tellen hoe vaak](/course/open/prob-basics?lang=nl) maakte je kansverdelingen; de verwachtingswaarde is hun gemiddelde op de lange duur, en de variantie meet hoe ver uitkomsten daaromheen schommelen. De wortel eruit is de standaardafwijking uit [Data beschrijven: gemiddelde, mediaan en spreiding](/course/open/stats-describe?lang=nl), gewogen met de kansen. Later in de course is een loss een verwachtingswaarde: het gemiddelde over alle voorbeelden die een model zou kunnen zien. In de volgende les, *De regel van Bayes*, draai je een voorwaardelijke kans om.
     """)
     return
 

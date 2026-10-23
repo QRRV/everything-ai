@@ -305,7 +305,7 @@ def text_connections():
     mo.md(r"""
     ## Wrap-up
 
-    **How this connects.** The NLL of [How good is a language model?](/course/open/lm-nll?lang=en) became infinite for any text with a pair the model never saw; add-k smoothing gives every pair a little probability, and the NLL on new text shows which k works best. In the next lesson, *Project: the same bigram model, learned with gradient descent*, your model learns this table instead of counting it, and you see what takes the place of k there.
+    **How this connects.** The NLL of [How good is a language model?](/course/open/lm-nll?lang=en) became infinite for any text with a pair the model never saw; add-k smoothing gives every pair a little probability, and the NLL on new text shows which k works best. With *Show extra lessons* on, *Spam or not: naive Bayes* comes first: there, word counts with Laplace smoothing and Bayes' rule make a spam filter together. In the next lesson of the main route, *Project: the same bigram model, learned with gradient descent*, your model learns this table instead of counting it, and you see what takes the place of k there.
     """)
     return
 

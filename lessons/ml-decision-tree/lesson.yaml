@@ -1,0 +1,33 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: ml-decision-tree
+minutes: 15
+title:
+  en: "Question after question: the decision tree"
+  nl: "Vraag na vraag: de beslisboom"
+goal:
+  en: "count the mistakes of a split, choose the maximum depth of a decision tree on the validation set, and follow a penguin down its questions to a leaf."
+  nl: "de fouten van een splitsing tellen, de maximale diepte van een beslisboom kiezen op de validation set, en een pinguïn langs zijn vragen volgen tot een blad."
+summary:
+  - en: "A decision tree asks threshold questions, one after another: each split looks at one feature and one threshold, and a leaf says the most common class of its training examples."
+    nl: "Een beslisboom stelt de ene ja-nee-vraag na de andere, elk met een threshold: elke splitsing kijkt naar één feature en één threshold, en een blad zegt de klasse die het vaakst voorkomt onder zijn voorbeelden uit de training set."
+  - en: "It learns with the threshold rule, over and over: keep the split with the fewest mistakes, then do the same in each part, until a part is pure or the maximum depth is reached. scikit-learn scores a split by its Gini impurity instead, which breaks many ties."
+    nl: "Hij leert zoals de regel met één threshold, maar steeds opnieuw: houd de splitsing met de minste fouten over, en doe dan hetzelfde in elk deel, tot een deel zuiver is of de maximale diepte bereikt is. scikit-learn geeft een splitsing in plaats daarvan een score met de Gini impurity, die veel gelijke standen doorbreekt."
+  - en: "The maximum depth is a hyperparameter: a shallow tree underfits, a tree grown until every part is pure gets every training example right and overfits. Choose it on the validation set."
+    nl: "De maximale diepte is een hyperparameter: een ondiepe boom underfit, een boom die doorgroeit tot elk deel zuiver is, heeft elk voorbeeld uit de training set goed en overfit. Kies hem op de validation set."
+can_now:
+  - en: "count the mistakes of a split when each part says its most common class"
+    nl: "de fouten van een splitsing tellen als elk deel zijn meest voorkomende klasse zegt"
+    by: split-mistakes
+  - en: "choose the maximum depth of a tree by its mistakes on the validation set"
+    nl: "de maximale diepte van een boom kiezen aan de hand van de fouten op de validation set"
+    by: choose-depth
+  - en: "follow a penguin down the questions of a tree to its leaf"
+    nl: "een pinguïn langs de vragen van een boom volgen tot zijn blad"
+    by: read-tree
+further_reading:
+  - en: "Gareth James, Daniela Witten, Trevor Hastie, Robert Tibshirani and Jonathan Taylor (2023), *An Introduction to Statistical Learning with Applications in Python*, Springer, chapter 8.1, *The Basics of Decision Trees*"
+    nl: "Gareth James, Daniela Witten, Trevor Hastie, Robert Tibshirani en Jonathan Taylor (2023), *An Introduction to Statistical Learning with Applications in Python*, Springer, hoofdstuk 8.1, *The Basics of Decision Trees*"
+  - en: "scikit-learn, *User Guide*, section 1.10, *Decision Trees*: what a tree does well and badly, and tips for using one"
+    nl: "scikit-learn, *User Guide*, sectie 1.10, *Decision Trees*: wat een boom goed en slecht doet, en tips om er een te gebruiken"

@@ -91,7 +91,7 @@ routes:
   - prob-basics
   - prob-conditional
   - prob-expectation
-  - {id: prob-bayes, extra: true}
+  - prob-bayes
   - ml-kinds-of-learning
   - ml-classification
   - math-exp-log
@@ -123,6 +123,8 @@ routes:
   - ml-workflow
   - ml-project-tabular
   - rai-bias-in-data
+  - ml-decision-tree
+  - ml-random-forest
   - nn-neuron
   - nn-xor
   - nn-hidden-layer
@@ -168,6 +170,7 @@ routes:
   - {id: lm-top-k-top-p, extra: true}
   - lm-nll
   - lm-smoothing
+  - {id: lm-naive-bayes, extra: true}
   - lm-bigram-neural
   - lm-base-vs-chat
   - lm-hallucination

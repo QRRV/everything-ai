@@ -52,6 +52,34 @@ lessons:
   data: [palmer-penguins]
   needs: any
 
+- id: ml-decision-tree
+  tak: klassiek-ml
+  title: "Question after question: the decision tree"
+  level: basis
+  module: more-models
+  idea: "A decision tree asks threshold questions one after another: it keeps the split with the fewest mistakes and does the same again in each part, until a part is pure or the tree reaches its maximum depth, a hyperparameter that trades underfitting against overfitting."
+  covers: [bomen-en-ensembles#0, bomen-en-ensembles#1]
+  requires: [ml-project-tabular, ml-knn, start-rules-vs-learning, ml-overfitting]
+  introduces: [c:decision-tree, c:tree-split, c:leaf, c:tree-depth, c:gini-impurity, py:sklearn-export-text]
+  uses: [c:learning-from-data, c:hyperparameter, c:validation-set, c:train-set, c:test-set, c:overfitting, c:underfitting, c:noise, c:polynomial, c:k-nearest-neighbors, c:distance, c:standardization, c:classification, c:class, c:decision-boundary, c:label, c:feature, c:example, c:prediction, c:model, c:training, c:accuracy, c:mean, c:seed, c:random-number-generator, py:np-random-generator, c:csv, py:dataframe, py:pandas-select-filter, py:isna, py:sklearn-fit-predict, py:np-array, py:np-indexing, py:boolean-mask, py:np-unique, py:np-argmin, py:np-mean, py:np-sum, py:min-max, py:keyword-argument, py:none, c:array, py:slicing, py:indexing, py:tuple, py:def, py:return, py:for, py:len, py:if, py:comparison, py:bool, py:list, py:append, py:import, py:import-as, py:arithmetic, py:float, py:int, py:string-literal, py:print, py:comment, py:variable, py:underscore-name, v:scatter-plot, v:line-plot, q:predict, q:choice, q:exercise-with-check, q:run-cell]
+  ladder: [numpy]
+  data: [palmer-penguins]
+  needs: any
+
+- id: ml-random-forest
+  tak: klassiek-ml
+  title: "Many trees vote: the random forest"
+  level: basis
+  module: more-models
+  idea: "A random forest grows many deep trees, each on a bootstrap sample of the training set and with a random subset of the features at every split, and lets them vote; their mistakes differ, so the vote varies far less than one tree."
+  covers: [bomen-en-ensembles#3, bomen-en-ensembles#4]
+  requires: [ml-decision-tree, prob-expectation]
+  introduces: [c:random-forest, c:ensemble, c:bagging, c:bootstrap, c:with-replacement]
+  uses: [c:decision-tree, c:tree-split, c:leaf, c:tree-depth, c:majority-voting, c:variance, c:median, c:k-nearest-neighbors, c:hyperparameter, c:validation-set, c:train-set, c:test-set, c:overfitting, c:underfitting, c:classification, c:class, c:decision-boundary, c:label, c:feature, c:example, c:prediction, c:model, c:training, c:accuracy, c:mean, c:seed, c:random-number-generator, py:np-random-generator, c:csv, py:dataframe, py:pandas-select-filter, py:isna, py:sklearn-fit-predict, py:np-array, py:np-indexing, py:np-unique, py:np-argmax, py:np-mean, py:np-sum, py:keyword-argument, c:array, c:shape, py:slicing, py:indexing, py:def, py:return, py:for, py:range, py:len, py:comparison, py:list, py:append, py:import, py:import-as, py:arithmetic, py:float, py:int, py:string-literal, py:print, py:comment, py:variable, py:underscore-name, v:scatter-plot, q:predict, q:choice, q:exercise-with-check, q:run-cell]
+  ladder: [numpy]
+  data: [palmer-penguins]
+  needs: any
+
 # --- verantwoord ------------------------------------------------------------------
 - id: rai-bias-in-data
   tak: verantwoord

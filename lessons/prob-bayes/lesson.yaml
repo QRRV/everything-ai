@@ -2,7 +2,7 @@
 # SPDX-License-Identifier: CC-BY-SA-4.0
 # What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
 id: prob-bayes
-minutes: 20
+minutes: 15
 title:
   en: "Bayes' rule"
   nl: "De regel van Bayes"

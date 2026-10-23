@@ -79,6 +79,8 @@ bronnen:
    note_nl: "Meerkeuzevragen: het echte vervolg van een verhaal tegen zinnen uit andere verhalen. data/story-cloze.json, gemaakt met data/tools/make_story_cloze.py: 500 vragen uit verhalen die geen model van de course zag, en 500 uit verhalen waarop de GPT's van de course trainden."}
 - {id: course-red-team-prompts, kind: text, license: "course (CC BY-SA 4.0)", hosting: rehost,
    note_nl: "Een kleine set schadelijke en onschuldige-maar-eng-klinkende verzoeken, door de course geschreven, zonder werkende schadelijke inhoud."}
+- {id: course-spam-messages, kind: text, license: "course (CC BY-SA 4.0)", hosting: rehost,
+   note_nl: "60 korte berichten, spam of ok, door de course geschreven: 40 om op te trainen en 20 om op te testen, in kleine letters zonder leestekens, zonder echte namen, nummers, adressen of links. data/course-spam-messages.json, voor lm-naive-bayes."}
 - {id: course-red-team-answers, kind: text, license: "CC-BY-4.0 (the course; written by model-course-capstone, model-course-sft and model-course-dpo)", hosting: rehost,
    note_nl: "De antwoorden van de drie modellen van de course (basis, SFT, SFT met DPO) op elk verzoek van course-red-team-prompts. data/course-red-team-answers.json, gemaakt met data/tools/make_course_red_team_answers.py."}
 - {id: course-seeds, kind: text, license: "CC-BY-4.0 (the course)", hosting: rehost,

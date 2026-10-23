@@ -142,6 +142,19 @@ lessons:
   ladder: [numpy]
   needs: any
 
+- id: lm-naive-bayes
+  title: "Spam or not: naive Bayes"
+  level: basis
+  module: lm-basis
+  idea: "Naive Bayes gives a text the class with the highest P(class) times P(word | class) for each of its words, as if the words were independent within a class; the probabilities are word counts with Laplace smoothing, added up as logs."
+  covers: [klassieke-tekstclassificatie#2, klassieke-tekstclassificatie#6, instance-based-leren-en-naive-bayes#6]
+  requires: [lm-smoothing, prob-bayes, lm-tokens-outside]
+  introduces: [c:naive-bayes, c:text-classification, c:bag-of-words, c:conditional-independence]
+  uses: [c:bayes-rule, c:prior, c:conditional-probability, s:p-given, c:probability, s:p-prob, c:laplace-smoothing, c:smoothing, c:logarithm, s:log, s:sigma-sum, c:negative-log-likelihood, c:surprise, c:likelihood, c:vocabulary, c:classification, c:class, c:training, c:prediction, c:language-model, c:bigram, py:split, py:set, py:dict, py:list, py:append, py:tuple, py:str, py:string-literal, py:for, py:if, py:comparison, py:len, py:arithmetic, py:float, py:int, py:variable, py:def, py:return, py:print, py:comment, py:underscore-name, py:import-as, py:np-exp, q:predict, q:choice, q:exercise-with-check, q:run-cell]
+  data: [course-spam-messages]
+  ladder: [python, numpy]
+  needs: any
+
 - id: lm-bigram-neural
   title: "Project: the same bigram model, learned with gradient descent"
   level: basis

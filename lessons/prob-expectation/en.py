@@ -344,7 +344,7 @@ def text_connections():
     mo.md(r"""
     ## Wrap-up
 
-    **How this connects.** In [Probability: counting how often](/course/open/prob-basics?lang=en) you made distributions; the expected value is their long-run average, and the variance measures how far results spread around it. Its square root is the standard deviation of [Describing data: mean, median and spread](/course/open/stats-describe?lang=en), weighted by the probabilities. Later in the course, a loss is an expected value: the average over all examples a model could see. In the next lesson, *Kinds of learning*, you tell the kinds of learning apart by where the right answers come from. With *Show extra lessons* on, *Bayes' rule* comes first: it turns a conditional probability around.
+    **How this connects.** In [Probability: counting how often](/course/open/prob-basics?lang=en) you made distributions; the expected value is their long-run average, and the variance measures how far results spread around it. Its square root is the standard deviation of [Describing data: mean, median and spread](/course/open/stats-describe?lang=en), weighted by the probabilities. Later in the course, a loss is an expected value: the average over all examples a model could see. In the next lesson, *Bayes' rule*, you turn a conditional probability around.
     """)
     return
 

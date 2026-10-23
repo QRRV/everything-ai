@@ -1,15 +1,19 @@
 # SPDX-FileCopyrightText: 2026 Everything AI contributors
 # SPDX-License-Identifier: CC-BY-SA-4.0 AND MIT-0
 """Checks of the lesson prob-bayes: bayes, P(A | B) from the prior P(A) and the two conditional probabilities of the
-evidence B, with and without A. And the picture: the positive tests of 100,000 people, split into ill and healthy."""
+evidence B, with and without A. And the play block: 100,000 people with the test of the guess, for every share of
+them that is ill, as two bars, all people and the positive tests, split into ill and healthy."""
 import html
 import math
 import re
 
 from everything_ai.check import FunctionBox, Mistake
 
-# The rare illness of the guess: 1 in 1,000 people has it; the test is positive for 99% of the ill and 1% of the healthy.
+# The rare illness of the guess: 1 in 1000 people has it; the test is positive for 99% of the ill and 1% of the healthy.
 PRIOR, HIT, FALSE_ALARM = 0.001, 0.99, 0.01
+PEOPLE = 100_000
+# The stops of the play block: how many of the 100,000 people are ill, from 1 in 10,000 to 1 in 2. The guess is 100.
+ILL = [10, 20, 50, 100, 200, 500, 1000, 2000, 5000, 10000, 20000, 50000]
 
 
 def bayes(p_a: float, p_b_given_a: float, p_b_given_not_a: float) -> float:
@@ -18,44 +22,71 @@ def bayes(p_a: float, p_b_given_a: float, p_b_given_not_a: float) -> float:
     return p_b_given_a * p_a / p_b
 
 
-def tested(people: int = 100_000) -> tuple[int, int, int, int]:
-    """Of `people` people: how many are ill, how many of them test positive, how many are healthy, and how many of
-    those test positive, all rounded to whole people."""
-    ill = round(people * PRIOR)
-    healthy = people - ill
-    return ill, round(ill * HIT), healthy, round(healthy * FALSE_ALARM)
+def _whole(x: float) -> int:
+    """A number of people, rounded to a whole person, a half up."""
+    return math.floor(x + 0.5)
+
+
+def tested(ill: int = round(PEOPLE * PRIOR)) -> tuple[int, int, int, int]:
+    """Of 100,000 people of whom `ill` are ill: how many are ill, how many of them test positive, how many are
+    healthy, and how many of those test positive, all rounded to whole people."""
+    healthy = PEOPLE - ill
+    return ill, _whole(ill * HIT), healthy, _whole(healthy * FALSE_ALARM)
 
 
 def count(n: int, lang: str) -> str:
-    """A whole number for the text and the picture, with the thousands separator of the language: 1,098 or 1.098."""
+    """A whole number for the text and the picture, as the slider of the play block writes it: four digits without a
+    separator, 1098, and five or more with the thousands separator of the language, 99,900 or 99.900."""
+    if abs(n) < 10_000:
+        return str(n)
     return f"{n:,}".replace(",", ".") if lang == "nl" else f"{n:,}"
 
 
-# --- the picture: the positive tests as one bar, split into ill and healthy ---------------------------------------------
+def percent(part: int, whole: int, lang: str) -> str:
+    """A share as a percentage for the text and the picture: a whole percent, or below 1% with its own decimals, as
+    0.1%; with a decimal comma in Dutch."""
+    p = 100 * part / whole
+    text = f"{round(p)}%" if p >= 1 or p == 0 else f"{p:.2g}%"
+    return text.replace(".", ",") if lang == "nl" else text
 
-def picture(labels: dict[str, str], lang: str) -> str:
-    """The positive tests of 100,000 people as one bar of 100%: the share from ill people (filled) and from healthy
-    people (open). Two groups, so no colour: filled and open in data grey (style guide 1.7)."""
-    _, true_pos, _, false_pos = tested()
-    total = true_pos + false_pos
-    W, x0, y0, bar_h = 600, 0, 40, 46
-    w_ill = W * true_pos / total
-    num = lambda n: count(n, lang)
-    pct = lambda n: f"{round(100 * n / total)}%"
-    p = [f'<text x="0" y="18" style="font-size:16px;font-weight:600;fill:var(--ea-ink)">{html.escape(labels["title"])}</text>',
-         f'<rect x="{x0}" y="{y0}" width="{w_ill:.1f}" height="{bar_h}" style="fill:var(--ea-data)"/>',
-         f'<rect x="{x0 + w_ill + 0.75:.2f}" y="{y0 + 0.75}" width="{W - w_ill - 1.5:.2f}" height="{bar_h - 1.5}" '
-         f'style="fill:none;stroke:var(--ea-data);stroke-width:1.5"/>',
-         f'<text x="{x0}" y="{y0 + bar_h + 24}" style="font-size:14px;fill:var(--ea-ink)">'
-         f'{html.escape(labels["ill"])}: {num(true_pos)} ({pct(true_pos)})</text>',
-         f'<text x="{W}" y="{y0 + bar_h + 24}" style="font-size:14px;fill:var(--ea-ink);text-anchor:end">'
-         f'{html.escape(labels["healthy"])}: {num(false_pos)} ({pct(false_pos)})</text>',
-         f'<text x="{W / 2}" y="{y0 + bar_h / 2 + 5}" style="font-size:14px;fill:var(--ea-ink);text-anchor:middle;font-weight:600">'
-         f'{html.escape(labels["total"].format(n=num(total)))}</text>']
-    height = y0 + bar_h + 34
-    return (f'<figure class="ea-figure" style="margin:0.25rem 0 0.75rem;max-width:{W}px">'
-            f'<svg viewBox="0 0 {W} {height}" role="img" style="width:100%;height:auto;font-family:var(--ea-font-ui)">'
-            f'<title>{html.escape(labels["alt"])}</title>{"".join(p)}</svg></figure>')
+
+def frame(ill: int, lang: str) -> dict[str, str]:
+    """The numbers of one stop of the play block, written for the lesson's text in its language."""
+    _, true_pos, healthy, false_pos = tested(ill)
+    pos = true_pos + false_pos
+    return {"ill": count(ill, lang), "healthy": count(healthy, lang), "one_in": count(PEOPLE // ill, lang),
+            "share": percent(ill, PEOPLE, lang),
+            "pos": count(pos, lang), "true_pos": count(true_pos, lang), "false_pos": count(false_pos, lang),
+            "posterior": percent(true_pos, pos, lang), "false_share": percent(false_pos, pos, lang)}
+
+
+# --- the play block: everyone and the positive tests, each as one bar split into ill and healthy ------------------------
+
+def bars(ill: int, labels: dict[str, str], lang: str) -> str:
+    """Two bars of 100%: all 100,000 people, and the positive tests among them; the share of ill people filled, of
+    healthy people open. Two groups, so no colour: filled and open in data grey (style guide 1.7). A share too small
+    to see still gets a sliver, so that every bar shows both groups."""
+    _, true_pos, healthy, false_pos = tested(ill)
+    v = frame(ill, lang)
+    W, bar_h = 460, 30
+    rows = [(labels["everyone"].format(**v), ill / PEOPLE, labels["ill"].format(**v), labels["healthy"].format(**v)),
+            (labels["positive"].format(**v), true_pos / (true_pos + false_pos), labels["true_pos"].format(**v),
+             labels["false_pos"].format(**v))]
+    p = [f'<text x="0" y="16" style="font-size:15px;font-weight:600;fill:var(--ea-ink)">{html.escape(labels["title"])}</text>']
+    y = 30
+    for name, share, left, right in rows:
+        w = max(1.5, W * share)
+        p += [f'<text x="0" y="{y + 15}" style="font-size:13px;fill:var(--ea-ink-2)">{html.escape(name)}</text>',
+              f'<rect x="0" y="{y + 22}" width="{w:.2f}" height="{bar_h}" style="fill:var(--ea-data)"/>',
+              f'<rect x="{w + 0.75:.2f}" y="{y + 22.75}" width="{max(0.0, W - w - 1.5):.2f}" height="{bar_h - 1.5}" '
+              f'style="fill:none;stroke:var(--ea-data);stroke-width:1.5"/>',
+              f'<text x="0" y="{y + 22 + bar_h + 17}" style="font-size:13px;fill:var(--ea-ink)">{html.escape(left)}</text>',
+              f'<text x="{W}" y="{y + 22 + bar_h + 17}" style="font-size:13px;fill:var(--ea-ink);text-anchor:end">{html.escape(right)}</text>']
+        y += 22 + bar_h + 34
+    return (f'<figure class="ea-figure" role="img" aria-label="{html.escape(labels["alt"].format(**v))}" '
+            f'style="margin:0.25rem 0 0.5rem;max-width:{W}px">'
+            f'<svg viewBox="0 0 {W} {y - 8}" aria-hidden="true" style="width:100%;height:auto;font-family:var(--ea-font-ui);'
+            f'font-variant-numeric:tabular-nums">{"".join(p)}</svg></figure>')
 
 
 # The lesson is done when these are correct. "no-news" and "second-test" are choice questions in the lesson.
@@ -68,7 +99,7 @@ _DOTS = Mistake("dots-left", matches=lambda got, text: re.search(r"^[^#\n]*\.\.\
 
 def _short(v):
     """A probability for the messages: four significant digits, without float noise or e-notation, so that 0.00099
-    does not show as 0.001 and 0.0902 not as the 0.0902 it should be; whole numbers without .0."""
+    does not show as 0.001 nor as 9.9e-04, and 0.0901639... shows as 0.09016; whole numbers without .0."""
     try:
         x = float(v)
     except (TypeError, ValueError):
@@ -118,6 +149,11 @@ EXERCISES = {
             Mistake("only-a", wrong=_b(p_b="p_b_given_a * p_a"),
                     en="`{call}` gives `{got}`, and it should give `{want}`: your `p_b` only counts B together with A, so you divide P(A and B) by itself. B also happens without A: add `p_b_given_not_a * p_not_a`.",
                     nl="`{call}` geeft `{got}`, en dat moet `{want}` zijn: je `p_b` telt alleen B samen met A, dus deel je P(A en B) door zichzelf. B gebeurt ook zonder A: tel er `p_b_given_not_a * p_not_a` bij op."),
+            # 1 - P(B | A) is P(not B | A). With the test of the guess it is 0.01 = P(B | not A) by chance, so only the
+            # other cases show it; without this, the learner would hear "almost" with a question about hard-coded numbers.
+            Mistake("not-b-given-a", state="almost", wrong=_b(p_b="p_b_given_a * p_a + (1 - p_b_given_a) * p_not_a"),
+                    en="Right for the test of the guess, but only because there 1 − 0.99 is 0.01. `{call}` gives `{got}`, and it should give `{want}`: `1 - p_b_given_a` is P(not B | A), how often B does not happen with A. The second way B can happen is B without A: `p_b_given_not_a * p_not_a`.",
+                    nl="Goed voor de test uit de gok, maar alleen omdat 1 − 0,99 daar 0,01 is. `{call}` geeft `{got}`, en dat moet `{want}` zijn: `1 - p_b_given_a` is P(niet B | A), hoe vaak B niet gebeurt met A. De tweede manier waarop B kan gebeuren, is B zonder A: `p_b_given_not_a * p_not_a`."),
         ],
         digits=4,
         texts={
@@ -151,4 +187,9 @@ CASES = [
     ("bayes", _b(p_b="p_b_given_a * p_a"), "wrong", "only-a"),
     ("bayes", _b(ret="p_b_given_not_a * p_not_a / p_b"), "wrong", None),
     ("bayes", _B_HEAD + "    return 0.0902\n", "wrong", None),
+    ("bayes", _b(p_b="p_b_given_a * p_a + (1 - p_b_given_a) * p_not_a"), "almost", "not-b-given-a"),
+    ("bayes", _B_HEAD + "    return 0.99 * 0.001 / (0.99 * 0.001 + 0.01 * 0.999)\n", "almost", None),
+    ("bayes", _b(ret="..."), "wrong", "dots-left"),
+    ("bayes", _b(p_b="p_b_given_a * p_a + p_b_given_not_a * p_nota"), "error", None),
+    ("bayes", _b().replace("    return ", "    "), "wrong", "no-return"),
 ]
