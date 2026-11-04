@@ -386,7 +386,7 @@ def text_connections():
     mo.md(r"""
     ## Wrap-up
 
-    **How this connects.** The within-cluster sum of squares is what the two steps of [Groups without labels: k-means](/course/open/ml-kmeans?lang=en) make small, and the silhouette uses the same standardized distance as [Ask the neighbors: k-nearest neighbors](/course/open/ml-knn?lang=en). k is a hyperparameter, as the k of k-nearest neighbors is, but without labels there is no validation set to choose it with, so you choose with the sum, the silhouette and what you know about the data. In the next lesson, *A neuron*, the neural networks begin.
+    **How this connects.** The within-cluster sum of squares is what the two steps of [Groups without labels: k-means](/course/open/ml-kmeans?lang=en) make small, and the silhouette uses the same standardized distance as [Ask the neighbors: k-nearest neighbors](/course/open/ml-knn?lang=en). k is a hyperparameter, as the k of k-nearest neighbors is, but without labels there is no validation set to choose it with, so you choose with the sum, the silhouette and what you know about the data. In the next lesson, *The best shadow: PCA*, the penguins keep their four measurements, and you look for fewer numbers that keep as much of them as they can.
     """)
     return
 

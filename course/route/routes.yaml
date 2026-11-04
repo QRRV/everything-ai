@@ -131,6 +131,7 @@ routes:
   - ml-project-fair-comparison
   - ml-kmeans
   - ml-choosing-k
+  - ml-pca
   - nn-neuron
   - nn-xor
   - nn-hidden-layer

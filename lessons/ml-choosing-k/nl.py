@@ -386,7 +386,7 @@ def text_connections():
     mo.md(r"""
     ## Afronding
 
-    **Samenhang.** De within-cluster sum of squares is wat de twee stappen van [Groepen zonder labels: k-means](/course/open/ml-kmeans?lang=nl) klein maken, en het silhouette gebruikt dezelfde gestandaardiseerde afstand als [Vraag het de buren: k-nearest neighbors](/course/open/ml-knn?lang=nl). k is een hyperparameter, zoals de k van k-nearest neighbors, maar zonder labels is er geen validation set om hem mee te kiezen, dus kies je met de som, het silhouette en wat je van de data weet. In de volgende les, *Een neuron*, beginnen de neural networks.
+    **Samenhang.** De within-cluster sum of squares is wat de twee stappen van [Groepen zonder labels: k-means](/course/open/ml-kmeans?lang=nl) klein maken, en het silhouette gebruikt dezelfde gestandaardiseerde afstand als [Vraag het de buren: k-nearest neighbors](/course/open/ml-knn?lang=nl). k is een hyperparameter, zoals de k van k-nearest neighbors, maar zonder labels is er geen validation set om hem mee te kiezen, dus kies je met de som, het silhouette en wat je van de data weet. In de volgende les, *De beste schaduw: PCA*, houden de pinguïns hun vier metingen, en zoek je minder getallen die er zo veel mogelijk van bewaren.
     """)
     return
 

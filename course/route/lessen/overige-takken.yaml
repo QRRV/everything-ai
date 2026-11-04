@@ -165,6 +165,20 @@ lessons:
   data: [palmer-penguins]
   needs: any
 
+- id: ml-pca
+  tak: klassiek-ml
+  title: "The best shadow: PCA"
+  level: basis
+  module: without-labels
+  idea: "Four measurements do not fit in one picture, but their shadow on a line or a plane does; PCA finds the directions whose shadows keep the most of the spread, and the explained variance says how much each keeps, without ever seeing a label."
+  covers: [dimensiereductie#2]
+  requires: [ml-choosing-k, prob-expectation, math-matrix-multiply]
+  introduces: [c:dimensionality-reduction, c:principal-component-analysis, c:principal-component, c:explained-variance]
+  uses: [c:k-means, c:clustering, c:centroid, c:standardization, c:mean, c:variance, c:standard-deviation, c:dot-product, c:norm, c:vector, c:matrix-multiplication, c:residual, c:feature, c:example, c:label, c:unsupervised-learning, py:matmul-operator, py:np-linalg-norm, py:np-mean, py:np-std, py:np-sum, py:np-unique, py:np-array, py:np-indexing, py:slicing, py:boolean-mask, py:dataframe, py:pandas-select-filter, py:isna, py:sklearn-fit-predict, py:keyword-argument, py:for, py:range, py:if, py:break, py:comparison, py:list, py:indexing, py:tuple, py:import, py:import-as, py:arithmetic, py:float, py:int, py:string-literal, py:print, py:comment, py:variable, py:underscore-name, v:scatter-plot, v:line-plot, q:predict, q:choice, q:exercise-with-check, q:run-cell]
+  ladder: [numpy]
+  data: [palmer-penguins]
+  needs: any
+
 # --- verantwoord ------------------------------------------------------------------
 - id: rai-bias-in-data
   tak: verantwoord

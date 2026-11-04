@@ -1,0 +1,38 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: ml-pca
+minutes: 15
+title:
+  en: "The best shadow: PCA"
+  nl: "De beste schaduw: PCA"
+goal:
+  en: "describe examples with fewer numbers with principal component analysis, by hand in NumPy and with scikit-learn, and say how much of the spread the components keep."
+  nl: "voorbeelden met minder getallen beschrijven met principal component analysis, met de hand in NumPy en met scikit-learn, en zeggen hoeveel van de spreiding de componenten bewaren."
+summary:
+  - en: "The shadow of an example on a line through the mean, in a direction w of length 1, is the dot product of the example, minus the mean, with w. The best line is the one whose shadows keep the most spread; it is also the line with the smallest squared distances to the examples, because the two always add up to the same total."
+    nl: "De schaduw van een voorbeeld op een lijn door het gemiddelde, in een richting w met lengte 1, is het inproduct van het voorbeeld, min het gemiddelde, met w. De beste lijn is die waarvan de schaduwen de meeste spreiding bewaren; dat is ook de lijn met de kleinste gekwadrateerde afstanden tot de voorbeelden, omdat die twee altijd samen hetzelfde totaal zijn."
+  - en: "Principal component analysis finds that direction, the first principal component, and then each next one at right angles to the earlier ones. The explained variance is the share of the spread a component keeps: on bill length and flipper length in millimeters, the first keeps 93.0%; on the four measurements, standardized, two keep 88.2% and three 97.3%."
+    nl: "Principal component analysis vindt die richting, de eerste principal component, en daarna elke volgende loodrecht op de eerdere. De verklaarde variantie is het deel van de spreiding dat een component bewaart: op snavellengte en flipperlengte in millimeters bewaart de eerste 93,0%; op de vier metingen, gestandaardiseerd, bewaren er twee 88,2% en drie 97,3%."
+  - en: "PCA never sees a label: it keeps the most spread, not what tells groups apart. On two components, k-means puts 301 of the 342 penguins in the cluster of their own species, against 313 on all four. Without standardizing, the first component is almost exactly body mass and keeps 99.99% of the spread."
+    nl: "PCA ziet nooit een label: het bewaart de meeste spreiding, niet wat groepen uit elkaar houdt. Op twee componenten zet k-means 301 van de 342 pinguïns in het cluster van hun eigen soort, tegen 313 op alle vier. Zonder standaardiseren is de eerste component bijna precies het lichaamsgewicht, en die bewaart 99,99% van de spreiding."
+can_now:
+  - en: "compute the shadows of examples on a direction, and the share of the spread they keep, in NumPy"
+    nl: "de schaduwen van voorbeelden op een richting uitrekenen, en het deel van de spreiding dat ze bewaren, in NumPy"
+    by: first-share
+  - en: "choose how many principal components to keep with the explained variance"
+    nl: "kiezen hoeveel principal components je bewaart met de verklaarde variantie"
+    by: how-many
+  - en: "reduce examples to a few components with scikit-learn's PCA before clustering them"
+    nl: "voorbeelden terugbrengen tot een paar componenten met PCA uit scikit-learn voordat je ze clustert"
+    by: two-shadows
+  - en: "say why features in different units must be standardized before PCA"
+    nl: "zeggen waarom je features in verschillende eenheden standaardiseert voor PCA"
+    by: why-scale
+further_reading:
+  - en: "Karl Pearson (1901), *On lines and planes of closest fit to systems of points in space*, Philosophical Magazine 2(11): the line with the smallest squared distances to the points, the start of PCA"
+    nl: "Karl Pearson (1901), *On lines and planes of closest fit to systems of points in space*, Philosophical Magazine 2(11): de lijn met de kleinste gekwadrateerde afstanden tot de punten, het begin van PCA"
+  - en: "Harold Hotelling (1933), *Analysis of a complex of statistical variables into principal components*, Journal of Educational Psychology 24: where the name principal components comes from"
+    nl: "Harold Hotelling (1933), *Analysis of a complex of statistical variables into principal components*, Journal of Educational Psychology 24: waar de naam principal components vandaan komt"
+  - en: "scikit-learn user guide, *Decomposing signals in components*, section *Principal component analysis (PCA)*: the settings of `PCA`, and its variants"
+    nl: "scikit-learn user guide, *Decomposing signals in components*, paragraaf *Principal component analysis (PCA)*: de instellingen van `PCA`, en zijn varianten"
