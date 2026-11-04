@@ -129,6 +129,8 @@ routes:
   - ml-data-leakage
   - ml-pipelines
   - ml-project-fair-comparison
+  - ml-kmeans
+  - ml-choosing-k
   - nn-neuron
   - nn-xor
   - nn-hidden-layer

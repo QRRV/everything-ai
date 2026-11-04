@@ -1,0 +1,38 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: ml-choosing-k
+minutes: 15
+title:
+  en: "How many clusters? Choosing k"
+  nl: "Hoeveel clusters? k kiezen"
+goal:
+  en: "choose the number of clusters for k-means with the within-cluster sum of squares and the silhouette score, and see why k-means is run from several starts."
+  nl: "het aantal clusters voor k-means kiezen met de within-cluster sum of squares en de silhouette score, en zien waarom je k-means vanaf meerdere starts draait."
+summary:
+  - en: "The within-cluster sum of squares adds up, for every example, the squared distance to the centroid of its cluster; k-means makes it small. The best sum only falls as k grows, from 684.0 with one cluster to 57.8 with eight on the penguins, so you look for the elbow, where an extra cluster stops helping much."
+    nl: "De within-cluster sum of squares telt voor elk voorbeeld de gekwadrateerde afstand tot de centroid van zijn cluster op; k-means maakt die klein. De beste som daalt alleen maar als k groeit, op de pinguïns van 684,0 met één cluster tot 57,8 met acht, dus je zoekt de elleboog, waar een cluster erbij weinig meer helpt."
+  - en: "The silhouette of an example compares a, the mean distance to the other examples of its own cluster, with b, the mean distance to the nearest other cluster: (b − a) / max(a, b), from −1 to 1. The silhouette score, their mean, is highest on the penguins for k = 2, with 0.543, against 0.522 for k = 3."
+    nl: "Het silhouette van een voorbeeld vergelijkt a, de gemiddelde afstand tot de andere voorbeelden van zijn eigen cluster, met b, de gemiddelde afstand tot het dichtstbijzijnde andere cluster: (b − a) / max(a, b), van −1 tot 1. De silhouette score, hun gemiddelde, is op de pinguïns het hoogst voor k = 2, met 0,543, tegen 0,522 voor k = 3."
+  - en: "From one start, k-means can end in a local minimum: no example changes cluster, but the sum is not the smallest. One of ten starts on the penguins ends at 206.1 instead of 157.8, so KMeans keeps the best of `n_init` starts. No number chooses k on its own: you decide with what the clusters are for."
+    nl: "Vanaf één start kan k-means eindigen in een lokaal minimum: geen enkel voorbeeld verandert meer van cluster, maar de som is niet de kleinste. Eén van tien starts op de pinguïns eindigt op 206,1 in plaats van 157,8, dus houdt KMeans de beste van `n_init` starts. Geen getal kiest k in zijn eentje: je beslist met waar de clusters voor zijn."
+can_now:
+  - en: "compute the within-cluster sum of squares of a clustering in NumPy"
+    nl: "de within-cluster sum of squares van een clustering uitrekenen in NumPy"
+    by: wcss
+  - en: "run k-means from several starts and recognize a local minimum"
+    nl: "k-means vanaf meerdere starts draaien en een lokaal minimum herkennen"
+    by: starts
+  - en: "choose k with the silhouette score of scikit-learn"
+    nl: "k kiezen met de silhouette score van scikit-learn"
+    by: best-k
+  - en: "say why no single number decides how many clusters you want"
+    nl: "zeggen waarom geen enkel getal bepaalt hoeveel clusters je wilt"
+    by: which-k
+further_reading:
+  - en: "Peter J. Rousseeuw (1987), *Silhouettes: a graphical aid to the interpretation and validation of cluster analysis*, Journal of Computational and Applied Mathematics 20: where the silhouette comes from"
+    nl: "Peter J. Rousseeuw (1987), *Silhouettes: a graphical aid to the interpretation and validation of cluster analysis*, Journal of Computational and Applied Mathematics 20: waar het silhouette vandaan komt"
+  - en: "Robert L. Thorndike (1953), *Who belongs in the family?*, Psychometrika 18(4): an early use of the elbow in the within-cluster sum of squares"
+    nl: "Robert L. Thorndike (1953), *Who belongs in the family?*, Psychometrika 18(4): een vroeg gebruik van de elleboog in de within-cluster sum of squares"
+  - en: "scikit-learn user guide, *Clustering*, section *Clustering performance evaluation*: the silhouette coefficient and other ways to judge clusters, with and without labels"
+    nl: "scikit-learn user guide, *Clustering*, paragraaf *Clustering performance evaluation*: de silhouette coefficient en andere manieren om clusters te beoordelen, met en zonder labels"

@@ -1,0 +1,38 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: ml-kmeans
+minutes: 15
+title:
+  en: "Groups without labels: k-means"
+  nl: "Groepen zonder labels: k-means"
+goal:
+  en: "cluster examples without labels with k-means, by hand in NumPy and with scikit-learn, and judge the clusters against labels you held back."
+  nl: "voorbeelden zonder labels clusteren met k-means, met de hand in NumPy en met scikit-learn, en de clusters beoordelen met labels die je achterhield."
+summary:
+  - en: "Clustering splits examples without labels into groups of examples that are alike; a cluster is described by its centroid, the mean of its examples. k-means repeats two steps, every example to its nearest centroid and every centroid to the mean of its examples, until no example changes cluster."
+    nl: "Clustering verdeelt voorbeelden zonder labels in groepen van voorbeelden die op elkaar lijken; een cluster beschrijf je met zijn centroid, het gemiddelde van zijn voorbeelden. k-means herhaalt twee stappen, elk voorbeeld naar zijn dichtstbijzijnde centroid en elke centroid naar het gemiddelde van zijn voorbeelden, tot geen enkel voorbeeld meer van cluster verandert."
+  - en: "On bill length and flipper length, standardized, k-means with k = 3 puts 327 of the 342 penguins in the cluster of their own species without ever seeing it; from a start with two Gentoos it takes 7 steps. Without standardizing it is 287."
+    nl: "Op snavellengte en flipperlengte, gestandaardiseerd, zet k-means met k = 3 327 van de 342 pinguïns in het cluster van hun eigen soort, zonder die ooit te zien; vanaf een start met twee Gentoos duurt het 7 stappen. Zonder standaardiseren zijn het er 287."
+  - en: "k-means only knows distances, so the features decide which groups it can find: with all four measurements it is 313, because Adelies and Chinstraps differ almost only in bill length. The numbers of the clusters mean nothing; you name a cluster by looking at it."
+    nl: "k-means kent alleen afstanden, dus de features bepalen welke groepen het kan vinden: met alle vier de metingen zijn het er 313, omdat Adelies en Chinstraps bijna alleen in snavellengte verschillen. De nummers van de clusters betekenen niets; je geeft een cluster een naam door ernaar te kijken."
+can_now:
+  - en: "do one assign step and one move step of k-means by hand in NumPy"
+    nl: "één keer toewijzen en één keer verschuiven van k-means met de hand doen in NumPy"
+    by: one-step
+  - en: "repeat the two steps until no example changes cluster"
+    nl: "de twee stappen herhalen tot geen enkel voorbeeld meer van cluster verandert"
+    by: until-stable
+  - en: "cluster with scikit-learn's KMeans and count how well the clusters match labels you held back"
+    nl: "clusteren met KMeans uit scikit-learn en tellen hoe goed de clusters passen bij labels die je achterhield"
+    by: four
+  - en: "say why the features you choose decide which clusters k-means finds"
+    nl: "zeggen waarom de features die je kiest bepalen welke clusters k-means vindt"
+    by: why-four
+further_reading:
+  - en: "Stuart P. Lloyd (1982), *Least Squares Quantization in PCM*, IEEE Transactions on Information Theory 28(2): the two steps of k-means, written in 1957 at Bell Labs and published only in 1982"
+    nl: "Stuart P. Lloyd (1982), *Least Squares Quantization in PCM*, IEEE Transactions on Information Theory 28(2): de twee stappen van k-means, in 1957 bij Bell Labs geschreven en pas in 1982 gepubliceerd"
+  - en: "David Arthur and Sergei Vassilvitskii (2007), *k-means++: The Advantages of Careful Seeding*, Proceedings of the 18th ACM-SIAM Symposium on Discrete Algorithms: the way scikit-learn picks its starting centroids"
+    nl: "David Arthur en Sergei Vassilvitskii (2007), *k-means++: The Advantages of Careful Seeding*, Proceedings of the 18th ACM-SIAM Symposium on Discrete Algorithms: de manier waarop scikit-learn zijn startcentroids kiest"
+  - en: "scikit-learn user guide, *Clustering*, section *K-means*: the settings of `KMeans`, and when k-means does and does not work"
+    nl: "scikit-learn user guide, *Clustering*, paragraaf *K-means*: de instellingen van `KMeans`, en wanneer k-means wel en niet werkt"

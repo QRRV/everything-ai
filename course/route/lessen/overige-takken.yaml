@@ -137,6 +137,34 @@ lessons:
   data: [palmer-penguins]
   needs: any
 
+- id: ml-kmeans
+  tak: klassiek-ml
+  title: "Groups without labels: k-means"
+  level: basis
+  module: without-labels
+  idea: "k-means clusters examples without labels by repeating two steps, every example to its nearest centroid and every centroid to the mean of its examples, until nothing changes; on the penguins it finds the species it never saw, as far as the features allow."
+  covers: [clustering#0, clustering#1]
+  requires: [ml-knn, ml-kinds-of-learning, ml-sklearn, py-while]
+  introduces: [c:clustering, c:k-means, c:centroid]
+  uses: [c:unsupervised-learning, c:label, c:feature, c:example, c:class, c:model, c:distance, py:np-linalg-norm, c:standardization, c:feature-scaling, c:mean, c:standard-deviation, c:axis, c:k-nearest-neighbors, py:np-mean, py:np-argmin, py:np-unique, py:np-sum, py:np-zeros, py:boolean-mask, py:np-array, py:np-indexing, py:dataframe, py:pandas-select-filter, py:isna, py:sklearn-fit-predict, py:keyword-argument, py:for, py:range, py:break, py:if, py:comparison, py:bool, py:list, py:append, py:indexing, py:tuple, py:import, py:import-as, py:arithmetic, py:float, py:int, py:string-literal, py:print, py:comment, py:variable, py:underscore-name, v:scatter-plot, q:predict, q:choice, q:exercise-with-check, q:run-cell]
+  ladder: [numpy]
+  data: [palmer-penguins]
+  needs: any
+
+- id: ml-choosing-k
+  tak: klassiek-ml
+  title: "How many clusters? Choosing k"
+  level: basis
+  module: without-labels
+  idea: "k-means always ends, but not always in its best solution, and it never says how many clusters there are: the within-cluster sum of squares always falls as k grows, so you look for its elbow, ask the silhouette score how clearly the clusters lie apart, and decide with what the clusters are for."
+  covers: [clustering#5]
+  requires: [ml-kmeans]
+  introduces: [c:within-cluster-sum-of-squares, c:silhouette-score, c:local-minimum]
+  uses: [c:clustering, c:k-means, c:centroid, c:distance, c:standardization, c:mean, c:hyperparameter, c:label, c:feature, c:example, py:np-linalg-norm, py:np-argmin, py:np-sum, py:np-mean, py:np-unique, py:np-zeros, py:np-array, py:np-indexing, py:boolean-mask, py:np-random-generator, py:dataframe, py:pandas-select-filter, py:isna, py:sklearn-fit-predict, py:keyword-argument, py:def, py:return, py:while, py:break, py:for, py:range, py:if, py:comparison, py:min-max, py:list, py:append, py:indexing, py:slicing, py:tuple, py:import, py:import-as, py:arithmetic, py:float, py:int, py:string-literal, py:print, py:comment, py:variable, py:underscore-name, v:scatter-plot, v:line-plot, q:predict, q:choice, q:exercise-with-check, q:run-cell]
+  ladder: [numpy]
+  data: [palmer-penguins]
+  needs: any
+
 # --- verantwoord ------------------------------------------------------------------
 - id: rai-bias-in-data
   tak: verantwoord
