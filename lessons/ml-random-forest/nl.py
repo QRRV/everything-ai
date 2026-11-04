@@ -350,7 +350,7 @@ def text_connections():
     mo.md(r"""
     ## Afronding
 
-    **Samenhang.** Elke boom is de boom uit [Vraag na vraag: de beslisboom](/course/open/ml-decision-tree?lang=nl); de stemming is de majority voting uit [Vraag het de buren: k-nearest neighbors](/course/open/ml-knn?lang=nl), en de variantie uit [Verwachtingswaarde en variantie](/course/open/prob-expectation?lang=nl) zegt hoeveel een model met zijn willekeurige trekkingen verandert. De bootstrap komt op gevorderd niveau terug in *Hoe zeker is een getal? Betrouwbaarheidsintervallen en de bootstrap*. In de volgende les, *Een neuron*, zet je de eerste stap naar neural networks.
+    **Samenhang.** Elke boom is de boom uit [Vraag na vraag: de beslisboom](/course/open/ml-decision-tree?lang=nl); de stemming is de majority voting uit [Vraag het de buren: k-nearest neighbors](/course/open/ml-knn?lang=nl), en de variantie uit [Verwachtingswaarde en variantie](/course/open/prob-expectation?lang=nl) zegt hoeveel een model met zijn willekeurige trekkingen verandert. De bootstrap komt op gevorderd niveau terug in *Hoe zeker is een getal? Betrouwbaarheidsintervallen en de bootstrap*. In de volgende les, *Boom na boom op wat overblijft: gradient boosting*, werken kleine bomen achter elkaar in plaats van naast elkaar, elk aan wat de bomen ervoor nog fout hebben.
     """)
     return
 

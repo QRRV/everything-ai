@@ -1,0 +1,35 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: ml-pipelines
+minutes: 15
+title:
+  en: "Every step in every fold: pipelines"
+  nl: "Elke stap in elke fold: pipelines"
+goal:
+  en: "put the steps that learn from data and a model in one pipeline, measure it with cross-validation in one line, and fit it once and measure it once on the test set."
+  nl: "de stappen die van data leren en een model in één pipeline zetten, hem in één regel meten met cross-validation, en hem één keer fitten en één keer meten op de test set."
+summary:
+  - en: "A pipeline is a fixed chain of steps with a model at the end, fitted and used as one model. Every step before the model learns something with `fit` and changes the data with `transform`; `pipe.fit` learns every step from the training examples, and `pipe.predict` only changes new examples with what was learned."
+    nl: "Een pipeline is een vaste keten van stappen met een model aan het eind, die je als één model fit en gebruikt. Elke stap vóór het model leert iets met `fit` en verandert de data met `transform`; `pipe.fit` leert elke stap van de trainingsvoorbeelden, en `pipe.predict` verandert nieuwe voorbeelden alleen met wat geleerd is."
+  - en: "`cross_val_score(pipe, X, y, cv=KFold(5))` fits a fresh copy of the pipeline in every fold, so every step is learned again from that fold's training examples and none can leak. On the penguins, 5-nearest neighbors scores 0.759 without standardizing and 0.985 with `StandardScaler()` in the pipeline."
+    nl: "`cross_val_score(pipe, X, y, cv=KFold(5))` fit in elke fold een nieuwe kopie van de pipeline, dus elke stap wordt opnieuw geleerd van de trainingsvoorbeelden van die fold en geen enkele kan lekken. Op de pinguïns scoort 5-nearest neighbors 0,759 zonder standaardiseren en 0,985 met `StandardScaler()` in de pipeline."
+  - en: "Some leaks are tiny, such as standardizing all the examples first, and some are huge, such as choosing 20 columns of 1000 first; a pipeline makes both impossible. It protects only the steps that are in it."
+    nl: "Sommige lekken zijn klein, zoals eerst alle voorbeelden standaardiseren, en sommige enorm, zoals eerst 20 van de 1000 kolommen kiezen; een pipeline maakt ze allebei onmogelijk. Hij beschermt alleen de stappen die erin zitten."
+can_now:
+  - en: "make feature selection a step of a pipeline and measure it with cross-validation"
+    nl: "feature selection een stap van een pipeline maken en hem meten met cross-validation"
+    by: noise-pipeline
+  - en: "fit a pipeline on the training set and measure it once on the test set"
+    nl: "een pipeline fitten op de training set en hem één keer meten op de test set"
+    by: test-once
+  - en: "say why a step done before the pipeline is not protected by it"
+    nl: "zeggen waarom een stap vóór de pipeline er niet door beschermd wordt"
+    by: scaled-first
+further_reading:
+  - en: "scikit-learn user guide, *Pipelines and composite estimators*: pipelines, and steps for columns of different kinds"
+    nl: "scikit-learn-handleiding, *Pipelines and composite estimators*: pipelines, en stappen voor kolommen van verschillende soorten"
+  - en: "scikit-learn user guide, *Common pitfalls and recommended practices*: data leakage during preprocessing, and how a pipeline prevents it"
+    nl: "scikit-learn-handleiding, *Common pitfalls and recommended practices*: data leakage bij het voorbewerken, en hoe een pipeline dat voorkomt"
+  - en: "Lars Buitinck and others (2013), *API design for machine learning software: experiences from the scikit-learn project*: why every step has `fit`, `transform` and `predict`, and how pipelines follow from that"
+    nl: "Lars Buitinck en anderen (2013), *API design for machine learning software: experiences from the scikit-learn project*: waarom elke stap `fit`, `transform` en `predict` heeft, en hoe pipelines daaruit volgen"

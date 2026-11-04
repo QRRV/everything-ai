@@ -80,6 +80,63 @@ lessons:
   data: [palmer-penguins]
   needs: any
 
+- id: ml-gradient-boosting
+  tak: klassiek-ml
+  title: "Tree after tree on what is left: gradient boosting"
+  level: basis
+  module: more-models
+  idea: "Gradient boosting starts every prediction at the mean and adds small regression trees one after another, each learning the residuals of the trees before it and counting for a part, the learning rate; more trees keep lowering the training error, so the number of trees is chosen on the validation set."
+  covers: [bomen-en-ensembles#8]
+  requires: [ml-random-forest, ml-residuals, ml-regression-metrics, ml-learning-rate, ml-bias-variance]
+  introduces: [c:boosting, c:gradient-boosting, c:regression-tree]
+  uses: [c:decision-tree, c:tree-split, c:leaf, c:tree-depth, c:random-forest, c:ensemble, c:residual, c:learning-rate, c:gradient-descent, c:derivative, c:mean-squared-error, c:root-mean-squared-error, c:statistical-bias, c:variance, c:hyperparameter, c:validation-set, c:train-set, c:overfitting, c:underfitting, c:linear-regression, c:regression-task, c:label, c:feature, c:example, c:prediction, c:model, c:training, c:mean, c:missing-value, c:seed, c:random-number-generator, py:np-random-generator, c:csv, py:dataframe, py:pandas-select-filter, py:isna, py:sklearn-fit-predict, py:sklearn-export-text, py:np-array, py:np-zeros, py:np-mean, py:math-module, py:keyword-argument, c:array, py:indexing, py:slicing, py:def, py:return, py:for, py:range, py:len, py:if, py:comparison, py:list, py:append, py:import, py:import-as, py:arithmetic, py:float, py:int, py:string-literal, py:print, py:comment, py:variable, py:underscore-name, v:scatter-plot, v:line-plot, v:histogram, q:predict, q:choice, q:exercise-with-check, q:run-cell]
+  ladder: [numpy]
+  data: [palmer-penguins]
+  needs: any
+
+- id: ml-data-leakage
+  tak: klassiek-ml
+  title: "Too good to be true: data leakage"
+  level: basis
+  module: more-models
+  idea: "Data leakage is information about the answer that reaches training or your choices but will not be there when the model is used, such as features chosen on all the data before cross-validation, a feature only known after the label, or the same person in both sets; split first, and work out everything from the training part alone."
+  covers: [data-leakage#0, data-leakage#1]
+  requires: [ml-cross-validation, ml-feature-scaling, ml-baselines, ml-loss-vs-metric]
+  introduces: [c:data-leakage, c:target-leakage, c:feature-selection, c:group-split]
+  uses: [c:cross-validation, c:fold, c:k-nearest-neighbors, c:majority-voting, c:distance, c:standardization, c:validation-set, c:test-set, c:train-set, c:generalization, c:hyperparameter, c:overfitting, c:noise, c:baseline, c:accuracy, c:classification, c:class, c:label, c:feature, c:example, c:prediction, c:model, c:training, c:mean, c:seed, c:random-number-generator, py:np-random-generator, py:np-array, py:np-indexing, py:boolean-mask, py:np-argsort, py:np-unique, py:np-argmax, py:np-mean, py:np-sum, py:np-concatenate, py:np-arange, py:np-linalg-norm, py:abs, py:keyword-argument, c:array, c:shape, py:slicing, py:indexing, py:def, py:return, py:for, py:range, py:len, py:if, py:comparison, py:list, py:append, py:import, py:import-as, py:arithmetic, py:float, py:int, py:string-literal, py:print, py:comment, py:variable, py:underscore-name, v:line-plot, q:predict, q:choice, q:exercise-with-check, q:run-cell]
+  ladder: [numpy]
+  data: []
+  needs: any
+
+- id: ml-pipelines
+  tak: klassiek-ml
+  title: "Every step in every fold: pipelines"
+  level: basis
+  module: more-models
+  idea: "A pipeline chains the steps that learn from data and a model into one model: fit learns every step from the training examples only, and cross-validation fits a fresh copy in every fold, so no step can leak."
+  covers: [scikit-learn#1, scikit-learn#2]
+  requires: [ml-data-leakage, ml-sklearn, ml-knn]
+  introduces: [c:pipeline, py:sklearn-pipeline, py:sklearn-cross-val-score]
+  uses: [c:data-leakage, c:feature-selection, c:standardization, c:feature-scaling, c:cross-validation, c:fold, c:k-nearest-neighbors, c:distance, c:hyperparameter, c:train-set, c:validation-set, c:test-set, c:accuracy, c:classification, c:class, c:label, c:feature, c:example, c:prediction, c:model, c:training, c:mean, c:standard-deviation, c:seed, c:random-number-generator, py:sklearn-fit-predict, py:np-random-generator, py:np-array, py:np-mean, py:dataframe, py:pandas-select-filter, py:isna, py:keyword-argument, py:indexing, py:slicing, py:list, py:import, py:import-as, py:arithmetic, py:float, py:int, py:string-literal, py:print, py:comment, py:variable, py:underscore-name, q:predict, q:choice, q:exercise-with-check, q:run-cell]
+  ladder: [numpy]
+  data: [palmer-penguins]
+  needs: any
+
+- id: ml-project-fair-comparison
+  tak: klassiek-ml
+  title: "Project: which model is best? A fair comparison"
+  level: basis
+  module: more-models
+  kind: review
+  idea: "Compare the models of the module and the earlier ones on one question, the sex of a penguin: the same folds, every model in its pipeline, a baseline, fold by fold, hyperparameters chosen by cross-validation, and the test set once; the best four are about one penguin per fold apart."
+  covers: []
+  requires: [ml-pipelines, ml-gradient-boosting, ml-project-tabular]
+  uses: [c:pipeline, py:sklearn-pipeline, py:sklearn-cross-val-score, c:cross-validation, c:fold, c:baseline, c:k-nearest-neighbors, c:logistic-regression, c:decision-tree, c:tree-depth, c:random-forest, c:gradient-boosting, c:standardization, c:feature-scaling, c:hyperparameter, c:train-set, c:test-set, c:accuracy, c:classification, c:class, c:label, c:feature, c:example, c:prediction, c:model, c:training, c:mean, c:seed, c:random-number-generator, py:sklearn-fit-predict, py:np-random-generator, py:np-array, py:np-mean, py:min-max, py:dataframe, py:pandas-select-filter, py:isna, py:dict, py:for, py:if, py:comparison, py:tuple, py:keyword-argument, py:indexing, py:slicing, py:list, py:import, py:import-as, py:arithmetic, py:float, py:int, py:string-literal, py:print, py:comment, py:variable, py:underscore-name, q:predict, q:choice, q:explain, q:exercise-with-check, q:run-cell]
+  mentions: [c:fair-comparison]
+  ladder: [numpy]
+  data: [palmer-penguins]
+  needs: any
+
 # --- verantwoord ------------------------------------------------------------------
 - id: rai-bias-in-data
   tak: verantwoord

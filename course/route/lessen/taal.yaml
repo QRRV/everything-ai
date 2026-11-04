@@ -540,6 +540,7 @@ lessons:
   requires: [llm-decontamination, tok-special-tokens, torch-dataloader]
   introduces: [c:token-shard, py:np-memmap, py:np-tofile, py:tempfile]
   uses: [c:token, c:token-id, c:tokenizer, c:end-of-text, c:special-token, c:vocabulary, c:bpe, c:merge-rule, c:gpt, c:context-window, c:embedding, c:mini-batch, c:epoch, c:shuffling, c:dtype, c:array, c:tensor, c:file-path, c:pretraining-corpus, c:training, c:language-model, py:np-array, py:np-indexing, py:slicing, py:dataset, py:dataloader, py:len-getitem, py:class, py:self, py:init-method, py:torch-tensor, py:import, py:import-as, py:list, py:append, py:tuple, py:for, py:range, py:range-step, py:if, py:comparison, py:len, py:arithmetic, py:f-string, py:def, py:return, py:print, py:comment, py:underscore-name, py:string-literal, py:comprehension, py:none, py:indexing, q:predict, q:choice, q:exercise-with-check, q:run-cell]
+  mentions: [c:pipeline]
   ladder: [numpy, torch]
   data: [tinystories]
   needs: any

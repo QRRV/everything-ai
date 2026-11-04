@@ -125,6 +125,10 @@ routes:
   - rai-bias-in-data
   - ml-decision-tree
   - ml-random-forest
+  - ml-gradient-boosting
+  - ml-data-leakage
+  - ml-pipelines
+  - ml-project-fair-comparison
   - nn-neuron
   - nn-xor
   - nn-hidden-layer

@@ -1,0 +1,35 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: ml-project-fair-comparison
+minutes: 30
+title:
+  en: "Project: which model is best? A fair comparison"
+  nl: "Project: welk model is het best? Een eerlijke vergelijking"
+goal:
+  en: "compare five models and a baseline fairly on one question, fold by fold, choose a hyperparameter with cross-validation, measure the chosen model once on the test set, and write down how large the differences really are."
+  nl: "vijf modellen en een baseline eerlijk vergelijken op één vraag, fold voor fold, een hyperparameter kiezen met cross-validation, het gekozen model één keer meten op de test set, en opschrijven hoe groot de verschillen echt zijn."
+summary:
+  - en: "A fair comparison gives every model the same examples and the same folds, the steps it needs in its own pipeline, the same care with its hyperparameters, and a baseline next to it. On the sex of 266 penguins, k-nearest neighbors gets 0.913, logistic regression 0.906, the random forest 0.902, boosting 0.895, a tree of depth 3 0.864 and the baseline 0.451."
+    nl: "Een eerlijke vergelijking geeft elk model dezelfde voorbeelden en dezelfde folds, de stappen die het nodig heeft in zijn eigen pipeline, evenveel zorg voor zijn hyperparameters, en een baseline ernaast. Op het geslacht van 266 pinguïns haalt k-nearest neighbors 0,913, logistische regressie 0,906, het random forest 0,902, boosting 0,895, een boom met diepte 3 0,864 en de baseline 0,451."
+  - en: "With 53 penguins in a fold, one penguin is 0.019: the best four lie within one penguin per fold, less than one model's folds differ from each other. Compare fold by fold, and cut the folds in other ways: k-NN gets the most penguins right in seven of nine ways, by one to four of 266."
+    nl: "Met 53 pinguïns in een fold is één pinguïn 0,019: de beste vier liggen binnen één pinguïn per fold, minder dan de folds van één model onderling verschillen. Vergelijk fold voor fold, en snijd de folds op andere manieren: k-NN heeft in zeven van de negen manieren de meeste pinguïns goed, één tot vier van de 266 meer."
+  - en: "Choose with cross-validation and use the test set once, for the one model you chose: k = 9 gets 0.932 in cross-validation and 0.881 on the 67 test penguins. Choosing on the test set turns its number into the best of several tries, and one test penguin there is 0.015."
+    nl: "Kies met cross-validation en gebruik de test set één keer, voor het ene model dat je koos: k = 9 haalt 0,932 in cross-validation en 0,881 op de 67 testpinguïns. Kiezen op de test set maakt zijn getal de beste van een paar pogingen, en één testpinguïn is daar 0,015."
+can_now:
+  - en: "compare two models on the same folds, fold by fold"
+    nl: "twee modellen op dezelfde folds vergelijken, fold voor fold"
+    by: fold-by-fold
+  - en: "choose a hyperparameter with cross-validation and measure the chosen model once on the test set"
+    nl: "een hyperparameter kiezen met cross-validation en het gekozen model één keer meten op de test set"
+    by: choose-k
+  - en: "say why a model is not chosen on the test set, and how many examples a difference is"
+    nl: "zeggen waarom je een model niet op de test set kiest, en hoeveel voorbeelden een verschil is"
+    by: test-pick
+further_reading:
+  - en: "Thomas G. Dietterich (1998), *Approximate Statistical Tests for Comparing Supervised Classification Learning Algorithms*, Neural Computation 10(7): when a difference between two classifiers on the same data is more than chance, and why folds that share training examples make that hard"
+    nl: "Thomas G. Dietterich (1998), *Approximate Statistical Tests for Comparing Supervised Classification Learning Algorithms*, Neural Computation 10(7): wanneer een verschil tussen twee classifiers op dezelfde data meer is dan toeval, en waarom folds die trainingsvoorbeelden delen dat lastig maken"
+  - en: "Gavin C. Cawley and Nicola L. C. Talbot (2010), *On Over-fitting in Model Selection and Subsequent Selection Bias in Performance Evaluation*, Journal of Machine Learning Research 11: why the best cross-validation score of many tries is too good"
+    nl: "Gavin C. Cawley en Nicola L. C. Talbot (2010), *On Over-fitting in Model Selection and Subsequent Selection Bias in Performance Evaluation*, Journal of Machine Learning Research 11: waarom de beste score in cross-validation van veel pogingen te goed is"
+  - en: "Kristen B. Gorman, Tony D. Williams and William R. Fraser (2014), *Ecological Sexual Dimorphism and Environmental Variability within a Community of Antarctic Penguins (Genus Pygoscelis)*, PLoS ONE 9(3): the study the penguin measurements come from, and how males and females differ"
+    nl: "Kristen B. Gorman, Tony D. Williams en William R. Fraser (2014), *Ecological Sexual Dimorphism and Environmental Variability within a Community of Antarctic Penguins (Genus Pygoscelis)*, PLoS ONE 9(3): het onderzoek waar de metingen van de pinguïns vandaan komen, en hoe mannetjes en vrouwtjes verschillen"

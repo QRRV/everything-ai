@@ -1,0 +1,37 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: ml-data-leakage
+minutes: 15
+title:
+  en: "Too good to be true: data leakage"
+  nl: "Te mooi om waar te zijn: data leakage"
+goal:
+  en: "recognize data leakage, choose features inside every fold of cross-validation, keep features out that are only known later, and split by group when examples belong together."
+  nl: "data leakage herkennen, features binnen elke fold van cross-validation kiezen, features weglaten die pas later bekend zijn, en per groep splitsen als voorbeelden bij elkaar horen."
+summary:
+  - en: "Data leakage is information in training that the model will not have when it predicts for real, most often about the examples it is measured on. On 50 people with 1000 columns of random numbers, choosing the 20 best columns with all 50 people makes cross-validation say 0.96, while new people get 52.1% right."
+    nl: "Data leakage is informatie in de training die het model niet heeft als het echt voorspelt, meestal over de voorbeelden waarop het gemeten wordt. Op 50 mensen met 1000 kolommen willekeurige getallen laat het kiezen van de 20 beste kolommen met alle 50 mensen cross-validation 0,96 zeggen, terwijl nieuwe mensen voor 52,1% goed gaan."
+  - en: "Split first. Every step that learns from data, such as feature selection, standardizing or filling in gaps, learns from the training examples only, in every fold again; chosen inside each fold, the same columns give a score around guessing."
+    nl: "Eerst splitsen. Elke stap die van data leert, zoals feature selection, standaardiseren of gaten vullen, leert alleen van de trainingsvoorbeelden, in elke fold opnieuw; binnen elke fold gekozen geven dezelfde kolommen een score rond gokken."
+  - en: "Target leakage is a feature that is only known after the label, or is made from it: ask for every feature whether you would know it when you predict. Examples that belong together, such as the photos of one patient, stay on one side: a group split."
+    nl: "Target leakage is een feature die pas na het label bekend is, of eruit gemaakt is: vraag bij elke feature of je hem zou weten op het moment dat je voorspelt. Voorbeelden die bij elkaar horen, zoals de foto's van één patiënt, blijven aan één kant: een group split."
+can_now:
+  - en: "choose features inside every fold of cross-validation, from its training examples only"
+    nl: "features binnen elke fold van cross-validation kiezen, alleen uit de trainingsvoorbeelden ervan"
+    by: inside-folds
+  - en: "tell which features are known at the moment of predicting, and which leak"
+    nl: "zeggen welke features bekend zijn op het moment van voorspellen, en welke lekken"
+    by: known-then
+  - en: "say why examples that belong together go on one side of a split"
+    nl: "zeggen waarom voorbeelden die bij elkaar horen aan één kant van een split gaan"
+    by: same-patient
+further_reading:
+  - en: "Trevor Hastie, Robert Tibshirani and Jerome Friedman (2009), *The Elements of Statistical Learning*, 2nd edition, Springer, section 7.10.2, *The Wrong and Right Way to Do Cross-validation*: the example the table of noise of this lesson follows, there with 5000 columns, 100 kept and one nearest neighbor"
+    nl: "Trevor Hastie, Robert Tibshirani en Jerome Friedman (2009), *The Elements of Statistical Learning*, 2e druk, Springer, paragraaf 7.10.2, *The Wrong and Right Way to Do Cross-validation*: het voorbeeld dat de tabel met ruis van deze les volgt, daar met 5000 kolommen, waarvan er 100 blijven, en één dichtstbijzijnde buur"
+  - en: "Shachar Kaufman, Saharon Rosset, Claudia Perlich and Ori Stitelman (2012), *Leakage in Data Mining: Formulation, Detection, and Avoidance*, ACM Transactions on Knowledge Discovery from Data 6(4): the kinds of leakage, with examples from data mining competitions"
+    nl: "Shachar Kaufman, Saharon Rosset, Claudia Perlich en Ori Stitelman (2012), *Leakage in Data Mining: Formulation, Detection, and Avoidance*, ACM Transactions on Knowledge Discovery from Data 6(4): de soorten leakage, met voorbeelden uit data-mining-wedstrijden"
+  - en: "Sayash Kapoor and Arvind Narayanan (2023), *Leakage and the reproducibility crisis in machine-learning-based science*, Patterns 4(9): 294 papers in 17 fields, and eight kinds of leakage"
+    nl: "Sayash Kapoor en Arvind Narayanan (2023), *Leakage and the reproducibility crisis in machine-learning-based science*, Patterns 4(9): 294 artikelen in 17 vakgebieden, en acht soorten leakage"
+  - en: "Oskar Pfungst (1907), *Das Pferd des Herrn von Osten (Der Kluge Hans)*, in English as *Clever Hans (The Horse of Mr. von Osten)* (1911): how the horse read the answer from the questioner"
+    nl: "Oskar Pfungst (1907), *Das Pferd des Herrn von Osten (Der Kluge Hans)*, in het Engels als *Clever Hans (The Horse of Mr. von Osten)* (1911): hoe het paard het antwoord van de vraagsteller las"

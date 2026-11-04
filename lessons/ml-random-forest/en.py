@@ -350,7 +350,7 @@ def text_connections():
     mo.md(r"""
     ## Wrap-up
 
-    **How this connects.** Each tree is the tree of [Question after question: the decision tree](/course/open/ml-decision-tree?lang=en); the vote is the majority voting of [Ask the neighbors: k-nearest neighbors](/course/open/ml-knn?lang=en), and the variance of [Expected value and variance](/course/open/prob-expectation?lang=en) says how much a model changes with its random draws. The bootstrap comes back at the intermediate level in *How sure is a number? Confidence intervals and the bootstrap*. In the next lesson, *A neuron*, you take the first step towards neural networks.
+    **How this connects.** Each tree is the tree of [Question after question: the decision tree](/course/open/ml-decision-tree?lang=en); the vote is the majority voting of [Ask the neighbors: k-nearest neighbors](/course/open/ml-knn?lang=en), and the variance of [Expected value and variance](/course/open/prob-expectation?lang=en) says how much a model changes with its random draws. The bootstrap comes back at the intermediate level in *How sure is a number? Confidence intervals and the bootstrap*. In the next lesson, *Tree after tree on what is left: gradient boosting*, small trees work in a row instead of side by side, each on what the trees before it still get wrong.
     """)
     return
 

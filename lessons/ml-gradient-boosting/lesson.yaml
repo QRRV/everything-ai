@@ -1,0 +1,37 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: ml-gradient-boosting
+minutes: 15
+title:
+  en: "Tree after tree on what is left: gradient boosting"
+  nl: "Boom na boom op wat overblijft: gradient boosting"
+goal:
+  en: "fit gradient boosting from small regression trees that each learn the residuals of the trees before them, predict with it, and choose the number of trees on the validation set."
+  nl: "gradient boosting maken van kleine regressiebomen die elk de residuen van de bomen ervoor leren, ermee voorspellen, en het aantal bomen kiezen op de validation set."
+summary:
+  - en: "Gradient boosting starts every prediction at the mean of the labels. Round after round, a small regression tree learns the residuals, and a part of what it predicts, the learning rate, is added to the prediction. The model is the start plus the learning rate times what all its trees predict."
+    nl: "Gradient boosting begint elke voorspelling bij het gemiddelde van de labels. Ronde na ronde leert een kleine regressieboom de residuen, en een deel van wat hij voorspelt, de learning rate, komt bij de voorspelling. Het model is de start plus de learning rate keer wat al zijn bomen voorspellen."
+  - en: "The residual is minus half the derivative of the squared residual with respect to the prediction, so every round is a step of gradient descent; the tree makes that step for new examples too. A forest averages deep trees and lowers the variance; boosting adds up small trees and lowers the bias."
+    nl: "Het residu is min de helft van de afgeleide van het gekwadrateerde residu naar de voorspelling, dus elke ronde is een stap gradient descent; de boom zet die stap ook voor nieuwe voorbeelden. Een forest middelt diepe bomen en verlaagt de variantie; boosting telt kleine bomen op en verlaagt de bias."
+  - en: "More trees keep lowering the training RMSE, but after a while the trees learn the quirks of single training examples: on the penguins the validation RMSE is smallest at 42 trees, 415 g, and rises to 575 g at 1000. The number of trees is a hyperparameter, chosen on the validation set."
+    nl: "Meer bomen laten de RMSE op de training set steeds verder dalen, maar na een tijd leren de bomen de eigenaardigheden van losse trainingsvoorbeelden: op de pinguïns is de RMSE op de validation set het kleinst bij 42 bomen, 415 g, en stijgt hij naar 575 g bij 1000. Het aantal bomen is een hyperparameter, die je kiest op de validation set."
+can_now:
+  - en: "do one round of gradient boosting: residuals, a small tree on them, and a part of its prediction added"
+    nl: "één ronde gradient boosting doen: residuen, een kleine boom erop, en een deel van zijn voorspelling erbij"
+    by: one-round
+  - en: "predict with a start and a list of trees"
+    nl: "voorspellen met een start en een lijst bomen"
+    by: predict
+  - en: "say why more trees can make boosting worse, and how to choose their number"
+    nl: "zeggen waarom meer bomen boosting slechter kunnen maken, en hoe je hun aantal kiest"
+    by: too-many
+further_reading:
+  - en: "Jerome H. Friedman (2001), *Greedy Function Approximation: A Gradient Boosting Machine*, Annals of Statistics 29(5), 1189–1232: the paper that introduced gradient boosting"
+    nl: "Jerome H. Friedman (2001), *Greedy Function Approximation: A Gradient Boosting Machine*, Annals of Statistics 29(5), 1189–1232: het artikel waarin gradient boosting werd voorgesteld"
+  - en: "Gareth James, Daniela Witten, Trevor Hastie, Robert Tibshirani and Jonathan Taylor (2023), *An Introduction to Statistical Learning with Applications in Python*, Springer, chapter 8.2, on boosting"
+    nl: "Gareth James, Daniela Witten, Trevor Hastie, Robert Tibshirani en Jonathan Taylor (2023), *An Introduction to Statistical Learning with Applications in Python*, Springer, hoofdstuk 8.2, over boosting"
+  - en: "Terence Parr and Jeremy Howard (2018), *How to explain gradient boosting*, explained.ai: gradient boosting step by step, with the golfer"
+    nl: "Terence Parr en Jeremy Howard (2018), *How to explain gradient boosting*, explained.ai: gradient boosting stap voor stap, met de golfer"
+  - en: "Léo Grinsztajn, Edouard Oyallon and Gaël Varoquaux (2022), *Why do tree-based models still outperform deep learning on typical tabular data?*, NeurIPS Datasets and Benchmarks: on 45 tables, boosted trees and forests beat neural networks"
+    nl: "Léo Grinsztajn, Edouard Oyallon en Gaël Varoquaux (2022), *Why do tree-based models still outperform deep learning on typical tabular data?*, NeurIPS Datasets and Benchmarks: op 45 tabellen winnen boosted trees en forests van neural networks"
