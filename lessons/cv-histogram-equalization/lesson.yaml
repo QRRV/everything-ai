@@ -1,0 +1,31 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: cv-histogram-equalization
+minutes: 25
+title:
+  en: "Spread the grays: histogram equalization"
+  nl: "Grijstinten spreiden: histogramegalisatie"
+goal:
+  en: "make a dull photo clear again with histogram equalization: every gray gets 255 times the share of the pixels with that gray or a darker one."
+  nl: "een doffe foto weer helder maken met histogramegalisatie: elke grijstint krijgt 255 keer het aandeel van de pixels met die grijstint of een donkerdere."
+summary:
+  - en: "A dull photo has little contrast: its grays lie in a narrow band of the scale, and its histogram shows that band."
+    nl: "Een doffe foto heeft weinig contrast: zijn grijstinten liggen in een smalle band van de schaal, en zijn histogram laat die band zien."
+  - en: "The cumulative histogram gives, for every gray, how many pixels have that gray or a darker one: `np.cumsum(counts)`. Divided by the number of pixels, it is a share from 0 to 1."
+    nl: "Het cumulatieve histogram geeft voor elke grijstint hoeveel pixels die grijstint of een donkerdere hebben: `np.cumsum(counts)`. Gedeeld door het aantal pixels is het een aandeel van 0 tot en met 1."
+  - en: "Histogram equalization gives every gray 255 times its share: `table = (255 * share).astype(np.uint8)`, then `table[img]` looks up every pixel. The median lands in the middle of the scale, and the grays spread out, with gaps, because equalization makes no new grays."
+    nl: "Histogramegalisatie geeft elke grijstint 255 keer zijn aandeel: `table = (255 * share).astype(np.uint8)`, en `table[img]` zoekt dan elke pixel op. De mediaan komt in het midden van de schaal, en de grijstinten spreiden zich, met gaten, omdat egalisatie geen nieuwe grijstinten maakt."
+can_now:
+  - en: "predict which grays get the most room after equalization"
+    nl: "voorspellen welke grijstinten na egalisatie de meeste ruimte krijgen"
+    by: snow
+  - en: "make the cumulative histogram of an image as shares"
+    nl: "het cumulatieve histogram van een afbeelding maken als aandelen"
+    by: cumulative
+  - en: "read off the cumulative histogram which gray a gray becomes"
+    nl: "aan het cumulatieve histogram aflezen welke grijstint een grijstint wordt"
+    by: middle
+  - en: "equalize a grayscale image with a table of new grays"
+    nl: "een grijswaardenbeeld egaliseren met een tabel van nieuwe grijstinten"
+    by: equalize

@@ -41,11 +41,11 @@ lessons:
   title: "Spread the grays: histogram equalization"
   level: basis
   module: image-processing
-  idea: "A dull photo uses only part of the grays; mapping each gray to the share of pixels that are darker spreads them over the whole range, and the histogram shows it."
+  idea: "A dull photo uses only part of the grays; mapping each gray to 255 times the share of pixels with that gray or a darker one spreads them over the whole range, and the histogram shows it."
   covers: [d13-klassieke-beeldverwerking#0]
   requires: [cv-color-spaces, stats-describe]
-  introduces: [c:histogram-equalization, c:contrast, c:cumulative-histogram]
-  uses: [v:histogram, c:bin, py:plt-hist, c:grayscale-image]
+  introduces: [c:histogram-equalization, c:contrast, c:cumulative-histogram, py:np-cumsum, py:array-as-index]
+  uses: [v:histogram, v:line-plot, c:grayscale-image, c:pixel, c:uint8, c:png, c:array, c:shape, c:dtype, c:axis, c:hsv, c:median, c:quantile, c:standard-deviation, c:file-path, py:pil-image, py:np-array, py:np-astype, py:np-sum, py:min-max, py:np-std, py:np-median, py:np-quantile, py:np-indexing, py:comprehension, py:comparison, py:imread-imshow, py:keyword-argument, py:range, py:for, py:list, py:def, py:return, py:import, py:print, py:comment, py:variable, py:arithmetic, py:float, py:string-literal, q:predict, q:choice, q:exercise-with-check, q:slider-task, q:run-cell]
   ladder: [numpy]
   data: [course-photos]
   needs: any
