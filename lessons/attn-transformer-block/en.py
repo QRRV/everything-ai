@@ -351,7 +351,7 @@ def text_connections():
     mo.md(r"""
     ## Wrap-up
 
-    **How this connects.** The multi-head attention of [Multi-head attention](/course/open/attn-multi-head?lang=en), now for a mini-batch, and the pre-norm residual block of [Layer normalization](/course/open/nn-layernorm?lang=en), twice: that is the transformer block. The positions of [Telling attention where things are](/course/open/attn-positions?lang=en) go in at the start, and the residual stream carries them through every block. Your project `llm` now has `attention.py` and `block.py`. In *Assemble your GPT*, embeddings, a stack of your blocks and an output head become your GPT. First, on the main route, you build your own tokenizer, starting with *Byte pair encoding: build your own tokenizer*.
+    **How this connects.** The multi-head attention of [Multi-head attention](/course/open/attn-multi-head?lang=en), now for a mini-batch, and the pre-norm residual block of [Layer normalization](/course/open/nn-layernorm?lang=en), twice: that is the transformer block. The positions of [Telling attention where things are](/course/open/attn-positions?lang=en) go in at the start, and the residual stream carries them through every block. Your project `llm` now has `attention.py` and `block.py`. In *Assemble your GPT*, embeddings, a stack of your blocks and an output head become your GPT. First you build your own tokenizer, starting with *Byte pair encoding: build your own tokenizer*.
     """)
     return
 

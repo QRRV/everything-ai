@@ -351,7 +351,7 @@ def text_connections():
     mo.md(r"""
     ## Wrap-up
 
-    **How this connects.** [Bayes' rule](/course/open/prob-bayes?lang=en) gave the probability of spam after one word; naive Bayes does it for every word at once. Its probabilities come from counts with the Laplace smoothing of [Pairs you never saw: smoothing](/course/open/lm-smoothing?lang=en), and their logs are added up as in [How good is a language model?](/course/open/lm-nll?lang=en). Each class is in fact a small language model of single words, and the filter asks which of the two, weighed by its prior, makes the message more likely. In the next lesson of the main route, *Project: the same bigram model, learned with gradient descent*, your bigram model learns its table instead of counting it.
+    **How this connects.** [Bayes' rule](/course/open/prob-bayes?lang=en) gave the probability of spam after one word; naive Bayes does it for every word at once. Its probabilities come from counts with the Laplace smoothing of [Pairs you never saw: smoothing](/course/open/lm-smoothing?lang=en), and their logs are added up as in [How good is a language model?](/course/open/lm-nll?lang=en). Each class is in fact a small language model of single words, and the filter asks which of the two, weighed by its prior, makes the message more likely. In the next lesson of the route, *Project: the same bigram model, learned with gradient descent*, your bigram model learns its table instead of counting it.
     """)
     return
 

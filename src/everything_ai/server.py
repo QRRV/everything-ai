@@ -6,7 +6,7 @@ marimo loads this middleware through the entry point in pyproject.toml. It answe
   /                        the start page (marimo's own file list is never shown)
   /course/static/<file>    the start page's script, styles and fonts
   /course/api/state        the route, your progress and settings, as JSON
-  /course/api/settings     POST: language, theme, extra lessons on or off
+  /course/api/settings     POST: language, theme, extra lessons on or off, the route you follow
   /course/api/reset/<id>   POST: start a lesson over (your progress stays)
   /course/open/<id>?lang=  make or refresh your copy of a lesson, then open it
 Every other request goes to marimo. Everything here sits behind marimo's login token.
@@ -59,13 +59,10 @@ async def _body(receive) -> dict:
         return {}
 
 
-def state() -> dict:
-    """Everything the start page shows, in one go."""
-    lessons = course.lessons()
-    built = set(course.built_lessons())
-    done = progress.all_lessons()
+def _entries(steps: list[dict], lessons: dict, built: set, done: dict) -> list[dict]:
+    """The lessons of a route as the start page shows them."""
     route = []
-    for step in course.main_route():
+    for step in steps:
         lid = step["id"]
         lesson = lessons[lid]
         entry = {
@@ -80,9 +77,22 @@ def state() -> dict:
             entry["minutes"] = meta.get("minutes")
             entry["copy"] = {lang: workcopy.state(lid, lang) for lang in course.LANGS}
         route.append(entry)
+    return route
+
+
+def state() -> dict:
+    """Everything the start page shows, in one go."""
+    lessons = course.lessons()
+    built = set(course.built_lessons())
+    done = progress.all_lessons()
+    route = _entries(course.main_route(), lessons, built, done)
+    branch_routes = [{**r, "steps": _entries(course.route_steps(r["id"]), lessons, built, done)}
+                     for r in course.branch_routes()]
     disp = course.display()
     return {
         "route": route,
+        "mainRoute": course.main_route_names(),
+        "branchRoutes": branch_routes,
         "milestones": course.milestones(),
         "modules": disp["modules"],
         "levels": {lvl: {lang: course.level_name(lvl, lang) for lang in course.LANGS}
@@ -169,6 +179,8 @@ class CourseMiddleware:
                 _set_theme(scope, body["theme"])
             if isinstance(body.get("extras"), bool):
                 changes["extras"] = body["extras"]
+            if body.get("route") in course.route_ids():
+                changes["route"] = body["route"]
             return await _json(send, progress.save_settings(**changes))
         if path.startswith("/course/api/reset/") and method == "POST":
             lid = path.removeprefix("/course/api/reset/")

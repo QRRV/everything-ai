@@ -351,7 +351,7 @@ def text_connections():
     mo.md(r"""
     ## Afronding
 
-    **Samenhang.** De multi-head attention uit [Multi-head attention](/course/open/attn-multi-head?lang=nl), nu voor een mini-batch, en het pre-norm block met een residual connection uit [Layer normalization](/course/open/nn-layernorm?lang=nl), twee keer: dat is het transformer block. De posities uit [Attention laten weten waar alles staat](/course/open/attn-positions?lang=nl) gaan er aan het begin in, en de residual stream draagt ze door elk block. Je project `llm` heeft nu `attention.py` en `block.py`. In *Je GPT in elkaar zetten* worden embeddings, een stapel van je blocks en een output head je GPT. Eerst bouw je op de hoofdroute je eigen tokenizer, te beginnen met *Byte pair encoding: bouw je eigen tokenizer*.
+    **Samenhang.** De multi-head attention uit [Multi-head attention](/course/open/attn-multi-head?lang=nl), nu voor een mini-batch, en het pre-norm block met een residual connection uit [Layer normalization](/course/open/nn-layernorm?lang=nl), twee keer: dat is het transformer block. De posities uit [Attention laten weten waar alles staat](/course/open/attn-positions?lang=nl) gaan er aan het begin in, en de residual stream draagt ze door elk block. Je project `llm` heeft nu `attention.py` en `block.py`. In *Je GPT in elkaar zetten* worden embeddings, een stapel van je blocks en een output head je GPT. Eerst bouw je je eigen tokenizer, te beginnen met *Byte pair encoding: bouw je eigen tokenizer*.
     """)
     return
 

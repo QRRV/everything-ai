@@ -290,7 +290,7 @@ def text_connections():
     mo.md(r"""
     ## Afronding
 
-    **Samenhang.** In [Zo werkt een les](/course/open/start-how-this-course-works?lang=nl) leerde je de weg in een les; vanaf nu gaat elke les over AI zelf. De volgende les zoomt in op de eerste vraag van het recept: regels schrijven tegenover leren van voorbeelden. Later in de course bouw je elke cirkel zelf: eerst iets dat leert van voorbeelden, dan je eigen neural network, en aan het eind van de hoofdroute een klein generatief model dat tekst schrijft.
+    **Samenhang.** In [Zo werkt een les](/course/open/start-how-this-course-works?lang=nl) leerde je de weg in een les; vanaf nu gaat elke les over AI zelf. De volgende les zoomt in op de eerste vraag van het recept: regels schrijven tegenover leren van voorbeelden. Later in de course bouw je elke cirkel zelf: eerst iets dat leert van voorbeelden, dan je eigen neural network, en in de route naar je eigen LLM een klein generatief model dat tekst schrijft.
     """)
     return
 

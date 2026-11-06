@@ -1,0 +1,287 @@
+# The branch beeld (computer vision and all CNN families), after the main route. Its lessons that the main route
+# already has (data-images-as-arrays, cnn-pytorch and the CNN extras) stay in overige-takken.yaml.
+# The first part of the branch: docs/onderzoek/reports/Voorstel tak beeld.md, decided in besluiten.md 1.14.
+# A learner can start this part after the basics of the main route; the route beeld in routes.yaml gives the order.
+# Planning data; "uses" is filled in fully when a lesson is built. Format: ../FORMAT.md.
+tak: beeld
+map: v2.2
+lessons:
+
+# --- basis: working with images (classical image processing, in NumPy) ---------------------------------------
+- id: cv-image-files
+  title: "From light to a file of numbers"
+  level: basis
+  module: image-processing
+  idea: "An image file stores a number per pixel and per color: PNG keeps every number exactly, JPEG keeps a much smaller approximation."
+  covers: [beelden-als-data#3, beelden-als-data#4]
+  requires: [data-images-as-arrays]
+  introduces: [c:image-resolution, c:jpeg, c:lossless-compression, c:lossy-compression, py:pil-image]
+  uses: [c:pixel, c:channel, c:grayscale-image, py:imread-imshow, py:np-array]
+  ladder: [numpy]
+  data: [course-photos]
+  needs: any
+
+- id: cv-color-spaces
+  title: "Another way to write a color: HSV"
+  level: basis
+  module: image-processing
+  idea: "Red, green and blue are not the only three numbers for a color: hue, saturation and value say which color, how strong and how bright, so picking out one color becomes a simple rule."
+  covers: [d13-klassieke-beeldverwerking#0]
+  requires: [cv-image-files]
+  introduces: [c:color-space, c:rgb, c:hsv]
+  warns: [saturation]
+  uses: [c:pixel, c:channel, py:pil-image]
+  ladder: [numpy]
+  data: [course-photos]
+  needs: any
+
+- id: cv-histogram-equalization
+  title: "Spread the grays: histogram equalization"
+  level: basis
+  module: image-processing
+  idea: "A dull photo uses only part of the grays; mapping each gray to the share of pixels that are darker spreads them over the whole range, and the histogram shows it."
+  covers: [d13-klassieke-beeldverwerking#0]
+  requires: [cv-color-spaces, stats-describe]
+  introduces: [c:histogram-equalization, c:contrast, c:cumulative-histogram]
+  uses: [v:histogram, c:bin, py:plt-hist, c:grayscale-image]
+  ladder: [numpy]
+  data: [course-photos]
+  needs: any
+
+- id: cv-otsu-threshold
+  title: "Black or white: a threshold and Otsu's method"
+  level: basis
+  module: image-processing
+  idea: "A threshold turns a gray image into a binary one; Otsu's method picks the threshold that makes the two groups of grays each as tight as possible, by trying every gray."
+  covers: [d13-klassieke-beeldverwerking#1]
+  requires: [cv-histogram-equalization, prob-expectation]
+  introduces: [c:point-operation, c:thresholding, c:binary-image, c:otsu-method]
+  uses: [v:histogram, c:variance, c:cumulative-histogram]
+  ladder: [numpy]
+  data: [course-photos]
+  needs: any
+
+- id: cv-denoise-filters
+  title: "Less noise: the mean, the Gaussian and the median filter"
+  level: basis
+  module: image-processing
+  idea: "Replacing each pixel by a weighted average of its neighbors smooths noise but blurs edges; the median of the neighbors removes specks and keeps edges."
+  covers: [d13-klassieke-beeldverwerking#3]
+  requires: [cv-image-files, cnn-convolution-idea]
+  introduces: [c:image-noise, c:mean-filter, c:gaussian-filter, c:median-filter]
+  mentions: [c:normal-distribution]
+  warns: [noise]
+  uses: [c:convolution, c:filter, c:median]
+  ladder: [numpy]
+  data: [course-photos]
+  needs: any
+
+- id: cv-sobel-edges
+  title: "Where the brightness jumps: gradients and Sobel"
+  level: basis
+  module: image-processing
+  idea: "An edge is where the brightness changes fast; two small filters estimate how fast it changes to the right and downward, and the length of that gradient marks the edges."
+  covers: [d13-klassieke-beeldverwerking#4]
+  requires: [cv-denoise-filters, math-gradient, math-norms-cosine]
+  introduces: [c:edge-detection, c:image-gradient, c:sobel-filter]
+  uses: [c:gradient, c:partial-derivative, c:convolution, c:filter, c:norm]
+  ladder: [numpy]
+  data: [course-photos]
+  needs: any
+
+- id: cv-canny
+  title: "Thin, connected edges: Canny"
+  level: basis
+  module: image-processing
+  idea: "Canny turns the thick edges of Sobel into thin, connected lines: it keeps only the strongest point across each edge, and a weaker point only where it touches a strong one."
+  covers: [d13-klassieke-beeldverwerking#4]
+  requires: [cv-sobel-edges, cv-otsu-threshold]
+  introduces: [c:canny-edge-detector, c:edge-thinning, c:hysteresis-threshold]
+  uses: [c:image-gradient, c:sobel-filter, c:thresholding, c:binary-image]
+  ladder: [numpy]
+  data: [course-photos]
+  needs: any
+
+- id: cv-morphology
+  title: "Grow and shrink shapes: erosion and dilation"
+  level: basis
+  module: image-processing
+  idea: "Erosion keeps a pixel only if its whole neighborhood is white, dilation makes it white if any neighbor is; one after the other, they remove specks (opening) or fill holes (closing)."
+  covers: [d13-klassieke-beeldverwerking#5]
+  requires: [cv-otsu-threshold]
+  introduces: [c:morphological-operation, c:structuring-element, c:erosion, c:dilation, c:opening, c:closing]
+  uses: [c:binary-image, c:thresholding]
+  ladder: [numpy]
+  data: [course-photos]
+  needs: any
+
+- id: cv-connected-components
+  title: "Count the shapes: connected components"
+  level: basis
+  module: image-processing
+  idea: "Pixels that touch belong to one shape; a breadth-first search from each unvisited white pixel finds every shape, its size and the smallest box around it."
+  covers: [d13-klassieke-beeldverwerking#6]
+  requires: [cv-morphology, search-bfs]
+  introduces: [c:connected-component, c:bounding-box]
+  uses: [c:breadth-first-search, c:queue, py:deque, c:binary-image, c:opening]
+  ladder: [python, numpy]
+  data: [course-photos]
+  needs: any
+
+- id: cv-resize-interpolation
+  title: "Bigger and smaller: interpolation"
+  level: basis
+  module: image-processing
+  idea: "A resized image needs values between the old pixels; the nearest pixel gives blocks, a weighted mean of the four around it (bilinear interpolation) gives smooth steps."
+  covers: [d13-klassieke-beeldverwerking#7]
+  requires: [cv-image-files]
+  introduces: [c:interpolation, c:nearest-neighbor-interpolation, c:bilinear-interpolation]
+  uses: [c:pixel, c:image-resolution]
+  ladder: [numpy]
+  data: [course-photos]
+  needs: any
+
+- id: cv-alpha-compositing
+  title: "One image over another: alpha and green screens"
+  level: basis
+  module: image-processing
+  idea: "An alpha value per pixel says how much of the front image covers the back one; a green screen gets its alpha from how green each pixel is."
+  covers: [d13-klassieke-beeldverwerking#2]
+  requires: [cv-color-spaces]
+  introduces: [c:alpha-channel, c:alpha-compositing, c:chroma-key]
+  uses: [c:hsv, c:channel]
+  ladder: [numpy]
+  data: [course-photos]
+  needs: any
+
+# --- basis: using a pretrained model ------------------------------------------------------------------------
+- id: cv-prepare-photo
+  title: "Get a photo ready for a model"
+  level: basis
+  module: pretrained-vision
+  idea: "A pretrained model expects photos like the ones it learned from: the same size, cut from the middle, and each color channel scaled with the mean and spread of its training photos."
+  covers: []
+  requires: [cv-resize-interpolation, ml-feature-scaling, torch-pretrained]
+  introduces: [c:center-crop, c:per-channel-normalization]
+  uses: [c:standardization, c:interpolation, c:channel, c:pretrained-model]
+  ladder: [numpy, torch]
+  data: [course-photos]
+  needs: any
+
+- id: cv-try-classifier
+  title: "Try an image classifier: top-1 and top-5"
+  level: basis
+  module: pretrained-vision
+  idea: "A classifier trained on ImageNet gives a probability for each of 1,000 kinds of things; top-5 accuracy counts it right when the true kind is among its five best guesses."
+  covers: [beeldclassificatie#0, beeldclassificatie#2]
+  requires: [cv-prepare-photo]
+  introduces: [c:imagenet, c:top-k-accuracy]
+  uses: [c:pretrained-model, c:softmax, c:accuracy, c:per-channel-normalization]
+  ladder: [torch]
+  data: [model-resnet18-imagenet, course-photos]
+  needs: any
+
+- id: cv-pretrained-features
+  title: "What a vision model sees: features and a linear probe"
+  level: basis
+  module: pretrained-vision
+  idea: "A large pretrained vision model turns a photo into a vector of features; a linear classifier on those features learns new kinds of things from a few examples each."
+  covers: [vision-foundation-models#0, vision-foundation-models#1]
+  requires: [cv-try-classifier, torch-frozen-features, ml-embeddings-idea]
+  introduces: [c:vision-foundation-model, c:linear-probe]
+  uses: [c:feature-extractor, c:embedding, c:freezing, c:transfer-learning]
+  ladder: [torch]
+  data: [model-dinov2-small, caltech-101-download-only]
+  needs: any
+
+- id: cv-image-search
+  title: "Find photos that look alike"
+  level: basis
+  module: pretrained-vision
+  idea: "Photos whose feature vectors point the same way look alike; the cosine similarity to every other photo finds the nearest ones, and that is image search."
+  covers: [embeddings-en-similariteit#2]
+  requires: [cv-pretrained-features, ml-knn]
+  introduces: [c:image-retrieval]
+  uses: [c:cosine-similarity, c:k-nearest-neighbors, c:embedding, c:vision-foundation-model, py:np-argsort]
+  ladder: [numpy, torch]
+  data: [model-dinov2-small, caltech-101-download-only]
+  needs: any
+
+- id: cv-fine-tune-photos
+  title: "Fine-tune a classifier on your own kinds of photos"
+  level: basis
+  module: pretrained-vision
+  idea: "Fine-tuning every layer of a pretrained classifier on a few hundred photos of new kinds, with a small learning rate, starts from what it already sees and beats training only the last layer."
+  covers: [beeldclassificatie#1]
+  requires: [cv-try-classifier, torch-fine-tune, nn-data-augmentation]
+  introduces: [c:full-fine-tuning]
+  uses: [c:fine-tuning, c:pretrained-model, c:data-augmentation, c:imagenet, c:per-channel-normalization]
+  ladder: [torch]
+  data: [model-resnet18-imagenet, caltech-101-download-only]
+  needs: any
+
+# --- basis: boxes and masks ----------------------------------------------------------------------------------
+- id: cv-annotations
+  title: "Labels, boxes, masks and keypoints"
+  level: basis
+  module: boxes-and-masks
+  idea: "What a vision model must find decides how its data is labeled: one label per image, a box per object, a mask per pixel or a point per joint."
+  covers: [beelden-als-data#5]
+  requires: [cv-connected-components]
+  introduces: [c:annotation, c:object-detection, c:segmentation-mask, c:keypoint]
+  uses: [c:bounding-box, c:label, c:connected-component]
+  ladder: [numpy]
+  data: [course-scenes, coco-annotations]
+  needs: any
+
+- id: cv-iou
+  title: "How much two boxes overlap: IoU"
+  level: basis
+  module: boxes-and-masks
+  idea: "The intersection over union of a predicted and a true box is the overlap divided by the area they cover together: 1 for a perfect box, 0 for a miss."
+  covers: [objectdetectie#0]
+  requires: [cv-annotations]
+  introduces: [c:intersection-over-union]
+  uses: [c:bounding-box, c:object-detection]
+  ladder: [python, numpy]
+  data: [course-scenes]
+  needs: any
+
+- id: cv-nms
+  title: "One box per object: non-maximum suppression"
+  level: basis
+  module: boxes-and-masks
+  idea: "A detector proposes many boxes for one object; keeping the most confident box and dropping every box that overlaps it too much leaves one box per object."
+  covers: [objectdetectie#0]
+  requires: [cv-iou]
+  introduces: [c:non-maximum-suppression, c:confidence-score]
+  uses: [c:intersection-over-union, c:bounding-box]
+  ladder: [python, numpy]
+  data: [course-scenes]
+  needs: any
+
+- id: cv-map
+  title: "Score a detector: mean average precision"
+  level: basis
+  module: boxes-and-masks
+  idea: "A detected box counts as found when its IoU with a true box is high enough; the area under the precision-recall curve per kind, averaged over the kinds, is the detector's mAP."
+  covers: [objectdetectie#0]
+  requires: [cv-nms, ml-roc-auc]
+  introduces: [c:average-precision, c:mean-average-precision]
+  uses: [c:precision-recall-curve, c:intersection-over-union, c:confidence-score]
+  ladder: [numpy]
+  data: [course-scenes]
+  needs: any
+
+- id: cv-pretrained-detector
+  title: "Use a pretrained detector"
+  level: basis
+  module: boxes-and-masks
+  idea: "A detector trained on COCO draws a box, a kind and a score around each object it knows in a photo; a threshold on the score decides which boxes you keep, and that threshold trades missed objects for false boxes."
+  covers: [objectdetectie#1]
+  requires: [cv-map, cv-prepare-photo]
+  introduces: [c:score-threshold]
+  uses: [c:object-detection, c:bounding-box, c:confidence-score, c:non-maximum-suppression, c:pretrained-model]
+  ladder: [torch]
+  data: [model-detr-resnet50, caltech-101-download-only]
+  needs: any

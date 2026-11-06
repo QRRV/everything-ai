@@ -351,7 +351,7 @@ def text_connections():
     mo.md(r"""
     ## Afronding
 
-    **Samenhang.** [De regel van Bayes](/course/open/prob-bayes?lang=nl) gaf de kans op spam na één woord; naive Bayes doet dat voor alle woorden tegelijk. Zijn kansen komen uit tellingen met de Laplace smoothing uit [Paren die je nooit zag: smoothing](/course/open/lm-smoothing?lang=nl), en hun logs worden opgeteld zoals in [Hoe goed is een language model?](/course/open/lm-nll?lang=nl). Elke klasse is eigenlijk een klein language model van losse woorden, en het filter vraagt welke van de twee, gewogen met haar prior, het bericht waarschijnlijker maakt. In de volgende les van de hoofdroute, *Project: hetzelfde bigram-model, geleerd met gradient descent*, leert je bigram-model zijn tabel in plaats van haar te tellen.
+    **Samenhang.** [De regel van Bayes](/course/open/prob-bayes?lang=nl) gaf de kans op spam na één woord; naive Bayes doet dat voor alle woorden tegelijk. Zijn kansen komen uit tellingen met de Laplace smoothing uit [Paren die je nooit zag: smoothing](/course/open/lm-smoothing?lang=nl), en hun logs worden opgeteld zoals in [Hoe goed is een language model?](/course/open/lm-nll?lang=nl). Elke klasse is eigenlijk een klein language model van losse woorden, en het filter vraagt welke van de twee, gewogen met haar prior, het bericht waarschijnlijker maakt. In de volgende les van de route, *Project: hetzelfde bigram-model, geleerd met gradient descent*, leert je bigram-model zijn tabel in plaats van haar te tellen.
     """)
     return
 

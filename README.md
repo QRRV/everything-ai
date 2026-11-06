@@ -32,7 +32,7 @@ The first part of the course runs on any computer from the last few years. Lesso
 
 ## How it works
 
-- **One route, three levels.** The start page shows the whole route, from the basics through intermediate to expert. You can open any lesson; if you miss something from before, the lesson says where to find it.
+- **Routes in three levels.** The start page shows your route, from the basics through intermediate to expert, and lets you choose another one, such as computer vision after the basics. You can open any lesson; if you miss something from before, the lesson says where to find it.
 - **Every lesson works the same way.** Why it matters, the idea with a worked example, then exercises with a check that tells you straight away what is right, what is not yet, and what to do next. Hints open one at a time, with the solution last.
 - **Your work stays yours.** You work in your own copy of every lesson, in the folder `work/`. Your progress is kept there too. "Start over" puts a lesson back the way the course made it.
 - **English and Dutch.** Switch on the start page or at the top of a lesson.

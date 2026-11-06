@@ -302,7 +302,7 @@ def text_connections():
     mo.md(r"""
     ## Wrap-up
 
-    **How this connects.** A language model gives likely text, as in [Sampling: let the model write](/course/open/lm-sampling?lang=en) and [Base model or chat model?](/course/open/lm-base-vs-chat?lang=en); likely is often true, but not always, and how sure the model is does not tell you which. So check what matters against a source you trust. With *Show extra lessons* on, two come first: *Encoders, decoders and the GPT line*, about the kinds of language model, and *Look inside a real LLM's next-token probabilities*, where you load a small open model and read its probabilities. In the next lesson of the main route, *What a paper, a preprint and peer review are*, you start reading research yourself, where every claim needs a source too.
+    **How this connects.** A language model gives likely text, as in [Sampling: let the model write](/course/open/lm-sampling?lang=en) and [Base model or chat model?](/course/open/lm-base-vs-chat?lang=en); likely is often true, but not always, and how sure the model is does not tell you which. So check what matters against a source you trust. With *Show extra lessons* on, two come first: *Encoders, decoders and the GPT line*, about the kinds of language model, and *Look inside a real LLM's next-token probabilities*, where you load a small open model and read its probabilities. In the next lesson of the route, *What a paper, a preprint and peer review are*, you start reading research yourself, where every claim needs a source too.
     """)
     return
 

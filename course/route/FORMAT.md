@@ -31,7 +31,7 @@ lessons:
 
 | field | required | meaning |
 |---|---|---|
-| `id` | yes | Stable id in English kebab-case, never a number. Never renamed once lessons exist; the app stores progress by it. Prefix shows the subject (`py-`, `np-`, `ml-`, `nn-`, `torch-`, `cnn-`, `attn-`, `lm-`, `tok-`, `gpt-`, `llm-`, `sys-`, `res-`, `repro-`, `math-`, `prob-`, `stats-`, `info-`, `opt-`, `data-`, `rai-`, `rl-`, `search-`, `start-`). |
+| `id` | yes | Stable id in English kebab-case, never a number. Never renamed once lessons exist; the app stores progress by it. Prefix shows the subject (`py-`, `np-`, `ml-`, `nn-`, `torch-`, `cnn-`, `attn-`, `lm-`, `tok-`, `gpt-`, `llm-`, `sys-`, `res-`, `repro-`, `math-`, `prob-`, `stats-`, `info-`, `opt-`, `data-`, `rai-`, `rl-`, `search-`, `start-`, `cv-`). |
 | `tak` | yes (or from the file) | Home branch, one of the ids in `takken.yaml`. |
 | `title` | yes | English title. The Dutch title is written with the lesson. |
 | `level` | yes | `basis`, `gevorderd` or `expert`. |
@@ -60,7 +60,7 @@ Inventory item prefixes: `c:` concept, `s:` symbol or notation, `py:` Python or 
 
 ## Routes: `routes.yaml`
 
-A route has an `id`, titles, `milestones` (shown when a learner passes a step) and `steps`. A step is a lesson id, or `{id: ..., extra: true}` for an optional deepening step (verdieping) in that route. Being extra is a property of the step in a route, not of the lesson: the same lesson can be core in one route and extra in another.
+A route has an `id`, titles, `milestones` (shown when a learner passes a step) and `steps`. The first route is the main route. A later route belongs to a branch (`tak`) and starts `after` a step of the main route, such as the end of the basics: the core steps of the main route up to and including that step count as done, and every other lesson its steps need is a step of the route itself (rule 9). A step is a lesson id, or `{id: ..., extra: true}` for an optional deepening step (verdieping) in that route. Being extra is a property of the step in a route, not of the lesson: the same lesson can be core in one route and extra in another.
 
 `goals` lists example goal routes. They are computed, not written: the lessons a goal lesson needs, in the order of the main route.
 
@@ -84,7 +84,7 @@ Errors (the route is not valid until these are gone):
 6. Every `covers` reference exists in its map version.
 7. A lesson on the `numpy` or `torch` rung builds on the lesson that introduces that rung.
 8. Hardware fits the level: basis lessons run on a CPU, gevorderd lessons need at most an 8 GB GPU.
-9. Every step of a route exists, appears once, comes after everything it requires, and the route contains everything its steps require.
+9. Every step of a route exists, appears once, comes after everything it requires, and the route contains everything its steps require; for a route with `after`, the core steps of the main route up to that step count as contained.
 10. A core step of a route never requires an extra step of that route.
 11. The main route never goes down a level.
 12. Every map topic has a home branch; overrides name existing topics and branches.

@@ -32,7 +32,7 @@ Het eerste deel van de course draait op elke computer van de laatste jaren. Less
 
 ## Hoe het werkt
 
-- **Eén route, drie niveaus.** De startpagina laat de hele route zien, van basis via gevorderd tot expert. Je kunt elke les openen; mis je iets van eerder, dan zegt de les waar je het vindt.
+- **Routes in drie niveaus.** De startpagina laat je route zien, van basis via gevorderd tot expert, en je kiest er ook een andere, zoals computer vision na de basis. Je kunt elke les openen; mis je iets van eerder, dan zegt de les waar je het vindt.
 - **Elke les werkt hetzelfde.** Waarom het ertoe doet, het idee met een uitgewerkt voorbeeld, en dan oefeningen met een check die meteen zegt wat goed is, wat nog niet, en wat je nu doet. Hints gaan één voor één open, met de oplossing als laatste.
 - **Je werk blijft van jou.** Je werkt in je eigen kopie van elke les, in de map `work/`. Daar wordt ook je voortgang bewaard. "Opnieuw beginnen" zet een les terug zoals de course hem maakte.
 - **Nederlands en Engels.** Wissel op de startpagina of bovenaan een les.

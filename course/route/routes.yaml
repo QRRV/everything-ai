@@ -7,6 +7,8 @@ routes:
 - id: hoofdroute
   title: "From zero to your own LLM and a reproduced paper"
   title_nl: "Van nul tot je eigen LLM en een nagebouwde paper"
+  short: "Your own LLM"
+  short_nl: "Je eigen LLM"
   status: first-to-build
   milestones:
     - after: res-research-cycle
@@ -323,6 +325,43 @@ routes:
   - repro-own-compare
   - repro-own-report
   - res-whats-next
+
+- id: beeld
+  tak: beeld
+  title: "Computer vision: the first part"
+  title_nl: "Computer vision: het eerste deel"
+  short: "Computer vision"
+  short_nl: "Computer vision"
+  status: building
+  after: res-research-cycle
+  # The main route up to and including "after" counts as done; every lesson the steps need from later in the
+  # main route is a step of this route itself. The first part: docs/onderzoek/reports/Voorstel tak beeld.md.
+  milestones: []
+  steps:
+  # ---------- basis: working with images ----------
+  - cv-image-files
+  - cv-color-spaces
+  - cv-histogram-equalization
+  - cv-otsu-threshold
+  - cv-denoise-filters
+  - cv-sobel-edges
+  - cv-canny
+  - cv-morphology
+  - cv-connected-components
+  - cv-resize-interpolation
+  - cv-alpha-compositing
+  # ---------- basis: using a pretrained model ----------
+  - cv-prepare-photo
+  - cv-try-classifier
+  - cv-pretrained-features
+  - cv-image-search
+  - cv-fine-tune-photos
+  # ---------- basis: boxes and masks ----------
+  - cv-annotations
+  - cv-iou
+  - cv-nms
+  - cv-map
+  - cv-pretrained-detector
 
 # Goal routes are computed, not written: the smallest set of lessons a goal needs, in route order.
 # The checker prints these as examples; the app can compute any of them on demand.

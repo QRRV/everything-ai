@@ -102,6 +102,8 @@ li.branch .b-title { font-weight: 600; font-size: 0.95rem; }
 li.branch .b-state { font-size: 0.8rem; color: var(--ea-ink-3); }
 li.branch.later { border-style: dashed; }
 li.branch.later .b-title { color: var(--ea-ink-2); }
+li.branch.building { border-color: var(--ea-ink-2); }
+li.branch.building button.link { align-self: flex-start; margin-top: 0.15rem; }
 
 .foot { margin-top: 3.5rem; padding-top: 1.2rem; border-top: 1px solid var(--ea-line); font-size: 0.88rem; color: var(--ea-ink-2); }
 

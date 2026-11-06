@@ -290,7 +290,7 @@ def text_connections():
     mo.md(r"""
     ## Wrap-up
 
-    **How this connects.** In [How a lesson works](/course/open/start-how-this-course-works?lang=en) you learned to find your way around a lesson; from now on, every lesson is about AI itself. The next lesson zooms in on the first question of the recipe: writing rules versus learning from examples. Later in the course you build each circle yourself: a model that learns from examples, then your own neural network, and at the end of the main route a small generative model that writes text.
+    **How this connects.** In [How a lesson works](/course/open/start-how-this-course-works?lang=en) you learned to find your way around a lesson; from now on, every lesson is about AI itself. The next lesson zooms in on the first question of the recipe: writing rules versus learning from examples. Later in the course you build each circle yourself: a model that learns from examples, then your own neural network, and in the route to your own LLM a small generative model that writes text.
     """)
     return
 

@@ -1,6 +1,6 @@
 # SPDX-FileCopyrightText: 2026 Everything AI contributors
 # SPDX-License-Identifier: MIT
-"""The course as data: lessons, the main route, branches, goals and fixed phrases.
+"""The course as data: lessons, routes, branches, goals and fixed phrases.
 
 Everything here is read from files in the repository, so the start page, the lesson
 header and the tests all count and name things the same way.
@@ -45,10 +45,13 @@ def _routes() -> dict:
     return _load(paths.COURSE / "route" / "routes.yaml")
 
 
+MAIN = "hoofdroute"
+
+
 @functools.cache
-def main_route() -> list[dict]:
-    """The main route in order: [{"id": ..., "extra": bool}, ...]."""
-    route = next(r for r in _routes()["routes"] if r["id"] == "hoofdroute")
+def route_steps(route_id: str = MAIN) -> list[dict]:
+    """A route in order: [{"id": ..., "extra": bool}, ...]."""
+    route = next(r for r in _routes()["routes"] if r["id"] == route_id)
     steps = []
     for step in route["steps"]:
         if isinstance(step, str):
@@ -58,14 +61,47 @@ def main_route() -> list[dict]:
     return steps
 
 
+def main_route() -> list[dict]:
+    """The main route in order: [{"id": ..., "extra": bool}, ...]."""
+    return route_steps(MAIN)
+
+
+def _names(r: dict) -> dict:
+    return {"id": r["id"], "title": {"en": r["title"], "nl": r["title_nl"]},
+            "short": {"en": r.get("short", r["title"]), "nl": r.get("short_nl", r["title_nl"])}}
+
+
+def main_route_names() -> dict:
+    """The id, title and short name of the first route, the one from zero to your own LLM."""
+    return _names(next(r for r in _routes()["routes"] if r["id"] == MAIN))
+
+
+def branch_routes() -> list[dict]:
+    """The routes of branches that start after a step of the first route, such as beeld after the basics."""
+    return [{**_names(r), "tak": r.get("tak"), "after": r.get("after")}
+            for r in _routes()["routes"] if r["id"] != MAIN]
+
+
+def route_ids() -> list[str]:
+    return [r["id"] for r in _routes()["routes"]]
+
+
+def route_for(lesson_id: str) -> str:
+    """The route a lesson belongs to: the main route when it is in it, else the first branch route that has it."""
+    for rid in route_ids():
+        if any(s["id"] == lesson_id for s in route_steps(rid)):
+            return rid
+    return MAIN
+
+
 def milestones() -> list[dict]:
-    route = next(r for r in _routes()["routes"] if r["id"] == "hoofdroute")
+    route = next(r for r in _routes()["routes"] if r["id"] == MAIN)
     return route.get("milestones", [])
 
 
-def numbering(extras: bool = False) -> tuple[dict[str, int], int]:
-    """The one count a learner sees: place in the main route, without extra lessons unless switched on."""
-    steps = [s for s in main_route() if extras or not s["extra"]]
+def numbering(extras: bool = False, route_id: str = MAIN) -> tuple[dict[str, int], int]:
+    """The one count a learner sees: place in the route, without extra lessons unless switched on."""
+    steps = [s for s in route_steps(route_id) if extras or not s["extra"]]
     return {s["id"]: i + 1 for i, s in enumerate(steps)}, len(steps)
 
 

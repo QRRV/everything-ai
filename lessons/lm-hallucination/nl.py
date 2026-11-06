@@ -302,7 +302,7 @@ def text_connections():
     mo.md(r"""
     ## Afronding
 
-    **Samenhang.** Een language model geeft waarschijnlijke tekst, zoals in [Sampling: laat het model schrijven](/course/open/lm-sampling?lang=nl) en [Base model of chat model?](/course/open/lm-base-vs-chat?lang=nl); waarschijnlijk is vaak waar, maar niet altijd, en hoe zeker het model is, zegt niet welke van de twee. Kijk wat ertoe doet dus na in een bron die je vertrouwt. Met *Toon verdieping* aan komen er eerst twee: *Encoders, decoders en de GPT-lijn*, over de soorten language models, en *Kijk in de kansen van een echte LLM voor het volgende token*, waarin je een klein open model laadt en zijn kansen leest. In de volgende les van de hoofdroute, *Wat een paper, een preprint en peer review zijn*, ga je zelf onderzoek lezen, waar ook elke bewering een bron nodig heeft.
+    **Samenhang.** Een language model geeft waarschijnlijke tekst, zoals in [Sampling: laat het model schrijven](/course/open/lm-sampling?lang=nl) en [Base model of chat model?](/course/open/lm-base-vs-chat?lang=nl); waarschijnlijk is vaak waar, maar niet altijd, en hoe zeker het model is, zegt niet welke van de twee. Kijk wat ertoe doet dus na in een bron die je vertrouwt. Met *Toon verdieping* aan komen er eerst twee: *Encoders, decoders en de GPT-lijn*, over de soorten language models, en *Kijk in de kansen van een echte LLM voor het volgende token*, waarin je een klein open model laadt en zijn kansen leest. In de volgende les van de route, *Wat een paper, een preprint en peer review zijn*, ga je zelf onderzoek lezen, waar ook elke bewering een bron nodig heeft.
     """)
     return
 

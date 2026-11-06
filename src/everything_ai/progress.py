@@ -15,7 +15,7 @@ from pathlib import Path
 
 from everything_ai import paths
 
-DEFAULT_SETTINGS = {"lang": "en", "theme": "system", "extras": False}
+DEFAULT_SETTINGS = {"lang": "en", "theme": "system", "extras": False, "route": "hoofdroute"}
 
 
 def _read(path: Path, default):
