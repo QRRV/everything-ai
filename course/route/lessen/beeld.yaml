@@ -29,9 +29,10 @@ lessons:
   idea: "Red, green and blue are not the only three numbers for a color: hue, saturation and value say which color, how strong and how bright, so picking out one color becomes a simple rule."
   covers: [d13-klassieke-beeldverwerking#0]
   requires: [cv-image-files]
-  introduces: [c:color-space, c:rgb, c:hsv]
+  introduces: [c:color-space, c:rgb, c:hsv, py:rgb-to-hsv, py:mask-and-or]
   warns: [saturation]
-  uses: [c:pixel, c:channel, py:pil-image]
+  uses: [c:pixel, c:channel, c:image-resolution, c:uint8, c:png, c:label, c:array, c:shape, c:dtype, c:mean, py:pil-image, py:np-array, py:np-indexing, py:boolean-mask, py:min-max, py:np-mean, py:np-sum, py:comparison, py:if, py:bool, py:def, py:return, py:import, py:print, py:comment, py:variable, py:tuple, py:float, py:arithmetic, py:list, py:string-literal, c:file-path, q:predict, q:choice, q:exercise-with-check, q:slider-task, q:run-cell]
+  mentions: [c:chroma-key, c:data-augmentation]
   ladder: [numpy]
   data: [course-photos]
   needs: any

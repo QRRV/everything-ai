@@ -1,0 +1,31 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: cv-color-spaces
+minutes: 25
+title:
+  en: "Another way to write a color: HSV"
+  nl: "Een kleur anders opschrijven: HSV"
+goal:
+  en: "write a color as hue, saturation and value, and pick out the pixels of one color with a mask that holds in the light and in the shade."
+  nl: "een kleur opschrijven als kleurtoon, verzadiging en helderheid, en de pixels van één kleur uitkiezen met een masker dat standhoudt in het licht en in de schaduw."
+summary:
+  - en: "HSV writes a color as three numbers from 0 to 1: the hue says which color, the saturation how strong it is, and the value how bright: the strongest of red, green and blue. Shade changes the value, not the hue."
+    nl: "HSV schrijft een kleur als drie getallen van 0 tot en met 1: de kleurtoon zegt welke kleur, de verzadiging hoe sterk hij is, en de helderheid hoe helder: de sterkste van rood, groen en blauw. Schaduw verandert de helderheid, niet de kleurtoon."
+  - en: "The saturation is the strongest minus the weakest, divided by the strongest, and 0 for black: grey, white and black have no color, and their hue means nothing."
+    nl: "De verzadiging is de sterkste min de zwakste, gedeeld door de sterkste, en 0 bij zwart: grijs, wit en zwart hebben geen kleur, en hun kleurtoon betekent niets."
+  - en: "`rgb_to_hsv(img / 255)` gives every pixel in HSV. Red lies at both ends of the hue, so a mask for red is `((h < 0.05) | (h > 0.95)) & (s > 0.5)`: `&` and `|` join masks pixel by pixel, each comparison in parentheses."
+    nl: "`rgb_to_hsv(img / 255)` geeft elke pixel in HSV. Rood ligt aan beide einden van de kleurtoon, dus een masker voor rood is `((h < 0.05) | (h > 0.95)) & (s > 0.5)`: `&` en `|` verbinden maskers pixel voor pixel, elke vergelijking tussen haakjes."
+can_now:
+  - en: "tell the saturation of a color from its brightness"
+    nl: "de verzadiging van een kleur onderscheiden van zijn helderheid"
+    by: stronger
+  - en: "work out the value and the saturation of a pixel by hand"
+    nl: "de helderheid en de verzadiging van een pixel met de hand uitrekenen"
+    by: value-saturation
+  - en: "choose a saturation threshold that leaves out grey and pale colors"
+    nl: "een drempel voor de verzadiging kiezen die grijs en bleke kleuren weglaat"
+    by: threshold
+  - en: "make a mask for one color, with `&` and `|`"
+    nl: "een masker voor één kleur maken, met `&` en `|`"
+    by: red-mask

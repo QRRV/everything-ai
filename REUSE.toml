@@ -224,3 +224,9 @@ path = "data/photos/chelsea.png"
 precedence = "override"
 SPDX-FileCopyrightText = "Stefan van der Walt (photo); from the sample data of scikit-image"
 SPDX-License-Identifier = "CC0-1.0"
+
+[[annotations]]
+path = ["data/photos/fruit.png", "data/photos/fruit-labels.png"]
+precedence = "override"
+SPDX-FileCopyrightText = "2026 Everything AI contributors (drawn by lessons/cv-color-spaces/checks.py)"
+SPDX-License-Identifier = "CC-BY-4.0"
