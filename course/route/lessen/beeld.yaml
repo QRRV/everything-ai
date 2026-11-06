@@ -14,9 +14,10 @@ lessons:
   module: image-processing
   idea: "An image file stores a number per pixel and per color: PNG keeps every number exactly, JPEG keeps a much smaller approximation."
   covers: [beelden-als-data#3, beelden-als-data#4]
-  requires: [data-images-as-arrays]
-  introduces: [c:image-resolution, c:jpeg, c:lossless-compression, c:lossy-compression, py:pil-image]
-  uses: [c:pixel, c:channel, c:grayscale-image, py:imread-imshow, py:np-array]
+  requires: [data-images-as-arrays, data-text-as-numbers, ml-regression-metrics]
+  introduces: [c:image-resolution, c:uint8, c:lossless-compression, c:lossy-compression, c:png, c:jpeg, py:pil-image, py:os-path-getsize, py:np-astype]
+  uses: [c:pixel, c:channel, c:grayscale-image, c:byte, c:code-point, c:utf-8, c:array, c:shape, c:dtype, c:mean-absolute-error, py:imread-imshow, py:np-array, py:np-indexing, py:np-mean, c:mean, py:abs, py:arithmetic, py:comparison, py:keyword-argument, py:tuple, py:for, py:def, py:return, py:import, py:print, py:comment, py:variable, py:underscore-name, py:string-literal, c:file-path, c:library, q:predict, q:choice, q:exercise-with-check, q:slider-task, q:run-cell]
+  mentions: [c:model, c:pretrained-model]
   ladder: [numpy]
   data: [course-photos]
   needs: any

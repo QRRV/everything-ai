@@ -1,0 +1,31 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: cv-image-files
+minutes: 20
+title:
+  en: "From light to a file of numbers"
+  nl: "Van licht tot een bestand met getallen"
+goal:
+  en: "open an image file with Pillow, count the bytes of its numbers, and measure what saving it as PNG or as JPEG does to them."
+  nl: "een afbeeldingsbestand openen met Pillow, de bytes van zijn getallen tellen, en meten wat opslaan als PNG of als JPEG met die getallen doet."
+summary:
+  - en: "The numbers of a photo are uint8: whole numbers from 0 to 255, one byte each. Rows × columns × colors gives the bytes before any compression."
+    nl: "De getallen van een foto zijn uint8: gehele getallen van 0 tot en met 255, elk één byte. Rijen × kolommen × kleuren geeft de bytes vóór compressie."
+  - en: "PNG compresses without loss: every number comes back exactly. JPEG keeps an approximation: the file is often ten times smaller or more, and most numbers come back a little different; a lower `quality` gives a smaller file and numbers that are further off."
+    nl: "PNG comprimeert lossless: elk getal komt precies terug. JPEG bewaart een benadering: het bestand is vaak tien keer kleiner of meer, en de meeste getallen komen een beetje anders terug; een lagere `quality` geeft een kleiner bestand en getallen die verder ernaast zitten."
+  - en: "`np.array(Image.open(path))` reads a file, `Image.fromarray(img).save(path, quality=75)` writes one, and to compare two images, turn them into ordinary whole numbers first: `abs(a.astype(int) - b.astype(int)).mean()`."
+    nl: "`np.array(Image.open(path))` leest een bestand, `Image.fromarray(img).save(path, quality=75)` schrijft er een, en om twee afbeeldingen te vergelijken maak je er eerst gewone gehele getallen van: `abs(a.astype(int) - b.astype(int)).mean()`."
+can_now:
+  - en: "count how many bytes the numbers of a photo take"
+    nl: "tellen hoeveel bytes de getallen van een foto innemen"
+    by: raw-bytes
+  - en: "choose between lossless and lossy compression"
+    nl: "kiezen tussen lossless en lossy compressie"
+    by: road-format
+  - en: "measure how far an image is from the numbers it started with"
+    nl: "meten hoe ver een afbeelding afwijkt van de getallen waarmee hij begon"
+    by: mean-difference
+  - en: "weigh the size of a JPEG file against how close it stays"
+    nl: "de grootte van een JPEG-bestand afwegen tegen hoe dicht het erbij blijft"
+    by: quality

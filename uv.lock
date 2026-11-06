@@ -1,5 +1,5 @@
 version = 1
-revision = 3
+revision = 5
 requires-python = "==3.13.*"
 resolution-markers = [
     "platform_machine == 'arm64' and sys_platform == 'darwin'",
@@ -243,6 +243,7 @@ dependencies = [
     { name = "matplotlib" },
     { name = "numpy" },
     { name = "pandas" },
+    { name = "pillow" },
     { name = "pyyaml" },
     { name = "scikit-learn" },
     { name = "tiktoken" },
@@ -261,6 +262,7 @@ requires-dist = [
     { name = "matplotlib", specifier = "==3.11.2" },
     { name = "numpy", specifier = "==2.5.3" },
     { name = "pandas", specifier = "==3.0.6" },
+    { name = "pillow", specifier = "==12.3.0" },
     { name = "pyyaml", specifier = "==6.0.3" },
     { name = "scikit-learn", specifier = "==1.9.1" },
     { name = "tiktoken", specifier = "==0.14.0" },

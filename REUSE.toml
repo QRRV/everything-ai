@@ -212,3 +212,15 @@ path = "data/README.md"
 precedence = "aggregate"
 SPDX-FileCopyrightText = "2026 Everything AI contributors"
 SPDX-License-Identifier = "CC-BY-SA-4.0"
+
+[[annotations]]
+path = "data/photos/coffee.png"
+precedence = "override"
+SPDX-FileCopyrightText = "Rachel Michetti (photo, courtesy of Pikolo Espresso Bar); from the sample data of scikit-image"
+SPDX-License-Identifier = "CC0-1.0"
+
+[[annotations]]
+path = "data/photos/chelsea.png"
+precedence = "override"
+SPDX-FileCopyrightText = "Stefan van der Walt (photo); from the sample data of scikit-image"
+SPDX-License-Identifier = "CC0-1.0"
