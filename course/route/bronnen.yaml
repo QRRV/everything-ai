@@ -40,6 +40,8 @@ bronnen:
    note_nl: "De fotoset van de tak beeld (besluit 1.14): de course haalt hem de eerste keer zelf op, zonder de twee klassen met gezichten, en deelt geen model dat erop getraind is, omdat het auteursrecht op de foto's niet bij Caltech ligt."}
 - {id: model-resnet18-imagenet, kind: model, license: "BSD-3-Clause code; weights trained on ImageNet, terms unclear", hosting: download,
    note_nl: "ResNet-18 met de gewichten van torchvision, getraind op ImageNet (besluit 1.14): de course haalt ze de eerste keer zelf op, deelt ze nooit en zegt in de les dat hun status onduidelijk is. Een model dat de leerling ermee fine-tunet, blijft op zijn eigen pc."}
+- {id: imagenet-class-names, kind: text, license: "BSD-3-Clause", hosting: rehost,
+   note_nl: "De namen van de 1000 klassen van ImageNet, in de volgorde van de logits, uit de code van torchvision (BSD-3-Clause), zodat de lessen de gokken van ResNet-18 bij naam noemen. Alleen namen, geen foto's."}
 - {id: model-dinov2-small, kind: model, license: "Apache-2.0", hosting: download,
    note_nl: "facebook/dinov2-small, een Vision Transformer van 22 miljoen parameters, getraind op LVD-142M (rond ImageNet en andere sets samengesteld): de backbone voor features. De course schrijft de modelcode zelf, zoals bij Qwen3."}
 - {id: model-detr-resnet50, kind: model, license: "Apache-2.0; trained on COCO", hosting: download,

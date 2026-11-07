@@ -52,6 +52,12 @@ SPDX-FileCopyrightText = "Copyright (c) Facebook, Inc. and its affiliates. All r
 SPDX-License-Identifier = "BSD-3-Clause"
 
 [[annotations]]
+path = "data/imagenet-classes.txt"
+precedence = "override"
+SPDX-FileCopyrightText = "Copyright (c) Soumith Chintala 2016, All rights reserved. (torchvision; the names of ImageNet's classes)"
+SPDX-License-Identifier = "BSD-3-Clause"
+
+[[annotations]]
 path = "data/penguins.csv"
 precedence = "override"
 SPDX-FileCopyrightText = "Kristen B. Gorman and the Palmer Station Antarctica LTER; compiled by Allison M. Horst, Alison P. Hill and Kristen B. Gorman (palmerpenguins)"

@@ -69,6 +69,13 @@ PINNED = {
         "size": 200_000_000,
         "first": True,
     },
+    # ResNet-18 with torchvision's own weights, trained on ImageNet, in timm's copy: cv-try-classifier and the lessons
+    # after it (course/route/bronnen.yaml, model-resnet18-imagenet)
+    ("timm/resnet18.tv_in1k", "model.safetensors"): {
+        "revision": "bbd144b3e5565108aad885f145491d11bc6ce807",
+        "sha256": "694f673df6520a3158624e8a89af086f59923ee4cd7436fe5bc3bc71d295ad81",
+        "size": 46_807_446,
+    },
 }
 CHUNK = 1 << 20   # bytes per read while downloading
 

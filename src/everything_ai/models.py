@@ -141,7 +141,7 @@ def read_safetensors(path, skip=lambda name: False) -> dict:
             start, end = info["data_offsets"]
             t = torch.empty(info["shape"], dtype=types[info["dtype"]])
             f.seek(8 + n + start)
-            if f.readinto(memoryview(t.view(torch.uint8).numpy() if t.numel() else np.empty(0, np.uint8)).cast("B")) != end - start:
+            if f.readinto(memoryview(t.reshape(-1).view(torch.uint8).numpy() if t.numel() else np.empty(0, np.uint8)).cast("B")) != end - start:
                 raise OSError(f"{path} ends in the middle of {name}")
             tensors[name] = t
     return tensors
@@ -160,3 +160,75 @@ def gpt2() -> GPT2Model:
     model.load_state_dict(state, assign=True)
     model.requires_grad_(False)
     return model.eval()
+
+
+# --- ResNet-18, with torchvision's weights trained on ImageNet -------------------------------------------------------
+# The course does not ship it (47 MB, and the terms of weights trained on ImageNet are unclear: course/route/bronnen.yaml):
+# everything_ai.hub downloads it once, from timm's copy of torchvision's own file on Hugging Face, at a fixed commit.
+# The code below is ResNet-18 as the paper (He et al., 2015) and torchvision describe it, written out so that nothing
+# beyond PyTorch is needed. The names of its 1,000 classes are in data/imagenet-classes.txt.
+
+RESNET18 = ("timm/resnet18.tv_in1k", "model.safetensors")
+IMAGENET_CLASSES = paths.ROOT / "data" / "imagenet-classes.txt"
+
+
+class _Residual(nn.Module):
+    """Two 3 by 3 convolutions, each with batch normalization, and the block's input added to their outcome. With
+    stride 2 the block halves the rows and the columns, and a 1 by 1 convolution makes the input fit."""
+
+    def __init__(self, n_in: int, n_out: int, stride: int = 1):
+        super().__init__()
+        self.conv1 = nn.Conv2d(n_in, n_out, 3, stride, 1, bias=False)
+        self.bn1 = nn.BatchNorm2d(n_out)
+        self.conv2 = nn.Conv2d(n_out, n_out, 3, 1, 1, bias=False)
+        self.bn2 = nn.BatchNorm2d(n_out)
+        self.downsample = None
+        if stride != 1 or n_in != n_out:
+            self.downsample = nn.Sequential(nn.Conv2d(n_in, n_out, 1, stride, bias=False), nn.BatchNorm2d(n_out))
+
+    def forward(self, x):
+        out = self.bn2(self.conv2(torch.relu(self.bn1(self.conv1(x)))))
+        return torch.relu(out + (x if self.downsample is None else self.downsample(x)))
+
+
+class ResNet18(nn.Module):
+    """ResNet-18: a 7 by 7 convolution and max pooling, four stages of two residual blocks (64, 128, 256 and 512
+    channels), the mean over the rows and columns, and a linear layer with a logit per class."""
+
+    def __init__(self, classes: int = 1000):
+        super().__init__()
+        self.conv1 = nn.Conv2d(3, 64, 7, 2, 3, bias=False)
+        self.bn1 = nn.BatchNorm2d(64)
+        self.layer1 = nn.Sequential(_Residual(64, 64), _Residual(64, 64))
+        self.layer2 = nn.Sequential(_Residual(64, 128, 2), _Residual(128, 128))
+        self.layer3 = nn.Sequential(_Residual(128, 256, 2), _Residual(256, 256))
+        self.layer4 = nn.Sequential(_Residual(256, 512, 2), _Residual(512, 512))
+        self.fc = nn.Linear(512, classes)
+
+    def features(self, x):
+        """The 512 numbers per photo that the last layer gets: x has shape (n, 3, 224, 224), prepared as for ImageNet."""
+        x = torch.max_pool2d(torch.relu(self.bn1(self.conv1(x))), 3, 2, 1)
+        x = self.layer4(self.layer3(self.layer2(self.layer1(x))))
+        return x.mean(dim=(2, 3))
+
+    def forward(self, x):
+        return self.fc(self.features(x))
+
+
+def resnet18() -> ResNet18:
+    """ResNet-18 with torchvision's ImageNet weights, 11.7 million parameters, in eval mode, from the file
+    everything_ai.hub downloaded. It raises FileNotFoundError when that file is not there yet:
+    hub.download(*RESNET18) gets it."""
+    from everything_ai import hub
+    path = hub.pinned(*RESNET18)
+    if path is None:
+        raise FileNotFoundError("ResNet-18 is not downloaded yet: everything_ai.hub.download(*everything_ai.models.RESNET18)")
+    model = ResNet18()
+    model.load_state_dict(read_safetensors(path))
+    model.requires_grad_(False)
+    return model.eval()
+
+
+def imagenet_classes() -> list[str]:
+    """The names of ImageNet's 1,000 classes, in the order of the model's logits, as torchvision writes them."""
+    return IMAGENET_CLASSES.read_text(encoding="utf-8").splitlines()

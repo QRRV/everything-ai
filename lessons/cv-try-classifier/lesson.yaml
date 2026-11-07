@@ -1,0 +1,31 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: cv-try-classifier
+minutes: 35
+title:
+  en: "Try an image classifier: top-1 and top-5"
+  nl: "Een beeldclassifier uitproberen: top-1 en top-5"
+goal:
+  en: "let a classifier trained on ImageNet look at a photo, read its best guesses from its 1,000 probabilities, and judge it with top-1 and top-5 accuracy."
+  nl: "een classifier die op ImageNet is getraind naar een foto laten kijken, zijn beste gokken uit zijn 1000 kansen halen, en hem beoordelen met top-1 en top-5 accuracy."
+summary:
+  - en: "ImageNet is a collection of photos, each with one class out of 1,000 as its label. A classifier trained on it gives a photo a logit per class; softmax makes them probabilities that add up to 1."
+    nl: "ImageNet is een verzameling foto's met bij elke foto één klasse uit 1000. Een classifier die erop is getraind, geeft een foto een logit per klasse; softmax maakt er kansen van die samen 1 zijn."
+  - en: "The top-1 is the class with the highest probability, the top-5 the five with the highest: `sorted([(p[i], names[i]) for i in range(len(names))], reverse=True)[:5]`. Top-k accuracy is the share of photos whose label is among their k best guesses."
+    nl: "De top-1 is de klasse met de hoogste kans, de top-5 zijn de vijf met de hoogste: `sorted([(p[i], names[i]) for i in range(len(names))], reverse=True)[:5]`. Top-k accuracy is het deel van de foto's waarbij het label bij de k beste gokken zit."
+  - en: "Top-5 accuracy forgives a model that hesitates between classes that look alike, such as three classes of house cat. And the probabilities always add up to 1, also for an image that fits none of the classes: a high probability is no proof that the model is right."
+    nl: "Top-5 accuracy vergeeft een model dat twijfelt tussen klassen die op elkaar lijken, zoals drie klassen van huiskatten. En de kansen zijn altijd samen 1, ook voor een beeld dat in geen enkele klasse past: een hoge kans bewijst niet dat het model gelijk heeft."
+can_now:
+  - en: "tell whether a photo counts as right for top-1 and for top-5"
+    nl: "zeggen of een foto goed telt voor top-1 en voor top-5"
+    by: rank
+  - en: "find the k most likely classes among a model's probabilities"
+    nl: "de k waarschijnlijkste klassen vinden in de kansen van een model"
+    by: topk
+  - en: "compute top-k accuracy over a set of photos"
+    nl: "top-k accuracy uitrekenen over een reeks foto's"
+    by: accuracy
+  - en: "explain why a classifier can be sure of a wrong answer"
+    nl: "uitleggen waarom een classifier zeker kan zijn van een fout antwoord"
+    by: balloon

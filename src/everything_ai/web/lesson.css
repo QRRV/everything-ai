@@ -15,7 +15,7 @@ a.ea-home { display: inline-flex; align-items: center; gap: 0.4rem; padding: 0.3
 a.ea-home:hover { background: var(--ea-inset); border-color: var(--ea-ink-3); }
 a.ea-home .ea-icon { width: 1rem; height: 1rem; flex: none; }
 h1.ea-title { font-family: var(--ea-font-ui); font-size: 2.25rem; line-height: 1.15; font-weight: 720; letter-spacing: -0.022em;
-  margin: 0.45rem 0 0.5rem; max-width: var(--ea-measure); color: var(--ea-ink); }
+  margin: 0.45rem 0 0.5rem; max-width: var(--ea-measure); color: var(--ea-ink); text-wrap: balance; }
 .ea-goal { margin: 0 0 0.8rem; }
 .ea-needs { font-family: var(--ea-font-ui); font-size: 0.94rem; line-height: 1.55; color: var(--ea-ink-2); max-width: var(--ea-measure); margin: 0.3rem 0; }
 .ea-needs b { color: var(--ea-ink); font-weight: 620; }

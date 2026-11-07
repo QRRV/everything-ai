@@ -179,11 +179,12 @@ lessons:
   module: pretrained-vision
   idea: "A classifier trained on ImageNet gives a probability for each of 1,000 kinds of things; top-5 accuracy counts it right when the true kind is among its five best guesses."
   covers: [beeldclassificatie#0, beeldclassificatie#2]
-  requires: [cv-prepare-photo]
-  introduces: [c:imagenet, c:top-k-accuracy]
-  uses: [c:pretrained-model, c:softmax, c:accuracy, c:per-channel-normalization]
-  ladder: [torch]
-  data: [model-resnet18-imagenet, course-photos]
+  requires: [cv-prepare-photo, ml-softmax]
+  introduces: [c:imagenet, c:top-k-accuracy, py:torch-numpy]
+  uses: [c:pretrained-model, c:softmax, c:accuracy, c:per-channel-normalization, c:center-crop, c:logit, c:probability, c:label, c:class, c:validation-set, c:license, c:model-card, c:model-hub, c:weight, c:model-parameter, c:tensor, c:shape, c:array, c:mini-batch, c:float32, c:file-path, py:with, py:open, py:strip, py:comprehension, py:len, py:range, py:list, py:tuple, py:indexing, py:slicing, py:sorted, py:keyword-argument, py:for, py:if, py:dict, py:def, py:return, py:import, py:print, py:comment, py:variable, py:arithmetic, py:float, py:int, py:string-literal, py:method, py:min-max, py:pil-image, py:np-array, py:np-exp, py:np-sum, py:np-argmax, py:np-indexing, py:torch-tensor, py:torch-permute, py:torch-unsqueeze, py:no-grad, q:predict, q:choice, q:exercise-with-check, q:slider-task, q:explain, q:run-cell]
+  mentions: [c:resnet]
+  ladder: [numpy, torch]
+  data: [model-resnet18-imagenet, imagenet-class-names, course-photos]
   needs: any
 
 - id: cv-pretrained-features
