@@ -150,9 +150,10 @@ lessons:
   module: image-processing
   idea: "An alpha value per pixel says how much of the front image covers the back one; a green screen gets its alpha from how green each pixel is."
   covers: [d13-klassieke-beeldverwerking#2]
-  requires: [cv-color-spaces]
+  requires: [cv-color-spaces, np-broadcasting]
   introduces: [c:alpha-channel, c:alpha-compositing, c:chroma-key]
-  uses: [c:hsv, c:channel]
+  uses: [c:pixel, c:channel, c:rgb, c:hsv, c:uint8, c:png, c:array, c:shape, c:dtype, c:broadcasting, c:file-path, py:pil-image, py:rgb-to-hsv, py:mask-and-or, py:boolean-mask, py:np-array, py:np-astype, py:np-sum, py:np-indexing, py:slicing, py:comparison, py:imread-imshow, py:def, py:return, py:import, py:print, py:comment, py:variable, py:arithmetic, py:float, py:tuple, q:predict, q:choice, q:exercise-with-check, q:slider-task, q:explain, q:run-cell]
+  mentions: [c:data-augmentation, c:segmentation-mask]
   ladder: [numpy]
   data: [course-photos]
   needs: any

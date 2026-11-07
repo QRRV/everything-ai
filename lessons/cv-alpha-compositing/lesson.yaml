@@ -1,0 +1,31 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: cv-alpha-compositing
+minutes: 35
+title:
+  en: "One image over another: alpha and green screens"
+  nl: "Eén beeld over een ander: alpha en green screens"
+goal:
+  en: "lay one image over another with its alpha channel, and make the alpha of a photo in front of a green screen from the hue and the saturation of every pixel."
+  nl: "het ene beeld over het andere leggen met zijn alpha channel, en de alpha van een foto voor een green screen maken uit de kleurtoon en de verzadiging van elke pixel."
+summary:
+  - en: "An alpha channel is a fourth number per pixel, next to red, green and blue: how much the pixel covers what lies behind it, from 0 to 255 in a PNG. Alpha compositing mixes per pixel and per color: `a * front + (1 - a) * back`, with `a` the alpha divided by 255."
+    nl: "Een alpha channel is een vierde getal per pixel, naast rood, groen en blauw: hoeveel de pixel bedekt van wat erachter ligt, van 0 tot en met 255 in een PNG. Alpha compositing mengt per pixel en per kleur: `a * front + (1 - a) * back`, met `a` de alpha gedeeld door 255."
+  - en: "`sticker[:, :, 3:]` keeps the axis of the alpha, shape `(rows, columns, 1)`, so NumPy stretches it over the three colors; `sticker[:, :, 3]` has one axis less, and does not fit."
+    nl: "`sticker[:, :, 3:]` houdt de as van de alpha, shape `(rijen, kolommen, 1)`, zodat NumPy hem uitrekt over de drie kleuren; `sticker[:, :, 3]` heeft één as minder, en past niet."
+  - en: "A chroma key makes the alpha of a green-screen photo from its colors: 0 where the hue is the screen's green and the saturation strong, 1 elsewhere. Such a key of 0 or 1 gives stair edges with a green rim, and drops the shadows; a soft key gives an alpha between 0 and 1."
+    nl: "Een chroma key maakt de alpha van een foto voor een green screen uit zijn kleuren: 0 waar de kleurtoon het groen van het scherm is en de verzadiging sterk, 1 overal anders. Zo'n key van 0 of 1 geeft randen met trapjes en een groen randje, en laat de schaduwen weg; een zachte key geeft een alpha tussen 0 en 1."
+can_now:
+  - en: "keep the axis of the alpha channel so that it fits the colors"
+    nl: "de as van het alpha channel houden, zodat hij op de kleuren past"
+    by: axis
+  - en: "lay one image over another with its alpha"
+    nl: "het ene beeld over het andere leggen met zijn alpha"
+    by: over
+  - en: "make the alpha of a green-screen photo with a chroma key"
+    nl: "de alpha van een foto voor een green screen maken met een chroma key"
+    by: key
+  - en: "explain where the green rim and the stair edges of a key come from"
+    nl: "uitleggen waar het groene randje en de trapjes op de randen van een key vandaan komen"
+    by: edges

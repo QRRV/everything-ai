@@ -236,3 +236,9 @@ path = ["data/photos/fruit.png", "data/photos/fruit-labels.png"]
 precedence = "override"
 SPDX-FileCopyrightText = "2026 Everything AI contributors (drawn by lessons/cv-color-spaces/checks.py)"
 SPDX-License-Identifier = "CC-BY-4.0"
+
+[[annotations]]
+path = ["data/photos/fruit-sticker.png", "data/photos/green-screen.png"]
+precedence = "override"
+SPDX-FileCopyrightText = "2026 Everything AI contributors (drawn by lessons/cv-alpha-compositing/checks.py)"
+SPDX-License-Identifier = "CC-BY-4.0"
