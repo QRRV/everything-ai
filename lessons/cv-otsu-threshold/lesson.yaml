@@ -1,0 +1,31 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: cv-otsu-threshold
+minutes: 30
+title:
+  en: "Black or white: a threshold and Otsu's method"
+  nl: "Zwart of wit: een drempel en de methode van Otsu"
+goal:
+  en: "split an image into black and white with a threshold, and let Otsu's method choose that threshold: the one with the smallest within-group variance."
+  nl: "een afbeelding met een drempel splitsen in zwart en wit, en die drempel laten kiezen door de methode van Otsu: de drempel met de kleinste variantie binnen de groepen."
+summary:
+  - en: "A point operation gives every pixel a new gray that depends only on its own gray. Thresholding is the simplest one: `255 * (img > t)` makes a binary image, white for every pixel lighter than `t` and black for the rest."
+    nl: "Een puntbewerking geeft elke pixel een nieuwe grijstint die alleen van zijn eigen grijstint afhangt. Drempelen is de eenvoudigste: `255 * (img > t)` maakt een binair beeld, wit voor elke pixel die lichter is dan `t` en zwart voor de rest."
+  - en: "The mean gray is a poor threshold when the background is most of the image: it lies in the middle of the background, and about half of the background turns white."
+    nl: "De gemiddelde grijstint is een slechte drempel als de achtergrond het grootste deel van de afbeelding is: hij ligt midden in de achtergrond, en ongeveer de helft van de achtergrond wordt wit."
+  - en: "Otsu's method tries every threshold and takes the one with the smallest within-group variance: the variance of the dark and of the light pixels, each weighted by its share of the pixels, added up. On the photo of the cell that is 122."
+    nl: "De methode van Otsu probeert elke drempel en neemt die met de kleinste variantie binnen de groepen: de variantie van de donkere en van de lichte pixels, elk gewogen met zijn aandeel van de pixels, opgeteld. Op de foto van de cel is dat 122."
+can_now:
+  - en: "tell a point operation from an operation that looks at other pixels"
+    nl: "een puntbewerking onderscheiden van een bewerking die naar andere pixels kijkt"
+    by: point
+  - en: "make a binary image from a grayscale image with a threshold"
+    nl: "met een drempel een binair beeld maken van een grijswaardenbeeld"
+    by: binary
+  - en: "read Otsu's threshold off the within-group variance of every threshold"
+    nl: "de drempel van Otsu aflezen aan de variantie binnen de groepen van elke drempel"
+    by: lowest
+  - en: "find a threshold with Otsu's method by trying every gray"
+    nl: "een drempel vinden met de methode van Otsu door elke grijstint te proberen"
+    by: otsu

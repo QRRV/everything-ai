@@ -54,11 +54,11 @@ lessons:
   title: "Black or white: a threshold and Otsu's method"
   level: basis
   module: image-processing
-  idea: "A threshold turns a gray image into a binary one; Otsu's method picks the threshold that makes the two groups of grays each as tight as possible, by trying every gray."
+  idea: "A threshold turns a gray image into a binary one; Otsu's method tries every gray and picks the threshold with the smallest within-group variance, where the pixels lie, on average, closest to the mean of their own group."
   covers: [d13-klassieke-beeldverwerking#1]
   requires: [cv-histogram-equalization, prob-expectation]
-  introduces: [c:point-operation, c:thresholding, c:binary-image, c:otsu-method]
-  uses: [v:histogram, c:variance, c:cumulative-histogram]
+  introduces: [c:point-operation, c:thresholding, c:binary-image, c:within-group-variance, c:otsu-method]
+  uses: [v:histogram, c:variance, c:cumulative-histogram, c:histogram-equalization, c:grayscale-image, c:pixel, c:uint8, c:png, c:array, c:shape, c:dtype, c:mean, c:standard-deviation, c:expected-value, c:probability, s:var, c:file-path, c:loss, c:gradient-descent, c:model, py:pil-image, py:np-array, py:np-astype, py:np-mean, py:np-std, py:min-max, py:np-argmin, py:boolean-mask, py:np-indexing, py:slicing, py:comparison, py:imread-imshow, py:keyword-argument, py:range, py:for, py:list, py:append, py:def, py:return, py:import, py:print, py:comment, py:variable, py:arithmetic, py:float, py:int, py:bool, py:string-literal, q:predict, q:choice, q:exercise-with-check, q:slider-task, q:run-cell]
   ladder: [numpy]
   data: [course-photos]
   needs: any

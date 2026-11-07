@@ -226,6 +226,12 @@ SPDX-FileCopyrightText = "Stefan van der Walt (photo); from the sample data of s
 SPDX-License-Identifier = "CC0-1.0"
 
 [[annotations]]
+path = "data/photos/cell.png"
+precedence = "override"
+SPDX-FileCopyrightText = "Paul Müller, Mirjam Schürmann, Salvatore Girardo, Gheorghe Cojoc and Jochen Guck (quantitative phase image, Optics Express 2018); from the sample data of scikit-image"
+SPDX-License-Identifier = "CC0-1.0"
+
+[[annotations]]
 path = ["data/photos/fruit.png", "data/photos/fruit-labels.png"]
 precedence = "override"
 SPDX-FileCopyrightText = "2026 Everything AI contributors (drawn by lessons/cv-color-spaces/checks.py)"
