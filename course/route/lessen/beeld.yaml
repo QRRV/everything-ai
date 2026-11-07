@@ -138,8 +138,9 @@ lessons:
   covers: [d13-klassieke-beeldverwerking#7]
   requires: [cv-image-files]
   introduces: [c:interpolation, c:nearest-neighbor-interpolation, c:bilinear-interpolation]
-  uses: [c:pixel, c:image-resolution]
-  ladder: [numpy]
+  uses: [c:pixel, c:image-resolution, c:channel, c:uint8, c:label, c:array, c:shape, c:dtype, c:file-path, py:pil-image, py:np-array, py:np-astype, py:np-zeros, py:np-sum, py:np-indexing, py:slicing, py:indexing, py:nested-list, py:list, py:append, py:tuple, py:comparison, py:min-max, py:abs, py:keyword-argument, py:range, py:for, py:len, py:def, py:return, py:import, py:print, py:comment, py:variable, py:arithmetic, py:float, py:int, q:predict, q:choice, q:exercise-with-check, q:slider-task, q:explain, q:run-cell]
+  mentions: [c:model, c:pretrained-model]
+  ladder: [python, numpy]
   data: [course-photos]
   needs: any
 

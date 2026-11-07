@@ -1,0 +1,31 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: cv-resize-interpolation
+minutes: 35
+title:
+  en: "Bigger and smaller: interpolation"
+  nl: "Groter en kleiner: interpolatie"
+goal:
+  en: "make an image bigger or smaller with nearest-neighbor and with bilinear interpolation, by hand and with Pillow, and choose between the two."
+  nl: "een beeld groter of kleiner maken met nearest-neighbor- en met bilineaire interpolatie, met de hand en met Pillow, en tussen de twee kiezen."
+summary:
+  - en: "A resized image covers the same scene with other pixels. The middle of new pixel `c` lies at `(c + 0.5) * w / W` in an old row of `w` pixels; nearest-neighbor interpolation takes the old pixel whose square holds that middle, so an image gets blocks and keeps only values that were there."
+    nl: "Een beeld van een andere grootte bedekt dezelfde scène met andere pixels. Het midden van nieuwe pixel `c` ligt op `(c + 0.5) * w / W` in een oude rij van `w` pixels; nearest-neighbor-interpolatie neemt de oude pixel waarvan het vierkantje dat midden bevat, dus een beeld krijgt blokken en houdt alleen waarden die er al waren."
+  - en: "Bilinear interpolation mixes the four old pixels around the middle: first along two rows, `(1 - u) * left + u * right`, then between them with `t`. It gives soft steps, but mixes labels into labels that were not there: use nearest neighbor for a label image."
+    nl: "Bilineaire interpolatie mengt de vier oude pixels rond het midden: eerst langs twee rijen, `(1 - u) * links + u * rechts`, en daarna ertussen met `t`. Dat geeft zachte overgangen, maar mengt labels tot labels die er niet waren: gebruik nearest neighbor voor een labelbeeld."
+  - en: "Pillow's `Image.fromarray(img).resize((width, height), Image.BILINEAR)` writes the width first. When an image gets much smaller, the four pixels around a middle are too few: Pillow then mixes every old pixel under the new one, and those around it, with less weight the farther they lie."
+    nl: "In Pillow schrijf je de breedte eerst: `Image.fromarray(img).resize((breedte, hoogte), Image.BILINEAR)`. Wordt een beeld veel kleiner, dan zijn de vier pixels rond een midden te weinig: Pillow mengt dan elke oude pixel onder de nieuwe, en die eromheen, met minder gewicht naarmate ze verder liggen."
+can_now:
+  - en: "choose nearest-neighbor interpolation for labels"
+    nl: "nearest-neighbor-interpolatie kiezen voor labels"
+    by: labels
+  - en: "work out the bilinear value between four pixels"
+    nl: "de bilineaire waarde tussen vier pixels uitrekenen"
+    by: value
+  - en: "resize a photo with Pillow, width before height"
+    nl: "een foto groter of kleiner maken met Pillow, breedte voor hoogte"
+    by: half
+  - en: "explain why shrinking needs more than the four pixels around a middle"
+    nl: "uitleggen waarom verkleinen meer nodig heeft dan de vier pixels rond een midden"
+    by: shrink
