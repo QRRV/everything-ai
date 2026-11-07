@@ -1,0 +1,31 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: cv-morphology
+minutes: 35
+title:
+  en: "Grow and shrink shapes: erosion and dilation"
+  nl: "Vormen laten groeien en krimpen: erosie en dilatatie"
+goal:
+  en: "tidy up a binary image with erosion and dilation: remove the specks with an opening, fill the holes with a closing, and choose the size of the square."
+  nl: "een binair beeld opruimen met erosie en dilatatie: de spikkels weghalen met een opening, de gaten dichten met een sluiting, en de grootte van het vierkant kiezen."
+summary:
+  - en: "A morphological operation looks at every pixel through a structuring element, here a square of k by k around it. Erosion keeps a pixel white only when its whole window is white, the smallest value; dilation makes it white when any pixel of the window is, the largest value."
+    nl: "Een morfologische operatie bekijkt elke pixel door een structuurelement, hier een vierkant van k bij k eromheen. Erosie houdt een pixel alleen wit als zijn hele venster wit is, de kleinste waarde; dilatatie maakt hem wit als er een pixel van het venster wit is, de grootste waarde."
+  - en: "An opening, erosion and then dilation, removes everything the square does not fit in, such as specks. A closing, dilation and then erosion, fills the holes and gaps the square does not fit in."
+    nl: "Een opening, eerst erosie en dan dilatatie, haalt alles weg waar het vierkant niet in past, zoals spikkels. Een sluiting, eerst dilatatie en dan erosie, vult de gaten en kieren waar het vierkant niet in past."
+  - en: "On the apples of the drawing of fruit, an opening of 3 by 3 removes all 1331 specks, and a closing of 5 by 5, the smallest that fills the holes of the shine, leaves 14 pixels wrong instead of 2780. The opening comes first: a closing first sticks specks onto the apples."
+    nl: "Op de appels van de tekening van fruit haalt een opening van 3 bij 3 alle 1331 spikkels weg, en zijn er na een sluiting van 5 bij 5, de kleinste die de gaten van de glans dicht, nog 14 pixels fout in plaats van 2780. De opening komt eerst: een sluiting plakt eerst spikkels aan de appels vast."
+can_now:
+  - en: "say which pixels of a binary image an erosion keeps"
+    nl: "zeggen welke pixels van een binair beeld een erosie houdt"
+    by: block
+  - en: "write a dilation with a square of any size"
+    nl: "een dilatatie schrijven met een vierkant van elke grootte"
+    by: dilate
+  - en: "choose the size of a closing by measuring"
+    nl: "de grootte van een sluiting kiezen door te meten"
+    by: size
+  - en: "explain why the opening comes before the closing"
+    nl: "uitleggen waarom de opening voor de sluiting komt"
+    by: order

@@ -110,9 +110,9 @@ lessons:
   module: image-processing
   idea: "Erosion keeps a pixel only if its whole neighborhood is white, dilation makes it white if any neighbor is; one after the other, they remove specks (opening) or fill holes (closing)."
   covers: [d13-klassieke-beeldverwerking#5]
-  requires: [cv-otsu-threshold]
+  requires: [cv-otsu-threshold, cv-color-spaces]
   introduces: [c:morphological-operation, c:structuring-element, c:erosion, c:dilation, c:opening, c:closing]
-  uses: [c:binary-image, c:thresholding]
+  uses: [c:binary-image, c:thresholding, c:hsv, c:rgb, c:channel, c:pixel, c:label, c:grayscale-image, c:array, c:shape, c:dtype, c:file-path, py:pil-image, py:rgb-to-hsv, py:mask-and-or, py:np-array, py:np-zeros, py:np-sum, py:np-indexing, py:slicing, py:indexing, py:nested-list, py:comparison, py:min-max, py:imread-imshow, py:keyword-argument, py:range, py:for, py:len, py:def, py:return, py:import, py:print, py:comment, py:variable, py:arithmetic, py:int, py:bool, q:predict, q:choice, q:exercise-with-check, q:slider-task, q:explain, q:run-cell]
   ladder: [numpy]
   data: [course-photos]
   needs: any
