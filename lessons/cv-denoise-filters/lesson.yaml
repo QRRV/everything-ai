@@ -1,0 +1,31 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: cv-denoise-filters
+minutes: 35
+title:
+  en: "Less noise: the mean, the Gaussian and the median filter"
+  nl: "Minder ruis: het gemiddelde-, het Gauss- en het mediaanfilter"
+goal:
+  en: "filter an image with the mean and the median filter, say why the weights of a smoothing filter add up to 1, and find the window size that removes the most noise for the least blur."
+  nl: "een afbeelding filteren met het gemiddelde- en het mediaanfilter, uitleggen waarom de weights van een filter dat gladstrijkt samen 1 zijn, en de venstergrootte vinden die de meeste ruis weghaalt voor de minste vervaging."
+summary:
+  - en: "Image noise is a random change of the grays: grain makes every pixel a bit lighter or darker, specks make a few pixels pure black or white. `abs(out - clean[1:-1, 1:-1]).mean()` measures how far a filtered photo is from the clean one."
+    nl: "Beeldruis is een willekeurige verandering van de grijstinten: korrel maakt elke pixel iets lichter of donkerder, spikkels maken een paar pixels puur zwart of wit. `abs(out - clean[1:-1, 1:-1]).mean()` meet hoe ver een gefilterde foto van de schone afligt."
+  - en: "The mean filter and the Gaussian filter are convolutions whose weights add up to 1. They cancel grain, but they blur edges and only smear specks out; the Gaussian filter, with the largest weight in the middle, blurs less. A bigger window removes more noise and more detail: on the grainy photo, a mean filter of 5 by 5 comes closest to the clean one."
+    nl: "Het gemiddeldefilter en het Gauss-filter zijn convoluties waarvan de weights samen 1 zijn. Ze middelen korrel weg, maar ze vervagen randen en smeren spikkels alleen uit; het Gauss-filter, met de grootste weight in het midden, vervaagt minder. Een groter venster haalt meer ruis weg en meer detail: op de foto met korrel komt een gemiddeldefilter van 5 bij 5 het dichtst bij de schone."
+  - en: "The median filter takes the middle gray of the window. It is not a convolution: it leaves specks out and keeps edges sharp."
+    nl: "Het mediaanfilter neemt de middelste grijstint van het venster. Het is geen convolutie: het laat spikkels weg en houdt randen scherp."
+can_now:
+  - en: "say why the weights of a smoothing filter add up to 1"
+    nl: "uitleggen waarom de weights van een filter dat gladstrijkt samen 1 zijn"
+    by: weights
+  - en: "filter an image with a mean filter of 3 by 3"
+    nl: "een afbeelding filteren met een gemiddeldefilter van 3 bij 3"
+    by: mean
+  - en: "weigh how much noise a bigger window removes against how much it blurs"
+    nl: "afwegen hoeveel ruis een groter venster weghaalt tegen hoeveel het vervaagt"
+    by: size
+  - en: "remove specks with a median filter, and keep the edges sharp"
+    nl: "spikkels weghalen met een mediaanfilter, en de randen scherp houden"
+    by: median

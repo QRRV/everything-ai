@@ -72,8 +72,8 @@ lessons:
   requires: [cv-image-files, cnn-convolution-idea]
   introduces: [c:image-noise, c:mean-filter, c:gaussian-filter, c:median-filter]
   mentions: [c:normal-distribution]
-  warns: [noise]
-  uses: [c:convolution, c:filter, c:median]
+  warns: [noise, filter]
+  uses: [c:convolution, c:filter, c:feature-map, c:weight, c:median, c:outlier, c:mean, c:standard-deviation, c:mean-absolute-error, c:grayscale-image, c:pixel, c:channel, c:uint8, c:png, c:array, c:shape, c:dtype, c:axis, c:random-number-generator, c:seed, c:file-path, py:pil-image, py:np-array, py:np-astype, py:np-zeros, py:np-mean, py:np-median, py:np-sum, py:min-max, py:np-random-generator, py:np-indexing, py:boolean-mask, py:slicing, py:indexing, py:nested-list, py:abs, py:comparison, py:imread-imshow, py:keyword-argument, py:range, py:for, py:len, py:list, py:tuple, py:def, py:return, py:import, py:print, py:comment, py:variable, py:arithmetic, py:float, py:int, py:string-literal, q:predict, q:choice, q:exercise-with-check, q:slider-task, q:run-cell]
   ladder: [numpy]
   data: [course-photos]
   needs: any
