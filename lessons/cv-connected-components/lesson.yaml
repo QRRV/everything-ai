@@ -1,0 +1,31 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: cv-connected-components
+minutes: 35
+title:
+  en: "Count the shapes: connected components"
+  nl: "Vormen tellen: connected components"
+goal:
+  en: "find every shape of a binary image with a breadth-first search, with its size and its bounding box, and remove specks by their size."
+  nl: "elke vorm van een binair beeld vinden met een breadth-first search, met zijn grootte en zijn bounding box, en spikkels weghalen op hun grootte."
+summary:
+  - en: "Two white pixels touch when one is among the eight around the other, also at a corner. A connected component is a group of white pixels that touch, from neighbor to neighbor: one shape. Its size is its number of pixels, and its bounding box runs from its smallest to its largest row and column."
+    nl: "Twee witte pixels raken elkaar als de een bij de acht rond de ander hoort, ook schuin, met een hoek. Een connected component is een groep witte pixels die elkaar raken, van buur tot buur: één vorm. Zijn grootte is zijn aantal pixels, en zijn bounding box loopt van zijn kleinste tot zijn grootste rij en kolom."
+  - en: "A breadth-first search finds a shape: from a start pixel, it takes the oldest pixel from the queue and puts each white neighbor it has not seen yet at the back, until the queue is empty. A scan row by row starts a new search at every white pixel that no search has found."
+    nl: "Een breadth-first search vindt een vorm: vanaf een startpixel haalt hij de oudste pixel uit de wachtrij en zet hij elke witte buur die hij nog niet gezien heeft achteraan, tot de wachtrij leeg is. Een scan rij voor rij begint een nieuwe zoektocht bij elke witte pixel die nog geen zoektocht gevonden heeft."
+  - en: "The red pixels of the drawing of fruit form 1335 shapes: four apples and 1331 specks of 1 to 4 pixels. Keeping only the shapes of at least 5 pixels leaves the four apples, but with the 45 pixels of tablecloth that touch them, where the opening leaves 14."
+    nl: "De rode pixels van de tekening van fruit bestaan uit 1335 vormen: vier appels en 1331 spikkels van 1 tot 4 pixels. Alleen de vormen van minstens 5 pixels houden laat de vier appels over, maar met de 45 pixels tafelkleed die ze raken, waar de opening er 14 laat staan."
+can_now:
+  - en: "count the shapes of a binary image when pixels that touch at a corner count as touching"
+    nl: "de vormen van een binair beeld tellen als pixels die elkaar met een hoek raken ook meetellen"
+    by: count
+  - en: "find the bounding box of a shape with a breadth-first search"
+    nl: "de bounding box van een vorm vinden met een breadth-first search"
+    by: box
+  - en: "remove specks by their size"
+    nl: "spikkels weghalen op hun grootte"
+    by: smallest
+  - en: "explain why a filter by size keeps what touches a big shape, and an opening does not"
+    nl: "uitleggen waarom een filter op grootte houdt wat een grote vorm raakt, en een opening niet"
+    by: filter

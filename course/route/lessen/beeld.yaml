@@ -125,7 +125,7 @@ lessons:
   covers: [d13-klassieke-beeldverwerking#6]
   requires: [cv-morphology, search-bfs]
   introduces: [c:connected-component, c:bounding-box]
-  uses: [c:breadth-first-search, c:queue, py:deque, c:binary-image, c:opening]
+  uses: [c:breadth-first-search, c:queue, py:deque, c:binary-image, c:opening, c:closing, c:erosion, c:dilation, c:structuring-element, c:pixel, c:hsv, c:label, c:file-path, py:pil-image, py:rgb-to-hsv, py:mask-and-or, py:np-array, py:np-zeros, py:np-sum, py:np-indexing, py:slicing, py:indexing, py:nested-list, py:list, py:tuple, py:set, py:set-add, py:append, py:sorted, py:keyword-argument, py:while, py:comparison, py:min-max, py:imread-imshow, py:plot, py:range, py:for, py:if, py:len, py:def, py:return, py:import, py:print, py:comment, py:variable, py:arithmetic, py:int, py:bool, q:predict, q:choice, q:exercise-with-check, q:slider-task, q:explain, q:run-cell]
   ladder: [python, numpy]
   data: [course-photos]
   needs: any
