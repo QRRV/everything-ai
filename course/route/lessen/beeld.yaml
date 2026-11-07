@@ -166,8 +166,9 @@ lessons:
   idea: "A pretrained model expects photos like the ones it learned from: the same size, cut from the middle, and each color channel scaled with the mean and spread of its training photos."
   covers: []
   requires: [cv-resize-interpolation, ml-feature-scaling, torch-pretrained]
-  introduces: [c:center-crop, c:per-channel-normalization]
-  uses: [c:standardization, c:interpolation, c:channel, c:pretrained-model]
+  introduces: [c:center-crop, c:per-channel-normalization, py:torch-permute, py:torch-unsqueeze]
+  uses: [c:standardization, c:interpolation, c:bilinear-interpolation, c:channel, c:pretrained-model, c:model-card, c:pixel, c:uint8, c:png, c:array, c:shape, c:dtype, c:axis, c:broadcasting, c:tensor, c:float32, c:mini-batch, c:mean, c:standard-deviation, c:weight, c:file-path, py:pil-image, py:np-array, py:np-arange, py:np-reshape, py:np-mean, py:np-indexing, py:slicing, py:int, py:keyword-argument, py:torch-tensor, py:def, py:return, py:import, py:print, py:comment, py:variable, py:arithmetic, py:float, py:tuple, py:method, q:predict, q:choice, q:exercise-with-check, q:slider-task, q:explain, q:run-cell]
+  mentions: [c:imagenet]
   ladder: [numpy, torch]
   data: [course-photos]
   needs: any

@@ -1,0 +1,31 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: cv-prepare-photo
+minutes: 30
+title:
+  en: "Get a photo ready for a model"
+  nl: "Een foto klaarmaken voor een model"
+goal:
+  en: "make a photo of any size into the input of a pretrained image model: the shorter side resized, the middle cut out, every color scaled with the numbers of its training photos, and the colors first."
+  nl: "een foto van elke maat klaarmaken als input voor een pretrained beeldmodel: de korte zijde op maat, het midden eruit geknipt, elke kleur geschaald met de getallen van zijn trainingsfoto's, en de kleuren vooraan."
+summary:
+  - en: "A pretrained model expects photos prepared the way its training photos were. For most ImageNet models: the shorter side to 256 with the ratio kept, then a center crop, the middle square of 224 by 224, so that nothing is squashed."
+    nl: "Een pretrained model verwacht foto's die zijn klaargemaakt zoals zijn trainingsfoto's. Voor de meeste ImageNet-modellen: de korte zijde naar 256 met dezelfde verhouding, en dan een center crop, het middelste vierkant van 224 bij 224, zodat er niets wordt platgedrukt."
+  - en: "Per-channel normalization standardizes every color with the mean and the standard deviation of the training photos, `(crop / 255 - mean) / std`, not with those of the photo itself, so that a red photo stays red."
+    nl: "Per-channel normalization standaardiseert elke kleur met het gemiddelde en de standaardafwijking van de trainingsfoto's, `(crop / 255 - mean) / std`, niet met die van de foto zelf, zodat een rode foto rood blijft."
+  - en: "PyTorch's image models take `(batch, colors, rows, columns)` in float32: `.permute(2, 0, 1)` puts the colors first, and `.unsqueeze(0)` makes a batch of one. `reshape` gives the right shape with the numbers in the wrong places."
+    nl: "De beeldmodellen van PyTorch verwachten `(batch, kleuren, rijen, kolommen)` in float32: `.permute(2, 0, 1)` zet de kleuren vooraan, en `.unsqueeze(0)` maakt een batch van één. `reshape` geeft de goede shape met de getallen op de verkeerde plekken."
+can_now:
+  - en: "work out the shape of a photo after its shorter side is resized"
+    nl: "de shape van een foto uitrekenen nadat zijn korte zijde op maat is gebracht"
+    by: shape
+  - en: "cut the middle square out of an image"
+    nl: "het middelste vierkant uit een beeld knippen"
+    by: crop
+  - en: "make a photo into the input of a pretrained image model"
+    nl: "een foto klaarmaken als input voor een pretrained beeldmodel"
+    by: prepare
+  - en: "explain why a photo is scaled with the numbers of the training photos, not its own"
+    nl: "uitleggen waarom een foto wordt geschaald met de getallen van de trainingsfoto's, niet met zijn eigen"
+    by: own
