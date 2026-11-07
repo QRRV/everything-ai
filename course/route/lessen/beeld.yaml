@@ -98,8 +98,8 @@ lessons:
   idea: "Canny turns the thick edges of Sobel into thin, connected lines: it keeps only the strongest point across each edge, and a weaker point only where it touches a strong one."
   covers: [d13-klassieke-beeldverwerking#4]
   requires: [cv-sobel-edges, cv-otsu-threshold]
-  introduces: [c:canny-edge-detector, c:edge-thinning, c:hysteresis-threshold]
-  uses: [c:image-gradient, c:sobel-filter, c:thresholding, c:binary-image]
+  introduces: [c:canny-edge-detector, c:edge-thinning, c:hysteresis-threshold, py:not-operator]
+  uses: [c:image-gradient, c:sobel-filter, c:edge-detection, c:thresholding, c:binary-image, c:gaussian-filter, c:filter, c:gradient, c:norm, c:vector, c:grayscale-image, c:pixel, c:rgb, c:channel, c:array, c:shape, c:axis, c:file-path, py:pil-image, py:np-array, py:np-zeros, py:np-mean, py:np-sum, py:np-indexing, py:boolean-mask, py:slicing, py:indexing, py:nested-list, py:comparison, py:abs, py:min-max, py:if, py:imread-imshow, py:keyword-argument, py:range, py:for, py:len, py:list, py:append, py:tuple, py:def, py:return, py:import, py:print, py:comment, py:variable, py:arithmetic, py:float, py:int, py:bool, py:string-literal, q:predict, q:choice, q:exercise-with-check, q:slider-task, q:explain, q:run-cell]
   ladder: [numpy]
   data: [course-photos]
   needs: any

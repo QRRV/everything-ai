@@ -1,0 +1,31 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: cv-canny
+minutes: 40
+title:
+  en: "Thin, connected edges: Canny"
+  nl: "Dunne, doorlopende randen: Canny"
+goal:
+  en: "turn thick, broken edges into thin, connected lines with the Canny edge detector: thin every edge to its strongest pixel across it, and keep a weak edge only where it is connected to a strong one."
+  nl: "dikke, onderbroken randen omzetten in dunne, doorlopende lijnen met de Canny-randdetector: elke rand dwars uitdunnen tot zijn sterkste pixel, en een zwakke rand alleen houden waar hij aan een sterke vastzit."
+summary:
+  - en: "The Canny edge detector smooths the image, works out the image gradient with the two Sobel filters, thins the edges and applies a hysteresis threshold."
+    nl: "De Canny-randdetector strijkt het beeld glad, berekent de beeldgradient met de twee Sobel-filters, dunt de randen uit en past een hysteresedrempel toe."
+  - en: "Edge thinning keeps a pixel only when it is at least as strong as its two neighbors across the edge, along the image gradient rounded to one of four directions: every edge becomes a line one pixel wide."
+    nl: "Het uitdunnen van randen houdt een pixel alleen als hij minstens zo sterk is als zijn twee buren dwars op de rand, langs de beeldgradient afgerond op een van vier richtingen: elke rand wordt een lijn van één pixel breed."
+  - en: "A hysteresis threshold has two thresholds: above the high one a pixel is an edge, between the two only when it is connected to such a strong edge. On the drawing of fruit, with 70 and 200, 107 pixels are wrong; with one threshold, in steps of 10, at best 307."
+    nl: "Een hysteresedrempel heeft twee drempels: boven de hoge is een pixel een rand, tussen de twee alleen als hij aan zo'n sterke rand vastzit. Op de tekening van fruit zijn met 70 en 200 nog 107 pixels fout; met één drempel, in stappen van 10, op zijn best 307."
+can_now:
+  - en: "say with which two neighbors edge thinning compares a pixel, from its image gradient"
+    nl: "aan de beeldgradient van een pixel zien met welke twee buren het uitdunnen hem vergelijkt"
+    by: neighbors
+  - en: "thin an edge strength to lines one pixel wide"
+    nl: "een randsterkte uitdunnen tot lijnen van één pixel breed"
+    by: thin
+  - en: "choose the low threshold of a hysteresis threshold by measuring"
+    nl: "de lage drempel van een hysteresedrempel kiezen door te meten"
+    by: low
+  - en: "explain why two thresholds find connected edges better than one"
+    nl: "uitleggen waarom twee drempels doorlopende randen beter vinden dan één"
+    by: two
