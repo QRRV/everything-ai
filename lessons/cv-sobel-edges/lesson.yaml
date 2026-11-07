@@ -1,0 +1,31 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: cv-sobel-edges
+minutes: 35
+title:
+  en: "Where the brightness jumps: gradients and Sobel"
+  nl: "Waar de helderheid verspringt: gradients en Sobel"
+goal:
+  en: "find the edges of a photo with two Sobel filters and the length of the image gradient, read from the gradient which side is lighter, and choose a threshold that marks edges and not grain."
+  nl: "de randen van een foto vinden met twee Sobel-filters en de lengte van de beeldgradient, aan de gradient aflezen welke kant lichter is, en een drempel kiezen die randen markeert en geen korrel."
+summary:
+  - en: "Two Sobel filters estimate how fast the brightness changes: $K_x$ to the right, $K_y$ downward. Each takes the difference of the two outer columns or rows of the window, weighted 1, 2, 1 as in the Gaussian filter."
+    nl: "Twee Sobel-filters schatten hoe snel de helderheid verandert: $K_x$ naar rechts, $K_y$ naar beneden. Elk neemt het verschil van de twee buitenste kolommen of rijen van het venster, waarbij de drie rijen of kolommen 1, 2 en 1 keer meetellen, zoals in het Gauss-filter."
+  - en: "Their results $(g_x, g_y)$ form the image gradient. It points toward the lighter side, and its length $\\sqrt{g_x^2 + g_y^2}$ is the edge strength; edge detection marks the pixels where it is above a threshold."
+    nl: "Hun uitkomsten $(g_x, g_y)$ vormen de beeldgradient. Die wijst naar de lichtere kant, en de lengte $\\sqrt{g_x^2 + g_y^2}$ is de randsterkte; randdetectie markeert de pixels waar die boven een drempel ligt."
+  - en: "Grain does not cancel out in a difference, so on a grainy photo a Sobel filter finds edges everywhere. Smoothing first with the Gaussian filter lets a lower threshold find the real edges: on the grainy coffee photo, 175 instead of 300."
+    nl: "Korrel valt in een verschil niet tegen elkaar weg, dus op een foto met korrel vindt een Sobel-filter overal randen. Strijk je eerst glad met het Gauss-filter, dan vindt een lagere drempel de echte randen: op de koffiefoto met korrel 175 in plaats van 300."
+can_now:
+  - en: "read from an image gradient which side of an edge is lighter"
+    nl: "aan een beeldgradient aflezen welke kant van een rand lichter is"
+    by: direction
+  - en: "work out the edge strength of an image with two Sobel filters"
+    nl: "de randsterkte van een afbeelding uitrekenen met twee Sobel-filters"
+    by: strength
+  - en: "choose a threshold that marks the real edges and leaves the grain out"
+    nl: "een drempel kiezen die de echte randen markeert en de korrel weglaat"
+    by: threshold
+  - en: "explain why a grainy image needs smoothing before edge detection"
+    nl: "uitleggen waarom een afbeelding met korrel gladgestreken moet worden vóór randdetectie"
+    by: smooth

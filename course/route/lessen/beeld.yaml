@@ -86,7 +86,7 @@ lessons:
   covers: [d13-klassieke-beeldverwerking#4]
   requires: [cv-denoise-filters, math-gradient, math-norms-cosine]
   introduces: [c:edge-detection, c:image-gradient, c:sobel-filter]
-  uses: [c:gradient, c:partial-derivative, c:convolution, c:filter, c:norm]
+  uses: [c:gradient, c:partial-derivative, c:finite-difference, c:loss, c:gradient-descent, c:convolution, c:filter, c:feature-map, c:weight, c:layer, c:norm, c:vector, c:transpose, c:matrix-multiplication, v:contour-plot, c:gaussian-filter, c:image-noise, c:mean, c:standard-deviation, c:grayscale-image, c:pixel, c:channel, c:uint8, c:png, c:array, c:shape, c:dtype, c:axis, c:random-number-generator, c:seed, c:file-path, py:pil-image, py:np-array, py:np-astype, py:np-zeros, py:np-mean, py:np-sum, py:np-linalg-norm, py:matmul-operator, py:comprehension, py:min-max, py:np-random-generator, py:np-indexing, py:boolean-mask, py:slicing, py:indexing, py:nested-list, py:comparison, py:imread-imshow, py:keyword-argument, py:range, py:for, py:len, py:list, py:tuple, py:def, py:return, py:import, py:print, py:comment, py:variable, py:arithmetic, py:float, py:int, py:string-literal, q:predict, q:choice, q:exercise-with-check, q:slider-task, q:explain, q:run-cell]
   ladder: [numpy]
   data: [course-photos]
   needs: any
