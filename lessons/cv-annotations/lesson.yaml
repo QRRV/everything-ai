@@ -1,0 +1,31 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: cv-annotations
+minutes: 30
+title:
+  en: "Labels, boxes, masks and keypoints"
+  nl: "Labels, boxes, masks en keypoints"
+goal:
+  en: "choose between a label, a box, a mask and keypoints for a vision task, and write a box in the format of COCO."
+  nl: "voor een beeldtaak kiezen tussen een label, een box, een mask en keypoints, en een box schrijven in het formaat van COCO."
+summary:
+  - en: "An annotation is the right answer that people add to an example by hand. What a model must find decides its form: a label per image for what it shows, a box per object for object detection, a segmentation mask for which pixels an object has, and keypoints for exact places on it."
+    nl: "Een annotatie is het goede antwoord dat mensen met de hand aan een voorbeeld toevoegen. Wat een model moet vinden, bepaalt de vorm: een label per beeld voor wat het laat zien, een box per voorwerp voor object detection, een segmentation mask voor welke pixels een voorwerp heeft, en keypoints voor precieze plekken erop."
+  - en: "A box holds background: in the course's scenes, a triangle fills about half of its box, a circle 79%, and a square from half to all of it, depending on how it is turned. A mask is exact, but takes much longer: a box of good quality takes 7 to 35 seconds, a mask in COCO took more than 79."
+    nl: "Een box bevat achtergrond: in de scènes van de course vult een driehoek ongeveer de helft van zijn box, een cirkel 79%, en een vierkant van de helft tot alles, afhankelijk van hoe het gedraaid is. Een mask is precies, maar kost veel meer tijd: een box van goede kwaliteit kost 7 tot 35 seconden, een mask kostte in COCO meer dan 79."
+  - en: "COCO writes a box as [x, y, width, height], with x the column of the left side, and a keypoint as [x, y, v], with v 2 when it can be seen, 1 when it is hidden and 0 when it is not labeled."
+    nl: "COCO schrijft een box als [x, y, width, height], met x de kolom van de linkerkant, en een keypoint als [x, y, v], met v 2 als het te zien is, 1 als het bedekt is en 0 als het niet gelabeld is."
+can_now:
+  - en: "choose the annotation a vision task needs"
+    nl: "de annotatie kiezen die een beeldtaak nodig heeft"
+    by: which
+  - en: "write a box in the format of COCO"
+    nl: "een box schrijven in het formaat van COCO"
+    by: coco
+  - en: "label a keypoint that is hidden"
+    nl: "een keypoint labelen dat bedekt is"
+    by: hidden
+  - en: "explain why a dataset for object detection gets boxes and not masks"
+    nl: "uitleggen waarom een dataset voor object detection boxes krijgt en geen masks"
+    by: cost

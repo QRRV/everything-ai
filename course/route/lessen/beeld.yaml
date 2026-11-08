@@ -233,13 +233,13 @@ lessons:
   title: "Labels, boxes, masks and keypoints"
   level: basis
   module: boxes-and-masks
-  idea: "What a vision model must find decides how its data is labeled: one label per image, a box per object, a mask per pixel or a point per joint."
+  idea: "What a vision model must find decides how its data is labeled: one label per image, a box per object, a mask per object or points on exact places of it; the more exact, the longer the labeling takes."
   covers: [beelden-als-data#5]
   requires: [cv-connected-components]
   introduces: [c:annotation, c:object-detection, c:segmentation-mask, c:keypoint]
-  uses: [c:bounding-box, c:label, c:connected-component]
+  uses: [c:bounding-box, c:label, c:connected-component, c:classification, c:class, c:binary-image, c:pixel, c:seed, py:np-arange, py:np-sum, c:axis, py:boolean-mask, py:min-max, py:class, py:import, py:tuple, py:list, py:int, py:bool, py:arithmetic, py:comparison, py:for, py:def, py:return, py:print, py:comment, py:variable, py:len, q:predict, q:choice, q:exercise-with-check, q:slider-task, q:explain, q:run-cell]
   ladder: [numpy]
-  data: [course-scenes, coco-annotations]
+  data: [course-scenes]
   needs: any
 
 - id: cv-iou
