@@ -1,0 +1,31 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: cv-iou
+minutes: 30
+title:
+  en: "How much two boxes overlap: IoU"
+  nl: "Hoeveel twee boxes overlappen: IoU"
+goal:
+  en: "compute the intersection over union of two boxes from their four numbers, and say what it tells about a predicted box."
+  nl: "de intersection over union van twee boxes berekenen uit hun vier getallen, en zeggen wat die over een voorspelde box vertelt."
+summary:
+  - en: "The intersection over union (IoU) of two boxes is the number of pixels in their overlap divided by the number of pixels they cover together: 1 for the same box, 0 for boxes that do not overlap. It is a share, so it weighs how far off a box is against its size: 3 pixels too many on every side give 0.39 around a box of 10 by 10 pixels, and 0.89 around one of 100 by 100."
+    nl: "De intersection over union (IoU) van twee boxes is het aantal pixels in hun overlap gedeeld door het aantal pixels dat ze samen bedekken: 1 voor dezelfde box, 0 voor boxes die niet overlappen. Het is een verhouding, dus hij weegt hoe ver een box ernaast zit af tegen zijn grootte: 3 pixels te veel aan elke kant geven 0,39 om een box van 10 bij 10 pixels, en 0,89 om een van 100 bij 100."
+  - en: "The overlap of two boxes runs from the larger of their tops and lefts to the smaller of their bottoms and rights, each count of rows and columns at least 0; the union is both areas added, minus the overlap. For masks you count pixels with & and |."
+    nl: "De overlap van twee boxes loopt van de grootste van hun bovenkanten en linkerkanten tot de kleinste van hun onderkanten en rechterkanten, met elk aantal rijen en kolommen minstens 0; de vereniging is beide oppervlaktes opgeteld, min de overlap. Voor masks tel je pixels met & en |."
+  - en: "PASCAL VOC counts a predicted box as found when its IoU with the true box is above 0.5. A box shifted by a third of its width no longer gets above that, and a box with the right middle but twice as wide and twice as tall gets only 0.25."
+    nl: "PASCAL VOC telt een voorspelde box als gevonden als zijn IoU met de echte box boven 0,5 ligt. Een box die een derde van zijn breedte verschoven is, komt daar al niet meer boven, en een box met het goede midden maar twee keer zo breed en twee keer zo hoog krijgt maar 0,25."
+can_now:
+  - en: "find the overlap of two boxes"
+    nl: "de overlap van twee boxes vinden"
+    by: overlap
+  - en: "compute the IoU of two boxes from their four numbers"
+    nl: "de IoU van twee boxes berekenen uit hun vier getallen"
+    by: iou
+  - en: "tell why the distance between the middles of two boxes says too little"
+    nl: "zeggen waarom de afstand tussen de middens van twee boxes te weinig zegt"
+    by: middle
+  - en: "explain why IoU divides by the union and not by the true box"
+    nl: "uitleggen waarom IoU deelt door de vereniging en niet door de echte box"
+    by: big

@@ -250,7 +250,7 @@ lessons:
   covers: [objectdetectie#0]
   requires: [cv-annotations]
   introduces: [c:intersection-over-union]
-  uses: [c:bounding-box, c:object-detection]
+  uses: [c:bounding-box, c:object-detection, c:annotation, c:segmentation-mask, c:binary-image, c:pixel, c:seed, c:dtype, py:np-zeros, py:mask-and-or, py:np-sum, py:slicing, py:np-indexing, py:min-max, py:indexing, py:keyword-argument, py:tuple, py:int, py:float, py:bool, py:arithmetic, py:for, py:def, py:return, py:print, py:comment, py:variable, py:import, q:predict, q:choice, q:exercise-with-check, q:slider-task, q:explain, q:run-cell]
   ladder: [python, numpy]
   data: [course-scenes]
   needs: any
