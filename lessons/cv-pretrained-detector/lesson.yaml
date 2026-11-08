@@ -1,0 +1,31 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: cv-pretrained-detector
+minutes: 30
+title:
+  en: "Use a pretrained detector"
+  nl: "Een pretrained detector gebruiken"
+goal:
+  en: "find the objects in a photo with DETR, a detector trained on COCO, and choose the score threshold that decides which of its boxes you keep."
+  nl: "de voorwerpen op een foto vinden met DETR, een detector die op COCO getraind is, en de score threshold kiezen die bepaalt welke van zijn boxes je houdt."
+summary:
+  - en: "DETR turns a photo into features with a ResNet-50, and 100 object queries each give a box, (cx, cy, w, h) as fractions of the photo, and 92 logits: COCO's kinds, and the last for no object. Each object mostly gets one query, so DETR needs no non-maximum suppression."
+    nl: "DETR maakt van een foto features met een ResNet-50, en 100 object queries geven elk een box, (cx, cy, w, h) als delen van de foto, en 92 logits: de soorten van COCO, en de laatste voor no object. Elk voorwerp krijgt meestal één query, dus DETR heeft geen non-maximum suppression nodig."
+  - en: "Softmax turns the logits of a query into probabilities; its kind is the most likely kind, not counting no object, and its score is that probability. A box is kept when its score is above the score threshold: on 30 chair photos and 30 starfish photos, a chair on 27 and a box on all 30 starfish photos at 0.05, and 12 and 4 at 0.99."
+    nl: "Softmax maakt van de logits van een query kansen; zijn soort is de waarschijnlijkste soort, waarbij no object niet meetelt, en zijn score is die kans. Een box blijft als zijn score boven de score threshold ligt: bij 30 stoelfoto's en 30 zeesterfoto's een stoel op 27 en een box op alle 30 zeesterfoto's bij 0,05, en 12 en 4 bij 0,99."
+  - en: "A detector only knows the kinds it learned: DETR has no starfish, so every box on a starfish is wrong, some with very high scores, such as a snowboard with 0.999. No score threshold makes it find a kind it never learned."
+    nl: "Een detector kent alleen de soorten die hij geleerd heeft: DETR heeft geen zeester, dus elke box op een zeester is fout, sommige met heel hoge scores, zoals een snowboard met 0,999. Geen score threshold laat hem een soort vinden die hij nooit geleerd heeft."
+can_now:
+  - en: "work out the kind and score of a query of DETR from its probabilities"
+    nl: "de soort en de score van een query van DETR uitrekenen uit zijn kansen"
+    by: score
+  - en: "turn a box of DETR into pixels"
+    nl: "een box van DETR omrekenen naar pixels"
+    by: pixels
+  - en: "choose a low or a high score threshold for what each mistake costs in an app"
+    nl: "een lage of een hoge score threshold kiezen naar wat elke vergissing in een app kost"
+    by: apps
+  - en: "explain why a detector cannot find a kind it never learned, whatever its score threshold"
+    nl: "uitleggen waarom een detector een soort die hij nooit geleerd heeft niet kan vinden, wat zijn score threshold ook is"
+    by: starfish

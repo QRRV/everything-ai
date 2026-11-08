@@ -84,6 +84,13 @@ PINNED = {
         "sha256": "ae1e99fcefd534ed978cdeb8326f08030c96e28b7a81ffcbc98a857c84d14be1",
         "size": 88_249_960,
     },
+    # DETR with ResNet-50, a detector of Meta trained on COCO (Apache-2.0): cv-pretrained-detector and the lessons after
+    # it (course/route/bronnen.yaml, model-detr-resnet50)
+    ("facebook/detr-resnet-50", "model.safetensors"): {
+        "revision": "1d5f47bd3bdd2c4bbfa585418ffe6da5028b4c0b",
+        "sha256": "830f5e2eeaada8c8c8281779dcc8ab12833972eb8514ed0a35be6c1d4420ad81",
+        "size": 166_587_896,
+    },
     # Caltech-101 (CC BY 4.0), at its source, CaltechDATA (doi:10.22002/D1.20086): the photo set of the vision branch
     # (course/route/bronnen.yaml, caltech-101-download-only; everything_ai.caltech unpacks it). CaltechDATA gives the
     # same file's MD5, 3138e1922a9193bfa496528edbbc45d0.

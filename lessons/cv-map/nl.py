@@ -24,7 +24,7 @@ def header():
 @app.cell(hide_code=True)
 def text_quick_check():
     mo.md(r"""
-    ### Even checken
+    ### Instapcheck
 
     Twee korte vragen over [Eén box per voorwerp: non-maximum suppression](/course/open/cv-nms?lang=nl) en over precision en recall, uit [Alle thresholds tegelijk: de ROC curve en AUC](/course/open/ml-roc-auc?lang=nl) en de lessen daarvoor.
     """)
@@ -80,7 +80,7 @@ def quick_check_pr():
 @app.cell(hide_code=True)
 def text_why():
     mo.md(r"""
-    ## Waarom dit ertoe doet
+    ## Waarom
 
     Een detector tekent boxes, elk met een soort en een score. Hoe goed is hij? Je kunt niet gewoon goede antwoorden tellen, zoals accuracy doet: de detector bepaalt zelf hoeveel boxes hij tekent, een box kan bijna goed zijn, en één voorwerp kan twee boxes krijgen. Een score voor een detector moet zeggen hoeveel voorwerpen hij vindt, hoeveel van zijn boxes fout zijn, en of de boxes waar hij het zekerst van is, kloppen. Papers en ranglijsten vergelijken detectors met één zo'n getal: mean average precision.
 
@@ -123,7 +123,7 @@ def text_idea():
         """),
         L.watch_out("Deel door het aantal echte boxes, niet door het aantal true positives. Een echte box die door geen enkele box gevonden wordt, telt als 0: anders krijgt een detector die één box tekent, op het voorwerp waar hij het zekerst van is, een AP van 1."),
         mo.md(r"""
-        ### Nieuwe woorden en symbolen
+        ### Nieuwe woorden en tekens
 
         | Woord | Wat het betekent | In code |
         |---|---|---|

@@ -288,9 +288,10 @@ lessons:
   module: boxes-and-masks
   idea: "A detector trained on COCO draws a box, a kind and a score around each object it knows in a photo; a threshold on the score decides which boxes you keep, and that threshold trades missed objects for false boxes."
   covers: [objectdetectie#1]
-  requires: [cv-map, cv-prepare-photo]
-  introduces: [c:score-threshold]
-  uses: [c:object-detection, c:bounding-box, c:confidence-score, c:non-maximum-suppression, c:pretrained-model]
-  ladder: [torch]
-  data: [model-detr-resnet50, caltech-101-download-only]
+  requires: [cv-map, cv-try-classifier]
+  introduces: [c:score-threshold, c:object-query]
+  uses: [c:object-detection, c:bounding-box, c:confidence-score, c:non-maximum-suppression, c:pretrained-model, c:average-precision, c:intersection-over-union, c:interpolation, c:decision-threshold, c:false-positive, c:false-negative, c:softmax, c:logit, c:probability, c:class, c:feature, c:imagenet, c:per-channel-normalization, c:model-parameter, c:model-hub, c:tensor, c:shape, c:pixel, c:validation-set, c:file-path, py:with, py:no-grad, py:torch-numpy, py:pil-image, py:np-exp, py:np-argmax, py:min-max, py:method, py:slicing, py:indexing, py:tuple, py:for, py:range, py:if, py:comparison, py:def, py:return, py:import, py:print, py:comment, py:variable, py:arithmetic, py:int, py:float, py:string-literal, q:predict, q:choice, q:exercise-with-check, q:slider-task, q:explain, q:run-cell]
+  mentions: [c:resnet, c:transformer, c:mini-batch]
+  ladder: [numpy, torch]
+  data: [model-detr-resnet50, caltech-101-download-only, course-photos]
   needs: any
