@@ -10,7 +10,8 @@ tests do.
 Other models, too large for the course to ship, are downloaded from a repository on the hub (PINNED): once,
 when a learner asks for it, from a fixed commit, and kept only when the SHA-256 is the one the course pinned. After
 that the lesson works offline. Of a large file, a lesson can pin only its first bytes (`first`), such as the
-beginning of a compressed shard of web pages: a learner then downloads only those."""
+beginning of a compressed shard of web pages: a learner then downloads only those. A file that is not on the hub has
+its own address (`url`), at its source, and is pinned in the same way."""
 import hashlib
 import http.client
 import os
@@ -76,8 +77,25 @@ PINNED = {
         "sha256": "694f673df6520a3158624e8a89af086f59923ee4cd7436fe5bc3bc71d295ad81",
         "size": 46_807_446,
     },
+    # DINOv2-small, a vision foundation model of Meta (Apache-2.0): cv-pretrained-features and the lessons after it
+    # (course/route/bronnen.yaml, model-dinov2-small)
+    ("facebook/dinov2-small", "model.safetensors"): {
+        "revision": "ed25f3a31f01632728cabb09d1542f84ab7b0056",
+        "sha256": "ae1e99fcefd534ed978cdeb8326f08030c96e28b7a81ffcbc98a857c84d14be1",
+        "size": 88_249_960,
+    },
+    # Caltech-101 (CC BY 4.0), at its source, CaltechDATA (doi:10.22002/D1.20086): the photo set of the vision branch
+    # (course/route/bronnen.yaml, caltech-101-download-only; everything_ai.caltech unpacks it). CaltechDATA gives the
+    # same file's MD5, 3138e1922a9193bfa496528edbbc45d0.
+    ("caltechdata/mzrjq-6wc02", "caltech-101.zip"): {
+        "url": "https://data.caltech.edu/records/mzrjq-6wc02/files/caltech-101.zip?download=1",
+        "revision": "v1",
+        "sha256": "331234750fc7f77520e50d9565e8b6907b03565e30320da1401130db08c61f91",
+        "size": 137_414_764,
+    },
 }
 CHUNK = 1 << 20   # bytes per read while downloading
+AGENT = "everything-ai-course"   # how a download introduces itself: some sources refuse Python's own name
 
 
 def address(repo: str, filename: str) -> str:
@@ -132,8 +150,10 @@ class NotPinned(OSError):
 
 
 def pinned_address(repo: str, filename: str) -> str:
-    """The address of a pinned file on the hub: at its fixed commit, so that it never changes."""
-    return f"{HUB}/{repo}/resolve/{PINNED[(repo, filename)]['revision']}/{filename}"
+    """The address of a pinned file on the hub: at its fixed commit, so that it never changes. A file from elsewhere
+    has its own address."""
+    pin = PINNED[(repo, filename)]
+    return pin.get("url") or f"{HUB}/{repo}/resolve/{pin['revision']}/{filename}"
 
 
 def _pinned_path(repo: str, filename: str) -> Path:
@@ -165,9 +185,10 @@ def download(repo: str, filename: str, progress=None) -> Path:
     try:
         digest, done = hashlib.sha256(), 0
         first = pin.get("first", False)
-        request = pinned_address(repo, filename)
+        headers = {"User-Agent": AGENT}
         if first:   # ask for those bytes only
-            request = urllib.request.Request(request, headers={"Range": f"bytes=0-{pin['size'] - 1}"})
+            headers["Range"] = f"bytes=0-{pin['size'] - 1}"
+        request = urllib.request.Request(pinned_address(repo, filename), headers=headers)
         # of a file pinned by its first bytes, exactly those: also when the hub sends the whole file anyway
         wanted = pin["size"] if first else pin["size"] + 1
         with os.fdopen(fd, "wb") as f, urllib.request.urlopen(request, timeout=60) as response:
@@ -181,7 +202,7 @@ def download(repo: str, filename: str, progress=None) -> Path:
                 if progress is not None:
                     progress(done, pin["size"])
         if done != pin["size"] or digest.hexdigest() != pin["sha256"]:
-            raise NotPinned(f"the file from the hub is not the pinned one ({done} bytes)")
+            raise NotPinned(f"the downloaded file is not the pinned one ({done} bytes)")
         os.chmod(tmp, 0o644)   # mkstemp makes a file only its owner may read; a download is for whoever uses the work folder
         os.replace(tmp, target)   # in one step: another lesson never reads half a file
         return target

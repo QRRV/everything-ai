@@ -1,0 +1,31 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: cv-pretrained-features
+minutes: 35
+title:
+  en: "What a vision model sees: features and a linear probe"
+  nl: "Wat een beeldmodel ziet: features en een linear probe"
+goal:
+  en: "turn photos into features with DINOv2, a vision foundation model, and train a linear probe on them that learns new classes from a few photos each."
+  nl: "foto's met DINOv2, een vision foundation model, omzetten in features, en daarop een linear probe trainen die nieuwe klassen leert van een paar foto's per klasse."
+summary:
+  - en: "A vision foundation model is a large network trained on a huge, varied collection of photos, often without labels, so that its features are useful for many tasks. DINOv2-small learned from 142 million photos without labels and turns a photo into 384 numbers."
+    nl: "Een vision foundation model is een groot netwerk dat getraind is op een enorme, gevarieerde verzameling foto's, vaak zonder labels, zodat zijn features voor veel taken bruikbaar zijn. DINOv2-small leerde van 142 miljoen foto's zonder labels en maakt van een foto 384 getallen."
+  - en: "A linear probe is one linear layer, `nn.Linear(384, k)`, trained on the frozen features. The model learns nothing, so you compute the features of every photo once, as a tensor of shape `(n, 384)`, and train the probe on that tensor."
+    nl: "Een linear probe is één lineaire layer, `nn.Linear(384, k)`, getraind op de bevroren features. Het model leert niets, dus reken je de features van elke foto één keer uit, als een tensor met shape `(n, 384)`, en train je de probe op die tensor."
+  - en: "On DINOv2's features, a probe gets 95 of 100 test photos of 10 classes right after one photo per class; on the pixels, 20. A training loss of 0 says little: only photos the probe never saw show what it learned."
+    nl: "Op de features van DINOv2 haalt een probe na één foto per klasse 95 van 100 testfoto's van 10 klassen goed; op de pixels 20. Een training loss van 0 zegt weinig: alleen foto's die de probe nooit zag, laten zien wat hij leerde."
+can_now:
+  - en: "count the numbers a linear probe learns"
+    nl: "de getallen tellen die een linear probe leert"
+    by: params
+  - en: "train a linear probe on the features of photos"
+    nl: "een linear probe trainen op de features van foto's"
+    by: probe
+  - en: "say why a probe on pixels learns its photos by heart"
+    nl: "zeggen waarom een probe op pixels zijn foto's uit het hoofd leert"
+    by: pixels
+  - en: "explain how features learned without labels can hold classes"
+    nl: "uitleggen hoe features die zonder labels geleerd zijn, toch klassen kunnen bevatten"
+    by: no-labels

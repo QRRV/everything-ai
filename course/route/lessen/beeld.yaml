@@ -195,7 +195,8 @@ lessons:
   covers: [vision-foundation-models#0, vision-foundation-models#1]
   requires: [cv-try-classifier, torch-frozen-features, ml-embeddings-idea]
   introduces: [c:vision-foundation-model, c:linear-probe]
-  uses: [c:feature-extractor, c:embedding, c:freezing, c:transfer-learning]
+  uses: [c:feature-extractor, c:embedding, c:freezing, c:transfer-learning, c:pretrained-model, c:feature, c:self-supervised-learning, c:linear-separability, c:label, c:class, c:logit, c:cross-entropy, c:overfitting, c:test-set, c:train-set, c:epoch, c:learning-rate, c:optimizer, c:sgd, c:model-parameter, c:weight, c:gradient, c:tensor, c:shape, c:cosine-similarity, c:imagenet, c:license, c:model-card, c:model-hub, c:pixel, c:seed, c:matrix-multiplication, c:accuracy, c:bilinear-interpolation, c:interpolation, c:center-crop, c:per-channel-normalization, c:file-path, py:nn-linear, py:nn-cross-entropy-loss, py:torch-optim, py:zero-grad, py:backward, py:optimizer-step, py:no-grad, py:requires-grad, py:manual-seed, py:model-eval, py:torch-tensor, py:torch-numpy, py:np-array, py:item, py:dim, py:with, py:for, py:range, py:list, py:append, py:slicing, py:indexing, py:def, py:return, py:import, py:print, py:comment, py:variable, py:arithmetic, py:comparison, py:method, py:keyword-argument, py:int, py:tuple, v:line-plot, v:log-scale, q:predict, q:choice, q:exercise-with-check, q:slider-task, q:explain, q:run-cell]
+  mentions: [c:transformer]
   ladder: [torch]
   data: [model-dinov2-small, caltech-101-download-only]
   needs: any

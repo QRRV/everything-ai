@@ -31,6 +31,11 @@ def main() -> None:
     os.chdir(paths.ROOT)
     os.environ.setdefault("PYTHONUTF8", "1")
     os.environ.setdefault("PYTORCH_ENABLE_MPS_FALLBACK", "1")
+    # PyTorch calculates on every core, and by default its threads keep a core busy while they wait for each other.
+    # When something else holds one core, such as the browser, every step then waits for the thread that lost its
+    # core: DINOv2 became 30 times slower (cv-pretrained-features). Threads that sleep while they wait cost a little
+    # speed on an idle computer and keep it steady on a busy one. PyTorch reads this once, at its import.
+    os.environ.setdefault("OMP_WAIT_POLICY", "PASSIVE")
     args = [
         "edit", str(paths.WORK),
         "--skip-update-check",      # marimo updates come with the course, never on their own
