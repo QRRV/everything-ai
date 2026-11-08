@@ -134,3 +134,52 @@ def scene(seed: int, size: int = SIZE, count: int | None = None) -> Scene:
         shapes.append(Shape(kind, KINDS.index(kind), (int(r.min()), int(c.min()), int(r.max()), int(c.max())), mask,
                             keypoints, centre, radius, angle, int(pixels.sum())))
     return Scene(seed, image.astype(np.uint8), shapes)
+
+
+def _iou(a: tuple[int, int, int, int], b: tuple[int, int, int, int]) -> float:
+    """The intersection over union of two boxes, as cv-iou computes it."""
+    def area(box):
+        return (box[2] - box[0] + 1) * (box[3] - box[1] + 1)
+    both = max(0, min(a[2], b[2]) - max(a[0], b[0]) + 1) * max(0, min(a[3], b[3]) - max(a[1], b[1]) + 1)
+    return both / (area(a) + area(b) - both)
+
+
+def proposals(s: Scene, seed: int, per: int = 7) -> tuple[list[tuple[int, int, int, int]], list[float]]:
+    """Boxes that a detector could propose for the shapes of a scene, before non-maximum suppression, and a score for
+    each box. Every shape gets `per` boxes: its own box, moved and stretched a little at random, each with an IoU of at
+    least 0.55 with it. A score lies between 0 and 1, with two decimals, and no two are the same: it is mostly higher the
+    better the box fits, with a little noise, and the shapes differ in how high it gets, as a detector is surer of one
+    object than of another.
+    The boxes come in a random order. The course makes them itself, so that a lesson can show what happens after a
+    detector before it has one: they are not a real detector's output. The same scene and seed always give the same
+    boxes."""
+    if per * len(s.shapes) > 95:
+        raise ValueError("there are only 95 different scores with two decimals from 0.05 to 0.99")
+    rng = np.random.default_rng(seed)
+    size = s.image.shape[0]
+    made = []
+    for k, shape in enumerate(s.shapes):
+        top, left, bottom, right = shape.box
+        h, w = bottom - top + 1, right - left + 1
+        peak = rng.uniform(0.75, 0.97)            # the highest score this shape can get
+        count, tries = 0, 0
+        while count < per:
+            tries += 1
+            if tries > TRIES * per:
+                raise ValueError(f"no {per} different boxes with an IoU of at least 0.55 for shape {k}; try fewer")
+            cy = (top + bottom) / 2 + rng.normal(0, 0.07 * h)
+            cx = (left + right) / 2 + rng.normal(0, 0.07 * w)
+            nh = h * math.exp(rng.normal(0, 0.07))
+            nw = w * math.exp(rng.normal(0, 0.07))
+            box = (max(0, int(round(cy - (nh - 1) / 2))), max(0, int(round(cx - (nw - 1) / 2))),
+                   min(size - 1, int(round(cy + (nh - 1) / 2))), min(size - 1, int(round(cx + (nw - 1) / 2))))
+            fit = _iou(box, shape.box)
+            if fit < 0.55:
+                continue
+            score = round(float(np.clip(peak * fit ** 1.5 + rng.normal(0, 0.03), 0.05, 0.99)), 2)
+            if any(score == m[1] for m in made):
+                continue
+            made.append((box, score))
+            count += 1
+    order = rng.permutation(len(made))
+    return [made[i][0] for i in order], [made[i][1] for i in order]

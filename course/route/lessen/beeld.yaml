@@ -263,8 +263,8 @@ lessons:
   covers: [objectdetectie#0]
   requires: [cv-iou]
   introduces: [c:non-maximum-suppression, c:confidence-score]
-  uses: [c:intersection-over-union, c:bounding-box]
-  ladder: [python, numpy]
+  uses: [c:intersection-over-union, c:bounding-box, c:object-detection, c:pixel, c:class, c:label, c:library, c:seed, py:while, py:for, py:if, py:comparison, py:list, py:append, py:range, py:len, py:comprehension, py:min-max, py:indexing, py:tuple, py:keyword-argument, py:int, py:float, py:arithmetic, py:def, py:return, py:print, py:comment, py:variable, py:import, q:predict, q:choice, q:exercise-with-check, q:slider-task, q:explain, q:run-cell]
+  ladder: [python]
   data: [course-scenes]
   needs: any
 

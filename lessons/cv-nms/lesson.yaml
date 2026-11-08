@@ -1,0 +1,31 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: cv-nms
+minutes: 30
+title:
+  en: "One box per object: non-maximum suppression"
+  nl: "Eén box per voorwerp: non-maximum suppression"
+goal:
+  en: "keep one box per object of the many boxes a detector gives, with non-maximum suppression, and say what its threshold does."
+  nl: "met non-maximum suppression één box per voorwerp overhouden van de vele boxes die een detector geeft, en zeggen wat de drempel doet."
+summary:
+  - en: "A detector gives a crowd of boxes around every object, each with a confidence score from 0 to 1. Boxes that are almost the same get almost the same score, so the highest scores sit together: the 6 highest of the scene's 28 boxes all lie around the circle."
+    nl: "Een detector geeft een hele groep boxes om elk voorwerp, elk met een confidence score van 0 tot 1. Boxes die bijna gelijk zijn, krijgen bijna dezelfde score, dus de hoogste scores zitten bij elkaar: de 6 hoogste van de 28 boxes in de scène liggen allemaal om de cirkel."
+  - en: "Non-maximum suppression keeps the box with the highest score, drops every box whose IoU with it is above a threshold, and repeats that with the boxes that are left, until none are left. Only kept boxes drop others."
+    nl: "Non-maximum suppression houdt de box met de hoogste score, gooit elke box weg waarvan de IoU ermee boven een drempel ligt, en herhaalt dat met de boxes die over zijn, tot er geen meer over is. Alleen gehouden boxes gooien andere weg."
+  - en: "The threshold decides what counts as the same object: too low, and an object close to another loses its box; too high, and copies stay. On the scene, every threshold from 0.3 to 0.55 keeps the box with the highest score of every shape."
+    nl: "De drempel bepaalt wat als hetzelfde voorwerp telt: te laag, en een voorwerp vlak bij een ander verliest zijn box; te hoog, en kopieën blijven staan. In de scène houdt elke drempel van 0,3 tot 0,55 van elke vorm de box met de hoogste score."
+can_now:
+  - en: "work out by hand which boxes non-maximum suppression keeps"
+    nl: "met de hand uitrekenen welke boxes non-maximum suppression houdt"
+    by: chain
+  - en: "write non-maximum suppression as a function"
+    nl: "non-maximum suppression als functie schrijven"
+    by: nms
+  - en: "tell what happens to two objects close together"
+    nl: "zeggen wat er gebeurt met twee voorwerpen vlak bij elkaar"
+    by: cars
+  - en: "explain why a detector runs non-maximum suppression for each kind on its own"
+    nl: "uitleggen waarom een detector non-maximum suppression voor elke soort apart doet"
+    by: kinds
