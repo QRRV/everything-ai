@@ -276,7 +276,8 @@ lessons:
   covers: [objectdetectie#0]
   requires: [cv-nms, ml-roc-auc]
   introduces: [c:average-precision, c:mean-average-precision]
-  uses: [c:precision-recall-curve, c:intersection-over-union, c:confidence-score]
+  uses: [c:precision-recall-curve, c:intersection-over-union, c:confidence-score, c:non-maximum-suppression, c:object-detection, c:bounding-box, c:true-positive, c:false-positive, c:false-negative, c:precision, c:recall, c:decision-threshold, c:accuracy, c:test-set, c:class, c:mean, c:array, c:seed, c:library, py:np-array, py:np-cumsum, py:np-arange, py:np-sum, py:np-mean, py:boolean-mask, py:method, py:none, py:set, py:set-add, py:list, py:append, py:comprehension, py:range, py:len, py:for, py:if, py:comparison, py:bool, py:tuple, py:indexing, py:min-max, py:keyword-argument, py:def, py:return, py:import, py:import-as, py:print, py:comment, py:variable, py:arithmetic, py:int, py:float, py:string-literal, q:predict, q:choice, q:exercise-with-check, q:slider-task, q:explain, q:run-cell]
+  mentions: [c:interpolation]
   ladder: [numpy]
   data: [course-scenes]
   needs: any

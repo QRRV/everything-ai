@@ -183,3 +183,81 @@ def proposals(s: Scene, seed: int, per: int = 7) -> tuple[list[tuple[int, int, i
             count += 1
     order = rng.permutation(len(made))
     return [made[i][0] for i in order], [made[i][1] for i in order]
+
+
+MISS, WRONG, SECOND, EXTRA = 0.1, 0.08, 0.12, 0.4   # how often `detections` misses a shape, names the wrong kind,
+SPREAD = 0.08                                       # adds a looser second box, puts a box on the background; how far
+                                                    # it moves and stretches a box
+
+
+def detections(scenes: list[Scene], seed: int) -> list[tuple[int, str, float, tuple[int, int, int, int]]]:
+    """What a detector of middling quality could give for a list of scenes, after non-maximum suppression with a
+    threshold of 0.5 for each kind: for each box, (image, kind, score, box), with image the place of its scene in the
+    list. Most shapes get one box of their own kind: their own box, moved and stretched a little at random. Now and
+    then a shape gets no box, a box of another kind, or a second, looser box as well, and a box lies on the
+    background. A score lies between 0 and 1, with two decimals, and no two are the same: it is mostly higher the better
+    the box fits, with noise. The list comes sorted by score, highest first. There are only 95 such scores, so the
+    boxes of all scenes together can be at most 95 (about 20 scenes); with more, it stops with a ValueError.
+    The course makes these boxes itself, so that a lesson can score a detector before it has one: they are not a real
+    detector's output. The same scenes and seed always give the same boxes."""
+    rng = np.random.default_rng(seed)
+    used: set[int] = set()
+    made = []
+
+    def score(x: float) -> float:
+        # the nearest score with two decimals from 0.05 to 0.99 that no box has yet
+        free = [v for v in range(5, 100) if v not in used]
+        if not free:
+            raise ValueError("there are only 95 different scores with two decimals from 0.05 to 0.99")
+        v = min(free, key=lambda f: (abs(f / 100 - x), f))
+        used.add(v)
+        return v / 100
+
+    for image, s in enumerate(scenes):
+        size = s.image.shape[0]
+
+        def moved(box, spread):
+            top, left, bottom, right = box
+            h, w = bottom - top + 1, right - left + 1
+            cy = (top + bottom) / 2 + rng.normal(0, spread * h)
+            cx = (left + right) / 2 + rng.normal(0, spread * w)
+            nh, nw = h * math.exp(rng.normal(0, spread)), w * math.exp(rng.normal(0, spread))
+            # every side stays inside the image, so that top <= bottom and left <= right
+            top = min(size - 1, max(0, int(round(cy - (nh - 1) / 2))))
+            left = min(size - 1, max(0, int(round(cx - (nw - 1) / 2))))
+            return (top, left, max(top, min(size - 1, int(round(cy + (nh - 1) / 2)))),
+                    max(left, min(size - 1, int(round(cx + (nw - 1) / 2)))))
+
+        boxes = []
+        for shape in s.shapes:
+            if rng.random() < MISS:
+                continue
+            box = moved(shape.box, SPREAD)
+            kind = shape.kind
+            if rng.random() < WRONG:
+                kind = KINDS[(shape.label + int(rng.integers(1, len(KINDS)))) % len(KINDS)]
+            base = 0.25 + 0.7 * _iou(box, shape.box) ** 2 + rng.normal(0, 0.1)
+            boxes.append((kind, base, box))
+            if rng.random() < SECOND:
+                boxes.append((shape.kind, base - rng.uniform(0.1, 0.4), moved(shape.box, 2.5 * SPREAD)))
+        for _ in range(int(rng.poisson(EXTRA))):
+            for _ in range(TRIES):
+                h, w = int(rng.integers(14, 40)), int(rng.integers(14, 40))
+                top, left = int(rng.integers(0, size - h + 1)), int(rng.integers(0, size - w + 1))
+                box = (top, left, top + h - 1, left + w - 1)
+                if all(_iou(box, shape.box) <= 0.1 for shape in s.shapes):
+                    break
+            else:
+                raise ValueError(f"no room on the background of scene {s.seed} for a box")
+            boxes.append((KINDS[int(rng.integers(len(KINDS)))], float(rng.uniform(0.05, 0.6)), box))
+        # non-maximum suppression with a threshold of 0.5, for each kind on its own
+        boxes.sort(key=lambda b: -b[1])
+        kept = []
+        for kind, base, box in boxes:
+            if all(k != kind or _iou(box, b) <= 0.5 for k, _, b in kept):
+                kept.append((kind, base, box))
+        made += [(image, kind, base, box) for kind, base, box in kept]
+    made.sort(key=lambda d: -d[2])     # the surest boxes first, so that they get the score nearest to their own
+    out = [(image, kind, score(base), box) for image, kind, base, box in made]
+    out.sort(key=lambda d: -d[2])
+    return out

@@ -1,0 +1,31 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: cv-map
+minutes: 30
+title:
+  en: "Score a detector: mean average precision"
+  nl: "Een detector beoordelen: mean average precision"
+goal:
+  en: "score a detector from its boxes and the true boxes: average precision for each kind, and mean average precision over the kinds."
+  nl: "een detector beoordelen aan de hand van zijn boxes en de echte boxes: average precision per soort, en mean average precision over de soorten."
+summary:
+  - en: "A box of a detector is a true positive when its IoU with a true box of its kind in the same image is above a threshold, such as 0.5, and no box with a higher score found that true box first. Every other box is a false positive, and every true box that no box finds is a miss."
+    nl: "Een box van een detector is een true positive als zijn IoU met een echte box van zijn soort in hetzelfde beeld boven een drempel ligt, zoals 0,5, en geen box met een hogere score die echte box eerder vond. Elke andere box is een false positive, en elke echte box die door geen enkele box gevonden wordt, is gemist."
+  - en: "Going down the boxes of one kind from the highest score, precision and recall after each box trace the precision-recall curve. Average precision, the area under it, adds up the precision at each true positive and divides by the number of true boxes: on the 8 scenes, 0.56 for circles, whose surest box lies on a square."
+    nl: "Als je de boxes van één soort afloopt vanaf de hoogste score, tekenen precision en recall na elke box de precision-recall curve. Average precision, de oppervlakte eronder, telt de precision bij elke true positive op en deelt door het aantal echte boxes: in de 8 scènes 0,56 voor cirkels, waarvan de zekerste box op een vierkant ligt."
+  - en: "Mean average precision is the mean of the APs of all kinds: on the 8 scenes 0.69 at PASCAL VOC's IoU threshold of 0.5, and 0.39 averaged over COCO's ten thresholds from 0.5 to 0.95, both without the interpolation VOC and COCO add."
+    nl: "Mean average precision is het gemiddelde van de AP's van alle soorten: in de 8 scènes 0,69 bij de IoU-drempel van PASCAL VOC, 0,5, en 0,39 als gemiddelde over de tien drempels van COCO van 0,5 tot 0,95, allebei zonder de interpolatie die VOC en COCO toevoegen."
+can_now:
+  - en: "work out the average precision of a list of boxes by hand"
+    nl: "de average precision van een lijst boxes met de hand uitrekenen"
+    by: hand
+  - en: "write average precision as a function"
+    nl: "average precision als functie schrijven"
+    by: ap
+  - en: "work out the mean average precision of a detector from the APs of its kinds"
+    nl: "de mean average precision van een detector uitrekenen uit de AP's van zijn soorten"
+    by: bikes
+  - en: "explain why extra boxes with low scores do not change the AP, and what an app still has to choose"
+    nl: "uitleggen waarom extra boxes met lage scores de AP niet veranderen, en wat een app nog moet kiezen"
+    by: extra
