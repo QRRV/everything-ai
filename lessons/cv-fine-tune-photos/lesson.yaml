@@ -1,0 +1,34 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: cv-fine-tune-photos
+minutes: 35
+title:
+  en: "Fine-tune a classifier on your own kinds of photos"
+  nl: "Een classifier finetunen op je eigen soorten foto's"
+goal:
+  en: "fine-tune every layer of ResNet-18 on photos of 10 kinds of things, after a new last layer, and measure on test photos whether it pays."
+  nl: "elke layer van ResNet-18 finetunen op foto's van 10 soorten dingen, na een nieuwe laatste layer, en op testfoto's meten of het loont."
+summary:
+  - en: "Full fine-tuning lets every parameter of a model learn: on ResNet-18 with a new last layer for 10 classes, 11,181,642 numbers, against 5,130 for the last layer alone. Every step, each parameter gets a gradient, and every photo goes through every layer, forward and back."
+    nl: "Full fine-tuning laat elke parameter van een model leren: op ResNet-18 met een nieuwe laatste layer voor 10 klassen 11.181.642 getallen, tegen 5.130 voor de laatste layer alleen. Bij elke stap krijgt elke parameter een gradient, en gaat elke foto door elke layer, heen en terug."
+  - en: "Phase 1 computes the features of every photo once, with `model.fc = nn.Identity()`, and trains a new last layer on them. Phase 2 unfreezes every parameter and trains them all in mini-batches from a `DataLoader`, with a small learning rate, the model in eval mode."
+    nl: "Fase 1 rekent de features van elke foto één keer uit, met `model.fc = nn.Identity()`, en traint daarop een nieuwe laatste layer. Fase 2 ontdooit elke parameter en traint ze allemaal in mini-batches uit een `DataLoader`, met een kleine learning rate en het model in eval mode."
+  - en: "On 10 kinds of photos of Caltech-101, phase 1 gets 90 to 95 of 100 test photos right, and 2 epochs of phase 2 then 0 to 2 more on each seed, for about five times the computing: phase 1 already gets every training photo right, and nearly all mistakes left mix up lotus and water lily. From a learning rate of 0.03, phase 2 runs away to `nan`."
+    nl: "Op 10 soorten foto's van Caltech-101 haalt fase 1 er 90 tot 95 van de 100 testfoto's goed, en 2 epochs fase 2 daarna bij elke seed 0 tot 2 meer, voor ongeveer vijf keer het rekenwerk: fase 1 heeft elke trainingsfoto al goed, en bijna alle fouten die overblijven halen lotus en waterlelie door elkaar. Vanaf een learning rate van 0,03 ontspoort fase 2 tot `nan`."
+can_now:
+  - en: "count what learns in phase 2 of a fine-tuned classifier"
+    nl: "tellen wat er leert in fase 2 van een gefinetunede classifier"
+    by: params
+  - en: "write phase 2 of fine-tuning as a training loop in mini-batches"
+    nl: "fase 2 van fine-tuning schrijven als training loop in mini-batches"
+    by: phase-two
+  - en: "recognize a learning rate that makes phase 2 run away"
+    nl: "een learning rate herkennen waarbij fase 2 ontspoort"
+    by: too-big
+  - en: "judge whether full fine-tuning pays, on photos it did not train on"
+    nl: "op foto's waarop hij niet trainde beoordelen of full fine-tuning loont"
+    by: worth-it
+further_reading:
+  - en: "Simon Kornblith, Jonathon Shlens and Quoc V. Le (2019), *Do Better ImageNet Models Transfer Better?*, CVPR 2019, arXiv:1805.08974"
+    nl: "Simon Kornblith, Jonathon Shlens en Quoc V. Le (2019), *Do Better ImageNet Models Transfer Better?*, CVPR 2019, arXiv:1805.08974"

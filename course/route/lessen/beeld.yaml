@@ -218,11 +218,12 @@ lessons:
   title: "Fine-tune a classifier on your own kinds of photos"
   level: basis
   module: pretrained-vision
-  idea: "Fine-tuning every layer of a pretrained classifier on a few hundred photos of new kinds, with a small learning rate, starts from what it already sees and beats training only the last layer."
+  idea: "Fine-tuning every layer of a pretrained classifier needs a small learning rate and far more computing than a new last layer; on photos its features already describe well, it adds little."
   covers: [beeldclassificatie#1]
   requires: [cv-try-classifier, torch-fine-tune, nn-data-augmentation]
   introduces: [c:full-fine-tuning]
-  uses: [c:fine-tuning, c:pretrained-model, c:data-augmentation, c:imagenet, c:per-channel-normalization]
+  uses: [c:fine-tuning, c:pretrained-model, c:data-augmentation, c:imagenet, c:per-channel-normalization, c:freezing, c:feature-extractor, c:feature, c:learning-rate, c:divergence, c:mini-batch, c:batch-size, c:epoch, c:sgd, c:optimizer, c:loss, c:cross-entropy, c:gradient, c:model-parameter, c:weight, c:layer, c:logit, c:label, c:class, c:train-set, c:test-set, c:validation-set, c:overfitting, c:seed, c:matrix-multiplication, c:tensor, c:shape, c:license, c:model-hub, c:pixel, c:channel, c:bilinear-interpolation, c:center-crop, c:file-path, py:requires-grad, py:nn-identity, py:dataloader, py:tensor-dataset, py:model-eval, py:model-train, py:no-grad, py:nn-linear, py:nn-cross-entropy-loss, py:torch-optim, py:zero-grad, py:backward, py:optimizer-step, py:manual-seed, py:torch-tensor, py:torch-numpy, py:np-array, py:item, py:dim, py:with, py:for, py:range, py:list, py:append, py:slicing, py:indexing, py:def, py:return, py:import, py:print, py:comment, py:variable, py:arithmetic, py:augmented-assignment, py:comparison, py:method, py:keyword-argument, py:int, py:float, py:tuple, v:line-plot, v:log-scale, q:predict, q:choice, q:exercise-with-check, q:slider-task, q:explain, q:run-cell]
+  mentions: [c:batchnorm, c:adam, c:dropout, c:resnet]
   ladder: [torch]
   data: [model-resnet18-imagenet, caltech-101-download-only]
   needs: any
