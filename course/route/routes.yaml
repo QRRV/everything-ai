@@ -335,8 +335,16 @@ routes:
   status: building
   after: res-research-cycle
   # The main route up to and including "after" counts as done; every lesson the steps need from later in the
-  # main route is a step of this route itself. The first part: docs/onderzoek/reports/Voorstel tak beeld.md.
-  milestones: []
+  # main route is a step of this route itself. The first part: docs/onderzoek/reports/Voorstel tak beeld.md: 21 basis
+  # lessons, then 26 gevorderd lessons with the 37 lessons of the main route they build on (cnn-lenet, cnn-vgg-blocks
+  # and cnn-resnet are core here, extra in the main route).
+  milestones:
+    - after: cv-pretrained-detector
+      en: "Basics done: you processed images with your own code, classified and searched photos with pretrained models, and found objects with a detector whose boxes you can score."
+      nl: "Basis af: je hebt beelden bewerkt met je eigen code, foto's geclassificeerd en doorzocht met pretrained modellen, en voorwerpen gevonden met een detector waarvan je de boxes kunt beoordelen."
+    - after: cv-project-detector-or-unet
+      en: "Intermediate done: you trained CNNs on color photos, met the CNN families from AlexNet to EfficientNet, showed where a CNN looks, built a Vision Transformer, and trained your own detector or U-Net."
+      nl: "Gevorderd af: je hebt CNN's op kleurenfoto's getraind, de CNN-families van AlexNet tot EfficientNet leren kennen, laten zien waar een CNN naar kijkt, een Vision Transformer gebouwd en je eigen detector of U-Net getraind."
   steps:
   # ---------- basis: working with images ----------
   - cv-image-files
@@ -362,6 +370,78 @@ routes:
   - cv-nms
   - cv-map
   - cv-pretrained-detector
+  # ---------- gevorderd: from the shared trunk, the maths, training and CNN building blocks the CNN families need ----------
+  - math-derivative-rules
+  - math-partial-derivatives
+  - math-matrix-calculus
+  - prob-distributions
+  - num-floats-stability
+  - nn-gradient-check
+  - nn-backprop-tensors
+  - nn-vanishing-exploding
+  - nn-initialization
+  - nn-activation-stats
+  - nn-batchnorm
+  - nn-residual
+  - nn-layernorm
+  - opt-momentum
+  - opt-adam
+  - opt-adamw
+  - opt-lr-schedules
+  - opt-gradient-clipping
+  - nn-dropout
+  - nn-embedding-layer
+  - nn-trainer
+  - nn-deep-net-project
+  - cnn-conv-formal
+  - cnn-channels-pooling
+  - cnn-conv-numpy
+  - cnn-pytorch
+  - cnn-lenet
+  - cnn-vgg-blocks
+  - cnn-resnet
+  # ---------- gevorderd: color photos in a CNN ----------
+  - cv-color-cnn
+  - cv-augment-photos
+  - cv-inside-cnn
+  # ---------- gevorderd: CNN families ----------
+  - cv-alexnet
+  - cv-1x1-convolution
+  - cv-inception
+  - cv-resnext
+  - cv-densenet
+  - cv-mobilenet
+  - cv-efficientnet
+  # ---------- gevorderd: where a CNN looks ----------
+  - cv-saliency
+  - cv-grad-cam
+  # ---------- gevorderd: object detection ----------
+  - cv-anchors
+  - cv-one-stage-detector
+  - cv-rcnn
+  - cv-fpn
+  - cv-focal-loss
+  # ---------- gevorderd: segmentation ----------
+  - cv-fcn
+  - cv-unet
+  - cv-deeplab
+  - cv-mask-rcnn
+  - cv-sam
+  # ---------- gevorderd: from the shared trunk, attention and the transformer block ----------
+  - lm-mlp-context
+  - attn-scores
+  - attn-qkv
+  - attn-scale
+  - attn-causal-mask
+  - attn-multi-head
+  - attn-positions
+  - attn-transformer-block
+  # ---------- gevorderd: Vision Transformers ----------
+  - cv-vit
+  - cv-vit-attention
+  # ---------- gevorderd: final project ----------
+  - cv-project-resnet-grad-cam
+  - cv-project-detector-or-unet
 
 # Goal routes are computed, not written: the smallest set of lessons a goal needs, in route order.
 # The checker prints these as examples; the app can compute any of them on demand.

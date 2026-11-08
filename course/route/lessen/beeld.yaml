@@ -295,3 +295,369 @@ lessons:
   ladder: [numpy, torch]
   data: [model-detr-resnet50, caltech-101-download-only, course-photos]
   needs: any
+
+# --- gevorderd: color photos in a CNN ------------------------------------------------------------------------------
+# The gevorderd part builds and trains the CNNs itself (besluiten.md 1.14). cnn-lenet, cnn-vgg-blocks and cnn-resnet
+# are core steps in the route beeld; the color CNN comes before augmentation, so that augmentation has a model to help.
+# CIFAR-10 is checkpoints: false, so no lesson can fall back on a model the course trained on it: every run in these
+# lessons must fit a CPU in a lesson's time (ResNet-20 measured 4.4 min per epoch on one thread, voorstel tak beeld),
+# on a subset where needed, next to curves the course recorded. The families are not measured yet: measure each
+# when it is built.
+- id: cv-color-cnn
+  title: "Project: your CNN on color photos"
+  level: gevorderd
+  module: color-cnn
+  kind: project
+  project: cnn
+  idea: "A color photo has three channels, so the first convolution takes three input channels; on CIFAR-10's photos of 10 kinds, a CNN like the one that reads clothes well gets far fewer right, and learns its training photos much better than new ones."
+  covers: [beeldclassificatie#3]
+  requires: [cnn-resnet, cv-prepare-photo]
+  ladder: [torch]
+  data: [cifar-10-download-only]
+  reference_data: []
+  needs: any
+
+# The run without augmentation is cv-color-cnn's: this lesson needs one new run, on a subset.
+- id: cv-augment-photos
+  title: "Data augmentation for photos: flip, crop and color"
+  level: gevorderd
+  module: color-cnn
+  idea: "A mirror image, a random crop and a small change of color keep what a photo shows, so every epoch can show the CNN slightly different photos; it learns its training photos less by heart and gets more new ones right, while a change that alters the label, such as turning a 6 into a 9, or makes photos unlike real ones, such as an upside-down car, does not help."
+  covers: [regularisatie#3]
+  requires: [cv-color-cnn, nn-data-augmentation]
+  introduces: [c:horizontal-flip, c:random-crop, c:color-jitter, py:torch-flip]
+  ladder: [torch]
+  data: [cifar-10-download-only]
+  needs: any
+
+# The 3×3 filters of a small CIFAR CNN are 9 pixels and barely readable; the 7×7 filters of ResNet-18's first layer
+# show the edges and colors.
+- id: cv-inside-cnn
+  title: "Look inside a CNN: filters and feature maps"
+  level: gevorderd
+  module: color-cnn
+  idea: "The first layer of a trained CNN such as ResNet-18 holds small detectors of edges and colors, and the feature maps of deeper layers answer to larger parts of a photo; drawing them shows what the network learned to look for."
+  covers: [vision-modellen-visualiseren-en-begrijpen#0]
+  requires: [cv-color-cnn, cv-try-classifier]
+  introduces: [v:filter-grid, v:feature-map-grid]
+  ladder: [torch]
+  data: [model-resnet18-imagenet, caltech-101-download-only, cifar-10-download-only]
+  needs: any
+
+# --- gevorderd: CNN families ----------------------------------------------------------------------------------------
+# AlexNet (2012) comes after VGG (2014) and ResNet (2015), which the learner built: the lesson looks back. Its 15%
+# came from seven CNNs together; one CNN got about 18%. The learner runs one variant at a reduced size (a quarter of
+# the channels, dense layers of 512, a subset) and compares it with runs the course recorded.
+- id: cv-alexnet
+  title: "ImageNet and AlexNet: why 2012 changed everything"
+  level: gevorderd
+  module: cnn-families
+  idea: "Before VGG and ResNet came AlexNet: in 2012 this deep CNN, trained on two GPUs with ReLU, dropout and data augmentation, brought the top-5 error on ImageNet down from 26% to 15%; you build a small version for CIFAR-10 and see what dropout and augmentation still add."
+  covers: [d11-cnn-architecturen#0]
+  requires: [cv-augment-photos, cv-try-classifier]
+  introduces: [c:alexnet, c:ilsvrc]
+  mentions: [c:gpu]
+  ladder: [torch]
+  data: [fashion-mnist, cifar-10-download-only]
+  needs: any
+
+# ResNet already gave its residual connection a convolution of 1 by 1 (cnn-resnet); this lesson names it and shows
+# what it is for. The term list has it as pointwise-convolution ("1×1 convolution"). cv-fpn and cv-fcn need it.
+- id: cv-1x1-convolution
+  title: "1×1 convolutions: mixing the channels"
+  level: gevorderd
+  module: cnn-families
+  idea: "A 1×1 convolution mixes the channels of each pixel without looking at its neighbors, as a linear layer on every pixel; it makes the number of channels smaller or larger cheaply, such as before an expensive 3×3 convolution."
+  covers: [convolutionele-netwerken#2]
+  requires: [cv-color-cnn]
+  introduces: [c:pointwise-convolution]
+  ladder: [torch]
+  data: [fashion-mnist, cifar-10-download-only]
+  needs: any
+
+# Inception, DenseNet and U-Net stack maps along the channels with torch.cat (py:torch-cat), which attn-multi-head
+# introduces, outside their chains. Decided: when cv-inception is built, py:torch-cat moves to torch-tensors, which
+# both chains share; torch-tensors then teaches it, and attn-multi-head uses it.
+- id: cv-inception
+  title: "Inception: filters of several sizes side by side"
+  level: gevorderd
+  module: cnn-families
+  idea: "Inception puts branches of 1×1, 3×3 and 5×5 filters side by side, each behind a 1×1 convolution that makes the channels fewer, and stacks what they find along the channels; one block sees small and large patterns at once, at a cost a plain stack of large filters could not pay."
+  covers: [d11-cnn-architecturen#1]
+  requires: [cv-1x1-convolution, cnn-vgg-blocks]
+  introduces: [c:inception]
+  ladder: [torch]
+  data: [fashion-mnist, cifar-10-download-only]
+  needs: any
+
+# ResNeXt's and EfficientNet's claims are differences of 1 to 2 points on ImageNet: the exercises count parameters and
+# multiplications, which the learner can check exactly; the accuracy comes from the papers or from recorded runs.
+- id: cv-resnext
+  title: "Groups of channels: ResNeXt"
+  level: gevorderd
+  module: cnn-families
+  idea: "A grouped convolution splits the channels into groups that each get filters of their own, with fewer weights than one convolution over all channels; ResNeXt puts many such thin paths in one residual block, and with the same number of parameters its paper got more right on ImageNet than with a wider block."
+  covers: [d11-cnn-architecturen#2, convolutionele-netwerken#2]
+  requires: [cv-inception]
+  introduces: [c:grouped-convolution, c:resnext, py:conv2d-groups]
+  mentions: [c:imagenet]
+  ladder: [torch]
+  data: [fashion-mnist, cifar-10-download-only]
+  needs: any
+
+# A standard DenseNet-BC-100 is about 7 times ResNet-20: the lesson trains 3 dense blocks of 4 layers, on a subset.
+- id: cv-densenet
+  title: "DenseNet: every layer sees all the layers before it"
+  level: gevorderd
+  module: cnn-families
+  idea: "In a dense block every layer gets the feature maps of all layers before it, stacked along the channels, and adds only a few channels of its own, the growth rate; DenseNet uses features again instead of learning them again."
+  covers: [d11-cnn-architecturen#1]
+  requires: [cv-inception]
+  introduces: [c:dense-block, c:densenet, c:growth-rate]
+  ladder: [torch]
+  data: [fashion-mnist, cifar-10-download-only]
+  needs: any
+
+- id: cv-mobilenet
+  title: "Depthwise separable convolutions: MobileNet"
+  level: gevorderd
+  module: cnn-families
+  idea: "A depthwise convolution filters each channel on its own, and a 1×1 convolution then mixes the channels; together they do the work of a normal 3×3 convolution with eight to nine times fewer multiplications, which lets MobileNet run on a phone."
+  covers: [convolutionele-netwerken#2, d11-cnn-architecturen#3]
+  requires: [cv-resnext]
+  introduces: [c:depthwise-convolution, c:depthwise-separable-convolution, c:mobilenet]
+  ladder: [torch]
+  data: [fashion-mnist, cifar-10-download-only]
+  needs: any
+
+- id: cv-efficientnet
+  title: "EfficientNet: wider, deeper or sharper"
+  level: gevorderd
+  module: cnn-families
+  idea: "A CNN can grow in depth, in width or in the resolution of its input photos; growing all three together in a fixed ratio, compound scaling, gave EfficientNet more accuracy on ImageNet for the same computation than growing just one, and you work out what each choice costs."
+  covers: [d11-cnn-architecturen#3]
+  requires: [cv-mobilenet]
+  introduces: [c:compound-scaling, c:efficientnet]
+  mentions: [c:imagenet]
+  ladder: [torch]
+  data: [fashion-mnist, cifar-10-download-only]
+  needs: any
+
+# --- gevorderd: where a CNN looks -----------------------------------------------------------------------------------
+# On ResNet-18 and the course's photos (224 pixels): in a small CIFAR CNN the last feature map is 8×8 or 4×4, so a
+# heat map over a photo of 32 by 32 is a blob. The learner's own CIFAR CNN can be compared.
+- id: cv-saliency
+  title: "Saliency: the pixels that change the answer"
+  level: gevorderd
+  module: explaining
+  idea: "The gradient of a class score with respect to the pixels of the photo says which pixels would change that score the most; drawn as a picture, it is a first and noisy explanation of what a classifier used."
+  covers: [saliency-en-uitleg-evalueren#0]
+  requires: [cv-inside-cnn, torch-autograd]
+  introduces: [c:saliency-map]
+  ladder: [torch]
+  data: [model-resnet18-imagenet, caltech-101-download-only, cifar-10-download-only]
+  needs: any
+
+- id: cv-grad-cam
+  title: "Grad-CAM: where a CNN looked"
+  level: gevorderd
+  module: explaining
+  idea: "When a CNN ends with global average pooling, the mean of each feature map, and one linear layer, the weights of a class over the feature maps make a heat map, the class activation map; Grad-CAM finds those weights for any CNN from the gradient of the class score, adds up the weighted maps and keeps the positive part, a coarse map of the places that made the CNN choose that class."
+  covers: [vision-modellen-visualiseren-en-begrijpen#1, vision-modellen-visualiseren-en-begrijpen#2]
+  requires: [cv-saliency]
+  introduces: [c:global-average-pooling, c:class-activation-map, c:grad-cam, py:retain-grad]
+  ladder: [torch]
+  data: [model-resnet18-imagenet, caltech-101-download-only, cifar-10-download-only]
+  needs: any
+
+# --- gevorderd: object detection ------------------------------------------------------------------------------------
+# On the course's own scenes (scenes.py): no licence questions, no people, and a detector trains on them on a CPU.
+- id: cv-anchors
+  title: "Anchors: the boxes a detector starts from"
+  level: gevorderd
+  module: detection
+  idea: "Many detectors, unlike DETR, put a fixed set of anchor boxes, a few sizes and shapes, on every square of a feature map, and learn for each anchor only a kind and a small shift and change of size; matching the anchors to the true boxes by IoU decides what each anchor should learn."
+  covers: [objectdetectie#0]
+  requires: [cv-pretrained-detector, cnn-resnet]
+  introduces: [c:anchor-box, c:box-offset]
+  ladder: [numpy, torch]
+  data: [course-scenes]
+  needs: any
+
+- id: cv-one-stage-detector
+  title: "Project: your own one-stage detector"
+  level: gevorderd
+  module: detection
+  kind: project
+  project: cnn
+  idea: "A one-stage detector, as SSD and YOLOv2 are, is one CNN that gives, for every anchor at once, a kind and a shift of its box; trained on the course's scenes with one loss for the kinds and one for the boxes, and followed by NMS, it finds the shapes."
+  covers: [objectdetectie#3]
+  requires: [cv-anchors]
+  introduces: [c:one-stage-detector]
+  ladder: [torch]
+  data: [course-scenes]
+  needs: any
+
+- id: cv-rcnn
+  title: "From R-CNN to Faster R-CNN: two stages"
+  level: gevorderd
+  module: detection
+  idea: "A two-stage detector first proposes regions that may hold an object, then cuts the features of each region to one size, RoI pooling, and gives it a kind and a corrected box; from R-CNN to Faster R-CNN the proposals moved into the network itself, as a region proposal network that scores anchors on the same features."
+  # In map v2.3 this subtopic is objectdetectie#3 with a longer name; migrate_refs.py cannot find it: map it by hand.
+  covers: [objectdetectie#2]
+  requires: [cv-anchors]
+  introduces: [c:two-stage-detector, c:region-proposal-network, c:roi-pooling]
+  ladder: [torch]
+  data: [course-scenes]
+  needs: any
+
+- id: cv-fpn
+  title: "A feature pyramid for small and large objects"
+  level: gevorderd
+  module: detection
+  idea: "Deep feature maps know what is there but are coarse, early ones are sharp but know little; a feature pyramid network makes the deep maps larger again with nearest-neighbor interpolation, gives the earlier ones the same number of channels with a 1×1 convolution and adds them up, so that every scale has both and the detector finds small objects too."
+  covers: [objectdetectie#4]
+  requires: [cv-one-stage-detector, cv-1x1-convolution]
+  introduces: [c:feature-pyramid-network, py:interpolate]
+  ladder: [torch]
+  data: [course-scenes]
+  needs: any
+
+- id: cv-focal-loss
+  title: "Focal loss and RetinaNet"
+  level: gevorderd
+  module: detection
+  idea: "Almost every anchor lies on the background, and their many small, easy losses drown out the few objects; focal loss makes the cross-entropy of an anchor smaller the surer the model already is, which let RetinaNet, a one-stage detector with a feature pyramid, match the two-stage detectors."
+  covers: [objectdetectie#3]
+  requires: [cv-fpn, cv-rcnn]
+  introduces: [c:focal-loss, c:retinanet]
+  ladder: [torch]
+  data: [course-scenes]
+  needs: any
+
+# --- gevorderd: segmentation ----------------------------------------------------------------------------------------
+# Segmentation does not need detection, except Mask R-CNN (through cv-rcnn).
+- id: cv-fcn
+  title: "A kind for every pixel: FCN and transposed convolutions"
+  level: gevorderd
+  module: segmentation
+  idea: "Semantic segmentation gives every pixel a kind; a fully convolutional network has no dense layers, so it takes a photo of any size, and makes its coarse feature maps full size again, upsampling, with transposed convolutions that learn how."
+  covers: [segmentatie#3, convolutionele-netwerken#2]
+  requires: [cv-1x1-convolution, cv-iou, cv-annotations]
+  introduces: [c:semantic-segmentation, c:fully-convolutional-network, c:upsampling, c:transposed-convolution, py:nn-convtranspose2d]
+  ladder: [torch]
+  data: [course-scenes]
+  needs: any
+
+# The natural words encoder and decoder are items of lm-model-families, outside this chain: the lesson says "the way
+# down" and "the way up".
+- id: cv-unet
+  title: "Project: your own U-Net"
+  level: gevorderd
+  module: segmentation
+  kind: project
+  project: cnn
+  idea: "A U-Net goes down to coarse feature maps and back up, and stacks each map on the way up with the sharp map of the same size from the way down; with those skip connections it draws exact edges. You train one on the course's scenes and score its masks with mean IoU, the IoU of each kind averaged over the kinds."
+  covers: [d11-cnn-architecturen#5, segmentatie#3]
+  requires: [cv-fcn]
+  introduces: [c:u-net, c:skip-connection, c:mean-iou]
+  ladder: [torch]
+  data: [course-scenes]
+  needs: any
+
+# A dilated convolution keeps the map large, so this network needs little upsampling; it can use cv-fcn's transposed
+# convolution for the rest.
+- id: cv-deeplab
+  title: "Dilated convolutions and DeepLab"
+  level: gevorderd
+  module: segmentation
+  idea: "A dilated convolution spreads its filter out with gaps, so it sees a larger area with the same weights and without making the map smaller; DeepLab puts several dilations side by side to see small and large surroundings at once."
+  covers: [segmentatie#4, convolutionele-netwerken#2]
+  requires: [cv-fcn]
+  introduces: [c:dilated-convolution, c:atrous-spatial-pyramid-pooling, c:deeplab, py:conv2d-dilation]
+  warns: [dilation]
+  ladder: [torch]
+  data: [course-scenes]
+  needs: any
+
+- id: cv-mask-rcnn
+  title: "A mask for every object: the idea of Mask R-CNN"
+  level: gevorderd
+  module: segmentation
+  idea: "Instance segmentation gives each object a mask of its own, also when two objects are of the same kind; Mask R-CNN adds to Faster R-CNN a small head that draws a mask inside every box it finds."
+  covers: [segmentatie#3]
+  requires: [cv-rcnn, cv-fcn]
+  introduces: [c:instance-segmentation, c:mask-r-cnn]
+  ladder: [torch]
+  data: [course-scenes]
+  needs: any
+
+# How fast SAM 2.1 tiny runs on a CPU is measured when the lesson is built.
+- id: cv-sam
+  title: "Segment what you point at: SAM 2.1"
+  level: gevorderd
+  module: segmentation
+  idea: "SAM 2.1, trained on the 11 million photos and 1.1 billion masks of SA-1B and on tens of thousands of videos, draws the mask of whatever you point at with a click or a box, also of things it has no name for; you try it on the course's photos and see where a click is not enough."
+  covers: [segmentatie#0]
+  requires: [cv-fcn]
+  introduces: [c:promptable-segmentation]
+  ladder: [torch]
+  data: [model-sam2-1-hiera-tiny, caltech-101-download-only, course-photos]
+  needs: any
+
+# --- gevorderd: Vision Transformers ---------------------------------------------------------------------------------
+# attn-transformer-block brings lm-mlp-context and attn-causal-mask along, just before this lesson: it bridges
+# explicitly, tokens become patches, and a ViT drops the causal mask.
+- id: cv-vit
+  title: "A Vision Transformer from scratch"
+  level: gevorderd
+  module: vision-transformers
+  idea: "A Vision Transformer cuts a photo into patches, turns each patch into a token with a linear layer and a position, and runs transformer blocks over them without a causal mask, so every patch sees every other; trained from scratch on CIFAR-10 it trails a CNN of the same size, because it has to learn from data, helped by augmentation, what a convolution builds in, its inductive bias."
+  covers: [vision-transformers#0, vision-transformers#1, inductive-bias-symmetrie-en-equivariantie#3]
+  requires: [cv-augment-photos, attn-transformer-block]
+  introduces: [c:vision-transformer, c:patch-embedding, c:class-token, c:inductive-bias]
+  ladder: [torch]
+  data: [cifar-10-download-only]
+  needs: any
+
+# Check when built: DINOv2's attention can show a few tokens of very high norm on the background (Darcet et al.,
+# "Vision Transformers Need Registers"); if they spoil the maps, use the version with registers.
+- id: cv-vit-attention
+  title: "Where a Vision Transformer looks"
+  level: gevorderd
+  module: vision-transformers
+  idea: "The attention of the class token to the patches shows which parts of the photo a Vision Transformer used; attention rollout averages the attention of each layer over its heads, adds the residual connection as attention of each token to itself, and multiplies the layers, so that it follows the information through the whole network."
+  covers: [vision-modellen-visualiseren-en-begrijpen#3]
+  requires: [cv-vit, cv-pretrained-features]
+  introduces: [c:attention-rollout]
+  ladder: [torch]
+  data: [model-dinov2-small, caltech-101-download-only, course-photos]
+  needs: any
+
+# --- gevorderd: final project ---------------------------------------------------------------------------------------
+- id: cv-project-resnet-grad-cam
+  title: "Final project: your own ResNet, explained with Grad-CAM"
+  level: gevorderd
+  module: vision-project
+  kind: project
+  project: cnn
+  idea: "You train your own ResNet on Fashion-MNIST, or on CIFAR-10 if you have the time, now with what this part added, augmentation and more depth; you judge it on the test set and with Grad-CAM, and write down which photos it gets wrong and why."
+  covers: [beeldclassificatie#3]
+  requires: [cv-grad-cam, cv-augment-photos]
+  ladder: [torch]
+  data: [fashion-mnist, cifar-10-download-only]
+  reference_data: [fashion-mnist]
+  needs: any
+
+- id: cv-project-detector-or-unet
+  title: "Final project: your own U-Net or detector"
+  level: gevorderd
+  module: vision-project
+  kind: project
+  project: cnn
+  idea: "You choose a U-Net or a one-stage detector, train it on harder scenes that you generate yourself, score it with mean IoU or mAP, and show where it fails."
+  covers: [segmentatie#3, objectdetectie#3]
+  requires: [cv-unet, cv-focal-loss]
+  ladder: [torch]
+  data: [course-scenes]
+  needs: any

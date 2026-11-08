@@ -46,6 +46,8 @@ bronnen:
    note_nl: "facebook/dinov2-small, een Vision Transformer van 22 miljoen parameters, getraind op LVD-142M (rond ImageNet en andere sets samengesteld): de backbone voor features. De course schrijft de modelcode zelf, zoals bij Qwen3."}
 - {id: model-detr-resnet50, kind: model, license: "Apache-2.0; trained on COCO", hosting: download,
    note_nl: "facebook/detr-resnet-50 (Carion e.a. 2020), een detector van 41,5 miljoen parameters die op COCO getraind is, voor cv-pretrained-detector. Gekozen boven RT-DETR omdat zijn opbouw, een ResNet-50 en een gewone transformer, eenvoudig genoeg is om zelf uit te schrijven. De course schrijft de modelcode zelf, zoals bij DINOv2, en de test vergelijkt hem met de getallen uit de test van transformers."}
+- {id: model-sam2-1-hiera-tiny, kind: model, license: "Apache-2.0; trained on SA-1B and SA-V", hosting: download,
+   note_nl: "facebook/sam2.1-hiera-tiny (Ravi e.a. 2024), het kleinste model van SAM 2.1 (38,9 miljoen parameters, ongeveer 156 MB), voor cv-sam: tekent het masker van wat je aanwijst met een klik of een box. De course gebruikt het alleen op zijn eigen foto's en die van Caltech-101, zonder mensen. Wordt automatisch gedownload met een vaste versie; de modelcode schrijft de course zelf of laadt hem, dat wordt bij het bouwen van de les gekozen."}
 - {id: palmer-penguins, kind: tabular, license: "CC0-1.0", hosting: rehost,
    note_nl: "344 pinguins, drie soorten, met ontbrekende waarden: klein genoeg voor de CPU en echt genoeg voor de hele workflow."}
 - {id: model-gpt2-mit, kind: model, license: "MIT", hosting: download}

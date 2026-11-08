@@ -14,6 +14,13 @@ modules:
   image-processing: {en: "Working with images", nl: "Beelden bewerken"}
   pretrained-vision: {en: "Using a pretrained model", nl: "Een pretrained model gebruiken"}
   boxes-and-masks: {en: "Boxes and masks", nl: "Bounding boxes en maskers"}
+  color-cnn: {en: "Color photos in a CNN", nl: "Kleurenfoto's in een CNN"}
+  cnn-families: {en: "CNN families", nl: "CNN-families"}
+  explaining: {en: "Where a CNN looks", nl: "Waar een CNN naar kijkt"}
+  detection: {en: "Object detection", nl: "Object detection"}
+  segmentation: {en: "Segmentation", nl: "Segmentatie"}
+  vision-transformers: {en: "Vision Transformers", nl: "Vision Transformers"}
+  vision-project: {en: "Final project", nl: "Eindproject"}
   neural-networks: {en: "Neural networks", nl: "Neural networks"}
   pytorch: {en: "PyTorch", nl: "PyTorch"}
   building-blocks: {en: "Building blocks", nl: "Bouwstenen"}
