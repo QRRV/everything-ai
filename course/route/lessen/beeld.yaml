@@ -209,8 +209,8 @@ lessons:
   covers: [embeddings-en-similariteit#2]
   requires: [cv-pretrained-features, ml-knn]
   introduces: [c:image-retrieval]
-  uses: [c:cosine-similarity, c:k-nearest-neighbors, c:embedding, c:vision-foundation-model, py:np-argsort]
-  ladder: [numpy, torch]
+  uses: [c:cosine-similarity, c:k-nearest-neighbors, c:embedding, c:vision-foundation-model, c:linear-probe, c:feature, c:class, c:classification, c:label, c:pixel, c:matrix, c:vector, c:array, c:shape, c:matrix-multiplication, c:dot-product, c:norm, c:distance, c:vectorization, c:mean, c:pretrained-model, c:axis, c:majority-voting, c:broadcasting, c:layer, c:model-hub, py:np-argsort, py:np-linalg-norm, py:matmul-operator, py:np-dot, py:np-array, py:np-indexing, py:sorted, py:keyword-argument, py:slicing, py:indexing, py:def, py:return, py:import, py:import-as, py:print, py:comment, py:variable, py:arithmetic, py:tuple, v:line-plot, v:log-scale, q:predict, q:choice, q:exercise-with-check, q:slider-task, q:explain, q:run-cell]
+  ladder: [numpy]
   data: [model-dinov2-small, caltech-101-download-only]
   needs: any
 

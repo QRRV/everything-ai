@@ -1,0 +1,31 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: cv-image-search
+minutes: 30
+title:
+  en: "Find photos that look alike"
+  nl: "Foto's vinden die op elkaar lijken"
+goal:
+  en: "search a collection of photos for the ones most like a given photo, with the cosine similarity of their DINOv2 features."
+  nl: "een verzameling foto's doorzoeken op de foto's die het meest op een gegeven foto lijken, met de cosine similarity van hun features van DINOv2."
+summary:
+  - en: "Image retrieval is finding the photos in a collection that look most like a given photo. You compute the features of every photo once, as a matrix `F` with a row per photo, and compare the features `q` of the photo you search with to every row. Nobody has to label anything."
+    nl: "Image retrieval is de foto's in een verzameling vinden die het meest op een gegeven foto lijken. Je rekent de features van elke foto één keer uit, als een matrix `F` met een rij per foto, en vergelijkt de features `q` van de foto waarmee je zoekt met elke rij. Niemand hoeft iets te labelen."
+  - en: "`(F @ q) / (np.linalg.norm(F, axis=1) * np.linalg.norm(q))` is the cosine similarity of `q` with every row at once. `np.argsort(-sims, kind=\"stable\")[:k]` gives the positions of the k most alike, the most alike first. When the photo you search with is in the collection, it comes first: skip it."
+    nl: "`(F @ q) / (np.linalg.norm(F, axis=1) * np.linalg.norm(q))` is de cosine similarity van `q` met elke rij tegelijk. `np.argsort(-sims, kind=\"stable\")[:k]` geeft de posities van de k meest gelijkende, de meest gelijkende eerst. Zit de foto waarmee je zoekt in de verzameling, dan komt hij als eerste: sla hem over."
+  - en: "On DINOv2's features, 4.78 of the 5 photos most alike are of the same class, on average over 300 photos of 10 classes; on the pixels, 1.42, and often by color. The search knows no classes: a water lily found for a lotus looks alike, and only labels call it a mistake."
+    nl: "Op de features van DINOv2 zijn gemiddeld 4,78 van de 5 meest gelijkende foto's van dezelfde klasse, over 300 foto's van 10 klassen; op de pixels 1,42, en vaak door de kleur. Het zoeken kent geen klassen: een waterlelie die bij een lotus gevonden wordt, lijkt erop, en alleen labels noemen het een fout."
+can_now:
+  - en: "compute the cosine similarity of one photo with a whole collection at once"
+    nl: "de cosine similarity van één foto met een hele verzameling tegelijk berekenen"
+    by: sims
+  - en: "search a collection for the photos most like a given one"
+    nl: "een verzameling doorzoeken op de foto's die het meest op een gegeven foto lijken"
+    by: search
+  - en: "say why a search on pixels finds photos by their colors"
+    nl: "zeggen waarom zoeken op pixels foto's vindt op hun kleuren"
+    by: pixels
+  - en: "explain why a photo that looks alike is not always the same kind"
+    nl: "uitleggen waarom een foto die erop lijkt niet altijd hetzelfde soort is"
+    by: look-alike
