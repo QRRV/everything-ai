@@ -320,17 +320,23 @@ lessons:
   reference_data: []
   needs: any
 
-# The run without augmentation is cv-color-cnn's: this lesson needs one new run, on a subset.
+# The demo trains 40 epochs with flip, crop and color on cv-color-cnn's 6,000 photos (about a minute on one thread);
+# with 20 epochs, augmentation made the small ColorCNN underfit, and at 40 epochs it clearly wins. The other runs of
+# its picture (no changes at 20 and 40 epochs, flip, flip and crop, upside down instead of flip) are the course's, 5 seeds
+# each. Contrast comes from cv-histogram-equalization; clamp and int() are only in the demo's Dataset, shown in the text.
 - id: cv-augment-photos
   title: "Data augmentation for photos: flip, crop and color"
   level: gevorderd
   module: color-cnn
   idea: "A mirror image, a random crop and a small change of color keep what a photo shows, so every epoch can show the CNN slightly different photos; it learns its training photos less by heart and gets more new ones right, while a change that alters the label, such as turning a 6 into a 9, or makes photos unlike real ones, such as an upside-down car, does not help."
   covers: [regularisatie#3]
-  requires: [cv-color-cnn, nn-data-augmentation]
+  requires: [cv-color-cnn, nn-data-augmentation, cv-histogram-equalization]
   introduces: [c:horizontal-flip, c:random-crop, c:color-jitter, py:torch-flip]
+  uses: [c:data-augmentation, py:torch-roll, py:dataset, py:len-getitem, py:dataloader, c:cifar-10, c:channel, c:pixel, c:float32, c:per-channel-normalization, c:overfitting, c:train-set, c:test-set, c:validation-set, c:epoch, c:mini-batch, c:learning-rate, c:warmup, c:seed, c:model-parameter, c:label, c:accuracy, c:loss, v:loss-curve, v:train-val-curves, c:shape, c:tensor, c:axis, c:mean, c:contrast, c:broadcasting, c:resnet, py:np-zeros, py:np-sum, py:min-max, py:keyword-argument, py:torch-tensor, py:dim, py:keepdim, py:slicing, py:indexing, py:item, py:manual-seed, py:torch-rand-like, py:boolean-mask, py:comparison, py:def, py:return, py:print, py:comment, py:import, py:tuple, q:predict, q:choice, q:exercise-with-check, q:run-cell]
+  mentions: [c:alexnet, c:imagenet, py:torch-clamp, py:int-conversion]
   ladder: [torch]
   data: [cifar-10-download-only]
+  reference_data: []
   needs: any
 
 # The 3×3 filters of a small CIFAR CNN are 9 pixels and barely readable; the 7×7 filters of ResNet-18's first layer

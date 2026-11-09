@@ -1,0 +1,36 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: cv-augment-photos
+minutes: 35
+title:
+  en: "Data augmentation for photos: flip, crop and color"
+  nl: "Data augmentation voor foto's: spiegelen, uitsnijden en kleur"
+goal:
+  en: "change every training photo at random with a mirror image, a random crop and a small change of color, and see your CNN learn its training photos less by heart and read more new ones right."
+  nl: "elke trainingsfoto willekeurig veranderen met een spiegelbeeld, een random crop en een kleine kleurverandering, en zien dat je CNN zijn trainingsfoto's minder uit zijn hoofd leert en meer nieuwe goed leest."
+summary:
+  - en: "A mirror image, a random crop and a small change of brightness, contrast and saturation keep what a photo shows. Made anew every time the Dataset gives a training photo, they show the network a slightly different photo every epoch; the test photos stay as they are."
+    nl: "Een spiegelbeeld, een random crop en een kleine verandering van helderheid, contrast en verzadiging veranderen niets aan wat er op een foto staat. De Dataset maakt ze opnieuw elke keer dat hij een trainingsfoto geeft, dus ziet het netwerk elke epoch een net iets andere foto; de testfoto's blijven zoals ze zijn."
+  - en: "x.flip(dims=[2]) mirrors a photo of shape (3, 32, 32). A random crop puts the photo in a black photo of 40 by 40 and cuts a 32 by 32 out of it at one of 81 places."
+    nl: "x.flip(dims=[2]) spiegelt een foto met shape (3, 32, 32). Een random crop zet de foto in een zwarte foto van 40 bij 40 en snijdt er op een van 81 plekken een 32 bij 32 uit."
+  - en: "With all three, for 40 epochs, your ColorCNN reads 65 to 67% of its training photos right and 583 to 619 of the 1,000 test photos, against 99 to 100% and 460 to 545 without changes. Upside down instead of mirrored, which real photos hardly show, gives 479 to 492, against 541 to 591 for the mirror image alone."
+    nl: "Met alle drie, 40 epochs lang, leest je ColorCNN 65 tot 67% van zijn trainingsfoto's goed en 583 tot 619 van de 1.000 testfoto's, tegen 99 tot 100% en 460 tot 545 zonder veranderingen. Ondersteboven in plaats van gespiegeld, wat echte foto's bijna nooit laten zien, geeft 479 tot 492, tegen 541 tot 591 voor alleen het spiegelbeeld."
+can_now:
+  - en: "tell changes that keep what a photo shows and look real from changes that do not"
+    nl: "veranderingen die laten staan wat er op een foto staat en er echt uitzien, onderscheiden van veranderingen die dat niet doen"
+    by: photo-changes
+  - en: "write a random crop with a black border in PyTorch"
+    nl: "een random crop met een zwarte rand schrijven in PyTorch"
+    by: crop
+  - en: "change the brightness, the contrast and the saturation of a photo"
+    nl: "de helderheid, het contrast en de verzadiging van een foto veranderen"
+    by: color
+  - en: "tell from the loss curves that a network with data augmentation learns less by heart"
+    nl: "aan de loss curves zien dat een netwerk met data augmentation minder uit zijn hoofd leert"
+    by: augment-gap
+further_reading:
+  - en: "Kaiming He, Xiangyu Zhang, Shaoqing Ren and Jian Sun (2015), *Deep Residual Learning for Image Recognition*, section 4.2: CIFAR-10 with 4 pixels of padding, a random crop of 32 by 32 and a mirror image"
+    nl: "Kaiming He, Xiangyu Zhang, Shaoqing Ren en Jian Sun (2015), *Deep Residual Learning for Image Recognition*, paragraaf 4.2: CIFAR-10 met 4 pixels padding, een random crop van 32 bij 32 en een spiegelbeeld"
+  - en: "Alex Krizhevsky, Ilya Sutskever and Geoffrey Hinton (2012), *ImageNet Classification with Deep Convolutional Neural Networks*, section 4.1: the data augmentation of AlexNet"
+    nl: "Alex Krizhevsky, Ilya Sutskever en Geoffrey Hinton (2012), *ImageNet Classification with Deep Convolutional Neural Networks*, paragraaf 4.1: de data augmentation van AlexNet"
