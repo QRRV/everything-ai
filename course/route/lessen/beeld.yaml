@@ -312,6 +312,9 @@ lessons:
   idea: "A color photo has three channels, so the first convolution takes three input channels; on CIFAR-10's photos of 10 kinds, a CNN like the one that reads clothes well gets far fewer right, and learns its training photos much better than new ones."
   covers: [beeldclassificatie#3]
   requires: [cnn-resnet, cv-prepare-photo]
+  introduces: [c:cifar-10]
+  uses: [c:channel, c:pixel, c:uint8, c:float32, c:convolution, c:filter, c:output-channel, c:feature-map, c:pooling, c:kernel-size, c:padding, c:layer, c:relu, c:logit, c:mini-batch, c:epoch, c:learning-rate, c:warmup, c:train-set, c:test-set, c:seed, c:model-parameter, c:weight, c:bias-term, c:shape, c:tensor, c:axis, c:mean, c:standard-deviation, c:variance, c:per-channel-normalization, c:overfitting, c:resnet, c:pretrained-model, c:residual-block, c:label, c:dtype, c:accuracy, c:validation-set, c:cosine-decay, c:logarithm, v:loss-curve, py:nn-conv2d, py:nn-maxpool2d, py:nn-module, py:nn-linear, py:no-grad, py:class, py:self, py:init-method, py:forward-method, py:super, py:manual-seed, py:item, py:torch-tensor, py:slicing, py:indexing, py:tuple, py:def, py:return, py:print, py:comment, py:import, py:keepdim, py:dim, py:torch-reshape, py:torch-relu, py:len, py:comprehension, q:predict, q:choice, q:exercise-with-check, q:run-cell]
+  mentions: [c:imagenet]
   ladder: [torch]
   data: [cifar-10-download-only]
   reference_data: []

@@ -81,7 +81,7 @@ def text_why():
         mo.md(r"""
         ## Waarom
 
-        Je diepste VGG-netwerk leerde helemaal niets. In 2015 liepen Kaiming He, Xiangyu Zhang, Shaoqing Ren en Jian Sun tegen dezelfde muur aan op ImageNet: een gewoon netwerk van 34 layers maakte meer fouten dan een van 18, zelfs op zijn eigen trainingsafbeeldingen, ook met batch normalization. Hun **ResNet** zette een residual connection om elke twee convoluties, drie in de diepste versies, ging naar 152 layers en won de grote beeldwedstrijd van dat jaar. Residual connections zitten nu in bijna elk diep netwerk, van CNN's tot transformers. In deze laatste stap van je project bouw je het residual block van een CNN, en train je een netwerk dat even diep is als het VGG-netwerk dat niet leerde.
+        Je diepste VGG-netwerk leerde helemaal niets. In 2015 liepen Kaiming He, Xiangyu Zhang, Shaoqing Ren en Jian Sun tegen dezelfde muur aan op ImageNet: een gewoon netwerk van 34 layers maakte meer fouten dan een van 18, zelfs op zijn eigen trainingsafbeeldingen, ook met batch normalization. Hun **ResNet** zette een residual connection om elke twee convoluties, drie in de diepste versies, ging naar 152 layers en won de grote beeldwedstrijd van dat jaar. Residual connections zitten nu in bijna elk diep netwerk, van CNN's tot transformers. In deze stap van je project bouw je het residual block van een CNN, en train je een netwerk dat even diep is als het VGG-netwerk dat niet leerde.
         """),
         draw.project_steps(["Je eerste CNN", "LeNet-5, het CNN dat cheques las", "VGG: dieper met kleine filters",
                             "ResNet: diepte die blijft werken"],
@@ -361,7 +361,7 @@ def text_connections():
     mo.md(r"""
     ## Afronding
 
-    **Samenhang.** De residual connection uit [Residual connections](/course/open/nn-residual?lang=nl), nu om de convoluties van een CNN: waar je VGG blocks uit [VGG: dieper met kleine filters](/course/open/cnn-vgg-blocks?lang=nl) ophielden met leren, traint nu een netwerk dat nog dieper is, en leest het meer testafbeeldingen goed dan je SmallCNN. Je project `cnn` is af: `small_cnn.py`, `lenet.py`, `vgg.py` en `resnet.py`, van het CNN uit 1998 tot het block dat nog in bijna elk diep netwerk zit. Je komt $x + f(x)$ weer tegen in elk transformer block.
+    **Samenhang.** De residual connection uit [Residual connections](/course/open/nn-residual?lang=nl), nu om de convoluties van een CNN: waar je VGG blocks uit [VGG: dieper met kleine filters](/course/open/cnn-vgg-blocks?lang=nl) ophielden met leren, traint nu een netwerk dat nog dieper is, en leest het meer testafbeeldingen goed dan je SmallCNN. Je project `cnn` heeft nu `small_cnn.py`, `lenet.py`, `vgg.py` en `resnet.py`, van het CNN uit 1998 tot het block dat nog in bijna elk diep netwerk zit; in computer vision gaat het verder met kleurenfoto's. Je komt $x + f(x)$ weer tegen in elk transformer block.
     """)
     return
 

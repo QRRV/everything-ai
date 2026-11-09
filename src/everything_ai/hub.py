@@ -100,6 +100,16 @@ PINNED = {
         "sha256": "331234750fc7f77520e50d9565e8b6907b03565e30320da1401130db08c61f91",
         "size": 137_414_764,
     },
+    # CIFAR-10 (no licence stated), at its source, the page of Alex Krizhevsky at the University of Toronto, which sends
+    # the download on to cave.cs.toronto.edu: its binary version, bytes only (course/route/bronnen.yaml,
+    # cifar-10-download-only; everything_ai.cifar unpacks it). The page gives the same file's MD5,
+    # c32a1d4ab5d03f1284b67883e8d87530.
+    ("cs.toronto.edu/kriz", "cifar-10-binary.tar.gz"): {
+        "url": "https://www.cs.toronto.edu/~kriz/cifar-10-binary.tar.gz",
+        "revision": "v1",
+        "sha256": "c4a38c50a1bc5f3a1c5537f2155ab9d68f9f25eb1ed8d9ddda3db29a59bca1dd",
+        "size": 170_052_171,
+    },
 }
 CHUNK = 1 << 20   # bytes per read while downloading
 AGENT = "everything-ai-course"   # how a download introduces itself: some sources refuse Python's own name

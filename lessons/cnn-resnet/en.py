@@ -81,7 +81,7 @@ def text_why():
         mo.md(r"""
         ## Why this matters
 
-        Your deepest VGG network did not learn at all. In 2015, Kaiming He, Xiangyu Zhang, Shaoqing Ren and Jian Sun saw the same wall on ImageNet: a plain network of 34 layers made more mistakes than one of 18, even on its own training images, also with batch normalization. Their **ResNet** put a residual connection around every two convolutions, three in its deepest versions, went to 152 layers and won the large image contest of that year. Residual connections are now in almost every deep network, from CNNs to transformers. In this last step of your project you build the residual block of a CNN, and train a network as deep as the VGG network that did not learn.
+        Your deepest VGG network did not learn at all. In 2015, Kaiming He, Xiangyu Zhang, Shaoqing Ren and Jian Sun saw the same wall on ImageNet: a plain network of 34 layers made more mistakes than one of 18, even on its own training images, also with batch normalization. Their **ResNet** put a residual connection around every two convolutions, three in its deepest versions, went to 152 layers and won the large image contest of that year. Residual connections are now in almost every deep network, from CNNs to transformers. In this step of your project you build the residual block of a CNN, and train a network as deep as the VGG network that did not learn.
         """),
         draw.project_steps(["Your first CNN", "LeNet-5, the CNN that read checks", "VGG: deeper with small filters",
                             "ResNet: depth that keeps working"],
@@ -361,7 +361,7 @@ def text_connections():
     mo.md(r"""
     ## Wrap-up
 
-    **How this connects.** The residual connection of [Residual connections](/course/open/nn-residual?lang=en), now around the convolutions of a CNN: where your VGG blocks of [VGG: deeper with small filters](/course/open/cnn-vgg-blocks?lang=en) stopped learning, a network that is deeper still now trains, and reads more test images right than your SmallCNN. Your project `cnn` is complete: `small_cnn.py`, `lenet.py`, `vgg.py` and `resnet.py`, from the CNN of 1998 to the block that is still in almost every deep network. You will meet $x + f(x)$ again in every transformer block.
+    **How this connects.** The residual connection of [Residual connections](/course/open/nn-residual?lang=en), now around the convolutions of a CNN: where your VGG blocks of [VGG: deeper with small filters](/course/open/cnn-vgg-blocks?lang=en) stopped learning, a network that is deeper still now trains, and reads more test images right than your SmallCNN. Your project `cnn` now has `small_cnn.py`, `lenet.py`, `vgg.py` and `resnet.py`, from the CNN of 1998 to the block that is still in almost every deep network; in computer vision, it goes on with color photos. You will meet $x + f(x)$ again in every transformer block.
     """)
     return
 

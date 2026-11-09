@@ -1,0 +1,34 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: cv-color-cnn
+minutes: 35
+title:
+  en: "Project: your CNN on color photos"
+  nl: "Project: je CNN op kleurenfoto's"
+goal:
+  en: "give your CNN color photos as input, normalize them with the numbers of your own training photos, and see how much better it reads its training photos than new ones."
+  nl: "je CNN kleurenfoto's laten verwerken, ze normaliseren met de getallen van je eigen trainingsfoto's, en zien hoeveel beter hij zijn trainingsfoto's leest dan nieuwe."
+summary:
+  - en: "A color photo has three channels, so the first convolution takes three: each filter has a 3 by 3 for every color, and adds them up. nn.Conv2d(3, 8, 3) has 8 · 27 + 8 = 224 parameters."
+    nl: "Een kleurenfoto heeft drie channels, dus neemt de eerste convolutie er drie: elk filter heeft een 3 bij 3 voor elke kleur, en telt ze op. nn.Conv2d(3, 8, 3) heeft 8 · 27 + 8 = 224 parameters."
+  - en: "A network you train yourself is normalized with the mean and the standard deviation of each channel of its own training photos, over the photos, the rows and the columns: X.mean(dim=(0, 2, 3)). The test photos get the same numbers."
+    nl: "Een netwerk dat je zelf traint, normaliseer je met het gemiddelde en de standaardafwijking van elke kleur van zijn eigen trainingsfoto's, over de foto's, de rijen en de kolommen: X.mean(dim=(0, 2, 3)). De testfoto's krijgen dezelfde getallen."
+  - en: "Trained on 6,000 photos of CIFAR-10, the CNN that reads 864 to 879 of 1,000 clothes right gets 548 to 561 of the 1,000 test photos right after 5 epochs. After 20, it reads 92 to 97% of its training photos right and 52 to 54% of the test photos: it learned its training photos by heart."
+    nl: "Getraind op 6.000 foto's van CIFAR-10 leest het CNN dat 864 tot 879 van de 1.000 kledingstukken goed heeft, na 5 epochs 548 tot 561 van de 1.000 testfoto's goed. Na 20 leest hij 92 tot 97% van zijn trainingsfoto's goed en 52 tot 54% van de testfoto's: hij heeft zijn trainingsfoto's uit zijn hoofd geleerd."
+can_now:
+  - en: "work out how many parameters a convolution on color photos has"
+    nl: "uitrekenen hoeveel parameters een convolutie op kleurenfoto's heeft"
+    by: color-weights
+  - en: "compute the mean and the standard deviation of each color channel of a set of photos"
+    nl: "het gemiddelde en de standaardafwijking van elke kleur van een set foto's berekenen"
+    by: channel-stats
+  - en: "build a CNN for color photos of 32 by 32 in PyTorch"
+    nl: "een CNN bouwen voor kleurenfoto's van 32 bij 32 in PyTorch"
+    by: color-cnn
+  - en: "tell from the loss curves that a network learns its training photos by heart"
+    nl: "aan de loss curves zien dat een netwerk zijn trainingsfoto's uit zijn hoofd leert"
+    by: color-gap
+further_reading:
+  - en: "Alex Krizhevsky (2009), *Learning Multiple Layers of Features from Tiny Images*, technical report, University of Toronto: the report that describes CIFAR-10"
+    nl: "Alex Krizhevsky (2009), *Learning Multiple Layers of Features from Tiny Images*, technisch rapport, University of Toronto: het rapport dat CIFAR-10 beschrijft"
