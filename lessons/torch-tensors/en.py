@@ -120,6 +120,8 @@ def text_idea():
 
         **A tensor with no axes.** `t.sum()` and `t.mean()` give back a tensor, not a number: `tensor(0.4375)`. That is on purpose: in the next lesson such a tensor remembers how it was made. `.item()` takes the number out, as a Python number, for a `print` or a list of losses.
 
+        **Tensors put together.** `torch.cat` puts a list of tensors together along one axis. `torch.cat([a, b], dim=0)` puts the rows of `b` under those of `a`: shapes (2, 3) and (1, 3) give (3, 3). With `dim=1` they go side by side, column after column: (4, 2) and (4, 1) give (4, 3). On every other axis the tensors must have the same length, or PyTorch stops.
+
         **Where a tensor lives.** Every tensor is stored on a **device**: the CPU, `"cpu"`, or a GPU: `"cuda"` on an NVIDIA card, `"mps"` on a Mac with an Apple chip. `t.device` says which device it is on. A GPU does thousands of calculations at the same time, so on a big tensor it is many times faster. One rule: the tensors of one calculation must be on the same device. PyTorch never moves a tensor by itself; it stops with an error such as "Expected all tensors to be on the same device". Until *Why AI uses GPUs, and the same code on yours*, a few lessons from now, your tensors stay on the CPU; that lesson shows how to move them.
 
         ### New words and symbols
@@ -130,6 +132,7 @@ def text_idea():
         | **float32** | float thirty-two | a float in 32 bits, about 7 digits: PyTorch's standard for floats, half the memory of NumPy's float64 | `dtype=torch.float32` |
         | `dim` | | PyTorch's name for an axis; `keepdim=True` keeps it with length 1 | `t.mean(dim=1, keepdim=True)` |
         | `.item()` | | the number in a tensor with no axes, as a Python number | `loss.item()` |
+        | `torch.cat` | torch cat | puts a list of tensors together along one axis; on the other axes they must have the same length | `torch.cat([a, b], dim=1)` |
         | **device** | | where a tensor is stored and calculated: the CPU, or a GPU | `t.device` |
         """),
         L.watch_out("In physics and in pure maths, a tensor is something stricter: an object that changes in a fixed way when you change the coordinates. In machine learning, a tensor is just a grid of numbers with any number of axes. If you meet the word in a physics text, it means more there."),
@@ -155,7 +158,7 @@ def text_recipe():
     To calculate with PyTorch instead of NumPy:
 
     1. Make the data tensors, with floats: `torch.tensor(data, dtype=torch.float32)`.
-    2. Calculate as with NumPy: `@`, broadcasting, and methods such as `.mean(dim=..., keepdim=True)`.
+    2. Calculate as with NumPy: `@`, broadcasting, and methods such as `.mean(dim=..., keepdim=True)`. Put tensors together with `torch.cat`.
     3. For a single number, such as a loss, take it out with `.item()`.
     4. Check where your tensors live with `.device`: the tensors of one calculation must all be on the same device.
     """)
@@ -188,6 +191,7 @@ def example_tensors():
     print(_loss)
     print(_X.mean(dim=0))   # the mean of each column: one per input
     print(_X.mean(dim=1, keepdim=True))   # the mean of each row, kept as a column: (4, 1)
+    print(torch.cat([_X, _X.mean(dim=1, keepdim=True)], dim=1))   # each row with its mean beside it: (4, 3)
     # 3. the loss as a Python number
     print(_loss.item())
     # 4. where the tensors live, and whether PyTorch finds a GPU from NVIDIA
@@ -199,7 +203,7 @@ def example_tensors():
 @app.cell(hide_code=True)
 def text_after_example():
     mo.md(r"""
-    `y_pred` is 4.5, 5, 3.5 and 5.5. The residuals $y - \hat{y}$ are 0.5, −1, −0.5 and 0.5, their squares 0.25, 1, 0.25 and 0.25, and their mean is 1.75 / 4 = 0.4375. `print(_loss)` shows `tensor(0.4375)`: still a tensor, with no axes. `.item()` gives the Python number `0.4375`. `_X.mean(dim=0)` runs down the rows and gives one mean per column: 1.5 and 1.75. `_X.mean(dim=1, keepdim=True)` runs along each row and gives one mean per row, 1.5, 2, 1 and 2, kept as a column of shape (4, 1), so that it fits `_X` for broadcasting. Both tensors are on the CPU, and the last line says whether PyTorch finds a GPU from NVIDIA on your computer. Either way, the next lessons run on the CPU.
+    `y_pred` is 4.5, 5, 3.5 and 5.5. The residuals $y - \hat{y}$ are 0.5, −1, −0.5 and 0.5, their squares 0.25, 1, 0.25 and 0.25, and their mean is 1.75 / 4 = 0.4375. `print(_loss)` shows `tensor(0.4375)`: still a tensor, with no axes. `.item()` gives the Python number `0.4375`. `_X.mean(dim=0)` runs down the rows and gives one mean per column: 1.5 and 1.75. `_X.mean(dim=1, keepdim=True)` runs along each row and gives one mean per row, 1.5, 2, 1 and 2, kept as a column of shape (4, 1), so that it fits `_X` for broadcasting. `torch.cat` puts that column beside the two columns of `_X`: every row with its own mean as a third number, shape (4, 3). `_X` and `_y_pred` are both on the CPU, and the last line says whether PyTorch finds a GPU from NVIDIA on your computer. Either way, the next lessons run on the CPU.
     """)
     return
 
@@ -322,7 +326,7 @@ def text_connections():
     mo.md(r"""
     ## Wrap-up
 
-    **How this connects.** A tensor is the array you know from [Broadcasting](/course/open/np-broadcasting?lang=en): the same shapes, the same `@` and the same rule for stretching. What is new is small: float32, `dim`, `.item()` and the device. In [Training your MLP: the training loop](/course/open/nn-micrograd-train?lang=en) every number was a `Value` of its own; one tensor holds thousands of numbers in one object. In the next lesson, *PyTorch autograd does what your Value did*, a tensor learns to remember where it came from, and `backward()` gives every number in it its slope, as your own `Value` did.
+    **How this connects.** A tensor is the array you know from [Broadcasting](/course/open/np-broadcasting?lang=en): the same shapes, the same `@` and the same rule for stretching. What is new is small: float32, `dim`, `.item()`, `torch.cat` and the device. In [Training your MLP: the training loop](/course/open/nn-micrograd-train?lang=en) every number was a `Value` of its own; one tensor holds thousands of numbers in one object. In the next lesson, *PyTorch autograd does what your Value did*, a tensor learns to remember where it came from, and `backward()` gives every number in it its slope, as your own `Value` did.
     """)
     return
 

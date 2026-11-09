@@ -7,11 +7,11 @@ title:
   en: "PyTorch tensors"
   nl: "Tensors in PyTorch"
 goal:
-  en: "make tensors in PyTorch and calculate with them as with NumPy arrays: with float32, `dim`, `keepdim` and `.item()`, and say where a tensor lives."
-  nl: "tensors maken in PyTorch en ermee rekenen zoals met NumPy-arrays: met float32, `dim`, `keepdim` en `.item()`, en zeggen waar een tensor staat."
+  en: "make tensors in PyTorch and calculate with them as with NumPy arrays: with float32, `dim`, `keepdim`, `.item()` and `torch.cat`, and say where a tensor lives."
+  nl: "tensors maken in PyTorch en ermee rekenen zoals met NumPy-arrays: met float32, `dim`, `keepdim`, `.item()` en `torch.cat`, en zeggen waar een tensor staat."
 summary:
-  - en: "A tensor is PyTorch's array: a grid of numbers with any number of axes. It calculates as NumPy does, with `@`, broadcasting and methods such as `.mean()`, where an axis is called `dim`."
-    nl: "Een tensor is de array van PyTorch: een rooster van getallen met een willekeurig aantal axes. Hij rekent zoals NumPy, met `@`, broadcasting en methods zoals `.mean()`, waarbij een axis `dim` heet."
+  - en: "A tensor is PyTorch's array: a grid of numbers with any number of axes. It calculates as NumPy does, with `@`, broadcasting and methods such as `.mean()`, where an axis is called `dim`. `torch.cat` puts tensors together along one axis."
+    nl: "Een tensor is de array van PyTorch: een rooster van getallen met een willekeurig aantal axes. Hij rekent zoals NumPy, met `@`, broadcasting en methods zoals `.mean()`, waarbij een axis `dim` heet. `torch.cat` zet tensors aan elkaar langs één axis."
   - en: "Floats are float32 by default: 32 bits, about 7 digits. Whole numbers are int64, and their mean stops PyTorch: make them floats first. A summary such as `t.mean()` is a tensor with no axes; `.item()` turns it into a Python number."
     nl: "Floats zijn standaard float32: 32 bits, ongeveer 7 cijfers. Gehele getallen zijn int64, en hun gemiddelde laat PyTorch stoppen: maak er eerst floats van. Een samenvatting zoals `t.mean()` is een tensor zonder axes; `.item()` maakt er een Python-getal van."
   - en: "Every tensor lives on a device: the CPU, or a GPU. The tensors of one calculation must be on the same device."

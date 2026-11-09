@@ -109,7 +109,7 @@ def text_idea():
         """),
         L.formula(r"\begin{aligned} [[hidden:\mathbf{H}_i]] &= \mathrm{softmax}\!\left(\frac{[[hidden:Q_i]] [[hidden:K_i]]^\top}{\sqrt{[[hyper:d_\text{head}]]}} + M\right) [[hidden:V_i]] \\ [[hidden:\mathbf{Y}]] &= [\,[[hidden:\mathbf{H}_1]] \; \cdots \; [[hidden:\mathbf{H}_h]]\,] \, [[param:\mathbf{W}_O]] + [[param:\mathbf{b}_O]] \end{aligned}"),
         mo.md(r"""
-        Opsplitsen voegt geen parameters toe: de matrices zijn even groot als voor één head van $d$ getallen, en de vermenigvuldigingen kosten even veel werk. Wat verandert, is dat elke head eigen scores en een eigen softmax heeft, $h$ in plaats van één, dus zijn weight aan zijn eigen woorden kan geven. De kleinste GPT-2 heeft $d = 768$ in 12 heads van 64. In PyTorch zet `torch.cat(outputs, dim=1)` een lijst tensors naast elkaar, kolom na kolom.
+        Opsplitsen voegt geen parameters toe: de matrices zijn even groot als voor één head van $d$ getallen, en de vermenigvuldigingen kosten even veel werk. Wat verandert, is dat elke head eigen scores en een eigen softmax heeft, $h$ in plaats van één, dus zijn weight aan zijn eigen woorden kan geven. De kleinste GPT-2 heeft $d = 768$ in 12 heads van 64. `torch.cat(outputs, dim=1)`, uit [Tensors in PyTorch](/course/open/torch-tensors?lang=nl), zet de outputs van de heads naast elkaar, kolom na kolom.
 
         ### Nieuwe woorden en tekens
 
@@ -119,7 +119,6 @@ def text_idea():
         | **multi-head attention** | | $h$ heads naast elkaar, met hun outputs naast elkaar gezet en gemengd door een output-projectie | `self.out(torch.cat(outputs, dim=1))` |
         | **output-projectie** | | een lineaire layer van $d$ naar $d$ na de heads, die hun outputs mengt | `nn.Linear(d, d)` |
         | $d_\text{head}$ | d head | het aantal kolommen van één head: $d / h$ | `d_head` |
-        | `torch.cat` | torch cat | zet een lijst tensors aan elkaar, langs één axis | `torch.cat(outputs, dim=1)` |
         """),
         L.watch_out("Meer heads betekent niet meer parameters: dezelfde matrices van $d$ bij $d$ worden alleen in smallere heads geknipt. Maar meer heads maken elke head smaller: met te veel heads vergelijkt elke head maar een paar getallen. Niemand vertelt een head ook waar hij naar moet zoeken: wat elke head doet, komt uit het trainen."),
         mo.md(r"""

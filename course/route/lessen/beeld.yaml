@@ -408,9 +408,15 @@ lessons:
   reference_data: []
   needs: any
 
-# Inception, DenseNet and U-Net stack maps along the channels with torch.cat (py:torch-cat), which attn-multi-head
-# introduces, outside their chains. Decided: when cv-inception is built, py:torch-cat moves to torch-tensors, which
-# both chains share; torch-tensors then teaches it, and attn-multi-head uses it.
+# Inception, DenseNet and U-Net stack maps along the channels with torch.cat (py:torch-cat), which torch-tensors
+# introduces (moved there from attn-multi-head when cv-inception was built: both chains share torch-tensors).
+# The lesson counts inception (3a) of GoogLeNet (163,696 parameters with biases and 128 million multiplications for a
+# photo, against 387,296 parameters and 416 channels out for the paper's naive block, without the 1×1 convolutions
+# before the 3×3 and 5×5 filters and after the pooling), and the learner builds Inception (cnn/inception.py). The demo
+# puts it in the middle of the network of cv-1x1-convolution, on 6,000 photos of CIFAR-10 for 20 epochs: 553 to 585
+# test photos right with 44,658 parameters, against 532 to 572 with one 3×3 convolution (66,570). Then it switches off
+# one branch at a time after training: the 1×1 branch costs 100 to 144 test photos, the 5×5 branch from 2 more to 34
+# fewer. That says what the trained network leans on, not what a network trained without the branch could do.
 - id: cv-inception
   title: "Inception: filters of several sizes side by side"
   level: gevorderd
@@ -419,8 +425,11 @@ lessons:
   covers: [d11-cnn-architecturen#1]
   requires: [cv-1x1-convolution, cnn-vgg-blocks]
   introduces: [c:inception]
+  uses: [c:pointwise-convolution, c:bottleneck, c:convolution, c:filter, c:channel, c:output-channel, c:feature-map, c:pooling, c:kernel-size, c:stride, c:padding, c:receptive-field, c:pixel, c:vgg, c:vgg-block, c:batchnorm, c:layer, c:relu, c:logit, c:model-parameter, c:weight, c:bias-term, c:shape, c:tensor, c:mini-batch, c:epoch, c:learning-rate, c:warmup, c:seed, c:overfitting, c:train-set, c:test-set, c:validation-set, c:accuracy, c:loss, c:cifar-10, c:per-channel-normalization, c:hyperparameter, v:loss-curve, v:train-val-curves, py:nn-conv2d, py:nn-maxpool2d, py:nn-module, py:numel, py:torch-cat, py:dim, c:axis, py:keyword-argument, py:torch-relu, py:torch-randn, py:slicing, py:class, py:self, py:init-method, py:forward-method, py:super, py:manual-seed, py:for, py:tuple, py:comprehension, py:list, py:def, py:return, py:print, py:comment, py:import, q:predict, q:choice, q:exercise-with-check, q:run-cell, q:slider-task]
+  mentions: [c:alexnet, c:imagenet, c:resnext]
   ladder: [torch]
-  data: [fashion-mnist, cifar-10-download-only]
+  data: [cifar-10-download-only]
+  reference_data: []
   needs: any
 
 # ResNeXt's and EfficientNet's claims are differences of 1 to 2 points on ImageNet: the exercises count parameters and

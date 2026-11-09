@@ -352,8 +352,8 @@ _SORT = Sort(
     texts={
         "missing": {"en": "I cannot see your choices. Run the cell with the six things again.",
                     "nl": "Ik zie je keuzes niet. Voer de cel met de zes dingen opnieuw uit."},
-        "empty": {"en": "Nothing filled in yet. Put each one in a group: a 1×1 convolution can do it, or it needs a larger filter.",
-                  "nl": "Nog niets ingevuld. Zet elk ding in een groep: een 1×1 convolution kan het, of daar is een groter filter voor nodig."},
+        "empty": {"en": "Put each one in a group: a 1×1 convolution can do it, or it needs a larger filter.",
+                  "nl": "Zet elk ding in een groep: een 1×1 convolution kan het, of daar is een groter filter voor nodig."},
         "unfinished": {"en": "Everything you sorted so far is right. Sort the rest too ({n} to go).",
                        "nl": "Alles wat je tot nu toe indeelde, klopt. Deel ook de rest in (nog {n})."},
         "wrong": {"en": "{item} belongs in the other group.", "nl": "{item} hoort in de andere groep."},

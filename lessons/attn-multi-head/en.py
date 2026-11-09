@@ -109,7 +109,7 @@ def text_idea():
         """),
         L.formula(r"\begin{aligned} [[hidden:\mathbf{H}_i]] &= \mathrm{softmax}\!\left(\frac{[[hidden:Q_i]] [[hidden:K_i]]^\top}{\sqrt{[[hyper:d_\text{head}]]}} + M\right) [[hidden:V_i]] \\ [[hidden:\mathbf{Y}]] &= [\,[[hidden:\mathbf{H}_1]] \; \cdots \; [[hidden:\mathbf{H}_h]]\,] \, [[param:\mathbf{W}_O]] + [[param:\mathbf{b}_O]] \end{aligned}"),
         mo.md(r"""
-        Splitting adds no parameters: the matrices are as large as for one head of $d$ numbers, and the multiplications take as much work. What changes is that every head has its own scores and its own softmax, $h$ of them instead of one, so it can give its weight to its own words. The smallest GPT-2 has $d = 768$ in 12 heads of 64. In PyTorch, `torch.cat(outputs, dim=1)` puts a list of tensors side by side, column after column.
+        Splitting adds no parameters: the matrices are as large as for one head of $d$ numbers, and the multiplications take as much work. What changes is that every head has its own scores and its own softmax, $h$ of them instead of one, so it can give its weight to its own words. The smallest GPT-2 has $d = 768$ in 12 heads of 64. `torch.cat(outputs, dim=1)`, from [PyTorch tensors](/course/open/torch-tensors?lang=en), puts the outputs of the heads side by side, column after column.
 
         ### New words and symbols
 
@@ -119,7 +119,6 @@ def text_idea():
         | **multi-head attention** | | $h$ heads side by side, their outputs put next to each other and mixed by an output projection | `self.out(torch.cat(outputs, dim=1))` |
         | **output projection** | | a linear layer from $d$ to $d$ after the heads, which mixes their outputs | `nn.Linear(d, d)` |
         | $d_\text{head}$ | d head | the number of columns of one head: $d / h$ | `d_head` |
-        | `torch.cat` | torch cat | puts a list of tensors together, along one axis | `torch.cat(outputs, dim=1)` |
         """),
         L.watch_out("More heads do not mean more parameters: the same matrices of $d$ by $d$ are only cut into narrower heads. But more heads make every head narrower: with too many heads, each compares only a few numbers. Nobody tells a head what to look for either: what each head does comes out of training."),
         mo.md(r"""

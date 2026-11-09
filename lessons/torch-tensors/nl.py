@@ -120,6 +120,8 @@ def text_idea():
 
         **Een tensor zonder axes.** `t.sum()` en `t.mean()` geven een tensor terug, geen getal: `tensor(0.4375)`. Dat is met opzet: in de volgende les onthoudt zo'n tensor hoe hij gemaakt is. `.item()` haalt het getal eruit, als Python-getal, voor een `print` of een lijst met losses.
 
+        **Tensors aan elkaar.** `torch.cat` zet een lijst tensors aan elkaar langs één axis. `torch.cat([a, b], dim=0)` zet de rijen van `b` onder die van `a`: shapes (2, 3) en (1, 3) geven (3, 3). Met `dim=1` komen ze naast elkaar, kolom na kolom: (4, 2) en (4, 1) geven (4, 3). Op elke andere axis moeten de tensors even lang zijn, anders stopt PyTorch.
+
         **Waar een tensor staat.** Elke tensor staat op een **device**: de CPU, `"cpu"`, of een GPU: `"cuda"` op een kaart van NVIDIA, `"mps"` op een Mac met een chip van Apple. `t.device` zegt op welk device hij staat. Een GPU doet duizenden berekeningen tegelijk, dus op een grote tensor is hij vele malen sneller. Eén regel: de tensors van één berekening moeten op hetzelfde device staan. PyTorch verplaatst een tensor nooit uit zichzelf; hij stopt met een fout zoals "Expected all tensors to be on the same device". Tot *Waarom AI GPU's gebruikt, en dezelfde code op de jouwe*, een paar lessen verderop, blijven je tensors op de CPU; die les laat zien hoe je ze verplaatst.
 
         ### Nieuwe woorden en tekens
@@ -130,6 +132,7 @@ def text_idea():
         | **float32** | float tweeëndertig | een float in 32 bits, ongeveer 7 cijfers: de standaard van PyTorch voor floats, de helft van het geheugen van float64 in NumPy | `dtype=torch.float32` |
         | `dim` | | de naam van PyTorch voor een axis; `keepdim=True` houdt hem met lengte 1 | `t.mean(dim=1, keepdim=True)` |
         | `.item()` | | het getal in een tensor zonder axes, als Python-getal | `loss.item()` |
+        | `torch.cat` | torch cat | zet een lijst tensors aan elkaar langs één axis; op de andere axes moeten ze even lang zijn | `torch.cat([a, b], dim=1)` |
         | **device** | | de plek waar een tensor staat en waarop ermee gerekend wordt: de CPU, of een GPU | `t.device` |
         """),
         L.watch_out("In de natuurkunde en de zuivere wiskunde is een tensor iets strengers: een object dat op een vaste manier verandert als je de coördinaten verandert. In machine learning is een tensor gewoon een rooster van getallen met een willekeurig aantal axes. Kom je het woord tegen in een tekst over natuurkunde, dan betekent het daar meer."),
@@ -155,7 +158,7 @@ def text_recipe():
     Om met PyTorch te rekenen in plaats van met NumPy:
 
     1. Maak van de data tensors, met floats: `torch.tensor(data, dtype=torch.float32)`.
-    2. Reken zoals met NumPy: `@`, broadcasting, en methods zoals `.mean(dim=..., keepdim=True)`.
+    2. Reken zoals met NumPy: `@`, broadcasting, en methods zoals `.mean(dim=..., keepdim=True)`. Zet tensors aan elkaar met `torch.cat`.
     3. Voor één getal, zoals een loss, haal je het eruit met `.item()`.
     4. Kijk met `.device` waar je tensors staan: de tensors van één berekening moeten allemaal op hetzelfde device staan.
     """)
@@ -188,6 +191,7 @@ def example_tensors():
     print(_loss)
     print(_X.mean(dim=0))   # het gemiddelde van elke kolom: één per input
     print(_X.mean(dim=1, keepdim=True))   # het gemiddelde van elke rij, als kolom gehouden: (4, 1)
+    print(torch.cat([_X, _X.mean(dim=1, keepdim=True)], dim=1))   # elke rij met zijn gemiddelde ernaast: (4, 3)
     # 3. de loss als Python-getal
     print(_loss.item())
     # 4. waar de tensors staan, en of PyTorch een GPU van NVIDIA vindt
@@ -199,7 +203,7 @@ def example_tensors():
 @app.cell(hide_code=True)
 def text_after_example():
     mo.md(r"""
-    `y_pred` is 4,5; 5; 3,5 en 5,5. De residuen $y - \hat{y}$ zijn 0,5; −1; −0,5 en 0,5, hun kwadraten 0,25; 1; 0,25 en 0,25, en hun gemiddelde is 1,75 / 4 = 0,4375. `print(_loss)` laat `tensor(0.4375)` zien: nog steeds een tensor, zonder axes. `.item()` geeft het Python-getal `0.4375`. `_X.mean(dim=0)` loopt langs de rijen omlaag en geeft één gemiddelde per kolom: 1,5 en 1,75. `_X.mean(dim=1, keepdim=True)` loopt langs elke rij en geeft één gemiddelde per rij, 1,5; 2; 1 en 2, als kolom met shape (4, 1), zodat het voor broadcasting bij `_X` past. Beide tensors staan op de CPU, en de laatste regel zegt of PyTorch op je computer een GPU van NVIDIA vindt. Hoe dan ook draaien de volgende lessen op de CPU.
+    `y_pred` is 4,5; 5; 3,5 en 5,5. De residuen $y - \hat{y}$ zijn 0,5; −1; −0,5 en 0,5, hun kwadraten 0,25; 1; 0,25 en 0,25, en hun gemiddelde is 1,75 / 4 = 0,4375. `print(_loss)` laat `tensor(0.4375)` zien: nog steeds een tensor, zonder axes. `.item()` geeft het Python-getal `0.4375`. `_X.mean(dim=0)` loopt langs de rijen omlaag en geeft één gemiddelde per kolom: 1,5 en 1,75. `_X.mean(dim=1, keepdim=True)` loopt langs elke rij en geeft één gemiddelde per rij, 1,5; 2; 1 en 2, als kolom met shape (4, 1), zodat het voor broadcasting bij `_X` past. `torch.cat` zet die kolom naast de twee kolommen van `_X`: elke rij met zijn eigen gemiddelde als derde getal, shape (4, 3). `_X` en `_y_pred` staan allebei op de CPU, en de laatste regel zegt of PyTorch op je computer een GPU van NVIDIA vindt. Hoe dan ook draaien de volgende lessen op de CPU.
     """)
     return
 
@@ -322,7 +326,7 @@ def text_connections():
     mo.md(r"""
     ## Afronding
 
-    **Samenhang.** Een tensor is de array die je kent uit [Broadcasting](/course/open/np-broadcasting?lang=nl): dezelfde shapes, dezelfde `@` en dezelfde regel voor het uitrekken. Wat nieuw is, is klein: float32, `dim`, `.item()` en het device. In [Je MLP trainen: de training loop](/course/open/nn-micrograd-train?lang=nl) was elk getal een eigen `Value`; één tensor bevat duizenden getallen in één object. In de volgende les, *PyTorch-autograd doet wat jouw Value deed*, leert een tensor te onthouden waar hij vandaan komt, en geeft `backward()` elk getal erin zijn helling, zoals je eigen `Value` deed.
+    **Samenhang.** Een tensor is de array die je kent uit [Broadcasting](/course/open/np-broadcasting?lang=nl): dezelfde shapes, dezelfde `@` en dezelfde regel voor het uitrekken. Wat nieuw is, is klein: float32, `dim`, `.item()`, `torch.cat` en het device. In [Je MLP trainen: de training loop](/course/open/nn-micrograd-train?lang=nl) was elk getal een eigen `Value`; één tensor bevat duizenden getallen in één object. In de volgende les, *PyTorch-autograd doet wat jouw Value deed*, leert een tensor te onthouden waar hij vandaan komt, en geeft `backward()` elk getal erin zijn helling, zoals je eigen `Value` deed.
     """)
     return
 

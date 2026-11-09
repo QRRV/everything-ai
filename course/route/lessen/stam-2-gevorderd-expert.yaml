@@ -558,8 +558,8 @@ lessons:
   idea: "Several smaller attention heads in parallel can each look for a different kind of relation."
   covers: [attention-en-transformers#2]
   requires: [attn-causal-mask]
-  introduces: [c:attention-head, c:multi-head-attention, c:output-projection, py:torch-cat]
-  uses: [c:causal-mask, c:scaled-dot-product-attention, c:self-attention, c:attention, c:attention-weights, c:attention-score, c:query, c:key, c:value, c:softmax, c:transformer, c:matrix, c:shape, c:weight, c:bias-term, py:torch-tensor, py:torch-softmax, py:torch-tril, py:masked-fill, py:nn-module, py:nn-linear, py:class, py:self, py:init-method, py:forward-method, py:super, py:manual-seed, py:slicing, py:list, py:append, py:for, py:range, py:int, py:comprehension, py:math-module, py:matmul-operator, py:dim, py:keyword-argument, py:tuple, py:def, py:return, py:print, py:comment, py:underscore-name, py:import, q:predict, q:choice, q:exercise-with-check, q:run-cell]
+  introduces: [c:attention-head, c:multi-head-attention, c:output-projection]
+  uses: [c:causal-mask, c:scaled-dot-product-attention, c:self-attention, c:attention, c:attention-weights, c:attention-score, c:query, c:key, c:value, c:softmax, c:transformer, c:matrix, c:shape, c:weight, c:bias-term, py:torch-tensor, py:torch-cat, py:torch-softmax, py:torch-tril, py:masked-fill, py:nn-module, py:nn-linear, py:class, py:self, py:init-method, py:forward-method, py:super, py:manual-seed, py:slicing, py:list, py:append, py:for, py:range, py:int, py:comprehension, py:math-module, py:matmul-operator, py:dim, py:keyword-argument, py:tuple, py:def, py:return, py:print, py:comment, py:underscore-name, py:import, q:predict, q:choice, q:exercise-with-check, q:run-cell]
   ladder: [torch]
   needs: any
 

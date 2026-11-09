@@ -1402,7 +1402,7 @@ lessons:
   idea: "A tensor is PyTorch's array: it works like NumPy and can live on a GPU."
   covers: [tensors-en-autograd#0, frameworks#0]
   requires: [np-broadcasting, nn-micrograd-train]
-  introduces: [py:torch-tensor, c:tensor, c:device, c:float32, py:dim, py:item]
+  introduces: [py:torch-tensor, c:tensor, c:device, c:float32, py:dim, py:item, py:torch-cat]
   uses: [c:array, c:shape, c:dtype, c:axis, c:broadcasting, py:keepdims, py:np-array, c:matrix, c:vector, c:matrix-multiplication, py:matmul-operator, c:mean-squared-error, c:loss, c:residual, c:weight, c:bias-term, c:prediction, c:example, c:label, c:mean, c:mlp, c:autograd, s:y-hat, s:x-matrix, s:n-examples, py:np-sum, py:np-mean, py:list, py:nested-list, py:float, py:method, py:import, py:import-as, py:print, py:comment, py:variable, py:underscore-name, q:predict, q:choice, q:exercise-with-check, q:run-cell]
   mentions: [c:gpu]
   warns: [tensor]
