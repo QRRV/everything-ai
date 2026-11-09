@@ -1,0 +1,38 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: cv-inside-cnn
+minutes: 35
+title:
+  en: "Look inside a CNN: filters and feature maps"
+  nl: "In een CNN kijken: filters en feature maps"
+goal:
+  en: "draw the filters of the first layer of ResNet-18 as small images and its feature maps as gray images, stage by stage, and see how much of a photo one number deep inside looks at."
+  nl: "de filters van de eerste layer van ResNet-18 tekenen als kleine plaatjes en zijn feature maps als grijze plaatjes, fase na fase, en zien hoeveel van een foto één getal diep binnenin bekijkt."
+summary:
+  - en: "A filter drawn as an image shows what it looks for: its weights divided by twice the largest one, + or -, plus 0.5, so that a weight of 0 is gray, with the colors last. The 64 filters of the first layer of ResNet-18 are mostly edges at every angle, and spots of one color."
+    nl: "Een filter dat als plaatje getekend is, laat zien waar het naar zoekt: zijn weights gedeeld door twee keer de grootste, + of -, plus 0,5, zodat een weight van 0 grijs is, met de kleuren achteraan. De 64 filters van de eerste layer van ResNet-18 zijn vooral randen onder elke hoek, en vlekken van één kleur."
+  - en: "ResNet-18 takes a photo through stages: conv1, bn1 and a ReLU give 64 maps of 112 by 112; after max pooling, layer1 to layer4 give 64 maps of 56 by 56, then 128 of 28 by 28, 256 of 14 by 14 and 512 of 7 by 7. One number sees 7, 43, 99, 211 and 435 pixels wide, the middle of that piece most."
+    nl: "ResNet-18 verwerkt een foto in fases: conv1, bn1 en een ReLU geven 64 maps van 112 bij 112; na max pooling geven layer1 tot en met layer4 64 maps van 56 bij 56, dan 128 van 28 bij 28, 256 van 14 bij 14 en 512 van 7 bij 7. Eén getal ziet 7, 43, 99, 211 en 435 pixels breed, het midden van dat stuk het meest."
+  - en: "Scaled each on its own, every filter shows a pattern, also the 8 of ResNet-18 whose weights are below 0.00001 and whose maps are 0 on every photo. And one photo shows where a channel is high, not what it answers to: on the cat, channel 120 of layer3 is high around both eyes, on the coffee it is 154th of 256."
+    nl: "Elk op zijn eigen schaal laat elk filter een patroon zien, ook de 8 van ResNet-18 waarvan de weights kleiner zijn dan 0,00001 en waarvan de maps op elke foto 0 zijn. En één foto laat zien waar een channel hoog is, niet waar het op reageert: op de kat is channel 120 van layer3 hoog rond beide ogen, op de koffie is het 154e van de 256."
+can_now:
+  - en: "work out the shape of the feature maps after each stage of a CNN"
+    nl: "de shape van de feature maps na elke fase van een CNN uitrekenen"
+    by: inside-shape
+  - en: "draw a filter of a trained CNN as an image, with gray for a weight of 0"
+    nl: "een filter van een getrainde CNN als plaatje tekenen, met grijs voor een weight van 0"
+    by: filter-image
+  - en: "take a photo through a CNN one stage at a time and keep its feature maps"
+    nl: "een foto fase voor fase door een CNN halen en zijn feature maps bewaren"
+    by: feature-maps
+  - en: "tell what a feature map on one photo shows, and what it cannot show"
+    nl: "zeggen wat een feature map op één foto laat zien, en wat niet"
+    by: eyes
+further_reading:
+  - en: "Matthew Zeiler and Rob Fergus (2014), *Visualizing and Understanding Convolutional Networks*: section 4 and figure 2, the pieces of photos that make a channel strongest, layer by layer; section 4.1, the first filters of AlexNet and their fix"
+    nl: "Matthew Zeiler en Rob Fergus (2014), *Visualizing and Understanding Convolutional Networks*: paragraaf 4 en figuur 2, de stukken foto's die een channel het sterkst maken, layer na layer; paragraaf 4.1, de eerste filters van AlexNet en hoe ze die verbeterden"
+  - en: "Alex Krizhevsky, Ilya Sutskever and Geoffrey Hinton (2012), *ImageNet Classification with Deep Convolutional Neural Networks*, section 6.1 and figure 3: the 96 filters of the first layer of AlexNet"
+    nl: "Alex Krizhevsky, Ilya Sutskever en Geoffrey Hinton (2012), *ImageNet Classification with Deep Convolutional Neural Networks*, paragraaf 6.1 en figuur 3: de 96 filters van de eerste layer van AlexNet"
+  - en: "Wenjie Luo, Yujia Li, Raquel Urtasun and Richard Zemel (2016), *Understanding the Effective Receptive Field in Deep Convolutional Neural Networks*: why the middle of a receptive field counts most"
+    nl: "Wenjie Luo, Yujia Li, Raquel Urtasun en Richard Zemel (2016), *Understanding the Effective Receptive Field in Deep Convolutional Neural Networks*: waarom het midden van een receptive field het meest telt"

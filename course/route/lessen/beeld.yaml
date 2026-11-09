@@ -340,7 +340,12 @@ lessons:
   needs: any
 
 # The 3×3 filters of a small CIFAR CNN are 9 pixels and barely readable; the 7×7 filters of ResNet-18's first layer
-# show the edges and colors.
+# show the edges and colors. Each filter is drawn on its own scale, 0.5 + w / (2·max|w|), gray = 0: mostly edges, spots
+# of one color, and 8 filters (2, 4, 7, 9, 13, 36, 38, 48) whose weights are below 1e-5 and whose maps are 0 on every
+# photo. The maps are of the course photos, prepared as in cv-try-classifier; channel 120 of layer3 is the strongest on
+# the cat, high around both eyes, and 154th of 256 on the coffee. Receptive fields 7, 11 (pool), 43, 99, 211, 435; the
+# tests check them by autograd. No training: the slider over the filters and the demo need only the ResNet-18 download.
+# Project cnn gets filters.py and maps.py. AlexNet is named (Zeiler and Fergus looked inside it) before cv-alexnet.
 - id: cv-inside-cnn
   title: "Look inside a CNN: filters and feature maps"
   level: gevorderd
@@ -349,8 +354,11 @@ lessons:
   covers: [vision-modellen-visualiseren-en-begrijpen#0]
   requires: [cv-color-cnn, cv-try-classifier]
   introduces: [v:filter-grid, v:feature-map-grid]
+  uses: [c:filter, c:feature-map, c:convolution, c:receptive-field, c:stride, c:padding, c:kernel-size, c:pooling, c:batchnorm, c:relu, c:resnet, c:residual-block, c:channel, c:output-channel, c:pretrained-model, c:imagenet, c:weight, c:model-parameter, c:layer, c:shape, c:tensor, c:axis, c:mean, c:per-channel-normalization, c:center-crop, c:autograd, c:gradient, c:validation-set, c:pixel, c:logit, py:torch-permute, py:torch-unsqueeze, py:torch-relu, py:nn-maxpool2d, py:no-grad, py:with, py:imread-imshow, py:np-array, py:pil-image, py:torch-tensor, py:list, py:append, py:for, py:def, py:return, py:import, py:print, py:comment, py:indexing, py:slicing, py:method, py:comparison, py:np-abs, py:keyword-argument, py:forward-hook, py:float, py:variable, py:arithmetic, py:dim, py:item, py:manual-seed, py:torch-randn, py:scientific-notation, py:int, py:floor-division, py:modulo, c:top-k-accuracy, c:accuracy, q:predict, q:choice, q:exercise-with-check, q:run-cell, q:slider-task]
+  mentions: [c:alexnet]
   ladder: [torch]
-  data: [model-resnet18-imagenet, caltech-101-download-only, cifar-10-download-only]
+  data: [model-resnet18-imagenet, course-photos]
+  reference_data: []
   needs: any
 
 # --- gevorderd: CNN families ----------------------------------------------------------------------------------------
