@@ -387,6 +387,12 @@ lessons:
 
 # ResNet already gave its residual connection a convolution of 1 by 1 (cnn-resnet); this lesson names it and shows
 # what it is for. The term list has it as pointwise-convolution ("1×1 convolution"). cv-fpn and cv-fcn need it.
+# The lesson mixes the colors of the course's landscape (data-images-as-arrays) with 1×1 convolutions, counts the
+# bottleneck of ResNet-50 (70,016 parameters with biases, against 590,080 for one 3×3 convolution from 256 to 256), and
+# the learner builds Bottleneck (cnn/bottleneck.py). The demo puts it in the middle of a wider ColorCNN on 6,000
+# photos of CIFAR-10 for 20 epochs: with 16 in the middle the network has 34,090 parameters instead of 66,570, and
+# reads 521 to 550 test photos right against 532 to 572, and learns its training photos less by heart. Wall time is
+# not claimed: on one thread the course's runs took about as long with and without the bottleneck.
 - id: cv-1x1-convolution
   title: "1×1 convolutions: mixing the channels"
   level: gevorderd
@@ -394,9 +400,12 @@ lessons:
   idea: "A 1×1 convolution mixes the channels of each pixel without looking at its neighbors, as a linear layer on every pixel; it makes the number of channels smaller or larger cheaply, such as before an expensive 3×3 convolution."
   covers: [convolutionele-netwerken#2]
   requires: [cv-color-cnn]
-  introduces: [c:pointwise-convolution]
+  introduces: [c:pointwise-convolution, c:bottleneck]
+  uses: [c:convolution, c:filter, c:channel, c:output-channel, c:feature-map, c:pooling, c:kernel-size, c:padding, c:pixel, c:grayscale-image, c:resnet, c:residual-block, c:residual-connection, c:batchnorm, c:vgg, c:layer, c:relu, c:logit, c:model-parameter, c:weight, c:bias-term, c:shape, c:tensor, c:mini-batch, c:epoch, c:learning-rate, c:warmup, c:seed, c:overfitting, c:train-set, c:test-set, c:validation-set, c:accuracy, c:loss, c:cifar-10, c:per-channel-normalization, c:hyperparameter, v:loss-curve, v:train-val-curves, py:nn-conv2d, py:nn-maxpool2d, py:nn-linear, py:nn-module, py:nn-parameter, py:numel, py:no-grad, py:imread-imshow, py:torch-tensor, py:torch-permute, py:torch-unsqueeze, py:torch-relu, py:indexing, py:slicing, py:class, py:self, py:init-method, py:forward-method, py:super, py:manual-seed, py:with, py:comprehension, py:def, py:return, py:print, py:comment, py:import, q:predict, q:choice, q:exercise-with-check, q:run-cell, q:slider-task]
+  mentions: [c:inception, c:alexnet, c:imagenet]
   ladder: [torch]
-  data: [fashion-mnist, cifar-10-download-only]
+  data: [cifar-10-download-only]
+  reference_data: []
   needs: any
 
 # Inception, DenseNet and U-Net stack maps along the channels with torch.cat (py:torch-cat), which attn-multi-head
