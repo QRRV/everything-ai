@@ -362,20 +362,27 @@ lessons:
   needs: any
 
 # --- gevorderd: CNN families ----------------------------------------------------------------------------------------
-# AlexNet (2012) comes after VGG (2014) and ResNet (2015), which the learner built: the lesson looks back. Its 15%
-# came from seven CNNs together; one CNN got about 18%. The learner runs one variant at a reduced size (a quarter of
-# the channels, dense layers of 512, a subset) and compares it with runs the course recorded.
+# AlexNet (2012) comes after VGG (2014) and ResNet (2015), which the learner built: the lesson looks back. Its 15.3%
+# came from seven CNNs together; one CNN got 18.2%. Its 60,965,224 parameters are counted by building its layers on the
+# "meta" device (groups=2 for conv2, conv4 and conv5; padding 2 in conv1 for the paper's 55 by 55). The learner builds
+# SmallAlexNet (201,402 parameters: 12, 32, 48, 48, 32 filters and linear layers of 256), saved as cnn/alexnet.py, and
+# trains it with dropout or not, and with the changes of cv-augment-photos or not, at a learning rate of 0.001 (at 0.01
+# and 0.003 it hardly learned). Over 5 seeds the changes help (594 to 636 test photos against 541 to 576) and dropout
+# does not (542 to 575 alone, 581 to 604 with the changes). ReLU against tanh is told from the paper, not measured: with
+# AdamW in this setting, the course's own try did not show the paper's speed-up.
 - id: cv-alexnet
   title: "ImageNet and AlexNet: why 2012 changed everything"
   level: gevorderd
   module: cnn-families
   idea: "Before VGG and ResNet came AlexNet: in 2012 this deep CNN, trained on two GPUs with ReLU, dropout and data augmentation, brought the top-5 error on ImageNet down from 26% to 15%; you build a small version for CIFAR-10 and see what dropout and augmentation still add."
   covers: [d11-cnn-architecturen#0]
-  requires: [cv-augment-photos, cv-try-classifier]
-  introduces: [c:alexnet, c:ilsvrc]
-  mentions: [c:gpu]
+  requires: [cv-augment-photos, cv-inside-cnn, cv-try-classifier]
+  introduces: [c:alexnet, c:ilsvrc, c:local-response-normalization]
+  uses: [c:imagenet, c:top-k-accuracy, c:vgg, c:resnet, c:lenet, c:relu, c:dropout, py:nn-dropout, s:p-dropout, c:data-augmentation, c:horizontal-flip, c:random-crop, c:color-jitter, c:sgd, c:momentum, c:weight-decay, c:batchnorm, c:residual-block, c:convergence, c:mini-batch, c:learning-rate, c:epoch, c:warmup, c:cosine-decay, c:seed, c:convolution, c:filter, c:feature-map, c:pooling, c:kernel-size, c:stride, c:padding, c:receptive-field, c:channel, c:output-channel, c:layer, c:hidden-layer, c:neuron, c:logit, c:softmax, c:feature, c:label, c:model-parameter, c:weight, c:bias-term, c:shape, c:tensor, c:overfitting, c:train-set, c:test-set, c:validation-set, c:accuracy, c:loss, c:cifar-10, c:per-channel-normalization, c:pretrained-model, v:loss-curve, v:train-val-curves, py:nn-conv2d, py:nn-maxpool2d, py:nn-linear, py:nn-module, py:numel, py:floor-division, py:model-eval, py:model-train, py:torch-relu, py:torch-reshape, py:class, py:self, py:init-method, py:forward-method, py:super, py:manual-seed, py:comprehension, py:def, py:return, py:print, py:comment, py:import, q:predict, q:choice, q:exercise-with-check, q:run-cell, q:slider-task]
+  mentions: [c:gpu, c:tanh, c:inception]
   ladder: [torch]
-  data: [fashion-mnist, cifar-10-download-only]
+  data: [cifar-10-download-only]
+  reference_data: []
   needs: any
 
 # ResNet already gave its residual connection a convolution of 1 by 1 (cnn-resnet); this lesson names it and shows

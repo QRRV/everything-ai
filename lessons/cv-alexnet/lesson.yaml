@@ -1,0 +1,35 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: cv-alexnet
+minutes: 40
+title:
+  en: "ImageNet and AlexNet: why 2012 changed everything"
+  nl: "ImageNet en AlexNet: waarom 2012 alles veranderde"
+goal:
+  en: "see how AlexNet won ImageNet's contest in 2012, count where its 61 million parameters are, build a small version of it for CIFAR-10, and measure what its dropout and its changes of the photos still add."
+  nl: "zien hoe AlexNet in 2012 de wedstrijd van ImageNet won, tellen waar zijn 61 miljoen parameters zitten, er een kleine versie van bouwen voor CIFAR-10, en meten wat zijn dropout en zijn veranderingen van de foto's nog toevoegen."
+summary:
+  - en: "In ILSVRC, ImageNet's contest, the lowest top-5 error was 28.2% in 2010 and 25.8% in 2011, with features designed by hand. In 2012, AlexNet got 15.3%, against 26.2% for the second place: seven CNNs averaged, where one got 18.2%. From 2013 on, CNNs won, down to 3.6% with ResNet in 2015."
+    nl: "In ILSVRC, de wedstrijd van ImageNet, was de laagste top-5 error 28,2% in 2010 en 25,8% in 2011, met features die met de hand waren bedacht. In 2012 haalde AlexNet 15,3%, tegen 26,2% voor de tweede plaats: het gemiddelde van zeven CNN's, waar één er 18,2% haalde. Vanaf 2013 wonnen CNN's, tot 3,6% met ResNet in 2015."
+  - en: "AlexNet has five convolutions and three linear layers, with ReLU, overlapping max pooling, local response normalization, dropout after fc6 and fc7, and random cuts and mirror images of its photos. Of its 60,965,224 parameters, 96.2% are in its linear layers, 61.9% in fc6 alone, but its convolutions do 91.9% of the multiplications for a photo."
+    nl: "AlexNet heeft vijf convoluties en drie linear layers, met ReLU, max pooling die overlapt, local response normalization, dropout na fc6 en fc7, en willekeurige uitsneden en spiegelbeelden van zijn foto's. Van zijn 60.965.224 parameters zit 96,2% in zijn linear layers, 61,9% in fc6 alleen, maar zijn convoluties doen 91,9% van de vermenigvuldigingen voor een foto."
+  - en: "SmallAlexNet, 201,402 parameters, on 6,000 photos of CIFAR-10 for 40 epochs: 541 to 576 test photos right without dropout and changes, 542 to 575 with dropout, 594 to 636 with the changes, and 581 to 604 with both. Here, the changes help and dropout does not: what helps depends on the network and the data."
+    nl: "SmallAlexNet, 201.402 parameters, op 6.000 foto's van CIFAR-10, 40 epochs lang: 541 tot 576 testfoto's goed zonder dropout en veranderingen, 542 tot 575 met dropout, 594 tot 636 met de veranderingen, en 581 tot 604 met allebei. Hier helpen de veranderingen wel en dropout niet: wat helpt, hangt af van het netwerk en de data."
+can_now:
+  - en: "tell which ideas of AlexNet a CNN of today still uses, and which it does differently"
+    nl: "zeggen welke ideeën van AlexNet een CNN van nu nog gebruikt, en welke het anders doet"
+    by: alexnet-today
+  - en: "build a CNN after a paper, with the number of inputs of its first linear layer worked out from the shapes"
+    nl: "een CNN bouwen naar een paper, met het aantal inputs van zijn eerste linear layer uitgerekend uit de shapes"
+    by: small-alexnet
+  - en: "read from measured runs what dropout and changes of the photos add to a network"
+    nl: "uit gemeten runs aflezen wat dropout en veranderingen van de foto's aan een netwerk toevoegen"
+    by: dropout-here
+further_reading:
+  - en: "Alex Krizhevsky, Ilya Sutskever and Geoffrey Hinton (2012), *ImageNet Classification with Deep Convolutional Neural Networks*: section 3, the network, with ReLU, the two GPUs, local response normalization and overlapping pooling; section 4, the changes of the photos and dropout; table 2, one CNN and seven"
+    nl: "Alex Krizhevsky, Ilya Sutskever en Geoffrey Hinton (2012), *ImageNet Classification with Deep Convolutional Neural Networks*: paragraaf 3, het netwerk, met ReLU, de twee GPU's, local response normalization en pooling die overlapt; paragraaf 4, de veranderingen van de foto's en dropout; tabel 2, één CNN en zeven"
+  - en: "Olga Russakovsky and others (2015), *ImageNet Large Scale Visual Recognition Challenge*, section 5.1: the entries and winners of each year from 2010 to 2014"
+    nl: "Olga Russakovsky en anderen (2015), *ImageNet Large Scale Visual Recognition Challenge*, paragraaf 5.1: de inzendingen en winnaars van elk jaar van 2010 tot 2014"
+  - en: "Matthew Zeiler and Rob Fergus (2014), *Visualizing and Understanding Convolutional Networks*, section 4.1: what was wrong with the first layers of AlexNet, and the smaller filters that fixed it"
+    nl: "Matthew Zeiler en Rob Fergus (2014), *Visualizing and Understanding Convolutional Networks*, paragraaf 4.1: wat er mis was met de eerste layers van AlexNet, en de kleinere filters die het oplosten"
