@@ -354,10 +354,13 @@ class Lesson:
 
     def code_box(self, name: str, lines: int = 3):
         """A box to type code in. Your text is kept, also when you close the lesson or switch language.
-        A box you emptied starts again with the course's start when you open the lesson again."""
+        A box you emptied, or never changed, starts again with the course's start when you open the lesson again."""
         ex = self.exercise(name)
-        saved = progress.saved_text(self.id, name)
-        return mo.ui.code_editor(value=saved if saved and saved.strip() else ex.start, language="python",
+        kept = progress.lesson(self.id).get("exercises", {}).get(name, {})
+        saved = kept.get("text")
+        # a box last checked at its start ("empty") opens with the course's start: also with a newer one, after an update
+        typed = saved if saved and saved.strip() and kept.get("state") != "empty" else None
+        return mo.ui.code_editor(value=typed or ex.start, language="python",
                                  min_height=24 * lines + 16, debounce=600, show_copy_button=False)
 
     def sort(self, name: str, question: str = ""):
@@ -450,6 +453,8 @@ class Lesson:
         except Exception:  # a mistake in the check itself, never the learner's fault
             result = checking.Result("broken", {"en": "", "nl": ""})
         text = value if isinstance(ex, checking.CodeBox) and isinstance(value, str) else None
+        if text is not None and text.strip() == ex.start.strip():
+            text = ""   # the start as the course gives it is not kept: the box opens with the course's start, also a newer one
         if result.state != "broken":
             progress.record_exercise(self.id, name, result.state, self.required, text=text)
             if isinstance(ex, (checking.Value, checking.Sort)) and value is not checking.MISSING and _plain_data(value):

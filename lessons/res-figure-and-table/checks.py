@@ -43,8 +43,8 @@ _DOTS = Mistake("dots-left", matches=lambda got, text: re.search(r"^[^#\n]*\.\.\
 
 # --- exercise 2: fair-best ----------------------------------------------------------------------------------------------
 
-_ROWS = ('rows = [("Ours", "full", 84.1), ("Model X", "full", 82.7), ("Model Y", "easy half", 89.5), '
-         '("Model Z", "full", 83.9)]\n')
+_ROWS = ('rows = [("Ours", "full", 84.1), ("Model X", "full", 82.7),\n'
+         '        ("Model Y", "easy half", 89.5), ("Model Z", "full", 83.9)]\n')
 _F_HEAD = _ROWS + "best_name = None\nbest_score = 0\nfor name, test_set, score in rows:\n"
 _F_START = _F_HEAD + "    ...\nbest_name\n"
 

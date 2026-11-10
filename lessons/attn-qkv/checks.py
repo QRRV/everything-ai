@@ -83,7 +83,8 @@ def _matmul_error(e) -> bool:
 # --- exercise 2: qkv_attention --------------------------------------------------------------------------------------------
 
 _N_HEAD = ("import numpy as np\n\n\ndef qkv_attention(X, Wq, Wk, Wv):\n"
-           "    X, Wq, Wk, Wv = np.array(X, dtype=float), np.array(Wq, dtype=float), np.array(Wk, dtype=float), np.array(Wv, dtype=float)\n")
+           "    X, Wq = np.array(X, dtype=float), np.array(Wq, dtype=float)\n"
+           "    Wk, Wv = np.array(Wk, dtype=float), np.array(Wv, dtype=float)\n")
 _N_SOFTMAX = ("    # 3. the attention weights: the softmax of every row\n    S = S - S.max(axis=1, keepdims=True)\n"
               "    A = np.exp(S) / np.sum(np.exp(S), axis=1, keepdims=True)\n")
 _N_START = (_N_HEAD + "    # 1. the queries, keys and values of all words\n    Q = ...\n    K = ...\n    V = ...\n"
@@ -106,7 +107,7 @@ _M_INIT = ("        self.query = nn.Linear(d, d_k, bias=False)\n        self.key
            "        self.value = nn.Linear(d, d_k, bias=False)\n")
 _M_FORWARD = ("        q = self.query(x)\n        k = self.key(x)\n        v = self.value(x)\n"
               "        A = torch.softmax(q @ k.T, dim=1)\n        return A @ v\n")
-_M_START = (_M_HEAD + "        # three learned matrices from d to d_k numbers, without bias terms: query, key and value, in that order\n"
+_M_START = (_M_HEAD + "        # three learned matrices from d to d_k numbers, without bias terms:\n        # query, key and value, in that order\n"
             "        ...\n\n    def forward(self, x):\n"
             "        # x holds one embedding per row: queries, keys and values, then the weights, then the new vectors\n        ...\n")
 

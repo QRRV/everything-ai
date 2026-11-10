@@ -33,7 +33,7 @@ _E_HEAD = ("import torch\nimport torch.nn.functional as F\n\n\ndef train_epoch(m
            "        k = k + 1\n")
 _E_TAIL = "    return total / len(loader)\n"
 _E_START = (_E_HEAD + "        # backward with loss / accum; after every accum mini-batches, and after the last one:\n"
-            "        # clip when max_norm is not None, step, zero the gradients, and step the schedule when sched is not None\n"
+            "        # clip when max_norm is not None, step, zero the gradients,\n        # and step the schedule when sched is not None\n"
             "        ...\n" + _E_TAIL)
 _BACKWARD = "        (loss / accum).backward()\n"
 _WHEN = "k % accum == 0 or k == len(loader)"

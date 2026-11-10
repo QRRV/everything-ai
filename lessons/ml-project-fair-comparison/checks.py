@@ -244,7 +244,8 @@ EXERCISES = {
 
 # --- exercise 2: choose k, then test once -------------------------------------------------------------------------------
 
-def _k(score: str = "cross_val_score(make_pipeline(StandardScaler(), KNeighborsClassifier(n_neighbors=k)), X, y, cv=cv).mean()",
+def _k(score: str = "cross_val_score(make_pipeline(StandardScaler(), KNeighborsClassifier(n_neighbors=k)),\n"
+                     "                            X, y, cv=cv).mean()",
        pipe: str = "make_pipeline(StandardScaler(), KNeighborsClassifier(n_neighbors=best))",
        accuracy: str = "np.mean(pipe.predict(X_test) == y_test)") -> str:
     return (_HEAD + "best = 1\ntop = 0\nfor k in [1, 3, 5, 7, 9, 11, 15, 21, 31]:\n"

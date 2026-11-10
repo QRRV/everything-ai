@@ -98,7 +98,7 @@ class Panel:
 
     def text(self, x, y, words: str, role: str = "ink", anchor: str = "middle"):
         """Words centred on (x, y), such as the name of a vector next to its head; with anchor "start", they begin
-        at x, as in a key."""
+        at x, as in a key, and at least 6 px clear of the y-axis, such as the name above a row of bars or dots."""
         self.marks.append(("text", x, y, words, role, anchor))
         return self
 
@@ -223,7 +223,8 @@ def _panel(p: Panel, index: int, left: float, width: float, height: float) -> st
                             f'<polygon points="{corners}" style="fill:{_colour(role)}"/>')
         elif kind == "text":
             _, a, b, words, role, anchor = mark
-            body.append(f'<text x="{X(a):.1f}" y="{Y(b) + 5:.1f}" style="font-size:14px;font-weight:600;fill:{_colour(role)};text-anchor:{anchor}">{html.escape(words)}</text>')
+            at = max(X(a), L + 6) if anchor == "start" else X(a)
+            body.append(f'<text x="{at:.1f}" y="{Y(b) + 5:.1f}" style="font-size:14px;font-weight:600;fill:{_colour(role)};text-anchor:{anchor}">{html.escape(words)}</text>')
         elif kind == "points":
             _, xs, ys, role, r, hollow = mark
             look = (f"fill:var(--ea-page);stroke:{_colour(role)};stroke-width:1.8" if hollow

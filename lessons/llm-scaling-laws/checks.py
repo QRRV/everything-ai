@@ -44,7 +44,7 @@ def floor_picture(labels: dict) -> str:
 # --- exercise 1: fit_power_law -------------------------------------------------------------------------------------------------
 
 _HEAD = ("import numpy as np\n\n\ndef fit_power_law(x, loss, floor):\n"
-         "    # x: the sizes, such as parameters or tokens; loss: the loss at each size; floor: the loss no model gets below\n")
+         "    # x: the sizes, such as parameters or tokens; loss: the loss at each size;\n    # floor: the loss no model gets below\n")
 _LOGS = "    log_x = np.log10(x)\n    log_rest = np.log10(loss - floor)\n"
 _FIT = "    k, b = np.polyfit(log_x, log_rest, 1)\n"
 _A = "    a = 10 ** b\n"

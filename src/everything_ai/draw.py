@@ -1105,7 +1105,7 @@ def dict_boxes(pairs: list[tuple[str, str]], *, key_label: str, value_label: str
         if marked and mark_label:
             parts.append(f'<text x="{VX + VW + 16}" y="{cy + 5}" style="{mono};font-size:13.5px;fill:var(--ea-ink)">{html.escape(mark_label)}</text>')
     H = TOP + len(pairs) * (BH + GAP)
-    return _svg(W, H, title or ", ".join(f"{k}: {v}" for k, v in pairs), "".join(parts))
+    return _svg(W, H, title or ", ".join(f"{k}: {v}" for k, v in pairs), "".join(parts), natural=True)
 
 
 def value_rows(rows: list[tuple[str, list[str], str, bool]], *, title: str = "") -> mo.Html:

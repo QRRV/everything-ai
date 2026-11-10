@@ -100,7 +100,8 @@ _LOOP = ("        a, b = i * d_head, (i + 1) * d_head\n"
 # --- exercise 2: multi_head -----------------------------------------------------------------------------------------------
 
 _H_HEAD = (_HELPER + "def multi_head(Q, K, V, h):\n"
-           "    Q, K, V = torch.tensor(Q, dtype=torch.float32), torch.tensor(K, dtype=torch.float32), torch.tensor(V, dtype=torch.float32)\n"
+           "    Q = torch.tensor(Q, dtype=torch.float32)\n    K = torch.tensor(K, dtype=torch.float32)\n"
+           "    V = torch.tensor(V, dtype=torch.float32)\n"
            "    d_head = int(Q.shape[1] / h)\n    outputs = []\n    for i in range(h):\n")
 _H_START = (_H_HEAD + "        # head i: its own columns of Q, K and V, through causal attention\n        ...\n"
             "    # the outputs of all heads side by side\n    return ...\n")

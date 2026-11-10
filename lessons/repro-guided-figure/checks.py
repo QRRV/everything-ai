@@ -151,15 +151,16 @@ _L_EVERY = _L_HEAD + "    steps = list(range(per_factor, budget + 1, per_factor)
 _R_IMPORTS = ("import torch\nimport torch.nn.functional as F\n\nfrom llm.modern_gpt import ModernGPT\nfrom repro.data import dataset\n"
               "from repro.log import log_steps\n\n\n"
               "def tokens(rows, p):\n"
-              "    # the equations as the model reads them: a, the operation (token p), b and = (token p + 1); and the answers c\n"
+              "    # the equations as the model reads them: a, the operation (token p), b and = (token p + 1);\n    # and the answers c\n"
               "    x = torch.tensor([[a, p, b, p + 1] for a, b, _ in rows])\n    y = torch.tensor([c for _, _, c in rows])\n"
               "    return x, y\n\n\n"
               "def accuracy(model, x, y):\n"
-              "    # the share of the equations whose guess at the last place, the token with the highest logit, is the answer\n")
+              "    # the share of the equations whose guess at the last place, the token with the highest logit,\n    # is the answer\n")
 _R_ACC = ("    with torch.no_grad():\n        guess = model(x)[:, -1].argmax(-1)\n    return (guess == y).float().mean().item()\n")
 _R_RUN = ("\n\ndef run_seed(settings, seed, steps, device=\"cpu\", progress=None):\n"
-          "    # one run with this seed, which fixes the split, the starting weights and the batches; it logs the accuracy\n"
-          "    # on all training and all validation equations after each step of log_steps(steps, 20)\n"
+          "    # one run with this seed, which fixes the split, the starting weights and the batches;\n"
+          "    # it logs the accuracy on all training and all validation equations after each step of\n"
+          "    # log_steps(steps, 20)\n"
           "    s = settings\n    train, val = dataset(s[\"p\"], s[\"fraction\"], seed)\n"
           "    xt, yt = tokens(train, s[\"p\"])\n    xv, yv = tokens(val, s[\"p\"])\n"
           "    xt, yt, xv, yv = xt.to(device), yt.to(device), xv.to(device), yv.to(device)\n"
@@ -267,7 +268,8 @@ _M_EN, _M_NL = "Your `run_seeds` gives another experiment log than the course's"
 # --- exercise 4: the figure --------------------------------------------------------------------------------------------
 
 _F_HEAD = ("import json\n\nimport matplotlib.pyplot as plt\n\n"
-           "runs = [json.loads(line) for line in open(\"data/course-grokking.jsonl\")]   # the course's runs of seeds 0, 1 and 2\n\n"
+           "# the course's runs of seeds 0, 1 and 2\n"
+           "runs = [json.loads(line) for line in open(\"data/course-grokking.jsonl\")]\n\n"
            "for log in runs:\n")
 _F_LINES = ("    plt.plot(log[\"step\"], log[\"train\"], \"-\")\n    plt.plot(log[\"step\"], log[\"val\"], \"--\")\n")
 _F_SCALE = "plt.xscale(\"log\")\n"

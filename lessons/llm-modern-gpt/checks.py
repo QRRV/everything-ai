@@ -277,7 +277,7 @@ def _missing(name: str, lesson: str, title_en: str, title_nl: str) -> Mistake:
 
 _A_START = (_A_HEAD + "class ModernAttention(nn.Module):\n    def __init__(self, d, h, kv_heads):\n        super().__init__()\n"
             "        self.h = h\n        self.kv_heads = kv_heads\n        self.d_head = int(d / h)\n"
-            "        # query, key, value and out, in that order: queries for h heads, keys and values for only kv_heads heads\n"
+            "        # query, key, value and out, in that order:\n        # queries for h heads, keys and values for only kv_heads heads\n"
             "        ...\n\n    def turn(self, x, n_heads, start):\n"
             "        # rope on the d_head numbers of every head on its own, from place start; the heads side by side again\n"
             "        ...\n\n    def forward(self, x, cache=None):\n"

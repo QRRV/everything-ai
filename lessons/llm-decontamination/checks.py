@@ -217,7 +217,7 @@ _F_BODY = ("def flag(test_grams, train_grams, share):\n    flags = []\n    for g
            "            found = len(grams & train_grams)\n            flags.append(found / len(grams) > share)\n"
            "    return flags\n")
 _F_START = ("def flag(test_grams, train_grams, share):\n    flags = []\n    for grams in test_grams:\n"
-            "        # True when more than `share` of the question's n-grams are in the training data; False without n-grams\n"
+            "        # True when more than `share` of the question's n-grams are in the training data;\n        # False without n-grams\n"
             "        ...\n    return flags\n")
 
 # --- exercise 3: report ------------------------------------------------------------------------------------------------

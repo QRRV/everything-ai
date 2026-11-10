@@ -644,7 +644,7 @@ def _v(count: str = _V_COUNT, pick: str = _V_PICK) -> str:
 
 _V_CODE = _v()
 _V_START = (_V_HEAD + "    # how often each answer comes, without None\n    counts = {}\n    ...\n"
-            "    # the answer that comes most often; of answers that come as often, the first in the list; None if there is none\n"
+            "    # the answer that comes most often; of answers that come as often, the first in the list;\n    # None if there is none\n"
             "    ...\n")
 _V_WRONG = {
     "counts-none": _v(count=_V_COUNT.replace("        if answer is not None:\n            if answer in counts:\n"

@@ -117,7 +117,8 @@ _A_HEAD = ("import json\n\nfrom repro.grid import grid\nfrom repro.run import ru
            "    keys = list(changes)\n"
            "    with open(path, \"a\") as f:   # \"a\" makes the log when there is none yet, and keeps what is in it\n"
            "        f.write(\"\")\n"
-           "    done = [[json.loads(line)[key] for key in keys] for line in open(path)]   # the values of each run in the log\n"
+           "    # the values of each run in the log\n"
+           "    done = [[json.loads(line)[key] for key in keys] for line in open(path)]\n"
            "    for one in grid(settings, changes):\n")
 _A_VALUES = "        values = [one[key] for key in keys]\n"
 _A_IF = "        if values not in done:\n"

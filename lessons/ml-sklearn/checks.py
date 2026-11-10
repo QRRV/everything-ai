@@ -18,7 +18,8 @@ _DOTS = Mistake("dots-left", matches=lambda got, text: re.search(r"^[^#\n]*\.\.\
                 en="There is still a `...` in your code. Replace it with your own code.",
                 nl="Er staat nog een `...` in je code. Vervang die door je eigen code.")
 
-_DF = 'df = pd.DataFrame({"hours": [6, 10, 2, 8, 4, 7], "sleep": [8, 7, 9, 6, 7, 8], "grade": [6.6, 7.8, 4.8, 6.6, 5.4, 6.8]})\n'
+_DF = ('df = pd.DataFrame({"hours": [6, 10, 2, 8, 4, 7], "sleep": [8, 7, 9, 6, 7, 8],\n'
+       '                   "grade": [6.6, 7.8, 4.8, 6.6, 5.4, 6.8]})\n')
 _OTHER_DF = Code('pd.DataFrame({"hours": [6, 10, 2, 8, 4, 7], "sleep": [8, 7, 9, 6, 7, 8], "grade": [5.5, 8.0, 4.0, 7.5, 5.0, 6.5]})')
 _IMPORTS = "import pandas as pd\nfrom sklearn.linear_model import LinearRegression\n"
 

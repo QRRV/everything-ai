@@ -102,8 +102,9 @@ _KEEP = G._KEEP
 
 _R_HEAD = ("from repro.plan import THRESHOLD, first_step, verdict\n\n\n"
            "def result_rows(runs, budget):\n"
-           "    # one row of the results table for each run, in the order of the log: its seed, t, v and verdict; where\n"
-           "    # training or validation does not reach THRESHOLD, the text \"not within \" and the budget in place of the step\n"
+           "    # one row of the results table for each run, in the order of the log: its seed, t, v and verdict;\n"
+           "    # where training or validation does not reach THRESHOLD, the text \"not within \" and the budget\n"
+           "    # in place of the step\n"
            "    rows = []\n    for log in runs:\n")
 _R_T = "        t = first_step(log[\"step\"], log[\"train\"], THRESHOLD)\n"
 _R_V = "        v = first_step(log[\"step\"], log[\"val\"], THRESHOLD)\n"
@@ -144,9 +145,9 @@ def _same_rows(got, want) -> bool:
 
 _P_HEAD = ("SECTIONS = [\"Claim\", \"Setup\", \"Results\", \"Differences\", \"Not checked\"]\n\n\n"
            "def report(title, parts):\n"
-           "    # the report in Markdown: \"# \" and the title; then for each name in SECTIONS, in that order, \"## \" and the\n"
-           "    # name, and its text from parts, or \"*Not written yet.*\" when parts has no text for it; an empty line between\n"
-           "    # each of them\n"
+           "    # the report in Markdown: \"# \" and the title; then for each name in SECTIONS, in that order,\n"
+           "    # \"## \" and the name, and its text from parts, or \"*Not written yet.*\" when parts has no text\n"
+           "    # for it; an empty line between each of them\n"
            "    lines = [\"# \" + title]\n")
 _P_LOOP = ("    for name in SECTIONS:\n        lines.append(\"## \" + name)\n"
            "        if name in parts and parts[name] != \"\":\n            lines.append(parts[name])\n"

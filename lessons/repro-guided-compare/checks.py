@@ -117,8 +117,9 @@ _C_HEAD = ("import math\n\nimport numpy as np\n\nfrom repro.plan import THRESHOL
            "    means = [np.mean(rng.choice(diffs, size=len(diffs))) for _ in range(n_boot)]\n"
            "    low, high = np.quantile(means, [0.025, 0.975])\n    return [float(np.mean(diffs)), float(low), float(high)]\n\n\n"
            "def compare(runs_a, runs_b, n_boot, seed):\n"
-           "    # pairs each run of runs_a with the run of runs_b with the same seed; for each pair, log10 of the step at which\n"
-           "    # validation reaches THRESHOLD in a, and in b; a pair where either does not reach it is left out, and counted\n"
+           "    # pairs each run of runs_a with the run of runs_b with the same seed; for each pair, log10 of the step\n"
+           "    # at which validation reaches THRESHOLD in a, and in b; a pair where either does not reach it\n"
+           "    # is left out, and counted\n"
            "    by_seed = {log[\"seed\"]: log for log in runs_b}\n    a, b, left_out = [], [], 0\n    for log in runs_a:\n")
 _C_BODY = ("        if log[\"seed\"] in by_seed:\n            other = by_seed[log[\"seed\"]]\n"
            "            va = first_step(log[\"step\"], log[\"val\"], THRESHOLD)\n"

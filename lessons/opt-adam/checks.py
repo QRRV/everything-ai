@@ -139,7 +139,7 @@ def _s(m: str = "beta1 * m + (1 - beta1) * g", s: str = "beta2 * s + (1 - beta2)
 
 _A_HEAD = "import torch\n\n\nclass AdamOptimizer:\n"
 _A_START = (_A_HEAD + "    def __init__(self, params, lr, beta1, beta2):\n"
-            "        # keep the parameters and the numbers, a step counter t = 0, and one m and one s of zeros for each parameter\n        ...\n\n"
+            "        # keep the parameters and the numbers, a step counter t = 0,\n        # and one m and one s of zeros for each parameter\n        ...\n\n"
             "    def zero_grad(self):\n        for p in self.params:\n            p.grad = None\n\n"
             "    def step(self):\n        # t one up; for each parameter: m, s, both corrected, and the parameter minus the step\n        ...\n")
 

@@ -43,7 +43,7 @@ body, #root, #App { background: var(--ea-page) !important; color: var(--ea-ink);
 /* a long path in a sentence breaks at the edge of a phone instead of running off it; break-word, not anywhere,
    so a table does not squeeze its code columns (the table scrolls on its own instead) */
 .markdown code { overflow-wrap: break-word; }
-.markdown pre code { padding: 0; }   /* a fenced block starts at its edge, not at the padding of inline code */
+.markdown pre code { padding: 0; background: none; }   /* a fenced block is one box: no padding and no band per line from inline code */
 .markdown .katex { font-size: 1.06em; }
 /* display formulas sit centred in the text column, not in the full cell */
 /* a formula wider than a phone scrolls on its own instead of being cut off */

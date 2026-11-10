@@ -55,8 +55,8 @@ _DOTS = Mistake("dots-left", matches=lambda got, text: re.search(r"^[^#\n]*\.\.\
                 en="There is still a `...` in your code. Replace it with your own code.",
                 nl="Er staat nog een `...` in je code. Vervang die door je eigen code.")
 
-_A_HEAD = ("import numpy as np\n\nprobs = np.array([[0.7, 0.2, 0.1], [0.1, 0.3, 0.6], [0.2, 0.5, 0.3], [0.45, 0.35, 0.2], "
-           "[0.3, 0.3, 0.4], [0.1, 0.8, 0.1]])\nlabels = np.array([0, 2, 1, 1, 0, 1])\n")
+_A_HEAD = ("import numpy as np\n\nprobs = np.array([[0.7, 0.2, 0.1], [0.1, 0.3, 0.6], [0.2, 0.5, 0.3],\n"
+           "                  [0.45, 0.35, 0.2], [0.3, 0.3, 0.4], [0.1, 0.8, 0.1]])\nlabels = np.array([0, 2, 1, 1, 0, 1])\n")
 _A_START = _A_HEAD + "accuracy = ...\naccuracy\n"
 _A_LINE = "accuracy = np.mean(probs.argmax(axis=1) == labels)"
 _A = _A_HEAD + _A_LINE + "\naccuracy"

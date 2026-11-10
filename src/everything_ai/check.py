@@ -528,8 +528,9 @@ class CodeBox(Exercise):
             return Result("empty", self.message("cleared" if cleared else "empty"))
         names = dict(self.names if inputs is None else inputs)
         typed = {_same_code(line) for line in text.splitlines()}
-        for line in self.keep:
-            if _same_code(line) not in typed:
+        for line in self.keep:   # a kept value over several lines may also be typed on one, and back
+            if _same_code(line) not in (typed if "\n" not in line.strip() else _same_code(text)):
+                line = " ".join(line.split()) if "\n" in line.strip() else line   # shown in a message on one line
                 return Result("wrong", self.message("keep", line=line) if "keep" in self.texts else {
                     "en": f"Your code may be right, but the check needs the line `{line}` exactly as it was: put it back. The check tries other values by itself.",
                     "nl": f"Je code kan goed zijn, maar de check heeft de regel `{line}` nodig zoals hij was: zet hem terug. De check probeert zelf andere waarden."},
@@ -587,8 +588,7 @@ class CodeBox(Exercise):
         """Run the learner's code and the solution with other values; None if they agree."""
         def change(code):
             for name, value in values.items():
-                code = re.sub(rf"^([ \t]*){re.escape(name)}[ \t]*=(?!=).*$",
-                              lambda m: f"{m.group(1)}{name} = {value!r}", code, count=1, flags=re.MULTILINE)
+                code = _set_value(code, name, f"{value!r}")
             return code
         other_names = {**names, **{k: v for k, v in values.items() if k in names}}
         run = run_code(change(text), other_names)
@@ -1435,6 +1435,26 @@ def _copy(a):
     """The learner's code gets its own copy of the test data, so it cannot damage the check."""
     import copy
     return copy.deepcopy(a)
+
+
+def _set_value(code: str, name: str, value: str) -> str:
+    """`code` with its first line `name = ...` made `name = value`. A value written over more lines, such as a
+    dict that is too wide for one, is replaced in full."""
+    m = re.search(rf"^([ \t]*){re.escape(name)}[ \t]*=(?!=).*$", code, flags=re.MULTILINE)
+    if m is None:
+        return code
+    first = code.count("\n", 0, m.start())
+    last = first
+    try:
+        for node in ast.walk(ast.parse(code)):
+            if isinstance(node, ast.Assign) and node.lineno - 1 == first and node.col_offset == len(m.group(1)):
+                last = node.end_lineno - 1
+                break
+    except (SyntaxError, ValueError):   # code that does not parse: only the line itself
+        pass
+    lines = code.split("\n")
+    lines[first:last + 1] = [f"{m.group(1)}{name} = {value}"]
+    return "\n".join(lines)
 
 
 def _same_code(line: str) -> str:

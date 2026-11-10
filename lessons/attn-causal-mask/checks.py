@@ -111,7 +111,8 @@ def _f(body: str = "torch.tril(torch.ones(n, n)) == 0") -> str:
 # --- exercise 3: causal_attention -----------------------------------------------------------------------------------------
 
 _A_HEAD = ("import math\nimport torch\n\n\ndef causal_attention(Q, K, V):\n"
-           "    Q, K, V = torch.tensor(Q, dtype=torch.float32), torch.tensor(K, dtype=torch.float32), torch.tensor(V, dtype=torch.float32)\n"
+           "    Q = torch.tensor(Q, dtype=torch.float32)\n    K = torch.tensor(K, dtype=torch.float32)\n"
+           "    V = torch.tensor(V, dtype=torch.float32)\n"
            "    n, d_k = Q.shape\n    S = Q @ K.T / math.sqrt(d_k)\n")
 _A_START = (_A_HEAD + "    # the scores of the future set to minus infinity\n    S = ...\n"
             "    # the weights and the new vectors\n    A = torch.softmax(S, dim=1)\n    return A @ V\n")

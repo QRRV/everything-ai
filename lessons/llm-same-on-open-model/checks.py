@@ -409,7 +409,7 @@ _R_BODY = ("    new = []\n    for part in name.split(\".\")[1:]:\n        if par
            "        else:\n            new.append(part)\n    return \".\".join(new)\n")
 _R_CODE = _R_HEAD + _R_GIVEN + _R_REST + _R_DEF + _R_BODY
 _R_START = (_R_HEAD + _R_GIVEN + "    # and the six other linear layers of attention and the MLP\n" + _R_DEF
-            + "    # every part after the first, model, by its name in the course's model: the same name when it is not in PARTS\n"
+            + "    # every part after the first, model, by its name in the course's model:\n    # the same name when it is not in PARTS\n"
               "    ...\n")
 _R_WRONG = {
     "model": _R_CODE.replace('name.split(".")[1:]', 'name.split(".")'),

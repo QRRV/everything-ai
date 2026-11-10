@@ -183,19 +183,20 @@ def _outline(box):
 
 
 def _draw_true(ax, box):
-    """A true box: a thin line in the data color, with an edge in the page color."""
+    """A true box: a thin line in the data color, with a soft edge in the page color. The scenes are small and the
+    same light grey in both themes: a full edge in the page color would frame every box in black in dark."""
     from everything_ai import plots
     xs, ys = _outline(box)
-    ax.plot(xs, ys, color=plots.PAGE, linestyle="-", linewidth=2.4, solid_joinstyle="miter")
+    ax.plot(xs, ys, color=plots.PAGE, alpha=0.5, linestyle="-", linewidth=2.2, solid_joinstyle="miter")
     ax.plot(xs, ys, color=plots.DATA, linestyle="-", linewidth=1.0, solid_joinstyle="miter")
 
 
 def _draw_found(ax, box, right):
     """A box of the detector: a true positive dashed in the color of a prediction, a false positive dotted in the
-    color of a mistake, so that the two differ by more than their color."""
+    color of a mistake, so that the two differ by more than their color. Its edge is soft, as that of a true box."""
     from everything_ai import plots
     xs, ys = _outline(box)
-    ax.plot(xs, ys, color=plots.PAGE, linestyle="-", linewidth=3.2, solid_joinstyle="miter")
+    ax.plot(xs, ys, color=plots.PAGE, alpha=0.5, linestyle="-", linewidth=2.8, solid_joinstyle="miter")
     if right:
         ax.plot(xs, ys, color=plots.PRED, linestyle=(0, (3.0, 1.6)), linewidth=1.5, solid_joinstyle="miter",
                 dash_capstyle="butt")

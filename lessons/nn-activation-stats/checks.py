@@ -148,7 +148,7 @@ def _d(body: str = "(Z <= 0).all(dim=0).float().mean().item()") -> str:
 # --- exercise 3: per layer, with forward hooks ---------------------------------------------------------------------------------
 
 _P_HEAD = "import torch\n\n\ndef dead_per_layer(model, layers, x):\n"
-_P_START = _P_HEAD + "    # for each layer in layers, in that order: the share of its neurons whose z is 0 or below for every example of x\n    ...\n"
+_P_START = _P_HEAD + "    # for each layer in layers, in that order:\n    # the share of its neurons whose z is 0 or below for every example of x\n    ...\n"
 
 
 def _p(keep: str = "zs[module] = output", remove: bool = True, share: str = "(zs[layer] <= 0).all(dim=0).float().mean().item()") -> str:

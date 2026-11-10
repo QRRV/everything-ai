@@ -86,7 +86,7 @@ _T_LOOP = ("    merges = {}\n    for step in range(n):\n        counts = pair_co
            "        most = 0\n        for pair in counts:\n            if counts[pair] > most:\n                best = pair\n                most = counts[pair]\n")
 _T_KEEP = "        new_id = 256 + step\n        merges[best] = new_id\n        ids = merge_ids(ids, best, new_id)\n"
 _T_START = (_T_HEAD + "    # the bytes of the text in UTF-8, as numbers: the first ids\n    ids = ...\n" + _T_LOOP
-            + "        # the next new id, 256 for the first rule; keep the rule in merges, under the pair best, and merge it everywhere\n"
+            + "        # the next new id, 256 for the first rule;\n        # keep the rule in merges, under the pair best, and merge it everywhere\n"
             "        ...\n    return merges\n")
 
 

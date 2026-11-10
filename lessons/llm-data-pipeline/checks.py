@@ -162,7 +162,7 @@ _W_TYPE = "    if vocab <= 2 ** 16:\n        dtype = np.uint16\n    else:\n     
 _W_LOOP = ("    paths = []\n    for start in range(0, len(ids), size):\n        path = f\"{folder}/shard_{len(paths)}.bin\"\n"
            "        np.array(ids[start:start + size], dtype=dtype).tofile(path)\n        paths.append(path)\n    return paths\n")
 _W_START = (_W_HEAD + "    # the smallest type that holds every id: 2 bytes for up to 2 ** 16 different ids, else 4\n    ...\n"
-            "    paths = []\n    # every `size` ids in a file of their own, shard_0.bin, shard_1.bin, ... in folder; the last may be shorter\n"
+            "    paths = []\n    # every `size` ids in a file of their own, shard_0.bin, shard_1.bin, ... in folder;\n    # the last may be shorter\n"
             "    ...\n    return paths\n")
 
 

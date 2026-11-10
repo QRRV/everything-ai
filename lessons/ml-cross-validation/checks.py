@@ -120,8 +120,10 @@ _DOTS = Mistake("dots-left", matches=lambda got, text: re.search(r"^[^#\n]*\.\.\
                 nl="Er staat nog een `...` in je code. Vervang die door je eigen code.")
 
 # The 18 temperatures of exercise 2 in ml-validation-set, its 12 to train and 6 to validate together.
-_F_HEAD = ("import numpy as np\n\nx = np.array([8.4, 23.9, 6.0, 22.7, 5.1, 20.1, 22.4, 4.2, 9.9, 0.5, 20.8, 23.6, 10.3, 4.9, 16.0, 2.2, 16.4, 21.8])\n"
-           "y = np.array([17.8, 15.2, 15.5, 15.5, 14.1, 19.4, 18.7, 15.5, 18.6, 8.8, 18.4, 17.3, 19.3, 16.2, 20.7, 12.4, 19.7, 16.3])\n"
+_F_HEAD = ("import numpy as np\n\nx = np.array([8.4, 23.9, 6.0, 22.7, 5.1, 20.1, 22.4, 4.2, 9.9,\n"
+           "              0.5, 20.8, 23.6, 10.3, 4.9, 16.0, 2.2, 16.4, 21.8])\n"
+           "y = np.array([17.8, 15.2, 15.5, 15.5, 14.1, 19.4, 18.7, 15.5, 18.6,\n"
+           "              8.8, 18.4, 17.3, 19.3, 16.2, 20.7, 12.4, 19.7, 16.3])\n"
            "order = np.random.default_rng(1).permutation(18)\ndegrees = [1, 2, 3, 4, 5, 6]\ncv_mses = []\nfor degree in degrees:\n"
            "    total = 0\n    for f in range(3):\n")
 _F_TAIL = ("        w = np.polyfit(x[train], y[train], degree)\n        total = total + np.sum((y[val] - np.polyval(w, x[val])) ** 2)\n"

@@ -168,7 +168,7 @@ class _T:
 # --- exercise 2: layer normalization by hand ----------------------------------------------------------------------------
 
 _L_HEAD = "import torch\n\n\ndef layer_norm(X, gamma, beta):\n"
-_L_START = _L_HEAD + "    # standardize each row of X over its own features (the columns), with eps = 0.00001; then times gamma, plus beta\n    ...\n"
+_L_START = _L_HEAD + "    # standardize each row of X over its own features (the columns), with eps = 0.00001;\n    # then times gamma, plus beta\n    ...\n"
 
 
 def _l(mean: str = "X.mean(dim=1, keepdim=True)", var: str = "((X - mean) ** 2).mean(dim=1, keepdim=True)",

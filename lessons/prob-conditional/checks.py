@@ -63,10 +63,11 @@ _EVERYWHERE = _g("    with_b = 0\n    both = 0\n    for outcome, condition in ca
 
 _MAILS_CASE = [("spam", "free"), ("normal", "free"), ("spam", "free"), ("spam", "free"), ("normal", "plain"), ("spam", "plain"), ("spam", "plain")]
 
-_T_HEAD = 'counts = {("ill", "positive"): 9, ("ill", "negative"): 1, ("healthy", "positive"): 99, ("healthy", "negative"): 891}\n'
+_T_HEAD = ('counts = {("ill", "positive"): 9, ("ill", "negative"): 1,\n'
+           '          ("healthy", "positive"): 99, ("healthy", "negative"): 891}\n')
 _T_START = _T_HEAD + "p_ill_given_pos = ...\np_pos_given_ill = ...\n[p_ill_given_pos, p_pos_given_ill]\n"
-_ILL_POS = 'counts[("ill", "positive")] / (counts[("ill", "positive")] + counts[("healthy", "positive")])'
-_POS_ILL = 'counts[("ill", "positive")] / (counts[("ill", "positive")] + counts[("ill", "negative")])'
+_ILL_POS = 'counts[("ill", "positive")] / (\n    counts[("ill", "positive")] + counts[("healthy", "positive")])'
+_POS_ILL = 'counts[("ill", "positive")] / (\n    counts[("ill", "positive")] + counts[("ill", "negative")])'
 _T = _T_HEAD + f"p_ill_given_pos = {_ILL_POS}\np_pos_given_ill = {_POS_ILL}\n[p_ill_given_pos, p_pos_given_ill]"
 
 

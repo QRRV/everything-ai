@@ -97,7 +97,7 @@ _E_HEAD = ("import re\nfrom llm.byte_bpe import merge_ids\nfrom llm.pre_bpe impo
            "            piece_ids = merge_ids(piece_ids, pair, merges[pair])\n        ids = ids + piece_ids\n    return ids\n\n\n"
            "def encode(text, merges):\n")
 _E_START = (_E_HEAD + "    # the first free id, for end-of-text\n    end_id = ...\n    ids = []\n"
-            "    # the parts between the end-of-text tokens: the id of end-of-text between two parts, and the ids of every part\n"
+            "    # the parts between the end-of-text tokens:\n    # the id of end-of-text between two parts, and the ids of every part\n"
             "    ...\n    return ids\n")
 _E_ID = "    end_id = 256 + len(merges)\n    ids = []\n"
 _E_BODY = ("    parts = text.split(END)\n    for k in range(len(parts)):\n        if k > 0:\n            ids.append(end_id)\n"

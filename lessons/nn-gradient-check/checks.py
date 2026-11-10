@@ -133,7 +133,7 @@ _PRODUCT = _Fn("lambda w: w[0] * w[1] * w[2]")
 # --- exercise 3: the relative error -----------------------------------------------------------------------------------------
 
 _R_HEAD = "import numpy as np\n\n\ndef relative_error(a, n):\n"
-_R_START = _R_HEAD + "    # for each parameter: how far the gradient a from backprop lies from the estimate n, relative to their size\n    ...\n"
+_R_START = _R_HEAD + "    # for each parameter: how far the gradient a from backprop lies from the estimate n,\n    # relative to their size\n    ...\n"
 
 
 def _r(body: str = "np.abs(a - n) / np.maximum(np.abs(a), np.abs(n))") -> str:

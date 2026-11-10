@@ -125,13 +125,13 @@ _D_HEAD = "import random\n\n\n"
 _D_EQ = ("def equations(p):\n    # every equation a + b = c modulo p, as (a, b, c), for every a and every b from 0 to p - 1\n"
          "    rows = []\n    for a in range(p):\n        for b in range(p):\n            rows.append((a, b, (a + b) % p))\n    return rows\n\n\n")
 _D_SPLIT = ("def dataset(p, fraction, seed):\n"
-            "    # all equations in an order fixed by the seed: the first int(fraction * their number) for training, the rest for validation\n"
+            "    # all equations in an order fixed by the seed:\n    # the first int(fraction * their number) for training, the rest for validation\n"
             "    rows = equations(p)\n    random.seed(seed)\n    random.shuffle(rows)\n    n = int(fraction * len(rows))\n"
             "    return rows[:n], rows[n:]\n")
 _D = _D_HEAD + _D_EQ + _D_SPLIT
 _D_START = (_D_HEAD + "def equations(p):\n    # every equation a + b = c modulo p, as (a, b, c), for every a and every b from 0 to p - 1\n    ...\n\n\n"
             "def dataset(p, fraction, seed):\n"
-            "    # all equations in an order fixed by the seed: the first int(fraction * their number) for training, the rest for validation\n"
+            "    # all equations in an order fixed by the seed:\n    # the first int(fraction * their number) for training, the rest for validation\n"
             "    rows = equations(p)\n    random.seed(seed)\n    ...\n")
 # The table in The idea opens at 50%, not at the fraction exercise 2 asks for, with an open cell pointed at whose
 # mirror cell b + a is open too: 50 + 10 = 60, with 48 of the 97 cells of its answer filled.
@@ -171,12 +171,12 @@ def _same_split(got, want) -> bool:
 # --- exercise 3: SETTINGS ----------------------------------------------------------------------------------------------
 
 _S_KEYS = ["p", "layers", "width", "heads", "lr", "weight_decay", "betas", "warmup", "batch", "steps", "fraction"]
-_S = ("# The settings of the reproduction: the paper's, each from where its comment says, and the fraction of exercise 2.\n"
+_S = ("# The settings of the reproduction: the paper's, each from where its comment says,\n# and the fraction of exercise 2.\n"
       "SETTINGS = {\n"
       "    \"p\": 97,                # A.1.1\n    \"layers\": 2,            # A.1.2\n    \"width\": 128,\n    \"heads\": 4,\n"
       "    \"lr\": 1e-3,\n    \"weight_decay\": 1.0,\n    \"betas\": (0.9, 0.98),\n    \"warmup\": 10,\n    \"batch\": 512,\n"
       "    \"steps\": 100_000,\n    \"fraction\": " + repr(FRACTION) + ",     # exercise 2\n}\nSETTINGS\n")
-_S_START = ("# The settings of the reproduction: the paper's, each from where its comment says, and the fraction of exercise 2.\n"
+_S_START = ("# The settings of the reproduction: the paper's, each from where its comment says,\n# and the fraction of exercise 2.\n"
             "SETTINGS = {\n"
             "    \"p\": 97,                # A.1.1\n    \"layers\": ...,          # A.1.2\n    \"width\": ...,\n    \"heads\": ...,\n"
             "    \"lr\": ...,\n    \"weight_decay\": ...,\n    \"betas\": ...,\n    \"warmup\": ...,\n    \"batch\": ...,\n"
