@@ -167,7 +167,7 @@ def text_worked_example():
 def text_exercise_overclaims():
     mo.vstack([
         mo.md(r"""
-        ## Jouw beurt
+        ## Zelf doen
 
         ### Oefening 1. Vind de overclaims
 

@@ -450,17 +450,22 @@ lessons:
   reference_data: []
   needs: any
 
-# A standard DenseNet-BC-100 is about 7 times ResNet-20: the lesson trains 3 dense blocks of 4 layers, on a subset.
+# A standard DenseNet-BC-100 is about 7 times ResNet-20, too slow for a demo on a CPU: the demo of cv-densenet puts one
+# dense block with its transition in the middle of the network of cv-1x1-convolution, on 6,000 photos of CIFAR-10, and
+# compares growth rates at the same number of channels with a chain of the same depth and weights.
 - id: cv-densenet
   title: "DenseNet: every layer sees all the layers before it"
   level: gevorderd
   module: cnn-families
-  idea: "In a dense block every layer gets the feature maps of all layers before it, stacked along the channels, and adds only a few channels of its own, the growth rate; DenseNet uses features again instead of learning them again."
+  idea: "In a dense block every layer gets the feature maps of all layers before it, stacked along the channels, and adds only a few channels of its own, the growth rate; between blocks, a transition layer mixes the channels with a 1×1 convolution, in DenseNet-BC into half as many, and halves the maps with pooling. DenseNet uses features again instead of learning them again."
   covers: [d11-cnn-architecturen#1]
-  requires: [cv-inception]
-  introduces: [c:dense-block, c:densenet, c:growth-rate]
+  requires: [cv-inception, cnn-resnet]
+  introduces: [c:dense-block, c:densenet, c:growth-rate, c:transition-layer]
+  uses: [c:inception, c:residual-block, c:resnet, c:residual-connection, c:pointwise-convolution, c:bottleneck, c:convolution, c:filter, c:channel, c:output-channel, c:feature-map, c:kernel-size, c:stride, c:padding, c:pooling, c:batchnorm, c:layer, c:relu, c:model-parameter, c:weight, c:bias-term, c:shape, c:tensor, c:gradient, c:vanishing-gradient, c:mini-batch, c:epoch, c:learning-rate, c:warmup, c:seed, c:overfitting, c:train-set, c:test-set, c:validation-set, c:accuracy, c:loss, c:cifar-10, c:per-channel-normalization, c:hyperparameter, v:loss-curve, v:train-val-curves, py:nn-conv2d, py:nn-module, py:nn-modulelist, py:nn-linear, py:numel, py:no-grad, py:with, py:torch-cat, py:dim, c:axis, py:keyword-argument, py:torch-relu, py:slicing, py:indexing, py:comprehension, py:class, py:self, py:init-method, py:forward-method, py:super, py:manual-seed, py:for, py:range, py:append, py:list, py:return, py:print, py:comment, py:import, q:predict, q:choice, q:exercise-with-check, q:run-cell, q:slider-task]
+  mentions: [c:imagenet, c:data-augmentation]
   ladder: [torch]
-  data: [fashion-mnist, cifar-10-download-only]
+  data: [cifar-10-download-only]
+  reference_data: []
   needs: any
 
 - id: cv-mobilenet

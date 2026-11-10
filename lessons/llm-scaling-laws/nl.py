@@ -189,7 +189,7 @@ def text_after_example():
 def text_exercise_fit():
     mo.vstack([
         mo.md(r"""
-        ## Jouw beurt
+        ## Zelf doen
 
         ### Oefening 1. Fit een wet met een bodem
 

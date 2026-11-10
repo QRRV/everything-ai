@@ -207,7 +207,7 @@ def text_after_example():
 @app.cell(hide_code=True)
 def text_exercise_claim():
     mo.md(r"""
-    ## Jouw beurt
+    ## Zelf doen
 
     ### Oefening 1. De claim om te toetsen
     """)

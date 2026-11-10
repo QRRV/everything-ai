@@ -184,7 +184,7 @@ def text_after_example():
 def text_exercise_range():
     mo.vstack([
         mo.md(r"""
-        ## Jouw beurt
+        ## Zelf doen
 
         ### Oefening 1. De learning rates van een range test
 

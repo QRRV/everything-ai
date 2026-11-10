@@ -212,7 +212,7 @@ def text_after_example():
 def text_exercise_quantize():
     mo.vstack([
         mo.md(r"""
-        ## Jouw beurt
+        ## Zelf doen
 
         ### Oefening 1. Een matrix in minder bits
 

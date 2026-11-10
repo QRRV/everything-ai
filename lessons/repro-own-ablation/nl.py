@@ -218,7 +218,7 @@ def text_after_example():
 def text_exercise_ablation():
     mo.vstack([
         mo.md(r"""
-        ## Jouw beurt
+        ## Zelf doen
 
         ### Oefening 1. Je ablation
 

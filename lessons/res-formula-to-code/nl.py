@@ -204,7 +204,7 @@ def text_after_example():
 def text_exercise_smoothed():
     mo.vstack([
         mo.md(r"""
-        ## Jouw beurt
+        ## Zelf doen
 
         ### Oefening 1. Label smoothing uit de formule
 

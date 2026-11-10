@@ -196,7 +196,7 @@ def text_worked_example():
 def text_exercise_kinds():
     mo.vstack([
         mo.md(r"""
-        ## Jouw beurt
+        ## Zelf doen
 
         ### Oefening 1. Wat voor vraag?
 

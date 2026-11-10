@@ -178,7 +178,7 @@ def text_after_example():
 @app.cell(hide_code=True)
 def text_exercise_sort():
     mo.md(r"""
-    ## Jouw beurt
+    ## Zelf doen
 
     ### Oefening 1. Een goede eerste reproductie?
 

@@ -183,7 +183,7 @@ def text_after_example():
 def text_exercise_gqa():
     mo.vstack([
         mo.md(r"""
-        ## Jouw beurt
+        ## Zelf doen
 
         ### Oefening 1. Grouped-query attention
 

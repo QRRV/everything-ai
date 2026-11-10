@@ -1,0 +1,31 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: cv-densenet
+minutes: 35
+title:
+  en: "DenseNet: every layer sees all the layers before it"
+  nl: "DenseNet: elke layer ziet alle layers ervoor"
+goal:
+  en: "count the channels each layer of a dense block gets and gives, build a dense block that puts the maps of every layer after the maps before it with torch.cat, and test in a CNN on CIFAR-10 what its connections do."
+  nl: "tellen hoeveel channels elke layer van een dense block krijgt en geeft, een dense block bouwen dat de maps van elke layer met torch.cat achter de maps ervoor zet, en in een CNN op CIFAR-10 testen wat zijn verbindingen doen."
+summary:
+  - en: "In a dense block (Huang and others, 2016), every layer gets the maps of the block's input and of all the layers before it, put after each other along the channels with `torch.cat([x, y], dim=1)`, and adds k maps of its own, the growth rate. With k₀ channels in, layer l gets k₀ + k(l − 1) of them, and after L layers the block gives back k₀ + kL, with L(L + 1) / 2 connections. With 64 channels, growth 12 and 4 layers: 64, 76, 88 and 100 channels in, 112 out."
+    nl: "In een dense block (Huang en anderen, 2016) krijgt elke layer de maps van de input van het block en van alle layers ervoor, na elkaar gezet langs de channels met `torch.cat([x, y], dim=1)`, en voegt hij er k eigen maps aan toe, de growth rate. Met k₀ channels erin krijgt layer l er k₀ + k(l − 1), en na L layers geeft het block er k₀ + kL terug, met L(L + 1) / 2 verbindingen. Met 64 channels, groei 12 en 4 layers: 64, 76, 88 en 100 channels erin, 112 eruit."
+  - en: "Between two dense blocks, a transition layer mixes the channels with a 1×1 convolution, in DenseNet-BC into half as many, and makes the maps smaller with pooling. Each layer gets more channels than the one before, so a longer block costs more and more: with growth 12 on 64 channels, 4 layers have 35,472 parameters together, 5 layers 47,580, more than one 3×3 convolution from 64 channels to 64, 36,928. On CIFAR-10, a DenseNet of 100 layers from the paper, with 0.8 million parameters, got 4.51% of the test photos wrong, against 4.62% for a ResNet of 1,001 layers with 10.2 million."
+    nl: "Tussen twee dense blocks mengt een transition layer de channels met een 1×1 convolution, in DenseNet-BC tot de helft, en maakt hij de maps kleiner met pooling. Elke layer krijgt meer channels dan de vorige, dus kost een langer block steeds meer: met groei 12 op 64 channels hebben 4 layers samen 35.472 parameters, 5 layers 47.580, meer dan één 3×3-convolutie van 64 channels naar 64, 36.928. Op CIFAR-10 had een DenseNet van 100 layers uit de paper, met 0,8 miljoen parameters, 4,51% van de testfoto's fout, tegen 4,62% voor een ResNet van 1.001 layers met 10,2 miljoen."
+  - en: "A CNN on 6,000 photos of CIFAR-10, for 20 epochs, with a dense block and its transition in its middle, growth 24 with 2 layers, 12 with 4 or 6 with 8: it reads 546 to 600 test photos right, with no order between the three. A chain of 4 layers that each get only the maps of the layer before, as deep and with about as many parameters, reads 452 to 515, and learns only 3,908 to 4,727 of its 6,000 training photos."
+    nl: "Een CNN op 6.000 foto's van CIFAR-10, 20 epochs lang, met een dense block en zijn transition in zijn midden, groei 24 met 2 layers, 12 met 4 of 6 met 8: het leest 546 tot 600 testfoto's goed, zonder volgorde tussen de drie. Een keten van 4 layers die elk alleen de maps van de layer ervoor krijgen, even diep en met ongeveer evenveel parameters, leest er 452 tot 515, en leert maar 3.908 tot 4.727 van zijn 6.000 trainingsfoto's."
+can_now:
+  - en: "tell a residual block, which adds its input, from a dense block, which keeps it and puts new maps after it"
+    nl: "een residual block, dat zijn input optelt, onderscheiden van een dense block, dat hem houdt en er nieuwe maps achter zet"
+    by: blocks
+  - en: "build a dense block, and count the channels each of its layers gets"
+    nl: "een dense block bouwen, en tellen hoeveel channels elk van zijn layers krijgt"
+    by: dense
+  - en: "read from measured runs what a block's connections do, apart from its depth and its number of parameters"
+    nl: "uit gemeten runs aflezen wat de verbindingen van een block doen, los van zijn diepte en zijn aantal parameters"
+    by: dense-runs
+further_reading:
+  - en: "Gao Huang, Zhuang Liu, Laurens van der Maaten and Kilian Q. Weinberger (2016), *Densely Connected Convolutional Networks*: section 3 and figure 1, the dense block and the growth rate, figure 2, a DenseNet with transition layers, and table 2, the error on CIFAR and SVHN"
+    nl: "Gao Huang, Zhuang Liu, Laurens van der Maaten en Kilian Q. Weinberger (2016), *Densely Connected Convolutional Networks*: paragraaf 3 en figuur 1, het dense block en de growth rate, figuur 2, een DenseNet met transition layers, en tabel 2, de fout op CIFAR en SVHN"
