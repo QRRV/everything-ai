@@ -532,16 +532,26 @@ lessons:
   reference_data: []
   needs: any
 
+# cv-grad-cam: the class activation map from layer4 and fc of ResNet-18 on the cat (its mean plus the bias is the
+# logit, 19.6482), and Grad-CAM, which for ResNet-18 is its positive part divided by 49. The slider shows Grad-CAMs
+# the course measured, on a collage made from two of the course's photos (the middle half of the cat beside the
+# middle half of the coffee), so it needs no download: ResNet-18's 8 best guesses, the cat classes 95% to 96% on the
+# cat half, espresso (0.02) 87% on the coffee half, bucket split 44/56. On this collage the maps from layer3 no longer
+# part (37% to 65% on the cat half): the paper says maps get worse in earlier layers (section 3, appendix B.1). Its checks use made-up maps, a ResNet-18
+# with random weights and the DigitCNN with random weights, a CNN without global average pooling.
 - id: cv-grad-cam
   title: "Grad-CAM: where a CNN looked"
   level: gevorderd
   module: explaining
-  idea: "When a CNN ends with global average pooling, the mean of each feature map, and one linear layer, the weights of a class over the feature maps make a heat map, the class activation map; Grad-CAM finds those weights for any CNN from the gradient of the class score, adds up the weighted maps and keeps the positive part, a coarse map of the places that made the CNN choose that class."
+  idea: "When a CNN ends with global average pooling, the mean of each feature map, and one linear layer, the weights of a class over the feature maps make a heat map, the class activation map; Grad-CAM finds those weights for any CNN from the gradient of the class score, adds up the weighted maps and keeps the positive part, a coarse map of the places that speak for that class, which shows where the evidence for a class lies, not how sure the model is."
   covers: [vision-modellen-visualiseren-en-begrijpen#1, vision-modellen-visualiseren-en-begrijpen#2]
-  requires: [cv-saliency]
+  requires: [cv-saliency, nn-activation-stats, torch-autograd]
   introduces: [c:global-average-pooling, c:class-activation-map, c:grad-cam, py:retain-grad]
+  uses: [c:saliency-map, c:feature-map, c:receptive-field, c:layer, c:resnet, c:pretrained-model, c:imagenet, c:logit, c:softmax, c:probability, c:prediction, c:weight, c:bias-term, c:mean, c:gradient, c:partial-derivative, c:autograd, c:leaf-tensor, c:backward-pass, c:relu, c:convolution, c:pooling, c:lenet, c:top-k-accuracy, c:pixel, c:channel, c:interpolation, c:bilinear-interpolation, c:broadcasting, c:tensor, c:shape, c:axis, c:mini-batch, c:per-channel-normalization, c:center-crop, c:model-parameter, py:forward-hook, py:requires-grad, py:backward, py:grad-attribute, py:no-grad, py:with, py:none, py:torch-reshape, py:torch-relu, py:dim, py:nn-linear, py:torch-numpy, py:imread-imshow, py:pil-image, py:np-array, py:torch-tensor, py:torch-permute, py:torch-unsqueeze, py:indexing, py:slicing, py:keyword-argument, py:list, py:append, py:def, py:return, py:import, py:print, py:comment, py:variable, py:arithmetic, py:int, py:floor-division, py:modulo, py:np-argmax, py:min-max, py:method, s:z-logits, s:partial, s:sigma-sum, q:predict, q:choice, q:exercise-with-check, q:run-cell, q:slider-task]
+  mentions: [c:alexnet, c:ilsvrc, c:bounding-box]
   ladder: [torch]
-  data: [model-resnet18-imagenet, caltech-101-download-only, cifar-10-download-only]
+  data: [model-resnet18-imagenet, course-photos]
+  reference_data: []
   needs: any
 
 # --- gevorderd: object detection ------------------------------------------------------------------------------------
