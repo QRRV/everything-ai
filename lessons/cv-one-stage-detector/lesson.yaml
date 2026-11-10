@@ -1,0 +1,39 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: cv-one-stage-detector
+minutes: 45
+title:
+  en: "Project: your own one-stage detector"
+  nl: "Project: je eigen one-stage detector"
+goal:
+  en: "build a one-stage detector, a CNN that gives every anchor of a scene a kind and a box offset at once, train it with one loss for the kinds and one for the boxes, and find the shapes of new scenes with it."
+  nl: "een one-stage detector bouwen, een CNN dat elke anchor van een scène tegelijk een soort en een box offset geeft, hem trainen met één loss voor de soorten en één voor de boxes, en er de vormen van nieuwe scènes mee vinden."
+summary:
+  - en: "A one-stage detector gives every anchor, in one pass over the image, a kind and a box offset. A backbone makes feature maps with one square for each square of the anchors, and a head, a convolution of 3 by 3, gives every square (kinds + 1 + 4) numbers for each of its anchors; permute(0, 2, 3, 1) and reshape make that one row per anchor. SSD (2016) and YOLOv2 (2017) are one-stage detectors."
+    nl: "Een one-stage detector geeft elke anchor, in één keer over het beeld, een soort en een box offset. Een backbone maakt feature maps met één vakje voor elk vakje van de anchors, en een head, een convolutie van 3 bij 3, geeft elk vakje (soorten + 1 + 4) getallen voor elk van zijn anchors; permute(0, 2, 3, 1) en reshape maken daar één rij per anchor van. SSD (2016) en YOLOv2 (2017) zijn one-stage detectors."
+  - en: "Each anchor learns a class, 0 for background and the kind + 1 for a shape, or -1 when it is ignored. The loss is the cross-entropy over the anchors that are not ignored plus the mean absolute difference of the offsets over the anchors that learn a box. Background outnumbers everything: 735 of the 755 anchors in the kind loss on the scene of the worked example."
+    nl: "Elke anchor leert een klasse, 0 voor achtergrond en de soort + 1 voor een vorm, of -1 als hij genegeerd wordt. De loss is de cross-entropy over de anchors die niet genegeerd worden plus het gemiddelde absolute verschil van de offsets over de anchors die een box leren. Achtergrond is ver in de meerderheid: 735 van de 755 anchors in de loss van de soorten op de scène van het uitgewerkte voorbeeld."
+  - en: "Trained for 8 epochs on 2,000 of the course's scenes, a detector of 38,616 parameters finds 725 to 749 of the 808 shapes of 200 new scenes, with an mAP of 0.906 to 0.918. Before NMS, it gives about 20 boxes of 0.5 or more per scene, for 4 shapes: many anchors learned each shape."
+    nl: "Getraind in 8 epochs op 2.000 scènes van de course vindt een detector van 38.616 parameters 725 tot 749 van de 808 vormen van 200 nieuwe scènes, met een mAP van 0,906 tot 0,918. Vóór NMS geeft hij zo'n 20 boxes van 0,5 of meer per scène, voor 4 vormen: veel anchors leerden elke vorm."
+can_now:
+  - en: "work out how many output channels the head of a one-stage detector needs"
+    nl: "uitrekenen hoeveel output channels de head van een one-stage detector nodig heeft"
+    by: head-size
+  - en: "turn the true boxes of a scene into what every anchor learns: a class and a box offset"
+    nl: "de echte boxes van een scène omzetten in wat elke anchor leert: een klasse en een box offset"
+    by: targets
+  - en: "write one loss for the kinds and the boxes, each over its own anchors"
+    nl: "één loss schrijven voor de soorten en de boxes, elk over zijn eigen anchors"
+    by: detection-loss
+  - en: "build a CNN that gives every anchor of a scene 4 logits and 4 box offsets, in the order of the anchors"
+    nl: "een CNN bouwen dat elke anchor van een scène 4 logits en 4 box offsets geeft, in de volgorde van de anchors"
+    by: detector
+  - en: "explain why a one-stage detector needs NMS, and DETR did not"
+    nl: "uitleggen waarom een one-stage detector NMS nodig heeft, en DETR niet"
+    by: why-nms
+further_reading:
+  - en: "Wei Liu, Dragomir Anguelov, Dumitru Erhan, Christian Szegedy, Scott Reed, Cheng-Yang Fu and Alexander C. Berg (2016), *SSD: Single Shot MultiBox Detector*: section 2.1, the convolutions of 3 by 3 that give every square its numbers, and section 2.2, which anchors learn a box, the loss with a weight of 1, and at most 3 background anchors for every anchor that learns a shape"
+    nl: "Wei Liu, Dragomir Anguelov, Dumitru Erhan, Christian Szegedy, Scott Reed, Cheng-Yang Fu en Alexander C. Berg (2016), *SSD: Single Shot MultiBox Detector*: paragraaf 2.1, de convoluties van 3 bij 3 die elk vakje zijn getallen geven, en paragraaf 2.2, welke anchors een box leren, de loss met een gewicht van 1, en hoogstens 3 anchors met achtergrond voor elke anchor die een vorm leert"
+  - en: "Joseph Redmon and Ali Farhadi (2017), *YOLO9000: Better, Faster, Stronger*: section 2, the parts on anchor boxes, and a feature map of 13 by 13 squares with 5 anchors each"
+    nl: "Joseph Redmon en Ali Farhadi (2017), *YOLO9000: Better, Faster, Stronger*: paragraaf 2, de delen over anchor boxes, en een feature map van 13 bij 13 vakjes met elk 5 anchors"

@@ -82,6 +82,7 @@ class Panel:
     ylabel: str = ""
     marks: list[tuple] = field(default_factory=list)
     xticks: list[float] | None = None   # the ticks on the x-axis, when round numbers do not fit, such as the faces of a die
+    xtick_labels: list[str] | None = None   # the words of those ticks, in their order, when they are not their places
     yticks: list[float] | None = None   # the ticks on the y-axis, the same; [] for none, when the rows of a chart are groups
     xlog: bool = False   # a log scale on the x-axis: equal steps are equal factors, with a tick at each power of 10
     ylog: bool = False   # the same on the y-axis
@@ -167,6 +168,8 @@ def _panel(p: Panel, index: int, left: float, width: float, height: float) -> st
     yt, ylabel_of = _yticks(p)
     xt = p.xticks if p.xticks is not None else (log_ticks(x0, x1) if p.xlog else ticks(x0, x1))
     xlabel_of = _log_labels(xt) if p.xlog and p.xticks is None else (lambda v: _label(v, xt))
+    if p.xticks is not None and p.xtick_labels is not None:
+        xlabel_of = lambda v: html.escape(p.xtick_labels[xt.index(v)])   # noqa: E731
     fx = math.log10 if p.xlog else float
     fy = math.log10 if p.ylog else float
     L, R = _sides(p, left, width)

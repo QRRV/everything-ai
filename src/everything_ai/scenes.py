@@ -277,3 +277,25 @@ def anchor_boxes(cells: int = 16, stride: int = 8,
             for h, w in sizes:
                 rows.append((y - (h - 1) / 2, x - (w - 1) / 2, y + (h - 1) / 2, x + (w - 1) / 2))
     return np.array(rows, dtype=float).reshape(-1, 4)
+
+
+def match_anchors(anchors, boxes) -> np.ndarray:
+    """What each anchor learns, as `match` of cv-anchors tells it from the IoU of every anchor with every box (rows
+    (top, left, bottom, right), both ends included): the number of the box it overlaps most from an IoU of 0.5 on,
+    -2 (ignored) from 0.4 up to 0.5, -1 (background) below 0.4; and last, every box its best anchors, ties included,
+    even below 0.5. An array of whole numbers, one per anchor."""
+    anchors, boxes = np.asarray(anchors, dtype=float), np.asarray(boxes, dtype=float)
+    ious = np.zeros((len(anchors), len(boxes)))
+    for k, box in enumerate(boxes):
+        top, left = np.maximum(anchors[:, 0], box[0]), np.maximum(anchors[:, 1], box[1])
+        bottom, right = np.minimum(anchors[:, 2], box[2]), np.minimum(anchors[:, 3], box[3])
+        overlap = np.maximum(0, bottom - top + 1) * np.maximum(0, right - left + 1)
+        area_a = (anchors[:, 2] - anchors[:, 0] + 1) * (anchors[:, 3] - anchors[:, 1] + 1)
+        ious[:, k] = overlap / (area_a + (box[2] - box[0] + 1) * (box[3] - box[1] + 1) - overlap)
+    best, most = ious.argmax(axis=1), ious.max(axis=1)
+    label = np.full(len(anchors), -1)
+    label[most >= 0.5] = best[most >= 0.5]
+    label[(most >= 0.4) & (most < 0.5)] = -2
+    for k in range(len(boxes)):
+        label[ious[:, k] == ious[:, k].max()] = k
+    return label

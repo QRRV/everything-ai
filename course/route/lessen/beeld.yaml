@@ -582,12 +582,21 @@ lessons:
   module: detection
   kind: project
   project: cnn
-  idea: "A one-stage detector, as SSD and YOLOv2 are, is one CNN that gives, for every anchor at once, a kind and a shift of its box; trained on the course's scenes with one loss for the kinds and one for the boxes, and followed by NMS, it finds the shapes."
+  idea: "A one-stage detector, as SSD and YOLOv2 are, is one CNN that gives, for every anchor at once, a kind and a box offset; trained on the course's scenes with one loss for the kinds and one for the boxes, and followed by NMS, it finds the shapes."
   covers: [objectdetectie#3]
+  # Measured on the course's scenes (checks.py, REFERENCE and TRAINED): backbone 8-16-32-64 with batch normalization to
+  # 16 x 16, head conv 3x3 to 24, 38,616 parameters; 2,000 training scenes (1000-2999), 200 test scenes (0-199, 808
+  # shapes); 8 epochs, AdamW lr 0.01, warmup + cosine, batch 32, one thread (~105 s). Seeds 0-4: mAP@0.5 0.906-0.918,
+  # @0.75 0.807-0.822, 725-749 shapes found, 112-130 false boxes, ~20 boxes >= 0.5 per scene before NMS, 4.3 after.
+  # Seed 0 misses 25 of 95 shapes <= 20 px, 32 of 550 >= 25 px. Box-loss weight (seed 0): 0 -> 0.005, 0.25 -> 0.947,
+  # 1 -> 0.916, 4 -> 0.790, 16 -> 0.675 (test scenes: a watch-out says not to choose on them).
   requires: [cv-anchors]
-  introduces: [c:one-stage-detector]
+  introduces: [c:one-stage-detector, c:backbone, py:nn-sequential, py:nn-batchnorm2d, py:nn-relu]
+  uses: [c:anchor-box, c:box-offset, c:intersection-over-union, c:bounding-box, c:object-detection, c:non-maximum-suppression, c:confidence-score, c:score-threshold, c:mean-average-precision, c:average-precision, c:object-query, c:pretrained-model, c:feature-map, c:convolution, c:filter, c:output-channel, c:kernel-size, c:padding, c:pooling, c:batchnorm, c:relu, c:layer, c:channel, c:logit, c:softmax, c:probability, c:cross-entropy, c:mean-absolute-error, c:loss, c:training, c:epoch, c:mini-batch, c:train-set, c:test-set, c:validation-set, c:hyperparameter, c:class-imbalance, c:seed, c:model-parameter, c:weight, c:bias-term, c:tensor, c:shape, c:axis, c:class, c:label, c:pixel, c:logarithm, c:mean, c:dtype, v:loss-curve, py:nn-conv2d, py:nn-maxpool2d, py:nn-module, py:nn-cross-entropy-loss, py:torch-tensor, py:torch-permute, py:torch-reshape, py:torch-unsqueeze, py:torch-cat, py:torch-numpy, py:torch-relu, py:keepdim, py:abs, py:no-grad, py:with, py:class, py:self, py:init-method, py:forward-method, py:super, py:manual-seed, py:boolean-mask, py:array-as-index, py:dim, py:slicing, py:indexing, py:comparison, py:len, py:tuple, py:keyword-argument, py:method, py:def, py:return, py:import, py:import-as, py:print, py:comment, py:variable, py:arithmetic, py:int, py:float, s:log, s:exp, q:predict, q:choice, q:exercise-with-check, q:slider-task, q:explain, q:run-cell]
+  mentions: [c:retinanet, c:two-stage-detector]
   ladder: [torch]
   data: [course-scenes]
+  reference_data: []
   needs: any
 
 - id: cv-rcnn
