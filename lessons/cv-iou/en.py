@@ -171,7 +171,7 @@ def explore_shift_cell():
                                       "alt": "The true box of a red circle, solid, and a dashed box as large, shifted {shift} pixels to the right: IoU {iou}. Next to it, the IoU at every shift from 0 to 29 pixels: 1 at 0, falling fastest at the start, through the dotted line at 0.5 between 9 and 10 pixels, to 0 at 29. The shift of {shift} pixels is marked by a larger point."})
         return _html, f"Shifted by {d} pixels: overlap {_o['overlap']} pixels, union {_o['union']} pixels, IoU {L.number(_o['iou'])}."
 
-    explore_shift = L.explore("shift", "shift in pixels", _frame, start=0, values=C.SHIFTS, role="",
+    explore_shift = L.explore("shift-slider", "shift in pixels", _frame, start=0, values=C.SHIFTS, role="",
                               task="Find the largest shift at which the IoU is still above 0.5.")
     explore_shift
     return

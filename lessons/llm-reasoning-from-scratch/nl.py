@@ -152,7 +152,7 @@ def play_formats():
                "said": "**{a} × {b} = {product}** · alleen het antwoord {plain} tokens, met tussenstappen {steps}, het end-of-text meegeteld; {parts}.",
                "part": "{n} deelproduct", "parts": "{n} deelproducten",
                "alt": "De prompt van het gekozen paar in grijs, dan zijn antwoord in blauw, één keer met alleen het product en één keer met zijn tussenstappen, elk met het aantal tokens van het antwoord."}
-    _play = L.explore("formats", "voorbeeld", lambda _v: C.formats_frame(int(_v), _labels), start=2, values=list(range(1, len(C.PAIRS) + 1)),
+    _play = L.explore("formats-slider", "voorbeeld", lambda _v: C.formats_frame(int(_v), _labels), start=2, values=list(range(1, len(C.PAIRS) + 1)),
                       role="", task="Hoeveel tokens heeft het antwoord van elke vorm nodig bij 3 × 3? En hoeveel deelproducten heeft een product van 4 × 4 nodig, wat de training nooit laat zien?")
     _play
     return

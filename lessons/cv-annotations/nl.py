@@ -90,7 +90,7 @@ def text_why():
 @app.cell(hide_code=True)
 def predict_cost():
     guess_cost = L.guess(
-        "cost",
+        "cost-guess",
         question="Een box van goede kwaliteit tekenen kost 7 tot 35 seconden, afhankelijk van hoe je hem tekent. Hoe lang kostte het mask van één voorwerp in COCO, een bekende dataset van foto's?",
         options={
             "same": "Ongeveer even lang: 10 tot 35 seconden",

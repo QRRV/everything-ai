@@ -1,0 +1,31 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: cv-resnext
+minutes: 35
+title:
+  en: "Groups of channels: ResNeXt"
+  nl: "Groepen van channels: ResNeXt"
+goal:
+  en: "split a convolution into groups and count what that saves, build a ResNeXt block from a 1×1 convolution, a grouped 3×3 convolution and a 1×1 convolution with the input added, and test in a CNN on CIFAR-10 whether more groups help there."
+  nl: "een convolutie in groepen verdelen en tellen wat dat bespaart, een ResNeXt block bouwen uit een 1×1 convolution, een grouped 3×3-convolutie en een 1×1 convolution met de input erbij opgeteld, en in een CNN op CIFAR-10 testen of meer groepen daar helpen."
+summary:
+  - en: "`nn.Conv2d(c_in, c_out, k, groups=G)` splits the channels that come in and its filters into G groups: each filter sees only the c_in / G channels of its own group, so its weights get the shape (c_out, c_in / G, k, k), G times fewer. It is G small convolutions side by side, and both c_in and c_out must be divisible by G. From 128 channels to 128 with filters of 3 by 3: 147,456 weights in one group, 4,608 in 32."
+    nl: "`nn.Conv2d(c_in, c_out, k, groups=G)` verdeelt de channels die binnenkomen en zijn filters in G groepen: elk filter ziet alleen de c_in / G channels van zijn eigen groep, dus krijgen zijn weights de shape (c_out, c_in / G, k, k), G keer zo weinig. Het zijn G kleine convoluties naast elkaar, en zowel c_in als c_out moet deelbaar zijn door G. Van 128 channels naar 128 met filters van 3 bij 3: 147.456 weights in één groep, 4.608 in 32."
+  - en: "A ResNeXt block (Xie and others, 2016) is many thin paths of the same shape in a residual block, written as a 1×1 convolution, a 3×3 convolution in groups and a 1×1 convolution, with the input added; the number of paths is its cardinality. A block of ResNeXt-50 with 256 channels, 32×4d, has 70,656 parameters, counted with a bias for each filter, about as many as ResNet-50's bottleneck, 70,016, with 128 channels in the middle instead of 64. On ImageNet, the paper's 32×4d got 22.2% of the validation photos wrong, against 23.9% for ResNet-50."
+    nl: "Een ResNeXt block (Xie en anderen, 2016) is veel dunne paden van dezelfde vorm in een residual block, geschreven als een 1×1 convolution, een 3×3-convolutie in groepen en een 1×1 convolution, met de input erbij opgeteld; het aantal paden is zijn cardinality. Een block van ResNeXt-50 met 256 channels, 32×4d, heeft 70.656 parameters, geteld met een bias voor elk filter, ongeveer evenveel als de bottleneck van ResNet-50, 70.016, met 128 channels in het midden in plaats van 64. Op ImageNet had de 32×4d uit de paper 22,2% van de validatiefoto's fout, tegen 23,9% voor ResNet-50."
+  - en: "A CNN on 6,000 photos of CIFAR-10, for 20 epochs, with a ResNeXt block of about 4,400 weights in its middle, in 1, 2, 4 or 32 groups: it reads 562 to 599 test photos right, and the averages do not rise or fall with the number of groups; the bottleneck of *1×1 convolutions*, without the input added, reads 521 to 550. The paper's gain on ImageNet, 1.7 points, does not show up there: 32 groups read 5 fewer photos right than one group on average."
+    nl: "Een CNN op 6.000 foto's van CIFAR-10, 20 epochs lang, met een ResNeXt block van ongeveer 4.400 weights in zijn midden, in 1, 2, 4 of 32 groepen: het leest 562 tot 599 testfoto's goed, en de gemiddelden stijgen of dalen niet met het aantal groepen; de bottleneck uit *1×1 convolutions*, zonder de input erbij, leest 521 tot 550. De winst uit de paper op ImageNet, 1,7 procentpunt, is daar niet te zien: 32 groepen lezen er gemiddeld 5 minder goed dan één groep."
+can_now:
+  - en: "tell which numbers of groups a convolution can have: both its channels and its filters must be divisible by them"
+    nl: "zeggen welke aantallen groepen een convolutie kan hebben: zowel zijn channels als zijn filters moeten erdoor deelbaar zijn"
+    by: groups
+  - en: "build a ResNeXt block with a grouped convolution, and count what its groups save"
+    nl: "een ResNeXt block bouwen met een grouped convolution, en tellen wat zijn groepen besparen"
+    by: resnext
+  - en: "read from measured runs whether a gain a paper found on ImageNet shows up in a small network"
+    nl: "uit gemeten runs aflezen of een winst die een paper op ImageNet vond, in een klein netwerk te zien is"
+    by: groups-runs
+further_reading:
+  - en: "Saining Xie, Ross Girshick, Piotr Dollár, Zhuowen Tu and Kaiming He (2016), *Aggregated Residual Transformations for Deep Neural Networks*: section 3 and figure 3, the three equivalent forms of a block, table 2, blocks of about the same cost, and table 3, the error on ImageNet for each cardinality"
+    nl: "Saining Xie, Ross Girshick, Piotr Dollár, Zhuowen Tu en Kaiming He (2016), *Aggregated Residual Transformations for Deep Neural Networks*: paragraaf 3 en figuur 3, de drie gelijkwaardige vormen van een block, tabel 2, blocks van ongeveer dezelfde kosten, en tabel 3, de fout op ImageNet voor elke cardinality"

@@ -171,7 +171,7 @@ def explore_shift_cell():
                                       "alt": "De echte box van een rode cirkel, doorgetrokken, en een even grote gestreepte box, {shift} pixels naar rechts verschoven: IoU {iou}. Ernaast de IoU bij elke stap van 0 tot 29 pixels: 1 bij 0, aan het begin het snelst dalend, door de stippellijn bij 0,5 tussen 9 en 10 pixels, tot 0 bij 29. De stap van {shift} pixels is gemarkeerd met een grotere punt."})
         return _html, f"Verschoven over {d} pixels: overlap {_o['overlap']} pixels, vereniging {_o['union']} pixels, IoU {L.number(_o['iou'])}."
 
-    explore_shift = L.explore("shift", "pixels verschoven", _frame, start=0, values=C.SHIFTS, role="",
+    explore_shift = L.explore("shift-slider", "pixels verschoven", _frame, start=0, values=C.SHIFTS, role="",
                               task="Zoek hoeveel pixels je de box hoogstens kunt verschuiven terwijl de IoU nog boven 0,5 ligt.")
     explore_shift
     return

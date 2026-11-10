@@ -90,7 +90,7 @@ def text_why():
 @app.cell(hide_code=True)
 def predict_cost():
     guess_cost = L.guess(
-        "cost",
+        "cost-guess",
         question="A box of good quality takes 7 to 35 seconds to draw, depending on how you draw it. How long did the mask of one object take in COCO, a well-known dataset of photos?",
         options={
             "same": "About as long: 10 to 35 seconds",

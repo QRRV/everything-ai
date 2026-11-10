@@ -152,7 +152,7 @@ def play_formats():
                "said": "**{a} × {b} = {product}** · {plain} answer tokens with the answer only and {steps} with steps, the end-of-text included; {parts}.",
                "part": "{n} partial product", "parts": "{n} partial products",
                "alt": "The prompt of the chosen pair in grey, then its answer in blue, once with only the product and once with its steps, each with the number of answer tokens."}
-    _play = L.explore("formats", "example", lambda _v: C.formats_frame(int(_v), _labels), start=2, values=list(range(1, len(C.PAIRS) + 1)),
+    _play = L.explore("formats-slider", "example", lambda _v: C.formats_frame(int(_v), _labels), start=2, values=list(range(1, len(C.PAIRS) + 1)),
                       role="", task="How many answer tokens does each format need at 3 × 3? And how many partial products does a 4 × 4 product need, which the training never shows?")
     _play
     return

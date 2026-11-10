@@ -433,18 +433,21 @@ lessons:
   needs: any
 
 # ResNeXt's and EfficientNet's claims are differences of 1 to 2 points on ImageNet: the exercises count parameters and
-# multiplications, which the learner can check exactly; the accuracy comes from the papers or from recorded runs.
+# multiplications, which the learner can check exactly; the accuracy comes from the papers or from recorded runs. The
+# demo of cv-resnext measures four blocks with the same weights on CIFAR-10, and says that they overlap there.
 - id: cv-resnext
   title: "Groups of channels: ResNeXt"
   level: gevorderd
   module: cnn-families
-  idea: "A grouped convolution splits the channels into groups that each get filters of their own, with fewer weights than one convolution over all channels; ResNeXt puts many such thin paths in one residual block, and with the same number of parameters its paper got more right on ImageNet than with a wider block."
+  idea: "A grouped convolution splits the channels into groups that each get filters of their own, with fewer weights than one convolution over all channels; ResNeXt puts many such thin paths in one residual block, and with the same number of parameters its paper got more right on ImageNet than ResNet-50 with one wide path."
   covers: [d11-cnn-architecturen#2, convolutionele-netwerken#2]
-  requires: [cv-inception]
-  introduces: [c:grouped-convolution, c:resnext, py:conv2d-groups]
-  mentions: [c:imagenet]
+  requires: [cv-inception, cnn-resnet]
+  introduces: [c:grouped-convolution, c:resnext, c:cardinality, py:conv2d-groups]
+  uses: [c:inception, c:residual-block, c:resnet, c:bottleneck, c:pointwise-convolution, c:convolution, c:filter, c:channel, c:output-channel, c:feature-map, c:kernel-size, c:padding, c:pooling, c:batchnorm, c:layer, c:relu, c:model-parameter, c:weight, c:bias-term, c:shape, c:tensor, c:mini-batch, c:epoch, c:learning-rate, c:warmup, c:seed, c:overfitting, c:train-set, c:test-set, c:validation-set, c:accuracy, c:loss, c:cifar-10, c:per-channel-normalization, c:hyperparameter, v:loss-curve, v:train-val-curves, py:nn-conv2d, py:nn-module, py:no-grad, py:numel, py:torch-cat, py:dim, c:axis, py:keyword-argument, py:torch-relu, py:slicing, py:indexing, py:floor-division, py:with, py:class, py:self, py:init-method, py:forward-method, py:super, py:manual-seed, py:range, py:comprehension, py:list, py:return, py:print, py:comment, py:import, q:predict, q:choice, q:exercise-with-check, q:run-cell, q:slider-task]
+  mentions: [c:imagenet, c:alexnet, c:gpu, c:mobilenet, c:densenet]
   ladder: [torch]
-  data: [fashion-mnist, cifar-10-download-only]
+  data: [cifar-10-download-only]
+  reference_data: []
   needs: any
 
 # A standard DenseNet-BC-100 is about 7 times ResNet-20: the lesson trains 3 dense blocks of 4 layers, on a subset.

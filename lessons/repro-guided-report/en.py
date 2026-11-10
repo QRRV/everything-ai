@@ -139,7 +139,7 @@ def explore_pick_cell():
                                       "alt": f"How many times as late validation reaches 99% without weight decay, seed by seed; the report gives seeds {_seeds}: {C.number(C.reported(_k), 1, L.lang)} times as late, against {C.number(_every, 1, L.lang)} over all pairs."}),
                 f"A report of seed{'' if _k == 1 else 's'} {_seeds} says **{C.number(C.reported(_k), 1, L.lang)} times as late**; all four pairs give {C.number(_every, 1, L.lang)}.")
 
-    explore_pick = L.explore("pick", "seeds in the report", _frame, start=1, low=1, high=4, step=1, role="",
+    explore_pick = L.explore("pick-slider", "seeds in the report", _frame, start=1, low=1, high=4, step=1, role="",
                              task="How far does the number move as the report picks its seeds? And which seed gets no number, whatever the report picks?")
     explore_pick
     return
