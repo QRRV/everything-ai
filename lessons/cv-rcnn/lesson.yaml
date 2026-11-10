@@ -1,0 +1,41 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: cv-rcnn
+minutes: 45
+title:
+  en: "From R-CNN to Faster R-CNN: two stages"
+  nl: "Van R-CNN naar Faster R-CNN: twee fasen"
+goal:
+  en: "build a two-stage detector like Faster R-CNN, whose region proposal network proposes boxes and whose second stage cuts every proposal from the feature maps with RoI pooling and gives it a kind and a better box, train both stages with one loss, and compare it with your one-stage detector."
+  nl: "een two-stage detector zoals Faster R-CNN bouwen, waarvan het region proposal network boxes voorstelt en de tweede fase elke proposal met RoI pooling uit de feature maps snijdt en er een soort en een betere box aan geeft, beide fasen met één loss trainen, en hem vergelijken met je one-stage detector."
+summary:
+  - en: "A two-stage detector first proposes regions that may hold an object, then looks at each of them again. R-CNN (2014) ran a whole CNN on each of about 2,000 regions of a photo, 13 seconds per photo on a GPU; Fast R-CNN (2015) ran it once and cut every region from its feature maps; Faster R-CNN (2015) made the proposals in the network too, with a region proposal network: a head on the same feature maps that gives every anchor 2 logits, object or background, and 4 offsets."
+    nl: "Een two-stage detector stelt eerst gebieden voor waar een voorwerp in kan zitten, en bekijkt daarna elk ervan opnieuw. R-CNN (2014) liet een heel CNN los op elk van zo'n 2.000 gebieden van een foto, 13 seconden per foto op een GPU; Fast R-CNN (2015) liet het één keer lopen en sneed elk gebied uit zijn feature maps; Faster R-CNN (2015) liet ook de proposals door het netwerk maken, met een region proposal network: een head op dezelfde feature maps die elke anchor 2 logits geeft, voorwerp of achtergrond, en 4 offsets."
+  - en: "The proposals are the surest boxes of the RPN that stay after NMS at 0.7. RoI pooling cuts each of them from the feature maps to the same size: the squares its corners lie in, cut into k by k bins, and the highest number of each bin, as F.adaptive_max_pool2d does. A second stage gives every proposal a kind and offsets from the proposal. RoI pooling rounds to whole squares, so proposals a few pixels apart get the same numbers."
+    nl: "De proposals zijn de zekerste boxes van het RPN die na NMS bij 0,7 overblijven. RoI pooling snijdt elk ervan op dezelfde grootte uit de feature maps: de vakjes waar zijn hoeken in liggen, verdeeld in k bij k bins, en het hoogste getal van elke bin, zoals F.adaptive_max_pool2d doet. Een tweede fase geeft elke proposal een soort en offsets vanaf de proposal. RoI pooling rondt af op hele vakjes, dus proposals die een paar pixels verschillen, krijgen dezelfde getallen."
+  - en: "Trained for 8 epochs on 2,000 of the course's scenes, a two-stage detector of 167,386 parameters finds 761 to 776 of the 808 shapes of 200 new scenes, with an mAP of 0.947 to 0.962, more than the one-stage detector with the same backbone; at an IoU of 0.75, its mAP of 0.734 to 0.779 is lower. Trained with RoIAlign, which does not round, it reaches 0.891 at 0.75 with seed 0."
+    nl: "Getraind in 8 epochs op 2.000 scènes van de course vindt een two-stage detector van 167.386 parameters 761 tot 776 van de 808 vormen van 200 nieuwe scènes, met een mAP van 0,947 tot 0,962, meer dan de one-stage detector met dezelfde backbone; bij een IoU van 0,75 is zijn mAP, 0,734 tot 0,779, lager. Getraind met RoIAlign, die niet afrondt, haalt hij met seed 0 0,891 bij 0,75."
+can_now:
+  - en: "explain what made Fast R-CNN so much faster than R-CNN"
+    nl: "uitleggen wat Fast R-CNN zoveel sneller maakte dan R-CNN"
+    by: fast
+  - en: "cut any box from feature maps to k by k numbers per channel with RoI pooling"
+    nl: "met RoI pooling elke box uit feature maps snijden tot k bij k getallen per channel"
+    by: roi-pool
+  - en: "turn the rows of a region proposal network into proposals: probabilities, boxes, the surest anchors and NMS"
+    nl: "de rijen van een region proposal network omzetten in proposals: kansen, boxes, de zekerste anchors en NMS"
+    by: proposals
+  - en: "say which kind and which offsets a proposal learns in the second stage"
+    nl: "zeggen welke soort en welke offsets een proposal in de tweede fase leert"
+    by: learns
+  - en: "explain what the second stage of a two-stage detector sees that the head of a one-stage detector does not, and what RoI pooling costs it"
+    nl: "uitleggen wat de tweede fase van een two-stage detector ziet dat de head van een one-stage detector niet ziet, en wat RoI pooling hem kost"
+    by: why-second
+further_reading:
+  - en: "Ross Girshick, Jeff Donahue, Trevor Darrell and Jitendra Malik (2014), *Rich feature hierarchies for accurate object detection and semantic segmentation*: section 2.1, the regions of selective search, each stretched to 227 by 227 pixels for the CNN, and section 2.2, about 2,000 of them per photo, and 13 seconds per photo on a GPU"
+    nl: "Ross Girshick, Jeff Donahue, Trevor Darrell en Jitendra Malik (2014), *Rich feature hierarchies for accurate object detection and semantic segmentation*: paragraaf 2.1, de gebieden van selective search, elk opgerekt tot 227 bij 227 pixels voor het CNN, en paragraaf 2.2, zo'n 2.000 ervan per foto, en 13 seconden per foto op een GPU"
+  - en: "Ross Girshick (2015), *Fast R-CNN*: section 2.1, the RoI pooling layer, which cuts every region of the feature maps into 7 by 7 bins and keeps the highest number of each"
+    nl: "Ross Girshick (2015), *Fast R-CNN*: paragraaf 2.1, de laag voor RoI pooling, die elk gebied van de feature maps verdeelt in 7 bij 7 bins en het hoogste getal van elke bin houdt"
+  - en: "Shaoqing Ren, Kaiming He, Ross Girshick and Jian Sun (2015), *Faster R-CNN: Towards Real-Time Object Detection with Region Proposal Networks*: section 3.1, the region proposal network with 9 anchors on every square and its loss, and section 3.2, how the two stages share the feature maps, with approximate joint training"
+    nl: "Shaoqing Ren, Kaiming He, Ross Girshick en Jian Sun (2015), *Faster R-CNN: Towards Real-Time Object Detection with Region Proposal Networks*: paragraaf 3.1, het region proposal network met 9 anchors op elk vakje en zijn loss, en paragraaf 3.2, hoe de twee fasen de feature maps delen, met approximate joint training"

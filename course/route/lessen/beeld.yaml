@@ -264,6 +264,7 @@ lessons:
   requires: [cv-iou]
   introduces: [c:non-maximum-suppression, c:confidence-score]
   uses: [c:intersection-over-union, c:bounding-box, c:object-detection, c:pixel, c:class, c:label, c:library, c:seed, py:while, py:for, py:if, py:comparison, py:list, py:append, py:range, py:len, py:comprehension, py:min-max, py:indexing, py:tuple, py:keyword-argument, py:int, py:float, py:arithmetic, py:def, py:return, py:print, py:comment, py:variable, py:import, q:predict, q:choice, q:exercise-with-check, q:slider-task, q:explain, q:run-cell]
+  mentions: [c:faster-r-cnn]
   ladder: [python]
   data: [course-scenes]
   needs: any
@@ -570,7 +571,7 @@ lessons:
   requires: [cv-pretrained-detector, cnn-resnet]
   introduces: [c:anchor-box, c:box-offset]
   uses: [c:intersection-over-union, c:bounding-box, c:object-detection, c:annotation, c:object-query, c:mean-average-precision, c:feature-map, c:stride, c:convolution, c:filter, c:weight-sharing, c:resnet, c:model, c:prediction, c:training, c:loss, c:class, c:label, c:pixel, c:logarithm, c:exponent, c:mean, c:array, c:tensor, c:shape, c:axis, c:dtype, c:float32, c:broadcasting, py:np-array, py:np-zeros, py:np-maximum, py:np-argmax, py:np-exp, py:np-sum, py:np-indexing, py:boolean-mask, py:mask-and-or, py:array-as-index, py:torch-tensor, py:torch-cat, py:dim, py:abs, py:comprehension, py:list, py:append, py:tuple, py:for, py:range, py:len, py:slicing, py:indexing, py:comparison, py:keyword-argument, py:method, py:min-max, py:def, py:return, py:import, py:import-as, py:print, py:comment, py:variable, py:arithmetic, py:int, py:float, s:log, s:exp, q:predict, q:choice, q:exercise-with-check, q:slider-task, q:explain, q:run-cell]
-  mentions: [c:retinanet, c:one-stage-detector]
+  mentions: [c:retinanet, c:one-stage-detector, c:faster-r-cnn]
   ladder: [numpy, torch]
   data: [course-scenes]
   reference_data: []
@@ -593,7 +594,7 @@ lessons:
   requires: [cv-anchors]
   introduces: [c:one-stage-detector, c:backbone, py:nn-sequential, py:nn-batchnorm2d, py:nn-relu]
   uses: [c:anchor-box, c:box-offset, c:intersection-over-union, c:bounding-box, c:object-detection, c:non-maximum-suppression, c:confidence-score, c:score-threshold, c:mean-average-precision, c:average-precision, c:object-query, c:pretrained-model, c:feature-map, c:convolution, c:filter, c:output-channel, c:kernel-size, c:padding, c:pooling, c:batchnorm, c:relu, c:layer, c:channel, c:logit, c:softmax, c:probability, c:cross-entropy, c:mean-absolute-error, c:loss, c:training, c:epoch, c:mini-batch, c:train-set, c:test-set, c:validation-set, c:hyperparameter, c:class-imbalance, c:seed, c:model-parameter, c:weight, c:bias-term, c:tensor, c:shape, c:axis, c:class, c:label, c:pixel, c:logarithm, c:mean, c:dtype, v:loss-curve, py:nn-conv2d, py:nn-maxpool2d, py:nn-module, py:nn-cross-entropy-loss, py:torch-tensor, py:torch-permute, py:torch-reshape, py:torch-unsqueeze, py:torch-cat, py:torch-numpy, py:torch-relu, py:keepdim, py:abs, py:no-grad, py:with, py:class, py:self, py:init-method, py:forward-method, py:super, py:manual-seed, py:boolean-mask, py:array-as-index, py:dim, py:slicing, py:indexing, py:comparison, py:len, py:tuple, py:keyword-argument, py:method, py:def, py:return, py:import, py:import-as, py:print, py:comment, py:variable, py:arithmetic, py:int, py:float, s:log, s:exp, q:predict, q:choice, q:exercise-with-check, q:slider-task, q:explain, q:run-cell]
-  mentions: [c:retinanet, c:two-stage-detector]
+  mentions: [c:retinanet, c:two-stage-detector, c:faster-r-cnn]
   ladder: [torch]
   data: [course-scenes]
   reference_data: []
@@ -606,10 +607,20 @@ lessons:
   idea: "A two-stage detector first proposes regions that may hold an object, then cuts the features of each region to one size, RoI pooling, and gives it a kind and a corrected box; from R-CNN to Faster R-CNN the proposals moved into the network itself, as a region proposal network that scores anchors on the same features."
   # In map v2.3 this subtopic is objectdetectie#3 with a longer name; migrate_refs.py cannot find it: map it by hand.
   covers: [objectdetectie#2]
-  requires: [cv-anchors]
-  introduces: [c:two-stage-detector, c:region-proposal-network, c:roi-pooling]
+  # Measured on the course's scenes (checks.py, REFERENCE and TRAINED): the backbone of cv-one-stage-detector, RPN conv
+  # 3x3 to 18 (3 anchors x 2 logits + 4 offsets), proposals = top 100 by probability, NMS 0.7, first 32; RoI pooling to
+  # 4 x 4 (F.adaptive_max_pool2d on the squares of the corners); second stage 1024-128-8; 167,386 parameters (one-stage
+  # 38,616). True boxes join the proposals in training; approximate joint training; 8 epochs, batch 32, one thread
+  # (~180 s). Seeds 0-4: mAP@0.5 0.947-0.962, @0.75 0.734-0.779, 761-776 shapes found, 107-116 false boxes, 804-805
+  # shapes with a proposal above IoU 0.5. Seed 0, proposals kept to detect: 1 -> 0.241, 8 -> mAP@0.75 0.824 (highest),
+  # 64 -> 0.751. RoIAlign instead (seed 0): mAP@0.5 0.964, @0.75 0.891.
+  requires: [cv-one-stage-detector]
+  introduces: [c:two-stage-detector, c:region-proposal-network, c:roi-pooling, c:faster-r-cnn, py:adaptive-max-pool2d, py:torch-argsort]
+  uses: [c:one-stage-detector, c:backbone, c:anchor-box, c:box-offset, c:intersection-over-union, c:bounding-box, c:object-detection, c:non-maximum-suppression, c:confidence-score, c:score-threshold, c:mean-average-precision, c:average-precision, c:object-query, c:pretrained-model, c:feature-map, c:convolution, c:filter, c:output-channel, c:kernel-size, c:padding, c:pooling, c:receptive-field, c:vgg, c:resnet, c:batchnorm, c:relu, c:layer, c:hidden-layer, c:channel, c:logit, c:softmax, c:probability, c:cross-entropy, c:mean-absolute-error, c:loss, c:training, c:epoch, c:mini-batch, c:train-set, c:test-set, c:validation-set, c:hyperparameter, c:seed, c:model-parameter, c:weight, c:tensor, c:shape, c:axis, c:class, c:label, c:pixel, c:recall, c:inference, s:exp, v:loss-curve, py:nn-sequential, py:nn-batchnorm2d, py:nn-relu, py:nn-conv2d, py:nn-maxpool2d, py:nn-linear, py:nn-module, py:torch-tensor, py:torch-permute, py:torch-reshape, py:torch-unsqueeze, py:no-grad, py:with, py:manual-seed, py:math-module, py:floor-division, py:int-conversion, py:min-max, py:slicing, py:indexing, py:array-as-index, py:dim, py:for, py:range, py:tuple, py:len, py:keyword-argument, py:method, py:def, py:return, py:import, py:import-as, py:print, py:comment, py:variable, py:arithmetic, py:comparison, py:int, py:float, q:predict, q:choice, q:exercise-with-check, q:slider-task, q:explain, q:run-cell]
+  mentions: [c:mask-r-cnn, c:roi-align, c:retinanet, c:gpu]
   ladder: [torch]
   data: [course-scenes]
+  reference_data: []
   needs: any
 
 - id: cv-fpn
@@ -688,7 +699,7 @@ lessons:
   idea: "Instance segmentation gives each object a mask of its own, also when two objects are of the same kind; Mask R-CNN adds to Faster R-CNN a small head that draws a mask inside every box it finds."
   covers: [segmentatie#3]
   requires: [cv-rcnn, cv-fcn]
-  introduces: [c:instance-segmentation, c:mask-r-cnn]
+  introduces: [c:instance-segmentation, c:mask-r-cnn, c:roi-align]
   ladder: [torch]
   data: [course-scenes]
   needs: any

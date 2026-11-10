@@ -299,3 +299,28 @@ def match_anchors(anchors, boxes) -> np.ndarray:
     for k in range(len(boxes)):
         label[ious[:, k] == ious[:, k].max()] = k
     return label
+
+
+def nms(boxes, scores, threshold: float) -> list[int]:
+    """Non-maximum suppression, as `nms` of cv-nms does it: the numbers of the boxes kept, the highest score first. A
+    box goes when a box with a higher score that is kept overlaps it by more than `threshold` (the IoU of cv-iou, both
+    ends included); of two equal scores, the first box counts as the higher. `boxes` has a row (top, left, bottom,
+    right) for every box and `scores` a number for every box: lists, arrays or tensors. The IoU of every pair is worked
+    out at once, so that a few hundred boxes take no time."""
+    if hasattr(boxes, "detach"):
+        boxes = boxes.detach().cpu().numpy()
+    if hasattr(scores, "detach"):
+        scores = scores.detach().cpu().numpy()
+    b = np.asarray(boxes, dtype=float).reshape(-1, 4)
+    s = np.asarray(scores, dtype=float).reshape(-1)
+    top, left = np.maximum(b[:, None, 0], b[None, :, 0]), np.maximum(b[:, None, 1], b[None, :, 1])
+    bottom, right = np.minimum(b[:, None, 2], b[None, :, 2]), np.minimum(b[:, None, 3], b[None, :, 3])
+    both = np.maximum(0, bottom - top + 1) * np.maximum(0, right - left + 1)
+    area = (b[:, 2] - b[:, 0] + 1) * (b[:, 3] - b[:, 1] + 1)
+    ious = both / (area[:, None] + area[None, :] - both)
+    gone, kept = np.zeros(len(b), dtype=bool), []
+    for i in np.argsort(-s, kind="stable"):
+        if not gone[i]:
+            kept.append(int(i))
+            gone |= ious[i] > threshold
+    return kept
