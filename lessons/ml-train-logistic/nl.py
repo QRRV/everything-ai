@@ -61,13 +61,13 @@ def quick_check_fit():
         question="Wat doet één ronde van de loop in je `fit` voor lineaire regressie?",
         options={
             "predict": "Hij voorspelt de labels nog een keer, en houdt de beste weights",
-            "nudge": "Hij geeft elke weight een duwtje en meet de loss opnieuw",
+            "nudge": "Hij verandert elke weight een heel klein stapje en meet de loss opnieuw",
             "right": "Hij haalt beide hellingen uit `mse_gradients`, en schuift `w` en `b` ertegenin",
         },
         correct="right",
         why={
             "predict": "Er wordt niets bewaard of vergeleken: elke ronde verandert `w` en `b`. Hoe? Zie oefening 3 van [Lineaire regressie met veel features](/course/open/ml-linear-regression-numpy?lang=nl).",
-            "nudge": "Duwtjes geven was de trage manier uit [w en b passen met gradient descent](/course/open/ml-gradient-descent-2d?lang=nl). Waar haalt `fit` zijn hellingen vandaan? Zie oefening 3 van [Lineaire regressie met veel features](/course/open/ml-linear-regression-numpy?lang=nl).",
+            "nudge": "Heel kleine stapjes waren de trage manier uit [w en b passen met gradient descent](/course/open/ml-gradient-descent-2d?lang=nl). Waar haalt `fit` zijn hellingen vandaan? Zie oefening 3 van [Lineaire regressie met veel features](/course/open/ml-linear-regression-numpy?lang=nl).",
             "right": "`grad_w, grad_b = gradients.mse_gradients(X, y, w, b)`, dan `w = w - lr * grad_w` en `b = b - lr * grad_b`, `steps` keer.",
         },
     )

@@ -7,8 +7,8 @@ title:
   en: "Gradient checking"
   nl: "Gradient checking"
 goal:
-  en: "check a backward pass you wrote yourself against the slope you measure by nudging each parameter up and down."
-  nl: "een backward pass die je zelf schreef controleren met de helling die je meet door elke parameter omhoog en omlaag te duwen."
+  en: "check a backward pass you wrote yourself against the slope you measure with a tiny step up and down in each parameter."
+  nl: "een backward pass die je zelf schreef controleren met de helling die je meet met een heel klein stapje omhoog en omlaag in elke parameter."
 summary:
   - en: "The central difference $(\\mathcal{L}(w_j + h) - \\mathcal{L}(w_j - h)) / 2h$ estimates the slope of each parameter; its error shrinks with $h^2$, and $h = 10^{-5}$ is a good choice."
     nl: "De centrale differentie $(\\mathcal{L}(w_j + h) - \\mathcal{L}(w_j - h)) / 2h$ schat de helling van elke parameter; de fout ervan krimpt met $h^2$, en $h = 10^{-5}$ is een goede keuze."

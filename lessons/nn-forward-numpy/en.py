@@ -328,7 +328,7 @@ def text_connections():
     mo.md(r"""
     ## Wrap-up
 
-    **How this connects.** In [A hidden layer and ReLU](/course/open/nn-hidden-layer?lang=en) you worked out a network neuron by neuron. Now a whole layer is one line, `X @ W.T + b`, for all examples at once: matrix multiplication, the transpose and broadcasting together. The shape next to each line tells you before you run it whether it fits. In the next lesson, *Too many weights to nudge one by one*, you see why measuring the slope of every weight by nudging it is far too slow for a network like this.
+    **How this connects.** In [A hidden layer and ReLU](/course/open/nn-hidden-layer?lang=en) you worked out a network neuron by neuron. Now a whole layer is one line, `X @ W.T + b`, for all examples at once: matrix multiplication, the transpose and broadcasting together. The shape next to each line tells you before you run it whether it fits. In the next lesson, *Too many slopes to measure one by one*, you see why measuring the slope of every weight with a tiny step is far too slow for a network like this.
     """)
     return
 

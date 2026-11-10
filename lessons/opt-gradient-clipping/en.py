@@ -200,7 +200,7 @@ def text_exercise_direction():
 def choice_direction_cell():
     choice_direction = L.choice(
         "keeps-direction",
-        question="`torch.nn.utils.clip_grad_value_` cuts off every number of the gradient on its own at $-c$ and $c$. Why do almost all training scripts clip the norm instead?",
+        question="`torch.nn.utils.clip_grad_value_` cuts off every number of the gradient on its own at $-c$ and $c$. Why does almost all training code clip the norm instead?",
         options={
             "less-work": "Clipping the norm is less work: it looks at one number instead of at all of them",
             "larger": "Cutting off each number can make the gradient larger than it was",
@@ -252,7 +252,7 @@ def hints_clip():
             "The norm of all arrays together: add up `np.sum(g ** 2)` for every `g` in `grads`, and take the square root of the total, with `** 0.5`.",
             "Then `if norm > max_norm:` make a new list and `append` `g * (max_norm / norm)` for every `g`, and give it back; otherwise give back `grads`.",
         ],
-        why="`total = 0` and `for g in grads: total = total + np.sum(g ** 2)`; `norm = total ** 0.5`; `if norm > max_norm:` then `out = []`, `for g in grads: out.append(g * (max_norm / norm))` and `return out`; after the `if`, `return grads`. In the example, the norm is $\\sqrt{1 + 4 + 4 + 16} = 5$, so the factor is $2.5 / 5 = 0.5$.",
+        why="The solution writes the loops of the hints in one line each. `sum(np.sum(g ** 2) for g in grads)` is a generator expression: a list comprehension without its square brackets, whose values go straight into `sum`. With loops: `total = 0` and `for g in grads: total = total + np.sum(g ** 2)`; `norm = total ** 0.5`; `if norm > max_norm:` then `out = []`, `for g in grads: out.append(g * (max_norm / norm))` and `return out`; after the `if`, `return grads`. In the example, the norm is $\\sqrt{1 + 4 + 4 + 16} = 5$, so the factor is $2.5 / 5 = 0.5$.",
     )
     return
 

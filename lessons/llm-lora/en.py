@@ -179,14 +179,18 @@ def text_worked_example():
 @app.cell
 def example_lora():
     torch.manual_seed(0)
+    # 1. a frozen weight
     _W = torch.randn(4, 4)
+    # 2. LoRA around it: A random, B zero
     _A = torch.randn(1, 4)
     _B = torch.zeros(4, 1)
     _x = torch.randn(4)
     print(torch.allclose(_W @ _x + _B @ _A @ _x, _W @ _x))   # B is zero: nothing changes yet
-    _B = torch.tensor([[1.0], [0.5], [0.0], [-1.0]])         # as after some training
+    # 3. training changes only A and B: here B as after some training
+    _B = torch.tensor([[1.0], [0.5], [0.0], [-1.0]])
     print(_W.numel(), _A.numel() + _B.numel())
     print(np.linalg.matrix_rank((_B @ _A).numpy()))
+    # 4. merge the adapter into the weight
     _merged = _W + _B @ _A
     print(torch.allclose(_merged @ _x, _W @ _x + _B @ (_A @ _x)))   # merged: one matrix, the same output
     return

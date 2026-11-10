@@ -126,7 +126,7 @@ def text_idea():
         """),
         L.formula(r"[[pred:\hat{y}]] = \sigma(x + [[param:b]])"),
         mo.md(r"""
-        Schuif met de slider, of sleep over de grafiek van de log loss: dat zet de <span class="c-param">bias term</span> $b$. De ene grafiek toont de <span class="c-loss">log loss</span>, de andere de accuracy: een kans van 0,5 of meer telt als geslaagd.
+        Schuif met de slider, of sleep over de grafiek van de log loss: daarmee kies je de <span class="c-param">bias term</span> $b$. De ene grafiek toont de <span class="c-loss">log loss</span>, de andere de accuracy: een kans van 0,5 of meer telt als geslaagd.
         """),
     ])
     return

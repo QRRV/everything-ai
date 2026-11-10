@@ -95,7 +95,7 @@ def text_why():
 def predict_params():
     guess_params = L.guess(
         "params",
-        question="Je diepe MLP heeft 85.194 parameters. Het CNN van vandaag heeft twee convolutional layers, met 8 en dan 16 filters van 3 bij 3, en een output head die 784 getallen per afbeelding krijgt. Hoeveel parameters heeft het?",
+        question="Je diepe MLP heeft 85.194 parameters. Het CNN van vandaag heeft twee convolutional layers, met 8 en dan 16 filters van 3 bij 3, en een output head, de laatste lineaire layer, die van 784 getallen per afbeelding de 10 logits maakt. Hoeveel parameters heeft het?",
         options={
             "same": "Ongeveer 85.000: evenveel als je diepe MLP",
             "more": "Ongeveer 300.000: twee layers met veel channels",
@@ -115,7 +115,7 @@ def text_idea():
 
         In PyTorch is een convolutional layer `nn.Conv2d(c_in, c_out, k, padding=p)`: $C_\text{out}$ filters met shape $(C_\text{in}, k, k)$, elk met een bias term, zoals in [Channels en pooling](/course/open/cnn-channels-pooling?lang=nl), snel uitgerekend, als één grote matrixvermenigvuldiging of met andere trucs. Hij werkt op een hele mini-batch tegelijk, met shape $(B, C, H, W)$: $B$ afbeeldingen, elk met $C$ channels van $H$ bij $W$ pixels. De afbeeldingen van Fashion-MNIST zijn grijs, één channel, dus een mini-batch van 64 heeft shape (64, 1, 28, 28). `nn.MaxPool2d(2)` doet max pooling van 2 bij 2 op elk channel van elke afbeelding.
 
-        Je eerste CNN, `SmallCNN`, heeft twee blokken van convolutie, ReLU en pooling, en dan een output head. Met padding 1 houdt een convolutie van 3 bij 3 de hoogte en breedte, en elke pooling halveert ze: 28, 14, 7. Na het tweede blok is elke afbeelding 16 channels van 7 bij 7, en `x.reshape(len(x), -1)` maakt daar één rij van 784 getallen van, voor een `nn.Linear(784, 10)` die de 10 logits geeft, één voor elke soort kleding.
+        Je eerste CNN, `SmallCNN`, heeft twee blokken van convolutie, ReLU en pooling, en dan een output head: de laatste lineaire layer, die de logits maakt. Met padding 1 houdt een convolutie van 3 bij 3 de hoogte en breedte, en elke pooling halveert ze: 28, 14, 7. Na het tweede blok is elke afbeelding 16 channels van 7 bij 7, en `x.reshape(len(x), -1)` maakt daar één rij van 784 getallen van, voor een `nn.Linear(784, 10)` die de 10 logits geeft, één voor elke soort kleding.
 
         ### Nieuwe woorden en tekens
 

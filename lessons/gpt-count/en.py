@@ -26,7 +26,7 @@ def text_quick_check():
     mo.md(r"""
     ### Quick check
 
-    Two short questions about [Assemble your GPT](/course/open/gpt-assemble?lang=en) and [Too many weights to nudge one by one](/course/open/nn-why-backprop?lang=en).
+    Two short questions about [Assemble your GPT](/course/open/gpt-assemble?lang=en) and [Too many slopes to measure one by one](/course/open/nn-why-backprop?lang=en).
     """)
     return
 
@@ -64,8 +64,8 @@ def quick_check_flops():
         },
         correct="right",
         why={
-            "half": "The time halves, but the network needs as many multiplications and additions as before. See [Too many weights to nudge one by one](/course/open/nn-why-backprop?lang=en).",
-            "double": "Twice as many per second is the speed of the computer; the forward pass itself needs the same calculations. See [Too many weights to nudge one by one](/course/open/nn-why-backprop?lang=en).",
+            "half": "The time halves, but the network needs as many multiplications and additions as before. See [Too many slopes to measure one by one](/course/open/nn-why-backprop?lang=en).",
+            "double": "Twice as many per second is the speed of the computer; the forward pass itself needs the same calculations. See [Too many slopes to measure one by one](/course/open/nn-why-backprop?lang=en).",
             "right": "Today you count them for your GPT: per token, for the parameters and for attention.",
         },
     )
@@ -115,7 +115,7 @@ def text_idea():
         """),
         L.formula(r"\begin{gathered} N \approx 12\,L\,d^2 + 2\,|\mathcal{V}|\,d \\ \text{FLOPs} \approx 2N + 2\,L\,n\,d \end{gathered}"),
         mo.md(r"""
-        **FLOPs per token.** As in [Too many weights to nudge one by one](/course/open/nn-why-backprop?lang=en), a forward pass uses every parameter once per token, for a multiplication and an addition: about $2N$ FLOPs. Attention adds a part that grows with the length $n$ of the text. In every block, a token at place $t$ compares its query with the keys of the $t$ tokens up to it, and mixes their values: about $4\,t\,d$ FLOPs. Through the causal mask, a token of a text of $n$ tokens looks on average at about $n/2$ of them, so attention costs about $2\,L\,n\,d$ per token, the second part of the formula. Your attention of [The causal mask](/course/open/attn-causal-mask?lang=en) still computes the scores of the later tokens and only then hides them, so it does about twice that: the formula counts the work a token needs. Training also needs the backward pass, which costs about twice the forward pass: about three times the forward FLOPs per token, about $6N$ for a short text.
+        **FLOPs per token.** As in [Too many slopes to measure one by one](/course/open/nn-why-backprop?lang=en), a forward pass uses every parameter once per token, for a multiplication and an addition: about $2N$ FLOPs. Attention adds a part that grows with the length $n$ of the text. In every block, a token at place $t$ compares its query with the keys of the $t$ tokens up to it, and mixes their values: about $4\,t\,d$ FLOPs. Through the causal mask, a token of a text of $n$ tokens looks on average at about $n/2$ of them, so attention costs about $2\,L\,n\,d$ per token, the second part of the formula. Your attention of [The causal mask](/course/open/attn-causal-mask?lang=en) still computes the scores of the later tokens and only then hides them, so it does about twice that: the formula counts the work a token needs. Training also needs the backward pass, which costs about twice the forward pass: about three times the forward FLOPs per token, about $6N$ for a short text.
 
         ### New words and symbols
 
@@ -348,7 +348,7 @@ def text_connections():
     mo.md(r"""
     ## Wrap-up
 
-    **How this connects.** The FLOPs of [Too many weights to nudge one by one](/course/open/nn-why-backprop?lang=en), now for every token a GPT reads or learns from, and the parts of your GPT of [Assemble your GPT](/course/open/gpt-assemble?lang=en), counted one by one. Next: *Project: train your GPT on a book*, where your GPT of 10.8 million parameters learns from Tiny Shakespeare, at about 68 million FLOPs for every token it trains on.
+    **How this connects.** The FLOPs of [Too many slopes to measure one by one](/course/open/nn-why-backprop?lang=en), now for every token a GPT reads or learns from, and the parts of your GPT of [Assemble your GPT](/course/open/gpt-assemble?lang=en), counted one by one. Next: *Project: train your GPT on a book*, where your GPT of 10.8 million parameters learns from Tiny Shakespeare, at about 68 million FLOPs for every token it trains on.
     """)
     return
 

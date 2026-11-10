@@ -96,7 +96,7 @@ def predict_params():
             "even": "Ongeveer gelijk verdeeld over de acht layers",
             "right": "In de drie linear layers aan het eind",
         },
-        reveal="**In de drie linear layers.** Van zijn 60.965.224 parameters zitten er 58.631.144 in zijn drie linear layers, 96,2%; `fc6` alleen, van de 9.216 getallen na de laatste pooling naar 4.096, heeft er 37.752.832, 61,9%. Zijn vijf convoluties hebben er samen 2.334.080, 3,8%. De schuifregelaar na het uitgewerkte voorbeeld loopt ze layer voor layer langs.",
+        reveal="**In de drie linear layers.** Van zijn 60.965.224 parameters zitten er 58.631.144 in zijn drie linear layers, 96,2%; `fc6` alleen, van de 9.216 getallen na de laatste pooling naar 4.096, heeft er 37.752.832, 61,9%. Zijn vijf convoluties hebben er samen 2.334.080, 3,8%. De slider na het uitgewerkte voorbeeld loopt ze layer voor layer langs.",
     )
     guess_params
     return (guess_params,)

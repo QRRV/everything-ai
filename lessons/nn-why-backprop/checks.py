@@ -2,7 +2,7 @@
 # SPDX-License-Identifier: CC-BY-SA-4.0 AND MIT-0
 """Checks of the lesson nn-why-backprop: the FLOPs of a forward pass, counted from the sizes of the layers, and
 sorting calculations by how they grow with the number of parameters. And the picture: the FLOPs of one forward pass
-and of measuring every slope by moving, as the number of parameters N moves on a slider."""
+and of measuring every slope with a tiny step, as the number of parameters N moves on a slider."""
 import re
 
 from everything_ai.check import FunctionBox, Sort, Mistake
@@ -25,7 +25,7 @@ def whole(n: int, lang: str) -> str:
 
 
 def picture(n: int, labels: dict[str, str]) -> str:
-    """The FLOPs over N from 0 to 1000, in millions: one forward pass dashed, every slope by moving solid, with a dot
+    """The FLOPs over N from 0 to 1000, in millions: one forward pass dashed, every slope with a tiny step solid, with a dot
     on each at the N of the slider. Drawn as SVG text, once for every stop of the slider (L.explore)."""
     from everything_ai import chart
     ns = list(range(0, 1001, 25))
@@ -112,9 +112,9 @@ EXERCISES = {
         },
         items={
             "forward": {"en": "**One forward pass**, for one example.", "nl": "**Eén forward pass**, voor één voorbeeld."},
-            "moving": {"en": "**Every slope by moving** each parameter in turn.", "nl": "**Elke helling door te verschuiven**, elke parameter om de beurt."},
-            "half": {"en": "**Half of the slopes by moving**: you move only half of the parameters, each in turn.",
-                     "nl": "**De helft van de hellingen door te verschuiven**: je verschuift maar de helft van de parameters, elk om de beurt."},
+            "moving": {"en": "**Every slope with a tiny step**, each parameter in turn.", "nl": "**Elke helling met een heel klein stapje**, elke parameter om de beurt."},
+            "half": {"en": "**Half of the slopes with a tiny step**: you move only half of the parameters, each in turn.",
+                     "nl": "**De helft van de hellingen met een heel klein stapje**: je verandert maar de helft van de parameters, elk om de beurt."},
             "save": {"en": "**Saving the parameters** to a file.", "nl": "**De parameters bewaren** in een bestand."},
             "pairs": {"en": "**Comparing every pair** of parameters, to see which two are closest.",
                       "nl": "**Elk paar parameters vergelijken**, om te zien welke twee het dichtst bij elkaar liggen."},

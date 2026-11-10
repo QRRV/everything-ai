@@ -96,7 +96,7 @@ def predict_shape():
             "one": "(1,): één getal, zoals de loss",
             "right": "(2, 3): één getal per weight",
         },
-        reveal="**(2, 3).** De gradient bevat één partiële afgeleide voor elk getal van $\\mathbf{W}$, en zet die op dezelfde plek: het getal in rij $k$, kolom $j$ zegt hoe de loss verandert als je $W_{kj}$ een klein beetje verschuift. Dus heeft hij de shape van $\\mathbf{W}$. De loss is één getal, maar heeft hier 6 partiële afgeleiden. Sommige boeken schrijven deze gradient getransponeerd; de course houdt, net als PyTorch, de shape van $\\mathbf{W}$ aan.",
+        reveal="**(2, 3).** De gradient bevat één partiële afgeleide voor elk getal van $\\mathbf{W}$, en zet die op dezelfde plek: het getal in rij $k$, kolom $j$ zegt hoe de loss verandert als je $W_{kj}$ een heel klein stapje verandert. Dus heeft hij de shape van $\\mathbf{W}$. De loss is één getal, maar heeft hier 6 partiële afgeleiden. Sommige boeken schrijven deze gradient getransponeerd; de course houdt, net als PyTorch, de shape van $\\mathbf{W}$ aan.",
     )
     guess_shape
     return (guess_shape,)
@@ -146,7 +146,7 @@ def text_recipe():
     1. Schrijf de shape van elke matrix op: de input, de weights, de output, en de gradient naar de output.
     2. De gradient naar een matrix heeft de shape van die matrix.
     3. Zoek het product van de andere twee dat precies die shape geeft: transponeer er één waar nodig, zodat de binnenste getallen gelijk zijn.
-    4. Controleer één getal met een kleine stap: verschuif één getal van de matrix, en vergelijk.
+    4. Controleer één getal met een heel klein stapje in één getal van de matrix, en vergelijk.
     """)
     return
 
@@ -178,7 +178,7 @@ def example_shapes():
     # 2. en 3. dW heeft de shape van W, (2, 3): (2, 4) @ (4, 3) is G.T @ X
     _dW = _G.T @ _X
     print(_dW)
-    # 4. controleer het getal in rij 1, kolom 0: verschuif alleen die weight
+    # 4. controleer het getal in rij 1, kolom 0: een heel klein stapje in alleen die weight
     _h = 0.001
     _nudged = _W + np.array([[0.0, 0.0, 0.0], [_h, 0.0, 0.0]])
     print((_loss(_nudged) - _loss(_W)) / _h, _dW[1, 0])

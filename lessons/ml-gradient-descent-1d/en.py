@@ -200,7 +200,7 @@ def example_descent():
 @app.cell(hide_code=True)
 def text_after_example():
     mo.md(r"""
-    Each line shows the step, the slope it used, the new $w$ and its loss. After one step, $w$ is about 2.949, and the loss dropped from 2790 to 267. After five steps, $w$ is about 3.097, with a loss of about 99.93: almost the lowest point you found by hand, without trying a single step back. The learning rate is tiny, 0.00005, because the slopes here are in the thousands: 0.00005 times −8983 is −0.45, and minus that is a step of 0.45 to the right.
+    Each line shows the step, the slope it used, the new $w$ and its loss. After one step, $w$ is about 2.949, and the loss dropped from 2790 to 267. After five steps, $w$ is about 3.097, with a loss of about 99.93: almost the lowest point you found by hand, without trying a single step back. The learning rate is tiny, 0.00005, because the slopes here are in the thousands: 0.00005 times −8983 is −0.45, and minus that is a step of 0.45 to the right. That first slope is −8983, not the −8990 of the quick check: the code measures it with the tiny step $h = 0.001$, and on a curved loss that lands a little off the exact slope.
     """)
     return
 
@@ -242,7 +242,7 @@ def text_exercise_b():
         mo.md(r"""
         ### Exercise 2. Gradient descent for b
 
-        Now $w$ stays 3, and gradient descent looks for the best $b$, starting at $b = 0$, with the learning rate `lr = 0.2`. The box has the loss as `loss(w, b)` and the tiny step `h` for measuring a slope. The learning rate is much bigger than the 0.00005 for $w$: the slope for $b$ is in the tens, not in the thousands. The loop in the box runs 25 rounds. Replace the `...` with one update step for $b$. The last line is `b`, so the check sees where it ended. The check also tries another learning rate.
+        Now $w$ stays 3, and gradient descent looks for the best $b$, starting at $b = 0$, with the learning rate `lr = 0.2`. The box has the loss as `loss(w, b)` and the tiny step `h` for measuring a slope. The learning rate is much bigger than the 0.00005 for $w$: the slope for $b$ starts at about −115 and shrinks from there, far from the thousands. The loop in the box runs 25 rounds. Replace the `...` with one update step for $b$. The last line is `b`, so the check sees where it ended. The check also tries another learning rate.
         """),
         L.task("Fill the loop with one update step for b."),
     ])

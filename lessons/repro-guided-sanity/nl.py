@@ -118,7 +118,7 @@ def text_idea():
     2. **De loss vóór de training.** Een model dat niets geleerd heeft, gokt ongeveer gelijk verdeeld over zijn 99 tokens, dus zijn loss op de antwoorden is ongeveer ln 99 = 4,60. Veel hoger: het begint zeker en fout, zoals met weights die te groot beginnen. Veel lager: het weet iets wat het nog niet kan weten, zoals een antwoord dat in zijn input lekt.
     3. **Eén batch uit het hoofd leren.** Train op die ene batch alleen, steeds opnieuw, zonder weight decay: de test vraagt alleen of het model kan leren, en weight decay trekt de andere kant op. Een model dat werkt, leert 512 vergelijkingen in een paar honderd stappen, en zijn loss gaat naar bijna 0. Lukt dat niet, dan is het model of zijn trainingsstap kapot.
 
-    Hieronder staan twee runs van de ModernGPT van de course met de instellingen van de paper, op de eerste 512 vergelijkingen van je training data, met de AdamW van de paper zonder weight decay. Eén van de twee heeft de fout uit de gok: hij leest zijn gok op de plek van $a$. Schuif met de slider, of sleep over de grafiek, om het aantal stappen te zetten: de grafiek toont de loss van beide op de batch bij elke stap, de run met de fout gestippeld, en de grijze stippellijn is ln 99.
+    Hieronder staan twee runs van de ModernGPT van de course met de instellingen van de paper, op de eerste 512 vergelijkingen van je training data, met de AdamW van de paper zonder weight decay. Eén van de twee heeft de fout uit de gok: hij leest zijn gok op de plek van $a$. Schuif met de slider, of sleep over de grafiek, om het aantal stappen te kiezen: de grafiek toont de loss van beide op de batch bij elke stap, de run met de fout gestippeld, en de grijze stippellijn is ln 99.
     """)
     return
 

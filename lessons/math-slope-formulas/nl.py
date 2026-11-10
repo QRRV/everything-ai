@@ -181,7 +181,7 @@ def example_formula():
     # 1. en 2. x² is x tot de macht 2: de 2 komt naar voren, de macht wordt 1
     # 3. vul x in
     print(2 * _x)
-    # 4. controleer hem door te meten, met een heel kleine h
+    # 4. controleer hem door te meten, met een heel klein stapje h
     _h = 0.001
     print((_f(_x + _h) - _f(_x)) / _h)
     # een lijn, 5x, gemeten bij dezelfde x: de helling is 5

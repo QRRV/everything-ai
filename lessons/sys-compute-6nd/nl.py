@@ -93,7 +93,7 @@ def predict_gpt3():
             "years": "Ongeveer 3 jaar",
             "right": "Ongeveer 30 jaar",
         },
-        reveal="**Ongeveer 30 jaar.** $6 \\times 175 \\times 10^9 \\times 300 \\times 10^9 \\approx 3{,}2 \\times 10^{23}$ FLOPs, met $312 \\times 10^{12}$ per seconde: $10^9$ seconden, 32 jaar. Dat is op de volle piek, die geen run haalt. Het artikel over GPT-3 meldt $3{,}14 \\times 10^{23}$ FLOPs voor zijn training, gedaan op een groot cluster van GPU's.",
+        reveal="**Ongeveer 30 jaar.** $6 \\times 175 \\times 10^9 \\times 300 \\times 10^9 \\approx 3{,}2 \\times 10^{23}$ FLOPs, met $312 \\times 10^{12}$ per seconde: $10^9$ seconden, 32 jaar. Dat is op de volle piek, die geen run haalt. De paper over GPT-3 meldt $3{,}14 \\times 10^{23}$ FLOPs voor zijn training, gedaan op een groot cluster van GPU's.",
     )
     guess_gpt3
     return (guess_gpt3,)
@@ -159,7 +159,7 @@ def text_worked_example():
     mo.md(r"""
     ### Uitgewerkt voorbeeld
 
-    Nieuw is het terugrekenen vanuit een verslag. Llama 2 70B heeft 70 miljard parameters en trainde op 2 biljoen tokens; het artikel erover meldt 1.720.320 GPU-uren op A100-GPU's. Hoeveel van hun piek haalden die GPU's?
+    Nieuw is het terugrekenen vanuit een verslag. Llama 2 70B heeft 70 miljard parameters en trainde op 2 biljoen tokens; de paper erover meldt 1.720.320 GPU-uren op A100-GPU's. Hoeveel van hun piek haalden die GPU's?
     """)
     return
 
@@ -169,7 +169,7 @@ def example_llama():
     _n = 70e9                  # parameters van Llama 2 70B
     _d = 2e12                  # tokens waarop het trainde
     _peak = 312e12             # een A100 in BF16, FLOPs per seconde
-    _reported = 1_720_320      # GPU-uren, in het artikel over Llama 2
+    _reported = 1_720_320      # GPU-uren, in de paper over Llama 2
 
     _flops = 6 * _n * _d
     _at_peak = _flops / _peak / 3600
@@ -255,7 +255,7 @@ def demo_runs(box_hours, result_hours):
     |---|---|---|
     {_table}
 
-    Van seconden tot meer dan een maand, met dezelfde regel. Voor het model van 70 miljard parameters schat je functie ongeveer 1,9 miljoen GPU-uren; het artikel over Llama 2 meldt er 1,7 miljoen, omdat zijn GPU's iets meer dan 40% haalden. Een model zo klein als je GPT van het boek haalt veel minder dan 40%: zijn matrices zijn te klein om een grote GPU bezig te houden, en veel van zijn bewerkingen wachten op het geheugen. De volgende les meet hoeveel hij wel haalt.
+    Van seconden tot meer dan een maand, met dezelfde regel. Voor het model van 70 miljard parameters schat je functie ongeveer 1,9 miljoen GPU-uren; de paper over Llama 2 meldt er 1,7 miljoen, omdat zijn GPU's iets meer dan 40% haalden. Een model zo klein als je GPT van het boek haalt veel minder dan 40%: zijn matrices zijn te klein om een grote GPU bezig te houden, en veel van zijn bewerkingen wachten op het geheugen. De volgende les meet hoeveel hij wel haalt.
     """)
     _out
     return

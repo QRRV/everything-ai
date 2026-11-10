@@ -88,7 +88,7 @@ def text_why():
 def predict_warmup():
     guess_warmup = L.guess(
         "with-warmup",
-        question="The MLP of 10 residual blocks from [Residual connections](/course/open/nn-residual?lang=en) trains for one epoch with AdamW at a learning rate of 0.03, 30 times Adam's usual 0.001. Its loss shoots up in the first 20 steps and ends at 2.35, about the loss of guessing: it reads 131 of the 1,000 test digits right. Now the learning rate starts near 0 and climbs evenly to 0.03 over the first 30 steps, and then stays at 0.03. What do you think happens?",
+        question="The MLP of 10 blocks with residual connections from [Residual connections](/course/open/nn-residual?lang=en) trains for one epoch with AdamW at a learning rate of 0.03, 30 times Adam's usual 0.001. Its loss shoots up in the first 20 steps and ends at 2.35, about the loss of guessing: it reads 131 of the 1,000 test digits right. Now the learning rate starts near 0 and climbs evenly to 0.03 over the first 30 steps, and then stays at 0.03. What do you think happens?",
         options={
             "later": "It still gets stuck, only some steps later: the peak is the same",
             "right": "It trains: after one epoch it reads more than 800 of the test digits right",

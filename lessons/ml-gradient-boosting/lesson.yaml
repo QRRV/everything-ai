@@ -28,7 +28,7 @@ can_now:
     by: too-many
 further_reading:
   - en: "Jerome H. Friedman (2001), *Greedy Function Approximation: A Gradient Boosting Machine*, Annals of Statistics 29(5), 1189–1232: the paper that introduced gradient boosting"
-    nl: "Jerome H. Friedman (2001), *Greedy Function Approximation: A Gradient Boosting Machine*, Annals of Statistics 29(5), 1189–1232: het artikel waarin gradient boosting werd voorgesteld"
+    nl: "Jerome H. Friedman (2001), *Greedy Function Approximation: A Gradient Boosting Machine*, Annals of Statistics 29(5), 1189–1232: de paper waarin gradient boosting werd voorgesteld"
   - en: "Gareth James, Daniela Witten, Trevor Hastie, Robert Tibshirani and Jonathan Taylor (2023), *An Introduction to Statistical Learning with Applications in Python*, Springer, chapter 8.2, on boosting"
     nl: "Gareth James, Daniela Witten, Trevor Hastie, Robert Tibshirani en Jonathan Taylor (2023), *An Introduction to Statistical Learning with Applications in Python*, Springer, hoofdstuk 8.2, over boosting"
   - en: "Terence Parr and Jeremy Howard (2018), *How to explain gradient boosting*, explained.ai: gradient boosting step by step, with the golfer"

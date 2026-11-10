@@ -200,7 +200,7 @@ def text_exercise_direction():
 def choice_direction_cell():
     choice_direction = L.choice(
         "keeps-direction",
-        question="`torch.nn.utils.clip_grad_value_` kapt elk getal van de gradient apart af op $-c$ en $c$. Waarom clippen bijna alle trainingsscripts in plaats daarvan de norm?",
+        question="`torch.nn.utils.clip_grad_value_` kapt elk getal van de gradient apart af op $-c$ en $c$. Waarom clipt bijna alle trainingscode in plaats daarvan de norm?",
         options={
             "less-work": "De norm clippen is minder werk: het kijkt naar één getal in plaats van naar allemaal",
             "larger": "Elk getal afkappen kan de gradient groter maken dan hij was",
@@ -252,7 +252,7 @@ def hints_clip():
             "De norm van alle arrays samen: tel `np.sum(g ** 2)` op voor elke `g` in `grads`, en neem de wortel uit het totaal, met `** 0.5`.",
             "Dan `if norm > max_norm:` een nieuwe lijst maken, er met `append` `g * (max_norm / norm)` aan toevoegen voor elke `g`, en die teruggeven; anders `grads` teruggeven.",
         ],
-        why="`total = 0` en `for g in grads: total = total + np.sum(g ** 2)`; `norm = total ** 0.5`; `if norm > max_norm:` dan `out = []`, `for g in grads: out.append(g * (max_norm / norm))` en `return out`; na de `if` `return grads`. In het voorbeeld is de norm $\\sqrt{1 + 4 + 4 + 16} = 5$, dus de factor is $2{,}5 / 5 = 0{,}5$.",
+        why="De oplossing schrijft de loops van de hints elk op één regel. `sum(np.sum(g ** 2) for g in grads)` is een generator expression: een list comprehension zonder vierkante haken, waarvan de waarden meteen naar `sum` gaan. Met loops: `total = 0` en `for g in grads: total = total + np.sum(g ** 2)`; `norm = total ** 0.5`; `if norm > max_norm:` dan `out = []`, `for g in grads: out.append(g * (max_norm / norm))` en `return out`; na de `if` `return grads`. In het voorbeeld is de norm $\\sqrt{1 + 4 + 4 + 16} = 5$, dus de factor is $2{,}5 / 5 = 0{,}5$.",
     )
     return
 

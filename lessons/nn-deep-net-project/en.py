@@ -36,7 +36,7 @@ def text_quick_check():
 def quick_check_residual():
     quick_residual = L.choice(
         "quick-residual",
-        question="A residual block gives `x + f(x)`. Say that the layers of `f` pass back a gradient of almost 0. What reaches `x` on the way back?",
+        question="A block with a residual connection gives `x + f(x)`. Say that the layers of `f` pass back a gradient of almost 0. What reaches `x` on the way back?",
         options={
             "zero": "Almost 0 as well: everything has to go through the layers of `f`",
             "right": "All of the gradient from above: the + passes it on unchanged",

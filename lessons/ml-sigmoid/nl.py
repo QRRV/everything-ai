@@ -148,7 +148,7 @@ def text_idea():
         """),
         L.watch_out("Logit betekent twee dingen. In deze course is het de score vóór de sigmoid. De statistiek gebruikt het voor de weg terug, $\\log(p / (1 - p))$, ook log-odds genoemd. Bij twee klassen geven ze hetzelfde getal: de log-odds van $\\sigma(z)$ is weer $z$."),
         mo.md(r"""
-        Schuif met de slider, of sleep over de grafiek: dat zet de logit $z$. Het punt laat de <span class="c-pred">kans</span> $\sigma(z)$ zien die de sigmoid ervan maakt.
+        Schuif met de slider, of sleep over de grafiek: daarmee kies je de logit $z$. Het punt laat de <span class="c-pred">kans</span> $\sigma(z)$ zien die de sigmoid ervan maakt.
         """),
     ])
     return

@@ -177,7 +177,7 @@ def text_worked_example():
     mo.md(r"""
     ### Uitgewerkt voorbeeld
 
-    Waarom niet om de 500 stappen loggen? De cel hieronder rekent uit wat dat geeft voor een run van 12.000 stappen, en hoeveel van een logaritmische as het leeg laat: stap 1 van het recept. Voer hem uit.
+    Waarom niet om de 500 stappen loggen? De cel hieronder rekent uit wat dat geeft voor een run van 12.000 stappen, en hoeveel van een logaritmische as het leeg laat: stap 1 van het recept. `math.log10` is de logaritme met grondtal 10, waarmee een logaritmische as werkt. Voer hem uit.
     """)
     return
 

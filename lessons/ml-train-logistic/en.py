@@ -61,13 +61,13 @@ def quick_check_fit():
         question="What does one round of the loop in your `fit` for linear regression do?",
         options={
             "predict": "It predicts the labels once more, and keeps the best weights",
-            "nudge": "It nudges each weight and measures the loss again",
+            "nudge": "It changes each weight by a tiny step and measures the loss again",
             "right": "It gets both slopes from `mse_gradients`, and moves `w` and `b` against them",
         },
         correct="right",
         why={
             "predict": "Nothing is kept or compared: each round changes `w` and `b`. How? See exercise 3 of [Linear regression on many features](/course/open/ml-linear-regression-numpy?lang=en).",
-            "nudge": "Nudging was the slow way of [Fitting w and b with gradient descent](/course/open/ml-gradient-descent-2d?lang=en). Where does `fit` get its slopes? See exercise 3 of [Linear regression on many features](/course/open/ml-linear-regression-numpy?lang=en).",
+            "nudge": "Tiny steps were the slow way of [Fitting w and b with gradient descent](/course/open/ml-gradient-descent-2d?lang=en). Where does `fit` get its slopes? See exercise 3 of [Linear regression on many features](/course/open/ml-linear-regression-numpy?lang=en).",
             "right": "`grad_w, grad_b = gradients.mse_gradients(X, y, w, b)`, then `w = w - lr * grad_w` and `b = b - lr * grad_b`, `steps` times.",
         },
     )

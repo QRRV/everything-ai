@@ -220,12 +220,12 @@ def example_masks():
     from everything_ai.scenes import scene
 
     s = scene(18)
-    truth = s.shapes[3].box     # the box of the circle
-    pred = (62, 46, 91, 77)     # a box that a model could predict for it
+    truth = s.shapes[3].box     # de box van de cirkel
+    pred = (62, 46, 91, 77)     # een box die een model ervoor zou kunnen voorspellen
 
 
     def box_mask(box):
-        # a mask as large as the scene: True in the rows and columns of the box
+        # een mask zo groot als de scène: True in de rijen en kolommen van de box
         top, left, bottom, right = box
         mask = np.zeros((128, 128), dtype=bool)
         mask[top:bottom + 1, left:right + 1] = True
@@ -234,7 +234,7 @@ def example_masks():
 
     a = box_mask(truth)
     b = box_mask(pred)
-    # 5. count pixels: the overlap and the union
+    # 5. tel pixels: de overlap en de vereniging
     overlap = (a & b).sum()
     union = (a | b).sum()
     print(truth, a.sum(), pred, b.sum())
@@ -246,28 +246,28 @@ def example_masks():
 def example_others(b, box_mask, s):
     for shape in s.shapes:
         other = box_mask(shape.box)
-        # round(x, 2): x rounded to two decimals
+        # round(x, 2): x afgerond op twee decimalen
         print(shape.kind, shape.box, round((other & b).sum() / (other | b).sum(), 2))
     return
 
 
 @app.cell
 def example_steps(pred, s):
-    # steps 1 to 4 with only the four numbers of each box: the predicted box
-    # against the box of the square and the box of the large triangle
+    # stap 1 tot 4 met alleen de vier getallen van elke box: de voorspelde box
+    # tegen de box van het vierkant en de box van de grote driehoek
     for t in (s.shapes[2].box, s.shapes[1].box):
-        # 1. the overlap: the larger tops and lefts, the smaller bottoms and rights
+        # 1. de overlap: de grootste bovenkanten en linkerkanten, de kleinste onderkanten en rechterkanten
         top, left = max(t[0], pred[0]), max(t[1], pred[1])
         bottom, right = min(t[2], pred[2]), min(t[3], pred[3])
-        # 2. its rows and its columns, each at least 0, and its pixels
+        # 2. zijn rijen en zijn kolommen, elk minstens 0, en zijn pixels
         rows = max(0, bottom - top + 1)
         cols = max(0, right - left + 1)
         both = rows * cols
-        # 3. the union: both areas added, minus the overlap
+        # 3. de vereniging: beide oppervlakken opgeteld, min de overlap
         area_t = (t[2] - t[0] + 1) * (t[3] - t[1] + 1)
         area_pred = (pred[2] - pred[0] + 1) * (pred[3] - pred[1] + 1)
         union_t = area_t + area_pred - both
-        # 4. the overlap divided by the union
+        # 4. de overlap gedeeld door de vereniging
         print(t, bottom - top + 1, right - left + 1)
         print(both, union_t, round(both / union_t, 2))
     return

@@ -156,7 +156,7 @@ def text_recipe():
     1. Splits de functie in een binnenste en een buitenste stap, zoals $r = y - w \cdot x$ en $r^2$.
     2. Zoek de helling van elke stap met de regels die je kent: $-x$ voor de lijn, $2r$ voor het kwadraat.
     3. Vul de getallen in: eerst de binnenste waarde, dan de buitenste helling bij die waarde.
-    4. Vermenigvuldig de twee hellingen. Controleer het eventueel door te meten met een piepkleine $h$.
+    4. Vermenigvuldig de twee hellingen. Controleer het eventueel door te meten met een heel klein stapje $h$.
     """)
     return
 
@@ -184,7 +184,7 @@ def example_chain():
     # 4. vermenigvuldig de hellingen
     _slope = _dloss_dr * _dr_dw
     print(_r, _dloss_dr, _dr_dw, _slope)
-    # en controleer door te meten, met een piepkleine h
+    # en controleer door te meten, met een heel klein stapje h
     _h = 0.001
     print(((_y - (_w + _h) * _x) ** 2 - _loss) / _h)
     return

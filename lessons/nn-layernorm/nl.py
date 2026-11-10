@@ -40,12 +40,12 @@ def quick_check_over_what():
         options={
             "all-data": "Over alle training data tegelijk, voordat het trainen begint",
             "right": "Over de voorbeelden in de mini-batch",
-            "running": "Over zijn running averages, die het na elke batch bijwerkt",
+            "running": "Over zijn voortschrijdende gemiddelden, die het na elke batch bijwerkt",
         },
         correct="right",
         why={
             "all-data": "Het ziet nooit alle data tegelijk: in train mode gebruikt het de mini-batch die het krijgt. Zie [Batch normalization](/course/open/nn-batchnorm?lang=nl).",
-            "running": "De running averages zijn voor eval mode. In train mode gebruikt het het gemiddelde en de variantie van de mini-batch zelf. Zie [Batch normalization](/course/open/nn-batchnorm?lang=nl).",
+            "running": "De voortschrijdende gemiddelden zijn voor eval mode. In train mode gebruikt het het gemiddelde en de variantie van de mini-batch zelf. Zie [Batch normalization](/course/open/nn-batchnorm?lang=nl).",
             "right": "Per neuron, over de voorbeelden in de mini-batch: dus elk antwoord hangt af van de andere voorbeelden erin.",
         },
     )
@@ -79,7 +79,7 @@ def text_why():
     mo.md(r"""
     ## Waarom
 
-    Batch normalization heeft een batch nodig: elk antwoord hangt af van de andere voorbeelden erin, kleine batches geven ruwe schattingen, en eval mode heeft running averages nodig. Een language model dat tekst schrijft, werkt aan één reeks tegelijk, van willekeurige lengte. Layer normalization standaardiseert elk voorbeeld op zichzelf, over zijn eigen features, dus dat speelt allemaal niet. Transformers gebruiken het in elk block. Dat roept een tweede vraag op: waar komt de normalisatie in een block met een residual connection?
+    Batch normalization heeft een batch nodig: elk antwoord hangt af van de andere voorbeelden erin, kleine batches geven ruwe schattingen, en eval mode heeft voortschrijdende gemiddelden nodig. Een language model dat tekst schrijft, werkt aan één reeks tegelijk, van willekeurige lengte. Layer normalization standaardiseert elk voorbeeld op zichzelf, over zijn eigen features, dus dat speelt allemaal niet. Transformers gebruiken het in elk block. Dat roept een tweede vraag op: waar komt de normalisatie in een block met een residual connection?
     """)
     return
 
@@ -111,7 +111,7 @@ def text_idea():
         L.formula(r"\mu = \frac{1}{d} \sum_{j=1}^{d} x_j \qquad \sigma^2 = \frac{1}{d} \sum_{j=1}^{d} (x_j - \mu)^2"),
         L.formula(r"\hat{x}_j = \frac{x_j - \mu}{\sqrt{\sigma^2 + [[hyper:\varepsilon]]}} \qquad y_j = [[param:\gamma_j]] \, \hat{x}_j + [[param:\beta_j]]"),
         mo.md(r"""
-        Het zijn de formules van batch normalization, omgedraaid: het gemiddelde en de variantie worden genomen over de $d$ features van één voorbeeld, niet over de voorbeelden van een batch. $\gamma$ en $\beta$ hebben nog steeds één getal per feature, geleerd, hetzelfde voor elk voorbeeld. Er zijn geen running averages: LayerNorm doet hetzelfde in train mode en in eval mode, en het werkt voor een batch van één. In PyTorch doet `nn.LayerNorm(64)` dit voor 64 features.
+        Het zijn de formules van batch normalization, omgedraaid: het gemiddelde en de variantie worden genomen over de $d$ features van één voorbeeld, niet over de voorbeelden van een batch. $\gamma$ en $\beta$ hebben nog steeds één getal per feature, geleerd, hetzelfde voor elk voorbeeld. Er zijn geen voortschrijdende gemiddelden: LayerNorm doet hetzelfde in train mode en in eval mode, en het werkt voor een batch van één. In PyTorch doet `nn.LayerNorm(64)` dit voor 64 features.
 
         In een block met een residual connection kan het op twee plekken. **Post-norm**, zoals in de eerste transformer van 2017, normaliseert na het optellen: $y = \mathrm{LN}(x + f(x))$. **Pre-norm**, zoals in GPT-2 en de meeste transformers daarna, normaliseert op weg naar $f$: $y = x + f(\mathrm{LN}(x))$. Met pre-norm staat er niets op de directe weg, dus de gradient komt ongewijzigd terug door elk block, zoals in [Residual connections](/course/open/nn-residual?lang=nl). Omdat de weg zelf nooit genormaliseerd wordt, kunnen zijn getallen van block tot block groeien; een netwerk met pre-norm zet daarom nog één LayerNorm na het laatste block, vóór de output-layer. Zonder die LayerNorm eindigt ook het pre-norm-netwerk uit de gok in `nan`.
 
@@ -209,13 +209,13 @@ def choice_one_cell():
         "batch-of-one",
         question="Een model traint met één lange tekst per stap: een batch van één. Welke normalisatie standaardiseert in train mode dan nog zinvol zijn features?",
         options={
-            "batch": "BatchNorm: zijn running averages vullen de ontbrekende batch aan",
+            "batch": "BatchNorm: zijn voortschrijdende gemiddelden vullen de ontbrekende batch aan",
             "right": "LayerNorm: het standaardiseert elk voorbeeld over zijn eigen features",
             "both": "Allebei: een batch van één is gewoon een kleine batch",
         },
         correct="right",
         why={
-            "batch": "In train mode gebruikt BatchNorm de batch zelf, niet zijn running averages. Voor één voorbeeld is elke $z$ min zijn eigen gemiddelde 0: alles wordt $\\beta$.",
+            "batch": "In train mode gebruikt BatchNorm de batch zelf, niet zijn voortschrijdende gemiddelden. Voor één voorbeeld is elke $z$ min zijn eigen gemiddelde 0: alles wordt $\\beta$.",
             "both": "Voor BatchNorm is het gemiddelde van één getal dat getal zelf, dus elke $z$ wordt 0 vóór het herschalen; PyTorch weigert in train mode zelfs een batch van één. LayerNorm kijkt nooit naar andere voorbeelden.",
             "right": "LayerNorm neemt het gemiddelde en de variantie over de features van elk voorbeeld, dus de grootte van de batch doet er niet toe, in train mode en in eval mode.",
         },

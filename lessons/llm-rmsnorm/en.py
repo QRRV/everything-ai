@@ -154,7 +154,7 @@ def text_worked_example():
     mo.md(r"""
     ### Worked example
 
-    PyTorch's `nn.RMSNorm` is new: here it runs next to `nn.LayerNorm` on two rows of 6 numbers, once rescaled and once shifted.
+    PyTorch's `nn.RMSNorm` is new: here it runs next to `nn.LayerNorm` on two rows of 6 numbers, once rescaled and once shifted. `torch.allclose(a, b, atol=1e-5)` says whether two tensors are the same up to differences of about 0.00001, and `p.numel()` counts the numbers in a tensor `p`.
     """)
     return
 

@@ -125,7 +125,7 @@ def text_idea():
         """),
         L.watch_out("De log loss heeft de log nodig van de kans op wat er echt gebeurde: $\\hat{y}$ bij een spammail, maar $1 - \\hat{y}$ bij een mail die geen spam is. PyTorch noemt deze loss binary cross-entropy."),
         mo.md(r"""
-        Schuif met de slider, of sleep over de grafiek: dat zet de <span class="c-pred">kans op spam</span> $\hat{y}$ die het model geeft aan een mail die spam is. De doorgetrokken lijn is de <span class="c-loss">log loss</span>, de stippellijn het <span class="c-loss">gekwadrateerde residu</span> van de mean squared error.
+        Schuif met de slider, of sleep over de grafiek: daarmee kies je de <span class="c-pred">kans op spam</span> $\hat{y}$ die het model geeft aan een mail die spam is. De doorgetrokken lijn is de <span class="c-loss">log loss</span>, de stippellijn het <span class="c-loss">gekwadrateerde residu</span> van de mean squared error.
         """),
     ])
     return

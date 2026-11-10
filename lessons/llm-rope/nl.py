@@ -129,7 +129,7 @@ def text_idea():
         | **RoPE** | rotary position embeddings: elk paar van een query of key draaien over zijn plek maal zijn snelheid | `rope(q)`, `rope(k)` |
         | $\theta_j$ | de snelheid van paar $j$: radialen per plek | `base ** (-2 * j / d)` |
         """),
-        L.watch_out("Code gebruikt twee indelingen. Deze les, het artikel over RoPE en de Llama-code van Meta koppelen buren, getal 0 en 1; de Llama van Hugging Face koppelt de eerste helft van een vector aan de tweede helft. De weights van een getraind model verwachten de indeling waarmee het getraind is."),
+        L.watch_out("Code gebruikt twee indelingen. Deze les, de paper over RoPE en de Llama-code van Meta koppelen buren, getal 0 en 1; de Llama van Hugging Face koppelt de eerste helft van een vector aan de tweede helft. De weights van een getraind model verwachten de indeling waarmee het getraind is."),
     ])
     return
 

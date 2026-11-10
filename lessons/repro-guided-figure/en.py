@@ -177,7 +177,7 @@ def text_worked_example():
     mo.md(r"""
     ### Worked example
 
-    Why not log every 500 steps? The cell below works out what that gives for a run of 12,000 steps, and how much of a log axis it leaves empty: step 1 of the recipe. Run it.
+    Why not log every 500 steps? The cell below works out what that gives for a run of 12,000 steps, and how much of a log axis it leaves empty: step 1 of the recipe. `math.log10` is the logarithm with base 10, the one a log axis uses. Run it.
     """)
     return
 

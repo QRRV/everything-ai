@@ -57,7 +57,7 @@ def quick_check_autograd():
 def quick_check_error():
     quick_error = L.choice(
         "quick-error",
-        question="Your backward pass gives a weight the gradient 0.8; nudging gives 0.4. What is the relative error?",
+        question="Your backward pass gives a weight the gradient 0.8; a tiny step gives 0.4. What is the relative error?",
         options={
             "small": "1: the difference, 0.4, divided by the smaller of the two",
             "abs": "0.4: the difference itself",

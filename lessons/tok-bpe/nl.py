@@ -127,7 +127,7 @@ def text_idea():
         """),
         L.watch_out("Voeg samen van links naar rechts, en ga verder na beide tokens van een samengevoegd paar: `a a a` met de regel (`a`, `a`) geeft `aa a`, niet `aa aa`. In één ronde kan een token maar in één merge zitten."),
         mo.md(r"""
-        De figuur: een regel uit Hamlet, getokeniseerd met de eerste $n$ merge rules die de course leerde uit de eerste 20.000 tekens van Tiny Shakespeare. ␣ is een spatie, ↵ een nieuwe regel. Schuif met de slider, of sleep over de grafiek, om $n$ te zetten: de grafiek toont hoeveel tokens de regel heeft bij elke $n$, en de zin eronder welk paar de nieuwste merge rule samenvoegt.
+        De figuur: een regel uit Hamlet, getokeniseerd met de eerste $n$ merge rules die de course leerde uit de eerste 20.000 tekens van Tiny Shakespeare. ␣ is een spatie, ↵ een nieuwe regel. Schuif met de slider, of sleep over de grafiek, om $n$ te kiezen: de grafiek toont hoeveel tokens de regel heeft bij elke $n$, en de zin eronder welk paar de nieuwste merge rule samenvoegt.
         """),
     ])
     return

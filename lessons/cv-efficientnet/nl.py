@@ -156,7 +156,7 @@ def text_idea():
         | EfficientNet-B7 | 84,3% | 66 miljoen | 37 miljard |
         | GPipe | 84,3% | 557 miljoen | niet in de tabel |
         """),
-        L.watch_out("De regel $d \\cdot w^2 \\cdot r^2$ klopt ongeveer, niet precies. De paper gebruikt hem omdat gewone convoluties, de 1×1 convolutions daaronder, het meeste werk doen in een CNN; maar layers die op een andere manier groeien, tellen ook mee, zoals de eerste convolutie en de depthwise convolutions, en afronden ook, zoals het uitgewerkte voorbeeld en de schuifregelaar laten zien. Hoeveel compound scaling oplevert, hangt ook af van het netwerk waarmee je begint, zegt de paper: daarom zochten Tan en Le eerst naar B0. En een hogere resolutie helpt alleen als de foto's de details hebben. De foto's van CIFAR-10 zijn 32 bij 32, dus krijgt het basisnetwerk van de demo ze verkleind tot 16 bij 16, en krijgen de scherpere netwerken weer meer pixels, tot 32 bij 32."),
+        L.watch_out("De regel $d \\cdot w^2 \\cdot r^2$ klopt ongeveer, niet precies. De paper gebruikt hem omdat gewone convoluties, de 1×1 convolutions daaronder, het meeste werk doen in een CNN; maar layers die op een andere manier groeien, tellen ook mee, zoals de eerste convolutie en de depthwise convolutions, en afronden ook, zoals het uitgewerkte voorbeeld en de slider laten zien. Hoeveel compound scaling oplevert, hangt ook af van het netwerk waarmee je begint, zegt de paper: daarom zochten Tan en Le eerst naar B0. En een hogere resolutie helpt alleen als de foto's de details hebben. De foto's van CIFAR-10 zijn 32 bij 32, dus krijgt het basisnetwerk van de demo ze verkleind tot 16 bij 16, en krijgen de scherpere netwerken weer meer pixels, tot 32 bij 32."),
         mo.md(r"""
         ### Nieuwe woorden en tekens
 

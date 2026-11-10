@@ -14,8 +14,8 @@ summary:
     nl: 'De helling van de sigmoid is $\sigma(z)(1 - \sigma(z))$; de helling van $\log(p)$ is $1/p$. Met de kettingregel aan de helling van de loss gekoppeld valt bijna alles weg: $\hat{y} - y$ blijft over.'
   - en: 'The gradient of the log loss for a weight is $(\hat{y} - y)\, x_j$, for the bias term $\hat{y} - y$; for many examples, the mean: `np.mean((p - y) * x)`.'
     nl: 'De gradient van de log loss voor een weight is $(\hat{y} - y)\, x_j$, voor de bias term $\hat{y} - y$; bij veel voorbeelden het gemiddelde: `np.mean((p - y) * x)`.'
-  - en: "A nudge of a tiny h checks the formula: the change in the loss divided by h comes out close to it."
-    nl: "Een duwtje van een piepkleine h controleert de formule: de verandering van de loss gedeeld door h komt er dicht bij uit."
+  - en: "A tiny step h checks the formula: the change in the loss divided by h comes out close to it."
+    nl: "Een heel klein stapje h controleert de formule: de verandering van de loss gedeeld door h komt er dicht bij uit."
 can_now:
   - en: "work out the slope of the log loss for one weight"
     nl: "de helling van de log loss voor één weight uitrekenen"

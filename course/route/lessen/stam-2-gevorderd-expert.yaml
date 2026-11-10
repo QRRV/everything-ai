@@ -293,7 +293,7 @@ lessons:
   idea: "If the gradient's norm is above a limit, scale it down; one bad batch can then no longer wreck training."
   covers: [optimizers#4]
   requires: [nn-vanishing-exploding, opt-adam, math-norms-cosine]
-  introduces: [c:gradient-clipping, s:clip-norm, py:clip-grad-norm]
+  introduces: [c:gradient-clipping, s:clip-norm, py:clip-grad-norm, py:generator-expression]
   uses: [c:norm, c:cosine-similarity, c:vector, c:gradient, c:exploding-gradient, c:layer, c:weight, c:bias-term, c:mini-batch, c:epoch, c:loss, c:training, c:learning-rate, c:sgd, c:adam, c:optimizer, c:update-step, c:mlp, c:test-set, c:accuracy, c:model-parameter, s:eta, v:log-scale, v:loss-curve, py:torch-optim, py:optimizer-step, py:zero-grad, py:backward, py:item, py:nn-linear, py:np-array, py:np-sum, py:list, py:for, py:if, py:def, py:return, py:import, py:import-as, py:print, py:comment, py:underscore-name, q:predict, q:choice, q:exercise-with-check, q:run-cell]
   mentions: [c:language-model, c:overfitting, c:dropout]
   ladder: [torch]
@@ -417,7 +417,10 @@ lessons:
   idea: "A small CNN with nn.Conv2d beats your deep MLP on Fashion-MNIST with far fewer parameters; the Beeld branch continues this project."
   covers: [beeldclassificatie#3]
   requires: [cnn-conv-numpy, nn-deep-net-project]
+  # The output head is introduced by lm-mlp-context, which is not in this chain (route beeld): the lesson says in one clause
+  # what it is, the last linear layer that makes the logits.
   introduces: [py:nn-conv2d, py:nn-maxpool2d, py:numel]
+  mentions: [c:output-head]
   uses: [c:convolution, c:filter, c:channel, c:output-channel, c:feature-map, c:pooling, c:kernel-size, c:padding, c:receptive-field, c:im2col, c:patch, c:locality, c:weight-sharing, c:mlp, c:layer, c:relu, c:logit, c:softmax, c:cross-entropy, c:mini-batch, c:epoch, c:learning-rate, c:warmup, c:test-set, c:seed, c:model-parameter, c:weight, c:bias-term, c:shape, c:he-init, c:batchnorm, c:residual-connection, p:overfit-one-batch, py:nn-module, py:nn-linear, py:class, py:self, py:init-method, py:forward-method, py:super, py:manual-seed, py:tuple, py:for, py:len, py:def, py:return, py:print, py:comment, py:underscore-name, py:import, q:predict, q:choice, q:exercise-with-check, q:run-cell]
   ladder: [torch]
   data: [fashion-mnist]
@@ -614,6 +617,6 @@ lessons:
   requires: [nn-layernorm, gpt-assemble]
   introduces: [c:rmsnorm, c:root-mean-square]
   uses: [c:layernorm, c:pre-norm, c:residual-stream, c:gpt, c:transformer-block, c:attention, c:mlp, c:output-head, c:feature, c:mean, c:variance, c:standard-deviation, c:bias-term, c:model-parameter, c:validation-set, c:mini-batch, c:token, c:softmax, s:gamma-scale, s:beta-shift, s:epsilon, py:nn-module, py:nn-parameter, py:keepdim, py:nn-linear, py:torch-randn, py:manual-seed, py:class, py:init-method, py:self, py:def, py:return, py:print, py:comment, py:underscore-name, py:import, q:predict, q:choice, q:explain, q:exercise-with-check, q:run-cell]
-  mentions: [c:gpu-kernel]
+  mentions: [c:gpu-kernel, py:torch-allclose, py:numel]
   ladder: [torch]
   needs: any

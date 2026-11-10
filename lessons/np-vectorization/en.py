@@ -117,6 +117,7 @@ def text_idea():
     | **array and number** | `+`, `-`, `*`, `/` and `**` with one number work on every number of the array | `np.array([1, 2, 3]) * 2` gives `array([2, 4, 6])` |
     | **two arrays** | with two arrays of the same shape, the numbers in the same place go together | `np.array([1, 2]) + np.array([10, 20])` gives `array([11, 22])` |
     | **`np.arange`** | the numbers 0, 1, 2 and so on, as an array, the way `range` counts | `np.arange(4)` gives `array([0, 1, 2, 3])` |
+    | **`np.round`** | rounds every number of the array to the number of decimals you give, as `round` does for one number | `np.round(np.array([1.234, 5.678]), 1)` gives `array([1.2, 5.7])` |
 
     The result is always a new array, of the same shape; the array you started with stays as it was.
     """)

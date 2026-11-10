@@ -78,7 +78,7 @@ def text_why():
     mo.md(r"""
     ## Waarom
 
-    ResNet-18 noemt de koffiefoto espresso, met 0,85. Maar een kans zegt niet waar hij op rust: de koffie, het kopje, of het rode schoteltje eronder. Een classifier kan gelijk hebben om de verkeerde reden. Lapuschkin en zijn collega's (2019) bekeken een classifier die paarden herkende op de foto's van PASCAL VOC 2007, en tekenden over elke foto, met een ander soort map dan die van vandaag, waar zijn antwoord op rustte. Hij keek naar een bronvermelding, een regel tekst in een hoek, die op ongeveer één op de vijf paardenfoto's stond. Op een foto van een auto geplakt maakte die bronvermelding de auto tot een paard. Simonyan, Vedaldi en Zisserman (2014) maakten de eenvoudigste map van dat soort voor een CNN, met één backward pass: de grootte van de helling van een class-score naar elke pixel, die laat zien "which pixels need to be changed the least to affect the class score the most", welke pixels het minst hoeven te veranderen om de score het meest te veranderen. Vandaag maak je die map voor ResNet-18, en test je wat hij belooft.
+    ResNet-18 noemt de koffiefoto espresso, met 0,85. Maar een kans zegt niet waar hij op rust: de koffie, het kopje, of het rode schoteltje eronder. Een classifier kan gelijk hebben om de verkeerde reden. Lapuschkin en zijn collega's (2019) bekeken een classifier die paarden herkende op de foto's van PASCAL VOC 2007, en tekenden over elke foto, met een ander soort map dan die van vandaag, waar zijn antwoord op rustte. Hij keek naar een bronvermelding, een regel tekst in een hoek, die op ongeveer één op de vijf paardenfoto's stond. Op een foto van een auto geplakt maakte die bronvermelding de auto tot een paard. Simonyan, Vedaldi en Zisserman (2014) maakten de eenvoudigste map van dat soort voor een CNN, met één backward pass: de grootte van de helling van een klassescore naar elke pixel, die laat zien "which pixels need to be changed the least to affect the klasse score the most", welke pixels het minst hoeven te veranderen om de score het meest te veranderen. Vandaag maak je die map voor ResNet-18, en test je wat hij belooft.
     """)
     return
 
@@ -93,7 +93,7 @@ def predict_change():
             "right": "Ja, als je de goede pixels kiest en elke kleur de goede kant op verandert",
             "any": "Ja, elke 5% van de pixels zou dat doen",
         },
-        reveal="**Ja, met de goede pixels.** De 5% van de pixels met de grootste hellingen, elke kleur 1 tegen zijn helling in veranderd, brengen balloon omlaag naar 0,40, en ping-pong ball komt bovenaan, met 0,44. 5% willekeurige pixels, op dezelfde manier veranderd, laten balloon bovenaan, met 0,63. De hellingen komen uit één backward pass; hun grootste grootte per pixel, als plaatje getekend, is de map van vandaag. Met de schuifregelaar in *Het idee* verander je ze meer.",
+        reveal="**Ja, met de goede pixels.** De 5% van de pixels met de grootste hellingen, elke kleur 1 tegen zijn helling in veranderd, brengen balloon omlaag naar 0,40, en ping-pong ball komt bovenaan, met 0,44. 5% willekeurige pixels, op dezelfde manier veranderd, laten balloon bovenaan, met 0,63. De hellingen komen uit één backward pass; hun grootste grootte per pixel, als plaatje getekend, is de map van vandaag. Met de slider in *Het idee* verander je ze meer.",
     )
     guess_change
     return (guess_change,)
@@ -113,15 +113,15 @@ def text_idea():
         mo.md(r"""
         ## Het idee
 
-        **Een helling voor elke pixel.** De logit van een class $c$, zijn score $z_c$, is één getal, berekend uit een foto $\mathbf{x}$ van 3 × 224 × 224 = 150.528 getallen. Net als in [Twee parameters: de gradient](/course/open/math-gradient?lang=nl) heeft zijn gradient een helling voor elk van die getallen, de partiële afgeleide $\partial z_c / \partial x_i$: hoeveel de score verandert als dat ene getal een beetje verandert. Dicht bij de foto is de score in elke richting bijna een rechte lijn:
+        **Een helling voor elke pixel.** De logit van een klasse $c$, zijn score $z_c$, is één getal, berekend uit een foto $\mathbf{x}$ van 3 × 224 × 224 = 150.528 getallen. Net als in [Twee parameters: de gradient](/course/open/math-gradient?lang=nl) heeft zijn gradient een helling voor elk van die getallen, de partiële afgeleide $\partial z_c / \partial x_i$: hoeveel de score verandert als dat ene getal een beetje verandert. Dicht bij de foto is de score in elke richting bijna een rechte lijn:
 
         $$z_c(\text{veranderde foto}) \approx z_c(\mathbf{x}) + \sum_i \frac{\partial z_c}{\partial x_i} \times (\text{verandering van } x_i)$$
 
         Een kleine verandering van de getallen met de grootste hellingen beweegt de score dus het meest.
 
-        **Autograd geeft alle hellingen tegelijk.** De foto is een tensor die PyTorch zonder opnemen maakte, dus een leaf tensor, en `x.requires_grad = True` zet het opnemen voor hem aan, zoals `requires_grad=True` deed in [PyTorch-autograd doet wat jouw Value deed](/course/open/torch-autograd?lang=nl). `resnet(x)[0, c]` is de logit van class `c` voor foto 0 van de batch, één getal, en `.backward()` vanaf dat getal vult `x.grad`, in de shape van `x`: (1, 3, 224, 224). Dat is één keer vooruit door het netwerk en één keer terug. De centrale differentie van [Gradient checking](/course/open/nn-gradient-check?lang=nl), één getal tegelijk, zou twee keer door het netwerk moeten voor elk van de 150.528 getallen: 301.056 keer. De weights van de ResNet-18 van de course houden geen hellingen bij, dus krijgt alleen `x` een `.grad`. Haal hem buiten `torch.no_grad()` door het model: daarbinnen neemt PyTorch niets op.
+        **Autograd geeft alle hellingen tegelijk.** De foto is een tensor die PyTorch zonder opnemen maakte, dus een leaf tensor, en `x.requires_grad = True` zet het opnemen voor hem aan, zoals `requires_grad=True` deed in [PyTorch-autograd doet wat jouw Value deed](/course/open/torch-autograd?lang=nl). `resnet(x)[0, c]` is de logit van klasse `c` voor foto 0 van de batch, één getal, en `.backward()` vanaf dat getal vult `x.grad`, in de shape van `x`: (1, 3, 224, 224). Dat is één keer vooruit door het netwerk en één keer terug. De centrale differentie van [Gradient checking](/course/open/nn-gradient-check?lang=nl), één getal tegelijk, zou twee keer door het netwerk moeten voor elk van de 150.528 getallen: 301.056 keer. De weights van de ResNet-18 van de course houden geen hellingen bij, dus krijgt alleen `x` een `.grad`. Haal hem buiten `torch.no_grad()` door het model: daarbinnen neemt PyTorch niets op.
 
-        **De logit, niet de kans.** De kans op een class kan stijgen doordat andere classes dalen: softmax deelt door allemaal. De hellingen van een kans mengen er elke andere class in, dus namen Simonyan en zijn collega's de score zelf.
+        **De logit, niet de kans.** De kans op een klasse kan stijgen doordat andere klassen dalen: softmax deelt door allemaal. De hellingen van een kans mengen er elke andere klasse in, dus namen Simonyan en zijn collega's de score zelf.
 
         **Een saliency map.** Voor een plaatje, één getal per pixel: de grootste grootte van zijn drie hellingen, één per kleur.
 
@@ -129,7 +129,7 @@ def text_idea():
 
         De grootte, zonder het teken, want een pixel die de score verlaagt als hij lichter wordt, telt even zwaar als een die hem verhoogt. Dat is de **saliency map**, 224 bij 224: `np.abs(x.grad[0].numpy()).max(axis=0)`. `x.grad[0]` heeft de hellingen van foto 0, met shape (3, 224, 224); `.numpy()` maakt er een NumPy-array van, zoals in [Een beeldclassifier uitproberen](/course/open/cv-try-classifier?lang=nl), en `.max(axis=0)` neemt de grootste langs axis 0, de kleuren. Een paar pixels hebben veel grotere hellingen dan de rest, dus is een getekende map wit vanaf de 1% grootste: `vmax=np.quantile(sal, 0.99)`, het kwantiel van [Data beschrijven](/course/open/stats-describe?lang=nl).
 
-        **Houdt een map zijn belofte?** Verander alleen zijn lichtste pixels, een beetje: elke kleur 1 op zijn schaal van 0 tot 255, tegen zijn helling in, dus omlaag waar de helling positief is en omhoog waar hij negatief is. Klopt de map, dan verandert het antwoord eerder dan wanneer evenveel willekeurige pixels op dezelfde manier veranderen. De schuifregelaar doet dat op de tekening van fruit, die ResNet-18 een balloon noemt: met de 5% pixels met de hoogste saliency in de map van balloon, 2.509 van de 50.176, of met 2.509 willekeurige, elke kleur zoveel veranderd als je kiest.
+        **Houdt een map zijn belofte?** Verander alleen zijn lichtste pixels, een beetje: elke kleur 1 op zijn schaal van 0 tot 255, tegen zijn helling in, dus omlaag waar de helling positief is en omhoog waar hij negatief is. Klopt de map, dan verandert het antwoord eerder dan wanneer evenveel willekeurige pixels op dezelfde manier veranderen. De slider doet dat op de tekening van fruit, die ResNet-18 een balloon noemt: met de 5% pixels met de hoogste saliency in de map van balloon, 2.509 van de 50.176, of met 2.509 willekeurige, elke kleur zoveel veranderd als je kiest.
         """),
         _steps,
         mo.md(r"""
@@ -141,7 +141,7 @@ def text_idea():
 
         | Woord | Wat het betekent | In code |
         |---|---|---|
-        | **saliency map** | één getal per pixel: hoe sterk een class-score verandert als die pixel een beetje verandert, de grootste grootte van zijn hellingen over de kleuren | `np.abs(x.grad[0].numpy()).max(axis=0)` |
+        | **saliency map** | één getal per pixel: hoe sterk een klassescore verandert als die pixel een beetje verandert, de grootste grootte van zijn hellingen over de kleuren | `np.abs(x.grad[0].numpy()).max(axis=0)` |
         | $M_{ij}$ | de saliency van de pixel in rij $i$ en kolom $j$ | `sal[i, j]` |
         """),
     ])
@@ -156,7 +156,7 @@ def text_recipe():
     Zo zie je welke pixels het antwoord van een classifier veranderen:
 
     1. Maak de foto klaar zoals voor het model, een tensor `x` met shape (1, 3, 224, 224), en zet het opnemen aan: `x.requires_grad = True`.
-    2. Haal hem door het model, niet binnen `torch.no_grad()`, en neem de logit van de class die je wilt uitleggen: `model(x)[0, c]`, niet zijn kans.
+    2. Haal hem door het model, niet binnen `torch.no_grad()`, en neem de logit van de klasse die je wilt uitleggen: `model(x)[0, c]`, niet zijn kans.
     3. Ga terug vanaf dat ene getal, `.backward()`: `x.grad` heeft een helling voor elke pixel en kleur. Zet vóór een tweede map van dezelfde `x` eerst `x.grad = None`: `.grad` telt op.
     4. De saliency map: per pixel de grootste grootte van zijn hellingen over de kleuren, `np.abs(x.grad[0].numpy()).max(axis=0)`, met shape (224, 224).
     5. Teken hem, wit vanaf de 1% grootste. Om hem te testen verander je zijn lichtste pixels een beetje en kijk je of het antwoord eerder verandert dan met willekeurige pixels: de demo doet dat met je functies.
@@ -169,7 +169,7 @@ def text_worked_example():
     mo.md(r"""
     ### Uitgewerkt voorbeeld
 
-    De cel onder de download maakt de kat klaar zoals in [Een beeldclassifier uitproberen](/course/open/cv-try-classifier?lang=nl), met het opnemen aan, en neemt de logit van class 285, Egyptian cat, de beste gok van ResNet-18 voor de kat. Hij print de score, gaat ervandaan terug, en print de shape van `x.grad`. Dan maakt hij de map, en print hij zijn shape, zijn grootste getal en waar dat staat: `argmax` telt de pixels rij voor rij, 224 per rij, dus geeft `// 224` de rij en `% 224` de kolom. Als laatste tekent hij de map. De commentaren met `#` zeggen welke stap van het recept elk deel is. Voer hem uit zoals hij is; verander dan `c` waar het commentaar dat zegt, in 967, espresso, en voer hem opnieuw uit. `resnet` is ResNet-18, die de cel hieronder laadt zodra hij gedownload is.
+    De cel onder de download maakt de kat klaar zoals in [Een beeldclassifier uitproberen](/course/open/cv-try-classifier?lang=nl), met het opnemen aan, en neemt de logit van klasse 285, Egyptian cat, de beste gok van ResNet-18 voor de kat. Hij print de score, gaat ervandaan terug, en print de shape van `x.grad`. Dan maakt hij de map, en print hij zijn shape, zijn grootste getal en waar dat staat: `argmax` telt de pixels rij voor rij, 224 per rij, dus geeft `// 224` de rij en `% 224` de kolom. Als laatste tekent hij de map. De commentaren met `#` zeggen welke stap van het recept elk deel is. Voer hem uit zoals hij is; verander dan `c` waar het commentaar dat zegt, in 967, espresso, en voer hem opnieuw uit. `resnet` is ResNet-18, die de cel hieronder laadt zodra hij gedownload is.
     """)
     return
 
@@ -183,7 +183,7 @@ def get_button_cell():
 @app.cell(hide_code=True)
 def resnet_cell(get_button):
     resnet = C.resnet_or_stop(get_button, {
-        "ask": "*ResNet-18 staat nog niet op je computer. Als je [Een beeldclassifier uitproberen](/course/open/cv-try-classifier?lang=nl) op deze computer hebt gedaan, staat hij er wel: dan vindt deze les hem. Anders downloadt de knop hem één keer, 47 MB, van Hugging Face. Het uitgewerkte voorbeeld, de maps van de drie foto's en de demo hebben hem nodig; de schuifregelaar in *Het idee* en de oefeningen niet. Terwijl hij downloadt, wacht de hele les: doe bij een trage verbinding eerst de oefeningen.*",
+        "ask": "*ResNet-18 staat nog niet op je computer. Als je [Een beeldclassifier uitproberen](/course/open/cv-try-classifier?lang=nl) op deze computer hebt gedaan, staat hij er wel: dan vindt deze les hem. Anders downloadt de knop hem één keer, 47 MB, van Hugging Face. Het uitgewerkte voorbeeld, de maps van de drie foto's en de demo hebben hem nodig; de slider in *Het idee* en de oefeningen niet. Terwijl hij downloadt, wacht de hele les: doe bij een trage verbinding eerst de oefeningen.*",
         "busy": "**ResNet-18 downloaden** · {done} van {total} MB",
         "no_net": "*De download lukte niet: Hugging Face was niet te bereiken, of de verbinding viel weg. Controleer je verbinding, en klik opnieuw.*",
         "not_pinned": "*De download lukte niet: het bestand dat binnenkwam is niet het vastgezette bestand van de course, dus heeft de course het weggegooid. Klik opnieuw; gebeurt het weer, meld het dan op GitHub.*",
@@ -209,7 +209,7 @@ def example_saliency(resnet):
     std = np.array([0.229, 0.224, 0.225])
     x = torch.tensor((crop / 255 - mean) / std).float().permute(2, 0, 1).unsqueeze(0)
     x.requires_grad = True
-    # 2. de logit van één class: 285 is Egyptian cat
+    # 2. de logit van één klasse: 285 is Egyptian cat
     c = 285  # verander: 967
     score = resnet(x)[0, c]
     print(score)
@@ -300,9 +300,9 @@ def text_exercise_saliency():
         mo.md(r"""
         ### Oefening 2. De saliency map
 
-        Maak `saliency(model, x, label)` af: de saliency map van de foto `x`, met shape (1, 3, H, W), voor de class `label`, als NumPy-array met shape (H, W): per pixel de grootste grootte van de hellingen van de logit van `label` over zijn 3 kleuren. De check gebruikt een ResNet-18 met willekeurige weights en kleine foto's, van 32 bij 32 en 40 bij 48, dus hij heeft geen download nodig. Hij vraagt ook twee maps van één foto, voor twee classes, na elkaar: denk eraan dat `.grad` optelt. Als het klopt, bewaart hij je functie in je project, als `work/projects/cnn/saliency.py`.
+        Maak `saliency(model, x, label)` af: de saliency map van de foto `x`, met shape (1, 3, H, W), voor de klasse `label`, als NumPy-array met shape (H, W): per pixel de grootste grootte van de hellingen van de logit van `label` over zijn 3 kleuren. De check gebruikt een ResNet-18 met willekeurige weights en kleine foto's, van 32 bij 32 en 40 bij 48, dus hij heeft geen download nodig. Hij vraagt ook twee maps van één foto, voor twee klassen, na elkaar: denk eraan dat `.grad` optelt. Als het klopt, bewaart hij je functie in je project, als `work/projects/cnn/saliency.py`.
         """),
-        L.task("Laat `saliency` de map van een foto voor een class geven."),
+        L.task("Laat `saliency` de map van een foto voor een klasse geven."),
     ])
     return
 
@@ -326,7 +326,7 @@ def hints_saliency():
     L.hints(
         "saliency",
         [
-            "Zet het opnemen aan voor de foto, `x.requires_grad = True`, en wis een oude helling, `x.grad = None`. Dan de logit: `model(x)` heeft shape (1, classes); welk getal is de logit van `label` voor foto 0?",
+            "Zet het opnemen aan voor de foto, `x.requires_grad = True`, en wis een oude helling, `x.grad = None`. Dan de logit: `model(x)` heeft shape (1, klassen); welk getal is de logit van `label` voor foto 0?",
             "`score.backward()` vult `x.grad`, met shape (1, 3, H, W). Neem de hellingen van foto 0, maak er een NumPy-array van zoals in *Het idee*, en neem per pixel de grootste grootte langs axis 0, de kleuren.",
         ],
         why="Eén backward pass vanaf één logit geeft een helling voor elke pixel en kleur, omdat de foto een leaf tensor is die wordt opgenomen. Zonder `x.grad = None` telt een tweede aanroep op dezelfde foto zijn hellingen op bij die van de eerste, zoals `.grad` dat bij de weights doet in een trainingsstap.",
@@ -340,7 +340,7 @@ def text_exercise_salient():
         mo.md(r"""
         ### Oefening 3. De pixels met de hoogste saliency
 
-        Maak `most_salient(sal, share)` af: een array met True en False in de shape van de map, True voor het deel van de pixels met de hoogste saliency, zoals de 5% die de schuifregelaar veranderde bij een deel van 0,05. `np.quantile` uit [Data beschrijven](/course/open/stats-describe?lang=nl) vindt het getal waar een deel van de map onder ligt. De check geeft je functie verzonnen maps. Als het klopt, bewaart hij je functie in je project, als `work/projects/cnn/salient.py`.
+        Maak `most_salient(sal, share)` af: een array met True en False in de shape van de map, True voor het deel van de pixels met de hoogste saliency, zoals de 5% die de slider veranderde bij een deel van 0,05. `np.quantile` uit [Data beschrijven](/course/open/stats-describe?lang=nl) vindt het getal waar een deel van de map onder ligt. De check geeft je functie verzonnen maps. Als het klopt, bewaart hij je functie in je project, als `work/projects/cnn/salient.py`.
         """),
         L.task("Laat `most_salient` het lichtste deel van een map kiezen."),
     ])
@@ -431,14 +431,14 @@ def choice_alike_cell():
         question="Op de kat zijn 66% van de 5% lichtste pixels van de map van Egyptian cat ook bij de 5% lichtste van de map van tiger cat. Van de map van espresso 17%; twee willekeurige trekkingen van 5% delen er ongeveer 5%. Wat zegt dat?",
         options={
             "detector": "De map van Egyptian cat laat zien wat de kat tot een Egyptian cat maakt",
-            "right": "Beide kattenclasses worden door ongeveer dezelfde pixels bewogen: de map laat zien waar een score gevoelig is, niet wat de twee onderscheidt",
+            "right": "Beide kattenklassen worden door ongeveer dezelfde pixels bewogen: de map laat zien waar een score gevoelig is, niet wat de twee onderscheidt",
             "noise": "De map van espresso is ruis, want er staat geen espresso op de foto",
         },
         correct="right",
         why={
-            "detector": "Dan zou de map van tiger cat andere pixels aanwijzen, en twee derde van de lichtste pixels is hetzelfde: de ogen en de neus bewegen beide kattenclasses. Wat Egyptian cat van tiger cat scheidt, kan de map van één class niet laten zien.",
-            "noise": "17% is meer dan de 5% die twee willekeurige trekkingen delen, en zijn lichtste pixel ligt ook bij de neus. Elke pixel heeft een helling voor elke class: de map van espresso wijst de pixels aan waarvan een verandering de score van espresso het meest beweegt, en sommige daarvan doen ook voor een kat ertoe.",
-            "right": "Een saliency map beantwoordt één vraag: welke pixels deze score het meest veranderen, bij deze foto. Voor classes die op elkaar lijken zijn dat ongeveer dezelfde pixels. De volgende les maakt een grovere map, uit de laatste feature maps van ResNet-18 in plaats van uit de pixels.",
+            "detector": "Dan zou de map van tiger cat andere pixels aanwijzen, en twee derde van de lichtste pixels is hetzelfde: de ogen en de neus bewegen beide kattenklassen. Wat Egyptian cat van tiger cat scheidt, kan de map van één klasse niet laten zien.",
+            "noise": "17% is meer dan de 5% die twee willekeurige trekkingen delen, en zijn lichtste pixel ligt ook bij de neus. Elke pixel heeft een helling voor elke klasse: de map van espresso wijst de pixels aan waarvan een verandering de score van espresso het meest beweegt, en sommige daarvan doen ook voor een kat ertoe.",
+            "right": "Een saliency map beantwoordt één vraag: welke pixels deze score het meest veranderen, bij deze foto. Voor klassen die op elkaar lijken zijn dat ongeveer dezelfde pixels. De volgende les maakt een grovere map, uit de laatste feature maps van ResNet-18 in plaats van uit de pixels.",
         },
     )
     choice_alike

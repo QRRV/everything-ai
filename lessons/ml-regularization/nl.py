@@ -126,7 +126,7 @@ def text_idea():
         """),
         L.watch_out("Kies $\\lambda$ op de validation set, nooit op de training set. Op de training set wint $\\lambda = 0$ altijd: door de straf past het model alleen maar slechter op de trainingsvoorbeelden."),
         mo.md(r"""
-        Schuif met de slider, of sleep over de grafiek van de MSE: dat zet $\lambda$. De ene grafiek toont de acht <span class="c-param">weights</span>; de streepjes geven de weights aan waarmee de labels gemaakt zijn, 3, −2 en zes keer 0. De andere toont de <span class="c-loss">MSE</span> voor elke $\lambda$: op de training set (doorgetrokken lijn, gevulde stip) en op de validation set (gestreepte lijn, open stip). De figuur rekent de weights direct uit, zonder stappen: de weights waar gradient descent na heel veel stappen uitkomt. Zo volgt hij de slider meteen.
+        Schuif met de slider, of sleep over de grafiek van de MSE: daarmee kies je $\lambda$. De ene grafiek toont de acht <span class="c-param">weights</span>; de streepjes geven de weights aan waarmee de labels gemaakt zijn, 3, −2 en zes keer 0. De andere toont de <span class="c-loss">MSE</span> voor elke $\lambda$: op de training set (doorgetrokken lijn, gevulde stip) en op de validation set (gestreepte lijn, open stip). De figuur rekent de weights direct uit, zonder stappen: de weights waar gradient descent na heel veel stappen uitkomt. Zo volgt hij de slider meteen.
         """),
     ])
     return

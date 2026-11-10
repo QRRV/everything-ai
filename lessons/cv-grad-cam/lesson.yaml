@@ -8,20 +8,20 @@ title:
   nl: "Grad-CAM: waar een CNN keek"
 goal:
   en: "make a map of the places in a photo that speak for a class: the class activation map from layer4, the last convolutional layer of ResNet-18, and Grad-CAM from the gradient, for any layer of any CNN."
-  nl: "een map maken van de plekken in een foto die voor een class pleiten: de class activation map uit layer4, de laatste convolutional layer van ResNet-18, en Grad-CAM uit de gradient, voor elke layer van elk CNN."
+  nl: "een map maken van de plekken in een foto die voor een klasse pleiten: de class activation map uit layer4, de laatste convolutional layer van ResNet-18, en Grad-CAM uit de gradient, voor elke layer van elk CNN."
 summary:
   - en: "ResNet-18 ends with global average pooling, the mean of each of the 512 maps of `layer4`, and one linear layer. The maps, each times the weight of a class in that layer, added up, give the class activation map (Zhou and colleagues, 2016): 7 by 7, and its mean plus the bias is the logit, exactly."
-    nl: "ResNet-18 eindigt met global average pooling, het gemiddelde van elk van de 512 maps van `layer4`, en één linear layer. De maps, elk keer de weight van een class in die layer, opgeteld, geven de class activation map (Zhou en zijn collega's, 2016): 7 bij 7, en zijn gemiddelde plus de bias is precies de logit."
+    nl: "ResNet-18 eindigt met global average pooling, het gemiddelde van elk van de 512 maps van `layer4`, en één linear layer. De maps, elk keer de weight van een klasse in die layer, opgeteld, geven de class activation map (Zhou en zijn collega's, 2016): 7 bij 7, en zijn gemiddelde plus de bias is precies de logit."
   - en: "Grad-CAM (Selvaraju and colleagues, 2017) gives each map the mean slope of the logit over it, adds up the weighted maps and keeps the positive part; it works for any CNN, and for ResNet-18, from `layer4`, it is the positive part of the class activation map divided by 49. The maps come from a forward hook, and keep their slopes with `A.retain_grad()`, because they are no leaf tensor."
     nl: "Grad-CAM (Selvaraju en zijn collega's, 2017) geeft elke map de gemiddelde helling van de logit erover, telt de gewogen maps op en houdt het positieve deel; het werkt voor elk CNN, en bij ResNet-18, uit `layer4`, is het het positieve deel van de class activation map gedeeld door 49. De maps komen uit een forward hook, en bewaren hun hellingen met `A.retain_grad()`, omdat ze geen leaf tensor zijn."
   - en: "On a collage of the cat and the coffee, 95% of the Grad-CAM of Egyptian cat lies on the cat half and 87% of that of espresso on the coffee half, though ResNet-18 gives espresso only 0.02: a map shows where the evidence for a class lies, not how sure the model is. On this collage, from `layer3`, the maps no longer tell the classes apart: take the last convolutional layer."
-    nl: "Op een collage van de kat en de koffie ligt 95% van de Grad-CAM van Egyptian cat op de helft met de kat en 87% van die van espresso op de helft met de koffie, hoewel ResNet-18 espresso maar 0,02 geeft: een map laat zien waar het bewijs voor een class ligt, niet hoe zeker het model is. Op deze collage houden de maps uit `layer3` de classes niet meer uit elkaar: neem de laatste convolutional layer."
+    nl: "Op een collage van de kat en de koffie ligt 95% van de Grad-CAM van Egyptian cat op de helft met de kat en 87% van die van espresso op de helft met de koffie, hoewel ResNet-18 espresso maar 0,02 geeft: een map laat zien waar het bewijs voor een klasse ligt, niet hoe zeker het model is. Op deze collage houden de maps uit `layer3` de klassen niet meer uit elkaar: neem de laatste convolutional layer."
 can_now:
   - en: "work out a logit from a class activation map: its mean plus the bias"
     nl: "een logit uitrekenen uit een class activation map: zijn gemiddelde plus de bias"
     by: logit
   - en: "make the class activation map of a photo's feature maps with the weights of a class"
-    nl: "de class activation map van de feature maps van een foto maken met de weights van een class"
+    nl: "de class activation map van de feature maps van een foto maken met de weights van een klasse"
     by: class-map
   - en: "make Grad-CAM for any layer of any CNN, with a forward hook, `retain_grad` and one backward pass"
     nl: "Grad-CAM maken voor elke layer van elk CNN, met een forward hook, `retain_grad` en één backward pass"

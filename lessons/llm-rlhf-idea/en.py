@@ -173,7 +173,7 @@ def text_worked_example():
     mo.md(r"""
     ### Worked example
 
-    Two answers. The reference model gives them 0.8 and 0.2; the reward model gives them 0 and 2.
+    Two answers. The reference model gives them 0.8 and 0.2; the reward model gives them 0 and 2. For every $\beta$, the code works out the policy that steps 3 and 4 of the recipe end up with. New is `zip`: it goes through two lists at once, one item of each per round, so that `_p` and `_r` belong to the same answer. `math`, with `math.exp` and `math.log`, is imported for you.
     """)
     return
 
@@ -182,8 +182,10 @@ def text_worked_example():
 def example_best():
     _ref, _rewards = [0.8, 0.2], [0.0, 2.0]
     for _beta in (10.0, 1.0, 0.1):
+        # 3. and 4. the best policy for this beta: the reference model times e^(reward / beta), scaled to add up to 1
         _weights = [_p * math.exp(_r / _beta) for _p, _r in zip(_ref, _rewards)]
         _pol = [_w / sum(_weights) for _w in _weights]
+        # how far it drifts: its KL divergence from the reference model
         _kl = sum(_q * math.log(_q / _p) for _q, _p in zip(_pol, _ref))
         print(_beta, [round(_q, 3) for _q in _pol], round(_kl, 3))
     return

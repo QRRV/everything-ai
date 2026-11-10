@@ -89,9 +89,9 @@ def text_why():
 def predict_seconds():
     guess_seconds = L.guess(
         "seconds",
-        question="Say one forward pass of a network with 100,000 parameters takes 0.1 milliseconds, for one example. How long do you think measuring the gradient takes for that one example, by moving each parameter in turn?",
+        question="Say one forward pass of a network with 100,000 parameters takes 0.1 milliseconds, for one example. How long do you think measuring the gradient takes for that one example, by moving each parameter in turn by a tiny step?",
         options={
-            "twice": "About 0.2 milliseconds: once where you are, once moved",
+            "twice": "About 0.2 milliseconds: once where you are, once a tiny step away",
             "right": "About 10 seconds",
             "second": "About 1 second",
         },
@@ -111,11 +111,11 @@ def text_idea():
 
         **One forward pass.** In a layer, each weight is used once per example: one multiplication, $w \cdot x$, and one addition to the sum (the first one adds the bias term). With $N$ parameters, a forward pass for one example costs about $2N$ FLOPs.
 
-        **Measuring by moving.** You work out the loss where you are, and then once more for each parameter, moved by a tiny step: $N + 1$ forward passes. That is $N + 1$ times the cost of one:
+        **Measuring with a tiny step.** You work out the loss where you are, and then once more for each parameter, moved by a tiny step: $N + 1$ forward passes. That is $N + 1$ times the cost of one:
         """),
-        L.formula(r"\underbrace{2N}_{\text{one forward pass}} \qquad \underbrace{(N + 1) \cdot 2N \approx 2N^2}_{\text{every slope by moving}}"),
+        L.formula(r"\underbrace{2N}_{\text{one forward pass}} \qquad \underbrace{(N + 1) \cdot 2N \approx 2N^2}_{\text{every slope with a tiny step}}"),
         mo.md(r"""
-        What matters is how the cost grows with $N$. **Big-O notation** says just that, and leaves out the constant factors: a forward pass is $O(N)$, it grows like $N$; measuring every slope by moving is $O(N^2)$, it grows like $N^2$. Make the network twice as big, and a forward pass takes twice as long, but measuring the gradient four times as long.
+        What matters is how the cost grows with $N$. **Big-O notation** says just that, and leaves out the constant factors: a forward pass is $O(N)$, it grows like $N$; measuring every slope with a tiny step is $O(N^2)$, it grows like $N^2$. Make the network twice as big, and a forward pass takes twice as long, but measuring the gradient four times as long.
 
         ### New words and symbols
 
@@ -127,9 +127,9 @@ def text_idea():
         | $O(N)$ | big O of N | grows like $N$: twice as big, twice the cost | |
         | $O(N^2)$ | big O of N squared | grows like $N^2$: twice as big, four times the cost | |
         """),
-        L.watch_out("Measuring slopes by moving is not wrong, only slow. It is simple and hard to get wrong, so it stays the way to check slopes that were worked out in a faster way, on a few parameters."),
+        L.watch_out("Measuring slopes with a tiny step is not wrong, only slow. It is simple and hard to get wrong, so it stays the way to check slopes that were worked out in a faster way, on a few parameters."),
         mo.md(r"""
-        Move the slider, or drag across the chart, to set the number of parameters $N$. The dashed line is one forward pass, the solid line measuring every slope by moving, both in millions of FLOPs.
+        Move the slider, or drag across the chart, to set the number of parameters $N$. The dashed line is one forward pass, the solid line measuring every slope with a tiny step, both in millions of FLOPs.
         """),
     ])
     return
@@ -140,11 +140,11 @@ def explore_n_cell():
     def _frame(n):
         n = int(n)
         return (C.picture(n, {"title": "What the slopes cost", "x": "number of parameters N", "y": "millions of FLOPs",
-                              "move": "every slope by moving", "forward": "one forward pass",
-                              "alt": f"Two lines over N from 0 to 1000. The dashed line, one forward pass, stays near 0: at N = 1000 it is 0.002 million FLOPs. The solid line, every slope by moving, curves up to about 2 million FLOPs at N = 1000. At N = {n}, the dots are at {L.number(C.forward(n) / 1e6, 4)} and {L.number(C.moving(n) / 1e6, 3)} million."}),
-                f"""With <i>N</i> = {n}, one forward pass costs <span class="ea-num">{C.whole(C.forward(n), L.lang)}</span> FLOPs, and every slope by moving <span class="ea-num">{C.whole(C.moving(n), L.lang)}</span>: {C.whole(n + 1, L.lang)} times as many.""")
+                              "move": "every slope with a tiny step", "forward": "one forward pass",
+                              "alt": f"Two lines over N from 0 to 1000. The dashed line, one forward pass, stays near 0: at N = 1000 it is 0.002 million FLOPs. The solid line, every slope with a tiny step, curves up to about 2 million FLOPs at N = 1000. At N = {n}, the dots are at {L.number(C.forward(n) / 1e6, 4)} and {L.number(C.moving(n) / 1e6, 3)} million."}),
+                f"""With <i>N</i> = {n}, one forward pass costs <span class="ea-num">{C.whole(C.forward(n), L.lang)}</span> FLOPs, and every slope with a tiny step <span class="ea-num">{C.whole(C.moving(n), L.lang)}</span>: {C.whole(n + 1, L.lang)} times as many.""")
 
-    explore_n = L.explore("n", "N", _frame, start=400, low=50, high=1000, step=50, role="", task="Say you have a million FLOPs for the slopes of one example. Up to which $N$ is that enough to measure every slope by moving?")
+    explore_n = L.explore("n", "N", _frame, start=400, low=50, high=1000, step=50, role="", task="Say you have a million FLOPs for the slopes of one example. Up to which $N$ is that enough to measure every slope with a tiny step?")
     explore_n
     return
 
@@ -152,7 +152,7 @@ def explore_n_cell():
 @app.cell(hide_code=True)
 def text_recipe():
     mo.md(r"""
-    A million FLOPs is enough to measure every slope by moving up to about $N$ = 700: that takes 981,400 FLOPs, and at 750 it is already 1,126,500. For one forward pass, the same million is enough up to $N$ = 500,000.
+    A million FLOPs is enough to measure every slope with a tiny step up to about $N$ = 700: that takes 981,400 FLOPs, and at 750 it is already 1,126,500. For one forward pass, the same million is enough up to $N$ = 500,000.
 
     ### Recipe
 
@@ -194,7 +194,7 @@ def example_cost():
 @app.cell(hide_code=True)
 def text_after_example():
     mo.md(r"""
-    The network has 101,770 parameters, and one forward pass for one example costs 203,264 FLOPs. Measuring every slope by moving costs about 20,700,000,000 FLOPs: 101,771 times as much, for one example. Training needs a way to get every slope at a few times the cost of a forward pass.
+    The network has 101,770 parameters, and one forward pass for one example costs 203,264 FLOPs. Measuring every slope with a tiny step costs about 20,700,000,000 FLOPs: 101,771 times as much, for one example. Training needs a way to get every slope at a few times the cost of a forward pass.
     """)
     return
 
@@ -276,9 +276,9 @@ def hints_growth():
         [
             "For each one: how many forward passes, or how many steps, does it take, and what does each cost?",
             "A fixed bit of work per parameter is $O(N)$. A forward pass for each parameter, or a step for each pair of parameters, is $O(N^2)$.",
-            "Like $N$: one forward pass, \\_\\_\\_ and saving the parameters. Like $N^2$: every slope by moving, \\_\\_\\_ and comparing every pair.",
+            "Like $N$: one forward pass, \\_\\_\\_ and saving the parameters. Like $N^2$: every slope with a tiny step, \\_\\_\\_ and comparing every pair.",
         ],
-        why="**Like $N$:** one forward pass, saving the parameters and one step of gradient descent; each does a fixed bit of work per parameter, so twice as many parameters is twice the work. **Like $N^2$:** every slope by moving, half of the slopes by moving and comparing every pair. Moving only half the parameters is still a forward pass, $2N$ FLOPs, for each of $N/2$ parameters: $N^2$, and big-O leaves out the half.",
+        why="**Like $N$:** one forward pass, saving the parameters and one step of gradient descent; each does a fixed bit of work per parameter, so twice as many parameters is twice the work. **Like $N^2$:** every slope with a tiny step, half of the slopes with a tiny step and comparing every pair. Moving only half the parameters is still a forward pass, $2N$ FLOPs, for each of $N/2$ parameters: $N^2$, and big-O leaves out the half.",
     )
     return
 
@@ -295,7 +295,7 @@ def text_exercise_bigger():
 def choice_bigger_cell():
     choice_bigger = L.choice(
         "bigger",
-        question="For a network with 100,000 parameters, measuring every slope by moving takes about 10 seconds per example. You make the network ten times as big: 1,000,000 parameters. About how long does it take now?",
+        question="For a network with 100,000 parameters, measuring every slope with a tiny step takes about 10 seconds per example. You make the network ten times as big: 1,000,000 parameters. About how long does it take now?",
         options={
             "ten": "About 100 seconds",
             "twenty": "About 20 seconds",
@@ -317,7 +317,7 @@ def text_connections():
     mo.md(r"""
     ## Wrap-up
 
-    **How this connects.** In [Two parameters: the gradient](/course/open/math-gradient?lang=en) you measured every slope by moving each parameter in turn. That costs a forward pass per parameter: $O(N^2)$ FLOPs, far too much for a network like the one in [The forward pass in NumPy, with shapes](/course/open/nn-forward-numpy?lang=en). In the next lesson, *Backpropagation by hand on a tiny graph*, you get every slope in one pass backwards through the calculation, for a few times the cost of a forward pass.
+    **How this connects.** In [Two parameters: the gradient](/course/open/math-gradient?lang=en) you measured every slope by moving each parameter in turn by a tiny step. That costs a forward pass per parameter: $O(N^2)$ FLOPs, far too much for a network like the one in [The forward pass in NumPy, with shapes](/course/open/nn-forward-numpy?lang=en). In the next lesson, *Backpropagation by hand on a tiny graph*, you get every slope in one pass backwards through the calculation, for a few times the cost of a forward pass.
     """)
     return
 

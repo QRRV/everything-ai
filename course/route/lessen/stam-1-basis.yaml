@@ -92,7 +92,7 @@ lessons:
   idea: "A variable is a name for a value; Python calculates with whole numbers and decimal numbers, including powers with **."
   covers: [python#0]
   requires: [py-first-program]
-  introduces: [py:variable, py:int, py:float, py:arithmetic]
+  introduces: [py:variable, py:int, py:float, py:arithmetic, py:round, py:int-conversion]
   uses: [py:print, py:string-literal, py:comment, q:predict, q:choice, q:exercise-with-check, p:scratchpad]
   mentions: [c:artificial-intelligence]
   ladder: [python]
@@ -204,7 +204,7 @@ lessons:
   idea: "A dictionary looks up a value by its key, like a word in a dictionary."
   covers: [python#1]
   requires: [py-for]
-  introduces: [py:dict]
+  introduces: [py:dict, py:dict-items]
   warns: [key]
   uses: [py:for, py:if, py:comparison, py:bool, py:list, py:indexing, py:len, py:int, py:float, py:f-string, py:print, py:string-literal, py:comment, py:variable, py:arithmetic, py:underscore-name, q:predict, q:choice, q:exercise-with-check, q:run-cell]
   ladder: [python]
@@ -254,8 +254,8 @@ lessons:
   idea: "try and except let a program handle an expected problem, and raise signals one yourself."
   covers: [python#3]
   requires: [py-errors]
-  introduces: [py:try-except, py:raise, py:int-conversion]
-  uses: [c:traceback, py:def, py:return, py:none, py:str, c:function-argument, py:for, py:if, py:comparison, py:bool, py:list, py:len, py:f-string, py:print, py:string-literal, py:comment, py:variable, py:int, py:float, py:arithmetic, py:underscore-name, q:predict, q:choice, q:exercise-with-check, q:run-cell]
+  introduces: [py:try-except, py:raise]
+  uses: [c:traceback, py:def, py:return, py:none, py:str, c:function-argument, py:for, py:if, py:comparison, py:bool, py:list, py:len, py:f-string, py:print, py:string-literal, py:comment, py:variable, py:int, py:float, py:arithmetic, py:underscore-name, q:predict, q:choice, q:exercise-with-check, q:run-cell, py:int-conversion]
   ladder: [python]
   needs: any
 
@@ -369,7 +369,7 @@ lessons:
   idea: "A plot turns a list of numbers into a picture you can read at a glance."
   covers: [eda-en-visualisatie#5]
   requires: [py-lists, py-imports]
-  introduces: [py:plot, v:line-plot, v:scatter-plot, v:bar-chart]
+  introduces: [py:plot, v:line-plot, v:scatter-plot, v:bar-chart, c:library]
   uses: [py:import, py:list, py:len, py:str, py:string-literal, py:int, py:print, py:comment, py:variable, py:underscore-name, q:predict, q:choice, q:exercise-with-check, q:run-cell]
   mentions: [c:loss, c:model]
   ladder: [python]
@@ -437,7 +437,7 @@ lessons:
   idea: "Arithmetic on whole arrays at once is shorter and much faster than a Python loop."
   covers: [numpy-en-scipy#1]
   requires: [np-arrays, py-for]
-  introduces: [c:vectorization, py:np-arange]
+  introduces: [c:vectorization, py:np-arange, py:np-round]
   uses: [py:np-array, c:array, c:shape, py:for, py:range, py:list, py:append, py:arithmetic, py:float, py:import, py:def, py:return, py:print, py:comment, py:variable, py:underscore-name, q:predict, q:choice, q:exercise-with-check, q:run-cell]
   mentions: [c:model]
   ladder: [python, numpy]
@@ -489,9 +489,10 @@ lessons:
   idea: "A DataFrame is a table with named columns; you select columns and filter rows."
   covers: [dataframes#0]
   requires: [np-indexing, py-files]
-  introduces: [py:dataframe, py:pandas-select-filter, c:csv, c:library]
+  introduces: [py:dataframe, py:pandas-select-filter, c:csv]
   uses: [py:np-array, c:array, c:shape, c:dtype, py:boolean-mask, py:np-indexing, c:file-path, py:import, py:import-as, py:list, py:comparison, py:bool, py:def, py:return, py:print, py:comment, py:variable, py:underscore-name, py:string-literal, q:predict, q:choice, q:exercise-with-check, q:run-cell]
-  mentions: [c:example]
+  # c:library is introduced by py-plotting, which comes first but is not in this chain: the new words explain it again.
+  mentions: [c:example, c:library]
   ladder: [numpy]
   needs: any
 
@@ -1055,7 +1056,7 @@ lessons:
   idea: "A model is only useful if it works on examples it has not seen, so you hold back a test set."
   covers: [evaluatie-en-modelselectie#0]
   requires: [ml-linear-regression-numpy, np-random]
-  introduces: [c:generalization, c:train-set, c:test-set]
+  introduces: [c:generalization, c:train-set, c:test-set, c:shuffling]
   uses: [c:linear-regression, c:mean-squared-error, c:residual, c:loss, c:gradient-descent, c:learning-rate, s:eta, c:weight, c:bias-term, c:feature, c:example, c:label, c:prediction, c:model, c:training, c:random-number-generator, py:np-random-generator, c:seed, py:np-array, py:np-indexing, py:np-mean, py:np-arange, c:array, c:vector, py:len, py:for, py:range, py:tuple, py:import, py:import-as, py:arithmetic, py:float, py:int, py:print, py:comment, py:variable, py:underscore-name, q:predict, q:choice, q:exercise-with-check, q:run-cell]
   mentions: [c:overfitting, c:underfitting]
   ladder: [numpy]
@@ -1308,7 +1309,7 @@ lessons:
   needs: any
 
 - id: nn-why-backprop
-  title: "Too many weights to nudge one by one"
+  title: "Too many slopes to measure one by one"
   level: basis
   module: neural-networks
   idea: "Measuring each slope by nudging costs one forward pass per weight; with millions of weights we need a smarter way."
@@ -1468,8 +1469,8 @@ lessons:
   idea: "A Dataset hands out single examples and a DataLoader shuffles them into batches."
   covers: [d11-de-trainingslus#2]
   requires: [torch-batches, ml-digits-linear]
-  introduces: [py:dataset, py:dataloader, c:shuffling, py:tensor-dataset, py:len-getitem]
-  uses: [py:np-load, c:pixel, py:tuple, py:keyword-argument, py:indexing, py:iterator, c:float32, c:gradient, c:class, c:mini-batch, c:batch-size, c:epoch, c:iteration, c:sgd, py:torch-optim, py:optimizer-step, py:zero-grad, py:nn-linear, py:manual-seed, py:backward, py:item, py:torch-tensor, c:tensor, c:dtype, c:shape, c:axis, c:loss, c:mean-squared-error, c:label, c:example, py:class, py:init-method, py:inheritance, py:dunder-method, py:yield, py:np-array, py:import, py:import-as, py:for, py:range, py:len, py:list, py:def, py:return, py:print, py:comment, py:variable, py:underscore-name, q:predict, q:choice, q:exercise-with-check, q:run-cell]
+  introduces: [py:dataset, py:dataloader, py:tensor-dataset, py:len-getitem]
+  uses: [py:np-load, c:pixel, py:tuple, py:keyword-argument, py:indexing, py:iterator, c:float32, c:gradient, c:class, c:mini-batch, c:batch-size, c:epoch, c:iteration, c:sgd, py:torch-optim, py:optimizer-step, py:zero-grad, py:nn-linear, py:manual-seed, py:backward, py:item, py:torch-tensor, c:tensor, c:dtype, c:shape, c:axis, c:loss, c:mean-squared-error, c:label, c:example, py:class, py:init-method, py:inheritance, py:dunder-method, py:yield, py:np-array, py:import, py:import-as, py:for, py:range, py:len, py:list, py:def, py:return, py:print, py:comment, py:variable, py:underscore-name, q:predict, q:choice, q:exercise-with-check, q:run-cell, c:shuffling]
   ladder: [torch]
   data: [qmnist]
   needs: any

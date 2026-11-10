@@ -78,7 +78,7 @@ def text_why():
     mo.md(r"""
     ## Waarom
 
-    In [Je MLP trainen: de training loop](/course/open/nn-micrograd-train?lang=nl) gaf je backward pass elke parameter een `grad`, en de training volgde die. Een fout in een backward pass laat zelden iets crashen: een factor te veel of een verkeerd teken geeft nog steeds getallen, en het netwerk traint nog steeds, alleen slechter, of helemaal niet, en niets vertelt je waarom. Straks schrijf je backward passes voor hele layers. Voordat je er een vertrouwt, controleer je hem met een helling die je zelf kunt meten, zoals je in [Backpropagation met de hand op een kleine graaf](/course/open/nn-backward-by-hand?lang=nl) één gradient controleerde door een getal te verschuiven.
+    In [Je MLP trainen: de training loop](/course/open/nn-micrograd-train?lang=nl) gaf je backward pass elke parameter een `grad`, en de training volgde die. Een fout in een backward pass laat zelden iets crashen: een factor te veel of een verkeerd teken geeft nog steeds getallen, en het netwerk traint nog steeds, alleen slechter, of helemaal niet, en niets vertelt je waarom. Straks schrijf je backward passes voor hele layers. Voordat je er een vertrouwt, controleer je hem met een helling die je zelf kunt meten, zoals je in [Backpropagation met de hand op een kleine graaf](/course/open/nn-backward-by-hand?lang=nl) één gradient controleerde met een heel klein stapje.
 
     **Een voorbeeld uit het dagelijks leven.** Voordat je een keukenweegschaal vertrouwt die je zelf gebouwd hebt, weeg je iets waarvan je het gewicht kent, zoals een liter water.
     """)
@@ -107,13 +107,13 @@ def text_idea():
         mo.md(r"""
         ## Het idee
 
-        **Gradient checking** vergelijkt de gradient uit je backward pass met een schatting door te verschuiven, één parameter tegelijk. In [De afgeleide als helling](/course/open/math-slope?lang=nl) zette je alleen een stapje omhoog: een **eindige differentie**. Zet ook een stapje omlaag en neem de helling tussen die twee, de **centrale differentie**:
+        **Gradient checking** vergelijkt de gradient uit je backward pass met een schatting met heel kleine stapjes, één parameter tegelijk. In [De afgeleide als helling](/course/open/math-slope?lang=nl) zette je alleen een stapje omhoog: een **eindige differentie**. Zet ook een stapje omlaag en neem de helling tussen die twee, de **centrale differentie**:
         """),
         L.formula(r"[[grad:\frac{\partial \mathcal{L}}{\partial w_j}]] \approx \frac{[[loss:\mathcal{L}(w_j + h)]] - [[loss:\mathcal{L}(w_j - h)]]}{2h}"),
         mo.md(r"""
         De fout ervan krimpt met $h^2$, niet met $h$: tien keer kleinere $h$, honderd keer kleinere fout. Maar $h$ mag niet te klein zijn: $\mathcal{L}(w_j + h)$ en $\mathcal{L}(w_j - h)$ komen dan in bijna al hun cijfers overeen, en hun verschil houdt weinig meer over dan afronding. Met de gewone floats van NumPy is $h = 10^{-5}$ een goede keuze.
 
-        Vergelijk de twee dan met de **relatieve fout**: het verschil, gedeeld door de grootste van de twee groottes, met $a$ de gradient uit backprop en $n$ de schatting door te verschuiven:
+        Vergelijk de twee dan met de **relatieve fout**: het verschil, gedeeld door de grootste van de twee groottes, met $a$ de gradient uit backprop en $n$ de schatting met heel kleine stapjes:
         """),
         L.formula(r"\text{relatieve fout} = \frac{|a - n|}{\max(|a|, |n|)}"),
         mo.md(r"""
@@ -123,7 +123,7 @@ def text_idea():
 
         | Woord of teken | Uitspraak | Wat het betekent | In code |
         |---|---|---|---|
-        | **gradient checking** | | de gradient uit een backward pass vergelijken met een schatting door te verschuiven, voor elke parameter | |
+        | **gradient checking** | | de gradient uit een backward pass vergelijken met een schatting met heel kleine stapjes, voor elke parameter | |
         | **centrale differentie** | | de helling tussen een stapje omhoog en een stapje omlaag: $(\mathcal{L}(w_j + h) - \mathcal{L}(w_j - h)) / 2h$ | `(f(w + step) - f(w - step)) / (2 * h)` |
         | $h$ | h | de grootte van het stapje; $10^{-5}$ is een goede keuze | `h = 1e-5` |
         | `np.abs` | | de grootte van elk getal, getal voor getal: `np.abs(a - n)` haalt het teken van elk verschil tegelijk weg. `abs(x)` van Python werkt maar op één getal | `np.abs(a - n)` |
@@ -150,7 +150,7 @@ def text_recipe():
     Om een backward pass te controleren:
 
     1. Reken de gradient uit met je backward pass: één getal $a$ voor elke parameter.
-    2. Voor elke parameter: verschuif hem omhoog met $h$ en omlaag met $h$, reken beide keren de loss uit, en deel het verschil door $2h$: de schatting $n$.
+    2. Voor elke parameter: zet een heel klein stapje $h$ omhoog en een omlaag, reken beide keren de loss uit, en deel het verschil door $2h$: de schatting $n$.
     3. Reken de relatieve fout van elke parameter uit: $|a - n| / \max(|a|, |n|)$.
     4. Beoordeel: onder ongeveer $10^{-7}$ zijn ze het eens; boven ongeveer $10^{-3}$ zoek je de bug in de backward pass van die parameter.
     """)
@@ -185,7 +185,7 @@ def example_check():
     _w = np.array([0.3, 0.4])
     # 1. de gradient uit de backward pass
     _a = _grad(_w)
-    # 2. voor elke weight: verschuif hem omhoog en omlaag met h, en de helling daartussen
+    # 2. voor elke weight: een heel klein stapje h omhoog en een omlaag, en de helling daartussen
     _h = 1e-5
     _n = np.zeros(2)
     for _j in range(2):
@@ -242,7 +242,7 @@ def choice_bug_cell():
 def text_exercise_grad():
     mo.vstack([
         mo.md(r"""
-        ### Oefening 2. De schatting door te verschuiven
+        ### Oefening 2. De schatting met heel kleine stapjes
 
         Schrijf `numerical_grad(f, w, h)`: voor elk getal van de array `w` de centrale differentie van de functie `f`, met stap 2 van het recept, als array. De check roept `numerical_grad(lambda w: np.sum(w ** 2), np.array([1.0, -2.0]), 0.001)` aan, en dat moet `[2, -4]` geven; hij probeert ook andere functies, ook functies waarin de getallen van `w` samenwerken, zoals `np.sum(w) ** 2`.
         """),
@@ -271,7 +271,7 @@ def hints_grad():
         "numerical-grad",
         [
             "Zoals in stap 2 van het uitgewerkte voorbeeld: een loop over `range(len(w))`, en voor elk getal een stap-array van nullen met `h` op één plek.",
-            "`f(w + step)` en `f(w - step)` verschuiven alleen dat ene getal, en laten `w` zelf zoals hij is. Deel hun verschil door `2 * h`, en verzamel de hellingen in `np.zeros(len(w))`.",
+            "`f(w + step)` en `f(w - step)` veranderen alleen dat ene getal, en laten `w` zelf zoals hij is. Deel hun verschil door `2 * h`, en verzamel de hellingen in `np.zeros(len(w))`.",
         ],
         why="Bij `np.sum(w ** 2)` is de helling van elk getal twee keer dat getal: bij `[1, -2]` is dat `[2, -4]`. De centrale differentie geeft dat precies, omdat de functie in elk getal een parabool is.",
     )
@@ -323,7 +323,7 @@ def text_connections():
     mo.md(r"""
     ## Afronding
 
-    **Samenhang.** De helling die je in [De afgeleide als helling](/course/open/math-slope?lang=nl) door te verschuiven mat, genomen aan beide kanten, wordt een test voor de backward pass uit [Je MLP trainen: de training loop](/course/open/nn-micrograd-train?lang=nl): twee keer de loss per parameter, en een relatieve fout die zegt of een gradient klopt. In de volgende les, *Backprop door hele layers met de hand*, schrijf je de backward pass van een heel netwerk in NumPy, en deze check, en PyTorch, vertellen je of hij klopt.
+    **Samenhang.** De helling die je in [De afgeleide als helling](/course/open/math-slope?lang=nl) met een heel klein stapje mat, genomen aan beide kanten, wordt een test voor de backward pass uit [Je MLP trainen: de training loop](/course/open/nn-micrograd-train?lang=nl): twee keer de loss per parameter, en een relatieve fout die zegt of een gradient klopt. In de volgende les, *Backprop door hele layers met de hand*, schrijf je de backward pass van een heel netwerk in NumPy, en deze check, en PyTorch, vertellen je of hij klopt.
     """)
     return
 

@@ -1,7 +1,7 @@
 # SPDX-FileCopyrightText: 2026 Everything AI contributors
 # SPDX-License-Identifier: CC-BY-SA-4.0 AND MIT-0
 """Checks of the lesson ml-softmax-gradient: the gradient of the cross-entropy for the logits, the probabilities minus
-the one-hot label, as a function; and the slope for one logit measured by nudging it. And the picture of the
+the one-hot label, as a function; and the slope for one logit measured with a tiny step. And the picture of the
 probabilities and the gradient as the logit of the right class moves on the slider."""
 import math
 import re
@@ -171,7 +171,7 @@ EXERCISES = {
         keep=["label = 0"],
         # The check also runs the box with other logits: a number typed in by hand does not change with them.
         others=[{"z": Code("np.array([1.0, -0.5, 0.0])")}],
-        # A nudge measures the slope to about 4 decimals: another small h, or a nudge both ways, is right too.
+        # A tiny step measures the slope to about 4 decimals: another small h, or a tiny step both ways, is right too.
         compare=lambda got, want: same_value(got, want, rel=0.001),
         first=[_DOTS],
         mistakes=[

@@ -126,7 +126,7 @@ def text_idea():
         """),
         L.watch_out("Ondanks de naam doet logistische regressie classificatie: het model voorspelt een klasse, met een kans. Het woord *regressie* in de naam komt van de gewogen som erbinnen, die hetzelfde is als in een model dat een getal voorspelt."),
         mo.md(r"""
-        De leerlingen van [Voorbeelden, features en labels](/course/open/ml-vocabulary?lang=nl) van wie de uitslag bekend is, naar uren leren en uren slaap. De gevulde punten slaagden, de open punten zakten. De <span class="c-pred">blauwe lijn</span> is de decision boundary van het model met de weights 1 en 0,5. Schuif met de slider: hij zet de <span class="c-param">bias term</span> $b$, en verschuift de lijn. De andere grafiek telt voor elke $b$ de leerlingen aan de <span class="c-loss">verkeerde kant</span> van de lijn (gevuld) en er precies op (open); sleep eroverheen om $b$ te zetten.
+        De leerlingen van [Voorbeelden, features en labels](/course/open/ml-vocabulary?lang=nl) van wie de uitslag bekend is, naar uren leren en uren slaap. De gevulde punten slaagden, de open punten zakten. De <span class="c-pred">blauwe lijn</span> is de decision boundary van het model met de weights 1 en 0,5. Schuif met de slider: daarmee kies je de <span class="c-param">bias term</span> $b$, en verschuif je de lijn. De andere grafiek telt voor elke $b$ de leerlingen aan de <span class="c-loss">verkeerde kant</span> van de lijn (gevuld) en er precies op (open); sleep eroverheen om $b$ te kiezen.
         """),
     ])
     return

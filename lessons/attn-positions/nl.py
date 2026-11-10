@@ -93,7 +93,7 @@ def predict_swap():
             "right": "Die wisselen ook van plek, en verder verandert er niets",
             "none": "Niets: elke rij blijft precies zoals hij was",
         },
-        reveal="**Die wisselen ook van plek, en verder verandert er niets.** Elk woord vergelijkt zich met dezelfde woorden als eerder en middelt dezelfde embeddings: alleen de rijen komen in een andere volgorde naar buiten. Zo krijgt \"dog\" dezelfde nieuwe vector in \"dog bites man\" en in \"man bites dog\": attention behandelt een zin als een zak met woorden. Met de causal mask is het niet veel beter: in één layer ziet een woord welke woorden ervoor kwamen, maar niet in welke volgorde.",
+        reveal="**Die wisselen ook van plek, en verder verandert er niets.** Elk woord vergelijkt zich met dezelfde woorden als eerder en middelt dezelfde embeddings: alleen de rijen komen in een andere volgorde naar buiten. Zo krijgt \"dog\" dezelfde nieuwe vector in \"dog bites man\" en in \"man bites dog\": attention behandelt een zin als een hoop woorden zonder volgorde. Met de causal mask is het niet veel beter: in één layer ziet een woord welke woorden ervoor kwamen, maar niet in welke volgorde.",
     )
     guess_swap
     return (guess_swap,)

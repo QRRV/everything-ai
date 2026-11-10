@@ -132,7 +132,7 @@ def text_idea():
         """),
         L.watch_out("Tel de layers met weights. Het XOR-netwerk heeft er twee: de hidden layer en het output-neuron. De inputs zijn geen layer van neuronen; ze hebben geen eigen weights."),
         mo.md(r"""
-        Schuif met de slider: hij zet de bias term $b_2$ van hidden neuron 2. De <span class="c-pred">blauwe stipjes</span> laten zien waar het netwerk vuurt; de gestreepte lijnen zijn de twee hidden neurons. De hoeken zijn XOR: gevuld voor 1, open voor 0. Een <span class="c-loss">paarse ring</span> markeert elke hoek die het netwerk fout heeft, en de andere grafiek telt ze voor elke $b_2$; sleep eroverheen om $b_2$ te zetten.
+        Schuif met de slider: daarmee kies je de bias term $b_2$ van hidden neuron 2. De <span class="c-pred">blauwe stipjes</span> laten zien waar het netwerk vuurt; de gestreepte lijnen zijn de twee hidden neurons. De hoeken zijn XOR: gevuld voor 1, open voor 0. Een <span class="c-loss">paarse ring</span> markeert elke hoek die het netwerk fout heeft, en de andere grafiek telt ze voor elke $b_2$; sleep eroverheen om $b_2$ te kiezen.
         """),
     ])
     return

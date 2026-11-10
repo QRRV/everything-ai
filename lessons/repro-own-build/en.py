@@ -302,7 +302,7 @@ def hints_experiment():
             "Then the one thing that differs, in the dict `SETTINGS`, and the seed: `torch.manual_seed(seed)` in `make_model`, `torch.Generator().manual_seed(seed)` for the batches in `run`, which makes its model with `make_model`.",
             "For the dropout paper: an MLP with two hidden layers of 512 on Fashion-MNIST, dropout of 0.2 on the input and 0.5 on the hidden layers, SGD with momentum, and a learning rate that decays to 0 over the steps.",
         ],
-        why="This is the course's experiment for the dropout paper, whose runs the picture shows. For another paper the shape stays the same: a dict of the settings, the seed first, the part both share, and the metric as one number.",
+        why="This is the course's experiment for the dropout paper, whose runs the picture shows. For another paper the shape stays the same: a dict of the settings, the seed first, the part both share, and the metric as one number. New in it are `nn.Sequential(...)`, which runs the layers you give it one after the other, and `nn.ReLU()`, `torch.relu` as a layer.",
     )
     return
 

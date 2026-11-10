@@ -226,22 +226,22 @@ def example_scene():
 @app.cell
 def example_fill(np, s):
     def box_of_mask(mask):
-        # 4. the rows and the columns with at least one pixel of the mask
+        # 4. de rijen en de kolommen met minstens één pixel van het mask
         rows = np.arange(len(mask))[mask.sum(axis=1) > 0]
         cols = np.arange(len(mask[0]))[mask.sum(axis=0) > 0]
         return int(rows.min()), int(cols.min()), int(rows.max()), int(cols.max())
 
 
     def fill(shape):
-        # how much of its box the pixels of its mask fill
+        # hoeveel van zijn box de pixels van zijn mask vullen
         top, left, bottom, right = shape.box
         return shape.mask.sum() / ((bottom - top + 1) * (right - left + 1))
 
 
-    # _shape, because the cell above already has a name shape
+    # _shape, omdat de cel hierboven al een naam shape heeft
     for _shape in s.shapes:
         same = box_of_mask(_shape.mask) == _shape.box
-        # round(x, 2): x rounded to two decimals
+        # round(x, 2): x afgerond op twee decimalen
         print(_shape.kind, same, round(fill(_shape), 2))
     return
 

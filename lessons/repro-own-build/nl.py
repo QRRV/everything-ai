@@ -302,7 +302,7 @@ def hints_experiment():
             "Dan het ene ding dat verschilt, in de dict `SETTINGS`, en de seed: `torch.manual_seed(seed)` in `make_model`, `torch.Generator().manual_seed(seed)` voor de batches in `run`, die zijn model maakt met `make_model`.",
             "Voor de dropout-paper: een MLP met twee hidden layers van 512 op Fashion-MNIST, dropout van 0,2 op de input en 0,5 op de hidden layers, SGD met momentum, en een learning rate die over de stappen afloopt naar 0.",
         ],
-        why="Dit is het experiment van de course voor de dropout-paper, waarvan het plaatje de runs laat zien. Voor een andere paper blijft de vorm hetzelfde: een dict met de settings, eerst de seed, het deel dat beide delen, en de metric als één getal.",
+        why="Dit is het experiment van de course voor de dropout-paper, waarvan het plaatje de runs laat zien. Voor een andere paper blijft de vorm hetzelfde: een dict met de settings, eerst de seed, het deel dat beide delen, en de metric als één getal. Nieuw daarin zijn `nn.Sequential(...)`, dat de layers die je meegeeft na elkaar uitvoert, en `nn.ReLU()`, `torch.relu` als layer.",
     )
     return
 

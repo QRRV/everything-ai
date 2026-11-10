@@ -26,7 +26,7 @@ def text_quick_check():
     mo.md(r"""
     ### Quick check
 
-    Two short questions about [Rates multiply: the chain rule](/course/open/math-chain-rule?lang=en) and [Too many weights to nudge one by one](/course/open/nn-why-backprop?lang=en).
+    Two short questions about [Rates multiply: the chain rule](/course/open/math-chain-rule?lang=en) and [Too many slopes to measure one by one](/course/open/nn-why-backprop?lang=en).
     """)
     return
 
@@ -56,7 +56,7 @@ def quick_check_chain():
 def quick_check_passes():
     quick_passes = L.choice(
         "quick-passes",
-        question="You measure every slope of a model with $N$ parameters by moving each parameter in turn. How many forward passes does that take?",
+        question="You measure every slope of a model with $N$ parameters by moving each parameter in turn by a tiny step. How many forward passes does that take?",
         options={
             "right": "N + 1",
             "two": "2",
@@ -64,8 +64,8 @@ def quick_check_passes():
         },
         correct="right",
         why={
-            "two": "That is enough for one slope. How many slopes do you need? See [Too many weights to nudge one by one](/course/open/nn-why-backprop?lang=en).",
-            "square": "N² is how the FLOPs grow, not the number of forward passes. See [Too many weights to nudge one by one](/course/open/nn-why-backprop?lang=en).",
+            "two": "That is enough for one slope. How many slopes do you need? See [Too many slopes to measure one by one](/course/open/nn-why-backprop?lang=en).",
+            "square": "N² is how the FLOPs grow, not the number of forward passes. See [Too many slopes to measure one by one](/course/open/nn-why-backprop?lang=en).",
             "right": "One where you are, and one for each parameter you move: N + 1 forward passes, each of about 2N FLOPs.",
         },
     )
@@ -78,7 +78,7 @@ def text_why():
     mo.md(r"""
     ## Why this matters
 
-    In [Too many weights to nudge one by one](/course/open/nn-why-backprop?lang=en), measuring every slope by moving cost a forward pass per parameter. But the slopes are not unrelated: the loss reaches every parameter through the same few steps, such as the prediction, the residual and the square. [Rates multiply: the chain rule](/course/open/math-chain-rule?lang=en) tells you how slopes combine along such steps. This lesson uses that, step by step, on a calculation you can follow by hand. Every library that trains networks, such as PyTorch, works this way.
+    In [Too many slopes to measure one by one](/course/open/nn-why-backprop?lang=en), measuring every slope with a tiny step cost a forward pass per parameter. But the slopes are not unrelated: the loss reaches every parameter through the same few steps, such as the prediction, the residual and the square. [Rates multiply: the chain rule](/course/open/math-chain-rule?lang=en) tells you how slopes combine along such steps. This lesson uses that, step by step, on a calculation you can follow by hand. Every library that trains networks, such as PyTorch, works this way.
 
     **An everyday example.** One euro buys 1.1 dollars, and one dollar buys 150 yen. So one euro buys 1.1 × 150 = 165 yen: along the way, you multiply the rates.
     """)
@@ -298,11 +298,11 @@ def choice_branch_cell():
 def text_exercise_check():
     mo.vstack([
         mo.md(r"""
-        ### Exercise 3. Check it by moving
+        ### Exercise 3. Check it with a tiny step
 
-        In [Too many weights to nudge one by one](/course/open/nn-why-backprop?lang=en), moving each parameter by a tiny step was too slow to train with, but good for checking. Check the slopes of the worked example: replace the two `...` with the slopes of `loss` at $w = 1$ and $b = 1$, measured by moving $w$, and then $b$, by `h`. The last line is `[slope_w, slope_b]`, so the check sees it.
+        In [Too many slopes to measure one by one](/course/open/nn-why-backprop?lang=en), moving each parameter by a tiny step was too slow to train with, but good for checking. Check the slopes of the worked example: replace the two `...` with the slopes of `loss` at $w = 1$ and $b = 1$, measured by moving $w$, and then $b$, by `h`. The last line is `[slope_w, slope_b]`, so the check sees it.
         """),
-        L.task("Measure both slopes by moving, and compare them with −16 and −4 from the backward pass."),
+        L.task("Measure both slopes with a tiny step, and compare them with −16 and −4 from the backward pass."),
     ])
     return
 
@@ -340,7 +340,7 @@ def text_connections():
     mo.md(r"""
     ## Wrap-up
 
-    **How this connects.** [Rates multiply: the chain rule](/course/open/math-chain-rule?lang=en) multiplied two slopes; the backward pass does that at every arrow of a graph, from the loss back, and reuses what it has. So backpropagation gives every slope for a few times the cost of a forward pass, where moving cost a forward pass per parameter, as in [Too many weights to nudge one by one](/course/open/nn-why-backprop?lang=en). In the next lesson, *Build your own autograd: a Value that remembers*, you write a small class that builds the graph while it calculates, and does the backward pass for you.
+    **How this connects.** [Rates multiply: the chain rule](/course/open/math-chain-rule?lang=en) multiplied two slopes; the backward pass does that at every arrow of a graph, from the loss back, and reuses what it has. So backpropagation gives every slope for a few times the cost of a forward pass, where tiny steps cost a forward pass per parameter, as in [Too many slopes to measure one by one](/course/open/nn-why-backprop?lang=en). In the next lesson, *Build your own autograd: a Value that remembers*, you write a small class that builds the graph while it calculates, and does the backward pass for you.
     """)
     return
 

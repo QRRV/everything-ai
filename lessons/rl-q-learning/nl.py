@@ -139,7 +139,7 @@ def text_replay():
     mo.md(rf"""
     ### De run, episode voor episode
 
-    De course liet Q-learning {C.EPISODES} episodes lopen op GRID, met $\varepsilon$ = {C.number(C.EPSILON, 1, 'nl')}; zodra je in *Zelf doen* je eigen agent traint, zie je hier de jouwe. Een lijn is de weg van die episode, een stip een stap tegen de rand; een getal is de grootste <span class="c-param">Q</span> van een state na die episode, en een driehoekje zijn beste action. De *greedy weg* is waar de agent vanaf S heen zou gaan als hij altijd zijn beste action nam en niets uitgleed.
+    De course liet Q-learning {C.EPISODES} episodes lopen op GRID, met $\varepsilon$ = {C.number(C.EPSILON, 1, 'nl')}; zodra je in *Zelf doen* je eigen agent traint, zie je hier de jouwe. Een lijn is de weg van die episode, een stip een stap tegen de rand; een getal is de grootste <span class="c-param">Q</span> van een state na die episode, en een driehoekje zijn beste action. De *greedy weg* is waar de agent vanaf S heen zou gaan als hij altijd zijn beste action nam en nooit uitgleed.
     """)
     return
 

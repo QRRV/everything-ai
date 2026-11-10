@@ -57,7 +57,7 @@ def quick_check_autograd():
 def quick_check_error():
     quick_error = L.choice(
         "quick-error",
-        question="Je backward pass geeft een weight de gradient 0,8; duwen geeft 0,4. Wat is de relatieve fout?",
+        question="Je backward pass geeft een weight de gradient 0,8; een heel klein stapje geeft 0,4. Wat is de relatieve fout?",
         options={
             "small": "1: het verschil, 0,4, gedeeld door de kleinste van de twee",
             "abs": "0,4: het verschil zelf",

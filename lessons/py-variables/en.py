@@ -126,7 +126,7 @@ def text_idea():
     | `/` | divided by | `7 / 2` | `3.5` |
     | `**` | to the power of | `7 ** 2` | `49` |
 
-    Dividing with `/` always gives a float, even when it comes out whole: `6 / 2` gives `3.0`. A power is a number multiplied by itself: `2 ** 3` is `2 * 2 * 2`, so `8`. And as in math, `*` and `/` go before `+` and `-`; with parentheses you change that: `(1 + 2) * 3` gives `9`.
+    Dividing with `/` always gives a float, even when it comes out whole: `6 / 2` gives `3.0`. `int(...)` makes a whole number of a float by dropping what comes after the point: `int(6 / 2)` gives `3`, and `int(2.7)` gives `2`. `round(...)` rounds instead: `round(2.7)` gives `3`, and `round(3.14159, 2)` rounds to two decimals, `3.14`. A power is a number multiplied by itself: `2 ** 3` is `2 * 2 * 2`, so `8`. And as in math, `*` and `/` go before `+` and `-`; with parentheses you change that: `(1 + 2) * 3` gives `9`.
 
     Below is a program with names. For each line you see the names with their values after that line ran, and what the line shows under the cell.
     """)

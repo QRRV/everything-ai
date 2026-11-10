@@ -128,7 +128,7 @@ def text_idea():
         """),
         L.watch_out("Op een logaritmische schaal is de ruimte tussen rasterlijnen een factor, geen verschil: van 1 tot 10 neemt evenveel ruimte in als van 100 tot 1000. Lees de getallen af van de as, niet de afstanden."),
         mo.md(r"""
-        Schuif met de slider: hij zet de exponent $k$ van $y = x^k$, getekend op gewone assen en op een log-log plot. De punten liggen bij $x$ = 1, 10 en 100: even ver uit elkaar op de logaritmische schaal.
+        Schuif met de slider: daarmee kies je de exponent $k$ van $y = x^k$, getekend op gewone assen en op een log-log plot. De punten liggen bij $x$ = 1, 10 en 100: even ver uit elkaar op de logaritmische schaal.
         """),
     ])
     return

@@ -131,7 +131,7 @@ def text_idea():
         """),
         L.watch_out("`np.exp(1000)` is te groot voor de computer: het wordt `inf`, oneindig groot, en `inf / inf` is `nan`. Grote logits komen in echte modellen voor. Eerst de grootste logit eraf halen voorkomt het, en verandert niets aan de kansen."),
         mo.md(r"""
-        Schuif met de slider: hij zet de logit van klasse 0, terwijl klasse 1 de logit 1 houdt en klasse 2 de logit 0. De ene grafiek heeft de <span class="c-pred">kansen</span> als staven; samen zijn ze altijd 1 (de getallen boven de staven zijn afgerond). De andere toont de drie kansen voor elke $z_0$: klasse 0 doorgetrokken, klasse 1 en 2 gestippeld, elk met zijn nummer, en een grijze stippellijn bij 0,5; sleep eroverheen om $z_0$ te zetten.
+        Schuif met de slider: daarmee kies je de logit van klasse 0, terwijl klasse 1 de logit 1 houdt en klasse 2 de logit 0. De ene grafiek heeft de <span class="c-pred">kansen</span> als staven; samen zijn ze altijd 1 (de getallen boven de staven zijn afgerond). De andere toont de drie kansen voor elke $z_0$: klasse 0 doorgetrokken, klasse 1 en 2 gestippeld, elk met zijn nummer, en een grijze stippellijn bij 0,5; sleep eroverheen om $z_0$ te kiezen.
         """),
     ])
     return

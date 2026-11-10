@@ -26,7 +26,7 @@ def text_quick_check():
     mo.md(r"""
     ### Instapcheck
 
-    Twee korte vragen over [Je GPT in elkaar zetten](/course/open/gpt-assemble?lang=nl) en [Te veel weights om één voor één op te schuiven](/course/open/nn-why-backprop?lang=nl).
+    Twee korte vragen over [Je GPT in elkaar zetten](/course/open/gpt-assemble?lang=nl) en [Te veel hellingen om één voor één te meten](/course/open/nn-why-backprop?lang=nl).
     """)
     return
 
@@ -64,8 +64,8 @@ def quick_check_flops():
         },
         correct="right",
         why={
-            "half": "De tijd halveert, maar het netwerk heeft evenveel vermenigvuldigingen en optellingen nodig als eerst. Zie [Te veel weights om één voor één op te schuiven](/course/open/nn-why-backprop?lang=nl).",
-            "double": "Twee keer zoveel per seconde is de snelheid van de computer; de forward pass zelf heeft dezelfde berekeningen nodig. Zie [Te veel weights om één voor één op te schuiven](/course/open/nn-why-backprop?lang=nl).",
+            "half": "De tijd halveert, maar het netwerk heeft evenveel vermenigvuldigingen en optellingen nodig als eerst. Zie [Te veel hellingen om één voor één te meten](/course/open/nn-why-backprop?lang=nl).",
+            "double": "Twee keer zoveel per seconde is de snelheid van de computer; de forward pass zelf heeft dezelfde berekeningen nodig. Zie [Te veel hellingen om één voor één te meten](/course/open/nn-why-backprop?lang=nl).",
             "right": "Vandaag tel je ze voor je GPT: per token, voor de parameters en voor attention.",
         },
     )
@@ -115,7 +115,7 @@ def text_idea():
         """),
         L.formula(r"\begin{gathered} N \approx 12\,L\,d^2 + 2\,|\mathcal{V}|\,d \\ \text{FLOPs} \approx 2N + 2\,L\,n\,d \end{gathered}"),
         mo.md(r"""
-        **FLOPs per token.** Net als in [Te veel weights om één voor één op te schuiven](/course/open/nn-why-backprop?lang=nl) gebruikt een forward pass elke parameter één keer per token, voor een vermenigvuldiging en een optelling: ongeveer $2N$ FLOPs. Attention doet er een deel bij dat groeit met de lengte $n$ van de tekst. In elk block vergelijkt een token op plek $t$ zijn query met de keys van de $t$ tokens tot en met zichzelf, en mengt het hun values: ongeveer $4\,t\,d$ FLOPs. Door de causal mask kijkt een token van een tekst van $n$ tokens gemiddeld naar ongeveer $n/2$ ervan, dus kost attention ongeveer $2\,L\,n\,d$ per token, het tweede deel van de formule. Je attention uit [De causal mask](/course/open/attn-causal-mask?lang=nl) berekent de scores van de latere tokens toch, en verbergt ze pas daarna, dus die doet ongeveer twee keer zoveel: de formule telt het werk dat een token nodig heeft. Trainen heeft ook de backward pass nodig, die ongeveer twee keer zoveel kost als de forward pass: ongeveer drie keer de FLOPs van de forward pass per token, ongeveer $6N$ bij een korte tekst.
+        **FLOPs per token.** Net als in [Te veel hellingen om één voor één te meten](/course/open/nn-why-backprop?lang=nl) gebruikt een forward pass elke parameter één keer per token, voor een vermenigvuldiging en een optelling: ongeveer $2N$ FLOPs. Attention doet er een deel bij dat groeit met de lengte $n$ van de tekst. In elk block vergelijkt een token op plek $t$ zijn query met de keys van de $t$ tokens tot en met zichzelf, en mengt het hun values: ongeveer $4\,t\,d$ FLOPs. Door de causal mask kijkt een token van een tekst van $n$ tokens gemiddeld naar ongeveer $n/2$ ervan, dus kost attention ongeveer $2\,L\,n\,d$ per token, het tweede deel van de formule. Je attention uit [De causal mask](/course/open/attn-causal-mask?lang=nl) berekent de scores van de latere tokens toch, en verbergt ze pas daarna, dus die doet ongeveer twee keer zoveel: de formule telt het werk dat een token nodig heeft. Trainen heeft ook de backward pass nodig, die ongeveer twee keer zoveel kost als de forward pass: ongeveer drie keer de FLOPs van de forward pass per token, ongeveer $6N$ bij een korte tekst.
 
         ### Nieuwe woorden en tekens
 
@@ -348,7 +348,7 @@ def text_connections():
     mo.md(r"""
     ## Afronding
 
-    **Samenhang.** De FLOPs uit [Te veel weights om één voor één op te schuiven](/course/open/nn-why-backprop?lang=nl), nu voor elk token dat een GPT leest of waarvan hij leert, en de delen van je GPT uit [Je GPT in elkaar zetten](/course/open/gpt-assemble?lang=nl), één voor één geteld. Hierna: *Project: je GPT op een boek trainen*, waar je GPT van 10,8 miljoen parameters leert van Tiny Shakespeare, voor ongeveer 68 miljoen FLOPs per token waarop hij traint.
+    **Samenhang.** De FLOPs uit [Te veel hellingen om één voor één te meten](/course/open/nn-why-backprop?lang=nl), nu voor elk token dat een GPT leest of waarvan hij leert, en de delen van je GPT uit [Je GPT in elkaar zetten](/course/open/gpt-assemble?lang=nl), één voor één geteld. Hierna: *Project: je GPT op een boek trainen*, waar je GPT van 10,8 miljoen parameters leert van Tiny Shakespeare, voor ongeveer 68 miljoen FLOPs per token waarop hij traint.
     """)
     return
 

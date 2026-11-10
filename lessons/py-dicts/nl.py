@@ -152,7 +152,7 @@ def text_recipe():
         2. Zoek een waarde op met de key tussen vierkante haken: `prices["pear"]`.
         3. Verander een waarde, of voeg een nieuw paar toe, met `=`: `prices["plum"] = 0.3`.
         4. Weet je niet zeker of een key er is? Kijk eerst met `in`: `if "plum" in prices:`.
-        5. Ga alle paren langs met `for`: in `for fruit in prices:` krijgt `fruit` elke key, en `prices[fruit]` geeft de waarde erbij.
+        5. Ga alle paren langs met `for`: in `for fruit in prices:` krijgt `fruit` elke key, en `prices[fruit]` geeft de waarde erbij. Of vraag ze allebei tegelijk met `.items()`: in `for fruit, price in prices.items():` krijgt `fruit` elke key en `price` de waarde erbij.
         """),
     ])
     return

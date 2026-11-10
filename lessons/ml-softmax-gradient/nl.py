@@ -134,7 +134,7 @@ def text_idea():
         """),
         L.watch_out("Let op de volgorde: de kansen min het one-hot-label, zoals $\\hat{y} - y$ bij log loss. Draai je ze om, dan krijgt elke helling het verkeerde teken: gradient descent verlaagt dan de logit van de goede klasse."),
         mo.md(r"""
-        Schuif met de slider: hij zet $z_1$, de logit van hond, de goede klasse, terwijl kat de logit 2 houdt en vogel de logit 0. De ene grafiek toont de <span class="c-pred">kansen</span> als staven, die van hond met een dikkere rand. De andere toont de <span class="c-grad">helling</span> voor elke logit bij elke $z_1$, de lijn van hond het dikst, met een stip bij elke helling voor de $z_1$ van de slider en stippellijnen bij −0,1 en 0,1; sleep eroverheen om $z_1$ te zetten. De getallen zijn afgerond.
+        Schuif met de slider: daarmee kies je $z_1$, de logit van hond, de goede klasse, terwijl kat de logit 2 houdt en vogel de logit 0. De ene grafiek toont de <span class="c-pred">kansen</span> als staven, die van hond met een dikkere rand. De andere toont de <span class="c-grad">helling</span> voor elke logit bij elke $z_1$, de lijn van hond het dikst, met een stip bij elke helling voor de $z_1$ van de slider en stippellijnen bij −0,1 en 0,1; sleep eroverheen om $z_1$ te kiezen. De getallen zijn afgerond.
         """),
     ])
     return

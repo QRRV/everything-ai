@@ -26,7 +26,7 @@ def text_quick_check():
     mo.md(r"""
     ### Instapcheck
 
-    Twee korte vragen over [Snelheden vermenigvuldigen: de kettingregel](/course/open/math-chain-rule?lang=nl) en [Te veel weights om één voor één op te schuiven](/course/open/nn-why-backprop?lang=nl).
+    Twee korte vragen over [Snelheden vermenigvuldigen: de kettingregel](/course/open/math-chain-rule?lang=nl) en [Te veel hellingen om één voor één te meten](/course/open/nn-why-backprop?lang=nl).
     """)
     return
 
@@ -56,7 +56,7 @@ def quick_check_chain():
 def quick_check_passes():
     quick_passes = L.choice(
         "quick-passes",
-        question="Je meet elke helling van een model met $N$ parameters door elke parameter om de beurt te verschuiven. Hoeveel forward passes kost dat?",
+        question="Je meet elke helling van een model met $N$ parameters door elke parameter om de beurt een heel klein stapje te veranderen. Hoeveel forward passes kost dat?",
         options={
             "right": "N + 1",
             "two": "2",
@@ -64,9 +64,9 @@ def quick_check_passes():
         },
         correct="right",
         why={
-            "two": "Dat is genoeg voor één helling. Hoeveel hellingen heb je nodig? Zie [Te veel weights om één voor één op te schuiven](/course/open/nn-why-backprop?lang=nl).",
-            "square": "N² is hoe de FLOPs groeien, niet het aantal forward passes. Zie [Te veel weights om één voor één op te schuiven](/course/open/nn-why-backprop?lang=nl).",
-            "right": "Eén waar je bent, en één voor elke parameter die je verschuift: N + 1 forward passes, elk van ongeveer 2N FLOPs.",
+            "two": "Dat is genoeg voor één helling. Hoeveel hellingen heb je nodig? Zie [Te veel hellingen om één voor één te meten](/course/open/nn-why-backprop?lang=nl).",
+            "square": "N² is hoe de FLOPs groeien, niet het aantal forward passes. Zie [Te veel hellingen om één voor één te meten](/course/open/nn-why-backprop?lang=nl).",
+            "right": "Eén waar je bent, en één voor elke parameter die je verandert: N + 1 forward passes, elk van ongeveer 2N FLOPs.",
         },
     )
     quick_passes
@@ -78,7 +78,7 @@ def text_why():
     mo.md(r"""
     ## Waarom
 
-    In [Te veel weights om één voor één op te schuiven](/course/open/nn-why-backprop?lang=nl) kostte elke helling meten door te verschuiven een forward pass per parameter. Maar de hellingen staan niet los van elkaar: de loss bereikt elke parameter via dezelfde paar stappen, zoals de voorspelling, het residu en het kwadraat. [Snelheden vermenigvuldigen: de kettingregel](/course/open/math-chain-rule?lang=nl) vertelt hoe hellingen samengaan langs zulke stappen. Deze les gebruikt dat, stap voor stap, op een berekening die je met de hand kunt volgen. Elke library die netwerken traint, zoals PyTorch, werkt zo.
+    In [Te veel hellingen om één voor één te meten](/course/open/nn-why-backprop?lang=nl) kostte elke helling meten met een heel klein stapje een forward pass per parameter. Maar de hellingen staan niet los van elkaar: de loss bereikt elke parameter via dezelfde paar stappen, zoals de voorspelling, het residu en het kwadraat. [Snelheden vermenigvuldigen: de kettingregel](/course/open/math-chain-rule?lang=nl) vertelt hoe hellingen samengaan langs zulke stappen. Deze les gebruikt dat, stap voor stap, op een berekening die je met de hand kunt volgen. Elke library die netwerken traint, zoals PyTorch, werkt zo.
 
     **Een voorbeeld uit het dagelijks leven.** Voor één euro krijg je 1,1 dollar, en voor één dollar 150 yen. Dus voor één euro krijg je 1,1 × 150 = 165 yen: onderweg vermenigvuldig je de koersen.
     """)
@@ -298,11 +298,11 @@ def choice_branch_cell():
 def text_exercise_check():
     mo.vstack([
         mo.md(r"""
-        ### Oefening 3. Controleer het door te verschuiven
+        ### Oefening 3. Controleer het met een heel klein stapje
 
-        In [Te veel weights om één voor één op te schuiven](/course/open/nn-why-backprop?lang=nl) was elke parameter een heel klein stukje verschuiven te traag om mee te trainen, maar goed om te controleren. Controleer de hellingen van het uitgewerkte voorbeeld: vervang de twee `...` door de hellingen van `loss` bij $w = 1$ en $b = 1$, gemeten door $w$, en dan $b$, met `h` te verschuiven. De laatste regel is `[slope_w, slope_b]`, zodat de check het ziet.
+        In [Te veel hellingen om één voor één te meten](/course/open/nn-why-backprop?lang=nl) was elke parameter een heel klein stapje veranderen te traag om mee te trainen, maar goed om te controleren. Controleer de hellingen van het uitgewerkte voorbeeld: vervang de twee `...` door de hellingen van `loss` bij $w = 1$ en $b = 1$, gemeten door $w$, en dan $b$, met een stapje `h` te veranderen. De laatste regel is `[slope_w, slope_b]`, zodat de check het ziet.
         """),
-        L.task("Meet beide hellingen door te verschuiven, en vergelijk ze met −16 en −4 uit de backward pass."),
+        L.task("Meet beide hellingen met een heel klein stapje, en vergelijk ze met −16 en −4 uit de backward pass."),
     ])
     return
 
@@ -326,11 +326,11 @@ def hints_check():
     L.hints(
         "check",
         [
-            "Zoals in [Twee parameters: de gradient](/course/open/math-gradient?lang=nl): de loss met één parameter verschoven, min de loss waar je bent, gedeeld door `h`.",
+            "Zoals in [Twee parameters: de gradient](/course/open/math-gradient?lang=nl): de loss met één parameter `h` groter, min de loss waar je bent, gedeeld door `h`.",
             "Verschuif alleen `w` voor `slope_w`, en alleen `b` voor `slope_b`; de andere blijft op 1.",
             "`slope_w = (loss(1 + h, 1) - loss(___, ___)) / h`, en hetzelfde voor `b`.",
         ],
-        why="$w$ verschuiven met $h$ verandert de loss met ongeveer −16 · $h$, en $b$ verschuiven met ongeveer −4 · $h$; gedeeld door $h$ zijn de hellingen −15,9984 en −3,9999. Ze zijn niet precies −16 en −4, omdat $h$ geen 0 is, maar ze liggen dicht bij wat de backward pass geeft.",
+        why="$w$ veranderen met $h$ verandert de loss met ongeveer −16 · $h$, en $b$ veranderen met ongeveer −4 · $h$; gedeeld door $h$ zijn de hellingen −15,9984 en −3,9999. Ze zijn niet precies −16 en −4, omdat $h$ geen 0 is, maar ze liggen dicht bij wat de backward pass geeft.",
     )
     return
 
@@ -340,7 +340,7 @@ def text_connections():
     mo.md(r"""
     ## Afronding
 
-    **Samenhang.** [Snelheden vermenigvuldigen: de kettingregel](/course/open/math-chain-rule?lang=nl) vermenigvuldigde twee hellingen; de backward pass doet dat bij elke pijl van een graaf, vanaf de loss terug, en gebruikt opnieuw wat hij al heeft. Zo geeft backpropagation elke helling voor een paar keer de kosten van een forward pass, terwijl verschuiven een forward pass per parameter kostte, zoals in [Te veel weights om één voor één op te schuiven](/course/open/nn-why-backprop?lang=nl). In de volgende les, *Bouw je eigen autograd: een Value die onthoudt*, schrijf je een kleine class die de graaf opbouwt terwijl hij rekent, en de backward pass voor je doet.
+    **Samenhang.** [Snelheden vermenigvuldigen: de kettingregel](/course/open/math-chain-rule?lang=nl) vermenigvuldigde twee hellingen; de backward pass doet dat bij elke pijl van een graaf, vanaf de loss terug, en gebruikt opnieuw wat hij al heeft. Zo geeft backpropagation elke helling voor een paar keer de kosten van een forward pass, terwijl heel kleine stapjes een forward pass per parameter kostten, zoals in [Te veel hellingen om één voor één te meten](/course/open/nn-why-backprop?lang=nl). In de volgende les, *Bouw je eigen autograd: een Value die onthoudt*, schrijf je een kleine class die de graaf opbouwt terwijl hij rekent, en de backward pass voor je doet.
     """)
     return
 

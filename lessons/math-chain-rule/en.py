@@ -155,7 +155,7 @@ def text_recipe():
     1. Split the function into an inner step and an outer step, such as $r = y - w \cdot x$ and $r^2$.
     2. Find the slope of each step with the rules you know: $-x$ for the line, $2r$ for the square.
     3. Fill in the numbers: first the inner value, then the outer slope at that value.
-    4. Multiply the two slopes. If you like, check by measuring with a tiny $h$.
+    4. Multiply the two slopes. If you like, check by measuring with a tiny step $h$.
     """)
     return
 
@@ -183,7 +183,7 @@ def example_chain():
     # 4. multiply the slopes
     _slope = _dloss_dr * _dr_dw
     print(_r, _dloss_dr, _dr_dw, _slope)
-    # and check by measuring, with a tiny h
+    # and check by measuring, with a tiny step h
     _h = 0.001
     print(((_y - (_w + _h) * _x) ** 2 - _loss) / _h)
     return

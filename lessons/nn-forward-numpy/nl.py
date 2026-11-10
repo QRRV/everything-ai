@@ -329,7 +329,7 @@ def text_connections():
     mo.md(r"""
     ## Afronding
 
-    **Samenhang.** In [Een hidden layer en ReLU](/course/open/nn-hidden-layer?lang=nl) rekende je een netwerk neuron voor neuron uit. Nu is een hele layer één regel, `X @ W.T + b`, voor alle voorbeelden tegelijk: matrixvermenigvuldiging, de getransponeerde en broadcasting samen. De shape naast elke regel vertelt je vóór je hem uitvoert of hij past. In de volgende les, *Te veel weights om één voor één op te schuiven*, zie je waarom het veel te traag is om de helling van elke weight te meten door hem een klein stukje op te schuiven, bij een netwerk als dit.
+    **Samenhang.** In [Een hidden layer en ReLU](/course/open/nn-hidden-layer?lang=nl) rekende je een netwerk neuron voor neuron uit. Nu is een hele layer één regel, `X @ W.T + b`, voor alle voorbeelden tegelijk: matrixvermenigvuldiging, de getransponeerde en broadcasting samen. De shape naast elke regel vertelt je vóór je hem uitvoert of hij past. In de volgende les, *Te veel hellingen om één voor één te meten*, zie je waarom het veel te traag is om de helling van elke weight te meten met een heel klein stapje, bij een netwerk als dit.
     """)
     return
 

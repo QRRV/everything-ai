@@ -136,7 +136,7 @@ def text_idea():
         """),
         L.watch_out("Een neuron in een netwerk lijkt maar losjes op een zenuwcel in de hersenen. Het is rekenwerk, en de course heeft nooit meer biologie nodig dan de naam."),
         mo.md(r"""
-        Schuif met de slider: hij zet de bias term $b$ van een neuron met de weights 1 en 1 en een stap. De vier hoeken van het vierkant zijn de inputs van het neuron: een gevulde stip waar het neuron vuurt, een open stip waar het niet vuurt. De <span class="c-pred">lijn</span> is waar $z = 0$: het neuron vuurt aan de kant rechtsboven. De andere grafiek telt voor elke $b$ de hoeken die vuren; sleep eroverheen om $b$ te zetten.
+        Schuif met de slider: daarmee kies je de bias term $b$ van een neuron met de weights 1 en 1 en een stap. De vier hoeken van het vierkant zijn de inputs van het neuron: een gevulde stip waar het neuron vuurt, een open stip waar het niet vuurt. De <span class="c-pred">lijn</span> is waar $z = 0$: het neuron vuurt aan de kant rechtsboven. De andere grafiek telt voor elke $b$ de hoeken die vuren; sleep eroverheen om $b$ te kiezen.
         """),
     ])
     return

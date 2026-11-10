@@ -89,6 +89,10 @@ phrases:
   group: block
   en: The idea
   nl: Het idee
+- id: block-reading-guide
+  group: block
+  en: Reading guide
+  nl: Leeswijzer
 - id: block-recipe
   group: block
   en: Recipe
@@ -101,6 +105,10 @@ phrases:
   group: block
   en: One rung up
   nl: Een trede hoger
+- id: block-your-turn
+  group: block
+  en: Your turn
+  nl: Zelf doen
 - id: block-exercise
   group: block
   en: Exercise
@@ -117,6 +125,14 @@ phrases:
   group: block
   en: How this connects
   nl: Samenhang
+- id: block-project-now
+  group: block
+  en: What your project can do now
+  nl: Wat je project nu kan
+- id: block-wrap-up
+  group: block
+  en: Wrap-up
+  nl: Afronding
 - id: block-summary
   group: block
   en: Summary

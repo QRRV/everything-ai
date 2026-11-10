@@ -93,7 +93,7 @@ def predict_swap():
             "right": "They swap places too, and nothing else changes",
             "none": "Nothing: every row stays exactly as it was",
         },
-        reveal="**They swap places too, and nothing else changes.** Every word compares itself with the same words as before and averages the same embeddings: only the rows come out in another order. So \"dog\" gets the same new vector in \"dog bites man\" and in \"man bites dog\": attention treats a sentence as a bag of words. With the causal mask it is not much better: in one layer, a word sees which words came before it, but not in which order.",
+        reveal="**They swap places too, and nothing else changes.** Every word compares itself with the same words as before and averages the same embeddings: only the rows come out in another order. So \"dog\" gets the same new vector in \"dog bites man\" and in \"man bites dog\": attention treats a sentence as a heap of words without an order. With the causal mask it is not much better: in one layer, a word sees which words came before it, but not in which order.",
     )
     guess_swap
     return (guess_swap,)

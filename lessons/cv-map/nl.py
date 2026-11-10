@@ -153,7 +153,7 @@ def picture_scenes():
 @app.cell(hide_code=True)
 def text_play():
     mo.md(r"""
-    Wat doet de IoU-drempel? COCO houdt niet op bij 0,5: het vraagt ook om boxes die strak passen. Met de schuifregelaar zet je de IoU-drempel op elk van de tien waarden van COCO, van 0,5 tot 0,95. Links de precision-recall curve van elke soort, met zijn AP; rechts de mAP bij elke drempel, met een stippellijn bij 0,5.
+    Wat doet de IoU-drempel? COCO houdt niet op bij 0,5: het vraagt ook om boxes die strak passen. Met de slider zet je de IoU-drempel op elk van de tien waarden van COCO, van 0,5 tot 0,95. Links de precision-recall curve van elke soort, met zijn AP; rechts de mAP bij elke drempel, met een stippellijn bij 0,5.
     """)
     return
 

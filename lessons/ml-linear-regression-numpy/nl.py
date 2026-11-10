@@ -80,7 +80,7 @@ def text_why():
         mo.md(r"""
         ## Waarom
 
-        In [w en b passen met gradient descent](/course/open/ml-gradient-descent-2d?lang=nl) mat je elke helling door een parameter een klein stukje te verschuiven: één extra loss voor elke parameter, bij elke stap. Met één feature gaat dat prima. Een huis heeft veel features, en een model voor tekst heeft miljoenen weights. Met de kettingregel krijg je elke helling exact, in één keer, met één matrixvermenigvuldiging. Dat is lineaire regressie met veel features, en het eerste stuk van je eigen neural network: dat leert op dezelfde manier, alleen met meer stappen in de ketting.
+        In [w en b passen met gradient descent](/course/open/ml-gradient-descent-2d?lang=nl) mat je elke helling met een heel klein stapje in een parameter: één extra loss voor elke parameter, bij elke stap. Met één feature gaat dat prima. Een huis heeft veel features, en een model voor tekst heeft miljoenen weights. Met de kettingregel krijg je elke helling exact, in één keer, met één matrixvermenigvuldiging. Dat is lineaire regressie met veel features, en het eerste stuk van je eigen neural network: dat leert op dezelfde manier, alleen met meer stappen in de ketting.
         """),
         draw.project_steps(["Lineaire regressie met veel features", "Logistische regressie trainen", "Een lineaire classifier voor handgeschreven cijfers",
                             "Je eigen autograd: een Value die onthoudt", "De volledige backward pass", "Neuronen, layers en een MLP",
@@ -98,13 +98,13 @@ def text_why():
 def predict_nudges():
     guess_nudges = L.guess(
         "nudges",
-        question="Een model heeft 1000 weights en een bias term. Hoe vaak denk je dat je de loss uitrekent in één stap van gradient descent, als je elke helling meet door te verschuiven?",
+        question="Een model heeft 1000 weights en een bias term. Hoe vaak denk je dat je de loss uitrekent in één stap van gradient descent, als je elke helling meet met een heel klein stapje?",
         options={
             "two": "2",
             "thousand": "Ongeveer 1000",
             "million": "Ongeveer 1.000.000",
         },
-        reveal="**Ongeveer 1000:** één keer waar je staat, en nog eens voor elk van de 1001 parameters. Elk daarvan is een rondgang langs alle data. De kettingregel geeft alle 1001 hellingen uit één rondgang: helemaal zonder verschuiven.",
+        reveal="**Ongeveer 1000:** één keer waar je staat, en nog eens voor elk van de 1001 parameters. Elk daarvan is een rondgang langs alle data. De kettingregel geeft alle 1001 hellingen uit één rondgang: helemaal zonder heel kleine stapjes.",
     )
     guess_nudges
     return (guess_nudges,)
@@ -116,7 +116,7 @@ def text_idea():
         mo.md(r"""
         ## Het idee
 
-        Lineaire regressie voorspelt met een gewogen som van de features plus een bias term, $\hat{\mathbf{y}} = \mathbf{X}\mathbf{w} + b$, en vindt $\mathbf{w}$ en $b$ door de mean squared error zo klein mogelijk te maken. Je kent elk stuk. Voor één voorbeeld geeft de kettingregel de helling $2r \cdot (-x)$ voor een weight. De MSE is het gemiddelde van de losses van alle voorbeelden. Schuift $w$ een piepklein stapje op, dan verandert elke loss met zijn eigen helling keer die stap, dus hun gemiddelde verandert met het gemiddelde van die veranderingen: de helling van de MSE is het gemiddelde van de hellingen. Het uitgewerkte voorbeeld controleert dat door te meten. Voor weight $j$ en voor $b$ zijn de hellingen:
+        Lineaire regressie voorspelt met een gewogen som van de features plus een bias term, $\hat{\mathbf{y}} = \mathbf{X}\mathbf{w} + b$, en vindt $\mathbf{w}$ en $b$ door de mean squared error zo klein mogelijk te maken. Je kent elk stuk. Voor één voorbeeld geeft de kettingregel de helling $2r \cdot (-x)$ voor een weight. De MSE is het gemiddelde van de losses van alle voorbeelden. Zet je $w$ een heel klein stapje verder, dan verandert elke loss met zijn eigen helling keer die stap, dus hun gemiddelde verandert met het gemiddelde van die veranderingen: de helling van de MSE is het gemiddelde van de hellingen. Het uitgewerkte voorbeeld controleert dat door te meten. Voor weight $j$ en voor $b$ zijn de hellingen:
         """),
         L.formula(r"[[grad:\frac{\partial \mathcal{L}}{\partial w_j}]] = -\frac{2}{n} \sum_{i=1}^{n} [[residual:r_i]] \, x_{ij} \qquad [[grad:\frac{\partial \mathcal{L}}{\partial b}]] = -\frac{2}{n} \sum_{i=1}^{n} [[residual:r_i]]"),
         mo.md(r"""
@@ -182,7 +182,7 @@ def example_step():
     _grad_b = -2 * _r.mean()
     print(_grad_w, _grad_b)
 
-    # controleer de eerste helling door te meten, met een piepkleine h
+    # controleer de eerste helling door te meten, met een heel klein stapje h
     def _loss(w, b):
         return ((_y - (_X @ w + b)) ** 2).mean()
 
@@ -197,7 +197,7 @@ def example_step():
 @app.cell(hide_code=True)
 def text_after_example():
     mo.md(r"""
-    De kettingregel geeft de hellingen van ongeveer −394,7; −263 en −374 voor de drie weights, en −442,5 voor $b$. Meten geeft voor de eerste −394,66: hetzelfde; de kettingregel hoefde niets te verschuiven. Eén stap brengt de loss van 52310,5 naar ongeveer 2530. In oefening 3 herhaal je deze stap in een loop.
+    De kettingregel geeft de hellingen van ongeveer −394,7; −263 en −374 voor de drie weights, en −442,5 voor $b$. Meten geeft voor de eerste −394,66: hetzelfde; de kettingregel had geen heel klein stapje nodig. Eén stap brengt de loss van 52310,5 naar ongeveer 2530. In oefening 3 herhaal je deze stap in een loop.
     """)
     return
 

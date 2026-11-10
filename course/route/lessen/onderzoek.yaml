@@ -131,7 +131,7 @@ lessons:
   requires: [res-hypothesis-control, gpt-train-chars]
   introduces: [c:ablation]
   uses: [c:control-run, c:independent-variable, c:run, c:seed, c:validation-set, c:loss, c:epoch, c:gpt, c:learned-position-embedding, c:causal-mask, c:transformer-block, c:mlp, c:layernorm, c:attention, c:token, c:embedding, c:logit, c:optimizer, c:model-parameter, c:checkpoint, c:gpu, c:device, py:no-grad, py:requires-grad, py:slicing, py:torch-tensor, py:import, py:def, py:print, py:comment, py:underscore-name, q:predict, q:choice, q:explain, q:exercise-with-check, q:run-cell]
-  mentions: [c:freezing]
+  mentions: [c:freezing, py:torch-allclose]
   ladder: [torch]
   data: [tiny-shakespeare]
   compute_minutes: 8
@@ -394,6 +394,7 @@ lessons:
   requires: [repro-own-claim]
   introduces: [c:contract, c:determinism, py:math-isnan]
   uses: [p:repro-kit, p:reproduction-plan, c:reproduction, c:paper, c:seed, c:run, c:random-number-generator, c:run-to-run-variance, c:median, c:effect-size, c:dropout, c:dropout-mask, c:lr-schedule, c:cosine-decay, c:mini-batch, c:test-set, c:overfitting, c:gpu, c:module, c:mlp, c:relu, c:sgd, c:momentum, py:manual-seed, py:nn-dropout, py:nn-linear, py:nn-cross-entropy-loss, py:zero-grad, py:backward, py:optimizer-step, py:no-grad, py:lambda, py:model-eval, py:model-train, py:np-load, py:math-module, py:def, py:return, py:if, py:for, py:range, py:float, py:dict, py:tuple, py:comparison, py:f-string, py:import, py:comment, py:underscore-name, py:print, py:string-literal, q:predict, q:choice, q:explain, q:exercise-with-check, q:run-cell]
+  mentions: [py:nn-sequential, py:nn-relu]
   needs: any
 
 - id: repro-own-sanity
@@ -406,6 +407,7 @@ lessons:
   covers: [papers-reproduceren#3]
   requires: [repro-own-build]
   uses: [p:repro-kit, p:overfit-one-batch, py:torch-reshape, c:sanity-check, c:contract, c:loss, c:cross-entropy, c:logit, c:logarithm, c:probability, c:shape, c:mini-batch, c:adamw, c:learning-rate, c:weight-decay, c:initialization, c:checkpoint, c:dropout, c:vocabulary, c:token, c:seed, c:run, c:module, py:no-grad, py:requires-grad, py:np-reshape, py:dict, py:tuple, py:def, py:return, py:if, py:for, py:range, py:import, py:math-module, py:comment, py:print, py:string-literal, py:comparison, q:predict, q:choice, q:explain, q:exercise-with-check, q:run-cell]
+  introduces: [py:conditional-expression]
   needs: any
 
 - id: repro-own-figure

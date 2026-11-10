@@ -28,7 +28,7 @@ can_now:
     by: random-features
 further_reading:
   - en: "Leo Breiman (2001), *Random Forests*, Machine Learning 45, 5–32: the paper that introduced them"
-    nl: "Leo Breiman (2001), *Random Forests*, Machine Learning 45, 5–32: het artikel waarin ze werden voorgesteld"
+    nl: "Leo Breiman (2001), *Random Forests*, Machine Learning 45, 5–32: de paper waarin ze werden voorgesteld"
   - en: "Gareth James, Daniela Witten, Trevor Hastie, Robert Tibshirani and Jonathan Taylor (2023), *An Introduction to Statistical Learning with Applications in Python*, Springer, chapter 8.2, on bagging and random forests"
     nl: "Gareth James, Daniela Witten, Trevor Hastie, Robert Tibshirani en Jonathan Taylor (2023), *An Introduction to Statistical Learning with Applications in Python*, Springer, hoofdstuk 8.2, over bagging en random forests"
   - en: "Francis Galton (1907), *Vox Populi*, Nature 75, 450–451: the 787 guesses of the weight of an ox"

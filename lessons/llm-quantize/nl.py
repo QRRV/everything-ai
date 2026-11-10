@@ -216,7 +216,7 @@ def text_exercise_quantize():
 
         ### Oefening 1. Een matrix in minder bits
 
-        Maak `quantize(w, bits, group)` af: de weights van de matrix `w` zoals het model ermee rekent nadat elke weight is opgeslagen in `bits` bits, met een schaal per groep van `group` weights van een rij. De eerste regels knippen elke rij al in groepen: `groups` heeft de vorm (rijen, groepen per rij, `group`). `groups.abs().amax(dim=2, keepdim=True)` geeft de grootste $\lvert w \rvert$ van elke groep, `torch.round` rondt elk getal af, en `.clamp(-qmax, qmax)` houdt de hele getallen binnen hun bereik. Een groep met alleen nullen heeft een schaal van 0: geef hem een schaal van 1, dan blijven zijn weights 0.
+        Maak `quantize(w, bits, group)` af: de weights van de matrix `w` zoals het model ermee rekent nadat elke weight is opgeslagen in `bits` bits, met een schaal per groep van `group` weights van een rij. De eerste regels knippen elke rij al in groepen: `groups` heeft de vorm (rijen, groepen per rij, `group`), met `cols // group`, dat deelt en de rest weglaat. `groups.abs().amax(dim=2, keepdim=True)` geeft de grootste $\lvert w \rvert$ van elke groep, `torch.round` rondt elk getal af, en `.clamp(-qmax, qmax)` houdt de hele getallen binnen hun bereik. Een groep met alleen nullen heeft een schaal van 0: geef hem een schaal van 1, dan blijven zijn weights 0.
 
         De check probeert een voorbeeld, een matrix van twee rijen, in 4 bits met groepen van 2; daarna één schaal per rij, 2 en 8 bits, een groep nullen, en de vorm van het resultaat.
         """),

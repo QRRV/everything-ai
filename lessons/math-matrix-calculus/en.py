@@ -95,7 +95,7 @@ def predict_shape():
             "one": "(1,): one number, like the loss",
             "right": "(2, 3): one number per weight",
         },
-        reveal="**(2, 3).** The gradient holds one partial derivative for every number of $\\mathbf{W}$, and puts it in the same place: the number in row $k$, column $j$ says how the loss changes when you nudge $W_{kj}$. So it has the shape of $\\mathbf{W}$. The loss is one number, but it has 6 partial derivatives here. Some books write this gradient transposed; the course, like PyTorch, keeps the shape of $\\mathbf{W}$.",
+        reveal="**(2, 3).** The gradient holds one partial derivative for every number of $\\mathbf{W}$, and puts it in the same place: the number in row $k$, column $j$ says how the loss changes when you change $W_{kj}$ by a tiny step. So it has the shape of $\\mathbf{W}$. The loss is one number, but it has 6 partial derivatives here. Some books write this gradient transposed; the course, like PyTorch, keeps the shape of $\\mathbf{W}$.",
     )
     guess_shape
     return (guess_shape,)
@@ -145,7 +145,7 @@ def text_recipe():
     1. Write down the shape of every matrix: the input, the weights, the output, and the gradient for the output.
     2. The gradient for a matrix has the shape of that matrix.
     3. Find the product of the other two that gives exactly that shape: transpose one where needed, so that the inner numbers match.
-    4. Check one number with a tiny step: nudge one entry of the matrix, and compare.
+    4. Check one number with a tiny step in one entry of the matrix, and compare.
     """)
     return
 
@@ -177,7 +177,7 @@ def example_shapes():
     # 2. and 3. dW has the shape of W, (2, 3): (2, 4) @ (4, 3) is G.T @ X
     _dW = _G.T @ _X
     print(_dW)
-    # 4. check the number in row 1, column 0: nudge only that weight
+    # 4. check the number in row 1, column 0: a tiny step in only that weight
     _h = 0.001
     _nudged = _W + np.array([[0.0, 0.0, 0.0], [_h, 0.0, 0.0]])
     print((_loss(_nudged) - _loss(_W)) / _h, _dW[1, 0])

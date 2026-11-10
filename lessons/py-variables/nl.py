@@ -126,7 +126,7 @@ def text_idea():
     | `/` | gedeeld door | `7 / 2` | `3.5` |
     | `**` | tot de macht | `7 ** 2` | `49` |
 
-    Delen met `/` geeft altijd een float, ook als het precies uitkomt: `6 / 2` geeft `3.0`. Een macht is een getal dat je met zichzelf vermenigvuldigt: `2 ** 3` is `2 * 2 * 2`, dus `8`. En net als in de wiskunde gaan `*` en `/` vóór `+` en `-`; met ronde haakjes verander je dat: `(1 + 2) * 3` geeft `9`.
+    Delen met `/` geeft altijd een float, ook als het precies uitkomt: `6 / 2` geeft `3.0`. `int(...)` maakt van een float een geheel getal door weg te laten wat na de punt komt: `int(6 / 2)` geeft `3`, en `int(2.7)` geeft `2`. `round(...)` rondt af: `round(2.7)` geeft `3`, en `round(3.14159, 2)` rondt af op twee decimalen, `3.14`. Een macht is een getal dat je met zichzelf vermenigvuldigt: `2 ** 3` is `2 * 2 * 2`, dus `8`. En net als in de wiskunde gaan `*` en `/` vóór `+` en `-`; met ronde haakjes verander je dat: `(1 + 2) * 3` geeft `9`.
 
     Hieronder staat een programma met namen. Bij elke regel zie je de namen met hun waarden nadat die regel is uitgevoerd, en wat de regel onder de cel laat zien.
     """)

@@ -35,7 +35,7 @@ def text_quick_check():
 def quick_check_slope():
     quick_slope = L.choice(
         "quick-slope",
-        question="Je verschuift `w` met een heel kleine stap `h` = 0,001, en de loss gaat van 50 naar 49,997. Wat is ongeveer de helling van de loss voor `w`?",
+        question="Je verandert `w` met een heel klein stapje `h` = 0,001, en de loss gaat van 50 naar 49,997. Wat is ongeveer de helling van de loss voor `w`?",
         options={
             "right": "−3",
             "change": "−0,003",
@@ -78,7 +78,7 @@ def text_why():
     mo.md(r"""
     ## Waarom
 
-    Trainen zet steeds weer een stap tegen de gradient in, en elke stap heeft de helling van de loss voor elke parameter nodig. In [Twee parameters: de gradient](/course/open/math-gradient?lang=nl) mat je die hellingen door elke parameter om de beurt een heel klein stukje te verschuiven, voor $w$ en $b$. Een klein netwerk voor handgeschreven cijfers heeft al zo'n 100.000 parameters, en een language model heeft er miljarden. Voordat je iets zo groots bouwt, loont het om te tellen wat het kost.
+    Trainen zet steeds weer een stap tegen de gradient in, en elke stap heeft de helling van de loss voor elke parameter nodig. In [Twee parameters: de gradient](/course/open/math-gradient?lang=nl) mat je die hellingen door elke parameter om de beurt een heel klein stapje te veranderen, voor $w$ en $b$. Een klein netwerk voor handgeschreven cijfers heeft al zo'n 100.000 parameters, en een language model heeft er miljarden. Voordat je iets zo groots bouwt, loont het om te tellen wat het kost.
 
     **Een voorbeeld uit het dagelijks leven.** Op een feest waar iedereen iedereen een hand geeft, maken 4 gasten 6 handdrukken. Met 40 gasten zijn het er geen 60 maar 780: tien keer zoveel gasten, meer dan honderd keer zoveel handdrukken.
     """)
@@ -89,13 +89,13 @@ def text_why():
 def predict_seconds():
     guess_seconds = L.guess(
         "seconds",
-        question="Stel dat één forward pass van een netwerk met 100.000 parameters 0,1 milliseconde kost, voor één voorbeeld. Hoe lang duurt het volgens jou om voor dat ene voorbeeld de gradient te meten, door elke parameter om de beurt te verschuiven?",
+        question="Stel dat één forward pass van een netwerk met 100.000 parameters 0,1 milliseconde kost, voor één voorbeeld. Hoe lang duurt het volgens jou om voor dat ene voorbeeld de gradient te meten, door elke parameter om de beurt een heel klein stapje te veranderen?",
         options={
-            "twice": "Ongeveer 0,2 milliseconde: één keer waar je bent, één keer verschoven",
+            "twice": "Ongeveer 0,2 milliseconde: één keer waar je bent, één keer een heel klein stapje verder",
             "right": "Ongeveer 10 seconden",
             "second": "Ongeveer 1 seconde",
         },
-        reveal="**Ongeveer 10 seconden.** Je hebt de loss één keer nodig waar je bent, en nog één keer voor elke parameter die je verschuift: 100.001 forward passes. Bij 0,1 milliseconde per stuk is dat ongeveer 10 seconden, voor één voorbeeld en één stap. Trainen kost duizenden stappen, elk over veel voorbeelden.",
+        reveal="**Ongeveer 10 seconden.** Je hebt de loss één keer nodig waar je bent, en nog één keer voor elke parameter die je verandert: 100.001 forward passes. Bij 0,1 milliseconde per stuk is dat ongeveer 10 seconden, voor één voorbeeld en één stap. Trainen kost duizenden stappen, elk over veel voorbeelden.",
     )
     guess_seconds
     return (guess_seconds,)
@@ -111,11 +111,11 @@ def text_idea():
 
         **Eén forward pass.** In een layer wordt elke weight één keer per voorbeeld gebruikt: één vermenigvuldiging, $w \cdot x$, en één optelling bij de som (de eerste telt de bias term erbij). Met $N$ parameters kost een forward pass voor één voorbeeld ongeveer $2N$ FLOPs.
 
-        **Meten door te verschuiven.** Je rekent de loss uit waar je bent, en dan nog één keer voor elke parameter, verschoven met een heel kleine stap: $N + 1$ forward passes. Dat is $N + 1$ keer de kosten van één:
+        **Meten met een heel klein stapje.** Je rekent de loss uit waar je bent, en dan nog één keer voor elke parameter, na een heel klein stapje in die parameter: $N + 1$ forward passes. Dat is $N + 1$ keer de kosten van één:
         """),
-        L.formula(r"\underbrace{2N}_{\text{één forward pass}} \qquad \underbrace{(N + 1) \cdot 2N \approx 2N^2}_{\text{elke helling door te verschuiven}}"),
+        L.formula(r"\underbrace{2N}_{\text{één forward pass}} \qquad \underbrace{(N + 1) \cdot 2N \approx 2N^2}_{\text{elke helling met een heel klein stapje}}"),
         mo.md(r"""
-        Waar het om gaat, is hoe de kosten groeien met $N$. De **grote-O-notatie** zegt precies dat, en laat de constante factoren weg: een forward pass is $O(N)$, hij groeit zoals $N$; elke helling meten door te verschuiven is $O(N^2)$, dat groeit zoals $N^2$. Maak het netwerk twee keer zo groot, en een forward pass duurt twee keer zo lang, maar de gradient meten vier keer zo lang.
+        Waar het om gaat, is hoe de kosten groeien met $N$. De **grote-O-notatie** zegt precies dat, en laat de constante factoren weg: een forward pass is $O(N)$, hij groeit zoals $N$; elke helling meten met een heel klein stapje is $O(N^2)$, dat groeit zoals $N^2$. Maak het netwerk twee keer zo groot, en een forward pass duurt twee keer zo lang, maar de gradient meten vier keer zo lang.
 
         ### Nieuwe woorden en tekens
 
@@ -127,9 +127,9 @@ def text_idea():
         | $O(N)$ | grote O van N | groeit zoals $N$: twee keer zo groot, twee keer de kosten | |
         | $O(N^2)$ | grote O van N kwadraat | groeit zoals $N^2$: twee keer zo groot, vier keer de kosten | |
         """),
-        L.watch_out("Hellingen meten door te verschuiven is niet fout, alleen traag. Het is eenvoudig en je doet het niet snel fout, dus het blijft de manier om hellingen te controleren die op een snellere manier zijn uitgerekend, bij een paar parameters."),
+        L.watch_out("Hellingen meten met een heel klein stapje is niet fout, alleen traag. Het is eenvoudig en je doet het niet snel fout, dus het blijft de manier om hellingen te controleren die op een snellere manier zijn uitgerekend, bij een paar parameters."),
         mo.md(r"""
-        Schuif met de slider, of sleep over de grafiek: zo zet je het aantal parameters $N$. De gestreepte lijn is één forward pass, de doorgetrokken lijn elke helling meten door te verschuiven, allebei in miljoenen FLOPs.
+        Schuif met de slider, of sleep over de grafiek: zo kies je het aantal parameters $N$. De gestreepte lijn is één forward pass, de doorgetrokken lijn elke helling meten met een heel klein stapje, allebei in miljoenen FLOPs.
         """),
     ])
     return
@@ -140,11 +140,11 @@ def explore_n_cell():
     def _frame(n):
         n = int(n)
         return (C.picture(n, {"title": "Wat de hellingen kosten", "x": "aantal parameters N", "y": "miljoenen FLOPs",
-                              "move": "elke helling door te verschuiven", "forward": "één forward pass",
-                              "alt": f"Twee lijnen over N van 0 tot 1000. De gestreepte lijn, één forward pass, blijft bij 0: bij N = 1000 is hij 0,002 miljoen FLOPs. De doorgetrokken lijn, elke helling door te verschuiven, buigt omhoog tot ongeveer 2 miljoen FLOPs bij N = 1000. Bij N = {n} staan de stippen op {L.number(C.forward(n) / 1e6, 4)} en {L.number(C.moving(n) / 1e6, 3)} miljoen."}),
-                f"""Met <i>N</i> = {n} kost één forward pass <span class="ea-num">{C.whole(C.forward(n), L.lang)}</span> FLOPs, en elke helling door te verschuiven <span class="ea-num">{C.whole(C.moving(n), L.lang)}</span>: {C.whole(n + 1, L.lang)} keer zoveel.""")
+                              "move": "elke helling met een heel klein stapje", "forward": "één forward pass",
+                              "alt": f"Twee lijnen over N van 0 tot 1000. De gestreepte lijn, één forward pass, blijft bij 0: bij N = 1000 is hij 0,002 miljoen FLOPs. De doorgetrokken lijn, elke helling met een heel klein stapje, buigt omhoog tot ongeveer 2 miljoen FLOPs bij N = 1000. Bij N = {n} staan de stippen op {L.number(C.forward(n) / 1e6, 4)} en {L.number(C.moving(n) / 1e6, 3)} miljoen."}),
+                f"""Met <i>N</i> = {n} kost één forward pass <span class="ea-num">{C.whole(C.forward(n), L.lang)}</span> FLOPs, en elke helling met een heel klein stapje <span class="ea-num">{C.whole(C.moving(n), L.lang)}</span>: {C.whole(n + 1, L.lang)} keer zoveel.""")
 
-    explore_n = L.explore("n", "N", _frame, start=400, low=50, high=1000, step=50, role="", task="Stel dat je een miljoen FLOPs hebt voor de hellingen van één voorbeeld. Tot welke $N$ is dat genoeg om elke helling te meten door te verschuiven?")
+    explore_n = L.explore("n", "N", _frame, start=400, low=50, high=1000, step=50, role="", task="Stel dat je een miljoen FLOPs hebt voor de hellingen van één voorbeeld. Tot welke $N$ is dat genoeg om elke helling te meten met een heel klein stapje?")
     explore_n
     return
 
@@ -152,7 +152,7 @@ def explore_n_cell():
 @app.cell(hide_code=True)
 def text_recipe():
     mo.md(r"""
-    Een miljoen FLOPs is tot ongeveer $N$ = 700 genoeg om elke helling te meten door te verschuiven: dat kost 981.400 FLOPs, en bij 750 is het al 1.126.500. Voor één forward pass is hetzelfde miljoen genoeg tot $N$ = 500.000.
+    Een miljoen FLOPs is tot ongeveer $N$ = 700 genoeg om elke helling te meten met een heel klein stapje: dat kost 981.400 FLOPs, en bij 750 is het al 1.126.500. Voor één forward pass is hetzelfde miljoen genoeg tot $N$ = 500.000.
 
     ### Recept
 
@@ -194,7 +194,7 @@ def example_cost():
 @app.cell(hide_code=True)
 def text_after_example():
     mo.md(r"""
-    Het netwerk heeft 101.770 parameters, en één forward pass voor één voorbeeld kost 203.264 FLOPs. Elke helling meten door te verschuiven kost ongeveer 20.700.000.000 FLOPs: 101.771 keer zoveel, voor één voorbeeld. Trainen heeft een manier nodig om elke helling te krijgen voor een paar keer de kosten van een forward pass.
+    Het netwerk heeft 101.770 parameters, en één forward pass voor één voorbeeld kost 203.264 FLOPs. Elke helling meten met een heel klein stapje kost ongeveer 20.700.000.000 FLOPs: 101.771 keer zoveel, voor één voorbeeld. Trainen heeft een manier nodig om elke helling te krijgen voor een paar keer de kosten van een forward pass.
     """)
     return
 
@@ -276,9 +276,9 @@ def hints_growth():
         [
             "Vraag je bij elke berekening af: hoeveel forward passes of stappen kost hij, en wat kost elk daarvan?",
             "Een vast beetje werk per parameter is $O(N)$. Een forward pass voor elke parameter, of een stap voor elk paar parameters, is $O(N^2)$.",
-            "Zoals $N$: één forward pass, \\_\\_\\_ en de parameters bewaren. Zoals $N^2$: elke helling door te verschuiven, \\_\\_\\_ en elk paar vergelijken.",
+            "Zoals $N$: één forward pass, \\_\\_\\_ en de parameters bewaren. Zoals $N^2$: elke helling met een heel klein stapje, \\_\\_\\_ en elk paar vergelijken.",
         ],
-        why="**Zoals $N$:** één forward pass, de parameters bewaren en één stap van gradient descent; elk doet een vast beetje werk per parameter, dus twee keer zoveel parameters is twee keer zoveel werk. **Zoals $N^2$:** elke helling door te verschuiven, de helft van de hellingen door te verschuiven en elk paar vergelijken. De helft van de parameters verschuiven is nog steeds een forward pass, $2N$ FLOPs, voor elk van $N/2$ parameters: $N^2$, en de grote-O-notatie laat de helft weg.",
+        why="**Zoals $N$:** één forward pass, de parameters bewaren en één stap van gradient descent; elk doet een vast beetje werk per parameter, dus twee keer zoveel parameters is twee keer zoveel werk. **Zoals $N^2$:** elke helling met een heel klein stapje, de helft van de hellingen met een heel klein stapje en elk paar vergelijken. De helft van de parameters veranderen is nog steeds een forward pass, $2N$ FLOPs, voor elk van $N/2$ parameters: $N^2$, en de grote-O-notatie laat de helft weg.",
     )
     return
 
@@ -295,7 +295,7 @@ def text_exercise_bigger():
 def choice_bigger_cell():
     choice_bigger = L.choice(
         "bigger",
-        question="Bij een netwerk met 100.000 parameters duurt elke helling meten door te verschuiven ongeveer 10 seconden per voorbeeld. Je maakt het netwerk tien keer zo groot: 1.000.000 parameters. Hoe lang duurt het nu ongeveer?",
+        question="Bij een netwerk met 100.000 parameters duurt elke helling meten met een heel klein stapje ongeveer 10 seconden per voorbeeld. Je maakt het netwerk tien keer zo groot: 1.000.000 parameters. Hoe lang duurt het nu ongeveer?",
         options={
             "ten": "Ongeveer 100 seconden",
             "twenty": "Ongeveer 20 seconden",
@@ -317,7 +317,7 @@ def text_connections():
     mo.md(r"""
     ## Afronding
 
-    **Samenhang.** In [Twee parameters: de gradient](/course/open/math-gradient?lang=nl) mat je elke helling door elke parameter om de beurt te verschuiven. Dat kost een forward pass per parameter: $O(N^2)$ FLOPs, veel te veel voor een netwerk zoals in [De forward pass in NumPy, met shapes](/course/open/nn-forward-numpy?lang=nl). In de volgende les, *Backpropagation met de hand op een kleine graaf*, krijg je elke helling door één keer achteruit door de berekening te gaan, voor een paar keer de kosten van een forward pass.
+    **Samenhang.** In [Twee parameters: de gradient](/course/open/math-gradient?lang=nl) mat je elke helling door elke parameter om de beurt een heel klein stapje te veranderen. Dat kost een forward pass per parameter: $O(N^2)$ FLOPs, veel te veel voor een netwerk zoals in [De forward pass in NumPy, met shapes](/course/open/nn-forward-numpy?lang=nl). In de volgende les, *Backpropagation met de hand op een kleine graaf*, krijg je elke helling door één keer achteruit door de berekening te gaan, voor een paar keer de kosten van een forward pass.
     """)
     return
 

@@ -200,7 +200,7 @@ def example_descent():
 @app.cell(hide_code=True)
 def text_after_example():
     mo.md(r"""
-    Elke regel toont de stap, de helling die hij gebruikte, de nieuwe $w$ en zijn loss. Na één stap is $w$ ongeveer 2,949 en is de loss van 2790 naar 267 gedaald. Na vijf stappen is $w$ ongeveer 3,097, met een loss van ongeveer 99,93: bijna het laagste punt dat je met de hand vond, zonder één stap terug te proberen. De learning rate is piepklein (0,00005), omdat de hellingen hier in de duizenden lopen: 0,00005 keer −8983 is −0,45, en min dat is een stap van 0,45 naar rechts.
+    Elke regel toont de stap, de helling die hij gebruikte, de nieuwe $w$ en zijn loss. Na één stap is $w$ ongeveer 2,949 en is de loss van 2790 naar 267 gedaald. Na vijf stappen is $w$ ongeveer 3,097, met een loss van ongeveer 99,93: bijna het laagste punt dat je met de hand vond, zonder één stap terug te proberen. De learning rate is piepklein (0,00005), omdat de hellingen hier in de duizenden lopen: 0,00005 keer −8983 is −0,45, en min dat is een stap van 0,45 naar rechts. Die eerste helling is −8983, niet de −8990 uit de instapcheck: de code meet hem met het heel kleine stapje $h = 0{,}001$, en bij een kromme loss komt dat een beetje naast de precieze helling uit.
     """)
     return
 
@@ -242,7 +242,7 @@ def text_exercise_b():
         mo.md(r"""
         ### Oefening 2. Gradient descent voor b
 
-        Nu blijft $w$ 3, en zoekt gradient descent de beste $b$, vanaf $b = 0$, met de learning rate `lr = 0.2`. Het vak heeft de loss als `loss(w, b)` en het heel kleine stapje `h` om een helling te meten. De learning rate is veel groter dan de 0,00005 voor $w$: de helling voor $b$ loopt in de tientallen, niet in de duizenden. De loop in het vak draait 25 rondes. Vervang de `...` door één update-stap voor $b$. De laatste regel is `b`, zodat de check ziet waar hij eindigde. De check probeert ook een andere learning rate.
+        Nu blijft $w$ 3, en zoekt gradient descent de beste $b$, vanaf $b = 0$, met de learning rate `lr = 0.2`. Het vak heeft de loss als `loss(w, b)` en het heel kleine stapje `h` om een helling te meten. De learning rate is veel groter dan de 0,00005 voor $w$: de helling voor $b$ begint bij ongeveer −115 en wordt daarna kleiner, ver van de duizenden. De loop in het vak draait 25 rondes. Vervang de `...` door één update-stap voor $b$. De laatste regel is `b`, zodat de check ziet waar hij eindigde. De check probeert ook een andere learning rate.
         """),
         L.task("Vul de loop met één update-stap voor b."),
     ])

@@ -217,8 +217,8 @@ lessons:
   idea: "When an action can slip, write the task down as a Markov decision process; the Bellman equation gives every state the best return you can expect from it, value iteration finds those values round by round from zero, and the policy takes in every state the action with the largest Q."
   covers: [mdp-s-bellman-en-pomdp-s#0, mdp-s-bellman-en-pomdp-s#1, dynamic-programming#2]
   requires: [search-astar, prob-expectation]
-  introduces: [c:markov-decision-process, c:transition-function, c:value-function, c:action-value-function, c:bellman-equation, c:value-iteration, s:v-q-functions, py:round]
-  uses: [c:policy, s:pi-policy, c:agent, c:environment, c:action, c:reward, c:return, c:discount, c:state, c:a-star-search, c:search-frontier, s:h-heuristic, c:expected-value, c:probability, s:sigma-sum, py:dict, py:for, py:range, py:list, py:append, py:tuple, py:indexing, py:def, py:return, py:import, py:import-as, py:np-argmax, py:min-max, py:arithmetic, py:float, py:int, py:print, py:comment, py:underscore-name, py:variable, py:string-literal, q:predict, q:choice, q:exercise-with-check, q:run-cell]
+  introduces: [c:markov-decision-process, c:transition-function, c:value-function, c:action-value-function, c:bellman-equation, c:value-iteration, s:v-q-functions]
+  uses: [c:policy, s:pi-policy, c:agent, c:environment, c:action, c:reward, c:return, c:discount, c:state, c:a-star-search, c:search-frontier, s:h-heuristic, c:expected-value, c:probability, s:sigma-sum, py:dict, py:for, py:range, py:list, py:append, py:tuple, py:indexing, py:def, py:return, py:import, py:import-as, py:np-argmax, py:min-max, py:arithmetic, py:float, py:int, py:print, py:comment, py:underscore-name, py:variable, py:string-literal, q:predict, q:choice, q:exercise-with-check, q:run-cell, py:round]
   warns: [value]
   data: []
   ladder: [python, numpy]
@@ -306,7 +306,7 @@ lessons:
   idea: "A GPU does thousands of simple calculations at once; moving the model and data to it with .to(device) makes training much faster, and the code still runs on a CPU."
   covers: [compute-geletterdheid#0, compute-geletterdheid#1, gpu-programmeren#0]
   requires: [torch-mlp-digits]
-  introduces: [c:gpu, py:to-device]
+  introduces: [c:gpu, py:to-device, c:cuda]
   uses: [c:flops, c:device, py:torch-tensor, py:nn-module, py:nn-linear, py:torch-relu, py:forward-method, py:manual-seed, py:item, py:np-load, py:dataloader, py:tensor-dataset, py:torch-optim, py:optimizer-step, py:zero-grad, py:backward, py:model-eval, py:model-train, py:no-grad, py:nn-cross-entropy-loss, c:mlp, c:hidden-layer, c:mini-batch, c:epoch, c:loss, c:learning-rate, c:optimizer, c:forward-pass, c:backward-pass, c:weight, c:bias-term, c:package, c:module, p:import-own-code, py:init-method, py:inheritance, py:super, py:class, py:def, py:return, py:for, py:if, py:bool, py:import, py:print, py:comment, py:keyword-argument, py:tuple, q:predict, q:choice, q:exercise-with-check, q:run-cell]
   ladder: [torch]
   needs: any
@@ -404,8 +404,8 @@ lessons:
   idea: "In Triton you write a fused softmax kernel in Python that reads the data once instead of several times, and you measure the speed-up."
   covers: [gpu-programmeren#1, gpu-programmeren#2, kernels-fusie-en-compilers#0, capstone-zelf-een-kleine-llm-bouwen-en-trainen#2]
   requires: [sys-profiling-mfu, num-floats-stability]
-  introduces: [c:gpu-kernel, c:operator-fusion, py:triton, c:cuda, c:thread-block]
-  uses: [c:gpu, c:memory-bound, c:bandwidth, c:roofline, c:flops, c:softmax, c:log-sum-exp, c:overflow, c:relu, c:tensor, c:shape, c:float32, py:torch-randn, py:manual-seed, py:decorator, py:keyword-argument, py:tuple, py:def, py:return, py:print, py:comment, py:underscore-name, py:import, q:predict, q:choice, q:explain, q:exercise-with-check, q:run-cell]
+  introduces: [c:gpu-kernel, c:operator-fusion, py:triton, c:thread-block]
+  uses: [c:gpu, c:memory-bound, c:bandwidth, c:roofline, c:flops, c:softmax, c:log-sum-exp, c:overflow, c:relu, c:tensor, c:shape, c:float32, py:torch-randn, py:manual-seed, py:decorator, py:keyword-argument, py:tuple, py:def, py:return, py:print, py:comment, py:underscore-name, py:import, q:predict, q:choice, q:explain, q:exercise-with-check, q:run-cell, c:cuda]
   warns: [kernel]
   compute_minutes: 3
   fallback: [cpu]

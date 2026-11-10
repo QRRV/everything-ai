@@ -95,7 +95,7 @@ def text_why():
 def predict_params():
     guess_params = L.guess(
         "params",
-        question="Your deep MLP has 85,194 parameters. Today's CNN has two convolutional layers, with 8 and then 16 filters of 3 by 3, and an output head that gets 784 numbers per image. How many parameters does it have?",
+        question="Your deep MLP has 85,194 parameters. Today's CNN has two convolutional layers, with 8 and then 16 filters of 3 by 3, and an output head, the last linear layer, which makes the 10 logits out of 784 numbers per image. How many parameters does it have?",
         options={
             "same": "About 85,000: as many as your deep MLP",
             "more": "About 300,000: two layers of many channels",
@@ -115,7 +115,7 @@ def text_idea():
 
         In PyTorch, a convolutional layer is `nn.Conv2d(c_in, c_out, k, padding=p)`: $C_\text{out}$ filters of shape $(C_\text{in}, k, k)$, each with a bias term, as in [Channels and pooling](/course/open/cnn-channels-pooling?lang=en), computed fast, as one big matrix multiplication or with other tricks. It works on a whole mini-batch at once, of shape $(B, C, H, W)$: $B$ images, each with $C$ channels of $H$ by $W$ pixels. The images of Fashion-MNIST are gray, one channel, so a mini-batch of 64 has shape (64, 1, 28, 28). `nn.MaxPool2d(2)` does max pooling of 2 by 2 on every channel of every image.
 
-        Your first CNN, `SmallCNN`, has two blocks of convolution, ReLU and pooling, and then an output head. With padding 1, a convolution of 3 by 3 keeps the height and width, and each pooling halves them: 28, 14, 7. After the second block, every image is 16 channels of 7 by 7, and `x.reshape(len(x), -1)` lays them out as one row of 784 numbers, for an `nn.Linear(784, 10)` that gives the 10 logits, one for every kind of clothing.
+        Your first CNN, `SmallCNN`, has two blocks of convolution, ReLU and pooling, and then an output head: the last linear layer, which makes the logits. With padding 1, a convolution of 3 by 3 keeps the height and width, and each pooling halves them: 28, 14, 7. After the second block, every image is 16 channels of 7 by 7, and `x.reshape(len(x), -1)` lays them out as one row of 784 numbers, for an `nn.Linear(784, 10)` that gives the 10 logits, one for every kind of clothing.
 
         ### New words and symbols
 

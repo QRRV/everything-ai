@@ -156,7 +156,7 @@ def text_worked_example():
     mo.md(r"""
     ### Uitgewerkt voorbeeld
 
-    Stap 1 en 3 op een kleine GPT uit [Je GPT in elkaar zetten](/course/open/gpt-assemble?lang=nl), met 1 block en 4 plekken, die nog niet getraind is. **1. De verwachting:** zonder posities geeft hij op de laatste plek dezelfde logits voor "abc" en voor "bac". Stap 3 is niet af: voer de cel uit zoals hij is, maak hem dan af waar het commentaar zegt, en voer hem opnieuw uit.
+    Stap 1 en 3 op een kleine GPT uit [Je GPT in elkaar zetten](/course/open/gpt-assemble?lang=nl), met 1 block en 4 plekken, die nog niet getraind is. **1. De verwachting:** zonder posities geeft hij op de laatste plek dezelfde logits voor "abc" en voor "bac". `torch.allclose(a, b)` zegt of twee tensors op afronding na gelijk zijn. Stap 3 is niet af: voer de cel uit zoals hij is, maak hem dan af waar het commentaar zegt, en voer hem opnieuw uit.
     """)
     return
 

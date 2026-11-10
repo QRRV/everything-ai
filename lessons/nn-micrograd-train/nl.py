@@ -140,7 +140,7 @@ def text_idea():
         """),
         L.watch_out("Zet de gradients op nul vóór `backward(loss)`, niet erna. Zet je ze na de backward pass en vóór de stap op 0, dan is elke helling 0 als de stap komt, en verandert het model nooit."),
         mo.md(r"""
-        Schuif met de slider, of sleep over de grafiek van de loss: dat zet het aantal stappen dat een `MLP(1, [8, 1])` getraind heeft op 12 punten die op een kromme liggen, met $\eta$ = 0,2. De ene grafiek toont de punten en <span class="c-pred">wat het model voorspelt</span>; de andere de <span class="c-loss">loss</span> van elke stap, met een punt bij het aantal stappen dat je koos.
+        Schuif met de slider, of sleep over de grafiek van de loss: daarmee kies je het aantal stappen dat een `MLP(1, [8, 1])` getraind heeft op 12 punten die op een kromme liggen, met $\eta$ = 0,2. De ene grafiek toont de punten en <span class="c-pred">wat het model voorspelt</span>; de andere de <span class="c-loss">loss</span> van elke stap, met een punt bij het aantal stappen dat je koos.
         """),
     ])
     return

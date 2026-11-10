@@ -181,7 +181,7 @@ def example_formula():
     # 1. and 2. x² is x to the power 2: the 2 comes to the front, the power becomes 1
     # 3. fill in x
     print(2 * _x)
-    # 4. check it by measuring, with a tiny h
+    # 4. check it by measuring, with a tiny step h
     _h = 0.001
     print((_f(_x + _h) - _f(_x)) / _h)
     # a line, 5x, measured at the same x: its slope is 5

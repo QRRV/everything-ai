@@ -458,7 +458,7 @@ def choice_runs_cell():
 @app.cell(hide_code=True)
 def text_connections():
     mo.md(r"""
-    ## Afsluiting
+    ## Afronding
 
     **Samenhang.** Een ResNeXt block is het residual block uit [ResNet: diepte die blijft werken](/course/open/cnn-resnet?lang=nl) met de bottleneck uit [1×1 convolutions: de channels mengen](/course/open/cv-1x1-convolution?lang=nl), in het midden twee keer zo breed gemaakt door een grouped convolution; zijn 32 paden naast elkaar zijn de takken uit [Inception: filters van verschillende groottes naast elkaar](/course/open/cv-inception?lang=nl), allemaal van één vorm. Je telde zijn weights met de shapes uit [Convolutie in detail](/course/open/cnn-conv-formal?lang=nl), zette kleine convoluties naast elkaar met `torch.cat` uit [Tensors in PyTorch](/course/open/torch-tensors?lang=nl), en trainde het block met de Trainer uit [Een herbruikbare training loop](/course/open/nn-trainer?lang=nl) op de foto's uit [Project: je CNN op kleurenfoto's](/course/open/cv-color-cnn?lang=nl). Je project `cnn` heeft nu `resnext.py`. In de volgende les, *DenseNet: elke layer ziet alle layers ervoor*, telt een block zijn input niet op maar houdt hem: elke layer krijgt de maps van alle layers ervoor, gestapeld langs de channels.
     """)

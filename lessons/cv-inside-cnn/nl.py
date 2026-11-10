@@ -113,7 +113,7 @@ def text_idea():
 
         **Feature maps, fase na fase.** ResNet-18 verwerkt een foto in fases. Eerst `conv1`, 64 filters van 7 bij 7 met stride 2, dan `bn1`, batch normalization, en een ReLU: 64 feature maps van 112 bij 112 voor een foto van 224 bij 224. Dan halveert max pooling van 3 bij 3 met stride 2 en padding 1 de rijen en de kolommen, en volgen er vier fases, `layer1` tot en met `layer4`, elk van twee residual blocks zoals in [ResNet: diepte die blijft werken](/course/open/cnn-resnet?lang=nl). `layer1` geeft 64 maps van 56 bij 56. `layer2`, `layer3` en `layer4` beginnen elk met een stride van 2, dus halveert elk de rijen en de kolommen van de maps die hij krijgt, en heeft hij twee keer zoveel channels. Je kunt een map tekenen als een grijs plaatje: zwart voor 0, wit voor zijn grootste getal. De ReLU maakt elk negatief getal 0: op de kat is na `conv1` 29% van de getallen 0. De maps van een fase naast elkaar heten een **feature map grid**, de sterkste eerst: die met het hoogste gemiddelde.
 
-        **Hoeveel van de foto één getal ziet.** Zoals in [Convolutie in detail: kernel size, stride en padding](/course/open/cnn-conv-formal?lang=nl) hangt elk getal van een map af van een stuk van de foto, zijn receptive field, en maakt elke layer dat stuk groter: een 3 bij 3 voegt 2 keer de afstand tussen buurgetallen toe. Na `conv1` 7 bij 7 pixels; na de pooling 11; na `layer1` 43; na `layer2` 99; na `layer3` 211; na `layer4` 435: meer dan de hele foto. De schuifregelaar laat dat stuk zien voor het getal van elke map dat het dichtst bij het midden van het oog links ligt: dik voor de fase die je kiest, dun voor de andere.
+        **Hoeveel van de foto één getal ziet.** Zoals in [Convolutie in detail: kernel size, stride en padding](/course/open/cnn-conv-formal?lang=nl) hangt elk getal van een map af van een stuk van de foto, zijn receptive field, en maakt elke layer dat stuk groter: een 3 bij 3 voegt 2 keer de afstand tussen buurgetallen toe. Na `conv1` 7 bij 7 pixels; na de pooling 11; na `layer1` 43; na `layer2` 99; na `layer3` 211; na `layer4` 435: meer dan de hele foto. De slider laat dat stuk zien voor het getal van elke map dat het dichtst bij het midden van het oog links ligt: dik voor de fase die je kiest, dun voor de andere.
         """),
         _field,
         mo.md(r"""
@@ -167,7 +167,7 @@ def get_button_cell():
 @app.cell(hide_code=True)
 def resnet_cell(get_button):
     resnet = C.resnet_or_stop(get_button, {
-        "ask": "*ResNet-18 staat nog niet op je computer. Als je [Een beeldclassifier uitproberen](/course/open/cv-try-classifier?lang=nl) op deze computer hebt gedaan, staat hij er wel: dan vindt deze les hem. Anders downloadt de knop hem één keer, 47 MB, van Hugging Face. Het uitgewerkte voorbeeld, de schuifregelaar langs de filters en de demo hebben hem nodig; de oefeningen niet. Terwijl hij downloadt, wacht de hele les: doe bij een trage verbinding eerst de oefeningen.*",
+        "ask": "*ResNet-18 staat nog niet op je computer. Als je [Een beeldclassifier uitproberen](/course/open/cv-try-classifier?lang=nl) op deze computer hebt gedaan, staat hij er wel: dan vindt deze les hem. Anders downloadt de knop hem één keer, 47 MB, van Hugging Face. Het uitgewerkte voorbeeld, de slider langs de filters en de demo hebben hem nodig; de oefeningen niet. Terwijl hij downloadt, wacht de hele les: doe bij een trage verbinding eerst de oefeningen.*",
         "busy": "**ResNet-18 downloaden** · {done} van {total} MB",
         "no_net": "*De download lukte niet: Hugging Face was niet te bereiken, of de verbinding viel weg. Controleer je verbinding, en klik opnieuw.*",
         "not_pinned": "*De download lukte niet: het bestand dat binnenkwam is niet het vastgezette bestand van de course, dus heeft de course het weggegooid. Klik opnieuw; gebeurt het weer, meld het dan op GitHub.*",
@@ -232,7 +232,7 @@ def text_after_example():
 @app.cell(hide_code=True)
 def text_before_play():
     mo.md(r"""
-    Welk filter zoekt waarnaar? Het grid laat de 64 filters van `conv1` zien, 8 per rij: het getal links van een rij is het eerste filter ervan, en het getal boven een kolom zegt hoeveel je verder telt, dus filter 26 staat in rij 24, kolom 2. De schuifregelaar gaat ze langs: links het filter, rechts zijn map op de kat, van zwart, 0, tot wit, zijn grootste getal.
+    Welk filter zoekt waarnaar? Het grid laat de 64 filters van `conv1` zien, 8 per rij: het getal links van een rij is het eerste filter ervan, en het getal boven een kolom zegt hoeveel je verder telt, dus filter 26 staat in rij 24, kolom 2. De slider gaat ze langs: links het filter, rechts zijn map op de kat, van zwart, 0, tot wit, zijn grootste getal.
     """)
     return
 
@@ -386,7 +386,7 @@ def text_demo():
     mo.md(r"""
     ### Wat je project nu kan
 
-    De knop gebruikt je project: je `filter_image` tekent de 64 filters van `conv1`, en je `feature_maps` haalt de foto die je kiest door de fases van ResNet-18. Dan gaat een schuifregelaar de fases langs. Links de foto met het vierkant pixels dat het sterkste getal van die fase ziet; rechts de 8 sterkste maps, de sterkste eerst, met een kader om zijn grootste getal. Hij heeft ResNet-18 nodig, uit het uitgewerkte voorbeeld, en oefening 2 en 3.
+    De knop gebruikt je project: je `filter_image` tekent de 64 filters van `conv1`, en je `feature_maps` haalt de foto die je kiest door de fases van ResNet-18. Dan gaat een slider de fases langs. Links de foto met het vierkant pixels dat het sterkste getal van die fase ziet; rechts de 8 sterkste maps, de sterkste eerst, met een kader om zijn grootste getal. Hij heeft ResNet-18 nodig, uit het uitgewerkte voorbeeld, en oefening 2 en 3.
     """)
     return
 

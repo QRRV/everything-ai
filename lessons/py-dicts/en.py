@@ -152,7 +152,7 @@ def text_recipe():
         2. Look up a value with its key in square brackets: `prices["pear"]`.
         3. Change a value, or add a new pair, with `=`: `prices["plum"] = 0.3`.
         4. Not sure a key is there? Check with `in` first: `if "plum" in prices:`.
-        5. Go through all pairs with `for`: in `for fruit in prices:`, `fruit` gets each key, and `prices[fruit]` gives its value.
+        5. Go through all pairs with `for`: in `for fruit in prices:`, `fruit` gets each key, and `prices[fruit]` gives its value. Or ask for both at once with `.items()`: in `for fruit, price in prices.items():`, `fruit` gets each key and `price` the value with it.
         """),
     ])
     return

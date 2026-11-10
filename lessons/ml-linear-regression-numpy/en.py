@@ -80,7 +80,7 @@ def text_why():
         mo.md(r"""
         ## Why this matters
 
-        In [Fitting w and b with gradient descent](/course/open/ml-gradient-descent-2d?lang=en) you measured each slope by nudging a parameter: one extra loss for every parameter, at every step. With one feature that is fine. A house has many features, and a model for text has millions of weights. With the chain rule you get every slope exactly, in one go, with one matrix multiplication. That is linear regression on many features, and the first piece of your own neural network: it learns in the same way, only with more steps in the chain.
+        In [Fitting w and b with gradient descent](/course/open/ml-gradient-descent-2d?lang=en) you measured each slope with a tiny step in a parameter: one extra loss for every parameter, at every step. With one feature that is fine. A house has many features, and a model for text has millions of weights. With the chain rule you get every slope exactly, in one go, with one matrix multiplication. That is linear regression on many features, and the first piece of your own neural network: it learns in the same way, only with more steps in the chain.
         """),
         draw.project_steps(["Linear regression on many features", "Training logistic regression", "A linear classifier for handwritten digits",
                             "Your own autograd: a Value that remembers", "The full backward pass", "Neurons, layers and an MLP",
@@ -98,13 +98,13 @@ def text_why():
 def predict_nudges():
     guess_nudges = L.guess(
         "nudges",
-        question="A model has 1000 weights and a bias term. To measure every slope by nudging, how many times do you think you work out the loss in one step of gradient descent?",
+        question="A model has 1000 weights and a bias term. To measure every slope with a tiny step, how many times do you think you work out the loss in one step of gradient descent?",
         options={
             "two": "2",
             "thousand": "About 1000",
             "million": "About 1,000,000",
         },
-        reveal="**About 1000:** once where you are, and once more for each of the 1001 parameters. Each of those is a pass over all the data. The chain rule gives all 1001 slopes from one pass: no nudging at all.",
+        reveal="**About 1000:** once where you are, and once more for each of the 1001 parameters. Each of those is a pass over all the data. The chain rule gives all 1001 slopes from one pass: no tiny steps at all.",
     )
     guess_nudges
     return (guess_nudges,)
@@ -182,7 +182,7 @@ def example_step():
     _grad_b = -2 * _r.mean()
     print(_grad_w, _grad_b)
 
-    # check the first slope by measuring, with a tiny h
+    # check the first slope by measuring, with a tiny step h
     def _loss(w, b):
         return ((_y - (_X @ w + b)) ** 2).mean()
 
@@ -197,7 +197,7 @@ def example_step():
 @app.cell(hide_code=True)
 def text_after_example():
     mo.md(r"""
-    The chain rule gives the slopes of about −394.7, −263 and −374 for the three weights, and −442.5 for $b$. Measuring the first one gives −394.66: the same; the chain rule needed no nudging at all. One step brings the loss down from 52310.5 to about 2530. In exercise 3 you repeat this step in a loop.
+    The chain rule gives the slopes of about −394.7, −263 and −374 for the three weights, and −442.5 for $b$. Measuring the first one gives −394.66: the same; the chain rule needed no tiny steps at all. One step brings the loss down from 52310.5 to about 2530. In exercise 3 you repeat this step in a loop.
     """)
     return
 

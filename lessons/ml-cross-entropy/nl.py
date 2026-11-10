@@ -147,7 +147,7 @@ def text_idea():
         """),
         L.watch_out("Cross-entropy kijkt alleen naar de kans op de goede klasse, maar de andere tellen toch mee: alle kansen zijn samen 1, dus meer voor een foute klasse laat minder over voor de goede. Twee modellen met dezelfde kans op de goede klasse krijgen dezelfde loss, hoe ze de rest ook verdelen."),
         mo.md(r"""
-        Schuif met de slider: hij zet de logit van hond, terwijl kat de logit 2 houdt en vogel de logit 0. De foto is van een hond, klasse 1. De ene grafiek toont de <span class="c-pred">kansen</span> uit softmax, die van hond met een dikkere rand; de andere de <span class="c-loss">cross-entropy</span>, min de log van de kans op hond.
+        Schuif met de slider: daarmee kies je de logit van hond, terwijl kat de logit 2 houdt en vogel de logit 0. De foto is van een hond, klasse 1. De ene grafiek toont de <span class="c-pred">kansen</span> uit softmax, die van hond met een dikkere rand; de andere de <span class="c-loss">cross-entropy</span>, min de log van de kans op hond.
         """),
     ])
     return

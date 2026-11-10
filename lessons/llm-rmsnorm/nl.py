@@ -112,7 +112,7 @@ def text_idea():
         mo.md(r"""
         Zoals bij layer normalization voorkomt $\varepsilon$ dat een rij nullen door 0 gedeeld wordt, en begint $\gamma$ bij 1. Er is geen gemiddelde om af te trekken, en geen $\beta$.
 
-        **Stap 2: wat het houdt, en wat het laat vallen.** Net als layer normalization trekt RMSNorm zich niets aan van de grootte van zijn input: $3x$ geeft hetzelfde als $x$. Dat houdt de getallen in een diep netwerk op een vaste grootte. Anders dan layer normalization let het wel op een verschuiving: $x + 5$ geeft iets anders dan $x$. Het artikel dat RMSNorm introduceerde, stelde dat het herschalen telt en dat het centreren weg kan, en in zijn experimenten trainden modellen zonder centreren ongeveer even goed. <!-- termen:ok -->
+        **Stap 2: wat het houdt, en wat het laat vallen.** Net als layer normalization trekt RMSNorm zich niets aan van de grootte van zijn input: $3x$ geeft hetzelfde als $x$. Dat houdt de getallen in een diep netwerk op een vaste grootte. Anders dan layer normalization let het wel op een verschuiving: $x + 5$ geeft iets anders dan $x$. De paper die RMSNorm introduceerde, stelde dat het herschalen telt en dat het centreren weg kan, en in zijn experimenten trainden modellen zonder centreren ongeveer even goed. <!-- termen:ok -->
 
         **Stap 3: wat het bespaart.** Per rij berekent layer normalization twee getallen, het gemiddelde en de variantie, en trekt het gemiddelde van elke feature af; RMSNorm berekent er één, het gemiddelde van de kwadraten, en trekt niets af. Per normalisatie heeft layer normalization $2d$ parameters, RMSNorm $d$. Of het daardoor sneller is, hangt af van de code: `nn.LayerNorm` van PyTorch draait als één samengevoegde kernel, één programma dat de hele normalisatie in één keer doet, en op een CPU doet zijn `nn.RMSNorm` dat niet, dus daar kan layer normalization zelfs sneller zijn. Grote modellen gebruiken een samengevoegde RMSNorm.
 
@@ -154,7 +154,7 @@ def text_worked_example():
     mo.md(r"""
     ### Uitgewerkt voorbeeld
 
-    `nn.RMSNorm` van PyTorch is nieuw: hier draait het naast `nn.LayerNorm` op twee rijen van 6 getallen, één keer herschaald en één keer verschoven.
+    `nn.RMSNorm` van PyTorch is nieuw: hier draait het naast `nn.LayerNorm` op twee rijen van 6 getallen, één keer herschaald en één keer verschoven. `torch.allclose(a, b, atol=1e-5)` zegt of twee tensors gelijk zijn op verschillen van zo'n 0,00001 na, en `p.numel()` telt de getallen in een tensor `p`.
     """)
     return
 
@@ -328,7 +328,7 @@ def explain_no_mean():
     explain_mean_cell = L.explain(
         "why-no-mean",
         question="RMSNorm laat weg wat layer normalization als eerste doet: het gemiddelde aftrekken. Waarom verliest een model daar weinig door, en wat wint het?",
-        model_answer="**Wat blijft:** de deling door de RMS houdt elk token nog steeds op een vaste grootte, hoe groot de getallen die binnenkomen ook zijn; dat herschalen houdt een diep netwerk stabiel. **Waarom het gemiddelde weg kan:** de vaste grootte komt van het herschalen, niet van een gemiddelde van 0; het artikel dat RMSNorm introduceerde, vond dat modellen zonder het centreren ongeveer even goed trainen, en de grote language models van nu trainen goed met RMSNorm. **Wat het wint:** één getal per rij om te berekenen in plaats van twee, niets om af te trekken, en geen $\\beta$: minder werk per token, wat zich uitbetaalt in een samengevoegde kernel.",
+        model_answer="**Wat blijft:** de deling door de RMS houdt elk token nog steeds op een vaste grootte, hoe groot de getallen die binnenkomen ook zijn; dat herschalen houdt een diep netwerk stabiel. **Waarom het gemiddelde weg kan:** de vaste grootte komt van het herschalen, niet van een gemiddelde van 0; de paper die RMSNorm introduceerde, vond dat modellen zonder het centreren ongeveer even goed trainen, en de grote language models van nu trainen goed met RMSNorm. **Wat het wint:** één getal per rij om te berekenen in plaats van twee, niets om af te trekken, en geen $\\beta$: minder werk per token, wat zich uitbetaalt in een samengevoegde kernel.",
         points=[
             "je zegt dat het herschalen, dat elk token op een vaste grootte houdt, blijft",
             "je geeft een reden waarom het centreren weinig toevoegt, zoals dat het herschalen alleen al de vaste grootte geeft, of dat modellen er zonder ongeveer even goed trainen",

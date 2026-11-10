@@ -79,7 +79,7 @@ def text_why():
     mo.md(r"""
     ## Waarom
 
-    Een paper vertelt wat een team vond; een volledig open trainingsrecept laat je het zelf doen. nanochat, van Andrej Karpathy, is zo'n recept: zijn code, zijn data en elke instelling zijn openbaar, en één script doet alles, van de tokenizer tot een model waarmee je kunt chatten. In 2019 kostte het trainen van GPT-2 zo'n 43.000 dollar. nanochat houdt een leaderboard bij van hoe snel zijn recept de score van GPT-2 op CORE verslaat, een verzameling benchmarks, op één computer met 8 H100-GPU's, en elke inzending noemt de commit van de code die het deed. Zo'n recept van begin tot eind lezen laat zien welke keuzes een echte run maakt, en laat je er één veranderen om te zien wat die doet.
+    Een paper vertelt wat een team vond; een volledig open trainingsrecept laat je het zelf doen. nanochat, van Andrej Karpathy, is zo'n recept: zijn code, zijn data en elke instelling zijn openbaar, en één script, een bestand met opdrachten die na elkaar draaien, doet alles, van de tokenizer tot een model waarmee je kunt chatten. In 2019 kostte het trainen van GPT-2 zo'n 43.000 dollar. nanochat houdt een leaderboard bij van hoe snel zijn recept de score van GPT-2 op CORE verslaat, een verzameling benchmarks, op één computer met 8 H100-GPU's, en elke inzending noemt de commit van de code die het deed. Zo'n recept van begin tot eind lezen laat zien welke keuzes een echte run maakt, en laat je er één veranderen om te zien wat die doet.
 
     **Een voorbeeld uit het dagelijks leven.** Een foto van een brood vertelt je dat het kan. Een recept met het meel, de hoeveelheden, de tijden en de oventemperatuur laat je het bakken, en nog eens bakken met minder gist om te zien wat de gist doet.
     """)
@@ -183,7 +183,7 @@ def example_speedrun():
     # de scaling-parameters, en de tokens om op te trainen
     _params = 12 * _depth * _dim * _dim + _vocab * _dim
     _tokens = _ratio * _params
-    # de batch, vanuit het referentiemodel d12 van nanochat: 2 ** 19 tokens, groeiend als de tokens tot de macht 0,383
+    # de batch, vanuit het model d12 van nanochat: 2 ** 19 tokens, groeiend als de tokens tot de macht 0,383
     _ref = _ratio * (12 * 12 * 768 * 768 + _vocab * 768)
     _batch = 2 ** round(math.log2(2 ** 19 * (_tokens / _ref) ** 0.383))
     print(_dim, _heads, _params, _tokens, _batch, int(_tokens / _batch))
@@ -194,7 +194,7 @@ def example_speedrun():
 def text_after_example():
     _s = C.speedrun()
     mo.md(f"""
-    Diepte 24 geeft een breedte van {C.number(_s['dim'], 0, L.lang)}, al een veelvoud van 128, dus {_s['heads']} heads, en {C.number(_s['params'], 0, L.lang)} scaling-parameters volgens de formule; nanochat telt er {C.number(729810624, 0, L.lang)}, omdat een paar kleine gates er niet in zitten. 8 tokens per parameter geven {C.number(_s['tokens'] / 1e9, 2, L.lang)} miljard tokens. Het referentiemodel, diepte 12, traint op `2 ** 19` tokens per stap; de speedrun heeft {C.number(_s['tokens'] / (8 * C.size_of(12, 2 ** 15)[2]), 1, L.lang)} keer zijn tokens, dus zijn batch is `2 ** 19` keer dat tot de macht 0,383, afgerond op een macht van 2: `2 ** 20`, {C.number(_s['batch'], 0, L.lang)} tokens. Dat geeft {C.number(_s['steps'], 0, L.lang)} stappen. De hele run volgt uit één getal, en daarom kan een inzending op het leaderboard "d24" of "d26" zeggen en een hele run bedoelen.
+    Diepte 24 geeft een breedte van {C.number(_s['dim'], 0, L.lang)}, al een veelvoud van 128, dus {_s['heads']} heads, en {C.number(_s['params'], 0, L.lang)} scaling-parameters volgens de formule; nanochat telt er {C.number(729810624, 0, L.lang)}, omdat een paar kleine gates er niet in zitten. 8 tokens per parameter geven {C.number(_s['tokens'] / 1e9, 2, L.lang)} miljard tokens. De regel van nanochat gaat uit van zijn model van diepte 12, dat traint op `2 ** 19` tokens per stap; de speedrun heeft {C.number(_s['tokens'] / (8 * C.size_of(12, 2 ** 15)[2]), 1, L.lang)} keer zijn tokens, dus zijn batch is `2 ** 19` keer dat tot de macht 0,383, afgerond op een macht van 2: `2 ** 20`, {C.number(_s['batch'], 0, L.lang)} tokens. Dat geeft {C.number(_s['steps'], 0, L.lang)} stappen. De hele run volgt uit één getal, en daarom kan een inzending op het leaderboard "d24" of "d26" zeggen en een hele run bedoelen.
     """)
     return
 

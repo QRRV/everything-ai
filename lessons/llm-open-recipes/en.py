@@ -79,7 +79,7 @@ def text_why():
     mo.md(r"""
     ## Why this matters
 
-    A paper tells you what a team found; a fully open training recipe lets you do it yourself. nanochat, by Andrej Karpathy, is such a recipe: its code, its data and every setting are public, and one script runs it all, from the tokenizer to a model you can chat with. In 2019, training GPT-2 cost about 43,000 dollars. nanochat keeps a leaderboard of how fast its recipe beats GPT-2's score on CORE, a set of benchmarks, on one computer with 8 H100 GPUs, and every entry names the commit of the code that did it. Reading such a recipe end to end shows which choices a real run makes, and lets you change one of them and see what it does.
+    A paper tells you what a team found; a fully open training recipe lets you do it yourself. nanochat, by Andrej Karpathy, is such a recipe: its code, its data and every setting are public, and one script, a file of commands that run one after the other, runs it all, from the tokenizer to a model you can chat with. In 2019, training GPT-2 cost about 43,000 dollars. nanochat keeps a leaderboard of how fast its recipe beats GPT-2's score on CORE, a set of benchmarks, on one computer with 8 H100 GPUs, and every entry names the commit of the code that did it. Reading such a recipe end to end shows which choices a real run makes, and lets you change one of them and see what it does.
 
     **An everyday example.** A photo of a loaf of bread tells you it can be done. A recipe with the flour, the amounts, the times and the oven temperature lets you bake it, and bake it again with less yeast to see what the yeast does.
     """)
@@ -183,7 +183,7 @@ def example_speedrun():
     # the scaling parameters, and the tokens to train on
     _params = 12 * _depth * _dim * _dim + _vocab * _dim
     _tokens = _ratio * _params
-    # the batch, from nanochat's reference d12: 2 ** 19 tokens, growing as the tokens to the power 0.383
+    # the batch, from nanochat's model d12: 2 ** 19 tokens, growing as the tokens to the power 0.383
     _ref = _ratio * (12 * 12 * 768 * 768 + _vocab * 768)
     _batch = 2 ** round(math.log2(2 ** 19 * (_tokens / _ref) ** 0.383))
     print(_dim, _heads, _params, _tokens, _batch, int(_tokens / _batch))
@@ -194,7 +194,7 @@ def example_speedrun():
 def text_after_example():
     _s = C.speedrun()
     mo.md(f"""
-    Depth 24 gives a width of {C.number(_s['dim'], 0, L.lang)}, already a multiple of 128, so {_s['heads']} heads, and {C.number(_s['params'], 0, L.lang)} scaling parameters by the formula; nanochat counts {C.number(729810624, 0, L.lang)}, as a few small gates are not in it. 8 tokens per parameter make {C.number(_s['tokens'] / 1e9, 2, L.lang)} billion tokens. The reference model, depth 12, trains on `2 ** 19` tokens per step; the speedrun has {C.number(_s['tokens'] / (8 * C.size_of(12, 2 ** 15)[2]), 1, L.lang)} times its tokens, so its batch is `2 ** 19` times that to the power 0.383, rounded to a power of 2: `2 ** 20`, {C.number(_s['batch'], 0, L.lang)} tokens. That gives {C.number(_s['steps'], 0, L.lang)} steps. The whole run follows from one number, which is why a leaderboard entry can say "d24" or "d26" and mean a whole run.
+    Depth 24 gives a width of {C.number(_s['dim'], 0, L.lang)}, already a multiple of 128, so {_s['heads']} heads, and {C.number(_s['params'], 0, L.lang)} scaling parameters by the formula; nanochat counts {C.number(729810624, 0, L.lang)}, as a few small gates are not in it. 8 tokens per parameter make {C.number(_s['tokens'] / 1e9, 2, L.lang)} billion tokens. nanochat's rule starts from its model of depth 12, which trains on `2 ** 19` tokens per step; the speedrun has {C.number(_s['tokens'] / (8 * C.size_of(12, 2 ** 15)[2]), 1, L.lang)} times its tokens, so its batch is `2 ** 19` times that to the power 0.383, rounded to a power of 2: `2 ** 20`, {C.number(_s['batch'], 0, L.lang)} tokens. That gives {C.number(_s['steps'], 0, L.lang)} steps. The whole run follows from one number, which is why a leaderboard entry can say "d24" or "d26" and mean a whole run.
     """)
     return
 

@@ -132,7 +132,7 @@ def text_idea():
         """),
         L.watch_out("De prior vergeten is een veelgemaakte fout, de **base-rate fallacy**: bij een test die 99 van de 100 keer gelijk heeft, lijkt een positieve uitslag 99% zeker. Maar als de ziekte zeldzaam is, zijn de meeste positieve uitslagen vals alarm. De prior, hoe vaak de ziekte voorkomt, hoort in de berekening: bovenaan, en in P(B)."),
         mo.md(r"""
-        Het speelblok: 100.000 mensen en de test uit de gok. De bovenste balk is iedereen, de onderste zijn hun positieve tests, en het gevulde deel zijn de mensen die ziek zijn. Schuif met de slider: hij zet hoeveel van de 100.000 er ziek zijn, en de test blijft dezelfde. De aantallen zijn afgerond op hele mensen.
+        Het speelblok: 100.000 mensen en de test uit de gok. De bovenste balk is iedereen, de onderste zijn hun positieve tests, en het gevulde deel zijn de mensen die ziek zijn. Schuif met de slider: daarmee kies je hoeveel van de 100.000 er ziek zijn, en de test blijft dezelfde. De aantallen zijn afgerond op hele mensen.
         """),
     ])
     return

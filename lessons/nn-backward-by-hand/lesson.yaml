@@ -23,6 +23,6 @@ can_now:
   - en: "add up the slopes of a value that goes into more than one node"
     nl: "de hellingen optellen van een waarde die in meer dan één node gaat"
     by: branch
-  - en: "check slopes from the backward pass by moving a parameter"
-    nl: "hellingen uit de backward pass controleren door een parameter te verschuiven"
+  - en: "check slopes from the backward pass by moving a parameter a tiny step"
+    nl: "hellingen uit de backward pass controleren met een heel klein stapje in een parameter"
     by: check

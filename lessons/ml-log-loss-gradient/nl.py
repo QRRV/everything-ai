@@ -100,7 +100,7 @@ def text_why():
     mo.md(r"""
     ## Waarom
 
-    Om logistische regressie met gradient descent te trainen, heb je de helling van de log loss nodig voor elke weight en voor de bias term. Elke weight een duwtje geven werkt, maar een model met een miljoen weights zou dan per stap een miljoen duwtjes nodig hebben. De kettingregel geeft elke helling uit één formule. Bij log loss met een sigmoid blijkt die formule verrassend eenvoudig: de kans min het label, keer de feature.
+    Om logistische regressie met gradient descent te trainen, heb je de helling van de log loss nodig voor elke weight en voor de bias term. Een heel klein stapje voor elke weight werkt, maar een model met een miljoen weights zou er dan per trainingsstap een miljoen nodig hebben. De kettingregel geeft elke helling uit één formule. Bij log loss met een sigmoid blijkt die formule verrassend eenvoudig: de kans min het label, keer de feature.
 
     **Een voorbeeld uit het dagelijks leven.** Om te weten wat een taxirit kost, maak je niet elke rit om het uit te proberen. Het tarief, een starttarief plus een prijs per kilometer, geeft de kosten van elke rit tegelijk.
     """)
@@ -147,7 +147,7 @@ def text_idea():
         """),
         L.formula(r"[[grad:\frac{\partial \mathcal{L}}{\partial w_j}]] = ([[pred:\hat{y}]] - y)\, x_j \qquad [[grad:\frac{\partial \mathcal{L}}{\partial b}]] = [[pred:\hat{y}]] - y"),
         mo.md(r"""
-        Bij veel voorbeelden is de log loss een gemiddelde, dus is elke helling het gemiddelde van deze hellingen over de voorbeelden. De slider hieronder controleert de helling van $\sigma$ met een duwtje, zoals in [De afgeleide als helling](/course/open/math-slope?lang=nl); het uitgewerkte voorbeeld controleert de hele formule.
+        Bij veel voorbeelden is de log loss een gemiddelde, dus is elke helling het gemiddelde van deze hellingen over de voorbeelden. De slider hieronder controleert de helling van $\sigma$ met een heel klein stapje, zoals in [De afgeleide als helling](/course/open/math-slope?lang=nl); het uitgewerkte voorbeeld controleert de hele formule.
 
         ### Nieuwe woorden en tekens
 
@@ -158,7 +158,7 @@ def text_idea():
         """),
         L.watch_out("De helling van de sigmoid valt weg tegen de helling van de log; daarom is de gradient zo eenvoudig. Met de mean squared error op een kans blijft hij staan: een model dat zeker en fout is, met $\\hat{y}(1 - \\hat{y})$ dicht bij 0, zou dan nauwelijks leren."),
         mo.md(r"""
-        Schuif met de slider, of sleep over de grafiek: dat zet de logit $z$. De <span class="c-grad">groene lijn</span> heeft de helling van de sigmoid op dat punt, $\hat{y}(1 - \hat{y})$.
+        Schuif met de slider, of sleep over de grafiek: daarmee kies je de logit $z$. De <span class="c-grad">groene lijn</span> heeft de helling van de sigmoid op dat punt, $\hat{y}(1 - \hat{y})$.
         """),
     ])
     return
@@ -172,7 +172,7 @@ def explore_z_cell():
         nudged = (C.sigmoid(z + 0.001) - p) / 0.001
         return (C.picture(z, {"title": "De helling van de sigmoid", "z": "logit z", "p": "kans ŷ",
                               "alt": f"De sigmoid, met een punt bij z = {L.number(z, 1)} en een korte groene lijn met de helling daar, {L.number(slope, 3)}. De sigmoid is het steilst bij z = 0 en bijna vlak ver naar links en rechts."}),
-                f"""Bij <i>z</i> = {L.number(z, 1)}: <i>ŷ</i> = <span class="c-pred ea-num">{L.number(p, 3)}</span>, en de helling <i>ŷ</i>(1 − <i>ŷ</i>) = <span class="c-grad ea-num">{L.number(slope, 4)}</span>. Een duwtje van 0,001 aan <i>z</i> geeft <span class="c-grad ea-num">{L.number(nudged, 4)}</span>.""")
+                f"""Bij <i>z</i> = {L.number(z, 1)}: <i>ŷ</i> = <span class="c-pred ea-num">{L.number(p, 3)}</span>, en de helling <i>ŷ</i>(1 − <i>ŷ</i>) = <span class="c-grad ea-num">{L.number(slope, 4)}</span>. Een heel klein stapje van 0,001 in <i>z</i> geeft <span class="c-grad ea-num">{L.number(nudged, 4)}</span>.""")
 
     explore_z = L.explore("slope-z", "z", _frame, start=0, low=-5, high=5, step=0.5, role="", task="Hoeveel keer kleiner is de helling $\\hat{y}(1 - \\hat{y})$ bij $z = -5$ dan bij $z = 0$?")
     explore_z
@@ -182,7 +182,7 @@ def explore_z_cell():
 @app.cell(hide_code=True)
 def text_recipe():
     mo.md(r"""
-    Bij $z = -5$ is de helling 0,0066: ongeveer 38 keer kleiner dan 0,25 bij $z = 0$, en het duwtje geeft bijna hetzelfde, 0,0067. Een spammail met die logit krijgt $\hat{y} = 0{,}007$: het model is zeker en fout. Log loss geeft hem toch de helling $\hat{y} - y \approx -0{,}99$ voor de bias term, bijna de grootste die er is; met de mean squared error blijft deze helling van de sigmoid, 0,0066, in zijn gradient staan, en zou het model nauwelijks van deze mail leren.
+    Bij $z = -5$ is de helling 0,0066: ongeveer 38 keer kleiner dan 0,25 bij $z = 0$, en het heel kleine stapje geeft bijna hetzelfde, 0,0067. Een spammail met die logit krijgt $\hat{y} = 0{,}007$: het model is zeker en fout. Log loss geeft hem toch de helling $\hat{y} - y \approx -0{,}99$ voor de bias term, bijna de grootste die er is; met de mean squared error blijft deze helling van de sigmoid, 0,0066, in zijn gradient staan, en zou het model nauwelijks van deze mail leren.
 
     ### Recept
 
@@ -191,7 +191,7 @@ def text_recipe():
     1. Reken de kans $\hat{y}$ van elk voorbeeld uit: de sigmoid van de logit.
     2. Trek van elke kans het label af: $\hat{y} - y$.
     3. De helling voor elke weight is het gemiddelde van $\hat{y} - y$ keer zijn feature; voor de bias term het gemiddelde van $\hat{y} - y$ zelf.
-    4. Controleer één helling met een duwtje: verander die weight met een piepkleine $h$, en deel de verandering van de loss door $h$.
+    4. Controleer één helling met een heel klein stapje: verander die weight met een heel klein stapje $h$, en deel de verandering van de loss door $h$.
     """)
     return
 
@@ -201,7 +201,7 @@ def text_worked_example():
     mo.md(r"""
     ### Uitgewerkt voorbeeld
 
-    Eén spammail, $y = 1$, met de features 2 en 1, en een model met de weights 0,5 en −1 en de bias term 0. Eerst de gradient uit de formule, dan de controle met een duwtje aan de eerste weight. Het commentaar met `#` zegt bij welke stap van het recept elk deel hoort. Voer de cel uit.
+    Eén spammail, $y = 1$, met de features 2 en 1, en een model met de weights 0,5 en −1 en de bias term 0. Eerst de gradient uit de formule, dan de controle met een heel klein stapje in de eerste weight. Het commentaar met `#` zegt bij welke stap van het recept elk deel hoort. Voer de cel uit.
     """)
     return
 
@@ -226,7 +226,7 @@ def example_gradient():
     print(_p - _y)
     # 3. de hellingen voor de twee weights, en voor de bias term
     print((_p - _y) * _x, _p - _y)
-    # 4. de controle: geef de eerste weight een duwtje van h
+    # 4. de controle: een heel klein stapje h in de eerste weight
     _h = 0.001
     print((_loss(_w + np.array([_h, 0]), _b) - _loss(_w, _b)) / _h)
     return
@@ -235,7 +235,7 @@ def example_gradient():
 @app.cell(hide_code=True)
 def text_after_example():
     mo.md(r"""
-    De logit is $0{,}5 \cdot 2 - 1 \cdot 1 + 0 = 0$, dus $\hat{y} = 0{,}5$ en $\hat{y} - y = -0{,}5$. De hellingen zijn $-0{,}5 \cdot 2 = -1$ en $-0{,}5 \cdot 1 = -0{,}5$ voor de weights, en $-0{,}5$ voor de bias term; met één voorbeeld is het gemiddelde uit stap 3 die ene waarde zelf. Het duwtje aan de eerste weight geeft $-0{,}9995$: dicht bij $-1$, dus de formule doorstaat de controle. Alle hellingen zijn negatief: maak de weights en de bias term een beetje groter, en de loss van deze spammail daalt.
+    De logit is $0{,}5 \cdot 2 - 1 \cdot 1 + 0 = 0$, dus $\hat{y} = 0{,}5$ en $\hat{y} - y = -0{,}5$. De hellingen zijn $-0{,}5 \cdot 2 = -1$ en $-0{,}5 \cdot 1 = -0{,}5$ voor de weights, en $-0{,}5$ voor de bias term; met één voorbeeld is het gemiddelde uit stap 3 die ene waarde zelf. Het heel kleine stapje in de eerste weight geeft $-0{,}9995$: dicht bij $-1$, dus de formule doorstaat de controle. Alle hellingen zijn negatief: maak de weights en de bias term een beetje groter, en de loss van deze spammail daalt.
     """)
     return
 
@@ -360,7 +360,7 @@ def text_connections():
     mo.md(r"""
     ## Afronding
 
-    **Samenhang.** In [Snelheden vermenigvuldigen: de kettingregel](/course/open/math-chain-rule?lang=nl) vermenigvuldigde je de hellingen van de stappen van één functie; hier zijn de stappen de logit, de sigmoid en de log, en valt de helling van de sigmoid weg. In [Twee parameters: de gradient](/course/open/math-gradient?lang=nl) vormde een helling per parameter de gradient; nu heb je er een formule voor, gecontroleerd met een duwtje. In [Kansen scoren met de log: log loss](/course/open/ml-log-loss?lang=nl) mat je hoe ver de kansen ernaast zaten; nu weet je welke kant je het model op moet sturen. In de volgende les, *Logistische regressie trainen*, gebruikt gradient descent precies deze gradient om het model te trainen.
+    **Samenhang.** In [Snelheden vermenigvuldigen: de kettingregel](/course/open/math-chain-rule?lang=nl) vermenigvuldigde je de hellingen van de stappen van één functie; hier zijn de stappen de logit, de sigmoid en de log, en valt de helling van de sigmoid weg. In [Twee parameters: de gradient](/course/open/math-gradient?lang=nl) vormde een helling per parameter de gradient; nu heb je er een formule voor, gecontroleerd met een heel klein stapje. In [Kansen scoren met de log: log loss](/course/open/ml-log-loss?lang=nl) mat je hoe ver de kansen ernaast zaten; nu weet je welke kant je het model op moet sturen. In de volgende les, *Logistische regressie trainen*, gebruikt gradient descent precies deze gradient om het model te trainen.
     """)
     return
 

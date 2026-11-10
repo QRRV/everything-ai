@@ -156,7 +156,7 @@ def text_worked_example():
     mo.md(r"""
     ### Worked example
 
-    Measuring activations is new: a small MLP, and two functions for `saved_tensors_hooks`. It calls the first for every tensor the forward pass keeps, and keeps what that function gives back, here the tensor itself; the second gives it back to the backward pass, here unchanged. `t.numel()` is the number of numbers in a tensor `t`, `t.element_size()` the bytes of each, and `t.data_ptr()` the place in memory where its numbers start. The function leaves out the parameters, which are counted already, and counts every place once, because two operations can keep the same tensor.
+    Measuring activations is new: a small MLP, and two functions for `saved_tensors_hooks`. It calls the first for every tensor the forward pass keeps, and keeps what that function gives back, here the tensor itself; the second gives it back to the backward pass, here unchanged. `t.numel()` is the number of numbers in a tensor `t`, `t.element_size()` the bytes of each, and `t.data_ptr()` the place in memory where its numbers start; `.values()` gives the values of a dictionary, without their keys. The function leaves out the parameters, which are counted already, and counts every place once, because two operations can keep the same tensor.
     """)
     return
 

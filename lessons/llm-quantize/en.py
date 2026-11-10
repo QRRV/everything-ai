@@ -216,7 +216,7 @@ def text_exercise_quantize():
 
         ### Exercise 1. Quantize a matrix
 
-        Complete `quantize(w, bits, group)`: the weights of the matrix `w` as the model computes with them after storing each in `bits` bits, with a scale per group of `group` weights of a row. The first lines already cut each row into groups: `groups` has the shape (rows, groups per row, `group`). `groups.abs().amax(dim=2, keepdim=True)` gives the largest $\lvert w \rvert$ of every group, `torch.round` rounds every number, and `.clamp(-qmax, qmax)` keeps the whole numbers in their range. A group of only zeros has a scale of 0: give it a scale of 1, and its weights stay 0.
+        Complete `quantize(w, bits, group)`: the weights of the matrix `w` as the model computes with them after storing each in `bits` bits, with a scale per group of `group` weights of a row. The first lines already cut each row into groups: `groups` has the shape (rows, groups per row, `group`), with `cols // group`, which divides and drops the remainder. `groups.abs().amax(dim=2, keepdim=True)` gives the largest $\lvert w \rvert$ of every group, `torch.round` rounds every number, and `.clamp(-qmax, qmax)` keeps the whole numbers in their range. A group of only zeros has a scale of 0: give it a scale of 1, and its weights stay 0.
 
         The check tries an example, a matrix of two rows, in 4 bits with groups of 2; then one scale per row, 2 and 8 bits, a group of zeros, and the shape of the result.
         """),

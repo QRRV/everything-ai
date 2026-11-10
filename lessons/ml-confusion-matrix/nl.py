@@ -131,7 +131,7 @@ def text_idea():
         """),
         L.watch_out("Als deze course alleen precision zegt, bedoelt hij deze metric. De precisie van getallen in een computer, hoeveel cijfers die bewaart, is iets anders: numerieke precisie."),
         mo.md(r"""
-        Veertig mails, waarvan tien spam, elk met de kans op spam die een filter eraan gaf. Schuif met de slider, of sleep over de grafiek van precision en recall, om de decision threshold te zetten. Onder de slider staat de confusion matrix, met geen spam als klasse 0 en spam als klasse 1, dus de true positives staan rechtsonder, in `cm[1, 1]`. Weer daaronder staat de grafiek: precision (doorgetrokken lijn) en recall (gestreepte lijn) voor elke threshold.
+        Veertig mails, waarvan tien spam, elk met de kans op spam die een filter eraan gaf. Schuif met de slider, of sleep over de grafiek van precision en recall, om de decision threshold te kiezen. Onder de slider staat de confusion matrix, met geen spam als klasse 0 en spam als klasse 1, dus de true positives staan rechtsonder, in `cm[1, 1]`. Weer daaronder staat de grafiek: precision (doorgetrokken lijn) en recall (gestreepte lijn) voor elke threshold.
         """),
     ])
     return

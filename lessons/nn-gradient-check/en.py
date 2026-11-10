@@ -107,13 +107,13 @@ def text_idea():
         mo.md(r"""
         ## The idea
 
-        **Gradient checking** compares the gradient from your backward pass with an estimate from nudging, one parameter at a time. In [The derivative as a slope](/course/open/math-slope?lang=en) you nudged up only: a **finite difference**. Nudge down as well and take the slope between the two, the **central difference**:
+        **Gradient checking** compares the gradient from your backward pass with an estimate from tiny steps, one parameter at a time. In [The derivative as a slope](/course/open/math-slope?lang=en) you took a tiny step up only: a **finite difference**. Take one down as well and take the slope between the two, the **central difference**:
         """),
         L.formula(r"[[grad:\frac{\partial \mathcal{L}}{\partial w_j}]] \approx \frac{[[loss:\mathcal{L}(w_j + h)]] - [[loss:\mathcal{L}(w_j - h)]]}{2h}"),
         mo.md(r"""
         Its error shrinks with $h^2$, not with $h$: ten times smaller $h$, a hundred times smaller error. But $h$ cannot be too small: $\mathcal{L}(w_j + h)$ and $\mathcal{L}(w_j - h)$ then agree in almost all their digits, and their difference keeps little more than rounding. With NumPy's usual floats, $h = 10^{-5}$ is a good choice.
 
-        Then compare the two with the **relative error**: the difference, divided by the larger of the two sizes, with $a$ the gradient from backprop and $n$ the estimate from nudging:
+        Then compare the two with the **relative error**: the difference, divided by the larger of the two sizes, with $a$ the gradient from backprop and $n$ the estimate from tiny steps:
         """),
         L.formula(r"\text{relative error} = \frac{|a - n|}{\max(|a|, |n|)}"),
         mo.md(r"""
@@ -123,15 +123,15 @@ def text_idea():
 
         | Word or symbol | Say it | What it means | In code |
         |---|---|---|---|
-        | **gradient checking** | | comparing the gradient from a backward pass with an estimate from nudging, for each parameter | |
-        | **central difference** | | the slope between a nudge up and a nudge down: $(\mathcal{L}(w_j + h) - \mathcal{L}(w_j - h)) / 2h$ | `(f(w + step) - f(w - step)) / (2 * h)` |
-        | $h$ | h | the size of the nudge; $10^{-5}$ is a good choice | `h = 1e-5` |
+        | **gradient checking** | | comparing the gradient from a backward pass with an estimate from tiny steps, for each parameter | |
+        | **central difference** | | the slope between a tiny step up and a tiny step down: $(\mathcal{L}(w_j + h) - \mathcal{L}(w_j - h)) / 2h$ | `(f(w + step) - f(w - step)) / (2 * h)` |
+        | $h$ | h | the size of the tiny step; $10^{-5}$ is a good choice | `h = 1e-5` |
         | `np.abs` | | the size of every number, number by number: `np.abs(a - n)` drops the sign of each difference at once. Python's `abs(x)` works on one number only | `np.abs(a - n)` |
         | **relative error** | | the difference of two numbers divided by the larger of their sizes | `np.abs(a - n) / np.maximum(np.abs(a), np.abs(n))` |
         | `1e-5` | one e minus five | how Python writes $10^{-5}$: 0.00001. A number in front multiplies: `5.6e-12` is $5.6 \cdot 10^{-12}$ | `1e-5` |
         | `lambda w: ...` | lambda | a function in one line, without a name: `lambda w: np.sum(w ** 2)` gets `w` and gives back `np.sum(w ** 2)` | `lambda w: np.sum(w ** 2)` |
         """),
-        L.watch_out("ReLU has a kink at 0. If a nudge takes an input of a ReLU across 0, the estimate mixes two slopes, and the check fails although your backward pass is right. When one parameter fails, look at whether an input sits near 0 before you hunt for a bug."),
+        L.watch_out("ReLU has a kink at 0. If a tiny step takes an input of a ReLU across 0, the estimate mixes two slopes, and the check fails although your backward pass is right. When one parameter fails, look at whether an input sits near 0 before you hunt for a bug."),
         mo.md(r"""
         The picture: how far the two estimates of the slope of $e^x$ at $x = 1$ lie off, for each $h$. Going left, both get better, up and down much faster, until rounding wins: below about $10^{-5}$ for up and down and $10^{-8}$ for only up, the error grows again.
         """),
@@ -150,7 +150,7 @@ def text_recipe():
     To check a backward pass:
 
     1. Work out the gradient with your backward pass: one number $a$ for each parameter.
-    2. For each parameter: nudge it up by $h$ and down by $h$, work out the loss both times, and divide the difference by $2h$: the estimate $n$.
+    2. For each parameter: take a tiny step $h$ up and one down, work out the loss both times, and divide the difference by $2h$: the estimate $n$.
     3. Work out the relative error of each parameter: $|a - n| / \max(|a|, |n|)$.
     4. Judge: below about $10^{-7}$ they agree; above about $10^{-3}$, look for the bug in the backward pass of that parameter.
     """)
@@ -185,7 +185,7 @@ def example_check():
     _w = np.array([0.3, 0.4])
     # 1. the gradient from the backward pass
     _a = _grad(_w)
-    # 2. for each weight: nudge it up and down by h, and the slope between
+    # 2. for each weight: a tiny step h up and one down, and the slope between
     _h = 1e-5
     _n = np.zeros(2)
     for _j in range(2):
@@ -202,7 +202,7 @@ def example_check():
 @app.cell(hide_code=True)
 def text_after_example():
     mo.md(r"""
-    The backward pass and the nudges both give 1.2 and 2.4. The relative errors are about $6 \cdot 10^{-12}$ and $10^{-12}$ (Python prints `5.62...e-12` and `9.99...e-13`): far below $10^{-7}$, so the backward pass is right. With the 2 left out, the backward pass gives 0.6 and 1.2, the nudges still 1.2 and 2.4, and both relative errors are 0.5: far above $10^{-3}$. The check catches the bug, although the gradients still point the right way.
+    The backward pass and the tiny steps both give 1.2 and 2.4. The relative errors are about $6 \cdot 10^{-12}$ and $10^{-12}$ (Python prints `5.62...e-12` and `9.99...e-13`): far below $10^{-7}$, so the backward pass is right. With the 2 left out, the backward pass gives 0.6 and 1.2, the tiny steps still 1.2 and 2.4, and both relative errors are 0.5: far above $10^{-3}$. The check catches the bug, although the gradients still point the right way.
     """)
     return
 
@@ -242,7 +242,7 @@ def choice_bug_cell():
 def text_exercise_grad():
     mo.vstack([
         mo.md(r"""
-        ### Exercise 2. The estimate from nudging
+        ### Exercise 2. The estimate from tiny steps
 
         Write `numerical_grad(f, w, h)`: for each number of the array `w`, the central difference of the function `f`, by step 2 of the recipe, as an array. The check calls `numerical_grad(lambda w: np.sum(w ** 2), np.array([1.0, -2.0]), 0.001)`, which should give `[2, -4]`, and tries other functions, also ones in which the numbers of `w` work together, such as `np.sum(w) ** 2`.
         """),
@@ -270,8 +270,8 @@ def hints_grad():
     L.hints(
         "numerical-grad",
         [
-            "As in step 2 of the worked example: a loop over `range(len(w))`, and for each number a nudge array of zeros with `h` in one place.",
-            "`f(w + step)` and `f(w - step)` nudge only that one number, and leave `w` itself as it is. Divide their difference by `2 * h`, and collect the slopes in `np.zeros(len(w))`.",
+            "As in step 2 of the worked example: a loop over `range(len(w))`, and for each number a step array of zeros with `h` in one place.",
+            "`f(w + step)` and `f(w - step)` change only that one number, and leave `w` itself as it is. Divide their difference by `2 * h`, and collect the slopes in `np.zeros(len(w))`.",
         ],
         why="For `np.sum(w ** 2)` the slope of each number is twice that number: at `[1, -2]`, that is `[2, -4]`. The central difference gives it exactly, because the function is a parabola in each number.",
     )
@@ -323,7 +323,7 @@ def text_connections():
     mo.md(r"""
     ## Wrap-up
 
-    **How this connects.** The slope you measured by nudging in [The derivative as a slope](/course/open/math-slope?lang=en), taken on both sides, becomes a test for the backward pass of [Training your MLP: the training loop](/course/open/nn-micrograd-train?lang=en): two runs of the loss for each parameter, and a relative error that says whether a gradient is right. In the next lesson, *Backprop through whole layers by hand*, you write the backward pass of a whole network in NumPy, and this check, and PyTorch, tell you whether it is right.
+    **How this connects.** The slope you measured with a tiny step in [The derivative as a slope](/course/open/math-slope?lang=en), taken on both sides, becomes a test for the backward pass of [Training your MLP: the training loop](/course/open/nn-micrograd-train?lang=en): two runs of the loss for each parameter, and a relative error that says whether a gradient is right. In the next lesson, *Backprop through whole layers by hand*, you write the backward pass of a whole network in NumPy, and this check, and PyTorch, tell you whether it is right.
     """)
     return
 

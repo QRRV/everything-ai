@@ -117,6 +117,7 @@ def text_idea():
     | **array en getal** | `+`, `-`, `*`, `/` en `**` met één getal werken op elk getal van de array | `np.array([1, 2, 3]) * 2` geeft `array([2, 4, 6])` |
     | **twee arrays** | bij twee arrays met dezelfde shape gaan de getallen op dezelfde plek samen | `np.array([1, 2]) + np.array([10, 20])` geeft `array([11, 22])` |
     | **`np.arange`** | de getallen 0, 1, 2 enzovoort, als array, zoals `range` telt | `np.arange(4)` geeft `array([0, 1, 2, 3])` |
+    | **`np.round`** | rondt elk getal van de array af op het aantal decimalen dat je geeft, zoals `round` dat doet voor één getal | `np.round(np.array([1.234, 5.678]), 1)` geeft `array([1.2, 5.7])` |
 
     De uitkomst is altijd een nieuwe array, met dezelfde shape; de array waarmee je begon, blijft zoals hij was.
     """)

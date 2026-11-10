@@ -130,7 +130,7 @@ def text_idea():
         """),
         L.watch_out("ROC staat voor receiver operating characteristic, uit de radar van de Tweede Wereldoorlog. In de geneeskunde heet recall sensitiviteit en 1 min de false positive rate specificiteit, dus een ROC curve laat daar sensitiviteit zien tegen 1 − specificiteit."),
         mo.md(r"""
-        Schuif met de slider, of sleep over de grafiek van de mails, om de threshold te zetten: elke mail rechts van de lijn wordt spam genoemd. De andere grafiek laat de ROC curve zien, de stip van die threshold, de gestreepte diagonaal van gokken en, in grijs, de oppervlakte onder de curve.
+        Schuif met de slider, of sleep over de grafiek van de mails, om de threshold te kiezen: elke mail rechts van de lijn wordt spam genoemd. De andere grafiek laat de ROC curve zien, de stip van die threshold, de gestreepte diagonaal van gokken en, in grijs, de oppervlakte onder de curve.
         """),
     ])
     return

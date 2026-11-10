@@ -156,7 +156,7 @@ def text_worked_example():
     mo.md(r"""
     ### Worked example
 
-    Steps 1 and 3 on a small GPT of [Assemble your GPT](/course/open/gpt-assemble?lang=en), with 1 block and 4 places, that has not been trained. **1. The expectation:** without positions, it gives the same logits at the last place for "abc" and for "bac". Step 3 is not finished: run the cell as it is, then complete it where the comment says, and run it again.
+    Steps 1 and 3 on a small GPT of [Assemble your GPT](/course/open/gpt-assemble?lang=en), with 1 block and 4 places, that has not been trained. **1. The expectation:** without positions, it gives the same logits at the last place for "abc" and for "bac". `torch.allclose(a, b)` says whether two tensors are the same up to rounding. Step 3 is not finished: run the cell as it is, then complete it where the comment says, and run it again.
     """)
     return
 

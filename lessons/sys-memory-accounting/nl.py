@@ -156,7 +156,7 @@ def text_worked_example():
     mo.md(r"""
     ### Uitgewerkt voorbeeld
 
-    Activations meten is nieuw: een kleine MLP, en twee functies voor `saved_tensors_hooks`. Die roept de eerste aan voor elke tensor die de forward pass bewaart, en bewaart wat die functie teruggeeft, hier de tensor zelf; de tweede geeft hem terug aan de backward pass, hier onveranderd. `t.numel()` is het aantal getallen in een tensor `t`, `t.element_size()` de bytes van elk, en `t.data_ptr()` de plek in het geheugen waar zijn getallen beginnen. De functie laat de parameters weg, die al geteld zijn, en telt elke plek één keer, omdat twee bewerkingen dezelfde tensor kunnen bewaren.
+    Activations meten is nieuw: een kleine MLP, en twee functies voor `saved_tensors_hooks`. Die roept de eerste aan voor elke tensor die de forward pass bewaart, en bewaart wat die functie teruggeeft, hier de tensor zelf; de tweede geeft hem terug aan de backward pass, hier onveranderd. `t.numel()` is het aantal getallen in een tensor `t`, `t.element_size()` de bytes van elk, en `t.data_ptr()` de plek in het geheugen waar zijn getallen beginnen; `.values()` geeft de waarden van een dictionary, zonder hun keys. De functie laat de parameters weg, die al geteld zijn, en telt elke plek één keer, omdat twee bewerkingen dezelfde tensor kunnen bewaren.
     """)
     return
 

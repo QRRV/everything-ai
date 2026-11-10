@@ -115,7 +115,7 @@ def text_idea():
 
         Waarom werkt het zo goed op ruis? Van 1000 kolommen willekeurige getallen verschillen er een paar puur door toeval tussen de twee labels, en de beste 20 verschillen het meest. Gekozen op alle 50 mensen verschillen die kolommen ook tussen de labels van de 10 mensen waarop een fold gemeten wordt, door datzelfde toeval, en de buren vinden dat. Gekozen op de 40 trainingsmensen van de fold zeggen ze niets over de andere 10.
 
-        Sayash Kapoor en Arvind Narayanan (2023) zetten op een rij wat anderen vonden: data leakage in 294 gepubliceerde artikelen, in 17 vakgebieden die machine learning gebruiken.
+        Sayash Kapoor en Arvind Narayanan (2023) zetten op een rij wat anderen vonden: data leakage in 294 gepubliceerde papers, in 17 vakgebieden die machine learning gebruiken.
 
         ### Nieuwe woorden en tekens
 

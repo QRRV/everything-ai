@@ -100,7 +100,7 @@ def text_why():
     mo.md(r"""
     ## Why this matters
 
-    To train logistic regression with gradient descent, you need the slope of the log loss for each weight and for the bias term. Nudging each one works, but a model with a million weights would need a million nudges per step. The chain rule gives every slope from one formula. For log loss with a sigmoid, that formula turns out surprisingly simple: the probability minus the label, times the feature.
+    To train logistic regression with gradient descent, you need the slope of the log loss for each weight and for the bias term. A tiny step for each one works, but a model with a million weights would need a million of them per training step. The chain rule gives every slope from one formula. For log loss with a sigmoid, that formula turns out surprisingly simple: the probability minus the label, times the feature.
 
     **An everyday example.** To know what a taxi ride costs, you do not take every ride to find out. The fare, a start price plus a price per kilometre, gives the cost of every ride at once.
     """)
@@ -147,7 +147,7 @@ def text_idea():
         """),
         L.formula(r"[[grad:\frac{\partial \mathcal{L}}{\partial w_j}]] = ([[pred:\hat{y}]] - y)\, x_j \qquad [[grad:\frac{\partial \mathcal{L}}{\partial b}]] = [[pred:\hat{y}]] - y"),
         mo.md(r"""
-        For many examples the log loss is a mean, so each slope is the mean of these slopes over the examples. The slider below checks the slope of $\sigma$ by nudging, as in [The derivative as a slope](/course/open/math-slope?lang=en); the worked example checks the whole formula.
+        For many examples the log loss is a mean, so each slope is the mean of these slopes over the examples. The slider below checks the slope of $\sigma$ with a tiny step, as in [The derivative as a slope](/course/open/math-slope?lang=en); the worked example checks the whole formula.
 
         ### New words and symbols
 
@@ -172,7 +172,7 @@ def explore_z_cell():
         nudged = (C.sigmoid(z + 0.001) - p) / 0.001
         return (C.picture(z, {"title": "The slope of the sigmoid", "z": "logit z", "p": "probability ŷ",
                               "alt": f"The sigmoid, with a point at z = {L.number(z, 1)} and a short green line with the slope there, {L.number(slope, 3)}. The sigmoid is steepest at z = 0 and almost flat far to the left and right."}),
-                f"""At <i>z</i> = {L.number(z, 1)}: <i>ŷ</i> = <span class="c-pred ea-num">{L.number(p, 3)}</span>, and the slope <i>ŷ</i>(1 − <i>ŷ</i>) = <span class="c-grad ea-num">{L.number(slope, 4)}</span>. Nudging <i>z</i> by 0.001 gives <span class="c-grad ea-num">{L.number(nudged, 4)}</span>.""")
+                f"""At <i>z</i> = {L.number(z, 1)}: <i>ŷ</i> = <span class="c-pred ea-num">{L.number(p, 3)}</span>, and the slope <i>ŷ</i>(1 − <i>ŷ</i>) = <span class="c-grad ea-num">{L.number(slope, 4)}</span>. A tiny step of 0.001 in <i>z</i> gives <span class="c-grad ea-num">{L.number(nudged, 4)}</span>.""")
 
     explore_z = L.explore("slope-z", "z", _frame, start=0, low=-5, high=5, step=0.5, role="", task="How many times smaller is the slope $\\hat{y}(1 - \\hat{y})$ at $z = -5$ than at $z = 0$?")
     explore_z
@@ -182,7 +182,7 @@ def explore_z_cell():
 @app.cell(hide_code=True)
 def text_recipe():
     mo.md(r"""
-    At $z = -5$ the slope is 0.0066: about 38 times smaller than 0.25 at $z = 0$, and nudging gives almost the same, 0.0067. A spam mail with that logit gets $\hat{y} = 0.007$: the model is confidently wrong. Log loss still gives it the slope $\hat{y} - y \approx -0.99$ for the bias term, almost the biggest there is; with the mean squared error, this slope of the sigmoid, 0.0066, stays in its gradient, and the model would barely learn from this mail.
+    At $z = -5$ the slope is 0.0066: about 38 times smaller than 0.25 at $z = 0$, and the tiny step gives almost the same, 0.0067. A spam mail with that logit gets $\hat{y} = 0.007$: the model is confidently wrong. Log loss still gives it the slope $\hat{y} - y \approx -0.99$ for the bias term, almost the biggest there is; with the mean squared error, this slope of the sigmoid, 0.0066, stays in its gradient, and the model would barely learn from this mail.
 
     ### Recipe
 
@@ -191,7 +191,7 @@ def text_recipe():
     1. Work out the probability $\hat{y}$ of each example: the sigmoid of the logit.
     2. Subtract the label from each probability: $\hat{y} - y$.
     3. The slope for each weight is the mean of $\hat{y} - y$ times its feature; for the bias term, the mean of $\hat{y} - y$ itself.
-    4. Check one slope by nudging: change that weight by a tiny $h$, and divide the change in the loss by $h$.
+    4. Check one slope with a tiny step: change that weight by a tiny step $h$, and divide the change in the loss by $h$.
     """)
     return
 
@@ -201,7 +201,7 @@ def text_worked_example():
     mo.md(r"""
     ### Worked example
 
-    One spam mail, $y = 1$, with the features 2 and 1, and a model with the weights 0.5 and −1 and the bias term 0. First the gradient from the formula, then the check by nudging the first weight. The comments with `#` say which step of the recipe each part is. Run the cell.
+    One spam mail, $y = 1$, with the features 2 and 1, and a model with the weights 0.5 and −1 and the bias term 0. First the gradient from the formula, then the check with a tiny step in the first weight. The comments with `#` say which step of the recipe each part is. Run the cell.
     """)
     return
 
@@ -226,7 +226,7 @@ def example_gradient():
     print(_p - _y)
     # 3. the slopes for the two weights, and for the bias term
     print((_p - _y) * _x, _p - _y)
-    # 4. the check: nudge the first weight by h
+    # 4. the check: a tiny step h in the first weight
     _h = 0.001
     print((_loss(_w + np.array([_h, 0]), _b) - _loss(_w, _b)) / _h)
     return
@@ -235,7 +235,7 @@ def example_gradient():
 @app.cell(hide_code=True)
 def text_after_example():
     mo.md(r"""
-    The logit is $0.5 \cdot 2 - 1 \cdot 1 + 0 = 0$, so $\hat{y} = 0.5$ and $\hat{y} - y = -0.5$. The slopes are $-0.5 \cdot 2 = -1$ and $-0.5 \cdot 1 = -0.5$ for the weights, and $-0.5$ for the bias term; with one example, the mean of step 3 is that one value. Nudging the first weight gives $-0.9995$: close to $-1$, so the formula passes the check. All slopes are negative: raise the weights and the bias term a little, and the loss of this spam mail goes down.
+    The logit is $0.5 \cdot 2 - 1 \cdot 1 + 0 = 0$, so $\hat{y} = 0.5$ and $\hat{y} - y = -0.5$. The slopes are $-0.5 \cdot 2 = -1$ and $-0.5 \cdot 1 = -0.5$ for the weights, and $-0.5$ for the bias term; with one example, the mean of step 3 is that one value. The tiny step in the first weight gives $-0.9995$: close to $-1$, so the formula passes the check. All slopes are negative: raise the weights and the bias term a little, and the loss of this spam mail goes down.
     """)
     return
 
@@ -360,7 +360,7 @@ def text_connections():
     mo.md(r"""
     ## Wrap-up
 
-    **How this connects.** In [Rates multiply: the chain rule](/course/open/math-chain-rule?lang=en) you multiplied the slopes of the steps of one function; here the steps are the logit, the sigmoid and the log, and the slope of the sigmoid cancels. In [Two parameters: the gradient](/course/open/math-gradient?lang=en) a slope per parameter made the gradient; now you have a formula for it, checked by nudging. In [Scoring probabilities with the log: log loss](/course/open/ml-log-loss?lang=en) you measured how wrong the probabilities were; now you know which way to change the model. In the next lesson, *Training logistic regression*, gradient descent uses exactly this gradient to train the model.
+    **How this connects.** In [Rates multiply: the chain rule](/course/open/math-chain-rule?lang=en) you multiplied the slopes of the steps of one function; here the steps are the logit, the sigmoid and the log, and the slope of the sigmoid cancels. In [Two parameters: the gradient](/course/open/math-gradient?lang=en) a slope per parameter made the gradient; now you have a formula for it, checked with a tiny step. In [Scoring probabilities with the log: log loss](/course/open/ml-log-loss?lang=en) you measured how wrong the probabilities were; now you know which way to change the model. In the next lesson, *Training logistic regression*, gradient descent uses exactly this gradient to train the model.
     """)
     return
 
