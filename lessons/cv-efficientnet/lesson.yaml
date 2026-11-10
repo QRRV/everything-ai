@@ -1,0 +1,31 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: cv-efficientnet
+minutes: 35
+title:
+  en: "EfficientNet: wider, deeper or sharper"
+  nl: "EfficientNet: breder, dieper of scherper"
+goal:
+  en: "count what a CNN costs when it grows in depth, in width or in the resolution of its photos, build a network that grows from your depthwise separable convolutions, and test on CIFAR-10 which way of growing pays off."
+  nl: "tellen wat een CNN kost als het groeit in diepte, in breedte of in de resolutie van zijn foto's, een netwerk bouwen dat groeit uit je depthwise separable convolutions, en op CIFAR-10 testen welke manier van groeien loont."
+summary:
+  - en: "A CNN can grow deeper, with more blocks, wider, with more channels, or sharper, with photos of more pixels. Its multiplications grow with the depth, the square of the width and the square of the resolution, $d \\cdot w^2 \\cdot r^2$; its parameters with the depth and the square of the width, but not with the resolution: on a larger photo, the same filters slide over more pixels."
+    nl: "Een CNN kan dieper groeien, met meer blocks, breder, met meer channels, of scherper, met foto's van meer pixels. Zijn vermenigvuldigingen groeien met de diepte, het kwadraat van de breedte en het kwadraat van de resolutie, $d \\cdot w^2 \\cdot r^2$; zijn parameters met de diepte en het kwadraat van de breedte, maar niet met de resolutie: op een grotere foto schuiven dezelfde filters over meer pixels."
+  - en: "Compound scaling (EfficientNet, Tan and Le, 2019) grows all three together: $d = \\alpha^\\varphi$, $w = \\beta^\\varphi$ and $r = \\gamma^\\varphi$, with $\\alpha \\cdot \\beta^2 \\cdot \\gamma^2 \\approx 2$, so that every step of $\\varphi$ about doubles the multiplications; for EfficientNet-B0, $\\alpha = 1.2$, $\\beta = 1.1$ and $\\gamma = 1.15$. Grown to about 4.5 times its multiplications, B0 got 79.0% of ImageNet's photos right deeper, 78.9% wider, 79.1% sharper, and 81.1% with all three together."
+    nl: "Compound scaling (EfficientNet, Tan en Le, 2019) laat alle drie tegelijk groeien: $d = \\alpha^\\varphi$, $w = \\beta^\\varphi$ en $r = \\gamma^\\varphi$, met $\\alpha \\cdot \\beta^2 \\cdot \\gamma^2 \\approx 2$, zodat elke stap van $\\varphi$ de vermenigvuldigingen ongeveer verdubbelt; voor EfficientNet-B0 is $\\alpha = 1{,}2$, $\\beta = 1{,}1$ en $\\gamma = 1{,}15$. Gegroeid tot ongeveer 4,5 keer zijn vermenigvuldigingen had B0 79,0% van de foto's van ImageNet goed als het dieper werd, 78,9% breder, 79,1% scherper, en 81,1% met alle drie samen."
+  - en: "A network of 2 blocks of 64 channels, on 6,000 photos of CIFAR-10 made 16 by 16, for 20 epochs, reads 506 to 524 of 1,000 test photos right. Grown to about 4 times its multiplications: deeper 513 to 536, wider 536 to 555, sharper 514 to 558, and all three together 543 to 571, the most on average, though its runs overlap with those of wider and sharper. Counted exactly, 4 times the blocks or twice the channels cost only 3.53 and 3.48 times as much: the rule is about right."
+    nl: "Een netwerk van 2 blocks van 64 channels, op 6.000 foto's van CIFAR-10 die 16 bij 16 zijn gemaakt, 20 epochs lang, leest 506 tot 524 van 1.000 testfoto's goed. Gegroeid tot ongeveer 4 keer zijn vermenigvuldigingen: dieper 513 tot 536, breder 536 tot 555, scherper 514 tot 558, en alle drie samen 543 tot 571, gemiddeld de meeste, al overlappen zijn runs met die van breder en scherper. Precies geteld kosten 4 keer zoveel blocks of twee keer zoveel channels maar 3,53 en 3,48 keer zoveel: de regel klopt ongeveer."
+can_now:
+  - en: "work out what growing a network in depth, in width or in resolution costs"
+    nl: "uitrekenen wat het kost om een netwerk te laten groeien in diepte, in breedte of in resolutie"
+    by: costs
+  - en: "build a network whose depth and width are numbers you choose"
+    nl: "een netwerk bouwen waarvan je de diepte en de breedte zelf kiest"
+    by: scaled
+  - en: "read from measured runs which way of growing paid off, and how sure that is"
+    nl: "uit gemeten runs aflezen welke manier van groeien loonde, en hoe zeker dat is"
+    by: scaling-runs
+further_reading:
+  - en: "Mingxing Tan and Quoc V. Le (2019), *EfficientNet: Rethinking Model Scaling for Convolutional Neural Networks*, with the numbers of version 5 on arXiv (2020): section 3, the three ways to grow and compound scaling, tables 3 and 7, networks grown in each way, and table 2, the family B0 to B7"
+    nl: "Mingxing Tan en Quoc V. Le (2019), *EfficientNet: Rethinking Model Scaling for Convolutional Neural Networks*, met de getallen van versie 5 op arXiv (2020): paragraaf 3, de drie manieren van groeien en compound scaling, tabellen 3 en 7, netwerken die op elke manier zijn gegroeid, en tabel 2, de familie B0 tot en met B7"

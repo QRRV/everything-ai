@@ -489,17 +489,26 @@ lessons:
   reference_data: []
   needs: any
 
+# The lesson counts multiplications exactly: by the paper's rule d·w²·r², 4 times the blocks would be 8 and twice the
+# channels 128, but counted those cost only 3.53 and 3.48 times as much (the first convolution grows otherwise), so
+# the demo grows to 9 blocks and 136 channels. On 6,000 photos of CIFAR-10 made 16 by 16, for 20 epochs, the base
+# network (2 blocks of 64 channels) reads 506 to 524 test photos right; grown to about 4 times its multiplications,
+# deeper 513 to 536 (it overfits), wider 536 to 555, sharper (32 by 32) 514 to 558 and all three together (φ = 2)
+# 543 to 571: all three together first, as in the paper, though the runs overlap and deeper hardly beats the base
+# network, and the lesson says so.
 - id: cv-efficientnet
   title: "EfficientNet: wider, deeper or sharper"
   level: gevorderd
   module: cnn-families
   idea: "A CNN can grow in depth, in width or in the resolution of its input photos; growing all three together in a fixed ratio, compound scaling, gave EfficientNet more accuracy on ImageNet for the same computation than growing just one, and you work out what each choice costs."
   covers: [d11-cnn-architecturen#3]
-  requires: [cv-mobilenet]
+  requires: [cv-mobilenet, cnn-resnet]
   introduces: [c:compound-scaling, c:efficientnet]
-  mentions: [c:imagenet]
+  uses: [c:depthwise-separable-convolution, c:depthwise-convolution, c:mobilenet, c:residual-connection, c:residual-block, c:resnet, c:convolution, c:filter, c:channel, c:output-channel, c:feature-map, c:kernel-size, c:stride, c:padding, c:receptive-field, c:layer, c:relu, c:logit, c:mean, c:model-parameter, c:weight, c:bias-term, c:shape, c:tensor, c:flops, c:image-resolution, c:pixel, c:interpolation, c:bilinear-interpolation, c:exponent, c:mini-batch, c:epoch, c:learning-rate, c:warmup, c:seed, c:gradient, c:overfitting, c:train-set, c:test-set, c:validation-set, c:accuracy, c:loss, c:cifar-10, c:per-channel-normalization, c:hyperparameter, v:loss-curve, v:train-val-curves, v:bar-chart, v:log-scale, py:nn-conv2d, py:nn-modulelist, py:nn-module, py:nn-linear, py:comprehension, py:range, py:underscore-name, py:for, py:dim, py:torch-relu, py:class, py:self, py:init-method, py:forward-method, py:super, py:def, py:return, py:floor-division, py:arithmetic, py:variable, py:print, py:comment, py:import, q:predict, q:choice, q:exercise-with-check, q:run-cell, q:slider-task]
+  mentions: [c:imagenet, c:batchnorm]
   ladder: [torch]
-  data: [fashion-mnist, cifar-10-download-only]
+  data: [cifar-10-download-only]
+  reference_data: []
   needs: any
 
 # --- gevorderd: where a CNN looks -----------------------------------------------------------------------------------
