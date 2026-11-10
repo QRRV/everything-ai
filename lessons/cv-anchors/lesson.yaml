@@ -1,0 +1,36 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: cv-anchors
+minutes: 40
+title:
+  en: "Anchors: the boxes a detector starts from"
+  nl: "Anchors: de boxes waar een detector mee begint"
+goal:
+  en: "tell every anchor of a scene with the IoU what it learns, a box, background or nothing, and turn anchors into boxes and back with box offsets."
+  nl: "elke anchor van een scène met de IoU vertellen wat hij leert, een box, achtergrond of niets, en met box offsets van anchors boxes maken en weer terug."
+summary:
+  - en: "An anchor box is a fixed box around the middle of a square of a feature map; every square gets the same few sizes and shapes. Faster R-CNN (Ren and colleagues, 2015) takes 3 sizes and 3 shapes, 9 anchors per square; the course takes 3 square sizes, 16, 24 and 32 pixels, 768 anchors on a scene of 128 by 128 pixels."
+    nl: "Een anchor box is een vaste box rond het midden van een vakje van een feature map; elk vakje krijgt dezelfde anchors, in een paar groottes en vormen. Faster R-CNN (Ren en collega's, 2015) neemt 3 groottes en 3 vormen, 9 anchors per vakje; de course neemt 3 vierkante groottes, 16, 24 en 32 pixels, 768 anchors op een scène van 128 bij 128 pixels."
+  - en: "Each anchor takes the true box it overlaps most: from an IoU of 0.5 it learns that box, below 0.4 background, in between it is ignored (the thresholds of RetinaNet). Last, every box gets its best anchors, even below 0.5. On the scene of the worked example, 20 of the 768 anchors learn a shape."
+    nl: "Elke anchor neemt de echte box waar hij het meest mee overlapt: vanaf een IoU van 0,5 leert hij die box, onder 0,4 achtergrond, daartussen wordt hij genegeerd (de drempels van RetinaNet). Als laatste krijgt elke box zijn beste anchors, ook onder 0,5. Op de scène van het uitgewerkte voorbeeld leren 20 van de 768 anchors een vorm."
+  - en: "An anchor learns a box offset: the shift of the middle as a share of its height and width, and the log of how many times higher and wider the box is. One size of anchor finds at most 81.0% of the shapes of 500 scenes; the three sizes together 98.8%."
+    nl: "Een anchor leert een box offset: de verplaatsing van het midden als deel van zijn hoogte en breedte, en de log van hoeveel keer hoger en breder de box is. Eén grootte van anchor vindt hoogstens 81,0% van de vormen van 500 scènes; de drie groottes samen 98,8%."
+can_now:
+  - en: "tell from its IoUs what an anchor learns: a box, background or nothing"
+    nl: "aan zijn IoU's zien wat een anchor leert: een box, achtergrond of niets"
+    by: learn
+  - en: "match every anchor of a scene to a true box with the IoU, and give every box its best anchors"
+    nl: "elke anchor van een scène met de IoU aan een echte box koppelen, en elke box zijn beste anchors geven"
+    by: match
+  - en: "turn anchors and their box offsets into boxes, in PyTorch"
+    nl: "van anchors en hun box offsets boxes maken, in PyTorch"
+    by: boxes-from
+  - en: "explain why a detector learns box offsets from anchors, not the sides of its boxes"
+    nl: "uitleggen waarom een detector box offsets vanaf anchors leert, en niet de kanten van zijn boxes"
+    by: why-offsets
+further_reading:
+  - en: "Shaoqing Ren, Kaiming He, Ross Girshick and Jian Sun (2015), *Faster R-CNN: Towards Real-Time Object Detection with Region Proposal Networks*: section 3.1.1, anchors, section 3.1.2, which anchors learn a box and the box offsets, and table 8, one anchor against nine"
+    nl: "Shaoqing Ren, Kaiming He, Ross Girshick en Jian Sun (2015), *Faster R-CNN: Towards Real-Time Object Detection with Region Proposal Networks*: paragraaf 3.1.1, anchors, paragraaf 3.1.2, welke anchors een box leren en de box offsets, en tabel 8, één anchor tegen negen"
+  - en: "Tsung-Yi Lin, Priya Goyal, Ross Girshick, Kaiming He and Piotr Dollár (2017), *Focal Loss for Dense Object Detection*: section 4, the anchors of RetinaNet and the thresholds 0.5 and 0.4"
+    nl: "Tsung-Yi Lin, Priya Goyal, Ross Girshick, Kaiming He en Piotr Dollár (2017), *Focal Loss for Dense Object Detection*: paragraaf 4, de anchors van RetinaNet en de drempels 0,5 en 0,4"

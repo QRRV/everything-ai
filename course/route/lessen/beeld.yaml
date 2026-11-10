@@ -562,10 +562,18 @@ lessons:
   module: detection
   idea: "Many detectors, unlike DETR, put a fixed set of anchor boxes, a few sizes and shapes, on every square of a feature map, and learn for each anchor only a kind and a small shift and change of size; matching the anchors to the true boxes by IoU decides what each anchor should learn."
   covers: [objectdetectie#0]
+  # Measured on the course's scenes (checks.py, REFERENCE): 3 square sizes (16, 24, 32) on 16 x 16 squares of 8 pixels,
+  # 768 anchors; RetinaNet's thresholds (0.5 / 0.4) plus every box's best anchors, ties included. scene(18): 20 learn a
+  # shape, 13 ignored, 735 background; 500 scenes: 17.2 per scene (2.2%). One size finds at most 81.0% of the shapes
+  # (28 px), the three together 98.8% (55.0% at 0.7), Faster R-CNN's 9 anchors 99.0%, 8 x 8 squares 69.6%. The boxes
+  # are 9 to 44 pixels and almost square (h/w 0.88 to 1.13). Offsets: mean 0.11 (shift) and 0.15 (log of the size).
   requires: [cv-pretrained-detector, cnn-resnet]
   introduces: [c:anchor-box, c:box-offset]
+  uses: [c:intersection-over-union, c:bounding-box, c:object-detection, c:annotation, c:object-query, c:mean-average-precision, c:feature-map, c:stride, c:convolution, c:filter, c:weight-sharing, c:resnet, c:model, c:prediction, c:training, c:loss, c:class, c:label, c:pixel, c:logarithm, c:exponent, c:mean, c:array, c:tensor, c:shape, c:axis, c:dtype, c:float32, c:broadcasting, py:np-array, py:np-zeros, py:np-maximum, py:np-argmax, py:np-exp, py:np-sum, py:np-indexing, py:boolean-mask, py:mask-and-or, py:array-as-index, py:torch-tensor, py:torch-cat, py:dim, py:abs, py:comprehension, py:list, py:append, py:tuple, py:for, py:range, py:len, py:slicing, py:indexing, py:comparison, py:keyword-argument, py:method, py:min-max, py:def, py:return, py:import, py:import-as, py:print, py:comment, py:variable, py:arithmetic, py:int, py:float, s:log, s:exp, q:predict, q:choice, q:exercise-with-check, q:slider-task, q:explain, q:run-cell]
+  mentions: [c:retinanet, c:one-stage-detector]
   ladder: [numpy, torch]
   data: [course-scenes]
+  reference_data: []
   needs: any
 
 - id: cv-one-stage-detector

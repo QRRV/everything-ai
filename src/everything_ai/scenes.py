@@ -261,3 +261,19 @@ def detections(scenes: list[Scene], seed: int) -> list[tuple[int, str, float, tu
     out = [(image, kind, score(base), box) for image, kind, base, box in made]
     out.sort(key=lambda d: -d[2])
     return out
+
+
+def anchor_boxes(cells: int = 16, stride: int = 8,
+                 sizes: tuple[tuple[float, float], ...] = ((16, 16), (24, 24), (32, 32))) -> np.ndarray:
+    """Anchor boxes for a scene, as the worked example of cv-anchors lays them: a feature map of `cells` by `cells`
+    squares, each standing for `stride` by `stride` pixels, and around the middle of every square one anchor of each
+    (height, width) in `sizes`. Row by row, square by square, size by size: an array of shape
+    (cells * cells * len(sizes), 4), each row a box as the course writes it, (top, left, bottom, right) with both ends
+    included, in floats. Anchors at the edge stick out of the scene."""
+    rows = []
+    for i in range(cells):
+        for j in range(cells):
+            y, x = i * stride + (stride - 1) / 2, j * stride + (stride - 1) / 2
+            for h, w in sizes:
+                rows.append((y - (h - 1) / 2, x - (w - 1) / 2, y + (h - 1) / 2, x + (w - 1) / 2))
+    return np.array(rows, dtype=float).reshape(-1, 4)
