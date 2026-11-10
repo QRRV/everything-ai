@@ -514,16 +514,22 @@ lessons:
 # --- gevorderd: where a CNN looks -----------------------------------------------------------------------------------
 # On ResNet-18 and the course's photos (224 pixels): in a small CIFAR CNN the last feature map is 8×8 or 4×4, so a
 # heat map over a photo of 32 by 32 is a blob. The learner's own CIFAR CNN can be compared.
+# cv-saliency: the maps of the cat, the coffee and the drawing of fruit for ResNet-18's best guess. The slider in
+# The idea shows probabilities the course measured, so it needs no download: a change of 1 to 12 (of 255) against
+# the slope on the 5% most salient pixels of balloon's map, or on 5% random pixels. Its checks use a ResNet-18 with
+# random weights and made-up maps. No Caltech-101 or CIFAR-10: three photos show the map and its limits.
 - id: cv-saliency
   title: "Saliency: the pixels that change the answer"
   level: gevorderd
   module: explaining
-  idea: "The gradient of a class score with respect to the pixels of the photo says which pixels would change that score the most; drawn as a picture, it is a first and noisy explanation of what a classifier used."
+  idea: "The gradient of a class score with respect to the pixels of the photo says which pixels would change that score the most; drawn as a picture, it is a first and noisy explanation: it shows where a classifier's score is sensitive, not what the classifier needs."
   covers: [saliency-en-uitleg-evalueren#0]
   requires: [cv-inside-cnn, torch-autograd]
   introduces: [c:saliency-map]
+  uses: [c:gradient, c:partial-derivative, c:logit, c:softmax, c:probability, c:prediction, c:autograd, c:leaf-tensor, c:backward-pass, c:central-difference, c:gradient-checking, c:pixel, c:channel, c:receptive-field, c:feature-map, c:resnet, c:pretrained-model, c:imagenet, c:quantile, c:tensor, c:array, c:shape, c:axis, c:mini-batch, c:per-channel-normalization, c:center-crop, c:mean, c:weight, c:model-parameter, c:layer, v:bar-chart, py:requires-grad, py:backward, py:grad-attribute, py:no-grad, py:grad-fn, py:none, py:torch-numpy, py:np-abs, py:min-max, py:np-argmax, py:np-quantile, py:floor-division, py:modulo, py:imread-imshow, py:pil-image, py:np-array, py:torch-tensor, py:torch-permute, py:torch-unsqueeze, py:indexing, py:slicing, py:keyword-argument, py:comparison, py:boolean-mask, py:bool, py:def, py:return, py:import, py:print, py:comment, py:variable, py:arithmetic, py:float, py:int, py:method, s:z-logits, s:partial, s:sigma-sum, s:abs, s:x, q:predict, q:choice, q:exercise-with-check, q:run-cell, q:slider-task]
   ladder: [torch]
-  data: [model-resnet18-imagenet, caltech-101-download-only, cifar-10-download-only]
+  data: [model-resnet18-imagenet, course-photos]
+  reference_data: []
   needs: any
 
 - id: cv-grad-cam

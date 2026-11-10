@@ -1,0 +1,36 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: cv-saliency
+minutes: 30
+title:
+  en: "Saliency: the pixels that change the answer"
+  nl: "Saliency: de pixels die het antwoord veranderen"
+goal:
+  en: "compute with one backward pass how strongly every pixel of a photo moves a class score of ResNet-18, draw that as a saliency map, and test what the map promises."
+  nl: "met één backward pass uitrekenen hoe sterk elke pixel van een foto een class-score van ResNet-18 beweegt, dat tekenen als saliency map, en testen wat de map belooft."
+summary:
+  - en: "The gradient of the logit of a class with respect to a photo has a slope for every pixel and color; autograd gives all 150,528 with one backward pass, when the photo records: `x.requires_grad = True`, `model(x)[0, c].backward()`, and `x.grad`. The logit, not the probability: a probability also rises when other classes fall."
+    nl: "De gradient van de logit van een class naar een foto heeft een helling voor elke pixel en kleur; autograd geeft ze alle 150.528 met één backward pass, als de foto wordt opgenomen: `x.requires_grad = True`, `model(x)[0, c].backward()`, en `x.grad`. De logit, niet de kans: een kans stijgt ook als andere classes dalen."
+  - en: "The saliency map (Simonyan, Vedaldi and Zisserman, 2014) keeps per pixel the largest size of its slopes over the colors. On ResNet-18 it is speckled, but it gathers on the eyes and nose of the cat and on the fruit of the drawing, where the fruit covers 32% of the square and holds 54% of the 5% brightest pixels of balloon's map."
+    nl: "De saliency map (Simonyan, Vedaldi en Zisserman, 2014) houdt per pixel de grootste grootte van zijn hellingen over de kleuren. Op ResNet-18 is hij gespikkeld, maar hij verzamelt zich op de ogen en de neus van de kat en op het fruit van de tekening, waar het fruit 32% van het vierkant beslaat en 54% van de 5% lichtste pixels van de map van balloon heeft."
+  - en: "A map holds for small changes: a change of 1 in 255 on the 5% most salient pixels takes first place from balloon, where random pixels need 4. But blanking the 5% most salient pixels of the cat's map raises the logit of Egyptian cat, from 19.65 to 20.83, as the slopes with their sign predict, and the maps of Egyptian cat and tiger cat share 66% of their brightest pixels: a map shows where a score is sensitive, not what a model needs, nor what tells two classes apart."
+    nl: "Een map geldt voor kleine veranderingen: een verandering van 1 op 255 op de 5% pixels met de hoogste saliency neemt balloon de eerste plaats af, waar willekeurige pixels er 4 nodig hebben. Maar als je de 5% pixels met de hoogste saliency in de map van de kat leegmaakt, stijgt de logit van Egyptian cat, van 19,65 naar 20,83, zoals de hellingen met hun teken voorspellen, en de maps van Egyptian cat en tiger cat delen 66% van hun lichtste pixels: een map laat zien waar een score gevoelig is, niet wat een model nodig heeft, en ook niet wat twee classes onderscheidt."
+can_now:
+  - en: "compute the slopes of a class score with respect to the pixels of a photo with autograd"
+    nl: "met autograd de hellingen van een class-score naar de pixels van een foto uitrekenen"
+    by: saliency
+  - en: "tell from the slopes of a pixel how bright it is in a saliency map: the largest size of its slopes over the colors"
+    nl: "uit de hellingen van een pixel afleiden hoe licht hij is in een saliency map: de grootste grootte van zijn hellingen over de kleuren"
+    by: brighter
+  - en: "pick the share of the pixels with the highest saliency, and test whether changing them moves the score more than random pixels"
+    nl: "het deel van de pixels met de hoogste saliency kiezen, en testen of die veranderen de score meer beweegt dan willekeurige pixels"
+    by: most-salient
+  - en: "tell what a saliency map shows, and what it does not"
+    nl: "zeggen wat een saliency map laat zien, en wat niet"
+    by: alike
+further_reading:
+  - en: "Karen Simonyan, Andrea Vedaldi and Andrew Zisserman (2014), *Deep Inside Convolutional Networks: Visualising Image Classification Models and Saliency Maps*: section 3.1, the saliency map from one backward pass, figure 2, maps for the best guess of ImageNet photos, and section 3.2, finding objects with them"
+    nl: "Karen Simonyan, Andrea Vedaldi en Andrew Zisserman (2014), *Deep Inside Convolutional Networks: Visualising Image Classification Models and Saliency Maps*: paragraaf 3.1, de saliency map uit één backward pass, figuur 2, maps voor de beste gok bij foto's van ImageNet, en paragraaf 3.2, objecten ermee vinden"
+  - en: "Sebastian Lapuschkin and colleagues (2019), *Unmasking Clever Hans predictors and assessing what machines really learn*, Nature Communications: figure 2, the horse classifier that looked at a source tag"
+    nl: "Sebastian Lapuschkin en collega's (2019), *Unmasking Clever Hans predictors and assessing what machines really learn*, Nature Communications: figuur 2, de paardenclassifier die naar een bronvermelding keek"
