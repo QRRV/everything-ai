@@ -468,6 +468,12 @@ lessons:
   reference_data: []
   needs: any
 
+# The lesson counts multiplications and weights exactly (the paper's table 3: one layer with 512 channels in and out on
+# maps of 14 by 14, 462 million against 52.3 million). The demo puts a depthwise separable convolution in the middle of
+# the network of cv-1x1-convolution, on 6,000 photos of CIFAR-10 for 20 epochs: 548 to 581 test photos right with
+# 4,800 parameters in its middle, against 532 to 572 with one 3×3 convolution (36,928). Only the depthwise or only the
+# 1×1 convolution reads 557 to 585 and 557 to 576, and two in a row 527 to 541: in this small network the runs show
+# that the split costs nothing, not what each step adds, and the lesson says so.
 - id: cv-mobilenet
   title: "Depthwise separable convolutions: MobileNet"
   level: gevorderd
@@ -476,8 +482,11 @@ lessons:
   covers: [convolutionele-netwerken#2, d11-cnn-architecturen#3]
   requires: [cv-resnext]
   introduces: [c:depthwise-convolution, c:depthwise-separable-convolution, c:mobilenet]
+  uses: [c:grouped-convolution, c:resnext, c:pointwise-convolution, c:convolution, c:filter, c:channel, c:output-channel, c:feature-map, c:kernel-size, c:stride, c:padding, c:pooling, c:batchnorm, c:layer, c:relu, c:model-parameter, c:weight, c:bias-term, c:shape, c:tensor, c:matrix-multiplication, c:mini-batch, c:epoch, c:learning-rate, c:warmup, c:seed, c:overfitting, c:train-set, c:test-set, c:validation-set, c:accuracy, c:loss, c:cifar-10, c:per-channel-normalization, c:hyperparameter, v:loss-curve, v:train-val-curves, py:nn-conv2d, py:conv2d-groups, py:nn-module, py:numel, py:no-grad, py:with, py:keyword-argument, py:torch-relu, py:class, py:self, py:init-method, py:forward-method, py:super, py:list, py:return, py:print, py:comment, py:import, q:predict, q:choice, q:exercise-with-check, q:run-cell, q:slider-task]
+  mentions: [c:imagenet, c:vgg, c:inception]
   ladder: [torch]
-  data: [fashion-mnist, cifar-10-download-only]
+  data: [cifar-10-download-only]
+  reference_data: []
   needs: any
 
 - id: cv-efficientnet

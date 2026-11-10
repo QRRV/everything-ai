@@ -1,0 +1,31 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: cv-mobilenet
+minutes: 35
+title:
+  en: "Depthwise separable convolutions: MobileNet"
+  nl: "Depthwise separable convolutions: MobileNet"
+goal:
+  en: "count what a depthwise separable convolution saves against a 3×3 convolution, build one from a depthwise convolution and a 1×1 convolution, and test in a CNN on CIFAR-10 what it and each of its two steps do."
+  nl: "tellen wat een depthwise separable convolution bespaart tegenover een 3×3-convolutie, er een bouwen uit een depthwise convolution en een 1×1 convolution, en in een CNN op CIFAR-10 testen wat hij en elk van zijn twee stappen doen."
+summary:
+  - en: "A depthwise convolution gives every channel a 3×3 filter of its own, which sees only that channel: `nn.Conv2d(64, 64, 3, padding=1, groups=64)`, a grouped convolution with as many groups as channels. A 1×1 convolution after it mixes the channels. Together they are a depthwise separable convolution (MobileNet, Howard and others, 2017): first filter each channel, then mix."
+    nl: "Een depthwise convolution geeft elk channel een eigen 3×3-filter, dat alleen dat channel ziet: `nn.Conv2d(64, 64, 3, padding=1, groups=64)`, een grouped convolution met evenveel groepen als channels. Een 1×1 convolution erna mengt de channels. Samen zijn ze een depthwise separable convolution (MobileNet, Howard en anderen, 2017): eerst elk channel filteren, dan mengen."
+  - en: "With M channels in, N out and filters of k by k, it needs 1/N + 1/k² of the multiplications of an ordinary convolution, and as large a share of its weights: with 3×3 filters, 8 to 9 times fewer when there are many channels, but never 9. From 64 channels to 64 on maps of 8 by 8: 299,008 multiplications against 2,359,296, 7.89 times fewer. On ImageNet, MobileNet got 70.6% of the photos right with 569 million multiplications for a photo, the same network with ordinary 3×3 convolutions 71.7% with 4,866 million."
+    nl: "Met M channels erin, N eruit en filters van k bij k heeft hij 1/N + 1/k² van de vermenigvuldigingen van een gewone convolutie nodig, en een even groot deel van zijn weights: met 3×3-filters 8 tot 9 keer zo weinig als er veel channels zijn, maar nooit 9. Van 64 channels naar 64 op maps van 8 bij 8: 299.008 vermenigvuldigingen tegen 2.359.296, 7,89 keer zo weinig. Op ImageNet had MobileNet 70,6% van de foto's goed met 569 miljoen vermenigvuldigingen per foto, hetzelfde netwerk met gewone 3×3-convoluties 71,7% met 4.866 miljoen."
+  - en: "A CNN on 6,000 photos of CIFAR-10, for 20 epochs, with a depthwise separable convolution in its middle: it reads 548 to 581 test photos right, with one 3×3 convolution 532 to 572, with an eighth of the multiplications in its middle. With only the depthwise or only the 1×1 convolution, it reads 557 to 585 and 557 to 576: in this small network, these runs cannot show what each step adds. Two in a row read 527 to 541."
+    nl: "Een CNN op 6.000 foto's van CIFAR-10, 20 epochs lang, met een depthwise separable convolution in zijn midden: het leest 548 tot 581 testfoto's goed, met één 3×3-convolutie 532 tot 572, met een achtste van de vermenigvuldigingen in zijn midden. Met alleen de depthwise of alleen de 1×1 convolution leest het er 557 tot 585 en 557 tot 576: in dit kleine netwerk kunnen deze runs niet laten zien wat elke stap toevoegt. Twee na elkaar lezen er 527 tot 541."
+can_now:
+  - en: "tell what the depthwise convolution of a depthwise separable convolution does from what the 1×1 convolution after it does"
+    nl: "onderscheiden wat de depthwise convolution van een depthwise separable convolution doet en wat de 1×1 convolution erna doet"
+    by: steps
+  - en: "build a depthwise separable convolution with `groups`, and count what it saves"
+    nl: "een depthwise separable convolution bouwen met `groups`, en tellen wat hij bespaart"
+    by: separable
+  - en: "read from measured runs what a cheaper block costs, and what the runs cannot tell"
+    nl: "uit gemeten runs aflezen wat een goedkoper block kost, en wat de runs niet kunnen zeggen"
+    by: separable-runs
+further_reading:
+  - en: "Andrew G. Howard, Menglong Zhu, Bo Chen, Dmitry Kalenichenko, Weijun Wang, Tobias Weyand, Marco Andreetto and Hartwig Adam (2017), *MobileNets: Efficient Convolutional Neural Networks for Mobile Vision Applications*: section 3.1 and figure 2, the depthwise separable convolution and what it costs, table 3, one layer, and tables 4 and 8, whole networks on ImageNet"
+    nl: "Andrew G. Howard, Menglong Zhu, Bo Chen, Dmitry Kalenichenko, Weijun Wang, Tobias Weyand, Marco Andreetto en Hartwig Adam (2017), *MobileNets: Efficient Convolutional Neural Networks for Mobile Vision Applications*: paragraaf 3.1 en figuur 2, de depthwise separable convolution en wat hij kost, tabel 3, één layer, en tabellen 4 en 8, hele netwerken op ImageNet"
