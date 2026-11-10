@@ -77,6 +77,11 @@ _WORDS = {
 }
 
 
+def _css_string(text: str) -> str:
+    """A text as a CSS string, for `content:`."""
+    return '"' + text.replace("\\", "\\\\").replace('"', '\\"').replace("\n", " ") + '"'
+
+
 def _md(text: str) -> str:
     """Markdown to HTML, the way marimo renders it (for text inside our own blocks)."""
     return mo.md(text).text
@@ -237,8 +242,16 @@ class Lesson:
                  f'{self.w["about_minutes"].format(n=self.meta["minutes"])}. {self._needs_text()}</p>')
         # a lesson the route marks as hard says so up front (lesson template, block 3)
         tough = f'<p class="ea-needs ea-tough">{html.escape(self.phrase("block-tough"))}</p>' if self.route.get("hard") else ""
-        return mo.Html(kicker + f'<h1 class="ea-title">{html.escape(self.t(self.meta["title"]))}</h1>'
+        return mo.Html(self._page_words() + kicker + f'<h1 class="ea-title">{html.escape(self.t(self.meta["title"]))}</h1>'
                        + goal + needs + tough + self._prerequisites())
+
+    def _page_words(self) -> str:
+        """Words that lesson.css shows in place of marimo's own English, in this lesson's language: as CSS custom
+        properties on the page, so that one source (course/phrases.yaml) serves every cell. Now one: what a cell says
+        while it waits for a cell above it (marimo: "Ancestor stopped")."""
+        words = {"--ea-cell-waits": self.phrase("cell-waits")}
+        props = " ".join(f"{name}: {_css_string(text)};" for name, text in words.items())
+        return f"<style>:root {{ {props} }}</style>"
 
     def _needs_text(self) -> str:
         """What the lesson needs, and what that means on this computer (template 2.3). The course's data is in the
@@ -590,6 +603,18 @@ def _with_commas(fn):
         out = fn(*args, **kwargs)
         return chart.with_decimal_comma(out) if isinstance(out, str) and 'class="ea-tick"' in out else out
     return wrapped
+
+
+def download_card(ask: str, button, failed: str | None = None) -> mo.Html:
+    """The cell that asks for a download before part of a lesson can run, as in `mo.stop(True, download_card(...))`:
+    an inset panel with why the last try did not work (`failed`), what the download is and what it costs (`ask`,
+    markdown), and the button. The cells that need it say, in the lesson's language, that they wait (lesson.css)."""
+    def para(text):
+        body = _inline(text)
+        return body if body.startswith("<p>") else f"<p>{body}</p>"
+    head = para(failed).replace("<p>", '<p class="ea-download-failed">', 1) if failed else ""
+    return mo.Html(f'<div class="ea-download">{style.icon("download")}{head}{para(ask)}'
+                   f'<div class="ea-download-button">{button}</div></div>')
 
 
 class _NoChecks:

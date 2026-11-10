@@ -18,6 +18,7 @@ import torch   # imported once, when the lesson opens: the first import takes lo
 from torch.utils.data import DataLoader, Dataset, TensorDataset
 
 from everything_ai import chart, cifar, hub, live, projects
+from everything_ai.lesson import download_card
 from everything_ai.check import Mistake, ScenarioBox, Sort, Timeout, run_code, with_time_limit
 
 # The demo uses the learner's ColorCNN and channel_stats of cv-color-cnn, their Trainer of nn-trainer and their
@@ -155,8 +156,7 @@ def cifar_or_stop(button, texts: dict):
         except OSError as e:
             failed = texts["no_room"] if e.errno == errno.ENOSPC else texts["failed"].format(why=html.escape(str(e)))
     if not ready():
-        parts = [mo.md(failed)] if failed else []
-        mo.stop(True, mo.vstack(parts + [mo.md(texts["ask"]), button]))
+        mo.stop(True, download_card(texts["ask"], button, failed))
     mo.output.replace(mo.md(texts["here"]))
     return cifar
 

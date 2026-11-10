@@ -164,9 +164,9 @@ function renderSwitches() {
   const ts = document.getElementById("theme-switch");
   ts.setAttribute("aria-label", t("themeLabel"));
   for (const b of ts.querySelectorAll("button")) {
-    b.textContent = t("themes")[b.dataset.theme];
-    b.setAttribute("aria-pressed", String(b.dataset.theme === S.settings.theme));
-    b.onclick = () => saveSettings({ theme: b.dataset.theme });
+    b.textContent = t("themes")[b.dataset.choice];
+    b.setAttribute("aria-pressed", String(b.dataset.choice === S.settings.theme));
+    b.onclick = () => saveSettings({ theme: b.dataset.choice });
   }
 }
 

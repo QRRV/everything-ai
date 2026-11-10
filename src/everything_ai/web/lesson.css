@@ -61,3 +61,26 @@ ul.ea-cannow li .paragraph, ul.ea-cannow li p { font-family: var(--ea-font-ui) !
 .ea-only-dark { display: none; }
 :root.dark .ea-only-light, .dark .ea-only-light, [data-theme="dark"] .ea-only-light { display: none; }
 :root.dark .ea-only-dark, .dark .ea-only-dark, [data-theme="dark"] .ea-only-dark { display: block; }
+
+/* A cell that waits for a cell above it. marimo says "Ancestor stopped" (or "Ancestor prevented from running") in
+   English and names the other cell by its name in the code; a lesson says it in its own language, from the phrase
+   that the header puts on the page (lesson.py, _page_words). Those two notes are the only ones marimo draws with
+   text-secondary-foreground; a real error keeps marimo's own note. Only in a lesson with the course's header. */
+:root:has(h1.ea-title) .output-area > [role="alert"]:has(h5.text-secondary-foreground) {
+  font-family: var(--ea-font-ui); font-size: 0.95rem; line-height: 1.55; color: var(--ea-ink-2); max-width: var(--ea-measure);
+  border: 1px dashed var(--ea-line) !important; border-radius: var(--ea-radius); padding: 0.7rem 1rem 0.75rem !important; background: var(--ea-page) !important; }
+:root:has(h1.ea-title) .output-area > [role="alert"]:has(h5.text-secondary-foreground) > * { display: none; }
+:root:has(h1.ea-title) .output-area > [role="alert"]:has(h5.text-secondary-foreground)::before { content: var(--ea-cell-waits); }
+
+/* The cell that asks for a download (lesson.download_card): an inset panel with the reason, what it costs and the
+   button, like a "watch out" note */
+.ea-download { font-family: var(--ea-font-ui); font-size: 0.95rem; line-height: 1.55; color: var(--ea-ink); background: var(--ea-inset);
+  border-radius: var(--ea-radius); padding: 0.8rem 1rem 0.9rem 2.6rem; max-width: var(--ea-measure); position: relative; }
+.ea-download > .ea-icon { position: absolute; left: 0.95rem; top: 0.95rem; width: 1.05rem; height: 1.05rem; color: var(--ea-ink-2); }
+.ea-download p, .ea-download .paragraph { font-family: var(--ea-font-ui) !important; font-size: 0.95rem !important; line-height: 1.55 !important; margin: 0 0 0.5rem !important; }
+.ea-download em { font-style: normal; }
+.ea-download a { color: inherit; text-decoration: underline; text-decoration-color: var(--ea-axis); text-underline-offset: 0.18em; text-decoration-thickness: 1px; }
+.ea-download a:hover { text-decoration-color: currentColor; }
+.ea-download .ea-download-failed { font-weight: 620; }
+.ea-download .ea-download-button { margin-top: 0.7rem; }
+

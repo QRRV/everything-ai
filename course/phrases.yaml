@@ -158,6 +158,12 @@ phrases:
   en: Watch out
   nl: Let op
 
+# --- the app around a lesson: in place of the notebook's own English -----------
+- id: cell-waits
+  group: app
+  en: This part waits for a cell above it. What that cell still needs is shown there.
+  nl: Dit deel wacht op een cel hierboven. Wat die cel nog nodig heeft, staat daar.
+
 # --- course levels -----------------------------------------------------------
 - id: level-basis
   group: level

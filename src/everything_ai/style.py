@@ -33,6 +33,7 @@ _ICONS = {
     "note": '<circle cx="8" cy="8" r="6.2"/><path d="M8 7.3v4M8 4.9v.2"/>',
     "tick": '<path d="M3.5 8.4 6.6 11.3 12.5 4.9"/>',
     "box": '<rect x="2.5" y="2.5" width="11" height="11" rx="2"/>',
+    "download": '<path d="M8 2.2v8M4.8 7.2 8 10.4l3.2-3.2M2.6 13.4h10.8"/>',
     "home": '<path d="M2.2 7.4 8 2.6l5.8 4.8M3.8 6.2v7.2h3V10h2.4v3.4h3V6.2"/>',
 }
 

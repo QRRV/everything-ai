@@ -15,6 +15,7 @@ import numpy as np
 import torch   # imported once, when the lesson opens: the first import takes longer than a check may
 
 from everything_ai import caltech, chart, detr, hub, paths
+from everything_ai.lesson import download_card
 from everything_ai.check import FunctionBox, Mistake, run_code, with_time_limit
 
 DOWNLOAD_LINE = {
@@ -218,8 +219,7 @@ def detr_or_stop(button, texts: dict):
         except OSError as e:
             failed = texts["no_room"] if e.errno == errno.ENOSPC else texts["failed"].format(why=html.escape(str(e)))
     if not ready():
-        parts = [mo.md(failed)] if failed else []
-        mo.stop(True, mo.vstack(parts + [mo.md(texts["ask"]), button]))
+        mo.stop(True, download_card(texts["ask"], button, failed))
     model = _detr()
     mo.output.replace(mo.md(texts["here"]))
     return model

@@ -18,6 +18,7 @@ import torch   # imported once, when the lesson opens: the first import takes lo
 from torch.utils.data import DataLoader, TensorDataset
 
 from everything_ai import chart, cifar, hub, live, projects
+from everything_ai.lesson import download_card
 from everything_ai.check import ClassBox, Mistake, ScenarioBox, Timeout, run_code, with_time_limit
 
 # The demo trains with the learner's Trainer of nn-trainer and counts with their count_params of cnn-pytorch; where one
@@ -128,8 +129,7 @@ def cifar_or_stop(button, texts: dict):
         except OSError as e:
             failed = texts["no_room"] if e.errno == errno.ENOSPC else texts["failed"].format(why=html.escape(str(e)))
     if not ready():
-        parts = [mo.md(failed)] if failed else []
-        mo.stop(True, mo.vstack(parts + [mo.md(texts["ask"]), button]))
+        mo.stop(True, download_card(texts["ask"], button, failed))
     mo.output.replace(mo.md(texts["here"]))
     return cifar
 

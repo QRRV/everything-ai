@@ -151,7 +151,7 @@ def threshold_frame(t: int, labels: dict[str, str]) -> tuple[str, dict]:
     fig, (left, right) = plt.subplots(1, 2, figsize=(6.8, 2.9), gridspec_kw={"width_ratios": [1.35, 1.0], "wspace": 0.3})
     _photo_axes(left, strength_of(smoothed_photo()) > t, labels["edges"].format(t=t), cmap="gray_r", vmin=0, vmax=1)
     # the axis stops at 12%, so that the low point shows; a value above it is a triangle at the top
-    right.plot(THRESHOLDS, curve, color=plots.LOSS, linewidth=1.8)
+    right.plot(THRESHOLDS, curve, color=plots.LOSS, linewidth=1.8, linestyle="-")   # plots.style() cycles line styles
     inside = [(x, v) for x, v in zip(THRESHOLDS, curve) if v <= TOP]
     right.plot([x for x, _ in inside], [v for _, v in inside], color=plots.LOSS, marker="o", markersize=3.5, linestyle="none")
     above = [x for x, v in zip(THRESHOLDS, curve) if v > TOP]

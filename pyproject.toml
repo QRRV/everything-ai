@@ -28,6 +28,7 @@ everything-ai = "everything_ai.server:MIDDLEWARE"
 
 [dependency-groups]
 dev = ["pytest==8.4.2"]
+screenshots = ["playwright==1.63.0"]   # tools/screenshots.py for the course's developers; never installed for learners
 
 [build-system]
 requires = ["uv_build>=0.11,<0.14"]

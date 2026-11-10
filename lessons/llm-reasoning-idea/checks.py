@@ -12,6 +12,7 @@ import re
 import time
 
 from everything_ai import paths
+from everything_ai.lesson import download_card
 from everything_ai.check import Code, FunctionBox, Mistake
 
 GSM8K = "data/gsm8k-sample.jsonl"            # the first 4 train and the first 30 test problems of GSM8K (MIT)
@@ -116,7 +117,7 @@ def download_or_stop(button, texts: dict) -> None:
         except OSError as e:
             failed = texts["no_room"] if e.errno == errno.ENOSPC else texts["failed"].format(why=html.escape(str(e)))
     if not downloaded():
-        mo.stop(True, mo.vstack(([mo.md(failed)] if failed else []) + [mo.md(texts["ask"]), button]))
+        mo.stop(True, download_card(texts["ask"], button, failed))
 
 
 def where() -> dict:

@@ -16,6 +16,7 @@ import torch   # imported once, when the lesson opens: the first import takes lo
 from torch import nn
 
 from everything_ai import caltech, chart, hub, models
+from everything_ai.lesson import download_card
 from everything_ai.check import FunctionBox, Mistake, run_code
 
 DOWNLOAD_LINE = {
@@ -223,8 +224,7 @@ def downloads_or_stop(button, texts: dict):
         except OSError as e:
             failed = texts["no_room"] if e.errno == errno.ENOSPC else texts["failed"].format(why=html.escape(str(e)))
     if not ready():
-        parts = [mo.md(failed)] if failed else []
-        mo.stop(True, mo.vstack(parts + [mo.md(texts["ask"]), button]))
+        mo.stop(True, download_card(texts["ask"], button, failed))
     mo.output.replace(mo.md(texts["here"]))
     return models.resnet18
 

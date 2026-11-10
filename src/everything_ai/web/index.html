@@ -27,8 +27,10 @@
       <div class="seg" role="group" id="lang-switch" aria-label="Language">
         <button type="button" data-lang="en">EN</button><button type="button" data-lang="nl">NL</button>
       </div>
+      <!-- data-choice, not data-theme: kleuren.css gives every element with data-theme="dark" the dark colours,
+           and the Dark button then had light-grey text on the light page -->
       <div class="seg" role="group" id="theme-switch">
-        <button type="button" data-theme="system"></button><button type="button" data-theme="light"></button><button type="button" data-theme="dark"></button>
+        <button type="button" data-choice="system"></button><button type="button" data-choice="light"></button><button type="button" data-choice="dark"></button>
       </div>
     </div>
   </header>

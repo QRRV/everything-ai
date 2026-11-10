@@ -168,7 +168,7 @@ class Descent(anywidget.AnyWidget):
         for (const t of [...new Set([1, Math.round(N / 2), N])]) mk("text", { x: X(t), y: H2 - PB2 + 18, "text-anchor": "middle" }, g2).textContent = t;
         mk("text", { x: W2 - PR2, y: H2 - 4, "text-anchor": "end" }, g2).textContent = L.steps_name;
         m.forEach((v, j) => { const s = j + 1, h = Math.max(1, H2 - PB2 - Y(v)), done = s <= i, nextOne = s === i + 1 && !playing;
-          mk("rect", { x: X(s) - bw / 2, y: H2 - PB2 - h, width: bw, height: h, rx: 2, fill: done ? "var(--ea-param)" : "var(--ea-line)",
+          mk("rect", { x: X(s) - bw / 2, y: H2 - PB2 - h, width: bw, height: h, rx: 2, fill: done ? "var(--ea-param)" : "var(--ea-axis)",
             stroke: nextOne ? "var(--ea-hyper)" : "none", "stroke-width": 1.6, "stroke-dasharray": "4 3" }, bars); });
         if (i > 0) { const v = m[i - 1]; mk("text", { x: X(i), y: Y(v) - 6, "text-anchor": "middle", class: "ea-title", style: "fill: var(--ea-param-text)" }, bars).textContent = v < 0.0005 ? "< " + fmt(0.001, 3) : fmt(v, 3); }
       }

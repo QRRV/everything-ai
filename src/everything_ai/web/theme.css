@@ -40,6 +40,9 @@ body, #root, #App { background: var(--ea-page) !important; color: var(--ea-ink);
 .markdown a { color: inherit; text-decoration: underline; text-decoration-color: var(--ea-axis); text-underline-offset: 0.18em; text-decoration-thickness: 1px; }
 .markdown a:hover { text-decoration-color: currentColor; }
 .markdown code { font-family: var(--ea-font-code); font-size: 0.86em; font-variant-ligatures: none; background: var(--ea-inset); border-radius: 4px; padding: 0.08em 0.32em; }
+/* a long path in a sentence breaks at the edge of a phone instead of running off it; break-word, not anywhere,
+   so a table does not squeeze its code columns (the table scrolls on its own instead) */
+.markdown code { overflow-wrap: break-word; }
 .markdown pre code { padding: 0; }   /* a fenced block starts at its edge, not at the padding of inline code */
 .markdown .katex { font-size: 1.06em; }
 /* display formulas sit centred in the text column, not in the full cell */
@@ -107,6 +110,8 @@ body, #root, #App { background: var(--ea-page) !important; color: var(--ea-ink);
 .markdown th, .markdown td { text-align: left !important; padding: 0.42rem 1.1rem 0.42rem 0; border-bottom: 1px solid var(--ea-line); vertical-align: top; }
 .markdown th { font-weight: 600; color: var(--ea-ink-2); border-bottom-color: var(--ea-axis); }
 .markdown td.ea-r, .markdown th.ea-r { text-align: right !important; font-variant-numeric: tabular-nums; }
+/* a table wider than the window scrolls on its own, like a formula, instead of pushing the page wider */
+.markdown table { display: block; overflow-x: auto; }
 
 /* ---------- controls take the colour of the concept they set ----------
    marimo draws its widgets in shadow DOM; custom properties cross that border, class names do not.
@@ -141,5 +146,23 @@ button:focus-visible, [role="slider"]:focus-visible, a:focus-visible, summary:fo
 .marimo-cell .cm.opacity-20 { display: none; }
 .marimo-cell:has(.cm.opacity-20) { border-color: transparent !important; box-shadow: none !important; background: transparent !important; }
 .marimo-cell:has(.cm.opacity-20) .output-area { border-top: none !important; }
+/* No lines between cells whose code is hidden: marimo draws one under the code area and one under the cell, and
+   with the code out of sight they were only lines across the page, often two on top of each other */
+.marimo-cell:is(:has(.cm.opacity-20), :has(.cm.h-0)) > .relative,
+.marimo-cell:is(:has(.cm.opacity-20), :has(.cm.h-0)) .tray { border-color: transparent !important; }
+/* marimo lays out the markdown of a stack with display: contents, so the gap of the stack came on top of the
+   margins: a paragraph stood further from its heading there than anywhere else. As a block it has the same rhythm */
+.markdown.contents { display: block !important; }
+
+/* The notebook's own tools that a lesson does not use stay out of sight: the file name at the top, the setup cell
+   (the lesson's imports; it shows when it has an error), the arrows that fold a section, the buttons under the last
+   cell that add a new one, the switch that hides all code (also the boxes you type in) and the button that stops
+   the whole course. What a learner does use stays: a cell's run button, saving, the command palette, and the
+   counters at the bottom left that open the scratchpad (lesson start-how-this-course-works). */
+#filename-input { visibility: hidden; }
+.marimo-cell[data-setup-cell="true"]:not(:has([role="alert"])) { display: none; }
+.marimo-cell .absolute.top-5.\-left-7 { display: none; }
+#App .flex.justify-center.mt-4.pt-6.pb-32.group { display: none; }
+[data-testid="hide-code-button"], [data-testid="shutdown-button"] { display: none !important; }
 
 @media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation-duration: 1ms !important; transition-duration: 1ms !important; } }
