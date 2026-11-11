@@ -1,0 +1,37 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: cv-mask-rcnn
+minutes: 50
+title:
+  en: "A mask for every object: the idea of Mask R-CNN"
+  nl: "Een mask voor elk voorwerp: het idee van Mask R-CNN"
+goal:
+  en: "give every object its own mask, also when it touches another of its kind: build Mask R-CNN on your two-stage detector, with bilinear interpolation of feature maps, RoIAlign instead of RoI pooling, a small FCN as mask head and paste to put its masks into the scene, and see what rounding costs a mask."
+  nl: "elk voorwerp een eigen mask geven, ook als het een ander van zijn soort raakt: Mask R-CNN bouwen op je two-stage detector, met bilineaire interpolatie van feature maps, RoIAlign in plaats van RoI pooling, een klein FCN als mask head en paste om zijn masks in de scène te zetten, en zien wat afronden een mask kost."
+summary:
+  - en: "Instance segmentation gives every object a mask of its own. A class map cannot: when two shapes of the same kind touch, it makes one area of them, and on the course's 200 test scenes 186 of the 808 shapes touch or overlap one of their kind. Mask R-CNN (2017) adds to Faster R-CNN a mask head: a small FCN that draws, in every box, a mask of logits for every kind, of which only the mask of the box's kind learns, with the sigmoid and the log loss."
+    nl: "Instance segmentation geeft elk voorwerp een eigen mask. Een class map kan dat niet: raken twee vormen van dezelfde soort elkaar, dan maakt hij er één gebied van, en in de 200 testscènes van de course raken of overlappen 186 van de 808 vormen er een van hun soort. Mask R-CNN (2017) voegt aan Faster R-CNN een mask head toe: een klein FCN dat in elke box een mask van logits tekent voor elke soort, waarvan alleen het mask van de soort van de box leert, met de sigmoid en de log loss."
+  - en: "RoIAlign cuts a box to k by k bins without rounding: the middle of every bin, in squares of the feature maps, where pixel y lies at (y − 3.5) / 8, and the value there with bilinear interpolation of the four squares around it. In training, every proposal of a kind learns the true mask of its shape at the middles of its 16 by 16 bins; to detect, the mask of every box is made as large as the box and cut off at 0.5."
+    nl: "RoIAlign snijdt een box tot k bij k bins zonder af te ronden: het midden van elke bin, in vakjes van de feature maps, waar pixel y op (y − 3,5) / 8 ligt, en de waarde daar met bilineaire interpolatie van de vier vakjes eromheen. Bij het trainen leert elke proposal van een soort het echte mask van zijn vorm in de middens van zijn 16 bij 16 bins; bij het detecteren wordt het mask van elke box zo groot gemaakt als de box en afgekapt bij 0,5."
+  - en: "Trained for 8 epochs on 2,000 of the course's scenes, a Mask R-CNN of 199,325 parameters has a mask AP at an IoU of 0.5 of 0.941 to 0.948 on 200 new scenes, and of 0.846 to 0.857 at 0.75. With RoI pooling instead of RoIAlign, its masks are about as often in the right place, 0.915 to 0.925, but their edges are off: 0.535 to 0.592 at 0.75."
+    nl: "Getraind in 8 epochs op 2.000 scènes van de course heeft een Mask R-CNN van 199.325 parameters bij een IoU van 0,5 een mask AP van 0,941 tot 0,948 op 200 nieuwe scènes, en van 0,846 tot 0,857 bij 0,75. Met RoI pooling in plaats van RoIAlign liggen zijn masks ongeveer even vaak op de goede plek, 0,915 tot 0,925, maar hun randen liggen ernaast: 0,535 tot 0,592 bij 0,75."
+can_now:
+  - en: "read feature maps at any point of a grid with bilinear interpolation, for every channel at once"
+    nl: "feature maps op elk punt van een raster lezen met bilineaire interpolatie, voor elk channel tegelijk"
+    by: bilinear
+  - en: "cut any box from feature maps to k by k numbers per channel with RoIAlign, without rounding"
+    nl: "met RoIAlign elke box uit feature maps snijden tot k bij k getallen per channel, zonder af te ronden"
+    by: roi-align
+  - en: "paste the small mask of a box into the scene"
+    nl: "het kleine mask van een box in de scène plakken"
+    by: paste
+  - en: "say which mask of the mask head learns from a proposal, and what it learns"
+    nl: "zeggen welk mask van de mask head van een proposal leert, en wat het leert"
+    by: learns
+  - en: "explain why rounding to whole squares hurts a mask more than the kind of a box, and what RoIAlign does instead"
+    nl: "uitleggen waarom afronden op hele vakjes een mask meer schaadt dan de soort van een box, en wat RoIAlign in plaats daarvan doet"
+    by: why-align
+further_reading:
+  - en: "Kaiming He, Georgia Gkioxari, Piotr Dollár and Ross Girshick (2017), *Mask R-CNN*: section 3, the mask head, the mask of only the box's kind with a sigmoid for every pixel, and RoIAlign; section 3.1, the targets of the proposals and the masks of the 100 best boxes; and table 2, RoI pooling against RoIAlign and a sigmoid against softmax"
+    nl: "Kaiming He, Georgia Gkioxari, Piotr Dollár en Ross Girshick (2017), *Mask R-CNN*: paragraaf 3, de mask head, alleen het mask van de soort van de box met een sigmoid voor elke pixel, en RoIAlign; paragraaf 3.1, de targets van de proposals en de masks van de 100 beste boxes; en tabel 2, RoI pooling tegen RoIAlign en een sigmoid tegen softmax"

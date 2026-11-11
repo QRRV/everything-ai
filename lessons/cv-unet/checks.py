@@ -17,7 +17,7 @@ import torch   # imported once, when the lesson opens: the first import takes lo
 import torch.nn.functional as F
 from torch import nn
 
-from everything_ai import netview, paths, projects, scenes
+from everything_ai import live, netview, paths, projects, scenes
 from everything_ai.check import ClassBox, Mistake, ScenarioBox, Timeout, run_code, with_time_limit
 
 
@@ -821,8 +821,9 @@ def _demo(show=None):
     with the loss after every epoch ("curves"), the class maps of the SHOWN scenes after every epoch ("moments"), and
     on the test scenes after the last epoch the share of pixels right, the IoU of every class (background first), the
     mean IoU by their mean_iou, the parameters of their U-Net, the modules the course's versions stood in for, and
-    their trained U-Net layer by layer on the scene of the worked example ("net", a netview.Trace). `show` hears the
-    run while it trains."""
+    their trained U-Net layer by layer on the scene of the worked example ("net", a netview.Trace), with the layer the
+    demo watches after every epoch ("layers", see look). `show` hears the run while it trains, every report with
+    "look": a function that gives what the U-Net makes at that moment (decision 1.17)."""
     if not (_saved("unet") and _saved("mean_iou")):
         return None
     names = {}
@@ -863,15 +864,32 @@ def _demo(show=None):
         return "unet"
     model.forward = _named(model.forward, "unet")   # an error in their U-Net is theirs; one in the course's code is not
     shown_at = [TEST.index(seed) for seed in SHOWN]
-    moments = []
+    example = Xt[TEST.index(SEED):TEST.index(SEED) + 1].float() / 255   # the scene of the worked example
+    moments, layers = [], []
+
+    def watched_layer():
+        """The layer the demo watches, on the scene of the worked example, kept small; None when there is none."""
+        net = netview.trace(model, example)
+        k = netview.last_maps(net)
+        return None if k is None else netview.kept(net.layers[k])
+
+    def look() -> dict:
+        """What the U-Net makes at this moment: the class maps of the SHOWN test scenes and the layer the demo
+        watches, looked at with netview.looking, so the run stays the same."""
+        with netview.looking(model):
+            maps = model(Xt[shown_at].float() / 255).argmax(1)
+        return {"maps": [m.numpy() for m in maps], "layer": watched_layer()}
 
     def heard(p):
         if "pred" in p:
             moments.append([p["pred"][i].numpy() for i in shown_at])
+            layers.append(watched_layer())
             p = {k: v for k, v in p.items() if k != "pred"}
         if show is not None:
             try:
-                show(p)
+                show(p | {"look": look})
+            except Timeout:   # the demo's time limit, also when it falls while the chart draws
+                raise
             except Exception:   # the live chart is the course's own: it never stops the learner's run
                 pass
 
@@ -891,7 +909,27 @@ def _demo(show=None):
     curves = {"train": [float(h["train_loss"]) for h in history], "val": [float(h["val_loss"]) for h in history]}
     net = netview.trace(model, Xt[TEST.index(SEED):TEST.index(SEED) + 1].float() / 255)   # the scene of the example
     return {"curves": curves, "moments": moments, "acc": float((pred == Ct).float().mean()), "ious": class_ious(pred, Ct),
-            "miou": miou, "params": sum(p.numel() for p in model.parameters()), "stand_ins": stand_ins, "net": net}
+            "miou": miou, "params": sum(p.numel() for p in model.parameters()), "stand_ins": stand_ins, "net": net,
+            "layers": layers}
+
+
+def epoch_frame(result: dict, e: int, labels: dict, words: dict, lang: str) -> str:
+    """The rewind at epoch e (from 1): the loss after every epoch with a line at e, beside the class maps of the SHOWN
+    test scenes after it, and under them the layer the demo watches, as it was then."""
+    maps, *layer = now_pictures({"maps": result["moments"][e - 1], "layer": result["layers"][e - 1]}, words, lang,
+                                f"nv-unet-epoch-{e}")
+    return live.beside((_FCN.curves_picture(result["curves"], labels, lang, at=e), 276), maps) + "".join(layer)
+
+
+def now_pictures(seen: dict, words: dict, lang: str, uid: str) -> list[str]:
+    """What the learner's U-Net makes at one moment of its run, as `look` or a rewind gives it: the class maps of the
+    SHOWN test scenes, and the layer the demo watches, under words["layer"] with its name. `uid` keeps the masks of
+    the layer apart from those of another picture on the page."""
+    parts = [_FCN.rewind_picture(seen["maps"], words)]
+    if seen.get("layer") is not None:
+        parts.append(netview.layer_picture(seen["layer"], words["layer"].format(name=seen["layer"].name, seed=SEED),
+                                           lang, uid))
+    return parts
 
 
 def layer_frame(net, k, lang: str) -> str:

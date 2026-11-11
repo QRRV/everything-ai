@@ -416,35 +416,84 @@ def picture(tr: Trace, lang: str, chosen: int | None = None, uid: str = "nv", sc
                    f'<div style="{text.format(13, "ink-2", "0.2rem 0 0")};font-family:var(--ea-font-code);'
                    f'overflow-wrap:anywhere">{_esc(tr.error)}</div>')
     if chosen is not None and 0 <= chosen < len(layers) and layers[chosen].out is not None:
-        l = layers[chosen]
-        kind = " + ".join([type(l.module).__name__ + _settings(l.module)] + l.with_it)
-        line = course.phrase("net-layer", lang, name=l.name, kind=kind, shape_in=_shape_text(l.shape_in),
-                             shape_out=_shape_text(l.shape_out), params=_whole(l.params, lang))
-        out.append(f'<div style="{text.format(14, "ink", "0.7rem 0 0.4rem")}">{_esc(line)}</div>')
-        a = l.out.numpy()
-        if a.ndim == 3:
-            n = min(_SHOWN_MAPS, a.shape[0])
-            cells = "".join(
-                f'<div style="{text.format(12, "ink-2", "0")};text-align:center">'
-                f'{_masked(f"{uid}-{chosen}-{k}", _mask(a[k]), 64, 64)}'
-                f'{_esc(course.phrase("net-channel", lang, k=k))}</div>' for k in range(n))
-            out.append(f'<div style="display:flex;flex-wrap:wrap;gap:0.3rem 0.4rem">{cells}</div>')
-            said = (course.phrase("net-maps-all", lang, n=n) if n == a.shape[0]
-                    else course.phrase("net-maps-some", lang, n=n, total=_whole(a.shape[0], lang)))
-        else:
-            v = a.reshape(-1)
-            n = min(_SHOWN_VALUES, v.shape[0])
-            out.append(f'<div style="overflow-x:auto;max-width:100%">'
-                       f'{_masked(f"{uid}-{chosen}-v", _mask(v[None, :n]), n * 6, 16)}</div>')
-            said = (course.phrase("net-values-all", lang, n=n) if n == v.shape[0]
-                    else course.phrase("net-values-some", lang, n=n, total=_whole(v.shape[0], lang)))
-        out.append(f'<div style="{text.format(12, "ink-2", "0.3rem 0 0")}">{_esc(said)}</div>')
+        out += _chosen(layers[chosen], lang, f"{uid}-{chosen}")
     key = [course.phrase("net-key", lang)] + ([course.phrase("net-key-resize", lang)] if resized else []) \
         + ([course.phrase("net-key-arc", lang)] if arcs else [])
     out.append(f'<div style="{text.format(12, "ink-2", "0.6rem 0 0")}">{"<br>".join(_esc(k) for k in key)}</div>')
     body = f'<div class="ea-netview" style="font-family:var(--ea-font-ui);line-height:1.45">{"".join(out)}</div>'
     # framed as every picture of the learner's work: the title above it
     return yours.figure(title, body, alt=title + (". " + tr.error if tr.error else ""))
+
+
+def _chosen(l: Layer, lang: str, uid: str) -> list[str]:
+    """The chosen layer under the network: its line (name, kind, shapes, parameters) and its first feature maps, or its
+    first values when it gives a vector, with what they are. `uid` keeps the masks apart on one page."""
+    text = "font-size:{}px;color:var(--ea-{});margin:{}"
+    kind = " + ".join([type(l.module).__name__ + _settings(l.module)] + l.with_it)
+    line = course.phrase("net-layer", lang, name=l.name, kind=kind, shape_in=_shape_text(l.shape_in),
+                         shape_out=_shape_text(l.shape_out), params=_whole(l.params, lang))
+    out = [f'<div style="{text.format(14, "ink", "0.7rem 0 0.4rem")}">{_esc(line)}</div>']
+    a = l.out.numpy()
+    total = l.shape_out[0] if l.shape_out else a.shape[0]   # a layer kept for a rewind holds only the maps shown
+    if a.ndim == 3:
+        n = min(_SHOWN_MAPS, a.shape[0])
+        cells = "".join(
+            f'<div style="{text.format(12, "ink-2", "0")};text-align:center">'
+            f'{_masked(f"{uid}-{k}", _mask(a[k]), 64, 64)}'
+            f'{_esc(course.phrase("net-channel", lang, k=k))}</div>' for k in range(n))
+        out.append(f'<div style="display:flex;flex-wrap:wrap;gap:0.3rem 0.4rem">{cells}</div>')
+        said = (course.phrase("net-maps-all", lang, n=n) if n == total
+                else course.phrase("net-maps-some", lang, n=n, total=_whole(total, lang)))
+    else:
+        v = a.reshape(-1)
+        n = min(_SHOWN_VALUES, v.shape[0])
+        total = math.prod(l.shape_out) if l.shape_out else v.shape[0]
+        out.append(f'<div style="overflow-x:auto;max-width:100%">'
+                   f'{_masked(f"{uid}-v", _mask(v[None, :n]), n * 6, 16)}</div>')
+        said = (course.phrase("net-values-all", lang, n=n) if n == total
+                else course.phrase("net-values-some", lang, n=n, total=_whole(total, lang)))
+    out.append(f'<div style="{text.format(12, "ink-2", "0.3rem 0 0")}">{_esc(said)}</div>')
+    return out
+
+
+@contextlib.contextmanager
+def looking(model: nn.Module):
+    """Look at a model halfway through its training, as a picture beside the chart does (decision 1.17): in eval mode
+    and without a graph, and afterwards every module back in its own mode, also when the look stops with an error. So
+    looking takes no step, draws no random number and changes no running statistics: the run stays the same."""
+    modes = [(m, m.training) for m in model.modules()]
+    try:
+        model.eval()
+        with torch.no_grad():
+            yield model
+    finally:
+        for m, mode in modes:
+            m.training = mode
+
+
+def last_maps(tr: Trace) -> int | None:
+    """The last layer before the scores that gives feature maps, such as the last block on the way up of a U-Net:
+    the layer a demo shows while its network trains. None when the pass stopped before there is one."""
+    for k in range(len(tr.layers) - 2, -1, -1):
+        if tr.layers[k].out is not None and tr.layers[k].out.dim() == 3:
+            return k
+    return None
+
+
+def kept(l: Layer) -> Layer:
+    """A copy of one layer of a trace with only the feature maps (or values) its picture shows, for a rewind through
+    a run: a layer of every epoch, kept small."""
+    a = l.out
+    if a is not None:
+        a = a[:_SHOWN_MAPS].clone() if a.dim() == 3 else a.reshape(-1)[:_SHOWN_VALUES].clone()
+    return Layer(l.name, l.module, l.shape_in, l.shape_out, a, l.params, list(l.with_it), l.fed, l.joined, l.done)
+
+
+def layer_picture(l: Layer, title: str, lang: str, uid: str = "nv-layer") -> str:
+    """One layer of the network without the boxes of the whole network: its line and its first feature maps, under
+    `title`. Beside the chart of a run while it trains (decision 1.17), and in a rewind through that run."""
+    body = f'<div class="ea-netview" style="font-family:var(--ea-font-ui);line-height:1.45">{"".join(_chosen(l, lang, uid))}</div>'
+    return yours.figure(title, body, alt=title)
 
 
 def network(name: str, make_input, *args, chosen: int | None = None, scores: bool = True):

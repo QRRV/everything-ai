@@ -484,7 +484,7 @@ def text_demo():
     mo.md(r"""
     ### What your project can do now
 
-    Press the button: the demo trains your `UNet`, made of your `DoubleConv`, on the class maps your `class_map` makes of the 2,000 training scenes, for 8 epochs in mini-batches of 32, just as the course's FCN trained. Then it measures your U-Net on the 200 test scenes with your `mean_iou`. It trains on one thread, so that it follows the course's run with seed 0 as closely as your computer allows; on the course's computer, with 4 cores, that took about 9 minutes. The chart shows the loss on the test scenes after every epoch. When it is done, you can go back through the epochs, and see the classes your U-Net gave three test scenes after each of them.
+    Press the button: the demo trains your `UNet`, made of your `DoubleConv`, on the class maps your `class_map` makes of the 2,000 training scenes, for 8 epochs in mini-batches of 32, just as the course's FCN trained. Then it measures your U-Net on the 200 test scenes with your `mean_iou`. It trains on one thread, so that it follows the course's run with seed 0 as closely as your computer allows; on the course's computer, with 4 cores, that took about 9 minutes. While it trains, the chart shows the loss on the training scenes every 10 batches, and dashed, the loss on the 200 test scenes after every epoch. Beside it are the classes your U-Net gives three test scenes at that moment, and under them the feature maps of its last block before the scores, on the scene of the worked example; both are drawn again as it trains. When it is done, you can go back through the epochs and see both after each of them.
     """)
     return
 
@@ -503,15 +503,24 @@ def demo_unet(train_button, result_double_conv, result_unet, result_mean_iou):
         _out = mo.md("*Press the button to train your U-Net.*")
     else:
         _now = {}   # the live chart, made at the first report
+        _words = {"scene": "scene {seed}", "kinds": ("circle", "square", "triangle"), "layer": "Layer {name} of your U-Net on scene {seed}",
+                  "alt": "Three test scenes, each with the class of every pixel that your U-Net gave it after that epoch."}
+        _words_now = _words | {"alt": "Three test scenes, each with the class of every pixel that your U-Net gives it now."}
 
         def _progress(_p):
             if "chart" not in _now:
-                _now["chart"] = L.live({"title": "Your U-Net: the loss on the test scenes", "x": "epoch", "y": "test loss",
-                                        "alt": "The loss of your U-Net on the 200 test scenes after every epoch so far."}, _p["epochs"], low=0.0)
-            if "val_loss" in _p:
-                _now["chart"].add(_p["epoch"], _p["val_loss"], f"**Your U-Net** · epoch {_p['epoch']} of {_p['epochs']} · test loss {L.number(_p['val_loss'], 3)}")
-            else:
-                _now["chart"].line(f"**Your U-Net** · epoch {_p['epoch']} of {_p['epochs']} · batch {_p['batch']} of {_p['batches']}")
+                _now["chart"] = L.live({"title": "Your U-Net: the loss while it trains", "x": "epoch", "y": "loss",
+                                        "alt": "The loss of your U-Net so far: on the training scenes every 10 batches, and dashed on the 200 test scenes after every epoch."}, _p["epochs"], low=0.0,
+                                       key=[("loss", False, "training scenes, every 10 batches"), ("loss", True, "test scenes, after every epoch")])
+                _now["chart"].watch(lambda: C.now_pictures(_p["look"](), _words_now, L.lang, "nv-unet-now"))
+                _now["test"] = []
+            if "val_loss" in _p:   # the test scenes after every epoch, dashed
+                _now["test"].append((_p["epoch"], _p["val_loss"]))
+                _now["chart"].reference(_now["test"], "", role="loss", replace=True)
+                _now["chart"].line(f"**Your U-Net** · epoch {_p['epoch']} of {_p['epochs']} · test loss {L.number(_p['val_loss'], 3)}")
+            else:   # the training scenes every 10 batches
+                _now["chart"].add(_p["epoch"] - 1 + _p["batch"] / _p["batches"], _p["loss"],
+                                  f"**Your U-Net** · epoch {_p['epoch']} of {_p['epochs']} · batch {_p['batch']} of {_p['batches']} · loss {L.number(_p['loss'], 3)}")
 
         _result = C.demo(_progress)
         if _result is None:
@@ -528,13 +537,11 @@ def demo_unet(train_button, result_double_conv, result_unet, result_mean_iou):
             _who = "" if not _result["stand_ins"] else " The course's version stood in for " + ", ".join(f"`{m}`" for m in _result["stand_ins"]) + ", as the note under *Where your project stands* says."
             _labels = {"title": "Loss after every epoch", "x": "epoch", "y": "loss", "train": "training", "val": "test",
                        "alt": "The loss of your U-Net after every epoch: on the training scenes solid, on the test scenes dashed."}
-            _words = {"scene": "scene {seed}", "kinds": ("circle", "square", "triangle"),
-                      "alt": "Three test scenes, each with the class of every pixel that your U-Net gave it after that epoch."}
             _val, _moments = _result["curves"]["val"], _result["moments"]
 
             def _frame(_e):
                 _e = int(_e)
-                return (C._FCN.curves_picture(_result["curves"], _labels, L.lang, at=_e) + C._FCN.rewind_picture(_moments[_e - 1], _words),
+                return (C.epoch_frame(_result, _e, _labels, _words, L.lang),
                         f"After epoch {_e}: test loss {L.number(_val[_e - 1], 3)}.")
 
             if len(_moments) == len(_val) > 1:   # rewinding through the run, with the whole run in the picture

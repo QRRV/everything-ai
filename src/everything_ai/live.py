@@ -3,15 +3,26 @@
 """A run you can watch (decision 1.11): while a demo trains, its chart grows step by step in the cell, in place of a
 line of text. A lesson makes one with `L.live(...)` before the run, and its progress callback gives it every step;
 the chart is drawn again at most every half second, so a fast run does not spend its time drawing. The line of the
-run is in the colour of its role: loss for a loss, ink for a reward or an accuracy (style guide, chapter 1)."""
+run is in the colour of its role: loss for a loss, ink for a reward or an accuracy (style guide, chapter 1).
+
+Next to the chart you see what the model makes at that moment (decision 1.17): `watch(now)` gives the chart a
+function that draws it, such as the class maps of a few test scenes or a sentence the model writes, and the feature
+maps of one layer of the learner's network. It is called only when the chart is drawn, so a model is looked at at
+most every half second; a lesson looks at its model in eval mode and without a graph, and puts it back in train mode,
+so that looking never changes the run."""
 from __future__ import annotations
 
+import html
 import math
 import time
 
 import marimo as mo
 
 from everything_ai import chart
+from everything_ai.check import Timeout
+
+
+CHART_WIDTH = 360   # px of the chart of a run
 
 
 class Live:
@@ -19,11 +30,14 @@ class Live:
     as the thicker line, against an x-axis of all `steps` the run will take, so that you see how far it is. `labels`
     has title, x, y and alt; `low` and `high` fix the y-axis, else it follows the values. `line(text)` shows a line
     of progress under the chart, or alone before the first step; `reference(points, label)` adds another run to hold
-    this one against."""
+    this one against. `key` says under the chart what each line is, as (role, dashed, words), for lines whose names
+    would sit in each other's way, such as a run and its test loss that end close together."""
 
     def __init__(self, labels: dict, steps: int, role: str = "loss", lang: str = "en", low: float | None = None,
-                 high: float | None = None, window: int | None = None, every: float = 0.5, xlog: bool = False):
+                 high: float | None = None, window: int | None = None, every: float = 0.5, xlog: bool = False,
+                 key: list | None = None):
         self.labels, self.steps, self.role, self.lang = labels, max(int(steps), 1), role, lang
+        self.key = key or []   # under the chart, what each line is: (role, dashed, words)
         self.low, self.high, self.every, self.xlog = low, high, every, xlog
         self.window = window or max(1, self.steps // 50)
         self.xs: list = []
@@ -33,6 +47,33 @@ class Live:
         self._sides: dict = {}
         self.text = ""
         self._last = 0.0
+        self._now = None
+        self._seen = None   # (when, parts) of the last look
+
+    def watch(self, now) -> None:
+        """What the model makes at this moment, drawn with the chart each time the chart is drawn: `now()` gives HTML,
+        or a list of HTML parts, the first beside the chart (under it on a narrow screen) and the others under them.
+        Set it before the step it belongs to; a later call replaces it. A picture that fails is left out: the chart is
+        the course's own, and never stops the learner's run."""
+        self._now, self._seen = now, None
+
+    def looked(self) -> list:
+        """What `watch` draws now, as a list of HTML parts; empty without a watch, or when drawing it fails. The model
+        is looked at again only `every` seconds after the last look, also when the line of progress changes faster."""
+        if self._now is None:
+            return []
+        at = time.perf_counter()
+        if self._seen is not None and at - self._seen[0] < self.every:
+            return self._seen[1]
+        try:
+            out = self._now()
+        except Timeout:   # the time limit of the run is not the picture's error
+            raise
+        except Exception:
+            out = []
+        parts = [p for p in ([out] if isinstance(out, str) else list(out or [])) if p]
+        self._seen = (at, parts)
+        return parts
 
     def add(self, x: float, y: float, text: str = "") -> None:
         """One step of the run: its x and its value; `text` replaces the line under the chart."""
@@ -51,16 +92,18 @@ class Live:
             self._last = now
             self.show()
 
-    def reference(self, points: list, label: str, role: str = "ink-2") -> None:
+    def reference(self, points: list, label: str, role: str = "ink-2", replace: bool = False) -> None:
         """Another run to hold this one against, such as the course's or an earlier run of yours, as (x, value): drawn
         thin and dashed, with its name at its end, on the side away from this run; its values count for the y-axis
         too. Its `role` is ink-2 for a line the run is measured against, such as ln 2; for another run of the same
         thing, the role of this run (style guide 1.3: the same role keeps its colour, the line style tells them apart).
         An empty `label` draws no name, for several runs that the text under the chart names together; a run with the
-        name of one already there takes its place, such as one that grows along with this run."""
+        name of one already there takes its place, such as one that grows along with this run; with `replace`, also
+        a run without a name takes the place of the one in its role, such as the test loss of this run after every
+        epoch."""
         points = [(x, y) for x, y in points if math.isfinite(y)]
-        if label:
-            self.others = [o for o in self.others if o[1] != label]
+        if label or replace:
+            self.others = [o for o in self.others if o[1] != label or (replace and o[2] != role)]
         if points:
             self.others.append((points, label, role))
 
@@ -71,13 +114,32 @@ class Live:
 
     def stopped(self, note: str):
         """What a cell shows when its run stops early and the cell gives its output itself: the chart so far, when the
-        run took a step, with `note` under it."""
-        return mo.vstack([*self.above, mo.Html(self.picture()), mo.md(note)] if self.xs else [*self.above, mo.md(note)])
+        run took a step, with what the model made then beside it (watch), and `note` under it."""
+        if not self.xs:
+            return mo.vstack([*self.above, mo.md(note)])
+        now = self.looked()   # what the model made when it stopped, beside the chart as during the run
+        return mo.vstack([*self.above, mo.Html(beside((self.drawn(), CHART_WIDTH), now[0]) if now else self.drawn()),
+                          *[mo.Html(p) for p in now[1:]], mo.md(note)])
 
-    def show(self) -> None:
-        parts = [*self.above] + ([mo.Html(self.picture())] if self.xs or self.others else [])
+    def drawn(self) -> str:
+        """The chart with its key under it."""
+        return self.picture() + (key_html(self.key) if self.key else "")
+
+    def parts(self) -> list:
+        """What the cell shows now: what stays above, the chart with what the model makes now beside it and under
+        it, and the line of progress."""
+        parts = [*self.above]
+        now = self.looked()
+        if self.xs or self.others:
+            parts.append(mo.Html(beside((self.drawn(), CHART_WIDTH), now[0]) if now else self.drawn()))
+            now = now[1:]
+        parts += [mo.Html(p) for p in now]
         if self.text:
             parts.append(mo.md(self.text))
+        return parts
+
+    def show(self) -> None:
+        parts = self.parts()
         mo.output.replace(mo.vstack(parts) if parts else mo.md(""))
 
     def means(self) -> list:
@@ -106,16 +168,43 @@ class Live:
             above = self._sides.get(label, bool(self.xs) and mean[-1] < value_at(points, self.xs[-1]))   # the side away
             if self.xs and self.xs[-1] >= max(1, self.steps // 10):     # from this run, where it is now; fixed after a
                 self._sides.setdefault(label, above)                        # tenth of it, so the name does not jump about
-            p.text(*name_at(points, label, above, self.steps, y, self.xlog), label, role, "end")
+            p.text(*name_at(points, label, above, self.steps, y, self.xlog, list(zip(self.xs, mean))), label, role, "end")
         if len(self.xs) > 1:
             p.line(self.xs, self.ys, "axis", 0.8)                      # every step, thin and light grey
             p.line(self.xs, mean, self.role, 2.4)                       # its mean over the last steps, in its role
-        if self.xs and self.steps <= 50:
+        if self.xs and self.steps <= 50 and all(float(x).is_integer() for x in self.xs):
             p.points(self.xs, mean, self.role, r=2.5)                   # a run of few steps: a dot at every step
         if self.xs:
             p.points([self.xs[-1]], [mean[-1]], self.role, r=3.5)       # where the run is now
-        svg = chart.figure([p], alt=self.labels["alt"], width=360, height=240)
+        svg = chart.figure([p], alt=self.labels["alt"], width=CHART_WIDTH, height=240)
         return chart.with_decimal_comma(svg) if self.lang == "nl" else svg
+
+
+def beside(*parts) -> str:
+    """Pictures side by side that wrap one under the other where the screen is too narrow. A part is HTML at its own
+    width, or (HTML, width in px) for a chart, which fills the width it gets: it gets that width, or less on a phone."""
+    def cell(part) -> str:
+        if isinstance(part, tuple):
+            html, width = part
+            return f'<div style="flex:0 1 {width}px;width:{width}px;min-width:0;max-width:100%">{html}</div>'
+        return f'<div style="flex:0 1 auto;min-width:0;max-width:100%">{part}</div>'
+    cells = "".join(cell(p) for p in parts)
+    return f'<div class="ea-beside" style="display:flex;flex-wrap:wrap;gap:0.75rem 1.5rem;align-items:flex-start">{cells}</div>'
+
+
+def key_html(entries: list) -> str:
+    """Under a chart, what each line is: a short piece of the line in its role, solid or dashed, and its words. As the
+    chart draws them: a run solid and 2.4 px wide, another run dashed and 1.4 px wide."""
+    items = []
+    for role, dashed, words in entries:
+        dash = ";stroke-dasharray:5 5" if dashed else ""
+        width = 1.4 if dashed else 2.4
+        sample = (f'<svg width="26" height="10" viewBox="0 0 26 10" aria-hidden="true" style="flex:none">'
+                  f'<line x1="2" y1="5" x2="24" y2="5" style="stroke:{chart._colour(role)};stroke-width:{width};'
+                  f'stroke-linecap:round{dash}"/></svg>')
+        items.append(f'<span style="display:inline-flex;align-items:center;gap:0.35rem">{sample}{html.escape(words)}</span>')
+    return (f'<div class="ea-linekey" style="font-family:var(--ea-font-ui);font-size:12px;color:var(--ea-ink-2);'
+            f'display:flex;flex-wrap:wrap;gap:0.2rem 1rem;margin:0.2rem 0 0">{"".join(items)}</div>')
 
 
 def value_at(points: list, x: float) -> float:
@@ -127,9 +216,10 @@ def value_at(points: list, x: float) -> float:
     return points[0][1] if x < points[0][0] else points[-1][1]
 
 
-def name_at(points: list, label: str, above: bool, steps: float, y: tuple, xlog: bool = False) -> tuple:
+def name_at(points: list, label: str, above: bool, steps: float, y: tuple, xlog: bool = False, avoid=()) -> tuple:
     """Where the name of another run goes, as (x, y) for words that end at its last point: above or below every point
     of it under the name (about 0.03 of the x-axis a letter), so that its own line does not cross it, and inside `y`.
+    The points of `avoid`, such as those of the run itself, count too where they are under the name.
     Below a line that ends at the bottom of the chart there is no room, so its name then goes above it; above a line
     that ends at the top, below it. A line that ends near the start of the x-axis has its name just after it, so that
     the name does not begin left of the axis."""
@@ -137,7 +227,7 @@ def name_at(points: list, label: str, above: bool, steps: float, y: tuple, xlog:
     width = 0.03 * len(label)   # of the x-axis; on a log scale a share of its decades
     end = max(points[-1][0], steps ** width if xlog else width * steps)   # the x-axis begins at 1 on a log scale, else at 0
     left = end / steps ** width if xlog else end - width * steps
-    under = [v for x, v in points if x >= left]
+    under = [v for x, v in points if x >= left] + [v for x, v in avoid if left <= x <= end]
     up, down = max(under) + 0.07 * h, min(under) - 0.1 * h
     if not above and down < y[0] + 0.05 * h and up <= y[1] - 0.05 * h:
         above = True

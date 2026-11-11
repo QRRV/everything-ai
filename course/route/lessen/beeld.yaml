@@ -759,10 +759,22 @@ lessons:
   module: segmentation
   idea: "Instance segmentation gives each object a mask of its own, also when two objects are of the same kind; Mask R-CNN adds to Faster R-CNN a small head that draws a mask inside every box it finds."
   covers: [segmentatie#3]
+  # Measured on the course's scenes (checks.py, REFERENCE and TRAINED): cv-rcnn's two-stage detector with RoIAlign (one
+  # bilinear point per bin, pixel y at (y - 3.5) / 8 squares) for its second stage (4 x 4) and a mask head on 8 x 8:
+  # conv 3x3 32, conv 3x3 32, ConvTranspose 2x2 stride 2, conv 1x1 to 3 masks of 16 x 16 (31,939 parameters, 199,325
+  # in all); target = the true mask at the pixel of every bin middle of the proposal; loss = RPN + second + mask (BCE of
+  # the box's kind only); 8 epochs, batch 32, one thread (~11 min with the learner-style roi_align). Seeds 0-4, mask AP
+  # @0.5 0.941-0.948, @0.75 0.846-0.857, box mAP@0.75 0.879-0.903; with RoI pooling instead 0.915-0.925 / 0.535-0.592
+  # / 0.731-0.774. Seed 0 over COCO's ten thresholds: 0.758 against 0.537. Test scenes: 186 of 808 shapes touch one of
+  # their kind (82 scenes); a box holds a median 78/59/50% of its circle/square/triangle; a true mask through 16 x 16
+  # bins and back keeps a median IoU of 0.941. The demo is a third slower than RoI pooling's with RoIAlign as lists.
   requires: [cv-rcnn, cv-fcn]
   introduces: [c:instance-segmentation, c:mask-r-cnn, c:roi-align]
+  uses: [c:two-stage-detector, c:region-proposal-network, c:roi-pooling, c:faster-r-cnn, c:semantic-segmentation, c:fully-convolutional-network, c:transposed-convolution, py:nn-convtranspose2d, c:bilinear-interpolation, c:interpolation, c:sigmoid, c:logit, c:log-loss, c:broadcasting, c:one-stage-detector, c:backbone, c:anchor-box, c:box-offset, c:intersection-over-union, c:bounding-box, c:object-detection, c:non-maximum-suppression, c:confidence-score, c:score-threshold, c:mean-average-precision, c:average-precision, c:feature-map, c:convolution, c:kernel-size, c:stride, c:padding, c:pooling, c:resnet, c:batchnorm, c:relu, c:layer, c:channel, c:softmax, c:probability, c:loss, c:training, c:epoch, c:mini-batch, c:train-set, c:test-set, c:seed, c:model-parameter, c:tensor, c:shape, c:class, c:pixel, c:median, c:mean, s:exp, s:log, v:loss-curve, py:nn-sequential, py:nn-batchnorm2d, py:nn-relu, py:nn-conv2d, py:nn-maxpool2d, py:nn-module, py:torch-tensor, py:np-zeros, py:torch-permute, py:torch-reshape, py:torch-unsqueeze, py:no-grad, py:with, py:manual-seed, py:math-module, py:floor-division, py:int-conversion, py:min-max, py:slicing, py:indexing, py:array-as-index, py:comprehension, py:dim, py:for, py:range, py:tuple, py:list, py:len, py:keyword-argument, py:method, py:def, py:return, py:import, py:print, py:comment, py:variable, py:arithmetic, py:comparison, py:int, py:float, py:bool, q:predict, q:choice, q:exercise-with-check, q:slider-task, q:explain, q:run-cell]
+  mentions: [c:paper, c:gpu]
   ladder: [torch]
   data: [course-scenes]
+  reference_data: []
   needs: any
 
 # How fast SAM 2.1 tiny runs on a CPU is measured when the lesson is built.

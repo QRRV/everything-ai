@@ -272,7 +272,8 @@ def scores(pred, C, iou_fn=kind_iou) -> tuple[float, list[float]]:
 def train(model, data, test, seed: int = 0, epochs: int = EPOCHS, heard=None, iou_fn=kind_iou) -> list[dict]:
     """Train `model` on data = (X, C) with the cross-entropy of every pixel, as the course measured, and measure it
     on test after every epoch: its loss, the share of pixels right and the IoU of every kind. `heard` hears every 10
-    batches how far an epoch is, and after every epoch what it measured, with the class of every test pixel."""
+    batches how far an epoch is, with the mean loss of those 10 batches ("loss"), and after every epoch what it
+    measured, with the class of every test pixel."""
     X, C = data
     Xt, Ct = test
     n = len(X)
@@ -286,7 +287,7 @@ def train(model, data, test, seed: int = 0, epochs: int = EPOCHS, heard=None, io
     model.train()
     for epoch in range(1, epochs + 1):
         order = torch.randperm(n, generator=order_rng)
-        running = 0.0
+        running = reported = 0.0
         for b, i in enumerate(range(0, n, BATCH), 1):
             idx = order[i:i + BATCH]
             loss = F.cross_entropy(model(X[idx].float() / 255), C[idx])
@@ -297,7 +298,8 @@ def train(model, data, test, seed: int = 0, epochs: int = EPOCHS, heard=None, io
             sched.step()
             running += loss.item()
             if heard is not None and b % 10 == 0:
-                heard({"epoch": epoch, "epochs": epochs, "batch": b, "batches": per})
+                heard({"epoch": epoch, "epochs": epochs, "batch": b, "batches": per, "loss": (running - reported) / 10})
+                reported = running
         out = outputs(model, Xt)
         pred = out.argmax(1)
         acc, ious = scores(pred, Ct, iou_fn)
@@ -604,14 +606,36 @@ def curves_picture(curves: dict, labels: dict, lang: str, at: int | None = None)
     mine = [v for v in train_l + val if math.isfinite(v)]
     top = max([0.2] + [1.1 * v for v in mine])
     p = chart.Panel((0.5, max(len(val), len(train_l), 1) + 0.5), (0, top), title=labels["title"], xlabel=labels["x"], ylabel=labels["y"])
-    for ys, dashed, name, dy in ((train_l, False, labels["train"], 0.07), (val, True, labels["val"], -0.08)):
+    drawn = [(ys, name) for ys, name in ((train_l, labels["train"]), (val, labels["val"])) if ys]
+    for ys, dashed in ((train_l, False), (val, True)):
         if ys:
             p.line(list(range(1, len(ys) + 1)), ys, "loss", 2.2, dashed=dashed)
-            p.text(len(ys) - 0.3 if len(ys) > 1 else 1, ys[-1] + dy * top, name, "loss", "end")   # clear of the line at the last epoch
+    drawn.sort(key=lambda d: d[0][-1], reverse=True)
+    for (ys, name), y in zip(drawn, name_heights([ys[-1] for ys, _ in drawn], top)):
+        p.text(len(ys) - 0.3 if len(ys) > 1 else 1, y, name, "loss", "end")   # clear of the line at the last epoch
     if at is not None:
         p.line([at, at], [0, top], "ink-2", 1.2)
     svg = chart.figure([p], alt=labels["alt"], width=276, height=200)   # 11 px text in a play box on a phone
     return chart.with_decimal_comma(svg) if lang == "nl" else svg
+
+
+def name_heights(ends: list, top: float) -> list:
+    """Where the names of one or two lines go at their last epoch, given where they end (the higher end first) on a
+    y-axis from 0 to top: over the line that ends higher and under the other. A name is about 0.1 of the axis high.
+    Where there is no room over the higher line, its name goes under it too; where there is no room under the lower
+    one, its name goes just over it when the higher line is far enough above, and else both names go over both lines,
+    the name of the higher line on top."""
+    if len(ends) < 2:
+        return [e + 0.07 * top if e + 0.07 * top <= 0.95 * top else e - 0.08 * top for e in ends]
+    hi, lo = ends
+    up, down = hi + 0.07 * top, lo - 0.08 * top
+    if up > 0.95 * top:                          # the higher line ends at the top: both names under their lines
+        return [hi - 0.08 * top, down if hi - lo > 0.2 * top else hi - 0.23 * top]
+    if down >= 0.06 * top:
+        return [up, down]
+    if hi - lo > 0.2 * top:                      # the lower line's name fits between the two lines
+        return [up, lo + 0.07 * top]
+    return [hi + 0.22 * top, hi + 0.07 * top]    # both end close together near 0: both names over them
 
 
 def rewind_picture(maps: list, words: dict) -> str:
