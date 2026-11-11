@@ -15,6 +15,7 @@ import torch   # imported once, when the lesson opens: the first import takes lo
 
 from everything_ai import scenes
 from everything_ai.check import Mistake, ScenarioBox
+from everything_ai import yours
 
 SEED = 18                    # the scene of the worked example, as in cv-annotations, cv-iou and cv-nms
 CELLS, STRIDE = 16, 8        # a feature map of 16 by 16 squares, each for 8 by 8 pixels of the scene of 128 by 128
@@ -613,6 +614,7 @@ _BF_MISTAKES = [
 EXERCISES = {
     "match": ScenarioBox(
         name="match",
+        picture=yours.arrays(call=0, show=("ious",), result="match(ious)"),
         start=_MA_START,
         solution=_MA,
         scenarios=_MA_SCENARIOS,

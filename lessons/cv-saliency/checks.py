@@ -18,6 +18,7 @@ import torch   # imported once, when the lesson opens: the first import takes lo
 
 from everything_ai import models, paths, projects
 from everything_ai.check import Mistake, ScenarioBox, run_code, with_time_limit
+from everything_ai import yours
 
 
 def _lesson_checks(lesson_id: str):
@@ -538,6 +539,7 @@ _MS_WRONG = {
 EXERCISES = {
     "saliency": ScenarioBox(
         name="saliency",
+        picture=yours.image(call=0, result="sal / sal.max()"),
         start=_SAL_START,
         solution=_SAL,
         scenarios=_SAL_SCENARIOS,
@@ -620,6 +622,7 @@ EXERCISES = {
     ),
     "most-salient": ScenarioBox(
         name="most-salient",
+        picture=yours.arrays(call=0, show=("sal",), result="mask", shade=True),
         start=_MS_START,
         solution=_MS,
         scenarios=_MS_SCENARIOS,

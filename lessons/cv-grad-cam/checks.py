@@ -21,6 +21,7 @@ import torch   # imported once, when the lesson opens: the first import takes lo
 
 from everything_ai import models, paths, projects
 from everything_ai.check import Mistake, ScenarioBox, run_code, with_time_limit
+from everything_ai import yours
 
 
 def _lesson_checks(lesson_id: str):
@@ -575,6 +576,7 @@ _GC_MISTAKES = [
 EXERCISES = {
     "class-map": ScenarioBox(
         name="class-map",
+        picture=yours.arrays(call=0, show=("weights",), result="class_map(maps, weights)", shade=True),
         start=_CM_START,
         solution=_CM,
         scenarios=_CM_SCENARIOS,
@@ -599,6 +601,7 @@ EXERCISES = {
     ),
     "grad-cam": ScenarioBox(
         name="grad-cam",
+        picture=yours.arrays(call=0, result="cam", shade=True),
         start=_GC_START,
         solution=_GC,
         scenarios=_GC_SCENARIOS,

@@ -20,6 +20,7 @@ from torch import nn
 
 from everything_ai import chart, paths, projects, scenes
 from everything_ai.check import Mistake, ScenarioBox, Timeout, run_code, with_time_limit
+from everything_ai import yours
 
 
 def _lesson_checks(lesson_id: str):
@@ -746,6 +747,7 @@ _H_MISTAKES = [
 EXERCISES = {
     "pyramid": ScenarioBox(
         name="pyramid",
+        picture=yours.image(call=0, result="[p[0, 0] for p in ps]"),
         start=_Y_START,
         solution=_Y,
         scenarios=_Y_SCENARIOS,

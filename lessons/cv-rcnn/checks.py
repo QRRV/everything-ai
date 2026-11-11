@@ -20,6 +20,7 @@ from torch import nn
 
 from everything_ai import chart, paths, projects, scenes
 from everything_ai.check import Mistake, ScenarioBox, Timeout, run_code, with_time_limit
+from everything_ai import yours
 
 
 def _lesson_checks(lesson_id: str):
@@ -800,6 +801,7 @@ _P_MISTAKES = [
 EXERCISES = {
     "roi-pool": ScenarioBox(
         name="roi-pool",
+        picture=yours.arrays(call=0, result="tuple(roi_pool(maps, (5.5, 9.0, 30.2, 44.0), 2))", shade=True),
         start=_R_START,
         solution=_R,
         scenarios=_R_SCENARIOS,

@@ -22,6 +22,7 @@ from torch import nn
 
 from everything_ai import chart, projects, scenes
 from everything_ai.check import Mistake, ScenarioBox, Timeout, run_code, with_time_limit
+from everything_ai import yours
 
 SEED = 18                     # the scene of the worked example: scenes.scene(18), the scene of cv-annotations and cv-iou
 KINDS = scenes.KINDS          # circle, square, triangle: classes 1 to 3; 0 is background
@@ -915,6 +916,7 @@ _I_MISTAKES = [
 EXERCISES = {
     "class-map": ScenarioBox(
         name="class-map",
+        picture=yours.image(call=0, result="classes"),
         start=_C_START,
         solution=_C,
         scenarios=_C_SCENARIOS,
@@ -937,6 +939,7 @@ EXERCISES = {
     ),
     "transposed": ScenarioBox(
         name="transposed",
+        picture=yours.arrays(call=0, show=("x", "kernel"), result="transposed(x, kernel, 2)", shade=True),
         start=_T_START,
         solution=_T,
         scenarios=_T_SCENARIOS,
@@ -958,6 +961,7 @@ EXERCISES = {
     ),
     "upsampler": ScenarioBox(
         name="upsampler",
+        picture=yours.arrays(call=0, result="bilinear_kernel(4)", shade=True),
         start=_U_START,
         solution=_U,
         scenarios=_U_SCENARIOS,

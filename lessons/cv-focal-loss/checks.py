@@ -18,6 +18,7 @@ import torch.nn.functional as F
 
 from everything_ai import chart, paths, projects, scenes
 from everything_ai.check import Mistake, ScenarioBox, Timeout, run_code, with_time_limit
+from everything_ai import yours
 
 
 def _lesson_checks(lesson_id: str):
@@ -624,6 +625,7 @@ _B_MISTAKES = [
 EXERCISES = {
     "focal-loss": ScenarioBox(
         name="focal-loss",
+        picture=yours.series(call=1, xs=[0.0, 0.5, 1.0, 2.0, 5.0], role="loss", xlabel="gamma"),
         start=_L_START,
         solution=_L,
         scenarios=_L_SCENARIOS,

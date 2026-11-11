@@ -792,37 +792,14 @@ def arrays(call: int | None = None, *, show: tuple[str, ...] = (), result: str |
     gives back. With `shade`, each cell gets a grey wash as strong as its number is large. With `column`, a result
     with one number per row of what it starts from (a mean along axis 1) stands as a column, beside those rows."""
     def picture(seen: checking.Seen) -> str:
-        ex = seen.exercise
         mine = seen.mine
         if mine is None:
             return ""
         lang = seen.lang
-        start: list[tuple[str, object]] = []
-        if call is None:
-            got = mine.names.get(result) if result else mine.value
-            want = seen.want.names.get(result) if result else seen.want.value
-            start = [(k, mine.names[k]) for k in show if k in mine.names]
-            what = result or (seen.text.strip().splitlines() or [""])[-1].strip()
-        else:
-            case = (list(ex.visible) + list(ex.hidden))[call]
-            fn, right = mine.names.get(ex.function), seen.want.names.get(ex.function)
-            if not callable(fn) or not callable(right):
-                return ""
-            try:
-                params = list(inspect.signature(right).parameters)
-            except (TypeError, ValueError):
-                params = []
-            start = [(params[i] if i < len(params) else f"#{i}", a) for i, a in enumerate(case)]
-            try:
-                with contextlib.redirect_stdout(io.StringIO()), warnings.catch_warnings():
-                    warnings.simplefilter("ignore")
-                    got = checking.with_time_limit(lambda: fn(*(checking._copy(a) for a in case)))
-            except Exception:
-                return ""
-            want = right(*(checking._copy(a) for a in case))
-            what = ex._call_text(case)
-            if len(what) > 34:
-                what = f"{ex.function}(…)"
+        out = _outcome(seen, call, show, result)
+        if out is None:
+            return ""
+        got, want, start, what = out
         if _several(got):   # a list of arrays, such as [dW, dX]: a grid for each
             pieces = [_grid_svg(f"{name}  {_shape(value)}", g, shade=shade) for name, value in start
                       if (g := _as_grid(value)) is not None and g.size > 1]
@@ -1178,7 +1155,6 @@ def series(call: int | None = None, *, of: tuple[str, ...] = (), xs: list | None
         return [[float(v) for v in row] for row in g]
 
     def picture(seen: checking.Seen) -> str:
-        ex = seen.exercise
         mine = seen.mine
         if mine is None:
             return ""
@@ -1187,20 +1163,11 @@ def series(call: int | None = None, *, of: tuple[str, ...] = (), xs: list | None
                 return ""
             got = [mine.names[k] for k in of] if len(of) > 1 else mine.names[of[0]]
             want = [seen.want.names.get(k) for k in of] if len(of) > 1 else seen.want.names.get(of[0])
-        elif call is None:
-            got, want = mine.value, seen.want.value
         else:
-            case = (list(ex.visible) + list(ex.hidden))[call]
-            fn, right = mine.names.get(ex.function), seen.want.names.get(ex.function)
-            if not callable(fn) or not callable(right):
+            out = _outcome(seen, call)
+            if out is None:
                 return ""
-            try:
-                with contextlib.redirect_stdout(io.StringIO()), warnings.catch_warnings():
-                    warnings.simplefilter("ignore")
-                    got = checking.with_time_limit(lambda: fn(*(checking._copy(a) for a in case)))
-            except Exception:
-                return ""
-            want = right(*(checking._copy(a) for a in case))
+            got, want = out[0], out[1]
         mine_l, want_l = lines(got), lines(want)
         if mine_l is None:
             return ""
@@ -1313,11 +1280,26 @@ def _outcome(seen: checking.Seen, call: int | None, show: tuple[str, ...] = (), 
     """What the learner's code makes and what it should make, with what it starts from: (got, want, start, what).
     A code box gives the value of its last line, or of the name `result`, and starts from the names in `show`; a
     function exercise gives what it gives back for case `call`, and starts from that case's arguments. `what` says
-    in a few signs where the value comes from. None when the learner's code does not run or stops with an error."""
+    in a few signs where the value comes from. None when the learner's code does not run or stops with an error.
+    A class exercise (ClassBox) runs scenario `call` after the learner's code, with `result` as its last line if given
+    (an expression, such as `class_map(scene(18))`), and starts from the names in `show` that the scenario makes."""
     ex = seen.exercise
     mine = seen.mine
     if mine is None:
         return None
+    if isinstance(ex, checking.ClassBox) and call is not None:
+        lines = ex.scenarios[call].rstrip().split("\n")
+        last = result or lines[-1].strip()
+        setup = "\n".join(lines[:-1])
+
+        def made(code: str):
+            return checking.run_code(code + "\n\n" + setup + "\n" + last, seen.names)
+        run = made(seen.text)
+        if run.error is not None or run.timeout or not run.has_value:
+            return None
+        right = seen.remember(("scenario", call, last), lambda: made(ex.solution))
+        start = [(k, run.names[k]) for k in show if k in run.names]
+        return run.value, right.value, start, _cut(last, 34)
     if call is None:
         got = mine.names.get(result) if result else mine.value
         want = seen.want.names.get(result) if result else seen.want.value
@@ -1406,8 +1388,8 @@ def histogram(call: int | None = None, *, bins: int = 24, role: str = "data", xl
 
 def _png(value, size: int) -> str | None:
     """An array as an <img> of itself: 2-D in grey, 3-D with 3 or 4 channels in colour. Numbers from 0 to 1, colours
-    and whole numbers from 0 to 255 stand as they are; other numbers go from black at the smallest to white at the
-    largest.
+    and whole numbers from 0 to 255 stand as they are, except labels (whole numbers up to 15, such as classes 0 to 3),
+    which spread from black to white, as other numbers do from the smallest to the largest.
     A small image is drawn larger, with sharp pixels, so that each pixel can be seen."""
     import base64
     import numpy as np
@@ -1436,7 +1418,7 @@ def _png(value, size: int) -> str | None:
     lo, hi = float(a.min()), float(a.max())
     if lo >= 0 and hi <= 1:
         a = a * 255
-    elif not (lo >= 0 and hi <= 255 and (colour or whole)):   # colours from 0 to 255 stay the colours they are
+    elif not (lo >= 0 and hi <= 255 and (colour or whole and hi > 15)):   # colours from 0 to 255 stay the colours they are
         a = (a - lo) / ((hi - lo) or 1) * 255
     img = Image.fromarray(np.clip(a, 0, 255).round().astype(np.uint8))
     buffer = io.BytesIO()
@@ -1460,6 +1442,8 @@ def image(call: int | None = None, *, show: tuple[str, ...] = (), result: str | 
             return ""
         got, want, start, what = out
         lang = seen.lang
+        if _images(got):
+            return _image_list(seen, got, want, what, size, title)
         mine_img = _png(got, size)
         if mine_img is None:
             return ""
@@ -1480,6 +1464,36 @@ def image(call: int | None = None, *, show: tuple[str, ...] = (), result: str | 
         heading = seen.word(title) if title is not None else _word("yours-image", lang)
         return _figure(heading, body, alt=f"{what}  {_shape(got)}")
     return picture
+
+
+def _images(value) -> bool:
+    """A list or tuple of 2 to 4 images, such as the levels of a feature pyramid."""
+    return (isinstance(value, (list, tuple)) and 1 < len(value) <= 4
+            and all((a := _as_array(v)) is not None and (a.ndim == 2 or a.ndim == 3 and a.shape[2] in (1, 3, 4))
+                    for v in value))
+
+
+def _image_list(seen: checking.Seen, got, want, what: str, size: int, title: Text | None) -> str:
+    """The images of image(), for a list: each as large as it is next to the largest, the right one under it where
+    the learner's differs."""
+    lang = seen.lang
+    biggest = max(max(_as_array(v).shape[:2]) for v in got)
+    columns = []
+    for i, value in enumerate(got):
+        a = _as_array(value)
+        px = max(40, round(size * max(a.shape[:2]) / biggest))
+        pieces = [f'<span style="{_MONO};font-size:0.8rem;color:var(--ea-ink-2)">[{i}]  {_shape(value)}</span>{_png(value, px)}']
+        other = _as_array(want[i]) if _images(want) and i < len(want) else None
+        if other is not None and (other.shape != a.shape or not bool(
+                (abs(a.astype(float) - other.astype(float)) <= 1e-6 + 1e-4 * abs(other.astype(float))).all())):
+            pieces.append(f'<span style="{_MONO};font-size:0.8rem;color:var(--ea-ink-2)">{_word("yours-right", lang)}</span>'
+                          f'{_png(want[i], px)}')
+        columns.append(f'<div style="display:flex;flex-direction:column;gap:0.2rem">{"".join(pieces)}</div>')
+    body = (f'<div style="{_MONO};font-size:0.8rem;color:var(--ea-ink-2);margin-bottom:0.3rem">{_word("yours-code", lang)}: '
+            f'{html.escape(what)}</div><div style="display:flex;flex-wrap:wrap;gap:0.5rem 1.1rem;align-items:flex-start">'
+            f'{"".join(columns)}</div>')
+    heading = seen.word(title) if title is not None else _word("yours-image", lang)
+    return _figure(heading, body, alt=what)
 
 
 def _as_array(value):
