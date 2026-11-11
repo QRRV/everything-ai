@@ -25,6 +25,8 @@ CORNERS = {"circle": 0, "square": 4, "triangle": 3}   # its keypoints: a circle 
 SHAPES = (3, 5)                             # a scene has from 3 to 5 shapes
 RADIUS = (10.0, 22.0)                       # from the centre of a shape to its edge (circle) or its corners
 SMALLEST = 60                               # every shape keeps at least this many pixels in sight
+SPREAD_RADIUS = (5.0, 40.0)                 # the radius of a shape in a scene with spread=True, for cv-fpn
+SHARE, FEWEST = 0.5, 20                     # there, every shape keeps this share of its pixels, and this many, in sight
 TRIES = 1000                                # scenes drawn for one seed before `scene` gives up
 # Colours that stand out from the grey background and from each other; a shape gets one at random, so that its
 # colour does not give its kind away.
@@ -91,10 +93,15 @@ def _background(rng: np.random.Generator, size: int) -> np.ndarray:
     return np.repeat(np.clip(grey, 0, 255)[:, :, None], 3, axis=2)
 
 
-def scene(seed: int, size: int = SIZE, count: int | None = None) -> Scene:
-    """The scene of this seed: from 3 to 5 shapes, or `count`, each at least SMALLEST pixels in sight."""
-    if size < 2 * RADIUS[1] + 4:
-        raise ValueError(f"a scene needs at least {int(2 * RADIUS[1] + 4)} by {int(2 * RADIUS[1] + 4)} pixels for its largest shape")
+def scene(seed: int, size: int = SIZE, count: int | None = None, spread: bool = False) -> Scene:
+    """The scene of this seed: from 3 to 5 shapes, or `count`, each at least SMALLEST pixels in sight. With `spread`,
+    the shapes are small and large: the radius goes from 5 to 40 pixels (SPREAD_RADIUS), spread evenly over the scales
+    (its logarithm is uniform), so that a shape is as likely to be twice as large as another as half as large; every
+    shape then keeps at least half its pixels, and at least 20, in sight. The same seed gives another scene with
+    `spread` than without."""
+    lo, hi = SPREAD_RADIUS if spread else RADIUS
+    if size < 2 * hi + 4:
+        raise ValueError(f"a scene needs at least {int(2 * hi + 4)} by {int(2 * hi + 4)} pixels for its largest shape")
     if count is not None and count < 1:
         raise ValueError("a scene has at least one shape")
     rng = np.random.default_rng(seed)
@@ -106,7 +113,7 @@ def scene(seed: int, size: int = SIZE, count: int | None = None) -> Scene:
         n = int(rng.integers(SHAPES[0], SHAPES[1] + 1))
         for i in range(count if count is not None else n):
             kind = KINDS[int(rng.integers(len(KINDS)))]
-            radius = float(rng.uniform(*RADIUS))
+            radius = float(math.exp(rng.uniform(math.log(lo), math.log(hi)))) if spread else float(rng.uniform(lo, hi))
             centre = (float(rng.uniform(radius + 1, size - radius - 2)), float(rng.uniform(radius + 1, size - radius - 2)))
             angle = float(rng.uniform(0, 2 * math.pi))
             corners = _corners(kind, centre, radius, angle)
@@ -116,10 +123,10 @@ def scene(seed: int, size: int = SIZE, count: int | None = None) -> Scene:
             noise = rng.normal(0, 4, (int(pixels.sum()), 3))
             image[pixels] = np.clip(np.array(colour) + noise, 0, 255)
             drawn.append((kind, centre, radius, angle, corners, pixels))
-        if all((owner == i).sum() >= SMALLEST for i in range(len(drawn))):
+        if all((owner == i).sum() >= (max(FEWEST, SHARE * d[5].sum()) if spread else SMALLEST) for i, d in enumerate(drawn)):
             break
     else:
-        raise ValueError(f"no scene of {count} shapes keeps {SMALLEST} pixels of each in sight; try fewer shapes")
+        raise ValueError(f"no scene of {count} shapes keeps enough pixels of each in sight; try fewer shapes")
     shapes = []
     for i, (kind, centre, radius, angle, corners, pixels) in enumerate(drawn):
         mask = owner == i
@@ -186,7 +193,7 @@ def proposals(s: Scene, seed: int, per: int = 7) -> tuple[list[tuple[int, int, i
 
 
 MISS, WRONG, SECOND, EXTRA = 0.1, 0.08, 0.12, 0.4   # how often `detections` misses a shape, names the wrong kind,
-SPREAD = 0.08                                       # adds a looser second box, puts a box on the background; how far
+JITTER = 0.08                                       # adds a looser second box, puts a box on the background; how far
                                                     # it moves and stretches a box
 
 
@@ -232,14 +239,14 @@ def detections(scenes: list[Scene], seed: int) -> list[tuple[int, str, float, tu
         for shape in s.shapes:
             if rng.random() < MISS:
                 continue
-            box = moved(shape.box, SPREAD)
+            box = moved(shape.box, JITTER)
             kind = shape.kind
             if rng.random() < WRONG:
                 kind = KINDS[(shape.label + int(rng.integers(1, len(KINDS)))) % len(KINDS)]
             base = 0.25 + 0.7 * _iou(box, shape.box) ** 2 + rng.normal(0, 0.1)
             boxes.append((kind, base, box))
             if rng.random() < SECOND:
-                boxes.append((shape.kind, base - rng.uniform(0.1, 0.4), moved(shape.box, 2.5 * SPREAD)))
+                boxes.append((shape.kind, base - rng.uniform(0.1, 0.4), moved(shape.box, 2.5 * JITTER)))
         for _ in range(int(rng.poisson(EXTRA))):
             for _ in range(TRIES):
                 h, w = int(rng.integers(14, 40)), int(rng.integers(14, 40))

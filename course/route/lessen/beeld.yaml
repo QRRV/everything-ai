@@ -629,10 +629,21 @@ lessons:
   module: detection
   idea: "Deep feature maps know what is there but are coarse, early ones are sharp but know little; a feature pyramid network makes the deep maps larger again with nearest-neighbor interpolation, gives the earlier ones the same number of channels with a 1×1 convolution and adds them up, so that every scale has both and the detector finds small objects too."
   covers: [objectdetectie#4]
+  # Measured on the course's scenes with spread=True (radius 5-40 px; checks.py, REFERENCE and TRAINED): the backbone
+  # of cv-one-stage-detector with two more parts, C2-C5 (32/64/128/128 channels, squares of 4-32 px); lateral 1x1 to
+  # 32 channels, nearest-neighbor x2 top down, smooth 3x3; one shared head (2 anchors x 8); anchors 2 and 2*sqrt(2)
+  # squares wide per level, 2,720 in all; 299,728 parameters. Loss with hard negative mining (3 background anchors per
+  # positive at most, as SSD); with the plain loss of cv-one-stage-detector it finds 9 of 786 shapes. 8 epochs, batch 32, one
+  # thread (~170 s). Seeds 0-4, 786 test shapes (268 small, 282 medium, 236 large): FPN 727-741 found (small 244-249),
+  # mAP 0.934-0.950; without the top-down path 731-739 (small 242-252), mAP 0.947-0.957; all anchors on C4 553-573
+  # (small 129-143), mAP 0.761-0.790; all on C2 687-706 (small 202-219), 505-546 false boxes, mAP 0.814-0.844.
   requires: [cv-one-stage-detector, cv-1x1-convolution]
-  introduces: [c:feature-pyramid-network, py:interpolate]
+  introduces: [c:feature-pyramid-network, c:lateral-connection, c:image-pyramid, c:hard-negative-mining, py:interpolate]
+  uses: [c:one-stage-detector, c:backbone, c:anchor-box, c:box-offset, c:intersection-over-union, c:bounding-box, c:object-detection, c:non-maximum-suppression, c:confidence-score, c:score-threshold, c:mean-average-precision, c:average-precision, c:pointwise-convolution, c:nearest-neighbor-interpolation, c:interpolation, c:feature-map, c:convolution, c:filter, c:output-channel, c:kernel-size, c:padding, c:pooling, c:receptive-field, c:batchnorm, c:relu, c:layer, c:channel, c:logit, c:cross-entropy, c:mean-absolute-error, c:loss, c:training, c:epoch, c:mini-batch, c:train-set, c:test-set, c:seed, c:model-parameter, c:weight, c:tensor, c:shape, c:axis, c:class, c:label, c:pixel, c:recall, v:loss-curve, py:nn-sequential, py:nn-batchnorm2d, py:nn-relu, py:nn-conv2d, py:nn-maxpool2d, py:torch-tensor, py:torch-permute, py:torch-reshape, py:torch-unsqueeze, py:torch-cat, py:no-grad, py:with, py:manual-seed, py:math-module, py:indexing, py:dim, py:list, py:append, py:reversed, py:comprehension, py:for, py:range, py:tuple, py:len, py:keyword-argument, py:method, py:def, py:return, py:import, py:import-as, py:print, py:comment, py:variable, py:arithmetic, py:comparison, py:round, py:int, py:float, q:predict, q:choice, q:exercise-with-check, q:slider-task, q:explain, q:run-cell]
+  mentions: [c:region-proposal-network, c:faster-r-cnn, c:two-stage-detector, c:upsampling, c:focal-loss, c:retinanet]
   ladder: [torch]
   data: [course-scenes]
+  reference_data: []
   needs: any
 
 - id: cv-focal-loss

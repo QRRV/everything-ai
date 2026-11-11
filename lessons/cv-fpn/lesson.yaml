@@ -1,0 +1,39 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: cv-fpn
+minutes: 45
+title:
+  en: "A feature pyramid for small and large objects"
+  nl: "Een feature pyramid voor kleine en grote voorwerpen"
+goal:
+  en: "build a feature pyramid network on the backbone of your one-stage detector, from the top down with 1×1 convolutions and nearest-neighbor interpolation, give the anchors of every level their rows with one head, train it with hard negative mining, and see which level finds which shapes."
+  nl: "een feature pyramid network bouwen op de backbone van je one-stage detector, van boven naar beneden met 1×1 convolutions en nearest-neighbor-interpolatie, de anchors van elk niveau met één head hun rijen geven, het trainen met hard negative mining, en zien welk niveau welke vormen vindt."
+summary:
+  - en: "Deep feature maps know what is there, but are coarse; early ones are sharp, but know little. An image pyramid runs the detector on the photo at several sizes, about four times slower. A feature pyramid network (2017) makes maps of every size from the backbone instead: from the top down, the level above made twice as large with nearest-neighbor interpolation, plus the map of the backbone through a 1×1 convolution, the lateral connection, and a 3×3 convolution after adding."
+    nl: "Diepe feature maps weten wat er is, maar zijn grof; vroege zijn scherp, maar weten weinig. Een beeldpiramide laat de detector op de foto in verschillende groottes lopen, zo'n vier keer langzamer. Een feature pyramid network (2017) maakt in plaats daarvan maps van elke grootte uit de backbone: van boven naar beneden het niveau erboven twee keer zo groot gemaakt met nearest-neighbor-interpolatie, plus de map van de backbone door een 1×1 convolution, de lateral connection, en na het optellen een 3×3-convolutie."
+  - en: "Every level gets its own anchors, 2 and 2√2 of its squares wide, so a shape is learned by the anchors of the level whose size fits it, and one head gives the anchors of every level their rows. With 2,720 anchors, about 10 learn a shape in a scene; hard negative mining, as in SSD, counts all of them and three times as many background anchors, those with the highest loss."
+    nl: "Elk niveau krijgt zijn eigen anchors, 2 en 2√2 van zijn vakjes breed, dus een vorm wordt geleerd door de anchors van het niveau waarvan de grootte past, en één head geeft de anchors van elk niveau hun rijen. Met 2.720 anchors leren er in een scène zo'n 10 een vorm; hard negative mining, zoals in SSD, telt die allemaal en drie keer zoveel achtergrond-anchors, die met de hoogste loss."
+  - en: "Trained for 8 epochs on 2,000 scenes with small and large shapes, an FPN detector of 299,728 parameters finds 727 to 741 of the 786 shapes of 200 new scenes, 244 to 249 of the 268 small ones, with an mAP of 0.934 to 0.950; with all its anchors on one coarse map, a detector finds 129 to 143 of the small ones. On these scenes, a pyramid without the way down does as well, even a little better; on the photos of COCO, the way down made the difference for small objects."
+    nl: "Getraind in 8 epochs op 2.000 scènes met kleine en grote vormen vindt een FPN-detector van 299.728 parameters 727 tot 741 van de 786 vormen van 200 nieuwe scènes, 244 tot 249 van de 268 kleine, met een mAP van 0,934 tot 0,950; met al zijn anchors op één grove map vindt een detector 129 tot 143 van de kleine. Op deze scènes doet een pyramid zonder de weg naar beneden het even goed, zelfs een beetje beter; op de foto's van COCO maakte de weg naar beneden het verschil voor kleine voorwerpen."
+can_now:
+  - en: "explain why one head can serve every level of a feature pyramid"
+    nl: "uitleggen waarom één head elk niveau van een feature pyramid kan bedienen"
+    by: head
+  - en: "build the levels of a feature pyramid network from the maps of a backbone, from the top down"
+    nl: "de niveaus van een feature pyramid network bouwen uit de maps van een backbone, van boven naar beneden"
+    by: pyramid
+  - en: "give the anchors of every level their rows with one head, in the order of the anchors"
+    nl: "de anchors van elk niveau met één head hun rijen geven, in de volgorde van de anchors"
+    by: head-rows
+  - en: "say which anchors the loss counts with hard negative mining, and why"
+    nl: "zeggen welke anchors de loss telt met hard negative mining, en waarom"
+    by: background
+  - en: "explain what the way down gives the sharp levels, and why it matters more in photos than in simple scenes"
+    nl: "uitleggen wat de weg naar beneden de scherpe niveaus geeft, en waarom dat in foto's meer uitmaakt dan in eenvoudige scènes"
+    by: why-top-down
+further_reading:
+  - en: "Tsung-Yi Lin, Piotr Dollár, Ross Girshick, Kaiming He, Bharath Hariharan and Serge Belongie (2017), *Feature Pyramid Networks for Object Detection*: section 3, the way down with nearest-neighbor upsampling, lateral connections and a 3×3 convolution after adding; section 4.1, the region proposal network on the pyramid, with 15 anchors and one shared head; and Table 1 in section 5.1, the pyramid with and without the way down"
+    nl: "Tsung-Yi Lin, Piotr Dollár, Ross Girshick, Kaiming He, Bharath Hariharan en Serge Belongie (2017), *Feature Pyramid Networks for Object Detection*: paragraaf 3, de weg naar beneden met nearest-neighbor upsampling, lateral connections en een 3×3-convolutie na het optellen; paragraaf 4.1, het region proposal network op de pyramid, met 15 anchors en één gedeelde head; en tabel 1 in paragraaf 5.1, de pyramid met en zonder de weg naar beneden"
+  - en: "Wei Liu, Dragomir Anguelov, Dumitru Erhan, Christian Szegedy, Scott Reed, Cheng-Yang Fu and Alexander C. Berg (2016), *SSD: Single Shot MultiBox Detector*: section 2.1, boxes from feature maps of several sizes, and section 2.2, hard negative mining, with at most three negatives for every positive"
+    nl: "Wei Liu, Dragomir Anguelov, Dumitru Erhan, Christian Szegedy, Scott Reed, Cheng-Yang Fu en Alexander C. Berg (2016), *SSD: Single Shot MultiBox Detector*: paragraaf 2.1, boxes uit feature maps van verschillende groottes, en paragraaf 2.2, hard negative mining, met hoogstens drie negatieve voor elk positief voorbeeld"
