@@ -652,10 +652,22 @@ lessons:
   module: detection
   idea: "Almost every anchor lies on the background, and their many small, easy losses drown out the few objects; focal loss makes the cross-entropy of an anchor smaller the surer the model already is, which let RetinaNet, a one-stage detector with a feature pyramid, match the two-stage detectors."
   covers: [objectdetectie#3]
+  # Measured on the course's scenes with spread=True (checks.py, REFERENCE and TRAINED): the FPN detector of cv-fpn
+  # (2,720 anchors, one head, softmax over background and 3 kinds); focal loss summed over the anchors that are not
+  # ignored and divided by the anchors that learn a shape, plus the box loss; every anchor started at background with
+  # pi = 0.01 (background bias log 297, the kinds 0); 8 epochs, batch 32, one thread (~150 s). Seeds 0-4, 786 test
+  # shapes: gamma 2 723-734 found, 95-109 false boxes, mAP 0.944-0.951; gamma 0 (CE / shapes) 729-740, 127-145 false;
+  # gamma 1 726-741, 100-127 false; gamma 5 706-711, 71-81 false; hard negative mining (cv-fpn) 727-741, 104-114
+  # false; without the start, gamma 2 723-735 and CE / shapes 726-737 (no divergence at 2,720 anchors); mean CE 8-59
+  # found, with the start 361-428; mean focal loss 233-286. The trained gamma-2 detector: easy background anchors
+  # (p_t > 0.9) give 56% of its summed CE on the test scenes and 0.2% of its focal loss.
   requires: [cv-fpn, cv-rcnn]
   introduces: [c:focal-loss, c:retinanet]
+  uses: [c:one-stage-detector, c:two-stage-detector, c:region-proposal-network, c:faster-r-cnn, c:feature-pyramid-network, c:hard-negative-mining, c:anchor-box, c:box-offset, c:intersection-over-union, c:bounding-box, c:object-detection, c:non-maximum-suppression, c:confidence-score, c:score-threshold, c:mean-average-precision, c:average-precision, c:backbone, c:feature-map, c:convolution, c:layer, c:logit, c:softmax, c:sigmoid, c:probability, c:cross-entropy, c:mean-absolute-error, c:loss, c:training, c:epoch, c:mini-batch, c:train-set, c:test-set, c:seed, c:model-parameter, c:weight, c:bias-term, c:initialization, c:class-imbalance, c:hyperparameter, c:divergence, c:resnet, c:tensor, c:shape, c:class, c:label, c:logarithm, c:mean, s:exp, s:log, v:loss-curve, py:nn-cross-entropy-loss, py:torch-tensor, py:torch-cat, py:boolean-mask, py:math-module, py:comparison, py:indexing, py:for, py:range, py:len, py:list, py:append, py:keyword-argument, py:method, py:def, py:return, py:import, py:import-as, py:print, py:comment, py:variable, py:arithmetic, py:int, py:float, q:predict, q:choice, q:exercise-with-check, q:slider-task, q:explain, q:run-cell]
+  mentions: [c:fully-convolutional-network, c:transposed-convolution]
   ladder: [torch]
   data: [course-scenes]
+  reference_data: []
   needs: any
 
 # --- gevorderd: segmentation ----------------------------------------------------------------------------------------

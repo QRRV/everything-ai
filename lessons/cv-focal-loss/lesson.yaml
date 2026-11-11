@@ -1,0 +1,37 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: cv-focal-loss
+minutes: 45
+title:
+  en: "Focal loss and RetinaNet"
+  nl: "Focal loss en RetinaNet"
+goal:
+  en: "write the focal loss of RetinaNet, which weights the cross-entropy of every anchor by how wrong the detector still is and divides the sum by the anchors that learn a shape, work out the bias with which every anchor starts at background, train your FPN detector with both, and see what γ changes."
+  nl: "de focal loss van RetinaNet schrijven, die de cross-entropy van elke anchor weegt met hoeveel de detector er nog naast zit en de som deelt door de anchors die een vorm leren, de bias uitrekenen waarmee elke anchor bij achtergrond begint, je FPN-detector met allebei trainen, en zien wat γ verandert."
+summary:
+  - en: "A one-stage detector looks at every anchor, and almost all are background: in a scene of the course, about 10 of 2,720 learn a shape. Each easy background anchor has a small cross-entropy, but together they add up: in the course's detector trained with the focal loss, the background anchors with a probability above 0.9 give 56% of the summed cross-entropy of a scene."
+    nl: "Een one-stage detector kijkt naar elke anchor, en bijna allemaal zijn ze achtergrond: in een scène van de course leren er zo'n 10 van de 2.720 een vorm. Elke makkelijke achtergrond-anchor heeft een kleine cross-entropy, maar samen tellen ze op: in de detector van de course die met de focal loss getraind is, geven de achtergrond-anchors met een kans boven 0,9 56% van de opgetelde cross-entropy van een scène."
+  - en: "The focal loss (2017) weights the cross-entropy of every anchor by (1 − p_t)^γ: with γ = 2, an anchor at p_t = 0.9 counts a hundredth of it. RetinaNet sums it over all anchors, divides it by the anchors that learn an object, and starts every anchor at background with a probability of 0.99, through the bias of the last layer; with it, a one-stage detector found objects as well as the two-stage detectors."
+    nl: "De focal loss (2017) weegt de cross-entropy van elke anchor met (1 − p_t)^γ: met γ = 2 telt een anchor bij p_t = 0,9 voor een honderdste mee. RetinaNet telt hem op over alle anchors, deelt door de anchors die een voorwerp leren, en laat elke anchor met een kans van 0,99 bij achtergrond beginnen, via de bias van de laatste layer; daarmee vond een one-stage detector voorwerpen even goed als de two-stage detectors."
+  - en: "Trained with the focal loss, the course's FPN detector finds 723 to 734 of the 786 shapes of 200 new scenes, with 95 to 109 false boxes, as many shapes as with hard negative mining, which gave 104 to 114 false boxes. With the cross-entropy divided by the shapes, it finds as many, with 127 to 145 false boxes; with γ = 5, it gives the fewest false boxes, but also finds the fewest shapes."
+    nl: "Getraind met de focal loss vindt de FPN-detector van de course 723 tot 734 van de 786 vormen van 200 nieuwe scènes, met 95 tot 109 valse boxes, evenveel vormen als met hard negative mining, dat 104 tot 114 valse boxes gaf. Met de cross-entropy gedeeld door de vormen vindt hij er evenveel, met 127 tot 145 valse boxes; met γ = 5 geeft hij de minste valse boxes, maar vindt hij ook de minste vormen."
+can_now:
+  - en: "say how much smaller the focal loss makes the loss of an easy anchor"
+    nl: "zeggen hoeveel kleiner de focal loss de loss van een makkelijke anchor maakt"
+    by: easy
+  - en: "write the focal loss over the anchors of a detector, divided by the anchors that learn a shape"
+    nl: "de focal loss over de anchors van een detector schrijven, gedeeld door de anchors die een vorm leren"
+    by: focal-loss
+  - en: "work out the bias with which softmax starts every anchor at background"
+    nl: "de bias uitrekenen waarmee softmax elke anchor bij achtergrond laat beginnen"
+    by: background-bias
+  - en: "tell how hard negative mining and the focal loss each count the background anchors"
+    nl: "vertellen hoe hard negative mining en de focal loss elk de achtergrond-anchors meetellen"
+    by: versus
+  - en: "explain why a large γ gives fewer false boxes but finds fewer shapes"
+    nl: "uitleggen waarom een grote γ minder valse boxes geeft, maar minder vormen vindt"
+    by: why-gamma
+further_reading:
+  - en: "Tsung-Yi Lin, Priya Goyal, Ross Girshick, Kaiming He and Piotr Dollár (2017), *Focal Loss for Dense Object Detection*: section 3, from the cross-entropy to the focal loss, with Figure 1; section 3.3, the start with a probability π of an object; section 4, RetinaNet, its feature pyramid, anchors and heads; and Table 1 in section 5.1, γ, α and the comparison with hard example mining"
+    nl: "Tsung-Yi Lin, Priya Goyal, Ross Girshick, Kaiming He en Piotr Dollár (2017), *Focal Loss for Dense Object Detection*: paragraaf 3, van de cross-entropy naar de focal loss, met figuur 1; paragraaf 3.3, het begin met een kans π op een voorwerp; paragraaf 4, RetinaNet, zijn feature pyramid, anchors en heads; en tabel 1 in paragraaf 5.1, γ, α en de vergelijking met hard example mining"
