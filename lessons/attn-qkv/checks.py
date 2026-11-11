@@ -9,7 +9,7 @@ import torch   # imported once, when the lesson opens: the first import takes lo
 
 from everything_ai import draw
 from everything_ai.check import ClassBox, FunctionBox, Mistake, run_code
-from everything_ai import yours
+from everything_ai import netview, yours
 
 # "a red car" with made-up embeddings of 2 numbers: how much a word describes, and how much it is a thing.
 SENTENCE = ["a", "red", "car"]
@@ -188,6 +188,7 @@ EXERCISES = {
     ),
     "self-attention-module": ClassBox(
         name="self-attention-module",
+        picture=netview.network("SelfAttention", lambda: torch.rand(5, 4), 4, 3, scores=False),
         start=_M_START,
         solution=_m(),
         scenarios=_M_SCENARIOS,

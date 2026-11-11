@@ -16,6 +16,7 @@ from torch.utils.data import DataLoader, TensorDataset
 
 from everything_ai import paths
 from everything_ai.check import ClassBox, Mistake
+from everything_ai import netview, yours
 
 DATA = "data/qmnist-small.npz"   # the first 6,000 training and 1,000 test images of QMNIST: see data/README.md
 N_TRAIN, HIDDEN, LR, EPOCHS = 500, 256, 0.1, 100
@@ -227,6 +228,7 @@ EXERCISES = {
     ),
     "dropout-mlp": ClassBox(
         name="dropout-mlp",
+        picture=netview.network("DropoutMLP", lambda: yours.digit_batch(flat=True), 8, 0.5),
         start=_M_START,
         solution=_m(),
         scenarios=_M_SCENARIOS,

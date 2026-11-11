@@ -13,6 +13,7 @@ from torch.utils.data import DataLoader, TensorDataset
 
 from everything_ai import draw, paths, projects
 from everything_ai.check import ClassBox, Mistake, Timeout, run_code, with_time_limit
+from everything_ai import netview, yours
 
 # The demo trains with the learner's Trainer of nn-trainer and runs their overfit test and DeepMLP of
 # nn-deep-net-project, or the course's versions where theirs are missing or broken. The Trainer imports train_epoch.
@@ -139,6 +140,7 @@ _P_SCENARIOS = [
 EXERCISES = {
     "small-cnn": ClassBox(
         name="small-cnn",
+        picture=netview.network("SmallCNN", yours.digit_batch, chosen=0),
         start=_S_START,
         solution=_S,
         scenarios=_S_SCENARIOS,

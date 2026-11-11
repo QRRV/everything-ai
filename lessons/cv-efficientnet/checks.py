@@ -24,6 +24,7 @@ from torch.utils.data import DataLoader, TensorDataset
 
 from everything_ai import chart, draw, live, paths, projects
 from everything_ai.check import Mistake, ScenarioBox, Sort, Timeout, run_code, with_time_limit
+from everything_ai import netview, yours
 
 
 def _lesson_checks(lesson_id: str):
@@ -396,6 +397,7 @@ EXERCISES = {
     "costs": _SORT,
     "scaled": ScenarioBox(
         name="scaled",
+        picture=netview.network("ScaledCNN", yours.scene_batch, 2, 64, chosen=1),
         start=_N_START,
         solution=_N,
         scenarios=_N_SCENARIOS,

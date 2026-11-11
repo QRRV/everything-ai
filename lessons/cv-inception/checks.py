@@ -18,6 +18,7 @@ from torch.utils.data import DataLoader, TensorDataset
 
 from everything_ai import chart, draw, live, paths, projects
 from everything_ai.check import Mistake, ScenarioBox, Sort, Timeout, run_code, with_time_limit
+from everything_ai import netview, yours
 
 
 def _lesson_checks(lesson_id: str):
@@ -426,6 +427,7 @@ EXERCISES = {
     "same-size": _SORT,
     "inception": ScenarioBox(
         name="inception",
+        picture=netview.network("Inception", lambda: torch.rand(1, 192, 28, 28), 192, 64, 96, 128, 16, 32, 32, scores=False),
         start=_I_START,
         solution=_I,
         scenarios=_I_SCENARIOS,

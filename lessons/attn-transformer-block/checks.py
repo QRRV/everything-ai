@@ -11,6 +11,7 @@ import torch   # imported once, when the lesson opens: the first import takes lo
 
 from everything_ai import projects
 from everything_ai.check import ClassBox, Mistake, Timeout, run_code, with_time_limit
+from everything_ai import netview
 
 # The block imports the attention of exercise 2; until that is saved, the course's version stands in (template 1.3).
 projects.builds_on(("llm", "attention", "attn-transformer-block", "causal-self-attention"))
@@ -192,6 +193,7 @@ def _b_order(got, text) -> bool:
 EXERCISES = {
     "causal-self-attention": ClassBox(
         name="causal-self-attention",
+        picture=netview.network("CausalSelfAttention", lambda: 4 * torch.rand(1, 3, 6), 6, 2, scores=False),
         start=_A_START,
         solution=_a(),
         scenarios=_A_SCENARIOS,
@@ -244,6 +246,7 @@ EXERCISES = {
     ),
     "block": ClassBox(
         name="block",
+        picture=netview.network("Block", lambda: torch.randn(1, 3, 8), 8, 2, scores=False),
         start=_B_START,
         solution=_b(),
         scenarios=_B_SCENARIOS,

@@ -20,6 +20,7 @@ from torch.utils.data import DataLoader, TensorDataset
 from everything_ai import chart, cifar, hub, live, projects
 from everything_ai.lesson import download_card
 from everything_ai.check import ClassBox, Mistake, ScenarioBox, Timeout, run_code, with_time_limit
+from everything_ai import netview, yours
 
 # The demo trains with the learner's Trainer of nn-trainer and counts with their count_params of cnn-pytorch; where one
 # is missing or broken, the course's version stands in (template 1.3).
@@ -380,6 +381,7 @@ EXERCISES = {
     ),
     "color-cnn": ClassBox(
         name="color-cnn",
+        picture=netview.network("ColorCNN", yours.scene_batch, chosen=0),
         start=_K_START,
         solution=_K,
         scenarios=_K_SCENARIOS,

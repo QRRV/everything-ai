@@ -99,6 +99,28 @@ def _figure(title: str, body: str, *, alt: str = "") -> str:
             f'margin:0 0 0.35rem">{html.escape(title)}</figcaption>{body}</figure>')
 
 
+def digit_batch(flat: bool = False):
+    """The first test digit of the course's QMNIST sample (data/qmnist-small.npz) as a batch of one, from 0 to 1:
+    (1, 1, 28, 28), or (1, 784) with `flat`. What netview.network sends through a learner's digit network, so its
+    feature maps show a digit rather than noise."""
+    import numpy as np
+    import torch
+    from everything_ai import paths
+    with np.load(paths.ROOT / "data" / "qmnist-small.npz") as data:
+        x = torch.tensor(data["test_images"][:1], dtype=torch.float32) / 255
+    return x if flat else x.reshape(1, 1, 28, 28)
+
+
+def scene_batch(size: int = 32, seed: int = 18):
+    """A scene of the course (scenes.py) as a colour batch of one, (1, 3, size, size) from 0 to 1, made smaller by
+    averaging: what netview.network sends through a learner's colour network."""
+    import torch
+    import torch.nn.functional as F
+    from everything_ai import scenes
+    x = torch.tensor(scenes.scene(seed).image).permute(2, 0, 1).unsqueeze(0).float() / 255
+    return x if x.shape[-1] == size else F.interpolate(x, size=(size, size), mode="area")
+
+
 def figure(title: str, body: str, *, alt: str = "") -> str:
     """A picture of the learner's work that a lesson draws itself, such as a grid world with the values of their
     value iteration, framed as the pictures here are: its title, then the body."""

@@ -8,7 +8,7 @@ import re
 import torch   # imported once, when the lesson opens: the first import takes longer than a check may
 
 from everything_ai.check import ClassBox, FunctionBox, Mistake, run_code
-from everything_ai import yours
+from everything_ai import netview, yours
 
 # GPT-2's four sizes: (name, d, layers). All have a vocabulary of 50,257 tokens and 1,024 places.
 GPT2 = [("small", 768, 12), ("medium", 1024, 24), ("large", 1280, 36), ("XL", 1600, 48)]
@@ -172,6 +172,7 @@ EXERCISES = {
     ),
     "tied-lm": ClassBox(
         name="tied-lm",
+        picture=netview.network("TiedLM", lambda: torch.tensor([[1, 2, 3]]), 10, 4),
         start=_T_START,
         solution=_t(),
         scenarios=_T_SCENARIOS,

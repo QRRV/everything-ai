@@ -20,6 +20,7 @@ from torch.utils.data import DataLoader, TensorDataset
 
 from everything_ai import chart, draw, live, paths, projects
 from everything_ai.check import Mistake, ScenarioBox, Sort, Timeout, run_code, with_time_limit
+from everything_ai import netview, yours
 
 
 def _lesson_checks(lesson_id: str):
@@ -445,6 +446,7 @@ EXERCISES = {
     "steps": _SORT,
     "separable": ScenarioBox(
         name="separable",
+        picture=netview.network("SeparableConv", lambda: torch.rand(1, 64, 8, 8), 64, 64, scores=False),
         start=_S_START,
         solution=_S,
         scenarios=_S_SCENARIOS,

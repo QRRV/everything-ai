@@ -15,7 +15,7 @@ import torch.nn.functional as F
 
 from everything_ai import paths, projects
 from everything_ai.check import ClassBox, FunctionBox, Mistake, Timeout, run_code, with_time_limit
-from everything_ai import yours
+from everything_ai import netview, yours
 
 # GPT imports Block of attn-transformer-block, which imports CausalSelfAttention; where those are missing or broken,
 # the course's versions stand in (template 1.3).
@@ -174,6 +174,7 @@ def _x(loop: str = _X_LOOP) -> str:
 EXERCISES = {
     "gpt": ClassBox(
         name="gpt",
+        picture=netview.network("GPT", lambda: torch.tensor([[1, 2, 3]]), 10, 8, 2, 2, 6),
         start=_G_START,
         solution=_g(),
         scenarios=_G_SCENARIOS,

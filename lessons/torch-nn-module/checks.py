@@ -9,7 +9,7 @@ import torch   # imported once, when the lesson opens: the first import takes lo
 
 from everything_ai import draw
 from everything_ai.check import CodeBox, Mistake, run_code, same_value
-from everything_ai import yours
+from everything_ai import netview, yours
 
 
 def picture(captions: list[str], title: str, alt: str):
@@ -105,6 +105,7 @@ _T = _t()
 EXERCISES = {
     "net": CodeBox(
         name="net",
+        picture=netview.network("Net", lambda: torch.tensor([[1.0, 2.0]])),
         start=_N_START,
         solution=_N,
         keep=["torch.manual_seed(0)", "net = Net()", "net(X)"],

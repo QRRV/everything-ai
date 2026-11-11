@@ -15,7 +15,7 @@ from torch import nn
 
 from everything_ai import paths
 from everything_ai.check import ClassBox, FunctionBox, Mistake
-from everything_ai import yours
+from everything_ai import netview, yours
 
 DATA = "data/tiny-shakespeare.txt"   # about 1.1 MB of plays by Shakespeare: see data/README.md
 DIMS = [1, 2, 4, 8, 16, 32]
@@ -232,6 +232,7 @@ EXERCISES = {
     ),
     "char-bigram": ClassBox(
         name="char-bigram",
+        picture=netview.network("CharBigram", lambda: torch.tensor([0, 3, 3]), 5, 2),
         start=_B_START,
         solution=_b(),
         scenarios=_B_SCENARIOS,

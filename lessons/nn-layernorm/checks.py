@@ -15,7 +15,7 @@ from torch.utils.data import DataLoader, TensorDataset
 
 from everything_ai import paths
 from everything_ai.check import ClassBox, FunctionBox, Mistake
-from everything_ai import yours
+from everything_ai import netview, yours
 
 DATA = "data/qmnist-small.npz"   # the first 6,000 training and 1,000 test images of QMNIST: see data/README.md
 BLOCKS = 30
@@ -242,6 +242,7 @@ EXERCISES = {
     ),
     "pre-norm-block": ClassBox(
         name="pre-norm-block",
+        picture=netview.network("PreNormBlock", lambda: 5 * torch.randn(3, 4), 4, 8, scores=False),
         start=_B_START,
         solution=_b(),
         scenarios=_B_SCENARIOS,

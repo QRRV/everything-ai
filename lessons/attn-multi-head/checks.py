@@ -11,7 +11,7 @@ import torch   # imported once, when the lesson opens: the first import takes lo
 
 from everything_ai import draw
 from everything_ai.check import ClassBox, FunctionBox, Mistake
-from everything_ai import yours
+from everything_ai import netview, yours
 
 SENTENCE = ["the", "cat", "sat", "down"]
 
@@ -210,6 +210,7 @@ EXERCISES = {
     ),
     "multi-head-module": ClassBox(
         name="multi-head-module",
+        picture=netview.network("MultiHeadAttention", lambda: torch.rand(4, 6), 6, 2, scores=False),
         start=_M_START,
         solution=_m(),
         scenarios=_M_SCENARIOS,

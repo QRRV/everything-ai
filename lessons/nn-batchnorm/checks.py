@@ -14,7 +14,7 @@ from torch.utils.data import DataLoader, TensorDataset
 
 from everything_ai import paths
 from everything_ai.check import ClassBox, FunctionBox, Mistake
-from everything_ai import yours
+from everything_ai import netview, yours
 
 DATA = "data/qmnist-small.npz"   # the first 6,000 training and 1,000 test images of QMNIST: see data/README.md
 DEPTH = 10      # hidden layers in the picture
@@ -265,6 +265,7 @@ EXERCISES = {
     ),
     "bn-mlp": ClassBox(
         name="bn-mlp",
+        picture=netview.network("BNMLP", lambda: torch.randn(8, 4), 4, 6, 3),
         start=_M_START,
         solution=_m(),
         scenarios=_M_SCENARIOS,

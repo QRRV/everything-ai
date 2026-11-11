@@ -14,6 +14,7 @@ from torch.utils.data import DataLoader, TensorDataset
 
 from everything_ai import live, paths, projects
 from everything_ai.check import ClassBox, Mistake, Timeout, run_code, with_time_limit
+from everything_ai import netview
 
 # The demo trains with the learner's Trainer of nn-trainer and counts with their count_params of cnn-pytorch; where one
 # is missing or broken, the course's version stands in (template 1.3).
@@ -135,6 +136,7 @@ _R_WRONG = {
 EXERCISES = {
     "res-block": ClassBox(
         name="res-block",
+        picture=netview.network("ResBlock", lambda: torch.randn(1, 4, 6, 6), 4, scores=False),
         start=_R_START,
         solution=_R,
         scenarios=_R_SCENARIOS,

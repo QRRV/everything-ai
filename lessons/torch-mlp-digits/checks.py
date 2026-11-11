@@ -14,6 +14,7 @@ from torch.utils.data import DataLoader, TensorDataset
 
 from everything_ai import paths, projects
 from everything_ai.check import ClassBox, Mistake, Timeout, run_code, with_time_limit
+from everything_ai import netview, yours
 
 DATA = "data/qmnist-small.npz"   # the first 6,000 training and 1,000 test images of QMNIST: see data/README.md
 HIDDEN, LR, EPOCHS, BATCH = 64, 0.5, 10, 64   # the demo: 64 hidden neurons, a learning rate of 0.5, 10 epochs of 64
@@ -219,6 +220,7 @@ _F_SCENARIOS = [
 EXERCISES = {
     "digits-mlp": ClassBox(
         name="digits-mlp",
+        picture=netview.network("DigitsMLP", lambda: yours.digit_batch(flat=True), 64),
         start=_M_START,
         solution=_M,
         scenarios=_M_SCENARIOS,

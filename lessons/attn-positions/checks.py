@@ -10,7 +10,7 @@ import torch   # imported once, when the lesson opens: the first import takes lo
 
 from everything_ai import chart
 from everything_ai.check import ClassBox, FunctionBox, Mistake, run_code
-from everything_ai import yours
+from everything_ai import netview, yours
 
 N, D = 64, 16
 SHOWN = [0, 4, 8]   # the columns in the picture: fast, middle and slow
@@ -182,6 +182,7 @@ EXERCISES = {
     ),
     "tokens-and-positions": ClassBox(
         name="tokens-and-positions",
+        picture=netview.network("TokensAndPositions", lambda: torch.tensor([3, 1, 3]), 10, 4, 8, scores=False),
         start=_T_START,
         solution=_t(),
         scenarios=_T_SCENARIOS,

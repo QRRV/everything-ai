@@ -12,7 +12,7 @@ from torch.utils.data import DataLoader, TensorDataset
 
 from everything_ai import paths, projects
 from everything_ai.check import ClassBox, FunctionBox, Mistake, same_value
-from everything_ai import yours
+from everything_ai import netview, yours
 
 DATA = "data/tiny-shakespeare.txt"   # about 1.1 MB of plays by Shakespeare: see data/README.md
 DIM, HIDDEN, LR = 10, 128, 0.003
@@ -231,6 +231,7 @@ EXERCISES = {
     ),
     "mlp-lm": ClassBox(
         name="mlp-lm",
+        picture=netview.network("MLPLanguageModel", lambda: torch.tensor([[46, 43, 1]]), 65, 3, 10, 32),
         start=_M_START,
         solution=_m(),
         scenarios=_M_SCENARIOS,

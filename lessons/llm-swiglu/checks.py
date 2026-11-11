@@ -4,8 +4,10 @@
 import re
 
 import numpy as np
+import torch
 
 from everything_ai.check import ClassBox, Mistake
+from everything_ai import netview
 
 
 def activations_picture(labels: dict) -> str:
@@ -94,6 +96,7 @@ _NAMES = Mistake("names", error=lambda e: isinstance(e, AttributeError) and any(
 EXERCISES = {
     "swiglu": ClassBox(
         name="swiglu",
+        picture=netview.network("SwiGLU", lambda: torch.tensor([[1.0, -1.0]]), 2, 3, scores=False),
         start=_START,
         solution=_s(),
         scenarios=_SCENARIOS,

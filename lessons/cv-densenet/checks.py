@@ -19,6 +19,7 @@ from torch.utils.data import DataLoader, TensorDataset
 
 from everything_ai import chart, draw, live, paths, projects
 from everything_ai.check import Mistake, ScenarioBox, Sort, Timeout, run_code, with_time_limit
+from everything_ai import netview, yours
 
 
 def _lesson_checks(lesson_id: str):
@@ -383,6 +384,7 @@ EXERCISES = {
     "blocks": _SORT,
     "dense": ScenarioBox(
         name="dense",
+        picture=netview.network("DenseBlock", lambda: torch.rand(1, 64, 8, 8), 64, 12, 4, scores=False),
         start=_D_START,
         solution=_D,
         scenarios=_D_SCENARIOS,

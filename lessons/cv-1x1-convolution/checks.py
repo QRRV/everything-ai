@@ -18,6 +18,7 @@ from torch.utils.data import DataLoader, TensorDataset
 
 from everything_ai import chart, live, paths, projects
 from everything_ai.check import Mistake, ScenarioBox, Sort, Timeout, run_code, with_time_limit
+from everything_ai import netview
 
 
 def _lesson_checks(lesson_id: str):
@@ -437,6 +438,7 @@ EXERCISES = {
     "one-by-one": _SORT,
     "bottleneck": ScenarioBox(
         name="bottleneck",
+        picture=netview.network("Bottleneck", lambda: torch.rand(1, 64, 8, 8), 64, 16, scores=False),
         start=_B_START,
         solution=_B,
         scenarios=_B_SCENARIOS,

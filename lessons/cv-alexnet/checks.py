@@ -17,6 +17,7 @@ from torch.utils.data import DataLoader, TensorDataset
 
 from everything_ai import chart, cifar, live, paths, projects
 from everything_ai.check import Mistake, ScenarioBox, Sort, Timeout, run_code, with_time_limit
+from everything_ai import netview, yours
 
 
 def _lesson_checks(lesson_id: str):
@@ -414,6 +415,7 @@ EXERCISES = {
     "alexnet-today": _SORT,
     "small-alexnet": ScenarioBox(
         name="small-alexnet",
+        picture=netview.network("SmallAlexNet", yours.scene_batch, chosen=0),
         start=_A_START,
         solution=_A,
         scenarios=_A_SCENARIOS,

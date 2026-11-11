@@ -18,6 +18,7 @@ import torch
 
 from everything_ai import paths, projects
 from everything_ai.check import ClassBox, Mistake, run_code
+from everything_ai import netview
 
 
 def _train_bpe():
@@ -409,6 +410,7 @@ EXERCISES = {
     ),
     "modern-attention": ClassBox(
         name="modern-attention",
+        picture=netview.network("ModernAttention", lambda: torch.randn(1, 3, 8), 8, 4, 2, scores=False),
         start=_A_START,
         solution=_a(),
         scenarios=_A_SCENARIOS,
@@ -467,6 +469,7 @@ EXERCISES = {
     ),
     "modern-gpt": ClassBox(
         name="modern-gpt",
+        picture=netview.network("ModernGPT", lambda: torch.tensor([[1, 2, 3]]), 20, 16, 4, 2, 3),
         start=_G_START,
         solution=_g(),
         scenarios=_G_SCENARIOS,

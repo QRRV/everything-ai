@@ -13,6 +13,7 @@ from torch.utils.data import DataLoader, TensorDataset
 
 from everything_ai import draw, paths, projects
 from everything_ai.check import ClassBox, Mistake, Timeout, run_code, with_time_limit
+from everything_ai import netview, yours
 
 # The demo trains with the learner's Trainer of nn-trainer, and compares with their SmallCNN and counts with their
 # count_params of cnn-pytorch; where one is missing or broken, the course's version stands in (template 1.3).
@@ -140,6 +141,7 @@ def _out_of_order(got, text) -> bool:
 EXERCISES = {
     "lenet5": ClassBox(
         name="lenet5",
+        picture=netview.network("LeNet5", yours.digit_batch, chosen=0),
         start=_L_START,
         solution=_L,
         scenarios=_L_SCENARIOS,

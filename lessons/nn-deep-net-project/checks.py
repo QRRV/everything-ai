@@ -14,6 +14,7 @@ from torch.utils.data import DataLoader, TensorDataset
 
 from everything_ai import draw, paths, projects
 from everything_ai.check import ClassBox, Mistake
+from everything_ai import netview, yours
 
 DATA = "data/fashion-mnist-small.npz"   # 6,000 training and 1,000 test images of Fashion-MNIST: see data/README.md
 DEPTH, WIDTH, EPOCHS = 10, 64, 3
@@ -245,6 +246,7 @@ EXERCISES = {
     ),
     "deep-mlp": ClassBox(
         name="deep-mlp",
+        picture=netview.network("DeepMLP", lambda: yours.digit_batch(flat=True), 4, 8),
         start=_D_START,
         solution=_d(),
         scenarios=_D_SCENARIOS,

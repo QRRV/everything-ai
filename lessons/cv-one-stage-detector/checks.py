@@ -19,6 +19,7 @@ from torch import nn
 
 from everything_ai import chart, projects, scenes
 from everything_ai.check import ClassBox, Mistake, ScenarioBox, Timeout, run_code, with_time_limit
+from everything_ai import netview, yours
 
 # The demo uses the learner's match and offsets of cv-anchors: targets imports them. Where a file is missing or
 # broken, the course's version stands in, and the lesson says so.
@@ -1065,6 +1066,7 @@ EXERCISES = {
     ),
     "detector": ClassBox(
         name="detector",
+        picture=netview.network("Detector", lambda: yours.scene_batch(128), chosen=0),
         start=_D_START,
         solution=_D,
         scenarios=_D_SCENARIOS,
