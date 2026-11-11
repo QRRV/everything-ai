@@ -1,0 +1,37 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: cv-fcn
+minutes: 50
+title:
+  en: "A kind for every pixel: FCN and transposed convolutions"
+  nl: "Een soort voor elke pixel: FCN en transposed convolutions"
+goal:
+  en: "make the class map of a scene, paint a transposed convolution by hand, start a transposed convolution as bilinear upsampling, measure every kind with the IoU of its pixels, and train the course's FCN on the scenes with all of them."
+  nl: "de class map van een scène maken, een transposed convolution met de hand schilderen, een transposed convolution als bilineaire upsampling laten beginnen, elke soort meten met de IoU van zijn pixels, en het FCN van de course daarmee op de scènes trainen."
+summary:
+  - en: "Semantic segmentation gives every pixel a class. A network that says background everywhere gets 87% of the pixels of the course's test scenes right and finds no shape, so every kind is measured on its own, with the IoU of its pixels."
+    nl: "Semantic segmentation geeft elke pixel een klasse. Een netwerk dat overal achtergrond zegt, heeft 87% van de pixels van de testscènes van de course goed en vindt geen enkele vorm, dus wordt elke soort apart gemeten, met de IoU van zijn pixels."
+  - en: "An FCN (2015) has no linear layers, so it takes a picture of any size; a transposed convolution, in which every value paints a copy of the kernel, makes its coarse map as large as the picture again: fixed to bilinear upsampling, as in the last layer of the paper, or started as bilinear upsampling and learned, as in the course's FCN."
+    nl: "Een FCN (2015) heeft geen linear layers, dus neemt het een beeld van elke grootte aan; een transposed convolution, waarin elke waarde een kopie van de kernel schildert, maakt zijn grove map weer zo groot als het beeld: vast op bilineaire upsampling, zoals in de laatste layer van de paper, of als bilineaire upsampling begonnen en geleerd, zoals in het FCN van de course."
+  - en: "With output stride 8, the course's FCN reaches an IoU of 0.78 to 0.87 for the circles, 0.53 to 0.71 for the squares and 0.60 to 0.73 for the triangles. Stride 4, which sees only 18 by 18 pixels from every place, does far worse, and so does nearest neighbor instead of a transposed convolution that learns."
+    nl: "Met output stride 8 haalt het FCN van de course een IoU van 0,78 tot 0,87 voor de cirkels, 0,53 tot 0,71 voor de vierkanten en 0,60 tot 0,73 voor de driehoeken. Stride 4, die vanuit elke plaats maar 18 bij 18 pixels ziet, doet het veel slechter, en nearest neighbor in plaats van een transposed convolution die leert ook."
+can_now:
+  - en: "make the class map of a scene from the masks of its shapes"
+    nl: "de class map van een scène maken uit de masks van zijn vormen"
+    by: class-map
+  - en: "paint a transposed convolution by hand, and say how large its output is"
+    nl: "een transposed convolution met de hand schilderen, en zeggen hoe groot zijn output is"
+    by: transposed
+  - en: "make a transposed convolution that starts as bilinear upsampling and learns"
+    nl: "een transposed convolution maken die als bilineaire upsampling begint en leert"
+    by: upsampler
+  - en: "measure the classes a network gives every pixel with the IoU of the pixels of every kind"
+    nl: "de klassen die een netwerk elke pixel geeft meten met de IoU van de pixels van elke soort"
+    by: kind-iou
+  - en: "explain why a finer last map with stride 4 tells the kinds apart worse than stride 8"
+    nl: "uitleggen waarom een fijnere laatste map met stride 4 de soorten slechter uit elkaar houdt dan stride 8"
+    by: why-stride
+further_reading:
+  - en: "Jonathan Long, Evan Shelhamer and Trevor Darrell (2015), *Fully Convolutional Networks for Semantic Segmentation*: section 3.1, linear layers as convolutions, with Figure 2; section 3.3, upsampling as a backwards convolution; section 4.1, from classifier to FCN, with Table 1; section 4.2, the skip connections of FCN-16s and FCN-8s, with Table 2; and section 4.3, where the last transposed convolution is fixed to bilinear upsampling"
+    nl: "Jonathan Long, Evan Shelhamer en Trevor Darrell (2015), *Fully Convolutional Networks for Semantic Segmentation*: paragraaf 3.1, linear layers als convoluties, met figuur 2; paragraaf 3.3, upsampling als achterwaartse convolutie; paragraaf 4.1, van classifier naar FCN, met tabel 1; paragraaf 4.2, de skip connections van FCN-16s en FCN-8s, met tabel 2; en paragraaf 4.3, waar de laatste transposed convolution vast op bilineaire upsampling staat"

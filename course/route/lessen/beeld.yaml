@@ -676,12 +676,23 @@ lessons:
   title: "A kind for every pixel: FCN and transposed convolutions"
   level: gevorderd
   module: segmentation
-  idea: "Semantic segmentation gives every pixel a kind; a fully convolutional network has no dense layers, so it takes a photo of any size, and makes its coarse feature maps full size again, upsampling, with transposed convolutions that learn how."
+  idea: "Semantic segmentation gives every pixel a kind; a fully convolutional network has no linear layers, so it takes a photo of any size, and makes its coarse feature maps full size again, upsampling, with transposed convolutions that learn how."
   covers: [segmentatie#3, convolutionele-netwerken#2]
+  # Measured on the course's scenes (checks.py, REFERENCE and TRAINED): blocks of conv 3x3 + ReLU + max pool 2 (16, 32,
+  # 64 channels), one more conv 3x3, a 1x1 conv to 4 classes, one ConvTranspose2d (kernel 2s, stride s, padding s/2,
+  # no bias) started as bilinear and learned; 64,868 parameters at stride 8; 8 epochs, batch 32, one thread (~170 s).
+  # Background is 87% of the test pixels. IoU of the pixels of circles / squares / triangles over seeds 0-4: stride 8
+  # 0.78-0.87 / 0.53-0.71 / 0.60-0.73; stride 4 (sees 18 px) 0.54-0.66 / 0.07-0.32 / 0.30-0.46; stride 16 0.54-0.72
+  # / 0.21-0.47 / 0.27-0.53, with 16 epochs 0.66-0.86 (seeds 1-4 as good as stride 8); stride 32 0.38-0.60, with 16
+  # epochs 0.52-0.75. At stride 8: fixed bilinear 0.68-0.87, random start 0.63-0.82, fixed nearest 0.50-0.67 (the best
+  # 8x8 blocks would give 0.78 / 0.72 / 0.64). The same FCN on scenes of 96 and 192 px: circles 0.69-0.77, 0.82-0.92.
   requires: [cv-1x1-convolution, cv-iou, cv-annotations]
   introduces: [c:semantic-segmentation, c:fully-convolutional-network, c:upsampling, c:transposed-convolution, py:nn-convtranspose2d]
+  uses: [c:segmentation-mask, c:pointwise-convolution, c:intersection-over-union, c:convolution, c:feature-map, c:filter, c:kernel-size, c:stride, c:padding, c:pooling, c:receptive-field, c:relu, c:layer, c:channel, c:output-channel, c:nearest-neighbor-interpolation, c:bilinear-interpolation, c:interpolation, c:classification, c:vgg, c:pretrained-model, c:cross-entropy, c:loss, c:training, c:epoch, c:mini-batch, c:learning-rate, c:train-set, c:test-set, c:seed, c:model-parameter, c:weight, c:initialization, c:backward-pass, c:tensor, c:shape, c:axis, c:class, c:label, c:pixel, c:accuracy, c:mean, v:loss-curve, py:nn-conv2d, py:nn-maxpool2d, py:nn-modulelist, py:nn-cross-entropy-loss, py:nn-init, py:nn-linear, py:torch-tensor, py:torch-permute, py:torch-unsqueeze, py:torch-relu, py:no-grad, py:with, py:requires-grad, py:manual-seed, py:np-zeros, py:zeros-like, py:np-argmax, py:boolean-mask, py:mask-and-or, py:np-sum, py:np-mean, py:indexing, py:slicing, py:augmented-assignment, py:floor-division, py:int-conversion, py:dim, py:for, py:range, py:len, py:list, py:comprehension, py:keyword-argument, py:method, py:def, py:return, py:import, py:print, py:comment, py:variable, py:arithmetic, py:comparison, py:int, py:float, q:predict, q:choice, q:exercise-with-check, q:slider-task, q:explain, q:run-cell]
+  mentions: [c:skip-connection, c:mean-iou, c:imagenet, c:alexnet, c:inception]
   ladder: [torch]
   data: [course-scenes]
+  reference_data: []
   needs: any
 
 # The natural words encoder and decoder are items of lm-model-families, outside this chain: the lesson says "the way
