@@ -17,7 +17,7 @@ import torch   # imported once, when the lesson opens: the first import takes lo
 import torch.nn.functional as F
 from torch import nn
 
-from everything_ai import paths, projects, scenes
+from everything_ai import netview, paths, projects, scenes
 from everything_ai.check import ClassBox, Mistake, ScenarioBox, Timeout, run_code, with_time_limit
 
 
@@ -672,6 +672,12 @@ _M_MISTAKES = [
 
 # --- the exercises ----------------------------------------------------------------------------------------------------
 
+def _scene_batch() -> torch.Tensor:
+    """The scene of the worked example as a batch of one: what the picture under exercises 2 and 3 sends through the
+    learner's block or network, redrawn as they type (netview.network)."""
+    return torch.tensor(scenes.scene(SEED).image).permute(2, 0, 1).unsqueeze(0).float() / 255
+
+
 EXERCISES = {
     "double-conv": ClassBox(
         name="double-conv",
@@ -681,6 +687,7 @@ EXERCISES = {
         compare=_close,
         digits=4,
         save_as=("cnn", "double_conv"),
+        picture=netview.network("DoubleConv", _scene_batch, 3, 8, chosen=1, scores=False),
         first=[_DOTS],
         mistakes=_B_MISTAKES,
         texts={
@@ -704,6 +711,7 @@ EXERCISES = {
         compare=_close,
         digits=4,
         save_as=("cnn", "unet"),
+        picture=netview.network("UNet", _scene_batch),
         first=[_DOTS],
         mistakes=_N_MISTAKES,
         texts={
@@ -812,8 +820,9 @@ def _demo(show=None):
     or does not give 1 for class maps compared with themselves; "slow" when the training takes too long; else a dict
     with the loss after every epoch ("curves"), the class maps of the SHOWN scenes after every epoch ("moments"), and
     on the test scenes after the last epoch the share of pixels right, the IoU of every class (background first), the
-    mean IoU by their mean_iou, the parameters of their U-Net, and the modules the course's versions stood in for.
-    `show` hears the run while it trains."""
+    mean IoU by their mean_iou, the parameters of their U-Net, the modules the course's versions stood in for, and
+    their trained U-Net layer by layer on the scene of the worked example ("net", a netview.Trace). `show` hears the
+    run while it trains."""
     if not (_saved("unet") and _saved("mean_iou")):
         return None
     names = {}
@@ -880,8 +889,15 @@ def _demo(show=None):
     except _Stopped as e:
         return e.key
     curves = {"train": [float(h["train_loss"]) for h in history], "val": [float(h["val_loss"]) for h in history]}
+    net = netview.trace(model, Xt[TEST.index(SEED):TEST.index(SEED) + 1].float() / 255)   # the scene of the example
     return {"curves": curves, "moments": moments, "acc": float((pred == Ct).float().mean()), "ious": class_ious(pred, Ct),
-            "miou": miou, "params": sum(p.numel() for p in model.parameters()), "stand_ins": stand_ins}
+            "miou": miou, "params": sum(p.numel() for p in model.parameters()), "stand_ins": stand_ins, "net": net}
+
+
+def layer_frame(net, k, lang: str) -> str:
+    """The slider over the layers of the learner's trained U-Net: the network, with layer k (from 1) chosen and its
+    feature maps under it."""
+    return netview.picture(net, lang, chosen=int(k) - 1, uid=f"nv-unet-{int(k)}")
 
 
 _DEMO_RUNS: dict = {}

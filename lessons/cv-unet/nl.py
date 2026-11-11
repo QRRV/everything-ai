@@ -544,7 +544,13 @@ def demo_unet(train_button, result_double_conv, result_unet, result_mean_iou):
                 _pic = [mo.Html(C._FCN.curves_picture(_result["curves"], _labels, L.lang))] if _val else []
             _ious = ", ".join(f"{_name} {L.number(_v, 2)}" for _name, _v in zip(("achtergrond", "cirkels", "vierkanten", "driehoeken"), _result["ious"]))
             _out = mo.vstack(_pic + [
-                mo.md(f"""Je U-Net, met {C._FCN.whole(_result['params'], L.lang)} parameters, heeft {L.number(100 * _result['acc'], 1)}% van de pixels van de 200 testscènes goed. Zijn mean IoU, volgens je `mean_iou`, is {L.number(_result['miou'], 3)}, met een IoU van: {_ious}. Met seed 0, de run die de demo volgt, heeft het U-Net van de course 99,6% van de pixels goed, met een mean IoU van 0,953; over de seeds 0 tot 4 is de mediaan van de mean IoU 0,95, en met seed 3 is hij maar 0,65, zoals de tabel na de slider laat zien.{_who}"""),
+                mo.md(f"""Je U-Net, met {C._FCN.whole(_result['params'], L.lang)} parameters, heeft {L.number(100 * _result['acc'], 1)}% van de pixels van de 200 testscènes goed. Zijn mean IoU, volgens je `mean_iou`, is {L.number(_result['miou'], 3)}, met een IoU van: {_ious}. Met seed 0, de run die de demo volgt, heeft het U-Net van de course 99,6% van de pixels goed, met een mean IoU van 0,953; over de seeds 0 tot 4 is de mediaan van de mean IoU 0,95, en met seed 3 is hij maar 0,65, zoals de tabel na de slider over de skip connections laat zien.{_who}"""),
+                mo.md("**Je U-Net, layer voor layer.** Het eerste vak is de scène van het uitgewerkte voorbeeld, en de vakken daarna zijn de layers van je getrainde U-Net, in de volgorde waarin de scène erdoor gaat; eronder staan de feature maps van de layer die je kiest."),
+                (L.explore("layers", "layer", lambda _k: C.layer_frame(_result["net"], _k, L.lang), start=1,
+                           values=list(range(1, len(_result["net"].layers) + 1)), role="",
+                           task="Loop door je getrainde U-Net, van de scène tot de scores: wat maakt elke layer van de scène?")
+                 if len(_result["net"].layers) > 1 else mo.Html(C.layer_frame(_result["net"], 1, L.lang))),
+                mo.md("Op de weg omlaag worden de maps grover: in het eerste blok volgen veel ervan de randen van de vormen of de vormen zelf, en onderin, op nog maar 16 bij 16 plaatsen, zijn het grove vlekken. Op de weg omhoog is de map die uit `ups.2` komt nog wazig; gestapeld met de map die op de weg omlaag bewaard is, zijn de randen in `convs.2` weer scherp. De laatste layer, `score`, heeft één channel voor elke klasse: de cirkel heeft de meeste inkt in channel 1, het vierkant in channel 2 en beide driehoeken in channel 3; in channel 0, de achtergrond, is het andersom: daar hebben de vormen de minste inkt."),
             ])
     _out
     return

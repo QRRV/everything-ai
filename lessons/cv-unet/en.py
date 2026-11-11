@@ -544,7 +544,13 @@ def demo_unet(train_button, result_double_conv, result_unet, result_mean_iou):
                 _pic = [mo.Html(C._FCN.curves_picture(_result["curves"], _labels, L.lang))] if _val else []
             _ious = ", ".join(f"{_name} {L.number(_v, 2)}" for _name, _v in zip(("background", "circles", "squares", "triangles"), _result["ious"]))
             _out = mo.vstack(_pic + [
-                mo.md(f"""Your U-Net, with {C._FCN.whole(_result['params'], L.lang)} parameters, gets {L.number(100 * _result['acc'], 1)}% of the pixels of the 200 test scenes right. Its mean IoU, by your `mean_iou`, is {L.number(_result['miou'], 3)}, with an IoU of: {_ious}. With seed 0, the run the demo follows, the course's U-Net gets 99.6% of the pixels right, with a mean IoU of 0.953; over the seeds 0 to 4, the median mean IoU is 0.95, and with seed 3 it is only 0.65, as the table after the slider shows.{_who}"""),
+                mo.md(f"""Your U-Net, with {C._FCN.whole(_result['params'], L.lang)} parameters, gets {L.number(100 * _result['acc'], 1)}% of the pixels of the 200 test scenes right. Its mean IoU, by your `mean_iou`, is {L.number(_result['miou'], 3)}, with an IoU of: {_ious}. With seed 0, the run the demo follows, the course's U-Net gets 99.6% of the pixels right, with a mean IoU of 0.953; over the seeds 0 to 4, the median mean IoU is 0.95, and with seed 3 it is only 0.65, as the table after the slider over the skip connections shows.{_who}"""),
+                mo.md("**Your U-Net, layer by layer.** The first box is the scene of the worked example, and the boxes after it are the layers of your trained U-Net, in the order the scene goes through them; under them are the feature maps of the layer you choose."),
+                (L.explore("layers", "layer", lambda _k: C.layer_frame(_result["net"], _k, L.lang), start=1,
+                           values=list(range(1, len(_result["net"].layers) + 1)), role="",
+                           task="Go through your trained U-Net from the scene to the scores: what does each layer make of the scene?")
+                 if len(_result["net"].layers) > 1 else mo.Html(C.layer_frame(_result["net"], 1, L.lang))),
+                mo.md("On the way down, the maps get coarser: in the first block, many follow the edges of the shapes or the shapes themselves, and at the bottom, on only 16 by 16 places, they are coarse spots. On the way up, the map that comes out of `ups.2` is still blurred; stacked with the map kept on the way down, the edges are sharp again in `convs.2`. The last layer, `score`, has one channel for every class: the circle has the most ink in channel 1, the square in channel 2 and both triangles in channel 3; in channel 0, the background, it is the other way round: there the shapes have the least ink."),
             ])
     _out
     return

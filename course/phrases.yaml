@@ -359,3 +359,65 @@ phrases:
   group: level
   en: expert
   nl: expert
+
+# --- your network, under a check or in a demo (netview.py) -----------------------
+- id: net-title
+  group: yours
+  en: "Your network: {layers}, {params} parameters"
+  nl: "Je netwerk: {layers}, {params} parameters"
+- id: net-one-layer
+  group: yours
+  en: "1 layer"
+  nl: "1 layer"
+- id: net-layers
+  group: yours
+  en: "{n} layers"
+  nl: "{n} layers"
+- id: net-stops-in
+  group: yours
+  en: "Python stops in {name}:"
+  nl: "Python stopt in {name}:"
+- id: net-stops-after
+  group: yours
+  en: "Python stops after {name}:"
+  nl: "Python stopt na {name}:"
+- id: net-stops-before
+  group: yours
+  en: "Python stops before the first layer:"
+  nl: "Python stopt vóór de eerste layer:"
+- id: net-layer
+  group: yours
+  en: "{name} · {kind} · in {shape_in} → out {shape_out} · {params} parameters"
+  nl: "{name} · {kind} · in {shape_in} → uit {shape_out} · {params} parameters"
+- id: net-channel
+  group: yours
+  en: "channel {k}"
+  nl: "channel {k}"
+- id: net-maps-all
+  group: yours
+  en: "Its {n} channels, each a feature map: within a map, the more ink, the higher the value."
+  nl: "Zijn {n} channels, elk een feature map: hoe meer inkt, hoe hoger de waarde in die map."
+- id: net-maps-some
+  group: yours
+  en: "The first {n} of its {total} channels, each a feature map: within a map, the more ink, the higher the value."
+  nl: "De eerste {n} van zijn {total} channels, elk een feature map: hoe meer inkt, hoe hoger de waarde in die map."
+- id: net-values-all
+  group: yours
+  en: "Its {n} values: the more ink, the higher the value."
+  nl: "Zijn {n} waarden: hoe meer inkt, hoe hoger de waarde."
+- id: net-values-some
+  group: yours
+  en: "The first {n} of its {total} values: the more ink, the higher the value."
+  nl: "De eerste {n} van zijn {total} waarden: hoe meer inkt, hoe hoger de waarde."
+- id: net-key
+  group: yours
+  en: "The first box is the input and every box after it a layer, with its number of channels above it: the taller the box, the larger its maps; the wider, the more channels."
+  nl: "Het eerste vak is de input en elk vak daarna een layer, met zijn aantal channels erboven: hoe hoger het vak, hoe groter zijn maps; hoe breder, hoe meer channels."
+- id: net-key-resize
+  group: yours
+  en: "Dotted edge: pooling or upsampling, which make the maps smaller or larger."
+  nl: "Gestippelde rand: pooling of upsampling, die de maps kleiner of groter maken."
+- id: net-key-arc
+  group: yours
+  en: "Arc: input from an earlier layer than the one before, as in a skip connection, stacked in or added."
+  nl: "Boog: input van een eerdere layer dan de vorige, zoals bij een skip connection, erbij gestapeld of opgeteld."

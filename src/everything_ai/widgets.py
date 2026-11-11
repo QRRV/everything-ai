@@ -18,6 +18,13 @@ _BASE_CSS = r"""
 .ea-w code { font-family: "JetBrains Mono var", "JetBrains Mono", ui-monospace, monospace; font-size: 0.86em;
   font-variant-ligatures: none; background: var(--ea-inset); border-radius: 4px; padding: 0.06em 0.3em; }
 .ea-w .ea-q { font-family: "Source Serif var", "Source Serif 4", Georgia, serif; font-size: 1.125rem; line-height: 1.6; margin: 0 0 0.6rem; }
+/* code in a question, a block between ```: no band of inline code, and the weight and grey of the style guide (chapter 7),
+   as theme.css gives the code blocks outside this widget, where its rules do not reach */
+.ea-w pre code { background: none; padding: 0; border-radius: 0; }
+.ea-w .codehilite span { color: var(--ea-ink) !important; font-weight: 400; font-style: normal !important; }
+.ea-w .codehilite :is(.k, .kd, .kn, .kp, .kr, .kt) { font-weight: 600; }
+.ea-w .codehilite :is(.o, .ow, .p, .nd, .s, .s1, .s2, .sa, .sb, .sc, .sd, .se, .sh, .si, .sx, .sr, .ss, .dl) { color: var(--ea-ink-2) !important; }
+.ea-w .codehilite :is(.c, .c1, .ch, .cm, .cp, .cpf, .cs) { color: var(--ea-ink-3) !important; }
 .ea-w .ea-kick { font-size: 0.72rem; font-weight: 650; letter-spacing: 0.07em; text-transform: uppercase;
   color: var(--ea-page); background: var(--ea-ink); border-radius: 4px; padding: 0.12rem 0.42rem; margin-right: 0.5rem;
   font-family: "Inter var", Inter, system-ui, sans-serif; vertical-align: 0.15em; }
