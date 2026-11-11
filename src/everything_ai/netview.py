@@ -292,6 +292,24 @@ def _esc(s: str) -> str:
     return html.escape(s, quote=True)
 
 
+def _settings(module: nn.Module) -> str:
+    """The stride and the dilation of a convolution when they are not 1, as PyTorch's arguments: "(dilation=2)"."""
+    if not isinstance(module, nn.modules.conv._ConvNd):   # every convolution, 1-D to 3-D, transposed too
+        return ""
+    said = []
+    for name in ("stride", "dilation"):
+        v = getattr(module, name)
+        if any(x != 1 for x in v):
+            said.append(f"{name}={v[0] if len(set(v)) == 1 else tuple(v)}")
+    return f"({', '.join(said)})" if said else ""
+
+
+def _count(shape: tuple) -> int:
+    """The number above a box: the channels of maps (C, H, W), the features of a vector (F,) or of every position of a
+    sequence (T, F)."""
+    return shape[-1] if len(shape) == 2 else shape[0]
+
+
 def _diagram(tr: Trace, lang: str, chosen: int | None, alt: str, scores: bool) -> tuple[str, bool, bool]:
     """The row of boxes as SVG; and whether it has a dotted edge and an arc, for the key under it."""
     ink, ink2, ink3 = "var(--ea-ink)", "var(--ea-ink-2)", "var(--ea-ink-3)"
@@ -303,23 +321,29 @@ def _diagram(tr: Trace, lang: str, chosen: int | None, alt: str, scores: bool) -
     def level(shape) -> float:
         if shape and len(shape) == 3 and shape[1]:
             return math.log2(side0 / shape[1])
-        return deepest + 1.4          # a vector of features, or nothing: below the smallest map
+        # a vector of features, a sequence, or nothing: below the smallest map; on top when there are no maps
+        return deepest + 1.4 if sides else 0.0
 
     def size(shape) -> tuple[float, float]:
         if shape and len(shape) == 3:
             return 4 + 2.2 * math.log2(max(shape[0], 1)), 8 + 40 * shape[1] / side0
-        if shape and len(shape) == 1:
-            return 6, 8 + 4 * math.log2(max(shape[0], 1))
+        if shape and len(shape) in (1, 2):   # a vector of features, or a sequence of them: its features count
+            return 6, 8 + 4 * math.log2(max(_count(shape), 1))
         return 8, 12
 
-    labels = [_whole(l.shape_out[0], lang) if l.done and l.shape_out else ("?" if l.done else "") for l in layers]
-    label0 = _whole(tr.shape_in[0], lang) if tr.shape_in else ""
+    labels = [_whole(_count(l.shape_out), lang) if l.done and l.shape_out else ("?" if l.done else "") for l in layers]
+    label0 = _whole(_count(tr.shape_in), lang) if tr.shape_in else ""
     step = max(30, 7.2 * max(map(len, labels + [label0])) + 8)   # room for the widest number of channels
     arcs = any(j != i - 1 for i, l in enumerate(layers) for j in l.fed)
-    top = 46 + (22 if arcs else 0)    # room above the largest maps for their channels, and for the arcs
     xs = [step * (i + 1) + 40 for i in range(len(layers))]
-    ys = [top + _LEVEL * level(l.shape_out if l.done else l.shape_in) for l in layers]
+    levels = [level(l.shape_out if l.done else l.shape_in) for l in layers]
     hs = [size(l.shape_out)[1] if l.done else 20 for l in layers]
+    # room above the boxes on top for their channels, and for the arcs: the tallest box of the top row decides
+    rows = [(level(tr.shape_in), size(tr.shape_in)[1])] + list(zip(levels, hs))
+    first = min(lv for lv, _ in rows)
+    tallest = max(h for lv, h in rows if lv == first)
+    top = max(46, tallest / 2 + 22) + (22 if arcs else 0)
+    ys = [top + _LEVEL * lv for lv in levels]
     parts = []
     w0, h0 = size(tr.shape_in)
     y0 = top + _LEVEL * level(tr.shape_in)
@@ -393,7 +417,7 @@ def picture(tr: Trace, lang: str, chosen: int | None = None, uid: str = "nv", sc
                    f'overflow-wrap:anywhere">{_esc(tr.error)}</div>')
     if chosen is not None and 0 <= chosen < len(layers) and layers[chosen].out is not None:
         l = layers[chosen]
-        kind = " + ".join([type(l.module).__name__] + l.with_it)
+        kind = " + ".join([type(l.module).__name__ + _settings(l.module)] + l.with_it)
         line = course.phrase("net-layer", lang, name=l.name, kind=kind, shape_in=_shape_text(l.shape_in),
                              shape_out=_shape_text(l.shape_out), params=_whole(l.params, lang))
         out.append(f'<div style="{text.format(14, "ink", "0.7rem 0 0.4rem")}">{_esc(line)}</div>')

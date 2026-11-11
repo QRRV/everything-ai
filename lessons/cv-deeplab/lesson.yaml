@@ -1,0 +1,37 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+# termen:allow atrous convolution
+id: cv-deeplab
+minutes: 50
+title:
+  en: "Dilated convolutions and DeepLab"
+  nl: "Dilated convolutions en DeepLab"
+goal:
+  en: "count what one place of a stack of layers sees, dilations included, build an ASPP from a 1×1 convolution and dilated 3×3 convolutions side by side, and build a DeepLab from the layers of the course's FCN with two poolings taken out, and train it on the course's scenes."
+  nl: "tellen wat één plaats van een stapel layers ziet, dilations meegeteld, een ASPP bouwen uit een 1×1-convolutie en 3×3-convoluties met dilation naast elkaar, en een DeepLab bouwen uit de layers van het FCN van de course met twee poolings eruit, en het trainen op de scènes van de course."
+summary:
+  - en: "A dilated convolution spreads its taps out with gaps: a 3×3 kernel with dilation d sees 2d + 1 pixels with the same 9 weights, and padding d keeps the map as large as it was. A stack with dilation 1, 2, 4 and 8 sees 31 pixels without a gap; a dilation larger than what the layer before it covers skips pixels."
+    nl: "Een dilated convolution spreidt zijn taps uit met gaten ertussen: een 3×3-kernel met dilation d ziet 2d + 1 pixels met dezelfde 9 weights, en padding d houdt de map zo groot als hij was. Een stapel met dilation 1, 2, 4 en 8 ziet 31 pixels zonder gat; een dilation die groter is dan wat de layer ervoor beslaat, slaat pixels over."
+  - en: "DeepLab (2015) takes the last poolings out of a CNN trained on photos and dilates the layers after them, so that every layer still reaches what it learned to look at, at every other place exactly, and the map stays larger. Its ASPP puts a 1×1 convolution and 3×3 convolutions with several dilations side by side on one map."
+    nl: "DeepLab (2015) haalt de laatste poolings uit een CNN dat op foto's getraind is en geeft de layers erna een dilation, zodat elke layer nog bereikt waar hij naar leerde kijken, op elke tweede plaats precies, en de map groter blijft. Zijn ASPP zet een 1×1-convolutie en 3×3-convoluties met verschillende dilations naast elkaar op één map."
+  - en: "On the course's scenes, over five seeds, each network with a last map of 32 by 32 whose places see 34 pixels or more has a higher median IoU for every kind than the FCNs with stride 8 and 16, and the course's DeepLab reaches 0.92 for the circles. There, dilation on its own does not help a network that learns from scratch, and an ASPP helps about as much with dilation 1, 1 and 1. What DeepLab first used dilation for is keeping the weights of a network trained on photos."
+    nl: "Op de scènes van de course, over vijf seeds, heeft elk netwerk met een laatste map van 32 bij 32 waarvan de plaatsen 34 pixels of meer zien, voor elke soort een hogere mediaan van de IoU dan de FCN's met stride 8 en 16, en haalt het DeepLab van de course 0,92 voor de cirkels. Daar helpt een dilation alleen een netwerk dat vanaf nul leert niet, en helpt een ASPP ongeveer even veel met dilation 1, 1 en 1. DeepLab gebruikte een dilation eerst om de weights te houden van een netwerk dat op foto's getraind is."
+can_now:
+  - en: "count how many pixels one place after a stack of layers sees, with their strides and dilations"
+    nl: "tellen hoeveel pixels één plaats na een stapel layers ziet, met hun strides en dilations"
+    by: field
+  - en: "build an ASPP: a 1×1 convolution and dilated 3×3 convolutions side by side, stacked and combined"
+    nl: "een ASPP bouwen: een 1×1-convolutie en 3×3-convoluties met dilation naast elkaar, gestapeld en gecombineerd"
+    by: aspp
+  - en: "take poolings out of a CNN and dilate the layers after them, as DeepLab does"
+    nl: "poolings uit een CNN halen en de layers erna een dilation geven, zoals DeepLab doet"
+    by: deeplab
+  - en: "explain why DeepLab dilates the layers after a pooling it takes out"
+    nl: "uitleggen waarom DeepLab de layers na een pooling die het eruit haalt een dilation geeft"
+    by: why-dilate
+further_reading:
+  - en: "Liang-Chieh Chen, George Papandreou, Iasonas Kokkinos, Kevin Murphy and Alan Yuille (2016), *DeepLab: Semantic Image Segmentation with Deep Convolutional Nets, Atrous Convolution, and Fully Connected CRFs*: section 3.1, the convolution with gaps, with Figures 2 and 3; section 3.2, ASPP, with Figure 4; and section 4.1, the results on PASCAL VOC 2012"
+    nl: "Liang-Chieh Chen, George Papandreou, Iasonas Kokkinos, Kevin Murphy en Alan Yuille (2016), *DeepLab: Semantic Image Segmentation with Deep Convolutional Nets, Atrous Convolution, and Fully Connected CRFs*: paragraaf 3.1, de convolutie met gaten, met figuur 2 en 3; paragraaf 3.2, ASPP, met figuur 4; en paragraaf 4.1, de resultaten op PASCAL VOC 2012"
+  - en: "Liang-Chieh Chen, George Papandreou, Florian Schroff and Hartwig Adam (2017), *Rethinking Atrous Convolution for Semantic Image Segmentation*: section 3.3, ASPP with batch normalization and a branch that averages the whole map, with Figures 4 and 5"
+    nl: "Liang-Chieh Chen, George Papandreou, Florian Schroff en Hartwig Adam (2017), *Rethinking Atrous Convolution for Semantic Image Segmentation*: paragraaf 3.3, ASPP met batch normalization en een tak die de hele map middelt, met figuur 4 en 5"

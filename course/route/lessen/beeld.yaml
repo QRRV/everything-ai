@@ -731,11 +731,26 @@ lessons:
   module: segmentation
   idea: "A dilated convolution spreads its filter out with gaps, so it sees a larger area with the same weights and without making the map smaller; DeepLab puts several dilations side by side to see small and large surroundings at once."
   covers: [segmentatie#4, convolutionele-netwerken#2]
+  # Measured on the course's scenes (checks.py, REFERENCE and TRAINED): the layers of cv-fcn's FCN with stride 16 (conv
+  # 3x3 with 16, 32, 64, 64 channels), its third and fourth pooling left out, conv4 dilated by 2, an ASPP (a 1x1 and 3x3
+  # branches with dilation 2, 4, 8, 64 channels each, ReLU, torch.cat, a 1x1 with ReLU), a 1x1 conv to 4 classes and
+  # cv-fcn's upsampler with stride 4; 193,188 parameters; trained as cv-fcn (8 epochs, batch 32, one thread, ~6 min).
+  # IoU of circles / squares / triangles over seeds 0-4: DeepLab 0.91-0.93 / 0.80-0.83 / 0.81-0.84; its ASPP with
+  # dilation 1, 1, 1 0.90-0.91 / 0.79-0.81 / 0.82-0.83; dilated without ASPP (98,724 parameters) 0.83-0.88 / 0.65-0.74
+  # / 0.71-0.75; neither 0.79-0.90 / 0.58-0.79 / 0.66-0.82, with higher medians than dilated. Dilation alone does not
+  # help a network trained from scratch, also not on scenes with shapes up to 80 px (tried during the build); the lesson
+  # says so, and shows what DeepLab first used dilation for, keeping a trained network's weights, in the worked
+  # example. cv-fcn's FCN with stride 4 also has a 32x32 map but sees 18 px: lowest of all (in the lesson's table).
+  # The worked example slices with a step (x[:, :, ::2, ::2]), from math-complex-rotation, outside this chain: the
+  # lesson's new-words table explains it, so it is in mentions.
   requires: [cv-fcn]
   introduces: [c:dilated-convolution, c:atrous-spatial-pyramid-pooling, c:deeplab, py:conv2d-dilation]
   warns: [dilation]
+  uses: [c:semantic-segmentation, c:fully-convolutional-network, c:upsampling, c:transposed-convolution, py:nn-convtranspose2d, c:receptive-field, c:convolution, c:feature-map, c:filter, c:kernel-size, c:stride, c:padding, c:pooling, c:relu, c:layer, c:channel, c:output-channel, c:pointwise-convolution, c:intersection-over-union, c:vgg, c:resnet, c:batchnorm, c:pretrained-model, c:bilinear-interpolation, c:dilation, c:binary-image, c:cross-entropy, c:loss, c:training, c:epoch, c:mini-batch, c:train-set, c:test-set, c:seed, c:model-parameter, c:weight, c:tensor, c:shape, c:class, c:pixel, c:accuracy, c:mean, c:median, v:loss-curve, py:nn-conv2d, py:nn-maxpool2d, py:nn-modulelist, py:nn-module, py:nn-init, py:torch-tensor, py:torch-randn, py:np-zeros, py:torch-permute, py:torch-unsqueeze, py:torch-relu, py:torch-cat, py:state-dict, py:no-grad, py:with, py:manual-seed, py:np-sum, py:abs, py:min-max, py:numel, py:round, py:indexing, py:slicing, py:range-step, py:augmented-assignment, py:int-conversion, py:boolean-mask, py:dim, py:class, py:init-method, py:super, py:for, py:range, py:len, py:list, py:tuple, py:comprehension, py:keyword-argument, py:method, py:def, py:return, py:import, py:print, py:comment, py:variable, py:arithmetic, py:comparison, py:int, py:float, q:predict, q:choice, q:exercise-with-check, q:slider-task, q:explain, q:run-cell]
+  mentions: [c:imagenet, c:mean-iou, c:global-average-pooling, c:paper, py:slice-step]
   ladder: [torch]
   data: [course-scenes]
+  reference_data: []
   needs: any
 
 - id: cv-mask-rcnn
