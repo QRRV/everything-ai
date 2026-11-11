@@ -703,12 +703,24 @@ lessons:
   module: segmentation
   kind: project
   project: cnn
-  idea: "A U-Net goes down to coarse feature maps and back up, and stacks each map on the way up with the sharp map of the same size from the way down; with those skip connections it draws exact edges. You train one on the course's scenes and score its masks with mean IoU, the IoU of each kind averaged over the kinds."
+  idea: "A U-Net goes down to coarse feature maps and back up, and stacks each map on the way up with the map of the same size from the way down; with those skip connections it gets the details from before every pooling. You train one on the course's scenes and score its masks with mean IoU, the IoU of each class averaged over the classes, background included."
   covers: [d11-cnn-architecturen#5, segmentatie#3]
+  # Measured on the course's scenes (checks.py, REFERENCE and TRAINED): blocks of two conv 3x3 (padding 1) + BatchNorm2d
+  # + ReLU; the way down 8, 16, 32 channels, each kept, then max pool 2; a bottom block of 64 at 16 px; each step up a
+  # ConvTranspose2d 2x2 stride 2, torch.cat with the kept map, a block back to half; a 1x1 conv to 4 classes; 121,556
+  # parameters; trained as cv-fcn (8 epochs, batch 32, one thread, ~9 min). Median mean IoU over seeds 0-4, background
+  # included: 3 skips 0.95, 2 skips 0.94, 1 skip 0.93, none 0.91 (squares 0.87 -> 0.92, triangles 0.84 -> 0.92); 3 skips
+  # without BN 0.43; cv-fcn's FCN 0.77. Seed 3 with 3 skips and seed 0 with 1 skip call the triangles squares after 8
+  # epochs (seed 3: 97.3% of the pixels right, mean IoU 0.65); with 16 epochs, seed 3 reaches 0.97. nn.BatchNorm2d is
+  # introduced in cv-one-stage-detector, outside this chain: the lesson explains it as nn-batchnorm's BatchNorm1d per
+  # channel, so it is in mentions.
   requires: [cv-fcn]
   introduces: [c:u-net, c:skip-connection, c:mean-iou]
+  uses: [c:semantic-segmentation, c:fully-convolutional-network, c:upsampling, c:transposed-convolution, py:nn-convtranspose2d, c:batchnorm, s:gamma-scale, s:beta-shift, c:standardization, c:neuron, c:residual-connection, c:receptive-field, c:intersection-over-union, c:segmentation-mask, c:median, c:convolution, c:feature-map, c:filter, c:kernel-size, c:stride, c:padding, c:pooling, c:relu, c:layer, c:channel, c:output-channel, c:pointwise-convolution, c:cross-entropy, c:loss, c:training, c:epoch, c:mini-batch, c:train-set, c:test-set, c:seed, c:model-parameter, c:weight, c:tensor, c:shape, c:axis, c:class, c:label, c:pixel, c:accuracy, c:mean, c:vgg, c:resnet, v:loss-curve, py:nn-conv2d, py:nn-maxpool2d, py:nn-modulelist, py:nn-module, py:torch-cat, py:torch-tensor, py:torch-permute, py:torch-unsqueeze, py:torch-relu, py:manual-seed, py:np-zeros, py:zeros-like, py:boolean-mask, py:mask-and-or, py:np-sum, py:np-mean, py:indexing, py:augmented-assignment, py:for, py:range, py:list, py:append, py:round, py:class, py:init-method, py:forward-method, py:super, py:inheritance, py:self, py:def, py:return, py:import, py:print, py:comment, py:variable, py:arithmetic, py:comparison, py:int, py:float, py:keyword-argument, py:method, py:dim, q:predict, q:choice, q:exercise-with-check, q:slider-task, q:explain, q:run-cell]
+  mentions: [py:nn-batchnorm2d, c:gpu, c:paper]
   ladder: [torch]
   data: [course-scenes]
+  reference_data: []
   needs: any
 
 # A dilated convolution keeps the map large, so this network needs little upsampling; it can use cv-fcn's transposed

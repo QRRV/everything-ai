@@ -1,0 +1,37 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: cv-unet
+minutes: 50
+title:
+  en: "Project: your own U-Net"
+  nl: "Project: je eigen U-Net"
+goal:
+  en: "build a U-Net, which goes down to coarse feature maps and back up and stacks every map of the way up with the map of the same size from the way down, train it on the course's scenes, and measure it with mean IoU."
+  nl: "een U-Net bouwen, dat omlaag gaat naar grove feature maps en weer omhoog en elke map van de weg omhoog stapelt met de map van dezelfde grootte van de weg omlaag, het trainen op de scènes van de course, en het meten met mean IoU."
+summary:
+  - en: "A U-Net (2015) goes down to coarse feature maps, which see a lot of the picture, and back up with transposed convolutions; every step up stacks the map of the same size from the way down in front of it, with torch.cat along the channels. Those skip connections give the way up the details from before every pooling."
+    nl: "Een U-Net (2015) gaat omlaag naar grove feature maps, die veel van het beeld zien, en met transposed convolutions weer omhoog; elke stap omhoog stapelt de map van dezelfde grootte van de weg omlaag ervoor, met torch.cat langs de channels. Die skip connections geven de weg omhoog de details van vóór elke pooling."
+  - en: "Mean IoU is the IoU of every class, background included, averaged over the classes: every class counts the same. A network that says background everywhere gets 87% of the pixels of the course's test scenes right, and a mean IoU of only 0.22."
+    nl: "Mean IoU is de IoU van elke klasse, achtergrond meegeteld, gemiddeld over de klassen: elke klasse telt even zwaar. Een netwerk dat overal achtergrond zegt, heeft 87% van de pixels van de testscènes van de course goed, en een mean IoU van maar 0,22."
+  - en: "Over five seeds, the course's U-Net reaches a median mean IoU of 0.95 on the course's test scenes. Every skip connection helps, from 0.91 without any, most for the squares and the triangles; in 8 epochs, batch normalization matters even more. With seed 3, the U-Net calls the triangles squares after 8 epochs: 97.3% of the pixels right, but a mean IoU of only 0.65."
+    nl: "Over vijf seeds haalt het U-Net van de course een mediaan van 0,95 voor de mean IoU op de testscènes van de course. Elke skip connection helpt, vanaf 0,91 zonder, het meest voor de vierkanten en de driehoeken; in 8 epochs maakt batch normalization nog meer uit. Met seed 3 noemt het U-Net de driehoeken na 8 epochs vierkant: 97,3% van de pixels goed, maar een mean IoU van maar 0,65."
+can_now:
+  - en: "count the channels a block of the way up gets after a skip connection"
+    nl: "de channels tellen die een blok van de weg omhoog krijgt na een skip connection"
+    by: stack-channels
+  - en: "write the block of a U-Net: two 3×3 convolutions, each with batch normalization and ReLU"
+    nl: "het blok van een U-Net schrijven: twee 3×3-convoluties, elk met batch normalization en ReLU"
+    by: double-conv
+  - en: "build a U-Net that keeps the maps of the way down and stacks them on the way up"
+    nl: "een U-Net bouwen dat de maps van de weg omlaag bewaart en ze op de weg omhoog stapelt"
+    by: unet
+  - en: "measure the classes a network gives every pixel with mean IoU"
+    nl: "de klassen die een netwerk elke pixel geeft meten met mean IoU"
+    by: mean-iou
+  - en: "explain what the skip connections give the way up that the bottom map cannot"
+    nl: "uitleggen wat de skip connections de weg omhoog geven dat de onderste map niet kan"
+    by: why-skips
+further_reading:
+  - en: "Olaf Ronneberger, Philipp Fischer and Thomas Brox (2015), *U-Net: Convolutional Networks for Biomedical Image Segmentation*: section 1, the idea, with the overlap-tile strategy of Figure 2; section 2, the network, with Figure 1; section 3, training, with the weighted loss, and section 3.1, the elastic deformations; and section 4, the results on the EM segmentation challenge and the ISBI cell tracking challenge, with Tables 1 and 2"
+    nl: "Olaf Ronneberger, Philipp Fischer en Thomas Brox (2015), *U-Net: Convolutional Networks for Biomedical Image Segmentation*: paragraaf 1, het idee, met de overlap-tile-aanpak van figuur 2; paragraaf 2, het netwerk, met figuur 1; paragraaf 3, het trainen, met de gewogen loss, en paragraaf 3.1, de elastische vervormingen; en paragraaf 4, de resultaten op de EM segmentation challenge en de ISBI cell tracking challenge, met tabel 1 en 2"
