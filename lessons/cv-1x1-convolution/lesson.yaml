@@ -5,23 +5,23 @@ id: cv-1x1-convolution
 minutes: 35
 title:
   en: "1×1 convolutions: mixing the channels"
-  nl: "1×1 convolutions: de channels mengen"
+  nl: "1×1-convoluties: de channels mengen"
 goal:
   en: "see that a 1×1 convolution is a linear layer on every pixel, count what a bottleneck saves, build one, and measure it in a CNN on CIFAR-10."
-  nl: "zien dat een 1×1 convolution een linear layer op elke pixel is, tellen wat een bottleneck bespaart, er een bouwen, en hem meten in een CNN op CIFAR-10."
+  nl: "zien dat een 1×1-convolutie een linear layer op elke pixel is, tellen wat een bottleneck bespaart, er een bouwen, en hem meten in een CNN op CIFAR-10."
 summary:
   - en: "A 1×1 convolution from c_in channels to c_out takes the numbers of one pixel in every channel, and makes c_out new numbers of them with c_out × (c_in + 1) parameters: a linear layer, the same at every pixel. It never looks at a neighbor. With the weights 0.299, 0.587 and 0.114, it makes a color photo gray."
-    nl: "Een 1×1 convolution van c_in channels naar c_out neemt de getallen van één pixel in elk channel, en maakt er c_out nieuwe getallen van met c_out × (c_in + 1) parameters: een linear layer, op elke pixel dezelfde. Hij kijkt nooit naar een buur. Met de weights 0,299, 0,587 en 0,114 maakt hij een kleurenfoto grijs."
+    nl: "Een 1×1-convolutie van c_in channels naar c_out neemt de getallen van één pixel in elk channel, en maakt er c_out nieuwe getallen van met c_out × (c_in + 1) parameters: een linear layer, op elke pixel dezelfde. Hij kijkt nooit naar een buur. Met de weights 0,299, 0,587 en 0,114 maakt hij een kleurenfoto grijs."
   - en: "A bottleneck puts the expensive 3×3 convolution between a 1×1 convolution to fewer channels and one back. In ResNet-50, from 256 channels to 64 and back: 70,016 parameters, where one 3×3 convolution from 256 to 256 would have 590,080. Network In Network (2013), GoogLeNet (2014) and ResNet-50 (2015) used 1×1 convolutions."
-    nl: "Een bottleneck zet de dure 3×3-convolutie tussen een 1×1 convolution naar minder channels en een terug. In ResNet-50 van 256 channels naar 64 en terug: 70.016 parameters, waar één 3×3-convolutie van 256 naar 256 er 590.080 zou hebben. Network In Network (2013), GoogLeNet (2014) en ResNet-50 (2015) gebruikten 1×1 convolutions."
+    nl: "Een bottleneck zet de dure 3×3-convolutie tussen een 1×1-convolutie naar minder channels en een terug. In ResNet-50 van 256 channels naar 64 en terug: 70.016 parameters, waar één 3×3-convolutie van 256 naar 256 er 590.080 zou hebben. Network In Network (2013), GoogLeNet (2014) en ResNet-50 (2015) gebruikten 1×1-convoluties."
   - en: "A CNN on 6,000 photos of CIFAR-10, for 20 epochs: with one 3×3 convolution from 64 to 64 in its middle, 66,570 parameters, it reads 532 to 572 test photos right and learns its training photos by heart; with a bottleneck from 64 to 16 channels and back, 34,090 parameters, 521 to 550 test photos, and 5,077 to 5,510 of its 6,000 training photos."
     nl: "Een CNN op 6.000 foto's van CIFAR-10, 20 epochs lang: met één 3×3-convolutie van 64 naar 64 in zijn midden, 66.570 parameters, leest het 532 tot 572 testfoto's goed en leert het zijn trainingsfoto's uit zijn hoofd; met een bottleneck van 64 naar 16 channels en terug, 34.090 parameters, 521 tot 550 testfoto's, en 5.077 tot 5.510 van zijn 6.000 trainingsfoto's."
 can_now:
   - en: "tell what a 1×1 convolution can do with a map, and what needs a larger filter"
-    nl: "zeggen wat een 1×1 convolution met een map kan doen, en waar een groter filter voor nodig is"
+    nl: "zeggen wat een 1×1-convolutie met een map kan doen, en waar een groter filter voor nodig is"
     by: one-by-one
   - en: "build a bottleneck from two 1×1 convolutions around a 3×3 convolution, and count what it saves"
-    nl: "een bottleneck bouwen uit twee 1×1 convolutions rond een 3×3-convolutie, en tellen wat hij bespaart"
+    nl: "een bottleneck bouwen uit twee 1×1-convoluties rond een 3×3-convolutie, en tellen wat hij bespaart"
     by: bottleneck
   - en: "read from measured runs what a network gains and loses with fewer parameters"
     nl: "uit gemeten runs aflezen wat een netwerk wint en verliest met minder parameters"
@@ -30,6 +30,6 @@ further_reading:
   - en: "Min Lin, Qiang Chen and Shuicheng Yan (2013), *Network In Network*: section 3.1, where the small network in each layer turns out to be the same as convolutions with filters of 1 by 1"
     nl: "Min Lin, Qiang Chen en Shuicheng Yan (2013), *Network In Network*: paragraaf 3.1, waar het kleine netwerk in elke layer hetzelfde blijkt als convoluties met filters van 1 bij 1"
   - en: "Christian Szegedy and others (2014), *Going Deeper with Convolutions*: section 4, 1×1 convolutions that make the channels fewer before the 3×3 and 5×5 convolutions of GoogLeNet"
-    nl: "Christian Szegedy en anderen (2014), *Going Deeper with Convolutions*: paragraaf 4, 1×1 convolutions die de channels minder maken vóór de 3×3- en 5×5-convoluties van GoogLeNet"
+    nl: "Christian Szegedy en anderen (2014), *Going Deeper with Convolutions*: paragraaf 4, 1×1-convoluties die de channels minder maken vóór de 3×3- en 5×5-convoluties van GoogLeNet"
   - en: "Kaiming He and others (2015), *Deep Residual Learning for Image Recognition*, section 4.1 and figure 5: the bottleneck blocks of ResNet-50, 101 and 152"
     nl: "Kaiming He en anderen (2015), *Deep Residual Learning for Image Recognition*, paragraaf 4.1 en figuur 5: de bottleneck blocks van ResNet-50, 101 en 152"

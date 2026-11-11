@@ -124,7 +124,7 @@ body, #root, #App { background: var(--ea-page) !important; color: var(--ea-ink);
 
 /* ---------- code: structure in weight and grey, never a role hue ----------
    marimo 0.25.1 gives CodeMirror generated class names, different per theme. This map is pinned to that
-   version and checked by the screenshot test; see the style guide, chapter 5. */
+   version and checked by the screenshot test; see the style guide, chapter 7. */
 .cm-content { font-variant-ligatures: none; font-feature-settings: "calt" 0, "liga" 0; }   /* `>=` stays two signs, never ≥ */
 .console-output-area { font-variant-ligatures: none; font-feature-settings: "calt" 0, "liga" 0; }   /* the same in what a cell prints: `<|` stays two signs */
 :root:not(.dark) .ͼ73 { color: var(--ea-ink) !important; font-weight: 600; }          /* keywords */
@@ -132,12 +132,20 @@ body, #root, #App { background: var(--ea-page) !important; color: var(--ea-ink);
 :root:not(.dark) :is(.ͼ6y, .ͼ7c, .ͼ7b, .ͼ74, .ͼ70, .ͼ71) { color: var(--ea-ink) !important; } /* names, calls, numbers */
 :root:not(.dark) :is(.ͼ6z, .ͼ78, .ͼ79) { color: var(--ea-ink-2) !important; }      /* strings, html */
 :root:not(.dark) .ͼ6x { color: var(--ea-ink-3) !important; }                         /* comments */
+:root:not(.dark) .ͼ6w { color: var(--ea-ink) !important; }                           /* plain names */
 .dark .ͼ6l { color: var(--ea-ink) !important; font-weight: 600; }
 .dark :is(.ͼ6s, .ͼ6p) { color: var(--ea-ink-2) !important; font-weight: 400; }
 .dark :is(.ͼ6g, .ͼ6u, .ͼ6t, .ͼ6m, .ͼ6i, .ͼ6j) { color: var(--ea-ink) !important; }
 .dark :is(.ͼ6h, .ͼ6q, .ͼ6r) { color: var(--ea-ink-2) !important; }
 .dark .ͼ6f { color: var(--ea-ink-3) !important; }
+.dark .ͼ6e { color: var(--ea-ink) !important; }
 .mo-cm-reactive-reference { color: inherit !important; text-decoration: underline dotted var(--ea-ink-3); text-underline-offset: 3px; }
+/* The boxes of the exercises: editor.css. Code in the text (a fenced block, Pygments' classes): the same weight and grey */
+.markdown .codehilite span { color: var(--ea-ink) !important; font-weight: 400; font-style: normal !important; }
+.markdown .codehilite :is(.k, .kd, .kn, .kp, .kr, .kt) { font-weight: 600; }   /* keywords; True and None are names */                     /* keywords */
+.markdown .codehilite :is(.o, .ow, .p, .nd) { color: var(--ea-ink-2) !important; }                   /* operators, `in`, decorators */
+.markdown .codehilite :is(.s, .s1, .s2, .sa, .sb, .sc, .sd, .se, .sh, .si, .sx, .sr, .ss, .dl) { color: var(--ea-ink-2) !important; } /* strings */
+.markdown .codehilite :is(.c, .c1, .ch, .cm, .cp, .cpf, .cs) { color: var(--ea-ink-3) !important; }  /* comments */
 
 /* buttons and focus: ink, not a hue */
 button:focus-visible, [role="slider"]:focus-visible, a:focus-visible, summary:focus-visible { outline: 2px solid var(--ea-ink) !important; outline-offset: 2px; }

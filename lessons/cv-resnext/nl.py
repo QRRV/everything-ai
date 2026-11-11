@@ -116,9 +116,9 @@ def text_idea():
                                   "sub": "groups={g}: {n} vakjes",
                                   "alt": "Twee roosters van 8 bij 8 vakjes, een rij voor elk filter en een kolom voor elk channel dat binnenkomt. Links, groups=1: alle 64 vakjes oranje, elk filter ziet alle 8 channels. Rechts, groups=4: vier oranje blokken van 2 bij 2 op de diagonaal, 16 vakjes: elk filter ziet alleen de 2 channels van zijn eigen groep."}),
         mo.md(r"""
-        **Het ResNeXt block.** De paper van ResNeXt begint bij 32 paden van dezelfde vorm naast elkaar in een residual block: elk pad is een 1×1 convolution van 256 channels naar 4, een 3×3-convolutie van 4 naar 4, en een 1×1 convolution van 4 terug naar 256. Het block telt op wat de 32 paden geven, en telt daar zijn input $x$ bij op, zoals in [ResNet](/course/open/cnn-resnet?lang=nl). Omdat de paden dezelfde vorm hebben, passen ze in drie convoluties. De 32 eerste samen zijn één 1×1 convolution van 256 channels naar 128. De 32 middelste, elk op zijn eigen 4 channels, zijn één 3×3-convolutie van 128 naar 128 in 32 groepen. En de 32 laatste optellen is één 1×1 convolution van 128 terug naar 256. De paper noemt het aantal paden de **cardinality**, en schrijft een block als C×d, voor C paden van d channels: ResNeXt-50 heeft 32×4d.
+        **Het ResNeXt block.** De paper van ResNeXt begint bij 32 paden van dezelfde vorm naast elkaar in een residual block: elk pad is een 1×1-convolutie van 256 channels naar 4, een 3×3-convolutie van 4 naar 4, en een 1×1-convolutie van 4 terug naar 256. Het block telt op wat de 32 paden geven, en telt daar zijn input $x$ bij op, zoals in [ResNet](/course/open/cnn-resnet?lang=nl). Omdat de paden dezelfde vorm hebben, passen ze in drie convoluties. De 32 eerste samen zijn één 1×1-convolutie van 256 channels naar 128. De 32 middelste, elk op zijn eigen 4 channels, zijn één 3×3-convolutie van 128 naar 128 in 32 groepen. En de 32 laatste optellen is één 1×1-convolutie van 128 terug naar 256. De paper noemt het aantal paden de **cardinality**, en schrijft een block als C×d, voor C paden van d channels: ResNeXt-50 heeft 32×4d.
 
-        **Dezelfde kosten, twee keer zo breed.** Dit block, met 256 channels erin en eruit zoals in ResNeXt-50, heeft 70.656 parameters, geteld met een bias voor elk filter, zoals `nn.Conv2d` ze maakt. De bottleneck van ResNet-50 uit [1×1 convolutions: de channels mengen](/course/open/cv-1x1-convolution?lang=nl), van 256 channels naar 64, van 64 naar 64, en terug naar 256, heeft er 70.016. In het midden is het block van ResNeXt voor die kosten twee keer zo breed, 128 channels tegen 64; zonder groepen zou het 213.504 parameters hebben. Tabel 3 van de paper vergelijkt blocks van ongeveer dezelfde kosten op ImageNet, van 1 pad van 64 channels, ResNet-50 zelf, tot 32 paden van 4. De getallen zeggen voor hoeveel van de validatiefoto's van ImageNet de eerste gok van het netwerk fout was:
+        **Dezelfde kosten, twee keer zo breed.** Dit block, met 256 channels erin en eruit zoals in ResNeXt-50, heeft 70.656 parameters, geteld met een bias voor elk filter, zoals `nn.Conv2d` ze maakt. De bottleneck van ResNet-50 uit [1×1-convoluties: de channels mengen](/course/open/cv-1x1-convolution?lang=nl), van 256 channels naar 64, van 64 naar 64, en terug naar 256, heeft er 70.016. In het midden is het block van ResNeXt voor die kosten twee keer zo breed, 128 channels tegen 64; zonder groepen zou het 213.504 parameters hebben. Tabel 3 van de paper vergelijkt blocks van ongeveer dezelfde kosten op ImageNet, van 1 pad van 64 channels, ResNet-50 zelf, tot 32 paden van 4. De getallen zeggen voor hoeveel van de validatiefoto's van ImageNet de eerste gok van het netwerk fout was:
 
         | Block | Paden van channels | Fout op ImageNet |
         |---|---|---|
@@ -135,10 +135,10 @@ def text_idea():
         | Woord | Wat het betekent | In code |
         |---|---|---|
         | **grouped convolution** | een convolutie waarvan de channels en de filters in even grote groepen verdeeld zijn: elk filter ziet alleen de channels van zijn eigen groep, dus heeft de convolutie `groups` keer zo weinig weights | `nn.Conv2d(128, 128, 3, groups=32)` |
-        | **ResNeXt** | een ResNet waarvan de blocks veel dunne paden van dezelfde vorm zijn, geschreven als een 1×1 convolution, een grouped 3×3-convolutie en een 1×1 convolution, met de input erbij opgeteld; uit 2016 | `ResNeXtBlock(256, 128, 32)` |
+        | **ResNeXt** | een ResNet waarvan de blocks veel dunne paden van dezelfde vorm zijn, geschreven als een 1×1-convolutie, een grouped 3×3-convolutie en een 1×1-convolutie, met de input erbij opgeteld; uit 2016 | `ResNeXtBlock(256, 128, 32)` |
         | **cardinality** | het aantal paden in een ResNeXt block: de `groups` van zijn 3×3-convolutie. 32×4d is 32 paden van 4 channels | `groups=32` |
 
-        **Het netwerk van de demo.** De demo traint het netwerk uit [1×1 convolutions: de channels mengen](/course/open/cv-1x1-convolution?lang=nl), met een ResNeXt block in het midden, op de 64 maps van 8 bij 8. Je kiest uit vier blocks: de 1×64d, 2×40d, 4×24d en 32×4d uit de paper met al hun channels gedeeld door 4, dus 1×16d, 2×10d, 4×6d en 32×1d. De 8×14d uit de paper zou 8 groepen van 3,5 channels geven, dus die valt af. Elk block heeft ongeveer 4.400 weights, 4.352, 4.360, 4.368 of 4.384, en het hele netwerk 34.090 tot 34.154 parameters. 1×16d heeft precies de drie convoluties van de bottleneck met 16 in het midden uit die les; het telt aan het eind de input erbij op, waar de bottleneck een ReLU heeft. In 32×1d ziet elk filter van 3 bij 3 maar één channel.
+        **Het netwerk van de demo.** De demo traint het netwerk uit [1×1-convoluties: de channels mengen](/course/open/cv-1x1-convolution?lang=nl), met een ResNeXt block in het midden, op de 64 maps van 8 bij 8. Je kiest uit vier blocks: de 1×64d, 2×40d, 4×24d en 32×4d uit de paper met al hun channels gedeeld door 4, dus 1×16d, 2×10d, 4×6d en 32×1d. De 8×14d uit de paper zou 8 groepen van 3,5 channels geven, dus die valt af. Elk block heeft ongeveer 4.400 weights, 4.352, 4.360, 4.368 of 4.384, en het hele netwerk 34.090 tot 34.154 parameters. 1×16d heeft precies de drie convoluties van de bottleneck met 16 in het midden uit die les; het telt aan het eind de input erbij op, waar de bottleneck een ReLU heeft. In 32×1d ziet elk filter van 3 bij 3 maar één channel.
 
         Het plaatje: hoeveel van de eerste 1.000 testfoto's van CIFAR-10 het netwerk goed leest na 20 epochs op de eerste 6.000 trainingsfoto's, een stip voor elk van 5 seeds, met de code van de course. De twee bovenste rijen komen uit die les, zonder de input erbij: één 3×3-convolutie, 532 tot 572, en de bottleneck met 16 in het midden, 521 tot 550. De vier ResNeXt blocks: 562 tot 598, 565 tot 580, 572 tot 599 en 574 tot 584. Oefening 3 vraagt wat de rijen zeggen.
         """),
@@ -159,9 +159,9 @@ def text_recipe():
 
     Zo bouw je een ResNeXt block voor `channels` channels, `width` in het midden, in `groups` groepen:
 
-    1. Een 1×1 convolution van `channels` naar `width`, met een ReLU.
+    1. Een 1×1-convolutie van `channels` naar `width`, met een ReLU.
     2. Een 3×3-convolutie van `width` naar `width` in `groups` groepen, met `padding=1` en een ReLU: elke groep heeft `width // groups` channels.
-    3. Een 1×1 convolution van `width` terug naar `channels`, zonder ReLU.
+    3. Een 1×1-convolutie van `width` terug naar `channels`, zonder ReLU.
     4. Geef de input erbij opgeteld terug: `x + y`.
     """)
     return
@@ -219,12 +219,12 @@ def text_before_play():
 @app.cell(hide_code=True)
 def play_groups():
     _labels = {"title": "Een block van ResNeXt-50, 256 channels", "x": "parameters (duizenden)",
-               "reduce": "1×1 convolution, 256 naar 128", "conv": "3×3-convolutie, 128 naar 128, in groepen",
-               "expand": "1×1 convolution, 128 terug naar 256",
-               "alt": "Drie balken parameters, in duizenden, voor het gekozen aantal groepen, in oranje: de 1×1 convolution van 256 channels naar 128, de 3×3-convolutie van 128 naar 128 in groepen, en de 1×1 convolution van 128 terug naar 256."}
+               "reduce": "1×1-convolutie, 256 naar 128", "conv": "3×3-convolutie, 128 naar 128, in groepen",
+               "expand": "1×1-convolutie, 128 terug naar 256",
+               "alt": "Drie balken parameters, in duizenden, voor het gekozen aantal groepen, in oranje: de 1×1-convolutie van 256 channels naar 128, de 3×3-convolutie van 128 naar 128 in groepen, en de 1×1-convolutie van 128 terug naar 256."}
     explore_groups = L.explore("groups-slider", "groepen", lambda _v: (C.groups_bars(int(_v), _labels, L.lang), C.groups_sentence(int(_v), L.lang)),
                                start=32, values=C.GROUPS, role="hyper",
-                               task="Vanaf hoeveel groepen heeft de 3×3-convolutie minder parameters dan de 1×1 convolution ervoor?")
+                               task="Vanaf hoeveel groepen heeft de 3×3-convolutie minder parameters dan de 1×1-convolutie ervoor?")
     explore_groups
     return
 
@@ -232,7 +232,7 @@ def play_groups():
 @app.cell(hide_code=True)
 def text_after_play():
     mo.md(r"""
-    Vanaf 8 groepen: dan heeft de 3×3-convolutie 18.560 parameters, tegen 32.896 voor de 1×1 convolution ervoor; met 4 groepen heeft hij er nog 36.992. Met 32 groepen, zoals in ResNeXt-50, heeft hij er 4.736, en zitten bijna alle 70.656 parameters van het block in zijn twee 1×1 convolutions: 65.920. Daarom kan ResNeXt het midden voor dezelfde kosten twee keer zo breed maken. Met 128 groepen ziet elk filter één channel: daar begint *Depthwise separable convolutions: MobileNet*.
+    Vanaf 8 groepen: dan heeft de 3×3-convolutie 18.560 parameters, tegen 32.896 voor de 1×1-convolutie ervoor; met 4 groepen heeft hij er nog 36.992. Met 32 groepen, zoals in ResNeXt-50, heeft hij er 4.736, en zitten bijna alle 70.656 parameters van het block in zijn twee 1×1-convoluties: 65.920. Daarom kan ResNeXt het midden voor dezelfde kosten twee keer zo breed maken. Met 128 groepen ziet elk filter één channel: daar begint *Depthwise separable convolutions: MobileNet*.
     """)
     return
 
@@ -438,7 +438,7 @@ def text_exercise_runs():
 def choice_runs_cell():
     choice_runs = L.choice(
         "groups-runs",
-        question="Over 5 seeds, na 20 epochs, elk netwerk met ongeveer 34.100 parameters. Met het ResNeXt block in 1 groep van 16 channels leest het 562 tot 598 testfoto's goed; in 2 groepen van 10, 565 tot 580; in 4 groepen van 6, 572 tot 599; in 32 groepen van 1, 574 tot 584. De bottleneck met 16 in het midden uit [1×1 convolutions](/course/open/cv-1x1-convolution?lang=nl), zonder de input erbij, leest 521 tot 550. Wat zeggen de getallen?",
+        question="Over 5 seeds, na 20 epochs, elk netwerk met ongeveer 34.100 parameters. Met het ResNeXt block in 1 groep van 16 channels leest het 562 tot 598 testfoto's goed; in 2 groepen van 10, 565 tot 580; in 4 groepen van 6, 572 tot 599; in 32 groepen van 1, 574 tot 584. De bottleneck met 16 in het midden uit [1×1-convoluties](/course/open/cv-1x1-convolution?lang=nl), zonder de input erbij, leest 521 tot 550. Wat zeggen de getallen?",
         options={
             "more": "Meer groepen lezen meer foto's goed: 32 groepen van 1 is het best",
             "one": "Eén groep is het best: daar ziet elk filter alle 16 channels",
@@ -460,7 +460,7 @@ def text_connections():
     mo.md(r"""
     ## Afronding
 
-    **Samenhang.** Een ResNeXt block is het residual block uit [ResNet: diepte die blijft werken](/course/open/cnn-resnet?lang=nl) met de bottleneck uit [1×1 convolutions: de channels mengen](/course/open/cv-1x1-convolution?lang=nl), in het midden twee keer zo breed gemaakt door een grouped convolution; zijn 32 paden naast elkaar zijn de takken uit [Inception: filters van verschillende groottes naast elkaar](/course/open/cv-inception?lang=nl), allemaal van één vorm. Je telde zijn weights met de shapes uit [Convolutie in detail](/course/open/cnn-conv-formal?lang=nl), zette kleine convoluties naast elkaar met `torch.cat` uit [Tensors in PyTorch](/course/open/torch-tensors?lang=nl), en trainde het block met de Trainer uit [Een herbruikbare training loop](/course/open/nn-trainer?lang=nl) op de foto's uit [Project: je CNN op kleurenfoto's](/course/open/cv-color-cnn?lang=nl). Je project `cnn` heeft nu `resnext.py`. In de volgende les, *DenseNet: elke layer ziet alle layers ervoor*, telt een block zijn input niet op maar houdt hem: elke layer krijgt de maps van alle layers ervoor, gestapeld langs de channels.
+    **Samenhang.** Een ResNeXt block is het residual block uit [ResNet: diepte die blijft werken](/course/open/cnn-resnet?lang=nl) met de bottleneck uit [1×1-convoluties: de channels mengen](/course/open/cv-1x1-convolution?lang=nl), in het midden twee keer zo breed gemaakt door een grouped convolution; zijn 32 paden naast elkaar zijn de takken uit [Inception: filters van verschillende groottes naast elkaar](/course/open/cv-inception?lang=nl), allemaal van één vorm. Je telde zijn weights met de shapes uit [Convolutie in detail](/course/open/cnn-conv-formal?lang=nl), zette kleine convoluties naast elkaar met `torch.cat` uit [Tensors in PyTorch](/course/open/torch-tensors?lang=nl), en trainde het block met de Trainer uit [Een herbruikbare training loop](/course/open/nn-trainer?lang=nl) op de foto's uit [Project: je CNN op kleurenfoto's](/course/open/cv-color-cnn?lang=nl). Je project `cnn` heeft nu `resnext.py`. In de volgende les, *DenseNet: elke layer ziet alle layers ervoor*, telt een block zijn input niet op maar houdt hem: elke layer krijgt de maps van alle layers ervoor, gestapeld langs de channels.
     """)
     return
 

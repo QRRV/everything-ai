@@ -27,7 +27,7 @@ def text_quick_check():
     mo.md(r"""
     ### Instapcheck
 
-    Twee korte vragen over [1×1 convolutions: de channels mengen](/course/open/cv-1x1-convolution?lang=nl), [Hoeveel twee boxes overlappen: IoU](/course/open/cv-iou?lang=nl) en [Labels, boxes, masks en keypoints](/course/open/cv-annotations?lang=nl).
+    Twee korte vragen over [1×1-convoluties: de channels mengen](/course/open/cv-1x1-convolution?lang=nl), [Hoeveel twee boxes overlappen: IoU](/course/open/cv-iou?lang=nl) en [Labels, boxes, masks en keypoints](/course/open/cv-annotations?lang=nl).
     """)
     return
 
@@ -36,7 +36,7 @@ def text_quick_check():
 def quick_check_pointwise():
     quick_pointwise = L.choice(
         "quick-pointwise",
-        question="Een netwerk heeft een feature map van 64 channels en 16 bij 16 plaatsen. Een 1×1 convolution van 64 naar 4 channels: wat geeft die?",
+        question="Een netwerk heeft een feature map van 64 channels en 16 bij 16 plaatsen. Een 1×1-convolutie van 64 naar 4 channels: wat geeft die?",
         options={
             "right": "4 maps van 16 bij 16: op elk van de 256 plaatsen maakt dezelfde linear layer van de 64 getallen van die plaats er 4",
             "whole": "4 getallen voor de hele map, zoals een linear layer aan het eind van een classifier",
@@ -45,10 +45,10 @@ def quick_check_pointwise():
         },
         correct="right",
         why={
-            "right": "Een 1×1 convolution kijkt naar één plaats tegelijk: hij mengt de channels van die plaats, met dezelfde weights op elke plaats. Dus de map houdt zijn 16 bij 16 plaatsen, en krijgt 4 channels. Vandaag geeft hij op elke plaats een score voor elke klasse.",
-            "whole": "Een linear layer aan het eind zou één antwoord geven voor de hele map. Een 1×1 convolution geeft een antwoord op elke plaats: een linear layer op elke pixel. Zie [1×1 convolutions: de channels mengen](/course/open/cv-1x1-convolution?lang=nl).",
-            "neighbors": "Dat is een 3×3-convolutie. Een 1×1 convolution kijkt niet naar de buren: hij mengt alleen de 64 channels van elke plaats.",
-            "smaller": "Een 1×1 convolution met stride 1 houdt elke plaats: alleen het aantal channels verandert, van 64 naar 4.",
+            "right": "Een 1×1-convolutie kijkt naar één plaats tegelijk: hij mengt de channels van die plaats, met dezelfde weights op elke plaats. Dus de map houdt zijn 16 bij 16 plaatsen, en krijgt 4 channels. Vandaag geeft hij op elke plaats een score voor elke klasse.",
+            "whole": "Een linear layer aan het eind zou één antwoord geven voor de hele map. Een 1×1-convolutie geeft een antwoord op elke plaats: een linear layer op elke pixel. Zie [1×1-convoluties: de channels mengen](/course/open/cv-1x1-convolution?lang=nl).",
+            "neighbors": "Dat is een 3×3-convolutie. Een 1×1-convolutie kijkt niet naar de buren: hij mengt alleen de 64 channels van elke plaats.",
+            "smaller": "Een 1×1-convolutie met stride 1 houdt elke plaats: alleen het aantal channels verandert, van 64 naar 4.",
         },
     )
     quick_pointwise
@@ -113,9 +113,9 @@ def text_idea():
 
         **Een klasse voor elke pixel.** In [Labels, boxes, masks en keypoints](/course/open/cv-annotations?lang=nl) kreeg elke vorm een mask: `True` voor elke pixel van die vorm. Semantic segmentation geeft elke pixel van een scène een klasse: hier 0 voor achtergrond, en 1, 2 en 3 voor cirkel, vierkant en driehoek, het label van een vorm plus 1. Alle cirkels krijgen dezelfde klasse: die zegt wat een pixel laat zien, niet bij welke vorm hij hoort. De **class map**, een array zo groot als de scène met de klasse van elke pixel, is wat het netwerk leert; oefening 1 maakt hem uit de masks.
 
-        **Geen linear layers.** Een classifier, zoals je CNN's, eindigt met linear layers: die willen een feature map van één grootte, en geven één antwoord voor het hele beeld. FCN behandelt elke linear layer als een convolutie waarvan de kernel zijn hele input beslaat: een linear layer op een map van 7 bij 7 wordt een 7×7-convolutie, en de linear layers daarna 1×1 convolutions. Een 1×1 convolution is een linear layer op elke pixel, zoals in [1×1 convolutions: de channels mengen](/course/open/cv-1x1-convolution?lang=nl): uit de channels van elke plaats van de map maakt hij een score voor elke klasse op die plaats. Met alleen convoluties en pooling neemt een netwerk een beeld van elke grootte aan, en groeien zijn maps mee.
+        **Geen linear layers.** Een classifier, zoals je CNN's, eindigt met linear layers: die willen een feature map van één grootte, en geven één antwoord voor het hele beeld. FCN behandelt elke linear layer als een convolutie waarvan de kernel zijn hele input beslaat: een linear layer op een map van 7 bij 7 wordt een 7×7-convolutie, en de linear layers daarna 1×1-convoluties. Een 1×1-convolutie is een linear layer op elke pixel, zoals in [1×1-convoluties: de channels mengen](/course/open/cv-1x1-convolution?lang=nl): uit de channels van elke plaats van de map maakt hij een score voor elke klasse op die plaats. Met alleen convoluties en pooling neemt een netwerk een beeld van elke grootte aan, en groeien zijn maps mee.
 
-        **Het FCN van de course.** Drie blokken van een 3×3-convolutie, ReLU en max pooling van 2, met 16, 32 en 64 channels, maken van een scène van 128 bij 128 pixels een map van 16 bij 16: elke plaats daarvan staat voor een vierkant van 8 bij 8 pixels. Die factor 8 is de **output stride**. Nog een 3×3-convolutie met ReLU, en dan geeft een 1×1 convolution van 64 channels naar 4 op elke plaats een score voor achtergrond en voor elke soort. Met de layer die zijn scores weer zo groot maakt als de scène, verderop, heeft het netwerk 64.868 parameters.
+        **Het FCN van de course.** Drie blokken van een 3×3-convolutie, ReLU en max pooling van 2, met 16, 32 en 64 channels, maken van een scène van 128 bij 128 pixels een map van 16 bij 16: elke plaats daarvan staat voor een vierkant van 8 bij 8 pixels. Die factor 8 is de **output stride**. Nog een 3×3-convolutie met ReLU, en dan geeft een 1×1-convolutie van 64 channels naar 4 op elke plaats een score voor achtergrond en voor elke soort. Met de layer die zijn scores weer zo groot maakt als de scène, verderop, heeft het netwerk 64.868 parameters.
 
         **Upsampling.** De scores moeten weer zo groot worden als de scène, één score per klasse voor elke pixel: **upsampling**. In [Groter en kleiner: interpolatie](/course/open/cv-resize-interpolation?lang=nl) maakte je een beeld op twee manieren groter: nearest neighbor herhaalt elke pixel, en bilineaire interpolatie mengt de oude pixels rond elke nieuwe, de dichtstbijzijnde het zwaarst. Voor de scores van 16 bij 16 geeft nearest neighbor blokken van 8 bij 8 pixels; bilineaire interpolatie geeft zachte overgangen ertussen.
 
@@ -123,7 +123,7 @@ def text_idea():
 
         **Trainen en meten.** De loss is de cross-entropy van elke pixel: `nn.CrossEntropyLoss()` neemt scores van shape (N, 4, H, W) en klassen van shape (N, H, W), en geeft hun gemiddelde over alle pixels. Het antwoord van het netwerk voor elke pixel is de klasse met de hoogste score: `out.argmax(1)`. Welk deel van de pixels het goed heeft, zegt weinig, zoals de gok liet zien. Daarom wordt elke soort apart gemeten, met de IoU van zijn pixels, zoals bij masks in [Hoeveel twee boxes overlappen: IoU](/course/open/cv-iou?lang=nl): de pixels die die soort zijn in het antwoord én in de class map, gedeeld door de pixels die die soort zijn in een van beide. Deze les telt elke soort over alle pixels van de 200 testscènes; de paper neemt ook het gemiddelde over de klassen, zoals de volgende les doet.
 
-        **FCN in de paper.** De paper maakt de classifier VGG16, getraind op de foto's van ImageNet, fully convolutional: zijn laatste map is 32 keer zo klein als de foto, en een 1×1 convolution geeft op elke plaats daarvan 21 scores, voor de 20 klassen van PASCAL VOC en achtergrond. Eén transposed convolution met stride 32, vast op bilineaire upsampling, maakt de scores zo groot als de foto. Met de klassen van PASCAL VOC 2011 haalde dat FCN een gemiddelde IoU van 56,0% op foto's waar het niet van leerde; op dezelfde manier gemaakt uit AlexNet 39,8%, en uit GoogLeNet 42,5%. De paper noemt zijn grens zelf: "de stride van 32 pixels in de laatste layer, die voorspelt, beperkt de schaal van de details in de opgeschaalde output". Daarom telt hij er scores bij op uit de fijnere maps van eerdere layers, met skip connections, die elk twee keer zo groot worden gemaakt door een transposed convolution die als bilineaire upsampling begint en leert: met stride 8 haalde zijn FCN-8s 62,7% waar stride 32 59,4% haalde, op een deel van die foto's. Je volgende les bouwt op dat idee verder.
+        **FCN in de paper.** De paper maakt de classifier VGG16, getraind op de foto's van ImageNet, fully convolutional: zijn laatste map is 32 keer zo klein als de foto, en een 1×1-convolutie geeft op elke plaats daarvan 21 scores, voor de 20 klassen van PASCAL VOC en achtergrond. Eén transposed convolution met stride 32, vast op bilineaire upsampling, maakt de scores zo groot als de foto. Met de klassen van PASCAL VOC 2011 haalde dat FCN een gemiddelde IoU van 56,0% op foto's waar het niet van leerde; op dezelfde manier gemaakt uit AlexNet 39,8%, en uit GoogLeNet 42,5%. De paper noemt zijn grens zelf: "de stride van 32 pixels in de laatste layer, die voorspelt, beperkt de schaal van de details in de opgeschaalde output". Daarom telt hij er scores bij op uit de fijnere maps van eerdere layers, met skip connections, die elk twee keer zo groot worden gemaakt door een transposed convolution die als bilineaire upsampling begint en leert: met stride 8 haalde zijn FCN-8s 62,7% waar stride 32 59,4% haalde, op een deel van die foto's. Je volgende les bouwt op dat idee verder.
         """),
         L.watch_out("`nn.CrossEntropyLoss` wil de class map als gehele getallen: `dtype=int` in `np.zeros` maakt ze zo, en `torch.tensor` houdt ze zo. Met een class map van floats stopt hij met een fout."),
         mo.md(r"""
@@ -215,7 +215,7 @@ def text_recipe():
 
         1. De class map van elke scène: overal 0, en het label van een vorm plus 1 op de pixels van zijn mask.
         2. Blokken van een 3×3-convolutie, ReLU en max pooling van 2, tot de map $s$ keer zo klein is als de scène; dan nog een 3×3-convolutie met ReLU.
-        3. Een 1×1 convolution naar een score voor elke klasse op elke plaats.
+        3. Een 1×1-convolutie naar een score voor elke klasse op elke plaats.
         4. Een transposed convolution met stride $s$, een kernel van $2s$ en padding $s/2$, die als bilineaire upsampling begint: de scores zo groot als de scène.
         5. Train met de cross-entropy van elke pixel.
         6. Voor elke pixel de klasse met de hoogste score; meet de IoU van de pixels van elke soort.
@@ -294,7 +294,7 @@ def example_fcn(classes, np, s, torch):
         x = pool(torch.relu(conv(x)))
         print(x.shape)
 
-    # 3. nog een 3x3-convolutie, en een 1x1 convolution naar een score voor elke klasse op elke plaats
+    # 3. nog een 3x3-convolutie, en een 1x1-convolutie naar een score voor elke klasse op elke plaats
     extra = nn.Conv2d(64, 64, 3, padding=1)
     score = nn.Conv2d(64, 4, 1)
     coarse = score(torch.relu(extra(x)))
@@ -314,7 +314,7 @@ def example_fcn(classes, np, s, torch):
 @app.cell(hide_code=True)
 def text_after_example():
     mo.md(r"""
-    De eerste cel telt 14.622 pixels achtergrond, 694 van de cirkel, 653 van het vierkant en 415 van de twee driehoeken: samen 16.384, 128 maal 128. Een netwerk dat overal achtergrond zegt, heeft er 0,892 van goed, en de IoU van de pixels van de cirkel is 0,0: van zijn 694 pixels noemt het er geen enkele cirkel. In de tweede cel schildert de 0 een kopie van nullen; de 100 telt er twee plaatsen verderop 25, 75, 75 en 25 bij op; en de 200 nog twee plaatsen verderop 50, 150, 150 en 50, waar de kopieën optellen tot 75 + 50 = 125 en 25 + 150 = 175. Zonder de eerste en de laatste plaats, padding 1, is dat 0, 25, 75, 125, 175, 150: de rij van bilineaire interpolatie, 0 25 75 125 175 200, behalve de laatste waarde. Voorbij elk eind van de rij mengt de transposed convolution een 0 in: aan het eind, waar geen waarde na de 200 meemengt, geeft dat 150 in plaats van 200; aan het begin zie je het niet, omdat de eerste waarde zelf 0 is. De kernel van enen geeft 0, 0, 100, 100, 200, 200: nearest neighbor. In de derde cel maakt elk blok de map half zo groot, en groeien de channels van 16 naar 64: (1, 64, 16, 16) na drie blokken. De 1×1 convolution maakt daar 4 maps van 16 bij 16 van, en de transposed convolution maakt die 128 bij 128: $(16 - 1) \cdot 8 - 2 \cdot 4 + 16 = 128$. De loss is 1,3862, ongeveer $\log 4 = 1{,}386$: het netwerk heeft nog niets geleerd, dus geeft het elke klasse ongeveer dezelfde score, alsof het een van 4 gokt.
+    De eerste cel telt 14.622 pixels achtergrond, 694 van de cirkel, 653 van het vierkant en 415 van de twee driehoeken: samen 16.384, 128 maal 128. Een netwerk dat overal achtergrond zegt, heeft er 0,892 van goed, en de IoU van de pixels van de cirkel is 0,0: van zijn 694 pixels noemt het er geen enkele cirkel. In de tweede cel schildert de 0 een kopie van nullen; de 100 telt er twee plaatsen verderop 25, 75, 75 en 25 bij op; en de 200 nog twee plaatsen verderop 50, 150, 150 en 50, waar de kopieën optellen tot 75 + 50 = 125 en 25 + 150 = 175. Zonder de eerste en de laatste plaats, padding 1, is dat 0, 25, 75, 125, 175, 150: de rij van bilineaire interpolatie, 0 25 75 125 175 200, behalve de laatste waarde. Voorbij elk eind van de rij mengt de transposed convolution een 0 in: aan het eind, waar geen waarde na de 200 meemengt, geeft dat 150 in plaats van 200; aan het begin zie je het niet, omdat de eerste waarde zelf 0 is. De kernel van enen geeft 0, 0, 100, 100, 200, 200: nearest neighbor. In de derde cel maakt elk blok de map half zo groot, en groeien de channels van 16 naar 64: (1, 64, 16, 16) na drie blokken. De 1×1-convolutie maakt daar 4 maps van 16 bij 16 van, en de transposed convolution maakt die 128 bij 128: $(16 - 1) \cdot 8 - 2 \cdot 4 + 16 = 128$. De loss is 1,3862, ongeveer $\log 4 = 1{,}386$: het netwerk heeft nog niets geleerd, dus geeft het elke klasse ongeveer dezelfde score, alsof het een van 4 gokt.
     """)
     return
 
@@ -584,7 +584,7 @@ def text_connections():
     mo.md(r"""
     ## Afronding
 
-    **Samenhang.** De masks uit [Labels, boxes, masks en keypoints](/course/open/cv-annotations?lang=nl) werden een class map, de IoU uit [Hoeveel twee boxes overlappen: IoU](/course/open/cv-iou?lang=nl) meet nu de pixels van elke soort, en de 1×1 convolution uit [1×1 convolutions: de channels mengen](/course/open/cv-1x1-convolution?lang=nl) geeft op elke plaats een score voor elke klasse. De bilineaire interpolatie uit [Groter en kleiner: interpolatie](/course/open/cv-resize-interpolation?lang=nl) is nu het begin van een transposed convolution die leert. Waar een detector elke vorm een box gaf, geeft het FCN elke pixel een soort: met je `class_map`, je `upsampler` en je `kind_iou` haalt het FCN van de course met stride 8 een IoU van 0,78 tot 0,87 voor de cirkels. Je project `cnn` heeft nu `classes.py`, `upsample.py` en `kind_iou.py`. In de volgende les, *Project: je eigen U-Net*, gaat een netwerk omlaag naar grove maps en weer omhoog, en stapelt het elke map op de weg omhoog met de scherpe map van dezelfde grootte van de weg omlaag, om de randen precies te tekenen.
+    **Samenhang.** De masks uit [Labels, boxes, masks en keypoints](/course/open/cv-annotations?lang=nl) werden een class map, de IoU uit [Hoeveel twee boxes overlappen: IoU](/course/open/cv-iou?lang=nl) meet nu de pixels van elke soort, en de 1×1-convolutie uit [1×1-convoluties: de channels mengen](/course/open/cv-1x1-convolution?lang=nl) geeft op elke plaats een score voor elke klasse. De bilineaire interpolatie uit [Groter en kleiner: interpolatie](/course/open/cv-resize-interpolation?lang=nl) is nu het begin van een transposed convolution die leert. Waar een detector elke vorm een box gaf, geeft het FCN elke pixel een soort: met je `class_map`, je `upsampler` en je `kind_iou` haalt het FCN van de course met stride 8 een IoU van 0,78 tot 0,87 voor de cirkels. Je project `cnn` heeft nu `classes.py`, `upsample.py` en `kind_iou.py`. In de volgende les, *Project: je eigen U-Net*, gaat een netwerk omlaag naar grove maps en weer omhoog, en stapelt het elke map op de weg omhoog met de scherpe map van dezelfde grootte van de weg omlaag, om de randen precies te tekenen.
     """)
     return
 

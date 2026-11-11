@@ -1,0 +1,36 @@
+/* SPDX-FileCopyrightText: 2026 Everything AI contributors
+   SPDX-License-Identifier: MIT
+   The boxes of the exercises (mo.ui.code_editor) in weight and grey, like the code of a cell (style guide, chapter 7).
+   Those boxes sit in a shadow root, and marimo 0.25.1 copies only the first of the course's style sheets into it:
+   it knows them all by one title, marimo-custom. So this file comes first in custom_css (pyproject.toml), and
+   holds only what the boxes need; the colours come in as --ea-* tokens, which cross into a shadow root.
+   CodeMirror gives its highlighting generated class names: the light box uses its default style, the dark box
+   One Dark, each with its own names, so no theme selector is needed. The names are pinned to marimo 0.25.1;
+   tools/screenshots.py reports code that has a colour again. */
+
+/* What the boxes draw behind the code is grey too: the line with the cursor, a selection, the bracket that matches.
+   .ͼ16 is the light box, .ͼp the dark one (One Dark). */
+/* the line with the cursor is see-through: CodeMirror draws the selection under it */
+:is(.ͼ16, .ͼp) .cm-activeLine { background-color: color-mix(in srgb, var(--ea-ink) 5%, transparent) !important; }
+.ͼ16 .cm-activeLineGutter { background-color: var(--ea-inset) !important; }
+.ͼp .cm-activeLineGutter { background-color: var(--ea-mid) !important; }
+:is(.ͼ16, .ͼp) .cm-selectionBackground { background-color: var(--ea-axis) !important; }
+:is(.ͼ16, .ͼp) .cm-matchingBracket { background-color: transparent !important; outline: 1px solid var(--ea-ink-3); }
+
+/* light: CodeMirror's default highlight style */
+.ͼb { color: var(--ea-ink) !important; font-weight: 600; }                                   /* keywords */
+.ͼ5 { color: var(--ea-ink-2) !important; }                                                   /* decorators */
+:is(.ͼc, .ͼd, .ͼg, .ͼh, .ͼi, .ͼj, .ͼk, .ͼl) { color: var(--ea-ink) !important; }            /* names, numbers, True */
+:is(.ͼe, .ͼf) { color: var(--ea-ink-2) !important; }                                         /* strings */
+.ͼm { color: var(--ea-ink-3) !important; }                                                   /* comments */
+
+/* dark: One Dark, on the course's inset instead of its blue-grey */
+.cm-editor.ͼp { background-color: var(--ea-inset) !important; color: var(--ea-ink) !important; }
+.ͼp .cm-gutters { background-color: var(--ea-inset) !important; color: var(--ea-ink-3) !important; }
+.ͼp .cm-cursor { border-left-color: var(--ea-ink) !important; }
+.ͼq { color: var(--ea-ink) !important; font-weight: 600; }                                   /* keywords */
+.ͼw { color: var(--ea-ink-2) !important; }                                                   /* operators, `in` */
+:is(.ͼr, .ͼs, .ͼt, .ͼu, .ͼv, .ͼ13) { color: var(--ea-ink) !important; }                     /* names, calls, numbers */
+.ͼ14 { color: var(--ea-ink-2) !important; }                                                  /* strings */
+:is(.ͼx, .ͼ11) { color: var(--ea-ink-3) !important; }                                        /* comments */
+.ͼ12 { color: var(--ea-ink) !important; }                                                    /* headings */

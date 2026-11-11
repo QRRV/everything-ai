@@ -310,7 +310,7 @@ def share_sentence(c_out: int, lang: str) -> str:
     x = number(times_fewer(c_out), 2, lang)
     if lang == "nl":
         return (f"Met {grouped(c_out, lang)} channels eruit doet de depthwise convolution 1/{grouped(c_out, lang)} van de "
-                f"vermenigvuldigingen van de 3×3-convolutie, en de 1×1 convolution 1/9: samen {t}%, {x} keer zo weinig.")
+                f"vermenigvuldigingen van de 3×3-convolutie, en de 1×1-convolutie 1/9: samen {t}%, {x} keer zo weinig.")
     return (f"With {grouped(c_out, lang)} channels coming out, the depthwise convolution does 1/{grouped(c_out, lang)} of the "
             f"multiplications of the 3×3 convolution, and the 1×1 convolution 1/9: {t}% together, {x} times fewer.")
 
@@ -334,7 +334,7 @@ _SORT = Sort(
                    "nl": "**Groepen.** In PyTorch is zijn `groups` het aantal channels dat hij krijgt."},
     },
     groups={"depthwise": {"en": "the depthwise convolution", "nl": "de depthwise convolution"},
-            "pointwise": {"en": "the 1×1 convolution after it", "nl": "de 1×1 convolution erna"}},
+            "pointwise": {"en": "the 1×1 convolution after it", "nl": "de 1×1-convolutie erna"}},
     solution={"neighbors": "depthwise", "mixes": "pointwise", "own": "depthwise", "out": "pointwise", "work": "pointwise",
               "groups": "depthwise"},
     nudge={
@@ -347,7 +347,7 @@ _SORT = Sort(
         "out": {"en": "The depthwise convolution gives one map for each channel it gets. Which convolution can make another number?",
                 "nl": "De depthwise convolution geeft één map voor elk channel dat hij krijgt. Welke convolutie kan een ander aantal maken?"},
         "work": {"en": "For one pixel, the depthwise convolution needs 9 × 64 multiplications, and the 1×1 convolution 64 × 64. Which is more?",
-                 "nl": "Voor één pixel heeft de depthwise convolution 9 × 64 vermenigvuldigingen nodig, en de 1×1 convolution 64 × 64. Wat is meer?"},
+                 "nl": "Voor één pixel heeft de depthwise convolution 9 × 64 vermenigvuldigingen nodig, en de 1×1-convolutie 64 × 64. Wat is meer?"},
         "groups": {"en": "With as many groups as channels, each group is one channel. Which convolution is that?",
                    "nl": "Met evenveel groepen als channels is elke groep één channel. Welke convolutie is dat?"},
     },
@@ -355,12 +355,12 @@ _SORT = Sort(
         "missing": {"en": "I cannot see your choices. Run the cell with the six sentences again.",
                     "nl": "Ik zie je keuzes niet. Voer de cel met de zes zinnen opnieuw uit."},
         "empty": {"en": "Choose for each sentence: the depthwise convolution or the 1×1 convolution after it.",
-                  "nl": "Kies bij elke zin: de depthwise convolution of de 1×1 convolution erna."},
+                  "nl": "Kies bij elke zin: de depthwise convolution of de 1×1-convolutie erna."},
         "unfinished": {"en": "Everything you sorted so far is right. Sort the rest too ({n} to go).",
                        "nl": "Alles wat je tot nu toe indeelde, klopt. Deel ook de rest in (nog {n})."},
         "wrong": {"en": "{item} belongs to the other convolution.", "nl": "{item} hoort bij de andere convolutie."},
         "correct": {"en": "All {n} are right. The depthwise convolution filters: every channel gets a 3×3 filter of its own, which looks at the neighbors but at no other channel, so `groups` is its number of channels. The 1×1 convolution mixes: it looks at all the channels of one pixel, and makes as many maps as you ask. With 64 channels in and out, it does 64 × 64 = 4,096 multiplications for a pixel, and the depthwise convolution 9 × 64 = 576.",
-                    "nl": "Alle {n} kloppen. De depthwise convolution filtert: elk channel krijgt een eigen 3×3-filter, dat naar de buren kijkt maar naar geen ander channel, dus is `groups` zijn aantal channels. De 1×1 convolution mengt: hij kijkt naar alle channels van één pixel, en maakt zoveel maps als je vraagt. Met 64 channels erin en eruit doet hij 64 × 64 = 4.096 vermenigvuldigingen voor een pixel, en de depthwise convolution 9 × 64 = 576."},
+                    "nl": "Alle {n} kloppen. De depthwise convolution filtert: elk channel krijgt een eigen 3×3-filter, dat naar de buren kijkt maar naar geen ander channel, dus is `groups` zijn aantal channels. De 1×1-convolutie mengt: hij kijkt naar alle channels van één pixel, en maakt zoveel maps als je vraagt. Met 64 channels erin en eruit doet hij 64 × 64 = 4.096 vermenigvuldigingen voor een pixel, en de depthwise convolution 9 × 64 = 576."},
     },
 )
 
@@ -458,10 +458,10 @@ EXERCISES = {
                     nl="PyTorch stopt: de channels die binnenkomen, moeten in `groups` even grote groepen te verdelen zijn. Een depthwise convolution geeft elk channel een eigen groep: `groups=channels_in`, evenveel groepen als channels."),
             Mistake("depthwise-out", error=lambda e: isinstance(e, ValueError) and "out_channels must be divisible by groups" in str(e),
                     en="PyTorch stops: the filters of the depthwise convolution must split into its groups, and you gave it `channels_out` filters. A depthwise convolution has one filter for each channel it gets, so it makes `channels_in` maps: `nn.Conv2d(channels_in, channels_in, ...)`. The 1×1 convolution after it makes `channels_out`.",
-                    nl="PyTorch stopt: de filters van de depthwise convolution moeten in zijn groepen te verdelen zijn, en je gaf hem `channels_out` filters. Een depthwise convolution heeft één filter voor elk channel dat hij krijgt, dus maakt hij `channels_in` maps: `nn.Conv2d(channels_in, channels_in, ...)`. De 1×1 convolution erna maakt er `channels_out`."),
+                    nl="PyTorch stopt: de filters van de depthwise convolution moeten in zijn groepen te verdelen zijn, en je gaf hem `channels_out` filters. Een depthwise convolution heeft één filter voor elk channel dat hij krijgt, dus maakt hij `channels_in` maps: `nn.Conv2d(channels_in, channels_in, ...)`. De 1×1-convolutie erna maakt er `channels_out`."),
             Mistake("channels", error=lambda e: isinstance(e, RuntimeError) and "channels, but got" in str(e),
                     en="A convolution gets another number of channels than it was made for. The first number of `nn.Conv2d` is what it gets, the second what it makes. The depthwise convolution gets `channels_in` and makes one map for each, `channels_in`; the 1×1 convolution gets those `channels_in` and makes `channels_out`.",
-                    nl="Een convolutie krijgt een ander aantal channels dan waarvoor hij gemaakt is. Het eerste getal van `nn.Conv2d` is wat hij krijgt, het tweede wat hij maakt. De depthwise convolution krijgt `channels_in` en maakt er voor elk één map, `channels_in`; de 1×1 convolution krijgt die `channels_in` en maakt er `channels_out`."),
+                    nl="Een convolutie krijgt een ander aantal channels dan waarvoor hij gemaakt is. Het eerste getal van `nn.Conv2d` is wat hij krijgt, het tweede wat hij maakt. De depthwise convolution krijgt `channels_in` en maakt er voor elk één map, `channels_in`; de 1×1-convolutie krijgt die `channels_in` en maakt er `channels_out`."),
             Mistake("no-groups", matches=_no_groups,
                     en=_S_EN + ": your depthwise convolution has no `groups`, so it is an ordinary 3×3 convolution. Each of its filters then sees all `channels_in` channels, with 9 × `channels_in` weights instead of 9. Give every channel a filter of its own: `groups=channels_in`.",
                     nl=_S_NL + ": je depthwise convolution heeft geen `groups`, dus is hij een gewone 3×3-convolutie. Elk van zijn filters ziet dan alle `channels_in` channels, met 9 × `channels_in` weights in plaats van 9. Geef elk channel een eigen filter: `groups=channels_in`."),
@@ -470,25 +470,25 @@ EXERCISES = {
                     nl=_S_NL + ": je tweede convolutie is een 3×3-convolutie. Hij kijkt opnieuw naar de buren, wat de depthwise convolution al deed, en heeft 9 keer zoveel weights. De tweede stap mengt alleen de channels: kernel size 1."),
             Mistake("swapped", matches=_swapped,
                     en=_S_EN + ": your `self.depthwise` is a 1×1 convolution and your `self.pointwise` a 3×3 one. The depthwise convolution comes first, with a 3×3 filter for each channel and `groups=channels_in`; the 1×1 convolution after it mixes the channels, from `channels_in` to `channels_out`.",
-                    nl=_S_NL + ": je `self.depthwise` is een 1×1 convolution en je `self.pointwise` een 3×3-convolutie. De depthwise convolution komt eerst, met een 3×3-filter voor elk channel en `groups=channels_in`; de 1×1 convolution erna mengt de channels, van `channels_in` naar `channels_out`."),
+                    nl=_S_NL + ": je `self.depthwise` is een 1×1-convolutie en je `self.pointwise` een 3×3-convolutie. De depthwise convolution komt eerst, met een 3×3-filter voor elk channel en `groups=channels_in`; de 1×1-convolutie erna mengt de channels, van `channels_in` naar `channels_out`."),
             Mistake("pointwise-groups", matches=_pointwise_groups,
                     en=_S_EN + ": your 1×1 convolution has `groups` too. Then each of its filters sees only part of the channels, and with `groups=channels_in` only one: it mixes nothing. The 1×1 convolution is the step that mixes all the channels: leave `groups` out there.",
-                    nl=_S_NL + ": je 1×1 convolution heeft ook `groups`. Dan ziet elk van zijn filters maar een deel van de channels, en met `groups=channels_in` maar één: hij mengt niets. De 1×1 convolution is de stap die alle channels mengt: laat `groups` daar weg."),
+                    nl=_S_NL + ": je 1×1-convolutie heeft ook `groups`. Dan ziet elk van zijn filters maar een deel van de channels, en met `groups=channels_in` maar één: hij mengt niets. De 1×1-convolutie is de stap die alle channels mengt: laat `groups` daar weg."),
             Mistake("pointwise-out", wrong=_s(pw="nn.Conv2d(channels_in, channels_in, 1)"),
                     en=_S_EN + ": your 1×1 convolution makes `channels_in` maps. With 64 channels in and out you cannot see the difference, but from 3 channels to 5 it must make 5: the 1×1 convolution goes from `channels_in` to `channels_out`.",
-                    nl=_S_NL + ": je 1×1 convolution maakt `channels_in` maps. Met 64 channels erin en eruit zie je het verschil niet, maar van 3 channels naar 5 moet hij er 5 maken: de 1×1 convolution gaat van `channels_in` naar `channels_out`."),
+                    nl=_S_NL + ": je 1×1-convolutie maakt `channels_in` maps. Met 64 channels erin en eruit zie je het verschil niet, maar van 3 channels naar 5 moet hij er 5 maken: de 1×1-convolutie gaat van `channels_in` naar `channels_out`."),
             Mistake("padding", matches=_other_size,
                     en=_S_EN + ": your block gives back maps of another size than it gets, 8 by 8. A 3×3 convolution keeps the height and width with `padding=1`, and a 1×1 convolution without padding.",
-                    nl=_S_NL + ": je block geeft maps van een andere grootte terug dan het krijgt, 8 bij 8. Een 3×3-convolutie houdt de hoogte en breedte met `padding=1`, en een 1×1 convolution zonder padding."),
+                    nl=_S_NL + ": je block geeft maps van een andere grootte terug dan het krijgt, 8 bij 8. Een 3×3-convolutie houdt de hoogte en breedte met `padding=1`, en een 1×1-convolutie zonder padding."),
         ],
         texts={
             **_TEXTS,
             "empty": {"en": "Replace the two `...` with a convolution: the depthwise one, and the 1×1 one.",
                       "nl": "Vervang de twee `...` door een convolutie: de depthwise, en de 1×1."},
             "wrong": {"en": _S_EN + ". Does the depthwise convolution give every channel a 3×3 filter of its own, with `padding=1` and `groups=channels_in`, and does the 1×1 convolution go from `channels_in` to `channels_out`?",
-                      "nl": _S_NL + ". Geeft de depthwise convolution elk channel een eigen 3×3-filter, met `padding=1` en `groups=channels_in`, en gaat de 1×1 convolution van `channels_in` naar `channels_out`?"},
+                      "nl": _S_NL + ". Geeft de depthwise convolution elk channel een eigen 3×3-filter, met `padding=1` en `groups=channels_in`, en gaat de 1×1-convolutie van `channels_in` naar `channels_out`?"},
             "almost": {"en": "With 64 channels in and out your block is right, but " + _S_EN[0].lower() + _S_EN[1:] + ". Did you change the lines that were in the box? `forward` sends `x` through the depthwise convolution and a ReLU, then through the 1×1 convolution and a ReLU.",
-                       "nl": "Met 64 channels erin en eruit klopt je block, maar " + _S_NL[0].lower() + _S_NL[1:] + ". Heb je de regels veranderd die in het vak stonden? `forward` stuurt `x` door de depthwise convolution en een ReLU, en dan door de 1×1 convolution en een ReLU."},
+                       "nl": "Met 64 channels erin en eruit klopt je block, maar " + _S_NL[0].lower() + _S_NL[1:] + ". Heb je de regels veranderd die in het vak stonden? `forward` stuurt `x` door de depthwise convolution en een ReLU, en dan door de 1×1-convolutie en een ReLU."},
             "correct": {"en": f"Your `SeparableConv` is right: with 64 channels in and out, it has {grouped(separable_params(64, 64), 'en')} parameters, where a 3×3 convolution has {grouped(conv_params(64, 64, 3), 'en')}. It is now in your project, as `{{saved}}`.",
                         "nl": f"Je `SeparableConv` klopt: met 64 channels erin en eruit heeft hij {grouped(separable_params(64, 64), 'nl')} parameters, waar een 3×3-convolutie er {grouped(conv_params(64, 64, 3), 'nl')} heeft. Hij staat nu in je project, als `{{saved}}`."},
             "kept": {"en": "Your `SeparableConv` is right. You changed `{saved}` yourself, so the check leaves that file as it is. To save this version, delete the file and check again.",

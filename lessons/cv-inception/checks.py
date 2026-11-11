@@ -189,8 +189,8 @@ def kernel_sentence(k: int, lang: str) -> str:
     s, r, c, t = (grouped(n, lang) for n in (straight, reduce, conv, reduce + conv))
     x = number(round(ratio(k), 1), 1, lang)
     if lang == "nl":
-        name = "1×1 convolution" if k == 1 else f"{k}×{k}-convolutie"
-        return (f"Met filters van {k} bij {k}: {s} parameters rechtstreeks op de {WIDE} channels, tegen {r} in de 1×1 convolution naar {NARROW} "
+        name = "1×1-convolutie" if k == 1 else f"{k}×{k}-convolutie"
+        return (f"Met filters van {k} bij {k}: {s} parameters rechtstreeks op de {WIDE} channels, tegen {r} in de 1×1-convolutie naar {NARROW} "
                 f"en {c} in de {name} erachter, samen {t}: {x} keer zo weinig.")
     return (f"With filters of {k} by {k}: {s} parameters straight on the {WIDE} channels, against {r} in the 1×1 convolution to {NARROW} "
             f"and {c} in the {k}×{k} convolution behind it, {t} together: {x} times fewer.")
@@ -301,7 +301,7 @@ REQUIRED = ["same-size", "inception", "branches"]
 _SORT = Sort(
     name="same-size",
     items={
-        "one": {"en": "**1×1 convolution, no padding**", "nl": "**1×1 convolution, zonder padding**"},
+        "one": {"en": "**1×1 convolution, no padding**", "nl": "**1×1-convolutie, zonder padding**"},
         "three": {"en": "**3×3 convolution, padding 1**", "nl": "**3×3-convolutie, padding 1**"},
         "five_two": {"en": "**5×5 convolution, padding 2**", "nl": "**5×5-convolutie, padding 2**"},
         "five_one": {"en": "**5×5 convolution, padding 1**", "nl": "**5×5-convolutie, padding 1**"},
@@ -436,7 +436,7 @@ EXERCISES = {
         mistakes=[
             Mistake("sizes", error=lambda e: isinstance(e, RuntimeError) and "Sizes of tensors must match except in dimension 1" in str(e),
                     en="Your branches give maps of different heights and widths, and `torch.cat` stops: `Sizes of tensors must match except in dimension 1`. A 1×1 convolution needs no padding. A filter of 5 by 5 with stride 1 fits n + 2p − 4 times across n pixels with padding p: which padding keeps n?",
-                    nl="Je takken geven maps met verschillende hoogtes en breedtes, en `torch.cat` stopt: `Sizes of tensors must match except in dimension 1`. Een 1×1 convolution heeft geen padding nodig. Een filter van 5 bij 5 met stride 1 past op n pixels met padding p precies n + 2p − 4 keer: welke padding houdt n?"),
+                    nl="Je takken geven maps met verschillende hoogtes en breedtes, en `torch.cat` stopt: `Sizes of tensors must match except in dimension 1`. Een 1×1-convolutie heeft geen padding nodig. Een filter van 5 bij 5 met stride 1 past op n pixels met padding p precies n + 2p − 4 keer: welke padding houdt n?"),
             Mistake("cat-dim", error=_cat_dim,
                     en="`torch.cat` puts your branches together along another axis than the channels, and stops: their maps have different numbers of channels, and on every other axis they must match. A batch of maps has the shape (photos, channels, rows, columns): the channels are `dim=1`.",
                     nl="`torch.cat` zet je takken aan elkaar langs een andere axis dan de channels, en stopt: hun maps hebben verschillende aantallen channels, en op elke andere axis moeten ze passen. Een batch maps heeft de shape (foto's, channels, rijen, kolommen): de channels zijn `dim=1`."),
@@ -473,7 +473,7 @@ EXERCISES = {
             "empty": {"en": "Replace the four `...` with your code: `b5_reduce`, `b5`, `y5`, and what `forward` gives back.",
                       "nl": "Vervang de vier `...` door je code: `b5_reduce`, `b5`, `y5`, en wat `forward` teruggeeft."},
             "wrong": {"en": _S_EN + ". Is `b5_reduce` a 1×1 convolution from `c_in` to `c5_reduce`, and `b5` a 5×5 one from `c5_reduce` to `c5` with padding 2, each with a ReLU after it in `y5`, and does `forward` give back `y1`, `y3`, `y5` and `yp` side by side along the channels?",
-                      "nl": _S_NL + ". Is `b5_reduce` een 1×1 convolution van `c_in` naar `c5_reduce`, en `b5` een 5×5-convolutie van `c5_reduce` naar `c5` met padding 2, elk met een ReLU erna in `y5`, en geeft `forward` `y1`, `y3`, `y5` en `yp` naast elkaar terug langs de channels?"},
+                      "nl": _S_NL + ". Is `b5_reduce` een 1×1-convolutie van `c_in` naar `c5_reduce`, en `b5` een 5×5-convolutie van `c5_reduce` naar `c5` met padding 2, elk met een ReLU erna in `y5`, en geeft `forward` `y1`, `y3`, `y5` en `yp` naast elkaar terug langs de channels?"},
             "almost": {"en": "The shape and the number of parameters are right, but " + _S_EN[0].lower() + _S_EN[1:] + ". Does `y5` put a ReLU after `b5_reduce` and after `b5`, and are the branches in the order y1, y3, y5, yp?",
                        "nl": "De shape en het aantal parameters kloppen, maar " + _S_NL[0].lower() + _S_NL[1:] + ". Zet `y5` een ReLU na `b5_reduce` en na `b5`, en staan de takken in de volgorde y1, y3, y5, yp?"},
             "correct": {"en": f"Your `Inception` is right: inception (3a) gives 256 channels of 28 by 28, with {grouped(G3A_PARAMS, 'en')} parameters. It is now in your project, as `{{saved}}`.",

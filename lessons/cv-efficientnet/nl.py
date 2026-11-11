@@ -35,16 +35,16 @@ def text_quick_check():
 def quick_check_separable():
     quick_separable = L.choice(
         "quick-separable",
-        question="`SeparableConv(64, 64)` heeft 9 × 64 + 64 × 64 = 4.672 vermenigvuldigingen nodig voor elke pixel van zijn maps: 9 voor elk channel in zijn depthwise convolution, en 64 voor elk channel in zijn 1×1 convolution. Hoeveel heeft `SeparableConv(128, 128)` er nodig voor elke pixel?",
+        question="`SeparableConv(64, 64)` heeft 9 × 64 + 64 × 64 = 4.672 vermenigvuldigingen nodig voor elke pixel van zijn maps: 9 voor elk channel in zijn depthwise convolution, en 64 voor elk channel in zijn 1×1-convolutie. Hoeveel heeft `SeparableConv(128, 128)` er nodig voor elke pixel?",
         options={
-            "right": "17.536: bijna 4 keer zoveel, omdat de 1×1 convolution van 64 × 64 naar 128 × 128 gaat",
+            "right": "17.536: bijna 4 keer zoveel, omdat de 1×1-convolutie van 64 × 64 naar 128 × 128 gaat",
             "twice": "9.344: twee keer zoveel, omdat er twee keer zoveel channels zijn",
             "same": "4.672: zijn filters zijn nog steeds 3 bij 3 en 1 bij 1",
         },
         correct="right",
         why={
-            "right": "9 × 128 + 128 × 128 = 1.152 + 16.384 = 17.536, 3,75 keer zoveel. De 1×1 convolution groeit met de channels die binnenkomen keer de channels die eruit gaan: twee keer zoveel van allebei is 4 keer zoveel. Vandaag tel je wat een breder netwerk kost, en een dieper, en een dat grotere foto's krijgt.",
-            "twice": "De depthwise convolution verdubbelt, tot 9 × 128, maar de 1×1 convolution krijgt twee keer zoveel filters, elk twee keer zo diep: 128 × 128 = 16.384, 4 keer 64 × 64. Zie [MobileNet](/course/open/cv-mobilenet?lang=nl).",
+            "right": "9 × 128 + 128 × 128 = 1.152 + 16.384 = 17.536, 3,75 keer zoveel. De 1×1-convolutie groeit met de channels die binnenkomen keer de channels die eruit gaan: twee keer zoveel van allebei is 4 keer zoveel. Vandaag tel je wat een breder netwerk kost, en een dieper, en een dat grotere foto's krijgt.",
+            "twice": "De depthwise convolution verdubbelt, tot 9 × 128, maar de 1×1-convolutie krijgt twee keer zoveel filters, elk twee keer zo diep: 128 × 128 = 16.384, 4 keer 64 × 64. Zie [MobileNet](/course/open/cv-mobilenet?lang=nl).",
             "same": "De filters houden hun grootte, maar het worden er meer, en elk 1×1-filter is zo diep als de channels die het krijgt. Zie [MobileNet](/course/open/cv-mobilenet?lang=nl).",
         },
     )
@@ -126,7 +126,7 @@ def text_idea():
 
         Volgens de regel groeien de vermenigvuldigingen dan met $(\alpha \cdot \beta^2 \cdot \gamma^2)^\varphi$: elke stap van $\varphi$ verdubbelt ze ongeveer. Met $\varphi = 1$ probeerden ze een paar waarden van $\alpha$, $\beta$ en $\gamma$ uit op EfficientNet-B0, en hielden ze de beste: $\alpha = 1{,}2$, $\beta = 1{,}1$ en $\gamma = 1{,}15$, met $\alpha \cdot \beta^2 \cdot \gamma^2 = 1{,}92$. Daarna hielden ze die drie vast en namen ze een grotere $\varphi$ voor elk van EfficientNet-B1 tot en met B7. Waarom alle drie tegelijk? Een grotere foto heeft meer layers nodig, zodat een filter laat in het netwerk er nog genoeg van ziet, zijn receptive field; en meer channels, voor de fijnere patronen die de extra pixels laten zien.
 
-        **EfficientNet-B0** zelf is gevonden door een computer die zocht tussen veel kleine netwerken, gebouwd uit depthwise convolutions en 1×1 convolutions zoals in MobileNet, naar het netwerk dat de meeste foto's goed leest voor zijn vermenigvuldigingen. De paper telt in FLOPS, een vermenigvuldiging met haar optelling als één geteld; hier zijn dat de vermenigvuldigingen. Tabel 7 laat B0 op elk van de vier manieren groeien tot ongeveer 4,5 keer zijn vermenigvuldigingen:
+        **EfficientNet-B0** zelf is gevonden door een computer die zocht tussen veel kleine netwerken, gebouwd uit depthwise convolutions en 1×1-convoluties zoals in MobileNet, naar het netwerk dat de meeste foto's goed leest voor zijn vermenigvuldigingen. De paper telt in FLOPS, een vermenigvuldiging met haar optelling als één geteld; hier zijn dat de vermenigvuldigingen. Tabel 7 laat B0 op elk van de vier manieren groeien tot ongeveer 4,5 keer zijn vermenigvuldigingen:
 
         | EfficientNet-B0 | Vermenigvuldigingen per foto | Goed op ImageNet |
         |---|---|---|
@@ -156,7 +156,7 @@ def text_idea():
         | EfficientNet-B7 | 84,3% | 66 miljoen | 37 miljard |
         | GPipe | 84,3% | 557 miljoen | niet in de tabel |
         """),
-        L.watch_out("De regel $d \\cdot w^2 \\cdot r^2$ klopt ongeveer, niet precies. De paper gebruikt hem omdat gewone convoluties, de 1×1 convolutions daaronder, het meeste werk doen in een CNN; maar layers die op een andere manier groeien, tellen ook mee, zoals de eerste convolutie en de depthwise convolutions, en afronden ook, zoals het uitgewerkte voorbeeld en de slider laten zien. Hoeveel compound scaling oplevert, hangt ook af van het netwerk waarmee je begint, zegt de paper: daarom zochten Tan en Le eerst naar B0. En een hogere resolutie helpt alleen als de foto's de details hebben. De foto's van CIFAR-10 zijn 32 bij 32, dus krijgt het basisnetwerk van de demo ze verkleind tot 16 bij 16, en krijgen de scherpere netwerken weer meer pixels, tot 32 bij 32."),
+        L.watch_out("De regel $d \\cdot w^2 \\cdot r^2$ klopt ongeveer, niet precies. De paper gebruikt hem omdat gewone convoluties, de 1×1-convoluties daaronder, het meeste werk doen in een CNN; maar layers die op een andere manier groeien, tellen ook mee, zoals de eerste convolutie en de depthwise convolutions, en afronden ook, zoals het uitgewerkte voorbeeld en de slider laten zien. Hoeveel compound scaling oplevert, hangt ook af van het netwerk waarmee je begint, zegt de paper: daarom zochten Tan en Le eerst naar B0. En een hogere resolutie helpt alleen als de foto's de details hebben. De foto's van CIFAR-10 zijn 32 bij 32, dus krijgt het basisnetwerk van de demo ze verkleind tot 16 bij 16, en krijgen de scherpere netwerken weer meer pixels, tot 32 bij 32."),
         mo.md(r"""
         ### Nieuwe woorden en tekens
 
@@ -227,7 +227,7 @@ def example_cost():
 @app.cell(hide_code=True)
 def text_after_example():
     mo.md(r"""
-    Zoals hij is, print de cel `709248 2503296 3.529507309149973`: 4 keer zoveel blocks kosten maar 3,53 keer zoveel. De blocks groeien wel 4 keer, van 598.016 naar 2.392.064, maar de eerste convolutie, 110.592, en de linear layer, 640, blijven zoals ze zijn. Met `depth, width, side = 2, 128, 16` print hij `709248 2467072 3.4784334957588885`: twee keer zoveel channels kosten 3,48 keer zoveel. De 1×1 convolutions in de blocks groeien 4 keer, maar de depthwise convolutions en de eerste convolutie maar 2 keer, omdat elk van hun filters één channel ziet, of de 3 kleuren. Probeer ook `2, 64, 32`: dan krijgt elke layer behalve de linear layer 4 keer zoveel pixels, en print de cel `709248 2835072 3.9972929074174335`, bijna precies 4.
+    Zoals hij is, print de cel `709248 2503296 3.529507309149973`: 4 keer zoveel blocks kosten maar 3,53 keer zoveel. De blocks groeien wel 4 keer, van 598.016 naar 2.392.064, maar de eerste convolutie, 110.592, en de linear layer, 640, blijven zoals ze zijn. Met `depth, width, side = 2, 128, 16` print hij `709248 2467072 3.4784334957588885`: twee keer zoveel channels kosten 3,48 keer zoveel. De 1×1-convoluties in de blocks groeien 4 keer, maar de depthwise convolutions en de eerste convolutie maar 2 keer, omdat elk van hun filters één channel ziet, of de 3 kleuren. Probeer ook `2, 64, 32`: dan krijgt elke layer behalve de linear layer 4 keer zoveel pixels, en print de cel `709248 2835072 3.9972929074174335`, bijna precies 4.
     """)
     return
 
@@ -334,7 +334,7 @@ def hints_scaled():
             "Stap 1 van het recept: een lijst van `depth` nieuwe blocks, één voor elke plek. Hoe maak je zo'n lijst in één regel, en wat moet eromheen, zodat PyTorch de blocks ziet?",
             "`self.blocks = nn.ModuleList([SeparableConv(width, width) for _ in range(depth)])`. In `forward`: `for block in self.blocks:` en, daaronder ingesprongen, stap 2 van het recept.",
         ],
-        why="De blocks zijn `nn.ModuleList([SeparableConv(width, width) for _ in range(depth)])`, en `forward` loopt erdoor met `for block in self.blocks:` en `x = x + block(x)`. De meeste blocks van EfficientNet maken de channels eerst 6 keer zoveel met een 1×1 convolution, vóór hun depthwise convolution, en ze gebruiken batch normalization; de diepte, breedte en resolutie van EfficientNet groeien net als hier.",
+        why="De blocks zijn `nn.ModuleList([SeparableConv(width, width) for _ in range(depth)])`, en `forward` loopt erdoor met `for block in self.blocks:` en `x = x + block(x)`. De meeste blocks van EfficientNet maken de channels eerst 6 keer zoveel met een 1×1-convolutie, vóór hun depthwise convolution, en ze gebruiken batch normalization; de diepte, breedte en resolutie van EfficientNet groeien net als hier.",
     )
     return
 

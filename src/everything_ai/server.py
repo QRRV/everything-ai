@@ -17,6 +17,7 @@ import html
 import json
 import mimetypes
 import urllib.parse
+from pathlib import Path
 
 from starlette.middleware import Middleware
 
@@ -136,6 +137,44 @@ def _set_theme(scope, theme: str) -> None:
         scope["app"].state.config_manager.save_config({"display": {"theme": theme}})
     except Exception:
         pass
+
+
+def _lang_of(file_key) -> str:
+    """The language of a lesson's copy (work/lessons/<id>/<lang>.py), else the language of the course."""
+    stem = Path(str(file_key or "")).stem
+    return stem if stem in course.LANGS else progress.settings()["lang"]
+
+
+def _say_reconnected_in_course_words() -> bool:
+    """A lesson opened again while it still runs: marimo says "Reconnected. You have reconnected to an existing
+    session." in English, as a banner that stays and offers to restart, which runs the whole lesson again. The course
+    says it in the lesson's language (course/phrases.yaml), as a note that goes away by itself. Pinned to marimo
+    0.25.1's SessionHandler; tests/test_page.py checks it. False when marimo changed and the patch is not in place."""
+    try:   # marimo's own code: if a later version moved it, the course still starts, with marimo's English
+        from marimo._messaging.notification import AlertNotification, BannerNotification
+        from marimo._server.api.endpoints.ws.session_handler import SessionHandler
+        original = SessionHandler._serialize_and_notify
+    except (ImportError, AttributeError):
+        return False
+    if getattr(original, "everything_ai", False):
+        return True
+
+    def notify(self, notification):
+        if isinstance(notification, (AlertNotification, BannerNotification)) and notification.title == "Reconnected":
+            try:
+                lang = _lang_of(getattr(getattr(self, "params", None), "file_key", None))
+                notification = AlertNotification(title=course.phrase("reconnected-title", lang),
+                                                 description=course.phrase("reconnected-text", lang))
+            except Exception:   # never let the words stop the reconnect: then marimo's own message goes
+                pass
+        return original(self, notification)
+
+    notify.everything_ai = True
+    SessionHandler._serialize_and_notify = notify
+    return True
+
+
+_say_reconnected_in_course_words()
 
 
 class CourseMiddleware:

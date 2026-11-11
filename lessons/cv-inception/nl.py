@@ -26,7 +26,7 @@ def text_quick_check():
     mo.md(r"""
     ### Instapcheck
 
-    Twee korte vragen over [1×1 convolutions: de channels mengen](/course/open/cv-1x1-convolution?lang=nl) en [VGG: dieper met kleine filters](/course/open/cnn-vgg-blocks?lang=nl).
+    Twee korte vragen over [1×1-convoluties: de channels mengen](/course/open/cv-1x1-convolution?lang=nl) en [VGG: dieper met kleine filters](/course/open/cnn-vgg-blocks?lang=nl).
     """)
     return
 
@@ -35,7 +35,7 @@ def text_quick_check():
 def quick_check_reduce():
     quick_reduce = L.choice(
         "quick-reduce",
-        question="Een 1×1 convolution van 192 channels naar 16. Hoeveel parameters heeft hij?",
+        question="Een 1×1-convolutie van 192 channels naar 16. Hoeveel parameters heeft hij?",
         options={
             "five": "76.816: 16 filters van 192 × 5 × 5 weights, elk met een bias",
             "right": "3.088: 16 filters van 192 weights, elk met een bias",
@@ -43,8 +43,8 @@ def quick_check_reduce():
         },
         correct="right",
         why={
-            "five": "Dat zou een convolutie van 5 bij 5 zijn. Een filter van 1 bij 1 heeft één weight voor elk channel dat binnenkomt, 192, en een bias. Zie [1×1 convolutions](/course/open/cv-1x1-convolution?lang=nl).",
-            "sum": "Elk van de 16 filters heeft een weight voor elk van de 192 channels, en een bias: 16 × (192 + 1). Zie [1×1 convolutions](/course/open/cv-1x1-convolution?lang=nl).",
+            "five": "Dat zou een convolutie van 5 bij 5 zijn. Een filter van 1 bij 1 heeft één weight voor elk channel dat binnenkomt, 192, en een bias. Zie [1×1-convoluties](/course/open/cv-1x1-convolution?lang=nl).",
+            "sum": "Elk van de 16 filters heeft een weight voor elk van de 192 channels, en een bias: 16 × (192 + 1). Zie [1×1-convoluties](/course/open/cv-1x1-convolution?lang=nl).",
             "right": "16 × (192 + 1) = 3.088. Vandaag staat zo'n convolutie vóór een convolutie van 5 bij 5, die dan op 16 channels werkt in plaats van 192.",
         },
     )
@@ -79,7 +79,7 @@ def text_why():
         mo.md(r"""
         ## Waarom
 
-        Hoe groot moet een filter zijn? In [VGG: dieper met kleine filters](/course/open/cnn-vgg-blocks?lang=nl) was elk filter 3 bij 3, en pas een stapel ervan liet een getal verder kijken. Maar wat een foto laat zien, heeft elke grootte: het oog van een kat is een paar pixels, zijn kop kan de halve foto vullen. In 2014 gaven Christian Szegedy en zijn collega's bij Google één block filters van 1 bij 1, 3 bij 3 en 5 bij 5 naast elkaar, met max pooling ernaast, en lieten ze de training beslissen waarvoor elk dient. Met de 1×1 convolutions uit [1×1 convolutions: de channels mengen](/course/open/cv-1x1-convolution?lang=nl) ervoor, om dat betaalbaar te houden, stapelden ze 9 van zulke blocks in GoogLeNet: 22 layers met weights, en 12 keer zo weinig parameters als AlexNet, de winnaar van 2012. Het won de wedstrijd van ImageNet in 2014. De naam komt van *Network In Network* en van een internetgrap over de film *Inception*: "we need to go deeper". Vandaag tel je wat de 1×1 convolutions besparen, bouw je een Inception block, en zoek je in een CNN op CIFAR-10 uit op welke van zijn takken het netwerk leunt.
+        Hoe groot moet een filter zijn? In [VGG: dieper met kleine filters](/course/open/cnn-vgg-blocks?lang=nl) was elk filter 3 bij 3, en pas een stapel ervan liet een getal verder kijken. Maar wat een foto laat zien, heeft elke grootte: het oog van een kat is een paar pixels, zijn kop kan de halve foto vullen. In 2014 gaven Christian Szegedy en zijn collega's bij Google één block filters van 1 bij 1, 3 bij 3 en 5 bij 5 naast elkaar, met max pooling ernaast, en lieten ze de training beslissen waarvoor elk dient. Met de 1×1-convoluties uit [1×1-convoluties: de channels mengen](/course/open/cv-1x1-convolution?lang=nl) ervoor, om dat betaalbaar te houden, stapelden ze 9 van zulke blocks in GoogLeNet: 22 layers met weights, en 12 keer zo weinig parameters als AlexNet, de winnaar van 2012. Het won de wedstrijd van ImageNet in 2014. De naam komt van *Network In Network* en van een internetgrap over de film *Inception*: "we need to go deeper". Vandaag tel je wat de 1×1-convoluties besparen, bouw je een Inception block, en zoek je in een CNN op CIFAR-10 uit op welke van zijn takken het netwerk leunt.
         """),
         L.course_versions(),
     ])
@@ -90,13 +90,13 @@ def text_why():
 def predict_channels():
     guess_channels = L.guess(
         "naive-channels",
-        question="Inception (3a), een block van GoogLeNet, krijgt 192 channels van 28 bij 28. Zonder de 1×1 convolutions die de channels minder maken, zou het drie convoluties rechtstreeks op die 192 channels zetten, met 64 filters van 1 bij 1, 128 van 3 bij 3 en 32 van 5 bij 5, en 3×3 max pooling ernaast, en alles wat eruit komt langs de channels stapelen. Hoeveel channels zouden eruit komen?",
+        question="Inception (3a), een block van GoogLeNet, krijgt 192 channels van 28 bij 28. Zonder de 1×1-convoluties die de channels minder maken, zou het drie convoluties rechtstreeks op die 192 channels zetten, met 64 filters van 1 bij 1, 128 van 3 bij 3 en 32 van 5 bij 5, en 3×3 max pooling ernaast, en alles wat eruit komt langs de channels stapelen. Hoeveel channels zouden eruit komen?",
         options={
             "sum": "224: 64 + 128 + 32",
             "right": "416",
             "same": "192: evenveel als erin gingen",
         },
-        reveal="**416.** De pooling heeft geen filters: hij houdt alle 192 channels, dus komen er 64 + 128 + 32 + 192 = 416 uit. Het volgende block zou 416 channels krijgen, en met een eigen pooling nog meer geven: de paper noemt dat een explosie van rekenwerk binnen een paar stappen. GoogLeNet zet een 1×1 convolution na de pooling, naar 32 channels, dus geeft het block er 256. En het zet 1×1 convolutions vóór de filters van 3 bij 3 en 5 bij 5, die dan op 96 en 16 channels werken in plaats van 192: 163.696 parameters in plaats van 387.296.",
+        reveal="**416.** De pooling heeft geen filters: hij houdt alle 192 channels, dus komen er 64 + 128 + 32 + 192 = 416 uit. Het volgende block zou 416 channels krijgen, en met een eigen pooling nog meer geven: de paper noemt dat een explosie van rekenwerk binnen een paar stappen. GoogLeNet zet een 1×1-convolutie na de pooling, naar 32 channels, dus geeft het block er 256. En het zet 1×1-convoluties vóór de filters van 3 bij 3 en 5 bij 5, die dan op 96 en 16 channels werken in plaats van 192: 163.696 parameters in plaats van 387.296.",
     )
     guess_channels
     return (guess_channels,)
@@ -108,7 +108,7 @@ def text_idea():
         mo.md(r"""
         ## Het idee
 
-        **Takken naast elkaar.** Een Inception block stuurt dezelfde maps tegelijk vier takken in: een 1×1 convolution; een 1×1 convolution naar minder channels, dan een 3×3-convolutie; een 1×1 convolution naar minder channels, dan een 5×5-convolutie; en 3×3 max pooling, dan een 1×1 convolution. Elke convolutie heeft een ReLU erna. Daarna zet het block wat de vier takken geven naast elkaar langs de channels, met `torch.cat` uit [Tensors in PyTorch](/course/open/torch-tensors?lang=nl). Een batch maps heeft de shape (foto's, channels, rijen, kolommen), dus de channels zijn `dim=1`, en ze tellen op: in inception (3a) 64 + 128 + 32 + 32 = 256.
+        **Takken naast elkaar.** Een Inception block stuurt dezelfde maps tegelijk vier takken in: een 1×1-convolutie; een 1×1-convolutie naar minder channels, dan een 3×3-convolutie; een 1×1-convolutie naar minder channels, dan een 5×5-convolutie; en 3×3 max pooling, dan een 1×1-convolutie. Elke convolutie heeft een ReLU erna. Daarna zet het block wat de vier takken geven naast elkaar langs de channels, met `torch.cat` uit [Tensors in PyTorch](/course/open/torch-tensors?lang=nl). Een batch maps heeft de shape (foto's, channels, rijen, kolommen), dus de channels zijn `dim=1`, en ze tellen op: in inception (3a) 64 + 128 + 32 + 32 = 256.
 
         **Dezelfde hoogte en breedte.** `torch.cat` zet maps alleen naast elkaar als hun rijen en kolommen passen. Met stride 1 past een venster van $k$ bij $k$ op $n$ pixels met padding $p$ precies $n + 2p - k + 1$ keer, volgens de formule uit [Convolutie in detail](/course/open/cnn-conv-formal?lang=nl): padding 1 houdt de grootte voor 3 bij 3, en padding 2 voor 5 bij 5. De max pooling van de vierde tak gebruikt stride 1 en padding 1, dus die houdt de grootte ook, anders dan de 2×2 pooling van je ColorCNN, die hem halveert.
 
@@ -116,10 +116,10 @@ def text_idea():
         """),
         C.block_picture(C.G3A, C.G3A_SIDE, {"title": "Inception (3a) van GoogLeNet", "input": "{c} channels van {s} bij {s}",
                                             "output": "{c} channels van {s} bij {s}, naast elkaar", "filters": "{n} filters",
-                                            "conv1": "1×1 convolution", "conv": "{k}×{k}-convolutie", "pool": "3×3 max pooling",
-                                            "alt": "Een Inception block van boven naar beneden. 192 channels van 28 bij 28 gaan vier takken naast elkaar in: een 1×1 convolution met 64 filters; een 1×1 convolution met 96 filters, dan een 3×3-convolutie met 128; een 1×1 convolution met 16 filters, dan een 5×5-convolutie met 32; en 3×3 max pooling, dan een 1×1 convolution met 32 filters. Onderaan 256 channels van 28 bij 28: 64 + 128 + 32 + 32."}),
+                                            "conv1": "1×1-convolutie", "conv": "{k}×{k}-convolutie", "pool": "3×3 max pooling",
+                                            "alt": "Een Inception block van boven naar beneden. 192 channels van 28 bij 28 gaan vier takken naast elkaar in: een 1×1-convolutie met 64 filters; een 1×1-convolutie met 96 filters, dan een 3×3-convolutie met 128; een 1×1-convolutie met 16 filters, dan een 5×5-convolutie met 32; en 3×3 max pooling, dan een 1×1-convolutie met 32 filters. Onderaan 256 channels van 28 bij 28: 64 + 128 + 32 + 32."}),
         mo.md(r"""
-        **Waarom de 1×1 convolutions.** Een filter van $k$ bij $k$ op $c$ channels heeft $c \times k \times k$ weights, dus een 5×5-filter op alle 192 channels is duur: 4.800 weights. Achter een 1×1 convolution naar 16 channels heeft het er 400. Inception (3a) heeft 163.696 parameters; de eigen tabel van GoogLeNet zegt 159K, omdat die alleen de 163.328 weights telt, zonder de biases, en een K als 1.024 telt. Voor één foto doet het block 128.049.152 vermenigvuldigingen: die 163.328 voor elk van de 28 × 28 pixels, de 128 miljoen uit de tabel. Zonder zijn 1×1 convolutions vóór de filters van 3 bij 3 en 5 bij 5 en na de pooling, het naïeve block uit de paper, zou het 387.296 parameters hebben, 303 miljoen vermenigvuldigingen doen, en het volgende block 416 channels geven in plaats van 256.
+        **Waarom de 1×1-convoluties.** Een filter van $k$ bij $k$ op $c$ channels heeft $c \times k \times k$ weights, dus een 5×5-filter op alle 192 channels is duur: 4.800 weights. Achter een 1×1-convolutie naar 16 channels heeft het er 400. Inception (3a) heeft 163.696 parameters; de eigen tabel van GoogLeNet zegt 159K, omdat die alleen de 163.328 weights telt, zonder de biases, en een K als 1.024 telt. Voor één foto doet het block 128.049.152 vermenigvuldigingen: die 163.328 voor elk van de 28 × 28 pixels, de 128 miljoen uit de tabel. Zonder zijn 1×1-convoluties vóór de filters van 3 bij 3 en 5 bij 5 en na de pooling, het naïeve block uit de paper, zou het 387.296 parameters hebben, 303 miljoen vermenigvuldigingen doen, en het volgende block 416 channels geven in plaats van 256.
         """),
         L.watch_out("Inception is de naam van een familie, niet van één netwerk. GoogLeNet is de eerste, uit 2014; de versies erna, vanaf 2015, veranderden het block. Sommige zetten twee 3×3-convoluties waar de 5×5 stond, de truc van VGG blocks, en kregen batch normalization. Zegt een paper of een library Inception, kijk dan welke versie bedoeld is."),
         mo.md(r"""
@@ -127,9 +127,9 @@ def text_idea():
 
         | Woord | Wat het betekent | In code |
         |---|---|---|
-        | **Inception block** | takken van 1×1 convolutions, 3×3- en 5×5-convoluties en van 3×3 max pooling naast elkaar op dezelfde maps, de 3×3 en 5×5 achter een 1×1 convolution naar minder channels en de pooling vóór één, met hun maps gestapeld langs de channels. GoogLeNet is een stapel ervan | `torch.cat([y1, y3, y5, yp], dim=1)` |
+        | **Inception block** | takken van 1×1-, 3×3- en 5×5-convoluties en van 3×3 max pooling naast elkaar op dezelfde maps, de 3×3 en 5×5 achter een 1×1-convolutie naar minder channels en de pooling vóór één, met hun maps gestapeld langs de channels. GoogLeNet is een stapel ervan | `torch.cat([y1, y3, y5, yp], dim=1)` |
 
-        **Het netwerk van de demo.** De demo traint het netwerk uit [1×1 convolutions: de channels mengen](/course/open/cv-1x1-convolution?lang=nl), met een Inception block in het midden. Op de 64 maps van 8 bij 8 heeft het 16 filters van 1 bij 1; 32 van 3 bij 3, achter een 1×1 convolution naar 32 channels; 8 van 5 bij 5, achter één naar 8; en 8 filters van 1 bij 1 na de pooling: 16 + 32 + 8 + 8 = 64 channels, de outputs van inception (3a) gedeeld door 4. Het block heeft 15.016 parameters, tegen 36.928 voor één 3×3-convolutie van 64 naar 64; het hele netwerk 44.658 tegen 66.570.
+        **Het netwerk van de demo.** De demo traint het netwerk uit [1×1-convoluties: de channels mengen](/course/open/cv-1x1-convolution?lang=nl), met een Inception block in het midden. Op de 64 maps van 8 bij 8 heeft het 16 filters van 1 bij 1; 32 van 3 bij 3, achter een 1×1-convolutie naar 32 channels; 8 van 5 bij 5, achter één naar 8; en 8 filters van 1 bij 1 na de pooling: 16 + 32 + 8 + 8 = 64 channels, de outputs van inception (3a) gedeeld door 4. Het block heeft 15.016 parameters, tegen 36.928 voor één 3×3-convolutie van 64 naar 64; het hele netwerk 44.658 tegen 66.570.
 
         Het plaatje: hoeveel van de eerste 1.000 testfoto's van CIFAR-10 het netwerk goed leest na 20 epochs op de eerste 6.000 trainingsfoto's, een stip voor elk van 5 seeds, met de code van de course. Met één 3×3-convolutie in het midden, zoals in die les: 532 tot 572, gemiddeld 549. Met het Inception block: 553 tot 585, gemiddeld 567. De twee bereiken overlappen: minstens zoveel goed, met een derde minder parameters. Het leert zijn trainingsfoto's nog steeds bijna uit zijn hoofd, 5.896 tot 5.997 van de 6.000. Daarna zette de course in de getrainde netwerken één tak tegelijk uit, door zijn channels op 0 te zetten, en telde opnieuw: de vier rijen eronder. Oefening 3 vraagt wat ze zeggen.
         """),
@@ -149,7 +149,7 @@ def text_recipe():
 
     Zo bouw je een Inception block:
 
-    1. Geef het vier takken op dezelfde input `x`: een 1×1 convolution; een 1×1 convolution naar minder channels en een 3×3-convolutie; een 1×1 convolution naar minder channels en een 5×5-convolutie; 3×3 max pooling en een 1×1 convolution.
+    1. Geef het vier takken op dezelfde input `x`: een 1×1-convolutie; een 1×1-convolutie naar minder channels en een 3×3-convolutie; een 1×1-convolutie naar minder channels en een 5×5-convolutie; 3×3 max pooling en een 1×1-convolutie.
     2. Zet een ReLU na elke convolutie.
     3. Houd in elke tak de hoogte en breedte: padding 1 voor 3 bij 3, padding 2 voor 5 bij 5, en de max pooling met `stride=1, padding=1`.
     4. Zet de takken naast elkaar langs de channels, `torch.cat([y1, y3, y5, yp], dim=1)`: dan komen er `c1 + c3 + c5 + pool_proj` channels uit.
@@ -198,7 +198,7 @@ def example_inception():
 @app.cell(hide_code=True)
 def text_after_example():
     mo.md(r"""
-    Zoals de cel nu is, print hij vier keer `torch.Size([28, 28])`: elke tak houdt de hoogte en breedte, zoals stap 3 van het recept zegt. Dan `torch.Size([1, 256, 28, 28])`: 64 + 128 + 32 + 32 channels naast elkaar, en `163696` parameters. Daarvan zitten er 12.352 in de 1×1-tak; 18.528 + 110.720 in de 3×3-tak; 3.088 + 12.832 in de 5×5-tak; en 6.176 in de 1×1 convolution na de pooling. Met `padding=1` geeft de 5×5-convolutie 26 bij 26: de eerste regel print `torch.Size([26, 26])` voor de derde tak, en `torch.cat` stopt met `Sizes of tensors must match except in dimension 1. Expected size 28 but got size 26 for tensor number 2 in the list`. Hij telt de tensors in de lijst vanaf 0, dus nummer 2 is `y5`.
+    Zoals de cel nu is, print hij vier keer `torch.Size([28, 28])`: elke tak houdt de hoogte en breedte, zoals stap 3 van het recept zegt. Dan `torch.Size([1, 256, 28, 28])`: 64 + 128 + 32 + 32 channels naast elkaar, en `163696` parameters. Daarvan zitten er 12.352 in de 1×1-tak; 18.528 + 110.720 in de 3×3-tak; 3.088 + 12.832 in de 5×5-tak; en 6.176 in de 1×1-convolutie na de pooling. Met `padding=1` geeft de 5×5-convolutie 26 bij 26: de eerste regel print `torch.Size([26, 26])` voor de derde tak, en `torch.cat` stopt met `Sizes of tensors must match except in dimension 1. Expected size 28 but got size 26 for tensor number 2 in the list`. Hij telt de tensors in de lijst vanaf 0, dus nummer 2 is `y5`.
     """)
     return
 
@@ -206,7 +206,7 @@ def text_after_example():
 @app.cell(hide_code=True)
 def text_before_play():
     mo.md(r"""
-    Schuif de grootte van de filters van één tak, van 1 bij 1 tot 11 bij 11. De tak krijgt 192 channels en geeft er 32, zoals de 5×5-tak van inception (3a). De grijze balk is de tak rechtstreeks op de 192 channels; de oranje balk is de tak achter een 1×1 convolution naar 16 channels, zijn twee convoluties na elkaar. De as blijft dezelfde, in duizenden parameters.
+    Schuif de grootte van de filters van één tak, van 1 bij 1 tot 11 bij 11. De tak krijgt 192 channels en geeft er 32, zoals de 5×5-tak van inception (3a). De grijze balk is de tak rechtstreeks op de 192 channels; de oranje balk is de tak achter een 1×1-convolutie naar 16 channels, zijn twee convoluties na elkaar. De as blijft dezelfde, in duizenden parameters.
     """)
     return
 
@@ -215,10 +215,10 @@ def text_before_play():
 def play_kernel():
     _labels = {"title": "Eén tak, van 192 channels naar 32", "x": "parameters (duizenden)",
                "straight": "rechtstreeks op 192", "reduced": "achter een 1×1 naar 16",
-               "alt": "Twee balken parameters, in duizenden, voor filters van de gekozen grootte: de tak rechtstreeks op de 192 channels, in grijs, en de tak achter een 1×1 convolution naar 16 channels, zijn twee convoluties na elkaar, in oranje."}
+               "alt": "Twee balken parameters, in duizenden, voor filters van de gekozen grootte: de tak rechtstreeks op de 192 channels, in grijs, en de tak achter een 1×1-convolutie naar 16 channels, zijn twee convoluties na elkaar, in oranje."}
     explore_kernel = L.explore("kernel", "grootte van het filter", lambda _v: (C.kernel_picture(int(_v), _labels, L.lang), C.kernel_sentence(int(_v), L.lang)),
                                start=5, values=C.KERNELS, role="hyper",
-                               task="Vanaf welke grootte van het filter heeft de tak rechtstreeks op de 192 channels meer dan 10 keer zoveel parameters als de tak achter de 1×1 convolution?")
+                               task="Vanaf welke grootte van het filter heeft de tak rechtstreeks op de 192 channels meer dan 10 keer zoveel parameters als de tak achter de 1×1-convolutie?")
     explore_kernel
     return
 
@@ -226,7 +226,7 @@ def play_kernel():
 @app.cell(hide_code=True)
 def text_after_play():
     mo.md(r"""
-    Vanaf 7 bij 7: 301.088 parameters tegen 28.208, 10,7 keer zoveel. Bij 5 bij 5 is het 9,7 keer, en bij 3 bij 3 is het 7,2. Hoe groter het filter, hoe dichter de factor bij 192 / 16 = 12 komt: dan zitten bijna alle parameters in de filters van $k$ bij $k$, en achter de 1×1 convolution werken die op 16 channels in plaats van 192. Daarom geeft GoogLeNet zijn 5×5-takken de smalste 1×1 convolutions ervoor: 16 van de 192 channels in inception (3a), waar de 3×3-tak er 96 krijgt.
+    Vanaf 7 bij 7: 301.088 parameters tegen 28.208, 10,7 keer zoveel. Bij 5 bij 5 is het 9,7 keer, en bij 3 bij 3 is het 7,2. Hoe groter het filter, hoe dichter de factor bij 192 / 16 = 12 komt: dan zitten bijna alle parameters in de filters van $k$ bij $k$, en achter de 1×1-convolutie werken die op 16 channels in plaats van 192. Daarom geeft GoogLeNet zijn 5×5-takken de smalste 1×1-convoluties ervoor: 16 van de 192 channels in inception (3a), waar de 3×3-tak er 96 krijgt.
     """)
     return
 
@@ -265,7 +265,7 @@ def hints_same_size():
             "Reken voor elke stap uit hoeveel plekken een venster van $k$ bij $k$ heeft op 28 pixels: $28 + 2p - k + 1$ met stride 1. Met een stride van 2 neemt het alleen elke tweede plek.",
             "Vier ervan houden 28 bij 28, twee niet. Een padding van $(k - 1) / 2$ houdt de grootte: 0 voor 1 bij 1, 1 voor 3 bij 3, 2 voor 5 bij 5.",
         ],
-        why="**Ze houden 28 bij 28:** de 1×1 convolution, 28 + 0 − 1 + 1 = 28; de 3×3-convolutie met padding 1, 28 + 2 − 3 + 1 = 28; de 5×5-convolutie met padding 2, 28 + 4 − 5 + 1 = 28; en 3×3 max pooling met stride 1 en padding 1, zoals de 3×3-convolutie. **Ze veranderen de grootte:** de 5×5-convolutie met padding 1, 28 + 2 − 5 + 1 = 26; en 2×2 max pooling, met een stride van 2, dus 14 bij 14.",
+        why="**Ze houden 28 bij 28:** de 1×1-convolutie, 28 + 0 − 1 + 1 = 28; de 3×3-convolutie met padding 1, 28 + 2 − 3 + 1 = 28; de 5×5-convolutie met padding 2, 28 + 4 − 5 + 1 = 28; en 3×3 max pooling met stride 1 en padding 1, zoals de 3×3-convolutie. **Ze veranderen de grootte:** de 5×5-convolutie met padding 1, 28 + 2 − 5 + 1 = 26; en 2×2 max pooling, met een stride van 2, dus 14 bij 14.",
     )
     return
 
@@ -276,7 +276,7 @@ def text_exercise_inception():
         mo.md(r"""
         ### Oefening 2. Een Inception block
 
-        Maak `Inception` af. Zijn argumenten zijn de kolommen van de tabel van GoogLeNet: de channels die binnenkomen, `c_in`; de filters van de 1×1-tak, `c1`; de filters van de 1×1 convolution vóór de 3×3-convolutie, en van die 3×3-convolutie zelf, `c3_reduce` en `c3`; hetzelfde voor de 5×5-tak, `c5_reduce` en `c5`; en de filters na de pooling, `pool_proj`. De 1×1-, 3×3- en pooling-takken staan in het vak. Maak de 5×5-tak: `b5_reduce`, een 1×1 convolution van `c_in` naar `c5_reduce`, en `b5`, een 5×5-convolutie van `c5_reduce` naar `c5` die de hoogte en breedte houdt. Maak in `forward` `y5` zoals `y3` gemaakt wordt, en geef de vier takken naast elkaar terug langs de channels, in de volgorde `y1`, `y3`, `y5`, `yp`. De check bouwt je block, met de getallen van inception (3a) en met verzonnen getallen, en vergelijkt wat eruit komt, en hoeveel parameters het heeft, met dat van de course. Als het klopt, bewaart hij je class in je project, als `work/projects/cnn/inception.py`.
+        Maak `Inception` af. Zijn argumenten zijn de kolommen van de tabel van GoogLeNet: de channels die binnenkomen, `c_in`; de filters van de 1×1-tak, `c1`; de filters van de 1×1-convolutie vóór de 3×3-convolutie, en van die 3×3-convolutie zelf, `c3_reduce` en `c3`; hetzelfde voor de 5×5-tak, `c5_reduce` en `c5`; en de filters na de pooling, `pool_proj`. De 1×1-, 3×3- en pooling-takken staan in het vak. Maak de 5×5-tak: `b5_reduce`, een 1×1-convolutie van `c_in` naar `c5_reduce`, en `b5`, een 5×5-convolutie van `c5_reduce` naar `c5` die de hoogte en breedte houdt. Maak in `forward` `y5` zoals `y3` gemaakt wordt, en geef de vier takken naast elkaar terug langs de channels, in de volgorde `y1`, `y3`, `y5`, `yp`. De check bouwt je block, met de getallen van inception (3a) en met verzonnen getallen, en vergelijkt wat eruit komt, en hoeveel parameters het heeft, met dat van de course. Als het klopt, bewaart hij je class in je project, als `work/projects/cnn/inception.py`.
         """),
         L.task("Maak `b5_reduce` en `b5`, dan `y5`, en geef de vier takken naast elkaar terug."),
     ])
@@ -448,7 +448,7 @@ def text_connections():
     mo.md(r"""
     ## Afronding
 
-    **Samenhang.** Een Inception block zet de 1×1 convolutions uit [1×1 convolutions: de channels mengen](/course/open/cv-1x1-convolution?lang=nl) vóór filters van 3 bij 3 en 5 bij 5 naast elkaar, waar [VGG: dieper met kleine filters](/course/open/cnn-vgg-blocks?lang=nl) filters van één grootte na elkaar stapelde. Je hield de hoogte en breedte met de formule uit [Convolutie in detail](/course/open/cnn-conv-formal?lang=nl), stapelde de takken met `torch.cat` uit [Tensors in PyTorch](/course/open/torch-tensors?lang=nl), en trainde het block met de Trainer uit [Een herbruikbare training loop](/course/open/nn-trainer?lang=nl) op de foto's uit [Project: je CNN op kleurenfoto's](/course/open/cv-color-cnn?lang=nl). Je project `cnn` heeft nu `inception.py`. In de volgende les, *Groepen van channels: ResNeXt*, krijgt een block weer veel dunne paden naast elkaar, deze keer allemaal van dezelfde vorm, met een convolutie die de channels in groepen verdeelt.
+    **Samenhang.** Een Inception block zet de 1×1-convoluties uit [1×1-convoluties: de channels mengen](/course/open/cv-1x1-convolution?lang=nl) vóór filters van 3 bij 3 en 5 bij 5 naast elkaar, waar [VGG: dieper met kleine filters](/course/open/cnn-vgg-blocks?lang=nl) filters van één grootte na elkaar stapelde. Je hield de hoogte en breedte met de formule uit [Convolutie in detail](/course/open/cnn-conv-formal?lang=nl), stapelde de takken met `torch.cat` uit [Tensors in PyTorch](/course/open/torch-tensors?lang=nl), en trainde het block met de Trainer uit [Een herbruikbare training loop](/course/open/nn-trainer?lang=nl) op de foto's uit [Project: je CNN op kleurenfoto's](/course/open/cv-color-cnn?lang=nl). Je project `cnn` heeft nu `inception.py`. In de volgende les, *Groepen van channels: ResNeXt*, krijgt een block weer veel dunne paden naast elkaar, deze keer allemaal van dezelfde vorm, met een convolutie die de channels in groepen verdeelt.
     """)
     return
 

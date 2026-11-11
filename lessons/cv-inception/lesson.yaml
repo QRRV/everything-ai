@@ -8,12 +8,12 @@ title:
   nl: "Inception: filters van verschillende groottes naast elkaar"
 goal:
   en: "build an Inception block from branches of 1×1, 3×3 and 5×5 convolutions and max pooling, count what its 1×1 convolutions save, and find out in a CNN on CIFAR-10 which branch the network leans on."
-  nl: "een Inception block bouwen uit takken van 1×1 convolutions, 3×3- en 5×5-convoluties en max pooling, tellen wat zijn 1×1 convolutions besparen, en in een CNN op CIFAR-10 uitzoeken op welke tak het netwerk leunt."
+  nl: "een Inception block bouwen uit takken van 1×1-, 3×3- en 5×5-convoluties en max pooling, tellen wat zijn 1×1-convoluties besparen, en in een CNN op CIFAR-10 uitzoeken op welke tak het netwerk leunt."
 summary:
   - en: "An Inception block sends the same maps into four branches side by side: a 1×1 convolution; a 1×1 convolution to fewer channels and a 3×3 convolution; the same with a 5×5 convolution; and 3×3 max pooling and a 1×1 convolution. Each branch keeps the height and width, with padding 1 for 3 by 3, 2 for 5 by 5, and pooling with stride 1, and `torch.cat(..., dim=1)` puts their maps side by side along the channels."
-    nl: "Een Inception block stuurt dezelfde maps vier takken naast elkaar in: een 1×1 convolution; een 1×1 convolution naar minder channels en een 3×3-convolutie; hetzelfde met een 5×5-convolutie; en 3×3 max pooling en een 1×1 convolution. Elke tak houdt de hoogte en breedte, met padding 1 voor 3 bij 3, 2 voor 5 bij 5, en pooling met stride 1, en `torch.cat(..., dim=1)` zet hun maps naast elkaar langs de channels."
+    nl: "Een Inception block stuurt dezelfde maps vier takken naast elkaar in: een 1×1-convolutie; een 1×1-convolutie naar minder channels en een 3×3-convolutie; hetzelfde met een 5×5-convolutie; en 3×3 max pooling en een 1×1-convolutie. Elke tak houdt de hoogte en breedte, met padding 1 voor 3 bij 3, 2 voor 5 bij 5, en pooling met stride 1, en `torch.cat(..., dim=1)` zet hun maps naast elkaar langs de channels."
   - en: "Inception (3a) of GoogLeNet (2014) turns 192 channels of 28 by 28 into 256, with 163,696 parameters and 128 million multiplications for a photo. Without its 1×1 convolutions before the 3×3 and 5×5 filters and after the pooling, the naive block of the paper, it would have 387,296 parameters, and give 416 channels, because the pooling keeps all 192."
-    nl: "Inception (3a) van GoogLeNet (2014) krijgt 192 channels van 28 bij 28 en geeft er 256, met 163.696 parameters en 128 miljoen vermenigvuldigingen per foto. Zonder zijn 1×1 convolutions vóór de filters van 3 bij 3 en 5 bij 5 en na de pooling, het naïeve block uit de paper, zou het 387.296 parameters hebben, en 416 channels geven, omdat de pooling alle 192 houdt."
+    nl: "Inception (3a) van GoogLeNet (2014) krijgt 192 channels van 28 bij 28 en geeft er 256, met 163.696 parameters en 128 miljoen vermenigvuldigingen per foto. Zonder zijn 1×1-convoluties vóór de filters van 3 bij 3 en 5 bij 5 en na de pooling, het naïeve block uit de paper, zou het 387.296 parameters hebben, en 416 channels geven, omdat de pooling alle 192 houdt."
   - en: "A CNN on 6,000 photos of CIFAR-10, for 20 epochs: with an Inception block in its middle, 44,658 parameters, it reads 553 to 585 test photos right, where one 3×3 convolution there, 66,570 parameters, reads 532 to 572. With its 1×1 branch switched off after training, 100 to 144 fewer; with its 5×5 branch switched off, from 2 more to 34 fewer."
     nl: "Een CNN op 6.000 foto's van CIFAR-10, 20 epochs lang: met een Inception block in zijn midden, 44.658 parameters, leest het 553 tot 585 testfoto's goed, waar één 3×3-convolutie daar, 66.570 parameters, er 532 tot 572 leest. Met zijn 1×1-tak uit na de training 100 tot 144 minder; met zijn 5×5-tak uit van 2 meer tot 34 minder."
 can_now:
@@ -21,13 +21,13 @@ can_now:
     nl: "zeggen welke convoluties en welke pooling de hoogte en breedte houden, zodat torch.cat ze naast elkaar kan zetten"
     by: same-size
   - en: "build an Inception block with torch.cat, and count what its 1×1 convolutions save"
-    nl: "een Inception block bouwen met torch.cat, en tellen wat zijn 1×1 convolutions besparen"
+    nl: "een Inception block bouwen met torch.cat, en tellen wat zijn 1×1-convoluties besparen"
     by: inception
   - en: "read from measured runs which branch of a block a trained network leans on"
     nl: "uit gemeten runs aflezen op welke tak van een block een getraind netwerk leunt"
     by: branches
 further_reading:
   - en: "Christian Szegedy and others (2014), *Going Deeper with Convolutions*: section 4 and figure 2, the naive Inception block and the one with 1×1 convolutions, and section 5 and table 1, GoogLeNet with the numbers of every block"
-    nl: "Christian Szegedy en anderen (2014), *Going Deeper with Convolutions*: paragraaf 4 en figuur 2, het naïeve Inception block en dat met 1×1 convolutions, en paragraaf 5 en tabel 1, GoogLeNet met de getallen van elk block"
+    nl: "Christian Szegedy en anderen (2014), *Going Deeper with Convolutions*: paragraaf 4 en figuur 2, het naïeve Inception block en dat met 1×1-convoluties, en paragraaf 5 en tabel 1, GoogLeNet met de getallen van elk block"
   - en: "Christian Szegedy and others (2015), *Rethinking the Inception Architecture for Computer Vision*: section 3.1, two 3×3 convolutions in the place of one 5×5"
     nl: "Christian Szegedy en anderen (2015), *Rethinking the Inception Architecture for Computer Vision*: paragraaf 3.1, twee 3×3-convoluties op de plek van één 5×5"

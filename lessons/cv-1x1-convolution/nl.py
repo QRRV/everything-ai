@@ -79,7 +79,7 @@ def text_why():
         mo.md(r"""
         ## Waarom
 
-        In [ResNet: diepte die blijft werken](/course/open/cnn-resnet?lang=nl) kreeg de residual connection een convolutie van 1 bij 1 waar de channels van $x$ en $f(x)$ niet pasten. Een filter van 1 bij 1 klinkt nutteloos: hij ziet één pixel, dus hij kan geen rand of vorm vinden. Maar een pixel diep in een CNN is niet één getal. Hij heeft een getal in elk channel, 64 of 512 stuks, en een filter van 1 bij 1 mengt die tot nieuwe. In 2013 zetten Min Lin, Qiang Chen en Shuicheng Yan zulke convoluties na de grotere in hun netwerk, *Network In Network*. In 2014 gebruikte GoogLeNet ze om de channels minder te maken vóór zijn dure convoluties van 3 bij 3 en 5 bij 5, zodat het met hetzelfde werk dieper en breder kon worden, en won het de wedstrijd van ImageNet. In 2015 bouwden ResNet-50 en de diepere ResNets elk block zo: een bottleneck. Vandaag meng je de kleuren van een foto met een 1×1 convolution, tel je wat een bottleneck bespaart, bouw je er een, en zet je hem in een CNN op CIFAR-10.
+        In [ResNet: diepte die blijft werken](/course/open/cnn-resnet?lang=nl) kreeg de residual connection een convolutie van 1 bij 1 waar de channels van $x$ en $f(x)$ niet pasten. Een filter van 1 bij 1 klinkt nutteloos: hij ziet één pixel, dus hij kan geen rand of vorm vinden. Maar een pixel diep in een CNN is niet één getal. Hij heeft een getal in elk channel, 64 of 512 stuks, en een filter van 1 bij 1 mengt die tot nieuwe. In 2013 zetten Min Lin, Qiang Chen en Shuicheng Yan zulke convoluties na de grotere in hun netwerk, *Network In Network*. In 2014 gebruikte GoogLeNet ze om de channels minder te maken vóór zijn dure convoluties van 3 bij 3 en 5 bij 5, zodat het met hetzelfde werk dieper en breder kon worden, en won het de wedstrijd van ImageNet. In 2015 bouwden ResNet-50 en de diepere ResNets elk block zo: een bottleneck. Vandaag meng je de kleuren van een foto met een 1×1-convolutie, tel je wat een bottleneck bespaart, bouw je er een, en zet je hem in een CNN op CIFAR-10.
         """),
         L.course_versions(),
     ])
@@ -96,7 +96,7 @@ def predict_bottleneck():
             "half": "Ongeveer de helft",
             "right": "Ongeveer een achtste",
         },
-        reveal="**Ongeveer een achtste: 70.016.** De 1×1 convolution van 256 naar 64 heeft er 64 × (256 + 1) = 16.448; de 3×3 van 64 naar 64 heeft er 64 × (64 × 9 + 1) = 36.928; en de 1×1 van 64 terug naar 256 heeft er 256 × (64 + 1) = 16.640. Samen 8,4 keer minder dan 590.080. Voor elke pixel doen ze 69.632 vermenigvuldigingen, tegen 589.824; en ongeveer evenveel als de 73.728 van het block van twee 3×3-convoluties van 64 channels in de kleinere ResNets, zoals ResNet-34: hetzelfde werk, op maps met 4 keer zoveel channels. Geteld met een bias voor elk filter, zoals `nn.Conv2d` ze maakt; ResNet laat de biases weg, omdat er na elke convolutie batch normalization komt.",
+        reveal="**Ongeveer een achtste: 70.016.** De 1×1-convolutie van 256 naar 64 heeft er 64 × (256 + 1) = 16.448; de 3×3 van 64 naar 64 heeft er 64 × (64 × 9 + 1) = 36.928; en de 1×1 van 64 terug naar 256 heeft er 256 × (64 + 1) = 16.640. Samen 8,4 keer minder dan 590.080. Voor elke pixel doen ze 69.632 vermenigvuldigingen, tegen 589.824; en ongeveer evenveel als de 73.728 van het block van twee 3×3-convoluties van 64 channels in de kleinere ResNets, zoals ResNet-34: hetzelfde werk, op maps met 4 keer zoveel channels. Geteld met een bias voor elk filter, zoals `nn.Conv2d` ze maakt; ResNet laat de biases weg, omdat er na elke convolutie batch normalization komt.",
     )
     guess_bottleneck
     return (guess_bottleneck,)
@@ -108,25 +108,25 @@ def text_idea():
         mo.md(r"""
         ## Het idee
 
-        **Eén pixel, al zijn channels.** Een 1×1 convolution heeft filters van 1 bij 1. Op elke pixel neemt een filter het getal van die pixel in elk channel dat binnenkomt, vermenigvuldigt elk met zijn eigen weight, telt ze op met zijn bias, en dat is het getal van zijn channel op die pixel. Met $c_{in}$ channels erin en $c_{out}$ filters is dat een linear layer van $c_{in}$ getallen naar $c_{out}$, op elke pixel dezelfde. De rijen en kolommen blijven zoals ze zijn; alleen het aantal channels verandert.
+        **Eén pixel, al zijn channels.** Een 1×1-convolutie heeft filters van 1 bij 1. Op elke pixel neemt een filter het getal van die pixel in elk channel dat binnenkomt, vermenigvuldigt elk met zijn eigen weight, telt ze op met zijn bias, en dat is het getal van zijn channel op die pixel. Met $c_{in}$ channels erin en $c_{out}$ filters is dat een linear layer van $c_{in}$ getallen naar $c_{out}$, op elke pixel dezelfde. De rijen en kolommen blijven zoals ze zijn; alleen het aantal channels verandert.
 
-        Het plaatje: het landschap uit [Een afbeelding is een rooster van getallen](/course/open/data-images-as-arrays?lang=nl), en wat twee 1×1 convolutions van 3 channels naar 1 ervan maken, getekend met het laagste getal zwart en het hoogste wit. De weights 0,299, 0,587 en 0,114 voor rood, groen en blauw geven een grijze foto: ze zeggen hoe licht elke kleur er voor ons uitziet, groen het meest en blauw het minst, en ze zijn een standaard voor televisie. De weights 1, 0 en −1 geven rood min blauw: licht waar een pixel meer rood dan blauw heeft, zoals in de gele zon, en donker waar hij meer blauw heeft, zoals in de lucht.
+        Het plaatje: het landschap uit [Een afbeelding is een rooster van getallen](/course/open/data-images-as-arrays?lang=nl), en wat twee 1×1-convoluties van 3 channels naar 1 ervan maken, getekend met het laagste getal zwart en het hoogste wit. De weights 0,299, 0,587 en 0,114 voor rood, groen en blauw geven een grijze foto: ze zeggen hoe licht elke kleur er voor ons uitziet, groen het meest en blauw het minst, en ze zijn een standaard voor televisie. De weights 1, 0 en −1 geven rood min blauw: licht waar een pixel meer rood dan blauw heeft, zoals in de gele zon, en donker waar hij meer blauw heeft, zoals in de lucht.
         """),
         mo.Html(C.mix_picture({"photo": "foto, 3 channels", "gray": "0,299; 0,587; 0,114", "red_blue": "1; 0; −1",
                                "alt": "Drie plaatjes van hetzelfde landschap van 24 bij 40 pixels: in kleur; in grijs, gemaakt met de weights 0,299, 0,587 en 0,114; en rood min blauw, gemaakt met de weights 1, 0 en −1, met de zon licht en de lucht donker."})),
         mo.md(r"""
-        **Zijn parameters.** Een 1×1 convolution van $c_{in}$ channels naar $c_{out}$ heeft $c_{out} \times (c_{in} + 1)$ parameters: per filter een weight voor elk channel dat binnenkomt, en een bias. Een 3×3-convolutie heeft er $c_{out} \times (9\,c_{in} + 1)$: negen keer zoveel weights. Allebei groeien ze met $c_{in} \times c_{out}$, dus een convolutie tussen veel channels is duur, en een 3×3-convolutie het meest.
+        **Zijn parameters.** Een 1×1-convolutie van $c_{in}$ channels naar $c_{out}$ heeft $c_{out} \times (c_{in} + 1)$ parameters: per filter een weight voor elk channel dat binnenkomt, en een bias. Een 3×3-convolutie heeft er $c_{out} \times (9\,c_{in} + 1)$: negen keer zoveel weights. Allebei groeien ze met $c_{in} \times c_{out}$, dus een convolutie tussen veel channels is duur, en een 3×3-convolutie het meest.
 
-        **Een bottleneck.** Zet de dure 3×3-convolutie dus op een smalle plek. Een bottleneck rond $c$ channels heeft drie convoluties, elk met een ReLU erna: een 1×1 convolution van $c$ channels naar $m$, minder; de 3×3-convolutie van $m$ naar $m$; en een 1×1 convolution van $m$ terug naar $c$. Wat eruit komt, heeft evenveel channels als wat erin ging, dus het past waar één 3×3-convolutie van $c$ naar $c$ zat.
+        **Een bottleneck.** Zet de dure 3×3-convolutie dus op een smalle plek. Een bottleneck rond $c$ channels heeft drie convoluties, elk met een ReLU erna: een 1×1-convolutie van $c$ channels naar $m$, minder; de 3×3-convolutie van $m$ naar $m$; en een 1×1-convolutie van $m$ terug naar $c$. Wat eruit komt, heeft evenveel channels als wat erin ging, dus het past waar één 3×3-convolutie van $c$ naar $c$ zat.
         """),
-        L.watch_out("Een 1×1 convolution kijkt nooit naar een buur: wat hij op een pixel geeft, komt alleen uit die pixel. Een stapel van alleen 1×1 convolutions vindt geen randen, geen vormen, niets wat over twee pixels gaat. Daarom houdt een bottleneck een 3×3-convolutie in zijn midden: de 1×1 convolutions eromheen mengen alleen channels."),
+        L.watch_out("Een 1×1-convolutie kijkt nooit naar een buur: wat hij op een pixel geeft, komt alleen uit die pixel. Een stapel van alleen 1×1-convoluties vindt geen randen, geen vormen, niets wat over twee pixels gaat. Daarom houdt een bottleneck een 3×3-convolutie in zijn midden: de 1×1-convoluties eromheen mengen alleen channels."),
         mo.md(r"""
         ### Nieuwe woorden en tekens
 
         | Woord | Wat het betekent | In code |
         |---|---|---|
-        | **1×1 convolution** | een convolutie met filters van 1 bij 1: op elke pixel mengt hij de getallen van de channels van die pixel tot nieuwe channels, als een linear layer op elke pixel | `nn.Conv2d(c_in, c_out, 1)` |
-        | **bottleneck** | een smal midden: een 1×1 convolution naar minder channels, de dure convolutie op die paar, en een 1×1 convolution terug naar evenveel als eerst | |
+        | **1×1-convolutie** | een convolutie met filters van 1 bij 1: op elke pixel mengt hij de getallen van de channels van die pixel tot nieuwe channels, als een linear layer op elke pixel | `nn.Conv2d(c_in, c_out, 1)` |
+        | **bottleneck** | een smal midden: een 1×1-convolutie naar minder channels, de dure convolutie op die paar, en een 1×1-convolutie terug naar evenveel als eerst | |
 
         **Het netwerk van de demo.** De demo traint een CNN zoals je ColorCNN, maar breder en met één stap meer: 32 en 64 filters van 3 bij 3, elk met max pooling van 2 bij 2, dan een block op de 64 maps van 8 bij 8, weer pooling, en één linear layer naar de 10 logits. Het block is één 3×3-convolutie van 64 naar 64 met een ReLU, 36.928 parameters, of je `Bottleneck` uit oefening 2, met 32 of 16 channels in het midden: 13.440 of 4.448 parameters. Het hele netwerk heeft er dan 66.570, 43.082 of 34.090: met 16 in het midden ongeveer de helft.
 
@@ -145,12 +145,12 @@ def text_recipe():
     mo.md(r"""
     ### Recept
 
-    De channels van een map mengen met een 1×1 convolution:
+    De channels van een map mengen met een 1×1-convolutie:
 
     1. Maak hem met `nn.Conv2d(c_in, c_out, 1)`: een kernel size van 1, geen padding nodig. De rijen en kolommen blijven.
     2. Zijn `weight` heeft shape `(c_out, c_in, 1, 1)`: `weight[k, :, 0, 0]` bevat de weights van output channel `k`, één voor elk channel dat binnenkomt.
     3. Hij heeft $c_{out} \times (c_{in} + 1)$ parameters, tegen $c_{out} \times (9\,c_{in} + 1)$ voor een 3×3-convolutie.
-    4. Voor een bottleneck rond $c$ channels met $m$ in het midden: een 1×1 convolution van $c$ naar $m$, een 3×3 van $m$ naar $m$ met padding 1, en een 1×1 van $m$ terug naar $c$, elk met een ReLU erna.
+    4. Voor een bottleneck rond $c$ channels met $m$ in het midden: een 1×1-convolutie van $c$ naar $m$, een 3×3 van $m$ naar $m$ met padding 1, en een 1×1 van $m$ terug naar $c$, elk met een ReLU erna.
     """)
     return
 
@@ -160,7 +160,7 @@ def text_worked_example():
     mo.md(r"""
     ### Uitgewerkt voorbeeld
 
-    De cel leest het landschap als een batch van één foto, maakt een 1×1 convolution van 3 channels naar 1, geeft hem de weights van een grijswaarde, en print de shape van zijn weights, de shapes van de foto en van wat eruit komt, de drie kleuren van een pixel in de zon, rij 5 en kolom 32, en wat de convolutie van die pixel maakt. Daarna telt hij de parameters van de convolutie. Voer de cel uit zoals hij is, verander hem dan waar het commentaar het zegt, en voer hem opnieuw uit. Hij heeft geen download nodig.
+    De cel leest het landschap als een batch van één foto, maakt een 1×1-convolutie van 3 channels naar 1, geeft hem de weights van een grijswaarde, en print de shape van zijn weights, de shapes van de foto en van wat eruit komt, de drie kleuren van een pixel in de zon, rij 5 en kolom 32, en wat de convolutie van die pixel maakt. Daarna telt hij de parameters van de convolutie. Voer de cel uit zoals hij is, verander hem dan waar het commentaar het zegt, en voer hem opnieuw uit. Hij heeft geen download nodig.
     """)
     return
 
@@ -173,7 +173,7 @@ def example_mix():
 
     img = plt.imread("lessons/data-images-as-arrays/landscape.png")
     x = torch.tensor(img).permute(2, 0, 1).unsqueeze(0)
-    # 1. een 1×1 convolution van 3 channels naar 1
+    # 1. een 1×1-convolutie van 3 channels naar 1
     mix = nn.Conv2d(3, 1, 1)
     # 2. zijn weights: één voor rood, één voor groen en één voor blauw
     print(mix.weight.shape)
@@ -231,7 +231,7 @@ def text_exercise_one_by_one():
 
     ### Oefening 1. Eén pixel of meer?
 
-    Zes dingen die je een convolutie met een foto zou kunnen laten doen. Welke kan een 1×1 convolution, met de goede weights, en voor welke is een groter filter nodig? Zet elk ding in zijn groep.
+    Zes dingen die je een convolutie met een foto zou kunnen laten doen. Welke kan een 1×1-convolutie, met de goede weights, en voor welke is een groter filter nodig? Zet elk ding in zijn groep.
     """)
     return
 
@@ -256,9 +256,9 @@ def hints_one_by_one():
         "one-by-one",
         [
             "Vraag bij elk ding: heeft het nieuwe getal op een pixel iets anders nodig dan de oude getallen van diezelfde pixel?",
-            "Drie ervan kan hij wel, de andere drie niet. Een 1×1 convolution kan uit de channels van één pixel zoveel nieuwe channels maken als je wilt, met elke weights die je wilt; hij kan niet één pixel verder kijken.",
+            "Drie ervan kan hij wel, de andere drie niet. Een 1×1-convolutie kan uit de channels van één pixel zoveel nieuwe channels maken als je wilt, met elke weights die je wilt; hij kan niet één pixel verder kijken.",
         ],
-        why="**Een 1×1 convolution kan het:** een grijze foto, met de weights 0,299, 0,587 en 0,114; minder channels, met 16 filters van elk 64 weights; en verwisselde kleuren, met een weight van 1 van het oude blauw naar het nieuwe rood en van het oude rood naar het nieuwe blauw, 1 van groen naar groen, en overal anders 0. **Daar is een groter filter voor nodig:** een rand, vervagen en verschuiven hebben allemaal de buren van een pixel nodig.",
+        why="**Een 1×1-convolutie kan het:** een grijze foto, met de weights 0,299, 0,587 en 0,114; minder channels, met 16 filters van elk 64 weights; en verwisselde kleuren, met een weight van 1 van het oude blauw naar het nieuwe rood en van het oude rood naar het nieuwe blauw, 1 van groen naar groen, en overal anders 0. **Daar is een groter filter voor nodig:** een rand, vervagen en verschuiven hebben allemaal de buren van een pixel nodig.",
     )
     return
 
@@ -269,7 +269,7 @@ def text_exercise_bottleneck():
         mo.md(r"""
         ### Oefening 2. Een bottleneck
 
-        Maak `Bottleneck` af, een block dat past waar een 3×3-convolutie van `channels` naar `channels` zat. Maak `reduce`, een 1×1 convolution van `channels` naar `middle`, en `expand`, een 1×1 convolution van `middle` terug naar `channels`; `conv`, de 3×3-convolutie ertussen, staat al in het vak. Stuur in `forward` `x` door `reduce`, `conv` en `expand`, in die volgorde, elk met een ReLU erna, en geef terug wat eruit komt. De check bouwt je block, geeft het verzonnen getallen, en vergelijkt wat eruit komt, en hoeveel parameters het heeft, met dat van de course. Als het klopt, bewaart hij je class in je project, als `work/projects/cnn/bottleneck.py`.
+        Maak `Bottleneck` af, een block dat past waar een 3×3-convolutie van `channels` naar `channels` zat. Maak `reduce`, een 1×1-convolutie van `channels` naar `middle`, en `expand`, een 1×1-convolutie van `middle` terug naar `channels`; `conv`, de 3×3-convolutie ertussen, staat al in het vak. Stuur in `forward` `x` door `reduce`, `conv` en `expand`, in die volgorde, elk met een ReLU erna, en geef terug wat eruit komt. De check bouwt je block, geeft het verzonnen getallen, en vergelijkt wat eruit komt, en hoeveel parameters het heeft, met dat van de course. Als het klopt, bewaart hij je class in je project, als `work/projects/cnn/bottleneck.py`.
         """),
         L.task("Maak `reduce` en `expand`, en maak `forward` af."),
     ])
@@ -295,7 +295,7 @@ def hints_bottleneck():
     L.hints(
         "bottleneck",
         [
-            "Een 1×1 convolution is `nn.Conv2d` met een kernel size van 1. Hoeveel channels gaan er in `reduce`, en hoeveel komen eruit? En bij `expand`?",
+            "Een 1×1-convolutie is `nn.Conv2d` met een kernel size van 1. Hoeveel channels gaan er in `reduce`, en hoeveel komen eruit? En bij `expand`?",
             "`self.reduce = nn.Conv2d(channels, middle, 1)`. In `forward` is `x = torch.relu(self.reduce(x))` de eerste stap; `conv` en `expand` gaan net zo, en de laatste regel geeft terug wat `expand` en zijn ReLU maken.",
         ],
         why="`reduce` is `nn.Conv2d(channels, middle, 1)` en `expand` is `nn.Conv2d(middle, channels, 1)`, en `forward` stuurt `x` door `reduce`, `conv` en `expand`, elk gevolgd door `torch.relu`. In ResNet-50 heeft elk van de drie convoluties batch normalization erna, en wordt de input van het block opgeteld bij wat `expand` geeft vóór de laatste ReLU, zoals in [ResNet](/course/open/cnn-resnet?lang=nl). Hier staat het block op de plek van één 3×3-convolutie, zonder die optelling.",
@@ -445,7 +445,7 @@ def text_connections():
     mo.md(r"""
     ## Afronding
 
-    **Samenhang.** Een 1×1 convolution is de linear layer uit [Layers als modules: nn.Linear](/course/open/torch-nn-module?lang=nl), gebruikt op elke pixel, met de shapes uit [Convolutie in detail](/course/open/cnn-conv-formal?lang=nl): hij zat in de residual connection van [ResNet: diepte die blijft werken](/course/open/cnn-resnet?lang=nl), en in een bottleneck laat hij de 3×3-convoluties uit [VGG: dieper met kleine filters](/course/open/cnn-vgg-blocks?lang=nl) op minder channels werken. Je telde zijn parameters zoals in [Project: je eerste CNN](/course/open/cnn-pytorch?lang=nl), en trainde hem met de Trainer uit [Een herbruikbare training loop](/course/open/nn-trainer?lang=nl) op de foto's uit [Project: je CNN op kleurenfoto's](/course/open/cv-color-cnn?lang=nl). Je project `cnn` heeft nu `bottleneck.py`. In de volgende les, *Inception: filters van verschillende groottes naast elkaar*, maken 1×1 convolutions de channels minder vóór filters van 3 bij 3 en 5 bij 5 die naast elkaar naar dezelfde maps kijken, zoals in GoogLeNet.
+    **Samenhang.** Een 1×1-convolutie is de linear layer uit [Layers als modules: nn.Linear](/course/open/torch-nn-module?lang=nl), gebruikt op elke pixel, met de shapes uit [Convolutie in detail](/course/open/cnn-conv-formal?lang=nl): hij zat in de residual connection van [ResNet: diepte die blijft werken](/course/open/cnn-resnet?lang=nl), en in een bottleneck laat hij de 3×3-convoluties uit [VGG: dieper met kleine filters](/course/open/cnn-vgg-blocks?lang=nl) op minder channels werken. Je telde zijn parameters zoals in [Project: je eerste CNN](/course/open/cnn-pytorch?lang=nl), en trainde hem met de Trainer uit [Een herbruikbare training loop](/course/open/nn-trainer?lang=nl) op de foto's uit [Project: je CNN op kleurenfoto's](/course/open/cv-color-cnn?lang=nl). Je project `cnn` heeft nu `bottleneck.py`. In de volgende les, *Inception: filters van verschillende groottes naast elkaar*, maken 1×1-convoluties de channels minder vóór filters van 3 bij 3 en 5 bij 5 die naast elkaar naar dezelfde maps kijken, zoals in GoogLeNet.
     """)
     return
 

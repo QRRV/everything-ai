@@ -614,7 +614,7 @@ _N_MISTAKES = [
             nl=_K_NL + ": je netwerk stapelt de opgeschaalde map eerst. De course stapelt de map van de weg omlaag eerst, zoals de figuur van de paper hem tekent: `torch.cat([kept[2 - i], self.ups[i](x)], dim=1)`. De volgorde bepaalt welke weights van het blok welke channels zien, dus de getallen van de check veranderen mee."),
     Mistake("no-score", wrong=_N_WRONG["no-score"],
             en=_K_EN + ": your network gives the 8 channels of the last block. The scores come from the 1×1 convolution after it: `return self.score(x)`.",
-            nl=_K_NL + ": je netwerk geeft de 8 channels van het laatste blok. De scores komen uit de 1×1 convolution erna: `return self.score(x)`."),
+            nl=_K_NL + ": je netwerk geeft de 8 channels van het laatste blok. De scores komen uit de 1×1-convolutie erna: `return self.score(x)`."),
 ]
 
 

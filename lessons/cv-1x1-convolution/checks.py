@@ -146,7 +146,7 @@ def bottleneck_sentence(m: int, lang: str) -> str:
     total = bottleneck_params(CHANNELS, m)
     s, t, p = grouped(total, lang), grouped(PLAIN_BLOCK, lang), number(share(total, PLAIN_BLOCK), 1, lang)
     if lang == "nl":
-        return (f"Met {m} in het midden: {parts[0]} parameters in de 1×1 convolution van {CHANNELS} naar {m}, {parts[1]} in de 3×3 van {m} naar {m}, "
+        return (f"Met {m} in het midden: {parts[0]} parameters in de 1×1-convolutie van {CHANNELS} naar {m}, {parts[1]} in de 3×3 van {m} naar {m}, "
                 f"en {parts[2]} in de 1×1 van {m} terug naar {CHANNELS}. Samen {s}, {p}% van de {t} van één 3×3-convolutie van {CHANNELS} naar {CHANNELS}.")
     return (f"With {m} in the middle: {parts[0]} parameters in the 1×1 convolution from {CHANNELS} to {m}, {parts[1]} in the 3×3 from {m} to {m}, "
             f"and {parts[2]} in the 1×1 from {m} back to {CHANNELS}. Together {s}, {p}% of the {t} of one 3×3 convolution from {CHANNELS} to {CHANNELS}.")
@@ -332,7 +332,7 @@ _SORT = Sort(
                  "nl": "**Kleuren wisselen**: van het rode channel het blauwe maken, en van het blauwe het rode."},
         "shift": {"en": "**Shift**: move a photo one pixel to the right.", "nl": "**Verschuiven**: een foto één pixel naar rechts schuiven."},
     },
-    groups={"can": {"en": "a 1×1 convolution can do it", "nl": "een 1×1 convolution kan het"},
+    groups={"can": {"en": "a 1×1 convolution can do it", "nl": "een 1×1-convolutie kan het"},
             "larger": {"en": "it needs a larger filter", "nl": "daar is een groter filter voor nodig"}},
     solution={"gray": "can", "edge": "larger", "fewer": "can", "blur": "larger", "swap": "can", "shift": "larger"},
     nudge={
@@ -353,12 +353,12 @@ _SORT = Sort(
         "missing": {"en": "I cannot see your choices. Run the cell with the six things again.",
                     "nl": "Ik zie je keuzes niet. Voer de cel met de zes dingen opnieuw uit."},
         "empty": {"en": "Put each one in a group: a 1×1 convolution can do it, or it needs a larger filter.",
-                  "nl": "Zet elk ding in een groep: een 1×1 convolution kan het, of daar is een groter filter voor nodig."},
+                  "nl": "Zet elk ding in een groep: een 1×1-convolutie kan het, of daar is een groter filter voor nodig."},
         "unfinished": {"en": "Everything you sorted so far is right. Sort the rest too ({n} to go).",
                        "nl": "Alles wat je tot nu toe indeelde, klopt. Deel ook de rest in (nog {n})."},
         "wrong": {"en": "{item} belongs in the other group.", "nl": "{item} hoort in de andere groep."},
         "correct": {"en": "All {n} are right. A 1×1 convolution makes the new numbers of a pixel from the old numbers of that same pixel: a gray value, fewer channels and swapped colors all are that, with the right weights (for the swap: 1 where the new red takes the old blue, and the other way around). An edge, a blur and a shift need the neighbors of a pixel, so a filter larger than 1 by 1: two pixels side by side for the edge and the shift, 3 by 3 for the blur.",
-                    "nl": "Alle {n} kloppen. Een 1×1 convolution maakt de nieuwe getallen van een pixel uit de oude getallen van diezelfde pixel: een grijswaarde, minder channels en verwisselde kleuren zijn dat allemaal, met de goede weights (voor het wisselen: 1 waar het nieuwe rood het oude blauw neemt, en andersom). Een rand, vervagen en verschuiven hebben de buren van een pixel nodig, dus een filter groter dan 1 bij 1: twee pixels naast elkaar voor de rand en het verschuiven, 3 bij 3 voor het vervagen."},
+                    "nl": "Alle {n} kloppen. Een 1×1-convolutie maakt de nieuwe getallen van een pixel uit de oude getallen van diezelfde pixel: een grijswaarde, minder channels en verwisselde kleuren zijn dat allemaal, met de goede weights (voor het wisselen: 1 waar het nieuwe rood het oude blauw neemt, en andersom). Een rand, vervagen en verschuiven hebben de buren van een pixel nodig, dus een filter groter dan 1 bij 1: twee pixels naast elkaar voor de rand en het verschuiven, 3 bij 3 voor het vervagen."},
     },
 )
 
@@ -456,7 +456,7 @@ EXERCISES = {
                     nl="De check vraagt de shape van wat je block geeft, en `forward` geeft niets terug, `None`: eindig hem met `return`, en wat `expand` en zijn ReLU maken."),
             Mistake("kernel-3", wrong=_B_WRONG["kernel-3"],
                     en=_S_EN + f": the shape is right, but your block has {grouped(_KERNEL_3, 'en')} parameters instead of {grouped(bottleneck_params(64, 16), 'en')}, because `reduce` and `expand` have filters of 3 by 3. A 1×1 convolution has a kernel size of 1: `nn.Conv2d(channels, middle, 1)`. It needs no padding, because it does not look past its own pixel.",
-                    nl=_S_NL + f": de shape klopt, maar je block heeft {grouped(_KERNEL_3, 'nl')} parameters in plaats van {grouped(bottleneck_params(64, 16), 'nl')}, omdat `reduce` en `expand` filters van 3 bij 3 hebben. Een 1×1 convolution heeft een kernel size van 1: `nn.Conv2d(channels, middle, 1)`. Hij heeft geen padding nodig, omdat hij niet verder kijkt dan zijn eigen pixel."),
+                    nl=_S_NL + f": de shape klopt, maar je block heeft {grouped(_KERNEL_3, 'nl')} parameters in plaats van {grouped(bottleneck_params(64, 16), 'nl')}, omdat `reduce` en `expand` filters van 3 bij 3 hebben. Een 1×1-convolutie heeft een kernel size van 1: `nn.Conv2d(channels, middle, 1)`. Hij heeft geen padding nodig, omdat hij niet verder kijkt dan zijn eigen pixel."),
             Mistake("no-relu", wrong=_B_WRONG["no-relu"],
                     en=_S_EN + ": without a ReLU between them, three convolutions in a row are no more than one convolution. Put `torch.relu` around `self.reduce(x)`, `self.conv(x)` and `self.expand(x)`.",
                     nl=_S_NL + ": zonder ReLU ertussen zijn drie convoluties achter elkaar niet meer dan één convolutie. Zet `torch.relu` om `self.reduce(x)`, `self.conv(x)` en `self.expand(x)`."),
@@ -471,7 +471,7 @@ EXERCISES = {
                     nl=_S_NL + f": je block heeft {grouped(bottleneck_params(64, 16) - 16 - 64, 'nl')} parameters in plaats van {grouped(bottleneck_params(64, 16), 'nl')}, omdat `reduce` en `expand` geen bias hebben. ResNet laat ze weg omdat er batch normalization volgt; hier volgt niets, dus laat `bias=False` weg."),
             Mistake("padding", wrong=_B_WRONG["padding"],
                     en=_S_EN + ": your block gives maps of 12 by 12 instead of 8 by 8, because `reduce` and `expand` have `padding=1`. A 1×1 convolution fits on every pixel, so it needs no padding; with it, each adds a border of zeros, 2 more rows and columns.",
-                    nl=_S_NL + ": je block geeft maps van 12 bij 12 in plaats van 8 bij 8, omdat `reduce` en `expand` `padding=1` hebben. Een 1×1 convolution past op elke pixel, dus hij heeft geen padding nodig; daarmee zet elk er een rand van nullen omheen, 2 rijen en kolommen meer."),
+                    nl=_S_NL + ": je block geeft maps van 12 bij 12 in plaats van 8 bij 8, omdat `reduce` en `expand` `padding=1` hebben. Een 1×1-convolutie past op elke pixel, dus hij heeft geen padding nodig; daarmee zet elk er een rand van nullen omheen, 2 rijen en kolommen meer."),
             Mistake("no-expand", wrong=_B_WRONG["no-expand"],
                     en=_S_EN + ": your block gives `middle` channels, 16 instead of 64, so `expand` is missing. After `conv` comes `expand`, back to `channels`: then the block fits where the 3×3 convolution was.",
                     nl=_S_NL + ": je block geeft `middle` channels, 16 in plaats van 64, dus ontbreekt `expand`. Na `conv` komt `expand`, terug naar `channels`: dan past het block waar de 3×3-convolutie zat."),

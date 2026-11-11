@@ -317,7 +317,7 @@ def groups_sentence(g: int, lang: str) -> str:
     if lang == "nl":
         each = "1 channel" if size == 1 else f"{size} channels"
         return (f"Met {g} {'groep' if g == 1 else 'groepen'}: elk filter van de 3×3-convolutie ziet {each}. Die convolutie heeft {c} parameters, "
-                f"de 1×1 convolution ervoor {r} en die erna {e}: samen {t}.")
+                f"de 1×1-convolutie ervoor {r} en die erna {e}: samen {t}.")
     each = "1 channel" if size == 1 else f"{size} channels"
     return (f"With {g} {'group' if g == 1 else 'groups'}: each filter of the 3×3 convolution sees {each}. That convolution has {c} parameters, "
             f"the 1×1 convolution in front of it {r} and the one after it {e}: {t} together.")

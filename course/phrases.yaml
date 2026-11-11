@@ -337,6 +337,14 @@ phrases:
   group: app
   en: This part waits for a cell above it. What that cell still needs is shown there.
   nl: Dit deel wacht op een cel hierboven. Wat die cel nog nodig heeft, staat daar.
+- id: reconnected-title
+  group: app
+  en: Back in this lesson
+  nl: Terug in deze les
+- id: reconnected-text
+  group: app
+  en: The lesson was still running, so everything is as you left it.
+  nl: De les liep nog, dus alles staat zoals je het liet.
 
 # --- course levels -----------------------------------------------------------
 - id: level-basis

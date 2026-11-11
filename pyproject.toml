@@ -57,7 +57,7 @@ on_cell_change = "autorun"
 
 [tool.marimo.display]
 default_width = "medium"
-custom_css = ["src/everything_ai/web/fonts.css", "src/everything_ai/web/kleuren.css", "src/everything_ai/web/theme.css", "src/everything_ai/web/lesson.css"]
+custom_css = ["src/everything_ai/web/editor.css", "src/everything_ai/web/fonts.css", "src/everything_ai/web/kleuren.css", "src/everything_ai/web/theme.css", "src/everything_ai/web/lesson.css"]
 
 [tool.marimo.ai]
 enabled = false                      # marimo's AI buttons need your own API key; the course hides them

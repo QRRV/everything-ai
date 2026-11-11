@@ -26,7 +26,7 @@ def text_quick_check():
     mo.md(r"""
     ### Instapcheck
 
-    Twee korte vragen over [Project: je eigen one-stage detector](/course/open/cv-one-stage-detector?lang=nl) en [1×1 convolutions: de channels mengen](/course/open/cv-1x1-convolution?lang=nl).
+    Twee korte vragen over [Project: je eigen one-stage detector](/course/open/cv-one-stage-detector?lang=nl) en [1×1-convoluties: de channels mengen](/course/open/cv-1x1-convolution?lang=nl).
     """)
     return
 
@@ -35,7 +35,7 @@ def text_quick_check():
 def quick_check_lateral():
     quick_lateral = L.choice(
         "quick-lateral",
-        question="Een 1×1 convolution van 128 channels naar 32, `nn.Conv2d(128, 32, 1)`. Hoeveel parameters heeft die?",
+        question="Een 1×1-convolutie van 128 channels naar 32, `nn.Conv2d(128, 32, 1)`. Hoeveel parameters heeft die?",
         options={
             "right": "4.128: 32 filters, elk met 128 weights en een bias",
             "bias": "4.096: 128 × 32 weights",
@@ -44,9 +44,9 @@ def quick_check_lateral():
         },
         correct="right",
         why={
-            "right": "Elk van de 32 filters heeft een weight voor elk channel dat binnenkomt, en een bias: 32 × (128 + 1) = 4.128. Vandaag geeft zo'n 1×1 convolution elke map van de backbone dezelfde 32 channels.",
-            "bias": "De weights kloppen, maar elk filter heeft ook een bias: 32 × (128 + 1). Zie [1×1 convolutions: de channels mengen](/course/open/cv-1x1-convolution?lang=nl).",
-            "three": "Dat is een 3×3-convolutie, met 9 weights per channel. Een 1×1 convolution heeft één weight per channel dat binnenkomt: 32 × (128 + 1). Zie [1×1 convolutions: de channels mengen](/course/open/cv-1x1-convolution?lang=nl).",
+            "right": "Elk van de 32 filters heeft een weight voor elk channel dat binnenkomt, en een bias: 32 × (128 + 1) = 4.128. Vandaag geeft zo'n 1×1-convolutie elke map van de backbone dezelfde 32 channels.",
+            "bias": "De weights kloppen, maar elk filter heeft ook een bias: 32 × (128 + 1). Zie [1×1-convoluties: de channels mengen](/course/open/cv-1x1-convolution?lang=nl).",
+            "three": "Dat is een 3×3-convolutie, met 9 weights per channel. Een 1×1-convolutie heeft één weight per channel dat binnenkomt: 32 × (128 + 1). Zie [1×1-convoluties: de channels mengen](/course/open/cv-1x1-convolution?lang=nl).",
             "sum": "Elk filter ziet alle 128 channels: 128 weights en een bias voor elk van de 32 filters, 32 × (128 + 1).",
         },
     )
@@ -119,7 +119,7 @@ def text_idea():
 
         **Een niveau voor elke grootte.** Een feature pyramid geeft elke schaal een eigen niveau, P2 tot P5, uit C2 tot C5, en elk niveau zijn eigen anchors: op elk van zijn vakjes 2 anchors, 2 en $2\sqrt{2}$ vakjes breed. Dat is 8 en 11,3 pixels op P2, 16 en 22,6 op P3, 32 en 45,3 op P4, en 64 en 90,5 op P5: 2.048 + 512 + 128 + 32 = 2.720 anchors. Elke anchor leert zoals in je one-stage detector, door zijn IoU met de echte boxes, dus een vorm wordt geleerd door anchors van het niveau waarvan de groottes passen: gemiddeld 2,5 tot 2,7 anchors per vorm, klein of groot. De paper zette zijn pyramid in een two-stage detector, Faster R-CNN, waarvan de eerste fase, een *region proposal network*, boxes voorstelt waar een voorwerp in kan zitten, de *proposals*: [Van R-CNN naar Faster R-CNN: twee fasen](/course/open/cv-rcnn?lang=nl) legt dat uit. Zijn anchors hebben één oppervlakte per niveau, 32² tot 512² pixels op P2 tot P6, waarbij P6 nog een keer half zo groot is als P5, elk in 3 verhoudingen van breedte tot hoogte, 1:2, 1:1 en 2:1: 15 soorten anchors, 3 op elk vakje. Hier gaat de pyramid in je one-stage detector, zoals RetinaNet in de volgende les.
 
-        **De weg naar beneden.** Een **feature pyramid network** maakt de niveaus van boven naar beneden, langs wat de paper het *top-down pathway* noemt. P5 is C5 door een 1×1 convolution naar 32 channels. Daarna, één niveau tegelijk: het niveau erboven twee keer zo groot gemaakt met nearest-neighbor-interpolatie, plus de map van de backbone door zijn eigen 1×1 convolution, de *lateral connection*. `F.interpolate(p, scale_factor=2, mode="nearest")` maakt van elk getal van `p` een blok van 2 bij 2. Als laatste een 3×3-convolutie op elk niveau, die de paper toevoegt "to reduce the aliasing effect of upsampling": de harde overgangen tussen de blokken van 2 bij 2. Zo krijgt het scherpe niveau P2 ook wat C3, C4 en C5 weten. De paper gebruikt 256 channels, en geen ReLU in deze layers; hier 32 channels, en ook geen ReLU.
+        **De weg naar beneden.** Een **feature pyramid network** maakt de niveaus van boven naar beneden, langs wat de paper het *top-down pathway* noemt. P5 is C5 door een 1×1-convolutie naar 32 channels. Daarna, één niveau tegelijk: het niveau erboven twee keer zo groot gemaakt met nearest-neighbor-interpolatie, plus de map van de backbone door zijn eigen 1×1-convolutie, de *lateral connection*. `F.interpolate(p, scale_factor=2, mode="nearest")` maakt van elk getal van `p` een blok van 2 bij 2. Als laatste een 3×3-convolutie op elk niveau, die de paper toevoegt "to reduce the aliasing effect of upsampling": de harde overgangen tussen de blokken van 2 bij 2. Zo krijgt het scherpe niveau P2 ook wat C3, C4 en C5 weten. De paper gebruikt 256 channels, en geen ReLU in deze layers; hier 32 channels, en ook geen ReLU.
 
         **Eén head voor elk niveau.** Eén convolutie van 3 bij 3 geeft elk vakje van elk niveau 2 × 8 getallen: 4 logits en 4 offsets voor elk van zijn 2 anchors. Eén head kan alle vier de niveaus bedienen, omdat ze allemaal 32 channels hebben en de anchors van elk niveau evenveel van zijn vakjes breed zijn: een vorm van 2 vakjes breed ziet er op elk niveau hetzelfde uit. De rijen van de niveaus komen achter elkaar, de fijnste eerst, in de volgorde van de anchors. In de paper gaf een head per niveau ongeveer dezelfde nauwkeurigheid als één gedeelde head; volgens de paper laat dat zien dat na de weg naar beneden elk niveau ongeveer evenveel weet van wat het ziet.
 
@@ -131,9 +131,9 @@ def text_idea():
 
         | Woord | Wat het betekent | In code |
         |---|---|---|
-        | **feature pyramid network** (FPN) | maps met hetzelfde aantal channels op elke schaal, van boven naar beneden gemaakt uit de maps van de backbone: van elk een 1×1 convolution, het niveau erboven twee keer zo groot gemaakt en erbij opgeteld, en dan een 3×3-convolutie | `pyramid` |
+        | **feature pyramid network** (FPN) | maps met hetzelfde aantal channels op elke schaal, van boven naar beneden gemaakt uit de maps van de backbone: van elk een 1×1-convolutie, het niveau erboven twee keer zo groot gemaakt en erbij opgeteld, en dan een 3×3-convolutie | `pyramid` |
         | **beeldpiramide** | dezelfde afbeelding in verschillende groottes, elk kleiner dan de vorige, vaak half zo groot, om op elke schaal naar patronen te zoeken | |
-        | **lateral connection** | in een FPN de 1×1 convolution die een map van de backbone naar het niveau van dezelfde grootte brengt | `lateral[i]` |
+        | **lateral connection** | in een FPN de 1×1-convolutie die een map van de backbone naar het niveau van dezelfde grootte brengt | `lateral[i]` |
         | **hard negative mining** | trainen op de negatieve voorbeelden die het model het meest fout doet: in een detector de achtergrond-anchors met de hoogste loss, in SSD hoogstens drie voor elke anchor die een voorwerp leert | |
         | `F.interpolate(x, scale_factor=2, mode="nearest")` | maakt elke map van x in beide richtingen twee keer zo groot, elk getal een blok van 2 bij 2 | |
         """),
@@ -185,7 +185,7 @@ def explore_level_cell():
 def text_after_play():
     mo.vstack([
         mo.md(r"""
-        Elk niveau vindt de vormen van zijn grootte. Van de 248 kleine vormen die de detector vindt, vindt niveau 2 er 229 en niveau 3 de andere 19; van de 223 grote vindt niveau 4 er 183, niveau 5 er 36 en niveau 3 er 4. Niveau 5 vindt geen box op de scène van het uitgewerkte voorbeeld: haar grootste vorm, de driehoek van 41 pixels, wordt op niveau 4 gevonden. De course trainde de detector ook zonder de weg naar beneden, elk niveau alleen gemaakt uit zijn eigen map met zijn eigen 1×1 convolution en 3×3-convolutie, de *bottom-up pyramid* van de paper, die SSD nadoet; en met alle anchors op één map, C4 of C2:
+        Elk niveau vindt de vormen van zijn grootte. Van de 248 kleine vormen die de detector vindt, vindt niveau 2 er 229 en niveau 3 de andere 19; van de 223 grote vindt niveau 4 er 183, niveau 5 er 36 en niveau 3 er 4. Niveau 5 vindt geen box op de scène van het uitgewerkte voorbeeld: haar grootste vorm, de driehoek van 41 pixels, wordt op niveau 4 gevonden. De course trainde de detector ook zonder de weg naar beneden, elk niveau alleen gemaakt uit zijn eigen map met zijn eigen 1×1- en 3×3-convolutie, de *bottom-up pyramid* van de paper, die SSD nadoet; en met alle anchors op één map, C4 of C2:
         """),
         mo.md(C.comparison_table({"header": ("Detector", "Anchors", "Klein", "Middelgroot", "Groot", "mAP", "mAP 0,75", "Valse boxes"),
                                   "names": {"fpn": "FPN", "bottom-up": "zonder de weg naar beneden", "deep": "één map, C4", "sharp": "één map, C2"}}, L.lang)),
@@ -205,13 +205,13 @@ def text_recipe():
         Een one-stage detector met een feature pyramid:
 
         1. De backbone maakt de maps C2 tot C5, elk half zo groot als de vorige.
-        2. Van boven naar beneden: P5 is de 1×1 convolution van C5; elk niveau eronder is de 1×1 convolution van zijn map van de backbone, plus het niveau erboven, twee keer zo groot gemaakt met `F.interpolate(..., scale_factor=2, mode="nearest")`.
+        2. Van boven naar beneden: P5 is de 1×1-convolutie van C5; elk niveau eronder is de 1×1-convolutie van zijn map van de backbone, plus het niveau erboven, twee keer zo groot gemaakt met `F.interpolate(..., scale_factor=2, mode="nearest")`.
         3. Een 3×3-convolutie op elk niveau geeft P2 tot P5, allemaal met hetzelfde aantal channels.
         4. Eén head op elk niveau; de rijen van de niveaus achter elkaar, de fijnste eerst.
         5. De anchors in dezelfde volgorde: op niveau $k$ vakjes van $2^k$ pixels, en op elk vakje anchors van 2 en $2\sqrt{2}$ vakjes breed.
         6. Train met hard negative mining: de cross-entropy over de anchors die een vorm leren en de drie keer zoveel achtergrond-anchors met de hoogste cross-entropy, plus de box loss. Detecteer zoals je one-stage detector deed, met NMS voor elke soort.
         """),
-        L.watch_out("De niveaus worden opgeteld, niet gestapeld: de 1×1 convolution geeft elke map van de backbone dezelfde 32 channels als het niveau erboven, zodat die twee getal voor getal kunnen worden opgeteld. Met `torch.cat` langs de channels zou elk niveau meer channels krijgen dan het niveau erboven."),
+        L.watch_out("De niveaus worden opgeteld, niet gestapeld: de 1×1-convolutie geeft elke map van de backbone dezelfde 32 channels als het niveau erboven, zodat die twee getal voor getal kunnen worden opgeteld. Met `torch.cat` langs de channels zou elk niveau meer channels krijgen dan het niveau erboven."),
     ])
     return
 
@@ -221,7 +221,7 @@ def text_worked_example():
     mo.md(r"""
     ### Uitgewerkt voorbeeld
 
-    Het uitgewerkte voorbeeld doet de stappen van het recept op een testscène met kleine en grote vormen, `scene(26, spread=True)`, met een netwerk dat nog niet getraind is; zijn stap 6 rekent uit wat elke anchor leert, de targets van het trainen. `part2` is de backbone van je one-stage detector zonder zijn laatste deel, dat nu `part3` is; `part4` en `part5` voegen elk een pooling en een convolutie toe. Twee lijsten hebben er elk één per niveau: `lateral` met 1×1 convolutions en `smooth` met 3×3-convoluties. Stap 2 laat eerst nearest-neighbor-interpolatie zien op een map van 2 bij 2 getallen, en schrijft dan de weg naar beneden uit, niveau voor niveau. In stap 5 legt `anchor_boxes(cells, stride, sizes)` van [Anchors: de boxes waar een detector mee begint](/course/open/cv-anchors?lang=nl) de anchors van één niveau, en `torch.zeros(n, dtype=torch.int64) + k` geeft elk ervan het nummer van zijn niveau. In stap 6 zegt `match_anchors` uit `everything_ai.scenes` welke vorm elke anchor leert, zoals je `match` deed: het nummer van de vorm, of −1 of −2. Voer de cel uit zoals hij is.
+    Het uitgewerkte voorbeeld doet de stappen van het recept op een testscène met kleine en grote vormen, `scene(26, spread=True)`, met een netwerk dat nog niet getraind is; zijn stap 6 rekent uit wat elke anchor leert, de targets van het trainen. `part2` is de backbone van je one-stage detector zonder zijn laatste deel, dat nu `part3` is; `part4` en `part5` voegen elk een pooling en een convolutie toe. Twee lijsten hebben er elk één per niveau: `lateral` met 1×1-convoluties en `smooth` met 3×3-convoluties. Stap 2 laat eerst nearest-neighbor-interpolatie zien op een map van 2 bij 2 getallen, en schrijft dan de weg naar beneden uit, niveau voor niveau. In stap 5 legt `anchor_boxes(cells, stride, sizes)` van [Anchors: de boxes waar een detector mee begint](/course/open/cv-anchors?lang=nl) de anchors van één niveau, en `torch.zeros(n, dtype=torch.int64) + k` geeft elk ervan het nummer van zijn niveau. In stap 6 zegt `match_anchors` uit `everything_ai.scenes` welke vorm elke anchor leert, zoals je `match` deed: het nummer van de vorm, of −1 of −2. Voer de cel uit zoals hij is.
     """)
     return
 
@@ -304,7 +304,7 @@ def text_after_example():
     mo.md(r"""
     De vier maps van de backbone hebben shapes (1, 32, 32, 32), (1, 64, 16, 16), (1, 128, 8, 8) en (1, 128, 4, 4): elk deel halveert de vakjes in beide richtingen. De map van 2 bij 2 getallen wordt 4 bij 4, elk getal een blok van 2 bij 2: de eerste rij (1, 1, 2, 2). De vier niveaus hebben allemaal 32 channels, op 32 bij 32 tot 4 bij 4 vakjes. De head geeft 2.048, 512, 128 en 32 rijen, samen (1, 2720, 8), één rij voor elk van de 2.720 anchors. De eerste anchor, (−2, −2, 5, 5), is 8 pixels breed rond het midden van het eerste vakje van niveau 2; de laatste, ongeveer (66,7; 66,7; 156,3; 156,3), is 90,5 pixels breed rond het midden van het laatste vakje van niveau 5, en steekt buiten de scène uit.
 
-    De scène heeft vijf vormen, en 17 anchors leren er een van. Het vierkant van 10 pixels en de cirkel van 10,5 worden alleen door anchors van niveau 2 geleerd, door 4 en door 3; de cirkel van 20 pixels door 3 anchors van niveau 3; de driehoek van 41 pixels door 3 van niveau 4. De cirkel van 23 pixels wordt geleerd door 3 anchors van niveau 3 en 1 van niveau 4: hij ligt tussen de groottes van die twee niveaus in, 22,6 en 32 pixels. De FPN-detector heeft 299.728 parameters, waarvan de 1×1 convolutions en 3×3-convoluties van de pyramid er 48.384 hebben en de head 4.624.
+    De scène heeft vijf vormen, en 17 anchors leren er een van. Het vierkant van 10 pixels en de cirkel van 10,5 worden alleen door anchors van niveau 2 geleerd, door 4 en door 3; de cirkel van 20 pixels door 3 anchors van niveau 3; de driehoek van 41 pixels door 3 van niveau 4. De cirkel van 23 pixels wordt geleerd door 3 anchors van niveau 3 en 1 van niveau 4: hij ligt tussen de groottes van die twee niveaus in, 22,6 en 32 pixels. De FPN-detector heeft 299.728 parameters, waarvan de 1×1- en 3×3-convoluties van de pyramid er 48.384 hebben en de head 4.624.
     """)
     return
 
@@ -348,7 +348,7 @@ def text_exercise_pyramid():
         mo.md(r"""
         ### Oefening 2. De weg naar beneden
 
-        Maak `pyramid(cs, lateral, smooth)` af, stap 2 en 3 van het recept: `cs` is een lijst van de maps van de backbone, de fijnste eerst, elk een tensor met shape (N, C, H, W) met de helft van de rijen en kolommen van de vorige; `lateral` en `smooth` zijn lijsten van een 1×1 convolution en een 3×3-convolutie voor elk niveau. Hij geeft een lijst van de niveaus terug, de fijnste eerst. Begin bovenaan, met `lateral[-1](cs[-1])`, en ga niveau voor niveau naar beneden, zoals het uitgewerkte voorbeeld deed met `p5` tot `p2`, maar voor elk aantal niveaus: de check probeert vier niveaus, drie niveaus met twee scènes, en de maps van de backbone van de les. Als hij klopt, bewaart hij `pyramid` in je project, als `work/projects/cnn/pyramid.py`.
+        Maak `pyramid(cs, lateral, smooth)` af, stap 2 en 3 van het recept: `cs` is een lijst van de maps van de backbone, de fijnste eerst, elk een tensor met shape (N, C, H, W) met de helft van de rijen en kolommen van de vorige; `lateral` en `smooth` zijn lijsten van een 1×1-convolutie en een 3×3-convolutie voor elk niveau. Hij geeft een lijst van de niveaus terug, de fijnste eerst. Begin bovenaan, met `lateral[-1](cs[-1])`, en ga niveau voor niveau naar beneden, zoals het uitgewerkte voorbeeld deed met `p5` tot `p2`, maar voor elk aantal niveaus: de check probeert vier niveaus, drie niveaus met twee scènes, en de maps van de backbone van de les. Als hij klopt, bewaart hij `pyramid` in je project, als `work/projects/cnn/pyramid.py`.
         """),
         L.task("Laat `pyramid` de niveaus van een feature pyramid network geven."),
     ])
@@ -556,7 +556,7 @@ def text_connections():
     mo.md(r"""
     ## Afronding
 
-    **Samenhang.** De anchors, targets en boxes van [Project: je eigen one-stage detector](/course/open/cv-one-stage-detector?lang=nl) werken nu op vier niveaus: elk niveau zijn eigen anchors, elke vorm geleerd door de anchors waarvan de grootte past. De 1×1 convolutions van [1×1 convolutions: de channels mengen](/course/open/cv-1x1-convolution?lang=nl) geven elke map van de backbone dezelfde 32 channels, en de nearest-neighbor-interpolatie van [Groter en kleiner: interpolatie](/course/open/cv-resize-interpolation?lang=nl) maakt elk niveau op de weg naar beneden twee keer zo groot. Je `pyramid` bouwt de niveaus van boven naar beneden, je `head_rows` laat één head elke anchor zijn rijen geven, en hard negative mining zorgt dat de loss niet verdrinkt in achtergrond. Op de scènes van de course vindt het FPN 244 tot 249 van de 268 kleine vormen, waar één grove map er 129 tot 143 vond. Je project `cnn` heeft nu `pyramid.py` en `head_rows.py`. In de volgende les, *Focal loss en RetinaNet*, krijgt een one-stage detector met een feature pyramid een loss die elke anchor weegt naar hoe fout hij zit, in plaats van een paar moeilijke te kiezen; daarmee vond RetinaNet voorwerpen even goed als de two-stage detectors.
+    **Samenhang.** De anchors, targets en boxes van [Project: je eigen one-stage detector](/course/open/cv-one-stage-detector?lang=nl) werken nu op vier niveaus: elk niveau zijn eigen anchors, elke vorm geleerd door de anchors waarvan de grootte past. De 1×1-convoluties van [1×1-convoluties: de channels mengen](/course/open/cv-1x1-convolution?lang=nl) geven elke map van de backbone dezelfde 32 channels, en de nearest-neighbor-interpolatie van [Groter en kleiner: interpolatie](/course/open/cv-resize-interpolation?lang=nl) maakt elk niveau op de weg naar beneden twee keer zo groot. Je `pyramid` bouwt de niveaus van boven naar beneden, je `head_rows` laat één head elke anchor zijn rijen geven, en hard negative mining zorgt dat de loss niet verdrinkt in achtergrond. Op de scènes van de course vindt het FPN 244 tot 249 van de 268 kleine vormen, waar één grove map er 129 tot 143 vond. Je project `cnn` heeft nu `pyramid.py` en `head_rows.py`. In de volgende les, *Focal loss en RetinaNet*, krijgt een one-stage detector met een feature pyramid een loss die elke anchor weegt naar hoe fout hij zit, in plaats van een paar moeilijke te kiezen; daarmee vond RetinaNet voorwerpen even goed als de two-stage detectors.
     """)
     return
 
