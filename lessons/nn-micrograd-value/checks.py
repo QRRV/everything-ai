@@ -8,6 +8,7 @@ import re
 
 from everything_ai import draw, projects
 from everything_ai.check import ClassBox, CodeBox, Code, Mistake, run_code
+from everything_ai import yours
 
 # --- the picture: d = a * b + a, with a = 2 and b = 3 ----------------------------------------------------------------
 
@@ -237,6 +238,7 @@ EXERCISES = {
     ),
     "student": CodeBox(
         name="student",
+        picture=yours.steps(),
         start=_S_START,
         solution=_S,
         keep=["from nn.value import Value", "x = Value(4)", "y = Value(7)", "w = Value(1)", "b = Value(1)", "m = w * x", "y_pred = m + b", "neg = y_pred * Value(-1)", "r = y + neg", "loss = r * r", _S_END],

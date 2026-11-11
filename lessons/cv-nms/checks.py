@@ -385,9 +385,45 @@ _HIDDEN = [
     ([], [], 0.5),
 ]
 
+def _yours(seen) -> str:
+    """The boxes the learner's nms keeps at 0.5 on the scene of the worked example, as the lesson draws them, beside
+    the course's where the learner's keeps others."""
+    import matplotlib.pyplot as plt
+    from everything_ai import check as checking, course, plots, yours
+    mine = seen.mine
+    fn = mine.names.get("nms") if mine else None
+    if not callable(fn):
+        return ""
+    boxes, scores = proposed()
+    try:
+        kept = _indices(checking.with_time_limit(lambda: fn(list(boxes), list(scores), THRESHOLD)))
+    except Exception:
+        return ""
+    if kept is None or any(not 0 <= i < len(boxes) for i in kept):
+        return ""
+    right = nms(boxes, scores, THRESHOLD)
+    lang = seen.lang
+    panels = [(course.phrase("yours-code", lang), kept)]
+    if sorted(kept) != sorted(right):
+        panels.append((course.phrase("yours-right", lang), right))
+    word = {"en": "{who}: {n} boxes", "nl": "{who}: {n} boxes"}[lang]
+    fig, axes = plt.subplots(1, len(panels), figsize=(3.6 * len(panels), 3.75), squeeze=False)
+    fig.subplots_adjust(left=0.01, right=0.99, top=0.92, bottom=0.01, wspace=0.05)
+    for ax, (who, ks) in zip(axes[0], panels):
+        _photo_axes(ax, example().image, word.format(who=who, n=len(ks)))
+        for i in ks:
+            _draw_box(ax, boxes[i])
+    title = {"en": "The boxes your nms keeps at 0.5", "nl": "De boxes die jouw nms houdt bij 0,5"}[lang]
+    alt = "; ".join(word.format(who=who, n=len(ks)) for who, ks in panels)
+    out = plots.render(fig, alt=alt)
+    plt.close(fig)
+    return yours.figure(title, out, alt=alt)
+
+
 EXERCISES = {
     "nms": _NmsBox(
         name="nms",
+        picture=_yours,
         function="nms",
         start=_START,
         solution=_SOLUTION,

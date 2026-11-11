@@ -8,6 +8,7 @@ import functools
 import re
 
 from everything_ai.check import Code, CodeBox, FunctionBox, Mistake
+from everything_ai import yours
 
 DATA = "data/penguins.csv"   # the Palmer penguins (CC0): see data/README.md
 SPECIES = ["Adelie", "Chinstrap", "Gentoo"]   # in the order np.unique and scikit-learn sort them
@@ -286,6 +287,7 @@ def _has(prop):
 EXERCISES = {
     "bootstrap": CodeBox(
         name="bootstrap",
+        picture=yours.arrays(),
         start=_B_START,
         solution=_B,
         compare=_is_bootstrap,

@@ -6,6 +6,7 @@ import math
 import re
 
 from everything_ai.check import FunctionBox, Mistake
+from everything_ai import yours
 
 def _num(v) -> str:
     """A number the way the lesson writes it, rounded to 3 decimals, never in e-notation."""
@@ -107,6 +108,7 @@ def _g(body: str = "np.exp(x) / (1 + np.exp(x))") -> str:
 EXERCISES = {
     "product": FunctionBox(
         name="product",
+        picture=yours.curve("df", [0.2 + i / 25 for i in range(46)], role="grad"),
         function="df",
         start=_D_START,
         solution=_d(),
@@ -144,6 +146,7 @@ EXERCISES = {
     ),
     "softplus": FunctionBox(
         name="softplus",
+        picture=yours.curve("dk", [i / 10 for i in range(-50, 51)], role="grad"),
         function="dk",
         start=_G_START,
         solution=_g(),

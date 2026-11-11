@@ -11,6 +11,7 @@ import numpy as np
 
 from everything_ai import paths
 from everything_ai.check import FunctionBox, Mistake
+from everything_ai import yours
 
 DATA = "data/tiny-shakespeare.txt"   # about 1.1 MB of plays by Shakespeare: see data/README.md
 
@@ -126,6 +127,7 @@ _C = _c()
 EXERCISES = {
     "perplexity": FunctionBox(
         name="perplexity",
+        picture=yours.steps(call=0),
         function="perplexity",
         start=_P_START,
         solution=_P,
@@ -164,6 +166,7 @@ EXERCISES = {
     ),
     "char-perplexity": FunctionBox(
         name="char-perplexity",
+        picture=yours.steps(call=0),
         function="char_perplexity",
         start=_C_START,
         solution=_C,

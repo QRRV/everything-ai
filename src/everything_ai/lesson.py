@@ -459,7 +459,20 @@ class Lesson:
             progress.record_exercise(self.id, name, result.state, self.required, text=text)
             if isinstance(ex, (checking.Value, checking.Sort)) and value is not checking.MISSING and _plain_data(value):
                 progress.record_answer(self.id, name, value)
+        if result.state not in ("empty", "slow", "broken"):
+            result.extra += self._picture(ex, value, inputs)
         return CheckResult(self, name, result)
+
+    def _picture(self, ex: checking.Exercise, value, inputs) -> str:
+        """The picture of what the learner made, under the message: drawn again at every check, so it follows the code.
+        A picture that fails or takes too long is left out: it never stands in the way of the check."""
+        if ex.picture is None:
+            return ""
+        try:
+            out = checking.with_time_limit(lambda: checking.picture_of(ex, value, inputs, self.lang), seconds=3.0)
+        except Exception:   # also checking.Timeout
+            return ""
+        return chart.with_decimal_comma(out) if self.lang == "nl" and 'class="ea-tick"' in out else out
 
     def hints(self, name: str, hints: list[str], why: str):
         """Hints that each say a bit more, then the solution with its reasoning."""

@@ -14,6 +14,7 @@ import torch   # imported once, when the lesson opens: the first import takes lo
 
 from everything_ai import paths, projects
 from everything_ai.check import FunctionBox, Mistake, run_code
+from everything_ai import yours
 
 COURSE_GPT = "data/course-gpt-chars"   # .pt and .json: the course's GPT of gpt-train-chars, see data/README.md
 TEXT = "JULIET:\nWhat's in a name?"       # the text of the pictures
@@ -230,6 +231,7 @@ def _show(v):
 EXERCISES = {
     "previous-score": FunctionBox(
         name="previous-score",
+        picture=yours.arrays(call=0, shade=True),
         function="previous_score",
         start=_P_START,
         solution=_p(),
@@ -269,6 +271,7 @@ EXERCISES = {
     ),
     "share-on": FunctionBox(
         name="share-on",
+        picture=yours.steps(call=0),
         function="share_on",
         start=_S_START,
         solution=_s(),

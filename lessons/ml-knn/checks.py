@@ -7,6 +7,7 @@ import functools
 import re
 
 from everything_ai.check import Code, CodeBox, FunctionBox, Mistake
+from everything_ai import yours
 
 DATA = "data/penguins.csv"   # the Palmer penguins (CC0): see data/README.md
 SPECIES = ["Adelie", "Chinstrap", "Gentoo"]   # in the order np.unique sorts them, so the vote breaks a tie the same way
@@ -240,6 +241,7 @@ _SORT_VALUES = Mistake(
 EXERCISES = {
     "knn-predict": FunctionBox(
         name="knn-predict",
+        picture=yours.steps(call=0),
         function="knn_predict",
         start=_K_START,
         solution=_K,

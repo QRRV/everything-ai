@@ -5,6 +5,7 @@ import ast
 import re
 
 from everything_ai.check import CodeBox, Mistake
+from everything_ai import yours
 
 # The picture: the same numbers as a list, a tuple, a set, and sorted.
 PICTURE = [3, 1, 3, 2]
@@ -69,6 +70,7 @@ REQUIRED = ["unique", "tuple-change", "podium"]
 EXERCISES = {
     "unique": CodeBox(
         name="unique",
+        picture=yours.names(),
         start='words = ["rain", "sun", "rain", "fog", "sun"]\nunique = ...\nprint(unique)',
         solution='words = ["rain", "sun", "rain", "fog", "sun"]\nunique = sorted(set(words))\nprint(unique)',
         outcome="stdout",
@@ -129,6 +131,7 @@ EXERCISES = {
     ),
     "podium": CodeBox(
         name="podium",
+        picture=yours.names(),
         start="times = [12.4, 11.8, 13.1, 11.9, 12.0]\npodium = ...\nprint(podium)",
         solution="times = [12.4, 11.8, 13.1, 11.9, 12.0]\npodium = sorted(times)[:3]\nprint(podium)",
         outcome="stdout",

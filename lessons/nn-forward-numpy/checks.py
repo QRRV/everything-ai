@@ -6,6 +6,7 @@ example as grids, with the row of one example, the row of one neuron and the num
 import re
 
 from everything_ai.check import FunctionBox, CodeBox, Mistake
+from everything_ai import yours
 
 # The worked example: 4 examples with 2 inputs, a hidden layer of 3 neurons.
 X = [[1, 2], [3, 1], [0, 2], [2, 2]]
@@ -124,6 +125,7 @@ _VISIBLE = ([[1, 2], [2, 0]], [[1, -1], [0, 1], [2, 1]], [0, -1, -3], [[2, 1, -3
 EXERCISES = {
     "shapes": CodeBox(
         name="shapes",
+        picture=yours.names(),
         start=_S_START,
         solution=_S,
         keep=[_S_END],
@@ -159,6 +161,7 @@ EXERCISES = {
     ),
     "forward": FunctionBox(
         name="forward",
+        picture=yours.arrays(call=0),
         function="forward",
         start=_F_START,
         solution=_F,

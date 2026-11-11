@@ -14,6 +14,7 @@ from torch.utils.data import DataLoader, TensorDataset
 
 from everything_ai import paths
 from everything_ai.check import ClassBox, FunctionBox, Mistake, run_code
+from everything_ai import yours
 
 DATA = "data/qmnist-small.npz"   # the first 6,000 training and 1,000 test images of QMNIST: see data/README.md
 
@@ -192,6 +193,7 @@ def _same_list(got, want) -> bool:
 EXERCISES = {
     "dead-share": FunctionBox(
         name="dead-share",
+        picture=yours.arrays(call=0, shade=True),
         function="dead_share",
         start=_D_START,
         solution=_d(),

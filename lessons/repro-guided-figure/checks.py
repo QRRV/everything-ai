@@ -12,6 +12,7 @@ import re
 
 from everything_ai import paths, projects
 from everything_ai.check import ClassBox, FunctionBox, Mistake, PlotBox, run_code
+from everything_ai import yours
 
 
 def _checks(lesson: str, name: str):
@@ -369,6 +370,7 @@ def _not_told_apart(got, text) -> bool:
 EXERCISES = {
     "log-steps": FunctionBox(
         name="log-steps",
+        picture=yours.steps(call=0),
         function="log_steps",
         start=_L_START,
         solution=_L,

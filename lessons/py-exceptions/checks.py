@@ -2,6 +2,7 @@
 # SPDX-License-Identifier: CC-BY-SA-4.0 AND MIT-0
 """Checks of the lesson py-exceptions: catching a ValueError, and raising one yourself."""
 from everything_ai.check import BugFix, Mistake
+from everything_ai import yours
 
 # The lesson is done when these are correct. "raise-caught" is the choice question in the lesson.
 REQUIRED = ["safe-int", "raise-caught", "average"]
@@ -21,6 +22,7 @@ def _no_value_error(got, fn) -> bool:
 EXERCISES = {
     "safe-int": BugFix(
         name="safe-int",
+        picture=yours.steps(call=1),
         function="safe_int",
         start=_SAFE_START,
         solution=_SAFE,
@@ -62,6 +64,7 @@ EXERCISES = {
     ),
     "average": BugFix(
         name="average",
+        picture=yours.steps(call=0),
         function="average",
         start=_AVERAGE_START,
         solution=_AVERAGE,

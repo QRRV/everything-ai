@@ -9,6 +9,7 @@ import torch   # imported once, when the lesson opens: the first import takes lo
 
 from everything_ai import draw
 from everything_ai.check import ClassBox, FunctionBox, Mistake, run_code
+from everything_ai import yours
 
 # "a red car" with made-up embeddings of 2 numbers: how much a word describes, and how much it is a thing.
 SENTENCE = ["a", "red", "car"]
@@ -147,6 +148,7 @@ def _out_of_order(got, text) -> bool:
 EXERCISES = {
     "qkv-attention": FunctionBox(
         name="qkv-attention",
+        picture=yours.arrays(call=0),
         function="qkv_attention",
         start=_N_START,
         solution=_n(),

@@ -5,6 +5,7 @@ dtype of an array. And the numbers in the picture and the worked example."""
 import re
 
 from everything_ai.check import CodeBox, FunctionBox, Mistake, same_array
+from everything_ai import yours
 
 # The picture: a vector and a matrix.
 VECTOR = [7, 9, 4]
@@ -55,6 +56,7 @@ _DESCRIBE = ("import numpy as np\n\n\ndef describe(table):\n    grid = np.array(
 EXERCISES = {
     "rain": CodeBox(
         name="rain",
+        picture=yours.arrays(shade=True),
         start=_RAIN_START,
         solution=_RAIN,
         # This lesson is about the array itself: a list with the right numbers is not it yet (template 4.3).
@@ -98,6 +100,7 @@ EXERCISES = {
     ),
     "describe": FunctionBox(
         name="describe",
+        picture=yours.steps(call=0),
         function="describe",
         start=_DESCRIBE_START,
         solution=_DESCRIBE,

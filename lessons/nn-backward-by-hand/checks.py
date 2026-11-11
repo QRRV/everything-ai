@@ -7,6 +7,7 @@ import re
 
 from everything_ai import draw
 from everything_ai.check import CodeBox, Mistake
+from everything_ai import yours
 
 # The student of the lesson: x = 4 hours, the grade y = 7, at w = 1 and b = 1.
 # Colours: what is learned (w, b), the loss, and the slopes; the rest stays ink, so the picture has three roles.
@@ -87,6 +88,7 @@ _C = _c()
 EXERCISES = {
     "backward": CodeBox(
         name="backward",
+        picture=yours.steps(),
         start=_B_START,
         solution=_B,
         compare=_close,
@@ -133,6 +135,7 @@ EXERCISES = {
     ),
     "check": CodeBox(
         name="check",
+        picture=yours.steps(),
         start=_C_START,
         solution=_C,
         compare=_close,

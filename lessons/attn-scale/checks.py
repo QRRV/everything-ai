@@ -11,6 +11,7 @@ import torch   # imported once, when the lesson opens: the first import takes lo
 
 from everything_ai import chart
 from everything_ai.check import FunctionBox, Mistake
+from everything_ai import yours
 
 SIZES = [4, 16, 64, 256, 1024]
 ROWS, KEYS = 2000, 16
@@ -119,6 +120,7 @@ _V1 = [[1.0, 0.0], [0.0, 1.0], [1.0, 1.0]]
 EXERCISES = {
     "score-spread": FunctionBox(
         name="score-spread",
+        picture=yours.curve("score_spread", [1, 2, 4, 8, 16, 32, 64, 128, 256], role="ink", xlog=True, xlabel="d_k"),
         function="score_spread",
         start=_P_START,
         solution=_p(),
@@ -156,6 +158,7 @@ EXERCISES = {
     ),
     "scaled-attention": FunctionBox(
         name="scaled-attention",
+        picture=yours.arrays(call=0),
         function="scaled_attention",
         start=_A_START,
         solution=_a(),

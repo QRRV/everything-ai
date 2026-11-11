@@ -15,6 +15,7 @@ from torch.utils.data import DataLoader, TensorDataset
 
 from everything_ai import live, paths, projects
 from everything_ai.check import ClassBox, FunctionBox, Mistake, Timeout, run_code, same_value, with_time_limit
+from everything_ai import yours
 
 # The demo trains with the learner's Trainer of nn-trainer and counts with their count_params of cnn-pytorch; where one
 # is missing or broken, the course's version stands in (template 1.3).
@@ -178,6 +179,7 @@ _C_NL = "Met deze regels na je class:\n\n```python\n{scenario}\n```\n\nkrijg je 
 EXERCISES = {
     "stack-params": FunctionBox(
         name="stack-params",
+        picture=yours.steps(call=0),
         function="stack_vs_one",
         start=_P_START,
         solution=_p(),

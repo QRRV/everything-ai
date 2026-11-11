@@ -4,6 +4,7 @@
 import re
 
 from everything_ai.check import ClassBox, Mistake
+from everything_ai import yours
 
 # A `...` that is still there, found before the code runs: a method that is still `...` gives back nothing,
 # and that should not be explained as some other mistake.
@@ -38,6 +39,7 @@ _PLAYLIST_SHARED = ("class Playlist:\n    songs = []\n\n    def __init__(self, n
 EXERCISES = {
     "counter": ClassBox(
         name="counter",
+        picture=yours.objects(0),
         start=_COUNTER_START,
         solution=_COUNTER,
         scenarios=[
@@ -78,6 +80,7 @@ EXERCISES = {
     ),
     "playlist": ClassBox(
         name="playlist",
+        picture=yours.objects(0),
         start=_PLAYLIST_START,
         solution=_PLAYLIST,
         scenarios=[

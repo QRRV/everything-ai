@@ -11,6 +11,7 @@ import time
 
 from everything_ai import paths, projects
 from everything_ai.check import Mistake, ScenarioBox, run_code
+from everything_ai import yours
 
 
 def _checks(lesson: str, name: str):
@@ -371,6 +372,7 @@ EXERCISES = {
     ),
     "dpo-loss": ScenarioBox(
         name="dpo-loss",
+        picture=yours.steps(scenario=0),
         save_as=("llm", "dpo_loss"),
         start=_D_START,
         solution=_D,

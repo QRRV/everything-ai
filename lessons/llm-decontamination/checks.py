@@ -14,6 +14,7 @@ from functools import cache
 
 from everything_ai import paths
 from everything_ai.check import FunctionBox, Mistake, Timeout, run_code, with_time_limit
+from everything_ai import yours
 
 CLOZE = "data/story-cloze.json"        # the course's story-cloze questions: see data/README.md
 STORIES = "data/tinystories-small.txt"   # 6,189 short stories of TinyStories, joined by <|endoftext|>
@@ -269,6 +270,7 @@ _FL = [False, True, False, False, True, False, False, False]
 EXERCISES = {
     "ngrams": FunctionBox(
         name="ngrams",
+        picture=yours.steps(call=0),
         function="ngrams",
         start=_G_START,
         solution=_g(),
@@ -320,6 +322,7 @@ EXERCISES = {
     ),
     "flag": FunctionBox(
         name="flag",
+        picture=yours.steps(call=0),
         function="flag",
         start=_F_START,
         solution=_F_BODY,
@@ -364,6 +367,7 @@ EXERCISES = {
     ),
     "report": FunctionBox(
         name="report",
+        picture=yours.steps(call=0),
         function="report",
         start=_R_START,
         solution=_R_BODY,

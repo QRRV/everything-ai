@@ -155,10 +155,11 @@ class Run:
     names: dict = field(default_factory=dict)   # the names the code made, such as a function it defined
 
 
-def run_code(text: str, names: dict | None = None, keep_figures: bool = False) -> Run:
+def run_code(text: str, names: dict | None = None, keep_figures: bool = False, trace=None) -> Run:
     """Run the learner's code the way a notebook cell does: everything, and keep the value of the last line.
     Charts the code opens with matplotlib are closed afterwards, unless `keep_figures` (a chart check reads them):
-    otherwise the next chart in the lesson could be drawn on top of one."""
+    otherwise the next chart in the lesson could be drawn on top of one. `trace` is a trace function (sys.settrace)
+    for the run, for a picture that follows the code step by step (yours.steps)."""
     from everything_ai import projects   # the learner's own modules, read fresh each time
     projects.on_path()
     projects.forget()
@@ -184,10 +185,17 @@ def run_code(text: str, names: dict | None = None, keep_figures: bool = False) -
         with contextlib.redirect_stdout(out), warnings.catch_warnings():
             warnings.simplefilter("ignore", RuntimeWarning)   # NumPy's "divide by zero": the check explains, not Python
             warnings.simplefilter("ignore", UserWarning)      # PyTorch's warnings in English: the check explains them too
-            exec(code, ns)
-            if last is not None:
-                run.value = eval(last, ns)
-                run.has_value = True
+            before = sys.gettrace()
+            if trace is not None:
+                sys.settrace(trace)
+            try:
+                exec(code, ns)
+                if last is not None:
+                    run.value = eval(last, ns)
+                    run.has_value = True
+            finally:
+                if trace is not None:
+                    sys.settrace(before)
 
     plt = sys.modules.get("matplotlib.pyplot")
     before = set(plt.get_fignums()) if plt is not None and not keep_figures else None
@@ -344,6 +352,91 @@ def _same_array(np, a, b, rel: float, strict: bool) -> bool:
     return a.dtype.kind == b.dtype.kind and bool(np.array_equal(a, b))
 
 
+# --- a picture of the learner's own work ----------------------------------------------
+
+@dataclass(eq=False)
+class Seen:
+    """What the picture of an exercise gets: what the learner typed, and their code and the course's solution, each
+    run the way the check runs them, once, when the picture asks for it. `mine` is None when the learner's code
+    stops with an error or takes too long; a picture then shows what it can, or nothing."""
+    exercise: "Exercise"
+    text: Any                  # what is in the box
+    names: dict                # the names of the lesson's own cells that the code may use
+    lang: str
+
+    @property
+    def run(self) -> Run:
+        """The learner's code as it ran, also when it stopped with an error. For a find-the-bug exercise, whose
+        function is in a cell of the lesson, a run that made only that function."""
+        if not hasattr(self, "_run"):
+            fn = self.text
+            if not isinstance(fn, str):
+                self._run = Run(names={self.exercise.function: fn})
+            else:   # the check just ran this same code: the picture draws that run instead of running it again
+                last = _LAST_RUN.get(id(self.exercise))
+                same = last is not None and last[0] == fn and last[1] == _names_key(self.names)
+                self._run = last[2] if same else run_code(fn, self.names)
+        return self._run
+
+    @property
+    def mine(self) -> Run | None:
+        run = self.run
+        return None if run.error is not None or run.timeout else run
+
+    @property
+    def want(self) -> Run:
+        """The course's solution as it ran: the same every time for the same names, so it runs once."""
+        if not hasattr(self, "_want"):
+            self._want = self.remember("want", lambda: run_code(self.exercise.solution, self.names))
+        return self._want
+
+    def remember(self, key, make):
+        """What make() gives for the course's solution, such as its run, made once for this exercise and these names
+        and then kept: a picture redraws on every edit, and the solution does not change. The cache holds on to the
+        names, so their ids cannot come back for other values."""
+        ex = self.exercise
+        k = (id(ex), ex.solution, key, _names_key(self.names))
+        if k not in _REMEMBERED:
+            if len(_REMEMBERED) >= 256:
+                _REMEMBERED.pop(next(iter(_REMEMBERED)))
+            _REMEMBERED[k] = (ex, dict(self.names), make())
+        return _REMEMBERED[k][2]
+
+    def word(self, text: Text | str) -> str:
+        """One of {"en": ..., "nl": ...} in the lesson's language."""
+        return text[self.lang] if isinstance(text, dict) else text
+
+
+_REMEMBERED: dict = {}   # what Seen.remember made: key -> (exercise, names, value)
+_LAST_RUN: dict = {}     # id of an exercise -> (text, names, Run): the learner's code as its check ran it last
+
+
+def _names_key(names: dict) -> tuple:
+    return tuple(sorted((k, id(v)) for k, v in names.items()))
+
+
+def _ran(ex, text: str, names: dict, run: Run) -> None:
+    """Keep the run of the learner's code that a check made, for the picture drawn right after it (Seen.run). Only
+    an exercise with a picture keeps one, and only its last."""
+    if ex.picture is not None:
+        _LAST_RUN[id(ex)] = (text, _names_key(names), run)
+
+
+def picture_of(ex: "Exercise", text, inputs: dict | None, lang: str) -> str:
+    """The picture of what the learner made in exercise `ex`, as HTML text, or "" when the exercise has none.
+    `text` is what is in the box, or for a find-the-bug exercise the function from the lesson's cell.
+    A mistake in a picture is not caught here, so the tests see it; the lesson leaves the picture out instead."""
+    if ex.picture is None or not (isinstance(text, str) or callable(text)):
+        return ""
+    # A mistake the check sees in the text alone stops it before the code runs, such as `random.seed = 1`, which
+    # would change the module for everything after it: the picture does not run that code either.
+    if isinstance(text, str) and any(m.matches(None, text) for m in getattr(ex, "first", ())):
+        return ""
+    names = dict(getattr(ex, "names", {}) if inputs is None else inputs)
+    out = ex.picture(Seen(ex, text, names, lang))
+    return str(getattr(out, "text", out) or "")
+
+
 # --- exercises ------------------------------------------------------------------------
 
 @dataclass
@@ -353,6 +446,9 @@ class Exercise:
     required: bool = True
     mistakes: list[Mistake] = field(default_factory=list)
     texts: dict[str, Text] = field(default_factory=dict)   # empty, correct, wrong, almost, error...
+    # A picture of what the learner made, drawn from their own code each time the check runs, so it changes while
+    # they type: `picture(seen)` gets a Seen and gives SVG or HTML (yours.py has the usual ones), or "" for none.
+    picture: Callable[["Seen"], Any] | None = None
 
     def message(self, key: str, **values) -> Text:
         t = self.texts[key]
@@ -539,6 +635,7 @@ class CodeBox(Exercise):
             if m.matches(None, text):
                 return Result(m.state, m.text, mistake=m.key)
         run = run_code(text, names)
+        _ran(self, text, names, run)
         if run.timeout:
             return Result("slow", self.message("slow") if "slow" in self.texts else {
                 "en": "Your code is still not done after {s:g} seconds. Does something keep going forever?".format(s=TIME_LIMIT),
@@ -1035,6 +1132,7 @@ class FunctionBox(CodeBox):
             if m.matches(None, text):
                 return Result(m.state, m.text, mistake=m.key)
         run = run_code(text)
+        _ran(self, text, {}, run)
         if run.timeout:
             return Result("slow", self.message("slow") if "slow" in self.texts else {
                 "en": "Your code is still not done after {s:g} seconds. Does something keep going forever?".format(s=TIME_LIMIT),

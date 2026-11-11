@@ -16,6 +16,7 @@ import torch   # imported once, when the lesson opens: the first import takes lo
 from everything_ai import hub, models
 from everything_ai.lesson import download_card
 from everything_ai.check import FunctionBox, Mistake
+from everything_ai import yours
 
 DOWNLOADS = {"ResNet-18": models.RESNET18}   # what the lesson downloads, for the line under its header
 CLASSES = "data/imagenet-classes.txt"        # the names of ImageNet's 1,000 classes, in the order of the logits
@@ -234,6 +235,7 @@ _OTHER_LABELS = ["a", "a", "a", "b", "b"]
 EXERCISES = {
     "topk": FunctionBox(
         name="topk",
+        picture=yours.steps(call=0),
         function="top_k",
         start=_TOPK_START,
         solution=_TOPK,
@@ -301,6 +303,7 @@ EXERCISES = {
     ),
     "accuracy": FunctionBox(
         name="accuracy",
+        picture=yours.steps(call=0),
         function="top_k_accuracy",
         start=_ACC_START,
         solution=_ACC,

@@ -8,6 +8,7 @@ import re
 
 from everything_ai import projects
 from everything_ai.check import FunctionBox, Mistake, run_code
+from everything_ai import yours
 
 # The students of ml-vocabulary whose result is known: hours of study and of sleep, and whether they passed.
 STUDENTS = [[2, 6], [8, 7], [5, 8], [1, 5], [6, 6], [3, 8], [9, 8]]
@@ -171,9 +172,18 @@ def _fit_course(body: str) -> str:
 _REDO = {"en": " Did you change that file? Delete it, and check exercise 2 again: its check then saves your function again.",
          "nl": " Heb je dat bestand veranderd? Verwijder het, en laat oefening 2 opnieuw nakijken: die check bewaart je functie dan opnieuw."}
 
+def _log_loss(ns) -> float:
+    """The mean log loss of `w` and `b` as they are at a moment in the learner's fit, for the picture of its descent."""
+    import numpy as np
+    X, y = np.asarray(ns["X"], float), np.asarray(ns["y"], float)
+    p = np.clip(1 / (1 + np.exp(-(X @ np.asarray(ns["w"], float) + ns["b"]))), 1e-12, 1 - 1e-12)
+    return float(-np.mean(y * np.log(p) + (1 - y) * np.log(1 - p)))
+
+
 EXERCISES = {
     "log-loss-gradients": FunctionBox(
         name="log-loss-gradients",
+        picture=yours.arrays(call=0),
         function="log_loss_gradients",
         start=_GRAD_START,
         solution=_GRAD,
@@ -231,6 +241,7 @@ EXERCISES = {
     ),
     "fit-logistic": FunctionBox(
         name="fit-logistic",
+        picture=yours.descent("b", _log_loss, call=0),
         function="fit",
         start=_FIT_START,
         solution=_FIT,

@@ -5,6 +5,7 @@ training has converged. And the pictures: three loss curves side by side, and th
 import re
 
 from everything_ai.check import FunctionBox, Mistake, Value
+from everything_ai import yours
 
 # The houses that were sold, from the lesson ml-vocabulary: area in m², price in thousands of euros.
 AREA = [62, 85, 110, 48, 95, 130, 73, 58]
@@ -120,6 +121,7 @@ EXERCISES = {
     ),
     "converged": FunctionBox(
         name="converged",
+        picture=yours.steps(call=0),
         function="converged",
         start=_CONV_START,
         solution=_CONV,

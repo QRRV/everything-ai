@@ -6,6 +6,7 @@ import re
 
 from everything_ai import draw
 from everything_ai.check import FunctionBox, Mistake
+from everything_ai import yours
 
 # The 8 lines of three squares: the rows, the columns and the two diagonals. A board is a text of 9 signs, row by
 # row, X, O or "." for an empty square; square 0 is top left, square 8 bottom right.
@@ -206,6 +207,7 @@ _M = _m()
 EXERCISES = {
     "minimax": FunctionBox(
         name="minimax",
+        picture=yours.steps(call=0),
         function="minimax",
         start=_M_START,
         solution=_M,

@@ -6,6 +6,7 @@ and of measuring every slope with a tiny step, as the number of parameters N mov
 import re
 
 from everything_ai.check import FunctionBox, Sort, Mistake
+from everything_ai import yours
 
 
 def forward(n: int) -> int:
@@ -58,6 +59,7 @@ def _f(body: str) -> str:
 EXERCISES = {
     "forward-flops": FunctionBox(
         name="forward-flops",
+        picture=yours.steps(call=0),
         function="forward_flops",
         start=_F_START,
         solution=_F,

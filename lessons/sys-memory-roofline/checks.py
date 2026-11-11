@@ -8,6 +8,7 @@ import re
 import time
 
 from everything_ai.check import FunctionBox, Mistake
+from everything_ai import yours
 
 # An example GPU from its published specifications: the NVIDIA GeForce RTX 4090 (2022), FP32 on its ordinary cores,
 # without tensor cores, and the bandwidth of its 24 GB of GDDR6X memory.
@@ -204,6 +205,7 @@ _DOTS = Mistake("dots-left", matches=lambda got, text: re.search(r"^[^#\n]*\.\.\
 EXERCISES = {
     "roofline-time": FunctionBox(
         name="roofline-time",
+        picture=yours.steps(call=0),
         function="roofline_time",
         start=_START,
         solution=_SOLUTION,

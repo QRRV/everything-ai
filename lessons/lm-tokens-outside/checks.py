@@ -7,6 +7,7 @@ import re
 
 from everything_ai import draw, gpt2_tokenizer
 from everything_ai.check import FunctionBox, Mistake, same_value
+from everything_ai import yours
 
 gpt2_tokenizer.offline()   # before any tiktoken.get_encoding("gpt2"), also in the lesson's own cells
 
@@ -80,6 +81,7 @@ def _num(v):
 EXERCISES = {
     "pieces": FunctionBox(
         name="pieces",
+        picture=yours.tokens(0),
         function="pieces",
         start=_P_START,
         solution=_P,
@@ -117,6 +119,7 @@ EXERCISES = {
     ),
     "tokens-per-word": FunctionBox(
         name="tokens-per-word",
+        picture=yours.steps(call=0),
         function="tokens_per_word",
         start=_W_START,
         solution=_W,

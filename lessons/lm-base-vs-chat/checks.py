@@ -12,6 +12,7 @@ from functools import cache
 
 from everything_ai import paths
 from everything_ai.check import FunctionBox, Mistake
+from everything_ai import yours
 
 DATA = "data/tiny-shakespeare.txt"   # about 1.1 MB of plays by Shakespeare: see data/README.md
 LOOK = 7                             # the model looks at the last 7 characters of the text so far
@@ -165,6 +166,7 @@ def _has_text_message(got, text) -> bool:
 EXERCISES = {
     "as-text": FunctionBox(
         name="as-text",
+        picture=yours.steps(call=0),
         function="as_text",
         start=_T_START,
         solution=_t(),
@@ -207,6 +209,7 @@ EXERCISES = {
     ),
     "next-turn": FunctionBox(
         name="next-turn",
+        picture=yours.steps(call=0),
         function="next_turn",
         start=_N_START,
         solution=_n(),

@@ -5,6 +5,7 @@ import math
 import re
 
 from everything_ai.check import FunctionBox, Mistake
+from everything_ai import yours
 
 
 def same_pi(a, b) -> bool:
@@ -46,6 +47,7 @@ _PICK = "import random\n\ndef pick(items, seed):\n    random.seed(seed)\n    ret
 EXERCISES = {
     "circle": FunctionBox(
         name="circle",
+        picture=yours.curve("circle_area", [i / 20 for i in range(61)], role="pred", xlabel="r"),
         function="circle_area",
         start="import math\n\ndef circle_area(r):\n    ...\n",
         solution=_CIRCLE,
@@ -93,6 +95,7 @@ EXERCISES = {
     ),
     "pick": FunctionBox(
         name="pick",
+        picture=yours.steps(call=0),
         function="pick",
         start="import random\n\ndef pick(items, seed):\n    ...\n",
         solution=_PICK,

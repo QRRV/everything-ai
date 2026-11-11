@@ -13,6 +13,7 @@ from torch import nn
 
 from everything_ai import paths
 from everything_ai.check import ClassBox, FunctionBox, Mistake
+from everything_ai import yours
 
 DATA = "data/qmnist-small.npz"   # the first 6,000 training and 1,000 test images of QMNIST: see data/README.md
 BLOCKS = 10
@@ -158,6 +159,7 @@ _B_SCENARIOS = [
 EXERCISES = {
     "residual-chain": FunctionBox(
         name="residual-chain",
+        picture=yours.steps(call=0),
         function="residual_chain_gradient",
         start=_C_START,
         solution=_c(),

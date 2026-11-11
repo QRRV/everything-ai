@@ -5,6 +5,7 @@ decorates small functions of its own with them, and compares what those give bac
 import re
 
 from everything_ai.check import Mistake, ScenarioBox
+from everything_ai import yours
 
 # A `...` that is still there, found before the code runs: a function that is still `...` gives back nothing,
 # and that should not be explained as some other mistake.
@@ -62,6 +63,7 @@ _NONNEG = ("def no_negatives(fn):\n    def wrapper(x):\n        result = fn(x)\n
 EXERCISES = {
     "plus-ten": ScenarioBox(
         name="plus-ten",
+        picture=yours.steps(scenario=0),
         start=_PLUS_START,
         solution=_PLUS,
         scenarios=[
@@ -95,6 +97,7 @@ EXERCISES = {
     ),
     "no-negatives": ScenarioBox(
         name="no-negatives",
+        picture=yours.steps(scenario=0),
         start=_NONNEG_START,
         solution=_NONNEG,
         scenarios=[

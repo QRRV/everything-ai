@@ -6,6 +6,7 @@ and standardized, each with 50 steps of gradient descent."""
 import re
 
 from everything_ai.check import Code, CodeBox, Mistake
+from everything_ai import yours
 
 # The houses of the previous lesson, in their raw units: area in m², a garden (1 = yes), distance to the station in m.
 HOUSES_RAW = [[62, 0, 400], [85, 1, 1200], [110, 1, 800], [48, 0, 300],
@@ -94,6 +95,7 @@ def _pred(new: str) -> str:
 EXERCISES = {
     "standardize": CodeBox(
         name="standardize",
+        picture=yours.arrays(show=("X",)),
         start=_S_START,
         solution=_S,
         keep=["X = np.array([[6, 480], [10, 450], [2, 540], [8, 420]])"],
@@ -146,6 +148,7 @@ EXERCISES = {
     ),
     "predict-new": CodeBox(
         name="predict-new",
+        picture=yours.steps(),
         start=_P_START,
         solution=_P,
         keep=["mean = X.mean(axis=0)", "std = X.std(axis=0)", "w = np.array([53.39, 8.28, -14.89])", "b = 221.25", "new = np.array([100, 1, 500])"],

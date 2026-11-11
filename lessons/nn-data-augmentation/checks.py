@@ -15,6 +15,7 @@ from torch.utils.data import DataLoader, Dataset, TensorDataset
 
 from everything_ai import paths
 from everything_ai.check import CodeBox, Mistake, Sort
+from everything_ai import yours
 
 # termen:allow verschuiving, verschuivingen
 # (the shift of an image here, not the bias term)
@@ -192,6 +193,7 @@ _S = _s()
 EXERCISES = {
     "shifted": CodeBox(
         name="shifted",
+        picture=yours.steps(),
         start=_S_START,
         solution=_S,
         keep=["        dy = random.randint(-self.k, self.k)", "        return img.reshape(784), self.labels[i]", "random.seed(3)",

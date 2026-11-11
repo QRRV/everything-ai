@@ -6,6 +6,7 @@ import html
 import re
 
 from everything_ai.check import FunctionBox, Mistake
+from everything_ai import yours
 
 
 class _Graph(dict):
@@ -132,6 +133,7 @@ REQUIRED = ["one-round", "direction", "plan-search"]
 EXERCISES = {
     "one-round": FunctionBox(
         name="one-round",
+        picture=yours.steps(call=0),
         function="one_round",
         start=_START,
         solution=_SOLUTION,

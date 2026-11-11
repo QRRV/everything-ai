@@ -11,6 +11,7 @@ import re
 import numpy as np
 
 from everything_ai.check import CodeBox, FunctionBox, Mistake
+from everything_ai import yours
 
 STICKER = "data/photos/fruit-sticker.png"   # 400 rows by 600 columns, RGBA: the fruit and their shadows (draw_sticker)
 SCREEN = "data/photos/green-screen.png"     # the same sticker in front of a green screen, RGB (draw_green_screen)
@@ -303,6 +304,7 @@ def _lost(name):
 EXERCISES = {
     "over": FunctionBox(
         name="over",
+        picture=yours.image(call=0),
         function="over",
         start=_OVER_START,
         solution=_OVER,
@@ -369,6 +371,7 @@ EXERCISES = {
     ),
     "key": CodeBox(
         name="key",
+        picture=yours.image(show=("photo",)),
         start=_KEY_START,
         solution=_KEY,
         compare=_key_right,

@@ -10,6 +10,7 @@ import re
 import numpy as np
 
 from everything_ai.check import FunctionBox, Mistake
+from everything_ai import yours
 
 
 class _Matrix(np.ndarray):
@@ -171,6 +172,7 @@ _G2 = _m([[1, 0, 2], [0, 1, -1]])
 EXERCISES = {
     "grad-two": FunctionBox(
         name="grad-two",
+        picture=yours.arrays(call=0),
         function="grad_W",
         start=_W_START,
         solution=_gw(),
@@ -213,6 +215,7 @@ EXERCISES = {
     ),
     "layer-grads": FunctionBox(
         name="layer-grads",
+        picture=yours.arrays(call=0),
         function="layer_grads",
         start=_L_START,
         solution=_lg(),

@@ -16,6 +16,7 @@ from torch.utils.data import DataLoader, TensorDataset
 
 from everything_ai import paths
 from everything_ai.check import ClassBox, FunctionBox, Mistake
+from everything_ai import yours
 
 DATA = "data/qmnist-small.npz"   # the first 6,000 training and 1,000 test images of QMNIST: see data/README.md
 LR, HIDDEN, BAD, CLIP = 0.5, 64, 40, 5.0   # the MLP of torch-mlp-digits; the bad mini-batch is step 40 of 94
@@ -221,6 +222,7 @@ _BY_VALUE = Mistake("by-value", matches=lambda got, text: re.search(r"clip_grad_
 EXERCISES = {
     "clip-grads": FunctionBox(
         name="clip-grads",
+        picture=yours.arrays(call=0),
         function="clip_grads",
         start=_C_START,
         solution=_c(),
@@ -262,6 +264,7 @@ EXERCISES = {
     ),
     "train-step": ClassBox(
         name="train-step",
+        picture=yours.steps(scenario=0),
         start=_T_START,
         solution=_t(),
         scenarios=_T_SCENARIOS,

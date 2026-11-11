@@ -11,6 +11,7 @@ import functools
 import re
 
 from everything_ai.check import Code, CodeBox, Mistake, Sort
+from everything_ai import yours
 
 PEOPLE = 50                 # people in a table, half with label 1
 NEW = 1000                  # new people, to see what a model really gets right
@@ -164,6 +165,7 @@ def _index_error(e) -> bool:
 EXERCISES = {
     "inside-folds": CodeBox(
         name="inside-folds",
+        picture=yours.steps(),
         start=_F_START,
         solution=_F,
         keep=["rng = np.random.default_rng(2)"],

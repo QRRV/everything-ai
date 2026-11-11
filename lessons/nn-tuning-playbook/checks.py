@@ -9,6 +9,7 @@ import re
 
 from everything_ai import paths
 from everything_ai.check import FunctionBox, Mistake, run_code
+from everything_ai import yours
 
 DATA = "data/qmnist-small.npz"   # the first 6,000 training and 1,000 test images of QMNIST: see data/README.md
 LO, HI, STEPS, BATCH, BETA = 1e-4, 10.0, 100, 64, 0.9
@@ -226,6 +227,7 @@ _P_WRONG = {
 EXERCISES = {
     "lr-range": FunctionBox(
         name="lr-range",
+        picture=yours.steps(call=0),
         function="lr_range",
         start=_R_START,
         solution=_r(),
@@ -264,6 +266,7 @@ EXERCISES = {
     ),
     "range-pick": FunctionBox(
         name="range-pick",
+        picture=yours.steps(call=0),
         function="range_pick",
         start=_P_START,
         solution=_p(),

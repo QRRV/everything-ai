@@ -10,6 +10,7 @@ import torch   # imported once, when the lesson opens: the first import takes lo
 from torch import nn
 
 from everything_ai.check import CodeBox, Code, Mistake
+from everything_ai import yours
 
 # --- the data and the picture: y = 2x + 1 with noise, trained with three batch sizes ------------------------------
 
@@ -130,6 +131,7 @@ _E = _e()
 EXERCISES = {
     "batches": CodeBox(
         name="batches",
+        picture=yours.steps(),
         start=_B_START,
         solution=_B,
         keep=["def batches(X, y, size):", "for xb, yb in batches(X, y, size):"],
@@ -173,6 +175,7 @@ EXERCISES = {
     ),
     "epochs": CodeBox(
         name="epochs",
+        picture=yours.descent("loss", lambda ns: float(ns["loss"])),
         start=_E_START,
         solution=_E,
         keep=["X, y = data()", "torch.manual_seed(1)", "for epoch in range(3):", "    for xb, yb in batches(X, y, 20):", _E_END],

@@ -8,6 +8,7 @@ import functools
 import re
 
 from everything_ai.check import Code, CodeBox, Mistake
+from everything_ai import yours
 
 DATA = "data/penguins.csv"   # the Palmer penguins (CC0): see data/README.md
 TWO = ["bill_length_mm", "flipper_length_mm"]
@@ -162,6 +163,7 @@ def _error(*words):
 EXERCISES = {
     "one-step": CodeBox(
         name="one-step",
+        picture=yours.arrays(),
         start=_S_START,
         solution=_S,
         keep=_KEEP,

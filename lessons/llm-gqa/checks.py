@@ -4,6 +4,7 @@
 import re
 
 from everything_ai.check import FunctionBox, Mistake
+from everything_ai import yours
 
 
 def number(x: float, digits: int, lang: str) -> str:
@@ -113,6 +114,7 @@ _DOTS = Mistake("dots-left", matches=lambda got, text: re.search(r"^\s*\.\.\.\s*
 EXERCISES = {
     "gqa": FunctionBox(
         name="gqa",
+        picture=yours.steps(call=0),
         function="gqa",
         start=_START,
         solution=_g(),

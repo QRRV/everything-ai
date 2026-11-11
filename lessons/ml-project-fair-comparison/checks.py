@@ -9,6 +9,7 @@ import functools
 import re
 
 from everything_ai.check import CodeBox, Mistake
+from everything_ai import yours
 
 DATA = "data/penguins.csv"   # the Palmer penguins (CC0): see data/README.md
 N_COMPARE = 266              # of the 333 penguins with a known sex, shuffled with seed 0: the rest, 67, is the test set
@@ -212,6 +213,7 @@ _P = _p()
 EXERCISES = {
     "fold-by-fold": CodeBox(
         name="fold-by-fold",
+        picture=yours.arrays(),
         start=_P_START,
         solution=_P,
         digits=4,

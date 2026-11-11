@@ -6,6 +6,7 @@ step neurons fires and which corners it gets wrong, as the bias term of its seco
 import re
 
 from everything_ai.check import FunctionBox, CodeBox, Mistake
+from everything_ai import yours
 
 CORNERS = [(0, 0), (0, 1), (1, 0), (1, 1)]
 XOR = [0, 1, 1, 0]
@@ -113,6 +114,7 @@ def _three_right(got) -> bool:
 EXERCISES = {
     "forward": FunctionBox(
         name="forward",
+        picture=yours.steps(call=0),
         function="forward",
         start=_F_START,
         solution=_F,
@@ -153,6 +155,7 @@ EXERCISES = {
     ),
     "output-weights": CodeBox(
         name="output-weights",
+        picture=yours.steps(),
         start=_O_START,
         solution=_O,
         keep=["return max(0, z)", "for x in [[0, 0], [0, 1], [1, 0], [1, 1]]:", "h = [relu(x[0] + x[1]), relu(x[0] + x[1] - 1)]", "outputs.append(np.dot(v, h) + c)"],

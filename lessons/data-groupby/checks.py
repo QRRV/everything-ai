@@ -10,6 +10,7 @@ import numpy as np
 import pandas as pd   # here, so the first import of pandas never counts against the time limit of a check
 
 from everything_ai.check import Code, CodeBox, FunctionBox, Mistake
+from everything_ai import yours
 
 PENGUINS = "data/penguins.csv"
 STATION = "lessons/data-explore/station.csv"
@@ -151,6 +152,7 @@ _ITSELF = Mistake("itself", matches=lambda got, text: callable(got),
 EXERCISES = {
     "per-sky": CodeBox(
         name="per-sky",
+        picture=yours.table(),
         start=_SKY_START,
         solution=_SKY,
         keep=["import pandas as pd", _READ],
@@ -245,6 +247,7 @@ def _summary(new: str) -> str:
 
 EXERCISES["summary"] = FunctionBox(
     name="summary",
+    picture=yours.table(call=0),
     function="summary",
     start=_SUMMARY_START,
     solution=_SUMMARY,

@@ -10,6 +10,7 @@ import time
 import torch   # imported once, when the lesson opens: the first import takes longer than a check may
 
 from everything_ai.check import FunctionBox, Mistake, ScenarioBox, run_code
+from everything_ai import yours
 
 LAYERS = 16
 
@@ -163,6 +164,7 @@ EXERCISES = {
     ),
     "best-k": FunctionBox(
         name="best-k",
+        picture=yours.steps(call=0),
         function="best_k",
         start=_B_START,
         solution=_bk(),

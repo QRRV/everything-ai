@@ -2,6 +2,7 @@
 # SPDX-License-Identifier: CC-BY-SA-4.0 AND MIT-0
 """Checks of the lesson start-how-this-course-works: what is right, known mistakes, messages in both languages."""
 from everything_ai.check import CodeBox, Mistake
+from everything_ai import yours
 
 # The lesson is done when these are correct. "parts" is the choice question in the lesson.
 REQUIRED = ["sum", "parts"]
@@ -9,6 +10,7 @@ REQUIRED = ["sum", "parts"]
 EXERCISES = {
     "sum": CodeBox(
         name="sum",
+        picture=yours.steps(),
         start="3 + 4",
         solution="3 + 7",
         outcome="value",

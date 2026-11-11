@@ -10,6 +10,7 @@ from decimal import Decimal
 
 from everything_ai import projects
 from everything_ai.check import FunctionBox, Mistake, Timeout, run_code, with_time_limit
+from everything_ai import yours
 
 # The demo makes the learner's GPT of gpt-assemble, which imports their Block and CausalSelfAttention; where one is
 # missing or broken, the course's version stands in (template 1.3).
@@ -136,6 +137,7 @@ def _f(forward: str = _F_FORWARD, ret: str = _F_RETURN) -> str:
 EXERCISES = {
     "gpt-params": FunctionBox(
         name="gpt-params",
+        picture=yours.steps(call=0),
         function="gpt_params",
         start=_P_START,
         solution=_p(),
@@ -180,6 +182,7 @@ EXERCISES = {
     ),
     "train-flops": FunctionBox(
         name="train-flops",
+        picture=yours.steps(call=0),
         function="train_flops",
         start=_F_START,
         solution=_f(),

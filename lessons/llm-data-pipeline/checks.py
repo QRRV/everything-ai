@@ -13,6 +13,7 @@ import numpy as np
 
 from everything_ai import paths, projects
 from everything_ai.check import ClassBox, Mistake, run_code
+from everything_ai import yours
 
 
 def _train_bpe():
@@ -236,6 +237,7 @@ def _no_memmap(got, text) -> bool:
 EXERCISES = {
     "write-shards": ClassBox(
         name="write-shards",
+        picture=yours.steps(scenario=0),
         start=_W_START,
         solution=_w(),
         scenarios=_W_SCENARIOS,

@@ -10,6 +10,7 @@ import re
 import numpy as np
 
 from everything_ai.check import FunctionBox, Mistake, Value
+from everything_ai import yours
 
 CAT = "data/photos/chelsea.png"     # 451 by 300 pixels, RGB; CC0, from the sample data of scikit-image
 GRAYS = list(range(130, 161))       # the stops of the slider: the grays in the middle of the dull photo
@@ -231,6 +232,7 @@ def _m(key, en, nl, **kw):
 EXERCISES = {
     "cumulative": FunctionBox(
         name="cumulative",
+        picture=yours.arrays(call=0),
         function="cumulative",
         start=_CUM_START,
         solution=_CUM,
@@ -306,6 +308,7 @@ EXERCISES = {
     ),
     "equalize": FunctionBox(
         name="equalize",
+        picture=yours.arrays(call=0, shade=True),
         function="equalize",
         start=_EQ_START,
         solution=_EQ,

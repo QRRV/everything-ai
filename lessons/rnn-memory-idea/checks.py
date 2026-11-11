@@ -9,6 +9,7 @@ import re
 import numpy as np
 
 from everything_ai.check import FunctionBox, Mistake
+from everything_ai import yours
 
 # The network of the worked example: the first number of the hidden state remembers the a's, the second the b's.
 VEC = {"a": np.array([1.0, 0.0]), "b": np.array([0.0, 1.0])}
@@ -123,6 +124,7 @@ _R = _r()
 EXERCISES = {
     "rnn": FunctionBox(
         name="rnn",
+        picture=yours.steps(call=0),
         function="rnn",
         start=_R_START,
         solution=_R,

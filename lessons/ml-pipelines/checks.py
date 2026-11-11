@@ -9,6 +9,7 @@ import functools
 import re
 
 from everything_ai.check import Code, CodeBox, Mistake
+from everything_ai import yours
 
 DATA = "data/penguins.csv"   # the Palmer penguins (CC0): see data/README.md
 N_TRAIN = 274                # of the 342 penguins with all measurements, shuffled with seed 0: the rest is the test set
@@ -118,6 +119,7 @@ def _not_a_step(e) -> bool:
 EXERCISES = {
     "noise-pipeline": CodeBox(
         name="noise-pipeline",
+        picture=yours.steps(),
         start=_N_START,
         solution=_N,
         keep=["rng = np.random.default_rng(6)"],

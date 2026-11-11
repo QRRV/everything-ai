@@ -17,6 +17,7 @@ import numpy as np
 from everything_ai import hub, paths, projects
 from everything_ai.lesson import download_card
 from everything_ai.check import FunctionBox, Mistake, run_code
+from everything_ai import yours
 
 C4_SAMPLE = ("datasets/allenai/c4", "en.noclean/c4-train.00000-of-07168.json.gz")
 DOWNLOAD_LINE = {
@@ -195,6 +196,7 @@ def _shown(v) -> str:
 EXERCISES = {
     "clean-lines": FunctionBox(
         name="clean-lines",
+        picture=yours.steps(call=0),
         function="clean_lines",
         start=_L_START,
         solution=_l(),
@@ -244,6 +246,7 @@ EXERCISES = {
     ),
     "keep-page": FunctionBox(
         name="keep-page",
+        picture=yours.steps(call=0),
         function="keep_page",
         start=_P_START,
         solution=_p(),
@@ -295,6 +298,7 @@ EXERCISES = {
     ),
     "features": FunctionBox(
         name="features",
+        picture=yours.steps(call=0),
         function="features",
         start=_F_START,
         solution=_f(),

@@ -5,6 +5,7 @@ import math
 import re
 
 from everything_ai.check import FunctionBox, Mistake
+from everything_ai import yours
 
 # Chinchilla's fit (Hoffmann and others 2022, approach 3): L(N, D) = E + A / N**ALPHA + B / D**BETA, in nats per token.
 E, A, ALPHA = 1.69, 406.4, 0.34
@@ -126,6 +127,7 @@ _DOTS = Mistake("dots-left", matches=lambda got, text: re.search(r"^\s*\.\.\.\s*
 EXERCISES = {
     "fit-power-law": FunctionBox(
         name="fit-power-law",
+        picture=yours.steps(call=0),
         function="fit_power_law",
         start=_START,
         solution=_f(),

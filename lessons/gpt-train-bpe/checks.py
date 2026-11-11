@@ -16,6 +16,7 @@ import torch
 
 from everything_ai import paths, projects
 from everything_ai.check import FunctionBox, Mistake, Result, run_code
+from everything_ai import yours
 
 
 def _train_chars():
@@ -350,6 +351,7 @@ class _Box(FunctionBox):
 EXERCISES = {
     "train-bpe-fast": _Box(
         name="train-bpe-fast",
+        picture=yours.steps(call=0),
         function="train_bpe_fast",
         start=_F_START,
         solution=_f(),
@@ -394,6 +396,7 @@ EXERCISES = {
     ),
     "encode-fast": _Box(
         name="encode-fast",
+        picture=yours.tokens(0),
         function="encode_fast",
         start=_E_START,
         solution=_e(),

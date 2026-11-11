@@ -12,6 +12,7 @@ from torch.utils.data import DataLoader, TensorDataset
 
 from everything_ai import paths, projects
 from everything_ai.check import ClassBox, FunctionBox, Mistake, same_value
+from everything_ai import yours
 
 DATA = "data/tiny-shakespeare.txt"   # about 1.1 MB of plays by Shakespeare: see data/README.md
 DIM, HIDDEN, LR = 10, 128, 0.003
@@ -189,6 +190,7 @@ _C_NL = "Met deze regels na je class:\n\n```python\n{scenario}\n```\n\nkrijg je 
 EXERCISES = {
     "contexts": FunctionBox(
         name="contexts",
+        picture=yours.arrays(call=0),
         function="contexts",
         start=_X_START,
         solution=_X,

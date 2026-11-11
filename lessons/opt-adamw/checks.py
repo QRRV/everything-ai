@@ -10,6 +10,7 @@ import numpy as np
 import torch   # imported once, when the lesson opens: the first import takes longer than a check may
 
 from everything_ai.check import ClassBox, FunctionBox, Mistake
+from everything_ai import yours
 
 LR = 0.01
 STEPS = 1000
@@ -133,6 +134,7 @@ _G_SCENARIOS = [
 EXERCISES = {
     "adamw-path": FunctionBox(
         name="adamw-path",
+        picture=yours.series(call=0, role="param", xlabel={"en": "step", "nl": "stap"}),
         function="adamw_path",
         start=_P_START,
         solution=_p(),
@@ -171,6 +173,7 @@ EXERCISES = {
     ),
     "param-groups": ClassBox(
         name="param-groups",
+        picture=yours.steps(scenario=0),
         start=_G_START,
         solution=_g(),
         scenarios=_G_SCENARIOS,

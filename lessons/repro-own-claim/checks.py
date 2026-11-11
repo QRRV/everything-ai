@@ -11,6 +11,7 @@ from dataclasses import dataclass, field
 
 from everything_ai import paths, projects
 from everything_ai.check import Exercise, FunctionBox, Mistake, Result, _fill
+from everything_ai import yours
 
 
 def _checks(lesson: str, name: str):
@@ -138,6 +139,7 @@ _DOTS = Mistake("dots-left", matches=lambda got, text: re.search(r"^[^#\n]*\.\.\
 EXERCISES = {
     "verdict": FunctionBox(
         name="verdict",
+        picture=yours.steps(call=0),
         function="verdict",
         start=_V_START,
         solution=_V,

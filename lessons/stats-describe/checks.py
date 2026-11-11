@@ -5,6 +5,7 @@ works out the standard deviation step by step. And the histogram in the picture.
 import re
 
 from everything_ai.check import Code, CodeBox, FunctionBox, Mistake
+from everything_ai import yours
 
 # How many minutes 15 students took to get to school one morning; one of them missed the bus.
 TIMES = [25, 18, 32, 20, 95, 27, 12, 40, 22, 25, 35, 15, 30, 20, 45]
@@ -61,6 +62,7 @@ def _spread(new: str) -> str:
 EXERCISES = {
     "slow-trips": CodeBox(
         name="slow-trips",
+        picture=yours.steps(),
         start=_SLOW_START,
         solution=_SLOW,
         keep=["import numpy as np", _TIMES_LINE],
@@ -119,6 +121,7 @@ EXERCISES = {
     ),
     "spread": FunctionBox(
         name="spread",
+        picture=yours.steps(call=0),
         function="spread",
         start=_SPREAD_START,
         solution=_SPREAD,

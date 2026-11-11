@@ -5,6 +5,7 @@ that uses the slope for w to take one step downhill. And the picture: the loss f
 import re
 
 from everything_ai.check import CodeBox, FunctionBox, Mistake
+from everything_ai import yours
 
 # The houses that were sold, from the lesson ml-vocabulary: area in m², price in thousands of euros.
 AREA = [62, 85, 110, 48, 95, 130, 73, 58]
@@ -75,6 +76,7 @@ def _next(new: str) -> str:
 EXERCISES = {
     "slope-b": CodeBox(
         name="slope-b",
+        picture=yours.tangent("b", lambda ns, b: ns["loss"](ns["w"], b), span=40, xlabel="b", ylabel="loss"),
         start=_B_START,
         solution=_B,
         keep=["area = np.array([62, 85, 110, 48, 95, 130, 73, 58])", "price = np.array([245, 310, 395, 198, 320, 465, 280, 232])",
@@ -123,6 +125,7 @@ EXERCISES = {
     ),
     "next-w": FunctionBox(
         name="next-w",
+        picture=yours.steps(call=0),
         function="next_w",
         start=_NEXT_START,
         solution=_NEXT,

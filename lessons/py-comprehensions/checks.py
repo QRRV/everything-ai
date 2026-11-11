@@ -5,6 +5,7 @@ import ast
 import re
 
 from everything_ai.check import CodeBox, Mistake
+from everything_ai import yours
 
 # The picture: a loop that builds a list, and the same list in one line. The marks tie the parts together.
 PICTURE_LOOP = [("above = []", ""), ("for t in temps:", "2"), ("    if t > 20:", "3"), ("        above.append(t - 20)", "1")]
@@ -78,6 +79,7 @@ _SCORES = 'scores = {"Ada": 7.5, "Bo": 4.0, "Cas": 6.0, "Dex": 5.5}'
 EXERCISES = {
     "lengths": CodeBox(
         name="lengths",
+        picture=yours.names(),
         start='words = ["horse", "ox", "bird"]\nlengths = ...\nprint(lengths)',
         solution='words = ["horse", "ox", "bird"]\nlengths = [len(word) for word in words]\nprint(lengths)',
         outcome="stdout",
@@ -124,6 +126,7 @@ EXERCISES = {
     ),
     "passed": CodeBox(
         name="passed",
+        picture=yours.names(),
         start=_SCORES + "\npassed = ...\nprint(passed)",
         solution=_SCORES + "\npassed = [name for name in scores if scores[name] >= 5.5]\nprint(passed)",
         outcome="stdout",

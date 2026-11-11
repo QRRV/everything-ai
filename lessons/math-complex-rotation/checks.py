@@ -8,6 +8,7 @@ import re
 import numpy as np
 
 from everything_ai.check import FunctionBox, Mistake, _show_rounded
+from everything_ai import yours
 
 
 def plane_picture(labels: dict) -> str:
@@ -147,6 +148,7 @@ def _complex(got, text) -> bool:
 EXERCISES = {
     "rotate-pairs": FunctionBox(
         name="rotate-pairs",
+        picture=yours.vectors(0),
         function="rotate_pairs",
         start=_START,
         solution=_r(),

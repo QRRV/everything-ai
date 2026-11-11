@@ -6,6 +6,7 @@ import math
 import re
 
 from everything_ai.check import CodeBox, FunctionBox, Mistake
+from everything_ai import yours
 
 
 def picture(x: float, labels: dict[str, str]) -> str:
@@ -65,6 +66,7 @@ def _p(body: str, end: str = "    return total") -> str:
 EXERCISES = {
     "folds": CodeBox(
         name="folds",
+        picture=yours.steps(),
         start=_F_START,
         solution=_F,
         keep=["thickness = 0.1"],
@@ -114,6 +116,7 @@ EXERCISES = {
     ),
     "log-product": FunctionBox(
         name="log-product",
+        picture=yours.steps(call=0),
         function="log_product",
         start=_P_START,
         solution=_P,

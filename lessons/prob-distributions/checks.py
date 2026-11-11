@@ -12,6 +12,7 @@ import numpy as np
 
 from everything_ai import paths
 from everything_ai.check import FunctionBox, Mistake
+from everything_ai import yours
 
 DATA = "data/penguins.csv"   # 344 penguins of the Palmer Archipelago: see data/README.md
 
@@ -134,6 +135,7 @@ def _s(first: str = "x[x > low]", second: str = "inside[inside < high]") -> str:
 EXERCISES = {
     "density": FunctionBox(
         name="density",
+        picture=yours.curve("normal_density", [i / 10 for i in range(-80, 101)], at=lambda x: (x, 1, 3), role="ink"),
         function="normal_density",
         start=_D_START,
         solution=_d(),
@@ -178,6 +180,7 @@ EXERCISES = {
     ),
     "share-within": FunctionBox(
         name="share-within",
+        picture=yours.steps(call=0),
         function="share_within",
         start=_S_START,
         solution=_s(),

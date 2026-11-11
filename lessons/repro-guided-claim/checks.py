@@ -7,6 +7,7 @@ import math
 import re
 
 from everything_ai.check import FunctionBox, Mistake
+from everything_ai import yours
 
 THRESHOLD, DELAY = 0.99, 10
 
@@ -111,6 +112,7 @@ _WRONG = {
 EXERCISES = {
     "verdict": FunctionBox(
         name="verdict",
+        picture=yours.steps(call=0),
         function="verdict",
         start=_START,
         solution=_p(),

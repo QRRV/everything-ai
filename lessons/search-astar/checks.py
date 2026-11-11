@@ -10,6 +10,7 @@ from dataclasses import dataclass, field
 
 from everything_ai import draw
 from everything_ai.check import FunctionBox, Mistake
+from everything_ai import yours
 
 INF = float("inf")
 
@@ -344,6 +345,7 @@ _A = _a()
 EXERCISES = {
     "astar": SearchBox(
         name="astar",
+        picture=yours.search(0),
         function="astar",
         start=_A_START,
         solution=_A,

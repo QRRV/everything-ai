@@ -5,6 +5,7 @@ recall, their plain mean and their F1 score as bars, for every point of the plan
 import re
 
 from everything_ai.check import Code, CodeBox, Mistake
+from everything_ai import yours
 
 # The worked example: four detectors of 5s on the last 1,000 of the 6,000 training digits of QMNIST (BSD-3-Clause,
 # data/README.md), 80 of them a 5, as (true positives, false positives, false negatives, true negatives). The two in
@@ -63,6 +64,7 @@ def _f(body: str, counts: str = _F_COUNTS) -> str:
 EXERCISES = {
     "f1": CodeBox(
         name="f1",
+        picture=yours.steps(),
         start=_F_START,
         solution=_F,
         digits=4,

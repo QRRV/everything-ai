@@ -4,6 +4,7 @@
 import re
 
 from everything_ai.check import FunctionBox, Mistake
+from everything_ai import yours
 
 _SYNTAX = [
     Mistake("dots-left", syntax=r"^[^#\n]*\.\.\.",
@@ -29,6 +30,7 @@ REQUIRED = ["area", "none", "count-long"]
 EXERCISES = {
     "area": FunctionBox(
         name="area",
+        picture=yours.steps(call=0),
         function="area",
         start="def area(width, height):\n    ...\n",
         solution="def area(width, height):\n    return width * height",
@@ -73,6 +75,7 @@ EXERCISES = {
     ),
     "count-long": FunctionBox(
         name="count-long",
+        picture=yours.steps(call=0),
         function="count_long",
         start="def count_long(words, n):\n    ...\n",
         solution="def count_long(words, n):\n    count = 0\n    for word in words:\n        if len(word) > n:\n            count = count + 1\n    return count",

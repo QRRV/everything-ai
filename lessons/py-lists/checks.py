@@ -4,6 +4,7 @@
 import re
 
 from everything_ai.check import CodeBox, Mistake
+from everything_ai import yours
 
 # The list in the picture, and the slice it marks.
 PICTURE = [7, 9, 4, 8, 6]
@@ -39,6 +40,7 @@ REQUIRED = ["top", "last-two", "cart"]
 EXERCISES = {
     "top": CodeBox(
         name="top",
+        picture=yours.names(),
         start="scores = [7, 9, 4, 8, 6]\ntop = ...\nprint(top)",
         solution="scores = [7, 9, 4, 8, 6]\ntop = scores[:3]\nprint(top)",
         outcome="stdout",
@@ -90,6 +92,7 @@ EXERCISES = {
     ),
     "cart": CodeBox(
         name="cart",
+        picture=yours.names(),
         start='cart = ["bread", "milk"]\n...\nprint(cart)',
         solution='cart = ["bread", "milk"]\ncart.append("apples")\nprint(cart)',
         outcome="stdout",

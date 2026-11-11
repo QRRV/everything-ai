@@ -8,6 +8,7 @@ import math
 import re
 
 from everything_ai.check import FunctionBox, Mistake
+from everything_ai import yours
 
 # The rare illness of the guess: 1 in 1000 people has it; the test is positive for 99% of the ill and 1% of the healthy.
 PRIOR, HIT, FALSE_ALARM = 0.001, 0.99, 0.01
@@ -125,6 +126,7 @@ _B = _b()
 EXERCISES = {
     "bayes": FunctionBox(
         name="bayes",
+        picture=yours.curve("bayes", [i / 400 for i in range(1, 201)], at=lambda p: (p, 0.99, 0.01), role="pred", xlabel="p_a", y=(0, 1)),
         function="bayes",
         start=_B_START,
         solution=_B,

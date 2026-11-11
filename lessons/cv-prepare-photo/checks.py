@@ -10,6 +10,7 @@ import numpy as np
 import torch   # imported once, when the lesson opens: the first import takes longer than a check may
 
 from everything_ai.check import CodeBox, FunctionBox, Mistake
+from everything_ai import yours
 
 PHOTO = "data/photos/coffee.png"    # 600 by 400 pixels: the worked example and the pictures
 CAT = "data/photos/chelsea.png"     # 451 by 300 pixels: exercise 3 uses an upright piece of it
@@ -278,6 +279,7 @@ def _own(got, text) -> bool:
 EXERCISES = {
     "crop": FunctionBox(
         name="crop",
+        picture=yours.arrays(call=0, shade=True),
         function="center_crop",
         start=_CROP_START,
         solution=_CROP,
@@ -338,6 +340,7 @@ EXERCISES = {
     ),
     "prepare": CodeBox(
         name="prepare",
+        picture=yours.steps(),
         start=_PREP_START,
         solution=_PREP,
         compare=_prep_right,

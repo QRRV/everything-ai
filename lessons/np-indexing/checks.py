@@ -5,6 +5,7 @@ a boolean mask. And the numbers in the picture."""
 import re
 
 from everything_ai.check import Code, CodeBox, FunctionBox, Mistake, uses_loop
+from everything_ai import yours
 
 # The picture: one matrix, and what three selections pick from it.
 PICTURE = [[1, 2, 3], [4, 5, 6]]
@@ -63,6 +64,7 @@ _WET = "import numpy as np\n\n\ndef wet_days(rain, limit):\n    grid = np.array(
 EXERCISES = {
     "wednesdays": CodeBox(
         name="wednesdays",
+        picture=yours.arrays(show=("rain",), shade=True),
         start=_WED_START,
         solution=_WED,
         keep=["import numpy as np", _RAIN_LINE],
@@ -109,6 +111,7 @@ EXERCISES = {
     ),
     "wet-days": FunctionBox(
         name="wet-days",
+        picture=yours.arrays(call=0, shade=True),
         function="wet_days",
         start=_WET_START,
         solution=_WET,

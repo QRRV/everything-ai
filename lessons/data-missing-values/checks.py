@@ -11,6 +11,7 @@ import numpy as np
 import pandas as pd   # here, so the first import of pandas never counts against the time limit of a check
 
 from everything_ai.check import Code, CodeBox, FunctionBox, Mistake, same_value
+from everything_ai import yours
 
 STATION = "lessons/data-explore/station.csv"
 STATION_2 = "lessons/data-explore/station-2.csv"
@@ -142,6 +143,7 @@ _TABLE_MEDIAN = r"\bdf\.(median|mean)\(\s*\)"
 EXERCISES = {
     "filled": CodeBox(
         name="filled",
+        picture=yours.table(),
         start=_FILLED_START,
         solution=_FILLED,
         keep=["import pandas as pd", _READ],
@@ -306,6 +308,7 @@ def _new_bool_column(got) -> bool:
 
 EXERCISES["fill-flag"] = FunctionBox(
     name="fill-flag",
+    picture=yours.table(call=0),
     function="fill_flag",
     start=_FLAG_START,
     solution=_FLAG,

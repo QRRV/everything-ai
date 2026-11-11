@@ -7,6 +7,7 @@ from pathlib import Path
 
 from everything_ai import projects
 from everything_ai.check import CodeBox, FunctionBox, Mistake, run_code, same_value
+from everything_ai import yours
 
 # The module the course puts in your project folder, without its licence lines, as the lesson shows it.
 DEMO = "\n".join(line for line in (Path(__file__).parent / "project" / "demo" / "shapes.py").read_text(encoding="utf-8").splitlines()
@@ -60,6 +61,7 @@ REQUIRED = ["mean", "import-line", "use-stats"]
 EXERCISES = {
     "mean": FunctionBox(
         name="mean",
+        picture=yours.steps(call=0),
         function="mean",
         start="def mean(numbers):\n    ...\n",
         solution="def mean(numbers):\n    total = 0\n    for n in numbers:\n        total = total + n\n    return total / len(numbers)",
@@ -101,6 +103,7 @@ EXERCISES = {
     ),
     "use-stats": CodeBox(
         name="use-stats",
+        picture=yours.steps(),
         start="from tools import stats\n\ntemps = [12, 15, 9]\n...",
         solution="from tools import stats\n\ntemps = [12, 15, 9]\nprint(stats.mean(temps))",
         outcome="stdout",

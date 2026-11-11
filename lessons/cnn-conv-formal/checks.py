@@ -8,6 +8,7 @@ import numpy as np
 
 from everything_ai import draw
 from everything_ai.check import FunctionBox, Mistake
+from everything_ai import yours
 
 
 def conv_picture(labels: dict):
@@ -89,6 +90,7 @@ _IMG5 = [[1, 0, 2, 1, 0], [0, 1, 1, 0, 2], [3, 0, 1, 2, 1], [1, 2, 0, 0, 1], [0,
 EXERCISES = {
     "out-size": FunctionBox(
         name="out-size",
+        picture=yours.curve("out_size", list(range(4, 33)), at=lambda n: (n, 5, 2, 0), role="ink", xlabel="n"),
         function="out_size",
         start=_O_START,
         solution=_O,
@@ -127,6 +129,7 @@ EXERCISES = {
     ),
     "conv2d": FunctionBox(
         name="conv2d",
+        picture=yours.arrays(call=0, shade=True),
         function="conv2d",
         start=_C_START,
         solution=_C,

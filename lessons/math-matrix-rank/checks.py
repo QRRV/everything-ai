@@ -10,6 +10,7 @@ import re
 import numpy as np
 
 from everything_ai.check import FunctionBox, Mistake
+from everything_ai import yours
 
 
 class _Matrix(np.ndarray):
@@ -166,6 +167,7 @@ _C3, _R3 = _pieces([[[2], [1], [0], [1]]], [[[1, -1, 0, 2]]])
 EXERCISES = {
     "thin-numbers": FunctionBox(
         name="thin-numbers",
+        picture=yours.steps(call=0),
         function="thin_numbers",
         start=_N_START,
         solution=_n(),
@@ -199,6 +201,7 @@ EXERCISES = {
     ),
     "from-pieces": FunctionBox(
         name="from-pieces",
+        picture=yours.arrays(call=0),
         function="from_pieces",
         start=_P_START,
         solution=_p(),

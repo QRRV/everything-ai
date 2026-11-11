@@ -17,6 +17,7 @@ import time
 from everything_ai import paths, projects
 from everything_ai.lesson import download_card
 from everything_ai.check import FunctionBox, Mistake, run_code
+from everything_ai import yours
 
 
 def _checks(lesson: str, name: str):
@@ -484,6 +485,7 @@ def _a_list(got, text) -> bool:
 EXERCISES = {
     "rename": FunctionBox(
         name="rename",
+        picture=yours.steps(call=0),
         function="rename",
         start=_R_START,
         solution=_R_CODE,
@@ -518,6 +520,7 @@ EXERCISES = {
     ),
     "lora-parameters": FunctionBox(
         name="lora-parameters",
+        picture=yours.steps(call=0),
         function="lora_parameters",
         start=_P_START,
         solution=_P_CODE,

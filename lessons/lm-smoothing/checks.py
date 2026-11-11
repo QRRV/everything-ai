@@ -11,6 +11,7 @@ import numpy as np
 
 from everything_ai import paths
 from everything_ai.check import FunctionBox, Mistake
+from everything_ai import yours
 
 DATA = "data/tiny-shakespeare.txt"   # about 1.1 MB of plays by Shakespeare: see data/README.md
 SHARE = 0.9                          # the first 90% of the plays is counted; the last 10% is the text to measure on
@@ -167,6 +168,7 @@ def _s(body: str = "    M = N + k\n    return M / M.sum(axis=1, keepdims=True)\n
 EXERCISES = {
     "smooth": FunctionBox(
         name="smooth",
+        picture=yours.arrays(call=0, shade=True),
         function="smooth",
         start=_START,
         solution=_s(),

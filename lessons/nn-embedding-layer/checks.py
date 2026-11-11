@@ -15,6 +15,7 @@ from torch import nn
 
 from everything_ai import paths
 from everything_ai.check import ClassBox, FunctionBox, Mistake
+from everything_ai import yours
 
 DATA = "data/tiny-shakespeare.txt"   # about 1.1 MB of plays by Shakespeare: see data/README.md
 DIMS = [1, 2, 4, 8, 16, 32]
@@ -195,6 +196,7 @@ _NO_FORWARD = Mistake("no-forward", syntax=r"\A(?![\s\S]*^[ \t]+def[ \t]+forward
 EXERCISES = {
     "sgd-step": FunctionBox(
         name="sgd-step",
+        picture=yours.arrays(call=0),
         function="sgd_step",
         start=_S_START,
         solution=_s(),

@@ -6,6 +6,7 @@ import math
 import re
 
 from everything_ai.check import Code, CodeBox, FunctionBox, Mistake
+from everything_ai import yours
 
 
 def picture(p: float, labels: dict[str, str]) -> str:
@@ -53,6 +54,7 @@ def _m(new: str) -> str:
 EXERCISES = {
     "one-loss": FunctionBox(
         name="one-loss",
+        picture=yours.curve("one_loss", [0.02 + i / 100 for i in range(97)], at=lambda p: (1, p), role="loss", xlabel={"en": "p, the chance of a 1, when y = 1", "nl": "p, de kans op een 1, als y = 1"}),
         function="one_loss",
         start=_O_START,
         solution=_O,
@@ -96,6 +98,7 @@ EXERCISES = {
     ),
     "mean-loss": CodeBox(
         name="mean-loss",
+        picture=yours.steps(),
         start=_M_START,
         solution=_M,
         keep=["y = np.array([1, 1, 0, 0, 1])"],

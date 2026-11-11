@@ -7,6 +7,7 @@ import math
 import re
 
 from everything_ai.check import Code, CodeBox, FunctionBox, Mistake
+from everything_ai import yours
 
 OTHERS = (2.0, 0.0)   # the logits of class 0 (cat) and class 2 (bird) in the picture; the slider sets class 1 (dog)
 RIGHT = 1             # the right class in the picture: the photo is of a dog
@@ -83,6 +84,7 @@ def _b(new: str) -> str:
 EXERCISES = {
     "cross-entropy": FunctionBox(
         name="cross-entropy",
+        picture=yours.curve("cross_entropy", [0.02 + i / 100 for i in range(99)], at=lambda q: ([q, (1 - q) / 2, (1 - q) / 2], 0), role="loss", xlabel={"en": "probability of the right class", "nl": "kans op de goede klasse"}),
         function="cross_entropy",
         start=_E_START,
         solution=_E,
@@ -123,6 +125,7 @@ EXERCISES = {
     ),
     "batch-loss": CodeBox(
         name="batch-loss",
+        picture=yours.steps(),
         start=_B_START,
         solution=_B,
         keep=["onehot = np.eye(3)[labels]"],

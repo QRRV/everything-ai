@@ -8,6 +8,7 @@ import re
 from decimal import Decimal
 
 from everything_ai.check import FunctionBox, Mistake, run_code, with_time_limit
+from everything_ai import yours
 
 
 def token_picture(labels: dict) -> str:
@@ -139,6 +140,7 @@ _DOTS = Mistake("dots-left", matches=lambda got, text: re.search(r"^[^#\n]*\.\.\
 EXERCISES = {
     "train-hours": FunctionBox(
         name="train-hours",
+        picture=yours.curve("train_hours", [10 ** (8 + i / 10) for i in range(31)], at=lambda n: (n, 20 * n, 989e12, 0.4, 8), role="ink", xlog=True, xlabel={"en": "parameters, with 20 tokens each", "nl": "parameters, met elk 20 tokens"}, ylabel={"en": "hours", "nl": "uur"}),
         function="train_hours",
         start=_START,
         solution=_t(),

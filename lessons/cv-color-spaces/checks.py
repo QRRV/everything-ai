@@ -9,6 +9,7 @@ import re
 import numpy as np
 
 from everything_ai.check import FunctionBox, Mistake, Value
+from everything_ai import yours
 
 FRUIT = "data/photos/fruit.png"           # 240 rows, 360 columns, RGB; drawn by the course (draw_fruit)
 LABELS = "data/photos/fruit-labels.png"   # the same size: the number of what each pixel is, FRUIT_KINDS
@@ -195,6 +196,7 @@ ROW = [[[0.02, 0.9, 0.8], [0.98, 0.7, 0.5], [0.08, 0.9, 0.9], [0.0, 0.0, 0.6], [
 EXERCISES = {
     "value-saturation": FunctionBox(
         name="value-saturation",
+        picture=yours.steps(call=0),
         function="value_saturation",
         start=_VS_START,
         solution=_VS,
@@ -274,6 +276,7 @@ EXERCISES = {
     ),
     "red-mask": FunctionBox(
         name="red-mask",
+        picture=yours.image(call=0),
         function="red_mask",
         start=_RED_START,
         solution=_RED,

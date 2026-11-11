@@ -14,6 +14,7 @@ import numpy as np
 
 from everything_ai import paths
 from everything_ai.check import FunctionBox, Mistake, run_code, uses_loop
+from everything_ai import yours
 
 
 def _quality():
@@ -238,6 +239,7 @@ def _same(got, want) -> bool:
 EXERCISES = {
     "shingles": FunctionBox(
         name="shingles",
+        picture=yours.steps(call=0),
         function="shingles",
         start=_S_START,
         solution=_s(),
@@ -280,6 +282,7 @@ EXERCISES = {
     ),
     "minhash": FunctionBox(
         name="minhash",
+        picture=yours.steps(call=0),
         function="minhash",
         start=_M_START,
         solution=_m(),
@@ -323,6 +326,7 @@ EXERCISES = {
     ),
     "signature": FunctionBox(
         name="signature",
+        picture=yours.arrays(call=0),
         function="signature",
         start=_N_START,
         solution=_n(),

@@ -8,6 +8,7 @@ import math
 import re
 
 from everything_ai.check import FunctionBox, Mistake
+from everything_ai import yours
 
 # Sign, exponent and mantissa bits of each format.
 FORMATS = [("FP32", 1, 8, 23), ("TF32", 1, 8, 10), ("BF16", 1, 8, 7), ("FP16", 1, 5, 10)]
@@ -74,6 +75,7 @@ _SCALED = dict(
 EXERCISES = {
     "spacing": FunctionBox(
         name="spacing",
+        picture=yours.curve("spacing", [2 ** (i / 4) for i in range(0, 81)], at=lambda x: (x, 7), role="ink", xlog=True, xlabel="x"),
         function="spacing",
         start=_START,
         solution=_s(),

@@ -5,6 +5,7 @@ respect to the bias term. And the picture: the loss of one student over w, with 
 import re
 
 from everything_ai.check import CodeBox, FunctionBox, Mistake
+from everything_ai import yours
 
 # The student of the picture and the worked example: 4 hours of study, a grade of 7. The model predicts w · hours.
 HOURS, GRADE = 4, 7
@@ -58,6 +59,7 @@ def _b(new: str) -> str:
 EXERCISES = {
     "loss-slope": FunctionBox(
         name="loss-slope",
+        picture=yours.curve("loss_slope", [i / 10 for i in range(0, 41)], at=lambda w: (w, 4, 7), role="grad", xlabel="w"),
         function="loss_slope",
         start=_SLOPE_START,
         solution=_SLOPE,
@@ -97,6 +99,7 @@ EXERCISES = {
     ),
     "slope-b": CodeBox(
         name="slope-b",
+        picture=yours.steps(),
         start=_B_START,
         solution=_B,
         keep=["x = 4", "y = 7", "w = 1.5", "r = y - (w * x + b)"],

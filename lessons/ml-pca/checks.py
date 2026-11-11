@@ -10,6 +10,7 @@ import math
 import re
 
 from everything_ai.check import Code, CodeBox, Mistake
+from everything_ai import yours
 
 DATA = "data/penguins.csv"   # the Palmer penguins (CC0): see data/README.md
 TWO = ["bill_length_mm", "flipper_length_mm"]
@@ -128,6 +129,7 @@ _ONE = _one()
 EXERCISES = {
     "first-share": CodeBox(
         name="first-share",
+        picture=yours.steps(),
         start=_ONE_START,
         solution=_ONE,
         keep=_KEEP1,

@@ -8,6 +8,7 @@ import re
 import torch   # imported once, when the lesson opens: the first import takes longer than a check may
 
 from everything_ai.check import CodeBox, Code, Mistake, same_value
+from everything_ai import yours
 
 # --- the picture: the tensors of the worked example ---------------------------------------------------------------
 
@@ -76,6 +77,7 @@ _C = _c("centered = scores - scores.float().mean(dim=1, keepdim=True)")
 EXERCISES = {
     "loss": CodeBox(
         name="loss",
+        picture=yours.steps(),
         start=_L_START,
         solution=_L,
         keep=["X = torch.tensor([[2, 1], [0, 3], [1, 1]], dtype=torch.float32)", "y = torch.tensor([4, 3, 3], dtype=torch.float32)"],
@@ -120,6 +122,7 @@ EXERCISES = {
     ),
     "centered": CodeBox(
         name="centered",
+        picture=yours.arrays(show=("scores",)),
         start=_C_START,
         solution=_C,
         keep=[],

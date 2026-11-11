@@ -11,6 +11,7 @@ import math
 
 from everything_ai import paths, projects
 from everything_ai.check import ClassBox, FunctionBox, Mistake, _show_rounded, run_code
+from everything_ai import yours
 
 
 def _checks(lesson: str, name: str):
@@ -209,6 +210,7 @@ EXERCISES = {
     ),
     "report": FunctionBox(
         name="report",
+        picture=yours.steps(call=0),
         function="report",
         start=_P_START,
         solution=_P,

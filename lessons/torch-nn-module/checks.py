@@ -9,6 +9,7 @@ import torch   # imported once, when the lesson opens: the first import takes lo
 
 from everything_ai import draw
 from everything_ai.check import CodeBox, Mistake, run_code, same_value
+from everything_ai import yours
 
 
 def picture(captions: list[str], title: str, alt: str):
@@ -151,6 +152,7 @@ EXERCISES = {
     ),
     "train": CodeBox(
         name="train",
+        picture=yours.descent("loss", lambda ns: float(ns["loss"])),
         compare=_close_loss,
         start=_T_START,
         solution=_T,

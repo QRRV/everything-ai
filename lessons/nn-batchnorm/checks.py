@@ -14,6 +14,7 @@ from torch.utils.data import DataLoader, TensorDataset
 
 from everything_ai import paths
 from everything_ai.check import ClassBox, FunctionBox, Mistake
+from everything_ai import yours
 
 DATA = "data/qmnist-small.npz"   # the first 6,000 training and 1,000 test images of QMNIST: see data/README.md
 DEPTH = 10      # hidden layers in the picture
@@ -211,6 +212,7 @@ _M_OWN = ("import torch\nfrom torch import nn\n\n\ndef batch_norm(Z, gamma, beta
 EXERCISES = {
     "batch-norm": FunctionBox(
         name="batch-norm",
+        picture=yours.arrays(call=0),
         function="batch_norm",
         start=_B_START,
         solution=_b(),

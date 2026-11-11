@@ -5,6 +5,7 @@ import re
 from pathlib import Path
 
 from everything_ai.check import CodeBox, Mistake
+from everything_ai import yours
 
 # The files of this lesson. Python runs in the course's own folder, so a path starts there.
 FOLDER = "lessons/py-files"
@@ -58,6 +59,7 @@ REQUIRED = ["count-lines", "newline", "long-items"]
 EXERCISES = {
     "count-lines": CodeBox(
         name="count-lines",
+        picture=yours.steps(),
         start=f'path = "{SHOPPING}"\ncount = 0\n...\nprint(count)',
         solution=f'path = "{SHOPPING}"\ncount = 0\nwith open(path) as f:\n    for line in f:\n        count = count + 1\nprint(count)',
         outcome="stdout",
@@ -105,6 +107,7 @@ EXERCISES = {
     ),
     "long-items": CodeBox(
         name="long-items",
+        picture=yours.steps(),
         start=f'path = "{SHOPPING}"\nwith open(path) as f:\n    for line in f:\n        ...',
         solution=f'path = "{SHOPPING}"\nwith open(path) as f:\n    for line in f:\n        item = line.strip()\n        if len(item) > 4:\n            print(item)',
         outcome="stdout",

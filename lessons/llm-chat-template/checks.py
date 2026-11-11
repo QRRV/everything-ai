@@ -6,6 +6,7 @@ import re
 
 from everything_ai import gpt2_tokenizer
 from everything_ai.check import FunctionBox, Mistake
+from everything_ai import yours
 
 gpt2_tokenizer.offline()   # before any tiktoken.get_encoding("gpt2")
 
@@ -95,6 +96,7 @@ _WRONG = {
 EXERCISES = {
     "gemma-text": FunctionBox(
         name="gemma-text",
+        picture=yours.steps(call=0),
         function="gemma_text",
         start=_START,
         solution=_g(),

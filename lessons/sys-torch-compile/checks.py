@@ -12,6 +12,7 @@ import time
 import torch   # imported once, when the lesson opens: the first import takes longer than a check may
 
 from everything_ai.check import FunctionBox, Mistake, run_code
+from everything_ai import yours
 
 # Measured on a CPU with 2 threads (PyTorch 2.14): gelu(x * 2 + 1).sum(-1) on 4 million numbers. The first call with
 # empty caches (Inductor's cache and Python's bytecode) took 15.8 to 16.1 s; with a warm cache about 1 s.
@@ -163,6 +164,7 @@ class _Tensor:
 EXERCISES = {
     "break-even": FunctionBox(
         name="break-even",
+        picture=yours.steps(call=0),
         function="break_even",
         start=_E_START,
         solution=_e(),
@@ -200,6 +202,7 @@ EXERCISES = {
     ),
     "one-graph": FunctionBox(
         name="one-graph",
+        picture=yours.arrays(call=0),
         function="one_graph",
         start=_G_START,
         solution=_g(),

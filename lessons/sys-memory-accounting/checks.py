@@ -9,6 +9,7 @@ import re
 
 from everything_ai import projects
 from everything_ai.check import FunctionBox, Mistake, with_time_limit
+from everything_ai import yours
 
 projects.builds_on(("llm", "attention", "attn-transformer-block", "causal-self-attention"),
                    ("llm", "block", "attn-transformer-block", "block"), ("llm", "gpt", "gpt-assemble", "gpt"))
@@ -154,6 +155,7 @@ _DOTS = Mistake("dots-left", matches=lambda got, text: re.search(r"^[^#\n]*\.\.\
 EXERCISES = {
     "training-gb": FunctionBox(
         name="training-gb",
+        picture=yours.steps(call=0),
         function="training_gb",
         start=_START,
         solution=_t(),

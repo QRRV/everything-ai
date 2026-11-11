@@ -6,6 +6,7 @@ import math
 import re
 
 from everything_ai.check import Code, CodeBox, FunctionBox, Mistake
+from everything_ai import yours
 
 # Vector a of the picture: length 4, at 15 degrees above the horizontal axis. Vector b turns from there.
 A_LENGTH, A_ANGLE = 4, 15
@@ -106,6 +107,7 @@ def _dist(new: str) -> str:
 EXERCISES = {
     "cosine": CodeBox(
         name="cosine",
+        picture=yours.arrays(show=("a", "b")),
         start=_START,
         solution=_SOLUTION,
         keep=["a = np.array([10, 2, 5])"],
@@ -158,6 +160,7 @@ EXERCISES = {
     ),
     "distance-loop": FunctionBox(
         name="distance-loop",
+        picture=yours.steps(call=0),
         function="distance",
         start=_DIST_START,
         solution=_DIST,

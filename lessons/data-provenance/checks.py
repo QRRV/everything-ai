@@ -5,6 +5,7 @@ completed in a box, and a function that finds the fields a datasheet still lacks
 import re
 
 from everything_ai.check import CodeBox, FunctionBox, Mistake
+from everything_ai import yours
 
 # What every datasheet in this lesson answers, in this order.
 FIELDS = ["source", "collected", "license", "consent", "limits"]
@@ -101,6 +102,7 @@ def _missing(new: str) -> str:
 EXERCISES = {
     "station-card": CodeBox(
         name="station-card",
+        picture=yours.names(),
         start=_CARD_START,
         solution=_CARD,
         compare=_card_ok,
@@ -139,6 +141,7 @@ EXERCISES = {
     ),
     "missing-fields": FunctionBox(
         name="missing-fields",
+        picture=yours.steps(call=0),
         function="missing_fields",
         start=_MISSING_START,
         solution=_MISSING,

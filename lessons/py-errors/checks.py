@@ -2,6 +2,7 @@
 # SPDX-License-Identifier: CC-BY-SA-4.0 AND MIT-0
 """Checks of the lesson py-errors: two functions with a bug, fixed in their own cells. And the cell and traceback in the picture."""
 from everything_ai.check import BugFix, Mistake
+from everything_ai import yours
 
 # The picture: a cell whose function stops for an empty list, and the traceback under it, read from the bottom up.
 PICTURE_CELL = [("def average(numbers):", ""), ("    total = 0", ""), ("    for n in numbers:", ""),
@@ -18,6 +19,7 @@ _PASSED_BUG = "def count_passed(scores):\n    count = 0\n    for score in scores
 EXERCISES = {
     "total": BugFix(
         name="total",
+        picture=yours.steps(call=0),
         function="total_price",
         start=_TOTAL_BUG,
         solution=_TOTAL_BUG.replace("total + prices", "total + price"),
@@ -53,6 +55,7 @@ EXERCISES = {
     ),
     "passed": BugFix(
         name="passed",
+        picture=yours.steps(call=0),
         function="count_passed",
         start=_PASSED_BUG,
         solution=_PASSED_BUG.replace("\n        return count", "\n    return count"),

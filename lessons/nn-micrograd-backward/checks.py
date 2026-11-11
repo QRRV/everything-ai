@@ -8,6 +8,7 @@ import re
 
 from everything_ai import draw, projects
 from everything_ai.check import ClassBox, CodeBox, Code, Mistake, run_code, with_time_limit, Timeout
+from everything_ai import yours
 
 # The Value of the lesson before: yours when it is there and gives the course's results, else the course's (template 1.3).
 projects.builds_on(("nn", "value", "nn-micrograd-value", "value"))
@@ -203,6 +204,7 @@ EXERCISES = {
     ),
     "neuron": CodeBox(
         name="neuron",
+        picture=yours.steps(),
         start=_N_START,
         solution=_N,
         keep=["from nn.value import Value", "from nn.backward import backward", _N_END],

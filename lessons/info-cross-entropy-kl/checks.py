@@ -12,6 +12,7 @@ import numpy as np
 
 from everything_ai import paths
 from everything_ai.check import FunctionBox, Mistake
+from everything_ai import yours
 
 PENGUINS = "data/penguins.csv"   # 344 penguins of the Palmer Archipelago: see data/README.md
 SPECIES = ("Adelie", "Gentoo", "Chinstrap")
@@ -166,6 +167,7 @@ def _k(body: str = "    keep = p > 0\n    return np.sum(p[keep] * np.log2(p[keep
 EXERCISES = {
     "cross-entropy": FunctionBox(
         name="cross-entropy",
+        picture=yours.arrays(call=0, shade=True),
         function="cross_entropy",
         start=_X_START,
         solution=_x(),
@@ -206,6 +208,7 @@ EXERCISES = {
     ),
     "kl": FunctionBox(
         name="kl",
+        picture=yours.arrays(call=0, shade=True),
         function="kl",
         start=_K_START,
         solution=_k(),

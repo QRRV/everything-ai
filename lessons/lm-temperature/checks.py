@@ -11,6 +11,7 @@ import numpy as np
 
 from everything_ai import paths
 from everything_ai.check import FunctionBox, Mistake
+from everything_ai import yours
 
 DATA = "data/tiny-shakespeare.txt"   # about 1.1 MB of plays by Shakespeare: see data/README.md
 
@@ -171,6 +172,7 @@ def _quiet_compare(got, want) -> bool:
 EXERCISES = {
     "with-temperature": FunctionBox(
         name="with-temperature",
+        picture=yours.arrays(call=0, shade=True),
         function="with_temperature",
         start=_START,
         solution=_W,

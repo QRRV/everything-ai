@@ -12,6 +12,7 @@ import numpy as np
 
 from everything_ai import scenes
 from everything_ai.check import FunctionBox, Mistake
+from everything_ai import yours
 
 SEED = 18                    # the scene of the worked example: two triangles, a square and a circle on top of it
 ONE = 16                     # the scene of one shape, a triangle, for a label per image: scenes.scene(ONE, count=1)
@@ -271,6 +272,7 @@ SQUARE_BOX = (42, 39, 73, 72)
 EXERCISES = {
     "coco": FunctionBox(
         name="coco",
+        picture=yours.steps(call=0),
         function="to_coco",
         start=_START,
         solution=_SOLUTION,

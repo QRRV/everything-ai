@@ -10,6 +10,7 @@ import re
 import numpy as np
 
 from everything_ai.check import FunctionBox, Mistake, Value
+from everything_ai import yours
 
 COFFEE = "data/photos/coffee.png"       # 600 by 400 pixels, RGB; from the sample data of scikit-image
 PART = (slice(0, 300), slice(100, 500))  # the part with the cup, as in cv-denoise-filters
@@ -241,6 +242,7 @@ _SUM_NL = "Je telt `gx` en `gy` op. De lengte van een vector is de wortel uit de
 EXERCISES = {
     "strength": FunctionBox(
         name="strength",
+        picture=yours.arrays(call=0, shade=True),
         function="edge_strength",
         start=_START,
         solution=_SOLUTION,

@@ -6,6 +6,7 @@ import html
 import re
 
 from everything_ai.check import Code, CodeBox, FunctionBox, Mistake, uses_loop
+from everything_ai import yours
 
 
 def picture(w: list, x: list, labels: dict[str, str]) -> str:
@@ -69,6 +70,7 @@ def _loop(new: str) -> str:
 EXERCISES = {
     "grade": CodeBox(
         name="grade",
+        picture=yours.arrays(show=("w", "x")),
         start=_START,
         solution=_SOLUTION,
         keep=["w = np.array([0.5, 0.3])", "b = 1", "x = np.array([6, 8])"],
@@ -109,6 +111,7 @@ EXERCISES = {
     ),
     "dot-loop": FunctionBox(
         name="dot-loop",
+        picture=yours.steps(call=0),
         function="dot",
         start=_LOOP_START,
         solution=_LOOP,

@@ -174,6 +174,164 @@ phrases:
   en: Watch out
   nl: Let op
 
+# --- pictures of what the learner made, under a check (yours.py) ---------------
+- id: yours-steps
+  group: yours
+  en: "Step by step: what your code does"
+  nl: "Stap voor stap: wat jouw code doet"
+- id: yours-steps-call
+  group: yours
+  en: "Step by step: what your function does with {call}"
+  nl: "Stap voor stap: wat jouw functie doet met {call}"
+- id: yours-line
+  group: yours
+  en: line
+  nl: regel
+- id: yours-names-after
+  group: yours
+  en: names after it
+  nl: namen erna
+- id: yours-shows
+  group: yours
+  en: shows
+  nl: laat zien
+- id: yours-more-steps
+  group: yours
+  en: "… {n} more steps"
+  nl: "… nog {n} stappen"
+- id: yours-stops
+  group: yours
+  en: stops here
+  nl: stopt hier
+- id: yours-gives-back
+  group: yours
+  en: "gives back {value}"
+  nl: "geeft {value} terug"
+- id: yours-hands-out
+  group: yours
+  en: "hands out {value}"
+  nl: "geeft {value}"
+- id: yours-names
+  group: yours
+  en: The names your code made
+  nl: De namen die jouw code maakt
+- id: yours-more
+  group: yours
+  en: "… {n} more"
+  nl: "… nog {n}"
+- id: yours-more-rows
+  group: yours
+  en: "… {n} more rows"
+  nl: "… nog {n} rijen"
+- id: yours-place
+  group: yours
+  en: place in the row
+  nl: plek in de rij
+- id: yours-grid
+  group: yours
+  en: "What your {function} gives for each row i and column j"
+  nl: "Wat jouw {function} geeft voor elke rij i en kolom j"
+- id: yours-tokens
+  group: yours
+  en: The pieces your code makes, each in its own box
+  nl: De stukjes die jouw code maakt, elk in een eigen vakje
+- id: yours-histogram
+  group: yours
+  en: How often each value comes out of your code
+  nl: Hoe vaak elke waarde uit jouw code komt
+- id: yours-how-many
+  group: yours
+  en: how many
+  nl: hoeveel
+- id: yours-image
+  group: yours
+  en: What your code makes of the image
+  nl: Wat jouw code van de afbeelding maakt
+- id: yours-search
+  group: yours
+  en: Your search in the maze
+  nl: Jouw search in het doolhof
+- id: yours-search-path
+  group: yours
+  en: "{who}: a path of {steps}, after expanding {done}"
+  nl: "{who}: een pad van {steps}, na {done} uit te breiden"
+- id: yours-search-none
+  group: yours
+  en: "{who}: no path, after expanding {done}"
+  nl: "{who}: geen pad, na {done} uit te breiden"
+- id: yours-n-steps
+  group: yours
+  en: "{n} steps"
+  nl: "{n} stappen"
+- id: yours-one-step
+  group: yours
+  en: 1 step
+  nl: 1 stap
+- id: yours-n-states
+  group: yours
+  en: "{n} states"
+  nl: "{n} states"
+- id: yours-one-state
+  group: yours
+  en: 1 state
+  nl: 1 state
+- id: yours-curve
+  group: yours
+  en: "Your {function} next to the right one"
+  nl: "Jouw {function} naast de goede"
+- id: yours-code
+  group: yours
+  en: your code
+  nl: jouw code
+- id: yours-right
+  group: yours
+  en: right
+  nl: goed
+- id: yours-objects
+  group: yours
+  en: The objects your class makes
+  nl: De objecten die jouw class maakt
+- id: yours-counts
+  group: yours
+  en: "What your function counts in {call}"
+  nl: "Wat jouw functie telt in {call}"
+- id: yours-arrays
+  group: yours
+  en: What your code makes of the arrays
+  nl: Wat jouw code van de arrays maakt
+- id: yours-tangent
+  group: yours
+  en: Your slope as a line through the point
+  nl: Jouw helling als lijn door het punt
+- id: yours-vectors
+  group: yours
+  en: "What {call} does to the vectors"
+  nl: "Wat {call} met de vectoren doet"
+- id: yours-given
+  group: yours
+  en: given
+  nl: gegeven
+- id: yours-descent
+  group: yours
+  en: "Your gradient descent, step by step"
+  nl: "Jouw gradient descent, stap voor stap"
+- id: yours-descent-steps
+  group: yours
+  en: "{n} steps; the big dot is where {param} ends: {value}"
+  nl: "{n} stappen; de grote stip is waar {param} eindigt: {value}"
+- id: yours-step
+  group: yours
+  en: step
+  nl: stap
+- id: yours-series
+  group: yours
+  en: The numbers your code makes
+  nl: De getallen die jouw code maakt
+- id: yours-table
+  group: yours
+  en: The table your code makes
+  nl: De tabel die jouw code maakt
+
 # --- the app around a lesson: in place of the notebook's own English -----------
 - id: cell-waits
   group: app

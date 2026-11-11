@@ -10,6 +10,7 @@ import torch   # imported once, when the lesson opens: the first import takes lo
 
 from everything_ai import chart
 from everything_ai.check import ClassBox, FunctionBox, Mistake, run_code
+from everything_ai import yours
 
 N, D = 64, 16
 SHOWN = [0, 4, 8]   # the columns in the picture: fast, middle and slow
@@ -142,6 +143,7 @@ def _t_order(got, text) -> bool:
 EXERCISES = {
     "sinusoids": FunctionBox(
         name="sinusoids",
+        picture=yours.arrays(call=0, shade=True),
         function="sinusoids",
         start=_S_START,
         solution=_s(),

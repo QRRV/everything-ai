@@ -7,6 +7,7 @@ import re
 import numpy as np
 
 from everything_ai.check import FunctionBox, Mistake, run_code
+from everything_ai import yours
 
 
 def number(x: float, digits: int, lang: str) -> str:
@@ -133,6 +134,7 @@ _DOTS = Mistake("dots-left", matches=lambda got, text: re.search(r"^\s*\.\.\.\s*
 EXERCISES = {
     "rope": FunctionBox(
         name="rope",
+        picture=yours.arrays(call=0),
         function="rope",
         start=_START,
         solution=_r(),

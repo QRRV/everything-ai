@@ -9,6 +9,7 @@ from functools import cache
 
 from everything_ai import draw, paths, projects
 from everything_ai.check import FunctionBox, Mistake, Timeout, run_code, with_time_limit
+from everything_ai import yours
 
 # train_byte_bpe imports pair_counts from the learner's bpe.py of tok-bpe, which imports their merge; where those
 # are missing or broken, the course's versions stand in (template 1.3).
@@ -112,6 +113,7 @@ def _d(vocab: str = _D_VOCAB, join: str = _D_JOIN, back: str = _D_BACK) -> str:
 EXERCISES = {
     "train-byte-bpe": FunctionBox(
         name="train-byte-bpe",
+        picture=yours.steps(call=0),
         function="train_byte_bpe",
         start=_T_START,
         solution=_t(),
@@ -159,6 +161,7 @@ EXERCISES = {
     ),
     "decode": FunctionBox(
         name="decode",
+        picture=yours.steps(call=0),
         function="decode",
         start=_D_START,
         solution=_d(),

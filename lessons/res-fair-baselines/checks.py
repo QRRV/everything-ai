@@ -8,6 +8,7 @@ import re
 import numpy as np
 
 from everything_ai.check import FunctionBox, Mistake, _show_rounded
+from everything_ai import yours
 
 # The course's runs of the small GPT of res-hypothesis-control (6 epochs on the first quarter of Tiny Shakespeare,
 # warmup 100), on a CPU with 1 thread: the validation loss after the last epoch, by number of layers, by learning rate,
@@ -162,6 +163,7 @@ def _exercises():
     return {
         "best-setting": FunctionBox(
             name="best-setting",
+            picture=yours.steps(call=0),
             function="best_setting",
             start=_START,
             solution=_b(),

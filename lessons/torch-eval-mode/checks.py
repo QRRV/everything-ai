@@ -12,6 +12,7 @@ from torch import nn
 from torch.utils.data import DataLoader, TensorDataset
 
 from everything_ai.check import CodeBox, Mistake, Sort
+from everything_ai import yours
 
 # --- the data, the network and the picture -------------------------------------------------------------------------
 
@@ -104,6 +105,7 @@ _P = _p()
 EXERCISES = {
     "evaluate": CodeBox(
         name="evaluate",
+        picture=yours.steps(),
         start=_P_START,
         solution=_P,
         keep=["def evaluate(model, X, y):", "torch.manual_seed(1)", "loss = evaluate(net, X, y)", "[loss.requires_grad, net.training, loss.item()]"],

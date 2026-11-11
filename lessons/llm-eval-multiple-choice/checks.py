@@ -11,6 +11,7 @@ import time
 
 from everything_ai import paths, projects
 from everything_ai.check import FunctionBox, Mistake, ScenarioBox, run_code
+from everything_ai import yours
 
 
 def _checks(lesson: str, name: str):
@@ -203,6 +204,7 @@ EXERCISES = {
     ),
     "best-option": FunctionBox(
         name="best-option",
+        picture=yours.steps(call=0),
         function="best_option",
         start=_P_START,
         solution=_P,

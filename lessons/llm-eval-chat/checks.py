@@ -12,6 +12,7 @@ import time
 
 from everything_ai import paths, projects
 from everything_ai.check import FunctionBox, Mistake, run_code
+from everything_ai import yours
 
 
 def _checks(lesson: str, name: str):
@@ -225,6 +226,7 @@ def _same(got, want) -> bool:
 EXERCISES = {
     "avoids": FunctionBox(
         name="avoids",
+        picture=yours.steps(call=0),
         function="avoids",
         start=_A_START,
         solution=_A,
@@ -262,6 +264,7 @@ EXERCISES = {
     ),
     "sentences": FunctionBox(
         name="sentences",
+        picture=yours.steps(call=0),
         function="sentences",
         start=_S_START,
         solution=_S,
@@ -295,6 +298,7 @@ EXERCISES = {
     ),
     "held-out": FunctionBox(
         name="held-out",
+        picture=yours.steps(call=0),
         function="held_out",
         start=_H_START,
         solution=_H,

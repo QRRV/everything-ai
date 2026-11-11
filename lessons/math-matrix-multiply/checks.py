@@ -5,6 +5,7 @@ function. And the houses of the picture: a matrix of examples and a weight vecto
 import re
 
 from everything_ai.check import Code, CodeBox, FunctionBox, Mistake
+from everything_ai import yours
 
 # Four houses from the lesson ml-vocabulary: area in m², rooms, garden (1 or 0); and the model of math-dot-product.
 HOUSES = [[62, 3, 0], [85, 4, 1], [110, 5, 1], [48, 2, 0]]
@@ -38,6 +39,7 @@ def _rule(new: str) -> str:
 EXERCISES = {
     "all-grades": CodeBox(
         name="all-grades",
+        picture=yours.arrays(show=("X", "w"), column=True),
         start=_START,
         solution=_SOLUTION,
         keep=["w = np.array([0.5, 0.3])", "b = 1"],
@@ -81,6 +83,7 @@ EXERCISES = {
     ),
     "shape-rule": FunctionBox(
         name="shape-rule",
+        picture=yours.steps(call=0),
         function="result_shape",
         start=_RULE_START,
         solution=_RULE,

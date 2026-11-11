@@ -5,6 +5,7 @@ toward 0. And the picture of the eight weights and the training and validation M
 import re
 
 from everything_ai.check import Code, CodeBox, FunctionBox, Mistake, same_value
+from everything_ai import yours
 
 SEED, N, D, N_TRAIN = 2, 40, 8, 12   # as in the worked example: 12 examples to train on, 28 to validate on
 LAMBDAS = [round(0.01 * k, 2) for k in range(21)]   # the slider: λ from 0 to 0.2
@@ -124,6 +125,7 @@ _SMALL = ([[0.2, 0.9], [0.5, 0.4], [0.8, 0.1], [0.3, 0.7]], [0.5, 1.7, 3.0, 1.1]
 EXERCISES = {
     "penalty-loss": CodeBox(
         name="penalty-loss",
+        picture=yours.steps(),
         start=_L_START,
         solution=_L,
         keep=["w = np.array([2.0, -1.5])", "lam = 0.1"],
@@ -167,6 +169,7 @@ EXERCISES = {
     ),
     "decay-gradients": FunctionBox(
         name="decay-gradients",
+        picture=yours.arrays(call=0),
         function="decay_gradients",
         start=_G_START,
         solution=_G,

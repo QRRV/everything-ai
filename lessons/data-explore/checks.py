@@ -5,6 +5,7 @@ weather station, and a function that counts how often each value of a column app
 import re
 
 from everything_ai.check import Code, CodeBox, FunctionBox, Mistake, same_value
+from everything_ai import yours
 
 STATION = "lessons/data-explore/station.csv"
 STATION_2 = "lessons/data-explore/station-2.csv"
@@ -107,6 +108,7 @@ def _counts(new: str) -> str:
 EXERCISES = {
     "missing": CodeBox(
         name="missing",
+        picture=yours.table(),
         start=_MISSING_START,
         solution=_MISSING,
         keep=["import pandas as pd", _READ],
@@ -154,6 +156,7 @@ EXERCISES = {
     ),
     "counts": FunctionBox(
         name="counts",
+        picture=yours.table(call=0),
         function="counts",
         start=_COUNTS_START,
         solution=_COUNTS,

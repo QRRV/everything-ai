@@ -5,6 +5,7 @@ that loss over w and b, with the two slopes at one point, or with three points t
 import re
 
 from everything_ai.check import FunctionBox, Mistake
+from everything_ai import yours
 
 # The houses that were sold, from the lesson ml-vocabulary: area in m², price in thousands of euros.
 AREA = [62, 85, 110, 48, 95, 130, 73, 58]
@@ -97,6 +98,7 @@ def _close(got, want) -> bool:
 EXERCISES = {
     "gradient": FunctionBox(
         name="gradient",
+        picture=yours.arrays(call=0),
         function="gradient",
         start=_START,
         solution=_SOLUTION,

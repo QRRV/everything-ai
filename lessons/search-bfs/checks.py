@@ -8,6 +8,7 @@ from dataclasses import dataclass, field
 
 from everything_ai import draw
 from everything_ai.check import FunctionBox, Mistake, Sort
+from everything_ai import yours
 
 
 class Maze(list):
@@ -292,6 +293,7 @@ _B = _b()
 EXERCISES = {
     "bfs": SearchBox(
         name="bfs",
+        picture=yours.search(0),
         function="bfs",
         start=_B_START,
         solution=_B,

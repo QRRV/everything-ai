@@ -12,6 +12,7 @@ import numpy as np
 
 from everything_ai import paths
 from everything_ai.check import FunctionBox, Mistake
+from everything_ai import yours
 
 DATA = "data/tiny-shakespeare.txt"   # about 1.1 MB of plays by Shakespeare: see data/README.md
 
@@ -240,6 +241,7 @@ def _p(inner: str = "        if total >= top:\n            cut = q\n            
 EXERCISES = {
     "top-k": FunctionBox(
         name="top-k",
+        picture=yours.arrays(call=0, shade=True),
         function="top_k",
         start=_K_START,
         solution=_k(),
@@ -276,6 +278,7 @@ EXERCISES = {
     ),
     "top-p": FunctionBox(
         name="top-p",
+        picture=yours.arrays(call=0, shade=True),
         function="top_p",
         start=_P_START,
         solution=_p(),

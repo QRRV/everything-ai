@@ -14,6 +14,7 @@ from statistics import mean
 
 from everything_ai import paths
 from everything_ai.check import FunctionBox, Mistake, _as_code
+from everything_ai import yours
 
 DATA = "data/tiny-shakespeare.txt"   # about 1.1 MB of plays by Shakespeare: see data/README.md
 LOOK = 7                             # the model looks at the last 7 characters of the text so far
@@ -183,6 +184,7 @@ _SOURCE = ["Whither?", "Good night.", "Away!"]
 EXERCISES = {
     "found-share": FunctionBox(
         name="found-share",
+        picture=yours.steps(call=0),
         function="found_share",
         start=_F_START,
         solution=_f(),

@@ -6,6 +6,7 @@ import functools
 import re
 
 from everything_ai.check import FunctionBox, Mistake, Value
+from everything_ai import yours
 
 # The houses that were sold, from the lesson ml-vocabulary: area in m², price in thousands of euros.
 AREA = [62, 85, 110, 48, 95, 130, 73, 58]
@@ -104,6 +105,7 @@ EXERCISES = {
     ),
     "search": FunctionBox(
         name="search",
+        picture=yours.steps(call=0),
         function="best_b",
         start=_SEARCH_START,
         solution=_SEARCH,

@@ -13,6 +13,7 @@ import re
 
 from everything_ai import paths, projects
 from everything_ai.check import ClassBox, FunctionBox, Mistake, PlotBox
+from everything_ai import yours
 
 
 def _checks(lesson: str, name: str):
@@ -237,6 +238,7 @@ def _first_two_wrong(got, text) -> bool:
 EXERCISES = {
     "grid": FunctionBox(
         name="grid",
+        picture=yours.steps(call=0),
         function="grid",
         start=_G_START,
         solution=_G,

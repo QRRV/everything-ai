@@ -5,6 +5,7 @@ comes from, and the picture of a face detector whose overall score hides one gro
 import re
 
 from everything_ai.check import Code, CodeBox, Mistake, Sort
+from everything_ai import yours
 
 # The worked example and the picture: 200 test faces, 180 of group A and 20 of group B.
 FACES = {"A": (180, 176), "B": (20, 12)}   # group: (faces in the test set, faces the detector found)
@@ -66,6 +67,7 @@ def _three_same(got, text) -> bool:
 EXERCISES = {
     "per-accent": CodeBox(
         name="per-accent",
+        picture=yours.steps(),
         start=_A_START,
         solution=_A,
         keep=[_ACCENTS],

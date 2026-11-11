@@ -4,6 +4,7 @@
 import re
 
 from everything_ai.check import CodeBox, Mistake
+from everything_ai import yours
 
 # The loop in the picture: a total of temperatures, step by step. Python works out the names after each step.
 PICTURE_ITEMS = [12, 15, 9]
@@ -99,6 +100,7 @@ REQUIRED = ["total", "range", "frost"]
 EXERCISES = {
     "total": CodeBox(
         name="total",
+        picture=yours.steps(),
         start="prices = [2.5, 4, 1.5, 3]\ntotal = 0\nfor price in prices:\n    ...\nprint(total)",
         solution="prices = [2.5, 4, 1.5, 3]\ntotal = 0\nfor price in prices:\n    total = total + price\nprint(total)",
         outcome="stdout",
@@ -148,6 +150,7 @@ EXERCISES = {
     ),
     "frost": CodeBox(
         name="frost",
+        picture=yours.steps(),
         start="temps = [12, -3, 5, -1, 0, 8, 7]\nfrost_days = 0\n...\nprint(frost_days)",
         solution="temps = [12, -3, 5, -1, 0, 8, 7]\nfrost_days = 0\nfor temp in temps:\n    if temp < 0:\n        frost_days = frost_days + 1\nprint(frost_days)",
         outcome="stdout",

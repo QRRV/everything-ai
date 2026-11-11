@@ -10,6 +10,7 @@ import functools
 import re
 
 from everything_ai.check import Code, CodeBox, FunctionBox, Mistake
+from everything_ai import yours
 
 DATA = "data/penguins.csv"   # the Palmer penguins (CC0): see data/README.md
 N_TRAIN, N_VAL = 206, 68     # of the 342 penguins with all measurements, split with seed 0 as in ml-project-tabular
@@ -151,6 +152,7 @@ def _is_mean(got) -> bool:
 EXERCISES = {
     "one-round": CodeBox(
         name="one-round",
+        picture=yours.arrays(show=("y",)),
         start=_R_START,
         solution=_R,
         keep=["rate = 0.1"],

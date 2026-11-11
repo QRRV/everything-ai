@@ -11,6 +11,7 @@ import numpy as np
 
 from everything_ai import paths
 from everything_ai.check import FunctionBox, Mistake
+from everything_ai import yours
 
 DATA = "data/tiny-shakespeare.txt"   # about 1.1 MB of plays by Shakespeare: see data/README.md
 
@@ -163,6 +164,7 @@ def _n(inner: str = "        p = P[row_of[text[i]], row_of[text[i + 1]]]\n      
 EXERCISES = {
     "nll": FunctionBox(
         name="nll",
+        picture=yours.steps(call=0),
         function="nll",
         start=_START,
         solution=_n(),

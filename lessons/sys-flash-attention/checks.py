@@ -12,6 +12,7 @@ import time
 import torch   # imported once, when the lesson opens: the first import takes longer than a check may
 
 from everything_ai.check import FunctionBox, Mistake
+from everything_ai import yours
 
 
 def grouped(n: float, lang: str) -> str:
@@ -177,6 +178,7 @@ _V = [[1.0, 0.0], [0.0, 1.0], [2.0, 2.0], [0.0, -1.0], [3.0, 1.0]]
 EXERCISES = {
     "online-attention": FunctionBox(
         name="online-attention",
+        picture=yours.steps(call=0),
         function="online_attention",
         start=_A_START,
         solution=_a(),
@@ -213,6 +215,7 @@ EXERCISES = {
     ),
     "merge": FunctionBox(
         name="merge",
+        picture=yours.steps(call=0),
         function="merge",
         start=_M_START,
         solution=_mg(),

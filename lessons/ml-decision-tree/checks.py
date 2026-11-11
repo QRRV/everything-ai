@@ -8,6 +8,7 @@ import functools
 import re
 
 from everything_ai.check import Code, CodeBox, FunctionBox, Mistake
+from everything_ai import yours
 
 DATA = "data/penguins.csv"   # the Palmer penguins (CC0): see data/README.md
 SPECIES = ["Adelie", "Chinstrap", "Gentoo"]   # in the order np.unique and scikit-learn sort them
@@ -241,6 +242,7 @@ def _s(parts: str = "[y[x <= t], y[x > t]]", wrong: str = "wrong + len(part) - m
 EXERCISES = {
     "split-mistakes": FunctionBox(
         name="split-mistakes",
+        picture=yours.curve("split_mistakes", [178 + i / 2 for i in range(95)], at=lambda t: (_X, _Y, t), role="loss", xlabel={"en": "threshold t", "nl": "drempel t"}),
         function="split_mistakes",
         start=_S_START,
         solution=_S,

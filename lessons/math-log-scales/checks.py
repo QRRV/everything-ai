@@ -7,6 +7,7 @@ import math
 import re
 
 from everything_ai.check import CodeBox, Mistake, PlotBox
+from everything_ai import yours
 
 RANKS = [1, 2, 5, 10, 20, 50, 100, 200, 500, 1000, 2000, 5000]
 COUNTS = [6283, 5690, 3759, 2375, 1507, 592, 306, 139, 50, 21, 9, 3]
@@ -107,6 +108,7 @@ EXERCISES = {
     ),
     "zipf-exponent": CodeBox(
         name="zipf-exponent",
+        picture=yours.steps(),
         start=_K_START,
         solution=_K,
         keep=["rank_a = 10", "count_a = 2375", "rank_b = 1000"],

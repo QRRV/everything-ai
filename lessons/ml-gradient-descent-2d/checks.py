@@ -5,6 +5,7 @@ picture: the loss landscape of the houses as a contour plot, with the path gradi
 import re
 
 from everything_ai.check import CodeBox, Mistake
+from everything_ai import yours
 
 # The houses that were sold, from the lesson ml-vocabulary: area in hundreds of m², price in thousands of euros.
 AREA = [0.62, 0.85, 1.10, 0.48, 0.95, 1.30, 0.73, 0.58]
@@ -96,6 +97,7 @@ def _close(got, want) -> bool:
 EXERCISES = {
     "descend-wb": CodeBox(
         name="descend-wb",
+        picture=yours.descent("b", lambda ns: ns["loss"](ns["w"], ns["b"])),
         start=_START,
         solution=_SOLUTION,
         keep=["area = np.array([62, 85, 110, 48, 95, 130, 73, 58]) / 100", "price = np.array([245, 310, 395, 198, 320, 465, 280, 232])",

@@ -12,6 +12,7 @@ import yaml
 
 from everything_ai import paths, projects
 from everything_ai.check import FunctionBox, Mistake, _show_rounded
+from everything_ai import yours
 
 LEVELS = ["any", "gpu8", "rec"]   # what a paper needs, from least to most, as in the route data
 CHOICE = "paper.json"             # the learner's choice, in work/projects/own/
@@ -180,6 +181,7 @@ _F_EN, _F_NL = "`{call}` gives `{got}`, and it should give `{want}`", "`{call}` 
 EXERCISES = {
     "fits": FunctionBox(
         name="fits",
+        picture=yours.steps(call=0),
         function="fits",
         start=_F_START,
         solution=_F,

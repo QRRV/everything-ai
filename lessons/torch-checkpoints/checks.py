@@ -11,6 +11,7 @@ import torch   # imported once, when the lesson opens: the first import takes lo
 
 from everything_ai import paths, projects
 from everything_ai.check import CodeBox, Mistake, Sort
+from everything_ai import yours
 
 # The modules of the lesson before: yours when they are there and give the course's results, else the course's
 # (template 1.3).
@@ -93,6 +94,7 @@ def _same_two(got) -> bool:
 EXERCISES = {
     "best-epoch": CodeBox(
         name="best-epoch",
+        picture=yours.steps(),
         start=_B_START,
         solution=_B,
         keep=["path = checkpoint_path(\"best.pt\")", "for epoch in range(30):", "    if val_losses[-1] == min(val_losses):",

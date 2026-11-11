@@ -14,6 +14,7 @@ from torch.utils.data import DataLoader, TensorDataset
 
 from everything_ai import paths, projects
 from everything_ai.check import CodeBox, Mistake, Sort
+from everything_ai import yours
 
 # The modules of the lesson before: yours when they are there and give the course's results, else the course's
 # (template 1.3).
@@ -148,6 +149,7 @@ def _three(got) -> bool:
 EXERCISES = {
     "curves": CodeBox(
         name="curves",
+        picture=yours.series(of=("train_losses", "val_losses"), names=[{"en": "train", "nl": "train"}, {"en": "validation", "nl": "validatie"}], xlabel="epoch", ylabel="loss"),
         start=_C_START,
         solution=_C,
         keep=["for epoch in range(30):", "    fit(model, loader, 1, 0.5)", _C_END],

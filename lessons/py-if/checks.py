@@ -4,6 +4,7 @@
 import re
 
 from everything_ai.check import CodeBox, Mistake, run_code
+from everything_ai import yours
 
 # The worked example, with its comments per language. Python works out what it shows for each amount.
 EXAMPLE = {
@@ -99,6 +100,7 @@ REQUIRED = ["below-zero", "boundary", "ticket"]
 EXERCISES = {
     "below-zero": CodeBox(
         name="below-zero",
+        picture=yours.steps(),
         start='temperature = -3\n...\n',
         keep=["temperature = -3"],
         solution='temperature = -3\nif temperature < 0:\n    print("Below zero")\nelse:\n    print("Zero or above")',
@@ -136,6 +138,7 @@ EXERCISES = {
     ),
     "ticket": CodeBox(
         name="ticket",
+        picture=yours.steps(),
         start='age = 15\n...\nprint(price)',
         keep=["age = 15"],
         solution='age = 15\nif age < 12:\n    price = 5\nelse:\n    price = 9\nprint(price)',

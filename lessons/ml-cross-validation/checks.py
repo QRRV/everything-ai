@@ -7,6 +7,7 @@ import functools
 import re
 
 from everything_ai.check import Code, CodeBox, Mistake
+from everything_ai import yours
 
 DATA = "data/penguins.csv"   # the Palmer penguins (CC0): see data/README.md
 SPECIES = ["Adelie", "Chinstrap", "Gentoo"]   # in the order np.unique sorts them, so a tie is broken the same way
@@ -148,6 +149,7 @@ _BEST = 1 + _RIGHT.index(min(_RIGHT))
 EXERCISES = {
     "folds": CodeBox(
         name="folds",
+        picture=yours.series(xs=[1, 2, 3, 4, 5, 6], xlabel={"en": "degree", "nl": "graad"}, ylabel="MSE"),
         start=_F_START,
         solution=_F,
         digits=2,

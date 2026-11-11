@@ -6,6 +6,7 @@ example, with a line and the baseline."""
 import re
 
 from everything_ai.check import Code, CodeBox, Mistake
+from everything_ai import yours
 
 
 def _houses():
@@ -72,6 +73,7 @@ def _m(body: str) -> str:
 EXERCISES = {
     "majority": CodeBox(
         name="majority",
+        picture=yours.steps(),
         start=_C_START,
         solution=_C,
         keep=["counts = np.eye(3)[y_train].sum(axis=0)"],
@@ -112,6 +114,7 @@ EXERCISES = {
     ),
     "mean-baseline": CodeBox(
         name="mean-baseline",
+        picture=yours.steps(),
         start=_M_START,
         solution=_M,
         # The check also runs the box with other training prices: a number typed in by hand does not change with them.

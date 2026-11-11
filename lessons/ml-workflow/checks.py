@@ -6,6 +6,7 @@ import html
 import re
 
 from everything_ai.check import Code, CodeBox, Mistake, Sort
+from everything_ai import yours
 
 
 def picture(boxes: list[tuple[str, str]], back: str, title: str, alt: str) -> str:
@@ -141,6 +142,7 @@ EXERCISES = {
     ),
     "pick-model": CodeBox(
         name="pick-model",
+        picture=yours.steps(),
         start=_P_START,
         solution=_P,
         keep=[_NAMES, _PRECISION, _RECALL],

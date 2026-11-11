@@ -11,6 +11,7 @@ import torch   # imported once, when the lesson opens: the first import takes lo
 from torch.utils.data import DataLoader, Dataset
 
 from everything_ai.check import CodeBox, Mistake
+from everything_ai import yours
 
 DATA = "data/qmnist-small.npz"   # the first 6,000 training and 1,000 test images of QMNIST: see data/README.md
 
@@ -113,6 +114,7 @@ _S = _s()
 EXERCISES = {
     "digits": CodeBox(
         name="digits",
+        picture=yours.steps(),
         start=_D_START,
         solution=_D,
         keep=["class Digits(Dataset):", "x, y = ds[7]", "[len(ds), len(x), y.item(), x.sum().item()]"],
@@ -150,6 +152,7 @@ EXERCISES = {
     ),
     "shuffled": CodeBox(
         name="shuffled",
+        picture=yours.descent("loss", lambda ns: float(ns["loss"])),
         start=_S_START,
         solution=_S,
         keep=["X, y = data()", "torch.manual_seed(2)", "for epoch in range(3):", _S_END],

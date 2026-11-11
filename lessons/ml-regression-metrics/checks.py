@@ -7,6 +7,7 @@ import math
 import re
 
 from everything_ai.check import Code, CodeBox, Mistake
+from everything_ai import yours
 
 W, B = 152.82, 52.32          # the line learned from the 32 training houses, as in ml-baselines
 CHEAPER = list(range(0, 201, 10))   # the slider: how many thousand euros less one test house sells for
@@ -154,6 +155,7 @@ def _near(value: float, tol: float):
 EXERCISES = {
     "mae-rmse": CodeBox(
         name="mae-rmse",
+        picture=yours.steps(),
         start=_M_START,
         solution=_M,
         digits=4,
@@ -206,6 +208,7 @@ EXERCISES = {
     ),
     "r2": CodeBox(
         name="r2",
+        picture=yours.steps(),
         start=_R_START,
         solution=_R,
         digits=4,

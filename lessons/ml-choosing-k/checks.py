@@ -8,6 +8,7 @@ import functools
 import re
 
 from everything_ai.check import Code, CodeBox, Mistake
+from everything_ai import yours
 
 DATA = "data/penguins.csv"   # the Palmer penguins (CC0): see data/README.md
 TWO = ["bill_length_mm", "flipper_length_mm"]
@@ -132,6 +133,7 @@ _W_SOLUTION = _w()
 EXERCISES = {
     "wcss": CodeBox(
         name="wcss",
+        picture=yours.steps(),
         start=_W_START,
         solution=_W_SOLUTION,
         keep=[_KM],

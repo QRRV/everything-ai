@@ -7,6 +7,7 @@ import math
 import re
 
 from everything_ai.check import Code, CodeBox, Mistake
+from everything_ai import yours
 
 HOURS = [1, 2, 2.5, 3, 4, 4.5, 5, 6, 7, 8]   # ten students: hours of study, and whether they passed
 PASSED = [0, 0, 1, 0, 0, 1, 1, 0, 1, 1]
@@ -69,6 +70,7 @@ def _a(new: str) -> str:
 EXERCISES = {
     "accuracy": CodeBox(
         name="accuracy",
+        picture=yours.steps(),
         start=_A_START,
         solution=_A,
         # The check also runs the box with other labels: a number typed in by hand does not change with them.

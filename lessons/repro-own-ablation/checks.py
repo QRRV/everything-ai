@@ -12,6 +12,7 @@ import time
 
 import torch  # noqa: F401  loaded here: a first import inside the time limit of a check would not finish in it
 
+from everything_ai import yours
 from everything_ai import paths, projects
 from everything_ai.check import MISSING, TIME_LIMIT, CodeBox, FunctionBox, Mistake, Result, Timeout, _fill, _show_rounded, is_empty_text, run_code, with_time_limit
 
@@ -289,6 +290,7 @@ _K_WRONG = {
 _COURSE_CASE = ("lower", [12.5, 12.9, 12.4], [13.8, 13.2, 14.1], [12.9, 13.6, 13.6])
 EXERCISES["kept"] = FunctionBox(
     name="kept",
+    picture=yours.steps(call=0),
     function="kept",
     start=_K_START,
     solution=K_CODE,

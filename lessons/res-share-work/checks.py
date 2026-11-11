@@ -15,6 +15,7 @@ from importlib import metadata
 
 from everything_ai import paths, projects
 from everything_ai.check import FunctionBox, Mistake, Sort, _show_rounded
+from everything_ai import yours
 
 
 def _checks(lesson: str, name: str):
@@ -94,6 +95,7 @@ _SOLUTION = {"kit": "share", "paper": "link", "versions": "share", "token": "out
 EXERCISES = {
     "checksums": FunctionBox(
         name="checksums",
+        picture=yours.steps(call=0),
         function="checksums",
         start=_C_START,
         solution=_C,

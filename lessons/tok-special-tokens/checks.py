@@ -9,6 +9,7 @@ from functools import cache
 
 from everything_ai import draw, paths, projects
 from everything_ai.check import FunctionBox, Mistake, Timeout, run_code, with_time_limit
+from everything_ai import yours
 
 # encode imports merge_ids of tok-byte-level and PATTERN of tok-pre-tokenization; decode imports decode of
 # tok-byte-level; the demo trains with train_pre_bpe. Where one of those is missing or broken, the course's version
@@ -126,6 +127,7 @@ def _d(body: str = _D_BODY) -> str:
 EXERCISES = {
     "encode": FunctionBox(
         name="encode",
+        picture=yours.tokens(0),
         function="encode",
         start=_E_START,
         solution=_e(),
@@ -171,6 +173,7 @@ EXERCISES = {
     ),
     "decode": FunctionBox(
         name="decode",
+        picture=yours.steps(call=0),
         function="decode",
         start=_D_START,
         solution=_d(),

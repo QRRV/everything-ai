@@ -14,6 +14,7 @@ from decimal import Decimal
 
 from everything_ai import paths, projects
 from everything_ai.check import FunctionBox, Mistake, run_code
+from everything_ai import yours
 
 
 def _checks(lesson: str, name: str):
@@ -285,6 +286,7 @@ _L = [3.4, 2.9, 2.55, 2.35]
 EXERCISES = {
     "best-floor": FunctionBox(
         name="best-floor",
+        picture=yours.steps(call=0),
         function="best_floor",
         start=_F_START,
         solution=_f(),
@@ -321,6 +323,7 @@ EXERCISES = {
     ),
     "predict": FunctionBox(
         name="predict",
+        picture=yours.curve("predict", [10 ** (5 + i / 20) for i in range(61)], at=lambda x: (x, [1e5, 3e5, 1e6, 3e6], [3.4, 2.9, 2.55, 2.35], 1.5), role="loss", xlog=True, xlabel={"en": "tokens", "nl": "tokens"}, ylabel="loss"),
         function="predict",
         start=_P_START,
         solution=_P_BODY,
@@ -357,6 +360,7 @@ EXERCISES = {
     ),
     "compute-optimal": FunctionBox(
         name="compute-optimal",
+        picture=yours.steps(call=0),
         function="compute_optimal",
         start=_C_START,
         solution=_C_BODY,

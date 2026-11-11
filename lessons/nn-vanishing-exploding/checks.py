@@ -10,6 +10,7 @@ import re
 import numpy as np
 
 from everything_ai.check import FunctionBox, Mistake
+from everything_ai import yours
 
 
 def sigmoid(z):
@@ -143,6 +144,7 @@ _R_SIZE_FIRST = _R_HEAD + "    h = x\n    zs = []\n    for W in Ws:\n        z =
 EXERCISES = {
     "chain-gradient": FunctionBox(
         name="chain-gradient",
+        picture=yours.steps(call=0),
         function="chain_gradient",
         start=_C_START,
         solution=_c(),
@@ -178,6 +180,7 @@ EXERCISES = {
     ),
     "relu-sizes": FunctionBox(
         name="relu-sizes",
+        picture=yours.series(call=0, role="grad", xlabel={"en": "layer, from the back", "nl": "laag, van achteren"}),
         function="relu_grad_sizes",
         start=_R_START,
         solution=_r(),

@@ -5,6 +5,7 @@ picture of the training and validation MSE of every degree for the temperatures 
 import re
 
 from everything_ai.check import Code, CodeBox, Mistake
+from everything_ai import yours
 
 SEED, N, DEGREES = 75, 32, range(1, 10)   # as in the worked example: 12 to train, 10 to validate, 10 to test
 
@@ -96,6 +97,7 @@ _FIT_ON_VAL = Mistake("fit-on-val", matches=lambda got, text: re.search(r"^[^#\n
 EXERCISES = {
     "choose-degree": CodeBox(
         name="choose-degree",
+        picture=yours.steps(),
         start=_C_START,
         solution=_C,
         keep=["for degree in degrees:"],

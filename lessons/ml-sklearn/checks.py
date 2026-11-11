@@ -5,6 +5,7 @@ predicts the mean, with the same two steps."""
 import re
 
 from everything_ai.check import Code, CodeBox, Mistake
+from everything_ai import yours
 
 # The houses of the lesson on linear regression, as a table: area in hundreds of m², garden (1 = yes), distance to
 # the station in km, and the price in thousands of euros.
@@ -54,6 +55,7 @@ _NOT_FITTED = lambda e: "not fitted" in str(e) or (isinstance(e, AttributeError)
 EXERCISES = {
     "fit-students": CodeBox(
         name="fit-students",
+        picture=yours.steps(),
         start=_F_START,
         solution=_F,
         keep=['y = df["grade"]', "model.coef_"],
@@ -113,6 +115,7 @@ EXERCISES = {
     ),
     "mean-model": CodeBox(
         name="mean-model",
+        picture=yours.steps(),
         start=_M_START,
         solution=_M,
         keep=["mse_model = ((y - model.predict(X)) ** 2).mean()", "mean_model = DummyRegressor()", "[mse_model, mse_mean]"],

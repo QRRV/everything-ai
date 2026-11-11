@@ -11,6 +11,7 @@ from collections import Counter
 
 from everything_ai import course, draw, progress
 from everything_ai.check import FunctionBox, Mistake, Sort
+from everything_ai import yours
 
 LEVELS = ["basis", "gevorderd", "expert"]
 CORE = [s["id"] for s in course.main_route() if not s["extra"]]   # the main route without its extra lessons
@@ -228,6 +229,7 @@ EXERCISES = {
     ),
     "can-begin": FunctionBox(
         name="can-begin",
+        picture=yours.steps(call=0),
         function="can_begin",
         start=_C_START,
         solution=C_CODE,

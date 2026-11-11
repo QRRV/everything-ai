@@ -11,6 +11,7 @@ import re
 import numpy as np
 
 from everything_ai.check import FunctionBox, Mistake, Value
+from everything_ai import yours
 
 COFFEE = "data/photos/coffee.png"       # 600 by 400 pixels, RGB; from the sample data of scikit-image
 PART = (slice(0, 300), slice(100, 500))  # the part with the cup: rows 0 to 300, columns 100 to 500
@@ -259,6 +260,7 @@ _CLEARED = {"en": "There is no code in the box any more. Undo with Ctrl+Z (on a 
 EXERCISES = {
     "mean": FunctionBox(
         name="mean",
+        picture=yours.arrays(call=0, shade=True),
         function="mean_filter",
         start=_MEAN_START,
         solution=_MEAN,
@@ -345,6 +347,7 @@ EXERCISES = {
     ),
     "median": FunctionBox(
         name="median",
+        picture=yours.arrays(call=0, shade=True),
         function="median_filter",
         start=_MED_START,
         solution=_MED,

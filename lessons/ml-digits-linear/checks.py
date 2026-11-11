@@ -8,6 +8,7 @@ import re
 
 from everything_ai import paths, projects
 from everything_ai.check import FunctionBox, Mistake, Timeout, run_code, with_time_limit
+from everything_ai import yours
 
 DATA = "data/qmnist-small.npz"   # the first 6,000 training and 1,000 test images of QMNIST: see data/README.md
 K, LR, STEPS = 10, 1.0, 100       # ten digits; the demo trains with a learning rate of 1, for 100 steps
@@ -268,6 +269,7 @@ _VISIBLE = ([[1, 0], [0, 1], [1, 1], [0, 0]], [0, 2, 2, 1], [[0, 0], [0, 0], [0,
 EXERCISES = {
     "cross-entropy-gradients": FunctionBox(
         name="cross-entropy-gradients",
+        picture=yours.arrays(call=0),
         function="cross_entropy_gradients",
         start=_G_START,
         solution=_G,
@@ -351,6 +353,7 @@ EXERCISES = {
     ),
     "fit-softmax": FunctionBox(
         name="fit-softmax",
+        picture=yours.arrays(call=0),
         function="fit",
         start=_FIT_START,
         solution=_FIT,

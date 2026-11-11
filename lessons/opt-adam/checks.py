@@ -14,6 +14,7 @@ from torch.utils.data import DataLoader, TensorDataset
 
 from everything_ai import paths
 from everything_ai.check import ClassBox, FunctionBox, Mistake
+from everything_ai import yours
 
 DATA = "data/qmnist-small.npz"   # the first 6,000 training and 1,000 test images of QMNIST: see data/README.md
 AT_STEP = 51    # the step of the picture
@@ -171,6 +172,7 @@ _A_SCENARIOS = [
 EXERCISES = {
     "adam-steps": FunctionBox(
         name="adam-steps",
+        picture=yours.series(call=0, xs=list(range(1, 101)), role="param", xlabel="t"),
         function="adam_steps",
         start=_S_START,
         solution=_s(),
@@ -210,6 +212,7 @@ EXERCISES = {
     ),
     "adam-optimizer": ClassBox(
         name="adam-optimizer",
+        picture=yours.objects(0),
         start=_A_START,
         solution=_a(),
         scenarios=_A_SCENARIOS,

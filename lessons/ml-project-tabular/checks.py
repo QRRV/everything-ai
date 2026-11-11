@@ -7,6 +7,7 @@ import functools
 import re
 
 from everything_ai.check import Code, CodeBox, Mistake, run_code, same_value
+from everything_ai import yours
 
 DATA = "data/penguins.csv"   # the Palmer penguins (CC0): see data/README.md
 SPECIES = ["Adelie", "Chinstrap", "Gentoo"]
@@ -99,6 +100,7 @@ _KEPT = {"en": "Your code may be right, but the check needs the line `{line}` ex
 EXERCISES = {
     "model": CodeBox(
         name="model",
+        picture=yours.steps(),
         start=_M_START,
         solution=_M,
         keep=_KEEP,
@@ -151,6 +153,7 @@ EXERCISES = {
     ),
     "mistakes": CodeBox(
         name="mistakes",
+        picture=yours.table(),
         start=_W_START,
         solution=_W,
         keep=_KEEP,

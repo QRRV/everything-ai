@@ -15,6 +15,7 @@ import torch   # imported once, when the lesson opens: the first import takes lo
 from everything_ai import gpt2_tokenizer, hub, models
 from everything_ai.lesson import download_card
 from everything_ai.check import FunctionBox, Mistake, run_code
+from everything_ai import yours
 
 gpt2_tokenizer.offline()   # before any tiktoken.get_encoding("gpt2"), also in the lesson's own cells
 import tiktoken  # noqa: E402  (after offline(): tiktoken reads its cache folder when it loads a file)
@@ -239,6 +240,7 @@ _T_WRONG = {
 EXERCISES = {
     "next-probs": FunctionBox(
         name="next-probs",
+        picture=yours.histogram(call=0, bins=30),
         function="next_probs",
         start=_P_START,
         solution=_P_HEAD + _P_RIGHT,
@@ -285,6 +287,7 @@ EXERCISES = {
     ),
     "top-tokens": FunctionBox(
         name="top-tokens",
+        picture=yours.steps(call=0),
         function="top_tokens",
         start=_T_START,
         solution=_T_HEAD + _T_TOP + _T_LOOP,

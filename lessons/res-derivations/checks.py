@@ -10,6 +10,7 @@ import re
 import numpy as np
 
 from everything_ai.check import FunctionBox, Mistake, run_code
+from everything_ai import yours
 
 WIDTH, LAYERS, BATCH, SEEDS = 256, 10, 1000, 8
 
@@ -169,6 +170,7 @@ _TEXTS = {
 EXERCISES = {
     "line2-sides": FunctionBox(
         name="line2-sides",
+        picture=yours.steps(call=0),
         function="line2_sides",
         start=_2_START,
         solution=_l2(),
@@ -209,6 +211,7 @@ EXERCISES = {
     ),
     "line3-sides": FunctionBox(
         name="line3-sides",
+        picture=yours.steps(call=0),
         function="line3_sides",
         start=_3_START,
         solution=_l3(),

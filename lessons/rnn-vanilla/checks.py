@@ -8,6 +8,7 @@ import math
 import re
 
 from everything_ai.check import FunctionBox, Mistake
+from everything_ai import yours
 
 STEPS, NOISE = 30, 0.5
 
@@ -131,6 +132,7 @@ _WRONG = {
 EXERCISES = {
     "bptt": FunctionBox(
         name="bptt",
+        picture=yours.steps(call=0),
         function="bptt",
         start=_START,
         solution=_b(),

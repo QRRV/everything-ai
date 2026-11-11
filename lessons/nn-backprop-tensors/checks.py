@@ -13,6 +13,7 @@ import torch   # imported once, when the lesson opens: the first import takes lo
 
 from everything_ai import paths, projects
 from everything_ai.check import ClassBox, FunctionBox, Mistake, Timeout, run_code, with_time_limit
+from everything_ai import yours
 
 DATA = "data/qmnist-small.npz"   # the first 6,000 training and 1,000 test images of QMNIST: see data/README.md
 HIDDEN, LR, EPOCHS, BATCH = 64, 0.5, 5, 64   # the demo: 64 hidden neurons, a learning rate of 0.5, 5 epochs of 64
@@ -247,6 +248,7 @@ _SCENARIOS = [_SMALL + "np.asarray(dW2).tolist()", _SMALL + "np.asarray(db2).tol
 EXERCISES = {
     "linear-backward": FunctionBox(
         name="linear-backward",
+        picture=yours.arrays(call=0),
         function="linear_backward",
         start=_L_START,
         solution=_l(),

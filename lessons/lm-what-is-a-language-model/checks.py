@@ -9,6 +9,7 @@ from collections import Counter
 
 from everything_ai import paths
 from everything_ai.check import CodeBox, FunctionBox, Mistake, same_value
+from everything_ai import yours
 
 DATA = "data/tiny-shakespeare.txt"   # about 1.1 MB of plays by Shakespeare: see data/README.md
 LOOK = 3                             # the model looks at the last 3 characters of the text so far
@@ -112,6 +113,7 @@ _P = _p()
 EXERCISES = {
     "examples": FunctionBox(
         name="examples",
+        picture=yours.steps(call=0),
         function="examples",
         start=_E_START,
         solution=_E,
@@ -159,6 +161,7 @@ EXERCISES = {
     ),
     "real-probs": CodeBox(
         name="real-probs",
+        picture=yours.steps(),
         start=_P_START,
         solution=_P,
         names={"next_probs": next_probs},

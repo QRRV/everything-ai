@@ -9,6 +9,7 @@ import re
 import numpy as np
 
 from everything_ai.check import FunctionBox, Mistake
+from everything_ai import yours
 
 
 # --- the picture: the error of a forward and a central difference, for every h ------------------------------------------------
@@ -143,6 +144,7 @@ def _r(body: str = "np.abs(a - n) / np.maximum(np.abs(a), np.abs(n))") -> str:
 EXERCISES = {
     "numerical-grad": FunctionBox(
         name="numerical-grad",
+        picture=yours.arrays(call=0),
         function="numerical_grad",
         start=_N_START,
         solution=_n(),
@@ -185,6 +187,7 @@ EXERCISES = {
     ),
     "relative-error": FunctionBox(
         name="relative-error",
+        picture=yours.arrays(call=0),
         function="relative_error",
         start=_R_START,
         solution=_r(),

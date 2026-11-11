@@ -8,6 +8,7 @@ import numpy as np
 
 from everything_ai import draw
 from everything_ai.check import FunctionBox, Mistake
+from everything_ai import yours
 
 # The made-up embeddings of attn-idea: how much a word is about money, and how much about water.
 WORDS = {"the": [0.5, 0.5], "river": [0.0, 2.0], "bank": [1.0, 1.0], "account": [2.0, 0.0]}
@@ -96,6 +97,7 @@ def _a(scores: str = "X @ X.T", out: str = "A @ X") -> str:
 EXERCISES = {
     "softmax-rows": FunctionBox(
         name="softmax-rows",
+        picture=yours.arrays(call=0, shade=True),
         function="softmax_rows",
         start=_S_START,
         solution=_s(),
@@ -141,6 +143,7 @@ EXERCISES = {
     ),
     "self-attention": FunctionBox(
         name="self-attention",
+        picture=yours.arrays(call=0),
         function="attend_all",
         start=_A_START,
         solution=_a(),

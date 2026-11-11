@@ -4,6 +4,7 @@
 import re
 
 from everything_ai.check import CodeBox, Mistake
+from everything_ai import yours
 
 # The loop in the picture: n doubles while n < 20. For each check: what it says, and n after the round.
 PICTURE_LIMIT = 20
@@ -71,6 +72,7 @@ REQUIRED = ["double", "break", "first-long"]
 EXERCISES = {
     "double": CodeBox(
         name="double",
+        picture=yours.steps(),
         start="target = 1000\ncount = 1\nhours = 0\nwhile ...:\n    ...\nprint(hours)",
         solution="target = 1000\ncount = 1\nhours = 0\nwhile count < target:\n    count = count * 2\n    hours = hours + 1\nprint(hours)",
         outcome="stdout",
@@ -112,6 +114,7 @@ EXERCISES = {
     ),
     "first-long": CodeBox(
         name="first-long",
+        picture=yours.steps(),
         start='words = ["sun", "rain", "thunder", "fog", "drizzle"]\nfirst_long = "none"\nfor word in words:\n    ...\nprint(first_long)',
         solution='words = ["sun", "rain", "thunder", "fog", "drizzle"]\nfirst_long = "none"\nfor word in words:\n    if len(word) > 5:\n        first_long = word\n        break\nprint(first_long)',
         outcome="stdout",

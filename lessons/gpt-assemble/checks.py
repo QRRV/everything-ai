@@ -15,6 +15,7 @@ import torch.nn.functional as F
 
 from everything_ai import paths, projects
 from everything_ai.check import ClassBox, FunctionBox, Mistake, Timeout, run_code, with_time_limit
+from everything_ai import yours
 
 # GPT imports Block of attn-transformer-block, which imports CausalSelfAttention; where those are missing or broken,
 # the course's versions stand in (template 1.3).
@@ -228,6 +229,7 @@ EXERCISES = {
     ),
     "gpt-examples": FunctionBox(
         name="gpt-examples",
+        picture=yours.arrays(call=0),
         function="gpt_examples",
         start=_X_START,
         solution=_x(),

@@ -7,6 +7,7 @@ import math
 import re
 
 from everything_ai.check import CodeBox, Mistake, run_code
+from everything_ai import yours
 
 # The program in the picture. For each line: the names and their values after it, and what it shows under the cell.
 STEPS = ["price = 2.5", "cups = 3", "total = price * cups", "print(total)"]
@@ -151,6 +152,7 @@ REQUIRED = ["coffee", "lock", "divide"]
 EXERCISES = {
     "coffee": CodeBox(
         name="coffee",
+        picture=yours.steps(),
         start="price = ...\ncups = ...\ntotal = ...\nprint(total)",
         solution="price = 2.5\ncups = 3\ntotal = price * cups\nprint(total)",
         outcome="stdout",
@@ -182,6 +184,7 @@ EXERCISES = {
     ),
     "lock": CodeBox(
         name="lock",
+        picture=yours.steps(),
         start="digits = 4\ncodes = ...\nprint(codes)",
         solution="digits = 4\ncodes = 10 ** digits\nprint(codes)",
         outcome="stdout",

@@ -7,6 +7,7 @@ import html
 import re
 
 from everything_ai.check import CodeBox, FunctionBox, Mistake
+from everything_ai import yours
 
 CORNERS = [(0, 0), (0, 1), (1, 0), (1, 1)]
 BIASES = [round(-2.5 + 0.1 * k, 1) for k in range(31)]   # the slider: b from -2.5 to 0.5, with w = (1, 1)
@@ -113,6 +114,7 @@ def _outputs(want):
 EXERCISES = {
     "step-neuron": FunctionBox(
         name="step-neuron",
+        picture=yours.grid("step_neuron", 2, 2, at=lambda i, j: ([i, j], [1, 1], -1.5), title={"en": "What your step_neuron gives for the inputs [i, j]", "nl": "Wat jouw step_neuron geeft voor de inputs [i, j]"}),
         function="step_neuron",
         start=_S_START,
         solution=_S,
@@ -159,6 +161,7 @@ EXERCISES = {
     ),
     "one-corner": CodeBox(
         name="one-corner",
+        picture=yours.steps(),
         start=_C_START,
         solution=_C,
         keep=["for x in [[0, 0], [0, 1], [1, 0], [1, 1]]:", "z = np.dot(w, x) + b", "if z > 0:"],

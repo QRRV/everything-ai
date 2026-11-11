@@ -13,6 +13,7 @@ import numpy as np
 
 from everything_ai import paths
 from everything_ai.check import FunctionBox, Mistake, same_value
+from everything_ai import yours
 
 DATA = "data/course-spam-messages.json"   # 60 short messages written by the course: see data/README.md
 CLASSES = ["spam", "ok"]
@@ -228,6 +229,7 @@ _L = _l()
 EXERCISES = {
     "log-score": FunctionBox(
         name="log-score",
+        picture=yours.steps(call=0),
         function="log_score",
         start=_START,
         solution=_L,

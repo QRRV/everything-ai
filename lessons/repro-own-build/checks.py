@@ -13,6 +13,7 @@ from dataclasses import dataclass
 import torch  # noqa: F401  loaded here: a first import inside the time limit of a check would not finish in it
 
 from everything_ai import paths
+from everything_ai import yours
 from everything_ai.check import (MISSING, PLAIN_ERRORS, TIME_LIMIT, CodeBox, FunctionBox, Mistake, Result, Run, Timeout, _fill,
                                  _plain_kind, _tb_frames, is_empty_text, run_code, with_time_limit)
 
@@ -236,6 +237,7 @@ _DOTS = Mistake("dots-left", matches=lambda got, text: re.search(r"^[^#\n]*\.\.\
 EXERCISES = {
     "contract": FunctionBox(
         name="contract",
+        picture=yours.steps(call=0),
         function="contract",
         start=_C_START,
         solution=C_CODE,

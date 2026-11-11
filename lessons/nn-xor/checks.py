@@ -7,6 +7,7 @@ import math
 import re
 
 from everything_ai.check import FunctionBox, Mistake, Sort
+from everything_ai import yours
 
 CORNERS = [(0, 0), (0, 1), (1, 0), (1, 1)]
 XOR = [0, 1, 1, 0]
@@ -129,6 +130,7 @@ EXERCISES = {
     ),
     "perceptron-step": FunctionBox(
         name="perceptron-step",
+        picture=yours.steps(call=0),
         function="perceptron_step",
         start=_P_START,
         solution=_P,

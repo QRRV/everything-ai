@@ -7,6 +7,7 @@ import re
 from pathlib import Path
 
 from everything_ai.check import FunctionBox, Mistake
+from everything_ai import yours
 
 STUDENTS = Path(__file__).parent.parent / "ml-vocabulary" / "students.csv"
 
@@ -47,6 +48,7 @@ _CLASS_NAME = ("def delay_classes(delays):\n    classes = []\n    for delay in d
 EXERCISES = {
     "delay-classes": FunctionBox(
         name="delay-classes",
+        picture=yours.steps(call=0),
         function="delay_classes",
         start=_START,
         solution=_SOLUTION,

@@ -5,6 +5,7 @@ digit labels by adding up their one-hot vectors."""
 import re
 
 from everything_ai.check import CodeBox, Code, FunctionBox, Mistake
+from everything_ai import yours
 
 # The lesson is done when these are correct. "how-long" is the choice question in the lesson.
 REQUIRED = ["how-long", "one-hot", "count-classes"]
@@ -35,6 +36,7 @@ def _c(new: str) -> str:
 EXERCISES = {
     "one-hot": FunctionBox(
         name="one-hot",
+        picture=yours.arrays(call=0),
         function="one_hot",
         start=_O_START,
         solution=_O,
@@ -75,6 +77,7 @@ EXERCISES = {
     ),
     "count-classes": CodeBox(
         name="count-classes",
+        picture=yours.arrays(show=("labels",)),
         start=_C_START,
         solution=_C,
         keep=[],

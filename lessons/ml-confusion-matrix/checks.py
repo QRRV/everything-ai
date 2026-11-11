@@ -6,6 +6,7 @@ recall as the decision threshold moves on the slider."""
 import re
 
 from everything_ai.check import Code, CodeBox, Mistake
+from everything_ai import yours
 
 # Forty mails: the probability of spam a filter gave each, and whether it is spam. Ten are spam.
 SPAM = [0.95, 0.9, 0.85, 0.8, 0.7, 0.65, 0.55, 0.45, 0.35, 0.2]
@@ -85,6 +86,7 @@ def _m(body: str) -> str:
 EXERCISES = {
     "precision-recall": CodeBox(
         name="precision-recall",
+        picture=yours.steps(),
         start=_P_START,
         solution=_P,
         keep=["tp = np.sum(pred * y)"],
@@ -126,6 +128,7 @@ EXERCISES = {
     ),
     "matrix": CodeBox(
         name="matrix",
+        picture=yours.arrays(shade=True),
         start=_M_START,
         solution=_M,
         keep=["for i in range(len(labels)):"],

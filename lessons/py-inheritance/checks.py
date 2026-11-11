@@ -5,6 +5,7 @@ __init__ that calls the parent's with super(). Each is a class written in a box 
 import re
 
 from everything_ai.check import ClassBox, Mistake
+from everything_ai import yours
 
 # A `...` that is still there, found before the code runs: a method that is still `...` gives back nothing,
 # and that should not be explained as some other mistake.
@@ -46,6 +47,7 @@ _HAS_SUPER = r"\bsuper\s*\("
 EXERCISES = {
     "greeter": ClassBox(
         name="greeter",
+        picture=yours.objects(0),
         start=_DUTCH_START,
         solution=_DUTCH,
         scenarios=[
@@ -93,6 +95,7 @@ EXERCISES = {
     ),
     "savings": ClassBox(
         name="savings",
+        picture=yours.objects(0),
         start=_SAVINGS_START,
         solution=_SAVINGS,
         scenarios=[

@@ -10,6 +10,7 @@ import re
 import numpy as np
 
 from everything_ai.check import CodeBox, FunctionBox, Mistake
+from everything_ai import yours
 
 COFFEE = "data/photos/coffee.png"        # the photo of cv-image-files: 400 rows by 600 columns, RGB
 LABELS = "data/photos/fruit-labels.png"  # the label of every pixel of the drawing of fruit: 0 the tablecloth, 1 to 4 fruit
@@ -207,6 +208,7 @@ def _is_image(got, text) -> bool:
 EXERCISES = {
     "value": FunctionBox(
         name="value",
+        picture=yours.steps(call=0),
         function="value_at",
         start=_START,
         solution=_SOLUTION,
@@ -277,6 +279,7 @@ EXERCISES = {
     ),
     "half": CodeBox(
         name="half",
+        picture=yours.image(show=("coffee",)),
         start=_HALF_START,
         solution=_HALF_SOLUTION,
         first=[_DOTS],

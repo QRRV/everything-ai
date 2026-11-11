@@ -10,6 +10,7 @@ import numpy as np
 import torch   # imported once, when the lesson opens: the first import takes longer than a check may
 
 from everything_ai.check import ClassBox, FunctionBox, Mistake
+from everything_ai import yours
 
 START = (10.0, 1.0)
 STEEP = 100.0   # the valley is 100 times as steep across (w2) as along (w1)
@@ -146,6 +147,7 @@ _M_SCENARIOS = [
 EXERCISES = {
     "momentum-steps": FunctionBox(
         name="momentum-steps",
+        picture=yours.series(call=0, role="param", xlabel={"en": "step", "nl": "stap"}),
         function="momentum_steps",
         start=_S_START,
         solution=_s(),
@@ -187,6 +189,7 @@ EXERCISES = {
     ),
     "momentum-sgd": ClassBox(
         name="momentum-sgd",
+        picture=yours.objects(0),
         start=_M_START,
         solution=_m(),
         scenarios=_M_SCENARIOS,

@@ -5,6 +5,7 @@ building block of the lesson takes: the loss for every w, its slope, and where g
 import re
 
 from everything_ai.check import CodeBox, Mistake
+from everything_ai import yours
 
 # The houses that were sold, from the lesson ml-vocabulary: area in m², price in thousands of euros.
 AREA = [62, 85, 110, 48, 95, 130, 73, 58]
@@ -65,6 +66,7 @@ def _close(got, want) -> bool:
 EXERCISES = {
     "descend-b": CodeBox(
         name="descend-b",
+        picture=yours.descent("b", lambda ns: ns["loss"](ns["w"], ns["b"]), over=lambda ns, v: ns["loss"](ns["w"], v)),
         start=_START,
         solution=_SOLUTION,
         keep=["area = np.array([62, 85, 110, 48, 95, 130, 73, 58])", "price = np.array([245, 310, 395, 198, 320, 465, 280, 232])",

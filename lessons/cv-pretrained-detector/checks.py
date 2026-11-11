@@ -14,6 +14,7 @@ import urllib.error
 import numpy as np
 import torch   # imported once, when the lesson opens: the first import takes longer than a check may
 
+from everything_ai import yours
 from everything_ai import caltech, chart, detr, hub, paths
 from everything_ai.lesson import download_card
 from everything_ai.check import FunctionBox, Mistake, run_code, with_time_limit
@@ -438,6 +439,7 @@ def _exercise():
     visible, hidden = _cases()
     return FunctionBox(
         name="pixels",
+        picture=yours.steps(call=0),
         function="to_pixels",
         start=_START,
         solution=_SOLUTION,

@@ -10,6 +10,7 @@ import re
 import numpy as np
 
 from everything_ai.check import FunctionBox, Mistake
+from everything_ai import yours
 
 STEPS, HIDDEN, INPUTS, SEEDS, FORGET_BIAS = 60, 16, 4, 8, 3.0
 
@@ -125,6 +126,7 @@ _VISIBLE = ([1.0], [0.5], [2.0], [[1.0], [2.0], [0.5], [-1.0]], [[0.5], [1.0], [
 EXERCISES = {
     "lstm-step": FunctionBox(
         name="lstm-step",
+        picture=yours.steps(call=0),
         function="lstm_step",
         start=_START,
         solution=_b(),

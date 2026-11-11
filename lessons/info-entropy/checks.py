@@ -14,6 +14,7 @@ import numpy as np
 
 from everything_ai import paths
 from everything_ai.check import FunctionBox, Mistake
+from everything_ai import yours
 
 PLAYS = "data/tiny-shakespeare.txt"   # about 1.1 MB of plays by Shakespeare: see data/README.md
 PENGUINS = "data/penguins.csv"         # 344 penguins of the Palmer Archipelago: see data/README.md
@@ -204,6 +205,7 @@ def _b(last: str = "    return -np.sum(p * np.log2(p)) * len(text)\n") -> str:
 EXERCISES = {
     "entropy": FunctionBox(
         name="entropy",
+        picture=yours.curve("entropy", [i / 100 for i in range(101)], at=lambda p: (np.array([p, 1 - p]),), role="ink", xlabel={"en": "p, the chance of heads", "nl": "p, de kans op kop"}, ylabel="bits"),
         function="entropy",
         start=_E_START,
         solution=_e(),
@@ -242,6 +244,7 @@ EXERCISES = {
     ),
     "min-bits": FunctionBox(
         name="min-bits",
+        picture=yours.steps(call=0),
         function="min_bits",
         start=_B_START,
         solution=_b(),

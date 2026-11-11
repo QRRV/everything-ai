@@ -8,6 +8,7 @@ from pathlib import Path
 
 from everything_ai import paths, projects
 from everything_ai.check import FunctionBox, Mistake, PlotBox, run_code
+from everything_ai import yours
 
 LETTERS_LINE = 'LETTERS = "abcdefghijklmnopqrstuvwxyz"\n\n\n'
 
@@ -107,6 +108,7 @@ _COUNT_TEXTS = {
 EXERCISES = {
     "count-letters": FunctionBox(
         name="count-letters",
+        picture=yours.bars(0),
         function="count_letters",
         start=_LETTERS_START,
         solution=_LETTERS,
@@ -151,6 +153,7 @@ EXERCISES = {
     ),
     "count-pairs": FunctionBox(
         name="count-pairs",
+        picture=yours.bars(0),
         function="count_pairs",
         start=_PAIRS_START,
         solution=_PAIRS,

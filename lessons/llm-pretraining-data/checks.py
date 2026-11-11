@@ -6,6 +6,7 @@ lesson itself (open weights against open source, and an opt-out under the EU's t
 import html
 
 from everything_ai.check import FunctionBox, Mistake, Sort, same_value
+from everything_ai import yours
 
 # Dolma v1.6, the open corpus of the Allen Institute for AI: Llama tokens per source, in billions (Soldaini and others,
 # 2024, "Dolma: an Open Corpus of Three Trillion Tokens for Language Model Pretraining Research", ACL 2024, table 1).
@@ -159,6 +160,7 @@ EXERCISES = {
     ),
     "by-license": FunctionBox(
         name="by-license",
+        picture=yours.bars(0),
         function="by_license",
         start=_B_START,
         solution=_b(),

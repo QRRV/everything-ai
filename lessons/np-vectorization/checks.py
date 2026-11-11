@@ -6,6 +6,7 @@ import re
 import time
 
 from everything_ai.check import Code, CodeBox, FunctionBox, Mistake, uses_loop
+from everything_ai import yours
 
 # The picture: two arrays, and what +, and * with a number, make of them. Exercise 1 asks about other numbers.
 A, B = [1, 2, 3], [10, 20, 30]
@@ -84,6 +85,7 @@ _SPEEDS = ("import numpy as np\n\n\ndef speeds(km, minutes):\n    km = np.array(
 EXERCISES = {
     "new-prices": CodeBox(
         name="new-prices",
+        picture=yours.arrays(show=("prices",)),
         start=_PRICES_START,
         solution=_PRICES,
         keep=["import numpy as np", _PRICES_LINE],
@@ -128,6 +130,7 @@ EXERCISES = {
     ),
     "speeds": FunctionBox(
         name="speeds",
+        picture=yours.arrays(call=0),
         function="speeds",
         start=_SPEEDS_START,
         solution=_SPEEDS,

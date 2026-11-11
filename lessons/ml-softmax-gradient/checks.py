@@ -7,6 +7,7 @@ import math
 import re
 
 from everything_ai.check import Code, CodeBox, FunctionBox, Mistake, same_value
+from everything_ai import yours
 
 OTHERS = (2.0, 0.0)   # the logits of class 0 (cat) and class 2 (bird) in the picture; the slider sets class 1 (dog)
 RIGHT = 1             # the right class in the picture: the photo is of a dog
@@ -116,6 +117,7 @@ def _n(new: str) -> str:
 EXERCISES = {
     "logit-gradient": FunctionBox(
         name="logit-gradient",
+        picture=yours.arrays(call=0),
         function="logit_gradient",
         start=_G_START,
         solution=_G,
@@ -166,6 +168,7 @@ EXERCISES = {
     ),
     "nudge": CodeBox(
         name="nudge",
+        picture=yours.steps(),
         start=_N_START,
         solution=_N,
         keep=["label = 0"],

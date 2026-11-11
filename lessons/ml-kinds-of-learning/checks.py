@@ -5,6 +5,7 @@ a list of words, the way self-supervised learning makes its own labels."""
 import re
 
 from everything_ai.check import FunctionBox, Mistake, Sort
+from everything_ai import yours
 
 # The lesson is done when these are correct. "spam-kind" is the choice question in the lesson.
 REQUIRED = ["spam-kind", "kinds", "word-pairs"]
@@ -86,6 +87,7 @@ EXERCISES = {
     ),
     "word-pairs": FunctionBox(
         name="word-pairs",
+        picture=yours.steps(call=0),
         function="word_pairs",
         start=_START,
         solution=_SOLUTION,

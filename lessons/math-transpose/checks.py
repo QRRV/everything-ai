@@ -5,6 +5,7 @@ nested list in plain Python. And the data of the picture and the worked example.
 import re
 
 from everything_ai.check import Code, CodeBox, FunctionBox, Mistake
+from everything_ai import yours
 
 # The matrix of the picture, and the houses and two models of the worked example: one row of weights per model.
 A = [[1, 2, 3], [4, 5, 6]]
@@ -40,6 +41,7 @@ def _lists(new: str) -> str:
 EXERCISES = {
     "two-models": CodeBox(
         name="two-models",
+        picture=yours.arrays(show=("X", "W")),
         start=_START,
         solution=_SOLUTION,
         keep=["W = np.array([[0.5, 0.3], [0.2, 0.6]])"],
@@ -86,6 +88,7 @@ EXERCISES = {
     ),
     "transpose-lists": FunctionBox(
         name="transpose-lists",
+        picture=yours.arrays(call=0),
         function="transpose",
         start=_LISTS_START,
         solution=_LISTS,

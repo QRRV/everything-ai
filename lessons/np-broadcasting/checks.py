@@ -5,6 +5,7 @@ share of the votes, with a column of totals. And the numbers in the picture."""
 import re
 
 from everything_ai.check import Code, CodeBox, FunctionBox, Mistake, uses_loop
+from everything_ai import yours
 
 # The picture: a matrix, a vector stretched over its rows, and their sum.
 MATRIX = [[1, 2, 3], [4, 5, 6]]
@@ -44,6 +45,7 @@ _SHARES = ("import numpy as np\n\n\ndef shares(votes):\n    votes = np.array(vot
 EXERCISES = {
     "centered": CodeBox(
         name="centered",
+        picture=yours.arrays(show=("temps",)),
         start=_CENTER_START,
         solution=_CENTER,
         keep=["import numpy as np", _TEMPS_LINE],
@@ -93,6 +95,7 @@ EXERCISES = {
     ),
     "shares": FunctionBox(
         name="shares",
+        picture=yours.arrays(call=0),
         function="shares",
         start=_SHARES_START,
         solution=_SHARES,

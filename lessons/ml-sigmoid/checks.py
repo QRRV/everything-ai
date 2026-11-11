@@ -6,6 +6,7 @@ import math
 import re
 
 from everything_ai.check import CodeBox, FunctionBox, Mistake
+from everything_ai import yours
 
 
 def sigmoid(z: float) -> float:
@@ -53,6 +54,7 @@ def _l(new: str) -> str:
 EXERCISES = {
     "sigmoid": FunctionBox(
         name="sigmoid",
+        picture=yours.curve("sigmoid", [i / 10 for i in range(-80, 81)], role="pred", xlabel="z", y=(0, 1)),
         function="sigmoid",
         start=_S_START,
         solution=_S,
@@ -90,6 +92,7 @@ EXERCISES = {
     ),
     "back-to-logit": CodeBox(
         name="back-to-logit",
+        picture=yours.steps(),
         start=_L_START,
         solution=_L,
         keep=["p = 0.9"],

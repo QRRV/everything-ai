@@ -9,6 +9,7 @@ import torch   # imported once, when the lesson opens: the first import takes lo
 
 from everything_ai import draw
 from everything_ai.check import CodeBox, Code, Mistake
+from everything_ai import yours
 
 # --- the picture: d = a * b + a, as PyTorch records it ------------------------------------------------------------
 
@@ -76,6 +77,7 @@ _T = _t()
 EXERCISES = {
     "neuron": CodeBox(
         name="neuron",
+        picture=yours.steps(),
         start=_N_START,
         solution=_N,
         keep=["x = torch.tensor([2.0, 1.0])", "y = torch.tensor(3.0)", _N_END],
@@ -116,6 +118,7 @@ EXERCISES = {
     ),
     "train": CodeBox(
         name="train",
+        picture=yours.descent("loss", lambda ns: float(ns["loss"])),
         start=_T_START,
         solution=_T,
         keep=["for step in range(100):", "    loss = ((X @ w + b - y) ** 2).mean()"],

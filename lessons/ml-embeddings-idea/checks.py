@@ -11,6 +11,7 @@ import numpy as np
 
 from everything_ai import paths
 from everything_ai.check import FunctionBox, Mistake, _show_rounded
+from everything_ai import yours
 
 DATA = "data/qmnist-small.npz"   # the first 6,000 training and 1,000 test images of QMNIST: see data/README.md
 SHOWN = 300                       # the picture draws the first 300 test digits, so that the map stays readable
@@ -108,6 +109,7 @@ _HIDDEN = [
 EXERCISES = {
     "most-similar": FunctionBox(
         name="most-similar",
+        picture=yours.steps(call=0),
         function="most_similar",
         start=_M_START,
         solution=_m(),

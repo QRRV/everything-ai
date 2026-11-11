@@ -8,6 +8,7 @@ import time
 
 from everything_ai import paths, projects
 from everything_ai.check import FunctionBox, Mistake, _as_value, run_code
+from everything_ai import yours
 
 
 def _checks(lesson: str, name: str):
@@ -190,6 +191,7 @@ def _rounded(v) -> str:
 EXERCISES = {
     "refuses": FunctionBox(
         name="refuses",
+        picture=yours.steps(call=0),
         function="refuses",
         start=_R_START,
         solution=_R,
@@ -227,6 +229,7 @@ EXERCISES = {
     ),
     "blocked": FunctionBox(
         name="blocked",
+        picture=yours.steps(call=0),
         function="blocked",
         start=_B_START,
         solution=_B,
@@ -261,6 +264,7 @@ EXERCISES = {
     ),
     "refusal-rate": FunctionBox(
         name="refusal-rate",
+        picture=yours.steps(call=0),
         function="refusal_rate",
         start=_T_START,
         solution=_T,

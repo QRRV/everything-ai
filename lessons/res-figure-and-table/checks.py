@@ -6,6 +6,7 @@ import re
 
 from everything_ai import chart
 from everything_ai.check import CodeBox, Mistake
+from everything_ai import yours
 
 SCORES = {"A": 91.2, "B": 91.8}   # the made-up accuracies of the worked example, in %
 
@@ -61,6 +62,7 @@ _OTHER = [("A", "full", 70.0), ("B", "small", 79.0), ("C", "full", 75.5), ("D", 
 EXERCISES = {
     "fair-best": CodeBox(
         name="fair-best",
+        picture=yours.steps(),
         start=_F_START,
         solution=_F,
         others=[{"rows": _OTHER}],

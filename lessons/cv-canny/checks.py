@@ -10,6 +10,7 @@ import re
 import numpy as np
 
 from everything_ai.check import FunctionBox, Mistake, Value
+from everything_ai import yours
 
 FRUIT = "data/photos/fruit.png"          # the drawing of cv-color-spaces: 360 by 240 pixels, RGB
 LABELS = "data/photos/fruit-labels.png"  # what every pixel is: 0 the tablecloth, 1 to 4 a fruit
@@ -337,6 +338,7 @@ _TWO = _rows(0, 90, 30, 80, 0)
 EXERCISES = {
     "thin": FunctionBox(
         name="thin",
+        picture=yours.arrays(call=0, shade=True),
         function="thin",
         start=_START,
         solution=_SOLUTION,

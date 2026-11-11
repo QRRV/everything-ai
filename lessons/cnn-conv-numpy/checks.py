@@ -8,6 +8,7 @@ import numpy as np
 
 from everything_ai import draw
 from everything_ai.check import FunctionBox, Mistake
+from everything_ai import yours
 
 PICTURE_IN = [[2, 0, 1], [1, 3, 0], [0, 1, 2]]
 
@@ -107,6 +108,7 @@ _W2 = [[[[1, 0], [0, 1]], [[0, 1], [1, 0]]], [[[1, 1], [0, 0]], [[0, 0], [-1, 1]
 EXERCISES = {
     "patches": FunctionBox(
         name="patches",
+        picture=yours.arrays(call=0),
         function="patches",
         start=_P_START,
         solution=_P,
@@ -146,6 +148,7 @@ EXERCISES = {
     ),
     "conv-matmul": FunctionBox(
         name="conv-matmul",
+        picture=yours.steps(call=0),
         function="conv_matmul",
         start=_M_START,
         solution=_M,

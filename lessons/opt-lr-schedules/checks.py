@@ -15,6 +15,7 @@ from torch.utils.data import DataLoader, TensorDataset
 
 from everything_ai import paths
 from everything_ai.check import ClassBox, FunctionBox, Mistake
+from everything_ai import yours
 
 DATA = "data/qmnist-small.npz"   # the first 6,000 training and 1,000 test images of QMNIST: see data/README.md
 BLOCKS = 10
@@ -220,6 +221,7 @@ _W_SCENARIOS = [
 EXERCISES = {
     "lr-at": FunctionBox(
         name="lr-at",
+        picture=yours.curve("lr_at", list(range(61)), at=lambda t: (t, 0.002, 10, 50, 0.0), role="ink", xlabel={"en": "step", "nl": "stap"}, ylabel="lr"),
         function="lr_at",
         start=_L_START,
         solution=_l(),
@@ -261,6 +263,7 @@ EXERCISES = {
     ),
     "warmup-cosine": ClassBox(
         name="warmup-cosine",
+        picture=yours.steps(scenario=0),
         start=_W_START,
         solution=_w(),
         scenarios=_W_SCENARIOS,

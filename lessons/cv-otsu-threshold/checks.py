@@ -11,6 +11,7 @@ import re
 import numpy as np
 
 from everything_ai.check import FunctionBox, Mistake, Value
+from everything_ai import yours
 
 CELL = "data/photos/cell.png"           # 550 by 660 pixels, grayscale; CC0, from the sample data of scikit-image
 THRESHOLDS = list(range(66, 187, 8))    # the stops of the slider: 66, 74, ..., 186
@@ -205,6 +206,7 @@ _CLEARED = {"en": "There is no code in the box any more. Undo with Ctrl+Z (on a 
 EXERCISES = {
     "binary": FunctionBox(
         name="binary",
+        picture=yours.arrays(call=0, shade=True),
         function="binary",
         start=_BIN_START,
         solution=_BIN,
@@ -277,6 +279,7 @@ EXERCISES = {
     ),
     "otsu": FunctionBox(
         name="otsu",
+        picture=yours.steps(call=0),
         function="otsu",
         start=_OTSU_START,
         solution=_OTSU,

@@ -11,6 +11,7 @@ import numpy as np
 
 from everything_ai import paths
 from everything_ai.check import FunctionBox, Mistake, run_code
+from everything_ai import yours
 
 DATA = "data/penguins.csv"   # 344 penguins of the Palmer Archipelago: see data/README.md
 
@@ -223,6 +224,7 @@ def _fixed_seed(text: str) -> bool:
 EXERCISES = {
     "boot-means": FunctionBox(
         name="boot-means",
+        picture=yours.histogram(call=0, xlabel={"en": "mean of a resample", "nl": "gemiddelde van een resample"}),
         function="bootstrap_means",
         start=_B_START,
         solution=_b(),
@@ -272,6 +274,7 @@ EXERCISES = {
     ),
     "interval": FunctionBox(
         name="interval",
+        picture=yours.arrays(call=0),
         function="interval",
         start=_I_START,
         solution=_i(),

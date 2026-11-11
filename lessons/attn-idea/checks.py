@@ -11,6 +11,7 @@ import re
 import numpy as np
 
 from everything_ai.check import FunctionBox, Mistake
+from everything_ai import yours
 
 # Embeddings the course made up for the lesson: 2 numbers each, about money and about water.
 WORDS = {"the": (0.5, 0.5), "river": (0.0, 2.0), "bank": (1.0, 1.0), "account": (2.0, 0.0)}
@@ -130,6 +131,7 @@ _HIDDEN = [
 EXERCISES = {
     "attend": FunctionBox(
         name="attend",
+        picture=yours.arrays(call=0),
         function="attend",
         start=_A_START,
         solution=_f(),

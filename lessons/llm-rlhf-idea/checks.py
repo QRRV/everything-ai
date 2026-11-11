@@ -9,6 +9,7 @@ import math
 import warnings
 
 from everything_ai.check import FunctionBox, Mistake
+from everything_ai import yours
 
 WORDS = ["kite", "park"]
 # Four answers to "Write a story with the words: kite and park.", the same length but the last.
@@ -161,6 +162,7 @@ def _not_finite(got) -> bool:
 EXERCISES = {
     "penalized-reward": FunctionBox(
         name="penalized-reward",
+        picture=yours.steps(call=0),
         function="penalized_reward",
         start=_R_START,
         solution=_R,
@@ -197,6 +199,7 @@ EXERCISES = {
     ),
     "best-policy": FunctionBox(
         name="best-policy",
+        picture=yours.arrays(call=0, shade=True),
         function="best_policy",
         start=_P_START,
         solution=_P,

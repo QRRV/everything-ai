@@ -11,6 +11,7 @@ import torch   # imported once, when the lesson opens: the first import takes lo
 
 from everything_ai import draw
 from everything_ai.check import FunctionBox, Mistake
+from everything_ai import yours
 
 # "the cat sat down" with made-up embeddings of 2 numbers, used as queries, keys and values at once.
 SENTENCE = ["the", "cat", "sat", "down"]
@@ -126,6 +127,7 @@ def _a(mask: str = _A_MASK, tail: str = "    A = torch.softmax(S, dim=1)\n    re
 EXERCISES = {
     "future-mask": FunctionBox(
         name="future-mask",
+        picture=yours.arrays(call=0, shade=True),
         function="future_mask",
         start=_F_START,
         solution=_f(),
@@ -161,6 +163,7 @@ EXERCISES = {
     ),
     "causal-attention": FunctionBox(
         name="causal-attention",
+        picture=yours.arrays(call=0),
         function="causal_attention",
         start=_A_START,
         solution=_a(),

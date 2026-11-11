@@ -5,6 +5,7 @@ two features, each with its own weight. And the picture of the houses with a lin
 import re
 
 from everything_ai.check import CodeBox, FunctionBox, Mistake
+from everything_ai import yours
 
 # The houses that were sold, from the lesson ml-vocabulary: area in m², price in thousands of euros.
 AREA = [62, 85, 110, 48, 95, 130, 73, 58]
@@ -56,6 +57,7 @@ def _two(new: str) -> str:
 EXERCISES = {
     "taxi": CodeBox(
         name="taxi",
+        picture=yours.curve("fare", list(range(31)), at=lambda km: (km, 2.5, 4), role="pred", xlabel="km"),
         start=_TAXI_START,
         solution=_TAXI,
         keep=["def fare(km, w, b):", "    return w * km + b", "km = 12", "fare(km, w, b)"],
@@ -98,6 +100,7 @@ EXERCISES = {
     ),
     "two-features": FunctionBox(
         name="two-features",
+        picture=yours.steps(call=0),
         function="predict",
         start=_TWO_START,
         solution=_TWO,

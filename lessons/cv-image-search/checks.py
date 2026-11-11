@@ -17,6 +17,7 @@ import torch   # imported once, when the lesson opens: DINOv2 runs on it
 from everything_ai import caltech, chart, dinov2, hub
 from everything_ai.lesson import download_card
 from everything_ai.check import FunctionBox, Mistake, run_code, with_time_limit
+from everything_ai import yours
 
 DOWNLOAD_LINE = {
     "en": "Works on every computer. DINOv2-small, 88 MB, is downloaded once from Hugging Face, and Caltech-101, 137 MB of photos, from Caltech, when you click their button in the lesson; if you did the previous lesson, they are already there. The exercises work without them.",
@@ -325,6 +326,7 @@ _CASES = [_made_up(6, 3, 3, seed=0), _made_up(10, 5, 4, seed=1), _made_up(8, 384
 EXERCISES = {
     "search": FunctionBox(
         name="search",
+        picture=yours.steps(call=0),
         function="search",
         start=_START,
         solution=_SOLUTION,

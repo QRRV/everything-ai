@@ -2,6 +2,7 @@
 # SPDX-License-Identifier: CC-BY-SA-4.0 AND MIT-0
 """Checks of the lesson py-recursion, and the calls in its picture."""
 from everything_ai.check import FunctionBox, Mistake, calls_itself
+from everything_ai import yours
 
 # The picture: sum_to(3), call by call. Python works out what each call gives back.
 
@@ -51,6 +52,7 @@ REQUIRED = ["factorial", "sum-four", "reverse"]
 EXERCISES = {
     "factorial": FunctionBox(
         name="factorial",
+        picture=yours.steps(call=0),
         function="factorial",
         start="def factorial(n):\n    ...\n",
         solution="def factorial(n):\n    if n == 0:\n        return 1\n    return n * factorial(n - 1)",
@@ -91,6 +93,7 @@ EXERCISES = {
     ),
     "reverse": FunctionBox(
         name="reverse",
+        picture=yours.steps(call=0),
         function="reverse",
         start="def reverse(text):\n    ...\n",
         solution='def reverse(text):\n    if text == "":\n        return ""\n    return reverse(text[1:]) + text[0]',

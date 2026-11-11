@@ -8,6 +8,7 @@ import functools
 import re
 
 from everything_ai.check import Code, CodeBox, Mistake
+from everything_ai import yours
 
 NOISE = 0.75                      # the noise is uniform between -1.5 and 1.5 °C: its variance, 3² / 12, is the MSE no model gets below
 SETS, POOL = 20, 400              # twenty training sets, each the first n of its own 400 temperatures
@@ -213,6 +214,7 @@ _TEXTS = {
 EXERCISES = {
     "learning-curve": CodeBox(
         name="learning-curve",
+        picture=yours.series(xs=[10, 20, 50, 100], names=[{"en": "train", "nl": "train"}, {"en": "validation", "nl": "validatie"}], xlabel={"en": "training examples", "nl": "trainingsvoorbeelden"}, ylabel="MSE"),
         start=_START,
         solution=_SOLUTION,
         digits=2,

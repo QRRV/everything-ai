@@ -4,6 +4,7 @@
 import re
 
 from everything_ai.check import CodeBox, Mistake, Sort
+from everything_ai import yours
 
 # What the lesson's own cell for exercise 1 makes. The learner may change it; the check cell passes the current value.
 TICKET_PRICE = 12.5
@@ -41,6 +42,7 @@ _UNDERSCORE = {"en": "Look at the names that start with `_`. Where can a cell se
 EXERCISES = {
     "trip_cost": CodeBox(
         name="trip_cost",
+        picture=yours.steps(),
         start="# ticket_price comes from the cell above\ntrip_cost = ...\nprint(trip_cost)",
         solution="trip_cost = ticket_price * 4 * 2\nprint(trip_cost)",
         outcome="stdout",

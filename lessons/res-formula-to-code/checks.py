@@ -6,6 +6,7 @@ import math
 import re
 
 from everything_ai.check import FunctionBox, Mistake
+from everything_ai import yours
 
 
 def number(x: float, digits: int, lang: str) -> str:
@@ -126,9 +127,16 @@ _WRONG = {
     "sign": _s(loss="    return (q * torch.log(p)).sum(dim=1).mean()\n"),
 }
 
+def _at_eps(eps):
+    """The visible case of smoothed_loss with another eps, for the picture: its loss for every eps from 0 to 1."""
+    import torch
+    return torch.tensor([[math.log(3), 0.0]]), torch.tensor([0]), eps
+
+
 EXERCISES = {
     "smoothed-loss": FunctionBox(
         name="smoothed-loss",
+        picture=yours.curve("smoothed_loss", [i / 50 for i in range(51)], at=_at_eps, role="loss", xlabel="eps"),
         function="smoothed_loss",
         start=_START,
         solution=_s(),

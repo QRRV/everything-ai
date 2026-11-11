@@ -10,6 +10,7 @@ import numpy as np
 
 from everything_ai import scenes
 from everything_ai.check import FunctionBox, Mistake
+from everything_ai import yours
 
 SEED = 18                    # the scene of the worked example, as in cv-annotations
 CIRCLE = 3                   # the circle is the last shape of that scene, on top: s.shapes[3]
@@ -277,6 +278,7 @@ _SWAPPED = dict(top="min(a[0], b[0])", left="min(a[1], b[1])", bottom="max(a[2],
 EXERCISES = {
     "iou": FunctionBox(
         name="iou",
+        picture=yours.steps(call=0),
         function="iou",
         start=_START,
         solution=_SOLUTION,

@@ -11,6 +11,7 @@ import math
 
 from everything_ai import paths, projects
 from everything_ai.check import FunctionBox, Mistake
+from everything_ai import yours
 
 
 def _checks(lesson: str, name: str):
@@ -204,6 +205,7 @@ _L_PROB = _L.replace("total += -math.log(p)", "total += 1 - p")
 EXERCISES = {
     "bt-prob": FunctionBox(
         name="bt-prob",
+        picture=yours.curve("bt_prob", [i / 10 for i in range(-60, 61)], at=lambda d: (d, 0.0), role="pred", xlabel="score_a − score_b", y=(0, 1)),
         function="bt_prob",
         start=_P_START,
         solution=_P,
@@ -240,6 +242,7 @@ EXERCISES = {
     ),
     "make-pairs": FunctionBox(
         name="make-pairs",
+        picture=yours.steps(call=0),
         function="make_pairs",
         start=_M_START,
         solution=_M,
@@ -283,6 +286,7 @@ EXERCISES = {
     ),
     "bt-loss": FunctionBox(
         name="bt-loss",
+        picture=yours.steps(call=0),
         function="bt_loss",
         start=_L_START,
         solution=_L,

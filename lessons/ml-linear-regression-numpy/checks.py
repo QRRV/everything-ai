@@ -7,6 +7,7 @@ import re
 
 from everything_ai import projects
 from everything_ai.check import FunctionBox, Mistake, run_code
+from everything_ai import yours
 
 # Eight houses: area in hundreds of m², a garden (1 = yes, 0 = no), and the distance to the station in km. The price
 # is in thousands of euros. The units keep the numbers of the three features about equally big.
@@ -145,9 +146,17 @@ def _fit_course(body: str) -> str:
 _REDO = {"en": " Did you change that file? Delete it, and check exercise 2 again: its check then saves your function again.",
          "nl": " Heb je dat bestand veranderd? Verwijder het, en laat oefening 2 opnieuw nakijken: die check bewaart je functie dan opnieuw."}
 
+def _mse(ns) -> float:
+    """The MSE of `w` and `b` as they are at a moment in the learner's fit, for the picture of its descent."""
+    import numpy as np
+    X, y = np.asarray(ns["X"], float), np.asarray(ns["y"], float)
+    return float(np.mean((y - (X @ np.asarray(ns["w"], float) + ns["b"])) ** 2))
+
+
 EXERCISES = {
     "mse-gradients": FunctionBox(
         name="mse-gradients",
+        picture=yours.arrays(call=0),
         function="mse_gradients",
         start=_GRAD_START,
         solution=_GRAD,
@@ -199,6 +208,7 @@ EXERCISES = {
     ),
     "fit": FunctionBox(
         name="fit",
+        picture=yours.descent("b", _mse, call=0),
         function="fit",
         start=_FIT_START,
         solution=_FIT,

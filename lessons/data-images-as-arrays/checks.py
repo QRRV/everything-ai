@@ -5,6 +5,7 @@ with much red in a color image. And the pixels of the picture."""
 import re
 
 from everything_ai.check import CodeBox, FunctionBox, Mistake
+from everything_ai import yours
 
 IMAGE = "lessons/data-images-as-arrays/landscape.png"   # made for the course: 24 rows, 40 columns, RGB
 
@@ -68,6 +69,7 @@ def _red(new: str) -> str:
 EXERCISES = {
     "sun": CodeBox(
         name="sun",
+        picture=yours.image(),
         start=_SUN_START,
         solution=_SUN,
         keep=["import matplotlib.pyplot as plt", _READ],
@@ -114,6 +116,7 @@ EXERCISES = {
     ),
     "red-pixels": FunctionBox(
         name="red-pixels",
+        picture=yours.steps(call=0),
         function="red_pixels",
         start=_RED_START,
         solution=_RED,

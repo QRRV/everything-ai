@@ -6,6 +6,7 @@ import math
 import re
 
 from everything_ai.check import FunctionBox, CodeBox, Mistake
+from everything_ai import yours
 
 
 def sigmoid(z: float) -> float:
@@ -57,6 +58,7 @@ def _m(new: str) -> str:
 EXERCISES = {
     "one-gradient": FunctionBox(
         name="one-gradient",
+        picture=yours.arrays(call=0),
         function="one_gradient",
         start=_G_START,
         solution=_G,
@@ -97,6 +99,7 @@ EXERCISES = {
     ),
     "mean-gradient": CodeBox(
         name="mean-gradient",
+        picture=yours.arrays(),
         start=_M_START,
         solution=_M,
         keep=["passed = np.array([0, 1, 1, 0, 1, 0, 1])", "w = np.array([1, 0.5])", "b = -8", "p = 1 / (1 + np.exp(-(w[0] * hours + w[1] * sleep + b)))"],

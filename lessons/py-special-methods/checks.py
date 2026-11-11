@@ -5,6 +5,7 @@ call, each a class written in a box and tried in scenarios."""
 import re
 
 from everything_ai.check import ClassBox, Mistake, same_value
+from everything_ai import yours
 
 # A `...` that is still there, found before the code runs: a method that is still `...` gives back nothing,
 # and that should not be explained as some other mistake.
@@ -57,6 +58,7 @@ def _line_parts(got) -> bool:
 EXERCISES = {
     "vec": ClassBox(
         name="vec",
+        picture=yours.objects(0),
         start=_VEC_START,
         solution=_VEC,
         scenarios=[
@@ -99,6 +101,7 @@ EXERCISES = {
     ),
     "line": ClassBox(
         name="line",
+        picture=yours.objects(0),
         start=_LINE_START,
         solution=_LINE,
         scenarios=[

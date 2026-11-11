@@ -5,6 +5,7 @@ each photo, with argmax along each row. And the numbers in the picture."""
 import re
 
 from everything_ai.check import Code, CodeBox, FunctionBox, Mistake
+from everything_ai import yours
 
 # The picture: a matrix, and its sums along each axis.
 PICTURE = [[1, 2, 3], [4, 5, 6]]
@@ -41,6 +42,7 @@ _PRED = "import numpy as np\n\n\ndef predictions(scores):\n    scores = np.array
 EXERCISES = {
     "day-means": CodeBox(
         name="day-means",
+        picture=yours.arrays(show=("temps",), column=True),
         start=_MEANS_START,
         solution=_MEANS,
         keep=["import numpy as np", _TEMPS_LINE],
@@ -83,6 +85,7 @@ EXERCISES = {
     ),
     "predictions": FunctionBox(
         name="predictions",
+        picture=yours.arrays(call=0, shade=True, column=True),
         function="predictions",
         start=_PRED_START,
         solution=_PRED,

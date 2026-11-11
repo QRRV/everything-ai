@@ -10,6 +10,7 @@ import re
 import numpy as np
 
 from everything_ai.check import FunctionBox, Mistake, Value
+from everything_ai import yours
 
 FRUIT = "data/photos/fruit.png"          # the drawing of cv-color-spaces: 360 by 240 pixels, RGB
 LABELS = "data/photos/fruit-labels.png"  # what every pixel is: 0 the tablecloth, 1 an apple, 2 to 4 other fruit
@@ -264,6 +265,7 @@ _BOOLS = [[False, True, False, False, False, False], [False, False, False, False
 EXERCISES = {
     "dilate": FunctionBox(
         name="dilate",
+        picture=yours.arrays(call=0, shade=True),
         function="dilate",
         start=_START,
         solution=_SOLUTION,

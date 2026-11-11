@@ -5,6 +5,7 @@ turns a list of code points back into text."""
 import re
 
 from everything_ai.check import CodeBox, FunctionBox, Mistake
+from everything_ai import yours
 
 # The lesson is done when these are correct. "bytes" is the choice question in the lesson.
 REQUIRED = ["bytes", "codes", "decode"]
@@ -19,6 +20,7 @@ _DOTS = Mistake("dots-left", matches=lambda got, text: re.search(r"^[^#\n]*\.\.\
 EXERCISES = {
     "codes": CodeBox(
         name="codes",
+        picture=yours.names(),
         start=_CODES_START,
         solution=_CODES,
         keep=['word = "lamp"'],
@@ -82,6 +84,7 @@ EXERCISES = {
     ),
     "decode": FunctionBox(
         name="decode",
+        picture=yours.steps(call=0),
         function="decode",
         start="def decode(codes):\n    ...\n",
         solution='def decode(codes):\n    chars = [chr(n) for n in codes]\n    return "".join(chars)',

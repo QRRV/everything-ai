@@ -6,6 +6,7 @@ import re
 
 from everything_ai import draw
 from everything_ai.check import FunctionBox, Mistake, same_value
+from everything_ai import yours
 
 
 def sees(kind: str, i: int, j: int) -> bool:
@@ -40,6 +41,7 @@ _C = _c()
 EXERCISES = {
     "can-see": FunctionBox(
         name="can-see",
+        picture=yours.grid("can_see", 6, 6, at=lambda i, j: ("decoder", i, j)),
         function="can_see",
         start=_START,
         solution=_C,

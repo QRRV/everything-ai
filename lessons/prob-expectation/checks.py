@@ -5,6 +5,7 @@ a bet with NumPy. And the picture: two bets with the same expected value and a d
 import re
 
 from everything_ai.check import Code, CodeBox, FunctionBox, Mistake
+from everything_ai import yours
 
 # Two bets of the picture: what you win, and how likely. Both give 5 on average.
 SAFE = {4: 0.5, 6: 0.5}
@@ -52,6 +53,7 @@ def _v(new: str) -> str:
 EXERCISES = {
     "expected": FunctionBox(
         name="expected",
+        picture=yours.steps(call=0),
         function="expected",
         start=_E_START,
         solution=_E,
@@ -92,6 +94,7 @@ EXERCISES = {
     ),
     "variance": CodeBox(
         name="variance",
+        picture=yours.steps(),
         start=_V_START,
         solution=_V,
         keep=["values = np.array([0, 5, 20])", "mean = (values * probs).sum()"],

@@ -12,6 +12,7 @@ from dataclasses import dataclass, field
 
 from everything_ai import paths, projects
 from everything_ai.check import Exercise, FunctionBox, Mistake, Result, _fill, run_code
+from everything_ai import yours
 
 
 def _checks(lesson: str, name: str):
@@ -70,6 +71,7 @@ _VISIBLE = (_HEAD, [[0, 12.5, 12.9, 0.40000000000000036], [1, 12.9, 13.6, 0.6999
 EXERCISES = {
     "table": FunctionBox(
         name="table",
+        picture=yours.steps(call=0),
         function="markdown_table",
         start=_T_START,
         solution=T_CODE,

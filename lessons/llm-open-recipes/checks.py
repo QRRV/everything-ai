@@ -12,6 +12,7 @@ import time
 
 from everything_ai import paths, projects
 from everything_ai.check import FunctionBox, Mistake, Sort, run_code
+from everything_ai import yours
 
 
 def _checks(lesson: str, name: str):
@@ -294,6 +295,7 @@ EXERCISES = {
     ),
     "size": FunctionBox(
         name="size",
+        picture=yours.steps(call=0),
         function="size",
         start=_S_START,
         solution=_s(),
@@ -331,6 +333,7 @@ EXERCISES = {
     ),
     "lr-multiplier": FunctionBox(
         name="lr-multiplier",
+        picture=yours.curve("lr_multiplier", list(range(100)), at=lambda t: (t, 100, 20, 0.5, 0.1), role="ink", xlabel={"en": "step", "nl": "stap"}),
         function="lr_multiplier",
         start=_L_START,
         solution=_L_BODY,

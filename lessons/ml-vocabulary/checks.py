@@ -7,6 +7,7 @@ import re
 from pathlib import Path
 
 from everything_ai.check import CodeBox, FunctionBox, Mistake, same_value
+from everything_ai import yours
 
 HERE = Path(__file__).parent
 HOUSES = "lessons/ml-vocabulary/houses.csv"
@@ -83,6 +84,7 @@ def _predict(new: str) -> str:
 EXERCISES = {
     "features": CodeBox(
         name="features",
+        picture=yours.table(),
         start=_FEATURES_START,
         solution=_FEATURES,
         compare=_same_features,
@@ -127,6 +129,7 @@ EXERCISES = {
     ),
     "to-predict": FunctionBox(
         name="to-predict",
+        picture=yours.table(call=0),
         function="to_predict",
         start=_PREDICT_START,
         solution=_PREDICT,

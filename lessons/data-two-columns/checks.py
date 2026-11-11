@@ -10,6 +10,7 @@ from functools import cache
 import numpy as np
 import pandas as pd   # here, so the first import of pandas never counts against the time limit of a check
 
+from everything_ai import yours
 from everything_ai.check import Mistake, CodeBox, PlotBox, same_value
 
 PENGUINS = "data/penguins.csv"
@@ -279,6 +280,7 @@ def _means(new: str) -> str:
 
 EXERCISES["per-species"] = CodeBox(
     name="per-species",
+    picture=yours.table(),
     start=_MEANS_START,
     solution=_MEANS,
     keep=["import pandas as pd", _READ],

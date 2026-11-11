@@ -10,6 +10,7 @@ import re
 
 from everything_ai import projects
 from everything_ai.check import CodeBox, FunctionBox, Mistake
+from everything_ai import yours
 
 # The model the reproduction adapts: the learner's ModernGPT of llm-modern-gpt, with the modules it imports; where one
 # is missing or broken, the course's version stands in.
@@ -243,6 +244,7 @@ def _first_float(got, text) -> dict:
 EXERCISES = {
     "dataset": FunctionBox(
         name="dataset",
+        picture=yours.steps(call=0),
         function="dataset",
         start=_D_START,
         solution=_D,
@@ -296,6 +298,7 @@ EXERCISES = {
     ),
     "settings": CodeBox(
         name="settings",
+        picture=yours.names(),
         start=_S_START,
         solution=_S,
         compare=_settings_ok,

@@ -14,6 +14,7 @@ import time
 
 from everything_ai import hub, paths, projects
 from everything_ai.check import FunctionBox, Mistake, ScenarioBox, run_code
+from everything_ai import yours
 
 
 def _checks(lesson: str, name: str):
@@ -698,6 +699,7 @@ def _formats(got) -> bool:
 EXERCISES = {
     "plan-run": FunctionBox(
         name="plan-run",
+        picture=yours.steps(call=0),
         function="plan_run",
         start=_PLAN_START,
         solution=_PLAN,

@@ -6,6 +6,7 @@ text of exercise 3, worked out by NumPy itself when the lesson opens, so they al
 import re
 
 from everything_ai.check import CodeBox, FunctionBox, Mistake, _as_code
+from everything_ai import yours
 
 NAMES = ["Ada", "Bo", "Cas", "Dex", "Eva"]
 
@@ -81,6 +82,7 @@ _SHUFFLED = ("import numpy as np\n\n\ndef shuffled(items, seed):\n    rng = np.r
 EXERCISES = {
     "rolls": CodeBox(
         name="rolls",
+        picture=yours.arrays(),
         start=_ROLLS_START,
         solution=_ROLLS,
         first=[_DOTS],
@@ -119,6 +121,7 @@ EXERCISES = {
     ),
     "shuffled": FunctionBox(
         name="shuffled",
+        picture=yours.arrays(call=0),
         function="shuffled",
         start=_SHUFFLED_START,
         solution=_SHUFFLED,

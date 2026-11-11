@@ -5,6 +5,7 @@ discounted_return, the return of a list of rewards with a discount factor gamma.
 import re
 
 from everything_ai.check import FunctionBox, Mistake, Sort
+from everything_ai import yours
 
 
 def discounted_return(rewards, gamma) -> float:
@@ -99,6 +100,7 @@ EXERCISES = {
     ),
     "discounted-return": FunctionBox(
         name="discounted-return",
+        picture=yours.steps(call=0),
         function="discounted_return",
         start=_D_START,
         solution=_D,

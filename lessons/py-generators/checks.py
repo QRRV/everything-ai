@@ -5,6 +5,7 @@ each one hands out, each copied the moment it comes out, and compares them with 
 import re
 
 from everything_ai.check import FunctionBox, Mistake, collect_generator, handed_out
+from everything_ai import yours
 
 # A `...` that is still there, found before the code runs: a loop whose body is `...` hands out nothing,
 # and that should not be explained as some other mistake.
@@ -43,6 +44,7 @@ _LAST = "\n    if len(batch) > 0:\n        yield batch"
 EXERCISES = {
     "squares": FunctionBox(
         name="squares",
+        picture=yours.steps(call=0),
         function="squares",
         start="def squares(n):\n    ...\n",
         solution=_SQUARES,
@@ -86,6 +88,7 @@ EXERCISES = {
     ),
     "batches": FunctionBox(
         name="batches",
+        picture=yours.steps(call=0),
         function="batches",
         start=_BATCHES_START,
         solution=_BATCHES,

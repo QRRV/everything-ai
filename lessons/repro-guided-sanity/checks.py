@@ -12,6 +12,7 @@ import re
 
 from everything_ai import paths, projects
 from everything_ai.check import ClassBox, FunctionBox, Mistake, Timeout, _show_rounded, run_code, with_time_limit
+from everything_ai import yours
 
 
 def _checks(lesson: str, name: str):
@@ -346,6 +347,7 @@ EXERCISES = {
     ),
     "best-loss": FunctionBox(
         name="best-loss",
+        picture=yours.steps(call=0),
         function="best_loss",
         start=_BEST_START,
         solution=_BEST,

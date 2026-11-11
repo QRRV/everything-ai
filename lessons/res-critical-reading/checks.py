@@ -7,6 +7,7 @@ import math
 import re
 
 from everything_ai.check import FunctionBox, Mistake, Sort
+from everything_ai import yours
 
 
 def number(x: float, digits: int, lang: str) -> str:
@@ -169,6 +170,7 @@ EXERCISES = {
     ),
     "fake-wins": FunctionBox(
         name="fake-wins",
+        picture=yours.curve("fake_win_rate", list(range(1, 21)), at=lambda k: (k, 2000, 0), role="ink", xlabel={"en": "variants tried", "nl": "geprobeerde varianten"}, y=(0, 1)),
         function="fake_win_rate",
         start=_START,
         solution=_w(),

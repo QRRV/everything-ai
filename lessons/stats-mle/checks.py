@@ -9,6 +9,7 @@ import re
 import numpy as np
 
 from everything_ai.check import FunctionBox, Mistake
+from everything_ai import yours
 
 
 def avg_nll(p: float, data) -> float:
@@ -115,6 +116,7 @@ _FINE = _v([round(0.05 * i, 2) for i in range(1, 20)])
 EXERCISES = {
     "avg-nll": FunctionBox(
         name="avg-nll",
+        picture=yours.curve("avg_nll", [0.02 + i / 100 for i in range(97)], at=lambda p: (p, np.array([1, 0, 1, 1])), role="loss", xlabel="p"),
         function="avg_nll",
         start=_N_START,
         solution=_n(),
@@ -156,6 +158,7 @@ EXERCISES = {
     ),
     "best-p": FunctionBox(
         name="best-p",
+        picture=yours.steps(call=0),
         function="best_p",
         start=_B_START,
         solution=_b(),

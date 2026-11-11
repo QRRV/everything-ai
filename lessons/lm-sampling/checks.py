@@ -12,6 +12,7 @@ import numpy as np
 
 from everything_ai import paths, projects
 from everything_ai.check import FunctionBox, Mistake, run_code, with_time_limit, Timeout
+from everything_ai import yours
 
 # The table comes from the learner's count_bigrams, bigram_matrix and to_probs, or the course's versions.
 projects.builds_on(("llm", "bigrams", "lm-bigram-counts", "count-bigrams"),
@@ -196,6 +197,7 @@ def _text(v) -> str:
 EXERCISES = {
     "greedy": FunctionBox(
         name="greedy",
+        picture=yours.steps(call=0),
         function="greedy",
         start=_G_START,
         solution=_G,
@@ -226,6 +228,7 @@ EXERCISES = {
     ),
     "generate": FunctionBox(
         name="generate",
+        picture=yours.steps(call=0),
         function="generate",
         start=_S_START,
         solution=_S,

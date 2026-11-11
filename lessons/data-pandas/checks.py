@@ -7,6 +7,7 @@ import re
 from pathlib import Path
 
 from everything_ai.check import Code, CodeBox, FunctionBox, Mistake, _as_code
+from everything_ai import yours
 
 HERE = Path(__file__).parent
 WEEK = "lessons/data-pandas/weather.csv"
@@ -79,6 +80,7 @@ _WARM = ('import pandas as pd\n\n\ndef warm_days(path, limit):\n    df = pd.read
 EXERCISES = {
     "windy": CodeBox(
         name="windy",
+        picture=yours.table(),
         start=_WINDY_START,
         solution=_WINDY,
         keep=["import pandas as pd", _READ],
@@ -123,6 +125,7 @@ EXERCISES = {
     ),
     "warm-days": FunctionBox(
         name="warm-days",
+        picture=yours.table(call=0),
         function="warm_days",
         start=_WARM_START,
         solution=_WARM,

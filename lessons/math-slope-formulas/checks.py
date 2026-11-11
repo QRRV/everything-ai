@@ -5,6 +5,7 @@ measuring. And the picture: x² with its slope at one x, measured and from the f
 import re
 
 from everything_ai.check import CodeBox, FunctionBox, Mistake, run_code
+from everything_ai import yours
 
 H = 0.001
 
@@ -74,6 +75,7 @@ def _ignores_f(text: str) -> bool:
 EXERCISES = {
     "power": FunctionBox(
         name="power",
+        picture=yours.curve("power_slope", [i / 20 for i in range(-50, 51)], at=lambda x: (3, x), role="grad", xlabel="x"),
         function="power_slope",
         start=_POWER_START,
         solution=_POWER,
@@ -116,6 +118,7 @@ EXERCISES = {
     ),
     "claim": CodeBox(
         name="claim",
+        picture=yours.tangent("x", lambda ns, x: ns["f"](x), span=1.0, role="ink"),
         start=_CLAIM_START,
         solution=_CLAIM,
         keep=["def f(x):", "    return x ** 3", "x = 2"],

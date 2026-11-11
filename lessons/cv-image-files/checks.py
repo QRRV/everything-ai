@@ -10,6 +10,7 @@ import numpy as np
 
 from everything_ai import paths
 from everything_ai.check import FunctionBox, Mistake, Value
+from everything_ai import yours
 
 COFFEE = "data/photos/coffee.png"     # 400 rows, 600 columns, RGB; CC0 (data/README.md)
 CAT = "data/photos/chelsea.png"       # 300 rows, 451 columns, RGB; CC0 (data/README.md)
@@ -152,6 +153,7 @@ def _subtracts_uint8(got, text: str) -> bool:
 EXERCISES = {
     "mean-difference": FunctionBox(
         name="mean-difference",
+        picture=yours.arrays(call=0, shade=True),
         function="mean_difference",
         start=_DIFF_START,
         solution=_DIFF,

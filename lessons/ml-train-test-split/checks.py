@@ -6,6 +6,7 @@ line and a look-up model trained on one shuffle and measured on the houses they 
 import re
 
 from everything_ai.check import Code, CodeBox, Mistake
+from everything_ai import yours
 
 SEED, N, N_TRAIN = 18, 40, 32   # as in the worked example
 
@@ -121,6 +122,7 @@ def _m(body: str) -> str:
 EXERCISES = {
     "split": CodeBox(
         name="split",
+        picture=yours.arrays(),
         start=_S_START,
         solution=_S,
         keep=["rng = np.random.default_rng(1)", "x_train = sizes[train]", "x_test = sizes[test]"],
@@ -171,6 +173,7 @@ EXERCISES = {
     ),
     "two-mse": CodeBox(
         name="two-mse",
+        picture=yours.steps(),
         start=_M_START,
         solution=_M,
         keep=["w = 160", "b = 50"],

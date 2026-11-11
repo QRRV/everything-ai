@@ -6,6 +6,7 @@ import math
 import re
 
 from everything_ai.check import FunctionBox, Mistake
+from everything_ai import yours
 
 
 def number(x: float, digits: int, lang: str) -> str:
@@ -178,6 +179,7 @@ def _gb_show(v):
 EXERCISES = {
     "attend-step": FunctionBox(
         name="attend-step",
+        picture=yours.steps(call=0),
         function="attend_step",
         start=_START,
         solution=_a(),
@@ -233,6 +235,7 @@ EXERCISES = {
     ),
     "kv-gb": FunctionBox(
         name="kv-gb",
+        picture=yours.steps(call=0),
         function="kv_cache_gb",
         start=_GB_START,
         solution=_k(),

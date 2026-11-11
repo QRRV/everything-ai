@@ -4,6 +4,7 @@
 import re
 
 from everything_ai.check import CodeBox, Mistake, run_code
+from everything_ai import yours
 
 # The program in the picture, per language, and what each line adds under the cell: Python works that out.
 STEPS = {
@@ -92,6 +93,7 @@ REQUIRED = ["tools", "countdown", "quotes"]
 EXERCISES = {
     "tools": CodeBox(
         name="tools",
+        picture=yours.steps(),
         start="# Python, NumPy, PyTorch\n",
         solution='print("Python")\nprint("NumPy")\nprint("PyTorch")',
         outcome="stdout",
@@ -129,6 +131,7 @@ EXERCISES = {
     ),
     "countdown": CodeBox(
         name="countdown",
+        picture=yours.steps(),
         start='print("1")\nprint("Go!")\nprint("3")\nprint("2")',
         solution='print("3")\nprint("2")\nprint("1")\nprint("Go!")',
         outcome="stdout",

@@ -10,6 +10,7 @@ import time
 
 from everything_ai import hub, models, paths, projects
 from everything_ai.check import FunctionBox, Mistake, ScenarioBox, run_code
+from everything_ai import yours
 
 
 def _checks(lesson: str, name: str):
@@ -265,6 +266,7 @@ EXERCISES = {
     ),
     "bits-per-byte": FunctionBox(
         name="bits-per-byte",
+        picture=yours.steps(call=0),
         function="bits_per_byte",
         start=_B_START,
         solution=_B,

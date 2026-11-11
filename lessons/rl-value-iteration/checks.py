@@ -378,9 +378,37 @@ def _v(q: str = "q = q + p * (r + gamma * V[nxt])", pi: str = "pi[s] = actions[n
 _V_START = _v("q = q + ...", "pi[s] = ...")
 _V = _v()
 
+def _yours(seen) -> str:
+    """The learner's value iteration on GRID, as the play block draws it: the value of each state and the action the
+    policy takes there, beside the course's where a value or an action differs."""
+    from everything_ai import check as checking, course, yours
+    mine = seen.mine
+    fn = mine.names.get("value_iteration") if mine else None
+    if not callable(fn):
+        return ""
+    case = seen.exercise.visible[0]
+    try:
+        V, pi = checking.with_time_limit(lambda: fn(*(checking._copy(a) for a in case)))
+        cells = [(r, c) for r in range(len(GRID)) for c in range(len(GRID[0])) if not is_end(GRID, (r, c))]
+        mine_panel = {"rows": GRID, "title": course.phrase("yours-code", seen.lang), "role": "pred", "index": True,
+                      "values": {x: float(V[x]) for x in cells}, "arrows": {x: [pi[x]] for x in cells if pi.get(x) in ACTIONS}}
+    except Exception:
+        return ""
+    panels = [mine_panel]
+    want, _ = value_iteration(*case)
+    if any(f"{mine_panel['values'][x]:.2f}" != f"{want[x]:.2f}" for x in cells):
+        panels.append(_panel(GRID, {"V": want, "Q": q_values(T, want, case[1])}, course.phrase("yours-right", seen.lang)))
+    title = {"en": "Your value iteration on GRID", "nl": "Jouw value iteration op GRID"}[seen.lang]
+    alt = {"en": "The values and the actions of the policy your value_iteration gives for GRID, cell by cell",
+           "nl": "De waarden en de actions van de policy die jouw value_iteration geeft voor GRID, cel voor cel"}[seen.lang]
+    grid = draw.grid_world(panels, alt=alt, cell=50 if len(panels) == 1 else 42, decimal="," if seen.lang == "nl" else ".")
+    return yours.figure(title, grid.text, alt=alt)
+
+
 EXERCISES = {
     "value-iteration": ValueBox(
         name="value-iteration",
+        picture=_yours,
         function="value_iteration",
         start=_V_START,
         solution=_V,

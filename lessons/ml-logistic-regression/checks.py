@@ -8,6 +8,7 @@ import re
 from pathlib import Path
 
 from everything_ai.check import Code, CodeBox, FunctionBox, Mistake
+from everything_ai import yours
 
 STUDENTS = Path(__file__).parent.parent / "ml-vocabulary" / "students.csv"
 W = (1, 0.5)   # the lesson's model: a weight for the hours of study and one for the hours of sleep
@@ -89,6 +90,7 @@ def _h(new: str) -> str:
 EXERCISES = {
     "probability": FunctionBox(
         name="probability",
+        picture=yours.curve("probability", [i / 5 for i in range(71)], at=lambda h: ([h, 6], [1, 0.5], -8), role="pred", xlabel={"en": "hours, with 6 hours of sleep", "nl": "uren, met 6 uur slaap"}, y=(0, 1)),
         function="probability",
         start=_P_START,
         solution=_P,
@@ -135,6 +137,7 @@ EXERCISES = {
     ),
     "hours-needed": CodeBox(
         name="hours-needed",
+        picture=yours.steps(),
         start=_H_START,
         solution=_H,
         keep=["b = -8"],

@@ -4,6 +4,7 @@
 import re
 
 from everything_ai.check import CodeBox, Mistake
+from everything_ai import yours
 
 # The word in the picture.
 WORD = "banana"
@@ -72,6 +73,7 @@ REQUIRED = ["initials", "spaces", "caption"]
 EXERCISES = {
     "initials": CodeBox(
         name="initials",
+        picture=yours.names(),
         start='first_name = "Grace"\nlast_name = "Hopper"\ninitials = ...\nprint(initials)',
         solution='first_name = "Grace"\nlast_name = "Hopper"\ninitials = f"{first_name[0]}{last_name[0]}"\nprint(initials)',
         outcome="stdout",
@@ -117,6 +119,7 @@ EXERCISES = {
     ),
     "caption": CodeBox(
         name="caption",
+        picture=yours.names(),
         start='city_name = "Groningen"\ncaption = ...\nprint(caption)',
         solution='city_name = "Groningen"\ncaption = f"{city_name} ({len(city_name)})"\nprint(caption)',
         outcome="stdout",

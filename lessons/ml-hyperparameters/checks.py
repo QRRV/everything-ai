@@ -6,6 +6,7 @@ import math
 import re
 
 from everything_ai.check import Code, CodeBox, Mistake, Sort
+from everything_ai import yours
 
 # The lesson is done when these are correct.
 REQUIRED = ["who-sets", "three-rates"]
@@ -103,6 +104,7 @@ EXERCISES = {
     ),
     "three-rates": CodeBox(
         name="three-rates",
+        picture=yours.arrays(),
         start=_R_START,
         solution=_R,
         keep=["for lr in [0.01, 0.1, 0.3]:"],

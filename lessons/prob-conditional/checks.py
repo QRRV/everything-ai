@@ -6,6 +6,7 @@ import html
 import re
 
 from everything_ai.check import Code, CodeBox, FunctionBox, Mistake
+from everything_ai import yours
 
 # 100 mails: spam or not, and whether they contain the word "free".
 MAILS = [[15, 5], [10, 70]]   # rows: spam, not spam; columns: with "free", without
@@ -80,6 +81,7 @@ _ALL = 'counts[("ill", "positive")] / 1000'
 EXERCISES = {
     "p-given": FunctionBox(
         name="p-given",
+        picture=yours.steps(call=0),
         function="p_given",
         start=_G_START,
         solution=_G,
@@ -123,6 +125,7 @@ EXERCISES = {
     ),
     "test-both-ways": CodeBox(
         name="test-both-ways",
+        picture=yours.steps(),
         start=_T_START,
         solution=_T,
         keep=[_T_HEAD.strip()],

@@ -7,6 +7,7 @@ import re
 from pathlib import Path
 
 from everything_ai.check import CodeBox, Mistake
+from everything_ai import yours
 
 # The script the course puts in the learner's project folder, without its licence lines, as the lesson shows it.
 DICE = "\n".join(line for line in (Path(__file__).parent / "project" / "scripts" / "dice.py").read_text(encoding="utf-8").splitlines()
@@ -30,6 +31,7 @@ _SOLUTION = "# countdown.py: counts down from 3, then says go\nfor i in range(3)
 EXERCISES = {
     "countdown": CodeBox(
         name="countdown",
+        picture=yours.steps(),
         start=_START,
         solution=_SOLUTION,
         outcome="stdout",

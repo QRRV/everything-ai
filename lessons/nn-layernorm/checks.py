@@ -15,6 +15,7 @@ from torch.utils.data import DataLoader, TensorDataset
 
 from everything_ai import paths
 from everything_ai.check import ClassBox, FunctionBox, Mistake
+from everything_ai import yours
 
 DATA = "data/qmnist-small.npz"   # the first 6,000 training and 1,000 test images of QMNIST: see data/README.md
 BLOCKS = 30
@@ -197,6 +198,7 @@ _B_SCENARIOS = [
 EXERCISES = {
     "layer-norm": FunctionBox(
         name="layer-norm",
+        picture=yours.arrays(call=0),
         function="layer_norm",
         start=_L_START,
         solution=_l(),

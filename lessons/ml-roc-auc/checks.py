@@ -6,6 +6,7 @@ threshold of the slider, and the ROC curve with the dot of that threshold and th
 import re
 
 from everything_ai.check import Code, CodeBox, Mistake
+from everything_ai import yours
 
 # The forty mails of ml-confusion-matrix: the probability of spam a filter gave each. Ten are spam.
 SPAM = [0.95, 0.9, 0.85, 0.8, 0.7, 0.65, 0.55, 0.45, 0.35, 0.2]
@@ -150,6 +151,7 @@ _BOX_TEXTS = {
 EXERCISES = {
     "rates": CodeBox(
         name="rates",
+        picture=yours.steps(),
         start=_R_START,
         solution=_R,
         digits=4,
@@ -207,6 +209,7 @@ EXERCISES = {
     ),
     "auc": CodeBox(
         name="auc",
+        picture=yours.steps(),
         start=_A_START,
         solution=_A,
         digits=4,

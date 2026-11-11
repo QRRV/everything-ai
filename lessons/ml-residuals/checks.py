@@ -5,6 +5,7 @@ house whose price the model predicts too low by the most. And the picture of the
 import re
 
 from everything_ai.check import Code, CodeBox, FunctionBox, Mistake
+from everything_ai import yours
 
 # The houses that were sold, from the lesson ml-vocabulary, and the model of ml-model-is-a-function.
 AREA = [62, 85, 110, 48, 95, 130, 73, 58]
@@ -63,6 +64,7 @@ def _low(new: str) -> str:
 EXERCISES = {
     "residuals": CodeBox(
         name="residuals",
+        picture=yours.arrays(show=("fare",)),
         start=_RES_START,
         solution=_RES,
         keep=["import numpy as np", "km = np.array([3, 12, 7, 20, 5])", "fare = np.array([12, 33, 23, 56, 15])", "w = 2.5", "b = 4"],
@@ -112,6 +114,7 @@ EXERCISES = {
     ),
     "too-low": FunctionBox(
         name="too-low",
+        picture=yours.steps(call=0),
         function="too_low",
         start=_LOW_START,
         solution=_LOW,

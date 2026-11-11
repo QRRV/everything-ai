@@ -7,6 +7,7 @@ import re
 
 from everything_ai import draw
 from everything_ai.check import FunctionBox, Mistake
+from everything_ai import yours
 
 
 def _plain(v):
@@ -119,6 +120,7 @@ def _p(dv: str = "2 * np.exp(2 * t)", ret: str = "dz_du * du_dt + dz_dv * dv_dt"
 EXERCISES = {
     "gradient-formula": FunctionBox(
         name="gradient-formula",
+        picture=yours.arrays(call=0),
         function="grad_f",
         start=_G_START,
         solution=_g(),
@@ -159,6 +161,7 @@ EXERCISES = {
     ),
     "two-paths": FunctionBox(
         name="two-paths",
+        picture=yours.curve("dz_dt", [i / 20 for i in range(-30, 21)], role="grad", xlabel="t"),
         function="dz_dt",
         start=_P_START,
         solution=_p(),

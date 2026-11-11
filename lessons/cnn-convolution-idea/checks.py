@@ -11,6 +11,7 @@ import numpy as np
 
 from everything_ai import paths
 from everything_ai.check import FunctionBox, Mistake
+from everything_ai import yours
 
 DATA = "data/qmnist-small.npz"   # the first 6,000 training and 1,000 test images of QMNIST: see data/README.md
 VERTICAL = np.array([[-1, 0, 1], [-1, 0, 1], [-1, 0, 1]])     # dark on the left, light on the right
@@ -121,6 +122,7 @@ _C = _c()
 EXERCISES = {
     "convolve": FunctionBox(
         name="convolve",
+        picture=yours.arrays(call=0, shade=True),
         function="convolve",
         start=_C_START,
         solution=_C,

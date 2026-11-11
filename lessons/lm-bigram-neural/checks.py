@@ -15,6 +15,7 @@ import torch.nn.functional as F
 
 from everything_ai import paths, projects
 from everything_ai.check import FunctionBox, Mistake, run_code, with_time_limit, Timeout
+from everything_ai import yours
 
 # The demo writes with the learner's generate of lm-sampling, or the course's version.
 projects.builds_on(("llm", "sampling", "lm-sampling", "generate"))
@@ -281,6 +282,7 @@ _TV, _TH = _train_cases()
 EXERCISES = {
     "loss-of": FunctionBox(
         name="loss-of",
+        picture=yours.arrays(call=0),
         function="loss_of",
         start=_L_START,
         solution=_l(),
@@ -313,6 +315,7 @@ EXERCISES = {
     ),
     "train": FunctionBox(
         name="train",
+        picture=yours.descent("loss", lambda ns: float(ns["loss"]), call=0),
         function="train",
         start=_T_START,
         solution=_t(),

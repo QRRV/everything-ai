@@ -5,6 +5,7 @@ import ast
 import re
 
 from everything_ai.check import CodeBox, Mistake
+from everything_ai import yours
 
 # The dictionary in the picture, and the key that is looked up.
 PICTURE = {"apple": 0.5, "pear": 0.75, "plum": 0.3}
@@ -58,6 +59,7 @@ _CAPITALS = 'capitals = {"France": "Paris", "Japan": "Tokyo", "Peru": "Lima"}'
 EXERCISES = {
     "capital": CodeBox(
         name="capital",
+        picture=yours.names(),
         start=_CAPITALS + '\ncountry = "Japan"\ncity = ...\nprint(city)',
         solution=_CAPITALS + '\ncountry = "Japan"\ncity = capitals[country]\nprint(city)',
         outcome="stdout",
@@ -108,6 +110,7 @@ EXERCISES = {
     ),
     "count": CodeBox(
         name="count",
+        picture=yours.names(hide=("word",)),
         start='words = ["rain", "sun", "rain", "fog", "rain"]\ncounts = {}\nfor word in words:\n    ...\nprint(counts)',
         solution=('words = ["rain", "sun", "rain", "fog", "rain"]\ncounts = {}\nfor word in words:\n'
                   '    if word in counts:\n        counts[word] = counts[word] + 1\n    else:\n        counts[word] = 1\nprint(counts)'),

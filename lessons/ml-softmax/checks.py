@@ -6,6 +6,7 @@ import math
 import re
 
 from everything_ai.check import CodeBox, FunctionBox, Mistake
+from everything_ai import yours
 
 OTHERS = (1.0, 0.0)   # the logits of class 1 and class 2 in the picture; the slider sets class 0
 
@@ -70,6 +71,7 @@ def _t(new: str) -> str:
 EXERCISES = {
     "softmax": FunctionBox(
         name="softmax",
+        picture=yours.arrays(call=0, shade=True),
         function="softmax",
         start=_S_START,
         solution=_S,
@@ -117,6 +119,7 @@ EXERCISES = {
     ),
     "two-classes": CodeBox(
         name="two-classes",
+        picture=yours.arrays(show=("logits",)),
         start=_T_START,
         solution=_T,
         keep=["logits = np.array([z, 0])"],

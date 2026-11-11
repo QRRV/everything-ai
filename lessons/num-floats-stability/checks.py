@@ -9,6 +9,7 @@ import re
 import numpy as np
 
 from everything_ai.check import FunctionBox, Mistake
+from everything_ai import yours
 
 
 def stable_lse(z) -> float:
@@ -147,6 +148,7 @@ _FAR = _v([0, 800, -800])   # the largest value in the middle: taking off z[0] o
 EXERCISES = {
     "logsumexp": FunctionBox(
         name="logsumexp",
+        picture=yours.curve("logsumexp", list(range(0, 1001, 10)), at=lambda t: (np.array([t, t - 1.0, t - 2.0]),), role="ink", xlabel="z[0]"),
         function="logsumexp",
         start=_L_START,
         solution=_l(),
@@ -180,6 +182,7 @@ EXERCISES = {
     ),
     "ce-from-logits": FunctionBox(
         name="ce-from-logits",
+        picture=yours.curve("ce_from_logits", list(range(0, 1001, 10)), at=lambda t: (np.array([t, 0.0, -t]), 1), role="loss", xlabel="z[0]"),
         function="ce_from_logits",
         start=_C_START,
         solution=_c(),

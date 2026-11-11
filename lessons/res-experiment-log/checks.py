@@ -10,6 +10,7 @@ import re
 import tempfile
 from pathlib import Path
 
+from everything_ai import yours
 from everything_ai import paths, projects
 from everything_ai.check import FunctionBox, Mistake, ScenarioBox, _as_code, run_code
 
@@ -305,6 +306,7 @@ def _show_runs(v):
 
 EXERCISES["find-runs"] = FunctionBox(
     name="find-runs",
+    picture=yours.steps(call=0),
     function="find_runs",
     start=_FSTART,
     solution=_f(),

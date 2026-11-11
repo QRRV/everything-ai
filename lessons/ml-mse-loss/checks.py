@@ -5,6 +5,7 @@ function with NumPy. And the picture of the residuals with their squares."""
 import re
 
 from everything_ai.check import CodeBox, FunctionBox, Mistake
+from everything_ai import yours
 
 # Five houses and a model, for the picture: area in m², price in thousands of euros.
 AREA = [70, 95, 110, 130, 150]
@@ -72,6 +73,7 @@ def _mse(new: str) -> str:
 EXERCISES = {
     "mse-temps": CodeBox(
         name="mse-temps",
+        picture=yours.steps(),
         start=_TEMPS_START,
         solution=_TEMPS_SOLUTION,
         keep=["temps_y = [12, 15, 9, 10]", "temps_y_pred = [15, 15, 8, 14]"],
@@ -123,6 +125,7 @@ EXERCISES = {
     ),
     "mse": FunctionBox(
         name="mse",
+        picture=yours.arrays(call=0),
         function="mse",
         start=_MSE_START,
         solution=_MSE,

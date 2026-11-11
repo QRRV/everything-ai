@@ -8,6 +8,7 @@ import numpy as np
 
 from everything_ai import draw
 from everything_ai.check import FunctionBox, Mistake
+from everything_ai import yours
 
 POOL_IN = [[1, 3, 2, 0], [4, 2, 1, 5], [0, 1, 3, 2], [2, 6, 1, 1]]
 
@@ -97,6 +98,7 @@ _W_ONE = [[[[1, 0], [0, -1]]]]
 EXERCISES = {
     "conv-channels": FunctionBox(
         name="conv-channels",
+        picture=yours.steps(call=0),
         function="conv_channels",
         start=_C_START,
         solution=_C,
@@ -135,6 +137,7 @@ EXERCISES = {
     ),
     "max-pool": FunctionBox(
         name="max-pool",
+        picture=yours.steps(call=0),
         function="max_pool",
         start=_P_START,
         solution=_P,

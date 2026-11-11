@@ -9,6 +9,7 @@ import re
 from functools import cache
 
 from everything_ai.check import Code, CodeBox, FunctionBox, Mistake
+from everything_ai import yours
 
 WEATHER = "lessons/data-pandas/weather.csv"
 WEATHER_2 = "lessons/data-pandas/weather-2.csv"
@@ -164,6 +165,7 @@ def _shown_table(value) -> str:
 EXERCISES = {
     "week-2": CodeBox(
         name="week-2",
+        picture=yours.table(),
         start=_WEEK_START,
         solution=_WEEK,
         keep=["import pandas as pd"] + _READS,
@@ -243,6 +245,7 @@ def _shown_value(value) -> str:
 
 EXERCISES["extra-rows"] = FunctionBox(
     name="extra-rows",
+    picture=yours.steps(call=0),
     function="extra_rows",
     start=_EXTRA_START,
     solution=_EXTRA,

@@ -6,6 +6,7 @@ import random
 import re
 
 from everything_ai.check import CodeBox, FunctionBox, Mistake, same_value
+from everything_ai import yours
 
 # 2000 throws of a fair die, always the same ones: the picture shows the first n of them.
 _rng = random.Random(41)
@@ -90,6 +91,7 @@ def _near(got, want: float, margin: float = 1e-9) -> bool:
 EXERCISES = {
     "distribution": FunctionBox(
         name="distribution",
+        picture=yours.bars(0),
         function="distribution",
         start=_D_START,
         solution=_D,
@@ -131,6 +133,7 @@ EXERCISES = {
     ),
     "estimate": CodeBox(
         name="estimate",
+        picture=yours.steps(),
         start=_E_START,
         solution=_E,
         keep=["seed = 8", "random.seed(seed)", "for i in range(500):", "    throws.append(random.randint(1, 6))"],

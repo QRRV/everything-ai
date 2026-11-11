@@ -10,6 +10,7 @@ import torch   # imported once, when the lesson opens: the first import takes lo
 from torch import nn
 
 from everything_ai.check import ClassBox, FunctionBox, Mistake
+from everything_ai import yours
 
 
 def spreads(kind: str, layers: int = 20, width: int = 256, seed: int = 0) -> list[float]:
@@ -119,6 +120,7 @@ def _spread_alike(got, want) -> bool:
 EXERCISES = {
     "init-std": FunctionBox(
         name="init-std",
+        picture=yours.steps(call=0),
         function="init_std",
         start=_S_START,
         solution=_s(),

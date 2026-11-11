@@ -6,6 +6,7 @@ test MSE of every degree."""
 import re
 
 from everything_ai.check import Code, CodeBox, Mistake
+from everything_ai import yours
 
 SEED, N, N_TRAIN, DEGREES = 75, 32, 12, range(1, 10)   # as in the worked example
 
@@ -104,6 +105,7 @@ def _same(got, want: float) -> bool:
 EXERCISES = {
     "test-mse": CodeBox(
         name="test-mse",
+        picture=yours.steps(),
         start=_T_START,
         solution=_T,
         # The check also runs the box with another degree: a number typed in by hand does not change with it.
