@@ -803,6 +803,12 @@ lessons:
 # --- gevorderd: Vision Transformers ---------------------------------------------------------------------------------
 # attn-transformer-block brings lm-mlp-context and attn-causal-mask along, just before this lesson: it bridges
 # explicitly, tokens become patches, and a ViT drops the causal mask.
+# Measured with the lesson's code (12 November), ViT(16, 2, 3, 4) with 11,738 parameters against ColorCNN with 11,642,
+# 6,000 CIFAR-10 photos, 40 epochs, lr 0.01, seeds 0-4: see REFERENCE in checks.py. On average the ViT stays below the CNN with
+# and without augmentation, augmentation helps it, and its learned positions grow alike for neighboring patches (the
+# picture after the demo is the course's run with seed 0, as Figure 7 of Dosovitskiy et al. 2020). The class token
+# comes from BERT, named with encoders and decoders in passing; ImageNet too: cv-try-classifier is not a prerequisite.
+# Project cnn gets patches.py, self_attention.py and vit.py; SelfAttention inherits the learner's CausalSelfAttention.
 - id: cv-vit
   title: "A Vision Transformer from scratch"
   level: gevorderd
@@ -810,9 +816,12 @@ lessons:
   idea: "A Vision Transformer cuts a photo into patches, turns each patch into a token with a linear layer and a position, and runs transformer blocks over them without a causal mask, so every patch sees every other; trained from scratch on CIFAR-10 it trails a CNN of the same size, because it has to learn from data, helped by augmentation, what a convolution builds in, its inductive bias."
   covers: [vision-transformers#0, vision-transformers#1, inductive-bias-symmetrie-en-equivariantie#3]
   requires: [cv-augment-photos, attn-transformer-block]
-  introduces: [c:vision-transformer, c:patch-embedding, c:class-token, c:inductive-bias]
+  introduces: [c:vision-transformer, c:patch-embedding, c:class-token, c:inductive-bias, py:torch-expand]
+  uses: [c:patch, c:token, c:embedding-layer, py:nn-embedding, c:learned-position-embedding, c:positional-encoding, c:self-attention, c:attention, c:attention-head, c:multi-head-attention, c:query, c:key, c:value, c:attention-score, c:attention-weights, c:scaled-dot-product-attention, c:softmax, py:torch-softmax, c:causal-mask, py:masked-fill, c:transformer, c:transformer-block, c:layernorm, c:residual-connection, c:mlp, c:logit, c:cross-entropy, c:classification, c:class, c:cifar-10, c:convolution, c:kernel-size, c:stride, c:filter, c:data-augmentation, c:horizontal-flip, c:random-crop, c:color-jitter, c:per-channel-normalization, c:train-set, c:test-set, c:validation-set, c:overfitting, c:epoch, c:mini-batch, c:learning-rate, c:warmup, c:seed, c:model-parameter, c:pretrained-model, c:accuracy, c:loss, v:loss-curve, v:train-val-curves, c:cosine-similarity, c:resnet, c:pixel, c:channel, c:float32, c:shape, c:tensor, c:axis, py:torch-reshape, py:torch-permute, py:torch-cat, py:torch-transpose, py:matmul-operator, py:nn-linear, py:nn-parameter, py:torch-arange, py:nn-modulelist, py:class, py:inheritance, py:super, py:forward-method, py:dataset, py:math-module, py:torch-tensor, py:dim, py:manual-seed, py:floor-division, py:slicing, py:indexing, py:for, py:list, py:append, py:tuple, py:len, py:keyword-argument, py:def, py:return, py:import, py:print, py:comment, q:predict, q:choice, q:exercise-with-check, q:run-cell, q:slider-task, q:explain]
+  mentions: [c:encoder, c:decoder, c:imagenet, c:paper]
   ladder: [torch]
   data: [cifar-10-download-only]
+  reference_data: []
   needs: any
 
 # Check when built: DINOv2's attention can show a few tokens of very high norm on the background (Darcet et al.,

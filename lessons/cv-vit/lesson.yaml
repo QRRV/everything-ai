@@ -1,0 +1,39 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: cv-vit
+minutes: 50
+title:
+  en: "A Vision Transformer from scratch"
+  nl: "Een Vision Transformer vanaf nul"
+goal:
+  en: "build a Vision Transformer from your transformer block: cut photos into patches that become tokens, put a class token in front, let every patch take from every patch, and train it on CIFAR-10 against a CNN of the same size, to see what a convolution builds in and a ViT has to learn."
+  nl: "een Vision Transformer bouwen uit je transformer block: foto's in patches knippen die tokens worden, een class token vooraan zetten, elke patch iets laten overnemen van elke patch, en hem op CIFAR-10 trainen tegen een CNN van dezelfde grootte, om te zien wat een convolutie inbouwt en een ViT moet leren."
+summary:
+  - en: "A Vision Transformer cuts a photo into patches of p by p pixels, row by row, and sends the 3 · p · p numbers of each patch through one linear layer, the patch embedding: the same d filters at every place, as a convolution with d output channels, a kernel size and a stride of p."
+    nl: "Een Vision Transformer knipt een foto in patches van p bij p pixels, rij voor rij, en stuurt de 3 · p · p getallen van elke patch door één lineaire layer, de patch embedding: dezelfde d filters op elke plek, zoals een convolutie met d output channels, een kernel size en een stride van p."
+  - en: "A learned class token goes in front of the patch tokens, every token gets a learned position, and the blocks run without a causal mask, so every patch takes from every patch. After the last block, the class token gives the logits."
+    nl: "Een geleerd class token komt vóór de tokens van de patches, elk token krijgt een geleerde positie, en de blocks draaien zonder causal mask, dus neemt elke patch iets over van elke patch. Na het laatste block geeft het class token de logits."
+  - en: "On 6,000 CIFAR-10 photos, for 40 epochs, your ViT with 11,738 parameters reads 489 to 524 of the 1,000 test photos right with mirror, crop and color, and 442 to 465 without; your ColorCNN with 11,642 reads 583 to 619 and 460 to 545. A convolution builds in that neighboring pixels belong together and that a pattern means the same everywhere, its inductive bias; the ViT has to learn that from its photos, and its learned positions show it does: those of neighboring patches grow alike."
+    nl: "Op 6.000 foto's van CIFAR-10, 40 epochs lang, leest je ViT met 11.738 parameters 489 tot 524 van de 1.000 testfoto's goed met spiegelen, crop en kleur, en 442 tot 465 zonder; je ColorCNN met 11.642 leest er 583 tot 619 en 460 tot 545. Een convolutie bouwt in dat naburige pixels bij elkaar horen en dat een patroon overal hetzelfde betekent, zijn inductive bias; de ViT moet dat uit zijn foto's leren, en zijn geleerde posities laten zien dat hij het doet: die van naburige patches gaan op elkaar lijken."
+can_now:
+  - en: "cut a batch of photos into patches with reshape and permute"
+    nl: "een batch foto's in patches knippen met reshape en permute"
+    by: patches
+  - en: "turn causal self-attention into attention in which every token takes from every token"
+    nl: "causal self-attention veranderen in attention waarin elk token iets overneemt van elk token"
+    by: self-attention
+  - en: "build a Vision Transformer from patch embedding, class token, learned positions and transformer blocks"
+    nl: "een Vision Transformer bouwen uit patch embedding, class token, geleerde posities en transformer blocks"
+    by: vit
+  - en: "read from its learned positions what a Vision Transformer learned about where its patches lie"
+    nl: "aan zijn geleerde posities aflezen wat een Vision Transformer leerde over waar zijn patches liggen"
+    by: learned-places
+  - en: "explain with inductive bias why a Vision Transformer needs more photos than a CNN"
+    nl: "met inductive bias uitleggen waarom een Vision Transformer meer foto's nodig heeft dan een CNN"
+    by: inductive-bias
+further_reading:
+  - en: "Alexey Dosovitskiy and others (2020), *An Image is Worth 16x16 Words: Transformers for Image Recognition at Scale*, section 3.1: the Vision Transformer and its inductive bias"
+    nl: "Alexey Dosovitskiy en anderen (2020), *An Image is Worth 16x16 Words: Transformers for Image Recognition at Scale*, paragraaf 3.1: de Vision Transformer en zijn inductive bias"
+  - en: "The same paper, section 4.3: how much the ViT gains from more photos, against ResNets; and section 4.5 with Figure 7: what its learned positions look like"
+    nl: "Dezelfde paper, paragraaf 4.3: hoeveel de ViT wint met meer foto's, tegen ResNets; en paragraaf 4.5 met figuur 7: hoe zijn geleerde posities eruitzien"
