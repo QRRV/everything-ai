@@ -1,0 +1,36 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: cv-project-detector-or-unet
+minutes: 75
+title:
+  en: "Final project: your own U-Net or detector"
+  nl: "Eindproject: je eigen U-Net of detector"
+goal:
+  en: "make the course's scenes harder with fog, light from one side and noise, choose on validation scenes what your U-Net or detector learns from, test it once, and find the groups of shapes where it fails."
+  nl: "de scènes van de course moeilijker maken met mist, licht van één kant en ruis, op validatiescènes kiezen waarvan je U-Net of detector leert, het één keer testen, en de groepen vormen vinden waarin het faalt."
+summary:
+  - en: "A hard scene is a scene of the course with the same shapes, masks and boxes, and other pixels: fog pulls every number toward the mean of the image, light falls off toward the left, and noise from a normal distribution is added; then every number is kept within 0 and 255 with `np.clip`, rounded, and made uint8."
+    nl: "Een moeilijke scène is een scène van de course met dezelfde vormen, masks en boxes, en andere pixels: mist trekt elk getal naar het gemiddelde van de afbeelding, licht neemt naar links af, en er komt ruis uit een normale verdeling bij; dan wordt elk getal met `np.clip` binnen 0 en 255 gehouden, afgerond, en uint8 gemaakt."
+  - en: "Learned from the scenes as they are, the course's detector falls from an mAP of 0.91 on the validation scenes to 0.28 on them made harder, and its U-Net from a mean IoU of 0.94 to 0.23, the medians of five seeds: a distribution shift, which a test set from the source of the training data does not show."
+    nl: "Geleerd van de scènes zoals ze zijn, zakt de detector van de course van een mAP van 0,91 op de validatiescènes naar 0,28 op die scènes moeilijker gemaakt, en zijn U-Net van een mean IoU van 0,94 naar 0,23, de medianen van vijf seeds: een distribution shift, die een test set uit de bron van de training data niet laat zien."
+  - en: "Chosen on the hard validation scenes by the median of five seeds, the U-Net learns from all training scenes made harder, 0.89, and the detector from half of them, 0.80; measured once on the hard test scenes, with seed 0, they reach 0.908 and 0.815."
+    nl: "Gekozen op de moeilijke validatiescènes met de mediaan van vijf seeds, leert het U-Net van alle trainingsscènes moeilijker gemaakt, 0,89, en de detector van de helft ervan, 0,80; één keer gemeten op de moeilijke testscènes, met seed 0, halen ze 0,908 en 0,815."
+  - en: "The error analysis puts every shape of the hard validation scenes, found or not, in groups by its pixels in sight, its light, and the fog and the noise of its scene: the course's detector finds 40% of the smallest shapes and 60% of those in the heaviest fog, and a group of few shapes says less."
+    nl: "De error analysis zet elke vorm van de moeilijke validatiescènes, gevonden of niet, in groepen naar zijn pixels in zicht, zijn licht, en de mist en de ruis van zijn scène: de detector van de course vindt 40% van de kleinste vormen en 60% van die in de zwaarste mist, en een groep van weinig vormen zegt minder."
+can_now:
+  - en: "make an image harder to read with fog, light from one side and noise, and keep its numbers whole numbers from 0 to 255"
+    nl: "een afbeelding moeilijker leesbaar maken met mist, licht van één kant en ruis, en haar getallen hele getallen van 0 tot 255 houden"
+    by: harder
+  - en: "put shapes in groups by a property, and give the share found of every group"
+    nl: "vormen in groepen verdelen naar een eigenschap, en het aandeel gevonden van elke groep geven"
+    by: shares
+  - en: "choose what to try next on the validation set, and keep the test set for the end"
+    nl: "kiezen wat je daarna probeert op de validation set, en de test set bewaren voor het eind"
+    by: next-step
+  - en: "report on a network under a distribution shift: how its training data was chosen, how it did on the hard test scenes, and where it fails"
+    nl: "verslag doen van een netwerk onder een distribution shift: hoe zijn training data gekozen is, hoe het deed op de moeilijke testscènes, en waar het faalt"
+    by: report
+further_reading:
+  - en: "Dan Hendrycks and Thomas Dietterich (2019), *Benchmarking Neural Network Robustness to Common Corruptions and Perturbations*: section 4.1, ImageNet-C, fifteen corruptions of the ImageNet validation images, such as fog, brightness, contrast and noise from a normal distribution, each at five levels of severity, with Figure 1; section 4.2, how a network is scored on all of them; and section 5.1, networks from AlexNet to ResNet, whose gains under corruption are mostly explained by their gains on the clean images"
+    nl: "Dan Hendrycks en Thomas Dietterich (2019), *Benchmarking Neural Network Robustness to Common Corruptions and Perturbations*: paragraaf 4.1, ImageNet-C, vijftien verstoringen van de validatieafbeeldingen van ImageNet, zoals mist, helderheid, contrast en ruis uit een normale verdeling, elk op vijf niveaus van zwaarte, met figuur 1; paragraaf 4.2, hoe een netwerk op al die verstoringen een score krijgt; en paragraaf 5.1, netwerken van AlexNet tot ResNet, die onder verstoringen vooral beter worden doordat ze op de schone afbeeldingen beter worden"

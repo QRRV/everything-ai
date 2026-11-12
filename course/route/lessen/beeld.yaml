@@ -880,7 +880,17 @@ lessons:
   project: cnn
   idea: "You choose a U-Net or a one-stage detector, train it on harder scenes that you generate yourself, score it with mean IoU or mAP, and show where it fails."
   covers: [segmentatie#3, objectdetectie#3]
+  # Measured with the course's own scenes (2,000 training, 200 validation, 200 test; 8 epochs, one thread, seeds 0-4):
+  # learned from the scenes as they are, the U-Net falls from a mean IoU of 0.94 on the validation scenes to 0.23 on
+  # them made harder, the detector from an mAP of 0.91 to 0.28 (medians). Chosen on the hard validation scenes by the
+  # median: the U-Net learns from all training scenes made harder (0.89; half 0.86), the detector from half (0.80; all
+  # 0.78). Test once, seed 0: 0.908 and 0.815. The error analysis looks at the 802 shapes of the hard validation
+  # scenes, so that what to try next is chosen there. c:error-analysis is introduced by cv-project-resnet-grad-cam,
+  # outside this chain, so it is in mentions.
   requires: [cv-unet, cv-focal-loss]
+  introduces: [c:distribution-shift, py:np-clip]
+  uses: [c:u-net, c:mean-iou, c:skip-connection, c:semantic-segmentation, c:segmentation-mask, c:one-stage-detector, c:anchor-box, c:object-detection, c:bounding-box, c:mean-average-precision, c:average-precision, c:intersection-over-union, c:non-maximum-suppression, c:confidence-score, c:focal-loss, c:retinanet, c:cross-entropy, c:probability, c:validation-set, c:test-set, c:train-set, c:hyperparameter, c:overfitting, c:generalization, c:contrast, c:histogram-equalization, c:uint8, c:normal-distribution, c:random-number-generator, c:noise, c:standard-deviation, c:mean, c:median, c:bin, c:broadcasting, c:dtype, c:shape, c:axis, c:pixel, c:channel, c:rgb, c:class, c:label, c:feature-map, c:layer, c:convolution, c:model-parameter, c:loss, c:training, c:epoch, c:mini-batch, c:seed, c:tensor, v:loss-curve, v:train-val-curves, py:np-array, py:np-arange, py:np-reshape, py:np-astype, py:np-round, py:np-mean, py:np-sum, py:boolean-mask, py:mask-and-or, py:np-random-generator, py:float, py:none, py:list, py:append, py:for, py:range, py:len, py:if, py:def, py:return, py:import, py:print, py:comment, py:variable, py:arithmetic, py:comparison, py:indexing, py:tuple, py:keyword-argument, py:round, q:predict, q:choice, q:exercise-with-check, q:slider-task, q:explain, q:run-cell]
+  mentions: [c:error-analysis]
   ladder: [torch]
   data: [course-scenes]
   needs: any
