@@ -18,7 +18,7 @@ import torch   # imported once, when the lesson opens: the first import takes lo
 import torch.nn.functional as F
 from torch import nn
 
-from everything_ai import chart, paths, projects, scenes
+from everything_ai import chart, live, netview, paths, projects, scenes
 from everything_ai.check import Mistake, ScenarioBox, Timeout, run_code, with_time_limit
 from everything_ai import yours
 
@@ -391,7 +391,8 @@ def train(model, seed: int = 0, epochs: int = EPOCHS, heard=None, pool_fn=roi_po
     """Train `model` on the training scenes, as the course measured: for every batch, the RPN's loss, and for every scene
     its proposals (prop_fn, TRAIN_KEEP of them, with the true boxes added), their pooled features (pool_fn) and the loss
     of the second stage on them; the sum of the two. The proposals count as given numbers. `heard` hears every 10
-    batches how far an epoch is, and after every epoch the loss of each stage and the boxes on the SHOWN scenes."""
+    batches how far an epoch is, with the mean loss of those 10 batches, both stages together ("loss"), and after every
+    epoch the loss of each stage and the model."""
     ss, X = scene_set("train")
     C, T = rpn_targets()
     truths = [boxes_and_labels(s) for s in ss]
@@ -406,7 +407,7 @@ def train(model, seed: int = 0, epochs: int = EPOCHS, heard=None, pool_fn=roi_po
     model.train()
     for epoch in range(1, epochs + 1):
         order = torch.randperm(n, generator=order_rng)
-        run_rpn = run_second = 0.0
+        run_rpn = run_second = reported = 0.0
         for b, i in enumerate(range(0, n, BATCH), 1):
             idx = order[i:i + BATCH]
             maps, rows = model(X[idx].float() / 255)
@@ -430,7 +431,9 @@ def train(model, seed: int = 0, epochs: int = EPOCHS, heard=None, pool_fn=roi_po
             run_rpn += first.item()
             run_second += second.item()
             if heard is not None and b % 10 == 0:
-                heard({"epoch": epoch, "epochs": epochs, "batch": b, "batches": per})
+                heard({"epoch": epoch, "epochs": epochs, "batch": b, "batches": per,
+                       "loss": (run_rpn + run_second - reported) / 10})
+                reported = run_rpn + run_second
         history.append({"epoch": epoch, "rpn_loss": run_rpn / per, "second_loss": run_second / per})
         if heard is not None:
             heard({"epoch": epoch, "epochs": epochs, "rpn_loss": run_rpn / per, "second_loss": run_second / per,
@@ -633,10 +636,14 @@ def curves_picture(curves: dict, labels: dict, lang: str, at: int | None = None)
     mine = [v for v in first + second if np.isfinite(v)]
     top = max([0.2] + [1.1 * v for v in mine])
     p = chart.Panel((0.5, max(len(first), len(second), 1) + 0.5), (0, top), title=labels["title"], xlabel=labels["x"], ylabel=labels["y"])
-    for ys, dashed, name, dy in ((second, True, labels["second"], 0.07), (first, False, labels["rpn"], 0.07)):
+    drawn = []
+    for ys, dashed, name in ((second, True, labels["second"]), (first, False, labels["rpn"])):
         if ys:
             p.line(list(range(1, len(ys) + 1)), ys, "loss", 2.2, dashed=dashed)
-            p.text(len(ys) - 0.3 if len(ys) > 1 else 1, ys[-1] + dy * top, name, "loss", "end")   # above the line at the end
+            drawn.append((ys, name))
+    drawn.sort(key=lambda d: d[0][-1], reverse=True)
+    for (ys, name), y in zip(drawn, chart.name_heights([ys[-1] for ys, _ in drawn], top)):
+        p.text(len(ys) - 0.3 if len(ys) > 1 else 1, y, name, "loss", "end")   # clear of the lines at the last epoch
     if at is not None:
         p.line([at, at], [0, top], "ink-2", 1.2)
     svg = chart.figure([p], alt=labels["alt"], width=276, height=200)   # 11 px text in a play box on a phone
@@ -922,9 +929,10 @@ def _demo(show=None):
     roi_pool stops with an error or does not give (64, K, K) numbers that training can follow back for a box of the
     scene; "proposals" when their proposals stops or does not give boxes; "offsets" when their boxes_from stops on the
     trained detector's offsets; "slow" when the training takes too long; else a dict with the loss of each stage after
-    every epoch ("curves"), the boxes on the SHOWN scenes after every epoch ("moments"), the summary of the trained
-    detector on the test scenes, its parameters, and the modules the course's versions stood in for. `show` hears the
-    run while it trains."""
+    every epoch ("curves"), the boxes on the SHOWN scenes after every epoch ("moments"), the layer the demo watches
+    after every epoch ("layers", see look), the summary of the trained detector on the test scenes, its parameters, and
+    the modules the course's versions stood in for. `show` hears the run while it trains, every report with "look": a
+    function that gives what the detector makes at that moment (decision 1.17)."""
     if not (_saved("roi_pool") and _saved("proposals")):
         return None
     names = {}
@@ -956,7 +964,17 @@ def _demo(show=None):
                                 _named(names["boxes_from"], "offsets"))
     torch.manual_seed(0)   # the same start as the course's run
     model = TwoStage()
-    moments, broken = [], []
+    test_ss, Xt = scene_set("test")
+    example_x = Xt[TEST.index(SEED):TEST.index(SEED) + 1].float() / 255   # the scene of the worked example
+    moments, layers, broken = [], [], []
+
+    def look() -> dict:
+        """What the detector makes at this moment: its boxes on the SHOWN test scenes, and the last layer of its
+        backbone, the feature maps both stages read, on the scene of the worked example; looked at in eval mode
+        without a graph, so the run stays the same."""
+        with netview.looking(model):
+            boxes = shown_moment(model, pool, props_of, boxes_of)
+        return {"boxes": boxes, "layer": netview.watched(model, example_x)}
 
     def heard(p):
         if "model" in p:
@@ -968,10 +986,13 @@ def _demo(show=None):
             except Exception:
                 broken.append("offsets")
                 moments.append([[] for _ in SHOWN])
+            layers.append(netview.watched(model, example_x))
             p = {k: v for k, v in p.items() if k != "model"}
         if show is not None:
             try:
-                show(p)
+                show(p | {"look": look})
+            except Timeout:   # the demo's time limit, also when it falls while the chart draws
+                raise
             except Exception:   # the live chart is the course's own: it never stops the learner's run
                 pass
 
@@ -985,7 +1006,6 @@ def _demo(show=None):
         return "roi_pool"
     if broken:
         return broken[0]
-    test_ss, Xt = scene_set("test")
     try:
         result = summary(detect(model, Xt, TEST_KEEP, pool, props_of, boxes_of), test_ss)
     except _Stopped as e:
@@ -993,7 +1013,21 @@ def _demo(show=None):
     except Exception:
         return "offsets"
     curves = {"rpn": [float(h["rpn_loss"]) for h in history], "second": [float(h["second_loss"]) for h in history]}
-    return result | {"curves": curves, "moments": moments, "params": sum(v.numel() for v in model.parameters()), "stand_ins": stand_ins}
+    return result | {"curves": curves, "moments": moments, "layers": layers, "params": sum(v.numel() for v in model.parameters()),
+                     "stand_ins": stand_ins}
+
+
+def now_pictures(seen: dict, words: dict, lang: str, uid: str) -> list[str]:
+    """What the two-stage detector makes at one moment of the demo's run, as `look` or a rewind gives it: its boxes on
+    the SHOWN test scenes, and the layer the demo watches, under words["layer"] with its name."""
+    return netview.moment(rewind_picture(seen["boxes"], words), seen.get("layer"), words["layer"], lang, uid, seed=SEED)
+
+
+def epoch_frame(result: dict, e: int, labels: dict, words: dict, lang: str) -> str:
+    """The rewind at epoch e (from 1): the loss of each stage after every epoch with a line at e, then the boxes on
+    the SHOWN test scenes after it, and under them the layer the demo watches, as it was then."""
+    seen = {"boxes": result["moments"][e - 1], "layer": result["layers"][e - 1]}
+    return live.rewound(curves_picture(result["curves"], labels, lang, at=e), now_pictures(seen, words, lang, f"nv-rcnn-epoch-{e}"))
 
 
 _DEMO_RUNS: dict = {}

@@ -18,7 +18,7 @@ import torch   # imported once, when the lesson opens: the first import takes lo
 import torch.nn.functional as F
 from torch import nn
 
-from everything_ai import chart, paths, projects, scenes
+from everything_ai import chart, live, netview, paths, projects, scenes
 from everything_ai.check import Mistake, ScenarioBox, Timeout, run_code, with_time_limit
 from everything_ai import yours
 
@@ -881,8 +881,10 @@ def _demo(show=None):
     pyramid stops or does not give the four levels of 32 maps that training can follow back; "head_rows" when their
     head_rows stops or does not give 2,720 rows of 8; "offsets" when their boxes_from stops on the trained detector's
     offsets; "slow" when the training takes too long; else a dict with the loss after every epoch ("curves"), the boxes
-    on the SHOWN scenes after every epoch ("moments"), the summary of the trained detector on the test scenes, its
-    parameters, and the modules the course's versions stood in for. `show` hears the run while it trains."""
+    on the SHOWN scenes after every epoch ("moments"), level 2 of the pyramid after every epoch ("layers", see look),
+    the summary of the trained detector on the test scenes, its parameters, and the modules the course's versions
+    stood in for. `show` hears the run while it trains, every report with "look": a function that gives what the
+    detector makes at that moment (decision 1.17)."""
     if not (_saved("pyramid") and _saved("head_rows")):
         return None
     names = {}
@@ -915,19 +917,33 @@ def _demo(show=None):
     torch.manual_seed(0)   # the same start as the course's run
     model = FPNDetector(pyr, rows_of)
     a = anchors()
-    moments, broken = [], []
+    test_ss, Xt = scene_set("test")
+    shown_at = [TEST.index(seed) for seed in SHOWN]
+    example_x = Xt[TEST.index(SEED):TEST.index(SEED) + 1].float() / 255   # the scene of the worked example
+    moments, layers, broken = [], [], []
+
+    def look() -> dict:
+        """What the detector makes at this moment: its boxes on the SHOWN test scenes, and level 2 of the pyramid,
+        the finest, on the scene of the worked example; looked at in eval mode without a graph, so the run stays the
+        same."""
+        with netview.looking(model):
+            out = model(Xt[shown_at].float() / 255)
+        return {"boxes": [shown(detect(o, a, boxes_fn=boxes_of)) for o in out], "layer": netview.watched(model, example_x, "smooth.0")}
 
     def heard(p):
         if "out" in p:
             try:
-                moments.append([shown(detect(p["out"][TEST.index(seed)], a, boxes_fn=boxes_of)) for seed in SHOWN])
+                moments.append([shown(detect(p["out"][i], a, boxes_fn=boxes_of)) for i in shown_at])
             except _Stopped as e:   # the learner's boxes_from stopped (any other error is the course's own)
                 broken.append(e.key)
                 moments.append([[] for _ in SHOWN])
+            layers.append(netview.watched(model, example_x, "smooth.0"))
             p = {k: v for k, v in p.items() if k != "out"}
         if show is not None:
             try:
-                show(p)
+                show(p | {"look": look})
+            except Timeout:   # the demo's time limit, also when it falls while the chart draws
+                raise
             except Exception:   # the live chart is the course's own: it never stops the learner's run
                 pass
 
@@ -941,13 +957,26 @@ def _demo(show=None):
         return "pyramid"
     if broken:
         return broken[0]
-    test_ss, Xt = scene_set("test")
     try:
         result = summary(outputs(model, Xt), test_ss, a, boxes_fn=boxes_of)
     except _Stopped as e:   # the learner's module that stopped; any other error is the course's own
         return e.key
     curves = {"train": [float(h["train_loss"]) for h in history], "val": [float(h["val_loss"]) for h in history]}
-    return result | {"curves": curves, "moments": moments, "params": sum(v.numel() for v in model.parameters()), "stand_ins": stand_ins}
+    return result | {"curves": curves, "moments": moments, "layers": layers, "params": sum(v.numel() for v in model.parameters()),
+                     "stand_ins": stand_ins}
+
+
+def now_pictures(seen: dict, words: dict, lang: str, uid: str) -> list[str]:
+    """What the FPN detector makes at one moment of the demo's run, as `look` or a rewind gives it: its boxes on the
+    SHOWN test scenes, and level 2 of the pyramid, under words["layer"] with its name."""
+    return netview.moment(rewind_picture(seen["boxes"], words), seen.get("layer"), words["layer"], lang, uid, seed=SEED)
+
+
+def epoch_frame(result: dict, e: int, labels: dict, words: dict, lang: str) -> str:
+    """The rewind at epoch e (from 1): the loss after every epoch with a line at e, then the boxes on the SHOWN test
+    scenes after it, and under them level 2 of the pyramid, as it was then."""
+    seen = {"boxes": result["moments"][e - 1], "layer": result["layers"][e - 1]}
+    return live.rewound(curves_picture(result["curves"], labels, lang, at=e), now_pictures(seen, words, lang, f"nv-fpn-epoch-{e}"))
 
 
 _DEMO_RUNS: dict = {}

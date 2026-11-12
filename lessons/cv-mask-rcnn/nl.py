@@ -481,7 +481,7 @@ def text_demo():
     mo.md(r"""
     ### Wat je project nu kan
 
-    Druk op de knop: de demo traint de Mask R-CNN van de course, de two-stage detector met een mask head, met je `roi_align`, en daardoor je `bilinear`, en met je `proposals`, 8 epochs lang op de 2.000 trainingsscènes, in mini-batches van 32. Daarna vindt hij de vormen van de 200 testscènes met je `boxes_from`, en plakt hij hun masks met je `paste`. Hij traint op één thread, zodat hij de run van de course met seed 0 zo goed volgt als je computer toelaat; dat duurt even: op de computer van de course ongeveer elf minuten. De grafiek toont na elke epoch de training loss van de drie delen samen. Als hij klaar is, kun je terug door de epochs, en de masks zien die hij na elk ervan aan drie testscènes gaf.
+    Druk op de knop: de demo traint de Mask R-CNN van de course, de two-stage detector met een mask head, met je `roi_align`, en daardoor je `bilinear`, en met je `proposals`, 8 epochs lang op de 2.000 trainingsscènes, in mini-batches van 32. Daarna vindt hij de vormen van de 200 testscènes met je `boxes_from`, en plakt hij hun masks met je `paste`. Hij traint op één thread, zodat hij de run van de course met seed 0 zo goed volgt als je computer toelaat; dat duurt even: op de computer van de course ongeveer elf minuten. Terwijl hij traint, toont de grafiek elke 10 batches de training loss van de drie delen samen. Onder de grafiek staan de masks die hij op dat moment aan drie testscènes geeft, en daaronder de feature maps van de laatste layer van zijn backbone, waaruit alle drie de delen lezen, op de scène van het uitgewerkte voorbeeld; allebei worden ze opnieuw getekend terwijl hij traint. Als hij klaar is, kun je terug door de epochs en zie je ze allebei na elke epoch.
     """)
     return
 
@@ -500,16 +500,21 @@ def demo_mask_rcnn(train_button, result_bilinear, result_align, result_paste):
         _out = mo.md("*Druk op de knop om Mask R-CNN te trainen.*")
     else:
         _now = {}   # de live grafiek, gemaakt bij het eerste bericht
+        _words = {"scene": "scène {seed}: {n} masks", "layer": "Layer {name} van Mask R-CNN op scène {seed}: de maps waaruit alle drie de delen lezen",
+                  "alt": "Drie testscènes in grijs, elk met de randen van zijn echte masks en de masks van de boxes van 0,5 of meer die Mask R-CNN er na die epoch aan gaf, gevuld."}
+        _words_now = _words | {"alt": "Drie testscènes in grijs, elk met de randen van zijn echte masks en de masks van de boxes van 0,5 of meer die Mask R-CNN er nu aan geeft, gevuld."}
 
         def _progress(_p):
             if "chart" not in _now:
                 _now["chart"] = L.live({"title": "Mask R-CNN: de training loss", "x": "epoch", "y": "training loss",
-                                        "alt": "De training loss van Mask R-CNN, zijn drie delen samen, na elke epoch tot nu toe."}, _p["epochs"], low=0.0)
-            if "mask" in _p:
+                                        "alt": "De training loss van Mask R-CNN tot nu toe, zijn drie delen samen, elke 10 batches."}, _p["epochs"], low=0.0)
+                _now["chart"].watch(lambda: C.now_pictures(_p["look"](), _words_now, L.lang, "nv-mask-now"))
+            if "mask" in _p:   # na elke epoch: het gemiddelde
                 _loss = _p["rpn"] + _p["second"] + _p["mask"]
-                _now["chart"].add(_p["epoch"], _loss, f"**Mask R-CNN** · epoch {_p['epoch']} van {_p['epochs']} · training loss {L.number(_loss, 3)}")
-            else:
-                _now["chart"].line(f"**Mask R-CNN** · epoch {_p['epoch']} van {_p['epochs']} · batch {_p['batch']} van {_p['batches']}")
+                _now["chart"].line(f"**Mask R-CNN** · epoch {_p['epoch']} van {_p['epochs']} · training loss {L.number(_loss, 3)}")
+            else:   # elke 10 batches
+                _now["chart"].add(_p["epoch"] - 1 + _p["batch"] / _p["batches"], _p["loss"],
+                                  f"**Mask R-CNN** · epoch {_p['epoch']} van {_p['epochs']} · batch {_p['batch']} van {_p['batches']} · training loss {L.number(_p['loss'], 3)}")
 
         _result = C.demo(_progress)
         if _result is None:
@@ -528,13 +533,12 @@ def demo_mask_rcnn(train_button, result_bilinear, result_align, result_paste):
             _labels = {"title": "Loss van elk deel", "x": "epoch", "y": "loss", "rpn": "RPN, doorgetrokken", "second": "tweede fase, gestreept",
                        "mask": "mask head, met rondjes",
                        "alt": "De training loss van elk deel na elke epoch: van het RPN doorgetrokken, van de tweede fase gestreept, van de mask head doorgetrokken met rondjes."}
-            _words = {"scene": "scène {seed}: {n} masks", "alt": "Drie testscènes in grijs, elk met de randen van zijn echte masks en de masks van de boxes van 0,5 of meer die Mask R-CNN er na die epoch aan gaf, gevuld."}
             _curves, _moments = _result["curves"], _result["moments"]
 
             def _frame(_e):
                 _e = int(_e)
                 _n = sum(len(_m) for _m in _moments[_e - 1])
-                return (C.curves_picture(_curves, _labels, L.lang, at=_e) + C.rewind_picture(_moments[_e - 1], _words),
+                return (C.epoch_frame(_result, _e, _labels, _words, L.lang),
                         f"Na epoch {_e}: loss {L.number(_curves['rpn'][_e - 1], 3)} voor het RPN, {L.number(_curves['second'][_e - 1], 3)} voor de tweede fase en {L.number(_curves['mask'][_e - 1], 3)} voor de mask head, en {_n} masks in deze drie scènes, die {C.SHOWN_SHAPES} vormen hebben.")
 
             if len(_moments) == len(_curves["mask"]) > 1:   # terugspoelen door de run, met de hele run in het plaatje

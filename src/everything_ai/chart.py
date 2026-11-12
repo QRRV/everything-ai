@@ -149,6 +149,25 @@ def with_decimal_comma(svg: str) -> str:
     return re.sub(r'(<text class="ea-tick"[^>]*>)([^<]*)(</text>)', lambda m: m[1] + m[2].replace(".", ",") + m[3], svg)
 
 
+def name_heights(ends: list, top: float) -> list:
+    """Where the names of one or two lines go at their last epoch, given where they end (the higher end first) on a
+    y-axis from 0 to top: over the line that ends higher and under the other. A name is about 0.1 of the axis high.
+    Where there is no room over the higher line, its name goes under it too; where there is no room under the lower
+    one, its name goes just over it when the higher line is far enough above, and else both names go over both lines,
+    the name of the higher line on top."""
+    if len(ends) < 2:
+        return [e + 0.07 * top if e + 0.07 * top <= 0.95 * top else e - 0.08 * top for e in ends]
+    hi, lo = ends
+    up, down = hi + 0.07 * top, lo - 0.08 * top
+    if up > 0.95 * top:                          # the higher line ends at the top: both names under their lines
+        return [hi - 0.08 * top, down if hi - lo > 0.2 * top else hi - 0.23 * top]
+    if down >= 0.06 * top:
+        return [up, down]
+    if hi - lo > 0.2 * top:                      # the lower line's name fits between the two lines
+        return [up, lo + 0.07 * top]
+    return [hi + 0.22 * top, hi + 0.07 * top]    # both end close together near 0: both names over them
+
+
 def _yticks(p: Panel) -> tuple[list[float], object]:
     """The ticks of the y-axis and how each is written."""
     y0, y1 = p.y

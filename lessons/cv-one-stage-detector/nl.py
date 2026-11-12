@@ -460,7 +460,7 @@ def text_demo():
     mo.md(r"""
     ### Wat je project nu kan
 
-    Druk op de knop: de demo maakt met je `targets` de targets van de 2.000 trainingsscènes en de 200 testscènes, traint je `Detector` met je `detection_loss` 8 epochs lang, in mini-batches van 32, zoals de detector van de course trainde, en vindt daarna de vormen van de testscènes met je `boxes_from` en NMS. Hij traint op één thread, zodat hij de run van de course met seed 0 zo goed volgt als je computer toelaat; dat duurt een paar minuten. De grafiek laat na elke epoch de loss op de testscènes zien. Als hij klaar is, kun je door de epochs terugspoelen, en zien welke boxes je detector na elke epoch aan drie testscènes gaf.
+    Druk op de knop: de demo maakt met je `targets` de targets van de 2.000 trainingsscènes en de 200 testscènes, traint je `Detector` met je `detection_loss` 8 epochs lang, in mini-batches van 32, zoals de detector van de course trainde, en vindt daarna de vormen van de testscènes met je `boxes_from` en NMS. Hij traint op één thread, zodat hij de run van de course met seed 0 zo goed volgt als je computer toelaat; dat duurt een paar minuten. Terwijl hij traint, laat de grafiek elke 10 batches de loss op de trainingsscènes zien, en gestreept de loss op de 200 testscènes na elke epoch. Onder de grafiek staan de boxes die je detector op dat moment aan drie testscènes geeft, en daaronder de feature maps van zijn laatste layer vóór de head, op de scène van het uitgewerkte voorbeeld; allebei worden ze opnieuw getekend terwijl hij traint. Als hij klaar is, kun je door de epochs terugspoelen en zie je ze allebei na elke epoch.
     """)
     return
 
@@ -479,15 +479,24 @@ def demo_detector(train_button, result_targets, result_loss, result_detector):
         _out = mo.md("*Druk op de knop om je detector te trainen.*")
     else:
         _now = {}   # the live chart, made at the first report
+        _words = {"scene": "scène {seed}: {n} boxes", "layer": "Layer {name} van je detector op scène {seed}",
+                  "alt": "Drie testscènes, elk met haar echte boxes en de gestreepte boxes van 0,5 of meer die je detector er na die epoch aan gaf, na NMS."}
+        _words_now = _words | {"alt": "Drie testscènes, elk met haar echte boxes en de gestreepte boxes van 0,5 of meer die je detector er nu aan geeft, na NMS."}
 
         def _progress(_p):
             if "chart" not in _now:
-                _now["chart"] = L.live({"title": "Je detector: de loss op de testscènes", "x": "epoch", "y": "loss op de testscènes",
-                                        "alt": "De loss van je detector op de 200 testscènes na elke epoch tot nu toe."}, _p["epochs"], low=0.0)
-            if "val_loss" in _p:
-                _now["chart"].add(_p["epoch"], _p["val_loss"], f"**Je detector** · epoch {_p['epoch']} van {_p['epochs']} · loss op de testscènes {L.number(_p['val_loss'], 3)}")
-            else:
-                _now["chart"].line(f"**Je detector** · epoch {_p['epoch']} van {_p['epochs']} · batch {_p['batch']} van {_p['batches']}")
+                _now["chart"] = L.live({"title": "Je detector: de loss tijdens het trainen", "x": "epoch", "y": "loss",
+                                        "alt": "De loss van je detector tot nu toe: op de trainingsscènes elke 10 batches, en gestreept op de 200 testscènes na elke epoch."}, _p["epochs"], low=0.0,
+                                       key=[("loss", False, "trainingsscènes, elke 10 batches"), ("loss", True, "testscènes, na elke epoch")])
+                _now["chart"].watch(lambda: C.now_pictures(_p["look"](), _words_now, L.lang, "nv-one-now"))
+                _now["test"] = []
+            if "val_loss" in _p:   # de testscènes na elke epoch, gestreept
+                _now["test"].append((_p["epoch"], _p["val_loss"]))
+                _now["chart"].reference(_now["test"], "", role="loss", replace=True)
+                _now["chart"].line(f"**Je detector** · epoch {_p['epoch']} van {_p['epochs']} · loss op de testscènes {L.number(_p['val_loss'], 3)}")
+            else:   # de trainingsscènes elke 10 batches
+                _now["chart"].add(_p["epoch"] - 1 + _p["batch"] / _p["batches"], _p["loss"],
+                                  f"**Je detector** · epoch {_p['epoch']} van {_p['epochs']} · batch {_p['batch']} van {_p['batches']} · loss {L.number(_p['loss'], 3)}")
 
         _result = C.demo(_progress)
         if _result is None:
@@ -505,13 +514,12 @@ def demo_detector(train_button, result_targets, result_loss, result_detector):
             _who = "" if not _result["stand_ins"] else " De versie van de course sprong in voor " + ", ".join(f"`{m}`" for m in _result["stand_ins"]) + ", zoals de melding bij *Waar je project staat* zegt."
             _labels = {"title": "Loss na elke epoch", "x": "epoch", "y": "loss", "train": "training", "val": "test",
                        "alt": "De loss van je detector na elke epoch: op de trainingsscènes doorgetrokken, op de testscènes gestreept."}
-            _words = {"scene": "scène {seed}: {n} boxes", "alt": "Drie testscènes, elk met zijn echte boxes en de gestreepte boxes van 0,5 of meer die je detector er na die epoch aan gaf, na NMS."}
             _val, _moments = _result["curves"]["val"], _result["moments"]
 
             def _frame(_e):
                 _e = int(_e)
                 _n = sum(len(_b) for _b in _moments[_e - 1])
-                return (C.curves_picture(_result["curves"], _labels, L.lang, at=_e) + C.rewind_picture(_moments[_e - 1], _words),
+                return (C.epoch_frame(_result, _e, _labels, _words, L.lang),
                         f"Na epoch {_e}: loss op de testscènes {L.number(_val[_e - 1], 3)}, en {_n} boxes van 0,5 of meer op deze drie scènes, die {C.SHOWN_SHAPES} vormen hebben.")
 
             if len(_moments) == len(_val) > 1:   # rewinding through the run, with the whole run in the picture

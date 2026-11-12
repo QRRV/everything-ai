@@ -17,7 +17,7 @@ import numpy as np
 import torch   # imported once, when the lesson opens: the first import takes longer than a check may
 from torch import nn
 
-from everything_ai import netview, paths, projects, scenes, yours
+from everything_ai import live, netview, paths, projects, scenes, yours
 from everything_ai.check import ClassBox, Mistake, ScenarioBox, Timeout, run_code, with_time_limit
 
 
@@ -798,8 +798,9 @@ def _demo(show=None):
     too long; else a dict with the loss after every epoch ("curves"), the class maps of the SHOWN scenes after every
     epoch ("moments"), on the test scenes after the last epoch the share of pixels right and the IoU of every kind by
     their kind_iou, the parameters of their DeepLab, the modules the course's versions stood in for, and their trained
-    DeepLab layer by layer on the scene of the worked example ("net", a netview.Trace). `show` hears the run while it
-    trains."""
+    DeepLab layer by layer on the scene of the worked example ("net", a netview.Trace), with the layer the demo watches
+    after every epoch ("layers", see look). `show` hears the run while it trains, every report with "look": a function
+    that gives what the DeepLab makes at that moment (decision 1.17)."""
     if not _saved("deeplab"):
         return None
     names = {}
@@ -841,15 +842,26 @@ def _demo(show=None):
     model.forward = _named(model.forward, "deeplab")   # an error in their network is theirs; one in the course's code is not
     iou_of = _named(names["kind_iou"], "kind_iou")
     shown_at = [TEST.index(seed) for seed in SHOWN]
-    moments = []
+    example_x = Xt[TEST.index(SEED):TEST.index(SEED) + 1].float() / 255   # the scene of the worked example
+    moments, layers = [], []
+
+    def look() -> dict:
+        """What the DeepLab makes at this moment: the class maps of the SHOWN test scenes, and its ASPP on the scene of
+        the worked example; looked at in eval mode without a graph, so the run stays the same."""
+        with netview.looking(model):
+            maps = model(Xt[shown_at].float() / 255).argmax(1)
+        return {"maps": [m.numpy() for m in maps], "layer": netview.watched(model, example_x, "aspp")}
 
     def heard(p):
         if "pred" in p:
             moments.append([p["pred"][i].numpy() for i in shown_at])
+            layers.append(netview.watched(model, example_x, "aspp"))
             p = {k: v for k, v in p.items() if k != "pred"}
         if show is not None:
             try:
-                show(p)
+                show(p | {"look": look})
+            except Timeout:   # the demo's time limit, also when it falls while the chart draws
+                raise
             except Exception:   # the live chart is the course's own: it never stops the learner's run
                 pass
 
@@ -863,9 +875,25 @@ def _demo(show=None):
         return "deeplab"
     last = history[-1]
     curves = {"train": [float(h["train_loss"]) for h in history], "val": [float(h["val_loss"]) for h in history]}
-    net = netview.trace(model, Xt[TEST.index(SEED):TEST.index(SEED) + 1].float() / 255)   # the scene of the example
-    return {"curves": curves, "moments": moments, "acc": last["acc"], "ious": last["ious"],
+    net = netview.trace(model, example_x)   # the scene of the worked example
+    return {"curves": curves, "moments": moments, "layers": layers, "acc": last["acc"], "ious": last["ious"],
             "params": sum(p.numel() for p in model.parameters()), "stand_ins": stand_ins, "net": net}
+
+
+def now_pictures(seen: dict, words: dict, lang: str, uid: str) -> list[str]:
+    """What the learner's DeepLab makes at one moment of its run, as `look` or a rewind gives it: the class maps of the
+    SHOWN test scenes, and the layer the demo watches, under words["layer"] with its name. `uid` keeps the masks of the
+    layer apart from those of another picture on the page."""
+    return netview.moment(_FCN.rewind_picture(seen["maps"], words), seen.get("layer"), words["layer"], lang, uid,
+                          seed=SEED)
+
+
+def epoch_frame(result: dict, e: int, labels: dict, words: dict, lang: str) -> str:
+    """The rewind at epoch e (from 1): the loss after every epoch with a line at e, beside the class maps of the SHOWN
+    test scenes after it, and under them the layer the demo watches, as it was then."""
+    seen = {"maps": result["moments"][e - 1], "layer": result["layers"][e - 1]}
+    return live.rewound(_FCN.curves_picture(result["curves"], labels, lang, at=e),
+                        now_pictures(seen, words, lang, f"nv-deeplab-epoch-{e}"))
 
 
 def layer_frame(net, k, lang: str) -> str:

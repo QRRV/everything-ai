@@ -460,7 +460,7 @@ def text_demo():
     mo.md(r"""
     ### Wat je project nu kan
 
-    Druk op de knop: de demo traint de FPN-detector van de course, de backbone van deze les met je `pyramid` en je `head_rows`, met hard negative mining, 8 epochs lang op de 2.000 trainingsscènes met kleine en grote vormen, in mini-batches van 32, zoals je one-stage detector trainde. Daarna vindt hij de vormen van de 200 testscènes met je `boxes_from` en NMS, en telt hij wat hij van elke grootte vindt. Hij traint op één thread, zodat hij de run van de course met seed 0 zo goed volgt als je computer toelaat; dat duurt een paar minuten. De grafiek laat na elke epoch de loss op de testscènes zien. Als hij klaar is, kun je door de epochs terugspoelen, en zien welke boxes de detector na elke epoch aan drie testscènes gaf.
+    Druk op de knop: de demo traint de FPN-detector van de course, de backbone van deze les met je `pyramid` en je `head_rows`, met hard negative mining, 8 epochs lang op de 2.000 trainingsscènes met kleine en grote vormen, in mini-batches van 32, zoals je one-stage detector trainde. Daarna vindt hij de vormen van de 200 testscènes met je `boxes_from` en NMS, en telt hij wat hij van elke grootte vindt. Hij traint op één thread, zodat hij de run van de course met seed 0 zo goed volgt als je computer toelaat; dat duurt een paar minuten. Terwijl hij traint, laat de grafiek elke 10 batches de loss op de trainingsscènes zien, en gestreept de loss op de 200 testscènes na elke epoch. Onder de grafiek staan de boxes die de detector op dat moment aan drie testscènes geeft, en daaronder de feature maps van niveau 2 van de pyramid, het fijnste, op de scène van het uitgewerkte voorbeeld; allebei worden ze opnieuw getekend terwijl hij traint. Als hij klaar is, kun je door de epochs terugspoelen en zie je ze allebei na elke epoch.
     """)
     return
 
@@ -479,15 +479,24 @@ def demo_fpn(train_button, result_pyramid, result_head_rows):
         _out = mo.md("*Druk op de knop om de FPN-detector te trainen.*")
     else:
         _now = {}   # de live grafiek, gemaakt bij het eerste bericht
+        _words = {"scene": ("scène {seed}: {n} box", "scène {seed}: {n} boxes"), "layer": "Niveau 2 van de pyramid op scène {seed}: layer {name}",
+                  "alt": "Drie testscènes met kleine en grote vormen, elk met haar echte boxes en de gestreepte boxes van 0,5 of meer die de detector haar na die epoch gaf, na NMS."}
+        _words_now = _words | {"alt": "Drie testscènes met kleine en grote vormen, elk met haar echte boxes en de gestreepte boxes van 0,5 of meer die de detector haar nu geeft, na NMS."}
 
         def _progress(_p):
             if "chart" not in _now:
-                _now["chart"] = L.live({"title": "FPN-detector: de loss op de testscènes", "x": "epoch", "y": "test loss",
-                                        "alt": "De loss van de FPN-detector op de 200 testscènes na elke epoch tot nu toe."}, _p["epochs"], low=0.0)
-            if "val_loss" in _p:
-                _now["chart"].add(_p["epoch"], _p["val_loss"], f"**FPN-detector** · epoch {_p['epoch']} van {_p['epochs']} · test loss {L.number(_p['val_loss'], 3)}")
-            else:
-                _now["chart"].line(f"**FPN-detector** · epoch {_p['epoch']} van {_p['epochs']} · batch {_p['batch']} van {_p['batches']}")
+                _now["chart"] = L.live({"title": "FPN-detector: de loss tijdens het trainen", "x": "epoch", "y": "loss",
+                                        "alt": "De loss van de FPN-detector tot nu toe: op de trainingsscènes elke 10 batches, en gestreept op de 200 testscènes na elke epoch."}, _p["epochs"], low=0.0,
+                                       key=[("loss", False, "trainingsscènes, elke 10 batches"), ("loss", True, "testscènes, na elke epoch")])
+                _now["chart"].watch(lambda: C.now_pictures(_p["look"](), _words_now, L.lang, "nv-fpn-now"))
+                _now["test"] = []
+            if "val_loss" in _p:   # de testscènes na elke epoch, gestreept
+                _now["test"].append((_p["epoch"], _p["val_loss"]))
+                _now["chart"].reference(_now["test"], "", role="loss", replace=True)
+                _now["chart"].line(f"**FPN-detector** · epoch {_p['epoch']} van {_p['epochs']} · test loss {L.number(_p['val_loss'], 3)}")
+            else:   # de trainingsscènes elke 10 batches
+                _now["chart"].add(_p["epoch"] - 1 + _p["batch"] / _p["batches"], _p["loss"],
+                                  f"**FPN-detector** · epoch {_p['epoch']} van {_p['epochs']} · batch {_p['batch']} van {_p['batches']} · loss {L.number(_p['loss'], 3)}")
 
         _result = C.demo(_progress)
         if _result is None:
@@ -504,13 +513,12 @@ def demo_fpn(train_button, result_pyramid, result_head_rows):
             _who = "" if not _result["stand_ins"] else " De versie van de course nam de plaats in van " + ", ".join(f"`{m}`" for m in _result["stand_ins"]) + ", zoals de opmerking onder *Waarom* zegt."
             _labels = {"title": "Loss na elke epoch", "x": "epoch", "y": "loss", "train": "training", "val": "test",
                        "alt": "De loss van de FPN-detector na elke epoch: op de trainingsscènes doorgetrokken, op de testscènes gestreept."}
-            _words = {"scene": ("scène {seed}: {n} box", "scène {seed}: {n} boxes"), "alt": "Drie testscènes met kleine en grote vormen, elk met haar echte boxes en de gestreepte boxes van 0,5 of meer die de detector haar na die epoch gaf, na NMS."}
             _val, _moments = _result["curves"]["val"], _result["moments"]
 
             def _frame(_e):
                 _e = int(_e)
                 _n = sum(len(_b) for _b in _moments[_e - 1])
-                return (C.curves_picture(_result["curves"], _labels, L.lang, at=_e) + C.rewind_picture(_moments[_e - 1], _words),
+                return (C.epoch_frame(_result, _e, _labels, _words, L.lang),
                         f"Na epoch {_e}: test loss {L.number(_val[_e - 1], 3)}, en {_n} {'box' if _n == 1 else 'boxes'} van 0,5 of meer op deze drie scènes, die {C.SHOWN_SHAPES} vormen hebben.")
 
             if len(_moments) == len(_val) > 1:   # terugspoelen door de run, met de hele run in het plaatje

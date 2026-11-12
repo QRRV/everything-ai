@@ -20,7 +20,7 @@ import torch   # imported once, when the lesson opens: the first import takes lo
 import torch.nn.functional as F
 from torch import nn
 
-from everything_ai import chart, projects, scenes
+from everything_ai import chart, live, netview, projects, scenes
 from everything_ai.check import Mistake, ScenarioBox, Timeout, run_code, with_time_limit
 from everything_ai import yours
 
@@ -619,23 +619,7 @@ def curves_picture(curves: dict, labels: dict, lang: str, at: int | None = None)
     return chart.with_decimal_comma(svg) if lang == "nl" else svg
 
 
-def name_heights(ends: list, top: float) -> list:
-    """Where the names of one or two lines go at their last epoch, given where they end (the higher end first) on a
-    y-axis from 0 to top: over the line that ends higher and under the other. A name is about 0.1 of the axis high.
-    Where there is no room over the higher line, its name goes under it too; where there is no room under the lower
-    one, its name goes just over it when the higher line is far enough above, and else both names go over both lines,
-    the name of the higher line on top."""
-    if len(ends) < 2:
-        return [e + 0.07 * top if e + 0.07 * top <= 0.95 * top else e - 0.08 * top for e in ends]
-    hi, lo = ends
-    up, down = hi + 0.07 * top, lo - 0.08 * top
-    if up > 0.95 * top:                          # the higher line ends at the top: both names under their lines
-        return [hi - 0.08 * top, down if hi - lo > 0.2 * top else hi - 0.23 * top]
-    if down >= 0.06 * top:
-        return [up, down]
-    if hi - lo > 0.2 * top:                      # the lower line's name fits between the two lines
-        return [up, lo + 0.07 * top]
-    return [hi + 0.22 * top, hi + 0.07 * top]    # both end close together near 0: both names over them
+name_heights = chart.name_heights   # where the names of the two loss lines go
 
 
 def rewind_picture(maps: list, words: dict) -> str:
@@ -1131,8 +1115,9 @@ def _demo(show=None):
     does not give a transposed convolution that makes the 4 maps of 16 by 16 as large as the scene and that training
     can change; "kind_iou" when their kind_iou stops or does not give a number between 0 and 1; "slow" when the
     training takes too long; else a dict with the loss after every epoch ("curves"), the class maps of the SHOWN scenes
-    after every epoch ("moments"), and the share of pixels right and the IoU of every kind on the test scenes after the
-    last epoch. `show` hears the run while it trains."""
+    after every epoch ("moments"), the layer the demo watches after every epoch ("layers", see look), and the share of
+    pixels right and the IoU of every kind on the test scenes after the last epoch. `show` hears the run while it
+    trains, every report with "look": a function that gives what the FCN makes at that moment (decision 1.17)."""
     if not (_saved("classes") and _saved("upsample") and _saved("kind_iou")):
         return None
     names = {}
@@ -1172,15 +1157,27 @@ def _demo(show=None):
     except _Stopped as e:
         return e.key
     shown_at = [TEST.index(seed) for seed in SHOWN]
-    moments = []
+    example_x = Xt[TEST.index(SEED):TEST.index(SEED) + 1].float() / 255   # the scene of the worked example
+    moments, layers = [], []
+
+    def look() -> dict:
+        """What the FCN makes at this moment: the class maps of the SHOWN test scenes, and the coarse scores that the
+        learner's transposed convolution makes as large as the scene, on the scene of the worked example; looked at in
+        eval mode without a graph, so the run stays the same."""
+        with netview.looking(model):
+            maps = model(Xt[shown_at].float() / 255).argmax(1)
+        return {"maps": [m.numpy() for m in maps], "layer": netview.watched(model, example_x, "score")}
 
     def heard(p):
         if "pred" in p:
             moments.append([p["pred"][i].numpy() for i in shown_at])
+            layers.append(netview.watched(model, example_x, "score"))
             p = {k: v for k, v in p.items() if k != "pred"}
         if show is not None:
             try:
-                show(p)
+                show(p | {"look": look})
+            except Timeout:   # the demo's time limit, also when it falls while the chart draws
+                raise
             except Exception:   # the live chart is the course's own: it never stops the learner's run
                 pass
 
@@ -1194,7 +1191,21 @@ def _demo(show=None):
         return "upsample"
     last = history[-1]
     curves = {"train": [float(h["train_loss"]) for h in history], "val": [float(h["val_loss"]) for h in history]}
-    return {"curves": curves, "moments": moments, "acc": last["acc"], "ious": last["ious"]}
+    return {"curves": curves, "moments": moments, "layers": layers, "acc": last["acc"], "ious": last["ious"]}
+
+
+def now_pictures(seen: dict, words: dict, lang: str, uid: str) -> list[str]:
+    """What the FCN makes at one moment of the demo's run, as `look` or a rewind gives it: the class maps of the SHOWN
+    test scenes, and the layer the demo watches, under words["layer"] with its name. `uid` keeps the masks of the
+    layer apart from those of another picture on the page."""
+    return netview.moment(rewind_picture(seen["maps"], words), seen.get("layer"), words["layer"], lang, uid, seed=SEED)
+
+
+def epoch_frame(result: dict, e: int, labels: dict, words: dict, lang: str) -> str:
+    """The rewind at epoch e (from 1): the loss after every epoch with a line at e, beside the class maps of the SHOWN
+    test scenes after it, and under them the layer the demo watches, as it was then."""
+    seen = {"maps": result["moments"][e - 1], "layer": result["layers"][e - 1]}
+    return live.rewound(curves_picture(result["curves"], labels, lang, at=e), now_pictures(seen, words, lang, f"nv-fcn-epoch-{e}"))
 
 
 _DEMO_RUNS: dict = {}

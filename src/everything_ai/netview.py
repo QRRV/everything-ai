@@ -460,11 +460,13 @@ def _chosen(l: Layer, lang: str, uid: str) -> list[str]:
 def looking(model: nn.Module):
     """Look at a model halfway through its training, as a picture beside the chart does (decision 1.17): in eval mode
     and without a graph, and afterwards every module back in its own mode, also when the look stops with an error. So
-    looking takes no step, draws no random number and changes no running statistics: the run stays the same."""
+    looking takes no step and changes no running statistics, and a random number the learner's network draws while
+    it is looked at, such as with F.dropout, which does not follow eval mode, is drawn again in the run: the random
+    state is put back. So the run stays the same."""
     modes = [(m, m.training) for m in model.modules()]
     try:
         model.eval()
-        with torch.no_grad():
+        with torch.no_grad(), torch.random.fork_rng(devices=[]):
             yield model
     finally:
         for m, mode in modes:
@@ -494,6 +496,34 @@ def layer_picture(l: Layer, title: str, lang: str, uid: str = "nv-layer") -> str
     `title`. Beside the chart of a run while it trains (decision 1.17), and in a rewind through that run."""
     body = f'<div class="ea-netview" style="font-family:var(--ea-font-ui);line-height:1.45">{"".join(_chosen(l, lang, uid))}</div>'
     return yours.figure(title, body, alt=title)
+
+
+def watched(model: nn.Module, x: torch.Tensor, name: str | None = None) -> Layer | None:
+    """The layer a demo watches while its network trains (decision 1.17), on the input x, kept small: the first layer
+    with that name that gives feature maps, or when there is none (a learner may name their layers otherwise, or their
+    network may stop in it), the last that gives feature maps before the scores (last_maps). None when there is no
+    such layer either. It looks as `looking` does, so watching leaves the run as it is, and it never stops the run:
+    the picture is the course's own."""
+    try:
+        with torch.random.fork_rng(devices=[]):
+            net = trace(model, x)
+        k = next((i for i, l in enumerate(net.layers) if l.name == name and l.out is not None and l.out.dim() == 3),
+                 None) if name is not None else None
+        k = last_maps(net) if k is None else k
+        return None if k is None else kept(net.layers[k])
+    except Timeout:   # the demo's time limit
+        raise
+    except Exception:
+        return None
+
+
+def moment(picture: str, l: Layer | None, title: str, lang: str, uid: str, **fields) -> list[str]:
+    """What a demo shows of its network at one moment of a run (decision 1.17): `picture`, what the network makes,
+    and under it the layer it watches (None: no layer), under `title` with {name} the layer's name and `fields`
+    filled in. `uid` keeps the masks of the layer apart from those of another picture on the page."""
+    if l is None or l.out is None:
+        return [picture]
+    return [picture, layer_picture(l, title.format(name=l.name, **fields), lang, uid)]
 
 
 def network(name: str, make_input, *args, chosen: int | None = None, scores: bool = True):

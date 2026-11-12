@@ -464,7 +464,7 @@ def text_demo():
     mo.md(r"""
     ### What your project can do now
 
-    Press the button: the demo trains the course's two-stage detector, the backbone of your one-stage detector, an RPN and a second stage, with your `proposals` and your `roi_pool`, for 8 epochs on the 2,000 training scenes, in mini-batches of 32, as your one-stage detector trained. Then it finds the shapes of the 200 test scenes with them and your `boxes_from`. It trains on one thread, so that it follows the course's run with seed 0 as closely as your computer allows; that takes a few minutes. The chart shows the training loss of both stages together after every epoch. When it is done, you can go back through the epochs, and see the boxes the detector gave three test scenes after each of them.
+    Press the button: the demo trains the course's two-stage detector, the backbone of your one-stage detector, an RPN and a second stage, with your `proposals` and your `roi_pool`, for 8 epochs on the 2,000 training scenes, in mini-batches of 32, as your one-stage detector trained. Then it finds the shapes of the 200 test scenes with them and your `boxes_from`. It trains on one thread, so that it follows the course's run with seed 0 as closely as your computer allows; that takes a few minutes. While it trains, the chart shows the training loss of both stages together every 10 batches. Under the chart are the boxes the detector gives three test scenes at that moment, and under them the feature maps of the last layer of its backbone, which both stages read, on the scene of the worked example; both are drawn again as it trains. When it is done, you can go back through the epochs and see both after each of them.
     """)
     return
 
@@ -483,16 +483,21 @@ def demo_two_stages(train_button, result_roi, result_proposals):
         _out = mo.md("*Press the button to train the two-stage detector.*")
     else:
         _now = {}   # the live chart, made at the first report
+        _words = {"scene": "scene {seed}: {n} boxes", "layer": "Layer {name} of the detector on scene {seed}: the maps both stages read",
+                  "alt": "Three test scenes, each with its true boxes and the dashed boxes of 0.5 or more that the detector gave it after that epoch, after NMS."}
+        _words_now = _words | {"alt": "Three test scenes, each with its true boxes and the dashed boxes of 0.5 or more that the detector gives it now, after NMS."}
 
         def _progress(_p):
             if "chart" not in _now:
                 _now["chart"] = L.live({"title": "Two stages: the training loss", "x": "epoch", "y": "training loss",
-                                        "alt": "The training loss of the two-stage detector, both stages together, after every epoch so far."}, _p["epochs"], low=0.0)
-            if "rpn_loss" in _p:
+                                        "alt": "The training loss of the two-stage detector so far, both stages together, every 10 batches."}, _p["epochs"], low=0.0)
+                _now["chart"].watch(lambda: C.now_pictures(_p["look"](), _words_now, L.lang, "nv-rcnn-now"))
+            if "rpn_loss" in _p:   # after every epoch: its mean
                 _loss = _p["rpn_loss"] + _p["second_loss"]
-                _now["chart"].add(_p["epoch"], _loss, f"**Two stages** · epoch {_p['epoch']} of {_p['epochs']} · training loss {L.number(_loss, 3)}")
-            else:
-                _now["chart"].line(f"**Two stages** · epoch {_p['epoch']} of {_p['epochs']} · batch {_p['batch']} of {_p['batches']}")
+                _now["chart"].line(f"**Two stages** · epoch {_p['epoch']} of {_p['epochs']} · training loss {L.number(_loss, 3)}")
+            else:   # every 10 batches
+                _now["chart"].add(_p["epoch"] - 1 + _p["batch"] / _p["batches"], _p["loss"],
+                                  f"**Two stages** · epoch {_p['epoch']} of {_p['epochs']} · batch {_p['batch']} of {_p['batches']} · training loss {L.number(_p['loss'], 3)}")
 
         _result = C.demo(_progress)
         if _result is None:
@@ -509,13 +514,12 @@ def demo_two_stages(train_button, result_roi, result_proposals):
             _who = "" if not _result["stand_ins"] else " The course's version stood in for " + ", ".join(f"`{m}`" for m in _result["stand_ins"]) + ", as the note under *Why this matters* says."
             _labels = {"title": "Loss of each stage", "x": "epoch", "y": "loss", "rpn": "first stage", "second": "second stage",
                        "alt": "The training loss of each stage after every epoch: of the first stage solid, of the second stage dashed."}
-            _words = {"scene": "scene {seed}: {n} boxes", "alt": "Three test scenes, each with its true boxes and the dashed boxes of 0.5 or more that the detector gave it after that epoch, after NMS."}
             _curves, _moments = _result["curves"], _result["moments"]
 
             def _frame(_e):
                 _e = int(_e)
                 _n = sum(len(_b) for _b in _moments[_e - 1])
-                return (C.curves_picture(_curves, _labels, L.lang, at=_e) + C.rewind_picture(_moments[_e - 1], _words),
+                return (C.epoch_frame(_result, _e, _labels, _words, L.lang),
                         f"After epoch {_e}: loss {L.number(_curves['rpn'][_e - 1], 3)} for the first stage and {L.number(_curves['second'][_e - 1], 3)} for the second, and {_n} boxes of 0.5 or more on these three scenes, which have {C.SHOWN_SHAPES} shapes.")
 
             if len(_moments) == len(_curves["rpn"]) > 1:   # rewinding through the run, with the whole run in the picture

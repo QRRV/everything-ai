@@ -17,7 +17,7 @@ import torch   # imported once, when the lesson opens: the first import takes lo
 import torch.nn.functional as F
 from torch import nn
 
-from everything_ai import chart, projects, scenes
+from everything_ai import chart, live, projects, scenes
 from everything_ai.check import ClassBox, Mistake, ScenarioBox, Timeout, run_code, with_time_limit
 from everything_ai import netview, yours
 
@@ -314,8 +314,8 @@ def outputs(model, X) -> torch.Tensor:
 
 def train(model, loss_fn, data, test, seed: int = 0, epochs: int = EPOCHS, heard=None) -> list[dict]:
     """Train `model` on data = (X, classes, t), as the course measured, and measure the validation loss on test after
-    every epoch. `heard` hears every 10 batches how far an epoch is, and after every epoch its validation loss with the
-    outputs on the test scenes."""
+    every epoch. `heard` hears every 10 batches how far an epoch is, with the mean loss of those 10 batches ("loss"),
+    and after every epoch its validation loss with the outputs on the test scenes."""
     X, C, T = data
     Xt, Ct, Tt = test
     n = len(X)
@@ -328,7 +328,7 @@ def train(model, loss_fn, data, test, seed: int = 0, epochs: int = EPOCHS, heard
     model.train()
     for epoch in range(1, epochs + 1):
         order = torch.randperm(n, generator=order_rng)
-        running = 0.0
+        running = reported = 0.0
         for b, i in enumerate(range(0, n, BATCH), 1):
             idx = order[i:i + BATCH]
             loss = loss_fn(model(X[idx].float() / 255), C[idx], T[idx])
@@ -339,7 +339,8 @@ def train(model, loss_fn, data, test, seed: int = 0, epochs: int = EPOCHS, heard
             sched.step()
             running += loss.item()
             if heard is not None and b % 10 == 0:
-                heard({"epoch": epoch, "epochs": epochs, "batch": b, "batches": per})
+                heard({"epoch": epoch, "epochs": epochs, "batch": b, "batches": per, "loss": (running - reported) / 10})
+                reported = running
         out = outputs(model, Xt)
         val = float(loss_fn(out, Ct, Tt))
         history.append({"epoch": epoch, "train_loss": running / per, "val_loss": val})
@@ -714,10 +715,14 @@ def curves_picture(curves: dict, labels: dict, lang: str, at: int | None = None)
     mine = [v for v in train_l + val if np.isfinite(v)]
     top = max([0.2] + [1.1 * v for v in mine])
     p = chart.Panel((0.5, max(len(val), len(train_l), 1) + 0.5), (0, top), title=labels["title"], xlabel=labels["x"], ylabel=labels["y"])
-    for ys, dashed, name, dy in ((train_l, False, labels["train"], 0.07), (val, True, labels["val"], -0.08)):
+    drawn = []
+    for ys, dashed, name in ((train_l, False, labels["train"]), (val, True, labels["val"])):
         if ys:
             p.line(list(range(1, len(ys) + 1)), ys, "loss", 2.2, dashed=dashed)
-            p.text(len(ys) - 0.3 if len(ys) > 1 else 1, ys[-1] + dy * top, name, "loss", "end")   # clear of the line at the last epoch
+            drawn.append((ys, name))
+    drawn.sort(key=lambda d: d[0][-1], reverse=True)
+    for (ys, name), y in zip(drawn, chart.name_heights([ys[-1] for ys, _ in drawn], top)):
+        p.text(len(ys) - 0.3 if len(ys) > 1 else 1, y, name, "loss", "end")   # clear of the lines at the last epoch
     if at is not None:
         p.line([at, at], [0, top], "ink-2", 1.2)
     svg = chart.figure([p], alt=labels["alt"], width=276, height=200)   # 11 px text in a play box on a phone
@@ -1164,9 +1169,10 @@ def _demo(show=None):
     the learner's targets stops with an error or does not give 768 classes and offsets for the scene; "detector" when
     their Detector does, on 2 scenes; "loss" when their detection_loss does not give one finite number; "offsets" when
     their boxes_from stops with an error after training; "slow" when the training takes too long; else a dict with
-    the loss after every epoch ("curves"), their boxes on the SHOWN scenes after every epoch ("moments"), the summary of
-    their trained detector on the test scenes, and the modules the course's versions stood in for. `show` hears the run
-    while it trains."""
+    the loss after every epoch ("curves"), their boxes on the SHOWN scenes after every epoch ("moments"), the layer the
+    demo watches after every epoch ("layers", see look), the summary of their trained detector on the test scenes, and
+    the modules the course's versions stood in for. `show` hears the run while it trains, every report with "look": a
+    function that gives what the detector makes at that moment (decision 1.17)."""
     if not (_saved("targets") and _saved("detection_loss") and _saved("detector")):
         return None
     names = {}
@@ -1205,19 +1211,32 @@ def _demo(show=None):
         return "loss"
     torch.manual_seed(0)   # the same start as the course's run: the check above drew no random numbers, but be sure
     model = names["Detector"]()
-    moments, broken = [], []
+    shown_at = [TEST.index(seed) for seed in SHOWN]
+    example_x = Xt[TEST.index(SEED):TEST.index(SEED) + 1].float() / 255   # the scene of the worked example
+    moments, layers, broken = [], [], []
+
+    def look() -> dict:
+        """What the detector makes at this moment: its boxes on the SHOWN test scenes, and its last layer that gives
+        feature maps before the head, on the scene of the worked example; looked at in eval mode without a graph, so
+        the run stays the same."""
+        with netview.looking(model):
+            out = model(Xt[shown_at].float() / 255)
+        return {"boxes": [shown_boxes(o, boxes_fn=names["boxes_from"]) for o in out], "layer": netview.watched(model, example_x)}
 
     def heard(p):
         if "out" in p:
             try:
-                moments.append([shown_boxes(p["out"][TEST.index(seed)], boxes_fn=names["boxes_from"]) for seed in SHOWN])
+                moments.append([shown_boxes(p["out"][i], boxes_fn=names["boxes_from"]) for i in shown_at])
             except Exception:
                 broken.append(True)
                 moments.append([[] for _ in SHOWN])
+            layers.append(netview.watched(model, example_x))
             p = {k: v for k, v in p.items() if k != "out"}
         if show is not None:
             try:
-                show(p)
+                show(p | {"look": look})
+            except Timeout:   # the demo's time limit, also when it falls while the chart draws
+                raise
             except Exception:   # the live chart is the course's own: it never stops the learner's run
                 pass
 
@@ -1234,7 +1253,22 @@ def _demo(show=None):
     except Exception:
         return "offsets"
     curves = {"train": [float(h["train_loss"]) for h in history], "val": [float(h["val_loss"]) for h in history]}
-    return result | {"curves": curves, "moments": moments, "params": sum(v.numel() for v in model.parameters()), "stand_ins": stand_ins}
+    return result | {"curves": curves, "moments": moments, "layers": layers, "params": sum(v.numel() for v in model.parameters()),
+                     "stand_ins": stand_ins}
+
+
+def now_pictures(seen: dict, words: dict, lang: str, uid: str) -> list[str]:
+    """What the learner's detector makes at one moment of its run, as `look` or a rewind gives it: its boxes on the
+    SHOWN test scenes, and the layer the demo watches, under words["layer"] with its name. `uid` keeps the masks of
+    the layer apart from those of another picture on the page."""
+    return netview.moment(rewind_picture(seen["boxes"], words), seen.get("layer"), words["layer"], lang, uid, seed=SEED)
+
+
+def epoch_frame(result: dict, e: int, labels: dict, words: dict, lang: str) -> str:
+    """The rewind at epoch e (from 1): the loss after every epoch with a line at e, then the boxes on the SHOWN test
+    scenes after it, and under them the layer the demo watches, as it was then."""
+    seen = {"boxes": result["moments"][e - 1], "layer": result["layers"][e - 1]}
+    return live.rewound(curves_picture(result["curves"], labels, lang, at=e), now_pictures(seen, words, lang, f"nv-one-epoch-{e}"))
 
 
 _DEMO_RUNS: dict = {}

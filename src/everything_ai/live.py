@@ -192,6 +192,15 @@ def beside(*parts) -> str:
     return f'<div class="ea-beside" style="display:flex;flex-wrap:wrap;gap:0.75rem 1.5rem;align-items:flex-start">{cells}</div>'
 
 
+def rewound(curves: str, parts: list, width: int = 276) -> str:
+    """A rewind through a run at one epoch (decision 1.17): `curves`, a chart of the run with a line at that epoch,
+    beside the first of `parts`, what the model made then, and the others under them, such as the layer the demo
+    watched. A chart in a row needs its width: it gets `width`, or less on a phone."""
+    if not parts:
+        return curves
+    return beside((curves, width), parts[0]) + "".join(parts[1:])
+
+
 def key_html(entries: list) -> str:
     """Under a chart, what each line is: a short piece of the line in its role, solid or dashed, and its words. As the
     chart draws them: a run solid and 2.4 px wide, another run dashed and 1.4 px wide."""

@@ -443,7 +443,7 @@ def text_demo():
     mo.md(r"""
     ### Wat je project nu kan
 
-    Druk op de knop: de demo traint je `DeepLab`, met je `ASPP` en je `upsampler`, op de class maps die je `class_map` van de 2.000 trainingsscènes maakt, 8 epochs lang in mini-batches van 32, net zoals het FCN van de course trainde. Na elke epoch meet hij je DeepLab op de 200 testscènes met je `kind_iou`. Hij traint op één thread, zodat hij de run van de course met seed 0 zo goed volgt als je computer toelaat; op de computer van de course duurde dat ongeveer 6 minuten. De grafiek laat na elke epoch de loss op de testscènes zien. Is hij klaar, dan kun je teruggaan door de epochs, en zien welke klassen je DeepLab na elke epoch aan drie testscènes gaf.
+    Druk op de knop: de demo traint je `DeepLab`, met je `ASPP` en je `upsampler`, op de class maps die je `class_map` van de 2.000 trainingsscènes maakt, 8 epochs lang in mini-batches van 32, net zoals het FCN van de course trainde. Na elke epoch meet hij je DeepLab op de 200 testscènes met je `kind_iou`. Hij traint op één thread, zodat hij de run van de course met seed 0 zo goed volgt als je computer toelaat; op de computer van de course duurde dat ongeveer 6 minuten. Terwijl hij traint, laat de grafiek elke 10 batches de loss op de trainingsscènes zien, en gestreept de loss op de 200 testscènes na elke epoch. Ernaast staan de klassen die je DeepLab op dat moment aan drie testscènes geeft, en daaronder de feature maps van je ASPP op de scène van het uitgewerkte voorbeeld; allebei worden ze opnieuw getekend terwijl hij traint. Is hij klaar, dan kun je teruggaan door de epochs en zie je ze allebei na elke epoch.
     """)
     return
 
@@ -462,15 +462,24 @@ def demo_deeplab(train_button, result_aspp, result_deeplab):
         _out = mo.md("*Druk op de knop om je DeepLab te trainen.*")
     else:
         _now = {}   # de live grafiek, gemaakt bij het eerste bericht
+        _words = {"scene": "scène {seed}", "kinds": ("cirkel", "vierkant", "driehoek"), "layer": "Layer {name} van je DeepLab op scène {seed}",
+                  "alt": "Drie testscènes, elk met de klasse die je DeepLab na die epoch elke pixel gaf."}
+        _words_now = _words | {"alt": "Drie testscènes, elk met de klasse die je DeepLab elke pixel nu geeft."}
 
         def _progress(_p):
             if "chart" not in _now:
-                _now["chart"] = L.live({"title": "Je DeepLab: de loss op de testscènes", "x": "epoch", "y": "test loss",
-                                        "alt": "De loss van je DeepLab op de 200 testscènes na elke epoch tot nu toe."}, _p["epochs"], low=0.0)
-            if "val_loss" in _p:
-                _now["chart"].add(_p["epoch"], _p["val_loss"], f"**Je DeepLab** · epoch {_p['epoch']} van {_p['epochs']} · test loss {L.number(_p['val_loss'], 3)}")
-            else:
-                _now["chart"].line(f"**Je DeepLab** · epoch {_p['epoch']} van {_p['epochs']} · batch {_p['batch']} van {_p['batches']}")
+                _now["chart"] = L.live({"title": "Je DeepLab: de loss tijdens het trainen", "x": "epoch", "y": "loss",
+                                        "alt": "De loss van je DeepLab tot nu toe: op de trainingsscènes elke 10 batches, en gestreept op de 200 testscènes na elke epoch."}, _p["epochs"], low=0.0,
+                                       key=[("loss", False, "trainingsscènes, elke 10 batches"), ("loss", True, "testscènes, na elke epoch")])
+                _now["chart"].watch(lambda: C.now_pictures(_p["look"](), _words_now, L.lang, "nv-deeplab-now"))
+                _now["test"] = []
+            if "val_loss" in _p:   # de testscènes na elke epoch, gestreept
+                _now["test"].append((_p["epoch"], _p["val_loss"]))
+                _now["chart"].reference(_now["test"], "", role="loss", replace=True)
+                _now["chart"].line(f"**Je DeepLab** · epoch {_p['epoch']} van {_p['epochs']} · test loss {L.number(_p['val_loss'], 3)}")
+            else:   # de trainingsscènes elke 10 batches
+                _now["chart"].add(_p["epoch"] - 1 + _p["batch"] / _p["batches"], _p["loss"],
+                                  f"**Je DeepLab** · epoch {_p['epoch']} van {_p['epochs']} · batch {_p['batch']} van {_p['batches']} · loss {L.number(_p['loss'], 3)}")
 
         _result = C.demo(_progress)
         if _result is None:
@@ -487,13 +496,11 @@ def demo_deeplab(train_button, result_aspp, result_deeplab):
             _who = "" if not _result["stand_ins"] else " De versie van de course stond in voor " + ", ".join(f"`{m}`" for m in _result["stand_ins"]) + ", zoals de opmerking onder *Waarom* zegt."
             _labels = {"title": "Loss na elke epoch", "x": "epoch", "y": "loss", "train": "training", "val": "test",
                        "alt": "De loss van je DeepLab na elke epoch: op de trainingsscènes doorgetrokken, op de testscènes gestreept."}
-            _words = {"scene": "scène {seed}", "kinds": ("cirkel", "vierkant", "driehoek"),
-                      "alt": "Drie testscènes, elk met de klasse die je DeepLab na die epoch elke pixel gaf."}
             _val, _moments = _result["curves"]["val"], _result["moments"]
 
             def _frame(_e):
                 _e = int(_e)
-                return (C._FCN.curves_picture(_result["curves"], _labels, L.lang, at=_e) + C._FCN.rewind_picture(_moments[_e - 1], _words),
+                return (C.epoch_frame(_result, _e, _labels, _words, L.lang),
                         f"Na epoch {_e}: test loss {L.number(_val[_e - 1], 3)}.")
 
             if len(_moments) == len(_val) > 1:   # terugspoelen door de run, met de hele run in het plaatje

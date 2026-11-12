@@ -464,7 +464,7 @@ def text_demo():
     mo.md(r"""
     ### Wat je project nu kan
 
-    Druk op de knop: de demo traint de two-stage detector van de course, de backbone van je one-stage detector, een RPN en een tweede fase, met je `proposals` en je `roi_pool`, 8 epochs lang op de 2.000 trainingsscènes, in mini-batches van 32, zoals je one-stage detector trainde. Daarna vindt hij er de vormen van de 200 testscènes mee, met je `boxes_from`. Hij traint op één thread, zodat hij de run van de course met seed 0 zo goed volgt als je computer toelaat; dat duurt een paar minuten. De grafiek toont na elke epoch de training loss van beide fasen samen. Als hij klaar is, kun je terug door de epochs, en de boxes zien die de detector na elk ervan aan drie testscènes gaf.
+    Druk op de knop: de demo traint de two-stage detector van de course, de backbone van je one-stage detector, een RPN en een tweede fase, met je `proposals` en je `roi_pool`, 8 epochs lang op de 2.000 trainingsscènes, in mini-batches van 32, zoals je one-stage detector trainde. Daarna vindt hij er de vormen van de 200 testscènes mee, met je `boxes_from`. Hij traint op één thread, zodat hij de run van de course met seed 0 zo goed volgt als je computer toelaat; dat duurt een paar minuten. Terwijl hij traint, toont de grafiek elke 10 batches de training loss van beide fasen samen. Onder de grafiek staan de boxes die de detector op dat moment aan drie testscènes geeft, en daaronder de feature maps van de laatste layer van zijn backbone, waaruit beide fasen lezen, op de scène van het uitgewerkte voorbeeld; allebei worden ze opnieuw getekend terwijl hij traint. Als hij klaar is, kun je terug door de epochs en zie je ze allebei na elke epoch.
     """)
     return
 
@@ -483,16 +483,21 @@ def demo_two_stages(train_button, result_roi, result_proposals):
         _out = mo.md("*Druk op de knop om de two-stage detector te trainen.*")
     else:
         _now = {}   # de live grafiek, gemaakt bij het eerste bericht
+        _words = {"scene": "scène {seed}: {n} boxes", "layer": "Layer {name} van de detector op scène {seed}: de maps waaruit beide fasen lezen",
+                  "alt": "Drie testscènes, elk met haar echte boxes en de gestreepte boxes van 0,5 of meer die de detector haar na die epoch gaf, na NMS."}
+        _words_now = _words | {"alt": "Drie testscènes, elk met haar echte boxes en de gestreepte boxes van 0,5 of meer die de detector haar nu geeft, na NMS."}
 
         def _progress(_p):
             if "chart" not in _now:
                 _now["chart"] = L.live({"title": "Twee fasen: de training loss", "x": "epoch", "y": "training loss",
-                                        "alt": "De training loss van de two-stage detector, beide fasen samen, na elke epoch tot nu toe."}, _p["epochs"], low=0.0)
-            if "rpn_loss" in _p:
+                                        "alt": "De training loss van de two-stage detector tot nu toe, beide fasen samen, elke 10 batches."}, _p["epochs"], low=0.0)
+                _now["chart"].watch(lambda: C.now_pictures(_p["look"](), _words_now, L.lang, "nv-rcnn-now"))
+            if "rpn_loss" in _p:   # na elke epoch: het gemiddelde
                 _loss = _p["rpn_loss"] + _p["second_loss"]
-                _now["chart"].add(_p["epoch"], _loss, f"**Twee fasen** · epoch {_p['epoch']} van {_p['epochs']} · training loss {L.number(_loss, 3)}")
-            else:
-                _now["chart"].line(f"**Twee fasen** · epoch {_p['epoch']} van {_p['epochs']} · batch {_p['batch']} van {_p['batches']}")
+                _now["chart"].line(f"**Twee fasen** · epoch {_p['epoch']} van {_p['epochs']} · training loss {L.number(_loss, 3)}")
+            else:   # elke 10 batches
+                _now["chart"].add(_p["epoch"] - 1 + _p["batch"] / _p["batches"], _p["loss"],
+                                  f"**Twee fasen** · epoch {_p['epoch']} van {_p['epochs']} · batch {_p['batch']} van {_p['batches']} · training loss {L.number(_p['loss'], 3)}")
 
         _result = C.demo(_progress)
         if _result is None:
@@ -509,13 +514,12 @@ def demo_two_stages(train_button, result_roi, result_proposals):
             _who = "" if not _result["stand_ins"] else " De versie van de course nam de plaats in van " + ", ".join(f"`{m}`" for m in _result["stand_ins"]) + ", zoals de opmerking onder *Waarom* zegt."
             _labels = {"title": "Loss van elke fase", "x": "epoch", "y": "loss", "rpn": "eerste fase", "second": "tweede fase",
                        "alt": "De training loss van elke fase na elke epoch: van de eerste fase doorgetrokken, van de tweede fase gestreept."}
-            _words = {"scene": "scène {seed}: {n} boxes", "alt": "Drie testscènes, elk met haar echte boxes en de gestreepte boxes van 0,5 of meer die de detector haar na die epoch gaf, na NMS."}
             _curves, _moments = _result["curves"], _result["moments"]
 
             def _frame(_e):
                 _e = int(_e)
                 _n = sum(len(_b) for _b in _moments[_e - 1])
-                return (C.curves_picture(_curves, _labels, L.lang, at=_e) + C.rewind_picture(_moments[_e - 1], _words),
+                return (C.epoch_frame(_result, _e, _labels, _words, L.lang),
                         f"Na epoch {_e}: loss {L.number(_curves['rpn'][_e - 1], 3)} voor de eerste fase en {L.number(_curves['second'][_e - 1], 3)} voor de tweede, en {_n} boxes van 0,5 of meer in deze drie scènes, die {C.SHOWN_SHAPES} vormen hebben.")
 
             if len(_moments) == len(_curves["rpn"]) > 1:   # terugspoelen door de run, met de hele run in het plaatje

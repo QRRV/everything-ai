@@ -21,7 +21,7 @@ import torch   # imported once, when the lesson opens: the first import takes lo
 import torch.nn.functional as F
 from torch import nn
 
-from everything_ai import chart, paths, projects, scenes
+from everything_ai import chart, live, netview, paths, projects, scenes
 from everything_ai.check import Mistake, ScenarioBox, Timeout, run_code, with_time_limit
 
 
@@ -275,7 +275,8 @@ def train(model, seed: int = 0, epochs: int = EPOCHS, heard=None, pool_fn=roi_al
     """Train `model` on the training scenes, as cv-rcnn trains its two-stage detector, with a third loss: for every
     proposal (and true box) that learns a kind, the mask of that kind learns the true mask of its shape, cut to the
     proposal (`target`). pool_fn cuts the boxes for both heads. `heard` hears every 10 batches how far an epoch is,
-    and after every epoch the loss of each part and the model."""
+    with the mean loss of those 10 batches, the three parts together ("loss"), and after every epoch the loss of each
+    part and the model."""
     ss, X = scene_set("train")
     C, T = rpn_targets()
     truths = [boxes_and_labels(s) for s in ss]
@@ -291,6 +292,7 @@ def train(model, seed: int = 0, epochs: int = EPOCHS, heard=None, pool_fn=roi_al
     for epoch in range(1, epochs + 1):
         order = torch.randperm(n, generator=order_rng)
         runs = {"rpn": 0.0, "second": 0.0, "mask": 0.0}
+        reported = 0.0
         for b, i in enumerate(range(0, n, BATCH), 1):
             idx = order[i:i + BATCH]
             maps, rows = model(X[idx].float() / 255)
@@ -324,7 +326,9 @@ def train(model, seed: int = 0, epochs: int = EPOCHS, heard=None, pool_fn=roi_al
             runs["second"] += second.item()
             runs["mask"] += third.item()
             if heard is not None and b % 10 == 0:
-                heard({"epoch": epoch, "epochs": epochs, "batch": b, "batches": per})
+                heard({"epoch": epoch, "epochs": epochs, "batch": b, "batches": per,
+                       "loss": (sum(runs.values()) - reported) / 10})
+                reported = sum(runs.values())
         history.append({"epoch": epoch} | {key: v / per for key, v in runs.items()})
         if heard is not None:
             heard({"epoch": epoch, "epochs": epochs} | {key: v / per for key, v in runs.items()} | {"model": model})
@@ -1233,9 +1237,10 @@ def _demo(show=None):
     back for a box of a scene; "paste" when their paste stops or does not give a mask of the scene; "proposals" when
     their proposals stops or does not give boxes; "offsets" when their boxes_from stops on the trained detector's
     offsets; "slow" when the training takes too long; else a dict with the loss of each part after every epoch
-    ("curves"), the boxes and masks on the SHOWN scenes after every epoch ("moments"), the summary of the trained Mask
-    R-CNN on the test scenes, its parameters, and the modules the course's versions stood in for. `show` hears the
-    run while it trains."""
+    ("curves"), the boxes and masks on the SHOWN scenes after every epoch ("moments"), the layer the demo watches after
+    every epoch ("layers", see look), the summary of the trained Mask R-CNN on the test scenes, its parameters, and the
+    modules the course's versions stood in for. `show` hears the run while it trains, every report with "look": a
+    function that gives what Mask R-CNN makes at that moment (decision 1.17)."""
     if not (_saved("roi_align") and _saved("paste")):
         return None
     names = {}
@@ -1273,7 +1278,17 @@ def _demo(show=None):
                                            _named(names["boxes_from"], "offsets"), _named(names["paste"], "paste"))
     torch.manual_seed(0)   # the same start as the course's run
     model = MaskRCNN()
-    moments, broken = [], []
+    test_ss, Xt = scene_set("test")
+    example_x = Xt[TEST.index(SEED):TEST.index(SEED) + 1].float() / 255   # the scene of the worked example
+    moments, layers, broken = [], [], []
+
+    def look() -> dict:
+        """What Mask R-CNN makes at this moment: its masks on the SHOWN test scenes, and the last layer of its
+        backbone, the feature maps all three parts read, on the scene of the worked example; looked at in eval mode
+        without a graph, so the run stays the same."""
+        with netview.looking(model):
+            masks = shown_moment(model, align, props_of, boxes_of, paste_of)
+        return {"masks": masks, "layer": netview.watched(model, example_x)}
 
     def heard(p):
         if "model" in p:
@@ -1285,10 +1300,13 @@ def _demo(show=None):
             except Exception:
                 broken.append("offsets")
                 moments.append([[] for _ in SHOWN])
+            layers.append(netview.watched(model, example_x))
             p = {k: v for k, v in p.items() if k != "model"}
         if show is not None:
             try:
-                show(p)
+                show(p | {"look": look})
+            except Timeout:   # the demo's time limit, also when it falls while the chart draws
+                raise
             except Exception:   # the live chart is the course's own: it never stops the learner's run
                 pass
 
@@ -1302,7 +1320,6 @@ def _demo(show=None):
         return "roi_align"
     if broken:
         return broken[0]
-    test_ss, Xt = scene_set("test")
     try:
         result = summary(detect(model, Xt, TEST_KEEP, align, props_of, boxes_of, paste_of), test_ss)
     except _Stopped as e:
@@ -1310,7 +1327,21 @@ def _demo(show=None):
     except Exception:
         return "paste"
     curves = {key: [float(h[key]) for h in history] for key in ("rpn", "second", "mask")}
-    return result | {"curves": curves, "moments": moments, "params": sum(v.numel() for v in model.parameters()), "stand_ins": stand_ins}
+    return result | {"curves": curves, "moments": moments, "layers": layers, "params": sum(v.numel() for v in model.parameters()),
+                     "stand_ins": stand_ins}
+
+
+def now_pictures(seen: dict, words: dict, lang: str, uid: str) -> list[str]:
+    """What Mask R-CNN makes at one moment of the demo's run, as `look` or a rewind gives it: its masks on the SHOWN
+    test scenes, and the layer the demo watches, under words["layer"] with its name."""
+    return netview.moment(rewind_picture(seen["masks"], words), seen.get("layer"), words["layer"], lang, uid, seed=SEED)
+
+
+def epoch_frame(result: dict, e: int, labels: dict, words: dict, lang: str) -> str:
+    """The rewind at epoch e (from 1): the loss of each part after every epoch with a line at e, then the masks on
+    the SHOWN test scenes after it, and under them the layer the demo watches, as it was then."""
+    seen = {"masks": result["moments"][e - 1], "layer": result["layers"][e - 1]}
+    return live.rewound(curves_picture(result["curves"], labels, lang, at=e), now_pictures(seen, words, lang, f"nv-mask-epoch-{e}"))
 
 
 _DEMO_RUNS: dict = {}
