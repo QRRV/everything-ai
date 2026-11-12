@@ -824,8 +824,13 @@ lessons:
   reference_data: []
   needs: any
 
-# Check when built: DINOv2's attention can show a few tokens of very high norm on the background (Darcet et al.,
-# "Vision Transformers Need Registers"); if they spoil the maps, use the version with registers.
+# Measured with the lesson's code (12 November) on the 300 photos of cv-pretrained-features, with the outlines of
+# Caltech-101: DINOv2-small without registers shows no tokens of very high norm (the largest token after the last block
+# at most 1.45 times the median), so the plain model is used. The class token's attention lies on the object only in
+# layers 11 and 12 (71% inside the outline in layer 12, 50% to 58% in layers 1 to 10, objects 51%); attention rollout
+# puts 57% there, as it adds the early layers, and the lesson says so. A map is tested by leaving patches out (keep):
+# with the probe of cv-pretrained-features, see REFERENCE in checks.py. dinov2.py gets Block.weights, DINOv2.embed,
+# DINOv2.looks and tokens(x, keep), with the same numbers as before.
 - id: cv-vit-attention
   title: "Where a Vision Transformer looks"
   level: gevorderd
@@ -833,9 +838,12 @@ lessons:
   idea: "The attention of the class token to the patches shows which parts of the photo a Vision Transformer used; attention rollout averages the attention of each layer over its heads, adds the residual connection as attention of each token to itself, and multiplies the layers, so that it follows the information through the whole network."
   covers: [vision-modellen-visualiseren-en-begrijpen#3]
   requires: [cv-vit, cv-pretrained-features]
-  introduces: [c:attention-rollout]
+  introduces: [c:attention-rollout, py:torch-sort]
+  uses: [c:vision-transformer, c:class-token, c:patch, c:token, c:attention, c:self-attention, c:attention-weights, c:attention-head, c:multi-head-attention, c:softmax, c:transformer-block, c:residual-connection, c:identity-matrix, c:matrix-multiplication, c:convolution, c:learned-position-embedding, c:vision-foundation-model, c:linear-probe, c:feature, c:pretrained-model, c:self-supervised-learning, c:label, c:class, c:probability, c:test-set, c:train-set, c:mean, c:pixel, c:shape, c:tensor, c:axis, py:torch-reshape, py:torch-cat, py:torch-tensor, py:torch-softmax, py:matmul-operator, py:no-grad, py:dim, py:np-argmax, py:floor-division, py:modulo, py:indexing, py:slicing, py:list, py:comprehension, py:for, py:def, py:return, py:import, py:print, py:comment, py:variable, py:arithmetic, py:keyword-argument, v:heatmap, q:predict, q:choice, q:exercise-with-check, q:explain, q:run-cell]
+  mentions: [c:paper, py:torch-eye]
   ladder: [torch]
   data: [model-dinov2-small, caltech-101-download-only, course-photos]
+  reference_data: []
   needs: any
 
 # --- gevorderd: final project ---------------------------------------------------------------------------------------

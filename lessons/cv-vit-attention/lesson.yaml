@@ -1,0 +1,39 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: cv-vit-attention
+minutes: 45
+title:
+  en: "Where a Vision Transformer looks"
+  nl: "Waar een Vision Transformer naar kijkt"
+goal:
+  en: "read in DINOv2's attention weights where its class token looks, follow it through all layers with attention rollout, and test by leaving patches out whether the model needs what the map shows."
+  nl: "in de attention weights van DINOv2 aflezen waar zijn class token naar kijkt, het met attention rollout door alle layers volgen, en door patches weg te laten testen of het model nodig heeft wat de map laat zien."
+summary:
+  - en: "Row 0 of a head's attention weights is the class token's: without its first number, how much it takes from each patch. In the shape of the photo, `weights[:, 0, 1:].reshape(-1, rows, cols)`, it is a map per head of where the class token looks. In DINOv2-small, that map lies on the object only in the last two layers: 71% of it inside the outline in layer 12, on objects that cover 51% of the photo, and 50% to 58% in layers 1 to 10."
+    nl: "Rij 0 van de attention weights van een head is die van het class token: zonder zijn eerste getal, hoeveel het uit elke patch haalt. In de shape van de foto, `weights[:, 0, 1:].reshape(-1, rows, cols)`, is het per head een map van waar het class token naar kijkt. In DINOv2-small ligt die map alleen in de laatste twee layers op het voorwerp: 71% ervan binnen de omtrek in layer 12, bij voorwerpen die 51% van de foto beslaan, en 50% tot 58% in layer 1 tot en met 10."
+  - en: "Attention rollout follows the class token through every layer: per layer `W = 0.5 · average of the heads + 0.5 · I`, the identity for the residual connection, and `R = W @ R` from the first layer to the last; `R[0, 1:]` is the map. On DINOv2-small it puts only 57% inside the outline: it adds the first ten layers, which look about everywhere."
+    nl: "Attention rollout volgt het class token door elke layer: per layer `W = 0.5 · gemiddelde van de heads + 0.5 · I`, de eenheidsmatrix voor de residual connection, en `R = W @ R` van de eerste layer tot de laatste; `R[0, 1:]` is de map. Op DINOv2-small legt hij maar 57% binnen de omtrek: hij telt de eerste tien layers mee, die ongeveer overal naar kijken."
+  - en: "A map is a claim; leaving patches out tests it. Without the 64 patches the class token looks at most in layer 12, the probe gets 84 of 100 test photos right instead of 98; without 64 random patches, 97; with only the 64 it looks at most, still 94."
+    nl: "Een map is een bewering; patches weglaten test hem. Zonder de 64 patches waar het class token in layer 12 het meest naar kijkt, haalt de probe 84 van de 100 testfoto's goed in plaats van 98; zonder 64 willekeurige patches 97; met alleen de 64 waar het het meest naar kijkt nog 94."
+can_now:
+  - en: "read the class token's attention to the patches from a layer's attention weights, as a map per head"
+    nl: "de attention van het class token naar de patches aflezen uit de attention weights van een layer, als een map per head"
+    by: class-attention
+  - en: "compute attention rollout over all layers of a Vision Transformer"
+    nl: "attention rollout uitrekenen over alle layers van een Vision Transformer"
+    by: rollout
+  - en: "explain why attention rollout can spread over the whole photo"
+    nl: "uitleggen waarom attention rollout zich over de hele foto kan verspreiden"
+    by: spread
+  - en: "test a map by leaving out the patches it ranks highest, against random patches"
+    nl: "een map testen door de patches weg te laten die hij het hoogst zet, tegen willekeurige patches"
+    by: keep
+  - en: "say what a map of attention shows and what it does not"
+    nl: "zeggen wat een map van attention laat zien en wat niet"
+    by: what-it-shows
+further_reading:
+  - en: "Samira Abnar and Willem Zuidema (2020), *Quantifying Attention Flow in Transformers*, section 3: attention rollout, and why it adds the identity for the residual connections"
+    nl: "Samira Abnar en Willem Zuidema (2020), *Quantifying Attention Flow in Transformers*, paragraaf 3: attention rollout, en waarom die de eenheidsmatrix optelt voor de residual connections"
+  - en: "Mathilde Caron and others (2021), *Emerging Properties in Self-Supervised Vision Transformers*, Figures 1 and 3: the class token's attention in the heads of the last layer, from a ViT that learned without labels"
+    nl: "Mathilde Caron en anderen (2021), *Emerging Properties in Self-Supervised Vision Transformers*, figuur 1 en 3: de attention van het class token in de heads van de laatste layer, uit een ViT die zonder labels leerde"

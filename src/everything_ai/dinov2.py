@@ -41,11 +41,17 @@ class Block(nn.Module):
         self.fc1, self.fc2 = nn.Linear(D, 4 * D), nn.Linear(4 * D, D)
         self.scale2 = nn.Parameter(torch.ones(D))
 
+    def weights(self, x):
+        """The attention weights for x, the tokens after norm1: shape (n, 6, t, t), the 6 heads stacked; row i of a head says how
+        token i divides its attention over all t tokens, and adds up to 1."""
+        n, t, _ = x.shape
+        q, k = (f(x).view(n, t, HEADS, D // HEADS).transpose(1, 2) for f in (self.query, self.key))
+        return torch.softmax(q @ k.transpose(-2, -1) / math.sqrt(D // HEADS), dim=-1)
+
     def attention(self, x):
         n, t, _ = x.shape
-        q, k, v = (f(x).view(n, t, HEADS, D // HEADS).transpose(1, 2) for f in (self.query, self.key, self.value))
-        weights = torch.softmax(q @ k.transpose(-2, -1) / math.sqrt(D // HEADS), dim=-1)
-        return self.out((weights @ v).transpose(1, 2).reshape(n, t, D))
+        v = self.value(x).view(n, t, HEADS, D // HEADS).transpose(1, 2)
+        return self.out((self.weights(x) @ v).transpose(1, 2).reshape(n, t, D))
 
     def forward(self, x):
         x = x + self.scale1 * self.attention(self.norm1(x))
@@ -72,14 +78,31 @@ class DINOv2(nn.Module):
         grid = F.interpolate(grid, size=(rows, cols), mode="bicubic", align_corners=False)
         return torch.cat([self.pos[:, :1], grid.permute(0, 2, 3, 1).reshape(1, rows * cols, D)], dim=1)
 
-    def tokens(self, x):
-        """Every token after the last block: the class token first, then one per square, row after row."""
+    def embed(self, x):
+        """The tokens before the first block: the class token first, then one per square, row after row, each with
+        its position added."""
         squares = self.patch(x)   # (n, 384, rows, cols)
         n, _, rows, cols = squares.shape
-        t = torch.cat([self.cls.expand(n, -1, -1), squares.flatten(2).transpose(1, 2)], dim=1) + self.places(rows, cols)
+        return torch.cat([self.cls.expand(n, -1, -1), squares.flatten(2).transpose(1, 2)], dim=1) + self.places(rows, cols)
+
+    def tokens(self, x, keep=None):
+        """Every token after the last block: the class token first, then one per square, row after row. With `keep`,
+        a list or tensor of token numbers, only those tokens go into the blocks, in that order (the class token is
+        number 0, square j number 1 + j): the others are left out, as if those squares were not in the photo."""
+        t = self.embed(x)
+        if keep is not None:
+            t = t[:, torch.as_tensor(keep, dtype=torch.long)]
         for block in self.blocks:
             t = block(t)
         return self.norm(t)
+
+    def looks(self, x) -> list:
+        """The attention weights of every block for a batch x, in order: 12 tensors of shape (n, 6, t, t)."""
+        t, found = self.embed(x), []
+        for block in self.blocks:
+            found.append(block.weights(block.norm1(t)))
+            t = block(t)
+        return found
 
     def forward(self, x):
         """x: (n, 3, h, w), prepared as `prepare` does, h and w multiples of 14. The class token: (n, 384)."""
