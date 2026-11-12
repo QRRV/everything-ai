@@ -17,7 +17,7 @@ import numpy as np
 import torch   # imported once, when the lesson opens: the first import takes longer than a check may
 from torch.utils.data import DataLoader, Dataset, TensorDataset
 
-from everything_ai import chart, cifar, hub, live, projects
+from everything_ai import chart, cifar, hub, live, netview, projects, yours
 from everything_ai.lesson import download_card
 from everything_ai.check import Mistake, ScenarioBox, Sort, Timeout, run_code, with_time_limit
 
@@ -40,6 +40,8 @@ PHOTO = 82                       # the test photo of the pictures and the worked
 SHIFTS = list(range(-PAD, PAD + 1))   # how far the car moves in the plane, each way: from row 4 + up, column 4 - right
 SHOWN = tuple(cifar.checked(kind, 1)[0] for kind in cifar.KINDS)   # one checked test photo of each kind, for the rewind
 MOMENTS = (1, 2, 5, 10, 20, 30, 40)   # the epochs to rewind to after the demo, with its last epoch
+EVERY = 10                       # the live chart hears the training loss of every 10 batches (live.follow)
+hearing = netview.hearing        # how a demo hears its run: the guesses and a layer, now and after every epoch
 NAMES = {
     "en": dict(zip(cifar.KINDS, ("airplane", "automobile", "bird", "cat", "deer", "dog", "frog", "horse", "ship", "truck"))),
     "nl": dict(zip(cifar.KINDS, ("vliegtuig", "auto", "vogel", "kat", "hert", "hond", "kikker", "paard", "schip", "vrachtwagen"))),
@@ -251,28 +253,42 @@ def crop_frames(labels: dict) -> dict:
 
 
 def guesses_picture(guesses: list, truth: list, lang: str) -> str:
-    """The checked test photos of the rewind, one of each kind, each with the kind the network guessed at that moment:
-    in ink when it is right, in the color of mistakes and with the right kind under it when it is not."""
-    import matplotlib.pyplot as plt
-    from everything_ai import plots
+    """The checked test photos of the rewind, one of each kind, each with the kind the network guessed at that moment
+    under it: in ink when it is right, in the color of mistakes and with the right kind under it when it is not
+    (yours.guesses: quick to draw again while the network trains)."""
     _, _, X_test, _ = cifar.load()
-    fig, axes = plt.subplots(1, len(SHOWN), figsize=(6.8, 1.25))
-    fig.subplots_adjust(left=0.01, right=0.99, top=0.62, bottom=0.02, wspace=0.12)
-    said = []
-    for ax, place, guess, kind in zip(axes, SHOWN, guesses, truth):
-        right = guess == kind
-        ax.imshow(np.transpose(X_test[place], (1, 2, 0)), interpolation="nearest")
-        ax.set_xticks([])
-        ax.set_yticks([])
-        ax.grid(False)
-        name, real = NAMES[lang][cifar.KINDS[guess]], NAMES[lang][cifar.KINDS[kind]]
-        ax.set_title(name if right else f"{name}\n({real})", fontsize=7.5, loc="center", **({} if right else {"color": plots.LOSS_TEXT}))
-        said.append(f"{real}: {name}")
+    said = [NAMES[lang][cifar.KINDS[g]] for g in guesses]
+    right = [NAMES[lang][cifar.KINDS[k]] for k in truth]
     alt = {"en": "One test photo of each kind, each with the kind your network guessed then, and in brackets the right kind where it is wrong: ",
            "nl": "Eén testfoto van elke soort, elk met de soort die je netwerk toen gokte, en tussen haakjes de goede soort waar het fout is: "}
-    out = plots.render(fig, alt=alt[lang] + "; ".join(said) + ".")
-    plt.close(fig)
-    return out
+    return yours.guesses([np.transpose(X_test[place], (1, 2, 0)) for place in SHOWN], said, right,
+                         alt[lang] + "; ".join(f"{r}: {g}" for r, g in zip(right, said)) + ".")
+
+
+def now_pictures(seen: dict, title: str, lang: str, uid: str) -> list:
+    """What the learner's network makes at one moment of its run, as `look` or a rewind gives it: its guesses for the
+    photos SHOWN, and under them the layer it watches on the car, under `title` with {name} the layer's name. `uid` keeps
+    the masks of the layer apart from those of another picture on the page."""
+    return netview.moment(guesses_picture(seen["guesses"], seen["truth"], lang), seen.get("layer"), title, lang, uid)
+
+
+def epoch_seen(result: dict, e: int) -> dict:
+    """What the rewind shows of the network after epoch e (from 1), for now_pictures."""
+    layers = result.get("layers", [])
+    return {"guesses": result["guesses"][e - 1], "truth": result["truth"], "layer": layers[e - 1] if e <= len(layers) else None}
+
+
+def rewind_frame(curves_picture, result: dict, e: int, labels: dict, title: str, lang: str, uid: str, **kw) -> str:
+    """The rewind of a CIFAR demo at epoch e (from 1): the lesson's `curves_picture` of the run with a line at e, then
+    the network's guesses for the photos SHOWN after that epoch, and under them the layer it watches on the car, as it
+    was then (decision 1.17). `kw` goes to curves_picture, such as the course's run it shows in grey."""
+    return live.rewound(curves_picture(result["curves"], labels, lang, at=e, **kw),
+                        now_pictures(epoch_seen(result, e), title, lang, f"nv-{uid}-epoch-{e}"))
+
+
+def epoch_frame(result: dict, e: int, labels: dict, title: str, lang: str) -> str:
+    """This lesson's rewind at epoch e (rewind_frame)."""
+    return rewind_frame(curves_picture, result, e, labels, title, lang, "augment")
 
 
 def moments(n: int) -> list:
@@ -656,8 +672,9 @@ def _demo(show=None):
     "cnn" when ColorCNN or channel_stats does; "trainer" when the Trainer or count_params does; "slow" when the
     training takes too long; else a dict with how many of the training photos as they are and of the test photos it
     reads right, the loss after every epoch on both ("curves"), the epoch with the lowest validation loss (best_epoch),
-    the network's guess for the photos SHOWN after every epoch ("guesses") and their right kinds ("truth"), and the
-    modules the course's versions stood in for. `show` hears the run while it trains (live.follow)."""
+    the network's guess for the photos SHOWN after every epoch ("guesses") and their right kinds ("truth"), its first
+    layer of feature maps on the car after every epoch ("layers"), and the modules the course's versions stood in
+    for. `show` hears the run while it trains (live.follow, every 10 batches), with what it makes then (hearing)."""
     if not (_saved("crop") and _saved("color")):
         return None
     if not ready():
@@ -707,24 +724,15 @@ def _demo(show=None):
     except Exception:
         return "trainer"
 
-    shown, guesses = X_test[list(SHOWN)], []
-
-    def heard(p):
-        if "val_loss" in p:   # after every epoch: the guesses for the rewind, without randomness, so the run stays the same
-            was = model.training
-            model.eval()
-            with torch.no_grad():
-                guesses.append([int(g) for g in model(shown).argmax(dim=1)])
-            model.train(was)
-        if show is not None:
-            show(p)
+    truth, guesses, layers = [int(y_test[place]) for place in SHOWN], [], []
+    heard = hearing(model, X_test[list(SHOWN)], truth, X_test[PHOTO:PHOTO + 1], show, guesses, layers)
 
     def train():
         torch.manual_seed(1)
         loader = DataLoader(_Augmented(X, y, mean, std, crop, jitter), batch_size=64, shuffle=True)
         val = DataLoader(TensorDataset(X_test, y_test), batch_size=500)
         trainer = Trainer(model, loader, val, epochs=EPOCHS, lr=LR, warmup=len(loader), max_norm=1.0)
-        live.follow(trainer, heard, "augment")
+        live.follow(trainer, heard, "augment", every=EVERY)
         return trainer.fit() or []
 
     try:
@@ -737,7 +745,7 @@ def _demo(show=None):
               "val": [float(h["val_loss"]) for h in history if isinstance(h, dict) and "val_loss" in h]}
     return {"params": params, "train": _accuracy(model, X_norm, y), "test": _accuracy(model, X_test, y_test),
             "curves": curves, "best": best_epoch(curves["val"]), "guesses": guesses[:len(curves["val"])],
-            "truth": [int(y_test[place]) for place in SHOWN], "stand_ins": stand_ins}
+            "layers": layers[:len(curves["val"])], "truth": truth, "stand_ins": stand_ins}
 
 
 _DEMO_RUNS: dict = {}

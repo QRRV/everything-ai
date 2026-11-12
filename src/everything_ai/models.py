@@ -172,7 +172,7 @@ RESNET18 = ("timm/resnet18.tv_in1k", "model.safetensors")
 IMAGENET_CLASSES = paths.ROOT / "data" / "imagenet-classes.txt"
 
 
-class _Residual(nn.Module):
+class ResidualBlock(nn.Module):
     """Two 3 by 3 convolutions, each with batch normalization, and the block's input added to their outcome. With
     stride 2 the block halves the rows and the columns, and a 1 by 1 convolution makes the input fit."""
 
@@ -199,10 +199,10 @@ class ResNet18(nn.Module):
         super().__init__()
         self.conv1 = nn.Conv2d(3, 64, 7, 2, 3, bias=False)
         self.bn1 = nn.BatchNorm2d(64)
-        self.layer1 = nn.Sequential(_Residual(64, 64), _Residual(64, 64))
-        self.layer2 = nn.Sequential(_Residual(64, 128, 2), _Residual(128, 128))
-        self.layer3 = nn.Sequential(_Residual(128, 256, 2), _Residual(256, 256))
-        self.layer4 = nn.Sequential(_Residual(256, 512, 2), _Residual(512, 512))
+        self.layer1 = nn.Sequential(ResidualBlock(64, 64), ResidualBlock(64, 64))
+        self.layer2 = nn.Sequential(ResidualBlock(64, 128, 2), ResidualBlock(128, 128))
+        self.layer3 = nn.Sequential(ResidualBlock(128, 256, 2), ResidualBlock(256, 256))
+        self.layer4 = nn.Sequential(ResidualBlock(256, 512, 2), ResidualBlock(512, 512))
         self.fc = nn.Linear(512, classes)
 
     def features(self, x):

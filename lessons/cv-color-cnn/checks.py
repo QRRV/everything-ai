@@ -40,6 +40,10 @@ N_TRAIN, N_TEST = 6_000, 1_000   # the first photos of each set: as many as the 
 EPOCHS, LR = 20, 0.01            # the demo; the guess and the picture also have the 5 epochs of cnn-pytorch
 PARAMS = 11_642                  # of ColorCNN: 3·8·9 + 8, 8·16·9 + 16 and 1,024·10 + 10
 SHOWN = 2                        # checked test photos of each kind in the demo, with the network's guess
+ONE_EACH = tuple(cifar.checked(kind, 1)[0] for kind in cifar.KINDS)   # the first of those of each kind, for the run
+PHOTO = 82                       # the test photo the run shows its first layer on: a car, in cifar.CHECKED
+EVERY = 10                       # the live chart hears the training loss of every 10 batches (live.follow)
+MOMENTS = (1, 2, 5, 10, 20)      # the epochs to rewind to after the demo, with its last epoch
 
 # What the course measured, on one thread, with the course's code: the first N_TRAIN training photos and N_TEST test
 # photos, normalized with the mean and the standard deviation of each channel of those training photos (MEAN, STD,
@@ -222,9 +226,9 @@ def guesses_picture(guesses: list, lang: str) -> str:
     return out
 
 
-def curves_picture(curves: dict, labels: dict, lang: str) -> str:
+def curves_picture(curves: dict, labels: dict, lang: str, at: int | None = None) -> str:
     """The loss after every epoch of the demo's run: on the training photos solid and on the test photos dashed, as in
-    torch-loss-curves, with a dot where the validation loss is lowest."""
+    torch-loss-curves, with a dot where the validation loss is lowest. With `at`, a line at that epoch, for rewinding."""
     train, val = curves.get("train", []), curves.get("val", [])
     every = [v for v in train + val if np.isfinite(v)] or [0.0, 1.0]
     p = chart.Panel((0, max(len(val), len(train), 1) + 0.5), (0, max(every) * 1.12), title=labels["title"],
@@ -233,12 +237,48 @@ def curves_picture(curves: dict, labels: dict, lang: str) -> str:
         if ys:
             xs = list(range(1, len(ys) + 1))
             p.line(xs, ys, "loss", 2.2, dashed=dashed)
-            p.text(len(ys), ys[-1] + (0.07 if dashed else -0.1) * max(every), name, "loss", "end")
+            under = ys[-1] - 0.1 * max(every)   # the training loss under its line, unless that is under the axis
+            p.text(len(ys), ys[-1] + 0.07 * max(every) if dashed or under < 0.06 * max(every) else under, name, "loss", "end")
     if val:
         best = int(np.argmin(val))
         p.points([best + 1], [val[best]], "loss", r=4)
+    if at is not None:
+        p.line([at, at], [0, max(every) * 1.12], "ink-2", 1.2)
     svg = chart.figure([p], alt=labels["alt"], width=360, height=250)
     return chart.with_decimal_comma(svg) if lang == "nl" else svg
+
+
+def now_guesses(guesses: list, truth: list, lang: str) -> str:
+    """The photos ONE_EACH, one checked test photo of each kind, each with the kind the network guessed at one moment
+    of its run under it: in ink when it is right, in the color of mistakes and with the right kind under it when it is
+    not (yours.guesses: quick to draw again while the network trains)."""
+    _, _, X_test, _ = cifar.load()
+    said = [NAMES[lang][cifar.KINDS[g]] for g in guesses]
+    right = [NAMES[lang][cifar.KINDS[k]] for k in truth]
+    alt = {"en": "One test photo of each kind, each with the kind your network guessed then, and in brackets the right kind where it is wrong: ",
+           "nl": "Eén testfoto van elke soort, elk met de soort die je netwerk toen gokte, en tussen haakjes de goede soort waar het fout is: "}
+    return yours.guesses([np.transpose(X_test[place], (1, 2, 0)) for place in ONE_EACH], said, right,
+                         alt[lang] + "; ".join(f"{r}: {g}" for r, g in zip(right, said)) + ".")
+
+
+def now_pictures(seen: dict, title: str, lang: str, uid: str) -> list:
+    """What the learner's network makes at one moment of its run, as `look` or the rewind gives it: its guesses for the
+    photos ONE_EACH, and under them its first layer on the car, under `title` with {name} the layer's name. `uid` keeps
+    the masks of the layer apart from those of another picture on the page."""
+    return netview.moment(now_guesses(seen["guesses"], seen["truth"], lang), seen.get("layer"), title, lang, uid)
+
+
+def epoch_frame(result: dict, e: int, labels: dict, title: str, lang: str) -> str:
+    """The rewind at epoch e (from 1): the loss after every epoch with a line at e, then the network's guesses for the
+    photos ONE_EACH after that epoch, and under them its first layer on the car, as it was then (decision 1.17)."""
+    layers = result.get("layers", [])
+    seen = {"guesses": result["looked"][e - 1], "truth": result["truth"], "layer": layers[e - 1] if e <= len(layers) else None}
+    return live.rewound(curves_picture(result["curves"], labels, lang, at=e), now_pictures(seen, title, lang, f"nv-color-epoch-{e}"))
+
+
+def moments(n: int) -> list:
+    """The epochs to rewind to in a run of n epochs: those of MOMENTS before its last, and its last."""
+    return [m for m in MOMENTS if m < n] + ([n] if n else [])
 
 
 # The lesson is done when these are correct. "color-weights" and "color-gap" are the choice questions in the lesson.
@@ -464,7 +504,9 @@ def _demo(show=None):
     too long; else a dict with the mean and standard deviation of their channel_stats, the parameters, how many of the
     training and test photos it reads right, the loss after every epoch on both ("curves"), the epoch with the lowest
     validation loss, its guesses on the checked photos (place, kind, guess), and the modules the course's versions
-    stood in for. `show` hears the run while it trains (live.follow)."""
+    stood in for; and for the rewind, after every epoch, its guesses for the photos ONE_EACH ("looked") with their
+    right kinds ("truth"), and its first layer on the car ("layers"). `show` hears the run while it trains
+    (live.follow, every 10 batches), with what the network makes then (netview.hearing)."""
     if not (_saved("color_cnn") and _saved("channels")):
         return None
     if not ready():
@@ -506,13 +548,15 @@ def _demo(show=None):
     except Exception:
         return "trainer"
 
+    truth, looked, layers = [int(y_test[place]) for place in ONE_EACH], [], []   # what the rewind keeps of every epoch
+    heard = netview.hearing(model, X_test[list(ONE_EACH)], truth, X_test[PHOTO:PHOTO + 1], show, looked, layers)
+
     def train():
         torch.manual_seed(1)
         loader = DataLoader(TensorDataset(X, y), batch_size=64, shuffle=True)
         val = DataLoader(TensorDataset(X_test, y_test), batch_size=500)
         trainer = Trainer(model, loader, val, epochs=EPOCHS, lr=LR, warmup=len(loader), max_norm=1.0)
-        if show is not None:
-            live.follow(trainer, show, "color")
+        live.follow(trainer, heard, "color", every=EVERY)
         return trainer.fit() or []
 
     try:
@@ -531,7 +575,7 @@ def _demo(show=None):
     return {"mean": mean.tolist(), "std": std.tolist(), "params": params, "train": _accuracy(model, X, y),
             "test": _accuracy(model, X_test, y_test), "curves": curves,
             "best": int(np.argmin(curves["val"])) + 1 if curves["val"] else None, "guesses": guesses,
-            "stand_ins": stand_ins}
+            "looked": looked, "truth": truth, "layers": layers, "stand_ins": stand_ins}
 
 
 _DEMO_RUNS: dict = {}

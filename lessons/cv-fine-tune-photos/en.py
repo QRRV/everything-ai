@@ -392,7 +392,7 @@ def text_demo():
     mo.md(r"""
     ### Your phase 2 on the photos
 
-    Once you have downloaded ResNet-18 and the photos with the button in the worked example, the button below trains phase 1 again and hands the model to your `phase_two` if it is right, or else to the course's: 2 epochs with a learning rate of 0.003. While phase 2 trains, a chart shows the loss of each batch of 20. Then a table shows, per class, how many of the 10 test photos are right after phase 1 and after phase 2. It takes about as long as the worked example.
+    Once you have downloaded ResNet-18 and the photos with the button in the worked example, the button below trains phase 1 again and hands the model to your `phase_two` if it is right, or else to the course's: 2 epochs with a learning rate of 0.003. While phase 2 trains, a chart shows the loss of each batch of 20. Beside or under it are ResNet-18's guesses at that moment for the 20 test photos of lotus and water lily, the two flowers that all mistakes after phase 1 mix up, each with how sure it is: the probability softmax gives the class it guesses, as in [Try an image classifier: top-1 and top-5](/course/open/cv-try-classifier?lang=en). Under them is what `layer4.1`, the last part of `layer4`, makes of the first lotus: its **feature maps**, a grid of 7 by 7 numbers for each of its channels, one number for each part of the photo. Both are drawn again as phase 2 trains. Then you can rewind to a few steps of phase 2, with both as they were then, and a table shows, per class, how many of the 10 test photos are right after phase 1 and after phase 2. It takes about as long as the worked example.
     """)
     return
 
@@ -410,20 +410,40 @@ def demo_phase_two(pretrained, demo_button, phase_two_code, result_phase_two):
         _out = mo.md("*Press the button to train phase 1 and phase 2.*")
     else:
         _now = {}
+        _layer = "The last part of layer4 on the first test photo of a lotus: {name}"
 
         def _progress(_p):
             if "step" not in _p:   # phase 1 starts: a new chart for phase 2
                 _now["live"] = L.live({"title": "Phase 2: the loss of each batch", "x": "step", "y": "loss",
                                        "alt": "The loss of each batch of 20 training photos in phase 2 so far, step by step."},
-                                      C.TUNE_EPOCHS * C.STEPS, low=0.0)
+                                      C.TUNE_EPOCHS * C.STEPS, low=0.0, every=2.0)
+                _now.pop("look", None)
                 _now["live"].line("**Phase 1** · the features of the 200 training photos, and a new last layer")
             else:
+                if "look" not in _now:   # phase 2 starts: what ResNet-18 makes at each step, beside the chart
+                    _now["look"] = _p["look"]
+                    _now["live"].watch(lambda: C.now_pictures(_now["look"](), _layer, L.lang, "nv-tune-now"))
                 _now["live"].add(_p["step"], _p["loss"], f"**Phase 2** · step {_p['step']} of {C.TUNE_EPOCHS * C.STEPS} · loss {C.loss_text(_p['loss'], 'en')}")
 
         _d = C.demo(pretrained, phase_two_code.value if result_phase_two.state == "correct" else None, _progress)
         _who = "your `phase_two`" if _d["yours"] else "the course's `phase_two`"
         _rows = "\n".join(f"| {C.NAMES['en'][_c]} | {_b} | {_a} |" for _c, _b, _a in zip(C.CLASSES, _d["before"], _d["after"]))
-        _out = mo.vstack([mo.Html(_now["live"].picture()), mo.md(f"""With {_who}, of the 10 test photos of each class:
+        _labels = {"title": "Phase 2: the loss of each batch", "x": "step", "y": "loss",
+                   "alt": "The loss of each batch of 20 training photos in phase 2, step by step."}
+        _when = sorted(_d["looked"])
+
+        def _frame(_k):
+            _k, _seen = int(_k), _d["looked"][int(_k)]
+            _right = sum(_g == _t for _g, _t in zip(_seen["guesses"], _seen["truth"]))
+            _at = "After phase 1, before phase 2 takes a step" if _k == 0 else f"After step {_k} of phase 2"
+            return C.step_frame(_d, _k, _labels, _layer, L.lang), f"{_at}: {_right} of these 20 photos are right."
+
+        if len(_when) > 1:   # rewinding through phase 2, with all of it in the picture
+            _pic = L.explore("rewind", "step", _frame, start=_when[-1], values=_when, role="",
+                             task="Go back to step 0, then forward again: which photos change their guess, and how sure is ResNet-18 of those?")
+        else:
+            _pic = mo.Html(C.losses_picture(_d["losses"], _labels, L.lang))
+        _out = mo.vstack([_pic, mo.md(f"""With {_who}, of the 10 test photos of each class:
 
 | class | right after phase 1 | right after phase 2 |
 |---|---|---|

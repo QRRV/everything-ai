@@ -405,7 +405,7 @@ def text_demo():
         return (x - self.mean) / self.std, self.y[i]
     ```
 
-    It trains for {C.EPOCHS} epochs, twice as long as in the last lesson, with a learning rate of {C.number(C.LR, 2, L.lang)}, a warmup of one epoch and seed 0, and tests on the first 1,000 test photos, as they are. Where a module of yours is missing or broken, the course's stands in. It needs CIFAR-10, from the worked example, and exercises 2 and 3, and takes about a minute. While it trains, a chart shows the validation loss after every epoch. In the picture after, the gray line is the validation loss of the same network without changes, one run of the course's with seed 0, for 40 epochs: it leaves the picture at the top, on its way to 4.4. Then you can rewind through your run: the slider goes back to an epoch, and shows what your network guessed then for one test photo of each kind.
+    It trains for {C.EPOCHS} epochs, twice as long as in the last lesson, with a learning rate of {C.number(C.LR, 2, L.lang)}, a warmup of one epoch and seed 0, and tests on the first 1,000 test photos, as they are. Where a module of yours is missing or broken, the course's stands in. It needs CIFAR-10, from the worked example, and exercises 2 and 3, and takes about a minute. While it trains, a chart shows the loss on the changed training photos every 10 batches, and dashed on the test photos after every epoch. Beside or under it are your network's guesses at that moment for one test photo of each kind, and under them the feature maps of its first layer on a car; both are drawn again as it trains. In the picture after, the gray line is the validation loss of the same network without changes, one run of the course's with seed 0, for 40 epochs: it leaves the picture at the top, on its way to 4.4. Then you can rewind through your run: the slider goes back to an epoch, and shows what your network guessed then for one test photo of each kind, and the feature maps of its first layer.
     """)
     return
 
@@ -424,13 +424,22 @@ def demo_augment(train_button, result_crop, result_color):
         _out = mo.md("*Press the button to train your network.*")
     else:
         _now = {}   # the live chart, made at the first report
+        _layer = "Layer {name}, the first of your ColorCNN, on a test photo of a car"
 
         def _progress(_p):
             if "chart" not in _now:
-                _now["chart"] = L.live({"title": "Your ColorCNN on changed photos", "x": "epoch", "y": "validation loss",
-                                        "alt": "The validation loss of your ColorCNN on the 1,000 test photos after every epoch so far."}, _p["epochs"], low=0.0)
-            if "val_loss" in _p:
-                _now["chart"].add(_p["epoch"], _p["val_loss"], f"**Your ColorCNN** · epoch {_p['epoch']} of {_p['epochs']} · validation loss {C.number(_p['val_loss'], 3, L.lang)}")
+                _now["chart"] = L.live({"title": "Your ColorCNN on changed photos", "x": "epoch", "y": "loss",
+                                        "alt": "The loss of your ColorCNN so far: on the changed training photos every 10 batches, and dashed on the 1,000 test photos after every epoch."}, _p["epochs"], low=0.0, window=5,
+                                       key=[("loss", False, "changed training photos, every 10 batches"), ("loss", True, "test photos, after every epoch")])
+                _now["chart"].watch(lambda: C.now_pictures(_p["look"](), _layer, L.lang, "nv-augment-now"))
+                _now["test"] = []
+            if "val_loss" in _p:   # the test photos after every epoch, dashed
+                _now["test"].append((_p["epoch"], _p["val_loss"]))
+                _now["chart"].reference(_now["test"], "", role="loss", replace=True)
+                _now["chart"].line(f"**Your ColorCNN** · epoch {_p['epoch']} of {_p['epochs']} · validation loss {C.number(_p['val_loss'], 3, L.lang)}")
+            elif "loss" in _p:   # the training photos every 10 batches
+                _now["chart"].add(_p["epoch"] - 1 + _p["batch"] / _p["batches"], _p["loss"],
+                                  f"**Your ColorCNN** · epoch {_p['epoch']} of {_p['epochs']} · batch {_p['batch']} of {_p['batches']} · loss {C.number(_p['loss'], 3, L.lang)}")
             else:
                 _now["chart"].line(f"**Your ColorCNN** · epoch {_p['epoch']} of {_p['epochs']} · batch {_p['batch']} of {_p['batches']}")
 
@@ -457,7 +466,7 @@ def demo_augment(train_button, result_crop, result_color):
             def _frame(_e):
                 _e = int(_e)
                 _right = sum(_g == _k for _g, _k in zip(_guesses[_e - 1], _result["truth"]))
-                return (C.curves_picture(_result["curves"], _labels, L.lang, at=_e) + C.guesses_picture(_guesses[_e - 1], _result["truth"], L.lang),
+                return (C.epoch_frame(_result, _e, _labels, _layer, L.lang),
                         f"After epoch {_e}: validation loss {C.number(_val[_e - 1], 3, L.lang)}, and {_right} of these {len(C.SHOWN)} photos read right.")
 
             if len(_when) > 1:   # rewinding through the run, with the whole run in the picture

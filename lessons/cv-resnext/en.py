@@ -321,7 +321,7 @@ def text_demo():
     mo.md(f"""
     ### What your project can do now
 
-    The button uses your project. It trains the demo's network, with your `ResNeXtBlock` in its middle, on the first 6,000 training photos of CIFAR-10, with your Trainer, for {C.EPOCHS} epochs with a learning rate of {C.number(C.LR, 2, L.lang)}, a warmup of one epoch and seed 0, and tests it on the first 1,000 test photos. Choose how its block splits the middle into groups: 1 group of 16 channels, 2 of 10, 4 of 6 or 32 of 1. Where a module of yours is missing or broken, the course's stands in. It needs CIFAR-10 and exercise 2, and takes a few minutes. While it trains, a chart shows the validation loss after every epoch. In the picture after, the gray line is the validation loss of the course's run with one 3×3 convolution in the middle and seed 0. Then you can rewind through your run, and see your run next to the course's.
+    The button uses your project. It trains the demo's network, with your `ResNeXtBlock` in its middle, on the first 6,000 training photos of CIFAR-10, with your Trainer, for {C.EPOCHS} epochs with a learning rate of {C.number(C.LR, 2, L.lang)}, a warmup of one epoch and seed 0, and tests it on the first 1,000 test photos. Choose how its block splits the middle into groups: 1 group of 16 channels, 2 of 10, 4 of 6 or 32 of 1. Where a module of yours is missing or broken, the course's stands in. It needs CIFAR-10 and exercise 2, and takes a few minutes. While it trains, a chart shows the loss on the training photos every 10 batches, and dashed on the test photos after every epoch. Beside or under it are the network's guesses at that moment for one test photo of each kind, and under them the feature maps its middle makes of a car; both are drawn again as it trains. In the picture after, the gray line is the validation loss of the course's run with one 3×3 convolution in the middle and seed 0. Then you can rewind to a few epochs of your run, with both pictures as they were then, and see your run next to the course's.
     """)
     return
 
@@ -368,13 +368,22 @@ def demo_resnext(cifar, train_button, variant_choice, result_resnext):
         _names = {"1x16": "1×16d", "2x10": "2×10d", "4x6": "4×6d", "32x1": "32×1d"}
         _with = {"1x16": "in 1 group of 16 channels", "2x10": "in 2 groups of 10 channels", "4x6": "in 4 groups of 6 channels", "32x1": "in 32 groups of 1 channel"}
         _now = {}   # the live chart, made at the first report
+        _layer = "The middle of the network on a test photo of a car: layer {name}"
 
         def _progress(_p):
             if "chart" not in _now:
-                _now["chart"] = L.live({"title": "Your network on CIFAR-10", "x": "epoch", "y": "validation loss",
-                                        "alt": "The validation loss of the network on the 1,000 test photos after every epoch so far."}, _p["epochs"], low=0.0)
-            if "val_loss" in _p:
-                _now["chart"].add(_p["epoch"], _p["val_loss"], f"**ResNeXt block {_names[_variant]}** · epoch {_p['epoch']} of {_p['epochs']} · validation loss {C.number(_p['val_loss'], 3, L.lang)}")
+                _now["chart"] = L.live({"title": "Your network on CIFAR-10", "x": "epoch", "y": "loss",
+                                        "alt": "The loss of the network so far: on the training photos every 10 batches, and dashed on the 1,000 test photos after every epoch."}, _p["epochs"], low=0.0, window=5,
+                                       key=[("loss", False, "training photos, every 10 batches"), ("loss", True, "test photos, after every epoch")])
+                _now["chart"].watch(lambda: C.now_pictures(_p["look"](), _layer, L.lang, "nv-resnext-now"))
+                _now["test"] = []
+            if "val_loss" in _p:   # the test photos after every epoch, dashed
+                _now["test"].append((_p["epoch"], _p["val_loss"]))
+                _now["chart"].reference(_now["test"], "", role="loss", replace=True)
+                _now["chart"].line(f"**ResNeXt block {_names[_variant]}** · epoch {_p['epoch']} of {_p['epochs']} · validation loss {C.number(_p['val_loss'], 3, L.lang)}")
+            elif "loss" in _p:   # the training photos every 10 batches
+                _now["chart"].add(_p["epoch"] - 1 + _p["batch"] / _p["batches"], _p["loss"],
+                                  f"**ResNeXt block {_names[_variant]}** · epoch {_p['epoch']} of {_p['epochs']} · batch {_p['batch']} of {_p['batches']} · loss {C.number(_p['loss'], 3, L.lang)}")
             else:
                 _now["chart"].line(f"**ResNeXt block {_names[_variant]}** · epoch {_p['epoch']} of {_p['epochs']} · batch {_p['batch']} of {_p['batches']}")
 
@@ -401,7 +410,7 @@ def demo_resnext(cifar, train_button, variant_choice, result_resnext):
             def _frame(_e):
                 _e = int(_e)
                 _right = sum(_g == _k for _g, _k in zip(_guesses[_e - 1], _result["truth"]))
-                return (C.curves_picture(_result["curves"], _labels, L.lang, at=_e) + C.guesses_picture(_guesses[_e - 1], _result["truth"], L.lang),
+                return (C.epoch_frame(_result, _e, _labels, _layer, L.lang),
                         f"After epoch {_e}: validation loss {C.number(_val[_e - 1], 3, L.lang)}, and {_right} of these {len(C.SHOWN)} photos read right.")
 
             if len(_when) > 1:   # rewinding through the run, with the whole run in the picture

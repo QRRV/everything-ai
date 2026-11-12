@@ -50,6 +50,7 @@ cifar_or_stop, ready, photos = _ONE.cifar_or_stop, _ONE.ready, _ONE.photos
 grouped, number, percent, low_high = _ONE.grouped, _ONE.number, _ONE.percent, _ONE.low_high
 guesses_picture, moments, best_epoch = _ONE.guesses_picture, _ONE.moments, _ONE.best_epoch
 SHOWN, N_TRAIN, N_TEST, EPOCHS, LR = _ONE.SHOWN, _ONE.N_TRAIN, _ONE.N_TEST, _ONE.EPOCHS, _ONE.LR
+EVERY = _ONE.EVERY   # the live chart hears the training loss of every EVERY batches
 conv_params = _ONE.conv_params
 
 
@@ -155,11 +156,12 @@ def _accuracy(model, X, y) -> int:
 def run(variant: str, seed: int, ScaledCNN, channel_stats, Trainer, count_params, show=None):
     """One run of ScaledCNN as VARIANTS says for `variant`, as REFERENCE says: the photos made side by side (photos_at),
     normalized with channel_stats of the training photos, the network made after torch.manual_seed(seed), and the photos
-    shuffled after torch.manual_seed(seed + 1). Gives back a dict with the parameters of the network, its multiplications
-    for one photo, how many of the training and test photos it reads right, the loss after every epoch ("curves"), the
-    epoch with the lowest validation loss, and the network's guess for the photos SHOWN after every epoch ("guesses")
-    with their right kinds ("truth"). Errors go to the caller, which says whose code made them. `show` hears the run
-    while it trains."""
+    shuffled after torch.manual_seed(seed + 1). Gives back a dict with the parameters of the network, its
+    multiplications for one photo, how many of the training and test photos it reads right, the loss after every epoch
+    ("curves"), the epoch with the lowest validation loss, and the network's guess for the photos SHOWN after every
+    epoch ("guesses") with their right kinds ("truth"), and its first layer of feature maps on the car ("layers").
+    Errors go to the caller, which says whose code made them. `show` hears the run while it trains (live.follow, every
+    10 batches), with what the network makes then."""
     depth, width, side = VARIANTS[variant]
     X, y, X_test, y_test = photos_at(side)
     mean_, std = channel_stats(X.clone())
@@ -170,30 +172,21 @@ def run(variant: str, seed: int, ScaledCNN, channel_stats, Trainer, count_params
     torch.manual_seed(seed)
     model = ScaledCNN(depth, width)
     params = int(count_params(model))
-    shown, guesses = X_test[list(SHOWN)], []
-
-    def heard(e):
-        if "val_loss" in e:   # after every epoch: the guesses for the rewind, in eval mode, so the run stays the same
-            was = model.training
-            model.eval()
-            with torch.no_grad():
-                guesses.append([int(g) for g in model(shown).argmax(dim=1)])
-            model.train(was)
-        if show is not None:
-            show(e)
+    truth, guesses, layers = [int(y_test[place]) for place in SHOWN], [], []   # what the rewind keeps of every epoch
+    heard = _ONE.hearing(model, X_test[list(SHOWN)], truth, X_test[_ONE.PHOTO:_ONE.PHOTO + 1], show, guesses, layers)
 
     torch.manual_seed(seed + 1)
     loader = DataLoader(TensorDataset(X, y), batch_size=64, shuffle=True)
     val = DataLoader(TensorDataset(X_test, y_test), batch_size=500)
     trainer = Trainer(model, loader, val, epochs=EPOCHS, lr=LR, warmup=len(loader), max_norm=1.0)
-    live.follow(trainer, heard, "efficientnet")
+    live.follow(trainer, heard, "efficientnet", every=EVERY)
     history = trainer.fit() or []
     curves = {"train": [float(h["train_loss"]) for h in history if isinstance(h, dict) and "train_loss" in h],
               "val": [float(h["val_loss"]) for h in history if isinstance(h, dict) and "val_loss" in h]}
     return {"variant": variant, "params": params, "mults": multiplications(depth, width, side),
             "train": _accuracy(model, X, y), "test": _accuracy(model, X_test, y_test), "curves": curves,
-            "best": best_epoch(curves["val"]), "guesses": guesses[:len(curves["val"])],
-            "truth": [int(y_test[place]) for place in SHOWN]}
+            "best": best_epoch(curves["val"]), "guesses": guesses[:len(curves["val"])], "layers": layers[:len(curves["val"])],
+            "truth": truth}
 
 
 # --- the picture of the five networks -------------------------------------------------------------------------------
@@ -646,6 +639,18 @@ def curves_picture(curves: dict, labels: dict, lang: str, at: int | None = None)
         p.line([at, at], [0, top], "ink-2", 1.2)
     svg = chart.figure([p], alt=labels["alt"], width=380, height=260)
     return chart.with_decimal_comma(svg) if lang == "nl" else svg
+
+
+def now_pictures(seen: dict, title: str, lang: str, uid: str) -> list:
+    """What the network makes at one moment of its run: its guesses for the photos SHOWN, and its first layer on the
+    car (cv-augment-photos)."""
+    return _ONE.now_pictures(seen, title, lang, uid)
+
+
+def epoch_frame(result: dict, e: int, labels: dict, title: str, lang: str) -> str:
+    """The rewind at epoch e (from 1): the loss after every epoch with a line at e, then the network's guesses for the
+    photos SHOWN after it, and under them its first layer on the car, as it was then (cv-augment-photos)."""
+    return _ONE.rewind_frame(curves_picture, result, e, labels, title, lang, "efficientnet")
 
 
 # The lesson is done when these are correct. "scaling-runs" is the choice question in the lesson.

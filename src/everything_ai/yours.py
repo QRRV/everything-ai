@@ -1453,6 +1453,33 @@ def _png(value, size: int) -> str | None:
             f'border:1px solid var(--ea-line);background:var(--ea-inset)">')
 
 
+def guesses(images: list, said: list, right: list, alt: str, size: int = 56, title: str = "", notes: list | None = None) -> str:
+    """Images, each with what a network guessed for it under it, as a classifier's demo shows them while it trains
+    and in the rewind after it (decision 1.17): in ink where the guess is right, in the color of mistakes with the
+    right answer in brackets under it where it is not. `said` and `right` are words, such as the names of kinds; a
+    `title` goes above them, such as which of two networks guessed; `notes` go under each guess in grey, such as how
+    sure the network is. HTML rather than matplotlib, so that it is drawn
+    again in a few milliseconds; on a phone the row wraps."""
+    cells = []
+    notes = list(notes or [])
+    notes += [""] * (len(said) - len(notes))
+    for image, guess, real, note in zip(images, said, right, notes):
+        words = html.escape(str(guess)) if guess == real else f"{html.escape(str(guess))}<br>({html.escape(str(real))})"
+        colour = "var(--ea-ink)" if guess == real else "var(--ea-loss-text)"
+        under = (f'<div style="font-family:var(--ea-font-ui);font-size:12px;line-height:1.25;color:var(--ea-ink-2)">'
+                 f'{html.escape(str(note))}</div>') if note else ""
+        # as wide as the image, or as its longest word where that is wider, such as "(waterlelie)": no label runs into the next
+        cells.append(f'<div style="flex:0 0 auto;min-width:{size + 6}px;display:flex;flex-direction:column;align-items:center">'
+                     f'{_png(image, size) or ""}<div style="font-family:var(--ea-font-ui);font-size:12px;line-height:1.25;'
+                     f'margin-top:3px;text-align:center;white-space:nowrap;color:{colour}">{words}</div>{under}</div>')
+    if title:
+        grid = (f'<div role="img" aria-label="{html.escape(alt, quote=True)}" style="display:flex;flex-wrap:wrap;gap:8px 4px;'
+                f'max-width:100%">{"".join(cells)}</div>')
+        return _figure(title, grid, alt=title)
+    return (f'<figure class="ea-figure" role="img" aria-label="{html.escape(alt, quote=True)}" style="margin:0.25rem 0 0.75rem;'
+            f'display:flex;flex-wrap:wrap;gap:8px 4px;max-width:100%">{"".join(cells)}</figure>')
+
+
 def image(call: int | None = None, *, show: tuple[str, ...] = (), result: str | None = None, size: int = 160,
           title: Text | None = None):
     """What the learner's code makes of an image, as images: first the ones it starts from (`show`, or the arguments

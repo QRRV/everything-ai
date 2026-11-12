@@ -14,7 +14,7 @@ from torch.utils.data import DataLoader, TensorDataset
 
 from everything_ai import live, paths, projects
 from everything_ai.check import ClassBox, Mistake, Timeout, run_code, with_time_limit
-from everything_ai import netview
+from everything_ai import netview, yours
 
 # The demo trains with the learner's Trainer of nn-trainer and counts with their count_params of cnn-pytorch; where one
 # is missing or broken, the course's version stands in (template 1.3).
@@ -25,6 +25,12 @@ projects.builds_on(*BUILDS_ON)
 DATA = "data/fashion-mnist-small.npz"   # 6,000 training and 1,000 test images of Fashion-MNIST: see data/README.md
 EPOCHS, LR = 5, 0.01
 BLOCKS = 4   # residual blocks per stage in the demo: 2 + 4 × 4 convolutions and the output head, 19 layers with weights
+EVERY = 10   # the live chart hears the training loss of every 10 batches (live.follow)
+WATCHED = f"stage2.{BLOCKS - 1}"   # the layer the demo shows of each network: its last block, before the pooling
+NAMES = {    # the 10 kinds of Fashion-MNIST, label 0 to 9 (data/README.md)
+    "en": ("T-shirt", "trouser", "pullover", "dress", "coat", "sandal", "shirt", "sneaker", "bag", "ankle boot"),
+    "nl": ("T-shirt", "broek", "trui", "jurk", "jas", "sandaal", "overhemd", "sneaker", "tas", "enkellaars"),
+}
 
 # How much the logits of a fresh network differ between images: the standard deviation over the first 256 test images,
 # averaged over the 10 logits, after torch.manual_seed(0), for 0 to 8 blocks per stage (_network below), on one thread.
@@ -201,7 +207,7 @@ CASES = [
 
 # --- the demo: a plain network and a residual one of the same depth -------------------------------------------------------------
 
-class _PlainBlock(torch.nn.Module):
+class PlainBlock(torch.nn.Module):
     """The learner's block without its residual connection: two convolutions, each with a ReLU after it. Its layers are
     made in the same order as in ResBlock, so that both networks start from the same weights."""
     def __init__(self, c):
@@ -247,12 +253,48 @@ def _accuracy(model, X, y) -> int:
         return int((model(X).argmax(dim=1) == y).sum())
 
 
+def one_each() -> list:
+    """The first test image of each kind, in the order of the labels: what the demo shows its networks guess."""
+    _, _, _, y_test = fashion()
+    return [int((y_test == k).nonzero()[0]) for k in range(len(NAMES["en"]))]
+
+
+def now_pictures(seen: dict, heads: dict, lang: str, uid: str) -> list:
+    """What one network of the demo makes at one moment of its run, as `look` or the rewind gives it: its guess for
+    the first test image of each kind, under heads["guesses"], and under them its last block on the ankle boot, under
+    heads["layer"] with {name} the layer's name. `uid` keeps the masks of the layer apart from those of another picture
+    on the page."""
+    _, _, X_test, _ = fashion()
+    said = [NAMES[lang][g] for g in seen["guesses"]]
+    right = [NAMES[lang][k] for k in seen["truth"]]
+    alt = {"en": "The first test image of each kind, each with the kind the network guessed, and in brackets the right kind where it is wrong: ",
+           "nl": "De eerste testafbeelding van elke soort, elk met de soort die het netwerk gokte, en tussen haakjes de goede soort waar het fout is: "}
+    picture = yours.guesses([X_test[place][0].numpy() for place in one_each()], said, right,
+                            alt[lang] + "; ".join(f"{r}: {g}" for r, g in zip(right, said)) + ".", title=heads["guesses"])
+    return netview.moment(picture, seen.get("layer"), heads["layer"], lang, uid)
+
+
+def epoch_frame(result: dict, e: int, labels: dict, heads: dict, lang: str) -> str:
+    """The rewind at epoch e (from 1): the validation loss of both networks after every epoch with a line at e, then
+    for the plain network and then for the residual one, its guesses and its last block as they were after that epoch
+    (decision 1.17); heads[name] gives the titles of each, as for now_pictures."""
+    parts = []
+    for name in ("plain", "residual"):
+        layers = result["layers"][name]
+        seen = {"guesses": result["looked"][name][e - 1], "truth": result["truth"],
+                "layer": layers[e - 1] if e <= len(layers) else None}
+        parts += now_pictures(seen, heads[name], lang, f"nv-resnet-{name}-epoch-{e}")
+    return live.rewound(curves_picture(result["curves"], labels, lang, at=e), parts)
+
+
 def _demo(show=None):
     """For the demo: None when resnet.py is not in the project yet; "resnet" when a network of the learner's ResBlock
     stops with an error; "trainer" when the Trainer or count_params does; "slow" when a training run takes too long;
     else a dict with the parameters and the test images read right of the plain and the residual network, one run each,
-    seed 0, their validation loss after every epoch ("curves"), and the modules the course's versions stood in for.
-    `show` hears both runs while they train (live.follow), "plain" and then "residual"."""
+    seed 0, their validation loss after every epoch ("curves"), the modules the course's versions stood in for, and for
+    the rewind, after every epoch, each network's guesses for the first test image of each kind ("looked", with their
+    right kinds in "truth") and its last block on the ankle boot ("layers"). `show` hears both runs while they train
+    (live.follow, every 10 batches), "plain" and then "residual", with what the network makes then (netview.hearing)."""
     if not _saved("resnet"):
         return None
     run = run_code("from cnn.resnet import ResBlock")
@@ -265,20 +307,23 @@ def _demo(show=None):
     Trainer, count_params = run.names["Trainer"], run.names["count_params"]
     stand_ins = [f"{package}/{module}.py" for package, module, _, _ in projects.stand_ins()]
     X, y, X_test, y_test = fashion()
+    shown = one_each()
+    example = X_test[shown[-1]:shown[-1] + 1]   # the ankle boot
 
     def train(model, name):
+        out["looked"][name], out["layers"][name] = [], []
+        heard = netview.hearing(model, X_test[shown], out["truth"], example, show, out["looked"][name], out["layers"][name], WATCHED)
         torch.manual_seed(1)
         loader = DataLoader(TensorDataset(X, y), batch_size=64, shuffle=True)
         val = DataLoader(TensorDataset(X_test, y_test), batch_size=500)
         trainer = Trainer(model, loader, val, epochs=EPOCHS, lr=LR, warmup=len(loader), max_norm=1.0)
-        if show is not None:
-            live.follow(trainer, show, name)
+        live.follow(trainer, heard, name, every=EVERY)
         history = trainer.fit()
         out["curves"][name] = [float(h["val_loss"]) for h in history or []]
         return _accuracy(model, X_test, y_test)
 
-    out = {"curves": {}}
-    for name, Block in (("plain", _PlainBlock), ("residual", ResBlock)):
+    out = {"curves": {}, "looked": {}, "layers": {}, "truth": [int(y_test[place]) for place in shown]}
+    for name, Block in (("plain", PlainBlock), ("residual", ResBlock)):
         try:
             torch.manual_seed(0)
             model = _network(Block)
@@ -309,14 +354,15 @@ def _project_texts() -> tuple:
     return tuple(texts)
 
 
-def curves_picture(curves: dict, labels: dict, lang: str) -> str:
+def curves_picture(curves: dict, labels: dict, lang: str, at: int | None = None) -> str:
     """The validation loss after every epoch of both networks of the demo: the residual one as the run, in the colour
-    of loss, and the plain one thin and dashed beside it, named labels["plain"]."""
+    of loss, and the plain one thin, dashed and grey beside it, named labels["plain"], as the live chart draws it. With `at`, a line at that epoch, for
+    rewinding."""
     run = live.Live(labels, EPOCHS, lang=lang, low=0.0)   # from 0, as the chart while it trains
-    run.reference(list(enumerate(curves.get("plain", []), 1)), labels["plain"], role="loss")
+    run.reference(list(enumerate(curves.get("plain", []), 1)), labels["plain"], role="ink-2")
     run.ys = list(curves.get("residual", []))
     run.xs = list(range(1, len(run.ys) + 1))
-    return run.picture()
+    return run.picture(at=at)
 
 
 def demo(show=None):

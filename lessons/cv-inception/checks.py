@@ -43,9 +43,22 @@ grouped, number, percent, low_high = _ONE.grouped, _ONE.number, _ONE.percent, _O
 guesses_picture, moments, best_epoch = _ONE.guesses_picture, _ONE.moments, _ONE.best_epoch
 curves_picture = _ONE.curves_picture   # the demo's loss after every epoch, with the course's 3×3 run in grey
 SHOWN, N_TRAIN, N_TEST = _ONE.SHOWN, _ONE.N_TRAIN, _ONE.N_TEST
+EVERY = _ONE.EVERY   # the live chart hears the training loss of every EVERY batches
 EPOCHS, LR, CHANNELS, SIDE = _ONE.EPOCHS, _ONE.LR, _ONE.CHANNELS, _ONE.SIDE
 conv_params, conv_mults = _ONE.conv_params, _ONE.conv_mults
 WideCNN, Plain, AROUND, PLAIN_BLOCK = _ONE.WideCNN, _ONE.Plain, _ONE.AROUND, _ONE.PLAIN_BLOCK
+
+
+def now_pictures(seen: dict, title: str, lang: str, uid: str) -> list:
+    """What the network makes at one moment of its run: its guesses for the photos SHOWN, and the feature maps of its
+    middle on the car (cv-augment-photos)."""
+    return _ONE.now_pictures(seen, title, lang, uid)
+
+
+def epoch_frame(result: dict, e: int, labels: dict, title: str, lang: str) -> str:
+    """The rewind at epoch e (from 1): the loss after every epoch with a line at e, then the network's guesses for the
+    photos SHOWN after it, and under them the feature maps of its middle on the car, as it was then (cv-augment-photos)."""
+    return _ONE.rewind_frame(curves_picture, result, e, labels, title, lang, "inception")
 
 
 # --- counting -------------------------------------------------------------------------------------------------------
@@ -564,10 +577,11 @@ def run(seed: int, Inception, channel_stats, Trainer, count_params, show=None):
     """One run of WideCNN with Inception(*DEMO_BLOCK) in its middle, as REFERENCE says: the block made after
     torch.manual_seed(seed), then the rest of the network, and the photos shuffled after torch.manual_seed(seed + 1).
     Gives back a dict with the parameters of the network and of its block, how many of the training and test photos it
-    reads right, how many test photos with each branch switched off ("off"), the loss after every epoch ("curves"),
-    the epoch with the lowest validation loss, and the network's guess for the photos SHOWN after every epoch
-    ("guesses") with their right kinds ("truth"). Errors go to the caller, which says whose code made them. `show`
-    hears the run while it trains."""
+    reads right, how many test photos with each branch switched off ("off"), the loss after every epoch ("curves"), the
+    epoch with the lowest validation loss, and the network's guess for the photos SHOWN after every epoch ("guesses")
+    with their right kinds ("truth"), and the feature maps of its middle on the car ("layers"). Errors go to the caller,
+    which says whose code made them. `show` hears the run while it trains (live.follow, every 10 batches), with what the
+    network makes then."""
     X, y, X_test, y_test = photos()
     mean_, std = channel_stats(X.clone())
     mean_ = torch.as_tensor(mean_, dtype=torch.float32).reshape(3)
@@ -578,30 +592,21 @@ def run(seed: int, Inception, channel_stats, Trainer, count_params, show=None):
     block = Inception(*DEMO_BLOCK)
     model = WideCNN(block)
     params, block_params = int(count_params(model)), int(count_params(block))
-    shown, guesses = X_test[list(SHOWN)], []
-
-    def heard(e):
-        if "val_loss" in e:   # after every epoch: the guesses for the rewind, in eval mode, so the run stays the same
-            was = model.training
-            model.eval()
-            with torch.no_grad():
-                guesses.append([int(g) for g in model(shown).argmax(dim=1)])
-            model.train(was)
-        if show is not None:
-            show(e)
+    truth, guesses, layers = [int(y_test[place]) for place in SHOWN], [], []   # what the rewind keeps of every epoch
+    heard = _ONE.hearing(model, X_test[list(SHOWN)], truth, X_test[_ONE.PHOTO:_ONE.PHOTO + 1], show, guesses, layers, "block")
 
     torch.manual_seed(seed + 1)
     loader = DataLoader(TensorDataset(X, y), batch_size=64, shuffle=True)
     val = DataLoader(TensorDataset(X_test, y_test), batch_size=500)
     trainer = Trainer(model, loader, val, epochs=EPOCHS, lr=LR, warmup=len(loader), max_norm=1.0)
-    live.follow(trainer, heard, "inception")
+    live.follow(trainer, heard, "inception", every=EVERY)
     history = trainer.fit() or []
     curves = {"train": [float(h["train_loss"]) for h in history if isinstance(h, dict) and "train_loss" in h],
               "val": [float(h["val_loss"]) for h in history if isinstance(h, dict) and "val_loss" in h]}
     return {"params": params, "block_params": block_params, "train": _accuracy(model, X, y),
             "test": _accuracy(model, X_test, y_test), "off": switched_off(model, block, X_test, y_test),
-            "curves": curves, "best": best_epoch(curves["val"]), "guesses": guesses[:len(curves["val"])],
-            "truth": [int(y_test[place]) for place in SHOWN]}
+            "curves": curves, "best": best_epoch(curves["val"]), "guesses": guesses[:len(curves["val"])], "layers": layers[:len(curves["val"])],
+            "truth": truth}
 
 
 def _from_block(e: BaseException) -> bool:

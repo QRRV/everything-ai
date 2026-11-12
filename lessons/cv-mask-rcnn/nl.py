@@ -500,7 +500,7 @@ def demo_mask_rcnn(train_button, result_bilinear, result_align, result_paste):
         _out = mo.md("*Druk op de knop om Mask R-CNN te trainen.*")
     else:
         _now = {}   # de live grafiek, gemaakt bij het eerste bericht
-        _words = {"scene": "scène {seed}: {n} masks", "layer": "Layer {name} van Mask R-CNN op scène {seed}: de maps waaruit alle drie de delen lezen",
+        _words = {"scene": ("scène {seed}: {n} mask", "scène {seed}: {n} masks"), "layer": "Layer {name} van Mask R-CNN op scène {seed}: de maps waaruit alle drie de delen lezen",
                   "alt": "Drie testscènes in grijs, elk met de randen van zijn echte masks en de masks van de boxes van 0,5 of meer die Mask R-CNN er na die epoch aan gaf, gevuld."}
         _words_now = _words | {"alt": "Drie testscènes in grijs, elk met de randen van zijn echte masks en de masks van de boxes van 0,5 of meer die Mask R-CNN er nu aan geeft, gevuld."}
 
@@ -539,7 +539,7 @@ def demo_mask_rcnn(train_button, result_bilinear, result_align, result_paste):
                 _e = int(_e)
                 _n = sum(len(_m) for _m in _moments[_e - 1])
                 return (C.epoch_frame(_result, _e, _labels, _words, L.lang),
-                        f"Na epoch {_e}: loss {L.number(_curves['rpn'][_e - 1], 3)} voor het RPN, {L.number(_curves['second'][_e - 1], 3)} voor de tweede fase en {L.number(_curves['mask'][_e - 1], 3)} voor de mask head, en {_n} masks in deze drie scènes, die {C.SHOWN_SHAPES} vormen hebben.")
+                        f"Na epoch {_e}: loss {L.number(_curves['rpn'][_e - 1], 3)} voor het RPN, {L.number(_curves['second'][_e - 1], 3)} voor de tweede fase en {L.number(_curves['mask'][_e - 1], 3)} voor de mask head, en {_n} {'mask' if _n == 1 else 'masks'} in deze drie scènes, die {C.SHOWN_SHAPES} vormen hebben.")
 
             if len(_moments) == len(_curves["mask"]) > 1:   # terugspoelen door de run, met de hele run in het plaatje
                 _pic = [L.explore("rewind", "epoch", _frame, start=len(_moments), values=list(range(1, len(_moments) + 1)), role="",

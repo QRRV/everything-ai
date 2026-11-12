@@ -479,7 +479,7 @@ def demo_detector(train_button, result_targets, result_loss, result_detector):
         _out = mo.md("*Press the button to train your detector.*")
     else:
         _now = {}   # the live chart, made at the first report
-        _words = {"scene": "scene {seed}: {n} boxes", "layer": "Layer {name} of your detector on scene {seed}",
+        _words = {"scene": ("scene {seed}: {n} box", "scene {seed}: {n} boxes"), "layer": "Layer {name} of your detector on scene {seed}",
                   "alt": "Three test scenes, each with its true boxes and the dashed boxes of 0.5 or more that your detector gave it after that epoch, after NMS."}
         _words_now = _words | {"alt": "Three test scenes, each with its true boxes and the dashed boxes of 0.5 or more that your detector gives it now, after NMS."}
 
@@ -520,7 +520,7 @@ def demo_detector(train_button, result_targets, result_loss, result_detector):
                 _e = int(_e)
                 _n = sum(len(_b) for _b in _moments[_e - 1])
                 return (C.epoch_frame(_result, _e, _labels, _words, L.lang),
-                        f"After epoch {_e}: test loss {L.number(_val[_e - 1], 3)}, and {_n} boxes of 0.5 or more on these three scenes, which have {C.SHOWN_SHAPES} shapes.")
+                        f"After epoch {_e}: test loss {L.number(_val[_e - 1], 3)}, and {_n} {'box' if _n == 1 else 'boxes'} of 0.5 or more on these three scenes, which have {C.SHOWN_SHAPES} shapes.")
 
             if len(_moments) == len(_val) > 1:   # rewinding through the run, with the whole run in the picture
                 _pic = [L.explore("rewind", "epoch", _frame, start=len(_val), values=list(range(1, len(_val) + 1)), role="",

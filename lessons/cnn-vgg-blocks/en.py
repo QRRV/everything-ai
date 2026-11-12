@@ -306,7 +306,7 @@ def text_demo():
     mo.md(f"""
     ### What your project can do now
 
-    The button uses your project. With your `VGGBlock`, it builds networks of two blocks, from 1 to {C.WIDTHS[0]} channels and from {C.WIDTHS[0]} to {C.WIDTHS[1]}, as your SmallCNN, with {", ".join(str(n) for n in C.DEPTHS[:-1])} and {C.DEPTHS[-1]} convolutions per block. With 1 per block, it is your SmallCNN, with the same starting values. It trains each with your Trainer: {C.EPOCHS} epochs on the 6,000 training images, a learning rate of {C.number(C.LR, 2, L.lang)} with a warmup of one epoch, one run each, with seed 0, and counts the parameters with your `count_params`. Where a module of yours is missing or broken, the course's stands in. It works once exercise 3 is done, and takes one to two minutes. While each network trains, a chart shows its validation loss after every epoch, with the networks trained before it dashed beside it; the chart of the last, with {C.DEPTHS[-1]} per block, stays above the table.
+    The button uses your project. With your `VGGBlock`, it builds networks of two blocks, from 1 to {C.WIDTHS[0]} channels and from {C.WIDTHS[0]} to {C.WIDTHS[1]}, as your SmallCNN, with {", ".join(str(n) for n in C.DEPTHS[:-1])} and {C.DEPTHS[-1]} convolutions per block. With 1 per block, it is your SmallCNN, with the same starting values. It trains each with your Trainer: {C.EPOCHS} epochs on the 6,000 training images, a learning rate of {C.number(C.LR, 2, L.lang)} with a warmup of one epoch, one run each, with seed 0, and counts the parameters with your `count_params`. Where a module of yours is missing or broken, the course's stands in. It works once exercise 3 is done, and takes one to two minutes. While each network trains, a chart shows its loss on the training images every 10 batches, and dashed on the test images after every epoch, with the validation loss of the networks trained before it thin and dashed beside it. Beside or under it are the network's guesses at that moment for one test image of each kind, and under them the feature maps of its last block on an ankle boot; both are drawn again as it trains. Then you can rewind: drag a dot over the epochs and the four networks, and see each network's guesses and feature maps as they were then, above the table.
     """)
     return
 
@@ -324,18 +324,29 @@ def demo_depth(depth_button, result_block):
     if not depth_button.value:
         _out = mo.md("*Press the button to train the four networks.*")
     else:
-        _done, _now = [], {}   # the curves of the networks trained before; the live chart of the one that trains now
+        _done = []   # the validation loss after every epoch of the networks trained before
+        _now = {}    # the live chart of the one that trains now, and its validation loss so far
+        _heads = {"guesses": "The network with {n} per block: its guess for one test image of each kind",
+                  "layer": "Its last block on a test image of an ankle boot: layer {name}"}
 
         def _progress(_p):
             if _now.get("run") != _p["run"]:
-                if "live" in _now:
-                    _done.append(list(zip(_now["live"].xs, _now["live"].ys)))
-                _now["run"], _now["live"] = _p["run"], L.live({"title": f"{_p['run']} convolutions per block: the validation loss" if _p["run"] > 1 else "1 convolution per block: the validation loss", "x": "epoch", "y": "validation loss",
-                                                              "alt": f"The validation loss after every epoch so far of the network with {_p['run']} per block{'; dashed, the networks trained before it' if _done else ''}."}, _p["epochs"], low=0.0)
-                for _c in _done:
-                    _now["live"].reference(_c, "", role="loss")
-            if "val_loss" in _p:
-                _now["live"].add(_p["epoch"], _p["val_loss"], f"**{_p['run']} per block** · epoch {_p['epoch']} of {_p['epochs']} · validation loss {C.number(_p['val_loss'], 3, L.lang)}")
+                if "test" in _now:
+                    _done.append(_now["test"])
+                _now["run"], _now["test"] = _p["run"], []
+                _now["live"] = L.live({"title": f"{_p['run']} convolutions per block" if _p["run"] > 1 else "1 convolution per block", "x": "epoch", "y": "loss",
+                                       "alt": f"The loss of the network with {_p['run']} per block so far: on the training images every 10 batches, and dashed on the 1,000 test images after every epoch{'; thin and dashed, the validation loss of the networks trained before it' if _done else ''}."}, _p["epochs"], low=0.0, window=5,
+                                      key=[("loss", False, "training images, every 10 batches"), ("loss", True, "test images, after every epoch")] + ([("ink-2", True, "the networks before it, test images")] if _done else []))
+                _now["live"].watch(lambda: C.now_pictures(_p["look"](), dict(_heads, guesses=_heads["guesses"].format(n=_p["run"])), L.lang, f"nv-vgg-{_p['run']}-now"))
+                for _c in _done:   # the networks trained before, thin and dashed
+                    _now["live"].reference(_c, "", role="ink-2")
+            if "val_loss" in _p:   # the test images after every epoch, dashed
+                _now["test"].append((_p["epoch"], _p["val_loss"]))
+                _now["live"].reference(_now["test"], "", role="loss", replace=True)
+                _now["live"].line(f"**{_p['run']} per block** · epoch {_p['epoch']} of {_p['epochs']} · validation loss {C.number(_p['val_loss'], 3, L.lang)}")
+            elif "loss" in _p:   # the training images every 10 batches
+                _now["live"].add(_p["epoch"] - 1 + _p["batch"] / _p["batches"], _p["loss"],
+                                 f"**{_p['run']} per block** · epoch {_p['epoch']} of {_p['epochs']} · batch {_p['batch']} of {_p['batches']} · loss {C.number(_p['loss'], 3, L.lang)}")
             else:
                 _now["live"].line(f"**{_p['run']} per block** · epoch {_p['epoch']} of {_p['epochs']} · batch {_p['batch']} of {_p['batches']}")
 
@@ -352,9 +363,24 @@ def demo_depth(depth_button, result_block):
         else:
             _rows = "\n".join(f"| {n} | {2 * n + 1} | {C.grouped(p, L.lang)} | {right} |" for n, p, right in _result["rows"])
             _who = "" if not _result["stand_ins"] else "\n\nThe course's version stood in for " + ", ".join(f"`{m}`" for m in _result["stand_ins"]) + ", as the note under *Where your project stands* says."
-            _pic = [mo.Html(C.curves_picture(_result["curves"], {"title": f"{C.DEPTHS[-1]} convolutions per block: the validation loss", "x": "epoch", "y": "validation loss",
-                                                                 "alt": f"The validation loss after every epoch of the network with {C.DEPTHS[-1]} per block; dashed, those with {', '.join(str(n) for n in C.DEPTHS[:-2])} and {C.DEPTHS[-2]} per block."}, L.lang))] if all(_result["curves"].get(n) for n in C.DEPTHS) else []   # none from a fit that gives no history
-            _says = " The chart shows the validation loss of your four networks after every epoch: solid, the one with 8 per block; dashed, those with 1, 2 and 4." if _pic else ""
+            _looked = _result["looked"]
+            _ready = C.EPOCHS > 1 and all(len(_looked.get(_n, [])) == len(_result["curves"].get(_n, [])) == C.EPOCHS for _n in C.DEPTHS)
+
+            def _frame(_e, _n):
+                _e, _n = int(_e), int(_n)
+                _right = sum(_g == _k for _g, _k in zip(_looked[_n][_e - 1], _result["truth"]))
+                _labels = {"title": "Validation loss after every epoch", "x": "epoch", "y": "validation loss", "alt": f"The validation loss after every epoch of the network with {_n} per block, solid, with a line at epoch {_e}; dashed, the other three."}
+                return (C.epoch_frame(_result, _n, _e, _labels, dict(_heads, guesses=_heads["guesses"].format(n=_n)), L.lang),
+                        f"The network with {_n} per block, after epoch {_e}: validation loss {C.number(_result['curves'][_n][_e - 1], 3, L.lang)}, and {_right} of these 10 test images read right.")
+
+            if _ready:   # rewinding through every network and every epoch, with all four in the picture
+                _pic = [L.plane("rewind", "epoch", "convolutions per block", _frame, list(range(1, C.EPOCHS + 1)), list(C.DEPTHS),
+                                start=(C.EPOCHS, C.DEPTHS[-1]), role="", task="Drag the dot through the epochs and the networks: where do the guesses and the feature maps of the network with 8 per block differ from those of the others?")]
+            else:
+                _pic = [mo.Html(C.curves_picture(_result["curves"], {"title": f"{C.DEPTHS[-1]} convolutions per block: the validation loss", "x": "epoch", "y": "validation loss",
+                                                                     "alt": f"The validation loss after every epoch of the network with {C.DEPTHS[-1]} per block; dashed, those with {', '.join(str(n) for n in C.DEPTHS[:-2])} and {C.DEPTHS[-2]} per block."}, L.lang))] if all(_result["curves"].get(n) for n in C.DEPTHS) else []   # none from a fit that gives no history
+            _says = (" The chart shows the validation loss of your four networks after every epoch: solid, the one where the dot is; dashed, the other three." if _ready else
+                     " The chart shows the validation loss of your four networks after every epoch: solid, the one with 8 per block; dashed, those with 1, 2 and 4.") if _pic else ""
             _out = mo.vstack(_pic + [mo.md(f"""| convolutions per block | layers with weights | parameters | right |
 |---|---|---|---|
 {_rows}

@@ -392,7 +392,7 @@ def text_demo():
     mo.md(r"""
     ### Jouw fase 2 op de foto's
 
-    Zodra je ResNet-18 en de foto's met de knop bij het uitgewerkte voorbeeld hebt gedownload, traint de knop hieronder fase 1 opnieuw en geeft hij het model aan jouw `phase_two` als die klopt, anders aan die van de course: 2 epochs met een learning rate van 0,003. Terwijl fase 2 traint, laat een grafiek de loss van elke batch van 20 zien. Daarna laat een tabel per klasse zien hoeveel van de 10 testfoto's goed zijn na fase 1 en na fase 2. Dat duurt ongeveer even lang als het uitgewerkte voorbeeld.
+    Zodra je ResNet-18 en de foto's met de knop bij het uitgewerkte voorbeeld hebt gedownload, traint de knop hieronder fase 1 opnieuw en geeft hij het model aan jouw `phase_two` als die klopt, anders aan die van de course: 2 epochs met een learning rate van 0,003. Terwijl fase 2 traint, laat een grafiek de loss van elke batch van 20 zien. Ernaast of eronder staat wat ResNet-18 op dat moment gokt voor de 20 testfoto's van lotus en waterlelie, de twee bloemen die bij alle fouten na fase 1 door elkaar worden gehaald, elk met hoe zeker het is: de kans die softmax de gegokte klasse geeft, zoals in [Een beeldclassifier uitproberen: top-1 en top-5](/course/open/cv-try-classifier?lang=nl). Daaronder staat wat `layer4.1`, het laatste deel van `layer4`, van de eerste lotus maakt: zijn **feature maps**, een raster van 7 bij 7 getallen voor elk van zijn channels, één getal voor elk stuk van de foto. Allebei worden ze opnieuw getekend terwijl fase 2 traint. Daarna kun je terugspoelen naar een paar stappen van fase 2, met allebei zoals ze toen waren, en laat een tabel per klasse zien hoeveel van de 10 testfoto's goed zijn na fase 1 en na fase 2. Dat duurt ongeveer even lang als het uitgewerkte voorbeeld.
     """)
     return
 
@@ -410,20 +410,40 @@ def demo_phase_two(pretrained, demo_button, phase_two_code, result_phase_two):
         _out = mo.md("*Druk op de knop om fase 1 en fase 2 te trainen.*")
     else:
         _now = {}
+        _layer = "Het laatste deel van layer4 bij de eerste testfoto van een lotus: {name}"
 
         def _progress(_p):
             if "step" not in _p:   # fase 1 begint: een nieuwe grafiek voor fase 2
                 _now["live"] = L.live({"title": "Fase 2: de loss van elke batch", "x": "stap", "y": "loss",
                                        "alt": "De loss van elke batch van 20 trainingsfoto's in fase 2 tot nu toe, stap voor stap."},
-                                      C.TUNE_EPOCHS * C.STEPS, low=0.0)
+                                      C.TUNE_EPOCHS * C.STEPS, low=0.0, every=2.0)
+                _now.pop("look", None)
                 _now["live"].line("**Fase 1** · de features van de 200 trainingsfoto's, en een nieuwe laatste layer")
             else:
+                if "look" not in _now:   # fase 2 begint: wat ResNet-18 bij elke stap maakt, naast de grafiek
+                    _now["look"] = _p["look"]
+                    _now["live"].watch(lambda: C.now_pictures(_now["look"](), _layer, L.lang, "nv-tune-now"))
                 _now["live"].add(_p["step"], _p["loss"], f"**Fase 2** · stap {_p['step']} van {C.TUNE_EPOCHS * C.STEPS} · loss {C.loss_text(_p['loss'], 'nl')}")
 
         _d = C.demo(pretrained, phase_two_code.value if result_phase_two.state == "correct" else None, _progress)
         _who = "jouw `phase_two`" if _d["yours"] else "de `phase_two` van de course"
         _rows = "\n".join(f"| {C.NAMES['nl'][_c]} | {_b} | {_a} |" for _c, _b, _a in zip(C.CLASSES, _d["before"], _d["after"]))
-        _out = mo.vstack([mo.Html(_now["live"].picture()), mo.md(f"""Met {_who}, van de 10 testfoto's van elke klasse:
+        _labels = {"title": "Fase 2: de loss van elke batch", "x": "stap", "y": "loss",
+                   "alt": "De loss van elke batch van 20 trainingsfoto's in fase 2, stap voor stap."}
+        _when = sorted(_d["looked"])
+
+        def _frame(_k):
+            _k, _seen = int(_k), _d["looked"][int(_k)]
+            _right = sum(_g == _t for _g, _t in zip(_seen["guesses"], _seen["truth"]))
+            _at = "Na fase 1, voordat fase 2 een stap zet" if _k == 0 else f"Na stap {_k} van fase 2"
+            return C.step_frame(_d, _k, _labels, _layer, L.lang), f"{_at}: {_right} van deze 20 foto's zijn goed."
+
+        if len(_when) > 1:   # terugspoelen door fase 2, met heel fase 2 in het plaatje
+            _pic = L.explore("rewind", "stap", _frame, start=_when[-1], values=_when, role="",
+                             task="Ga terug naar stap 0 en dan weer vooruit: bij welke foto's verandert de gok, en hoe zeker is ResNet-18 daarvan?")
+        else:
+            _pic = mo.Html(C.losses_picture(_d["losses"], _labels, L.lang))
+        _out = mo.vstack([_pic, mo.md(f"""Met {_who}, van de 10 testfoto's van elke klasse:
 
 | klasse | goed na fase 1 | goed na fase 2 |
 |---|---|---|

@@ -405,7 +405,7 @@ def text_demo():
         return (x - self.mean) / self.std, self.y[i]
     ```
 
-    Hij traint {C.EPOCHS} epochs, twee keer zo lang als in de vorige les, met een learning rate van {C.number(C.LR, 2, L.lang)}, een warmup van één epoch en seed 0, en test op de eerste 1.000 testfoto's, zoals ze zijn. Waar een module van jou ontbreekt of stuk is, springt die van de course in. Hij heeft CIFAR-10 nodig, uit het uitgewerkte voorbeeld, en oefening 2 en 3, en duurt ongeveer een minuut. Tijdens het trainen laat een grafiek de validation loss na elke epoch zien. In het plaatje daarna is de grijze lijn de validation loss van hetzelfde netwerk zonder veranderingen, één run van de course met seed 0, 40 epochs lang: die verlaat het plaatje aan de bovenkant, op weg naar 4,4. Daarna kun je door je run terugspoelen: de schuif gaat terug naar een epoch, en laat zien wat je netwerk toen gokte bij één testfoto van elke soort.
+    Hij traint {C.EPOCHS} epochs, twee keer zo lang als in de vorige les, met een learning rate van {C.number(C.LR, 2, L.lang)}, een warmup van één epoch en seed 0, en test op de eerste 1.000 testfoto's, zoals ze zijn. Waar een module van jou ontbreekt of stuk is, springt die van de course in. Hij heeft CIFAR-10 nodig, uit het uitgewerkte voorbeeld, en oefening 2 en 3, en duurt ongeveer een minuut. Tijdens het trainen toont een grafiek de loss op de veranderde trainingsfoto's elke 10 batches, en gestreept op de testfoto's na elke epoch. Naast of onder de grafiek staat wat je netwerk op dat moment gokt bij één testfoto van elke soort, en daaronder de feature maps van zijn eerste layer op een auto; allebei worden ze opnieuw getekend terwijl het traint. In het plaatje daarna is de grijze lijn de validation loss van hetzelfde netwerk zonder veranderingen, één run van de course met seed 0, 40 epochs lang: die verlaat het plaatje aan de bovenkant, op weg naar 4,4. Daarna kun je door je run terugspoelen: de slider gaat terug naar een epoch, en laat zien wat je netwerk toen gokte bij één testfoto van elke soort, en de feature maps van zijn eerste layer.
     """)
     return
 
@@ -424,13 +424,22 @@ def demo_augment(train_button, result_crop, result_color):
         _out = mo.md("*Druk op de knop om je netwerk te trainen.*")
     else:
         _now = {}   # the live chart, made at the first report
+        _layer = "Layer {name}, de eerste van je ColorCNN, op een testfoto van een auto"
 
         def _progress(_p):
             if "chart" not in _now:
-                _now["chart"] = L.live({"title": "Je ColorCNN op veranderde foto's", "x": "epoch", "y": "validation loss",
-                                        "alt": "De validation loss van je ColorCNN op de 1.000 testfoto's na elke epoch tot nu toe."}, _p["epochs"], low=0.0)
-            if "val_loss" in _p:
-                _now["chart"].add(_p["epoch"], _p["val_loss"], f"**Je ColorCNN** · epoch {_p['epoch']} van {_p['epochs']} · validation loss {C.number(_p['val_loss'], 3, L.lang)}")
+                _now["chart"] = L.live({"title": "Je ColorCNN op veranderde foto's", "x": "epoch", "y": "loss",
+                                        "alt": "De loss van je ColorCNN tot nu toe: op de veranderde trainingsfoto's elke 10 batches, en gestreept op de 1.000 testfoto's na elke epoch."}, _p["epochs"], low=0.0, window=5,
+                                       key=[("loss", False, "veranderde trainingsfoto's, elke 10 batches"), ("loss", True, "testfoto's, na elke epoch")])
+                _now["chart"].watch(lambda: C.now_pictures(_p["look"](), _layer, L.lang, "nv-augment-now"))
+                _now["test"] = []
+            if "val_loss" in _p:   # the test photos after every epoch, dashed
+                _now["test"].append((_p["epoch"], _p["val_loss"]))
+                _now["chart"].reference(_now["test"], "", role="loss", replace=True)
+                _now["chart"].line(f"**Je ColorCNN** · epoch {_p['epoch']} van {_p['epochs']} · validation loss {C.number(_p['val_loss'], 3, L.lang)}")
+            elif "loss" in _p:   # the training photos every 10 batches
+                _now["chart"].add(_p["epoch"] - 1 + _p["batch"] / _p["batches"], _p["loss"],
+                                  f"**Je ColorCNN** · epoch {_p['epoch']} van {_p['epochs']} · batch {_p['batch']} van {_p['batches']} · loss {C.number(_p['loss'], 3, L.lang)}")
             else:
                 _now["chart"].line(f"**Je ColorCNN** · epoch {_p['epoch']} van {_p['epochs']} · batch {_p['batch']} van {_p['batches']}")
 
@@ -457,7 +466,7 @@ def demo_augment(train_button, result_crop, result_color):
             def _frame(_e):
                 _e = int(_e)
                 _right = sum(_g == _k for _g, _k in zip(_guesses[_e - 1], _result["truth"]))
-                return (C.curves_picture(_result["curves"], _labels, L.lang, at=_e) + C.guesses_picture(_guesses[_e - 1], _result["truth"], L.lang),
+                return (C.epoch_frame(_result, _e, _labels, _layer, L.lang),
                         f"Na epoch {_e}: validation loss {C.number(_val[_e - 1], 3, L.lang)}, en {_right} van deze {len(C.SHOWN)} foto's goed gelezen.")
 
             if len(_when) > 1:   # rewinding through the run, with the whole run in the picture

@@ -1213,12 +1213,14 @@ def curves_picture(curves: dict, labels: dict, lang: str, at: int | None = None)
 
 def rewind_picture(moments: list, words: dict) -> str:
     """The test scenes of the rewind, each with the edges of its true masks and the masks of the boxes of 0.5 or more
-    that the learner's Mask R-CNN gave it at one moment."""
+    that the learner's Mask R-CNN gave it at one moment. words["scene"] is one label, or two: for one, and for any
+    other number."""
     panels = []
     for seed, found in zip(SHOWN, moments):
         s = scenes.scene(seed)
         panels.append((_masks_svg(s.image, [unpacked(t) for *_, t in found], [sh.mask for sh in s.shapes],
-                                  words["scene"].format(seed=seed, n=len(found)), figsize=(2.3, 2.45), crop=(0, 0, 127, 127), size=9), 160))
+                                  (words["scene"] if isinstance(words["scene"], str) else words["scene"][0 if len(found) == 1 else 1]).format(seed=seed, n=len(found)),
+                                  figsize=(2.3, 2.45), crop=(0, 0, 127, 127), size=9), 160))
     return _ONE._side_by_side(panels, words["alt"])
 
 

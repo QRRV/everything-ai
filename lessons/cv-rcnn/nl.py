@@ -483,7 +483,7 @@ def demo_two_stages(train_button, result_roi, result_proposals):
         _out = mo.md("*Druk op de knop om de two-stage detector te trainen.*")
     else:
         _now = {}   # de live grafiek, gemaakt bij het eerste bericht
-        _words = {"scene": "scène {seed}: {n} boxes", "layer": "Layer {name} van de detector op scène {seed}: de maps waaruit beide fasen lezen",
+        _words = {"scene": ("scène {seed}: {n} box", "scène {seed}: {n} boxes"), "layer": "Layer {name} van de detector op scène {seed}: de maps waaruit beide fasen lezen",
                   "alt": "Drie testscènes, elk met haar echte boxes en de gestreepte boxes van 0,5 of meer die de detector haar na die epoch gaf, na NMS."}
         _words_now = _words | {"alt": "Drie testscènes, elk met haar echte boxes en de gestreepte boxes van 0,5 of meer die de detector haar nu geeft, na NMS."}
 
@@ -520,7 +520,7 @@ def demo_two_stages(train_button, result_roi, result_proposals):
                 _e = int(_e)
                 _n = sum(len(_b) for _b in _moments[_e - 1])
                 return (C.epoch_frame(_result, _e, _labels, _words, L.lang),
-                        f"Na epoch {_e}: loss {L.number(_curves['rpn'][_e - 1], 3)} voor de eerste fase en {L.number(_curves['second'][_e - 1], 3)} voor de tweede, en {_n} boxes van 0,5 of meer in deze drie scènes, die {C.SHOWN_SHAPES} vormen hebben.")
+                        f"Na epoch {_e}: loss {L.number(_curves['rpn'][_e - 1], 3)} voor de eerste fase en {L.number(_curves['second'][_e - 1], 3)} voor de tweede, en {_n} {'box' if _n == 1 else 'boxes'} van 0,5 of meer in deze drie scènes, die {C.SHOWN_SHAPES} vormen hebben.")
 
             if len(_moments) == len(_curves["rpn"]) > 1:   # terugspoelen door de run, met de hele run in het plaatje
                 _pic = [L.explore("rewind", "epoch", _frame, start=len(_moments), values=list(range(1, len(_moments) + 1)), role="",

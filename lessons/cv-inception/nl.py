@@ -315,7 +315,7 @@ def text_demo():
     mo.md(f"""
     ### Wat je project nu kan
 
-    De knop gebruikt je project. Hij traint het netwerk van de demo, met je `Inception` in het midden, op de eerste 6.000 trainingsfoto's van CIFAR-10, met je Trainer, {C.EPOCHS} epochs lang met een learning rate van {C.number(C.LR, 2, L.lang)}, een warmup van één epoch en seed 0, en test het op de eerste 1.000 testfoto's. Daarna zet hij elke tak van je block om de beurt uit, door zijn channels op 0 te zetten, en telt de testfoto's opnieuw. Waar een module van jou ontbreekt of kapot is, springt die van de course in. Hij heeft CIFAR-10 en oefening 2 nodig, en duurt een paar minuten. Tijdens het trainen laat een grafiek na elke epoch de validation loss zien. In het plaatje daarna is de grijze lijn de validation loss van de run van de course met één 3×3-convolutie in het midden en seed 0. Daarna kun je terugspoelen door je run, en zie je je run naast die van de course.
+    De knop gebruikt je project. Hij traint het netwerk van de demo, met je `Inception` in het midden, op de eerste 6.000 trainingsfoto's van CIFAR-10, met je Trainer, {C.EPOCHS} epochs lang met een learning rate van {C.number(C.LR, 2, L.lang)}, een warmup van één epoch en seed 0, en test het op de eerste 1.000 testfoto's. Daarna zet hij elke tak van je block om de beurt uit, door zijn channels op 0 te zetten, en telt de testfoto's opnieuw. Waar een module van jou ontbreekt of kapot is, springt die van de course in. Hij heeft CIFAR-10 en oefening 2 nodig, en duurt een paar minuten. Tijdens het trainen toont een grafiek de loss op de trainingsfoto's elke 10 batches, en gestreept op de testfoto's na elke epoch. Naast of onder de grafiek staat wat het netwerk op dat moment gokt bij één testfoto van elke soort, en daaronder de feature maps die zijn midden van een auto maakt; allebei worden ze opnieuw getekend terwijl het traint. In het plaatje daarna is de grijze lijn de validation loss van de run van de course met één 3×3-convolutie in het midden en seed 0. Daarna kun je terugspoelen naar een paar epochs van je run, met beide plaatjes zoals ze toen waren, en zie je je run naast die van de course.
     """)
     return
 
@@ -356,13 +356,22 @@ def demo_inception(cifar, train_button, result_inception):
         _out = mo.md("*Druk op de knop om het netwerk te trainen.*")
     else:
         _now = {}   # de live grafiek, gemaakt bij het eerste bericht
+        _layer = "Het midden van het netwerk op een testfoto van een auto: layer {name}"
 
         def _progress(_p):
             if "chart" not in _now:
-                _now["chart"] = L.live({"title": "Je netwerk op CIFAR-10", "x": "epoch", "y": "validation loss",
-                                        "alt": "De validation loss van het netwerk op de 1.000 testfoto's na elke epoch tot nu toe."}, _p["epochs"], low=0.0)
-            if "val_loss" in _p:
-                _now["chart"].add(_p["epoch"], _p["val_loss"], f"**Inception block** · epoch {_p['epoch']} van {_p['epochs']} · validation loss {C.number(_p['val_loss'], 3, L.lang)}")
+                _now["chart"] = L.live({"title": "Je netwerk op CIFAR-10", "x": "epoch", "y": "loss",
+                                        "alt": "De loss van het netwerk tot nu toe: op de trainingsfoto's elke 10 batches, en gestreept op de 1.000 testfoto's na elke epoch."}, _p["epochs"], low=0.0, window=5,
+                                       key=[("loss", False, "trainingsfoto's, elke 10 batches"), ("loss", True, "testfoto's, na elke epoch")])
+                _now["chart"].watch(lambda: C.now_pictures(_p["look"](), _layer, L.lang, "nv-inception-now"))
+                _now["test"] = []
+            if "val_loss" in _p:   # the test photos after every epoch, dashed
+                _now["test"].append((_p["epoch"], _p["val_loss"]))
+                _now["chart"].reference(_now["test"], "", role="loss", replace=True)
+                _now["chart"].line(f"**Inception block** · epoch {_p['epoch']} van {_p['epochs']} · validation loss {C.number(_p['val_loss'], 3, L.lang)}")
+            elif "loss" in _p:   # the training photos every 10 batches
+                _now["chart"].add(_p["epoch"] - 1 + _p["batch"] / _p["batches"], _p["loss"],
+                                  f"**Inception block** · epoch {_p['epoch']} van {_p['epochs']} · batch {_p['batch']} van {_p['batches']} · loss {C.number(_p['loss'], 3, L.lang)}")
             else:
                 _now["chart"].line(f"**Inception block** · epoch {_p['epoch']} van {_p['epochs']} · batch {_p['batch']} van {_p['batches']}")
 
@@ -389,7 +398,7 @@ def demo_inception(cifar, train_button, result_inception):
             def _frame(_e):
                 _e = int(_e)
                 _right = sum(_g == _k for _g, _k in zip(_guesses[_e - 1], _result["truth"]))
-                return (C.curves_picture(_result["curves"], _labels, L.lang, at=_e) + C.guesses_picture(_guesses[_e - 1], _result["truth"], L.lang),
+                return (C.epoch_frame(_result, _e, _labels, _layer, L.lang),
                         f"Na epoch {_e}: validation loss {C.number(_val[_e - 1], 3, L.lang)}, en {_right} van deze {len(C.SHOWN)} foto's goed gelezen.")
 
             if len(_when) > 1:   # terugspoelen door de run, met de hele run in het plaatje

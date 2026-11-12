@@ -500,7 +500,7 @@ def demo_mask_rcnn(train_button, result_bilinear, result_align, result_paste):
         _out = mo.md("*Press the button to train Mask R-CNN.*")
     else:
         _now = {}   # the live chart, made at the first report
-        _words = {"scene": "scene {seed}: {n} masks", "layer": "Layer {name} of Mask R-CNN on scene {seed}: the maps all three parts read",
+        _words = {"scene": ("scene {seed}: {n} mask", "scene {seed}: {n} masks"), "layer": "Layer {name} of Mask R-CNN on scene {seed}: the maps all three parts read",
                   "alt": "Three test scenes in grey, each with the edges of its true masks and the masks of the boxes of 0.5 or more that Mask R-CNN gave it after that epoch, filled."}
         _words_now = _words | {"alt": "Three test scenes in grey, each with the edges of its true masks and the masks of the boxes of 0.5 or more that Mask R-CNN gives it now, filled."}
 
@@ -539,7 +539,7 @@ def demo_mask_rcnn(train_button, result_bilinear, result_align, result_paste):
                 _e = int(_e)
                 _n = sum(len(_m) for _m in _moments[_e - 1])
                 return (C.epoch_frame(_result, _e, _labels, _words, L.lang),
-                        f"After epoch {_e}: loss {L.number(_curves['rpn'][_e - 1], 3)} for the RPN, {L.number(_curves['second'][_e - 1], 3)} for the second stage and {L.number(_curves['mask'][_e - 1], 3)} for the mask head, and {_n} masks on these three scenes, which have {C.SHOWN_SHAPES} shapes.")
+                        f"After epoch {_e}: loss {L.number(_curves['rpn'][_e - 1], 3)} for the RPN, {L.number(_curves['second'][_e - 1], 3)} for the second stage and {L.number(_curves['mask'][_e - 1], 3)} for the mask head, and {_n} {'mask' if _n == 1 else 'masks'} on these three scenes, which have {C.SHOWN_SHAPES} shapes.")
 
             if len(_moments) == len(_curves["mask"]) > 1:   # rewinding through the run, with the whole run in the picture
                 _pic = [L.explore("rewind", "epoch", _frame, start=len(_moments), values=list(range(1, len(_moments) + 1)), role="",

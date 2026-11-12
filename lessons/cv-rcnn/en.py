@@ -483,7 +483,7 @@ def demo_two_stages(train_button, result_roi, result_proposals):
         _out = mo.md("*Press the button to train the two-stage detector.*")
     else:
         _now = {}   # the live chart, made at the first report
-        _words = {"scene": "scene {seed}: {n} boxes", "layer": "Layer {name} of the detector on scene {seed}: the maps both stages read",
+        _words = {"scene": ("scene {seed}: {n} box", "scene {seed}: {n} boxes"), "layer": "Layer {name} of the detector on scene {seed}: the maps both stages read",
                   "alt": "Three test scenes, each with its true boxes and the dashed boxes of 0.5 or more that the detector gave it after that epoch, after NMS."}
         _words_now = _words | {"alt": "Three test scenes, each with its true boxes and the dashed boxes of 0.5 or more that the detector gives it now, after NMS."}
 
@@ -520,7 +520,7 @@ def demo_two_stages(train_button, result_roi, result_proposals):
                 _e = int(_e)
                 _n = sum(len(_b) for _b in _moments[_e - 1])
                 return (C.epoch_frame(_result, _e, _labels, _words, L.lang),
-                        f"After epoch {_e}: loss {L.number(_curves['rpn'][_e - 1], 3)} for the first stage and {L.number(_curves['second'][_e - 1], 3)} for the second, and {_n} boxes of 0.5 or more on these three scenes, which have {C.SHOWN_SHAPES} shapes.")
+                        f"After epoch {_e}: loss {L.number(_curves['rpn'][_e - 1], 3)} for the first stage and {L.number(_curves['second'][_e - 1], 3)} for the second, and {_n} {'box' if _n == 1 else 'boxes'} of 0.5 or more on these three scenes, which have {C.SHOWN_SHAPES} shapes.")
 
             if len(_moments) == len(_curves["rpn"]) > 1:   # rewinding through the run, with the whole run in the picture
                 _pic = [L.explore("rewind", "epoch", _frame, start=len(_moments), values=list(range(1, len(_moments) + 1)), role="",

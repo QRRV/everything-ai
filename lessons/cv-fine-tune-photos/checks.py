@@ -7,6 +7,7 @@ CaltechDATA) the lesson downloads once, when the learner asks for them (everythi
 worked example and the demo need them, the exercises do not. The slider uses what the course measured with them
 (REFERENCE)."""
 import errno
+import functools
 import html
 import re
 import urllib.error
@@ -15,7 +16,7 @@ import numpy as np
 import torch   # imported once, when the lesson opens: the first import takes longer than a check may
 from torch import nn
 
-from everything_ai import caltech, chart, hub, models
+from everything_ai import caltech, chart, hub, live, models, netview, yours
 from everything_ai.lesson import download_card
 from everything_ai.check import FunctionBox, Mistake, run_code
 
@@ -38,6 +39,11 @@ TUNE_LR, TUNE_EPOCHS, BATCH = 0.003, 2, 20   # phase 2: every parameter, in mini
 RATES = [0.0003, 0.001, 0.003, 0.01, 0.03, 0.1]   # the stops of the slider: learning rates of phase 2
 SEEDS = 5
 STEPS = 10 * TRAIN // BATCH   # the steps of phase 2 in one epoch: 200 training photos in mini-batches of 20
+PAIR = ("lotus", "water_lilly")   # the two classes that every mistake after phase 1 mixes up
+SHOWN = [10 * CLASSES.index(name) + k for name in PAIR for k in range(10)]   # their 20 test photos, in the order of split()
+EXAMPLE = SHOWN[0]    # the test photo the demo shows the feature maps of: the first lotus
+WATCHED = "layer4"    # the layer it shows: ResNet-18's last block of convolutions, which phase 2 changes most
+MOMENTS = (0, 1, 2, 5, 10, 15, 20)   # the steps of phase 2 to rewind to: 0 is after phase 1, before phase 2 changes anything
 
 # What the course measured: everything_ai.models.resnet18 with its pinned file, the 30 photos of each class
 # (everything_ai.caltech.checked), prepared with `prepare`; phase 1 with phase_one(seed) and phase 2 with the course's
@@ -579,12 +585,63 @@ def _key(photo) -> bytes:
     return photo.flatten()[::4999].numpy().tobytes()
 
 
+@functools.lru_cache(maxsize=1)
+def thumbnails() -> tuple:
+    """The test photos SHOWN, small: the middle square of each, 64 by 64 pixels, as the demo shows them with its
+    guesses."""
+    from PIL import Image
+    out = []
+    for photo in [p for name in PAIR for p in photos(name)[TEST[0]:TEST[1]]]:
+        with Image.open(photo) as image:
+            image = image.convert("RGB")
+            w, h = image.size
+            s = min(w, h)
+            square = image.crop(((w - s) // 2, (h - s) // 2, (w - s) // 2 + s, (h - s) // 2 + s))
+            out.append(np.asarray(square.resize((64, 64), Image.BILINEAR)))
+    return tuple(out)
+
+
+def now_pictures(seen: dict, title: str, lang: str, uid: str) -> list:
+    """What ResNet-18 makes at one moment of phase 2, as `look` or the rewind gives it: the class it guesses for each
+    of the 20 test photos of lotus and water lily, and how sure it is of that guess, as softmax gives it; and under
+    them its layer WATCHED on the first lotus (layer4.1, the last part of layer4), under `title` with {name} the
+    layer's name. `uid` keeps the masks of the layer apart from those of another picture on the page."""
+    said = [NAMES[lang][CLASSES[g]] for g in seen["guesses"]]
+    right = [NAMES[lang][CLASSES[k]] for k in seen["truth"]]
+    heads = {"en": "ResNet-18's guess for each test photo of lotus and water lily, and how sure it is",
+             "nl": "Wat ResNet-18 gokt voor elke testfoto van lotus en waterlelie, en hoe zeker het is"}
+    alt = {"en": "The 10 test photos of lotus and the 10 of water lily, each with the class ResNet-18 guesses, how sure it is, and in brackets the right class where it is wrong: ",
+           "nl": "De 10 testfoto's van lotus en de 10 van waterlelie, elk met de klasse die ResNet-18 gokt, hoe zeker het is, en tussen haakjes de goede klasse waar het fout is: "}
+    sure = [f"{round(100 * s)}%" for s in seen["sure"]]
+    picture = yours.guesses(list(thumbnails()), said, right, alt[lang] + "; ".join(
+        f"{r}: {g}, {s}" for r, g, s in zip(right, said, sure)) + ".", size=48, title=heads[lang], notes=sure)
+    return netview.moment(picture, seen.get("layer"), title, lang, uid)
+
+
+def losses_picture(losses: list, labels: dict, lang: str, at: int | None = None) -> str:
+    """The loss of each batch of phase 2, as the live chart drew it, with a line at step `at` for rewinding."""
+    run = live.Live(labels, max(len(losses), TUNE_EPOCHS * STEPS), lang=lang, low=0.0)
+    run.xs, run.ys = list(range(1, len(losses) + 1)), list(losses)
+    return run.picture(at=at)
+
+
+def step_frame(result: dict, k: int, labels: dict, title: str, lang: str) -> str:
+    """The rewind at step k of phase 2 (0: after phase 1): the loss of each batch with a line at k, then what ResNet-18
+    guessed after that step, how sure, and its layer layer4, as they were then (decision 1.17)."""
+    return live.rewound(losses_picture(result["losses"], labels, lang, at=k),
+                        now_pictures(result["looked"][k], title, lang, f"nv-tune-step-{k}"))
+
+
 def demo(pretrained, text, progress=None) -> dict:
     """The learner's phase_two once it is right, else the course's, on ResNet-18 after phase 1 (seed 0), with TUNE_LR
     for TUNE_EPOCHS epochs: how many test photos of each class it gets right after phase 1 and after phase 2, how
-    many mistakes mix up lotus and water lily, and whose function it was. `progress` hears {"phase": 1} when phase 1
-    starts, and {"step": k, "loss": v} after each forward pass of phase 2 with gradients: the loss of that batch,
-    worked out from the logits by a hook on the model, since the learner's loop keeps its own. If the learner's
+    many mistakes mix up lotus and water lily, and whose function it was; and for the rewind, the loss of each batch
+    of phase 2 ("losses") and at the steps of MOMENTS what the model makes ("looked": its guesses for the photos SHOWN,
+    how sure it is of each, and its layer WATCHED on EXAMPLE). `progress` hears {"phase": 1} when phase 1 starts, and
+    {"step": k, "loss": v, "look": f} after each forward pass of phase 2 with gradients: the loss of that batch,
+    worked out from the logits by a hook on the model, since the learner's loop keeps its own, and f() what the model
+    makes before that step changes it, as now_pictures draws it (decision 1.17). It looks in eval mode without a graph and without drawing a random
+    number, and puts the model back in its own mode, so phase 2 stays the same. If the learner's
     function fails here after all, the course's runs instead, and progress hears {"phase": 1} again. It runs without
     the time limit of a check, which would make PyTorch calculate with one thread: phase 2 takes long enough as it is.
     The cell passes `pretrained`, which it got from downloads_or_stop, so that it runs only once the downloads are
@@ -595,32 +652,65 @@ def demo(pretrained, text, progress=None) -> dict:
     X, y, X_test, y_test = split()
     labels = {_key(photo): int(label) for photo, label in zip(X, y)}
     tell = progress or (lambda report: None)
+    truth = [int(y_test[place]) for place in SHOWN]
+    kept = {}
 
     def run(f):
         tell({"phase": 1})
         model = phase_one(pretrained(), X, y)
         before = per_class(model, X_test, y_test)
-        steps = [0]
+        steps, losses = [0], []
+        kept.clear()
+        kept["losses"], kept["looked"] = losses, {}
+
+        def look(m) -> dict:
+            with netview.looking(m):
+                p = torch.softmax(m(X_test[SHOWN]), dim=1)
+            return {"guesses": p.argmax(dim=1).tolist(), "sure": [float(v) for v in p.max(dim=1).values], "truth": truth,
+                    "layer": netview.watched(m, X_test[EXAMPLE:EXAMPLE + 1], WATCHED)}
+
+        now = {}   # the model the hook fired on, and what it makes before this step changes it, once something looks
+
+        def look_now() -> dict:   # the chart looks at most every 2 seconds (Live.watch), not at every step
+            if "seen" not in now:
+                now["seen"] = look(now["model"])
+            return now["seen"]
 
         def hook(module, inputs, output):
-            if not torch.is_grad_enabled():
+            if not torch.is_grad_enabled():   # also while the hook looks: no graph there
                 return
             known = [labels.get(_key(photo)) for photo in inputs[0]]
             if None in known:
                 return
+            now.clear()
+            now["model"] = module   # also when the learner's loop trains a copy of the model
+            try:   # the course's pictures never stop the learner's phase 2
+                if steps[0] in MOMENTS:
+                    kept["looked"][steps[0]] = look_now()
+            except Exception:
+                pass
             steps[0] += 1
             loss = nn.functional.cross_entropy(output.detach(), torch.tensor(known)).item()
-            tell({"step": steps[0], "loss": loss})
+            losses.append(loss)
+            try:
+                tell({"step": steps[0], "loss": loss, "look": look_now})
+            except Exception:
+                pass
         handle = model.register_forward_hook(hook)
         try:
             model = f(model, X, y, TUNE_LR, TUNE_EPOCHS)
         finally:
             handle.remove()
         model.eval()
+        if steps[0] in MOMENTS:   # after the last step
+            try:
+                kept["looked"][steps[0]] = look(model)
+            except Exception:
+                pass
         return before, per_class(model, X_test, y_test), mixed(model, X_test, y_test)
     try:
         before, after_, lotus = run(fn if yours else course_phase_two())
     except Exception:
         yours = False
         before, after_, lotus = run(course_phase_two())
-    return {"before": before, "after": after_, "mixed": lotus, "yours": yours}
+    return {"before": before, "after": after_, "mixed": lotus, "yours": yours, "truth": truth, **kept}

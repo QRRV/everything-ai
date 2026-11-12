@@ -27,6 +27,12 @@ DATA = "data/fashion-mnist-small.npz"   # 6,000 training and 1,000 test images o
 EPOCHS, LR = 5, 0.01
 DEPTHS = (1, 2, 4, 8)   # convolutions per block in the demo
 WIDTHS = (8, 16)        # the channels of block 1 and block 2, as in SmallCNN
+EVERY = 10              # the live chart hears the training loss of every 10 batches (live.follow)
+WATCHED = "block2"      # the layer the demo shows of each network: its last block, before the head
+NAMES = {               # the 10 kinds of Fashion-MNIST, label 0 to 9 (data/README.md)
+    "en": ("T-shirt", "trouser", "pullover", "dress", "coat", "sandal", "shirt", "sneaker", "bag", "ankle boot"),
+    "nl": ("T-shirt", "broek", "trui", "jurk", "jas", "sandaal", "overhemd", "sneaker", "tas", "enkellaars"),
+}
 
 
 @functools.lru_cache(maxsize=1)
@@ -320,12 +326,46 @@ def _network(VGGBlock, n: int):
     return VGGNet()
 
 
+def one_each() -> list:
+    """The first test image of each kind, in the order of the labels: what the demo shows its networks guess."""
+    _, _, _, y_test = fashion()
+    return [int((y_test == k).nonzero()[0]) for k in range(len(NAMES["en"]))]
+
+
+def now_pictures(seen: dict, heads: dict, lang: str, uid: str) -> list:
+    """What one network of the demo makes at one moment of its run, as `look` or the rewind gives it: its guess for
+    the first test image of each kind, under heads["guesses"], and under them its last block on the ankle boot, under
+    heads["layer"] with {name} the layer's name. `uid` keeps the masks of the layer apart from those of another picture
+    on the page."""
+    _, _, X_test, _ = fashion()
+    said = [NAMES[lang][g] for g in seen["guesses"]]
+    right = [NAMES[lang][k] for k in seen["truth"]]
+    alt = {"en": "The first test image of each kind, each with the kind the network guessed, and in brackets the right kind where it is wrong: ",
+           "nl": "De eerste testafbeelding van elke soort, elk met de soort die het netwerk gokte, en tussen haakjes de goede soort waar het fout is: "}
+    picture = yours.guesses([X_test[place][0].numpy() for place in one_each()], said, right,
+                            alt[lang] + "; ".join(f"{r}: {g}" for r, g in zip(right, said)) + ".", title=heads["guesses"])
+    return netview.moment(picture, seen.get("layer"), heads["layer"], lang, uid)
+
+
+def epoch_frame(result: dict, n: int, e: int, labels: dict, heads: dict, lang: str) -> str:
+    """The rewind at the network with n convolutions per block, after epoch e (from 1): the validation loss of all
+    four after every epoch, that network's solid, with a line at e; then its guesses and its last block as they were
+    after that epoch (decision 1.17), under heads as for now_pictures."""
+    layers = result["layers"][n]
+    seen = {"guesses": result["looked"][n][e - 1], "truth": result["truth"], "layer": layers[e - 1] if e <= len(layers) else None}
+    return live.rewound(curves_picture(result["curves"], labels, lang, run=n, at=e),
+                        now_pictures(seen, heads, lang, f"nv-vgg-{n}-epoch-{e}"))
+
+
 def _demo(show=None):
     """For the demo: None when vgg.py is not in the project yet; "vgg" when a network of the learner's VGGBlock stops
     with an error; "trainer" when the Trainer or count_params does; "slow" when a training run takes too long; else a
     dict with, per number of convolutions per block, the parameters and the test images read right, one run each,
-    seed 0, their validation loss after every epoch ("curves"), and the modules the course's versions stood in for.
-    `show` hears every run while it trains (live.follow), named by its number of convolutions per block."""
+    seed 0, their validation loss after every epoch ("curves"), the modules the course's versions stood in for, and for
+    the rewind, per network after every epoch, its guesses for the first test image of each kind ("looked", with their
+    right kinds in "truth") and its last block on the ankle boot ("layers"). `show` hears every run while it trains
+    (live.follow, every 10 batches), named by its number of convolutions per block, with what the network makes then
+    (netview.hearing)."""
     if not _saved("vgg"):
         return None
     run = run_code("from cnn.vgg import VGGBlock")
@@ -338,14 +378,18 @@ def _demo(show=None):
     Trainer, count_params = run.names["Trainer"], run.names["count_params"]
     stand_ins = [f"{package}/{module}.py" for package, module, _, _ in projects.stand_ins()]
     X, y, X_test, y_test = fashion()
+    shown = one_each()
+    example = X_test[shown[-1]:shown[-1] + 1]   # the ankle boot
+    truth, looked, layers = [int(y_test[place]) for place in shown], {}, {}
 
     def train(model, n):
+        looked[n], layers[n] = [], []
+        heard = netview.hearing(model, X_test[shown], truth, example, show, looked[n], layers[n], WATCHED)
         torch.manual_seed(1)
         loader = DataLoader(TensorDataset(X, y), batch_size=64, shuffle=True)
         val = DataLoader(TensorDataset(X_test, y_test), batch_size=500)
         trainer = Trainer(model, loader, val, epochs=EPOCHS, lr=LR, warmup=len(loader), max_norm=1.0)
-        if show is not None:
-            live.follow(trainer, show, n)
+        live.follow(trainer, heard, n, every=EVERY)
         history = trainer.fit()
         curves[n] = [float(h["val_loss"]) for h in history or []]
         return _accuracy(model, X_test, y_test)
@@ -367,7 +411,7 @@ def _demo(show=None):
             return "slow"
         except Exception:
             return "trainer"
-    return {"rows": rows, "curves": curves, "stand_ins": stand_ins}
+    return {"rows": rows, "curves": curves, "stand_ins": stand_ins, "looked": looked, "layers": layers, "truth": truth}
 
 
 _DEMO_RUNS: dict = {}
@@ -382,15 +426,18 @@ def _project_texts() -> tuple:
     return tuple(texts)
 
 
-def curves_picture(curves: dict, labels: dict, lang: str) -> str:
+def curves_picture(curves: dict, labels: dict, lang: str, run: int | None = None, at: int | None = None) -> str:
     """The validation loss after every epoch of the networks of the demo, as the live chart of the last one ends: the
-    deepest as the run, in the colour of loss, and the others thin and dashed beside it, without names."""
-    run = live.Live(labels, EPOCHS, lang=lang, low=0.0)
-    for n in DEPTHS[:-1]:
-        run.reference(list(enumerate(curves.get(n, []), 1)), "", role="loss")
-    points = [(x, v) for x, v in enumerate(curves.get(DEPTHS[-1], []), 1) if math.isfinite(v)]
-    run.xs, run.ys = [x for x, _ in points], [v for _, v in points]
-    return run.picture()
+    deepest as the run, or the network with `run` convolutions per block, in the color of loss, and the others thin,
+    dashed and grey beside it, without names, as the live chart draws the networks trained before. With `at`, a line at that epoch, for rewinding."""
+    run = DEPTHS[-1] if run is None else run
+    chart_ = live.Live(labels, EPOCHS, lang=lang, low=0.0)
+    for n in DEPTHS:
+        if n != run:
+            chart_.reference(list(enumerate(curves.get(n, []), 1)), "", role="ink-2")
+    points = [(x, v) for x, v in enumerate(curves.get(run, []), 1) if math.isfinite(v)]
+    chart_.xs, chart_.ys = [x for x, _ in points], [v for _, v in points]
+    return chart_.picture(at=at)
 
 
 def demo(show=None):

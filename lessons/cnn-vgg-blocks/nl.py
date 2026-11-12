@@ -132,7 +132,7 @@ def text_idea():
         """),
         mo.Html(C.weights_picture({"title": "Weights om even ver te zien", "x": "breedte van het geziene stuk, in pixels", "y": "weights, in C²",
                            "one": "één convolutie van k bij k", "stack": "een stapel van 3 bij 3",
-                           "alt": "Twee lijnen van weights in eenheden van C kwadraat tegen de breedte van het geziene stuk, 3 tot 11 pixels. Eén convolutie van k bij k, gestippeld, stijgt van 9 via 25 en 49 naar 121. Een stapel van 3 bij 3 stijgt van 9 via 18 en 27 naar 45. Bij 7 pixels: 49 tegen 27."})),
+                           "alt": "Twee lijnen van weights in eenheden van C kwadraat tegen de breedte van het geziene stuk, 3 tot 11 pixels. Eén convolutie van k bij k, gestreept, stijgt van 9 via 25 en 49 naar 121. Een stapel van 3 bij 3 stijgt van 9 via 18 en 27 naar 45. Bij 7 pixels: 49 tegen 27."})),
     ])
     return
 
@@ -306,7 +306,7 @@ def text_demo():
     mo.md(f"""
     ### Wat je project nu kan
 
-    De knop gebruikt je project. Met je `VGGBlock` bouwt hij netwerken van twee blokken, van 1 naar {C.WIDTHS[0]} channels en van {C.WIDTHS[0]} naar {C.WIDTHS[1]}, zoals je SmallCNN, met {", ".join(str(n) for n in C.DEPTHS[:-1])} en {C.DEPTHS[-1]} convoluties per blok. Met 1 per blok is het je SmallCNN, met dezelfde beginwaarden. Hij traint elk met je Trainer: {C.EPOCHS} epochs op de 6.000 trainingsafbeeldingen, een learning rate van {C.number(C.LR, 2, L.lang)} met een warmup van één epoch, elk één run, met seed 0, en telt de parameters met je `count_params`. Waar een module van jou ontbreekt of stuk is, springt die van de course in. Het werkt zodra oefening 3 af is, en duurt een à twee minuten. Terwijl elk netwerk traint, laat een grafiek zijn validation loss na elke epoch zien, met de netwerken die al klaar zijn als gestippelde lijnen erbij; de grafiek van het laatste, met {C.DEPTHS[-1]} per blok, blijft boven de tabel staan.
+    De knop gebruikt je project. Met je `VGGBlock` bouwt hij netwerken van twee blokken, van 1 naar {C.WIDTHS[0]} channels en van {C.WIDTHS[0]} naar {C.WIDTHS[1]}, zoals je SmallCNN, met {", ".join(str(n) for n in C.DEPTHS[:-1])} en {C.DEPTHS[-1]} convoluties per blok. Met 1 per blok is het je SmallCNN, met dezelfde beginwaarden. Hij traint elk met je Trainer: {C.EPOCHS} epochs op de 6.000 trainingsafbeeldingen, een learning rate van {C.number(C.LR, 2, L.lang)} met een warmup van één epoch, elk één run, met seed 0, en telt de parameters met je `count_params`. Waar een module van jou ontbreekt of stuk is, springt die van de course in. Het werkt zodra oefening 3 af is, en duurt een à twee minuten. Terwijl elk netwerk traint, toont een grafiek zijn loss op de trainingsafbeeldingen elke 10 batches, en gestreept op de testafbeeldingen na elke epoch, met de validation loss van de netwerken die al klaar zijn dun en gestreept erbij. Naast of onder de grafiek staat wat het netwerk op dat moment gokt bij één testafbeelding van elke soort, en daaronder de feature maps van zijn laatste blok op een enkellaars; allebei worden ze opnieuw getekend terwijl het traint. Daarna kun je terugspoelen: sleep een stip over de epochs en de vier netwerken, en je ziet de gokken en de feature maps van elk netwerk zoals ze toen waren, boven de tabel.
     """)
     return
 
@@ -324,18 +324,29 @@ def demo_depth(depth_button, result_block):
     if not depth_button.value:
         _out = mo.md("*Druk op de knop om de vier netwerken te trainen.*")
     else:
-        _done, _now = [], {}   # the curves of the networks trained before; the live chart of the one that trains now
+        _done = []   # the validation loss after every epoch of the networks trained before
+        _now = {}    # the live chart of the one that trains now, and its validation loss so far
+        _heads = {"guesses": "Het netwerk met {n} per blok: wat het gokt bij één testafbeelding van elke soort",
+                  "layer": "Zijn laatste blok op een testafbeelding van een enkellaars: layer {name}"}
 
         def _progress(_p):
             if _now.get("run") != _p["run"]:
-                if "live" in _now:
-                    _done.append(list(zip(_now["live"].xs, _now["live"].ys)))
-                _now["run"], _now["live"] = _p["run"], L.live({"title": f"{_p['run']} convoluties per blok: de validation loss" if _p["run"] > 1 else "1 convolutie per blok: de validation loss", "x": "epoch", "y": "validation loss",
-                                                              "alt": f"De validation loss na elke epoch tot nu toe van het netwerk met {_p['run']} per blok{'; gestippeld de netwerken die al klaar zijn' if _done else ''}."}, _p["epochs"], low=0.0)
-                for _c in _done:
-                    _now["live"].reference(_c, "", role="loss")
-            if "val_loss" in _p:
-                _now["live"].add(_p["epoch"], _p["val_loss"], f"**{_p['run']} per blok** · epoch {_p['epoch']} van {_p['epochs']} · validation loss {C.number(_p['val_loss'], 3, L.lang)}")
+                if "test" in _now:
+                    _done.append(_now["test"])
+                _now["run"], _now["test"] = _p["run"], []
+                _now["live"] = L.live({"title": f"{_p['run']} convoluties per blok" if _p["run"] > 1 else "1 convolutie per blok", "x": "epoch", "y": "loss",
+                                       "alt": f"De loss van het netwerk met {_p['run']} per blok tot nu toe: op de trainingsafbeeldingen elke 10 batches, en gestreept op de 1.000 testafbeeldingen na elke epoch{'; dun en gestreept de validation loss van de netwerken die al klaar zijn' if _done else ''}."}, _p["epochs"], low=0.0, window=5,
+                                      key=[("loss", False, "trainingsafbeeldingen, elke 10 batches"), ("loss", True, "testafbeeldingen, na elke epoch")] + ([("ink-2", True, "de netwerken ervoor, testafbeeldingen")] if _done else []))
+                _now["live"].watch(lambda: C.now_pictures(_p["look"](), dict(_heads, guesses=_heads["guesses"].format(n=_p["run"])), L.lang, f"nv-vgg-{_p['run']}-now"))
+                for _c in _done:   # the networks trained before, thin and dashed
+                    _now["live"].reference(_c, "", role="ink-2")
+            if "val_loss" in _p:   # the test images after every epoch, dashed
+                _now["test"].append((_p["epoch"], _p["val_loss"]))
+                _now["live"].reference(_now["test"], "", role="loss", replace=True)
+                _now["live"].line(f"**{_p['run']} per blok** · epoch {_p['epoch']} van {_p['epochs']} · validation loss {C.number(_p['val_loss'], 3, L.lang)}")
+            elif "loss" in _p:   # the training images every 10 batches
+                _now["live"].add(_p["epoch"] - 1 + _p["batch"] / _p["batches"], _p["loss"],
+                                 f"**{_p['run']} per blok** · epoch {_p['epoch']} van {_p['epochs']} · batch {_p['batch']} van {_p['batches']} · loss {C.number(_p['loss'], 3, L.lang)}")
             else:
                 _now["live"].line(f"**{_p['run']} per blok** · epoch {_p['epoch']} van {_p['epochs']} · batch {_p['batch']} van {_p['batches']}")
 
@@ -352,9 +363,24 @@ def demo_depth(depth_button, result_block):
         else:
             _rows = "\n".join(f"| {n} | {2 * n + 1} | {C.grouped(p, L.lang)} | {right} |" for n, p, right in _result["rows"])
             _who = "" if not _result["stand_ins"] else "\n\nDe versie van de course sprong in voor " + ", ".join(f"`{m}`" for m in _result["stand_ins"]) + ", zoals de melding bij *Waar je project staat* zegt."
-            _pic = [mo.Html(C.curves_picture(_result["curves"], {"title": f"{C.DEPTHS[-1]} convoluties per blok: de validation loss", "x": "epoch", "y": "validation loss",
-                                                                 "alt": f"De validation loss na elke epoch van het netwerk met {C.DEPTHS[-1]} per blok; gestippeld die met {', '.join(str(n) for n in C.DEPTHS[:-2])} en {C.DEPTHS[-2]} per blok."}, L.lang))] if all(_result["curves"].get(n) for n in C.DEPTHS) else []   # none from a fit that gives no history
-            _says = " De grafiek laat de validation loss van je vier netwerken na elke epoch zien: doorgetrokken die met 8 per blok, gestippeld die met 1, 2 en 4." if _pic else ""
+            _looked = _result["looked"]
+            _ready = C.EPOCHS > 1 and all(len(_looked.get(_n, [])) == len(_result["curves"].get(_n, [])) == C.EPOCHS for _n in C.DEPTHS)
+
+            def _frame(_e, _n):
+                _e, _n = int(_e), int(_n)
+                _right = sum(_g == _k for _g, _k in zip(_looked[_n][_e - 1], _result["truth"]))
+                _labels = {"title": "Validation loss na elke epoch", "x": "epoch", "y": "validation loss", "alt": f"De validation loss na elke epoch van het netwerk met {_n} per blok, doorgetrokken, met een lijn bij epoch {_e}; gestreept de andere drie."}
+                return (C.epoch_frame(_result, _n, _e, _labels, dict(_heads, guesses=_heads["guesses"].format(n=_n)), L.lang),
+                        f"Het netwerk met {_n} per blok, na epoch {_e}: validation loss {C.number(_result['curves'][_n][_e - 1], 3, L.lang)}, en {_right} van deze 10 testafbeeldingen goed gelezen.")
+
+            if _ready:   # rewinding through every network and every epoch, with all four in the picture
+                _pic = [L.plane("rewind", "epoch", "convoluties per blok", _frame, list(range(1, C.EPOCHS + 1)), list(C.DEPTHS),
+                                start=(C.EPOCHS, C.DEPTHS[-1]), role="", task="Sleep de stip door de epochs en de netwerken: waar verschillen de gokken en de feature maps van het netwerk met 8 per blok van die van de andere?")]
+            else:
+                _pic = [mo.Html(C.curves_picture(_result["curves"], {"title": f"{C.DEPTHS[-1]} convoluties per blok: de validation loss", "x": "epoch", "y": "validation loss",
+                                                                     "alt": f"De validation loss na elke epoch van het netwerk met {C.DEPTHS[-1]} per blok; gestreept die met {', '.join(str(n) for n in C.DEPTHS[:-2])} en {C.DEPTHS[-2]} per blok."}, L.lang))] if all(_result["curves"].get(n) for n in C.DEPTHS) else []   # none from a fit that gives no history
+            _says = (" De grafiek laat de validation loss van je vier netwerken na elke epoch zien: doorgetrokken die waar de stip staat, gestreept de andere drie." if _ready else
+                     " De grafiek laat de validation loss van je vier netwerken na elke epoch zien: doorgetrokken die met 8 per blok, gestreept die met 1, 2 en 4.") if _pic else ""
             _out = mo.vstack(_pic + [mo.md(f"""| convoluties per blok | layers met weights | parameters | goed |
 |---|---|---|---|
 {_rows}

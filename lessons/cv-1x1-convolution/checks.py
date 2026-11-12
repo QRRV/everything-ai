@@ -49,6 +49,8 @@ photos = _AUG.photos                   # the first N_TRAIN training photos and N
 grouped, number, percent, low_high = _AUG.grouped, _AUG.number, _AUG.percent, _AUG.low_high
 guesses_picture, moments, best_epoch = _AUG.guesses_picture, _AUG.moments, _AUG.best_epoch
 SHOWN = _AUG.SHOWN                     # one checked test photo of each kind, for the rewind
+EVERY = _AUG.EVERY   # the live chart hears the training loss of every EVERY batches
+hearing, rewind_frame, PHOTO = _AUG.hearing, _AUG.rewind_frame, _AUG.PHOTO   # what a run shows while it trains
 N_TRAIN, N_TEST = _AUG.N_TRAIN, _AUG.N_TEST
 EPOCHS, LR = 20, 0.01                  # the demo: as in cv-color-cnn
 CHANNELS = 64                          # the channels around the block in the middle of the demo's network
@@ -314,6 +316,18 @@ def curves_picture(curves: dict, labels: dict, lang: str, at: int | None = None,
     return chart.with_decimal_comma(svg) if lang == "nl" else svg
 
 
+def now_pictures(seen: dict, title: str, lang: str, uid: str) -> list:
+    """What the network makes at one moment of its run: its guesses for the photos SHOWN, and the feature maps of its
+    middle on the car (cv-augment-photos)."""
+    return _AUG.now_pictures(seen, title, lang, uid)
+
+
+def epoch_frame(result: dict, e: int, labels: dict, title: str, lang: str, **kw) -> str:
+    """The rewind at epoch e (from 1): the loss after every epoch with a line at e, then the network's guesses for the
+    photos SHOWN after it, and under them the feature maps of its middle on the car, as it was then (cv-augment-photos)."""
+    return rewind_frame(curves_picture, result, e, labels, title, lang, "bottleneck", **kw)
+
+
 # The lesson is done when these are correct. "bottleneck-runs" is the choice question in the lesson.
 REQUIRED = ["one-by-one", "bottleneck", "bottleneck-runs"]
 
@@ -542,10 +556,11 @@ def _accuracy(model, X, y) -> int:
 def run(variant: str, seed: int, Bottleneck, channel_stats, Trainer, count_params, show=None):
     """One run of WideCNN, as REFERENCE says: the block of `variant` (a Plain 3×3 convolution, or Bottleneck with MIDDLE
     in the middle) made after torch.manual_seed(seed), then the rest of the network, and the photos shuffled after
-    torch.manual_seed(seed + 1). Gives back a dict with the parameters of the network and of its block, how many of
-    the training and test photos it reads right, the loss after every epoch ("curves"), the epoch with the lowest
-    validation loss, and the network's guess for the photos SHOWN after every epoch ("guesses") with their right kinds
-    ("truth"). Errors go to the caller, which says whose code made them. `show` hears the run while it trains."""
+    torch.manual_seed(seed + 1). Gives back a dict with the parameters of the network and of its block, how many of the
+    training and test photos it reads right, the loss after every epoch ("curves"), the epoch with the lowest validation
+    loss, and the network's guess for the photos SHOWN after every epoch ("guesses") with their right kinds ("truth"),
+    and the feature maps of its middle on the car ("layers"). Errors go to the caller, which says whose code made them.
+    `show` hears the run while it trains (live.follow, every 10 batches), with what the network makes then."""
     X, y, X_test, y_test = photos()
     mean, std = channel_stats(X.clone())
     mean = torch.as_tensor(mean, dtype=torch.float32).reshape(3)
@@ -557,29 +572,20 @@ def run(variant: str, seed: int, Bottleneck, channel_stats, Trainer, count_param
     block = Plain(CHANNELS) if middle is None else Bottleneck(CHANNELS, middle)
     model = WideCNN(block)
     params, block_params = int(count_params(model)), int(count_params(block))
-    shown, guesses = X_test[list(SHOWN)], []
-
-    def heard(e):
-        if "val_loss" in e:   # after every epoch: the guesses for the rewind, in eval mode, so the run stays the same
-            was = model.training
-            model.eval()
-            with torch.no_grad():
-                guesses.append([int(g) for g in model(shown).argmax(dim=1)])
-            model.train(was)
-        if show is not None:
-            show(e)
+    truth, guesses, layers = [int(y_test[place]) for place in SHOWN], [], []   # what the rewind keeps of every epoch
+    heard = hearing(model, X_test[list(SHOWN)], truth, X_test[PHOTO:PHOTO + 1], show, guesses, layers, "block")
 
     torch.manual_seed(seed + 1)
     loader = DataLoader(TensorDataset(X, y), batch_size=64, shuffle=True)
     val = DataLoader(TensorDataset(X_test, y_test), batch_size=500)
     trainer = Trainer(model, loader, val, epochs=EPOCHS, lr=LR, warmup=len(loader), max_norm=1.0)
-    live.follow(trainer, heard, "bottleneck")
+    live.follow(trainer, heard, "bottleneck", every=EVERY)
     history = trainer.fit() or []
     curves = {"train": [float(h["train_loss"]) for h in history if isinstance(h, dict) and "train_loss" in h],
               "val": [float(h["val_loss"]) for h in history if isinstance(h, dict) and "val_loss" in h]}
     return {"variant": variant, "params": params, "block_params": block_params, "train": _accuracy(model, X, y),
             "test": _accuracy(model, X_test, y_test), "curves": curves, "best": best_epoch(curves["val"]),
-            "guesses": guesses[:len(curves["val"])], "truth": [int(y_test[place]) for place in SHOWN]}
+            "guesses": guesses[:len(curves["val"])], "layers": layers[:len(curves["val"])], "truth": truth}
 
 
 def _demo(variant: str, show=None):

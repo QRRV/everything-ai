@@ -352,7 +352,7 @@ def text_demo():
     mo.md(f"""
     ### Wat je project nu kan
 
-    De knop gebruikt je project. Hij neemt de eerste 6.000 trainingsfoto's van CIFAR-10 en de eerste 1.000 testfoto's, evenveel als bij de kleding, en normaliseert ze allebei met de getallen die je `channel_stats` voor de trainingsfoto's geeft. Hij traint je `ColorCNN` met je Trainer: {C.EPOCHS} epochs, een learning rate van {C.number(C.LR, 2, L.lang)} met een warmup van één epoch, met seed 0, en telt zijn parameters met je `count_params`. Waar een module van jou ontbreekt of stuk is, springt die van de course in. Hij heeft CIFAR-10 nodig, uit het uitgewerkte voorbeeld, en oefening 2 en 3, en duurt ongeveer een halve minuut. Tijdens het trainen laat een grafiek de validation loss na elke epoch zien, op de 1.000 testfoto's. Gokken uit 10 soorten geeft een loss van $\\ln 10 \\approx 2{{,}}30$. Bij epoch 20 kan de validation loss even hoog zijn, terwijl het netwerk nog ongeveer de helft van de testfoto's goed leest: bij de foto's die het fout heeft, is het erg zeker van een verkeerde soort, en dat kost meer dan een gok.
+    De knop gebruikt je project. Hij neemt de eerste 6.000 trainingsfoto's van CIFAR-10 en de eerste 1.000 testfoto's, evenveel als bij de kleding, en normaliseert ze allebei met de getallen die je `channel_stats` voor de trainingsfoto's geeft. Hij traint je `ColorCNN` met je Trainer: {C.EPOCHS} epochs, een learning rate van {C.number(C.LR, 2, L.lang)} met een warmup van één epoch, met seed 0, en telt zijn parameters met je `count_params`. Waar een module van jou ontbreekt of stuk is, springt die van de course in. Hij heeft CIFAR-10 nodig, uit het uitgewerkte voorbeeld, en oefening 2 en 3, en duurt ongeveer een halve minuut. Tijdens het trainen toont een grafiek de loss op de trainingsfoto's elke 10 batches, en gestreept op de 1.000 testfoto's na elke epoch. Naast of onder de grafiek staat wat je netwerk op dat moment gokt bij één testfoto van elke soort, en daaronder de feature maps van zijn eerste layer op een auto; allebei worden ze opnieuw getekend terwijl het traint. Gokken uit 10 soorten geeft een loss van $\\ln 10 \\approx 2{{,}}30$. Bij epoch 20 kan de validation loss even hoog zijn, terwijl het netwerk nog ongeveer de helft van de testfoto's goed leest: bij de foto's die het fout heeft, is het erg zeker van een verkeerde soort, en dat kost meer dan een gok. Daarna kun je terugspoelen naar een paar epochs van je run, met beide plaatjes zoals ze toen waren.
     """)
     return
 
@@ -371,13 +371,22 @@ def demo_color(train_button, result_stats, result_cnn):
         _out = mo.md("*Druk op de knop om je netwerk te trainen.*")
     else:
         _now = {}   # the live chart, made at the first report
+        _layer = "Layer {name}, de eerste van je ColorCNN, op een testfoto van een auto"
 
         def _progress(_p):
             if "chart" not in _now:
-                _now["chart"] = L.live({"title": "Je ColorCNN: de validation loss", "x": "epoch", "y": "validation loss",
-                                        "alt": "De validation loss van je ColorCNN op de 1.000 testfoto's na elke epoch tot nu toe."}, _p["epochs"], low=0.0)
-            if "val_loss" in _p:
-                _now["chart"].add(_p["epoch"], _p["val_loss"], f"**Je ColorCNN** · epoch {_p['epoch']} van {_p['epochs']} · validation loss {C.number(_p['val_loss'], 3, L.lang)}")
+                _now["chart"] = L.live({"title": "Je ColorCNN op CIFAR-10", "x": "epoch", "y": "loss",
+                                        "alt": "De loss van je ColorCNN tot nu toe: op de trainingsfoto's elke 10 batches, en gestreept op de 1.000 testfoto's na elke epoch."}, _p["epochs"], low=0.0, window=5,
+                                       key=[("loss", False, "trainingsfoto's, elke 10 batches"), ("loss", True, "testfoto's, na elke epoch")])
+                _now["chart"].watch(lambda: C.now_pictures(_p["look"](), _layer, L.lang, "nv-color-now"))
+                _now["test"] = []
+            if "val_loss" in _p:   # the test photos after every epoch, dashed
+                _now["test"].append((_p["epoch"], _p["val_loss"]))
+                _now["chart"].reference(_now["test"], "", role="loss", replace=True)
+                _now["chart"].line(f"**Je ColorCNN** · epoch {_p['epoch']} van {_p['epochs']} · validation loss {C.number(_p['val_loss'], 3, L.lang)}")
+            elif "loss" in _p:   # the training photos every 10 batches
+                _now["chart"].add(_p["epoch"] - 1 + _p["batch"] / _p["batches"], _p["loss"],
+                                  f"**Je ColorCNN** · epoch {_p['epoch']} van {_p['epochs']} · batch {_p['batch']} van {_p['batches']} · loss {C.number(_p['loss'], 3, L.lang)}")
             else:
                 _now["chart"].line(f"**Je ColorCNN** · epoch {_p['epoch']} van {_p['epochs']} · batch {_p['batch']} van {_p['batches']}")
 
@@ -395,8 +404,22 @@ def demo_color(train_button, result_stats, result_cnn):
             _out = _now["chart"].stopped(_note) if "chart" in _now else mo.md(_note)
         else:
             _who = "" if not _result["stand_ins"] else " De versie van de course sprong in voor " + ", ".join(f"`{m}`" for m in _result["stand_ins"]) + ", zoals de melding bij *Waar je project staat* zegt."
-            _pic = [mo.Html(C.curves_picture(_result["curves"], {"title": "Loss na elke epoch", "x": "epoch", "y": "loss", "train": "training", "val": "validation",
-                                                                 "alt": "De loss van je ColorCNN na elke epoch: op de trainingsfoto's doorgetrokken, op de testfoto's gestippeld, met een stip waar de validation loss het laagst is."}, L.lang))] if _result["curves"]["val"] else []
+            _labels = {"title": "Loss na elke epoch", "x": "epoch", "y": "loss", "train": "training", "val": "validation",
+                       "alt": "De loss van je ColorCNN na elke epoch: op de trainingsfoto's doorgetrokken, op de testfoto's gestreept, met een stip waar de validation loss het laagst is."}
+            _val, _looked = _result["curves"]["val"], _result["looked"]
+            _when = C.moments(len(_val)) if len(_looked) == len(_val) else []
+
+            def _frame(_e):
+                _e = int(_e)
+                _right = sum(_g == _k for _g, _k in zip(_looked[_e - 1], _result["truth"]))
+                return (C.epoch_frame(_result, _e, _labels, _layer, L.lang),
+                        f"Na epoch {_e}: validation loss {C.number(_val[_e - 1], 3, L.lang)}, en {_right} van deze {len(C.ONE_EACH)} foto's goed gelezen.")
+
+            if len(_when) > 1:   # rewinding through the run, with the whole run in the picture
+                _pic = [L.explore("rewind", "epoch", _frame, start=_when[-1], values=_when, role="",
+                                  task="Ga terug naar epoch 1, en dan weer vooruit: welke foto's leest je netwerk het eerst goed?")]
+            else:
+                _pic = [mo.Html(C.curves_picture(_result["curves"], _labels, L.lang))] if _val else []
             _best = _result["best"]
             _turn = "" if _best is None else (f" De validation loss was het laagst na epoch **{_best}**; daarna steeg hij, terwijl de training loss bleef dalen." if _best < C.EPOCHS else f" De validation loss daalde na epoch {_best} nog steeds.")
             _numbers = "; ".join(C.number(_v, 3, L.lang) for _v in _result["mean"]), "; ".join(C.number(_v, 3, L.lang) for _v in _result["std"])

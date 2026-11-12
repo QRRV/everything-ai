@@ -243,7 +243,7 @@ def _fold(calls: list[Layer]) -> list[Layer]:
         if (out and isinstance(c.module, _WITH_BEFORE) and c.done and out[-1].done
                 and (not c.fed or feeds == {len(out) - 1})):
             last = out[-1]
-            last.with_it += [type(c.module).__name__] + c.with_it
+            last.with_it += [_kind(c.module)] + c.with_it
             last.params += c.params
             if not isinstance(c.module, nn.Flatten):   # a flatten only reshapes: the box keeps its maps
                 last.shape_out, last.out = c.shape_out, c.out
@@ -409,7 +409,7 @@ def picture(tr: Trace, lang: str, chosen: int | None = None, uid: str = "nv", sc
     out = [f'<div style="overflow-x:auto;max-width:100%">{svg}</div>']
     if tr.error:
         stuck = next((l for l in layers if not l.done), None)
-        where = (course.phrase("net-stops-in", lang, name=f"{stuck.name} ({type(stuck.module).__name__})") if stuck
+        where = (course.phrase("net-stops-in", lang, name=f"{stuck.name} ({_kind(stuck.module)})") if stuck
                  else course.phrase("net-stops-after", lang, name=layers[-1].name) if layers
                  else course.phrase("net-stops-before", lang))
         out.append(f'<div style="{text.format(14, "ink", "0.6rem 0 0")};font-weight:600">{_esc(where)}</div>'
@@ -429,7 +429,7 @@ def _chosen(l: Layer, lang: str, uid: str) -> list[str]:
     """The chosen layer under the network: its line (name, kind, shapes, parameters) and its first feature maps, or its
     first values when it gives a vector, with what they are. `uid` keeps the masks apart on one page."""
     text = "font-size:{}px;color:var(--ea-{});margin:{}"
-    kind = " + ".join([type(l.module).__name__ + _settings(l.module)] + l.with_it)
+    kind = " + ".join([_kind(l.module) + _settings(l.module)] + l.with_it)
     line = course.phrase("net-layer", lang, name=l.name, kind=kind, shape_in=_shape_text(l.shape_in),
                          shape_out=_shape_text(l.shape_out), params=_whole(l.params, lang))
     out = [f'<div style="{text.format(14, "ink", "0.7rem 0 0.4rem")}">{_esc(line)}</div>']
@@ -454,6 +454,14 @@ def _chosen(l: Layer, lang: str, uid: str) -> list[str]:
                 else course.phrase("net-values-some", lang, n=n, total=_whole(total, lang)))
     out.append(f'<div style="{text.format(12, "ink-2", "0.3rem 0 0")}">{_esc(said)}</div>')
     return out
+
+
+def _kind(module: nn.Module) -> str:
+    """The name of a module's class as the picture writes it: without the leading _ of a class that the course keeps to
+    itself (one of its own modules or of a lesson's checks), such as a block of its own network. A learner's class
+    keeps its name as they wrote it."""
+    name = type(module).__name__
+    return (name.lstrip("_") or name) if type(module).__module__.startswith("everything_ai") else name
 
 
 @contextlib.contextmanager
@@ -482,6 +490,15 @@ def last_maps(tr: Trace) -> int | None:
     return None
 
 
+def first_maps(tr: Trace) -> int | None:
+    """The first layer that gives feature maps, such as the first convolution of a classifier: what it finds in the
+    photo itself, edges and colors, which a demo shows while its network trains. None when there is none."""
+    for k, l in enumerate(tr.layers):
+        if l.out is not None and l.out.dim() == 3:
+            return k
+    return None
+
+
 def kept(l: Layer) -> Layer:
     """A copy of one layer of a trace with only the feature maps (or values) its picture shows, for a rewind through
     a run: a layer of every epoch, kept small."""
@@ -498,18 +515,21 @@ def layer_picture(l: Layer, title: str, lang: str, uid: str = "nv-layer") -> str
     return yours.figure(title, body, alt=title)
 
 
-def watched(model: nn.Module, x: torch.Tensor, name: str | None = None) -> Layer | None:
+def watched(model: nn.Module, x: torch.Tensor, name: str | None = None, first: bool = False) -> Layer | None:
     """The layer a demo watches while its network trains (decision 1.17), on the input x, kept small: the first layer
-    with that name that gives feature maps, or when there is none (a learner may name their layers otherwise, or their
-    network may stop in it), the last that gives feature maps before the scores (last_maps). None when there is no
-    such layer either. It looks as `looking` does, so watching leaves the run as it is, and it never stops the run:
+    with that name that gives feature maps; for a Sequential of that name, which the picture opens up, its last part
+    that gives feature maps; or when there is none (a learner may name their layers otherwise, or their network may
+    stop in it), the last that gives feature maps before the scores (last_maps), or with `first` the
+    first that gives feature maps (first_maps). None when there is no such layer either. It looks as `looking` does, so watching leaves the run as it is, and it never stops the run:
     the picture is the course's own."""
     try:
         with torch.random.fork_rng(devices=[]):
             net = trace(model, x)
-        k = next((i for i, l in enumerate(net.layers) if l.name == name and l.out is not None and l.out.dim() == 3),
-                 None) if name is not None else None
-        k = last_maps(net) if k is None else k
+        maps = [i for i, l in enumerate(net.layers) if l.out is not None and l.out.dim() == 3]
+        k = next((i for i in maps if net.layers[i].name == name), None) if name is not None else None
+        if k is None and name is not None:   # a Sequential opened up: its last part, what the whole of it gives
+            k = next((i for i in reversed(maps) if net.layers[i].name.startswith(name + ".")), None)
+        k = (first_maps(net) if first else last_maps(net)) if k is None else k
         return None if k is None else kept(net.layers[k])
     except Timeout:   # the demo's time limit
         raise
@@ -524,6 +544,42 @@ def moment(picture: str, l: Layer | None, title: str, lang: str, uid: str, **fie
     if l is None or l.out is None:
         return [picture]
     return [picture, layer_picture(l, title.format(name=l.name, **fields), lang, uid)]
+
+
+def hearing(model: nn.Module, shown: torch.Tensor, truth: list, example: torch.Tensor, show, guesses: list,
+            layers: list, name: str | None = None):
+    """How a demo hears the learner's Trainer while it fits a network that sorts photos into classes (live.follow),
+    decision 1.17: after every epoch it keeps the network's guesses for the photos `shown` in `guesses`, and the feature
+    maps of its layer `name` on `example` in `layers`, for the rewind (without a name, its first layer of feature maps;
+    without a layer of that name, its last); and it passes every report on to `show` with "look", what the network
+    makes at that moment: those guesses, their right classes `truth`, and that layer. Both look in eval mode without a
+    graph and put every module back in its own mode (looking), so the run stays the same. A chart or a look that fails
+    never stops the run: they are the course's own. A look after an epoch that fails keeps no guesses ([]) and no layer
+    (None), so that `guesses` and `layers` still have one entry per epoch."""
+    def look() -> dict:
+        with looking(model):
+            now = [int(g) for g in model(shown).argmax(dim=1)]
+        return {"guesses": now, "truth": truth, "layer": watched(model, example, name, first=name is None)}
+
+    def heard(e):
+        if "val_loss" in e:   # after every epoch: the guesses and the layer for the rewind
+            try:
+                with looking(model):
+                    now = [int(g) for g in model(shown).argmax(dim=1)]
+            except Timeout:
+                raise
+            except Exception:   # not the learner's Trainer that failed: the rewind shows no guesses here
+                now = []
+            guesses.append(now)
+            layers.append(watched(model, example, name, first=name is None))
+        if show is not None:
+            try:
+                show(e | {"look": look})
+            except Timeout:   # the demo's time limit, also when it falls while the chart draws
+                raise
+            except Exception:
+                pass
+    return heard
 
 
 def network(name: str, make_input, *args, chosen: int | None = None, scores: bool = True):

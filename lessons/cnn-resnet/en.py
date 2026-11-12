@@ -304,7 +304,7 @@ def text_demo():
     mo.md(f"""
     ### What your project can do now
 
-    The button uses your project. It builds two networks of the same depth: a convolution from 1 to 8 channels, {C.BLOCKS} blocks of 8 channels, pooling, a convolution to 16 channels, {C.BLOCKS} blocks of 16 channels, pooling, and the output head: 19 layers with weights. In the one, every block is plain, two convolutions with a ReLU after each; in the other, every block is your `ResBlock`. Both start from the same weights. It trains each with your Trainer: {C.EPOCHS} epochs on the 6,000 training images, a learning rate of {C.number(C.LR, 2, L.lang)} with a warmup of one epoch, one run each, with seed 0, and counts the parameters with your `count_params`. Where a module of yours is missing or broken, the course's stands in. It works once exercise 2 is done, and takes about a minute and a half. While it trains, a chart shows the validation loss after every epoch: first of the plain network, then of yours, with the plain one dashed beside it. Guessing among 10 kinds gives a loss of $\\ln 10 \\approx 2.30$.
+    The button uses your project. It builds two networks of the same depth: a convolution from 1 to 8 channels, {C.BLOCKS} blocks of 8 channels, pooling, a convolution to 16 channels, {C.BLOCKS} blocks of 16 channels, pooling, and the output head: 19 layers with weights. In the one, every block is plain, two convolutions with a ReLU after each; in the other, every block is your `ResBlock`. Both start from the same weights. It trains each with your Trainer: {C.EPOCHS} epochs on the 6,000 training images, a learning rate of {C.number(C.LR, 2, L.lang)} with a warmup of one epoch, one run each, with seed 0, and counts the parameters with your `count_params`. Where a module of yours is missing or broken, the course's stands in. It works once exercise 2 is done, and takes about a minute and a half. While each network trains, a chart shows its loss on the training images every 10 batches, and dashed on the test images after every epoch: first of the plain network, then of yours, with the validation loss of the plain one thin and dashed beside it. Beside or under it are the network's guesses at that moment for one test image of each kind, and under them the feature maps of its last block on an ankle boot; both are drawn again as it trains. Guessing among 10 kinds gives a loss of $\\ln 10 \\approx 2.30$. Then you can rewind through both runs, epoch by epoch, with the pictures of both networks as they were then.
     """)
     return
 
@@ -322,20 +322,33 @@ def demo_resnet(train_button, result_block):
     if not train_button.value:
         _out = mo.md("*Press the button to train both networks.*")
     else:
-        _now = {}   # the live chart of each network, made at its first report
+        _now = {}   # the live chart of each network, made at its first report, and its validation loss so far
+        _heads = {"plain": {"guesses": "The plain network: its guess for one test image of each kind",
+                            "layer": "Its last block on a test image of an ankle boot: layer {name}"},
+                  "residual": {"guesses": "Your residual network: its guess for one test image of each kind",
+                               "layer": "Its last block on a test image of an ankle boot: layer {name}"}}
 
         def _progress(_p):
-            if _p["run"] not in _now:
-                _res = _p["run"] == "residual"
-                _now[_p["run"]] = L.live({"title": "Your residual network: the validation loss" if _res else "The plain network: the validation loss", "x": "epoch", "y": "validation loss",
-                                          "alt": "The validation loss of the network of your residual blocks after every epoch so far; dashed, that of the plain network." if _res else "The validation loss of the plain network after every epoch so far."}, _p["epochs"], low=0.0)
-                if _res and "plain" in _now:
-                    _now["residual"].reference(list(zip(_now["plain"].xs, _now["plain"].ys)), "plain", role="loss")
-            _who = "The plain network" if _p["run"] == "plain" else "Your residual network"
-            if "val_loss" in _p:
-                _now[_p["run"]].add(_p["epoch"], _p["val_loss"], f"**{_who}** · epoch {_p['epoch']} of {_p['epochs']} · validation loss {C.number(_p['val_loss'], 3, L.lang)}")
+            _run = _p["run"]
+            if _run not in _now:
+                _res = _run == "residual"
+                _now[_run] = L.live({"title": "Your residual network" if _res else "The plain network", "x": "epoch", "y": "loss",
+                                     "alt": "The loss of the network of your residual blocks so far: on the training images every 10 batches, and dashed on the 1,000 test images after every epoch; thin and dashed, the validation loss of the plain network." if _res else "The loss of the plain network so far: on the training images every 10 batches, and dashed on the 1,000 test images after every epoch."}, _p["epochs"], low=0.0, window=5,
+                                    key=[("loss", False, "training images, every 10 batches"), ("loss", True, "test images, after every epoch")])
+                _now[_run].watch(lambda: C.now_pictures(_p["look"](), _heads[_run], L.lang, f"nv-resnet-{_run}-now"))
+                _now[_run + "-test"] = []
+                if _res and "plain-test" in _now:   # the plain network's validation loss, thin and dashed beside yours
+                    _now["residual"].reference(_now["plain-test"], "plain", role="ink-2")
+            _who = "The plain network" if _run == "plain" else "Your residual network"
+            if "val_loss" in _p:   # the test images after every epoch, dashed
+                _now[_run + "-test"].append((_p["epoch"], _p["val_loss"]))
+                _now[_run].reference(_now[_run + "-test"], "", role="loss", replace=True)
+                _now[_run].line(f"**{_who}** · epoch {_p['epoch']} of {_p['epochs']} · validation loss {C.number(_p['val_loss'], 3, L.lang)}")
+            elif "loss" in _p:   # the training images every 10 batches
+                _now[_run].add(_p["epoch"] - 1 + _p["batch"] / _p["batches"], _p["loss"],
+                               f"**{_who}** · epoch {_p['epoch']} of {_p['epochs']} · batch {_p['batch']} of {_p['batches']} · loss {C.number(_p['loss'], 3, L.lang)}")
             else:
-                _now[_p["run"]].line(f"**{_who}** · epoch {_p['epoch']} of {_p['epochs']} · batch {_p['batch']} of {_p['batches']}")
+                _now[_run].line(f"**{_who}** · epoch {_p['epoch']} of {_p['epochs']} · batch {_p['batch']} of {_p['batches']}")
 
         _result = C.demo(_progress)
         if _result is None:
@@ -350,7 +363,23 @@ def demo_resnet(train_button, result_block):
             _out = _last.stopped(_note) if _last else mo.md(_note)
         else:
             _who = "" if not _result["stand_ins"] else " The course's version stood in for " + ", ".join(f"`{m}`" for m in _result["stand_ins"]) + ", as the note under *Where your project stands* says."
-            _pic = [mo.Html(C.curves_picture(_result["curves"], {"title": "Validation loss after every epoch", "x": "epoch", "y": "validation loss", "plain": "plain", "alt": "The validation loss of the network of your residual blocks after every epoch, and dashed that of the plain network."}, L.lang))] if _result.get("curves") else []
+            _labels = {"title": "Validation loss after every epoch", "x": "epoch", "y": "validation loss", "plain": "plain", "alt": "The validation loss of the network of your residual blocks after every epoch, and thin and dashed that of the plain network."}
+            _curves = _result.get("curves", {})
+            _when = list(range(1, len(_curves.get("residual", [])) + 1))
+            if any(len(_result["looked"][_n]) != len(_curves.get(_n, [])) for _n in ("plain", "residual")):
+                _when = []
+
+            def _frame(_e):
+                _e = int(_e)
+                _right = {_n: sum(_g == _k for _g, _k in zip(_result["looked"][_n][_e - 1], _result["truth"])) for _n in ("plain", "residual")}
+                return (C.epoch_frame(_result, _e, _labels, _heads, L.lang),
+                        f"After epoch {_e}: of these 10 test images, the plain network reads {_right['plain']} right, and yours {_right['residual']}.")
+
+            if len(_when) > 1:   # rewinding through both runs, with both in the picture
+                _pic = [L.explore("rewind", "epoch", _frame, start=_when[-1], values=_when, role="",
+                                  task="Go back to epoch 1, then forward again: how do the guesses and the feature maps of the plain network differ from those of yours?")]
+            else:
+                _pic = [mo.Html(C.curves_picture(_curves, _labels, L.lang))] if _curves else []
             _out = mo.vstack(_pic + [mo.md(f"""Of the 1,000 test images, the plain network reads **{_result['plain']}** right, and the one of your residual blocks **{_result['residual']}**, both with {C.grouped(_result['params_residual'], L.lang)} parameters, counted with your `count_params`. Over 5 seeds, with the course's code: 105 every time plain, and 876 to 895 residual, more than your SmallCNN with every seed. The chart shows the validation loss of both after every epoch, the plain network's dashed.{_who}""")])
     _out
     return

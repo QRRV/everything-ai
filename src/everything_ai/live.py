@@ -14,6 +14,7 @@ from __future__ import annotations
 
 import html
 import math
+import re
 import time
 
 import marimo as mo
@@ -149,8 +150,9 @@ class Live:
             out.append(sum(part) / len(part))
         return out
 
-    def picture(self) -> str:
-        """The run so far as SVG; also for a test, or for the chart that stays after the run."""
+    def picture(self, at: float | None = None) -> str:
+        """The run so far as SVG; also for a test, or for the chart that stays after the run. With `at`, a line at that
+        step, for a rewind through the run."""
         mean = self.means()
         every = self.ys + [v for points, _, _ in self.others for _, v in points]
         low = self.low if self.low is not None else min(every)
@@ -176,6 +178,8 @@ class Live:
             p.points(self.xs, mean, self.role, r=2.5)                   # a run of few steps: a dot at every step
         if self.xs:
             p.points([self.xs[-1]], [mean[-1]], self.role, r=3.5)       # where the run is now
+        if at is not None:
+            p.line([at, at], list(y), "ink-2", 1.2)                     # where a rewind is
         svg = chart.figure([p], alt=self.labels["alt"], width=CHART_WIDTH, height=240)
         return chart.with_decimal_comma(svg) if self.lang == "nl" else svg
 
@@ -192,12 +196,16 @@ def beside(*parts) -> str:
     return f'<div class="ea-beside" style="display:flex;flex-wrap:wrap;gap:0.75rem 1.5rem;align-items:flex-start">{cells}</div>'
 
 
-def rewound(curves: str, parts: list, width: int = 276) -> str:
+def rewound(curves: str, parts: list, width: int | None = None) -> str:
     """A rewind through a run at one epoch (decision 1.17): `curves`, a chart of the run with a line at that epoch,
     beside the first of `parts`, what the model made then, and the others under them, such as the layer the demo
-    watched. A chart in a row needs its width: it gets `width`, or less on a phone."""
+    watched. A chart in a row needs its width: it gets `width`, by default the width chart.figure drew it at, so its
+    words keep their size, or less on a phone."""
     if not parts:
         return curves
+    if width is None:
+        drawn = re.search(r"max-width:min\(100%,(\d+)px\)", curves)
+        width = int(drawn.group(1)) if drawn else CHART_WIDTH
     return beside((curves, width), parts[0]) + "".join(parts[1:])
 
 
@@ -231,7 +239,8 @@ def name_at(points: list, label: str, above: bool, steps: float, y: tuple, xlog:
     The points of `avoid`, such as those of the run itself, count too where they are under the name.
     Below a line that ends at the bottom of the chart there is no room, so its name then goes above it; above a line
     that ends at the top, below it. A line that ends near the start of the x-axis has its name just after it, so that
-    the name does not begin left of the axis."""
+    the name does not begin left of the axis. When neither side has room beyond both lines, such as for a line near the
+    top over a run near the bottom, the name goes just beside its own line, on a side clear of the run's points."""
     h = y[1] - y[0]
     width = 0.03 * len(label)   # of the x-axis; on a log scale a share of its decades
     end = max(points[-1][0], steps ** width if xlog else width * steps)   # the x-axis begins at 1 on a log scale, else at 0
@@ -243,22 +252,67 @@ def name_at(points: list, label: str, above: bool, steps: float, y: tuple, xlog:
     elif above and up > y[1] - 0.05 * h and down >= y[0] + 0.05 * h:
         above = False
     at = up if above else down
+    if not y[0] + 0.05 * h <= at <= y[1] - 0.05 * h:   # no room beyond both: beside its own line, clear of the run
+        own = [v for x, v in points if x >= left]
+        sides = (max(own) + 0.07 * h, min(own) - 0.1 * h)
+        for spot in (sides if above else sides[::-1]):
+            if y[0] + 0.05 * h <= spot <= y[1] - 0.05 * h and all(abs(v - spot) > 0.1 * h for x, v in avoid if left <= x <= end):
+                at = spot
+                break
     return end, min(max(at, y[0] + 0.05 * h), y[1] - 0.05 * h)
 
 
 def follow(trainer, show, name: str, every: int = 50) -> None:
     """Let `show` hear a run of the learner's Trainer of nn-trainer while it fits, without changing their code: after
     every epoch its validation loss ({"run": name, "epoch", "epochs", "val_loss"}), and every `every` batches how far
-    the epoch is ({"run", "epoch", "epochs", "batch", "batches"}). This wraps self.train_loader, which their fit walks
-    once an epoch, and self.evaluate, on this one trainer. An epoch counts from its first batch, and its validation loss
-    is the first evaluate after it: one before the first epoch, or a second in the same epoch, is not heard, and a fit
-    that measures without self.evaluate only shows how far each epoch is."""
+    the epoch is, with the mean training loss of those batches ({"run", "epoch", "epochs", "batch", "batches",
+    "loss"}). This wraps self.train_loader, which their fit walks once an epoch, and self.evaluate, on this one
+    trainer. An epoch counts from its first batch, and its validation loss is the first evaluate after it: one before
+    the first epoch, or a second in the same epoch, is not heard, and a fit that measures without self.evaluate only
+    shows how far each epoch is.
+
+    The training loss is the cross-entropy of what self.model gives on a batch in train mode, as train_epoch of
+    nn-trainer measures it, against the labels of that batch: a hook on the model hears it, without a graph and
+    without drawing a random number, so the run stays the same. A report leaves "loss" out when the model gave nothing
+    it can measure, such as a trainer without self.model; the hook goes once the last epoch is measured, or when
+    self.fit stops sooner."""
+    import torch   # here, not at the top: lessons without torch load this module too
+    import torch.nn.functional as F
+
     evaluate, loader, epoch, heard = trainer.evaluate, trainer.train_loader, [0], [0]
+    labels, losses, hooked = [None], [], []   # the labels of the batch it trains on now; the loss of each batch since
+
+    def measured(module, args, out):   # the last report
+        if not module.training:
+            return
+        yb, labels[0] = labels[0], None   # one loss per batch, also when the model is called again on it
+        if yb is None or not torch.is_tensor(out) or out.dim() < 2 or out.shape[:1] != yb.shape[:1]:
+            return
+        try:
+            with torch.no_grad():
+                loss = F.cross_entropy(out.detach().reshape(-1, out.shape[-1]).float(), yb.to(out.device).reshape(-1))
+            if torch.isfinite(loss):
+                losses.append(float(loss))
+        except Timeout:   # the time limit of the run, also when it falls while the hook measures
+            raise
+        except Exception:   # labels that do not fit the model's output: the chart then only shows how far it is
+            pass
+
+    model = getattr(trainer, "model", None)
+    if isinstance(model, torch.nn.Module):
+        hooked.append(model.register_forward_hook(measured))
+
+    def unhooked():
+        for h in hooked:
+            h.remove()
+        hooked.clear()
 
     def evaluated(*args, **kwargs):
         loss = evaluate(*args, **kwargs)
         if heard[0] < epoch[0]:
             heard[0] = epoch[0]
+            if epoch[0] >= trainer.epochs:   # the last epoch: the model trains no more under this trainer
+                unhooked()
             show({"run": name, "epoch": epoch[0], "epochs": trainer.epochs, "val_loss": float(loss)})
         return loss
 
@@ -271,9 +325,24 @@ def follow(trainer, show, name: str, every: int = 50) -> None:
 
         def __iter__(self):
             epoch[0] += 1
+            losses.clear()
             for i, batch in enumerate(loader, 1):
+                labels[0] = batch[1] if isinstance(batch, (tuple, list)) and len(batch) == 2 and torch.is_tensor(batch[1]) else None
+                yield batch   # the fit trains on it before it asks for the next one
+                labels[0] = None
                 if i % every == 0:
-                    show({"run": name, "epoch": epoch[0], "epochs": trainer.epochs, "batch": i, "batches": len(loader)})
-                yield batch
+                    report = {"run": name, "epoch": epoch[0], "epochs": trainer.epochs, "batch": i, "batches": len(loader)}
+                    if losses:
+                        report["loss"] = sum(losses) / len(losses)
+                        losses.clear()
+                    show(report)
 
     trainer.evaluate, trainer.train_loader = evaluated, Counted()
+    fit = getattr(trainer, "fit", None)
+    if callable(fit):
+        def fitted(*args, **kwargs):   # also when the fit stops sooner, at the time limit or on an error of theirs
+            try:
+                return fit(*args, **kwargs)
+            finally:
+                unhooked()
+        trainer.fit = fitted

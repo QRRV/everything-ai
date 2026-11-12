@@ -731,11 +731,12 @@ def curves_picture(curves: dict, labels: dict, lang: str, at: int | None = None)
 
 def rewind_picture(boxes: list, words: dict) -> str:
     """The test scenes of the rewind, each with its true boxes and the boxes of 0.5 or more that the learner's
-    detector gave it at one moment, after NMS."""
+    detector gave it at one moment, after NMS. words["scene"] is one label, or two: for one, and for any
+    other number."""
     panels = []
     for seed, found in zip(SHOWN, boxes):
         s = scenes.scene(seed)
-        panels.append((_scene_svg(s, found, words["scene"].format(seed=seed, n=len(found)), figsize=(2.3, 2.45),
+        panels.append((_scene_svg(s, found, (words["scene"] if isinstance(words["scene"], str) else words["scene"][0 if len(found) == 1 else 1]).format(seed=seed, n=len(found)), figsize=(2.3, 2.45),
                                   crop=(0, 0, 127, 127), size=9, labels=False), 160))
     return _side_by_side(panels, words["alt"])
 

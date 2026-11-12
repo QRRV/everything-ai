@@ -50,6 +50,7 @@ photos = _AUG.photos                   # the first N_TRAIN training photos and N
 grouped, number, percent, low_high = _AUG.grouped, _AUG.number, _AUG.percent, _AUG.low_high
 N_TRAIN, N_TEST = _AUG.N_TRAIN, _AUG.N_TEST
 SHOWN, MOMENTS, NAMES = _AUG.SHOWN, _AUG.MOMENTS, _AUG.NAMES
+EVERY = _AUG.EVERY   # the live chart hears the training loss of every EVERY batches
 moments, best_epoch, guesses_picture = _AUG.moments, _AUG.best_epoch, _AUG.guesses_picture
 
 EPOCHS, LR = 40, 0.001   # the demo: as long as in cv-augment-photos; at 0.01 or 0.003 SmallAlexNet hardly learns its training photos
@@ -294,6 +295,18 @@ def curves_picture(curves: dict, labels: dict, lang: str, at: int | None = None,
     return chart.with_decimal_comma(svg) if lang == "nl" else svg
 
 
+def now_pictures(seen: dict, title: str, lang: str, uid: str) -> list:
+    """What the network makes at one moment of its run: its guesses for the photos SHOWN, and its first layer on the
+    car (cv-augment-photos)."""
+    return _AUG.now_pictures(seen, title, lang, uid)
+
+
+def epoch_frame(result: dict, e: int, labels: dict, title: str, lang: str, **kw) -> str:
+    """The rewind at epoch e (from 1): the loss after every epoch with a line at e, then the network's guesses for the
+    photos SHOWN after it, and under them its first layer on the car, as it was then (cv-augment-photos)."""
+    return _AUG.rewind_frame(curves_picture, result, e, labels, title, lang, "alexnet", **kw)
+
+
 # The lesson is done when these are correct. "dropout-here" is the choice question in the lesson.
 REQUIRED = ["alexnet-today", "small-alexnet", "dropout-here"]
 
@@ -515,11 +528,12 @@ def _accuracy(model, X, y) -> int:
 
 def run(variant: str, seed: int, SmallAlexNet, crop, jitter, channel_stats, Trainer, count_params, show=None):
     """One run of SmallAlexNet, as REFERENCE says: with dropout and the changes of `variant` (SETTINGS), the network
-    made after torch.manual_seed(seed) and the photos shuffled after torch.manual_seed(seed + 1). Gives back a dict
-    with the number of parameters, how many of the training photos as they are and of the test photos it reads right,
-    the loss after every epoch ("curves"), the epoch with the lowest validation loss, and the network's guess for the
-    photos SHOWN after every epoch ("guesses") with their right kinds ("truth"). Errors go to the caller, which says
-    whose code made them. `show` hears the run while it trains (live.follow)."""
+    made after torch.manual_seed(seed) and the photos shuffled after torch.manual_seed(seed + 1). Gives back a dict with
+    the number of parameters, how many of the training photos as they are and of the test photos it reads right, the
+    loss after every epoch ("curves"), the epoch with the lowest validation loss, and the network's guess for the photos
+    SHOWN after every epoch ("guesses") with their right kinds ("truth"), and its first layer of feature maps on the car
+    ("layers"). Errors go to the caller, which says whose code made them. `show` hears the run while it trains
+    (live.follow, every 10 batches), with what the network makes then."""
     p, changed = SETTINGS[variant]
     X, y, X_test, y_test = photos()
     mean, std = channel_stats(X.clone())
@@ -530,17 +544,8 @@ def run(variant: str, seed: int, SmallAlexNet, crop, jitter, channel_stats, Trai
     torch.manual_seed(seed)
     model = SmallAlexNet(p=p)
     params = int(count_params(model))
-    shown, guesses = X_test[list(SHOWN)], []
-
-    def heard(e):
-        if "val_loss" in e:   # after every epoch: the guesses for the rewind, in eval mode, so the run stays the same
-            was = model.training
-            model.eval()
-            with torch.no_grad():
-                guesses.append([int(g) for g in model(shown).argmax(dim=1)])
-            model.train(was)
-        if show is not None:
-            show(e)
+    truth, guesses, layers = [int(y_test[place]) for place in SHOWN], [], []   # what the rewind keeps of every epoch
+    heard = _AUG.hearing(model, X_test[list(SHOWN)], truth, X_test[_AUG.PHOTO:_AUG.PHOTO + 1], show, guesses, layers)
 
     torch.manual_seed(seed + 1)
     if changed:
@@ -549,13 +554,13 @@ def run(variant: str, seed: int, SmallAlexNet, crop, jitter, channel_stats, Trai
         loader = DataLoader(TensorDataset(X_norm, y), batch_size=64, shuffle=True)
     val = DataLoader(TensorDataset(X_test, y_test), batch_size=500)
     trainer = Trainer(model, loader, val, epochs=EPOCHS, lr=LR, warmup=len(loader), max_norm=1.0)
-    live.follow(trainer, heard, "alexnet")
+    live.follow(trainer, heard, "alexnet", every=EVERY)
     history = trainer.fit() or []
     curves = {"train": [float(h["train_loss"]) for h in history if isinstance(h, dict) and "train_loss" in h],
               "val": [float(h["val_loss"]) for h in history if isinstance(h, dict) and "val_loss" in h]}
     return {"variant": variant, "params": params, "train": _accuracy(model, X_norm, y), "test": _accuracy(model, X_test, y_test),
-            "curves": curves, "best": best_epoch(curves["val"]), "guesses": guesses[:len(curves["val"])],
-            "truth": [int(y_test[place]) for place in SHOWN]}
+            "curves": curves, "best": best_epoch(curves["val"]), "guesses": guesses[:len(curves["val"])], "layers": layers[:len(curves["val"])],
+            "truth": truth}
 
 
 def _demo(variant: str, show=None):
