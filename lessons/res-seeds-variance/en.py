@@ -230,7 +230,7 @@ def text_demo():
     mo.md(r"""
     ### Your GPT with five seeds
 
-    The button trains the small GPT of [Change one thing at a time](/course/open/res-hypothesis-control?lang=en) five times, with seeds 0 to 4, with your `GPT`, `gpt_loaders` and `Trainer` on the CPU: about half a minute to a minute per run, so a few minutes in all. The rest of the lesson waits while it trains, and the cell's stop button ends it. Meanwhile a chart shows the validation loss after every epoch, of each seed in turn, with the runs of the earlier seeds dashed beside it. The five end close together, but not at the same number; the picture after the runs zooms in on where they end.
+    The button trains the small GPT of [Change one thing at a time](/course/open/res-hypothesis-control?lang=en) five times, with seeds 0 to 4, with your `GPT`, `gpt_loaders` and `Trainer` on the CPU: about half a minute to a minute per run, so a few minutes in all. The rest of the lesson waits while it trains, and the cell's stop button ends it. Meanwhile a chart shows the validation loss after every epoch, of each seed in turn, with the runs of the earlier seeds dashed beside it, and beside the chart what the model writes now after `ROMEO:`, every character drawn from its probabilities, with the same seed each time. After the runs you can rewind with a dot through every epoch of every seed. The five end close together, but not at the same number; the picture after the runs zooms in on where they end.
     """)
     return
 
@@ -247,23 +247,29 @@ def demo_seeds(box_summary, result_summary, seeds_button):
     if not seeds_button.value:
         _out = mo.md("*Press the button to start the five runs.*")
     else:
-        _done, _now = [], {}   # the curves of the seeds before; the live chart of the seed that trains now
+        _done = []   # the curves of the seeds before
+        _now = {}    # the live chart of the seed that trains now, and its last report
+        _kept = []   # every run, with what its model wrote at every epoch, for the rewind
+        _wrote = {"now": "What it writes now, in epoch {epoch}",
+                  "alt_now": "What the model writes now after ROMEO: and a new line, which are in gray: every character drawn from its probabilities, with the same seed for the drawing each time."}
 
-        def _hear(_i, _e):
+        def _progress(_i, _e):
             if _now.get("seed") != _i:
                 if "live" in _now:
                     _done.append(list(zip(_now["live"].xs, _now["live"].ys)))
                 _now["seed"], _now["live"] = _i, L.live({"title": f"Seed {_i}: the validation loss", "x": "epoch", "y": "validation loss",
-                                                          "alt": f"The validation loss after every epoch so far of the run with seed {_i}{'; dashed, the runs of the earlier seeds' if _done else ''}."}, _e["epochs"])
+                                                          "alt": f"The validation loss after every epoch so far of the run with seed {_i}{'; dashed, the runs of the earlier seeds' if _done else ''}."}, _e["epochs"], look_every=2.0)
+                _now["live"].watch(lambda: C.now_picture(_now["last"], _wrote))   # what the model writes now, beside the chart
                 for _c in _done:
                     _now["live"].reference(_c, "", role="loss")
+            _now["last"] = _e
             if "val_loss" in _e:
                 _now["live"].add(_e["epoch"], _e["val_loss"], f"**Seed {_i}** · epoch {_e['epoch']} of {_e['epochs']} · validation loss {C.number(_e['val_loss'], 3, L.lang)}")
             else:
                 _now["live"].line(f"**Seed {_i}** · epoch {_e['epoch']} of {_e['epochs']} · batch {_e['batch']} of {_e['batches']}")
 
         mo.output.replace(mo.md("*Seed 0 · starting …*"))   # until the first batches of seed 0
-        _runs = C.run_seeds(None, _hear)
+        _runs = C.run_seeds(None, _progress, _kept)
         if isinstance(_runs, str):
             _note = "*You stopped the runs. Press the button to start again.*" if _runs == "stopped" else "*A run stops with an error. Do your modules in `work/projects/llm/` and `work/projects/nn/` still pass their checks? Delete a file you changed, and check its exercise again.*"
             _out = _now["live"].stopped(_note) if "live" in _now else mo.md(_note)   # runs that stop keep their chart so far
@@ -271,7 +277,15 @@ def demo_seeds(box_summary, result_summary, seeds_button):
             _summary, _yours = C.summary_of(box_summary.value if result_summary.state == "correct" else None)
             _mean, _low, _high = _summary(_runs, 10000, 0)
             _who = "" if _yours else " Exercise 1 is not right yet, so the course's `seed_summary` made the summary."
-            _out = mo.vstack([
+            _rewind = {"title": "Seed {seed}: the validation loss", "x": "epoch", "y": "validation loss", "lang": "en",
+                       "alt": "The validation loss after every epoch of the five runs, seed {seed} solid and the others dashed, with a dashed line at the chosen epoch.",
+                       "wrote": "What it wrote at that moment",
+                       "alt_wrote": "What the model of seed {seed} wrote after epoch {epoch}, after ROMEO: and a new line, which are in gray, with the same seed for the drawing each time.",
+                       "start": "**Seed {seed}, before the first epoch**", "after": "**Seed {seed}, after epoch {epoch}** · validation loss {loss}"}
+            _pic = [L.plane("rewind", "epoch", "seed", lambda _e, _s: C.rewind_frame(_kept, int(_e), int(_s), _rewind), list(range(len(_kept[0]) + 1)), C.SEEDS,
+                            start=(len(_kept[0]), C.SEEDS[0]), role="",
+                            task="Drag the dot over the epochs and the seeds: after the same epoch, do the five models write alike?")] if C.rewinds(_kept) else []
+            _out = mo.vstack(_pic + [
                 mo.Html(C.strip_picture([("yours, with warmup", _runs), ("course, with warmup", C.REFERENCE["control"]), ("course, without warmup", C.REFERENCE["warmup=0"])],
                                         {"title": "Five seeds each", "x": "validation loss after 6 epochs", "lang": L.lang,
                                          "alt": f"Three rows of five runs each. Your runs lie from {C.number(min(_runs), 3, L.lang)} to {C.number(max(_runs), 3, L.lang)}, with a mean of {C.number(_mean, 3, L.lang)}."})),

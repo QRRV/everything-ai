@@ -310,7 +310,7 @@ def text_demo():
         mo.md(f"""
         ### Train je model met DPO
 
-        De knop zet adapters van rang {_r} op je SFT-model uit [Project: leer je model instructies volgen (SFT)](/course/open/llm-sft?lang=nl), of op dat van de course als je er geen hebt, maakt de paren met je `dpo_pairs`, en laat je `dpo_step` één keer over alle paren gaan, in batches van {C.BATCH}, bij $\\beta = {C.number(C.BETA, 1, L.lang).replace(',', '{,}')}$ en een learning rate van {C.number(C.LR, 3, L.lang)}. Daarna beantwoordt het model de {C.T.TESTS} testinstructies van die les opnieuw, en meet de demo hoe ver de antwoorden van de eerste {C.MOVED} paren bewogen. Op de CPU van de course, met één thread, duurde dat ongeveer {round((_y['seconds'] + _y['other_seconds']) / 60)} minuten voor haar model van de demorun, en ongeveer {round((_c['seconds'] + _c['other_seconds']) / 60)} minuten op twee threads voor het eigen SFT-model van de course, dat ongeveer vijf keer zo groot is. De adapters worden bewaard in `work/projects/llm/dpo.pt`.
+        De knop zet adapters van rang {_r} op je SFT-model uit [Project: leer je model instructies volgen (SFT)](/course/open/llm-sft?lang=nl), of op dat van de course als je er geen hebt, maakt de paren met je `dpo_pairs`, en laat je `dpo_step` één keer over alle paren gaan, in batches van {C.BATCH}, bij $\\beta = {C.number(C.BETA, 1, L.lang).replace(',', '{,}')}$ en een learning rate van {C.number(C.LR, 3, L.lang)}. Daarna beantwoordt het model de {C.T.TESTS} testinstructies van die les opnieuw, en meet de demo hoe ver de antwoorden van de eerste {C.MOVED} paren bewogen. Op de CPU van de course, met één thread, duurde dat ongeveer {round((_y['seconds'] + _y['other_seconds']) / 60)} minuten voor haar model van de demorun, en ongeveer {round((_c['seconds'] + _c['other_seconds']) / 60)} minuten op twee threads voor het eigen SFT-model van de course, dat ongeveer vijf keer zo groot is. De adapters worden bewaard in `work/projects/llm/dpo.pt`. Tijdens het trainen zie je naast de grafiek om de paar seconden wat het model met je adapters op dat moment antwoordt op de eerste testinstructie, zoals in *Je DPO-run, stap voor stap* hieronder.
         """),
         L.course_versions(),
     ])
@@ -334,7 +334,11 @@ def demo_dpo(dpo_button, result_pairs, result_reference, result_step):
         _note = "*Maak eerst oefening 1 tot en met 3 af: de demo traint met je `dpo_pairs`, `reference_logprob` en `dpo_step`.*"
     elif dpo_button.value:
         _live = L.live({"title": "Je DPO-run: de loss van elke stap", "x": "stap", "y": "loss",
-                        "alt": "De loss van DPO van elke stap van je run tot nu toe, in grijs, en als dikkere lijn het gemiddelde over de laatste stappen; gestippeld ln 2, de loss aan het begin."}, C.MEASURED["yours"]["steps"], low=0.0)
+                        "alt": "De loss van DPO van elke stap van je run tot nu toe, in grijs, en als dikkere lijn het gemiddelde over de laatste stappen; gestreept ln 2, de loss aan het begin."}, C.MEASURED["yours"]["steps"], low=0.0, look_every=8.0)
+        _now = {}   # het laatste bericht van de run, voor wat het model nu antwoordt naast de grafiek
+        _seen = {"title": "Wat het nu antwoordt, na stap {step}", "lang": "nl",
+                 "alt": "Wat het model met je adapters nu antwoordt op de eerste testinstructie, die in grijs staat, getrokken met dezelfde seed als op de momenten van het terugspoelen, en eronder of het elk woord gebruikt en zelf stopt.",
+                 "used": "elk woord gebruikt", "not_used": "niet elk woord gebruikt", "stopped": "zelf gestopt", "not_stopped": "niet zelf gestopt"}
 
         def _progress(_p):
             if _p["phase"] == "pairs":
@@ -344,6 +348,10 @@ def demo_dpo(dpo_button, result_pairs, result_reference, result_step):
             elif _p["phase"] == "after":
                 _live.line(f"**Na DPO** · instructie {_p['done']} van {_p['total']} · elk woord gebruikt: {_p['used']}")
             else:
+                if "look" in _p and not _now:   # vanaf de eerste stap staat naast de grafiek wat het model antwoordt
+                    _live.watch(lambda: C.T.now_picture(_now["train"], _seen))
+                if "look" in _p:
+                    _now["train"] = _p
                 _live.extend(_p["fresh"], f"**Stap {C.number(_p['step'], 0, L.lang)} van {C.number(_p['steps'], 0, L.lang)}** · loss {C.number(_p['loss'], 3, L.lang)} · {C.number(_p['seconds'] / 60, 1, L.lang)} minuten")
         _r = C.run(_progress)
         _note = {

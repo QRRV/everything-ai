@@ -12,8 +12,8 @@ import math
 import re
 import time
 
-from everything_ai import hub, paths, projects
-from everything_ai.check import FunctionBox, Mistake, ScenarioBox, run_code
+from everything_ai import hub, netview, paths, projects
+from everything_ai.check import FunctionBox, Mistake, ScenarioBox, Timeout, run_code
 from everything_ai import yours
 
 
@@ -307,8 +307,10 @@ def train(depth: int, tokens: int, step_fn, mixed: bool, show, *, train_windows=
     the schedule of llm-open-recipes, mini-batches of BATCH windows, the validation loss on QUICK windows EVALS times and
     on all at the end. `show` hears every step that ends a second and every evaluation. With `state_file`, the model, the
     optimizer and the step are kept there every `save_every` steps, and a run starts again from it. With `snap(model)`,
-    every evaluation also keeps what the model writes then ("story"), for the replay of the run. "run" when a module
-    of the learner stops with an error; else the model and what the run measured."""
+    every evaluation also keeps what the model writes then ("story"), for the replay of the run, and what `show` hears
+    has "look": a function that gives what the model writes now (decision 1.17); at an evaluation, "seen" is its story.
+    Looking, like evaluating, is not in the seconds of the run. "run" when a module of the learner stops with an error;
+    else the model and what the run measured."""
     import torch
     ran = run_code("from llm.modern_gpt import ModernGPT\nfrom llm.token_windows import TokenWindows")
     if ran.error is not None:
@@ -345,9 +347,10 @@ def train(depth: int, tokens: int, step_fn, mixed: bool, show, *, train_windows=
         model.load_state_dict(state["model"])
         opt.load_state_dict(state["opt"])
         history, step, seconds = state["history"], state["step"], state["seconds"]
-        for e in history:   # the curve of the part already done
-            show({"phase": "eval", **e, "steps": steps})
+        for e in history:   # the curve of the part already done, with what the model wrote then
+            show({"phase": "eval", **e, "steps": steps, **({"seen": e.get("story")} if snap is not None else {})})
     order = _Orders(len(train_windows), seed)
+    look = {} if snap is None else {"look": lambda: looked(model, snap)}
     model.train()
     recent, last_show = [], time.perf_counter()
     while step < steps:
@@ -376,9 +379,9 @@ def train(depth: int, tokens: int, step_fn, mixed: bool, show, *, train_windows=
                 except Exception:
                     history[-1]["story"] = None
             recent = []
-            show({"phase": "eval", **history[-1], "steps": steps})
+            show({"phase": "eval", **history[-1], "steps": steps, **look, **({"seen": history[-1]["story"]} if look else {})})
         elif time.perf_counter() - last_show > 1:
-            show({"phase": "train", "step": step, "steps": steps, "loss": loss, "seconds": seconds})
+            show({"phase": "train", "step": step, "steps": steps, "loss": loss, "seconds": seconds, **look})
             last_show = time.perf_counter()
         if state_file is not None and save_every and step % save_every == 0 and step < steps:
             torch.save({"model": model.state_dict(), "opt": opt.state_dict(), "history": history, "step": step,
@@ -415,6 +418,27 @@ def write(model, merges: dict, encode, decode, seed: int = 0, start: str = START
                 logits = model(torch.tensor([[j]], device=device), caches)
     model.train()
     return decode(out, merges)
+
+
+def looked(model, snap):
+    """What the model writes now, `snap(model)`, looked at as netview.looking looks, so that the run goes on as it would
+    have; None when it stops with an error."""
+    try:
+        with netview.looking(model):
+            return snap(model)
+    except Timeout:
+        raise
+    except Exception:
+        return None
+
+
+def now_picture(report: dict, labels: dict) -> str:
+    """Beside the live chart (decision 1.17): what the model writes now from START, SNAP tokens with the same seed each
+    time; while the run measures, the picture keeps what it saw. `labels`: now, alt."""
+    if "seen" not in report:   # one look per report
+        report["seen"] = report["look"]() if "look" in report else None
+    text_ = report["seen"] or ""
+    return yours.writes(labels["now"], [(START, text_[len(START):] if text_.startswith(START) else text_)], alt=labels["alt"])
 
 
 def saved() -> dict | None:

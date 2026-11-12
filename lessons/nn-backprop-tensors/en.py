@@ -356,7 +356,7 @@ def text_demo():
     mo.md(r"""
     ### What your project can do now
 
-    The cell below takes your own `mlp_gradients` from your project. First it compares its gradients with those of PyTorch, for an MLP with 64 hidden neurons on 64 digits. Then it trains that MLP with them on the 6,000 training digits, in NumPy only, for 5 epochs of mini-batches of 64 with $\eta$ = 0.5, and measures it on the 1,000 test digits. That takes a few seconds. It works once exercise 3 is done.
+    The cell below takes your own `mlp_gradients` from your project. First it compares its gradients with those of PyTorch, for an MLP with 64 hidden neurons on 64 digits. Then it trains that MLP with them on the 6,000 training digits, in NumPy only, for 5 epochs of mini-batches of 64 with $\eta$ = 0.5, and measures it on the 1,000 test digits. That takes a few seconds. While it trains, a chart shows the mean loss of every 10 mini-batches, and dashed the loss on all training digits after every epoch; beside or under it is what your MLP guesses at that moment for one test digit of each kind, drawn again as it trains. Then you can rewind through the epochs, with its guesses as they were then. It works once exercise 3 is done.
     """)
     return
 
@@ -364,19 +364,49 @@ def text_demo():
 @app.cell(hide_code=True)
 def demo_backprop(result_mlp):
     result_mlp  # run again when exercise 3 saves your function
-    _result = C.demo()
+    _now = {}   # the live chart, made at the first report, and the loss on all training digits so far
+
+    def _progress(_p):
+        if "chart" not in _now:
+            _now["chart"] = L.live({"title": "Your MLP, trained with your gradients", "x": "epoch", "y": "loss", "alt": "The loss of your training so far: the mean of every 10 mini-batches, and dashed the loss on all training digits after every epoch."}, _p["epochs"], low=0.0,
+                                   window=3, key=[("loss", False, "mean loss of 10 mini-batches"), ("loss", True, "all training digits, after every epoch")])
+            _now["chart"].watch(lambda: C.now_picture(_p["look"](), "What your MLP guesses now for one test digit of each kind", L.lang))
+            _now["all"] = []
+        if "train_loss" in _p:   # all training digits after every epoch, dashed
+            _now["all"].append((_p["epoch"], _p["train_loss"]))
+            _now["chart"].reference(_now["all"], "", role="loss", replace=True)
+            _now["chart"].line(f"**Your MLP, trained with your gradients** · epoch {_p['epoch']} of {_p['epochs']} · loss {L.number(_p['train_loss'], 3)}")
+        else:   # every 10 mini-batches
+            _now["chart"].add(_p["epoch"] - 1 + _p["batch"] / _p["batches"], _p["loss"],
+                              f"**Your MLP, trained with your gradients** · epoch {_p['epoch']} of {_p['epochs']} · batch {_p['batch']} of {_p['batches']} · loss {L.number(_p['loss'], 3)}")
+
+    _result = C.demo(_progress)
     if _result is None:
         _out = mo.md("*Finish exercise 3 first: then your `mlp_gradients` is in your project, and this cell uses it.*")
-    elif _result == "slow":
-        _out = mo.md("*Training with your `mlp_gradients` in `work/projects/nn/mlp_backward.py` takes more than a minute. Does it use whole matrices, without a loop over the examples?*")
-    elif _result == "broken":
-        _out = mo.md("*The `mlp_gradients` in `work/projects/nn/mlp_backward.py` stops with an error, or gives other gradients than PyTorch. Did you change that file? Delete it, and check exercise 3 again: its check then saves your function again.*")
+    elif isinstance(_result, str):
+        _note = {
+            "slow": "*Training with your `mlp_gradients` in `work/projects/nn/mlp_backward.py` takes more than a minute. Does it use whole matrices, without a loop over the examples?*",
+            "broken": "*The `mlp_gradients` in `work/projects/nn/mlp_backward.py` stops with an error, or gives other gradients than PyTorch. Did you change that file? Delete it, and check exercise 3 again: its check then saves your function again.*",
+        }[_result]
+        _out = _now["chart"].stopped(_note) if "chart" in _now else mo.md(_note)   # a run that stops keeps its chart so far
     else:
-        _errors, _accuracy, _losses = _result
+        _errors, _accuracy, _losses, _looked = _result
+        _labels = {"title": "The loss of your training, per epoch", "epoch": "epoch", "loss": "loss on the training digits", "alt": f"A line through {len(_losses)} points, one per epoch: the loss on all training digits falls from {L.number(_losses[0], 2)} after the first epoch to {L.number(_losses[-1], 2)} after the last."}
+        _when = list(range(1, len(_losses) + 1)) if len(_looked) == len(_losses) and all(_looked) else []
+
+        def _frame(_e):
+            _e = int(_e)
+            return (C.epoch_frame(_losses, _looked, _e, _labels, "What your MLP guessed after this epoch for one test digit of each kind", L.lang),
+                    f"After epoch {_e}: your MLP reads {C.right_of(_looked[_e - 1])} of these 10 test digits right; the loss on all training digits was {L.number(_losses[_e - 1], 2)}.")
+
+        if len(_when) > 1:   # rewinding through the epochs, with its guesses as they were then
+            _rewind = L.explore("rewind", "epoch", _frame, start=_when[-1], values=_when, role="",
+                                task="Go back to epoch 1, then forward again: which digits does your MLP read right first?")
+        else:
+            _rewind = mo.Html(C.losses_picture(_losses, _labels))
         _out = mo.vstack([
             mo.md(f"""The largest relative error of your four gradients against PyTorch is below $10^{{{C.power(max(_errors))}}}$: far below $10^{{-7}}$, so your backward pass computes what `loss.backward()` computes. Trained with it, your MLP reads <span class="ea-num">{L.number(round(_accuracy * 1000), 0)}</span> of the 1,000 test digits right: an accuracy of <span class="ea-num">{L.number(_accuracy, 3)}</span>, where your linear classifier read 890; and without a single line of PyTorch."""),
-            mo.Html(C.losses_picture(_losses, {"title": "The loss of your training, per epoch", "epoch": "epoch", "loss": "loss on the training digits",
-                                               "alt": f"A line through {len(_losses)} points, one per epoch: the loss on all training digits falls from {L.number(_losses[0], 2)} after the first epoch to {L.number(_losses[-1], 2)} after the last."})),
+            _rewind,
         ])
     _out
     return

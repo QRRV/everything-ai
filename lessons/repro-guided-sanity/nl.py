@@ -367,7 +367,7 @@ def text_demo():
     mo.md(rf"""
     ### Wat je project nu kan
 
-    De knop draait je `sanity` uit je project twee keer, op de eerste batch van je training data: op je ModernGPT met je instellingen, en op hetzelfde model met de fout uit de gok erin gezet, zodat hij zijn gok op de plek van $a$ leest. Elk leert de batch {C.STEPS} stappen lang uit het hoofd; samen kost dat op een CPU ongeveer een halve minuut. Waar een deel van je kit ontbreekt of kapot is, springt de versie van de course in.
+    De knop draait je `sanity` uit je project twee keer, op de eerste batch van je training data: op je ModernGPT met je instellingen, en op hetzelfde model met de fout uit de gok erin gezet, zodat hij zijn gok op de plek van $a$ leest. Elk leert de batch {C.STEPS} stappen lang uit het hoofd; samen kost dat op een CPU ongeveer een halve minuut. Terwijl ze leren, toont een grafiek de loss van elke stap, en ernaast of eronder welke vergelijkingen van de batch het model bij die stap goed beantwoordt. Daarna kun je door de stappen van allebei terugspoelen. Waar een deel van je kit ontbreekt of kapot is, springt de versie van de course in.
     """)
     return
 
@@ -383,24 +383,57 @@ def sanity_button_cell():
 def demo_sanity(sanity_button, result_overfit, result_sanity):
     result_overfit, result_sanity  # run again when an exercise saves a part of the kit
     _ready = result_overfit.state == "correct" and result_sanity.state == "correct"
+    _now = {}   # the live chart of each model, made at its first step, and the loss of every step so far
+    _titles = {"yours": "Je ModernGPT", "planted": "Met de fout erin gezet"}
+
+    def _progress(_p):
+        _run = _p["run"]
+        if _run not in _now:
+            _bug = _run == "planted"
+            _now[_run] = L.live({"title": _titles[_run], "x": "stap", "y": "loss", "alt": "De loss van de antwoorden bij elke stap tot nu toe van je ModernGPT met de fout erin gezet, dun en gestreept die van je ModernGPT, en gestreept de laagste loss van een model dat alleen a ziet." if _bug else "De loss van de antwoorden bij elke stap van je ModernGPT tot nu toe."},
+                                _p["steps"], low=0.0, window=1,
+                                key=[("loss", False, "de loss van de antwoorden, elke stap")] + ([("ink-2", True, _titles["yours"]), ("ink-3", True, "een model dat alleen a ziet")] if _bug else []))
+            _now[_run + "-losses"] = []
+            if _bug and _now.get("yours-losses"):   # the run of the model without the bug, thin and dashed
+                _now["planted"].reference(_now["yours-losses"], "", role="ink-2")
+            if _bug:
+                _now["planted"].reference([(0, _p["floor"]), (_p["steps"], _p["floor"])], "", role="ink-3")
+        _now[_run + "-losses"].append((_p["step"], _p["loss"]))
+        _now[_run].watch(lambda _look=_p["look"]: C.batch_picture(_look(), f"{_titles[_run]}: welke vergelijkingen van de batch hij nu goed beantwoordt", L.lang))
+        _now[_run].add(_p["step"], _p["loss"], f"**{_titles[_run]}** · na {_p['step']} van {_p['steps']} stappen · loss {C.number(_p['loss'], 4, L.lang)}")
+
     if not sanity_button.value:
         _out = mo.md("*Druk op de knop om je sanity check te draaien.*" if _ready else "*Maak eerst oefening 2 en 4 af, en druk dan op de knop: hij draait je `sanity` met je `overfit_one_batch`.*")
     else:
-        with mo.status.spinner(title="Je sanity check leert de batch uit het hoofd, twee keer: ongeveer een halve minuut"):
-            _r = C.demo()
+        _r = C.demo(show=_progress)
         if _r is None:
             _out = mo.md("*Maak eerst oefening 2 en 4 af: dan staan je `overfit_one_batch` en je `sanity` in je project, en gebruikt deze cel ze.*")
         elif isinstance(_r, str):
-            _out = mo.md({"slow": "*Je sanity check doet er hier langer dan drie minuten over voor één model. Doet je `overfit_one_batch` of je `sanity` meer werk dan nodig is, zoals meer stappen dan `steps`?*",
-                          "sanity": "*Je `repro/sanity.py` of `repro/overfit.py` stopt met een fout. Heb je hem na zijn check veranderd? Verwijder hem, en check zijn oefening opnieuw.*",
-                          "model": "*Je ModernGPT of je data stopt met een fout. Heb je `llm/modern_gpt.py`, `repro/data.py` of `repro/settings.py` na zijn check veranderd? Verwijder het bestand dat je veranderde, en check zijn oefening opnieuw.*"}[_r])
+            _last = _now.get("planted") or _now.get("yours")   # a run that stops keeps its chart so far
+            _note = ({"slow": "*Je sanity check doet er hier langer dan drie minuten over voor één model. Doet je `overfit_one_batch` of je `sanity` meer werk dan nodig is, zoals meer stappen dan `steps`?*",
+                     "sanity": "*Je `repro/sanity.py` of `repro/overfit.py` stopt met een fout. Heb je hem na zijn check veranderd? Verwijder hem, en check zijn oefening opnieuw.*",
+                     "model": "*Je ModernGPT of je data stopt met een fout. Heb je `llm/modern_gpt.py`, `repro/data.py` of `repro/settings.py` na zijn check veranderd? Verwijder het bestand dat je veranderde, en check zijn oefening opnieuw.*"}[_r])
+            _out = _last.stopped(_note) if _last else mo.md(_note)
         else:
             _y, _b = _r["reports"]["yours"], _r["reports"]["planted"]
             _yes = lambda _v: "slaagt" if _v else "**zakt**"
             _stand = (" De versie van de course sprong in voor: " + ", ".join(f"`{_m}`" for _m in _r["stand_ins"]) + ".") if _r["stand_ins"] else ""
             _verdict = ("Je model slaagt voor alle drie de checks, en je check vangt de fout die erin gezet is" if all(_y[_k] for _k in ("shape", "first", "learns")) and not _b["learns"]
                         else "Niet elke check kwam uit zoals verwacht: kijk naar de rij die afwijkt")
-            _out = mo.md(f"""
+            _runs = _r["runs"]
+            _n = min(len(_runs["yours"]["losses"]), len(_runs["planted"]["losses"]))
+            _labels = {"title": "De batch uit het hoofd leren", "x": "stap", "y": "loss", "yours": "je ModernGPT", "planted": "met de fout", "floor": "een model dat alleen a ziet", "lang": L.lang,
+                       "alt": f"De loss van de antwoorden bij elke stap van beide runs, de run met de fout gestreept, en grijs gestreept {C.number(_r['floor'], 2, L.lang)}, de laagste loss van een model dat alleen a ziet."}
+
+            def _frame(_s):
+                _s = int(_s)
+                return (C.step_frame(_r, _s, _labels, {"yours": "Je ModernGPT bij deze stap", "planted": "Met de fout bij deze stap"}, L.lang),
+                        f"Vóór de eerste stap: je ModernGPT beantwoordt {sum(_runs['yours']['right'][0])} van de {_r['batch']} vergelijkingen goed, bij een loss van {C.number(_runs['yours']['losses'][0], 4, L.lang)}; met de fout {sum(_runs['planted']['right'][0])}, bij {C.number(_runs['planted']['losses'][0], 4, L.lang)}." if _s == 0 else
+                        f"Na {_s} stappen: je ModernGPT beantwoordt {sum(_runs['yours']['right'][_s])} van de {_r['batch']} vergelijkingen goed, bij een loss van {C.number(_runs['yours']['losses'][_s], 4, L.lang)}; met de fout {sum(_runs['planted']['right'][_s])}, bij {C.number(_runs['planted']['losses'][_s], 4, L.lang)}.")
+
+            _rewind = [L.explore("rewind", "stap", _frame, start=C.kept(_n)[-1], values=C.kept(_n), role="",
+                                 task="Ga terug naar stap 1 en dan weer vooruit: wanneer kent je ModernGPT de hele batch, en hoe ver komt het model met de fout?")] if _n > 1 else []
+            _out = mo.vstack(_rewind + [mo.md(f"""
 | check | je ModernGPT | met de fout | wat je mag verwachten |
 |---|---|---|---|
 | vorm van de logits | {_yes(_y['shape'])} | {_yes(_b['shape'])} | {_r['batch']} × 4 × {_r['vocab']} |
@@ -408,7 +441,7 @@ def demo_sanity(sanity_button, result_overfit, result_sanity):
 | loss na {_r['steps']} stappen op de batch | {C.number(_y['last_loss'], 4, L.lang)}: {_yes(_y['learns'])} | {C.number(_b['last_loss'], 4, L.lang)}: {_yes(_b['learns'])} | onder {C.number(C.LEARNED, 2, L.lang)}; een model dat alleen a ziet, op zijn best {C.number(_r['floor'], 2, L.lang)} |
 
 {_verdict}.{_stand}
-""")
+""")])
     _out
     return
 

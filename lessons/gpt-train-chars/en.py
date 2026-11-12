@@ -321,7 +321,7 @@ def text_demo():
     mo.md(f"""
     ### What your project can do now
 
-    The button below starts a run on Tiny Shakespeare with your `gpt_run`, and so with your `gpt_loaders`, your `GPT` and your `Trainer`. {_where}: a GPT of {C.grouped(_p['params'], L.lang)} parameters, with $d = {_d}$, {_h} heads, {_layers} blocks and windows of {_block} characters, {_p['epochs']} epochs of mini-batches of {_p['batch']}.{_time} While it trains, the cell shows the loss after every epoch and the time left, and the rest of the lesson waits. The stop button of the cell ends the run early; the best parameters so far stay saved, in `work/projects/llm/gpt_chars.pt`.
+    The button below starts a run on Tiny Shakespeare with your `gpt_run`, and so with your `gpt_loaders`, your `GPT` and your `Trainer`. {_where}: a GPT of {C.grouped(_p['params'], L.lang)} parameters, with $d = {_d}$, {_h} heads, {_layers} blocks and windows of {_block} characters, {_p['epochs']} epochs of mini-batches of {_p['batch']}.{_time} While it trains, a chart shows the loss eight times per epoch and after every epoch, with the time left, and beside it what your GPT expects next now at three places in the text it validates on; after the run you can rewind through the epochs. The rest of the lesson waits meanwhile. The stop button of the cell ends the run early; the best parameters so far stay saved, in `work/projects/llm/gpt_chars.pt`.
     """)
     return
 
@@ -336,15 +336,34 @@ def train_button_cell():
 @app.cell(hide_code=True)
 def demo_train(train_button, result_loaders, result_run):
     result_loaders, result_run  # run again when exercise 2 or 3 saves your module
-    _labels = {"title": "Your run", "x": "epoch", "y": "loss", "lang": L.lang, "guess": "guessing evenly", "mlp": "your MLP", "train": "training", "val": "validation"}
+    _labels = {"title": "Your run", "x": "epoch", "y": "loss", "lang": L.lang, "guess": "guessing evenly", "mlp": "your MLP", "train": "training", "val": "validation", "start": "**Before the first epoch**", "after": "**After epoch {epoch}** · validation loss {loss}"}
+
+    _now = {}   # the live chart, made at the first report, and the last report
+    _guess = {"title": "What your GPT expects next now", "then": "What your GPT expected next after epoch {epoch}", "before": "What your GPT expected next before the first epoch",
+              "read": "it read", "next": "next", "guesses": "its three guesses", "lang": "en",
+              "alt": "At three places near the end of the book, in the text it validates on and never trained on: the end of what it read, the character that follows, and its three likeliest next characters with their chances. A space is shown as ␣, a new line as ↵."}
 
     def _progress(_p):
         _m = 1 if _p["left"] is None else max(1, round(_p["left"] / 60))
         _left = "" if _p["left"] is None else f" · about {_m} {'minutes' if _m > 1 else 'minute'} left"
-        _parts = [mo.md(f"**Epoch {_p['epoch']} of {_p['epochs']}** · step {_p['step']} of {_p['steps']}{_left}")]
-        if _p["history"]:
-            _parts.append(mo.Html(C.history_picture(_p["history"], {**_labels, "alt": "The training and validation loss of your run so far, after every epoch."}, _p["epochs"])))
-        mo.output.replace(mo.vstack(_parts))
+        if "chart" not in _now:
+            _now["chart"] = L.live({"title": "Your run", "x": "epoch", "y": "loss",
+                                    "alt": "The loss of your run so far: on the training windows eight times per epoch, and dashed on the validation windows after every epoch; thin gray lines at the loss of guessing evenly and at that of your MLP."},
+                                   _p["epochs"], window=4, key=[("loss", False, "training, eight times per epoch"), ("loss", True, "validation, after every epoch")])
+            _now["chart"].reference([(0, C.GUESS_LOSS), (_p["epochs"], C.GUESS_LOSS)], "guessing evenly", role="ink-3")
+            _now["chart"].reference([(0, C.MLP_LOSS), (_p["epochs"], C.MLP_LOSS)], "your MLP", role="ink-3")
+            _now["chart"].watch(lambda: C.now_picture(_now["last"], _guess))   # what your GPT expects next now, beside the chart
+            _now["val"] = []
+        _now["last"] = _p
+        if "val_loss" in _p:   # the validation windows after every epoch, dashed
+            _now["val"].append((_p["epoch"], _p["val_loss"]))
+            _now["chart"].reference(_now["val"], "", role="loss", replace=True)
+            _now["chart"].line(f"**Epoch {_p['epoch']} of {_p['epochs']}** · validation loss {C.number(_p['val_loss'], 3, L.lang)}{_left}")
+        elif "loss" in _p:   # the training windows, eight times per epoch
+            _now["chart"].add(_p["epoch"] - 1 + _p["batch"] / _p["batches"], _p["loss"],
+                              f"**Epoch {_p['epoch']} of {_p['epochs']}** · batch {_p['batch']} of {_p['batches']} · loss {C.number(_p['loss'], 3, L.lang)}{_left}")
+        else:
+            _now["chart"].line(f"**Epoch {_p['epoch']} of {_p['epochs']}** · batch {_p['batch']} of {_p['batches']}{_left}")
 
     if train_button.value:
         _result = C.train(_progress)
@@ -384,6 +403,8 @@ def demo_train(train_button, result_loaders, result_run):
         _table = "" if not _rows else ("\n\nWhat your GPT expects next, at three places near the end of the book, in the text it validates on and never trained on (␣ is a space, ↵ a new line):\n\n"
                                        "| it read | next | your GPT's three guesses |\n|---|---|---|\n" + "\n".join(_rows))
         _out = mo.vstack([
+            L.explore("rewind", "epoch", lambda _e: C.rewind_frame(_result, int(_e), {**_labels, "alt": f"The training and validation loss of your run after every epoch: the validation loss is lowest after epoch {_result['best_epoch']}, at {C.number(_result['best'], 2, L.lang)}."}, _guess), start=len(_h),
+                      values=list(range(len(_h) + 1)), role="", task="Go back to before the first epoch, then forward: when does your GPT start to expect the character that follows, and where does it still hesitate?") if C.rewinds(_result) else
             mo.Html(C.history_picture(_h, {**_labels, "alt": f"The training and validation loss of your run after every epoch: the validation loss is lowest after epoch {_result['best_epoch']}, at {C.number(_result['best'], 2, L.lang)}."}, _result["epochs"])),
             mo.md(f"""Your GPT of {C.grouped(_result['params'], L.lang)} parameters trained for {len(_h)} {'epochs' if len(_h) > 1 else 'epoch'} on {_on}, in {C.number(_result['minutes'], 1, L.lang)} minutes: {C.grouped(_result['tokens'], L.lang)} tokens, about ${C.sci(_result['flops'], L.lang)}$ FLOPs. Its validation loss went from {C.number(_h[0]['val_loss'], 2, L.lang)} after the first epoch to **{C.number(_result['best'], 2, L.lang)}** after epoch {_result['best_epoch']}.{_saved} Guessing evenly gives 4.17, and your MLP got 2.20. {_verdict}{_who}{_table}"""),
         ])

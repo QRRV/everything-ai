@@ -267,7 +267,7 @@ def text_demo():
     mo.md(r"""
     ### Your range test, and a sweep
 
-    The cell below runs the range test of the picture with your `lr_range`, reads it with your `range_pick`, and then trains three short runs, one epoch each: at a tenth of the learning rate it found, at a third of it, and at the rate itself. Until your functions are right, the course's stand in.
+    The cell below runs the range test of the picture with your `lr_range`, reads it with your `range_pick`, and then trains three short runs, one epoch each: at a tenth of the learning rate it found, at a third of it, and at the rate itself. Until your functions are right, the course's stand in. While the range test runs, a chart shows the loss of every step, and beside or under it what the network guesses at that moment for one test digit of each kind. Then you can rewind through the steps.
     """)
     return
 
@@ -277,7 +277,27 @@ def demo_sweep(box_pick, box_range, result_pick, result_range):
     _range, _pick, _r_yours, _p_yours = C.functions_of(box_range.value if result_range.state == "correct" else None,
                                                        box_pick.value if result_pick.state == "correct" else None)
     _lrs = list(_range(C.LO, C.HI, C.STEPS))
-    _losses = C.range_test(_lrs, 0)
+    _now = {}   # the live chart, made at the first step
+
+    def _progress(_p):
+        if "chart" not in _now:
+            _now["chart"] = L.live({"title": "Your range test", "x": "step", "y": "loss", "alt": "The loss of every step of the range test so far, and its mean over the last 10 steps."}, _p["steps"], low=0.0, high=4.0,
+                                   window=10, look_every=0.0, key=[("loss", False, "mean loss of the last 10 steps")])
+        _now["chart"].watch(lambda _look=_p["look"]: C.now_picture(_look(), "What the network guesses now for one test digit of each kind", L.lang))
+        # above 4 the test blows up: the chart stops there, and the text says how far
+        _now["chart"].add(_p["step"], min(_p["loss"], 3.95), f"**Range test** · step {_p['step']} of at most {_p['steps']} · learning rate {C.rate(_p['lr'], L.lang)} · loss {C.number(_p['loss'], 3, L.lang)}")
+
+    _losses, _looked = C.demo_range(_lrs, _progress)
+    _labels = {"title": "Your range test", "x": "learning rate", "y": "loss", "lowest": "the dot: lowest at {lr}", "band": "sweep", "lang": L.lang,
+               "alt": f"Loss against the learning rate on a log scale, over the {len(_losses)} steps of your range test, with a line at the step you rewound to."}
+
+    def _frame(_s):
+        _s = int(_s)
+        return (C.step_frame(_lrs, _losses, _looked, _s, _labels, "What the network guessed after this step for one test digit of each kind", L.lang),
+                f"After step {_s}, at a learning rate of {C.rate(_lrs[_s - 1], L.lang)}: the network reads {C.right_of(_looked[_s - 1])} of these 10 test digits right, and the loss of that step was {C.number(_losses[_s - 1], 3, L.lang)}.")
+
+    _rewind = L.explore("rewind", "step", _frame, start=len(_losses), values=C.kept(len(_losses)), role="",
+                        task="Go back to step 1, then forward again: from which learning rate on does the network read most digits right, and where does it lose them again?")
     _found = _pick(_lrs[:len(_losses)], _losses, C.BETA)
     _values = (_found / 10, _found / 3, _found)
     _val = C.sweep(_values)
@@ -286,15 +306,19 @@ def demo_sweep(box_pick, box_range, result_pick, result_range):
             "your `lr_range` and the course's `range_pick`" if _r_yours else
             "the course's `lr_range` and your `range_pick`" if _p_yours else "the course's functions")
     _rows = [f"| {C.rate(_v, L.lang)} | {C.number(_l, 3, L.lang)}{' (lowest)' if _k == _best else ''} |" for _k, (_v, _l) in enumerate(zip(_values, _val))]
-    mo.md("\n".join([
-        f"With {_who}, the test stopped after {len(_losses)} steps, and its lowest smoothed loss lies at a learning rate of {C.rate(_found, L.lang)}. The sweep, one epoch each:",
-        "",
-        "| learning rate | validation loss |",
-        "|---|---|",
-        *_rows,
-        "",
-        "The test cut a search over five factors of ten down to one; three short runs then picked the value.",
-    ]))
+    mo.vstack([
+        mo.md(f"With {_who}, the test stopped after {len(_losses)} steps, and its lowest smoothed loss lies at a learning rate of {C.rate(_found, L.lang)}."),
+        _rewind,
+        mo.md("\n".join([
+            "The sweep, one epoch each:",
+            "",
+            "| learning rate | validation loss |",
+            "|---|---|",
+            *_rows,
+            "",
+            "The test cut a search over five factors of ten down to one; three short runs then picked the value.",
+        ])),
+    ])
     return
 
 

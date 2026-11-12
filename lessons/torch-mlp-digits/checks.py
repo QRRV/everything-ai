@@ -3,7 +3,7 @@
 """Checks of the project lesson torch-mlp-digits: DigitsMLP, an MLP for the handwritten digits as a PyTorch module,
 saved as nn/torch_mlp.py, and fit, the training loop with nn.CrossEntropyLoss, saved as nn/torch_train.py. And the
 demo: it trains the learner's own MLP with their own fit on 6,000 digits of QMNIST, measures it on 1,000 others, and
-draws the loss of each epoch."""
+draws the loss of each epoch; while it trains and after every epoch it shows what the MLP guesses (decision 1.17)."""
 import functools
 import re
 
@@ -12,7 +12,7 @@ import torch   # imported once, when the lesson opens: the first import takes lo
 from torch import nn
 from torch.utils.data import DataLoader, TensorDataset
 
-from everything_ai import paths, projects
+from everything_ai import live, paths, projects
 from everything_ai.check import ClassBox, Mistake, Timeout, run_code, with_time_limit
 from everything_ai import netview, yours
 
@@ -20,6 +20,7 @@ DATA = "data/qmnist-small.npz"   # the first 6,000 training and 1,000 test image
 HIDDEN, LR, EPOCHS, BATCH = 64, 0.5, 10, 64   # the demo: 64 hidden neurons, a learning rate of 0.5, 10 epochs of 64
 torch.optim.SGD([torch.zeros(1, requires_grad=True)], lr=0.1)   # the first optimizer in a process takes a second: not in a check
 LINEAR = 890   # test digits that the linear classifier of ml-digits-linear reads right (its demo, 100 steps, lr 1)
+EVERY = 10     # the live chart hears the mean loss of every 10 mini-batches (live.walked)
 
 
 @functools.lru_cache(maxsize=1)
@@ -76,28 +77,91 @@ def baseline() -> tuple[int, float]:
     return digit, (yt == digit).float().mean().item()
 
 
-def train_demo(make_model, fit) -> tuple:
+def one_each() -> list:
+    """The first test digit of each kind, 0 to 9: what the demo shows the MLP guess."""
+    _, _, _, yt = tensors()
+    return [int((yt == k).nonzero()[0]) for k in range(10)]
+
+
+def train_demo(make_model, fit, show=None) -> tuple:
     """A model from `make_model` trained with `fit` as in the demo: the same seeds, so the same run every time.
-    Gives back the model and the mean loss of each epoch."""
-    X, y, _, _ = tensors()
+    Gives back the model, the mean loss of each epoch, and after every epoch its guesses for the first test digit of
+    each kind, for the rewind (decision 1.17). `show` hears the run while it trains (live.walked, every 10
+    mini-batches, and after every epoch), with "look", what the MLP guesses at that moment. Both look in eval mode
+    without a graph and put the model back as it was (netview.looking), so the run stays the same; a look that fails
+    never stops the run."""
+    X, y, Xt, _ = tensors()
     torch.manual_seed(0)
     model = make_model(HIDDEN)
-    loader = DataLoader(TensorDataset(X, y), batch_size=BATCH, shuffle=True)
+    shown, looked = Xt[one_each()], []
+
+    def look() -> list:
+        with netview.looking(model):
+            return [int(g) for g in model(shown).argmax(dim=1)]
+
+    def heard(p):
+        if p.get("done"):   # after every epoch: the guesses for the rewind
+            try:
+                looked.append(look())
+            except Timeout:
+                raise
+            except Exception:
+                looked.append([])
+        if show is not None:
+            try:
+                show(p | {"look": look})
+            except Timeout:   # the demo's time limit, also when it falls while the chart draws
+                raise
+            except Exception:
+                pass
+
+    loader = live.walked(DataLoader(TensorDataset(X, y), batch_size=BATCH, shuffle=True), model, heard, "mlp", EPOCHS, every=EVERY)
     torch.manual_seed(2)
-    return model, fit(model, loader, EPOCHS, LR)
+    try:
+        return model, fit(model, loader, EPOCHS, LR), looked
+    finally:
+        loader.unhook()
+
+
+def right_of(guesses: list) -> int:
+    """How many of the first test digit of each kind these guesses read right."""
+    _, _, _, yt = tensors()
+    return sum(g == int(yt[place]) for g, place in zip(guesses, one_each()))
+
+
+def now_picture(guesses: list, title: str, lang: str) -> str:
+    """What the MLP guesses at one moment of the demo, as `look` or the rewind gives it: its guess for the first test
+    digit of each kind, under `title`, in ink where it is right, in the colour of mistakes where it is not."""
+    _, _, Xt, yt = tensors()
+    shown = one_each()
+    said, right = [str(g) for g in guesses], [str(int(yt[place])) for place in shown]
+    alt = {"en": "The first test digit of each kind, each with the digit the MLP guessed, and in brackets the right digit where it is wrong: ",
+           "nl": "Het eerste testcijfer van elke soort, elk met het cijfer dat het MLP gokte, en tussen haakjes het goede cijfer waar het fout is: "}
+    return yours.guesses([Xt[place].reshape(28, 28).numpy() for place in shown], said, right,
+                         alt[lang] + "; ".join(f"{r}: {g}" for r, g in zip(right, said)) + ".", title=title)
 
 
 # --- the demo's picture ------------------------------------------------------------------------------------------
 
-def losses_picture(losses: list[float], labels: dict[str, str]) -> str:
-    """The mean loss of each epoch of the learner's own training, as a line with a dot per epoch."""
+def losses_picture(losses: list[float], labels: dict[str, str], at: int | None = None) -> str:
+    """The mean loss of each epoch of the learner's own training, as a line with a dot per epoch; with `at`, a line at
+    that epoch, for rewinding."""
     from everything_ai import chart
     epochs = list(range(1, len(losses) + 1))
-    p = chart.Panel((0.5, len(losses) + 0.5), (0, max(1.0, max(losses) * 1.1)), title=labels["title"],
+    top = max(1.0, max(losses) * 1.1)
+    p = chart.Panel((0.5, len(losses) + 0.5), (0, top), title=labels["title"],
                     xlabel=labels["epoch"], ylabel=labels["loss"])
+    if at is not None:
+        p.line([at, at], [0, top], "ink-2", 1.2)
     p.line(epochs, losses, "loss", 2.5)
     p.points(epochs, losses, "loss", 4)
-    return chart.figure([p], alt=labels["alt"], width=520, height=300)
+    return chart.figure([p], alt=labels["alt"], width=520 if at is None else live.CHART_WIDTH, height=300 if at is None else 240)
+
+
+def epoch_frame(losses: list, looked: list, e: int, labels: dict, title: str, lang: str) -> str:
+    """The rewind at epoch e (from 1): the mean loss of every epoch with a line at e, and beside it what the MLP
+    guessed after that epoch (decision 1.17)."""
+    return live.rewound(losses_picture(losses, labels, at=e), [now_picture(looked[e - 1], title, lang)])
 
 
 # --- the demo: the learner's own DigitsMLP, trained with their own fit ----------------------------------------------
@@ -110,10 +174,11 @@ def _saved(module: str) -> bool:
     return (projects.folder() / "nn" / f"{module}.py").exists()
 
 
-def trained():
+def trained(show=None):
     """For the demo: None when torch_mlp.py or torch_train.py is not in the project yet; "mlp" or "fit" when that saved
     module no longer gives what the course's gives on a small case, or stops with an error; "slow" when the training
-    takes more than a minute; else (accuracy, losses) of the learner's MLP after the learner's fit."""
+    takes more than a minute; else (accuracy, losses, guesses after every epoch) of the learner's MLP after the
+    learner's fit. `show` hears the run while it trains, as for train_demo."""
     if not (_saved("torch_mlp") and _saved("torch_train")):
         return None
     run = run_code(_MINE + _M_SCENARIOS[1])
@@ -128,12 +193,12 @@ def trained():
         return "fit"
     make, fit = run.names["DigitsMLP"], run.names["fit"]
     try:
-        model, losses = with_time_limit(lambda: train_demo(make, fit), 60)
+        model, losses, looked = with_time_limit(lambda: train_demo(make, fit, show), 60)
     except Timeout:
         return "slow"
     except Exception:
         return "fit"
-    return accuracy(model), [float(v) for v in losses]
+    return accuracy(model), [float(v) for v in losses], looked
 
 
 def _same_logits(got, want) -> bool:

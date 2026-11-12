@@ -321,7 +321,7 @@ def text_demo():
     mo.md(f"""
     ### Wat je project nu kan
 
-    De knop hieronder start een run op Tiny Shakespeare met je `gpt_run`, en dus met je `gpt_loaders`, je `GPT` en je `Trainer`. {_where}: een GPT van {C.grouped(_p['params'], L.lang)} parameters, met $d = {_d}$, {_h} heads, {_layers} blocks en vensters van {_block} tekens, {_p['epochs']} epochs van mini-batches van {_p['batch']}.{_time} Tijdens het trainen laat de cel na elke epoch de loss zien en de tijd die nog over is, en wacht de rest van de les. Met de stopknop van de cel stop je de run eerder; de beste parameters tot dan blijven bewaard, in `work/projects/llm/gpt_chars.pt`.
+    De knop hieronder start een run op Tiny Shakespeare met je `gpt_run`, en dus met je `gpt_loaders`, je `GPT` en je `Trainer`. {_where}: een GPT van {C.grouped(_p['params'], L.lang)} parameters, met $d = {_d}$, {_h} heads, {_layers} blocks en vensters van {_block} tekens, {_p['epochs']} epochs van mini-batches van {_p['batch']}.{_time} Tijdens het trainen laat een grafiek de loss zien, acht keer per epoch en na elke epoch, met de tijd die nog over is, en ernaast wat je GPT nu als volgend teken verwacht op drie plekken in de tekst waarop hij valideert; na de run kun je door de epochs terugspoelen. Intussen wacht de rest van de les. Met de stopknop van de cel stop je de run eerder; de beste parameters tot dan blijven bewaard, in `work/projects/llm/gpt_chars.pt`.
     """)
     return
 
@@ -336,15 +336,34 @@ def train_button_cell():
 @app.cell(hide_code=True)
 def demo_train(train_button, result_loaders, result_run):
     result_loaders, result_run  # opnieuw draaien als oefening 2 of 3 je module bewaart
-    _labels = {"title": "Je run", "x": "epoch", "y": "loss", "lang": L.lang, "guess": "gelijkmatig gokken", "mlp": "je MLP", "train": "training", "val": "validation"}
+    _labels = {"title": "Je run", "x": "epoch", "y": "loss", "lang": L.lang, "guess": "gelijkmatig gokken", "mlp": "je MLP", "train": "training", "val": "validation", "start": "**Vóór de eerste epoch**", "after": "**Na epoch {epoch}** · validation loss {loss}"}
+
+    _now = {}   # de live grafiek, gemaakt bij het eerste verslag, en het laatste verslag
+    _guess = {"title": "Wat je GPT nu als volgende verwacht", "then": "Wat je GPT na epoch {epoch} als volgende verwachtte", "before": "Wat je GPT vóór de eerste epoch als volgende verwachtte",
+              "read": "wat hij las", "next": "volgt", "guesses": "zijn drie gokken", "lang": "nl",
+              "alt": "Op drie plekken bij het eind van het boek, in de tekst waarop hij valideert en nooit getraind heeft: het eind van wat hij las, het teken dat volgt, en zijn drie waarschijnlijkste volgende tekens met hun kansen. Een spatie staat er als ␣, een nieuwe regel als ↵."}
 
     def _progress(_p):
         _m = 1 if _p["left"] is None else max(1, round(_p["left"] / 60))
         _left = "" if _p["left"] is None else f" · ongeveer {_m} {'minuten' if _m > 1 else 'minuut'} te gaan"
-        _parts = [mo.md(f"**Epoch {_p['epoch']} van {_p['epochs']}** · stap {_p['step']} van {_p['steps']}{_left}")]
-        if _p["history"]:
-            _parts.append(mo.Html(C.history_picture(_p["history"], {**_labels, "alt": "De training loss en de validation loss van je run tot nu toe, na elke epoch."}, _p["epochs"])))
-        mo.output.replace(mo.vstack(_parts))
+        if "chart" not in _now:
+            _now["chart"] = L.live({"title": "Je run", "x": "epoch", "y": "loss",
+                                    "alt": "De loss van je run tot nu toe: op de trainingsvensters acht keer per epoch, en gestreept op de validation set na elke epoch; dunne grijze lijnen bij de loss van gelijkmatig gokken en bij die van je MLP."},
+                                   _p["epochs"], window=4, key=[("loss", False, "training, acht keer per epoch"), ("loss", True, "validation, na elke epoch")])
+            _now["chart"].reference([(0, C.GUESS_LOSS), (_p["epochs"], C.GUESS_LOSS)], "gelijkmatig gokken", role="ink-3")
+            _now["chart"].reference([(0, C.MLP_LOSS), (_p["epochs"], C.MLP_LOSS)], "je MLP", role="ink-3")
+            _now["chart"].watch(lambda: C.now_picture(_now["last"], _guess))   # wat je GPT nu als volgende verwacht, naast de grafiek
+            _now["val"] = []
+        _now["last"] = _p
+        if "val_loss" in _p:   # de validation set na elke epoch, gestreept
+            _now["val"].append((_p["epoch"], _p["val_loss"]))
+            _now["chart"].reference(_now["val"], "", role="loss", replace=True)
+            _now["chart"].line(f"**Epoch {_p['epoch']} van {_p['epochs']}** · validation loss {C.number(_p['val_loss'], 3, L.lang)}{_left}")
+        elif "loss" in _p:   # de trainingsvensters, acht keer per epoch
+            _now["chart"].add(_p["epoch"] - 1 + _p["batch"] / _p["batches"], _p["loss"],
+                              f"**Epoch {_p['epoch']} van {_p['epochs']}** · batch {_p['batch']} van {_p['batches']} · loss {C.number(_p['loss'], 3, L.lang)}{_left}")
+        else:
+            _now["chart"].line(f"**Epoch {_p['epoch']} van {_p['epochs']}** · batch {_p['batch']} van {_p['batches']}{_left}")
 
     if train_button.value:
         _result = C.train(_progress)
@@ -384,6 +403,8 @@ def demo_train(train_button, result_loaders, result_run):
         _table = "" if not _rows else ("\n\nWat je GPT als volgende verwacht, op drie plekken bij het eind van het boek, in de tekst waarop hij valideert en nooit getraind heeft (␣ is een spatie, ↵ een nieuwe regel):\n\n"
                                        "| wat hij las | volgt | de drie gokken van je GPT |\n|---|---|---|\n" + "\n".join(_rows))
         _out = mo.vstack([
+            L.explore("rewind", "epoch", lambda _e: C.rewind_frame(_result, int(_e), {**_labels, "alt": f"De training loss en de validation loss van je run na elke epoch: de validation loss is het laagst na epoch {_result['best_epoch']}, op {C.number(_result['best'], 2, L.lang)}."}, _guess), start=len(_h),
+                      values=list(range(len(_h) + 1)), role="", task="Ga terug naar vóór de eerste epoch, en dan vooruit: wanneer gaat je GPT het teken verwachten dat volgt, en waar twijfelt hij nog?") if C.rewinds(_result) else
             mo.Html(C.history_picture(_h, {**_labels, "alt": f"De training loss en de validation loss van je run na elke epoch: de validation loss is het laagst na epoch {_result['best_epoch']}, op {C.number(_result['best'], 2, L.lang)}."}, _result["epochs"])),
             mo.md(f"""Je GPT van {C.grouped(_result['params'], L.lang)} parameters trainde {len(_h)} {'epochs' if len(_h) > 1 else 'epoch'} op {_on}, in {C.number(_result['minutes'], 1, L.lang)} minuten: {C.grouped(_result['tokens'], L.lang)} tokens, ongeveer ${C.sci(_result['flops'], L.lang)}$ FLOPs. Zijn validation loss ging van {C.number(_h[0]['val_loss'], 2, L.lang)} na de eerste epoch naar **{C.number(_result['best'], 2, L.lang)}** na epoch {_result['best_epoch']}.{_saved} Gelijkmatig gokken geeft 4,17, en je MLP kwam tot 2,20. {_verdict}{_who}{_table}"""),
         ])

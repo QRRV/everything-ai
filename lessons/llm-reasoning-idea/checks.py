@@ -140,17 +140,19 @@ def _cut(text: str) -> str:
     return text
 
 
-def generate(model, enc, prompt: str, new: int, n: int = 1, temperature: float = 0.0, seed: int = 0) -> list:
+def generate(model, enc, prompt: str, new: int, n: int = 1, temperature: float = 0.0, seed: int = 0, heard=None) -> list:
     """`n` answers to `prompt`, each a dict: its text (up to where it stops), its tokens (the forward passes after the
     prompt) and its seconds (from the start until it stopped). Greedy when temperature is 0, else sampled with
     `seed`. The whole prompt goes into an empty KV cache at once, so the course's Attention masks it (it applies the
-    causal mask only while the cache is empty); then one new token at a time, for all n answers together."""
+    causal mask only while the cache is empty); then one new token at a time, for all n answers together. `heard`
+    hears the text of the first answer so far after every token, for the picture beside the live chart; its seconds
+    are not those of the answer."""
     import torch
     from everything_ai import qwen3
     device = next(model.parameters()).device
     end = enc.encode_single_token(END)
     g = torch.Generator(device=device).manual_seed(seed)
-    start = time.perf_counter()
+    start, aside = time.perf_counter(), 0.0   # aside: the seconds of `heard`, drawing the picture
     caches = [{} for _ in model.blocks]
     out = [[] for _ in range(n)]
     seconds = [0.0] * n
@@ -170,13 +172,31 @@ def generate(model, enc, prompt: str, new: int, n: int = 1, temperature: float =
                 if not done[i]:
                     out[i].append(j)
                     if j == end or any(s in enc.decode(out[i]) for s in STOPS):
-                        done[i], seconds[i] = True, time.perf_counter() - start
+                        done[i], seconds[i] = True, time.perf_counter() - start - aside
+            if heard is not None and not done[0]:
+                drawn = time.perf_counter()
+                heard(_cut(enc.decode([j for j in out[0] if j != end])))
+                aside += time.perf_counter() - drawn
             if all(done):
                 break
             logits = model(nxt[:, None], caches)[:, -1]
-    now = time.perf_counter() - start
+    now = time.perf_counter() - start - aside
     return [{"text": _cut(enc.decode([j for j in ids if j != end])), "tokens": len(ids),
              "seconds": round(seconds[i] if done[i] else now, 2)} for i, ids in enumerate(out)]
+
+
+def writing_picture(report: dict, labels: dict) -> str:
+    """Beside the live chart of the demo (decision 1.17): what Qwen3 writes for the question of the last report, so far
+    while it writes, and once it is done whether the learner's read_answer read the answer key from it. `labels`:
+    title ({i}, {n}, {kind}), the words of each kind (direct, steps, votes), alt, read ({read}, {mark}, {key}), nothing."""
+    from everything_ai import yours
+    done = report["phase"] == "answered"
+    note, right = "", None
+    if done:
+        read = labels["nothing"] if report["read"] is None else str(report["read"])
+        note, right = labels["read"].format(read=read, mark="✓" if report["right"] else "✗", key=report["key"]), report["right"]
+    title = labels["title"].format(i=report["i"], n=report["n"], kind=labels[report["kind"]])
+    return yours.writes(title, [("", report["text"], note, right)], alt=labels["alt"], width=320)
 
 
 # --- a run, scored: the course's or the learner's ---------------------------------------------------------------------
@@ -358,8 +378,10 @@ def run(few_shot_prompt, read_answer, majority_vote, show, kind: str | None = No
     only the answer and with their steps), greedy, every answer read by the learner's read_answer; with VOTE samples
     at TEMPERATURE per question, voted with majority_vote, when VOTE of the device is more than 0. `kind` is "cpu" or
     "gpu": that of the device when None. `show` hears {"phase": "load"}, then {"phase": "answer", "i", "n", "kind"}
-    before an answer and {"phase": "answered", "i", "n", "kind", "tokens", "seconds", "right"} after it, and
-    {"phase": "question", "i", "n", "direct", "steps"} after each question with the right answers so far. A string
+    before an answer, {"phase": "writing", "i", "n", "kind", "text"} with its text so far at most every second while
+    the model writes it, and {"phase": "answered", "i", "n", "kind", "tokens", "seconds", "right", "text", "read",
+    "key"} after it, and {"phase": "question", "i", "n", "direct", "steps"} after each question with the right answers
+    so far. A string
     when it stops: "prompt" (few_shot_prompt), "read" (read_answer), "vote" (majority_vote), "run" (loading), "memory"."""
     import torch
     w = where()
@@ -383,8 +405,15 @@ def run(few_shot_prompt, read_answer, majority_vote, show, kind: str | None = No
         q = {"k": i - 1, "answer": p["answer"], "question": p["question"]}
         for kind_, prompt in zip(("direct", "steps"), two):
             show({"phase": "answer", "i": i, "n": len(tests), "kind": kind_})
+            last = [time.perf_counter()]
+
+            def heard(text, i=i, kind_=kind_, last=last):   # what the model has written so far, once a second
+                if time.perf_counter() - last[0] >= 1:
+                    last[0] = time.perf_counter()
+                    show({"phase": "writing", "i": i, "n": len(tests), "kind": kind_, "text": text})
+
             try:
-                a = generate(model, enc, prompt, NEW[kind_])[0]
+                a = generate(model, enc, prompt, NEW[kind_], heard=heard)[0]
             except torch.OutOfMemoryError:
                 return "memory"
             try:
@@ -395,7 +424,7 @@ def run(few_shot_prompt, read_answer, majority_vote, show, kind: str | None = No
             so_far[kind_] += a["right"]
             q[kind_] = a
             show({"phase": "answered", "i": i, "n": len(tests), "kind": kind_, "tokens": a["tokens"],
-                  "seconds": a["seconds"], "right": a["right"]})
+                  "seconds": a["seconds"], "right": a["right"], "text": a["text"], "read": a["read"], "key": p["answer"]})
         if VOTE[kind]:
             show({"phase": "answer", "i": i, "n": len(tests), "kind": "votes"})
             try:

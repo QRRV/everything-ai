@@ -301,7 +301,7 @@ def text_demo():
     mo.md(f"""
     ### Wat je project nu kan
 
-    De cel hieronder gebruikt je project. Hij traint je `LeNet5`, en je `SmallCNN` uit [Project: je eerste CNN](/course/open/cnn-pytorch?lang=nl), met je Trainer: {C.EPOCHS} epochs op de 6.000 trainingsafbeeldingen, een learning rate van {C.number(C.LR, 2, L.lang)} met een warmup van één epoch, voor allebei hetzelfde, elk één run, met seed 0. Hij telt hun parameters met je `count_params`. Waar een module van jou ontbreekt of stuk is, springt die van de course in. Het werkt zodra oefening 2 af is, en duurt ongeveer 10 seconden.
+    De cel hieronder gebruikt je project. Hij traint je `SmallCNN` uit [Project: je eerste CNN](/course/open/cnn-pytorch?lang=nl), en daarna je `LeNet5`, met je Trainer: {C.EPOCHS} epochs op de 6.000 trainingsafbeeldingen, een learning rate van {C.number(C.LR, 2, L.lang)} met een warmup van één epoch, voor allebei hetzelfde, elk één run, met seed 0. Hij telt hun parameters met je `count_params`. Waar een module van jou ontbreekt of stuk is, springt die van de course in. Het werkt zodra oefening 2 af is, en duurt ongeveer 10 seconden. Terwijl elk netwerk traint, toont een grafiek zijn loss op de trainingsafbeeldingen elke 10 batches, en gestreept op de testafbeeldingen na elke epoch: eerst van je SmallCNN, dan van je LeNet-5, met de validation loss van SmallCNN dun en gestreept ernaast. Naast of onder de grafiek staat wat het netwerk op dat moment gokt bij één testafbeelding van elke soort, en daaronder de feature maps van zijn tweede convolutie, `conv2`, op een enkellaars; allebei worden ze opnieuw getekend terwijl het traint. Daarna kun je door beide runs terugspoelen, epoch voor epoch, met de plaatjes van beide netwerken zoals ze toen waren.
     """)
     return
 
@@ -309,18 +309,65 @@ def text_demo():
 @app.cell(hide_code=True)
 def demo_lenet(result_lenet):
     result_lenet  # run again when exercise 2 saves your module
-    _result = C.demo()
+    _now = {}   # the live chart of each network, made at its first report, and its validation loss so far
+    _heads = {"small": {"guesses": "Je SmallCNN: wat hij gokt bij één testafbeelding van elke soort",
+                        "layer": "Zijn tweede convolutie op een testafbeelding van een enkellaars: layer {name}"},
+              "lenet": {"guesses": "Je LeNet-5: wat hij gokt bij één testafbeelding van elke soort",
+                        "layer": "Zijn tweede convolutie op een testafbeelding van een enkellaars: layer {name}"}}
+
+    def _progress(_p):
+        _run = _p["run"]
+        if _run not in _now:
+            _le = _run == "lenet"
+            _now[_run] = L.live({"title": "Je LeNet-5" if _le else "Je SmallCNN", "x": "epoch", "y": "loss",
+                                 "alt": "De loss van je LeNet-5 tot nu toe: op de trainingsafbeeldingen elke 10 batches, en gestreept op de 1.000 testafbeeldingen na elke epoch; dun en gestreept de validation loss van je SmallCNN." if _le else "De loss van je SmallCNN tot nu toe: op de trainingsafbeeldingen elke 10 batches, en gestreept op de 1.000 testafbeeldingen na elke epoch."}, _p["epochs"], low=0.0, window=5,
+                                key=[("loss", False, "trainingsafbeeldingen, elke 10 batches"), ("loss", True, "testafbeeldingen, na elke epoch")])
+            _now[_run].watch(lambda: C.now_pictures(_p["look"](), _heads[_run], L.lang, f"nv-lenet-{_run}-now"))
+            _now[_run + "-test"] = []
+            if _le and "small-test" in _now:   # the validation loss of SmallCNN, thin and dashed beside LeNet-5
+                _now["lenet"].reference(_now["small-test"], "SmallCNN", role="ink-2")
+        _who = "Je LeNet-5" if _run == "lenet" else "Je SmallCNN"
+        if "val_loss" in _p:   # the test images after every epoch, dashed
+            _now[_run + "-test"].append((_p["epoch"], _p["val_loss"]))
+            _now[_run].reference(_now[_run + "-test"], "", role="loss", replace=True)
+            _now[_run].line(f"**{_who}** · epoch {_p['epoch']} van {_p['epochs']} · validation loss {C.number(_p['val_loss'], 3, L.lang)}")
+        elif "loss" in _p:   # the training images every 10 batches
+            _now[_run].add(_p["epoch"] - 1 + _p["batch"] / _p["batches"], _p["loss"],
+                           f"**{_who}** · epoch {_p['epoch']} van {_p['epochs']} · batch {_p['batch']} van {_p['batches']} · loss {C.number(_p['loss'], 3, L.lang)}")
+        else:
+            _now[_run].line(f"**{_who}** · epoch {_p['epoch']} van {_p['epochs']} · batch {_p['batch']} van {_p['batches']}")
+
+    _result = C.demo(_progress)
     if _result is None:
         _out = mo.md("*Maak eerst oefening 2 af: dan staat je `LeNet5` in je project, en gebruikt deze cel hem.*")
     elif isinstance(_result, str):
-        _out = mo.md({
+        _note = {
             "slow": "*Je project doet er hier te lang over: meer dan twee minuten om één netwerk te trainen. Doet je `LeNet5` of je Trainer meer werk dan nodig is, zoals een loop die te vaak draait?*",
             "lenet": "*Je `LeNet5` in `work/projects/cnn/lenet.py` stopt met een fout, bij het maken, tellen of trainen. Heb je zijn bestand veranderd? Verwijder het, en check oefening 2 opnieuw: de check bewaart je code dan weer.*",
             "trainer": "*Je Trainer in `work/projects/nn/trainer.py`, je `SmallCNN` in `work/projects/cnn/small_cnn.py` of je `count_params` in `work/projects/cnn/count.py` stopt met een fout. Heb je een van die bestanden veranderd? Verwijder het, en check zijn oefening opnieuw.*",
-        }[_result])
+        }[_result]
+        _last = _now.get("lenet") or _now.get("small")   # a run that stops keeps its chart so far
+        _out = _last.stopped(_note) if _last else mo.md(_note)
     else:
         _who = "" if not _result["stand_ins"] else " De versie van de course sprong in voor " + ", ".join(f"`{m}`" for m in _result["stand_ins"]) + ", zoals de melding bij *Waar je project staat* zegt."
-        _out = mo.md(f"""Van de 1.000 testafbeeldingen leest je LeNet-5 er **{_result['lenet']}** goed, met {C.grouped(_result['params_lenet'], L.lang)} parameters, geteld met je `count_params`; je SmallCNN leest er **{_result['small']}** goed, met {C.grouped(_result['params_small'], L.lang)}. Over 5 seeds leest LeNet-5 met de code van de course er 828 tot 852 goed, en SmallCNN 864 tot 879.{_who}""")
+        _labels = {"title": "Validation loss na elke epoch", "x": "epoch", "y": "validation loss", "small": "SmallCNN", "alt": "De validation loss van je LeNet-5 na elke epoch, en dun en gestreept die van je SmallCNN."}
+        _curves = _result.get("curves", {})
+        _when = list(range(1, len(_curves.get("lenet", [])) + 1))
+        if any(len(_result["looked"][_n]) != len(_curves.get(_n, [])) or not all(_result["looked"][_n]) for _n in C.RUNS):   # an epoch it could not look at
+            _when = []
+
+        def _frame(_e):
+            _e = int(_e)
+            _right = {_n: sum(_g == _k for _g, _k in zip(_result["looked"][_n][_e - 1], _result["truth"])) for _n in C.RUNS}
+            return (C.epoch_frame(_result, _e, _labels, _heads, L.lang),
+                    f"Na epoch {_e}: van deze 10 testafbeeldingen leest je SmallCNN er {_right['small']} goed, en je LeNet-5 {_right['lenet']}.")
+
+        if len(_when) > 1:   # rewinding through both runs, with both in the picture
+            _pic = [L.explore("rewind", "epoch", _frame, start=_when[-1], values=_when, role="",
+                              task="Ga terug naar epoch 1, en dan weer vooruit: waar verschillen de gokken en de feature maps van je twee netwerken?")]
+        else:
+            _pic = [mo.Html(C.curves_picture(_curves, _labels, L.lang))] if _curves else []
+        _out = mo.vstack(_pic + [mo.md(f"""Van de 1.000 testafbeeldingen leest je LeNet-5 er **{_result['lenet']}** goed, met {C.grouped(_result['params_lenet'], L.lang)} parameters, geteld met je `count_params`; je SmallCNN leest er **{_result['small']}** goed, met {C.grouped(_result['params_small'], L.lang)}. Over 5 seeds leest LeNet-5 met de code van de course er 828 tot 852 goed, en SmallCNN 864 tot 879. De grafiek laat de validation loss van allebei na elke epoch zien, die van SmallCNN gestreept.{_who}""")])
     _out
     return
 

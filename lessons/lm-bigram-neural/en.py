@@ -324,7 +324,7 @@ def text_demo():
     mo.md(f"""
     ### What your project can do now
 
-    The cell below trains a table with your `train`, on the pairs of the first {C.grouped(C.START, L.lang)} characters of the plays, for {C.STEPS} steps with the learning rate {C.LR} and `lam` 0, and lets the learned table write with your `generate` of [Sampling: let the model write](/course/open/lm-sampling?lang=en), or the course's when yours is missing or broken. It works once exercises 2 and 3 are done, and training takes a few seconds.
+    The cell below trains a table with your `train`, on the pairs of the first {C.grouped(C.START, L.lang)} characters of the plays, for {C.STEPS} steps with the learning rate {C.LR} and `lam` 0, and lets the learned table write with your `generate` of [Sampling: let the model write](/course/open/lm-sampling?lang=en), or the course's when yours is missing or broken. It works once exercises 2 and 3 are done, and training takes a few seconds. While it trains, a chart shows the NLL of your table on those pairs every 5 steps, against that of the counted table, dashed; beside or under it is what your table writes at that moment, starting with "T", with seed 1, drawn again as it trains. Then you can rewind through the steps, with what it wrote then.
     """)
     return
 
@@ -332,19 +332,41 @@ def text_demo():
 @app.cell(hide_code=True)
 def demo_learn(result_loss, result_train):
     result_loss, result_train  # run again when exercise 2 or 3 saves your module
-    _result = C.demo()
+    _now = {}   # the live chart, made at the first report
+
+    def _progress(_p):
+        if "chart" not in _now:
+            _now["chart"] = L.live({"title": "Your table", "x": "step", "y": "NLL", "alt": "The NLL of your table on the pairs it learns from, every 5 steps so far, and dashed that of the counted table."}, _p["steps"], low=0.0)
+            _now["chart"].reference([(0, C.counted_nll()), (_p["steps"], C.counted_nll())], "counted table", role="ink-3")
+        _now["chart"].watch(lambda _look=_p["look"]: C.now_picture(_look(), "What your table writes now, starting with \"T\", with seed 1"))
+        _now["chart"].add(_p["step"], _p["loss"], f"**Your table** · step {_p['step']} of {_p['steps']} · NLL {C.number(_p['loss'], 3, L.lang)}")
+
+    _result = C.demo(_progress)
     if _result is None:
         _out = mo.md("*Finish exercises 2 and 3 first: then your `loss_of` and your `train` are in your project, and this cell uses them.*")
     elif isinstance(_result, str):
-        _out = mo.md({
+        _note = {
             "slow": "*Training with your `train` takes more than 30 seconds. Does each step go over the pairs once, with `W[x]`?*",
             "train": "*The `train` in `work/projects/llm/bigram_train.py` no longer gives what the check expects, or stops with an error. Did you change that file? Delete it, and check exercise 3 again: its check then saves your function again.*",
             "net": "*The `loss_of` in `work/projects/llm/bigram_net.py` no longer gives what the check expects, or stops with an error. Did you change that file? Delete it, and check exercise 2 again: its check then saves your function again.*",
             "sampling": "*Writing with `generate` from `work/projects/llm/sampling.py` stops with an error. Did you change that file? Delete it, and check exercise 3 of [Sampling: let the model write](/course/open/lm-sampling?lang=en) again.*",
-        }[_result])
+        }[_result]
+        _out = _now["chart"].stopped(_note) if "chart" in _now else mo.md(_note)   # a run that stops keeps its chart so far
     else:
         _who = "" if _result["yours"] else " The text comes from the course's `generate`: yours is missing or broken, as the note under *Where your project stands* says."
-        _out = mo.vstack([
+        _labels = {"title": "The NLL of your table", "x": "step", "y": "NLL", "counted": "counted table", "alt": "The NLL of your table on the pairs it learned from, at the steps of the rewind, and dashed that of the counted table."}
+        _when = [_s for _s, _, _ in _result["kept"]]
+
+        def _frame(_s):
+            _s = int(_s)
+            _loss = next(_v for _k, _v, _ in _result["kept"] if _k == _s)
+            _when_said = "Before the first step, with every character as likely" if _s == 0 else f"After step {_s}"
+            return (C.step_frame(_result["kept"], _s, _labels, "What your table wrote at this step, starting with \"T\", with seed 1", L.lang),
+                    f"{_when_said}: an NLL of {C.number(_loss, 2, L.lang)}, against {C.number(C.counted_nll(), 2, L.lang)} for the counted table.")
+
+        _rewind = [L.explore("rewind", "step", _frame, start=_when[-1], values=_when, role="",
+                             task="Go back to step 0, then forward again: from which step on does the text start to look like English?")] if len(_when) > 1 else []
+        _out = mo.vstack(_rewind + [
             mo.md(f"""Your learned table gets an NLL of {C.number(_result['nll'], 2, L.lang)} on the pairs it learned from, worked out with your `loss_of`, against {C.number(C.counted_nll(), 2, L.lang)} for the counted table. After "t", "h" has {C.number(_result['th'], 3, L.lang)}. What it writes, starting with "T", with seed 1:"""),
             mo.Html(C.text_block(_result["text"])),
             mo.md(f"""It writes like your counted model: it is the same kind of table, only learned instead of counted, and from a smaller part of the plays.{_who}"""),

@@ -307,6 +307,8 @@ def text_demo():
         De knop traint een nieuwe ModernGPT van {C.number(C.PARAMS, 0, 'nl')} parameters (d = {C.SIZES[1]}, {C.SIZES[4]} blocks, {C.SIZES[2]} query heads, {C.SIZES[3]} key en value heads) op elke vorm om de beurt: {C.number(C.RUNS['cpu'][0][1], 0, 'nl')} stappen van {C.BATCH} paren, getrokken met seed 0 en nooit een achtergehouden paar, met je `steps_answer`, `sft_example`, `sft_batch` en `pretrain_step`; AdamW met {C.number(C.LR, 3, 'nl')}, weight decay {C.number(C.WEIGHT_DECAY, 1, 'nl')}, met de warmup en warmdown uit [Een open trainingsrecept lezen](/course/open/llm-open-recipes?lang=nl). Daarna beantwoordt elk model de {len(C.TESTS) * C.HELD} achtergehouden paren greedy, en leest je `read_product` elk antwoord.
 
         Op de CPU van de course met {C.threads('cpu')} threads duurden beide runs samen {C.number(C.plan_minutes('cpu'), 0, 'nl')} minuten, {C.number(_s, 2, 'nl')} s per stap met tussenstappen en {C.number(_p, 2, 'nl')} s zonder. Op een GPU traint de demo ook nog alleen het antwoord met {C.number(C.RUNS['gpu'][2][1], 0, 'nl')} stappen, vier keer zoveel, ongeveer de tijd die de run met tussenstappen op die CPU kost; de course nam die run ook op haar CPU op, met {C.threads('gpu')} threads, niet op een GPU. Een proefmeting van {C.PROBE} stappen van elke vorm zegt eerst hoe lang het op de jouwe duurt; zonder die tijd nemen de runs en modellen van de course het over.
+
+        Terwijl een model traint, zie je naast zijn grafiek om de paar seconden wat het op dat moment greedy schrijft bij {C.HELD_OUT[3][0][0]} × {C.HELD_OUT[3][0][1]}, zoals in *Je run, stap voor stap* hieronder, en of het product erin goed is.
         """),
         L.course_versions(),
     ])
@@ -358,24 +360,31 @@ def demo_train(box_answer, box_read, result_answer, result_read, train_button):
         _plan = C.where()["kind"]
         _names = {"steps": "Met tussenstappen", "plain": "Alleen het antwoord"}
         _lives = {}
+        _now = {}   # het laatste bericht van elke run, voor wat zijn model nu schrijft naast zijn grafiek
+        _seen = {"title": "Wat het nu schrijft bij {a} × {b}, na stap {step}", "lang": "nl",
+                 "alt": "Wat het model nu greedy schrijft na de prompt {a}*{b}=, die in grijs staat, en eronder of het product erin goed is.",
+                 "right": "Het product is goed: {product}.", "wrong": "Het product is nog niet {product}."}
 
-        def _show(_d):
+        def _progress(_d):
             _key = (_d.get("format"), _d.get("steps"))
             _name = f"{_names[_key[0]]}, {C.number(_key[1], 0, 'nl')} stappen" if _key[0] else ""
             if _d["phase"] == "start":
                 _live = L.live({"title": f"{_names[_key[0]]}: loss per stap", "x": "stap", "y": "loss",
                                 "alt": f"De loss van elke stap tot nu toe van je run, {_name.lower()}, in grijs, met zijn gemiddelde als de dikkere lijn, en de run van de course op hetzelfde plan gestippeld."},
-                               _key[1], low=0.0)
+                               _key[1], low=0.0, look_every=3.0)
                 _live.reference(C.live_reference(_plan, *_key), "", role="loss")
                 _live.above = [mo.Html(_l.picture()) for _l in _lives.values()]
                 _lives[_key] = _live
                 _live.line(f"**{_name}** · run {_d['i']} van {_d['n']} …")
             elif _d["phase"] == "train":
+                if _key not in _now:   # vanaf het eerste bericht van een run staat naast de grafiek wat zijn model schrijft
+                    _lives[_key].watch(lambda _k=_key: C.now_picture(_now[_k], _seen))
+                _now[_key] = _d
                 _lives[_key].extend(_d["fresh"], f"**{_name}** · stap {C.number(_d['step'], 0, 'nl')} van {C.number(_d['steps'], 0, 'nl')} · loss {C.number(_d['loss'], 3, 'nl')} · {C.number(_d['seconds'] / 60, 1, 'nl')} minuten · gestippeld: de run van de course")
             elif _d["phase"] == "measure":
                 _lives[_key].line(f"**{_name}** · het model beantwoordt de {len(C.TESTS) * C.HELD} achtergehouden paren …")
 
-        _r = C.run(run_code(box_answer.value).names["steps_answer"], run_code(box_read.value).names["read_product"], _show)
+        _r = C.run(run_code(box_answer.value).names["steps_answer"], run_code(box_read.value).names["read_product"], _progress)
         _charts = [mo.Html(_l.picture()) for _l in _lives.values()]   # ze blijven staan na de run
         if isinstance(_r, str):
             _out = mo.vstack(_charts + [mo.md({

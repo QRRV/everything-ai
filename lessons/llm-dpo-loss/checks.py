@@ -4,13 +4,15 @@
 of a language model; dpo_loss, the DPO loss of preference pairs from four log-probabilities each; and a choice. The
 demo trains the course's SFT model for STEPS steps of DPO on one preference pair, the story with both requested words
 against the same story with "hill" in place of "park", with the learner's two functions, and shows the loss, how far
-each answer moved from the reference model, and the probability of the word where the two answers differ."""
+each answer moved from the reference model, and the probability of the word where the two answers differ: at every
+step while it trains, and after it in a rewind through the steps (decision 1.17)."""
+import functools
 import importlib.util
 import math
 import time
 
-from everything_ai import paths, projects
-from everything_ai.check import Mistake, ScenarioBox, run_code
+from everything_ai import live, netview, paths, projects
+from everything_ai.check import Mistake, ScenarioBox, Timeout, run_code
 from everything_ai import yours
 
 
@@ -34,6 +36,7 @@ CONTEXT = "Tom took his red kite to the"                 # what both answers say
 NEXT = ("park", "hill")
 BETAS = (0.05, 0.1, 0.2, 0.5, 1.0)   # the values of the slider
 STEPS, LR = 20, 2e-5                 # AdamW on the whole model, one pair a step
+LN2 = math.log(2)                    # the loss at step 0, where the policy is still the reference model
 
 
 def number(x: float, digits: int, lang: str) -> str:
@@ -65,6 +68,12 @@ def _course(name: str):
     return run_code(EXERCISES[name].solution).names[name.replace("-", "_")]
 
 
+@functools.cache
+def _course_logprob():
+    """The course's answer_logprob, made once: word_probs uses it at every step of the demo."""
+    return _course("answer-logprob")
+
+
 def word_probs(model, s: dict) -> dict:
     """The probability of each word of NEXT right after CONTEXT: the product of the probabilities of its tokens."""
     import torch
@@ -73,15 +82,17 @@ def word_probs(model, s: dict) -> dict:
         for w, toks in s["next"].items():
             ids = s["context"] + toks
             logits = model(torch.tensor([ids[:-1]]))[0]
-            out[w] = math.exp(float(_course("answer-logprob")(logits, ids, len(s["context"]))))
+            out[w] = math.exp(float(_course_logprob()(logits, ids, len(s["context"]))))
     return out
 
 
-def run(beta: float, answer_logprob, dpo_loss, s: dict | None = None) -> dict | str:
+def run(beta: float, answer_logprob, dpo_loss, s: dict | None = None, show=None) -> dict | str:
     """STEPS steps of DPO with AdamW on a copy of the course's SFT model, on the one pair, with the learner's functions.
-    Per step the loss and how far each answer moved from the reference model, in nats; the probability of the two
-    words before and after. "logprob" or "loss" when that function stops with an error or gives no tensor to train
-    with; "run" when the model cannot be made."""
+    Per step the loss and how far each answer moved from the reference model, in nats, and the probability of the two
+    words then ("probs", decision 1.17); the probability of the two words before and after. "logprob" or "loss" when
+    that function stops with an error or gives no tensor to train with; "run" when the model cannot be made. `show`
+    hears every step ({"step", "steps", "loss", "chosen", "rejected", "look"}), with "look", the two probabilities at
+    that moment. The policy is looked at in eval mode without a graph (netview.looking), so the run stays the same."""
     import copy
     import torch
     s = setup() if s is None else s
@@ -101,7 +112,12 @@ def run(beta: float, answer_logprob, dpo_loss, s: dict | None = None) -> dict | 
     for p in policy.parameters():
         p.requires_grad_(True)
     opt = torch.optim.AdamW(policy.parameters(), lr=LR)
-    history, t0 = [], time.time()
+    history, probs, t0, aside = [], [], time.time(), 0.0
+
+    def look() -> dict:
+        with netview.looking(policy):
+            return word_probs(policy, s)
+
     for step in range(STEPS + 1):
         try:
             pc, pr = logp(policy, s["chosen"]), logp(policy, s["rejected"])
@@ -116,6 +132,17 @@ def run(beta: float, answer_logprob, dpo_loss, s: dict | None = None) -> dict | 
         except Exception:
             return "loss"
         history.append((float(loss.detach()), float(pc.detach()) - ref_c, float(pr.detach()) - ref_r))
+        began = time.time()   # the looking is left out of the seconds the lesson tells
+        probs.append(look())
+        if show is not None:
+            try:
+                show({"step": step, "steps": STEPS, "loss": history[-1][0], "chosen": history[-1][1], "rejected": history[-1][2],
+                      "look": lambda seen=probs[-1]: seen})
+            except Timeout:
+                raise
+            except Exception:   # the chart is the course's own: it never stops the run
+                pass
+        aside += time.time() - began
         if step == STEPS:
             break
         opt.zero_grad()
@@ -125,21 +152,23 @@ def run(beta: float, answer_logprob, dpo_loss, s: dict | None = None) -> dict | 
             return "loss"
         opt.step()
     policy.eval()
-    return {"history": history, "before": word_probs(ref, s), "after": word_probs(policy, s), "seconds": time.time() - t0}
+    return {"history": history, "probs": probs, "before": word_probs(ref, s), "after": word_probs(policy, s),
+            "seconds": time.time() - t0 - aside}
 
 
-def demo(beta: float, answer_logprob=None, dpo_loss=None) -> tuple:
+def demo(beta: float, answer_logprob=None, dpo_loss=None, show=None) -> tuple:
     """The run of the demo with the learner's functions, None for one that has not passed its check yet; where one of
-    them stops on the model, the course's stands in. The result of run, and which of the learner's stood down."""
+    them stops on the model, the course's stands in, from step 0 again. The result of run, and which of the learner's
+    stood down. `show` hears every step, as for run."""
     s = setup()
     fns = {"logprob": answer_logprob or _course("answer-logprob"), "loss": dpo_loss or _course("dpo-loss")}
     failed = []
     while True:
-        r = run(beta, fns["logprob"], fns["loss"], s)
+        r = run(beta, fns["logprob"], fns["loss"], s, show)
         if not isinstance(r, str) or r not in fns:
             return r, failed
         if r in failed:   # it stopped again, with the course's own in its place: the course's two together
-            return run(beta, _course("answer-logprob"), _course("dpo-loss"), s), failed
+            return run(beta, _course("answer-logprob"), _course("dpo-loss"), s, show), failed
         failed.append(r)
         fns[r] = _course("answer-logprob" if r == "logprob" else "dpo-loss")
 
@@ -171,9 +200,10 @@ def loss_picture(beta: float, points: list, labels: dict) -> str:
     return chart.with_decimal_comma(svg) if labels.get("lang") == "nl" else svg
 
 
-def curves_picture(history: list, labels: dict) -> str:
+def curves_picture(history: list, labels: dict, at: int | None = None) -> str:
     """Two panels over the steps: the loss, in the colour of loss, with ln 2 dashed; and how far the chosen and the
-    rejected answer moved from the reference model, in the colour of what a model learns, the rejected one dashed."""
+    rejected answer moved from the reference model, in the colour of what a model learns, the rejected one dashed.
+    With `at`, a line at that step in both, for rewinding."""
     from everything_ai import chart
     steps = list(range(len(history)))
     losses = [h[0] for h in history]
@@ -188,8 +218,24 @@ def curves_picture(history: list, labels: dict) -> str:
     p2.line(steps, [h[2] for h in history], "param", dashed=True)
     p2.text(len(history) - 1, history[-1][1] + 0.07 * (hi - lo), labels["chosen"], "ink", anchor="end")
     p2.text(len(history) - 1, history[-1][2] - 0.08 * (hi - lo), labels["rejected"], "ink", anchor="end")
+    if at is not None:
+        p1.line([at, at], [0, 0.8], "ink-2", 1.2)
+        p2.line([at, at], [lo, hi], "ink-2", 1.2)
     svg = chart.figure([p1, p2], alt=labels["alt"], width=280, height=260)
     return chart.with_decimal_comma(svg) if labels.get("lang") == "nl" else svg
+
+
+def now_picture(probs: dict, title: str, lang: str) -> str:
+    """What the policy makes at one moment of the demo (decision 1.17): after CONTEXT, how likely it finds each word
+    of NEXT, the chosen one first."""
+    return yours.writes(title, [(CONTEXT + " ", w, percent(probs[w], lang), None) for w in NEXT],
+                        alt=title + ": " + "; ".join(f"{w} {percent(probs[w], lang)}" for w in NEXT), width=320)
+
+
+def step_frame(result: dict, step: int, labels: dict, title: str, lang: str) -> str:
+    """The rewind at a step (from 0): the loss and how far each answer moved, with a line at that step, and beside
+    them how likely the policy found each word then."""
+    return live.rewound(curves_picture(result["history"], labels, at=step), [now_picture(result["probs"][step], title, lang)])
 
 
 # --- measured: STEPS steps of DPO on the course's SFT model, data/course-sft.pt, with the course's functions, on the

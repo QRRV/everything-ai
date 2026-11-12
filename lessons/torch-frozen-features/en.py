@@ -251,16 +251,54 @@ def text_demo():
     mo.md(f"""
     ### Your new last layer on the old scanner's digits
 
-    The cell below gives the digit reader to your `new_head` once it is right, else to the course's, and trains the new last layer on the 100 labeled digits of the old scanner: {C.HEAD_EPOCHS} epochs with a learning rate of {L.number(C.HEAD_LR, 2)}. For comparison, it trains a new network of the same layers from scratch on the same 100 digits, all of it: {C.SCRATCH_EPOCHS} epochs with a learning rate of {L.number(C.SCRATCH_LR, 3)}. It tests both, and the digit reader as it is, on 1,000 speckled test digits. It takes a few seconds.
+    The cell below gives the digit reader to your `new_head` once it is right, else to the course's, and trains the new last layer on the 100 labeled digits of the old scanner: {C.HEAD_EPOCHS} epochs with a learning rate of {L.number(C.HEAD_LR, 2)}. For comparison, it trains a new network of the same layers from scratch on the same 100 digits, all of it: {C.SCRATCH_EPOCHS} epochs with a learning rate of {L.number(C.SCRATCH_LR, 3)}. It tests both, and the digit reader as it is, on 1,000 speckled test digits. It takes a few seconds. While each network trains, a chart shows its loss on the 100 training digits after every epoch, and dashed on the 1,000 test digits at the epochs you can rewind to: first of the network from scratch, then of the frozen one, with the test loss of the one from scratch thin and dashed beside it. Beside or under it are the network's guesses at that moment for one speckled test digit of each kind, and under them what its layer `conv2` makes of a speckled 9; both are drawn again as it trains. Then you can rewind through both runs, with the pictures of both networks as they were then.
     """)
     return
 
 
 @app.cell(hide_code=True)
 def demo_frozen(box_head, result_head):
-    _d = C.demo(box_head.value if result_head.state == "correct" else None)
+    _now = {}   # the live chart of each network, made at its first report, and its test loss so far
+    _heads = {"scratch": {"guesses": "The network from scratch: its guess for one speckled test digit of each kind",
+                          "layer": "What its layer {name} makes of a speckled 9"},
+              "frozen": {"guesses": "Frozen, with a new last layer: its guess for one speckled test digit of each kind",
+                         "layer": "What its layer {name} makes of a speckled 9: borrowed and frozen, so the same after every epoch"}}
+
+    def _progress(_p):
+        _run = _p["run"]
+        if _run not in _now or _p["epoch"] == 1:   # a new run, also when the course's runs again in place of yours
+            _fr = _run == "frozen"
+            _now[_run] = L.live({"title": "Frozen, with a new last layer" if _fr else "A new network from scratch", "x": "epoch", "y": "loss",
+                                 "alt": "The loss of the frozen network with a new last layer so far: on the 100 training digits after every epoch, and dashed on the 1,000 test digits at the epochs of the rewind; thin and dashed, the test loss of the network from scratch." if _fr else "The loss of the new network from scratch so far: on the 100 training digits after every epoch, and dashed on the 1,000 test digits at the epochs of the rewind."}, _p["epochs"], low=0.0,
+                                key=[("loss", False, "100 training digits, every epoch"), ("loss", True, "1,000 test digits, at the epochs of the rewind")])
+            _now[_run].watch(lambda: C.now_pictures(_p["look"](), _heads[_run], L.lang, f"nv-frozen-{_run}-now"))
+            _now[_run + "-test"] = []
+            if _fr and "scratch-test" in _now:   # the test loss of the network from scratch, thin and dashed, as far as this run goes
+                _now["frozen"].reference([_pt for _pt in _now["scratch-test"] if _pt[0] <= _p["epochs"]], "from scratch", role="ink-2")
+        _who = "Frozen, with a new last layer" if _run == "frozen" else "A new network from scratch"
+        _line = f"**{_who}** · epoch {_p['epoch']} of {_p['epochs']} · loss {L.number(_p['loss'], 3)}"
+        if "val_loss" in _p:   # the test digits at the epochs of the rewind, dashed
+            _now[_run + "-test"].append((_p["epoch"], _p["val_loss"]))
+            _now[_run].reference(_now[_run + "-test"], "", role="loss", replace=True)
+            _line += f" · test loss {L.number(_p['val_loss'], 3)}"
+        _now[_run].add(_p["epoch"], _p["loss"], _line)
+
+    _d = C.demo(box_head.value if result_head.state == "correct" else None, _progress)
     _who = "your `new_head`" if _d["yours"] else "the course's `new_head`"
-    mo.md(f"""With {_who}, of the 1,000 speckled test digits:
+    _labels = {"title": "Loss on the test digits", "x": "epoch", "y": "test loss", "scratch": "from scratch", "alt": "The loss on the 1,000 test digits of the frozen network with a new last layer, at the epochs of the rewind, and thin and dashed that of the network from scratch."}
+    _when = [_e for _e, _ in _d["tests"]["scratch"]]
+    if any(len(_d["looked"][_n]) != len(_d["tests"][_n]) or not all(_d["looked"][_n]) for _n in C.RUNS):   # an epoch it could not look at
+        _when = []
+
+    def _frame(_e):
+        _e = int(_e)
+        _right = {_n: sum(_g == _k for _g, _k in zip(_d["looked"][_n][C.at_epoch(_d, _n, _e)], _d["truth"])) for _n in C.RUNS}
+        _end = _d["tests"]["frozen"][-1][0]
+        _last = "" if _e <= _end else f" (after its last epoch, {_end})"
+        return (C.epoch_frame(_d, _e, _labels, _heads, L.lang),
+                f"After epoch {_e}: of these 10 test digits, the network from scratch reads {_right['scratch']} right, and the frozen one with a new last layer {_right['frozen']}{_last}.")
+
+    _table = mo.md(f"""With {_who}, of the 1,000 speckled test digits:
 
 | | read right |
 |---|---|
@@ -269,6 +307,12 @@ def demo_frozen(box_head, result_head):
 | frozen, with a new last layer trained on the 100 | {_d['frozen']} |
 
 Over 5 seeds, with the course's code: {C.REFERENCE['scratch'][0]} to {C.REFERENCE['scratch'][1]} from scratch, and {C.REFERENCE['frozen'][0]} to {C.REFERENCE['frozen'][1]} frozen with a new last layer.""")
+    if len(_when) > 1:   # rewinding through both runs, with both in the picture
+        _out = mo.vstack([L.explore("rewind", "epoch", _frame, start=_when[-1], values=_when, role="",
+                                    task="Go back to epoch 1, then forward again: which of the two reads the speckled digits right sooner, and what changes in layer `conv2`?"), _table])
+    else:
+        _out = _table
+    _out
     return
 
 

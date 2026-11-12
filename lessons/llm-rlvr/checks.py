@@ -184,7 +184,7 @@ def run(advantages, policy_loss, show, steps: int | None = None) -> dict | str:
         model.eval()
         rewards.append(sum(got) / len(got))
         show({"phase": "train", "step": step + 1, "steps": steps, "reward": rewards[-1], "seconds": time.perf_counter() - start,
-              "fresh": [(step + 1, rewards[-1])]})
+              "fresh": [(step + 1, rewards[-1])], "group": groups[-1]})
     try:
         after = measure(model, merges, t["encode_fast"], t["decode"], t["words_used"], show)
     except Exception:
@@ -231,12 +231,7 @@ def group_frame(run: dict, step: int, labels: dict) -> tuple:
     r.line(list(range(1, len(rewards) + 1)), rewards, "ink", 2.0)
     r.points(list(range(1, len(rewards) + 1)), rewards, "ink", r=2.5)
     r.points([step], [rewards[step - 1]], "ink", r=4)
-    p = chart.Panel((0.5, n + 0.5), (-1, 1), title=labels["title"].format(step=step), xlabel=labels["x"], ylabel=labels["y"],
-                    xticks=list(range(1, n + 1)), yticks=[-1, -0.5, 0, 0.5, 1])
-    p.line([0.5, n + 0.5], [0, 0], "ink-3", 1.0)
-    for k, a in enumerate(g["answers"], 1):
-        if abs(a["advantage"]) > 1e-9:
-            p.rect(k - 0.3, 0, k + 0.3, max(-1.0, min(1.0, a["advantage"])), "ink")
+    p = advantage_panel(g, labels)
     svg = chart.figure([r, p], alt=labels["alt"], width=330, height=220)
     rows = "  \n".join(f"**{k}** · {labels['reward']} {a['reward']:g} · {labels['advantage']} {signed(a['advantage'], 3, lang)} · "
                        f"{T.written(a['text'])}" for k, a in enumerate(g["answers"], 1))   # its number, as under its bar
@@ -244,6 +239,33 @@ def group_frame(run: dict, step: int, labels: dict) -> tuple:
     said = (f"**{labels['step'].format(step=step)}** · {labels['mean']} {short(mean, 3, lang)} · "
             f"*{prompt(g['word']).splitlines()[0]}*\n\n{rows}")
     return svg, said
+
+
+def advantage_panel(g: dict, labels: dict):
+    """The advantage of every answer of a group as a bar from zero, in ink, numbered as under the bars."""
+    from everything_ai import chart
+    n = len(g["answers"])
+    p = chart.Panel((0.5, n + 0.5), (-1, 1), title=labels["title"].format(step=g["step"]), xlabel=labels["x"],
+                    ylabel=labels["y"], xticks=list(range(1, n + 1)), yticks=[-1, -0.5, 0, 0.5, 1])
+    p.line([0.5, n + 0.5], [0, 0], "ink-3", 1.0)
+    for k, a in enumerate(g["answers"], 1):
+        if abs(a["advantage"]) > 1e-9:
+            p.rect(k - 0.3, 0, k + 0.3, max(-1.0, min(1.0, a["advantage"])), "ink")
+    return p
+
+
+def group_pictures(g: dict, labels: dict) -> list:
+    """Beside the live chart of the run (decision 1.17): the group of the first instruction of the last step, as in the
+    replay: the advantage of every answer as a bar beside the chart, and under them the instruction with every answer,
+    its reward and its advantage, in ink where the reward is 1. `labels` as group_frame's, with alt_now ({step}) and
+    answers ({n}, {instruction})."""
+    from everything_ai import chart, yours
+    lang = labels.get("lang", "en")
+    bars = chart.figure([advantage_panel(g, labels)], alt=labels["alt_now"].format(step=g["step"]), width=300, height=220)
+    rows = [(f"{k}  ", a["text"], f"{labels['reward']} {a['reward']:g} · {labels['advantage']} {signed(a['advantage'], 3, lang)}",
+             a["reward"] == 1) for k, a in enumerate(g["answers"], 1)]
+    title = labels["answers"].format(n=len(rows), instruction=prompt(g["word"]).splitlines()[0])
+    return [bars, yours.writes(title, rows, width=640)]
 
 
 def short(x: float, digits: int, lang: str) -> str:

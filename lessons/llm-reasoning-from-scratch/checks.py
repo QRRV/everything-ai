@@ -228,7 +228,8 @@ def measure(model, fmt: str, steps_answer, read_product, n: int, pairs: list | N
 def train(fmt: str, steps: int, seed: int, steps_answer, read_product, t: dict, show, snap: bool = True) -> dict | str:
     """Train a new ModernGPT on `fmt` for `steps` steps with the learner's sft_example, sft_batch and pretrain_step:
     AdamW at LR times the schedule of llm-open-recipes, BATCH pairs a step drawn with `seed`, never a held-out pair.
-    `show` hears a step every second, with every (step, loss) since it last heard ("fresh"), for a live chart. With
+    `show` hears a step every second, with every (step, loss) since it last heard ("fresh"), for a live chart, and
+    "look", which gives what the model writes now for the first held-out 3x3 pair, for the picture beside it. With
     `snap`, before the first step and after every steps / SNAPSHOTS steps the model answers the first SNAP held-out
     3x3 pairs, for the replay of the run. A string when it stops: "steps" (steps_answer), "example" (sft_example),
     "batch" (sft_batch), "run" (pretrain_step or the model), "read" (read_product), "memory", "diverged"."""
@@ -251,6 +252,20 @@ def train(fmt: str, steps: int, seed: int, steps_answer, read_product, t: dict, 
             return m
         model.train()
         return {"step": step, "right": m["right"], "total": m["total"], "text": m["texts"][0]}
+
+    def look():
+        """What the model writes now for the first held-out 3x3 pair, greedily, and whether read_product reads its
+        product from it (decision 1.17): as netview.looking looks, in eval mode, without a graph and with every module
+        back in its own mode after it, so that looking never changes the run."""
+        from everything_ai import netview
+        a, b = HELD_OUT[3][0]
+        with netview.looking(model):
+            text = greedy(model, [(a, b)], longest(3, fmt, steps_answer))[0]
+        try:
+            got = read_product(text)
+        except Exception:
+            got = None
+        return {"pair": (a, b), "text": text, "right": got is not None and str(got) == f"{a * b}"}
 
     if snap:
         at_start = moment(0)
@@ -300,7 +315,7 @@ def train(fmt: str, steps: int, seed: int, steps_answer, read_product, t: dict, 
             snapshots.append(m)
         if time.perf_counter() - last_show > 1 or step + 1 == steps:
             show({"phase": "train", "format": fmt, "step": step + 1, "steps": steps, "loss": loss, "seconds": seconds,
-                  "fresh": fresh})
+                  "fresh": fresh, "look": look})
             fresh, last_show = [], time.perf_counter()
     model.eval()
     return {"model": model, "format": fmt, "steps": steps, "seed": seed, "seconds": seconds, "tokens": tokens,
@@ -612,6 +627,20 @@ def replay_frame(result: dict, i: int, labels: dict) -> tuple:
         said += "\n\n" + labels["longer"] + "  \n" + "  \n".join(
             f"{x} × {y}: {shown(t)}" for (x, y), t in zip(HELD_OUT[4], fours))
     return svg, said
+
+
+def now_picture(report: dict, labels: dict) -> str:
+    """Beside the live chart of a run (decision 1.17): what the model writes now for the first held-out 3x3 pair, after
+    the step of the last report, and whether its product is right. `labels`: title ({step}, {a}, {b}), alt, right and
+    wrong ({product})."""
+    from everything_ai import yours
+    if "seen" not in report:   # one look per report: while the run measures, the picture keeps what it saw
+        report["seen"] = report["look"]()
+    seen = report["seen"]
+    (a, b), lang = seen["pair"], labels.get("lang", "en")
+    note = labels["right" if seen["right"] else "wrong"].format(product=whole(a * b, lang))
+    title = labels["title"].format(step=number(report["step"], 0, lang), a=a, b=b)
+    return yours.writes(title, [(prompt(a, b), seen["text"], note, seen["right"])], alt=labels["alt"].format(a=a, b=b))
 
 
 def live_reference(plan: str, fmt: str, steps: int) -> list:

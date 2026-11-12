@@ -322,7 +322,7 @@ def text_demo_measure():
     mo.md(f"""
     ### Your run, step 2: measure and plan
 
-    The button times {C.PROBE_STEPS} steps of your `pretrain_step` on the model of depth {C.PROBE}, in FP32 and in BF16, keeps the faster, and plans a run of {C.MINUTES} minutes with your `plan_run`. The plan is kept in your project: to go on with a run that stopped, press *Pretrain* again without measuring again.
+    The button times {C.PROBE_STEPS} steps of your `pretrain_step` on the model of depth {C.PROBE}, in FP32 and in BF16, keeps the faster, and plans a run of {C.MINUTES} minutes with your `plan_run`. The plan is kept in your project: to go on with a run that stopped, press *Pretrain* again without measuring again. While your model pretrains, a chart shows its loss, with beside it what it writes now from *{C.START}*.
     """)
     return
 
@@ -368,22 +368,31 @@ def train_button_cell(plan):
 
 @app.cell(hide_code=True)
 def demo_train(box_step, plan, train_button):
-    _labels = {"title": "Validation loss during the run", "x": "tokens seen", "y": "validation loss per token",
-               "reference": f"depth {C.S.BIG}, scaling law", "lang": L.lang, "alt": "The validation loss of your run so far."}
     trained = None
     _note = None
     if train_button.value and plan is None:
         _note = "*Measure this computer first: the run follows its plan.*"
     elif train_button.value:
-        _seen = []
+        _now = {}   # the live chart, made at the first report, and the last report
+        _wrote = {"now": "What your model writes now",
+                  "alt": "What your model writes now from “Once upon a time”: 60 tokens, drawn with the same seed each time, so that only your model changes."}
 
         def _progress(_p):
-            if _p["phase"] == "eval":
-                _seen.append(_p)
-            _parts = [mo.md(f"**Step {C.number(_p['step'], 0, L.lang)} of {C.number(_p['steps'], 0, L.lang)}** · {C.number(_p['seconds'] / 60, 1, L.lang)} minutes")]
-            if _seen:
-                _parts.append(mo.Html(C.curve_picture([(_seen, False)], C.S.MEASURED["big"]["val"], _labels)))
-            mo.output.replace(mo.vstack(_parts))
+            if "chart" not in _now:
+                _now["chart"] = L.live({"title": "Your run", "x": "step", "y": "loss per token",
+                                        "alt": f"The loss per token of your run so far: on the mini-batches of the steps, and dashed on the validation windows at every measurement; a thin gray line at the validation loss of depth {C.S.BIG} of the scaling law."},
+                                       _p["steps"], window=20, look_every=5.0, key=[("loss", False, "training"), ("loss", True, "validation, at every measurement")])
+                _now["chart"].reference([(0, C.S.MEASURED["big"]["val"]), (_p["steps"], C.S.MEASURED["big"]["val"])], f"depth {C.S.BIG}, scaling law", role="ink-3")
+                _now["chart"].watch(lambda: C.now_picture(_now["last"], _wrote))   # what your model writes now, beside the chart
+                _now["val"] = []
+            _now["last"] = _p
+            _time = f"{C.number(_p['seconds'] / 60, 1, L.lang)} minutes"
+            if _p["phase"] == "eval":   # the validation windows at every measurement, dashed
+                _now["val"].append((_p["step"], _p["val"]))
+                _now["chart"].reference(_now["val"], "", role="loss", replace=True)
+                _now["chart"].line(f"**Step {C.number(_p['step'], 0, L.lang)} of {C.number(_p['steps'], 0, L.lang)}** · validation loss {C.number(_p['val'], 3, L.lang)} · {_time}")
+            else:
+                _now["chart"].add(_p["step"], _p["loss"], f"**Step {C.number(_p['step'], 0, L.lang)} of {C.number(_p['steps'], 0, L.lang)}** · loss {C.number(_p['loss'], 3, L.lang)} · {_time}")
         _r = C.run_plan(plan, run_code(box_step.value).names["pretrain_step"], _progress)
         if _r == "data":
             _note = "*There are no shards of the run yet: press* Get the stories *first.*"

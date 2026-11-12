@@ -239,7 +239,7 @@ def text_demo():
     mo.md(f"""
     ### Stap 4: de run zonder posities
 
-    De knop traint je GPT nog een keer, {_where}, precies zoals in [Project: je GPT op een boek trainen](/course/open/gpt-train-chars?lang=nl): hetzelfde plan, {_p['epochs']} epochs en seed 0, met je `no_positions` toegepast voordat hij traint.{_time} Tijdens het trainen laat de cel na elke epoch de loss zien, en wacht de rest van de les; met de stopknop van de cel stop je de run eerder. Hieronder staat je run naast de run met posities: die van jou, als je er een trainde op deze computer, en anders die van de course.
+    De knop traint je GPT nog een keer, {_where}, precies zoals in [Project: je GPT op een boek trainen](/course/open/gpt-train-chars?lang=nl): hetzelfde plan, {_p['epochs']} epochs en seed 0, met je `no_positions` toegepast voordat hij traint.{_time} Tijdens het trainen laat een grafiek de loss zien, acht keer per epoch en na elke epoch, met ernaast wat je GPT zonder posities nu als volgend teken verwacht op drie plekken in de tekst waarop hij valideert, en wacht de rest van de les; na de run kun je door de epochs terugspoelen, en met de stopknop van de cel stop je de run eerder. Hieronder staat je run naast de run met posities: die van jou, als je er een trainde op deze computer, en anders die van de course.
     """)
     return
 
@@ -254,15 +254,34 @@ def ablation_button_cell():
 @app.cell(hide_code=True)
 def demo_ablation(ablation_button, result_nopos):
     result_nopos  # run again when exercise 1 saves your no_positions
-    _labels = {"title": "Je run zonder posities", "x": "epoch", "y": "loss", "lang": L.lang, "guess": "gelijkmatig gokken", "mlp": "je MLP", "train": "training", "val": "validatie"}
+    _labels = {"title": "Je run zonder posities", "x": "epoch", "y": "loss", "lang": L.lang, "guess": "gelijkmatig gokken", "mlp": "je MLP", "train": "training", "val": "validatie", "start": "**Vóór de eerste epoch**", "after": "**Na epoch {epoch}** · validation loss {loss}"}
+
+    _now = {}   # de live grafiek, gemaakt bij het eerste verslag, en het laatste verslag
+    _guess = {"title": "Wat je GPT zonder posities nu als volgende verwacht", "then": "Wat hij na epoch {epoch} als volgende verwachtte", "before": "Wat hij vóór de eerste epoch als volgende verwachtte",
+              "read": "wat hij las", "next": "volgt", "guesses": "zijn drie gokken", "lang": "nl",
+              "alt": "Op drie plekken bij het eind van het boek, in de tekst waarop hij valideert en nooit getraind heeft: het eind van wat je GPT zonder posities las, het teken dat volgt, en zijn drie waarschijnlijkste volgende tekens met hun kansen. Een spatie staat er als ␣, een nieuwe regel als ↵."}
 
     def _progress(_p):
         _m = 1 if _p["left"] is None else max(1, round(_p["left"] / 60))
-        _left = "" if _p["left"] is None else f" · nog ongeveer {_m} {'minuten' if _m > 1 else 'minuut'} te gaan"
-        _parts = [mo.md(f"**Epoch {_p['epoch']} van {_p['epochs']}** · stap {_p['step']} van {_p['steps']}{_left}")]
-        if _p["history"]:
-            _parts.append(mo.Html(C.T.history_picture(_p["history"], {**_labels, "alt": "De training en validation loss van je run zonder posities tot nu toe, na elke epoch."}, _p["epochs"])))
-        mo.output.replace(mo.vstack(_parts))
+        _left = "" if _p["left"] is None else f" · ongeveer {_m} {'minuten' if _m > 1 else 'minuut'} te gaan"
+        if "chart" not in _now:
+            _now["chart"] = L.live({"title": "Je run zonder posities", "x": "epoch", "y": "loss",
+                                    "alt": "De loss van je run zonder posities tot nu toe: op de trainingsvensters acht keer per epoch, en gestreept op de validation set na elke epoch; dunne grijze lijnen bij de loss van gelijkmatig gokken en bij die van je MLP."},
+                                   _p["epochs"], window=4, key=[("loss", False, "training, acht keer per epoch"), ("loss", True, "validation, na elke epoch")])
+            _now["chart"].reference([(0, C.T.GUESS_LOSS), (_p["epochs"], C.T.GUESS_LOSS)], "gelijkmatig gokken", role="ink-3")
+            _now["chart"].reference([(0, C.T.MLP_LOSS), (_p["epochs"], C.T.MLP_LOSS)], "je MLP", role="ink-3")
+            _now["chart"].watch(lambda: C.T.now_picture(_now["last"], _guess))   # wat hij nu als volgende verwacht, naast de grafiek
+            _now["val"] = []
+        _now["last"] = _p
+        if "val_loss" in _p:   # de validation set na elke epoch, gestreept
+            _now["val"].append((_p["epoch"], _p["val_loss"]))
+            _now["chart"].reference(_now["val"], "", role="loss", replace=True)
+            _now["chart"].line(f"**Epoch {_p['epoch']} van {_p['epochs']}** · validation loss {C.number(_p['val_loss'], 3, L.lang)}{_left}")
+        elif "loss" in _p:   # de trainingsvensters, acht keer per epoch
+            _now["chart"].add(_p["epoch"] - 1 + _p["batch"] / _p["batches"], _p["loss"],
+                              f"**Epoch {_p['epoch']} van {_p['epochs']}** · batch {_p['batch']} van {_p['batches']} · loss {C.number(_p['loss'], 3, L.lang)}{_left}")
+        else:
+            _now["chart"].line(f"**Epoch {_p['epoch']} van {_p['epochs']}** · batch {_p['batch']} van {_p['batches']}{_left}")
 
     _result = C.train(_progress) if ablation_button.value else C.last_run()
     if _result is None and result_nopos.state == "correct" and not ablation_button.value:
@@ -280,15 +299,18 @@ def demo_ablation(ablation_button, result_nopos):
         _h = _result["history"]
         _stopped = f" Je stopte de run na epoch {len(_h)} van {_result['epochs']}, dus vergelijk voorzichtig." if _result["stopped"] else ""
         _stand = "" if not _result.get("stand_ins") else " De versie van de course sprong in voor " + ", ".join(f"`{_m}`" for _m in _result["stand_ins"]) + ", zoals de melding bij oefening 1 zegt."
+        _rewind = [L.explore("rewind", "epoch", lambda _e: C.T.rewind_frame(_result, int(_e), {**_labels, "alt": f"De training loss en de validation loss van je run zonder posities na elke epoch: de validation loss is het laagst na epoch {_result['best_epoch']}, op {C.number(_result['best'], 2, L.lang)}."}, _guess),
+                             start=len(_h), values=list(range(len(_h) + 1)), role="",
+                             task="Ga terug naar vóór de eerste epoch, en dan vooruit: wat leert je GPT zonder posities verwachten, en waar blijft hij onzeker?")] if C.T.rewinds(_result) else []
         if _control is None:
-            _out = mo.md(f"Zonder posities haalde je GPT een validation loss van {C.number(_result['best'], 3, L.lang)} na epoch {_result['best_epoch']}.{_stopped}{_stand} Train je GPT met posities in [Project: je GPT op een boek trainen](/course/open/gpt-train-chars?lang=nl) om te vergelijken.")
+            _out = mo.vstack(_rewind + [mo.md(f"Zonder posities haalde je GPT een validation loss van {C.number(_result['best'], 3, L.lang)} na epoch {_result['best_epoch']}.{_stopped}{_stand} Train je GPT met posities in [Project: je GPT op een boek trainen](/course/open/gpt-train-chars?lang=nl) om te vergelijken.")])
         else:
             _whose = "je run uit [Project: je GPT op een boek trainen](/course/open/gpt-train-chars?lang=nl)" if _who == "yours" else "de run van de course met hetzelfde plan en seed 0"
             _d = _result["best"] - _control["best"]
             _diffs = C.course_differences("cpu" if _result["device"] == "cpu" else "gpu")
             _course = "" if not _diffs else f" In de {'runs' if len(_diffs) > 1 else 'run'} van de course met dit plan{', seed voor seed' if len(_diffs) > 1 else ', met seed 0'}, was het verschil zonder posities min met posities {'; '.join(C.signed(_x, 3, L.lang) for _x in _diffs)}."
             _rows = [("volledige GPT", C.number(_control["best"], 3, L.lang)), ("zonder posities", C.number(_result["best"], 3, L.lang))]
-            _out = mo.vstack([
+            _out = mo.vstack(_rewind + [
                 mo.Html(C.pair_picture(_control["history"], _h, {"title": "Validation loss", "x": "epoch", "y": "loss", "lang": L.lang, "guess": "gelijkmatig gokken",
                                                                   "with": "met posities", "without": "zonder",
                                                                   "alt": f"De validation loss na elke epoch, met posities omlaag tot {C.number(_control['best'], 2, L.lang)} en zonder posities omlaag tot {C.number(_result['best'], 2, L.lang)}."},

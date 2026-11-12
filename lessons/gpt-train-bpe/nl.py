@@ -312,7 +312,7 @@ def text_demo(result_bpe, result_encode):
         mo.md(f"""
         ### Wat je project nu kan
 
-        De knop hieronder traint je tokenizer, je `train_bpe_fast`, met {C.grouped(C.MERGES, L.lang)} regels op de eerste 90% van de verhalen, encodeert ze allemaal met je `encode_fast`, en traint je GPT op hun tokens, met je `gpt_loaders` en je `Trainer`, zoals in [Project: je GPT op een boek trainen](/course/open/gpt-train-chars?lang=nl). {_where}: een GPT van {C.grouped(_p['params'], L.lang)} parameters, met $d = {_d}$, {_h} heads, {_layers} blocks en vensters van {_block} tokens, {_p['epochs']} epochs met mini-batches van {_p['batch']}. Daarna schrijft hij een verhaal dat begint met "{C.START}".{_time} Tijdens het trainen laat de cel na elke epoch de loss zien en de tijd die nog over is, en wacht de rest van de les. De stopknop van de cel beëindigt de run eerder; de beste parameters tot dan blijven bewaard, in `work/projects/llm/gpt_bpe.pt`.
+        De knop hieronder traint je tokenizer, je `train_bpe_fast`, met {C.grouped(C.MERGES, L.lang)} regels op de eerste 90% van de verhalen, encodeert ze allemaal met je `encode_fast`, en traint je GPT op hun tokens, met je `gpt_loaders` en je `Trainer`, zoals in [Project: je GPT op een boek trainen](/course/open/gpt-train-chars?lang=nl). {_where}: een GPT van {C.grouped(_p['params'], L.lang)} parameters, met $d = {_d}$, {_h} heads, {_layers} blocks en vensters van {_block} tokens, {_p['epochs']} epochs met mini-batches van {_p['batch']}. Daarna schrijft hij een verhaal dat begint met "{C.START}".{_time} Tijdens het trainen laat een grafiek de loss zien, acht keer per epoch en na elke epoch, met de tijd die nog over is, en ernaast wat je GPT nu schrijft na *{C.START}*; na de run loop je er hieronder epoch voor epoch doorheen. Intussen wacht de rest van de les. De stopknop van de cel beëindigt de run eerder; de beste parameters tot dan blijven bewaard, in `work/projects/llm/gpt_bpe.pt`.
         """),
         L.course_versions(),
     ])
@@ -331,6 +331,10 @@ def demo_train(train_button, result_bpe, result_encode):
     result_bpe, result_encode  # run again when exercise 1 or 2 saves your module
     _labels = {"title": "Jouw run", "x": "epoch", "y": "loss per token", "lang": L.lang, "guess": "gelijk gokken", "train": "training", "val": "validatie"}
 
+    _now = {}   # de live grafiek, gemaakt bij het eerste verslag van de training, en het laatste verslag
+    _wrote = {"now": "Wat je GPT nu schrijft",
+              "alt": "Wat je GPT nu schrijft na “Once upon a time”: 50 tokens, telkens met dezelfde seed getrokken, zodat alleen je GPT verandert."}
+
     def _progress(_p):
         if _p["phase"] == "tokenizer":
             mo.output.replace(mo.md("**Je tokenizer traint** op de eerste 90% van de verhalen…"))
@@ -340,10 +344,23 @@ def demo_train(train_button, result_bpe, result_encode):
             return
         _m = 1 if _p["left"] is None else max(1, round(_p["left"] / 60))
         _left = "" if _p["left"] is None else f" · nog ongeveer {_m} {'minuten' if _m > 1 else 'minuut'} te gaan"
-        _parts = [mo.md(f"**Epoch {_p['epoch']} van {_p['epochs']}** · stap {_p['step']} van {_p['steps']}{_left}")]
-        if _p["history"]:
-            _parts.append(mo.Html(C.history_picture(_p["history"], {**_labels, "alt": "De training loss en validation loss van je run tot nu toe, na elke epoch."}, _p["epochs"])))
-        mo.output.replace(mo.vstack(_parts))
+        if "chart" not in _now:
+            _now["chart"] = L.live({"title": "Jouw run", "x": "epoch", "y": "loss per token",
+                                    "alt": "De loss per token van je run tot nu toe: op de trainingsvensters acht keer per epoch, en gestreept op de validation set na elke epoch; een dunne grijze lijn bij de loss van gelijk gokken tussen de 1.257 ids."},
+                                   _p["epochs"], window=4, key=[("loss", False, "training, acht keer per epoch"), ("loss", True, "validation, na elke epoch")])
+            _now["chart"].reference([(0, C.GUESS_LOSS), (_p["epochs"], C.GUESS_LOSS)], "gelijk gokken", role="ink-3")
+            _now["chart"].watch(lambda: C.now_picture(_now["last"], _wrote))   # wat je GPT nu schrijft, naast de grafiek
+            _now["val"] = []
+        _now["last"] = _p
+        if "val_loss" in _p:   # de validation set na elke epoch, gestreept
+            _now["val"].append((_p["epoch"], _p["val_loss"]))
+            _now["chart"].reference(_now["val"], "", role="loss", replace=True)
+            _now["chart"].line(f"**Epoch {_p['epoch']} van {_p['epochs']}** · validation loss {C.number(_p['val_loss'], 3, L.lang)} per token{_left}")
+        elif "loss" in _p:   # de trainingsvensters, acht keer per epoch
+            _now["chart"].add(_p["epoch"] - 1 + _p["batch"] / _p["batches"], _p["loss"],
+                              f"**Epoch {_p['epoch']} van {_p['epochs']}** · batch {_p['batch']} van {_p['batches']} · loss {C.number(_p['loss'], 3, L.lang)} per token{_left}")
+        else:
+            _now["chart"].line(f"**Epoch {_p['epoch']} van {_p['epochs']}** · batch {_p['batch']} van {_p['batches']}{_left}")
 
     if train_button.value:
         _result = C.train(_progress)

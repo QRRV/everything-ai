@@ -360,7 +360,7 @@ def text_demo():
     mo.md(rf"""
     ### What your project can do now
 
-    The button trains the grid with your kit: your `run_grid` with your `grid` and your `run_seed`, on your ModernGPT with your data and your settings, weight decay 1 and 0 at 30%, 50% and 90%, {C.number(C.STEPS, 0, L.lang)} steps each, into your experiment log `work/projects/repro/ablation.jsonl`. A chart shows each run while it trains: its validation accuracy, with its training accuracy dashed, on a log scale of the steps as in the figure above, and the run's weight decay and fraction in its title. On a GPU the six runs take a few minutes each; on the course's CPU, with one thread, about {C.number(6 * C.STEPS * C.SECONDS_PER_STEP / 3600, 1, L.lang)} hours together. Close the lesson halfway, and the runs that are done stay in your log; the next press goes on with the others. While it trains, the rest of this lesson waits: you can read on, or work in another lesson. Where a part of your kit is missing or broken, the course's version stands in.
+    The button trains the grid with your kit: your `run_grid` with your `grid` and your `run_seed`, on your ModernGPT with your data and your settings, weight decay 1 and 0 at 30%, 50% and 90%, {C.number(C.STEPS, 0, L.lang)} steps each, into your experiment log `work/projects/repro/ablation.jsonl`. A chart shows each run while it trains: its validation accuracy, with its training accuracy dashed, on a log scale of the steps as in the figure above, and the run's weight decay and fraction in its title. On a GPU the six runs take a few minutes each; on the course's CPU, with one thread, about {C.number(6 * C.STEPS * C.SECONDS_PER_STEP / 3600, 1, L.lang)} hours together. Beside the chart is which equations the model answers right at that moment: the table of all 9,409 equations from [Guided reproduction 2: build the model and the data](/course/open/repro-guided-build?lang=en), the training and the validation equations apart. After the runs you can rewind through each run of this press, with what its model answered then. Close the lesson halfway, and the runs that are done stay in your log; the next press goes on with the others. While it trains, the rest of this lesson waits: you can read on, or work in another lesson. Where a part of your kit is missing or broken, the course's version stands in.
     """)
     return
 
@@ -386,17 +386,23 @@ def demo_train(train_button, result_grid, result_run_grid):
     else:
         _kept = [(_l["weight_decay"], _l["fraction"]) for _l in C.my_runs() or []]
         _todo = [(_wd, _f) for _wd in C.CHANGES["weight_decay"] for _f in C.CHANGES["fraction"] if (_wd, _f) not in _kept]   # what this press trains, in the order of the grid
-        _starts, _lives = [], {}   # when each run of this press started; its live chart
+        _starts, _lives = [], {}   # when each run of this press started, with the seconds spent looking until then; its live chart
+        _now = {}   # the last report, for the tables beside the chart
+        _tables = {"train": "Training equations: {share} right", "val": "Validation equations: {share} right", "right": "right answer", "wrong": "wrong answer",
+                   "now": "What the model answers now, at step {step}", "lang": "en",
+                   "alt": "All 9,409 equations a + b modulo 97, a down and b across, in two tables: the training equations and the validation equations. Right answers are in ink, wrong ones in the color of mistakes: {train} of the training equations are right, and {val} of the validation equations."}
 
-        def _progress(_log):
-            _step, _now = _log["step"][-1], _time.perf_counter()
+        def _progress(_log, _report):
+            _step, _t = _log["step"][-1], _time.perf_counter()
             if _step == 1:   # the first logged step of a new run
-                _starts.append(_now)
-            _spent, _n = _now - _starts[-1], len(_starts)
+                _starts.append((_t, _report.get("aside", 0.0)))
+            _spent, _n = _t - _starts[-1][0] - (_report.get("aside", 0.0) - _starts[-1][1]), len(_starts)   # without the time spent looking
             if _n not in _lives:   # its settings; none only when your run_grid trains a run that is in the log already
                 _title = f"Weight decay {C.number(_todo[_n - 1][0], 0, L.lang)} at {round(100 * _todo[_n - 1][1])}% of the table" if _n <= len(_todo) else f"Run {_n} of this press"
                 _lives[_n] = L.live({"title": _title, "x": "step", "y": "accuracy", "alt": f"{_title}: the validation accuracy so far, on a log scale of the steps; dashed, the training accuracy."},
-                                    C.STEPS, role="ink", low=0.0, high=1.15, window=1, xlog=True)   # room above 1 for the name of the training line
+                                    C.STEPS, role="ink", low=0.0, high=1.15, window=1, xlog=True, look_every=2.0)   # room above 1 for the name of the training line
+                _lives[_n].watch(lambda: C.now_picture(_now["last"], _tables))   # which equations the model answers right now, beside the chart
+            _now["last"] = _report
             _live, _of = _lives[_n], f" of {len(_todo)}" if _n <= len(_todo) else ""
             _live.reference(list(zip(_log["step"], _log["train"])), "training", role="ink")   # it grows with the run
             _live.extend(list(zip(_log["step"][len(_live.xs):], _log["val"][len(_live.xs):])), f"**Run {_n}{_of} in this press, step {C.number(_step, 0, L.lang)} of {C.number(C.STEPS, 0, L.lang)}** · {C.number(_spent / 60, 1, L.lang)} minutes · training {C.number(100 * _log['train'][-1], 1, L.lang)}%, validation {C.number(100 * _log['val'][-1], 1, L.lang)}%")
@@ -410,7 +416,20 @@ def demo_train(train_button, result_grid, result_run_grid):
         else:
             trained = _r
             _stand = (" The course's version stood in for: " + ", ".join(f"`{_m}`" for _m in _r["stand_ins"]) + ".") if _r["stand_ins"] else ""
-            _out = mo.md(f"*Done: the six runs of the grid are in your experiment log, `work/projects/repro/ablation.jsonl`.{_stand}*")
+            _done = mo.md(f"*Done: the six runs of the grid are in your experiment log, `work/projects/repro/ablation.jsonl`.{_stand}*")
+            _w = _r["watched"]
+            if C.rewinds(_w) and len(_w) == len(_lives):   # rewind through the runs of this press, with what their models answered
+                _steps = [_s for _s, _ in _w[0]["moments"]]
+                _rewind = {**_tables, "then": "What the model answered at step {step}", "title": "Weight decay {weight_decay} at {fraction}% of the table",
+                           "said": "**{title}, step {step}** · training {train}%, validation {val}%"}
+                _frame = lambda _s, _i: C.rewind_frame(_w[int(_i) - 1], _lives[int(_i)].picture(at=int(_s)), int(_s), _rewind)
+                _pic = L.plane("rewind", "step", "run", _frame, _steps, list(range(1, len(_w) + 1)), start=(_steps[-1], 1), role="",
+                               task="Drag the dot: to the right through the steps of a run, up through the runs of this press. When does the model start to answer the validation equations right, and in which runs does it not?") \
+                    if len(_w) > 1 else L.explore("rewind-one", "step", lambda _s: _frame(_s, 1), start=_steps[-1], values=_steps, role="",
+                                                  task="Go back to the first steps, then forward: when does the model start to answer the training equations right, and when the validation equations?")
+                _out = mo.vstack([_pic, _done])
+            else:
+                _out = _done
     _out
     return (trained,)
 

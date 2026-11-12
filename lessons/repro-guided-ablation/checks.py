@@ -398,40 +398,59 @@ CASES = [
 ]
 
 
+# --- the demo: what the model answers while it trains, and the rewind after it (decision 1.17), as in repro-guided-figure
+
+moment_steps, answers, _watch, now_picture, tables, rewinds, rewind_frame = (
+    G.moment_steps, G.answers, G._watch, G.now_picture, G.tables, G.rewinds, G.rewind_frame)
+
+
 def demo(progress=None, steps: int = STEPS, changes: dict | None = None) -> dict | str | None:
     """Trains the learner's grid with their kit: their run_grid with their grid and run_seed, on their ModernGPT with
     their data and settings, into work/projects/repro/ablation.jsonl, on a GPU when there is one. None when
     repro/grid.py or repro/ablation.py is not in the project yet; "grid" when run_grid stops with an error, "model" when
     the model, the data or the settings do; otherwise the runs of the log, as from my_runs. Where a module it uses is
-    missing or broken, the course's version stands in, and "stand_ins" names it."""
+    missing or broken, the course's version stands in, and "stand_ins" names it. `progress(log, report)` sees the log
+    of the run at each step it logs, with a report of _watch; "watched" has each run this press trained, with which
+    equations its model answered right at the moments of moment_steps, for the rewind."""
     folder = projects.folder() / "repro"
     if not (folder / "grid.py").is_file() or not (folder / "ablation.py").is_file():
         return None
     projects.on_path()
     projects.forget()
     stand = projects.use_course_versions()
+    undo = None
     try:
         import importlib
+        import sys
         import torch
         try:
+            settings = importlib.import_module("repro.settings").SETTINGS
+            data = importlib.import_module("repro.data")
+            importlib.import_module("llm.modern_gpt")
+            data.dataset(settings["p"], settings["fraction"], 0)
+        except Exception:
+            settings = None
+        try:
+            run_module = importlib.import_module("repro.run")
+            if settings is not None:   # before repro/ablation.py imports run_seed from it
+                watched, heard, undo = _watch(run_module, sys.modules["llm.modern_gpt"], data, settings["p"], steps, progress)
             run_grid = importlib.import_module("repro.ablation").run_grid
         except Exception:
             return "grid"
-        try:
-            settings = importlib.import_module("repro.settings").SETTINGS
-            importlib.import_module("llm.modern_gpt")
-            importlib.import_module("repro.data").dataset(settings["p"], settings["fraction"], 0)
-        except Exception:
+        if settings is None:
             return "model"
         device = "cuda" if torch.cuda.is_available() else "cpu"
         try:
-            run_grid(settings, changes or CHANGES, steps, str(folder / "ablation.jsonl"), device, progress)
+            run_grid(settings, changes or CHANGES, steps, str(folder / "ablation.jsonl"), device, heard)
         except Exception:
             return "grid"
         used = {"llm", "repro/data", "repro/settings", "repro/log", "repro/run", "repro/grid"}   # what training the grid uses
-        return {"runs": my_runs(), "stand_ins": [f"{package}/{module}.py" for package, module, _, _ in stand
-                                                 if package == "llm" or f"{package}/{module}" in used]}
+        return {"runs": my_runs(), "watched": [{k: r[k] for k in ("weight_decay", "fraction", "train", "log", "moments")} for r in watched],
+                "stand_ins": [f"{package}/{module}.py" for package, module, _, _ in stand
+                              if package == "llm" or f"{package}/{module}" in used]}
     finally:
+        if undo is not None:
+            undo()
         projects.forget()
 
 

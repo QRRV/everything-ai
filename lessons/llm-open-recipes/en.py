@@ -315,7 +315,7 @@ def text_demo():
         mo.md(f"""
         ### A few hundred steps of the recipe
 
-        The button below trains your ModernGPT with what this lesson read from nanochat: the size of depth {C.DEPTH} by nanochat's rule, a width of {_dim} with {_heads} heads, and your `lr_multiplier` with nanochat's defaults, a warmup of {C.SCHEDULE['warmup']} steps and a warmdown over the last {round(100 * C.SCHEDULE['warmdown'])}% to {round(100 * C.SCHEDULE['final'])}% of the peak, for {C.STEPS} steps of {C.BATCH} windows of {C.BLOCK} tokens. It reads the windows with your `TokenWindows` from the shards of [Project: a pretraining data pipeline](/course/open/llm-data-pipeline?lang=en), and holds the last shard back to validate on. The optimizer is AdamW, at a peak of {C.number(C.PEAK, 3, L.lang)}, not Muon. On the course's computer, on its CPU, the run took about {round(C.MEASURED['seconds'] / 60)} minutes, on 2 threads; on a GPU, it is much faster. While it trains, a chart shows the loss of every step, with the course's run dashed beside it.
+        The button below trains your ModernGPT with what this lesson read from nanochat: the size of depth {C.DEPTH} by nanochat's rule, a width of {_dim} with {_heads} heads, and your `lr_multiplier` with nanochat's defaults, a warmup of {C.SCHEDULE['warmup']} steps and a warmdown over the last {round(100 * C.SCHEDULE['warmdown'])}% to {round(100 * C.SCHEDULE['final'])}% of the peak, for {C.STEPS} steps of {C.BATCH} windows of {C.BLOCK} tokens. It reads the windows with your `TokenWindows` from the shards of [Project: a pretraining data pipeline](/course/open/llm-data-pipeline?lang=en), and holds the last shard back to validate on. The optimizer is AdamW, at a peak of {C.number(C.PEAK, 3, L.lang)}, not Muon. On the course's computer, on its CPU, the run took about {round(C.MEASURED['seconds'] / 60)} minutes, on 2 threads; on a GPU, it is much faster. While it trains, a chart shows the loss of every step, with the course's run dashed beside it, and beside the chart the start of a story your model writes at that moment after *Once upon a time*, at temperature {C.number(C.D.B.TAU, 1, L.lang)} as in [Generate text with your GPT](/course/open/gpt-generate?lang=en). After the run you can go back through it, with the story it wrote before the first step and after every {C.STEPS // C.MOMENTS} steps. Writing those stories takes extra time, which the seconds of the run leave out.
         """),
         L.course_versions(),
     ])
@@ -342,11 +342,18 @@ def demo_train(train_button, box_lr, result_lr):
         _out = mo.vstack([mo.md("*Press the button to start the run. Until then, the course's run:*"), _course, mo.md(_verdict)])
     else:
         _live = L.live({"title": "Your run: the training loss of every step", "x": "step", "y": "loss per token",
-                        "alt": "The training loss of every step of your run so far, in grey, and its mean over the last 10 steps as the thicker line; dashed, the course's run."}, C.STEPS, window=10)
+                        "alt": "The training loss of every step of your run so far, in gray, and its mean over the last 10 steps as the thicker line; dashed, the course's run."}, C.STEPS, window=10, look_every=6.0)
         _live.reference(C.course_curve(), "the course's run", role="loss")
         _live.line(f"**Training** · step 1 of {C.STEPS} …")   # the course's run shows from the press of the button
 
+        _now = {}   # the last report, for the story the model writes now beside the chart
+        _wrote = {"now": "What it writes now, after step {step}",
+                  "alt_now": "The start of a story your model writes now after Once upon a time, which is in gray, at temperature 0.8 with the same seed at every look."}
+
         def _progress(_p):
+            if not _now:   # from the first report on, the story beside the chart
+                _live.watch(lambda: C.now_picture(_now["last"], _wrote))
+            _now["last"] = _p
             _live.extend(_p["fresh"], f"**Step {_p['step']} of {_p['steps']}** · training loss {C.number(_p['loss'], 2, L.lang)} per token · {round(_p['seconds'])} s")
         _r = C.run(run_code(box_lr.value).names["lr_multiplier"], _progress)
         if _r == "run":
@@ -354,8 +361,12 @@ def demo_train(train_button, box_lr, result_lr):
         else:
             _on = "the CPU" if _r["device"] == "cpu" else "the GPU"
             _out = mo.vstack([
-                mo.Html(C.curve_picture([(_m["curve"], True), (_r["curve"], False)], {**_labels, "key": "— your run   - - the course's",
-                                                                                      "alt": f"The training loss of your run, from {C.number(_r['curve'][0], 1, L.lang)} after 10 steps down to {C.number(_r['curve'][-1], 2, L.lang)} after 300, next to the course's run."})),
+                L.explore("rewind", "step", lambda _v: C.rewind_frame(_r, int(_v), {**_labels, "key": "— your run   - - the course's",
+                                                                                   "alt": f"The training loss of your run, from {C.number(_r['curve'][0], 1, L.lang)} after 10 steps down to {C.number(_r['curve'][-1], 2, L.lang)} after 300, next to the course's run, with a dashed line at the chosen step.",
+                                                                                   "wrote": "What it wrote at that moment", "alt_wrote": "The start of the story your model wrote after step {step}, after Once upon a time, which is in gray, at temperature 0.8 with the same seed at every moment.",
+                                                                                   "start": "**Before the first step**", "after": "**After step {step}** · training loss {loss} per token, over the last 10 steps"}),
+                          start=C.moments()[-1], values=C.moments(), role="",
+                          task="Go back to before the first step, then forward: from which moment on does the story have words, and from which moment sentences?"),
                 mo.md(f"""Your ModernGPT of {C.number(_r['params'], 0, L.lang)} parameters trained for {C.STEPS} steps on {_on}, in {round(_r['seconds'])} seconds. Its validation loss on the held-back shard is **{C.number(_r['val'], 2, L.lang)} per token**, {C.number(_r['per_char'], 2, L.lang)} per character. {_verdict}"""),
             ])
     _out

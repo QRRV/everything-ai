@@ -352,7 +352,7 @@ def text_demo():
     mo.md(r"""
     ### Wat je project nu kan
 
-    De cel hieronder maakt je eigen `DigitsMLP(64)`, traint het met je eigen `fit` op de 6.000 trainingscijfers, 10 epochs met mini-batches van 64 en $\eta$ = 0,5, en meet het op de 1.000 testcijfers, die het nooit zag. Dat duurt een seconde of twee. De cel gebruikt je eigen modules, dus hij werkt zodra oefening 2 en 3 af zijn.
+    De cel hieronder maakt je eigen `DigitsMLP(64)`, traint het met je eigen `fit` op de 6.000 trainingscijfers, 10 epochs met mini-batches van 64 en $\eta$ = 0,5, en meet het op de 1.000 testcijfers, die het nooit zag. Dat duurt een seconde of twee. Terwijl het traint, toont een grafiek de gemiddelde loss van elke 10 mini-batches, en daarnaast of daaronder wat je MLP op dat moment gokt bij één testcijfer van elke soort, opnieuw getekend terwijl het traint. Daarna kun je door de epochs terugspoelen, met zijn gokken zoals ze toen waren. De cel gebruikt je eigen modules, dus hij werkt zodra oefening 2 en 3 af zijn.
     """)
     return
 
@@ -360,23 +360,50 @@ def text_demo():
 @app.cell(hide_code=True)
 def demo_digits(result_fit, result_mlp):
     result_mlp, result_fit  # run again when exercise 2 or 3 saves your module
-    _result = C.trained()
+    _now = {}   # the live chart, made at the first report
+
+    def _progress(_p):
+        if "chart" not in _now:
+            _now["chart"] = L.live({"title": "Je MLP", "x": "epoch", "y": "loss", "alt": "De gemiddelde loss van elke 10 mini-batches van je training tot nu toe."}, _p["epochs"], low=0.0,
+                                   window=3, key=[("loss", False, "gemiddelde loss van 10 mini-batches")])
+            _now["chart"].watch(lambda: C.now_picture(_p["look"](), "Wat je MLP nu gokt bij één testcijfer van elke soort", L.lang))
+        if "loss" in _p:   # every 10 mini-batches
+            _now["chart"].add(_p["epoch"] - 1 + _p["batch"] / _p["batches"], _p["loss"],
+                              f"**Je MLP** · epoch {_p['epoch']} van {_p['epochs']} · batch {_p['batch']} van {_p['batches']} · loss {L.number(_p['loss'], 3)}")
+        elif "batch" in _p:
+            _now["chart"].line(f"**Je MLP** · epoch {_p['epoch']} van {_p['epochs']} · batch {_p['batch']} van {_p['batches']}")
+
+    _result = C.trained(_progress)
     if _result is None:
         _out = mo.md("*Maak eerst oefening 2 en 3 af: dan staan je `DigitsMLP` en je `fit` in je project, en gebruikt deze cel ze.*")
-    elif _result == "slow":
-        _out = mo.md("*Trainen met je `fit` in `work/projects/nn/torch_train.py` duurt op de 6.000 cijfers langer dan een minuut. Gaat hij in elke epoch één keer langs de mini-batches van `loader`?*")
-    elif _result == "mlp":
-        _out = mo.md("*De `DigitsMLP` in `work/projects/nn/torch_mlp.py` geeft niet meer de logits die de check verwacht, of stopt met een fout. Heb je dat bestand veranderd? Verwijder het, en check oefening 2 opnieuw: de check bewaart je class dan opnieuw.*")
-    elif _result == "fit":
-        _out = mo.md("*De `fit` in `work/projects/nn/torch_train.py` traint niet meer zoals de check verwacht, of stopt met een fout. Heb je dat bestand veranderd? Verwijder het, en check oefening 3 opnieuw: de check bewaart je functie dan opnieuw.*")
+    elif isinstance(_result, str):
+        _note = {
+            "slow": "*Trainen met je `fit` in `work/projects/nn/torch_train.py` duurt op de 6.000 cijfers langer dan een minuut. Gaat hij in elke epoch één keer langs de mini-batches van `loader`?*",
+            "mlp": "*De `DigitsMLP` in `work/projects/nn/torch_mlp.py` geeft niet meer de logits die de check verwacht, of stopt met een fout. Heb je dat bestand veranderd? Verwijder het, en check oefening 2 opnieuw: de check bewaart je class dan opnieuw.*",
+            "fit": "*De `fit` in `work/projects/nn/torch_train.py` traint niet meer zoals de check verwacht, of stopt met een fout. Heb je dat bestand veranderd? Verwijder het, en check oefening 3 opnieuw: de check bewaart je functie dan opnieuw.*",
+        }[_result]
+        _out = _now["chart"].stopped(_note) if "chart" in _now else mo.md(_note)   # a run that stops keeps its chart so far
     else:
-        _accuracy, _losses = _result
+        _accuracy, _losses, _looked = _result
         _digit, _baseline = C.baseline()
         _right = round(_accuracy * 1000)
+        _labels = {"title": "De loss van je training, per epoch", "epoch": "epoch", "loss": "gemiddelde loss", "alt": f"Een lijn door 10 punten, één per epoch: de gemiddelde loss van de mini-batches daalt van {L.number(_losses[0], 2)} in de eerste epoch naar {L.number(_losses[-1], 2)} in de tiende, eerst snel en dan langzamer."}
+        _when = list(range(1, len(_losses) + 1)) if len(_looked) == len(_losses) and all(_looked) else []
+
+        def _frame(_e):
+            _e = int(_e)
+            _right_now = C.right_of(_looked[_e - 1])
+            return (C.epoch_frame(_losses, _looked, _e, _labels, "Wat je MLP na deze epoch gokte bij één testcijfer van elke soort", L.lang),
+                    f"Na epoch {_e}: je MLP leest {_right_now} van deze 10 testcijfers goed; de gemiddelde loss van die epoch was {L.number(_losses[_e - 1], 2)}.")
+
+        if len(_when) > 1:   # rewinding through the epochs, with its guesses as they were then
+            _rewind = L.explore("rewind", "epoch", _frame, start=_when[-1], values=_when, role="",
+                                task="Ga terug naar epoch 1, en dan weer vooruit: welke cijfers leest je MLP het eerst goed?")
+        else:
+            _rewind = mo.Html(C.losses_picture(_losses, _labels))
         _out = mo.vstack([
             mo.md(f"""Je MLP leest <span class="ea-num">{L.number(_right, 0)}</span> van de 1.000 testcijfers goed: een accuracy van <span class="ea-num">{L.number(_accuracy, 3)}</span>. Je lineaire classifier las er {L.number(C.LINEAR, 0)}, en altijd het vaakste cijfer zeggen, een {_digit}, haalt <span class="ea-num">{L.number(_baseline, 3)}</span>. Je MLP leest er dus {L.number(1000 - _right, 0)} fout, waar de lineaire classifier er {L.number(1000 - C.LINEAR, 0)} fout las."""),
-            mo.Html(C.losses_picture(_losses, {"title": "De loss van je training, per epoch", "epoch": "epoch", "loss": "gemiddelde loss",
-                                               "alt": f"Een lijn door 10 punten, één per epoch: de gemiddelde loss van de mini-batches daalt van {L.number(_losses[0], 2)} in de eerste epoch naar {L.number(_losses[-1], 2)} in de tiende, eerst snel en dan langzamer."})),
+            _rewind,
             mo.md(f"""Elk punt is de gemiddelde loss van de 94 mini-batches van één epoch, zoals je `fit` hem teruggeeft: van <span class="c-loss ea-num">{L.number(_losses[0], 2)}</span> in de eerste epoch naar <span class="c-loss ea-num">{L.number(_losses[-1], 2)}</span> in de tiende. Op de trainingscijfers blijft de loss dalen. Of dat ook geldt voor cijfers die het model nooit zag, ontdek je in *Loss curves lezen*, twee lessen verder."""),
         ])
     _out

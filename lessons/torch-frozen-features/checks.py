@@ -3,7 +3,8 @@
 """Checks of the lesson torch-frozen-features: new_head, which freezes every layer of the course's digit reader and
 gives it a new last layer on its 64 hidden features. The new task: digits from an old scanner that puts grey speckles
 on every image (QMNIST with noise), with only 100 labeled ones. The demo trains the new last layer of the learner's
-model on them, and a DigitCNN from scratch, and tests both and the digit reader as it is on 1,000 such digits."""
+model on them, and a DigitCNN from scratch, and tests both and the digit reader as it is on 1,000 such digits; while
+they train and after every epoch it shows what each network guesses and its second convolution (decision 1.17)."""
 import copy
 import functools
 import html
@@ -13,8 +14,8 @@ import numpy as np
 import torch   # imported once, when the lesson opens: the first import takes longer than a check may
 from torch import nn
 
-from everything_ai import paths
-from everything_ai.check import FunctionBox, Mistake, run_code, with_time_limit
+from everything_ai import live, netview, paths, yours
+from everything_ai.check import FunctionBox, Mistake, Timeout, run_code, with_time_limit
 
 DATA = "data/qmnist-small.npz"   # the first 6,000 training and 1,000 test images of QMNIST: see data/README.md
 LABELED = 100                    # the labeled digits of the new task: the first 100 of the training images
@@ -22,6 +23,9 @@ SPECKLE = 0.5                     # the scanner adds to every pixel a random amo
 HEAD_LR, HEAD_EPOCHS = 0.01, 30   # the new last layer, on frozen features
 SCRATCH_LR, SCRATCH_EPOCHS = 0.003, 60
 BATCH = 32
+WATCHED = "conv2"   # the layer the demo shows of each network: its second convolution
+KEPT = (1, 2, 3, 5, 10, 15, 20, 25, 30, 40, 50, 60)   # the epochs the rewind after the run goes back to
+RUNS = ("scratch", "frozen")   # the network from scratch first, then the frozen one with its new last layer
 # The course's runs with the course's code, on one thread, for seeds 0 to 4: test images read right of 1,000, lowest and
 # highest. "clothes" is the same pair of runs on the first 100 images of Fashion-MNIST, tested on its 1,000 test images.
 REFERENCE = {"as-is": (729, 729), "scratch": (629, 669), "frozen": (860, 883),
@@ -44,21 +48,26 @@ def scanner_digits():
     return X, torch.tensor(d["train_labels"][:LABELED], dtype=torch.int64), X_test, torch.tensor(d["test_labels"], dtype=torch.int64)
 
 
-def train(model, params, X, y, lr: float, epochs: int, seed: int = 0) -> None:
+def train(model, params, X, y, lr: float, epochs: int, seed: int = 0, heard=None) -> None:
     """The course's training loop: mini-batches of 32 in a new order every epoch, cross-entropy, and the optimizer
-    Adam, which a later lesson explains, on `params`, the parameters that should learn."""
+    Adam, which a later lesson explains, on `params`, the parameters that should learn. After every epoch,
+    heard(epoch, epochs, the mean loss of its mini-batches), when given: the demo looks at the model then."""
     torch.manual_seed(seed)
     opt = torch.optim.Adam(params, lr=lr)
     loss_fn = nn.CrossEntropyLoss()
     model.train()
-    for _ in range(epochs):
+    for e in range(1, epochs + 1):
         order = torch.randperm(len(X))
+        losses = []
         for i in range(0, len(X), BATCH):
             batch = order[i:i + BATCH]
             loss = loss_fn(model(X[batch]), y[batch])
             opt.zero_grad()
             loss.backward()
             opt.step()
+            losses.append(float(loss.detach()))
+        if heard is not None:
+            heard(e, epochs, sum(losses) / len(losses))
     model.eval()
 
 
@@ -273,20 +282,104 @@ CASES = [
 
 # --- the demo: the new last layer on 100 labeled digits of the scanner, against a DigitCNN from scratch -------------------
 
-def _runs(new_head, seed: int) -> dict:
+def one_each() -> list:
+    """The first speckled test digit of each kind, 0 to 9: what the demo shows its networks guess."""
+    _, _, _, y_test = scanner_digits()
+    return [int((y_test == k).nonzero()[0]) for k in range(10)]
+
+
+def now_pictures(seen: dict, heads: dict, lang: str, uid: str) -> list:
+    """What one network of the demo makes at one moment of its run, as `look` or the rewind gives it: its guess for
+    the first speckled test digit of each kind, under heads["guesses"], and under them its second convolution on the
+    9, under heads["layer"] with {name} the layer's name. `uid` keeps the masks of the layer apart from those of
+    another picture on the page."""
+    _, _, X_test, _ = scanner_digits()
+    said, right = [str(g) for g in seen["guesses"]], [str(k) for k in seen["truth"]]
+    alt = {"en": "The first speckled test digit of each kind, each with the digit the network guessed, and in brackets the right digit where it is wrong: ",
+           "nl": "Het eerste gespikkelde testcijfer van elke soort, elk met het cijfer dat het netwerk gokte, en tussen haakjes het goede cijfer waar het fout is: "}
+    picture = yours.guesses([X_test[place].reshape(28, 28).numpy() for place in one_each()], said, right,
+                            alt[lang] + "; ".join(f"{r}: {g}" for r, g in zip(right, said)) + ".", title=heads["guesses"])
+    return netview.moment(picture, seen.get("layer"), heads["layer"], lang, uid, plain=True)   # before the cnn lessons: no feature maps
+
+
+def at_epoch(result: dict, name: str, e: int) -> int:
+    """Where the rewind at epoch e is in the run `name`: the place of e among the epochs it kept, or of its last
+    epoch for the run of 30 when e lies beyond it."""
+    kept = [k for k, _ in result["tests"][name]]
+    return kept.index(min(e, kept[-1]))
+
+
+def curves_picture(result: dict, labels: dict, lang: str, at: int | None = None) -> str:
+    """The loss on the 1,000 test digits of both networks of the demo, at the epochs the run kept: the frozen one with
+    its new last layer as the run, in the colour of loss, and the one from scratch thin, dashed and grey beside it,
+    named labels["scratch"], as the live chart draws it. With `at`, a line at that epoch, for rewinding."""
+    run = live.Live(labels, SCRATCH_EPOCHS, lang=lang, low=0.0)
+    run.reference(list(result["tests"].get("scratch", [])), labels["scratch"], role="ink-2")
+    run.xs = [e for e, _ in result["tests"].get("frozen", [])]
+    run.ys = [v for _, v in result["tests"].get("frozen", [])]
+    return run.picture(at=at)
+
+
+def epoch_frame(result: dict, e: int, labels: dict, heads: dict, lang: str) -> str:
+    """The rewind at epoch e, one the runs kept: the test loss of both networks with a line at e, then for the network
+    from scratch and then for the frozen one, its guesses and its second convolution as they were after that epoch,
+    or for the frozen one after its last epoch where e lies beyond it (decision 1.17); heads[name] gives the titles
+    of each, as for now_pictures."""
+    parts = []
+    for name in RUNS:
+        k = at_epoch(result, name, e)
+        seen = {"guesses": result["looked"][name][k], "truth": result["truth"], "layer": result["layers"][name][k]}
+        parts += now_pictures(seen, heads[name], lang, f"nv-frozen-{name}-epoch-{e}")
+    return live.rewound(curves_picture(result, labels, lang, at=e), parts)
+
+
+def _hearing(model, name: str, show, out: dict):
+    """How the demo hears one run of the course's training loop: every epoch its loss on the training digits, and at
+    the epochs of KEPT and the last its loss on the 1,000 test digits too ("val_loss"), with the guesses and the
+    second convolution kept for the rewind (netview.hearing); every report goes on to `show` with "look", what the
+    network makes then. It looks in eval mode without a graph (netview.looking), so the run stays the same. The test
+    loss only at those epochs: at every epoch it would take longer than the training."""
+    _, _, X_test, y_test = scanner_digits()
+    shown = one_each()
+    out["looked"][name], out["layers"][name], out["curves"][name], out["tests"][name] = [], [], [], []
+    hear = netview.hearing(model, X_test[shown], out["truth"], X_test[shown[-1:]], show, out["looked"][name], out["layers"][name], WATCHED)
+
+    def heard(e: int, epochs: int, loss: float):
+        out["curves"][name].append((e, loss))
+        report = {"run": name, "epoch": e, "epochs": epochs, "loss": loss}
+        if e in KEPT or e == epochs:
+            try:
+                with netview.looking(model):
+                    test = float(nn.functional.cross_entropy(model(X_test), y_test))
+            except Timeout:
+                raise
+            except Exception:   # a model of the learner's that does not give 10 scores: no test loss, the run goes on
+                test = float("nan")
+            out["tests"][name].append((e, test))
+            report["val_loss"] = test
+        hear(report)
+    return heard
+
+
+def _runs(new_head, seed: int, show=None) -> dict:
     """One run of each: the digit reader as it is, a new DigitCNN with a new last layer trained from scratch on the 100
-    labeled digits, and the digit reader through new_head with only its new last layer trained on them."""
+    labeled digits, and the digit reader through new_head with only its new last layer trained on them. For the live
+    chart and the rewind, per network: its loss on the training digits after every epoch, as (epoch, loss)
+    ("curves"), and at the epochs of KEPT and its last its loss on the test digits ("tests", the same way), its guesses
+    for the first test digit of each kind ("looked", with the right digits in "truth") and its second convolution on
+    the 9 ("layers"); `show` hears every epoch of both, "scratch" and then "frozen"."""
     from everything_ai.models import DigitCNN, digit_cnn
     X, y, X_test, y_test = scanner_digits()
-    out = {"as-is": right(digit_cnn(), X_test, y_test)}
+    out = {"as-is": right(digit_cnn(), X_test, y_test), "curves": {}, "tests": {}, "looked": {}, "layers": {},
+           "truth": [int(y_test[place]) for place in one_each()]}
     torch.manual_seed(seed)
     scratch = DigitCNN()
     scratch.embed, scratch.out = nn.Identity(), nn.Linear(64, 10)
-    train(scratch, list(scratch.parameters()), X, y, SCRATCH_LR, SCRATCH_EPOCHS, seed)
+    train(scratch, list(scratch.parameters()), X, y, SCRATCH_LR, SCRATCH_EPOCHS, seed, _hearing(scratch, "scratch", show, out))
     out["scratch"] = right(scratch, X_test, y_test)
     torch.manual_seed(seed)
     frozen = new_head(digit_cnn())
-    train(frozen, [p for p in frozen.parameters() if p.requires_grad], X, y, HEAD_LR, HEAD_EPOCHS, seed)
+    train(frozen, [p for p in frozen.parameters() if p.requires_grad], X, y, HEAD_LR, HEAD_EPOCHS, seed, _hearing(frozen, "frozen", show, out))
     out["frozen"] = right(frozen, X_test, y_test)
     return out
 
@@ -295,15 +388,15 @@ def course_new_head():
     return run_code(_n()).names["new_head"]
 
 
-def demo(text) -> dict | str:
+def demo(text, show=None) -> dict | str:
     """The demo with the learner's new_head once it is right, else the course's, seed 0, on one thread: the test
-    digits read right of each way, and whose new_head it was. If the learner's new_head fails here after all, the
-    course's runs instead."""
+    digits read right of each way, whose new_head it was, and what _runs keeps for the rewind; `show` hears both runs
+    while they train. If the learner's new_head fails here after all, the course's runs instead, from epoch 1 again."""
     ran = run_code(text) if text else None
     fn = ran.names.get("new_head") if ran is not None and ran.error is None else None
-    yours = callable(fn)
-    fn = fn if yours else course_new_head()
+    mine = callable(fn)
+    fn = fn if mine else course_new_head()
     try:
-        return {**with_time_limit(lambda: _runs(fn, 0), 60), "yours": yours}
+        return {**with_time_limit(lambda: _runs(fn, 0, show), 60), "yours": mine}
     except Exception:
-        return {**with_time_limit(lambda: _runs(course_new_head(), 0), 60), "yours": False}
+        return {**with_time_limit(lambda: _runs(course_new_head(), 0, show), 60), "yours": False}

@@ -338,7 +338,7 @@ def text_demo():
 
         On a CPU, and with a model this small, a step of LoRA is not faster than one of full SFT: the backward pass still goes through every layer. LoRA saves memory, and file size: the optimizer keeps its two numbers only for what learns.
 
-        While it trains, the chart shows the loss of every step, with your run of full SFT on the same model dashed beside it, if you have done one.
+        While it trains, the chart shows the loss of every step, with your run of full SFT on the same model dashed beside it, if you have done one. Beside the chart you see every few seconds what the model with your adapters answers at that moment to the first test instruction, as in *Your LoRA run, step by step* below.
         """),
         L.course_versions(),
     ])
@@ -362,7 +362,11 @@ def demo_lora(box_add, box_layer, box_merge, lora_button, rank_pick, result_add,
         _note = "*Finish exercises 1 to 3 first: the demo fine-tunes with your `LoRALinear` and `add_lora`, and merges with your `merge_lora`.*"
     elif lora_button.value:
         _live = L.live({"title": "Your LoRA run: the loss of every step", "x": "step", "y": "loss",
-                        "alt": f"The loss of every step of your LoRA run so far, in grey, and its mean over the last {max(1, C.STEPS // 50)} steps as the thicker line; dashed, the loss of your run of full SFT on the same model, if you have done one."}, C.STEPS, low=0.0)
+                        "alt": f"The loss of every step of your LoRA run so far, in gray, and its mean over the last {max(1, C.STEPS // 50)} steps as the thicker line; dashed, the loss of your run of full SFT on the same model, if you have done one."}, C.STEPS, low=0.0, look_every=8.0)
+        _now = {}   # the last report of the run, for what the model answers now beside the chart
+        _seen = {"title": "What it answers now, after step {step}", "lang": "en",
+                 "alt": "What the model with your adapters answers now to the first test instruction, which is in gray, drawn with the same seed as at the moments of the replay, and under it whether it uses every word and stops by itself.",
+                 "used": "every word used", "not_used": "not every word used", "stopped": "stopped by itself", "not_stopped": "did not stop by itself"}
 
         def _progress(_p):
             if _p["phase"] == "pairs":
@@ -371,6 +375,10 @@ def demo_lora(box_add, box_layer, box_merge, lora_button, rank_pick, result_add,
             elif _p["phase"] == "after":
                 _live.line(f"**After LoRA** · instruction {_p['done']} of {_p['total']} · every word used: {_p['used']}")
             else:
+                if "look" in _p and not _now:   # from the first step on, what the model answers beside the chart
+                    _live.watch(lambda: C.T.now_picture(_now["train"], _seen))
+                if "look" in _p:
+                    _now["train"] = _p
                 _live.extend(_p["fresh"], f"**Step {C.number(_p['step'], 0, L.lang)} of {C.number(_p['steps'], 0, L.lang)}** · loss {C.number(_p['loss'], 3, L.lang)} · {C.number(_p['seconds'] / 60, 1, L.lang)} minutes")
         _r = C.run(rank_pick.value, _progress)
         if _r == "run":

@@ -228,7 +228,7 @@ def text_demo():
     mo.md(r"""
     ### LayerNorm tegen je RMSNorm
 
-    De knop traint je `GPT` uit [Je GPT in elkaar zetten](/course/open/gpt-assemble?lang=nl) twee keer op Tiny Shakespeare, met dezelfde start en dezelfde 400 mini-batches: één keer zoals hij is, en één keer met je `RMSNorm` op de plek van elke `nn.LayerNorm`. Een kleine GPT, 2 blocks met $d = 64$, op de CPU: het duurt ongeveer een minuut. Waar een module van jou ontbreekt, springt de versie van de course in. Hij werkt zodra oefening 1 goed is. Tijdens het trainen laat een grafiek de training loss van elke stap zien: eerst met LayerNorm, dan met je RMSNorm, met daarnaast gestippeld de run met LayerNorm. De laatste grafiek blijft boven de tabel staan.
+    De knop traint je `GPT` uit [Je GPT in elkaar zetten](/course/open/gpt-assemble?lang=nl) twee keer op Tiny Shakespeare, met dezelfde start en dezelfde 400 mini-batches: één keer zoals hij is, en één keer met je `RMSNorm` op de plek van elke `nn.LayerNorm`. Een kleine GPT, 2 blocks met $d = 64$, op de CPU: het duurt ongeveer een minuut. Waar een module van jou ontbreekt, springt de versie van de course in. Hij werkt zodra oefening 1 goed is. Tijdens het trainen laat een grafiek de training loss van elke stap zien: eerst met LayerNorm, dan met je RMSNorm, met daarnaast gestreept de run met LayerNorm. Naast de grafiek zie je wat het model op dat moment schrijft na `ROMEO:`, elk teken getrokken uit zijn kansen, zoals in [Sampling: laat het model schrijven](/course/open/lm-sampling?lang=nl). Na de run kun je beide runs terugspoelen, met wat beide modellen schreven voor de eerste stap en na elke 100 stappen.
     """)
     return
 
@@ -248,14 +248,19 @@ def demo_train(box_rms, result_rms, train_button):
         _out = mo.md("*Druk op de knop om te trainen.*")
     else:
         _now = {}   # the live chart of each run, made at its first steps
+        _heard = {}   # het laatste bericht van elke run, voor wat zijn model nu schrijft naast zijn grafiek
+        _wrote = {"now": "Wat het nu schrijft, na stap {step}",
+                  "alt_now": "Wat het model nu schrijft na ROMEO: en een nieuwe regel, die in grijs staan: elk teken getrokken uit zijn kansen, telkens met dezelfde seed."}
 
         def _progress(_p):
             if _p["run"] not in _now:
                 _rms = _p["run"] == "rms"
                 _now[_p["run"]] = L.live({"title": "Je RMSNorm: de training loss van elke stap" if _rms else "LayerNorm: de training loss van elke stap", "x": "stap", "y": "loss",
-                                          "alt": "De training loss van elke stap van de run met je RMSNorm tot nu toe, in grijs, en als dikkere lijn het gemiddelde over de laatste 10 stappen; gestippeld hetzelfde gemiddelde van de run met LayerNorm." if _rms else "De training loss van elke stap van de run met LayerNorm tot nu toe, in grijs, en als dikkere lijn het gemiddelde over de laatste 10 stappen."}, _p["steps"], window=10)
+                                          "alt": "De training loss van elke stap van de run met je RMSNorm tot nu toe, in grijs, en als dikkere lijn het gemiddelde over de laatste 10 stappen; gestreept hetzelfde gemiddelde van de run met LayerNorm." if _rms else "De training loss van elke stap van de run met LayerNorm tot nu toe, in grijs, en als dikkere lijn het gemiddelde over de laatste 10 stappen."}, _p["steps"], window=10, look_every=2.0)
+                _now[_p["run"]].watch(lambda _r=_p["run"]: C.now_picture(_heard[_r], _wrote))   # vanaf de eerste stappen staat naast de grafiek wat het model schrijft
                 if _rms and "layer" in _now:
                     _now["rms"].reference(list(zip(_now["layer"].xs, _now["layer"].means())), "LayerNorm", role="loss")
+            _heard[_p["run"]] = _p
             _who = "LayerNorm" if _p["run"] == "layer" else "Je RMSNorm"
             _now[_p["run"]].extend(_p["fresh"], f"**{_who}** · stap {_p['step']} van {_p['steps']}")
 
@@ -269,10 +274,17 @@ def demo_train(box_rms, result_rms, train_button):
             _n = lambda _x, _d=0: C.number(_x, _d, L.lang)
             _l, _r = _m["layer"], _m["rms"]
             _stand = (" De versie van de course sprong in voor: " + ", ".join(f"`{_s}`" for _s in _m["stand_ins"]) + ".") if _m["stand_ins"] else ""
-            _pic = [mo.Html(_now["rms"].picture())] if "rms" in _now else []   # the RMSNorm run, LayerNorm dashed
-            if _pic and "layer" in _now and _now["rms"].xs and _now["rms"].xs == _now["layer"].xs:   # both with every step a number
+            _rewind = {"title": "Gemiddelde training loss over 10 stappen", "x": "stap", "y": "loss", "lang": "nl",
+                       "alt": "De gemiddelde training loss over 10 stappen van beide runs: LayerNorm dun en gestreept, je RMSNorm dik, met een gestreepte lijn bij de gekozen stap.",
+                       "layer": "LayerNorm", "rms": "je RMSNorm", "wrote": "Wat beide op dat moment schreven",
+                       "alt_wrote": "Wat beide modellen schrijven na stap {step}, na ROMEO: en een nieuwe regel, getrokken met dezelfde seed: eerst het model met LayerNorm, dan dat met je RMSNorm.",
+                       "start": "**Voor de eerste stap**", "after": "**Na stap {step}**",
+                       "loss": "gemiddelde loss over de laatste 10 stappen: LayerNorm {layer}, je RMSNorm {rms}"}
+            _pic = [L.explore("rewind", "stap", lambda _v: C.rewind_frame(_m, int(_v), _rewind), start=C.moments()[-1], values=C.moments(), role="",
+                              task="Ga terug naar voor de eerste stap, en dan weer vooruit: wat leren beide modellen het eerst schrijven, en schrijven ze hetzelfde?")] if _m["rms"]["losses"] else []
+            if _pic and "layer" in _now and "rms" in _now and _now["rms"].xs and _now["rms"].xs == _now["layer"].xs:   # both with every step a number
                 _gap = max(abs(_a - _b) for _a, _b in zip(_now["rms"].means(), _now["layer"].means()))   # rounded up below
-                _pic.append(mo.md(f"In de grafiek liggen de twee runs op elkaar: hun gemiddelden over 10 stappen lagen nooit meer dan {_n(_gap + 0.0005, 3)} uit elkaar, dus de dikke lijn van je RMSNorm bedekt de gestippelde van LayerNorm." if _gap < 0.01 else f"In de grafiek lagen de gemiddelden over 10 stappen van de twee runs hooguit {_n(_gap + 0.0005, 3)} uit elkaar."))
+                _pic.append(mo.md(f"In de grafiek liggen de twee runs op elkaar: hun gemiddelden over 10 stappen lagen nooit meer dan {_n(_gap + 0.0005, 3)} uit elkaar, dus de dikke lijn van je RMSNorm bedekt de gestreepte van LayerNorm." if _gap < 0.01 else f"In de grafiek lagen de gemiddelden over 10 stappen van de twee runs hooguit {_n(_gap + 0.0005, 3)} uit elkaar."))
             _out = mo.vstack(_pic + [mo.md(f"""
     | | LayerNorm | je RMSNorm |
     |---|---|---|

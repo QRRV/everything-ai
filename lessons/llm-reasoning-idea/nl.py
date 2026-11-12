@@ -376,7 +376,7 @@ def text_demo():
     mo.md(rf"""
     ### Qwen3 met jouw prompt en jouw checker
 
-    De demo geeft Qwen3-0.6B-Base de eerste {C.QUESTIONS['cpu']} testvragen met je `few_shot_prompt`, zonder en met stappen, greedy, en leest elk antwoord met je `read_answer`; op een GPU alle {C.QUESTIONS['gpu']}, met een stemming over {C.VOTE['gpu']} samples. Op de CPU van de course met 2 threads duurde het {C.number(C.DEMO['minutes'], 1, 'nl')} minuten, gemeten; op een GPU is het niet gemeten. Greedy schrijven ligt vast: op een CPU zoals die van de course ligt je lijn met stappen op die van de course, gestippeld; een ander apparaat kan door afronding een token veranderen.
+    De demo geeft Qwen3-0.6B-Base de eerste {C.QUESTIONS['cpu']} testvragen met je `few_shot_prompt`, zonder en met stappen, greedy, en leest elk antwoord met je `read_answer`; op een GPU alle {C.QUESTIONS['gpu']}, met een stemming over {C.VOTE['gpu']} samples. Op de CPU van de course met 2 threads duurde het {C.number(C.DEMO['minutes'], 1, 'nl')} minuten, gemeten; op een GPU is het niet gemeten. Greedy schrijven ligt vast: op een CPU zoals die van de course ligt je lijn met stappen op die van de course, gestreept; een ander apparaat kan door afronding een token veranderen. Terwijl Qwen3 schrijft, zie je naast de grafiek zijn antwoord tot nu toe; als het klaar is, wat je `read_answer` erin las.
     """)
     return
 
@@ -426,20 +426,30 @@ def demo_run(box_prompt, box_read, box_vote, result_prompt, result_read, result_
         _direct = []
         _what = {"direct": "direct", "steps": "met stappen", "votes": f"{C.VOTE['gpu']} samples"}
 
-        def _show(_d):
+        _now = {}   # het laatste antwoord, tot nu toe terwijl Qwen3 het schrijft, naast de grafiek
+        _wrote = {"title": "Vraag {i} van {n}, {kind}: wat Qwen3 schrijft", "direct": "direct", "steps": "met stappen", "votes": "samples",
+                  "alt": "Wat Qwen3 tot nu toe schrijft bij de vraag, en als het klaar is wat je read_answer erin las, met het goede antwoord.",
+                  "read": "je read_answer las: {read} {mark}; het goede antwoord is {key}", "nothing": "niets"}
+
+        def _progress(_d):
             if _d["phase"] == "load":
                 _live.line("**Qwen3 laden** …")
             elif _d["phase"] == "answer":
                 _live.line(f"**Vraag {_d['i']} van {_d['n']}** · {_what[_d['kind']]} …")
-            elif _d["phase"] == "answered":
-                _live.line(f"**Vraag {_d['i']} van {_d['n']}** · {_what[_d['kind']]} · {_d['tokens']} tokens · {_d['seconds']:.0f} s · {'goed' if _d['right'] else 'fout'}")
+            elif _d["phase"] in ("writing", "answered"):
+                _now["last"] = _d   # wat Qwen3 schrijft, naast de grafiek: bij elk bericht opnieuw getekend, want het kijkt niet in het model
+                _live.watch(lambda: C.writing_picture(_now["last"], _wrote))
+                if _d["phase"] == "writing":
+                    _live.show()
+                else:
+                    _live.line(f"**Vraag {_d['i']} van {_d['n']}** · {_what[_d['kind']]} · {_d['tokens']} tokens · {_d['seconds']:.0f} s · {'goed' if _d['right'] else 'fout'}")
             elif _d["phase"] == "question":
                 _direct.append((_d["i"], _d["direct"]))
                 _live.reference(_direct, "")
                 _live.add(_d["i"], _d["steps"], f"**Vraag {_d['i']} van {_d['n']}:** tot nu toe {_d['steps']} goed met stappen, de lijn met punten, en {_d['direct']} direct, de grijze gestippelde lijn")
 
         _vote = run_code(box_vote.value).names["majority_vote"] if result_vote.state == "correct" else C.course_functions()[1]
-        _r = C.run(run_code(box_prompt.value).names["few_shot_prompt"], run_code(box_read.value).names["read_answer"], _vote, _show)
+        _r = C.run(run_code(box_prompt.value).names["few_shot_prompt"], run_code(box_read.value).names["read_answer"], _vote, _progress)
         if isinstance(_r, str):
             _out = _live.stopped({
                 "prompt": "*Je `few_shot_prompt` stopt met een fout bij een vraag van de demo, of geeft geen tekst. Haalt hij zijn check nog?*",

@@ -322,6 +322,8 @@ def text_demo():
         De knop schrijft een instructie voor elk verhaal van `data/tinystories-small.txt` behalve de laatste {C.HELD} dat een van de {len(C.WORDS)} zelfstandige naamwoorden van de lijst van de course noemt: het verhaal afgeknipt na zijn laatste zin die met zijn instructie in {C.MAX_LEN} tokens past, en een of twee van zijn zelfstandige naamwoorden als gevraagde woorden. Hij maakt de voorbeelden met je `sft_example`: ongeveer {C.number(round(_m['pairs'], -2), 0, L.lang)}. Dan beantwoordt je model uit [Capstone: je eigen kleine LLM pretrainen](/course/open/llm-pretrain-capstone?lang=nl), of dat van de course als je er geen hebt, {C.TESTS} instructies uit de laatste {C.HELD} verhalen, waar geen van de voorbeelden uit komt, en telt je `words_used` de antwoorden die elk woord gebruiken. Met maar {len(C.WORDS)} woorden om naar te vragen staan de meeste van deze instructies ook tussen de voorbeelden, elk met een ander verhaal: wat telt, is of het eigen verhaal van het model de woorden gebruikt. Dan {C.number(C.STEPS, 0, L.lang)} stappen SFT, met je `sft_batch` en je `pretrain_step` uit de capstone met een learning rate van {C.number(C.LR, 3, L.lang)}, een derde van die van de pretraining, en weer dezelfde {C.TESTS} instructies.
 
         Je `pretrain_step` hoeft niet te veranderen: `F.cross_entropy` slaat elk doel van -100 vanzelf over. Op de CPU van de course, met één thread, deed de knop er in totaal ongeveer {round((_m['seconds'] + _m['other_seconds']) / 60)} minuten over voor haar model uit de demorun van de capstone, van {C.number(_m['params'], 0, L.lang)} parameters; het eigen model van de course is ongeveer vijf keer zo groot, en doet er ongeveer vier keer zo lang over. Het gefinetunede model wordt bewaard in `work/projects/llm/sft.pt`, voor de lessen hierna.
+
+        Tijdens het trainen zie je naast de grafiek om de paar seconden wat je model op dat moment antwoordt op de eerste testinstructie, getrokken met dezelfde seed als in *Je run, stap voor stap* hieronder.
         """),
         L.course_versions(),
     ])
@@ -344,7 +346,11 @@ def demo_tune(box_batch, box_example, box_words, result_batch, result_example, r
         _note = "*Maak eerst oefening 1 tot en met 3 af: de demo finetunet met je `sft_example` en `sft_batch`, en telt met je `words_used`.*"
     elif tune_button.value:
         _live = L.live({"title": "Je run: de loss van elke stap", "x": "stap", "y": "loss",
-                        "alt": f"De loss van elke stap van je run tot nu toe, in grijs, en als dikkere lijn het gemiddelde over de laatste {max(1, C.STEPS // 50)} stappen."}, C.STEPS, low=0.0)
+                        "alt": f"De loss van elke stap van je run tot nu toe, in grijs, en als dikkere lijn het gemiddelde over de laatste {max(1, C.STEPS // 50)} stappen."}, C.STEPS, low=0.0, look_every=8.0)
+        _now = {}   # het laatste bericht van de run, voor wat het model nu antwoordt naast de grafiek
+        _seen = {"title": "Wat het nu antwoordt, na stap {step}", "lang": "nl",
+                 "alt": "Wat het model nu antwoordt op de eerste testinstructie, die in grijs staat, getrokken met dezelfde seed als op de momenten van het terugspoelen, en eronder of het elk woord gebruikt en zelf stopt.",
+                 "used": "elk woord gebruikt", "not_used": "niet elk woord gebruikt", "stopped": "zelf gestopt", "not_stopped": "niet zelf gestopt"}
 
         def _progress(_p):
             if _p["phase"] == "pairs":
@@ -353,6 +359,10 @@ def demo_tune(box_batch, box_example, box_words, result_batch, result_example, r
                 _when = "Voor SFT" if _p["phase"] == "before" else "Na SFT"
                 _live.line(f"**{_when}** · instructie {_p['done']} van {_p['total']} · elk woord gebruikt: {_p['used']}")
             else:
+                if "look" in _p and not _now:   # vanaf de eerste stap staat naast de grafiek wat het model antwoordt
+                    _live.watch(lambda: C.now_picture(_now["train"], _seen))
+                if "look" in _p:
+                    _now["train"] = _p
                 _live.extend(_p["fresh"], f"**Stap {C.number(_p['step'], 0, L.lang)} van {C.number(_p['steps'], 0, L.lang)}** · loss {C.number(_p['loss'], 3, L.lang)} · {C.number(_p['seconds'] / 60, 1, L.lang)} minuten")
         _r = C.run(run_code(box_example.value).names["sft_example"], run_code(box_batch.value).names["sft_batch"],
                    run_code(box_words.value).names["words_used"], _progress)

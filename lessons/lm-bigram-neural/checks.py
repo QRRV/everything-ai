@@ -3,7 +3,8 @@
 """Checks of the project lesson lm-bigram-neural: loss_of, the cross-entropy of a weight table on pairs of characters
 given as one-hot rows, and train, gradient descent on that table with an L2 penalty; each saved in the learner's
 project (work/projects/llm/) when right. And the picture of training on the start of the plays, and a demo that
-trains with the learner's code and lets the learned table write."""
+trains with the learner's code and lets the learned table write: while it trains, and at a few steps for the rewind
+after it, what the table writes at that moment (decision 1.17)."""
 import html
 import math
 import re
@@ -12,8 +13,9 @@ from functools import cache
 import numpy as np
 import torch   # imported once, when the lesson opens: the first import takes longer than a check may
 import torch.nn.functional as F
+from torch.optim.optimizer import register_optimizer_step_post_hook
 
-from everything_ai import paths, projects
+from everything_ai import live, paths, projects
 from everything_ai.check import FunctionBox, Mistake, run_code, with_time_limit, Timeout
 from everything_ai import yours
 
@@ -23,6 +25,9 @@ projects.builds_on(("llm", "sampling", "lm-sampling", "generate"))
 DATA = "data/tiny-shakespeare.txt"   # about 1.1 MB of plays by Shakespeare: see data/README.md
 START = 20_000                       # the network trains on the pairs of the first 20,000 characters: fast enough here
 STEPS, LR = 200, 100
+EVERY = 5                                            # the live chart hears the loss of every 5th step
+KEPT = (0, 5, 10, 20, 30, 50, 75, 100, 150, 200)     # the steps the rewind after the run goes back to
+SAMPLE = 80                                          # characters the table writes in the live picture and the rewind
 
 
 @cache
@@ -363,13 +368,102 @@ def _saved(module: str) -> bool:
     return (projects.folder() / "llm" / f"{module}.py").exists()
 
 
-def demo():
+def written(W, generate) -> str:
+    """What a table writes from "T", SAMPLE characters with seed 1, as the demo lets it write: the softmax of every
+    row, with `generate` of lm-sampling. A function of its own random numbers, so writing changes nothing in a run."""
+    probs = torch.softmax(torch.as_tensor(W).detach().float(), dim=1).numpy().astype(float)
+    probs = probs / probs.sum(axis=1, keepdims=True)
+    return generate(probs, list(chars()), "T", SAMPLE, 1)
+
+
+def watching(show=None) -> tuple:
+    """How the demo hears the learner's train while it runs (decision 1.17), without changing their code: a hook on
+    every step of an optimizer finds the table, the parameter of 65 by 65, and every 5th step `show` hears
+    {"step", "steps", "loss", "look"}, with the table's loss on the 20,000 characters and "look", what it writes at
+    that moment; at the steps of KEPT, and before the first step (a table of zeros), (step, loss, text) goes in the
+    list it gives back, for the rewind. A train without an optimizer is not heard. Gives (that list, a function that
+    hears step 0 and puts the hook on, to call under the demo's time limit since it runs the learner's generate, and
+    a function that takes the hook off). Measuring and writing look without a graph and draw no random number of PyTorch, so the run
+    stays the same, and a look that fails never stops it."""
+    run = run_code("from llm.sampling import generate")   # the learner's, or the course's when theirs is missing or broken
+    generate = run.names.get("generate") if run.error is None else None
+    x, y = start_pairs()
+    tx, ty, n, kept, steps = torch.tensor(x), torch.tensor(y), len(chars()), [], [0]
+
+    def heard(step: int, W):
+        def look() -> str:
+            try:
+                return written(W, generate) if generate is not None else ""
+            except Timeout:
+                raise
+            except Exception:   # a generate that stops: the picture shows no text
+                return ""
+        with torch.no_grad():
+            loss = float(F.cross_entropy(W[tx].float(), ty))
+        if step in KEPT:
+            kept.append((step, loss, look()))
+        if show is not None:
+            try:
+                show({"step": step, "steps": STEPS, "loss": loss, "look": look})
+            except Timeout:   # the demo's time limit, also when it falls while the chart draws
+                raise
+            except Exception:
+                pass
+
+    def hook(opt, args, kwargs):
+        steps[0] += 1
+        if steps[0] % EVERY and steps[0] not in KEPT:
+            return
+        try:
+            W = next((p for g in opt.param_groups for p in g["params"] if tuple(p.shape) == (n, n)), None)
+            if W is not None:
+                heard(steps[0], W.detach())
+        except Timeout:
+            raise
+        except Exception:   # the course's picture never stops the learner's train
+            pass
+
+    handles = []
+
+    def begin() -> None:
+        heard(0, torch.zeros((n, n)))
+        handles.append(register_optimizer_step_post_hook(hook))
+
+    def unwatch() -> None:
+        while handles:
+            handles.pop().remove()
+
+    return kept, begin, unwatch
+
+
+def curve_picture(kept: list, labels: dict, lang: str, at: int | None = None) -> str:
+    """The loss of the learner's table at the steps the demo kept, against the NLL of the counted table, dashed and
+    named labels["counted"], as the live chart draws it; with `at`, a line at that step, for rewinding."""
+    run = live.Live(labels, STEPS, lang=lang, low=0.0)
+    run.reference([(0, counted_nll()), (STEPS, counted_nll())], labels["counted"], role="ink-3")
+    run.xs, run.ys = [s for s, _, _ in kept], [v for _, v, _ in kept]
+    return run.picture(at=at)
+
+
+def now_picture(text: str, title: str) -> str:
+    """What the table writes at one moment, after "T": the prompt in grey and what it wrote in ink."""
+    return yours.writes(title, [("T", text[1:])], alt=title + ": " + text, width=320)
+
+
+def step_frame(kept: list, s: int, labels: dict, title: str, lang: str) -> str:
+    """The rewind at step s, one the demo kept: the loss with a line at s, and beside it what the table wrote then."""
+    text = next(w for step, _, w in kept if step == s)
+    return live.rewound(curve_picture(kept, labels, lang, at=s), [now_picture(text, title)])
+
+
+def demo(show=None):
     """For the demo: None when bigram_net.py or bigram_train.py is not in the project yet; "train" when the saved
     train no longer gives what the course's gives on the short text, or stops with an error; "net" when the saved
     loss_of does not give the NLL of the learned table, or stops with an error; "sampling" when generate stops with an
     error; "slow" when training takes more than 30 seconds; else a dict with the NLL of the learned table (worked out
-    with the learner's loss_of), the probability of "h" after "t", a text it wrote, and whether generate was the
-    learner's own."""
+    with the learner's loss_of), the probability of "h" after "t", a text it wrote, whether generate was the
+    learner's own, and for the rewind, at the steps of KEPT that it saw, (step, loss, what the table wrote then)
+    ("kept"). `show` hears the training while it runs (watching)."""
     if not (_saved("bigram_net") and _saved("bigram_train")):
         return None
     run = run_code("from llm.bigram_train import train")
@@ -383,12 +477,20 @@ def demo():
     except Exception:
         return "train"
     sx, sy = start_pairs()
+    kept, begin, unwatch = watching(show)
+
+    def watched_train():
+        begin()
+        return train(sx, sy, STEPS, LR, 0.0)
+
     try:
-        W = with_time_limit(lambda: train(sx, sy, STEPS, LR, 0.0), 30)
+        W = with_time_limit(watched_train, 30)
     except Timeout:
         return "slow"
     except Exception:
         return "train"
+    finally:
+        unwatch()
     W = torch.as_tensor(W).detach().float()
     run = run_code("from llm.bigram_net import loss_of")
     if run.error is not None:
@@ -412,7 +514,7 @@ def demo():
         written = with_time_limit(lambda: run.names["generate"](probs, cs, "T", 200, 1), 10)
     except Exception:
         return "sampling"
-    return {"nll": nll, "th": float(probs[cs.index("t"), cs.index("h")]), "text": written, "yours": yours}
+    return {"nll": nll, "th": float(probs[cs.index("t"), cs.index("h")]), "text": written, "yours": yours, "kept": kept}
 
 
 # What the tests feed each check, and what it must say: (exercise, what the learner typed, state, known mistake).

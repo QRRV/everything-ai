@@ -309,7 +309,7 @@ def text_demo():
     mo.md(f"""
     ### Wat je project nu kan
 
-    De cel hieronder gebruikt je project. Hij draait je overfit-test uit [Project: een diep netwerk laten trainen](/course/open/nn-deep-net-project?lang=nl) op je `SmallCNN`: {C.OVERFIT_STEPS} stappen met een learning rate van {C.number(C.OVERFIT_LR, 1, L.lang)} op de eerste 64 afbeeldingen. Daarna traint hij je `SmallCNN`, en je `DeepMLP` met He initialization, batch normalization en residual connections, met je Trainer: {C.EPOCHS} epochs op de 6.000 trainingsafbeeldingen, een learning rate van {C.number(C.LR, 2, L.lang)} met een warmup van één epoch, voor allebei hetzelfde, elk één run, met seed 0. Waar een module van jou ontbreekt of stuk is, springt die van de course in. Het werkt zodra oefening 2 en 3 af zijn, en duurt ongeveer 10 seconden.
+    De cel hieronder gebruikt je project. Hij draait je overfit-test uit [Project: een diep netwerk laten trainen](/course/open/nn-deep-net-project?lang=nl) op je `SmallCNN`: {C.OVERFIT_STEPS} stappen met een learning rate van {C.number(C.OVERFIT_LR, 1, L.lang)} op de eerste 64 afbeeldingen. Daarna traint hij je `DeepMLP` met He initialization, batch normalization en residual connections, en dan je `SmallCNN`, met je Trainer: {C.EPOCHS} epochs op de 6.000 trainingsafbeeldingen, een learning rate van {C.number(C.LR, 2, L.lang)} met een warmup van één epoch, voor allebei hetzelfde, elk één run, met seed 0. Waar een module van jou ontbreekt of stuk is, springt die van de course in. Het werkt zodra oefening 2 en 3 af zijn, en duurt ongeveer 10 seconden. Terwijl elk netwerk traint, toont een grafiek zijn loss op de trainingsafbeeldingen elke 10 batches, en gestreept op de testafbeeldingen na elke epoch: eerst van je diepe MLP, dan van je CNN, met de validation loss van het MLP dun en gestreept ernaast. Naast of onder de grafiek staat wat het netwerk op dat moment gokt bij één testafbeelding van elke soort, en bij je CNN daaronder de feature maps van zijn tweede convolutie, `conv2`, op een enkellaars; ze worden opnieuw getekend terwijl het traint. Daarna kun je door beide runs terugspoelen, epoch voor epoch, met de plaatjes van beide netwerken zoals ze toen waren.
     """)
     return
 
@@ -317,22 +317,68 @@ def text_demo():
 @app.cell(hide_code=True)
 def demo_cnn(result_small_cnn, result_count):
     result_small_cnn, result_count  # run again when exercise 2 or 3 saves your module
-    _result = C.demo()
+    _now = {}   # the live chart of each network, made at its first report, and its validation loss so far
+    _heads = {"mlp": {"guesses": "Je diepe MLP: wat het gokt bij één testafbeelding van elke soort"},
+              "cnn": {"guesses": "Je CNN: wat het gokt bij één testafbeelding van elke soort",
+                      "layer": "Zijn tweede convolutie op een testafbeelding van een enkellaars: layer {name}"}}
+
+    def _progress(_p):
+        _run = _p["run"]
+        if _run not in _now:
+            _cnn = _run == "cnn"
+            _now[_run] = L.live({"title": "Je CNN" if _cnn else "Je diepe MLP", "x": "epoch", "y": "loss",
+                                 "alt": "De loss van je CNN tot nu toe: op de trainingsafbeeldingen elke 10 batches, en gestreept op de 1.000 testafbeeldingen na elke epoch; dun en gestreept de validation loss van je diepe MLP." if _cnn else "De loss van je diepe MLP tot nu toe: op de trainingsafbeeldingen elke 10 batches, en gestreept op de 1.000 testafbeeldingen na elke epoch."}, _p["epochs"], low=0.0, window=5,
+                                key=[("loss", False, "trainingsafbeeldingen, elke 10 batches"), ("loss", True, "testafbeeldingen, na elke epoch")])
+            _now[_run].watch(lambda: C.now_pictures(_p["look"](), _heads[_run], L.lang, f"nv-cnn-{_run}-now"))
+            _now[_run + "-test"] = []
+            if _cnn and "mlp-test" in _now:   # the validation loss of the MLP, thin and dashed beside the CNN
+                _now["cnn"].reference(_now["mlp-test"], "MLP", role="ink-2")
+        _who = "Je CNN" if _run == "cnn" else "Je diepe MLP"
+        if "val_loss" in _p:   # the test images after every epoch, dashed
+            _now[_run + "-test"].append((_p["epoch"], _p["val_loss"]))
+            _now[_run].reference(_now[_run + "-test"], "", role="loss", replace=True)
+            _now[_run].line(f"**{_who}** · epoch {_p['epoch']} van {_p['epochs']} · validation loss {C.number(_p['val_loss'], 3, L.lang)}")
+        elif "loss" in _p:   # the training images every 10 batches
+            _now[_run].add(_p["epoch"] - 1 + _p["batch"] / _p["batches"], _p["loss"],
+                           f"**{_who}** · epoch {_p['epoch']} van {_p['epochs']} · batch {_p['batch']} van {_p['batches']} · loss {C.number(_p['loss'], 3, L.lang)}")
+        else:
+            _now[_run].line(f"**{_who}** · epoch {_p['epoch']} van {_p['epochs']} · batch {_p['batch']} van {_p['batches']}")
+
+    _result = C.demo(_progress)
     if _result is None:
         _out = mo.md("*Maak eerst oefening 2 en 3 af: dan staan je `SmallCNN` en je `count_params` in je project, en gebruikt deze cel ze.*")
     elif isinstance(_result, str):
-        _out = mo.md({
+        _note = {
             "slow": "*Je project doet er hier te lang over: meer dan een minuut voor de overfit-test, of meer dan twee minuten om één netwerk te trainen. Doet je `SmallCNN`, je overfit-test of je Trainer meer werk dan nodig is, zoals een loop die te vaak draait?*",
             "cnn": "*`SmallCNN` of `count_params` in `work/projects/cnn/` stopt met een fout. Heb je zijn bestand veranderd? Verwijder het, en check oefening 2 of 3 opnieuw: de check bewaart je code dan weer.*",
             "overfit": "*Je `overfit_one_batch` in `work/projects/nn/overfit.py` stopt met een fout op het CNN. Heb je dat bestand veranderd? Verwijder het, en check oefening 2 van [Project: een diep netwerk laten trainen](/course/open/nn-deep-net-project?lang=nl) opnieuw.*",
             "trainer": "*Trainen met de Trainer in `work/projects/nn/trainer.py`, of de `DeepMLP` uit `work/projects/nn/deep_mlp.py` maken, stopt met een fout. Heb je een van die bestanden veranderd? Verwijder het, en check zijn oefening opnieuw.*",
-        }[_result])
+        }[_result]
+        _last = _now.get("cnn") or _now.get("mlp")   # a run that stops keeps its chart so far
+        _out = _last.stopped(_note) if _last else mo.md(_note)
     else:
         _learned = "het kan leren" if _result["loss"] < 0.1 else "het leert de 64 afbeeldingen niet uit het hoofd, dus kijk eerst naar je `SmallCNN`"
         _who = "" if not _result["stand_ins"] else " De versie van de course sprong in voor " + ", ".join(f"`{m}`" for m in _result["stand_ins"]) + ", zoals de melding bij *Waar je project staat* zegt."
-        _out = mo.md(f"""Je overfit-test: na {C.OVERFIT_STEPS} stappen op 64 afbeeldingen is de loss van je CNN {C.number(_result['loss'], 3, L.lang)}: {_learned}.
+        _labels = {"title": "Validation loss na elke epoch", "x": "epoch", "y": "validation loss", "mlp": "MLP", "alt": "De validation loss van je CNN na elke epoch, en dun en gestreept die van je diepe MLP."}
+        _curves = _result.get("curves", {})
+        _when = list(range(1, len(_curves.get("cnn", [])) + 1))
+        if any(len(_result["looked"][_n]) != len(_curves.get(_n, [])) or not all(_result["looked"][_n]) for _n in C.RUNS):   # an epoch it could not look at
+            _when = []
 
-Van de 1.000 testafbeeldingen leest je CNN er **{_result['cnn']}** goed, met {C.grouped(_result['params_cnn'], L.lang)} parameters, geteld met je `count_params`; je diepe MLP leest er **{_result['mlp']}** goed, met {C.grouped(_result['params_mlp'], L.lang)}. Over 5 seeds leest het CNN met de code van de course er 864 tot 879 goed, en het diepe MLP 845 tot 863: beter, met een negende van de parameters.{_who}""")
+        def _frame(_e):
+            _e = int(_e)
+            _right = {_n: sum(_g == _k for _g, _k in zip(_result["looked"][_n][_e - 1], _result["truth"])) for _n in C.RUNS}
+            return (C.epoch_frame(_result, _e, _labels, _heads, L.lang),
+                    f"Na epoch {_e}: van deze 10 testafbeeldingen leest je diepe MLP er {_right['mlp']} goed, en je CNN {_right['cnn']}.")
+
+        if len(_when) > 1:   # rewinding through both runs, with both in the picture
+            _pic = [L.explore("rewind", "epoch", _frame, start=_when[-1], values=_when, role="",
+                              task="Ga terug naar epoch 1, en dan weer vooruit: welke soorten leest je CNN eerder goed dan je MLP?")]
+        else:
+            _pic = [mo.Html(C.curves_picture(_curves, _labels, L.lang))] if _curves else []
+        _out = mo.vstack(_pic + [mo.md(f"""Je overfit-test: na {C.OVERFIT_STEPS} stappen op 64 afbeeldingen is de loss van je CNN {C.number(_result['loss'], 3, L.lang)}: {_learned}.
+
+Van de 1.000 testafbeeldingen leest je CNN er **{_result['cnn']}** goed, met {C.grouped(_result['params_cnn'], L.lang)} parameters, geteld met je `count_params`; je diepe MLP leest er **{_result['mlp']}** goed, met {C.grouped(_result['params_mlp'], L.lang)}. Over 5 seeds leest het CNN met de code van de course er 864 tot 879 goed, en het diepe MLP 845 tot 863: beter, met een negende van de parameters. De grafiek laat de validation loss van allebei na elke epoch zien, die van het MLP gestreept.{_who}""")])
     _out
     return
 

@@ -346,7 +346,7 @@ def text_demo(result_gpt):
         mo.md(f"""
         ### What your project can do now
 
-        The button below trains your ModernGPT as [Project: your GPT on your own tokens](/course/open/gpt-train-bpe?lang=en) trains your GPT: your tokenizer on the first 90% of the stories, all of them encoded, and your `gpt_loaders` and `Trainer`, with the same plan and seed. {_where}: a ModernGPT of {C.grouped(_p['params'], L.lang)} parameters, with $d = {_d}$, {_h} query heads and {_p['kv_heads']} key and value heads, {_layers} blocks and windows of {_block} tokens, {_p['epochs']} epochs of mini-batches of {_p['batch']}. Then it writes a story that starts with "{C.B.START}".{_time} The stop button of the cell ends the run early; the best parameters so far stay saved, in `work/projects/llm/gpt_modern.pt`.
+        The button below trains your ModernGPT as [Project: your GPT on your own tokens](/course/open/gpt-train-bpe?lang=en) trains your GPT: your tokenizer on the first 90% of the stories, all of them encoded, and your `gpt_loaders` and `Trainer`, with the same plan and seed. {_where}: a ModernGPT of {C.grouped(_p['params'], L.lang)} parameters, with $d = {_d}$, {_h} query heads and {_p['kv_heads']} key and value heads, {_layers} blocks and windows of {_block} tokens, {_p['epochs']} epochs of mini-batches of {_p['batch']}. Then it writes a story that starts with "{C.B.START}".{_time} While it trains, a chart shows the loss eight times per epoch and after every epoch, with the time left, and beside it what your ModernGPT writes now from *{C.B.START}*. The stop button of the cell ends the run early; the best parameters so far stay saved, in `work/projects/llm/gpt_modern.pt`.
         """),
         L.course_versions(),
     ])
@@ -366,6 +366,10 @@ def demo_train(train_button, result_gpt):
     _labels = {"title": "Your run", "x": "epoch", "y": "loss per token", "lang": L.lang, "guess": "guessing evenly", "train": "training", "val": "validation"}
     _names = {"gpt": "your GPT on tokens", "rms": "+ RMSNorm", "swiglu": "+ SwiGLU", "rope": "+ RoPE, no table of places", "gqa": "+ grouped-query attention"}
 
+    _now = {}   # the live chart, made at the first report of the training, and the last report
+    _wrote = {"now": "What your ModernGPT writes now",
+              "alt": "What your ModernGPT writes now from “Once upon a time”: 50 tokens, drawn with the same seed each time, so that only your ModernGPT changes."}
+
     def _progress(_p):
         if _p["phase"] == "tokenizer":
             mo.output.replace(mo.md("**Training your tokenizer** on the first 90% of the stories…"))
@@ -375,10 +379,23 @@ def demo_train(train_button, result_gpt):
             return
         _m = 1 if _p["left"] is None else max(1, round(_p["left"] / 60))
         _left = "" if _p["left"] is None else f" · about {_m} {'minutes' if _m > 1 else 'minute'} left"
-        _parts = [mo.md(f"**Epoch {_p['epoch']} of {_p['epochs']}** · step {_p['step']} of {_p['steps']}{_left}")]
-        if _p["history"]:
-            _parts.append(mo.Html(C.history_picture(_p["history"], {**_labels, "alt": "The training and validation loss of your run so far, after every epoch."}, _p["epochs"])))
-        mo.output.replace(mo.vstack(_parts))
+        if "chart" not in _now:
+            _now["chart"] = L.live({"title": "Your run", "x": "epoch", "y": "loss per token",
+                                    "alt": "The loss per token of your run so far: on the training windows eight times per epoch, and dashed on the validation windows after every epoch; a thin gray line at the loss of guessing evenly among the 1,257 ids."},
+                                   _p["epochs"], window=4, key=[("loss", False, "training, eight times per epoch"), ("loss", True, "validation, after every epoch")])
+            _now["chart"].reference([(0, C.B.GUESS_LOSS), (_p["epochs"], C.B.GUESS_LOSS)], "guessing evenly", role="ink-3")
+            _now["chart"].watch(lambda: C.now_picture(_now["last"], _wrote))   # what your ModernGPT writes now, beside the chart
+            _now["val"] = []
+        _now["last"] = _p
+        if "val_loss" in _p:   # the validation windows after every epoch, dashed
+            _now["val"].append((_p["epoch"], _p["val_loss"]))
+            _now["chart"].reference(_now["val"], "", role="loss", replace=True)
+            _now["chart"].line(f"**Epoch {_p['epoch']} of {_p['epochs']}** · validation loss {C.number(_p['val_loss'], 3, L.lang)} per token{_left}")
+        elif "loss" in _p:   # the training windows, eight times per epoch
+            _now["chart"].add(_p["epoch"] - 1 + _p["batch"] / _p["batches"], _p["loss"],
+                              f"**Epoch {_p['epoch']} of {_p['epochs']}** · batch {_p['batch']} of {_p['batches']} · loss {C.number(_p['loss'], 3, L.lang)} per token{_left}")
+        else:
+            _now["chart"].line(f"**Epoch {_p['epoch']} of {_p['epochs']}** · batch {_p['batch']} of {_p['batches']}{_left}")
 
     _best = {_k: C.mean_best(_k) for _k in C.CHANGES}
     _step = {_k: _best[_k] - _best[C.CHANGES[_i - 1]] for _i, _k in enumerate(C.CHANGES) if _i > 0}

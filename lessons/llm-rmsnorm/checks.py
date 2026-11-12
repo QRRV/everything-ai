@@ -48,6 +48,31 @@ def norms_picture(labels: dict) -> str:
 DATA = "data/tiny-shakespeare.txt"
 SIZES = {"d": 64, "heads": 4, "layers": 2, "block": 64}
 STEPS, BATCH, LR = 400, 32, 3e-3
+START, WRITE = "ROMEO:\n", 120   # what the model writes beside the chart and in the rewind: WRITE characters after START
+MOMENTS = 4                      # the rewind stops before the first step and after every quarter of the run
+
+
+def write(model, chars: list, seed: int = 0) -> str:
+    """WRITE characters the model writes after START, each drawn from the probabilities it gives for the next one with
+    its own seed (lm-sampling), so that two moments differ only by the model (decision 1.17). It looks as
+    netview.looking looks: in eval mode, without a graph, and every module and the random state back afterwards, so
+    that looking never changes the run."""
+    import torch
+    from everything_ai import netview
+    index = {ch: i for i, ch in enumerate(chars)}
+    ids = [index[ch] for ch in START]
+    g = torch.Generator().manual_seed(seed)
+    with netview.looking(model):
+        for _ in range(WRITE):
+            logits = model(torch.tensor([ids[-SIZES["block"]:]]))[0, -1]
+            ids.append(int(torch.multinomial(torch.softmax(logits.double(), dim=-1), 1, generator=g)))
+    return "".join(chars[i] for i in ids[len(START):])
+
+
+def moments(steps: int | None = None) -> list:
+    """The steps the rewind stops at: before the first one and after every quarter of a run of `steps` (STEPS)."""
+    steps = STEPS if steps is None else steps
+    return sorted({round(steps * k / MOMENTS) for k in range(MOMENTS + 1)})
 
 
 def _swap(model, RMSNorm) -> int:
@@ -62,14 +87,15 @@ def _swap(model, RMSNorm) -> int:
     return count
 
 
-def _run(GPT, RMSNorm, ids, n_chars: int, seed: int = 0, show=None, name: str = "") -> dict:
+def _run(GPT, RMSNorm, ids, chars: list, seed: int = 0, show=None, name: str = "") -> dict:
     """Train one small GPT on the first 90% of the ids for STEPS mini-batches, the same ones for every run, and give
-    its validation loss on the last 10%, its parameters, its norms swapped and its seconds. `show` hears every 10
-    steps the loss of each of them ("fresh"), with the run's `name`, for a live chart."""
+    its validation loss on the last 10%, its parameters, its norms swapped, its seconds of training (without those of
+    the chart and of writing), the loss of every step, and what it wrote at the moments of the rewind. `show` hears every 10 steps the loss of each of them ("fresh"), with
+    the run's `name`, for a live chart, and "look", which gives what the model writes now, for the picture beside it."""
     import torch
     import torch.nn.functional as F
     torch.manual_seed(seed)
-    s = SIZES
+    s, n_chars = SIZES, len(chars)
     model = GPT(n_chars, s["d"], s["heads"], s["layers"], s["block"])
     swapped = _swap(model, RMSNorm) if RMSNorm is not None else 0
     opt = torch.optim.AdamW(model.parameters(), lr=LR)
@@ -77,7 +103,9 @@ def _run(GPT, RMSNorm, ids, n_chars: int, seed: int = 0, show=None, name: str = 
     train, val = ids[:cut], ids[cut:]
     T = s["block"]
     g = torch.Generator().manual_seed(seed)
-    start, fresh = time.perf_counter(), []
+    marks = moments()
+    wrote = {0: write(model, chars)} if 0 in marks else {}
+    start, fresh, losses, aside = time.perf_counter(), [], [], 0.0   # aside: the seconds of looking, not of training
     for step in range(STEPS):
         i = torch.randint(0, len(train) - T - 1, (BATCH,), generator=g)
         x = torch.stack([train[j:j + T] for j in i])
@@ -87,17 +115,23 @@ def _run(GPT, RMSNorm, ids, n_chars: int, seed: int = 0, show=None, name: str = 
         loss.backward()
         opt.step()
         fresh.append((step + 1, loss.item()))
+        losses.append(loss.item())
+        looked = time.perf_counter()
+        if step + 1 in marks:
+            wrote[step + 1] = write(model, chars)
         if show is not None and (step % 10 == 9 or step == STEPS - 1):
-            show({"run": name, "step": step + 1, "steps": STEPS, "fresh": fresh})
+            show({"run": name, "step": step + 1, "steps": STEPS, "fresh": fresh, "look": lambda: write(model, chars)})
             fresh = []
-    seconds = time.perf_counter() - start
+        aside += time.perf_counter() - looked
+    seconds = time.perf_counter() - start - aside
     with torch.no_grad():
         g = torch.Generator().manual_seed(1)
         i = torch.randint(0, len(val) - T - 1, (256,), generator=g)
         x = torch.stack([val[j:j + T] for j in i])
         y = torch.stack([val[j + 1:j + T + 1] for j in i])
         val_loss = float(F.cross_entropy(model(x).reshape(-1, n_chars), y.reshape(-1)))
-    return {"val_loss": val_loss, "params": sum(p.numel() for p in model.parameters()), "swapped": swapped, "seconds": seconds}
+    return {"val_loss": val_loss, "params": sum(p.numel() for p in model.parameters()), "swapped": swapped, "seconds": seconds,
+            "losses": losses, "wrote": wrote}
 
 
 def demo(code: str, show=None) -> dict | str:
@@ -121,8 +155,8 @@ def demo(code: str, show=None) -> dict | str:
         s = SIZES   # a GPT without nn.LayerNorm has nothing to swap: say so before a minute of training, and a chart of "your RMSNorm" without it
         if not any(isinstance(m, torch.nn.LayerNorm) for m in GPT(len(chars), s["d"], s["heads"], s["layers"], s["block"]).modules()):
             return "norms"
-        runs = with_time_limit(lambda: [_run(GPT, None, ids, len(chars), show=show, name="layer"),
-                                        _run(GPT, RMSNorm, ids, len(chars), show=show, name="rms")], 600)
+        runs = with_time_limit(lambda: [_run(GPT, None, ids, chars, show=show, name="layer"),
+                                        _run(GPT, RMSNorm, ids, chars, show=show, name="rms")], 600)
     except Exception:
         return "error"
     finally:
@@ -130,6 +164,47 @@ def demo(code: str, show=None) -> dict | str:
     if runs[1]["swapped"] == 0:
         return "norms"
     return {"layer": runs[0], "rms": runs[1], "stand_ins": [f"{package}/{module}.py" for package, module, _, _ in stand]}
+
+
+def now_picture(report: dict, labels: dict) -> str:
+    """Beside the live chart of a run (decision 1.17): what its model writes now after START, after the step of the
+    last report. `labels`: now ({step}), alt_now."""
+    from everything_ai import yours
+    if "seen" not in report:   # one look per report: while the run measures, the picture keeps what it saw
+        report["seen"] = report["look"]()
+    return yours.writes(labels["now"].format(step=report["step"]), [(START, report["seen"])], alt=labels["alt_now"])
+
+
+def _means(losses: list, window: int = 10) -> list:
+    return [float(np.mean(losses[max(0, i - window + 1): i + 1])) for i in range(len(losses))]
+
+
+def rewind_frame(result: dict, k: int, labels: dict) -> tuple:
+    """Moment k (a step of moments()) of both runs, for the rewind after the demo (decision 1.17): the mean training
+    loss over 10 steps of both, LayerNorm thin and dashed and your RMSNorm thick, both in the color of loss, with a
+    dashed line at k and a key under them; beside it what both models wrote after START at that moment. And the
+    sentence under it. `labels`: title, x, y, alt, lang, layer, rms, wrote ({step}), alt_wrote ({step}), start, after
+    ({step}), loss ({layer}, {rms})."""
+    from everything_ai import chart, live, yours
+    lang = labels.get("lang", "en")
+    layer, rms = _means(result["layer"]["losses"]), _means(result["rms"]["losses"])
+    top = float(np.ceil(max(layer + rms) * 2) / 2)
+    p = chart.Panel((0, len(rms)), (0, top), title=labels["title"], xlabel=labels["x"], ylabel=labels["y"])
+    xs = list(range(1, len(rms) + 1))
+    p.line(xs, layer, "loss", 1.4, dashed=True)
+    p.line(xs, rms, "loss", 2.2)
+    p.line([k, k], [0, top], "ink-2", 1.2, dashed=True)
+    svg = chart.figure([p], alt=labels["alt"], width=360, height=220)
+    svg = chart.with_decimal_comma(svg) if lang == "nl" else svg
+    curves = svg + live.key_html([("loss", True, labels["layer"]), ("loss", False, labels["rms"])])
+    rows = [(START, result[run]["wrote"][k], labels[run], None) for run in ("layer", "rms")]
+    wrote = yours.writes(labels["wrote"].format(step=k), rows, alt=labels["alt_wrote"].format(step=k))
+    if k == 0:
+        said = labels["start"]
+    else:
+        said = (labels["after"].format(step=k) + " · " +
+                labels["loss"].format(layer=number(layer[k - 1], 3, lang), rms=number(rms[k - 1], 3, lang)))
+    return live.rewound(curves, [wrote], width=360), said
 
 
 # --- exercise 1: RMSNorm ------------------------------------------------------------------------------------------------------

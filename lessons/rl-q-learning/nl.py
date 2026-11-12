@@ -345,7 +345,7 @@ def text_demo():
                 break
     ```
 
-    De grafiek laat de return van elke episode zien, dun, en het gemiddelde over de laatste 20, dik; gestippeld hetzelfde, gemiddeld over 20 runs van de course. De demo wacht na elke episode 10 ms, zodat je kunt meekijken.
+    De grafiek laat de return van elke episode zien, dun, en het gemiddelde over de laatste 20, dik; gestreept hetzelfde, gemiddeld over 20 runs van de course. Ernaast zie je wat je agent op dat moment weet, getekend zoals in *De run, episode voor episode*: de weg van zijn laatste episode, en zijn beste action in elke state. De demo wacht na elke episode 10 ms, zodat je kunt meekijken.
     """)
     return
 
@@ -366,13 +366,23 @@ def demo_train(box_choose, box_update, result_choose, result_update, train_butto
         _mine = [_n for _n, _r in (("update", result_update), ("choose", result_choose)) if _r.state == "correct"]
         _update = run_code(box_update.value).names["update"] if "update" in _mine else C.update
         _choose = run_code(box_choose.value).names["choose"] if "choose" in _mine else C.choose
+        _now = {}   # de live grafiek, en wat de agent weet na de laatste episode
+        _grid = {"grid": "Jouw agent na episode {k}",
+                 "grid_alt": "GRID na episode {k} van je run: de weg van die episode als lijn, de grootste Q van elke state, en een driehoekje voor zijn beste action."}
+
+        def _progress(_k, _g, _seen):
+            if "seen" not in _now:   # vanaf de eerste episode staat naast de grafiek wat de agent weet
+                _now["chart"].watch(lambda: C.now_picture(_now["seen"], _grid, L.lang))
+            _now["seen"] = _seen
+            _now["chart"].add(_k, _g, f"**Episode {_k} van {C.EPISODES}**")
+
         _live = L.live({"title": "Jouw run: de return van elke episode", "x": "episode", "y": "return",
                         "alt": "De return van elke episode van je run tot nu toe, dun, en het gemiddelde over de laatste 20, dik; gestippeld hetzelfde, gemiddeld over 20 runs van de course."},
                        C.EPISODES, role="ink", low=-1.05, high=1.05, window=20)
         _live.line("**Trainen** …")
         _live.reference(list(enumerate(C.mean_line(), 1)), "gemiddelde van 20 runs", role="ink")
-        _r = C.train(_update, _choose, seed=C.YOUR_SEED, pause=0.01,
-                     show=lambda _k, _g: _live.add(_k, _g, f"**Episode {_k} van {C.EPISODES}**"))
+        _now["chart"] = _live
+        _r = C.train(_update, _choose, seed=C.YOUR_SEED, pause=0.01, show=_progress)
         if _r == "update":
             _out = _live.stopped("*Je `update` gaf tijdens de run een fout of geen getal. Haalt hij zijn check nog?*")
         elif _r == "choose":

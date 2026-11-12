@@ -376,7 +376,7 @@ def text_demo():
     mo.md(rf"""
     ### Qwen3 on your prompt and your checker
 
-    The demo gives Qwen3-0.6B-Base the first {C.QUESTIONS['cpu']} test questions with your `few_shot_prompt`, without and with steps, greedy, and reads every answer with your `read_answer`; on a GPU all {C.QUESTIONS['gpu']}, with a vote over {C.VOTE['gpu']} samples. On the course's CPU with 2 threads it took {C.number(C.DEMO['minutes'], 1, 'en')} minutes, measured; on a GPU it was not measured. Greedy writing is deterministic: on a CPU like the course's, your line with steps lies on the course's, dashed; another device can change a token through rounding.
+    The demo gives Qwen3-0.6B-Base the first {C.QUESTIONS['cpu']} test questions with your `few_shot_prompt`, without and with steps, greedy, and reads every answer with your `read_answer`; on a GPU all {C.QUESTIONS['gpu']}, with a vote over {C.VOTE['gpu']} samples. On the course's CPU with 2 threads it took {C.number(C.DEMO['minutes'], 1, 'en')} minutes, measured; on a GPU it was not measured. Greedy writing is deterministic: on a CPU like the course's, your line with steps lies on the course's, dashed; another device can change a token through rounding. While Qwen3 writes, beside the chart you see its answer so far; once it is done, what your `read_answer` read in it.
     """)
     return
 
@@ -426,20 +426,30 @@ def demo_run(box_prompt, box_read, box_vote, result_prompt, result_read, result_
         _direct = []
         _what = {"direct": "direct", "steps": "with steps", "votes": f"{C.VOTE['gpu']} samples"}
 
-        def _show(_d):
+        _now = {}   # the last answer, so far while Qwen3 writes it, beside the chart
+        _wrote = {"title": "Question {i} of {n}, {kind}: what Qwen3 writes", "direct": "direct", "steps": "with steps", "votes": "samples",
+                  "alt": "What Qwen3 writes for the question, so far, and once it is done what your read_answer read in it, with the answer key.",
+                  "read": "your read_answer read: {read} {mark}; the answer key is {key}", "nothing": "nothing"}
+
+        def _progress(_d):
             if _d["phase"] == "load":
                 _live.line("**Loading Qwen3** …")
             elif _d["phase"] == "answer":
                 _live.line(f"**Question {_d['i']} of {_d['n']}** · {_what[_d['kind']]} …")
-            elif _d["phase"] == "answered":
-                _live.line(f"**Question {_d['i']} of {_d['n']}** · {_what[_d['kind']]} · {_d['tokens']} tokens · {_d['seconds']:.0f} s · {'right' if _d['right'] else 'wrong'}")
+            elif _d["phase"] in ("writing", "answered"):
+                _now["last"] = _d   # what Qwen3 writes, beside the chart: drawn again at every report, as it costs no look at the model
+                _live.watch(lambda: C.writing_picture(_now["last"], _wrote))
+                if _d["phase"] == "writing":
+                    _live.show()
+                else:
+                    _live.line(f"**Question {_d['i']} of {_d['n']}** · {_what[_d['kind']]} · {_d['tokens']} tokens · {_d['seconds']:.0f} s · {'right' if _d['right'] else 'wrong'}")
             elif _d["phase"] == "question":
                 _direct.append((_d["i"], _d["direct"]))
                 _live.reference(_direct, "")
                 _live.add(_d["i"], _d["steps"], f"**Question {_d['i']} of {_d['n']}:** right so far {_d['steps']} with steps, the line with dots, and {_d['direct']} direct, the grey dashed line")
 
         _vote = run_code(box_vote.value).names["majority_vote"] if result_vote.state == "correct" else C.course_functions()[1]
-        _r = C.run(run_code(box_prompt.value).names["few_shot_prompt"], run_code(box_read.value).names["read_answer"], _vote, _show)
+        _r = C.run(run_code(box_prompt.value).names["few_shot_prompt"], run_code(box_read.value).names["read_answer"], _vote, _progress)
         if isinstance(_r, str):
             _out = _live.stopped({
                 "prompt": "*Your `few_shot_prompt` stops with an error on a question of the demo, or gives no text. Does it still pass its check?*",

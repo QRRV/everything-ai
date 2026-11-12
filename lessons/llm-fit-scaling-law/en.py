@@ -275,7 +275,7 @@ def text_demo_small():
         mo.md(f"""
         ### Your four small models
 
-        The button below trains your ModernGPT at depths {', '.join(str(_d) for _d in C.SMALL[:-1])} and {C.SMALL[-1]}: one epoch each over the training shards, mini-batches of {C.BATCH} windows of {C.BLOCK} tokens, AdamW with the warmup, plateau and warmdown of [Reading an open training recipe](/course/open/llm-open-recipes?lang=en), seed 0, and the last shard to validate on. The runs are kept in `work/projects/llm/{C.RUNS}`. On the course's computer, on 2 CPU threads, the four took about {round(sum(_r['seconds'] for _r in _m['small']) / 60)} minutes together; a GPU is much faster. Until you train your own, the course's runs stand in. While each model trains, a chart shows its training loss at every step, with the smaller models trained before it dashed beside it; the chart of the last model stays above the table. Once you have trained all four, the run of depth {C.BIG} further down shows them dashed beside it too.
+        The button below trains your ModernGPT at depths {', '.join(str(_d) for _d in C.SMALL[:-1])} and {C.SMALL[-1]}: one epoch each over the training shards, mini-batches of {C.BATCH} windows of {C.BLOCK} tokens, AdamW with the warmup, plateau and warmdown of [Reading an open training recipe](/course/open/llm-open-recipes?lang=en), seed 0, and the last shard to validate on. The runs are kept in `work/projects/llm/{C.RUNS}`. On the course's computer, on 2 CPU threads, the four took about {round(sum(_r['seconds'] for _r in _m['small']) / 60)} minutes together; a GPU is much faster. Until you train your own, the course's runs stand in. While each model trains, a chart shows its training loss at every step, with the smaller models trained before it dashed beside it, and beside the chart the start of a story the model writes now, after Once upon a time, at temperature {C.number(C.D.B.TAU, 1, L.lang)} as in [Generate text with your GPT](/course/open/gpt-generate?lang=en). Once you have trained all four, you can rewind the runs with a dot above the table: drag it over the steps and the depths, and you see the loss and the story at every moment. The run of depth {C.BIG} further down then shows them dashed beside it too; once you have trained it, a slider rewinds its run in the same way.
         """),
         L.course_versions(),
     ])
@@ -296,13 +296,17 @@ def demo_small(small_button):
     if small_button.value:
         _done = []   # the curves of the depths trained before, dashed beside the one that trains now
         _now = {}    # the live chart of the depth that trains now
+        _wrote = {"now": "What it writes now, after step {step}",
+                  "alt_now": "The start of a story the model writes now after Once upon a time, which is in gray, at temperature 0.8 with the same seed at every look."}
 
         def _progress(_p):
             if _now.get("depth") != _p["depth"]:
                 _now["depth"], _now["live"] = _p["depth"], L.live({"title": f"Depth {_p['depth']}: the training loss of every step", "x": "step", "y": "loss per token",
-                                                                  "alt": f"The training loss of every step of depth {_p['depth']} so far, in grey, and its mean over the last 10 steps as the thicker line{'; dashed, the smaller models trained before it' if _done else ''}."}, _p["steps"], window=10)
+                                                                  "alt": f"The training loss of every step of depth {_p['depth']} so far, in gray, and its mean over the last 10 steps as the thicker line{'; dashed, the smaller models trained before it' if _done else ''}."}, _p["steps"], window=10, look_every=6.0)
+                _now["live"].watch(lambda: C.now_picture(_now["last"], _wrote))   # what the model of this depth writes, beside its chart
                 for _c in _done:
                     _now["live"].reference(_c, "", role="loss")
+            _now["last"] = _p
             _now["live"].extend(_p["fresh"], f"**Depth {_p['depth']}** · step {_p['step']} of {_p['steps']} · loss {C.number(_p['loss'], 2, L.lang)} per token · {round(_p['seconds'])} s")
         for _depth in C.SMALL:
             _r = C.train(_depth, _progress)
@@ -317,6 +321,15 @@ def demo_small(small_button):
     _mine = all(_d in _saved for _d in C.SMALL)
     small_runs = [_saved[_d] for _d in C.SMALL] if _mine else C.MEASURED["small"]
     _whose = "Your runs" if _mine else "The course's runs, until you train your own"
+    _rewind = {"title": "Depth {depth}: the training loss, every 10 steps", "x": "step", "y": "loss per token", "lang": "en",
+               "alt": "The training loss of your runs as the mean of every 10 steps: depth {depth} solid, the others dashed, with a dashed line at the chosen step.",
+               "wrote": "What it wrote at that moment",
+               "alt_wrote": "The start of the story the model of depth {depth} wrote after step {step}, after Once upon a time, which is in gray, at temperature 0.8 with the same seed at every moment.",
+               "start": "**Depth {depth}, before the first step**", "after": "**Depth {depth}, after step {step}** · training loss {loss} per token, the mean of the 10 steps around it"}
+    if _mine and C.rewinds(small_runs):   # rewinding through every run and every moment, with all four in the picture
+        _steps = [_s for _s, _t in small_runs[0]["wrote"]]
+        _kept = [L.plane("rewind-small", "step", "depth", lambda _s, _d: C.rewind_frame(small_runs, int(_s), int(_d), _rewind), _steps, list(C.SMALL),
+                         start=(_steps[-1], C.SMALL[-1]), role="", task="Drag the dot through the steps and the depths: at the same step, does a deeper model write a better story?")]
     _rows = "\n".join(f"| {_r['depth']} | {C.number(_r['params'], 0, L.lang)} | {C.number(_r['tokens'] / _r['params'], 1, L.lang)} | {C.number(_r['val'], 3, L.lang)} |" for _r in small_runs)
     _note = [mo.md("*The run stops with an error. Do your modules in `work/projects/llm/` still pass their checks? Delete a file you changed, and check its exercise again.*")] if _failed else []
     mo.vstack(_note + _kept + [mo.md(f"{_whose}:\n\n| depth | parameters | tokens per parameter | validation loss per token |\n|---|---|---|---|\n{_rows}")])
@@ -350,15 +363,19 @@ def demo_big(big_button, law_floor, law_prediction, small_runs):
     _failed = False
     if big_button.value:
         _now = {}   # the live chart, made at the first step: then the run knows its steps
+        _wrote = {"now": "What it writes now, after step {step}",
+                  "alt_now": "The start of a story the model writes now after Once upon a time, which is in gray, at temperature 0.8 with the same seed at every look."}
 
         def _progress(_p):
             if not _now:
                 _runs = C.saved_runs()
                 _curves = [_runs[_d]["curve"] for _d in C.SMALL if "curve" in _runs.get(_d, {})]   # none for the course's runs, or for older runs saved without a curve
                 _now["live"] = L.live({"title": f"Depth {_p['depth']}: the training loss of every step", "x": "step", "y": "loss per token",
-                                       "alt": f"The training loss of every step of depth {_p['depth']} so far, in grey, and its mean over the last 10 steps as the thicker line{'; dashed, your small models' if _curves else ''}."}, _p["steps"], window=10)
+                                       "alt": f"The training loss of every step of depth {_p['depth']} so far, in gray, and its mean over the last 10 steps as the thicker line{'; dashed, your small models' if _curves else ''}."}, _p["steps"], window=10, look_every=6.0)
+                _now["live"].watch(lambda: C.now_picture(_now["last"], _wrote))   # what the model writes, beside its chart
                 for _c in _curves:
                     _now["live"].reference(_c, "", role="loss")
+            _now["last"] = _p
             _now["live"].extend(_p["fresh"], f"**Depth {_p['depth']}** · step {_p['step']} of {_p['steps']} · loss {C.number(_p['loss'], 2, L.lang)} per token · {round(_p['seconds'])} s")
         _r = C.train(C.BIG, _progress)
         if _r == "run":
@@ -370,8 +387,17 @@ def demo_big(big_button, law_floor, law_prediction, small_runs):
     _whose = "Your model" if C.BIG in _saved else "The course's model"
     _stand = "" if C.BIG in _saved else " Until you train your own, the course's model stands in."
     _diff = _big["val"] - law_prediction
+    _rewind = {"title": "Depth {depth}: the training loss, every 10 steps", "x": "step", "y": "loss per token", "lang": "en",
+               "alt": "The training loss of your runs as the mean of every 10 steps: depth {depth} solid, the others dashed, with a dashed line at the chosen step.",
+               "wrote": "What it wrote at that moment",
+               "alt_wrote": "The start of the story the model of depth {depth} wrote after step {step}, after Once upon a time, which is in gray, at temperature 0.8 with the same seed at every moment.",
+               "start": "**Depth {depth}, before the first step**", "after": "**Depth {depth}, after step {step}** · training loss {loss} per token, the mean of the 10 steps around it"}
+    _runs = [_r for _r in small_runs if _r.get("curve")] + [_big]   # the small runs with their curves, dashed beside it
+    _alone = {"alt": "The training loss of depth {depth} as the mean of every 10 steps, with a dashed line at the chosen step."} if len(_runs) == 1 else {}   # without small runs to show beside it
+    _pic = [L.explore("rewind-big", "step", lambda _v: C.rewind_frame(_runs, int(_v), C.BIG, {**_rewind, **_alone}), start=_big["wrote"][-1][0],
+                      values=[_s for _s, _t in _big["wrote"]], role="", task="Go back to before the first step, then forward through the run of depth 6: from which moment on does its story have sentences?")] if C.rewinds([_big]) else []
     _note = [mo.md("*The run stops with an error. Do your modules in `work/projects/llm/` still pass their checks? Delete a file you changed, and check its exercise again.*")] if _failed else []
-    mo.vstack(_note + [
+    mo.vstack(_note + _pic + [
         mo.Html(C.law_picture(small_runs, law_floor, _big, law_prediction,
                               {"title": "Validation loss against size", "x": "parameters", "y": "validation loss per token", "lang": L.lang,
                                "measured": "measured", "predicted": "predicted", "law": "the law",

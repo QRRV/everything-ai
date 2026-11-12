@@ -118,7 +118,7 @@ def text_idea():
     2. **The loss before training.** A model that has learned nothing guesses about evenly among its 99 tokens, so its loss on the answers is about ln 99 = 4.60. Much higher: it starts out sure and wrong, such as with weights that start too large. Much lower: it knows something it cannot know yet, such as an answer that leaks into its input.
     3. **Learning one batch by heart.** Train on that one batch alone, again and again, without weight decay: the test asks only whether the model can learn, and weight decay pulls the other way. A model that works learns 512 equations in a few hundred steps, and its loss goes to almost 0. If it does not, the model or its training step is broken.
 
-    Below are two runs of the course's ModernGPT with the paper's settings, on the first 512 training equations of your data, with the paper's AdamW without weight decay. One of them has the bug of the guess: it reads its guess at the place of $a$. Move the slider, or drag across the chart, to set the number of steps: the chart shows the loss of both on the batch for every step, the run with the bug dashed, and the grey dashed line is ln 99.
+    Below are two runs of the course's ModernGPT with the paper's settings, on the first 512 training equations of your data, with the paper's AdamW without weight decay. One of them has the bug of the guess: it reads its guess at the place of $a$. Move the slider, or drag across the chart, to set the number of steps: the chart shows the loss of both on the batch for every step, the run with the bug dashed, and the gray dashed line is ln 99.
     """)
     return
 
@@ -367,7 +367,7 @@ def text_demo():
     mo.md(rf"""
     ### What your project can do now
 
-    The button runs your `sanity`, from your project, twice, on the first batch of your training data: on your ModernGPT with your settings, and on the same model with the bug of the guess planted, so that it reads its guess at the place of $a$. Each learns the batch by heart for {C.STEPS} steps; together that takes about half a minute on a CPU. Where a part of your kit is missing or broken, the course's version stands in.
+    The button runs your `sanity`, from your project, twice, on the first batch of your training data: on your ModernGPT with your settings, and on the same model with the bug of the guess planted, so that it reads its guess at the place of $a$. Each learns the batch by heart for {C.STEPS} steps; together that takes about half a minute on a CPU. While they learn, a chart shows the loss of every step, and beside or under it which equations of the batch the model answers right at that step. Then you can rewind through the steps of both. Where a part of your kit is missing or broken, the course's version stands in.
     """)
     return
 
@@ -383,24 +383,57 @@ def sanity_button_cell():
 def demo_sanity(sanity_button, result_overfit, result_sanity):
     result_overfit, result_sanity  # run again when an exercise saves a part of the kit
     _ready = result_overfit.state == "correct" and result_sanity.state == "correct"
+    _now = {}   # the live chart of each model, made at its first step, and the loss of every step so far
+    _titles = {"yours": "Your ModernGPT", "planted": "With the bug planted"}
+
+    def _progress(_p):
+        _run = _p["run"]
+        if _run not in _now:
+            _bug = _run == "planted"
+            _now[_run] = L.live({"title": _titles[_run], "x": "step", "y": "loss", "alt": "The loss of the answers at every step so far of your ModernGPT with the bug planted, thin and dashed that of your ModernGPT, and dashed the lowest loss of a model that sees only a." if _bug else "The loss of the answers at every step of your ModernGPT so far."},
+                                _p["steps"], low=0.0, window=1,
+                                key=[("loss", False, "the loss of the answers, every step")] + ([("ink-2", True, _titles["yours"]), ("ink-3", True, "a model that sees only a")] if _bug else []))
+            _now[_run + "-losses"] = []
+            if _bug and _now.get("yours-losses"):   # the run of the model without the bug, thin and dashed
+                _now["planted"].reference(_now["yours-losses"], "", role="ink-2")
+            if _bug:
+                _now["planted"].reference([(0, _p["floor"]), (_p["steps"], _p["floor"])], "", role="ink-3")
+        _now[_run + "-losses"].append((_p["step"], _p["loss"]))
+        _now[_run].watch(lambda _look=_p["look"]: C.batch_picture(_look(), f"{_titles[_run]}: which equations of the batch it answers right now", L.lang))
+        _now[_run].add(_p["step"], _p["loss"], f"**{_titles[_run]}** · after {_p['step']} of {_p['steps']} steps · loss {C.number(_p['loss'], 4, L.lang)}")
+
     if not sanity_button.value:
         _out = mo.md("*Press the button to run your sanity check.*" if _ready else "*Finish exercises 2 and 4 first, then press the button: it runs your `sanity` with your `overfit_one_batch`.*")
     else:
-        with mo.status.spinner(title="Your sanity check is learning the batch by heart, twice: about half a minute"):
-            _r = C.demo()
+        _r = C.demo(show=_progress)
         if _r is None:
             _out = mo.md("*Finish exercises 2 and 4 first: then your `overfit_one_batch` and your `sanity` are in your project, and this cell uses them.*")
         elif isinstance(_r, str):
-            _out = mo.md({"slow": "*Your sanity check takes more than three minutes here for one model. Does your `overfit_one_batch` or your `sanity` do more work than it needs, such as more steps than `steps`?*",
-                          "sanity": "*Your `repro/sanity.py` or `repro/overfit.py` stops with an error. Did you change it after its check? Delete it, and check its exercise again.*",
-                          "model": "*Your ModernGPT or your data stops with an error. Did you change `llm/modern_gpt.py`, `repro/data.py` or `repro/settings.py` after its check? Delete the file you changed, and check its exercise again.*"}[_r])
+            _last = _now.get("planted") or _now.get("yours")   # a run that stops keeps its chart so far
+            _note = ({"slow": "*Your sanity check takes more than three minutes here for one model. Does your `overfit_one_batch` or your `sanity` do more work than it needs, such as more steps than `steps`?*",
+                     "sanity": "*Your `repro/sanity.py` or `repro/overfit.py` stops with an error. Did you change it after its check? Delete it, and check its exercise again.*",
+                     "model": "*Your ModernGPT or your data stops with an error. Did you change `llm/modern_gpt.py`, `repro/data.py` or `repro/settings.py` after its check? Delete the file you changed, and check its exercise again.*"}[_r])
+            _out = _last.stopped(_note) if _last else mo.md(_note)
         else:
             _y, _b = _r["reports"]["yours"], _r["reports"]["planted"]
             _yes = lambda _v: "passes" if _v else "**fails**"
             _stand = (" The course's version stood in for: " + ", ".join(f"`{_m}`" for _m in _r["stand_ins"]) + ".") if _r["stand_ins"] else ""
             _verdict = ("Your model passes all three checks, and your check catches the planted bug" if all(_y[_k] for _k in ("shape", "first", "learns")) and not _b["learns"]
                         else "Not every check came out as expected: look at the row that does not")
-            _out = mo.md(f"""
+            _runs = _r["runs"]
+            _n = min(len(_runs["yours"]["losses"]), len(_runs["planted"]["losses"]))
+            _labels = {"title": "Learning the batch by heart", "x": "step", "y": "loss", "yours": "your ModernGPT", "planted": "with the bug", "floor": "a model that sees only a", "lang": L.lang,
+                       "alt": f"The loss of the answers at every step of both runs, the run with the bug dashed, and dashed in gray {C.number(_r['floor'], 2, L.lang)}, the lowest loss of a model that sees only a."}
+
+            def _frame(_s):
+                _s = int(_s)
+                return (C.step_frame(_r, _s, _labels, {"yours": "Your ModernGPT at this step", "planted": "With the bug at this step"}, L.lang),
+                        f"Before the first step: your ModernGPT answers {sum(_runs['yours']['right'][0])} of the {_r['batch']} equations right, at a loss of {C.number(_runs['yours']['losses'][0], 4, L.lang)}; with the bug, {sum(_runs['planted']['right'][0])}, at {C.number(_runs['planted']['losses'][0], 4, L.lang)}." if _s == 0 else
+                        f"After {_s} steps: your ModernGPT answers {sum(_runs['yours']['right'][_s])} of the {_r['batch']} equations right, at a loss of {C.number(_runs['yours']['losses'][_s], 4, L.lang)}; with the bug, {sum(_runs['planted']['right'][_s])}, at {C.number(_runs['planted']['losses'][_s], 4, L.lang)}.")
+
+            _rewind = [L.explore("rewind", "step", _frame, start=C.kept(_n)[-1], values=C.kept(_n), role="",
+                                 task="Go back to step 1, then forward again: when does your ModernGPT know the whole batch, and how far does the model with the bug get?")] if _n > 1 else []
+            _out = mo.vstack(_rewind + [mo.md(f"""
 | check | your ModernGPT | with the bug | what to expect |
 |---|---|---|---|
 | shape of the logits | {_yes(_y['shape'])} | {_yes(_b['shape'])} | {_r['batch']} × 4 × {_r['vocab']} |
@@ -408,7 +441,7 @@ def demo_sanity(sanity_button, result_overfit, result_sanity):
 | loss after {_r['steps']} steps on the batch | {C.number(_y['last_loss'], 4, L.lang)}: {_yes(_y['learns'])} | {C.number(_b['last_loss'], 4, L.lang)}: {_yes(_b['learns'])} | below {C.number(C.LEARNED, 2, L.lang)}; a model that sees only a, {C.number(_r['floor'], 2, L.lang)} at best |
 
 {_verdict}.{_stand}
-""")
+""")])
     _out
     return
 

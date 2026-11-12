@@ -14,8 +14,8 @@ from functools import cache
 
 import torch
 
-from everything_ai import paths, projects
-from everything_ai.check import FunctionBox, Mistake, Result, run_code
+from everything_ai import netview, paths, projects
+from everything_ai.check import FunctionBox, Mistake, Result, Timeout, run_code
 from everything_ai import yours
 
 
@@ -51,6 +51,7 @@ END = "<|endoftext|>"
 PATTERN = r" ?\w+| ?[^\w\s]+|\s+"   # the pieces of tok-pre-tokenization
 MERGES = 1000                      # merge rules of the tokenizer: ids 256 to 1255, and 1256 for end-of-text
 VOCAB = 256 + MERGES + 1
+GUESS_LOSS = math.log(VOCAB)   # the loss per token of guessing evenly among the ids
 # What the demo trains: the GPT of gpt-train-chars on each plan, with the tokens as its vocabulary; 20 epochs on a GPU,
 # 10 on a CPU, so that every run does the same work and can be held against the course's runs.
 PLANS = {"gpu": {"sizes": (384, 6, 6, 256), "batch": 64, "epochs": 20},
@@ -583,19 +584,34 @@ def written(text: str) -> str:
     return "  \n".join(f"<i>{line}</i>" for line in lines) or "…"
 
 
-def snapper(trainer, model, merges: dict, block: int, seed: int, decode, encode):
+def snapper(trainer, model, merges: dict, block: int, seed: int, decode, encode, said: dict | None = None):
     """What the GPT writes after every epoch of a run, for its replay: `snap()` lets it write SNAP tokens once the
     Trainer has one more epoch in its history, and keeps them in `snap.kept` with the epoch. Its own random numbers,
-    so the training stays the same; a story that fails keeps None and the run goes on."""
+    so the training stays the same; a story that fails keeps None and the run goes on. `said`: what the run already
+    let the GPT write after the k-th epoch, by k from 1, as it does for the picture beside the live chart; that story is
+    kept as it is, since the GPT has not changed since."""
     def snap():
         while len(snap.kept) < len(trainer.history):
-            try:
-                text_ = write(model, merges, block, seed, decode, encode, length=SNAP)
-            except Exception:
-                text_ = None
-            snap.kept.append({"epoch": int(trainer.history[len(snap.kept)]["epoch"]), "text": text_})
+            k = len(snap.kept) + 1
+            if said and k in said:
+                text_ = said[k]
+            else:
+                try:
+                    text_ = write(model, merges, block, seed, decode, encode, length=SNAP)
+                except Exception:
+                    text_ = None
+            snap.kept.append({"epoch": int(trainer.history[k - 1]["epoch"]), "text": text_})
     snap.kept = []
     return snap
+
+
+def now_picture(report: dict, labels: dict) -> str:
+    """Beside the live chart (decision 1.17): what the GPT writes now from START, SNAP tokens with the run's seed, as
+    after every epoch; while the run measures, the picture keeps what it saw. `labels`: now, alt."""
+    if "seen" not in report:   # one look per report
+        report["seen"] = report["look"]()
+    text_ = report["seen"] or ""
+    return yours.writes(labels["now"], [(START, text_[len(START):] if text_.startswith(START) else text_)], alt=labels["alt"])
 
 
 def course_run(ref: dict) -> dict:
@@ -624,7 +640,12 @@ def replay_frame(run: dict, epoch: int, labels: dict) -> tuple:
 
 def train(show, seed: int = 0, epochs: int | None = None) -> dict | str | None:
     """Train the learner's tokenizer on the first 90% of the stories, then the learner's GPT on the tokens of all of
-    them, as gpt-train-chars does on characters. `show` gets a dict with how far the run is. None when fast_bpe.py or
+    them, as gpt-train-chars does on characters. `show` gets a dict with how far the run is: {"phase": "tokenizer"},
+    then {"phase": "encode", "seconds_bpe"}, then while the GPT trains what live.follow hears (eight times per epoch the
+    mean training loss, after every epoch the validation loss), with "phase": "train", the step, the steps, the
+    seconds left and "look": a function that gives what the GPT writes now from START, SNAP tokens with the run's seed
+    (decision 1.17). What it wrote after every epoch is the run's "snapshots", for the replay; looking is left out of
+    the minutes and of the time left. None when fast_bpe.py or
     fast_encode.py is not in the project yet; "run" when the run stops with an error; "memory" when the GPU runs out
     of memory; "stopped" when the stop button ended the run before its first epoch did; else the run, saved as
     work/projects/llm/gpt_bpe.pt and gpt_bpe.json, unless an earlier run had a lower validation loss."""
@@ -659,23 +680,43 @@ def train(show, seed: int = 0, epochs: int | None = None) -> dict | str | None:
     except Exception:
         return "run"
     steps = len(trainer.train_loader)
-    windows = len(getattr(trainer.train_loader, "dataset", [])) or steps * p["batch"]
-    state = {"step": 0, "shown": 0.0, "start": time.time()}
-    snap = snapper(trainer, model, merges, block, seed, tools["decode"], tools["encode"])
+    state = {"step": 0, "start": time.time(), "aside": 0.0}   # aside: the seconds of looking, not of training
+    said = {}   # what the GPT wrote after the k-th epoch, by k
+    snap = snapper(trainer, model, merges, block, seed, tools["decode"], tools["encode"], said)
+
+    def look():
+        """What the GPT writes now, as after every epoch: looked at as netview.looking looks, so the run goes on as
+        it would have. None when it stops with an error."""
+        begun = time.time()
+        try:
+            with netview.looking(model):
+                return write(model, merges, block, seed, tools["decode"], tools["encode"], length=SNAP)
+        except Timeout:
+            raise
+        except Exception:
+            return None
+        finally:
+            state["aside"] += time.time() - begun
 
     def step():
-        snap()   # the epoch before has ended: what the GPT writes now
+        begun = time.time()
+        snap()   # the epoch before has ended: what the GPT wrote then, if the run did not let it write already
+        state["aside"] += time.time() - begun
         state["step"] += 1
-        now = time.time()
-        if now - state["shown"] >= 2 or state["step"] == 1:
-            state["shown"] = now
-            done = state["step"] - 1
-            seconds = now - state["start"]
-            left = seconds / done * (epochs * steps - done) if done >= 10 else None
-            show({"phase": "train", "epoch": done // steps + 1, "epochs": epochs, "step": done, "steps": epochs * steps,
-                  "seconds": seconds, "left": left, "history": list(trainer.history)})
+
+    def heard(e):
+        done, seconds = state["step"], time.time() - state["start"] - state["aside"]
+        report = e | {"phase": "train", "look": look, "step": done, "steps": epochs * steps,
+                      "left": seconds / done * (epochs * steps - done) if done >= 10 else None}
+        if "val_loss" in e:   # after every epoch: what it writes then, for the replay
+            said[e["epoch"]] = report["seen"] = look()
+        show(report)
 
     trainer.train_loader = T._Counted(trainer.train_loader, step, _shifted(tools["gpt_loaders"], ids, block, p["batch"], where, epochs, seed))
+    show({"phase": "train", "run": "", "epoch": 1, "epochs": epochs, "batch": 0, "batches": steps, "look": look,
+          "seen": look(), "step": 0, "steps": epochs * steps, "left": None})   # what the GPT writes before the first epoch
+    from everything_ai import live
+    live.follow(trainer, heard, "", every=max(1, steps // 8))   # eight times per epoch, on every plan
     stopped = False
     try:
         trainer.fit()
@@ -696,7 +737,7 @@ def train(show, seed: int = 0, epochs: int | None = None) -> dict | str | None:
     val_tokens, val_chars = len(ids) - cut, len(tools["decode"](ids[cut:], merges))
     best = min(history, key=lambda hist: hist["val_loss"])
     result = {"device": where, "name": p["name"], "sizes": list(p["sizes"]), "batch": p["batch"], "epochs": epochs,
-              "params": p["params"], "seed": seed, "stopped": stopped, "minutes": (time.time() - start) / 60,
+              "params": p["params"], "seed": seed, "stopped": stopped, "minutes": (time.time() - start - state["aside"]) / 60,
               "history": history, "merges": [[a, b] for (a, b) in merges], "stand_ins": stand_ins,
               "tokens": len(ids), "chars": len(text()), "val_tokens": val_tokens, "val_chars": val_chars,
               "best": best["val_loss"], "best_epoch": best["epoch"], "snapshots": snap.kept,

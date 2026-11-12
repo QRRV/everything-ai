@@ -244,16 +244,52 @@ def text_demo():
     mo.md(r"""
     ### Your two phases on the old scanner's digits
 
-    The cell below hands the course's real training loop, on the 100 labeled digits, to your `fine_tune` once it is right, else to the course's, and tests the result on the 1,000 speckled test digits, next to phase 1 alone. It takes a few seconds.
+    The cell below hands the course's real training loop, on the 100 labeled digits, to your `fine_tune` once it is right, else to the course's, and tests the result on the 1,000 speckled test digits, next to phase 1 alone. It takes a few seconds. While each run trains, a chart shows its loss on the 100 training digits after every epoch, and dashed on the 1,000 test digits at the epochs you can rewind to: first of phase 1 alone, then of the two phases of `fine_tune` one after the other, with the test loss of phase 1 alone thin and dashed beside it. Beside or under it are the digit reader's guesses at that moment for one speckled test digit of each kind, and under them what its layer `conv2` makes of a speckled 9; both are drawn again as it trains. Then you can rewind through both phases.
     """)
     return
 
 
 @app.cell(hide_code=True)
 def demo_tune(box_tune, result_tune):
-    _d = C.demo(box_tune.value if result_tune.state == "correct" else None)
+    _now = {}   # the live chart of each run, made at its first report, and its test loss so far
+    _heads = {"frozen": {"guesses": "The digit reader: its guess for one speckled test digit of each kind",
+                         "layer": "What its layer {name} makes of a speckled 9: frozen, so the same after every epoch"},
+              "tuned": {"guesses": "The digit reader: its guess for one speckled test digit of each kind",
+                        "layer": "What its layer {name} makes of a speckled 9: frozen in phase 1, learning in phase 2"}}
+
+    def _progress(_p):
+        _run = _p["run"]
+        if _run not in _now or _p["epoch"] == 1:   # a new run, also when the course's runs again in place of yours
+            _tu = _run == "tuned"
+            _now[_run] = L.live({"title": "Both phases" if _tu else "Phase 1 alone", "x": "epoch", "y": "loss",
+                                 "alt": "The loss of both phases so far: on the 100 training digits after every epoch, and dashed on the 1,000 test digits at the epochs of the rewind; thin and dashed, the test loss of phase 1 alone." if _tu else "The loss in phase 1 alone so far: on the 100 training digits after every epoch, and dashed on the 1,000 test digits at the epochs of the rewind."}, _p["epochs"], low=0.0,
+                                key=[("loss", False, "100 training digits, every epoch"), ("loss", True, "1,000 test digits, at the epochs of the rewind")])
+            _now[_run].watch(lambda: C.now_pictures(_p["look"](), _heads[_run], L.lang, f"nv-tune-{_run}-now"))
+            _now[_run + "-test"] = []
+            if _tu and "frozen-test" in _now:   # the test loss of phase 1 alone, thin and dashed
+                _now["tuned"].reference(_now["frozen-test"], "phase 1 alone", role="ink-2")
+        _who = "Both phases" if _run == "tuned" else "Phase 1 alone"
+        _line = f"**{_who}** · phase {_p['phase']} · epoch {_p['epoch']} of {_p['epochs']} · loss {L.number(_p['loss'], 3)}"
+        if "val_loss" in _p:   # the test digits at the epochs of the rewind, dashed
+            _now[_run + "-test"].append((_p["epoch"], _p["val_loss"]))
+            _now[_run].reference(_now[_run + "-test"], "", role="loss", replace=True)
+            _line += f" · test loss {L.number(_p['val_loss'], 3)}"
+        _now[_run].add(_p["epoch"], _p["loss"], _line)
+
+    _d = C.demo(box_tune.value if result_tune.state == "correct" else None, _progress)
     _who = "your `fine_tune`" if _d["yours"] else "the course's `fine_tune`"
-    mo.md(f"""With {_who}, of the 1,000 speckled test digits:
+    _labels = {"title": "Loss on the test digits", "x": "epoch", "y": "test loss", "frozen": "phase 1 alone", "alt": "The loss on the 1,000 test digits through both phases, at the epochs of the rewind, and thin and dashed that of phase 1 alone."}
+    _when = [_e for _e, _ in _d["tests"]["tuned"]] if len(_d["looked"]["tuned"]) == len(_d["tests"]["tuned"]) and all(_d["looked"]["tuned"]) else []
+
+    def _frame(_e):
+        _e = int(_e)
+        _i = _when.index(_e)
+        _k = _d["phases"]["tuned"][_i]
+        _right = sum(_g == _t for _g, _t in zip(_d["looked"]["tuned"][_i], _d["truth"]))
+        return (C.epoch_frame(_d, _e, _labels, _heads["tuned"], L.lang),
+                f"After epoch {_e}, in phase {_k}: of these 10 test digits, the digit reader reads {_right} right.")
+
+    _table = mo.md(f"""With {_who}, of the 1,000 speckled test digits:
 
 | | read right |
 |---|---|
@@ -261,6 +297,12 @@ def demo_tune(box_tune, result_tune):
 | both phases: fine-tuned | {_d['tuned']} |
 
 Over 5 seeds, with the course's code: {C.REFERENCE['frozen'][0]} to {C.REFERENCE['frozen'][1]} after phase 1 alone, {C.REFERENCE['tuned'][0]} to {C.REFERENCE['tuned'][1]} fine-tuned. On every seed, fine-tuning reads {C.REFERENCE['gain'][0]} to {C.REFERENCE['gain'][1]} digits more: a small gain, on top of what the borrowed features already gave.""")
+    if len(_when) > 1:   # rewinding through both phases
+        _out = mo.vstack([L.explore("rewind", "epoch", _frame, start=_when[-1], values=_when, role="",
+                                    task="Go through phase 1 and on into phase 2: when does layer `conv2` start to change, and do the guesses change with it?"), _table])
+    else:
+        _out = _table
+    _out
     return
 
 

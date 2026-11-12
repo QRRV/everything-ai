@@ -8,7 +8,7 @@ run is in the colour of its role: loss for a loss, ink for a reward or an accura
 Next to the chart you see what the model makes at that moment (decision 1.17): `watch(now)` gives the chart a
 function that draws it, such as the class maps of a few test scenes or a sentence the model writes, and the feature
 maps of one layer of the learner's network. It is called only when the chart is drawn, so a model is looked at at
-most every half second; a lesson looks at its model in eval mode and without a graph, and puts it back in train mode,
+most every half second, or less often with `look_every`; a lesson looks at its model in eval mode and without a graph, and puts it back in train mode,
 so that looking never changes the run."""
 from __future__ import annotations
 
@@ -32,14 +32,17 @@ class Live:
     has title, x, y and alt; `low` and `high` fix the y-axis, else it follows the values. `line(text)` shows a line
     of progress under the chart, or alone before the first step; `reference(points, label)` adds another run to hold
     this one against. `key` says under the chart what each line is, as (role, dashed, words), for lines whose names
-    would sit in each other's way, such as a run and its test loss that end close together."""
+    would sit in each other's way, such as a run and its test loss that end close together. `every` is how often the
+    chart is drawn at most, in seconds; `look_every` how often `watch` looks at the model, by default as often: a
+    look that takes long, such as a model that writes a sentence, is spread out more than the chart."""
 
     def __init__(self, labels: dict, steps: int, role: str = "loss", lang: str = "en", low: float | None = None,
                  high: float | None = None, window: int | None = None, every: float = 0.5, xlog: bool = False,
-                 key: list | None = None):
+                 key: list | None = None, look_every: float | None = None):
         self.labels, self.steps, self.role, self.lang = labels, max(int(steps), 1), role, lang
         self.key = key or []   # under the chart, what each line is: (role, dashed, words)
         self.low, self.high, self.every, self.xlog = low, high, every, xlog
+        self.look_every = every if look_every is None else look_every
         self.window = window or max(1, self.steps // 50)
         self.xs: list = []
         self.ys: list = []
@@ -60,11 +63,12 @@ class Live:
 
     def looked(self) -> list:
         """What `watch` draws now, as a list of HTML parts; empty without a watch, or when drawing it fails. The model
-        is looked at again only `every` seconds after the last look, also when the line of progress changes faster."""
+        is looked at again only `look_every` seconds after the last look ended, also when the line of progress changes
+        faster: a slow look, such as a model writing a story, then takes a small part of the run however slow it is."""
         if self._now is None:
             return []
         at = time.perf_counter()
-        if self._seen is not None and at - self._seen[0] < self.every:
+        if self._seen is not None and at - self._seen[0] < self.look_every:
             return self._seen[1]
         try:
             out = self._now()
@@ -73,7 +77,7 @@ class Live:
         except Exception:
             out = []
         parts = [p for p in ([out] if isinstance(out, str) else list(out or [])) if p]
-        self._seen = (at, parts)
+        self._seen = (time.perf_counter(), parts)
         return parts
 
     def add(self, x: float, y: float, text: str = "") -> None:
@@ -178,8 +182,8 @@ class Live:
             p.points(self.xs, mean, self.role, r=2.5)                   # a run of few steps: a dot at every step
         if self.xs:
             p.points([self.xs[-1]], [mean[-1]], self.role, r=3.5)       # where the run is now
-        if at is not None:
-            p.line([at, at], list(y), "ink-2", 1.2)                     # where a rewind is
+        if at is not None:   # where a rewind is: up to the highest line, under the names above it
+            p.line([at, at], [y[0], min(y[1], max(every)) if every else y[1]], "ink-2", 1.2)
         svg = chart.figure([p], alt=self.labels["alt"], width=CHART_WIDTH, height=240)
         return chart.with_decimal_comma(svg) if self.lang == "nl" else svg
 
@@ -216,7 +220,8 @@ def key_html(entries: list) -> str:
     for role, dashed, words in entries:
         dash = ";stroke-dasharray:5 5" if dashed else ""
         width = 1.4 if dashed else 2.4
-        sample = (f'<svg width="26" height="10" viewBox="0 0 26 10" aria-hidden="true" style="flex:none">'
+        sample = (f'<svg width="26" height="10" viewBox="0 0 26 10" aria-hidden="true" '   # its size in its style: a rewind
+                  f'style="flex:none;display:inline-block;width:26px;height:10px">'   # sizes every svg in it to its column
                   f'<line x1="2" y1="5" x2="24" y2="5" style="stroke:{chart._colour(role)};stroke-width:{width};'
                   f'stroke-linecap:round{dash}"/></svg>')
         items.append(f'<span style="display:inline-flex;align-items:center;gap:0.35rem">{sample}{html.escape(words)}</span>')
@@ -262,27 +267,19 @@ def name_at(points: list, label: str, above: bool, steps: float, y: tuple, xlog:
     return end, min(max(at, y[0] + 0.05 * h), y[1] - 0.05 * h)
 
 
-def follow(trainer, show, name: str, every: int = 50) -> None:
-    """Let `show` hear a run of the learner's Trainer of nn-trainer while it fits, without changing their code: after
-    every epoch its validation loss ({"run": name, "epoch", "epochs", "val_loss"}), and every `every` batches how far
-    the epoch is, with the mean training loss of those batches ({"run", "epoch", "epochs", "batch", "batches",
-    "loss"}). This wraps self.train_loader, which their fit walks once an epoch, and self.evaluate, on this one
-    trainer. An epoch counts from its first batch, and its validation loss is the first evaluate after it: one before
-    the first epoch, or a second in the same epoch, is not heard, and a fit that measures without self.evaluate only
-    shows how far each epoch is.
-
-    The training loss is the cross-entropy of what self.model gives on a batch in train mode, as train_epoch of
-    nn-trainer measures it, against the labels of that batch: a hook on the model hears it, without a graph and
-    without drawing a random number, so the run stays the same. A report leaves "loss" out when the model gave nothing
-    it can measure, such as a trainer without self.model; the hook goes once the last epoch is measured, or when
-    self.fit stops sooner."""
+def _measuring(model):
+    """The training loss of every batch that `model` trains on, as follow and walked hear it: the cross-entropy of
+    what the model gives on a batch in train mode against the labels of that batch, put in labels[0] by the loader
+    before the batch goes out. A forward hook hears it, without a graph and without drawing a random number, so the
+    run stays the same; a batch it cannot measure, such as one whose labels do not fit the output, adds nothing.
+    Gives (labels, losses, unhook): losses gets one number per batch, and unhook() takes the hook off. Without a
+    model (no nn.Module), no hook and no losses."""
     import torch   # here, not at the top: lessons without torch load this module too
     import torch.nn.functional as F
 
-    evaluate, loader, epoch, heard = trainer.evaluate, trainer.train_loader, [0], [0]
-    labels, losses, hooked = [None], [], []   # the labels of the batch it trains on now; the loss of each batch since
+    labels, losses, hooked = [None], [], []
 
-    def measured(module, args, out):   # the last report
+    def measured(module, args, out):
         if not module.training:
             return
         yb, labels[0] = labels[0], None   # one loss per batch, also when the model is called again on it
@@ -298,14 +295,34 @@ def follow(trainer, show, name: str, every: int = 50) -> None:
         except Exception:   # labels that do not fit the model's output: the chart then only shows how far it is
             pass
 
-    model = getattr(trainer, "model", None)
     if isinstance(model, torch.nn.Module):
         hooked.append(model.register_forward_hook(measured))
 
-    def unhooked():
+    def unhook():
         for h in hooked:
             h.remove()
         hooked.clear()
+    return labels, losses, unhook
+
+
+def follow(trainer, show, name: str, every: int = 50) -> None:
+    """Let `show` hear a run of the learner's Trainer of nn-trainer while it fits, without changing their code: after
+    every epoch its validation loss ({"run": name, "epoch", "epochs", "val_loss"}), and every `every` batches how far
+    the epoch is, with the mean training loss of those batches ({"run", "epoch", "epochs", "batch", "batches",
+    "loss"}). This wraps self.train_loader, which their fit walks once an epoch, and self.evaluate, on this one
+    trainer. An epoch counts from its first batch, and its validation loss is the first evaluate after it: one before
+    the first epoch, or a second in the same epoch, is not heard, and a fit that measures without self.evaluate only
+    shows how far each epoch is.
+
+    The training loss is the cross-entropy of what self.model gives on a batch in train mode, as train_epoch of
+    nn-trainer measures it, against the labels of that batch: a hook on the model hears it, without a graph and
+    without drawing a random number, so the run stays the same. A report leaves "loss" out when the model gave nothing
+    it can measure, such as a trainer without self.model; the hook goes once the last epoch is measured, or when
+    self.fit stops sooner."""
+    import torch   # here, not at the top: lessons without torch load this module too
+
+    evaluate, loader, epoch, heard = trainer.evaluate, trainer.train_loader, [0], [0]
+    labels, losses, unhooked = _measuring(getattr(trainer, "model", None))
 
     def evaluated(*args, **kwargs):
         loss = evaluate(*args, **kwargs)
@@ -346,3 +363,47 @@ def follow(trainer, show, name: str, every: int = 50) -> None:
             finally:
                 unhooked()
         trainer.fit = fitted
+
+
+def walked(loader, model, show, name: str, epochs: int, every: int = 10):
+    """The loader as it is, for a fit of the learner's own that walks it once an epoch, such as fit of
+    torch-mlp-digits (decision 1.17): every `every` batches `show` hears how far the epoch is, with the mean training
+    loss of those batches ({"run": name, "epoch", "epochs", "batch", "batches", "loss"}), and after the last batch of
+    every epoch, before the fit goes on, {"run", "epoch", "epochs", "done": True}, so that a demo can look at the model
+    as that epoch left it. An epoch counts from its first batch.
+
+    The training loss is measured as follow measures it (_measuring). The hook goes after the last epoch; `.unhook()`
+    takes it off sooner, such as when the fit stops with an error."""
+    import torch   # here, not at the top: lessons without torch load this module too
+
+    epoch = [0]
+    labels, losses, unhooked = _measuring(model)
+
+    class Walked:   # the loader as it is, also for len() and its other attributes, telling how far an epoch is
+        def __len__(self):
+            return len(loader)
+
+        def __getattr__(self, key):
+            return getattr(loader, key)
+
+        def unhook(self):
+            unhooked()
+
+        def __iter__(self):
+            epoch[0] += 1
+            losses.clear()
+            for i, batch in enumerate(loader, 1):
+                labels[0] = batch[1] if isinstance(batch, (tuple, list)) and len(batch) == 2 and torch.is_tensor(batch[1]) else None
+                yield batch   # the fit trains on it before it asks for the next one
+                labels[0] = None
+                if i % every == 0:
+                    report = {"run": name, "epoch": epoch[0], "epochs": epochs, "batch": i, "batches": len(loader)}
+                    if losses:
+                        report["loss"] = sum(losses) / len(losses)
+                        losses.clear()
+                    show(report)
+            if epoch[0] >= epochs:   # the last epoch: the model trains no more on this loader
+                self.unhook()
+            show({"run": name, "epoch": epoch[0], "epochs": epochs, "done": True})
+
+    return Walked()

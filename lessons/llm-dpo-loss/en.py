@@ -331,7 +331,7 @@ def text_demo():
     mo.md(f"""
     ### Twenty steps of DPO
 
-    The course's SFT model of [Project: teach your model to follow instructions (SFT)](/course/open/llm-sft?lang=en), as the policy and as the reference model, and one preference pair for *Write a story with the words: kite and park.*: the story with both words is chosen, the same story with *hill* in place of *park* is rejected. Before the first step, the two log-probabilities of the reference model with your `answer_logprob`; every step, the two of the policy, the loss with your `dpo_loss`, and a step of AdamW on the whole policy. Choose $\\beta$: each value trains anew, in about {C.number(C.MEASURED['seconds'], 0, L.lang)} seconds on the course's CPU with one thread.
+    The course's SFT model of [Project: teach your model to follow instructions (SFT)](/course/open/llm-sft?lang=en), as the policy and as the reference model, and one preference pair for *Write a story with the words: kite and park.*: the story with both words is chosen, the same story with *hill* in place of *park* is rejected. Before the first step, the two log-probabilities of the reference model with your `answer_logprob`; every step, the two of the policy, the loss with your `dpo_loss`, and a step of AdamW on the whole policy. Choose $\\beta$: each value trains anew, in about {C.number(C.MEASURED['seconds'], 0, L.lang)} seconds on the course's CPU with one thread. While it trains, a chart shows the loss of every step, and beside or under it how likely the policy finds *park* and *hill* after *{C.CONTEXT}* at that moment. Then you can rewind through the steps.
     """)
     return
 
@@ -348,22 +348,42 @@ def demo_dpo(beta_pick, box_logprob, result_logprob, box_loss, result_loss):
     _beta = C.BETAS[beta_pick.value]
     _mine = {"logprob": run_code(box_logprob.value).names.get("answer_logprob") if result_logprob.state == "correct" else None,
              "loss": run_code(box_loss.value).names.get("dpo_loss") if result_loss.state == "correct" else None}
-    _r, _failed = C.demo(_beta, _mine["logprob"], _mine["loss"])
+    _b = C.number(_beta, 2 if _beta < 0.1 else 1, L.lang)
+    _pct = lambda _v: C.percent(_v, L.lang)
+    _moved = lambda _v: ("+" if _v >= 0 else "") + C.number(_v, 1, L.lang)
+    _now = {}   # the live chart, made anew at step 0: where one of your functions stands down, the run starts again
+
+    def _progress(_p):
+        if _p["step"] == 0:
+            _now["chart"] = L.live({"title": f"DPO at β = {_b}", "x": "step", "y": "loss", "alt": "The DPO loss of every step so far, against ln 2 dashed."}, _p["steps"], low=0.0, window=1,
+                                   look_every=0.0, key=[("loss", False, "the loss of every step"), ("ink-3", True, "ln 2 = 0.693, where it starts")])
+            _now["chart"].reference([(0, C.LN2), (_p["steps"], C.LN2)], "", "ink-3")
+        _now["chart"].watch(lambda _look=_p["look"]: C.now_picture(_look(), "How likely the policy finds each word now", L.lang))
+        _now["chart"].add(_p["step"], _p["loss"], f"**β = {_b}** · step {_p['step']} of {_p['steps']} · loss {C.number(_p['loss'], 3, L.lang)} · chosen answer {_moved(_p['chosen'])} nats, rejected answer {_moved(_p['rejected'])} nats")
+
+    _r, _failed = C.demo(_beta, _mine["logprob"], _mine["loss"], _progress)
     _names = {"logprob": "`answer_logprob`", "loss": "`dpo_loss`"}
     _notes = [f"*The course's {_names[_k]} stands in until yours passes its check.*" for _k in _names if _mine[_k] is None]
     _notes += [f"*Your {_names[_k]} stops with an error on the model, or gives no tensor to train with: the course's stands in.*" for _k in _failed]
-    _b = C.number(_beta, 2 if _beta < 0.1 else 1, L.lang)
     if _r == "run":
         _out = mo.md("*The course's SFT model cannot be made here: a module of your project that it needs stops with an error. The note at the top of the lesson says which one.*")
     else:
         _h = _r["history"]
-        _pct = lambda _v: C.percent(_v, L.lang)
-        _moved = lambda _v: ("+" if _v >= 0 else "") + C.number(_v, 1, L.lang)
+        _labels = {"loss_title": "Loss", "moved_title": "How far each moved", "x": "step", "loss": "loss",
+                   "moved": "nats", "chosen": "chosen", "rejected": "rejected", "lang": L.lang,
+                   "alt": f"Two charts over {C.STEPS} steps at beta {_b}: the loss falls from 0.693 to {C.number(_h[-1][0], 3, L.lang)}; the chosen answer moves {_moved(_h[-1][1])} nats and the rejected answer {_moved(_h[-1][2])} nats from the reference model."}
+
+        def _frame(_s):
+            _s = int(_s)
+            return (C.step_frame(_r, _s, _labels, "How likely the policy found each word after this step", L.lang),
+                    f"Before the first step the policy is the SFT model: *park* {_pct(_r['probs'][0]['park'])}, *hill* {_pct(_r['probs'][0]['hill'])}, and the loss is {C.number(_h[0][0], 3, L.lang)}." if _s == 0 else
+                    f"After step {_s}: *park* {_pct(_r['probs'][_s]['park'])}, *hill* {_pct(_r['probs'][_s]['hill'])}; the loss is now {C.number(_h[_s][0], 3, L.lang)}.")
+
+        _rewind = L.explore("rewind", "step", _frame, start=C.STEPS, values=list(range(C.STEPS + 1)), role="",
+                            task="Go back to step 0, then forward again: which of the two words moves first, and how far?")
         _out = mo.vstack([
             mo.md(f"**β = {_b}** · loss after {C.STEPS} steps {C.number(_h[-1][0], 3, L.lang)} · chosen answer {_moved(_h[-1][1])} nats, rejected answer {_moved(_h[-1][2])} nats, compared with the reference model"),
-            mo.Html(C.curves_picture(_h, {"loss_title": "Loss", "moved_title": "How far each moved", "x": "step", "loss": "loss",
-                                          "moved": "nats", "chosen": "chosen", "rejected": "rejected", "lang": L.lang,
-                                          "alt": f"Two charts over {C.STEPS} steps at beta {_b}: the loss falls from 0.693 to {C.number(_h[-1][0], 3, L.lang)}; the chosen answer moves {_moved(_h[-1][1])} nats and the rejected answer {_moved(_h[-1][2])} nats from the reference model."})),
+            _rewind,
             mo.md(f"""
             | After *{C.CONTEXT}* | SFT model | after {C.STEPS} steps |
             |---|---|---|

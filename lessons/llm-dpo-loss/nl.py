@@ -331,7 +331,7 @@ def text_demo():
     mo.md(f"""
     ### Twintig stappen DPO
 
-    Het SFT-model van de course uit [Project: leer je model instructies volgen (SFT)](/course/open/llm-sft?lang=nl), als de policy en als het reference model, en één preference pair voor *Write a story with the words: kite and park.*: het verhaal met beide woorden is gekozen, hetzelfde verhaal met *hill* in plaats van *park* is afgewezen. Voor de eerste stap de twee log-kansen van het reference model met je `answer_logprob`; elke stap de twee van de policy, de loss met je `dpo_loss`, en een stap AdamW op de hele policy. Kies $\\beta$: elke waarde traint opnieuw, in ongeveer {C.number(C.MEASURED['seconds'], 0, L.lang)} seconden op de CPU van de course met één thread.
+    Het SFT-model van de course uit [Project: leer je model instructies volgen (SFT)](/course/open/llm-sft?lang=nl), als de policy en als het reference model, en één preference pair voor *Write a story with the words: kite and park.*: het verhaal met beide woorden is gekozen, hetzelfde verhaal met *hill* in plaats van *park* is afgewezen. Vóór de eerste stap de twee log-kansen van het reference model met je `answer_logprob`; elke stap de twee van de policy, de loss met je `dpo_loss`, en een stap AdamW op de hele policy. Kies $\\beta$: elke waarde traint opnieuw, in ongeveer {C.number(C.MEASURED['seconds'], 0, L.lang)} seconden op de CPU van de course met één thread. Tijdens het trainen toont een grafiek de loss van elke stap, en ernaast of eronder hoe waarschijnlijk de policy op dat moment *park* en *hill* vindt na *{C.CONTEXT}*. Daarna kun je terugspoelen door de stappen.
     """)
     return
 
@@ -348,22 +348,42 @@ def demo_dpo(beta_pick, box_logprob, result_logprob, box_loss, result_loss):
     _beta = C.BETAS[beta_pick.value]
     _mine = {"logprob": run_code(box_logprob.value).names.get("answer_logprob") if result_logprob.state == "correct" else None,
              "loss": run_code(box_loss.value).names.get("dpo_loss") if result_loss.state == "correct" else None}
-    _r, _failed = C.demo(_beta, _mine["logprob"], _mine["loss"])
+    _b = C.number(_beta, 2 if _beta < 0.1 else 1, L.lang)
+    _pct = lambda _v: C.percent(_v, L.lang)
+    _moved = lambda _v: ("+" if _v >= 0 else "") + C.number(_v, 1, L.lang)
+    _now = {}   # the live chart, made anew at step 0: where one of your functions stands down, the run starts again
+
+    def _progress(_p):
+        if _p["step"] == 0:
+            _now["chart"] = L.live({"title": f"DPO bij β = {_b}", "x": "stap", "y": "loss", "alt": "De DPO-loss van elke stap tot nu toe, tegen ln 2 gestreept."}, _p["steps"], low=0.0, window=1,
+                                   look_every=0.0, key=[("loss", False, "de loss van elke stap"), ("ink-3", True, "ln 2 = 0,693, waar hij begint")])
+            _now["chart"].reference([(0, C.LN2), (_p["steps"], C.LN2)], "", "ink-3")
+        _now["chart"].watch(lambda _look=_p["look"]: C.now_picture(_look(), "Hoe waarschijnlijk de policy elk woord nu vindt", L.lang))
+        _now["chart"].add(_p["step"], _p["loss"], f"**β = {_b}** · stap {_p['step']} van {_p['steps']} · loss {C.number(_p['loss'], 3, L.lang)} · gekozen antwoord {_moved(_p['chosen'])} nats, afgewezen antwoord {_moved(_p['rejected'])} nats")
+
+    _r, _failed = C.demo(_beta, _mine["logprob"], _mine["loss"], _progress)
     _names = {"logprob": "`answer_logprob`", "loss": "`dpo_loss`"}
     _notes = [f"*De {_names[_k]} van de course staat er tot de jouwe slaagt voor zijn check.*" for _k in _names if _mine[_k] is None]
     _notes += [f"*Je {_names[_k]} stopt met een fout op het model, of geeft geen tensor om mee te trainen: die van de course staat er.*" for _k in _failed]
-    _b = C.number(_beta, 2 if _beta < 0.1 else 1, L.lang)
     if _r == "run":
         _out = mo.md("*Het SFT-model van de course kan hier niet gemaakt worden: een module van je project die het nodig heeft stopt met een fout. De notitie bovenaan de les zegt welke.*")
     else:
         _h = _r["history"]
-        _pct = lambda _v: C.percent(_v, L.lang)
-        _moved = lambda _v: ("+" if _v >= 0 else "") + C.number(_v, 1, L.lang)
+        _labels = {"loss_title": "Loss", "moved_title": "Hoe ver elk antwoord ging", "x": "stap", "loss": "loss",
+                   "moved": "nats", "chosen": "gekozen", "rejected": "afgewezen", "lang": L.lang,
+                   "alt": f"Twee grafieken over {C.STEPS} stappen bij beta {_b}: de loss daalt van 0,693 naar {C.number(_h[-1][0], 3, L.lang)}; het gekozen antwoord verschuift {_moved(_h[-1][1])} nats en het afgewezen antwoord {_moved(_h[-1][2])} nats ten opzichte van het reference model."}
+
+        def _frame(_s):
+            _s = int(_s)
+            return (C.step_frame(_r, _s, _labels, "Hoe waarschijnlijk de policy elk woord vond na deze stap", L.lang),
+                    f"Vóór de eerste stap is de policy het SFT-model: *park* {_pct(_r['probs'][0]['park'])}, *hill* {_pct(_r['probs'][0]['hill'])}, en de loss is {C.number(_h[0][0], 3, L.lang)}." if _s == 0 else
+                    f"Na stap {_s}: *park* {_pct(_r['probs'][_s]['park'])}, *hill* {_pct(_r['probs'][_s]['hill'])}; de loss is nu {C.number(_h[_s][0], 3, L.lang)}.")
+
+        _rewind = L.explore("rewind", "stap", _frame, start=C.STEPS, values=list(range(C.STEPS + 1)), role="",
+                            task="Ga terug naar stap 0 en dan weer vooruit: welk van de twee woorden verschuift het eerst, en hoe ver?")
         _out = mo.vstack([
             mo.md(f"**β = {_b}** · loss na {C.STEPS} stappen {C.number(_h[-1][0], 3, L.lang)} · gekozen antwoord {_moved(_h[-1][1])} nats, afgewezen antwoord {_moved(_h[-1][2])} nats, vergeleken met het reference model"),
-            mo.Html(C.curves_picture(_h, {"loss_title": "Loss", "moved_title": "Hoe ver elk antwoord ging", "x": "stap", "loss": "loss",
-                                          "moved": "nats", "chosen": "gekozen", "rejected": "afgewezen", "lang": L.lang,
-                                          "alt": f"Twee grafieken over {C.STEPS} stappen bij beta {_b}: de loss daalt van 0,693 naar {C.number(_h[-1][0], 3, L.lang)}; het gekozen antwoord verschuift {_moved(_h[-1][1])} nats en het afgewezen antwoord {_moved(_h[-1][2])} nats ten opzichte van het reference model."})),
+            _rewind,
             mo.md(f"""
             | Na *{C.CONTEXT}* | SFT-model | na {C.STEPS} stappen |
             |---|---|---|

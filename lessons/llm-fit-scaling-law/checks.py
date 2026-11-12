@@ -41,6 +41,8 @@ SCHEDULE = {"warmup": 40, "warmdown": 0.65, "final": 0.05}   # a warmup, a plate
 FLOORS = [round(0.05 * i, 2) for i in range(0, 60)]          # the floors best_floor tries, below the lowest loss
 CHINCHILLA = 20      # tokens per parameter that Hoffmann and others (2022) found compute-optimal
 RUNS = "scaling_runs.json"   # the runs of the learner, in work/projects/llm/
+WRITE, MOMENTS = 40, 6   # the story a model writes beside the chart and in the rewind: WRITE tokens; the rewind stops
+                         # before the first step and after every sixth of a run (decision 1.17)
 
 
 def number(x: float, digits: int, lang: str) -> str:
@@ -62,6 +64,29 @@ def floors_for(losses: list) -> list:
     return [f for f in FLOORS if f < min(losses) - 0.05]
 
 
+def moments(steps: int) -> list:
+    """The steps the rewind stops at: before the first one and after every sixth of a run of `steps`."""
+    return sorted({round(steps * k / MOMENTS) for k in range(MOMENTS + 1)})
+
+
+def writer(model):
+    """A function that lets `model` write WRITE tokens of a story from "Once upon a time" now, at temperature TAU as in
+    gpt-generate, with the learner's encode and decode and its own seed: looked at as netview.looking looks, so that
+    the run stays the same (decision 1.17). It gives None when that stops with an error."""
+    words = run_code("from llm.encode import encode\nfrom llm.decode import decode")
+    merges = D.tokenizer()["merges"]
+
+    def write_now() -> str | None:
+        from everything_ai import netview
+        try:
+            with netview.looking(model):
+                text = D.B.write(model, merges, BLOCK, 0, words.names["decode"], words.names["encode"], length=WRITE)
+            return text[len(D.B.START):] if text.startswith(D.B.START) else text   # the story after its start, which the picture shows in gray
+        except Exception:
+            return None
+    return write_now
+
+
 def _shards(tools) -> tuple | str:
     """The training and validation windows of the shards of llm-data-pipeline, written first with the course's versions
     when they are missing."""
@@ -79,10 +104,11 @@ def _shards(tools) -> tuple | str:
 def train(depth: int, show) -> dict | str:
     """One run: the learner's ModernGPT of `depth` blocks, WIDTH * depth wide with a head per HEAD, one epoch of BATCH
     windows of BLOCK tokens over the training shards, AdamW at PEAK times multiplier(), seed 0. `show` gets the step
-    every 10 steps and at the last one, with the loss of each step since the one before ("fresh"). "run" when a
-    module of the learner stops with an error; else its parameters, its tokens, its validation loss per token on the
-    last shard, the seconds, and its training loss as the mean of every 10 steps at the last of them ("curve", for
-    the live chart of a later run)."""
+    every 10 steps and at the last one, with the loss of each step since the one before ("fresh"), and "look", which
+    lets the model write a story now, for the picture beside the chart. "run" when a module of the learner stops with
+    an error; else its parameters, its tokens, its validation loss per token on the last shard, the seconds of training
+    (without those of the stories), its training loss as the mean of every 10 steps at the last of them ("curve", for
+    the live chart of a later run), and the story it wrote at every moment of the rewind ("wrote", as [step, text])."""
     import torch
     from torch.utils.data import DataLoader
     ran = run_code("from llm.modern_gpt import ModernGPT\nfrom llm.token_windows import TokenWindows")
@@ -98,8 +124,10 @@ def train(depth: int, show) -> dict | str:
     model = ran.names["ModernGPT"](D.B.VOCAB, d, d // HEAD, d // HEAD, depth).to(device)
     opt = torch.optim.AdamW(model.parameters(), lr=PEAK, weight_decay=0.1)
     loader = DataLoader(train_ds, batch_size=BATCH, shuffle=True, generator=torch.Generator().manual_seed(0))
-    steps, start = len(loader), time.perf_counter()
-    losses = []
+    steps = len(loader)
+    write_now, marks = writer(model), moments(steps)
+    wrote = [[0, write_now()]] if 0 in marks else []
+    losses, start, aside = [], time.perf_counter(), 0.0   # aside: the seconds of the stories, not of training
     model.train()
     for step, (xb, yb) in enumerate(loader):
         for group in opt.param_groups:
@@ -112,10 +140,14 @@ def train(depth: int, show) -> dict | str:
         torch.nn.utils.clip_grad_norm_(model.parameters(), 1.0)
         opt.step()
         losses.append(loss.item())
+        looked = time.perf_counter()
+        if step + 1 in marks:
+            wrote.append([step + 1, write_now()])
         if step % 10 == 9 or step == steps - 1:
             shown = step - step % 10   # the steps since the last report, for the live chart
-            show({"depth": depth, "step": step + 1, "steps": steps, "loss": losses[-1], "seconds": time.perf_counter() - start,
-                  "fresh": list(zip(range(shown + 1, step + 2), losses[shown:]))})
+            show({"depth": depth, "step": step + 1, "steps": steps, "loss": losses[-1], "seconds": looked - start - aside,
+                  "fresh": list(zip(range(shown + 1, step + 2), losses[shown:])), "look": write_now})
+        aside += time.perf_counter() - looked
     model.eval()
     total, count = 0.0, 0
     with torch.no_grad():
@@ -126,7 +158,8 @@ def train(depth: int, show) -> dict | str:
             count += yb.numel()
     curve = [[min(k + 10, steps), sum(losses[k:k + 10]) / len(losses[k:k + 10])] for k in range(0, steps, 10)]
     return {"depth": depth, "params": sum(p.numel() for p in model.parameters()), "tokens": len(train_ds) * BLOCK,
-            "val": total / count, "seconds": time.perf_counter() - start, "device": device, "curve": curve}
+            "val": total / count, "seconds": time.perf_counter() - start - aside, "device": device, "curve": curve,
+            "wrote": wrote}
 
 
 def saved_runs() -> dict:
@@ -144,6 +177,50 @@ def save_run(run: dict) -> None:
     path = projects.folder() / "llm" / RUNS
     path.parent.mkdir(parents=True, exist_ok=True)
     path.write_text(json.dumps({str(k): v for k, v in sorted(runs.items())}, indent=1) + "\n", encoding="utf-8")
+
+
+def now_picture(report: dict, labels: dict) -> str:
+    """Beside the live chart (decision 1.17): the story the model of the last report writes now. `labels`: now
+    ({step}), alt_now."""
+    from everything_ai import yours
+    if "seen" not in report:   # one look per report: while the run measures, the picture keeps what it saw
+        report["seen"] = report["look"]()
+    return yours.writes(labels["now"].format(step=report["step"]), [(D.B.START, report["seen"] or "")], alt=labels["alt_now"])
+
+
+def rewinds(runs: list) -> bool:
+    """Whether these runs can be rewound: each with its curve and its stories at the same moments."""
+    return bool(runs) and all(r.get("wrote") and r.get("curve") for r in runs) and \
+        len({tuple(s for s, _ in r["wrote"]) for r in runs}) == 1
+
+
+def rewind_frame(runs: list, step: int, depth: int, labels: dict) -> tuple:
+    """A moment of one of `runs` (all with the same steps), for the rewind after the demo (decision 1.17): the training
+    loss of every run as the mean of every 10 steps, the one of `depth` solid and the others dashed, with a dashed
+    line at `step`; beside it the story that model wrote then; and the sentence under it. `labels`: title ({depth}),
+    x, y, alt ({depth}), lang, wrote, alt_wrote ({depth}, {step}), start ({depth}), after ({depth}, {step}, {loss})."""
+    from everything_ai import chart, live, yours
+    lang = labels.get("lang", "en")
+    run = next(r for r in runs if r["depth"] == depth)
+    top = math.ceil(max(v for r in runs for _, v in r["curve"]) * 2) / 2
+    low = math.floor(min(v for r in runs for _, v in r["curve"]) * 2) / 2
+    steps = max(x for r in runs for x, _ in r["curve"])
+    p = chart.Panel((0, steps), (low, top), title=labels["title"].format(depth=depth), xlabel=labels["x"], ylabel=labels["y"])
+    p.line([step, step], [low, top], "ink-2", 1.2, dashed=True)
+    for r in runs:
+        if r is not run:
+            p.line([x for x, _ in r["curve"]], [v for _, v in r["curve"]], "loss", 1.4, dashed=True)
+    p.line([x for x, _ in run["curve"]], [v for _, v in run["curve"]], "loss", 2.4)
+    svg = chart.figure([p], alt=labels["alt"].format(depth=depth), width=330, height=240)
+    svg = chart.with_decimal_comma(svg) if lang == "nl" else svg
+    text = dict((s, t) for s, t in run["wrote"]).get(step) or ""
+    story = yours.writes(labels["wrote"], [(D.B.START, text)], alt=labels["alt_wrote"].format(depth=depth, step=step))
+    if step == 0:
+        said = labels["start"].format(depth=depth)
+    else:
+        loss = next(v for x, v in run["curve"] if x >= step)   # the mean of the 10 steps around it
+        said = labels["after"].format(depth=depth, step=step, loss=number(loss, 2, lang))
+    return live.rewound(svg, [story], width=330), said
 
 
 def law_picture(runs: list, floor: float, big: dict | None, predicted: float, labels: dict) -> str:

@@ -33,6 +33,7 @@ PLANS = {"gpu": {"sizes": (384, 6, 6, 256), "batch": 64, "epochs": 20},
 MIN_GPU_MEMORY = 7 * 2 ** 30   # the bigger GPT with mini-batches of 64 needs about 5 GB on the GPU
 VOCAB = 65                     # the characters of Tiny Shakespeare
 MLP_LOSS = 2.20                # the validation loss of the MLP of lm-mlp-context, with 3 characters of context
+GUESS_LOSS = math.log(VOCAB)   # the loss of guessing evenly among the 65 characters: 4.17
 # The course's own runs of both plans, with the course's solutions, PyTorch 2.14.1 on the CPU of the course's computer
 # (4 threads): the validation and training loss after every epoch, per seed. The GPU plan ran on that CPU too, which
 # gives nearly the same numbers as a GPU, only slower: its minutes are those of the CPU, and only one seed ran, since
@@ -425,8 +426,11 @@ def _sync(where: str) -> None:
 
 def train(show, seed: int = 0, epochs: int | None = None, ablate=None, name: str = "gpt_chars",
           own: bool = True) -> dict | str | None:
-    """Train the learner's GPT with their gpt_run on Tiny Shakespeare. `show` gets a dict with how far the run is,
-    every few seconds. None when gpt_loaders.py or gpt_run.py is not in the project yet; "run" when the run stops with
+    """Train the learner's GPT with their gpt_run on Tiny Shakespeare. `show` hears the run as live.follow reports it
+    (eight times per epoch the mean training loss, after every epoch the validation loss), with the step, the steps and the
+    seconds left, and "look": a function that gives what the GPT expects next now at the places of GUESS_AT (decision
+    1.17; no text it writes, decision 1.12). The run keeps that before the first epoch and after every epoch, as
+    "looks", for the rewind after it; looking is left out of its minutes and of the time left. None when gpt_loaders.py or gpt_run.py is not in the project yet; "run" when the run stops with
     an error; "memory" when the GPU runs out of memory; "stopped" when the stop button ended the run before its first
     epoch did; else the run, with `kept`: None when its checkpoint became gpt_chars.pt, or the earlier run that stays
     there because its validation loss was lower. The marimo stop button ends the run early, with the best parameters
@@ -459,21 +463,35 @@ def train(show, seed: int = 0, epochs: int | None = None, ablate=None, name: str
         return "run"
     steps = len(trainer.train_loader)
     windows = len(getattr(trainer.train_loader, "dataset", [])) or steps * p["batch"]
-    state = {"step": 0, "shown": 0.0, "start": time.time()}
+    chars = "".join(sorted(set(book)))
+    state = {"step": 0, "start": time.time(), "aside": 0.0}
+    looks = {}
+
+    def look():
+        start = time.time()
+        try:
+            return guesses_of(trainer.model, chars, p["sizes"][3], book)
+        finally:
+            state["aside"] += time.time() - start
 
     def step():
         state["step"] += 1
-        now = time.time()
-        if now - state["shown"] >= 2 or state["step"] == 1:
-            state["shown"] = now
-            done = state["step"] - 1
-            seconds = now - state["start"]
-            left = seconds / done * (epochs * steps - done) if done >= 10 else None
-            show({"epoch": done // steps + 1, "epochs": epochs, "step": done, "steps": epochs * steps,
-                  "seconds": seconds, "left": left, "history": list(trainer.history)})
+
+    def heard(e):
+        done, seconds = state["step"], time.time() - state["start"] - state["aside"]
+        report = e | {"look": look, "step": done, "steps": epochs * steps,
+                      "left": seconds / done * (epochs * steps - done) if done >= 10 else None}
+        if "val_loss" in e:   # after every epoch: what it expects then, for the rewind
+            looks[e["epoch"]] = report["seen"] = look()
+        show(report)
 
     shift = _shifted(gpt_loaders, book, p["sizes"][3], p["batch"], where, epochs, seed)
     trainer.train_loader = _Counted(trainer.train_loader, step, shift)
+    looks[0] = look()   # before the first epoch: also the first picture beside the chart, until the first report
+    show({"run": "", "epoch": 1, "epochs": epochs, "batch": 0, "batches": steps, "look": look, "seen": looks[0],
+          "step": 0, "steps": epochs * steps, "left": None})
+    from everything_ai import live
+    live.follow(trainer, heard, "", every=max(1, steps // 8))   # eight times per epoch, on every plan
     stopped = False
     try:
         trainer.fit()
@@ -489,7 +507,8 @@ def train(show, seed: int = 0, epochs: int | None = None, ablate=None, name: str
         fresh.unlink(missing_ok=True)
         return "stopped"
     result = {"device": where, "name": p["name"], "sizes": list(p["sizes"]), "batch": p["batch"], "epochs": epochs,
-              "params": p["params"], "seed": seed, "stopped": stopped, "minutes": (time.time() - state["start"]) / 60,
+              "params": p["params"], "seed": seed, "stopped": stopped, "minutes": (time.time() - state["start"] - state["aside"]) / 60,
+              "looks": [looks.get(k) for k in range(len(history) + 1)],   # a list, so that it reads back from JSON as it was
               "history": history, "chars": "".join(sorted(set(book))), "stand_ins": stand_ins,
               "tokens": len(history) * windows * p["sizes"][3],
               # training on one token as in gpt-count: 2 FLOPs per parameter and attention, forward, three times that in all
@@ -510,9 +529,8 @@ def train(show, seed: int = 0, epochs: int | None = None, ablate=None, name: str
 
 
 def guesses(result: dict, checkpoint) -> list | None:
-    """The three likeliest next characters of the GPT in `checkpoint` at the places of GUESS_AT, on the CPU: for each,
-    the end of the text it read (its last 16 characters), the character that really follows, and the three guesses
-    with their chances."""
+    """The three likeliest next characters of the GPT in `checkpoint` at the places of GUESS_AT, on the CPU, as
+    guesses_of gives them."""
     run = run_code("from llm.gpt import GPT")
     if run.error is not None or not checkpoint.exists():
         return None
@@ -521,19 +539,89 @@ def guesses(result: dict, checkpoint) -> list | None:
     try:
         model = run.names["GPT"](len(chars), d, h, n_layers, block)
         model.load_state_dict(torch.load(checkpoint, map_location="cpu", weights_only=True))
-        model.eval()
-        book = text()
-        out = []
-        for until in GUESS_AT:
-            end = book.rindex(until) + len(until)
-            ids = [chars.index(ch) for ch in book[end - block:end]]
-            with torch.no_grad():
-                probs = torch.softmax(model(torch.tensor([ids]))[0, -1], dim=0)
-            top = torch.topk(probs, 3)
-            out.append({"read": book[end - 16:end], "next": book[end], "top": [(chars[i], float(pr)) for pr, i in zip(top.values.tolist(), top.indices.tolist())]})
-        return out
     except Exception:
         return None
+    return guesses_of(model, chars, block)
+
+
+def guesses_of(model, chars: str, block: int, book: str | None = None) -> list | None:
+    """What a GPT expects next at the places of GUESS_AT, in the text it validates on and never trains on: for each, the
+    end of the text it read (its last 16 characters), the character that really follows, and its three likeliest next
+    characters with their chances. Looked at as netview.looking looks, so a run it looks at goes on as it would have;
+    None when the GPT stops with an error."""
+    from everything_ai import netview
+    book = book or text()
+    rows, ids = [], []
+    for until in GUESS_AT:
+        end = book.rindex(until) + len(until)
+        ids.append([chars.index(ch) for ch in book[end - block:end]])
+        rows.append((book[end - 16:end], book[end]))
+    try:
+        x = torch.tensor(ids, device=next(model.parameters()).device)
+        with netview.looking(model):
+            probs = torch.softmax(model(x)[:, -1].float(), dim=-1).cpu()
+    except Exception:
+        return None
+    out = []
+    for (read, after), pr in zip(rows, probs):
+        top = torch.topk(pr, 3)
+        out.append({"read": read, "next": after, "top": [(chars[i], float(v)) for v, i in zip(top.values.tolist(), top.indices.tolist())]})
+    return out
+
+
+def guesses_picture(gs: list, labels: dict) -> str:
+    """What the GPT expects next at the places of GUESS_AT, beside the live chart (decision 1.17) and in the rewind:
+    for each place the end of the text it read in gray, the character that follows, and its three guesses with their
+    chances, the first in ink where it is that character and in the color of mistakes where it is not, the others gray
+    unless one of them is that character. `labels`: title, alt, read, next, guesses."""
+    import html as _html
+    mono = "font-family:var(--ea-font-code);font-size:13px"
+    words = "font-family:var(--ea-font-ui);font-size:12px;color:var(--ea-ink-2)"
+    head = (f'<tr><th style="{words};text-align:left;font-weight:500;padding:0 0.6rem 0.2rem 0">{_html.escape(labels["read"])}</th>'
+            f'<th style="{words};text-align:left;font-weight:500;padding:0 0.6rem 0.2rem 0">{_html.escape(labels["next"])}</th>'
+            f'<th style="{words};text-align:left;font-weight:500;padding:0 0 0.2rem 0">{_html.escape(labels["guesses"])}</th></tr>')
+    rows = []
+    for g in gs:
+        cells = []
+        for k, (ch, pr) in enumerate(g["top"]):
+            color = "var(--ea-ink)" if ch == g["next"] else ("var(--ea-loss-text)" if k == 0 else "var(--ea-ink-2)")
+            pct = f"{100 * pr:.0f}"   # a whole number: the same in both languages
+            cells.append(f'<span style="color:{color};white-space:nowrap;margin-right:0.7rem"><span style="{mono}">{_html.escape(shown_char(ch))}</span>'
+                         f'<span style="{words};color:inherit"> {pct}%</span></span>')
+        rows.append(f'<tr><td style="{mono};color:var(--ea-ink-2);padding:0.1rem 0.6rem 0.1rem 0;white-space:pre">…{_html.escape(shown_text(g["read"]))}</td>'
+                    f'<td style="{mono};color:var(--ea-ink);font-weight:600;padding:0.1rem 0.6rem 0.1rem 0">{_html.escape(shown_char(g["next"]))}</td>'
+                    f'<td style="padding:0.1rem 0">{"".join(cells)}</td></tr>')
+    table = f'<table style="border-collapse:collapse">{head}{"".join(rows)}</table>'
+    from everything_ai import yours
+    return yours.figure(labels["title"], f'<div role="img" aria-label="{_html.escape(labels["alt"], quote=True)}" style="overflow-x:auto;max-width:100%">{table}</div>', alt=labels["title"])
+
+
+def now_picture(report: dict | None, labels: dict) -> str | None:
+    """Beside the live chart: what the GPT expects next now, once per report. `labels`: those of guesses_picture."""
+    if not report:
+        return None
+    if "seen" not in report:   # one look per report
+        report["seen"] = report["look"]()
+    return guesses_picture(report["seen"], labels) if report["seen"] else None
+
+
+def rewinds(result: dict) -> bool:
+    """Whether the run kept what its GPT expected next before the first epoch and after every epoch."""
+    looks = result.get("looks") or []
+    return bool(result.get("history")) and len(looks) == len(result["history"]) + 1 and all(looks)
+
+
+def rewind_frame(result: dict, epoch: int, labels: dict, guess: dict) -> tuple:
+    """An epoch of the run, for the rewind after it (decision 1.17): the loss after every epoch with a dashed line at
+    that epoch, beside it what the GPT expected next then, and the sentence under it. `labels`: those of
+    history_picture, and start, after ({epoch}, {loss}); `guess`: those of guesses_picture, with then ({epoch})."""
+    from everything_ai import live
+    lang = labels.get("lang", "en")
+    svg = history_picture(result["history"], labels, result["epochs"], at=epoch)
+    title = guess["then"].format(epoch=epoch) if epoch else guess["before"]
+    said = labels["start"] if epoch == 0 else labels["after"].format(
+        epoch=epoch, loss=number(next(h["val_loss"] for h in result["history"] if h["epoch"] == epoch), 3, lang))
+    return live.rewound(svg, [guesses_picture(result["looks"][epoch], {**guess, "title": title})], width=330), said
 
 
 def shown_text(text_: str) -> str:
@@ -546,14 +634,18 @@ def shown_char(ch: str) -> str:
     return {" ": "␣", "\n": "↵"}.get(ch, ch)
 
 
-def history_picture(history: list, labels: dict, epochs: int | None = None) -> str:
+def history_picture(history: list, labels: dict, epochs: int | None = None, at: int | None = None) -> str:
     """The loss of the run after every epoch: training solid, validation dashed and open, as in nn-trainer; a grey
-    line at the loss of guessing among 65 characters, and one at the MLP of lm-mlp-context."""
+    line at the loss of guessing among 65 characters, and one at the MLP of lm-mlp-context. With `at`, a dashed line
+    at that epoch, for the rewind (0: before the first epoch)."""
     from everything_ai import chart
     n = max(epochs or 0, history[-1]["epoch"], 2)   # the x-axis has every epoch of the run, also while it trains
     epochs = [h["epoch"] for h in history]
     low = min([h["train_loss"] for h in history] + [1.2])
-    panel = chart.Panel((0.5, n + 0.5), (math.floor(low * 2 - 0.4) / 2, 4.5), title=labels["title"], xlabel=labels["x"], ylabel=labels["y"])
+    bottom = math.floor(low * 2 - 0.4) / 2
+    panel = chart.Panel((0.5 if at is None else -0.4, n + 0.5), (bottom, 4.5), title=labels["title"], xlabel=labels["x"], ylabel=labels["y"])
+    if at is not None:
+        panel.line([at, at], [bottom, 3.6], "ink-2", 1.2, dashed=True)   # under the key, not through it
     panel.line([0.5, n + 0.5], [math.log(VOCAB)] * 2, "ink-3", 1, dashed=True)
     panel.text(n + 0.4, math.log(VOCAB) + 0.22, labels["guess"], "ink-3", "end")
     panel.line([0.5, n + 0.5], [MLP_LOSS] * 2, "ink-3", 1, dashed=True)

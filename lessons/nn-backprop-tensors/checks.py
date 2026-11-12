@@ -3,7 +3,8 @@
 """Checks of the project lesson nn-backprop-tensors: linear_backward, the backward pass of one linear layer, saved as
 nn/layer_backward.py, and mlp_gradients, the backward pass of a two-layer MLP with softmax and cross-entropy, in
 NumPy, saved as nn/mlp_backward.py. And the demo: it compares the learner's own gradients with those of PyTorch on 64
-digits of QMNIST, then trains the MLP with them, in NumPy only, and measures it on 1,000 test digits."""
+digits of QMNIST, then trains the MLP with them, in NumPy only, and measures it on 1,000 test digits; while it trains
+and after every epoch it shows what the MLP guesses (decision 1.17)."""
 import functools
 import math
 import re
@@ -11,12 +12,13 @@ import re
 import numpy as np
 import torch   # imported once, when the lesson opens: the first import takes longer than a check may
 
-from everything_ai import paths, projects
+from everything_ai import live, paths, projects
 from everything_ai.check import ClassBox, FunctionBox, Mistake, Timeout, run_code, with_time_limit
 from everything_ai import yours
 
 DATA = "data/qmnist-small.npz"   # the first 6,000 training and 1,000 test images of QMNIST: see data/README.md
 HIDDEN, LR, EPOCHS, BATCH = 64, 0.5, 5, 64   # the demo: 64 hidden neurons, a learning rate of 0.5, 5 epochs of 64
+EVERY = 10   # the live chart hears the mean loss of every 10 mini-batches
 
 
 @functools.lru_cache(maxsize=1)
@@ -80,21 +82,82 @@ def _saved(module: str) -> bool:
     return (projects.folder() / "nn" / f"{module}.py").exists()
 
 
-def train(gradients, epochs: int = EPOCHS):
+def one_each() -> list:
+    """The first test digit of each kind, 0 to 9: what the demo shows the MLP guess."""
+    _, _, _, yt = digits()
+    return [int(np.flatnonzero(yt == k)[0]) for k in range(10)]
+
+
+def guesses(W1, b1, W2, b2) -> list:
+    """What the MLP guesses for the first test digit of each kind: a forward pass, which changes nothing."""
+    _, _, Xt, _ = digits()
+    _, _, P = forward(Xt[one_each()], W1, b1, W2, b2)
+    return [int(g) for g in P.argmax(axis=1)]
+
+
+def train(gradients, epochs: int = EPOCHS, show=None):
     """The digits MLP trained with `gradients`, mini-batch by mini-batch, in NumPy: the same seeds every time.
-    Gives back the weights and the loss over all training digits after each epoch."""
+    Gives back the weights, the loss over all training digits after each epoch, and after each epoch the MLP's
+    guesses for the first test digit of each kind, for the rewind (decision 1.17). `show` hears the run while it
+    trains: every 10 mini-batches the mean loss of those ({"epoch", "epochs", "batch", "batches", "loss"}), and after
+    every epoch its loss over all training digits ({"epoch", "epochs", "train_loss"}), each with "look", what the MLP
+    guesses then. Looking is a forward pass: it changes neither the weights nor the order of the mini-batches."""
     X, y, _, _ = digits()
     W1, b1, W2, b2 = start()
     rng = np.random.default_rng(1)
-    losses = []
-    for _ in range(epochs):
+    losses, looked, batches = [], [], -(-len(y) // BATCH)
+    look = lambda: guesses(W1, b1, W2, b2)   # the weights of this moment, as the loop has them
+    for e in range(1, epochs + 1):
         order = rng.permutation(len(y))
-        for s in range(0, len(y), BATCH):
+        since = []
+        for i, s in enumerate(range(0, len(y), BATCH), 1):
             idx = order[s:s + BATCH]
+            if show is not None:   # the loss of this mini-batch, before the step, as the gradients see it
+                since.append(loss(X[idx], y[idx], W1, b1, W2, b2))
             dW1, db1, dW2, db2 = (np.asarray(g, dtype=float) for g in gradients(X[idx], y[idx], W1, b1, W2, b2))
             W1, b1, W2, b2 = W1 - LR * dW1, b1 - LR * db1, W2 - LR * dW2, b2 - LR * db2
+            if show is not None and i % EVERY == 0:
+                _heard(show, {"epoch": e, "epochs": epochs, "batch": i, "batches": batches, "loss": sum(since) / len(since), "look": look})
+                since = []
         losses.append(loss(X, y, W1, b1, W2, b2))
-    return (W1, b1, W2, b2), losses
+        looked.append(look())
+        if show is not None:
+            _heard(show, {"epoch": e, "epochs": epochs, "train_loss": losses[-1], "look": look})
+    return (W1, b1, W2, b2), losses, looked
+
+
+def _heard(show, report: dict) -> None:
+    """Pass a report on to the chart: a chart that fails never stops the run, it is the course's own."""
+    try:
+        show(report)
+    except Timeout:   # the demo's time limit, also when it falls while the chart draws
+        raise
+    except Exception:
+        pass
+
+
+def now_picture(guessed: list, title: str, lang: str) -> str:
+    """What the MLP guesses at one moment of the demo, as `look` or the rewind gives it: its guess for the first test
+    digit of each kind, under `title`, in ink where it is right, in the colour of mistakes where it is not."""
+    _, _, Xt, yt = digits()
+    shown = one_each()
+    said, right = [str(g) for g in guessed], [str(int(yt[place])) for place in shown]
+    alt = {"en": "The first test digit of each kind, each with the digit the MLP guessed, and in brackets the right digit where it is wrong: ",
+           "nl": "Het eerste testcijfer van elke soort, elk met het cijfer dat het MLP gokte, en tussen haakjes het goede cijfer waar het fout is: "}
+    return yours.guesses([Xt[place].reshape(28, 28) for place in shown], said, right,
+                         alt[lang] + "; ".join(f"{r}: {g}" for r, g in zip(right, said)) + ".", title=title)
+
+
+def right_of(guessed: list) -> int:
+    """How many of the first test digit of each kind these guesses read right."""
+    _, _, _, yt = digits()
+    return sum(g == int(yt[place]) for g, place in zip(guessed, one_each()))
+
+
+def epoch_frame(losses: list, looked: list, e: int, labels: dict, title: str, lang: str) -> str:
+    """The rewind at epoch e (from 1): the loss of every epoch with a line at e, and beside it what the MLP guessed
+    after that epoch (decision 1.17)."""
+    return live.rewound(losses_picture(losses, labels, at=e), [now_picture(looked[e - 1], title, lang)])
 
 
 def accuracy(W1, b1, W2, b2) -> float:
@@ -103,10 +166,11 @@ def accuracy(W1, b1, W2, b2) -> float:
     return float(np.mean(P.argmax(axis=1) == yt))
 
 
-def demo():
+def demo(show=None):
     """For the demo: None when mlp_backward.py is not in the project yet; "broken" when it stops with an error or gives
     other gradients than PyTorch on 64 digits; "slow" when training takes more than a minute; else (the largest
-    relative error of each of the four gradients, the accuracy, the losses)."""
+    relative error of each of the four gradients, the accuracy, the losses, the guesses after every epoch). `show`
+    hears the training, as for train."""
     if not _saved("mlp_backward"):
         return None
     run = run_code(_MINE)
@@ -123,23 +187,27 @@ def demo():
     if len(errors) != 4 or max(errors) > 1e-6:
         return "broken"
     try:
-        weights, losses = with_time_limit(lambda: train(mine), 60)
+        weights, losses, looked = with_time_limit(lambda: train(mine, show=show), 60)
     except Timeout:
         return "slow"
     except Exception:
         return "broken"
-    return errors, accuracy(*weights), losses
+    return errors, accuracy(*weights), losses, looked
 
 
-def losses_picture(losses: list[float], labels: dict) -> str:
-    """The loss over all training digits after each epoch of the learner's own training, a dot per epoch."""
+def losses_picture(losses: list[float], labels: dict, at: int | None = None) -> str:
+    """The loss over all training digits after each epoch of the learner's own training, a dot per epoch; with `at`,
+    a line at that epoch, for rewinding, at the width of a chart beside a picture."""
     from everything_ai import chart
     epochs = list(range(1, len(losses) + 1))
-    p = chart.Panel((0.5, len(losses) + 0.5), (0, max(0.5, max(losses) * 1.2)), title=labels["title"],
+    top = max(0.5, max(losses) * 1.2)
+    p = chart.Panel((0.5, len(losses) + 0.5), (0, top), title=labels["title"],
                     xlabel=labels["epoch"], ylabel=labels["loss"], xticks=epochs)
+    if at is not None:
+        p.line([at, at], [0, top], "ink-2", 1.2)
     p.line(epochs, losses, "loss", 2.5)
     p.points(epochs, losses, "loss", 4)
-    return chart.figure([p], alt=labels["alt"], width=520, height=290)
+    return chart.figure([p], alt=labels["alt"], width=520 if at is None else live.CHART_WIDTH, height=290 if at is None else 240)
 
 
 # The lesson is done when these are correct. "bias-sum" is the choice question in the lesson.

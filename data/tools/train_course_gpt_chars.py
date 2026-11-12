@@ -35,13 +35,10 @@ def main():
     d, _, n_layers, block = C.PLANS["cpu"]["sizes"]
     # the CPU plan, also on a computer with a GPU
     C.plan = lambda: {"device": "cpu", "name": "CPU", "small": None, **C.PLANS["cpu"], "params": C.n_params(C.VOCAB, d, n_layers, block)}
-    shown = set()
 
     def show(p):
-        if len(p["history"]) not in shown:
-            shown.add(len(p["history"]))
-            for h in p["history"][-1:]:
-                print(f"epoch {h['epoch']}: training loss {h['train_loss']:.4f}, validation loss {h['val_loss']:.4f}", flush=True)
+        if "val_loss" in p:   # after every epoch, as live.follow hears the Trainer
+            print(f"epoch {p['epoch']}: validation loss {p['val_loss']:.4f}", flush=True)
 
     result = C.train(show, seed=0)
     assert isinstance(result, dict) and not result["stopped"], result

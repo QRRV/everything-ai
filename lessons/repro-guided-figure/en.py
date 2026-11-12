@@ -401,7 +401,7 @@ def text_demo():
     mo.md(rf"""
     ### What your project can do now
 
-    The button trains seeds 0, 1 and 2 with your kit, one after another: your `run_seeds` with your `run_seed`, on your ModernGPT with your data and your settings, {C.number(C.STEPS, 0, L.lang)} steps each, into your experiment log `work/projects/repro/runs.jsonl`. You see each run while it trains. On the course's CPU, with one thread, a seed takes about {round(C.STEPS * C.SECONDS_PER_STEP / 60)} minutes, all three about {round(3 * C.STEPS * C.SECONDS_PER_STEP / 60)}; on a GPU, a few minutes. That is where your runner earns its keep: close the lesson halfway, and the seeds that are done stay in your log; the next press goes on with the others. While it trains, the rest of this lesson waits: you can read on, or work in another lesson. Where a part of your kit is missing or broken, the course's version stands in.
+    The button trains seeds 0, 1 and 2 with your kit, one after another: your `run_seeds` with your `run_seed`, on your ModernGPT with your data and your settings, {C.number(C.STEPS, 0, L.lang)} steps each, into your experiment log `work/projects/repro/runs.jsonl`. You see each run while it trains, with beside its chart which of the 9,409 equations the model answers right at that moment; after the runs you can rewind through them. On the course's CPU, with one thread, a seed takes about {round(C.STEPS * C.SECONDS_PER_STEP / 60)} minutes, all three about {round(3 * C.STEPS * C.SECONDS_PER_STEP / 60)}; on a GPU, a few minutes. That is where your runner earns its keep: close the lesson halfway, and the seeds that are done stay in your log; the next press goes on with the others. While it trains, the rest of this lesson waits: you can read on, or work in another lesson. Where a part of your kit is missing or broken, the course's version stands in.
     """)
     return
 
@@ -419,23 +419,32 @@ def demo_train(train_button, result_run, result_seeds):
 
     result_run, result_seeds  # run again when an exercise saves a part of the kit
     _ready = result_run.state == "correct" and result_seeds.state == "correct"
-    _labels = {"x": "step", "y": "accuracy", "train": "training", "val": "validation"}
     trained = None
     if not train_button.value:
         _out = mo.md("*Press the button to train your seeds with your kit.*" if _ready else "*Finish exercises 2 and 3 first, then press the button: it trains with your `run_seeds` and your `run_seed`.*")
     elif set(C.SEEDS) <= {_log["seed"] for _log in C.my_runs() or []}:
         _out = mo.md("*Seeds 0, 1 and 2 are in your experiment log already, so your `run_seeds` skips them. To train them again, delete `work/projects/repro/runs.jsonl`.*")
     else:
-        _began = {}
+        _began, _lives = {}, {}   # when each seed of this press started, with the seconds spent looking until then; its live chart
+        _now = {}   # the last report, for the tables beside the chart
+        _tables = {"train": "Training equations: {share} right", "val": "Validation equations: {share} right", "right": "right answer", "wrong": "wrong answer",
+                   "now": "What the model answers now, at step {step}", "lang": "en",
+                   "alt": "All 9,409 equations a + b modulo 97, a down and b across, in two tables: the training equations and the validation equations. Right answers are in ink, wrong ones in the color of mistakes: {train} of the training equations are right, and {val} of the validation equations."}
 
-        def _progress(_log):
-            _step, _now = _log["step"][-1], _time.perf_counter()
-            _spent = _now - _began.setdefault(_log["seed"], _now)
+        def _progress(_log, _report):
+            _step, _t, _aside = _log["step"][-1], _time.perf_counter(), _report.get("aside", 0.0)
+            _start, _looked = _began.setdefault(_log["seed"], (_t, _aside))
+            _spent = _t - _start - (_aside - _looked)   # without the time spent looking
             _left = f", about {round(_spent / _step * (C.STEPS - _step) / 60)} to go" if _step >= 1000 else ""   # before step 1,000, the many logs of the start make a guess too high
-            mo.output.replace(mo.vstack([
-                mo.md(f"**Seed {_log['seed']}, step {C.number(_step, 0, L.lang)} of {C.number(C.STEPS, 0, L.lang)}** · {C.number(_spent / 60, 1, L.lang)} minutes{_left} · training {C.number(100 * _log['train'][-1], 1, L.lang)}%, validation {C.number(100 * _log['val'][-1], 1, L.lang)}%"),
-                mo.Html(C.figure_picture([_log], {**_labels, "title": f"Accuracy during your run, seed {_log['seed']}", "alt": f"Your run of seed {_log['seed']} up to step {_step}: training at {C.number(100 * _log['train'][-1], 1, L.lang)}%, validation at {C.number(100 * _log['val'][-1], 1, L.lang)}%."})),
-            ]))
+            if _log["seed"] not in _lives:
+                _title = f"Accuracy during your run, seed {_log['seed']}"
+                _lives[_log["seed"]] = L.live({"title": _title, "x": "step", "y": "accuracy", "alt": f"{_title}: the validation accuracy so far, on a log scale of the steps; dashed, the training accuracy."},
+                                              C.STEPS, role="ink", low=0.0, high=1.15, window=1, xlog=True, look_every=2.0)   # room above 1 for the name of the training line
+                _lives[_log["seed"]].watch(lambda: C.now_picture(_now["last"], _tables))   # which equations the model answers right now, beside the chart
+            _now["last"] = _report
+            _live = _lives[_log["seed"]]
+            _live.reference(list(zip(_log["step"], _log["train"])), "training", role="ink")   # it grows with the run
+            _live.extend(list(zip(_log["step"][len(_live.xs):], _log["val"][len(_live.xs):])), f"**Seed {_log['seed']}, step {C.number(_step, 0, L.lang)} of {C.number(C.STEPS, 0, L.lang)}** · {C.number(_spent / 60, 1, L.lang)} minutes{_left} · training {C.number(100 * _log['train'][-1], 1, L.lang)}%, validation {C.number(100 * _log['val'][-1], 1, L.lang)}%")
 
         _r = C.demo(_progress)
         if _r is None:
@@ -446,7 +455,21 @@ def demo_train(train_button, result_run, result_seeds):
         else:
             trained = _r
             _stand = (" The course's version stood in for: " + ", ".join(f"`{_m}`" for _m in _r["stand_ins"]) + ".") if _r["stand_ins"] else ""
-            _out = mo.md(f"*Done: seeds 0, 1 and 2 are in your experiment log, `work/projects/repro/runs.jsonl`.{_stand}*")
+            _done = mo.md(f"*Done: seeds 0, 1 and 2 are in your experiment log, `work/projects/repro/runs.jsonl`.{_stand}*")
+            _w = _r["watched"]
+            _seeds = [_x["seed"] for _x in _w]
+            if C.rewinds(_w) and _seeds == list(_lives) and len(set(_seeds)) == len(_seeds):   # rewind through the seeds of this press, with what their models answered
+                _steps = [_s for _s, _ in _w[0]["moments"]]
+                _rewind = {**_tables, "then": "What the model answered at step {step}", "title": "Seed {seed}",
+                           "said": "**{title}, step {step}** · training {train}%, validation {val}%"}
+                _frame = lambda _s, _k: C.rewind_frame(_w[_seeds.index(int(_k))], _lives[int(_k)].picture(at=int(_s)), int(_s), _rewind)
+                _pic = L.plane("rewind", "step", "seed", _frame, _steps, _seeds, start=(_steps[-1], _seeds[0]), role="",
+                               task="Drag the dot: to the right through the steps of a seed, up through the seeds. When does the model start to answer the validation equations right, and does it happen at the same step for every seed?") \
+                    if len(_w) > 1 else L.explore("rewind-one", "step", lambda _s: _frame(_s, _seeds[0]), start=_steps[-1], values=_steps, role="",
+                                                  task="Go back to the first steps, then forward: when does the model start to answer the training equations right, and when the validation equations?")
+                _out = mo.vstack([_pic, _done])
+            else:
+                _out = _done
     _out
     return (trained,)
 

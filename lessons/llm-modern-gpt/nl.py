@@ -346,7 +346,7 @@ def text_demo(result_gpt):
         mo.md(f"""
         ### Wat je project nu kan
 
-        De knop hieronder traint je ModernGPT zoals [Project: je GPT op je eigen tokens](/course/open/gpt-train-bpe?lang=nl) je GPT traint: je tokenizer op de eerste 90% van de verhalen, die daarna allemaal worden geëncodeerd, en je `gpt_loaders` en `Trainer`, met hetzelfde plan en dezelfde seed. {_where}: een ModernGPT van {C.grouped(_p['params'], L.lang)} parameters, met $d = {_d}$, {_h} query heads en {_p['kv_heads']} key en value heads, {_layers} blocks en vensters van {_block} tokens, {_p['epochs']} epochs met mini-batches van {_p['batch']}. Daarna schrijft hij een verhaal dat begint met "{C.B.START}".{_time} De stopknop van de cel beëindigt de run eerder; de beste parameters tot dan blijven bewaard, in `work/projects/llm/gpt_modern.pt`.
+        De knop hieronder traint je ModernGPT zoals [Project: je GPT op je eigen tokens](/course/open/gpt-train-bpe?lang=nl) je GPT traint: je tokenizer op de eerste 90% van de verhalen, die daarna allemaal worden geëncodeerd, en je `gpt_loaders` en `Trainer`, met hetzelfde plan en dezelfde seed. {_where}: een ModernGPT van {C.grouped(_p['params'], L.lang)} parameters, met $d = {_d}$, {_h} query heads en {_p['kv_heads']} key en value heads, {_layers} blocks en vensters van {_block} tokens, {_p['epochs']} epochs met mini-batches van {_p['batch']}. Daarna schrijft hij een verhaal dat begint met "{C.B.START}".{_time} Tijdens het trainen laat een grafiek de loss zien, acht keer per epoch en na elke epoch, met de tijd die nog over is, en ernaast wat je ModernGPT nu schrijft na *{C.B.START}*. De stopknop van de cel beëindigt de run eerder; de beste parameters tot dan blijven bewaard, in `work/projects/llm/gpt_modern.pt`.
         """),
         L.course_versions(),
     ])
@@ -366,6 +366,10 @@ def demo_train(train_button, result_gpt):
     _labels = {"title": "Jouw run", "x": "epoch", "y": "loss per token", "lang": L.lang, "guess": "gelijk gokken", "train": "training", "val": "validatie"}
     _names = {"gpt": "je GPT op tokens", "rms": "+ RMSNorm", "swiglu": "+ SwiGLU", "rope": "+ RoPE, geen tabel van plekken", "gqa": "+ grouped-query attention"}
 
+    _now = {}   # de live grafiek, gemaakt bij het eerste verslag van de training, en het laatste verslag
+    _wrote = {"now": "Wat je ModernGPT nu schrijft",
+              "alt": "Wat je ModernGPT nu schrijft na “Once upon a time”: 50 tokens, telkens met dezelfde seed getrokken, zodat alleen je ModernGPT verandert."}
+
     def _progress(_p):
         if _p["phase"] == "tokenizer":
             mo.output.replace(mo.md("**Je tokenizer traint** op de eerste 90% van de verhalen…"))
@@ -375,10 +379,23 @@ def demo_train(train_button, result_gpt):
             return
         _m = 1 if _p["left"] is None else max(1, round(_p["left"] / 60))
         _left = "" if _p["left"] is None else f" · nog ongeveer {_m} {'minuten' if _m > 1 else 'minuut'} te gaan"
-        _parts = [mo.md(f"**Epoch {_p['epoch']} van {_p['epochs']}** · stap {_p['step']} van {_p['steps']}{_left}")]
-        if _p["history"]:
-            _parts.append(mo.Html(C.history_picture(_p["history"], {**_labels, "alt": "De training loss en validation loss van je run tot nu toe, na elke epoch."}, _p["epochs"])))
-        mo.output.replace(mo.vstack(_parts))
+        if "chart" not in _now:
+            _now["chart"] = L.live({"title": "Jouw run", "x": "epoch", "y": "loss per token",
+                                    "alt": "De loss per token van je run tot nu toe: op de trainingsvensters acht keer per epoch, en gestreept op de validation set na elke epoch; een dunne grijze lijn bij de loss van gelijk gokken tussen de 1.257 ids."},
+                                   _p["epochs"], window=4, key=[("loss", False, "training, acht keer per epoch"), ("loss", True, "validation, na elke epoch")])
+            _now["chart"].reference([(0, C.B.GUESS_LOSS), (_p["epochs"], C.B.GUESS_LOSS)], "gelijk gokken", role="ink-3")
+            _now["chart"].watch(lambda: C.now_picture(_now["last"], _wrote))   # wat je ModernGPT nu schrijft, naast de grafiek
+            _now["val"] = []
+        _now["last"] = _p
+        if "val_loss" in _p:   # de validation set na elke epoch, gestreept
+            _now["val"].append((_p["epoch"], _p["val_loss"]))
+            _now["chart"].reference(_now["val"], "", role="loss", replace=True)
+            _now["chart"].line(f"**Epoch {_p['epoch']} van {_p['epochs']}** · validation loss {C.number(_p['val_loss'], 3, L.lang)} per token{_left}")
+        elif "loss" in _p:   # de trainingsvensters, acht keer per epoch
+            _now["chart"].add(_p["epoch"] - 1 + _p["batch"] / _p["batches"], _p["loss"],
+                              f"**Epoch {_p['epoch']} van {_p['epochs']}** · batch {_p['batch']} van {_p['batches']} · loss {C.number(_p['loss'], 3, L.lang)} per token{_left}")
+        else:
+            _now["chart"].line(f"**Epoch {_p['epoch']} van {_p['epochs']}** · batch {_p['batch']} van {_p['batches']}{_left}")
 
     _best = {_k: C.mean_best(_k) for _k in C.CHANGES}
     _step = {_k: _best[_k] - _best[C.CHANGES[_i - 1]] for _i, _k in enumerate(C.CHANGES) if _i > 0}

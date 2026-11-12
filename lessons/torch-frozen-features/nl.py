@@ -251,16 +251,54 @@ def text_demo():
     mo.md(f"""
     ### Jouw nieuwe laatste layer op de cijfers van de oude scanner
 
-    De cel hieronder geeft de cijferlezer aan jouw `new_head` zodra die klopt, anders aan die van de course, en traint de nieuwe laatste layer op de 100 gelabelde cijfers van de oude scanner: {C.HEAD_EPOCHS} epochs met een learning rate van {L.number(C.HEAD_LR, 2)}. Ter vergelijking traint de cel een nieuw netwerk met dezelfde layers, die daar allemaal leren, vanaf nul op dezelfde 100 cijfers: {C.SCRATCH_EPOCHS} epochs met een learning rate van {L.number(C.SCRATCH_LR, 3)}. Dan test de cel beide, en de cijferlezer zoals hij is, op 1.000 gespikkelde testcijfers. Dat duurt een paar seconden.
+    De cel hieronder geeft de cijferlezer aan jouw `new_head` zodra die klopt, anders aan die van de course, en traint de nieuwe laatste layer op de 100 gelabelde cijfers van de oude scanner: {C.HEAD_EPOCHS} epochs met een learning rate van {L.number(C.HEAD_LR, 2)}. Ter vergelijking traint de cel een nieuw netwerk met dezelfde layers, die daar allemaal leren, vanaf nul op dezelfde 100 cijfers: {C.SCRATCH_EPOCHS} epochs met een learning rate van {L.number(C.SCRATCH_LR, 3)}. Dan test de cel beide, en de cijferlezer zoals hij is, op 1.000 gespikkelde testcijfers. Dat duurt een paar seconden. Terwijl elk netwerk traint, toont een grafiek zijn loss op de 100 trainingscijfers na elke epoch, en gestreept op de 1.000 testcijfers bij de epochs waar je naar terug kunt spoelen: eerst van het netwerk vanaf nul, dan van het bevroren netwerk, met de test loss van dat vanaf nul dun en gestreept ernaast. Naast of onder de grafiek staat wat het netwerk op dat moment gokt bij één gespikkeld testcijfer van elke soort, en daaronder wat zijn layer `conv2` maakt van een gespikkelde 9; allebei worden ze opnieuw getekend terwijl het traint. Daarna kun je door beide runs terugspoelen, met de plaatjes van beide netwerken zoals ze toen waren.
     """)
     return
 
 
 @app.cell(hide_code=True)
 def demo_frozen(box_head, result_head):
-    _d = C.demo(box_head.value if result_head.state == "correct" else None)
+    _now = {}   # the live chart of each network, made at its first report, and its test loss so far
+    _heads = {"scratch": {"guesses": "Het netwerk vanaf nul: wat het gokt bij één gespikkeld testcijfer van elke soort",
+                          "layer": "Wat zijn layer {name} maakt van een gespikkelde 9"},
+              "frozen": {"guesses": "Bevroren, met een nieuwe laatste layer: wat het gokt bij één gespikkeld testcijfer van elke soort",
+                         "layer": "Wat zijn layer {name} maakt van een gespikkelde 9: geleend en bevroren, dus na elke epoch hetzelfde"}}
+
+    def _progress(_p):
+        _run = _p["run"]
+        if _run not in _now or _p["epoch"] == 1:   # a new run, also when the course's runs again in place of yours
+            _fr = _run == "frozen"
+            _now[_run] = L.live({"title": "Bevroren, met een nieuwe laatste layer" if _fr else "Een nieuw netwerk vanaf nul", "x": "epoch", "y": "loss",
+                                 "alt": "De loss van het bevroren netwerk met een nieuwe laatste layer tot nu toe: op de 100 trainingscijfers na elke epoch, en gestreept op de 1.000 testcijfers bij de epochs van het terugspoelen; dun en gestreept de test loss van het netwerk vanaf nul." if _fr else "De loss van het nieuwe netwerk vanaf nul tot nu toe: op de 100 trainingscijfers na elke epoch, en gestreept op de 1.000 testcijfers bij de epochs van het terugspoelen."}, _p["epochs"], low=0.0,
+                                key=[("loss", False, "100 trainingscijfers, elke epoch"), ("loss", True, "1.000 testcijfers, bij de epochs van het terugspoelen")])
+            _now[_run].watch(lambda: C.now_pictures(_p["look"](), _heads[_run], L.lang, f"nv-frozen-{_run}-now"))
+            _now[_run + "-test"] = []
+            if _fr and "scratch-test" in _now:   # the test loss of the network from scratch, thin and dashed, as far as this run goes
+                _now["frozen"].reference([_pt for _pt in _now["scratch-test"] if _pt[0] <= _p["epochs"]], "vanaf nul", role="ink-2")
+        _who = "Bevroren, met een nieuwe laatste layer" if _run == "frozen" else "Een nieuw netwerk vanaf nul"
+        _line = f"**{_who}** · epoch {_p['epoch']} van {_p['epochs']} · loss {L.number(_p['loss'], 3)}"
+        if "val_loss" in _p:   # the test digits at the epochs of the rewind, dashed
+            _now[_run + "-test"].append((_p["epoch"], _p["val_loss"]))
+            _now[_run].reference(_now[_run + "-test"], "", role="loss", replace=True)
+            _line += f" · test loss {L.number(_p['val_loss'], 3)}"
+        _now[_run].add(_p["epoch"], _p["loss"], _line)
+
+    _d = C.demo(box_head.value if result_head.state == "correct" else None, _progress)
     _who = "jouw `new_head`" if _d["yours"] else "de `new_head` van de course"
-    mo.md(f"""Met {_who}, van de 1.000 gespikkelde testcijfers:
+    _labels = {"title": "Loss op de testcijfers", "x": "epoch", "y": "test loss", "scratch": "vanaf nul", "alt": "De loss op de 1.000 testcijfers van het bevroren netwerk met een nieuwe laatste layer, bij de epochs van het terugspoelen, en dun en gestreept die van het netwerk vanaf nul."}
+    _when = [_e for _e, _ in _d["tests"]["scratch"]]
+    if any(len(_d["looked"][_n]) != len(_d["tests"][_n]) or not all(_d["looked"][_n]) for _n in C.RUNS):   # an epoch it could not look at
+        _when = []
+
+    def _frame(_e):
+        _e = int(_e)
+        _right = {_n: sum(_g == _k for _g, _k in zip(_d["looked"][_n][C.at_epoch(_d, _n, _e)], _d["truth"])) for _n in C.RUNS}
+        _end = _d["tests"]["frozen"][-1][0]
+        _last = "" if _e <= _end else f" (na zijn laatste epoch, {_end})"
+        return (C.epoch_frame(_d, _e, _labels, _heads, L.lang),
+                f"Na epoch {_e}: van deze 10 testcijfers leest het netwerk vanaf nul er {_right['scratch']} goed, en het bevroren netwerk met een nieuwe laatste layer {_right['frozen']}{_last}.")
+
+    _table = mo.md(f"""Met {_who}, van de 1.000 gespikkelde testcijfers:
 
 | | goed gelezen |
 |---|---|
@@ -269,6 +307,12 @@ def demo_frozen(box_head, result_head):
 | bevroren, met een nieuwe laatste layer getraind op de 100 | {_d['frozen']} |
 
 Over 5 seeds, met de code van de course: {C.REFERENCE['scratch'][0]} tot {C.REFERENCE['scratch'][1]} vanaf nul, en {C.REFERENCE['frozen'][0]} tot {C.REFERENCE['frozen'][1]} bevroren met een nieuwe laatste layer.""")
+    if len(_when) > 1:   # rewinding through both runs, with both in the picture
+        _out = mo.vstack([L.explore("rewind", "epoch", _frame, start=_when[-1], values=_when, role="",
+                                    task="Ga terug naar epoch 1, en dan weer vooruit: welke van de twee leest de gespikkelde cijfers eerder goed, en wat verandert er in layer `conv2`?"), _table])
+    else:
+        _out = _table
+    _out
     return
 
 

@@ -31,11 +31,12 @@ SEEDS = [0, 1, 2, 3, 4]
 REFERENCE = {"control": [2.3902, 2.3924, 2.4174, 2.3938, 2.4012], "warmup=0": [2.3866, 2.3841, 2.4115, 2.3916, 2.3962]}
 
 
-def run_seeds(show=None, hear=None) -> list | str:
+def run_seeds(show=None, hear=None, kept: list | None = None) -> list | str:
     """The control run of res-hypothesis-control with each seed of SEEDS, with the learner's modules: the validation
     loss after the last epoch of each. "run" when a run stops with an error, "stopped" when the stop button ended it.
     `show` gets (which seed, share of that run done) about every second; `hear` gets (which seed, what live.follow
-    heard), for a live chart."""
+    heard, with "look": what the model writes now), for a live chart (decision 1.17). `kept` gets the history of
+    every run, with what its model wrote at every epoch, for the rewind."""
     out = []
     for i, seed in enumerate(SEEDS):
         settings = dict(CONTROL)
@@ -44,8 +45,50 @@ def run_seeds(show=None, hear=None) -> list | str:
                   None if hear is None else (lambda heard, i=i: hear(i, heard)))
         if isinstance(h, str):
             return h
+        if kept is not None:
+            kept.append(h)
         out.append(h[-1]["val_loss"])
     return out
+
+
+def now_picture(report: dict, labels: dict) -> str:
+    """Beside the live chart of a run: what its model writes now, as in res-hypothesis-control (decision 1.17)."""
+    return H.now_picture(report, labels)
+
+
+def rewinds(runs: list) -> bool:
+    """Whether every run of every seed kept what its model wrote at every epoch, and before the first."""
+    return len(runs) == len(SEEDS) and len({len(r) for r in runs}) == 1 and all(H.rewinds(r, r) for r in runs)
+
+
+def rewind_frame(runs: list, epoch: int, seed: int, labels: dict) -> tuple:
+    """An epoch of the run of one seed, for the rewind after the demo (decision 1.17): the validation loss after every
+    epoch of every seed, that seed solid and the others dashed, with a dashed line at that epoch; beside it what the
+    model of that seed wrote then after H.START; and the sentence under it. `labels`: title ({seed}), x, y, lang, alt
+    ({seed}), wrote, alt_wrote ({seed}, {epoch}), start ({seed}), after ({seed}, {epoch}, {loss})."""
+    from everything_ai import chart, live, yours
+    lang = labels.get("lang", "en")
+    run = runs[SEEDS.index(seed)]
+    values = [h["val_loss"] for r in runs for h in r]
+    low, high = math.floor(min(values) * 5) / 5 - 0.1, math.ceil(max(values) * 5) / 5 + 0.1
+    n = max(len(r) for r in runs)
+    p = chart.Panel((-0.4, n + 0.5), (low, high), title=labels["title"].format(seed=seed), xlabel=labels["x"], ylabel=labels["y"])
+    p.line([epoch, epoch], [low, high], "ink-2", 1.2, dashed=True)
+    for r in runs:
+        if r is not run:
+            p.line([h["epoch"] for h in r], [h["val_loss"] for h in r], "loss", 1.4, dashed=True)
+    p.line([h["epoch"] for h in run], [h["val_loss"] for h in run], "loss", 2.4)
+    p.points([h["epoch"] for h in run], [h["val_loss"] for h in run], "loss")
+    svg = chart.figure([p], alt=labels["alt"].format(seed=seed), width=330, height=250)
+    svg = chart.with_decimal_comma(svg) if lang == "nl" else svg
+    text = run[0]["before"] if epoch == 0 else next(h["wrote"] for h in run if h["epoch"] == epoch)
+    story = yours.writes(labels["wrote"], [(H.START, text or "")], alt=labels["alt_wrote"].format(seed=seed, epoch=epoch))
+    if epoch == 0:
+        said = labels["start"].format(seed=seed)
+    else:
+        loss = next(h["val_loss"] for h in run if h["epoch"] == epoch)
+        said = labels["after"].format(seed=seed, epoch=epoch, loss=number(loss, 3, lang))
+    return live.rewound(svg, [story], width=330), said
 
 
 def bootstrap_interval(values, n_boot: int = 10000, seed: int = 0) -> tuple:

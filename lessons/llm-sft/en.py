@@ -322,6 +322,8 @@ def text_demo():
         The button writes an instruction for every story of `data/tinystories-small.txt` but the last {C.HELD} that names one of the {len(C.WORDS)} nouns of the course's list: the story cut after its last sentence that fits in {C.MAX_LEN} tokens with its instruction, and one or two of its nouns as the requested words. It makes the examples with your `sft_example`: about {C.number(round(_m['pairs'], -2), 0, L.lang)}. Then your model of [Capstone: pretrain your own small LLM](/course/open/llm-pretrain-capstone?lang=en), or the course's when you have none, answers {C.TESTS} instructions made from the last {C.HELD} stories, which none of the examples come from, and your `words_used` counts the answers that use every word. With only {len(C.WORDS)} words to ask for, most of these instructions are also among the examples, each with another story: what counts is whether the model's own story uses the words. Then {C.number(C.STEPS, 0, L.lang)} steps of SFT, with your `sft_batch` and your `pretrain_step` of the capstone at a learning rate of {C.number(C.LR, 3, L.lang)}, a third of that of the pretraining, and the same {C.TESTS} instructions again.
 
         Your `pretrain_step` needs no change: `F.cross_entropy` skips every target of -100 by itself. On the course's CPU, with one thread, the button took about {round((_m['seconds'] + _m['other_seconds']) / 60)} minutes in all for its model of the capstone's demo run, of {C.number(_m['params'], 0, L.lang)} parameters; the course's own model is about five times as big, and takes about four times as long. The fine-tuned model is kept in `work/projects/llm/sft.pt`, for the lessons after this one.
+
+        While it trains, beside the chart you see every few seconds what your model answers at that moment to the first test instruction, drawn with the same seed as in *Your run, step by step* below.
         """),
         L.course_versions(),
     ])
@@ -344,7 +346,11 @@ def demo_tune(box_batch, box_example, box_words, result_batch, result_example, r
         _note = "*Finish exercises 1 to 3 first: the demo fine-tunes with your `sft_example` and `sft_batch`, and counts with your `words_used`.*"
     elif tune_button.value:
         _live = L.live({"title": "Your run: the loss of every step", "x": "step", "y": "loss",
-                        "alt": f"The loss of every step of your run so far, in grey, and its mean over the last {max(1, C.STEPS // 50)} steps as the thicker line."}, C.STEPS, low=0.0)
+                        "alt": f"The loss of every step of your run so far, in gray, and its mean over the last {max(1, C.STEPS // 50)} steps as the thicker line."}, C.STEPS, low=0.0, look_every=8.0)
+        _now = {}   # the last report of the run, for what the model answers now beside the chart
+        _seen = {"title": "What it answers now, after step {step}", "lang": "en",
+                 "alt": "What the model answers now to the first test instruction, which is in gray, drawn with the same seed as at the moments of the replay, and under it whether it uses every word and stops by itself.",
+                 "used": "every word used", "not_used": "not every word used", "stopped": "stopped by itself", "not_stopped": "did not stop by itself"}
 
         def _progress(_p):
             if _p["phase"] == "pairs":
@@ -353,6 +359,10 @@ def demo_tune(box_batch, box_example, box_words, result_batch, result_example, r
                 _when = "Before SFT" if _p["phase"] == "before" else "After SFT"
                 _live.line(f"**{_when}** · instruction {_p['done']} of {_p['total']} · every word used: {_p['used']}")
             else:
+                if "look" in _p and not _now:   # from the first step on, what the model answers beside the chart
+                    _live.watch(lambda: C.now_picture(_now["train"], _seen))
+                if "look" in _p:
+                    _now["train"] = _p
                 _live.extend(_p["fresh"], f"**Step {C.number(_p['step'], 0, L.lang)} of {C.number(_p['steps'], 0, L.lang)}** · loss {C.number(_p['loss'], 3, L.lang)} · {C.number(_p['seconds'] / 60, 1, L.lang)} minutes")
         _r = C.run(run_code(box_example.value).names["sft_example"], run_code(box_batch.value).names["sft_batch"],
                    run_code(box_words.value).names["words_used"], _progress)

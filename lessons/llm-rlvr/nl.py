@@ -281,7 +281,7 @@ def text_demo():
     mo.md(rf"""
     ### Train je model met GRPO
 
-    De knop meet je model uit het DPO-project (of dat van de course, als je er geen hebt) op {C.MEASURE} instructies om een woord weg te laten waarop de run nooit traint, en op {C.MEASURE} van de testinstructies met woorden uit het SFT-project; daarna traint hij het met GRPO, met je `advantages` en `policy_loss`, groepen van {C.G} antwoorden op {C.PROMPTS} instructies per stap, {C.STEPS['cpu']} stappen op een CPU of {C.STEPS['gpu']} op een GPU; en dan meet hij opnieuw. Met het model van de course op een CPU duurt dat ongeveer zeven minuten, met een kleiner eigen model korter, en op een GPU veel korter. Tien stappen komen niet zo ver als de {len(R['rewards'])} van de course: zijn run staat onder de jouwe getekend.
+    De knop meet je model uit het DPO-project (of dat van de course, als je er geen hebt) op {C.MEASURE} instructies om een woord weg te laten waarop de run nooit traint, en op {C.MEASURE} van de testinstructies met woorden uit het SFT-project; daarna traint hij het met GRPO, met je `advantages` en `policy_loss`, groepen van {C.G} antwoorden op {C.PROMPTS} instructies per stap, {C.STEPS['cpu']} stappen op een CPU of {C.STEPS['gpu']} op een GPU; en dan meet hij opnieuw. Met het model van de course op een CPU duurt dat ongeveer zeven minuten, met een kleiner eigen model korter, en op een GPU veel korter. Tien stappen komen niet zo ver als de {len(R['rewards'])} van de course: zijn run staat onder de jouwe getekend. Na elke stap zie je naast de grafiek de groep van zijn eerste instructie, zoals in *Je run, stap voor stap* hieronder: de advantage van elk antwoord als balk, en eronder de antwoorden met hun rewards.
     """)
     return
 
@@ -305,15 +305,23 @@ def demo_train(box_advantages, box_loss, demo_button, result_advantages, result_
                         "alt": "De gemiddelde reward van elke stap van je run tot nu toe, als lijn in inkt met een stip bij elke stap; gestippeld de run van de course op zijn model, bij dezelfde stappen."}, C.steps(), role="ink", low=0.0, high=1.0)
         _live.reference(list(enumerate(R["rewards"][:C.steps()], 1)), "de run van de course", role="ink")
 
-        def _show(_d):
+        _now = {}   # de groep van de laatste stap, naast de grafiek
+        _group = {"title": "Stap {step}: de groep van één instructie", "x": "antwoord", "y": "advantage", "lang": "nl",
+                  "alt_now": "De advantage van elk antwoord van de groep van de eerste instructie van stap {step}, als balk omhoog of omlaag vanaf nul.",
+                  "answers": "De {n} antwoorden op: {instruction}", "reward": "reward", "advantage": "advantage"}
+
+        def _progress(_d):
             if _d["phase"] == "measure":
                 _live.line(f"**Bezig met meten:** {_d['done']} van {_d['total']} …")
             elif _d["phase"] == "start":
                 _live.line(f"**Bezig met trainen:** stap 1 van {_d['steps']} …")
             else:
+                if not _now:   # vanaf de eerste stap staat zijn groep naast de grafiek
+                    _live.watch(lambda: C.group_pictures(_now["group"], _group))
+                _now["group"] = _d["group"]
                 _live.extend(_d["fresh"], f"**Stap {_d['step']} van {_d['steps']}:** gemiddelde reward {C.number(_d['reward'], 2, 'nl')}, {_d['seconds']:.0f} s")
 
-        _r = C.run(run_code(box_advantages.value).names["advantages"], run_code(box_loss.value).names["policy_loss"], _show)
+        _r = C.run(run_code(box_advantages.value).names["advantages"], run_code(box_loss.value).names["policy_loss"], _progress)
         trained = None if isinstance(_r, str) else _r
         if _r == "run":
             _out = _live.stopped("*Het laden of draaien van je model stopt met een fout. Slagen je modules in `work/projects/llm/` nog voor hun checks? Verwijder een bestand dat je veranderde, en check zijn oefening opnieuw.*")

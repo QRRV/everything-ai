@@ -228,7 +228,7 @@ def text_demo():
     mo.md(r"""
     ### LayerNorm against your RMSNorm
 
-    The button trains your `GPT` from [Assemble your GPT](/course/open/gpt-assemble?lang=en) twice on Tiny Shakespeare, with the same start and the same 400 mini-batches: once as it is, and once with your `RMSNorm` in the place of every `nn.LayerNorm`. A small GPT, 2 blocks of $d = 64$, on the CPU: it takes about a minute. Where a module of yours is missing, the course's version stands in. It works once exercise 1 is right. While it trains, a chart shows the training loss of every step: first with LayerNorm, then with your RMSNorm, the LayerNorm run dashed beside it. The last chart stays above the table.
+    The button trains your `GPT` from [Assemble your GPT](/course/open/gpt-assemble?lang=en) twice on Tiny Shakespeare, with the same start and the same 400 mini-batches: once as it is, and once with your `RMSNorm` in the place of every `nn.LayerNorm`. A small GPT, 2 blocks of $d = 64$, on the CPU: it takes about a minute. Where a module of yours is missing, the course's version stands in. It works once exercise 1 is right. While it trains, a chart shows the training loss of every step: first with LayerNorm, then with your RMSNorm, the LayerNorm run dashed beside it. Beside the chart you see what the model writes at that moment after `ROMEO:`, every character drawn from its probabilities, as in [Sampling: let the model write](/course/open/lm-sampling?lang=en). After the run you can go back through both runs, with what both models wrote before the first step and after every 100 steps.
     """)
     return
 
@@ -248,14 +248,19 @@ def demo_train(box_rms, result_rms, train_button):
         _out = mo.md("*Press the button to train.*")
     else:
         _now = {}   # the live chart of each run, made at its first steps
+        _heard = {}   # the last report of each run, for what its model writes now beside its chart
+        _wrote = {"now": "What it writes now, after step {step}",
+                  "alt_now": "What the model writes now after ROMEO: and a new line, which are in gray: every character drawn from its probabilities, with the same seed at every look."}
 
         def _progress(_p):
             if _p["run"] not in _now:
                 _rms = _p["run"] == "rms"
                 _now[_p["run"]] = L.live({"title": "RMSNorm: the training loss of every step" if _rms else "LayerNorm: the training loss of every step", "x": "step", "y": "loss",
-                                          "alt": "The training loss of every step of the run with your RMSNorm so far, in grey, and its mean over the last 10 steps as the thicker line; dashed, the same mean of the run with LayerNorm." if _rms else "The training loss of every step of the run with LayerNorm so far, in grey, and its mean over the last 10 steps as the thicker line."}, _p["steps"], window=10)
+                                          "alt": "The training loss of every step of the run with your RMSNorm so far, in gray, and its mean over the last 10 steps as the thicker line; dashed, the same mean of the run with LayerNorm." if _rms else "The training loss of every step of the run with LayerNorm so far, in gray, and its mean over the last 10 steps as the thicker line."}, _p["steps"], window=10, look_every=2.0)
+                _now[_p["run"]].watch(lambda _r=_p["run"]: C.now_picture(_heard[_r], _wrote))   # from the first steps on, what the model writes beside the chart
                 if _rms and "layer" in _now:
                     _now["rms"].reference(list(zip(_now["layer"].xs, _now["layer"].means())), "LayerNorm", role="loss")
+            _heard[_p["run"]] = _p
             _who = "LayerNorm" if _p["run"] == "layer" else "Your RMSNorm"
             _now[_p["run"]].extend(_p["fresh"], f"**{_who}** · step {_p['step']} of {_p['steps']}")
 
@@ -269,8 +274,15 @@ def demo_train(box_rms, result_rms, train_button):
             _n = lambda _x, _d=0: C.number(_x, _d, L.lang)
             _l, _r = _m["layer"], _m["rms"]
             _stand = (" The course's version stood in for: " + ", ".join(f"`{_s}`" for _s in _m["stand_ins"]) + ".") if _m["stand_ins"] else ""
-            _pic = [mo.Html(_now["rms"].picture())] if "rms" in _now else []   # the RMSNorm run, LayerNorm dashed
-            if _pic and "layer" in _now and _now["rms"].xs and _now["rms"].xs == _now["layer"].xs:   # both with every step a number
+            _rewind = {"title": "Mean training loss over 10 steps", "x": "step", "y": "loss", "lang": "en",
+                       "alt": "The mean training loss over 10 steps of both runs: LayerNorm thin and dashed, your RMSNorm thick, with a dashed line at the chosen step.",
+                       "layer": "LayerNorm", "rms": "your RMSNorm", "wrote": "What both wrote at that moment",
+                       "alt_wrote": "What both models write after step {step}, after ROMEO: and a new line, drawn with the same seed: first the one with LayerNorm, then the one with your RMSNorm.",
+                       "start": "**Before the first step**", "after": "**After step {step}**",
+                       "loss": "mean loss over the last 10 steps: LayerNorm {layer}, your RMSNorm {rms}"}
+            _pic = [L.explore("rewind", "step", lambda _v: C.rewind_frame(_m, int(_v), _rewind), start=C.moments()[-1], values=C.moments(), role="",
+                              task="Go back to before the first step, then forward: what do both models learn to write first, and do the two write alike?")] if _m["rms"]["losses"] else []
+            if _pic and "layer" in _now and "rms" in _now and _now["rms"].xs and _now["rms"].xs == _now["layer"].xs:   # both with every step a number
                 _gap = max(abs(_a - _b) for _a, _b in zip(_now["rms"].means(), _now["layer"].means()))   # rounded up below
                 _pic.append(mo.md(f"In the chart, the two runs lie on top of each other: their means over 10 steps were never more than {_n(_gap + 0.0005, 3)} apart, so the thick line of your RMSNorm hides the dashed one of LayerNorm." if _gap < 0.01 else f"In the chart, the means over 10 steps of the two runs were at most {_n(_gap + 0.0005, 3)} apart."))
             _out = mo.vstack(_pic + [mo.md(f"""

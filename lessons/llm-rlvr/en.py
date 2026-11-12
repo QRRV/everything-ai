@@ -280,7 +280,7 @@ def text_demo():
     mo.md(rf"""
     ### Train your model with GRPO
 
-    The button measures your model of the DPO project (or the course's, if you have none) on {C.MEASURE} instructions to leave out a word the run never trains on, and on {C.MEASURE} of the test instructions with words of the SFT project; then it trains it with GRPO, with your `advantages` and `policy_loss`, groups of {C.G} answers to {C.PROMPTS} instructions per step, for {C.STEPS['cpu']} steps on a CPU or {C.STEPS['gpu']} on a GPU; and then it measures again. That takes about seven minutes with the course's model on a CPU, less with a smaller model of your own, and much less on a GPU. Ten steps do not get as far as the course's {len(R['rewards'])}: its run is drawn under yours.
+    The button measures your model of the DPO project (or the course's, if you have none) on {C.MEASURE} instructions to leave out a word the run never trains on, and on {C.MEASURE} of the test instructions with words of the SFT project; then it trains it with GRPO, with your `advantages` and `policy_loss`, groups of {C.G} answers to {C.PROMPTS} instructions per step, for {C.STEPS['cpu']} steps on a CPU or {C.STEPS['gpu']} on a GPU; and then it measures again. That takes about seven minutes with the course's model on a CPU, less with a smaller model of your own, and much less on a GPU. Ten steps do not get as far as the course's {len(R['rewards'])}: its run is drawn under yours. After every step, beside the chart you see the group of its first instruction, as in *Your run, step by step* below: the advantage of every answer as a bar, and under them the answers with their rewards.
     """)
     return
 
@@ -304,15 +304,23 @@ def demo_train(box_advantages, box_loss, demo_button, result_advantages, result_
                         "alt": "The mean reward of every step of your run so far, as a line in ink with a dot at every step; dashed, the course's run on its model, at the same steps."}, C.steps(), role="ink", low=0.0, high=1.0)
         _live.reference(list(enumerate(R["rewards"][:C.steps()], 1)), "the course's run", role="ink")
 
-        def _show(_d):
+        _now = {}   # the group of the last step, beside the chart
+        _group = {"title": "Step {step}: the group of one instruction", "x": "answer", "y": "advantage", "lang": "en",
+                  "alt_now": "The advantage of every answer of the group of the first instruction of step {step}, as a bar up or down from zero.",
+                  "answers": "Its {n} answers to: {instruction}", "reward": "reward", "advantage": "advantage"}
+
+        def _progress(_d):
             if _d["phase"] == "measure":
                 _live.line(f"**Measuring** {_d['done']} of {_d['total']} …")
             elif _d["phase"] == "start":
                 _live.line(f"**Training** · step 1 of {_d['steps']} …")
             else:
+                if not _now:   # from the first step on, its group beside the chart
+                    _live.watch(lambda: C.group_pictures(_now["group"], _group))
+                _now["group"] = _d["group"]
                 _live.extend(_d["fresh"], f"**Step {_d['step']} of {_d['steps']}:** mean reward {C.number(_d['reward'], 2, 'en')}, {_d['seconds']:.0f} s")
 
-        _r = C.run(run_code(box_advantages.value).names["advantages"], run_code(box_loss.value).names["policy_loss"], _show)
+        _r = C.run(run_code(box_advantages.value).names["advantages"], run_code(box_loss.value).names["policy_loss"], _progress)
         trained = None if isinstance(_r, str) else _r
         if _r == "run":
             _out = _live.stopped("*Loading or running your model stops with an error. Do your modules in `work/projects/llm/` still pass their checks? Delete a file you changed, and check its exercise again.*")

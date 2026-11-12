@@ -60,13 +60,10 @@ def main(shard: str):
     text = stories(shard)
     C.B.text = lambda: text   # the run trains on these stories instead of TinyStories
     C.plan = lambda: {"device": "cpu", "name": "CPU", "small": None, **C.plan_for("cpu")}
-    shown = set()
 
     def show(p):
-        if p.get("phase") == "train" and len(p["history"]) not in shown:
-            shown.add(len(p["history"]))
-            for h in p["history"][-1:]:
-                print(f"epoch {h['epoch']}: training loss {h['train_loss']:.4f}, validation loss {h['val_loss']:.4f}", flush=True)
+        if "val_loss" in p:   # after every epoch, as live.follow hears the Trainer
+            print(f"epoch {p['epoch']}: validation loss {p['val_loss']:.4f}", flush=True)
 
     result = C.train(show, seed=0)
     assert isinstance(result, dict) and not result["stopped"], result

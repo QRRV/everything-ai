@@ -130,6 +130,15 @@ def run(show) -> dict | str:
     steps = math.ceil(len(data) / BATCH)
     marks = {round(steps * k / T.SNAPSHOTS) for k in range(1, T.SNAPSHOTS + 1)}
     losses, fresh, start, last = [], [], time.perf_counter(), 0.0
+    aside = 0.0   # the seconds of looking at the model and drawing it, which are not those of training (decision 1.17)
+
+    def look():
+        """What the model answers now, as at the moments of the replay (decision 1.17): snap draws with its own seed,
+        and netview.looking puts every module back in its own mode, so that looking never changes the run."""
+        from everything_ai import netview
+        with netview.looking(model):
+            return snap(step + 1, model)
+
     try:
         for step in range(steps):
             batch = [data[i] for i in order[step * BATCH:(step + 1) * BATCH]]
@@ -148,13 +157,14 @@ def run(show) -> dict | str:
             if now - last > 1 or step == steps - 1:
                 last = now
                 show({"phase": "steps", "step": step + 1, "steps": steps, "loss": sum(losses[-25:]) / len(losses[-25:]),
-                      "seconds": now - start, "fresh": fresh})
+                      "seconds": now - start - aside, "fresh": fresh, "look": look})
                 fresh = []
+                aside += time.perf_counter() - now
     except torch.OutOfMemoryError:
         return "memory"
     except Exception:
         return "step"
-    seconds = time.perf_counter() - start
+    seconds = time.perf_counter() - start - aside
     model.eval()
     try:   # how far the chosen and the rejected answers moved from the reference model, in nats, on average
         moved = {"chosen": 0.0, "rejected": 0.0}

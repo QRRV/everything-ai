@@ -315,7 +315,7 @@ def text_demo():
         mo.md(f"""
         ### Een paar honderd stappen van het recept
 
-        De knop hieronder traint je ModernGPT met wat deze les uit nanochat las: de grootte van diepte {C.DEPTH} volgens de regel van nanochat, een breedte van {_dim} met {_heads} heads, en je `lr_multiplier` met de standaardwaarden van nanochat, een warmup van {C.SCHEDULE['warmup']} stappen en een warmdown over de laatste {round(100 * C.SCHEDULE['warmdown'])}% naar {round(100 * C.SCHEDULE['final'])}% van de piek, {C.STEPS} stappen lang, met {C.BATCH} vensters van {C.BLOCK} tokens. Hij leest de vensters met je `TokenWindows` uit de shards van [Project: een datapipeline voor pretraining](/course/open/llm-data-pipeline?lang=nl), en houdt de laatste shard apart om op te valideren. De optimizer is AdamW, met een piek van {C.number(C.PEAK, 3, L.lang)}, niet Muon. Op de computer van de course, op zijn CPU, duurde de run ongeveer {round(C.MEASURED['seconds'] / 60)} minuten, op 2 threads; op een GPU gaat het veel sneller. Tijdens het trainen laat een grafiek de loss van elke stap zien, met de run van de course gestippeld ernaast.
+        De knop hieronder traint je ModernGPT met wat deze les uit nanochat las: de grootte van diepte {C.DEPTH} volgens de regel van nanochat, een breedte van {_dim} met {_heads} heads, en je `lr_multiplier` met de standaardwaarden van nanochat, een warmup van {C.SCHEDULE['warmup']} stappen en een warmdown over de laatste {round(100 * C.SCHEDULE['warmdown'])}% naar {round(100 * C.SCHEDULE['final'])}% van de piek, {C.STEPS} stappen lang, met {C.BATCH} vensters van {C.BLOCK} tokens. Hij leest de vensters met je `TokenWindows` uit de shards van [Project: een datapipeline voor pretraining](/course/open/llm-data-pipeline?lang=nl), en houdt de laatste shard apart om op te valideren. De optimizer is AdamW, met een piek van {C.number(C.PEAK, 3, L.lang)}, niet Muon. Op de computer van de course, op zijn CPU, duurde de run ongeveer {round(C.MEASURED['seconds'] / 60)} minuten, op 2 threads; op een GPU gaat het veel sneller. Tijdens het trainen laat een grafiek de loss van elke stap zien, met de run van de course gestreept ernaast, en naast de grafiek het begin van een verhaal dat je model op dat moment schrijft na *Once upon a time*, met temperatuur {C.number(C.D.B.TAU, 1, L.lang)} zoals in [Tekst genereren met je GPT](/course/open/gpt-generate?lang=nl). Na de run kun je de run terugspoelen, met het verhaal dat het schreef voor de eerste stap en na elke {C.STEPS // C.MOMENTS} stappen. Het schrijven van die verhalen kost extra tijd; die telt niet mee in de seconden van de run.
         """),
         L.course_versions(),
     ])
@@ -342,11 +342,18 @@ def demo_train(train_button, box_lr, result_lr):
         _out = mo.vstack([mo.md("*Druk op de knop om de run te starten. Tot dan de run van de course:*"), _course, mo.md(_verdict)])
     else:
         _live = L.live({"title": "Je run: de training loss van elke stap", "x": "stap", "y": "loss per token",
-                        "alt": "De training loss bij elke stap van je run tot nu toe, in grijs, en als dikkere lijn het gemiddelde over de laatste 10 stappen; gestippeld de run van de course."}, C.STEPS, window=10)
+                        "alt": "De training loss bij elke stap van je run tot nu toe, in grijs, en als dikkere lijn het gemiddelde over de laatste 10 stappen; gestreept de run van de course."}, C.STEPS, window=10, look_every=6.0)
         _live.reference(C.course_curve(), "de run van de course", role="loss")
         _live.line(f"**Bezig met trainen** · stap 1 van {C.STEPS} …")   # de run van de course staat er vanaf de druk op de knop
 
+        _now = {}   # het laatste bericht, voor het verhaal dat het model nu schrijft naast de grafiek
+        _wrote = {"now": "Wat het nu schrijft, na stap {step}",
+                  "alt_now": "Het begin van een verhaal dat je model nu schrijft na Once upon a time, dat in grijs staat, met temperatuur 0,8 en telkens dezelfde seed."}
+
         def _progress(_p):
+            if not _now:   # vanaf het eerste bericht staat het verhaal naast de grafiek
+                _live.watch(lambda: C.now_picture(_now["last"], _wrote))
+            _now["last"] = _p
             _live.extend(_p["fresh"], f"**Stap {_p['step']} van {_p['steps']}** · training loss {C.number(_p['loss'], 2, L.lang)} per token · {round(_p['seconds'])} s")
         _r = C.run(run_code(box_lr.value).names["lr_multiplier"], _progress)
         if _r == "run":
@@ -354,8 +361,12 @@ def demo_train(train_button, box_lr, result_lr):
         else:
             _on = "de CPU" if _r["device"] == "cpu" else "de GPU"
             _out = mo.vstack([
-                mo.Html(C.curve_picture([(_m["curve"], True), (_r["curve"], False)], {**_labels, "key": "— jouw run   - - die van de course",
-                                                                                      "alt": f"De training loss van jouw run, van {C.number(_r['curve'][0], 1, L.lang)} na 10 stappen omlaag naar {C.number(_r['curve'][-1], 2, L.lang)} na 300, naast de run van de course."})),
+                L.explore("rewind", "stap", lambda _v: C.rewind_frame(_r, int(_v), {**_labels, "key": "— jouw run   - - die van de course",
+                                                                                   "alt": f"De training loss van jouw run, van {C.number(_r['curve'][0], 1, L.lang)} na 10 stappen omlaag naar {C.number(_r['curve'][-1], 2, L.lang)} na 300, naast de run van de course, met een gestreepte lijn bij de gekozen stap.",
+                                                                                   "wrote": "Wat het op dat moment schreef", "alt_wrote": "Het begin van het verhaal dat je model schreef na stap {step}, na Once upon a time, dat in grijs staat, met temperatuur 0,8 en telkens dezelfde seed.",
+                                                                                   "start": "**Voor de eerste stap**", "after": "**Na stap {step}** · training loss {loss} per token, over de laatste 10 stappen"}),
+                          start=C.moments()[-1], values=C.moments(), role="",
+                          task="Ga terug naar voor de eerste stap, en dan weer vooruit: vanaf welk moment heeft het verhaal woorden, en vanaf welk moment zinnen?"),
                 mo.md(f"""Je ModernGPT van {C.number(_r['params'], 0, L.lang)} parameters trainde {C.STEPS} stappen op {_on}, in {round(_r['seconds'])} seconden. Zijn validation loss op de apart gehouden shard is **{C.number(_r['val'], 2, L.lang)} per token**, {C.number(_r['per_char'], 2, L.lang)} per teken. {_verdict}"""),
             ])
     _out

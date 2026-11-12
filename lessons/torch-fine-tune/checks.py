@@ -4,7 +4,8 @@
 (frozen, with a new last layer from 64 to 10) in two phases: first only the new last layer, then every layer with a
 learning rate ten times smaller. The check gives it a `train` that only notes which parameters each call would
 change, with which learning rate and for how many epochs; the demo gives it the course's real training loop on the
-100 labeled digits of the old scanner of the previous lesson, and tests on 1,000 such digits."""
+100 labeled digits of the old scanner of the previous lesson, and tests on 1,000 such digits; while it trains and
+after every epoch it shows what the digit reader guesses and its second convolution (decision 1.17)."""
 import functools
 import html
 import re
@@ -14,8 +15,8 @@ import numpy as np
 import torch   # imported once, when the lesson opens: the first import takes longer than a check may
 from torch import nn
 
-from everything_ai import paths
-from everything_ai.check import FunctionBox, Mistake, run_code, with_time_limit
+from everything_ai import live, netview, paths, yours
+from everything_ai.check import FunctionBox, Mistake, Timeout, run_code, with_time_limit
 
 DATA = "data/qmnist-small.npz"   # the first 6,000 training and 1,000 test images of QMNIST: see data/README.md
 LABELED = 100                    # the labeled digits of the new task: the first 100 of the training images
@@ -23,6 +24,9 @@ SPECKLE = 0.5                    # the old scanner adds to every pixel a random 
 HEAD_LR, HEAD_EPOCHS = 0.01, 30  # phase 1: only the new last layer
 TUNE_LR, TUNE_EPOCHS = 0.001, 30 # phase 2: every layer, with a learning rate ten times smaller
 BATCH = 32
+WATCHED = "conv2"   # the layer the demo shows of the digit reader: its second convolution
+KEPT = (1, 2, 3, 5, 10, 15, 20, 25, 30, 31, 32, 35, 40, 45, 50, 55, 60)   # the epochs the rewind goes back to
+RUNS = ("frozen", "tuned")   # phase 1 alone first, then both phases through fine_tune
 # The course's runs with the course's code, on one thread, for seeds 0 to 4: test images read right of 1,000, lowest
 # and highest. "frozen" is phase 1 alone, "tuned" both phases, "big-lr" phase 2 with the learning rate of phase 1,
 # "no-head" every layer from the start with the learning rate of phase 2, 30 epochs ("no-head-60": 60 epochs).
@@ -51,21 +55,26 @@ def scanner_digits():
     return X, torch.tensor(d["train_labels"][:LABELED], dtype=torch.int64), X_test, torch.tensor(d["test_labels"], dtype=torch.int64)
 
 
-def train(model, params, X, y, lr: float, epochs: int, seed: int = 0) -> None:
+def train(model, params, X, y, lr: float, epochs: int, seed: int = 0, heard=None) -> None:
     """The course's training loop: mini-batches of 32 in a new order every epoch, cross-entropy, and the optimizer
-    Adam, which a later lesson explains, on `params`, the parameters that should learn."""
+    Adam, which a later lesson explains, on `params`, the parameters that should learn. After every epoch,
+    heard(epoch, epochs, the mean loss of its mini-batches), when given: the demo looks at the model then."""
     torch.manual_seed(seed)
     opt = torch.optim.Adam(params, lr=lr)
     loss_fn = nn.CrossEntropyLoss()
     model.train()
-    for _ in range(epochs):
+    for e in range(1, epochs + 1):
         order = torch.randperm(len(X))
+        losses = []
         for i in range(0, len(X), BATCH):
             batch = order[i:i + BATCH]
             loss = loss_fn(model(X[batch]), y[batch])
             opt.zero_grad()
             loss.backward()
             opt.step()
+            losses.append(float(loss.detach()))
+        if heard is not None:
+            heard(e, epochs, sum(losses) / len(losses))
     model.eval()
 
 
@@ -283,17 +292,98 @@ CASES = [
 
 # --- the demo: phase 1 alone against both phases, on the 100 labeled digits of the old scanner ------------------------
 
-def _runs(fine_tune, seed: int) -> dict:
+def one_each() -> list:
+    """The first speckled test digit of each kind, 0 to 9: what the demo shows the digit reader guess."""
+    _, _, _, y_test = scanner_digits()
+    return [int((y_test == k).nonzero()[0]) for k in range(10)]
+
+
+def now_pictures(seen: dict, heads: dict, lang: str, uid: str) -> list:
+    """What the digit reader makes at one moment of a run, as `look` or the rewind gives it: its guess for the first
+    speckled test digit of each kind, under heads["guesses"], and under them its second convolution on the 9, under
+    heads["layer"] with {name} the layer's name. `uid` keeps the masks of the layer apart from those of another
+    picture on the page."""
+    _, _, X_test, _ = scanner_digits()
+    said, right_ = [str(g) for g in seen["guesses"]], [str(k) for k in seen["truth"]]
+    alt = {"en": "The first speckled test digit of each kind, each with the digit the network guessed, and in brackets the right digit where it is wrong: ",
+           "nl": "Het eerste gespikkelde testcijfer van elke soort, elk met het cijfer dat het netwerk gokte, en tussen haakjes het goede cijfer waar het fout is: "}
+    picture = yours.guesses([X_test[place].reshape(28, 28).numpy() for place in one_each()], said, right_,
+                            alt[lang] + "; ".join(f"{r}: {g}" for r, g in zip(right_, said)) + ".", title=heads["guesses"])
+    return netview.moment(picture, seen.get("layer"), heads["layer"], lang, uid, plain=True)   # before the cnn lessons: no feature maps
+
+
+def curves_picture(result: dict, labels: dict, lang: str, at: int | None = None) -> str:
+    """The loss on the 1,000 test digits at the epochs the runs kept: both phases as the run, in the colour of loss,
+    and phase 1 alone thin, dashed and grey beside it, named labels["frozen"], as the live chart draws it. With `at`,
+    a line at that epoch, for rewinding."""
+    run = live.Live(labels, HEAD_EPOCHS + TUNE_EPOCHS, lang=lang, low=0.0)
+    run.reference(list(result["tests"].get("frozen", [])), labels["frozen"], role="ink-2")
+    run.xs = [e for e, _ in result["tests"].get("tuned", [])]
+    run.ys = [v for _, v in result["tests"].get("tuned", [])]
+    return run.picture(at=at)
+
+
+def epoch_frame(result: dict, e: int, labels: dict, heads: dict, lang: str) -> str:
+    """The rewind at epoch e of both phases, one the run kept: the test loss with a line at e, and the digit reader's
+    guesses and its second convolution as they were after that epoch (decision 1.17), under heads as for now_pictures."""
+    k = [n for n, _ in result["tests"]["tuned"]].index(e)
+    seen = {"guesses": result["looked"]["tuned"][k], "truth": result["truth"], "layer": result["layers"]["tuned"][k]}
+    return live.rewound(curves_picture(result, labels, lang, at=e), now_pictures(seen, heads, lang, f"nv-tune-epoch-{e}"))
+
+
+def _hearing(model, name: str, show, out: dict):
+    """How the demo hears one run of the course's training loop: heard(epoch, epochs, loss, phase) after every epoch,
+    with its loss on the training digits, and at the epochs of KEPT and the last its loss on the 1,000 test digits
+    too ("val_loss"), with the guesses and the second convolution kept for the rewind (netview.hearing); every report
+    goes on to `show` with "look", what the digit reader makes then. It looks in eval mode without a graph
+    (netview.looking), so the run stays the same. The test loss only at those epochs: at every epoch it would take
+    longer than the training."""
+    _, _, X_test, y_test = scanner_digits()
+    shown = one_each()
+    out["looked"][name], out["layers"][name], out["curves"][name], out["tests"][name], out["phases"][name] = [], [], [], [], []
+    hear = netview.hearing(model, X_test[shown], out["truth"], X_test[shown[-1:]], show, out["looked"][name], out["layers"][name], WATCHED)
+
+    def heard(e: int, epochs: int, loss: float, phase: int = 1):
+        out["curves"][name].append((e, loss))
+        report = {"run": name, "epoch": e, "epochs": epochs, "phase": phase, "loss": loss}
+        if e in KEPT or e == epochs:
+            try:
+                with netview.looking(model):
+                    test = float(nn.functional.cross_entropy(model(X_test), y_test))
+            except Timeout:
+                raise
+            except Exception:   # a model that does not give 10 scores: no test loss, the run goes on
+                test = float("nan")
+            out["tests"][name].append((e, test))
+            out["phases"][name].append(phase)
+            report["val_loss"] = test
+        hear(report)
+    return heard
+
+
+def _runs(fine_tune, seed: int, show=None) -> dict:
     """One run of each: the frozen digit reader with only its new last layer trained (phase 1), and the digit reader
-    through fine_tune with the course's training loop on the 100 labeled digits."""
+    through fine_tune with the course's training loop on the 100 labeled digits. For the live chart and the rewind,
+    per run: its loss on the training digits after every epoch, as (epoch, loss) ("curves"), counted on over the
+    phases of fine_tune; at the epochs of KEPT and its last its loss on the test digits ("tests", the same way), the
+    phase it was in ("phases"), its guesses for the first test digit of each kind ("looked", with the right digits in
+    "truth") and its second convolution on the 9 ("layers"); `show` hears every epoch, "frozen" and then "tuned"."""
     X, y, X_test, y_test = scanner_digits()
+    out = {"curves": {}, "tests": {}, "phases": {}, "looked": {}, "layers": {}, "truth": [int(y_test[place]) for place in one_each()]}
     torch.manual_seed(seed)
     frozen = frozen_reader()
-    train(frozen, frozen.out.parameters(), X, y, HEAD_LR, HEAD_EPOCHS, seed)
-    out = {"frozen": right(frozen, X_test, y_test)}
+    train(frozen, frozen.out.parameters(), X, y, HEAD_LR, HEAD_EPOCHS, seed, _hearing(frozen, "frozen", show, out))
+    out["frozen"] = right(frozen, X_test, y_test)
     torch.manual_seed(seed)
     model = frozen_reader()
-    fine_tune(model, lambda params, lr, epochs: train(model, params, X, y, lr, epochs, seed))
+    heard, done = _hearing(model, "tuned", show, out), [0, 0]   # the calls of train so far, and their epochs
+
+    def phase(params, lr, epochs):   # the train that fine_tune gets: the course's loop, with the epochs counted on
+        done[0] += 1
+        k, start = done[0], done[1]
+        done[1] += epochs
+        train(model, params, X, y, lr, epochs, seed, lambda e, n, loss: heard(start + e, HEAD_EPOCHS + TUNE_EPOCHS, loss, k))
+    fine_tune(model, phase)
     out["tuned"] = right(model, X_test, y_test)
     return out
 
@@ -302,13 +392,15 @@ def course_fine_tune():
     return run_code(_f()).names["fine_tune"]
 
 
-def demo(text) -> dict:
+def demo(text, show=None) -> dict:
     """The demo with the learner's fine_tune once it is right, else the course's, seed 0, on one thread: the test
-    digits read right after phase 1 and after both phases, and whose fine_tune it was."""
+    digits read right after phase 1 and after both phases, whose fine_tune it was, and what _runs keeps for the
+    rewind; `show` hears both runs while they train. If the learner's fine_tune fails here after all, the course's
+    runs instead, from epoch 1 again."""
     ran = run_code(text) if text else None
     fn = ran.names.get("fine_tune") if ran is not None and ran.error is None else None
-    yours = callable(fn)
+    mine = callable(fn)
     try:
-        return {**with_time_limit(lambda: _runs(fn if yours else course_fine_tune(), 0), 60), "yours": yours}
+        return {**with_time_limit(lambda: _runs(fn if mine else course_fine_tune(), 0, show), 60), "yours": mine}
     except Exception:
-        return {**with_time_limit(lambda: _runs(course_fine_tune(), 0), 60), "yours": False}
+        return {**with_time_limit(lambda: _runs(course_fine_tune(), 0, show), 60), "yours": False}

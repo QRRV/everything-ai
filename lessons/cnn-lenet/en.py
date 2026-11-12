@@ -301,7 +301,7 @@ def text_demo():
     mo.md(f"""
     ### What your project can do now
 
-    The cell below uses your project. It trains your `LeNet5`, and your `SmallCNN` of [Project: your first CNN](/course/open/cnn-pytorch?lang=en), with your Trainer: {C.EPOCHS} epochs on the 6,000 training images, a learning rate of {C.number(C.LR, 2, L.lang)} with a warmup of one epoch, the same for both, one run each, with seed 0. It counts their parameters with your `count_params`. Where a module of yours is missing or broken, the course's stands in. It works once exercise 2 is done, and takes about 10 seconds.
+    The cell below uses your project. It trains your `SmallCNN` of [Project: your first CNN](/course/open/cnn-pytorch?lang=en), and then your `LeNet5`, with your Trainer: {C.EPOCHS} epochs on the 6,000 training images, a learning rate of {C.number(C.LR, 2, L.lang)} with a warmup of one epoch, the same for both, one run each, with seed 0. It counts their parameters with your `count_params`. Where a module of yours is missing or broken, the course's stands in. It works once exercise 2 is done, and takes about 10 seconds. While each network trains, a chart shows its loss on the training images every 10 batches, and dashed on the test images after every epoch: first of your SmallCNN, then of your LeNet-5, with the validation loss of SmallCNN thin and dashed beside it. Beside or under it are the network's guesses at that moment for one test image of each kind, and under them the feature maps of its second convolution, `conv2`, on an ankle boot; both are drawn again as it trains. Then you can rewind through both runs, epoch by epoch, with the pictures of both networks as they were then.
     """)
     return
 
@@ -309,18 +309,65 @@ def text_demo():
 @app.cell(hide_code=True)
 def demo_lenet(result_lenet):
     result_lenet  # run again when exercise 2 saves your module
-    _result = C.demo()
+    _now = {}   # the live chart of each network, made at its first report, and its validation loss so far
+    _heads = {"small": {"guesses": "Your SmallCNN: its guess for one test image of each kind",
+                        "layer": "Its second convolution on a test image of an ankle boot: layer {name}"},
+              "lenet": {"guesses": "Your LeNet-5: its guess for one test image of each kind",
+                        "layer": "Its second convolution on a test image of an ankle boot: layer {name}"}}
+
+    def _progress(_p):
+        _run = _p["run"]
+        if _run not in _now:
+            _le = _run == "lenet"
+            _now[_run] = L.live({"title": "Your LeNet-5" if _le else "Your SmallCNN", "x": "epoch", "y": "loss",
+                                 "alt": "The loss of your LeNet-5 so far: on the training images every 10 batches, and dashed on the 1,000 test images after every epoch; thin and dashed, the validation loss of your SmallCNN." if _le else "The loss of your SmallCNN so far: on the training images every 10 batches, and dashed on the 1,000 test images after every epoch."}, _p["epochs"], low=0.0, window=5,
+                                key=[("loss", False, "training images, every 10 batches"), ("loss", True, "test images, after every epoch")])
+            _now[_run].watch(lambda: C.now_pictures(_p["look"](), _heads[_run], L.lang, f"nv-lenet-{_run}-now"))
+            _now[_run + "-test"] = []
+            if _le and "small-test" in _now:   # the validation loss of SmallCNN, thin and dashed beside LeNet-5
+                _now["lenet"].reference(_now["small-test"], "SmallCNN", role="ink-2")
+        _who = "Your LeNet-5" if _run == "lenet" else "Your SmallCNN"
+        if "val_loss" in _p:   # the test images after every epoch, dashed
+            _now[_run + "-test"].append((_p["epoch"], _p["val_loss"]))
+            _now[_run].reference(_now[_run + "-test"], "", role="loss", replace=True)
+            _now[_run].line(f"**{_who}** · epoch {_p['epoch']} of {_p['epochs']} · validation loss {C.number(_p['val_loss'], 3, L.lang)}")
+        elif "loss" in _p:   # the training images every 10 batches
+            _now[_run].add(_p["epoch"] - 1 + _p["batch"] / _p["batches"], _p["loss"],
+                           f"**{_who}** · epoch {_p['epoch']} of {_p['epochs']} · batch {_p['batch']} of {_p['batches']} · loss {C.number(_p['loss'], 3, L.lang)}")
+        else:
+            _now[_run].line(f"**{_who}** · epoch {_p['epoch']} of {_p['epochs']} · batch {_p['batch']} of {_p['batches']}")
+
+    _result = C.demo(_progress)
     if _result is None:
         _out = mo.md("*Finish exercise 2 first: then your `LeNet5` is in your project, and this cell uses it.*")
     elif isinstance(_result, str):
-        _out = mo.md({
+        _note = {
             "slow": "*Your project takes too long here: more than two minutes to train one network. Does your `LeNet5` or your Trainer do more work than it needs, such as a loop that runs too often?*",
             "lenet": "*Your `LeNet5` in `work/projects/cnn/lenet.py` stops with an error, while it is made, counted or trained. Did you change its file? Delete it, and check exercise 2 again: its check then saves your code again.*",
             "trainer": "*Your Trainer in `work/projects/nn/trainer.py`, your `SmallCNN` in `work/projects/cnn/small_cnn.py` or your `count_params` in `work/projects/cnn/count.py` stops with an error. Did you change one of those files? Delete it, and check its exercise again.*",
-        }[_result])
+        }[_result]
+        _last = _now.get("lenet") or _now.get("small")   # a run that stops keeps its chart so far
+        _out = _last.stopped(_note) if _last else mo.md(_note)
     else:
         _who = "" if not _result["stand_ins"] else " The course's version stood in for " + ", ".join(f"`{m}`" for m in _result["stand_ins"]) + ", as the note under *Where your project stands* says."
-        _out = mo.md(f"""Of the 1,000 test images, your LeNet-5 reads **{_result['lenet']}** right, with {C.grouped(_result['params_lenet'], L.lang)} parameters, counted with your `count_params`; your SmallCNN reads **{_result['small']}** right, with {C.grouped(_result['params_small'], L.lang)}. Over 5 seeds, with the course's code, LeNet-5 reads 828 to 852 right and SmallCNN 864 to 879.{_who}""")
+        _labels = {"title": "Validation loss after every epoch", "x": "epoch", "y": "validation loss", "small": "SmallCNN", "alt": "The validation loss of your LeNet-5 after every epoch, and thin and dashed that of your SmallCNN."}
+        _curves = _result.get("curves", {})
+        _when = list(range(1, len(_curves.get("lenet", [])) + 1))
+        if any(len(_result["looked"][_n]) != len(_curves.get(_n, [])) or not all(_result["looked"][_n]) for _n in C.RUNS):   # an epoch it could not look at
+            _when = []
+
+        def _frame(_e):
+            _e = int(_e)
+            _right = {_n: sum(_g == _k for _g, _k in zip(_result["looked"][_n][_e - 1], _result["truth"])) for _n in C.RUNS}
+            return (C.epoch_frame(_result, _e, _labels, _heads, L.lang),
+                    f"After epoch {_e}: of these 10 test images, your SmallCNN reads {_right['small']} right, and your LeNet-5 {_right['lenet']}.")
+
+        if len(_when) > 1:   # rewinding through both runs, with both in the picture
+            _pic = [L.explore("rewind", "epoch", _frame, start=_when[-1], values=_when, role="",
+                              task="Go back to epoch 1, then forward again: where do the guesses and the feature maps of your two networks differ?")]
+        else:
+            _pic = [mo.Html(C.curves_picture(_curves, _labels, L.lang))] if _curves else []
+        _out = mo.vstack(_pic + [mo.md(f"""Of the 1,000 test images, your LeNet-5 reads **{_result['lenet']}** right, with {C.grouped(_result['params_lenet'], L.lang)} parameters, counted with your `count_params`; your SmallCNN reads **{_result['small']}** right, with {C.grouped(_result['params_small'], L.lang)}. Over 5 seeds, with the course's code, LeNet-5 reads 828 to 852 right and SmallCNN 864 to 879. The chart shows the validation loss of both after every epoch, SmallCNN's dashed.{_who}""")])
     _out
     return
 

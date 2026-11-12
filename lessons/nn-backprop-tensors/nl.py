@@ -356,7 +356,7 @@ def text_demo():
     mo.md(r"""
     ### Wat je project nu kan
 
-    De cel hieronder haalt je eigen `mlp_gradients` uit je project. Eerst vergelijkt hij de gradients ervan met die van PyTorch, voor een MLP met 64 hidden neuronen op 64 cijfers. Dan traint hij dat MLP ermee op de 6000 trainingscijfers, alleen met NumPy, 5 epochs van mini-batches van 64 met $\eta$ = 0,5, en meet hem op de 1000 testcijfers. Dat duurt een paar seconden. Het werkt zodra oefening 3 af is.
+    De cel hieronder haalt je eigen `mlp_gradients` uit je project. Eerst vergelijkt hij de gradients ervan met die van PyTorch, voor een MLP met 64 hidden neuronen op 64 cijfers. Dan traint hij dat MLP ermee op de 6000 trainingscijfers, alleen met NumPy, 5 epochs van mini-batches van 64 met $\eta$ = 0,5, en meet hem op de 1000 testcijfers. Dat duurt een paar seconden. Terwijl het traint, toont een grafiek de gemiddelde loss van elke 10 mini-batches, en gestreept de loss op alle trainingscijfers na elke epoch; daarnaast of daaronder staat wat je MLP op dat moment gokt bij één testcijfer van elke soort, opnieuw getekend terwijl het traint. Daarna kun je door de epochs terugspoelen, met zijn gokken zoals ze toen waren. Het werkt zodra oefening 3 af is.
     """)
     return
 
@@ -364,19 +364,49 @@ def text_demo():
 @app.cell(hide_code=True)
 def demo_backprop(result_mlp):
     result_mlp  # run again when exercise 3 saves your function
-    _result = C.demo()
+    _now = {}   # the live chart, made at the first report, and the loss on all training digits so far
+
+    def _progress(_p):
+        if "chart" not in _now:
+            _now["chart"] = L.live({"title": "Je MLP, getraind met je gradients", "x": "epoch", "y": "loss", "alt": "De loss van je training tot nu toe: het gemiddelde van elke 10 mini-batches, en gestreept de loss op alle trainingscijfers na elke epoch."}, _p["epochs"], low=0.0,
+                                   window=3, key=[("loss", False, "gemiddelde loss van 10 mini-batches"), ("loss", True, "alle trainingscijfers, na elke epoch")])
+            _now["chart"].watch(lambda: C.now_picture(_p["look"](), "Wat je MLP nu gokt bij één testcijfer van elke soort", L.lang))
+            _now["all"] = []
+        if "train_loss" in _p:   # all training digits after every epoch, dashed
+            _now["all"].append((_p["epoch"], _p["train_loss"]))
+            _now["chart"].reference(_now["all"], "", role="loss", replace=True)
+            _now["chart"].line(f"**Je MLP, getraind met je gradients** · epoch {_p['epoch']} van {_p['epochs']} · loss {L.number(_p['train_loss'], 3)}")
+        else:   # every 10 mini-batches
+            _now["chart"].add(_p["epoch"] - 1 + _p["batch"] / _p["batches"], _p["loss"],
+                              f"**Je MLP, getraind met je gradients** · epoch {_p['epoch']} van {_p['epochs']} · batch {_p['batch']} van {_p['batches']} · loss {L.number(_p['loss'], 3)}")
+
+    _result = C.demo(_progress)
     if _result is None:
         _out = mo.md("*Maak eerst oefening 3 af: dan staat je `mlp_gradients` in je project, en gebruikt deze cel hem.*")
-    elif _result == "slow":
-        _out = mo.md("*Trainen met je `mlp_gradients` in `work/projects/nn/mlp_backward.py` duurt langer dan een minuut. Gebruikt hij hele matrices, zonder loop over de voorbeelden?*")
-    elif _result == "broken":
-        _out = mo.md("*De `mlp_gradients` in `work/projects/nn/mlp_backward.py` stopt met een fout, of geeft andere gradients dan PyTorch. Heb je dat bestand veranderd? Verwijder het, en laat oefening 3 opnieuw nakijken: de check bewaart je functie dan opnieuw.*")
+    elif isinstance(_result, str):
+        _note = {
+            "slow": "*Trainen met je `mlp_gradients` in `work/projects/nn/mlp_backward.py` duurt langer dan een minuut. Gebruikt hij hele matrices, zonder loop over de voorbeelden?*",
+            "broken": "*De `mlp_gradients` in `work/projects/nn/mlp_backward.py` stopt met een fout, of geeft andere gradients dan PyTorch. Heb je dat bestand veranderd? Verwijder het, en laat oefening 3 opnieuw nakijken: de check bewaart je functie dan opnieuw.*",
+        }[_result]
+        _out = _now["chart"].stopped(_note) if "chart" in _now else mo.md(_note)   # a run that stops keeps its chart so far
     else:
-        _errors, _accuracy, _losses = _result
+        _errors, _accuracy, _losses, _looked = _result
+        _labels = {"title": "De loss van je training, per epoch", "epoch": "epoch", "loss": "loss op de trainingscijfers", "alt": f"Een lijn door {len(_losses)} punten, één per epoch: de loss op alle trainingscijfers daalt van {L.number(_losses[0], 2)} na de eerste epoch naar {L.number(_losses[-1], 2)} na de laatste."}
+        _when = list(range(1, len(_losses) + 1)) if len(_looked) == len(_losses) and all(_looked) else []
+
+        def _frame(_e):
+            _e = int(_e)
+            return (C.epoch_frame(_losses, _looked, _e, _labels, "Wat je MLP na deze epoch gokte bij één testcijfer van elke soort", L.lang),
+                    f"Na epoch {_e}: je MLP leest {C.right_of(_looked[_e - 1])} van deze 10 testcijfers goed; de loss op alle trainingscijfers was {L.number(_losses[_e - 1], 2)}.")
+
+        if len(_when) > 1:   # rewinding through the epochs, with its guesses as they were then
+            _rewind = L.explore("rewind", "epoch", _frame, start=_when[-1], values=_when, role="",
+                                task="Ga terug naar epoch 1, en dan weer vooruit: welke cijfers leest je MLP het eerst goed?")
+        else:
+            _rewind = mo.Html(C.losses_picture(_losses, _labels))
         _out = mo.vstack([
             mo.md(f"""De grootste relatieve fout van je vier gradients ten opzichte van PyTorch ligt onder $10^{{{C.power(max(_errors))}}}$: ver onder $10^{{-7}}$, dus je backward pass rekent uit wat `loss.backward()` uitrekent. Ermee getraind leest je MLP <span class="ea-num">{L.number(round(_accuracy * 1000), 0)}</span> van de 1000 testcijfers goed: een accuracy van <span class="ea-num">{L.number(_accuracy, 3)}</span>, waar je lineaire classifier er 890 las; en zonder één regel PyTorch."""),
-            mo.Html(C.losses_picture(_losses, {"title": "De loss van je training, per epoch", "epoch": "epoch", "loss": "loss op de trainingscijfers",
-                                               "alt": f"Een lijn door {len(_losses)} punten, één per epoch: de loss op alle trainingscijfers daalt van {L.number(_losses[0], 2)} na de eerste epoch naar {L.number(_losses[-1], 2)} na de laatste."})),
+            _rewind,
         ])
     _out
     return

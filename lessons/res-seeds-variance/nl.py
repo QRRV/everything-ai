@@ -230,7 +230,7 @@ def text_demo():
     mo.md(r"""
     ### Je GPT met vijf seeds
 
-    De knop traint de kleine GPT uit [Eén ding tegelijk veranderen](/course/open/res-hypothesis-control?lang=nl) vijf keer, met seeds 0 tot en met 4, met jouw `GPT`, `gpt_loaders` en `Trainer` op de CPU: een halve tot een hele minuut per run, dus samen een paar minuten. De rest van de les wacht terwijl hij traint, en de stopknop van de cel maakt er een eind aan. Intussen laat een grafiek de validation loss na elke epoch zien, voor elke seed om de beurt, met de runs van de eerdere seeds gestippeld ernaast. De vijf eindigen dicht bij elkaar, maar niet op hetzelfde getal; het plaatje na de runs zoomt in op waar ze eindigen. <!-- termen:ok -->
+    De knop traint de kleine GPT uit [Eén ding tegelijk veranderen](/course/open/res-hypothesis-control?lang=nl) vijf keer, met seeds 0 tot en met 4, met jouw `GPT`, `gpt_loaders` en `Trainer` op de CPU: een halve tot een hele minuut per run, dus samen een paar minuten. De rest van de les wacht terwijl hij traint, en de stopknop van de cel maakt er een eind aan. Intussen laat een grafiek de validation loss na elke epoch zien, voor elke seed om de beurt, met de runs van de eerdere seeds gestreept ernaast, en naast de grafiek wat het model nu schrijft na `ROMEO:`, elk teken getrokken uit zijn kansen, telkens met dezelfde seed. Na de runs kun je met een stip terugspoelen door elke epoch van elke seed. De vijf eindigen dicht bij elkaar, maar niet op hetzelfde getal; het plaatje na de runs zoomt in op waar ze eindigen. <!-- termen:ok -->
     """)
     return
 
@@ -247,23 +247,29 @@ def demo_seeds(box_summary, result_summary, seeds_button):
     if not seeds_button.value:
         _out = mo.md("*Druk op de knop om de vijf runs te starten.*")
     else:
-        _done, _now = [], {}   # the curves of the seeds before; the live chart of the seed that trains now
+        _done = []   # the curves of the seeds before
+        _now = {}    # the live chart of the seed that trains now, and its last report
+        _kept = []   # every run, with what its model wrote at every epoch, for the rewind
+        _wrote = {"now": "Wat het nu schrijft, in epoch {epoch}",
+                  "alt_now": "Wat het model nu schrijft na ROMEO: en een nieuwe regel, die in grijs staan: elk teken getrokken uit zijn kansen, telkens met dezelfde seed voor het trekken."}
 
-        def _hear(_i, _e):
+        def _progress(_i, _e):
             if _now.get("seed") != _i:
                 if "live" in _now:
                     _done.append(list(zip(_now["live"].xs, _now["live"].ys)))
                 _now["seed"], _now["live"] = _i, L.live({"title": f"Seed {_i}: de validation loss", "x": "epoch", "y": "validation loss",
-                                                          "alt": f"De validation loss na elke epoch tot nu toe van de run met seed {_i}{'; gestippeld de runs van de eerdere seeds' if _done else ''}."}, _e["epochs"])
+                                                          "alt": f"De validation loss na elke epoch tot nu toe van de run met seed {_i}{'; gestreept de runs van de eerdere seeds' if _done else ''}."}, _e["epochs"], look_every=2.0)
+                _now["live"].watch(lambda: C.now_picture(_now["last"], _wrote))   # what the model writes now, beside the chart
                 for _c in _done:
                     _now["live"].reference(_c, "", role="loss")
+            _now["last"] = _e
             if "val_loss" in _e:
                 _now["live"].add(_e["epoch"], _e["val_loss"], f"**Seed {_i}** · epoch {_e['epoch']} van {_e['epochs']} · validation loss {C.number(_e['val_loss'], 3, L.lang)}")
             else:
                 _now["live"].line(f"**Seed {_i}** · epoch {_e['epoch']} van {_e['epochs']} · batch {_e['batch']} van {_e['batches']}")
 
         mo.output.replace(mo.md("*Seed 0 · begint …*"))   # until the first batches of seed 0
-        _runs = C.run_seeds(None, _hear)
+        _runs = C.run_seeds(None, _progress, _kept)
         if isinstance(_runs, str):
             _note = "*Je hebt de runs gestopt. Druk op de knop om opnieuw te beginnen.*" if _runs == "stopped" else "*Een run stopt met een fout. Komen je modules in `work/projects/llm/` en `work/projects/nn/` nog door hun checks? Verwijder een bestand dat je veranderde, en controleer zijn oefening opnieuw.*"
             _out = _now["live"].stopped(_note) if "live" in _now else mo.md(_note)   # runs that stop keep their chart so far
@@ -271,7 +277,15 @@ def demo_seeds(box_summary, result_summary, seeds_button):
             _summary, _yours = C.summary_of(box_summary.value if result_summary.state == "correct" else None)
             _mean, _low, _high = _summary(_runs, 10000, 0)
             _who = "" if _yours else " Oefening 1 klopt nog niet, dus de `seed_summary` van de course maakte de samenvatting."
-            _out = mo.vstack([
+            _rewind = {"title": "Seed {seed}: de validation loss", "x": "epoch", "y": "validation loss", "lang": "nl",
+                       "alt": "De validation loss na elke epoch van de vijf runs, seed {seed} doorgetrokken en de andere gestreept, met een gestreepte lijn bij de gekozen epoch.",
+                       "wrote": "Wat het op dat moment schreef",
+                       "alt_wrote": "Wat het model van seed {seed} schreef na epoch {epoch}, na ROMEO: en een nieuwe regel, die in grijs staan, telkens met dezelfde seed voor het trekken.",
+                       "start": "**Seed {seed}, vóór de eerste epoch**", "after": "**Seed {seed}, na epoch {epoch}** · validation loss {loss}"}
+            _pic = [L.plane("rewind", "epoch", "seed", lambda _e, _s: C.rewind_frame(_kept, int(_e), int(_s), _rewind), list(range(len(_kept[0]) + 1)), C.SEEDS,
+                            start=(len(_kept[0]), C.SEEDS[0]), role="",
+                            task="Sleep de stip over de epochs en de seeds: schrijven de vijf modellen na dezelfde epoch hetzelfde?")] if C.rewinds(_kept) else []
+            _out = mo.vstack(_pic + [
                 mo.Html(C.strip_picture([("jij, met warmup", _runs), ("course, met warmup", C.REFERENCE["control"]), ("course, zonder warmup", C.REFERENCE["warmup=0"])],
                                         {"title": "Vijf seeds per rij", "x": "validation loss na 6 epochs", "lang": L.lang,
                                          "alt": f"Drie rijen van elk vijf runs. Jouw runs liggen van {C.number(min(_runs), 3, L.lang)} tot {C.number(max(_runs), 3, L.lang)}, met een gemiddelde van {C.number(_mean, 3, L.lang)}."})),

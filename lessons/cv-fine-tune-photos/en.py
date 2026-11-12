@@ -416,7 +416,7 @@ def demo_phase_two(pretrained, demo_button, phase_two_code, result_phase_two):
             if "step" not in _p:   # phase 1 starts: a new chart for phase 2
                 _now["live"] = L.live({"title": "Phase 2: the loss of each batch", "x": "step", "y": "loss",
                                        "alt": "The loss of each batch of 20 training photos in phase 2 so far, step by step."},
-                                      C.TUNE_EPOCHS * C.STEPS, low=0.0, every=2.0)
+                                      C.TUNE_EPOCHS * C.STEPS, low=0.0, look_every=2.0)
                 _now.pop("look", None)
                 _now["live"].line("**Phase 1** · the features of the 200 training photos, and a new last layer")
             else:

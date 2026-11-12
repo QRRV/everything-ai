@@ -2,8 +2,9 @@
 # SPDX-License-Identifier: CC-BY-SA-4.0 AND MIT-0
 """Checks of the project lesson cnn-lenet: LeNet5, the network of LeCun and others (1998) rebuilt in PyTorch for the
 28 by 28 images of Fashion-MNIST, saved in the learner's project (work/projects/cnn/lenet.py) when right. The picture
-follows one image through it; the demo trains it and the learner's SmallCNN of cnn-pytorch with their Trainer, and
-compares their parameters and the test images they read right."""
+follows one image through it; the demo trains the learner's SmallCNN of cnn-pytorch and then it with their Trainer,
+compares their parameters and the test images they read right, and shows what each network makes while it trains and
+after every epoch (decision 1.17)."""
 import functools
 import re
 
@@ -11,7 +12,7 @@ import numpy as np
 import torch   # imported once, when the lesson opens: the first import takes longer than a check may
 from torch.utils.data import DataLoader, TensorDataset
 
-from everything_ai import draw, paths, projects
+from everything_ai import draw, live, paths, projects
 from everything_ai.check import ClassBox, Mistake, Timeout, run_code, with_time_limit
 from everything_ai import netview, yours
 
@@ -22,6 +23,13 @@ projects.builds_on(("nn", "train_epoch", "nn-trainer", "train-epoch"), ("nn", "t
 
 DATA = "data/fashion-mnist-small.npz"   # 6,000 training and 1,000 test images of Fashion-MNIST: see data/README.md
 EPOCHS, LR = 5, 0.01
+EVERY = 10          # the live chart hears the training loss of every 10 batches (live.follow)
+WATCHED = "conv2"   # the layer the demo shows of each network: its second convolution, in both
+NAMES = {           # the 10 kinds of Fashion-MNIST, label 0 to 9 (data/README.md)
+    "en": ("T-shirt", "trouser", "pullover", "dress", "coat", "sandal", "shirt", "sneaker", "bag", "ankle boot"),
+    "nl": ("T-shirt", "broek", "trui", "jurk", "jas", "sandaal", "overhemd", "sneaker", "tas", "enkellaars"),
+}
+RUNS = ("small", "lenet")   # SmallCNN first, then LeNet5: each run seeds itself, so the order changes neither
 
 
 @functools.lru_cache(maxsize=1)
@@ -232,11 +240,59 @@ def _accuracy(model, X, y) -> int:
         return int((model(X).argmax(dim=1) == y).sum())
 
 
-def _demo():
+def one_each() -> list:
+    """The first test image of each kind, in the order of the labels: what the demo shows its networks guess."""
+    _, _, _, y_test = fashion()
+    return [int((y_test == k).nonzero()[0]) for k in range(len(NAMES["en"]))]
+
+
+def now_pictures(seen: dict, heads: dict, lang: str, uid: str) -> list:
+    """What one network of the demo makes at one moment of its run, as `look` or the rewind gives it: its guess for
+    the first test image of each kind, under heads["guesses"], and under them its second convolution on the ankle
+    boot, under heads["layer"] with {name} the layer's name. `uid` keeps the masks of the layer apart from those of
+    another picture on the page."""
+    _, _, X_test, _ = fashion()
+    said = [NAMES[lang][g] for g in seen["guesses"]]
+    right = [NAMES[lang][k] for k in seen["truth"]]
+    alt = {"en": "The first test image of each kind, each with the kind the network guessed, and in brackets the right kind where it is wrong: ",
+           "nl": "De eerste testafbeelding van elke soort, elk met de soort die het netwerk gokte, en tussen haakjes de goede soort waar het fout is: "}
+    picture = yours.guesses([X_test[place][0].numpy() for place in one_each()], said, right,
+                            alt[lang] + "; ".join(f"{r}: {g}" for r, g in zip(right, said)) + ".", title=heads["guesses"])
+    return netview.moment(picture, seen.get("layer"), heads["layer"], lang, uid)
+
+
+def epoch_frame(result: dict, e: int, labels: dict, heads: dict, lang: str) -> str:
+    """The rewind at epoch e (from 1): the validation loss of both networks after every epoch with a line at e, then
+    for SmallCNN and then for LeNet-5, its guesses and its second convolution as they were after that epoch
+    (decision 1.17); heads[name] gives the titles of each, as for now_pictures."""
+    parts = []
+    for name in RUNS:
+        layers = result["layers"][name]
+        seen = {"guesses": result["looked"][name][e - 1], "truth": result["truth"],
+                "layer": layers[e - 1] if e <= len(layers) else None}
+        parts += now_pictures(seen, heads[name], lang, f"nv-lenet-{name}-epoch-{e}")
+    return live.rewound(curves_picture(result["curves"], labels, lang, at=e), parts)
+
+
+def curves_picture(curves: dict, labels: dict, lang: str, at: int | None = None) -> str:
+    """The validation loss after every epoch of both networks of the demo: LeNet-5 as the run, in the colour of loss,
+    and SmallCNN thin, dashed and grey beside it, named labels["small"], as the live chart draws it. With `at`, a line
+    at that epoch, for rewinding."""
+    run = live.Live(labels, EPOCHS, lang=lang, low=0.0)   # from 0, as the chart while it trains
+    run.reference(list(enumerate(curves.get("small", []), 1)), labels["small"], role="ink-2")
+    run.ys = list(curves.get("lenet", []))
+    run.xs = list(range(1, len(run.ys) + 1))
+    return run.picture(at=at)
+
+
+def _demo(show=None):
     """For the demo: None when lenet.py is not in the project yet; "lenet" when LeNet5 stops with an error; "trainer"
     when the Trainer or SmallCNN stops with an error; "slow" when a training run takes too long; else a dict with the
-    test images read right and the parameters of both networks, one run each, seed 0, and the modules the course's
-    versions stood in for."""
+    test images read right and the parameters of both networks, one run each, seed 0, their validation loss after
+    every epoch ("curves"), the modules the course's versions stood in for, and for the rewind, after every epoch,
+    each network's guesses for the first test image of each kind ("looked", with their right kinds in "truth") and its
+    second convolution on the ankle boot ("layers"). `show` hears both runs while they train (live.follow, every 10
+    batches), "small" and then "lenet", with what the network makes then (netview.hearing)."""
     if not _saved("lenet"):
         return None
     run = run_code("from cnn.lenet import LeNet5")
@@ -249,21 +305,29 @@ def _demo():
     Trainer, SmallCNN, count_params = run.names["Trainer"], run.names["SmallCNN"], run.names["count_params"]
     stand_ins = [f"{package}/{module}.py" for package, module, _, _ in projects.stand_ins()]
     X, y, X_test, y_test = fashion()
+    shown = one_each()
+    example = X_test[shown[-1]:shown[-1] + 1]   # the ankle boot
 
-    def train(model):
+    def train(model, name):
+        out["looked"][name], out["layers"][name] = [], []
+        heard = netview.hearing(model, X_test[shown], out["truth"], example, show, out["looked"][name], out["layers"][name], WATCHED)
         torch.manual_seed(1)
         loader = DataLoader(TensorDataset(X, y), batch_size=64, shuffle=True)
         val = DataLoader(TensorDataset(X_test, y_test), batch_size=500)
-        Trainer(model, loader, val, epochs=EPOCHS, lr=LR, warmup=len(loader), max_norm=1.0).fit()
+        trainer = Trainer(model, loader, val, epochs=EPOCHS, lr=LR, warmup=len(loader), max_norm=1.0)
+        live.follow(trainer, heard, name, every=EVERY)
+        history = trainer.fit()
+        # a trainer.py changed after its check may give no validation loss: then there is no rewind, but the demo stands
+        out["curves"][name] = [float(h["val_loss"]) for h in history or [] if isinstance(h, dict) and h.get("val_loss") is not None]
         return _accuracy(model, X_test, y_test)
 
-    out = {}
-    for name, cls in (("lenet", LeNet5), ("small", SmallCNN)):
+    out = {"curves": {}, "looked": {}, "layers": {}, "truth": [int(y_test[place]) for place in shown]}
+    for name, cls in (("small", SmallCNN), ("lenet", LeNet5)):
         try:
             torch.manual_seed(0)
             model = cls()
             out["params_" + name] = int(count_params(model))
-            out[name] = with_time_limit(lambda: train(model), 120)
+            out[name] = with_time_limit(lambda: train(model, name), 120)
         except Timeout:
             return "slow"
         except Exception:
@@ -283,10 +347,10 @@ def _project_texts() -> tuple:
     return tuple(texts)
 
 
-def demo():
-    """The demo's result, worked out once for the project files as they are."""
+def demo(show=None):
+    """The demo's result, worked out once for the project files as they are; `show` hears the runs when they train."""
     key = _project_texts()
     if key not in _DEMO_RUNS:
         _DEMO_RUNS.clear()
-        _DEMO_RUNS[key] = _demo()
+        _DEMO_RUNS[key] = _demo(show)
     return _DEMO_RUNS[key]

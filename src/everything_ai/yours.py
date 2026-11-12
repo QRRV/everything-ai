@@ -1480,6 +1480,29 @@ def guesses(images: list, said: list, right: list, alt: str, size: int = 56, tit
             f'display:flex;flex-wrap:wrap;gap:8px 4px;max-width:100%">{"".join(cells)}</figure>')
 
 
+def writes(title: str, rows: list, alt: str = "", width: int = 300) -> str:
+    """What a language model writes at this moment, as its demo shows it while it trains and in the rewind after it
+    (decision 1.17): for each row its prompt in gray and what the model wrote after it in ink, in the code font,
+    wrapping in a column of `width` px. A row is (prompt, written), or (prompt, written, note, right) with a line under
+    it, such as the product the model should write: in ink where `right` is True, in the color of mistakes where it is
+    False, in gray where it is None. HTML rather than matplotlib, so that it is drawn again in a few milliseconds."""
+    out = []
+    for row in rows:
+        prompt, written = row[0], row[1]
+        note, right = (row[2], row[3]) if len(row) > 3 else (row[2] if len(row) > 2 else "", None)
+        said = (f'<span style="color:var(--ea-ink)">{html.escape(written)}</span>' if written else
+                '<span style="color:var(--ea-ink-3)">…</span>')
+        line = (f'<div style="{_MONO};font-size:13px;line-height:1.45;white-space:pre-wrap;overflow-wrap:anywhere">'
+                f'<span style="color:var(--ea-ink-2)">{html.escape(prompt)}</span>{said}</div>')
+        if note:
+            color = {True: "var(--ea-ink)", False: "var(--ea-loss-text)"}.get(right, "var(--ea-ink-2)")
+            line += (f'<div style="font-family:var(--ea-font-ui);font-size:12px;line-height:1.3;margin-top:2px;'
+                     f'color:{color}">{html.escape(note)}</div>')
+        out.append(f'<div style="margin-bottom:0.45rem">{line}</div>')
+    body = f'<div style="width:{width}px;max-width:100%">{"".join(out)}</div>'   # text a screen reader reads as it is
+    return _figure(title, body, alt=alt or title)
+
+
 def image(call: int | None = None, *, show: tuple[str, ...] = (), result: str | None = None, size: int = 160,
           title: Text | None = None):
     """What the learner's code makes of an image, as images: first the ones it starts from (`show`, or the arguments

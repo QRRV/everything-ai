@@ -17,7 +17,7 @@ import numpy as np
 import torch
 
 from everything_ai import paths, projects
-from everything_ai.check import ClassBox, Mistake, run_code
+from everything_ai.check import ClassBox, Mistake, Timeout, run_code
 from everything_ai import netview
 
 
@@ -113,6 +113,7 @@ def changes_picture(rows: list, labels: dict) -> str:
 
 
 history_picture = B.history_picture
+now_picture = B.now_picture   # what the ModernGPT writes now, beside the live chart
 
 # The lesson is done when these are correct. "gqa-why" is the choice question in the lesson.
 REQUIRED = ["parts", "modern-attention", "modern-gpt", "generate", "gqa-why"]
@@ -734,7 +735,9 @@ def _make(tools: dict, p: dict):
 def train(show, seed: int = 0, epochs: int | None = None, make=None) -> dict | str | None:
     """Train the learner's ModernGPT as gpt-train-bpe trains their GPT: their tokenizer on the first 90% of the stories,
     then the GPT on the tokens of all of them, with the same plan, mini-batches, learning rate and seed. `show` gets a dict
-    with how far the run is. None when modern_gpt.py is not in the project yet; "run" when the run stops with an error;
+    with how far the run is, as in gpt-train-bpe: with "look", what the ModernGPT writes now (decision 1.17), and what it
+    wrote after every epoch kept as the run's "snapshots"; looking is left out of the minutes and of the time left.
+    None when modern_gpt.py is not in the project yet; "run" when the run stops with an error;
     "memory" when the GPU runs out of memory; "stopped" when the stop button ended the run before its first epoch did;
     else the run, saved as work/projects/llm/gpt_modern.pt and gpt_modern.json, unless an earlier run had a lower
     validation loss. The course's own runs pass `make`, which builds another GPT from the tools and the plan: each change
@@ -771,23 +774,44 @@ def train(show, seed: int = 0, epochs: int | None = None, make=None) -> dict | s
     except Exception:
         return "run"
     steps = len(trainer.train_loader)
-    state = {"step": 0, "shown": 0.0, "start": time.time()}
-    snap = B.snapper(trainer, model, merges, block, seed, tools["decode"], tools["encode"])
+    state = {"step": 0, "start": time.time(), "aside": 0.0}   # aside: the seconds of looking, not of training
+    said = {}   # what the GPT wrote after the k-th epoch, by k
+    snap = B.snapper(trainer, model, merges, block, seed, tools["decode"], tools["encode"], said)
+
+    def look():
+        """What the ModernGPT writes now, as after every epoch: looked at as netview.looking looks, so the run goes on
+        as it would have. None when it stops with an error."""
+        begun = time.time()
+        try:
+            with netview.looking(model):
+                return B.write(model, merges, block, seed, tools["decode"], tools["encode"], length=B.SNAP)
+        except Timeout:
+            raise
+        except Exception:
+            return None
+        finally:
+            state["aside"] += time.time() - begun
 
     def step():
-        snap()   # the epoch before has ended: what the GPT writes now
+        begun = time.time()
+        snap()   # the epoch before has ended: what the GPT wrote then, if the run did not let it write already
+        state["aside"] += time.time() - begun
         state["step"] += 1
-        now = time.time()
-        if now - state["shown"] >= 2 or state["step"] == 1:
-            state["shown"] = now
-            done = state["step"] - 1
-            seconds = now - state["start"]
-            left = seconds / done * (epochs * steps - done) if done >= 10 else None
-            show({"phase": "train", "epoch": done // steps + 1, "epochs": epochs, "step": done, "steps": epochs * steps,
-                  "seconds": seconds, "left": left, "history": list(trainer.history)})
+
+    def heard(e):
+        done, seconds = state["step"], time.time() - state["start"] - state["aside"]
+        report = e | {"phase": "train", "look": look, "step": done, "steps": epochs * steps,
+                      "left": seconds / done * (epochs * steps - done) if done >= 10 else None}
+        if "val_loss" in e:   # after every epoch: what it writes then, for the replay
+            said[e["epoch"]] = report["seen"] = look()
+        show(report)
 
     trainer.train_loader = B.T._Counted(trainer.train_loader, step,
                                         B._shifted(tools["gpt_loaders"], ids, block, p["batch"], where, epochs, seed))
+    show({"phase": "train", "run": "", "epoch": 1, "epochs": epochs, "batch": 0, "batches": steps, "look": look,
+          "seen": look(), "step": 0, "steps": epochs * steps, "left": None})   # what the ModernGPT writes before the first epoch
+    from everything_ai import live
+    live.follow(trainer, heard, "", every=max(1, steps // 8))   # eight times per epoch, on every plan
     stopped = False
     try:
         trainer.fit()
@@ -808,7 +832,7 @@ def train(show, seed: int = 0, epochs: int | None = None, make=None) -> dict | s
     val_tokens, val_chars = len(ids) - cut, len(tools["decode"](ids[cut:], merges))
     best = min(history, key=lambda hist: hist["val_loss"])
     result = {"device": where, "name": p["name"], "sizes": list(p["sizes"]), "kv_heads": p["kv_heads"], "batch": p["batch"],
-              "epochs": epochs, "params": p["params"], "seed": seed, "stopped": stopped, "minutes": (time.time() - start) / 60,
+              "epochs": epochs, "params": p["params"], "seed": seed, "stopped": stopped, "minutes": (time.time() - start - state["aside"]) / 60,
               "history": history, "merges": [[a, b] for (a, b) in merges], "stand_ins": stand_ins,
               "tokens": len(ids), "chars": len(B.text()), "val_tokens": val_tokens, "val_chars": val_chars,
               "best": best["val_loss"], "best_epoch": best["epoch"], "snapshots": snap.kept,

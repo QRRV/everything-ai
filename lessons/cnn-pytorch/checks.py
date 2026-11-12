@@ -3,7 +3,8 @@
 """Checks of the project lesson cnn-pytorch: SmallCNN, a small convolutional network for the 28 by 28 images of
 Fashion-MNIST, built with nn.Conv2d and nn.MaxPool2d; and count_params, how many numbers a model learns. Both are saved
 in the learner's project (work/projects/cnn/) when right. The picture follows one image through the network; the demo
-runs the learner's overfit test on their CNN, then trains it and their deep MLP with their Trainer, and compares."""
+runs the learner's overfit test on their CNN, then trains their deep MLP and it with their Trainer, compares, and shows
+what each network makes while it trains and after every epoch (decision 1.17)."""
 import functools
 import re
 
@@ -11,7 +12,7 @@ import numpy as np
 import torch   # imported once, when the lesson opens: the first import takes longer than a check may
 from torch.utils.data import DataLoader, TensorDataset
 
-from everything_ai import draw, paths, projects
+from everything_ai import draw, live, paths, projects
 from everything_ai.check import ClassBox, Mistake, Timeout, run_code, with_time_limit
 from everything_ai import netview, yours
 
@@ -23,6 +24,13 @@ projects.builds_on(("nn", "train_epoch", "nn-trainer", "train-epoch"), ("nn", "t
 DATA = "data/fashion-mnist-small.npz"   # 6,000 training and 1,000 test images of Fashion-MNIST: see data/README.md
 EPOCHS, LR = 5, 0.01
 OVERFIT_STEPS, OVERFIT_LR = 300, 0.1
+EVERY = 10          # the live chart hears the training loss of every 10 batches (live.follow)
+WATCHED = "conv2"   # the layer the demo shows of the CNN: its second convolution; the MLP has no feature maps
+NAMES = {           # the 10 kinds of Fashion-MNIST, label 0 to 9 (data/README.md)
+    "en": ("T-shirt", "trouser", "pullover", "dress", "coat", "sandal", "shirt", "sneaker", "bag", "ankle boot"),
+    "nl": ("T-shirt", "broek", "trui", "jurk", "jas", "sandaal", "overhemd", "sneaker", "tas", "enkellaars"),
+}
+RUNS = ("mlp", "cnn")   # the deep MLP first, then the CNN: each run seeds itself, so the order changes neither
 
 
 @functools.lru_cache(maxsize=1)
@@ -230,12 +238,60 @@ def _accuracy(model, X, y) -> int:
         return int((model(X).argmax(dim=1) == y).sum())
 
 
-def _demo():
+def one_each() -> list:
+    """The first test image of each kind, in the order of the labels: what the demo shows its networks guess."""
+    _, _, _, y_test = fashion()
+    return [int((y_test == k).nonzero()[0]) for k in range(len(NAMES["en"]))]
+
+
+def now_pictures(seen: dict, heads: dict, lang: str, uid: str) -> list:
+    """What one network of the demo makes at one moment of its run, as `look` or the rewind gives it: its guess for
+    the first test image of each kind, under heads["guesses"], and for the CNN under them its second convolution on
+    the ankle boot, under heads["layer"] with {name} the layer's name. `uid` keeps the masks of the layer apart from
+    those of another picture on the page."""
+    _, _, X_test, _ = fashion()
+    said = [NAMES[lang][g] for g in seen["guesses"]]
+    right = [NAMES[lang][k] for k in seen["truth"]]
+    alt = {"en": "The first test image of each kind, each with the kind the network guessed, and in brackets the right kind where it is wrong: ",
+           "nl": "De eerste testafbeelding van elke soort, elk met de soort die het netwerk gokte, en tussen haakjes de goede soort waar het fout is: "}
+    picture = yours.guesses([X_test[place][0].numpy() for place in one_each()], said, right,
+                            alt[lang] + "; ".join(f"{r}: {g}" for r, g in zip(right, said)) + ".", title=heads["guesses"])
+    return netview.moment(picture, seen.get("layer"), heads.get("layer", ""), lang, uid)
+
+
+def epoch_frame(result: dict, e: int, labels: dict, heads: dict, lang: str) -> str:
+    """The rewind at epoch e (from 1): the validation loss of both networks after every epoch with a line at e, then
+    for the deep MLP and then for the CNN, its guesses, and for the CNN its second convolution, as they were after
+    that epoch (decision 1.17); heads[name] gives the titles of each, as for now_pictures."""
+    parts = []
+    for name in RUNS:
+        layers = result["layers"][name]
+        seen = {"guesses": result["looked"][name][e - 1], "truth": result["truth"],
+                "layer": layers[e - 1] if e <= len(layers) else None}
+        parts += now_pictures(seen, heads[name], lang, f"nv-cnn-{name}-epoch-{e}")
+    return live.rewound(curves_picture(result["curves"], labels, lang, at=e), parts)
+
+
+def curves_picture(curves: dict, labels: dict, lang: str, at: int | None = None) -> str:
+    """The validation loss after every epoch of both networks of the demo: the CNN as the run, in the colour of loss,
+    and the deep MLP thin, dashed and grey beside it, named labels["mlp"], as the live chart draws it. With `at`, a
+    line at that epoch, for rewinding."""
+    run = live.Live(labels, EPOCHS, lang=lang, low=0.0)   # from 0, as the chart while it trains
+    run.reference(list(enumerate(curves.get("mlp", []), 1)), labels["mlp"], role="ink-2")
+    run.ys = list(curves.get("cnn", []))
+    run.xs = list(range(1, len(run.ys) + 1))
+    return run.picture(at=at)
+
+
+def _demo(show=None):
     """For the demo: None when small_cnn.py or count.py is not in the project yet; "cnn" when SmallCNN or count_params
     stops with an error, also on a mini-batch of the training; "overfit" or "trainer" when the learner's module of nn-deep-net-project or nn-trainer
     does; "slow" when the CNN, the overfit test or a training run takes too long; else a dict with the last loss of the overfit test, the test images read
-    right by the CNN and by the deep MLP (one run each, seed 0), their numbers of parameters, and the modules the
-    course's versions stood in for."""
+    right by the CNN and by the deep MLP (one run each, seed 0), their numbers of parameters, the modules the
+    course's versions stood in for, their validation loss after every epoch ("curves"), and for the rewind, after every
+    epoch, each network's guesses for the first test image of each kind ("looked", with their right kinds in "truth")
+    and the CNN's second convolution on the ankle boot ("layers"; None for the MLP). `show` hears both runs while they
+    train (live.follow, every 10 batches), "mlp" and then "cnn", with what the network makes then (netview.hearing)."""
     if not (_saved("small_cnn") and _saved("count")):
         return None
     run = run_code("from cnn.small_cnn import SmallCNN\nfrom cnn.count import count_params")
@@ -248,12 +304,22 @@ def _demo():
     overfit_one_batch, Trainer, DeepMLP = run.names["overfit_one_batch"], run.names["Trainer"], run.names["DeepMLP"]
     stand_ins = [f"{package}/{module}.py" for package, module, _, _ in projects.stand_ins()]
     X, y, X_test, y_test = fashion()
+    shown = one_each()
+    out = {"curves": {}, "looked": {}, "layers": {}, "truth": [int(y_test[place]) for place in shown]}
 
-    def train(model, images, test_images):
+    def train(model, images, test_images, name):
+        flat = images.dim() == 2   # the MLP gets every image as one row of 784
+        seen = X_test[shown].reshape(len(shown), -1) if flat else X_test[shown]
+        out["looked"][name], out["layers"][name] = [], []
+        heard = netview.hearing(model, seen, out["truth"], seen[-1:], show, out["looked"][name], out["layers"][name], WATCHED)
         torch.manual_seed(1)
         loader = DataLoader(TensorDataset(images, y), batch_size=64, shuffle=True)
         val = DataLoader(TensorDataset(test_images, y_test), batch_size=500)
-        Trainer(model, loader, val, epochs=EPOCHS, lr=LR, warmup=len(loader), max_norm=1.0).fit()
+        trainer = Trainer(model, loader, val, epochs=EPOCHS, lr=LR, warmup=len(loader), max_norm=1.0)
+        live.follow(trainer, heard, name, every=EVERY)
+        history = trainer.fit()
+        # a trainer.py changed after its check may give no validation loss: then there is no rewind, but the demo stands
+        out["curves"][name] = [float(h["val_loss"]) for h in history or [] if isinstance(h, dict) and h.get("val_loss") is not None]
         return _accuracy(model, test_images, y_test)
 
     def probe():   # every batch size the demo gives the CNN: 64, the last 48 of an epoch, 500, and all 1,000 test images
@@ -278,17 +344,17 @@ def _demo():
         return "overfit"
     try:
         torch.manual_seed(0)
-        cnn = SmallCNN()
-        read_cnn = with_time_limit(lambda: train(cnn, X, X_test), 120)
-        torch.manual_seed(0)
         mlp = DeepMLP(10, 64, he=True, norm=True, residual=True)
         params_mlp = int(count_params(mlp))
-        read_mlp = with_time_limit(lambda: train(mlp, X.reshape(len(X), -1), X_test.reshape(len(X_test), -1)), 120)
+        read_mlp = with_time_limit(lambda: train(mlp, X.reshape(len(X), -1), X_test.reshape(len(X_test), -1), "mlp"), 120)
+        torch.manual_seed(0)
+        cnn = SmallCNN()
+        read_cnn = with_time_limit(lambda: train(cnn, X, X_test, "cnn"), 120)
     except Timeout:
         return "slow"
     except Exception:
         return "trainer"
-    return {"loss": loss, "cnn": read_cnn, "mlp": read_mlp, "params_cnn": params_cnn, "params_mlp": params_mlp,
+    return {**out, "loss": loss, "cnn": read_cnn, "mlp": read_mlp, "params_cnn": params_cnn, "params_mlp": params_mlp,
             "stand_ins": stand_ins}
 
 
@@ -305,13 +371,13 @@ def _project_texts() -> tuple:
     return tuple(texts)
 
 
-def demo():
+def demo(show=None):
     """The demo's result, worked out once for the project files as they are: it is the same for the same files, so a
-    check that saves the same code again does not train for ten seconds more."""
+    check that saves the same code again does not train for ten seconds more. `show` hears the runs when they train."""
     key = _project_texts()
     if key not in _DEMO_RUNS:
         _DEMO_RUNS.clear()
-        _DEMO_RUNS[key] = _demo()
+        _DEMO_RUNS[key] = _demo(show)
     return _DEMO_RUNS[key]
 
 

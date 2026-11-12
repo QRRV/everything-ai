@@ -171,7 +171,9 @@ def train(update_fn, choose_fn, episodes: int = EPISODES, seed: int = SEED, eta:
     """Q-learning on GRID with these two functions, after the recipe of the lesson: the return, the number of steps and
     where every episode ended, and at every stop of the replay the Q-table and the way of that episode. A function that
     stops with an error, or gives back something that does not fit, ends the run: then the name of that function.
-    `show(episode, return)` hears every episode; `pause` waits that long after each one, so that you can watch."""
+    `show(episode, return, seen)` hears every episode, with in `seen` the episode, the Q-table as it is now and the
+    way of that episode, for the picture beside the chart; `pause` waits that long after each one, so that you can
+    watch."""
     rng = np.random.default_rng(seed)
     Q = {s: {a: 0.0 for a in ACTIONS} for s in T}
     keep = set(stops(episodes))
@@ -207,7 +209,7 @@ def train(update_fn, choose_fn, episodes: int = EPISODES, seed: int = SEED, eta:
             run["Q"][episode] = {s: dict(qs) for s, qs in Q.items()}
             run["ways"][episode] = way
         if show is not None:
-            show(episode, G)
+            show(episode, G, {"episode": episode, "Q": Q, "way": way})
         if pause:
             time.sleep(pause)
     run["final"] = Q
@@ -294,14 +296,26 @@ def returns_chart(returns: list[float], upto: int, labels: dict, lang: str) -> s
     return chart.with_decimal_comma(svg) if lang == "nl" else svg
 
 
+def grid_after(Q, way: list, title: str, alt: str, lang: str) -> str:
+    """GRID after an episode: the way of that episode, and the greedy policy of the Q-table after it, with the largest
+    Q in every state."""
+    values, arrows = _cells(Q)
+    return draw.grid_world([{"rows": GRID, "title": title, "role": "param", "values": values, "arrows": arrows,
+                             "path": way, "index": True}], alt=alt, cell=50, decimal="," if lang == "nl" else ".").text
+
+
+def now_picture(seen: dict, labels: dict, lang: str) -> str:
+    """Beside the chart of the demo while it trains (decision 1.17): what the agent knows after the last episode, as in
+    the replay, with the way of that episode."""
+    k = seen["episode"]
+    return grid_after(seen["Q"], seen["way"], labels["grid"].format(k=k), labels["grid_alt"].format(k=k), lang)
+
+
 def replay_frame(run: dict, k: int, labels: dict, lang: str) -> tuple[str, str]:
     """Episode k of a run, for the replay: the way of that episode and the greedy policy of the Q-table after it, with
     the largest Q in every state; beside it the returns so far. And the sentence under it."""
     Q = run["Q"][k]
-    values, arrows = _cells(Q)
-    grid = draw.grid_world([{"rows": GRID, "title": labels["grid"].format(k=k), "role": "param", "values": values,
-                             "arrows": arrows, "path": run["ways"][k], "index": True}],
-                           alt=labels["grid_alt"].format(k=k), cell=50, decimal="," if lang == "nl" else ".").text
+    grid = grid_after(Q, run["ways"][k], labels["grid"].format(k=k), labels["grid_alt"].format(k=k), lang)
     side = returns_chart(run["returns"], k, labels, lang)
     picture = f'<div style="display:flex;flex-wrap:wrap;gap:0 16px;align-items:flex-start">{grid}{side}</div>'
     if k == 0:

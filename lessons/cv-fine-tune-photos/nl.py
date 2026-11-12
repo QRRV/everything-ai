@@ -416,7 +416,7 @@ def demo_phase_two(pretrained, demo_button, phase_two_code, result_phase_two):
             if "step" not in _p:   # fase 1 begint: een nieuwe grafiek voor fase 2
                 _now["live"] = L.live({"title": "Fase 2: de loss van elke batch", "x": "stap", "y": "loss",
                                        "alt": "De loss van elke batch van 20 trainingsfoto's in fase 2 tot nu toe, stap voor stap."},
-                                      C.TUNE_EPOCHS * C.STEPS, low=0.0, every=2.0)
+                                      C.TUNE_EPOCHS * C.STEPS, low=0.0, look_every=2.0)
                 _now.pop("look", None)
                 _now["live"].line("**Fase 1** · de features van de 200 trainingsfoto's, en een nieuwe laatste layer")
             else:

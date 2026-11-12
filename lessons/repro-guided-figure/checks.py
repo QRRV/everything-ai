@@ -7,6 +7,7 @@ as repro/seeds.py; and the paper's figure, drawn again from logs. The course's o
 data/course-grokking.jsonl, made with this lesson's run_seed; the demo trains seeds 0, 1 and 2 with the learner's kit."""
 import functools
 import importlib.util
+import itertools
 import json
 import re
 
@@ -601,39 +602,246 @@ CASES = [
 ]
 
 
+# --- the demo: what the model answers while it trains, and the rewind after it (decision 1.17); repro-guided-ablation
+# uses them too --------------------------------------------------------------------------------------------------------
+
+def moment_steps(steps: int) -> list[int]:
+    """The moments of each run of the demo that the rewind after it keeps: step 1, the steps 10 ** (k / 5) from step
+    10 on, rounded, five for every factor of 10 as every fourth step that log_steps logs, and the last step."""
+    out, k = {1, steps}, 5
+    while round(10 ** (k / 5)) <= steps:
+        out.add(round(10 ** (k / 5)))
+        k += 1
+    return sorted(out)
+
+
+def answers(model, p: int):
+    """Which of the p * p equations a + b = c modulo p the model answers right now, as a p by p array of True and
+    False, a down and b across: its guess at the last place, the token with the highest logit, as run_seed's accuracy
+    reads it. Under netview.looking, so the run goes on as it would have."""
+    import torch
+    from everything_ai import netview
+    a, b = torch.meshgrid(torch.arange(p), torch.arange(p), indexing="ij")
+    a, b = a.flatten(), b.flatten()
+    x = torch.stack([a, torch.full_like(a, p), b, torch.full_like(a, p + 1)], 1).to(next(model.parameters()).device)
+    with netview.looking(model):
+        guess = model(x)[:, -1].argmax(-1).cpu()
+    return (guess == (a + b) % p).reshape(p, p).numpy()
+
+
+def _watch(run_module, model_module, data, p: int, steps: int, progress) -> tuple:
+    """What the demo needs to show each run while it trains: run_seed of the learner's repro/run.py made to note the
+    settings and the seed of each run and its training equations (with the learner's own dataset), and their ModernGPT
+    to note each model it makes; and the progress that run_seeds or run_grid gets, which gives the lesson's progress
+    each log together with a
+    report: its run, the step, and "look", a function that gives which equations the model answers right now. At the
+    steps of moment_steps it looks once itself, for the rewind. Returns (watched runs, progress, undo)."""
+    import random
+    import time
+    import numpy as np
+    runs, targets = [], moment_steps(steps)
+    run_seed, model_class = run_module.run_seed, getattr(model_module, "ModernGPT", None)
+    made = model_class.__init__ if model_class is not None else None
+
+    def noted_run_seed(*args, **kwargs):
+        one = args[0] if args else kwargs.get("settings")
+        seed = args[1] if len(args) > 1 else kwargs.get("seed", 0)
+        state = random.getstate()   # the learner's dataset seeds Python's random: the run starts as it would have
+        try:
+            train = np.zeros((p, p), dtype=bool)
+            for a, b, _ in data.dataset(p, one["fraction"], seed)[0]:   # the split of this run
+                train[a, b] = True
+        except Exception:
+            train = None
+        finally:
+            random.setstate(state)
+        if runs:
+            runs[-1]["model"] = None   # the model of the run before is done
+        runs.append({"seed": seed, "weight_decay": one.get("weight_decay") if isinstance(one, dict) else None,
+                     "fraction": one.get("fraction") if isinstance(one, dict) else None,
+                     "train": train, "model": None, "log": None, "moments": [], "aside": 0.0, "passed": set()})
+        return run_seed(*args, **kwargs)
+
+    def noted_init(self, *args, **kwargs):
+        made(self, *args, **kwargs)
+        if runs and runs[-1]["model"] is None:
+            runs[-1]["model"] = self
+
+    def look(run):
+        start = time.perf_counter()
+        try:
+            return answers(run["model"], p)
+        except Exception:
+            return None
+        finally:
+            run["aside"] += time.perf_counter() - start   # left out of the minutes the lesson shows
+
+    def heard(log):
+        run = runs[-1] if runs else None
+        report = {"step": log["step"][-1], "run": run, "look": (lambda: look(run)) if run and run["model"] is not None and run["train"] is not None else (lambda: None)}
+        if run is not None:
+            run["log"] = log
+            due = {t for t in targets if t <= report["step"]} - run["passed"]
+            if due and run["model"] is not None and run["train"] is not None:
+                run["passed"] |= due
+                report["seen"] = report["look"]()
+                if report["seen"] is not None:
+                    run["moments"].append((report["step"], report["seen"]))
+            report["aside"] = run["aside"]
+        if progress is not None:
+            progress(log, report)
+
+    def undo():
+        run_module.run_seed = run_seed
+        if made is not None:
+            model_class.__init__ = made
+
+    run_module.run_seed = noted_run_seed
+    if made is not None:
+        model_class.__init__ = noted_init
+    return runs, heard, undo
+
+
+def now_picture(report: dict | None, labels: dict) -> str | None:
+    """Beside the live chart of a run of the demo (decision 1.17): which equations the model answers right now, the
+    training and the validation equations apart, once per report. None when the demo could not look. `labels`: those
+    of tables, and now ({step})."""
+    if not report or report.get("run") is None or report["run"]["train"] is None:
+        return None
+    if "seen" not in report:   # one look per report
+        report["seen"] = report["look"]()
+    if report["seen"] is None:
+        return None
+    import time
+    start = time.perf_counter()
+    try:
+        return tables(report["seen"], report["run"]["train"], labels, labels["now"].format(step=number(report["step"], 0, labels.get("lang", "en"))))
+    finally:
+        report["run"]["aside"] = report["run"].get("aside", 0.0) + time.perf_counter() - start   # drawing it is left out of the minutes too, as the look is
+
+
+_IDS = itertools.count()   # each picture its own masks: two of them can be on the page at once
+
+
+def _cells(mask) -> str:
+    """A mask as a PNG, white where it is True: a cell for each equation."""
+    import base64
+    import io
+    import numpy as np
+    from PIL import Image
+    buf = io.BytesIO()
+    Image.fromarray(np.where(mask, 255, 0).astype(np.uint8), "L").save(buf, "PNG")
+    return "data:image/png;base64," + base64.b64encode(buf.getvalue()).decode()
+
+
+def _square(right, part, size: int) -> str:
+    """The equations of one part of the table, `part`, in a square of `size` px, a down and b across: right answers in
+    ink, wrong ones in the color of mistakes, the other equations open."""
+    mid = f"ea-answers-{next(_IDS)}"
+    masks = "".join(f'<mask id="{mid}-{k}" maskUnits="userSpaceOnUse" x="0" y="0" width="{size}" height="{size}">'
+                    f'<image href="{_cells(m)}" x="0" y="0" width="{size}" height="{size}" preserveAspectRatio="none" '
+                    f'style="image-rendering:pixelated"/></mask>' for k, m in (("r", right & part), ("w", ~right & part)))
+    return (f'<svg viewBox="0 0 {size} {size}" width="{size}" height="{size}" aria-hidden="true" '
+            f'style="display:block;width:{size}px;height:{size}px;max-width:none"><defs>{masks}</defs>'
+            f'<rect width="{size}" height="{size}" style="fill:var(--ea-inset);stroke:var(--ea-line)"/>'
+            f'<rect width="{size}" height="{size}" mask="url(#{mid}-r)" style="fill:var(--ea-ink)"/>'
+            f'<rect width="{size}" height="{size}" mask="url(#{mid}-w)" style="fill:var(--ea-loss)"/></svg>')
+
+
+def tables(right, train, labels: dict, title: str) -> str:
+    """Which equations the model answers right, as two tables of all p * p equations side by side: the training
+    equations and the validation equations, each with the share it answers right above it, and a key under them.
+    `labels`: train and val ({share}), right, wrong, alt ({train}, {val}), lang."""
+    import html
+    import numpy as np
+    lang = labels.get("lang", "en")
+    right, train = np.asarray(right, dtype=bool), np.asarray(train, dtype=bool)
+    size = 2 * right.shape[0]   # 2 px for each cell: 194 px for p = 97
+    share = {k: number(100 * float(right[m].mean()) if m.any() else 0.0, 1, lang) + "%" for k, m in (("train", train), ("val", ~train))}
+    words = "font-family:var(--ea-font-ui);font-size:12px;line-height:1.3;color:var(--ea-ink-2)"
+    halves = "".join(f'<div style="flex:none"><div style="{words};margin-bottom:3px">{html.escape(labels[k].format(share=share[k]))}</div>'
+                     f'{_square(right, m, size)}</div>' for k, m in (("train", train), ("val", ~train)))
+    swatch = '<span style="display:inline-block;width:10px;height:10px;background:var({})"></span>'
+    key = "".join(f'<span style="display:inline-flex;align-items:center;gap:0.35rem">{swatch.format(c)}{html.escape(labels[k])}</span>'
+                  for k, c in (("right", "--ea-ink"), ("wrong", "--ea-loss")))
+    body = (f'<div role="img" aria-label="{html.escape(labels["alt"].format(**share), quote=True)}">'
+            f'<div style="display:flex;flex-wrap:wrap;gap:0.5rem 1rem">{halves}</div>'
+            f'<div style="{words};display:flex;flex-wrap:wrap;gap:0.2rem 1rem;margin-top:0.35rem">{key}</div></div>')
+    return yours.figure(title, body, alt=title)
+
+
+def rewinds(watched) -> bool:
+    """Whether the demo kept, of every run it trained, which equations its model answered right at the same moments,
+    at least two of them: then the lesson can rewind through them."""
+    if not watched or any(r["train"] is None or r["log"] is None or len(r["moments"]) < 2 or r["weight_decay"] is None
+                          or r["fraction"] is None for r in watched):
+        return False
+    steps = [s for s, _ in watched[0]["moments"]]
+    return all([s for s, _ in r["moments"]] == steps for r in watched)
+
+
+def rewind_frame(run: dict, curves: str, step: int, labels: dict) -> tuple:
+    """A moment of a run of the demo, for the rewind after it (decision 1.17): `curves`, its live chart with a line at
+    that step, beside which equations its model answered right then, and the sentence under it. `labels`: those of
+    tables, and then ({step}), said ({title}, {step}, {train}, {val}), and title, which can name the run's
+    {weight_decay}, {fraction} (in %) and {seed}."""
+    from everything_ai import live
+    lang = labels.get("lang", "en")
+    right = next(r for s, r in run["moments"] if s == step)
+    log = run["log"]
+    i = log["step"].index(step)
+    title = labels["title"].format(weight_decay=number(run["weight_decay"], 0, lang), fraction=round(100 * run["fraction"]), seed=run.get("seed"))
+    said = labels["said"].format(title=title,
+                                 step=number(step, 0, lang), train=number(100 * log["train"][i], 1, lang), val=number(100 * log["val"][i], 1, lang))
+    return live.rewound(curves, [tables(right, run["train"], labels, labels["then"].format(step=number(step, 0, lang)))]), said
+
+
 def demo(progress=None, steps: int = STEPS, seeds: tuple = tuple(SEEDS)) -> dict | str | None:
     """Trains the seeds with the learner's kit: their run_seeds with their run_seed, on their ModernGPT with their data
     and settings, into their experiment log work/projects/repro/runs.jsonl, on a GPU when there is one. None when
     repro/run.py or repro/seeds.py is not in the project yet; "seeds" when run_seeds or run_seed stops with an error,
     "model" when the model, the data or the settings do; otherwise the runs of the experiment log, as from my_runs.
-    Where a module it uses is missing or broken, the course's version stands in, and "stand_ins" names it."""
+    Where a module it uses is missing or broken, the course's version stands in, and "stand_ins" names it.
+    `progress(log, report)` sees the log of the run at each step it logs, with a report of _watch; "watched" has each
+    run this press trained, with which equations its model answered right at the moments of moment_steps, for the
+    rewind (decision 1.17)."""
     folder = projects.folder() / "repro"
     if not (folder / "run.py").is_file() or not (folder / "seeds.py").is_file():
         return None
     projects.on_path()
     projects.forget()
     stand = projects.use_course_versions()
+    undo = None
     try:
         import importlib
+        import sys
         import torch
         try:
+            settings = importlib.import_module("repro.settings").SETTINGS
+            data = importlib.import_module("repro.data")
+            importlib.import_module("llm.modern_gpt")
+            data.dataset(settings["p"], settings["fraction"], 0)
+        except Exception:
+            settings = None
+        try:
+            run_module = importlib.import_module("repro.run")
+            if settings is not None:   # before repro/seeds.py imports run_seed from it
+                watched, heard, undo = _watch(run_module, sys.modules["llm.modern_gpt"], data, settings["p"], steps, progress)
             run_seeds = importlib.import_module("repro.seeds").run_seeds
-            importlib.import_module("repro.run")
         except Exception:
             return "seeds"
-        try:
-            settings = importlib.import_module("repro.settings").SETTINGS
-            importlib.import_module("llm.modern_gpt")
-            importlib.import_module("repro.data").dataset(settings["p"], settings["fraction"], 0)
-        except Exception:
+        if settings is None:
             return "model"
         device = "cuda" if torch.cuda.is_available() else "cpu"
         try:
-            run_seeds(settings, list(seeds), steps, str(folder / "runs.jsonl"), device, progress)
+            run_seeds(settings, list(seeds), steps, str(folder / "runs.jsonl"), device, heard)
         except Exception:
             return "seeds"
-        return {"runs": my_runs(), "stand_ins": [f"{package}/{module}.py" for package, module, _, _ in stand]}
+        return {"runs": my_runs(), "watched": [{k: r[k] for k in ("seed", "weight_decay", "fraction", "train", "log", "moments")} for r in watched],
+                "stand_ins": [f"{package}/{module}.py" for package, module, _, _ in stand]}
     finally:
+        if undo is not None:
+            undo()
         projects.forget()
 
 

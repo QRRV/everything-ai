@@ -766,13 +766,20 @@ class Plane(anywidget.AnyWidget):
       const heard = el_("div", "ea-heard", root); heard.setAttribute("aria-live", "polite");
       const X = i => x0 + i / Math.max(1, nx - 1) * (x1 - x0), Y = j => y1 - j / Math.max(1, ny - 1) * (y1 - y0);
       const at = (vals, v) => vals.reduce((best, w, k) => Math.abs(w - v) < Math.abs(vals[best] - v) ? k : best, 0);
-      const show = (v, digits) => Number(v).toFixed(digits).replace(".", dec).replace("-", "−");
+      const show = (v, digits) => {   // with the decimal sign of the lesson, and its thousands apart as the course writes them: 12,000 or 12.000
+        const [whole, part] = Math.abs(Number(v)).toFixed(digits).split(".");
+        return (Number(v) < 0 ? "−" : "") + whole.replace(/\B(?=(\d{3})+(?!\d))/g, dec === "," ? "." : ",") + (part ? dec + part : ""); };
       const shades = mk("g", {}, svg);
       mk("rect", { x: x0, y: y0, width: x1 - x0, height: y1 - y0, class: "ea-plane-box" }, svg);
-      for (const v of model.get("xticks")) { const t = mk("text", { x: X(at(xs, v)), y: y1 + 16, "text-anchor": "middle" }, svg); t.textContent = show(v, model.get("xtick_digits")); }
+      for (const v of model.get("xticks")) {   // a long label at the right end moves left just enough to stay inside the picture
+        const s = show(v, model.get("xtick_digits")), t = mk("text", { x: Math.min(X(at(xs, v)), W - 2 - 3.6 * s.length), y: y1 + 16, "text-anchor": "middle" }, svg); t.textContent = s; }
       for (const v of model.get("yticks")) { const t = mk("text", { x: x0 - 8, y: Y(at(ys, v)) + 4, "text-anchor": "end" }, svg); t.textContent = show(v, model.get("ytick_digits")); }
       const nameX = mk("text", { x: (x0 + x1) / 2, y: H - 2, "text-anchor": "middle", class: "ea-plane-name" }, svg); nameX.textContent = L.x;
-      const nameY = mk("text", { x: 6, y: (y0 + y1) / 2 + 5, class: "ea-plane-name" }, svg); nameY.textContent = L.y;
+      // the name of the second value in the widest gap between its ticks, so that it is not drawn over a tick in the middle
+      const tys = model.get("yticks").map(v => Y(at(ys, v))).sort((a, b) => a - b);
+      let nameAt = (y0 + y1) / 2, gap = 0;
+      for (let k = 1; k < tys.length; k++) if (tys[k] - tys[k - 1] > gap + 0.5) { gap = tys[k] - tys[k - 1]; nameAt = (tys[k] + tys[k - 1]) / 2; }
+      const nameY = mk("text", { x: 6, y: nameAt + 5, class: "ea-plane-name" }, svg); nameY.textContent = L.y;
       const cross = mk("path", { class: "ea-plane-cross" }, svg);
       const dot = mk("circle", { r: 7, class: "ea-plane-dot" }, svg);
       let lit = false;

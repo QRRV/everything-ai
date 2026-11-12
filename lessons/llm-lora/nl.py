@@ -338,7 +338,7 @@ def text_demo():
 
         Op een CPU, en met een model dat zo klein is, is een stap LoRA niet sneller dan een stap full fine-tuning: de backward pass gaat nog door elke layer. LoRA spaart geheugen, en bestandsgrootte: de optimizer houdt zijn twee getallen alleen bij voor wat leert.
 
-        Tijdens het trainen laat de grafiek de loss van elke stap zien, met je run van full fine-tuning op hetzelfde model gestippeld ernaast, als je die hebt gedaan.
+        Tijdens het trainen laat de grafiek de loss van elke stap zien, met je run van full fine-tuning op hetzelfde model gestreept ernaast, als je die hebt gedaan. Naast de grafiek zie je om de paar seconden wat het model met je adapters op dat moment antwoordt op de eerste testinstructie, zoals in *Je LoRA-run, stap voor stap* hieronder.
         """),
         L.course_versions(),
     ])
@@ -362,7 +362,11 @@ def demo_lora(box_add, box_layer, box_merge, lora_button, rank_pick, result_add,
         _note = "*Maak eerst oefening 1 tot en met 3 af: de demo finetunet met je `LoRALinear` en `add_lora`, en voegt samen met je `merge_lora`.*"
     elif lora_button.value:
         _live = L.live({"title": "Je LoRA-run: de loss van elke stap", "x": "stap", "y": "loss",
-                        "alt": f"De loss van elke stap van je LoRA-run tot nu toe, in grijs, en als dikkere lijn het gemiddelde over de laatste {max(1, C.STEPS // 50)} stappen; gestippeld de loss van je run van full fine-tuning op hetzelfde model, als je die hebt gedaan."}, C.STEPS, low=0.0)
+                        "alt": f"De loss van elke stap van je LoRA-run tot nu toe, in grijs, en als dikkere lijn het gemiddelde over de laatste {max(1, C.STEPS // 50)} stappen; gestreept de loss van je run van full fine-tuning op hetzelfde model, als je die hebt gedaan."}, C.STEPS, low=0.0, look_every=8.0)
+        _now = {}   # het laatste bericht van de run, voor wat het model nu antwoordt naast de grafiek
+        _seen = {"title": "Wat het nu antwoordt, na stap {step}", "lang": "nl",
+                 "alt": "Wat het model met je adapters nu antwoordt op de eerste testinstructie, die in grijs staat, getrokken met dezelfde seed als op de momenten van het terugspoelen, en eronder of het elk woord gebruikt en zelf stopt.",
+                 "used": "elk woord gebruikt", "not_used": "niet elk woord gebruikt", "stopped": "zelf gestopt", "not_stopped": "niet zelf gestopt"}
 
         def _progress(_p):
             if _p["phase"] == "pairs":
@@ -371,6 +375,10 @@ def demo_lora(box_add, box_layer, box_merge, lora_button, rank_pick, result_add,
             elif _p["phase"] == "after":
                 _live.line(f"**Na LoRA** · instructie {_p['done']} van {_p['total']} · elk woord gebruikt: {_p['used']}")
             else:
+                if "look" in _p and not _now:   # vanaf de eerste stap staat naast de grafiek wat het model antwoordt
+                    _live.watch(lambda: C.T.now_picture(_now["train"], _seen))
+                if "look" in _p:
+                    _now["train"] = _p
                 _live.extend(_p["fresh"], f"**Stap {C.number(_p['step'], 0, L.lang)} van {C.number(_p['steps'], 0, L.lang)}** · loss {C.number(_p['loss'], 3, L.lang)} · {C.number(_p['seconds'] / 60, 1, L.lang)} minuten")
         _r = C.run(rank_pick.value, _progress)
         if _r == "run":

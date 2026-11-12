@@ -29,6 +29,7 @@ PART = 0.25   # the runs train on the first quarter of the book, so that one run
 CONTROL = {"lr": 0.001, "warmup": 100, "layers": 2, "d": 64, "heads": 4, "block": 64, "batch": 32, "epochs": 6, "seed": 0}
 # The changes the demo offers, each one setting: (name, value).
 CHANGES = [("lr", 0.003), ("warmup", 0), ("layers", 4)]
+START, WRITE = "ROMEO:\n", 120   # what a run writes beside its chart and in the rewind (decision 1.17): WRITE characters
 
 # The course's own runs of these experiments, seeds 0, 1 and 2, on a CPU with 1 thread: the validation loss after the
 # last epoch. "control" and "variant": the lowest and the highest of the 3 seeds. "lower": by how much the variant ended
@@ -81,11 +82,32 @@ class _Counted:
             yield batch
 
 
+def write(model, chars: list, block: int, seed: int = 0) -> str | None:
+    """WRITE characters the model writes after START, each drawn from the probabilities it gives for the next one with
+    its own seed (lm-sampling), so that two moments differ only by the model (decision 1.17). It looks as
+    netview.looking looks: in eval mode, without a graph, and every module and the random state back afterwards, so
+    that looking never changes the run. None when the model stops with an error."""
+    from everything_ai import netview
+    index = {ch: i for i, ch in enumerate(chars)}
+    ids = [index[ch] for ch in START]
+    g = torch.Generator().manual_seed(seed)
+    try:
+        with netview.looking(model):
+            for _ in range(WRITE):
+                logits = model(torch.tensor([ids[-block:]]))[0, -1]
+                ids.append(int(torch.multinomial(torch.softmax(logits.double(), dim=-1), 1, generator=g)))
+    except Exception:   # the picture is the course's own: it never stops the learner's run
+        return None
+    return "".join(chars[i] for i in ids[len(START):])
+
+
 def run(settings: dict, show=None, hear=None) -> list | str:
     """Train one run of the small GPT with these settings, on the CPU, and give back its history: a dict per epoch
     with epoch, train_loss and val_loss. "run" when the learner's code stops with an error, "stopped" after the stop
     button of marimo (a KeyboardInterrupt). `show` gets how far the run is, as a share from 0 to 1, about every second;
-    `hear` gets the validation loss after every epoch and how far an epoch is, for a live chart (live.follow)."""
+    `hear` gets the validation loss after every epoch and how far an epoch is, for a live chart (live.follow), with
+    "look": what the model writes now (decision 1.17). With `hear`, every epoch of the history also keeps what the
+    model wrote after it ("wrote"), and the first epoch what it wrote before the first one ("before"), for the rewind."""
     imports = run_code("from llm.gpt import GPT\nfrom llm.gpt_loaders import gpt_loaders\nfrom nn.trainer import Trainer")
     if imports.error is not None:
         return "run"
@@ -111,14 +133,28 @@ def run(settings: dict, show=None, hear=None) -> list | str:
                 show(state["step"] / steps)
 
         trainer.train_loader = _Counted(trainer.train_loader, step)
+        wrote = {}
         if hear is not None:
-            live.follow(trainer, hear, "")
+            wrote[0] = write(model, chars, s["block"])   # before the first epoch
+
+            def heard(e):
+                look = {"look": lambda: write(model, chars, s["block"])}
+                if "val_loss" in e:   # after every epoch: what it writes then, for the rewind, and the look of this report
+                    wrote[e["epoch"]] = look["seen"] = write(model, chars, s["block"])
+                hear(e | look)
+
+            live.follow(trainer, heard, "")
         history = trainer.fit()
     except KeyboardInterrupt:   # the stop button of marimo
         return "stopped"
     except Exception:
         return "run"
-    return [{"epoch": int(h["epoch"]), "train_loss": float(h["train_loss"]), "val_loss": float(h["val_loss"])} for h in history]
+    out = [{"epoch": int(h["epoch"]), "train_loss": float(h["train_loss"]), "val_loss": float(h["val_loss"])} for h in history]
+    if hear is not None and out:
+        for h in out:
+            h["wrote"] = wrote.get(h["epoch"])
+        out[0]["before"] = wrote.get(0)
+    return out
 
 
 def settings_picture(control: dict, variant: dict, labels: dict) -> str:
@@ -142,14 +178,17 @@ def settings_picture(control: dict, variant: dict, labels: dict) -> str:
             f'<table style="border-collapse:collapse">{head}{"".join(rows)}</table></figure>')
 
 
-def curves_picture(control: list, variant: list, labels: dict) -> str:
+def curves_picture(control: list, variant: list, labels: dict, at: int | None = None) -> str:
     """The validation loss after every epoch of the control run, dashed and open, and of the variant, solid: both a loss,
-    so both purple; the line tells them apart."""
+    so both purple; the line tells them apart. With `at`, a dashed line at that epoch, for the rewind (0: before the
+    first epoch)."""
     from everything_ai import chart
     n = max(len(control), len(variant), 2)
     values = [h["val_loss"] for h in control + variant]
     low, high = math.floor(min(values) * 5) / 5 - 0.1, math.ceil(max(values) * 5) / 5 + 0.1
-    panel = chart.Panel((0.5, n + 0.5), (low, high), title=labels["title"], xlabel=labels["x"], ylabel=labels["y"])
+    panel = chart.Panel((-0.4 if at is not None else 0.5, n + 0.5), (low, high), title=labels["title"], xlabel=labels["x"], ylabel=labels["y"])
+    if at is not None:
+        panel.line([at, at], [low, high - (high - low) * 0.16], "ink-2", 1.2, dashed=True)   # under the key, not through it
     for runs, dashed, width in ((control, True, 1.6), (variant, False, 2.4)):
         xs = [h["epoch"] for h in runs]
         panel.line(xs, [h["val_loss"] for h in runs], "loss", width, dashed=dashed)
@@ -157,6 +196,43 @@ def curves_picture(control: list, variant: list, labels: dict) -> str:
     panel.text(n + 0.4, high - (high - low) * 0.08, f"○ {labels['control']}   ● {labels['variant']}", "loss", "end")
     svg = chart.figure([panel], alt=labels["alt"], width=330, height=250)
     return chart.with_decimal_comma(svg) if labels.get("lang") == "nl" else svg
+
+
+def now_picture(report: dict, labels: dict) -> str:
+    """Beside the live chart of a run (decision 1.17): what its model writes now after START, once per report.
+    `labels`: now ({epoch})."""
+    from everything_ai import yours
+    if "seen" not in report:   # one look per report
+        report["seen"] = report["look"]()
+    return yours.writes(labels["now"].format(epoch=report["epoch"]), [(START, report["seen"] or "")], alt=labels["alt_now"])
+
+
+def rewinds(control: list, variant: list) -> bool:
+    """Whether both runs kept what their model wrote at every epoch, and before the first."""
+    return bool(control and variant) and len(control) == len(variant) and \
+        all(h.get("wrote") is not None for h in control + variant) and \
+        control[0].get("before") is not None and variant[0].get("before") is not None
+
+
+def rewind_frame(control: list, variant: list, epoch: int, labels: dict) -> tuple:
+    """An epoch of both runs, for the rewind after the demo (decision 1.17): their validation loss with a dashed line
+    at that epoch, beside it what both models wrote then after START, and the sentence under it. `labels`: those of
+    curves_picture, and wrote, alt_wrote ({epoch}), start, after ({epoch}, {control_loss}, {variant_loss})."""
+    from everything_ai import live, yours
+    lang = labels.get("lang", "en")
+
+    def at(run):
+        return run[0]["before"] if epoch == 0 else next(h["wrote"] for h in run if h["epoch"] == epoch)
+
+    svg = curves_picture(control, variant, labels, at=epoch)
+    rows = [(START, at(control), labels["control"], None), (START, at(variant), labels["variant"], None)]
+    story = yours.writes(labels["wrote"], rows, alt=labels["alt_wrote"].format(epoch=epoch))
+    if epoch == 0:
+        said = labels["start"]
+    else:
+        loss = {k: number(next(h["val_loss"] for h in r if h["epoch"] == epoch), 3, lang) for k, r in (("c", control), ("v", variant))}
+        said = labels["after"].format(epoch=epoch, control_loss=loss["c"], variant_loss=loss["v"])
+    return live.rewound(svg, [story], width=330), said
 
 
 def number(x: float, digits: int, lang: str) -> str:

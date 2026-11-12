@@ -4,13 +4,15 @@
 gives the loss of every step, saved as repro/overfit.py; best_loss, the lowest loss a model can reach that sees only
 a; and sanity, the three sanity checks of the reproduction kit, saved as repro/sanity.py. The picture shows two
 recorded runs of the course's ModernGPT on one batch, one of them with a bug; the demo runs the learner's sanity check
-on their ModernGPT, and on the same model with that bug."""
+on their ModernGPT, and on the same model with that bug, and shows while it runs, and in a rewind after it, the loss of
+every step and which equations of the batch each model answers right (decision 1.17)."""
 import functools
 import importlib.util
+import itertools
 import math
 import re
 
-from everything_ai import paths, projects
+from everything_ai import live, paths, projects
 from everything_ai.check import ClassBox, FunctionBox, Mistake, Timeout, _show_rounded, run_code, with_time_limit
 from everything_ai import yours
 
@@ -251,12 +253,13 @@ _S_SCENARIOS = [
 _S_EN, _S_NL = "Your `sanity` gives another report than the course's", "Je `sanity` geeft een ander rapport dan die van de course"
 
 
-def demo(steps: int = STEPS):
+def demo(steps: int = STEPS, show=None):
     """The learner's sanity check of their project, on their ModernGPT with their data and settings: the first batch
     of the training data, and the same model with the bug planted. None when repro/overfit.py or repro/sanity.py is not
     in the project yet; "sanity" when it stops with an error, "slow" when it takes more than three minutes for one model,
     "model" when the model or the data does. Where a module it uses is missing or broken, the course's version stands
-    in, and "stand_ins" names it."""
+    in, and "stand_ins" names it. "runs" has, for both models, the loss and the right answers of every step (hearing),
+    which `show` hears while they learn."""
     folder = projects.folder() / "repro"
     if not (folder / "overfit.py").is_file() or not (folder / "sanity.py").is_file():
         return None
@@ -264,12 +267,153 @@ def demo(steps: int = STEPS):
     projects.forget()
     stand = projects.use_course_versions()
     try:
-        return _demo(stand, steps)
+        return _demo(stand, steps, show)
     finally:
         projects.forget()
 
 
-def _demo(stand, steps: int):
+def hearing(y, show=None, floor: float | None = None) -> tuple:
+    """How the demo hears the learner's sanity check while it learns the batch by heart (decision 1.17), without
+    changing their code or their run: a hook on the model keeps, of its last pass over the whole batch, the loss of the
+    answers and which equations it answered right (its guess at the place of = against c), and a hook on every step
+    of an optimizer turns that into the step's report, numbered by the steps done before it: report 0 is the model
+    before its first step, as in the recorded runs. Passes of another size are left out.
+    Nothing is passed through the model for this, so the run stays the same. `show` hears every step ({"run", "step",
+    "steps", "loss", "look", "floor"}, with "look" those answers and "floor" the lowest loss of a model that sees only
+    a); a chart that fails never stops the run. Gives (runs, a
+    function watch(model, run, steps) to call before the check of each model, under its time limit, and a function
+    that takes the hooks off). runs[run] has "losses" and "right", one entry per step, from step 0."""
+    import torch
+    import torch.nn.functional as F
+    from torch.optim.optimizer import register_optimizer_step_post_hook
+    runs, now, handles = {}, {"run": None, "last": None, "steps": 0}, []
+
+    def passed(module, args, out):   # every pass of the model the check makes: keep what the step will learn from
+        try:
+            if isinstance(out, torch.Tensor) and out.dim() == 3 and out.shape[0] == len(y):
+                with torch.no_grad():
+                    last, want = out[:, -1].detach().float(), y.to(out.device)
+                    now["last"] = (float(F.cross_entropy(last, want)), (last.argmax(-1) == want).tolist())
+        except Timeout:   # the check's time limit
+            raise
+        except Exception:   # the course's picture never stops the learner's check
+            now["last"] = None
+
+    def stepped(opt, args, kwargs):
+        if now["run"] is None or now["last"] is None:
+            return
+        run = runs[now["run"]]
+        (loss, right), now["last"] = now["last"], None   # a step without a new pass of its own is not heard twice
+        run["losses"].append(loss)
+        run["right"].append(right)
+        if show is not None:
+            try:
+                show({"run": now["run"], "step": len(run["losses"]) - 1, "steps": now["steps"], "loss": loss, "look": lambda seen=right: seen,
+                      "floor": floor})
+            except Timeout:
+                raise
+            except Exception:
+                pass
+
+    def watch(model, run: str, steps: int) -> None:
+        unwatch()
+        now.update(run=run, last=None, steps=steps)
+        runs[run] = {"losses": [], "right": []}
+        handles.append(model.register_forward_hook(passed))
+        handles.append(register_optimizer_step_post_hook(stepped))
+
+    def unwatch() -> None:
+        while handles:
+            handles.pop().remove()
+
+    return runs, watch, unwatch
+
+
+def kept(n: int) -> list:
+    """The steps the rewind stops at, of a run heard at steps 0 to n - 1: 0, 5 and 10, then every 10th up to 50, every
+    25th, and the last."""
+    return sorted({s for s in (0, 5, 10, 20, 30, 40, 50, *range(75, n - 1, 25), n - 1) if 0 <= s <= n - 1})
+
+
+_IDS = itertools.count()                 # each picture its own masks: several can be on the page at once
+_PER_ROW = 32                            # squares in a row of the batch picture
+
+
+def _mask(cells) -> str:
+    """Cells as a PNG, white where True."""
+    import base64
+    import io
+    import numpy as np
+    from PIL import Image
+    buf = io.BytesIO()
+    Image.fromarray(np.where(cells, 255, 0).astype(np.uint8), "L").save(buf, "PNG")
+    return "data:image/png;base64," + base64.b64encode(buf.getvalue()).decode()
+
+
+_WORDS = {"en": {"share": "{n} of the {total} equations right", "right": "right", "wrong": "wrong",
+                 "alt": "A square for each of the {total} equations of the batch, {per} to a row: {n} in ink, which the model answers right, and the others in the color of mistakes."},
+          "nl": {"share": "{n} van de {total} vergelijkingen goed", "right": "goed", "wrong": "fout",
+                 "alt": "Een vakje voor elk van de {total} vergelijkingen van de batch, {per} per rij: {n} in inkt, die het model goed beantwoordt, en de andere in de kleur van fouten."}}
+
+
+def batch_picture(right: list, title: str, lang: str) -> str:
+    """Which equations of the batch a model answers right at one step of the demo (decision 1.17): a square for each,
+    in the order of the batch, 32 to a row, in ink where its guess at the place of = is c, in the color of mistakes
+    where it is not; above them how many it answers right."""
+    import numpy as np
+    w = _WORDS[lang]
+    cells = np.zeros(-(-len(right) // _PER_ROW) * _PER_ROW, dtype=bool)
+    cells[:len(right)] = right
+    filled = np.zeros_like(cells)
+    filled[:len(right)] = True
+    cells, filled = cells.reshape(-1, _PER_ROW), filled.reshape(-1, _PER_ROW)
+    size, n = 7, int(sum(bool(r) for r in right))
+    width, height = _PER_ROW * size, cells.shape[0] * size
+    mid = f"ea-batch-{next(_IDS)}"
+    masks = "".join(f'<mask id="{mid}-{k}" maskUnits="userSpaceOnUse" x="0" y="0" width="{width}" height="{height}">'
+                    f'<image href="{_mask(m)}" x="0" y="0" width="{width}" height="{height}" preserveAspectRatio="none" '
+                    f'style="image-rendering:pixelated"/></mask>' for k, m in (("r", cells), ("w", ~cells & filled)))
+    svg = (f'<svg viewBox="0 0 {width} {height}" width="{width}" height="{height}" aria-hidden="true" '
+           f'style="display:block;width:{width}px;height:{height}px;max-width:none"><defs>{masks}</defs>'
+           f'<rect width="{width}" height="{height}" style="fill:var(--ea-inset);stroke:var(--ea-line)"/>'
+           f'<rect width="{width}" height="{height}" mask="url(#{mid}-r)" style="fill:var(--ea-ink)"/>'
+           f'<rect width="{width}" height="{height}" mask="url(#{mid}-w)" style="fill:var(--ea-loss)"/></svg>')
+    swatch = ('<span style="display:inline-flex;align-items:center;gap:0.35rem"><span style="display:inline-block;width:10px;'
+              'height:10px;background:var(--ea-{})"></span>{}</span>')
+    key = (f'<div style="font-family:var(--ea-font-ui);font-size:12px;color:var(--ea-ink-2);margin-top:0.3rem;display:flex;gap:1rem">'
+           f'{swatch.format("ink", w["right"])}{swatch.format("loss", w["wrong"])}</div>')
+    head = f'<div style="font-family:var(--ea-font-ui);font-size:13px;color:var(--ea-ink);margin-bottom:0.3rem">{w["share"].format(n=n, total=len(right))}</div>'
+    return yours.figure(title, head + svg + key, alt=title + ". " + w["alt"].format(total=len(right), per=_PER_ROW, n=n))
+
+
+def runs_picture(result: dict, labels: dict, at: int) -> str:
+    """The loss of both runs of the demo at every step from 0, the run with the bug dashed (both are losses: purple),
+    and dashed in gray the lowest loss a model that sees only a can reach on the batch, with a line at step `at`, for
+    rewinding. What each line is stands in a key under the chart, so that the line crosses no names."""
+    from everything_ai import chart
+    mine, planted = result["runs"]["yours"]["losses"], result["runs"]["planted"]["losses"]
+    steps = max(len(mine), len(planted), 2) - 1
+    top = max([math.log(result["vocab"]), *mine, *planted]) * 1.08
+    p = chart.Panel((0, steps), (0, top), title=labels["title"], xlabel=labels["x"], ylabel=labels["y"])
+    p.line([0, steps], [result["floor"]] * 2, "ink-3", 1.2, dashed=True)
+    if planted:
+        p.line(list(range(len(planted))), planted, "loss", 2, dashed=True)
+    if mine:
+        p.line(list(range(len(mine))), mine, "loss", 2.4)
+    p.line([at, at], [0, top], "ink-2", 1.2)
+    svg = chart.figure([p], alt=labels["alt"], width=live.CHART_WIDTH, height=240)
+    key = live.key_html([("loss", False, labels["yours"]), ("loss", True, labels["planted"]), ("ink-3", True, labels["floor"])])
+    return (chart.with_decimal_comma(svg) if labels.get("lang") == "nl" else svg) + key
+
+
+def step_frame(result: dict, step: int, labels: dict, titles: dict, lang: str) -> str:
+    """The rewind at a step (from 0, before the first): the loss of both runs with a line at that step, and under it
+    which equations of the batch each model answered right there (decision 1.17)."""
+    pictures = [batch_picture(result["runs"][r]["right"][step], titles[r], lang) for r in ("yours", "planted")]
+    return runs_picture(result, labels, at=step) + live.beside(*pictures)
+
+
+def _demo(stand, steps: int, show=None):
     import importlib
     import torch
     try:
@@ -291,17 +435,25 @@ def _demo(stand, steps: int):
         model().forward(x[:2])
     except Exception:
         return "model"
-    reports = {}
+    reports, floor = {}, best(rows)
+    runs, watch, unwatch = hearing(y, show, floor)
+
+    def checked(m, which):
+        watch(m, which, steps)
+        return sanity(m, x, y, vocab, steps)
+
     try:
         for which in ("yours", "planted"):
             m = model() if which == "yours" else reads_at_a(model())
-            reports[which] = with_time_limit(lambda m=m: sanity(m, x, y, vocab, steps), 180)   # about 20 s each here
+            reports[which] = with_time_limit(lambda m=m, which=which: checked(m, which), 180)   # about 20 s each here
     except Timeout:
         return "slow"
     except Exception:
         return "sanity"
-    return {"reports": reports, "batch": len(rows), "vocab": vocab, "even": math.log(vocab), "floor": best(rows),
-            "steps": steps, "stand_ins": [f"{package}/{module}.py" for package, module, _, _ in stand]}
+    finally:
+        unwatch()
+    return {"reports": reports, "batch": len(rows), "vocab": vocab, "even": math.log(vocab), "floor": floor,
+            "steps": steps, "stand_ins": [f"{package}/{module}.py" for package, module, _, _ in stand], "runs": runs}
 
 
 EXERCISES = {

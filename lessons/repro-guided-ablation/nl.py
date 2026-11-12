@@ -360,7 +360,7 @@ def text_demo():
     mo.md(rf"""
     ### Wat je project nu kan
 
-    De knop traint het grid met je kit: je `run_grid` met je `grid` en je `run_seed`, op je ModernGPT met je data en je instellingen, weight decay 1 en 0 bij 30%, 50% en 90%, elk {C.number(C.STEPS, 0, L.lang)} stappen, in je experimentlogboek `work/projects/repro/ablation.jsonl`. Een grafiek laat elke run zien terwijl hij traint: zijn validation accuracy, met zijn training accuracy gestreept, op een logaritmische as van de stappen zoals in de figuur hierboven, en in de titel de weight decay en het deel van de tabel van de run. Op een GPU duren de zes runs elk een paar minuten; op de CPU van de course, met één thread, samen ongeveer {C.number(6 * C.STEPS * C.SECONDS_PER_STEP / 3600, 1, L.lang)} uur. Sluit je de les halverwege, dan blijven de runs die klaar zijn in je logboek staan; de volgende druk op de knop gaat verder met de andere. Terwijl hij traint, wacht de rest van deze les: je kunt verder lezen, of in een andere les werken. Waar een onderdeel van je kit ontbreekt of kapot is, springt de versie van de course in.
+    De knop traint het grid met je kit: je `run_grid` met je `grid` en je `run_seed`, op je ModernGPT met je data en je instellingen, weight decay 1 en 0 bij 30%, 50% en 90%, elk {C.number(C.STEPS, 0, L.lang)} stappen, in je experimentlogboek `work/projects/repro/ablation.jsonl`. Een grafiek laat elke run zien terwijl hij traint: zijn validation accuracy, met zijn training accuracy gestreept, op een logaritmische as van de stappen zoals in de figuur hierboven, en in de titel de weight decay en het deel van de tabel van de run. Op een GPU duren de zes runs elk een paar minuten; op de CPU van de course, met één thread, samen ongeveer {C.number(6 * C.STEPS * C.SECONDS_PER_STEP / 3600, 1, L.lang)} uur. Naast de grafiek zie je welke vergelijkingen het model op dat moment goed beantwoordt: de tabel van alle 9.409 vergelijkingen uit [Begeleide reproductie 2: bouw het model en de data](/course/open/repro-guided-build?lang=nl), de trainings- en de validatievergelijkingen apart. Na de runs kun je door elke run van deze druk op de knop terugspoelen, met wat zijn model toen antwoordde. Sluit je de les halverwege, dan blijven de runs die klaar zijn in je logboek staan; de volgende druk op de knop gaat verder met de andere. Terwijl hij traint, wacht de rest van deze les: je kunt verder lezen, of in een andere les werken. Waar een onderdeel van je kit ontbreekt of kapot is, springt de versie van de course in.
     """)
     return
 
@@ -386,17 +386,23 @@ def demo_train(train_button, result_grid, result_run_grid):
     else:
         _kept = [(_l["weight_decay"], _l["fraction"]) for _l in C.my_runs() or []]
         _todo = [(_wd, _f) for _wd in C.CHANGES["weight_decay"] for _f in C.CHANGES["fraction"] if (_wd, _f) not in _kept]   # wat deze druk traint, in de volgorde van het grid
-        _starts, _lives = [], {}   # when each run of this press started; its live chart
+        _starts, _lives = [], {}   # wanneer elke run van deze druk op de knop begon, met de seconden die tot dan aan kijken opgingen; zijn live grafiek
+        _now = {}   # het laatste verslag, voor de tabellen naast de grafiek
+        _tables = {"train": "Trainingsvergelijkingen: {share} goed", "val": "Validatievergelijkingen: {share} goed", "right": "goed antwoord", "wrong": "fout antwoord",
+                   "now": "Wat het model nu antwoordt, bij stap {step}", "lang": "nl",
+                   "alt": "Alle 9.409 vergelijkingen a + b modulo 97, a naar beneden en b naar rechts, in twee tabellen: de trainingsvergelijkingen en de validatievergelijkingen. Goede antwoorden staan in inkt, foute in de kleur van fouten: {train} van de trainingsvergelijkingen is goed, en {val} van de validatievergelijkingen."}
 
-        def _progress(_log):
-            _step, _now = _log["step"][-1], _time.perf_counter()
+        def _progress(_log, _report):
+            _step, _t = _log["step"][-1], _time.perf_counter()
             if _step == 1:   # de eerste gelogde stap van een nieuwe run
-                _starts.append(_now)
-            _spent, _n = _now - _starts[-1], len(_starts)
+                _starts.append((_t, _report.get("aside", 0.0)))
+            _spent, _n = _t - _starts[-1][0] - (_report.get("aside", 0.0) - _starts[-1][1]), len(_starts)   # zonder de tijd die aan kijken opging
             if _n not in _lives:   # zijn instellingen; geen alleen als je run_grid een run traint die al in het logboek staat
                 _title = f"Weight decay {C.number(_todo[_n - 1][0], 0, L.lang)} bij {round(100 * _todo[_n - 1][1])}% van de tabel" if _n <= len(_todo) else f"Run {_n} van deze druk op de knop"
                 _lives[_n] = L.live({"title": _title, "x": "stap", "y": "accuracy", "alt": f"{_title}: de validation accuracy tot nu toe, op een logaritmische as van de stappen; gestreept de training accuracy."},
-                                    C.STEPS, role="ink", low=0.0, high=1.15, window=1, xlog=True)   # ruimte boven 1 voor de naam van de lijn van training
+                                    C.STEPS, role="ink", low=0.0, high=1.15, window=1, xlog=True, look_every=2.0)   # ruimte boven 1 voor de naam van de lijn van training
+                _lives[_n].watch(lambda: C.now_picture(_now["last"], _tables))   # welke vergelijkingen het model nu goed beantwoordt, naast de grafiek
+            _now["last"] = _report
             _live, _of = _lives[_n], f" van {len(_todo)}" if _n <= len(_todo) else ""
             _live.reference(list(zip(_log["step"], _log["train"])), "training", role="ink")   # it grows with the run
             _live.extend(list(zip(_log["step"][len(_live.xs):], _log["val"][len(_live.xs):])), f"**Run {_n}{_of} bij deze druk op de knop, stap {C.number(_step, 0, L.lang)} van {C.number(C.STEPS, 0, L.lang)}** · {C.number(_spent / 60, 1, L.lang)} minuten · training {C.number(100 * _log['train'][-1], 1, L.lang)}%, validatie {C.number(100 * _log['val'][-1], 1, L.lang)}%")
@@ -410,7 +416,20 @@ def demo_train(train_button, result_grid, result_run_grid):
         else:
             trained = _r
             _stand = (" De versie van de course sprong in voor: " + ", ".join(f"`{_m}`" for _m in _r["stand_ins"]) + ".") if _r["stand_ins"] else ""
-            _out = mo.md(f"*Klaar: de zes runs van het grid staan in je logboek, `work/projects/repro/ablation.jsonl`.{_stand}*")
+            _done = mo.md(f"*Klaar: de zes runs van het grid staan in je logboek, `work/projects/repro/ablation.jsonl`.{_stand}*")
+            _w = _r["watched"]
+            if C.rewinds(_w) and len(_w) == len(_lives):   # terugspoelen door de runs van deze druk op de knop, met wat hun modellen antwoordden
+                _steps = [_s for _s, _ in _w[0]["moments"]]
+                _rewind = {**_tables, "then": "Wat het model antwoordde bij stap {step}", "title": "Weight decay {weight_decay} bij {fraction}% van de tabel",
+                           "said": "**{title}, stap {step}** · training {train}%, validatie {val}%"}
+                _frame = lambda _s, _i: C.rewind_frame(_w[int(_i) - 1], _lives[int(_i)].picture(at=int(_s)), int(_s), _rewind)
+                _pic = L.plane("rewind", "stap", "run", _frame, _steps, list(range(1, len(_w) + 1)), start=(_steps[-1], 1), role="",
+                               task="Sleep de stip: naar rechts door de stappen van een run, omhoog door de runs van deze druk op de knop. Wanneer begint het model de validatievergelijkingen goed te beantwoorden, en in welke runs niet?") \
+                    if len(_w) > 1 else L.explore("rewind-one", "stap", lambda _s: _frame(_s, 1), start=_steps[-1], values=_steps, role="",
+                                                  task="Ga terug naar de eerste stappen, en dan vooruit: wanneer begint het model de trainingsvergelijkingen goed te beantwoorden, en wanneer de validatievergelijkingen?")
+                _out = mo.vstack([_pic, _done])
+            else:
+                _out = _done
     _out
     return (trained,)
 

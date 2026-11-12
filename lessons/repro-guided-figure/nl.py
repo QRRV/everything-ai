@@ -401,7 +401,7 @@ def text_demo():
     mo.md(rf"""
     ### Wat je project nu kan
 
-    De knop traint de seeds 0, 1 en 2 met je kit, na elkaar: je `run_seeds` met je `run_seed`, op je ModernGPT met je data en je instellingen, elk {C.number(C.STEPS, 0, L.lang)} stappen, in je logboek `work/projects/repro/runs.jsonl`. Je ziet elke run terwijl hij traint. Op de CPU van de course, met één thread, duurt een seed ongeveer {round(C.STEPS * C.SECONDS_PER_STEP / 60)} minuten, alle drie ongeveer {round(3 * C.STEPS * C.SECONDS_PER_STEP / 60)}; op een GPU een paar minuten. Daar bewijst je runner zich: sluit je de les halverwege, dan blijven de seeds die klaar zijn in je logboek staan; de volgende druk op de knop gaat verder met de andere. Terwijl hij traint, wacht de rest van deze les: je kunt verder lezen, of in een andere les werken. Waar een onderdeel van je kit ontbreekt of kapot is, springt de versie van de course in.
+    De knop traint de seeds 0, 1 en 2 met je kit, na elkaar: je `run_seeds` met je `run_seed`, op je ModernGPT met je data en je instellingen, elk {C.number(C.STEPS, 0, L.lang)} stappen, in je logboek `work/projects/repro/runs.jsonl`. Je ziet elke run terwijl hij traint, met naast zijn grafiek welke van de 9.409 vergelijkingen het model op dat moment goed beantwoordt; na de runs kun je erdoorheen terugspoelen. Op de CPU van de course, met één thread, duurt een seed ongeveer {round(C.STEPS * C.SECONDS_PER_STEP / 60)} minuten, alle drie ongeveer {round(3 * C.STEPS * C.SECONDS_PER_STEP / 60)}; op een GPU een paar minuten. Daar bewijst je runner zich: sluit je de les halverwege, dan blijven de seeds die klaar zijn in je logboek staan; de volgende druk op de knop gaat verder met de andere. Terwijl hij traint, wacht de rest van deze les: je kunt verder lezen, of in een andere les werken. Waar een onderdeel van je kit ontbreekt of kapot is, springt de versie van de course in.
     """)
     return
 
@@ -419,23 +419,32 @@ def demo_train(train_button, result_run, result_seeds):
 
     result_run, result_seeds  # opnieuw uitvoeren als een oefening een onderdeel van de kit bewaart
     _ready = result_run.state == "correct" and result_seeds.state == "correct"
-    _labels = {"x": "stap", "y": "accuracy", "train": "training", "val": "validatie"}
     trained = None
     if not train_button.value:
         _out = mo.md("*Druk op de knop om je seeds met je kit te trainen.*" if _ready else "*Maak eerst oefening 2 en 3 af, en druk dan op de knop: hij traint met je `run_seeds` en je `run_seed`.*")
     elif set(C.SEEDS) <= {_log["seed"] for _log in C.my_runs() or []}:
         _out = mo.md("*De seeds 0, 1 en 2 staan al in je logboek, dus slaat je `run_seeds` ze over. Wil je ze opnieuw trainen, verwijder dan `work/projects/repro/runs.jsonl`.*")
     else:
-        _began = {}
+        _began, _lives = {}, {}   # wanneer elke seed van deze druk op de knop begon, met de seconden kijken tot dan; zijn live grafiek
+        _now = {}   # het laatste verslag, voor de tabellen naast de grafiek
+        _tables = {"train": "Trainingsvergelijkingen: {share} goed", "val": "Validatievergelijkingen: {share} goed", "right": "goed antwoord", "wrong": "fout antwoord",
+                   "now": "Wat het model nu antwoordt, bij stap {step}", "lang": "nl",
+                   "alt": "Alle 9.409 vergelijkingen a + b modulo 97, a naar beneden en b naar rechts, in twee tabellen: de trainingsvergelijkingen en de validatievergelijkingen. Goede antwoorden staan in inkt, foute in de kleur van fouten: {train} van de trainingsvergelijkingen is goed, en {val} van de validatievergelijkingen."}
 
-        def _progress(_log):
-            _step, _now = _log["step"][-1], _time.perf_counter()
-            _spent = _now - _began.setdefault(_log["seed"], _now)
+        def _progress(_log, _report):
+            _step, _t, _aside = _log["step"][-1], _time.perf_counter(), _report.get("aside", 0.0)
+            _start, _looked = _began.setdefault(_log["seed"], (_t, _aside))
+            _spent = _t - _start - (_aside - _looked)   # zonder de tijd die het kijken kostte
             _left = f", nog ongeveer {round(_spent / _step * (C.STEPS - _step) / 60)} te gaan" if _step >= 1000 else ""   # vóór stap 1.000 maken de vele logs van het begin een schatting te hoog
-            mo.output.replace(mo.vstack([
-                mo.md(f"**Seed {_log['seed']}, stap {C.number(_step, 0, L.lang)} van {C.number(C.STEPS, 0, L.lang)}** · {C.number(_spent / 60, 1, L.lang)} minuten{_left} · training {C.number(100 * _log['train'][-1], 1, L.lang)}%, validatie {C.number(100 * _log['val'][-1], 1, L.lang)}%"),
-                mo.Html(C.figure_picture([_log], {**_labels, "title": f"Accuracy tijdens je run, seed {_log['seed']}", "alt": f"Je run van seed {_log['seed']} tot stap {_step}: training op {C.number(100 * _log['train'][-1], 1, L.lang)}%, validatie op {C.number(100 * _log['val'][-1], 1, L.lang)}%."})),
-            ]))
+            if _log["seed"] not in _lives:
+                _title = f"Accuracy tijdens je run, seed {_log['seed']}"
+                _lives[_log["seed"]] = L.live({"title": _title, "x": "stap", "y": "accuracy", "alt": f"{_title}: de validation accuracy tot nu toe, op een logaritmische as van de stappen; gestreept de training accuracy."},
+                                              C.STEPS, role="ink", low=0.0, high=1.15, window=1, xlog=True, look_every=2.0)   # ruimte boven 1 voor de naam van de lijn van de training
+                _lives[_log["seed"]].watch(lambda: C.now_picture(_now["last"], _tables))   # welke vergelijkingen het model nu goed beantwoordt, naast de grafiek
+            _now["last"] = _report
+            _live = _lives[_log["seed"]]
+            _live.reference(list(zip(_log["step"], _log["train"])), "training", role="ink")   # hij groeit mee met de run
+            _live.extend(list(zip(_log["step"][len(_live.xs):], _log["val"][len(_live.xs):])), f"**Seed {_log['seed']}, stap {C.number(_step, 0, L.lang)} van {C.number(C.STEPS, 0, L.lang)}** · {C.number(_spent / 60, 1, L.lang)} minuten{_left} · training {C.number(100 * _log['train'][-1], 1, L.lang)}%, validatie {C.number(100 * _log['val'][-1], 1, L.lang)}%")
 
         _r = C.demo(_progress)
         if _r is None:
@@ -446,7 +455,21 @@ def demo_train(train_button, result_run, result_seeds):
         else:
             trained = _r
             _stand = (" De versie van de course sprong in voor: " + ", ".join(f"`{_m}`" for _m in _r["stand_ins"]) + ".") if _r["stand_ins"] else ""
-            _out = mo.md(f"*Klaar: de seeds 0, 1 en 2 staan in je logboek, `work/projects/repro/runs.jsonl`.{_stand}*")
+            _done = mo.md(f"*Klaar: de seeds 0, 1 en 2 staan in je logboek, `work/projects/repro/runs.jsonl`.{_stand}*")
+            _w = _r["watched"]
+            _seeds = [_x["seed"] for _x in _w]
+            if C.rewinds(_w) and _seeds == list(_lives) and len(set(_seeds)) == len(_seeds):   # terugspoelen door de seeds van deze druk op de knop, met wat hun modellen antwoordden
+                _steps = [_s for _s, _ in _w[0]["moments"]]
+                _rewind = {**_tables, "then": "Wat het model antwoordde bij stap {step}", "title": "Seed {seed}",
+                           "said": "**{title}, stap {step}** · training {train}%, validatie {val}%"}
+                _frame = lambda _s, _k: C.rewind_frame(_w[_seeds.index(int(_k))], _lives[int(_k)].picture(at=int(_s)), int(_s), _rewind)
+                _pic = L.plane("rewind", "stap", "seed", _frame, _steps, _seeds, start=(_steps[-1], _seeds[0]), role="",
+                               task="Sleep de stip: naar rechts door de stappen van een seed, omhoog door de seeds. Wanneer begint het model de validatievergelijkingen goed te beantwoorden, en gebeurt dat bij elke seed bij dezelfde stap?") \
+                    if len(_w) > 1 else L.explore("rewind-one", "stap", lambda _s: _frame(_s, _seeds[0]), start=_steps[-1], values=_steps, role="",
+                                                  task="Ga terug naar de eerste stappen, en dan vooruit: wanneer begint het model de trainingsvergelijkingen goed te beantwoorden, en wanneer de validatievergelijkingen?")
+                _out = mo.vstack([_pic, _done])
+            else:
+                _out = _done
     _out
     return (trained,)
 

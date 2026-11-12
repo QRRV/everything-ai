@@ -401,6 +401,18 @@ phrases:
   group: yours
   en: "The first {n} of its {total} channels, each a feature map: within a map, the more ink, the higher the value."
   nl: "De eerste {n} van zijn {total} channels, elk een feature map: hoe meer inkt, hoe hoger de waarde in die map."
+- id: net-picture
+  group: yours
+  en: "picture {k}"
+  nl: "plaatje {k}"
+- id: net-pictures-all
+  group: yours
+  en: "The {n} pictures this layer makes: within a picture, the more ink, the higher the value."
+  nl: "De {n} plaatjes die deze layer maakt: hoe meer inkt, hoe hoger de waarde in dat plaatje."
+- id: net-pictures-some
+  group: yours
+  en: "The first {n} of the {total} pictures this layer makes: within a picture, the more ink, the higher the value."
+  nl: "De eerste {n} van de {total} plaatjes die deze layer maakt: hoe meer inkt, hoe hoger de waarde in dat plaatje."
 - id: net-values-all
   group: yours
   en: "Its {n} values: the more ink, the higher the value."

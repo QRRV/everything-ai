@@ -310,7 +310,7 @@ def text_demo():
         mo.md(f"""
         ### Train your model with DPO
 
-        The button puts adapters of rank {_r} on your SFT model of [Project: teach your model to follow instructions (SFT)](/course/open/llm-sft?lang=en), or on the course's when you have none, makes the pairs with your `dpo_pairs`, and runs your `dpo_step` once over all of them, in batches of {C.BATCH}, at $\\beta = {C.number(C.BETA, 1, L.lang).replace(',', '{,}')}$ and a learning rate of {C.number(C.LR, 3, L.lang)}. Then the model answers the {C.T.TESTS} test instructions of that lesson again, and the demo measures how far the answers of the first {C.MOVED} pairs moved. On the course's CPU, with one thread, that took about {round((_y['seconds'] + _y['other_seconds']) / 60)} minutes for its model of the demo run, and about {round((_c['seconds'] + _c['other_seconds']) / 60)} minutes on two threads for the course's own SFT model, which is about five times as big. The adapters are kept in `work/projects/llm/dpo.pt`.
+        The button puts adapters of rank {_r} on your SFT model of [Project: teach your model to follow instructions (SFT)](/course/open/llm-sft?lang=en), or on the course's when you have none, makes the pairs with your `dpo_pairs`, and runs your `dpo_step` once over all of them, in batches of {C.BATCH}, at $\\beta = {C.number(C.BETA, 1, L.lang).replace(',', '{,}')}$ and a learning rate of {C.number(C.LR, 3, L.lang)}. Then the model answers the {C.T.TESTS} test instructions of that lesson again, and the demo measures how far the answers of the first {C.MOVED} pairs moved. On the course's CPU, with one thread, that took about {round((_y['seconds'] + _y['other_seconds']) / 60)} minutes for its model of the demo run, and about {round((_c['seconds'] + _c['other_seconds']) / 60)} minutes on two threads for the course's own SFT model, which is about five times as big. The adapters are kept in `work/projects/llm/dpo.pt`. While it trains, beside the chart you see every few seconds what the model with your adapters answers at that moment to the first test instruction, as in *Your DPO run, step by step* below.
         """),
         L.course_versions(),
     ])
@@ -334,7 +334,11 @@ def demo_dpo(dpo_button, result_pairs, result_reference, result_step):
         _note = "*Finish exercises 1 to 3 first: the demo trains with your `dpo_pairs`, `reference_logprob` and `dpo_step`.*"
     elif dpo_button.value:
         _live = L.live({"title": "Your DPO run: the loss of every step", "x": "step", "y": "loss",
-                        "alt": "The DPO loss of every step of your run so far, in grey, and its mean over the last steps as the thicker line; dashed, ln 2, the loss at the start."}, C.MEASURED["yours"]["steps"], low=0.0)
+                        "alt": "The DPO loss of every step of your run so far, in gray, and its mean over the last steps as the thicker line; dashed, ln 2, the loss at the start."}, C.MEASURED["yours"]["steps"], low=0.0, look_every=8.0)
+        _now = {}   # the last report of the run, for what the model answers now beside the chart
+        _seen = {"title": "What it answers now, after step {step}", "lang": "en",
+                 "alt": "What the model with your adapters answers now to the first test instruction, which is in gray, drawn with the same seed as at the moments of the replay, and under it whether it uses every word and stops by itself.",
+                 "used": "every word used", "not_used": "not every word used", "stopped": "stopped by itself", "not_stopped": "did not stop by itself"}
 
         def _progress(_p):
             if _p["phase"] == "pairs":
@@ -344,6 +348,10 @@ def demo_dpo(dpo_button, result_pairs, result_reference, result_step):
             elif _p["phase"] == "after":
                 _live.line(f"**After DPO** · instruction {_p['done']} of {_p['total']} · every word used: {_p['used']}")
             else:
+                if "look" in _p and not _now:   # from the first step on, what the model answers beside the chart
+                    _live.watch(lambda: C.T.now_picture(_now["train"], _seen))
+                if "look" in _p:
+                    _now["train"] = _p
                 _live.extend(_p["fresh"], f"**Step {C.number(_p['step'], 0, L.lang)} of {C.number(_p['steps'], 0, L.lang)}** · loss {C.number(_p['loss'], 3, L.lang)} · {C.number(_p['seconds'] / 60, 1, L.lang)} minutes")
         _r = C.run(_progress)
         _note = {

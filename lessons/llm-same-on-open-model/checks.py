@@ -40,6 +40,7 @@ DPO = {"lr": 1e-4, "beta": 0.1, "steps": {"cpu": 10, "gpu": 60}, "batch": {"cpu"
 MEASURE = {"cpu": {"loss": 20, "stops": 5, "pairs": 20}, "gpu": {"loss": 50, "stops": 50, "pairs": 100}}
 NEW = 256                 # tokens an answer may take while measuring; the longest answer of the people is 192
 SHOWN = 3                 # held-out questions whose answers the demo shows
+LOOK = 48                 # tokens of the answer beside the chart and in the rewind (decision 1.17): about a line
 START, TURN = "<|im_start|>", "<|im_end|>"   # the tokens of Qwen's chat template around a turn
 END = "<|endoftext|>"     # the end of an answer: the one special token the base model learned; the end id of SFT
 
@@ -185,9 +186,9 @@ def answer_loss(model, pairs: list, enc, end: int) -> float:
     return total / n
 
 
-def answer(model, question: str, enc, end: int) -> tuple:
+def answer(model, question: str, enc, end: int, new: int | None = None) -> tuple:
     """The model's answer to a question, greedily, with the KV cache: its text, and whether it stopped by itself with
-    <|endoftext|> within NEW tokens."""
+    <|endoftext|> within `new` tokens, NEW when None."""
     import torch
     from everything_ai import qwen3
     device = next(model.parameters()).device
@@ -195,7 +196,7 @@ def answer(model, question: str, enc, end: int) -> tuple:
     out = []
     with torch.no_grad(), _autocast(device.type):
         logits = model(torch.tensor([qwen3.encode(enc, prompt(question))], device=device), caches)[0, -1]
-        for _ in range(NEW):
+        for _ in range(NEW if new is None else new):
             j = int(logits.argmax())
             if j == end:
                 return enc.decode(out), True
@@ -260,7 +261,10 @@ def run(rename, show, kind: str | None = None) -> dict | str:
     """The demo: Qwen3-0.6B-Base loaded with the learner's rename, measured; SFT with adapters of the learner's
     add_lora, sft_example, sft_batch and pretrain_step; measured; the adapters merged with merge_lora; DPO with new
     adapters and dpo_step; measured. `kind` is "cpu" or "gpu", the settings of SFT, DPO and MEASURE: those of the
-    device when None. A string when it stops: "names" (rename), "run" (a module of the kit, or loading), "lora"
+    device when None. Every step of SFT and DPO goes to `show` with "look", which gives the model's answer now to the
+    first held-out question, in LOOK tokens, for the picture beside the chart; the run records that answer at the
+    moments of the rewind ("wrote", as [step, text, ended], the steps of DPO after those of SFT), and leaves the
+    seconds of looking out of its seconds (decision 1.17). A string when it stops: "names" (rename), "run" (a module of the kit, or loading), "lora"
     (add_lora), "sft" (sft_example, sft_batch or pretrain_step), "merge" (merge_lora), "dpo" (dpo_step), "memory"."""
     import torch
     from everything_ai import qwen3
@@ -293,8 +297,23 @@ def run(rename, show, kind: str | None = None) -> dict | str:
         return "memory"
     seconds["base"] = time.perf_counter() - begin
 
+    looked_for = [0.0]   # the seconds of every look, which the seconds of the run leave out
+
+    def look_now() -> tuple:   # as netview.looking looks: in eval mode, without a graph, every module back as it was
+        from everything_ai import netview
+        at = time.perf_counter()
+        try:
+            with netview.looking(model):
+                return answer(model, questions[0], enc, end, LOOK)
+        finally:
+            looked_for[0] += time.perf_counter() - at
+
+    try:
+        wrote = [[0, *look_now()]]   # before SFT: Qwen3-0.6B-Base as it came
+    except torch.OutOfMemoryError:
+        return "memory"
     # SFT with the learner's adapters and steps
-    start = time.perf_counter()
+    start, aside = time.perf_counter(), 0.0
     try:
         torch.manual_seed(0)   # the same random A on every run
         with torch.device(device):
@@ -311,6 +330,7 @@ def run(rename, show, kind: str | None = None) -> dict | str:
     order = list(range(len(examples)))
     random.Random(0).shuffle(order)
     steps, batch = SFT["steps"][kind], SFT["batch"][kind]
+    sft_steps, marks = steps, moments(steps, DPO["steps"][kind])
     opt = torch.optim.AdamW([p for p in model.parameters() if p.requires_grad], lr=SFT["lr"], weight_decay=0.0)
     model.train()
     losses = []
@@ -324,13 +344,18 @@ def run(rename, show, kind: str | None = None) -> dict | str:
             if not math.isfinite(float(loss)):
                 return "sft"
             losses.append(float(loss))
-            show({"phase": "sft", "step": step + 1, "steps": steps, "loss": losses[-1], "seconds": time.perf_counter() - start})
+            looked = time.perf_counter()
+            if step + 1 in marks:
+                wrote.append([step + 1, *look_now()])
+            show({"phase": "sft", "step": step + 1, "steps": steps, "loss": losses[-1], "seconds": looked - start - aside,
+                  "look": look_now, "question": questions[0]})
+            aside += time.perf_counter() - looked
     except torch.OutOfMemoryError:
         return "memory"
     except Exception:
         return "sft"
     model.eval()
-    seconds["sft"] = time.perf_counter() - start
+    seconds["sft"] = time.perf_counter() - start - aside
     result["sft_losses"] = losses
     try:
         result["sft"] = {"loss": answer_loss(model, sft_data["held"][:m["loss"]], enc, end),
@@ -345,7 +370,7 @@ def run(rename, show, kind: str | None = None) -> dict | str:
     except Exception:
         return "merge"
     model.requires_grad_(False)   # a merged layer is a new nn.Linear, whose weight would train; add_lora freezes it too
-    start = time.perf_counter()
+    start, aside = time.perf_counter(), 0.0
     try:
         torch.manual_seed(0)
         with torch.device(device):
@@ -375,13 +400,18 @@ def run(rename, show, kind: str | None = None) -> dict | str:
             if not isinstance(loss, (int, float)) or isinstance(loss, bool) or not math.isfinite(loss):
                 return "dpo"
             losses.append(float(loss))
-            show({"phase": "dpo", "step": step + 1, "steps": steps, "loss": losses[-1], "seconds": time.perf_counter() - start})
+            looked = time.perf_counter()
+            if sft_steps + step + 1 in marks:
+                wrote.append([sft_steps + step + 1, *look_now()])
+            show({"phase": "dpo", "step": step + 1, "steps": steps, "loss": losses[-1], "seconds": looked - start - aside,
+                  "look": look_now, "question": questions[0]})
+            aside += time.perf_counter() - looked
     except torch.OutOfMemoryError:
         return "memory"
     except Exception:
         return "dpo"
     model.eval()
-    seconds["dpo"] = time.perf_counter() - start
+    seconds["dpo"] = time.perf_counter() - start - aside
     result["dpo_losses"] = losses
     seen = [train[i] for i in order[:m["pairs"]]]   # pairs it trained on: the first of its order, all in its steps
     try:
@@ -393,8 +423,62 @@ def run(rename, show, kind: str | None = None) -> dict | str:
     except Exception:
         return "dpo"
     result["steps"] = {"sft": SFT["steps"][kind], "dpo": DPO["steps"][kind]}
-    result["seconds"] = {**seconds, "all": time.perf_counter() - begin}
+    result["wrote"] = wrote
+    result["seconds"] = {**seconds, "all": time.perf_counter() - begin - looked_for[0]}
     return result
+
+
+def moments(sft: int, dpo: int) -> list:
+    """The steps the rewind stops at, the steps of DPO after those of SFT: before SFT, halfway through it and at its
+    end, and halfway through DPO and at its end."""
+    return sorted({0, sft // 2, sft, sft + dpo // 2, sft + dpo})
+
+
+def _answer_row(question: str, text: str, ended: bool, labels: dict) -> tuple:
+    """A row of yours.writes: the question on one line, the answer, and whether it ended by itself within LOOK
+    tokens. yours.writes shows them as text, so nothing is escaped for Markdown here."""
+    flat = " ".join(question.split())
+    if len(flat) > 160:
+        flat = flat[:160].rsplit(" ", 1)[0].rstrip(" ,;:") + "…"
+    return flat + "\n", text.strip(), labels["ended"] if ended else labels["open"].format(n=LOOK), None
+
+
+def now_picture(report: dict, labels: dict) -> str:
+    """Beside the live chart (decision 1.17): the answer the model gives now to the first held-out question, once per
+    step: while the run measures after a phase, the chart keeps the answer it has. `labels`: now ({phase}, {step}),
+    ended, open ({n}), alt_now."""
+    if "seen" not in report:
+        report["seen"] = report["look"]()
+    text, ended = report["seen"]
+    return yours.writes(labels["now"].format(phase=report["phase"].upper(), step=report["step"]),
+                        [_answer_row(report["question"], text, ended, labels)], alt=labels["alt_now"])
+
+
+def rewind_frame(run: dict, at: int, labels: dict) -> tuple:
+    """A moment of the run, for the rewind after the demo (decision 1.17): the loss of every step of the phase it is
+    in, SFT or DPO, with a dashed line at that step (and ln 2 dashed under DPO); beside it the answer the model gave
+    then to the first held-out question; and the sentence under it. `at` is a step of run["wrote"], those of DPO
+    after those of SFT. `labels`: title ({phase}), x, y, alt ({phase}), lang, wrote, ended, open ({n}), alt_wrote,
+    start, after ({phase}, {step}, {steps}, {loss})."""
+    from everything_ai import chart, live
+    lang = labels.get("lang", "en")
+    sft = run["steps"]["sft"]
+    phase, losses, step = ("DPO", run["dpo_losses"], at - sft) if at > sft else ("SFT", run["sft_losses"], at)
+    top = math.ceil(max(losses) * 2) / 2
+    p = chart.Panel((0, len(losses)), (0, top), title=labels["title"].format(phase=phase), xlabel=labels["x"], ylabel=labels["y"])
+    if phase == "DPO":
+        p.line([0, len(losses)], [math.log(2)] * 2, "ink-3", 1.2, dashed=True)
+    p.line([step, step], [0, top], "ink-2", 1.2, dashed=True)
+    p.line(list(range(1, len(losses) + 1)), losses, "loss", 2.4)
+    svg = chart.figure([p], alt=labels["alt"].format(phase=phase), width=330, height=240)
+    svg = chart.with_decimal_comma(svg) if lang == "nl" else svg
+    text, ended = next((t, e) for s, t, e in run["wrote"] if s == at)
+    story = yours.writes(labels["wrote"], [_answer_row(run["questions"][0], text, ended, labels)], alt=labels["alt_wrote"])
+    if at == 0:
+        said = labels["start"]
+    else:
+        said = labels["after"].format(phase=phase, step=step, steps=len(losses), loss=number(losses[step - 1], 3, lang))
+    return live.rewound(svg, [story], width=330), said
 
 
 # --- exercise 1: rename ----------------------------------------------------------------------------------------------

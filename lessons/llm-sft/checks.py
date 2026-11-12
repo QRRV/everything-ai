@@ -238,7 +238,8 @@ def tune(model, examples: list, sft_batch, step_fn, end_id: int, show, steps: in
     llm-open-recipes, mini-batches of BATCH examples in a shuffled order, from the start again when they run out.
     `show` hears a step every second, with every (step, loss) since it last heard ("fresh"), for a live chart. With
     `snap(step, model)`, the model answers before the first step and after every steps / SNAPSHOTS steps, for the
-    replay of the run ("snapshots"). "batch" when sft_batch stops with an error, "run" when pretrain_step does,
+    replay of the run ("snapshots"), and `show` also gets "look", which lets it answer now, for the picture beside the
+    chart. "batch" when sft_batch stops with an error, "run" when pretrain_step does,
     "memory" when the device runs out of it, "diverged" when the loss is no number."""
     import torch
     steps = STEPS if steps is None else steps
@@ -255,6 +256,14 @@ def tune(model, examples: list, sft_batch, step_fn, end_id: int, show, steps: in
     marks = {round(steps * k / SNAPSHOTS) for k in range(1, SNAPSHOTS + 1)}
     snapshots = [] if snap is None else [snap(0, model)]
     model.train()
+
+    def look():
+        """What the model answers now, as at the moments of the replay (decision 1.17): snap draws with its own seed,
+        and netview.looking puts every module back in its own mode, so that looking never changes the run."""
+        from everything_ai import netview
+        with netview.looking(model):
+            return snap(step + 1, model)
+
     for step in range(steps):
         start = time.perf_counter()
         chosen = [examples[order[(step * batch + k) % len(order)]] for k in range(batch)]
@@ -280,7 +289,8 @@ def tune(model, examples: list, sft_batch, step_fn, end_id: int, show, steps: in
             losses.append({"step": step + 1, "loss": sum(recent) / len(recent)})
             recent = []
         if time.perf_counter() - last_show > 1 or step + 1 == steps:
-            show({"phase": "train", "step": step + 1, "steps": steps, "loss": loss, "seconds": seconds, "fresh": fresh})
+            show({"phase": "train", "step": step + 1, "steps": steps, "loss": loss, "seconds": seconds, "fresh": fresh,
+                  **({"look": look} if snap is not None else {})})
             fresh, last_show = [], time.perf_counter()
     model.eval()
     return {"steps": steps, "seconds": seconds, "losses": losses, "device": w["device"], "name": w["name"], "mixed": mixed,
@@ -390,6 +400,20 @@ def replay_frame(run: dict, step: int, labels: dict, reference: list | None = No
 
 
 written = P.written   # what a model wrote, safe in the sentence under a picture (llm-pretrain-capstone)
+
+
+def now_picture(report: dict, labels: dict) -> str:
+    """Beside the live chart of the run (decision 1.17): what the model answers now to the first test instruction, as
+    at the moments of the replay, after the step of the last report: the instruction in gray, its answer, and under it
+    whether it uses every word and stops by itself. `labels`: title ({step}), alt, lang, and the words used, not_used,
+    stopped and not_stopped of the replay."""
+    from everything_ai import yours
+    if "seen" not in report:   # one look per report: while the run measures, the picture keeps what it saw
+        report["seen"] = report["look"]()
+    snap, lang = report["seen"], labels.get("lang", "en")
+    note = f"{labels['used'] if snap['used'] else labels['not_used']}; {labels['stopped'] if snap['ended'] else labels['not_stopped']}"
+    return yours.writes(labels["title"].format(step=number(report["step"], 0, lang)),
+                        [(instruction(snap["words"]), snap["text"], note, snap["used"])], alt=labels["alt"])
 
 
 def example(before: dict, after: dict) -> dict:

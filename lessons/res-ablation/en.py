@@ -239,7 +239,7 @@ def text_demo():
     mo.md(f"""
     ### Step 4: the run without positions
 
-    The button trains your GPT once more, {_where}, exactly as in [Project: train your GPT on a book](/course/open/gpt-train-chars?lang=en): the same plan, {_p['epochs']} epochs and seed 0, with your `no_positions` applied before it trains.{_time} While it trains, the cell shows the loss after every epoch, and the rest of the lesson waits; the stop button of the cell ends the run early. Below, your run stands next to the run with positions: yours, if you trained one on this computer, or else the course's.
+    The button trains your GPT once more, {_where}, exactly as in [Project: train your GPT on a book](/course/open/gpt-train-chars?lang=en): the same plan, {_p['epochs']} epochs and seed 0, with your `no_positions` applied before it trains.{_time} While it trains, a chart shows the loss eight times per epoch and after every epoch, with what your GPT without positions expects next at three places in the text it validates on beside it, and the rest of the lesson waits. The stop button of the cell ends the run early; after the run you can rewind through the epochs. Below, your run stands next to the run with positions: yours, if you trained one on this computer, or else the course's.
     """)
     return
 
@@ -254,15 +254,34 @@ def ablation_button_cell():
 @app.cell(hide_code=True)
 def demo_ablation(ablation_button, result_nopos):
     result_nopos  # run again when exercise 1 saves your no_positions
-    _labels = {"title": "Your run without positions", "x": "epoch", "y": "loss", "lang": L.lang, "guess": "guessing evenly", "mlp": "your MLP", "train": "training", "val": "validation"}
+    _labels = {"title": "Your run without positions", "x": "epoch", "y": "loss", "lang": L.lang, "guess": "guessing evenly", "mlp": "your MLP", "train": "training", "val": "validation", "start": "**Before the first epoch**", "after": "**After epoch {epoch}** · validation loss {loss}"}
+
+    _now = {}   # the live chart, made at the first report, and the last report
+    _guess = {"title": "What your GPT without positions expects next now", "then": "What it expected next after epoch {epoch}", "before": "What it expected next before the first epoch",
+              "read": "it read", "next": "next", "guesses": "its three guesses", "lang": "en",
+              "alt": "At three places near the end of the book, in the text it validates on and never trained on: the end of what your GPT without positions read, the character that follows, and its three likeliest next characters with their chances. A space is shown as ␣, a new line as ↵."}
 
     def _progress(_p):
         _m = 1 if _p["left"] is None else max(1, round(_p["left"] / 60))
         _left = "" if _p["left"] is None else f" · about {_m} {'minutes' if _m > 1 else 'minute'} left"
-        _parts = [mo.md(f"**Epoch {_p['epoch']} of {_p['epochs']}** · step {_p['step']} of {_p['steps']}{_left}")]
-        if _p["history"]:
-            _parts.append(mo.Html(C.T.history_picture(_p["history"], {**_labels, "alt": "The training and validation loss of your run without positions so far, after every epoch."}, _p["epochs"])))
-        mo.output.replace(mo.vstack(_parts))
+        if "chart" not in _now:
+            _now["chart"] = L.live({"title": "Your run without positions", "x": "epoch", "y": "loss",
+                                    "alt": "The loss of your run without positions so far: on the training windows eight times per epoch, and dashed on the validation windows after every epoch; thin gray lines at the loss of guessing evenly and at that of your MLP."},
+                                   _p["epochs"], window=4, key=[("loss", False, "training, eight times per epoch"), ("loss", True, "validation, after every epoch")])
+            _now["chart"].reference([(0, C.T.GUESS_LOSS), (_p["epochs"], C.T.GUESS_LOSS)], "guessing evenly", role="ink-3")
+            _now["chart"].reference([(0, C.T.MLP_LOSS), (_p["epochs"], C.T.MLP_LOSS)], "your MLP", role="ink-3")
+            _now["chart"].watch(lambda: C.T.now_picture(_now["last"], _guess))   # what it expects next now, beside the chart
+            _now["val"] = []
+        _now["last"] = _p
+        if "val_loss" in _p:   # the validation windows after every epoch, dashed
+            _now["val"].append((_p["epoch"], _p["val_loss"]))
+            _now["chart"].reference(_now["val"], "", role="loss", replace=True)
+            _now["chart"].line(f"**Epoch {_p['epoch']} of {_p['epochs']}** · validation loss {C.number(_p['val_loss'], 3, L.lang)}{_left}")
+        elif "loss" in _p:   # the training windows, eight times per epoch
+            _now["chart"].add(_p["epoch"] - 1 + _p["batch"] / _p["batches"], _p["loss"],
+                              f"**Epoch {_p['epoch']} of {_p['epochs']}** · batch {_p['batch']} of {_p['batches']} · loss {C.number(_p['loss'], 3, L.lang)}{_left}")
+        else:
+            _now["chart"].line(f"**Epoch {_p['epoch']} of {_p['epochs']}** · batch {_p['batch']} of {_p['batches']}{_left}")
 
     _result = C.train(_progress) if ablation_button.value else C.last_run()
     if _result is None and result_nopos.state == "correct" and not ablation_button.value:
@@ -280,15 +299,18 @@ def demo_ablation(ablation_button, result_nopos):
         _h = _result["history"]
         _stopped = f" You stopped the run after epoch {len(_h)} of {_result['epochs']}, so compare with care." if _result["stopped"] else ""
         _stand = "" if not _result.get("stand_ins") else " The course's version stood in for " + ", ".join(f"`{_m}`" for _m in _result["stand_ins"]) + ", as the note at exercise 1 says."
+        _rewind = [L.explore("rewind", "epoch", lambda _e: C.T.rewind_frame(_result, int(_e), {**_labels, "alt": f"The training and validation loss of your run without positions after every epoch: the validation loss is lowest after epoch {_result['best_epoch']}, at {C.number(_result['best'], 2, L.lang)}."}, _guess),
+                             start=len(_h), values=list(range(len(_h) + 1)), role="",
+                             task="Go back to before the first epoch, then forward: what does your GPT without positions learn to expect, and where does it stay unsure?")] if C.T.rewinds(_result) else []
         if _control is None:
-            _out = mo.md(f"Without positions, your GPT reached a validation loss of {C.number(_result['best'], 3, L.lang)} after epoch {_result['best_epoch']}.{_stopped}{_stand} Train your GPT with positions in [Project: train your GPT on a book](/course/open/gpt-train-chars?lang=en) to compare.")
+            _out = mo.vstack(_rewind + [mo.md(f"Without positions, your GPT reached a validation loss of {C.number(_result['best'], 3, L.lang)} after epoch {_result['best_epoch']}.{_stopped}{_stand} Train your GPT with positions in [Project: train your GPT on a book](/course/open/gpt-train-chars?lang=en) to compare.")])
         else:
             _whose = "your run of [Project: train your GPT on a book](/course/open/gpt-train-chars?lang=en)" if _who == "yours" else "the course's run of the same plan, with seed 0"
             _d = _result["best"] - _control["best"]
             _diffs = C.course_differences("cpu" if _result["device"] == "cpu" else "gpu")
             _course = "" if not _diffs else f" In the course's {'runs' if len(_diffs) > 1 else 'run'} of this plan{', seed by seed' if len(_diffs) > 1 else ', with seed 0'}, the difference without positions minus with them was {', '.join(C.signed(_x, 3, L.lang) for _x in _diffs)}."
             _rows = [("full GPT", C.number(_control["best"], 3, L.lang)), ("without positions", C.number(_result["best"], 3, L.lang))]
-            _out = mo.vstack([
+            _out = mo.vstack(_rewind + [
                 mo.Html(C.pair_picture(_control["history"], _h, {"title": "Validation loss", "x": "epoch", "y": "loss", "lang": L.lang, "guess": "guessing evenly",
                                                                   "with": "with positions", "without": "without",
                                                                   "alt": f"The validation loss after every epoch, with positions down to {C.number(_control['best'], 2, L.lang)} and without positions down to {C.number(_result['best'], 2, L.lang)}."},

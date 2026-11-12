@@ -322,7 +322,7 @@ def text_demo_measure():
     mo.md(f"""
     ### Je run, stap 2: meten en plannen
 
-    De knop klokt {C.PROBE_STEPS} stappen van je `pretrain_step` op het model met diepte {C.PROBE}, in FP32 en in BF16, neemt de snelste, en plant met je `plan_run` een run van {C.MINUTES} minuten. Het plan wordt in je project bewaard: om verder te gaan met een run die stopte, druk je opnieuw op *Pretrain* zonder opnieuw te meten.
+    De knop klokt {C.PROBE_STEPS} stappen van je `pretrain_step` op het model met diepte {C.PROBE}, in FP32 en in BF16, neemt de snelste, en plant met je `plan_run` een run van {C.MINUTES} minuten. Het plan wordt in je project bewaard: om verder te gaan met een run die stopte, druk je opnieuw op *Pretrain* zonder opnieuw te meten. Terwijl je model pretraint, laat een grafiek zijn loss zien, met ernaast wat het nu schrijft na *{C.START}*.
     """)
     return
 
@@ -368,22 +368,31 @@ def train_button_cell(plan):
 
 @app.cell(hide_code=True)
 def demo_train(box_step, plan, train_button):
-    _labels = {"title": "Validation loss tijdens de run", "x": "geziene tokens", "y": "validation loss per token",
-               "reference": f"diepte {C.S.BIG}, scaling law", "lang": L.lang, "alt": "De validation loss van je run tot nu toe."}
     trained = None
     _note = None
     if train_button.value and plan is None:
         _note = "*Meet eerst deze computer: de run volgt zijn plan.*"
     elif train_button.value:
-        _seen = []
+        _now = {}   # de live grafiek, gemaakt bij het eerste verslag, en het laatste verslag
+        _wrote = {"now": "Wat je model nu schrijft",
+                  "alt": "Wat je model nu schrijft na “Once upon a time”: 60 tokens, telkens met dezelfde seed getrokken, zodat alleen je model verandert."}
 
         def _progress(_p):
-            if _p["phase"] == "eval":
-                _seen.append(_p)
-            _parts = [mo.md(f"**Stap {C.number(_p['step'], 0, L.lang)} van {C.number(_p['steps'], 0, L.lang)}** · {C.number(_p['seconds'] / 60, 1, L.lang)} minuten")]
-            if _seen:
-                _parts.append(mo.Html(C.curve_picture([(_seen, False)], C.S.MEASURED["big"]["val"], _labels)))
-            mo.output.replace(mo.vstack(_parts))
+            if "chart" not in _now:
+                _now["chart"] = L.live({"title": "Jouw run", "x": "stap", "y": "loss per token",
+                                        "alt": f"De loss per token van je run tot nu toe: op de mini-batches van de stappen, en gestreept op de validation set bij elke meting; een dunne grijze lijn bij de validation loss van diepte {C.S.BIG} van de scaling law."},
+                                       _p["steps"], window=20, look_every=5.0, key=[("loss", False, "training"), ("loss", True, "validation, bij elke meting")])
+                _now["chart"].reference([(0, C.S.MEASURED["big"]["val"]), (_p["steps"], C.S.MEASURED["big"]["val"])], f"diepte {C.S.BIG}, scaling law", role="ink-3")
+                _now["chart"].watch(lambda: C.now_picture(_now["last"], _wrote))   # wat je model nu schrijft, naast de grafiek
+                _now["val"] = []
+            _now["last"] = _p
+            _time = f"{C.number(_p['seconds'] / 60, 1, L.lang)} minuten"
+            if _p["phase"] == "eval":   # de validation set bij elke meting, gestreept
+                _now["val"].append((_p["step"], _p["val"]))
+                _now["chart"].reference(_now["val"], "", role="loss", replace=True)
+                _now["chart"].line(f"**Stap {C.number(_p['step'], 0, L.lang)} van {C.number(_p['steps'], 0, L.lang)}** · validation loss {C.number(_p['val'], 3, L.lang)} · {_time}")
+            else:
+                _now["chart"].add(_p["step"], _p["loss"], f"**Stap {C.number(_p['step'], 0, L.lang)} van {C.number(_p['steps'], 0, L.lang)}** · loss {C.number(_p['loss'], 3, L.lang)} · {_time}")
         _r = C.run_plan(plan, run_code(box_step.value).names["pretrain_step"], _progress)
         if _r == "data":
             _note = "*Er zijn nog geen shards van de run: druk eerst op* Haal de verhalen op*.*"

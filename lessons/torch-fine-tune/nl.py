@@ -244,16 +244,52 @@ def text_demo():
     mo.md(r"""
     ### Jouw twee fases op de cijfers van de oude scanner
 
-    De cel hieronder geeft de echte training loop van de course, op de 100 gelabelde cijfers, aan jouw `fine_tune` zodra die klopt, anders aan die van de course, en test het resultaat op de 1.000 gespikkelde testcijfers, naast fase 1 alleen. Dat duurt een paar seconden.
+    De cel hieronder geeft de echte training loop van de course, op de 100 gelabelde cijfers, aan jouw `fine_tune` zodra die klopt, anders aan die van de course, en test het resultaat op de 1.000 gespikkelde testcijfers, naast fase 1 alleen. Dat duurt een paar seconden. Terwijl elke run traint, toont een grafiek zijn loss op de 100 trainingscijfers na elke epoch, en gestreept op de 1.000 testcijfers bij de epochs waar je naar terug kunt spoelen: eerst van fase 1 alleen, dan van de twee fases van `fine_tune` na elkaar, met de test loss van fase 1 alleen dun en gestreept ernaast. Naast of onder de grafiek staat wat de cijferlezer op dat moment gokt bij één gespikkeld testcijfer van elke soort, en daaronder wat zijn layer `conv2` maakt van een gespikkelde 9; allebei worden ze opnieuw getekend terwijl hij traint. Daarna kun je door beide fases terugspoelen.
     """)
     return
 
 
 @app.cell(hide_code=True)
 def demo_tune(box_tune, result_tune):
-    _d = C.demo(box_tune.value if result_tune.state == "correct" else None)
+    _now = {}   # the live chart of each run, made at its first report, and its test loss so far
+    _heads = {"frozen": {"guesses": "De cijferlezer: wat hij gokt bij één gespikkeld testcijfer van elke soort",
+                         "layer": "Wat zijn layer {name} maakt van een gespikkelde 9: bevroren, dus na elke epoch hetzelfde"},
+              "tuned": {"guesses": "De cijferlezer: wat hij gokt bij één gespikkeld testcijfer van elke soort",
+                        "layer": "Wat zijn layer {name} maakt van een gespikkelde 9: in fase 1 bevroren, in fase 2 leert hij mee"}}
+
+    def _progress(_p):
+        _run = _p["run"]
+        if _run not in _now or _p["epoch"] == 1:   # a new run, also when the course's runs again in place of yours
+            _tu = _run == "tuned"
+            _now[_run] = L.live({"title": "Beide fases" if _tu else "Fase 1 alleen", "x": "epoch", "y": "loss",
+                                 "alt": "De loss van beide fases tot nu toe: op de 100 trainingscijfers na elke epoch, en gestreept op de 1.000 testcijfers bij de epochs van het terugspoelen; dun en gestreept de test loss van fase 1 alleen." if _tu else "De loss in fase 1 alleen tot nu toe: op de 100 trainingscijfers na elke epoch, en gestreept op de 1.000 testcijfers bij de epochs van het terugspoelen."}, _p["epochs"], low=0.0,
+                                key=[("loss", False, "100 trainingscijfers, elke epoch"), ("loss", True, "1.000 testcijfers, bij de epochs van het terugspoelen")])
+            _now[_run].watch(lambda: C.now_pictures(_p["look"](), _heads[_run], L.lang, f"nv-tune-{_run}-now"))
+            _now[_run + "-test"] = []
+            if _tu and "frozen-test" in _now:   # the test loss of phase 1 alone, thin and dashed
+                _now["tuned"].reference(_now["frozen-test"], "fase 1 alleen", role="ink-2")
+        _who = "Beide fases" if _run == "tuned" else "Fase 1 alleen"
+        _line = f"**{_who}** · fase {_p['phase']} · epoch {_p['epoch']} van {_p['epochs']} · loss {L.number(_p['loss'], 3)}"
+        if "val_loss" in _p:   # the test digits at the epochs of the rewind, dashed
+            _now[_run + "-test"].append((_p["epoch"], _p["val_loss"]))
+            _now[_run].reference(_now[_run + "-test"], "", role="loss", replace=True)
+            _line += f" · test loss {L.number(_p['val_loss'], 3)}"
+        _now[_run].add(_p["epoch"], _p["loss"], _line)
+
+    _d = C.demo(box_tune.value if result_tune.state == "correct" else None, _progress)
     _who = "jouw `fine_tune`" if _d["yours"] else "de `fine_tune` van de course"
-    mo.md(f"""Met {_who}, van de 1.000 gespikkelde testcijfers:
+    _labels = {"title": "Loss op de testcijfers", "x": "epoch", "y": "test loss", "frozen": "fase 1 alleen", "alt": "De loss op de 1.000 testcijfers door beide fases heen, bij de epochs van het terugspoelen, en dun en gestreept die van fase 1 alleen."}
+    _when = [_e for _e, _ in _d["tests"]["tuned"]] if len(_d["looked"]["tuned"]) == len(_d["tests"]["tuned"]) and all(_d["looked"]["tuned"]) else []
+
+    def _frame(_e):
+        _e = int(_e)
+        _i = _when.index(_e)
+        _k = _d["phases"]["tuned"][_i]
+        _right = sum(_g == _t for _g, _t in zip(_d["looked"]["tuned"][_i], _d["truth"]))
+        return (C.epoch_frame(_d, _e, _labels, _heads["tuned"], L.lang),
+                f"Na epoch {_e}, in fase {_k}: van deze 10 testcijfers leest de cijferlezer er {_right} goed.")
+
+    _table = mo.md(f"""Met {_who}, van de 1.000 gespikkelde testcijfers:
 
 | | goed gelezen |
 |---|---|
@@ -261,6 +297,12 @@ def demo_tune(box_tune, result_tune):
 | beide fases: na fine-tuning | {_d['tuned']} |
 
 Over 5 seeds, met de code van de course: {C.REFERENCE['frozen'][0]} tot {C.REFERENCE['frozen'][1]} na fase 1 alleen, {C.REFERENCE['tuned'][0]} tot {C.REFERENCE['tuned'][1]} na fine-tuning. Bij elke seed leest fine-tuning er {C.REFERENCE['gain'][0]} tot {C.REFERENCE['gain'][1]} cijfers meer goed: een kleine winst, bovenop wat de geleende features al gaven.""")
+    if len(_when) > 1:   # rewinding through both phases
+        _out = mo.vstack([L.explore("rewind", "epoch", _frame, start=_when[-1], values=_when, role="",
+                                    task="Ga door fase 1 en verder in fase 2: wanneer begint layer `conv2` te veranderen, en veranderen de gokken mee?"), _table])
+    else:
+        _out = _table
+    _out
     return
 
 

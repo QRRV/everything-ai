@@ -230,7 +230,7 @@ def text_demo():
     mo.md(r"""
     ### Step 4: run the experiment
 
-    Pick the setting to change; the control run has a learning rate of 0.001, a warmup of 100 steps and 2 layers. The button trains the control run of the worked example, and then the variant that your `one_change` makes of it: two runs of a small GPT of about 110,000 parameters (210,000 with 4 layers), with your `GPT`, `gpt_loaders` and `Trainer`, on the first quarter of Tiny Shakespeare, on the CPU. Each run takes about half a minute to a minute, a variant with 4 layers about twice as long. While it trains, the rest of the lesson waits; the stop button of the cell ends it. Meanwhile a chart shows the validation loss after every epoch: first of the control run, then of the variant, with the control run dashed beside it.
+    Pick the setting to change; the control run has a learning rate of 0.001, a warmup of 100 steps and 2 layers. The button trains the control run of the worked example, and then the variant that your `one_change` makes of it: two runs of a small GPT of about 110,000 parameters (210,000 with 4 layers), with your `GPT`, `gpt_loaders` and `Trainer`, on the first quarter of Tiny Shakespeare, on the CPU. Each run takes about half a minute to a minute, a variant with 4 layers about twice as long. While it trains, the rest of the lesson waits; the stop button of the cell ends it. Meanwhile a chart shows the validation loss after every epoch: first of the control run, then of the variant, with the control run dashed beside it. Beside the chart is what the model writes now after `ROMEO:`, every character drawn from its probabilities as in [Sampling: let the model write](/course/open/lm-sampling?lang=en), with the same seed each time. After the experiment you can rewind both runs, epoch by epoch, with what both models wrote.
     """)
     return
 
@@ -258,37 +258,50 @@ def demo_experiment(box_change, change_choice, result_change, run_button):
         if _differ != [_name]:
             _out = mo.md(f"*The variant differs from the control in {', '.join(f'`{_d}`' for _d in _differ) or 'nothing'}, not in `{_name}` alone. Check exercise 1 again.*")
         else:
-            _runs, _lives = [], {}   # the live chart of each run, made at its first report
+            _runs = []
+            _now = {}   # the live chart of each run, made at its first report; and the last report, for the story beside it
+            _wrote = {"now": "What it writes now, in epoch {epoch}",
+                      "alt_now": "What the model writes now after ROMEO: and a new line, which are in gray: every character drawn from its probabilities, with the same seed each time."}
 
-            def _hear(_e, _k):
-                if _k not in _lives:
-                    _lives[_k] = L.live({"title": ("The control run: the validation loss", "The variant: the validation loss")[_k], "x": "epoch", "y": "validation loss",
-                                         "alt": ("The validation loss of the control run after every epoch so far.", "The validation loss of the variant after every epoch so far; dashed, that of the control run.")[_k]}, _e["epochs"])
-                    if _k == 1 and 0 in _lives:
-                        _lives[1].reference(list(zip(_lives[0].xs, _lives[0].ys)), "control", role="loss")
+            def _progress(_e, _k):
+                if _k not in _now:
+                    _now[_k] = L.live({"title": ("The control run: the validation loss", "The variant: the validation loss")[_k], "x": "epoch", "y": "validation loss",
+                                         "alt": ("The validation loss of the control run after every epoch so far.", "The validation loss of the variant after every epoch so far; dashed, that of the control run.")[_k]}, _e["epochs"], look_every=2.0)
+                    _now[_k].watch(lambda _k=_k: C.now_picture(_now[("last", _k)], _wrote))   # what the model writes now, beside the chart
+                    if _k == 1 and 0 in _now:
+                        _now[1].reference(list(zip(_now[0].xs, _now[0].ys)), "control", role="loss")
+                _now[("last", _k)] = _e
                 _who = ("The control run", "The variant")[_k]
                 if "val_loss" in _e:
-                    _lives[_k].add(_e["epoch"], _e["val_loss"], f"**{_who}** · epoch {_e['epoch']} of {_e['epochs']} · validation loss {C.number(_e['val_loss'], 3, L.lang)}")
+                    _now[_k].add(_e["epoch"], _e["val_loss"], f"**{_who}** · epoch {_e['epoch']} of {_e['epochs']} · validation loss {C.number(_e['val_loss'], 3, L.lang)}")
                 else:
-                    _lives[_k].line(f"**{_who}** · epoch {_e['epoch']} of {_e['epochs']} · batch {_e['batch']} of {_e['batches']}")
+                    _now[_k].line(f"**{_who}** · epoch {_e['epoch']} of {_e['epochs']} · batch {_e['batch']} of {_e['batches']}")
 
             mo.output.replace(mo.md("*The control run · starting …*"))   # until the first batches of the control run
             for _k, _settings in enumerate((C.CONTROL, _variant)):
-                _h = C.run(_settings, hear=lambda _e, _k=_k: _hear(_e, _k))
+                _h = C.run(_settings, hear=lambda _e, _k=_k: _progress(_e, _k))
                 if isinstance(_h, str):
                     break
                 _runs.append(_h)
             if len(_runs) < 2:
                 _note = "*You stopped the experiment before both runs were done. Press the button to start it again.*" if _h == "stopped" else "*A run stops with an error. Do your modules in `work/projects/llm/` and `work/projects/nn/` still pass their checks? Delete a file you changed, and check its exercise again.*"
-                _last = next((_lives[_j] for _j in (1, 0) if _j in _lives and _lives[_j].xs), None)   # a run that stops keeps its chart so far
+                _last = next((_now[_j] for _j in (1, 0) if _j in _now and _now[_j].xs), None)   # a run that stops keeps its chart so far
                 _out = _last.stopped(_note) if _last else mo.md(_note)
             else:
                 _c, _v = _runs[0][-1]["val_loss"], _runs[1][-1]["val_loss"]
                 _ref = C.REFERENCE.get(f"{_name}={_value}")
                 _course = "" if not _ref else f" In the course's runs with seeds 0, 1 and 2, the control ended at {C.number(_ref['control'][0], 3, L.lang)} to {C.number(_ref['control'][1], 3, L.lang)}, and this variant lower than the control with every seed, by {C.number(_ref['lower'][0], _ref['lower'][2], L.lang)} to {C.number(_ref['lower'][1], _ref['lower'][2], L.lang)}."
                 _who = "" if _yours else " Exercise 1 is not right yet, so the course's `one_change` made the variant."
+                _rewind = {**_labels, "alt": "The validation loss after every epoch of both runs, the control dashed, with a dashed line at the chosen epoch.",
+                           "wrote": "What both wrote at that moment",
+                           "alt_wrote": "What the control model and the variant wrote after epoch {epoch}, after ROMEO: and a new line, which are in gray, with the same seed each time.",
+                           "start": "**Before the first epoch**", "after": "**After epoch {epoch}** · validation loss: control {control_loss}, variant {variant_loss}"}
+                _pic = L.explore("rewind", "epoch", lambda _v: C.rewind_frame(_runs[0], _runs[1], int(_v), _rewind), start=len(_runs[0]),
+                                 values=list(range(len(_runs[0]) + 1)), role="",
+                                 task="Go back to before the first epoch, then forward: does the variant write differently from the control, or only with a lower loss?") \
+                    if C.rewinds(_runs[0], _runs[1]) else mo.Html(C.curves_picture(_runs[0], _runs[1], {**_labels, "alt": f"The validation loss after every epoch: the control ends at {C.number(_c, 3, L.lang)}, the variant at {C.number(_v, 3, L.lang)}."}))
                 _out = mo.vstack([
-                    mo.Html(C.curves_picture(_runs[0], _runs[1], {**_labels, "alt": f"The validation loss after every epoch: the control ends at {C.number(_c, 3, L.lang)}, the variant at {C.number(_v, 3, L.lang)}."})),
+                    _pic,
                     mo.md(f"After {len(_runs[0])} epochs, the control run ended at a validation loss of {C.number(_c, 3, L.lang)}, and the variant, with `{_name} = {_value}`, at {C.number(_v, 3, L.lang)}.{_course}{_who}"),
                 ])
     _out

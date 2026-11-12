@@ -425,9 +425,11 @@ def picture(tr: Trace, lang: str, chosen: int | None = None, uid: str = "nv", sc
     return yours.figure(title, body, alt=title + (". " + tr.error if tr.error else ""))
 
 
-def _chosen(l: Layer, lang: str, uid: str) -> list[str]:
+def _chosen(l: Layer, lang: str, uid: str, plain: bool = False) -> list[str]:
     """The chosen layer under the network: its line (name, kind, shapes, parameters) and its first feature maps, or its
-    first values when it gives a vector, with what they are. `uid` keeps the masks apart on one page."""
+    first values when it gives a vector, with what they are. `uid` keeps the masks apart on one page. With `plain`,
+    the maps are the pictures the layer makes, in words a lesson before the convolution lessons knows, without
+    "channel" and "feature map"."""
     text = "font-size:{}px;color:var(--ea-{});margin:{}"
     kind = " + ".join([_kind(l.module) + _settings(l.module)] + l.with_it)
     line = course.phrase("net-layer", lang, name=l.name, kind=kind, shape_in=_shape_text(l.shape_in),
@@ -440,10 +442,11 @@ def _chosen(l: Layer, lang: str, uid: str) -> list[str]:
         cells = "".join(
             f'<div style="{text.format(12, "ink-2", "0")};text-align:center">'
             f'{_masked(f"{uid}-{k}", _mask(a[k]), 64, 64)}'
-            f'{_esc(course.phrase("net-channel", lang, k=k))}</div>' for k in range(n))
+            f'{_esc(course.phrase("net-picture" if plain else "net-channel", lang, k=k))}</div>' for k in range(n))
         out.append(f'<div style="display:flex;flex-wrap:wrap;gap:0.3rem 0.4rem">{cells}</div>')
-        said = (course.phrase("net-maps-all", lang, n=n) if n == total
-                else course.phrase("net-maps-some", lang, n=n, total=_whole(total, lang)))
+        word = "net-pictures" if plain else "net-maps"
+        said = (course.phrase(word + "-all", lang, n=n) if n == total
+                else course.phrase(word + "-some", lang, n=n, total=_whole(total, lang)))
     else:
         v = a.reshape(-1)
         n = min(_SHOWN_VALUES, v.shape[0])
@@ -470,11 +473,12 @@ def looking(model: nn.Module):
     and without a graph, and afterwards every module back in its own mode, also when the look stops with an error. So
     looking takes no step and changes no running statistics, and a random number the learner's network draws while
     it is looked at, such as with F.dropout, which does not follow eval mode, is drawn again in the run: the random
-    state is put back. So the run stays the same."""
+    state is put back, of the CPU and of every NVIDIA GPU the model is on. So the run stays the same."""
     modes = [(m, m.training) for m in model.modules()]
+    gpus = sorted({t.device.index or 0 for t in list(model.parameters()) + list(model.buffers()) if t.device.type == "cuda"})
     try:
         model.eval()
-        with torch.no_grad(), torch.random.fork_rng(devices=[]):
+        with torch.no_grad(), torch.random.fork_rng(devices=gpus):
             yield model
     finally:
         for m, mode in modes:
@@ -508,10 +512,11 @@ def kept(l: Layer) -> Layer:
     return Layer(l.name, l.module, l.shape_in, l.shape_out, a, l.params, list(l.with_it), l.fed, l.joined, l.done)
 
 
-def layer_picture(l: Layer, title: str, lang: str, uid: str = "nv-layer") -> str:
+def layer_picture(l: Layer, title: str, lang: str, uid: str = "nv-layer", plain: bool = False) -> str:
     """One layer of the network without the boxes of the whole network: its line and its first feature maps, under
-    `title`. Beside the chart of a run while it trains (decision 1.17), and in a rewind through that run."""
-    body = f'<div class="ea-netview" style="font-family:var(--ea-font-ui);line-height:1.45">{"".join(_chosen(l, lang, uid))}</div>'
+    `title`. Beside the chart of a run while it trains (decision 1.17), and in a rewind through that run. `plain` as
+    for _chosen."""
+    body = f'<div class="ea-netview" style="font-family:var(--ea-font-ui);line-height:1.45">{"".join(_chosen(l, lang, uid, plain))}</div>'
     return yours.figure(title, body, alt=title)
 
 
@@ -537,13 +542,14 @@ def watched(model: nn.Module, x: torch.Tensor, name: str | None = None, first: b
         return None
 
 
-def moment(picture: str, l: Layer | None, title: str, lang: str, uid: str, **fields) -> list[str]:
+def moment(picture: str, l: Layer | None, title: str, lang: str, uid: str, plain: bool = False, **fields) -> list[str]:
     """What a demo shows of its network at one moment of a run (decision 1.17): `picture`, what the network makes,
     and under it the layer it watches (None: no layer), under `title` with {name} the layer's name and `fields`
-    filled in. `uid` keeps the masks of the layer apart from those of another picture on the page."""
+    filled in. `uid` keeps the masks of the layer apart from those of another picture on the page; `plain` as for
+    _chosen."""
     if l is None or l.out is None:
         return [picture]
-    return [picture, layer_picture(l, title.format(name=l.name, **fields), lang, uid)]
+    return [picture, layer_picture(l, title.format(name=l.name, **fields), lang, uid, plain)]
 
 
 def hearing(model: nn.Module, shown: torch.Tensor, truth: list, example: torch.Tensor, show, guesses: list,

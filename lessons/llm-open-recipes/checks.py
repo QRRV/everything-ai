@@ -39,6 +39,14 @@ SPEEDRUN = {"depth": 24, "ratio": 8, "vocab": 2 ** 15}
 # The demo: the learner's ModernGPT at nanochat's rule for DEPTH, on windows of BLOCK tokens of the shards.
 DEPTH, BLOCK, BATCH, STEPS = 4, 256, 16, 300
 PEAK = 3e-3                                                # AdamW's learning rate at the top of the schedule
+WRITE, MOMENTS = 40, 6   # the story the model writes beside the chart and in the rewind: WRITE tokens; the rewind stops
+                         # before the first step and after every sixth of the run (decision 1.17)
+
+
+def moments(steps: int | None = None) -> list:
+    """The steps the rewind stops at: before the first one and after every sixth of a run of `steps` (STEPS)."""
+    steps = STEPS if steps is None else steps
+    return sorted({round(steps * k / MOMENTS) for k in range(MOMENTS + 1)})
 SCHEDULE = {"warmup": 40, "warmdown": 0.65, "final": 0.05}  # nanochat's defaults in scripts/base_train.py
 
 
@@ -66,8 +74,10 @@ def run(lr_multiplier, show) -> dict | str:
     """The demo: the learner's ModernGPT at nanochat's size for DEPTH, trained for STEPS steps of BATCH windows of
     BLOCK tokens of the shards of llm-data-pipeline (written first with the course's versions when they are missing),
     with AdamW at PEAK times the learner's lr_multiplier. `show` gets the step and the loss every 10 steps, and the loss
-    of each of those steps ("fresh"). "run" when a module of the learner stops with an error; else the losses, and the
-    validation loss per token and per character."""
+    of each of those steps ("fresh"), and "look", which lets the model write a story now, for the picture beside the
+    chart. "run" when a module of the learner stops with an error; else the losses, the validation loss per token and
+    per character, and the stories the model wrote at the moments of the rewind. The seconds are those of training,
+    without the time the stories take."""
     import numpy as np
     import torch
     from torch.utils.data import DataLoader
@@ -90,7 +100,23 @@ def run(lr_multiplier, show) -> dict | str:
     opt = torch.optim.AdamW(model.parameters(), lr=PEAK, weight_decay=0.1)
     loader = DataLoader(train, batch_size=BATCH, shuffle=True, generator=torch.Generator().manual_seed(0))
     batches = iter(loader)
-    losses, start = [], time.perf_counter()
+    words = run_code("from llm.encode import encode\nfrom llm.decode import decode")
+    merges = D.tokenizer()["merges"]
+
+    def write_now() -> str | None:
+        """WRITE tokens of a story from "Once upon a time", drawn at temperature TAU as in gpt-generate, with its own
+        seed: looked at as netview.looking looks, so that the run stays the same. None when it stops with an error."""
+        from everything_ai import netview
+        try:
+            with netview.looking(model):
+                text = D.B.write(model, merges, BLOCK, 0, words.names["decode"], words.names["encode"], length=WRITE)
+            return text[len(D.B.START):] if text.startswith(D.B.START) else text   # the story after its start, which the picture shows in gray
+        except Exception:
+            return None
+
+    marks = moments()
+    wrote = {0: write_now()} if 0 in marks else {}
+    losses, start, aside = [], time.perf_counter(), 0.0   # aside: the seconds of the stories, not of training
     for step in range(STEPS):
         try:
             xb, yb = next(batches)
@@ -111,9 +137,13 @@ def run(lr_multiplier, show) -> dict | str:
         torch.nn.utils.clip_grad_norm_(model.parameters(), 1.0)
         opt.step()
         losses.append(loss.item())
+        looked = time.perf_counter()
+        if step + 1 in marks:
+            wrote[step + 1] = write_now()
         if step % 10 == 9:
-            show({"step": step + 1, "steps": STEPS, "loss": sum(losses[-10:]) / 10, "seconds": time.perf_counter() - start,
-                  "fresh": list(zip(range(step - 8, step + 2), losses[-10:]))})   # its last 10 steps, for the live chart
+            show({"step": step + 1, "steps": STEPS, "loss": sum(losses[-10:]) / 10, "seconds": looked - start - aside,
+                  "fresh": list(zip(range(step - 8, step + 2), losses[-10:])), "look": write_now})   # its last 10 steps, for the live chart
+        aside += time.perf_counter() - looked
     model.eval()
     total, count = 0.0, 0
     with torch.no_grad():
@@ -128,7 +158,8 @@ def run(lr_multiplier, show) -> dict | str:
     bytes_per_token = D.MEASURED["chars"] / info["ids"]   # TinyStories here is ASCII: a character is a byte
     curve = [sum(losses[i:i + 10]) / 10 for i in range(0, STEPS, 10)]
     return {"curve": curve, "val": per_token, "per_char": per_token / bytes_per_token, "device": device,
-            "seconds": time.perf_counter() - start, "params": sum(p.numel() for p in model.parameters()), "dim": dim, "heads": heads}
+            "seconds": time.perf_counter() - start - aside, "params": sum(p.numel() for p in model.parameters()), "dim": dim,
+            "heads": heads, "wrote": wrote}
 
 
 def nanochat_multiplier(step: int, steps: int) -> float:
@@ -169,18 +200,40 @@ def course_curve() -> list:
     return [(10 * (k + 1), v) for k, v in enumerate(MEASURED["curve"])]
 
 
-def curve_picture(curves: list, labels: dict) -> str:
+def curve_picture(curves: list, labels: dict, at: int | None = None) -> str:
     """The training loss per token, averaged over every 10 steps: `curves` is a list of (values, dashed), the learner's
-    run solid and the course's dashed."""
+    run solid and the course's dashed. With `at`, a dashed line at that step, for the rewind."""
     from everything_ai import chart
     top = max(max(v) for v, _ in curves)
     panel = chart.Panel((0, STEPS), (2.0, math.ceil(top)), title=labels["title"], xlabel=labels["x"], ylabel=labels["y"])
+    if at is not None:
+        panel.line([at, at], [2.0, math.ceil(top) - 0.75], "ink-2", 1.2, dashed=True)   # under the key, not through it
     for values, dashed in curves:
         xs = [10 * (k + 1) for k in range(len(values))]
         panel.line(xs, values, "loss", 1.6 if dashed else 2.4, dashed=dashed)
     panel.text(STEPS - 4, math.ceil(top) - 0.4, labels["key"], "loss", "end")
     svg = chart.figure([panel], alt=labels["alt"], width=330, height=240)
     return chart.with_decimal_comma(svg) if labels.get("lang") == "nl" else svg
+
+
+def now_picture(report: dict, labels: dict) -> str:
+    """Beside the live chart (decision 1.17): the story the model writes now, after the step of the last report.
+    `labels`: now ({step}), alt_now."""
+    if "seen" not in report:   # one look per report: while the run measures, the picture keeps what it saw
+        report["seen"] = report["look"]()
+    return yours.writes(labels["now"].format(step=report["step"]), [(D.B.START, report["seen"] or "")], alt=labels["alt_now"])
+
+
+def rewind_frame(result: dict, k: int, labels: dict) -> tuple:
+    """Moment k (a step of moments()) of the learner's run, for the rewind after it (decision 1.17): both curves of
+    curve_picture with a dashed line at k, beside it the story the model wrote then; and the sentence under it.
+    `labels`: those of curve_picture, and wrote ({step}), alt_wrote ({step}), start, after ({step}, {loss})."""
+    from everything_ai import live
+    curves = curve_picture([(MEASURED["curve"], True), (result["curve"], False)], labels, at=k)
+    story = yours.writes(labels["wrote"].format(step=k), [(D.B.START, result["wrote"].get(k) or "")],
+                         alt=labels["alt_wrote"].format(step=k))
+    said = labels["start"] if k == 0 else labels["after"].format(step=k, loss=number(result["curve"][min((k - 1) // 10, len(result["curve"]) - 1)], 2, labels.get("lang", "en")))
+    return live.rewound(curves, [story], width=330), said
 
 
 # --- measured: the course's run of the demo with its own versions and merge rules, on the CPU, 2 threads ---

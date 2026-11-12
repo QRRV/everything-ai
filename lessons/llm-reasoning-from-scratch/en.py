@@ -307,6 +307,8 @@ def text_demo():
         The button trains a new ModernGPT of {C.number(C.PARAMS, 0, 'en')} parameters (d = {C.SIZES[1]}, {C.SIZES[4]} blocks, {C.SIZES[2]} query heads, {C.SIZES[3]} key and value heads) on each format in turn: {C.number(C.RUNS['cpu'][0][1], 0, 'en')} steps of {C.BATCH} pairs drawn with seed 0, never a held-out one, with your `steps_answer`, `sft_example`, `sft_batch` and `pretrain_step`; AdamW at {C.number(C.LR, 3, 'en')}, weight decay {C.number(C.WEIGHT_DECAY, 1, 'en')}, with the warmup and warmdown of [Reading an open training recipe](/course/open/llm-open-recipes?lang=en). Then each model answers the {len(C.TESTS) * C.HELD} held-out pairs greedily, and your `read_product` reads every answer.
 
         On the course's CPU with {C.threads('cpu')} threads both runs took {C.number(C.plan_minutes('cpu'), 0, 'en')} minutes, {C.number(_s, 2, 'en')} s per step with steps and {C.number(_p, 2, 'en')} s without. On a GPU the demo also trains the answer alone for {C.number(C.RUNS['gpu'][2][1], 0, 'en')} steps, four times as many, about the time the run with steps takes on that CPU; the course recorded that run on its CPU too, with {C.threads('gpu')} threads, not on a GPU. A probe of {C.PROBE} steps of each format says first how long it takes on yours; without the time, the course's runs and models stand in.
+
+        While a model trains, beside its chart you see every few seconds what it writes at that moment for {C.HELD_OUT[3][0][0]} × {C.HELD_OUT[3][0][1]}, greedily, as in *Your run, step by step* below, and whether the product in it is right.
         """),
         L.course_versions(),
     ])
@@ -358,24 +360,31 @@ def demo_train(box_answer, box_read, result_answer, result_read, train_button):
         _plan = C.where()["kind"]
         _names = {"steps": "With steps", "plain": "Answer only"}
         _lives = {}
+        _now = {}   # the last report of each run, for what its model writes now beside its chart
+        _seen = {"title": "What it writes now for {a} × {b}, after step {step}", "lang": "en",
+                 "alt": "What the model writes now after the prompt {a}*{b}=, in gray, greedily, and under it whether the product in it is right.",
+                 "right": "The product is right: {product}.", "wrong": "The product is not {product} yet."}
 
-        def _show(_d):
+        def _progress(_d):
             _key = (_d.get("format"), _d.get("steps"))
             _name = f"{_names[_key[0]]}, {C.number(_key[1], 0, 'en')} steps" if _key[0] else ""
             if _d["phase"] == "start":
                 _live = L.live({"title": f"{_names[_key[0]]}: loss of every step", "x": "step", "y": "loss",
                                 "alt": f"The loss of every step so far of your run, {_name.lower()}, in grey, with its mean as the thicker line, and the course's run of the same plan dashed."},
-                               _key[1], low=0.0)
+                               _key[1], low=0.0, look_every=3.0)
                 _live.reference(C.live_reference(_plan, *_key), "", role="loss")
                 _live.above = [mo.Html(_l.picture()) for _l in _lives.values()]
                 _lives[_key] = _live
                 _live.line(f"**{_name}** · run {_d['i']} of {_d['n']} …")
             elif _d["phase"] == "train":
+                if _key not in _now:   # from the first report of a run on, what its model writes beside the chart
+                    _lives[_key].watch(lambda _k=_key: C.now_picture(_now[_k], _seen))
+                _now[_key] = _d
                 _lives[_key].extend(_d["fresh"], f"**{_name}** · step {C.number(_d['step'], 0, 'en')} of {C.number(_d['steps'], 0, 'en')} · loss {C.number(_d['loss'], 3, 'en')} · {C.number(_d['seconds'] / 60, 1, 'en')} minutes · dashed: the course's run")
             elif _d["phase"] == "measure":
                 _lives[_key].line(f"**{_name}** · the model answers the {len(C.TESTS) * C.HELD} held-out pairs …")
 
-        _r = C.run(run_code(box_answer.value).names["steps_answer"], run_code(box_read.value).names["read_product"], _show)
+        _r = C.run(run_code(box_answer.value).names["steps_answer"], run_code(box_read.value).names["read_product"], _progress)
         _charts = [mo.Html(_l.picture()) for _l in _lives.values()]   # they stay after the run
         if isinstance(_r, str):
             _out = mo.vstack(_charts + [mo.md({

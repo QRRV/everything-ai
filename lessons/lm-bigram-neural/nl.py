@@ -324,7 +324,7 @@ def text_demo():
     mo.md(f"""
     ### Wat je project nu kan
 
-    De cel hieronder traint een tabel met je `train`, op de paren van de eerste {C.grouped(C.START, L.lang)} tekens van de toneelstukken, {C.STEPS} stappen met learning rate {C.LR} en `lam` 0, en laat de geleerde tabel schrijven met je `generate` uit [Sampling: laat het model schrijven](/course/open/lm-sampling?lang=nl), of die van de course als de jouwe ontbreekt of stuk is. Hij werkt zodra oefening 2 en 3 af zijn, en het trainen duurt een paar seconden.
+    De cel hieronder traint een tabel met je `train`, op de paren van de eerste {C.grouped(C.START, L.lang)} tekens van de toneelstukken, {C.STEPS} stappen met learning rate {C.LR} en `lam` 0, en laat de geleerde tabel schrijven met je `generate` uit [Sampling: laat het model schrijven](/course/open/lm-sampling?lang=nl), of die van de course als de jouwe ontbreekt of stuk is. Hij werkt zodra oefening 2 en 3 af zijn, en het trainen duurt een paar seconden. Terwijl hij traint, toont een grafiek elke 5 stappen de NLL van je tabel op die paren, tegen die van de getelde tabel, gestreept; daarnaast of daaronder staat wat je tabel op dat moment schrijft, beginnend met "T", met seed 1, opnieuw getekend terwijl hij traint. Daarna kun je door de stappen terugspoelen, met wat hij toen schreef.
     """)
     return
 
@@ -332,19 +332,41 @@ def text_demo():
 @app.cell(hide_code=True)
 def demo_learn(result_loss, result_train):
     result_loss, result_train  # run again when exercise 2 or 3 saves your module
-    _result = C.demo()
+    _now = {}   # the live chart, made at the first report
+
+    def _progress(_p):
+        if "chart" not in _now:
+            _now["chart"] = L.live({"title": "Je tabel", "x": "stap", "y": "NLL", "alt": "De NLL van je tabel op de paren waarvan hij leert, elke 5 stappen tot nu toe, en gestreept die van de getelde tabel."}, _p["steps"], low=0.0)
+            _now["chart"].reference([(0, C.counted_nll()), (_p["steps"], C.counted_nll())], "getelde tabel", role="ink-3")
+        _now["chart"].watch(lambda _look=_p["look"]: C.now_picture(_look(), "Wat je tabel nu schrijft, beginnend met \"T\", met seed 1"))
+        _now["chart"].add(_p["step"], _p["loss"], f"**Je tabel** · stap {_p['step']} van {_p['steps']} · NLL {C.number(_p['loss'], 3, L.lang)}")
+
+    _result = C.demo(_progress)
     if _result is None:
         _out = mo.md("*Maak eerst oefening 2 en 3 af: dan staan je `loss_of` en je `train` in je project, en gebruikt deze cel ze.*")
     elif isinstance(_result, str):
-        _out = mo.md({
+        _note = {
             "slow": "*Trainen met je `train` duurt langer dan 30 seconden. Gaat elke stap één keer over de paren, met `W[x]`?*",
             "train": "*De `train` in `work/projects/llm/bigram_train.py` geeft niet meer wat de check verwacht, of stopt met een fout. Heb je dat bestand veranderd? Verwijder het, en laat oefening 3 opnieuw nakijken: die check bewaart je functie dan opnieuw.*",
             "net": "*De `loss_of` in `work/projects/llm/bigram_net.py` geeft niet meer wat de check verwacht, of stopt met een fout. Heb je dat bestand veranderd? Verwijder het, en laat oefening 2 opnieuw nakijken: die check bewaart je functie dan opnieuw.*",
             "sampling": "*Schrijven met `generate` uit `work/projects/llm/sampling.py` stopt met een fout. Heb je dat bestand veranderd? Verwijder het, en laat oefening 3 van [Sampling: laat het model schrijven](/course/open/lm-sampling?lang=nl) opnieuw nakijken.*",
-        }[_result])
+        }[_result]
+        _out = _now["chart"].stopped(_note) if "chart" in _now else mo.md(_note)   # a run that stops keeps its chart so far
     else:
         _who = "" if _result["yours"] else " De tekst komt van de `generate` van de course: de jouwe ontbreekt of is stuk, zoals de melding bij *Waar je project staat* zegt."
-        _out = mo.vstack([
+        _labels = {"title": "De NLL van je tabel", "x": "stap", "y": "NLL", "counted": "getelde tabel", "alt": "De NLL van je tabel op de paren waarvan hij leerde, bij de stappen van het terugspoelen, en gestreept die van de getelde tabel."}
+        _when = [_s for _s, _, _ in _result["kept"]]
+
+        def _frame(_s):
+            _s = int(_s)
+            _loss = next(_v for _k, _v, _ in _result["kept"] if _k == _s)
+            _when_said = "Vóór de eerste stap, met elk teken even waarschijnlijk" if _s == 0 else f"Na stap {_s}"
+            return (C.step_frame(_result["kept"], _s, _labels, "Wat je tabel bij deze stap schreef, beginnend met \"T\", met seed 1", L.lang),
+                    f"{_when_said}: een NLL van {C.number(_loss, 2, L.lang)}, tegen {C.number(C.counted_nll(), 2, L.lang)} voor de getelde tabel.")
+
+        _rewind = [L.explore("rewind", "stap", _frame, start=_when[-1], values=_when, role="",
+                             task="Ga terug naar stap 0, en dan weer vooruit: vanaf welke stap gaat de tekst op Engels lijken?")] if len(_when) > 1 else []
+        _out = mo.vstack(_rewind + [
             mo.md(f"""Je geleerde tabel haalt een NLL van {C.number(_result['nll'], 2, L.lang)} op de paren waarvan hij leerde, uitgerekend met je `loss_of`, tegen {C.number(C.counted_nll(), 2, L.lang)} voor de getelde tabel. Na "t" heeft "h" {C.number(_result['th'], 3, L.lang)}. Wat hij schrijft, beginnend met "T", met seed 1:"""),
             mo.Html(C.text_block(_result["text"])),
             mo.md(f"""Hij schrijft zoals je getelde model: het is dezelfde soort tabel, alleen geleerd in plaats van geteld, en uit een kleiner deel van de toneelstukken.{_who}"""),

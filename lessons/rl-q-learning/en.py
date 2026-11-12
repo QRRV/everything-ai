@@ -345,7 +345,7 @@ def text_demo():
                 break
     ```
 
-    The chart shows the return of every episode, thin, and its mean over the last 20, thick; dashed, the same, averaged over 20 runs of the course. The demo waits 10 ms after each episode, so that you can watch.
+    The chart shows the return of every episode, thin, and its mean over the last 20, thick; dashed, the same, averaged over 20 runs of the course. Beside it you see what your agent knows at that moment, drawn as in *The run, episode by episode*: the way of its last episode, and its best action in every state. The demo waits 10 ms after each episode, so that you can watch.
     """)
     return
 
@@ -366,13 +366,23 @@ def demo_train(box_choose, box_update, result_choose, result_update, train_butto
         _mine = [_n for _n, _r in (("update", result_update), ("choose", result_choose)) if _r.state == "correct"]
         _update = run_code(box_update.value).names["update"] if "update" in _mine else C.update
         _choose = run_code(box_choose.value).names["choose"] if "choose" in _mine else C.choose
+        _now = {}   # the live chart, and what the agent knows after the last episode
+        _grid = {"grid": "Your agent after episode {k}",
+                 "grid_alt": "GRID after episode {k} of your run: the way of that episode as a line, the largest Q of every state, and a triangle for its best action."}
+
+        def _progress(_k, _g, _seen):
+            if "seen" not in _now:   # from the first episode on, what the agent knows beside the chart
+                _now["chart"].watch(lambda: C.now_picture(_now["seen"], _grid, L.lang))
+            _now["seen"] = _seen
+            _now["chart"].add(_k, _g, f"**Episode {_k} of {C.EPISODES}**")
+
         _live = L.live({"title": "Your run: the return of every episode", "x": "episode", "y": "return",
                         "alt": "The return of every episode of your run so far, thin, and its mean over the last 20, thick; dashed, the same, averaged over 20 runs of the course."},
                        C.EPISODES, role="ink", low=-1.05, high=1.05, window=20)
         _live.line("**Training** …")
         _live.reference(list(enumerate(C.mean_line(), 1)), "mean of 20 runs", role="ink")
-        _r = C.train(_update, _choose, seed=C.YOUR_SEED, pause=0.01,
-                     show=lambda _k, _g: _live.add(_k, _g, f"**Episode {_k} of {C.EPISODES}**"))
+        _now["chart"] = _live
+        _r = C.train(_update, _choose, seed=C.YOUR_SEED, pause=0.01, show=_progress)
         if _r == "update":
             _out = _live.stopped("*Your `update` gave an error or no number during the run. Does it still pass its check?*")
         elif _r == "choose":

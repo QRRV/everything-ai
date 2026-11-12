@@ -2,13 +2,14 @@
 # SPDX-License-Identifier: CC-BY-SA-4.0 AND MIT-0
 """Checks of the lesson nn-tuning-playbook: lr_range, learning rates an equal factor apart, and range_pick, the learning
 rate at the lowest smoothed loss of a range test. The picture and the demo run a real range test and a small sweep on
-the handwritten digits, with an MLP and SGD with momentum, on one thread."""
+the handwritten digits, with an MLP and SGD with momentum, on one thread. The demo's range test shows what the network
+guesses at every step while it runs, and after it a rewind through the steps (decision 1.17)."""
 import functools
 import math
 import re
 
-from everything_ai import paths
-from everything_ai.check import FunctionBox, Mistake, run_code
+from everything_ai import live, paths
+from everything_ai.check import FunctionBox, Mistake, Timeout, run_code
 from everything_ai import yours
 
 DATA = "data/qmnist-small.npz"   # the first 6,000 training and 1,000 test images of QMNIST: see data/README.md
@@ -43,18 +44,32 @@ def _model(seed: int):
     return nn.Sequential(nn.Linear(784, 128), nn.ReLU(), nn.Linear(128, 10))
 
 
-def range_test(lrs: list, seed: int = 0) -> list:
+def one_each() -> list:
+    """The first test digit of each kind, 0 to 9: what the demo shows the network guess during its range test."""
+    _, _, _, yt = _data()
+    return [int((yt == k).nonzero()[0]) for k in range(10)]
+
+
+def range_test(lrs: list, seed: int = 0, show=None, looked: list | None = None) -> list:
     """One run of a learning-rate range test: one mini-batch of 64 at every learning rate of `lrs`, in order, with SGD
-    and momentum 0.9. Gives back the loss of every step, and stops once the loss is 4 times its start or no number."""
+    and momentum 0.9. Gives back the loss of every step, and stops once the loss is 4 times its start or no number.
+    With `looked`, a list, the network's guesses for the first test digit of each kind after every step go in it
+    (decision 1.17); `show` hears every step ({"step", "steps", "lr", "loss", "look"}), with "look", those guesses.
+    The network is looked at in eval mode without a graph (netview.looking), so the run stays the same; a chart that
+    fails never stops the run."""
     import torch
     import torch.nn.functional as F
     torch.set_num_threads(1)
-    X, y, _, _ = _data()
+    X, y, Xt, _ = _data()
     model = _model(seed)
     opt = torch.optim.SGD(model.parameters(), lr=lrs[0], momentum=0.9)
     g = torch.Generator().manual_seed(seed)
+    watching = show is not None or looked is not None
+    if watching:
+        from everything_ai import netview
+        shown = Xt[one_each()]
     losses = []
-    for lr in lrs:
+    for step, lr in enumerate(lrs, start=1):
         for group in opt.param_groups:
             group["lr"] = lr
         idx = torch.randint(0, len(X), (BATCH,), generator=g)
@@ -63,9 +78,28 @@ def range_test(lrs: list, seed: int = 0) -> list:
         loss.backward()
         opt.step()
         losses.append(loss.item())
+        if watching:
+            with netview.looking(model):
+                guesses = [int(k) for k in model(shown).argmax(1)]
+            if looked is not None:
+                looked.append(guesses)
+            if show is not None:
+                try:
+                    show({"step": step, "steps": len(lrs), "lr": lr, "loss": losses[-1], "look": lambda seen=guesses: seen})
+                except Timeout:
+                    raise
+                except Exception:   # the chart is the course's own: it never stops the run
+                    pass
         if not math.isfinite(losses[-1]) or losses[-1] > 4 * losses[0]:
             break
     return losses
+
+
+def demo_range(lrs: list, show=None) -> tuple:
+    """The demo's range test, seed 0, at the learner's learning rates: the loss of every step, and the network's
+    guesses after every step for the rewind. `show` hears every step, as for range_test."""
+    looked = []
+    return range_test(lrs, 0, show, looked), looked
 
 
 def train(lr: float, seed: int = 0) -> float:
@@ -121,8 +155,14 @@ def range_picture(labels: dict) -> str:
     """The range test of seed 0: the loss of every step, small dots, and its smoothed loss, a line, against the
     learning rate on a log scale. Both are loss: purple. The lowest smoothed loss is marked, and the range a sweep
     looks at, from a tenth of it up to it, is a light band."""
+    return _range_chart(*picture_run(), labels)
+
+
+def _range_chart(lrs: list, losses: list, labels: dict, at: int | None = None) -> str:
+    """The chart of range_picture for these learning rates and losses; with `at`, a step (from 1), a line at its
+    learning rate, for rewinding, in the width of a chart beside a picture."""
     from everything_ai import chart
-    lrs, losses = picture_run()
+    lrs = lrs[:len(losses)]
     sm = smoothed(losses)
     k = min(range(len(sm)), key=lambda i: sm[i])
     p = chart.Panel((LO, HI), (0, 4), title=labels["title"], xlabel=labels["x"], ylabel=labels["y"], xlog=True, yticks=[0, 1, 2, 3, 4])
@@ -132,8 +172,39 @@ def range_picture(labels: dict) -> str:
     p.points([lrs[k]], [sm[k]], "ink", r=4.5)
     p.text(1.5e-4, 3.55, labels["lowest"].format(lr=rate(lrs[k], labels.get("lang", "en"))), "ink", "start")
     p.text(lrs[k] / 9, 2.95, labels["band"], "ink-2", "start")
-    svg = chart.figure([p], alt=labels["alt"], width=330, height=260)
+    if at is not None:
+        p.line([lrs[at - 1]] * 2, [0, 4], "ink-2", 1.2)
+    svg = chart.figure([p], alt=labels["alt"], width=330 if at is None else live.CHART_WIDTH, height=260 if at is None else 240)
     return chart.with_decimal_comma(svg) if labels.get("lang") == "nl" else svg
+
+
+def right_of(guesses: list) -> int:
+    """How many of the first test digit of each kind these guesses read right."""
+    _, _, _, yt = _data()
+    return sum(g == int(yt[place]) for g, place in zip(guesses, one_each()))
+
+
+def now_picture(guesses: list, title: str, lang: str) -> str:
+    """What the network guesses at one step of the range test: its guess for the first test digit of each kind, under
+    `title`, in ink where it is right, in the colour of mistakes where it is not."""
+    _, _, Xt, yt = _data()
+    shown = one_each()
+    said, right = [str(g) for g in guesses], [str(int(yt[place])) for place in shown]
+    alt = {"en": "The first test digit of each kind, each with the digit the network guessed, and in brackets the right digit where it is wrong: ",
+           "nl": "Het eerste testcijfer van elke soort, elk met het cijfer dat het netwerk gokte, en tussen haakjes het goede cijfer waar het fout is: "}
+    return yours.guesses([Xt[place].reshape(28, 28).numpy() for place in shown], said, right,
+                         alt[lang] + "; ".join(f"{r}: {g}" for r, g in zip(right, said)) + ".", title=title)
+
+
+def kept(steps: int) -> list:
+    """The steps the rewind stops at: the first, every fifth, and the last."""
+    return sorted({1, steps, *range(5, steps, 5)})
+
+
+def step_frame(lrs: list, losses: list, looked: list, step: int, labels: dict, title: str, lang: str) -> str:
+    """The rewind at a step (from 1): the range test with a line at that step's learning rate, and beside it what the
+    network guessed after that step (decision 1.17)."""
+    return live.rewound(_range_chart(lrs, losses, labels, at=step), [now_picture(looked[step - 1], title, lang)])
 
 
 # --- exercise 1: lr_range -------------------------------------------------------------------------------------------------------
