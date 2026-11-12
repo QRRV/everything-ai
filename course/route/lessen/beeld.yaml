@@ -853,11 +853,22 @@ lessons:
   module: vision-project
   kind: project
   project: cnn
-  idea: "You train your own ResNet on Fashion-MNIST, or on CIFAR-10 if you have the time, now with what this part added, augmentation and more depth; you judge it on the test set and with Grad-CAM, and write down which photos it gets wrong and why."
+  idea: "You build ResNet-20 from your own residual block with batch normalization, choose its changes on a validation set, and train it on Fashion-MNIST; you test it once, and explain its mistakes in an error analysis: a confusion matrix, and Grad-CAM of the guess and of the right kind over the mistakes it was most sure of."
   covers: [beeldclassificatie#3]
+  # Measured with the course's code (checks.py, REFERENCE), one thread, learning from the first 5,000 training images
+  # and choosing on the last 1,000: ResNet-20 with BatchNorm2d after every convolution and 1x1 projections where the
+  # shape changes, 272,970 parameters, 20 epochs, lr 0.01. Validation, median over seeds 0-4: no changes 871, random
+  # crop (pad 2) 892, crop and mirror 889, so the demo trains with the crop; test with the crop 903 to 914 (seed 0:
+  # 909). Made of the blocks of cnn-resnet, without batch normalization, it read 822 and 834 (seeds 0, 1) and diverged
+  # at 40 epochs. Almost all shoes of Fashion-MNIST point left. The shirt is the kind read wrong most in every seed.
+  # nn.BatchNorm2d, torch.softmax and the 1x1 convolution are introduced outside this chain and explained in the
+  # lesson, so they are in mentions.
   requires: [cv-grad-cam, cv-augment-photos]
+  introduces: [c:error-analysis]
+  uses: [c:resnet, c:residual-block, c:residual-connection, c:batchnorm, s:gamma-scale, s:beta-shift, c:standardization, c:neuron, c:validation-set, c:hyperparameter, c:test-set, c:train-set, c:overfitting, c:data-augmentation, c:random-crop, c:horizontal-flip, c:grad-cam, c:global-average-pooling, c:class-activation-map, v:confusion-matrix, c:softmax, s:softmax, s:z-logits, c:probability, c:logit, c:prediction, c:convolution, c:feature-map, c:filter, c:kernel-size, c:stride, c:padding, c:relu, c:layer, c:channel, c:output-channel, c:cross-entropy, c:loss, c:training, c:epoch, c:mini-batch, c:batch-size, c:seed, c:model-parameter, c:weight, c:bias-term, c:tensor, c:shape, c:axis, c:class, c:label, c:pixel, c:accuracy, c:mean, c:median, c:standard-deviation, c:variance, c:learning-rate, c:warmup, c:gradient-clipping, c:gradient, c:backward-pass, v:loss-curve, v:train-val-curves, c:top-k-accuracy, c:precision, c:recall, c:per-channel-normalization, c:cifar-10, c:imagenet, c:receptive-field, c:vgg, py:nn-conv2d, py:nn-linear, py:nn-modulelist, py:nn-module, py:model-train, py:model-eval, py:torch-flip, py:torch-randn, py:torch-tensor, py:torch-relu, py:np-zeros, py:np-argmax, py:item, py:no-grad, py:manual-seed, py:dataset, py:len-getitem, py:dataloader, py:tensor-dataset, py:forward-hook, py:retain-grad, py:backward, py:sorted, py:tuple, py:comprehension, py:lambda, py:slicing, py:indexing, py:len, py:int, py:float, py:int-conversion, py:floor-division, py:bool, py:none, py:is-none, py:if, py:for, py:range, py:list, py:append, py:round, py:class, py:init-method, py:forward-method, py:super, py:inheritance, py:self, py:def, py:return, py:import, py:print, py:comment, py:variable, py:arithmetic, py:comparison, py:keyword-argument, py:method, py:dim, py:augmented-assignment, py:with, q:predict, q:choice, q:exercise-with-check, q:slider-task, q:explain, q:run-cell]
+  mentions: [py:nn-batchnorm2d, py:torch-softmax, c:pointwise-convolution, c:paper]
   ladder: [torch]
-  data: [fashion-mnist, cifar-10-download-only]
+  data: [fashion-mnist]
   reference_data: [fashion-mnist]
   needs: any
 

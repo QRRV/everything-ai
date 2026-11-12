@@ -1,0 +1,44 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: cv-project-resnet-grad-cam
+minutes: 60
+title:
+  en: "Final project: your own ResNet, explained with Grad-CAM"
+  nl: "Eindproject: je eigen ResNet, uitgelegd met Grad-CAM"
+goal:
+  en: "build ResNet-20 from your own residual block with batch normalization, choose its changes on a validation set, test it once, and explain its mistakes with a confusion matrix and Grad-CAM."
+  nl: "ResNet-20 bouwen uit je eigen residual block met batch normalization, zijn veranderingen kiezen op een validation set, het één keer testen, en zijn fouten uitleggen met een confusion matrix en Grad-CAM."
+summary:
+  - en: "ResNet-20 (2015) is a 3×3 convolution, three stages of three residual blocks with 16, 32 and 64 channels, global average pooling and a linear layer: 20 layers with weights in a row. Every convolution is followed by batch normalization; the first block of stage 2 and 3 halves the height and the width with stride 2, and a 1×1 convolution changes its residual connection in the same way."
+    nl: "ResNet-20 (2015) is een 3×3-convolutie, drie stages van drie residual blocks met 16, 32 en 64 channels, global average pooling en een linear layer: 20 layers met weights achter elkaar. Na elke convolutie komt batch normalization; het eerste block van stage 2 en 3 halveert de hoogte en de breedte met stride 2, en een 1×1-convolutie verandert zijn residual connection op dezelfde manier."
+  - en: "The changes are chosen on a validation set, the last 1,000 of the 6,000 training images, and the test images are measured once. In the middle of five seeds, the course's ResNet-20 read 871 of the 1,000 validation images right without changes, 892 with a random crop, and 889 with mirror images too."
+    nl: "De veranderingen worden gekozen op een validation set, de laatste 1.000 van de 6.000 trainingsafbeeldingen, en de testafbeeldingen worden één keer gemeten. In het midden van vijf seeds las het ResNet-20 van de course zonder veranderingen 871 van de 1.000 afbeeldingen van de validation set goed, met een random crop 892, en met ook spiegelbeelden 889."
+  - en: "An error analysis looks at the mistakes themselves. With seed 0, the course's ResNet reads 909 of the 1,000 test images right, and 62 of its 91 mistakes are one garment for the upper body read as another. For the mistakes it was most sure of, Grad-CAM of the guess and of the right kind mostly shows evidence for the guess and much less for the right kind."
+    nl: "Een error analysis kijkt naar de fouten zelf. Met seed 0 leest het ResNet van de course 909 van de 1.000 testafbeeldingen goed, en 62 van zijn 91 fouten zijn het ene kledingstuk voor het bovenlijf gelezen als een ander. Voor de fouten waarvan het het zekerst was, laat de Grad-CAM van de gok en van de goede soort meestal bewijs voor de gok zien en veel minder voor de goede soort."
+can_now:
+  - en: "write the residual block of ResNet, with batch normalization after every convolution and a 1×1 convolution on the residual connection where the shape changes"
+    nl: "het residual block van ResNet schrijven, met batch normalization na elke convolutie en een 1×1-convolutie op de residual connection waar de shape verandert"
+    by: block
+  - en: "build ResNet-20 from your block: a stem, three stages and global average pooling"
+    nl: "ResNet-20 bouwen uit je block: een stem, drie stages en global average pooling"
+    by: resnet
+  - en: "write a random crop with a black border and a mirror image for images of any size"
+    nl: "een random crop met een zwarte rand en een spiegelbeeld schrijven voor afbeeldingen van elke maat"
+    by: changes
+  - en: "find the mistakes a network was most sure of, with softmax and sorting"
+    nl: "de fouten vinden waarvan een netwerk het zekerst was, met softmax en sorteren"
+    by: sure-mistakes
+  - en: "read a mistake with the Grad-CAM of the guess and of the right kind"
+    nl: "een fout lezen met de Grad-CAM van de gok en van de goede soort"
+    by: why-wrong
+  - en: "report on a trained network: how its settings were chosen, how it did on the test images, and what its mistakes show"
+    nl: "verslag doen van een getraind netwerk: hoe zijn instellingen gekozen zijn, hoe het deed op de testafbeeldingen, en wat zijn fouten laten zien"
+    by: report
+further_reading:
+  - en: "Kaiming He, Xiangyu Zhang, Shaoqing Ren and Jian Sun (2015), *Deep Residual Learning for Image Recognition*: section 3.4, batch normalization right after each convolution; and section 4.2, CIFAR-10 and Analysis, the networks of 6n + 2 layers with 16, 32 and 64 filters, with Table 6 and Figure 6"
+    nl: "Kaiming He, Xiangyu Zhang, Shaoqing Ren en Jian Sun (2015), *Deep Residual Learning for Image Recognition*: paragraaf 3.4, batch normalization direct na elke convolutie; en paragraaf 4.2, CIFAR-10 and Analysis, de netwerken van 6n + 2 layers met 16, 32 en 64 filters, met tabel 6 en figuur 6"
+  - en: "Sergey Ioffe and Christian Szegedy (2015), *Batch Normalization: Accelerating Deep Network Training by Reducing Internal Covariate Shift*: section 3.2, batch normalization of convolutional networks, one γ and β per feature map"
+    nl: "Sergey Ioffe en Christian Szegedy (2015), *Batch Normalization: Accelerating Deep Network Training by Reducing Internal Covariate Shift*: paragraaf 3.2, batch normalization van convolutional networks, één γ en β per feature map"
+  - en: "Ramprasaath R. Selvaraju and others (2017), *Grad-CAM: Visual Explanations from Deep Networks via Gradient-based Localization*: section 6.1, analyzing failure modes, with the Grad-CAM of both the right and the predicted class of each mistake"
+    nl: "Ramprasaath R. Selvaraju en anderen (2017), *Grad-CAM: Visual Explanations from Deep Networks via Gradient-based Localization*: paragraaf 6.1, het analyseren van fouten, met de Grad-CAM van zowel de goede als de voorspelde klasse van elke fout"
