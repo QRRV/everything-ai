@@ -8,11 +8,16 @@ and `unpack` puts the photos in work/cache/caltech-101/, one folder per class. T
 classes can still show a person here and there, so a lesson uses only photos that were looked at one by one
 (CHECKED), and the few among them with a person, or part of one, are left out as well (PEOPLE). The course trains
 no model on it that it shares: the rights to the photos lie with their photographers (course/route/bronnen.yaml,
-caltech-101-download-only)."""
+caltech-101-download-only).
+
+Next to the photos, the zip file holds an outline of the object on every photo, drawn by hand by the makers of
+Caltech-101. `outlines` gives those of the photos in CHECKED, from a file `unpack_outlines` makes once."""
 import gzip
+import json
 import os
 import re
 import shutil
+import struct
 import tarfile
 import tempfile
 import time
@@ -23,7 +28,8 @@ from pathlib import Path
 from everything_ai import hub, paths
 
 ZIP = ("caltechdata/mzrjq-6wc02", "caltech-101.zip")
-MEMBER = "caltech-101/101_ObjectCategories.tar.gz"   # the photos, inside the zip file; next to it are annotations
+MEMBER = "caltech-101/101_ObjectCategories.tar.gz"   # the photos, inside the zip file
+OUTLINES = "caltech-101/Annotations.tar"   # and the outlines, one MATLAB file per photo
 LEFT_OUT = {"Faces", "Faces_easy", "BACKGROUND_Google"}
 # The first 35 photos of each of these classes were looked at one by one, for people: the photos the lessons use.
 CHECKED = ("chandelier", "dragonfly", "ewer", "lotus", "nautilus", "rooster", "starfish", "sunflower", "water_lilly",
@@ -32,6 +38,7 @@ PEOPLE = {"sunflower/image_0004.jpg", "sunflower/image_0022.jpg", "ewer/image_00
 CLASSES = 99      # the classes the course keeps: 101 and BACKGROUND_Google, without these three
 PHOTOS = 7804     # the photos in them, without PEOPLE
 _NAME = re.compile(r"101_ObjectCategories/([A-Za-z_]+)/(image_\d{4}\.jpg)")
+_OUTLINE = re.compile(r"Annotations/([A-Za-z_]+)/annotation_(\d{4})\.mat")
 _LARGEST = 1_000_000   # bytes; the largest photo of the classes the course keeps has 45 kB
 
 
@@ -116,3 +123,111 @@ def checked(name: str, n: int = 30) -> list[Path]:
     if name not in CHECKED or n > 32:
         raise ValueError(f"only the first photos of the classes in CHECKED were looked at: {name}, {n}")
     return photos(name)[:n]
+
+
+def _outlines_file() -> Path:
+    return paths.WORK / "cache" / "caltech-101-outlines.json"
+
+
+# the types of numbers in a MATLAB file of version 5, and how struct reads them
+_NUMBERS = {1: "b", 2: "B", 3: "h", 4: "H", 5: "i", 6: "I", 7: "f", 9: "d", 12: "q", 13: "Q"}
+_MATRIX, _COMPRESSED = 14, 15
+
+
+def _elements(data: bytes):
+    """The elements of a MATLAB file of version 5, after its header, or of a matrix in it, as (type, bytes); a
+    compressed element is unpacked. Little-endian only, as all files of Caltech-101 are."""
+    at = 0
+    while at + 8 <= len(data):
+        kind, size = struct.unpack_from("<II", data, at)
+        if kind >> 16:   # a small element: type and size in one number, the bytes in the next four
+            kind, size = kind & 0xFFFF, kind >> 16
+            yield kind, data[at + 4:at + 4 + size]
+            at += 8
+            continue
+        body = data[at + 8:at + 8 + size]
+        if len(body) != size:
+            raise ValueError("a MATLAB file that ends too soon")
+        if kind == _COMPRESSED:
+            yield from _elements(zlib.decompressobj().decompress(body, 1_000_000))
+            at += 8 + size   # a compressed element is not padded
+        else:
+            yield kind, body
+            at += 8 + size + (-size % 8)   # every other element is padded to a multiple of 8 bytes
+
+
+def _read_mat(data: bytes) -> dict:
+    """The matrices of numbers in a MATLAB file of version 5, by name, each as a list of its columns. The course's
+    own reader, for the few files of Caltech-101 it needs: nothing in the file is ever run."""
+    if len(data) < 128 or data[126:128] != b"IM":
+        raise ValueError("not a little-endian MATLAB file of version 5")
+    found = {}
+    for kind, body in _elements(data[128:]):
+        if kind != _MATRIX:
+            continue
+        parts = list(_elements(body))
+        if len(parts) < 4 or parts[3][0] not in _NUMBERS:
+            continue   # a matrix of something else than numbers
+        rows, cols = struct.unpack_from("<ii", parts[1][1])
+        name = parts[2][1].decode("ascii")
+        code = _NUMBERS[parts[3][0]]
+        values = struct.unpack(f"<{len(parts[3][1]) // struct.calcsize(code)}{code}", parts[3][1])
+        if len(values) != rows * cols:
+            raise ValueError(f"matrix {name} has {len(values)} numbers, not {rows} by {cols}")
+        found[name] = [list(values[c * rows:(c + 1) * rows]) for c in range(cols)]
+    return found
+
+
+def _outline(data: bytes) -> list[list[float]]:
+    """The outline of one annotation file, as points [x, y] in pixels of the photo, from its top-left pixel at
+    [0, 0]. The file keeps the box around the object, box_coord, as its top, bottom, left and right, counted from 1,
+    and the outline, obj_contour, relative to the top-left corner of that box."""
+    mat = _read_mat(data)
+    (top,), (_,), (left,), (_,) = mat["box_coord"]
+    return [[round(x + left - 1, 2), round(y + top - 1, 2)] for x, y in mat["obj_contour"]]
+
+
+def unpack_outlines() -> Path:
+    """Read the outlines of the photos in CHECKED that were looked at, the first 35 of each class, from the downloaded
+    zip file into one file, once, and give that file. The outlines of the photos in PEOPLE are left out, as those
+    photos are. It raises FileNotFoundError when the zip file is not downloaded yet. A zip file that turns out to be
+    damaged is deleted, so that the next try downloads it again, and gives an OSError."""
+    if _outlines_file().exists():
+        return _outlines_file()
+    source = hub.pinned(*ZIP)
+    if source is None:
+        raise FileNotFoundError("Caltech-101 is not downloaded yet: everything_ai.hub.download(*everything_ai.caltech.ZIP)")
+    found = {}
+    try:
+        with zipfile.ZipFile(source) as z, z.open(OUTLINES) as raw, tarfile.open(fileobj=raw, mode="r|") as files:
+            for member in files:
+                name = _OUTLINE.fullmatch(member.name)
+                if (not member.isfile() or not name or name[1] not in CHECKED or int(name[2]) > 35
+                        or member.size > _LARGEST):
+                    continue
+                photo = f"{name[1]}/image_{name[2]}.jpg"
+                if photo not in PEOPLE:
+                    with files.extractfile(member) as f:
+                        found[photo] = _outline(f.read(_LARGEST + 1))
+    except (zipfile.BadZipFile, tarfile.TarError, EOFError, zlib.error, KeyError, ValueError, struct.error) as e:
+        source.unlink(missing_ok=True)   # damaged: the next try downloads it again, as unpack does
+        raise OSError(f"the outlines of Caltech-101 could not be read: {e}") from e
+    _outlines_file().parent.mkdir(parents=True, exist_ok=True)
+    tmp = _outlines_file().with_suffix(f".{os.getpid()}.part")
+    tmp.write_text(json.dumps(found, separators=(",", ":")))
+    os.replace(tmp, _outlines_file())   # in one step: a lesson never reads half the file
+    return _outlines_file()
+
+
+def outlines_ready() -> bool:
+    """The outlines are unpacked, or the zip file they come from is there to unpack them from."""
+    return _outlines_file().exists() or hub.pinned(*ZIP) is not None
+
+
+def outlines(name: str) -> dict[str, list[list[float]]]:
+    """The outlines of the photos of a class in CHECKED, by the photo's file name, such as "image_0001.jpg": each a
+    list of points [x, y] in pixels, around the object."""
+    if name not in CHECKED:
+        raise ValueError(f"the course reads only the outlines of the classes in CHECKED: {name}")
+    every = json.loads(unpack_outlines().read_text())
+    return {k.split("/")[1]: v for k, v in every.items() if k.split("/")[0] == name}

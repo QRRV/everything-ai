@@ -91,6 +91,13 @@ PINNED = {
         "sha256": "830f5e2eeaada8c8c8281779dcc8ab12833972eb8514ed0a35be6c1d4420ad81",
         "size": 166_587_896,
     },
+    # SAM 2.1 tiny, a model of Meta that draws the mask of what you point at, trained on SA-1B and SA-V (Apache-2.0):
+    # cv-sam (course/route/bronnen.yaml, model-sam2-1-hiera-tiny)
+    ("facebook/sam2.1-hiera-tiny", "model.safetensors"): {
+        "revision": "de431c4043854a71d8101e17995dfe596bf101a5",
+        "sha256": "48c14467e5cf9e51870511feb72c89688e82dd74523142c0538b663e193ac2a7",
+        "size": 155_908_064,
+    },
     # Caltech-101 (CC BY 4.0), at its source, CaltechDATA (doi:10.22002/D1.20086): the photo set of the vision branch
     # (course/route/bronnen.yaml, caltech-101-download-only; everything_ai.caltech unpacks it). CaltechDATA gives the
     # same file's MD5, 3138e1922a9193bfa496528edbbc45d0.

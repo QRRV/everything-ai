@@ -1,0 +1,36 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: cv-sam
+minutes: 40
+title:
+  en: "Segment what you point at: SAM 2.1"
+  nl: "Segmenteren wat je aanwijst: SAM 2.1"
+goal:
+  en: "get the mask of whatever you point at from SAM 2.1, a model with no kinds: choose among its masks by their predicted IoU, click again where the mask is most wrong, in the deepest pixel of that part, and see on photos of Caltech-101 where clicks are not enough."
+  nl: "van SAM 2.1, een model zonder soorten, het mask krijgen van wat je ook aanwijst: kiezen uit zijn masks met hun predicted IoU, opnieuw klikken waar het mask het meest fout is, in de diepste pixel van dat deel, en op foto's van Caltech-101 zien waar klikken niet genoeg is."
+summary:
+  - en: "SAM 2.1 (Meta, 2024) does promptable segmentation: you say with a prompt what you mean, clicks with label 1 on the thing and 0 on what is not part of it, or a box, and it gives the mask of that, of any kind. Its image encoder turns the photo into features once, in about a second; its small mask decoder turns every prompt into four masks of logits with their predicted IoU, in a few hundredths of a second."
+    nl: "SAM 2.1 (Meta, 2024) doet promptable segmentation: je zegt met een prompt wat je bedoelt, klikken met label 1 op het ding en 0 op wat er niet bij hoort, of een box, en hij geeft daar het mask van, van elke soort. Zijn image encoder maakt één keer features van de foto, in ongeveer een seconde; zijn kleine mask decoder maakt van elke prompt vier masks van logits met hun predicted IoU, in een paar honderdsten van een seconde."
+  - en: "One click can mean a part or the whole, so masks 1 to 3 are three guesses, in no fixed order, such as the whole, a part and a part of that; mask 0 is for a prompt that says what it means. With one click you take the best of masks 1 to 3 by score; where the mask is wrong, you click again in the deepest pixel of what it missed, with label 1, or of what it has too many, with label 0, and give SAM all the clicks."
+    nl: "Eén klik kan een deel of het geheel betekenen, dus masks 1 tot en met 3 zijn drie gokken, in geen vaste volgorde, zoals het geheel, een deel en een deel daarvan; mask 0 is voor een prompt die zegt wat hij bedoelt. Met één klik neem je de beste van masks 1 tot en met 3 op score; waar het mask fout is, klik je opnieuw in de diepste pixel van wat het mist, met label 1, of van wat het te veel heeft, met label 0, en geef je SAM alle klikken."
+  - en: "On 30 photos each of 10 kinds of Caltech-101, one click gives a median IoU of 0.85 or more with the outline for 1 kind, and two clicks for 8. On sunflowers, one click in the middle gives the seeds: the whole flower on 1 of the 30, although one of the three masks is the whole flower on 25. Chandeliers and Windsor chairs, with gaps inside their outlines, never get there, and more clicks can make a mask worse."
+    nl: "Op 30 foto's van elk van 10 soorten uit Caltech-101 geeft één klik voor 1 soort een mediane IoU met de omtrek van 0,85 of meer, en geven twee klikken dat voor 8. Bij zonnebloemen geeft één klik in het midden de pitten: de hele bloem op 1 van de 30, hoewel een van de drie masks op 25 de hele bloem is. Kroonluchters en windsorstoelen, met gaten binnen hun omtrek, komen er nooit, en meer klikken kunnen een mask slechter maken."
+can_now:
+  - en: "choose the mask SAM means for a prompt: the best of masks 1 to 3 by score for one click, mask 0 for more"
+    nl: "het mask kiezen dat SAM bedoelt bij een prompt: de beste van masks 1 tot en met 3 op score bij één klik, mask 0 bij meer"
+    by: choose
+  - en: "say which second click turns a part into the whole, and what a click with label 0 does"
+    nl: "zeggen welke tweede klik van een deel het geheel maakt, en wat een klik met label 0 doet"
+    by: seeds
+  - en: "find where to click next: in the deepest pixel of what the mask missed or has too many, with the right label"
+    nl: "vinden waar je daarna klikt: in de diepste pixel van wat het mask mist of te veel heeft, met het goede label"
+    by: next
+  - en: "explain why SAM, a model with no kinds, can draw what you point at but not say what it is, and what can"
+    nl: "uitleggen waarom SAM, een model zonder soorten, kan tekenen wat je aanwijst maar niet kan zeggen wat het is, en wat dat wel kan"
+    by: name
+further_reading:
+  - en: "Alexander Kirillov and others (2023), *Segment Anything*: section 3, SAM's three parts and its three masks for a prompt that can mean several things, the whole, a part and a subpart; section 4, the data engine, in which an annotator drew a mask in 14 seconds instead of 34; and section 5, SA-1B, of whose 1.1 billion masks SAM made 99.1% by itself"
+    nl: "Alexander Kirillov en anderen (2023), *Segment Anything*: paragraaf 3, de drie delen van SAM en zijn drie masks voor een prompt die meer kan betekenen, het geheel, een deel en een deel daarvan; paragraaf 4, de data engine, waarin een annotator een mask tekende in 14 seconden in plaats van 34; en paragraaf 5, SA-1B, waarvan SAM 99,1% van de 1,1 miljard masks zelf maakte"
+  - en: "Nikhila Ravi and others (2024), *SAM 2: Segment Anything in Images and Videos*: section 4, the model, with Hiera as its image encoder and the memory that follows a thing through a video, which this lesson leaves out; and section 6.3, SAM 2 on photos, more accurate than the first SAM and 6 times faster"
+    nl: "Nikhila Ravi en anderen (2024), *SAM 2: Segment Anything in Images and Videos*: paragraaf 4, het model, met Hiera als image encoder en het geheugen dat een ding door een video volgt, dat deze les weglaat; en paragraaf 6.3, SAM 2 op foto's, nauwkeuriger dan de eerste SAM en 6 keer zo snel"
