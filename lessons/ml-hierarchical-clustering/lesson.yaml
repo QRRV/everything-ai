@@ -1,0 +1,35 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: ml-hierarchical-clustering
+minutes: 15
+title:
+  en: "Clusters inside clusters: hierarchical clustering"
+  nl: "Clusters in clusters: hierarchical clustering"
+goal:
+  en: "build a tree of clusters inside clusters with four linkages, read its dendrogram, and cut it into the number of clusters you want."
+  nl: "een boom van clusters in clusters bouwen met vier linkages, het dendrogram ervan lezen, en het snijden in het aantal clusters dat je wilt."
+summary:
+  - en: "Hierarchical clustering starts with every example as its own cluster and merges the two closest clusters until one is left: 341 merges for the 342 penguins. Every k lies in the same tree, each clustering inside the one above it, so you choose k afterwards, where k-means gives a new clustering for every k."
+    nl: "Hierarchical clustering begint met elk voorbeeld als zijn eigen cluster en voegt de twee dichtstbijzijnde clusters samen tot er één over is: 341 keer samenvoegen voor de 342 pinguïns. Elke k ligt in dezelfde boom, elke clustering binnen die erboven, dus je kiest k achteraf, waar k-means voor elke k een nieuwe clustering geeft."
+  - en: "The linkage says what close means: single linkage takes the closest pair, complete linkage the farthest, average linkage the mean distance, and Ward the smallest rise in the within-cluster sum of squares. Cut into three, Ward finds the three species with 152, 126 and 64 penguins; single linkage gives 340, 1 and 1, because a chain of short steps joins the species."
+    nl: "De linkage zegt wat dichtbij betekent: single linkage neemt het dichtstbijzijnde paar, complete linkage het verste, average linkage de gemiddelde afstand, en Ward de kleinste stijging van de within-cluster sum of squares. In drie gesneden vindt Ward de drie soorten met 152, 126 en 64 pinguïns; single linkage geeft 340, 1 en 1, omdat een ketting van korte stapjes de soorten verbindt."
+  - en: "The dendrogram draws every merge at the height of its distance. A cut under the k − 1 highest merges gives k clusters, and a long stretch without merges is a good place to cut. In scipy: `linkage(X, method)` builds the tree, `fcluster(Z, k, criterion=\"maxclust\")` cuts it."
+    nl: "Het dendrogram tekent elke samenvoeging op de hoogte van haar afstand. Een snede onder de bovenste k − 1 samenvoegingen geeft k clusters, en een lang stuk zonder samenvoegingen is een goede plek om te snijden. In scipy: `linkage(X, method)` bouwt de boom, `fcluster(Z, k, criterion=\"maxclust\")` snijdt hem."
+can_now:
+  - en: "write the single-linkage distance between two clusters in NumPy"
+    nl: "de afstand van single linkage tussen twee clusters schrijven in NumPy"
+    by: single-link
+  - en: "build and cut a hierarchical clustering with scipy, for every linkage"
+    nl: "een hierarchical clustering bouwen en snijden met scipy, voor elke linkage"
+    by: largest
+  - en: "say why single linkage can chain clusters together"
+    nl: "zeggen waarom single linkage clusters aan elkaar kan rijgen"
+    by: chain
+further_reading:
+  - en: "Joe H. Ward Jr. (1963), *Hierarchical grouping to optimize an objective function*, Journal of the American Statistical Association 58(301): where Ward's method comes from"
+    nl: "Joe H. Ward Jr. (1963), *Hierarchical grouping to optimize an objective function*, Journal of the American Statistical Association 58(301): waar de methode van Ward vandaan komt"
+  - en: "Trevor Hastie, Robert Tibshirani and Jerome Friedman (2009), *The Elements of Statistical Learning*, second edition, section 14.3.12 *Hierarchical clustering*: the linkages side by side, with their dendrograms"
+    nl: "Trevor Hastie, Robert Tibshirani en Jerome Friedman (2009), *The Elements of Statistical Learning*, tweede editie, paragraaf 14.3.12 *Hierarchical clustering*: de linkages naast elkaar, met hun dendrogrammen"
+  - en: "SciPy documentation, *scipy.cluster.hierarchy.linkage*: the linkages and the layout of the matrix `Z`"
+    nl: "SciPy-documentatie, *scipy.cluster.hierarchy.linkage*: de linkages en hoe de matrix `Z` is opgebouwd"

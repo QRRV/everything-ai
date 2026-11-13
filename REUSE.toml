@@ -52,6 +52,12 @@ SPDX-FileCopyrightText = "Copyright (c) Facebook, Inc. and its affiliates. All r
 SPDX-License-Identifier = "BSD-3-Clause"
 
 [[annotations]]
+path = "data/qmnist-tsne-maps.npz"
+precedence = "override"
+SPDX-FileCopyrightText = "Copyright (c) Facebook, Inc. and its affiliates. All rights reserved. (QMNIST; t-SNE maps of its first 1,000 test images, made for Everything AI)"
+SPDX-License-Identifier = "BSD-3-Clause"
+
+[[annotations]]
 path = "data/imagenet-classes.txt"
 precedence = "override"
 SPDX-FileCopyrightText = "Copyright (c) Soumith Chintala 2016, All rights reserved. (torchvision; the names of ImageNet's classes)"
@@ -253,4 +259,10 @@ SPDX-License-Identifier = "CC-BY-4.0"
 path = "data/metro-interstate-traffic.csv.gz"
 precedence = "override"
 SPDX-FileCopyrightText = "2019 John Hogue (Metro Interstate Traffic Volume, UCI Machine Learning Repository, https://doi.org/10.24432/C5X60B)"
+SPDX-License-Identifier = "CC-BY-4.0"
+
+[[annotations]]
+path = "data/online-retail-baskets.csv.gz"
+precedence = "override"
+SPDX-FileCopyrightText = "2015 Daqing Chen (Online Retail, UCI Machine Learning Repository, https://doi.org/10.24432/C5BW33; the orders as sets of products, made for Everything AI)"
 SPDX-License-Identifier = "CC-BY-4.0"

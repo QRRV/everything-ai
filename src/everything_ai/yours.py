@@ -21,6 +21,7 @@ every word comes from course/phrases.yaml or from the lesson, in its language.
     table()     a pandas table the code makes, and the right one beside it when it differs
     graph()     a dictionary of neighbor lists or an adjacency matrix, drawn as the graph it stores
     dropped()   the rows of a table that a cleaning rule leaves out, beside the right ones
+    centroids() the examples of each class as dots, with the mean of each class the code computes, and the right ones
 """
 from __future__ import annotations
 
@@ -58,8 +59,13 @@ class _Short(reprlib.Repr):
         if value is Ellipsis:   # `...`, the gap the learner still fills in, is written the way they typed it
             return "..."
         kind = type(value).__name__
-        if kind == "ndarray" and value.size > 8:   # a big array by its shape: its numbers do not fit on a line anyway
+        numpy = type(value).__module__ == "numpy"
+        if numpy and kind == "ndarray" and value.size > 8:   # a big array by its shape: its numbers do not fit on a line anyway
             return f"array{tuple(int(n) for n in value.shape)}".replace(",)", ")")
+        if numpy and kind == "ndarray" and value.dtype.kind in "biufUS":   # array(['Adelie', 'Gentoo']), without its dtype
+            return "array(" + self.repr1(value.round(3).tolist() if value.dtype.kind == "f" else value.tolist(), level) + ")"
+        if numpy and getattr(value, "ndim", None) == 0 and hasattr(value, "item"):   # 'Gentoo', not np.str_('Gentoo')
+            return self.repr1(value.item(), level)
         if kind == "DataFrame" and type(value).__module__.startswith("pandas"):
             return f"DataFrame({value.shape[0]}×{value.shape[1]})"
         if kind == "Series" and type(value).__module__.startswith("pandas"):
@@ -685,6 +691,50 @@ def bars(call: int = 0, *, title: Text | None = None, ylabel: Text | str = "", t
             panel.line([i - 0.42, i + 0.42], [number(want.get(k))] * 2, role="ink", width=2, dashed=True)
         width = max(330, min(640, 70 + 34 * len(keys)))
         return _figure(heading, chart.figure([panel], alt=heading, width=width, height=230) + key)
+    return picture
+
+
+def outcome_bars(keys: list, *, title: Text, xlabel: Text | str = "", ylabel: Text | str = "", panels: list | None = None):
+    """What a code box ends with, a dictionary such as {"ward": 152}, as a bar per key in `keys`, with the course's
+    value as a dashed line over each bar, as in `bars`. With `panels` (titles, one per panel), every value is a list
+    such as [3, 15], and its item i is drawn in panel i, so numbers of different sizes each get their own axis."""
+    def picture(seen: checking.Seen) -> str:
+        mine = seen.mine
+        if mine is None or not mine.has_value or not isinstance(mine.value, dict) or not seen.want.has_value:
+            return ""
+        got, want = mine.value, seen.want.value
+
+        def number(v, i):
+            if panels is not None:
+                v = v[i] if isinstance(v, (list, tuple)) and len(v) > i else None
+            try:
+                return float(v) if v is not None and not isinstance(v, (bool, str)) else 0.0
+            except (TypeError, ValueError):
+                return 0.0
+        lang = seen.lang
+        heading = seen.word(title)
+        drawn = []
+        for i, name in enumerate(panels if panels is not None else [None]):
+            mine_, right = [number(got.get(k), i) for k in keys], [number(want.get(k), i) for k in keys]
+            hi = max(mine_ + right + [1])
+            whole = all(float(v).is_integer() for v in mine_ + right)
+            yticks = [float(t) for t in chart.ticks(0, hi) if not whole or float(t).is_integer()]
+            panel = chart.Panel(x=(-0.6, len(keys) - 0.4), y=(0, hi * 1.08), title=seen.word(name) if name else "",
+                                xlabel=seen.word(xlabel), ylabel=seen.word(ylabel), yticks=yticks, xticks=list(range(len(keys))),
+                                xtick_labels=[str(k) for k in keys])
+            for j in range(len(keys)):
+                if mine_[j] > 0:
+                    panel.rect(j - 0.34, 0, j + 0.34, min(mine_[j], hi * 1.08), role="data")
+                panel.line([j - 0.42, j + 0.42], [right[j]] * 2, role="ink", width=2, dashed=True)
+            drawn.append(panel)
+        key = (f'<div style="font-family:var(--ea-font-ui);font-size:0.82rem;color:var(--ea-ink-2);display:flex;gap:1.2rem;'
+               f'flex-wrap:wrap;margin-top:0.3rem">'
+               f'<span><svg width="14" height="12" aria-hidden="true"><rect x="1" y="1" width="12" height="10" style="fill:var(--ea-data);'
+               f'fill-opacity:0.18;stroke:var(--ea-data);stroke-width:1.2"/></svg> {html.escape(_word("yours-code", lang))}</span>'
+               f'<span><svg width="26" height="10" aria-hidden="true"><line x1="1" y1="5" x2="25" y2="5" style="stroke:var(--ea-ink);'
+               f'stroke-width:2;stroke-dasharray:5 5"/></svg> {html.escape(_word("yours-right", lang))}</span></div>')
+        width = max(330, min(640, 70 + 46 * len(keys)))   # each panel; two side by side where the page is wide enough
+        return _figure(heading, chart.figure(drawn, alt=heading, width=width, height=230) + key)
     return picture
 
 
@@ -1897,4 +1947,59 @@ def dropped(call: int = 0, *, title: Text | None = None, columns: list[str] | No
         heading = seen.word(title) if title is not None else _word("yours-dropped", lang)
         body = f'<div style="display:flex;flex-wrap:wrap;gap:0.6rem 1.1rem;align-items:flex-start">{"".join(parts)}</div>'
         return _figure(heading, body, alt=counted(_word("yours-code", lang), gone))
+    return picture
+
+
+# --- centroids: the mean of each class, among its examples -------------------------------------------------------
+
+def centroids(call: int = 0, *, title: Text | None = None):
+    """The examples of case `call`, (X, y), as dots by their first two features, each class in its group colour and
+    shape (style guide 1.7), with the mean of each class that the learner's function gives back, (names, means), as a
+    large mark of its class; the right means are rings in ink, which stand around the learner's when they are right.
+    Nothing when what the function gives back is not a name and a mean of at least two numbers for each class."""
+    def picture(seen: checking.Seen) -> str:
+        import numpy as np
+        out = _outcome(seen, call)
+        if out is None:
+            return ""
+        got, want, start, what = out
+        if len(start) < 2:
+            return ""
+        try:
+            X = np.asarray(checking._copy(start[0][1]), dtype=float)
+            y = [str(v) for v in np.asarray(checking._copy(start[1][1])).tolist()]
+            names_w = [str(v) for v in np.asarray(want[0]).tolist()]
+            means_w = np.asarray(want[1], dtype=float)
+        except (TypeError, ValueError, IndexError):
+            return ""
+        try:
+            names_g = [str(v) for v in np.asarray(got[0]).tolist()]
+            means_g = np.asarray(got[1], dtype=float)
+        except (TypeError, ValueError, IndexError, KeyError):
+            return ""
+        if X.ndim != 2 or X.shape[1] < 2 or means_g.ndim != 2 or means_g.shape[1] < 2 or len(names_g) != len(means_g):
+            return ""
+        groups = {name: k for k, name in enumerate(names_w[:4])}
+        every = np.concatenate([X[:, :2], means_g[:, :2], means_w[:, :2]])
+        lo, hi = every.min(axis=0), every.max(axis=0)
+        pad = np.maximum((hi - lo) * 0.12, 0.3)
+        panel = chart.Panel(x=(float(lo[0] - pad[0]), float(hi[0] + pad[0])), y=(float(lo[1] - pad[1]), float(hi[1] + pad[1])))
+        for name, k in groups.items():
+            rows = X[[v == name for v in y]]
+            if len(rows):
+                panel.group(rows[:, 0], rows[:, 1], k, r=4)
+        for name, m in zip(names_w, means_w):
+            panel.points([m[0]], [m[1]], "ink", r=10, hollow=True)
+        for name, m in zip(names_g, means_g):
+            panel.group([m[0]], [m[1]], groups.get(name, 3), r=7)
+        lang = seen.lang
+        heading = seen.word(title) if title is not None else _word(
+            "yours-centroids", lang, call=what if len(what) <= 34 else f"{seen.exercise.function}(…)")
+        key = (f'<div style="font-family:var(--ea-font-ui);font-size:0.82rem;color:var(--ea-ink-2);display:flex;gap:1.2rem;'
+               f'flex-wrap:wrap;margin-top:0.1rem">'
+               f'<span><svg width="16" height="16" aria-hidden="true"><circle cx="8" cy="8" r="6" style="fill:var(--ea-group-1)"/></svg> '
+               f'{html.escape(_word("yours-code", lang))}</span>'
+               f'<span><svg width="16" height="16" aria-hidden="true"><circle cx="8" cy="8" r="6.5" style="fill:none;stroke:var(--ea-ink);'
+               f'stroke-width:1.6"/></svg> {html.escape(_word("yours-right", lang))}</span></div>')
+        return _figure(heading, chart.figure([panel], alt=heading, width=320, height=280) + key)
     return picture

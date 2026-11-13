@@ -307,6 +307,10 @@ phrases:
   group: yours
   en: "{who}: leaves out {n} of the {total} rows"
   nl: "{who}: laat {n} van de {total} rijen weg"
+- id: yours-centroids
+  group: yours
+  en: "The means {call} gives, among the examples"
+  nl: "De gemiddelden die {call} geeft, tussen de voorbeelden"
 - id: yours-code
   group: yours
   en: your code

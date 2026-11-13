@@ -1,0 +1,28 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: ml-no-free-lunch
+minutes: 15
+title:
+  en: "No model wins everywhere"
+  nl: "Geen model wint overal"
+goal:
+  en: "say what each of four models assumes about the data, see each win where its assumption holds, and work out why averaged over all problems no model wins."
+  nl: "zeggen wat elk van vier modellen over de data aanneemt, zien dat elk wint waar zijn aanname klopt, en uitrekenen waarom gemiddeld over alle problemen geen model wint."
+summary:
+  - en: "Training examples only say what is right where they lie; everywhere else a model must guess, and how it guesses is what it assumes: near examples alike (k-NN), one round clump per class (the nearest centroid), a straight line between the classes (the widest street), thresholds on one feature at a time (a decision tree)."
+    nl: "Voorbeelden uit de training set zeggen alleen wat goed is waar ze liggen; overal elders moet een model gokken, en hoe het gokt is wat het aanneemt: voorbeelden die dicht bij elkaar liggen lijken op elkaar (k-NN), één ronde klont per klasse (de nearest centroid), een rechte lijn tussen de klassen (de breedste straat), drempels op één feature tegelijk (een beslisboom)."
+  - en: "On four made-up datasets a different model is best each time, and on coin flips all of them are close to 0.5: none is better than always saying the larger class."
+    nl: "Op vier verzonnen datasets is telkens een ander model het beste, en op muntworpen zitten ze allemaal dicht bij 0,5: geen enkel is beter dan altijd de grootste klasse zeggen."
+  - en: "The no free lunch theorem: averaged over all possible worlds that fit the training set, every rule gets exactly half the unseen examples right. A model wins only on problems that fit its assumption, so compare models on your own data."
+    nl: "De no-free-lunch-stelling: gemiddeld over alle mogelijke werelden die bij de training set passen, heeft elke regel precies de helft van de onbekende voorbeelden goed. Een model wint alleen op problemen die bij zijn aanname passen, dus vergelijk modellen op je eigen data."
+can_now:
+  - en: "list every way a few unseen examples can be labeled"
+    nl: "elke manier opsommen waarop een paar onbekende voorbeelden een label kunnen krijgen"
+    by: all-worlds
+  - en: "work out how often a rule is right, averaged over a set of worlds"
+    nl: "uitrekenen hoe vaak een regel goed zit, gemiddeld over een set werelden"
+    by: mean-right
+  - en: "say why one dataset does not make a model the best one"
+    nl: "zeggen waarom één dataset een model niet het beste maakt"
+    by: one-dataset

@@ -1,0 +1,28 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: ml-max-margin
+minutes: 15
+title:
+  en: "The widest street: the maximum-margin classifier"
+  nl: "De breedste straat: de maximum-margin classifier"
+goal:
+  en: "measure the margin of a line, find the line with the widest street between two classes, and let a soft margin trade width for slack."
+  nl: "de marge van een lijn meten, de lijn met de breedste straat tussen twee klassen vinden, en met een soft margin breedte ruilen tegen slack."
+summary:
+  - en: "The margin of a straight line is the smallest distance from the training examples to it, each on its own side. The maximum-margin classifier takes the line with the largest margin: the middle of the widest street with no example on it."
+    nl: "De marge van een rechte lijn is de kleinste afstand van de voorbeelden uit de training set tot die lijn, elk aan zijn eigen kant. De maximum-margin classifier neemt de lijn met de grootste marge: het midden van de breedste straat zonder voorbeeld erop."
+  - en: "Only the support vectors, the examples on the edges of the street, decide where it lies: for the Chinstraps and Gentoos 3 of the 110 penguins."
+    nl: "Alleen de support vectors, de voorbeelden op de randen van de straat, bepalen waar hij ligt: bij de Chinstraps en Gentoos 3 van de 110 pinguïns."
+  - en: "A soft margin lets examples onto the street at a price C per unit of slack. A small C is a wide street and strong regularization; for the penguins C = 0.1 gave a street twelve times as wide as the street without a penguin on it, without a mistake on the validation set."
+    nl: "Een soft margin laat voorbeelden op de straat toe tegen een prijs C per eenheid slack. Een kleine C is een brede straat en sterke regularisatie; bij de pinguïns gaf C = 0,1 een straat twaalf keer zo breed als de straat zonder pinguïn erop, zonder fout op de validation set."
+can_now:
+  - en: "compute the margin of a line on a set of examples"
+    nl: "de marge van een lijn uitrekenen op een set voorbeelden"
+    by: margin
+  - en: "compute the slack of every example for a soft margin"
+    nl: "de slack van elk voorbeeld uitrekenen voor een soft margin"
+    by: slacks
+  - en: "say which examples decide where the widest street lies"
+    nl: "zeggen welke voorbeelden bepalen waar de breedste straat ligt"
+    by: not-a-support-vector

@@ -14,11 +14,12 @@ import re
 from dataclasses import dataclass, field
 
 _ROLES = {"data", "param", "pred", "residual", "loss", "grad", "hyper", "hidden"}
+_GROUPS = {"group-1", "group-2", "group-3", "group-4"}   # the colours of Panel.group, for lines of a group, such as a cluster's branches
 _CLIPS = itertools.count()   # every clip path on a page needs its own id
 
 
 def _colour(role: str) -> str:
-    if role in _ROLES:
+    if role in _ROLES or role in _GROUPS:
         return f"var(--ea-{role})"
     return {"ink": "var(--ea-ink)", "ink-2": "var(--ea-ink-2)", "ink-3": "var(--ea-ink-3)", "axis": "var(--ea-axis)"}[role]
 
@@ -96,10 +97,12 @@ class Panel:
         self.marks.append(("arrow", x0, y0, x1, y1, role, width))
         return self
 
-    def text(self, x, y, words: str, role: str = "ink", anchor: str = "middle"):
+    def text(self, x, y, words: str, role: str = "ink", anchor: str = "middle", halo: bool = False):
         """Words centred on (x, y), such as the name of a vector next to its head; with anchor "start", they begin
-        at x, as in a key, and at least 6 px clear of the y-axis, such as the name above a row of bars or dots."""
-        self.marks.append(("text", x, y, words, role, anchor))
+        at x, as in a key, and at least 6 px clear of the y-axis, such as the name above a row of bars or dots. With
+        `halo`, a rim in the colour of the page keeps them readable on top of many dots, such as the name of a group
+        at its middle."""
+        self.marks.append(("text", x, y, words, role, anchor, halo))
         return self
 
     def points(self, xs, ys, role: str = "data", r: float = 4, hollow: bool = False):
@@ -119,9 +122,10 @@ class Panel:
         self.marks.append(("area", list(xs), list(ys), role))
         return self
 
-    def rect(self, x0, y0, x1, y1, role: str = "loss"):
-        """A rectangle between two corners, as a light wash with an outline in the role's colour."""
-        self.marks.append(("rect", x0, y0, x1, y1, role))
+    def rect(self, x0, y0, x1, y1, role: str = "loss", solid: bool = False):
+        """A rectangle between two corners, as a light wash with an outline in the role's colour; `solid` fills it,
+        for the first of two groups of bars beside open ones (style guide 1.7: filled and open, no colour)."""
+        self.marks.append(("rect", x0, y0, x1, y1, role, solid))
         return self
 
 
@@ -241,9 +245,10 @@ def _panel(p: Panel, index: int, left: float, width: float, height: float) -> st
                 body.append(f'<line x1="{px0:.1f}" y1="{py0:.1f}" x2="{bx:.1f}" y2="{by:.1f}" style="stroke:{_colour(role)};stroke-width:{w};stroke-linecap:round"/>'
                             f'<polygon points="{corners}" style="fill:{_colour(role)}"/>')
         elif kind == "text":
-            _, a, b, words, role, anchor = mark
+            _, a, b, words, role, anchor, halo = mark
             at = max(X(a), L + 6) if anchor == "start" else X(a)
-            body.append(f'<text x="{at:.1f}" y="{Y(b) + 5:.1f}" style="font-size:14px;font-weight:600;fill:{_colour(role)};text-anchor:{anchor}">{html.escape(words)}</text>')
+            rim = ";stroke:var(--ea-page);stroke-width:4px;stroke-linejoin:round;paint-order:stroke" if halo else ""
+            body.append(f'<text x="{at:.1f}" y="{Y(b) + 5:.1f}" style="font-size:14px;font-weight:600;fill:{_colour(role)};text-anchor:{anchor}{rim}">{html.escape(words)}</text>')
         elif kind == "points":
             _, xs, ys, role, r, hollow = mark
             look = (f"fill:var(--ea-page);stroke:{_colour(role)};stroke-width:1.8" if hollow
@@ -275,9 +280,9 @@ def _panel(p: Panel, index: int, left: float, width: float, height: float) -> st
                 corners = " ".join(f"{a:.1f},{b:.1f}" for a, b in pts) + f" {pts[-1][0]:.1f},{B:.1f} {pts[0][0]:.1f},{B:.1f}"
                 body.append(f'<polygon points="{corners}" style="fill:{_colour(role)};fill-opacity:0.18;stroke:none"/>')
         elif kind == "rect":
-            _, a0, b0, a1, b1, role = mark
+            _, a0, b0, a1, b1, role, solid = mark
             xa, xb, ya, yb = sorted((X(a0), X(a1))) + sorted((Y(b0), Y(b1)))
             body.append(f'<rect x="{xa:.1f}" y="{ya:.1f}" width="{xb - xa:.1f}" height="{yb - ya:.1f}" '
-                        f'style="fill:{_colour(role)};fill-opacity:0.18;stroke:{_colour(role)};stroke-width:1.2"/>')
+                        f'style="fill:{_colour(role)};fill-opacity:{1 if solid else 0.18};stroke:{_colour(role)};stroke-width:1.2"/>')
     out.append(f'<g clip-path="url(#{clip})">{"".join(body)}</g>')
     return "".join(out)

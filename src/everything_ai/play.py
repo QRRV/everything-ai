@@ -780,6 +780,11 @@ class Plane(anywidget.AnyWidget):
       let nameAt = (y0 + y1) / 2, gap = 0;
       for (let k = 1; k < tys.length; k++) if (tys[k] - tys[k - 1] > gap + 0.5) { gap = tys[k] - tys[k - 1]; nameAt = (tys[k] + tys[k - 1]) / 2; }
       const nameY = mk("text", { x: 6, y: nameAt + 5, class: "ea-plane-name" }, svg); nameY.textContent = L.y;
+      // a long name, such as "body mass (g)", would run into the square: it stands upright in that gap, if it fits there
+      const longY = 7.6 * L.y.length;   // about its width in pixels; the tick labels at both ends of the gap need room too
+      if (longY > 50 && longY <= gap - 16) {
+        nameY.setAttribute("x", 0); nameY.setAttribute("y", 0); nameY.setAttribute("text-anchor", "middle");
+        nameY.setAttribute("transform", `translate(17, ${nameAt}) rotate(-90)`); }
       const cross = mk("path", { class: "ea-plane-cross" }, svg);
       const dot = mk("circle", { r: 7, class: "ea-plane-dot" }, svg);
       let lit = false;

@@ -1,0 +1,28 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: ml-nearest-centroid
+minutes: 15
+title:
+  en: "Learn now or later: the nearest centroid"
+  nl: "Nu leren of later: de nearest centroid"
+goal:
+  en: "learn one mean per class before any question, classify by the nearest mean, and say what that costs against k-NN."
+  nl: "vooraf één gemiddelde per klasse leren, classificeren met het dichtstbijzijnde gemiddelde, en zeggen wat dat kost tegenover k-NN."
+summary:
+  - en: "k-NN is lazy learning: it keeps every training example and does its work at every question. Eager learning does the work before any question and keeps only what it learned."
+    nl: "k-NN is lazy learning: het bewaart elk voorbeeld uit de training set en doet zijn werk bij elke vraag. Eager learning doet het werk voor er iets gevraagd wordt en bewaart alleen wat het geleerd heeft."
+  - en: "The nearest centroid classifier learns the mean of each class, its centroid, and gives a new example the class of the nearest centroid: for the penguins 6 numbers and 3 distances, against 412 numbers and 206 distances for k-NN."
+    nl: "De nearest centroid classifier leert het gemiddelde van elke klasse, haar centroid, en geeft een nieuw voorbeeld de klasse van de dichtstbijzijnde centroid: voor de pinguïns 6 getallen en 3 afstanden, tegen 412 getallen en 206 afstanden voor k-NN."
+  - en: "The points equally far from two centroids lie on a straight line, so its boundaries are straight. That is enough when every class is one round clump; a class in a bent band or in two clumps fools it."
+    nl: "De punten die even ver van twee centroids liggen, liggen op een rechte lijn, dus zijn grenzen zijn recht. Dat is genoeg als elke klasse één ronde klont is; een klasse in een gebogen band of in twee klonten zet hem op het verkeerde been."
+can_now:
+  - en: "learn the centroid of every class with a mask and a mean"
+    nl: "de centroid van elke klasse leren met een mask en een gemiddelde"
+    by: centroids
+  - en: "classify a new example by its nearest centroid"
+    nl: "een nieuw voorbeeld classificeren met zijn dichtstbijzijnde centroid"
+    by: nc-predict
+  - en: "say when one mean per class is not enough"
+    nl: "zeggen wanneer één gemiddelde per klasse niet genoeg is"
+    by: two-clumps

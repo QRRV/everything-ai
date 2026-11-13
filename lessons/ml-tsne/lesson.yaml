@@ -1,0 +1,35 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: ml-tsne
+minutes: 15
+title:
+  en: "A map of many dimensions: t-SNE"
+  nl: "Een kaart van veel dimensies: t-SNE"
+goal:
+  en: "draw examples with many features on a flat map with t-SNE, say what its perplexity does, and read the map for its neighbors, not for the sizes of its islands or the distances between them."
+  nl: "voorbeelden met veel features op een platte kaart tekenen met t-SNE, zeggen wat de perplexity ervan doet, en de kaart lezen op de buren, niet op de grootte van de eilanden of de afstanden ertussen."
+summary:
+  - en: "t-SNE gives every example neighbor probabilities: the softmax of minus its squared distances divided by 2 times a width squared. The perplexity, e to the power of minus the sum of p log p, is about the number of neighbors that count; you choose it, and t-SNE finds the width for every example. Then gradient descent moves the examples on a flat map until the probabilities there match."
+    nl: "t-SNE geeft elk voorbeeld kansen op buren: de softmax van min de gekwadrateerde afstanden gedeeld door 2 keer een breedte in het kwadraat. De perplexity, e tot de macht min de som van p log p, is ongeveer het aantal buren dat telt; jij kiest hem, en t-SNE zoekt voor elk voorbeeld de breedte. Daarna schuift gradient descent de voorbeelden op een platte kaart tot de kansen daar kloppen."
+  - en: "On the 1,000 test digits of QMNIST, the nearest digit is the same digit for 86.4% in the 784 numbers, for 38.9% on the plane of PCA, and for 84.2% to 85.4% on the maps of t-SNE with perplexity 2 to 100."
+    nl: "Op de 1.000 testcijfers van QMNIST is het dichtstbijzijnde cijfer hetzelfde cijfer voor 86,4% in de 784 getallen, voor 38,9% op het vlak van PCA, en voor 84,2% tot 85,4% op de kaarten van t-SNE met perplexity 2 tot 100."
+  - en: "t-SNE keeps neighbors, not sizes or distances: the 1s lie closest together in the 784 numbers, but at perplexity 2 and 5 three islands are smaller than theirs, and which island lies farthest from the 0s changes with the perplexity."
+    nl: "t-SNE bewaart buren, geen groottes of afstanden: de 1'en liggen in de 784 getallen het dichtst bij elkaar, maar bij perplexity 2 en 5 zijn drie eilanden kleiner dan dat van hen, en welk eiland het verst van de 0'en ligt, verandert met de perplexity."
+can_now:
+  - en: "turn distances into neighbor probabilities in NumPy"
+    nl: "afstanden omzetten in kansen op buren in NumPy"
+    by: neighbor-probs
+  - en: "compute the perplexity of probabilities, and say what it counts"
+    nl: "de perplexity van kansen berekenen, en zeggen wat die telt"
+    by: perplexity
+  - en: "read a map of t-SNE for which examples are neighbors, and not for the sizes of its islands or the distances between them"
+    nl: "een kaart van t-SNE lezen op welke voorbeelden buren zijn, en niet op de grootte van de eilanden of de afstanden ertussen"
+    by: islands
+further_reading:
+  - en: "Laurens van der Maaten and Geoffrey Hinton (2008), *Visualizing data using t-SNE*, Journal of Machine Learning Research 9: where t-SNE comes from, with maps of MNIST"
+    nl: "Laurens van der Maaten en Geoffrey Hinton (2008), *Visualizing data using t-SNE*, Journal of Machine Learning Research 9: waar t-SNE vandaan komt, met kaarten van MNIST"
+  - en: "Martin Wattenberg, Fernanda Viégas and Ian Johnson (2016), *How to use t-SNE effectively*, Distill: what the perplexity, the sizes of clusters and the distances between them do, on small examples you can change yourself"
+    nl: "Martin Wattenberg, Fernanda Viégas en Ian Johnson (2016), *How to use t-SNE effectively*, Distill: wat de perplexity, de grootte van clusters en de afstanden ertussen doen, op kleine voorbeelden die je zelf kunt veranderen"
+  - en: "scikit-learn user guide, *Manifold learning*, section *t-distributed Stochastic Neighbor Embedding (t-SNE)*: its settings, and why it is slow on large data"
+    nl: "scikit-learn user guide, *Manifold learning*, paragraaf *t-distributed Stochastic Neighbor Embedding (t-SNE)*: de instellingen, en waarom hij traag is op grote data"

@@ -1,0 +1,35 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: ml-association-rules
+minutes: 15
+title:
+  en: "Bought together: support, confidence and lift"
+  nl: "Samen gekocht: support, confidence en lift"
+goal:
+  en: "find which products end up in the same order with support, confidence and lift, and say why Apriori may skip most sets."
+  nl: "met support, confidence en lift vinden welke producten in dezelfde bestelling belanden, en zeggen waarom Apriori de meeste sets mag overslaan."
+summary:
+  - en: "The support of a set of products is the share of the orders that hold all of it. The rule A → B has a confidence, the support of A and B together divided by that of A, which is P(B | A), and a lift, the confidence divided by the support of B: how many times as often B is in an order with A as in any order."
+    nl: "De support van een set producten is het deel van de bestellingen dat ze allemaal bevat. De regel A → B heeft een confidence, de support van A en B samen gedeeld door die van A, en dat is P(B | A), en een lift, de confidence gedeeld door de support van B: hoeveel keer zo vaak B in een bestelling met A zit als in een willekeurige bestelling."
+  - en: "In 19,773 orders of a British online shop, the green regency teacup is in 1,013 and the roses one in 1,065, 5.4% of all orders; 767 hold both, so GREEN → ROSES has a confidence of 0.757 and a lift of 14.06."
+    nl: "In 19.773 bestellingen van een Britse webwinkel zit de groene regency-theekop in 1.013 en die met rozen in 1.065, 5,4% van alle bestellingen; 767 bevatten ze allebei, dus GREEN → ROSES heeft een confidence van 0,757 en een lift van 14,06."
+  - en: "A set is never in more orders than any part of it, so Apriori makes larger sets only of frequent smaller ones: at min support 0.02 it counts 45,451 of all 7,085,730 pairs. A lift needs a frequent set behind it: two products bought once, in the same order, have a lift of 19,773."
+    nl: "Een set zit nooit in meer bestellingen dan elk deel ervan, dus maakt Apriori grotere sets alleen van frequente kleinere: bij min support 0,02 telt het 45.451 van alle 7.085.730 paren. Een lift heeft een frequente set nodig: twee producten die één keer gekocht zijn, in dezelfde bestelling, hebben een lift van 19.773."
+can_now:
+  - en: "compute the support of a set of products in plain Python"
+    nl: "de support van een set producten berekenen in gewoon Python"
+    by: support
+  - en: "compute the confidence and the lift of a rule from four counts"
+    nl: "de confidence en de lift van een regel berekenen uit vier aantallen"
+    by: rule
+  - en: "say why Apriori may skip a set with a part that is not frequent"
+    nl: "zeggen waarom Apriori een set mag overslaan met een deel dat niet frequent is"
+    by: apriori
+further_reading:
+  - en: "Rakesh Agrawal and Ramakrishnan Srikant (1994), *Fast algorithms for mining association rules*, Proceedings of VLDB 1994: where Apriori comes from"
+    nl: "Rakesh Agrawal en Ramakrishnan Srikant (1994), *Fast algorithms for mining association rules*, Proceedings of VLDB 1994: waar Apriori vandaan komt"
+  - en: "Daqing Chen, Sai Liang Sain and Kun Guo (2012), *Data mining for the online retail industry: a case study of RFM model-based customer segmentation using data mining*, Journal of Database Marketing and Customer Strategy Management 19(3): the shop of today's orders"
+    nl: "Daqing Chen, Sai Liang Sain en Kun Guo (2012), *Data mining for the online retail industry: a case study of RFM model-based customer segmentation using data mining*, Journal of Database Marketing and Customer Strategy Management 19(3): de winkel van de bestellingen van vandaag"
+  - en: "Jure Leskovec, Anand Rajaraman and Jeffrey Ullman, *Mining of Massive Datasets*, chapter 6, *Frequent itemsets*: support, confidence, interest and Apriori, with ways to count on data too big for memory"
+    nl: "Jure Leskovec, Anand Rajaraman en Jeffrey Ullman, *Mining of Massive Datasets*, hoofdstuk 6, *Frequent itemsets*: support, confidence, interest en Apriori, met manieren om te tellen op data die niet in het geheugen past"

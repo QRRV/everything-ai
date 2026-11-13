@@ -51,6 +51,7 @@ lessons:
   covers: [instance-based-leren-en-naive-bayes#2, instance-based-leren-en-naive-bayes#3]
   requires: [ml-knn, ml-kmeans]
   introduces: [c:lazy-learning, c:eager-learning, c:nearest-centroid-classifier]
+  uses: [c:k-nearest-neighbors, c:majority-voting, c:centroid, c:k-means, c:clustering, c:distance, c:norm, py:np-linalg-norm, c:standardization, c:feature-scaling, c:mean, c:standard-deviation, c:decision-boundary, c:logistic-regression, c:linear-regression, c:gradient-descent, c:loss, c:weight, c:bias-term, c:model-parameter, c:validation-set, c:train-set, c:classification, c:class, c:label, c:feature, c:example, c:prediction, c:model, c:training, v:scatter-plot, c:random-number-generator, py:np-random-generator, c:seed, c:csv, py:dataframe, py:pandas-select-filter, py:isna, py:np-array, py:np-indexing, py:boolean-mask, py:np-unique, py:np-argmin, py:np-mean, py:np-std, py:keyword-argument, c:axis, c:broadcasting, c:array, py:slicing, py:indexing, py:tuple, py:def, py:return, py:for, py:range, py:len, py:if, py:comparison, py:list, py:append, py:import, py:import-as, py:arithmetic, py:string-literal, py:print, py:comment, py:variable, py:underscore-name, q:predict, q:choice, q:exercise-with-check, q:run-cell]
   data: [palmer-penguins]
   ladder: [python, numpy]
   needs: any
@@ -62,8 +63,9 @@ lessons:
   module: modellen
   idea: "Of all straight lines that separate two classes, the maximum-margin classifier takes the one furthest from the nearest points, the support vectors; a soft margin lets a few points cross for a wider street, and C sets the price of each."
   covers: [svm-en-kernelmethoden#0]
-  requires: [ml-logistic-regression, ml-regularization, ml-feature-scaling, math-norms-cosine]
-  introduces: [c:margin, c:support-vector, c:maximum-margin-classifier, c:soft-margin, c:slack-variable]
+  requires: [ml-knn, ml-logistic-regression, ml-regularization, ml-feature-scaling, math-norms-cosine]
+  introduces: [c:margin, c:support-vector, c:maximum-margin-classifier, c:soft-margin, c:slack-variable, s:xi-slack, s:c-soft-margin, py:mask-assignment]
+  uses: [c:decision-boundary, c:logistic-regression, c:l2-regularization, c:regularization, c:weight-decay, c:hyperparameter, c:k-nearest-neighbors, c:norm, c:distance, c:dot-product, c:matrix-multiplication, c:standardization, c:feature-scaling, c:mean, c:standard-deviation, c:gradient-descent, c:loss, c:weight, c:bias-term, c:model-parameter, c:validation-set, c:train-set, c:classification, c:class, c:label, c:feature, c:example, c:prediction, c:model, c:vector, c:array, c:axis, c:broadcasting, c:random-number-generator, c:seed, c:csv, v:scatter-plot, py:dataframe, py:pandas-select-filter, py:isna, py:np-array, py:np-indexing, py:boolean-mask, py:matmul-operator, py:np-linalg-norm, py:min-max, py:np-sum, py:np-mean, py:np-std, py:np-random-generator, py:keyword-argument, py:slicing, py:tuple, py:def, py:return, py:comparison, py:import, py:import-as, py:arithmetic, py:float, py:string-literal, py:print, py:comment, py:variable, py:underscore-name, q:predict, q:choice, q:exercise-with-check, q:slider-task, q:run-cell]
   data: [palmer-penguins]
   ladder: [numpy]
   needs: any
@@ -77,6 +79,7 @@ lessons:
   covers: [multiclass-multilabel-en-ranking#0]
   requires: [ml-max-margin, ml-softmax]
   introduces: [c:one-vs-rest, c:one-vs-one, c:output-code]
+  uses: [c:maximum-margin-classifier, c:soft-margin, c:margin, c:softmax, c:logit, c:probability, c:k-nearest-neighbors, c:majority-voting, c:matrix, c:matrix-multiplication, c:vector, c:standardization, c:weight, c:bias-term, c:validation-set, c:train-set, c:classification, c:class, c:prediction, c:model, v:scatter-plot, py:np-array, py:matmul-operator, py:np-argmax, py:indexing, py:list, py:tuple, py:dict, py:for, py:if, py:comparison, py:def, py:return, py:import, py:import-as, py:round, py:arithmetic, py:float, py:string-literal, py:print, py:comment, py:variable, py:underscore-name, q:predict, q:choice, q:exercise-with-check, q:slider-task, q:run-cell]
   data: [palmer-penguins]
   ladder: [python, numpy]
   needs: any
@@ -89,8 +92,9 @@ lessons:
   idea: "Every model assumes something about the data, such as a straight boundary, near points alike or splits along one feature; it wins where the assumption holds and loses where it does not, so without an assumption nothing can be learned and averaged over all problems no model wins."
   covers: [inductive-bias-no-free-lunch-occam#0]
   requires: [ml-nearest-centroid, ml-max-margin, ml-decision-tree, ml-cross-validation]
-  introduces: [c:no-free-lunch]
+  introduces: [c:no-free-lunch-theorem, py:list-concatenation]
   mentions: [c:inductive-bias]
+  uses: [c:k-nearest-neighbors, c:nearest-centroid-classifier, c:centroid, c:maximum-margin-classifier, c:decision-tree, c:tree-depth, c:tree-split, c:decision-boundary, c:cross-validation, c:fold, c:accuracy, c:lazy-learning, c:generalization, c:train-set, c:training, c:classification, c:class, c:label, c:feature, c:prediction, c:model, v:scatter-plot, py:list, py:nested-list, py:append, py:len, py:range, py:for, py:if, py:comparison, py:indexing, py:def, py:return, py:arithmetic, py:int, py:float, py:print, py:comment, py:variable, q:predict, q:choice, q:exercise-with-check, q:slider-task, q:run-cell]
   data: []
   ladder: [python]
   needs: any
@@ -104,7 +108,8 @@ lessons:
   idea: "Agglomerative clustering starts with every point as a cluster and merges the two closest until one is left; the linkage says what closest means, and the dendrogram shows every merge, so you choose the number of clusters afterwards."
   covers: [clustering#3]
   requires: [ml-choosing-k]
-  introduces: [c:hierarchical-clustering, c:linkage, c:dendrogram]
+  introduces: [c:hierarchical-clustering, c:linkage, c:dendrogram, py:scipy-linkage]
+  uses: [c:clustering, c:k-means, c:within-cluster-sum-of-squares, c:local-minimum, c:silhouette-score, c:distance, c:standardization, c:mean, c:outlier, c:noise, c:feature, c:example, c:k-nearest-neighbors, c:hyperparameter, py:np-linalg-norm, py:np-unique, py:np-array, py:np-mean, py:np-std, py:nested-list, py:dataframe, py:pandas-select-filter, py:isna, py:dict, py:for, py:def, py:return, py:list, py:append, py:min-max, py:int, py:float, py:keyword-argument, py:import, py:import-as, py:arithmetic, py:string-literal, py:print, py:comment, py:variable, py:underscore-name, v:scatter-plot, q:predict, q:choice, q:exercise-with-check, q:slider-task, q:run-cell]
   data: [palmer-penguins]
   ladder: [python, numpy]
   needs: any
@@ -118,6 +123,7 @@ lessons:
   covers: [clustering#4]
   requires: [ml-hierarchical-clustering, ml-knn]
   introduces: [c:dbscan, c:core-point, c:noise-point, c:density-based-clustering]
+  uses: [c:clustering, c:k-means, c:centroid, c:hierarchical-clustering, c:linkage, c:k-nearest-neighbors, c:distance, c:standardization, c:noise, c:label, c:feature, c:example, c:hyperparameter, py:np-linalg-norm, py:np-sum, py:np-unique, py:boolean-mask, py:np-array, py:nested-list, py:keyword-argument, py:sklearn-fit-predict, py:dict, py:for, py:def, py:return, py:list, py:append, py:int, py:len, py:bool, py:comparison, py:float, py:import, py:import-as, py:string-literal, py:print, py:comment, py:variable, py:underscore-name, v:scatter-plot, q:predict, q:choice, q:exercise-with-check, q:slider-task, q:run-cell]
   data: []
   ladder: [python, numpy]
   needs: any
@@ -127,10 +133,11 @@ lessons:
   level: basis
   domein: klassiek-ml
   module: ongesuperviseerd
-  idea: "t-SNE draws points of many dimensions on a flat map so that neighbors stay neighbors; it shows groups PCA blurs, but the size of a group and the distance between groups on the map mean little, and another seed or perplexity draws another map."
+  idea: "t-SNE draws points of many dimensions on a flat map so that neighbors stay neighbors; it shows groups PCA blurs, but the size of a group and the distance between groups on the map are not promised, and another perplexity draws another map."
   covers: [d10-manifold-learning-en-visualisatie#1]
   requires: [ml-pca, ml-digits-linear]
   introduces: [c:t-sne, c:perplexity-t-sne]
+  uses: [c:dimensionality-reduction, c:principal-component-analysis, c:principal-component, c:explained-variance, c:softmax, c:cross-entropy, c:gradient-descent, c:loss, c:k-nearest-neighbors, c:distance, c:k-means, c:clustering, c:exponent, c:logarithm, c:probability, c:seed, c:median, c:mean, c:pixel, c:feature, c:example, c:label, c:hyperparameter, py:np-load, py:np-exp, py:np-sum, py:np-argsort, py:np-linalg-norm, py:slicing, py:indexing, py:arithmetic, py:sklearn-fit-predict, py:keyword-argument, py:def, py:return, py:for, py:range, py:len, py:int, py:round, py:comparison, py:float, py:import, py:print, py:comment, py:variable, py:underscore-name, v:scatter-plot, v:bar-chart, q:predict, q:choice, q:exercise-with-check, q:slider-task, q:run-cell]
   warns: [perplexity]
   data: [qmnist]
   ladder: [numpy]
@@ -144,7 +151,9 @@ lessons:
   idea: "An association rule says that orders with one product often hold another; support counts how often both occur, confidence how often the second follows the first, and lift how much more often than chance, and Apriori finds frequent sets by growing only sets whose parts are frequent."
   covers: [patroonmining-en-dichtheidsschatting#0]
   requires: [prob-conditional, py-tuples-sets, data-groupby]
-  introduces: [c:association-rule, c:support, c:confidence, c:lift, c:frequent-itemset, c:apriori]
+  introduces: [c:association-rule, c:support, c:confidence, c:lift, c:frequent-itemset, c:apriori, py:set-subset]
+  mentions: [q:slider-task]
+  uses: [c:conditional-probability, c:probability, c:csv, c:file-path, c:function-argument, py:set, py:tuple, py:groupby, py:pandas-agg, py:dataframe, py:def, py:return, py:for, py:if, py:len, py:round, py:print, py:list, py:import, py:import-as, py:string-literal, py:variable, py:underscore-name, py:comment, py:arithmetic, py:comparison, py:bool, py:int, py:float, v:bar-chart, v:scatter-plot, q:predict, q:choice, q:exercise-with-check, q:run-cell]
   warns: [support, confidence, lift]
   data: [online-retail-baskets]
   ladder: [python]

@@ -1,0 +1,35 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: ml-dbscan
+minutes: 15
+title:
+  en: "Clusters of any shape: DBSCAN"
+  nl: "Clusters van elke vorm: DBSCAN"
+goal:
+  en: "find clusters of any shape, and the examples that belong to none, with DBSCAN, and choose its radius eps and its min_samples."
+  nl: "clusters van elke vorm vinden, en de voorbeelden die nergens bij horen, met DBSCAN, en de straal eps en min_samples ervan kiezen."
+summary:
+  - en: "DBSCAN calls an example a core point when at least min_samples examples lie within the radius eps, itself included. A cluster grows from a core point through the neighborhoods of every core point it takes in; an example within eps of no core point is noise, with the label −1."
+    nl: "DBSCAN noemt een voorbeeld een core point als er minstens min_samples voorbeelden binnen de straal eps liggen, zichzelf meegeteld. Een cluster groeit vanuit een core point via de buurten van elk core point dat het opneemt; een voorbeeld binnen eps van geen enkel core point is ruis, met het label −1."
+  - en: "On 400 made-up points, a ring, a clump in its middle, a band and 20 strays, k-means cuts the ring in two and single linkage chains everything through the strays into one cluster of 398. DBSCAN with min_samples 5 finds the three shapes from eps 0.4 to 0.7, with only strays as noise."
+    nl: "Op 400 verzonnen punten, een ring, een klont in het midden, een band en 20 losse punten, snijdt k-means de ring in tweeën en rijgt single linkage via de losse punten alles aaneen tot één cluster van 398. DBSCAN met min_samples 5 vindt van eps 0,4 tot 0,7 de drie vormen, met alleen losse punten als ruis."
+  - en: "One eps holds for the whole data, so a cluster that is less dense than the others can fall apart: at eps 0.3 the ring is in four pieces. With min_samples 1 every example is a core point, and DBSCAN gives the clusters of single linkage cut at eps."
+    nl: "Eén eps geldt voor alle data, dus een cluster dat minder dicht is dan de andere kan uit elkaar vallen: bij eps 0,3 ligt de ring in vier stukken. Met min_samples 1 is elk voorbeeld een core point, en geeft DBSCAN de clusters van single linkage, gesneden op eps."
+can_now:
+  - en: "write in NumPy which examples are core points"
+    nl: "in NumPy schrijven welke voorbeelden core points zijn"
+    by: core-points
+  - en: "count the clusters and the noise points of DBSCAN in scikit-learn, and see what min_samples does"
+    nl: "de clusters en de noise points van DBSCAN tellen in scikit-learn, en zien wat min_samples doet"
+    by: min-samples
+  - en: "say how DBSCAN with min_samples 1 relates to single linkage"
+    nl: "zeggen hoe DBSCAN met min_samples 1 samenhangt met single linkage"
+    by: single
+further_reading:
+  - en: "Martin Ester, Hans-Peter Kriegel, Jörg Sander and Xiaowei Xu (1996), *A density-based algorithm for discovering clusters in large spatial databases with noise*, Proceedings of KDD-96: where DBSCAN comes from"
+    nl: "Martin Ester, Hans-Peter Kriegel, Jörg Sander en Xiaowei Xu (1996), *A density-based algorithm for discovering clusters in large spatial databases with noise*, Proceedings of KDD-96: waar DBSCAN vandaan komt"
+  - en: "Erich Schubert, Jörg Sander, Martin Ester, Hans-Peter Kriegel and Xiaowei Xu (2017), *DBSCAN revisited, revisited: why and how you should (still) use DBSCAN*, ACM Transactions on Database Systems 42(3): how to choose eps and min_samples"
+    nl: "Erich Schubert, Jörg Sander, Martin Ester, Hans-Peter Kriegel en Xiaowei Xu (2017), *DBSCAN revisited, revisited: why and how you should (still) use DBSCAN*, ACM Transactions on Database Systems 42(3): hoe je eps en min_samples kiest"
+  - en: "scikit-learn user guide, *Clustering*, section *DBSCAN*: the settings, core samples and noise, next to the other clustering methods on the same shapes"
+    nl: "scikit-learn user guide, *Clustering*, paragraaf *DBSCAN*: de instellingen, core samples en ruis, naast de andere clustermethoden op dezelfde vormen"

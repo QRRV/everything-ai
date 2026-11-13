@@ -1,0 +1,28 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: ml-one-vs-rest
+minutes: 15
+title:
+  en: "Many classes from two: one-vs-rest and one-vs-one"
+  nl: "Veel klassen uit twee: one-vs-rest en one-vs-one"
+goal:
+  en: "turn classifiers for two classes into one for many: one model per class and the highest score, one model per pair and the most votes, or an output code."
+  nl: "van classifiers voor twee klassen er een maken voor veel klassen: één model per klasse en de hoogste score, één model per paar en de meeste stemmen, of een output code."
+summary:
+  - en: "One-vs-rest trains one model per class, that class against all the others, and takes the class whose model gives the highest score, also when no model or several say yes. For k classes it needs k models, each trained on all the examples."
+    nl: "One-vs-rest traint één model per klasse, die klasse tegen alle andere, en neemt de klasse waarvan het model de hoogste score geeft, ook als geen enkel model of meer dan één ja zegt. Voor k klassen zijn dat k modellen, elk getraind op alle voorbeelden."
+  - en: "One-vs-one trains one model per pair of classes, on the examples of those two only, and lets each vote; the class with the most votes wins. For k classes it needs k(k − 1)/2 models: 3 for the penguins, 45 for ten digits."
+    nl: "One-vs-one traint één model per paar klassen, alleen op de voorbeelden van die twee, en laat elk stemmen; de klasse met de meeste stemmen wint. Voor k klassen zijn dat k(k − 1)/2 modellen: 3 voor de pinguïns, 45 voor tien cijfers."
+  - en: "An output code gives every class its own row of +1 and −1, one model per column, and takes the class whose row differs from the models' answers in the fewest places; with more columns than needed, one wrong model can be outvoted."
+    nl: "Een output code geeft elke klasse een eigen rij van +1 en −1, één model per kolom, en neemt de klasse waarvan de rij op de minste plaatsen verschilt van de antwoorden van de modellen; met meer kolommen dan nodig kan één fout model overstemd worden."
+can_now:
+  - en: "combine one model per class into one prediction with the highest score"
+    nl: "één model per klasse combineren tot één voorspelling met de hoogste score"
+    by: ovr-predict
+  - en: "count the votes of one model per pair of classes"
+    nl: "de stemmen tellen van één model per paar klassen"
+    by: ovo-votes
+  - en: "read a class from an output code, also when one model is wrong"
+    nl: "een klasse aflezen uit een output code, ook als één model fout zit"
+    by: output-code
