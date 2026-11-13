@@ -50,6 +50,16 @@ bronnen:
    note_nl: "facebook/sam2.1-hiera-tiny (Ravi e.a. 2024), het kleinste model van SAM 2.1 (38,9 miljoen parameters, ongeveer 156 MB), voor cv-sam: tekent het mask van wat je aanwijst met een klik of een box. De course gebruikt het alleen op zijn eigen foto's en die van Caltech-101, zonder mensen. Wordt automatisch gedownload met een vaste versie. De course schrijft de modelcode zelf, alleen voor foto's (31,3 miljoen van de parameters, zonder het geheugen voor video), en de test vergelijkt hem met de getallen uit de test van transformers."}
 - {id: palmer-penguins, kind: tabular, license: "CC0-1.0", hosting: rehost,
    note_nl: "344 pinguins, drie soorten, met ontbrekende waarden: klein genoeg voor de CPU en echt genoeg voor de hele workflow."}
+- {id: metro-traffic, kind: tabular, license: "CC-BY-4.0", hosting: rehost,
+   note_nl: "Metro Interstate Traffic Volume (UCI 492): verkeer per uur op de I-94 tussen Minneapolis en Saint Paul, westwaarts, 2012 tot 2018, met weer en feestdagen (48.204 rijen, 405 kB). Echt vuil: temperaturen van 0 kelvin, één uur met 9.831 mm regen, 7.629 dubbele uren en 2.588 gaten. Het project tabular van klassieke ML."}
+- {id: bike-sharing, kind: tabular, license: "CC-BY-4.0", hosting: rehost,
+   note_nl: "Bike Sharing (UCI 275, Fanaee-T en Gama 2013): fietsverhuur van Capital Bikeshare per uur en per dag in 2011 en 2012, met weer. Trend en seizoenen per dag, week en jaar, voor de lessen over tijdreeksen."}
+- {id: online-retail-baskets, kind: tabular, license: "CC-BY-4.0", hosting: rehost,
+   note_nl: "Afgeleid van Online Retail (UCI 352, Chen e.a. 2012): de bestellingen van een Britse webwinkel van december 2010 tot december 2011, alleen bestelnummer, klantnummer (al gepseudonimiseerd door de bron) en product, zonder annuleringen. Voor association rules en aanbevelen. Het script dat de course gebruikt, staat in data/tools/."}
+- {id: openflights-routes, kind: tabular, license: "ODbL-1.0", hosting: download,
+   note_nl: "Routes en vliegvelden van OpenFlights (67.663 routes tussen 3.321 vliegvelden, stand juni 2014), voor de les over netwerken. Gedownload bij de bron op een vaste commit met een vaste SHA-256; de course host er niets van, omdat ODbL share-alike vraagt voor afgeleide databases."}
+- {id: ai4i-maintenance, kind: tabular, license: "CC-BY-4.0", hosting: rehost,
+   note_nl: "AI4I 2020 Predictive Maintenance (UCI 601, Matzka 2020): 10.000 machines met 339 storingen (3,39%). Synthetisch: gemaakt om op echte onderhoudsdata te lijken, en de lessen zeggen dat. Voor onevenwichtige data en het zoeken naar instellingen."}
 - {id: model-gpt2-mit, kind: model, license: "MIT", hosting: download}
 - {id: tokenizer-gpt2-mit, kind: model, license: "MIT", hosting: rehost,
    note_nl: "Alleen de twee bestanden van de tokenizer van GPT-2, encoder.json en vocab.bpe (samen 1,5 MB), zodat tiktoken ook zonder internet werkt. Overgenomen uit het PyPI-wheel gpt3_tokenizer 0.1.5; de SHA-256 is die welke tiktoken vastzet, dus het zijn dezelfde bytes als die OpenAI publiceert."}

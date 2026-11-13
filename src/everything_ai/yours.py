@@ -19,6 +19,8 @@ every word comes from course/phrases.yaml or from the lesson, in its language.
     descent()   the steps of the learner's gradient descent, on the loss curve or as the loss after each step
     series()    lists of numbers the code makes, such as a loss for each degree, as lines
     table()     a pandas table the code makes, and the right one beside it when it differs
+    graph()     a dictionary of neighbor lists or an adjacency matrix, drawn as the graph it stores
+    dropped()   the rows of a table that a cleaning rule leaves out, beside the right ones
 """
 from __future__ import annotations
 
@@ -1246,7 +1248,7 @@ def _html_table(df, label: str, lang: str, other=None) -> str:
         for j, v in enumerate(row):
             differs = same_shape and not _same_cell(v, other.iloc[i, j])
             look = "font-weight:600;outline:2px solid var(--ea-ink);outline-offset:-2px" if differs else ""
-            text = _cell(v) if not isinstance(v, str) else v
+            text = v if isinstance(v, str) else str(v) if isinstance(v, pd.Timestamp) else _cell(v)
             out.append(f'<td style="{cell};color:var(--ea-ink);{look}">{html.escape(_cut(str(text), 24))}</td>')
         out.append("</tr>")
     more = ""
@@ -1258,10 +1260,19 @@ def _html_table(df, label: str, lang: str, other=None) -> str:
             f'<table style="border-collapse:collapse;{_MONO};font-size:0.8rem">{"".join(out)}</table>{more}</div></div>')
 
 
-def table(call: int | None = None, *, title: Text | None = None):
+def _only(df, columns):
+    """The table with only the columns named in `columns` that it has, in that order; all of them without `columns`."""
+    import pandas as pd
+    if columns is None or not isinstance(df, pd.DataFrame):
+        return df
+    return df[[c for c in columns if c in df.columns]]
+
+
+def table(call: int | None = None, *, title: Text | None = None, columns: list[str] | None = None):
     """A pandas table or series the learner's code makes (the value of its last line, or what a function gives back
     for case `call`), its first rows, with its shape; beside it the right one when it differs, with the cells that
-    differ marked."""
+    differ marked. With `columns`, only those columns are shown, such as the ones the exercise changes, so that a wide
+    table fits; when the tables differ only in other columns, all of them are shown."""
     def picture(seen: checking.Seen) -> str:
         import pandas as pd
         ex = seen.exercise
@@ -1285,9 +1296,15 @@ def table(call: int | None = None, *, title: Text | None = None):
         if not isinstance(got, (pd.DataFrame, pd.Series)):
             return ""
         frame = lambda v: v.to_frame(name=v.name if v.name is not None else "") if isinstance(v, pd.Series) else v   # noqa: E731
-        g, w = frame(got), frame(want) if isinstance(want, (pd.DataFrame, pd.Series)) else None
-        same = w is not None and g.shape == w.shape and list(g.columns) == list(w.columns) and all(
-            _same_cell(a, b) for a, b in zip(g.to_numpy().ravel(), w.to_numpy().ravel()))
+        gf, wf = frame(got), frame(want) if isinstance(want, (pd.DataFrame, pd.Series)) else None
+
+        def alike(a, b) -> bool:
+            return a.shape == b.shape and list(a.columns) == list(b.columns) and all(
+                _same_cell(x, y) for x, y in zip(a.to_numpy().ravel(), b.to_numpy().ravel()))
+        same = wf is not None and alike(gf, wf)   # judged on every column, also the ones not shown
+        g, w = _only(gf, columns), _only(wf, columns) if wf is not None else None
+        if not same and w is not None and alike(g, w):
+            g, w = gf, wf   # the difference is in a column that is not shown: show them all
         lang = seen.lang
         parts = [_html_table(g, f"{_word('yours-code', lang)}  {_shape(g)}", lang, None if same else w)]
         if not same and w is not None:
@@ -1735,4 +1752,149 @@ def tokens(call: int | None = 0, *, title: Text | None = None):
             body += _chips(f"{_word('yours-right', lang)}  ({len(want)})", want, got)
         heading = seen.word(title) if title is not None else _word("yours-tokens", lang)
         return _figure(heading, body)
+    return picture
+
+
+# --- graph: an adjacency list or matrix, drawn as the graph it stores ---------------------------------------------
+
+def _graph_edges(value, names: list | None) -> tuple[list, list] | None:
+    """The nodes and the edges (a, b, weight) that a dictionary of neighbor lists, or a square matrix, stores; the
+    weight is None in a dictionary and in a matrix of only 0 and 1. None when the value is neither."""
+    if isinstance(value, dict):
+        nodes, edges = list(value), []
+        for a, nbrs in value.items():
+            if isinstance(nbrs, (str, bytes)) or not hasattr(nbrs, "__iter__"):
+                nbrs = [nbrs]   # one name where a list belongs: drawn all the same, as the edge the learner meant
+            for b in nbrs:
+                try:
+                    hash(b)
+                except TypeError:
+                    return None
+                if b not in nodes:
+                    nodes.append(b)
+                edges.append((a, b, None))
+        return nodes, edges
+    grid = _as_grid(value)
+    if grid is None or grid.ndim != 2 or grid.shape[0] != grid.shape[1] or grid.dtype.kind not in "biuf" or grid.shape[0] > 30:
+        return None
+    n = grid.shape[0]
+    label = (lambda i: names[i]) if names and len(names) == n else (lambda i: i)
+    ones = all(float(v) in (0.0, 1.0) for v in grid.ravel())
+    edges = [(label(i), label(j), None if ones else float(grid[i, j]))
+             for i in range(n) for j in range(n) if float(grid[i, j]) != 0]
+    return [label(i) for i in range(n)], edges
+
+
+def _graph_panel(nodes: list, edges: list, at: dict, who: str) -> tuple[dict, int, int]:
+    """A panel for draw.graph_panels: the same pair both ways with the same weight is one line without a direction,
+    an edge only one way is an arrow. Nodes without a place in `at` go on a circle to the right of the others.
+    Gives the panel, the number of edges, and how many of them go only one way."""
+    import math as _m
+    weight = {(a, b): w for a, b, w in edges if a != b}
+    lines, arrows, n, one_way = [], set(), 0, 0
+    for (a, b), w in weight.items():
+        if (b, a) in weight and weight[(b, a)] == w:
+            if str(a) <= str(b):
+                lines.append((a, b, None if w is None else f"{w:g}"))
+                n += 1
+        else:
+            lines.append((a, b, None if w is None else f"{w:g}"))
+            arrows.add((a, b))
+            n, one_way = n + 1, one_way + 1
+    place = {k: v for k, v in at.items() if k in nodes}
+    rest = [v for v in nodes if v not in place]
+    if rest:
+        x0 = max([x for x, _ in place.values()], default=-1) + 1.4
+        cy = (min([y for _, y in place.values()], default=0) + max([y for _, y in place.values()], default=0)) / 2
+        r = 0.9 if len(rest) > 1 else 0
+        for k, v in enumerate(rest):
+            t = 2 * _m.pi * k / len(rest)
+            place[v] = (x0 + r + r * _m.cos(t), cy + r * _m.sin(t))
+    return {"title": who, "nodes": nodes, "at": place, "edges": lines, "arrows": arrows, "ink": True}, n, one_way
+
+
+def graph(call: int = 0, *, at: dict | None = None, names: list | None = None, title: Text | None = None):
+    """A graph the learner's function builds for case `call`, a dictionary of neighbor lists or a square adjacency
+    matrix, drawn as the graph it stores: a line for an edge that goes both ways, an arrow for an edge that only goes
+    one way, the weight beside a line when the matrix holds other numbers than 0 and 1. Where it differs from the
+    right graph, that one stands beside it. `at` places the nodes {name: (x, y)} as in draw.graph_panels; `names`
+    names the rows of a matrix, otherwise they are its numbers."""
+    def picture(seen: checking.Seen) -> str:
+        from everything_ai import draw
+        out = _outcome(seen, call)
+        if out is None:
+            return ""
+        got, want, _, what = out
+        mine, right = _graph_edges(got, names), _graph_edges(want, names)
+        if mine is None or not mine[0]:
+            return ""   # nothing to draw: an empty dictionary or matrix
+        lang = seen.lang
+
+        def count(n: int) -> str:
+            return _word("yours-one-edge", lang) if n == 1 else _word("yours-n-edges", lang, n=n)
+
+        def words(who: str, n: int, k: int) -> str:
+            if k:
+                return _word("yours-graph-one-way", lang, who=who, edges=count(n), k=k)
+            return _word("yours-graph-edges", lang, who=who, edges=count(n))
+        same = right is not None and set(mine[0]) == set(right[0]) and sorted(map(repr, mine[1])) == sorted(map(repr, right[1]))
+        code = _word("yours-code", lang)
+        shown = [(f"{code}: {what}", code, mine)] + ([] if same or right is None else [(_word("yours-right", lang),) * 2 + (right,)])
+        panels, said = [], []
+        for heading, who, (nodes, edges) in shown:
+            panel, n, k = _graph_panel(nodes, edges, at or {}, heading)
+            panels.append(panel)
+            said.append(words(who, n, k))
+        alt = "; ".join(said)
+        fig = draw.graph_panels(panels, alt=alt).text
+        key = "".join(f'<div>{html.escape(s)}</div>' for s in said)
+        heading = seen.word(title) if title is not None else _word("yours-graph", lang)
+        return _figure(heading, fig + f'<div style="font-family:var(--ea-font-ui);font-size:0.82rem;color:var(--ea-ink-2);'
+                                     f'margin-top:0.2rem">{key}</div>', alt=alt)
+    return picture
+
+
+# --- dropped: the rows a cleaning rule leaves out ------------------------------------------------------------------
+
+def dropped(call: int = 0, *, title: Text | None = None, columns: list[str] | None = None):
+    """The rows of a pandas table that the learner's function leaves out for case `call` (its first argument, a
+    table), found by their row labels, with how many it keeps; beside them the rows the right function leaves out,
+    when those differ. Nothing when the function gives back rows that are not the table's own rows with their labels,
+    such as after reset_index: then the rows cannot be matched. With `columns`, only those columns of the rows are
+    shown."""
+    def picture(seen: checking.Seen) -> str:
+        import pandas as pd
+        out = _outcome(seen, call)
+        if out is None:
+            return ""
+        got, want, start, _ = out
+        table = checking._copy(start[0][1]) if start else None   # as the function got it: a stand-in named TRAFFIC is its table
+        if not (isinstance(table, pd.DataFrame) and isinstance(got, pd.DataFrame)):
+            return ""
+        def kept_rows(df) -> bool:
+            """True when every row of df is a row of the table with the same label and the same values: only then do the
+            labels say which rows were left out (after reset_index, labels 0 to n-1 name other rows)."""
+            if not (df.index.is_unique and df.index.isin(table.index).all()):
+                return False
+            shared = [c for c in df.columns if c in table.columns]
+            try:
+                return bool(df[shared].equals(table.loc[df.index, shared]))
+            except Exception:
+                return False
+        if not table.index.is_unique or not kept_rows(got):
+            return ""
+        lang = seen.lang
+
+        def counted(who: str, rows) -> str:
+            return _word("yours-dropped-count", lang, who=who, n=f"{len(rows):,}".replace(",", "." if lang == "nl" else ","),
+                         total=f"{len(table):,}".replace(",", "." if lang == "nl" else ","))
+        gone = table[~table.index.isin(got.index)]
+        right = table[~table.index.isin(want.index)] if isinstance(want, pd.DataFrame) and kept_rows(want) else None
+        same = right is not None and list(gone.index) == list(right.index)
+        parts = [_html_table(_only(gone, columns), counted(_word("yours-code", lang), gone), lang)]
+        if not same and right is not None:
+            parts.append(_html_table(_only(right, columns), counted(_word("yours-right", lang), right), lang))
+        heading = seen.word(title) if title is not None else _word("yours-dropped", lang)
+        body = f'<div style="display:flex;flex-wrap:wrap;gap:0.6rem 1.1rem;align-items:flex-start">{"".join(parts)}</div>'
+        return _figure(heading, body, alt=counted(_word("yours-code", lang), gone))
     return picture

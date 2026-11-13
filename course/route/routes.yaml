@@ -179,6 +179,8 @@ routes:
   - search-minimax
   - rl-value-iteration
   - rl-q-learning
+  # ---------- basis: fundament/grafen-en-ruimte ----------
+  - math-graphs
   # ---------- basis: fundament/taalmodellen ----------
   - lm-what-is-a-language-model
   - lm-tokens-outside
@@ -571,6 +573,55 @@ routes:
   - repro-own-compare
   - repro-own-report
   - res-whats-next
+
+- id: klassiek-ml
+  domein: klassiek-ml
+  title: "Classical machine learning: the basics"
+  title_nl: "Klassieke machine learning: de basis"
+  short: "Classical ML"
+  short_nl: "Klassieke ML"
+  # The basics: docs/onderzoek/reports/Voorstel domein klassieke ML.md (besluit 1.18, advice 6). Its tasters are in the
+  # kern (ml-decision-tree, ml-kmeans), and so is the lesson on graphs its networks need (math-graphs).
+  milestones:
+    - after: ml-project-table-trees
+      en: "Basics done: you know more models and clusterings, forecast a time series and test it on the past, recommend products, find what matters in a network, and model a real table fairly from cleaning to trees."
+      nl: "Basis af: je kent meer modellen en manieren van clusteren, voorspelt een tijdreeks en toetst dat op het verleden, beveelt producten aan, vindt wat ertoe doet in een netwerk, en modelleert een echte tabel eerlijk, van schoonmaken tot bomen."
+  steps:
+  # ---------- basis: klassiek-ml/praktijk (project) ----------
+  - ml-project-table-explore
+  # ---------- basis: klassiek-ml/modellen ----------
+  - ml-nearest-centroid
+  - ml-max-margin
+  - ml-one-vs-rest
+  - ml-no-free-lunch
+  # ---------- basis: klassiek-ml/ongesuperviseerd ----------
+  - ml-hierarchical-clustering
+  - ml-dbscan
+  - ml-tsne
+  - ml-association-rules
+  # ---------- basis: klassiek-ml/tijdreeksen ----------
+  - ts-time-index
+  - ts-trend-season
+  - ts-autocorrelation
+  - ts-backtesting
+  - ts-forecast-demand
+  # ---------- basis: klassiek-ml/aanbevelen ----------
+  - ml-recommend-problem
+  - ml-content-based
+  - ml-collaborative-filtering
+  - ml-network-data
+  - ml-pagerank
+  # ---------- basis: klassiek-ml/praktijk ----------
+  - ml-gbdt-default
+  - ml-competitions
+  - ml-imbalanced
+  - ml-grid-random-search
+  - ml-automl
+  - data-labels
+  - data-annotation
+  - data-centric-ai
+  - data-synthetic
+  - ml-project-table-trees
 
 # Goal routes are computed, not written: the smallest set of lessons a goal needs, in the order of the routes.
 # The checker prints these as examples; the app can compute any of them on demand.

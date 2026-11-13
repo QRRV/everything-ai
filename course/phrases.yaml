@@ -279,6 +279,34 @@ phrases:
   group: yours
   en: "Your {function} next to the right one"
   nl: "Jouw {function} naast de goede"
+- id: yours-graph
+  group: yours
+  en: The graph your code makes
+  nl: De graaf die jouw code maakt
+- id: yours-graph-edges
+  group: yours
+  en: "{who}: {edges}"
+  nl: "{who}: {edges}"
+- id: yours-graph-one-way
+  group: yours
+  en: "{who}: {edges}, {k} of them only one way, drawn as an arrow"
+  nl: "{who}: {edges}, waarvan {k} maar één kant op, getekend als pijl"
+- id: yours-n-edges
+  group: yours
+  en: "{n} edges"
+  nl: "{n} edges"
+- id: yours-one-edge
+  group: yours
+  en: 1 edge
+  nl: 1 edge
+- id: yours-dropped
+  group: yours
+  en: The rows your code leaves out
+  nl: De rijen die jouw code weglaat
+- id: yours-dropped-count
+  group: yours
+  en: "{who}: leaves out {n} of the {total} rows"
+  nl: "{who}: laat {n} van de {total} rijen weg"
 - id: yours-code
   group: yours
   en: your code

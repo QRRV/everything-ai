@@ -47,6 +47,7 @@ modules:
   fundament/pytorch: {en: "PyTorch", nl: "PyTorch"}
   fundament/bouwstenen-idee: {en: "Building blocks", nl: "Bouwstenen"}
   fundament/agents: {en: "Agents", nl: "Agents"}
+  fundament/grafen-en-ruimte: {en: "Graphs and space", nl: "Grafen en ruimte"}
   fundament/taalmodellen: {en: "Language models", nl: "Language models"}
   fundament/onderzoek-basis: {en: "Research", nl: "Onderzoek"}
   # the shared modules of the foundation, also those without lessons yet: res-whats-next names what a domain borrows
@@ -79,6 +80,11 @@ modules:
   beeld/segmentatie: {en: "Segmentation", nl: "Segmentatie"}
   beeld/vit: {en: "Vision Transformers", nl: "Vision Transformers"}
   beeld/eindproject: {en: "Final project", nl: "Eindproject"}
+  klassiek-ml/modellen: {en: "More models, further", nl: "Meer modellen, verder"}
+  klassiek-ml/ongesuperviseerd: {en: "Without labels, further", nl: "Zonder labels, verder"}
+  klassiek-ml/tijdreeksen: {en: "Time series", nl: "Tijdreeksen"}
+  klassiek-ml/aanbevelen: {en: "Recommending and networks", nl: "Aanbevelen en netwerken"}
+  klassiek-ml/praktijk: {en: "Tables in practice", nl: "Tabeldata in de praktijk"}
   systemen/hardware: {en: "Hardware", nl: "Hardware"}
   systemen/snel-trainen: {en: "Training fast", nl: "Snel trainen"}
   systemen/productie: {en: "ML in production", nl: "ML in productie"}

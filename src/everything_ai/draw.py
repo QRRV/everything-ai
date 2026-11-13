@@ -1457,3 +1457,216 @@ def weight_grid(words: list[str], weights, *, row_label: str, col_label: str, de
                          f'<text x="{x + BW / 2}" y="{y + BH / 2 + 5}" style="{mono};font-size:14px;fill:var(--ea-ink);text-anchor:middle">{f"{w:.2f}".replace(".", decimal)}</text>')
     width = max(LEFT + n * (BW + GAP), 8 * len(col_label) + LEFT, 8 * len(title))
     return _svg(int(width), int(TOP + n * (BH + GAP) + 4), f"{title}. {alt}" if title else alt, "".join(parts), natural=True)
+
+
+def _graph_svg(p: dict) -> tuple[str, int, int]:
+    """One graph as SVG: a circle per node with its name in it, a line per edge, an arrow where the edge has a
+    direction, and its weight beside the middle of the line. Gives the SVG body and its width."""
+    unit, R = p.get("unit", 64), 15
+    at = p["at"]
+    xs, ys = [x for x, _ in at.values()], [y for _, y in at.values()]
+    top = (24 if p.get("title") else 0) + R + 6
+    left = R + 6 - min(xs) * unit
+
+    def xy(name):
+        x, y = at[name]
+        return left + x * unit, top + (y - min(ys)) * unit
+
+    W = int(left + max(xs) * unit + R + 6)
+    H = int(top + (max(ys) - min(ys)) * unit + R + 6)
+    mark, near = p.get("mark"), set(p.get("near", ()))
+    arrows = p.get("arrows")   # the edges drawn with a direction; all of them in a directed graph
+    halo = "paint-order:stroke;stroke:var(--ea-page);stroke-width:4px;stroke-linejoin:round"
+    parts = []
+    if p.get("title"):
+        parts.append(f'<text x="1" y="15" style="font-size:13.5px;font-weight:600;fill:var(--ea-ink)">{html.escape(p["title"])}</text>')
+    edges = [tuple(e) for e in p.get("edges", ())]
+    pairs = {(e[0], e[1]) for e in edges}
+    labels = []
+    for e in edges:
+        a, b = e[0], e[1]
+        if a not in at or b not in at or a == b:
+            continue
+        directed = p.get("directed") if arrows is None else (a, b) in arrows
+        if directed and (b, a) in pairs and (b, a) in (arrows if arrows is not None else pairs) and str(b) < str(a):
+            continue   # the same pair both ways: one line with a head at each end, drawn once
+        both = directed and (b, a) in pairs and (b, a) in (arrows if arrows is not None else pairs)
+        (x1, y1), (x2, y2) = xy(a), xy(b)
+        d = max(((x2 - x1) ** 2 + (y2 - y1) ** 2) ** 0.5, 1)
+        ux, uy = (x2 - x1) / d, (y2 - y1) / d
+        on = mark is not None and mark in (a, b)
+        stroke = "var(--ea-ink)" if on or mark is None and p.get("ink") else "var(--ea-ink-3)"
+        width = 2.6 if on else 1.6
+        sx, sy = x1 + ux * (R + 2 if both else R), y1 + uy * (R + 2 if both else R)
+        ex, ey = x2 - ux * (R + 2 if directed else R), y2 - uy * (R + 2 if directed else R)
+        path = f"M{sx:.1f} {sy:.1f} L{ex:.1f} {ey:.1f}"
+        if directed:
+            path += (f" M{ex - 8 * ux - 4.5 * uy:.1f} {ey - 8 * uy + 4.5 * ux:.1f} L{ex:.1f} {ey:.1f} "
+                     f"L{ex - 8 * ux + 4.5 * uy:.1f} {ey - 8 * uy - 4.5 * ux:.1f}")
+        if both:
+            path += (f" M{sx + 8 * ux - 4.5 * uy:.1f} {sy + 8 * uy + 4.5 * ux:.1f} L{sx:.1f} {sy:.1f} "
+                     f"L{sx + 8 * ux + 4.5 * uy:.1f} {sy + 8 * uy - 4.5 * ux:.1f}")
+        parts.append(f'<path d="{path}" style="fill:none;stroke:{stroke};stroke-width:{width};stroke-linecap:round;stroke-linejoin:round"/>')
+        if len(e) > 2 and e[2] is not None:
+            # beside the middle of the line, on its upper side, far enough that a sloping line never runs through it
+            text = str(e[2])
+            nx, ny = uy, -ux   # a normal of the line, turned to point up, or right on an upright line
+            if ny > 1e-9 or abs(ny) <= 1e-9 and nx < 0:
+                nx, ny = -nx, -ny
+            far = abs(nx) * 3.7 * len(text) + abs(ny) * 6 + 5
+            cx, cy = (x1 + x2) / 2 + nx * far, (y1 + y2) / 2 + ny * far
+            weight = ";font-weight:600" if on else ""
+            labels.append(f'<text x="{cx:.1f}" y="{cy + 4.5:.1f}" style="font-size:12.5px;fill:var(--ea-ink);text-anchor:middle;'
+                          f'font-variant-numeric:tabular-nums{weight};{halo}">{html.escape(text)}</text>')
+    parts += labels
+    for name in p.get("nodes", list(at)):
+        if name not in at:
+            continue
+        x, y = xy(name)
+        fill = "color-mix(in srgb, var(--ea-data) 30%, var(--ea-page))" if name in near else "var(--ea-page)"
+        ring = 3 if name == mark else 1.5
+        parts.append(f'<circle cx="{x:.1f}" cy="{y:.1f}" r="{R}" style="fill:{fill};stroke:var(--ea-ink);stroke-width:{ring}"/>'
+                     f'<text x="{x:.1f}" y="{y + 4.6:.1f}" style="font-size:13px;font-weight:600;fill:var(--ea-ink);'
+                     f'text-anchor:middle">{html.escape(str(name))}</text>')
+    W = max(W, int(8 * len(p.get("title", ""))))
+    return "".join(parts), W, H
+
+
+def _graph_list_svg(p: dict) -> tuple[str, int, int]:
+    """An adjacency list the way Python writes the dictionary: one line per node, `"A": ["B", "C"],`, with the line
+    of the marked node in ink and bold, the others in grey."""
+    rows, mark = p["rows"], p.get("mark")
+    top, LH = (24 if p.get("title") else 0) + 22, 22
+    mono = "font-family:var(--ea-font-code)"
+    lines = ["{"] + [f'"{n}": [{", ".join(chr(34) + str(v) + chr(34) for v in nbrs)}],' for n, nbrs in rows] + ["}"]
+    W = int(max(8 * len(p.get("title", "")), 12 + 8.2 * max(len(s) for s in lines)))
+    parts = []
+    if p.get("title"):
+        parts.append(f'<text x="1" y="15" style="font-size:13.5px;font-weight:600;fill:var(--ea-ink)">{html.escape(p["title"])}</text>')
+    for k, line in enumerate(lines):
+        y = top + k * LH
+        on = 0 < k <= len(rows) and rows[k - 1][0] == mark
+        if on:
+            parts.append(f'<rect x="0" y="{y - 16}" width="{W - 1}" height="{LH}" rx="4" style="fill:var(--ea-inset);stroke:var(--ea-ink);stroke-width:1.5"/>')
+        tone = "var(--ea-ink)" if on or mark is None or k in (0, len(lines) - 1) else "var(--ea-ink-2)"
+        indent = 0 if k in (0, len(lines) - 1) else 16
+        parts.append(f'<text x="{4 + indent}" y="{y}" style="{mono};font-size:13.5px;fill:{tone}{";font-weight:600" if on else ""};'
+                     f'white-space:pre">{html.escape(line)}</text>')
+    return "".join(parts), W, int(top + (len(lines) - 1) * LH + 8)
+
+
+def _graph_matrix_svg(p: dict) -> tuple[str, int, int]:
+    """An adjacency matrix: the names of the nodes above the columns and beside the rows, a box per entry with its
+    number, the entries that are not 0 in ink and the zeros in grey, and the row of the marked node outlined."""
+    names, values, mark = p["names"], p["values"], p.get("mark")
+    C = 26
+    mono = "font-family:var(--ea-font-code)"
+    left = 14 + 8 * max(len(str(n)) for n in names)
+    two = any(" " in str(name) for name in names)   # "0 A": the number above the name over a column
+    top = (24 if p.get("title") else 0) + (34 if two else 20)
+    n = len(names)
+    parts = []
+    if p.get("title"):
+        parts.append(f'<text x="1" y="15" style="font-size:13.5px;font-weight:600;fill:var(--ea-ink)">{html.escape(p["title"])}</text>')
+    for j, name in enumerate(names):
+        lines = str(name).split(" ", 1) if two else [str(name)]
+        for k, line in enumerate(lines):
+            y = top - 6 - 14 * (len(lines) - 1 - k)
+            parts.append(f'<text x="{left + j * C + C / 2}" y="{y}" style="font-size:12px;fill:var(--ea-ink-2);text-anchor:middle">{html.escape(line)}</text>')
+    for i, name in enumerate(names):
+        y = top + i * C
+        on = i == mark
+        parts.append(f'<text x="{left - 8}" y="{y + C / 2 + 4}" style="font-size:12px;fill:var(--ea-ink{"" if on else "-2"});'
+                     f'text-anchor:end{";font-weight:600" if on else ""}">{html.escape(str(name))}</text>')
+        for j in range(n):
+            v = values[i][j]
+            text = f"{v:g}" if isinstance(v, float) else str(v)
+            tone = "var(--ea-ink)" if text != "0" else "var(--ea-ink-3)"
+            weight = ";font-weight:600" if on and text != "0" else ""
+            parts.append(f'<rect x="{left + j * C}" y="{y}" width="{C}" height="{C}" style="fill:{"var(--ea-inset)" if on else "var(--ea-page)"};'
+                         f'stroke:var(--ea-line);stroke-width:1"/>'
+                         f'<text x="{left + j * C + C / 2}" y="{y + C / 2 + 4.5}" style="{mono};font-size:13px;fill:{tone};text-anchor:middle{weight}">'
+                         f'{html.escape(text)}</text>')
+    if mark is not None:
+        parts.append(f'<rect x="{left}" y="{top + mark * C}" width="{n * C}" height="{C}" style="fill:none;stroke:var(--ea-ink);stroke-width:2.2"/>')
+    W = int(max(left + n * C + 2, 8 * len(p.get("title", ""))))
+    return "".join(parts), W, int(top + n * C + 2)
+
+
+def graph_panels(panels: list[dict], *, alt: str) -> mo.Html:
+    """Graphs and the ways to store them, one panel each, side by side; in a narrow window they go one below the
+    other before their text gets smaller than it was drawn, as maze_grids does. Each panel is a dict with a `kind`:
+      "graph"   (the default) a drawing: `at` gives each node its place {name: (x, y)} in steps of `unit` pixels
+                (64), y downwards; `edges` are (a, b) or (a, b, weight); `directed` draws every edge as an arrow,
+                `arrows` only the edges in it; the same pair both ways is one line with a head at each end. `mark` is a
+                node with a thick ring, whose edges are drawn in ink and the others in grey; `near` are nodes filled
+                in the data colour, such as its neighbors; `ink` draws every edge in ink when no node is marked.
+      "list"    an adjacency list as Python writes it: `rows` are (name, [neighbors]); `mark` is the name whose line
+                is drawn in ink
+      "matrix"  an adjacency matrix: `names` above the columns and beside the rows, `values` row by row; `mark` is
+                the row that is outlined. A name such as "0 A" stands on two lines above its column
+    Each takes a `title` above it. Edges and names are ink, the nodes filled in grey are data; no role colour."""
+    draw = {"graph": _graph_svg, "list": _graph_list_svg, "matrix": _graph_matrix_svg}
+    svgs, total = [], 0
+    for p in panels:
+        body, W, H = draw[p.get("kind", "graph")](p)
+        total += W
+        svgs.append(f'<svg viewBox="0 0 {W} {H}" aria-hidden="true" style="flex:0 1 auto;width:{W}px;min-width:min(100%,{W}px);'
+                    f'max-width:{W}px;height:auto;{_FONT};font-variant-ligatures:none">{body}</svg>')
+    gap = 24
+    return mo.Html(f'<figure class="ea-figure" role="img" aria-label="{html.escape(alt)}" style="margin:0.25rem 0 0.75rem;'
+                   f'max-width:min(100%,{total + gap * (len(panels) - 1)}px);display:flex;flex-wrap:wrap;'
+                   f'gap:0.75rem {gap}px;align-items:flex-start">{"".join(svgs)}</figure>')
+
+
+def calendar(cells: dict, *, months: list[str], title: str = "", alt: str = "", marked: set | None = None,
+             legend: list[str] | None = None) -> mo.Html:
+    """One year as a grid: a column per month, `months` its 12 short names on top, and a row per day of the month,
+    1 to 31. `cells` gives each day that exists, (month 1 to 12, day), a fraction from 0 to 1: how full it is, drawn
+    as a fill in the data colour, from empty (0, with a dashed edge) to full (1); a day that is not in `cells` is not
+    drawn, such as 30 February or a day outside the data. A full day is dark; a day with a part missing is at
+    most two thirds as dark, lighter the more it misses, so that the two cannot be mistaken. Days in `marked` get
+    a dot, light with a dark ring, which shows on every fill. `legend` gives the words for a full day, a day with a
+    part missing, an empty day and a dot, drawn under the grid. Narrow enough for a phone at the size it was drawn."""
+    C, G = 20, 2
+    left, top = 24, (26 if title else 0) + 20
+    marked = marked or set()
+    parts = []
+    if title:
+        parts.append(f'<text x="0" y="16" style="font-size:14px;font-weight:600;fill:var(--ea-ink)">{html.escape(title)}</text>')
+    for m, name in enumerate(months):
+        parts.append(f'<text x="{left + m * (C + G) + C / 2}" y="{top - 6}" style="font-size:11px;fill:var(--ea-ink-2);text-anchor:middle">{html.escape(name)}</text>')
+    for d in range(1, 32):
+        y = top + (d - 1) * (C + G)
+        if d == 1 or d % 5 == 0:
+            parts.append(f'<text x="{left - 6}" y="{y + C / 2 + 4}" style="font-size:11px;fill:var(--ea-ink-2);text-anchor:end">{d}</text>')
+        for m in range(1, 13):
+            if (m, d) not in cells:
+                continue
+            x = left + (m - 1) * (C + G)
+            f = max(0.0, min(1.0, float(cells[(m, d)])))
+            if f == 0:
+                parts.append(f'<rect x="{x + 0.5}" y="{y + 0.5}" width="{C - 1}" height="{C - 1}" rx="3" '
+                             f'style="fill:var(--ea-page);stroke:var(--ea-ink-3);stroke-width:1;stroke-dasharray:2.5 2"/>')
+            else:
+                share = 90 if f >= 1 else 12 + 48 * f
+                parts.append(f'<rect x="{x}" y="{y}" width="{C}" height="{C}" rx="3" '
+                             f'style="fill:color-mix(in srgb, var(--ea-data) {share:.0f}%, var(--ea-page))"/>')
+            if (m, d) in marked:
+                parts.append(f'<circle cx="{x + C / 2}" cy="{y + C / 2}" r="3.4" style="fill:var(--ea-page);stroke:var(--ea-ink);stroke-width:1.3"/>')
+    H = top + 31 * (C + G)
+    W = left + 12 * (C + G)
+    if legend:
+        full, part, empty, dot = legend
+        y = H + 14
+        rows = [(f'<rect x="0" y="{{y}}" width="14" height="14" rx="3" style="fill:color-mix(in srgb, var(--ea-data) 90%, var(--ea-page))"/>', full),
+                (f'<rect x="0" y="{{y}}" width="14" height="14" rx="3" style="fill:color-mix(in srgb, var(--ea-data) 40%, var(--ea-page))"/>', part),
+                (f'<rect x="0.5" y="{{y}}" width="13" height="13" rx="3" style="fill:var(--ea-page);stroke:var(--ea-ink-3);stroke-width:1;stroke-dasharray:2.5 2"/>', empty),
+                (f'<circle cx="7" cy="{{y7}}" r="3.4" style="fill:var(--ea-page);stroke:var(--ea-ink);stroke-width:1.3"/>', dot)]
+        for k, (mark, words) in enumerate(rows):
+            yy = y + k * 20
+            parts.append(mark.format(y=yy, y7=yy + 7) + f'<text x="22" y="{yy + 11}" style="font-size:12px;fill:var(--ea-ink-2)">{html.escape(words)}</text>')
+            W = max(W, int(26 + 6.6 * len(words)))
+        H = y + 4 * 20
+    W = max(W, int(8 * len(title)))
+    return _svg(int(W), int(H + 2), f"{title}. {alt}" if title else alt, "".join(parts), natural=True)

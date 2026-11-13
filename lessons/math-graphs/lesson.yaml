@@ -1,0 +1,30 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: math-graphs
+minutes: 20
+title:
+  en: "Graphs: nodes, edges and paths"
+  nl: "Grafen: nodes, edges en paden"
+goal:
+  en: "write a network down as a graph, store it as an adjacency list and as an adjacency matrix, and search it."
+  nl: "een netwerk opschrijven als graaf, hem opslaan als adjacency list en als adjacency matrix, en erin zoeken."
+summary:
+  - en: "A graph is a set of nodes joined by edges. The degree of a node is its number of edges; the degrees add up to twice the number of edges."
+    nl: "Een graaf is een verzameling nodes die verbonden zijn door edges. De graad van een node is zijn aantal edges; de graden zijn samen twee keer het aantal edges."
+  - en: "In a directed graph every edge has a direction; in a weighted graph every edge carries a number, such as a length in km. A path is a row of nodes joined by edges."
+    nl: "In een gerichte graaf heeft elke edge een richting; in een gewogen graaf draagt elke edge een getal, zoals een lengte in km. Een pad is een rij nodes die door edges verbonden zijn."
+  - en: 'An adjacency list gives each node the list of its neighbors, `graph["A"]`; an adjacency matrix has a 1, or the weight, at `adj[i, j]` for an edge from node `i` to node `j`, and equals its transpose when the edges have no direction.'
+    nl: 'Een adjacency list geeft elke node de lijst van zijn buren, `graph["A"]`; een adjacency matrix heeft een 1, of het gewicht, op `adj[i, j]` voor een edge van node `i` naar node `j`, en is gelijk aan zijn getransponeerde als de edges geen richting hebben.'
+  - en: "Breadth-first search runs on any graph stored as an adjacency list, with `graph[state]` as the neighbors; it finds a path with the fewest edges."
+    nl: "Breadth-first search draait op elke graaf die als adjacency list is opgeslagen, met `graph[state]` als de buren; hij vindt een pad met zo min mogelijk edges."
+can_now:
+  - en: "build the adjacency list of a graph from its edges"
+    nl: "de adjacency list van een graaf bouwen uit zijn edges"
+    by: to-list
+  - en: "build the adjacency matrix of a weighted graph"
+    nl: "de adjacency matrix van een gewogen graaf bouwen"
+    by: to-matrix
+  - en: "read the rows and columns of the matrix of a directed graph"
+    nl: "de rijen en kolommen lezen van de matrix van een gerichte graaf"
+    by: column

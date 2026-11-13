@@ -1,0 +1,33 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: ml-project-table-explore
+minutes: 25
+title:
+  en: "Project: your table, explored and cleaned"
+  nl: "Project: je tabel, verkend en schoongemaakt"
+goal:
+  en: "look at a real table before any model, find its impossible values, duplicate rows and missing hours, and write a rule for each problem in your own project."
+  nl: "een echte tabel bekijken voordat er een model aan te pas komt, de onmogelijke waarden, dubbele rijen en ontbrekende uren vinden, en voor elk probleem een regel schrijven in je eigen project."
+summary:
+  - en: "`df.describe()` shows impossible values in its `min` and `max`; a rule keeps the rows that can be, with a mask such as `df[df[\"temp\"] > 0]` and a limit chosen from what is possible."
+    nl: "`df.describe()` laat onmogelijke waarden zien in zijn `min` en `max`; een regel houdt de rijen die kunnen, met een mask zoals `df[df[\"temp\"] > 0]` en een grens die je kiest uit wat mogelijk is."
+  - en: "A duplicate row repeats what should be in the table once. `df.drop_duplicates(subset=\"date_time\")` keeps the first row of every hour; without `subset`, only rows that are the same in every column go."
+    nl: "Een dubbele rij herhaalt wat maar één keer in de tabel hoort. `df.drop_duplicates(subset=\"date_time\")` houdt de eerste rij van elk uur; zonder `subset` verdwijnen alleen rijen die in elke kolom gelijk zijn."
+  - en: "`pd.to_datetime` makes text a time. Counting the hours from the first to the last finds the hours without a row, which `isna()` cannot see."
+    nl: "`pd.to_datetime` maakt van tekst een tijd. Door de uren van het eerste tot het laatste te tellen vind je de uren zonder rij, die `isna()` niet kan zien."
+  - en: "No rule makes up what was never measured: a hole stays a hole, written down in the datasheet."
+    nl: "Geen regel verzint wat nooit gemeten is: een gat blijft een gat, en staat in de datasheet."
+can_now:
+  - en: "write a rule that leaves out the impossible values of a table"
+    nl: "een regel schrijven die de onmogelijke waarden van een tabel weglaat"
+    by: impossible
+  - en: "keep one row for every hour, or for every value of another column, with drop_duplicates"
+    nl: "één rij per uur houden, of per waarde van een andere kolom, met drop_duplicates"
+    by: hours
+  - en: "put your rules together in a clean function in your project"
+    nl: "je regels samenvoegen in een functie clean in je project"
+    by: clean
+  - en: "say why a hole of missing rows is not filled in"
+    nl: "zeggen waarom je een gat van ontbrekende rijen niet invult"
+    by: gap

@@ -1,0 +1,419 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# Lessons of the domain klassiek-ml (classical machine learning and data science), level basis, and the core lesson on
+# graphs (domein fundament, module grafen-en-ruimte) that its lessons on networks need.
+# The plan: docs/onderzoek/reports/Voorstel domein klassieke ML.md (besluit 1.18, advice 6). The route klassiek-ml in
+# routes.yaml starts where the core ends and gives the order. Every lesson runs on a CPU.
+# Planning data; "introduces" is the plan and "uses" is filled in fully when a lesson is built. Format: ../FORMAT.md.
+map: v2.3
+lessons:
+
+# --- the core: graphs -----------------------------------------------------------
+- id: math-graphs
+  title: "Graphs: nodes, edges and paths"
+  level: basis
+  domein: fundament
+  module: grafen-en-ruimte
+  idea: "A graph is a set of nodes joined by edges, directed or not, weighted or not; you store it as a list of neighbors or as an adjacency matrix, and breadth-first search finds the shortest path in steps between two nodes."
+  covers: [discrete-wiskunde-en-grafen#2]
+  requires: [search-bfs, np-arrays]
+  introduces: [c:graph, c:node, c:edge, c:directed-graph, c:weighted-graph, c:adjacency-list, c:adjacency-matrix, c:graph-path, c:degree]
+  uses: [c:breadth-first-search, c:state, c:queue, c:search-frontier, c:computational-graph, c:transpose, c:matrix, c:array, c:shape, c:axis, py:def, py:return, py:none, py:for, py:if, py:while, py:list, py:nested-list, py:append, py:tuple, py:set, py:set-add, py:dict, py:dict-items, py:indexing, py:len, py:comparison, py:import, py:import-as, py:string-literal, py:str, py:float, py:print, py:comment, py:underscore-name, py:variable, py:range, py:deque, py:np-array, py:np-zeros, py:np-indexing, py:np-sum, py:keyword-argument, q:predict, q:choice, q:exercise-with-check, q:run-cell]
+  warns: [graph, node, edge, path, degree]
+  data: []
+  ladder: [python, numpy]
+  needs: any
+
+# --- project: your table, explored and cleaned ----------------------------------
+- id: ml-project-table-explore
+  title: "Project: your table, explored and cleaned"
+  level: basis
+  domein: klassiek-ml
+  module: praktijk
+  kind: project
+  project: tabular
+  idea: "Before any model, look at the table: hourly traffic on a highway has impossible temperatures, a rainfall no storm brings, hours that appear twice and months that are missing; write one rule for each problem, apply it, and count what is left."
+  covers: []
+  requires: [data-missing-values, data-explore, data-provenance, ml-workflow]
+  introduces: [c:data-cleaning, c:duplicate-row, py:drop-duplicates, py:pd-to-datetime, py:pd-date-range]
+  uses: [c:missing-value, c:imputation, c:missing-indicator, c:datasheet, c:license, c:csv, c:mean, c:standard-deviation, c:model, c:package, p:import-own-code, p:exploratory-data-analysis, py:dataframe, py:pandas-describe, py:isna, py:fillna, py:pandas-select-filter, py:pandas-new-column, py:boolean-mask, py:comparison, py:def, py:return, py:import, py:import-as, py:len, py:print, py:list, py:string-literal, py:float, py:arithmetic, py:keyword-argument, py:variable, py:comment, q:predict, q:choice, q:exercise-with-check, q:slider-task, q:run-cell]
+  data: [metro-traffic]
+  ladder: [python]
+  needs: any
+
+# --- more models ----------------------------------------------------------------
+- id: ml-nearest-centroid
+  title: "Learn now or later: the nearest centroid"
+  level: basis
+  domein: klassiek-ml
+  module: modellen
+  idea: "k-nearest neighbors learns nothing until it is asked and then searches all examples (lazy); the nearest centroid computes one mean per class beforehand (eager), so it predicts in a moment and keeps little, but can only draw straight boundaries between the classes."
+  covers: [instance-based-leren-en-naive-bayes#2, instance-based-leren-en-naive-bayes#3]
+  requires: [ml-knn, ml-kmeans]
+  introduces: [c:lazy-learning, c:eager-learning, c:nearest-centroid-classifier]
+  data: [palmer-penguins]
+  ladder: [python, numpy]
+  needs: any
+
+- id: ml-max-margin
+  title: "The widest street: the maximum-margin classifier"
+  level: basis
+  domein: klassiek-ml
+  module: modellen
+  idea: "Of all straight lines that separate two classes, the maximum-margin classifier takes the one furthest from the nearest points, the support vectors; a soft margin lets a few points cross for a wider street, and C sets the price of each."
+  covers: [svm-en-kernelmethoden#0]
+  requires: [ml-logistic-regression, ml-regularization, ml-feature-scaling, math-norms-cosine]
+  introduces: [c:margin, c:support-vector, c:maximum-margin-classifier, c:soft-margin, c:slack-variable]
+  data: [palmer-penguins]
+  ladder: [numpy]
+  needs: any
+
+- id: ml-one-vs-rest
+  title: "Many classes from two: one-vs-rest and one-vs-one"
+  level: basis
+  domein: klassiek-ml
+  module: modellen
+  idea: "A model for two classes handles many: one-vs-rest trains one model per class against all others and takes the most confident, one-vs-one trains one per pair and lets them vote, and an output code gives each class its own row of answers."
+  covers: [multiclass-multilabel-en-ranking#0]
+  requires: [ml-max-margin, ml-softmax]
+  introduces: [c:one-vs-rest, c:one-vs-one, c:output-code]
+  data: [palmer-penguins]
+  ladder: [python, numpy]
+  needs: any
+
+- id: ml-no-free-lunch
+  title: "No model wins everywhere"
+  level: basis
+  domein: klassiek-ml
+  module: modellen
+  idea: "Every model assumes something about the data, such as a straight boundary, near points alike or splits along one feature; it wins where the assumption holds and loses where it does not, so without an assumption nothing can be learned and averaged over all problems no model wins."
+  covers: [inductive-bias-no-free-lunch-occam#0]
+  requires: [ml-nearest-centroid, ml-max-margin, ml-decision-tree, ml-cross-validation]
+  introduces: [c:no-free-lunch]
+  mentions: [c:inductive-bias]
+  data: []
+  ladder: [python]
+  needs: any
+
+# --- without labels, further ----------------------------------------------------
+- id: ml-hierarchical-clustering
+  title: "Clusters inside clusters: hierarchical clustering"
+  level: basis
+  domein: klassiek-ml
+  module: ongesuperviseerd
+  idea: "Agglomerative clustering starts with every point as a cluster and merges the two closest until one is left; the linkage says what closest means, and the dendrogram shows every merge, so you choose the number of clusters afterwards."
+  covers: [clustering#3]
+  requires: [ml-choosing-k]
+  introduces: [c:hierarchical-clustering, c:linkage, c:dendrogram]
+  data: [palmer-penguins]
+  ladder: [python, numpy]
+  needs: any
+
+- id: ml-dbscan
+  title: "Clusters of any shape: DBSCAN"
+  level: basis
+  domein: klassiek-ml
+  module: ongesuperviseerd
+  idea: "DBSCAN calls a point a core point when enough others lie within a radius, grows clusters from core points to their neighbors and calls the rest noise, so it finds clusters of any shape without a number of clusters, where k-means cuts a ring in two."
+  covers: [clustering#4]
+  requires: [ml-hierarchical-clustering, ml-knn]
+  introduces: [c:dbscan, c:core-point, c:noise-point, c:density-based-clustering]
+  data: []
+  ladder: [python, numpy]
+  needs: any
+
+- id: ml-tsne
+  title: "A map of many dimensions: t-SNE"
+  level: basis
+  domein: klassiek-ml
+  module: ongesuperviseerd
+  idea: "t-SNE draws points of many dimensions on a flat map so that neighbors stay neighbors; it shows groups PCA blurs, but the size of a group and the distance between groups on the map mean little, and another seed or perplexity draws another map."
+  covers: [d10-manifold-learning-en-visualisatie#1]
+  requires: [ml-pca, ml-digits-linear]
+  introduces: [c:t-sne, c:perplexity-t-sne]
+  warns: [perplexity]
+  data: [qmnist]
+  ladder: [numpy]
+  needs: any
+
+- id: ml-association-rules
+  title: "Bought together: support, confidence and lift"
+  level: basis
+  domein: klassiek-ml
+  module: ongesuperviseerd
+  idea: "An association rule says that orders with one product often hold another; support counts how often both occur, confidence how often the second follows the first, and lift how much more often than chance, and Apriori finds frequent sets by growing only sets whose parts are frequent."
+  covers: [patroonmining-en-dichtheidsschatting#0]
+  requires: [prob-conditional, py-tuples-sets, data-groupby]
+  introduces: [c:association-rule, c:support, c:confidence, c:lift, c:frequent-itemset, c:apriori]
+  warns: [support, confidence, lift]
+  data: [online-retail-baskets]
+  ladder: [python]
+  needs: any
+
+# --- time series ----------------------------------------------------------------
+- id: ts-time-index
+  title: "Time as an index: dates and resampling in pandas"
+  level: basis
+  domein: klassiek-ml
+  module: tijdreeksen
+  idea: "With the time as its index, a table can be cut by date, resampled to days or weeks, smoothed with a rolling window or an exponentially weighted mean, and shifted, and a missing hour shows up as a gap instead of hiding."
+  covers: [dataframes#3]
+  requires: [ml-project-table-explore, data-groupby]
+  introduces: [c:time-series, c:datetime-index, c:resampling, c:rolling-window, py:pd-ewm, c:time-zone]
+  mentions: [c:exponential-moving-average]
+  data: [metro-traffic]
+  ladder: [python]
+  needs: any
+
+- id: ts-trend-season
+  title: "Trend, season and the rest"
+  level: basis
+  domein: klassiek-ml
+  module: tijdreeksen
+  idea: "A time series splits into a trend, a season that repeats and a remainder: a moving average over one season gives the trend, the mean per position in the season gives the season, and what is left shows the surprises."
+  covers: [tijdreeksen#0]
+  requires: [ts-time-index]
+  introduces: [c:trend, c:seasonality, c:decomposition, c:remainder, c:forecast]
+  data: [bike-sharing]
+  ladder: [python, numpy]
+  needs: any
+
+- id: ts-autocorrelation
+  title: "Does today look like yesterday? Autocorrelation"
+  level: basis
+  domein: klassiek-ml
+  module: tijdreeksen
+  idea: "The autocorrelation at lag k is the correlation of a series with itself k steps earlier; its peaks show the season, and a series whose mean and spread do not change over time, a stationary one, is what most forecasts assume."
+  covers: [tijdreeksen#0]
+  requires: [ts-trend-season, data-two-columns]
+  introduces: [c:correlation-coefficient, c:lag, c:autocorrelation, c:stationarity]
+  data: [bike-sharing]
+  ladder: [python, numpy]
+  needs: any
+
+- id: ts-backtesting
+  title: "Testing a forecast on the past"
+  level: basis
+  domein: klassiek-ml
+  module: tijdreeksen
+  idea: "A forecast is tested as it would have been used: train on everything up to a moment, forecast the next stretch, move the moment on and repeat; a naive and a seasonal naive forecast are the baselines, and MASE says how much better a forecast is than the naive one."
+  covers: [tijdreeksen#7]
+  requires: [ts-autocorrelation, ml-baselines, ml-regression-metrics]
+  introduces: [c:naive-forecast, c:seasonal-naive-forecast, c:backtesting, c:rolling-origin, c:mase, c:smape]
+  data: [bike-sharing]
+  ladder: [python, numpy]
+  needs: any
+
+- id: ts-forecast-demand
+  title: "Forecasting demand with trees"
+  level: basis
+  domein: klassiek-ml
+  module: tijdreeksen
+  idea: "Demand forecasts in shops, energy grids and bike schemes often turn the past into features, such as the value a day and a week ago, the hour and the weekday, and let gradient boosting learn from them, tested by backtesting against the seasonal naive forecast."
+  covers: [tijdreeksen#10]
+  requires: [ts-backtesting, ml-gradient-boosting]
+  introduces: [c:lag-feature, c:calendar-feature]
+  data: [bike-sharing]
+  ladder: [python]
+  needs: any
+
+# --- recommending and networks --------------------------------------------------
+- id: ml-recommend-problem
+  title: "What to show next: the recommendation problem"
+  level: basis
+  domein: klassiek-ml
+  module: aanbevelen
+  idea: "A recommender fills in a matrix of users and items that is almost empty: each customer bought a few of thousands of products; it is tested by hiding purchases and counting how many it finds back, and recommending what is popular is the baseline to beat."
+  covers: [recommender-systems#0]
+  requires: [ml-baselines, data-merge]
+  introduces: [c:recommender-system, c:user-item-matrix, c:interaction, c:sparsity, c:implicit-feedback, c:hit-rate, c:popularity-baseline]
+  data: [online-retail-baskets]
+  ladder: [python, numpy]
+  needs: any
+
+- id: ml-content-based
+  title: "More of what you liked: content-based filtering"
+  level: basis
+  domein: klassiek-ml
+  module: aanbevelen
+  idea: "Content-based filtering describes every item by its features, here the words of a product's name, builds a profile of each customer from the items they bought, and recommends the items closest to that profile."
+  covers: [recommender-systems#1]
+  requires: [ml-recommend-problem, math-norms-cosine]
+  introduces: [c:content-based-filtering, c:user-profile, c:item-features]
+  data: [online-retail-baskets]
+  ladder: [python, numpy]
+  needs: any
+
+- id: ml-collaborative-filtering
+  title: "Customers like you: collaborative filtering"
+  level: basis
+  domein: klassiek-ml
+  module: aanbevelen
+  idea: "Neighborhood collaborative filtering ignores what items are and looks only at who bought what: two products are alike when the same customers buy them, and a customer gets the products most like what they bought."
+  covers: [recommender-systems#2]
+  requires: [ml-content-based]
+  introduces: [c:collaborative-filtering, c:item-item-similarity, c:cold-start]
+  data: [online-retail-baskets]
+  ladder: [numpy]
+  needs: any
+
+- id: ml-network-data
+  title: "Networks as data: degrees and hubs"
+  level: basis
+  domein: klassiek-ml
+  module: aanbevelen
+  idea: "In a real network a few nodes have most of the edges: the degrees of the airports in the network of flights fall on a straight line on a log scale, and a few hubs make almost every airport a few flights from any other, a small world."
+  covers: [d10-netwerkanalyse-en-graph-mining#0]
+  requires: [math-graphs, math-log-scales]
+  introduces: [c:degree-distribution, c:hub, c:small-world, c:scale-free-network]
+  data: [openflights-routes]
+  ladder: [python, numpy]
+  needs: any
+
+- id: ml-pagerank
+  title: "Who matters in a network? Centrality and PageRank"
+  level: basis
+  domein: klassiek-ml
+  module: aanbevelen
+  idea: "Centrality says how important a node is: by its degree, by how close it is to all others, by how many shortest paths run through it, or by PageRank, the share of time a random walker spends there, computed by spreading scores along the edges until they stop changing."
+  covers: [d10-netwerkanalyse-en-graph-mining#1]
+  requires: [ml-network-data]
+  introduces: [c:centrality, c:closeness-centrality, c:betweenness-centrality, c:pagerank, c:random-walk, c:power-iteration]
+  data: []
+  ladder: [python, numpy]
+  needs: any
+
+# --- tables in practice ---------------------------------------------------------
+- id: ml-gbdt-default
+  title: "The default for tables: gradient-boosted trees"
+  level: basis
+  domein: klassiek-ml
+  module: praktijk
+  idea: "On a table of mixed columns, histogram gradient boosting is the model to try first: it bins every feature, handles missing values and categories itself, stops early on a validation part, and usually beats a forest and a linear model with little tuning."
+  covers: [tabulaire-data-in-de-praktijk#0]
+  requires: [ml-gradient-boosting, ml-pipelines, ts-time-index]
+  introduces: [c:histogram-gradient-boosting, c:native-categorical, c:early-stopping-trees]
+  data: [metro-traffic]
+  ladder: [python]
+  needs: any
+
+- id: ml-competitions
+  title: "What competitions teach: the leaderboard"
+  level: basis
+  domein: klassiek-ml
+  module: praktijk
+  idea: "In a competition the public leaderboard scores part of the test set and the private one the rest; who submits often and keeps the best public score fits that part, and drops on the private board, as the validation set warned."
+  covers: [tabulaire-data-in-de-praktijk#5]
+  requires: [ml-gbdt-default, ml-validation-set]
+  introduces: [c:leaderboard, c:public-leaderboard, c:private-leaderboard, c:leaderboard-overfitting]
+  data: []
+  ladder: [python, numpy]
+  needs: any
+
+- id: ml-imbalanced
+  title: "When one class is rare"
+  level: basis
+  domein: klassiek-ml
+  module: praktijk
+  idea: "With 3 failures in 100 machines a model that never predicts a failure is 97% accurate and useless; class weights make every rare example count more, undersampling and oversampling change the counts, and SMOTE makes new rare examples between neighbors, judged by precision and recall."
+  covers: [onevenwichtige-data#1]
+  requires: [ml-roc-auc, ml-f1-score, ml-knn]
+  introduces: [c:class-weight, c:undersampling, c:oversampling, c:smote]
+  data: [ai4i-maintenance]
+  ladder: [python, numpy]
+  needs: any
+
+- id: ml-grid-random-search
+  title: "Searching settings: grid search and random search"
+  level: basis
+  domein: klassiek-ml
+  module: praktijk
+  idea: "Grid search tries every combination of a few values per setting; random search draws combinations, and with the same number of tries it tests more values of the setting that matters, so it usually finds a better one."
+  covers: [automl#1]
+  requires: [ml-cross-validation, ml-pipelines, ml-hyperparameters]
+  introduces: [c:grid-search, c:random-search, c:search-space]
+  data: [ai4i-maintenance]
+  ladder: [python]
+  needs: any
+
+- id: ml-automl
+  title: "Let the computer choose: AutoML"
+  level: basis
+  domein: klassiek-ml
+  module: praktijk
+  idea: "AutoML searches models and their settings within a budget: successive halving gives many candidates a little data, keeps the best half and gives them more, and tools such as Optuna, auto-sklearn and AutoGluon add smarter search and ensembles, but still need a fair split and a metric from you."
+  covers: [automl#0, automl#7]
+  requires: [ml-grid-random-search, ml-random-forest]
+  introduces: [c:automl, c:successive-halving, c:budget]
+  warns: [budget]
+  data: [ai4i-maintenance]
+  ladder: [python]
+  needs: any
+
+- id: data-labels
+  title: "Where labels come from"
+  level: basis
+  domein: klassiek-ml
+  module: praktijk
+  idea: "A label comes from a person who judges, a measurement, or behavior such as a return or a click; a label from behavior is free and plentiful but arrives late and says what people did, not what is true, and the time it takes to arrive is the feedback loop."
+  covers: [labelen-en-annotatie#0, labelen-en-annotatie#3]
+  requires: [ml-classification, data-provenance]
+  introduces: [c:annotation-label, c:natural-label, c:feedback-loop]
+  data: []
+  ladder: [python]
+  needs: any
+
+- id: data-annotation
+  title: "Labeling well: guidelines and agreement"
+  level: basis
+  domein: klassiek-ml
+  module: praktijk
+  idea: "Labels from people are as good as their guidelines: two annotators who label the same messages agree more than chance only as far as the rules are clear, Cohen's kappa measures it, gold questions catch careless work, and fair pay and care for annotators belong to the process."
+  covers: [labelen-en-annotatie#1, labelen-en-annotatie#2, labelen-en-annotatie#4]
+  requires: [data-labels, prob-basics]
+  introduces: [c:annotation-guideline, c:inter-annotator-agreement, c:cohens-kappa, c:gold-question, c:crowdsourcing]
+  data: [course-spam-messages]
+  ladder: [python]
+  needs: any
+
+- id: data-centric-ai
+  title: "Fix the data, not the model"
+  level: basis
+  domein: klassiek-ml
+  module: praktijk
+  idea: "Keep the model fixed and improve the data: examples whose label the model, trained without them, finds very unlikely are often wrong; checking those first and fixing them raises the test score more than the same time spent on the model."
+  covers: [weinig-labels-synthetische-data-en-data-centric-ai#0]
+  requires: [data-annotation, ml-cross-validation, ml-log-loss]
+  introduces: [c:data-centric-ai, c:label-noise, c:out-of-fold-prediction]
+  data: [palmer-penguins]
+  ladder: [python, numpy]
+  needs: any
+
+- id: data-synthetic
+  title: "Data you make yourself"
+  level: basis
+  domein: klassiek-ml
+  module: praktijk
+  idea: "When data is scarce you can make more: change examples you have, simulate the process that makes them, or let a model write examples and labels; it helps when what you make looks like the real data on the points that matter, and you test it on real data only."
+  covers: [weinig-labels-synthetische-data-en-data-centric-ai#1]
+  requires: [data-centric-ai]
+  introduces: [c:simulation, c:synthetic-label]
+  mentions: [c:synthetic-data]
+  data: [ai4i-maintenance]
+  ladder: [python, numpy]
+  needs: any
+
+# --- project: trees on your table -----------------------------------------------
+- id: ml-project-table-trees
+  title: "Project: trees on your table, fairly"
+  level: basis
+  domein: klassiek-ml
+  module: praktijk
+  kind: project
+  project: tabular
+  idea: "Your clean table of traffic gets a fair test: split by time, beat the seasonal baseline, then compare a random forest and histogram gradient boosting on the same folds, and write down what wins and by how much."
+  covers: []
+  requires: [ml-gbdt-default, ts-backtesting, ml-project-fair-comparison]
+  data: [metro-traffic]
+  ladder: [python]
+  needs: any
