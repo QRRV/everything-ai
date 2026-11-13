@@ -380,7 +380,7 @@ def text_connections():
     mo.md(r"""
     ## Afronding
 
-    **Samenhang.** De one-hot-rijen uit [One-hot-vectoren voor klassen](/course/open/ml-one-hot?lang=nl), de cross-entropy uit [Cross-entropy-loss voor veel klassen](/course/open/ml-cross-entropy?lang=nl) en de optimizer uit [Laat de optimizer de stap zetten](/course/open/torch-optimizer?lang=nl) leren samen de tabel die je eerder telde, en de straf uit [Regularisatie en weight decay](/course/open/ml-regularization?lang=nl) doet wat smoothing deed. Je project `llm` heeft nu ook `bigram_net.py` en `bigram_train.py`. In de volgende les, *Base model of chat model?*, zie je wat de language models die je elke dag gebruikt, anders doen dan het model dat jij bouwde.
+    **Samenhang.** De one-hot-rijen uit [One-hot-vectoren voor klassen](/course/open/ml-one-hot?lang=nl), de cross-entropy uit [Cross-entropy-loss voor veel klassen](/course/open/ml-cross-entropy?lang=nl) en de optimizer uit [Laat de optimizer de stap zetten](/course/open/torch-optimizer?lang=nl) leren samen de tabel die je eerder telde, en de straf uit [Regularisatie en weight decay](/course/open/ml-regularization?lang=nl) doet wat smoothing deed. Je project `llm` heeft nu ook `bigram_net.py` en `bigram_train.py`. Wat de language models die je elke dag gebruikt, anders doen dan het model dat jij bouwde, komt in het domein *Large language models*, vanaf *Base model of chat model?*. Met *Toon verdieping* aan komt eerst *Spam of niet: naive Bayes*, waarin getelde woorden berichten in spam en ok indelen. In de volgende les, *Wat een paper, een preprint en peer review zijn*, ga je zelf onderzoek lezen.
     """)
     return
 

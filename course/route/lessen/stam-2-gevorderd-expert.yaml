@@ -1,6 +1,6 @@
-# Lessons whose home branch is "stam" (the shared foundation), levels gevorderd and expert.
+# Lessons of the foundation's shared modules (domein fundament), levels gevorderd and expert, with a few lessons of
+# the domains beeld and llm that sit with them.
 # Planning data; the map: key below names the map version. Format: ../FORMAT.md.
-tak: stam
 map: v2.2
 lessons:
 
@@ -8,7 +8,8 @@ lessons:
 - id: math-derivative-rules
   title: "Derivative rules"
   level: gevorderd
-  module: math-formal
+  domein: fundament
+  module: wiskunde
   idea: "A few rules (power, product, exp, log and the chain rule) give the exact derivative of any formula you build from them."
   covers: [calculus#1]
   requires: [math-chain-rule, math-exp-log]
@@ -20,7 +21,8 @@ lessons:
 - id: math-partial-derivatives
   title: "Partial derivatives and the gradient, formally"
   level: gevorderd
-  module: math-formal
+  domein: fundament
+  module: wiskunde
   idea: "A partial derivative holds all other variables fixed; the gradient collects them, and the multivariable chain rule adds up the paths."
   covers: [calculus#3]
   requires: [math-derivative-rules, math-gradient]
@@ -31,7 +33,8 @@ lessons:
 - id: math-matrix-calculus
   title: "Gradients of matrix expressions: follow the shapes"
   level: gevorderd
-  module: math-formal
+  domein: fundament
+  module: wiskunde
   idea: "The gradient of a loss with respect to a matrix has the same shape as that matrix; the shapes tell you which product and which transpose you need."
   covers: [calculus#5]
   requires: [math-partial-derivatives, math-transpose, nn-forward-numpy]
@@ -43,7 +46,8 @@ lessons:
 - id: math-matrix-rank
   title: "Rank: how many directions a matrix has"
   level: gevorderd
-  module: math-formal
+  domein: fundament
+  module: wiskunde
   idea: "The rank of a matrix is the number of independent directions in it; a d×d matrix written as a d×r matrix times an r×d matrix has rank at most r and needs only 2·d·r numbers."
   covers: [lineaire-algebra#5]
   requires: [math-matrix-multiply, math-transpose]
@@ -55,7 +59,8 @@ lessons:
 - id: prob-distributions
   title: "Common distributions"
   level: gevorderd
-  module: math-formal
+  domein: fundament
+  module: wiskunde
   idea: "Bernoulli for yes or no, categorical for one of many classes, normal for measurements: three distributions you meet everywhere in deep learning."
   covers: [kansrekening#3]
   requires: [prob-expectation, ml-softmax]
@@ -68,7 +73,8 @@ lessons:
 - id: info-entropy
   title: "Entropy: average surprise"
   level: gevorderd
-  module: math-formal
+  domein: fundament
+  module: wiskunde
   idea: "Entropy is the expected surprise of a distribution, measured in bits; no code that codes one symbol at a time can do better on average."
   covers: [informatietheorie#0, informatietheorie#1]
   requires: [ml-log-loss, prob-expectation]
@@ -81,7 +87,8 @@ lessons:
 - id: info-cross-entropy-kl
   title: "Cross-entropy and KL divergence"
   level: gevorderd
-  module: math-formal
+  domein: fundament
+  module: wiskunde
   idea: "Cross-entropy is the surprise when you expect distribution q but the truth is p; KL divergence is the extra surprise above the entropy of p."
   covers: [informatietheorie#2, informatietheorie#3]
   requires: [info-entropy, ml-cross-entropy]
@@ -94,7 +101,8 @@ lessons:
 - id: stats-mle
   title: "Maximum likelihood"
   level: gevorderd
-  module: math-formal
+  domein: fundament
+  module: wiskunde
   idea: "Choosing parameters that make the data most likely is the same as minimizing the cross-entropy, which is why we train on it."
   covers: [statistiek#3]
   requires: [info-cross-entropy-kl, lm-nll]
@@ -106,7 +114,8 @@ lessons:
 - id: num-floats-stability
   title: "Floating point and the log-sum-exp trick"
   level: gevorderd
-  module: math-formal
+  domein: fundament
+  module: wiskunde
   idea: "Computers store numbers with limited precision, which is why exp of a big logit overflows; the subtract-the-maximum trick from softmax also gives a stable log-sum-exp."
   covers: [numerieke-wiskunde#0, numerieke-wiskunde#3]
   requires: [ml-cross-entropy, math-exp-log]
@@ -119,7 +128,8 @@ lessons:
 - id: stats-bootstrap
   title: "How sure is a number? Confidence intervals and the bootstrap"
   level: gevorderd
-  module: math-formal
+  domein: fundament
+  module: wiskunde
   idea: "Resample your results many times; the spread of the resampled means gives a confidence interval without formulas."
   covers: [statistiek#5]
   requires: [prob-expectation, np-random, stats-describe, ml-random-forest]
@@ -134,7 +144,8 @@ lessons:
 - id: nn-gradient-check
   title: "Gradient checking"
   level: gevorderd
-  module: training
+  domein: fundament
+  module: trainen
   idea: "Compare the gradient from backprop with a finite-difference estimate; if they disagree, your backward pass has a bug."
   covers: [numerieke-wiskunde#7]
   requires: [nn-micrograd-train, math-slope]
@@ -147,7 +158,8 @@ lessons:
 - id: nn-backprop-tensors
   title: "Backprop through whole layers by hand"
   level: gevorderd
-  module: training
+  domein: fundament
+  module: trainen
   kind: project
   project: nn
   idea: "Write the backward pass of a two-layer MLP with softmax and cross-entropy in NumPy, matrix by matrix, and check it against PyTorch."
@@ -162,7 +174,8 @@ lessons:
 - id: nn-vanishing-exploding
   title: "Vanishing and exploding gradients"
   level: gevorderd
-  module: training
+  domein: fundament
+  module: trainen
   idea: "In a deep network the backward pass multiplies many factors; if they are small the gradient vanishes, if large it explodes."
   covers: [backpropagation-en-computational-graphs#2]
   requires: [nn-backprop-tensors, ml-sigmoid]
@@ -175,7 +188,8 @@ lessons:
 - id: nn-initialization
   title: "Initialization"
   level: gevorderd
-  module: training
+  domein: fundament
+  module: trainen
   idea: "Random starting weights with the right spread keep the signal the same size layer after layer; Xavier and He tell you the spread."
   covers: [initialisatie-en-parametrisatie#0, initialisatie-en-parametrisatie#1]
   requires: [nn-vanishing-exploding, prob-distributions]
@@ -188,7 +202,8 @@ lessons:
 - id: nn-activation-stats
   title: "Looking inside a training run"
   level: gevorderd
-  module: training
+  domein: fundament
+  module: trainen
   idea: "Activation histograms and gradient sizes per layer show where a training run goes wrong, such as dead neurons, where the loss only shows that it does."
   covers: [generalisatie-trainingsdynamiek-en-hpo#2]
   requires: [nn-initialization, torch-loss-curves]
@@ -200,7 +215,8 @@ lessons:
 - id: nn-batchnorm
   title: "Batch normalization"
   level: gevorderd
-  module: training
+  domein: fundament
+  module: trainen
   idea: "Standardise each feature over the batch inside the network, then let the network rescale it; deep networks train much more easily."
   covers: [normalisatielagen#0]
   requires: [nn-activation-stats, ml-feature-scaling]
@@ -212,7 +228,8 @@ lessons:
 - id: nn-layernorm
   title: "Layer normalization"
   level: gevorderd
-  module: training
+  domein: fundament
+  module: trainen
   idea: "Standardise each example over its own features instead of over the batch; transformers use this, usually before each sub-layer (pre-norm)."
   covers: [normalisatielagen#1]
   requires: [nn-batchnorm, nn-residual]
@@ -225,7 +242,8 @@ lessons:
 - id: nn-residual
   title: "Residual connections"
   level: gevorderd
-  module: training
+  domein: fundament
+  module: trainen
   idea: "Add a layer's input to its output, so the gradient has a direct path backwards and very deep networks still train."
   covers: [residuals-embeddings-en-conditioning#0]
   requires: [nn-vanishing-exploding, nn-batchnorm]
@@ -238,7 +256,8 @@ lessons:
 - id: opt-momentum
   title: "Momentum"
   level: gevorderd
-  module: training
+  domein: fundament
+  module: trainen
   idea: "Momentum steps by a running sum of the gradients, so steps speed up along a steady slope while gradients that keep changing sign, as across a narrow valley, largely cancel."
   covers: [optimizers#1]
   requires: [torch-optimizer, prob-expectation, ml-feature-scaling]
@@ -250,7 +269,8 @@ lessons:
 - id: opt-adam
   title: "Adam"
   level: gevorderd
-  module: training
+  domein: fundament
+  module: trainen
   idea: "Adam also keeps a running average of each parameter's squared gradient and divides the step by its root, so every parameter gets a step size that fits it."
   covers: [optimizers#1]
   requires: [opt-momentum, torch-mlp-digits, math-log-scales]
@@ -263,7 +283,8 @@ lessons:
 - id: opt-adamw
   title: "AdamW: weight decay done right"
   level: gevorderd
-  module: training
+  domein: fundament
+  module: trainen
   idea: "A weight penalty in the loss gets rescaled by Adam like any gradient; AdamW shrinks the weights directly instead, which is why it is the default for transformers."
   covers: [optimizers#1]
   requires: [opt-adam, ml-regularization, nn-layernorm]
@@ -276,7 +297,8 @@ lessons:
 - id: opt-lr-schedules
   title: "Learning-rate schedules"
   level: gevorderd
-  module: training
+  domein: fundament
+  module: trainen
   idea: "Start with a short warmup, then let the learning rate decay, for example along a cosine."
   covers: [learning-rate-schedules#0, learning-rate-schedules#1, learning-rate-schedules#2]
   requires: [opt-adamw, torch-loss-curves]
@@ -289,7 +311,8 @@ lessons:
 - id: opt-gradient-clipping
   title: "Gradient clipping"
   level: gevorderd
-  module: training
+  domein: fundament
+  module: trainen
   idea: "If the gradient's norm is above a limit, scale it down; one bad batch can then no longer wreck training."
   covers: [optimizers#4]
   requires: [nn-vanishing-exploding, opt-adam, math-norms-cosine]
@@ -302,7 +325,8 @@ lessons:
 - id: nn-dropout
   title: "Dropout"
   level: gevorderd
-  module: training
+  domein: fundament
+  module: trainen
   idea: "During training, randomly switch off part of the neurons, so the network cannot lean on any single one."
   covers: [regularisatie#2]
   requires: [ml-regularization, torch-eval-mode, torch-mlp-digits]
@@ -315,7 +339,8 @@ lessons:
 - id: nn-embedding-layer
   title: "Embedding layers"
   level: gevorderd
-  module: training
+  domein: fundament
+  module: trainen
   idea: "An embedding layer is a trainable lookup table: each id gets a vector, and training moves similar things close together."
   covers: [residuals-embeddings-en-conditioning#1, token-embeddings-en-output-head#0]
   requires: [torch-nn-module, ml-embeddings-idea, lm-bigram-neural, math-log-scales]
@@ -328,7 +353,8 @@ lessons:
 - id: nn-trainer
   title: "A reusable training loop"
   level: gevorderd
-  module: training
+  domein: fundament
+  module: trainen
   kind: project
   project: nn
   idea: "Turn your loop into a trainer with evaluation, logging, checkpoints, clipping, a schedule and gradient accumulation; every later project uses it."
@@ -343,7 +369,8 @@ lessons:
 - id: nn-deep-net-project
   title: "Project: make a deep network train"
   level: gevorderd
-  module: training
+  domein: fundament
+  module: trainen
   kind: project
   project: nn
   idea: "A 10-layer MLP on Fashion-MNIST fails at first; check that it can overfit one batch, then fix it step by step with initialization, normalization, residuals, AdamW and a schedule."
@@ -359,7 +386,8 @@ lessons:
 - id: nn-tuning-playbook
   title: "A tuning playbook"
   level: gevorderd
-  module: training
+  domein: fundament
+  module: trainen
   idea: "Find a good learning rate with a range test, then change one hyperparameter at a time in a small sweep."
   covers: [generalisatie-trainingsdynamiek-en-hpo#3]
   requires: [nn-trainer, opt-adam]
@@ -371,7 +399,8 @@ lessons:
 - id: cnn-conv-formal
   title: "Convolution in detail: kernel size, stride and padding"
   level: gevorderd
-  module: building-blocks
+  domein: fundament
+  module: cnn
   idea: "Kernel size, stride and padding decide the output shape; stacking layers grows the receptive field."
   covers: [convolutionele-netwerken#1]
   requires: [cnn-convolution-idea]
@@ -385,7 +414,8 @@ lessons:
 - id: cnn-channels-pooling
   title: "Channels and pooling"
   level: gevorderd
-  module: building-blocks
+  domein: fundament
+  module: cnn
   idea: "Each filter makes its own output channel, and pooling shrinks the image while keeping the strongest signals."
   covers: [convolutionele-netwerken#1]
   requires: [cnn-conv-formal]
@@ -397,7 +427,8 @@ lessons:
 - id: cnn-conv-numpy
   title: "Convolution as one big matrix multiplication"
   level: gevorderd
-  module: building-blocks
+  domein: fundament
+  module: cnn
   idea: "Cut the image into patches (im2col) and a convolution becomes a single matrix multiplication, which is how GPUs compute it."
   covers: [convolutionele-netwerken#6]
   requires: [cnn-channels-pooling, math-matrix-multiply, ml-digits-linear]
@@ -408,10 +439,10 @@ lessons:
   needs: any
 
 - id: cnn-pytorch
-  tak: beeld
   title: "Project: your first CNN"
   level: gevorderd
-  module: building-blocks
+  domein: fundament
+  module: cnn
   kind: project
   project: cnn
   idea: "A small CNN with nn.Conv2d beats your deep MLP on Fashion-MNIST with far fewer parameters; the Beeld branch continues this project."
@@ -427,10 +458,10 @@ lessons:
   needs: any
 
 - id: cnn-lenet
-  tak: beeld
   title: "LeNet-5, the CNN that read checks"
   level: gevorderd
-  module: building-blocks
+  domein: beeld
+  module: cnn-families
   kind: project
   project: cnn
   idea: "Rebuild LeNet-5, the network that read handwritten checks in the 1990s, and compare it with your own CNN: most later CNNs are the same blocks, stacked deeper."
@@ -444,10 +475,10 @@ lessons:
   needs: any
 
 - id: cnn-vgg-blocks
-  tak: beeld
   title: "VGG: deeper with small filters"
   level: gevorderd
-  module: building-blocks
+  domein: beeld
+  module: cnn-families
   kind: project
   project: cnn
   idea: "Stacks of small 3×3 convolutions see as far as one large filter with fewer parameters; you build VGG blocks and measure what depth does: on small images it stops helping soon, and a plain network that is too deep stops learning."
@@ -460,10 +491,10 @@ lessons:
   needs: any
 
 - id: cnn-resnet
-  tak: beeld
   title: "ResNet: depth that keeps working"
   level: gevorderd
-  module: building-blocks
+  domein: beeld
+  module: cnn-families
   kind: project
   project: cnn
   idea: "With residual connections a CNN can go much deeper: a small ResNet beats a plain network of the same depth on Fashion-MNIST."
@@ -479,7 +510,8 @@ lessons:
 - id: rnn-vanilla
   title: "A recurrent network and backprop through time"
   level: gevorderd
-  module: building-blocks
+  domein: fundament
+  module: rnn
   idea: "Unroll the recurrent network over the sequence and backprop through all steps; long sequences make gradients vanish."
   covers: [recurrente-netwerken#1]
   requires: [rnn-memory-idea, nn-backprop-tensors, nn-vanishing-exploding]
@@ -491,7 +523,8 @@ lessons:
 - id: rnn-lstm
   title: "LSTM and GRU"
   level: gevorderd
-  module: building-blocks
+  domein: fundament
+  module: rnn
   idea: "Gates decide what a recurrent cell keeps, forgets and outputs, which lets information survive over long sequences."
   covers: [recurrente-netwerken#2]
   requires: [rnn-vanilla, ml-sigmoid]
@@ -504,7 +537,8 @@ lessons:
 - id: attn-scores
   title: "Attention weights from dot products"
   level: gevorderd
-  module: building-blocks
+  domein: fundament
+  module: attention
   idea: "Score every pair of positions with a dot product, turn each row of scores into weights with softmax, and take the weighted average."
   covers: [attention-en-transformers#1]
   requires: [attn-idea, math-matrix-multiply, num-floats-stability]
@@ -517,7 +551,8 @@ lessons:
 - id: attn-qkv
   title: "Queries, keys and values"
   level: gevorderd
-  module: building-blocks
+  domein: fundament
+  module: attention
   idea: "Three learned projections give each position a query (what I look for), a key (what I offer) and a value (what I pass on)."
   covers: [attention-en-transformers#1]
   requires: [attn-scores, math-transpose, torch-nn-module]
@@ -531,7 +566,8 @@ lessons:
 - id: attn-scale
   title: "Scaling the scores"
   level: gevorderd
-  module: building-blocks
+  domein: fundament
+  module: attention
   idea: "Dot products grow with the key size; dividing the scores by its square root keeps softmax from saturating, so the gradients keep flowing."
   covers: [attention-en-transformers#1]
   requires: [attn-qkv, prob-expectation, nn-vanishing-exploding]
@@ -544,7 +580,8 @@ lessons:
 - id: attn-causal-mask
   title: "The causal mask"
   level: gevorderd
-  module: building-blocks
+  domein: fundament
+  module: attention
   idea: "A language model may not peek at the future: setting the scores of later positions to minus infinity before softmax gives them weight zero."
   covers: [decoder-only-transformer-in-detail#1]
   requires: [attn-scale, lm-what-is-a-language-model]
@@ -557,7 +594,8 @@ lessons:
 - id: attn-multi-head
   title: "Multi-head attention"
   level: gevorderd
-  module: building-blocks
+  domein: fundament
+  module: attention
   idea: "Several smaller attention heads in parallel can each look for a different kind of relation."
   covers: [attention-en-transformers#2]
   requires: [attn-causal-mask]
@@ -569,7 +607,8 @@ lessons:
 - id: attn-positions
   title: "Telling attention where things are"
   level: gevorderd
-  module: building-blocks
+  domein: fundament
+  module: attention
   idea: "Attention by itself ignores order; adding a position embedding, fixed sinusoids or learned vectors, gives it back."
   covers: [attention-en-transformers#3, positionele-codering#0, positionele-codering#1]
   requires: [attn-multi-head, nn-embedding-layer, lm-tokens-outside]
@@ -582,7 +621,8 @@ lessons:
 - id: attn-transformer-block
   title: "The transformer block"
   level: gevorderd
-  module: building-blocks
+  domein: fundament
+  module: attention
   kind: project
   project: llm
   idea: "Attention and an MLP, each with layer norm and a residual connection, form one block; the residual stream runs through all blocks."
@@ -598,7 +638,8 @@ lessons:
 - id: math-complex-rotation
   title: "Rotating vectors and complex numbers"
   level: expert
-  module: math-formal
+  domein: fundament
+  module: signalen-en-meetkunde
   idea: "Rotating a 2D vector is multiplying by a complex number of length 1, e to the power i times the angle."
   covers: [complexe-getallen#0, complexe-getallen#1, complexe-getallen#2]
   requires: [math-transpose, math-exp-log]
@@ -611,7 +652,8 @@ lessons:
 - id: llm-rmsnorm
   title: "RMSNorm"
   level: expert
-  module: modern-llm
+  domein: llm
+  module: modern
   idea: "RMSNorm drops the mean subtraction of layer norm and only rescales; it is cheaper and works as well in LLMs."
   covers: [normalisatielagen#2]
   requires: [nn-layernorm, gpt-assemble]

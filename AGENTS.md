@@ -4,14 +4,14 @@ This file is for an AI assistant that a learner points at this repository, such 
 
 ## What this repository is
 
-An interactive course that teaches AI from a first line of Python to your own small language model and a reproduced paper. It runs locally: `uv run everything-ai` starts the course in the browser. Lessons are [marimo](https://marimo.io) notebooks with exercises that are checked straight away. Every lesson exists in English (`en.py`) and Dutch (`nl.py`).
+An interactive course that teaches all of AI: from a first line of Python, through a core every domain builds on, to 18 domains a learner chooses from, such as large language models and computer vision, and a reproduced paper. It runs locally: `uv run everything-ai` starts the course in the browser. Lessons are [marimo](https://marimo.io) notebooks with exercises that are checked straight away. Every lesson exists in English (`en.py`) and Dutch (`nl.py`).
 
 | Path | What is there |
 |---|---|
 | `lessons/<id>/en.py`, `nl.py` | the course's own lesson, one file per language, with identical code |
 | `lessons/<id>/checks.py` | what is right in each exercise, the known mistakes, every check message in both languages, and `CASES` the tests run |
 | `lessons/<id>/lesson.yaml` | title, goal, minutes, summary and "You can now" of the lesson |
-| `course/route/` | the route: every lesson with its level, module, prerequisites (`requires`) and the ideas it introduces |
+| `course/route/` | the route: every lesson with its level, domain (`domein`) and module, prerequisites (`requires`) and the ideas it introduces; the core and the domains in `domeinen.yaml`, the routes in `routes.yaml` |
 | `course/phrases.yaml` | fixed words the course uses in the same place everywhere |
 | `src/everything_ai/` | the app: start page, lesson helper (`lesson.py`), checks (`check.py`), widgets, progress |
 | `data/` | datasets the course hosts itself, such as `tiny-shakespeare.txt`; `data/README.md` says where each comes from |

@@ -1,6 +1,6 @@
 # SPDX-FileCopyrightText: 2026 Everything AI contributors
 # SPDX-License-Identifier: MIT
-"""Caltech-101, the photo set of the vision branch: photos of objects in 101 classes, collected from the web in
+"""Caltech-101, the photo set of the domain computer vision: photos of objects in 101 classes, collected from the web in
 2003 by Fei-Fei Li, Marco Andreetto, Marc'Aurelio Ranzato and Pietro Perona, CC BY 4.0 on CaltechDATA
 (doi:10.22002/D1.20086). The course does not ship it: everything_ai.hub downloads its zip file once, at its source,
 and `unpack` puts the photos in work/cache/caltech-101/, one folder per class. The two classes of faces are left out

@@ -382,7 +382,7 @@ def text_connections():
     mo.md(r"""
     ## Wrap-up
 
-    **How this connects.** Minimax searches a game tree as [breadth-first search](/course/open/search-bfs?lang=en) searched a maze, but in another order: it follows each move down to the end of the game before it tries the next, as in the play block. It gives back a value instead of a path, and it calls itself, as in [A function that calls itself](/course/open/py-recursion?lang=en). With a value for every position, the best move is the one whose value is best for the player to move. Search in games such as chess comes back in a branch still to come, *Search, logic, planning and optimization*. In the next lesson, *When steps can slip: value iteration*, no opponent answers your action, but chance does, and every state gets a value again.
+    **How this connects.** Minimax searches a game tree as [breadth-first search](/course/open/search-bfs?lang=en) searched a maze, but in another order: it follows each move down to the end of the game before it tries the next, as in the play block. It gives back a value instead of a path, and it calls itself, as in [A function that calls itself](/course/open/py-recursion?lang=en). With a value for every position, the best move is the one whose value is best for the player to move. Search in games such as chess comes back in a domain of its own, still to come, *Search, logic, planning and optimization*. In the next lesson, *When steps can slip: value iteration*, no opponent answers your action, but chance does, and every state gets a value again.
     """)
     return
 

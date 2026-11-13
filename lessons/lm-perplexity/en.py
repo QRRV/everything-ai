@@ -298,7 +298,7 @@ def text_connections():
     mo.md(r"""
     ## Wrap-up
 
-    **How this connects.** The average NLL of [How good is a language model?](/course/open/lm-nll?lang=en) is the cross-entropy of [Cross-entropy and KL divergence](/course/open/info-cross-entropy-kl?lang=en) between the text and the model; perplexity is e to the power of it, a number of choices. Its floor is $e^{H(p)}$, set by the entropy of the text itself. Every language model from here on, your GPT included, gets a perplexity on unseen text, and for models with different tokens you first bring it to characters, as in exercise 3. The next lesson, *Convolution in detail: kernel size, stride and padding*, turns back to images: what a convolutional layer does with its kernel, how far it steps, and what happens at the edges.
+    **How this connects.** The average NLL of [How good is a language model?](/course/open/lm-nll?lang=en) is the cross-entropy of [Cross-entropy and KL divergence](/course/open/info-cross-entropy-kl?lang=en) between the text and the model; perplexity is e to the power of it, a number of choices. Its floor is $e^{H(p)}$, set by the entropy of the text itself. Every language model from here on, your GPT included, gets a perplexity on unseen text, and for models with different tokens you first bring it to characters, as in exercise 3. The next lesson, *Attention weights from dot products*, starts on attention: how a model works out, with dot products and softmax, which words to look at.
     """)
     return
 

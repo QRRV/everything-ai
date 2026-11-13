@@ -1,6 +1,5 @@
-# Lessons whose home branch is "taal" (language and LLMs). All levels.
+# Language lessons: those of the core (domein fundament), of the domain taal, and of the domain llm at all levels.
 # Planning data; the map: key below names the map version. Format: ../FORMAT.md. The running project "llm" grows through these lessons.
-tak: taal
 map: v2.2
 lessons:
 
@@ -8,6 +7,7 @@ lessons:
 - id: data-text-as-numbers
   title: "Text is a sequence of numbers"
   level: basis
+  domein: fundament
   module: data
   idea: "Every character has a number (Unicode); a text becomes a list of integers a computer can calculate with."
   covers: [tekstverwerking#0]
@@ -21,7 +21,8 @@ lessons:
 - id: lm-what-is-a-language-model
   title: "A language model predicts the next token"
   level: basis
-  module: lm-basis
+  domein: fundament
+  module: taalmodellen
   idea: "A language model gives, for every possible next token, the probability that it comes next; the text itself provides the labels."
   covers: [klassieke-taalmodellen#0, pretraining-doelen-en-databronnen#1]
   requires: [prob-conditional, data-text-as-numbers, ml-kinds-of-learning, ml-model-is-a-function]
@@ -34,7 +35,8 @@ lessons:
 - id: lm-tokens-outside
   title: "Tokens: how real LLMs chop up text"
   level: basis
-  module: lm-basis
+  domein: fundament
+  module: taalmodellen
   idea: "Real models split text into subword tokens from a fixed vocabulary; you count tokens with a ready-made tokenizer."
   covers: [subword-tokenisatie#0, subword-tokenisatie#1]
   requires: [lm-what-is-a-language-model]
@@ -47,7 +49,8 @@ lessons:
 - id: lm-bigram-counts
   title: "A bigram model by counting"
   level: basis
-  module: lm-basis
+  domein: fundament
+  module: taalmodellen
   kind: project
   project: llm
   idea: "Count how often each character follows each other character; those counts already make a language model."
@@ -62,7 +65,8 @@ lessons:
 - id: lm-bigram-matrix
   title: "The bigram table as a matrix of probabilities"
   level: basis
-  module: lm-basis
+  domein: fundament
+  module: taalmodellen
   kind: project
   project: llm
   idea: "Put the counts in a matrix and divide each row by its sum: row i is the probability distribution of the next character after character i."
@@ -77,7 +81,8 @@ lessons:
 - id: lm-sampling
   title: "Sampling: let the model write"
   level: basis
-  module: lm-basis
+  domein: fundament
+  module: taalmodellen
   kind: project
   project: llm
   idea: "Draw the next character from its probabilities, append it, and repeat; greedy decoding always takes the most likely one."
@@ -92,7 +97,8 @@ lessons:
 - id: lm-temperature
   title: "Temperature: bolder or safer text"
   level: basis
-  module: lm-basis
+  domein: llm
+  module: gebruiken
   idea: "Dividing the logits by a temperature before softmax makes the distribution sharper (below 1) or flatter (above 1)."
   covers: [autoregressieve-generatie-en-sampling#1]
   requires: [lm-sampling, ml-softmax]
@@ -106,7 +112,8 @@ lessons:
 - id: lm-top-k-top-p
   title: "Top-k and top-p sampling"
   level: basis
-  module: lm-basis
+  domein: llm
+  module: gebruiken
   idea: "Only sample from the k most likely tokens, or from the smallest set that covers probability p, to cut off nonsense."
   covers: [autoregressieve-generatie-en-sampling#2, autoregressieve-generatie-en-sampling#3]
   requires: [lm-temperature]
@@ -119,7 +126,8 @@ lessons:
 - id: lm-nll
   title: "How good is a language model?"
   level: basis
-  module: lm-basis
+  domein: fundament
+  module: taalmodellen
   idea: "The average negative log-likelihood of real text says how surprised the model is by it; lower is better."
   covers: [informatietheorie#0]
   requires: [lm-bigram-matrix, ml-log-loss]
@@ -132,7 +140,8 @@ lessons:
 - id: lm-smoothing
   title: "Pairs you never saw: smoothing"
   level: basis
-  module: lm-basis
+  domein: fundament
+  module: taalmodellen
   idea: "A pair with count zero gets probability zero and an infinite loss; adding a small count to everything fixes that."
   covers: []
   requires: [lm-nll]
@@ -145,7 +154,8 @@ lessons:
 - id: lm-naive-bayes
   title: "Spam or not: naive Bayes"
   level: basis
-  module: lm-basis
+  domein: taal
+  module: tekst-verwerken
   idea: "Naive Bayes gives a text the class with the highest P(class) times P(word | class) for each of its words, as if the words were independent within a class; the probabilities are word counts with Laplace smoothing, added up as logs."
   covers: [klassieke-tekstclassificatie#2, klassieke-tekstclassificatie#6, instance-based-leren-en-naive-bayes#6]
   requires: [lm-smoothing, prob-bayes, lm-tokens-outside]
@@ -158,7 +168,8 @@ lessons:
 - id: lm-bigram-neural
   title: "Project: the same bigram model, learned with gradient descent"
   level: basis
-  module: lm-basis
+  domein: fundament
+  module: taalmodellen
   kind: project
   project: llm
   idea: "A one-layer network on one-hot characters, trained with cross-entropy in PyTorch, learns the same table you counted; regularization plays the role of smoothing."
@@ -172,7 +183,8 @@ lessons:
 - id: lm-base-vs-chat
   title: "Base model or chat model?"
   level: basis
-  module: lm-basis
+  domein: llm
+  module: gebruiken
   idea: "A base model only continues text; a chat model was trained further to answer as an assistant, with system, user and assistant roles."
   covers: [base-vs-chat-en-chat-templates#0, base-vs-chat-en-chat-templates#1]
   requires: [lm-what-is-a-language-model]
@@ -184,7 +196,8 @@ lessons:
 - id: lm-hallucination
   title: "Why language models make things up"
   level: basis
-  module: lm-basis
+  domein: llm
+  module: gebruiken
   idea: "A language model produces likely text, not checked facts; it can sound sure and still be wrong, and it knows nothing after its knowledge cutoff."
   covers: [d16-hallucinatie-en-sycophancy#0, gedrag-en-beperkingen#1]
   requires: [lm-sampling, lm-base-vs-chat]
@@ -197,7 +210,8 @@ lessons:
 - id: lm-model-families
   title: "Encoders, decoders and the GPT line"
   level: basis
-  module: lm-basis
+  domein: llm
+  module: gebruiken
   idea: "Encoders such as BERT read a whole text, decoders such as GPT write the next token, encoder-decoders such as T5 do both."
   covers: [pretrained-encoders-en-encoderdecoders#1, de-gpt-lijn#0]
   requires: [attn-idea, lm-what-is-a-language-model]
@@ -209,7 +223,8 @@ lessons:
 - id: lm-peek-real-llm
   title: "Look inside a real LLM's next-token probabilities"
   level: basis
-  module: lm-basis
+  domein: llm
+  module: gebruiken
   idea: "Load GPT-2 small, an open model with 124 million parameters, and print its probabilities for the next token after any text: the same idea as your bigram table, but the row is computed anew from every token before."
   covers: [het-modellandschap#0]
   requires: [lm-tokens-outside, torch-pretrained, ml-softmax, lm-bigram-matrix, lm-bigram-neural]
@@ -224,7 +239,8 @@ lessons:
 - id: tok-bpe
   title: "Byte pair encoding: build your own tokenizer"
   level: gevorderd
-  module: tokenizer
+  domein: llm
+  module: tokens
   kind: project
   project: llm
   idea: "Start from characters and keep merging the most frequent pair into a new token until the vocabulary is big enough."
@@ -239,7 +255,8 @@ lessons:
 - id: tok-byte-level
   title: "Byte-level BPE"
   level: gevorderd
-  module: tokenizer
+  domein: llm
+  module: tokens
   kind: project
   project: llm
   idea: "Working on UTF-8 bytes instead of characters lets you tokenize any text, in any language or with emoji."
@@ -254,7 +271,8 @@ lessons:
 - id: tok-pre-tokenization
   title: "Pre-tokenization"
   level: gevorderd
-  module: tokenizer
+  domein: llm
+  module: tokens
   kind: project
   project: llm
   idea: "Split text into words, numbers and punctuation first, with a regular expression, so that merges never cross a word boundary."
@@ -269,7 +287,8 @@ lessons:
 - id: tok-special-tokens
   title: "Pre-tokenization and special tokens"
   level: gevorderd
-  module: tokenizer
+  domein: llm
+  module: tokens
   kind: project
   project: llm
   idea: "Reserve special tokens, such as end-of-text, that never come out of normal text; they mark where one document stops and the next begins."
@@ -284,7 +303,8 @@ lessons:
 - id: lm-mlp-context
   title: "A neural language model that looks further back"
   level: gevorderd
-  module: lm-neural
+  domein: fundament
+  module: attention
   kind: project
   project: llm
   idea: "Embed the last few tokens, glue the embeddings together and let an MLP give one logit per vocabulary token: Bengio's neural language model, which can only look back a fixed number of tokens."
@@ -300,7 +320,8 @@ lessons:
 - id: lm-perplexity
   title: "Perplexity"
   level: gevorderd
-  module: lm-neural
+  domein: fundament
+  module: attention
   idea: "Perplexity is e to the power of the average loss: the number of tokens the model is effectively choosing between."
   covers: [klassieke-taalmodellen#4]
   requires: [lm-nll, info-cross-entropy-kl, lm-tokens-outside]
@@ -313,6 +334,7 @@ lessons:
 - id: gpt-assemble
   title: "Assemble your GPT"
   level: gevorderd
+  domein: llm
   module: gpt
   kind: project
   project: llm
@@ -328,6 +350,7 @@ lessons:
 - id: gpt-count
   title: "Counting parameters and FLOPs per token"
   level: gevorderd
+  domein: llm
   module: gpt
   idea: "Count where the parameters of your GPT sit and how many calculations one token costs: about 2 FLOPs per parameter forward."
   covers: [decoder-only-transformer-in-detail#4]
@@ -340,6 +363,7 @@ lessons:
 - id: gpt-train-chars
   title: "Project: train your GPT on a book"
   level: gevorderd
+  domein: llm
   module: gpt
   kind: project
   project: llm
@@ -357,6 +381,7 @@ lessons:
 - id: gpt-generate
   title: "Generate text with your GPT"
   level: gevorderd
+  domein: llm
   module: gpt
   kind: project
   project: llm
@@ -372,6 +397,7 @@ lessons:
 - id: gpt-train-bpe
   title: "Project: your GPT on your own tokens"
   level: gevorderd
+  domein: llm
   module: gpt
   kind: project
   project: llm
@@ -391,6 +417,7 @@ lessons:
 - id: lm-weight-tying
   title: "Weight tying"
   level: gevorderd
+  domein: llm
   module: gpt
   idea: "Using the embedding matrix also as the output head saves parameters and often helps a little."
   covers: [token-embeddings-en-output-head#3]
@@ -403,6 +430,7 @@ lessons:
 - id: gpt-attention-maps
   title: "What does your GPT look at?"
   level: gevorderd
+  domein: llm
   module: gpt
   idea: "Plot the attention weights of each head as a heatmap and find heads that look at the previous token or at the start of the line."
   covers: [uitlegbaarheid-voor-llms#2]
@@ -417,7 +445,8 @@ lessons:
 - id: llm-swiglu
   title: "Modern MLP blocks: GELU, SiLU and SwiGLU"
   level: expert
-  module: modern-llm
+  domein: llm
+  module: modern
   idea: "Smooth activations and a gated MLP (SwiGLU) replace ReLU in modern LLMs."
   covers: [activaties-en-loss-functions#2, decoder-only-transformer-in-detail#3]
   requires: [gpt-assemble]
@@ -429,7 +458,8 @@ lessons:
 - id: llm-rope
   title: "Rotary position embeddings (RoPE)"
   level: expert
-  module: modern-llm
+  domein: llm
+  module: modern
   idea: "RoPE rotates queries and keys by an angle that depends on the position, so attention scores depend on relative distance."
   covers: [positionele-codering#2]
   requires: [math-complex-rotation, attn-positions, gpt-assemble]
@@ -441,7 +471,8 @@ lessons:
 - id: llm-gqa
   title: "Grouped-query attention"
   level: expert
-  module: modern-llm
+  domein: llm
+  module: modern
   idea: "Let several query heads share one key and value head; it saves memory with little loss in quality."
   covers: [attention-varianten#0, attention-varianten#1]
   requires: [attn-multi-head, gpt-assemble]
@@ -453,7 +484,8 @@ lessons:
 - id: llm-kv-cache
   title: "The KV cache"
   level: expert
-  module: modern-llm
+  domein: llm
+  module: modern
   idea: "When generating, store the keys and values of earlier tokens instead of recomputing them; then count how much memory that costs."
   covers: [kv-cache#0, kv-cache#1]
   requires: [gpt-generate, llm-gqa, sys-memory-accounting]
@@ -465,7 +497,8 @@ lessons:
 - id: llm-modern-gpt
   title: "Project: upgrade your GPT to a modern LLM"
   level: expert
-  module: modern-llm
+  domein: llm
+  module: modern
   kind: project
   project: llm
   idea: "Swap in RMSNorm, SwiGLU, RoPE and grouped-query attention and add a KV cache; check that each change keeps the loss as good or better."
@@ -482,7 +515,8 @@ lessons:
 - id: llm-pretraining-data
   title: "Where pretraining data comes from"
   level: expert
-  module: pretraining
+  domein: llm
+  module: pretrainen
   idea: "LLMs learn from web pages, books, code and papers; where data comes from decides what a model knows and which rights and licenses apply."
   covers: [pretraining-doelen-en-databronnen#0, auteursrecht-en-ip#4]
   requires: [data-provenance, gpt-train-bpe]
@@ -494,7 +528,8 @@ lessons:
 - id: llm-quality-filter
   title: "Cleaning text: quality filters"
   level: expert
-  module: pretraining
+  domein: llm
+  module: pretrainen
   idea: "Simple rules and a small classifier throw out spam, boilerplate and broken text before training."
   covers: [datacuratie-en-mixtures#0, data-op-webschaal#3, capstone-zelf-een-kleine-llm-bouwen-en-trainen#4]
   requires: [llm-pretraining-data, ml-logistic-regression]
@@ -506,7 +541,8 @@ lessons:
 - id: llm-dedup
   title: "Removing duplicates with MinHash"
   level: expert
-  module: pretraining
+  domein: llm
+  module: pretrainen
   idea: "MinHash finds near-identical documents quickly, so the model does not learn the same text many times."
   covers: [data-op-webschaal#2]
   requires: [llm-quality-filter, py-tuples-sets]
@@ -520,7 +556,8 @@ lessons:
 - id: llm-decontamination
   title: "Keeping test data out of training data"
   level: expert
-  module: pretraining
+  domein: llm
+  module: pretrainen
   idea: "If benchmark questions sit in the training data, a test score measures memory, not skill; remove them first."
   covers: [datacuratie-en-mixtures#2]
   requires: [llm-dedup, ml-train-test-split, res-reading-claims]
@@ -532,7 +569,8 @@ lessons:
 - id: llm-data-pipeline
   title: "Project: a pretraining data pipeline"
   level: expert
-  module: pretraining
+  domein: llm
+  module: pretrainen
   kind: project
   project: llm
   idea: "Tokenize the cleaned stories once into a file of token ids and stream random windows from it during training."
@@ -548,7 +586,8 @@ lessons:
 - id: llm-open-recipes
   title: "Reading an open training recipe"
   level: expert
-  module: pretraining
+  domein: llm
+  module: pretrainen
   idea: "Fully open projects such as nanochat publish data, code and settings; you read one recipe end to end, size a run by its rules, train a few hundred steps of it with what you built, and map each phase onto what you built yourself."
   covers: [volledig-open-pretraining-recepten#2, pretraining-doelen-en-databronnen#3, papers-reproduceren#0]
   requires: [llm-data-pipeline, llm-modern-gpt]
@@ -562,7 +601,8 @@ lessons:
 - id: llm-scaling-laws
   title: "Scaling laws"
   level: expert
-  module: scaling
+  domein: llm
+  module: schalen
   idea: "Loss falls as a power law in model size, data and compute: a straight line on a log-log plot."
   covers: [scaling-laws-en-compute#0, scaling-gedrag#0]
   requires: [math-log-scales, sys-compute-6nd]
@@ -573,7 +613,8 @@ lessons:
 - id: llm-fit-scaling-law
   title: "Project: fit your own scaling law"
   level: expert
-  module: scaling
+  domein: llm
+  module: schalen
   kind: project
   project: llm
   idea: "Train four small versions of your model for a few minutes each, fit a power law and predict the loss of a bigger one before you train it."
@@ -590,7 +631,8 @@ lessons:
 - id: llm-pretrain-capstone
   title: "Capstone: pretrain your own small LLM"
   level: expert
-  module: scaling
+  domein: llm
+  module: schalen
   kind: project
   project: llm
   idea: "Measure your computer, size a model for 15 minutes of it with your compute_optimal, pretrain it with mixed precision where that is faster, measure its MFU, and let it write stories; the course's own model, trained for hours with the same code, is the fallback."
@@ -608,7 +650,8 @@ lessons:
 - id: llm-overnight-gpt2
   title: "Optional night run: a GPT-2-size model"
   level: expert
-  module: scaling
+  domein: llm
+  module: schalen
   kind: project
   project: llm
   idea: "Scale the same code to 124M parameters and let it train overnight; the course checkpoint is the fallback."
@@ -623,7 +666,8 @@ lessons:
 - id: llm-open-recipe-full-run
   title: "Run a full open recipe"
   level: expert
-  module: post-training
+  domein: llm
+  module: natrainen
   kind: project
   project: llm
   idea: "Run the smallest nanochat recipe end to end, from tokenizer to chat model, over a few days on your own GPU; you can stop after any phase."
@@ -638,7 +682,8 @@ lessons:
 - id: llm-eval-base
   title: "Evaluating your base model"
   level: expert
-  module: evaluation
+  domein: llm
+  module: evalueren
   idea: "Perplexity depends on the tokenizer; bits per byte lets you compare models with different tokenizers."
   covers: [intrinsieke-evaluatie-metrics-en-klassieke-benchmarks#0]
   requires: [llm-pretrain-capstone, lm-perplexity, lm-base-vs-chat]
@@ -651,7 +696,8 @@ lessons:
 - id: llm-eval-multiple-choice
   title: "Scoring multiple-choice questions with log-likelihood"
   level: expert
-  module: evaluation
+  domein: llm
+  module: evalueren
   idea: "Let the model score each answer option and pick the most likely one; this is how many benchmarks test base models."
   covers: [intrinsieke-evaluatie-metrics-en-klassieke-benchmarks#2]
   requires: [llm-eval-base]
@@ -663,7 +709,8 @@ lessons:
 - id: llm-chat-template
   title: "Chat templates"
   level: expert
-  module: post-training
+  domein: llm
+  module: natrainen
   idea: "A chat template wraps every message in special tokens that mark its role; a wrong template quietly breaks a chat model."
   covers: [base-vs-chat-en-chat-templates#2, base-vs-chat-en-chat-templates#4]
   requires: [tok-special-tokens, lm-base-vs-chat]
@@ -674,7 +721,8 @@ lessons:
 - id: llm-sft
   title: "Project: teach your model to follow instructions (SFT)"
   level: expert
-  module: post-training
+  domein: llm
+  module: natrainen
   kind: project
   project: llm
   idea: "Fine-tune your model on instructions with a good answer, with the loss only on the answer and its end-of-text; a check a program can do counts how much more often it does what is asked."
@@ -692,7 +740,8 @@ lessons:
 - id: llm-lora
   title: "Project: LoRA, fine-tuning with a low-rank update"
   level: expert
-  module: post-training
+  domein: llm
+  module: aanpassen
   kind: project
   project: llm
   idea: "Freeze the model and learn a small low-rank correction per weight matrix; it needs far less memory and gives almost the same result."
@@ -710,7 +759,8 @@ lessons:
 - id: llm-preference-pairs
   title: "Preference pairs and the Bradley-Terry model"
   level: expert
-  module: post-training
+  domein: llm
+  module: natrainen
   idea: "People, or a checker, say which of two answers is better; the Bradley-Terry model turns that into a probability with a sigmoid."
   covers: [preferentiedata-en-reward-models#0, preferentiedata-en-reward-models#1]
   requires: [llm-sft, llm-lora, ml-sigmoid]
@@ -723,7 +773,8 @@ lessons:
 - id: llm-rlhf-idea
   title: "RLHF: learning from human preferences"
   level: expert
-  module: post-training
+  domein: llm
+  module: natrainen
   idea: "A reward model learns the preferences, and reinforcement learning pushes the model towards higher reward while a KL penalty keeps it close to where it started."
   covers: [rlhf#0]
   requires: [llm-preference-pairs, rl-what-is-rl, info-cross-entropy-kl]
@@ -735,7 +786,8 @@ lessons:
 - id: llm-dpo-loss
   title: "DPO: preferences without a reward model"
   level: expert
-  module: post-training
+  domein: llm
+  module: natrainen
   idea: "DPO turns the Bradley-Terry probability of a preference pair into a loss on how much more likely your model makes the better answer than a frozen reference model does; no reward model and no RL loop."
   covers: [dpo-en-varianten#0]
   requires: [llm-rlhf-idea]
@@ -747,7 +799,8 @@ lessons:
 - id: llm-dpo
   title: "Project: DPO, preferences without a reward model"
   level: expert
-  module: post-training
+  domein: llm
+  module: natrainen
   kind: project
   project: llm
   idea: "Train DPO on your story model: a checker builds the preference pairs from whether the requested words appear, and the reference model is your model with the LoRA adapter switched off."
@@ -765,7 +818,8 @@ lessons:
 - id: llm-rlvr
   title: "Reinforcement learning with verifiable rewards"
   level: expert
-  module: post-training
+  domein: llm
+  module: natrainen
   idea: "When a program can check the answer, that check can be the reward; this is how reasoning models are trained."
   covers: [rl-met-verifieerbare-beloningen#0, rl-met-verifieerbare-beloningen#1]
   requires: [llm-dpo]
@@ -779,7 +833,8 @@ lessons:
 - id: llm-eval-chat
   title: "Did post-training help?"
   level: expert
-  module: post-training
+  domein: llm
+  module: evalueren
   idea: "Measure instruction following with checks a program can verify, before and after SFT and DPO, on held-out prompts."
   covers: [capability-benchmarks#8]
   requires: [llm-dpo, llm-decontamination]
@@ -792,7 +847,8 @@ lessons:
 - id: llm-same-on-open-model
   title: "The same steps on an open model"
   level: expert
-  module: post-training
+  domein: llm
+  module: natrainen
   kind: project
   project: llm
   idea: "Apply LoRA SFT and DPO to a small open-license model with an open instruction and preference dataset."
@@ -809,7 +865,8 @@ lessons:
 - id: llm-reasoning-idea
   title: "How an LLM reasons: written steps and test-time compute"
   level: expert
-  module: post-training
+  domein: llm
+  module: redeneren
   idea: "A transformer does the same fixed work for every token; letting it write steps before its answer, or sample several answers and vote, spends more computation at answer time and often answers better, without changing a weight."
   covers: [reasoning-modellen-en-test-time-compute#0, reasoning-modellen-en-test-time-compute#2, reasoning-modellen-en-test-time-compute#3, prompt-basis#2]
   requires: [llm-eval-chat, res-research-cycle, stats-bootstrap, ml-knn]
@@ -827,7 +884,8 @@ lessons:
 - id: llm-reasoning-from-scratch
   title: "Project: a model that writes its steps, from scratch"
   level: expert
-  module: post-training
+  domein: llm
+  module: redeneren
   kind: project
   project: llm
   idea: "Train the same small model from scratch twice on multiplication, once on the answer alone and once on the answer with its steps written out: with steps it learns 3-digit products and without them it hardly does, and neither handles longer numbers than it saw."
@@ -847,7 +905,8 @@ lessons:
 - id: llm-quantize
   title: "Running a model in fewer bits"
   level: expert
-  module: post-training
+  domein: llm
+  module: genereren
   idea: "Storing your model's weights in 8 or 4 bits makes it smaller and faster to run, at a small cost in quality that you measure."
   covers: [quantization-en-compressie#0]
   requires: [sys-number-formats, llm-pretrain-capstone]

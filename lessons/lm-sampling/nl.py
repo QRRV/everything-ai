@@ -365,7 +365,7 @@ def text_connections():
     mo.md(r"""
     ## Afronding
 
-    **Samenhang.** De tabel uit [De bigram-tabel als matrix van kansen](/course/open/lm-bigram-matrix?lang=nl) geeft de kansen, de random number generator uit [Willekeurige getallen en seeds](/course/open/np-random?lang=nl) trekt eruit, en de `while`-loop uit [Herhalen tot er iets gebeurt: while](/course/open/py-while?lang=nl) gaat door tot de tekst lang genoeg is. Je project `llm` heeft nu ook `greedy.py` en `sampling.py`. In de volgende les, *Temperature: gedurfder of veiliger tekst*, maak je de keuze tussen veilig en gedurfd zelf: scherpere kansen, dichter bij greedy decoding, of vlakkere, dichter bij willekeurig trekken.
+    **Samenhang.** De tabel uit [De bigram-tabel als matrix van kansen](/course/open/lm-bigram-matrix?lang=nl) geeft de kansen, de random number generator uit [Willekeurige getallen en seeds](/course/open/np-random?lang=nl) trekt eruit, en de `while`-loop uit [Herhalen tot er iets gebeurt: while](/course/open/py-while?lang=nl) gaat door tot de tekst lang genoeg is. Je project `llm` heeft nu ook `greedy.py` en `sampling.py`. In de volgende les, *Hoe goed is een language model?*, meet je hoe verrast je model is door echte tekst. Zelf kiezen tussen veilig en gedurfd, met scherpere of vlakkere kansen, komt in het domein *Large language models*, in *Temperature: gedurfder of veiliger tekst*.
     """)
     return
 

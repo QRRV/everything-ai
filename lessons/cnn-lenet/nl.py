@@ -81,7 +81,7 @@ def text_why():
         mo.md(r"""
         ## Waarom
 
-        Je SmallCNN heeft twee blokken van convolutie en pooling, en daarna een output head. Die vorm is oud. In 1998 beschreven Yann LeCun, Léon Bottou, Yoshua Bengio en Patrick Haffner **LeNet-5**: een CNN van twee zulke blokken en drie linear layers dat handgeschreven cijfers las. Een systeem dat erop gebouwd was, las elke dag enkele miljoenen cheques. Latere CNN's, zoals VGG en ResNet uit de volgende twee extra lessen, zijn dezelfde blokken, dieper gestapeld, met een paar nieuwe trucs. In deze stap van je project bouw je LeNet-5 na in PyTorch, en train je het tegen je SmallCNN.
+        Je SmallCNN heeft twee blokken van convolutie en pooling, en daarna een output head. Die vorm is oud. In 1998 beschreven Yann LeCun, Léon Bottou, Yoshua Bengio en Patrick Haffner **LeNet-5**: een CNN van twee zulke blokken en drie linear layers dat handgeschreven cijfers las. Een systeem dat erop gebouwd was, las elke dag enkele miljoenen cheques. Latere CNN's, zoals VGG en ResNet uit de volgende twee lessen, zijn dezelfde blokken, dieper gestapeld, met een paar nieuwe trucs. In deze stap van je project bouw je LeNet-5 na in PyTorch, en train je het tegen je SmallCNN.
         """),
         draw.project_steps(["Je eerste CNN", "LeNet-5, het CNN dat cheques las", "VGG: dieper met kleine filters",
                             "ResNet: diepte die blijft werken"],
@@ -377,7 +377,7 @@ def text_connections():
     mo.md(r"""
     ## Afronding
 
-    **Samenhang.** De blokken van je SmallCNN uit [Project: je eerste CNN](/course/open/cnn-pytorch?lang=nl), zoals LeCun en anderen ze in 1998 samenstelden, met de tanh van hun tijd en de average pooling uit [Channels en pooling](/course/open/cnn-channels-pooling?lang=nl). De meeste parameters zitten in een linear layer, zoals in een MLP; de convoluties hebben er weinig nodig, omdat een filter over de hele afbeelding gedeeld wordt. Je project `cnn` heeft nu `lenet.py` naast `small_cnn.py`. De volgende extra les, *VGG: dieper met kleine filters*, stapelt veel convoluties van 3 bij 3 tot een dieper netwerk.
+    **Samenhang.** De blokken van je SmallCNN uit [Project: je eerste CNN](/course/open/cnn-pytorch?lang=nl), zoals LeCun en anderen ze in 1998 samenstelden, met de tanh van hun tijd en de average pooling uit [Channels en pooling](/course/open/cnn-channels-pooling?lang=nl). De meeste parameters zitten in een linear layer, zoals in een MLP; de convoluties hebben er weinig nodig, omdat een filter over de hele afbeelding gedeeld wordt. Je project `cnn` heeft nu `lenet.py` naast `small_cnn.py`. De volgende les, *VGG: dieper met kleine filters*, stapelt veel convoluties van 3 bij 3 tot een dieper netwerk.
     """)
     return
 

@@ -1,48 +1,112 @@
-# Display names the route data does not carry in both languages: modules (chapters), keyed by the `module`
-# field in route/lessen/*.yaml, and the example goal routes in route/routes.yaml.
+# Display names the route data does not carry in both languages: the parts of the course and the groups the start page
+# shows the domains in (route/domeinen.yaml), the modules (chapters), keyed by domein/module as in route/lessen/*.yaml,
+# the running project of every domain, and the example goal routes in route/routes.yaml. A module needs a name here as
+# soon as it has a lesson.
 # English is written first; the Dutch reads as Dutch. AI jargon stays English in both.
+parts:
+  kern: {en: "The core", nl: "De kern"}
+  fundament: {en: "Foundations", nl: "Fundament"}
+  taal: {en: "Language and search", nl: "Taal en zoeken"}
+  llm: {en: "Large language models", nl: "Large language models"}
+  beeld: {en: "Computer vision", nl: "Computer vision"}
+  spraak: {en: "Speech, audio and music", nl: "Spraak, audio en muziek"}
+  generatief: {en: "Generative AI and multimodal models", nl: "Generatieve AI en multimodale modellen"}
+  klassiek-ml: {en: "Classical machine learning and data science", nl: "Klassieke machine learning en data science"}
+  rl: {en: "Reinforcement learning", nl: "Reinforcement learning"}
+  onzekerheid: {en: "Uncertainty, probabilistic models and causality", nl: "Onzekerheid, probabilistische modellen en causaliteit"}
+  klassieke-ai: {en: "Search, logic, planning and optimization", nl: "Zoeken, logica, planning en optimalisatie"}
+  multi-agent: {en: "Multi-agent systems and game theory", nl: "Multi-agentsystemen en speltheorie"}
+  robotica: {en: "Robotics and embodied AI", nl: "Robotica en embodied AI"}
+  bouwen: {en: "Building with AI: prompts, RAG and agents", nl: "Bouwen met AI: prompts, RAG en agents"}
+  systemen: {en: "ML systems, hardware and MLOps", nl: "ML-systemen, hardware en MLOps"}
+  verantwoord: {en: "Responsible and safe AI", nl: "Verantwoorde en veilige AI"}
+  mens: {en: "People and society", nl: "Mens en maatschappij"}
+  toepassingen: {en: "AI in science and industry", nl: "AI in wetenschap en sectoren"}
+  dl-verdieping: {en: "Deep learning in depth: theory and other architectures", nl: "Deep learning in de diepte: theorie en andere architecturen"}
+  onderzoek: {en: "Research skills and the frontier", nl: "Onderzoeksvaardigheden en de frontier"}
+
+groups:
+  modaliteiten: {en: "Language, vision and sound", nl: "Taal, beeld en geluid"}
+  leren-en-beslissen: {en: "Learning, reasoning and deciding", nl: "Leren, redeneren en beslissen"}
+  bouwen-en-inzetten: {en: "Building and deploying", nl: "Bouwen en inzetten"}
+  mens-en-veiligheid: {en: "Safety, people and society", nl: "Veiligheid, mens en maatschappij"}
+  verdieping: {en: "In depth, and research", nl: "Verdieping en onderzoek"}
+
 modules:
-  start: {en: "Start", nl: "Start"}
-  python: {en: "Python", nl: "Python"}
-  numpy: {en: "NumPy", nl: "NumPy"}
-  data: {en: "Data", nl: "Data"}
-  first-model: {en: "Your first model", nl: "Je eerste model"}
-  classification: {en: "Classification", nl: "Classificatie"}
-  generalization: {en: "Generalization", nl: "Generalisatie"}
-  more-models: {en: "More models", nl: "Meer modellen"}
-  without-labels: {en: "Without labels", nl: "Zonder labels"}
-  image-processing: {en: "Working with images", nl: "Beelden bewerken"}
-  pretrained-vision: {en: "Using a pretrained model", nl: "Een pretrained model gebruiken"}
-  boxes-and-masks: {en: "Boxes and masks", nl: "Bounding boxes en maskers"}
-  color-cnn: {en: "Color photos in a CNN", nl: "Kleurenfoto's in een CNN"}
-  cnn-families: {en: "CNN families", nl: "CNN-families"}
-  explaining: {en: "Where a CNN looks", nl: "Waar een CNN naar kijkt"}
-  detection: {en: "Object detection", nl: "Object detection"}
-  segmentation: {en: "Segmentation", nl: "Segmentatie"}
-  vision-transformers: {en: "Vision Transformers", nl: "Vision Transformers"}
-  vision-project: {en: "Final project", nl: "Eindproject"}
-  neural-networks: {en: "Neural networks", nl: "Neural networks"}
-  pytorch: {en: "PyTorch", nl: "PyTorch"}
-  building-blocks: {en: "Building blocks", nl: "Bouwstenen"}
-  agents: {en: "Agents", nl: "Agents"}
-  lm-basis: {en: "Language models", nl: "Language models"}
-  research-basis: {en: "Research", nl: "Onderzoek"}
-  math-formal: {en: "Math, formally", nl: "Wiskunde, formeel"}
-  training: {en: "Training", nl: "Training"}
-  lm-neural: {en: "A neural language model", nl: "Een neural language model"}
-  tokenizer: {en: "Your tokenizer", nl: "Je tokenizer"}
-  gpt: {en: "Your GPT", nl: "Je GPT"}
-  research-reading: {en: "Reading research", nl: "Onderzoek lezen"}
-  research-experiments: {en: "Experiments", nl: "Experimenten"}
-  systems: {en: "Systems", nl: "Systemen"}
-  modern-llm: {en: "A modern LLM", nl: "Een modern LLM"}
-  pretraining: {en: "Pretraining", nl: "Pretraining"}
-  scaling: {en: "Scaling", nl: "Schalen"}
-  evaluation: {en: "Evaluation", nl: "Evaluatie"}
-  post-training: {en: "Post-training", nl: "Post-training"}
-  research-reproduction: {en: "Reproducing research", nl: "Onderzoek nabouwen"}
-  guided-reproduction: {en: "A guided reproduction", nl: "Een begeleide reproductie"}
-  own-reproduction: {en: "Your own reproduction", nl: "Je eigen reproductie"}
+  # the kern
+  fundament/start: {en: "Start", nl: "Start"}
+  fundament/python: {en: "Python", nl: "Python"}
+  fundament/numpy: {en: "NumPy", nl: "NumPy"}
+  fundament/data: {en: "Data", nl: "Data"}
+  fundament/eerste-model: {en: "Your first model", nl: "Je eerste model"}
+  fundament/classificatie: {en: "Classification", nl: "Classificatie"}
+  fundament/generalisatie: {en: "Generalization", nl: "Generalisatie"}
+  fundament/meer-modellen: {en: "More models", nl: "Meer modellen"}
+  fundament/zonder-labels: {en: "Without labels", nl: "Zonder labels"}
+  fundament/neurale-netwerken: {en: "Neural networks", nl: "Neural networks"}
+  fundament/pytorch: {en: "PyTorch", nl: "PyTorch"}
+  fundament/bouwstenen-idee: {en: "Building blocks", nl: "Bouwstenen"}
+  fundament/agents: {en: "Agents", nl: "Agents"}
+  fundament/taalmodellen: {en: "Language models", nl: "Language models"}
+  fundament/onderzoek-basis: {en: "Research", nl: "Onderzoek"}
+  # the shared modules of the foundation, also those without lessons yet: res-whats-next names what a domain borrows
+  fundament/data-bronnen: {en: "Python, SQL and data, further", nl: "Python, SQL en data, verder"}
+  fundament/wiskunde: {en: "Math, formally", nl: "Wiskunde, formeel"}
+  fundament/signalen-en-meetkunde: {en: "Signals, geometry and graphs", nl: "Signalen, meetkunde en grafen"}
+  fundament/trainen: {en: "Training deep networks", nl: "Diepe netwerken trainen"}
+  fundament/klassieke-modellen-formeel: {en: "Linear models and evaluation, formally", nl: "Lineaire modellen en evaluatie, formeel"}
+  fundament/cnn: {en: "Convolutional networks", nl: "CNN's"}
+  fundament/rnn: {en: "Recurrent networks", nl: "RNN's"}
+  fundament/attention: {en: "Attention and transformers", nl: "Attention en transformers"}
+  # the domains
+  taal/tekst-verwerken: {en: "Processing and classifying text", nl: "Tekst verwerken en indelen"}
+  llm/gebruiken: {en: "Using and understanding an LLM", nl: "Een LLM gebruiken en begrijpen"}
+  llm/tokens: {en: "Tokens and tokenizers", nl: "Tokens en tokenizers"}
+  llm/gpt: {en: "Your GPT", nl: "Je GPT"}
+  llm/modern: {en: "A modern LLM", nl: "Een modern LLM"}
+  llm/pretrainen: {en: "Pretraining", nl: "Pretraining"}
+  llm/schalen: {en: "Scaling", nl: "Schalen"}
+  llm/evalueren: {en: "Evaluation", nl: "Evaluatie"}
+  llm/natrainen: {en: "Post-training", nl: "Post-training"}
+  llm/aanpassen: {en: "Adapting a model", nl: "Een model aanpassen"}
+  llm/redeneren: {en: "Reasoning", nl: "Redeneren"}
+  llm/genereren: {en: "Generating and serving", nl: "Genereren en serveren"}
+  beeld/beelden-bewerken: {en: "Working with images", nl: "Beelden bewerken"}
+  beeld/classificatie: {en: "Using a pretrained model", nl: "Een pretrained model gebruiken"}
+  beeld/detectie: {en: "Object detection", nl: "Object detection"}
+  beeld/cnn-families: {en: "CNN families", nl: "CNN-families"}
+  beeld/uitleggen: {en: "Where a CNN looks", nl: "Waar een CNN naar kijkt"}
+  beeld/segmentatie: {en: "Segmentation", nl: "Segmentatie"}
+  beeld/vit: {en: "Vision Transformers", nl: "Vision Transformers"}
+  beeld/eindproject: {en: "Final project", nl: "Eindproject"}
+  systemen/hardware: {en: "Hardware", nl: "Hardware"}
+  systemen/snel-trainen: {en: "Training fast", nl: "Snel trainen"}
+  systemen/productie: {en: "ML in production", nl: "ML in productie"}
+  verantwoord/security: {en: "Security", nl: "Security"}
+  onderzoek/lezen: {en: "Reading papers", nl: "Papers lezen"}
+  onderzoek/experimenten: {en: "Experiments", nl: "Experimenten"}
+  onderzoek/nabouwen: {en: "Reproducing a paper", nl: "Een paper nabouwen"}
+
+# the running project of every domain (route/domeinen.yaml has the Dutch working titles)
+projects:
+  taal: {en: "Your own text analysis and search engine", nl: "Je eigen tekstanalyse en zoekmachine"}
+  llm: {en: "Your own LLM", nl: "Je eigen LLM"}
+  beeld: {en: "Your own CNN, growing lesson by lesson", nl: "Je eigen CNN, dat les voor les groeit"}
+  spraak: {en: "From sound wave to speech recognizer", nl: "Van geluidsgolf tot spraakherkenner"}
+  generatief: {en: "Your own generator", nl: "Je eigen generator"}
+  klassiek-ml: {en: "Tabular data from start to finish", nl: "Tabeldata van begin tot eind"}
+  rl: {en: "Your own agent", nl: "Je eigen agent"}
+  onzekerheid: {en: "A Bayesian network, a probabilistic program and a causal analysis", nl: "Een Bayesiaans netwerk, een probabilistisch programma en een causale analyse"}
+  klassieke-ai: {en: "Your own solver and planner", nl: "Je eigen zoeker en planner"}
+  multi-agent: {en: "Equilibria, markets and agents that negotiate", nl: "Evenwichten, markten en agents die onderhandelen"}
+  robotica: {en: "A simulated robot arm and a robot on wheels", nl: "Een gesimuleerde robotarm en een rijdende robot"}
+  bouwen: {en: "Your own assistant on a local open model", nl: "Je eigen assistent op een lokaal open model"}
+  systemen: {en: "Measuring, speeding up, serving and watching your own model", nl: "Je eigen model meten, versnellen, serveren en bewaken"}
+  verantwoord: {en: "Auditing your own models", nl: "Je eigen modellen doorlichten"}
+  mens: {en: "Testing your own AI application against the law and what we know about people", nl: "Je eigen AI-toepassing toetsen aan de wet en aan wat we weten over mensen"}
+  toepassingen: {en: "Choosing a field and applying the course to its real data", nl: "Een vakgebied kiezen en de course toepassen op echte data daaruit"}
+  dl-verdieping: {en: "Extending your own network with other building blocks", nl: "Je eigen netwerk uitbreiden met andere bouwstenen"}
+  onderzoek: {en: "Reproducing a paper: first with guidance, then one of your own choice", nl: "Een paper nabouwen: eerst begeleid, daarna een eigen keuze"}
 
 goals:
   doel-attention: {en: "I want to understand attention", nl: "Ik wil attention snappen"}

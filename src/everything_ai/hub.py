@@ -98,7 +98,7 @@ PINNED = {
         "sha256": "48c14467e5cf9e51870511feb72c89688e82dd74523142c0538b663e193ac2a7",
         "size": 155_908_064,
     },
-    # Caltech-101 (CC BY 4.0), at its source, CaltechDATA (doi:10.22002/D1.20086): the photo set of the vision branch
+    # Caltech-101 (CC BY 4.0), at its source, CaltechDATA (doi:10.22002/D1.20086): the photo set of the domain computer vision
     # (course/route/bronnen.yaml, caltech-101-download-only; everything_ai.caltech unpacks it). CaltechDATA gives the
     # same file's MD5, 3138e1922a9193bfa496528edbbc45d0.
     ("caltechdata/mzrjq-6wc02", "caltech-101.zip"): {

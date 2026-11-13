@@ -1,9 +1,8 @@
-# The branch beeld (computer vision and all CNN families), after the main route. Its lessons that the main route
-# already has (data-images-as-arrays, cnn-pytorch and the CNN extras) stay in overige-takken.yaml.
-# The first part of the branch: docs/onderzoek/reports/Voorstel tak beeld.md, decided in besluiten.md 1.14.
-# A learner can start this part after the basics of the main route; the route beeld in routes.yaml gives the order.
+# Lessons of the domain beeld (computer vision and all CNN families), levels basis and gevorderd. Its tasters in the
+# core (data-images-as-arrays, cnn-pytorch and the CNN extras) are in overige-takken.yaml.
+# The first part of the domain: docs/onderzoek/reports/Voorstel tak beeld.md, decided in besluiten.md 1.14.
+# The route beeld in routes.yaml starts where the core ends and gives the order.
 # Planning data; "uses" is filled in fully when a lesson is built. Format: ../FORMAT.md.
-tak: beeld
 map: v2.2
 lessons:
 
@@ -11,7 +10,8 @@ lessons:
 - id: cv-image-files
   title: "From light to a file of numbers"
   level: basis
-  module: image-processing
+  domein: beeld
+  module: beelden-bewerken
   idea: "An image file stores a number per pixel and per color: PNG keeps every number exactly, JPEG keeps a much smaller approximation."
   covers: [beelden-als-data#3, beelden-als-data#4]
   requires: [data-images-as-arrays, data-text-as-numbers, ml-regression-metrics]
@@ -25,7 +25,8 @@ lessons:
 - id: cv-color-spaces
   title: "Another way to write a color: HSV"
   level: basis
-  module: image-processing
+  domein: beeld
+  module: beelden-bewerken
   idea: "Red, green and blue are not the only three numbers for a color: hue, saturation and value say which color, how strong and how bright, so picking out one color becomes a simple rule."
   covers: [d13-klassieke-beeldverwerking#0]
   requires: [cv-image-files]
@@ -40,7 +41,8 @@ lessons:
 - id: cv-histogram-equalization
   title: "Spread the grays: histogram equalization"
   level: basis
-  module: image-processing
+  domein: beeld
+  module: beelden-bewerken
   idea: "A dull photo uses only part of the grays; mapping each gray to 255 times the share of pixels with that gray or a darker one spreads them over the whole range, and the histogram shows it."
   covers: [d13-klassieke-beeldverwerking#0]
   requires: [cv-color-spaces, stats-describe]
@@ -53,7 +55,8 @@ lessons:
 - id: cv-otsu-threshold
   title: "Black or white: a threshold and Otsu's method"
   level: basis
-  module: image-processing
+  domein: beeld
+  module: beelden-bewerken
   idea: "A threshold turns a gray image into a binary one; Otsu's method tries every gray and picks the threshold with the smallest within-group variance, where the pixels lie, on average, closest to the mean of their own group."
   covers: [d13-klassieke-beeldverwerking#1]
   requires: [cv-histogram-equalization, prob-expectation]
@@ -66,7 +69,8 @@ lessons:
 - id: cv-denoise-filters
   title: "Less noise: the mean, the Gaussian and the median filter"
   level: basis
-  module: image-processing
+  domein: beeld
+  module: beelden-bewerken
   idea: "Replacing each pixel by a weighted average of its neighbors smooths noise but blurs edges; the median of the neighbors removes specks and keeps edges."
   covers: [d13-klassieke-beeldverwerking#3]
   requires: [cv-image-files, cnn-convolution-idea]
@@ -81,7 +85,8 @@ lessons:
 - id: cv-sobel-edges
   title: "Where the brightness jumps: gradients and Sobel"
   level: basis
-  module: image-processing
+  domein: beeld
+  module: beelden-bewerken
   idea: "An edge is where the brightness changes fast; two small filters estimate how fast it changes to the right and downward, and the length of that gradient marks the edges."
   covers: [d13-klassieke-beeldverwerking#4]
   requires: [cv-denoise-filters, math-gradient, math-norms-cosine]
@@ -94,7 +99,8 @@ lessons:
 - id: cv-canny
   title: "Thin, connected edges: Canny"
   level: basis
-  module: image-processing
+  domein: beeld
+  module: beelden-bewerken
   idea: "Canny turns the thick edges of Sobel into thin, connected lines: it keeps only the strongest point across each edge, and a weaker point only where it touches a strong one."
   covers: [d13-klassieke-beeldverwerking#4]
   requires: [cv-sobel-edges, cv-otsu-threshold]
@@ -107,7 +113,8 @@ lessons:
 - id: cv-morphology
   title: "Grow and shrink shapes: erosion and dilation"
   level: basis
-  module: image-processing
+  domein: beeld
+  module: beelden-bewerken
   idea: "Erosion keeps a pixel only if its whole neighborhood is white, dilation makes it white if any neighbor is; one after the other, they remove specks (opening) or fill holes (closing)."
   covers: [d13-klassieke-beeldverwerking#5]
   requires: [cv-otsu-threshold, cv-color-spaces]
@@ -120,7 +127,8 @@ lessons:
 - id: cv-connected-components
   title: "Count the shapes: connected components"
   level: basis
-  module: image-processing
+  domein: beeld
+  module: beelden-bewerken
   idea: "Pixels that touch belong to one shape; a breadth-first search from each unvisited white pixel finds every shape, its size and the smallest box around it."
   covers: [d13-klassieke-beeldverwerking#6]
   requires: [cv-morphology, search-bfs]
@@ -133,7 +141,8 @@ lessons:
 - id: cv-resize-interpolation
   title: "Bigger and smaller: interpolation"
   level: basis
-  module: image-processing
+  domein: beeld
+  module: beelden-bewerken
   idea: "A resized image needs values between the old pixels; the nearest pixel gives blocks, a weighted mean of the four around it (bilinear interpolation) gives smooth steps."
   covers: [d13-klassieke-beeldverwerking#7]
   requires: [cv-image-files]
@@ -147,7 +156,8 @@ lessons:
 - id: cv-alpha-compositing
   title: "One image over another: alpha and green screens"
   level: basis
-  module: image-processing
+  domein: beeld
+  module: beelden-bewerken
   idea: "An alpha value per pixel says how much of the front image covers the back one; a green screen gets its alpha from how green each pixel is."
   covers: [d13-klassieke-beeldverwerking#2]
   requires: [cv-color-spaces, np-broadcasting]
@@ -162,7 +172,8 @@ lessons:
 - id: cv-prepare-photo
   title: "Get a photo ready for a model"
   level: basis
-  module: pretrained-vision
+  domein: beeld
+  module: classificatie
   idea: "A pretrained model expects photos like the ones it learned from: the same size, cut from the middle, and each color channel scaled with the mean and spread of its training photos."
   covers: []
   requires: [cv-resize-interpolation, ml-feature-scaling, torch-pretrained]
@@ -176,7 +187,8 @@ lessons:
 - id: cv-try-classifier
   title: "Try an image classifier: top-1 and top-5"
   level: basis
-  module: pretrained-vision
+  domein: beeld
+  module: classificatie
   idea: "A classifier trained on ImageNet gives a probability for each of 1,000 kinds of things; top-5 accuracy counts it right when the true kind is among its five best guesses."
   covers: [beeldclassificatie#0, beeldclassificatie#2]
   requires: [cv-prepare-photo, ml-softmax]
@@ -190,7 +202,8 @@ lessons:
 - id: cv-pretrained-features
   title: "What a vision model sees: features and a linear probe"
   level: basis
-  module: pretrained-vision
+  domein: beeld
+  module: classificatie
   idea: "A large pretrained vision model turns a photo into a vector of features; a linear classifier on those features learns new kinds of things from a few examples each."
   covers: [vision-foundation-models#0, vision-foundation-models#1]
   requires: [cv-try-classifier, torch-frozen-features, ml-embeddings-idea]
@@ -204,7 +217,8 @@ lessons:
 - id: cv-image-search
   title: "Find photos that look alike"
   level: basis
-  module: pretrained-vision
+  domein: beeld
+  module: classificatie
   idea: "Photos whose feature vectors point the same way look alike; the cosine similarity to every other photo finds the nearest ones, and that is image search."
   covers: [embeddings-en-similariteit#2]
   requires: [cv-pretrained-features, ml-knn]
@@ -217,7 +231,8 @@ lessons:
 - id: cv-fine-tune-photos
   title: "Fine-tune a classifier on your own kinds of photos"
   level: basis
-  module: pretrained-vision
+  domein: beeld
+  module: classificatie
   idea: "Fine-tuning every layer of a pretrained classifier needs a small learning rate and far more computing than a new last layer; on photos its features already describe well, it adds little."
   covers: [beeldclassificatie#1]
   requires: [cv-try-classifier, torch-fine-tune, nn-data-augmentation]
@@ -232,7 +247,8 @@ lessons:
 - id: cv-annotations
   title: "Labels, boxes, masks and keypoints"
   level: basis
-  module: boxes-and-masks
+  domein: beeld
+  module: detectie
   idea: "What a vision model must find decides how its data is labeled: one label per image, a box per object, a mask per object or points on exact places of it; the more exact, the longer the labeling takes."
   covers: [beelden-als-data#5]
   requires: [cv-connected-components]
@@ -245,7 +261,8 @@ lessons:
 - id: cv-iou
   title: "How much two boxes overlap: IoU"
   level: basis
-  module: boxes-and-masks
+  domein: beeld
+  module: detectie
   idea: "The intersection over union of a predicted and a true box is the overlap divided by the area they cover together: 1 for a perfect box, 0 for a miss."
   covers: [objectdetectie#0]
   requires: [cv-annotations]
@@ -258,7 +275,8 @@ lessons:
 - id: cv-nms
   title: "One box per object: non-maximum suppression"
   level: basis
-  module: boxes-and-masks
+  domein: beeld
+  module: detectie
   idea: "A detector proposes many boxes for one object; keeping the most confident box and dropping every box that overlaps it too much leaves one box per object."
   covers: [objectdetectie#0]
   requires: [cv-iou]
@@ -272,7 +290,8 @@ lessons:
 - id: cv-map
   title: "Score a detector: mean average precision"
   level: basis
-  module: boxes-and-masks
+  domein: beeld
+  module: detectie
   idea: "A detected box counts as found when its IoU with a true box is high enough; the area under the precision-recall curve per kind, averaged over the kinds, is the detector's mAP."
   covers: [objectdetectie#0]
   requires: [cv-nms, ml-roc-auc]
@@ -286,7 +305,8 @@ lessons:
 - id: cv-pretrained-detector
   title: "Use a pretrained detector"
   level: basis
-  module: boxes-and-masks
+  domein: beeld
+  module: detectie
   idea: "A detector trained on COCO draws a box, a kind and a score around each object it knows in a photo; a threshold on the score decides which boxes you keep, and that threshold trades missed objects for false boxes."
   covers: [objectdetectie#1]
   requires: [cv-map, cv-try-classifier]
@@ -307,7 +327,8 @@ lessons:
 - id: cv-color-cnn
   title: "Project: your CNN on color photos"
   level: gevorderd
-  module: color-cnn
+  domein: beeld
+  module: cnn-families
   kind: project
   project: cnn
   idea: "A color photo has three channels, so the first convolution takes three input channels; on CIFAR-10's photos of 10 kinds, a CNN like the one that reads clothes well gets far fewer right, and learns its training photos much better than new ones."
@@ -328,7 +349,8 @@ lessons:
 - id: cv-augment-photos
   title: "Data augmentation for photos: flip, crop and color"
   level: gevorderd
-  module: color-cnn
+  domein: beeld
+  module: cnn-families
   idea: "A mirror image, a random crop and a small change of color keep what a photo shows, so every epoch can show the CNN slightly different photos; it learns its training photos less by heart and gets more new ones right, while a change that alters the label, such as turning a 6 into a 9, or makes photos unlike real ones, such as an upside-down car, does not help."
   covers: [regularisatie#3]
   requires: [cv-color-cnn, nn-data-augmentation, cv-histogram-equalization]
@@ -350,7 +372,8 @@ lessons:
 - id: cv-inside-cnn
   title: "Look inside a CNN: filters and feature maps"
   level: gevorderd
-  module: color-cnn
+  domein: beeld
+  module: cnn-families
   idea: "The first layer of a trained CNN such as ResNet-18 holds small detectors of edges and colors, and the feature maps of deeper layers answer to larger parts of a photo; drawing them shows what the network learned to look for."
   covers: [vision-modellen-visualiseren-en-begrijpen#0]
   requires: [cv-color-cnn, cv-try-classifier]
@@ -374,6 +397,7 @@ lessons:
 - id: cv-alexnet
   title: "ImageNet and AlexNet: why 2012 changed everything"
   level: gevorderd
+  domein: beeld
   module: cnn-families
   idea: "Before VGG and ResNet came AlexNet: in 2012 this deep CNN, trained on two GPUs with ReLU, dropout and data augmentation, brought the top-5 error on ImageNet down from 26% to 15%; you build a small version for CIFAR-10 and see what dropout and augmentation still add."
   covers: [d11-cnn-architecturen#0]
@@ -397,6 +421,7 @@ lessons:
 - id: cv-1x1-convolution
   title: "1×1 convolutions: mixing the channels"
   level: gevorderd
+  domein: beeld
   module: cnn-families
   idea: "A 1×1 convolution mixes the channels of each pixel without looking at its neighbors, as a linear layer on every pixel; it makes the number of channels smaller or larger cheaply, such as before an expensive 3×3 convolution."
   covers: [convolutionele-netwerken#2]
@@ -421,6 +446,7 @@ lessons:
 - id: cv-inception
   title: "Inception: filters of several sizes side by side"
   level: gevorderd
+  domein: beeld
   module: cnn-families
   idea: "Inception puts branches of 1×1, 3×3 and 5×5 filters side by side, each behind a 1×1 convolution that makes the channels fewer, and stacks what they find along the channels; one block sees small and large patterns at once, at a cost a plain stack of large filters could not pay."
   covers: [d11-cnn-architecturen#1]
@@ -439,6 +465,7 @@ lessons:
 - id: cv-resnext
   title: "Groups of channels: ResNeXt"
   level: gevorderd
+  domein: beeld
   module: cnn-families
   idea: "A grouped convolution splits the channels into groups that each get filters of their own, with fewer weights than one convolution over all channels; ResNeXt puts many such thin paths in one residual block, and with the same number of parameters its paper got more right on ImageNet than ResNet-50 with one wide path."
   covers: [d11-cnn-architecturen#2, convolutionele-netwerken#2]
@@ -457,6 +484,7 @@ lessons:
 - id: cv-densenet
   title: "DenseNet: every layer sees all the layers before it"
   level: gevorderd
+  domein: beeld
   module: cnn-families
   idea: "In a dense block every layer gets the feature maps of all layers before it, stacked along the channels, and adds only a few channels of its own, the growth rate; between blocks, a transition layer mixes the channels with a 1×1 convolution, in DenseNet-BC into half as many, and halves the maps with pooling. DenseNet uses features again instead of learning them again."
   covers: [d11-cnn-architecturen#1]
@@ -478,6 +506,7 @@ lessons:
 - id: cv-mobilenet
   title: "Depthwise separable convolutions: MobileNet"
   level: gevorderd
+  domein: beeld
   module: cnn-families
   idea: "A depthwise convolution filters each channel on its own, and a 1×1 convolution then mixes the channels; together they do the work of a normal 3×3 convolution with eight to nine times fewer multiplications, which lets MobileNet run on a phone."
   covers: [convolutionele-netwerken#2, d11-cnn-architecturen#3]
@@ -500,6 +529,7 @@ lessons:
 - id: cv-efficientnet
   title: "EfficientNet: wider, deeper or sharper"
   level: gevorderd
+  domein: beeld
   module: cnn-families
   idea: "A CNN can grow in depth, in width or in the resolution of its input photos; growing all three together in a fixed ratio, compound scaling, gave EfficientNet more accuracy on ImageNet for the same computation than growing just one, and you work out what each choice costs."
   covers: [d11-cnn-architecturen#3]
@@ -522,7 +552,8 @@ lessons:
 - id: cv-saliency
   title: "Saliency: the pixels that change the answer"
   level: gevorderd
-  module: explaining
+  domein: beeld
+  module: uitleggen
   idea: "The gradient of a class score with respect to the pixels of the photo says which pixels would change that score the most; drawn as a picture, it is a first and noisy explanation: it shows where a classifier's score is sensitive, not what the classifier needs."
   covers: [saliency-en-uitleg-evalueren#0]
   requires: [cv-inside-cnn, torch-autograd]
@@ -543,7 +574,8 @@ lessons:
 - id: cv-grad-cam
   title: "Grad-CAM: where a CNN looked"
   level: gevorderd
-  module: explaining
+  domein: beeld
+  module: uitleggen
   idea: "When a CNN ends with global average pooling, the mean of each feature map, and one linear layer, the weights of a class over the feature maps make a heat map, the class activation map; Grad-CAM finds those weights for any CNN from the gradient of the class score, adds up the weighted maps and keeps the positive part, a coarse map of the places that speak for that class, which shows where the evidence for a class lies, not how sure the model is."
   covers: [vision-modellen-visualiseren-en-begrijpen#1, vision-modellen-visualiseren-en-begrijpen#2]
   requires: [cv-saliency, nn-activation-stats, torch-autograd]
@@ -560,7 +592,8 @@ lessons:
 - id: cv-anchors
   title: "Anchors: the boxes a detector starts from"
   level: gevorderd
-  module: detection
+  domein: beeld
+  module: detectie
   idea: "Many detectors, unlike DETR, put a fixed set of anchor boxes, a few sizes and shapes, on every square of a feature map, and learn for each anchor only a kind and a small shift and change of size; matching the anchors to the true boxes by IoU decides what each anchor should learn."
   covers: [objectdetectie#0]
   # Measured on the course's scenes (checks.py, REFERENCE): 3 square sizes (16, 24, 32) on 16 x 16 squares of 8 pixels,
@@ -580,7 +613,8 @@ lessons:
 - id: cv-one-stage-detector
   title: "Project: your own one-stage detector"
   level: gevorderd
-  module: detection
+  domein: beeld
+  module: detectie
   kind: project
   project: cnn
   idea: "A one-stage detector, as SSD and YOLOv2 are, is one CNN that gives, for every anchor at once, a kind and a box offset; trained on the course's scenes with one loss for the kinds and one for the boxes, and followed by NMS, it finds the shapes."
@@ -603,7 +637,8 @@ lessons:
 - id: cv-rcnn
   title: "From R-CNN to Faster R-CNN: two stages"
   level: gevorderd
-  module: detection
+  domein: beeld
+  module: detectie
   idea: "A two-stage detector first proposes regions that may hold an object, then cuts the features of each region to one size, RoI pooling, and gives it a kind and a corrected box; from R-CNN to Faster R-CNN the proposals moved into the network itself, as a region proposal network that scores anchors on the same features."
   # In map v2.3 this subtopic is objectdetectie#3 with a longer name; migrate_refs.py cannot find it: map it by hand.
   covers: [objectdetectie#2]
@@ -626,7 +661,8 @@ lessons:
 - id: cv-fpn
   title: "A feature pyramid for small and large objects"
   level: gevorderd
-  module: detection
+  domein: beeld
+  module: detectie
   idea: "Deep feature maps know what is there but are coarse, early ones are sharp but know little; a feature pyramid network makes the deep maps larger again with nearest-neighbor interpolation, gives the earlier ones the same number of channels with a 1×1 convolution and adds them up, so that every scale has both and the detector finds small objects too."
   covers: [objectdetectie#4]
   # Measured on the course's scenes with spread=True (radius 5-40 px; checks.py, REFERENCE and TRAINED): the backbone
@@ -649,7 +685,8 @@ lessons:
 - id: cv-focal-loss
   title: "Focal loss and RetinaNet"
   level: gevorderd
-  module: detection
+  domein: beeld
+  module: detectie
   idea: "Almost every anchor lies on the background, and their many small, easy losses drown out the few objects; focal loss makes the cross-entropy of an anchor smaller the surer the model already is, which let RetinaNet, a one-stage detector with a feature pyramid, match the two-stage detectors."
   covers: [objectdetectie#3]
   # Measured on the course's scenes with spread=True (checks.py, REFERENCE and TRAINED): the FPN detector of cv-fpn
@@ -675,7 +712,8 @@ lessons:
 - id: cv-fcn
   title: "A kind for every pixel: FCN and transposed convolutions"
   level: gevorderd
-  module: segmentation
+  domein: beeld
+  module: segmentatie
   idea: "Semantic segmentation gives every pixel a kind; a fully convolutional network has no linear layers, so it takes a photo of any size, and makes its coarse feature maps full size again, upsampling, with transposed convolutions that learn how."
   covers: [segmentatie#3, convolutionele-netwerken#2]
   # Measured on the course's scenes (checks.py, REFERENCE and TRAINED): blocks of conv 3x3 + ReLU + max pool 2 (16, 32,
@@ -700,7 +738,8 @@ lessons:
 - id: cv-unet
   title: "Project: your own U-Net"
   level: gevorderd
-  module: segmentation
+  domein: beeld
+  module: segmentatie
   kind: project
   project: cnn
   idea: "A U-Net goes down to coarse feature maps and back up, and stacks each map on the way up with the map of the same size from the way down; with those skip connections it gets the details from before every pooling. You train one on the course's scenes and score its masks with mean IoU, the IoU of each class averaged over the classes, background included."
@@ -728,7 +767,8 @@ lessons:
 - id: cv-deeplab
   title: "Dilated convolutions and DeepLab"
   level: gevorderd
-  module: segmentation
+  domein: beeld
+  module: segmentatie
   idea: "A dilated convolution spreads its filter out with gaps, so it sees a larger area with the same weights and without making the map smaller; DeepLab puts several dilations side by side to see small and large surroundings at once."
   covers: [segmentatie#4, convolutionele-netwerken#2]
   # Measured on the course's scenes (checks.py, REFERENCE and TRAINED): the layers of cv-fcn's FCN with stride 16 (conv
@@ -756,7 +796,8 @@ lessons:
 - id: cv-mask-rcnn
   title: "A mask for every object: the idea of Mask R-CNN"
   level: gevorderd
-  module: segmentation
+  domein: beeld
+  module: segmentatie
   idea: "Instance segmentation gives each object a mask of its own, also when two objects are of the same kind; Mask R-CNN adds to Faster R-CNN a small head that draws a mask inside every box it finds."
   covers: [segmentatie#3]
   # Measured on the course's scenes (checks.py, REFERENCE and TRAINED): cv-rcnn's two-stage detector with RoIAlign (one
@@ -788,7 +829,8 @@ lessons:
 - id: cv-sam
   title: "Segment what you point at: SAM 2.1"
   level: gevorderd
-  module: segmentation
+  domein: beeld
+  module: segmentatie
   idea: "SAM 2.1, trained on the 11 million photos and 1.1 billion masks of SA-1B and on videos, draws the mask of whatever you point at with a click or a box, also of things it has no name for; you choose among its masks by their predicted IoU, click again where the mask is most wrong, and see on Caltech-101 where clicks are not enough."
   covers: [segmentatie#0]
   requires: [cv-fcn]
@@ -812,7 +854,8 @@ lessons:
 - id: cv-vit
   title: "A Vision Transformer from scratch"
   level: gevorderd
-  module: vision-transformers
+  domein: beeld
+  module: vit
   idea: "A Vision Transformer cuts a photo into patches, turns each patch into a token with a linear layer and a position, and runs transformer blocks over them without a causal mask, so every patch sees every other; trained from scratch on CIFAR-10 it trails a CNN of the same size, because it has to learn from data, helped by augmentation, what a convolution builds in, its inductive bias."
   covers: [vision-transformers#0, vision-transformers#1, inductive-bias-symmetrie-en-equivariantie#3]
   requires: [cv-augment-photos, attn-transformer-block]
@@ -834,7 +877,8 @@ lessons:
 - id: cv-vit-attention
   title: "Where a Vision Transformer looks"
   level: gevorderd
-  module: vision-transformers
+  domein: beeld
+  module: vit
   idea: "The attention of the class token to the patches shows which parts of the photo a Vision Transformer used; attention rollout averages the attention of each layer over its heads, adds the residual connection as attention of each token to itself, and multiplies the layers, so that it follows the information through the whole network."
   covers: [vision-modellen-visualiseren-en-begrijpen#3]
   requires: [cv-vit, cv-pretrained-features]
@@ -850,7 +894,8 @@ lessons:
 - id: cv-project-resnet-grad-cam
   title: "Final project: your own ResNet, explained with Grad-CAM"
   level: gevorderd
-  module: vision-project
+  domein: beeld
+  module: eindproject
   kind: project
   project: cnn
   idea: "You build ResNet-20 from your own residual block with batch normalization, choose its changes on a validation set, and train it on Fashion-MNIST; you test it once, and explain its mistakes in an error analysis: a confusion matrix, and Grad-CAM of the guess and of the right kind over the mistakes it was most sure of."
@@ -875,7 +920,8 @@ lessons:
 - id: cv-project-detector-or-unet
   title: "Final project: your own U-Net or detector"
   level: gevorderd
-  module: vision-project
+  domein: beeld
+  module: eindproject
   kind: project
   project: cnn
   idea: "You choose a U-Net or a one-stage detector, train it on harder scenes that you generate yourself, score it with mean IoU or mAP, and show where it fails."

@@ -352,7 +352,7 @@ def text_connections():
     mo.md(r"""
     ## Afronding
 
-    **Samenhang.** Het verslag van [Begeleide reproductie 7](/course/open/repro-guided-report?lang=nl) en het delen van [Je werk delen zodat anderen het kunnen herhalen](/course/open/res-share-work?lang=nl), nu voor je eigen paper; en elk deel van je kit, van het plan van [Je reproductie 2](/course/open/repro-own-claim?lang=nl) tot de vergelijking van [Je reproductie 7](/course/open/repro-own-compare?lang=nl). Je eigen reproductie is klaar. De volgende les, *Waar nu heen*, laat zien waar de andere takken van de course aansluiten op wat je nu weet.
+    **Samenhang.** Het verslag van [Begeleide reproductie 7](/course/open/repro-guided-report?lang=nl) en het delen van [Je werk delen zodat anderen het kunnen herhalen](/course/open/res-share-work?lang=nl), nu voor je eigen paper; en elk deel van je kit, van het plan van [Je reproductie 2](/course/open/repro-own-claim?lang=nl) tot de vergelijking van [Je reproductie 7](/course/open/repro-own-compare?lang=nl). Je eigen reproductie is klaar. De volgende les, *Waar nu heen*, laat zien waar de andere domeinen van de course aansluiten op wat je nu weet.
     """)
     return
 

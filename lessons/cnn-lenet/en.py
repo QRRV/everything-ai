@@ -81,7 +81,7 @@ def text_why():
         mo.md(r"""
         ## Why this matters
 
-        Your SmallCNN has two blocks of convolution and pooling, and then an output head. That shape is old. In 1998, Yann LeCun, Léon Bottou, Yoshua Bengio and Patrick Haffner described **LeNet-5**: a CNN of two such blocks and three linear layers that read handwritten digits. A system built on it read several million bank checks a day. Later CNNs, such as VGG and ResNet of the next two extra lessons, are the same blocks, stacked deeper, with a few new tricks. In this step of your project you rebuild LeNet-5 in PyTorch, and train it against your SmallCNN.
+        Your SmallCNN has two blocks of convolution and pooling, and then an output head. That shape is old. In 1998, Yann LeCun, Léon Bottou, Yoshua Bengio and Patrick Haffner described **LeNet-5**: a CNN of two such blocks and three linear layers that read handwritten digits. A system built on it read several million bank checks a day. Later CNNs, such as VGG and ResNet of the next two lessons, are the same blocks, stacked deeper, with a few new tricks. In this step of your project you rebuild LeNet-5 in PyTorch, and train it against your SmallCNN.
         """),
         draw.project_steps(["Your first CNN", "LeNet-5, the CNN that read checks", "VGG: deeper with small filters",
                             "ResNet: depth that keeps working"],
@@ -377,7 +377,7 @@ def text_connections():
     mo.md(r"""
     ## Wrap-up
 
-    **How this connects.** The blocks of your SmallCNN of [Project: your first CNN](/course/open/cnn-pytorch?lang=en), as LeCun and others put them together in 1998, with the tanh of their time and the average pooling of [Channels and pooling](/course/open/cnn-channels-pooling?lang=en). Most of its parameters sit in a linear layer, as in an MLP; the convolutions need few, because a filter is shared over the whole image. Your project `cnn` now has `lenet.py` next to `small_cnn.py`. The next extra lesson, *VGG: deeper with small filters*, stacks many convolutions of 3 by 3 into a deeper network.
+    **How this connects.** The blocks of your SmallCNN of [Project: your first CNN](/course/open/cnn-pytorch?lang=en), as LeCun and others put them together in 1998, with the tanh of their time and the average pooling of [Channels and pooling](/course/open/cnn-channels-pooling?lang=en). Most of its parameters sit in a linear layer, as in an MLP; the convolutions need few, because a filter is shared over the whole image. Your project `cnn` now has `lenet.py` next to `small_cnn.py`. The next lesson, *VGG: deeper with small filters*, stacks many convolutions of 3 by 3 into a deeper network.
     """)
     return
 

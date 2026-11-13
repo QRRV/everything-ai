@@ -365,7 +365,7 @@ def text_connections():
     mo.md(r"""
     ## Wrap-up
 
-    **How this connects.** The table of [The bigram table as a matrix of probabilities](/course/open/lm-bigram-matrix?lang=en) gives the probabilities, the random number generator of [Random numbers and seeds](/course/open/np-random?lang=en) draws from them, and the `while` loop of [Repeating until something happens: while](/course/open/py-while?lang=en) keeps going until the text is long enough. Your project `llm` now has `greedy.py` and `sampling.py` as well. In the next lesson, *Temperature: bolder or safer text*, you make the choice between safe and bold yourself: sharper probabilities, closer to greedy decoding, or flatter ones, closer to drawing at random.
+    **How this connects.** The table of [The bigram table as a matrix of probabilities](/course/open/lm-bigram-matrix?lang=en) gives the probabilities, the random number generator of [Random numbers and seeds](/course/open/np-random?lang=en) draws from them, and the `while` loop of [Repeating until something happens: while](/course/open/py-while?lang=en) keeps going until the text is long enough. Your project `llm` now has `greedy.py` and `sampling.py` as well. In the next lesson, *How good is a language model?*, you measure how surprised your model is by real text. Choosing between safe and bold yourself, with sharper or flatter probabilities, comes in the domain *Large language models*, in *Temperature: bolder or safer text*.
     """)
     return
 

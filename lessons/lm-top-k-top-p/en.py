@@ -321,7 +321,7 @@ def text_connections():
     mo.md(r"""
     ## Wrap-up
 
-    **How this connects.** The temperature of [Temperature: bolder or safer text](/course/open/lm-temperature?lang=en) reshapes the probabilities; top-k and top-p cut off the unlikely ones, and the sampling of [Sampling: let the model write](/course/open/lm-sampling?lang=en) draws from what is left. Chat services often use both: a temperature, and then top-p. In the next lesson, *How good is a language model?*, you measure how surprised your model is by real text.
+    **How this connects.** The temperature of [Temperature: bolder or safer text](/course/open/lm-temperature?lang=en) reshapes the probabilities; top-k and top-p cut off the unlikely ones, and the sampling of [Sampling: let the model write](/course/open/lm-sampling?lang=en) draws from what is left. Chat services often use both: a temperature, and then top-p. In the next lesson, *Base model or chat model?*, you see what the language models you use every day do differently from the one you built.
     """)
     return
 

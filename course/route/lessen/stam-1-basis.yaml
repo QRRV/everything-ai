@@ -1,6 +1,5 @@
-# Lessons whose home branch is "stam" (the shared foundation), level basis.
+# Lessons of the foundation (domein fundament), level basis: most of the core.
 # Planning data; the map: key below names the map version. Format: ../FORMAT.md. Titles are English working titles.
-tak: stam
 map: v2.2
 lessons:
 
@@ -8,6 +7,7 @@ lessons:
 - id: start-how-this-course-works
   title: "How a lesson works"
   level: basis
+  domein: fundament
   module: start
   idea: "You read a short explanation, run code, predict what happens, try an exercise, and a check tells you why your answer is right or wrong."
   covers: [notebooks#0]
@@ -17,6 +17,7 @@ lessons:
 - id: start-ai-ml-genai
   title: "AI, machine learning, deep learning and generative AI"
   level: basis
+  domein: fundament
   module: start
   idea: "These four words are nested circles: generative AI is a kind of deep learning, which is a kind of machine learning, which is one way to build AI."
   covers: [definities-en-framings#0, wat-ml-is#1]
@@ -27,6 +28,7 @@ lessons:
 - id: start-rules-vs-learning
   title: "Writing rules versus learning from examples"
   level: basis
+  domein: fundament
   module: start
   idea: "Instead of writing the rules yourself, you show the computer examples and let it find the rule."
   covers: [wat-ml-is#0]
@@ -38,19 +40,20 @@ lessons:
 - id: start-map-of-ai
   title: "The map of AI and how this course is organized"
   level: basis
+  domein: fundament
   module: start
-  idea: "AI is a large field; the course shows the whole map, a shared trunk, branches per area and three levels, and you choose a route through it."
+  idea: "AI is a large field; the course shows the whole map: the core that everyone takes first, equal domains that build on it, three levels, and routes through it that you choose."
   covers: [definities-en-framings#2]
   requires: [start-ai-ml-genai]
-  introduces: [c:course-branch, c:course-level, c:course-route]
+  introduces: [c:course-core, c:course-domain, c:course-level, c:course-route]
   uses: [q:choice, q:predict]
-  mentions: [c:model, c:paper, c:attention, c:gpt]
+  mentions: [c:model, c:paper, c:attention, c:gpt, c:language-model]
   needs: any
 
 - id: start-using-ai-tools
-  tak: bouwen
   title: "Using AI tools with your eyes open"
   level: basis
+  domein: fundament
   module: start
   idea: "A chat assistant is a language model behind an interface: it can explain, draft and code, but it also says wrong things with confidence, so you check what matters."
   covers: [ai-geletterdheid-voor-gebruikers#0, ai-geletterdheid-voor-gebruikers#4, ai-geletterdheid-voor-gebruikers#5]
@@ -63,6 +66,7 @@ lessons:
 - id: start-short-history
   title: "A short history of AI"
   level: basis
+  domein: fundament
   module: start
   idea: "AI went through waves of hope and winters; deep learning and then large language models are the latest wave."
   covers: [geschiedenis#2, geschiedenis#4, geschiedenis#5, geschiedenis#6, geschiedenis#7, geschiedenis#8]
@@ -76,6 +80,7 @@ lessons:
 - id: py-first-program
   title: "Your first program"
   level: basis
+  domein: fundament
   module: python
   idea: "A program is a list of instructions that runs from top to bottom; print shows a result."
   covers: [python#0]
@@ -88,6 +93,7 @@ lessons:
 - id: py-variables
   title: "Variables and numbers"
   level: basis
+  domein: fundament
   module: python
   idea: "A variable is a name for a value; Python calculates with whole numbers and decimal numbers, including powers with **."
   covers: [python#0]
@@ -101,6 +107,7 @@ lessons:
 - id: py-names-in-cells
   title: "Names in a notebook: one name, one cell"
   level: basis
+  domein: fundament
   module: python
   idea: "In a notebook every name belongs to exactly one cell; helper names that start with _ stay inside their own cell, so they never clash with yours."
   covers: [notebooks#1]
@@ -113,6 +120,7 @@ lessons:
 - id: py-strings
   title: "Text: strings"
   level: basis
+  domein: fundament
   module: python
   idea: "A string is a sequence of characters you can measure, index and build with f-strings."
   covers: [python#0]
@@ -126,6 +134,7 @@ lessons:
 - id: py-if
   title: "Making choices: if and else"
   level: basis
+  domein: fundament
   module: python
   idea: "A comparison gives True or False, and if runs code only when the condition is True."
   covers: [python#0]
@@ -138,6 +147,7 @@ lessons:
 - id: py-lists
   title: "Lists"
   level: basis
+  domein: fundament
   module: python
   idea: "A list holds many values in order; you can index, slice and grow it."
   covers: [python#1]
@@ -151,6 +161,7 @@ lessons:
 - id: py-for
   title: "Repeating: for loops"
   level: basis
+  domein: fundament
   module: python
   idea: "A for loop runs the same code once for every item in a list or range."
   covers: [python#0]
@@ -163,6 +174,7 @@ lessons:
 - id: py-while
   title: "Repeating until something happens: while"
   level: basis
+  domein: fundament
   module: python
   idea: "A while loop repeats until its condition becomes False, and break stops it early."
   covers: [python#0]
@@ -175,6 +187,7 @@ lessons:
 - id: py-functions
   title: "Functions"
   level: basis
+  domein: fundament
   module: python
   idea: "A function puts code under a name, takes arguments and returns a result."
   covers: [python#0]
@@ -188,6 +201,7 @@ lessons:
 - id: py-recursion
   title: "A function that calls itself"
   level: basis
+  domein: fundament
   module: python
   idea: "A recursive function solves a problem by calling itself on a smaller piece, with a base case that stops it."
   covers: [python#0]
@@ -200,6 +214,7 @@ lessons:
 - id: py-dicts
   title: "Dictionaries"
   level: basis
+  domein: fundament
   module: python
   idea: "A dictionary looks up a value by its key, like a word in a dictionary."
   covers: [python#1]
@@ -213,6 +228,7 @@ lessons:
 - id: py-tuples-sets
   title: "Tuples, sets and sorting"
   level: basis
+  domein: fundament
   module: python
   idea: "A tuple is a fixed group of values, a set keeps each value once, and sorted puts values in order."
   covers: [python#1]
@@ -226,6 +242,7 @@ lessons:
 - id: py-comprehensions
   title: "Building lists and dictionaries in one line"
   level: basis
+  domein: fundament
   module: python
   idea: "A comprehension builds a new list or dictionary from an old one in a single readable line."
   covers: [python#5]
@@ -238,6 +255,7 @@ lessons:
 - id: py-errors
   title: "Reading error messages and finding bugs"
   level: basis
+  domein: fundament
   module: python
   idea: "A traceback tells you where and why the program stopped; read it from the bottom up and test small pieces."
   covers: [python#3]
@@ -250,6 +268,7 @@ lessons:
 - id: py-exceptions
   title: "Catching and raising errors"
   level: basis
+  domein: fundament
   module: python
   idea: "try and except let a program handle an expected problem, and raise signals one yourself."
   covers: [python#3]
@@ -262,6 +281,7 @@ lessons:
 - id: py-files
   title: "Reading a text file"
   level: basis
+  domein: fundament
   module: python
   idea: "open reads a file from disk, and with makes sure it is closed again."
   covers: [python#3]
@@ -274,6 +294,7 @@ lessons:
 - id: py-imports
   title: "Using code from modules"
   level: basis
+  domein: fundament
   module: python
   idea: "import brings in ready-made code such as math and random, so you do not write everything yourself."
   covers: [python#6]
@@ -286,6 +307,7 @@ lessons:
 - id: py-own-modules
   title: "Your own module: keeping project code in a file"
   level: basis
+  domein: fundament
   module: python
   idea: "Code you want to reuse goes in your own .py file, which later lessons import; this is how your projects grow."
   covers: [ontwikkelomgeving-tracking-en-reproduceerbaarheid#0]
@@ -299,6 +321,7 @@ lessons:
 - id: py-classes
   title: "Classes and objects"
   level: basis
+  domein: fundament
   module: python
   idea: "A class bundles data and the functions that work on it; each object made from it has its own data."
   covers: [python#5]
@@ -312,6 +335,7 @@ lessons:
 - id: py-special-methods
   title: "Special methods: making + and print work on your objects"
   level: basis
+  domein: fundament
   module: python
   idea: "Methods with double underscores, like __add__ and __call__, tell Python what +, print and calling do with your object."
   covers: [python#5]
@@ -325,6 +349,7 @@ lessons:
 - id: py-inheritance
   title: "Building on another class"
   level: basis
+  domein: fundament
   module: python
   idea: "A subclass reuses everything of its parent class and adds or changes a little; super() calls the parent."
   covers: [python#5]
@@ -338,6 +363,7 @@ lessons:
 - id: py-generators
   title: "Generators: producing values one at a time"
   level: basis
+  domein: fundament
   module: python
   idea: "A generator uses yield to hand out values one by one, so you never hold all of them in memory."
   covers: [python#5]
@@ -351,6 +377,7 @@ lessons:
 - id: py-decorators
   title: "Decorators"
   level: basis
+  domein: fundament
   module: python
   idea: "A line starting with @ above a function wraps that function in extra behavior."
   covers: [python#5]
@@ -365,6 +392,7 @@ lessons:
 - id: py-plotting
   title: "Drawing numbers: line, scatter and bar charts"
   level: basis
+  domein: fundament
   module: python
   idea: "A plot turns a list of numbers into a picture you can read at a glance."
   covers: [eda-en-visualisatie#5]
@@ -378,6 +406,7 @@ lessons:
 - id: py-project-letter-counts
   title: "Project: which letters does a book use?"
   level: basis
+  domein: fundament
   module: python
   kind: project
   project: llm
@@ -394,6 +423,7 @@ lessons:
 - id: py-terminal
   title: "The terminal: running a script"
   level: basis
+  domein: fundament
   module: python
   idea: "Long jobs run as a script from the terminal instead of inside a notebook."
   covers: [python#4]
@@ -407,6 +437,7 @@ lessons:
 - id: np-arrays
   title: "From lists to arrays: shape and dtype"
   level: basis
+  domein: fundament
   module: numpy
   idea: "A NumPy array is a grid of numbers of one type; its shape says how many numbers it has along each direction."
   covers: [numpy-en-scipy#0, lineaire-algebra#0]
@@ -420,6 +451,7 @@ lessons:
 - id: np-indexing
   title: "Selecting parts of an array"
   level: basis
+  domein: fundament
   module: numpy
   idea: "Indexing, slicing and boolean masks select rows, columns or the values that meet a condition."
   covers: [numpy-en-scipy#0]
@@ -433,6 +465,7 @@ lessons:
 - id: np-vectorization
   title: "Calculating without loops"
   level: basis
+  domein: fundament
   module: numpy
   idea: "Arithmetic on whole arrays at once is shorter and much faster than a Python loop."
   covers: [numpy-en-scipy#1]
@@ -446,6 +479,7 @@ lessons:
 - id: np-axis
   title: "Sums and means along an axis"
   level: basis
+  domein: fundament
   module: numpy
   idea: "sum, mean and argmax can work over the whole array or along one axis, such as per row."
   covers: [numpy-en-scipy#0]
@@ -459,6 +493,7 @@ lessons:
 - id: np-broadcasting
   title: "Broadcasting"
   level: basis
+  domein: fundament
   module: numpy
   idea: "NumPy stretches a smaller array to match a bigger one when their shapes are compatible."
   covers: [numpy-en-scipy#1]
@@ -472,6 +507,7 @@ lessons:
 - id: np-random
   title: "Random numbers and seeds"
   level: basis
+  domein: fundament
   module: numpy
   idea: "A random generator with a fixed seed gives the same 'random' numbers every run, so results can be repeated."
   covers: [numpy-en-scipy#2, numerieke-wiskunde#2]
@@ -485,6 +521,7 @@ lessons:
 - id: data-pandas
   title: "Tables with pandas"
   level: basis
+  domein: fundament
   module: data
   idea: "A DataFrame is a table with named columns; you select columns and filter rows."
   covers: [dataframes#0]
@@ -499,6 +536,7 @@ lessons:
 - id: stats-describe
   title: "Describing data: mean, median and spread"
   level: basis
+  domein: fundament
   module: data
   idea: "A few numbers and a histogram summarize a whole column: where the middle is and how spread out it is."
   covers: [statistiek#0]
@@ -512,6 +550,7 @@ lessons:
 - id: data-explore
   title: "Asking questions of data"
   level: basis
+  domein: fundament
   module: data
   idea: "Before modeling, look at the data: what is in it, what is missing, what is strange."
   covers: [eda-en-visualisatie#2]
@@ -525,6 +564,7 @@ lessons:
 - id: data-groupby
   title: "One number per group: groupby"
   level: basis
+  domein: fundament
   module: data
   idea: "groupby splits the rows of a table into groups by the values of one column, computes one number per group and combines them; a mean per group hides how many values it rests on and what else differs between the groups."
   covers: [dataframes#1]
@@ -539,6 +579,7 @@ lessons:
 - id: data-merge
   title: "Two tables into one: merge"
   level: basis
+  domein: fundament
   module: data
   idea: "merge puts the rows of two tables side by side where a key column matches; an inner join drops a row without a match, a left join keeps it with missing values, and a key that appears twice doubles its row, so you count the rows before and after."
   covers: [dataframes#1]
@@ -552,6 +593,7 @@ lessons:
 - id: data-missing-values
   title: "Gaps in a table: dropna and fillna"
   level: basis
+  domein: fundament
   module: data
   idea: "A gap is left out with dropna or filled in with fillna: a value you know, or a guess such as the mean or the median, after a missing-indicator column marks where it was; each choice changes the numbers, and a filled-in mean shrinks the spread."
   covers: [feature-engineering#2]
@@ -566,6 +608,7 @@ lessons:
 - id: data-provenance
   title: "Where does this data come from?"
   level: basis
+  domein: fundament
   module: data
   idea: "Every dataset has a source, a license and limits; you write them down before you use it."
   covers: [datasetdocumentatie#0, datasetdocumentatie#1]
@@ -580,7 +623,8 @@ lessons:
 - id: ml-vocabulary
   title: "Examples, features and labels"
   level: basis
-  module: first-model
+  domein: fundament
+  module: eerste-model
   idea: "Each example has features (what you know) and a label (what you want to predict); training uses examples with labels, inference predicts new ones."
   covers: [wat-ml-is#2]
   requires: [start-rules-vs-learning, data-explore]
@@ -594,7 +638,8 @@ lessons:
 - id: ml-model-is-a-function
   title: "A model is a function with parameters"
   level: basis
-  module: first-model
+  domein: fundament
+  module: eerste-model
   idea: "A model turns features into a prediction; its parameters, such as the weight w and the bias b in w*x + b, decide which prediction."
   covers: [notatie-en-wiskundig-redeneren#0]
   requires: [ml-vocabulary, py-functions, py-plotting]
@@ -607,7 +652,8 @@ lessons:
 - id: ml-residuals
   title: "How wrong is one prediction?"
   level: basis
-  module: first-model
+  domein: fundament
+  module: eerste-model
   idea: "The residual is the difference between the true value and the prediction for one example."
   covers: [lineaire-regressie-en-uitbreidingen#0]
   requires: [ml-model-is-a-function]
@@ -620,7 +666,8 @@ lessons:
 - id: ml-mse-loss
   title: "One number for how wrong: the loss"
   level: basis
-  module: first-model
+  domein: fundament
+  module: eerste-model
   idea: "The loss summarizes all residuals in one number; mean squared error squares them and takes the mean."
   covers: [loss-en-empirical-risk-minimization#1, notatie-en-wiskundig-redeneren#1]
   requires: [ml-residuals, np-axis, np-vectorization]
@@ -633,7 +680,8 @@ lessons:
 - id: ml-fit-by-hand
   title: "Fitting a line by hand"
   level: basis
-  module: first-model
+  domein: fundament
+  module: eerste-model
   idea: "Move w and b with sliders and watch the loss; the best line is the lowest point of the loss."
   covers: [optimalisatie#0]
   requires: [ml-mse-loss]
@@ -645,7 +693,8 @@ lessons:
 - id: math-slope
   title: "The derivative as a slope"
   level: basis
-  module: first-model
+  domein: fundament
+  module: eerste-model
   idea: "The derivative tells how fast the loss changes when you nudge a parameter; you can measure it by nudging a tiny bit."
   covers: [calculus#0]
   requires: [ml-fit-by-hand]
@@ -657,7 +706,8 @@ lessons:
 - id: math-slope-formulas
   title: "Slope formulas you can trust"
   level: basis
-  module: first-model
+  domein: fundament
+  module: eerste-model
   idea: "Nudging x², x³ and a·x shows that their slopes follow short formulas (2x, 3x², a); a formula gives the exact slope at once, and nudging checks it."
   covers: [calculus#0]
   requires: [math-slope]
@@ -669,7 +719,8 @@ lessons:
 - id: ml-gradient-descent-1d
   title: "Rolling downhill: gradient descent"
   level: basis
-  module: first-model
+  domein: fundament
+  module: eerste-model
   idea: "Take a small step against the slope, again and again, and you end up at the bottom of the loss."
   covers: [optimalisatie#1, optimizers#0]
   requires: [math-slope]
@@ -682,7 +733,8 @@ lessons:
 - id: ml-learning-rate
   title: "Too small, too big: the learning rate"
   level: basis
-  module: first-model
+  domein: fundament
+  module: eerste-model
   idea: "With a small learning rate training crawls, with a big one it overshoots and diverges; the loss curve shows which."
   covers: [optimalisatie#1]
   requires: [ml-gradient-descent-1d]
@@ -694,7 +746,8 @@ lessons:
 - id: math-gradient
   title: "Two parameters: the gradient"
   level: basis
-  module: first-model
+  domein: fundament
+  module: eerste-model
   idea: "With several parameters you measure a slope per parameter; together they form the gradient, which points uphill."
   covers: [calculus#0]
   requires: [ml-learning-rate]
@@ -706,7 +759,8 @@ lessons:
 - id: ml-gradient-descent-2d
   title: "Fitting w and b with gradient descent"
   level: basis
-  module: first-model
+  domein: fundament
+  module: eerste-model
   idea: "Gradient descent moves w and b together, downhill across the loss landscape."
   covers: [optimalisatie#1]
   requires: [math-gradient]
@@ -719,7 +773,8 @@ lessons:
 - id: math-dot-product
   title: "Many features: the dot product"
   level: basis
-  module: first-model
+  domein: fundament
+  module: eerste-model
   idea: "A weighted sum of many features is a dot product of two vectors."
   covers: [lineaire-algebra#2]
   requires: [np-vectorization, ml-model-is-a-function]
@@ -731,7 +786,8 @@ lessons:
 - id: math-matrix-multiply
   title: "A whole batch at once: matrix multiplication"
   level: basis
-  module: first-model
+  domein: fundament
+  module: eerste-model
   idea: "Multiplying a matrix of examples by a weight vector or matrix does all dot products at once; the shapes must fit."
   covers: [lineaire-algebra#1]
   requires: [math-dot-product]
@@ -745,7 +801,8 @@ lessons:
 - id: math-transpose
   title: "Flipping a matrix: the transpose"
   level: basis
-  module: first-model
+  domein: fundament
+  module: eerste-model
   idea: "The transpose swaps rows and columns, which is often what makes two shapes fit."
   covers: [lineaire-algebra#1]
   requires: [math-matrix-multiply]
@@ -758,7 +815,8 @@ lessons:
 - id: math-norms-cosine
   title: "Length, distance and cosine similarity"
   level: basis
-  module: first-model
+  domein: fundament
+  module: eerste-model
   idea: "A norm measures how long a vector is; cosine similarity measures whether two vectors point the same way."
   covers: [lineaire-algebra#2]
   requires: [math-dot-product]
@@ -770,7 +828,8 @@ lessons:
 - id: math-chain-rule
   title: "Rates multiply: the chain rule"
   level: basis
-  module: first-model
+  domein: fundament
+  module: eerste-model
   idea: "If b changes 3 times as fast as a, and c changes 2 times as fast as b, then c changes 6 times as fast as a; with this rule you get the slope of a loss such as (w·x − y)² without nudging."
   covers: [backpropagation-en-computational-graphs#0]
   requires: [math-slope-formulas]
@@ -783,7 +842,8 @@ lessons:
 - id: ml-linear-regression-numpy
   title: "Linear regression on many features"
   level: basis
-  module: first-model
+  domein: fundament
+  module: eerste-model
   kind: project
   project: nn
   idea: "The slope formulas and the chain rule give the gradient of the MSE for every weight at once; vectorised in NumPy, the same gradient descent now trains on any number of features."
@@ -798,7 +858,8 @@ lessons:
 - id: ml-feature-scaling
   title: "Why gradient descent likes scaled features"
   level: basis
-  module: first-model
+  domein: fundament
+  module: eerste-model
   idea: "Features on very different scales stretch the loss landscape; standardising them makes descent fast and stable."
   covers: [feature-engineering#0]
   requires: [ml-linear-regression-numpy, stats-describe, np-broadcasting]
@@ -811,7 +872,8 @@ lessons:
 - id: ml-sklearn
   title: "The same model with scikit-learn"
   level: basis
-  module: first-model
+  domein: fundament
+  module: eerste-model
   idea: "scikit-learn gives every model the same two steps, fit and predict, so you can swap models easily."
   covers: [scikit-learn#0]
   requires: [ml-linear-regression-numpy, data-pandas, py-dicts]
@@ -824,7 +886,8 @@ lessons:
 - id: prob-basics
   title: "Probability: counting how often"
   level: basis
-  module: classification
+  domein: fundament
+  module: classificatie
   idea: "A probability is how often something happens out of all tries; a distribution lists the probabilities of all outcomes and they add up to 1."
   covers: [kansrekening#0]
   requires: [np-axis, py-dicts]
@@ -837,7 +900,8 @@ lessons:
 - id: prob-conditional
   title: "Conditional probability"
   level: basis
-  module: classification
+  domein: fundament
+  module: classificatie
   idea: "P(A | B) is the probability of A among only the cases where B happened."
   covers: [kansrekening#1]
   requires: [prob-basics]
@@ -850,7 +914,8 @@ lessons:
 - id: prob-expectation
   title: "Expected value and variance"
   level: basis
-  module: classification
+  domein: fundament
+  module: classificatie
   idea: "The expected value is the long-run average; the variance is the squared difference from it, weighted by probability, and its square root says how far results typically lie from it."
   covers: [kansrekening#2]
   requires: [prob-basics, stats-describe]
@@ -863,7 +928,8 @@ lessons:
 - id: prob-bayes
   title: "Bayes' rule"
   level: basis
-  module: classification
+  domein: fundament
+  module: classificatie
   idea: "Bayes' rule turns P(B | A) into P(A | B): it updates a belief with new evidence."
   covers: [kansrekening#1, onzekerheid-kwantificeren#1, onzekerheid-kwantificeren#2]
   requires: [prob-conditional]
@@ -874,7 +940,8 @@ lessons:
 - id: ml-kinds-of-learning
   title: "Kinds of learning"
   level: basis
-  module: classification
+  domein: fundament
+  module: classificatie
   idea: "Supervised learning has labels, unsupervised learning has none, self-supervised learning makes labels from the data itself, and reinforcement learning learns from rewards."
   covers: [wat-ml-is#3]
   requires: [ml-vocabulary]
@@ -887,7 +954,8 @@ lessons:
 - id: ml-classification
   title: "Classification: predicting a class"
   level: basis
-  module: classification
+  domein: fundament
+  module: classificatie
   idea: "Regression predicts a number, classification predicts which class an example belongs to."
   covers: [wat-ml-is#2]
   requires: [ml-kinds-of-learning]
@@ -901,7 +969,8 @@ lessons:
 - id: math-exp-log
   title: "Exponents and logarithms"
   level: basis
-  module: classification
+  domein: fundament
+  module: classificatie
   idea: "exp grows faster and faster; log is its inverse and turns multiplying into adding."
   covers: [notatie-en-wiskundig-redeneren#2]
   requires: [py-plotting, np-vectorization]
@@ -914,7 +983,8 @@ lessons:
 - id: math-log-scales
   title: "Log scales and power laws"
   level: basis
-  module: classification
+  domein: fundament
+  module: classificatie
   idea: "On a log scale equal steps are equal factors; a power law becomes a straight line on a log-log plot."
   covers: [notatie-en-wiskundig-redeneren#3]
   requires: [math-exp-log]
@@ -928,7 +998,8 @@ lessons:
 - id: ml-sigmoid
   title: "From score to probability: the sigmoid"
   level: basis
-  module: classification
+  domein: fundament
+  module: classificatie
   idea: "The sigmoid squeezes any score, called a logit, into a probability between 0 and 1."
   covers: [activaties-en-loss-functions#0]
   requires: [math-exp-log, prob-basics, ml-classification]
@@ -942,7 +1013,8 @@ lessons:
 - id: ml-logistic-regression
   title: "Logistic regression and the decision boundary"
   level: basis
-  module: classification
+  domein: fundament
+  module: classificatie
   idea: "A dot product plus a sigmoid gives a probability per class; the line where it is 0.5 is the decision boundary."
   covers: [lineaire-classificatie#0]
   requires: [ml-sigmoid, math-dot-product]
@@ -956,7 +1028,8 @@ lessons:
 - id: ml-log-loss
   title: "Scoring probabilities with the log: log loss"
   level: basis
-  module: classification
+  domein: fundament
+  module: classificatie
   idea: "Log loss punishes a confident wrong probability much more than an unsure one; minus the log of a probability measures surprise."
   covers: [activaties-en-loss-functions#4]
   requires: [ml-logistic-regression, ml-mse-loss]
@@ -969,7 +1042,8 @@ lessons:
 - id: ml-log-loss-gradient
   title: "The gradient of log loss"
   level: basis
-  module: classification
+  domein: fundament
+  module: classificatie
   idea: "Chaining the slope of the log (1/p) with the slope of the sigmoid (p·(1 − p)) collapses the gradient of log loss to (p − y)·x; a nudging check confirms it."
   covers: [calculus#0]
   requires: [ml-log-loss, math-chain-rule, math-gradient]
@@ -983,7 +1057,8 @@ lessons:
 - id: ml-train-logistic
   title: "Training logistic regression"
   level: basis
-  module: classification
+  domein: fundament
+  module: classificatie
   kind: project
   project: nn
   idea: "Gradient descent with the gradient (p − y)·x trains a classifier exactly as it trained the line."
@@ -998,7 +1073,8 @@ lessons:
 - id: ml-one-hot
   title: "One-hot vectors for classes"
   level: basis
-  module: classification
+  domein: fundament
+  module: classificatie
   idea: "A class becomes a vector of zeros with a single 1 at the position of that class."
   covers: [representatieleren#0, feature-engineering#1]
   requires: [np-indexing, ml-classification]
@@ -1011,7 +1087,8 @@ lessons:
 - id: ml-softmax
   title: "Many classes: softmax"
   level: basis
-  module: classification
+  domein: fundament
+  module: classificatie
   idea: "Softmax turns a vector of logits into probabilities that are all positive and add up to 1; subtracting the largest logit first changes nothing and keeps exp from overflowing."
   covers: [activaties-en-loss-functions#3]
   requires: [ml-sigmoid, np-axis]
@@ -1024,7 +1101,8 @@ lessons:
 - id: ml-cross-entropy
   title: "Cross-entropy loss for many classes"
   level: basis
-  module: classification
+  domein: fundament
+  module: classificatie
   idea: "Cross-entropy is the log loss for many classes: minus the log of the probability given to the right class."
   covers: [activaties-en-loss-functions#4]
   requires: [ml-softmax, ml-log-loss, ml-one-hot]
@@ -1037,7 +1115,8 @@ lessons:
 - id: ml-softmax-gradient
   title: "The gradient of softmax with cross-entropy"
   level: basis
-  module: classification
+  domein: fundament
+  module: classificatie
   idea: "For softmax followed by cross-entropy, the gradient on the logits is the predicted probabilities minus the one-hot target, the same pattern as for log loss; you check it by nudging each logit."
   covers: [calculus#0]
   requires: [ml-cross-entropy, ml-log-loss-gradient]
@@ -1052,7 +1131,8 @@ lessons:
 - id: ml-train-test-split
   title: "Will it work on new data? Training and test sets"
   level: basis
-  module: generalization
+  domein: fundament
+  module: generalisatie
   idea: "A model is only useful if it works on examples it has not seen, so you hold back a test set."
   covers: [evaluatie-en-modelselectie#0]
   requires: [ml-linear-regression-numpy, np-random]
@@ -1065,7 +1145,8 @@ lessons:
 - id: ml-overfitting
   title: "Overfitting and underfitting"
   level: basis
-  module: generalization
+  domein: fundament
+  module: generalisatie
   idea: "A model that is too flexible learns the noise in the training set; one that is too simple misses the pattern."
   covers: [evaluatie-en-modelselectie#2]
   requires: [ml-train-test-split]
@@ -1078,7 +1159,8 @@ lessons:
 - id: ml-hyperparameters
   title: "Parameters and hyperparameters"
   level: basis
-  module: generalization
+  domein: fundament
+  module: generalisatie
   idea: "Parameters are learned from the data; hyperparameters, such as the learning rate or the number of steps, are settings you choose yourself."
   covers: [evaluatie-en-modelselectie#5]
   requires: [ml-learning-rate, ml-overfitting]
@@ -1092,7 +1174,8 @@ lessons:
 - id: ml-validation-set
   title: "Choosing hyperparameters: the validation set"
   level: basis
-  module: generalization
+  domein: fundament
+  module: generalisatie
   idea: "Choose hyperparameters on a separate validation set, never on the test set, or the test score stops being an honest estimate."
   covers: [evaluatie-en-modelselectie#5]
   requires: [ml-hyperparameters]
@@ -1105,7 +1188,8 @@ lessons:
 - id: ml-cross-validation
   title: "Choosing more reliably: cross-validation"
   level: basis
-  module: generalization
+  domein: fundament
+  module: generalisatie
   idea: "One validation set is small, so the hyperparameter it chooses depends on which examples land in it; cross-validation lets every fold of the examples take one turn as the validation set and adds up the mistakes of all folds."
   covers: [evaluatie-en-modelselectie#1]
   requires: [ml-knn]
@@ -1118,7 +1202,8 @@ lessons:
 - id: ml-bias-variance
   title: "Will more data help? Bias, variance and learning curves"
   level: basis
-  module: generalization
+  domein: fundament
+  module: generalisatie
   idea: "A model that is too simple misses the pattern in the same way on every training set (bias), one that is too flexible gives a different fit on every training set (variance), and its learning curve, the training and validation MSE against the number of training examples, shows which of the two it has, and so whether more data would help."
   covers: [evaluatie-en-modelselectie#2]
   requires: [ml-cross-validation, prob-expectation]
@@ -1132,7 +1217,8 @@ lessons:
 - id: ml-regularization
   title: "Regularization and weight decay"
   level: basis
-  module: generalization
+  domein: fundament
+  module: generalisatie
   idea: "Adding a penalty for large weights to the loss keeps a model simpler and helps it generalize."
   covers: [evaluatie-en-modelselectie#4, regularisatie#0]
   requires: [ml-validation-set, ml-gradient-descent-2d]
@@ -1145,7 +1231,8 @@ lessons:
 - id: ml-loss-vs-metric
   title: "The loss you train on and the metric you report"
   level: basis
-  module: generalization
+  domein: fundament
+  module: generalisatie
   idea: "You train on a loss that has a gradient, and you judge the model on a metric people care about, such as accuracy."
   covers: [loss-en-empirical-risk-minimization#0]
   requires: [ml-validation-set, ml-cross-entropy]
@@ -1158,7 +1245,8 @@ lessons:
 - id: ml-confusion-matrix
   title: "Beyond accuracy: precision and recall"
   level: basis
-  module: generalization
+  domein: fundament
+  module: generalisatie
   idea: "A confusion matrix shows which classes get mixed up; precision and recall tell different stories when classes are unbalanced."
   covers: [d10-evaluatiemetrics#0, d10-evaluatiemetrics#1]
   requires: [ml-loss-vs-metric]
@@ -1171,7 +1259,8 @@ lessons:
 - id: ml-f1-score
   title: "Precision and recall in one number: the F1 score"
   level: basis
-  module: generalization
+  domein: fundament
+  module: generalisatie
   idea: "When one class is rare, accuracy can rank a model that finds nothing above one that finds most of it; the F1 score, the harmonic mean of precision and recall, is only high when both are, so it ranks them the right way."
   covers: [d10-evaluatiemetrics#0, d10-evaluatiemetrics#1, onevenwichtige-data#0]
   requires: [ml-confusion-matrix]
@@ -1184,7 +1273,8 @@ lessons:
 - id: ml-roc-auc
   title: "Every threshold at once: the ROC curve and AUC"
   level: basis
-  module: generalization
+  domein: fundament
+  module: generalisatie
   idea: "Move the decision threshold over every value and plot recall, the true positive rate, against the false positive rate: the ROC curve. The area under it, the AUC, is the share of pairs of a positive and a negative example that the scores put in the right order: one number for the ranking, whatever the threshold."
   covers: [d10-evaluatiemetrics#2]
   requires: [ml-f1-score]
@@ -1197,7 +1287,8 @@ lessons:
 - id: ml-baselines
   title: "Always beat a simple baseline"
   level: basis
-  module: generalization
+  domein: fundament
+  module: generalisatie
   idea: "Before trusting a score, compare it with a dumb baseline such as always predicting the most common class."
   covers: [baselines-en-error-analysis#0]
   requires: [ml-loss-vs-metric]
@@ -1209,7 +1300,8 @@ lessons:
 - id: ml-regression-metrics
   title: "How far off? MAE, RMSE and R²"
   level: basis
-  module: generalization
+  domein: fundament
+  module: generalisatie
   idea: "The MSE is in the square of the label's unit; the MAE and the RMSE say in that unit how far off a model typically is, the RMSE counting large misses more, and R² says what share of the variance of the labels the model explains, against always predicting their mean."
   covers: [d10-evaluatiemetrics#4]
   requires: [ml-baselines, prob-expectation]
@@ -1221,7 +1313,8 @@ lessons:
 - id: ml-digits-linear
   title: "Project: a linear classifier for handwritten digits"
   level: basis
-  module: generalization
+  domein: fundament
+  module: generalisatie
   kind: project
   project: nn
   idea: "Softmax regression in NumPy reads handwritten digits better than a baseline, and you see which digits it confuses."
@@ -1237,7 +1330,8 @@ lessons:
 - id: ml-workflow
   title: "The machine learning workflow"
   level: basis
-  module: generalization
+  domein: fundament
+  module: generalisatie
   idea: "A project goes from question to metric, data, baseline and model, and then round again."
   covers: [de-ml-workflow#0, de-ml-workflow#2, de-ml-workflow#3, de-ml-workflow#4, de-ml-workflow#5]
   requires: [ml-baselines, ml-confusion-matrix, data-provenance]
@@ -1249,7 +1343,8 @@ lessons:
 - id: ml-project-tabular
   title: "Project: predict something real, end to end"
   level: basis
-  module: generalization
+  domein: fundament
+  module: generalisatie
   kind: review
   idea: "Run the whole workflow on a real table, the Palmer penguins, with scikit-learn and write down what you found."
   covers: [de-ml-workflow#1, baselines-en-error-analysis#1]
@@ -1262,7 +1357,8 @@ lessons:
 - id: nn-neuron
   title: "A neuron"
   level: basis
-  module: neural-networks
+  domein: fundament
+  module: neurale-netwerken
   idea: "A neuron is a weighted sum plus a bias, passed through an activation function; logistic regression is one neuron."
   covers: [wat-een-neuraal-netwerk-is#0, lineaire-modellen-als-netwerk-en-de-perceptron#1]
   requires: [ml-logistic-regression, ml-linear-regression-numpy]
@@ -1274,7 +1370,8 @@ lessons:
 - id: nn-xor
   title: "What one neuron cannot learn"
   level: basis
-  module: neural-networks
+  domein: fundament
+  module: neurale-netwerken
   idea: "A single neuron draws one straight boundary, so it cannot learn XOR, the limit of the perceptron that Minsky and Papert made famous."
   covers: [multilayer-perceptron#1, lineaire-modellen-als-netwerk-en-de-perceptron#0, lineaire-modellen-als-netwerk-en-de-perceptron#2]
   requires: [nn-neuron]
@@ -1286,7 +1383,8 @@ lessons:
 - id: nn-hidden-layer
   title: "A hidden layer and ReLU"
   level: basis
-  module: neural-networks
+  domein: fundament
+  module: neurale-netwerken
   idea: "Stacking neurons in a hidden layer with a non-linear activation such as ReLU lets the network bend its boundary."
   covers: [multilayer-perceptron#0, activaties-en-loss-functions#1]
   requires: [nn-xor]
@@ -1298,7 +1396,8 @@ lessons:
 - id: nn-forward-numpy
   title: "The forward pass in NumPy, with shapes"
   level: basis
-  module: neural-networks
+  domein: fundament
+  module: neurale-netwerken
   idea: "A forward pass is matrix multiply, add bias, activation, repeated per layer; writing the shape next to each step keeps you right."
   covers: [multilayer-perceptron#0]
   requires: [nn-hidden-layer, math-matrix-multiply, math-transpose, np-broadcasting]
@@ -1311,7 +1410,8 @@ lessons:
 - id: nn-why-backprop
   title: "Too many slopes to measure one by one"
   level: basis
-  module: neural-networks
+  domein: fundament
+  module: neurale-netwerken
   idea: "Measuring each slope by nudging costs one forward pass per weight; with millions of weights we need a smarter way."
   covers: [numerieke-wiskunde#1, wat-een-neuraal-netwerk-is#1]
   requires: [nn-forward-numpy, math-gradient]
@@ -1324,7 +1424,8 @@ lessons:
 - id: nn-backward-by-hand
   title: "Backpropagation by hand on a tiny graph"
   level: basis
-  module: neural-networks
+  domein: fundament
+  module: neurale-netwerken
   idea: "Write the calculation as a graph, then walk it backwards, multiplying local slopes, to get every gradient in one pass."
   covers: [backpropagation-en-computational-graphs#0]
   requires: [nn-why-backprop, math-chain-rule]
@@ -1337,7 +1438,8 @@ lessons:
 - id: nn-micrograd-value
   title: "Build your own autograd: a Value that remembers"
   level: basis
-  module: neural-networks
+  domein: fundament
+  module: neurale-netwerken
   kind: project
   project: nn
   idea: "A Value object stores a number, where it came from and its gradient; +, * and relu build the graph, and each operation knows its own local slope."
@@ -1352,7 +1454,8 @@ lessons:
 - id: nn-micrograd-backward
   title: "The full backward pass, in the right order"
   level: basis
-  module: neural-networks
+  domein: fundament
+  module: neurale-netwerken
   kind: project
   project: nn
   idea: "Sort the graph so every node comes after its inputs, then run the backward steps in reverse order."
@@ -1367,7 +1470,8 @@ lessons:
 - id: nn-micrograd-mlp
   title: "Neurons, layers and an MLP on top of your Value"
   level: basis
-  module: neural-networks
+  domein: fundament
+  module: neurale-netwerken
   kind: project
   project: nn
   idea: "Your Value class is enough to build neurons, layers and a whole MLP."
@@ -1383,7 +1487,8 @@ lessons:
 - id: nn-micrograd-train
   title: "Training your MLP: the training loop"
   level: basis
-  module: neural-networks
+  domein: fundament
+  module: neurale-netwerken
   kind: project
   project: nn
   idea: "Forward, loss, backward, step, zero the gradients, repeat: this loop trains every network in the course."
@@ -1399,6 +1504,7 @@ lessons:
 - id: torch-tensors
   title: "PyTorch tensors"
   level: basis
+  domein: fundament
   module: pytorch
   idea: "A tensor is PyTorch's array: it works like NumPy and can live on a GPU."
   covers: [tensors-en-autograd#0, frameworks#0]
@@ -1413,6 +1519,7 @@ lessons:
 - id: torch-autograd
   title: "PyTorch autograd does what your Value did"
   level: basis
+  domein: fundament
   module: pytorch
   idea: "requires_grad and backward compute the same gradients as your own Value class, for whole tensors at once."
   covers: [tensors-en-autograd#1]
@@ -1425,6 +1532,7 @@ lessons:
 - id: torch-nn-module
   title: "Layers as modules: nn.Linear"
   level: basis
+  domein: fundament
   module: pytorch
   idea: "nn.Module holds parameters and a forward method; nn.Linear is one layer. Note that PyTorch computes x W^T + b."
   covers: [frameworks#0]
@@ -1439,6 +1547,7 @@ lessons:
 - id: torch-optimizer
   title: "Let the optimizer take the step"
   level: basis
+  domein: fundament
   module: pytorch
   idea: "torch.optim does the update step and zeroing for you, the same rule you wrote by hand."
   covers: [d11-de-trainingslus#1]
@@ -1452,6 +1561,7 @@ lessons:
 - id: torch-batches
   title: "Mini-batches and epochs"
   level: basis
+  domein: fundament
   module: pytorch
   idea: "Instead of all examples per step you use a small random batch; one pass over all data is an epoch."
   covers: [d11-de-trainingslus#0]
@@ -1465,6 +1575,7 @@ lessons:
 - id: torch-dataloader
   title: "Datasets and DataLoaders"
   level: basis
+  domein: fundament
   module: pytorch
   idea: "A Dataset hands out single examples and a DataLoader shuffles them into batches."
   covers: [d11-de-trainingslus#2]
@@ -1478,6 +1589,7 @@ lessons:
 - id: torch-eval-mode
   title: "Training mode and evaluation mode"
   level: basis
+  domein: fundament
   module: pytorch
   idea: "model.eval() and no_grad switch a model from learning to just predicting."
   covers: [d11-de-trainingslus#3]
@@ -1492,6 +1604,7 @@ lessons:
 - id: torch-mlp-digits
   title: "Project: an MLP that reads handwritten digits"
   level: basis
+  domein: fundament
   module: pytorch
   kind: project
   project: nn
@@ -1508,6 +1621,7 @@ lessons:
 - id: torch-loss-curves
   title: "Reading loss curves"
   level: basis
+  domein: fundament
   module: pytorch
   idea: "Training and validation loss side by side show whether a model is still learning, overfitting or stuck."
   covers: [generalisatie-trainingsdynamiek-en-hpo#0, generalisatie-trainingsdynamiek-en-hpo#1]
@@ -1521,6 +1635,7 @@ lessons:
 - id: nn-early-stopping
   title: "Early stopping"
   level: basis
+  domein: fundament
   module: pytorch
   idea: "Stop training, and keep the best checkpoint, once the validation loss stops improving."
   covers: [regularisatie#1]
@@ -1533,6 +1648,7 @@ lessons:
 - id: nn-data-augmentation
   title: "Data augmentation"
   level: basis
+  domein: fundament
   module: pytorch
   idea: "Small changes to training images that keep the label, such as a shift, give the model more varied examples for free."
   covers: [regularisatie#3]
@@ -1545,6 +1661,7 @@ lessons:
 - id: torch-checkpoints
   title: "Saving and loading a model"
   level: basis
+  domein: fundament
   module: pytorch
   idea: "A checkpoint stores the parameters, so you can stop training and pick it up later or share the model."
   covers: [d11-de-trainingslus#4]
@@ -1558,6 +1675,7 @@ lessons:
 - id: torch-pretrained
   title: "Using a pretrained model"
   level: basis
+  domein: fundament
   module: pytorch
   idea: "A model hub offers networks someone else trained; you load one, a small digit reader the course trained on QMNIST, and check its license and training data on its model card."
   covers: [pretrained-modellen-via-hubs#0, pretrained-modellen-via-hubs#1]
@@ -1572,6 +1690,7 @@ lessons:
 - id: torch-frozen-features
   title: "A pretrained network as feature extractor"
   level: basis
+  domein: fundament
   module: pytorch
   idea: "Keep a trained network's layers frozen and train only a new last layer: with few labeled examples of data like the old, such as digits from a noisy scanner, borrowed features beat starting from scratch; for clothes they do not."
   covers: [transfer-learning-en-fine-tuning#0]
@@ -1586,6 +1705,7 @@ lessons:
 - id: torch-fine-tune
   title: "Reusing a trained network: freeze, then fine-tune"
   level: basis
+  domein: fundament
   module: pytorch
   idea: "First train only a new last layer on the frozen features, then unfreeze every layer and train on with a learning rate ten times smaller: the borrowed features adapt a little to the new data; skip the first phase or keep the large learning rate, and they get worse."
   covers: [transfer-learning-en-fine-tuning#1]
@@ -1601,7 +1721,8 @@ lessons:
 - id: ml-embeddings-idea
   title: "Embeddings: meaning as coordinates"
   level: basis
-  module: building-blocks
+  domein: fundament
+  module: bouwstenen-idee
   idea: "An embedding gives every word, image or sound a list of numbers so that similar things lie close together; you plot embeddings of handwritten digits, made by the course's digit model, and measure closeness with cosine similarity."
   covers: [embeddings-en-similariteit#0, embeddings-en-similariteit#1]
   requires: [math-norms-cosine, ml-one-hot, py-plotting, torch-mlp-digits]
@@ -1616,7 +1737,8 @@ lessons:
 - id: cnn-convolution-idea
   title: "Convolution: one small filter slides over the image"
   level: basis
-  module: building-blocks
+  domein: fundament
+  module: bouwstenen-idee
   idea: "Instead of one weight per pixel, a small filter slides over the image and reuses its weights everywhere; it finds edges by hand in NumPy."
   covers: [convolutionele-netwerken#0]
   requires: [data-images-as-arrays, nn-forward-numpy]
@@ -1630,7 +1752,8 @@ lessons:
 - id: rnn-memory-idea
   title: "Recurrence: a network with memory"
   level: basis
-  module: building-blocks
+  domein: fundament
+  module: bouwstenen-idee
   idea: "A recurrent network reads a sequence step by step and carries a hidden state, its memory, from one step to the next."
   covers: [recurrente-netwerken#0]
   requires: [nn-forward-numpy, data-text-as-numbers]
@@ -1643,7 +1766,8 @@ lessons:
 - id: attn-idea
   title: "Attention: every word looks at the others"
   level: basis
-  module: building-blocks
+  domein: fundament
+  module: bouwstenen-idee
   idea: "Attention lets each position take a weighted average of all other positions, with weights that depend on how well they match."
   covers: [attention-en-transformers#0, neurale-nlp#4]
   requires: [nn-forward-numpy, ml-softmax, ml-embeddings-idea, cnn-convolution-idea, rnn-memory-idea]

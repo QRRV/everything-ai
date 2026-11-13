@@ -276,7 +276,7 @@ def text_connections():
     mo.md(r"""
     ## Afronding
 
-    **Samenhang.** [Wat een paper, een preprint en peer review zijn](/course/open/res-what-is-a-paper?lang=nl) liet zien hoe onderzoek gedeeld wordt; nu weet je wat er vóór de paper komt: een vraag, een hypothese die fout kan zijn, en een experiment dat haar test. In het onderzoeksdeel van de course ontwerp je zelf zulke experimenten, en aan het eind herhaal je het resultaat van een paper. Met deze les is het basisdeel van de course af. Latere lessen bouwen erop voort, zoals *Eén ding tegelijk veranderen* en *Is het verschil echt?*. De volgende les, *Rekenregels voor afgeleiden*, begint het gevorderde deel.
+    **Samenhang.** [Wat een paper, een preprint en peer review zijn](/course/open/res-what-is-a-paper?lang=nl) liet zien hoe onderzoek gedeeld wordt; nu weet je wat er vóór de paper komt: een vraag, een hypothese die fout kan zijn, en een experiment dat haar test. In het domein *Onderzoeksvaardigheden en de frontier* ontwerp je zelf zulke experimenten, en aan het eind herhaal je het resultaat van een paper; lessen als *Eén ding tegelijk veranderen* en *Is het verschil echt?* bouwen op deze voort. Met deze les is de kern van de course af. Op de startpagina kies je nu een domein, zoals large language models, computer vision of onderzoek, en volg je zijn route, die op de kern voortbouwt.
     """)
     return
 

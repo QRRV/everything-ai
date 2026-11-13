@@ -380,7 +380,7 @@ def text_connections():
     mo.md(r"""
     ## Wrap-up
 
-    **How this connects.** The one-hot rows of [One-hot vectors for classes](/course/open/ml-one-hot?lang=en), the cross-entropy of [Cross-entropy loss for many classes](/course/open/ml-cross-entropy?lang=en) and the optimizer of [Let the optimizer take the step](/course/open/torch-optimizer?lang=en) together learn the table you counted before, and the penalty of [Regularization and weight decay](/course/open/ml-regularization?lang=en) does what smoothing did. Your project `llm` now has `bigram_net.py` and `bigram_train.py` as well. In the next lesson, *Base model or chat model?*, you see what the language models you use every day do differently from the one you built.
+    **How this connects.** The one-hot rows of [One-hot vectors for classes](/course/open/ml-one-hot?lang=en), the cross-entropy of [Cross-entropy loss for many classes](/course/open/ml-cross-entropy?lang=en) and the optimizer of [Let the optimizer take the step](/course/open/torch-optimizer?lang=en) together learn the table you counted before, and the penalty of [Regularization and weight decay](/course/open/ml-regularization?lang=en) does what smoothing did. Your project `llm` now has `bigram_net.py` and `bigram_train.py` as well. What the language models you use every day do differently from the one you built comes in the domain *Large language models*, from *Base model or chat model?* on. With *Show extra lessons* on, *Spam or not: naive Bayes* comes first, where counted words sort messages into spam and ok. In the next lesson, *What a paper, a preprint and peer review are*, you start reading research yourself.
     """)
     return
 

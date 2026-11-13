@@ -321,7 +321,7 @@ def text_connections():
     mo.md(r"""
     ## Afronding
 
-    **Samenhang.** De temperature uit [Temperature: gedurfder of veiliger tekst](/course/open/lm-temperature?lang=nl) verandert de vorm van de kansen; top-k en top-p snijden de onwaarschijnlijke af, en de sampling uit [Sampling: laat het model schrijven](/course/open/lm-sampling?lang=nl) trekt uit wat overblijft. Chatdiensten gebruiken vaak allebei: een temperature, en dan top-p. In de volgende les, *Hoe goed is een language model?*, meet je hoe verrast je model is door echte tekst.
+    **Samenhang.** De temperature uit [Temperature: gedurfder of veiliger tekst](/course/open/lm-temperature?lang=nl) verandert de vorm van de kansen; top-k en top-p snijden de onwaarschijnlijke af, en de sampling uit [Sampling: laat het model schrijven](/course/open/lm-sampling?lang=nl) trekt uit wat overblijft. Chatdiensten gebruiken vaak allebei: een temperature, en dan top-p. In de volgende les, *Base model of chat model?*, zie je wat de language models die je elke dag gebruikt, anders doen dan het model dat jij bouwde.
     """)
     return
 

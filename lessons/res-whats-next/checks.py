@@ -1,58 +1,57 @@
 # SPDX-FileCopyrightText: 2026 Everything AI contributors
 # SPDX-License-Identifier: CC-BY-SA-4.0 AND MIT-0
-"""Checks of the lesson res-whats-next, and the numbers about the branches that the lesson shows.
+"""Checks of the lesson res-whats-next, and the numbers about the domains that the lesson shows.
 
-Every later branch has its attach points in the route data (course/route/takken.yaml): the lessons of the main route it
-connects to, in route order; the branch can begin after the first. The numbers, the figure and the cards come from there
-and from the learner's progress, so the lesson stays right when the route changes. The exercises: sort next questions of
-a reproduction by their kind, and can_begin, the branches whose first attach point you have done."""
+Every domain builds on the core, and borrows shared modules of the foundation at the level where it first needs them
+(`gebruikt` in route/domeinen.yaml). The numbers, the picture and the card come from there and from the learner's
+progress, so the lesson stays right when the course grows. The exercises: sort next questions of a reproduction by their
+kind, and ready, the domains whose shared modules up to the intermediate level you have all done."""
 import html
 from collections import Counter
 
-from everything_ai import course, draw, progress
+from everything_ai import course, progress
 from everything_ai.check import FunctionBox, Mistake, Sort
 from everything_ai import yours
 
 LEVELS = ["basis", "gevorderd", "expert"]
-CORE = [s["id"] for s in course.main_route() if not s["extra"]]   # the main route without its extra lessons
-LATER = sorted((b for b in course.branches() if b["status"] == "later"), key=lambda b: b["build_order"])
-ATTACH = {b["id"]: list(b["attach"]) for b in LATER}
-MILESTONES = course.milestones()   # the wrap-up lists all three
+HERE = "onderzoek"   # the domain this lesson belongs to
+DOMAINS = [d["id"] for d in course.structure()["domeinen"]]
+OTHERS = [d for d in DOMAINS if d != HERE]
+SHARED = [m["id"] for m in course.structure()["fundament"]["modules"] if not m.get("kern")]
+USES = {d["id"]: {lv: list(d["gebruikt"].get(lv, [])) for lv in LEVELS} for d in course.structure()["domeinen"]}
+CORE = [s["id"] for s in course.kern_route() if not s["extra"]]   # the core without its extra lessons
+MILESTONES = course.milestones() + course.milestones(course.route_for("res-whats-next"))   # the wrap-up lists them all
 
 
-def level(lesson_id: str) -> str:
-    return course.lessons()[lesson_id]["level"]
+def domain(domain_id: str) -> dict:
+    return next(d for d in course.structure()["domeinen"] if d["id"] == domain_id)
 
 
-def branch(branch_id: str) -> dict:
-    return next(b for b in LATER if b["id"] == branch_id)
+def name(domain_id: str, lang: str) -> str:
+    """The name of a domain, as the start page shows it."""
+    return course.part_name(domain_id, lang)
 
 
-def short_title(branch_id: str, lang: str) -> str:
-    """The name of a branch without what follows a colon: "Building with AI", not all it holds."""
-    b = branch(branch_id)
-    return (b["title_nl"] if lang == "nl" else b["title"]).split(":")[0]
+def module_name(module_id: str, lang: str) -> str:
+    """The name of a shared module, as the start page shows it."""
+    return course.display()["modules"][f"fundament/{module_id}"][lang]
 
 
-def first_levels() -> dict[str, int]:
-    """How many later branches can begin after each level: the level of their first attach point."""
-    c = Counter(level(points[0]) for points in ATTACH.values())
-    return {lv: c.get(lv, 0) for lv in LEVELS}
+def module_lessons(module_id: str) -> list[str]:
+    """The built lessons of a shared module, in the order of the course."""
+    lessons = course.lessons()
+    return [lid for lid in course.order()
+            if lessons[lid]["domein"] == "fundament" and lessons[lid]["module"] == module_id and course.is_built(lid)]
 
 
-def later_names(lang: str) -> list[str]:
-    """The short names of the branches that cannot begin after the basics, in build order."""
-    return [short_title(k, lang) for k, points in ATTACH.items() if level(points[0]) != "basis"]
+def borrowers() -> Counter:
+    """How many domains borrow each shared module, at any level."""
+    return Counter(m for d in DOMAINS for m in {m for lv in LEVELS for m in USES[d][lv]})
 
 
-def milestone_lines(lang: str) -> str:
-    """The milestones of the main route as a Markdown list, in the learner's language."""
-    return "\n".join(f"- {m[lang]}" for m in MILESTONES)
-
-
-def waiting(ready: list) -> list[str]:
-    """The later branches not in `ready`, in the order of their first attach point on the main route."""
-    return sorted((k for k in ATTACH if k not in ready), key=lambda k: CORE.index(ATTACH[k][0]))
+def up_to_intermediate(domain_id: str) -> list[str]:
+    """The shared modules a domain borrows at the basics and the intermediate level, as far as they have lessons yet."""
+    return [m for lv in ("basis", "gevorderd") for m in USES[domain_id][lv] if module_lessons(m)]
 
 
 def done_lessons() -> set[str]:
@@ -60,105 +59,105 @@ def done_lessons() -> set[str]:
     return {lid for lid, p in progress.all_lessons().items() if p.get("done")}
 
 
-def extra_lessons(branch_id: str) -> list[str]:
-    """The built extra lessons of the main route whose home is this branch: a start you can make now."""
-    lessons = course.lessons()
-    return [s["id"] for s in course.main_route()
-            if s["extra"] and lessons[s["id"]]["tak"] == branch_id and course.is_built(s["id"])]
+def done_modules(done: set) -> list[str]:
+    """The shared modules with lessons, every one of which the learner has done."""
+    return [m for m in SHARED if module_lessons(m) and all(lid in done for lid in module_lessons(m))]
 
 
-def branch_card(branch_id: str, lang: str, done: set, words: dict) -> str:
-    """What the lesson says about one branch, in Markdown: its project, its attach points with a link and whether you
-    did them, and the extra lessons of the main route that already belong to it."""
-    b = branch(branch_id)
-    nl = lang == "nl"
-    out = [f"**{b['title_nl'] if nl else b['title']}**  ", f"{words['project']}: {b['project']['title_nl' if nl else 'title']}.", "",
-           f"{words['attach']}:", ""]
-    for i, a in enumerate(b["attach"], 1):
-        state = words["done"] if a in done else words["not_done"]
-        out.append(f"{i}. [{course.title(a, lang)}](/course/open/{a}?lang={lang}), "
-                   f"{course.level_name(level(a), lang).lower()}: {state}")
-    extras = extra_lessons(branch_id)
-    if extras:
-        out += ["", words["extras"] + " " + ", ".join(f"[{course.title(e, lang)}](/course/open/{e}?lang={lang})" for e in extras) + "."]
+def milestone_lines(lang: str) -> str:
+    """The milestones of the core and of the route of this lesson as a Markdown list, in the learner's language."""
+    return "\n".join(f"- {m[lang]}" for m in MILESTONES)
+
+
+def _chip(title: str, line: str, share: float | None) -> str:
+    """One shared module in the picture: its name, a line under it, and a bar for how much of it is done; a module
+    without lessons yet (share None) has a dashed box and no bar."""
+    border = "1px dashed var(--ea-ink-3)" if share is None else "1px solid var(--ea-ink-2)"
+    bar = ("" if share is None else
+           f'<div style="height:4px;border-radius:2px;background:var(--ea-line);margin-top:0.3rem">'
+           f'<div style="height:4px;border-radius:2px;width:{100 * share:.0f}%;background:var(--ea-ink-2)"></div></div>')
+    return (f'<div style="border:{border};border-radius:6px;padding:0.35rem 0.5rem">'
+            f'<div style="font-size:0.85rem;font-weight:600;color:var(--ea-ink);line-height:1.25">{html.escape(title)}</div>'
+            f'<div style="font-size:0.78rem;color:var(--ea-ink-2);margin-top:0.1rem">{html.escape(line)}</div>{bar}</div>')
+
+
+def domain_picture(domain_id: str, done: set, words: dict) -> str:
+    """What a domain builds on, read from the bottom up: the core, filled, with how many of its lessons you have done;
+    above it a row per level with the shared modules the domain borrows there, each with how many of its lessons you
+    have done and a bar. Ink only: nothing here is learned or counted wrong. HTML, so the names wrap on a phone."""
+    lang = words["lang"]
+
+    def count(lessons: list) -> tuple[str, float | None]:
+        if not lessons:
+            return words["later"], None
+        k = sum(1 for lid in lessons if lid in done)
+        return words["count_one" if len(lessons) == 1 else "count"].format(k=k, n=len(lessons)), k / len(lessons)
+
+    rows = []
+    for lv, label in zip(LEVELS, words["levels"]):
+        chips = "".join(_chip(module_name(m, lang), *count(module_lessons(m))) for m in USES[domain_id][lv])
+        body = (f'<div style="display:grid;gap:0.35rem;grid-template-columns:repeat(auto-fill,minmax(9.5rem,1fr))">{chips}</div>'
+                if chips else f'<div style="font-size:0.85rem;color:var(--ea-ink-3);padding:0.35rem 0">{html.escape(words["nothing"])}</div>')
+        rows.append(f'<div style="margin-bottom:0.55rem"><div style="font-size:0.8rem;font-weight:650;color:var(--ea-ink-2);'
+                    f'margin-bottom:0.25rem">{html.escape(label)}</div>{body}</div>')
+    line, _ = count(CORE)
+    core = (f'<div style="background:var(--ea-inset);border:1px solid var(--ea-ink-2);border-radius:6px;padding:0.4rem 0.55rem">'
+            f'<div style="font-size:0.85rem;font-weight:600;color:var(--ea-ink)">{html.escape(words["core"])}</div>'
+            f'<div style="font-size:0.78rem;color:var(--ea-ink-2);margin-top:0.1rem">{html.escape(line)}</div></div>')
+    title = words["title"].format(domain=name(domain_id, lang))
+    return yours.figure(title, f'<div style="font-family:var(--ea-font-ui)">{"".join(reversed(rows))}{core}</div>',
+                        alt=words["alt"])
+
+
+def domain_card(domain_id: str, lang: str, done: set, words: dict) -> str:
+    """What the lesson says about one domain, in Markdown: its project, the lessons of the core that gave a first taste
+    of it, with a link and whether you did them, and how many of its lessons are ready, and in which route."""
+    out = [f"**{name(domain_id, lang)}**  ", f"{words['project']}: {course.display()['projects'][domain_id][lang]}."]
+    tasters = domain(domain_id).get("proef")
+    if isinstance(tasters, list) and tasters:
+        out += ["", f"{words['taste']}:", ""]
+        out += [f"- [{course.title(t, lang)}](/course/open/{t}?lang={lang}): {words['done'] if t in done else words['not_done']}"
+                for t in tasters]
+    lessons = [lid for lid in course.built_lessons() if lid in course.lessons() and course.part(lid) == domain_id]
+    routes = {r["domein"]: r for r in course.domain_routes()}
+    if not lessons:
+        ready = words["later"]
+    else:
+        # its own route, else the first route that has its first lesson, the core included
+        others = [course.kern_names()] + course.domain_routes()
+        where = routes[domain_id] if domain_id in routes else next(
+            (r for r in others if any(s["id"] == lessons[0] for s in course.route_steps(r["id"]))), None)
+        count = words["one"] if len(lessons) == 1 else words["many"].format(n=len(lessons))
+        ready = count + ("" if where is None else " " + words["in"].format(route=where["short"][lang]))
+    out += ["", f"{words['lessons']}: {ready}."]
     return "\n".join(out)
 
 
-def tree_picture(branch_id: str, done: set, labels: dict):
-    """The main route as a trunk, with its three levels, and the chosen branch growing out of it at its first attach
-    point; its other attach points, numbered, join it with a dotted line. Every other later branch is a short grey
-    stub where it begins. A dot marks the furthest lesson of the trunk you have done. Ink only: nothing here is learned
-    or counted wrong."""
-    W, H = 540, 216
-    x0, x1, ty, by = 14, 500, 164, 86          # trunk from x0 to x1 at height ty; the chosen branch runs at height by
-    n = len(CORE)
+# --- exercise 2: ready ------------------------------------------------------------------------------------------------
 
-    def x(lesson_id: str) -> float:
-        return x0 + (x1 - x0) * CORE.index(lesson_id) / (n - 1)
-
-    parts = [f'<text x="0" y="16" style="font-size:15px;font-weight:600;fill:var(--ea-ink)">{html.escape(labels["title"])}</text>']
-    seen = Counter()
-    for other, points in ATTACH.items():   # the stubs first, under everything else; two at one lesson side by side
-        if other != branch_id:
-            xs = x(points[0]) + 6 * seen[points[0]]
-            seen[points[0]] += 1
-            parts.append(f'<path d="M{xs:.1f} {ty - 3} C{xs:.1f} {ty - 22} {xs + 8:.1f} {ty - 34} {xs + 28:.1f} {ty - 34}" '
-                         f'style="fill:none;stroke:var(--ea-axis);stroke-width:2.2;stroke-linecap:round">'
-                         f'<title>{html.escape(short_title(other, labels["lang"]))}</title></path>')
-    mine = [CORE.index(s) for s in CORE if s in done]
-    if mine:   # just under the trunk, above the level names; never cut off at the left edge
-        xm = x0 + (x1 - x0) * max(mine) / (n - 1)
-        tx, anchor = (xm + 3, "end") if xm > 90 else (max(xm - 3, 4), "start")
-        parts.append(f'<path d="M{xm:.1f} {ty + 6} V{ty + 13}" style="stroke:var(--ea-ink-3);stroke-width:1.4"/>'
-                     f'<text x="{tx:.1f}" y="{ty + 26}" text-anchor="{anchor}" style="font-size:13px;fill:var(--ea-ink-3)">'
-                     f'{html.escape(labels["you"])}</text>')
-    starts = [CORE.index(next(s for s in CORE if level(s) == lv)) for lv in LEVELS] + [n]
-    for i, lv in enumerate(LEVELS):
-        a, b = x0 + (x1 - x0) * starts[i] / (n - 1), x0 + (x1 - x0) * (starts[i + 1] - 1) / (n - 1)
-        parts.append(f'<line x1="{a:.1f}" y1="{ty}" x2="{b:.1f}" y2="{ty}" style="stroke:var(--ea-ink-2);stroke-width:6;stroke-linecap:round"/>'
-                     f'<text x="{(a + b) / 2:.1f}" y="{ty + 47}" text-anchor="middle" style="font-size:14px;fill:var(--ea-ink-2)">'
-                     f'{html.escape(labels["levels"][i])}</text>')
-    points = ATTACH[branch_id]
-    xf = x(points[0])
-    parts.append(f'<path d="M{xf:.1f} {ty} C{xf:.1f} {ty - 50} {xf + 10:.1f} {by} {xf + 50:.1f} {by} H{x1 + 30}" '
-                 f'style="fill:none;stroke:var(--ea-ink);stroke-width:3;stroke-linecap:round"/>')
-    name = short_title(branch_id, labels["lang"])
-    wide = 8.2 * len(name)
-    tx, anchor = (xf + 50, "start") if xf + 50 + wide < W - 4 else (W - 4, "end")
-    parts.append(f'<text x="{tx:.1f}" y="{by - 10}" text-anchor="{anchor}" style="font-size:15px;font-weight:600;fill:var(--ea-ink)">'
-                 f'{html.escape(name)}</text>')
-    for xa in (x(p) for p in points[1:]):
-        parts.append(f'<line x1="{xa:.1f}" y1="{ty - 9}" x2="{xa:.1f}" y2="{by + 2}" style="stroke:var(--ea-ink);stroke-width:1.6;stroke-dasharray:3 4"/>')
-    for i, xa in enumerate((x(p) for p in points), 1):
-        parts.append(f'<circle cx="{xa:.1f}" cy="{ty}" r="10" style="fill:var(--ea-ink);stroke:var(--ea-page);stroke-width:2"/>'
-                     f'<text x="{xa:.1f}" y="{ty + 4.5}" text-anchor="middle" style="font-size:13px;font-weight:600;fill:var(--ea-page)">{i}</text>')
-    return draw._svg(W, H, labels["alt"], "".join(parts))
-
-
-# --- exercise 2: can_begin ---------------------------------------------------------------------------------------------
-
-_C_HEAD = ("def can_begin(attach, done):\n"
-           "    # attach: for each branch, its attach points, in route order\n"
-           "    # done: the lessons you have done\n"
-           "    # gives a list of the branches whose first attach point is in done, in the order of attach\n")
+_C_HEAD = ("def ready(uses, done):\n"
+           "    # uses: for each domain, the shared modules it borrows up to its intermediate level\n"
+           "    # done: the shared modules you have finished\n"
+           "    # gives a list of the domains whose shared modules are all in done, in the order of uses\n")
 _C_BODY = ("    ready = []\n"
-           "    for branch, points in attach.items():\n"
-           "        if points[0] in done:\n"
-           "            ready.append(branch)\n"
+           "    for domain, modules in uses.items():\n"
+           "        missing = [m for m in modules if m not in done]\n"
+           "        if len(missing) == 0:\n"
+           "            ready.append(domain)\n"
            "    return ready\n")
 _C_START = _C_HEAD + "    ...\n"
 C_CODE = _C_HEAD + _C_BODY
 _C_WRONG = {
-    "any": C_CODE.replace("        if points[0] in done:\n            ready.append(branch)\n",
-                          "        for point in points:\n            if point in done:\n                ready.append(branch)\n                break\n"),
-    "all": C_CODE.replace("        if points[0] in done:\n",
-                          "        if len([p for p in points if p in done]) == len(points):\n"),
-    "last": C_CODE.replace("points[0]", "points[-1]"),
-    "points": C_CODE.replace("ready.append(branch)", "ready.append(points[0])"),
+    "any": C_CODE.replace("        missing = [m for m in modules if m not in done]\n        if len(missing) == 0:\n",
+                          "        found = [m for m in modules if m in done]\n        if len(found) > 0:\n"),
+    "nothing": C_CODE.replace("        missing = [m for m in modules if m not in done]\n        if len(missing) == 0:\n",
+                              "        missing = [m for m in modules if m not in done]\n        if len(modules) > 0 and len(missing) == 0:\n"),
+    "every": C_CODE.replace("        missing = [m for m in modules if m not in done]\n        if len(missing) == 0:\n            ready.append(domain)\n",
+                            "        for m in modules:\n            if m in done:\n                ready.append(domain)\n"),
+    "modules": C_CODE.replace("ready.append(domain)", "ready.append(modules)"),
 }
-_ATTACH = {"vision": ["cnn-convolution-idea", "cnn-pytorch"], "depth": ["nn-deep-net-project", "llm-modern-gpt"],
-           "robots": ["math-matrix-multiply", "rl-what-is-rl"]}
-_DONE = ["cnn-convolution-idea", "llm-modern-gpt", "math-matrix-multiply", "rl-what-is-rl"]
+_USES = {"vision": ["math", "cnn"], "build": [], "speech": ["math", "cnn", "attention"]}
+_DONE = ["cnn", "math"]
 _DOTS = Mistake("dots-left", matches=lambda got, text: any(line.strip() == "..." for line in text.splitlines()),
                 en="There is still a `...` in your code. Replace it with your own code.",
                 nl="Er staat nog een `...` in je code. Vervang die door je eigen code.")
@@ -227,67 +226,80 @@ EXERCISES = {
                         "nl": "Alle {n} staan in hun groep. Twee ervan veranderen twee dingen tegelijk: splits elk in twee vragen, zodat wat je vindt één oorzaak heeft."},
         },
     ),
-    "can-begin": FunctionBox(
-        name="can-begin",
+    "ready": FunctionBox(
+        name="ready",
         picture=yours.steps(call=0),
-        function="can_begin",
+        function="ready",
         start=_C_START,
         solution=C_CODE,
-        visible=[(_ATTACH, _DONE)],
-        hidden=[({}, ["cnn-pytorch"]),
-                ({"vision": ["cnn-convolution-idea", "cnn-pytorch"]}, []),
-                ({"people": ["start-using-ai-tools", "rai-bias-in-data"], "search": ["py-recursion", "prob-expectation"],
-                  "speech": ["torch-pretrained", "cnn-pytorch"]},
-                 ["py-recursion", "prob-expectation", "torch-pretrained", "cnn-pytorch", "start-using-ai-tools"]),
-                ({"one": ["rl-what-is-rl"]}, ["rl-what-is-rl"])],
+        visible=[(_USES, _DONE)],
+        hidden=[({}, ["math"]),
+                ({"vision": ["math", "cnn"]}, []),
+                ({"build": [], "people": []}, []),
+                ({"robots": ["signals", "math"], "build": [], "text": ["attention"], "speech": ["signals", "cnn"]},
+                 ["attention", "math", "signals"]),
+                ({"one": ["math"]}, ["math"])],
         python_values=True,
         first=[_DOTS],
         mistakes=[
+            Mistake("first", error=lambda e: isinstance(e, IndexError),
+                    en="With `{call}`, your function stops: a domain that borrows nothing has an empty list, and an empty list has no first item. Look at every module of a domain, not only the first.",
+                    nl="Met `{call}` stopt je functie: een domein dat niets leent, heeft een lege lijst, en een lege lijst heeft geen eerste onderdeel. Kijk naar elke module van een domein, niet alleen naar de eerste."),
             Mistake("any", wrong=_C_WRONG["any"],
-                    en="`{call}` gives `{got}`, and it should give `{want}`: you take a branch when any of its attach points is done. A branch begins after its first one; the later ones are for its later lessons. Look only at `points[0]`.",
-                    nl="`{call}` geeft `{got}`, en dat moet `{want}` zijn: je neemt een tak als een van zijn aanhaakpunten af is. Een tak begint na zijn eerste; de latere zijn voor zijn latere lessen. Kijk alleen naar `points[0]`."),
-            Mistake("all", wrong=_C_WRONG["all"],
-                    en="`{call}` gives `{got}`, and it should give `{want}`: you wait until every attach point of a branch is done. A branch can begin after its first one; look only at `points[0]`.",
-                    nl="`{call}` geeft `{got}`, en dat moet `{want}` zijn: je wacht tot elk aanhaakpunt van een tak af is. Een tak kan beginnen na zijn eerste; kijk alleen naar `points[0]`."),
-            Mistake("last", wrong=_C_WRONG["last"],
-                    en="`{call}` gives `{got}`, and it should give `{want}`: you look at the last attach point of each branch. The points are in route order, so the first, where the branch begins, is `points[0]`.",
-                    nl="`{call}` geeft `{got}`, en dat moet `{want}` zijn: je kijkt naar het laatste aanhaakpunt van elke tak. De punten staan in de volgorde van de route, dus het eerste, waar de tak begint, is `points[0]`."),
-            Mistake("points", wrong=_C_WRONG["points"],
-                    en="`{call}` gives `{got}`, and it should give `{want}`: those are lessons, not branches. Append the name of the branch, the key of `attach`.",
-                    nl="`{call}` geeft `{got}`, en dat moet `{want}` zijn: dat zijn lessen, geen takken. Voeg de naam van de tak toe, de sleutel van `attach`."),
+                    en="`{call}` gives `{got}`, and it should give `{want}`: you take a domain when one of its modules is done. It is ready only when every module it borrows is done, and a domain that borrows nothing is ready right away.",
+                    nl="`{call}` geeft `{got}`, en dat moet `{want}` zijn: je neemt een domein als een van zijn modules af is. Het is pas klaar als elke module die het leent af is, en een domein dat niets leent, is meteen klaar."),
+            Mistake("nothing", wrong=_C_WRONG["nothing"],
+                    en="`{call}` gives `{got}`, and it should give `{want}`: a domain that borrows nothing is missing from your list. It needs no module you have not done, so it is ready.",
+                    nl="`{call}` geeft `{got}`, en dat moet `{want}` zijn: een domein dat niets leent, ontbreekt in je lijst. Het heeft geen module nodig die je nog niet af hebt, dus het is klaar."),
+            Mistake("every", wrong=_C_WRONG["every"],
+                    en="`{call}` gives `{got}`, and it should give `{want}`: you append a domain once for every module of it that is done. Look at all the modules of a domain first, and then append it once, if none is missing.",
+                    nl="`{call}` geeft `{got}`, en dat moet `{want}` zijn: je voegt een domein toe voor elke module ervan die af is. Kijk eerst naar alle modules van een domein, en voeg het dan één keer toe, als er geen ontbreekt."),
+            Mistake("modules", wrong=_C_WRONG["modules"],
+                    en="`{call}` gives `{got}`, and it should give `{want}`: those are lists of modules, not domains. Append the name of the domain, the key of `uses`.",
+                    nl="`{call}` geeft `{got}`, en dat moet `{want}` zijn: dat zijn lijsten met modules, geen domeinen. Voeg de naam van het domein toe, de sleutel van `uses`."),
         ],
         texts={
-            "empty": {"en": "Replace the `...`: go through `attach.items()`, and keep each branch whose first attach point is in `done`.",
-                      "nl": "Vervang de `...`: loop door `attach.items()`, en houd elke tak waarvan het eerste aanhaakpunt in `done` staat."},
-            "wrong": {"en": "`{call}` gives `{got}`, and it should give `{want}`. Does it give a list of branches, the keys of `attach`, each one whose first attach point is in `done`, in the order of `attach`?",
-                      "nl": "`{call}` geeft `{got}`, en dat moet `{want}` zijn. Geeft hij een lijst met takken, de sleutels van `attach`, elk waarvan het eerste aanhaakpunt in `done` staat, in de volgorde van `attach`?"},
-            "almost": {"en": "Your `can_begin` is right for the lesson's example. But `{call}` gives `{got}`, and it should give `{want}`. Does it work without branches, without lessons done, for a branch with one attach point, and when `done` has the lessons in another order than `attach` has the branches?",
-                       "nl": "Je `can_begin` klopt voor het voorbeeld van de les. Maar `{call}` geeft `{got}`, en dat moet `{want}` zijn. Werkt hij zonder takken, zonder afgeronde lessen, voor een tak met één aanhaakpunt, en als `done` de lessen in een andere volgorde heeft dan `attach` de takken?"},
-            "correct": {"en": "Your `can_begin` finds the branches you can begin. Below, it runs on the route data of the course and on your own progress.",
-                        "nl": "Je `can_begin` vindt de takken waaraan je kunt beginnen. Hieronder draait hij op de routedata van de course en op je eigen voortgang."},
+            "empty": {"en": "Replace the `...`: go through `uses.items()`, and keep each domain none of whose modules is missing from `done`.",
+                      "nl": "Vervang de `...`: loop door `uses.items()`, en houd elk domein waarvan geen enkele module in `done` ontbreekt."},
+            "wrong": {"en": "`{call}` gives `{got}`, and it should give `{want}`. Does it give a list of domains, the keys of `uses`, each one whose modules are all in `done`, in the order of `uses`?",
+                      "nl": "`{call}` geeft `{got}`, en dat moet `{want}` zijn. Geeft hij een lijst met domeinen, de sleutels van `uses`, elk waarvan alle modules in `done` staan, in de volgorde van `uses`?"},
+            "almost": {"en": "Your `ready` is right for the lesson's example. But `{call}` gives `{got}`, and it should give `{want}`. Does it work without domains, with nothing done, for domains that borrow nothing, and when `done` has the modules in another order than `uses`?",
+                       "nl": "Je `ready` klopt voor het voorbeeld van de les. Maar `{call}` geeft `{got}`, en dat moet `{want}` zijn. Werkt hij zonder domeinen, als er niets af is, voor domeinen die niets lenen, en als `done` de modules in een andere volgorde heeft dan `uses`?"},
+            "correct": {"en": "Your `ready` finds the domains you are ready for. Below, it runs on the route data of the course and on your own progress.",
+                        "nl": "Je `ready` vindt de domeinen waar je klaar voor bent. Hieronder draait hij op de routedata van de course en op je eigen voortgang."},
         },
     ),
 }
 
 
-def my_branches(text: str) -> list | None:
-    """The learner's can_begin on the attach points of the route data and the lessons they have done; None when it does
-    not run."""
-    fn = EXERCISES["can-begin"]._fn(text or "")
+def my_ready(text: str) -> list | None:
+    """The learner's ready on what the other domains borrow up to intermediate and the shared modules they have done;
+    None when it does not run."""
+    fn = EXERCISES["ready"]._fn(text or "")
     if fn is None:
         return None
-    done = done_lessons()
     try:
-        return list(fn({k: list(v) for k, v in ATTACH.items()}, [s["id"] for s in course.main_route() if s["id"] in done]))
+        return list(fn({d: up_to_intermediate(d) for d in OTHERS}, done_modules(done_lessons())))
     except Exception:
         return None
 
 
+def missing(domain_id: str, done: set) -> list[tuple[str, int, int, str]]:
+    """The shared modules up to intermediate that a domain still needs: (module, lessons done, lessons, the first lesson
+    not done yet)."""
+    out = []
+    for m in up_to_intermediate(domain_id):
+        lessons = module_lessons(m)
+        todo = [lid for lid in lessons if lid not in done]
+        if todo:
+            out.append((m, len(lessons) - len(todo), len(lessons), todo[0]))
+    return out
+
+
 # The lesson is done when these are correct. "next-question" is the open question at the end.
-REQUIRED = ["kinds", "can-begin", "next-question"]
+REQUIRED = ["kinds", "ready", "next-question"]
 
 # What the tests feed each check, and what it must say: (exercise, what the learner gave, state, known mistake).
-_C_ANY = _C_WRONG["any"]
 CASES = [
     ("kinds", {}, "empty", None),
     ("kinds", _SOLUTION, "correct", None),
@@ -296,14 +308,18 @@ CASES = [
     ("kinds", {**_SOLUTION, "wide-mnist": "data"}, "wrong", "wrong:wide-mnist"),
     ("kinds", {**_SOLUTION, "hidden-only": "two", "noinput-noise": "ablation"}, "wrong", "wrong:noinput-noise"),
     ("kinds", {**_SOLUTION, "hidden-only": "two"}, "wrong", "wrong:hidden-only"),
-    ("can-begin", _C_START, "empty", None),
-    ("can-begin", C_CODE, "correct", None),
-    ("can-begin", _C_ANY, "wrong", "any"),
-    ("can-begin", _C_WRONG["all"], "wrong", "all"),
-    ("can-begin", _C_WRONG["last"], "wrong", "last"),
-    ("can-begin", _C_WRONG["points"], "wrong", "points"),
-    ("can-begin", _C_HEAD + "    ready = []\n    ...\n    return ready\n", "wrong", "dots-left"),
-    ("can-begin", _C_HEAD + "    return [b for b, p in attach.items() if p[0] in done]\n", "correct", None),
-    ("can-begin", _C_HEAD + "    return [b for b, p in attach.items() if p and p[0] in set(done)]\n", "correct", None),
-    ("can-begin", _C_HEAD + "    return [b for d in done for b, p in attach.items() if p[0] == d]\n", "almost", None),
+    ("ready", _C_START, "empty", None),
+    ("ready", C_CODE, "correct", None),
+    ("ready", _C_WRONG["any"], "wrong", "any"),
+    ("ready", _C_WRONG["nothing"], "wrong", "nothing"),
+    ("ready", _C_WRONG["every"], "wrong", "every"),
+    ("ready", _C_WRONG["modules"], "wrong", "modules"),
+    ("ready", _C_HEAD + "    ready = []\n    for domain, modules in uses.items():\n        if modules[0] in done:\n"
+              "            ready.append(domain)\n    return ready\n", "error", "first"),
+    ("ready", _C_HEAD + "    ready = []\n    ...\n    return ready\n", "wrong", "dots-left"),
+    ("ready", _C_HEAD + "    return [d for d, ms in uses.items() if all(m in done for m in ms)]\n", "correct", None),
+    ("ready", _C_HEAD + "    ready = []\n    for domain, modules in uses.items():\n        ok = True\n        for m in modules:\n"
+              "            if m not in done:\n                ok = False\n        if ok:\n            ready.append(domain)\n"
+              "    return ready\n", "correct", None),
+    ("ready", _C_HEAD + "    return [d for d, ms in uses.items() if len(ms) <= len(done)]\n", "almost", None),
 ]

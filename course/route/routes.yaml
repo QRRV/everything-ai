@@ -1,27 +1,24 @@
-# Routes are ordered lists of lesson ids. A lesson belongs to one branch (tak) but can appear in many routes.
-# "extra: true" marks an optional (verdieping) step in this route; every other step is core (kern) for this route.
+# Routes are ordered lists of lesson ids. A lesson has one place in the course (its domein and module, see
+# domeinen.yaml) but can appear in many routes.
+# The first route is the kern: the start everyone takes before choosing a domain (besluit 1.18). Every later route is
+# the route of one domain and starts after the kern: the core steps of the kern count as done, and every other lesson
+# its steps need is a step of the route itself, borrowed from a shared module of the foundation or from another domain.
+# A domain without a route of its own yet has its first lessons in the route that uses them.
+# "extra: true" marks an optional (verdieping) step in this route; every other step is core for this route.
 # Format: FORMAT.md.
 
 routes:
-
-- id: hoofdroute
-  title: "From zero to your own LLM and a reproduced paper"
-  title_nl: "Van nul tot je eigen LLM en een nagebouwde paper"
-  short: "Your own LLM"
-  short_nl: "Je eigen LLM"
-  status: first-to-build
+- id: kern
+  title: "The core: what every domain builds on"
+  title_nl: "De kern: waar elk domein op voortbouwt"
+  short: "The core"
+  short_nl: "De kern"
   milestones:
     - after: res-research-cycle
-      en: "Basics done: you built your own autograd, trained a neural network on handwritten digits and wrote a language model that predicts letters."
-      nl: "Basis af: je hebt je eigen autograd gebouwd, een neural network op handgeschreven cijfers getraind en een language model gemaakt dat letters voorspelt."
-    - after: res-figures
-      en: "Intermediate done: you built a GPT from scratch, trained it on text with your own tokenizer, and ran your first ablation."
-      nl: "Gevorderd af: je hebt een GPT vanaf nul gebouwd, op tekst getraind met je eigen tokenizer, en je eerste ablation gedaan."
-    - after: res-whats-next
-      en: "Expert done: you pretrained and post-trained your own LLM and reproduced a paper on your own."
-      nl: "Expert af: je hebt je eigen LLM gepretraind, er post-training op gedaan en zelfstandig een paper nagebouwd."
+      en: "Core done: you built your own autograd, trained a neural network on handwritten digits and wrote a language model that predicts letters."
+      nl: "Kern af: je hebt je eigen autograd gebouwd, een neural network op handgeschreven cijfers getraind en een language model gemaakt dat letters voorspelt."
   steps:
-  # ---------- basis ----------
+  # ---------- basis: fundament/start ----------
   - start-how-this-course-works
   - start-ai-ml-genai
   - start-rules-vs-learning
@@ -29,6 +26,7 @@ routes:
   - start-using-ai-tools
   - {id: start-short-history, extra: true}
   - {id: start-your-own-assistant, extra: true}
+  # ---------- basis: fundament/python ----------
   - py-first-program
   - py-variables
   - py-names-in-cells
@@ -55,12 +53,14 @@ routes:
   - py-plotting
   - py-project-letter-counts
   - {id: py-terminal, extra: true}
+  # ---------- basis: fundament/numpy ----------
   - np-arrays
   - np-indexing
   - np-vectorization
   - np-axis
   - np-broadcasting
   - np-random
+  # ---------- basis: fundament/data ----------
   - data-images-as-arrays
   - data-text-as-numbers
   - data-pandas
@@ -71,6 +71,7 @@ routes:
   - data-missing-values
   - data-two-columns
   - data-provenance
+  # ---------- basis: fundament/eerste-model ----------
   - ml-vocabulary
   - ml-model-is-a-function
   - ml-residuals
@@ -90,6 +91,7 @@ routes:
   - ml-linear-regression-numpy
   - ml-feature-scaling
   - ml-sklearn
+  # ---------- basis: fundament/classificatie ----------
   - prob-basics
   - prob-conditional
   - prob-expectation
@@ -107,6 +109,7 @@ routes:
   - ml-softmax
   - ml-cross-entropy
   - ml-softmax-gradient
+  # ---------- basis: fundament/generalisatie ----------
   - ml-train-test-split
   - ml-overfitting
   - ml-hyperparameters
@@ -125,15 +128,18 @@ routes:
   - ml-workflow
   - ml-project-tabular
   - rai-bias-in-data
+  # ---------- basis: fundament/meer-modellen ----------
   - ml-decision-tree
   - ml-random-forest
   - ml-gradient-boosting
   - ml-data-leakage
   - ml-pipelines
   - ml-project-fair-comparison
+  # ---------- basis: fundament/zonder-labels ----------
   - ml-kmeans
   - ml-choosing-k
   - ml-pca
+  # ---------- basis: fundament/neurale-netwerken ----------
   - nn-neuron
   - nn-xor
   - nn-hidden-layer
@@ -144,6 +150,7 @@ routes:
   - nn-micrograd-backward
   - nn-micrograd-mlp
   - nn-micrograd-train
+  # ---------- basis: fundament/pytorch ----------
   - torch-tensors
   - torch-autograd
   - torch-nn-module
@@ -160,36 +167,60 @@ routes:
   - torch-pretrained
   - torch-frozen-features
   - torch-fine-tune
+  # ---------- basis: fundament/bouwstenen-idee ----------
   - ml-embeddings-idea
   - cnn-convolution-idea
   - rnn-memory-idea
   - attn-idea
+  # ---------- basis: fundament/agents ----------
   - rl-what-is-rl
   - search-bfs
   - search-astar
   - search-minimax
   - rl-value-iteration
   - rl-q-learning
+  # ---------- basis: fundament/taalmodellen ----------
   - lm-what-is-a-language-model
   - lm-tokens-outside
   - lm-bigram-counts
   - lm-bigram-matrix
   - lm-sampling
-  - lm-temperature
-  - {id: lm-top-k-top-p, extra: true}
   - lm-nll
   - lm-smoothing
-  - {id: lm-naive-bayes, extra: true}
   - lm-bigram-neural
-  - lm-base-vs-chat
-  - lm-hallucination
-  - {id: lm-model-families, extra: true}
-  - {id: lm-peek-real-llm, extra: true}
+  # ---------- basis: taal/tekst-verwerken ----------
+  - {id: lm-naive-bayes, extra: true}
+  # ---------- basis: fundament/onderzoek-basis ----------
   - res-what-is-a-paper
   - res-reading-claims
   - res-figure-and-table
   - res-research-cycle
-  # ---------- gevorderd ----------
+
+- id: llm
+  domein: llm
+  title: "Large language models: from using one to building your own"
+  title_nl: "Large language models: van er een gebruiken tot je eigen bouwen"
+  short: "LLMs"
+  short_nl: "LLM's"
+  milestones:
+    - after: lm-hallucination
+      en: "Basics done: you steered how bold a language model's text is, and you know how a chat model differs from a base model and why a model makes things up."
+      nl: "Basis af: je hebt gestuurd hoe gewaagd de tekst van een language model is, en je weet hoe een chatmodel verschilt van een base model en waarom een model dingen verzint."
+    - after: gpt-train-bpe
+      en: "Intermediate done: you built your own tokenizer and a GPT from scratch, and trained it on text with your own tokens."
+      nl: "Gevorderd af: je hebt je eigen tokenizer en een GPT vanaf nul gebouwd, en die op tekst getraind met je eigen tokens."
+    - after: llm-model-card
+      en: "Expert done: you modernized your GPT, pretrained it with your own data pipeline, post-trained it with SFT, LoRA and DPO, and evaluated it."
+      nl: "Expert af: je hebt je GPT gemoderniseerd, gepretraind met je eigen datapijplijn, er post-training op gedaan met SFT, LoRA en DPO, en hem geëvalueerd."
+  steps:
+  # ---------- basis: llm/gebruiken ----------
+  - lm-temperature
+  - {id: lm-top-k-top-p, extra: true}
+  - lm-base-vs-chat
+  - lm-hallucination
+  - {id: lm-model-families, extra: true}
+  - {id: lm-peek-real-llm, extra: true}
+  # ---------- gevorderd: fundament/wiskunde ----------
   - math-derivative-rules
   - math-partial-derivatives
   - math-matrix-calculus
@@ -200,6 +231,7 @@ routes:
   - stats-mle
   - num-floats-stability
   - stats-bootstrap
+  # ---------- gevorderd: fundament/trainen ----------
   - nn-gradient-check
   - nn-backprop-tensors
   - nn-vanishing-exploding
@@ -218,17 +250,12 @@ routes:
   - nn-trainer
   - nn-deep-net-project
   - {id: nn-tuning-playbook, extra: true}
-  - lm-mlp-context
-  - lm-perplexity
-  - cnn-conv-formal
-  - cnn-channels-pooling
-  - cnn-conv-numpy
-  - cnn-pytorch
-  - {id: cnn-lenet, extra: true}
-  - {id: cnn-vgg-blocks, extra: true}
-  - {id: cnn-resnet, extra: true}
+  # ---------- gevorderd: fundament/rnn ----------
   - {id: rnn-vanilla, extra: true}
   - {id: rnn-lstm, extra: true}
+  # ---------- gevorderd: fundament/attention ----------
+  - lm-mlp-context
+  - lm-perplexity
   - attn-scores
   - attn-qkv
   - attn-scale
@@ -236,10 +263,12 @@ routes:
   - attn-multi-head
   - attn-positions
   - attn-transformer-block
+  # ---------- gevorderd: llm/tokens ----------
   - tok-bpe
   - tok-byte-level
   - tok-pre-tokenization
   - tok-special-tokens
+  # ---------- gevorderd: llm/gpt ----------
   - gpt-assemble
   - gpt-count
   - gpt-train-chars
@@ -247,21 +276,17 @@ routes:
   - gpt-train-bpe
   - {id: lm-weight-tying, extra: true}
   - {id: gpt-attention-maps, extra: true}
-  - res-how-research-is-published
-  - res-find-papers
-  - res-paper-anatomy
-  - res-three-pass
+  # ---------- gevorderd: onderzoek/experimenten ----------
   - res-hypothesis-control
   - res-ablation
   - res-seeds-variance
-  - res-experiment-log
   - res-fair-baselines
-  - res-significance
-  - res-figures
-  # ---------- expert ----------
+  # ---------- expert: fundament/signalen-en-meetkunde ----------
   - math-complex-rotation
+  # ---------- expert: systemen/hardware ----------
   - sys-memory-roofline
   - sys-number-formats
+  # ---------- expert: systemen/snel-trainen ----------
   - sys-mixed-precision
   - sys-memory-accounting
   - sys-compute-6nd
@@ -270,43 +295,264 @@ routes:
   - {id: sys-flash-attention, extra: true}
   - {id: sys-torch-compile, extra: true}
   - {id: sys-gradient-checkpointing, extra: true}
+  # ---------- expert: llm/modern ----------
   - llm-rmsnorm
   - llm-swiglu
   - llm-rope
   - llm-gqa
   - llm-kv-cache
   - llm-modern-gpt
+  # ---------- expert: llm/pretrainen ----------
   - llm-pretraining-data
   - llm-quality-filter
   - llm-dedup
   - llm-decontamination
   - llm-data-pipeline
   - llm-open-recipes
+  # ---------- expert: llm/schalen ----------
   - llm-scaling-laws
   - llm-fit-scaling-law
   - llm-pretrain-capstone
   - {id: llm-overnight-gpt2, extra: true}
+  # ---------- expert: llm/evalueren ----------
   - llm-eval-base
   - {id: llm-eval-multiple-choice, extra: true}
+  # ---------- expert: llm/natrainen ----------
   - llm-chat-template
   - llm-sft
+  # ---------- expert: llm/aanpassen ----------
   - llm-lora
+  # ---------- expert: llm/natrainen ----------
   - llm-preference-pairs
   - llm-rlhf-idea
   - llm-dpo-loss
   - llm-dpo
   - {id: llm-rlvr, extra: true}
-  - llm-eval-chat
-  - llm-safety-eval
-  - llm-model-card
   - {id: llm-same-on-open-model, extra: true}
+  - {id: llm-open-recipe-full-run, extra: true}
+  # ---------- expert: llm/evalueren ----------
+  - llm-eval-chat
+  # ---------- expert: verantwoord/security ----------
+  - llm-safety-eval
+  # ---------- expert: systemen/productie ----------
+  - llm-model-card
+  # ---------- expert: llm/redeneren ----------
   - {id: llm-reasoning-idea, extra: true}
   - {id: llm-reasoning-from-scratch, extra: true}
-  - {id: llm-open-recipe-full-run, extra: true}
+  # ---------- expert: llm/genereren ----------
   - {id: llm-quantize, extra: true}
+
+- id: beeld
+  domein: beeld
+  title: "Computer vision: the first part"
+  title_nl: "Computer vision: het eerste deel"
+  short: "Computer vision"
+  short_nl: "Computer vision"
+  # The first part: docs/onderzoek/reports/Voorstel tak beeld.md: 21 basis lessons, then 26 gevorderd lessons with the
+  # lessons of the foundation's shared modules they build on, and LeNet, VGG blocks and ResNet.
+  milestones:
+    - after: cv-pretrained-detector
+      en: "Basics done: you processed images with your own code, classified and searched photos with pretrained models, and found objects with a detector whose boxes you can score."
+      nl: "Basis af: je hebt beelden bewerkt met je eigen code, foto's geclassificeerd en doorzocht met pretrained modellen, en voorwerpen gevonden met een detector waarvan je de boxes kunt beoordelen."
+    - after: cv-project-detector-or-unet
+      en: "Intermediate done: you trained CNNs on color photos, met the CNN families from AlexNet to EfficientNet, showed where a CNN looks, built a Vision Transformer, and trained your own detector or U-Net."
+      nl: "Gevorderd af: je hebt CNN's op kleurenfoto's getraind, de CNN-families van AlexNet tot EfficientNet leren kennen, laten zien waar een CNN naar kijkt, een Vision Transformer gebouwd en je eigen detector of U-Net getraind."
+  steps:
+  # ---------- basis: beeld/beelden-bewerken ----------
+  - cv-image-files
+  - cv-color-spaces
+  - cv-histogram-equalization
+  - cv-otsu-threshold
+  - cv-denoise-filters
+  - cv-sobel-edges
+  - cv-canny
+  - cv-morphology
+  - cv-connected-components
+  - cv-resize-interpolation
+  - cv-alpha-compositing
+  # ---------- basis: beeld/classificatie ----------
+  - cv-prepare-photo
+  - cv-try-classifier
+  - cv-pretrained-features
+  - cv-image-search
+  - cv-fine-tune-photos
+  # ---------- basis: beeld/detectie ----------
+  - cv-annotations
+  - cv-iou
+  - cv-nms
+  - cv-map
+  - cv-pretrained-detector
+  # ---------- gevorderd: fundament/wiskunde ----------
+  - math-derivative-rules
+  - math-partial-derivatives
+  - math-matrix-calculus
+  - prob-distributions
+  - num-floats-stability
+  # ---------- gevorderd: fundament/trainen ----------
+  - nn-gradient-check
+  - nn-backprop-tensors
+  - nn-vanishing-exploding
+  - nn-initialization
+  - nn-activation-stats
+  - nn-batchnorm
+  - nn-residual
+  - nn-layernorm
+  - opt-momentum
+  - opt-adam
+  - opt-adamw
+  - opt-lr-schedules
+  - opt-gradient-clipping
+  - nn-dropout
+  - nn-embedding-layer
+  - nn-trainer
+  - nn-deep-net-project
+  # ---------- gevorderd: fundament/cnn ----------
+  - cnn-conv-formal
+  - cnn-channels-pooling
+  - cnn-conv-numpy
+  - cnn-pytorch
+  # ---------- gevorderd: beeld/cnn-families ----------
+  - cnn-lenet
+  - cnn-vgg-blocks
+  - cnn-resnet
+  - cv-color-cnn
+  - cv-augment-photos
+  - cv-inside-cnn
+  - cv-alexnet
+  - cv-1x1-convolution
+  - cv-inception
+  - cv-resnext
+  - cv-densenet
+  - cv-mobilenet
+  - cv-efficientnet
+  # ---------- gevorderd: beeld/uitleggen ----------
+  - cv-saliency
+  - cv-grad-cam
+  # ---------- gevorderd: beeld/detectie ----------
+  - cv-anchors
+  - cv-one-stage-detector
+  - cv-rcnn
+  - cv-fpn
+  - cv-focal-loss
+  # ---------- gevorderd: beeld/segmentatie ----------
+  - cv-fcn
+  - cv-unet
+  - cv-deeplab
+  - cv-mask-rcnn
+  - cv-sam
+  # ---------- gevorderd: fundament/attention ----------
+  - lm-mlp-context
+  - attn-scores
+  - attn-qkv
+  - attn-scale
+  - attn-causal-mask
+  - attn-multi-head
+  - attn-positions
+  - attn-transformer-block
+  # ---------- gevorderd: beeld/vit ----------
+  - cv-vit
+  - cv-vit-attention
+  # ---------- gevorderd: beeld/eindproject ----------
+  - cv-project-resnet-grad-cam
+  - cv-project-detector-or-unet
+
+- id: onderzoek
+  domein: onderzoek
+  title: "Research: from reading a paper to reproducing one"
+  title_nl: "Onderzoek: van een paper lezen tot er een nabouwen"
+  short: "Research"
+  short_nl: "Onderzoek"
+  # The basis of research is in the kern (onderzoek-basis); this route starts at gevorderd. Until advice 5 of
+  # besluit 1.18 is carried out, its experiments and the guided reproduction still build on the GPT of the domain llm.
+  milestones:
+    - after: res-figures
+      en: "Intermediate done: you can find and read a paper, and run experiments that hold up: one change at a time, ablations, seeds, fair baselines and figures that show something."
+      nl: "Gevorderd af: je kunt een paper vinden en lezen, en experimenten doen die standhouden: één ding tegelijk veranderen, ablations, seeds, eerlijke baselines en figuren die iets laten zien."
+    - after: res-whats-next
+      en: "Expert done: you reproduced a paper with guidance, then one of your own choice, and wrote it up so others can repeat it."
+      nl: "Expert af: je hebt een paper begeleid nagebouwd, daarna een van je eigen keuze, en het zo opgeschreven dat anderen het kunnen herhalen."
+  steps:
+  # ---------- basis: llm/gebruiken ----------
+  - lm-temperature
+  # ---------- gevorderd: fundament/wiskunde ----------
+  - math-derivative-rules
+  - math-partial-derivatives
+  - math-matrix-calculus
+  - prob-distributions
+  - num-floats-stability
+  - stats-bootstrap
+  # ---------- gevorderd: fundament/trainen ----------
+  - nn-gradient-check
+  - nn-backprop-tensors
+  - nn-vanishing-exploding
+  - nn-initialization
+  - nn-activation-stats
+  - nn-batchnorm
+  - nn-residual
+  - nn-layernorm
+  - opt-momentum
+  - opt-adam
+  - opt-adamw
+  - opt-lr-schedules
+  - opt-gradient-clipping
+  - nn-dropout
+  - nn-embedding-layer
+  - nn-trainer
+  - nn-deep-net-project
+  # ---------- gevorderd: fundament/attention ----------
+  - lm-mlp-context
+  - attn-scores
+  - attn-qkv
+  - attn-scale
+  - attn-causal-mask
+  - attn-multi-head
+  - attn-positions
+  - attn-transformer-block
+  # ---------- gevorderd: llm/tokens ----------
+  - tok-bpe
+  - tok-byte-level
+  - tok-pre-tokenization
+  - tok-special-tokens
+  # ---------- gevorderd: llm/gpt ----------
+  - gpt-assemble
+  - gpt-count
+  - gpt-train-chars
+  - gpt-generate
+  - gpt-train-bpe
+  # ---------- gevorderd: onderzoek/lezen ----------
+  - res-how-research-is-published
+  - res-find-papers
+  - res-paper-anatomy
+  - res-three-pass
+  # ---------- gevorderd: onderzoek/experimenten ----------
+  - res-hypothesis-control
+  - res-ablation
+  - res-seeds-variance
+  - res-experiment-log
+  - res-fair-baselines
+  - res-significance
+  - res-figures
+  # ---------- expert: fundament/signalen-en-meetkunde ----------
+  - math-complex-rotation
+  # ---------- expert: systemen/hardware ----------
+  - sys-memory-roofline
+  - sys-number-formats
+  # ---------- expert: systemen/snel-trainen ----------
+  - sys-mixed-precision
+  - sys-memory-accounting
+  - sys-compute-6nd
+  # ---------- expert: llm/modern ----------
+  - llm-rmsnorm
+  - llm-swiglu
+  - llm-rope
+  - llm-gqa
+  - llm-kv-cache
+  - llm-modern-gpt
+  # ---------- expert: onderzoek/lezen ----------
   - res-formula-to-code
   - {id: res-derivations, extra: true}
   - res-critical-reading
+  # ---------- expert: onderzoek/nabouwen ----------
   - res-choose-paper
   - repro-guided-claim
   - repro-guided-build
@@ -326,124 +572,7 @@ routes:
   - repro-own-report
   - res-whats-next
 
-- id: beeld
-  tak: beeld
-  title: "Computer vision: the first part"
-  title_nl: "Computer vision: het eerste deel"
-  short: "Computer vision"
-  short_nl: "Computer vision"
-  status: building
-  after: res-research-cycle
-  # The main route up to and including "after" counts as done; every lesson the steps need from later in the
-  # main route is a step of this route itself. The first part: docs/onderzoek/reports/Voorstel tak beeld.md: 21 basis
-  # lessons, then 26 gevorderd lessons with the 37 lessons of the main route they build on (cnn-lenet, cnn-vgg-blocks
-  # and cnn-resnet are core here, extra in the main route).
-  milestones:
-    - after: cv-pretrained-detector
-      en: "Basics done: you processed images with your own code, classified and searched photos with pretrained models, and found objects with a detector whose boxes you can score."
-      nl: "Basis af: je hebt beelden bewerkt met je eigen code, foto's geclassificeerd en doorzocht met pretrained modellen, en voorwerpen gevonden met een detector waarvan je de boxes kunt beoordelen."
-    - after: cv-project-detector-or-unet
-      en: "Intermediate done: you trained CNNs on color photos, met the CNN families from AlexNet to EfficientNet, showed where a CNN looks, built a Vision Transformer, and trained your own detector or U-Net."
-      nl: "Gevorderd af: je hebt CNN's op kleurenfoto's getraind, de CNN-families van AlexNet tot EfficientNet leren kennen, laten zien waar een CNN naar kijkt, een Vision Transformer gebouwd en je eigen detector of U-Net getraind."
-  steps:
-  # ---------- basis: working with images ----------
-  - cv-image-files
-  - cv-color-spaces
-  - cv-histogram-equalization
-  - cv-otsu-threshold
-  - cv-denoise-filters
-  - cv-sobel-edges
-  - cv-canny
-  - cv-morphology
-  - cv-connected-components
-  - cv-resize-interpolation
-  - cv-alpha-compositing
-  # ---------- basis: using a pretrained model ----------
-  - cv-prepare-photo
-  - cv-try-classifier
-  - cv-pretrained-features
-  - cv-image-search
-  - cv-fine-tune-photos
-  # ---------- basis: boxes and masks ----------
-  - cv-annotations
-  - cv-iou
-  - cv-nms
-  - cv-map
-  - cv-pretrained-detector
-  # ---------- gevorderd: from the shared trunk, the maths, training and CNN building blocks the CNN families need ----------
-  - math-derivative-rules
-  - math-partial-derivatives
-  - math-matrix-calculus
-  - prob-distributions
-  - num-floats-stability
-  - nn-gradient-check
-  - nn-backprop-tensors
-  - nn-vanishing-exploding
-  - nn-initialization
-  - nn-activation-stats
-  - nn-batchnorm
-  - nn-residual
-  - nn-layernorm
-  - opt-momentum
-  - opt-adam
-  - opt-adamw
-  - opt-lr-schedules
-  - opt-gradient-clipping
-  - nn-dropout
-  - nn-embedding-layer
-  - nn-trainer
-  - nn-deep-net-project
-  - cnn-conv-formal
-  - cnn-channels-pooling
-  - cnn-conv-numpy
-  - cnn-pytorch
-  - cnn-lenet
-  - cnn-vgg-blocks
-  - cnn-resnet
-  # ---------- gevorderd: color photos in a CNN ----------
-  - cv-color-cnn
-  - cv-augment-photos
-  - cv-inside-cnn
-  # ---------- gevorderd: CNN families ----------
-  - cv-alexnet
-  - cv-1x1-convolution
-  - cv-inception
-  - cv-resnext
-  - cv-densenet
-  - cv-mobilenet
-  - cv-efficientnet
-  # ---------- gevorderd: where a CNN looks ----------
-  - cv-saliency
-  - cv-grad-cam
-  # ---------- gevorderd: object detection ----------
-  - cv-anchors
-  - cv-one-stage-detector
-  - cv-rcnn
-  - cv-fpn
-  - cv-focal-loss
-  # ---------- gevorderd: segmentation ----------
-  - cv-fcn
-  - cv-unet
-  - cv-deeplab
-  - cv-mask-rcnn
-  - cv-sam
-  # ---------- gevorderd: from the shared trunk, attention and the transformer block ----------
-  - lm-mlp-context
-  - attn-scores
-  - attn-qkv
-  - attn-scale
-  - attn-causal-mask
-  - attn-multi-head
-  - attn-positions
-  - attn-transformer-block
-  # ---------- gevorderd: Vision Transformers ----------
-  - cv-vit
-  - cv-vit-attention
-  # ---------- gevorderd: final project ----------
-  - cv-project-resnet-grad-cam
-  - cv-project-detector-or-unet
-
-# Goal routes are computed, not written: the smallest set of lessons a goal needs, in route order.
+# Goal routes are computed, not written: the smallest set of lessons a goal needs, in the order of the routes.
 # The checker prints these as examples; the app can compute any of them on demand.
 goals:
 - {id: doel-attention, goal: attn-multi-head, title_nl: "Ik wil attention snappen"}

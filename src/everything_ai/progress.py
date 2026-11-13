@@ -15,7 +15,7 @@ from pathlib import Path
 
 from everything_ai import paths
 
-DEFAULT_SETTINGS = {"lang": "en", "theme": "system", "extras": False, "route": "hoofdroute"}
+DEFAULT_SETTINGS = {"lang": "en", "theme": "system", "extras": False, "route": "kern"}
 
 
 def _read(path: Path, default):
@@ -37,7 +37,10 @@ def _write(path: Path, data) -> None:
 # --- settings ----------------------------------------------------------------------
 
 def settings() -> dict:
-    return {**DEFAULT_SETTINGS, **_read(paths.SETTINGS, {})}
+    s = {**DEFAULT_SETTINGS, **_read(paths.SETTINGS, {})}
+    if s.get("route") == "hoofdroute":    # the first route before besluit 1.18; the kern is its start
+        s["route"] = "kern"
+    return s
 
 
 def save_settings(**changes) -> dict:

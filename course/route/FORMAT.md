@@ -2,23 +2,22 @@
 
 This folder describes the course as data: which lessons exist, in which order a learner meets them, and where every topic of the map lives. Nothing here is a lesson yet; it is the plan the lessons will be built from. `tools/check_route.py` checks all of it and writes `rapport/`.
 
-There are three layers:
+There are four layers:
 
-1. **The map** (`onderzoek/kaart/kaart_v2.yaml`, owned by the map thread) says *what exists*: 27 domains, 623 topics, about 3,400 subtopics, each with a level N1 to N5 and prerequisite topics.
-2. **Lessons** (`lessen/*.yaml`) say *how it is taught*: one idea per lesson, with what it needs and what it introduces.
-3. **Routes** (`routes.yaml`) say *in which order*: ordered lists of lesson ids. A lesson can be in many routes.
-
-Branches (`takken.yaml`) tie the map to the grid of the course: every map topic has exactly one home branch.
+1. **The map** (`onderzoek/kaart/kaart_v2.yaml`, owned by the map thread) says *what exists*: 27 map domains, 623 topics, 3,848 subtopics, each with a level N1 to N5 and prerequisite topics.
+2. **The structure** (`domeinen.yaml`, besluit 1.18) says *how the course is divided*: the foundation (fundament), whose kern modules everyone takes first and whose shared modules a domain pulls in when it needs them, and 18 equal domains, each with modules, a running project and a final project. Every map subtopic belongs to exactly one module.
+3. **Lessons** (`lessen/*.yaml`) say *how it is taught*: one idea per lesson, with its place in the structure, what it needs and what it introduces.
+4. **Routes** (`routes.yaml`) say *in which order*: the kern, then a route per domain. A lesson can be in many routes.
 
 ## Lesson files: `lessen/*.yaml`
 
 ```yaml
-tak: stam          # default branch for the lessons in this file (a lesson may override it)
 map: v2.2          # map version that the "covers" references point into
 lessons:
 - id: py-first-program
   title: "Your first program"
   level: basis
+  domein: fundament
   module: python
   idea: "A program is a list of instructions that runs from top to bottom; print shows a result."
   covers: [python#0]
@@ -32,10 +31,10 @@ lessons:
 | field | required | meaning |
 |---|---|---|
 | `id` | yes | Stable id in English kebab-case, never a number. Never renamed once lessons exist; the app stores progress by it. Prefix shows the subject (`py-`, `np-`, `ml-`, `nn-`, `torch-`, `cnn-`, `attn-`, `lm-`, `tok-`, `gpt-`, `llm-`, `sys-`, `res-`, `repro-`, `math-`, `prob-`, `stats-`, `info-`, `opt-`, `data-`, `rai-`, `rl-`, `search-`, `start-`, `cv-`). |
-| `tak` | yes (or from the file) | Home branch, one of the ids in `takken.yaml`. |
 | `title` | yes | English title. The Dutch title is written with the lesson. |
 | `level` | yes | `basis`, `gevorderd` or `expert`. |
-| `module` | yes | Group of lessons inside a branch and level, used by the app to show chapters. |
+| `domein` | yes | The part of the course the lesson belongs to: `fundament` or one of the domain ids in `domeinen.yaml`. |
+| `module` | yes | A module of that part in `domeinen.yaml`. The app shows consecutive lessons of one module as a chapter, named in `../display.yaml` (key `domein/module`). |
 | `idea` | yes | The one idea of the lesson, in one or two sentences. If it needs "and also", it is two lessons. |
 | `covers` | yes | Map subtopics this lesson teaches, as `topic-id#index` into the map version in `map:`. `[]` means no subtopic fits, on purpose. |
 | `requires` | yes | Lesson ids that must come before. Only the first lesson has none. |
@@ -45,7 +44,7 @@ lessons:
 | `warns` | no | Words that mean something else in daily life or in another field (`token`, `kernel`, `bias`, `class`); the lesson says so. The name check treats them as homonyms. |
 | `ladder` | no | Code rungs used: `python` (by hand), `numpy`, `torch`. |
 | `kind` | no | `project` for a step of a running project; `refresher` for a short repair lesson on something taught earlier; `review` for mixed practice of earlier lessons, including a standalone mini-project. Refresher and review lessons introduce nothing new. |
-| `project` | with kind project | Running project id from `takken.yaml` (`nn`, `cnn`, `llm`, `repro`, ...). |
+| `project` | with kind project | Running project id from `domeinen.yaml` (`nn`, `cnn`, `llm`, `repro`, ...). A project step can sit in another part than the project's owner. |
 | `data` | no | Dataset, model or code ids from `bronnen.yaml`. `[]` says on purpose that the lesson uses no external data. |
 | `reference_data` | see rule 15 | The data the course trains its own reference checkpoint for this step on, when that differs from `data`. `[]` means the course hands out no checkpoint for this step. |
 | `minutes` | no | Study time in minutes, without waiting for training. Filled in when the lesson is built; `didactiek/generieke-principes.md` aims at 10 to 15. |
@@ -60,13 +59,13 @@ Inventory item prefixes: `c:` concept, `s:` symbol or notation, `py:` Python or 
 
 ## Routes: `routes.yaml`
 
-A route has an `id`, titles, `milestones` (shown when a learner passes a step) and `steps`. The first route is the main route. A later route belongs to a branch (`tak`) and starts `after` a step of the main route, such as the end of the basics: the core steps of the main route up to and including that step count as done, and every other lesson its steps need is a step of the route itself (rule 9). A step is a lesson id, or `{id: ..., extra: true}` for an optional deepening step (verdieping) in that route. Being extra is a property of the step in a route, not of the lesson: the same lesson can be core in one route and extra in another.
+A route has an `id`, titles, `milestones` (shown on the start page under the level they end) and `steps`. The first route is the kern (`id: kern`): the start everyone takes before choosing a domain. Every later route is the route of one domain (`domein`) and starts after the kern: the core steps of the kern count as done, and every other lesson its steps need is a step of the route itself (rule 9), borrowed from a shared module of the foundation or from another domain. A domain has at most one route; a domain without one yet has its first lessons in the route that uses them. A step is a lesson id, or `{id: ..., extra: true}` for an optional deepening step (verdieping) in that route. Being extra is a property of the step in a route, not of the lesson: the same lesson can be core in one route and extra in another.
 
-`goals` lists example goal routes. They are computed, not written: the lessons a goal lesson needs, in the order of the main route.
+The order of the whole course is the kern, then the other routes in the order of the file, each lesson at its first place. `goals` lists example goal routes. They are computed, not written: the lessons a goal lesson needs, in that order.
 
-## Branches: `takken.yaml`
+## The structure: `domeinen.yaml`
 
-Each branch has an id, titles, the map domains it owns by default, a `status` (`main-route` or `later`), a proposed `build_order`, its running `project` (an id with an English `title` and a Dutch `title_nl`) and its final project. A later branch has `attach`: its attach points, the lessons of the main route it connects to, in route order. The branch can begin after the first one; its later lessons build on the others too. Like `build_order`, a proposal. `overrides` moves single topics to another branch than their domain's default. A main-route branch has `rest_after`: the branch after which the rest of it is built (what the main route does not cover and no earlier branch has built ahead).
+The decided structure of the course (besluit 1.18), in Dutch; the comments at the top of the file describe every field. `fundament` has modules; those with `kern: true` form the kern, the others are shared modules. Every domain has a group on the start page (`groepen`), modules, a running `project` (an `id` that project lessons name, a `titel`, what it yields per level, and `eindles` once the lesson of the final project exists), a final project, papers, the kern lessons that are a taster of it (`proef`) and the shared modules it pulls in per level (`gebruikt`). Each module claims map topics, levels of topics or single subtopics (`onderwerpen`). The structure check (`tools/check_structuur.py`, run by `tools/check_route.py`) holds it to the map and the lessons.
 
 ## Papers and sources
 
@@ -84,12 +83,12 @@ Errors (the route is not valid until these are gone):
 6. Every `covers` reference exists in its map version.
 7. A lesson on the `numpy` or `torch` rung builds on the lesson that introduces that rung.
 8. Hardware fits the level: basis lessons run on a CPU, gevorderd lessons need at most an 8 GB GPU.
-9. Every step of a route exists, appears once, comes after everything it requires, and the route contains everything its steps require; for a route with `after`, the core steps of the main route up to that step count as contained.
+9. Every step of a route exists, appears once, comes after everything it requires, and the route contains everything its steps require; for the route of a domain, the core steps of the kern count as contained.
 10. A core step of a route never requires an extra step of that route.
-11. The main route never goes down a level.
-12. Every map topic has a home branch; overrides name existing topics and branches.
-13. Every `data` and `reference_data` id is in `bronnen.yaml`; papers and branch finals point to existing lessons; goals are in the main route; every project has a `title` and a `title_nl`; every later branch has `attach` points, core steps of the main route in route order, and a main-route branch has none; every own-choice paper has `needs` and a compute estimate, and at least one runs on a CPU.
-14. `kind`, `project`, `minutes`, `compute_minutes`, `fallback`, `hard`, `goal` and `look_back` have valid values; `kind: project` has a `project` and the other way round; a core step of the main route computes at most 15 minutes; a core step of the main route that needs a GPU has a `fallback` (unless its time depends on the chosen paper); `look_back` points into the `requires` chain.
+11. No route goes down a level.
+12. Every lesson's `domein` is `fundament` or a domain of `domeinen.yaml`, and its `module` is a module of that part. The first route is the kern; every other route names its domain, and a domain has at most one route. Every lesson is in a route; every lesson of the kern is a step of the kern route, and every core step of the kern route is a lesson of the kern (a lesson the kern borrows is extra); every lesson of a domain with a route is a step of that route.
+13. Every `data` and `reference_data` id is in `bronnen.yaml`; papers point to existing lessons and name an existing `domein`; goals are in a route; every part has a project with an `id` and a `titel`, project ids are unique, and an `eindles` is an existing lesson of that part; every own-choice paper has `needs` and a compute estimate, and at least one runs on a CPU.
+14. `kind`, `project`, `minutes`, `compute_minutes`, `fallback`, `hard`, `goal` and `look_back` have valid values; `kind: project` has a `project` and the other way round; a core step of any route computes at most 15 minutes; a core step that needs a GPU has a `fallback` (unless its time depends on the chosen paper); `look_back` points into the `requires` chain.
 15. A project step that trains on data with `checkpoints: false` has `reference_data` with data the course may train its handed-out checkpoints on, or `[]`.
 
 Warnings:
@@ -99,16 +98,17 @@ Warnings:
 - a title, idea or goal that names an item introduced outside its `requires` chain (homonyms in `warns` and items in `mentions` are skipped; a longer known phrase such as "gradient descent" hides the shorter ones inside it);
 - a text that names PyTorch or NumPy code while `ladder` lacks that rung;
 - a text that names a dataset, pretrained model or corpus while the lesson has no `data` field;
-- a core step of the main route that needs a GPU but has no `compute_minutes`;
+- a core step that needs a GPU but has no `compute_minutes`;
 - a running project with only one step in a route, or a project step that stands alone (it builds on no earlier step of its project and no later step builds on it).
 
 The reports also list, for information: subtopics covered by more than one lesson, project steps that do not end up in the project's final step, and items that no later lesson names or uses yet.
 
 ## Reports
 
-- `rapport/controle.md`: errors, warnings, numbers per level, compute time and fallback per GPU step, running projects, code ladder, goal routes.
-- `rapport/takken-plan.md`: per branch its topics, size, attach points, where it can start, and the build phases after the main route (what each phase builds ahead from other branches).
-- `rapport/kerncijfers.md`: the numbers `Leerroute.md` cites. The checker fills them into `Leerroute.md` between `<!--n:key-->` and `<!--/n-->`, so the design doc never goes stale.
+- `rapport/controle.md`: errors, warnings, lessons per part, every route per level, compute time and fallback per GPU step, running projects, code ladder, goal routes.
+- From the structure check: `rapport/dekking.md` (where every map subtopic goes), `rapport/omvang.md` (size per part and the estimate of lessons still to build), `rapport/verbanden.md` (what the parts need from each other), `rapport/lessen-per-deel.md`, `rapport/dubbel.md` and `rapport/domeinen-detail.md`. The structure check's own rules are in its docstring.
+
+`Leerroute.md` is the design document of the first route, from before besluit 1.18; its numbers are no longer kept up to date.
 
 ## When the map changes
 

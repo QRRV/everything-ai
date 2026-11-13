@@ -226,7 +226,7 @@ class Lesson:
 
     def header(self) -> mo.Html:
         s = progress.settings()
-        numbers, total = course.numbering(extras=s["extras"], route_id=course.route_for(self.id))
+        numbers, total = course.numbering(extras=s["extras"], route_id=course.route_of(self.id, s.get("route")))
         level = course.level_name(self.route["level"], self.lang)
         place = []
         if self.id in numbers:
@@ -540,7 +540,8 @@ class Lesson:
     def _neighbours(self) -> tuple[str | None, str | None]:
         """The lessons before and after this one in the route the learner follows (with or without extra lessons)."""
         s = progress.settings()
-        steps = [st["id"] for st in course.route_steps(course.route_for(self.id)) if s["extras"] or not st["extra"]]
+        route = course.route_of(self.id, s.get("route"))
+        steps = [st["id"] for st in course.route_steps(route) if s["extras"] or not st["extra"]]
         if self.id not in steps:
             return None, None
         i = steps.index(self.id)

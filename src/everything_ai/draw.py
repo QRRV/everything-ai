@@ -98,48 +98,34 @@ def mistakes_per_rule(counts: dict[int, int], *, axis: str, value: str, best: st
     return _svg(W, H, title or value, "".join(parts))
 
 
-def route_grid(rows: list[str], cols: list[str], counts: dict[tuple[int, int], int], *, unit: tuple[str, str],
-               arrows: int = 0, title: str = "") -> mo.Html:
-    """A grid of the route: a row per level, a column per branch, and in each cell how many lessons
-    lie there. A fuller cell is a little darker. The first `arrows` columns get an arrow between them,
-    for the order in which the route goes through them; the columns after that stand apart, dashed."""
-    W, LW, CH, GAP, RG = 640, 104, 62, 22, 10
-    HEAD = 30 if title else 0        # the title, visible above the grid
-    TOP = HEAD + 34
-    cw = (W - LW - GAP * (len(cols) - 1)) / len(cols)
-    most = max(counts.values() or [1])
+def course_map(core: tuple[str, str], groups: list[tuple[str, list[tuple[str, str, bool]]]], *, title: str,
+               alt: str) -> mo.Html:
+    """The parts of the course as the start page shows them: the core on top, in a filled box, an arrow down, and
+    under it the domains in their groups, each in a box with its name and a line under it, such as how many lessons
+    it has. `core` is (name, line); each group is (name, [(domain, line, has lessons), ...]). A domain without lessons
+    yet has a dashed box. Ink only: nothing here is learned or counted wrong. HTML rather than SVG, so the long names
+    wrap and keep their size on a phone."""
+    def box(name: str, line: str, *, filled: bool = False, dashed: bool = False) -> str:
+        border = f"1px {'dashed' if dashed else 'solid'} var({'--ea-ink-3' if dashed else '--ea-ink-2'})"
+        return (f'<div style="border:{border};border-radius:6px;padding:0.4rem 0.55rem;'
+                f'background:{"var(--ea-inset)" if filled else "none"}">'
+                f'<div style="font-size:0.9rem;font-weight:600;color:var(--ea-ink);line-height:1.25">{html.escape(name)}</div>'
+                f'<div style="font-size:0.8rem;color:var(--ea-ink-2);line-height:1.3;margin-top:0.15rem">{html.escape(line)}</div>'
+                f'</div>')
 
-    def cx(j):
-        return LW + j * (cw + GAP)
-
-    parts = []
-    if title:
-        parts.append(f'<text x="0" y="16" style="font-size:15px;font-weight:600;fill:var(--ea-ink)">{html.escape(title)}</text>')
-    for j, name in enumerate(cols):
-        parts.append(f'<text x="{cx(j) + cw / 2:.1f}" y="{HEAD + 20}" style="font-size:14px;font-weight:650;fill:var(--ea-ink);'
-                     f'text-anchor:middle">{html.escape(name)}</text>')
-    for i, name in enumerate(rows):
-        y = TOP + i * (CH + RG)
-        parts.append(f'<text x="0" y="{y + CH / 2 + 5:.1f}" style="font-size:14px;font-weight:650;fill:var(--ea-ink)">'
-                     f'{html.escape(name)}</text>')
-        for j in range(len(cols)):
-            n = counts.get((i, j), 0)
-            side = j >= arrows > 0
-            fill = 0.03 + 0.17 * n / most
-            dash = "stroke-dasharray:4 3;" if side else ""
-            parts.append(f'<rect x="{cx(j):.1f}" y="{y}" width="{cw:.1f}" height="{CH}" rx="6" style="fill:var(--ea-ink);'
-                         f'fill-opacity:{fill:.3f};stroke:var(--ea-ink-3);stroke-width:1.2;{dash}"/>')
-            word = unit[0] if n == 1 else unit[1]
-            parts.append(f'<text x="{cx(j) + cw / 2:.1f}" y="{y + 30}" style="font-size:21px;font-weight:700;fill:var(--ea-ink);'
-                         f'text-anchor:middle">{n}</text>'
-                         f'<text x="{cx(j) + cw / 2:.1f}" y="{y + 49}" style="font-size:12.5px;fill:var(--ea-ink-2);'
-                         f'text-anchor:middle">{html.escape(word)}</text>')
-            if j + 1 < arrows:
-                ax, ay = cx(j) + cw + GAP / 2, y + CH / 2
-                parts.append(f'<path d="M{ax - 6:.1f} {ay} h11 M{ax + 1:.1f} {ay - 4} l4 4 l-4 4" '
-                             f'style="fill:none;stroke:var(--ea-ink-2);stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round"/>')
-    H = TOP + len(rows) * (CH + RG) - RG + 2
-    return _svg(W, H, title or ", ".join(rows), "".join(parts))
+    rows = []
+    for name, domains in groups:
+        cells = "".join(box(d, line, dashed=not ready) for d, line, ready in domains)
+        rows.append(f'<div style="margin-top:0.7rem"><div style="font-size:0.8rem;font-weight:650;color:var(--ea-ink-2);'
+                    f'margin:0 0 0.3rem">{html.escape(name)}</div><div style="display:grid;gap:0.4rem;'
+                    f'grid-template-columns:repeat(auto-fill,minmax(9.5rem,1fr))">{cells}</div></div>')
+    arrow = ('<svg viewBox="0 0 16 22" width="16" height="22" aria-hidden="true" style="display:block;margin:0.3rem auto 0">'
+             '<path d="M8 1 V20 M3 15 L8 20 L13 15" style="fill:none;stroke:var(--ea-ink-2);stroke-width:1.6;'
+             'stroke-linecap:round;stroke-linejoin:round"/></svg>')
+    return mo.Html(
+        f'<figure class="ea-figure" role="img" aria-label="{html.escape(alt)}" style="margin:0.25rem 0 0.75rem;max-width:40rem;'
+        f'{_FONT}"><figcaption style="font-size:0.95rem;font-weight:600;color:var(--ea-ink);margin:0 0 0.45rem">'
+        f'{html.escape(title)}</figcaption>{box(*core, filled=True)}{arrow}{"".join(rows)}</figure>')
 
 
 def maze_grids(panels: list[dict], *, alt: str, cell: int = 30) -> mo.Html:

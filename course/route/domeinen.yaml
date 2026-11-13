@@ -1,0 +1,1229 @@
+# Everything AI als fundament plus gelijkwaardige domeinen: de opzet van de course (besluit 1.18 in
+# docs/beslissingen/besluiten.md). Uitleg en onderbouwing: docs/onderzoek/reports/Voorstel structuur Everything AI.md
+# (voorstel van 6 november 2026, aangenomen op 13 november). tools/check_structuur.py controleert dit bestand tegen de
+# onderwerpenkaart (v2.3) en de lessen; tools/check_route.py draait die controle mee. Formaat: FORMAT.md.
+#
+# Opbouw
+#   fundament: wat meerdere domeinen nodig hebben. Modules met `kern: true` doet iedereen voordat die een domein kiest;
+#              de andere modules van het fundament zijn gedeelde modules, die een domein pas binnenhaalt als het ze nodig heeft.
+#   domeinen:  gelijkwaardige domeinen, elk met de niveaus basis, gevorderd en expert, een lopend project en een eindproject.
+#
+# Een les zegt zelf waar hij hoort, met `domein` (fundament of een domein hieronder) en `module` in lessen/*.yaml.
+#
+# Velden van een module
+#   onderwerpen: kaartonderwerpen. `onderwerp` betekent: alle niveaus van dat onderwerp die nog niet elders geclaimd zijn.
+#                `onderwerp@basis` (of @gevorderd, @expert, of meerdere met een plus: @gevorderd+expert) claimt alleen die niveaus.
+#                `onderwerp#3` (of #3+4) claimt losse subonderwerpen (hun nummer in de kaart, vanaf 0); dat gaat voor alles.
+#                Basis = N1 en N2, gevorderd = N3, expert = N4 en N5 (zoals in de kaart).
+#   nieuw:       nieuwe lessen die het voorstel noemt (werktitels); de rest volgt uit de subonderwerpen.
+#   tekst:       de lessen op hoofdlijnen.
+#   proef:       bij een nieuwe proefles in het fundament: het domein waar de les een voorproefje van is.
+#
+# Velden van een domein (naast titel, doel, eindproject, papers en modules)
+#   project:     het lopende project: `id` (wat een projectles in zijn veld `project` noemt), `titel`, wat het per niveau
+#                oplevert, en `eindles` zodra de les van het eindproject bestaat. Het fundament heeft ook een project.
+#   proef:       de lessen in de kern die al een voorproefje van dit domein zijn, of `nieuw`.
+#   gebruikt:    de gedeelde modules van het fundament die dit domein binnenhaalt, bij het niveau waarop het ze voor het eerst nodig heeft.
+#   begint:      `gevorderd` voor een domein waarvan de basis in de kern zit (onderzoek, deep learning in de diepte).
+#
+# Uitzonderingen, elk met de reden erbij
+#   verbanden_ok:  onderwerpen die twee of meer domeinen nodig hebben, maar toch in één domein blijven (een verband).
+#   fundament_ok:  plekken waar de kaart zegt dat het fundament iets uit een domein vraagt, en waarom dat niet zo is.
+#   les_ok:        lessen die alleen subonderwerpen van een ander deel dekken, en waarom ze toch hier staan.
+#
+# De namen die de app toont, in beide talen, staan in ../display.yaml.
+
+versie: 1
+kaart: v2.3
+
+# Groepen waarin de app de domeinen toont, naar de lagen van de onderwerpenkaart.
+groepen:
+- id: modaliteiten
+  titel: "Taal, beeld en geluid"
+  domeinen: [taal, llm, beeld, spraak, generatief]
+- id: leren-en-beslissen
+  titel: "Leren, redeneren en beslissen"
+  domeinen: [klassiek-ml, rl, onzekerheid, klassieke-ai, multi-agent]
+- id: bouwen-en-inzetten
+  titel: "Bouwen en inzetten"
+  domeinen: [bouwen, systemen, robotica, toepassingen]
+- id: mens-en-veiligheid
+  titel: "Veiligheid, mens en maatschappij"
+  domeinen: [verantwoord, mens]
+- id: verdieping
+  titel: "Verdieping en onderzoek"
+  domeinen: [dl-verdieping, onderzoek]
+
+# Onderwerpen die twee of meer andere domeinen nodig hebben maar toch in hun eigen domein blijven (gedeelde-regel, zie check_structuur.py).
+# De andere domeinen lenen dan de lessen van dat domein; de app neemt ze vanzelf op in je pad.
+verbanden_ok:
+- {onderwerp: diffusiemodellen, niveau: basis, voor: [llm, spraak],
+   reden: "Het hart van generatief. LLM's (diffusie-taalmodellen) en spraak (audio genereren) lenen de module Diffusie."}
+- {onderwerp: 3d-vision, niveau: basis, voor: [generatief, robotica],
+   reden: "Het hart van de module 3D in beeld. Robotica (waarnemen) en generatief (3D genereren) lenen die module."}
+- {onderwerp: workflows-en-agentpatronen, niveau: basis, voor: [multi-agent, toepassingen],
+   reden: "Het hart van de module Agents in bouwen. Multi-agent (LLM-agents die samenwerken) en toepassingen (onderzoeksagents) lenen die module; de basis van agents zit al in de kern."}
+- {onderwerp: workflows-en-agentpatronen, niveau: gevorderd, voor: [multi-agent, toepassingen],
+   reden: "Zelfde module, het gevorderde deel (state machines en de agent-harness)."}
+- {onderwerp: agentraamwerk, niveau: gevorderd, voor: [multi-agent, robotica, toepassingen, verantwoord],
+   reden: "Eén subonderwerp (reactieve en gelaagde agentarchitecturen) in de module Zoeken van klassieke AI; de basis van het agentraamwerk zit in de kern."}
+- {onderwerp: klassieke-taalmodellen, niveau: gevorderd, voor: [llm, spraak],
+   reden: "Taal legt n-grammodellen in de diepte uit (smoothing, het noisy-channelmodel); perplexity, wat LLM's en spraak vooral nodig hebben, zit in de gedeelde module Attention."}
+- {onderwerp: data-engineering-voor-ml, niveau: gevorderd, voor: [llm, verantwoord],
+   reden: "Het hart van Data voor ML in systemen; LLM's (data op webschaal) en verantwoord (privacy bij dataverwerking) lenen die module."}
+- {onderwerp: metric-learning-en-semi-supervised-leren, niveau: gevorderd, voor: [beeld, spraak],
+   reden: "Contrastive en triplet loss staan in Representaties leren (deep learning in de diepte); beeld (gezichten, zoeken in foto's) en spraak (sprekers) lenen die les."}
+- {onderwerp: self-supervised-learning, niveau: gevorderd, voor: [generatief, spraak, beeld],
+   reden: "Het hart van Representaties leren; generatief, spraak (wav2vec) en beeld (DINO) lenen die module."}
+- {onderwerp: anomaliedetectie, niveau: gevorderd, voor: [beeld, toepassingen, verantwoord],
+   reden: "De basis zit in de kern; de methoden op gevorderd niveau (LOF, isolation forest, reconstructie) staan in klassieke ML en worden geleend."}
+- {onderwerp: probabilistisch-redeneren-over-tijd, niveau: gevorderd, voor: [beeld, robotica, spraak],
+   reden: "Het hart van de module Onzekerheid over tijd, die ook de Bayesiaanse netwerken van het domein nodig heeft; beeld (volgen), robotica (lokaliseren) en spraak (HMM's) lenen die module."}
+- {onderwerp: onzekerheid-en-conformal-prediction, niveau: basis, voor: [klassiek-ml, verantwoord],
+   reden: "Het hart van Onzekerheid uitdrukken in het domein onzekerheid; klassieke ML en verantwoord lenen het."}
+- {onderwerp: onzekerheid-en-conformal-prediction, niveau: gevorderd, voor: [klassiek-ml, verantwoord],
+   reden: "Zelfde module, het gevorderde deel (conformal prediction)."}
+
+# Voorkennis uit de kaart die het fundament niet zelf geeft, met de reden waarom dat mag (zie check_structuur.py).
+fundament_ok:
+- onderwerp: convolutionele-netwerken
+  voorkennis: beelden-als-data
+  reden: "de CNN-module heeft van het gevorderde deel van beelden als data alleen de voorbewerking voor netwerken nodig (normaliseren, formaat), en dat subonderwerp zit in de module zelf; datasetbias in beeld blijft in het domein beeld."
+- onderwerp: subword-tokenisatie
+  voorkennis: morfologie
+  reden: "voor de basis van tokens (waarom subwords, tokenizers gebruiken en tokens tellen) is taalkunde niet nodig; de kaart noemt morfologie voor BPE op gevorderd niveau, en dat deel zit in het domein LLM's, dat taal hiervoor leent."
+
+# Bestaande lessen die alleen subonderwerpen van een ander deel dekken, met de reden waarom ze toch hier staan.
+les_ok:
+- les: cv-image-search
+  reden: "zoeken in foto's met de features van een pretrained model; de les dekt 'embeddings gebruiken: zoeken, clusteren en visualiseren', dat in de kern hoort (bouwen, taal en klassieke ML gebruiken het ook). Bij het omzetten krijgt de kern daar een korte algemene les voor, die cv-image-search vraagt en op foto's toepast; tot die les er is, legt cv-image-search het uit."
+- les: cv-augment-photos
+  reden: "augmentatie op kleurenfoto's; de les dekt het subonderwerp data-augmentatie van regularisatie, dat in de kern hoort omdat ook tekst en spraak het gebruiken. Tot de kern daar een korte algemene les voor krijgt, legt cv-augment-photos het uit en meet het wat het op CIFAR-10 oplevert."
+- les: cv-1x1-convolution
+  reden: "de 1×1-convolutie staat in de kaart bij convolutionele netwerken (de gedeelde module cnn), maar alleen Inception, ResNeXt en de families daarna gebruiken hem; daarom staat de les bij de CNN-families."
+- les: cv-saliency
+  reden: "saliency maps zijn een uitlegmethode (verantwoord, module uitleggen); de les staat in beeld omdat je ze meteen op je eigen CNN toepast, net als Grad-CAM in de les erna. Verantwoord leent deze les."
+
+fundament:
+  id: fundament
+  titel: "Fundament"
+  titel_en: "Foundations"
+  doel: "Alles wat meerdere domeinen nodig hebben: Python, data, de wiskunde, hoe een model leert, neurale netwerken, PyTorch, de bouwstenen, een eerste taalmodel, en van elk domein een voorproefje."
+  project:
+    id: nn
+    titel: "Je eigen neurale netwerk: van één neuron met de hand tot een diep netwerk in PyTorch"
+    eindles: nn-deep-net-project
+  modules:
+
+  # ---------------- kern: iedereen, voordat je kiest ----------------
+  - id: start
+    kern: true
+    titel: "Start"
+    onderwerpen: [definities-en-framings, ai-geletterdheid-voor-gebruikers, prompt-basis, ai-ondersteund-programmeren#0, geschiedenis#2+4+6+8+9]
+    tekst: "Hoe de course werkt, wat AI, ML en generatieve AI zijn, regels tegenover leren, de kaart van het vakgebied, en een chatassistent gebruiken met open ogen: wat hij kan, waar hij de mist in gaat, hoe je goed vraagt en hoe je controleert."
+
+  - id: python
+    kern: true
+    titel: "Python"
+    onderwerpen: [python@basis, notebooks, ontwikkelomgeving-tracking-en-reproduceerbaarheid#0]
+    tekst: "Van je eerste programma tot klassen, generators en decorators, met de regels voor notebooks. Het projectje dat letters telt in een boek wordt later je eerste taalmodel."
+
+  - id: numpy
+    kern: true
+    titel: "NumPy"
+    onderwerpen: [numpy-en-scipy@basis, numerieke-wiskunde#2]
+    tekst: "Arrays, indexeren, vectoriseren, assen, broadcasting en toeval."
+
+  - id: data
+    kern: true
+    titel: "Data"
+    onderwerpen: [dataframes, tidy-data-en-cleaning, eda-en-visualisatie, beelden-als-data#0+4,
+                  tekstverwerking#0, datasetdocumentatie#0+1, data-engineering-voor-ml#0, causaliteit-basis#0+1]
+    tekst: "pandas, beschrijven, verkennen, groeperen, samenvoegen, ontbrekende waarden, waar data vandaan komt, samenhang tussen twee kolommen, en een afbeelding en een tekst als getallen."
+
+  - id: eerste-model
+    kern: true
+    titel: "Je eerste model"
+    onderwerpen: [notatie-en-wiskundig-redeneren@basis, lineaire-algebra@basis, calculus@basis, optimalisatie@basis,
+                  wat-ml-is, de-ml-workflow, loss-en-empirical-risk-minimization@basis, lineaire-regressie-en-uitbreidingen@basis,
+                  scikit-learn@basis]
+    tekst: "Een model is een functie, residuen en MSE, met de hand fitten, de helling meten, gradient descent in 1D en 2D, vectoren en matrices, de kettingregel, lineaire regressie in NumPy en daarna scikit-learn."
+
+  - id: classificatie
+    kern: true
+    titel: "Classificatie"
+    onderwerpen: [kansrekening@basis, statistiek@basis, informatietheorie@basis, lineaire-classificatie@basis, onzekerheid-kwantificeren#1+2]
+    tekst: "Kansrekening en Bayes, exp en log, sigmoid, logistische regressie met log loss en de gradiënt (p − y)·x, softmax en cross-entropy."
+
+  - id: generalisatie
+    kern: true
+    titel: "Generaliseren"
+    onderwerpen: [evaluatie-en-modelselectie@basis, d10-evaluatiemetrics@basis, baselines-en-error-analysis@basis, feature-engineering@basis,
+                  instance-based-leren-en-naive-bayes#0, waarom-ai-ethiek#0, bronnen-van-bias#1,
+                  onevenwichtige-data#0, beeldclassificatie#2]
+    tekst: "Train/test-split, overfitting, de validatieset, k-nearest neighbours, cross-validation, bias en variance, regularisatie, confusion matrix, F1, ROC en AUC, maatstaven voor regressie, baselines, wie er in de data zit, en je eerste complete ML-project."
+
+  - id: meer-modellen
+    kern: true
+    titel: "Meer modellen"
+    onderwerpen: [bomen-en-ensembles@basis, data-leakage@basis]
+    tekst: "De beslisboom, random forest, gradient boosting, data leakage, pipelines en een eerlijke vergelijking. Ook het voorproefje van klassieke ML (besluit 1.13)."
+
+  - id: zonder-labels
+    kern: true
+    titel: "Zonder labels"
+    onderwerpen: [clustering@basis, dimensiereductie@basis, anomaliedetectie@basis]
+    tekst: "k-means, k kiezen, PCA als de beste schaduw, en afwijkende punten vinden met z-scores en de IQR."
+
+  - id: neurale-netwerken
+    kern: true
+    titel: "Neurale netwerken"
+    onderwerpen: [wat-een-neuraal-netwerk-is, lineaire-modellen-als-netwerk-en-de-perceptron@basis, multilayer-perceptron@basis,
+                  backpropagation-en-computational-graphs@basis, minimale-frameworks@basis, activaties-en-loss-functions@basis,
+                  numerieke-wiskunde#1]
+    tekst: "Neuron, XOR, een verborgen laag, backprop met de hand en je eigen autograd (micrograd)."
+
+  - id: pytorch
+    kern: true
+    titel: "PyTorch"
+    onderwerpen: [tensors-en-autograd, frameworks@basis, d11-de-trainingslus@basis, pretrained-modellen-via-hubs,
+                  transfer-learning-en-fine-tuning@basis, generalisatie-trainingsdynamiek-en-hpo@basis, regularisatie@basis,
+                  optimizers#0, compute-geletterdheid#0+1, gpu-programmeren#0]
+    tekst: "Tensors, autograd, nn.Module, optimizer, batches, een MLP op cijfers, de GPU, loss-curves, checkpoints, early stopping, een model van een hub, en een getraind netwerk hergebruiken."
+
+  - id: bouwstenen-idee
+    kern: true
+    titel: "Bouwstenen als idee"
+    onderwerpen: [embeddings-en-similariteit@basis, convolutionele-netwerken@basis, recurrente-netwerken@basis, attention-en-transformers@basis,
+                  representatieleren#0, neurale-nlp#5]
+    nieuw:
+    - titel: "Embeddings gebruiken: zoeken, clusteren en een kaart maken"
+    tekst: "Embeddings, convolutie, recurrentie en attention, elk als idee in één les, en embeddings gebruiken om te zoeken en te clusteren (beeld, taal, bouwen en klassieke ML passen dat later toe). De uitwerking zit in de gedeelde modules."
+
+  - id: agents
+    kern: true
+    titel: "Agents"
+    onderwerpen: [agentraamwerk@basis, wat-een-agent-is, wat-rl-is, probleemformulering-en-zoekinfrastructuur#0+2, ongeinformeerd-zoeken#0, exploratie#0,
+                  heuristisch-zoeken#1, spellen-als-zoekprobleem#1, mdp-s-bellman-en-pomdp-s#1, dynamic-programming#2, temporal-difference-learning#1]
+    tekst: "Wat een agent is, ook een LLM-agent, en wat reinforcement learning is; zoeken in een doolhof met BFS en A*, minimax, value iteration en Q-learning. Ook het voorproefje van klassieke AI en RL (besluit 1.13)."
+
+  - id: taalmodellen
+    kern: true
+    titel: "Taalmodellen"
+    onderwerpen: [wat-nlp-is#0+1+2+3, subword-tokenisatie@basis, klassieke-taalmodellen@basis, token-embeddings-en-output-head@basis,
+                  autoregressieve-generatie-en-sampling#0, pretraining-doelen-en-databronnen#2]
+    tekst: "Wat een taalmodel is, tokens, een bigrammodel door te tellen, samplen, de loss, smoothing, en hetzelfde model geleerd met gradient descent. Temperature, top-k, base- en chatmodellen, hallucinatie en de families van modellen zitten in het domein LLM's, naive Bayes in taal. In het fundament omdat de transformer, die taal, beeld, generatief en spraak delen, hierop voortbouwt, en omdat bouwen, verantwoord en mens LLM's als gereedschap gebruiken."
+
+  - id: onderzoek-basis
+    kern: true
+    titel: "Onderzoek lezen"
+    onderwerpen: [d27-wetenschappelijke-geletterdheid, d27-hoe-ai-onderzoek-werkt#0]
+    tekst: "Wat een paper is, claims lezen, figuren en tabellen lezen, de onderzoekscyclus."
+
+  - id: grafen-en-ruimte
+    kern: true
+    titel: "Grafen en ruimte"
+    onderwerpen: [discrete-wiskunde-en-grafen@basis, meetkunde-en-transformaties@basis, lineaire-algebra#3]
+    nieuw:
+    - {titel: "Verzamelingen, logica en tellen"}
+    - {titel: "Grafen: knopen, kanten en paden"}
+    - {titel: "Coördinaten, lijnen en vlakken, en een vorm verschuiven, draaien en schalen met een matrix"}
+    tekst: "Verzamelingen en logica, tellen (permutaties en combinaties), grafen, en coördinaten met verschuiven, draaien en schalen. Klassieke ML, klassieke AI, multi-agent, taal, beeld en robotica hebben dit al op basisniveau nodig; zoeken in een doolhof (agents) is al zoeken in een graaf."
+
+  - id: proeven
+    kern: true
+    titel: "Proeven van elk domein"
+    onderwerpen: [fundamenten-van-generatief-modelleren#0, audio-fundamenten#0+1, wat-een-robot-is#0+2, niet-cooperatieve-speltheorie#0+4,
+                  wat-ai-in-de-wetenschap-doet#0, moravec-s-paradox-en-embodiment#0, ai-act-opbouw-en-verboden-praktijken#0+2,
+                  profiling-en-prestatiemetrics#0+1, theorie-expressiviteit-en-loss-landscapes#0]
+    nieuw:
+    - {titel: "Een machine die iets nieuws maakt: nieuwe cijfers samplen uit een geleerde verdeling", proef: generatief}
+    - {titel: "Geluid als getallen: een golf en een spectrogram", proef: spraak}
+    - {titel: "Waarnemen, denken, doen: een gesimuleerde robot die een lijn volgt", proef: robotica}
+    - {titel: "Samenwerken of verraden: een toernooi van strategieën in het prisoner's dilemma", proef: multi-agent}
+    - {titel: "AI in een vakgebied: een echte vraag uit de wetenschap met open data", proef: toepassingen}
+    - {titel: "Mens en machine: waar mensen goed in zijn en machines niet (Moravec), en wat de AI Act verbiedt", proef: mens}
+    - {titel: "Hoe snel is je model? FLOPs, FLOP/s, tokens per seconde en waar de tijd heen gaat", proef: systemen}
+    - {titel: "Waarom kan een netwerk alles leren? De universele benaderingsstelling, en een netwerk dat zelfs willekeurige labels uit zijn hoofd leert", proef: dl-verdieping}
+    - {titel: "Kies je domein: de kaart van alle domeinen, hun projecten en hoe ze samenhangen", proef: null}
+    tekst: "Acht korte proeflessen voor de domeinen die er nog geen goede in het fundament hebben, en een les waarin je je domein kiest. De andere domeinen hebben hun proefles al: beeld (afbeeldingen als getallen, convolutie), taal en LLM's (de taalmodellen), klassieke ML, klassieke AI en RL (meer modellen, zonder labels, agents), onzekerheid (Bayes, samenhang en oorzaak), verantwoord (wie er in de data zit), bouwen (AI-hulpmiddelen gebruiken) en onderzoek."
+
+  # ---------------- gedeelde modules: binnengehaald door de domeinen die ze nodig hebben ----------------
+  - id: data-bronnen
+    titel: "Python, SQL en data verder"
+    onderwerpen: [python@gevorderd, notebooks#2+3, eda-en-visualisatie#4+6, scikit-learn#3, feature-engineering#3+4+5,
+                  sql-en-databronnen, data-engineering-voor-ml@basis, dataframes@gevorderd, tidy-data-en-cleaning@gevorderd, eda-en-visualisatie@gevorderd, feature-engineering@gevorderd, numpy-en-scipy@gevorderd, scikit-learn@gevorderd+expert]
+    tekst: "Snellere en nettere Python (profileren, onderzoekscode structureren, typecontrole), tabellen uit een database halen met SQL, waar trainingsdata vandaan komt en hoe je die opslaat en samplet, data schoonmaken op schaal, betere figuren, features maken en SciPy. Nodig voor klassieke ML, systemen, LLM's, verantwoord en toepassingen."
+
+  - id: wiskunde
+    titel: "Wiskunde formeel"
+    onderwerpen: [notatie-en-wiskundig-redeneren@gevorderd, lineaire-algebra@gevorderd, calculus@gevorderd, optimalisatie@gevorderd,
+                  kansrekening@gevorderd, statistiek@gevorderd, informatietheorie@gevorderd, numerieke-wiskunde, d2-matrixdecomposities-en-spectrale-methoden,
+                  dimensiereductie#1+3, d2-stochastische-processen-en-monte-carlo, d2-optimalisatie-voor-ml-gevorderd, d2-analyse-en-functionaalanalyse]
+    tekst: "Afgeleiden, partiële afgeleiden, matrixcalculus, rang, verdelingen, entropie, cross-entropy en KL, maximum likelihood, rekenen met floats, bootstrap; daarna eigenwaarden, SVD en PCA formeel, numerieke methoden, Markov-ketens en Monte Carlo, en op expertniveau optimalisatie en analyse voor de theorie."
+
+  - id: signalen-en-meetkunde
+    titel: "Signalen, meetkunde en grafen"
+    onderwerpen: [complexe-getallen, fourier-analyse-en-signaalverwerking, meetkunde-en-transformaties, differentiaalvergelijkingen, discrete-wiskunde-en-grafen]
+    nieuw:
+    - {titel: "Sinus, cosinus en draaien met een matrix"}
+    - {titel: "Een signaal als som van golven: de Fourier-transformatie"}
+    - {titel: "Grafen: knopen, kanten en paden"}
+    - {titel: "Een differentiaalvergelijking stap voor stap oplossen"}
+    tekst: "Complexe getallen als draaiing, sinus en cosinus, rotatiematrices en coördinatenstelsels, de Fourier-transformatie en het spectrogram, differentiaalvergelijkingen met de Euler-stap, grafen en hun algoritmen. Nodig voor beeld, spraak, robotica, generatief, klassieke AI en LLM's (RoPE). Dit stuk van het fundament ontbreekt nu bijna helemaal."
+
+  - id: trainen
+    titel: "Diepe netwerken trainen"
+    onderwerpen: [lineaire-modellen-als-netwerk-en-de-perceptron@gevorderd, multilayer-perceptron@gevorderd, activaties-en-loss-functions@gevorderd,
+                  backpropagation-en-computational-graphs@gevorderd+expert, automatic-differentiation, initialisatie-en-parametrisatie, normalisatielagen,
+                  d11-de-trainingslus@gevorderd, optimizers, learning-rate-schedules, regularisatie@gevorderd, residuals-embeddings-en-conditioning,
+                  generalisatie-trainingsdynamiek-en-hpo@gevorderd, frameworks@gevorderd, minimale-frameworks@gevorderd, embeddings-en-similariteit@gevorderd,
+                  transfer-learning-en-fine-tuning@gevorderd, loss-en-empirical-risk-minimization@gevorderd, frameworks#2]
+    tekst: "Backprop door hele lagen, vanishing gradients, initialisatie, BatchNorm, LayerNorm, residuals, momentum, Adam en AdamW, schema's voor de learning rate, dropout, de embedding-laag, een eigen trainer en een diep netwerk dat echt traint; op expertniveau µP, Shampoo en Muon, en autodiff van binnen."
+
+  - id: klassieke-modellen-formeel
+    titel: "Lineaire modellen en evaluatie, formeel"
+    onderwerpen: [lineaire-regressie-en-uitbreidingen@gevorderd+expert, lineaire-classificatie@gevorderd+expert, evaluatie-en-modelselectie@gevorderd+expert, baselines-en-error-analysis@gevorderd, d10-evaluatiemetrics@gevorderd]
+    tekst: "De normaalvergelijking, ridge en lasso, regularisatiepaden, discriminant analysis, maatstaven voor meer klassen en calibratie, de theorie van foutschatting en foutanalyse. Nodig voor klassieke ML, onzekerheid en deep learning in de diepte."
+
+  - id: cnn
+    titel: "Convolutionele netwerken"
+    onderwerpen: [convolutionele-netwerken@gevorderd+expert, beelden-als-data#7, beeldclassificatie#3]
+    tekst: "Convolutie in detail, kanalen en pooling, convolutie als één matrixvermenigvuldiging en je eerste CNN in PyTorch. Gedeeld door beeld, spraak, generatief, robotica en toepassingen."
+
+  - id: rnn
+    titel: "Recurrente netwerken en seq2seq"
+    onderwerpen: [recurrente-netwerken@gevorderd+expert, seq2seq-en-encoderdecoder]
+    tekst: "Een RNN, een LSTM, en encoder-decoder met de eerste attention (Bahdanau). Gedeeld door taal, spraak, klassieke ML (tijdreeksen) en RL; de module Attention bouwt erop voort."
+
+  - id: attention
+    titel: "Attention en transformers"
+    onderwerpen: [attention-en-transformers@gevorderd+expert, klassieke-taalmodellen#4, decoder-only-transformer-in-detail#1, positionele-codering#0+1, neurale-nlp#1]
+    tekst: "Een neuraal taalmodel met een vaste context en perplexity, waarom die context niet genoeg is, scores, queries, keys en values, schalen, de causale masker, multi-head, posities en het transformerblok. Eén keer geleerd, daarna gebruikt in LLM's, taal, beeld (Vision Transformer), generatief, spraak en verantwoord."
+
+domeinen:
+
+# =====================================================================================================
+- id: taal
+  titel: "Taal en zoeken"
+  titel_en: "Language and search"
+  kaart: [D15]
+  doel: "Hoe computers met taal werken zonder dat het een chatbot hoeft te zijn: taalkunde, klassieke en neurale NLP, de standaardtaken en zoekmachines."
+  proef: [data-text-as-numbers, lm-bigram-counts]
+  gebruikt: {basis: [], gevorderd: [data-bronnen, wiskunde, signalen-en-meetkunde, trainen, klassieke-modellen-formeel, rnn, attention], expert: []}
+  project:
+    id: text
+    titel: "Je eigen tekstanalyse en zoekmachine"
+    basis: "Een spamfilter en een sentimentclassifier op open tekst, met TF-IDF."
+    gevorderd: "Een tagger voor namen en plaatsen, en een kleine vertaler met seq2seq en attention."
+    expert: "Een zoekmachine met BM25 en een eigen dense retriever, eerlijk geëvalueerd."
+  eindproject: "Een zoekmachine over een open Nederlands of Engels corpus: eerst BM25, dan een zelf getrainde dense retriever en een reranker, met nDCG en een foutanalyse."
+  papers: ["Efficient Estimation of Word Representations (word2vec, Mikolov e.a. 2013): de analogieën nabouwen", "Dense Passage Retrieval (Karpukhin e.a. 2020), op een klein corpus"]
+  modules:
+  - id: taalkunde
+    titel: "Taalkunde voor AI"
+    onderwerpen: [wat-nlp-is, morfologie, syntaxis, semantiek-pragmatiek-en-discourse, fonetiek-corpora-en-typologie, d15-sociolinguistiek-en-taalvariatie]
+    tekst: "Wat NLP is en waarom taal moeilijk is, woorden en hun vormen, zinsbouw, betekenis en context, corpora en talen van de wereld, en hoe taal per groep verschilt."
+  - id: tekst-verwerken
+    titel: "Tekst verwerken en indelen"
+    onderwerpen: [tekstverwerking, klassieke-tekstclassificatie, nederlandse-nlp]
+    tekst: "Tekst opknippen en normaliseren, reguliere expressies, bag of words en TF-IDF, een classifier voor sentiment, en wat er anders is aan Nederlandse tekst."
+  - id: betekenis
+    titel: "Betekenis als vector"
+    onderwerpen: [distributionele-semantiek-en-word-embeddings, d15-lexicale-semantiek, sentence-embeddings]
+    tekst: "Een woord ken je aan zijn buren, word2vec en GloVe zelf trainen, analogieën, betekenis van woorden en WordNet, en embeddings voor hele zinnen."
+  - id: structuur
+    titel: "Structuur in zinnen"
+    onderwerpen: [sequence-labelling-en-structuur, d15-parsing-en-grammaticaformalismen, d15-zinssemantiek-en-semantic-parsing, d15-coreferentie-en-discourse]
+    tekst: "Woordsoorten en namen taggen met een HMM en een CRF, parsen, de betekenis van een zin als logische vorm, en wie 'hij' is in een tekst."
+  - id: neurale-nlp
+    titel: "Neurale NLP"
+    onderwerpen: [neurale-nlp, pretrained-encoders-en-encoderdecoders, klassieke-taalmodellen]
+    tekst: "Smoothing en het noisy-channelmodel, een RNN-taalmodel, BERT en T5 van binnen, en een encoder fine-tunen voor een taak."
+  - id: taken
+    titel: "De klassieke taken"
+    onderwerpen: [klassieke-nlp-taken, d15-informatie-extractie, d15-question-answering, d15-machinevertaling, d15-tekstgeneratie-en-samenvatten,
+                  d15-tekst-herschrijven, d15-evaluatie-van-tekstgeneratie, d15-dialoogsystemen]
+    tekst: "Informatie uit tekst halen, vragen beantwoorden, vertalen en BLEU, samenvatten, herschrijven, gegenereerde tekst eerlijk beoordelen, en dialoogsystemen."
+  - id: zoeken
+    titel: "Zoekmachines"
+    onderwerpen: [information-retrieval-en-zoekmachines, d15-retrievalmodellen-en-ranking, d15-webzoeken, d15-evaluatie-en-interactief-zoeken, d15-neurale-en-generatieve-retrieval]
+    tekst: "De inverted index, BM25, PageRank, zoeken evalueren met nDCG en MRR, dense retrieval en rerankers, en generatieve retrieval."
+  - id: meertalig
+    titel: "Meer talen"
+    onderwerpen: [meertaligheid-en-low-resource-talen]
+    tekst: "Meertalige modellen, transfer tussen talen en talen met weinig data."
+
+# =====================================================================================================
+- id: llm
+  titel: "Large language models"
+  titel_en: "Large language models"
+  kaart: [D16]
+  doel: "Hoe een LLM van binnen werkt, hoe je er een bouwt, pretraint en natraint, en hoe je hem evalueert, laat redeneren en serveert."
+  proef: [lm-what-is-a-language-model, lm-sampling]
+  gebruikt: {basis: [], gevorderd: [data-bronnen, signalen-en-meetkunde, trainen, klassieke-modellen-formeel, attention], expert: [wiskunde]}
+  project:
+    id: llm
+    titel: "Je eigen LLM"
+    basis: "Een LLM begrijpen en gebruiken: tokens bekijken, een open model lokaal laten praten, benchmarks lezen."
+    gevorderd: "Een GPT vanaf nul met je eigen tokenizer, getraind op een boek en op TinyStories, en je eerste ablation."
+    expert: "Je GPT moderniseren, een eigen datapijplijn en scaling law, de capstone pretrainen, en SFT, LoRA en DPO."
+  eindproject: "Je eigen kleine LLM, gepretraind en nagetraind (SFT, LoRA, DPO), geëvalueerd en getest op schadelijke verzoeken (bestaat: llm-dpo)."
+  eindles: llm-dpo
+  papers: ["The Reversal Curse (2023)", "LoRA (2021)", "Are Emergent Abilities a Mirage? (2023)"]
+  modules:
+  - id: gebruiken
+    titel: "Een LLM gebruiken en begrijpen"
+    onderwerpen: [autoregressieve-generatie-en-sampling@basis, de-gpt-lijn, base-vs-chat-en-chat-templates@basis, gedrag-en-beperkingen#0+2+3,
+                  d16-hallucinatie-en-sycophancy@basis, het-modellandschap@basis]
+    tekst: "Temperature, top-k en top-p, van GPT-1 tot nu, base- en chatmodellen, in-context learning en promptgevoeligheid, hallucinatie en sycophancy, de families van modellen, en in een echt LLM kijken. De basis van het domein, op een CPU."
+  - id: tokens
+    titel: "Tokens en tokenizers"
+    onderwerpen: [subword-tokenisatie, tokenizer-ontwerp-en-meertalige-pretraining]
+    tekst: "BPE zelf bouwen, bytes, pre-tokenisatie, special tokens, en hoe de keuze van tokenizer talen voortrekt of benadeelt."
+  - id: gpt
+    titel: "Je GPT"
+    onderwerpen: [token-embeddings-en-output-head, decoder-only-transformer-in-detail, uitlegbaarheid-voor-llms#2]
+    tekst: "Je GPT in elkaar zetten, parameters tellen, trainen op een boek, tekst genereren, trainen op TinyStories met je eigen tokens, weight tying en in je model kijken."
+  - id: modern
+    titel: "Een modern LLM"
+    onderwerpen: [positionele-codering, attention-varianten, kv-cache, normalisatielagen#2]
+    tekst: "RMSNorm, SwiGLU, RoPE, GQA en de KV-cache, en daarmee je GPT upgraden."
+  - id: architecturen
+    titel: "Andere architecturen"
+    onderwerpen: [mixture-of-experts-in-llms, long-context, ssm-hybrides-en-diffusie-taalmodellen, andere-architectuurfrontiers]
+    tekst: "Mixture of experts, lange context, hybriden met state-space-lagen, taalmodellen met diffusie, en wat er aan de rand gebeurt."
+  - id: pretrainen
+    titel: "Pretrainen"
+    onderwerpen: [pretraining-doelen-en-databronnen, datacuratie-en-mixtures, data-op-webschaal#3+4, synthetische-data-en-model-collapse,
+                  volledig-open-pretraining-recepten, trainingsdynamiek-en-stabiliteit, capstone-zelf-een-kleine-llm-bouwen-en-trainen]
+    tekst: "Waar de data vandaan komt, kwaliteitsfilters, deduplicatie, decontaminatie, je eigen datapijplijn, open recepten, stabiel trainen en synthetische data."
+  - id: schalen
+    titel: "Scaling"
+    onderwerpen: [scaling-laws-en-compute, het-debat-over-emergent-abilities, scaling-gedrag#0]
+    tekst: "Scaling laws, je eigen scaling law fitten, de capstone en de nachtrun, en het debat over plotselinge vaardigheden."
+  - id: natrainen
+    titel: "Natrainen"
+    onderwerpen: [base-vs-chat-en-chat-templates, supervised-fine-tuning, preferentiedata-en-reward-models, rlhf, dpo-en-varianten,
+                  rlaif-en-constitutional-ai, rl-met-verifieerbare-beloningen, safety-en-agentic-post-training, open-post-training-recepten,
+                  distillatie-model-merging-en-persona-training]
+    tekst: "Chat templates, SFT, preferentiedata, het idee van RLHF, de DPO-loss en DPO op je eigen model, RLVR, Constitutional AI, distillatie en open recepten."
+  - id: aanpassen
+    titel: "Een model aanpassen"
+    onderwerpen: [transfer-en-full-fine-tuning, peft-lora-en-qlora, continued-pretraining-en-adaptatiestrategie]
+    tekst: "Volledig fine-tunen, LoRA en QLoRA, doortrainen op eigen domeintekst en kiezen welke aanpak past."
+  - id: redeneren
+    titel: "Redeneren"
+    onderwerpen: [reasoning-modellen-en-test-time-compute]
+    tekst: "Tussenstappen, test-time compute en stemmen, en een eigen klein model leren rekenen met en zonder uitgeschreven stappen (besluit 1.12)."
+  - id: genereren
+    titel: "Genereren en serveren"
+    onderwerpen: [autoregressieve-generatie-en-sampling, structured-en-constrained-decoding, speculative-decoding, quantization-en-compressie,
+                  serving-concepten-small-en-lokale-modellen, multimodale-llms]
+    tekst: "Decoding-strategieën, gestructureerde uitvoer, speculative decoding, quantization, kleine modellen lokaal draaien en LLM's die ook beelden lezen."
+  - id: evalueren
+    titel: "Evalueren"
+    onderwerpen: [intrinsieke-evaluatie-metrics-en-klassieke-benchmarks, capability-benchmarks, llm-as-a-judge-en-arena-s, long-context-evaluatie-contaminatie-saturatie-en-harnesses]
+    tekst: "Een basismodel evalueren, meerkeuzevragen, chatmodellen beoordelen, LLM-as-a-judge en contaminatie. Red-teaming van je eigen model zit in verantwoord, de model card in systemen."
+  - id: gedrag
+    titel: "Gedrag en kennis"
+    onderwerpen: [gedrag-en-beperkingen, d16-hallucinatie-en-sycophancy, d16-kennis-en-model-editing, het-modellandschap]
+    tekst: "Hoe in-context learning werkt, de reversal curse, lange context, hallucinatie en sycophancy meten, waar kennis in een model zit en hoe je die bijwerkt, en het landschap van modellen."
+
+# =====================================================================================================
+- id: beeld
+  titel: "Beeld"
+  titel_en: "Computer vision"
+  kaart: [D13]
+  doel: "Computers die zien: beelden bewerken, alle CNN-families, detectie, segmentatie, Vision Transformers, video en 3D."
+  proef: [data-images-as-arrays, cnn-convolution-idea]
+  gebruikt: {basis: [], gevorderd: [data-bronnen, wiskunde, signalen-en-meetkunde, trainen, klassieke-modellen-formeel, cnn, rnn, attention], expert: []}
+  project:
+    id: cnn
+    titel: "Je eigen CNN groeit"
+    basis: "Beelden bewerken in NumPy en een pretrained model gebruiken, met bounding boxes en maskers."
+    gevorderd: "Een eigen ResNet met Grad-CAM, en een kleine U-Net of detector op eigen scènes."
+    expert: "Een detector of segmentatiemodel met een moderne backbone, video of 3D."
+  eindproject: "Een eigen ResNet op Fashion-MNIST of CIFAR-10 met Grad-CAM, en een kleine U-Net of detector op scènes die de course zelf maakt (voorstel tak beeld, goedgekeurd 6 november)."
+  eindles: cv-project-detector-or-unet
+  papers: ["ResNet, het degradatie-experiment (2015)", "Een Vision Transformer op kleine data (ViT, 2020), op CIFAR-formaat"]
+  modules:
+  - id: beelden-bewerken
+    titel: "Beelden bewerken"
+    onderwerpen: [d13-klassieke-beeldverwerking, beelden-als-data, d13-beeldkwaliteit-en-compressie]
+    tekst: "Van licht tot pixels, kleurruimtes, histogrammen, drempelen, filters, randen met Sobel en Canny, morfologie, connected components, schalen en compositing; later compressie en beeldkwaliteit."
+  - id: classificatie
+    titel: "Beelden herkennen met een pretrained model"
+    onderwerpen: [beeldclassificatie, vision-foundation-models]
+    tekst: "Een foto klaarmaken, een beeldclassifier uitproberen met top-1 en top-5, features met een lineaire classifier, zoeken in foto's en fine-tunen; later foundation models zoals DINOv2."
+  - id: cnn-families
+    titel: "CNN-families"
+    onderwerpen: [d11-cnn-architecturen]
+    tekst: "LeNet, VGG, ResNet, AlexNet, Inception, ResNeXt, DenseNet, MobileNet, EfficientNet en ConvNeXt, plus augmentatie en een kleuren-CNN."
+  - id: detectie
+    titel: "Detectie"
+    onderwerpen: [objectdetectie]
+    tekst: "Annotaties, IoU, non-maximum suppression, mAP, anchors, een eigen one-stage detector, Faster R-CNN, feature pyramids, focal loss en DETR."
+  - id: segmentatie
+    titel: "Segmentatie"
+    onderwerpen: [segmentatie]
+    tekst: "FCN, een eigen U-Net, DeepLab, Mask R-CNN en segmenteren met een prompt (SAM 2.1)."
+  - id: vit
+    titel: "Vision Transformers"
+    onderwerpen: [vision-transformers]
+    tekst: "Een Vision Transformer van nul, waar hij naar kijkt, en Swin."
+  - id: uitleggen
+    titel: "In een beeldmodel kijken"
+    onderwerpen: [vision-modellen-visualiseren-en-begrijpen]
+    tekst: "Filters en feature maps, saliency en Grad-CAM."
+  - id: video
+    titel: "Beweging en video"
+    onderwerpen: [beweging-en-tracking, videobegrip]
+    tekst: "Optical flow, objecten volgen en video begrijpen."
+  - id: drie-d
+    titel: "Meetkunde en 3D"
+    onderwerpen: [d13-beeldgeometrie-en-correspondentie, 3d-vision, d13-scenebegrip]
+    tekst: "Camera's, homografieën, correspondenties, stereo, 3D-reconstructie, NeRF en Gaussian splatting, en scènes begrijpen."
+  - id: mensen-en-documenten
+    titel: "Mensen en documenten"
+    onderwerpen: [pose-en-menselijke-analyse, gezichtsanalyse, ocr-en-document-ai]
+    tekst: "Houding schatten, gezichten (alleen met kunstmatige data of data met toestemming), en tekst en documenten lezen."
+  - id: beeldvorming
+    titel: "Beeldvorming en herstel"
+    onderwerpen: [restauratie-en-low-level-vision, d13-beeldacquisitie-en-computational-imaging, medische-beeldvorming-als-cv-taak, overige-cv-gebieden]
+    tekst: "Ruis en onscherpte wegwerken, super-resolutie, hoe camera's beelden maken, medische beelden en andere gebieden zoals satellietbeelden."
+  - id: eindproject
+    titel: "Eindproject"
+    onderwerpen: []
+    tekst: "Een eigen ResNet met Grad-CAM, en een eigen detector of U-Net op scènes die de course zelf maakt; de lessen dekken geen nieuwe subonderwerpen, ze passen toe wat de modules ervoor leerden."
+
+# =====================================================================================================
+- id: spraak
+  titel: "Spraak en audio"
+  titel_en: "Speech, audio and music"
+  kaart: [D14]
+  doel: "Geluid als data: audio herkennen, spraak herkennen en maken, sprekers, muziek en gesproken dialoog."
+  proef: nieuw
+  gebruikt: {basis: [], gevorderd: [wiskunde, signalen-en-meetkunde, trainen, cnn, rnn, attention], expert: []}
+  project:
+    id: audio
+    titel: "Van geluidsgolf tot spraakherkenner"
+    basis: "Een golf en een spectrogram, en een pretrained spraakherkenner gebruiken."
+    gevorderd: "Een eigen audioclassifier op spectrogrammen en een kleine CTC-spraakherkenner."
+    expert: "Een spraakherkenner met self-supervised features, of een kleine tekst-naar-spraak met een audiocodec."
+  eindproject: "Een eigen CTC-spraakherkenner op een kleine dataset met een vrije licentie, met de word error rate tegen een pretrained model."
+  papers: ["CTC (Graves e.a. 2006) op een klein spraakcorpus", "SpecAugment (2019): het effect van augmentatie op spectrogrammen"]
+  modules:
+  - id: geluid
+    titel: "Geluid als data"
+    onderwerpen: [audio-fundamenten, d14-spraakproductie-gehoor-en-psychoakoestiek]
+    tekst: "Sampling, de golf, het spectrogram en de mel-schaal, hoe mensen spreken en horen."
+  - id: herkennen
+    titel: "Geluid herkennen"
+    onderwerpen: [audioclassificatie-en-tagging, d14-paralinguistiek-en-spraakemotie]
+    tekst: "Een audioclassifier op spectrogrammen, geluiden taggen, en emotie en andere signalen in een stem."
+  - id: asr
+    titel: "Spraakherkenning"
+    onderwerpen: [spraakherkenning-asr, self-supervised-spraakrepresentaties]
+    tekst: "Van HMM naar CTC en attention, word error rate, een eigen kleine herkenner, Whisper gebruiken, en self-supervised features zoals wav2vec 2.0."
+  - id: sprekers
+    titel: "Sprekers"
+    onderwerpen: [sprekerherkenning-en-diarization]
+    tekst: "Wie spreekt er: sprekerherkenning en diarization."
+  - id: spraak-maken
+    titel: "Spraak en geluid maken"
+    onderwerpen: [text-to-speech-en-voice-cloning, neurale-audiocodecs-en-audiotokenizers, algemene-audiogeneratie]
+    tekst: "Tekst naar spraak, vocoders, audiocodecs en audiotokens, en geluid genereren; stemklonen alleen met toestemming."
+  - id: muziek
+    titel: "Muziek"
+    onderwerpen: [muziek-ai, d14-muziekanalyse-en-mir]
+    tekst: "Muziek analyseren (tempo, akkoorden, genre) en muziek genereren."
+  - id: dialoog
+    titel: "Gesproken dialoog"
+    onderwerpen: [speech-to-speech-en-gesproken-dialoog]
+    tekst: "Van spraak naar spraak en spraakassistenten die in realtime praten."
+  - id: ruimte
+    titel: "Ruis en ruimte"
+    onderwerpen: [spraakverbetering-en-bronscheiding, d14-microfoonarrays-en-ruimtelijke-audio]
+    tekst: "Ruis onderdrukken, stemmen scheiden, en meerdere microfoons en ruimtelijk geluid."
+
+# =====================================================================================================
+- id: generatief
+  titel: "Generatieve AI"
+  titel_en: "Generative AI and multimodal models"
+  kaart: [D12]
+  doel: "Modellen die nieuwe beelden en meer maken: autoencoders, VAE's, GAN's, diffusie, flow matching, en modellen die beeld en tekst koppelen."
+  proef: nieuw
+  gebruikt: {basis: [], gevorderd: [wiskunde, signalen-en-meetkunde, trainen, attention], expert: []}
+  project:
+    id: gen
+    titel: "Je eigen generator"
+    basis: "Een klein text-to-image-model gebruiken en sturen dat op een CPU draait (met een opgenomen run als terugval), en begrijpen wat er gebeurt."
+    gevorderd: "Een autoencoder, een VAE, een GAN en een diffusiemodel op Fashion-MNIST."
+    expert: "Een klasse-geconditioneerd diffusiemodel met classifier-free guidance, en flow matching."
+  eindproject: "Een klasse-geconditioneerd diffusiemodel dat je zelf traint op Fashion-MNIST (of als langere variant CIFAR-10, alleen gedownload), met guidance en een eerlijke meting van de kwaliteit."
+  papers: ["DDPM (Ho e.a. 2020) op Fashion-MNIST", "Classifier-free guidance (Ho en Salimans 2022)"]
+  modules:
+  - id: idee
+    titel: "Wat generatief modelleren is"
+    onderwerpen: [fundamenten-van-generatief-modelleren, text-to-image-systemen-als-casus]
+    tekst: "Een verdeling leren en eruit samplen, likelihood, de families van generatieve modellen, en hoe een text-to-image-systeem in elkaar zit."
+  - id: autoencoders
+    titel: "Autoencoders en VAE's"
+    onderwerpen: [vaes-en-discrete-latents, d11-boltzmann-machines-en-vroege-generatieve-modellen]
+    tekst: "Een autoencoder, de VAE met de ELBO, discrete latents (VQ-VAE), en de voorlopers: Boltzmann machines."
+  - id: gans
+    titel: "GAN's"
+    onderwerpen: [gans]
+    tekst: "Generator tegen discriminator, waarom GAN's instabiel trainen, en de bekende varianten."
+  - id: diffusie
+    titel: "Diffusie en flow matching"
+    onderwerpen: [diffusiemodellen, flow-matching-en-rectified-flow, few-step-generatie-en-distillatie, diffusion-transformers]
+    tekst: "Ruis toevoegen en weghalen, DDPM zelf bouwen, samplers, guidance, latente diffusie, flow matching, in weinig stappen genereren en diffusion transformers."
+  - id: andere-families
+    titel: "Flows, energie en autoregressief"
+    onderwerpen: [normalizing-flows-ebms-en-score-matching, autoregressieve-en-masked-generatieve-modellen]
+    tekst: "Normalizing flows, energy-based models, score matching, en beelden genereren token voor token."
+  - id: sturen
+    titel: "Sturen en bewerken"
+    onderwerpen: [controleerbare-generatie-en-beeldbewerking, memorisatie-in-generatieve-modellen]
+    tekst: "ControlNet, inpainting en beelden bewerken, en wanneer een generatief model zijn trainingsdata naprint."
+  - id: multimodaal
+    titel: "Beeld en tekst samen"
+    onderwerpen: [taalbeeld-pretraining, multimodale-fusie-en-retrieval, vision-language-models-architectuur, any-to-any-modellen]
+    tekst: "CLIP zelf trainen op klein formaat, zoeken tussen beeld en tekst, hoe een vision-language model werkt, en modellen die alles in alles omzetten."
+  - id: video-en-3d
+    titel: "Video, 3D en wereldmodellen"
+    onderwerpen: [videogeneratie-en-world-models, 3d-en-4d-generatie]
+    tekst: "Video genereren, wereldmodellen, en 3D genereren."
+
+# =====================================================================================================
+- id: klassiek-ml
+  titel: "Klassieke ML en data science"
+  titel_en: "Classical machine learning and data science"
+  kaart: [D10]
+  doel: "Alles van machine learning naast deep learning: meer modellen, ongesuperviseerd leren, tijdreeksen, aanbevelen, en echte tabeldata goed aanpakken."
+  proef: [ml-decision-tree, ml-kmeans]
+  gebruikt: {basis: [], gevorderd: [data-bronnen, wiskunde, signalen-en-meetkunde, trainen, klassieke-modellen-formeel, cnn, rnn, attention], expert: []}
+  project:
+    id: tabular
+    titel: "Tabeldata van begin tot eind"
+    basis: "Een tabulaire dataset verkennen, schoonmaken en eerlijk modelleren met bomen."
+    gevorderd: "SVM's, clustering, anomalieën en een tijdreeksvoorspelling op dezelfde data."
+    expert: "Conformal prediction, verschuiving in de data en AutoML tegen je eigen pijplijn."
+  eindproject: "Een complete pijplijn op een tabulaire dataset, eerlijk vergeleken met een neuraal netwerk, met onzekerheid per voorspelling."
+  papers: ["Why do tree-based models still outperform deep learning on tabular data? (Grinsztajn e.a. 2022), op een deel van de benchmark"]
+  modules:
+  - id: modellen
+    titel: "Meer modellen"
+    onderwerpen: [instance-based-leren-en-naive-bayes, bomen-en-ensembles, svm-en-kernelmethoden, glm-s-en-bayesiaanse-lineaire-modellen,
+                  d10-regelinductie-en-symbolisch-leren, multiclass-multilabel-en-ranking, inductive-bias-no-free-lunch-occam]
+    tekst: "Verder na de basis: XGBoost-achtige boosting van binnen, SVM's en de kernel trick, GLM's, regels leren, meerdere labels en ranking, en waarom geen model altijd wint."
+  - id: ongesuperviseerd
+    titel: "Zonder labels, verder"
+    onderwerpen: [clustering#3+4, clustering, d10-clustering-verdere-methoden, dimensiereductie, d10-manifold-learning-en-visualisatie, anomaliedetectie, patroonmining-en-dichtheidsschatting]
+    tekst: "Hiërarchisch clusteren, DBSCAN en Gaussian mixtures, t-SNE en UMAP, anomalieën vinden, patronen en dichtheden."
+  - id: tijdreeksen
+    titel: "Tijdreeksen"
+    onderwerpen: [dataframes#3, tijdreeksen, d10-tijdreeksanalyse-en-spatio-temporele-data]
+    tekst: "Trend en seizoen, ARIMA, voorspellen en eerlijk testen in de tijd, en data over plaats en tijd."
+  - id: aanbevelen
+    titel: "Aanbevelen en netwerken"
+    onderwerpen: [recommender-systems, d10-moderne-recommenders, d10-netwerkanalyse-en-graph-mining]
+    tekst: "Collaborative filtering, matrixfactorisatie, moderne recommenders en netwerkanalyse."
+  - id: praktijk
+    titel: "Tabeldata in de praktijk"
+    onderwerpen: [tabulaire-data-in-de-praktijk, data-leakage, onevenwichtige-data, automl, labelen-en-annotatie, weinig-labels-synthetische-data-en-data-centric-ai, leren-met-weinig-labels]
+    tekst: "Echte tabellen, lekkage opsporen, scheve klassen, AutoML, labelen en annotatie, met weinig labels werken en data-centric AI."
+  - id: betrouwbaar
+    titel: "Als de wereld verandert"
+    onderwerpen: [d10-distribution-shift-en-domeingeneralisatie, online-leren-en-drift, overige-leersettings]
+    tekst: "Als de wereld verandert (met conformal prediction uit onzekerheid), online leren en drift, en andere manieren van leren."
+
+# =====================================================================================================
+- id: rl
+  titel: "Reinforcement learning"
+  titel_en: "Reinforcement learning"
+  kaart: [D18]
+  doel: "Leren door te proberen: bandits, RL met tabellen, diep RL, policy gradients, modellen van de wereld en RL in de echte wereld."
+  proef: [rl-what-is-rl, rl-q-learning]
+  gebruikt: {basis: [], gevorderd: [data-bronnen, wiskunde, trainen, klassieke-modellen-formeel], expert: []}
+  project:
+    id: agent
+    titel: "Je eigen agent"
+    basis: "Bandits en een agent met een tabel in een rooster, met Monte Carlo en TD-learning."
+    gevorderd: "DQN en REINFORCE, en een actor-critic in een Gymnasium-omgeving."
+    expert: "PPO vanaf nul, en een model-based of offline variant."
+  eindproject: "Een PPO-agent die je vanaf nul schrijft en traint in een Gymnasium-omgeving, met de leercurve over meerdere seeds."
+  papers: ["Deep Q-Networks (Mnih e.a. 2015) op een kleine omgeving", "Deep RL that Matters (Henderson e.a. 2018): de invloed van seeds"]
+  modules:
+  - id: bandits
+    titel: "Bandits en exploratie"
+    onderwerpen: [bandits, exploratie]
+    tekst: "De multi-armed bandit, epsilon-greedy, UCB en Thompson sampling, en slim verkennen."
+  - id: tabel
+    titel: "RL met een tabel"
+    onderwerpen: [mdp-s-bellman-en-pomdp-s, dynamic-programming, monte-carlo-methoden, temporal-difference-learning]
+    tekst: "Na value iteration en Q-learning uit het fundament: de Bellman-vergelijkingen, policy iteration, Monte Carlo, SARSA en TD(λ), en wat je doet als je de toestand niet ziet."
+  - id: diep
+    titel: "Diep RL"
+    onderwerpen: [function-approximation, deep-value-based-rl, policy-gradients, actorcritic]
+    tekst: "Een netwerk als functie, DQN met replay en target network, REINFORCE, actor-critic, PPO en SAC."
+  - id: modellen
+    titel: "Plannen en modellen"
+    onderwerpen: [plannen-en-leren-met-modellen, model-based-rl-en-world-models]
+    tekst: "Dyna, plannen met een geleerd model, en wereldmodellen."
+  - id: settings
+    titel: "Andere settings"
+    onderwerpen: [offline-rl, imitation-learning-en-inverse-rl, hierarchische-rl, multi-agent-rl, beloningsontwerp]
+    tekst: "Leren uit een vaste dataset, nadoen en de beloning terugzoeken, hiërarchie, meerdere agents en een goede beloning ontwerpen."
+  - id: praktijk
+    titel: "RL in de praktijk"
+    onderwerpen: [tooling-en-experimentele-praktijk, rl-in-de-echte-wereld, mijlpalen-als-casus, d18-rl-psychologie-en-neurowetenschap, geavanceerde-en-dwarsdoorsnijdende-onderwerpen]
+    tekst: "Gymnasium en eerlijke experimenten, RL buiten het lab, AlphaGo als casus, dopamine en leren, en open problemen."
+
+# =====================================================================================================
+- id: onzekerheid
+  titel: "Onzekerheid en causaliteit"
+  titel_en: "Uncertainty, probabilistic models and causality"
+  kaart: [D6]
+  doel: "Redeneren met kansen: Bayesiaanse netwerken, modellen over tijd, inferentie, Bayesiaanse ML, beslissen en oorzaak en gevolg."
+  proef: [prob-bayes, data-two-columns]
+  gebruikt: {basis: [], gevorderd: [wiskunde, trainen, klassieke-modellen-formeel], expert: []}
+  project:
+    id: prob
+    titel: "Een Bayesiaans netwerk, probabilistisch programmeren en een causale analyse"
+    basis: "Onzekerheid uitdrukken, een klein Bayesiaans netwerk met de hand, en samenhang tegenover oorzaak."
+    gevorderd: "Een HMM en een Kalman-filter, en een model in een probabilistische programmeertaal."
+    expert: "Variational inference en een causaal effect schatten met een causaal model."
+  eindproject: "Een causaal effect schatten op echte data en laten zien waarom alleen correlatie misleidt."
+  papers: ["Weight Uncertainty in Neural Networks (Bayes by Backprop, 2015) op een kleine dataset"]
+  modules:
+  - id: onzekerheid
+    titel: "Onzekerheid uitdrukken"
+    onderwerpen: [onzekerheid-kwantificeren, onzekerheid-en-conformal-prediction, alternatieve-onzekerheidsformalismen, fuzzy-logica]
+    tekst: "Soorten onzekerheid, kansen als graad van geloof, onzekerheid meten en conformal prediction, Dempster-Shafer en fuzzy logica."
+  - id: netwerken
+    titel: "Bayesiaanse netwerken"
+    onderwerpen: [bayesiaanse-netwerken, undirected-en-relationele-modellen, d6-grafische-modellen-gevorderd, d6-grafische-modellen-leren, d6-tractable-probabilistische-modellen]
+    tekst: "Een Bayesiaans netwerk bouwen en ermee rekenen, Markov random fields, grafische modellen leren uit data, en modellen waarin rekenen snel gaat."
+  - id: tijd
+    titel: "Onzekerheid over tijd"
+    onderwerpen: [probabilistisch-redeneren-over-tijd, d6-state-space-modellen-en-tracking]
+    tekst: "Filteren, voorspellen en terugkijken, het Bayes filter, HMM's met forward-backward en Viterbi, het Kalman filter en het particle filter, en state-space-modellen en tracking in de diepte (Markov-ketens en Monte Carlo komen uit de gedeelde module Wiskunde formeel)."
+  - id: inferentie
+    titel: "Inferentie"
+    onderwerpen: [d6-benaderende-inferentie, d6-inferentie-als-optimalisatie, probabilistisch-programmeren]
+    tekst: "MCMC, variational inference, en modellen schrijven in een probabilistische programmeertaal."
+  - id: bayesiaanse-ml
+    titel: "Bayesiaanse machine learning"
+    onderwerpen: [probabilistische-ml, d2-bayesiaanse-en-geavanceerde-statistiek, d6-gaussian-processes-en-bayesiaanse-nonparametriek, d6-bayesiaans-deep-learning]
+    tekst: "Latente variabelen en EM, Bayesiaanse statistiek, Gaussian processes en onzekerheid in neurale netwerken."
+  - id: beslissen
+    titel: "Beslissen"
+    onderwerpen: [beslistheorie, d6-beslisanalyse, sequentiele-beslissingen-en-metareasoning]
+    tekst: "Nut en verwachte waarde, beslisbomen en de waarde van informatie, en beslissen in stappen."
+  - id: causaliteit
+    titel: "Oorzaak en gevolg"
+    onderwerpen: [causaliteit-basis, causaliteit-modellen, causal-ml-en-causal-discovery]
+    tekst: "Samenhang is geen oorzaak, causale grafen en de do-operator, confounders, causale effecten schatten en causale structuur ontdekken."
+
+# =====================================================================================================
+- id: klassieke-ai
+  titel: "Zoeken, logica en planning"
+  titel_en: "Search, logic, planning and optimization"
+  kaart: [D4, D5, D7]
+  doel: "De klassieke AI: zoeken en spellen, constraints, logica en kennis, planning, optimalisatie en evolutionaire methoden."
+  proef: [search-bfs, search-minimax]
+  gebruikt: {basis: [data-bronnen], gevorderd: [wiskunde, signalen-en-meetkunde], expert: []}
+  project:
+    id: solver
+    titel: "Je eigen zoeker en planner"
+    basis: "Zoeken en spellen verder, een sudoku met constraints, en een regelsysteem."
+    gevorderd: "Een SAT-solver, een planner in PDDL-stijl en een genetisch algoritme."
+    expert: "Monte Carlo tree search en een neuro-symbolische combinatie met een LLM."
+  eindproject: "Een spel-AI met Monte Carlo tree search, vergeleken met minimax en een eenvoudige heuristiek."
+  papers: ["Een kleine AlphaZero-achtige zelfspeler op een eenvoudig bordspel"]
+  modules:
+  - id: zoeken
+    titel: "Zoeken"
+    onderwerpen: [agentraamwerk, klassieke-agentbegrippen-voor-llm-agents, probleemformulering-en-zoekinfrastructuur, ongeinformeerd-zoeken, heuristisch-zoeken,
+                  d4-geavanceerd-heuristisch-zoeken, lokaal-zoeken-en-complexe-omgevingen, zoeken-binnen-moderne-ai]
+    tekst: "Na BFS en A* uit het fundament: problemen formuleren, uniform cost, heuristieken ontwerpen, IDA* en geheugenzuinig zoeken, hill climbing en simulated annealing, en zoeken binnen moderne AI (beam search, tree of thoughts)."
+  - id: spellen
+    titel: "Spellen"
+    onderwerpen: [spellen-als-zoekprobleem, monte-carlo-tree-search, imperfecte-informatie-en-general-game-playing]
+    tekst: "Alpha-beta, evaluatiefuncties, Monte Carlo tree search, en spellen met verborgen informatie."
+  - id: constraints
+    titel: "Constraints en SAT"
+    onderwerpen: [constraint-satisfaction, sat-en-smt]
+    tekst: "Sudoku en roosters als constraint-probleem, backtracking en propagatie, en een eigen SAT-solver."
+  - id: theorie
+    titel: "Wat berekenbaar is"
+    onderwerpen: [complexiteit-en-berekenbaarheid, d4-automaten-en-formele-talen]
+    tekst: "Big-O, P en NP, wat niet te berekenen is, automaten en formele talen."
+  - id: logica
+    titel: "Logica"
+    onderwerpen: [kennisgebaseerde-agents-en-propositielogica, eerste-orde-logica, logisch-programmeren, automated-reasoning-en-theorem-proving,
+                  neurale-en-llm-theorem-proving, niet-monotoon-redeneren]
+    tekst: "Propositielogica en resolutie, eerste-orde-logica, Prolog-achtig programmeren, stellingen bewijzen, en LLM's die bewijzen zoeken."
+  - id: kennis
+    titel: "Kennis vastleggen"
+    onderwerpen: [ontologieen-en-categorieen, d5-semantische-netwerken-frames-en-scripts, semantic-web-en-knowledge-graphs, gebeurtenissen-tijd-en-mentale-objecten,
+                  d5-kwalitatief-ruimtelijk-en-temporeel-redeneren, commonsense-diagnose-en-kennisverwerving, expert-en-regelsystemen]
+    tekst: "Ontologieën, semantische netwerken, knowledge graphs, redeneren over tijd en ruimte, gezond verstand, en expertsystemen."
+  - id: planning
+    titel: "Planning"
+    onderwerpen: [klassieke-planning, hierarchische-temporele-en-non-deterministische-planning, plannen-onder-onzekerheid, d5-plannen-en-handelen,
+                  d5-plan-en-doelherkenning, d5-mensbewust-en-uitlegbaar-plannen, d5-leren-voor-planning, plannen-met-llms]
+    tekst: "STRIPS en PDDL, een eigen planner, hiërarchisch en temporeel plannen, plannen onder onzekerheid, plannen herkennen en uitleggen, en plannen met LLM's."
+  - id: neuro-symbolisch
+    titel: "Neuro-symbolisch"
+    onderwerpen: [neuro-symbolische-ai, llm-s-plus-symbolische-tools]
+    tekst: "Neurale netwerken en logica samen, en een LLM die een solver of rekenmachine aanroept."
+  - id: optimalisatie
+    titel: "Optimalisatie"
+    onderwerpen: [wiskundige-optimalisatie, klassieke-combinatorische-problemen, solvers-en-metaheuristieken, stochastische-en-black-box-optimalisatie, ml-en-llms-voor-optimalisatie]
+    tekst: "Lineair programmeren, de handelsreiziger en roosters, solvers en metaheuristieken, black-box-optimalisatie en ML die optimalisatie helpt."
+  - id: evolutie
+    titel: "Evolutie en zwermen"
+    onderwerpen: [genetische-algoritmen, evolution-strategies-en-genetic-programming, multi-objective-en-open-ended-evolutie, swarm-intelligence, d7-artificial-life, llm-gedreven-evolutionair-zoeken]
+    tekst: "Genetische algoritmen, evolution strategies, meerdere doelen tegelijk, zwermen, kunstmatig leven en evolutionair zoeken met een LLM."
+
+# =====================================================================================================
+- id: multi-agent
+  titel: "Multi-agent en speltheorie"
+  titel_en: "Multi-agent systems and game theory"
+  kaart: [D8]
+  doel: "Wat er gebeurt als meerdere agents samen of tegen elkaar spelen: speltheorie, stemmen, veilingen, onderhandelen en leren met meerdere agents."
+  proef: nieuw
+  gebruikt: {basis: [], gevorderd: [wiskunde, signalen-en-meetkunde], expert: []}
+  project:
+    id: games
+    titel: "Evenwichten, markten en agents die onderhandelen"
+    basis: "Nash-evenwichten vinden in kleine spellen, en een simulatie met veel agents (een markt of het verkeer)."
+    gevorderd: "Een veiling ontwerpen, stemregels vergelijken en agents die leren in een herhaald spel."
+    expert: "Agents die onderhandelen, en meerdere LLM-agents die samenwerken."
+  eindproject: "Een markt of veiling met lerende agents ontwerpen en testen, met een analyse in speltheorie van wat er gebeurt en waarom."
+  papers: ["Dynamic Models of Segregation (Schelling 1971), als agent-based model", "Axelrods toernooi (The Evolution of Cooperation, 1981), uitgebreid met lerende spelers"]
+  modules:
+  - id: speltheorie
+    titel: "Speltheorie"
+    onderwerpen: [niet-cooperatieve-speltheorie, d8-incomplete-informatie-en-signalering, computationele-speltheorie, d8-evolutionaire-en-gedragsspeltheorie]
+    tekst: "Spellen in normale vorm, Nash-evenwichten, gemengde strategieën, verborgen informatie, evenwichten berekenen en evolutionaire speltheorie."
+  - id: samen-beslissen
+    titel: "Samen beslissen"
+    onderwerpen: [cooperatieve-speltheorie, computationele-social-choice]
+    tekst: "Coalities en de Shapley-waarde, stemregels en waarom geen stemregel perfect is."
+  - id: mechanismen
+    titel: "Veilingen en mechanismen"
+    onderwerpen: [mechanism-design-en-veilingen, d8-gevorderd-mechanism-design]
+    tekst: "Veilingen, eerlijk bieden, en spelregels ontwerpen zodat eigenbelang goed uitpakt."
+  - id: leren
+    titel: "Leren met meerdere agents"
+    onderwerpen: [multi-agentomgevingen, d8-leren-in-spellen, multi-agent-leren-en-plannen]
+    tekst: "Omgevingen met meerdere agents, leren in herhaalde spellen, en samen leren en plannen."
+  - id: agents
+    titel: "Agents en organisaties"
+    onderwerpen: [onderhandeling-argumentatie-vertrouwen-en-reputatie, d8-agentprogrammering-en-aose, d8-logica-voor-multi-agentsystemen, d8-normen-organisaties-en-instituties, llm-gebaseerde-multi-agentsystemen]
+    tekst: "Onderhandelen, argumenteren, vertrouwen en reputatie, agents programmeren, logica voor kennis van anderen, normen, en LLM-agents die samenwerken."
+  - id: simulatie
+    titel: "Simuleren met agents"
+    onderwerpen: [agent-based-modelling-en-simulatie]
+    tekst: "Agent-based modellen: files, epidemieën en markten nabootsen."
+
+# =====================================================================================================
+- id: robotica
+  titel: "Robotica"
+  titel_en: "Robotics and embodied AI"
+  kaart: [D19]
+  doel: "AI met een lichaam: beweging, regelen, waarnemen en lokaliseren, plannen, grijpen en lopen, en robots die leren."
+  proef: nieuw
+  gebruikt: {basis: [signalen-en-meetkunde], gevorderd: [wiskunde], expert: []}
+  project:
+    id: robot
+    titel: "Een gesimuleerde robotarm en rijdende robot"
+    basis: "Een rijdende robot in een simulatie die bijhoudt waar hij is (odometrie) en met een eenvoudige regelaar naar een doel rijdt."
+    gevorderd: "Kinematica van een robotarm, een PID-regelaar, lokaliseren met een filter en een pad plannen."
+    expert: "Een arm die leert grijpen met RL of door na te doen, en van simulatie naar de echte wereld."
+  eindproject: "Een gesimuleerde robotarm die een voorwerp leert oppakken, eerst met een plan en daarna met leren."
+  papers: ["Behavior cloning tegenover Diffusion Policy (Chi e.a. 2023) op een kleine 2D-duwtaak, kort getraind"]
+  modules:
+  - id: robots
+    titel: "Wat een robot is"
+    onderwerpen: [wat-een-robot-is, software-en-hardware-om-mee-te-oefenen, sensoren-en-actuatoren, d19-robotontwerp-en-morfologie, toepassingsvelden, humanoide-robots]
+    tekst: "Sensoren en motoren, een simulator, hoe een robot is gebouwd, waar robots werken en humanoïden."
+  - id: beweging
+    titel: "Beweging"
+    onderwerpen: [wiskunde-van-beweging, kinematica, dynamica-en-trajecten]
+    tekst: "Posities en rotaties, voorwaartse en inverse kinematica, krachten en banen."
+  - id: regelen
+    titel: "Regelen"
+    onderwerpen: [regeltechniek, d19-robotregeling]
+    tekst: "Terugkoppeling, de PID-regelaar, stabiliteit, en model predictive control."
+  - id: waarnemen
+    titel: "Waarnemen en lokaliseren"
+    onderwerpen: [robotperceptie, toestandsschatting-en-lokalisatie, mapping-en-slam]
+    tekst: "Wat een robot ziet, waar hij is met een Kalman- of particle filter, en een kaart maken terwijl hij rijdt (SLAM)."
+  - id: plannen
+    titel: "Plannen en navigeren"
+    onderwerpen: [bewegingsplanning-en-navigatie, d19-taakplanning-en-multi-robotsystemen, d19-robotarchitecturen-en-autonomie]
+    tekst: "Paden plannen met A* en RRT, taken plannen, meerdere robots, en hoe je een autonome robot opbouwt."
+  - id: grijpen-en-lopen
+    titel: "Grijpen en lopen"
+    onderwerpen: [manipulatie, locomotie]
+    tekst: "Grijpen en voorwerpen verplaatsen, en lopen op benen of wielen."
+  - id: leren
+    titel: "Robots die leren"
+    onderwerpen: [robot-learning, simulatie-en-sim-to-real, robot-foundation-models-en-vla-s, world-models-voor-embodied-ai]
+    tekst: "Leren door na te doen en met RL, van simulatie naar echt, vision-language-action-modellen en wereldmodellen."
+  - id: mens-en-robot
+    titel: "Robots en mensen"
+    onderwerpen: [mensrobotinteractie, d19-fysieke-hri-en-teleoperatie, d19-assistieve-en-draagbare-robotica]
+    tekst: "Samenwerken met mensen, op afstand besturen, en robots die mensen helpen."
+  - id: voertuigen
+    titel: "Voertuigen, drones en het veld"
+    onderwerpen: [autonome-voertuigen, drones, d19-veldrobotica]
+    tekst: "Zelfrijdende auto's, drones en robots buiten."
+
+# =====================================================================================================
+- id: bouwen
+  titel: "Bouwen met AI"
+  titel_en: "Building with AI: prompts, RAG and agents"
+  kaart: [D17]
+  doel: "Toepassingen bouwen met bestaande modellen: prompts, API's, RAG, agents en tools, evalueren en in productie brengen. Zonder API-sleutel: met een lokaal open model."
+  proef: [start-using-ai-tools, start-your-own-assistant]
+  gebruikt: {basis: [], gevorderd: [], expert: []}
+  project:
+    id: app
+    titel: "Je eigen assistent op een lokaal open model"
+    basis: "Een lokaal model aanroepen via een API, met goede prompts en een eerste RAG over je eigen documenten."
+    gevorderd: "Tools en function calling, een agent met geheugen, en een eigen evaluatieset."
+    expert: "Een agent met retrieval en tools, foutanalyse en bewaking in productie."
+  eindproject: "Een agent met retrieval en tools op een lokaal open model, met een eigen evaluatieset en foutanalyse."
+  papers: ["Lost in the Middle (Liu e.a. 2023) met een klein lokaal model"]
+  modules:
+  - id: werk
+    titel: "AI in je werk"
+    onderwerpen: [d17-ai-in-dagelijks-werk, ai-ondersteund-programmeren, d17-ai-code-kwaliteit-en-teampraktijk]
+    tekst: "AI gebruiken voor schrijven en analyseren, programmeren met een assistent, en code van AI goed nakijken."
+  - id: prompts
+    titel: "Prompts voor ontwikkelaars"
+    onderwerpen: [prompting-voor-ontwikkelaars, sampling-ensembles-en-zoeken, context-engineering, automatische-promptoptimalisatie]
+    tekst: "Systeemprompts en voorbeelden, gestructureerde uitvoer, meerdere antwoorden combineren, de context vullen, en prompts automatisch verbeteren."
+  - id: apis
+    titel: "Modellen aanroepen"
+    onderwerpen: [model-api-s, modelkeuze-routing-en-open-weights, multimodale-realtime-en-overige-api-s, klassieke-ai-diensten-via-api-s, browser-en-on-device-ai]
+    tekst: "Een OpenAI-compatibele API van een lokaal model, een model kiezen, beeld en spraak via een API, en AI in de browser of op een telefoon."
+  - id: rag
+    titel: "RAG"
+    onderwerpen: [rag-basis, retrieval-techniek, geavanceerde-rag, rag-evalueren-en-in-productie]
+    tekst: "Documenten opknippen, embeddings en een vectorindex, hybride zoeken en reranken, geavanceerde RAG, en RAG evalueren."
+  - id: agents
+    titel: "Agents en tools"
+    onderwerpen: [workflows-en-agentpatronen, planning-reflectie-en-geheugen, multi-agentsystemen, gespecialiseerde-agents, tool-use-en-function-calling,
+                  code-execution-computer-use-en-browser-use, protocollen-en-standaarden, frameworks-en-orkestratie]
+    tekst: "Function calling, workflows en agentpatronen, plannen, reflectie en geheugen, code laten uitvoeren, MCP, en frameworks."
+  - id: productie
+    titel: "Evalueren en in productie"
+    onderwerpen: [agents-beheersen-en-evalueren, evaluatie-en-llmops, d17-llmops-en-productie, modellen-aanpassen-vanuit-de-app]
+    tekst: "Een evaluatieset maken, agents begrenzen, LLMOps, kosten en snelheid bewaken, en een model aanpassen vanuit je app."
+  - id: open-problemen
+    titel: "Open problemen"
+    onderwerpen: [open-problemen]
+    tekst: "Waar het bouwen met AI nog vastloopt (gedateerde pagina, besluit 2.11)."
+
+# =====================================================================================================
+- id: systemen
+  titel: "ML-systemen"
+  titel_en: "ML systems, hardware and MLOps"
+  kaart: [D23]
+  doel: "Wat er nodig is om modellen snel te trainen, betrouwbaar te serveren en in productie te houden: hardware, kernels, parallellisme, MLOps en inference."
+  proef: nieuw
+  gebruikt: {basis: [wiskunde], gevorderd: [data-bronnen, signalen-en-meetkunde, trainen, klassieke-modellen-formeel, attention], expert: []}
+  project:
+    id: ops
+    titel: "Je eigen model meten, versnellen, serveren en bewaken"
+    basis: "Een model verpakken, testen en als dienst draaien, met experiment tracking."
+    gevorderd: "Meten waar de tijd heen gaat, mixed precision, en een model quantizen en serveren."
+    expert: "Een eigen GPU-kernel, en trainen over meerdere GPU's (of gesimuleerd)."
+  eindproject: "Je eigen model als lokale dienst, met metingen van snelheid, geheugen en kosten, en bewaking op drift."
+  papers: ["FlashAttention (Dao e.a. 2022): de snelheidswinst op je eigen GPU meten"]
+  modules:
+  - id: productie
+    titel: "ML in productie"
+    onderwerpen: [ml-systemen-in-productie, levenscyclus-en-stakeholderrollen, ontwikkelomgeving-tracking-en-reproduceerbaarheid, packaging-testen-en-pipelines,
+                  deployment-serving-en-release, monitoring-drift-en-hertraining, documentatie-platforms-en-llmops, cloud-en-platforms]
+    tekst: "De levenscyclus van een model, experiment tracking, verpakken en testen, uitrollen, bewaken op drift, documentatie en model cards, en de cloud."
+  - id: data
+    titel: "Data voor ML"
+    onderwerpen: [data-engineering-voor-ml, d3-opslag-en-data-loading-voor-training, datakwaliteit-versiebeheer-en-feature-stores, data-op-webschaal]
+    tekst: "Datapijplijnen, data op webschaal (MapReduce, webcrawls, tekst uit HTML halen, curatie), opslag en snel laden tijdens het trainen, datakwaliteit, versiebeheer en feature stores."
+  - id: hardware
+    titel: "Hardware"
+    onderwerpen: [compute-geletterdheid, gpu-architectuur-geheugen-en-roofline, getalformaten, accelerators-interconnects-en-rack-scale,
+                  datacenters-toeleveringsketen-en-benchmarks, d23-quantumcomputing-en-quantum-ml, energie-kosten-en-duurzaamheid]
+    tekst: "Wat compute is, de GPU en de roofline, FP16 en BF16, accelerators en datacenters, quantumcomputers, en energie en kosten."
+  - id: snel-trainen
+    titel: "Snel trainen"
+    onderwerpen: [gpu-programmeren, kernels-fusie-en-compilers, profiling-en-prestatiemetrics, compute-en-kostenramingen, precisie-en-geheugenbesparing]
+    tekst: "Mixed precision, waar het geheugen heen gaat, de 6ND-regel, profilen en MFU, een eigen Triton-kernel, FlashAttention, torch.compile en gradient checkpointing."
+  - id: schaal
+    titel: "Op veel GPU's"
+    onderwerpen: [d23-communicatie-en-collectives, parallellisme, trainingsinfrastructuur, multi-gpu-overzicht]
+    tekst: "All-reduce en andere collectives, data-, tensor- en pipeline-parallellisme, en de infrastructuur van grote trainingsruns."
+  - id: inference
+    titel: "Inference"
+    onderwerpen: [inference-fundamenten, llm-serving, inference-op-schaal, edge-on-device-en-browser]
+    tekst: "Latency en throughput, batching, LLM's serveren met paged attention, inference op schaal, en modellen op een telefoon of in de browser."
+
+# =====================================================================================================
+- id: verantwoord
+  titel: "Verantwoorde en veilige AI"
+  titel_en: "Responsible and safe AI"
+  kaart: [D24, D25]
+  doel: "Ethiek, fairness, uitlegbaarheid, privacy, security, AI-veiligheid en alignment (besluit 1.13: ethiek blijft in dit domein)."
+  proef: [rai-bias-in-data]
+  gebruikt: {basis: [], gevorderd: [data-bronnen, wiskunde, trainen, klassieke-modellen-formeel, cnn, attention], expert: []}
+  project:
+    id: audit
+    titel: "Je eigen modellen doorlichten"
+    basis: "Bias meten in een eigen classifier en een model uitleggen met eenvoudige methoden."
+    gevorderd: "SHAP en counterfactuals, differential privacy, en een adversarial aanval en verdediging."
+    expert: "Een sparse autoencoder op je eigen model, en een evaluatie van gevaarlijk gedrag."
+  eindproject: "Een audit van je eigen modellen: een classifier en een kleine transformer uit het fundament (of je eigen GPT als je LLM's deed). Bias, uitleg, privacy, aanvallen en interpretability, met een sparse autoencoder."
+  papers: ["In-context Learning and Induction Heads (2022), op een kleine transformer met twee lagen", "Explaining and Harnessing Adversarial Examples (FGSM, 2015)"]
+  modules:
+  - id: ethiek
+    titel: "Ethiek"
+    onderwerpen: [waarom-ai-ethiek, ethische-theorieen-en-machine-ethiek, principes-en-richtlijnen, ontwerpmethoden, verantwoordelijkheid-en-menselijk-toezicht,
+                  autonomie-manipulatie-en-waardigheid, beroeps-en-onderzoeksethiek, casussen]
+    tekst: "Waarom ethiek bij AI hoort, ethische theorieën, richtlijnen, ontwerpen met waarden, verantwoordelijkheid en toezicht, en casussen."
+  - id: fairness
+    titel: "Fairness"
+    onderwerpen: [discriminatie-begrippen-en-recht, bronnen-van-bias, formele-fairnessdefinities, bias-meten-en-mitigeren, bias-per-modaliteit,
+                  fairness-in-de-praktijk-en-kritische-perspectieven, datasetdocumentatie]
+    tekst: "Waar bias vandaan komt, formele definities van fairness en waarom ze botsen, bias meten en verminderen, bias in taal en beeld, en datasets documenteren."
+  - id: uitleggen
+    titel: "Uitleggen"
+    onderwerpen: [evaluatie-en-modelselectie#9, xai-begrippen-en-het-recht-op-uitleg, glass-box-modellen, model-agnostische-post-hoc-methoden, d24-globale-model-agnostische-methoden,
+                  d24-counterfactuals-voorbeelden-en-recourse, saliency-en-uitleg-evalueren, xai-tooling, uitlegbaarheid-voor-llms]
+    tekst: "Modellen die zichzelf uitleggen, LIME en SHAP, partial dependence, counterfactuals, saliency en of een uitleg klopt, en uitleg bij LLM's."
+  - id: interpretability
+    titel: "In het model kijken"
+    onderwerpen: [mechanistic-interpretability, d24-mi-features-steering-en-editing, cot-faithfulness-en-monitorability]
+    tekst: "Circuits en probes, sparse autoencoders, sturen met features, en of de tussenstappen van een model eerlijk zijn."
+  - id: privacy
+    titel: "Privacy"
+    onderwerpen: [privacybegrippen-en-de-avg, anonimisering-en-heridentificatie, differential-privacy, federated-learning-en-pets,
+                  memorisatie-inference-aanvallen-en-unlearning, privacy-in-llm-producten-en-privacy-engineering, privacybewuste-dataverwerking]
+    tekst: "Privacy en de AVG, waarom anonimiseren vaak faalt, differential privacy, federated learning, aanvallen die trainingsdata terugvinden, en unlearning."
+  - id: security
+    titel: "Security"
+    onderwerpen: [dreigingsmodellering, adversarial-examples, poisoning-en-backdoors, modelextractie-en-beveiliging-van-gewichten, aanvallen-op-llm-applicaties,
+                  d24-llm-applicatiebeveiliging, supply-chain-en-agent-security, d24-agent-security, red-teaming-provenance-en-securitykaders, d24-provenance-watermerken-en-deepfake-detectie]
+    tekst: "Dreigingen in kaart brengen, adversarial examples, vergiftigde data en backdoors, modellen stelen, prompt injection en jailbreaks, agents beveiligen, red-teaming, en watermerken en deepfakes herkennen."
+  - id: veiligheid
+    titel: "AI-veiligheid"
+    onderwerpen: [ai-veiligheid-als-vakgebied, het-veld-van-ai-veiligheid, specification-gaming-en-reward-hacking, generalisatiefouten, robuustheid-betrouwbaarheid-en-assurance,
+                  d25-safety-engineering, safeguards-bij-uitrol, frontier-safety-frameworks, d25-systemische-en-structurele-risicos,
+                  het-debat-over-catastrofale-en-existentiele-risico-s, ai-welzijn-en-morele-status]
+    tekst: "Wat AI-veiligheid is, reward hacking, verkeerd generaliseren, robuustheid, safety engineering, safeguards bij uitrol, en het debat over grote risico's."
+  - id: alignment
+    titel: "Alignment"
+    onderwerpen: [grenzen-van-leren-van-menselijke-feedback, scalable-oversight, misleidende-alignment-scheming-en-situational-awareness, sandbagging-en-de-integriteit-van-evaluaties,
+                  evaluaties-van-gevaarlijke-capabilities, model-organisms-of-misalignment, ai-control]
+    tekst: "De grenzen van menselijke feedback, toezicht op modellen die slimmer zijn dan wij, misleiding meten, gevaarlijke capabilities evalueren, en AI control."
+
+# =====================================================================================================
+- id: mens
+  titel: "Mens en maatschappij"
+  titel_en: "People and society"
+  kaart: [D1, D9, D22, D26]
+  doel: "AI en mensen: geschiedenis en filosofie, hoe mensen denken en wat het brein ons leert, mens-AI-interactie, en recht, governance en maatschappij. Weinig code."
+  proef: nieuw
+  gebruikt: {basis: [], gevorderd: [wiskunde, signalen-en-meetkunde], expert: []}
+  project:
+    id: society
+    titel: "Je eigen AI-toepassing toetsen aan de wet en aan wat we weten over mensen"
+    basis: "Een AI-toepassing indelen volgens de AI Act en testen met mensen."
+    gevorderd: "Een experiment met mensen ontwerpen, en een cognitief model vergelijken met een neuraal netwerk."
+    expert: "Een impact assessment met een gefundeerd oordeel, en neuroAI: een model vergelijken met hersendata."
+  eindproject: "Een onderbouwde analyse van één AI-toepassing: werking, risico's, wetgeving en effect op mensen."
+  papers: ["Using cognitive psychology to understand GPT-3 (Binz en Schulz 2023): dezelfde experimenten met een klein lokaal model, met de vraag of het effect ook bij kleine modellen optreedt"]
+  modules:
+  - id: geschiedenis-filosofie
+    titel: "Geschiedenis en filosofie"
+    onderwerpen: [definities-en-framings#6+7+8, smalle-algemene-en-superintelligente-ai, agi-en-intelligentie-meten, geschiedenis, historiografie, regionale-geschiedenis-nl-be,
+                  turing-test-en-chinese-room, betekenis-begrip-en-grenzen-van-mechanisme, philosophy-of-mind-en-bewustzijn, embodiment-en-rationaliteit,
+                  superintelligentie-en-singulariteit, d1-ai-in-fictie-en-populaire-cultuur]
+    tekst: "De geschiedenis van AI (ook in Nederland en België), wat intelligentie is en hoe je AGI meet, de Turing-test en de Chinese kamer, bewustzijn, en AI in fictie."
+  - id: cognitie
+    titel: "Hoe mensen denken"
+    onderwerpen: [fundamenten-van-cognitiewetenschap, menselijk-redeneren-en-beslissen, leren-geheugen-en-concepten-bij-mensen, d9-ontwikkelingscognitie,
+                  d9-taal-en-cognitie, d9-waarneming-en-aandacht, theory-of-mind-en-sociale-cognitie, moravec-s-paradox-en-embodiment,
+                  cognitieve-architecturen, cognitieve-architecturen-voor-llm-agents]
+    tekst: "Cognitiewetenschap, redeneren en beslissen bij mensen, leren en geheugen, hoe kinderen leren, taal, waarneming en aandacht, theory of mind, en cognitieve architecturen."
+  - id: brein
+    titel: "Brein en neuroAI"
+    onderwerpen: [neurowetenschap-en-neuroai, d9-computationele-neurowetenschap, braincomputer-interfaces]
+    tekst: "Wat het brein en neurale netwerken van elkaar leren, computationele neurowetenschap en brain-computer interfaces."
+  - id: interactie
+    titel: "Mens en AI samen"
+    onderwerpen: [hybrid-intelligence, mensai-interactie-en-vertrouwen, d22-autonomie-en-menselijke-controle, ai-ux-en-conversational-interfaces,
+                  d22-sociale-agents-en-antropomorfisme, affective-computing-en-computationele-creativiteit, evaluatie-met-mensen]
+    tekst: "Mens en AI als team, vertrouwen, wie de controle houdt, goede AI-interfaces, waarom we machines menselijk vinden, en testen met echte mensen."
+  - id: recht
+    titel: "Recht"
+    onderwerpen: [benaderingen-van-regulering, ai-act-opbouw-en-verboden-praktijken, ai-act-hoog-risico-transparantie-en-gpai, ai-act-handhaving-tijdlijn-en-samenhang,
+                  avg-en-ai-aansprakelijkheid, auteursrecht-en-ip, dsa-en-andere-europese-kaders, nederland, andere-jurisdicties]
+    tekst: "Hoe je AI reguleert, de AI Act stap voor stap, de AVG en aansprakelijkheid, auteursrecht, andere Europese regels, Nederland en de rest van de wereld (gedateerde pagina's, besluit 2.11)."
+  - id: governance
+    titel: "Governance"
+    onderwerpen: [standaarden-en-managementkaders, internationale-governance, compute-governance-en-exportcontroles, ai-governance-in-organisaties,
+                  impact-assessments-en-documentatie, audits-incidenten-en-verantwoorde-release, ai-geletterdheid-voor-organisaties]
+    tekst: "Normen en managementsystemen, internationale afspraken, regels voor chips en compute, AI-beleid in een organisatie, impact assessments en audits."
+  - id: maatschappij
+    titel: "AI in de samenleving"
+    onderwerpen: [werk-en-arbeidsmarkt, onderwijs-en-ai-op-school, desinformatie-deepfakes-en-verkiezingen, machtsconcentratie-en-politieke-economie,
+                  d26-geopolitiek-en-de-ai-race, milieu-impact, creativiteit-en-kunst, ai-companions-en-mentale-gezondheid,
+                  toegankelijkheid-digitale-kloof-en-datawerk, militaire-ai-en-surveillance, publieke-sector-vertrouwen-en-lange-termijn]
+    tekst: "Werk, onderwijs, desinformatie, macht en geopolitiek, het milieu, kunst, AI-vrienden, wie er buiten de boot valt, militaire AI, en de overheid."
+
+# =====================================================================================================
+- id: toepassingen
+  titel: "AI in wetenschap en sectoren"
+  titel_en: "AI in science and in industry"
+  kaart: [D20, D21]
+  doel: "De course toepassen in een vakgebied: eiwitten, medicijnen, klimaat, zorg, financiën, energie, games en meer."
+  proef: nieuw
+  gebruikt: {basis: [], gevorderd: [wiskunde, signalen-en-meetkunde, trainen, cnn], expert: [attention]}
+  project:
+    id: domain
+    titel: "Een vakgebied kiezen en de course toepassen op echte data"
+    basis: "Een kleine vraag uit één vakgebied met open data en een basismodel."
+    gevorderd: "Een eigen model voor een echte taak uit dat vakgebied, eerlijk vergeleken."
+    expert: "Een scientific-ML-model (bijvoorbeeld een physics-informed netwerk) of een model op moleculen."
+  eindproject: "Een eigen project in één vakgebied, van vraag tot resultaat, met de valkuilen van dat vakgebied."
+  papers: ["Physics-informed neural networks (Raissi e.a. 2019) op een eenvoudige vergelijking"]
+  modules:
+  - id: wetenschap
+    titel: "AI in de wetenschap"
+    onderwerpen: [wat-ai-in-de-wetenschap-doet, scientific-ml, ai-wetenschapper-agents, wiskunde-en-formeel-redeneren]
+    tekst: "Wat AI voor de wetenschap doet, scientific ML en physics-informed netwerken, agents die onderzoek doen, en AI in de wiskunde."
+  - id: leven
+    titel: "Leven en gezondheid"
+    onderwerpen: [eiwitten, medicijnontwikkeling, genomica-en-moleculaire-biologie, zorg-en-medische-beeldvorming, d21-publieke-gezondheid-en-digitale-zorg]
+    tekst: "Eiwitstructuur (AlphaFold), medicijnen ontwikkelen, DNA, AI in de zorg en publieke gezondheid."
+  - id: natuur
+    titel: "Materie, klimaat en heelal"
+    onderwerpen: [materialen-en-scheikunde, weer-en-klimaat, astronomie-deeltjesfysica-en-kosmologie, overige-wetenschappen]
+    tekst: "Materialen en moleculen, weersvoorspelling met AI, sterrenkunde en deeltjesfysica."
+  - id: samenleving-als-data
+    titel: "Samenleving als data"
+    onderwerpen: [d20-computational-social-science, d20-economie-en-geesteswetenschappen]
+    tekst: "Computational social science, economie en geesteswetenschappen."
+  - id: bedrijf
+    titel: "Bedrijven"
+    onderwerpen: [financien, marketing-advertenties-en-recommenders-op-schaal, e-commerce-en-retail, klantenservice, hr-en-werving, industrie-en-predictive-maintenance, logistiek-en-supply-chain]
+    tekst: "Financiën en fraude, marketing en aanbevelingen, winkels, klantenservice, werving, onderhoud voorspellen en logistiek."
+  - id: publiek
+    titel: "Publiek, recht en onderwijs"
+    onderwerpen: [recht-als-toepassingsdomein, publieke-sector, onderwijs, journalistiek-en-media, d21-ai-for-social-good]
+    tekst: "AI in de rechtspraak, de overheid, het onderwijs, de journalistiek en voor maatschappelijke doelen."
+  - id: fysiek
+    titel: "Energie, landbouw en vervoer"
+    onderwerpen: [energie-en-smart-grids, landbouw, transport-en-mobiliteit, d21-slimme-steden-en-geospatiale-ai]
+    tekst: "Slimme stroomnetten, landbouw, vervoer en slimme steden."
+  - id: creatief
+    titel: "Creatief en games"
+    onderwerpen: [creatieve-industrie, d21-games]
+    tekst: "AI in de creatieve industrie en in games."
+  - id: cybersecurity
+    titel: "Cybersecurity en andere sectoren"
+    onderwerpen: [cybersecurity-als-defensief-domein, overige-domeinen]
+    tekst: "AI om aanvallen te herkennen, en sectoren die nergens anders passen."
+
+# =====================================================================================================
+- id: dl-verdieping
+  titel: "Deep learning in de diepte"
+  titel_en: "Deep learning in depth: theory and other architectures"
+  kaart: []
+  doel: "Waarom deep learning werkt en wat er naast de standaardbouwstenen bestaat: theorie, representaties leren, grafen, andere architecturen en efficiëntie."
+  proef: nieuw
+  gebruikt: {basis: [], gevorderd: [wiskunde, signalen-en-meetkunde, trainen, klassieke-modellen-formeel, cnn, rnn, attention], expert: []}
+  begint: gevorderd
+  project:
+    id: arch
+    titel: "Je eigen netwerk uitbreiden met andere bouwstenen"
+    basis: "Kijken waar een netwerk op let en wat het eigenlijk leert."
+    gevorderd: "Een GNN, een netwerk dat symmetrie gebruikt, en self-supervised voortrainen."
+    expert: "Een state-space-laag of mixture of experts in je eigen code, en een theorie-experiment."
+  eindproject: "Een eigen vergelijking van twee architecturen op dezelfde taak, met seeds en een ablation."
+  papers: ["Understanding Deep Learning Requires Rethinking Generalization (2017)", "The Lottery Ticket Hypothesis (2019)"]
+  modules:
+  - id: theorie
+    titel: "Theorie"
+    onderwerpen: [learning-theory, d10-geavanceerde-learning-theory, theorie-expressiviteit-en-loss-landscapes, theorie-generalisatiepuzzels, scaling-gedrag, representatiefenomenen-en-synthese]
+    tekst: "PAC en VC-dimensie, waarom diepe netwerken zoveel kunnen, loss landscapes, double descent en grokking, scaling, en wat er in representaties gebeurt."
+  - id: wiskunde
+    titel: "Wiskunde voor de theorie"
+    onderwerpen: [d2-kansrekening-voor-theorie, d2-geavanceerde-informatietheorie]
+    tekst: "Kansrekening en informatietheorie voor de theorie (analyse en optimalisatie voor gevorderden zitten in de gedeelde module Wiskunde formeel)."
+  - id: representaties
+    titel: "Representaties leren"
+    onderwerpen: [representatieleren, self-supervised-learning, metric-learning-en-semi-supervised-leren, d12-multi-task-learning, low-shot-meta-en-continual-learning]
+    tekst: "Wat een goede representatie is, self-supervised learning (contrastive, masked), metric learning, meerdere taken, en leren van weinig voorbeelden of zonder te vergeten."
+  - id: grafen
+    titel: "Grafen"
+    onderwerpen: [graph-neural-networks, d11-graph-neural-networks-verdieping]
+    tekst: "Message passing, GCN en GAT, en wat een GNN wel en niet kan onderscheiden."
+  - id: architecturen
+    titel: "Andere architecturen"
+    onderwerpen: [state-space-modellen-en-hybrides, mixture-of-experts, kolmogorovarnold-networks, historische-en-alternatieve-architecturen,
+                  d11-spiking-netwerken-en-reservoir-computing, continuous-depth-en-impliciete-modellen]
+    tekst: "State-space-modellen, mixture of experts, KAN's, oudere architecturen, spiking netwerken en neural ODE's."
+  - id: ontwerp
+    titel: "Symmetrie, zoeken en efficiëntie"
+    onderwerpen: [inductive-bias-symmetrie-en-equivariantie, neural-architecture-search, efficientie]
+    tekst: "Netwerken die symmetrie inbouwen, architecturen automatisch zoeken, en pruning en distillatie."
+
+# =====================================================================================================
+- id: onderzoek
+  titel: "Onderzoek"
+  titel_en: "Research skills and the frontier"
+  kaart: [D27]
+  doel: "Papers lezen, experimenten opzetten, een paper nabouwen en zelf onderzoek doen. Het nabouwen kan met een paper uit elk domein."
+  proef: [res-what-is-a-paper, res-research-cycle]
+  gebruikt: {basis: [], gevorderd: [data-bronnen, wiskunde, trainen, klassieke-modellen-formeel, attention], expert: []}
+  begint: gevorderd
+  project:
+    id: repro
+    titel: "Een paper nabouwen: eerst begeleid, daarna een eigen keuze"
+    basis: "Papers lezen en de onderzoekscyclus (in het fundament)."
+    gevorderd: "Experimenten met hypothese, controle, ablation, seeds en significantie."
+    expert: "De begeleide reproductie van Grokking en daarna een eigen paper, gekozen uit de lijsten van de domeinen."
+  eindproject: "Een zelf gekozen paper nabouwen met de eigen reproductiekit, met een kort rapport (bestaat: repro-own-report)."
+  eindles: repro-own-report
+  papers: ["Grokking (2022), begeleid"]
+  modules:
+  - id: lezen
+    titel: "Papers lezen"
+    onderwerpen: [d27-hoe-ai-onderzoek-werkt, literatuur-zoeken-en-bijhouden, papers-lezen, wiskunde-in-papers-lezen]
+    tekst: "Hoe onderzoek gepubliceerd wordt, papers vinden, de drie-passen-methode, formules naar code, afleidingen volgen en kritisch lezen."
+  - id: experimenten
+    titel: "Experimenten"
+    onderwerpen: [experimenten-ontwerpen-en-ablaties, evaluatiemethodologie, reproduceerbaarheid-en-open-science]
+    tekst: "Hypothese en controle, ablation, seeds en variantie, een logboek, eerlijke baselines, significantie en goede figuren."
+  - id: nabouwen
+    titel: "Een paper nabouwen"
+    onderwerpen: [een-reproduceerbare-paper-kiezen, papers-reproduceren, resultaten-opschrijven-en-presenteren]
+    tekst: "Een paper kiezen, de begeleide reproductie van Grokking in zeven stappen, je werk delen, en dezelfde zeven stappen met een eigen paper."
+  - id: zelf-onderzoek
+    titel: "Zelf onderzoek doen"
+    onderwerpen: [peer-review-en-onderzoekscultuur, onderzoeksvragen-kiezen, open-vragen]
+    tekst: "Peer review, een goede onderzoeksvraag kiezen, en de open vragen van het vakgebied."
+  - id: frontier
+    titel: "De frontier"
+    onderwerpen: [de-frontier-van-20252026]
+    tekst: "Wat er nu gebeurt aan de rand van het vakgebied. Gedateerde pagina's met 'laatst geverifieerd', los van de lessen bijgewerkt (besluit 2.11)."

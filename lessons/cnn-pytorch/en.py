@@ -81,7 +81,7 @@ def text_why():
         mo.md(r"""
         ## Why this matters
 
-        Your deep MLP of [Project: make a deep network train](/course/open/nn-deep-net-project?lang=en) reads about 85% of the clothes of Fashion-MNIST right. But it sees an image as a row of 784 numbers in which neighbors mean nothing: shuffle the pixels of every image in the same way, and it learns just as well. And each of the 64 neurons of its first layer has a weight of its own for every pixel. A CNN makes use of how an image is built: its filters look at pixels together with their neighbors, and the same filter slides over the whole image. In this project you build your first CNN in PyTorch and train it with your own Trainer. It is the first step of your own CNN; the next three are extra lessons of the computer vision branch.
+        Your deep MLP of [Project: make a deep network train](/course/open/nn-deep-net-project?lang=en) reads about 85% of the clothes of Fashion-MNIST right. But it sees an image as a row of 784 numbers in which neighbors mean nothing: shuffle the pixels of every image in the same way, and it learns just as well. And each of the 64 neurons of its first layer has a weight of its own for every pixel. A CNN makes use of how an image is built: its filters look at pixels together with their neighbors, and the same filter slides over the whole image. In this project you build your first CNN in PyTorch and train it with your own Trainer. It is the first step of your own CNN; the next three lessons build on it.
         """),
         draw.project_steps(["Your first CNN", "LeNet-5, the CNN that read checks", "VGG: deeper with small filters",
                             "ResNet: depth that keeps working"],
@@ -388,7 +388,7 @@ def text_connections():
     mo.md(r"""
     ## Wrap-up
 
-    **How this connects.** The filters, channels and pooling of [Channels and pooling](/course/open/cnn-channels-pooling?lang=en), now as `nn.Conv2d` and `nn.MaxPool2d`, trained by your Trainer of [A reusable training loop](/course/open/nn-trainer?lang=en) and tested with the overfit test of [Project: make a deep network train](/course/open/nn-deep-net-project?lang=en). Looking at neighbors and sharing a filter over the whole image, from [Convolution: one small filter slides over the image](/course/open/cnn-convolution-idea?lang=en), are why it needs so few parameters. Your project `cnn` now has `small_cnn.py` and `count.py`. The computer vision branch continues this project in three extra lessons, with LeNet-5, VGG and ResNet. The route goes on with *Attention weights from dot products*: how a model works out, with dot products and softmax, which words to look at.
+    **How this connects.** The filters, channels and pooling of [Channels and pooling](/course/open/cnn-channels-pooling?lang=en), now as `nn.Conv2d` and `nn.MaxPool2d`, trained by your Trainer of [A reusable training loop](/course/open/nn-trainer?lang=en) and tested with the overfit test of [Project: make a deep network train](/course/open/nn-deep-net-project?lang=en). Looking at neighbors and sharing a filter over the whole image, from [Convolution: one small filter slides over the image](/course/open/cnn-convolution-idea?lang=en), are why it needs so few parameters. Your project `cnn` now has `small_cnn.py` and `count.py`. The next lesson, *LeNet-5, the CNN that read checks*, shows how old the shape of your SmallCNN is; after it, VGG and ResNet stack the same blocks deeper.
     """)
     return
 

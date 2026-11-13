@@ -1,6 +1,6 @@
-# Lessons whose home branch is "onderzoek" (research skills). All levels.
+# Research lessons: four of the core (domein fundament, basis), then the domain onderzoek (research skills and the
+# frontier), which begins at gevorderd.
 # Planning data; the map: key below names the map version. Format: ../FORMAT.md. The running project "repro" is the finale.
-tak: onderzoek
 map: v2.2
 lessons:
 
@@ -8,7 +8,8 @@ lessons:
 - id: res-what-is-a-paper
   title: "What a paper, a preprint and peer review are"
   level: basis
-  module: research-basis
+  domein: fundament
+  module: onderzoek-basis
   idea: "Research is shared as papers; a preprint is not yet reviewed, and peer review is a check by other researchers, not a guarantee."
   covers: [d27-wetenschappelijke-geletterdheid#0]
   requires: [start-ai-ml-genai]
@@ -21,7 +22,8 @@ lessons:
 - id: res-reading-claims
   title: "Reading AI claims critically"
   level: basis
-  module: research-basis
+  domein: fundament
+  module: onderzoek-basis
   idea: "A press release, a paper and a benchmark score say different things; ask what was measured, against which baseline."
   covers: [d27-wetenschappelijke-geletterdheid#1]
   requires: [res-what-is-a-paper, ml-baselines]
@@ -33,7 +35,8 @@ lessons:
 - id: res-figure-and-table
   title: "Reading an abstract, a figure and a results table"
   level: basis
-  module: research-basis
+  domein: fundament
+  module: onderzoek-basis
   idea: "Read the caption, the axes and the units first, then the claim; a results table compares rows under the same conditions."
   covers: [d27-wetenschappelijke-geletterdheid#2]
   requires: [res-reading-claims, torch-loss-curves]
@@ -44,7 +47,8 @@ lessons:
 - id: res-research-cycle
   title: "How research works: question, hypothesis, experiment"
   level: basis
-  module: research-basis
+  domein: fundament
+  module: onderzoek-basis
   idea: "Research starts with a question, turns it into a hypothesis you can test, and an experiment that could prove you wrong."
   covers: [d27-hoe-ai-onderzoek-werkt#0]
   requires: [res-what-is-a-paper]
@@ -56,7 +60,8 @@ lessons:
 - id: res-how-research-is-published
   title: "Kinds of papers and where they appear"
   level: gevorderd
-  module: research-reading
+  domein: onderzoek
+  module: lezen
   idea: "A paper contributes a method, an analysis, a benchmark or a reproduction, and appears at a conference, in a journal or on arXiv."
   covers: [d27-hoe-ai-onderzoek-werkt#1, d27-hoe-ai-onderzoek-werkt#2]
   requires: [res-research-cycle, res-reading-claims]
@@ -69,7 +74,8 @@ lessons:
 - id: res-find-papers
   title: "Finding papers"
   level: gevorderd
-  module: research-reading
+  domein: onderzoek
+  module: lezen
   idea: "Search arXiv and Semantic Scholar, follow citations both ways, and start from a survey or reading list."
   covers: [literatuur-zoeken-en-bijhouden#0, literatuur-zoeken-en-bijhouden#1, literatuur-zoeken-en-bijhouden#2]
   requires: [res-how-research-is-published]
@@ -83,7 +89,8 @@ lessons:
 - id: res-paper-anatomy
   title: "The anatomy of a machine learning paper"
   level: gevorderd
-  module: research-reading
+  domein: onderzoek
+  module: lezen
   idea: "Abstract, introduction, method, experiments and appendix each answer a different question; the details you need are often in the appendix."
   covers: [papers-lezen#0]
   requires: [res-find-papers, res-figure-and-table]
@@ -96,7 +103,8 @@ lessons:
 - id: res-three-pass
   title: "Reading a paper in three passes"
   level: gevorderd
-  module: research-reading
+  domein: onderzoek
+  module: lezen
   idea: "First skim for the claim, then read for the method, then go through the details until you could rebuild it; practised on the transformer paper you already built."
   covers: [papers-lezen#1]
   requires: [res-paper-anatomy, gpt-assemble]
@@ -109,7 +117,8 @@ lessons:
 - id: res-hypothesis-control
   title: "Change one thing at a time"
   level: gevorderd
-  module: research-experiments
+  domein: onderzoek
+  module: experimenten
   idea: "An experiment compares runs that differ in exactly one thing, against a control, so you know what caused the difference."
   covers: [experimenten-ontwerpen-en-ablaties#0]
   requires: [res-research-cycle, gpt-train-chars]
@@ -123,7 +132,8 @@ lessons:
 - id: res-ablation
   title: "Ablation: what happens if you take a part out?"
   level: gevorderd
-  module: research-experiments
+  domein: onderzoek
+  module: experimenten
   kind: project
   project: llm
   idea: "Remove one part of your GPT, such as the position embedding, retrain and measure; that is how papers show which parts matter."
@@ -141,7 +151,8 @@ lessons:
 - id: res-seeds-variance
   title: "One run is not a result: seeds and variance"
   level: gevorderd
-  module: research-experiments
+  domein: onderzoek
+  module: experimenten
   idea: "The same experiment with another seed gives another number; you train a small version of your GPT with five seeds and report the spread with a confidence interval."
   covers: [experimenten-ontwerpen-en-ablaties#2]
   requires: [res-ablation, stats-bootstrap]
@@ -155,7 +166,8 @@ lessons:
 - id: res-experiment-log
   title: "Keeping an experiment log"
   level: gevorderd
-  module: research-experiments
+  domein: onderzoek
+  module: experimenten
   idea: "Log every run with its settings, code version, seed and result, so you can always find out what you did."
   covers: [experimenten-ontwerpen-en-ablaties#3, ontwikkelomgeving-tracking-en-reproduceerbaarheid#2]
   requires: [res-seeds-variance]
@@ -167,7 +179,8 @@ lessons:
 - id: res-fair-baselines
   title: "Fair comparisons"
   level: gevorderd
-  module: research-experiments
+  domein: onderzoek
+  module: experimenten
   idea: "Give the baseline the same tuning effort, data and compute as your own method, or the comparison means nothing."
   covers: [evaluatiemethodologie#0]
   requires: [res-seeds-variance, ml-baselines]
@@ -179,7 +192,8 @@ lessons:
 - id: res-significance
   title: "Is the difference real?"
   level: gevorderd
-  module: research-experiments
+  domein: onderzoek
+  module: experimenten
   idea: "A paired bootstrap or a permutation test tells you whether a difference between two models could just be noise."
   covers: [evaluatiemethodologie#1]
   requires: [res-fair-baselines, stats-bootstrap]
@@ -191,7 +205,8 @@ lessons:
 - id: res-figures
   title: "Figures that show something"
   level: gevorderd
-  module: research-experiments
+  domein: onderzoek
+  module: experimenten
   idea: "One message per figure, labeled axes with units, spread over seeds shown, and the comparison you want people to see side by side."
   covers: [resultaten-opschrijven-en-presenteren#2]
   requires: [res-significance, py-plotting, res-figure-and-table]
@@ -204,7 +219,8 @@ lessons:
 - id: res-formula-to-code
   title: "From formula to code"
   level: expert
-  module: research-reproduction
+  domein: onderzoek
+  module: lezen
   idea: "Decode the notation, write each symbol as a tensor with a shape, and check the code on a toy example you can compute by hand."
   covers: [wiskunde-in-papers-lezen#0, wiskunde-in-papers-lezen#1, wiskunde-in-papers-lezen#2]
   requires: [res-three-pass, math-matrix-calculus]
@@ -215,7 +231,8 @@ lessons:
 - id: res-derivations
   title: "Following a derivation"
   level: expert
-  module: research-reproduction
+  domein: onderzoek
+  module: lezen
   idea: "Work through a derivation line by line, filling in the step the authors skipped, and check it numerically."
   covers: [wiskunde-in-papers-lezen#3]
   requires: [res-formula-to-code]
@@ -227,7 +244,8 @@ lessons:
 - id: res-critical-reading
   title: "Critical reading: claims versus evidence"
   level: expert
-  module: research-reproduction
+  domein: onderzoek
+  module: lezen
   idea: "Check whether the experiments really support the claim: missing baselines, one seed, a cherry-picked metric."
   covers: [papers-lezen#7]
   requires: [res-three-pass, res-fair-baselines]
@@ -238,7 +256,8 @@ lessons:
 - id: res-choose-paper
   title: "Choosing a paper you can reproduce"
   level: expert
-  module: research-reproduction
+  domein: onderzoek
+  module: nabouwen
   idea: "Pick a small, testable claim that fits your compute budget, with code or data available, and estimate the cost before you start."
   covers: [een-reproduceerbare-paper-kiezen#0, een-reproduceerbare-paper-kiezen#1, een-reproduceerbare-paper-kiezen#2]
   requires: [res-critical-reading, sys-compute-6nd]
@@ -249,7 +268,8 @@ lessons:
 - id: repro-guided-claim
   title: "Guided reproduction 1: read the paper and pick the claim"
   level: expert
-  module: guided-reproduction
+  domein: onderzoek
+  module: nabouwen
   kind: project
   project: repro
   idea: "Together we read the grokking paper and write down the one claim we will test, and how we would know it failed; the plan goes into the first part of your reproduction kit."
@@ -263,7 +283,8 @@ lessons:
 - id: repro-guided-build
   title: "Guided reproduction 2: build the model and the data"
   level: expert
-  module: guided-reproduction
+  domein: onderzoek
+  module: nabouwen
   kind: project
   project: repro
   idea: "Generate the modular arithmetic data and adapt your GPT to the paper's setup, checking every setting against the paper."
@@ -277,7 +298,8 @@ lessons:
 - id: repro-guided-sanity
   title: "Guided reproduction 3: sanity checks"
   level: expert
-  module: guided-reproduction
+  domein: onderzoek
+  module: nabouwen
   kind: project
   project: repro
   idea: "Overfit one batch and compare shapes and a first loss with what the paper implies, before any long run; the kit gets a sanity check you can point at any model."
@@ -290,7 +312,8 @@ lessons:
 - id: repro-guided-figure
   title: "Guided reproduction 4: reproduce the key figure"
   level: expert
-  module: guided-reproduction
+  domein: onderzoek
+  module: nabouwen
   kind: project
   project: repro
   idea: "Train long enough to see validation accuracy jump long after training accuracy, and redraw the figure from your own logs; the kit gets a multi-seed runner and a logger."
@@ -306,7 +329,8 @@ lessons:
 - id: repro-guided-ablation
   title: "Guided reproduction 5: the ablation"
   level: expert
-  module: guided-reproduction
+  domein: onderzoek
+  module: nabouwen
   kind: project
   project: repro
   idea: "Turn weight decay off and on and vary the training fraction: which part is needed for the jump? The six small runs take a few minutes each on one GPU."
@@ -322,7 +346,8 @@ lessons:
 - id: repro-guided-compare
   title: "Guided reproduction 6: does it match the paper?"
   level: expert
-  module: guided-reproduction
+  domein: onderzoek
+  module: nabouwen
   kind: project
   project: repro
   idea: "Compare your numbers with the paper over several seeds with a paired bootstrap, and hunt for undocumented details when they differ; the kit gets the comparison."
@@ -336,7 +361,8 @@ lessons:
 - id: repro-guided-report
   title: "Guided reproduction 7: write the report"
   level: expert
-  module: guided-reproduction
+  domein: onderzoek
+  module: nabouwen
   kind: project
   project: repro
   idea: "Write a short reproduction report: claim, setup, result, differences and what you could not check, including negative results; the kit gets the report template."
@@ -349,7 +375,8 @@ lessons:
 - id: res-share-work
   title: "Sharing your work so others can repeat it"
   level: expert
-  module: guided-reproduction
+  domein: onderzoek
+  module: nabouwen
   idea: "Publish code, settings, seeds and checkpoints with a license, so someone else can rerun your reproduction."
   covers: [reproduceerbaarheid-en-open-science#1, reproduceerbaarheid-en-open-science#2, reproduceerbaarheid-en-open-science#3]
   requires: [repro-guided-report, res-experiment-log, data-provenance]
@@ -360,7 +387,8 @@ lessons:
 - id: repro-own-choose
   title: "Your reproduction 1: choose a paper"
   level: expert
-  module: own-reproduction
+  domein: onderzoek
+  module: nabouwen
   kind: project
   project: repro
   idea: "Choose a paper from the course list, or one of your own that passes the same checks, in the spirit of the ML Reproducibility Challenge."
@@ -373,7 +401,8 @@ lessons:
 - id: repro-own-claim
   title: "Your reproduction 2: claim and plan"
   level: expert
-  module: own-reproduction
+  domein: onderzoek
+  module: nabouwen
   kind: project
   project: repro
   idea: "Write down the claim, the experiment, the compute estimate and what would count as a failed reproduction, in the plan format of your kit; a check reviews the plan."
@@ -386,7 +415,8 @@ lessons:
 - id: repro-own-build
   title: "Your reproduction 3: build it"
   level: expert
-  module: own-reproduction
+  domein: onderzoek
+  module: nabouwen
   kind: project
   project: repro
   idea: "Implement the method and the data from the paper with as little help as you need."
@@ -400,7 +430,8 @@ lessons:
 - id: repro-own-sanity
   title: "Your reproduction 4: sanity checks"
   level: expert
-  module: own-reproduction
+  domein: onderzoek
+  module: nabouwen
   kind: project
   project: repro
   idea: "Run the sanity checks of your kit on your own model before any long run."
@@ -413,7 +444,8 @@ lessons:
 - id: repro-own-figure
   title: "Your reproduction 5: the main result"
   level: expert
-  module: own-reproduction
+  domein: onderzoek
+  module: nabouwen
   kind: project
   project: repro
   idea: "Reproduce the main figure or table of the paper over several seeds, with the runner and logger of your kit."
@@ -427,7 +459,8 @@ lessons:
 - id: repro-own-ablation
   title: "Your reproduction 6: the ablation"
   level: expert
-  module: own-reproduction
+  domein: onderzoek
+  module: nabouwen
   kind: project
   project: repro
   idea: "Run one ablation that tests which part of the method the result depends on."
@@ -439,10 +472,10 @@ lessons:
   needs: rec
 
 - id: repro-own-compare
-  tak: onderzoek
   title: "Your reproduction 7: compare with the paper"
   level: expert
-  module: own-reproduction
+  domein: onderzoek
+  module: nabouwen
   kind: project
   project: repro
   idea: "Test with the comparison from your kit whether the difference between your numbers and the paper's is real, and look for the reason when it is."
@@ -455,7 +488,8 @@ lessons:
 - id: repro-own-report
   title: "Your reproduction 8: report and share"
   level: expert
-  module: own-reproduction
+  domein: onderzoek
+  module: nabouwen
   kind: project
   project: repro
   idea: "Write the report with the template of your kit, publish code and results, and tell the authors what you found."
@@ -468,10 +502,11 @@ lessons:
 - id: res-whats-next
   title: "Where to go next"
   level: expert
-  module: own-reproduction
-  idea: "Back to the map: every other branch now builds on what you know, and the course shows where each one connects."
+  domein: onderzoek
+  module: nabouwen
+  idea: "Back to the map: every other domain builds on what you know now, and borrows shared modules of the foundation at the level where it needs them."
   covers: [onderzoeksvragen-kiezen#0]
   requires: [repro-own-report, start-map-of-ai]
-  introduces: [c:attach-point, c:robustness-test]
-  uses: [c:course-branch, c:course-level, c:course-route, c:ablation, c:reproduction, c:paper, c:preregistration, c:seed, c:run, c:dropout, c:noise, c:test-set, c:negative-result, p:reproduction-plan, p:reproduction-report, py:dict, py:list, py:for, py:if, py:append, py:indexing, py:def, py:return, py:comment, py:string-literal, q:predict, q:choice, q:explain, q:exercise-with-check, q:run-cell]
+  introduces: [c:shared-module, c:robustness-test]
+  uses: [c:course-core, c:course-domain, c:course-level, c:course-route, c:ablation, c:reproduction, c:paper, c:preregistration, c:seed, c:run, c:dropout, c:noise, c:test-set, c:negative-result, p:reproduction-plan, p:reproduction-report, py:dict, py:list, py:for, py:if, py:append, py:indexing, py:def, py:return, py:comment, py:string-literal, q:predict, q:choice, q:explain, q:exercise-with-check, q:run-cell]
   needs: any

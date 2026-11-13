@@ -315,7 +315,7 @@ def text_connections():
     mo.md(r"""
     ## Wrap-up
 
-    **How this connects.** Softmax of [Many classes: softmax](/course/open/ml-softmax?lang=en) turns logits into probabilities; dividing the logits by a temperature first makes them sharper or flatter, and the sampling of [Sampling: let the model write](/course/open/lm-sampling?lang=en) then draws from those. Every language model that writes, up to the largest LLM, has this setting. Your bigram model still gives a probability of 0 to every pair it never saw, and no temperature changes that. An extra lesson, *Top-k and top-p sampling*, shows two more ways to keep the unlikely characters out. In the next lesson, *How good is a language model?*, you measure how surprised your model is by real text; after that, in *Pairs you never saw: smoothing*, you see why those zeros are a problem, and fix them.
+    **How this connects.** Softmax of [Many classes: softmax](/course/open/ml-softmax?lang=en) turns logits into probabilities; dividing the logits by a temperature first makes them sharper or flatter, and the sampling of [Sampling: let the model write](/course/open/lm-sampling?lang=en) then draws from those. Every language model that writes, up to the largest LLM, has this setting. A pair your table never saw keeps a probability of 0, and no temperature changes that. An extra lesson, *Top-k and top-p sampling*, shows two more ways to keep the unlikely characters out. In the next lesson, *Base model or chat model?*, you see what the language models you use every day do differently from the one you built.
     """)
     return
 

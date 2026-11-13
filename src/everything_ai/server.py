@@ -67,8 +67,8 @@ def _entries(steps: list[dict], lessons: dict, built: set, done: dict) -> list[d
         lid = step["id"]
         lesson = lessons[lid]
         entry = {
-            "id": lid, "extra": step["extra"], "level": lesson["level"], "module": lesson["module"],
-            "tak": lesson.get("tak"), "requires": lesson["requires"], "built": lid in built,
+            "id": lid, "extra": step["extra"], "level": lesson["level"], "module": course.module_key(lid),
+            "part": course.part(lid), "requires": lesson["requires"], "built": lid in built,
             "title": {"en": lesson["title"], "nl": None},
             "done": bool(done.get(lid, {}).get("done")), "opened": bool(done.get(lid, {}).get("opened")),
         }
@@ -86,23 +86,27 @@ def state() -> dict:
     lessons = course.lessons()
     built = set(course.built_lessons())
     done = progress.all_lessons()
-    route = _entries(course.main_route(), lessons, built, done)
-    branch_routes = [{**r, "steps": _entries(course.route_steps(r["id"]), lessons, built, done)}
-                     for r in course.branch_routes()]
+    kern = _entries(course.kern_route(), lessons, built, done)
+    domain_routes = [{**r, "milestones": course.milestones(r["id"]),
+                      "steps": _entries(course.route_steps(r["id"]), lessons, built, done)}
+                     for r in course.domain_routes()]
     disp = course.display()
+    counts = {}
+    for lid in lessons:
+        c = counts.setdefault(course.part(lid), {"lessons": 0, "built": 0})
+        c["lessons"] += 1
+        c["built"] += lid in built
     return {
-        "route": route,
-        "mainRoute": course.main_route_names(),
-        "branchRoutes": branch_routes,
-        "milestones": course.milestones(),
+        "route": kern,
+        "kern": {**course.kern_names(), "milestones": course.milestones()},
+        "domainRoutes": domain_routes,
         "modules": disp["modules"],
         "levels": {lvl: {lang: course.level_name(lvl, lang) for lang in course.LANGS}
                    for lvl in ("basis", "gevorderd", "expert")},
-        "branches": [{"id": b["id"], "title": {"en": b["title"], "nl": b["title_nl"]},
-                      "status": b["status"], "order": b["build_order"],
-                      "project": (b.get("project") or {}).get("title_nl")} for b in course.branches()],
+        "parts": {pid: {"name": names, **counts.get(pid, {"lessons": 0, "built": 0})} for pid, names in disp["parts"].items()},
+        "groups": [{**g, "name": disp["groups"][g["id"]]} for g in course.groups()],
         "goals": [{"id": g["id"], "lesson": g["goal"], "title": disp["goals"].get(g["id"], {"en": g["title_nl"], "nl": g["title_nl"]}),
-                   "lessons": course.goal_route(g["goal"])} for g in course.goals()],
+                   "lessons": course.goal_route(g["goal"]), "route": course.route_for(g["goal"])} for g in course.goals()],
         "settings": progress.settings(),
         "system": _system(),
     }

@@ -442,7 +442,7 @@ def text_connections():
     mo.md(r"""
     ## Afronding
 
-    **Samenhang.** In [Als stappen kunnen uitglijden: value iteration](/course/open/rl-value-iteration?lang=nl) telde de Bellman equation elke uitkomst op uit de tabel `T`. Q-learning gebruikt dezelfde vergelijking zonder `T`: elke stap is één uitkomst, en kleine stappen $\eta$ ernaartoe middelen de uitkomsten. Reinforcement learning komt terug in een tak die nog komt, met als project je eigen agent. In de volgende les, *Een language model voorspelt het volgende token*, leert een model van alleen tekst welk token er volgt.
+    **Samenhang.** In [Als stappen kunnen uitglijden: value iteration](/course/open/rl-value-iteration?lang=nl) telde de Bellman equation elke uitkomst op uit de tabel `T`. Q-learning gebruikt dezelfde vergelijking zonder `T`: elke stap is één uitkomst, en kleine stappen $\eta$ ernaartoe middelen de uitkomsten. Reinforcement learning komt terug in een eigen domein dat nog komt, met als project je eigen agent. In de volgende les, *Een language model voorspelt het volgende token*, leert een model van alleen tekst welk token er volgt.
     """)
     return
 

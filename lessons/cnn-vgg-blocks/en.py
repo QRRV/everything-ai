@@ -395,7 +395,7 @@ def text_connections():
     mo.md(r"""
     ## Wrap-up
 
-    **How this connects.** The receptive field of [Convolution in detail: kernel size, stride and padding](/course/open/cnn-conv-formal?lang=en), now as the reason to stack small filters: they see as far as one large filter, with fewer weights and more ReLUs. Your project `cnn` now has `vgg.py`. Deeper was not better here: on 6,000 small images of 28 by 28, one or two convolutions per block did best, and with eight per block, training got stuck. The next extra lesson, *ResNet: depth that keeps working*, gives a deep CNN the residual connections of your deep MLP in [Project: make a deep network train](/course/open/nn-deep-net-project?lang=en).
+    **How this connects.** The receptive field of [Convolution in detail: kernel size, stride and padding](/course/open/cnn-conv-formal?lang=en), now as the reason to stack small filters: they see as far as one large filter, with fewer weights and more ReLUs. Your project `cnn` now has `vgg.py`. Deeper was not better here: on 6,000 small images of 28 by 28, one or two convolutions per block did best, and with eight per block, training got stuck. The next lesson, *ResNet: depth that keeps working*, gives a deep CNN the residual connections of your deep MLP in [Project: make a deep network train](/course/open/nn-deep-net-project?lang=en).
     """)
     return
 

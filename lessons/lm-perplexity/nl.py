@@ -298,7 +298,7 @@ def text_connections():
     mo.md(r"""
     ## Afronding
 
-    **Samenhang.** De gemiddelde NLL uit [Hoe goed is een language model?](/course/open/lm-nll?lang=nl) is de cross-entropy uit [Cross-entropy en KL-divergentie](/course/open/info-cross-entropy-kl?lang=nl) tussen de tekst en het model; perplexity is e tot de macht daarvan, een aantal keuzes. Zijn bodem is $e^{H(p)}$, bepaald door de entropie van de tekst zelf. Elk language model vanaf hier, ook je GPT, krijgt een perplexity op onbekende tekst, en voor modellen met andere tokens breng je die eerst naar tekens, zoals in oefening 3. De volgende les, *Convolutie in detail: kernel size, stride en padding*, gaat terug naar afbeeldingen: wat een convolutional layer doet met zijn kernel, hoe ver hij stapt, en wat er aan de randen gebeurt.
+    **Samenhang.** De gemiddelde NLL uit [Hoe goed is een language model?](/course/open/lm-nll?lang=nl) is de cross-entropy uit [Cross-entropy en KL-divergentie](/course/open/info-cross-entropy-kl?lang=nl) tussen de tekst en het model; perplexity is e tot de macht daarvan, een aantal keuzes. Zijn bodem is $e^{H(p)}$, bepaald door de entropie van de tekst zelf. Elk language model vanaf hier, ook je GPT, krijgt een perplexity op onbekende tekst, en voor modellen met andere tokens breng je die eerst naar tekens, zoals in oefening 3. De volgende les, *Attention weights uit inproducten*, begint aan attention: hoe een model met inproducten en softmax uitrekent naar welke woorden het kijkt.
     """)
     return
 

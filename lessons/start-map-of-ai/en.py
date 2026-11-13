@@ -1,6 +1,6 @@
 # SPDX-FileCopyrightText: 2026 Everything AI contributors
 # SPDX-License-Identifier: CC-BY-SA-4.0 AND MIT-0
-# Lesson start-map-of-ai. Route: course/route/lessen/stam-1-basis.yaml. Checks and the numbers about the route: checks.py.
+# Lesson start-map-of-ai. Route: course/route/lessen/stam-1-basis.yaml. Checks and the numbers about the course: checks.py.
 # termen:allow genai
 
 import marimo
@@ -14,7 +14,7 @@ with app.setup(hide_code=True):
     from everything_ai.lesson import lesson
 
     L = lesson("start-map-of-ai", "en")
-    C = L.checks   # the numbers about the route, counted from the route data
+    C = L.checks   # the numbers about the course, counted from the route data
     GPT = C.goal("doel-eigen-gpt")
 
 
@@ -103,20 +103,21 @@ def predict_size():
 @app.cell(hide_code=True)
 def text_idea():
     mo.vstack([
-        mo.md(r"""
+        mo.md(rf"""
         ## The idea
 
-        Picture the course as a tree. That is only a comparison, but it helps: there is one trunk, the **foundation**, and every other part of AI grows out of it as a branch. Every lesson also has a level, and a route says in which order you take the lessons.
+        The course has one start that everyone takes, **the core**, and after it {C.N_DOMAINS} equal **domains** to choose from: parts of AI such as large language models, computer vision or robotics. Every lesson also has a level, and a route says in which order you take the lessons.
 
         ### New words and symbols
 
         | Word | What it means |
         |---|---|
-        | **branch** | one area of the course, such as language or computer vision (AI for pictures and video), with its own lessons and its own project; every branch grows from the **foundation**, the branch with math, Python, data, machine learning and deep learning that everyone takes |
+        | **the core** | the lessons everyone takes first, all at the basics level: Python, data, math, your first models, neural networks, and a first look at language models, agents and research |
+        | **domain** | one part of AI, such as large language models or computer vision (AI for pictures and video), with its own lessons and its own project; every domain builds on **the core** |
         | **level** | the label on a lesson that says how advanced it is: **basics**, **intermediate** or **expert** |
-        | **route** | an order of lessons through the course; the **main route** goes from your first line of Python to a model of your own that writes text, and a research paper that you reproduce yourself; a **goal route** takes only the lessons that one goal builds on |
+        | **route** | an order of lessons through the course; the core is the first route, a domain has a route of its own that starts where the core ends, and a **goal route** takes only the lessons that one goal builds on |
 
-        Three examples, one of each: robotics is a branch; *basics* is a level; and *I want my own GPT as fast as possible*, a goal on the start page, is a route.
+        Three examples, one of each: robotics is a domain; *basics* is a level; and *I want my own GPT as fast as possible*, a goal on the start page, is a route.
         """),
         L.watch_out("In a game, a level is a stage that opens only when you finish the one before. Here a level is just a label that says how advanced a lesson is: no lesson is locked."),
     ])
@@ -124,23 +125,23 @@ def text_idea():
 
 
 @app.cell(hide_code=True)
-def text_branches():
+def text_domains():
     mo.md(rf"""
-    The course groups the 27 fields of AI into {C.N_BRANCHES} branches. The main route goes through three of them, at all three levels: the foundation, language and research. The figure counts the lessons of the main route per level and per branch.
+    The course divides the 27 fields of AI over the core, lessons that several domains share, and {C.N_DOMAINS} domains, in {C.N_GROUPS} groups. The figure shows them all, as the start page does under *The whole map*.
     """)
     return
 
 
 @app.cell(hide_code=True)
-def picture_route():
+def picture_map():
     mo.vstack([
-        draw.route_grid(
-            ["Basics", "Intermediate", "Expert"],
-            ["Foundation", "Language", "Research", "Other branches"],
-            C.grid(), unit=("lesson", "lessons"), arrows=3,
-            title="The main route: lessons per level and per branch"),
+        draw.course_map(
+            ("The core", f"{len(C.CORE)} lessons, all at the basics level: everyone starts here"),
+            C.map_groups(L.lang, ("1 lesson", "{n} lessons", "still to come")),
+            title="The map of the course",
+            alt=f"The core on top, then an arrow down to the {C.N_DOMAINS} domains in {C.N_GROUPS} groups, each with how many of its lessons are ready."),
         mo.md(r"""
-        Read each row from left to right, then go down a row. A darker box holds more lessons. The dashed column counts the few lessons the main route borrows from other branches; they come in between, where you need them. So at each level you go mostly from the foundation to language and then to research.
+        Read it from the top down. The filled box is the core, which everyone takes first. Under it are the domains, in their groups; a dashed box is a domain whose lessons are still to come. Some lessons are shared: they are written once, and every domain that needs them borrows them, such as the lessons on attention, which large language models and several other domains build on.
         """),
     ])
     return
@@ -148,15 +149,15 @@ def picture_route():
 
 @app.cell(hide_code=True)
 def text_recipe():
-    mo.md(rf"""
-    So you do not have to pick a branch now: the main route takes you through the foundation, language and research. The other {C.N_BRANCHES - 3} branches, such as computer vision and robotics, come later; the start page shows them all under *The whole map*. Each of them builds on the main route, and most of their first lessons need only its basics level.
+    mo.md(r"""
+    So you do not have to pick a domain now: the core comes first, whichever domain you choose later. When you have done it, you pick a domain under *Your route* on the start page, and its route starts where the core ends. A domain whose lessons are still to come opens there as soon as they are ready.
 
     ### Recipe
 
     To pick your route, go through these questions in order:
 
-    1. **No goal of your own yet?** Follow the main route. On the start page, *Continue* takes you to your next lesson.
-    2. **A goal of your own?** Pick it on the start page under *Or follow a goal*. You then see only the lessons that goal builds on, in the order of the main route.
+    1. **No goal of your own yet?** Follow the core. On the start page, *Continue* takes you to your next lesson.
+    2. **A goal of your own?** Pick it on the start page under *Or follow a goal*. You then see only the lessons that goal builds on, the core included, in the order of the course.
     3. **Want to go deeper?** Switch on *Show extra lessons*. You never need an extra lesson for the lessons after it.
     4. **Opened a lesson further ahead?** Look at the top, under *Before you start*: it lists the lessons it builds on, with a tick for each one you have done.
     """)
@@ -168,14 +169,14 @@ def text_worked_example():
     mo.md(rf"""
     ### Worked example
 
-    **Case 1: no goal yet.** You want to learn AI from the start, and you have no goal of your own yet. Question 1 says it all: follow the main route, and *Continue* on the start page takes you to your next lesson. Questions 3 and 4 still help along the way.
+    **Case 1: no goal yet.** You want to learn AI from the start, and you have no goal of your own yet. Question 1 says it all: follow the core, and *Continue* on the start page takes you to your next lesson. Questions 3 and 4 still help along the way.
 
     **Case 2: a goal.** You want to build a GPT as fast as possible: a model that writes text. You build it yourself at the intermediate level.
 
     1. **No goal of your own yet?** You do have one, so on to question 2.
-    2. **A goal of your own?** Yes. On the start page you pick *I want my own GPT as fast as possible*. The start page counts the lessons this goal builds on: **{GPT["lessons"]} lessons**, instead of the {GPT["place"]} lessons up to the GPT in the main route (with *Show extra lessons* off). Look at which ones they are:
+    2. **A goal of your own?** Yes. On the start page you pick *I want my own GPT as fast as possible*. The start page switches to the route of large language models, the domain the goal belongs to, and counts the lessons this goal builds on: **{GPT["lessons"]} lessons**, instead of the {GPT["place"]} lessons up to the GPT along the core and that route (with *Show extra lessons* off). Look at which ones they are:
         - **Levels:** {GPT["levels"]["basis"]} at basics and {GPT["levels"]["gevorderd"]} at intermediate. None at expert: a first GPT does not need those.
-        - **Branches:** {GPT["foundation"]} from the foundation, and the rest mostly from the language branch.
+        - **Parts:** {GPT["core"]} from the core, {GPT["shared"]} shared lessons, and {GPT["domain"]} from the domain of large language models itself.
     3. **Want to go deeper?** Not now: you want your GPT fast. Leave *Show extra lessons* off.
     4. **Opened a lesson further ahead?** Not needed: the goal route gives you every lesson in order.
 
@@ -204,13 +205,13 @@ def choice_pick_route_cell():
         options={
             "jump": "Open the attention lesson straight away.",
             "goal": "Pick *I want to understand attention* on the start page, and follow that route.",
-            "all": "Take the whole main route first, up to attention.",
+            "all": "Take the whole core first, and then the route of large language models up to attention.",
         },
         correct="goal",
         why={
             "goal": "That route has exactly the lessons attention builds on, in the right order, and nothing else.",
             "jump": "That lesson builds on many lessons before it: under *Before you start* you would see them, without ticks. Look at question 2 of the recipe again.",
-            "all": "That works, but it takes longer than needed: before attention, the main route also has lessons that attention does not build on. Look at question 2 of the recipe again.",
+            "all": "That works, but it takes longer than needed: on the way to attention, the core and that route also have lessons that attention does not build on. Look at question 2 of the recipe again.",
         },
     )
     choice_pick_route
@@ -221,9 +222,9 @@ def choice_pick_route_cell():
 def text_exercise_kinds():
     mo.vstack([
         mo.md(r"""
-        ### Exercise 2. Branch, level or route?
+        ### Exercise 2. Domain, level or route?
 
-        Each item below is a branch, a level or a route, like the three examples under the table with the new words.
+        Each item below is a domain, a level or a route, like the three examples under the table with the new words.
         """),
         L.task("Put each item in the right group."),
     ])
@@ -249,11 +250,11 @@ def hints_kinds():
     L.hints(
         "kinds",
         [
-            "A branch is a part of AI, a level says how advanced a lesson is, and a route is an order of lessons.",
+            "A domain is a part of AI, a level says how advanced a lesson is, and a route is an order of lessons.",
             "Two items are labels on lessons: those are the levels. Which two items are lists of lessons to take one after the other?",
             "Computer vision and speech are parts of AI, each with lessons of its own.",
         ],
-        why="Branch: **Computer vision** and **Speech, audio and music**. Level: **Intermediate** and **Expert**. Route: **I want to understand attention** and **The main route**.",
+        why="Domain: **Computer vision** and **Speech, audio and music**. Level: **Intermediate** and **Expert**. Route: **I want to understand attention** and **The core**.",
     )
     return
 
@@ -261,7 +262,7 @@ def hints_kinds():
 @app.cell(hide_code=True)
 def text_foundation():
     mo.md(r"""
-    ### Exercise 3. How the branches hang together
+    ### Exercise 3. How the domains hang together
     """)
     return
 
@@ -270,17 +271,17 @@ def text_foundation():
 def choice_foundation_cell():
     choice_foundation = L.choice(
         "foundation",
-        question="Which sentence about the branches is right?",
+        question="Which sentence about the domains is right?",
         options={
-            "separate": "Each branch is a course of its own: you can start in any branch without anything before it.",
-            "levels": "There are three branches: basics, intermediate and expert.",
-            "grow": "Every branch grows from the foundation: its lessons build on lessons from the foundation.",
+            "separate": "Each domain is a course of its own: you can start in any domain without anything before it.",
+            "levels": "There are three domains: basics, intermediate and expert.",
+            "grow": "Every domain builds on the core: its lessons build on lessons from the core.",
         },
         correct="grow",
         why={
-            "grow": "Every part of AI uses the same basics, so every branch starts where the foundation has brought you.",
-            "separate": "A first lesson on computer vision, for example, stores a picture as numbers with Python; without the foundation you could not follow it. Look at the table with the new words again.",
-            "levels": "Basics, intermediate and expert are labels that say how advanced a lesson is. Look at the table with the new words again: what is a branch?",
+            "grow": "Every part of AI uses the same basics, so every domain starts where the core has brought you.",
+            "separate": "A first lesson on computer vision, for example, stores a picture as numbers with Python; without the core you could not follow it. Look at the table with the new words again.",
+            "levels": "Basics, intermediate and expert are labels that say how advanced a lesson is. Look at the table with the new words again: what is a domain?",
         },
     )
     choice_foundation
@@ -292,7 +293,7 @@ def text_further():
     mo.md(r"""
     ### Going further
 
-    Not needed for this lesson, but worth a look: on the start page, pick *I want to train my first CNN* under *Or follow a goal*. A CNN is a neural network for pictures, which you build at the intermediate level. At which levels are the lessons of that route? Then pick *The whole route* again to get the main route back.
+    Not needed for this lesson, but worth a look: on the start page, pick *I want to train my first CNN* under *Or follow a goal*. A CNN is a neural network for pictures, which you build at the intermediate level. To which domain does the start page switch, and at which levels are the lessons of that route? Then pick *The core* under *Your route* to get the core back.
     """)
     return
 

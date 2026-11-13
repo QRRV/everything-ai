@@ -2,7 +2,7 @@
 
 *[English](README.md)*
 
-Leer AI door het zelf te bouwen: van je eerste regel Python tot je eigen language model en een wetenschappelijke paper die je nabouwt. Elke les draait op je eigen computer, en elke oefening wordt meteen nagekeken. Gratis, in het Nederlands en het Engels.
+Leer AI door het zelf te bouwen: van je eerste regel Python, via een kern waar elk domein op voortbouwt, tot de delen van AI die jij kiest, zoals language models of computer vision, en een wetenschappelijke paper die je nabouwt. Elke les draait op je eigen computer, en elke oefening wordt meteen nagekeken. Gratis, in het Nederlands en het Engels.
 
 ## Starten
 
@@ -32,7 +32,7 @@ Het eerste deel van de course draait op elke computer van de laatste jaren. Less
 
 ## Hoe het werkt
 
-- **Routes in drie niveaus.** De startpagina laat je route zien, van basis via gevorderd tot expert, en je kiest er ook een andere, zoals computer vision na de basis. Je kunt elke les openen; mis je iets van eerder, dan zegt de les waar je het vindt.
+- **De kern, daarna een domein naar keuze.** Iedereen begint met de kern: Python, data, je eerste modellen en neural networks. Daarna kies je een domein, zoals large language models of computer vision, elk met een eigen route, tot en met niveau expert. Je kunt elke les openen; mis je iets van eerder, dan zegt de les waar je het vindt.
 - **Elke les werkt hetzelfde.** Waarom het ertoe doet, het idee met een uitgewerkt voorbeeld, en dan oefeningen met een check die meteen zegt wat goed is, wat nog niet, en wat je nu doet. Hints gaan één voor één open, met de oplossing als laatste.
 - **Je werk blijft van jou.** Je werkt in je eigen kopie van elke les, in de map `work/`. Daar wordt ook je voortgang bewaard. "Opnieuw beginnen" zet een les terug zoals de course hem maakte.
 - **Nederlands en Engels.** Wissel op de startpagina of bovenaan een les.

@@ -1,6 +1,7 @@
 # SPDX-FileCopyrightText: 2026 Everything AI contributors
 # SPDX-License-Identifier: MIT
-"""The course as data: lessons, routes, branches, goals and fixed phrases.
+"""The course as data: lessons, routes, the parts of the course (the kern, the foundation and the domains), goals
+and fixed phrases.
 
 Everything here is read from files in the repository, so the start page, the lesson
 header and the tests all count and name things the same way.
@@ -29,12 +30,11 @@ def _load(path: Path):
 
 @functools.cache
 def lessons() -> dict[str, dict]:
-    """Every lesson in the route data, by id. A lesson without its own `tak` takes the file's."""
+    """Every lesson in the route data, by id, with its place in the course: `domein` and `module`."""
     out = {}
     for f in sorted((paths.COURSE / "route" / "lessen").glob("*.yaml")):
         data = _load(f)
         for lesson in data["lessons"]:
-            lesson.setdefault("tak", data.get("tak"))
             lesson.setdefault("requires", [])
             out[lesson["id"]] = lesson
     return out
@@ -45,11 +45,11 @@ def _routes() -> dict:
     return _load(paths.COURSE / "route" / "routes.yaml")
 
 
-MAIN = "hoofdroute"
+KERN = "kern"   # the first route: the start everyone takes before choosing a domain (besluit 1.18)
 
 
 @functools.cache
-def route_steps(route_id: str = MAIN) -> list[dict]:
+def route_steps(route_id: str = KERN) -> list[dict]:
     """A route in order: [{"id": ..., "extra": bool}, ...]."""
     route = next(r for r in _routes()["routes"] if r["id"] == route_id)
     steps = []
@@ -61,9 +61,9 @@ def route_steps(route_id: str = MAIN) -> list[dict]:
     return steps
 
 
-def main_route() -> list[dict]:
-    """The main route in order: [{"id": ..., "extra": bool}, ...]."""
-    return route_steps(MAIN)
+def kern_route() -> list[dict]:
+    """The kern in order: [{"id": ..., "extra": bool}, ...]."""
+    return route_steps(KERN)
 
 
 def _names(r: dict) -> dict:
@@ -71,15 +71,14 @@ def _names(r: dict) -> dict:
             "short": {"en": r.get("short", r["title"]), "nl": r.get("short_nl", r["title_nl"])}}
 
 
-def main_route_names() -> dict:
-    """The id, title and short name of the first route, the one from zero to your own LLM."""
-    return _names(next(r for r in _routes()["routes"] if r["id"] == MAIN))
+def kern_names() -> dict:
+    """The id, title and short name of the kern."""
+    return _names(next(r for r in _routes()["routes"] if r["id"] == KERN))
 
 
-def branch_routes() -> list[dict]:
-    """The routes of branches that start after a step of the first route, such as beeld after the basics."""
-    return [{**_names(r), "tak": r.get("tak"), "after": r.get("after")}
-            for r in _routes()["routes"] if r["id"] != MAIN]
+def domain_routes() -> list[dict]:
+    """The routes of the domains. Each starts after the kern: the core steps of the kern come first."""
+    return [{**_names(r), "domein": r["domein"]} for r in _routes()["routes"] if r["id"] != KERN]
 
 
 def route_ids() -> list[str]:
@@ -87,22 +86,45 @@ def route_ids() -> list[str]:
 
 
 def route_for(lesson_id: str) -> str:
-    """The route a lesson belongs to: the main route when it is in it, else the first branch route that has it."""
+    """The route a lesson is numbered in: the route of its own domain when that has one, else the first route that
+    has it (the kern for a lesson of the kern, the first domain that borrows it for a lesson of a shared module)."""
+    domein = lessons()[lesson_id]["domein"]
+    for r in domain_routes():
+        if r["domein"] == domein:
+            return r["id"]
     for rid in route_ids():
         if any(s["id"] == lesson_id for s in route_steps(rid)):
             return rid
-    return MAIN
+    return KERN
 
 
-def milestones() -> list[dict]:
-    route = next(r for r in _routes()["routes"] if r["id"] == MAIN)
+def route_of(lesson_id: str, chosen: str | None = None) -> str:
+    """The route a learner sees a lesson in: the route they chose when it has the lesson (a shared lesson that several
+    domains borrow), else the route the lesson is numbered in."""
+    if chosen in route_ids() and any(s["id"] == lesson_id for s in route_steps(chosen)):
+        return chosen
+    return route_for(lesson_id)
+
+
+def milestones(route_id: str = KERN) -> list[dict]:
+    route = next(r for r in _routes()["routes"] if r["id"] == route_id)
     return route.get("milestones", [])
 
 
-def numbering(extras: bool = False, route_id: str = MAIN) -> tuple[dict[str, int], int]:
+def numbering(extras: bool = False, route_id: str = KERN) -> tuple[dict[str, int], int]:
     """The one count a learner sees: place in the route, without extra lessons unless switched on."""
     steps = [s for s in route_steps(route_id) if extras or not s["extra"]]
     return {s["id"]: i + 1 for i, s in enumerate(steps)}, len(steps)
+
+
+@functools.cache
+def order() -> tuple[str, ...]:
+    """The whole course in order: the kern, then the routes of the domains, every lesson at its first place."""
+    out: dict[str, None] = {}
+    for rid in route_ids():
+        for s in route_steps(rid):
+            out.setdefault(s["id"])
+    return tuple(out)
 
 
 def chain(lesson_id: str) -> set[str]:
@@ -119,10 +141,10 @@ def chain(lesson_id: str) -> set[str]:
 
 
 def goal_route(lesson_id: str) -> list[str]:
-    """The smallest set of lessons that reaches a goal, in main-route order."""
+    """The smallest set of lessons that reaches a goal, in the order of the course."""
     need = chain(lesson_id) | {lesson_id}
-    order = {s["id"]: i for i, s in enumerate(main_route())}
-    return sorted(need, key=lambda lid: order.get(lid, len(order)))
+    pos = {lid: i for i, lid in enumerate(order())}
+    return sorted(need, key=lambda lid: pos.get(lid, len(pos)))
 
 
 def goals() -> list[dict]:
@@ -130,8 +152,28 @@ def goals() -> list[dict]:
 
 
 @functools.cache
-def branches() -> list[dict]:
-    return _load(paths.COURSE / "route" / "takken.yaml")["takken"]
+def structure() -> dict:
+    """The parts of the course (route/domeinen.yaml): the foundation, whose kern modules everyone takes first and
+    whose shared modules a domain pulls in, and the domains, in the groups the start page shows them in."""
+    return _load(paths.COURSE / "route" / "domeinen.yaml")
+
+
+def domains() -> list[str]:
+    return [d["id"] for d in structure()["domeinen"]]
+
+
+def groups() -> list[dict]:
+    """The groups of domains as the start page shows them: [{"id": ..., "domains": [...]}, ...]."""
+    return [{"id": g["id"], "domains": list(g["domeinen"])} for g in structure()["groepen"]]
+
+
+def part(lesson_id: str) -> str:
+    """Where a lesson belongs: "kern", "fundament" (a shared module of the foundation) or the id of its domain."""
+    les = lessons()[lesson_id]
+    if les["domein"] != "fundament":
+        return les["domein"]
+    kern = {m["id"] for m in structure()["fundament"]["modules"] if m.get("kern")}
+    return "kern" if les["module"] in kern else "fundament"
 
 
 @functools.cache
@@ -154,9 +196,21 @@ def level_name(level: str, lang: str) -> str:
     return phrase(f"level-{level}", lang)
 
 
-def module_name(module: str, lang: str) -> str:
-    names = display()["modules"].get(module)
-    return names[lang] if names else module
+def module_key(lesson_id: str) -> str:
+    """The key of a lesson's module in display.yaml: domein/module."""
+    les = lessons()[lesson_id]
+    return f"{les['domein']}/{les['module']}"
+
+
+def module_name(lesson_id: str, lang: str) -> str:
+    """The name of a lesson's module (its chapter) in one language."""
+    names = display()["modules"].get(module_key(lesson_id))
+    return names[lang] if names else lessons()[lesson_id]["module"]
+
+
+def part_name(part_id: str, lang: str) -> str:
+    """The name of a part of the course (kern, fundament or a domain) in one language."""
+    return display()["parts"][part_id][lang]
 
 
 # --- built lessons ---------------------------------------------------------------

@@ -1,14 +1,14 @@
-# Main-route lessons whose home branch is another branch than stam, taal or onderzoek.
-# Each lesson keeps its own "tak"; the branch continues from it when it is built.
+# Lessons planned outside the other files: core lessons that give a first taste of a domain (domein fundament), and
+# the lessons built so far of the domains systemen and verantwoord. The domain of each lesson is in its "domein".
 # Planning data; the map: key below names the map version. Format: ../FORMAT.md.
 map: v2.2
 lessons:
 
 # --- beeld ----------------------------------------------------------------------
 - id: data-images-as-arrays
-  tak: beeld
   title: "An image is a grid of numbers"
   level: basis
+  domein: fundament
   module: data
   idea: "A grayscale image is a 2D array of brightness values; a color image has three channels; matplotlib reads and shows it, and slices and masks work on it."
   covers: [beelden-als-data#0, beelden-als-data#4]
@@ -22,9 +22,9 @@ lessons:
 
 # --- onzekerheid ------------------------------------------------------------------
 - id: data-two-columns
-  tak: onzekerheid
   title: "Two columns together: an association is not a cause"
   level: basis
+  domein: fundament
   module: data
   idea: "A scatter plot shows whether two columns move together: up, down, not at all, or in a curve; moving together is not causing, because a third column, a confounder, can drive both and can even turn the direction around within every group (Simpson's paradox)."
   covers: [causaliteit-basis#0, causaliteit-basis#1, eda-en-visualisatie#2]
@@ -38,10 +38,10 @@ lessons:
 
 # --- klassiek-ml -----------------------------------------------------------------
 - id: ml-knn
-  tak: klassiek-ml
   title: "Ask the neighbors: k-nearest neighbors"
   level: basis
-  module: generalization
+  domein: fundament
+  module: generalisatie
   idea: "A new example gets the class that most of its k nearest training examples have; k is a hyperparameter, chosen on the validation set."
   covers: [instance-based-leren-en-naive-bayes#0]
   requires: [ml-validation-set, math-norms-cosine, ml-feature-scaling, ml-logistic-regression, math-log-scales]
@@ -53,10 +53,10 @@ lessons:
   needs: any
 
 - id: ml-decision-tree
-  tak: klassiek-ml
   title: "Question after question: the decision tree"
   level: basis
-  module: more-models
+  domein: fundament
+  module: meer-modellen
   idea: "A decision tree asks threshold questions one after another: it keeps the split with the fewest mistakes and does the same again in each part, until a part is pure or the tree reaches its maximum depth, a hyperparameter that trades underfitting against overfitting."
   covers: [bomen-en-ensembles#0, bomen-en-ensembles#1]
   requires: [ml-project-tabular, ml-knn, start-rules-vs-learning, ml-overfitting]
@@ -67,10 +67,10 @@ lessons:
   needs: any
 
 - id: ml-random-forest
-  tak: klassiek-ml
   title: "Many trees vote: the random forest"
   level: basis
-  module: more-models
+  domein: fundament
+  module: meer-modellen
   idea: "A random forest grows many deep trees, each on a bootstrap sample of the training set and with a random subset of the features at every split, and lets them vote; their mistakes differ, so the vote varies far less than one tree."
   covers: [bomen-en-ensembles#3, bomen-en-ensembles#4]
   requires: [ml-decision-tree, prob-expectation]
@@ -81,10 +81,10 @@ lessons:
   needs: any
 
 - id: ml-gradient-boosting
-  tak: klassiek-ml
   title: "Tree after tree on what is left: gradient boosting"
   level: basis
-  module: more-models
+  domein: fundament
+  module: meer-modellen
   idea: "Gradient boosting starts every prediction at the mean and adds small regression trees one after another, each learning the residuals of the trees before it and counting for a part, the learning rate; more trees keep lowering the training error, so the number of trees is chosen on the validation set."
   covers: [bomen-en-ensembles#8]
   requires: [ml-random-forest, ml-residuals, ml-regression-metrics, ml-learning-rate, ml-bias-variance]
@@ -95,10 +95,10 @@ lessons:
   needs: any
 
 - id: ml-data-leakage
-  tak: klassiek-ml
   title: "Too good to be true: data leakage"
   level: basis
-  module: more-models
+  domein: fundament
+  module: meer-modellen
   idea: "Data leakage is information about the answer that reaches training or your choices but will not be there when the model is used, such as features chosen on all the data before cross-validation, a feature only known after the label, or the same person in both sets; split first, and work out everything from the training part alone."
   covers: [data-leakage#0, data-leakage#1]
   requires: [ml-cross-validation, ml-feature-scaling, ml-baselines, ml-loss-vs-metric]
@@ -109,10 +109,10 @@ lessons:
   needs: any
 
 - id: ml-pipelines
-  tak: klassiek-ml
   title: "Every step in every fold: pipelines"
   level: basis
-  module: more-models
+  domein: fundament
+  module: meer-modellen
   idea: "A pipeline chains the steps that learn from data and a model into one model: fit learns every step from the training examples only, and cross-validation fits a fresh copy in every fold, so no step can leak."
   covers: [scikit-learn#1, scikit-learn#2]
   requires: [ml-data-leakage, ml-sklearn, ml-knn]
@@ -123,10 +123,10 @@ lessons:
   needs: any
 
 - id: ml-project-fair-comparison
-  tak: klassiek-ml
   title: "Project: which model is best? A fair comparison"
   level: basis
-  module: more-models
+  domein: fundament
+  module: meer-modellen
   kind: review
   idea: "Compare the models of the module and the earlier ones on one question, the sex of a penguin: the same folds, every model in its pipeline, a baseline, fold by fold, hyperparameters chosen by cross-validation, and the test set once; the best four are about one penguin per fold apart."
   covers: []
@@ -138,10 +138,10 @@ lessons:
   needs: any
 
 - id: ml-kmeans
-  tak: klassiek-ml
   title: "Groups without labels: k-means"
   level: basis
-  module: without-labels
+  domein: fundament
+  module: zonder-labels
   idea: "k-means clusters examples without labels by repeating two steps, every example to its nearest centroid and every centroid to the mean of its examples, until nothing changes; on the penguins it finds the species it never saw, as far as the features allow."
   covers: [clustering#0, clustering#1]
   requires: [ml-knn, ml-kinds-of-learning, ml-sklearn, py-while]
@@ -152,10 +152,10 @@ lessons:
   needs: any
 
 - id: ml-choosing-k
-  tak: klassiek-ml
   title: "How many clusters? Choosing k"
   level: basis
-  module: without-labels
+  domein: fundament
+  module: zonder-labels
   idea: "k-means always ends, but not always in its best solution, and it never says how many clusters there are: the within-cluster sum of squares always falls as k grows, so you look for its elbow, ask the silhouette score how clearly the clusters lie apart, and decide with what the clusters are for."
   covers: [clustering#5]
   requires: [ml-kmeans]
@@ -166,10 +166,10 @@ lessons:
   needs: any
 
 - id: ml-pca
-  tak: klassiek-ml
   title: "The best shadow: PCA"
   level: basis
-  module: without-labels
+  domein: fundament
+  module: zonder-labels
   idea: "Four measurements do not fit in one picture, but their shadow on a line or a plane does; PCA finds the directions whose shadows keep the most of the spread, and the explained variance says how much each keeps, without ever seeing a label."
   covers: [dimensiereductie#2]
   requires: [ml-choosing-k, prob-expectation, math-matrix-multiply]
@@ -181,10 +181,10 @@ lessons:
 
 # --- verantwoord ------------------------------------------------------------------
 - id: rai-bias-in-data
-  tak: verantwoord
   title: "Who is in the data, and who is missing?"
   level: basis
-  module: generalization
+  domein: fundament
+  module: generalisatie
   idea: "A model learns the gaps and prejudices in its data; ask who could be harmed and who is missing before you trust a score."
   covers: [waarom-ai-ethiek#0, bronnen-van-bias#1]
   requires: [ml-workflow]
@@ -196,10 +196,10 @@ lessons:
 
 # --- rl ---------------------------------------------------------------------------
 - id: rl-what-is-rl
-  tak: rl
   title: "Learning from rewards"
   level: basis
-  module: building-blocks
+  domein: fundament
+  module: agents
   idea: "In reinforcement learning an agent acts in an environment and learns from rewards; it maximizes the discounted sum of future rewards, the return."
   covers: [wat-rl-is#0, wat-rl-is#1, agentraamwerk#0]
   requires: [ml-kinds-of-learning]
@@ -210,9 +210,9 @@ lessons:
   needs: any
 
 - id: rl-value-iteration
-  tak: rl
   title: "When steps can slip: value iteration"
   level: basis
+  domein: fundament
   module: agents
   idea: "When an action can slip, write the task down as a Markov decision process; the Bellman equation gives every state the best return you can expect from it, value iteration finds those values round by round from zero, and the policy takes in every state the action with the largest Q."
   covers: [mdp-s-bellman-en-pomdp-s#0, mdp-s-bellman-en-pomdp-s#1, dynamic-programming#2]
@@ -225,9 +225,9 @@ lessons:
   needs: any
 
 - id: rl-q-learning
-  tak: rl
   title: "Learning from your own steps: Q-learning"
   level: basis
+  domein: fundament
   module: agents
   idea: "Without the transition function, an agent learns Q(s, a) from its own steps: Q-learning moves each Q a step towards the reward plus the discounted best Q where it landed, and ε-greedy makes it explore with a random action now and then, so that the return per episode grows."
   covers: [temporal-difference-learning#1, exploratie#0]
@@ -241,9 +241,9 @@ lessons:
 
 # --- klassieke-ai -----------------------------------------------------------------
 - id: search-bfs
-  tak: klassieke-ai
   title: "Searching a maze: breadth-first search"
   level: basis
+  domein: fundament
   module: agents
   idea: "Write a task down as states, actions, a goal test and a path cost; breadth-first search takes the oldest path from a queue first, so the first path that reaches the goal is a shortest one."
   covers: [probleemformulering-en-zoekinfrastructuur#0, probleemformulering-en-zoekinfrastructuur#2, ongeinformeerd-zoeken#0]
@@ -256,9 +256,9 @@ lessons:
   needs: any
 
 - id: search-astar
-  tak: klassieke-ai
   title: "A*: search with a sense of direction"
   level: basis
+  domein: fundament
   module: agents
   idea: "A* takes from a priority queue the path with the smallest f = g + h, its steps so far plus an estimate of the steps still to go; with an estimate that never says too much and changes by at most 1 per step, as in a maze, it still finds a shortest path, but expands fewer states."
   covers: [heuristisch-zoeken#1]
@@ -270,9 +270,9 @@ lessons:
   needs: any
 
 - id: search-minimax
-  tak: klassieke-ai
   title: "Winning a game: minimax"
   level: basis
+  domein: fundament
   module: agents
   idea: "In a game where two players take turns, minimax gives every position the value the player to move can force: a finished game is worth +1, 0 or −1, X takes the largest value of its moves and O the smallest, and the function calls itself down the game tree to the finished games."
   covers: [spellen-als-zoekprobleem#1, spellen-als-zoekprobleem#2]
@@ -286,9 +286,9 @@ lessons:
 
 # --- bouwen -----------------------------------------------------------------------
 - id: start-your-own-assistant
-  tak: bouwen
   title: "Learning with your own AI assistant"
   level: basis
+  domein: fundament
   module: start
   idea: "You can point your own AI assistant at this course; ask it to explain and hint, not to hand you answers, and check what it says."
   covers: [ai-ondersteund-programmeren#0]
@@ -299,9 +299,9 @@ lessons:
 
 # --- systemen ---------------------------------------------------------------------
 - id: torch-gpu
-  tak: systemen
   title: "Why AI uses GPUs, and the same code on yours"
   level: basis
+  domein: fundament
   module: pytorch
   idea: "A GPU does thousands of simple calculations at once; moving the model and data to it with .to(device) makes training much faster, and the code still runs on a CPU."
   covers: [compute-geletterdheid#0, compute-geletterdheid#1, gpu-programmeren#0]
@@ -312,10 +312,10 @@ lessons:
   needs: any
 
 - id: sys-memory-roofline
-  tak: systemen
   title: "Memory or compute: what limits your GPU?"
   level: expert
-  module: systems
+  domein: systemen
+  module: hardware
   idea: "Moving data from GPU memory is often slower than calculating with it; the roofline shows whether an operation is limited by memory or by compute."
   covers: [gpu-architectuur-geheugen-en-roofline#0, gpu-architectuur-geheugen-en-roofline#3]
   requires: [torch-gpu, gpt-count]
@@ -325,10 +325,10 @@ lessons:
   needs: any
 
 - id: sys-number-formats
-  tak: systemen
   title: "Fewer bits: FP32, FP16 and BF16"
   level: expert
-  module: systems
+  domein: systemen
+  module: hardware
   idea: "16-bit numbers halve memory and speed up tensor cores; BF16 keeps the range of FP32 at lower precision."
   covers: [getalformaten#0]
   requires: [num-floats-stability, sys-memory-roofline]
@@ -340,10 +340,10 @@ lessons:
   needs: any
 
 - id: sys-mixed-precision
-  tak: systemen
   title: "Mixed-precision training"
   level: expert
-  module: systems
+  domein: systemen
+  module: snel-trainen
   idea: "Compute in BF16 where it is safe and keep the master weights in FP32; autocast does this for you."
   covers: [precisie-en-geheugenbesparing#0]
   requires: [sys-number-formats, nn-trainer]
@@ -355,10 +355,10 @@ lessons:
   needs: gpu8
 
 - id: sys-memory-accounting
-  tak: systemen
   title: "Where the memory goes"
   level: expert
-  module: systems
+  domein: systemen
+  module: snel-trainen
   idea: "Weights, gradients, optimizer states and activations each take memory; add them up before a run to know if it fits."
   covers: [compute-en-kostenramingen#2, transfer-en-full-fine-tuning#1]
   requires: [sys-mixed-precision, opt-adam]
@@ -368,10 +368,10 @@ lessons:
   needs: any
 
 - id: sys-compute-6nd
-  tak: systemen
   title: "Estimating training compute: the 6ND rule"
   level: expert
-  module: systems
+  domein: systemen
+  module: snel-trainen
   idea: "Training costs about 6 FLOPs per parameter per token, so compute is roughly 6 times parameters times tokens; divide by your GPU's speed to get the time."
   covers: [compute-en-kostenramingen#0, compute-en-kostenramingen#1]
   requires: [gpt-count, gpt-train-chars, sys-memory-roofline, sys-memory-accounting]
@@ -381,10 +381,10 @@ lessons:
   needs: any
 
 - id: sys-profiling-mfu
-  tak: systemen
   title: "Profiling: tokens per second and MFU"
   level: expert
-  module: systems
+  domein: systemen
+  module: snel-trainen
   idea: "Measure tokens per second and the fraction of the GPU's peak you use (MFU); the profiler shows where the time goes."
   covers: [profiling-en-prestatiemetrics#0, profiling-en-prestatiemetrics#1, profiling-en-prestatiemetrics#2, profiling-en-prestatiemetrics#3]
   requires: [sys-compute-6nd, sys-memory-roofline]
@@ -397,10 +397,10 @@ lessons:
   needs: gpu8
 
 - id: sys-triton-kernel
-  tak: systemen
   title: "Write your own GPU kernel"
   level: expert
-  module: systems
+  domein: systemen
+  module: snel-trainen
   idea: "In Triton you write a fused softmax kernel in Python that reads the data once instead of several times, and you measure the speed-up."
   covers: [gpu-programmeren#1, gpu-programmeren#2, kernels-fusie-en-compilers#0, capstone-zelf-een-kleine-llm-bouwen-en-trainen#2]
   requires: [sys-profiling-mfu, num-floats-stability]
@@ -412,10 +412,10 @@ lessons:
   needs: nvidia-linux
 
 - id: sys-flash-attention
-  tak: systemen
   title: "Online softmax and FlashAttention"
   level: expert
-  module: systems
+  domein: systemen
+  module: snel-trainen
   idea: "Computing softmax in blocks with a running maximum lets attention run without ever storing the full score matrix."
   covers: [kernels-fusie-en-compilers#3, kernels-fusie-en-compilers#4]
   requires: [sys-triton-kernel, attn-causal-mask]
@@ -425,10 +425,10 @@ lessons:
   needs: any
 
 - id: sys-torch-compile
-  tak: systemen
   title: "Letting a compiler fuse operations"
   level: expert
-  module: systems
+  domein: systemen
+  module: snel-trainen
   idea: "torch.compile traces your model and fuses operations automatically; measure when it helps and when it does not."
   covers: [kernels-fusie-en-compilers#1]
   requires: [sys-triton-kernel]
@@ -438,10 +438,10 @@ lessons:
   needs: any
 
 - id: sys-gradient-checkpointing
-  tak: systemen
   title: "Gradient checkpointing"
   level: expert
-  module: systems
+  domein: systemen
+  module: snel-trainen
   idea: "Throw activations away in the forward pass and recompute them in the backward pass: less memory for some extra compute."
   covers: [precisie-en-geheugenbesparing#1]
   requires: [sys-memory-accounting]
@@ -452,10 +452,10 @@ lessons:
   needs: any
 
 - id: llm-model-card
-  tak: systemen
   title: "A model card for your model"
   level: expert
-  module: post-training
+  domein: systemen
+  module: productie
   idea: "Write down what your model is for, what it was trained on, how it scored and where it fails, with the license of model and data."
   covers: [documentatie-platforms-en-llmops#0]
   requires: [llm-eval-chat, data-provenance, llm-safety-eval]
@@ -465,10 +465,10 @@ lessons:
   needs: any
 
 - id: llm-safety-eval
-  tak: verantwoord
   title: "Red-team your own chat model"
   level: expert
-  module: post-training
+  domein: verantwoord
+  module: security
   idea: "Before you share a chat model you test what it does with harmful requests: a small red-team set measures how often it goes along, and a set of harmless requests measures how often it refuses for no reason."
   covers: [red-teaming-provenance-en-securitykaders#0, aanvallen-op-llm-applicaties#2]
   requires: [llm-eval-chat]

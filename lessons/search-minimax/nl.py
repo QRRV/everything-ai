@@ -382,7 +382,7 @@ def text_connections():
     mo.md(r"""
     ## Afronding
 
-    **Samenhang.** Minimax doorzoekt een game tree zoals [breadth-first search](/course/open/search-bfs?lang=nl) een doolhof doorzocht, maar in een andere volgorde: hij volgt elke zet tot het eind van het spel voordat hij de volgende probeert, zoals in het speelblok. Hij geeft een waarde terug in plaats van een pad, en hij roept zichzelf aan, zoals in [Een functie die zichzelf aanroept](/course/open/py-recursion?lang=nl). Met een waarde voor elke positie is de beste zet die waarvan de waarde het best is voor de speler aan zet. Zoeken in spellen als schaken komt terug in een tak die nog komt, *Zoeken, logica, planning en optimalisatie*. In de volgende les, *Als stappen kunnen uitglijden: value iteration*, antwoordt er geen tegenstander op je action, maar het toeval, en krijgt elke state weer een waarde.
+    **Samenhang.** Minimax doorzoekt een game tree zoals [breadth-first search](/course/open/search-bfs?lang=nl) een doolhof doorzocht, maar in een andere volgorde: hij volgt elke zet tot het eind van het spel voordat hij de volgende probeert, zoals in het speelblok. Hij geeft een waarde terug in plaats van een pad, en hij roept zichzelf aan, zoals in [Een functie die zichzelf aanroept](/course/open/py-recursion?lang=nl). Met een waarde voor elke positie is de beste zet die waarvan de waarde het best is voor de speler aan zet. Zoeken in spellen als schaken komt terug in een eigen domein dat nog komt, *Zoeken, logica, planning en optimalisatie*. In de volgende les, *Als stappen kunnen uitglijden: value iteration*, antwoordt er geen tegenstander op je action, maar het toeval, en krijgt elke state weer een waarde.
     """)
     return
 

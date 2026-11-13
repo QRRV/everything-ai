@@ -315,7 +315,7 @@ def text_connections():
     mo.md(r"""
     ## Afronding
 
-    **Samenhang.** Softmax uit [Veel klassen: softmax](/course/open/ml-softmax?lang=nl) maakt van logits kansen; de logits eerst door een temperature delen maakt ze scherper of vlakker, en de sampling uit [Sampling: laat het model schrijven](/course/open/lm-sampling?lang=nl) trekt daar dan uit. Elk language model dat schrijft, tot het grootste LLM, heeft deze instelling. Je bigram-model geeft nog steeds een kans van 0 aan elk paar dat het nooit zag, en geen temperature verandert dat. Een extra les, *Top-k en top-p sampling*, laat nog twee manieren zien om de onwaarschijnlijke tekens buiten te houden. In de volgende les, *Hoe goed is een language model?*, meet je hoe verrast je model is door echte tekst; daarna zie je in *Paren die je nooit zag: smoothing* waarom die nullen een probleem zijn, en los je dat op.
+    **Samenhang.** Softmax uit [Veel klassen: softmax](/course/open/ml-softmax?lang=nl) maakt van logits kansen; de logits eerst door een temperature delen maakt ze scherper of vlakker, en de sampling uit [Sampling: laat het model schrijven](/course/open/lm-sampling?lang=nl) trekt daar dan uit. Elk language model dat schrijft, tot het grootste LLM, heeft deze instelling. Een paar dat je tabel nooit zag, houdt een kans van 0, en geen temperature verandert dat. Een extra les, *Top-k en top-p sampling*, laat nog twee manieren zien om de onwaarschijnlijke tekens buiten te houden. In de volgende les, *Base model of chat model?*, zie je wat de language models die je elke dag gebruikt, anders doen dan het model dat jij bouwde.
     """)
     return
 

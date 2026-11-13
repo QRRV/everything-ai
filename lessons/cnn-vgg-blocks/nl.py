@@ -395,7 +395,7 @@ def text_connections():
     mo.md(r"""
     ## Afronding
 
-    **Samenhang.** Het receptive field uit [Convolutie in detail: kernel size, stride en padding](/course/open/cnn-conv-formal?lang=nl), nu als reden om kleine filters te stapelen: ze zien even ver als één groot filter, met minder weights en meer ReLU's. Je project `cnn` heeft nu `vgg.py`. Dieper was hier niet beter: op 6.000 kleine afbeeldingen van 28 bij 28 deden één of twee convoluties per blok het best, en met acht per blok liep het trainen vast. De volgende extra les, *ResNet: diepte die blijft werken*, geeft een diep CNN de residual connections van je diepe MLP uit [Project: een diep netwerk laten trainen](/course/open/nn-deep-net-project?lang=nl).
+    **Samenhang.** Het receptive field uit [Convolutie in detail: kernel size, stride en padding](/course/open/cnn-conv-formal?lang=nl), nu als reden om kleine filters te stapelen: ze zien even ver als één groot filter, met minder weights en meer ReLU's. Je project `cnn` heeft nu `vgg.py`. Dieper was hier niet beter: op 6.000 kleine afbeeldingen van 28 bij 28 deden één of twee convoluties per blok het best, en met acht per blok liep het trainen vast. De volgende les, *ResNet: diepte die blijft werken*, geeft een diep CNN de residual connections van je diepe MLP uit [Project: een diep netwerk laten trainen](/course/open/nn-deep-net-project?lang=nl).
     """)
     return
 

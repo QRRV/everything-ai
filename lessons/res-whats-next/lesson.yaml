@@ -8,11 +8,11 @@ title:
   en: "Where to go next"
   nl: "Waar nu heen"
 goal:
-  en: "find where each branch of the course grows out of the main route, and turn your reproduction into a question of your own: an ablation, new data or a robustness test."
-  nl: "vinden waar elke tak van de course uit de hoofdroute groeit, en van je reproductie een eigen vraag maken: een ablation, nieuwe data of een robuustheidstest."
+  en: "find what each domain of the course builds on and borrows, and turn your reproduction into a question of your own: an ablation, new data or a robustness test."
+  nl: "vinden waar elk domein van de course op voortbouwt en wat het leent, en van je reproductie een eigen vraag maken: een ablation, nieuwe data of een robuustheidstest."
 summary:
-  - en: "Every branch still to come grows out of the main route at its attach points, the lessons it builds on; it can begin after the first, and most branches can begin after the basics."
-    nl: "Elke tak die nog komt, groeit uit de hoofdroute bij zijn aanhaakpunten, de lessen waarop hij voortbouwt; hij kan na het eerste beginnen, en de meeste takken kunnen na de basis beginnen."
+  - en: "Every domain builds on the core. Past its basics, it borrows shared modules of the foundation, such as the math written out formally or attention, at the level where it first needs them; a lesson you did for one domain counts for every domain that borrows it."
+    nl: "Elk domein bouwt voort op de kern. Voorbij zijn basis leent het gedeelde modules van het fundament, zoals de wiskunde formeel uitgeschreven of attention, op het niveau waarop het ze voor het eerst nodig heeft; een les die je voor één domein deed, telt voor elk domein dat hem leent."
   - en: "A reproduction grows into a question of your own when you change one thing about the paper: an ablation takes a part away, new data tries the claim elsewhere, a robustness test disturbs what the model is tested on."
     nl: "Een reproductie groeit uit tot een eigen vraag als je één ding aan de paper verandert: een ablation haalt een deel weg, nieuwe data probeert de claim ergens anders, een robuustheidstest verstoort waarop het model getest wordt."
   - en: "Change one thing at a time, and write the rule down before you run it: then whatever you find has one cause."
@@ -21,9 +21,9 @@ can_now:
   - en: "say what kind of change a next question makes"
     nl: "zeggen wat voor verandering een volgende vraag maakt"
     by: kinds
-  - en: "find the branches you can begin from the lessons you have done"
-    nl: "de takken vinden waaraan je kunt beginnen, uit de lessen die je hebt gedaan"
-    by: can-begin
+  - en: "find the domains you are ready for from the shared modules you have done"
+    nl: "de domeinen vinden waar je klaar voor bent, uit de gedeelde modules die je af hebt"
+    by: ready
   - en: "write the next question for a paper you reproduced"
     nl: "de volgende vraag schrijven voor een paper die je hebt nagebouwd"
     by: next-question

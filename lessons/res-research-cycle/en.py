@@ -276,7 +276,7 @@ def text_connections():
     mo.md(r"""
     ## Wrap-up
 
-    **How this connects.** [What a paper, a preprint and peer review are](/course/open/res-what-is-a-paper?lang=en) showed how research is shared; now you know what comes before the paper: a question, a hypothesis that could be wrong, and an experiment that tests it. In the research part of the course, you design experiments like this yourself, and in the end you repeat the result of a paper. With this lesson, the basics part of the course is done. Later lessons build on it, such as *Change one thing at a time* and *Is the difference real?*. The next lesson, *Derivative rules*, starts the intermediate part.
+    **How this connects.** [What a paper, a preprint and peer review are](/course/open/res-what-is-a-paper?lang=en) showed how research is shared; now you know what comes before the paper: a question, a hypothesis that could be wrong, and an experiment that tests it. In the domain *Research skills and the frontier*, you design experiments like this yourself, and in the end you repeat the result of a paper; lessons such as *Change one thing at a time* and *Is the difference real?* build on this one. With this lesson, the core of the course is done. On the start page you now choose a domain, such as large language models, computer vision or research, and follow its route, which builds on the core.
     """)
     return
 

@@ -352,7 +352,7 @@ def text_connections():
     mo.md(r"""
     ## Wrap-up
 
-    **How this connects.** The report of [Guided reproduction 7](/course/open/repro-guided-report?lang=en) and the sharing of [Sharing your work so others can repeat it](/course/open/res-share-work?lang=en), now for your own paper; and every part of your kit, from the plan of [Your reproduction 2](/course/open/repro-own-claim?lang=en) to the comparison of [Your reproduction 7](/course/open/repro-own-compare?lang=en). Your own reproduction is done. The next lesson, *Where to go next*, shows where the other branches of the course connect to what you know now.
+    **How this connects.** The report of [Guided reproduction 7](/course/open/repro-guided-report?lang=en) and the sharing of [Sharing your work so others can repeat it](/course/open/res-share-work?lang=en), now for your own paper; and every part of your kit, from the plan of [Your reproduction 2](/course/open/repro-own-claim?lang=en) to the comparison of [Your reproduction 7](/course/open/repro-own-compare?lang=en). Your own reproduction is done. The next lesson, *Where to go next*, shows where the other domains of the course connect to what you know now.
     """)
     return
 
