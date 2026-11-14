@@ -156,13 +156,23 @@ _CHECKS: dict[str, object] = {}
 _PASSED: dict[tuple, bool] = {}   # contract tests already run, by the code they ran on
 
 
+_SAID = [0]   # how often builds_on was called, so lesson._load_checks can tell whether a checks module called it
+
+
 def builds_on(*modules: tuple[str, str, str, str]) -> None:
     """Say which project modules this lesson uses, each as (package, module, the lesson that saves it, the exercise
     there), in the order they build on each other: the module the others import first. A lesson's checks say it
-    once; it replaces what an earlier lesson in the same process said."""
+    once; it replaces what an earlier lesson in the same process said. lesson.lesson says it again for a lesson
+    asked for again, since a lesson made in between replaced it."""
     _BUILDS_ON.clear()
     for package, module, lesson, exercise in modules:
         _BUILDS_ON[(package, module)] = (lesson, exercise)
+    _SAID[0] += 1
+
+
+def said() -> tuple[tuple[str, str, str, str], ...]:
+    """What builds_on said last, in the form it takes."""
+    return tuple((package, module, lesson, exercise) for (package, module), (lesson, exercise) in _BUILDS_ON.items())
 
 
 def _exercise(package: str, module: str):

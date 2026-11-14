@@ -609,7 +609,10 @@ def _load_checks(lesson_id: str, lang: str = "en"):
         return _NoChecks()
     spec = importlib.util.spec_from_file_location(f"everything_ai_checks_{lesson_id.replace('-', '_')}", path)
     module = importlib.util.module_from_spec(spec)
+    times = projects._SAID[0]
     spec.loader.exec_module(module)
+    if projects._SAID[0] != times:   # the checks said which project modules the lesson builds on: lesson() says it again
+        module._ea_builds_on = projects.said()
     if lang == "nl":
         for name, value in list(vars(module).items()):
             if isinstance(value, types.FunctionType) and value.__module__ == module.__name__:
@@ -644,5 +647,15 @@ class _NoChecks:
 
 
 @functools.cache
-def lesson(lesson_id: str, lang: str) -> Lesson:
+def _lesson(lesson_id: str, lang: str) -> Lesson:
     return Lesson(lesson_id, lang)
+
+
+def lesson(lesson_id: str, lang: str) -> Lesson:
+    """The lesson, made once in a process. A lesson whose checks say which project modules it builds on says it
+    again each time it is asked for, because a lesson made in between replaced that (projects.builds_on)."""
+    L = _lesson(lesson_id, lang)
+    again = getattr(L.checks, "_ea_builds_on", None)
+    if again is not None:
+        projects.builds_on(*again)
+    return L
