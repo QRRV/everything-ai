@@ -1,0 +1,35 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: data-centric-ai
+minutes: 25
+title:
+  en: "Fix the data, not the model"
+  nl: "Verbeter de data, niet het model"
+goal:
+  en: "find the labels that a model, trained without those examples, finds least likely, check those first, and see what fixing them does for the model."
+  nl: "de labels opsporen die een model, getraind zonder die voorbeelden, het minst waarschijnlijk vindt, ze eerst controleren, en zien wat verbeteren voor het model doet."
+summary:
+  - en: "Wrong labels in a dataset are called label noise. A model trained on them learns some of the mistakes, and a test set with them measures against the mistakes."
+    nl: "Verkeerde labels in een dataset heten label noise. Een model dat erop traint, leert een deel van de fouten, en een test set met zulke labels meet tegen de fouten."
+  - en: "An out-of-fold prediction comes from a model that trained on the other folds, without the example. A model that stored the example itself agrees with that example's label: with k = 1, every label gets probability 1."
+    nl: "Een out-of-fold-voorspelling komt van een model dat op de andere folds trainde, zonder het voorbeeld. Een model dat het voorbeeld zelf bewaarde, is het eens met het label van dat voorbeeld: met k = 1 krijgt elk label kans 1."
+  - en: "With 41 of the 274 penguin labels made wrong, checking the 30 whose label k-NN finds least likely finds 25 of them; 30 at random hold about 4.5 on average."
+    nl: "Als 41 van de 274 labels van de pinguïns verkeerd zijn, vind je er 25 door de 30 te controleren waarvan k-NN het label het minst waarschijnlijk vindt; 30 willekeurige bevatten er gemiddeld ongeveer 4,5."
+  - en: "Fixing them takes k = 1 from 14 to 7 mistakes on the test set, against 6 with all labels right; k = 9 outvotes most wrong labels by itself. Keeping the model the same and improving the data is data-centric AI, and every model trained afterwards starts from the fixed labels."
+    nl: "Ze verbeteren brengt k = 1 van 14 naar 7 fouten op de test set, tegenover 6 met alle labels goed; k = 9 stemt de meeste verkeerde labels zelf al weg. Het model hetzelfde houden en de data verbeteren is data-centric AI, en elk model dat je daarna traint, begint bij de verbeterde labels."
+can_now:
+  - en: "give the probability k-NN gives an example's own label"
+    nl: "de kans geven die k-NN aan het eigen label van een voorbeeld geeft"
+    by: p-given
+  - en: "put labels in order, the most suspect first, to check those first"
+    nl: "labels op volgorde zetten, de verdachtste eerst, om die eerst te controleren"
+    by: suspects
+  - en: "say why the probability must come from a model that never saw the example"
+    nl: "zeggen waarom de kans moet komen van een model dat het voorbeeld nooit zag"
+    by: self
+further_reading:
+  - en: "Curtis Northcutt, Anish Athalye and Jonas Mueller (2021), \"Pervasive Label Errors in Test Sets Destabilize Machine Learning Benchmarks\", NeurIPS Datasets and Benchmarks: wrong labels in ten well-known test sets, found with out-of-fold probabilities and checked by people"
+    nl: "Curtis Northcutt, Anish Athalye en Jonas Mueller (2021), \"Pervasive Label Errors in Test Sets Destabilize Machine Learning Benchmarks\", NeurIPS Datasets and Benchmarks: verkeerde labels in tien bekende test sets, gevonden met out-of-fold-kansen en door mensen gecontroleerd"
+  - en: "Curtis Northcutt, Lu Jiang and Isaac Chuang (2021), \"Confident Learning: Estimating Uncertainty in Dataset Labels\", Journal of Artificial Intelligence Research 70: a method that estimates from out-of-fold probabilities which labels are wrong"
+    nl: "Curtis Northcutt, Lu Jiang en Isaac Chuang (2021), \"Confident Learning: Estimating Uncertainty in Dataset Labels\", Journal of Artificial Intelligence Research 70: een methode die uit out-of-fold-kansen schat welke labels verkeerd zijn"

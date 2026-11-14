@@ -1,0 +1,31 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: ml-grid-random-search
+minutes: 25
+title:
+  en: "Searching settings: grid search and random search"
+  nl: "Instellingen zoeken: grid search en random search"
+goal:
+  en: "search two settings of k-NN at once with a grid and with random search, draw a setting evenly on a log scale, and see why random search tests more values of the setting that matters."
+  nl: "twee instellingen van k-NN tegelijk zoeken met een grid en met random search, een instelling gelijk verdeeld op een logaritmische schaal trekken, en zien waarom random search meer waarden test van de instelling die ertoe doet."
+summary:
+  - en: "Grid search tries every combination of a few values per setting; random search draws every try from the search space. Both score each try by the mean of the same folds of cross-validation, on the training part only."
+    nl: "Grid search probeert elke combinatie van een paar waarden per instelling; random search trekt elke poging uit de search space. Allebei geven ze elke poging een score met het gemiddelde over dezelfde folds van cross-validation, alleen op het trainingsdeel."
+  - en: "For k-NN on the 7,000 training runs of AI4I 2020, k matters and the power p of the distance hardly: a grid of 9 tries tests 3 values of k and finds AUC 0.947, 9 random tries test 9 and find 0.952. On the test set both winners score about the same, 0.960 and 0.962."
+    nl: "Voor k-NN op de 7.000 runs om op te trainen uit AI4I 2020 doet k ertoe en de macht p van de afstand nauwelijks: een grid van 9 pogingen test 3 waarden van k en vindt AUC 0,947, 9 willekeurige pogingen testen er 9 en vinden 0,952. Op de test set scoren beide winnaars ongeveer even goed, 0,960 en 0,962."
+  - en: "Draw a setting that works by factors, such as k or a learning rate, evenly on a log scale: `10 ** rng.uniform(np.log10(low), np.log10(high), n)`."
+    nl: "Trek een instelling die met factoren werkt, zoals k of een learning rate, gelijk verdeeld op een logaritmische schaal: `10 ** rng.uniform(np.log10(low), np.log10(high), n)`."
+can_now:
+  - en: "make every combination of the values of two settings for a grid search"
+    nl: "elke combinatie van de waarden van twee instellingen maken voor een grid search"
+    by: grid
+  - en: "draw values of a setting evenly on a log scale"
+    nl: "waarden van een instelling gelijk verdeeld trekken op een logaritmische schaal"
+    by: log-uniform
+  - en: "choose random search when only a few of many settings matter"
+    nl: "random search kiezen als maar een paar van veel instellingen ertoe doen"
+    by: few-matter
+further_reading:
+  - en: "James Bergstra and Yoshua Bengio (2012), *Random Search for Hyper-Parameter Optimization*, Journal of Machine Learning Research 13: why random search finds settings as good as a grid with fewer tries when only a few settings matter"
+    nl: "James Bergstra en Yoshua Bengio (2012), *Random Search for Hyper-Parameter Optimization*, Journal of Machine Learning Research 13: waarom random search met minder pogingen even goede instellingen vindt als een grid wanneer maar een paar instellingen ertoe doen"

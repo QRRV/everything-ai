@@ -469,7 +469,9 @@ class Lesson:
         if ex.picture is None:
             return ""
         try:
-            out = checking.with_time_limit(lambda: checking.picture_of(ex, value, inputs, self.lang), seconds=3.0)
+            # a picture that calls a slow function gets the seconds its check gives that function
+            seconds = max(3.0, getattr(ex, "time_limit", 0.0))
+            out = checking.with_time_limit(lambda: checking.picture_of(ex, value, inputs, self.lang), seconds=seconds)
         except Exception:   # also checking.Timeout
             return ""
         return chart.with_decimal_comma(out) if self.lang == "nl" and 'class="ea-tick"' in out else out

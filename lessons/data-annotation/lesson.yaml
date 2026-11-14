@@ -1,0 +1,37 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: data-annotation
+minutes: 25
+title:
+  en: "Labeling well: guidelines and agreement"
+  nl: "Goed labelen: richtlijnen en overeenstemming"
+goal:
+  en: "measure how well two annotators agree beyond chance with Cohen's kappa, and see how clearer guidelines raise it."
+  nl: "met Cohen's kappa meten hoe goed twee annotatoren het boven toeval eens zijn, en zien hoe duidelijkere richtlijnen die verhogen."
+summary:
+  - en: "An annotation guideline says what each label means, how to decide the hard cases, with examples, and what to do when unsure."
+    nl: "Een annotatierichtlijn zegt wat elk label betekent, hoe je in lastige gevallen kiest, met voorbeelden, en wat je doet bij twijfel."
+  - en: "Two annotators agree by chance too: both spam plus both ok, each a product of how often they say it. Cohen's kappa, (p_o − p_e) / (1 − p_e), is the part of the room above chance they use."
+    nl: "Twee annotatoren zijn het ook door toeval eens: allebei spam plus allebei ok, elk een product van hoe vaak ze het zeggen. Cohen's kappa, (p_o − p_e) / (1 − p_e), is het deel van de ruimte boven toeval dat ze gebruiken."
+  - en: "On 20 messages, two made-up annotators agree on 70% under a vague guideline, kappa 0.42; a rule with examples brings it to 95%, kappa 0.90. Someone who says ok to everything agrees on 55% with kappa 0."
+    nl: "Op 20 berichten zijn twee verzonnen annotatoren het onder een vage richtlijn over 70% eens, kappa 0,42; een regel met voorbeelden brengt dat op 95%, kappa 0,90. Iemand die overal ok zegt, is het over 55% eens met kappa 0."
+  - en: "Gold questions, examples with a certain label mixed in, catch careless work and unclear rules. Crowdsourced labeling needs pay for the real time, the right to skip disturbing content, and support."
+    nl: "Gold questions, voorbeelden met een vaststaand label ertussen gemengd, vangen slordig werk en onduidelijke regels. Labelen via crowdsourcing vraagt betaling voor de echte tijd, het recht om schokkende inhoud over te slaan, en steun."
+can_now:
+  - en: "compute how often two annotators give the same label"
+    nl: "berekenen hoe vaak twee annotatoren hetzelfde label geven"
+    by: agreement
+  - en: "compute Cohen's kappa from the agreement and how often each annotator gives a label"
+    nl: "Cohen's kappa berekenen uit de overeenstemming en hoe vaak elke annotator een label geeft"
+    by: kappa
+  - en: "read what gold questions say about an annotator and the way the work is set up"
+    nl: "lezen wat gold questions zeggen over een annotator en over hoe het werk is opgezet"
+    by: gold
+further_reading:
+  - en: "Jacob Cohen (1960), *A coefficient of agreement for nominal scales*, Educational and Psychological Measurement 20(1): kappa"
+    nl: "Jacob Cohen (1960), *A coefficient of agreement for nominal scales*, Educational and Psychological Measurement 20(1): kappa"
+  - en: "James Pustejovsky and Amber Stubbs (2012), *Natural Language Annotation for Machine Learning*, O'Reilly: writing guidelines, measuring agreement and revising"
+    nl: "James Pustejovsky en Amber Stubbs (2012), *Natural Language Annotation for Machine Learning*, O'Reilly: richtlijnen schrijven, overeenstemming meten en bijstellen"
+  - en: "Mary L. Gray and Siddharth Suri (2019), *Ghost Work: How to Stop Silicon Valley from Building a New Global Underclass*, Houghton Mifflin Harcourt: the people who do crowdsourced work"
+    nl: "Mary L. Gray en Siddharth Suri (2019), *Ghost Work: How to Stop Silicon Valley from Building a New Global Underclass*, Houghton Mifflin Harcourt: de mensen die werk via crowdsourcing doen"

@@ -1131,6 +1131,8 @@ class FunctionBox(CodeBox):
     collect: Callable[[Any], Any] | None = None
     # How {got} and {want} are shown, such as `handed_out` for a generator; a value or one per language.
     show: Callable[[Any], Any] | None = None
+    # Seconds the function gets per case: more than TIME_LIMIT only for a function that trains a model on a real table.
+    time_limit: float = TIME_LIMIT
 
     def _run(self, fn, case):
         with warnings.catch_warnings():   # NumPy's "divide by zero" and the like: the check explains, not Python
@@ -1188,11 +1190,11 @@ class FunctionBox(CodeBox):
             out = io.StringIO()
             try:
                 with contextlib.redirect_stdout(out):
-                    got = with_time_limit(lambda: self._run(fn, case))
+                    got = with_time_limit(lambda: self._run(fn, case), self.time_limit)
             except Timeout:
                 return Result("slow", self.message("slow") if "slow" in self.texts else {
-                    "en": f"With `{call}`, your function is still not done after {TIME_LIMIT:g} seconds. Does a loop keep going forever?",
-                    "nl": f"Met `{call}` is je functie na {TIME_LIMIT:g} seconden nog niet klaar. Gaat een loop eindeloos door?"})
+                    "en": f"With `{call}`, your function is still not done after {self.time_limit:g} seconds. Does a loop keep going forever?",
+                    "nl": f"Met `{call}` is je functie na {self.time_limit:g} seconden nog niet klaar. Gaat een loop eindeloos door?"})
             except Exception as e:
                 frames = [fr for fr in _tb_frames(e) if fr[0] == "<your code>"]
                 if isinstance(e, TypeError) and not frames and "argument" in str(e):   # the call itself does not fit the def line
@@ -1258,7 +1260,7 @@ class FunctionBox(CodeBox):
         for case in cases:
             try:
                 with contextlib.redirect_stdout(io.StringIO()):
-                    out.append(("value", with_time_limit(lambda: self._run(fn, case))))
+                    out.append(("value", with_time_limit(lambda: self._run(fn, case), self.time_limit)))
             except Exception:   # also Timeout
                 out.append(("error", None))
         return out

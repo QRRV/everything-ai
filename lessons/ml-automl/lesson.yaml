@@ -1,0 +1,41 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: ml-automl
+minutes: 25
+title:
+  en: "Let the computer choose: AutoML"
+  nl: "Laat de computer kiezen: AutoML"
+goal:
+  en: "let a search choose between k-NN and random forests and their settings within a budget, with successive halving: many candidates on a few runs, the best on more."
+  nl: "een zoektocht laten kiezen tussen k-NN en random forests en hun instellingen binnen een budget, met successive halving: veel kandidaten op een paar runs, de beste op meer."
+summary:
+  - en: "AutoML lets a tool choose the model, its settings and how to prepare the data. A budget is what the search may spend: tries, time or training runs, not money."
+    nl: "AutoML laat een tool het model, de instellingen ervan en de voorbewerking van de data kiezen. Een budget is wat de zoektocht mag uitgeven: pogingen, tijd of runs om op te trainen, geen geld."
+  - en: "Successive halving with factor 3 gives 27 candidates 778 runs each, the best 9 2,333 and the best 3 all 7,000. Every round costs about 21,000 runs, three rounds a third of the 189,000 of all 27 on all 7,000."
+    nl: "Successive halving met factor 3 geeft 27 kandidaten elk 778 runs, de beste 9 er 2.333 en de beste 3 alle 7.000. Elke ronde kost ongeveer 21.000 runs, drie rondes een derde van de 189.000 van alle 27 op alle 7.000."
+  - en: "On AI4I 2020 it keeps a forest with depth 5 and AUC 0.961; all 27 on all 7,000 find a forest with depth 12 and 0.969, which scored only 0.898 on 778 runs and dropped out in round 1. On the test set both score about 0.97, so little was lost here, but a first round that is too small can drop the best candidate."
+    nl: "Op AI4I 2020 houdt het een forest met diepte 5 en AUC 0,961 over; alle 27 op alle 7.000 vinden een forest met diepte 12 en 0,969, dat op 778 runs maar 0,898 scoorde en in ronde 1 afviel. Op de test set scoren beide ongeveer 0,97, dus hier ging weinig verloren, maar een te kleine eerste ronde kan de beste kandidaat laten vallen."
+  - en: "Optuna and auto-sklearn choose each new try from the scores so far, and auto-sklearn and AutoGluon combine their best models; but a fair split, a metric that fits the problem and a test set they never see stay your work."
+    nl: "Optuna en auto-sklearn kiezen elke nieuwe poging uit de scores tot nu toe, en auto-sklearn en AutoGluon combineren hun beste modellen; maar een eerlijke verdeling van de data, een metric die bij het probleem past en een test set die ze nooit zien blijven jouw werk."
+can_now:
+  - en: "work out how many candidates and runs every round of successive halving gets"
+    nl: "uitrekenen hoeveel kandidaten en runs elke ronde van successive halving krijgt"
+    by: plan
+  - en: "write successive halving that keeps the best third of every round"
+    nl: "successive halving schrijven dat elke ronde het beste derde deel houdt"
+    by: halving
+  - en: "see when the first round of successive halving is too small to tell good from bad"
+    nl: "zien wanneer de eerste ronde van successive halving te klein is om goed van slecht te onderscheiden"
+    by: small-first
+further_reading:
+  - en: "Kevin Jamieson and Ameet Talwalkar (2016), *Non-stochastic Best Arm Identification and Hyperparameter Optimization*, AISTATS: successive halving for searching settings"
+    nl: "Kevin Jamieson en Ameet Talwalkar (2016), *Non-stochastic Best Arm Identification and Hyperparameter Optimization*, AISTATS: successive halving om instellingen te zoeken"
+  - en: "Lisha Li and others (2018), *Hyperband: A Novel Bandit-Based Approach to Hyperparameter Optimization*, Journal of Machine Learning Research 18: successive halving several times, with different first rounds"
+    nl: "Lisha Li en anderen (2018), *Hyperband: A Novel Bandit-Based Approach to Hyperparameter Optimization*, Journal of Machine Learning Research 18: successive halving meerdere keren, met verschillende eerste rondes"
+  - en: "Takuya Akiba and others (2019), *Optuna: A Next-generation Hyperparameter Optimization Framework*, KDD: Optuna"
+    nl: "Takuya Akiba en anderen (2019), *Optuna: A Next-generation Hyperparameter Optimization Framework*, KDD: Optuna"
+  - en: "Matthias Feurer and others (2015), *Efficient and Robust Automated Machine Learning*, NeurIPS: auto-sklearn"
+    nl: "Matthias Feurer en anderen (2015), *Efficient and Robust Automated Machine Learning*, NeurIPS: auto-sklearn"
+  - en: "Nick Erickson and others (2020), *AutoGluon-Tabular: Robust and Accurate AutoML for Structured Data*, arXiv: AutoGluon"
+    nl: "Nick Erickson en anderen (2020), *AutoGluon-Tabular: Robust and Accurate AutoML for Structured Data*, arXiv: AutoGluon"

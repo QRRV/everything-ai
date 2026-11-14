@@ -1,0 +1,33 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: data-labels
+minutes: 20
+title:
+  en: "Where labels come from"
+  nl: "Waar labels vandaan komen"
+goal:
+  en: "see where the labels of a dataset come from, and give a label that comes from behavior only once its wait is over."
+  nl: "zien waar de labels van een dataset vandaan komen, en een label dat uit gedrag komt pas geven als het wachten voorbij is."
+summary:
+  - en: "A label comes from a person who judges (an annotation label), from a measurement, or from behavior such as a return or a click (a natural label)."
+    nl: "Een label komt van een mens die oordeelt (een annotatielabel), van een meting, of uit gedrag zoals een retour of een klik (een natural label)."
+  - en: "A natural label is free and plentiful, but it can take a while to arrive, and it says what people did, which is not always what you want to know: a click says that a headline drew someone in, not that the story is good."
+    nl: "Een natural label is gratis en er is er volop van, maar het kan lang op zich laten wachten, en het zegt wat mensen deden, en dat is niet altijd wat je wilt weten: een klik zegt dat een kop iemand nieuwsgierig maakte, niet dat het verhaal goed is."
+  - en: "The feedback loop runs from a model's predictions, through what people do, back into its training data; its length is how long a label takes to arrive. It feeds on itself: a shop only sees returns of what it sold."
+    nl: "De feedback loop loopt van de voorspellingen van een model, via wat mensen doen, terug naar de training data ervan; de lengte is hoe lang een label erover doet om binnen te komen. De loop voedt zichzelf: een winkel ziet alleen retouren van wat ze verkocht."
+  - en: "Until its wait is over, a label is unknown: None, not 0. In a simulated shop on day 60, waiting 30 days gives a return rate of 20%; unknown as kept gives 16% and counting the early returns too 29%."
+    nl: "Zolang het wachten niet voorbij is, is een label onbekend: None, niet 0. In een gesimuleerde winkel op dag 60 geeft 30 dagen wachten een retourpercentage van 20%; onbekend als gehouden geeft 16% en de vroege retouren ook meetellen 29%."
+can_now:
+  - en: "give an example a label only once its wait is over, and None until then"
+    nl: "een voorbeeld pas een label geven als het wachten voorbij is, en tot dan None"
+    by: label
+  - en: "compute a rate over the known labels only"
+    nl: "een percentage berekenen over alleen de bekende labels"
+    by: return-rate
+  - en: "say what a natural label such as a click really says"
+    nl: "zeggen wat een natural label zoals een klik echt zegt"
+    by: what-clicks-say
+further_reading:
+  - en: "Chip Huyen (2022), *Designing Machine Learning Systems*, O'Reilly, chapter 4: hand labels, natural labels and the length of the feedback loop; Huyen also counts measured outcomes, such as a trip's real arrival time, as natural labels"
+    nl: "Chip Huyen (2022), *Designing Machine Learning Systems*, O'Reilly, hoofdstuk 4: labels met de hand, natural labels en de lengte van de feedback loop; Huyen rekent ook gemeten uitkomsten, zoals de echte aankomsttijd van een rit, tot natural labels"

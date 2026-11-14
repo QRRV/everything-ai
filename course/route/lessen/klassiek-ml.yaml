@@ -315,8 +315,10 @@ lessons:
   module: praktijk
   idea: "On a table of mixed columns, histogram gradient boosting is the model to try first: it bins every feature, handles missing values and categories itself, stops early on a validation part, and usually beats a forest and a linear model with little tuning."
   covers: [tabulaire-data-in-de-praktijk#0]
-  requires: [ml-gradient-boosting, ml-pipelines, ts-time-index]
-  introduces: [c:histogram-gradient-boosting, c:native-categorical, c:early-stopping-trees]
+  requires: [ts-forecast-demand]
+  introduces: [c:histogram-gradient-boosting, c:native-categorical, c:early-stopping-trees, py:pd-get-dummies, py:pd-astype-category, py:notna, py:pd-index-date]
+  mentions: [c:epoch]
+  uses: [c:gradient-boosting, c:regression-tree, c:decision-tree, c:tree-split, c:random-forest, c:linear-regression, c:logistic-regression, c:one-hot, c:calendar-feature, c:feature, c:label, c:missing-value, c:residual, c:validation-set, c:test-set, c:train-set, c:hyperparameter, c:overfitting, c:mean-absolute-error, c:root-mean-squared-error, c:baseline, c:mean, c:classification, c:class, c:data-cleaning, c:duplicate-row, c:datetime-index, c:time-series, c:csv, c:file-path, c:function-argument, c:quantile, c:backtesting, c:shape, c:prediction, c:model, c:training, c:seed, py:dataframe, py:pd-to-datetime, py:drop-duplicates, py:pandas-select-filter, py:boolean-mask, py:isna, py:pandas-new-column, py:sklearn-fit-predict, py:threadpool-limits, py:with, py:np-mean, py:np-sum, py:abs, py:set, py:list, py:append, py:for, py:if, py:comparison, py:def, py:return, py:len, py:round, py:print, py:import, py:import-as, py:string-literal, py:keyword-argument, py:float, py:int, py:variable, py:underscore-name, py:comment, py:indexing, py:arithmetic, py:bool, v:histogram, v:bar-chart, q:predict, q:choice, q:exercise-with-check, q:slider-task, q:run-cell]
   data: [metro-traffic]
   ladder: [python]
   needs: any
@@ -330,6 +332,7 @@ lessons:
   covers: [tabulaire-data-in-de-praktijk#5]
   requires: [ml-gbdt-default, ml-validation-set]
   introduces: [c:leaderboard, c:public-leaderboard, c:private-leaderboard, c:leaderboard-overfitting]
+  uses: [c:validation-set, c:test-set, c:train-set, c:cross-validation, c:accuracy, c:label, c:prediction, c:standard-deviation, c:majority-voting, c:random-forest, c:broadcasting, c:early-stopping-trees, c:histogram-gradient-boosting, c:mean-absolute-error, c:hyperparameter, c:overfitting, c:seed, c:random-number-generator, c:array, c:shape, c:mean, c:example, c:model, py:np-random-generator, py:np-array, py:np-argmax, py:np-mean, py:boolean-mask, py:np-indexing, py:slicing, py:indexing, py:comparison, py:def, py:return, py:arithmetic, py:round, py:print, py:import, py:import-as, py:keyword-argument, py:float, py:int, py:variable, py:underscore-name, py:comment, q:predict, q:choice, q:exercise-with-check, q:slider-task, q:run-cell]
   data: []
   ladder: [python, numpy]
   needs: any
@@ -341,8 +344,10 @@ lessons:
   module: praktijk
   idea: "With 3 failures in 100 machines a model that never predicts a failure is 97% accurate and useless; class weights make every rare example count more, undersampling and oversampling change the counts, and SMOTE makes new rare examples between neighbors, judged by precision and recall."
   covers: [onevenwichtige-data#1]
-  requires: [ml-roc-auc, ml-f1-score, ml-knn]
+  requires: [ml-roc-auc, ml-f1-score, ml-knn, ml-sklearn]
   introduces: [c:class-weight, c:undersampling, c:oversampling, c:smote]
+  uses: [c:class-imbalance, c:precision, c:recall, c:accuracy, c:f1-score, c:true-positive, c:decision-threshold, c:roc-auc, c:precision-recall-curve, c:logistic-regression, c:log-loss, c:loss, c:k-nearest-neighbors, c:distance, c:feature-scaling, c:train-set, c:test-set, c:validation-set, c:label, c:feature, c:example, c:class, c:model, c:mean, c:standard-deviation, c:seed, c:random-number-generator, c:array, c:shape, py:np-linalg-norm, py:np-argsort, py:np-random-generator, py:np-array, py:np-zeros, py:np-sum, py:np-mean, py:np-std, py:boolean-mask, py:np-indexing, py:slicing, py:indexing, py:comparison, py:sklearn-fit-predict, py:dataframe, py:pandas-select-filter, py:def, py:return, py:for, py:list, py:none, py:len, py:string-literal, py:arithmetic, py:round, py:print, py:import, py:import-as, py:keyword-argument, py:float, py:int, py:variable, py:underscore-name, py:comment, q:predict, q:choice, q:exercise-with-check, q:slider-task, q:run-cell]
+  mentions: [c:data-leakage, c:synthetic-data]
   data: [ai4i-maintenance]
   ladder: [python, numpy]
   needs: any
@@ -352,10 +357,12 @@ lessons:
   level: basis
   domein: klassiek-ml
   module: praktijk
-  idea: "Grid search tries every combination of a few values per setting; random search draws combinations, and with the same number of tries it tests more values of the setting that matters, so it usually finds a better one."
+  idea: "Grid search tries every combination of a few values per setting; random search draws combinations, and with the same number of tries it tests more values of the setting that matters, so it does not depend on where the few values of a grid happen to fall."
   covers: [automl#1]
-  requires: [ml-cross-validation, ml-pipelines, ml-hyperparameters]
+  requires: [ml-cross-validation, ml-pipelines, ml-hyperparameters, ml-imbalanced]
   introduces: [c:grid-search, c:random-search, c:search-space]
+  uses: [c:hyperparameter, c:cross-validation, c:fold, c:pipeline, c:k-nearest-neighbors, c:distance, c:norm, c:roc-auc, c:metric, c:class-imbalance, c:logarithm, c:exponent, c:learning-rate, c:feature-scaling, c:standardization, c:train-set, c:validation-set, c:test-set, c:label, c:feature, c:example, c:model, c:training, c:mean, c:seed, c:random-number-generator, v:log-scale, py:sklearn-pipeline, py:sklearn-cross-val-score, py:np-random-generator, py:np-argmax, py:np-array, py:dataframe, py:pandas-select-filter, py:def, py:return, py:for, py:range, py:list, py:append, py:tuple, py:round, py:int, py:float, py:print, py:import, py:import-as, py:keyword-argument, py:indexing, py:slicing, py:arithmetic, py:string-literal, py:variable, py:underscore-name, py:comment, q:predict, q:choice, q:exercise-with-check, q:slider-task, q:run-cell]
+  mentions: [c:random-forest, c:regularization]
   data: [ai4i-maintenance]
   ladder: [python]
   needs: any
@@ -365,10 +372,11 @@ lessons:
   level: basis
   domein: klassiek-ml
   module: praktijk
-  idea: "AutoML searches models and their settings within a budget: successive halving gives many candidates a little data, keeps the best half and gives them more, and tools such as Optuna, auto-sklearn and AutoGluon add smarter search and ensembles, but still need a fair split and a metric from you."
+  idea: "AutoML searches models and their settings within a budget: successive halving gives many candidates a little data, keeps the best part (here a third) and gives them more, at the risk of dropping a candidate that needs many examples, and tools such as Optuna, auto-sklearn and AutoGluon add smarter search and ensembles, but still need a fair split and a metric from you."
   covers: [automl#0, automl#7]
   requires: [ml-grid-random-search, ml-random-forest]
   introduces: [c:automl, c:successive-halving, c:budget]
+  uses: [c:random-search, c:grid-search, c:search-space, c:hyperparameter, c:random-forest, c:bootstrap, c:ensemble, c:tree-depth, c:decision-tree, c:k-nearest-neighbors, c:cross-validation, c:fold, c:pipeline, c:roc-auc, c:metric, c:class-imbalance, c:feature-scaling, c:standardization, c:train-set, c:test-set, c:label, c:feature, c:example, c:model, c:training, c:mean, c:seed, c:random-number-generator, c:logarithm, v:log-scale, py:sklearn-pipeline, py:sklearn-cross-val-score, py:np-random-generator, py:np-argmax, py:np-argsort, py:np-array, py:dataframe, py:pandas-select-filter, py:def, py:return, py:for, py:if, py:range, py:list, py:append, py:tuple, py:round, py:int, py:len, py:print, py:import, py:import-as, py:keyword-argument, py:indexing, py:slicing, py:arithmetic, py:string-literal, py:variable, py:underscore-name, py:comment, q:predict, q:choice, q:exercise-with-check, q:slider-task, q:run-cell]
   warns: [budget]
   data: [ai4i-maintenance]
   ladder: [python]
@@ -383,6 +391,7 @@ lessons:
   covers: [labelen-en-annotatie#0, labelen-en-annotatie#3]
   requires: [ml-classification, data-provenance]
   introduces: [c:annotation-label, c:natural-label, c:feedback-loop]
+  uses: [c:label, c:classification, c:class, c:datasheet, c:license, c:example, c:training, py:def, py:return, py:none, py:if, py:for, py:range, py:len, py:list, py:bool, py:comparison, py:arithmetic, py:print, py:variable, py:comment, q:predict, q:choice, q:exercise-with-check, q:run-cell]
   data: []
   ladder: [python]
   needs: any
@@ -396,6 +405,7 @@ lessons:
   covers: [labelen-en-annotatie#1, labelen-en-annotatie#2, labelen-en-annotatie#4]
   requires: [data-labels, prob-basics]
   introduces: [c:annotation-guideline, c:inter-annotator-agreement, c:cohens-kappa, c:gold-question, c:crowdsourcing]
+  uses: [c:annotation-label, c:natural-label, c:label, c:probability, c:datasheet, c:consent, c:example, py:def, py:return, py:for, py:range, py:len, py:if, py:comparison, py:list, py:indexing, py:arithmetic, py:round, py:print, py:string-literal, py:float, py:variable, py:comment, q:predict, q:choice, q:exercise-with-check, q:run-cell]
   data: [course-spam-messages]
   ladder: [python]
   needs: any
@@ -405,10 +415,11 @@ lessons:
   level: basis
   domein: klassiek-ml
   module: praktijk
-  idea: "Keep the model fixed and improve the data: examples whose label the model, trained without them, finds very unlikely are often wrong; checking those first and fixing them raises the test score more than the same time spent on the model."
+  idea: "Keep the model fixed and improve the data: examples whose label the model, trained without them, finds very unlikely are often wrong; checking those first finds many more wrong labels than checking at random, and every model trained afterwards starts from the fixed labels."
   covers: [weinig-labels-synthetische-data-en-data-centric-ai#0]
   requires: [data-annotation, ml-cross-validation, ml-log-loss]
   introduces: [c:data-centric-ai, c:label-noise, c:out-of-fold-prediction]
+  uses: [c:annotation-label, c:label, c:cross-validation, c:fold, c:surprise, c:probability, c:k-nearest-neighbors, c:majority-voting, c:distance, c:standardization, c:mean, c:standard-deviation, c:hyperparameter, c:validation-set, c:train-set, c:test-set, c:model, c:training, c:example, c:class, c:feature, c:prediction, c:random-number-generator, py:np-random-generator, c:seed, c:csv, py:dataframe, py:pandas-select-filter, py:isna, py:np-array, py:np-indexing, py:boolean-mask, py:np-argsort, py:np-unique, py:np-concatenate, py:np-linalg-norm, py:np-mean, py:np-std, py:np-sum, py:keyword-argument, c:axis, c:array, py:slicing, py:indexing, py:def, py:return, py:for, py:range, py:len, py:if, py:comparison, py:list, py:append, py:import, py:import-as, py:arithmetic, py:float, py:int, py:string-literal, py:round, py:print, py:comment, py:variable, py:underscore-name, q:predict, q:choice, q:exercise-with-check, q:run-cell]
   data: [palmer-penguins]
   ladder: [python, numpy]
   needs: any
@@ -422,6 +433,7 @@ lessons:
   covers: [weinig-labels-synthetische-data-en-data-centric-ai#1]
   requires: [data-centric-ai]
   introduces: [c:simulation, c:synthetic-label]
+  uses: [c:data-centric-ai, c:label, c:label-noise, c:k-nearest-neighbors, c:majority-voting, c:distance, c:standardization, c:mean, c:standard-deviation, c:train-set, c:test-set, c:model, c:training, c:example, c:class, c:feature, c:prediction, c:random-number-generator, py:np-random-generator, c:seed, c:csv, py:dataframe, py:pandas-select-filter, py:np-array, py:np-zeros, py:np-indexing, py:boolean-mask, py:np-argsort, py:np-concatenate, py:np-linalg-norm, py:np-mean, py:np-std, py:np-sum, py:keyword-argument, py:tuple, c:broadcasting, c:axis, c:array, c:shape, py:slicing, py:indexing, py:def, py:return, py:for, py:range, py:len, py:if, py:comparison, py:list, py:append, py:import, py:import-as, py:math-module, py:arithmetic, py:float, py:int, py:int-conversion, py:bool, py:string-literal, py:print, py:comment, py:variable, py:underscore-name, q:predict, q:choice, q:exercise-with-check, q:slider-task, q:run-cell]
   mentions: [c:synthetic-data]
   data: [ai4i-maintenance]
   ladder: [python, numpy]
@@ -438,6 +450,10 @@ lessons:
   idea: "Your clean table of traffic gets a fair test: split by time, beat the seasonal baseline, then compare a random forest and histogram gradient boosting on the same folds, and write down what wins and by how much."
   covers: []
   requires: [ml-gbdt-default, ts-backtesting, ml-project-fair-comparison]
+  # `&` (py:mask-and-or) is introduced in cv-color-spaces, outside this chain: the lesson explains it again
+  # under New words before exercise 3 relies on it, so it stays a mention here.
+  mentions: [py:mask-and-or]
+  uses: [c:backtesting, c:rolling-origin, c:seasonal-naive-forecast, c:baseline, c:fold, c:cross-validation, c:histogram-gradient-boosting, c:native-categorical, c:gradient-boosting, c:random-forest, c:one-hot, c:calendar-feature, c:lag, c:seasonality, c:forecasting, c:time-series, c:datetime-index, c:missing-value, c:data-cleaning, c:feature, c:label, c:mean-absolute-error, c:train-set, c:test-set, c:prediction, c:model, c:training, c:mean, c:seed, c:csv, c:file-path, c:function-argument, c:package, p:import-own-code, py:dataframe, py:pd-to-datetime, py:drop-duplicates, py:pandas-select-filter, py:boolean-mask, py:pd-index-date, py:pd-astype-category, py:pd-get-dummies, py:notna, py:sklearn-fit-predict, py:threadpool-limits, py:with, py:np-mean, py:abs, py:list, py:append, py:for, py:range, py:tuple, py:comparison, py:def, py:return, py:round, py:print, py:import, py:import-as, py:string-literal, py:keyword-argument, py:float, py:int, py:variable, py:underscore-name, py:comment, py:indexing, py:arithmetic, q:predict, q:choice, q:exercise-with-check, q:slider-task, q:run-cell]
   data: [metro-traffic]
   ladder: [python]
   needs: any

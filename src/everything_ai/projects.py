@@ -197,7 +197,7 @@ def _value(code: str, names: dict):
 def _passes(package: str, module: str, mod) -> bool:
     """The contract test: every scenario of the exercise that saves the module gives with yours what it gives with
     the course's version. For a function exercise, every case it checks (`visible` and `hidden`) does."""
-    from everything_ai.check import with_time_limit
+    from everything_ai.check import TIME_LIMIT, with_time_limit
     exercise = _exercise(package, module)
     course = {"__name__": "__course__"}
     seed = random.getstate()   # the scenarios may seed `random`: the lesson's own random numbers stay as they were
@@ -215,7 +215,7 @@ def _passes(package: str, module: str, mod) -> bool:
                 return False
             with contextlib.redirect_stdout(io.StringIO()):
                 for case in list(exercise.visible) + list(exercise.hidden):
-                    got = with_time_limit(lambda: exercise._run(fn, case))
+                    got = with_time_limit(lambda: exercise._run(fn, case), getattr(exercise, "time_limit", TIME_LIMIT))
                     if not exercise.compare(got, exercise._run(course[name], case)):
                         return False
     except Exception:   # also Timeout

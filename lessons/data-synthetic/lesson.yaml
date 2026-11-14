@@ -1,0 +1,33 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: data-synthetic
+minutes: 25
+title:
+  en: "Data you make yourself"
+  nl: "Data die je zelf maakt"
+goal:
+  en: "make examples your data lacks with a simulation, give them labels from a rule, and see why you test on real data only."
+  nl: "voorbeelden die je data mist maken met een simulatie, ze labels geven met een regel, en zien waarom je alleen op echte data test."
+summary:
+  - en: "When data is scarce you can make more: change examples you have, simulate the process that makes them, or let a model write examples and labels. Made data is synthetic data."
+    nl: "Als data schaars is, kun je er meer maken: voorbeelden die je hebt veranderen, het proces dat ze maakt simuleren, of een model voorbeelden en labels laten schrijven. Gemaakte data is synthetische data."
+  - en: "A simulated example gets a synthetic label from a rule, and it is only as right as the rule. Simulated runs help when they look like the real ones where it matters: speeds from the log, temperatures where the log never went."
+    nl: "Een gesimuleerd voorbeeld krijgt een synthetisch label van een regel, en dat is maar zo goed als de regel. Gesimuleerde metingen helpen als ze lijken op de echte waar het ertoe doet: toerentallen uit het logboek, temperaturen waar het logboek nooit kwam."
+  - en: "A log of 3000 runs without a heat failure lets k-NN miss all 115 later ones; with 1000 simulated runs added, labeled by the rule that made AI4I, it misses 10 and raises 9 false alarms."
+    nl: "Met een logboek van 3000 metingen zonder hittestoring mist k-NN alle 115 latere; met 1000 gesimuleerde metingen erbij, gelabeld met de regel waarmee AI4I gemaakt is, mist het er 10 en geeft het 9 keer vals alarm."
+  - en: "A test on simulated data checks the model against its own rule: at every speed limit it looks good, while on the real runs a limit 40 rpm off misses 76 failures or raises 83 false alarms. Test on real data only."
+    nl: "Een test op gesimuleerde data toetst het model aan de regel waarmee het getraind is: bij elke toerentalgrens ziet het er goed uit, terwijl een grens die 40 rpm ernaast zit op de echte metingen 76 storingen mist of 83 keer vals alarm geeft. Test alleen op echte data."
+can_now:
+  - en: "write a rule that gives examples a synthetic label"
+    nl: "een regel schrijven die voorbeelden een synthetisch label geeft"
+    by: power
+  - en: "draw random numbers between two limits, to simulate examples"
+    nl: "willekeurige getallen tussen twee grenzen trekken, om voorbeelden te simuleren"
+    by: between
+  - en: "say why a test on simulated data says little about the real world"
+    nl: "zeggen waarom een test op gesimuleerde data weinig zegt over de echte wereld"
+    by: test-on
+further_reading:
+  - en: "Stephan Matzka (2020), *Explainable Artificial Intelligence for Predictive Maintenance Applications*, Third International Conference on Artificial Intelligence for Industries: the paper that comes with the AI4I 2020 dataset, whose page on the UCI Machine Learning Repository lists the rules by which its machine fails"
+    nl: "Stephan Matzka (2020), *Explainable Artificial Intelligence for Predictive Maintenance Applications*, Third International Conference on Artificial Intelligence for Industries: de paper bij de dataset AI4I 2020; de pagina van die dataset in de UCI Machine Learning Repository noemt de regels waarmee de machine uitvalt"

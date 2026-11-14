@@ -1,0 +1,33 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: ml-project-table-trees
+minutes: 35
+title:
+  en: "Project: trees on your table, fairly"
+  nl: "Project: bomen op je tabel, eerlijk getest"
+goal:
+  en: "test models of your traffic table the way they would be used: folds in time, a baseline that looks back a week, every model on the same hours, and a report fold by fold."
+  nl: "modellen van je verkeerstabel toetsen zoals ze gebruikt zouden worden: folds in de tijd, een baseline die een week terugkijkt, elk model op dezelfde uren, en een verslag fold na fold."
+summary:
+  - en: "Folds in time: an origin on 1 January of each year, learn from every hour before it, test on the hours of the year. Random folds put hours of the same weeks on both sides and look better than they are: on the same hours, 251.0 against 284.8 vehicles an hour."
+    nl: "Folds in de tijd: een origin op 1 januari van elk jaar, leren van elk uur ervoor, testen op de uren van het jaar. Willekeurige folds zetten uren van dezelfde weken aan beide kanten en zien er beter uit dan ze zijn: op dezelfde uren 251,0 tegen 284,8 voertuigen per uur."
+  - en: "The seasonal naive forecast for hours: the same hour a week earlier, `y.asfreq(\"h\").shift(168)`, on the grid of every hour, because 168 rows of the table are not always a week. A day earlier misses on Mondays and Saturdays."
+    nl: "De seasonal naive forecast voor uren: hetzelfde uur een week eerder, `y.asfreq(\"h\").shift(168)`, op het grid van elk uur, want 168 rijen van de tabel zijn niet altijd een week. Een dag eerder mist op maandagen en zaterdagen."
+  - en: "Every model is scored on the same hours: the test hours where the baseline is known, `test & base.notna()`."
+    nl: "Elk model wordt gescoord op dezelfde uren: de testuren waar de baseline bekend is, `test & base.notna()`."
+  - en: "Boosting beats the forest in all five years, by 3.7 to 25.2 vehicles an hour, and the week before in four by 38.8 or more. In 2016, when the traffic was lower from July to November, it ties with the week before: a model that learns from the past expects the old traffic, and the week before follows the change a week later."
+    nl: "Boosting verslaat het forest in alle vijf de jaren, met 3,7 tot 25,2 voertuigen per uur, en de week ervoor in vier met 38,8 of meer. In 2016, toen het verkeer van juli tot en met november lager was, speelt het gelijk met de week ervoor: een model dat van het verleden leert, verwacht het oude verkeer, en de week ervoor volgt de verandering een week later."
+can_now:
+  - en: "make the seasonal naive forecast of a series of hours with gaps"
+    nl: "de seasonal naive forecast maken van een reeks uren met gaten"
+    by: week-before
+  - en: "split a table in time into folds, one for each year"
+    nl: "een tabel in de tijd in folds verdelen, één voor elk jaar"
+    by: folds
+  - en: "score any model fold by fold on the same hours as a baseline"
+    nl: "elk model fold na fold scoren op dezelfde uren als een baseline"
+    by: scores
+  - en: "write down what a comparison shows, ties and surprises included"
+    nl: "opschrijven wat een vergelijking laat zien, gelijkspel en verrassingen inbegrepen"
+    by: report

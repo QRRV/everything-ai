@@ -1,0 +1,35 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: ml-imbalanced
+minutes: 25
+title:
+  en: "When one class is rare"
+  nl: "Als één klasse zeldzaam is"
+goal:
+  en: "see why accuracy hides a rare class, give its examples more weight, undersample, oversample and make new rare examples with SMOTE, and see that on these machines all of them mostly move the threshold."
+  nl: "zien waarom accuracy een zeldzame klasse verbergt, de voorbeelden ervan een grotere weight geven, undersamplen, oversamplen en met SMOTE nieuwe zeldzame voorbeelden maken, en zien dat ze op deze machines vooral de threshold verschuiven."
+summary:
+  - en: "In the synthetic AI4I 2020 dataset 339 of 10,000 machine runs end in a failure. On the 3,000 test runs \"no failure\" every time is 96.3% right and logistic regression 97.2%; it finds 31 of the 110 failures."
+    nl: "In de synthetische dataset AI4I 2020 eindigen 339 van de 10.000 runs van een machine in een storing. Op de 3.000 test-runs is elke keer \"geen storing\" 96,3% goed en logistische regressie 97,2%; die vindt 31 van de 110 storingen."
+  - en: "A class weight lets every example of a class count more in the loss; balanced weights $n / (2\\,n_c)$ make both classes weigh the same. Undersampling and oversampling change the counts; SMOTE makes new rare examples $a + u\\,(b - a)$ between a rare example and one of its nearest neighbors of the same class."
+    nl: "Een class weight laat elk voorbeeld van een klasse zwaarder tellen in de loss; gebalanceerde class weights $n / (2\\,n_c)$ laten beide klassen even zwaar wegen. Undersampling en oversampling veranderen de aantallen; SMOTE maakt nieuwe zeldzame voorbeelden $a + u\\,(b - a)$ tussen een zeldzaam voorbeeld en een van zijn naaste buren uit dezelfde klasse."
+  - en: "With any of the four, the model finds 89 to 91 of the 110 failures with 622 to 684 alarms, and its AUC hardly moves; the model without weights does nearly the same at the threshold where it raises as many alarms, 0.031. Resample only the training part, after the split."
+    nl: "Met elk van de vier vindt het model 89 tot 91 van de 110 storingen met 622 tot 684 alarmen, en de AUC verandert nauwelijks; het model zonder weights doet bijna hetzelfde bij de threshold waar het evenveel alarmen geeft, 0,031. Resample alleen het trainingsdeel, na de splitsing."
+can_now:
+  - en: "give every example of a rare class its balanced class weight"
+    nl: "elk voorbeeld van een zeldzame klasse zijn gebalanceerde class weight geven"
+    by: balanced-weights
+  - en: "make a new rare example with SMOTE, between an example and one of its nearest neighbors of the same class"
+    nl: "met SMOTE een nieuw zeldzaam voorbeeld maken, tussen een voorbeeld en een van zijn naaste buren uit dezelfde klasse"
+    by: new-failure
+  - en: "resample only the training part, so that the test set keeps the real share of failures"
+    nl: "alleen het trainingsdeel resamplen, zodat de test set het echte aandeel storingen houdt"
+    by: resample-when
+further_reading:
+  - en: "Nitesh Chawla and others (2002), *SMOTE: Synthetic Minority Over-sampling Technique*, Journal of Artificial Intelligence Research 16: the paper that introduced SMOTE"
+    nl: "Nitesh Chawla en anderen (2002), *SMOTE: Synthetic Minority Over-sampling Technique*, Journal of Artificial Intelligence Research 16: de paper waarin SMOTE werd voorgesteld"
+  - en: "Ruben van den Goorbergh and others (2022), *The harm of class imbalance corrections for risk prediction models: illustration and simulation using logistic regression*, Journal of the American Medical Informatics Association 29: random undersampling, random oversampling and SMOTE gave logistic regression no better AUC and made its probabilities too high, and moving the threshold gave a similar balance between finding the rare class and raising false alarms"
+    nl: "Ruben van den Goorbergh en anderen (2022), *The harm of class imbalance corrections for risk prediction models: illustration and simulation using logistic regression*, Journal of the American Medical Informatics Association 29: random undersampling, random oversampling en SMOTE gaven logistische regressie geen betere AUC en maakten de kansen te hoog, en de threshold verschuiven gaf een vergelijkbare balans tussen de zeldzame klasse vinden en valse alarmen geven"
+  - en: "Stephan Matzka (2020), *Explainable Artificial Intelligence for Predictive Maintenance Applications*, Third International Conference on Artificial Intelligence for Industries: the paper that comes with the AI4I 2020 dataset"
+    nl: "Stephan Matzka (2020), *Explainable Artificial Intelligence for Predictive Maintenance Applications*, Third International Conference on Artificial Intelligence for Industries: de paper bij de dataset AI4I 2020"

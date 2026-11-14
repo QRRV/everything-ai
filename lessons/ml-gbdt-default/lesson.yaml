@@ -1,0 +1,37 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: ml-gbdt-default
+minutes: 25
+title:
+  en: "The default for tables: gradient-boosted trees"
+  nl: "De standaard voor tabellen: gradient-boosted trees"
+goal:
+  en: "fit histogram gradient boosting on a real table with its default settings, see what it does with bins, empty cells and words, and let it choose the number of trees with early stopping on a validation set."
+  nl: "histogram gradient boosting met zijn standaardinstellingen op een echte tabel fitten, zien wat het doet met bins, lege cellen en woorden, en het met early stopping op een validation set het aantal bomen laten kiezen."
+summary:
+  - en: "HistGradientBoostingRegressor sorts every feature into at most 255 bins and only asks about the borders between them, which makes it fast; a missing value gets a bin of its own, and a column of type category it takes as it is. On the traffic of Interstate 94 it misses by 260.3 vehicles an hour on 2017 and 2018, a forest of 100 trees by 274.8, in a test of the course on one core in about twenty times the time, and a linear regression on 58 one-hot columns by 570.4."
+    nl: "HistGradientBoostingRegressor verdeelt elke feature in hoogstens 255 bins en vraagt alleen naar de grenzen ertussen, en daardoor is het snel; een ontbrekende waarde krijgt een eigen bin, en een kolom van type category neemt het zoals hij is. Op het verkeer van Interstate 94 zit het er op 2017 en 2018 260,3 voertuigen per uur naast, een forest van 100 bomen 274,8, in een test van de course op één core in ongeveer twintig keer zoveel tijd, en een lineaire regressie op 58 one-hot kolommen 570,4."
+  - en: "With too few bins, values that differ share a bin and no tree can tell them apart: with 12 bins, hours 4 and 5 share one and the MAE is 395.6; from 24 bins on, every hour has its own and the MAE stays near 260."
+    nl: "Met te weinig bins delen waarden die verschillen een bin en kan geen boom ze uit elkaar houden: met 12 bins delen uur 4 en 5 er een en is de MAE 395,6; vanaf 24 bins heeft elk uur een eigen bin en blijft de MAE rond 260."
+  - en: "Early stopping stops adding trees once 10 trees in a row did not lower the error on a validation set: early_stopping=True and fit(X, y, X_val=..., y_val=...). On 2016 it keeps 50 of 300 trees, about as good on the test as all 300. The default \"auto\" stops, in scikit-learn 1.9, only above 10,000 rows, even with X_val, and then on a random tenth of them."
+    nl: "Early stopping stopt met bomen toevoegen zodra 10 bomen op rij de fout op een validation set niet lieten dalen: early_stopping=True en fit(X, y, X_val=..., y_val=...). Op 2016 houdt het 50 van 300 bomen, op de test ongeveer even goed als alle 300. De standaard \"auto\" stopt, in scikit-learn 1.9, alleen boven 10.000 rijen, ook met X_val, en dan op een willekeurig tiende ervan."
+can_now:
+  - en: "turn a holiday name in one hour into a column for the whole day"
+    nl: "een naam van een feestdag in één uur omzetten in een kolom voor de hele dag"
+    by: whole-day
+  - en: "let gradient boosting choose its number of trees with early stopping on a validation set"
+    nl: "gradient boosting met early stopping op een validation set zijn aantal bomen laten kiezen"
+    by: stop-on
+  - en: "say which model to try first on a new table, and why"
+    nl: "zeggen welk model je als eerste probeert op een nieuwe tabel, en waarom"
+    by: first-model
+further_reading:
+  - en: "Léo Grinsztajn, Edouard Oyallon and Gaël Varoquaux (2022), *Why do tree-based models still outperform deep learning on typical tabular data?*, NeurIPS 2022 Datasets and Benchmarks: on 45 tables of medium size, trees did better than the neural networks tried, and the paper looks for the reasons"
+    nl: "Léo Grinsztajn, Edouard Oyallon en Gaël Varoquaux (2022), *Why do tree-based models still outperform deep learning on typical tabular data?*, NeurIPS 2022 Datasets and Benchmarks: op 45 tabellen van gemiddelde grootte deden bomen het beter dan de geprobeerde neural networks, en de paper zoekt naar de redenen"
+  - en: "Guolin Ke and others (2017), *LightGBM: A Highly Efficient Gradient Boosting Decision Tree*, NeurIPS 2017: the histograms and the speed that HistGradientBoostingRegressor is modeled on"
+    nl: "Guolin Ke en anderen (2017), *LightGBM: A Highly Efficient Gradient Boosting Decision Tree*, NeurIPS 2017: de histogrammen en de snelheid waarop HistGradientBoostingRegressor is gebaseerd"
+  - en: "Tianqi Chen and Carlos Guestrin (2016), *XGBoost: A Scalable Tree Boosting System*, KDD 2016: the library behind 17 of the 29 winning entries that Kaggle described on its blog in 2015"
+    nl: "Tianqi Chen en Carlos Guestrin (2016), *XGBoost: A Scalable Tree Boosting System*, KDD 2016: de library achter 17 van de 29 winnende inzendingen die Kaggle in 2015 op zijn blog beschreef"
+  - en: "The scikit-learn user guide, *Histogram-Based Gradient Boosting*: bins, missing values, categorical features and early stopping, with all settings"
+    nl: "De gebruikershandleiding van scikit-learn, *Histogram-Based Gradient Boosting*: bins, ontbrekende waarden, categorical features en early stopping, met alle instellingen"

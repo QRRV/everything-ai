@@ -1,0 +1,33 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: ml-competitions
+minutes: 20
+title:
+  en: "What competitions teach: the leaderboard"
+  nl: "Wat wedstrijden leren: het leaderboard"
+goal:
+  en: "see how choosing many times on the public part of a test set makes its score flatter you, with submissions that are coin flips, and choose final submissions by your own validation instead."
+  nl: "zien hoe steeds opnieuw kiezen op het publieke deel van een test set de score daar te mooi maakt, met inzendingen die munten zijn, en je laatste inzendingen in plaats daarvan op je eigen validatie kiezen."
+summary:
+  - en: "In a competition the public leaderboard scores part of the test set during the competition, and the private leaderboard the rest at the end. Every submission is a look at the public part; the best of many looks is partly luck."
+    nl: "In een wedstrijd scoort het public leaderboard tijdens de wedstrijd een deel van de test set, en het private leaderboard aan het eind de rest. Elke inzending is een blik op het publieke deel; de beste van veel blikken is deels geluk."
+  - en: "With 300 public examples, the best of 200 coin flips gets 57.0% right there and 48.6% on the private part; the vote of the 100 that scored above 50% gets 67.0% public and 50.9% private, and with 1,000 submissions 84.0% and 49.9%."
+    nl: "Met 300 publieke voorbeelden haalt de beste van 200 keer munten gooien daar 57,0% goed en 48,6% op het private deel; de stemming van de 100 die boven 50% scoorden haalt 67,0% op het publieke deel en 50,9% op het private deel, en met 1.000 inzendingen 84,0% en 49,9%."
+  - en: "With real models it happens more softly: of 24 settings of gradient boosting on the traffic, the best on 100 public hours was the best on the private part in 10% of random splits, on 4,500 hours in 75%. Choose by your own validation, and read the public score as one more noisy look."
+    nl: "Met echte modellen gebeurt het zachter: van 24 instellingen van gradient boosting op het verkeer was de beste op 100 publieke uren in 10% van de willekeurige splitsingen ook de beste op het private deel, op 4.500 uren in 75%. Kies op je eigen validatie, en lees de publieke score als nog een blik met ruis."
+can_now:
+  - en: "find the leader of a public leaderboard and what it scores on the private part"
+    nl: "de leider van een public leaderboard vinden en wat die op het private deel scoort"
+    by: best-of
+  - en: "show how a vote of lucky submissions climbs a public leaderboard without knowing anything"
+    nl: "laten zien hoe een stemming van inzendingen met geluk een public leaderboard beklimt zonder iets te weten"
+    by: vote
+  - en: "choose final submissions by your own validation, not by the public score"
+    nl: "je laatste inzendingen kiezen op je eigen validatie, niet op de publieke score"
+    by: final-pick
+further_reading:
+  - en: "Avrim Blum and Moritz Hardt (2015), *The Ladder: A Reliable Leaderboard for Machine Learning Competitions*, ICML 2015: the vote of lucky random submissions, which they call the boosting attack (Hardt's blog calls it wacky boosting), and a leaderboard that resists it"
+    nl: "Avrim Blum en Moritz Hardt (2015), *The Ladder: A Reliable Leaderboard for Machine Learning Competitions*, ICML 2015: de stemming van willekeurige inzendingen met geluk, die zij de boosting attack noemen (de blog van Hardt noemt het wacky boosting), en een leaderboard dat er niet in trapt"
+  - en: "Rebecca Roelofs and others (2019), *A Meta-Analysis of Overfitting in Machine Learning*, NeurIPS 2019: on 120 Kaggle competitions, they found little sign of overfitting to the public leaderboard; the exceptions mostly had small test sets or a split that was not random"
+    nl: "Rebecca Roelofs en anderen (2019), *A Meta-Analysis of Overfitting in Machine Learning*, NeurIPS 2019: op 120 Kaggle-wedstrijden vonden zij weinig tekenen van overfitten op het public leaderboard; de uitzonderingen hadden meestal kleine test sets of een splitsing die niet willekeurig was"
