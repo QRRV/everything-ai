@@ -1,0 +1,33 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: ml-content-based
+minutes: 25
+title:
+  en: "More of what you bought: content-based filtering"
+  nl: "Meer van wat je kocht: content-based filtering"
+goal:
+  en: "describe products by the words of their names, add up what a customer bought into a profile, and recommend the products closest to it by cosine similarity."
+  nl: "producten beschrijven met de woorden van hun namen, wat een klant kocht optellen tot een profiel, en de producten aanraden die er met cosine similarity het dichtst bij liggen."
+summary:
+  - en: "Item features describe what an item is. Here they are the words of the product names: a row for each of 3,576 products, a column for each of 2,163 words, and a 1 where the word is in the name."
+    nl: "Item features beschrijven wat een item is. Hier zijn dat de woorden van de productnamen: een rij voor elk van 3.576 producten, een kolom voor elk van 2.163 woorden, en een 1 waar het woord in de naam staat."
+  - en: "A user profile adds up the rows of everything a customer bought. Content-based filtering scores every product with the cosine similarity of its row and the profile, and recommends the highest that the customer has not bought; the cosine similarity keeps long names from winning."
+    nl: "Een gebruikersprofiel telt de rijen op van alles wat een klant kocht. Content-based filtering geeft elk product als score de cosine similarity van zijn rij en het profiel, en raadt de hoogste aan die de klant nog niet kocht; de cosine similarity zorgt dat lange namen niet winnen."
+  - en: "At k = 10, the names find something for 595 of 2,498 customers, 23.8%, against 541 for popularity: about as many, but other customers. They can show a new product nobody bought yet, and they recommend more of the same."
+    nl: "Bij k = 10 vinden de namen iets voor 595 van 2.498 klanten, 23,8%, tegen 541 voor populariteit: ongeveer evenveel, maar andere klanten. Ze kunnen een nieuw product laten zien dat nog niemand kocht, en ze raden meer van hetzelfde aan."
+can_now:
+  - en: "score every item against a profile with the cosine similarity"
+    nl: "elk item met de cosine similarity tegen een profiel scoren"
+    by: cosine-scores
+  - en: "recommend the k items with the highest scores that a user has not had"
+    nl: "de k items met de hoogste scores aanraden die een gebruiker nog niet had"
+    by: recommend
+  - en: "say why content-based filtering can show a new item and popularity cannot"
+    nl: "zeggen waarom content-based filtering een nieuw item kan laten zien en populariteit niet"
+    by: new-product
+further_reading:
+  - en: "Michael J. Pazzani and Daniel Billsus (2007), *Content-Based Recommendation Systems*, in *The Adaptive Web*, Springer: item features from text, user profiles, and why such recommenders find more of the same"
+    nl: "Michael J. Pazzani en Daniel Billsus (2007), *Content-Based Recommendation Systems*, in *The Adaptive Web*, Springer: item features uit tekst, gebruikersprofielen, en waarom zulke recommenders meer van hetzelfde vinden"
+  - en: "Charu C. Aggarwal (2016), *Recommender Systems: The Textbook*, Springer, chapter 4, *Content-Based Recommender Systems*: features, profiles and the nearest items"
+    nl: "Charu C. Aggarwal (2016), *Recommender Systems: The Textbook*, Springer, hoofdstuk 4, *Content-Based Recommender Systems*: features, profielen en de dichtstbijzijnde items"

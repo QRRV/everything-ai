@@ -242,21 +242,24 @@ lessons:
   module: aanbevelen
   idea: "A recommender fills in a matrix of users and items that is almost empty: each customer bought a few of thousands of products; it is tested by hiding purchases and counting how many it finds back, and recommending what is popular is the baseline to beat."
   covers: [recommender-systems#0]
-  requires: [ml-baselines, data-merge]
-  introduces: [c:recommender-system, c:user-item-matrix, c:interaction, c:sparsity, c:implicit-feedback, c:hit-rate, c:popularity-baseline]
+  requires: [ml-baselines, ml-project-table-explore, math-log-scales]
+  introduces: [c:recommender-system, c:user-item-matrix, c:interaction, c:sparsity, c:implicit-feedback, c:hit-rate, c:popularity-baseline, py:groupby-transform]
+  uses: [c:baseline, c:test-set, c:train-set, c:metric, c:matrix, c:duplicate-row, c:missing-value, c:csv, c:prediction, py:dataframe, py:dropna, py:drop-duplicates, py:groupby, py:pandas-agg, py:value-counts, py:pandas-select-filter, py:pandas-new-column, py:iloc, py:set, py:dict, py:dict-items, py:for, py:if, py:bool, py:comparison, py:list, py:append, py:len, py:slicing, py:indexing, py:def, py:return, py:print, py:round, py:import, py:import-as, py:keyword-argument, py:string-literal, py:float, py:arithmetic, py:comment, py:variable, py:underscore-name, v:log-scale, q:predict, q:choice, q:exercise-with-check, q:slider-task, q:run-cell]
   data: [online-retail-baskets]
-  ladder: [python, numpy]
+  ladder: [python]
   needs: any
 
 - id: ml-content-based
-  title: "More of what you liked: content-based filtering"
+  title: "More of what you bought: content-based filtering"
   level: basis
   domein: klassiek-ml
   module: aanbevelen
   idea: "Content-based filtering describes every item by its features, here the words of a product's name, builds a profile of each customer from the items they bought, and recommends the items closest to that profile."
   covers: [recommender-systems#1]
-  requires: [ml-recommend-problem, math-norms-cosine]
+  requires: [ml-recommend-problem, math-norms-cosine, ml-knn]
   introduces: [c:content-based-filtering, c:user-profile, c:item-features]
+  uses: [c:recommender-system, c:user-item-matrix, c:interaction, c:sparsity, c:hit-rate, c:popularity-baseline, c:baseline, c:cosine-similarity, c:dot-product, c:norm, c:vector, c:matrix, c:array, c:feature, c:axis, c:test-set, c:train-set, c:csv, py:np-argsort, py:np-linalg-norm, py:np-zeros, py:np-indexing, py:np-sum, py:matmul-operator, py:np-array, py:dataframe, py:dropna, py:groupby, py:groupby-transform, py:pandas-agg, py:drop-duplicates, py:value-counts, py:pandas-select-filter, py:pandas-new-column, py:set, py:dict, py:sorted, py:for, py:range, py:if, py:comparison, py:list, py:append, py:len, py:indexing, py:tuple, py:def, py:return, py:print, py:round, py:import, py:import-as, py:keyword-argument, py:string-literal, py:float, py:arithmetic, py:comment, py:variable, py:underscore-name, q:predict, q:choice, q:exercise-with-check, q:slider-task, q:run-cell]
+  mentions: [py:split]
   data: [online-retail-baskets]
   ladder: [python, numpy]
   needs: any
@@ -268,8 +271,9 @@ lessons:
   module: aanbevelen
   idea: "Neighborhood collaborative filtering ignores what items are and looks only at who bought what: two products are alike when the same customers buy them, and a customer gets the products most like what they bought."
   covers: [recommender-systems#2]
-  requires: [ml-content-based]
+  requires: [ml-content-based, math-transpose]
   introduces: [c:collaborative-filtering, c:item-item-similarity, c:cold-start]
+  uses: [c:recommender-system, c:user-item-matrix, c:interaction, c:implicit-feedback, c:hit-rate, c:popularity-baseline, c:content-based-filtering, c:user-profile, c:item-features, c:cosine-similarity, c:dot-product, c:norm, c:vector, c:matrix, c:array, c:shape, c:axis, c:transpose, c:matrix-multiplication, c:shape-rule, c:csv, py:np-argsort, py:np-linalg-norm, py:np-zeros, py:np-indexing, py:np-sum, py:matmul-operator, py:dataframe, py:dropna, py:groupby, py:groupby-transform, py:pandas-agg, py:drop-duplicates, py:value-counts, py:pandas-select-filter, py:pandas-new-column, py:set, py:dict, py:for, py:range, py:if, py:comparison, py:list, py:len, py:indexing, py:def, py:return, py:print, py:int, py:import, py:import-as, py:keyword-argument, py:string-literal, py:float, py:arithmetic, py:comment, py:variable, py:underscore-name, q:predict, q:choice, q:exercise-with-check, q:run-cell]
   data: [online-retail-baskets]
   ladder: [numpy]
   needs: any
@@ -282,9 +286,11 @@ lessons:
   idea: "In a real network a few nodes have most of the edges: the degrees of the airports in the network of flights fall on a straight line on a log scale, and a few hubs make almost every airport a few flights from any other, a small world."
   covers: [d10-netwerkanalyse-en-graph-mining#0]
   requires: [math-graphs, math-log-scales]
-  introduces: [c:degree-distribution, c:hub, c:small-world, c:scale-free-network]
+  introduces: [c:degree-distribution, c:hub, c:scale-free-network, c:small-world-network]
+  uses: [c:graph, c:node, c:edge, c:degree, c:adjacency-list, c:graph-path, c:breadth-first-search, c:queue, c:search-frontier, c:power-law, v:log-scale, v:log-log-plot, c:mean, c:median, py:deque, py:dict, py:set, py:set-add, py:tuple, py:len, py:for, py:while, py:if, py:comparison, py:def, py:return, py:indexing, py:print, py:round, py:arithmetic, py:string-literal, py:import, py:comment, py:variable, py:underscore-name, q:predict, q:choice, q:exercise-with-check, q:slider-task, q:run-cell]
+  mentions: [c:license]
   data: [openflights-routes]
-  ladder: [python, numpy]
+  ladder: [python]
   needs: any
 
 - id: ml-pagerank
@@ -296,8 +302,9 @@ lessons:
   covers: [d10-netwerkanalyse-en-graph-mining#1]
   requires: [ml-network-data]
   introduces: [c:centrality, c:closeness-centrality, c:betweenness-centrality, c:pagerank, c:random-walk, c:power-iteration]
+  uses: [c:graph, c:node, c:edge, c:degree, c:adjacency-list, c:graph-path, c:breadth-first-search, c:queue, c:search-frontier, c:hub, c:mean, c:probability, s:sigma-sum, py:random-module, c:seed, py:deque, py:dict, py:list, py:append, py:set, py:tuple, py:len, py:for, py:range, py:while, py:if, py:comparison, py:def, py:return, py:indexing, py:print, py:arithmetic, py:string-literal, py:import, py:comment, py:variable, py:underscore-name, q:predict, q:choice, q:exercise-with-check, q:slider-task, q:run-cell]
   data: []
-  ladder: [python, numpy]
+  ladder: [python]
   needs: any
 
 # --- tables in practice ---------------------------------------------------------

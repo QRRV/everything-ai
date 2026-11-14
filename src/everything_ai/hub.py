@@ -117,6 +117,15 @@ PINNED = {
         "sha256": "c4a38c50a1bc5f3a1c5537f2155ab9d68f9f25eb1ed8d9ddda3db29a59bca1dd",
         "size": 170_052_171,
     },
+    # The route database of OpenFlights (ODbL 1.0), at its source, the repository of OpenFlights on GitHub, at a fixed
+    # commit: ml-network-data and the lessons after it (course/route/bronnen.yaml, openflights-routes;
+    # everything_ai.flights reads it). A text file of 67,663 lines, read as CSV: nothing in it is ever run.
+    ("github.com/jpatokal/openflights", "routes.dat"): {
+        "url": "https://raw.githubusercontent.com/jpatokal/openflights/cd163fa17710f3135540651626ad719dd5322a05/data/routes.dat",
+        "revision": "cd163fa17710f3135540651626ad719dd5322a05",
+        "sha256": "bd373706238134f619c624c606dccc74c05c2582a977c489c81de501735f2390",
+        "size": 2_377_148,
+    },
 }
 CHUNK = 1 << 20   # bytes per read while downloading
 AGENT = "everything-ai-course"   # how a download introduces itself: some sources refuse Python's own name

@@ -1,0 +1,33 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: ml-collaborative-filtering
+minutes: 25
+title:
+  en: "Customers like you: collaborative filtering"
+  nl: "Klanten zoals jij: collaborative filtering"
+goal:
+  en: "measure how alike two products are by who bought them, add up those similarities into a score for every product, and say why a new customer or product is a cold start."
+  nl: "meten hoe sterk twee producten op elkaar lijken volgens wie ze kocht, die similarities optellen tot een score voor elk product, en zeggen waarom een nieuwe klant of een nieuw product een cold start is."
+summary:
+  - en: "A column of the user-item matrix describes a product by who bought it. The dot product of two columns counts the customers who bought both; divided by the lengths of both columns, it is the item-item similarity, so that a product everyone buys does not look like everything."
+    nl: "Een kolom van de user-item matrix beschrijft een product door wie het kocht. Het inproduct van twee kolommen telt de klanten die beide kochten; gedeeld door de lengtes van beide kolommen is het de item-item similarity, zodat een product dat iedereen koopt niet op alles lijkt."
+  - en: "Collaborative filtering adds up, for every product, its similarities with what a customer bought, and recommends the highest. At k = 10 it finds something for 800 of 2,498 customers, 32.0%, against 23.8% for the names and 21.7% for popularity, without knowing what the products are."
+    nl: "Collaborative filtering telt voor elk product de similarities op met wat een klant kocht, en raadt de hoogste aan. Bij k = 10 vindt het iets voor 800 van 2.498 klanten, 32,0%, tegen 23,8% voor de namen en 21,7% voor populariteit, zonder te weten wat de producten zijn."
+  - en: "A new customer or a new product is a cold start: there is nothing to add up, or nobody to compare with. Popularity needs nothing from the customer, and the names need no buyers."
+    nl: "Een nieuwe klant of een nieuw product is een cold start: er valt niets op te tellen, of er is niemand om mee te vergelijken. Populariteit heeft niets van de klant nodig, en de namen hebben geen kopers nodig."
+can_now:
+  - en: "measure how alike two items are by the users who had them"
+    nl: "meten hoe sterk twee items op elkaar lijken volgens de gebruikers die ze hadden"
+    by: similar-to
+  - en: "score every item for a user by adding up its similarities with what they had"
+    nl: "elk item voor een gebruiker scoren door zijn similarities op te tellen met wat de gebruiker had"
+    by: cf-scores
+  - en: "say which recommender still works for a new customer, and why"
+    nl: "zeggen welke recommender nog werkt voor een nieuwe klant, en waarom"
+    by: new-customer
+further_reading:
+  - en: "Badrul Sarwar, George Karypis, Joseph Konstan and John Riedl (2001), *Item-Based Collaborative Filtering Recommendation Algorithms*, WWW: similarities between items instead of between users, with the cosine similarity"
+    nl: "Badrul Sarwar, George Karypis, Joseph Konstan en John Riedl (2001), *Item-Based Collaborative Filtering Recommendation Algorithms*, WWW: similarities tussen items in plaats van tussen gebruikers, met de cosine similarity"
+  - en: "Greg Linden, Brent Smith and Jeremy York (2003), *Amazon.com Recommendations: Item-to-Item Collaborative Filtering*, IEEE Internet Computing: the same idea at the scale of a large shop"
+    nl: "Greg Linden, Brent Smith en Jeremy York (2003), *Amazon.com Recommendations: Item-to-Item Collaborative Filtering*, IEEE Internet Computing: hetzelfde idee op de schaal van een grote winkel"

@@ -1,0 +1,33 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: ml-recommend-problem
+minutes: 20
+title:
+  en: "What to show next: the recommendation problem"
+  nl: "Wat laat je hierna zien: het aanbevelingsprobleem"
+goal:
+  en: "describe a recommendation problem as a sparse user-item matrix of implicit feedback, test it by hiding every customer's last order, and measure the popularity baseline with the hit rate."
+  nl: "een aanbevelingsprobleem beschrijven als een sparse user-item matrix van implicit feedback, het testen door de laatste bestelling van elke klant te verbergen, en de popularity baseline meten met de hit rate."
+summary:
+  - en: "A user-item matrix has a row for every user, a column for every item, and a 1 for every interaction. Of the 15,745,422 cells for 4,334 customers and 3,633 products, 1.69% are 1. Purchases are implicit feedback: a 1 says something, a 0 little."
+    nl: "Een user-item matrix heeft een rij per gebruiker, een kolom per item, en een 1 voor elke interactie. Van de 15.745.422 vakjes voor 4.334 klanten en 3.633 producten is 1,69% een 1. Aankopen zijn implicit feedback: een 1 zegt iets, een 0 weinig."
+  - en: "Split by time: every customer's last order is the test, and the orders before it are all a recommender may use. The hit rate at k is the share of customers for whom at least one of k recommended products is new in their last order."
+    nl: "Splits op tijd: de laatste bestelling van elke klant is de test, en de bestellingen ervoor zijn alles wat een recommender mag gebruiken. De hit rate bij k is het deel van de klanten voor wie minstens één van k aanbevolen producten nieuw is in de laatste bestelling."
+  - en: "The popularity baseline gives every customer the most popular products they have not bought: at k = 10 it finds something for 21.7% of 2,498 customers, five times as often as picking at random. Counted on all orders, the test orders included, it would say 26.1%."
+    nl: "De popularity baseline geeft elke klant de populairste producten die de klant nog niet kocht: bij k = 10 vindt hij iets voor 21,7% van 2.498 klanten, vijf keer zo vaak als willekeurig kiezen. Geteld op alle bestellingen, ook die van de test, zou hij 26,1% zeggen."
+can_now:
+  - en: "give a customer the k most popular products they have not bought"
+    nl: "een klant de k populairste producten geven die de klant nog niet kocht"
+    by: popular
+  - en: "measure the hit rate of recommendations on hidden orders"
+    nl: "de hit rate van aanbevelingen meten op verborgen bestellingen"
+    by: hit-rate
+  - en: "say what a 0 in a matrix of implicit feedback does and does not mean"
+    nl: "zeggen wat een 0 in een matrix van implicit feedback wel en niet betekent"
+    by: implicit
+further_reading:
+  - en: "Charu C. Aggarwal (2016), *Recommender Systems: The Textbook*, Springer, chapter 1, *An Introduction to Recommender Systems*: users, items, explicit and implicit feedback, and the kinds of recommender"
+    nl: "Charu C. Aggarwal (2016), *Recommender Systems: The Textbook*, Springer, hoofdstuk 1, *An Introduction to Recommender Systems*: gebruikers, items, expliciete feedback en implicit feedback, en de soorten recommenders"
+  - en: "Maurizio Ferrari Dacrema, Paolo Cremonesi and Dietmar Jannach (2019), *Are We Really Making Much Progress? A Worrying Analysis of Recent Neural Recommendation Approaches*, RecSys: several new methods did not beat well-tuned simple baselines"
+    nl: "Maurizio Ferrari Dacrema, Paolo Cremonesi en Dietmar Jannach (2019), *Are We Really Making Much Progress? A Worrying Analysis of Recent Neural Recommendation Approaches*, RecSys: verschillende nieuwe methoden versloegen goed afgestelde eenvoudige baselines niet"

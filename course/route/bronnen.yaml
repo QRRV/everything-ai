@@ -57,7 +57,7 @@ bronnen:
 - {id: online-retail-baskets, kind: tabular, license: "CC-BY-4.0", hosting: rehost,
    note_nl: "Afgeleid van Online Retail (UCI 352, Chen e.a. 2012): de bestellingen van een Britse webwinkel van december 2010 tot december 2011, alleen bestelnummer, klantnummer (al gepseudonimiseerd door de bron) en product, zonder annuleringen. Voor association rules en aanbevelen. Het script dat de course gebruikt, staat in data/tools/."}
 - {id: openflights-routes, kind: tabular, license: "ODbL-1.0", hosting: download,
-   note_nl: "Routes en vliegvelden van OpenFlights (67.663 routes tussen 3.321 vliegvelden, stand juni 2014), voor de les over netwerken. Gedownload bij de bron op een vaste commit met een vaste SHA-256; de course host er niets van, omdat ODbL share-alike vraagt voor afgeleide databases."}
+   note_nl: "De routedatabase van OpenFlights, routes.dat (67.663 routes tussen 3.425 vliegvelden, stand juni 2014), voor de lessen over netwerken. Gedownload bij de bron, de repository jpatokal/openflights op GitHub, op een vaste commit met een vaste SHA-256 (everything_ai.hub, everything_ai.flights); de course host er niets van, omdat ODbL share-alike vraagt voor afgeleide databases."}
 - {id: ai4i-maintenance, kind: tabular, license: "CC-BY-4.0", hosting: rehost,
    note_nl: "AI4I 2020 Predictive Maintenance (UCI 601, Matzka 2020): 10.000 machines met 339 storingen (3,39%). Synthetisch: gemaakt om op echte onderhoudsdata te lijken, en de lessen zeggen dat. Voor onevenwichtige data en het zoeken naar instellingen."}
 - {id: model-gpt2-mit, kind: model, license: "MIT", hosting: download}

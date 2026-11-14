@@ -1,0 +1,35 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: ml-pagerank
+minutes: 25
+title:
+  en: "Who matters in a network? Centrality and PageRank"
+  nl: "Wie doet ertoe in een netwerk? Centraliteit en PageRank"
+goal:
+  en: "measure how much a node matters in four ways, by its degree, its closeness, its betweenness and its PageRank, compute closeness with breadth-first search and PageRank by power iteration, and say why a link from one page can be worth more than many links."
+  nl: "op vier manieren meten hoe belangrijk een node is, met zijn graad, zijn closeness, zijn betweenness en zijn PageRank, closeness berekenen met breadth-first search en PageRank met de machtsmethode, en zeggen waarom één link van een pagina meer waard kan zijn dan veel links."
+summary:
+  - en: "A centrality says how much a node matters, and each one means something else by it. In the karate club of 34 members, member 33 is first by degree and PageRank, member 0 by closeness and betweenness, and member 31, with only 6 friends, is 4th by closeness."
+    nl: "Een centraliteit zegt hoe belangrijk een node is, en elke centraliteit bedoelt daar iets anders mee. In de karateclub van 34 leden staat lid 33 bovenaan op graad en PageRank, lid 0 op closeness en betweenness, en lid 31, met maar 6 vrienden, staat 4e op closeness."
+  - en: "PageRank is the share of steps a random walker spends at a node, following an edge with chance 0.85 and jumping to a random node otherwise. Power iteration computes it by passing every score on, round after round, until the scores stop changing: on the club after 20 rounds."
+    nl: "PageRank is het deel van de stappen dat een willekeurige wandelaar bij een node doorbrengt, als hij met kans 0,85 een edge volgt en anders naar een willekeurige node springt. De machtsmethode berekent het door elke score ronde na ronde door te geven, tot de scores niet meer veranderen: op de club na 20 rondes."
+  - en: "With directions, PageRank does not count links: a link from a page with a high score and few links counts for much. In a small web, page X with one link from the top page gets 0.411, and page Y with two links from pages nobody links to gets 0.035."
+    nl: "Met richting telt PageRank geen links: een link van een pagina met een hoge score en weinig links telt zwaar. In een klein web krijgt pagina X, met één link van de hoogste pagina, 0,411, en pagina Y, met twee links van pagina's waar niemand naar linkt, 0,035."
+can_now:
+  - en: "compute the closeness centrality of a node with breadth-first search"
+    nl: "de closeness centrality van een node berekenen met breadth-first search"
+    by: closeness
+  - en: "compute PageRank by power iteration"
+    nl: "PageRank berekenen met de machtsmethode"
+    by: pagerank
+  - en: "say why one link from a page with a high PageRank can count for more than many links"
+    nl: "zeggen waarom één link van een pagina met een hoge PageRank meer kan tellen dan veel links"
+    by: web
+further_reading:
+  - en: "Wayne W. Zachary (1977), *An information flow model for conflict and fission in small groups*, Journal of Anthropological Research 33: the karate club and how it split"
+    nl: "Wayne W. Zachary (1977), *An information flow model for conflict and fission in small groups*, Journal of Anthropological Research 33: de karateclub en hoe die uiteenviel"
+  - en: "Sergey Brin and Lawrence Page (1998), *The anatomy of a large-scale hypertextual Web search engine*, Computer Networks and ISDN Systems 30: PageRank in the first Google"
+    nl: "Sergey Brin en Lawrence Page (1998), *The anatomy of a large-scale hypertextual Web search engine*, Computer Networks and ISDN Systems 30: PageRank in de eerste Google"
+  - en: "Mark Newman (2018), *Networks*, second edition, Oxford University Press, chapter 7: measures of centrality, among them closeness, betweenness and PageRank"
+    nl: "Mark Newman (2018), *Networks*, tweede druk, Oxford University Press, hoofdstuk 7: maten voor centraliteit, waaronder closeness, betweenness en PageRank"

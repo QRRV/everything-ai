@@ -1,0 +1,33 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: ml-network-data
+minutes: 25
+title:
+  en: "Networks as data: degrees and hubs"
+  nl: "Netwerken als data: graden en hubs"
+goal:
+  en: "turn the routes of airlines into a network, count its degree distribution, recognize hubs and a power law on a log-log plot, and measure with breadth-first search how few flights apart its airports are."
+  nl: "de routes van luchtvaartmaatschappijen tot een netwerk maken, de gradenverdeling ervan tellen, hubs en een machtswet op een log-log plot herkennen, en met breadth-first search meten hoe weinig vluchten de vliegvelden uit elkaar liggen."
+summary:
+  - en: "The degree distribution counts, for every degree, how many nodes have it. In the network of flights, 3,425 airports and 19,256 edges, the average degree is 11.2, but half the airports have 3 neighbors or fewer, and a few hubs have more than 200."
+    nl: "De gradenverdeling telt voor elke graad hoeveel nodes die hebben. In het netwerk van vluchten, 3.425 vliegvelden en 19.256 edges, is de gemiddelde graad 11,2, maar de helft van de vliegvelden heeft 3 buren of minder, en een paar hubs hebben er meer dan 200."
+  - en: "On a log-log plot the degree distribution falls along a straight line from degree 2 to about 100: a power law, the mark of a scale-free network. A random network with as many nodes and edges has a hump around the average instead, and no hubs."
+    nl: "Op een log-log plot ligt de gradenverdeling langs een rechte lijn van graad 2 tot ongeveer 100: een machtswet, het kenmerk van een schaalvrij netwerk. Een willekeurig netwerk met evenveel nodes en edges heeft in plaats daarvan een bult rond het gemiddelde, en geen hubs."
+  - en: "Two airports that can reach each other are on average 4.10 flights apart: a small-world network, held together by its hubs. Closing the 100 biggest hubs takes it to 5.74 flights; closing 100 airports at random hardly changes it."
+    nl: "Twee vliegvelden die elkaar kunnen bereiken, liggen gemiddeld 4,10 vluchten uit elkaar: een small-world network, bij elkaar gehouden door zijn hubs. Gaan de 100 grootste hubs dicht, dan wordt dat 5,74 vluchten; gaan er 100 willekeurige vliegvelden dicht, dan verandert er bijna niets."
+can_now:
+  - en: "count the degree distribution of a network"
+    nl: "de gradenverdeling van een netwerk tellen"
+    by: degree-counts
+  - en: "find the fewest steps from one node to every other with breadth-first search"
+    nl: "met breadth-first search het kleinste aantal stappen van één node naar alle andere vinden"
+    by: flights-from
+  - en: "say why a network with hubs falls apart when its hubs fail, and not when random nodes do"
+    nl: "zeggen waarom een netwerk met hubs uiteenvalt als zijn hubs wegvallen, en niet als willekeurige nodes wegvallen"
+    by: fragile
+further_reading:
+  - en: "Albert-László Barabási (2016), *Network Science*, Cambridge University Press, chapters 2 to 4: graphs, random networks and the scale-free property; free to read at networksciencebook.com"
+    nl: "Albert-László Barabási (2016), *Network Science*, Cambridge University Press, hoofdstukken 2 tot 4: grafen, willekeurige netwerken en schaalvrije netwerken; gratis te lezen op networksciencebook.com"
+  - en: "Réka Albert, Hawoong Jeong and Albert-László Barabási (2000), *Error and attack tolerance of complex networks*, Nature 406: why networks with hubs survive random failures but not attacks on their hubs"
+    nl: "Réka Albert, Hawoong Jeong en Albert-László Barabási (2000), *Error and attack tolerance of complex networks*, Nature 406: waarom netwerken met hubs willekeurige uitval overleven, maar geen aanval op hun hubs"
