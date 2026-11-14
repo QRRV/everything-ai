@@ -1,0 +1,33 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: ts-trend-season
+minutes: 15
+title:
+  en: "Trend, season and the rest"
+  nl: "Trend, seizoen en de rest"
+goal:
+  en: "split a time series into a trend, a season that repeats and a remainder, with a centered moving average and a mean per position in the period, and make a first forecast from trend and season."
+  nl: "een tijdreeks splitsen in een trend, een seizoen dat terugkomt en een rest, met een gecentreerd voortschrijdend gemiddelde en een gemiddelde per plek in de periode, en een eerste forecast maken uit trend en seizoen."
+summary:
+  - en: "A series is often trend + season + remainder. A centered moving average over exactly one period, `y.rolling(7, center=True).mean()` for a week, holds every weekday once, so the week averages out and the trend is left."
+    nl: "Een reeks is vaak trend + seizoen + rest. Een gecentreerd voortschrijdend gemiddelde over precies één periode, `y.rolling(7, center=True).mean()` voor een week, bevat elke dag van de week één keer, dus middelt de week eruit en blijft de trend over."
+  - en: "The season is the mean of the series minus its trend for every position in the period, shifted to add up to 0: for the registered riders of Capital Bikeshare from +411 on Thursday to −760 on Sunday. A few holidays pull Monday down to +15."
+    nl: "Het seizoen is het gemiddelde van de reeks min haar trend voor elke plek in de periode, opgeschoven tot het samen 0 is: voor de geregistreerde fietsers van Capital Bikeshare van +411 op donderdag tot −760 op zondag. Een paar feestdagen trekken maandag omlaag naar +15."
+  - en: "What is left is the remainder, and its largest values are surprises, such as Hurricane Sandy, 3,799 below trend and season. A first forecast continues the trend and adds the season; a sum of two series can hide both their seasons."
+    nl: "Wat overblijft is de rest, en de grootste waarden ervan zijn verrassingen, zoals orkaan Sandy, 3.799 onder trend en seizoen. Een eerste forecast zet de trend voort en telt het seizoen erbij op; een som van twee reeksen kan allebei hun seizoenen verstoppen."
+can_now:
+  - en: "compute a centered moving average by hand, as pandas does with rolling and center=True"
+    nl: "een gecentreerd voortschrijdend gemiddelde met de hand berekenen, zoals pandas met rolling en center=True doet"
+    by: moving-average
+  - en: "find the season of a series as the mean per position in the period, shifted to add up to 0"
+    nl: "het seizoen van een reeks vinden als het gemiddelde per plek in de periode, opgeschoven tot het samen 0 is"
+    by: season-of
+  - en: "say why the window of the trend must hold whole periods"
+    nl: "zeggen waarom het window van de trend hele periodes moet bevatten"
+    by: window
+further_reading:
+  - en: "Rob J. Hyndman and George Athanasopoulos (2021), *Forecasting: Principles and Practice*, 3rd edition, chapter 3, *Time series decomposition*: moving averages, classical decomposition and STL; free online"
+    nl: "Rob J. Hyndman en George Athanasopoulos (2021), *Forecasting: Principles and Practice*, derde editie, hoofdstuk 3, *Time series decomposition*: voortschrijdende gemiddelden, klassieke decompositie en STL; gratis online"
+  - en: "Hadi Fanaee-T and João Gama (2013), *Event labeling combining ensemble detectors and background knowledge*, Progress in Artificial Intelligence: the paper behind the bike data, which finds days such as Hurricane Sandy in it"
+    nl: "Hadi Fanaee-T en João Gama (2013), *Event labeling combining ensemble detectors and background knowledge*, Progress in Artificial Intelligence: de paper achter de fietsdata, die er dagen als orkaan Sandy in vindt"

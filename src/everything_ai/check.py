@@ -72,6 +72,19 @@ class Mistake:
         return {"en": self.en, "nl": self.nl}
 
 
+_KEPT: dict = {}
+
+
+def kept(key, make: Callable[[], Any]):
+    """What `make()` gives, made once per Python process and kept under `key`. Every lesson in every language loads its
+    own copy of its checks module (lesson._load_checks), so a functools.lru_cache there is made again by each copy; a
+    result that takes long, such as a backtest that trains 52 models (ts-forecast-demand), goes here instead. Keep only
+    numbers and arrays here, never a chart: a Dutch copy writes its charts with decimal commas."""
+    if key not in _KEPT:
+        _KEPT[key] = make()
+    return _KEPT[key]
+
+
 class Timeout(Exception):
     pass
 
@@ -94,8 +107,10 @@ def _warm_up_torch() -> None:
 def with_time_limit(fn, seconds: float = TIME_LIMIT):
     """Run fn, stopping it after `seconds`. Works where the lesson runs in the main thread
     (marimo edit, the tests); elsewhere it runs without a limit. Meanwhile PyTorch, if it is loaded, calculates with
-    one thread: the small models of a check are as fast that way, and on a busy computer several threads that wait
-    for each other can make a check ten times slower than its time limit allows. What PyTorch does once, for the first
+    one thread, and so do the OpenMP threads of scikit-learn, if it is loaded: the small models of a check are as fast
+    that way, and on a busy computer several threads that wait for each other can make a check ten times slower than
+    its time limit allows (one HistGradientBoostingRegressor in ts-forecast-demand: 0.1 s on one thread, over 2 s on
+    four while the tests ran). What PyTorch does once, for the first
     optimizer, happens before the clock starts (_warm_up_torch): it made the course's own training loops too slow on a
     busy computer, and a Timeout halfway through it left modules half made, so every optimizer after it failed.
 
@@ -118,6 +133,7 @@ def with_time_limit(fn, seconds: float = TIME_LIMIT):
     threads = torch.get_num_threads() if torch is not None else 1
     if threads > 1:
         torch.set_num_threads(1)
+    limits = _one_openmp_thread() if "sklearn" in sys.modules else None
     try:
         try:
             outer, outer_again = signal.getitimer(signal.ITIMER_REAL)   # what is left of a limit around this one
@@ -137,9 +153,21 @@ def with_time_limit(fn, seconds: float = TIME_LIMIT):
         if timed_out:   # its Timeout got lost on the way, or fn caught it itself: it ran past its limit
             raise Timeout()
         return value
-    finally:
+    finally:   # the other way around from how they were set: OpenMP first, as it also holds PyTorch's threads
+        if limits is not None:
+            limits.restore_original_limits()
         if threads > 1:
             torch.set_num_threads(threads)
+
+
+def _one_openmp_thread():
+    """OpenMP, which scikit-learn calculates with, set to one thread until restore_original_limits(); None when
+    threadpoolctl, which comes with scikit-learn, cannot do it."""
+    try:
+        from threadpoolctl import threadpool_limits
+        return threadpool_limits(1, user_api="openmp")
+    except Exception:
+        return None
 
 
 # --- running code from a code box ----------------------------------------------------

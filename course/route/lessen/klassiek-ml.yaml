@@ -170,6 +170,7 @@ lessons:
   requires: [ml-project-table-explore, data-groupby]
   introduces: [c:time-series, c:datetime-index, c:resampling, c:rolling-window, py:pd-ewm, c:time-zone]
   mentions: [c:exponential-moving-average]
+  uses: [c:missing-value, c:mean, c:csv, c:file-path, c:duplicate-row, c:function-argument, py:pd-to-datetime, py:drop-duplicates, py:groupby, py:dataframe, py:pandas-select-filter, py:isna, py:boolean-mask, py:comparison, py:def, py:return, py:for, py:list, py:append, py:indexing, py:arithmetic, py:round, py:len, py:print, py:import, py:import-as, py:string-literal, py:keyword-argument, py:float, py:variable, py:underscore-name, py:comment, q:predict, q:choice, q:exercise-with-check, q:slider-task, q:run-cell]
   data: [metro-traffic]
   ladder: [python]
   needs: any
@@ -182,7 +183,9 @@ lessons:
   idea: "A time series splits into a trend, a season that repeats and a remainder: a moving average over one season gives the trend, the mean per position in the season gives the season, and what is left shows the surprises."
   covers: [tijdreeksen#0]
   requires: [ts-time-index]
-  introduces: [c:trend, c:seasonality, c:decomposition, c:remainder, c:forecast]
+  introduces: [c:trend, c:seasonality, c:decomposition, c:remainder, c:forecasting, py:np-full, py:np-nanmean]
+  mentions: [py:slice-step]
+  uses: [c:time-series, c:datetime-index, c:rolling-window, c:mean, c:missing-value, c:residual, c:standard-deviation, c:csv, c:file-path, c:function-argument, py:pd-to-datetime, py:groupby, py:dataframe, py:pandas-select-filter, py:dropna, py:iloc, py:np-array, py:np-mean, py:np-zeros, py:np-argmin, py:slicing, py:indexing, py:def, py:return, py:for, py:range, py:list, py:arithmetic, py:round, py:len, py:print, py:import, py:import-as, py:string-literal, py:keyword-argument, py:float, py:variable, py:underscore-name, py:comment, q:predict, q:choice, q:exercise-with-check, q:slider-task, q:run-cell]
   data: [bike-sharing]
   ladder: [python, numpy]
   needs: any
@@ -195,7 +198,9 @@ lessons:
   idea: "The autocorrelation at lag k is the correlation of a series with itself k steps earlier; its peaks show the season, and a series whose mean and spread do not change over time, a stationary one, is what most forecasts assume."
   covers: [tijdreeksen#0]
   requires: [ts-trend-season, data-two-columns]
-  introduces: [c:correlation-coefficient, c:lag, c:autocorrelation, c:stationarity]
+  introduces: [c:correlation-coefficient, c:lag, c:autocorrelation, c:stationarity, py:np-corrcoef, py:pd-autocorr, py:pd-to-timedelta]
+  mentions: [py:slice-step]
+  uses: [c:time-series, c:datetime-index, c:rolling-window, c:trend, c:seasonality, c:remainder, c:association, c:confounder, c:mean, c:standard-deviation, c:missing-value, c:csv, c:file-path, c:function-argument, py:pd-to-datetime, py:dataframe, py:pandas-select-filter, py:np-array, py:np-mean, py:np-std, py:np-nanmean, py:slicing, py:indexing, py:len, py:def, py:return, py:arithmetic, py:round, py:print, py:import, py:import-as, py:string-literal, py:keyword-argument, py:float, py:variable, py:underscore-name, py:comment, q:predict, q:choice, q:exercise-with-check, q:slider-task, q:run-cell]
   data: [bike-sharing]
   ladder: [python, numpy]
   needs: any
@@ -209,6 +214,8 @@ lessons:
   covers: [tijdreeksen#7]
   requires: [ts-autocorrelation, ml-baselines, ml-regression-metrics]
   introduces: [c:naive-forecast, c:seasonal-naive-forecast, c:backtesting, c:rolling-origin, c:mase, c:smape]
+  mentions: [py:modulo, py:range-step]
+  uses: [c:forecasting, c:time-series, c:trend, c:seasonality, c:autocorrelation, c:lag, c:baseline, c:mean-absolute-error, c:root-mean-squared-error, c:mean, c:csv, c:file-path, c:function-argument, py:np-array, py:np-mean, py:np-full, py:np-nanmean, py:abs, py:slicing, py:indexing, py:len, py:range, py:for, py:list, py:append, py:def, py:return, py:arithmetic, py:round, py:print, py:import, py:import-as, py:string-literal, py:float, py:variable, py:underscore-name, py:comment, q:predict, q:choice, q:exercise-with-check, q:slider-task, q:run-cell]
   data: [bike-sharing]
   ladder: [python, numpy]
   needs: any
@@ -221,9 +228,10 @@ lessons:
   idea: "Demand forecasts in shops, energy grids and bike schemes often turn the past into features, such as the value a day and a week ago, the hour and the weekday, and let gradient boosting learn from them, tested by backtesting against the seasonal naive forecast."
   covers: [tijdreeksen#10]
   requires: [ts-backtesting, ml-gradient-boosting]
-  introduces: [c:lag-feature, c:calendar-feature]
+  introduces: [c:lag-feature, c:calendar-feature, py:threadpool-limits]
+  uses: [c:forecasting, c:time-series, c:datetime-index, c:resampling, c:seasonality, c:autocorrelation, c:lag, c:backtesting, c:rolling-origin, c:seasonal-naive-forecast, c:baseline, c:gradient-boosting, c:regression-tree, c:feature, c:label, c:missing-value, c:mean-absolute-error, c:mean, c:csv, c:file-path, c:function-argument, py:dataframe, py:pd-to-datetime, py:pd-to-timedelta, py:dropna, py:iloc, py:isna, py:pandas-new-column, py:sklearn-fit-predict, py:f-string, py:with, py:np-mean, py:np-nanmean, py:abs, py:slicing, py:indexing, py:len, py:range, py:for, py:if, py:comparison, py:list, py:append, py:def, py:return, py:arithmetic, py:round, py:print, py:import, py:import-as, py:string-literal, py:keyword-argument, py:float, py:int, py:variable, py:underscore-name, py:comment, q:predict, q:choice, q:exercise-with-check, q:slider-task, q:run-cell]
   data: [bike-sharing]
-  ladder: [python]
+  ladder: [python, numpy]
   needs: any
 
 # --- recommending and networks --------------------------------------------------

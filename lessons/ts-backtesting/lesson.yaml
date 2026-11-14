@@ -1,0 +1,33 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: ts-backtesting
+minutes: 15
+title:
+  en: "Testing a forecast on the past"
+  nl: "Een forecast testen op het verleden"
+goal:
+  en: "test a forecast as it would have been made at the time, with a rolling origin, beside the naive and the seasonal naive forecast, and score it with the MAE, the MASE and the sMAPE."
+  nl: "een forecast testen zoals hij toen gemaakt zou zijn, met een rolling origin, naast de naive en de seasonal naive forecast, en hem scoren met de MAE, de MASE en de sMAPE."
+summary:
+  - en: "Backtesting trains only on what came before an origin, forecasts the h steps after it, and moves the origin on: over 2012, a week at a time, 52 origins. The mean of their errors scores the forecast."
+    nl: "Backtesting traint alleen op wat er voor een origin kwam, voorspelt de h stappen erna, en schuift de origin op: over 2012, een week tegelijk, 52 origins. Het gemiddelde van hun fouten is de score van de forecast."
+  - en: "The naive forecast repeats the last value, the seasonal naive forecast the last period. A day ahead, the naive one wins for the registered riders, 804 against 860; a week ahead, the seasonal naive one, 859 against 1,340. Trend plus season beats both at every horizon."
+    nl: "De naive forecast herhaalt de laatste waarde, de seasonal naive forecast de laatste periode. Een dag vooruit wint de naive voor de geregistreerde fietsers, 804 tegen 860; een week vooruit de seasonal naive, 859 tegen 1.340. Trend plus seizoen verslaat ze allebei bij elke horizon."
+  - en: "The MASE divides the MAE by that of the naive forecast one step ahead on the training data, so series of any size compare. The sMAPE gives every miss as a share, and breaks down near 0: Hurricane Sandy alone counts 198.7%."
+    nl: "De MASE deelt de MAE door die van de naive forecast één stap vooruit op de training data, zodat reeksen van elke grootte te vergelijken zijn. De sMAPE geeft elke misser als aandeel, en ontspoort vlak bij 0: orkaan Sandy alleen telt voor 198,7%."
+can_now:
+  - en: "forecast with the seasonal naive forecast for any period and horizon"
+    nl: "voorspellen met de seasonal naive forecast voor elke periode en horizon"
+    by: seasonal-naive
+  - en: "backtest a forecast with a rolling origin, training only on the past"
+    nl: "een forecast backtesten met een rolling origin, en alleen op het verleden trainen"
+    by: backtest
+  - en: "say what the MASE adds to the MAE"
+    nl: "zeggen wat de MASE toevoegt aan de MAE"
+    by: mase
+further_reading:
+  - en: "Rob J. Hyndman and George Athanasopoulos (2021), *Forecasting: Principles and Practice*, 3rd edition, chapter 5, *The forecaster's toolbox*: simple forecasting methods, forecast accuracy, MASE and time series cross-validation; free online"
+    nl: "Rob J. Hyndman en George Athanasopoulos (2021), *Forecasting: Principles and Practice*, derde editie, hoofdstuk 5, *The forecaster's toolbox*: eenvoudige methoden, de nauwkeurigheid van forecasts, MASE en cross-validation voor tijdreeksen; gratis online"
+  - en: "Rob J. Hyndman and Anne B. Koehler (2006), *Another look at measures of forecast accuracy*, International Journal of Forecasting: where the MASE comes from, and why percentage errors break down near 0"
+    nl: "Rob J. Hyndman en Anne B. Koehler (2006), *Another look at measures of forecast accuracy*, International Journal of Forecasting: waar de MASE vandaan komt, en waarom procentuele fouten ontsporen vlak bij 0"

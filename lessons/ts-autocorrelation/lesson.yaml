@@ -1,0 +1,31 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: ts-autocorrelation
+minutes: 15
+title:
+  en: "Does today look like yesterday? Autocorrelation"
+  nl: "Lijkt vandaag op gisteren? Autocorrelatie"
+goal:
+  en: "compute the correlation coefficient of two columns, compare a series with itself a lag earlier, read the season and the trend from its autocorrelation, and tell whether a series is stationary."
+  nl: "de correlatiecoëfficiënt van twee kolommen berekenen, een reeks met zichzelf een lag eerder vergelijken, het seizoen en de trend aflezen aan haar autocorrelatie, en zeggen of een reeks stationair is."
+summary:
+  - en: "The correlation coefficient r is the mean product of the distances to the means, divided by both standard deviations: 1 on a rising line, −1 on a falling one, 0 when no straight line fits. Temperature and registered riders give 0.540."
+    nl: "De correlatiecoëfficiënt r is het gemiddelde product van de afstanden tot de gemiddelden, gedeeld door beide standaardafwijkingen: 1 op een stijgende lijn, −1 op een dalende, 0 als er geen rechte lijn past. Temperatuur en geregistreerde fietsers geven 0,540."
+  - en: "The autocorrelation at lag k is r between a series and itself k steps earlier, on a grid of equal steps. Its peaks show the seasons: for the riders of every hour 0.815 at 24 hours and 0.886 at 168, a week."
+    nl: "De autocorrelatie bij lag k is r tussen een reeks en zichzelf k stappen eerder, op een rooster van gelijke stappen. De pieken ervan laten de seizoenen zien: voor de fietsers van elk uur 0,815 bij 24 uur en 0,886 bij 168, een week."
+  - en: "A trend keeps the autocorrelation high at every lag. A stationary series keeps its mean and its spread over time; the riders are not stationary, and neither is their rest after the trend, whose spread grew over the two years."
+    nl: "Een trend houdt de autocorrelatie bij elke lag hoog. Een stationaire reeks houdt haar gemiddelde en haar spreiding over de tijd; de fietsers zijn niet stationair, en hun rest na de trend ook niet, want de spreiding ervan groeide over de twee jaar."
+can_now:
+  - en: "compute the correlation coefficient of two arrays by hand"
+    nl: "de correlatiecoëfficiënt van twee arrays met de hand berekenen"
+    by: correlation
+  - en: "compute the autocorrelation of a series at any lag, as pandas does with autocorr"
+    nl: "de autocorrelatie van een reeks bij elke lag berekenen, zoals pandas met autocorr doet"
+    by: autocorrelation
+  - en: "say whether a series is stationary from the mean and the spread of its stretches"
+    nl: "zeggen of een reeks stationair is aan het gemiddelde en de spreiding van stukken ervan"
+    by: stationary
+further_reading:
+  - en: "Rob J. Hyndman and George Athanasopoulos (2021), *Forecasting: Principles and Practice*, 3rd edition, section 2.8, *Autocorrelation*, and section 9.1, *Stationarity and differencing*: free online"
+    nl: "Rob J. Hyndman en George Athanasopoulos (2021), *Forecasting: Principles and Practice*, derde editie, paragraaf 2.8, *Autocorrelation*, en paragraaf 9.1, *Stationarity and differencing*: gratis online"

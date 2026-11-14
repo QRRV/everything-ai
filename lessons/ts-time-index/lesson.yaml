@@ -1,0 +1,33 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: ts-time-index
+minutes: 15
+title:
+  en: "Time as an index: dates and resampling in pandas"
+  nl: "Tijd als index: datums en resampling in pandas"
+goal:
+  en: "put the time in the index of a table, cut it by date, resample it to days, smooth it with a rolling window or an exponential moving average, compare it with a week earlier, and see a missing hour instead of missing it."
+  nl: "de tijd in de index van een tabel zetten, op datum knippen, naar dagen resamplen, gladstrijken met een rolling window of een exponentieel voortschrijdend gemiddelde, met een week eerder vergelijken, en een ontbrekend uur zien in plaats van missen."
+summary:
+  - en: "With the times in a datetime index, `s.loc[\"2017-10\"]` cuts out a month, `s.asfreq(\"h\")` puts every hour in its place with NaN where there is no row, and `s.resample(\"D\")` bins the hours into days for a mean, a sum or a count."
+    nl: "Met de tijden in een datetime index knipt `s.loc[\"2017-10\"]` een maand eruit, zet `s.asfreq(\"h\")` elk uur op zijn plek met NaN waar geen rij is, en verdeelt `s.resample(\"D\")` de uren over dagen voor een gemiddelde, een som of een telling."
+  - en: "A sum hides what was never counted: of the 2,190 days of the traffic table, 330 have no row and sum to 0. A mean gives NaN for them, and a count says what each day rests on. In the same way, `rolling(24)` takes 24 rows, which for 11,503 hours span more than a day; `rolling(\"24h\")` takes a day."
+    nl: "Een som verstopt wat nooit geteld is: van de 2.190 dagen van de verkeerstabel hebben er 330 geen rij en tellen op tot 0. Een gemiddelde geeft er NaN voor, en een telling zegt waar elke dag op rust. Zo neemt ook `rolling(24)` 24 rijen, die voor 11.503 uren meer dan een dag beslaan; `rolling(\"24h\")` neemt een dag."
+  - en: "An exponential moving average moves a level a share α towards every new value; on the grid of hours, `shift` finds the same hour a week earlier. Local times jump twice a year, so an hour can be missing that never was."
+    nl: "Een exponentieel voortschrijdend gemiddelde schuift een niveau bij elke nieuwe waarde een deel α die kant op; op het rooster van uren vindt `shift` hetzelfde uur een week eerder. Plaatselijke tijden springen twee keer per jaar, dus kan er een uur ontbreken dat nooit bestond."
+can_now:
+  - en: "compare every hour with the same hour a week earlier, with missing hours as NaN"
+    nl: "elk uur vergelijken met hetzelfde uur een week eerder, met ontbrekende uren als NaN"
+    by: week-change
+  - en: "compute an exponential moving average by hand, as pandas does with ewm"
+    nl: "een exponentieel voortschrijdend gemiddelde met de hand berekenen, zoals pandas met ewm doet"
+    by: smooth
+  - en: "say why a series in local time can miss an hour that never was"
+    nl: "zeggen waarom een reeks in plaatselijke tijd een uur kan missen dat nooit bestond"
+    by: spring
+further_reading:
+  - en: "pandas documentation, *Time series / date functionality*: the datetime index, resampling, rolling windows, shifting and time zones"
+    nl: "Documentatie van pandas, *Time series / date functionality*: de datetime index, resampling, rolling windows, opschuiven en tijdzones"
+  - en: "Rob J. Hyndman and George Athanasopoulos (2021), *Forecasting: Principles and Practice*, 3rd edition, chapter 2, *Time series graphics*: free online"
+    nl: "Rob J. Hyndman en George Athanasopoulos (2021), *Forecasting: Principles and Practice*, derde editie, hoofdstuk 2, *Time series graphics*: gratis online"

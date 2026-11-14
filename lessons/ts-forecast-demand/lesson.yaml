@@ -1,0 +1,33 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: ts-forecast-demand
+minutes: 20
+title:
+  en: "Forecasting demand with trees"
+  nl: "Vraag voorspellen met bomen"
+goal:
+  en: "turn a series into a table of lag features and calendar features, with only the lags the horizon allows, and backtest gradient boosting on it against the seasonal naive forecast."
+  nl: "een reeks omzetten in een tabel met lag features en kalenderfeatures, met alleen de lags die de horizon toestaat, en daarop gradient boosting backtesten tegen de seasonal naive forecast."
+summary:
+  - en: "A lag feature is the series k steps earlier, y.shift(k); a calendar feature is what a date says about itself, such as the hour, the weekday, the month or a holiday. A forecast h steps ahead may only use lags of at least h: a shorter lag holds values after the origin, and the backtest then looks far better than it is."
+    nl: "Een lag feature is de reeks k stappen eerder, y.shift(k); een kalenderfeature is wat een datum over zichzelf zegt, zoals het uur, de weekdag, de maand of een feestdag. Een forecast h stappen vooruit mag alleen lags van minstens h gebruiken: een kortere lag bevat waarden van na de origin, en de backtest ziet er dan veel beter uit dan hij is."
+  - en: "A week ahead over 2012, a tree on two lags and the calendar misses by 42.0 registered riders an hour, the seasonal naive forecast by 46.8, and the plain mean of the same hour one and two weeks earlier by 42.1. The tree earns its place on the holidays, where workingday takes its miss from 97.5 with the lags alone to 69.8, and with columns a rule of thumb cannot use."
+    nl: "Een week vooruit over 2012 zit een boom op twee lags en de kalender er 42,0 geregistreerde fietsers per uur naast, de seasonal naive forecast 46,8, en het gewone gemiddelde van hetzelfde uur één en twee weken eerder 42,1. De boom verdient zijn plek op de feestdagen, waar workingday zijn misser van 97,5 met alleen de lags naar 69,8 brengt, en met kolommen die een vuistregel niet kan gebruiken."
+  - en: "A tree trains only on the rows before the origin whose label is known: dropna(subset=[\"registered\"]) drops the hours without riders, while a missing lag can stay."
+    nl: "Een boom traint alleen op de rijen voor de origin waarvan het label bekend is: dropna(subset=[\"registered\"]) laat de uren zonder fietsers vallen, terwijl een ontbrekende lag mag blijven."
+can_now:
+  - en: "make lag features with pandas, only with the lags a horizon allows"
+    nl: "lag features maken met pandas, alleen met de lags die een horizon toestaat"
+    by: lag-features
+  - en: "forecast with gradient boosting from one origin, trained only on the past rows with a label"
+    nl: "voorspellen met gradient boosting vanaf één origin, getraind op alleen de rijen uit het verleden met een label"
+    by: tree-forecast
+  - en: "say which columns a forecast may use: what is known at the origin for every step of the horizon"
+    nl: "zeggen welke kolommen een forecast mag gebruiken: wat bij de origin bekend is voor elke stap van de horizon"
+    by: known-columns
+further_reading:
+  - en: "Rob J. Hyndman and George Athanasopoulos (2021), *Forecasting: Principles and Practice*, 3rd edition, chapter 7.4, *Some useful predictors*: trend, seasonal dummy variables, holidays and other calendar effects as features; free online"
+    nl: "Rob J. Hyndman en George Athanasopoulos (2021), *Forecasting: Principles and Practice*, derde editie, hoofdstuk 7.4, *Some useful predictors*: trend, dummyvariabelen voor het seizoen, feestdagen en andere kalendereffecten als features; gratis online"
+  - en: "Spyros Makridakis, Evangelos Spiliotis and Vassilios Assimakopoulos (2022), *M5 accuracy competition: Results, findings, and conclusions*, International Journal of Forecasting: in a large competition to forecast sales, the best entries used gradient boosting on lag and calendar features"
+    nl: "Spyros Makridakis, Evangelos Spiliotis en Vassilios Assimakopoulos (2022), *M5 accuracy competition: Results, findings, and conclusions*, International Journal of Forecasting: in een grote wedstrijd om verkopen te voorspellen gebruikten de beste inzendingen gradient boosting op lag features en kalenderfeatures"
