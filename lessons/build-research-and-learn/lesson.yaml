@@ -1,0 +1,28 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: build-research-and-learn
+minutes: 25
+title:
+  en: "Searching, deep research and learning with AI"
+  nl: "Zoeken, deep research en leren met AI"
+goal:
+  en: "choose between a search, deep research and being questioned, open the sources an answer gives, and see what a tutor instruction does and does not do."
+  nl: "kiezen tussen zoeken, deep research en je laten bevragen, de bronnen openen die een antwoord geeft, en zien wat een tutorinstructie wel en niet doet."
+summary:
+  - en: "A search answers one fact with links, deep research reads dozens of pages for one report with sources; a source is only worth something once you have opened it and found the claim there."
+    nl: "Zoeken beantwoordt één feit met links, deep research leest tientallen pagina's voor één rapport met bronnen; een bron is pas iets waard als je hem hebt geopend en de bewering erin hebt gevonden."
+  - en: "To learn, you ask an assistant to question you one step at a time, instead of giving you the answer."
+    nl: "Om te leren vraag je een assistent je stap voor stap te bevragen, in plaats van je het antwoord te geven."
+  - en: "In the course's run, Qwen3-0.6B with a tutor instruction still gave the answer in 17 of 24 runs; with an example it kept the answer back, but mostly repeated the question; and when the student pushed, it gave the answer every time."
+    nl: "In de run van de course gaf Qwen3-0.6B met een tutorinstructie nog steeds in 17 van de 24 runs het antwoord; met een voorbeeld hield het het antwoord voor zich, maar herhaalde het meestal de vraag; en toen de student aandrong, gaf het elke keer het antwoord."
+can_now:
+  - en: "choose a search, deep research or being questioned for what you want to find out or learn"
+    nl: "zoeken, deep research of je laten bevragen kiezen voor wat je wilt uitzoeken of leren"
+    by: which-way
+  - en: "tell an assistant that keeps the answer back from one that helps you find it"
+    nl: "een assistent die het antwoord voor zich houdt onderscheiden van een die je helpt het te vinden"
+    by: tutor-qwen
+  - en: "check a source in a report yourself before you use it"
+    nl: "een bron in een rapport zelf controleren voordat je hem gebruikt"
+    by: open-source

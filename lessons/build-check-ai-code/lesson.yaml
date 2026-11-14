@@ -1,0 +1,30 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: build-check-ai-code
+minutes: 25
+title:
+  en: "Checking code that AI wrote"
+  nl: "Code nakijken die AI schreef"
+goal:
+  en: "check code that AI wrote with tests in assert lines, a tool that reads the code, and a review, and know what each one finds."
+  nl: "code die AI schreef nakijken met tests in assert-regels, een tool die de code leest, en een review, en weten wat elk ervan vindt."
+summary:
+  - en: "Code from AI looks right more often than it is: all eight of Qwen3's count_vowels were the same function, and all eight counted only small letters, so \"Apple\" gave 1."
+    nl: "Code van AI ziet er vaker goed uit dan hij is: alle acht count_vowels van Qwen3 waren dezelfde functie, en alle acht telden alleen kleine letters, dus \"Apple\" gaf 1."
+  - en: "A test is a line with assert and a case whose answer you worked out by hand; it catches a bug only when you choose a case where the bug shows, such as a capital or a space."
+    nl: "Een test is een regel met assert en een geval waarvan je het antwoord met de hand uitrekende; hij vangt een bug alleen als je een geval kiest waarin de bug zichtbaar wordt, zoals een hoofdletter of een spatie."
+  - en: "Static analysis reads code without running it and finds what is wrong in any code; a review takes a person who knows what the code is for. Each finds what the others miss."
+    nl: "Static analysis leest code zonder hem uit te voeren en vindt wat in elke code fout is; voor een review is iemand nodig die weet waar de code voor is. Elk vindt wat de andere missen."
+  - en: "In a randomized controlled trial (METR, 2025), experienced developers were 19% slower with AI tools and believed they were 20% faster: measure, do not go by the feeling."
+    nl: "In een randomized controlled trial (METR, 2025) waren ervaren developers met AI-tools 19% langzamer, en dachten ze dat ze 20% sneller waren: meet het, ga niet op je gevoel af."
+can_now:
+  - en: "write a test with assert that catches a bug in code that AI wrote"
+    nl: "een test met assert schrijven die een bug vangt in code die AI schreef"
+    by: catch-vowels
+  - en: "fix the bug a test found, and see the test pass"
+    nl: "de bug verbeteren die een test vond, en de test zien slagen"
+    by: fix-vowels
+  - en: "tell which problems a test finds, which static analysis finds, and which a review finds"
+    nl: "zeggen welke problemen een test vindt, welke static analysis vindt, en welke een review vindt"
+    by: which-check

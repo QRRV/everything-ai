@@ -1,0 +1,28 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: build-ai-at-work
+minutes: 20
+title:
+  en: "AI at work: centaur or cyborg"
+  nl: "AI op je werk: centaur of cyborg"
+goal:
+  en: "find out for each task whether AI does it well, and choose how you share the work: hand over a whole part, or go back and forth at every step."
+  nl: "per taak uitzoeken of AI hem goed doet, en kiezen hoe je het werk deelt: een heel deel uit handen geven, of bij elke stap heen en weer gaan."
+summary:
+  - en: "The jagged frontier is the uneven border between tasks AI does well and tasks it gets wrong. Qwen3-0.6B worked out 23 × 47 right in every run, and never named the capital of Australia: you find out where a task lies by trying it on cases you know."
+    nl: "De jagged frontier is de onregelmatige grens tussen taken die AI goed doet en taken die het fout doet. Qwen3-0.6B rekende 23 × 47 in elke run goed uit, en noemde de hoofdstad van Australië nooit: waar een taak ligt, ontdek je door hem te proberen op gevallen die je kent."
+  - en: "A centaur splits the work, hands whole parts to the AI and checks them; a cyborg goes back and forth with the AI at every step. Both only help inside the frontier."
+    nl: "Een centaur verdeelt het werk, geeft hele delen aan de AI en kijkt ze na; een cyborg gaat bij elke stap heen en weer met de AI. Allebei helpen ze alleen binnen de frontier."
+  - en: "In a study with 758 consultants, those with GPT-4 did more, faster and better on tasks inside the frontier, and found the right answer 19 percentage points less often on a task outside it, because they relied on its convincing analysis."
+    nl: "In een onderzoek met 758 consultants deden de consultants met GPT-4 binnen de frontier meer, sneller en beter werk, en vonden ze bij een taak erbuiten 19 procentpunt minder vaak het goede antwoord, omdat ze op de overtuigende analyse van het model vertrouwden."
+can_now:
+  - en: "tell a centaur's way of working with AI from a cyborg's"
+    nl: "de manier van werken van een centaur en die van een cyborg uit elkaar houden"
+    by: centaur-or-cyborg
+  - en: "decide from tries with known answers which tasks you hand to a model and which you do yourself"
+    nl: "aan de hand van pogingen met bekende antwoorden beslissen welke taken je aan een model geeft en welke je zelf doet"
+    by: frontier-qwen
+  - en: "explain why AI can make work worse on a task outside the frontier"
+    nl: "uitleggen waarom AI het werk slechter kan maken bij een taak buiten de frontier"
+    by: outside-study

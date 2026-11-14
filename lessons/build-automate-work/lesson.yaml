@@ -1,0 +1,31 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: build-automate-work
+minutes: 30
+title:
+  en: "Automating work: flows, personal agents and process mining"
+  nl: "Werk automatiseren: flows, persoonlijke agents en process mining"
+goal:
+  en: "choose between a no-code flow, RPA and a personal agent, and see from an event log how work really goes before you automate it."
+  nl: "kiezen tussen een no-code-flow, RPA en een persoonlijke agent, en uit een eventlog zien hoe het werk echt gaat voordat je het automatiseert."
+summary:
+  - en: "A no-code flow and RPA repeat fixed steps, one through connections between programs, the other by clicking through their screens; a personal agent chooses its own steps, so you check what it did."
+    nl: "Een no-code-flow en RPA herhalen vaste stappen, de een via koppelingen tussen programma's, de ander door zich door hun schermen te klikken; een persoonlijke agent kiest zijn eigen stappen, dus je kijkt na wat hij deed."
+  - en: "An event log has a row for each step of each case. Process mining counts which step directly follows which within a case, and draws it as a directly-follows graph."
+    nl: "Een eventlog heeft een rij voor elke stap van elke case. Process mining telt welke stap binnen een case direct op welke volgt, en tekent dat als een directly-follows graph."
+  - en: "In the made-up log of 300 returns, only 175 went the way the webshop drew it: the graph showed checks done again, returns without a label and refunds paid twice, and the loop of photos asked took the most time."
+    nl: "In het verzonnen log van 300 retouren gingen er maar 175 zoals de webshop het tekende: de directly-follows graph liet controles zien die opnieuw gedaan werden, retouren zonder label en geld dat twee keer werd teruggestort, en de lus van de gevraagde foto's kostte de meeste tijd."
+can_now:
+  - en: "choose a no-code flow, RPA or a personal agent for a piece of work"
+    nl: "een no-code-flow, RPA of een persoonlijke agent kiezen voor een stuk werk"
+    by: which-automation
+  - en: "find the pairs of steps that directly follow each other in an event log, case by case"
+    nl: "de paren stappen vinden die in een eventlog direct op elkaar volgen, case voor case"
+    by: pairs
+  - en: "work out how long each case took with groupby, and find where the time goes"
+    nl: "met groupby uitrekenen hoe lang elke case duurde, en vinden waar de tijd heen gaat"
+    by: took
+  - en: "spot a step in a directly-follows graph that should not be there"
+    nl: "een stap in een directly-follows graph zien die er niet hoort"
+    by: never-twice

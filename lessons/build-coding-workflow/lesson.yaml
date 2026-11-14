@@ -1,0 +1,30 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: build-coding-workflow
+minutes: 25
+title:
+  en: "Working with a coding agent: plan, spec and context"
+  nl: "Werken met een coding agent: plan, spec en context"
+goal:
+  en: "hand a coding agent a task with a spec, a plan you read first, small steps with tests, and AGENTS.md for what always holds."
+  nl: "een coding agent een taak geven met een spec, een plan dat je eerst leest, kleine stappen met tests, en AGENTS.md voor wat altijd geldt."
+summary:
+  - en: "A spec says what must come out, with examples; for Qwen3, a spec instead of a vague request raised the right answers from 11 to 39 of 72."
+    nl: "Een spec zegt wat eruit moet komen, met voorbeelden; bij Qwen3 gingen de goede antwoorden met een spec in plaats van een vaag verzoek van 11 naar 39 van de 72."
+  - en: "A plan says how, in steps; you read it before there is code, and in four of the eight plans you could see that the step for +31 was missing."
+    nl: "Een plan zegt hoe, in stappen; je leest het voordat er code is, en bij vier van de acht plannen kon je zien dat de stap voor +31 ontbrak."
+  - en: "Not one of the 32 programs got the spec's own example with +31 right; the spec's examples, run as tests after every step, catch that at once."
+    nl: "Geen van de 32 programma's had het voorbeeld met +31 uit de spec zelf goed; de voorbeelden uit de spec, na elke stap als tests gedraaid, vangen dat meteen."
+  - en: "What holds for every task, such as how to run the tests and what not to touch, goes in AGENTS.md, the context the agent starts each task with."
+    nl: "Wat voor elke taak geldt, zoals hoe je de tests draait en wat de agent niet mag aanraken, hoort in AGENTS.md, de context waarmee de agent elke taak begint."
+can_now:
+  - en: "tell what belongs in a spec, in a plan and in AGENTS.md"
+    nl: "zeggen wat in een spec, in een plan en in AGENTS.md hoort"
+    by: spec-plan-context
+  - en: "tell why a spec with examples leaves an agent less to guess than a vague request"
+    nl: "zeggen waarom een agent met een spec met voorbeelden minder hoeft te gokken dan met een vaag verzoek"
+    by: which-helped
+  - en: "make an agent's work checkable by running the spec's examples as tests after every step"
+    nl: "het werk van een agent controleerbaar maken door de voorbeelden uit de spec na elke stap als tests te draaien"
+    by: plus-31

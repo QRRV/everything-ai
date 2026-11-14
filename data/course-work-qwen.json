@@ -1,0 +1,2280 @@
+{
+ "model": "Qwen/Qwen3-0.6B",
+ "revision": "c1899de289a04d12100db370d81485cdf75e47ca",
+ "dtype": "float32",
+ "machine": "Intel(R) Xeon(R) Processor @ 2.10GHz, 4 cores",
+ "threads": 1,
+ "torch": "2.14.1+cu130",
+ "sampling": {
+  "temperature": 0.7,
+  "top_p": 0.8,
+  "top_k": 20
+ },
+ "parts": {
+  "build-ai-at-work": {
+   "list": {
+    "messages": [
+     {
+      "role": "user",
+      "content": "Turn this into a shopping list, one item per line: we need milk, two loaves of bread and some apples."
+     }
+    ],
+    "max_tokens": 150,
+    "answers": [
+     {
+      "seed": 0,
+      "text": "- milk  \n- two loaves of bread  \n- some apples",
+      "tokens": 13,
+      "seconds": 3.2,
+      "finish": "stop"
+     },
+     {
+      "seed": 1,
+      "text": "- milk  \n- two loaves of bread  \n- some apples",
+      "tokens": 13,
+      "seconds": 3.19,
+      "finish": "stop"
+     },
+     {
+      "seed": 2,
+      "text": "- milk  \n- two loaves of bread  \n- some apples",
+      "tokens": 13,
+      "seconds": 3.14,
+      "finish": "stop"
+     },
+     {
+      "seed": 3,
+      "text": "- Milk  \n- Two loaves of bread  \n- Some apples",
+      "tokens": 13,
+      "seconds": 2.99,
+      "finish": "stop"
+     },
+     {
+      "seed": 4,
+      "text": "- milk  \n- two loaves of bread  \n- some apples",
+      "tokens": 13,
+      "seconds": 3.15,
+      "finish": "stop"
+     },
+     {
+      "seed": 5,
+      "text": "- Milk  \n- Two loaves of bread  \n- Some apples",
+      "tokens": 13,
+      "seconds": 3.16,
+      "finish": "stop"
+     },
+     {
+      "seed": 6,
+      "text": "- milk  \n- two loaves of bread  \n- some apples",
+      "tokens": 13,
+      "seconds": 3.3,
+      "finish": "stop"
+     },
+     {
+      "seed": 7,
+      "text": "- milk  \n- two loaves of bread  \n- some apples",
+      "tokens": 13,
+      "seconds": 3.23,
+      "finish": "stop"
+     }
+    ]
+   },
+   "capital": {
+    "messages": [
+     {
+      "role": "user",
+      "content": "What is the capital of Australia? Reply with the city only."
+     }
+    ],
+    "max_tokens": 150,
+    "answers": [
+     {
+      "seed": 0,
+      "text": "New South Wales",
+      "tokens": 3,
+      "seconds": 1.06,
+      "finish": "stop"
+     },
+     {
+      "seed": 1,
+      "text": "Sydney",
+      "tokens": 2,
+      "seconds": 0.82,
+      "finish": "stop"
+     },
+     {
+      "seed": 2,
+      "text": "Queensland",
+      "tokens": 3,
+      "seconds": 0.99,
+      "finish": "stop"
+     },
+     {
+      "seed": 3,
+      "text": "Sydney",
+      "tokens": 2,
+      "seconds": 0.88,
+      "finish": "stop"
+     },
+     {
+      "seed": 4,
+      "text": "New South Wales",
+      "tokens": 3,
+      "seconds": 1.04,
+      "finish": "stop"
+     },
+     {
+      "seed": 5,
+      "text": "Queensland",
+      "tokens": 3,
+      "seconds": 1.01,
+      "finish": "stop"
+     },
+     {
+      "seed": 6,
+      "text": "Sydney",
+      "tokens": 2,
+      "seconds": 0.81,
+      "finish": "stop"
+     },
+     {
+      "seed": 7,
+      "text": "Sydney",
+      "tokens": 2,
+      "seconds": 0.88,
+      "finish": "stop"
+     }
+    ]
+   },
+   "multiply": {
+    "messages": [
+     {
+      "role": "user",
+      "content": "What is 23 × 47? Reply with the number only."
+     }
+    ],
+    "max_tokens": 150,
+    "answers": [
+     {
+      "seed": 0,
+      "text": "23 × 47 = 1081.",
+      "tokens": 13,
+      "seconds": 2.93,
+      "finish": "stop"
+     },
+     {
+      "seed": 1,
+      "text": "23 × 47 = 1081.",
+      "tokens": 13,
+      "seconds": 3.0,
+      "finish": "stop"
+     },
+     {
+      "seed": 2,
+      "text": "23 × 47 = 1081.",
+      "tokens": 13,
+      "seconds": 3.01,
+      "finish": "stop"
+     },
+     {
+      "seed": 3,
+      "text": "23 × 47 = 1081.",
+      "tokens": 13,
+      "seconds": 3.05,
+      "finish": "stop"
+     },
+     {
+      "seed": 4,
+      "text": "23 × 47 = 1081.",
+      "tokens": 13,
+      "seconds": 3.13,
+      "finish": "stop"
+     },
+     {
+      "seed": 5,
+      "text": "23 × 47 = 1081.",
+      "tokens": 13,
+      "seconds": 3.07,
+      "finish": "stop"
+     },
+     {
+      "seed": 6,
+      "text": "23 × 47 = 1081.",
+      "tokens": 13,
+      "seconds": 3.07,
+      "finish": "stop"
+     },
+     {
+      "seed": 7,
+      "text": "23 × 47 = 1081.",
+      "tokens": 13,
+      "seconds": 3.07,
+      "finish": "stop"
+     }
+    ]
+   },
+   "letters": {
+    "messages": [
+     {
+      "role": "user",
+      "content": "How many times does the letter r appear in the word strawberry? Reply with the number only."
+     }
+    ],
+    "max_tokens": 150,
+    "answers": [
+     {
+      "seed": 0,
+      "text": "The letter **r** appears **once** in the word **strawberry**. \n\nAnswer: **1**",
+      "tokens": 24,
+      "seconds": 5.34,
+      "finish": "stop"
+     },
+     {
+      "seed": 1,
+      "text": "The letter **r** appears **once** in the word **strawberry**. \n\nAnswer: **1**",
+      "tokens": 24,
+      "seconds": 5.4,
+      "finish": "stop"
+     },
+     {
+      "seed": 2,
+      "text": "The letter **r** appears **once** in the word **strawberry**.  \n\n**Answer:** 1",
+      "tokens": 24,
+      "seconds": 5.32,
+      "finish": "stop"
+     },
+     {
+      "seed": 3,
+      "text": "The letter **r** appears **once** in the word **strawberry**.  \n\nAnswer: **1**",
+      "tokens": 24,
+      "seconds": 5.41,
+      "finish": "stop"
+     },
+     {
+      "seed": 4,
+      "text": "The letter **r** appears **once** in the word **strawberry**. \n\nAnswer: **1**",
+      "tokens": 24,
+      "seconds": 5.22,
+      "finish": "stop"
+     },
+     {
+      "seed": 5,
+      "text": "The letter **r** appears **once** in the word **strawberry**.  \n\nAnswer: **1**",
+      "tokens": 24,
+      "seconds": 5.34,
+      "finish": "stop"
+     },
+     {
+      "seed": 6,
+      "text": "The letter **r** appears **once** in the word **strawberry**. \n\nSo, the answer is: **1**.",
+      "tokens": 29,
+      "seconds": 6.22,
+      "finish": "stop"
+     },
+     {
+      "seed": 7,
+      "text": "The letter **r** appears **once** in the word **strawberry**. \n\nSo, the answer is: **1**.",
+      "tokens": 29,
+      "seconds": 6.43,
+      "finish": "stop"
+     }
+    ]
+   },
+   "email": {
+    "messages": [
+     {
+      "role": "user",
+      "content": "Write one polite sentence asking a colleague to move our meeting from Monday to Tuesday."
+     }
+    ],
+    "max_tokens": 150,
+    "answers": [
+     {
+      "seed": 0,
+      "text": "Certainly! Here's a polite sentence you can use:\n\n\"Please let me know if there's any time on Tuesday for us to meet.\"",
+      "tokens": 28,
+      "seconds": 6.2,
+      "finish": "stop"
+     },
+     {
+      "seed": 1,
+      "text": "Sure! Here's a polite sentence:  \n\n\"Could you please move our meeting from Monday to Tuesday so we can schedule it appropriately?\"",
+      "tokens": 27,
+      "seconds": 5.92,
+      "finish": "stop"
+     },
+     {
+      "seed": 2,
+      "text": "Could you please move our meeting from Monday to Tuesday?",
+      "tokens": 11,
+      "seconds": 2.79,
+      "finish": "stop"
+     },
+     {
+      "seed": 3,
+      "text": "Sure! Here's a polite sentence:  \n\n\"Please let me know if there's any scheduling conflict with your availability, and we can adjust the meeting time accordingly.\"",
+      "tokens": 33,
+      "seconds": 7.14,
+      "finish": "stop"
+     },
+     {
+      "seed": 4,
+      "text": "Certainly! Here's a polite sentence to ask your colleague to move the meeting from Monday to Tuesday:\n\n\"Please let me know if there's any scheduling conflict, and I will adjust the meeting time accordingly.\"",
+      "tokens": 41,
+      "seconds": 8.83,
+      "finish": "stop"
+     },
+     {
+      "seed": 5,
+      "text": "Could you please move our meeting from Monday to Tuesday?",
+      "tokens": 11,
+      "seconds": 2.75,
+      "finish": "stop"
+     },
+     {
+      "seed": 6,
+      "text": "Sure! Here's a polite sentence:  \n\n\"Please let me know if there's any time on Tuesday for our meeting.\"",
+      "tokens": 25,
+      "seconds": 5.44,
+      "finish": "stop"
+     },
+     {
+      "seed": 7,
+      "text": "Sure! Here's a polite sentence:\n\n\"Could you please move our meeting from Monday to Tuesday so that we can have a better time?\"",
+      "tokens": 28,
+      "seconds": 6.0,
+      "finish": "stop"
+     }
+    ]
+   },
+   "reverse": {
+    "messages": [
+     {
+      "role": "user",
+      "content": "Write the word lemonade backwards, letter by letter, as one word. Reply with that word only."
+     }
+    ],
+    "max_tokens": 150,
+    "answers": [
+     {
+      "seed": 0,
+      "text": "lemonade",
+      "tokens": 3,
+      "seconds": 1.05,
+      "finish": "stop"
+     },
+     {
+      "seed": 1,
+      "text": "lemonade",
+      "tokens": 3,
+      "seconds": 1.1,
+      "finish": "stop"
+     },
+     {
+      "seed": 2,
+      "text": "lemonade",
+      "tokens": 3,
+      "seconds": 1.13,
+      "finish": "stop"
+     },
+     {
+      "seed": 3,
+      "text": "lemonade",
+      "tokens": 3,
+      "seconds": 1.14,
+      "finish": "stop"
+     },
+     {
+      "seed": 4,
+      "text": "lemonade",
+      "tokens": 3,
+      "seconds": 1.11,
+      "finish": "stop"
+     },
+     {
+      "seed": 5,
+      "text": "lemonade",
+      "tokens": 3,
+      "seconds": 1.08,
+      "finish": "stop"
+     },
+     {
+      "seed": 6,
+      "text": "lemonade",
+      "tokens": 3,
+      "seconds": 1.11,
+      "finish": "stop"
+     },
+     {
+      "seed": 7,
+      "text": "lemonade",
+      "tokens": 3,
+      "seconds": 1.13,
+      "finish": "stop"
+     }
+    ]
+   },
+   "compare": {
+    "messages": [
+     {
+      "role": "user",
+      "content": "Which number is larger: 9.11 or 9.9? Reply with the number only."
+     }
+    ],
+    "max_tokens": 150,
+    "answers": [
+     {
+      "seed": 0,
+      "text": "The number **9.9** is larger than **9.11**. \n\n**Answer:** 9.9",
+      "tokens": 25,
+      "seconds": 5.42,
+      "finish": "stop"
+     },
+     {
+      "seed": 1,
+      "text": "The number **9.9** is larger than **9.11**.  \n\n**Answer:** 9.9",
+      "tokens": 25,
+      "seconds": 5.54,
+      "finish": "stop"
+     },
+     {
+      "seed": 2,
+      "text": "The number **9.9** is larger than **9.11**. \n\n**Answer:** 9.9",
+      "tokens": 25,
+      "seconds": 5.61,
+      "finish": "stop"
+     },
+     {
+      "seed": 3,
+      "text": "The number **9.9** is larger than **9.11**. \n\n**Answer:** 9.9",
+      "tokens": 25,
+      "seconds": 5.46,
+      "finish": "stop"
+     },
+     {
+      "seed": 4,
+      "text": "The number **9.9** is larger than **9.11**. \n\n**Answer:** 9.9",
+      "tokens": 25,
+      "seconds": 5.45,
+      "finish": "stop"
+     },
+     {
+      "seed": 5,
+      "text": "The number **9.9** is larger than **9.11**. \n\n**Answer:** 9.9",
+      "tokens": 25,
+      "seconds": 5.67,
+      "finish": "stop"
+     },
+     {
+      "seed": 6,
+      "text": "The number **9.9** is larger than **9.11**. \n\n**Answer:** 9.9",
+      "tokens": 25,
+      "seconds": 5.37,
+      "finish": "stop"
+     },
+     {
+      "seed": 7,
+      "text": "The number **9.9** is larger than **9.11**. \n\n**Answer:** 9.9",
+      "tokens": 25,
+      "seconds": 5.6,
+      "finish": "stop"
+     }
+    ]
+   },
+   "rhymes": {
+    "messages": [
+     {
+      "role": "user",
+      "content": "Give three English words that rhyme with cat. Reply with the three words only, separated by commas."
+     }
+    ],
+    "max_tokens": 150,
+    "answers": [
+     {
+      "seed": 0,
+      "text": "cat, cat, cat",
+      "tokens": 5,
+      "seconds": 1.42,
+      "finish": "stop"
+     },
+     {
+      "seed": 1,
+      "text": "cat, cat, cat",
+      "tokens": 5,
+      "seconds": 1.42,
+      "finish": "stop"
+     },
+     {
+      "seed": 2,
+      "text": "cat, cat, cat",
+      "tokens": 5,
+      "seconds": 1.41,
+      "finish": "stop"
+     },
+     {
+      "seed": 3,
+      "text": "cat, cat, cat",
+      "tokens": 5,
+      "seconds": 1.39,
+      "finish": "stop"
+     },
+     {
+      "seed": 4,
+      "text": "cat, cat, cat",
+      "tokens": 5,
+      "seconds": 1.43,
+      "finish": "stop"
+     },
+     {
+      "seed": 5,
+      "text": "cat, cat, cat",
+      "tokens": 5,
+      "seconds": 1.44,
+      "finish": "stop"
+     },
+     {
+      "seed": 6,
+      "text": "cat, cat, cat",
+      "tokens": 5,
+      "seconds": 1.5,
+      "finish": "stop"
+     },
+     {
+      "seed": 7,
+      "text": "cat, cat, cat",
+      "tokens": 5,
+      "seconds": 1.65,
+      "finish": "stop"
+     }
+    ]
+   },
+   "weekday": {
+    "messages": [
+     {
+      "role": "user",
+      "content": "What day is three days after Friday? Reply with the day only."
+     }
+    ],
+    "max_tokens": 150,
+    "answers": [
+     {
+      "seed": 0,
+      "text": "Three days after Friday is **Monday**.",
+      "tokens": 9,
+      "seconds": 2.43,
+      "finish": "stop"
+     },
+     {
+      "seed": 1,
+      "text": "Three days after Friday is **Monday**.",
+      "tokens": 9,
+      "seconds": 2.33,
+      "finish": "stop"
+     },
+     {
+      "seed": 2,
+      "text": "Three days after Friday is **Monday**.",
+      "tokens": 9,
+      "seconds": 2.34,
+      "finish": "stop"
+     },
+     {
+      "seed": 3,
+      "text": "Three days after Friday is **Monday**.",
+      "tokens": 9,
+      "seconds": 2.52,
+      "finish": "stop"
+     },
+     {
+      "seed": 4,
+      "text": "Three days after Friday is **Monday**.",
+      "tokens": 9,
+      "seconds": 2.36,
+      "finish": "stop"
+     },
+     {
+      "seed": 5,
+      "text": "Three days after Friday is **Monday**.",
+      "tokens": 9,
+      "seconds": 2.5,
+      "finish": "stop"
+     },
+     {
+      "seed": 6,
+      "text": "Three days after Friday is **Monday**.",
+      "tokens": 9,
+      "seconds": 2.36,
+      "finish": "stop"
+     },
+     {
+      "seed": 7,
+      "text": "Three days after Friday is **Monday**.",
+      "tokens": 9,
+      "seconds": 2.3,
+      "finish": "stop"
+     }
+    ]
+   },
+   "eight": {
+    "messages": [
+     {
+      "role": "user",
+      "content": "Write one sentence of exactly eight words about the sea. Reply with the sentence only."
+     }
+    ],
+    "max_tokens": 150,
+    "answers": [
+     {
+      "seed": 0,
+      "text": "The sea breathes with the rhythm of life.",
+      "tokens": 10,
+      "seconds": 2.48,
+      "finish": "stop"
+     },
+     {
+      "seed": 1,
+      "text": "The sea is vast and blue.",
+      "tokens": 7,
+      "seconds": 1.79,
+      "finish": "stop"
+     },
+     {
+      "seed": 2,
+      "text": "The sea breathes with the rhythm of waves.",
+      "tokens": 10,
+      "seconds": 2.48,
+      "finish": "stop"
+     },
+     {
+      "seed": 3,
+      "text": "The sea breathes.",
+      "tokens": 5,
+      "seconds": 1.46,
+      "finish": "stop"
+     },
+     {
+      "seed": 4,
+      "text": "The sea whispers secrets to the shore.",
+      "tokens": 8,
+      "seconds": 2.11,
+      "finish": "stop"
+     },
+     {
+      "seed": 5,
+      "text": "The sea breathes with life.",
+      "tokens": 7,
+      "seconds": 1.9,
+      "finish": "stop"
+     },
+     {
+      "seed": 6,
+      "text": "The sea is vast and endless.",
+      "tokens": 7,
+      "seconds": 1.82,
+      "finish": "stop"
+     },
+     {
+      "seed": 7,
+      "text": "The sea is a vast, shimmering expanse of blue and mystery.",
+      "tokens": 15,
+      "seconds": 3.36,
+      "finish": "stop"
+     }
+    ]
+   }
+  },
+  "build-research-and-learn": {
+   "percent:plain": {
+    "messages": [
+     {
+      "role": "user",
+      "content": "What is 15% of 80?"
+     }
+    ],
+    "max_tokens": 200,
+    "answers": [
+     {
+      "seed": 0,
+      "text": "To find **15% of 80**, follow these steps:\n\n1. Convert the percentage to a decimal:  \n   $ 15\\% = \\frac{15}{100} = 0.15 $\n\n2. Multiply by the number:  \n   $ 0.15 \\times 80 = 12 $\n\n**So, 15% of 80 is 12.**",
+      "tokens": 92,
+      "seconds": 19.07,
+      "finish": "stop"
+     },
+     {
+      "seed": 1,
+      "text": "To find **15% of 80**, we can convert the percentage to a decimal and multiply:\n\n15% = **0.15**\n\nSo:\n\n$$\n0.15 \\times 80 = 12\n$$\n\n**Answer:** 12.",
+      "tokens": 59,
+      "seconds": 12.11,
+      "finish": "stop"
+     },
+     {
+      "seed": 2,
+      "text": "To find **15% of 80**, follow these steps:\n\n1. Convert the percentage to a decimal:  \n   $15\\% = \\frac{15}{100} = 0.15$\n\n2. Multiply the decimal by the number:  \n   $0.15 \\times 80 = 12$\n\n**So, 15% of 80 is 12.**",
+      "tokens": 92,
+      "seconds": 19.1,
+      "finish": "stop"
+     },
+     {
+      "seed": 3,
+      "text": "To find **15% of 80**, follow these steps:\n\n1. Convert the percentage to a decimal:  \n   $ 15\\% = \\frac{15}{100} = 0.15 $\n\n2. Multiply by 80:  \n   $ 0.15 \\times 80 = 12 $\n\n**So, 15% of 80 is 12.**",
+      "tokens": 93,
+      "seconds": 19.26,
+      "finish": "stop"
+     },
+     {
+      "seed": 4,
+      "text": "To find **15% of 80**, follow these steps:\n\n1. Convert the percentage to a decimal:  \n   $ 15\\% = \\frac{15}{100} = 0.15 $\n\n2. Multiply the decimal by the number:  \n   $ 0.15 \\times 80 = 12 $\n\n**So, 15% of 80 is 12.**",
+      "tokens": 94,
+      "seconds": 19.78,
+      "finish": "stop"
+     },
+     {
+      "seed": 5,
+      "text": "To find **15% of 80**, follow these steps:\n\n1. Convert the percentage to a decimal:  \n   $ 15\\% = \\frac{15}{100} = 0.15 $\n\n2. Multiply the decimal by the number:  \n   $ 0.15 \\times 80 = 12 $\n\n**Answer:** 12.",
+      "tokens": 84,
+      "seconds": 18.02,
+      "finish": "stop"
+     },
+     {
+      "seed": 6,
+      "text": "To find **15% of 80**, follow these steps:\n\n1. Convert the percentage to a decimal:  \n   $ 15\\% = \\frac{15}{100} = 0.15 $\n\n2. Multiply by 80:  \n   $ 0.15 \\times 80 = 12 $\n\n**So, 15% of 80 is 12.**",
+      "tokens": 93,
+      "seconds": 19.53,
+      "finish": "stop"
+     },
+     {
+      "seed": 7,
+      "text": "To find **15% of 80**, follow these steps:\n\n1. Convert the percentage to a decimal:  \n   $ 15\\% = \\frac{15}{100} = 0.15 $\n\n2. Multiply the decimal by the number:  \n   $ 0.15 \\times 80 = 12 $\n\n**So, 15% of 80 is 12.**",
+      "tokens": 94,
+      "seconds": 19.58,
+      "finish": "stop"
+     }
+    ]
+   },
+   "percent:tutor": {
+    "messages": [
+     {
+      "role": "system",
+      "content": "You are a tutor. Never give the answer. Ask the student one question at a time that helps them find the next step themselves."
+     },
+     {
+      "role": "user",
+      "content": "What is 15% of 80?"
+     }
+    ],
+    "max_tokens": 200,
+    "answers": [
+     {
+      "seed": 0,
+      "text": "To find 15% of 80, you can convert 15% to a decimal (which is 0.15) and then multiply it by 80.  \n\nSo, $ 0.15 \\times 80 = 12 $.  \n\nTherefore, 15% of 80 is **12**.",
+      "tokens": 75,
+      "seconds": 16.29,
+      "finish": "stop"
+     },
+     {
+      "seed": 1,
+      "text": "What is 15% of 80?",
+      "tokens": 11,
+      "seconds": 2.83,
+      "finish": "stop"
+     },
+     {
+      "seed": 2,
+      "text": "To find 15% of 80, you can convert the percentage to a decimal (15% = 0.15) and multiply it by 80:\n\n$$ 0.15 \\times 80 = 12 $$\n\nSo, 15% of 80 is **12**.",
+      "tokens": 71,
+      "seconds": 15.85,
+      "finish": "stop"
+     },
+     {
+      "seed": 3,
+      "text": "What is 15% of 80?",
+      "tokens": 11,
+      "seconds": 3.03,
+      "finish": "stop"
+     },
+     {
+      "seed": 4,
+      "text": "What is 15% of 80?",
+      "tokens": 11,
+      "seconds": 2.96,
+      "finish": "stop"
+     },
+     {
+      "seed": 5,
+      "text": "To find 15% of 80, you can convert the percentage to a decimal by dividing by 100, then multiply by 80:\n\n15% = 0.15  \n0.15 × 80 = 12\n\nSo, 15% of 80 is **12**.",
+      "tokens": 73,
+      "seconds": 16.4,
+      "finish": "stop"
+     },
+     {
+      "seed": 6,
+      "text": "What is 15% of 80?",
+      "tokens": 11,
+      "seconds": 3.02,
+      "finish": "stop"
+     },
+     {
+      "seed": 7,
+      "text": "What is 15% of 80?",
+      "tokens": 11,
+      "seconds": 3.22,
+      "finish": "stop"
+     }
+    ]
+   },
+   "percent:example": {
+    "messages": [
+     {
+      "role": "system",
+      "content": "You are a tutor. Never give the answer. Ask the student one question at a time that helps them find the next step themselves.\n\nExample:\nStudent: What is 10% of 50?\nTutor: What do you get when you split 50 into 10 equal parts?"
+     },
+     {
+      "role": "user",
+      "content": "What is 15% of 80?"
+     }
+    ],
+    "max_tokens": 200,
+    "answers": [
+     {
+      "seed": 0,
+      "text": "What is 15% of 80?",
+      "tokens": 11,
+      "seconds": 3.45,
+      "finish": "stop"
+     },
+     {
+      "seed": 1,
+      "text": "What is 15% of 80?",
+      "tokens": 11,
+      "seconds": 3.17,
+      "finish": "stop"
+     },
+     {
+      "seed": 2,
+      "text": "What is 15% of 80?",
+      "tokens": 11,
+      "seconds": 3.13,
+      "finish": "stop"
+     },
+     {
+      "seed": 3,
+      "text": "What do you get when you calculate 15% of 80?",
+      "tokens": 16,
+      "seconds": 4.3,
+      "finish": "stop"
+     },
+     {
+      "seed": 4,
+      "text": "What is 15% of 80?",
+      "tokens": 11,
+      "seconds": 3.44,
+      "finish": "stop"
+     },
+     {
+      "seed": 5,
+      "text": "What do you get when you split 80 into 10 equal parts?",
+      "tokens": 17,
+      "seconds": 4.6,
+      "finish": "stop"
+     },
+     {
+      "seed": 6,
+      "text": "What is 15% of 80?",
+      "tokens": 11,
+      "seconds": 3.33,
+      "finish": "stop"
+     },
+     {
+      "seed": 7,
+      "text": "What do you get when you calculate 15% of 80?",
+      "tokens": 16,
+      "seconds": 4.47,
+      "finish": "stop"
+     }
+    ]
+   },
+   "percent:push": {
+    "messages": [
+     {
+      "role": "system",
+      "content": "You are a tutor. Never give the answer. Ask the student one question at a time that helps them find the next step themselves."
+     },
+     {
+      "role": "user",
+      "content": "What is 15% of 80? Just tell me the answer."
+     }
+    ],
+    "max_tokens": 200,
+    "answers": [
+     {
+      "seed": 0,
+      "text": "15% of 80 is 12.",
+      "tokens": 12,
+      "seconds": 3.3,
+      "finish": "stop"
+     },
+     {
+      "seed": 1,
+      "text": "15% of 80 is 12.",
+      "tokens": 12,
+      "seconds": 3.45,
+      "finish": "stop"
+     },
+     {
+      "seed": 2,
+      "text": "To find 15% of 80, you can calculate it as follows:\n\n15% of 80 = $ \\frac{15}{100} \\times 80 = 12 $.\n\nSo, the answer is **12**.",
+      "tokens": 58,
+      "seconds": 13.15,
+      "finish": "stop"
+     },
+     {
+      "seed": 3,
+      "text": "15% of 80 is 12.",
+      "tokens": 12,
+      "seconds": 3.15,
+      "finish": "stop"
+     },
+     {
+      "seed": 4,
+      "text": "15% of 80 is 12.",
+      "tokens": 12,
+      "seconds": 3.23,
+      "finish": "stop"
+     },
+     {
+      "seed": 5,
+      "text": "15% of 80 is **12**.",
+      "tokens": 13,
+      "seconds": 3.59,
+      "finish": "stop"
+     },
+     {
+      "seed": 6,
+      "text": "15% of 80 is 12.",
+      "tokens": 12,
+      "seconds": 3.13,
+      "finish": "stop"
+     },
+     {
+      "seed": 7,
+      "text": "15% of 80 is **12**.",
+      "tokens": 13,
+      "seconds": 3.23,
+      "finish": "stop"
+     }
+    ]
+   },
+   "minutes:plain": {
+    "messages": [
+     {
+      "role": "user",
+      "content": "How many minutes are there in 3.5 hours?"
+     }
+    ],
+    "max_tokens": 200,
+    "answers": [
+     {
+      "seed": 0,
+      "text": "To convert **3.5 hours** to **minutes**, we multiply by **60** (since there are 60 minutes in an hour):\n\n$$\n3.5 \\times 60 = 210\n$$\n\n**Therefore, there are 210 minutes in 3.5 hours.**",
+      "tokens": 67,
+      "seconds": 14.16,
+      "finish": "stop"
+     },
+     {
+      "seed": 1,
+      "text": "To convert 3.5 hours to minutes:\n\n- **1 hour = 60 minutes**\n- So, $ 3.5 \\, \\text{hours} \\times 60 = 210 \\, \\text{minutes} $\n\n**Answer: 210 minutes**.",
+      "tokens": 63,
+      "seconds": 13.79,
+      "finish": "stop"
+     },
+     {
+      "seed": 2,
+      "text": "To convert **3.5 hours** to minutes:\n\n1 hour = 60 minutes  \nSo,  \n3.5 hours × 60 minutes/hour = **210 minutes**\n\n**Answer: 210 minutes**.",
+      "tokens": 50,
+      "seconds": 11.4,
+      "finish": "stop"
+     },
+     {
+      "seed": 3,
+      "text": "To convert **3.5 hours** to minutes:\n\n1 hour = 60 minutes  \nSo,  \n3.5 hours × 60 minutes/hour = **210 minutes**\n\n**Answer:** 210 minutes.",
+      "tokens": 49,
+      "seconds": 10.6,
+      "finish": "stop"
+     },
+     {
+      "seed": 4,
+      "text": "To convert **3.5 hours** to **minutes**, we multiply by 60 (since there are 60 minutes in an hour):\n\n$$\n3.5 \\times 60 = 210 \\text{ minutes}\n$$\n\n**Answer:** There are **210 minutes** in 3.5 hours.",
+      "tokens": 70,
+      "seconds": 15.33,
+      "finish": "stop"
+     },
+     {
+      "seed": 5,
+      "text": "To find how many minutes are in 3.5 hours, we multiply the number of hours by 60 minutes per hour:\n\n$$\n3.5 \\, \\text{hours} \\times 60 \\, \\text{minutes/hour} = 210 \\, \\text{minutes}\n$$\n\nSo, there are **210 minutes** in 3.5 hours.",
+      "tokens": 84,
+      "seconds": 17.98,
+      "finish": "stop"
+     },
+     {
+      "seed": 6,
+      "text": "To convert 3.5 hours to minutes, we multiply by 60 (since there are 60 minutes in an hour):\n\n$$\n3.5 \\text{ hours} \\times 60 = 210 \\text{ minutes}\n$$\n\n**Answer:** 210 minutes.",
+      "tokens": 64,
+      "seconds": 14.27,
+      "finish": "stop"
+     },
+     {
+      "seed": 7,
+      "text": "To convert 3.5 hours into minutes, we multiply by 60 (since there are 60 minutes in an hour):\n\n$$\n3.5 \\, \\text{hours} \\times 60 = 210 \\, \\text{minutes}\n$$\n\n**Answer:** There are 210 minutes in 3.5 hours.",
+      "tokens": 76,
+      "seconds": 16.53,
+      "finish": "stop"
+     }
+    ]
+   },
+   "minutes:tutor": {
+    "messages": [
+     {
+      "role": "system",
+      "content": "You are a tutor. Never give the answer. Ask the student one question at a time that helps them find the next step themselves."
+     },
+     {
+      "role": "user",
+      "content": "How many minutes are there in 3.5 hours?"
+     }
+    ],
+    "max_tokens": 200,
+    "answers": [
+     {
+      "seed": 0,
+      "text": "To find how many minutes are in 3.5 hours, you can convert hours to minutes by multiplying by 60. \n\n$$ 3.5 \\text{ hours} \\times 60 \\text{ minutes/hour} = 210 \\text{ minutes} $$\n\nSo, there are **210 minutes** in 3.5 hours.",
+      "tokens": 78,
+      "seconds": 17.09,
+      "finish": "stop"
+     },
+     {
+      "seed": 1,
+      "text": "To find out how many minutes are in 3.5 hours, multiply 3.5 by 60:\n\n$$\n3.5 \\times 60 = 210\n$$\n\nSo, there are **210 minutes** in 3.5 hours.",
+      "tokens": 59,
+      "seconds": 13.16,
+      "finish": "stop"
+     },
+     {
+      "seed": 2,
+      "text": "To find how many minutes are in 3.5 hours, you can multiply 3.5 by 60 (since there are 60 minutes in an hour):\n\n$$\n3.5 \\times 60 = 210\n$$\n\nSo, there are **210 minutes** in 3.5 hours.",
+      "tokens": 71,
+      "seconds": 16.16,
+      "finish": "stop"
+     },
+     {
+      "seed": 3,
+      "text": "To find how many minutes are in 3.5 hours, multiply the number of hours by 60 minutes/hour:\n\n$$\n3.5 \\times 60 = 210\n$$\n\nSo, there are **210 minutes** in 3.5 hours.",
+      "tokens": 61,
+      "seconds": 13.5,
+      "finish": "stop"
+     },
+     {
+      "seed": 4,
+      "text": "To find the number of minutes in 3.5 hours, multiply 3.5 by 60:\n\n$$\n3.5 \\times 60 = 210\n$$\n\nSo, there are **210 minutes** in 3.5 hours.",
+      "tokens": 58,
+      "seconds": 12.57,
+      "finish": "stop"
+     },
+     {
+      "seed": 5,
+      "text": "To find how many minutes are in 3.5 hours, you multiply 3.5 by 60 (since there are 60 minutes in an hour):\n\n$$\n3.5 \\times 60 = 210\n$$\n\nSo, there are **210 minutes** in 3.5 hours.",
+      "tokens": 70,
+      "seconds": 15.48,
+      "finish": "stop"
+     },
+     {
+      "seed": 6,
+      "text": "To find the number of minutes in 3.5 hours, you multiply 3.5 by 60 (since there are 60 minutes in an hour):\n\n$$\n3.5 \\times 60 = 210\n$$\n\nSo, there are **210 minutes** in 3.5 hours.",
+      "tokens": 70,
+      "seconds": 16.02,
+      "finish": "stop"
+     },
+     {
+      "seed": 7,
+      "text": "To find the number of minutes in 3.5 hours, you can multiply 3.5 hours by 60 minutes per hour:\n\n$$\n3.5 \\times 60 = 210\n$$\n\nSo, there are **210 minutes** in 3.5 hours.",
+      "tokens": 64,
+      "seconds": 14.3,
+      "finish": "stop"
+     }
+    ]
+   },
+   "minutes:example": {
+    "messages": [
+     {
+      "role": "system",
+      "content": "You are a tutor. Never give the answer. Ask the student one question at a time that helps them find the next step themselves.\n\nExample:\nStudent: What is 10% of 50?\nTutor: What do you get when you split 50 into 10 equal parts?"
+     },
+     {
+      "role": "user",
+      "content": "How many minutes are there in 3.5 hours?"
+     }
+    ],
+    "max_tokens": 200,
+    "answers": [
+     {
+      "seed": 0,
+      "text": "How many minutes are there in 3.5 hours?",
+      "tokens": 12,
+      "seconds": 3.28,
+      "finish": "stop"
+     },
+     {
+      "seed": 1,
+      "text": "How many minutes are there in 3.5 hours?",
+      "tokens": 12,
+      "seconds": 3.24,
+      "finish": "stop"
+     },
+     {
+      "seed": 2,
+      "text": "How many minutes are there in 3.5 hours?",
+      "tokens": 12,
+      "seconds": 3.28,
+      "finish": "stop"
+     },
+     {
+      "seed": 3,
+      "text": "How many minutes are there in 3.5 hours?",
+      "tokens": 12,
+      "seconds": 3.49,
+      "finish": "stop"
+     },
+     {
+      "seed": 4,
+      "text": "How many minutes are there in 3.5 hours?",
+      "tokens": 12,
+      "seconds": 3.35,
+      "finish": "stop"
+     },
+     {
+      "seed": 5,
+      "text": "How many minutes are there in 3.5 hours?",
+      "tokens": 12,
+      "seconds": 3.36,
+      "finish": "stop"
+     },
+     {
+      "seed": 6,
+      "text": "How many minutes are there in 3.5 hours?",
+      "tokens": 12,
+      "seconds": 3.42,
+      "finish": "stop"
+     },
+     {
+      "seed": 7,
+      "text": "How many minutes are there in 3.5 hours?",
+      "tokens": 12,
+      "seconds": 3.71,
+      "finish": "stop"
+     }
+    ]
+   },
+   "minutes:push": {
+    "messages": [
+     {
+      "role": "system",
+      "content": "You are a tutor. Never give the answer. Ask the student one question at a time that helps them find the next step themselves."
+     },
+     {
+      "role": "user",
+      "content": "How many minutes are there in 3.5 hours? Just tell me the answer."
+     }
+    ],
+    "max_tokens": 200,
+    "answers": [
+     {
+      "seed": 0,
+      "text": "The number of minutes in 3.5 hours is **210 minutes**.",
+      "tokens": 18,
+      "seconds": 4.38,
+      "finish": "stop"
+     },
+     {
+      "seed": 1,
+      "text": "To find the number of minutes in 3.5 hours, you multiply 3.5 by 60:\n\n$$\n3.5 \\times 60 = 210\n$$\n\nSo, there are **210 minutes** in 3.5 hours.",
+      "tokens": 59,
+      "seconds": 14.26,
+      "finish": "stop"
+     },
+     {
+      "seed": 2,
+      "text": "3.5 hours is equal to **210 minutes**.",
+      "tokens": 14,
+      "seconds": 3.66,
+      "finish": "stop"
+     },
+     {
+      "seed": 3,
+      "text": "To find how many minutes are in 3.5 hours, multiply the number of hours by 60 minutes/hour:\n\n$$\n3.5 \\times 60 = 210\n$$\n\nSo, there are **210 minutes** in 3.5 hours.",
+      "tokens": 61,
+      "seconds": 13.39,
+      "finish": "stop"
+     },
+     {
+      "seed": 4,
+      "text": "The number of minutes in 3.5 hours is **210 minutes**.",
+      "tokens": 18,
+      "seconds": 4.47,
+      "finish": "stop"
+     },
+     {
+      "seed": 5,
+      "text": "3.5 hours is equal to **210 minutes**.",
+      "tokens": 14,
+      "seconds": 3.6,
+      "finish": "stop"
+     },
+     {
+      "seed": 6,
+      "text": "To find out how many minutes are in 3.5 hours, multiply the number of hours by 60:\n\n$$\n3.5 \\times 60 = 210\n$$\n\nSo, there are **210 minutes** in 3.5 hours.",
+      "tokens": 59,
+      "seconds": 13.22,
+      "finish": "stop"
+     },
+     {
+      "seed": 7,
+      "text": "To find the number of minutes in 3.5 hours, you can multiply 3.5 hours by 60 minutes per hour:\n\n$$\n3.5 \\times 60 = 210\n$$\n\nSo, there are **210 minutes** in 3.5 hours.",
+      "tokens": 64,
+      "seconds": 14.55,
+      "finish": "stop"
+     }
+    ]
+   },
+   "sale:plain": {
+    "messages": [
+     {
+      "role": "user",
+      "content": "A shirt costs 40 euros and is 25% off. What does it cost now?"
+     }
+    ],
+    "max_tokens": 200,
+    "answers": [
+     {
+      "seed": 0,
+      "text": "To find the discounted price of the shirt:\n\n1. Calculate 25% of 40 euros:\n   $$\n   25\\% \\times 40 = 0.25 \\times 40 = 10 \\text{ euros}\n   $$\n\n2. Subtract this from the original price:\n   $$\n   40 - 10 = 30 \\text{ euros}\n   $$\n\nSo, the shirt now costs **30 euros**.",
+      "tokens": 103,
+      "seconds": 22.79,
+      "finish": "stop"
+     },
+     {
+      "seed": 1,
+      "text": "To find the final price of the shirt after a 25% discount:\n\n1. Calculate the discount amount:  \n   $ 25\\% \\text{ of } 40 = 0.25 \\times 40 = 10 $\n\n2. Subtract the discount from the original price:  \n   $ 40 - 10 = 30 $\n\nSo, the shirt now costs **30 euros**.",
+      "tokens": 92,
+      "seconds": 19.91,
+      "finish": "stop"
+     },
+     {
+      "seed": 2,
+      "text": "To find the final price of the shirt after a 25% discount:\n\n1. **Calculate the discount amount**:\n   $$\n   25\\% \\text{ of } 40 \\text{ euros} = 0.25 \\times 40 = 10 \\text{ euros}\n   $$\n\n2. **Subtract the discount from the original price**:\n   $$\n   40 - 10 = 30 \\text{ euros}\n   $$\n\n**Final price: 30 euros**.",
+      "tokens": 116,
+      "seconds": 25.63,
+      "finish": "stop"
+     },
+     {
+      "seed": 3,
+      "text": "To find the final cost of the shirt after a 25% discount:\n\n1. **Calculate the discount amount**:\n   $$\n   25\\% \\text{ of } 40 = 0.25 \\times 40 = 10 \\text{ euros}\n   $$\n\n2. **Subtract the discount from the original price**:\n   $$\n   40 - 10 = 30 \\text{ euros}\n   $$\n\nSo, the shirt now costs **30 euros**.",
+      "tokens": 113,
+      "seconds": 24.21,
+      "finish": "stop"
+     },
+     {
+      "seed": 4,
+      "text": "To find the discounted price of the shirt:\n\n1. Calculate 25% of 40 euros:\n   $$\n   25\\% \\times 40 = 0.25 \\times 40 = 10 \\text{ euros}\n   $$\n\n2. Subtract the discount from the original price:\n   $$\n   40 - 10 = 30 \\text{ euros}\n   $$\n\n**So, the shirt now costs 30 euros.**",
+      "tokens": 105,
+      "seconds": 22.84,
+      "finish": "stop"
+     },
+     {
+      "seed": 5,
+      "text": "To find the final price of the shirt after a 25% discount:\n\n1. **Calculate the discount amount**:\n   $$\n   25\\% \\text{ of } 40 \\text{ euros} = 0.25 \\times 40 = 10 \\text{ euros}\n   $$\n\n2. **Subtract the discount from the original price**:\n   $$\n   40 - 10 = 30 \\text{ euros}\n   $$\n\n**So, the shirt now costs 30 euros.**",
+      "tokens": 119,
+      "seconds": 26.67,
+      "finish": "stop"
+     },
+     {
+      "seed": 6,
+      "text": "To find the final price of the shirt after a 25% discount:\n\n1. Calculate 25% of the original price:  \n   $ 25\\% \\times 40 = 0.25 \\times 40 = 10 $ euros.\n\n2. Subtract this amount from the original price:  \n   $ 40 - 10 = 30 $ euros.\n\n**Therefore, the shirt now costs 30 euros.**",
+      "tokens": 99,
+      "seconds": 20.95,
+      "finish": "stop"
+     },
+     {
+      "seed": 7,
+      "text": "To find the final price of the shirt after a 25% discount:\n\n1. Calculate 25% of 40 euros:\n   $$\n   25\\% \\times 40 = 0.25 \\times 40 = 10 \\text{ euros}\n   $$\n\n2. Subtract the discount from the original price:\n   $$\n   40 - 10 = 30 \\text{ euros}\n   $$\n\n**Final answer: 30 euros**.",
+      "tokens": 109,
+      "seconds": 23.88,
+      "finish": "stop"
+     }
+    ]
+   },
+   "sale:tutor": {
+    "messages": [
+     {
+      "role": "system",
+      "content": "You are a tutor. Never give the answer. Ask the student one question at a time that helps them find the next step themselves."
+     },
+     {
+      "role": "user",
+      "content": "A shirt costs 40 euros and is 25% off. What does it cost now?"
+     }
+    ],
+    "max_tokens": 200,
+    "answers": [
+     {
+      "seed": 0,
+      "text": "What is the final price of the shirt after applying the 25% discount?",
+      "tokens": 17,
+      "seconds": 4.39,
+      "finish": "stop"
+     },
+     {
+      "seed": 1,
+      "text": "The original price is 40 euros, and there is a 25% discount. To find the final price, you first calculate the discount amount and then subtract it from the original price. \n\nThe discount amount is:\n$$ 40 \\times 0.25 = 10 $$\n\nSubtracting the discount from the original price:\n$$ 40 - 10 = 30 $$\n\nSo, the final price is **30 euros**.",
+      "tokens": 99,
+      "seconds": 22.8,
+      "finish": "stop"
+     },
+     {
+      "seed": 2,
+      "text": "To find the discounted price, you can calculate 25% of 40 euros and subtract it from 40 euros:\n\n**25% of 40 euros = 0.25 × 40 = 10 euros**\n\n**Discounted price = 40 euros - 10 euros = 30 euros**\n\nSo, the shirt now costs **30 euros**.",
+      "tokens": 84,
+      "seconds": 20.81,
+      "finish": "stop"
+     },
+     {
+      "seed": 3,
+      "text": "The original price is 40 euros, and there is a 25% discount. To find the discounted price, you first calculate 25% of 40 euros, then subtract that amount from the original price. \n\n**Step-by-step:**\n1. Calculate 25% of 40 euros:\n   $$\n   0.25 \\times 40 = 10\n   $$\n2. Subtract the discount from the original price:\n   $$\n   40 - 10 = 30\n   $$\n\nSo, the discounted price is **30 euros**.",
+      "tokens": 130,
+      "seconds": 29.68,
+      "finish": "stop"
+     },
+     {
+      "seed": 4,
+      "text": "What is the final price of the shirt after applying a 25% discount?",
+      "tokens": 17,
+      "seconds": 4.26,
+      "finish": "stop"
+     },
+     {
+      "seed": 5,
+      "text": "To find the final price of the shirt after a 25% discount, you can calculate the discount amount first and then subtract it from the original price.\n\n**Original price:** 40 euros  \n**Discount:** 25% of 40 euros = 0.25 × 40 = 10 euros  \n**Final price:** 40 - 10 = 30 euros\n\nSo, the shirt now costs **30 euros**.",
+      "tokens": 98,
+      "seconds": 23.18,
+      "finish": "stop"
+     },
+     {
+      "seed": 6,
+      "text": "The original price is 40 euros, and there is a 25% discount. To find the final price, you can calculate 25% of 40 euros and subtract it from the original price. \n\nFinal price = 40 euros × (1 - 0.25) = 40 × 0.75 = 30 euros.\n\nSo, the shirt now costs 30 euros.",
+      "tokens": 90,
+      "seconds": 20.24,
+      "finish": "stop"
+     },
+     {
+      "seed": 7,
+      "text": "The original price of the shirt is 40 euros. Since it is 25% off, we need to calculate 25% of 40 euros and subtract it from the original price. \n\n25% of 40 euros is 0.25 × 40 = 10 euros. \n\nSo, the final price of the shirt is 40 - 10 = 30 euros. \n\nThe answer is 30 euros.",
+      "tokens": 99,
+      "seconds": 22.53,
+      "finish": "stop"
+     }
+    ]
+   },
+   "sale:example": {
+    "messages": [
+     {
+      "role": "system",
+      "content": "You are a tutor. Never give the answer. Ask the student one question at a time that helps them find the next step themselves.\n\nExample:\nStudent: What is 10% of 50?\nTutor: What do you get when you split 50 into 10 equal parts?"
+     },
+     {
+      "role": "user",
+      "content": "A shirt costs 40 euros and is 25% off. What does it cost now?"
+     }
+    ],
+    "max_tokens": 200,
+    "answers": [
+     {
+      "seed": 0,
+      "text": "What is the final price of the shirt after applying the 25% discount?",
+      "tokens": 17,
+      "seconds": 4.82,
+      "finish": "stop"
+     },
+     {
+      "seed": 1,
+      "text": "What is the final price of the shirt after applying the 25% discount?",
+      "tokens": 17,
+      "seconds": 4.68,
+      "finish": "stop"
+     },
+     {
+      "seed": 2,
+      "text": "To find the final price of the shirt after a 25% discount, you first calculate 25% of 40 euros and subtract that from 40. \n\n**Step-by-step:**  \n- 25% of 40 = 0.25 × 40 = 10  \n- Final price = 40 - 10 = 30  \n\nSo, the shirt now costs **30 euros**.",
+      "tokens": 95,
+      "seconds": 22.11,
+      "finish": "stop"
+     },
+     {
+      "seed": 3,
+      "text": "What is the final price of the shirt after applying the 25% discount?",
+      "tokens": 17,
+      "seconds": 4.87,
+      "finish": "stop"
+     },
+     {
+      "seed": 4,
+      "text": "What is the final price of the shirt after applying the 25% discount?",
+      "tokens": 17,
+      "seconds": 5.08,
+      "finish": "stop"
+     },
+     {
+      "seed": 5,
+      "text": "What is the final price of the shirt after applying the 25% discount?",
+      "tokens": 17,
+      "seconds": 4.96,
+      "finish": "stop"
+     },
+     {
+      "seed": 6,
+      "text": "What is the final price of the shirt after applying the 25% discount?",
+      "tokens": 17,
+      "seconds": 5.02,
+      "finish": "stop"
+     },
+     {
+      "seed": 7,
+      "text": "What is the final price of the shirt after applying the 25% discount?",
+      "tokens": 17,
+      "seconds": 5.43,
+      "finish": "stop"
+     }
+    ]
+   },
+   "sale:push": {
+    "messages": [
+     {
+      "role": "system",
+      "content": "You are a tutor. Never give the answer. Ask the student one question at a time that helps them find the next step themselves."
+     },
+     {
+      "role": "user",
+      "content": "A shirt costs 40 euros and is 25% off. What does it cost now? Just tell me the answer."
+     }
+    ],
+    "max_tokens": 200,
+    "answers": [
+     {
+      "seed": 0,
+      "text": "The original cost is 40 euros, and there is a 25% discount. To find the final price, calculate 25% of 40 euros and subtract it from the original price. \n\nFinal price = 40 euros × (1 - 0.25) = 40 × 0.75 = 30 euros. \n\nThe answer is 30 euros.",
+      "tokens": 86,
+      "seconds": 20.79,
+      "finish": "stop"
+     },
+     {
+      "seed": 1,
+      "text": "The original price is 40 euros, and there is a 25% discount. To find the final price, you first calculate the discount amount and then subtract it from the original price.\n\n**Discount amount = 40 € × 25% = 10 €**\n\n**Final price = 40 € - 10 € = 30 €**\n\nSo, the shirt now costs **30 euros**.",
+      "tokens": 90,
+      "seconds": 20.91,
+      "finish": "stop"
+     },
+     {
+      "seed": 2,
+      "text": "The original cost is 40 euros, and there is a 25% discount. To find the discounted price, we calculate:\n\n$$\n\\text{Discounted Price} = 40 \\times (1 - 0.25) = 40 \\times 0.75 = 30 \\text{ euros}\n$$\n\nSo, the final price is **30 euros**.",
+      "tokens": 86,
+      "seconds": 20.02,
+      "finish": "stop"
+     },
+     {
+      "seed": 3,
+      "text": "The original price is 40 euros, and there is a 25% discount. To find the discounted price:\n\n1. Calculate 25% of 40 euros:\n   $$\n   0.25 \\times 40 = 10 \\text{ euros}\n   $$\n\n2. Subtract the discount from the original price:\n   $$\n   40 - 10 = 30 \\text{ euros}\n   $$\n\nSo, the shirt now costs **30 euros**.",
+      "tokens": 109,
+      "seconds": 25.77,
+      "finish": "stop"
+     },
+     {
+      "seed": 4,
+      "text": "The original price of the shirt is 40 euros. Since it is 25% off, you need to calculate 25% of 40 euros first, then subtract that amount from the original price.\n\n**Step-by-step:**\n\n1. Calculate 25% of 40 euros:\n   $$\n   25\\% \\times 40 = 0.25 \\times 40 = 10 \\text{ euros}\n   $$\n\n2. Subtract the discount from the original price:\n   $$\n   40 - 10 = 30 \\text{ euros}\n   $$\n\nSo, the shirt now costs **30 euros**.",
+      "tokens": 146,
+      "seconds": 36.24,
+      "finish": "stop"
+     },
+     {
+      "seed": 5,
+      "text": "The original price is 40 euros, and there is a 25% discount. To find the discounted price, we calculate 25% of 40 euros and subtract it from 40 euros.\n\n**Answer:** The shirt now costs 40 euros - (25% of 40 euros) = 30 euros.",
+      "tokens": 73,
+      "seconds": 18.82,
+      "finish": "stop"
+     },
+     {
+      "seed": 6,
+      "text": "The original price is 40 euros, and there is a 25% discount. To find the final price, you can calculate 25% of 40 euros and subtract it from the original price. \n\nThe final price is **30 euros**.",
+      "tokens": 56,
+      "seconds": 12.97,
+      "finish": "stop"
+     },
+     {
+      "seed": 7,
+      "text": "The original price is 40 euros. Since it's 25% off, you save 25% of 40 euros. \n\n25% of 40 euros is $0.25 \\times 40 = 10$ euros. \n\nSo, the final price is $40 - 10 = 30$ euros. \n\n**Answer:** The shirt now costs 30 euros.",
+      "tokens": 91,
+      "seconds": 20.89,
+      "finish": "stop"
+     }
+    ]
+   }
+  },
+  "build-make-without-code": {
+   "short": {
+    "messages": [
+     {
+      "role": "user",
+      "content": "Write a Python function days_in_month(month, year) that returns how many days a month has. Reply with the code only."
+     }
+    ],
+    "max_tokens": 300,
+    "answers": [
+     {
+      "seed": 0,
+      "text": "```python\ndef days_in_month(month, year):\n    # List of days in a month (January to December)\n    months_days = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]\n    return months_days[month - 1]\n```",
+      "tokens": 87,
+      "seconds": 19.63,
+      "finish": "stop"
+     },
+     {
+      "seed": 1,
+      "text": "```python\ndef days_in_month(month, year):\n    # List of days in each month (28, 29, 31, 30, 31, 30, 31, 31, 30, 31, 31, 30, 31)\n    return [28, 29, 31, 30, 31, 30, 31, 31, 30, 31, 31, 30, 31][month - 1]\n```",
+      "tokens": 131,
+      "seconds": 29.11,
+      "finish": "stop"
+     },
+     {
+      "seed": 2,
+      "text": "```python\ndef days_in_month(month, year):\n    return 31  # This is a placeholder; actual implementation depends on the month\n```",
+      "tokens": 31,
+      "seconds": 7.51,
+      "finish": "stop"
+     },
+     {
+      "seed": 3,
+      "text": "```python\ndef days_in_month(month, year):\n    months = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]\n    if month == 2 and year % 4 == 0:\n        months[1] = 29\n    return months[month - 1]\n```",
+      "tokens": 97,
+      "seconds": 20.78,
+      "finish": "stop"
+     },
+     {
+      "seed": 4,
+      "text": "```python\ndef days_in_month(month, year):\n    # List of days in a month (28-31, 31-30, 31-31, 31-28, 29-29, etc.)\n    # Note: This is a simplified version and may not cover all months correctly\n    # (Actual implementation would use a list of days per month)\n    return 31  # Default value for a month with 31 days\n```",
+      "tokens": 106,
+      "seconds": 24.2,
+      "finish": "stop"
+     },
+     {
+      "seed": 5,
+      "text": "```python\ndef days_in_month(month, year):\n    return 31  # This is a placeholder. Actual implementation depends on the month and year.\n```",
+      "tokens": 33,
+      "seconds": 7.23,
+      "finish": "stop"
+     },
+     {
+      "seed": 6,
+      "text": "```python\ndef days_in_month(month, year):\n    return 31  # Assuming January has 31 days, and other months follow a similar pattern\n```",
+      "tokens": 35,
+      "seconds": 8.25,
+      "finish": "stop"
+     },
+     {
+      "seed": 7,
+      "text": "```python\ndef days_in_month(month, year):\n    # List of days in a month, assuming it's a valid month\n    days_in_month = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]\n    return days_in_month[month - 1]\n```",
+      "tokens": 92,
+      "seconds": 20.33,
+      "finish": "stop"
+     }
+    ]
+   },
+   "leap": {
+    "messages": [
+     {
+      "role": "user",
+      "content": "Write a Python function days_in_month(month, year) that returns how many days a month has, also for February in leap years. Reply with the code only."
+     }
+    ],
+    "max_tokens": 300,
+    "answers": [
+     {
+      "seed": 0,
+      "text": "```python\ndef days_in_month(month, year):\n    if month < 1 or month > 12:\n        return 0  # Invalid month\n\n    # Leap year check: divisible by 4, but not by 100 unless also by 400\n    if (year % 4 != 0) or (year % 100 == 0 and year % 400 == 0):\n        leap_year = True\n    else:\n        leap_year = False\n\n    # List of days in each month (with leap year flag)\n    month_days = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]\n    if leap_year:\n        month_days[1] = 29\n\n    return month_days[month - 1]\n```",
+      "tokens": 200,
+      "seconds": 45.52,
+      "finish": "stop"
+     },
+     {
+      "seed": 1,
+      "text": "```python\ndef days_in_month(month, year):\n    if month == 2:  # February\n        if is_leap(year):\n            return 29\n        else:\n            return 28\n    else:\n        return 30  # Assuming 30 days in non-leap, 31 in leap\n\ndef is_leap(year):\n    if year % 4 != 0:\n        return False\n    elif year % 100 != 0:\n        return True\n    else:\n        return year % 400 == 0\n```",
+      "tokens": 122,
+      "seconds": 27.23,
+      "finish": "stop"
+     },
+     {
+      "seed": 2,
+      "text": "Here's the Python function that returns the number of days in a given month, including February for leap years:\n\n```python\ndef days_in_month(month, year):\n    if month == 2:  # February\n        if is_leap(year):\n            return 29\n        else:\n            return 28\n    else:\n        # Days in a non-leap year\n        return 31  # Months have 31 days except February\n\ndef is_leap(year):\n    if year % 4 != 0:\n        return False\n    elif year % 100 != 0:\n        return True\n    else:\n        return year % 400 == 0\n```\n\n### Example usage:\n```python\nprint(days_in_month(2, 2024))  # Output: 29 (leap year)\nprint(days_in_month(2, 2020))  # Output: 28 (non-leap year)\nprint(days_in_month(4, 2023))  # Output: 30\nprint(days_in_month(5, 2023))  # Output: 31\n```",
+      "tokens": 249,
+      "seconds": 59.6,
+      "finish": "stop"
+     },
+     {
+      "seed": 3,
+      "text": "```python\ndef days_in_month(month, year):\n    if month == 2:\n        # Check if it's a leap year\n        if year % 4 == 0 and (year % 100 != 0 or year % 400 == 0):\n            return 29\n        else:\n            return 28\n    else:\n        # Days in the month (1 to 12)\n        return 31  # January has 31 days, others have 30, 31, etc.\n\n# Example usage:\nprint(days_in_month(2, 2020))  # Output: 29 (leap year)\nprint(days_in_month(2, 2021))  # Output: 28\nprint(days_in_month(3, 2021))  # Output: 31\n```",
+      "tokens": 188,
+      "seconds": 43.1,
+      "finish": "stop"
+     },
+     {
+      "seed": 4,
+      "text": "```python\ndef days_in_month(month, year):\n    if month < 1 or month > 12:\n        return 0  # Invalid month\n\n    if month == 2:  # February\n        if is_leap_year(year):\n            return 29\n        else:\n            return 28\n    else:\n        # Use a fixed value for other months\n        return 31  # Months 1-6 have 31 days, 7-10 have 31, 11-12 have 30 or 31\n\ndef is_leap_year(year):\n    if year % 4 != 0:\n        return False\n    elif year % 100 != 0:\n        return True\n    else:\n        return year % 400 == 0\n```\n\nThis function returns the number of days in a given month, returning 0 if the month is invalid. For February in a leap year, it returns 29 days. Other months return 31 days.",
+      "tokens": 220,
+      "seconds": 50.3,
+      "finish": "stop"
+     },
+     {
+      "seed": 5,
+      "text": "Here is a Python function that returns the number of days in a given month, including February for leap years:\n\n```python\ndef days_in_month(month, year):\n    if month == 1 or month == 3 or month == 5 or month == 7:\n        return 31\n    elif month == 2:\n        if year % 4 == 0 and year % 100 != 0 or year % 400 == 0:\n            return 29\n        else:\n            return 28\n    else:\n        return 30\n```",
+      "tokens": 123,
+      "seconds": 27.3,
+      "finish": "stop"
+     },
+     {
+      "seed": 6,
+      "text": "```python\ndef days_in_month(month, year):\n    if month == 2:  # February\n        if is_leap_year(year):\n            return 29\n        else:\n            return 28\n    else:\n        return 31  # Assuming 31 days in most months except February\n\ndef is_leap_year(year):\n    return year % 4 == 0 and (year % 100 != 0 or year % 400 == 0)\n```",
+      "tokens": 105,
+      "seconds": 24.2,
+      "finish": "stop"
+     },
+     {
+      "seed": 7,
+      "text": "```python\ndef days_in_month(month, year):\n    if month < 1 or month > 12:\n        return 0  # Invalid month, return 0\n\n    # Check leap year condition\n    if month == 2 and year % 4 != 0:\n        return 29 if year % 400 == 0 else 28\n    elif month == 2 and year % 4 == 0 and year % 100 != 0:\n        return 29\n    elif month == 2 and year % 400 == 0:\n        return 29\n    else:\n        # Default to 30 days for months other than February\n        return 30\n```",
+      "tokens": 157,
+      "seconds": 35.85,
+      "finish": "stop"
+     }
+    ]
+   }
+  },
+  "build-coding-workflow": {
+   "vague": {
+    "messages": [
+     {
+      "role": "user",
+      "content": "Write a Python function clean_phone(text) that cleans up a phone number. Reply with the code only."
+     }
+    ],
+    "max_tokens": 500,
+    "answers": [
+     {
+      "seed": 0,
+      "text": "```python\ndef clean_phone(text):\n    # Remove all non-digit characters\n    cleaned = ''.join([char for char in text if char.isdigit()])\n    return cleaned\n```",
+      "tokens": 36,
+      "seconds": 7.95,
+      "finish": "stop"
+     },
+     {
+      "seed": 1,
+      "text": "```python\ndef clean_phone(text):\n    # Remove all non-digit characters\n    cleaned = ''.join([char for char in text if char.isdigit()])\n    \n    # Remove leading zeros\n    if len(cleaned) > 1 and cleaned[0] == '0':\n        cleaned = cleaned[1:]\n    \n    return cleaned\n```",
+      "tokens": 69,
+      "seconds": 14.91,
+      "finish": "stop"
+     },
+     {
+      "seed": 2,
+      "text": "```python\ndef clean_phone(text):\n    return text.strip()\n```",
+      "tokens": 14,
+      "seconds": 3.73,
+      "finish": "stop"
+     },
+     {
+      "seed": 3,
+      "text": "```python\ndef clean_phone(text):\n    return text.strip()\n```",
+      "tokens": 14,
+      "seconds": 3.64,
+      "finish": "stop"
+     },
+     {
+      "seed": 4,
+      "text": "```python\ndef clean_phone(text):\n    # Remove all non-digit characters\n    cleaned = ''.join([c for c in text if c.isdigit()])\n    \n    # Remove leading zeros (if any)\n    if len(cleaned) > 1 and cleaned[0] == '0':\n        cleaned = cleaned[1:]\n    \n    # Remove trailing zeros (if any)\n    if len(cleaned) > 1 and cleaned[-1] == '0':\n        cleaned = cleaned[:-1]\n    \n    return cleaned\n```",
+      "tokens": 107,
+      "seconds": 22.83,
+      "finish": "stop"
+     },
+     {
+      "seed": 5,
+      "text": "```python\ndef clean_phone(text):\n    # Remove all non-digit characters\n    cleaned = ''.join([c for c in text if c.isdigit()])\n    return cleaned\n```",
+      "tokens": 36,
+      "seconds": 8.1,
+      "finish": "stop"
+     },
+     {
+      "seed": 6,
+      "text": "```python\ndef clean_phone(text):\n    # Remove all non-digit characters\n    cleaned = ''.join([char for char in text if char.isdigit()])\n    \n    # Remove leading zeros\n    if cleaned.startswith('0'):\n        cleaned = cleaned[1:]\n    \n    # Remove trailing zeros\n    if len(cleaned) > 1 and cleaned[-1] == '0':\n        cleaned = cleaned[:-1]\n    \n    return cleaned\n```",
+      "tokens": 90,
+      "seconds": 20.57,
+      "finish": "stop"
+     },
+     {
+      "seed": 7,
+      "text": "```python\ndef clean_phone(text):\n    # Remove all non-digit characters\n    cleaned = ''.join([char for char in text if char.isdigit()])\n    \n    # Ensure the cleaned number has exactly 10 digits\n    if len(cleaned) != 10:\n        cleaned = cleaned.zfill(10)\n    \n    return cleaned\n```",
+      "tokens": 72,
+      "seconds": 16.23,
+      "finish": "stop"
+     }
+    ]
+   },
+   "spec": {
+    "messages": [
+     {
+      "role": "user",
+      "content": "Write a Python function clean_phone(text) for Dutch phone numbers. Keep only the digits; a number that starts with +31 or 0031 starts with 0 instead; return the 10 digits as a string, or an empty string when there are not 10 digits left. Examples: '06-12345678' gives '0612345678', '+31 6 1234 5678' gives '0612345678', '12345' gives ''. Reply with the code only."
+     }
+    ],
+    "max_tokens": 500,
+    "answers": [
+     {
+      "seed": 0,
+      "text": "```python\ndef clean_phone(text):\n    # Remove all non-digit characters\n    cleaned = ''.join([c for c in text if c.isdigit()])\n    \n    # Check if the cleaned string has exactly 10 digits\n    if len(cleaned) == 10:\n        return cleaned\n    else:\n        return \"\"\n```",
+      "tokens": 68,
+      "seconds": 16.52,
+      "finish": "stop"
+     },
+     {
+      "seed": 1,
+      "text": "```python\ndef clean_phone(text):\n    # Remove all non-digit characters\n    cleaned = ''.join([c for c in text if c.isdigit()])\n    \n    # Handle the +31 or 0031 cases\n    if cleaned.startswith('0031') or cleaned.startswith('+31'):\n        # Remove leading zeros if they exist (but in the example, it's only 0)\n        cleaned = cleaned[2:]  # Remove the first 0 and 3\n    elif cleaned.startswith('0031'):\n        # Remove the leading 0s\n        cleaned = cleaned[2:]  # Remove the first 0\n    elif cleaned.startswith('+31'):\n        # Remove the + and 31\n        cleaned = cleaned[2:]  # Remove + and 31\n    elif cleaned.startswith('0'):\n        # Remove the leading 0\n        cleaned = cleaned[1:]  # Remove the first 0\n\n    # Ensure there are exactly 10 digits\n    if len(cleaned) != 10:\n        cleaned = ''\n    \n    return cleaned\n```",
+      "tokens": 232,
+      "seconds": 55.35,
+      "finish": "stop"
+     },
+     {
+      "seed": 2,
+      "text": "Here's the Python function `clean_phone(text)` that cleans and formats a Dutch phone number:\n\n```python\ndef clean_phone(text):\n    # Remove all non-digit characters\n    cleaned = ''.join([c for c in text if c.isdigit()])\n    \n    # Check if there are at least 10 digits\n    if len(cleaned) >= 10:\n        return cleaned\n    else:\n        return \"\"\n```\n\n### Example Usage:\n```python\nprint(clean_phone('06-12345678'))  # Output: '0612345678'\nprint(clean_phone('+31 6 1234 5678'))  # Output: '0612345678'\nprint(clean_phone('12345'))           # Output: ''\n```",
+      "tokens": 177,
+      "seconds": 42.46,
+      "finish": "stop"
+     },
+     {
+      "seed": 3,
+      "text": "```python\ndef clean_phone(text):\n    # Remove all non-digit characters\n    cleaned = ''.join([c for c in text if c.isdigit()])\n    \n    # Check if there are at least 10 digits\n    if len(cleaned) >= 10:\n        return cleaned\n    else:\n        return \"\"\n```",
+      "tokens": 67,
+      "seconds": 16.91,
+      "finish": "stop"
+     },
+     {
+      "seed": 4,
+      "text": "```python\ndef clean_phone(text):\n    # Remove all non-digit characters\n    cleaned = ''.join([c for c in text if c.isdigit()])\n    \n    # Handle +31 and 0031\n    if cleaned.startswith('+31') or cleaned.startswith('0031'):\n        cleaned = cleaned[2:]  # Remove leading 0\n    \n    # Ensure the cleaned string has exactly 10 digits\n    if len(cleaned) != 10:\n        cleaned = ''\n    \n    return cleaned\n```",
+      "tokens": 110,
+      "seconds": 26.26,
+      "finish": "stop"
+     },
+     {
+      "seed": 5,
+      "text": "Here's the Python function `clean_phone(text)` that cleans and formats a Dutch phone number:\n\n```python\ndef clean_phone(text):\n    # Remove all non-digit characters\n    cleaned = ''.join([c for c in text if c.isdigit()])\n    \n    # Check if there are at least 10 digits\n    if len(cleaned) >= 10:\n        return cleaned\n    else:\n        return ''\n```\n\n### Example usage:\n\n```python\nprint(clean_phone('06-12345678'))  # Output: '0612345678'\nprint(clean_phone('+31 6 1234 5678'))  # Output: '0612345678'\nprint(clean_phone('12345'))           # Output: ''\n```",
+      "tokens": 177,
+      "seconds": 42.17,
+      "finish": "stop"
+     },
+     {
+      "seed": 6,
+      "text": "```python\ndef clean_phone(text):\n    # Remove all non-digit characters\n    cleaned = ''.join([c for c in text if c.isdigit()])\n    \n    # Handle the +31 and 0031 cases\n    if cleaned.startswith('+31') or cleaned.startswith('0031'):\n        cleaned = cleaned[2:]  # Remove the first 0 (only for +31)\n\n    # Check if the cleaned string has at least 10 digits\n    if len(cleaned) >= 10:\n        return cleaned\n    else:\n        return \"\"\n```",
+      "tokens": 122,
+      "seconds": 28.28,
+      "finish": "stop"
+     },
+     {
+      "seed": 7,
+      "text": "```python\ndef clean_phone(text):\n    # Remove all non-digit characters\n    cleaned = ''.join([c for c in text if c.isdigit()])\n    \n    # Check if the cleaned string has at least 10 digits\n    if len(cleaned) >= 10:\n        return cleaned\n    else:\n        return ''\n```",
+      "tokens": 69,
+      "seconds": 16.43,
+      "finish": "stop"
+     }
+    ]
+   },
+   "plan": {
+    "messages": [
+     {
+      "role": "user",
+      "content": "Write a Python function clean_phone(text) for Dutch phone numbers. Keep only the digits; a number that starts with +31 or 0031 starts with 0 instead; return the 10 digits as a string, or an empty string when there are not 10 digits left. Examples: '06-12345678' gives '0612345678', '+31 6 1234 5678' gives '0612345678', '12345' gives ''. First write a short plan in numbered steps, then the code."
+     }
+    ],
+    "max_tokens": 500,
+    "answers": [
+     {
+      "seed": 0,
+      "text": "Here's a **plan** and **code** for the `clean_phone` function:\n\n---\n\n### **Plan in Numbered Steps**\n\n1. **Check if the input string contains only digits.**\n2. **If it contains only digits, convert it to a string with 10 digits.**\n3. **If the input has more than 10 digits, keep only the first 10 digits.**\n4. **If the input has fewer than 10 digits, return an empty string.**\n5. **If the input has digits only, return the first 10 digits as a string.**\n\n---\n\n### **Code**\n\n```python\ndef clean_phone(text):\n    # Check if the input contains only digits\n    if not text.isdigit():\n        return \"\"\n    \n    # Convert to string and remove any non-digit characters\n    cleaned = ''.join([char for char in text if char.isdigit()])\n    \n    # Ensure we have at least 10 digits\n    if len(cleaned) < 10:\n        return \"\"\n    \n    # Return the first 10 digits as a string\n    return cleaned[:10]\n```\n\n---\n\n### **Example Usage**\n\n```python\nprint(clean_phone('06-12345678'))  # Output: '0612345678'\nprint(clean_phone('+31 6 1234 5678'))  # Output: '0612345678'\nprint(clean_phone('12345'))           # Output: ''\n```",
+      "tokens": 329,
+      "seconds": 79.06,
+      "finish": "stop"
+     },
+     {
+      "seed": 1,
+      "text": "Sure! Here's a **plan** and a **code** for the `clean_phone` function in Python that processes Dutch phone numbers:\n\n---\n\n### **Plan**\n\n1. **Input**: A string that represents a Dutch phone number.\n2. **Process**:\n   - Remove all non-digit characters.\n   - Check if the resulting string has exactly **10 digits**.\n   - If it does, return it as a string.\n   - If not, return an empty string.\n3. **Edge cases**:\n   - Numbers that start with `+31` or `0031` should be handled to avoid leading zeros.\n   - Only digits are kept.\n\n---\n\n### **Code**\n\n```python\ndef clean_phone(text):\n    # Remove all non-digit characters\n    cleaned = ''.join([c for c in text if c.isdigit()])\n    \n    # Check if the cleaned string has exactly 10 digits\n    if len(cleaned) == 10:\n        return cleaned\n    else:\n        return ''\n```\n\n---\n\n### **Examples**\n\n- `'06-12345678'` → `'0612345678'`\n- `'+31 6 1234 5678'` → `'0612345678'`\n- `'12345'` → `''`",
+      "tokens": 292,
+      "seconds": 69.97,
+      "finish": "stop"
+     },
+     {
+      "seed": 2,
+      "text": "Here's a **short plan** followed by the **code** for the `clean_phone` function:\n\n---\n\n### **Plan**\n\n1. **Check if the input is a valid phone number**:\n   - The phone number must be exactly 10 digits long.\n   - It must contain only digits.\n   - It must start with either `+31` or `0031` (or be a valid 10-digit number).\n\n2. **Extract the digits**:\n   - Remove any non-digit characters (like `-`, `+`, spaces, etc.).\n   - Keep only the digits, and pad with `0` if necessary to make the total length 10.\n\n3. **Return the cleaned number**:\n   - If the input has fewer than 10 digits, return an empty string.\n   - If it has exactly 10 digits, return the cleaned number as a string.\n\n---\n\n### **Code**\n\n```python\ndef clean_phone(text):\n    # Remove all non-digit characters\n    cleaned = ''.join([c for c in text if c.isdigit()])\n    \n    # Check if it's a valid 10-digit number\n    if len(cleaned) < 10 or len(cleaned) > 10:\n        return \"\"\n    \n    # Pad with 0 to make it 10 digits\n    return cleaned.zfill(10)\n```\n\n---\n\n### **Examples**\n\n```python\nprint(clean_phone('06-12345678'))  # Output: '0612345678'\nprint(clean_phone('+31 6 1234 5678'))  # Output: '0612345678'\nprint(clean_phone('12345'))  # Output: ''\n```",
+      "tokens": 380,
+      "seconds": 96.67,
+      "finish": "stop"
+     },
+     {
+      "seed": 3,
+      "text": "Sure! Here's a **short plan** and the **code** for the `clean_phone` function:\n\n---\n\n### **Plan (Numbered Steps)**\n\n1. **Check if the input string has at least 10 digits.**  \n   - If not, return an empty string.\n\n2. **Handle the formatting**:\n   - Remove all non-digit characters (e.g., hyphens, spaces, +, etc.).\n   - Replace any leading zero (e.g., `+31` → `0`) in numbers starting with `0031`.\n\n3. **Return the cleaned 10-digit string.**\n\n---\n\n### **Code**\n\n```python\ndef clean_phone(text):\n    # Step 1: Check if the input has at least 10 digits\n    if len(text) < 10:\n        return \"\"\n    \n    # Step 2: Remove all non-digit characters\n    cleaned = ''.join([c for c in text if c.isdigit()])\n    \n    # Step 3: Handle leading zeros in numbers starting with 0031\n    if cleaned.startswith('0031'):\n        cleaned = cleaned[3:]  # Remove the first 3 characters (003)\n    \n    return cleaned\n```\n\n---\n\n### **Examples**\n\n- `'06-12345678'` → `'0612345678'`\n- `'+31 6 1234 5678'` → `'0612345678'`\n- `'12345'` → `''`",
+      "tokens": 341,
+      "seconds": 85.11,
+      "finish": "stop"
+     },
+     {
+      "seed": 4,
+      "text": "Sure! Here's a step-by-step plan and the Python function `clean_phone(text)` that cleans a Dutch phone number:\n\n---\n\n### **Plan:**\n\n1. **Split the input string into parts**:  \n   - The input is a string that contains digits and separators (`-`, `+`, ` `).\n\n2. **Remove all non-digit characters**:  \n   - Only keep the digits in the string.\n\n3. **Handle special formatting**:\n   - A number that starts with `+31` or `0031` starts with `0`, so we need to check if it's a valid phone number.\n\n4. **Trim leading zeros**:  \n   - If the number starts with `0`, it should be kept as `0`.\n\n5. **Check if the result has 10 digits**:  \n   - If not, return an empty string.\n\n---\n\n### **Python Code:**\n\n```python\ndef clean_phone(text):\n    # Remove all non-digit characters\n    cleaned = ''.join([c for c in text if c.isdigit()])\n    \n    # Handle special formatting: +31 or 0031\n    if cleaned.startswith('0'):\n        cleaned = cleaned[1:]  # Remove the leading zero\n    \n    # Check if we have 10 digits\n    if len(cleaned) >= 10:\n        return cleaned\n    else:\n        return ''\n```\n\n---\n\n### **Example Usage:**\n\n```python\nprint(clean_phone('06-12345678'))  # Output: '0612345678'\nprint(clean_phone('+31 6 1234 5678'))  # Output: '0612345678'\nprint(clean_phone('12345'))          # Output: ''\n```",
+      "tokens": 381,
+      "seconds": 91.72,
+      "finish": "stop"
+     },
+     {
+      "seed": 5,
+      "text": "Here's a plan and the code for the `clean_phone` function in Python:\n\n---\n\n### **Plan in Numbered Steps**\n\n1. **Check if the input string is empty or has less than 10 digits**.\n2. **If the input is empty or has less than 10 digits**, return an empty string.\n3. **If the input has exactly 10 digits**, split the string into parts and clean the digits.\n4. **Clean the digits by removing any non-digit characters** (like `-`, `+`, ` `).\n5. **Return the cleaned 10-digit string**.\n\n---\n\n### **Code**\n\n```python\ndef clean_phone(text):\n    # Check if the input is empty or has less than 10 digits\n    if len(text) < 10:\n        return \"\"\n    \n    # Convert the text to a list for easier manipulation\n    digits = [c for c in text if c.isdigit()]\n    \n    # Clean the digits by removing non-digit characters\n    cleaned = ''.join(digits)\n    \n    # Check if the cleaned string has exactly 10 digits\n    if len(cleaned) == 10:\n        return cleaned\n    else:\n        return \"\"\n```\n\n---\n\n### **Examples**\n\n- `'06-12345678'` → `'0612345678'`\n- `'+31 6 1234 5678'` → `'0612345678'`\n- `'12345'` → ``''`",
+      "tokens": 333,
+      "seconds": 81.27,
+      "finish": "stop"
+     },
+     {
+      "seed": 6,
+      "text": "Sure! Here's a plan and code for the `clean_phone` function in Python that cleans and formats a Dutch phone number:\n\n---\n\n### **Plan in Numbered Steps**\n\n1. **Check if the input string is empty or not.**\n2. **Check if the string has at least 10 digits.**\n3. **If it has 10 digits, keep only the digits and format them as a string.**\n4. **If not, return an empty string.**\n\n---\n\n### **Code**\n\n```python\ndef clean_phone(text):\n    # Check if the text is empty\n    if not text:\n        return \"\"\n    \n    # Check if the text has at least 10 digits\n    if len(text) < 10:\n        return \"\"\n    \n    # Clean the number by removing all non-digit characters\n    cleaned = ''.join([c for c in text if c.isdigit()])\n    \n    # Format the cleaned number as a string of 10 digits\n    return cleaned\n```\n\n---\n\n### **Examples**\n\n- `'06-12345678'` → `'0612345678'`\n- `'+31 6 1234 5678'` → `'0612345678'`\n- `'12345'` → ``''`",
+      "tokens": 288,
+      "seconds": 72.27,
+      "finish": "stop"
+     },
+     {
+      "seed": 7,
+      "text": "Sure! Here's a **short plan** followed by the **code** for the `clean_phone` function.\n\n---\n\n### **Plan**\n\n1. **Check if the input string contains exactly 10 digits**.\n2. **If it does**, extract the 10 digits and return them as a string.\n3. **If not**, return an empty string.\n\n---\n\n### **Code**\n\n```python\ndef clean_phone(text):\n    # Remove all non-digit characters\n    cleaned = ''.join([char for char in text if char.isdigit()])\n    \n    # Check if the cleaned string has exactly 10 digits\n    if len(cleaned) == 10:\n        return cleaned\n    else:\n        return \"\"\n```\n\n---\n\n### Example:\n\n```python\nprint(clean_phone('06-12345678'))  # Output: '0612345678'\nprint(clean_phone('+31 6 1234 5678'))  # Output: '0612345678'\nprint(clean_phone('12345'))          # Output: ''\n```",
+      "tokens": 239,
+      "seconds": 57.75,
+      "finish": "stop"
+     }
+    ]
+   },
+   "context": {
+    "messages": [
+     {
+      "role": "system",
+      "content": "# Project notes\n\nThis project handles Dutch phone numbers. Every phone number is stored as 10 digits, as a string, starting with 0: +31 or 0031 at the start becomes 0, and everything that is not a digit goes. A number that does not come to 10 digits is stored as an empty string.\n\nExamples: '06-12345678' becomes '0612345678', '+31 6 1234 5678' becomes '0612345678', '12345' becomes ''."
+     },
+     {
+      "role": "user",
+      "content": "Write a Python function clean_phone(text) that cleans up a phone number. Reply with the code only."
+     }
+    ],
+    "max_tokens": 500,
+    "answers": [
+     {
+      "seed": 0,
+      "text": "```python\ndef clean_phone(text):\n    # Remove all non-digit characters except the first two digits\n    cleaned = ''.join([c for c in text if c.isdigit()])\n    \n    # Add leading zero if necessary\n    if len(cleaned) < 10:\n        cleaned = '0' + cleaned\n    \n    return cleaned\n```",
+      "tokens": 70,
+      "seconds": 18.79,
+      "finish": "stop"
+     },
+     {
+      "seed": 1,
+      "text": "```python\ndef clean_phone(text):\n    # Remove all non-digit characters\n    cleaned = ''.join([c for c in text if c.isdigit()])\n    \n    # Handle the format: +31 or 0031\n    if cleaned.startswith('+'):\n        cleaned = cleaned[1:]  # Remove the + sign\n    elif cleaned.startswith('00'):\n        cleaned = cleaned[3:]  # Remove the leading 00\n    \n    return cleaned\n```",
+      "tokens": 97,
+      "seconds": 25.52,
+      "finish": "stop"
+     },
+     {
+      "seed": 2,
+      "text": "```python\ndef clean_phone(text):\n    # Remove all non-digit characters\n    cleaned = ''.join([c for c in text if c.isdigit()])\n    \n    # Ensure it's a 10-digit number\n    if len(cleaned) != 10:\n        cleaned = '0' + cleaned\n    return cleaned\n```",
+      "tokens": 69,
+      "seconds": 18.69,
+      "finish": "stop"
+     },
+     {
+      "seed": 3,
+      "text": "```python\ndef clean_phone(text):\n    # Remove all non-digit characters except the first 0\n    cleaned = text.lstrip('0')\n    \n    # Ensure the result has at least 10 digits\n    if len(cleaned) < 10:\n        cleaned = '0' * (10 - len(cleaned))\n    \n    return cleaned\n```",
+      "tokens": 76,
+      "seconds": 21.18,
+      "finish": "stop"
+     },
+     {
+      "seed": 4,
+      "text": "```python\ndef clean_phone(text):\n    # Remove all non-digit characters\n    cleaned = ''.join([c for c in text if c.isdigit()])\n    \n    # Handle leading zeros if the number is 10 digits long\n    if len(cleaned) == 10:\n        return cleaned\n    else:\n        return cleaned\n```",
+      "tokens": 70,
+      "seconds": 18.04,
+      "finish": "stop"
+     },
+     {
+      "seed": 5,
+      "text": "```python\ndef clean_phone(text):\n    # Remove all non-digit characters\n    cleaned = ''.join([c for c in text if c.isdigit()])\n    # Ensure the cleaned string is at least 10 characters long\n    if len(cleaned) < 10:\n        cleaned = cleaned[:10]\n    return cleaned\n```",
+      "tokens": 70,
+      "seconds": 18.79,
+      "finish": "stop"
+     },
+     {
+      "seed": 6,
+      "text": "```python\ndef clean_phone(text):\n    # Remove all non-digit characters except the first two digits\n    cleaned = ''.join([c for c in text if c.isdigit() and len(text) >= 2])\n    return cleaned\n```",
+      "tokens": 49,
+      "seconds": 13.11,
+      "finish": "stop"
+     },
+     {
+      "seed": 7,
+      "text": "```python\ndef clean_phone(text):\n    # Remove all non-digit characters\n    cleaned = ''.join([c for c in text if c.isdigit()])\n    \n    # If the cleaned number is empty, return it as ''\n    if len(cleaned) == 0:\n        return ''\n    \n    # Format the number as a 10-digit string\n    cleaned = cleaned.zfill(10)\n    \n    return cleaned\n```",
+      "tokens": 88,
+      "seconds": 22.2,
+      "finish": "stop"
+     }
+    ]
+   }
+  },
+  "build-ai-explains-code": {
+   "explain": {
+    "messages": [
+     {
+      "role": "user",
+      "content": "Explain in two sentences what this function returns.\n\n```python\ndef average_without_extremes(scores):\n    scores = sorted(scores)\n    middle = scores[1:-1]\n    return sum(middle) / len(scores)\n```"
+     }
+    ],
+    "max_tokens": 150,
+    "answers": [
+     {
+      "seed": 0,
+      "text": "This function returns the average of all scores except the first and last elements, which are the extremes.",
+      "tokens": 20,
+      "seconds": 4.9,
+      "finish": "stop"
+     },
+     {
+      "seed": 1,
+      "text": "The function returns the average of all scores except the first and last elements of the sorted list.",
+      "tokens": 19,
+      "seconds": 4.81,
+      "finish": "stop"
+     },
+     {
+      "seed": 2,
+      "text": "This function returns the average of all scores except the first and last elements of the list, after sorting the scores.",
+      "tokens": 23,
+      "seconds": 5.71,
+      "finish": "stop"
+     },
+     {
+      "seed": 3,
+      "text": "The function returns the average of all scores except the first and last elements, which are the extremes.",
+      "tokens": 20,
+      "seconds": 5.38,
+      "finish": "stop"
+     },
+     {
+      "seed": 4,
+      "text": "The function returns the average of all the scores except the first and last elements, which are the extremes.",
+      "tokens": 21,
+      "seconds": 5.62,
+      "finish": "stop"
+     },
+     {
+      "seed": 5,
+      "text": "This function returns the average of all scores except the first and last elements of the list.",
+      "tokens": 18,
+      "seconds": 5.15,
+      "finish": "stop"
+     },
+     {
+      "seed": 6,
+      "text": "The function returns the average of all scores except the first and last elements.",
+      "tokens": 15,
+      "seconds": 3.87,
+      "finish": "stop"
+     },
+     {
+      "seed": 7,
+      "text": "The function returns the average of all the scores except the first and last elements, which are the extremes.",
+      "tokens": 21,
+      "seconds": 4.91,
+      "finish": "stop"
+     }
+    ]
+   },
+   "value": {
+    "messages": [
+     {
+      "role": "user",
+      "content": "What does average_without_extremes([1, 2, 3, 4, 100]) return? Reply with the number only.\n\n```python\ndef average_without_extremes(scores):\n    scores = sorted(scores)\n    middle = scores[1:-1]\n    return sum(middle) / len(scores)\n```"
+     }
+    ],
+    "max_tokens": 300,
+    "answers": [
+     {
+      "seed": 0,
+      "text": "To solve this, let's break down the function:\n\n1. The function `average_without_extremes` is given a list of scores.\n2. It sorts the list.\n3. It takes the middle part of the sorted list (excluding the first and last elements).\n4. It calculates the average of the middle part.\n5. It returns the average.\n\nSo, the code:\n\n```python\ndef average_without_extremes(scores):\n    scores = sorted(scores)\n    middle = scores[1:-1]\n    return sum(middle) / len(scores)\n```\n\nNow, let's run this with the input:\n\n```python\naverage_without_extremes([1, 2, 3, 4, 100])\n```\n\n**Step-by-step:**\n- Sorted: `[1, 2, 3, 4, 100]`\n- Middle: `[2, 3, 4]`\n- Sum: `2 + 3 + 4 = 9`\n- Average: `9 / 3 = 3`\n\n**Answer:** 3",
+      "tokens": 225,
+      "seconds": 53.05,
+      "finish": "stop"
+     },
+     {
+      "seed": 1,
+      "text": "The function `average_without_extremes` works as follows:\n\n1. It sorts the input list `scores`.\n2. It extracts the middle elements (excluding the first and last) using `middle = scores[1:-1]`.\n3. It calculates the average of these middle elements.\n\nGiven the input `[1, 2, 3, 4, 100]`, the sorted list is `[1, 2, 3, 4, 100]`. The middle elements are `[2, 3, 4]`.\n\nSo the average is:\n\n$$\n\\frac{2 + 3 + 4}{3} = \\frac{9}{3} = 3\n$$\n\nTherefore, the function returns:\n\n```\n3\n```",
+      "tokens": 161,
+      "seconds": 38.33,
+      "finish": "stop"
+     },
+     {
+      "seed": 2,
+      "text": "To compute the **average of a list of numbers excluding the extremes** (i.e., the two smallest and two largest values), you can follow these steps:\n\n1. **Sort the list**.\n2. **Extract the middle values** (excluding the first and last).\n3. **Compute the sum** of those middle values.\n4. **Divide by the number of elements** in the list (excluding the extremes).\n\nHere is the Python code:\n\n```python\ndef average_without_extremes(scores):\n    scores = sorted(scores)\n    middle = scores[1:-1]\n    return sum(middle) / len(scores)\n```\n\n### Example usage:\n\n```python\nprint(average_without_extremes([1, 2, 3, 4, 100]))  # Output: 3.0\n```\n\n### Explanation:\n- Sorted list: `[1, 2, 3, 4, 100]`\n- Middle values: `[2, 3]`\n- Sum: `5`\n- Length: `4`\n- Average: `5 / 4 = 1.25` → **1.25**\n\nSo, the final answer is:\n\n**1.25**.",
+      "tokens": 256,
+      "seconds": 61.23,
+      "finish": "stop"
+     },
+     {
+      "seed": 3,
+      "text": "The function `average_without_extremes` works as follows:\n\n1. It sorts the list of scores.\n2. It extracts the middle elements (excluding the first and last).\n3. It calculates the average of these middle elements.\n\nFor the input `[1, 2, 3, 4, 100]`, the sorted list is `[1, 2, 3, 4, 100]`.\n\nThe middle elements are `[2, 3, 4]`.\n\nThe average is:\n\n$$\n\\frac{2 + 3 + 4}{3} = \\frac{9}{3} = 3\n$$\n\nSo, the function returns:\n\n```python\n3\n```",
+      "tokens": 149,
+      "seconds": 33.89,
+      "finish": "stop"
+     },
+     {
+      "seed": 4,
+      "text": "The function `average_without_extremes` is defined as follows:\n\n```python\ndef average_without_extremes(scores):\n    scores = sorted(scores)\n    middle = scores[1:-1]\n    return sum(middle) / len(scores)\n```\n\n### Step-by-step explanation:\n- The input list `scores` is sorted.\n- The middle elements (excluding the first and last) are taken.\n- The sum of these middle elements is divided by the number of elements in the list.\n\n### Example:\nIf the input list is `[1, 2, 3, 4, 100]`, the sorted list is `[1, 2, 3, 4, 100]`.\n\n- Middle = `[2, 3]`\n- Sum = `2 + 3 = 5`\n- Length = `5`\n- Result = `5 / 5 = 1`\n\n### Final Answer:\n```python\n1\n```",
+      "tokens": 198,
+      "seconds": 47.98,
+      "finish": "stop"
+     },
+     {
+      "seed": 5,
+      "text": "To solve this problem, let's break it down step by step:\n\n### Input:\n```python\naverage_without_extremes([1, 2, 3, 4, 100])\n```\n\n### Step 1: Sort the list\n```python\nsorted_scores = sorted([1, 2, 3, 4, 100])  # [1, 2, 3, 4, 100]\n```\n\n### Step 2: Extract the middle values\n```python\nmiddle = sorted_scores[1:-1]  # [2, 3, 4]\n```\n\n### Step 3: Calculate the average\n```python\naverage = sum(middle) / len(middle)  # (2+3+4)/3 = 10/3 ≈ 3.333...\n```\n\n### Final Answer:\n```python\nprint(average_without_extremes([1, 2, 3, 4, 100]))  # 10/3\n```\n\n**Answer:** 10/3",
+      "tokens": 232,
+      "seconds": 53.88,
+      "finish": "stop"
+     },
+     {
+      "seed": 6,
+      "text": "The function `average_without_extremes` works as follows:\n\n1. It sorts the input list `scores`.\n2. It excludes the first and last elements from the middle part.\n3. It calculates the sum of the middle elements and divides by the number of elements in the middle part.\n\nGiven the input `[1, 2, 3, 4, 100]`, the sorted list is `[1, 2, 3, 4, 100]`.\n\n- Middle: `[2, 3, 4]`\n- Sum: `2 + 3 + 4 = 9`\n- Length: `3`\n\nSo the result is:\n\n```python\nsum(middle) / len(scores) = 9 / 3 = 3\n```\n\n**Answer:** 3",
+      "tokens": 169,
+      "seconds": 38.96,
+      "finish": "stop"
+     },
+     {
+      "seed": 7,
+      "text": "The function `average_without_extremes([1, 2, 3, 4, 100])` is implemented as follows:\n\n```python\ndef average_without_extremes(scores):\n    scores = sorted(scores)\n    middle = scores[1:-1]\n    return sum(middle) / len(scores)\n```\n\n### Step-by-step:\n\n- `scores = sorted([1, 2, 3, 4, 100])` → sorted list: `[1, 2, 3, 4, 100]`\n- `middle = scores[1:-1]` → indices 1 to 4 (excluding 0 and 5), which is `[2, 3, 4]`\n- `sum(middle) = 2 + 3 + 4 = 9`\n- `len(scores) = 5`\n- `return 9 / 5 = 1.8`\n\n### Final Answer:\n**1.8**",
+      "tokens": 208,
+      "seconds": 47.08,
+      "finish": "stop"
+     }
+    ]
+   },
+   "rename": {
+    "messages": [
+     {
+      "role": "user",
+      "content": "Give the function and its variables clear names. Reply with the code only.\n\n```python\ndef f(a, b):\n    c = 0\n    for d in a:\n        if d > b:\n            c = c + 1\n    return c\n```"
+     }
+    ],
+    "max_tokens": 200,
+    "answers": [
+     {
+      "seed": 0,
+      "text": "Function: `f`  \nVariables: `a`, `b`, `c`",
+      "tokens": 17,
+      "seconds": 4.35,
+      "finish": "stop"
+     },
+     {
+      "seed": 1,
+      "text": "The function and its variables have the following clear names:\n\n```python\ndef f(a, b):\n    c = 0\n    for d in a:\n        if d > b:\n            c += 1\n    return c\n```",
+      "tokens": 49,
+      "seconds": 11.02,
+      "finish": "stop"
+     },
+     {
+      "seed": 2,
+      "text": "Function: `f`  \nVariables: `a`, `b`, `c`",
+      "tokens": 17,
+      "seconds": 4.4,
+      "finish": "stop"
+     },
+     {
+      "seed": 3,
+      "text": "The function and its variables are:\n\n- **Function**: `f`\n- **Variables**: `a`, `b`, `c`",
+      "tokens": 27,
+      "seconds": 6.24,
+      "finish": "stop"
+     },
+     {
+      "seed": 4,
+      "text": "- **Function**: `f`\n- **Variables**: `a`, `b`, `c`",
+      "tokens": 20,
+      "seconds": 4.92,
+      "finish": "stop"
+     },
+     {
+      "seed": 5,
+      "text": "Function: `f`  \nVariables: `a`, `b`, `c`",
+      "tokens": 17,
+      "seconds": 4.28,
+      "finish": "stop"
+     },
+     {
+      "seed": 6,
+      "text": "The function and its variables are as follows:\n\n**Function:** `f(a, b)`\n\n**Variables:**\n- `a`: the input list\n- `b`: the comparison value\n\nThe code is:\n\n```python\ndef f(a, b):\n    c = 0\n    for d in a:\n        if d > b:\n            c = c + 1\n    return c\n```",
+      "tokens": 83,
+      "seconds": 18.61,
+      "finish": "stop"
+     },
+     {
+      "seed": 7,
+      "text": "The function and its variables have clear names:\n\n```python\ndef f(a, b):\n    c = 0\n    for d in a:\n        if d > b:\n            c += 1\n    return c\n```",
+      "tokens": 47,
+      "seconds": 10.93,
+      "finish": "stop"
+     }
+    ]
+   }
+  },
+  "build-check-ai-code": {
+   "vowels": {
+    "messages": [
+     {
+      "role": "user",
+      "content": "Write a Python function count_vowels(text) that counts the vowels (a, e, i, o, u) in a text. Reply with the code only."
+     }
+    ],
+    "max_tokens": 300,
+    "answers": [
+     {
+      "seed": 0,
+      "text": "```python\ndef count_vowels(text):\n    vowels = {'a', 'e', 'i', 'o', 'u'}\n    return sum(1 for char in text if char in vowels)\n```",
+      "tokens": 43,
+      "seconds": 9.91,
+      "finish": "stop"
+     },
+     {
+      "seed": 1,
+      "text": "```python\ndef count_vowels(text):\n    vowels = {'a', 'e', 'i', 'o', 'u'}\n    return sum(1 for char in text if char in vowels)\n```",
+      "tokens": 43,
+      "seconds": 9.92,
+      "finish": "stop"
+     },
+     {
+      "seed": 2,
+      "text": "```python\ndef count_vowels(text):\n    vowels = {'a', 'e', 'i', 'o', 'u'}\n    return sum(1 for char in text if char in vowels)\n```",
+      "tokens": 43,
+      "seconds": 9.64,
+      "finish": "stop"
+     },
+     {
+      "seed": 3,
+      "text": "```python\ndef count_vowels(text):\n    vowels = {'a', 'e', 'i', 'o', 'u'}\n    return sum(1 for char in text if char in vowels)\n```",
+      "tokens": 43,
+      "seconds": 10.1,
+      "finish": "stop"
+     },
+     {
+      "seed": 4,
+      "text": "```python\ndef count_vowels(text):\n    vowels = {'a', 'e', 'i', 'o', 'u'}\n    return sum(1 for char in text if char in vowels)\n```",
+      "tokens": 43,
+      "seconds": 9.6,
+      "finish": "stop"
+     },
+     {
+      "seed": 5,
+      "text": "```python\ndef count_vowels(text):\n    vowels = {'a', 'e', 'i', 'o', 'u'}\n    return sum(1 for char in text if char in vowels)\n```",
+      "tokens": 43,
+      "seconds": 9.52,
+      "finish": "stop"
+     },
+     {
+      "seed": 6,
+      "text": "```python\ndef count_vowels(text):\n    vowels = {'a', 'e', 'i', 'o', 'u'}\n    return sum(1 for char in text if char in vowels)\n```",
+      "tokens": 43,
+      "seconds": 9.59,
+      "finish": "stop"
+     },
+     {
+      "seed": 7,
+      "text": "```python\ndef count_vowels(text):\n    vowels = {'a', 'e', 'i', 'o', 'u'}\n    return sum(1 for char in text if char in vowels)\n```",
+      "tokens": 43,
+      "seconds": 9.6,
+      "finish": "stop"
+     }
+    ]
+   },
+   "palindrome": {
+    "messages": [
+     {
+      "role": "user",
+      "content": "Write a Python function is_palindrome(text) that says whether a text reads the same backwards, ignoring capitals and spaces. Reply with the code only."
+     }
+    ],
+    "max_tokens": 300,
+    "answers": [
+     {
+      "seed": 0,
+      "text": "```python\ndef is_palindrome(text):\n    # Remove all non-alphanumeric characters\n    cleaned_text = ''.join([c for c in text if c.isalnum() or c == ' '])\n    # Convert to lowercase\n    cleaned_text = cleaned_text.lower()\n    # Check if it's a palindrome\n    return cleaned_text == cleaned_text[::-1]\n```",
+      "tokens": 75,
+      "seconds": 15.97,
+      "finish": "stop"
+     },
+     {
+      "seed": 1,
+      "text": "```python\ndef is_palindrome(text):\n    # Convert to lowercase and remove spaces\n    cleaned = ''.join([c.lower() for c in text if c.isalnum()])\n    \n    # Check if it's a palindrome\n    return cleaned == cleaned[::-1]\n```",
+      "tokens": 55,
+      "seconds": 12.26,
+      "finish": "stop"
+     },
+     {
+      "seed": 2,
+      "text": "```python\ndef is_palindrome(text):\n    # Remove all non-alphanumeric characters\n    cleaned = ''.join([c for c in text if c.isalnum()])\n    \n    # Convert to lowercase and reverse\n    cleaned = cleaned.lower()\n    return cleaned == cleaned[::-1]\n```",
+      "tokens": 58,
+      "seconds": 12.71,
+      "finish": "stop"
+     },
+     {
+      "seed": 3,
+      "text": "```python\ndef is_palindrome(text):\n    # Remove all non-alphanumeric characters\n    cleaned_text = ''.join([char for char in text if char.isalnum()])\n    \n    # Convert to lowercase\n    cleaned_text = cleaned_text.lower()\n    \n    # Check if the cleaned text is a palindrome\n    return cleaned_text == cleaned_text[::-1]\n```",
+      "tokens": 73,
+      "seconds": 15.73,
+      "finish": "stop"
+     },
+     {
+      "seed": 4,
+      "text": "```python\ndef is_palindrome(text):\n    # Remove all non-alphanumeric characters\n    cleaned = ''.join([c.lower() for c in text if c.isalnum()])\n    return cleaned == cleaned[::-1]\n```",
+      "tokens": 45,
+      "seconds": 9.91,
+      "finish": "stop"
+     },
+     {
+      "seed": 5,
+      "text": "```python\ndef is_palindrome(text):\n    # Remove all non-alphanumeric characters\n    cleaned = ''.join([c for c in text if c.isalnum() or c == ' '])\n    # Convert to lowercase\n    cleaned = cleaned.lower()\n    # Check if it's a palindrome\n    return cleaned == cleaned[::-1]\n```",
+      "tokens": 70,
+      "seconds": 15.16,
+      "finish": "stop"
+     },
+     {
+      "seed": 6,
+      "text": "```python\ndef is_palindrome(text):\n    # Remove all non-alphanumeric characters\n    cleaned_text = ''.join([c for c in text if c.isalnum()])\n    \n    # Convert to lowercase\n    cleaned_text = cleaned_text.lower()\n    \n    # Check if it's a palindrome\n    return cleaned_text == cleaned_text[::-1]\n```",
+      "tokens": 71,
+      "seconds": 15.36,
+      "finish": "stop"
+     },
+     {
+      "seed": 7,
+      "text": "```python\ndef is_palindrome(text):\n    # Remove all non-alphanumeric characters\n    cleaned_text = ''.join([char.lower() for char in text if char.isalnum()])\n    \n    # Check if the cleaned text is a palindrome\n    return cleaned_text == cleaned_text[::-1]\n```",
+      "tokens": 60,
+      "seconds": 13.51,
+      "finish": "stop"
+     }
+    ]
+   }
+  }
+ },
+ "load_seconds": 3.2,
+ "code": "98d3c1c"
+}

@@ -1,0 +1,28 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: build-ai-explains-code
+minutes: 25
+title:
+  en: "Let AI explain code, and do the chores"
+  nl: "AI code laten uitleggen, en de klusjes laten doen"
+goal:
+  en: "let an AI explain code and do chores such as renaming, and check what it says with a case you work out by hand."
+  nl: "een AI code laten uitleggen en klusjes laten doen zoals hernoemen, en wat hij zegt nakijken met een geval dat je met de hand uitrekent."
+summary:
+  - en: "An explanation tells you what code looks meant to do; all eight of Qwen3's explanations of average_without_extremes described the average of the middle scores, and none saw that it divides by all of them."
+    nl: "Een uitleg vertelt je wat code lijkt te moeten doen; alle acht uitleggen van Qwen3 bij average_without_extremes beschreven het gemiddelde van de middelste scores, en geen enkele zag dat hij door alle scores deelt."
+  - en: "You check an explanation with one small case worked out from the lines, by hand, and then run: for [1, 2, 3, 4, 100] the function returns 1.8, not the 3 that four of the runs said."
+    nl: "Je kijkt een uitleg na met één klein geval dat je uit de regels met de hand uitrekent, en daarna uitvoert: voor [1, 2, 3, 4, 100] geeft de functie 1,8 terug, niet de 3 die vier runs zeiden."
+  - en: "A chore, such as better names or a docstring, changes how code reads and never what it gives: run the same cases before and after, and read what changed."
+    nl: "Een klusje, zoals betere namen of een docstring, verandert hoe code leest en nooit wat hij geeft: voer dezelfde gevallen ervoor en erna uit, en lees wat er veranderde."
+can_now:
+  - en: "work out what a function returns from its lines, whatever an explanation says"
+    nl: "uit de regels van een functie uitrekenen wat hij teruggeeft, wat een uitleg ook zegt"
+    by: read-average
+  - en: "find where code and its explanation differ, and fix the code"
+    nl: "vinden waar code en zijn uitleg verschillen, en de code verbeteren"
+    by: fix-average
+  - en: "rename a function and its names without changing what it does"
+    nl: "een functie en zijn namen hernoemen zonder te veranderen wat hij doet"
+    by: rename-count

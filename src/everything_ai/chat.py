@@ -177,6 +177,34 @@ def answer_live(messages: list, show, every: float = 0.2, **answer):
         return "memory"
 
 
+def answer_picture(text: str, note: str, title: str) -> str:
+    """An answer of the chat model in a lesson's demo, framed as the learner's own (everything_ai.yours.figure): the
+    text in the colour of what a model writes, and a note under it."""
+    import html
+
+    from everything_ai import yours
+    body = (f'<div style="font-family:var(--ea-font-code);font-size:13px;line-height:1.45;white-space:pre-wrap;overflow-wrap:anywhere;'
+            f'color:var(--ea-pred-text)">{html.escape(text)}</div>'
+            f'<div style="font-family:var(--ea-font-ui);font-size:12px;color:var(--ea-ink-2);margin-top:0.3rem">{html.escape(note)}</div>')
+    return yours.figure(title, body, alt=title)
+
+
+def demo(messages: list, show, words: dict, lang: str, max_tokens: int = 256, seed: int = 0, note=None) -> str:
+    """A lesson's demo: `messages` to the chat model, sampled with `seed`, with the answer so far shown by `show(html)`
+    at most five times a second. `words` has "title", "loading", "writing", "done" (with {tokens} and {seconds}),
+    "load" and "memory", in the lesson's language; `note(text)`, when given, adds a sentence of the lesson's own about
+    the answer after "done". The picture of the answer, or the message of what went wrong."""
+    import html
+    a = answer_live(messages, lambda text: show(answer_picture(text or "", words["loading"] if text is None else words["writing"], words["title"])),
+                    max_tokens=max_tokens, seed=seed)
+    if isinstance(a, str):
+        return f'<p><em>{html.escape(words[a])}</em></p>'
+    seconds = f"{a['seconds']:.1f}".replace(".", "," if lang == "nl" else ".")
+    done = words["done"].format(tokens=a["tokens"], seconds=seconds)
+    text = a["message"]["content"]
+    return answer_picture(text, done + (" " + note(text) if note else ""), words["title"])
+
+
 # --- the download, for the lessons that run the chat model ------------------------------------------------------------
 
 def downloaded() -> bool:

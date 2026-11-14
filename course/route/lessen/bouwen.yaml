@@ -93,8 +93,9 @@ lessons:
   idea: "People who work with AI either hand it whole tasks and check them (centaur) or weave it through every step (cyborg); both only help inside the jagged frontier, as the study of Dell'Acqua and others (2023) measured."
   covers: [d17-ai-in-dagelijks-werk#0, d17-ai-in-dagelijks-werk#1]
   requires: [start-prompt-chains]
-  introduces: [c:centaur-work, c:cyborg-work]
-  data: []
+  introduces: [c:jagged-frontier, c:centaur, c:cyborg]
+  uses: [c:prompt, c:ai-assistant, p:verify-ai-output, c:prompt-chaining, c:self-refine, c:generative-ai, q:predict, q:choice, q:exercise-with-check, q:run-cell]
+  data: [model-qwen3-0.6b, course-work-qwen]
   needs: any
 
 - id: build-research-and-learn
@@ -106,7 +107,8 @@ lessons:
   covers: [d17-ai-in-dagelijks-werk#2, d17-ai-in-dagelijks-werk#3]
   requires: [build-ai-at-work, start-your-own-assistant]
   introduces: [c:deep-research, p:learn-by-being-questioned]
-  data: []
+  uses: [c:jagged-frontier, c:centaur, c:ai-assistant, c:message-role, c:few-shot-prompting, c:citation, c:grounding, p:verify-ai-output, p:learn-with-an-assistant, c:agents-md, q:predict, q:choice, q:exercise-with-check, q:run-cell]
+  data: [model-qwen3-0.6b, course-work-qwen]
   needs: any
 
 - id: build-make-without-code
@@ -118,8 +120,9 @@ lessons:
   covers: [d17-ai-in-dagelijks-werk#4, d17-ai-in-dagelijks-werk#5]
   requires: [build-ai-at-work]
   introduces: [c:vibe-coding]
+  uses: [c:jagged-frontier, c:centaur, c:cyborg, c:generative-ai, c:prompt, c:ai-assistant, p:verify-ai-output, q:predict, q:choice, q:exercise-with-check]
   mentions: [c:program]
-  data: []
+  data: [course-work-qwen]
   needs: any
 
 - id: build-automate-work
@@ -130,7 +133,9 @@ lessons:
   idea: "No-code tools and personal agents chain steps of work without programming; before you automate a process, process mining shows from an event log how the work really goes: count which step follows which."
   covers: [d17-ai-in-dagelijks-werk#6, d17-ai-in-dagelijks-werk#7]
   requires: [build-ai-at-work, data-groupby]
-  introduces: [c:no-code-automation, c:personal-agent, c:robotic-process-automation, c:process-mining, c:event-log, c:directly-follows-graph]
+  introduces: [c:no-code, c:robotic-process-automation, c:personal-agent, c:event-log, c:process-mining, c:directly-follows-graph]
+  warns: [no code]
+  uses: [c:jagged-frontier, c:centaur, c:ai-assistant, c:csv, c:mean, c:seed, c:program, py:groupby, py:pandas-agg, py:dataframe, py:pandas-select-filter, py:import-as, py:list, py:tuple, py:append, py:for, py:range, py:len, py:if, py:comparison, py:indexing, py:arithmetic, py:variable, py:string-literal, q:predict, q:choice, q:exercise-with-check, q:run-cell]
   data: []
   ladder: [python]
   needs: any
@@ -144,6 +149,7 @@ lessons:
   covers: [ai-ondersteund-programmeren#1, ai-ondersteund-programmeren#2]
   requires: [build-ai-at-work, start-your-own-assistant]
   introduces: [c:code-completion, c:coding-agent]
+  uses: [c:centaur, c:cyborg, c:ai-assistant, c:agents-md, p:privacy-hygiene, p:verify-ai-output, p:learn-with-an-assistant, q:predict, q:choice, q:exercise-with-check]
   data: []
   needs: any
 
@@ -155,8 +161,9 @@ lessons:
   idea: "A coding agent works best in a fixed rhythm: first a spec of what should happen, then a plan, then small steps you check; what it knows of your project comes from the context you give it, such as AGENTS.md."
   covers: [ai-ondersteund-programmeren#3, ai-ondersteund-programmeren#4, ai-ondersteund-programmeren#5]
   requires: [build-coding-help]
-  introduces: [c:spec-driven-coding, p:plan-then-code]
-  data: []
+  introduces: [c:spec-driven-development, p:plan-then-code]
+  uses: [c:coding-agent, c:code-completion, c:agents-md, c:ai-assistant, c:prompt, c:centaur, p:verify-ai-output, q:predict, q:choice, q:exercise-with-check]
+  data: [course-work-qwen]
   needs: any
 
 - id: build-ai-explains-code
@@ -168,7 +175,9 @@ lessons:
   covers: [ai-ondersteund-programmeren#6, ai-ondersteund-programmeren#7]
   requires: [build-coding-help, py-functions]
   introduces: [p:code-to-language]
-  data: []
+  uses: [c:ai-assistant, c:code-completion, c:coding-agent, p:verify-ai-output, py:def, py:return, py:for, py:if, py:comparison, py:list, py:slicing, py:len, py:arithmetic, py:float, py:variable, py:int, q:predict, q:choice, q:exercise-with-check]
+  mentions: [py:sorted]
+  data: [course-work-qwen]
   ladder: [python]
   needs: any
 
@@ -177,11 +186,13 @@ lessons:
   level: basis
   domein: bouwen
   module: werk
-  idea: "Code from AI looks right more often than it is: tests with assert, a review and static analysis find its mistakes; a randomized trial found developers with Copilot faster (Peng and others 2023), and another found much generated code insecure (Pearce and others 2022)."
+  idea: "Code from AI looks right more often than it is: tests with assert, static analysis and a review each find what the others miss; randomized controlled trials found developers with Copilot faster on one small task (Peng and others 2023) and experienced developers slower on their own projects (METR 2025), and much generated code insecure (Pearce and others 2022)."
   covers: [d17-ai-code-kwaliteit-en-teampraktijk#0, d17-ai-code-kwaliteit-en-teampraktijk#1]
   requires: [build-coding-workflow, py-errors]
   introduces: [c:unit-test, py:assert, c:code-review, c:static-analysis, c:randomized-controlled-trial]
-  data: []
+  uses: [c:coding-agent, c:spec-driven-development, c:ai-assistant, c:bug, c:traceback, p:verify-ai-output, py:def, py:return, py:str, py:string-literal, py:int, py:bool, py:comparison, py:for, py:if, py:list, q:predict, q:choice, q:exercise-with-check, q:run-cell, q:find-the-bug]
+  mentions: [py:set, py:generator-expression]
+  data: [course-work-qwen]
   ladder: [python]
   needs: any
 

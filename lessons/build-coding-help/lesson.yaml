@@ -1,0 +1,28 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: build-coding-help
+minutes: 20
+title:
+  en: "From autocomplete to agents: help with code"
+  nl: "Van aanvullen tot agents: hulp bij code"
+goal:
+  en: "choose between code completion, a chat about your code and a coding agent, and set an agent up with what it may read and do."
+  nl: "kiezen tussen code completion, een chat over je code en een coding agent, en een agent instellen met wat hij mag lezen en doen."
+summary:
+  - en: "Code completion suggests the next line where you type, a chat answers questions about code you paste in, and a coding agent reads, changes and runs files in your project folder by itself."
+    nl: "Code completion stelt de volgende regel voor waar je typt, een chat beantwoordt vragen over code die je erin plakt, en een coding agent leest, verandert en draait zelf bestanden in je projectmap."
+  - en: "The more a tool does by itself, the less you see of each step, so you check the result: what it changed, and whether the tests really pass."
+    nl: "Hoe meer een tool zelf doet, hoe minder je van elke stap ziet, dus kijk je het resultaat na: wat hij veranderde, en of de tests echt slagen."
+  - en: "An agent sees the folder you start it in; let it do by itself what is easy to undo, let it ask first before it deletes, installs or sends something, and keep passwords and keys out of its folder."
+    nl: "Een agent ziet de map waarin je hem start; laat hem zelf doen wat makkelijk terug te draaien is, laat hem eerst vragen voordat hij iets weggooit, installeert of verstuurt, en houd wachtwoorden en keys uit zijn map."
+can_now:
+  - en: "choose code completion, a chat or a coding agent for a task with code"
+    nl: "code completion, een chat of een coding agent kiezen voor een taak met code"
+    by: which-help
+  - en: "decide what a coding agent may do by itself and what it asks you first"
+    nl: "bepalen wat een coding agent zelf mag doen en wat hij jou eerst vraagt"
+    by: permissions
+  - en: "check the work of an agent yourself instead of trusting what it says about it"
+    nl: "het werk van een agent zelf nakijken in plaats van te vertrouwen op wat hij erover zegt"
+    by: after-done

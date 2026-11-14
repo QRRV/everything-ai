@@ -1,0 +1,28 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: build-make-without-code
+minutes: 20
+title:
+  en: "Making things without code"
+  nl: "Dingen maken zonder code"
+goal:
+  en: "know which tools make pictures, music and programs from a description, judge a program by trying its cases, edges included, and know when vibe coding is not enough."
+  nl: "weten welke tools plaatjes, muziek en programma's maken vanuit een beschrijving, een programma beoordelen door de gevallen te proberen, randgevallen ook, en weten wanneer vibe coding niet genoeg is."
+summary:
+  - en: "Tools make pictures, music, video and small programs from a description; vibe coding is judging such a program only by using it, without reading the code."
+    nl: "Tools maken plaatjes, muziek, video en kleine programma's vanuit een beschrijving; vibe coding is zo'n programma alleen beoordelen door het te gebruiken, zonder de code te lezen."
+  - en: "A program shows its mistakes only in the cases you try, so you try the edges too, and everything again after every change."
+    nl: "Een programma laat zijn fouten alleen zien in de gevallen die je probeert, dus probeer je ook de randen, en na elke verandering alles opnieuw."
+  - en: "None of the 16 programs Qwen3-0.6B wrote for the days of a month got all 2,652 months from 1890 to 2110 right; naming leap years in the description fixed February, but left another month wrong in 7 of the 8 programs."
+    nl: "Geen van de 16 programma's die Qwen3-0.6B schreef voor de dagen van een maand had alle 2.652 maanden van 1890 tot en met 2110 goed; schrikkeljaren noemen in de beschrijving maakte februari goed, maar liet bij 7 van de 8 programma's een andere maand fout."
+can_now:
+  - en: "decide when vibe coding is fine and when someone has to read the code"
+    nl: "bepalen wanneer vibe coding prima is en wanneer iemand de code moet lezen"
+    by: vibe-or-read
+  - en: "pick tries that reach the edges of a program, not only the easy cases"
+    nl: "proefjes kiezen die de randen van een programma bereiken, niet alleen de makkelijke gevallen"
+    by: only-recent
+  - en: "try everything again after you change a description"
+    nl: "alles opnieuw proberen nadat je een beschrijving verandert"
+    by: longer-description
