@@ -1,0 +1,1052 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# Lessons of the domain bouwen (building with AI: prompts, RAG and agents), level basis, and the five core lessons
+# (domein fundament: modules start, python and agents) that its lessons need.
+# The plan: docs/onderzoek/reports/Voorstel domein Bouwen met AI.md (besluit 1.18, advice 6). The route bouwen in routes.yaml
+# starts where the core ends and gives the order. Every lesson runs on a CPU: the model is Qwen3-0.6B on the course's own
+# server, and the checks talk to a stand-in with the same API.
+# Planning data; "introduces" is the plan and "uses" is filled in fully when a lesson is built. Format: ../FORMAT.md.
+map: v2.3
+lessons:
+
+# --- the core: AI tools, prompts, JSON and agents -------------------------------
+- id: start-ai-tools-landscape
+  title: "Which AI tool for what"
+  level: basis
+  domein: fundament
+  module: start
+  idea: "AI tools come in kinds (chat assistants, tools inside other programs, models you run yourself); an assistant can search, read files and run code, reads at most its context window, and everything you paste into it leaves your computer."
+  covers: [ai-geletterdheid-voor-gebruikers#1, ai-geletterdheid-voor-gebruikers#2, ai-geletterdheid-voor-gebruikers#3, ai-geletterdheid-voor-gebruikers#6]
+  requires: [start-using-ai-tools]
+  introduces: [c:context-window, c:open-weights, p:privacy-hygiene]
+  uses: [p:verify-ai-output, c:ai-assistant, q:choice, q:predict]
+  mentions: [c:program, c:model, c:language-model, c:token]
+  warns: [window]
+  data: []
+  needs: any
+
+- id: start-prompt-basics
+  title: "Asking well: roles, examples and steps"
+  level: basis
+  domein: fundament
+  module: start
+  idea: "A prompt has parts (instruction, context, examples, the form of the answer) in messages with a role; examples (few-shot), a role and asking for the steps first (chain of thought) each change what a model answers, as the same question asked seven ways shows."
+  covers: [prompt-basis#0, prompt-basis#1, prompt-basis#2]
+  requires: [start-ai-tools-landscape]
+  introduces: [c:prompt, c:message-role, c:delimiter, c:few-shot-prompting, c:zero-shot-prompting, c:role-prompting, c:chain-of-thought]
+  mentions: [c:example, c:model, c:chat-model]
+  warns: [role]
+  uses: [c:context-window, p:privacy-hygiene, c:ai-assistant, p:verify-ai-output, q:predict, q:choice, q:exercise-with-check]
+  data: [model-qwen3-0.6b, course-prompts-qwen]
+  needs: any
+
+- id: start-prompt-chains
+  title: "Prompts that check themselves"
+  level: basis
+  domein: fundament
+  module: start
+  idea: "A big task goes better in small prompts in a row (prompt chaining); a model can check and improve its own answer (Self-Refine, Chain-of-Verification); and an answer from a source you give, with the source named, can be checked."
+  covers: [prompt-basis#3, prompt-basis#4, prompt-basis#5, prompt-basis#6]
+  requires: [start-prompt-basics]
+  introduces: [c:prompt-chaining, c:self-refine, c:chain-of-verification, c:grounding, c:citation, c:multimodal-prompt]
+  mentions: [c:model]
+  uses: [c:prompt, c:message-role, c:delimiter, c:few-shot-prompting, c:chain-of-thought, c:ai-assistant, p:verify-ai-output, q:predict, q:choice, q:exercise-with-check]
+  data: [model-qwen3-0.6b, course-chains-qwen, course-prompts-qwen]
+  needs: any
+
+- id: py-json
+  title: "Data as text: JSON"
+  level: basis
+  domein: fundament
+  module: python
+  idea: "JSON writes lists, dicts, strings, numbers, True, False and None as text that every language can read; json.dumps turns them into text and json.loads back, and text that is not valid JSON raises an error."
+  covers: []
+  requires: [py-dicts, py-files, py-errors, py-imports]
+  introduces: [c:json, py:json]
+  uses: [py:import, c:module, py:dict, py:list, py:indexing, py:open, py:with, c:file-path, c:newline, py:def, py:return, py:for, py:arithmetic, py:comparison, py:bool, py:none, py:str, py:string-literal, py:int, py:float, py:print, py:comment, py:underscore-name, py:variable, q:predict, q:choice, q:exercise-with-check, q:run-cell]
+  data: []
+  ladder: [python]
+  needs: any
+
+- id: agent-idea
+  title: "What an agent is: a model, tools and a loop"
+  level: basis
+  domein: fundament
+  module: agents
+  idea: "An agent is a language model with tools in a loop towards a goal: it chooses a tool, sees the result and chooses again until it is done; from a chatbot to an agent that works on its own is a spectrum, and the agent of reinforcement learning is the same idea with a learned policy."
+  covers: [wat-een-agent-is#0, wat-een-agent-is#1, wat-een-agent-is#2, wat-een-agent-is#3, wat-een-agent-is#4]
+  requires: [rl-what-is-rl, start-prompt-chains, py-json]
+  introduces: [c:llm-agent, c:tool, c:tool-call, c:agent-loop, c:step-limit, c:autonomy-spectrum]
+  mentions: [c:model, c:language-model]
+  warns: [agent, tool]
+  uses: [c:agent, c:environment, c:action, c:reward, c:return, c:policy, c:prompt, c:message-role, c:prompt-chaining, c:self-refine, c:json, py:json, py:def, py:return, py:for, py:range, py:if, py:comparison, py:list, py:append, py:dict, py:indexing, py:print, py:comment, py:underscore-name, py:variable, py:string-literal, q:predict, q:choice, q:exercise-with-check, q:run-cell]
+  data: [model-qwen3-0.6b, course-agent-qwen]
+  ladder: [python]
+  needs: any
+
+# --- bouwen/werk: AI in your work ------------------------------------------------
+- id: build-ai-at-work
+  title: "AI at work: centaur or cyborg"
+  level: basis
+  domein: bouwen
+  module: werk
+  idea: "People who work with AI either hand it whole tasks and check them (centaur) or weave it through every step (cyborg); both only help inside the jagged frontier, as the study of Dell'Acqua and others (2023) measured."
+  covers: [d17-ai-in-dagelijks-werk#0, d17-ai-in-dagelijks-werk#1]
+  requires: [start-prompt-chains]
+  introduces: [c:centaur-work, c:cyborg-work]
+  data: []
+  needs: any
+
+- id: build-research-and-learn
+  title: "Searching, deep research and learning with AI"
+  level: basis
+  domein: bouwen
+  module: werk
+  idea: "An assistant that searches gives sources you can check, and deep research reads dozens of them for one report; to learn, ask it to question you and explain step by step instead of handing you the answer."
+  covers: [d17-ai-in-dagelijks-werk#2, d17-ai-in-dagelijks-werk#3]
+  requires: [build-ai-at-work, start-your-own-assistant]
+  introduces: [c:deep-research, p:learn-by-being-questioned]
+  data: []
+  needs: any
+
+- id: build-make-without-code
+  title: "Making things without code"
+  level: basis
+  domein: bouwen
+  module: werk
+  idea: "Creative tools make pictures, music and text from a description, and vibe coding makes a small program from one; both are fast for a first version and break where nobody reads what was made."
+  covers: [d17-ai-in-dagelijks-werk#4, d17-ai-in-dagelijks-werk#5]
+  requires: [build-ai-at-work]
+  introduces: [c:vibe-coding]
+  mentions: [c:program]
+  data: []
+  needs: any
+
+- id: build-automate-work
+  title: "Automating work: flows, personal agents and process mining"
+  level: basis
+  domein: bouwen
+  module: werk
+  idea: "No-code tools and personal agents chain steps of work without programming; before you automate a process, process mining shows from an event log how the work really goes: count which step follows which."
+  covers: [d17-ai-in-dagelijks-werk#6, d17-ai-in-dagelijks-werk#7]
+  requires: [build-ai-at-work, data-groupby]
+  introduces: [c:no-code-automation, c:personal-agent, c:robotic-process-automation, c:process-mining, c:event-log, c:directly-follows-graph]
+  data: []
+  ladder: [python]
+  needs: any
+
+- id: build-coding-help
+  title: "From autocomplete to agents: help with code"
+  level: basis
+  domein: bouwen
+  module: werk
+  idea: "AI helps with code in three ways, from completing the line you type, through a chat about your code, to an agent that changes files and runs them; which one fits depends on how much you check, and a tool is set up with what it may read and do."
+  covers: [ai-ondersteund-programmeren#1, ai-ondersteund-programmeren#2]
+  requires: [build-ai-at-work, start-your-own-assistant]
+  introduces: [c:code-completion, c:coding-agent]
+  data: []
+  needs: any
+
+- id: build-coding-workflow
+  title: "Working with a coding agent: plan, spec and context"
+  level: basis
+  domein: bouwen
+  module: werk
+  idea: "A coding agent works best in a fixed rhythm: first a spec of what should happen, then a plan, then small steps you check; what it knows of your project comes from the context you give it, such as AGENTS.md."
+  covers: [ai-ondersteund-programmeren#3, ai-ondersteund-programmeren#4, ai-ondersteund-programmeren#5]
+  requires: [build-coding-help]
+  introduces: [c:spec-driven-coding, p:plan-then-code]
+  data: []
+  needs: any
+
+- id: build-ai-explains-code
+  title: "Let AI explain code, and do the chores"
+  level: basis
+  domein: bouwen
+  module: werk
+  idea: "AI can explain code you did not write and summarize what it does, and take the chores off your hands (renaming, docstrings, a first test); you still check what it says against the code itself."
+  covers: [ai-ondersteund-programmeren#6, ai-ondersteund-programmeren#7]
+  requires: [build-coding-help, py-functions]
+  introduces: [p:code-to-language]
+  data: []
+  ladder: [python]
+  needs: any
+
+- id: build-check-ai-code
+  title: "Checking code that AI wrote"
+  level: basis
+  domein: bouwen
+  module: werk
+  idea: "Code from AI looks right more often than it is: tests with assert, a review and static analysis find its mistakes; a randomized trial found developers with Copilot faster (Peng and others 2023), and another found much generated code insecure (Pearce and others 2022)."
+  covers: [d17-ai-code-kwaliteit-en-teampraktijk#0, d17-ai-code-kwaliteit-en-teampraktijk#1]
+  requires: [build-coding-workflow, py-errors]
+  introduces: [c:unit-test, py:assert, c:code-review, c:static-analysis, c:randomized-controlled-trial]
+  data: []
+  ladder: [python]
+  needs: any
+
+# --- bouwen/apis: calling models -------------------------------------------------
+- id: build-tokens-prices
+  title: "Tokens and prices: count before you send"
+  level: basis
+  domein: bouwen
+  module: apis
+  idea: "An API charges per token, with output tokens dearer than input tokens; count the tokens of a prompt and its answer with the model's own tokenizer, and you know what a call costs before you make it."
+  covers: [model-api-s#1]
+  requires: [lm-tokens-outside, start-prompt-basics]
+  introduces: [c:input-token, c:output-token, c:token-price]
+  data: [model-qwen3-0.6b]
+  ladder: [python]
+  needs: any
+
+- id: build-call-api
+  title: "Calling a model over HTTP"
+  level: basis
+  domein: bouwen
+  module: apis
+  idea: "A model behind an API is a URL you send a request to: the conversation as JSON, the answer as JSON back; the course's own server speaks the same OpenAI-compatible protocol as hosted APIs, Ollama and llama.cpp, so the same few lines of urllib work with all of them."
+  covers: [model-api-s#0]
+  requires: [build-tokens-prices, lm-base-vs-chat, py-json]
+  introduces: [c:api, c:endpoint, c:http-request, c:openai-compatible-api, c:local-server, py:urllib-request]
+  data: [model-qwen3-0.6b]
+  ladder: [python]
+  needs: any
+
+- id: build-project-call
+  title: "Project: your assistant answers"
+  level: basis
+  domein: bouwen
+  module: apis
+  kind: project
+  project: app
+  idea: "Your project app gets its first module: a function that sends a conversation to the API and gives back the answer and the tokens it cost, so every later step of the project talks to the model through it."
+  covers: []
+  requires: [build-call-api, py-own-modules]
+  introduces: [c:api-client]
+  data: [model-qwen3-0.6b]
+  ladder: [python]
+  needs: any
+
+- id: build-streaming
+  title: "The answer as it comes: streaming"
+  level: basis
+  domein: bouwen
+  module: apis
+  idea: "With stream on, the server sends the answer in small pieces as server-sent events, each a line of JSON; you show the first words after a moment instead of waiting for the whole answer."
+  covers: [model-api-s#2]
+  requires: [build-call-api]
+  introduces: [c:streaming, c:server-sent-events]
+  data: [model-qwen3-0.6b]
+  ladder: [python]
+  needs: any
+
+- id: build-errors-retries
+  title: "When a call fails: errors, limits and retries"
+  level: basis
+  domein: bouwen
+  module: apis
+  idea: "A call can fail: a status code says why (a bad request, too many requests, a server error), and a timeout stops waiting; try again only what can succeed later, each time waiting longer (exponential backoff)."
+  covers: [model-api-s#3]
+  requires: [build-call-api, py-errors]
+  introduces: [c:http-status-code, c:rate-limit, c:timeout, c:retry, c:exponential-backoff]
+  data: []
+  ladder: [python]
+  needs: any
+
+- id: build-batch-keys-costs
+  title: "Batches, keys and the bill"
+  level: basis
+  domein: bouwen
+  module: apis
+  idea: "Many requests that may wait go cheaper as one batch; a key that gives access to a paid API belongs in an environment variable, never in your code; and counting tokens per call keeps the bill in sight."
+  covers: [model-api-s#4, model-api-s#5]
+  requires: [build-errors-retries]
+  introduces: [c:batch-api, c:api-key, c:environment-variable, py:os-environ]
+  warns: [key]
+  data: []
+  ladder: [python]
+  needs: any
+
+- id: build-choose-model
+  title: "Choosing a model, and routing between models"
+  level: basis
+  domein: bouwen
+  module: apis
+  idea: "A model is chosen on quality for your task, speed and price, measured on your own examples; a router sends easy questions to a small model and hard ones to a large one, and a gateway puts many models behind one address."
+  covers: [modelkeuze-routing-en-open-weights#0, modelkeuze-routing-en-open-weights#1]
+  requires: [build-call-api]
+  introduces: [c:model-routing, c:model-gateway]
+  data: [model-qwen3-0.6b]
+  ladder: [python]
+  needs: any
+
+- id: build-where-models-run
+  title: "Where a model runs"
+  level: basis
+  domein: bouwen
+  module: apis
+  idea: "An open-weight model runs on your own computer in a local runtime such as Ollama or llama.cpp, or at a company that hosts it for you; the API stays the same, only the address changes."
+  covers: [modelkeuze-routing-en-open-weights#3, modelkeuze-routing-en-open-weights#4, modelkeuze-routing-en-open-weights#5]
+  requires: [build-choose-model]
+  introduces: [c:local-runtime, c:hosted-inference]
+  data: []
+  ladder: [python]
+  needs: any
+
+- id: build-multimodal-apis
+  title: "Beyond text: images, audio and realtime"
+  level: basis
+  domein: bouwen
+  module: apis
+  idea: "The same messages can carry images and audio, a realtime API talks in both directions as you speak, and some tools (web search, running code) run at the provider instead of in your program."
+  covers: [multimodale-realtime-en-overige-api-s#0, multimodale-realtime-en-overige-api-s#3]
+  requires: [build-call-api]
+  introduces: [c:multimodal-api, c:realtime-api, c:hosted-tool]
+  data: []
+  needs: any
+
+- id: build-embeddings-api
+  title: "Embeddings and documents through an API"
+  level: basis
+  domein: bouwen
+  module: apis
+  idea: "An embeddings endpoint turns a text into a vector, so texts with the same meaning lie close together, also across languages; files and documents go along with a request as text or as an upload."
+  covers: [multimodale-realtime-en-overige-api-s#1, multimodale-realtime-en-overige-api-s#2]
+  requires: [build-call-api, ml-embeddings-idea]
+  introduces: [c:embeddings-api, c:file-upload]
+  data: [model-granite-embedding]
+  ladder: [python, numpy]
+  needs: any
+
+- id: build-ai-services
+  title: "Ready-made AI: vision, speech, translation and classic NLP"
+  level: basis
+  domein: bouwen
+  module: apis
+  idea: "For seeing, listening and translating there are ready-made services behind an API, and the classic tasks of language (sentiment, entities, summaries) can go to such a service or to an LLM with a prompt."
+  covers: [klassieke-ai-diensten-via-api-s#0, klassieke-ai-diensten-via-api-s#1]
+  requires: [build-call-api]
+  introduces: [c:ai-service, c:classic-nlp-task]
+  data: [model-qwen3-0.6b]
+  ladder: [python]
+  needs: any
+
+- id: build-generation-hubs
+  title: "Images from an API, and model hubs"
+  level: basis
+  domein: bouwen
+  module: apis
+  idea: "Image and video generation is one request with a description; a model hub holds thousands of open models with their cards, and a pipeline wraps one into a single call."
+  covers: [klassieke-ai-diensten-via-api-s#2, klassieke-ai-diensten-via-api-s#3]
+  requires: [build-ai-services, torch-pretrained]
+  introduces: [c:image-generation-api]
+  warns: [pipeline]
+  data: []
+  needs: any
+
+- id: build-llm-or-small-model
+  title: "A large model or a small one?"
+  level: basis
+  domein: bouwen
+  module: apis
+  idea: "For one fixed task, such as sorting messages, a small model trained on a few hundred examples can beat an LLM with a prompt in quality, speed and price; the LLM wins when there are no labels or the task keeps changing."
+  covers: [klassieke-ai-diensten-via-api-s#4]
+  requires: [build-ai-services, ml-sklearn, ml-f1-score]
+  introduces: [c:task-specific-model]
+  data: [model-qwen3-0.6b]
+  ladder: [python]
+  needs: any
+
+- id: build-on-device
+  title: "AI on your own device"
+  level: basis
+  domein: bouwen
+  module: apis
+  idea: "A model in the browser or on a phone works without a network, costs nothing per call and keeps data on the device, but it must be small; libraries such as TensorFlow.js and Pyodide run models and Python in the browser."
+  covers: [browser-en-on-device-ai#0, browser-en-on-device-ai#7]
+  requires: [build-where-models-run]
+  introduces: [c:on-device-ai]
+  warns: [device]
+  data: []
+  needs: any
+
+- id: build-js-basics
+  title: "Just enough JavaScript"
+  level: basis
+  domein: bouwen
+  module: apis
+  idea: "AI in the browser is written in JavaScript: a module imports another, await waits for a result while the page keeps responding, and a web worker computes beside the page; just enough to read and change the code of the next lesson."
+  covers: [browser-en-on-device-ai#1]
+  requires: [build-on-device, py-functions]
+  introduces: [c:javascript, c:await, c:web-worker]
+  data: []
+  needs: any
+
+- id: build-model-in-browser
+  title: "Your model in the browser"
+  level: basis
+  domein: bouwen
+  module: apis
+  idea: "A small network you trained earlier in the course goes to the browser as JSON and computes there, in a few lines of JavaScript; Transformers.js and WebLLM do the same with large open models, and the Prompt API of Chrome with one built into the browser."
+  covers: [browser-en-on-device-ai#2, browser-en-on-device-ai#4, browser-en-on-device-ai#5]
+  requires: [build-js-basics, torch-mlp-digits, py-json]
+  introduces: [c:transformers-js, c:webllm, c:built-in-browser-ai]
+  mentions: [c:transformer]
+  data: [qmnist]
+  ladder: [python, torch]
+  needs: any
+
+# --- bouwen/prompts: prompts for developers -----------------------------------
+- id: build-sampling-api
+  title: "Sampling settings through the API"
+  level: basis
+  domein: bouwen
+  module: prompts
+  idea: "Through the API you set how the model samples: temperature and top_p for how much it varies, a seed to get the same answer again, max_tokens and stop for where it ends."
+  covers: [prompting-voor-ontwikkelaars#0]
+  requires: [build-call-api, lm-top-k-top-p]
+  introduces: [c:max-tokens, c:stop-sequence]
+  data: [model-qwen3-0.6b]
+  ladder: [python]
+  needs: any
+
+- id: build-system-prompt
+  title: "System prompts and prefill"
+  level: basis
+  domein: bouwen
+  module: prompts
+  idea: "The system prompt says once how the assistant behaves in the whole conversation, and a prefill writes the first words of its answer for it, so the answer starts the way you need."
+  covers: [prompting-voor-ontwikkelaars#2]
+  requires: [build-call-api]
+  introduces: [c:system-prompt, c:prefill]
+  data: [model-qwen3-0.6b]
+  ladder: [python]
+  needs: any
+
+- id: build-structured-output
+  title: "JSON you can rely on"
+  level: basis
+  domein: bouwen
+  module: prompts
+  idea: "Ask for JSON and you often get almost-JSON: check the answer against a schema, and when it does not fit, ask again with what was wrong; hosted APIs can force valid JSON while the model writes."
+  covers: [prompting-voor-ontwikkelaars#1]
+  requires: [build-system-prompt]
+  introduces: [c:structured-output, c:json-schema, c:json-mode]
+  data: [model-qwen3-0.6b]
+  ladder: [python]
+  needs: any
+
+- id: build-prompt-templates
+  title: "Prompts as code: templates and versions"
+  level: basis
+  domein: bouwen
+  module: prompts
+  idea: "A prompt you use in a program is a template with fields you fill in, kept in a file under version control, so you know which version gave which answers."
+  covers: [prompting-voor-ontwikkelaars#3]
+  requires: [build-system-prompt]
+  introduces: [c:prompt-template, c:prompt-version]
+  data: []
+  ladder: [python]
+  needs: any
+
+- id: build-project-prompts
+  title: "Project: your assistant, prompted well"
+  level: basis
+  domein: bouwen
+  module: prompts
+  kind: project
+  project: app
+  idea: "Your assistant gets a system prompt and templates from files of its own, and gives answers as JSON it checks itself, so the rest of your app can use them."
+  covers: []
+  requires: [build-project-call, build-prompt-templates, build-structured-output]
+  data: [model-qwen3-0.6b]
+  ladder: [python]
+  needs: any
+
+- id: build-model-specific
+  title: "Each model its own prompt"
+  level: basis
+  domein: bouwen
+  module: prompts
+  idea: "A prompt that works for one model can fail for another: each has its own habits and its own guide; moving to a new model means running your examples again and adjusting the prompt."
+  covers: [prompting-voor-ontwikkelaars#4]
+  requires: [build-prompt-templates, build-choose-model]
+  introduces: [c:prompt-migration]
+  data: [model-qwen3-0.6b]
+  ladder: [python]
+  needs: any
+
+- id: build-defensive-prompts
+  title: "Prompts that hold"
+  level: basis
+  domein: bouwen
+  module: prompts
+  idea: "Text from users or documents can contain instructions of its own (prompt injection); mark such text clearly as data, tell the model not to follow instructions in it, and check the answer anyway."
+  covers: [prompting-voor-ontwikkelaars#9]
+  requires: [build-system-prompt]
+  introduces: [c:prompt-injection, c:defensive-prompting]
+  data: [model-qwen3-0.6b]
+  ladder: [python]
+  needs: any
+
+- id: build-self-consistency
+  title: "Ask more than once"
+  level: basis
+  domein: bouwen
+  module: prompts
+  idea: "Ask the same question several times with sampling and take the answer that comes back most often (self-consistency): more calls, more often right, as counted on questions with one right answer."
+  covers: [sampling-ensembles-en-zoeken#0]
+  requires: [build-sampling-api]
+  introduces: [c:self-consistency]
+  data: [model-qwen3-0.6b]
+  ladder: [python]
+  needs: any
+
+- id: build-context-engineering
+  title: "What goes into the window"
+  level: basis
+  domein: bouwen
+  module: prompts
+  idea: "What a model knows in a call is exactly what is in its context window: choose what goes in, summarize old turns when it fills up (compaction), keep notes outside it, and fetch information only when it is needed."
+  covers: [context-engineering#0, context-engineering#1]
+  requires: [build-system-prompt]
+  introduces: [c:context-engineering, c:compaction]
+  data: [model-qwen3-0.6b]
+  ladder: [python]
+  needs: any
+
+- id: build-prompt-caching
+  title: "Pay once for the same start"
+  level: basis
+  domein: bouwen
+  module: prompts
+  idea: "Many calls start with the same long text, such as the system prompt; with prompt caching the server keeps its work on that start, so the next call is faster and cheaper, and you measure it on the course's server."
+  covers: [context-engineering#2]
+  requires: [build-context-engineering]
+  introduces: [c:prompt-caching]
+  mentions: [c:kv-cache]
+  data: [model-qwen3-0.6b]
+  ladder: [python]
+  needs: any
+
+# --- bouwen/rag: retrieval-augmented generation ---------------------------------
+- id: build-rag-idea
+  title: "Look it up first: what RAG is"
+  level: basis
+  domein: bouwen
+  module: rag
+  idea: "A model answers from what it learned, and makes things up where that falls short; retrieval-augmented generation first looks up texts that fit the question and puts them in the prompt, so the answer can come from them."
+  covers: [rag-basis#0]
+  requires: [build-call-api, lm-hallucination, start-prompt-chains]
+  introduces: [c:retrieval-augmented-generation, c:retrieval]
+  data: []
+  needs: any
+
+- id: build-rag-first
+  title: "Your first RAG"
+  level: basis
+  domein: bouwen
+  module: rag
+  idea: "A whole RAG fits in a few functions: find the texts that share the most words with the question, put them in the prompt with the question, and send it to the model."
+  covers: [rag-basis#1]
+  requires: [build-rag-idea, build-system-prompt]
+  introduces: [c:rag-pipeline, c:knowledge-base]
+  data: [model-qwen3-0.6b, course-summaries]
+  ladder: [python]
+  needs: any
+
+- id: build-documents-to-text
+  title: "From files to text"
+  level: basis
+  domein: bouwen
+  module: rag
+  idea: "Before you can search documents you need their text: from Markdown and HTML it comes out cleanly, from a PDF with lost tables and columns, and from a scan only with OCR."
+  covers: [rag-basis#2]
+  requires: [build-rag-first, py-files]
+  introduces: [c:document-parsing, c:ingestion]
+  data: [course-summaries]
+  ladder: [python]
+  needs: any
+
+- id: build-chunking
+  title: "Cutting documents into pieces"
+  level: basis
+  domein: bouwen
+  module: rag
+  idea: "Documents are cut into chunks that are searched one by one: a fixed length, along paragraphs and sentences (recursive), or where the meaning changes (semantic); how you cut decides how often the right piece is found."
+  covers: [rag-basis#3]
+  requires: [build-documents-to-text]
+  introduces: [c:chunk, c:chunking, c:chunk-overlap]
+  data: [course-summaries]
+  ladder: [python]
+  needs: any
+
+- id: build-bm25
+  title: "Search by words: BM25"
+  level: basis
+  domein: bouwen
+  module: rag
+  idea: "BM25 scores a text by the words it shares with the question: a rare word counts more than a common one, a word that comes back often counts less each time, and a long text gets no head start."
+  covers: [rag-basis#5]
+  requires: [build-chunking, math-exp-log]
+  introduces: [c:lexical-retrieval, c:term-frequency, c:inverse-document-frequency, c:bm25]
+  data: [course-summaries]
+  ladder: [python, numpy]
+  needs: any
+
+- id: build-retrieval-embeddings
+  title: "Search by meaning"
+  level: basis
+  domein: bouwen
+  module: rag
+  idea: "With embeddings, a question finds texts that mean the same without sharing words, even in another language: embed every chunk once, embed the question, and take the chunks with the highest cosine similarity."
+  covers: [rag-basis#4]
+  requires: [build-bm25, build-embeddings-api]
+  introduces: [c:dense-retrieval, c:cross-lingual-retrieval]
+  data: [model-granite-embedding, course-summaries]
+  ladder: [python, numpy]
+  needs: any
+
+- id: build-grounded-answers
+  title: "Answers from the sources"
+  level: basis
+  domein: bouwen
+  module: rag
+  idea: "Tell the model to answer only from the chunks it got, to name the chunk for each claim, and to say it does not know when they do not answer the question; then check whether the named chunk says it."
+  covers: [rag-basis#6]
+  requires: [build-retrieval-embeddings]
+  introduces: [c:grounded-generation]
+  data: [model-qwen3-0.6b, course-summaries]
+  ladder: [python]
+  needs: any
+
+- id: build-project-rag
+  title: "Project: your assistant reads your documents"
+  level: basis
+  domein: bouwen
+  module: rag
+  kind: project
+  project: app
+  idea: "Your assistant answers questions about your own documents, or about the summaries of the course: cut them into chunks, search by words and by meaning, and answer from the sources with the source named."
+  covers: []
+  requires: [build-project-prompts, build-grounded-answers]
+  data: [model-qwen3-0.6b, model-granite-embedding, course-summaries]
+  ladder: [python, numpy]
+  needs: any
+
+- id: build-vector-index
+  title: "Searching many vectors fast"
+  level: basis
+  domein: bouwen
+  module: rag
+  idea: "Comparing a question with every vector is slow for millions of them; an index such as IVF only compares with the vectors in the nearest clusters, much faster and almost always with the same answer (approximate nearest neighbors); HNSW and FAISS do it better."
+  covers: [retrieval-techniek#0]
+  requires: [build-retrieval-embeddings, ml-kmeans]
+  introduces: [c:vector-index, c:approximate-nearest-neighbors, c:ivf-index, c:hnsw]
+  data: [model-granite-embedding, course-summaries]
+  ladder: [python, numpy]
+  needs: any
+
+- id: build-metadata-filters
+  title: "Filters and vector databases"
+  level: basis
+  domein: bouwen
+  module: rag
+  idea: "Every chunk carries metadata (its language, its lesson, its level), and a filter searches only among the chunks that fit; a vector database keeps vectors, metadata and index together."
+  covers: [retrieval-techniek#3]
+  requires: [build-vector-index]
+  introduces: [c:metadata-filter, c:vector-database]
+  mentions: [c:metadata]
+  data: [model-granite-embedding, course-summaries]
+  ladder: [python, numpy]
+  needs: any
+
+- id: build-hybrid-search
+  title: "Words and meaning together"
+  level: basis
+  domein: bouwen
+  module: rag
+  idea: "Search by words finds exact names and codes, search by meaning finds the same idea in other words; reciprocal rank fusion merges the two lists by rank, and finds more of the right chunks than either."
+  covers: [retrieval-techniek#4]
+  requires: [build-retrieval-embeddings]
+  introduces: [c:hybrid-search, c:reciprocal-rank-fusion]
+  data: [model-granite-embedding, course-summaries]
+  ladder: [python, numpy]
+  needs: any
+
+- id: build-reranking
+  title: "A second look: reranking"
+  level: basis
+  domein: bouwen
+  module: rag
+  idea: "Fast search gives the ten best candidates; a reranker reads each of them together with the question and puts them in a better order, slower but more precise."
+  covers: [retrieval-techniek#5]
+  requires: [build-hybrid-search]
+  introduces: [c:reranking]
+  data: [model-qwen3-0.6b, course-summaries]
+  ladder: [python]
+  needs: any
+
+- id: build-query-rewriting
+  title: "Ask it differently"
+  level: basis
+  domein: bouwen
+  module: rag
+  idea: "A short or vague question finds little; let the model first write an answer to search with (HyDE), several versions of the question, or the question in parts, and search with those."
+  covers: [retrieval-techniek#7]
+  requires: [build-hybrid-search]
+  introduces: [c:query-transformation, c:hyde]
+  data: [model-qwen3-0.6b, course-summaries]
+  ladder: [python]
+  needs: any
+
+- id: build-rag-eval
+  title: "Is the RAG right?"
+  level: basis
+  domein: bouwen
+  module: rag
+  idea: "A RAG fails in the search or in the answer, so measure both: did the right chunks come back (context recall and precision), and does the answer follow from them and fit the question (faithfulness and answer relevance)."
+  covers: [rag-evalueren-en-in-productie#0]
+  requires: [build-reranking, build-grounded-answers]
+  introduces: [c:context-recall, c:context-precision, c:answer-faithfulness, c:answer-relevance]
+  warns: [faithfulness]
+  data: [model-qwen3-0.6b, course-summaries]
+  ladder: [python]
+  needs: any
+
+# --- bouwen/agents: agents and tools -------------------------------------------
+- id: build-tool-calling
+  title: "Tools as JSON: function calling"
+  level: basis
+  domein: bouwen
+  module: agents
+  idea: "You describe each tool with a name, a description and a JSON schema of its arguments; the model answers with a tool call instead of text, your code runs the function and sends back the result, and the model answers with it."
+  covers: [tool-use-en-function-calling#0]
+  requires: [agent-idea, build-structured-output]
+  introduces: [c:function-calling, c:tool-choice]
+  data: [model-qwen3-0.6b]
+  ladder: [python]
+  needs: any
+
+- id: build-tool-design
+  title: "Tools an agent can use well"
+  level: basis
+  domein: bouwen
+  module: agents
+  idea: "A model can only use a tool as well as it is described: a clear name, a description that says when to use it, arguments with examples and error messages that say what to do instead; a measured run shows the difference. Tools run in your program or at the provider."
+  covers: [tool-use-en-function-calling#1, tool-use-en-function-calling#2]
+  requires: [build-tool-calling, build-multimodal-apis]
+  introduces: [c:agent-computer-interface, c:client-side-tool]
+  data: [model-qwen3-0.6b]
+  ladder: [python]
+  needs: any
+
+- id: build-tool-permissions
+  title: "What a tool may do"
+  level: basis
+  domein: bouwen
+  module: agents
+  idea: "Give an agent only the tools and rights its task needs (least privilege): read before write, a list of what is allowed, and a confirmation before anything that cannot be undone."
+  covers: [tool-use-en-function-calling#4]
+  requires: [build-tool-design]
+  introduces: [c:least-privilege, c:allowlist]
+  data: []
+  ladder: [python]
+  needs: any
+
+- id: build-workflow-or-agent
+  title: "A workflow or an agent?"
+  level: basis
+  domein: bouwen
+  module: agents
+  idea: "In a workflow your code fixes the steps and the model fills them in; in an agent the model chooses the steps itself; a workflow is cheaper, faster and easier to test, so use an agent only where the steps cannot be known beforehand."
+  covers: [workflows-en-agentpatronen#0]
+  requires: [build-tool-calling]
+  introduces: [c:llm-workflow]
+  data: [model-qwen3-0.6b]
+  ladder: [python]
+  needs: any
+
+- id: build-workflow-patterns
+  title: "Five workflow patterns"
+  level: basis
+  domein: bouwen
+  module: agents
+  idea: "Most workflows are made of five patterns: steps in a row, a router that picks a path, parts in parallel, an orchestrator that hands out work to workers, and an evaluator that sends an answer back until it is good."
+  covers: [workflows-en-agentpatronen#1]
+  requires: [build-workflow-or-agent, build-choose-model]
+  introduces: [c:orchestrator-workers, c:evaluator-optimizer]
+  data: [model-qwen3-0.6b]
+  ladder: [python]
+  needs: any
+
+- id: build-agent-loop
+  title: "The agent loop"
+  level: basis
+  domein: bouwen
+  module: agents
+  idea: "An agent goes wrong less often when the model writes its reasoning before each tool call and reads each result as an observation (ReAct); you add that to the loop of agent-idea, on the course's model through its API, and measure how often it reaches the answer within the step limit."
+  covers: [workflows-en-agentpatronen#2]
+  requires: [build-workflow-patterns]
+  introduces: [c:react-agent, c:observation]
+  data: [model-qwen3-0.6b]
+  ladder: [python]
+  needs: any
+
+- id: build-plan-execute
+  title: "Plan first, then act"
+  level: basis
+  domein: bouwen
+  module: agents
+  idea: "Instead of deciding one step at a time, an agent can first write the whole plan and then carry it out (plan-and-execute): fewer calls to the model, and you can read the plan before it runs; ReWOO and LLMCompiler run independent steps in parallel."
+  covers: [planning-reflectie-en-geheugen#0]
+  requires: [build-agent-loop]
+  introduces: [c:plan-and-execute]
+  data: [model-qwen3-0.6b]
+  ladder: [python]
+  needs: any
+
+- id: build-agent-memory
+  title: "What an agent remembers"
+  level: basis
+  domein: bouwen
+  module: agents
+  idea: "An agent remembers nothing between calls by itself: short-term memory is the conversation in its context, long-term memory is notes it writes to a file and searches again later."
+  covers: [planning-reflectie-en-geheugen#2]
+  requires: [build-agent-loop, build-context-engineering]
+  introduces: [c:short-term-memory, c:long-term-memory]
+  data: [model-qwen3-0.6b]
+  ladder: [python]
+  needs: any
+
+- id: build-code-sandbox
+  title: "Running code an agent wrote"
+  level: basis
+  domein: bouwen
+  module: agents
+  idea: "Code an agent writes runs in a separate process, with a time limit, in an empty folder and without a network: whatever it does wrong stays inside that sandbox."
+  covers: [code-execution-computer-use-en-browser-use#0]
+  requires: [build-agent-loop, build-tool-permissions]
+  introduces: [c:sandbox, py:subprocess]
+  data: []
+  ladder: [python]
+  needs: any
+
+- id: build-browser-use
+  title: "An agent that uses a browser"
+  level: basis
+  domein: bouwen
+  module: agents
+  idea: "A browser agent reads a page as text or as a screenshot and clicks, types and scrolls like a person; it can do what has no API, but it is slow, breaks when the page changes, and every page it reads can carry instructions."
+  covers: [code-execution-computer-use-en-browser-use#2]
+  requires: [build-agent-loop, build-defensive-prompts]
+  introduces: [c:browser-use, c:computer-use]
+  data: []
+  needs: any
+
+- id: build-mcp
+  title: "Tools through a protocol: MCP"
+  level: basis
+  domein: bouwen
+  module: agents
+  idea: "The Model Context Protocol lets any assistant use any tool server: the server lists its tools with their schemas and runs them on request, in messages of JSON-RPC; you write a small server and client yourself."
+  covers: [protocollen-en-standaarden#0]
+  requires: [build-tool-design]
+  introduces: [c:model-context-protocol, c:json-rpc, c:mcp-server]
+  data: []
+  ladder: [python]
+  needs: any
+
+- id: build-agent-extensions
+  title: "AGENTS.md, skills and other extensions"
+  level: basis
+  domein: bouwen
+  module: agents
+  idea: "An agent learns about a project from AGENTS.md, gets a procedure as a skill it loads only when needed, and can use any web API whose OpenAPI specification it reads; plugins bundle such extensions."
+  covers: [protocollen-en-standaarden#5, protocollen-en-standaarden#6, protocollen-en-standaarden#7]
+  requires: [build-mcp, build-coding-workflow]
+  introduces: [c:agent-skill, c:openapi-specification, c:plugin]
+  data: []
+  needs: any
+
+- id: build-kinds-of-agents
+  title: "Coding, research and personal agents"
+  level: basis
+  domein: bouwen
+  module: agents
+  idea: "The same loop with other tools makes other agents: a coding agent edits files and runs tests, a deep-research agent searches and reads, a personal agent works in your mail and calendar, and a shopping agent pays; each needs its own limits."
+  covers: [gespecialiseerde-agents#0, gespecialiseerde-agents#1, gespecialiseerde-agents#3, gespecialiseerde-agents#4]
+  requires: [build-agent-loop, build-coding-workflow, build-research-and-learn, build-automate-work]
+  introduces: [c:agentic-commerce]
+  data: []
+  needs: any
+
+- id: build-agent-history
+  title: "Before today's agents"
+  level: basis
+  domein: bouwen
+  module: agents
+  idea: "MRKL (2022) sent questions to tools, HuggingGPT let a model call other models, and AutoGPT and BabyAGI (2023) let a model set its own tasks; most of them looped or wandered off, and what stayed is the loop with tools and limits."
+  covers: [gespecialiseerde-agents#5]
+  requires: [build-kinds-of-agents]
+  introduces: [c:autonomous-agent]
+  data: []
+  needs: any
+
+- id: build-agent-frameworks
+  title: "Agent frameworks: the ideas behind them"
+  level: basis
+  domein: bouwen
+  module: agents
+  idea: "An agent framework gives you the loop, tools, memory and tracing ready-made; under the names (LangGraph, LlamaIndex, AutoGen, PydanticAI, the SDKs of providers) are the ideas you built yourself, so you can judge what a framework adds."
+  covers: [frameworks-en-orkestratie#0]
+  requires: [build-agent-loop, build-mcp, build-agent-memory]
+  introduces: [c:agent-framework]
+  data: []
+  needs: any
+
+# --- bouwen/productie: evaluating and production --------------------------------
+- id: build-error-analysis
+  title: "Look at the mistakes first"
+  level: basis
+  domein: bouwen
+  module: productie
+  idea: "Before you measure, read: go through a hundred answers, write down what goes wrong, sort the mistakes into kinds and count them; the biggest kind is what you fix first (evaluation-driven development)."
+  covers: [evaluatie-en-llmops#0]
+  requires: [build-structured-output, build-sampling-api]
+  introduces: [c:failure-taxonomy, c:evaluation-driven-development]
+  mentions: [c:error-analysis]
+  data: [model-qwen3-0.6b]
+  ladder: [python]
+  needs: any
+
+- id: build-eval-set
+  title: "An eval set and regression tests"
+  level: basis
+  domein: bouwen
+  module: productie
+  idea: "An eval set is a fixed list of inputs with checks in code (does the answer contain this, is it valid JSON, is it short enough); run it after every change, and a regression test fails when a new prompt does worse than the old one."
+  covers: [evaluatie-en-llmops#2]
+  requires: [build-error-analysis, build-check-ai-code, build-prompt-templates]
+  introduces: [c:eval-set, c:assertion-based-test, c:regression-test]
+  data: [model-qwen3-0.6b]
+  ladder: [python]
+  needs: any
+
+- id: build-judges
+  title: "Who grades the answer"
+  level: basis
+  domein: bouwen
+  module: productie
+  idea: "An answer can be graded by code, by people or by a model with a rubric (LLM as a judge); a judge is only useful if it agrees with people, so measure how often it does on answers people graded."
+  covers: [evaluatie-en-llmops#1]
+  requires: [build-eval-set]
+  introduces: [c:llm-as-a-judge, c:rubric]
+  data: [model-qwen3-0.6b]
+  ladder: [python]
+  needs: any
+
+- id: build-eval-online
+  title: "Offline, online and what it is worth"
+  level: basis
+  domein: bouwen
+  module: productie
+  idea: "An eval set measures offline, before users see a change; online you measure with real users (thumbs, tasks completed, an A/B test); what an app is worth is in tasks done and cost per conversation, and feedback becomes new examples for the eval set."
+  covers: [evaluatie-en-llmops#3, evaluatie-en-llmops#4, evaluatie-en-llmops#5]
+  requires: [build-eval-set]
+  introduces: [c:online-evaluation, c:ab-test, c:user-feedback, c:data-flywheel]
+  data: []
+  ladder: [python]
+  needs: any
+
+- id: build-tracing
+  title: "Seeing what happened"
+  level: basis
+  domein: bouwen
+  module: productie
+  idea: "A trace records every step of one request (each call to the model, each tool, how long it took and how many tokens it cost) as nested spans, so you can see afterwards where an answer went wrong or slow."
+  covers: [d17-llmops-en-productie#1]
+  requires: [build-agent-loop, build-eval-set]
+  introduces: [c:request-trace, c:span, c:observability]
+  data: [model-qwen3-0.6b]
+  ladder: [python]
+  needs: any
+
+- id: build-guardrails
+  title: "Guardrails"
+  level: basis
+  domein: bouwen
+  module: productie
+  idea: "Guardrails are checks around the model: before it (is this question allowed, does it hide an instruction) and after it (does the answer leak personal data, is it on topic); a guardrail that blocks too much is a failure too."
+  covers: [d17-llmops-en-productie#2]
+  requires: [build-defensive-prompts, build-tracing]
+  introduces: [c:guardrail]
+  data: [model-qwen3-0.6b]
+  ladder: [python]
+  needs: any
+
+- id: build-cost-latency-cache
+  title: "Cost, latency and caching answers"
+  level: basis
+  domein: bouwen
+  module: productie
+  idea: "Measure what each call costs and how long it takes; keep answers to repeated questions in a cache, exactly by the text or by meaning with embeddings, and check that a cached answer still fits."
+  covers: [d17-llmops-en-productie#3]
+  requires: [build-batch-keys-costs, build-prompt-caching, build-retrieval-embeddings]
+  introduces: [c:latency, c:exact-cache, c:semantic-cache]
+  mentions: [c:caching]
+  data: [model-qwen3-0.6b, model-granite-embedding]
+  ladder: [python, numpy]
+  needs: any
+
+- id: build-ship-app
+  title: "Shipping an LLM app"
+  level: basis
+  domein: bouwen
+  module: productie
+  idea: "AI engineering builds on a model someone else trained: the work is in prompts, data, evals and the code around them; an app ships with its settings in a file, logs, a version of every prompt, and a way back when a change goes wrong."
+  covers: [d17-llmops-en-productie#0, d17-llmops-en-productie#6]
+  requires: [build-guardrails, build-cost-latency-cache]
+  introduces: [c:ai-engineering, c:rollback]
+  data: []
+  ladder: [python]
+  needs: any
+
+- id: build-human-in-loop
+  title: "Ask before acting"
+  level: basis
+  domein: bouwen
+  module: productie
+  idea: "An agent can stop before a step and ask a person: approve, change or refuse; ask at the steps that cost money, send something or cannot be undone, not at every step."
+  covers: [agents-beheersen-en-evalueren#0]
+  requires: [build-tool-permissions, build-eval-set]
+  introduces: [c:human-in-the-loop, c:approval-step]
+  data: []
+  ladder: [python]
+  needs: any
+
+- id: build-agent-failures
+  title: "How agents go wrong"
+  level: basis
+  domein: bouwen
+  module: productie
+  idea: "Agents fail in recognizable ways: looping, choosing the wrong tool, inventing a result, giving up too early, doing more than asked; counted in recorded runs of the course's agent, each with what helps against it."
+  covers: [agents-beheersen-en-evalueren#1]
+  requires: [build-human-in-loop, build-error-analysis, build-agent-loop]
+  introduces: [c:agent-failure-mode]
+  data: [model-qwen3-0.6b]
+  ladder: [python]
+  needs: any
+
+- id: build-prompt-rag-finetune
+  title: "Prompt, RAG or fine-tune?"
+  level: basis
+  domein: bouwen
+  module: productie
+  idea: "Start with a better prompt, add RAG when the model lacks knowledge, and fine-tune only when it lacks a behavior that examples can teach; providers fine-tune for you on your examples, with preferences or with a reward."
+  covers: [modellen-aanpassen-vanuit-de-app#0, modellen-aanpassen-vanuit-de-app#1]
+  requires: [build-rag-eval, build-eval-set, build-where-models-run]
+  introduces: [c:hosted-fine-tuning]
+  mentions: [c:reward]
+  data: []
+  needs: any

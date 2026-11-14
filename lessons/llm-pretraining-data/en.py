@@ -123,7 +123,7 @@ def text_idea():
         3. **Was it copied lawfully?** Never from a pirate source, not even to train on yourself: the exception of question 4 covers only text you may lawfully read. Books3, nearly 200,000 books from a pirate site, was part of a well-known open corpus, the Pile, until a request by the Danish Rights Alliance took it offline.
         4. **Did the maker opt out?** In the EU, text and data mining of text you may lawfully read is allowed, also for training AI, unless the rightsholder reserved it; for text online, in a machine-readable way, such as rules in robots.txt, the file in which a website tells crawlers what they may fetch (the EU's copyright directive of 2019, article 4).
 
-        **The model has a license too.** Many models come with open weights, but open weights alone are not open source. The weights of Llama, the language model of Meta, can be downloaded by anyone, but its license limits who may use them and how. By the definition of the Open Source Initiative (2024), open-source AI comes with its weights and its code, and with enough information about its training data to build a similar model, all under terms that let anyone use, study, change and share it.
+        **The model has a license too.** Many models come with open weights, as in [Which AI tool for what](/course/open/start-ai-tools-landscape?lang=en), but open weights alone are not open source. The weights of Llama, the language model of Meta, can be downloaded by anyone, but its license limits who may use them and how. By the definition of the Open Source Initiative (2024), open-source AI comes with its weights and its code, and with enough information about its training data to build a similar model, all under terms that let anyone use, study, change and share it.
 
         ### New words and symbols
 
@@ -134,7 +134,6 @@ def text_idea():
         | **synthetic data** | data made by a program instead of collected from the world; here, text written by a language model | |
         | **text and data mining** | analyzing large amounts of text and data by computer to find patterns, as training a model does | |
         | **opt-out** | a way for the owner of content to say that it may not be used, for example for training AI: through rules in robots.txt, metadata or a request | |
-        | **open weights** | a model's trained parameters, published so that anyone can download and run them; its data and code may stay private, and its license may still set conditions | |
         | **open-source AI** | a model that anyone may use, study, change and share: with its weights, its code and enough information about its data to build a similar one | |
         """),
         L.watch_out("The license of a corpus can cover the collection and not the texts in it. FineWeb's license, ODC-By 1.0, lets you use and share the collection, if you name its makers; the web pages in it keep their own rights, so the course trains no model it shares on it."),

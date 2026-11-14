@@ -187,9 +187,9 @@ lessons:
   module: gebruiken
   idea: "A base model only continues text; a chat model was trained further to answer as an assistant, with system, user and assistant roles."
   covers: [base-vs-chat-en-chat-templates#0, base-vs-chat-en-chat-templates#1]
-  requires: [lm-what-is-a-language-model]
-  introduces: [c:base-model, c:chat-model, c:message-role]
-  uses: [c:language-model, c:next-token-prediction, c:token, c:probability, c:training, c:label, c:self-supervised-learning, c:seed, c:newline, py:dict, py:list, py:nested-list, py:append, py:str, py:string-literal, py:for, py:def, py:return, py:print, py:comment, py:underscore-name, py:variable, py:len, py:indexing, q:predict, q:choice, q:exercise-with-check, q:run-cell]
+  requires: [lm-what-is-a-language-model, start-prompt-basics]
+  introduces: [c:base-model, c:chat-model]
+  uses: [c:message-role, c:language-model, c:next-token-prediction, c:token, c:probability, c:training, c:label, c:self-supervised-learning, c:seed, c:newline, py:dict, py:list, py:nested-list, py:append, py:str, py:string-literal, py:for, py:def, py:return, py:print, py:comment, py:underscore-name, py:variable, py:len, py:indexing, q:predict, q:choice, q:exercise-with-check, q:run-cell]
   data: [tiny-shakespeare]
   needs: any
 
@@ -309,9 +309,9 @@ lessons:
   project: llm
   idea: "Embed the last few tokens, glue the embeddings together and let an MLP give one logit per vocabulary token: Bengio's neural language model, which can only look back a fixed number of tokens."
   covers: [neurale-nlp#1, token-embeddings-en-output-head#1, token-embeddings-en-output-head#2]
-  requires: [lm-bigram-neural, nn-embedding-layer, nn-trainer, lm-tokens-outside]
-  introduces: [c:context-window, c:neural-language-model, c:output-head]
-  uses: [c:vocabulary, c:embedding-matrix, c:embedding, c:embedding-layer, c:token, c:language-model, c:next-token-prediction, c:bigram, c:logit, c:softmax, c:cross-entropy, c:mlp, c:hidden-layer, c:relu, c:layer, c:shape, c:tensor, c:mini-batch, c:training-loop, c:validation-set, c:seed, c:loss, c:model-parameter, c:weight, py:nn-embedding, py:nn-linear, py:nn-module, py:class, py:self, py:init-method, py:forward-method, py:super, py:manual-seed, py:torch-tensor, py:list, py:append, py:slicing, py:for, py:range, py:len, py:def, py:return, py:print, py:comment, py:underscore-name, py:import, q:predict, q:choice, q:exercise-with-check, q:run-cell]
+  requires: [lm-bigram-neural, nn-embedding-layer, nn-trainer, lm-tokens-outside, start-ai-tools-landscape]
+  introduces: [c:neural-language-model, c:output-head]
+  uses: [c:context-window, c:vocabulary, c:embedding-matrix, c:embedding, c:embedding-layer, c:token, c:language-model, c:next-token-prediction, c:bigram, c:logit, c:softmax, c:cross-entropy, c:mlp, c:hidden-layer, c:relu, c:layer, c:shape, c:tensor, c:mini-batch, c:training-loop, c:validation-set, c:seed, c:loss, c:model-parameter, c:weight, py:nn-embedding, py:nn-linear, py:nn-module, py:class, py:self, py:init-method, py:forward-method, py:super, py:manual-seed, py:torch-tensor, py:list, py:append, py:slicing, py:for, py:range, py:len, py:def, py:return, py:print, py:comment, py:underscore-name, py:import, q:predict, q:choice, q:exercise-with-check, q:run-cell]
   mentions: [c:recurrent-network, c:attention]
   ladder: [torch]
   data: [tiny-shakespeare]
@@ -519,9 +519,9 @@ lessons:
   module: pretrainen
   idea: "LLMs learn from web pages, books, code and papers; where data comes from decides what a model knows and which rights and licenses apply."
   covers: [pretraining-doelen-en-databronnen#0, auteursrecht-en-ip#4]
-  requires: [data-provenance, gpt-train-bpe]
-  introduces: [c:pretraining-corpus, c:common-crawl, c:synthetic-data, c:text-and-data-mining, c:opt-out, c:open-weights, c:open-source-ai]
-  uses: [c:license, c:consent, c:data-provenance, c:datasheet, c:language-model, c:gpt, c:token, c:tokenizer, c:model-parameter, c:model, c:training, c:weight, py:dict, py:list, py:for, py:if, py:arithmetic, py:variable, py:float, py:string-literal, py:def, py:return, py:print, py:comment, py:underscore-name, q:predict, q:choice, q:exercise-with-check, q:run-cell]
+  requires: [data-provenance, gpt-train-bpe, start-ai-tools-landscape]
+  introduces: [c:pretraining-corpus, c:common-crawl, c:synthetic-data, c:text-and-data-mining, c:opt-out, c:open-source-ai]
+  uses: [c:open-weights, c:license, c:consent, c:data-provenance, c:datasheet, c:language-model, c:gpt, c:token, c:tokenizer, c:model-parameter, c:model, c:training, c:weight, py:dict, py:list, py:for, py:if, py:arithmetic, py:variable, py:float, py:string-literal, py:def, py:return, py:print, py:comment, py:underscore-name, q:predict, q:choice, q:exercise-with-check, q:run-cell]
   mentions: [c:knowledge-cutoff]
   needs: any
 
@@ -869,9 +869,9 @@ lessons:
   module: redeneren
   idea: "A transformer does the same fixed work for every token; letting it write steps before its answer, or sample several answers and vote, spends more computation at answer time and often answers better, without changing a weight."
   covers: [reasoning-modellen-en-test-time-compute#0, reasoning-modellen-en-test-time-compute#2, reasoning-modellen-en-test-time-compute#3, prompt-basis#2]
-  requires: [llm-eval-chat, res-research-cycle, stats-bootstrap, ml-knn]
-  introduces: [c:chain-of-thought, c:few-shot-prompting, c:zero-shot-prompting, c:test-time-compute, c:pass-at-k, c:reasoning-model, c:faithfulness, py:isdigit]
-  uses: [c:majority-voting, p:verifiable-eval, c:base-model, c:open-weights, c:license, c:model-hub, c:token, c:forward-pass, c:transformer-block, c:transformer, c:attention, c:sampling, c:greedy-decoding, c:temperature, c:reinforcement-learning, c:benchmark, c:contamination, c:test-set, c:accuracy, c:standard-error, c:experiment, c:floating-point, c:gpu, py:def, py:return, py:if, py:for, py:append, py:and-operator, py:or-operator, py:dict, py:list, py:str, py:string-literal, py:indexing, py:str-join, py:split, py:split-sep, py:strip-chars, py:reversed, py:repr, py:is-none, py:none, py:bool, py:comparison, py:print, py:comment, py:underscore-name, q:predict, q:choice, q:explain, q:exercise-with-check, q:run-cell]
+  requires: [llm-eval-chat, res-research-cycle, stats-bootstrap, ml-knn, start-prompt-basics]
+  introduces: [c:test-time-compute, c:pass-at-k, c:reasoning-model, c:faithfulness, py:isdigit]
+  uses: [c:chain-of-thought, c:few-shot-prompting, c:zero-shot-prompting, c:majority-voting, p:verifiable-eval, c:base-model, c:open-weights, c:license, c:model-hub, c:token, c:forward-pass, c:transformer-block, c:transformer, c:attention, c:sampling, c:greedy-decoding, c:temperature, c:reinforcement-learning, c:benchmark, c:contamination, c:test-set, c:accuracy, c:standard-error, c:experiment, c:floating-point, c:gpu, py:def, py:return, py:if, py:for, py:append, py:and-operator, py:or-operator, py:dict, py:list, py:str, py:string-literal, py:indexing, py:str-join, py:split, py:split-sep, py:strip-chars, py:reversed, py:repr, py:is-none, py:none, py:bool, py:comparison, py:print, py:comment, py:underscore-name, q:predict, q:choice, q:explain, q:exercise-with-check, q:run-cell]
   mentions: [c:verifiable-reward]
   ladder: [python]
   data: [model-qwen3-0.6b-base, gsm8k-sample, course-reasoning-qwen]

@@ -115,7 +115,7 @@ def text_idea():
         """),
         L.watch_out("*Redeneert* is beeldspraak. Het model voorspelt nog steeds het ene token na het andere: zijn stappen zijn tekst die het schreef en daarna leest."),
         mo.md(rf"""
-        **Drie manieren om de stappen te krijgen.** Uitgewerkte voorbeelden in de prompt: few-shot prompting met een chain of thought. Erom vragen zonder voorbeelden: zero-shot, *Let's think step by step.* na de vraag, het experiment uit [Hoe onderzoek werkt](/course/open/res-research-cycle?lang=nl); in de run van de course {S['zero']} van de {S['n']} goed. Of het model trainen om ze te schrijven: reasoning models zoals OpenAI o1 en DeepSeek-R1 (stand oktober 2026) leerden het met reinforcement learning, DeepSeek-R1 op antwoorden die een programma nakijkt, zoals in [Reinforcement learning met verifiable rewards](/course/open/llm-rlvr?lang=nl).
+        **Drie manieren om de stappen te krijgen.** Uitgewerkte voorbeelden in de prompt: few-shot prompting met een chain of thought, zoals in [Goed vragen: rollen, voorbeelden en stappen](/course/open/start-prompt-basics?lang=nl). Erom vragen zonder voorbeelden: zero-shot, *Let's think step by step.* na de vraag, het experiment uit [Hoe onderzoek werkt](/course/open/res-research-cycle?lang=nl); in de run van de course {S['zero']} van de {S['n']} goed. Of het model trainen om ze te schrijven: reasoning models zoals OpenAI o1 en DeepSeek-R1 (stand oktober 2026) leerden het met reinforcement learning, DeepSeek-R1 op antwoorden die een programma nakijkt, zoals in [Reinforcement learning met verifiable rewards](/course/open/llm-rlvr?lang=nl).
 
         **Test-time compute.** Stappen schrijven kost meer rekenwerk tijdens het antwoorden, en meerdere antwoorden ook. In de run van de course was een antwoord gemiddeld {C.number(S['tokens']['direct'], 1, 'nl')} tokens direct en {C.number(S['tokens']['steps'], 0, 'nl')} met stappen, en {C.SAMPLES} samples samen {C.number(C.SAMPLES * S['tokens']['sample'], 0, 'nl')}: op de CPU van de course ongeveer {C.number(S['seconds']['direct'], 0, 'nl')} s, {C.number(S['seconds']['steps'], 0, 'nl')} s en {C.number(S['seconds']['votes'] / 60, 0, 'nl')} minuten per vraag.
 
@@ -125,9 +125,6 @@ def text_idea():
 
         | Woord of teken | Wat het betekent |
         |---|---|
-        | **chain of thought** | de stappen die een model schrijft vóór zijn eindantwoord |
-        | **few-shot prompting** | een paar uitgewerkte voorbeelden in de prompt, vóór de echte vraag |
-        | **zero-shot prompting** | de vraag of een instructie, zonder voorbeelden |
         | **test-time compute** | het rekenwerk dat een model besteedt terwijl het antwoordt |
         | **pass@k**, $k$ | of minstens één van $k$ antwoorden goed is, volgens een check die het antwoord kent |
         | **reasoning model** | een model dat, meestal met reinforcement learning, getraind is om een lange chain of thought te schrijven voordat het antwoordt |

@@ -123,7 +123,7 @@ def text_idea():
         3. **Is hij rechtmatig gekopieerd?** Nooit uit een piraterijbron, ook niet om zelf op te trainen: de uitzondering van vraag 4 geldt alleen voor tekst die je rechtmatig mag lezen. Books3, bijna 200.000 boeken van een piraterijsite, zat in een bekend open corpus, de Pile, tot een verzoek van de Deense Rights Alliance het offline haalde.
         4. **Heeft de maker een opt-out gegeven?** In de EU is tekst- en datamining van tekst die je rechtmatig mag lezen toegestaan, ook voor het trainen van AI, tenzij de rechthebbende het heeft voorbehouden; voor tekst online op een machineleesbare manier, zoals met regels in robots.txt, het bestand waarin een website crawlers vertelt wat ze mogen ophalen (de Europese auteursrechtrichtlijn van 2019, artikel 4).
 
-        **Het model heeft ook een licentie.** Van veel modellen zijn de weights openbaar: open weights. Maar open weights alleen zijn nog geen open source. De weights van Llama, het language model van Meta, kan iedereen downloaden, maar zijn licentie beperkt wie ze mag gebruiken en hoe. Volgens de definitie van het Open Source Initiative (2024) komt open-source AI met zijn weights en zijn code, en met genoeg informatie over zijn training data om een vergelijkbaar model te bouwen, allemaal onder voorwaarden die iedereen laten gebruiken, bestuderen, aanpassen en delen.
+        **Het model heeft ook een licentie.** Van veel modellen zijn de weights openbaar: open weights, zoals in [Welke AI-tool waarvoor](/course/open/start-ai-tools-landscape?lang=nl). Maar open weights alleen zijn nog geen open source. De weights van Llama, het language model van Meta, kan iedereen downloaden, maar zijn licentie beperkt wie ze mag gebruiken en hoe. Volgens de definitie van het Open Source Initiative (2024) komt open-source AI met zijn weights en zijn code, en met genoeg informatie over zijn training data om een vergelijkbaar model te bouwen, allemaal onder voorwaarden die iedereen laten gebruiken, bestuderen, aanpassen en delen.
 
         ### Nieuwe woorden en tekens
 
@@ -134,7 +134,6 @@ def text_idea():
         | **synthetische data** | data die een programma maakt, in plaats van data die in de wereld verzameld is; hier tekst die een language model schreef | |
         | **tekst- en datamining** | grote hoeveelheden tekst en data door een computer laten analyseren om patronen te vinden, zoals het trainen van een model doet | |
         | **opt-out** | een manier waarop de eigenaar van content aangeeft dat die niet gebruikt mag worden, bijvoorbeeld voor het trainen van AI: met regels in robots.txt, metadata of een verzoek | |
-        | **open weights** | de getrainde parameters van een model, gepubliceerd zodat iedereen ze kan downloaden en draaien; zijn data en code kunnen geheim blijven, en zijn licentie kan nog voorwaarden stellen | |
         | **open-source AI** | een model dat iedereen mag gebruiken, bestuderen, aanpassen en delen: met zijn weights, zijn code en genoeg informatie over zijn data om een vergelijkbaar model te bouwen | |
         """),
         L.watch_out("De licentie van een corpus kan de verzameling dekken en niet de teksten erin. De licentie van FineWeb, ODC-By 1.0, laat je de verzameling gebruiken en delen, als je de makers noemt; de webpagina's erin houden hun eigen rechten, dus de course traint er geen model op dat ze deelt."),

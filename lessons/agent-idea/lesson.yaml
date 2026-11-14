@@ -1,0 +1,28 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: agent-idea
+minutes: 25
+title:
+  en: "What an agent is: a model, tools and a loop"
+  nl: "Wat een agent is: een model, tools en een loop"
+goal:
+  en: "write the agent loop that lets a language model call tools until it answers, say who runs a tool, and tell an LLM agent from an RL agent."
+  nl: "de agent loop schrijven die een language model tools laat aanroepen tot het antwoordt, zeggen wie een tool uitvoert, en een LLM agent onderscheiden van een RL agent."
+summary:
+  - en: "An LLM agent is a language model with tools in a loop: the model writes a tool call, your program runs the tool and gives the result back as a message, and the model chooses again, until it answers."
+    nl: "Een LLM agent is een language model met tools in een loop: het model schrijft een tool call, jouw programma voert de tool uit en geeft het resultaat terug als bericht, en het model kiest opnieuw, tot het antwoordt."
+  - en: "The model only writes text; the tools are described to it in the prompt, and a step limit stops a model that keeps calling them."
+    nl: "Het model schrijft alleen tekst; de tools worden in de prompt beschreven, en een stappenlimiet stopt een model dat ze blijft aanroepen."
+  - en: "From a chatbot to an agent that works on its own is a spectrum; the RL agent is the same loop with a policy learned from rewards."
+    nl: "Van een chatbot tot een agent die zelfstandig werkt is een spectrum; de RL agent is dezelfde loop met een policy die geleerd is uit rewards."
+can_now:
+  - en: "write an agent loop that runs the tools a model calls, with a step limit"
+    nl: "een agent loop schrijven die de tools uitvoert die een model aanroept, met een stappenlimiet"
+    by: run-agent
+  - en: "say who runs a tool when a model writes a tool call"
+    nl: "zeggen wie een tool uitvoert als een model een tool call schrijft"
+    by: who-runs
+  - en: "tell an LLM agent from an RL agent"
+    nl: "een LLM agent onderscheiden van een RL agent"
+    by: rl-agent

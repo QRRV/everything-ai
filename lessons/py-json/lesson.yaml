@@ -1,0 +1,28 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: py-json
+minutes: 15
+title:
+  en: "Data as text: JSON"
+  nl: "Data als tekst: JSON"
+goal:
+  en: "write dicts and lists as JSON text with `json.dumps`, and turn JSON back into Python values with `json.loads` or, from a file, `json.load`."
+  nl: "dicts en lijsten als JSON-tekst schrijven met `json.dumps`, en JSON weer omzetten in Python-waarden met `json.loads` of, uit een bestand, `json.load`."
+summary:
+  - en: "JSON writes dicts, lists, strings, numbers, true, false and null as text that almost every programming language can read; the module `json` translates between that text and Python."
+    nl: "JSON schrijft dicts, lijsten, strings, getallen, true, false en null als tekst die bijna elke programmeertaal kan lezen; de module `json` vertaalt tussen die tekst en Python."
+  - en: "`json.dumps(value)` gives the JSON text of a value; `json.loads(text)` turns JSON text into Python values; `json.load(f)` reads JSON from an open file."
+    nl: "`json.dumps(value)` geeft de JSON-tekst van een waarde; `json.loads(text)` zet JSON-tekst om in Python-waarden; `json.load(f)` leest JSON uit een open bestand."
+  - en: "In JSON, `true`, `false` and `null` are Python's `True`, `False` and `None`, and strings have double quotes. Let `json.dumps` write JSON instead of gluing text together: text that is not valid JSON stops `json.loads` with a `JSONDecodeError`."
+    nl: "In JSON zijn `true`, `false` en `null` de `True`, `False` en `None` van Python, en strings hebben dubbele aanhalingstekens. Laat `json.dumps` de JSON schrijven in plaats van zelf tekst aan elkaar te plakken: tekst die geen geldige JSON is, laat `json.loads` stoppen met een `JSONDecodeError`."
+can_now:
+  - en: "read a JSON file and add up values from the lists and dicts in it"
+    nl: "een JSON-bestand lezen en waarden uit de lijsten en dicts erin optellen"
+    by: total-grams
+  - en: "say what JSON's `true`, `false` and `null` become in Python"
+    nl: "zeggen wat de `true`, `false` en `null` van JSON in Python worden"
+    by: true-null
+  - en: "turn a dict into valid JSON text with `json.dumps`"
+    nl: "een dict omzetten in geldige JSON-tekst met `json.dumps`"
+    by: report

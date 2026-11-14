@@ -328,7 +328,7 @@ def text_connections():
     mo.md(r"""
     ## Wrap-up
 
-    **How this connects.** In [Functions](/course/open/py-functions?lang=en) you wrote your own functions; a module is a collection of functions that others wrote, and `math.sqrt(16)` is a call, just like yours. Later in the course, NumPy and PyTorch are imported the same way, and a seed makes training repeatable. In the next lesson you put your own code in a module.
+    **How this connects.** In [Functions](/course/open/py-functions?lang=en) you wrote your own functions; a module is a collection of functions that others wrote, and `math.sqrt(16)` is a call, just like yours. Later in the course, NumPy and PyTorch are imported the same way, and a seed makes training repeatable. In the next lesson you use one more module, `json`, to write data as text; after that, you put your own code in a module.
     """)
     return
 

@@ -1,0 +1,28 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: start-prompt-chains
+minutes: 25
+title:
+  en: "Prompts that check themselves"
+  nl: "Prompts die zichzelf controleren"
+goal:
+  en: "split a task into prompts in a row, let a model check its answers, and let it answer from a text you give, with the sentence it used."
+  nl: "een taak opdelen in prompts na elkaar, een model zijn antwoorden laten nakijken, en het laten antwoorden uit een tekst die je geeft, met de zin die het gebruikte."
+summary:
+  - en: "Prompt chaining splits a task into small prompts in a row: between two steps you can look at the answer so far."
+    nl: "Prompt chaining deelt een taak op in kleine prompts na elkaar: tussen twee stappen kun je naar het antwoord tot nu toe kijken."
+  - en: "Self-Refine lets a model check its own answer; Chain-of-Verification asks a fresh question for each claim, without the draft."
+    nl: "Self-Refine laat een model zijn eigen antwoord nakijken; Chain-of-Verification stelt voor elke bewering een losse vraag, zonder de eerste versie."
+  - en: "Grounding lets a model answer from a text you give; a citation names the sentence, so you can check the answer."
+    nl: "Grounding laat een model antwoorden uit een tekst die je geeft; een citatie noemt de zin, zodat je het antwoord kunt nakijken."
+can_now:
+  - en: "tell prompt chaining, Self-Refine, Chain-of-Verification and grounding apart"
+    nl: "prompt chaining, Self-Refine, Chain-of-Verification en grounding uit elkaar houden"
+    by: habits
+  - en: "choose an answer you can check against its source"
+    nl: "een antwoord kiezen dat je kunt nakijken in de bron"
+    by: cite
+  - en: "say why each check of Chain-of-Verification gets a fresh prompt"
+    nl: "zeggen waarom elke controle van Chain-of-Verification een nieuwe prompt krijgt"
+    by: fresh

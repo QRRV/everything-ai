@@ -1,0 +1,28 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: start-prompt-basics
+minutes: 20
+title:
+  en: "Asking well: roles, examples and steps"
+  nl: "Goed vragen: rollen, voorbeelden en stappen"
+goal:
+  en: "name the parts of a prompt and the role of each message, and choose how to ask: with or without examples, with a role, and with the steps first."
+  nl: "de delen van een prompt en de rol van elk bericht benoemen, en kiezen hoe je vraagt: met of zonder voorbeelden, met een rol, en met eerst de stappen."
+summary:
+  - en: "A prompt is everything a model gets before it writes: in a chat, all messages so far, each with a role: system, user or assistant."
+    nl: "Een prompt is alles wat een model krijgt voordat het schrijft: in een chat alle berichten tot nu toe, elk met een rol: system, user of assistant."
+  - en: "A good prompt has an instruction, context, examples and the form of the answer; delimiters set a pasted text apart."
+    nl: "Een goede prompt heeft een instructie, context, voorbeelden en de vorm van het antwoord; scheidingstekens zetten een geplakte tekst apart."
+  - en: "A model works things out in the text it writes: asking for only the answer takes that room away, examples set the form, and a role changes the style more than the result."
+    nl: "Een model rekent dingen uit in de tekst die het schrijft: vragen om alleen het antwoord neemt die ruimte weg, voorbeelden bepalen de vorm, en een rol verandert de stijl meer dan de uitkomst."
+can_now:
+  - en: "sort the lines of a prompt into instruction, context, example and the form of the answer"
+    nl: "de regels van een prompt indelen in instructie, context, voorbeeld en de vorm van het antwoord"
+    by: parts
+  - en: "choose a prompt that lets a model work out a sum"
+    nl: "een prompt kiezen waarmee een model een som kan uitrekenen"
+    by: sum-prompt
+  - en: "say which role a message has"
+    nl: "zeggen welke rol een bericht heeft"
+    by: message-role

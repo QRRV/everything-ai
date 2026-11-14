@@ -85,6 +85,12 @@ modules:
   klassiek-ml/tijdreeksen: {en: "Time series", nl: "Tijdreeksen"}
   klassiek-ml/aanbevelen: {en: "Recommending and networks", nl: "Aanbevelen en netwerken"}
   klassiek-ml/praktijk: {en: "Tables in practice", nl: "Tabeldata in de praktijk"}
+  bouwen/werk: {en: "AI in your work", nl: "AI in je werk"}
+  bouwen/apis: {en: "Calling models", nl: "Modellen aanroepen"}
+  bouwen/prompts: {en: "Prompts for developers", nl: "Prompts voor ontwikkelaars"}
+  bouwen/rag: {en: "Answers from your documents: RAG", nl: "Antwoorden uit je eigen documenten: RAG"}
+  bouwen/agents: {en: "Agents and tools", nl: "Agents en tools"}
+  bouwen/productie: {en: "Evaluating and shipping", nl: "Evalueren en in productie"}
   systemen/hardware: {en: "Hardware", nl: "Hardware"}
   systemen/snel-trainen: {en: "Training fast", nl: "Snel trainen"}
   systemen/productie: {en: "ML in production", nl: "ML in productie"}

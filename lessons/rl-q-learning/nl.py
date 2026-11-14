@@ -442,7 +442,7 @@ def text_connections():
     mo.md(r"""
     ## Afronding
 
-    **Samenhang.** In [Als stappen kunnen uitglijden: value iteration](/course/open/rl-value-iteration?lang=nl) telde de Bellman equation elke uitkomst op uit de tabel `T`. Q-learning gebruikt dezelfde vergelijking zonder `T`: elke stap is één uitkomst, en kleine stappen $\eta$ ernaartoe middelen de uitkomsten. Reinforcement learning komt terug in een eigen domein dat nog komt, met als project je eigen agent. In de volgende les, *Grafen: nodes, edges en paden*, blijkt een doolhof één voorbeeld van een graaf, en draait dezelfde search op elk netwerk.
+    **Samenhang.** In [Als stappen kunnen uitglijden: value iteration](/course/open/rl-value-iteration?lang=nl) telde de Bellman equation elke uitkomst op uit de tabel `T`. Q-learning gebruikt dezelfde vergelijking zonder `T`: elke stap is één uitkomst, en kleine stappen $\eta$ ernaartoe middelen de uitkomsten. Reinforcement learning komt terug in een eigen domein dat nog komt, met als project je eigen agent. In de volgende les, *Wat een agent is: een model, tools en een loop*, is de agent een language model: hij kiest tools in plaats van zetten, en niemand geeft hem rewards.
     """)
     return
 

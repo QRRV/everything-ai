@@ -56,6 +56,13 @@ PINNED = {
         "sha256": "3c04ed3ca964ea2f6b2b5faf0dc4d31aec1cb1e8b4bcf63f402d295046b422b5",
         "size": 9_678,
     },
+    # Qwen3-0.6B, the same model after post-training, which follows the chat template and calls tools: the lessons
+    # on prompts and agents and the domain bouwen (course/route/bronnen.yaml); its tokenizer is the Base's above
+    ("Qwen/Qwen3-0.6B", "model.safetensors"): {
+        "revision": "c1899de289a04d12100db370d81485cdf75e47ca",
+        "sha256": "f47f71177f32bcd101b7573ec9171e6a57f4f4d31148d38e382306f42996874b",
+        "size": 1_503_300_328,
+    },
     # the first 20 MB of a shard of C4 before its cleaning: raw web pages for llm-quality-filter (course/route/bronnen.yaml)
     ("datasets/allenai/c4", "en.noclean/c4-train.00000-of-07168.json.gz"): {
         "revision": "1588ec454efa1a09f29cd18ddd04fe05fc8653a2",

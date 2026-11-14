@@ -442,7 +442,7 @@ def text_connections():
     mo.md(r"""
     ## Wrap-up
 
-    **How this connects.** In [When steps can slip: value iteration](/course/open/rl-value-iteration?lang=en), the Bellman equation added up every outcome from the table `T`. Q-learning uses the same equation without `T`: each step is one outcome, and small steps $\eta$ towards them average the outcomes. Reinforcement learning comes back in a domain of its own, still to come, whose project is your own agent. In the next lesson, *Graphs: nodes, edges and paths*, a maze turns out to be one example of a graph, and the same search runs on any network.
+    **How this connects.** In [When steps can slip: value iteration](/course/open/rl-value-iteration?lang=en), the Bellman equation added up every outcome from the table `T`. Q-learning uses the same equation without `T`: each step is one outcome, and small steps $\eta$ towards them average the outcomes. Reinforcement learning comes back in a domain of its own, still to come, whose project is your own agent. In the next lesson, *What an agent is: a model, tools and a loop*, the agent is a language model: it chooses tools instead of moves, and nobody rewards it.
     """)
     return
 

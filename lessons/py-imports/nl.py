@@ -329,7 +329,7 @@ def text_connections():
     mo.md(r"""
     ## Afronding
 
-    **Samenhang.** In [Functies](/course/open/py-functions?lang=nl) schreef je je eigen functies; een module is een verzameling functies die anderen schreven, en `math.sqrt(16)` is een aanroep, net als die van jou. Later in de course haal je NumPy en PyTorch op dezelfde manier binnen, en maakt een seed het trainen herhaalbaar. In de volgende les zet je je eigen code in een module.
+    **Samenhang.** In [Functies](/course/open/py-functions?lang=nl) schreef je je eigen functies; een module is een verzameling functies die anderen schreven, en `math.sqrt(16)` is een aanroep, net als die van jou. Later in de course haal je NumPy en PyTorch op dezelfde manier binnen, en maakt een seed het trainen herhaalbaar. In de volgende les gebruik je nog een module, `json`, om data als tekst te schrijven; daarna zet je je eigen code in een module.
     """)
     return
 

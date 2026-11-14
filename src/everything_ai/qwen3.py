@@ -18,6 +18,15 @@ from everything_ai import hub, paths
 
 REPO = "Qwen/Qwen3-0.6B-Base"
 FILES = ["model.safetensors", "vocab.json", "tokenizer_config.json"]   # the weights, and the tokenizer's two files
+# The same model after post-training (Apache-2.0): it follows the chat template and calls tools. Its file has the same
+# tensors and one more, lm_head.weight, a stored copy of the tied embedding, which load() leaves out. Its tokenizer is
+# the Base's: the same vocab.json and the same special tokens.
+CHAT = "Qwen/Qwen3-0.6B"
+CHAT_FILES = [(CHAT, "model.safetensors"), (REPO, "vocab.json"), (REPO, "tokenizer_config.json")]
+# A part of a name in Qwen3's file, and the same part in the course's model: course_name() below.
+PARTS = {"embed_tokens": "tok", "layers": "blocks", "input_layernorm": "norm1", "post_attention_layernorm": "norm2",
+         "self_attn": "attention", "q_proj": "query", "k_proj": "key", "v_proj": "value", "o_proj": "out",
+         "gate_proj": "gate", "up_proj": "up", "down_proj": "down"}
 HEADER = paths.ROOT / "data" / "qwen3-0.6b-base.json"   # its config, and the name, type and shape of every tensor
 
 # Qwen3's config.json, in the names the course uses
@@ -129,8 +138,9 @@ class Block(nn.Module):
 class Qwen3(nn.Module):
     """The blocks of llm-modern-gpt with Qwen3's numbers, and the token embedding again as the output layer (weight
     tying). Its input is a tensor of token ids, shape (n, t), or (t,) for one text, on any device: they go to the
-    model's. Its output: the logits of the next token at every position, shape (n, t, vocab) or (t, vocab). With
-    `caches`, one dict per block, it keeps the keys and values, as the KV cache of llm-modern-gpt."""
+    model's. Its output: the logits of the next token at every position, shape (n, t, vocab) or (t, vocab); with
+    `last`, only at the last position, shape (n, 1, vocab) or (1, vocab), which spares the memory of a long prompt.
+    With `caches`, one dict per block, it keeps the keys and values, as the KV cache of llm-modern-gpt."""
 
     def __init__(self, c: dict = CONFIG):
         super().__init__()
@@ -138,12 +148,14 @@ class Qwen3(nn.Module):
         self.blocks = nn.ModuleList(Block(c) for _ in range(c["layers"]))
         self.norm = RMSNorm(c["d"], c["eps"])
 
-    def forward(self, ids, caches=None):
+    def forward(self, ids, caches=None, last: bool = False):
         one = ids.dim() == 1
         ids = (ids.reshape(1, -1) if one else ids).to(self.tok.weight.device)
         x = self.tok(ids)
         for i, block in enumerate(self.blocks):
             x = block(x, None if caches is None else caches[i])
+        if last:
+            x = x[:, -1:]
         logits = self.norm(x) @ self.tok.weight.T
         return logits[0] if one else logits
 
@@ -165,6 +177,25 @@ def download(progress=None) -> None:
     for f in FILES:
         hub.download(REPO, f, None if progress is None else lambda d, t, before=done: progress(before + d, total))
         done += hub.PINNED[(REPO, f)]["size"]
+
+
+def chat_downloaded() -> bool:
+    return all(hub.pinned(repo, f) is not None for repo, f in CHAT_FILES)
+
+
+def download_chat(progress=None) -> None:
+    """Download the chat model and the tokenizer once, as download() does for the Base."""
+    total = sum(hub.PINNED[pair]["size"] for pair in CHAT_FILES)
+    done = 0
+    for repo, f in CHAT_FILES:
+        hub.download(repo, f, None if progress is None else lambda d, t, before=done: progress(before + d, total))
+        done += hub.PINNED[(repo, f)]["size"]
+
+
+def course_name(name: str) -> str:
+    """The course's name of a tensor in Qwen3's file, as the learner's rename of llm-same-on-open-model gives it:
+    model.layers.0.self_attn.q_proj.weight is blocks.0.attention.query.weight."""
+    return ".".join(PARTS.get(part, part) for part in name.split(".")[1:])
 
 
 def model_names() -> dict:
@@ -195,17 +226,19 @@ def check_names(rename) -> None:
         raise NamesDoNotFit(missing, unknown, shapes)
 
 
-def load(rename, dtype=torch.float32, rope=rope_half) -> Qwen3:
+def load(rename=course_name, dtype=torch.float32, rope=rope_half, repo: str = REPO) -> Qwen3:
     """Qwen3-0.6B-Base from its downloaded file, with every name of the file turned into the model's by `rename`, in
-    `dtype` and in eval mode, nothing trainable. It raises NamesDoNotFit when the names do not fit, and
-    FileNotFoundError when the file is not downloaded yet (download() gets it). `rope` is for the lesson only: with
-    rope_pairs, the model computes with the wrong layout of RoPE."""
+    `dtype` and in eval mode, nothing trainable; with repo=CHAT, the chat model instead. It raises NamesDoNotFit when
+    the names do not fit, and FileNotFoundError when the file is not downloaded yet (download() and download_chat()
+    get them). `rope` is for the lesson only: with rope_pairs, the model computes with the wrong layout of RoPE."""
     from everything_ai.models import read_safetensors
     check_names(rename)
-    path = hub.pinned(REPO, "model.safetensors")
+    path = hub.pinned(repo, "model.safetensors")
     if path is None:
-        raise FileNotFoundError("Qwen3-0.6B-Base is not downloaded yet: everything_ai.qwen3.download()")
-    state = {rename(k): v.to(dtype) for k, v in read_safetensors(path).items()}
+        get = "download_chat()" if repo == CHAT else "download()"
+        raise FileNotFoundError(f"{repo} is not downloaded yet: everything_ai.qwen3.{get}")
+    # the chat model's lm_head.weight is a copy of the embedding, which the course's model uses as its output layer
+    state = {rename(k): v.to(dtype) for k, v in read_safetensors(path).items() if k != "lm_head.weight"}
     with torch.device("meta"):
         model = Qwen3()
     model.load_state_dict(state, assign=True, strict=True)

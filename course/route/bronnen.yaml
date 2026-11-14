@@ -64,6 +64,12 @@ bronnen:
 - {id: tokenizer-gpt2-mit, kind: model, license: "MIT", hosting: rehost,
    note_nl: "Alleen de twee bestanden van de tokenizer van GPT-2, encoder.json en vocab.bpe (samen 1,5 MB), zodat tiktoken ook zonder internet werkt. Overgenomen uit het PyPI-wheel gpt3_tokenizer 0.1.5; de SHA-256 is die welke tiktoken vastzet, dus het zijn dezelfde bytes als die OpenAI publiceert."}
 - {id: model-qwen3-0.6b-base, kind: model, license: "Apache-2.0", hosting: download}
+- {id: model-qwen3-0.6b, kind: model, license: "Apache-2.0", hosting: download,
+   note_nl: "Qwen3-0.6B na post-training (chat en tool calls), dezelfde architectuur en tokenizer als model-qwen3-0.6b-base; vast op revisie c1899de2 en SHA-256 f47f7117 (1,5 GB). Het model achter de eigen server van de course in het domein Bouwen met AI: leerlingen downloaden het zelf, de course host er niets van."}
+- {id: model-granite-embedding, kind: model, license: "Apache-2.0", hosting: download,
+   note_nl: "IBM granite-embedding-107m-multilingual: embeddings voor twaalf talen, waaronder Engels en Nederlands; vast op revisie d6cffd33 en SHA-256 ae6f20cc (214 MB). De course schrijft de encoder en de tokenizer zelf en rekent ze één keer na tegen de referentie."}
+- {id: course-summaries, kind: text, license: "CC-BY-SA-4.0 (the course)", hosting: rehost,
+   note_nl: "De punten van de samenvatting in lesson.yaml van elke gebouwde les, in het Engels en het Nederlands: de documenten waar de RAG-lessen van Bouwen met AI in zoeken. Elk punt hoort bij een les, dus een antwoord kan zijn bron noemen."}
 - {id: model-course-qmnist-cnn, kind: model, license: "CC-BY-4.0 (the course; trained on QMNIST, BSD-3-Clause)", hosting: rehost,
    note_nl: "Een klein CNN dat de course zelf op QMNIST traint en met een model card op een model hub zet, zodat de les over hubs geen licentievragen oproept."}
 - {id: model-course-gpt-bpe, kind: model, license: "CC-BY-4.0 (the course; trained on stories of Cosmopedia, Apache-2.0)", hosting: rehost,
@@ -82,6 +88,12 @@ bronnen:
    note_nl: "data/gsm8k-sample.jsonl: de eerste 4 sommen van de trainset en de eerste 30 van de testset van GSM8K (Cobbe en anderen, 2021), zoals ze in openai/grade-school-math staan, gemaakt met data/tools/make_gsm8k_sample.py. Mensen schreven ze voor OpenAI, geen model van OpenAI. De course traint er niets op: in llm-reasoning-idea zijn ze de voorbeelden in de prompt en de vragen. Het licentierapport noemt kleine subsets bruikbaar."}
 - {id: course-reasoning-qwen, kind: text, license: "CC-BY-4.0 (the course; written by Qwen3-0.6B-Base, Apache-2.0, to questions of GSM8K, MIT)", hosting: rehost,
    note_nl: "De run van de course van llm-reasoning-idea: de antwoorden van Qwen3-0.6B-Base op de 30 testvragen van gsm8k-sample, direct, met tussenstappen, zero-shot en 8 samples per vraag, elk met zijn tokens en seconden, en de demo van de les zoals hij op de CPU van de course liep. data/course-reasoning-qwen.json, gemaakt met data/tools/record_course_reasoning_qwen.py, met de code van de les."}
+- {id: course-prompts-qwen, kind: text, license: "CC-BY-4.0 (the course; written by Qwen3-0.6B, Apache-2.0, to sums the course wrote)", hosting: rehost,
+   note_nl: "De run van de course van start-prompt-basics: de antwoorden van Qwen3-0.6B op drie sommen, elk op zeven manieren gevraagd, 8 keer per manier met een andere seed, elk met zijn tokens en seconden. data/course-prompts-qwen.json, gemaakt met data/tools/record_course_prompts_qwen.py, met de code van de les."}
+- {id: course-chains-qwen, kind: text, license: "CC-BY-4.0 (the course; written by Qwen3-0.6B, Apache-2.0, to tasks the course wrote)", hosting: rehost,
+   note_nl: "De run van de course van start-prompt-chains: de antwoorden van Qwen3-0.6B op vier experimenten (één prompt of een keten, zijn eigen antwoord nakijken, Chain-of-Verification, antwoorden uit een bron), elk 8 keer met een andere seed. data/course-chains-qwen.json, gemaakt met data/tools/record_course_chains_qwen.py, met de code van de les."}
+- {id: course-agent-qwen, kind: text, license: "CC-BY-4.0 (the course; written by Qwen3-0.6B, Apache-2.0, as an agent with the course's tools)", hosting: rehost,
+   note_nl: "De runs van de course van agent-idea: Qwen3-0.6B op de taak met de voorraadkast, 6 keer zonder tools en 6 keer als agent met de run_agent van de course en de twee tools, elk bericht met zijn tokens en seconden. data/course-agent-qwen.json, gemaakt met data/tools/record_course_agent_qwen.py, met de code van de les."}
 - {id: synthetic-multiplication, kind: synthetic, license: "course (MIT-0 code)", hosting: synthetic,
    note_nl: "Vermenigvuldigsommen van getallen van 1 tot 4 cijfers, met of zonder uitgeschreven tussenstappen (de deelproducten van rechts, dan de lopende sommen), door de code van llm-reasoning-from-scratch gemaakt tijdens het trainen; 200 paren van 2, 3 en 4 cijfers blijven buiten de training. Het formaat komt uit het onderzoek naar reasoning (docs/onderzoek/reports/reasoning/tiny/multiply.py)."}
 - {id: course-reasoning-runs, kind: text, license: "CC-BY-4.0 (the course)", hosting: rehost,

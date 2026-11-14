@@ -1,0 +1,28 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: start-ai-tools-landscape
+minutes: 15
+title:
+  en: "Which AI tool for what"
+  nl: "Welke AI-tool waarvoor"
+goal:
+  en: "tell the three kinds of AI tools apart, say what an assistant can do and how much of a chat it sees at once, and decide what you leave out before you paste."
+  nl: "de drie soorten AI-tools uit elkaar houden, zeggen wat een assistent kan en hoeveel van een chat hij in één keer ziet, en bepalen wat je weglaat voordat je iets plakt."
+summary:
+  - en: "AI tools come in three kinds: chat assistants in a browser or an app, AI inside programs you already use, and models you run yourself. Names change fast; the three kinds stay."
+    nl: "AI-tools zijn er in drie soorten: chatassistenten in een browser of app, AI in programma's die je al gebruikt, en modellen die je zelf draait. Namen veranderen snel; de drie soorten blijven."
+  - en: "Besides writing, an assistant can search the web, read files, run code and remember. Everything the model looks at has to fit in its context window: what falls out of it, the model no longer sees."
+    nl: "Behalve schrijven kan een assistent op het web zoeken, bestanden lezen, code draaien en dingen onthouden. Alles waar het model naar kijkt, moet in zijn context window passen: wat eruit valt, ziet het model niet meer."
+  - en: "What you paste into a chat assistant goes to the provider's computers; with an open-weights model on your own computer it stays with you. Leave out passwords, and details about yourself or others that are not needed, or replace them."
+    nl: "Wat je in een chatassistent plakt, gaat naar de computers van de aanbieder; draai je een model met open weights op je eigen computer, dan blijft het bij jou. Laat wachtwoorden weg, en gegevens over jezelf of anderen die niet nodig zijn, of vervang ze."
+can_now:
+  - en: "decide what you leave out or replace before you paste something into an assistant"
+    nl: "bepalen wat je weglaat of vervangt voordat je iets in een assistent plakt"
+    by: before-you-paste
+  - en: "pick the kind of AI tool that fits a task, and say where your text goes with each"
+    nl: "de soort AI-tool kiezen die bij een taak past, en zeggen waar je tekst bij elke soort heen gaat"
+    by: which-tool
+  - en: "explain what a context window is, and why an assistant can lose the start of a long chat"
+    nl: "uitleggen wat een context window is, en waarom een assistent het begin van een lange chat kwijt kan raken"
+    by: long-chat

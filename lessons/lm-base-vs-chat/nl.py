@@ -112,7 +112,7 @@ def text_idea():
 
         Een **chat model** is een base model dat verder getraind is op gesprekken: heel veel voorbeelden waarin iemand iets vraagt en een assistent goed antwoordt. Het doet nog steeds niets anders dan het volgende token voorspellen; alleen is na een vraag de waarschijnlijkste tekst nu een antwoord. Chatprogramma's gebruiken chat models. Modellen waarvan de naam eindigt op -Instruct of -Chat zijn chat models; sommige teksten noemen ze instruct models.
 
-        Een gesprek bestaat uit berichten, en elk bericht heeft een **rol** die zegt van wie het komt: `system` voor instructies van wie het model inzet, zoals "Antwoord in het Nederlands."; `user` voor de persoon die typt; `assistant` voor het model zelf. In code is een gesprek een lijst berichten, elk een dictionary met de sleutels `"role"` en `"content"`: zo geven de meeste programma's een gesprek aan een chat model. Sommige programma's hebben een vierde rol, `tool`, voor wat een tool die het model gebruikte teruggaf.
+        Zoals in [Goed vragen: rollen, voorbeelden en stappen](/course/open/start-prompt-basics?lang=nl) bestaat een gesprek uit berichten, en elk bericht heeft een rol die zegt van wie het komt: `system` voor instructies van wie het model inzet, zoals "Antwoord in het Nederlands."; `user` voor de persoon die typt; `assistant` voor het model zelf. In code is een gesprek een lijst berichten, elk een dictionary met de sleutels `"role"` en `"content"`: zo geven de meeste programma's een gesprek aan een chat model. Sommige programma's hebben een vierde rol, `tool`, voor wat een tool die het model gebruikte teruggaf.
 
         Toch krijgt het model één tekst. Het gesprek wordt uitgeschreven met een markering voor elk bericht, en het eindigt met de markering van `assistant`, zodat wat volgt het antwoord is. Het model schrijft tot het de markering geeft die zijn beurt afsluit. Chat models verschillen in hun markeringen, die ze in de training leerden; de les *Chat templates* laat ze zien. In deze les is de markering de rol in hoofdletters met een dubbele punt, op een eigen regel, zoals de toneelstukken de naam van een spreker schrijven, en sluit een lege regel een beurt af.
 
@@ -124,10 +124,6 @@ def text_idea():
         |---|---|---|---|
         | **base model** | | een language model dat alleen heeft geleerd het volgende token te voorspellen, op heel veel tekst; het schrijft elke tekst die het krijgt verder | |
         | **chat model** | | een base model dat verder getraind is op gesprekken, zodat het als assistent antwoordt | |
-        | **rol** | | van wie een bericht komt: `system`, `user` of `assistant` | `m["role"]` |
-        | `system` | | instructies van wie het model inzet | `{"role": "system", "content": "Antwoord in het Nederlands."}` |
-        | `user` | | de persoon die typt | `{"role": "user", "content": "Wie is Romeo?"}` |
-        | `assistant` | | het model, ook in zijn eerdere antwoorden | `{"role": "assistant", "content": "Een jongeman uit Verona."}` |
         """),
         L.watch_out("`assistant` is een rol in de tekst, geen apart programma: hetzelfde model dat elk volgend token voorspelt, schrijft elk `assistant`-bericht. En een `system`-bericht is tekst zoals de rest, geen slot: een `user`-bericht kan het model nog steeds ergens anders heen leiden."),
         mo.md(r"""

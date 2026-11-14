@@ -1,0 +1,1243 @@
+{
+ "model": "Qwen/Qwen3-0.6B",
+ "revision": "c1899de289a04d12100db370d81485cdf75e47ca",
+ "dtype": "float32",
+ "machine": "Intel(R) Xeon(R) Processor @ 2.10GHz, 4 cores",
+ "threads": 1,
+ "torch": "2.14.1+cu130",
+ "code": "4a7f379",
+ "sampling": {
+  "temperature": 0.7,
+  "top_p": 0.8,
+  "top_k": 20
+ },
+ "max_tokens": 300,
+ "seeds": 8,
+ "answers": {
+  "bakery": {
+   "plain": [
+    {
+     "seed": 0,
+     "text": "We are given:\n\n- The price of one loaf of bread is **2.50 euros**.\n- On **Monday**, the bakery sold **36 loaves**.\n- On **Tuesday**, the bakery sold **12 more loaves** than on Monday.\n\n---\n\n### Step 1: Calculate the number of loaves sold on Tuesday\n\n$$\n\\text{Loaves on Tuesday} = 36 + 12 = 48\n$$\n\n---\n\n### Step 2: Calculate the total money taken in on both days\n\n$$\n\\text{Total money} = 36 \\times 2.50 + 48 \\times 2.50\n$$\n\n$$\n= (36 + 48) \\times 2.50 = 84 \\times 2.50 = 210 \\text{ euros}\n$$\n\n---\n\n### ✅ Final Answer: **210 euros**.",
+     "tokens": 200,
+     "seconds": 56.47,
+     "finish": "stop"
+    },
+    {
+     "seed": 1,
+     "text": "We are given:\n\n- Price per loaf of bread = 2.50 euros  \n- Number of loaves sold on **Monday** = 36  \n- Number of loaves sold on **Tuesday** = 12 more than on Monday → 36 + 12 = 48 loaves\n\nNow, calculate the total money taken in:\n\n$$\n\\text{Total money} = (\\text{Price per loaf} \\times \\text{Number of loaves on Monday}) + (\\text{Price per loaf} \\times \\text{Number of loaves on Tuesday})\n$$\n\n$$\n\\text{Total money} = (2.50 \\times 36) + (2.50 \\times 48)\n$$\n\n$$\n= 90 + 120 = 210 \\text{ euros}\n$$\n\n### ✅ Final Answer: **210 euros**.",
+     "tokens": 195,
+     "seconds": 52.81,
+     "finish": "stop"
+    },
+    {
+     "seed": 2,
+     "text": "We are given:\n\n- Price per loaf of bread: **2.50 euros**\n- Monday: 36 loaves sold  \n- Tuesday: 12 more loaves than Monday\n\n### Step 1: Find the number of loaves sold on Tuesday\n\n$$\n\\text{Tuesday} = \\text{Monday} + 12 = 36 + 12 = 48 \\text{ loaves}\n$$\n\n### Step 2: Calculate total money taken in two days\n\n$$\n\\text{Total money} = (\\text{Monday loaves} \\times \\text{price per loaf}) + (\\text{Tuesday loaves} \\times \\text{price per loaf})\n$$\n\n$$\n\\text{Total money} = (36 \\times 2.50) + (48 \\times 2.50)\n$$\n\n$$\n= (90) + (120) = 210 \\text{ euros}\n$$\n\n### ✅ Final Answer: **210 euros**",
+     "tokens": 220,
+     "seconds": 66.78,
+     "finish": "stop"
+    },
+    {
+     "seed": 3,
+     "text": "We are given:\n\n- Price per loaf of bread: **2.50 euros**\n- Number of loaves sold on **Monday**: **36**\n- Number of loaves sold on **Tuesday**: **12 more than on Monday**\n\n### Step 1: Find the number of loaves sold on Tuesday\n\n$$\n\\text{Tuesday} = 36 + 12 = 48 \\text{ loaves}\n$$\n\n### Step 2: Calculate total revenue\n\n$$\n\\text{Total revenue} = \\text{Price per loaf} \\times (\\text{Loaves sold on Monday} + \\text{Loaves sold on Tuesday})\n$$\n\n$$\n\\text{Total revenue} = 2.50 \\times (36 + 48) = 2.50 \\times 84 = 210 \\text{ euros}\n$$\n\n### ✅ Final Answer: **210 euros**",
+     "tokens": 199,
+     "seconds": 58.58,
+     "finish": "stop"
+    },
+    {
+     "seed": 4,
+     "text": "We are given:\n\n- The price of one loaf of bread is **2.50 euros**.\n- On **Monday**, the bakery sold **36 loaves**.\n- On **Tuesday**, the bakery sold **12 more loaves** than on Monday.\n\n---\n\n### Step 1: Calculate the number of loaves sold on Tuesday\n\n$$\n\\text{Loaves on Tuesday} = 36 + 12 = 48\n$$\n\n---\n\n### Step 2: Calculate the total amount of money taken in\n\n$$\n\\text{Total money} = (\\text{Loaves on Monday} \\times \\text{Price per loaf}) + (\\text{Loaves on Tuesday} \\times \\text{Price per loaf})\n$$\n\n$$\n\\text{Total money} = (36 \\times 2.50) + (48 \\times 2.50)\n$$\n\n$$\n= 90 + 120 = 210 \\text{ euros}\n$$\n\n---\n\n### ✅ Final Answer:\n\n$$\n\\boxed{210} \\text{ euros}\n$$",
+     "tokens": 236,
+     "seconds": 69.26,
+     "finish": "stop"
+    },
+    {
+     "seed": 5,
+     "text": "We are given:\n\n- Price per loaf of bread: **2.50 euros**\n- Number of loaves sold on **Monday**: 36\n- Number of loaves sold on **Tuesday**: 12 more than on Monday\n\n### Step 1: Calculate the number of loaves sold on Tuesday\n\n$$\n\\text{Tuesday loaves} = 36 + 12 = 48\n$$\n\n### Step 2: Calculate total revenue for both days\n\n$$\n\\text{Total revenue} = \\text{Monday revenue} + \\text{Tuesday revenue}\n$$\n\n$$\n\\text{Monday revenue} = 36 \\times 2.50 = 90.00 \\text{ euros}\n$$\n\n$$\n\\text{Tuesday revenue} = 48 \\times 2.50 = 120.00 \\text{ euros}\n$$\n\n$$\n\\text{Total revenue} = 90.00 + 120.00 = \\boxed{210.00} \\text{ euros}\n$$\n\nSo, the bakery took in **210.00 euros** on those two days together.",
+     "tokens": 254,
+     "seconds": 84.1,
+     "finish": "stop"
+    },
+    {
+     "seed": 6,
+     "text": "We are given:\n\n- The price of one loaf of bread is **2.50 euros**.\n- On **Monday**, the bakery sold **36** loaves.\n- On **Tuesday**, the number of loaves sold was **12 more than on Monday**.\n\n---\n\n### Step 1: Calculate the number of loaves sold on Tuesday\n\n$$\n\\text{Loaves on Tuesday} = 36 + 12 = 48\n$$\n\n---\n\n### Step 2: Calculate the total money taken in the two days\n\n$$\n\\text{Total money} = 36 \\times 2.50 + 48 \\times 2.50\n$$\n\n$$\n= (36 + 48) \\times 2.50 = 84 \\times 2.50 = 210\n$$\n\n---\n\n### ✅ Final Answer: **210 euros**.",
+     "tokens": 198,
+     "seconds": 60.94,
+     "finish": "stop"
+    },
+    {
+     "seed": 7,
+     "text": "We are given:\n\n- Price of a loaf of bread: **2.50 euros**\n- Number of loaves sold on **Monday**: **36**\n- Number of loaves sold on **Tuesday**: **12 more than on Monday**\n\n### Step 1: Calculate loaves sold on Tuesday\n$$\n12 \\text{ more than } 36 = 36 + 12 = 48 \\text{ loaves}\n$$\n\n### Step 2: Total loaves sold over two days\n$$\n36 + 48 = 84 \\text{ loaves}\n$$\n\n### Step 3: Total money taken in\n$$\n84 \\text{ loaves} \\times 2.50 \\text{ euros/loaf} = 210 \\text{ euros}\n$$\n\n### ✅ Final Answer:\n$$\n\\boxed{210} \\text{ euros}\n$$",
+     "tokens": 197,
+     "seconds": 61.93,
+     "finish": "stop"
+    }
+   ],
+   "delimit": [
+    {
+     "seed": 0,
+     "text": "The bakery sold 36 loaves on Monday and 12 more on Tuesday, so on Tuesday they sold 36 + 12 = 48 loaves. Together, they sold 36 + 48 = 84 loaves. The total amount of money the bakery took in is 2.50 euros per loaf, so 84 * 2.50 = 210 euros. Therefore, the bakery took in 210 euros on those two days together.",
+     "tokens": 108,
+     "seconds": 34.14,
+     "finish": "stop"
+    },
+    {
+     "seed": 1,
+     "text": "The bakery sold 36 loaves on Monday and 12 more loaves on Tuesday, totaling 48 loaves. Since each loaf costs 2.50 euros, the total amount of money taken in on those two days is 48 × 2.50 = 120 euros.",
+     "tokens": 66,
+     "seconds": 21.58,
+     "finish": "stop"
+    },
+    {
+     "seed": 2,
+     "text": "The bakery sold 36 loaves on Monday and 12 more loaves on Tuesday, which is 48 loaves in total. Each loaf costs 2.50 euros, so the total money taken in is 48 × 2.50 = 120 euros. Therefore, the bakery took in 120 euros on those two days together.",
+     "tokens": 80,
+     "seconds": 24.59,
+     "finish": "stop"
+    },
+    {
+     "seed": 3,
+     "text": "The bakery sold 36 loaves on Monday and 12 more on Tuesday, which means 36 + 12 = 48 loaves in total. Since each loaf costs 2.50 euros, the total amount of money taken in on those two days is 48 * 2.50 = 120 euros. Therefore, the bakery took in 120 euros on those two days together.",
+     "tokens": 92,
+     "seconds": 27.55,
+     "finish": "stop"
+    },
+    {
+     "seed": 4,
+     "text": "The bakery sold 36 loaves on Monday and 12 more loaves on Tuesday, which is 48 loaves in total. The total amount of money taken in is calculated by multiplying the number of loaves by the price per loaf. \n\n36 loaves × 2.50 euros per loaf = 90 euros  \n48 loaves × 2.50 euros per loaf = 120 euros  \n\nSo, the total amount of money the bakery took in on those two days is 120 euros.",
+     "tokens": 114,
+     "seconds": 35.15,
+     "finish": "stop"
+    },
+    {
+     "seed": 5,
+     "text": "The bakery sold 36 loaves on Monday and 12 more loaves on Tuesday, totaling 36 + 12 = 48 loaves. Since each loaf costs 2.50 euros, the total amount of money the bakery took in is 48 × 2.50 = 120 euros.",
+     "tokens": 72,
+     "seconds": 22.8,
+     "finish": "stop"
+    },
+    {
+     "seed": 6,
+     "text": "The bakery sold 36 loaves on Monday and 12 more on Tuesday, so they sold 36 + 12 = 48 loaves on Tuesday. The total amount of money the bakery took in is calculated by multiplying the number of loaves sold by the price per loaf. \n\nSo, the total amount is 36 loaves * 2.50 euros per loaf = 90.00 euros. \n\nThe bakery took in 90.00 euros on those two days together.",
+     "tokens": 110,
+     "seconds": 33.3,
+     "finish": "stop"
+    },
+    {
+     "seed": 7,
+     "text": "The bakery sold 36 loaves on Monday and 12 more loaves on Tuesday, so it sold 36 + 12 = 48 loaves in total. Each loaf costs 2.50 euros, so the total amount of money taken in on those two days is 48 × 2.50 = 120 euros.",
+     "tokens": 78,
+     "seconds": 23.41,
+     "finish": "stop"
+    }
+   ],
+   "number": [
+    {
+     "seed": 0,
+     "text": "The bakery sold 36 loaves on Monday and 12 more on Tuesday, so they sold 36 + 12 = 48 loaves in total. The total cost is:\n\n$$ 2.50 \\times (36 + 12) = 2.50 \\times 48 = 120.00 $$\n\nSo the final answer is:\n\n**120.00**",
+     "tokens": 93,
+     "seconds": 26.15,
+     "finish": "stop"
+    },
+    {
+     "seed": 1,
+     "text": "The bakery took in $ 2.50 \\times 36 + 2.50 \\times (36 + 12) = 90 + 90 = 180 $ euros.  \n\n**Final answer: 180**",
+     "tokens": 57,
+     "seconds": 16.26,
+     "finish": "stop"
+    },
+    {
+     "seed": 2,
+     "text": "The bakery sold 36 loaves on Monday and 12 more on Tuesday, so it sold 36 + 12 = 48 loaves in total. \n\nThe total amount of money the bakery took in is:\n$$ 36 \\times 2.50 + 12 \\times 2.50 = 48 \\times 2.50 = 120.00 $$\n\nThe final answer is:\n$$\n\\boxed{120.00}\n$$",
+     "tokens": 110,
+     "seconds": 29.02,
+     "finish": "stop"
+    },
+    {
+     "seed": 3,
+     "text": "The bakery took in 36 loaves on Monday and 12 more on Tuesday, so it sold 48 loaves in total. The total amount of money is:\n\n36 loaves × 2.50 euros/loaf = 90.00 euros.\n\nFinal answer: 90.00",
+     "tokens": 69,
+     "seconds": 18.87,
+     "finish": "stop"
+    },
+    {
+     "seed": 4,
+     "text": "The bakery took in $2.50 \\times 36 = 90$ euros on Monday, and $2.50 \\times (36 + 12) = 2.50 \\times 48 = 120$ euros on Tuesday. Together, the total is $90 + 120 = 210$ euros.\n\nFinal answer: **210**",
+     "tokens": 89,
+     "seconds": 23.69,
+     "finish": "stop"
+    },
+    {
+     "seed": 5,
+     "text": "The bakery took in $ 2.50 \\times 36 + 2.50 \\times (36 + 12) = 90 + 90 = 180 $ euros. \n\nThe final number is: **180**.",
+     "tokens": 59,
+     "seconds": 15.84,
+     "finish": "stop"
+    },
+    {
+     "seed": 6,
+     "text": "The bakery took in $2.50 \\times 36 = 90$ euros on Monday and $2.50 \\times (36 + 12) = 2.50 \\times 48 = 120$ euros on Tuesday. Together, they took in $90 + 120 = 210$ euros.\n\nThe final answer is: **210**.",
+     "tokens": 91,
+     "seconds": 23.15,
+     "finish": "stop"
+    },
+    {
+     "seed": 7,
+     "text": "The bakery took in 36 + (36 + 12) = 36 + 48 = 84 euros on those two days.  \n\n**Final answer: 84**",
+     "tokens": 43,
+     "seconds": 11.29,
+     "finish": "stop"
+    }
+   ],
+   "examples": [
+    {
+     "seed": 0,
+     "text": "Tom has 4 bags with 6 apples each, so the total number of apples is $4 \\times 6 = 24$ apples. Tom eats 3 apples, so the number of apples left is $24 - 3 = 21$.\n\nAnswer: 21",
+     "tokens": 61,
+     "seconds": 17.41,
+     "finish": "stop"
+    },
+    {
+     "seed": 1,
+     "text": "To find the total amount the bakery took in on the two days:\n\n- On Monday: 36 loaves × 2.50 euros = 90 euros  \n- On Tuesday: 12 more loaves than Monday → 36 + 12 = 48 loaves  \n- Total for both days: 90 + 48 = **138 euros**\n\nAnswer: **138**",
+     "tokens": 90,
+     "seconds": 24.93,
+     "finish": "stop"
+    },
+    {
+     "seed": 2,
+     "text": "Let's break it down step by step:\n\n- **Monday:** 36 loaves × 2.50 euros = **90 euros**\n- **Tuesday:** 12 more loaves than Monday → 36 + 12 = **48 loaves**\n- **Total cost:** 90 + 48 = **138 euros**\n\nAnswer: **138**",
+     "tokens": 84,
+     "seconds": 24.1,
+     "finish": "stop"
+    },
+    {
+     "seed": 3,
+     "text": "To find the total money taken in on those two days:\n\n- On Monday: 36 loaves × 2.50 euros = 90 euros  \n- On Tuesday: 12 more loaves than Monday = 36 + 12 = 48 loaves  \n- Total: 90 + 48 = **138 euros**\n\nAnswer: **138**",
+     "tokens": 85,
+     "seconds": 24.43,
+     "finish": "stop"
+    },
+    {
+     "seed": 4,
+     "text": "Tom has 4 bags with 6 apples each.  \nTom eats 3 apples.  \n\nTotal apples = 4 × 6 = 24  \nApples eaten = 3  \nApples left = 24 - 3 = **21**\n\nAnswer: **21**",
+     "tokens": 60,
+     "seconds": 16.76,
+     "finish": "stop"
+    },
+    {
+     "seed": 5,
+     "text": "Let's solve the problem step by step:\n\n1. **Tom has 4 bags with 6 apples each**:\n   - Total apples = $ 4 \\times 6 = 24 $ apples.\n\n2. **Tom eats 3 apples**:\n   - Apples remaining = $ 24 - 3 = 21 $.\n\n**Answer: 21 apples.**\n\n---\n\n**Answer: 21**",
+     "tokens": 89,
+     "seconds": 25.05,
+     "finish": "stop"
+    },
+    {
+     "seed": 6,
+     "text": "To find the total amount of money the bakery took in on those two days together:\n\n- On Monday, the bakery sold 36 loaves at 2.50 euros each:  \n  $ 36 \\times 2.50 = 90 $ euros.\n\n- On Tuesday, the bakery sold 12 more loaves than Monday:  \n  $ 36 + 12 = 48 $ loaves.\n\n- On Tuesday, the price per loaf is still 2.50 euros, so:  \n  $ 48 \\times 2.50 = 120 $ euros.\n\n- Total money taken in on both days:  \n  $ 90 + 120 = 210 $ euros.\n\n**Answer: 210**",
+     "tokens": 168,
+     "seconds": 48.16,
+     "finish": "stop"
+    },
+    {
+     "seed": 7,
+     "text": "To find the total money the bakery took in on those two days:\n\n- On Monday, the bakery sold 36 loaves at 2.50 euros each:  \n  $ 36 \\times 2.50 = 90 $ euros.\n\n- On Tuesday, the bakery sold 12 more loaves than on Monday:  \n  $ 36 + 12 = 48 $ loaves.\n\n- Total money:  \n  $ 90 + (48 \\times 2.50) = 90 + 120 = 210 $ euros.\n\n**Answer:** 210",
+     "tokens": 136,
+     "seconds": 37.11,
+     "finish": "stop"
+    }
+   ],
+   "examples-steps": [
+    {
+     "seed": 0,
+     "text": "Let's solve this step by step:\n\n1. **Number of loaves sold on Monday**: 36  \n2. **Number of loaves sold on Tuesday**: 36 + 12 = 48  \n3. **Total loaves sold**: 36 + 48 = 84  \n\n4. **Cost of each loaf**: 2.50 euros  \n5. **Total cost for 84 loaves**: 84 × 2.50 = 210 euros  \n\n**Answer**: 210.",
+     "tokens": 117,
+     "seconds": 33.7,
+     "finish": "stop"
+    },
+    {
+     "seed": 1,
+     "text": "To find the total amount the bakery took in on the two days:\n\n- On Monday, the bakery sold 36 loaves, each costing 2.50 euros:  \n  $ 36 \\times 2.50 = 90 $ euros.\n\n- On Tuesday, the bakery sold 12 more loaves than on Monday, so:  \n  $ 36 + 12 = 48 $ loaves.\n\n- The total amount taken in is:  \n  $ 90 + 48 = 138 $ euros.\n\n**Answer:** 138.",
+     "tokens": 127,
+     "seconds": 37.61,
+     "finish": "stop"
+    },
+    {
+     "seed": 2,
+     "text": "First, calculate the total number of loaves sold on Monday and Tuesday:\n\n- Monday: 36 loaves  \n- Tuesday: 36 + 12 = 48 loaves  \n\nTotal loaves sold:  \n$ 36 + 48 = 84 $ loaves  \n\nNext, calculate the total cost:\n\n- Each loaf costs 2.50 euros  \n- Total cost: $ 84 \\times 2.50 = 210 $ euros  \n\nAnswer: 210.",
+     "tokens": 111,
+     "seconds": 33.38,
+     "finish": "stop"
+    },
+    {
+     "seed": 3,
+     "text": "To find the total amount the bakery took in on those two days:\n\n- On Monday, the bakery sold 36 loaves at 2.50 euros each:  \n  $ 36 \\times 2.50 = 90 $ euros.\n\n- On Tuesday, the bakery sold 12 more loaves than on Monday:  \n  $ 36 + 12 = 48 $ loaves.\n\n- The total cost is:  \n  $ 90 + (48 \\times 2.50) = 90 + 120 = 210 $ euros.\n\n**Answer:** 210.",
+     "tokens": 139,
+     "seconds": 40.75,
+     "finish": "stop"
+    },
+    {
+     "seed": 4,
+     "text": "Let's break down the problem step by step:\n\n- The bakery sells **36 loaves** on Monday.\n- On **Tuesday**, the number of loaves sold is **12 more** than on Monday, so:\n  $$\n  36 + 12 = 48 \\text{ loaves}\n  $$\n- The total number of loaves sold on both days is:\n  $$\n  36 + 48 = 84 \\text{ loaves}\n  $$\n\n- Each loaf costs **2.50 euros**, so the total cost is:\n  $$\n  84 \\times 2.50 = 210 \\text{ euros}\n  $$\n\n**Answer:** 210 euros.",
+     "tokens": 160,
+     "seconds": 48.71,
+     "finish": "stop"
+    },
+    {
+     "seed": 5,
+     "text": "First, calculate the total number of loaves sold on Monday and Tuesday:\n\n- Monday: 36 loaves  \n- Tuesday: 36 + 12 = 48 loaves  \n\nNow, calculate the total cost:\n\n- Monday: $ 36 \\times 2.50 = 90 $ euros  \n- Tuesday: $ 48 \\times 2.50 = 120 $ euros  \n\nAdd the two days' costs:  \n$ 90 + 120 = 210 $ euros  \n\nThe answer is **210 euros**.",
+     "tokens": 126,
+     "seconds": 40.44,
+     "finish": "stop"
+    },
+    {
+     "seed": 6,
+     "text": "To find the total amount of money the bakery took in on those two days:\n\n- On Monday, the bakery sold 36 loaves at 2.50 euros each:  \n  $ 36 \\times 2.50 = 90 $ euros.\n\n- On Tuesday, the bakery sold 12 more loaves than on Monday:  \n  $ 36 + 12 = 48 $ loaves.\n\n- Total money taken in on both days:  \n  $ 90 + 48 = 138 $ euros.\n\nThe answer is **138 euros**.",
+     "tokens": 129,
+     "seconds": 38.42,
+     "finish": "stop"
+    },
+    {
+     "seed": 7,
+     "text": "To find the total amount the bakery took in on those two days:\n\n- On Monday, the bakery sold 36 loaves.\n- On Tuesday, they sold 12 more than Monday, so 36 + 12 = 48 loaves.\n- The total number of loaves sold is 36 + 48 = 84 loaves.\n\nSince each loaf costs 2.50 euros:\n\n- Total cost = 84 × 2.50 = 210 euros.\n\nThe answer is 210.",
+     "tokens": 117,
+     "seconds": 34.18,
+     "finish": "stop"
+    }
+   ],
+   "role": [
+    {
+     "seed": 0,
+     "text": "We are given the following information:\n\n- The price of one loaf of bread is **2.50 euros**.\n- On **Monday**, the bakery sold **36 loaves**.\n- On **Tuesday**, the bakery sold **12 more loaves** than on Monday.\n\n---\n\n### Step 1: Calculate the number of loaves sold on Tuesday\n\n$$\n\\text{Loaves on Tuesday} = 36 + 12 = 48\n$$\n\n---\n\n### Step 2: Calculate the total money taken in on both days\n\n$$\n\\text{Total money} = \\text{Loaves sold on Monday} \\times \\text{Price per loaf} + \\text{Loaves sold on Tuesday} \\times \\text{Price per loaf}\n$$\n\n$$\n\\text{Total money} = 36 \\times 2.50 + 48 \\times 2.50\n$$\n\n$$\n= (36 + 48) \\times 2.50 = 84 \\times 2.50 = 210\n$$\n\n---\n\n### ✅ Final Answer: The bakery took in **210 euros** on those two days together.",
+     "tokens": 256,
+     "seconds": 74.87,
+     "finish": "stop"
+    },
+    {
+     "seed": 1,
+     "text": "Let's solve the problem step by step:\n\n1. **Monday sales**:  \n   36 loaves sold.\n\n2. **Tuesday sales**:  \n   The bakery sold **12 more loaves** than Monday.  \n   So, Tuesday sales = $ 36 + 12 = 48 $ loaves.\n\n3. **Total sales on both days**:  \n   $ 36 + 48 = 84 $ loaves.\n\n4. **Total money taken in**:  \n   Each loaf is **2.50 euros**, so total money = $ 84 \\times 2.50 = 210 $ euros.\n\n**Answer: $ \\boxed{210} $ euros**.",
+     "tokens": 153,
+     "seconds": 43.29,
+     "finish": "stop"
+    },
+    {
+     "seed": 2,
+     "text": "We are given:\n\n- The price of one loaf of bread: **2.50 euros**\n- On **Monday**, the bakery sold **36** loaves\n- On **Tuesday**, the bakery sold **12 more loaves** than on Monday\n\n### Step 1: Calculate the number of loaves sold on Tuesday\n$$\n12 \\text{ more than } 36 = 36 + 12 = 48 \\text{ loaves}\n$$\n\n### Step 2: Calculate the total money taken in the two days\n$$\n\\text{Total money} = \\text{Price per loaf} \\times (\\text{Loaves sold on Monday} + \\text{Loaves sold on Tuesday})\n$$\n$$\n= 2.50 \\, \\text{euros} \\times (36 + 48) = 2.50 \\times 84 = 210 \\, \\text{euros}\n$$\n\n### ✅ Final Answer: **210 euros**",
+     "tokens": 220,
+     "seconds": 60.43,
+     "finish": "stop"
+    },
+    {
+     "seed": 3,
+     "text": "Let's calculate the total amount of money the bakery took in on Monday and Tuesday.\n\n- On **Monday**, the bakery sold 36 loaves, and each loaf costs 2.50 euros.\n- On **Tuesday**, the number of loaves sold is 12 more than on Monday:  \n  $ 36 + 12 = 48 $ loaves.\n\nNow, calculate the total amount:\n\n- **Monday total**:  \n  $ 36 \\times 2.50 = 90 $ euros.\n\n- **Tuesday total**:  \n  $ 48 \\times 2.50 = 120 $ euros.\n\n- **Total money taken in**:  \n  $ 90 + 120 = 210 $ euros.\n\n**Answer: 210 euros**.",
+     "tokens": 174,
+     "seconds": 47.81,
+     "finish": "stop"
+    },
+    {
+     "seed": 4,
+     "text": "Let's solve this step by step.\n\n- On **Monday**, the bakery sold **36 loaves**.\n- On **Tuesday**, they sold **12 more loaves** than on Monday.  \n  So, Tuesday's sales = 36 + 12 = **48 loaves**.\n\n- The price per loaf is **2.50 euros**.\n\nNow, calculate the total amount taken in both days:\n\n$$\n\\text{Total sales} = 36 \\, \\text{loaves} \\times 2.50 \\, \\text{euros/loaf} + 48 \\, \\text{loaves} \\times 2.50 \\, \\text{euros/loaf}\n$$\n\n$$\n= (36 + 48) \\times 2.50 = 84 \\times 2.50 = 210 \\, \\text{euros}\n$$\n\n**Answer: The bakery took in 210 euros in those two days.**",
+     "tokens": 221,
+     "seconds": 64.72,
+     "finish": "stop"
+    },
+    {
+     "seed": 5,
+     "text": "We are given:\n\n- Price per loaf of bread: **2.50 euros**\n- Number of loaves sold on Monday: **36**\n- Number of loaves sold on Tuesday: **12 more than on Monday**  \n  So, on Tuesday, they sold **36 + 12 = 48** loaves.\n\nNow, we calculate the total amount of money taken in:\n\n$$\n\\text{Total money} = (\\text{Loaves sold on Monday} \\times \\text{Price per loaf}) + (\\text{Loaves sold on Tuesday} \\times \\text{Price per loaf})\n$$\n\n$$\n= (36 \\times 2.50) + (48 \\times 2.50)\n$$\n\n$$\n= (90) + (120) = \\boxed{210} \\text{ euros}\n$$\n\nSo, the bakery took in **210 euros** on those two days.",
+     "tokens": 205,
+     "seconds": 53.85,
+     "finish": "stop"
+    },
+    {
+     "seed": 6,
+     "text": "Let's solve the problem step by step:\n\n1. **Number of loaves sold on Monday**: 36  \n2. **Number of loaves sold on Tuesday**: 12 more than Monday → $ 36 + 12 = 48 $  \n3. **Total loaves sold over two days**: $ 36 + 48 = 84 $  \n\n4. **Total money taken in**:  \n   Each loaf costs 2.50 euros.  \n   So, total money = $ 84 \\times 2.50 = 210 $ euros.\n\n**Answer:** The bakery took in **210 euros** on those two days together.",
+     "tokens": 146,
+     "seconds": 36.1,
+     "finish": "stop"
+    },
+    {
+     "seed": 7,
+     "text": "Let's solve this step by step.\n\n1. **Monday sales**:  \n   The bakery sold 36 loaves.\n\n2. **Tuesday sales**:  \n   The bakery sold **12 more loaves** than on Monday, so:  \n   $ 36 + 12 = 48 $ loaves.\n\n3. **Total sales for two days**:  \n   $ 36 + 48 = 84 $ loaves.\n\n4. **Total money earned**:  \n   Each loaf costs 2.50 euros, so:  \n   $ 84 \\times 2.50 = 210 $ euros.\n\n**Answer:** The bakery took in **210 euros** on those two days together.",
+     "tokens": 155,
+     "seconds": 38.42,
+     "finish": "stop"
+    }
+   ],
+   "steps": [
+    {
+     "seed": 0,
+     "text": "We are given the following information:\n\n- The price of a loaf of bread is **2.50 euros**.\n- On **Monday**, the bakery sold **36 loaves**.\n- On **Tuesday**, the number of loaves sold was **12 more than on Monday**.\n\n---\n\n### Step 1: Calculate the number of loaves sold on Tuesday\n\n$$\n\\text{Loaves on Tuesday} = 36 + 12 = 48\n$$\n\n---\n\n### Step 2: Calculate the total number of loaves sold over two days\n\n$$\n\\text{Total loaves sold} = 36 + 48 = 84\n$$\n\n---\n\n### Step 3: Calculate the total amount of money taken in\n\n$$\n\\text{Total money} = 84 \\text{ loaves} \\times 2.50 \\text{ euros per loaf} = 210 \\text{ euros}\n$$\n\n---\n\n### Final Answer:\n\n$$\n\\boxed{210}\n$$",
+     "tokens": 218,
+     "seconds": 54.65,
+     "finish": "stop"
+    },
+    {
+     "seed": 1,
+     "text": "We are given:\n\n- Price per loaf of bread = 2.50 euros  \n- Monday sold 36 loaves  \n- Tuesday sold 12 more loaves than Monday  \n\n---\n\n### Step 1: Calculate the number of loaves sold on Tuesday\n\n$$\n\\text{Tuesday's loaves} = 36 + 12 = 48\n$$\n\n---\n\n### Step 2: Calculate total money taken in two days\n\n$$\n\\text{Total money} = \\text{Monday's money} + \\text{Tuesday's money}\n$$\n\n$$\n\\text{Monday's money} = 36 \\times 2.50 = 90.00 \\text{ euros}\n$$\n\n$$\n\\text{Tuesday's money} = 48 \\times 2.50 = 120.00 \\text{ euros}\n$$\n\n$$\n\\text{Total money} = 90.00 + 120.00 = 210.00 \\text{ euros}\n$$\n\n---\n\n### Final Answer:\n\nAnswer: <210>",
+     "tokens": 239,
+     "seconds": 61.28,
+     "finish": "stop"
+    },
+    {
+     "seed": 2,
+     "text": "Let's break this down step by step:\n\n1. **Number of loaves sold on Monday:**  \n   $ 36 $\n\n2. **Number of loaves sold on Tuesday:**  \n   $ 12 $ more than Monday, so:  \n   $ 36 + 12 = 48 $\n\n3. **Total loaves sold on both days:**  \n   $ 36 + 48 = 84 $\n\n4. **Total money taken in:**  \n   Each loaf costs $2.50, so:  \n   $ 84 \\times 2.50 = 210 $\n\n**Answer:** Answer: 210",
+     "tokens": 141,
+     "seconds": 34.83,
+     "finish": "stop"
+    },
+    {
+     "seed": 3,
+     "text": "We are given:\n\n- Price of one loaf of bread: **2.50 euros**\n- Number of loaves sold on **Monday**: 36\n- Number of loaves sold on **Tuesday**: 12 more than on Monday\n\n---\n\n### Step 1: Calculate the number of loaves sold on Tuesday\n\n$$\n\\text{Tuesday loaves} = 36 + 12 = 48\n$$\n\n---\n\n### Step 2: Calculate total money taken in two days\n\n$$\n\\text{Total money} = (\\text{Monday loaves} \\times \\text{Price per loaf}) + (\\text{Tuesday loaves} \\times \\text{Price per loaf})\n$$\n\n$$\n\\text{Total money} = (36 \\times 2.50) + (48 \\times 2.50)\n$$\n\n$$\n\\text{Total money} = (90) + (120) = 210\n$$\n\n---\n\n### Final Answer:\n\n$$\n\\boxed{210}\n$$\n\nAnswer: **210**",
+     "tokens": 233,
+     "seconds": 58.24,
+     "finish": "stop"
+    },
+    {
+     "seed": 4,
+     "text": "We are given the following information:\n\n- The price of a loaf of bread is **2.50 euros**.\n- On **Monday**, the bakery sold **36 loaves**.\n- On **Tuesday**, the number of loaves sold is **12 more than on Monday**.\n\n---\n\n### Step 1: Calculate the number of loaves sold on Tuesday\n\n$$\n\\text{Loaves on Tuesday} = 36 + 12 = 48\n$$\n\n---\n\n### Step 2: Calculate the total number of loaves sold over the two days\n\n$$\n\\text{Total loaves} = 36 + 48 = 84\n$$\n\n---\n\n### Step 3: Calculate the total amount of money the bakery took in\n\n$$\n\\text{Total money} = 84 \\text{ loaves} \\times 2.50 \\text{ euros/loaf} = 210 \\text{ euros}\n$$\n\n---\n\n### Final Answer:\n\n$$\n\\boxed{210}\n$$",
+     "tokens": 221,
+     "seconds": 58.61,
+     "finish": "stop"
+    },
+    {
+     "seed": 5,
+     "text": "We are given:\n\n- Price per loaf of bread: **2.50 euros**\n- Number of loaves sold on **Monday**: 36\n- Number of loaves sold on **Tuesday**: 12 more than on Monday\n\n---\n\n### Step 1: Calculate the number of loaves sold on Tuesday\n\n$$\n\\text{Loaves on Tuesday} = 36 + 12 = 48\n$$\n\n---\n\n### Step 2: Calculate total money taken in two days\n\n$$\n\\text{Total money} = \\text{Price per loaf} \\times (\\text{Loaves on Monday} + \\text{Loaves on Tuesday})\n$$\n\n$$\n\\text{Total money} = 2.50 \\times (36 + 48) = 2.50 \\times 84 = 210\n$$\n\n---\n\n### Final Answer:\n\n$$\n\\boxed{210}\n$$",
+     "tokens": 200,
+     "seconds": 50.57,
+     "finish": "stop"
+    },
+    {
+     "seed": 6,
+     "text": "We are given:\n\n- The price of a loaf of bread is **2.50 euros**.\n- On **Monday**, the bakery sold **36** loaves.\n- On **Tuesday**, the number of loaves sold was **12 more than on Monday**.\n\n---\n\n### Step 1: Find the number of loaves sold on Tuesday\n\n$$\n\\text{Loaves on Tuesday} = \\text{Loaves on Monday} + 12 = 36 + 12 = 48\n$$\n\n---\n\n### Step 2: Calculate the total money taken in the two days\n\n$$\n\\text{Total money} = (\\text{Loaves on Monday} \\times 2.50) + (\\text{Loaves on Tuesday} \\times 2.50)\n$$\n\n$$\n\\text{Total money} = (36 + 48) \\times 2.50 = 84 \\times 2.50 = 210\n$$\n\n---\n\n### Final Answer:\n\n$$\n\\boxed{210}\n$$\n\nAnswer: 210",
+     "tokens": 236,
+     "seconds": 64.49,
+     "finish": "stop"
+    },
+    {
+     "seed": 7,
+     "text": "We are given the following:\n\n- Price per loaf of bread: **2.50 euros**\n- Number of loaves sold on **Monday**: **36**\n- Number of loaves sold on **Tuesday**: **12 more than on Monday**\n\n---\n\n### Step 1: Find the number of loaves sold on Tuesday\n\n$$\n\\text{Loaves on Tuesday} = \\text{Loaves on Monday} + 12 = 36 + 12 = 48\n$$\n\n---\n\n### Step 2: Calculate total money taken in two days\n\n$$\n\\text{Total money} = (\\text{Loaves on Monday} \\times \\text{Price}) + (\\text{Loaves on Tuesday} \\times \\text{Price})\n$$\n\n$$\n\\text{Total money} = (36 \\times 2.50) + (48 \\times 2.50)\n$$\n\n$$\n\\text{Total money} = (90 + 120) = 210\n$$\n\n---\n\n### Final Answer:\n\n$$\n\\boxed{210}\n$$",
+     "tokens": 237,
+     "seconds": 65.04,
+     "finish": "stop"
+    }
+   ]
+  },
+  "pencils": {
+   "plain": [
+    {
+     "seed": 0,
+     "text": "Lena starts with:\n\n- 3 boxes × 12 pencils = **36 pencils**\n\nShe gives **7 pencils** to a friend:\n\n- 36 - 7 = **29 pencils**\n\nThen she buys a pack of 5 pencils:\n\n- 29 + 5 = **34 pencils**\n\n**Answer: 34 pencils**.",
+     "tokens": 75,
+     "seconds": 19.21,
+     "finish": "stop"
+    },
+    {
+     "seed": 1,
+     "text": "Lena has:\n\n- **3 boxes × 12 pencils = 36 pencils**\n\nShe gives **7 pencils** to a friend:\n\n- **36 - 7 = 29 pencils**\n\nThen she buys a **pack of 5 pencils**:\n\n- **29 + 5 = 34 pencils**\n\n**Answer: 34 pencils**.",
+     "tokens": 76,
+     "seconds": 18.1,
+     "finish": "stop"
+    },
+    {
+     "seed": 2,
+     "text": "Lena starts with:\n\n- 3 boxes × 12 pencils = **36 pencils**\n\nLena gives **7 pencils** to a friend:\n\n- 36 − 7 = **29 pencils**\n\nThen she buys a pack of 5 pencils:\n\n- 29 + 5 = **34 pencils**\n\n**Answer: 34 pencils**.",
+     "tokens": 76,
+     "seconds": 20.15,
+     "finish": "stop"
+    },
+    {
+     "seed": 3,
+     "text": "Lena has:\n\n- 3 boxes × 12 pencils = **36 pencils**\n\nShe gives 7 pencils to a friend:  \n36 - 7 = **29 pencils**\n\nThen she buys a pack of 5 pencils:  \n29 + 5 = **34 pencils**\n\n**Answer: 34 pencils**.",
+     "tokens": 71,
+     "seconds": 18.72,
+     "finish": "stop"
+    },
+    {
+     "seed": 4,
+     "text": "Lena has 3 boxes with 12 pencils each:\n\n- Total pencils initially:  \n  $ 3 \\times 12 = 36 $ pencils.\n\nLena gives 7 pencils to a friend:  \n- Remaining pencils: $ 36 - 7 = 29 $.\n\nThen she buys a pack of 5 pencils:  \n- Now she has $ 29 + 5 = 34 $ pencils.\n\n**Answer: Lena has 34 pencils now.**",
+     "tokens": 104,
+     "seconds": 25.6,
+     "finish": "stop"
+    },
+    {
+     "seed": 5,
+     "text": "Lena has:\n\n- **3 boxes × 12 pencils = 36 pencils**\n\nShe gives **7 pencils** to a friend:\n\n- **36 - 7 = 29 pencils remaining**\n\nThen she buys a pack of **5 pencils**:\n\n- **29 + 5 = 34 pencils**\n\n**Answer: Lena now has 34 pencils.**",
+     "tokens": 79,
+     "seconds": 22.28,
+     "finish": "stop"
+    },
+    {
+     "seed": 6,
+     "text": "Lena has:\n\n- 3 boxes × 12 pencils = **36 pencils**\n\nLena gives **7 pencils** to a friend:  \n36 - 7 = **29 pencils**\n\nThen she buys a pack of **5 pencils**:  \n29 + 5 = **34 pencils**\n\n**Answer: 34 pencils**.",
+     "tokens": 73,
+     "seconds": 19.77,
+     "finish": "stop"
+    },
+    {
+     "seed": 7,
+     "text": "Lena has:\n\n- **3 boxes × 12 pencils = 36 pencils**\n\nLena gives **7 pencils** to a friend:  \n36 - 7 = **29 pencils**\n\nThen she buys a pack of **5 pencils**:  \n29 + 5 = **34 pencils**\n\n**Answer: Lena has 34 pencils now.**",
+     "tokens": 76,
+     "seconds": 19.91,
+     "finish": "stop"
+    }
+   ],
+   "delimit": [
+    {
+     "seed": 0,
+     "text": "Lena has 3 boxes with 12 pencils each, so she has $3 \\times 12 = 36$ pencils. She gives 7 pencils to a friend, leaving her with $36 - 7 = 29$ pencils. Then she buys a pack of 5, so she now has $29 + 5 = 34$ pencils. \n\nLena has 34 pencils now.",
+     "tokens": 91,
+     "seconds": 23.3,
+     "finish": "stop"
+    },
+    {
+     "seed": 1,
+     "text": "Lena starts with 3 boxes × 12 pencils = 36 pencils. She gives 7 pencils to a friend, so she has 36 - 7 = 29 pencils left. Then she buys a pack of 5 pencils, so she now has 29 + 5 = 34 pencils. \n\nTherefore, Lena has 34 pencils now.",
+     "tokens": 80,
+     "seconds": 21.84,
+     "finish": "stop"
+    },
+    {
+     "seed": 2,
+     "text": "Lena has 3 boxes with 12 pencils each, so she has $3 \\times 12 = 36$ pencils. She gives 7 pencils to a friend, so she has $36 - 7 = 29$ pencils left. Then she buys a pack of 5 pencils, so she now has $29 + 5 = 34$ pencils. \n\nTherefore, Lena has 34 pencils now.",
+     "tokens": 94,
+     "seconds": 25.6,
+     "finish": "stop"
+    },
+    {
+     "seed": 3,
+     "text": "Lena starts with $3 \\times 12 = 36$ pencils. She gives 7 pencils to a friend, so she has $36 - 7 = 29$ pencils left. Then she buys a pack of 5 pencils, so she now has $29 + 5 = 34$ pencils. \n\nTherefore, Lena has 34 pencils now.",
+     "tokens": 82,
+     "seconds": 22.32,
+     "finish": "stop"
+    },
+    {
+     "seed": 4,
+     "text": "Lena starts with 3 boxes × 12 pencils = 36 pencils. She gives 7 pencils to a friend, so she has 36 - 7 = 29 pencils left. Then she buys a pack of 5, so she now has 29 + 5 = 34 pencils. \n\nLena has 34 pencils now.",
+     "tokens": 78,
+     "seconds": 19.68,
+     "finish": "stop"
+    },
+    {
+     "seed": 5,
+     "text": "Lena starts with 3 boxes × 12 pencils = 36 pencils. She gives 7 pencils to a friend, so she has 36 - 7 = 29 pencils left. Then she buys a pack of 5 pencils, so she now has 29 + 5 = 34 pencils. \n\nLena has 34 pencils now.",
+     "tokens": 79,
+     "seconds": 19.82,
+     "finish": "stop"
+    },
+    {
+     "seed": 6,
+     "text": "Lena starts with 3 boxes × 12 pencils = 36 pencils. She gives 7 pencils to a friend, so she has 36 - 7 = 29 pencils left. Then she buys a pack of 5 pencils, so she now has 29 + 5 = 34 pencils. \n\nLena now has 34 pencils.",
+     "tokens": 79,
+     "seconds": 20.64,
+     "finish": "stop"
+    },
+    {
+     "seed": 7,
+     "text": "Lena starts with 3 boxes × 12 pencils = 36 pencils. She gives 7 pencils to a friend, so she has 36 - 7 = 29 pencils left. Then she buys a pack of 5 pencils, so she now has 29 + 5 = 34 pencils. \n\nLena has 34 pencils now.",
+     "tokens": 79,
+     "seconds": 20.26,
+     "finish": "stop"
+    }
+   ],
+   "number": [
+    {
+     "seed": 0,
+     "text": "The initial number of pencils Lena has is $ 3 \\times 12 = 36 $.\n\nLena gives 7 pencils to a friend:  \n$ 36 - 7 = 29 $.\n\nThen she buys a pack of 5 pencils:  \n$ 29 + 5 = 34 $.\n\n**Final answer:** 34.",
+     "tokens": 78,
+     "seconds": 20.0,
+     "finish": "stop"
+    },
+    {
+     "seed": 1,
+     "text": "Lena has $3 \\times 12 = 36$ pencils. She gives 7 pencils to a friend, so she has $36 - 7 = 29$ pencils left. Then she buys a pack of 5, so she now has $29 + 5 = 34$ pencils.\n\nFinal answer: **34**.",
+     "tokens": 77,
+     "seconds": 20.41,
+     "finish": "stop"
+    },
+    {
+     "seed": 2,
+     "text": "The initial number of pencils Lena has is $3 \\times 12 = 36$ pencils. She gives 7 pencils to a friend, so she has $36 - 7 = 29$ pencils left. Then she buys a pack of 5 pencils, bringing $29 + 5 = 34$ pencils. \n\nFinal answer: 34\n\n**Final Answer:** 34",
+     "tokens": 87,
+     "seconds": 21.8,
+     "finish": "stop"
+    },
+    {
+     "seed": 3,
+     "text": "Lena starts with $3 \\times 12 = 36$ pencils. She gives 7 pencils to a friend, so she has $36 - 7 = 29$ pencils left. Then she buys a pack of 5, so she adds $5$ to her total. \n\nFinal number of pencils: $29 + 5 = 34$. \n\nAnswer: 34",
+     "tokens": 86,
+     "seconds": 21.58,
+     "finish": "stop"
+    },
+    {
+     "seed": 4,
+     "text": "Lena has 3 boxes × 12 pencils = 36 pencils. She gives 7 pencils to a friend, so she has 36 - 7 = 29 pencils. Then she buys a pack of 5, so she now has 29 + 5 = 34 pencils.\n\nFinal answer: 34",
+     "tokens": 72,
+     "seconds": 18.93,
+     "finish": "stop"
+    },
+    {
+     "seed": 5,
+     "text": "The initial number of pencils Lena has is $ 3 \\times 12 = 36 $. She gives 7 pencils to a friend, so she has $ 36 - 7 = 29 $ pencils left. Then she buys a pack of 5, which adds $ 5 $ to her total. \n\nFinal number of pencils: $ 29 + 5 = 34 $. \n\nAnswer: 34",
+     "tokens": 91,
+     "seconds": 22.62,
+     "finish": "stop"
+    },
+    {
+     "seed": 6,
+     "text": "Lena has $3 \\times 12 = 36$ pencils. She gives 7 pencils to a friend, so she has $36 - 7 = 29$ pencils left. Then she buys a pack of 5, so she now has $29 + 5 = 34$ pencils.\n\nFinal answer: **34**.",
+     "tokens": 77,
+     "seconds": 19.53,
+     "finish": "stop"
+    },
+    {
+     "seed": 7,
+     "text": "Lena has 3 boxes with 12 pencils each, so she has $3 \\times 12 = 36$ pencils. She gives 7 pencils to a friend, so she has $36 - 7 = 29$ pencils left. Then she buys a pack of 5, so she now has $29 + 5 = 34$ pencils.\n\nFinal answer: 34",
+     "tokens": 88,
+     "seconds": 22.62,
+     "finish": "stop"
+    }
+   ],
+   "examples": [
+    {
+     "seed": 0,
+     "text": "Lena has 3 boxes with 12 pencils each, so she has $3 \\times 12 = 36$ pencils. She gives 7 pencils to a friend, leaving her with $36 - 7 = 29$ pencils. Then she buys a pack of 5, so she now has $29 + 5 = 34$ pencils. \n\nAnswer: 34",
+     "tokens": 87,
+     "seconds": 24.81,
+     "finish": "stop"
+    },
+    {
+     "seed": 1,
+     "text": "Lena has 3 boxes with 12 pencils each, so she has $ 3 \\times 12 = 36 $ pencils. She gives 7 pencils to a friend, so she has $ 36 - 7 = 29 $ pencils left. Then she buys a pack of 5 pencils, so she now has $ 29 + 5 = 34 $ pencils. \n\nAnswer: 34",
+     "tokens": 92,
+     "seconds": 24.93,
+     "finish": "stop"
+    },
+    {
+     "seed": 2,
+     "text": "Let's break it down step by step:\n\n- Tom has **4 bags × 6 apples = 24 apples**.\n- Tom eats **3 apples**, so the number of apples left is **24 - 3 = 21**.\n\n**Answer: 21**.",
+     "tokens": 60,
+     "seconds": 16.14,
+     "finish": "stop"
+    },
+    {
+     "seed": 3,
+     "text": "Lena has 3 boxes × 12 pencils = 36 pencils. She gives 7 pencils to a friend, so she has 36 - 7 = 29 pencils. Then she buys a pack of 5 pencils, so she now has 29 + 5 = 34 pencils.\n\nAnswer: 34",
+     "tokens": 72,
+     "seconds": 20.01,
+     "finish": "stop"
+    },
+    {
+     "seed": 4,
+     "text": "Lena has 3 boxes with 12 pencils each, so she has $3 \\times 12 = 36$ pencils. She gives 7 pencils to a friend, so she has $36 - 7 = 29$ pencils left. Then she buys a pack of 5 pencils, so she now has $29 + 5 = 34$ pencils. \n\nAnswer: 34",
+     "tokens": 89,
+     "seconds": 24.14,
+     "finish": "stop"
+    },
+    {
+     "seed": 5,
+     "text": "Lena has 3 boxes with 12 pencils each, so she has $3 \\times 12 = 36$ pencils. She gives 7 pencils to a friend, leaving her with $36 - 7 = 29$ pencils. Then she buys a pack of 5 pencils, so she now has $29 + 5 = 34$ pencils. \n\nAnswer: 34",
+     "tokens": 88,
+     "seconds": 23.56,
+     "finish": "stop"
+    },
+    {
+     "seed": 6,
+     "text": "Lena has 3 boxes × 12 pencils = 36 pencils. She gives 7 pencils to a friend, so she has 36 - 7 = 29 pencils. Then she buys a pack of 5 pencils, so she now has 29 + 5 = 34 pencils. \n\nAnswer: 34",
+     "tokens": 73,
+     "seconds": 19.49,
+     "finish": "stop"
+    },
+    {
+     "seed": 7,
+     "text": "Lena has 3 boxes × 12 pencils = 36 pencils. She gives 7 pencils to a friend, so she has 36 - 7 = 29 pencils. Then she buys a pack of 5, so she now has 29 + 5 = 34 pencils.  \n\nAnswer: 34",
+     "tokens": 72,
+     "seconds": 18.16,
+     "finish": "stop"
+    }
+   ],
+   "examples-steps": [
+    {
+     "seed": 0,
+     "text": "Lena has 3 boxes with 12 pencils each, so she has $3 \\times 12 = 36$ pencils. She gives 7 pencils to a friend, leaving $36 - 7 = 29$ pencils. Then she buys a pack of 5, so she now has $29 + 5 = 34$ pencils.\n\nAnswer: 34.",
+     "tokens": 85,
+     "seconds": 24.05,
+     "finish": "stop"
+    },
+    {
+     "seed": 1,
+     "text": "Lena has 3 boxes with 12 pencils each, so that's $ 3 \\times 12 = 36 $ pencils. She gives 7 pencils to a friend, so she has $ 36 - 7 = 29 $ pencils left. Then she buys a pack of 5, so she now has $ 29 + 5 = 34 $ pencils. \n\nThe answer is 34.",
+     "tokens": 93,
+     "seconds": 25.69,
+     "finish": "stop"
+    },
+    {
+     "seed": 2,
+     "text": "Lena has 3 boxes with 12 pencils each:  \n3 × 12 = **36 pencils**.  \n\nShe gives 7 pencils to a friend: 36 − 7 = **29 pencils**.  \n\nThen she buys a pack of 5 pencils: 29 + 5 = **34 pencils**.  \n\n**Answer:** 34.",
+     "tokens": 81,
+     "seconds": 23.69,
+     "finish": "stop"
+    },
+    {
+     "seed": 3,
+     "text": "Lena has 3 boxes with 12 pencils each, so that's $3 \\times 12 = 36$ pencils. She gives 7 pencils to a friend, so she has $36 - 7 = 29$ pencils left. Then she buys a pack of 5, so she now has $29 + 5 = 34$ pencils.\n\nThe answer is **34**.",
+     "tokens": 90,
+     "seconds": 26.12,
+     "finish": "stop"
+    },
+    {
+     "seed": 4,
+     "text": "Lena has 3 boxes with 12 pencils each, so she has $3 \\times 12 = 36$ pencils. She gives 7 pencils to a friend, so she has $36 - 7 = 29$ pencils left. Then she buys a pack of 5, so she now has $29 + 5 = 34$ pencils. \n\nThe answer is 34.",
+     "tokens": 90,
+     "seconds": 24.55,
+     "finish": "stop"
+    },
+    {
+     "seed": 5,
+     "text": "Lena has 3 boxes with 12 pencils each:  \n**3 × 12 = 36 pencils.**  \n\nShe gives 7 pencils to a friend: **36 - 7 = 29 pencils left.**  \n\nThen she buys a pack of 5 pencils: **29 + 5 = 34 pencils.**  \n\n**Answer: 34.**",
+     "tokens": 84,
+     "seconds": 23.78,
+     "finish": "stop"
+    },
+    {
+     "seed": 6,
+     "text": "Lena has 3 boxes × 12 pencils = 36 pencils. She gives 7 pencils to a friend, so she has 36 - 7 = 29 pencils. Then she buys a pack of 5, so she now has 29 + 5 = 34 pencils. The answer is 34.",
+     "tokens": 73,
+     "seconds": 19.96,
+     "finish": "stop"
+    },
+    {
+     "seed": 7,
+     "text": "Lena has 3 boxes × 12 pencils = 36 pencils. She gives 7 pencils to a friend, so she has 36 - 7 = 29 pencils. Then she buys a pack of 5, so she now has 29 + 5 = 34 pencils.\n\nThe answer is 34.",
+     "tokens": 73,
+     "seconds": 20.37,
+     "finish": "stop"
+    }
+   ],
+   "role": [
+    {
+     "seed": 0,
+     "text": "Lena starts with 3 boxes × 12 pencils = **36 pencils**.\n\nShe gives 7 pencils to a friend:  \n36 - 7 = **29 pencils**.\n\nThen she buys a pack of 5 pencils:  \n29 + 5 = **34 pencils**.\n\n**Answer: Lena has 34 pencils now.**",
+     "tokens": 76,
+     "seconds": 18.6,
+     "finish": "stop"
+    },
+    {
+     "seed": 1,
+     "text": "Lena has **3 boxes × 12 pencils** = **36 pencils**.\n\nShe gives **7 pencils** to a friend → 36 - 7 = **29 pencils**.\n\nThen she buys a **pack of 5** pencils → 29 + 5 = **34 pencils**.\n\n**Answer: Lena has 34 pencils now.**",
+     "tokens": 79,
+     "seconds": 21.22,
+     "finish": "stop"
+    },
+    {
+     "seed": 2,
+     "text": "Lena starts with:\n\n- 3 boxes × 12 pencils = **36 pencils**\n\nShe gives 7 pencils to a friend:  \n36 - 7 = **29 pencils**\n\nThen she buys a pack of 5 pencils:  \n29 + 5 = **34 pencils**\n\n**Answer: Lena has 34 pencils now.**",
+     "tokens": 75,
+     "seconds": 21.11,
+     "finish": "stop"
+    },
+    {
+     "seed": 3,
+     "text": "Lena has **3 boxes × 12 pencils = 36 pencils**.\n\nShe gives **7 pencils** to a friend, so now she has **36 - 7 = 29 pencils**.\n\nThen she buys a pack of **5 pencils**, so now she has **29 + 5 = 34 pencils**.\n\n**Answer: Lena has 34 pencils now.**",
+     "tokens": 84,
+     "seconds": 22.9,
+     "finish": "stop"
+    },
+    {
+     "seed": 4,
+     "text": "Lena has:\n\n- 3 boxes × 12 pencils = **36 pencils**\n\nShe gives 7 pencils to a friend, so:\n\n- 36 - 7 = **29 pencils**\n\nThen she buys a pack of 5 pencils, so:\n\n- 29 + 5 = **34 pencils**\n\n**Answer: Lena has 34 pencils now.**",
+     "tokens": 80,
+     "seconds": 23.15,
+     "finish": "stop"
+    },
+    {
+     "seed": 5,
+     "text": "Lena has 3 boxes with 12 pencils each, so:\n\n- 3 boxes × 12 pencils = 36 pencils.\n\nLena gives 7 pencils to a friend: 36 - 7 = **29 pencils**.\n\nThen she buys a pack of 5 pencils: 29 + 5 = **34 pencils**.\n\n**Answer: Lena now has 34 pencils.**",
+     "tokens": 88,
+     "seconds": 24.22,
+     "finish": "stop"
+    },
+    {
+     "seed": 6,
+     "text": "Lena has 3 boxes × 12 pencils = **36 pencils**.\n\nShe gives 7 pencils to a friend: **36 - 7 = 29 pencils**.\n\nThen she buys a pack of 5 pencils: **29 + 5 = 34 pencils**.\n\n**Answer: Lena now has 34 pencils.**",
+     "tokens": 75,
+     "seconds": 19.31,
+     "finish": "stop"
+    },
+    {
+     "seed": 7,
+     "text": "Lena has 3 boxes × 12 pencils = 36 pencils.\n\nShe gives 7 pencils to a friend, so she has 36 - 7 = 29 pencils left.\n\nThen she buys a pack of 5 pencils, so she adds 5 to 29: 29 + 5 = 34 pencils.\n\n**Answer: Lena now has 34 pencils.**",
+     "tokens": 86,
+     "seconds": 22.66,
+     "finish": "stop"
+    }
+   ],
+   "steps": [
+    {
+     "seed": 0,
+     "text": "Let's break down the problem step by step:\n\n1. **Lena has 3 boxes with 12 pencils each:**\n   $$\n   3 \\times 12 = 36 \\text{ pencils}\n   $$\n\n2. **Lena gives 7 pencils to a friend:**\n   $$\n   36 - 7 = 29 \\text{ pencils}\n   $$\n\n3. **Lena buys a pack of 5 pencils:**\n   $$\n   29 + 5 = 34 \\text{ pencils}\n   $$\n\n### Final Answer:\nAnswer: 34",
+     "tokens": 131,
+     "seconds": 36.12,
+     "finish": "stop"
+    },
+    {
+     "seed": 1,
+     "text": "Step 1: Lena has 3 boxes × 12 pencils = **36 pencils**.\n\nStep 2: Lena gives 7 pencils to a friend → **36 - 7 = 29 pencils**.\n\nStep 3: Lena buys a pack of 5 pencils → **29 + 5 = 34 pencils**.\n\n**Answer: 34**",
+     "tokens": 80,
+     "seconds": 21.64,
+     "finish": "stop"
+    },
+    {
+     "seed": 2,
+     "text": "Let's break down the problem step by step:\n\n1. Lena has **3 boxes**, and each box contains **12 pencils**.  \n   So, total number of pencils Lena starts with:  \n   $$\n   3 \\times 12 = 36 \\text{ pencils}\n   $$\n\n2. Lena gives **7 pencils** to a friend.  \n   So, pencils remaining after giving 7:  \n   $$\n   36 - 7 = 29 \\text{ pencils}\n   $$\n\n3. Then she buys a **pack of 5**.  \n   So, pencils now include the remaining 29 and the 5 she bought:  \n   $$\n   29 + 5 = 34 \\text{ pencils}\n   $$\n\n### Final Answer:\nAnswer: 34",
+     "tokens": 174,
+     "seconds": 47.67,
+     "finish": "stop"
+    },
+    {
+     "seed": 3,
+     "text": "Step 1: Lena has **3 boxes**, each with **12 pencils**.  \nSo, total pencils initially = $ 3 \\times 12 = 36 $.\n\nStep 2: Lena gives **7 pencils** to a friend.  \nRemaining pencils = $ 36 - 7 = 29 $.\n\nStep 3: Lena buys a pack of **5 pencils**.  \nNow, she has $ 29 + 5 = 34 $ pencils.\n\n**Answer: 34**",
+     "tokens": 110,
+     "seconds": 30.27,
+     "finish": "stop"
+    },
+    {
+     "seed": 4,
+     "text": "Step 1: Lena has 3 boxes with 12 pencils each.\n\n$$\n3 \\times 12 = 36 \\text{ pencils}\n$$\n\nStep 2: Lena gives 7 pencils to a friend.\n\n$$\n36 - 7 = 29 \\text{ pencils left}\n$$\n\nStep 3: Lena buys a pack of 5 pencils.\n\n$$\n29 + 5 = 34 \\text{ pencils}\n$$\n\nAnswer: <34>",
+     "tokens": 104,
+     "seconds": 27.86,
+     "finish": "stop"
+    },
+    {
+     "seed": 5,
+     "text": "Let's solve the problem step by step:\n\n1. Lena has **3 boxes**, each with **12 pencils**:\n   $$\n   3 \\times 12 = 36 \\text{ pencils}\n   $$\n\n2. Lena gives **7 pencils** to a friend:\n   $$\n   36 - 7 = 29 \\text{ pencils}\n   $$\n\n3. Then she buys a **pack of 5 pencils**:\n   $$\n   29 + 5 = 34 \\text{ pencils}\n   $$\n\n### Final Answer:\nAnswer: **34**",
+     "tokens": 128,
+     "seconds": 36.06,
+     "finish": "stop"
+    },
+    {
+     "seed": 6,
+     "text": "Step 1: Lena has **3 boxes**, each with **12 pencils**.\n\n$$\n3 \\times 12 = 36 \\text{ pencils}\n$$\n\nStep 2: Lena gives **7 pencils** to a friend.\n\n$$\n36 - 7 = 29 \\text{ pencils}\n$$\n\nStep 3: Lena buys a **pack of 5 pencils**.\n\n$$\n29 + 5 = 34 \\text{ pencils}\n$$\n\n**Answer: 34**",
+     "tokens": 109,
+     "seconds": 30.27,
+     "finish": "stop"
+    },
+    {
+     "seed": 7,
+     "text": "Step 1: Lena has **3 boxes**, each with **12 pencils**.  \nSo, total number of pencils:  \n$$ 3 \\times 12 = 36 $$\n\nStep 2: Lena gives **7 pencils** to a friend.  \nSo, remaining pencils:  \n$$ 36 - 7 = 29 $$\n\nStep 3: Lena buys a pack of **5 pencils**.  \nSo, new total pencils:  \n$$ 29 + 5 = 34 $$\n\n**Final Answer:**  \nAnswer: 34",
+     "tokens": 120,
+     "seconds": 33.78,
+     "finish": "stop"
+    }
+   ]
+  },
+  "cinema": {
+   "plain": [
+    {
+     "seed": 0,
+     "text": "We are given:\n\n- **Number of rows**: 12  \n- **Number of seats per row**: 18  \n- **Total number of tickets sold**: 157\n\n### Step 1: Calculate the total number of seats\n\n$$\n\\text{Total seats} = \\text{Number of rows} \\times \\text{Seats per row} = 12 \\times 18 = 216\n$$\n\n### Step 2: Subtract the number of tickets sold from the total seats to find the number of empty seats\n\n$$\n\\text{Empty seats} = \\text{Total seats} - \\text{Tickets sold} = 216 - 157 = 59\n$$\n\n### ✅ Final Answer: **59 seats remain empty**.",
+     "tokens": 169,
+     "seconds": 47.72,
+     "finish": "stop"
+    },
+    {
+     "seed": 1,
+     "text": "We are given:\n\n- Total number of seats:  \n  $ 12 \\text{ rows} \\times 18 \\text{ seats per row} = 216 \\text{ seats} $\n\n- Number of tickets sold:  \n  $ 157 \\text{ tickets} $\n\n- Number of seats **that are empty**:  \n  $ 216 - 157 = 59 $\n\n---\n\n### ✅ Final Answer:\n$$\n\\boxed{59}\n$$ seats remain empty.",
+     "tokens": 109,
+     "seconds": 28.23,
+     "finish": "stop"
+    },
+    {
+     "seed": 2,
+     "text": "We are given:\n\n- **Number of rows** = 12  \n- **Number of seats per row** = 18  \n- **Total number of tickets sold** = 157  \n\nWe need to find how many **seats are empty**.\n\n### Step 1: Calculate total number of seats\n\n$$\n\\text{Total seats} = \\text{Number of rows} \\times \\text{Number of seats per row} = 12 \\times 18 = 216\n$$\n\n### Step 2: Subtract the number of tickets sold from the total seats to find the number of empty seats\n\n$$\n\\text{Empty seats} = \\text{Total seats} - \\text{Tickets sold} = 216 - 157 = 59\n$$\n\n### ✅ Final Answer: **59 seats remain empty**.",
+     "tokens": 186,
+     "seconds": 51.4,
+     "finish": "stop"
+    },
+    {
+     "seed": 3,
+     "text": "We are given:\n\n- **12 rows** of **18 seats each** = 12 × 18 seats = **216 seats**\n- **157 tickets sold**\n\nTo find how many **seats remain empty**, we subtract the number of tickets sold from the total number of seats:\n\n$$\n\\text{Seats remaining empty} = 216 - 157 = \\boxed{59}\n$$\n\nSo, **59 seats remain empty**.",
+     "tokens": 103,
+     "seconds": 27.77,
+     "finish": "stop"
+    },
+    {
+     "seed": 4,
+     "text": "We are given:\n\n- **Number of rows**: 12  \n- **Number of seats per row**: 18  \n- **Total number of tickets sold**: 157  \n\nWe are to find the number of **empty seats**.\n\n### Step 1: Calculate the total number of seats\n$$\n\\text{Total seats} = \\text{Number of rows} \\times \\text{Number of seats per row} = 12 \\times 18 = 216\n$$\n\n### Step 2: Subtract the number of tickets sold from the total number of seats\n$$\n\\text{Empty seats} = \\text{Total seats} - \\text{Tickets sold} = 216 - 157 = 59\n$$\n\n### ✅ Final Answer:\n$$\n\\boxed{59}\n$$ seats remain empty.",
+     "tokens": 183,
+     "seconds": 50.33,
+     "finish": "stop"
+    },
+    {
+     "seed": 5,
+     "text": "We are given:\n\n- **Number of rows**: 12  \n- **Number of seats per row**: 18  \n- **Total number of tickets sold**: 157  \n\nWe are to find how many **seats are empty**.\n\n---\n\n### Step 1: Calculate the total number of seats\n\n$$\n\\text{Total seats} = \\text{Number of rows} \\times \\text{Seats per row} = 12 \\times 18 = 216\n$$\n\n---\n\n### Step 2: Subtract the number of tickets sold from the total number of seats\n\n$$\n\\text{Empty seats} = \\text{Total seats} - \\text{Tickets sold} = 216 - 157 = 59\n$$\n\n---\n\n### ✅ Final Answer:\n\n$$\n\\boxed{59}\n$$ seats remain empty.",
+     "tokens": 185,
+     "seconds": 49.93,
+     "finish": "stop"
+    },
+    {
+     "seed": 6,
+     "text": "We are given:\n\n- **12 rows** of **18 seats each**  \n- **157 tickets** are sold  \n- We need to find how many seats **remain empty**.\n\n---\n\n### Step 1: Calculate the total number of seats\n\n$$\n12 \\text{ rows} \\times 18 \\text{ seats/row} = 216 \\text{ seats}\n$$\n\n---\n\n### Step 2: Subtract the number of tickets sold from the total seats\n\n$$\n216 \\text{ seats} - 157 \\text{ tickets} = 59 \\text{ seats remain empty}\n$$\n\n---\n\n### ✅ Final Answer:\n\n$$\n\\boxed{59}\n$$ seats remain empty.",
+     "tokens": 157,
+     "seconds": 41.17,
+     "finish": "stop"
+    },
+    {
+     "seed": 7,
+     "text": "We are given:\n\n- Total number of seats: $12 \\text{ rows} \\times 18 \\text{ seats per row} = 216$ seats.\n- Number of tickets sold: $157$ tickets.\n- Number of empty seats: $216 - 157 = 59$.\n\n### Final Answer:\n$$\n\\boxed{59}\n$$ seats remain empty.",
+     "tokens": 89,
+     "seconds": 22.44,
+     "finish": "stop"
+    }
+   ],
+   "delimit": [
+    {
+     "seed": 0,
+     "text": "The total number of seats is $12 \\times 18 = 216$. The number of tickets sold is 157. The number of empty seats is $216 - 157 = 59$. \n\nSo, the number of seats that remain empty is 59.",
+     "tokens": 66,
+     "seconds": 16.31,
+     "finish": "stop"
+    },
+    {
+     "seed": 1,
+     "text": "To find the number of seats that remain empty, we need to subtract the number of tickets sold from the total number of seats. The total number of seats is 12 rows multiplied by 18 seats per row, which is $12 \\times 18 = 216$ seats. The number of tickets sold is 157. Therefore, the number of empty seats is $216 - 157 = 59$. \n\nThe answer is 59.",
+     "tokens": 104,
+     "seconds": 25.97,
+     "finish": "stop"
+    },
+    {
+     "seed": 2,
+     "text": "The total number of seats is $12 \\times 18 = 216$. The number of tickets sold is 157. The number of empty seats is $216 - 157 = 59$. \n\nSo, the number of seats that remain empty is 59.",
+     "tokens": 66,
+     "seconds": 17.19,
+     "finish": "stop"
+    },
+    {
+     "seed": 3,
+     "text": "To find the number of empty seats, we need to subtract the number of tickets sold from the total number of seats.\n\n- Total seats: $12 \\text{ rows} \\times 18 \\text{ seats per row} = 216$\n- Tickets sold: $157$\n- Empty seats: $216 - 157 = 59$\n\nSo, the number of seats that stay empty is 59.",
+     "tokens": 95,
+     "seconds": 24.14,
+     "finish": "stop"
+    },
+    {
+     "seed": 4,
+     "text": "To find the number of empty seats, we first calculate the total number of seats in the cinema and then subtract the number of tickets sold. The total number of seats is 12 rows multiplied by 18 seats per row, which equals 216 seats. The number of tickets sold is 157. Therefore, the number of empty seats is 216 - 157 = 59. \n\nSo, the answer is 59.",
+     "tokens": 98,
+     "seconds": 25.02,
+     "finish": "stop"
+    },
+    {
+     "seed": 5,
+     "text": "The cinema has 12 rows of 18 seats each, which equals $12 \\times 18 = 216$ seats. The number of tickets sold is 157. Therefore, the number of empty seats is $216 - 157 = 59$. \n\nSo, the number of seats that remain empty is 59.",
+     "tokens": 80,
+     "seconds": 20.44,
+     "finish": "stop"
+    },
+    {
+     "seed": 6,
+     "text": "To find the number of empty seats, we need to subtract the number of tickets sold from the total number of seats. The total number of seats is $12 \\text{ rows} \\times 18 \\text{ seats per row} = 216$ seats. The number of tickets sold is 157. Therefore, the number of empty seats is $216 - 157 = 59$. \n\nThe answer is 59.",
+     "tokens": 99,
+     "seconds": 25.61,
+     "finish": "stop"
+    },
+    {
+     "seed": 7,
+     "text": "To find the number of seats that remain empty, we first calculate the total number of seats in the cinema. There are 12 rows and 18 seats per row, so:\n\n$$\n12 \\times 18 = 216 \\text{ seats}\n$$\n\nNext, we subtract the number of tickets sold from the total number of seats:\n\n$$\n216 - 157 = 59\n$$\n\nTherefore, the number of seats that remain empty is **59**.",
+     "tokens": 107,
+     "seconds": 27.13,
+     "finish": "stop"
+    }
+   ],
+   "number": [
+    {
+     "seed": 0,
+     "text": "The total number of seats is $12 \\times 18 = 216$. The number of tickets sold is 157. The number of empty seats is:\n\n$$\n216 - 157 = \\boxed{59}\n$$",
+     "tokens": 56,
+     "seconds": 15.21,
+     "finish": "stop"
+    },
+    {
+     "seed": 1,
+     "text": "The total number of seats is $12 \\times 18 = 216$. The number of tickets sold is 157. The number of empty seats is $216 - 157 = 59$.\n\n**Final answer:** 59",
+     "tokens": 59,
+     "seconds": 17.12,
+     "finish": "stop"
+    },
+    {
+     "seed": 2,
+     "text": "The total number of seats is $12 \\times 18 = 216$.  \nThe number of tickets sold is 157.  \nSo, the number of empty seats is $216 - 157 = 59$.\n\n**Final Answer:** 59",
+     "tokens": 63,
+     "seconds": 18.91,
+     "finish": "stop"
+    },
+    {
+     "seed": 3,
+     "text": "The total number of seats is $12 \\times 18 = 216$. The number of tickets sold is 157. The number of empty seats is:\n\n$$\n216 - 157 = 59\n$$\n\nSo, the final answer is: **59**.",
+     "tokens": 67,
+     "seconds": 19.94,
+     "finish": "stop"
+    },
+    {
+     "seed": 4,
+     "text": "The total number of seats is $12 \\times 18 = 216$.  \nThe number of tickets sold is 157.  \n\nSo, the number of empty seats is:  \n$$\n216 - 157 = 59\n$$\n\n**Final Answer:** 59",
+     "tokens": 67,
+     "seconds": 18.65,
+     "finish": "stop"
+    },
+    {
+     "seed": 5,
+     "text": "The total number of seats is $12 \\times 18 = 216$.  \nThe number of tickets sold is 157.  \n\nThe number of empty seats is:  \n$$ 216 - 157 = 59 $$\n\nFinal answer: **59**",
+     "tokens": 64,
+     "seconds": 18.75,
+     "finish": "stop"
+    },
+    {
+     "seed": 6,
+     "text": "The total number of seats is $12 \\times 18 = 216$. The number of tickets sold is 157. The number of empty seats is $216 - 157 = 59$.\n\nThe final answer is: **59**.",
+     "tokens": 62,
+     "seconds": 17.75,
+     "finish": "stop"
+    },
+    {
+     "seed": 7,
+     "text": "The total number of seats is $12 \\times 18 = 216$. The number of tickets sold is 157. The number of empty seats is:\n\n$$\n216 - 157 = 59\n$$\n\n**Final Answer: 59**",
+     "tokens": 63,
+     "seconds": 17.97,
+     "finish": "stop"
+    }
+   ],
+   "examples": [
+    {
+     "seed": 0,
+     "text": "Tom has 4 bags with 6 apples each.  \nTom eats 3 apples.  \n\n**Step 1:**  \nEach bag has 6 apples, so 4 bags × 6 apples = 24 apples.  \n\n**Step 2:**  \nTom eats 3 apples, so 24 - 3 = **21 apples** remaining.  \n\n**Answer:** 21 apples are left.",
+     "tokens": 85,
+     "seconds": 24.43,
+     "finish": "stop"
+    },
+    {
+     "seed": 1,
+     "text": "To find the number of empty seats, first calculate the total number of seats:\n\n- Total seats = $12 \\text{ rows} \\times 18 \\text{ seats per row} = 216$ seats.\n\n- Tickets sold = 157.\n\n- Seats remaining = Total seats - Tickets sold = $216 - 157 = 59$.\n\nAnswer: 59",
+     "tokens": 87,
+     "seconds": 24.82,
+     "finish": "stop"
+    },
+    {
+     "seed": 2,
+     "text": "A cinema has 12 rows of 18 seats.  \nTotal seats = $12 \\times 18 = 216$.  \nTickets sold = 157.  \nEmpty seats = $216 - 157 = 59$.  \n\nAnswer: **59**",
+     "tokens": 65,
+     "seconds": 19.43,
+     "finish": "stop"
+    },
+    {
+     "seed": 3,
+     "text": "To find the number of empty seats, we start with the total number of seats and subtract the number of tickets sold.\n\n- Total number of seats: $12 \\text{ rows} \\times 18 \\text{ seats per row} = 216$\n- Number of tickets sold: $157$\n- Empty seats: $216 - 157 = 59$\n\nAnswer: 59",
+     "tokens": 90,
+     "seconds": 25.59,
+     "finish": "stop"
+    },
+    {
+     "seed": 4,
+     "text": "Tom has 4 bags with 6 apples each.  \nTom eats 3 apples.  \n\nTotal apples = 4 × 6 = 24  \nApples left = 24 - 3 = **21**  \n\nAnswer: **21**",
+     "tokens": 54,
+     "seconds": 15.96,
+     "finish": "stop"
+    },
+    {
+     "seed": 5,
+     "text": "A ticket costs 8 euros.  \n5 tickets and a 3-euro program cost:  \n5 × 8 + 3 = 40 + 3 = **43 euros**.  \n\nAnswer: 43.",
+     "tokens": 48,
+     "seconds": 14.29,
+     "finish": "stop"
+    },
+    {
+     "seed": 6,
+     "text": "To find the number of seats that remain empty:\n\n1. Calculate the total number of seats:\n   $$\n   12 \\text{ rows} \\times 18 \\text{ seats per row} = 216 \\text{ seats}\n   $$\n\n2. Subtract the number of tickets sold from the total seats:\n   $$\n   216 - 157 = 59\n   $$\n\nAnswer: 59 seats remain empty.",
+     "tokens": 99,
+     "seconds": 28.84,
+     "finish": "stop"
+    },
+    {
+     "seed": 7,
+     "text": "To find the number of empty seats:\n\n1. Calculate the total number of seats:\n   $ 12 \\text{ rows} \\times 18 \\text{ seats per row} = 216 \\text{ seats} $\n\n2. Subtract the number of tickets sold from the total seats:\n   $ 216 - 157 = 59 $\n\nAnswer: 59",
+     "tokens": 84,
+     "seconds": 25.73,
+     "finish": "stop"
+    }
+   ],
+   "examples-steps": [
+    {
+     "seed": 0,
+     "text": "To find how many seats stay empty, we first calculate the total number of seats:\n\n- There are 12 rows with 18 seats each:  \n  $ 12 \\times 18 = 216 $ seats.\n\n- Tickets sold: 157 tickets.  \n  So, the number of empty seats is:  \n  $ 216 - 157 = 59 $.\n\n**Answer:** 59 seats stay empty.",
+     "tokens": 99,
+     "seconds": 30.19,
+     "finish": "stop"
+    },
+    {
+     "seed": 1,
+     "text": "To find the number of seats that remain empty:\n\n- Each row has 18 seats, and there are 12 rows:  \n  $ 12 \\times 18 = 216 $ seats.\n\n- 157 tickets are sold, so the number of empty seats is:  \n  $ 216 - 157 = 59 $.\n\n**Answer:** 59 seats remain empty.",
+     "tokens": 91,
+     "seconds": 28.19,
+     "finish": "stop"
+    },
+    {
+     "seed": 2,
+     "text": "A cinema has 12 rows of 18 seats each, so the total number of seats is:\n\n$$ 12 \\times 18 = 216 $$\n\nTom sold 157 tickets, so the number of empty seats is:\n\n$$ 216 - 157 = 59 $$\n\nThe answer is **59**.",
+     "tokens": 78,
+     "seconds": 24.92,
+     "finish": "stop"
+    },
+    {
+     "seed": 3,
+     "text": "To find the number of empty seats, we first calculate the total number of seats:\n\n- Each row has 18 seats, and there are 12 rows:  \n  $12 \\times 18 = 216$ seats.\n\n- 157 tickets were sold, so the number of empty seats is:  \n  $216 - 157 = 59$.\n\nThe answer is **59**.",
+     "tokens": 94,
+     "seconds": 26.88,
+     "finish": "stop"
+    },
+    {
+     "seed": 4,
+     "text": "To find the number of empty seats:\n\n1. Calculate the total number of seats:\n   $$\n   12 \\text{ rows} \\times 18 \\text{ seats per row} = 216 \\text{ seats}\n   $$\n\n2. Subtract the number of tickets sold from the total seats:\n   $$\n   216 - 157 = 59\n   $$\n\nThe answer is 59.",
+     "tokens": 95,
+     "seconds": 27.42,
+     "finish": "stop"
+    },
+    {
+     "seed": 5,
+     "text": "To find the number of seats that remain empty, we first calculate the total number of seats:\n\n- There are 12 rows with 18 seats each:  \n  $ 12 \\times 18 = 216 $ seats.\n\n- 157 tickets are sold, so the number of empty seats is:  \n  $ 216 - 157 = 59 $.\n\n**Answer:** 59 seats remain empty.",
+     "tokens": 97,
+     "seconds": 28.38,
+     "finish": "stop"
+    },
+    {
+     "seed": 6,
+     "text": "To find the number of empty seats, we first calculate the total number of seats:\n\n- There are 12 rows and 18 seats per row:  \n  $12 \\times 18 = 216$ seats.\n\n- 157 tickets were sold, so the number of empty seats is:  \n  $216 - 157 = 59$.\n\nThe answer is **59**.",
+     "tokens": 92,
+     "seconds": 26.8,
+     "finish": "stop"
+    },
+    {
+     "seed": 7,
+     "text": "To find the number of seats that remain empty:\n\n1. Calculate the total number of seats:\n   - There are 12 rows × 18 seats per row = 216 seats.\n\n2. Subtract the number of tickets sold from the total seats:\n   - 216 - 157 = 59.\n\n**Answer:** 59 seats remain empty.",
+     "tokens": 80,
+     "seconds": 23.2,
+     "finish": "stop"
+    }
+   ],
+   "role": [
+    {
+     "seed": 0,
+     "text": "We are told:\n\n- There are **12 rows** of **18 seats** each.\n- **157 tickets** are sold.\n\nWe need to find how many **seats stay empty**.\n\n### Step 1: Calculate total number of seats\n$$\n\\text{Total seats} = 12 \\text{ rows} \\times 18 \\text{ seats per row} = 216 \\text{ seats}\n$$\n\n### Step 2: Subtract the number of tickets sold from the total seats\n$$\n\\text{Seats left empty} = 216 - 157 = 59\n$$\n\n### ✅ Final Answer: **59 seats stay empty**.",
+     "tokens": 151,
+     "seconds": 39.76,
+     "finish": "stop"
+    },
+    {
+     "seed": 1,
+     "text": "We are given:\n\n- Total number of seats: 12 rows × 18 seats per row = 216 seats  \n- Number of tickets sold: 157 tickets\n\nTo find how many seats remain empty:\n\n$$\n\\text{Seats remaining empty} = \\text{Total seats} - \\text{Tickets sold}\n$$\n\n$$\n\\text{Seats remaining empty} = 216 - 157 = 59\n$$\n\n**Answer: 59 seats remain empty.**",
+     "tokens": 110,
+     "seconds": 28.78,
+     "finish": "stop"
+    },
+    {
+     "seed": 2,
+     "text": "To find out how many seats stay empty, we need to calculate the total number of seats in the cinema and subtract the number of tickets sold.\n\n1. **Total number of seats**:  \n   There are 12 rows and 18 seats per row.  \n   So, total seats = $ 12 \\times 18 = 216 $ seats.\n\n2. **Number of tickets sold**:  \n   157 tickets were sold.\n\n3. **Seats remaining empty**:  \n   $ 216 - 157 = 59 $ seats.\n\n**Answer: 59 seats stay empty.**",
+     "tokens": 132,
+     "seconds": 34.34,
+     "finish": "stop"
+    },
+    {
+     "seed": 3,
+     "text": "We are given:\n\n- **12 rows of 18 seats each** = $ 12 \\times 18 = 216 $ seats.\n- **157 tickets are sold**.\n\nTo find how many seats **stay empty**, we subtract the number of tickets sold from the total number of seats:\n\n$$\n\\text{Seats remaining empty} = 216 - 157 = 59\n$$\n\n**Answer: 59 seats remain empty.**",
+     "tokens": 104,
+     "seconds": 25.17,
+     "finish": "stop"
+    },
+    {
+     "seed": 4,
+     "text": "We are given:\n\n- **Number of rows**: 12  \n- **Number of seats per row**: 18  \n- **Total number of tickets sold**: 157  \n\nWe are to find the number of **empty seats**.\n\n---\n\n### Step 1: Calculate total number of seats\n\n$$\n\\text{Total seats} = \\text{Number of rows} \\times \\text{Seats per row} = 12 \\times 18 = 216\n$$\n\n---\n\n### Step 2: Subtract the number of tickets sold from total seats\n\n$$\n\\text{Empty seats} = \\text{Total seats} - \\text{Tickets sold} = 216 - 157 = 59\n$$\n\n---\n\n### ✅ Final Answer:\n\n$$\n\\boxed{59}\n$$\n\nSo, **59 seats remain empty**.",
+     "tokens": 187,
+     "seconds": 46.93,
+     "finish": "stop"
+    },
+    {
+     "seed": 5,
+     "text": "We are given:\n\n- Number of rows: 12  \n- Number of seats per row: 18  \n- Total number of tickets sold: 157  \n\n### Step 1: Calculate total number of seats\n\n$$\n\\text{Total seats} = 12 \\times 18 = 216\n$$\n\n### Step 2: Subtract the number of tickets sold from the total number of seats\n\n$$\n\\text{Seats remaining empty} = 216 - 157 = 59\n$$\n\n### ✅ Final Answer: 59 seats stay empty.",
+     "tokens": 129,
+     "seconds": 32.47,
+     "finish": "stop"
+    },
+    {
+     "seed": 6,
+     "text": "We are given:\n\n- **12 rows** of **18 seats each** =  \n  $ 12 \\times 18 = 216 $ seats  \n- **157 tickets sold**  \n- **Tickets sold = 157**\n\nNow, to find how many seats are **empty**, we subtract the number of tickets sold from the total number of seats:\n\n$$\n\\text{Seats empty} = \\text{Total seats} - \\text{Tickets sold} = 216 - 157 = 59\n$$\n\n### ✅ Final Answer: **59 seats remain empty**.",
+     "tokens": 134,
+     "seconds": 33.91,
+     "finish": "stop"
+    },
+    {
+     "seed": 7,
+     "text": "We are given:\n\n- Total number of seats: $12 \\text{ rows} \\times 18 \\text{ seats per row} = 216$ seats.\n- Number of tickets sold: $157$ tickets.\n\nTo find the number of empty seats, we subtract the number of tickets from the total number of seats:\n\n$$\n\\text{Empty seats} = 216 - 157 = 59\n$$\n\n**Answer:** 59 seats remain empty.",
+     "tokens": 107,
+     "seconds": 27.32,
+     "finish": "stop"
+    }
+   ],
+   "steps": [
+    {
+     "seed": 0,
+     "text": "We are given:\n\n- **12 rows** of **18 seats each**\n- **157 tickets** are sold\n\nWe need to find how many **seats are empty**.\n\n---\n\n### Step 1: Calculate the total number of seats\n\n$$\n\\text{Total seats} = 12 \\times 18 = 216\n$$\n\n---\n\n### Step 2: Subtract the number of tickets sold from the total seats\n\n$$\n\\text{Seats empty} = 216 - 157 = 59\n$$\n\n---\n\n### Final Answer:\n\n$$\n\\boxed{59}\n$$\n\nAnswer: 59",
+     "tokens": 140,
+     "seconds": 37.48,
+     "finish": "stop"
+    },
+    {
+     "seed": 1,
+     "text": "We are given:\n\n- **12 rows** of seats  \n- **18 seats per row**  \n- **157 tickets sold**  \n- We need to find how many **seats are empty**.\n\n---\n\n### Step 1: Calculate the total number of seats\n\n$$\n\\text{Total seats} = 12 \\times 18 = 216\n$$\n\n---\n\n### Step 2: Subtract the number of tickets sold from the total seats\n\n$$\n\\text{Empty seats} = 216 - 157 = 59\n$$\n\n---\n\n### Final Answer:\n\nAnswer: **59**",
+     "tokens": 136,
+     "seconds": 38.14,
+     "finish": "stop"
+    },
+    {
+     "seed": 2,
+     "text": "We are given:\n\n- **12 rows** of **18 seats** each  \n- **157 tickets** sold  \n- We need to find how many **seats remain empty**\n\n---\n\n### Step 1: Calculate the total number of seats\n\n$$\n12 \\text{ rows} \\times 18 \\text{ seats per row} = 216 \\text{ seats}\n$$\n\n---\n\n### Step 2: Subtract the number of tickets sold from the total number of seats\n\n$$\n216 - 157 = 59\n$$\n\n---\n\n### Final Answer:\n\n$$\n\\boxed{59}\n$$\n\nAnswer: 59",
+     "tokens": 142,
+     "seconds": 40.79,
+     "finish": "stop"
+    },
+    {
+     "seed": 3,
+     "text": "We are given:\n\n- **Number of rows** = 12  \n- **Number of seats per row** = 18  \n- **Total number of tickets sold** = 157\n\n### Step 1: Calculate the total number of seats in the cinema\n\n$$\n\\text{Total seats} = 12 \\times 18 = 216\n$$\n\n### Step 2: Subtract the number of tickets sold from the total number of seats to find the number of empty seats\n\n$$\n\\text{Empty seats} = 216 - 157 = 59\n$$\n\n### Final Answer:\n\nAnswer: 59",
+     "tokens": 141,
+     "seconds": 39.58,
+     "finish": "stop"
+    },
+    {
+     "seed": 4,
+     "text": "We are given:\n\n- **12 rows** of **18 seats** each.\n- **157 tickets** are sold.\n\nWe are to find how many seats **stay empty**.\n\n---\n\n### Step 1: Calculate the total number of seats\n\n$$\n12 \\text{ rows} \\times 18 \\text{ seats per row} = 216 \\text{ seats}\n$$\n\n---\n\n### Step 2: Subtract the number of tickets sold from the total number of seats\n\n$$\n216 \\text{ seats} - 157 \\text{ tickets} = 59 \\text{ seats remain empty}\n$$\n\n---\n\n### Final Answer:\n\n$$\n\\boxed{59}\n$$\n\nAnswer: 59",
+     "tokens": 158,
+     "seconds": 49.32,
+     "finish": "stop"
+    },
+    {
+     "seed": 5,
+     "text": "We are given:\n\n- **12 rows** of **18 seats** each.\n- **157 tickets** are sold.\n\nWe are to find how many seats **remain empty**.\n\n---\n\n### Step 1: Calculate total number of seats\n\nEach row has 18 seats, and there are 12 rows:\n\n$$\n12 \\times 18 = 216 \\text{ seats}\n$$\n\n---\n\n### Step 2: Subtract the number of tickets sold from the total number of seats\n\n$$\n216 - 157 = 59\n$$\n\n---\n\n### Final Answer:\n\n$$\n\\boxed{59}\n$$\n\nAnswer: **59**",
+     "tokens": 146,
+     "seconds": 43.78,
+     "finish": "stop"
+    },
+    {
+     "seed": 6,
+     "text": "We are given:\n\n- **Number of rows** = 12  \n- **Number of seats per row** = 18  \n- **Total number of tickets sold** = 157  \n\n### Step 1: Calculate the total number of seats in the cinema\n\n$$\n\\text{Total seats} = \\text{Number of rows} \\times \\text{Number of seats per row} = 12 \\times 18 = 216\n$$\n\n### Step 2: Find the number of empty seats\n\n$$\n\\text{Empty seats} = \\text{Total seats} - \\text{Tickets sold} = 216 - 157 = 59\n$$\n\n### Final Answer:\n\nAnswer: 59",
+     "tokens": 161,
+     "seconds": 48.4,
+     "finish": "stop"
+    },
+    {
+     "seed": 7,
+     "text": "We are given:\n\n- **Number of rows**: 12  \n- **Number of seats per row**: 18  \n- **Total number of tickets sold**: 157  \n\nWe are to find how many **seats stay empty**.\n\n---\n\n### Step 1: Calculate the total number of seats\n\n$$\n\\text{Total seats} = \\text{Number of rows} \\times \\text{Seats per row} = 12 \\times 18 = 216\n$$\n\n---\n\n### Step 2: Subtract the number of tickets sold from the total seats to find the number of empty seats\n\n$$\n\\text{Empty seats} = \\text{Total seats} - \\text{Tickets sold} = 216 - 157 = 59\n$$\n\n---\n\n### Final Answer:\n\n$$\n\\boxed{59}\n$$\n\nAnswer: 59",
+     "tokens": 190,
+     "seconds": 52.34,
+     "finish": "stop"
+    }
+   ]
+  }
+ },
+ "load_seconds": 5.2
+}

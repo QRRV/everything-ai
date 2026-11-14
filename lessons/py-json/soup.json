@@ -1,0 +1,11 @@
+{
+  "name": "tomato soup",
+  "servings": 2,
+  "vegetarian": true,
+  "ingredients": [
+    {"item": "tomatoes", "grams": 600},
+    {"item": "onion", "grams": 150},
+    {"item": "stock", "grams": 500}
+  ],
+  "notes": "Blend before serving."
+}

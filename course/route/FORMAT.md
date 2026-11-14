@@ -30,7 +30,7 @@ lessons:
 
 | field | required | meaning |
 |---|---|---|
-| `id` | yes | Stable id in English kebab-case, never a number. Never renamed once lessons exist; the app stores progress by it. Prefix shows the subject (`py-`, `np-`, `ml-`, `nn-`, `torch-`, `cnn-`, `attn-`, `lm-`, `tok-`, `gpt-`, `llm-`, `sys-`, `res-`, `repro-`, `math-`, `prob-`, `stats-`, `info-`, `opt-`, `data-`, `rai-`, `rl-`, `search-`, `start-`, `cv-`, `ts-`). |
+| `id` | yes | Stable id in English kebab-case, never a number. Never renamed once lessons exist; the app stores progress by it. Prefix shows the subject (`py-`, `np-`, `ml-`, `nn-`, `torch-`, `cnn-`, `attn-`, `lm-`, `tok-`, `gpt-`, `llm-`, `sys-`, `res-`, `repro-`, `math-`, `prob-`, `stats-`, `info-`, `opt-`, `data-`, `rai-`, `rl-`, `search-`, `start-`, `cv-`, `ts-`, `build-`, `agent-`). |
 | `title` | yes | English title. The Dutch title is written with the lesson. |
 | `level` | yes | `basis`, `gevorderd` or `expert`. |
 | `domein` | yes | The part of the course the lesson belongs to: `fundament` or one of the domain ids in `domeinen.yaml`. |

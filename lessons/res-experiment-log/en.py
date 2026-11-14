@@ -111,7 +111,7 @@ def text_idea():
 
         An **experiment log** is a file with one line for every run you make: the code version, all settings, the seed and the result. The code that trains writes the line itself, right after the run, and a line is never changed afterwards. Then the log holds what ran, not what you remember.
 
-        Each line is written in **JSON**, a text format for data such as dictionaries and lists: `json.dumps(run)` turns a dictionary into one line of text, and `json.loads(line)` turns that line back into a dictionary. A file with one JSON line per run is called **JSON Lines**, often with the extension `.jsonl`. `open(path, "a")` opens a file to add to its end; `"w"` empties it first.
+        Each line is written in JSON, as in [Data as text: JSON](/course/open/py-json?lang=en): `json.dumps(run)` turns a dictionary into one line of text, and `json.loads(line)` turns that line back into a dictionary. A file with one JSON line per run is called **JSON Lines**, often with the extension `.jsonl`. `open(path, "a")` opens a file to add to its end; `"w"` empties it first.
 
         The **code version** says which code ran. Here it is a **hash** of the code: a short string of letters and digits computed from the text, the same for the same text, and a completely different one when a single character changes. `hashlib.sha256` computes it, and the first 8 characters are enough to tell your versions apart. If you keep your code in Git, the commit hash does the same job. Tools such as MLflow and Weights & Biases keep a log like this for you, with a website to browse it; underneath, it is the same idea.
 
@@ -126,7 +126,6 @@ def text_idea():
         | Word | What it means |
         |---|---|
         | **experiment log** | a file with one line per run: code version, settings, seed and result, written by the code that trains |
-        | **JSON** | a text format for data such as dictionaries and lists |
         | **JSON Lines** | a file with one JSON line per record, often `.jsonl` |
         | **hash** | a short string of letters and digits computed from a text: the same for the same text, a different one when anything changes |
         | **code version** | which code a run ran with, such as the hash of that code |

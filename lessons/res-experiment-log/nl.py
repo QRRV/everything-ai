@@ -111,7 +111,7 @@ def text_idea():
 
         Een **experimentlogboek** is een bestand met één regel voor elke run die je maakt: de codeversie, alle instellingen, de seed en het resultaat. De code die traint schrijft die regel zelf, direct na de run, en een regel verander je daarna nooit meer. Dan staat in het logboek wat er draaide, niet wat je je herinnert.
 
-        Elke regel is geschreven in **JSON**, een tekstformaat voor data zoals dictionaries en lijsten: `json.dumps(run)` maakt van een dictionary één regel tekst, en `json.loads(line)` maakt van die regel weer een dictionary. Een bestand met één JSON-regel per run heet **JSON Lines**, vaak met de extensie `.jsonl`. `open(path, "a")` opent een bestand om iets aan het eind toe te voegen; `"w"` maakt het eerst leeg.
+        Elke regel is geschreven in JSON, zoals in [Data als tekst: JSON](/course/open/py-json?lang=nl): `json.dumps(run)` maakt van een dictionary één regel tekst, en `json.loads(line)` maakt van die regel weer een dictionary. Een bestand met één JSON-regel per run heet **JSON Lines**, vaak met de extensie `.jsonl`. `open(path, "a")` opent een bestand om iets aan het eind toe te voegen; `"w"` maakt het eerst leeg.
 
         De **codeversie** zegt welke code er draaide. Hier is dat een **hash** van de code: een korte reeks letters en cijfers die uit de tekst berekend wordt, dezelfde voor dezelfde tekst, en een totaal andere als er één teken verandert. `hashlib.sha256` berekent hem, en de eerste 8 tekens zijn genoeg om je versies uit elkaar te houden. Houd je je code bij in Git, dan doet de commit-hash hetzelfde. Tools zoals MLflow en Weights & Biases houden zo'n logboek voor je bij, met een website om erin te bladeren; onder de motorkap is het hetzelfde idee.
 
@@ -126,7 +126,6 @@ def text_idea():
         | Woord | Wat het betekent |
         |---|---|
         | **experimentlogboek** | een bestand met één regel per run: codeversie, instellingen, seed en resultaat, geschreven door de code die traint |
-        | **JSON** | een tekstformaat voor data zoals dictionaries en lijsten |
         | **JSON Lines** | een bestand met één JSON-regel per record, vaak `.jsonl` |
         | **hash** | een korte reeks letters en cijfers die uit een tekst berekend wordt: dezelfde voor dezelfde tekst, een andere als er iets verandert |
         | **codeversie** | met welke code een run draaide, zoals de hash van die code |

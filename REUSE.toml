@@ -3,7 +3,7 @@
 version = 1
 
 [[annotations]]
-path = ["course/**", "docs/**", "lessons/**/*.yaml", "lessons/**/*.md", "lessons/**/*.txt", "lessons/**/*.csv", "lessons/**/*.png", "README.md", "README.nl.md", "AGENTS.md", "CLAUDE.md"]
+path = ["course/**", "docs/**", "lessons/**/*.yaml", "lessons/**/*.md", "lessons/**/*.txt", "lessons/**/*.csv", "lessons/**/*.json", "lessons/**/*.png", "README.md", "README.nl.md", "AGENTS.md", "CLAUDE.md"]
 precedence = "aggregate"
 SPDX-FileCopyrightText = "2026 Everything AI contributors"
 SPDX-License-Identifier = "CC-BY-SA-4.0"
@@ -206,6 +206,24 @@ path = "data/gsm8k-sample.jsonl"
 precedence = "override"
 SPDX-FileCopyrightText = "Copyright (c) 2021 OpenAI (GSM8K, grade-school-math; a subset made for Everything AI)"
 SPDX-License-Identifier = "MIT"
+
+[[annotations]]
+path = "data/course-prompts-qwen.json"
+precedence = "override"
+SPDX-FileCopyrightText = "2026 Everything AI contributors (the course's run; answers written by Qwen3-0.6B of Alibaba Cloud, Apache-2.0, to sums the course wrote)"
+SPDX-License-Identifier = "CC-BY-4.0"
+
+[[annotations]]
+path = "data/course-chains-qwen.json"
+precedence = "override"
+SPDX-FileCopyrightText = "2026 Everything AI contributors (the course's run; answers written by Qwen3-0.6B of Alibaba Cloud, Apache-2.0, to tasks the course wrote)"
+SPDX-License-Identifier = "CC-BY-4.0"
+
+[[annotations]]
+path = "data/course-agent-qwen.json"
+precedence = "override"
+SPDX-FileCopyrightText = "2026 Everything AI contributors (the course's runs; messages written by Qwen3-0.6B of Alibaba Cloud, Apache-2.0, with the course's task and tools)"
+SPDX-License-Identifier = "CC-BY-4.0"
 
 [[annotations]]
 path = "data/course-reasoning-qwen.json"

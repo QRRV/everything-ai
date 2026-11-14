@@ -24,6 +24,9 @@ routes:
   - start-rules-vs-learning
   - start-map-of-ai
   - start-using-ai-tools
+  - start-ai-tools-landscape
+  - start-prompt-basics
+  - start-prompt-chains
   - {id: start-short-history, extra: true}
   - {id: start-your-own-assistant, extra: true}
   # ---------- basis: fundament/python ----------
@@ -44,6 +47,7 @@ routes:
   - {id: py-exceptions, extra: true}
   - py-files
   - py-imports
+  - py-json
   - py-own-modules
   - py-classes
   - py-special-methods
@@ -179,6 +183,7 @@ routes:
   - search-minimax
   - rl-value-iteration
   - rl-q-learning
+  - agent-idea
   # ---------- basis: fundament/grafen-en-ruimte ----------
   - math-graphs
   # ---------- basis: fundament/taalmodellen ----------
@@ -622,6 +627,112 @@ routes:
   - data-centric-ai
   - data-synthetic
   - ml-project-table-trees
+
+- id: bouwen
+  domein: bouwen
+  title: "Building with AI: the basics"
+  title_nl: "Bouwen met AI: de basis"
+  short: "Building with AI"
+  short_nl: "Bouwen met AI"
+  # The basics: docs/onderzoek/reports/Voorstel domein Bouwen met AI.md (besluit 1.18, advice 6). Its tasters are in the
+  # kern (start-using-ai-tools, start-your-own-assistant), and so are the lessons on prompts, JSON and agents that its
+  # lessons need (start-ai-tools-landscape, start-prompt-basics, start-prompt-chains, py-json, agent-idea). The lessons
+  # of llm/gebruiken it borrows (base and chat models, temperature, top-k and top-p, hallucinations) come where they
+  # are first needed.
+  milestones:
+    - after: build-prompt-rag-finetune
+      en: "Basics done: you call a model through an API, write prompts that hold, let your assistant answer from your own documents, build an agent with tools, and measure and guard what it does."
+      nl: "Basis af: je roept een model aan via een API, schrijft prompts die standhouden, laat je assistent antwoorden uit je eigen documenten, bouwt een agent met tools, en meet en bewaakt wat die doet."
+  steps:
+  # ---------- basis: fundament/start (extra in the kern) ----------
+  - start-your-own-assistant
+  # ---------- basis: bouwen/werk ----------
+  - build-ai-at-work
+  - build-research-and-learn
+  - build-make-without-code
+  - build-automate-work
+  - build-coding-help
+  - build-coding-workflow
+  - build-ai-explains-code
+  - build-check-ai-code
+  # ---------- basis: llm/gebruiken ----------
+  - lm-base-vs-chat
+  # ---------- basis: bouwen/apis ----------
+  - build-tokens-prices
+  - build-call-api
+  - build-project-call
+  - build-streaming
+  - build-errors-retries
+  - build-batch-keys-costs
+  - build-choose-model
+  - build-where-models-run
+  - build-multimodal-apis
+  - build-embeddings-api
+  - build-ai-services
+  - build-generation-hubs
+  - build-llm-or-small-model
+  - build-on-device
+  - build-js-basics
+  - build-model-in-browser
+  # ---------- basis: llm/gebruiken ----------
+  - lm-temperature
+  - lm-top-k-top-p
+  # ---------- basis: bouwen/prompts ----------
+  - build-sampling-api
+  - build-system-prompt
+  - build-structured-output
+  - build-prompt-templates
+  - build-project-prompts
+  - build-model-specific
+  - build-defensive-prompts
+  - build-self-consistency
+  - build-context-engineering
+  - build-prompt-caching
+  # ---------- basis: llm/gebruiken ----------
+  - lm-hallucination
+  # ---------- basis: bouwen/rag ----------
+  - build-rag-idea
+  - build-rag-first
+  - build-documents-to-text
+  - build-chunking
+  - build-bm25
+  - build-retrieval-embeddings
+  - build-grounded-answers
+  - build-project-rag
+  - build-vector-index
+  - build-metadata-filters
+  - build-hybrid-search
+  - build-reranking
+  - build-query-rewriting
+  - build-rag-eval
+  # ---------- basis: bouwen/agents ----------
+  - build-tool-calling
+  - build-tool-design
+  - build-tool-permissions
+  - build-workflow-or-agent
+  - build-workflow-patterns
+  - build-agent-loop
+  - build-plan-execute
+  - build-agent-memory
+  - build-code-sandbox
+  - build-browser-use
+  - build-mcp
+  - build-agent-extensions
+  - build-kinds-of-agents
+  - {id: build-agent-history, extra: true}
+  - build-agent-frameworks
+  # ---------- basis: bouwen/productie ----------
+  - build-error-analysis
+  - build-eval-set
+  - build-judges
+  - build-eval-online
+  - build-tracing
+  - build-guardrails
+  - build-cost-latency-cache
+  - build-ship-app
+  - build-human-in-loop
+  - build-agent-failures
+  - build-prompt-rag-finetune
 
 # Goal routes are computed, not written: the smallest set of lessons a goal needs, in the order of the routes.
 # The checker prints these as examples; the app can compute any of them on demand.

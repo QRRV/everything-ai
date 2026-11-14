@@ -115,7 +115,7 @@ def text_idea():
         """),
         L.watch_out("*Reasons* is a picture. The model still predicts one token after another: its steps are text it wrote and then reads."),
         mo.md(rf"""
-        **Three ways to get the steps.** Worked examples in the prompt: few-shot prompting with a chain of thought. Asking without examples: zero-shot, *Let's think step by step.* after the question, the experiment of [How research works](/course/open/res-research-cycle?lang=en); in the course's run, {S['zero']} of {S['n']} right. Or training the model to write them: reasoning models such as OpenAI o1 and DeepSeek-R1 (as of October 2026) learned it with reinforcement learning, DeepSeek-R1 on answers a program checks, as in [Reinforcement learning with verifiable rewards](/course/open/llm-rlvr?lang=en).
+        **Three ways to get the steps.** Worked examples in the prompt: few-shot prompting with a chain of thought, as in [Asking well: roles, examples and steps](/course/open/start-prompt-basics?lang=en). Asking without examples: zero-shot, *Let's think step by step.* after the question, the experiment of [How research works](/course/open/res-research-cycle?lang=en); in the course's run, {S['zero']} of {S['n']} right. Or training the model to write them: reasoning models such as OpenAI o1 and DeepSeek-R1 (as of October 2026) learned it with reinforcement learning, DeepSeek-R1 on answers a program checks, as in [Reinforcement learning with verifiable rewards](/course/open/llm-rlvr?lang=en).
 
         **Test-time compute.** Writing steps spends more computation while answering, and so do several answers. In the course's run an answer was {C.number(S['tokens']['direct'], 1, 'en')} tokens direct and {C.number(S['tokens']['steps'], 0, 'en')} with steps on average, and {C.SAMPLES} samples {C.number(C.SAMPLES * S['tokens']['sample'], 0, 'en')} together: on the course's CPU about {C.number(S['seconds']['direct'], 0, 'en')} s, {C.number(S['seconds']['steps'], 0, 'en')} s and {C.number(S['seconds']['votes'] / 60, 0, 'en')} minutes per question.
 
@@ -125,9 +125,6 @@ def text_idea():
 
         | Word or symbol | What it means |
         |---|---|
-        | **chain of thought** | the steps a model writes before its final answer |
-        | **few-shot prompting** | a few worked examples in the prompt, before the real question |
-        | **zero-shot prompting** | the question or an instruction, without examples |
         | **test-time compute** | the computation a model spends while it answers |
         | **pass@k**, $k$ | whether at least one of $k$ answers is right, by a check that knows the answer |
         | **reasoning model** | a model trained, mostly with reinforcement learning, to write a long chain of thought before it answers |

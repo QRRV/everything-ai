@@ -1,0 +1,10 @@
+{
+  "name": "mint tea",
+  "servings": 1,
+  "vegetarian": true,
+  "ingredients": [
+    {"item": "mint", "grams": 5},
+    {"item": "water", "grams": 250}
+  ],
+  "notes": null
+}

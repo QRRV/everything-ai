@@ -81,7 +81,7 @@ lessons:
   requires: [res-how-research-is-published]
   introduces: [p:literature-search]
   uses: [c:paper, c:preprint, c:peer-review, c:contribution-type, c:venue, c:missing-value, c:mean, c:model, c:generative-ai, py:dict, py:list, py:append, py:for, py:if, py:comparison, py:bool, py:def, py:return, py:sorted, py:set, py:print, py:comment, py:string-literal, py:underscore-name, q:predict, q:choice, q:explain, q:exercise-with-check, q:run-cell]
-  mentions: [c:abstract, c:transformer, c:language-model]
+  mentions: [c:abstract, c:transformer, c:language-model, c:citation]
   ladder: [python]
   data: []
   needs: any
@@ -170,9 +170,9 @@ lessons:
   module: experimenten
   idea: "Log every run with its settings, code version, seed and result, so you can always find out what you did."
   covers: [experimenten-ontwerpen-en-ablaties#3, ontwikkelomgeving-tracking-en-reproduceerbaarheid#2]
-  requires: [res-seeds-variance]
-  introduces: [p:experiment-log, c:json, c:json-lines, c:hash, c:code-version, py:json, py:open-write, py:hashlib]
-  uses: [c:run, c:seed, c:run-to-run-variance, c:control-run, c:ablation, c:validation-set, c:loss, c:checkpoint, c:gpt, c:learning-rate, c:warmup, c:layer, c:mini-batch, c:weight, c:experiment, c:baseline, c:file-path, c:newline, py:dict, py:open, py:with, py:method, py:def, py:return, py:for, py:if, py:bool, py:comparison, py:list, py:tuple, py:append, py:comprehension, py:len, py:slicing, py:str, py:string-literal, py:import, py:print, py:comment, py:underscore-name, q:predict, q:choice, q:explain, q:exercise-with-check, q:run-cell]
+  requires: [res-seeds-variance, py-json]
+  introduces: [p:experiment-log, c:json-lines, c:hash, c:code-version, py:open-write, py:hashlib]
+  uses: [c:json, py:json, c:run, c:seed, c:run-to-run-variance, c:control-run, c:ablation, c:validation-set, c:loss, c:checkpoint, c:gpt, c:learning-rate, c:warmup, c:layer, c:mini-batch, c:weight, c:experiment, c:baseline, c:file-path, c:newline, py:dict, py:open, py:with, py:method, py:def, py:return, py:for, py:if, py:bool, py:comparison, py:list, py:tuple, py:append, py:comprehension, py:len, py:slicing, py:str, py:string-literal, py:import, py:print, py:comment, py:underscore-name, q:predict, q:choice, q:explain, q:exercise-with-check, q:run-cell]
   ladder: [python]
   needs: any
 

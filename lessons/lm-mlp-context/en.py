@@ -106,7 +106,7 @@ def text_idea():
         mo.md(r"""
         ## The idea
 
-        The model looks back a fixed number of tokens, $k$: its **context window**. For the next token at place $t$, it takes the ids of the $k$ tokens before it, looks up their embeddings, $d$ numbers each, and glues them side by side into one vector of $k \cdot d$ numbers. A hidden layer with ReLU follows, and then the **output head**: a linear layer from the hidden layer to one logit for every token of the vocabulary, 65 for Tiny Shakespeare. As in [Project: the same bigram model, learned with gradient descent](/course/open/lm-bigram-neural?lang=en), the softmax of the logits gives the probabilities, and cross-entropy with the token that really comes next gives the loss. Bengio and his colleagues used tanh, the S-curve of [Initialization](/course/open/nn-initialization?lang=en), where this lesson uses ReLU; with tanh the story of the picture below is the same, with a loss a little higher.
+        The model looks back a fixed number of tokens, $k$: its context window, which you met in [Which AI tool for what](/course/open/start-ai-tools-landscape?lang=en). Here you build one. For the next token at place $t$, it takes the ids of the $k$ tokens before it, looks up their embeddings, $d$ numbers each, and glues them side by side into one vector of $k \cdot d$ numbers. A hidden layer with ReLU follows, and then the **output head**: a linear layer from the hidden layer to one logit for every token of the vocabulary, 65 for Tiny Shakespeare. As in [Project: the same bigram model, learned with gradient descent](/course/open/lm-bigram-neural?lang=en), the softmax of the logits gives the probabilities, and cross-entropy with the token that really comes next gives the loss. Bengio and his colleagues used tanh, the S-curve of [Initialization](/course/open/nn-initialization?lang=en), where this lesson uses ReLU; with tanh the story of the picture below is the same, with a loss a little higher.
         """),
         L.formula(r"[[hidden:\mathbf{x}]] = \big[\, [[hidden:\mathbf{e}_{t-k}]] ; \dots ; [[hidden:\mathbf{e}_{t-1}]] \,\big]"),
         L.formula(r"[[pred:\mathbf{z}]] = [[param:\mathbf{W}_2]] \, \mathrm{ReLU}([[param:\mathbf{W}_1]] [[hidden:\mathbf{x}]] + [[param:\mathbf{b}_1]]) + [[param:\mathbf{b}_2]]"),
@@ -117,7 +117,7 @@ def text_idea():
 
         | Word or symbol | Say it | What it means | In code |
         |---|---|---|---|
-        | **context window** | | the fixed number of tokens a model looks back | `k` |
+        | $k$ | k | the size of the context window: the fixed number of tokens the model looks back | `k` |
         | **neural language model** | | a neural network that gives the probabilities of the next token | `MLPLanguageModel(65, 3, 10, 128)` |
         | **output head** | | the last layer: from the network's last vector to one logit for every token of the vocabulary | `nn.Linear(hidden, vocab)` |
         | $\mathbf{x}$ | x | the $k$ embeddings of the window side by side, $k \cdot d$ numbers | `e.reshape(len(x), -1)` |

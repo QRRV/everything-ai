@@ -112,7 +112,7 @@ def text_idea():
 
         A **chat model** is a base model that was trained further on conversations: many examples in which a person asks something and an assistant answers well. It still does nothing but predict the next token; only, after a question, the most likely text is now an answer. Chat programs use chat models. Models whose name ends in -Instruct or -Chat are chat models; some texts call them instruct models.
 
-        A conversation is made of messages, and each message has a **role** that says who it comes from: `system` for instructions from whoever runs the model, such as "Answer in Dutch."; `user` for the person who types; `assistant` for the model itself. In code, a conversation is a list of messages, each a dictionary with the keys `"role"` and `"content"`: that is how most programs hand a conversation to a chat model. Some programs add a fourth role, `tool`, for what a tool that the model used gave back.
+        As in [Asking well: roles, examples and steps](/course/open/start-prompt-basics?lang=en), a conversation is made of messages, and each message has a role that says who it comes from: `system` for instructions from whoever runs the model, such as "Answer in Dutch."; `user` for the person who types; `assistant` for the model itself. In code, a conversation is a list of messages, each a dictionary with the keys `"role"` and `"content"`: that is how most programs hand a conversation to a chat model. Some programs add a fourth role, `tool`, for what a tool that the model used gave back.
 
         Yet the model still gets one text. The conversation is written out with a marker before each message, and it ends with the marker of the assistant, so that what comes next is the answer. The model writes until it gives the marker that ends its turn. Chat models differ in their markers, which they learned in training; the lesson *Chat templates* shows them. In this lesson the marker is the role in capitals with a colon, on a line of its own, as the plays write the name of a speaker, and an empty line ends a turn.
 
@@ -124,10 +124,6 @@ def text_idea():
         |---|---|---|---|
         | **base model** | | a language model that only learned to predict the next token, on a lot of text; it continues any text it gets | |
         | **chat model** | | a base model trained further on conversations, so that it answers as an assistant | |
-        | **role** | | who a message comes from: `system`, `user` or `assistant` | `m["role"]` |
-        | `system` | | instructions from whoever runs the model | `{"role": "system", "content": "Answer in Dutch."}` |
-        | `user` | | the person who types | `{"role": "user", "content": "Who is Romeo?"}` |
-        | `assistant` | | the model, also in its earlier answers | `{"role": "assistant", "content": "A young man of Verona."}` |
         """),
         L.watch_out("`assistant` is a role in the text, not a separate program: the same model that predicts every next token writes every `assistant` message. And a `system` message is text like the rest, not a lock: a `user` message can still lead the model somewhere else."),
         mo.md(r"""

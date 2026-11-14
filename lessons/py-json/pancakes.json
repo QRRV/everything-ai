@@ -1,0 +1,12 @@
+{
+  "name": "pancakes",
+  "servings": 4,
+  "vegetarian": true,
+  "ingredients": [
+    {"item": "flour", "grams": 250},
+    {"item": "milk", "grams": 450},
+    {"item": "eggs", "grams": 110},
+    {"item": "butter", "grams": 25}
+  ],
+  "notes": null
+}
