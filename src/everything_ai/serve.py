@@ -3,9 +3,11 @@
 """A model behind an API on your own computer: an OpenAI-compatible server on 127.0.0.1, with only the standard
 library (http.server and json), for the lessons of domain bouwen. It answers
 
-  GET  /v1/models             the model it serves
+  GET  /v1/models             the models it serves: the chat model, and the embedding model
   POST /v1/chat/completions   an answer to a list of messages, with model, messages, max_tokens, temperature, top_p,
                               seed, stop, stream (and stream_options.include_usage) and tools
+  POST /v1/embeddings         the embeddings of a text or a list of texts, with model, input and encoding_format
+                              ("float", or "base64": the float32 numbers as bytes, little-endian, in base64)
 
 A message of the user may also be a list of parts, text and images, as a multimodal API takes them: an image as a data
 URL, data:image/png;base64,... The course's chat model reads text only, so the server answers such a request with an
@@ -15,18 +17,26 @@ image, and gives the model those words in place of the image; the answer says wh
 
 in the form of OpenAI's API, which Ollama, llama.cpp, vLLM and most hosted APIs speak as well: code a learner writes
 against this server works against those too, with another URL and a key. Behind the server is a backend: `Model`, the
-course's chat model (everything_ai.chat), or `StandIn`, which gives fixed answers at once, and on request also fails,
-waits or breaks off. The checks talk to a stand-in, since the model takes seconds per answer and a check has two.
+course's chat model (everything_ai.chat) and embedding model (everything_ai.embed), or `StandIn`, which gives fixed
+answers and made-up embeddings at once, and on request also fails, waits or breaks off. The checks talk to a stand-in,
+since the model takes seconds per answer and a check has two.
 
 `start(backend)` starts a server in a thread of its own and gives a `Running` with its `url` and a `log` of every
 request it got, which a check reads to say what a learner's request lacked."""
 import base64
+import hashlib
 import json
+import math
+import random
+import struct
 import threading
 import time
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 
 MODEL = "qwen3-0.6b"   # the name the server gives the course's chat model
+EMBEDDER = "granite-embedding-107m-multilingual"   # and its embedding model
+DIMS = 384             # the numbers in one of its embeddings
+MAX_INPUTS = 2048      # texts in one request for embeddings at most, as at OpenAI
 PORT = 8765            # where the lessons start the model's server, when that port is free
 _STOP = object()
 
@@ -39,8 +49,11 @@ MAX_PIXELS = 4096 * 4096    # the largest image the server reads
 class Backend:
     """What answers behind the server. `answer(request, heard)` gives {"text", "tool_calls", "finish", "prompt_tokens",
     "tokens"} for a request that is valid; `heard(text)` hears the text so far while it is written, for streaming.
-    `detect(image)` gives the kinds and scores of the objects on a PIL image, for the hosted tool."""
+    `detect(image)` gives the kinds and scores of the objects on a PIL image, for the hosted tool. `embed(texts)` gives
+    the embedding of each text, a list of `dims` numbers, and the number of tokens of all texts together."""
     model = MODEL
+    embedder = EMBEDDER
+    dims = DIMS
     key = None   # when set, a request needs the header "Authorization: Bearer <key>"
 
     def before(self, request: dict):
@@ -53,14 +66,28 @@ class Backend:
     def detect(self, image) -> list[tuple[str, float]]:
         raise NotImplementedError
 
+    def embed(self, texts: list[str]) -> tuple[list[list[float]], int]:
+        raise NotImplementedError
+
 
 class Model(Backend):
-    """The course's chat model (everything_ai.chat.loaded(), or `chat` when given), one answer at a time."""
+    """The course's chat model (everything_ai.chat.loaded(), or `chat` when given), one answer at a time, and its
+    embedding model, Granite Embedding (everything_ai.embed), loaded at the first request for embeddings."""
 
     def __init__(self, chat=None):
         self._chat = chat
         self._lock = threading.Lock()
+        self._embed_lock = threading.Lock()   # embeddings do not wait for an answer that is being written
         self._detector = None
+
+    def embed(self, texts: list[str]) -> tuple[list[list[float]], int]:
+        """Granite's embeddings of `texts`, each of length 1, and their tokens, <s> and </s> included; a text longer
+        than 512 tokens is cut off, as everything_ai.embed does. It raises FileNotFoundError while Granite is not
+        downloaded."""
+        from everything_ai import embed as E
+        with self._embed_lock:
+            ids = [E.encode(t) for t in texts]
+            return E.embed_ids(ids).tolist(), sum(len(x) for x in ids)
 
     def detect(self, image) -> list[tuple[str, float]]:
         """DETR's objects on the image, above THRESHOLD. It raises FileNotFoundError while DETR is not downloaded."""
@@ -109,6 +136,16 @@ class Model(Backend):
         return out
 
 
+def made_up(text: str, dims: int = DIMS) -> list[float]:
+    """The stand-in's embedding of a text: `dims` numbers drawn at random, with the text as the seed, so that a text
+    always gets the same ones, and scaled to length 1. They mean nothing: two texts of the same meaning get numbers as
+    far apart as any two."""
+    rng = random.Random(hashlib.sha256(text.encode("utf-8")).digest())
+    v = [rng.gauss(0.0, 1.0) for _ in range(dims)]
+    norm = math.sqrt(sum(x * x for x in v))
+    return [round(x / norm, 6) for x in v]
+
+
 def _held(text: str, markers: list) -> str:
     """`text` without an end that could be the start of one of `markers`."""
     for n in range(min(len(text), max(len(m) for m in markers)), 0, -1):
@@ -123,17 +160,25 @@ class StandIn(Backend):
     `fail`, a list of statuses (such as [429, 503]) that the first requests get, one each, with Retry-After `retry`
     seconds; `delay` seconds before every answer; `key`, an API key that every request must carry; `calls`, a tool
     call per question; `cut`, the number of pieces after which a stream breaks off; `model`, the name of its model;
-    `objects`, what its detector finds on any image."""
+    `objects`, what its detector finds on any image; `vectors`, the embedding of a text, {text: [numbers]}, where any
+    other text gets made-up numbers of its own (`made_up`), `dims` of them."""
 
     def __init__(self, answers=None, default="The stand-in's answer to: {question}", fail=(), retry=None, delay=0.0,
-                 key=None, calls=None, cut=None, model=MODEL, objects=(("cup", 0.997),)):
+                 key=None, calls=None, cut=None, model=MODEL, objects=(("cup", 0.997),), vectors=None, dims=DIMS):
         self.answers, self.default, self.model = dict(answers or {}), default, model
         self.fail, self.retry, self.delay, self.key = list(fail), retry, delay, key
         self.calls, self.cut, self.objects = dict(calls or {}), cut, list(objects)
+        self.vectors, self.dims = {t: list(v) for t, v in (vectors or {}).items()}, dims
         self.seen = 0
 
     def detect(self, image) -> list[tuple[str, float]]:
         return list(self.objects)
+
+    def embed(self, texts: list[str]) -> tuple[list[list[float]], int]:
+        if self.delay:
+            time.sleep(self.delay)
+        return ([self.vectors[t] if t in self.vectors else made_up(t, self.dims) for t in texts],
+                sum(len(t.split()) for t in texts))
 
     def before(self, request: dict):
         self.seen += 1
@@ -276,6 +321,46 @@ def _problem(request) -> str | None:
     return None
 
 
+_KINDS = {list: "a list", dict: "an object", float: "a number", bool: "true or false", type(None): "null"}
+
+
+def _whole(x) -> bool:
+    """Whether x is a whole number, as a token id is; true and false are not."""
+    return isinstance(x, int) and not isinstance(x, bool)
+
+
+def _embed_problem(request) -> tuple[str, str | None] | None:
+    """What makes a request for /v1/embeddings not valid, and the field it is about; None when it is valid."""
+    if not isinstance(request, dict):
+        return "The body must be a JSON object.", None
+    if "input" not in request:
+        return "The request needs 'input': a text, or a list of texts.", "input"
+    texts = request["input"]
+    if isinstance(texts, str):
+        texts = [texts]
+    elif not isinstance(texts, list) or not texts:
+        return "'input' must be a text, or a list with at least one text.", "input"
+    if len(texts) > MAX_INPUTS:
+        return f"'input' may hold at most {MAX_INPUTS:,} texts; this request has {len(texts):,}.", "input"
+    for i, t in enumerate(texts):
+        if _whole(t) or isinstance(t, list) and t and all(_whole(x) for x in t):
+            return "This server takes texts in 'input', not token ids.", "input"
+        if not isinstance(t, str):
+            return f"Every item of 'input' must be a text; item {i} is {_KINDS.get(type(t), 'not')}.", "input"
+        if not t.strip():
+            return f"A text in 'input' may not be empty; item {i} is." if len(texts) > 1 else "The text in 'input' may not be empty.", "input"
+    if request.get("encoding_format") not in (None, "float", "base64"):
+        return "'encoding_format' must be \"float\" or \"base64\".", "encoding_format"
+    return None
+
+
+def _floats(vector: list[float], encoding: str):
+    """An embedding as the answer gives it: a list of numbers, or for "base64" its float32 bytes in base64."""
+    if encoding == "base64":
+        return base64.b64encode(struct.pack(f"<{len(vector)}f", *vector)).decode()
+    return vector
+
+
 def _images(request: dict) -> list:
     """The images in a request's messages, as the bytes their data URLs hold, in order."""
     return [base64.b64decode(p["image_url"]["url"].split(";base64,", 1)[1])
@@ -392,10 +477,12 @@ def _handler(running_ref: list):
             backend = self._start(None)
             if not self._local() or not self._allowed(backend):
                 return
-            if self._entry["path"].rstrip("/") == "/v1/models":
-                self._send(200, {"object": "list", "data": [{"id": backend.model, "object": "model", "owned_by": "everything-ai"}]})
-            elif self._entry["path"].rstrip("/") == "/v1/chat/completions":   # a Request without data= is a GET
-                self._send(405, _error(405, "Use POST for /v1/chat/completions, with the request as JSON in the body."))
+            path = self._entry["path"].rstrip("/")
+            if path == "/v1/models":
+                self._send(200, {"object": "list", "data": [{"id": m, "object": "model", "owned_by": "everything-ai"}
+                                                            for m in (backend.model, backend.embedder)]})
+            elif path in ("/v1/chat/completions", "/v1/embeddings"):   # a Request without data= is a GET
+                self._send(405, _error(405, f"Use POST for {path}, with the request as JSON in the body."))
             else:
                 self._send(404, _error(404, f"There is no {self._entry['path']} here."))
 
@@ -420,7 +507,8 @@ def _handler(running_ref: list):
                 return
             if length < 0:
                 return self._send(400, _error(400, "The header Content-Length is not a number."))
-            if self._entry["path"].rstrip("/") != "/v1/chat/completions":
+            path = self._entry["path"].rstrip("/")
+            if path not in ("/v1/chat/completions", "/v1/embeddings"):
                 return self._send(404, _error(404, f"There is no {self._entry['path']} here."))
             if not self._allowed(backend):
                 return
@@ -429,9 +517,13 @@ def _handler(running_ref: list):
                 return self._send(415, _error(415, f"The body must be JSON, with the header Content-Type: application/json; this request said {kind or 'nothing'}."))
             if isinstance(body, str):
                 return self._send(400, _error(400, "The body is not valid JSON."))
+            if path == "/v1/embeddings":
+                return self._embeddings(backend, body)
             problem = _problem(body)
             if problem:
                 return self._send(400, _error(400, problem))
+            if body.get("model") == backend.embedder:
+                return self._send(400, _error(400, f"'{backend.embedder}' is an embedding model: it gives embeddings, it writes no answers. Send texts to /v1/embeddings, or ask '{backend.model}' here.", "model"))
             if body.get("model") not in (None, backend.model):
                 return self._send(404, _error(404, f"The model '{body.get('model')}' does not exist here; this server has '{backend.model}'.", "model"))
             if _images(body) and not any(t.get("type") == DETECT for t in body.get("tools") or []):
@@ -465,6 +557,35 @@ def _handler(running_ref: list):
             if runs:
                 out["hosted_tools"] = runs
             self._send(200, out)
+
+        def _embeddings(self, backend, body):
+            problem = _embed_problem(body)
+            if problem:
+                return self._send(400, _error(400, *problem))
+            model = body.get("model")
+            if model == backend.model:
+                return self._send(400, _error(400, f"'{model}' is a chat model: it writes answers, it gives no embeddings. For embeddings this server has '{backend.embedder}'.", "model"))
+            if model not in (None, backend.embedder):
+                return self._send(404, _error(404, f"The model '{model}' does not exist here; for embeddings this server has '{backend.embedder}'.", "model"))
+            if body.get("dimensions") not in (None, backend.dims):
+                return self._send(400, _error(400, f"'{backend.embedder}' gives {backend.dims} numbers per text; it cannot give another number of them.", "dimensions"))
+            other = backend.before(body)
+            if other is not None:
+                status, headers, out = other
+                return self._send(status, out, headers)
+            texts = [body["input"]] if isinstance(body["input"], str) else body["input"]
+            try:
+                vectors, tokens = backend.embed(texts)
+            except FileNotFoundError:
+                return self._send(503, _error(503, "The server's embedding model is not downloaded yet."))
+            except Exception as e:   # noqa: BLE001
+                if _memory_full(e):
+                    return self._send(503, _error(503, MEMORY))
+                return self._send(500, _error(500, f"The server had an error: {type(e).__name__}: {e}"))
+            encoding = body.get("encoding_format") or "float"
+            self._send(200, {"object": "list", "model": backend.embedder,
+                             "data": [{"object": "embedding", "index": i, "embedding": _floats(v, encoding)} for i, v in enumerate(vectors)],
+                             "usage": {"prompt_tokens": tokens, "total_tokens": tokens}})
 
         def _stream(self, backend, body, ident, created, runs=()):
             self.send_response(200)

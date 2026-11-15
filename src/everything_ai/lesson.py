@@ -268,8 +268,9 @@ class Lesson:
             downloads = getattr(self.checks, "DOWNLOADS", None)   # a lesson that downloads a larger model when asked
             if downloads:
                 from everything_ai import hub
-                name, pin = next(iter(downloads.items()))
-                return self.w["works_download"].format(name=name, size=round(hub.PINNED[pin]["size"] / 1e6))
+                name, pins = next(iter(downloads.items()))   # one pinned file, or a list of them
+                size = sum(hub.PINNED[pin]["size"] for pin in (pins if isinstance(pins, list) else [pins]))
+                return self.w["works_download"].format(name=name, size=round(size / 1e6))
             return self.w["works_paper" if paper else "works_here"]   # other needs get their own line when their first lesson is built
         gpu = _computer()["gpu"] or {}   # may ask nvidia-smi: only for a lesson that needs a GPU
         if needs == "nvidia-linux":

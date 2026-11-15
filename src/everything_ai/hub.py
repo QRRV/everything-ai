@@ -105,6 +105,17 @@ PINNED = {
         "sha256": "48c14467e5cf9e51870511feb72c89688e82dd74523142c0538b663e193ac2a7",
         "size": 155_908_064,
     },
+    # Granite Embedding 107M multilingual, a text embedding model of IBM (Apache-2.0), and its tokenizer: everything_ai.embed
+    ("ibm-granite/granite-embedding-107m-multilingual", "model.safetensors"): {
+        "revision": "d6cffd338414d6a1c1f5decfad5fec62eebc90d5",
+        "sha256": "ae6f20cc5dc433041118c900b652d87532e1335dade78c37765f0b94d1161283",
+        "size": 214_000_232,
+    },
+    ("ibm-granite/granite-embedding-107m-multilingual", "tokenizer.json"): {
+        "revision": "d6cffd338414d6a1c1f5decfad5fec62eebc90d5",
+        "sha256": "7fc9e475f2ac473f070052d92b0c46ec2b91d9cd672935feb6fd837a65d33f78",
+        "size": 9_081_382,
+    },
     # Caltech-101 (CC BY 4.0), at its source, CaltechDATA (doi:10.22002/D1.20086): the photo set of the domain computer vision
     # (course/route/bronnen.yaml, caltech-101-download-only; everything_ai.caltech unpacks it). CaltechDATA gives the
     # same file's MD5, 3138e1922a9193bfa496528edbbc45d0.

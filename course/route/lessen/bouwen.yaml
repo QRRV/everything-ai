@@ -222,7 +222,7 @@ lessons:
   requires: [build-tokens-prices, lm-base-vs-chat, py-json]
   introduces: [c:api, c:endpoint, c:http-request, c:openai-compatible-api, c:local-server, py:urllib-request]
   uses: [c:token, c:input-token, c:output-token, c:chat-model, c:base-model, c:message-role, c:json, c:byte, c:open-weights, py:json, py:dict, py:list, py:indexing, py:import, py:def, py:return, py:with, py:string-literal, q:choice, q:exercise-with-check, q:run-cell]
-  mentions: [c:max-tokens]
+  mentions: [c:max-tokens, c:embedding]
   data: [model-qwen3-0.6b, course-apis-qwen]
   ladder: [python]
   needs: any
@@ -341,8 +341,10 @@ lessons:
   idea: "An embeddings endpoint turns a text into a vector, so texts with the same meaning lie close together, also across languages; files and documents go along with a request as text or as an upload."
   covers: [multimodale-realtime-en-overige-api-s#1, multimodale-realtime-en-overige-api-s#2]
   requires: [build-call-api, ml-embeddings-idea]
-  introduces: [c:embeddings-api, c:file-upload]
-  data: [model-granite-embedding]
+  introduces: [c:embeddings-api, c:file-upload, c:embedding-model]
+  uses: [c:embedding, c:cosine-similarity, c:dot-product, c:norm, c:vector, c:api, c:endpoint, c:http-request, c:openai-compatible-api, c:local-server, c:json, c:token, c:input-token, c:output-token, c:prompt, c:delimiter, c:context-window, py:urllib-request, py:json, py:comprehension, py:np-array, py:np-dot, py:import-as, py:for, py:range, py:len, py:if, py:none, py:tuple, py:list, py:dict, py:indexing, py:def, py:return, py:import, py:string-literal, py:comparison, q:choice, q:exercise-with-check, q:run-cell]
+  mentions: [c:retrieval-augmented-generation, c:prompt-caching]
+  data: [model-granite-embedding, course-embeddings-granite]
   ladder: [python, numpy]
   needs: any
 

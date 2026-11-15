@@ -162,8 +162,8 @@ def text_worked_example():
 
     1. **Het adres:** `url` is waar de server luistert, eindigend op `/v1`; het endpoint komt erachter.
     2. **Het request:** `urlopen` neemt ook een adres, en maakt daar dan een GET van.
-    3. **Het antwoord:** `{"object": "list", "data": [{"id": "qwen3-0.6b", "object": "model", "owned_by": "everything-ai"}]}`, als bytes, waar `json.loads` een dictionary van maakt.
-    4. **De waarde:** de lijst onder `"data"` heeft één model; zijn `"id"` is `'qwen3-0.6b'`, de naam die je in de body van een request zet.
+    3. **Het antwoord:** `{"object": "list", "data": [{"id": "qwen3-0.6b", "object": "model", "owned_by": "everything-ai"}, {"id": "granite-embedding-107m-multilingual", "object": "model", "owned_by": "everything-ai"}]}`, als bytes, waar `json.loads` een dictionary van maakt.
+    4. **De waarde:** de lijst onder `"data"` heeft twee modellen; het eerste `"id"` is `'qwen3-0.6b'`, het chat model, de naam die je in de body van een request zet. Het andere maakt embeddings van teksten, zoals een latere les laat zien.
     """)
     return
 

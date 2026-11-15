@@ -162,8 +162,8 @@ def text_worked_example():
 
     1. **The address:** `url` is where the server listens, ending in `/v1`; the endpoint goes after it.
     2. **The request:** `urlopen` takes an address too, and then makes a GET of it.
-    3. **The answer:** `{"object": "list", "data": [{"id": "qwen3-0.6b", "object": "model", "owned_by": "everything-ai"}]}`, as bytes, which `json.loads` turns into a dictionary.
-    4. **The value:** the list under `"data"` has one model; its `"id"` is `'qwen3-0.6b'`, the name you put in the body of a request.
+    3. **The answer:** `{"object": "list", "data": [{"id": "qwen3-0.6b", "object": "model", "owned_by": "everything-ai"}, {"id": "granite-embedding-107m-multilingual", "object": "model", "owned_by": "everything-ai"}]}`, as bytes, which `json.loads` turns into a dictionary.
+    4. **The value:** the list under `"data"` has two models; the first `"id"` is `'qwen3-0.6b'`, the chat model, the name you put in the body of a request. The other one turns texts into embeddings, as a later lesson shows.
     """)
     return
 

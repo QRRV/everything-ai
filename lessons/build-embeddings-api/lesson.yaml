@@ -1,0 +1,31 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: build-embeddings-api
+minutes: 25
+title:
+  en: "Embeddings and documents through an API"
+  nl: "Embeddings en documenten via een API"
+goal:
+  en: "ask a server for the embeddings of many texts in one request, find the text that fits a question best, and know how a document goes along with a request."
+  nl: "een server in één request om de embeddings van veel teksten vragen, de tekst vinden die het best bij een vraag past, en weten hoe een document met een request meegaat."
+summary:
+  - en: "An embeddings API turns texts into embeddings: a POST to /v1/embeddings with \"input\", a text or a list of texts, gives under \"data\" one \"embedding\" per text, in the same order. One request for many texts is quicker than one request per text."
+    nl: "Een embeddings-API maakt embeddings van teksten: een POST naar /v1/embeddings met \"input\", een tekst of een lijst teksten, geeft onder \"data\" één \"embedding\" per tekst, in dezelfde volgorde. Eén request voor veel teksten is sneller dan één request per tekst."
+  - en: "Granite Embedding gives 384 numbers per text, of length 1, so the dot product is the cosine similarity. A question finds its answer across languages; the text with the highest score wins, and when the scores lie close together, no text fits clearly. Embeddings of two models do not fit together."
+    nl: "Granite Embedding geeft 384 getallen per tekst, met lengte 1, dus het inproduct is de cosine similarity. Een vraag vindt haar antwoord ook in een andere taal; de tekst met de hoogste score wint, en als de scores dicht bij elkaar liggen, past geen tekst duidelijk. Embeddings van twee modellen passen niet bij elkaar."
+  - en: "A document goes along as text in the message, between delimiters, or as a file upload: the file goes to the provider once, and later requests name it by its id. Its tokens count in every request that reads it."
+    nl: "Een document gaat mee als tekst in het bericht, tussen delimiters, of als bestandsupload: het bestand gaat één keer naar de aanbieder, en latere requests noemen het bij zijn id. De tokens ervan tellen mee in elk request dat het leest."
+can_now:
+  - en: "ask a server for the embeddings of a list of texts"
+    nl: "een server om de embeddings van een lijst teksten vragen"
+    by: embed
+  - en: "find the text that fits a question best, with one request"
+    nl: "de tekst vinden die het best bij een vraag past, met één request"
+    by: best_match
+  - en: "tell when a search found no clear match"
+    nl: "zeggen wanneer een zoekopdracht geen duidelijke match vond"
+    by: no-clear-match
+  - en: "tell what a file upload saves, and what it does not"
+    nl: "zeggen wat een bestandsupload bespaart, en wat niet"
+    by: upload
