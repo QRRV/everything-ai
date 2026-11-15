@@ -1,7 +1,8 @@
 # SPDX-FileCopyrightText: 2026 Everything AI contributors
 # SPDX-License-Identifier: MIT
-"""Writes data/course-apis-qwen.json, the course's runs of Qwen3-0.6B (the chat model) for the module *Calling
-models* (apis) of the domain bouwen. Each run goes through the course's own server (everything_ai.serve) with the
+"""Writes data/course-apis-qwen.json and data/course-dev-prompts-qwen.json, the course's runs of Qwen3-0.6B (the chat
+model) for the modules *Calling models* (apis) and *Prompts for developers* (prompts) of the domain bouwen, one file
+for each module. Each run goes through the course's own server (everything_ai.serve) with the
 standard library's urllib, the way a learner's code calls it: in float32 with the course's code and KV cache,
 non-thinking unless asked, sampled as Qwen3 advises for each mode (everything_ai.chat.SAMPLING, and THINKING for an
 ask with "think"). Each lesson's checks.py has
@@ -9,7 +10,11 @@ RECORD, {key: ask}, and an ask is one of
 
     {"messages": [...], "max_tokens": n, "seeds": k}   answered with the seeds 0 to k - 1, as a stream, which gives the
         seconds until the first piece of the answer ("first") and until its end ("seconds"); with "think": true in
-        thinking mode, and with "think" or "raw" without a stream, which keeps the whole JSON the server sent ("raw")
+        thinking mode, and with "think" or "raw" without a stream, which keeps the whole JSON the server sent ("raw");
+        "temperature", "top_p", "stop" and "response_format" go into the request as they are, and messages that end
+        with one of the assistant are a prefill; with "retry": n, checks.py's follow_up(text) reads each answer, and
+        while it gives a message and fewer than n tries were made, the answer and that message (as the user's) are
+        added and the model is asked again with the same seed: such an answer is {"seed": s, "tries": [...]}
     {"turns": [...], "max_tokens": n, "seeds": k}      a chat: in each turn the user's next message, after the
         messages so far and the model's answers to them, every turn with the same seed
     {"speed": "float32" | "bfloat16", "messages": [...], "max_tokens": n}   the chat model in that dtype on one thread,
@@ -45,9 +50,13 @@ import torch  # noqa: E402
 
 from everything_ai import chat, hub, paths, qwen3, serve  # noqa: E402
 
-OUT = paths.ROOT / "data" / "course-apis-qwen.json"
-LESSONS = ["build-tokens-prices", "build-call-api", "build-project-call", "build-streaming", "build-choose-model",
-           "build-where-models-run", "build-multimodal-apis", "build-ai-services"]
+FILES = {   # the file of each module, and its lessons
+    "course-apis-qwen.json": ["build-tokens-prices", "build-call-api", "build-project-call", "build-streaming",
+                              "build-choose-model", "build-where-models-run", "build-multimodal-apis", "build-ai-services"],
+    "course-dev-prompts-qwen.json": ["build-sampling-api", "build-system-prompt", "build-structured-output",
+                                     "build-prompt-templates", "build-project-prompts"],
+}
+LESSONS = [lesson for lessons in FILES.values() for lesson in lessons]
 THREADS = 2   # the server's threads; a speed ask runs on one
 
 
@@ -70,7 +79,7 @@ def _cpu() -> str:
 
 def _code() -> str:
     try:
-        return subprocess.run(["git", "rev-parse", "--short", "HEAD"], cwd=paths.ROOT, capture_output=True, text=True).stdout.strip()
+        return subprocess.run(["git", "describe", "--always", "--dirty"], cwd=paths.ROOT, capture_output=True, text=True).stdout.strip()
     except OSError:
         return ""
 
@@ -147,7 +156,8 @@ def _labels(url: str, ask: dict) -> list:
 def _answer(url: str, ask: dict, messages: list, seed: int) -> dict:
     if "image" in ask:
         return _image(url, ask, seed)
-    body = {"model": serve.MODEL, "messages": messages, "max_tokens": ask["max_tokens"], "seed": seed}
+    body = {"model": serve.MODEL, "messages": messages, "max_tokens": ask["max_tokens"], "seed": seed,
+            **{k: ask[k] for k in ("temperature", "top_p", "stop", "response_format") if k in ask}}
     if ask.get("think"):
         body["chat_template_kwargs"] = {"enable_thinking": True}
     if ask.get("think") or ask.get("raw"):
@@ -171,23 +181,32 @@ def _speed(ask: dict) -> dict:
             "per_second": round(a["tokens"] / a["seconds"], 2)}
 
 
-def main(lessons: list, again: set) -> None:
-    torch.set_num_threads(THREADS)
-    t = time.perf_counter()
-    running = serve.start(serve.Model(chat.Chat()))
-    out = json.loads(OUT.read_text(encoding="utf-8")) if OUT.exists() else {
+def _opened(name: str, load_seconds: float) -> dict:
+    path = paths.ROOT / "data" / name
+    out = json.loads(path.read_text(encoding="utf-8")) if path.exists() else {
         "model": qwen3.CHAT, "revision": hub.PINNED[(qwen3.CHAT, "model.safetensors")]["revision"], "dtype": "float32",
         "machine": f"{_cpu()}, {os.cpu_count()} cores", "threads": THREADS, "torch": torch.__version__,
         "parts": {}}
     out["sampling"] = {"normal": chat.SAMPLING, "thinking": chat.THINKING}
-    out["load_seconds"] = round(time.perf_counter() - t, 1)
+    out["load_seconds"] = load_seconds
+    return out
 
-    def save(*said):
-        out["code"] = _code()
-        OUT.write_text(json.dumps(out, ensure_ascii=False, indent=1) + "\n", encoding="utf-8")
-        print(*said, flush=True)
+
+def main(lessons: list, again: set) -> None:
+    torch.set_num_threads(THREADS)
+    t = time.perf_counter()
+    running = serve.start(serve.Model(chat.Chat()))
+    load_seconds = round(time.perf_counter() - t, 1)
+    opened = {}
     warm = [False]
     for lesson in lessons:
+        name = next(n for n, ls in FILES.items() if lesson in ls)
+        out = opened.setdefault(name, _opened(name, load_seconds))
+
+        def save(*said, out=out, name=name):
+            out["code"] = _code()
+            (paths.ROOT / "data" / name).write_text(json.dumps(out, ensure_ascii=False, indent=1) + "\n", encoding="utf-8")
+            print(*said, flush=True)
         C = _checks(lesson)
         part = out["parts"].setdefault(lesson, {})
         for key in list(part):
@@ -228,6 +247,15 @@ def main(lessons: list, again: set) -> None:
                         messages.append({"role": "assistant", "content": a["text"]})
                     entry["answers"].append({"seed": seed, "turns": turns})
                     save(lesson, key, seed, [a["prompt_tokens"] for a in turns])
+                elif "retry" in ask:
+                    messages, tries = list(ask["messages"]), [_answer(running.url, ask, ask["messages"], seed)]
+                    said = C.follow_up(tries[-1]["text"])
+                    while said is not None and len(tries) < ask["retry"]:
+                        messages += [{"role": "assistant", "content": tries[-1]["text"]}, {"role": "user", "content": said}]
+                        tries.append(_answer(running.url, ask, messages, seed))
+                        said = C.follow_up(tries[-1]["text"])
+                    entry["answers"].append({"seed": seed, "tries": tries})
+                    save(lesson, key, seed, len(tries), [repr(a["text"][:60]) for a in tries])
                 else:
                     a = _answer(running.url, ask, ask.get("messages"), seed)
                     entry["answers"].append({"seed": seed, **a})

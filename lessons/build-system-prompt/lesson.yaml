@@ -1,0 +1,28 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: build-system-prompt
+minutes: 25
+title:
+  en: "System prompts and response prefill"
+  nl: "System prompts en response prefill"
+goal:
+  en: "give a model instructions for a whole conversation with a system prompt, and the first words of its answer with a response prefill."
+  nl: "een model instructies voor een heel gesprek geven met een system prompt, en de eerste woorden van zijn antwoord met een response prefill."
+summary:
+  - en: "The system prompt is the message with the role system at the start of the conversation: the app adds it, the user does not see it, and it holds for the whole conversation. It goes in with every request, so it costs input tokens every time."
+    nl: "De system prompt is het bericht met de rol system aan het begin van het gesprek: de app voegt het toe, de gebruiker ziet het niet, en het geldt voor het hele gesprek. Het gaat met elk request mee, dus het kost elke keer input tokens."
+  - en: "With a short system prompt, Qwen3 answered in 13 to 28 tokens instead of running on to 200; with the system prompt of a bike shop, it still wrote a poem in every run. A system prompt is no lock and no secret: what must hold belongs in code."
+    nl: "Met een korte system prompt antwoordde Qwen3 in 13 tot 28 tokens in plaats van door te lopen tot 200; met de system prompt van een fietsenwinkel schreef het toch in elke run een gedicht. Een system prompt is geen slot en geen geheim: wat moet gelden, hoort in code."
+  - en: "A response prefill is a last message with the role assistant: the model goes on from those words, and the answer holds only the rest, so your code puts the two together. With the prefill {\"city\": \", all four JSON answers were usable, against none without it. Not every API takes a prefill."
+    nl: "Een response prefill is een laatste bericht met de rol assistant: het model gaat verder vanaf die woorden, en het antwoord bevat alleen de rest, dus je code zet de twee aan elkaar. Met de prefill {\"city\": \" waren alle vier de JSON-antwoorden bruikbaar, tegen geen enkele zonder. Niet elke API neemt een prefill."
+can_now:
+  - en: "put a system prompt at the start of a conversation, in place of an old one"
+    nl: "een system prompt aan het begin van een gesprek zetten, in plaats van een oude"
+    by: with_system
+  - en: "send a response prefill, and join it with the answer"
+    nl: "een response prefill meesturen, en hem aan het antwoord vastmaken"
+    by: ask_json
+  - en: "tell what a prompt can make sure of, and what only code can"
+    nl: "zeggen waar een prompt voor kan zorgen, en waar alleen code voor kan zorgen"
+    by: secret

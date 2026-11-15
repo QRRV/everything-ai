@@ -382,7 +382,7 @@ def text_connections():
     mo.md(r"""
     ## Afronding
 
-    **Samenhang.** De client is je `ask` uit [Een model aanroepen over HTTP](/course/open/build-call-api?lang=nl), met het gesprek van [Base model of chat model?](/course/open/lm-base-vs-chat?lang=nl) erin, bewaard in je project zoals in [Je eigen module: projectcode in een bestand bewaren](/course/open/py-own-modules?lang=nl). Elke beurt stuurt meer tokens, en die telde [Tokens en prijzen: tel voordat je verstuurt](/course/open/build-tokens-prices?lang=nl). Je project komt terug in *Project: je assistent, goed geprompt*, dat hem een system prompt en antwoorden als JSON geeft. Eerst laten de volgende lessen het antwoord binnenkomen terwijl het geschreven wordt, en gaan ze om met een server die nee zegt.
+    **Samenhang.** De client is je `ask` uit [Een model aanroepen over HTTP](/course/open/build-call-api?lang=nl), met het gesprek van [Base model of chat model?](/course/open/lm-base-vs-chat?lang=nl) erin, bewaard in je project zoals in [Je eigen module: projectcode in een bestand bewaren](/course/open/py-own-modules?lang=nl). Elke beurt stuurt meer tokens, en die telde [Tokens en prijzen: tel voordat je verstuurt](/course/open/build-tokens-prices?lang=nl). Je project komt terug in [Project: je assistent, goed geprompt](/course/open/build-project-prompts?lang=nl), dat hem een system prompt en antwoorden als JSON geeft. Eerst laten de volgende lessen het antwoord binnenkomen terwijl het geschreven wordt, en gaan ze om met een server die nee zegt.
     """)
     return
 

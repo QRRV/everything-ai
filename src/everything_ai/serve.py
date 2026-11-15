@@ -5,7 +5,9 @@ library (http.server and json), for the lessons of domain bouwen. It answers, in
 
   GET  /v1/models                 the models it serves: the chat model and the embedding model
   POST /v1/chat/completions       an answer to a list of messages, with model, messages, max_tokens, temperature, top_p,
-                                  seed, stop, stream (and stream_options.include_usage) and tools
+                                  seed, stop, stream (and stream_options.include_usage) and tools; a list of messages
+                                  that ends with one of the assistant is a prefill, as llama.cpp's server takes it: the
+                                  answer goes on from that text
   POST /v1/embeddings             the embeddings of a text or a list of texts, with model, input and encoding_format
                                   ("float", or "base64": the float32 numbers as bytes, little-endian, in base64)
   POST /v1/images/generations     images of a prompt, with model, prompt, n, size and response_format ("b64_json": a
@@ -118,6 +120,7 @@ class Model(Backend):
         # way unless told to think, as thinking takes long on a CPU. A request switches it as on those servers:
         # "chat_template_kwargs": {"enable_thinking": true}. Thinking is sampled as Qwen3 advises for it.
         thinking = bool((request.get("chat_template_kwargs") or {}).get("enable_thinking", False))
+        thinking = thinking and _prefill(request["messages"]) is None   # after a prefill Qwen3 does not think
         if thinking:
             settings = {**C.THINKING, **settings}
 
@@ -128,11 +131,17 @@ class Model(Backend):
             heard(_held(text[:min(cut)] if cut else text, markers))
         with self._lock:
             model = self._chat if self._chat is not None else C.loaded()
+            if stop:   # the model stops writing at a stop sequence, so the tokens after it are never written
+                settings["stop"] = [s for s in stop if s]
+            if (request.get("response_format") or {}).get("type") == "json_object":   # JSON mode
+                settings["json_object"] = True
             a = model.answer(request["messages"], tools=request.get("tools") or None, thinking=thinking,
                              max_tokens=int(request.get("max_tokens") or 256), heard=shown, **settings)
         message, finish = a["message"], a["finish"]
         thought = C.THOUGHT.match(a["text"].lstrip())
         text = message["content"]
+        if _prefill(request["messages"]) is not None and not thinking:   # the answer goes on from the prefill: keep its first space
+            text = a["text"] if not message["tool_calls"] else text
         cut = [text.index(s) for s in stop if s and s in text]
         if cut:   # the model went on past a stop sequence: the answer ends before it
             text, finish = text[:min(cut)], "stop"
@@ -172,7 +181,9 @@ class StandIn(Backend):
     seconds; `delay` seconds before every answer; `key`, an API key that every request must carry; `calls`, a tool
     call per question; `cut`, the number of pieces after which a stream breaks off; `model`, the name of its model;
     `objects`, what its detector finds on any image; `vectors`, the embedding of a text, {text: [numbers]}, where any
-    other text gets made-up numbers of its own (`made_up`), `dims` of them."""
+    other text gets made-up numbers of its own (`made_up`), `dims` of them. Like the server with the model, it ends an
+    answer before a stop sequence, and after a prefill it answers only the rest: what comes after the prefill in the
+    answer, or the whole answer when it does not start with it."""
 
     def __init__(self, answers=None, default="The stand-in's answer to: {question}", fail=(), retry=None, delay=0.0,
                  key=None, calls=None, cut=None, model=MODEL, objects=(("cup", 0.997),), vectors=None, dims=DIMS):
@@ -208,6 +219,13 @@ class StandIn(Backend):
             return {"text": "", "tool_calls": [{"name": name, "arguments": arguments}], "finish": "tool_calls",
                     "prompt_tokens": _words(request["messages"]), "tokens": 0}
         text = self.answers.get(question, self.default.format(question=question))
+        start = _prefill(request["messages"])
+        if start and text.startswith(start):   # a prefill: the answer goes on after it
+            text = text[len(start):]
+        stop = request.get("stop") or []
+        cut = [text.index(s) for s in ([stop] if isinstance(stop, str) else stop) if isinstance(s, str) and s and s in text]
+        if cut:   # the answer ends before a stop sequence
+            text = text[:min(cut)]
         words = text.split(" ")
         limit = request.get("max_tokens")
         finish = "stop"
@@ -272,6 +290,15 @@ def _error(status: int, message: str, param: str | None = None) -> dict:
     return {"error": {"message": message, "type": _TYPES.get(status, "error"), "param": param, "code": status}}
 
 
+def _prefill(messages: list) -> str | None:
+    """The start of the answer when a chat ends with a message of the assistant without tool calls, as llama.cpp's
+    server reads it: the model goes on from there, and the answer holds only what it writes after it. Else None."""
+    last = messages[-1] if messages else {}
+    if last.get("role") == "assistant" and not last.get("tool_calls"):
+        return last.get("content") or ""
+    return None
+
+
 def _last_user(messages: list) -> str:
     for m in reversed(messages):
         if m.get("role") == "user":
@@ -323,8 +350,30 @@ def _problem(request) -> str | None:
                     return problem
         elif m["role"] in ("system", "user") and not isinstance(content, str):
             return "A message of the system or the user needs its 'content' as a string, or for the user a list of parts."
+        elif m["role"] == "assistant" and content is not None and not isinstance(content, str):
+            return "A message of the assistant needs its 'content' as a string, or null."
     if request.get("max_tokens") is not None and (not isinstance(request["max_tokens"], int) or request["max_tokens"] < 1):
         return "'max_tokens' must be a whole number of at least 1."
+    for name, high in (("temperature", 2), ("top_p", 1)):
+        value = request.get(name)
+        if value is not None and (not isinstance(value, (int, float)) or isinstance(value, bool) or not 0 <= value <= high):
+            return f"'{name}' must be a number from 0 to {high}."
+    if request.get("seed") is not None and (not _whole(request["seed"]) or not 0 <= request["seed"] < 2 ** 64):
+        return f"'seed' must be a whole number from 0 to {2 ** 64 - 1}."
+    stop = request.get("stop")
+    if stop is not None and not isinstance(stop, str) and (not isinstance(stop, list) or len(stop) > 4
+                                                           or not all(isinstance(x, str) for x in stop)):
+        return "'stop' must be a string or a list of at most 4 strings."
+    form = request.get("response_format")
+    if form is not None:
+        kind = form.get("type") if isinstance(form, dict) else None
+        if kind == "json_schema":
+            return ("This server has JSON mode, 'response_format': {'type': 'json_object'}, but no 'json_schema': "
+                    "check the answer against your schema in your code.")
+        if kind not in ("text", "json_object"):
+            return "'response_format' must be {'type': 'text'} or {'type': 'json_object'}."
+        if kind == "json_object" and (request.get("chat_template_kwargs") or {}).get("enable_thinking"):
+            return "This server has JSON mode only without thinking."
     tools = request.get("tools")
     if tools is not None and (not isinstance(tools, list)
                               or any(not isinstance(t, dict) or t.get("type") not in ("function", DETECT) for t in tools)):

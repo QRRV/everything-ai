@@ -1,0 +1,28 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: build-project-prompts
+minutes: 30
+title:
+  en: "Project: your assistant, prompted well"
+  nl: "Project: je assistent, goed geprompt"
+goal:
+  en: "give your assistant its prompts in a file of their own, and a function that asks for JSON, checks it, and asks again, so that the rest of your app can use the answers."
+  nl: "je assistent zijn prompts in een eigen bestand geven, en een functie die om JSON vraagt, die controleert en opnieuw vraagt, zodat de rest van je app de antwoorden kan gebruiken."
+summary:
+  - en: "Rules for every task go in the system prompt: with \"answer with the JSON only, without a code block\" in it, Qwen3 gave JSON that fits in 24 of 24 runs at the first try; without that sentence, in 18 of 24, and asking again did not help the 6 others."
+    nl: "Regels voor elke taak horen in de system prompt: met een zin erin die om alleen de JSON vraagt, zonder codeblok, gaf Qwen3 in 24 van de 24 runs bij de eerste poging JSON die past; zonder die zin in 18 van de 24, en opnieuw vragen hielp de 6 andere niet."
+  - en: "Your assistant's words live in a file of their own, app/prompts.py: the system prompt, and for each task a template with its version and the schema of its answer. Better words change only that file, and its version goes up."
+    nl: "De woorden van je assistent staan in een eigen bestand, app/prompts.py: de system prompt, en voor elke taak een template met zijn versie en het schema van zijn antwoord. Betere woorden veranderen alleen dat bestand, en de versie gaat omhoog."
+  - en: "ask_json checks every answer with problems and asks again with what was wrong, and gives back None when no try fits. A check of the form does not see the meaning: for \"3 in the afternoon\", every answer gave hour 3."
+    nl: "ask_json controleert elk antwoord met problems en vraagt opnieuw met wat er mis was, en geeft None terug als geen poging past. Een controle van de vorm ziet de betekenis niet: bij \"3 in the afternoon\" gaf elk antwoord uur 3."
+can_now:
+  - en: "keep an assistant's prompts in a file of their own, with a version and a schema for each template"
+    nl: "de prompts van een assistent in een eigen bestand bijhouden, met een versie en een schema bij elke template"
+    by: messages_for
+  - en: "ask for JSON through your own client, check it, and ask again with what was wrong"
+    nl: "via je eigen client om JSON vragen, die controleren, en opnieuw vragen met wat er mis was"
+    by: ask_json
+  - en: "say what changes with a template when its words change"
+    nl: "zeggen wat er met een template verandert als zijn woorden veranderen"
+    by: new-version

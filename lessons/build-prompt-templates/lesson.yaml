@@ -1,0 +1,28 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: build-prompt-templates
+minutes: 25
+title:
+  en: "Prompts as code: templates and versions"
+  nl: "Prompts als code: templates en versies"
+goal:
+  en: "write a prompt as a template with fields that code fills in, keep it in a file with a version, and count per version which answers went right."
+  nl: "een prompt schrijven als template met velden die code invult, hem bewaren in een bestand met een versie, en per versie tellen welke antwoorden goed gingen."
+summary:
+  - en: "A prompt template is fixed words with fields, such as {text}, that code fills in with .format for each request; a brace that should stay in the prompt, such as in a JSON example, is written twice."
+    nl: "Een prompt template is vaste woorden met velden, zoals {text}, die code voor elk request invult met .format; een accolade die in de prompt moet blijven, zoals in een JSON-voorbeeld, schrijf je dubbel."
+  - en: "Every change to the words is a new version, kept in a file of its own under version control, and every answer is logged with its version. Of the course's bike template, version 1 gave 16 of 24 answers that fit, and version 2, with one sentence more, 24 of 24."
+    nl: "Elke verandering aan de woorden is een nieuwe versie, bewaard in een eigen bestand onder versiebeheer, en bij elk antwoord wordt de versie vastgelegd. Bij de template voor fietsen van de course pasten met versie 1 16 van de 24 antwoorden, en met versie 2, met één zin meer, 24 van de 24."
+  - en: "Few runs show what a version does on these examples, with this model: another model or other texts can need other words, so you run the same examples again for every new version."
+    nl: "Weinig runs laten zien wat een versie doet op deze voorbeelden, met dit model: een ander model of andere teksten kunnen andere woorden nodig hebben, dus draai je dezelfde voorbeelden opnieuw voor elke nieuwe versie."
+can_now:
+  - en: "write a template whose own braces stay in the prompt"
+    nl: "een template schrijven waarvan de eigen accolades in de prompt blijven"
+    by: bike_prompt
+  - en: "count in a log, for each version of a template, how many answers fit"
+    nl: "in een log voor elke versie van een template tellen hoeveel antwoorden passen"
+    by: fits_per_version
+  - en: "tell when a template needs a new version"
+    nl: "zeggen wanneer een template een nieuwe versie krijgt"
+    by: new-version

@@ -1,0 +1,28 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: build-structured-output
+minutes: 30
+title:
+  en: "JSON you can rely on"
+  nl: "JSON waar je op kunt bouwen"
+goal:
+  en: "check a model's JSON answer in code against a JSON schema, and ask again with what was wrong, in JSON mode."
+  nl: "het JSON-antwoord van een model in code controleren tegen een JSON-schema, en opnieuw vragen met wat er mis was, met JSON mode."
+summary:
+  - en: "Asked for a bike's details as JSON, Qwen3 put all eight answers in a code block, which json.loads cannot read; inside it, the price was the text \"649\" in five of them. Almost JSON stops a program, or slips through with a wrong type."
+    nl: "Toen de course Qwen3 om de gegevens van een fiets als JSON vroeg, zette het model alle acht de antwoorden in een codeblok, dat json.loads niet kan lezen; daarbinnen was de prijs in vijf ervan de tekst \"649\". Bijna-JSON laat een programma stoppen, of glipt erdoorheen met een verkeerd type."
+  - en: "JSON mode, \"response_format\": {\"type\": \"json_object\"}, puts aside every token after which the text can no longer become JSON: all eight answers were valid JSON, but in four the price was still a text. Valid JSON is not yet the JSON your app needs."
+    nl: "JSON mode, \"response_format\": {\"type\": \"json_object\"}, legt elk token opzij waarna de tekst geen JSON meer kan worden: alle acht de antwoorden waren geldige JSON, maar in vier was de prijs nog steeds een tekst. Geldige JSON is nog niet de JSON die je app nodig heeft."
+  - en: "A JSON schema says which keys an answer must have and the type of each value. Check every answer against it, and when it does not fit, ask again with the answer and the problems: all four answers that did not fit, fit at the second try. Other APIs and servers can force the schema itself, with structured outputs."
+    nl: "Een JSON-schema zegt welke keys een antwoord moet hebben en het type van elke waarde. Controleer elk antwoord ertegen, en vraag als het niet past opnieuw met het antwoord en de problemen: alle vier de antwoorden die niet pasten, pasten bij de tweede poging. Andere API's en servers kunnen het schema zelf afdwingen, met structured outputs."
+can_now:
+  - en: "check a JSON answer against the keys and types of a schema"
+    nl: "een JSON-antwoord controleren tegen de keys en types van een schema"
+    by: problems
+  - en: "ask again with the answer and what was wrong, a few times at most"
+    nl: "opnieuw vragen met het antwoord en wat er mis was, hooguit een paar keer"
+    by: ask_json
+  - en: "tell what JSON mode makes sure of, and what only a check in code can"
+    nl: "zeggen waar JSON mode voor zorgt, en waar alleen een controle in code voor kan zorgen"
+    by: guarantee

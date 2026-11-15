@@ -1,0 +1,28 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: build-sampling-api
+minutes: 25
+title:
+  en: "Sampling settings through the API"
+  nl: "Instellingen voor sampling via de API"
+goal:
+  en: "set per request how the model samples and where its answer ends: temperature, top_p, seed, max_tokens and stop."
+  nl: "per request bepalen hoe het model samplet en waar zijn antwoord eindigt: temperature, top_p, seed, max_tokens en stop."
+summary:
+  - en: "The settings of sampling go in the body of the request, next to the messages: \"temperature\" (0 is greedy decoding, the same answer each time), \"top_p\", and a \"seed\" that makes a sampled answer repeatable. A request without them gets the server's own."
+    nl: "De instellingen van het samplen gaan in de body van het request, naast de berichten: \"temperature\" (0 is greedy decoding, elke keer hetzelfde antwoord), \"top_p\", en een \"seed\" die een gesampled antwoord herhaalbaar maakt. Een request zonder krijgt die van de server."
+  - en: "Asked eight times for a bakery name, Qwen3 gave one name at temperature 0, five at 0.7 with top_p 0.8, and eight at 1.5, one of them a sentence instead of the name; the same seeds gave the same names again."
+    nl: "Acht keer gevraagd om een naam voor een bakkerij, gaf Qwen3 één naam bij temperature 0, vijf bij 0,7 met top_p 0,8, en acht bij 1,5, waarvan één een zin in plaats van de naam; dezelfde seeds gaven weer dezelfde namen."
+  - en: "\"max_tokens\" cuts an answer off, with finish_reason \"length\"; a stop sequence in \"stop\" ends it where you want, without the stop sequence itself, with finish_reason \"stop\". Read finish_reason before you use an answer."
+    nl: "\"max_tokens\" kapt een antwoord af, met finish_reason \"length\"; een stop sequence in \"stop\" beëindigt het waar jij wilt, zonder de stop sequence zelf, met finish_reason \"stop\". Lees finish_reason voordat je een antwoord gebruikt."
+can_now:
+  - en: "send temperature and seed with a request"
+    nl: "temperature en seed meesturen met een request"
+    by: ask
+  - en: "end an answer with a stop sequence, and read why it ended"
+    nl: "een antwoord beëindigen met een stop sequence, en lezen waarom het eindigde"
+    by: first_line
+  - en: "choose the settings for answers that should differ, or stay the same"
+    nl: "de instellingen kiezen voor antwoorden die moeten verschillen, of gelijk moeten blijven"
+    by: names

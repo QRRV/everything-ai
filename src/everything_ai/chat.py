@@ -48,8 +48,13 @@ def prompt(messages: list, tools: list | None = None, thinking: bool = False) ->
     """The text the model reads for `messages`, each {"role": "system" | "user" | "assistant" | "tool", "content": ...},
     an assistant message perhaps with "tool_calls"; with `tools`, their descriptions in the system message; and at
     the end the start of the assistant's answer, which the model goes on from. As Qwen3's chat template writes it for
-    a chat that ends with a message of the user or of a tool."""
+    a chat that ends with a message of the user or of a tool. A chat that ends with a message of the assistant without
+    tool calls is a prefill: the answer starts with that text, and the model goes on from its last word, without
+    thinking first, as Qwen3's template writes it then (its thought is empty)."""
     out, messages = [], list(messages)
+    prefill = None
+    if messages and messages[-1].get("role") == "assistant" and not messages[-1].get("tool_calls"):
+        prefill, messages = messages[-1].get("content") or "", messages[:-1]
     if tools:
         system = messages[0]["content"] + "\n\n" if messages and messages[0]["role"] == "system" else ""
         described = "".join("\n" + json.dumps(t, ensure_ascii=False) for t in tools)
@@ -68,7 +73,7 @@ def prompt(messages: list, tools: list | None = None, thinking: bool = False) ->
             out.append(f"{IM_START}assistant\n{content}{''.join(calls)}{IM_END}\n")
         else:
             out.append(f"{IM_START}{role}\n{content}{IM_END}\n")
-    out.append(f"{IM_START}assistant\n" + ("" if thinking else NO_THINKING))
+    out.append(f"{IM_START}assistant\n" + ("" if thinking and prefill is None else NO_THINKING) + (prefill or ""))
     return "".join(out)
 
 
@@ -97,6 +102,110 @@ def parse(text: str) -> dict:
     return {"role": "assistant", "content": content.strip(), "tool_calls": calls, "bad_calls": bad}
 
 
+def _nucleus(logits, temperature: float, top_k: int, top_p: float):
+    """The tokens to draw the next one from: the top_k most likely at `temperature`, of which the smallest set that
+    together reaches top_p, always at least the most likely one. Their probabilities (zero for the rest) and ids."""
+    import torch
+    top, which = torch.topk(logits / temperature, min(top_k, logits.numel()))
+    p = torch.softmax(top, -1)
+    keep = torch.cumsum(p, -1) - p < top_p
+    keep[0] = True
+    return torch.where(keep, p, torch.zeros_like(p)), which
+
+
+# --- JSON mode: the answer can only become one JSON object ------------------------------------------------------------
+
+_NUM = {   # the states of a JSON number while it is written, and where each next character takes it
+    "start": {"-": "minus", "0": "zero", **dict.fromkeys("123456789", "int")},
+    "minus": {"0": "zero", **dict.fromkeys("123456789", "int")},
+    "zero": {".": "dot", "e": "exp", "E": "exp"},
+    "int": {**dict.fromkeys("0123456789", "int"), ".": "dot", "e": "exp", "E": "exp"},
+    "dot": dict.fromkeys("0123456789", "frac"),
+    "frac": {**dict.fromkeys("0123456789", "frac"), "e": "exp", "E": "exp"},
+    "exp": {"+": "sign", "-": "sign", **dict.fromkeys("0123456789", "power")},
+    "sign": dict.fromkeys("0123456789", "power"),
+    "power": dict.fromkeys("0123456789", "power"),
+}
+_NUM_WHOLE = {"zero", "int", "frac", "power"}   # a number may end in these states
+_LITERALS = ("true", "false", "null")
+_HEX = set("0123456789abcdefABCDEF")
+
+
+def json_object_state(text: str) -> str | None:
+    """How far `text` is on its way to being one JSON object, as JSON mode checks it after every token: "done" when it
+    is one whole object, "open" when more text can still make it one, None when no text can. White space may come
+    before and after the object, and between its parts, as JSON allows."""
+    stack = []        # the objects and lists that are open: "{" or "["
+    want = "start"    # what may come next: start, key, key_or_end, colon, value, value_or_end, after (a value), done
+    string = None     # inside a string: whether it is a key, whether a backslash came, how many hex digits of \u are left
+    number = None     # inside a number: its state in _NUM
+    literal = None    # inside true, false or null: what is written of it so far
+    for ch in text:
+        if string is not None:
+            if string["hex"]:
+                if ch not in _HEX:
+                    return None
+                string["hex"] -= 1
+            elif string["escape"]:
+                if ch == "u":
+                    string["hex"] = 4
+                elif ch not in '"\\/bfnrt':
+                    return None
+                string["escape"] = False
+            elif ch == "\\":
+                string["escape"] = True
+            elif ch == '"':
+                want, string = ("colon" if string["key"] else "after"), None
+            elif ord(ch) < 0x20:   # a line break or tab in a string must be written as \n or \t
+                return None
+            continue
+        if number is not None:
+            if ch in _NUM[number]:
+                number = _NUM[number][ch]
+                continue
+            if number not in _NUM_WHOLE:
+                return None
+            number, want = None, "after"   # the number is over: this character comes after it
+        if literal is not None:
+            literal += ch
+            if not any(w.startswith(literal) for w in _LITERALS):
+                return None
+            if literal in _LITERALS:
+                literal, want = None, "after"
+            continue
+        if ch in " \t\n\r":
+            continue
+        if want == "start" and ch == "{":
+            stack.append("{")
+            want = "key_or_end"
+        elif want in ("key", "key_or_end") and ch == '"':
+            string = {"key": True, "escape": False, "hex": 0}
+        elif want == "colon" and ch == ":":
+            want = "value"
+        elif want in ("value", "value_or_end") and ch in '{["' or want in ("value", "value_or_end") and ch in _NUM["start"]:
+            if ch == "{":
+                stack.append("{")
+                want = "key_or_end"
+            elif ch == "[":
+                stack.append("[")
+                want = "value_or_end"
+            elif ch == '"':
+                string = {"key": False, "escape": False, "hex": 0}
+            else:
+                number = _NUM["start"][ch]
+        elif want in ("value", "value_or_end") and ch in "tfn":
+            literal = ch
+        elif want == "after" and ch == ",":
+            want = "key" if stack[-1] == "{" else "value"
+        elif (want == "after" and ch == {"{": "}", "[": "]"}[stack[-1]] or want == "key_or_end" and ch == "}"
+              or want == "value_or_end" and ch == "]"):
+            stack.pop()
+            want = "after" if stack else "done"
+        else:
+            return None
+    return "done" if want == "done" else "open"
+
+
 class Chat:
     """Qwen3-0.6B, ready to answer: the chat model in float32 on the CPU, or the model and tokenizer given."""
 
@@ -112,13 +221,21 @@ class Chat:
 
     def answer(self, messages: list, tools: list | None = None, max_tokens: int = 256, seed: int = 0,
                temperature: float = SAMPLING["temperature"], top_p: float = SAMPLING["top_p"], top_k: int = SAMPLING["top_k"],
-               thinking: bool = False, heard=None) -> dict:
+               thinking: bool = False, heard=None, stop: list | None = None, json_object: bool = False) -> dict:
         """The model's answer to `messages`: {"text": what it wrote, "message": parse(text), "prompt_tokens": ...,
         "tokens": tokens it wrote, "seconds": ..., "finish": "stop" when it ended its answer itself, "length" when it
         reached max_tokens}. Sampled with `seed` from the top_k most likely tokens that together reach top_p, at
         `temperature`; greedy at temperature 0. The whole prompt goes into an empty KV cache at once, then one token at
-        a time. `heard(text)` hears the answer so far after every token."""
+        a time. `heard(text)` hears the answer so far after every token. With `stop`, a list of texts, the model stops
+        writing as soon as its answer (after the thought, in thinking mode) holds one of them: finish "stop". With
+        `json_object` (JSON mode, without thinking), every token must keep the answer on its way to one JSON object, a
+        prefill included: a sampled token that does not is put aside and another drawn, and the answer ends as soon
+        as the object is whole."""
         import torch
+        last = messages[-1] if messages else {}
+        prefilled = last.get("role") == "assistant" and not last.get("tool_calls")
+        thinking = thinking and not prefilled   # after a prefill the model does not think: prompt() leaves the thought empty
+        begun = (last.get("content") or "") if prefilled else ""
         ids = self.tokens(prompt(messages, tools, thinking))
         device = next(self.model.parameters()).device
         g = torch.Generator(device=device).manual_seed(seed)
@@ -127,23 +244,61 @@ class Chat:
             caches = [{} for _ in self.model.blocks]
             logits = self.model(torch.tensor([ids], device=device), caches, last=True)[0, -1].float()
             for _ in range(max_tokens):
-                if temperature == 0:
+                if json_object:
+                    nxt = self._json_token(logits, out, begun, temperature, top_k, top_p, g)
+                    if nxt is None:   # no token keeps it JSON: it ends here
+                        finish = "stop"
+                        break
+                elif temperature == 0:
                     nxt = int(logits.argmax())
                 else:
-                    top, which = torch.topk(logits / temperature, min(top_k, logits.numel()))
-                    p = torch.softmax(top, -1)
-                    p = torch.where(torch.cumsum(p, -1) - p < top_p, p, torch.zeros_like(p))   # the smallest set that reaches top_p
+                    p, which = _nucleus(logits, temperature, top_k, top_p)
                     nxt = int(which[torch.multinomial(p / p.sum(), 1, generator=g)])
                 if nxt in self.stops:
                     finish = "stop"
                     break
                 out.append(nxt)
-                if heard is not None:
-                    heard(self.enc.decode(out))
+                if heard is not None or stop:
+                    so_far = self.enc.decode(out)
+                    if heard is not None:
+                        heard(so_far)
+                    if stop:
+                        answer = (so_far.split("</think>", 1)[1] if "</think>" in so_far else "") if thinking else so_far
+                        answer = answer.split("<tool_call>", 1)[0]   # a stop sequence in the markup of a tool call does not count
+                        if any(s and s in answer for s in stop):
+                            finish = "stop"
+                            break
+                if json_object and json_object_state(begun + self.enc.decode(out)) == "done":
+                    finish = "stop"
+                    break
                 logits = self.model(torch.tensor([[nxt]], device=device), caches)[0, -1].float()
         text = self.enc.decode(out)
         return {"text": text, "message": parse(text), "prompt_tokens": len(ids), "tokens": len(out),
                 "seconds": round(time.perf_counter() - start, 2), "finish": finish}
+
+    def _json_token(self, logits, out: list, begun: str, temperature: float, top_k: int, top_p: float, g,
+                    furthest: int = 5000) -> int | None:
+        """The next token in JSON mode: drawn as without it, but a token after which the answer (after `begun`, a
+        prefill) can no longer become one JSON object is put aside, and another is drawn from the rest; the end of
+        the answer only once the object is whole. When none of the tokens it may draw from will do, the most likely
+        one of the `furthest` most likely that does; None when there is none."""
+        import torch
+
+        def fits(token: int) -> bool:
+            if token in self.stops:
+                return json_object_state(begun + self.enc.decode(out)) == "done"
+            return json_object_state(begun + self.enc.decode(out + [token])) is not None
+        if temperature != 0:
+            p, which = _nucleus(logits, temperature, top_k, top_p)
+            while float(p.sum()) > 0:
+                i = int(torch.multinomial(p / p.sum(), 1, generator=g))
+                if fits(int(which[i])):
+                    return int(which[i])
+                p[i] = 0.0
+        for token in torch.argsort(logits, descending=True)[:furthest].tolist():
+            if fits(token):
+                return token
+        return None
 
 
 # --- running it in a lesson: once loaded, the answer so far shown while it writes ------------------------------------

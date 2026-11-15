@@ -192,6 +192,7 @@ def _exercise(package: str, module: str):
                                                       paths.LESSONS / lesson / "checks.py")
         mod = importlib.util.module_from_spec(spec)
         ours = dict(_BUILDS_ON)
+        _BUILDS_ON.clear()   # while it loads, what this lesson builds on does not hold: its code may run code itself
         try:
             spec.loader.exec_module(mod)   # its own builds_on, if it has one, says what *that* lesson builds on
         finally:
@@ -216,7 +217,8 @@ def _value(code: str, names: dict):
 
 def _passes(package: str, module: str, mod) -> bool:
     """The contract test: every scenario of the exercise that saves the module gives with yours what it gives with
-    the course's version. For a function exercise, every case it checks (`visible` and `hidden`) does."""
+    the course's version. For a function exercise, every case it checks (`visible` and `hidden`) does; for a
+    function that calls an API, the judge of every case finds nothing wrong."""
     from everything_ai.check import TIME_LIMIT, with_time_limit
     exercise = _exercise(package, module)
     course = {"__name__": "__course__"}
@@ -233,6 +235,8 @@ def _passes(package: str, module: str, mod) -> bool:
             fn = getattr(mod, name, None)
             if not callable(fn):
                 return False
+            if hasattr(exercise, "cases"):   # a function that calls an API (apicheck.ApiBox)
+                return _api_passes(fn, exercise)
             with contextlib.redirect_stdout(io.StringIO()):
                 for case in list(exercise.visible) + list(exercise.hidden):
                     got = with_time_limit(lambda: exercise._run(fn, case), getattr(exercise, "time_limit", TIME_LIMIT))
@@ -242,6 +246,19 @@ def _passes(package: str, module: str, mod) -> bool:
         return False
     finally:
         random.setstate(seed)
+    return True
+
+
+def _api_passes(fn, exercise) -> bool:
+    """The contract of a function that calls a model's API: on every case of its exercise, against the case's
+    stand-in server, the case's judge finds nothing wrong, as the check of the exercise does."""
+    from everything_ai import apicheck
+    for case in exercise.cases:
+        got, error, running = apicheck.call(fn, case, exercise.time_limit)
+        if case.expect is not None and (error is None or isinstance(error, case.expect)):
+            got, error = (got if error is None else error), None
+        if error is not None or case.judge(got, running) is not None:
+            return False
     return True
 
 

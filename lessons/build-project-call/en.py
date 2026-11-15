@@ -382,7 +382,7 @@ def text_connections():
     mo.md(r"""
     ## Wrap-up
 
-    **How this connects.** The client is your `ask` of [Calling a model over HTTP](/course/open/build-call-api?lang=en), with the conversation of [Base model or chat model?](/course/open/lm-base-vs-chat?lang=en) in it, kept in your project as in [Your own module: keeping project code in a file](/course/open/py-own-modules?lang=en). Every turn sends more tokens, which is what [Tokens and prices: count before you send](/course/open/build-tokens-prices?lang=en) counted. Your project comes back in *Project: your assistant, prompted well*, which gives it a system prompt and answers as JSON. First, the next lessons let the answer come in while it is written, and deal with a server that says no.
+    **How this connects.** The client is your `ask` of [Calling a model over HTTP](/course/open/build-call-api?lang=en), with the conversation of [Base model or chat model?](/course/open/lm-base-vs-chat?lang=en) in it, kept in your project as in [Your own module: keeping project code in a file](/course/open/py-own-modules?lang=en). Every turn sends more tokens, which is what [Tokens and prices: count before you send](/course/open/build-tokens-prices?lang=en) counted. Your project comes back in [Project: your assistant, prompted well](/course/open/build-project-prompts?lang=en), which gives it a system prompt and answers as JSON. First, the next lessons let the answer come in while it is written, and deal with a server that says no.
     """)
     return
 

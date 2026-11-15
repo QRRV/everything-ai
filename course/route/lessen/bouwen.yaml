@@ -450,20 +450,23 @@ lessons:
   covers: [prompting-voor-ontwikkelaars#0]
   requires: [build-call-api, lm-top-k-top-p]
   introduces: [c:max-tokens, c:stop-sequence]
-  data: [model-qwen3-0.6b]
+  uses: [c:api, c:endpoint, c:http-request, c:openai-compatible-api, c:local-server, c:temperature, c:top-p, c:top-k, c:seed, c:sampling, c:greedy-decoding, c:token, c:output-token, c:chat-model, c:message-role, c:json, c:open-weights, py:urllib-request, py:json, py:dict, py:list, py:indexing, py:import, py:def, py:return, py:with, py:tuple, py:string-literal, q:choice, q:exercise-with-check, q:run-cell]
+  data: [model-qwen3-0.6b, course-dev-prompts-qwen]
   ladder: [python]
   needs: any
 
 - id: build-system-prompt
-  title: "System prompts and prefill"
+  title: "System prompts and response prefill"
   level: basis
   domein: bouwen
   module: prompts
-  idea: "The system prompt says once how the assistant behaves in the whole conversation, and a prefill writes the first words of its answer for it, so the answer starts the way you need."
+  idea: "The system prompt says once how the assistant behaves in the whole conversation, and a response prefill writes the first words of its answer for it, so the answer starts the way you need."
   covers: [prompting-voor-ontwikkelaars#2]
   requires: [build-call-api]
-  introduces: [c:system-prompt, c:prefill]
-  data: [model-qwen3-0.6b]
+  introduces: [c:system-prompt, c:response-prefill]
+  uses: [c:api, c:endpoint, c:http-request, c:openai-compatible-api, c:local-server, c:message-role, c:chat-model, c:base-model, c:prompt, c:token, c:input-token, c:output-token, c:json, c:open-weights, py:urllib-request, py:json, py:dict, py:list, py:append, py:for, py:if, py:comparison, py:indexing, py:import, py:def, py:return, py:with, py:string-literal, q:choice, q:exercise-with-check, q:run-cell]
+  mentions: [c:max-tokens, c:sampling]
+  data: [model-qwen3-0.6b, course-dev-prompts-qwen]
   ladder: [python]
   needs: any
 
@@ -474,9 +477,11 @@ lessons:
   module: prompts
   idea: "Ask for JSON and you often get almost-JSON: check the answer against a schema, and when it does not fit, ask again with what was wrong; hosted APIs can force valid JSON while the model writes."
   covers: [prompting-voor-ontwikkelaars#1]
-  requires: [build-system-prompt]
+  requires: [build-system-prompt, py-exceptions]
   introduces: [c:structured-output, c:json-schema, c:json-mode]
-  data: [model-qwen3-0.6b]
+  uses: [c:api, c:endpoint, c:http-request, c:openai-compatible-api, c:local-server, c:message-role, c:chat-model, c:prompt, c:token, c:json, c:open-weights, c:system-prompt, c:response-prefill, py:urllib-request, py:json, py:dict, py:dict-items, py:list, py:append, py:for, py:range, py:if, py:comparison, py:indexing, py:import, py:def, py:return, py:with, py:string-literal, py:str-join, py:try-except, py:none, py:tuple, q:choice, q:exercise-with-check, q:run-cell]
+  mentions: [c:max-tokens, c:sampling]
+  data: [model-qwen3-0.6b, course-dev-prompts-qwen]
   ladder: [python]
   needs: any
 
@@ -489,7 +494,9 @@ lessons:
   covers: [prompting-voor-ontwikkelaars#3]
   requires: [build-system-prompt]
   introduces: [c:prompt-template, c:prompt-version]
-  data: []
+  uses: [c:api, c:openai-compatible-api, c:local-server, c:message-role, c:chat-model, c:prompt, c:json, c:open-weights, c:seed, py:json, py:dict, py:list, py:for, py:if, py:comparison, py:indexing, py:def, py:return, py:string-literal, q:choice, q:exercise-with-check, q:run-cell]
+  mentions: [c:max-tokens, c:sampling, c:json-mode]
+  data: [model-qwen3-0.6b, course-dev-prompts-qwen]
   ladder: [python]
   needs: any
 
@@ -503,7 +510,8 @@ lessons:
   idea: "Your assistant gets a system prompt and templates from files of its own, and gives answers as JSON it checks itself, so the rest of your app can use them."
   covers: []
   requires: [build-project-call, build-prompt-templates, build-structured-output]
-  data: [model-qwen3-0.6b]
+  uses: [c:api, c:api-client, c:openai-compatible-api, c:local-server, c:message-role, c:chat-model, c:prompt, c:system-prompt, c:prompt-template, c:prompt-version, c:structured-output, c:json, c:json-schema, c:module, c:open-weights, c:seed, py:json, py:dict, py:list, py:for, py:range, py:if, py:comparison, py:indexing, py:import, py:def, py:return, py:none, py:string-literal, py:str-join, q:choice, q:exercise-with-check, q:run-cell]
+  data: [model-qwen3-0.6b, course-dev-prompts-qwen]
   ladder: [python]
   needs: any
 
