@@ -1119,7 +1119,8 @@ class FunctionBox(CodeBox):
     """The learner writes a function in a code box; the check runs the box, then calls the function
     on the example from the lesson (`visible`) and on other cases (`hidden`), each a tuple of arguments,
     and compares with the course's solution, which is code text too. Every error is told in plain
-    words, as in a code box. A mistake's `wrong` is a wrong version of the code text."""
+    words, as in a code box. A mistake's `wrong` is a wrong version of the code text. With `names`, the box
+    (and the solution) may use those names of the lesson, such as a long text it should not have to hold."""
     function: str = ""                 # the name of the function the box makes
     visible: list[tuple] = field(default_factory=list)
     hidden: list[tuple] = field(default_factory=list)
@@ -1149,7 +1150,7 @@ class FunctionBox(CodeBox):
         return f"{self.function}({', '.join(_as_code(a) for a in case)})"
 
     def _fn(self, code: str):
-        run = run_code(code)
+        run = run_code(code, self.names)
         return run.names.get(self.function) if run.error is None else None
 
     def check(self, text, inputs=None) -> Result:
@@ -1161,8 +1162,9 @@ class FunctionBox(CodeBox):
         for m in self.first:
             if m.matches(None, text):
                 return Result(m.state, m.text, mistake=m.key)
-        run = run_code(text)
-        _ran(self, text, {}, run)
+        names = dict(self.names if inputs is None else inputs)   # names of the lesson the box may use, such as a long text
+        run = run_code(text, names)
+        _ran(self, text, names, run)
         if run.timeout:
             return Result("slow", self.message("slow") if "slow" in self.texts else {
                 "en": "Your code is still not done after {s:g} seconds. Does something keep going forever?".format(s=TIME_LIMIT),

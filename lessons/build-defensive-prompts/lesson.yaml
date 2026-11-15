@@ -1,0 +1,28 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: build-defensive-prompts
+minutes: 25
+title:
+  en: "Prompts that hold"
+  nl: "Prompts die standhouden"
+goal:
+  en: "mark text from outside as data, put your task after it, and let through only the answers your app expects."
+  nl: "tekst van buiten als data markeren, je taak erachter zetten, en alleen de antwoorden doorlaten die je app verwacht."
+summary:
+  - en: "Text from outside, such as an email or a web page, can hold instructions for the model; when the model follows them, that is prompt injection. A model reads your task and that text as one stream of tokens."
+    nl: "Tekst van buiten, zoals een e-mail of een webpagina, kan instructies voor het model bevatten; als het model die volgt, heet dat prompt injection. Een model leest je taak en die tekst als één stroom tokens."
+  - en: "The course had Qwen3 sort three emails with an instruction in them, eight times each. The plain way, 17 of 24 answers followed the email; with the email between markers and a warning in the system prompt, 24 of 24; with the task after the email, none followed it, but only 3 of 24 had the right label. A check in code that lets only the four labels through stops every answer that followed an email, though not a wrong label."
+    nl: "De course liet Qwen3 drie e-mails met een instructie erin sorteren, elk acht keer. Op de gewone manier volgden 17 van de 24 antwoorden de e-mail; met de e-mail tussen markeringen en een waarschuwing in de system prompt 24 van de 24; met de taak na de e-mail volgde geen enkel antwoord hem, maar hadden er maar 3 van de 24 het goede label. Een check in code die alleen de vier labels doorlaat, houdt elk antwoord tegen dat een e-mail volgde, al houdt hij een fout label niet tegen."
+  - en: "Defensive prompting lowers the risk, but no prompt removes it: check every answer in code, give the model no more power than its task needs, and let a person confirm what cannot be undone."
+    nl: "Defensive prompting verlaagt het risico, maar geen prompt haalt het weg: controleer elk antwoord in code, geef het model niet meer macht dan zijn taak nodig heeft, en laat een mens bevestigen wat niet terug te draaien is."
+can_now:
+  - en: "put text from outside between markers it cannot break"
+    nl: "tekst van buiten tussen markeringen zetten die hij niet kan breken"
+    by: mark
+  - en: "let through only the answers your app expects, and hand the rest to a person"
+    nl: "alleen de antwoorden doorlaten die je app verwacht, en de rest aan een mens geven"
+    by: label_of
+  - en: "decide what an assistant that can act may do by itself"
+    nl: "beslissen wat een assistent die iets kan doen zelf mag"
+    by: act

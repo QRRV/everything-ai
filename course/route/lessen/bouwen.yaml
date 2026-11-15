@@ -524,7 +524,9 @@ lessons:
   covers: [prompting-voor-ontwikkelaars#4]
   requires: [build-prompt-templates, build-choose-model]
   introduces: [c:prompt-migration]
-  data: [model-qwen3-0.6b]
+  uses: [c:api, c:endpoint, c:http-request, c:openai-compatible-api, c:local-server, c:message-role, c:chat-model, c:prompt, c:json, c:open-weights, c:token, c:system-prompt, c:prompt-template, c:output-token, c:chain-of-thought, py:urllib-request, py:json, py:dict, py:list, py:indexing, py:import, py:def, py:return, py:with, py:string-literal, py:for, py:if, q:choice, q:exercise-with-check, q:run-cell]
+  mentions: [c:model-card, c:max-tokens]
+  data: [model-qwen3-0.6b, course-dev-prompts-qwen]
   ladder: [python]
   needs: any
 
@@ -537,7 +539,9 @@ lessons:
   covers: [prompting-voor-ontwikkelaars#9]
   requires: [build-system-prompt]
   introduces: [c:prompt-injection, c:defensive-prompting]
-  data: [model-qwen3-0.6b]
+  uses: [c:api, c:endpoint, c:http-request, c:openai-compatible-api, c:local-server, c:message-role, c:chat-model, c:prompt, c:json, c:open-weights, c:token, c:system-prompt, py:urllib-request, py:json, py:dict, py:list, py:indexing, py:import, py:def, py:return, py:with, py:string-literal, py:if, py:none, py:strip, q:choice, q:exercise-with-check, q:run-cell]
+  mentions: [py:lower, c:max-tokens]
+  data: [model-qwen3-0.6b, course-dev-prompts-qwen]
   ladder: [python]
   needs: any
 
@@ -550,7 +554,9 @@ lessons:
   covers: [sampling-ensembles-en-zoeken#0]
   requires: [build-sampling-api]
   introduces: [c:self-consistency]
-  data: [model-qwen3-0.6b]
+  uses: [c:api, c:endpoint, c:http-request, c:openai-compatible-api, c:local-server, c:message-role, c:chat-model, c:prompt, c:json, c:open-weights, c:token, c:seed, c:temperature, c:sampling, c:greedy-decoding, c:max-tokens, c:chain-of-thought, py:urllib-request, py:json, py:dict, py:list, py:indexing, py:import, py:def, py:return, py:with, py:string-literal, py:append, py:for, py:range, py:if, py:comparison, py:none, q:choice, q:exercise-with-check, q:run-cell]
+  mentions: [c:majority-voting]
+  data: [model-qwen3-0.6b, course-dev-prompts-qwen]
   ladder: [python]
   needs: any
 
@@ -563,7 +569,9 @@ lessons:
   covers: [context-engineering#0, context-engineering#1]
   requires: [build-system-prompt]
   introduces: [c:context-engineering, c:compaction]
-  data: [model-qwen3-0.6b]
+  uses: [c:api, c:endpoint, c:http-request, c:openai-compatible-api, c:local-server, c:message-role, c:chat-model, c:prompt, c:json, c:open-weights, c:token, c:system-prompt, c:input-token, c:context-window, py:urllib-request, py:json, py:dict, py:list, py:indexing, py:import, py:def, py:return, py:with, py:string-literal, py:append, py:for, py:slicing, py:min-max, py:len, q:choice, q:exercise-with-check, q:run-cell]
+  mentions: [c:max-tokens, py:list-concatenation]
+  data: [model-qwen3-0.6b, course-dev-prompts-qwen]
   ladder: [python]
   needs: any
 
@@ -576,8 +584,9 @@ lessons:
   covers: [context-engineering#2]
   requires: [build-context-engineering]
   introduces: [c:prompt-caching]
-  mentions: [c:kv-cache]
-  data: [model-qwen3-0.6b]
+  uses: [c:api, c:endpoint, c:http-request, c:openai-compatible-api, c:local-server, c:message-role, c:chat-model, c:prompt, c:json, c:open-weights, c:token, c:system-prompt, c:input-token, c:tokenizer, c:context-window, c:context-engineering, py:urllib-request, py:json, py:dict, py:list, py:indexing, py:import, py:def, py:return, py:with, py:string-literal, py:for, py:range, py:len, py:min-max, py:if, py:comparison, q:choice, q:exercise-with-check, q:run-cell]
+  mentions: [c:kv-cache, c:max-tokens]
+  data: [model-qwen3-0.6b, course-dev-prompts-qwen]
   ladder: [python]
   needs: any
 

@@ -6,6 +6,7 @@ reads what the server got. A function that the server answers with an error hear
 check's message, as it would from a real API. The picture shows the request the learner's code sent and what came
 back (`exchange`)."""
 import contextlib
+import copy
 import html
 import io
 import json
@@ -24,8 +25,9 @@ URL = "<url>"   # in a case's arguments: the stand-in's URL, such as http://127.
 
 @dataclass
 class Case:
-    """One call of the learner's function: against a fresh server for `backend()`, with `args` (URL is the server's
-    URL) and the environment variables `env` set during the call. `judge(got, running)` says what is wrong: None when
+    """One call of the learner's function: against a fresh server for `backend()`, with a copy of `args` (URL is the
+    server's URL; with `share`, the arguments themselves, so that the judge can see what the function changed in them)
+    and the environment variables `env` set during the call. `judge(got, running)` says what is wrong: None when
     the value and the requests the server got are right, else the key of a text of the exercise; its text may use
     {got}, the value the function gave, and {call}. With `expect`, an error type, the call should stop with such an
     error: the judge then gets the error, or the value when there was none."""
@@ -35,6 +37,7 @@ class Case:
     env: dict = field(default_factory=dict)
     shown_args: tuple | None = None   # how the call is written in a message, when not with the server's URL
     expect: type | None = None
+    share: bool = False   # the arguments themselves instead of copies; the case puts them back before each call
 
 
 def _shown(v) -> str:
@@ -48,7 +51,8 @@ def call(fn, case: Case, time_limit: float = TIME_LIMIT):
     old = {k: os.environ.get(k) for k in case.env}
     os.environ.update(case.env)
     try:
-        args = tuple(running.url if a == URL else a for a in case.args)
+        # a copy: changing it changes no case, unless the case shares its arguments to see what was changed
+        args = tuple(running.url if a == URL else a if case.share else copy.deepcopy(a) for a in case.args)
         with contextlib.redirect_stdout(io.StringIO()):
             return with_time_limit(lambda: fn(*args), time_limit), None, running
     except Exception as e:   # also Timeout

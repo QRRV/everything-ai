@@ -7,7 +7,10 @@ library (http.server and json), for the lessons of domain bouwen. It answers, in
   POST /v1/chat/completions       an answer to a list of messages, with model, messages, max_tokens, temperature, top_p,
                                   seed, stop, stream (and stream_options.include_usage) and tools; a list of messages
                                   that ends with one of the assistant is a prefill, as llama.cpp's server takes it: the
-                                  answer goes on from that text
+                                  answer goes on from that text. It keeps the KV cache of the last request, as
+                                  llama.cpp's server does (prompt caching): usage.prompt_tokens_details.cached_tokens
+                                  says how many tokens of the prompt came from it, and "cache_prompt": false switches
+                                  it off for a request
   POST /v1/embeddings             the embeddings of a text or a list of texts, with model, input and encoding_format
                                   ("float", or "base64": the float32 numbers as bytes, little-endian, in base64)
   POST /v1/images/generations     images of a prompt, with model, prompt, n, size and response_format ("b64_json": a
@@ -135,8 +138,11 @@ class Model(Backend):
                 settings["stop"] = [s for s in stop if s]
             if (request.get("response_format") or {}).get("type") == "json_object":   # JSON mode
                 settings["json_object"] = True
+            # prompt caching, as llama.cpp's server does it: the KV cache of the last request is kept, and a prompt that
+            # starts the same way goes on from it; "cache_prompt": false computes the whole prompt again
             a = model.answer(request["messages"], tools=request.get("tools") or None, thinking=thinking,
-                             max_tokens=int(request.get("max_tokens") or 256), heard=shown, **settings)
+                             max_tokens=int(request.get("max_tokens") or 256), heard=shown,
+                             cache=request.get("cache_prompt", True) is not False, keep=True, **settings)
         message, finish = a["message"], a["finish"]
         thought = C.THOUGHT.match(a["text"].lstrip())
         text = message["content"]
@@ -148,7 +154,7 @@ class Model(Backend):
         if message["tool_calls"] and not cut:
             finish = "tool_calls"
         out = {"text": text, "tool_calls": [] if cut else message["tool_calls"], "finish": finish,
-               "prompt_tokens": a["prompt_tokens"], "tokens": a["tokens"]}
+               "prompt_tokens": a["prompt_tokens"], "tokens": a["tokens"], "cached_tokens": a.get("cached_tokens", 0)}
         if thinking:   # as vLLM gives it: the thought apart from the answer; a thought that never ended is all thought
             out["reasoning"] = thought.group(0).strip()[len("<think>"):-len("</think>")].strip() if thought else a["text"].replace("<think>", "", 1).strip()
             if not thought:
@@ -779,7 +785,10 @@ def _calls(calls: list, streamed: bool = False) -> list:
 
 
 def _usage(a: dict) -> dict:
-    return {"prompt_tokens": a["prompt_tokens"], "completion_tokens": a["tokens"], "total_tokens": a["prompt_tokens"] + a["tokens"]}
+    out = {"prompt_tokens": a["prompt_tokens"], "completion_tokens": a["tokens"], "total_tokens": a["prompt_tokens"] + a["tokens"]}
+    if "cached_tokens" in a:   # as OpenAI gives it: how many of the prompt's tokens came from the kept cache
+        out["prompt_tokens_details"] = {"cached_tokens": a["cached_tokens"]}
+    return out
 
 
 def _completion(a: dict, model: str, ident: str, created: int) -> dict:

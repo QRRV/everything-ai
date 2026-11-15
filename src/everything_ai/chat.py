@@ -206,6 +206,14 @@ def json_object_state(text: str) -> str | None:
     return "done" if want == "done" else "open"
 
 
+def shared_start(a: list, b: list) -> int:
+    """How many tokens two lists of tokens have in common at the start: up to the first place where they differ."""
+    n = 0
+    while n < len(a) and n < len(b) and a[n] == b[n]:
+        n += 1
+    return n
+
+
 class Chat:
     """Qwen3-0.6B, ready to answer: the chat model in float32 on the CPU, or the model and tokenizer given."""
 
@@ -214,6 +222,7 @@ class Chat:
         self.model = model if model is not None else qwen3.load(repo=qwen3.CHAT)
         self.enc = enc if enc is not None else qwen3.tokenizer()
         self.stops = {self.enc.encode_single_token(IM_END), self.enc.encode_single_token(END)}
+        self.kept = None   # with cache=True: the tokens of the last answer, its prompt and what it wrote, and their KV cache
 
     def tokens(self, text: str) -> list:
         from everything_ai import qwen3
@@ -221,7 +230,8 @@ class Chat:
 
     def answer(self, messages: list, tools: list | None = None, max_tokens: int = 256, seed: int = 0,
                temperature: float = SAMPLING["temperature"], top_p: float = SAMPLING["top_p"], top_k: int = SAMPLING["top_k"],
-               thinking: bool = False, heard=None, stop: list | None = None, json_object: bool = False) -> dict:
+               thinking: bool = False, heard=None, stop: list | None = None, json_object: bool = False,
+               cache: bool = False, keep: bool | None = None) -> dict:
         """The model's answer to `messages`: {"text": what it wrote, "message": parse(text), "prompt_tokens": ...,
         "tokens": tokens it wrote, "seconds": ..., "finish": "stop" when it ended its answer itself, "length" when it
         reached max_tokens}. Sampled with `seed` from the top_k most likely tokens that together reach top_p, at
@@ -230,7 +240,9 @@ class Chat:
         writing as soon as its answer (after the thought, in thinking mode) holds one of them: finish "stop". With
         `json_object` (JSON mode, without thinking), every token must keep the answer on its way to one JSON object, a
         prefill included: a sampled token that does not is put aside and another drawn, and the answer ends as soon
-        as the object is whole."""
+        as the object is whole. Prompt caching: with `keep` the KV cache of this answer is kept, and with `cache` the
+        tokens this prompt has in common at the start with the kept one are not computed again ("cached_tokens" says
+        how many there were); `keep` is `cache` unless given."""
         import torch
         last = messages[-1] if messages else {}
         prefilled = last.get("role") == "assistant" and not last.get("tool_calls")
@@ -241,8 +253,13 @@ class Chat:
         g = torch.Generator(device=device).manual_seed(seed)
         out, finish, start = [], "length", time.perf_counter()
         with torch.no_grad():
-            caches = [{} for _ in self.model.blocks]
-            logits = self.model(torch.tensor([ids], device=device), caches, last=True)[0, -1].float()
+            caches, cached = [{} for _ in self.model.blocks], 0
+            if cache and self.kept is not None:
+                cached = shared_start(self.kept[0], ids)
+                cached = min(cached, len(ids) - 1)   # at least the last token goes in, for the logits of the next one
+                if cached > 0:   # the keys and values of those tokens, from the kept cache
+                    caches = [{"k": c["k"][:, :, :cached], "v": c["v"][:, :, :cached]} for c in self.kept[1]]
+            logits = self.model(torch.tensor([ids[cached:]], device=device), caches, last=True)[0, -1].float()
             for _ in range(max_tokens):
                 if json_object:
                     nxt = self._json_token(logits, out, begun, temperature, top_k, top_p, g)
@@ -272,9 +289,11 @@ class Chat:
                     finish = "stop"
                     break
                 logits = self.model(torch.tensor([[nxt]], device=device), caches)[0, -1].float()
+        if cache if keep is None else keep:   # the prompt, and the tokens written that went back in: all but one that ended it
+            self.kept = ((ids + out)[:caches[0]["k"].shape[2]], caches)
         text = self.enc.decode(out)
         return {"text": text, "message": parse(text), "prompt_tokens": len(ids), "tokens": len(out),
-                "seconds": round(time.perf_counter() - start, 2), "finish": finish}
+                "seconds": round(time.perf_counter() - start, 2), "finish": finish, "cached_tokens": cached}
 
     def _json_token(self, logits, out: list, begun: str, temperature: float, top_k: int, top_p: float, g,
                     furthest: int = 5000) -> int | None:

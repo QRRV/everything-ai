@@ -25,6 +25,11 @@ RECORD, {key: ask}, and an ask is one of
         ("hosted_tools"). The detector is loaded before the first such ask, so that its time is not in the seconds.
     {"labels": side, "system": prompt, "max_tokens": n}  every question of that side of data/banking77-small.json,
         after the system prompt, greedy (temperature 0): the text of each answer and its seconds and tokens
+    {"sequence": [{"messages": [...], "cache": bool}, ...], "max_tokens": n, "seeds": k}   requests sent one after
+        the other without a stream, k times over, the k-th time with seed k - 1; "cache": false sends
+        "cache_prompt": false, so the server computes the whole prompt again. For each request: its seconds, and how
+        many of its prompt tokens came from the server's kept cache ("cached_tokens"). An answer is {"seed": s,
+        "steps": [...]}
 
 An ask whose content changed is asked again from the start, one with more seeds only for the new seeds. Timings depend
 on how busy the computer is: `--again lesson:key ...` asks those again, for a run on a quiet computer. The file is
@@ -54,7 +59,9 @@ FILES = {   # the file of each module, and its lessons
     "course-apis-qwen.json": ["build-tokens-prices", "build-call-api", "build-project-call", "build-streaming",
                               "build-choose-model", "build-where-models-run", "build-multimodal-apis", "build-ai-services"],
     "course-dev-prompts-qwen.json": ["build-sampling-api", "build-system-prompt", "build-structured-output",
-                                     "build-prompt-templates", "build-project-prompts"],
+                                     "build-prompt-templates", "build-project-prompts", "build-model-specific",
+                                     "build-defensive-prompts", "build-self-consistency", "build-context-engineering",
+                                     "build-prompt-caching"],
 }
 LESSONS = [lesson for lessons in FILES.values() for lesson in lessons]
 THREADS = 2   # the server's threads; a speed ask runs on one
@@ -100,6 +107,8 @@ def _whole(url: str, body: dict) -> dict:
            "prompt_tokens": usage["prompt_tokens"], "tokens": usage["completion_tokens"], "seconds": round(seconds, 2)}
     if "reasoning_content" in choice["message"]:
         out["reasoning"] = choice["message"]["reasoning_content"]
+    if "prompt_tokens_details" in usage:
+        out["cached_tokens"] = usage["prompt_tokens_details"]["cached_tokens"]
     return out, raw
 
 
@@ -238,7 +247,15 @@ def main(lessons: list, again: set) -> None:
                 running.backend.detect(Image.new("RGB", (64, 64)))
                 warm[0] = True
             for seed in range(len(entry["answers"]), ask["seeds"]):
-                if "turns" in ask:
+                if "sequence" in ask:
+                    steps = []
+                    for step in ask["sequence"]:
+                        body = {"model": serve.MODEL, "messages": step["messages"], "max_tokens": ask["max_tokens"],
+                                "seed": seed, "cache_prompt": step.get("cache", True)}
+                        steps.append(_whole(running.url, body)[0])
+                    entry["answers"].append({"seed": seed, "steps": steps})
+                    save(lesson, key, seed, [(a["cached_tokens"], a["seconds"]) for a in steps])
+                elif "turns" in ask:
                     messages, turns = [], []
                     for said in ask["turns"]:
                         messages.append({"role": "user", "content": said})

@@ -105,7 +105,11 @@ class Attention(nn.Module):
             cache["k"], cache["v"] = k, v
         k = k.repeat_interleave(self.h // self.kv, dim=1)   # every key and value head serves h / kv query heads
         v = v.repeat_interleave(self.h // self.kv, dim=1)
-        out = F.scaled_dot_product_attention(q, k, v, is_causal=start == 0 and t > 1)
+        if start > 0 and t > 1:   # more tokens after a kept cache, such as the rest of a prompt whose start was cached:
+            mask = torch.ones(t, start + t, dtype=torch.bool, device=q.device).tril(start)   # each sees the cache and itself
+            out = F.scaled_dot_product_attention(q, k, v, attn_mask=mask)
+        else:
+            out = F.scaled_dot_product_attention(q, k, v, is_causal=start == 0 and t > 1)
         return self.out(out.transpose(1, 2).reshape(n, t, self.h * self.dh))
 
 

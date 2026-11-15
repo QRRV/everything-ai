@@ -10,6 +10,9 @@ import math
 import time
 
 import numpy as np
+# scikit-learn loaded with the checks: its first import can take longer than the time limit of a run
+from sklearn.feature_extraction.text import TfidfVectorizer  # noqa: F401
+from sklearn.linear_model import LogisticRegression  # noqa: F401
 
 from everything_ai import paths, yours
 from everything_ai.check import FunctionBox, Mistake, kept, run_code
@@ -147,15 +150,19 @@ def size() -> dict:
 
 
 def speed() -> dict:
-    """How long the course's small model takes on this computer: training on the 300 questions, and sorting the 120."""
+    """How long the course's small model takes on this computer: training on the 300 questions, and sorting the 120,
+    on one core, as a check runs it. When other programs keep the cores busy, cores that wait for each other cost more
+    than they win: the training took 0.17 seconds on four cores and 0.02 on one while the course's tests ran beside it."""
+    from threadpoolctl import threadpool_limits
     fn = _course_train()
     texts, labels = train()
-    start = time.perf_counter()
-    pair = fn(texts, labels)
-    trained = time.perf_counter() - start
-    start = time.perf_counter()
-    predict(pair, test()[0])
-    return {"train": trained, "sort": time.perf_counter() - start}
+    with threadpool_limits(1):
+        start = time.perf_counter()
+        pair = fn(texts, labels)
+        trained = time.perf_counter() - start
+        start = time.perf_counter()
+        predict(pair, test()[0])
+        return {"train": trained, "sort": time.perf_counter() - start}
 
 
 def _nr(x: float, lang: str, digits: int = 3) -> str:

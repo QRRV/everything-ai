@@ -438,13 +438,13 @@ def _judge_ask(arg: list, asked: list, schema: dict, posts: int, want):
 ASK_CASES = [
     Case(_fresh(_BIKE_ARG, BIKE_ASKED, lambda: serve.StandIn({QUESTION: BAD}, default=_braced(GOOD))),
          (URL, _BIKE_ARG, SCHEMA, TRIES), _judge_ask(_BIKE_ARG, BIKE_ASKED, SCHEMA, 2, json.loads(GOOD)),
-         shown_args=("url", {"en": "[the question about the bike]", "nl": "[de vraag over de fiets]"}, "SCHEMA", TRIES)),
+         shown_args=("url", {"en": "[the question about the bike]", "nl": "[de vraag over de fiets]"}, "SCHEMA", TRIES), share=True),
     Case(_fresh(_BOOK_ARG, BOOK_ASKED, lambda: serve.StandIn(default=_braced(BOOK_BAD))),
          (URL, _BOOK_ARG, BOOK_SCHEMA, 2), _judge_ask(_BOOK_ARG, BOOK_ASKED, BOOK_SCHEMA, 2, None),
-         shown_args=("url", {"en": "[the question about the book]", "nl": "[de vraag over het boek]"}, "BOOK_SCHEMA", 2)),
+         shown_args=("url", {"en": "[the question about the book]", "nl": "[de vraag over het boek]"}, "BOOK_SCHEMA", 2), share=True),
     Case(_fresh(_BOOK_ARG, BOOK_ASKED, lambda: serve.StandIn(default=_braced(BOOK_GOOD))),
          (URL, _BOOK_ARG, BOOK_SCHEMA, TRIES), _judge_ask(_BOOK_ARG, BOOK_ASKED, BOOK_SCHEMA, 1, json.loads(BOOK_GOOD)),
-         shown_args=("url", {"en": "[the question about the book]", "nl": "[de vraag over het boek]"}, "BOOK_SCHEMA", TRIES)),
+         shown_args=("url", {"en": "[the question about the book]", "nl": "[de vraag over het boek]"}, "BOOK_SCHEMA", TRIES), share=True),
 ]
 
 

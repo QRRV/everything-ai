@@ -1,0 +1,28 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: build-model-specific
+minutes: 25
+title:
+  en: "Each model its own prompt"
+  nl: "Elk model een eigen prompt"
+goal:
+  en: "move a prompt to another model or other settings: run your examples with both, list what got worse, and adjust."
+  nl: "een prompt naar een ander model of andere instellingen verhuizen: je voorbeelden met beide draaien, opsommen wat slechter werd, en aanpassen."
+summary:
+  - en: "A prompt that works for one model can fail for another, or for the same model on another server: each has its own habits, settings and switches, written in its prompting guide."
+    nl: "Een prompt die bij het ene model werkt, kan bij een ander falen, of bij hetzelfde model op een andere server: elk heeft zijn eigen gewoontes, instellingen en schakelaars, beschreven in zijn prompting guide."
+  - en: "The course's prompt for an event as JSON got 8 of 12 answers right the normal way. With thinking switched on and the same 80 tokens, none: every answer ran out of tokens while Qwen3 was thinking. With 1000 tokens 4 of 12 were right, for up to 272 tokens an answer; with Qwen3's switch /no_think in the message, 8 of 12 again, in up to 24 tokens."
+    nl: "De prompt van de course voor een afspraak als JSON had op de gewone manier 8 van de 12 antwoorden goed. Met thinking aan en dezelfde 80 tokens geen enkel: elk antwoord had zijn tokens op terwijl Qwen3 nog dacht. Met 1000 tokens waren er 4 van de 12 goed, voor tot 272 tokens per antwoord; met de schakelaar /no_think van Qwen3 in het bericht weer 8 van de 12, in tot 24 tokens."
+  - en: "Moving to a new model means running your examples with the old and the new, and adjusting until nothing that was right got worse; what was already wrong before is a problem of its own."
+    nl: "Verhuizen naar een nieuw model betekent je voorbeelden draaien met het oude en het nieuwe, en aanpassen tot niets wat goed was slechter is geworden; wat eerst al fout was, is een probleem op zich."
+can_now:
+  - en: "list the examples that were right before and are wrong now"
+    nl: "de voorbeelden opsommen die eerst goed waren en nu fout zijn"
+    by: worse
+  - en: "run the same examples with other settings"
+    nl: "dezelfde voorbeelden draaien met andere instellingen"
+    by: run_examples
+  - en: "plan what to do when the model behind your app changes"
+    nl: "plannen wat je doet als het model achter je app verandert"
+    by: migrate

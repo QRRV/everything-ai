@@ -1,0 +1,28 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: build-self-consistency
+minutes: 25
+title:
+  en: "Ask more than once"
+  nl: "Meer dan één keer vragen"
+goal:
+  en: "ask the same question several times with sampling, take the final answer that comes up most often, and judge when that is worth its calls."
+  nl: "dezelfde vraag een paar keer stellen met sampling, het eindantwoord nemen dat het vaakst voorkomt, en beoordelen wanneer dat zijn aanroepen waard is."
+summary:
+  - en: "With sampling, each run of a question takes a slightly different way. Self-consistency asks the same question several times, each time with its own seed, and takes the final answer that comes up most often: majority voting over chains of thought."
+    nl: "Met sampling neemt elke run van een vraag een net iets andere weg. Self-consistency stelt dezelfde vraag een paar keer, elke keer met een eigen seed, en neemt het eindantwoord dat het vaakst voorkomt: majority voting over chains of thought."
+  - en: "The course asked Qwen3 twelve sums in words, nine times each. One answer got 9.8 of the 12 right on average, the vote of three 10.2, of five 10.5, and of all nine 11. The one sum it kept wrong, most runs got wrong the same way, and no vote fixes that."
+    nl: "De course gaf Qwen3 twaalf sommen in woorden, elk negen keer. Eén antwoord had er gemiddeld 9,8 van de 12 goed, de stemming van drie 10,2, van vijf 10,5, en van alle negen 11. De ene som die fout bleef, hadden de meeste runs op dezelfde manier fout, en dat herstelt geen stemming."
+  - en: "A vote needs answers that can be compared exactly, such as a number, and every answer is a call to wait for and pay for: use it where a wrong answer costs more than the extra calls."
+    nl: "Een stemming heeft antwoorden nodig die je precies kunt vergelijken, zoals een getal, en elk antwoord is een aanroep waar je op wacht en voor betaalt: gebruik hem waar een fout antwoord meer kost dan de extra aanroepen."
+can_now:
+  - en: "take the answer that comes up most often, and leave out runs without one"
+    nl: "het antwoord nemen dat het vaakst voorkomt, en runs zonder antwoord weglaten"
+    by: majority
+  - en: "ask the same question several times, each time with its own seed, and vote"
+    nl: "dezelfde vraag een paar keer stellen, elke keer met een eigen seed, en stemmen"
+    by: ask_many
+  - en: "judge where asking more than once pays for its calls"
+    nl: "beoordelen waar meer dan één keer vragen zijn aanroepen waard is"
+    by: worth

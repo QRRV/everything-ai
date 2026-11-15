@@ -1,0 +1,28 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: build-prompt-caching
+minutes: 25
+title:
+  en: "Pay once for the same start"
+  nl: "Eén keer betalen voor hetzelfde begin"
+goal:
+  en: "put what stays the same at the start of a prompt and what changes at the end, so that the server can keep its work on the start, and read in usage how much came from the cache."
+  nl: "wat hetzelfde blijft aan het begin van een prompt zetten en wat verandert aan het einde, zodat de server zijn werk aan het begin kan bewaren, en in usage lezen hoeveel er uit de cache kwam."
+summary:
+  - en: "A model reads the whole prompt before it writes a word, and keeps nothing between requests. With prompt caching the server keeps its work on the start of a prompt, the KV cache, and a next prompt that starts with exactly the same tokens goes on from there."
+    nl: "Een model leest de hele prompt voordat het een woord schrijft, en houdt niets vast tussen requests. Met prompt caching bewaart de server zijn werk aan het begin van een prompt, de KV cache, en een volgende prompt die met precies dezelfde tokens begint, gaat vanaf daar verder."
+  - en: "The course gave Qwen3 a bike shop's handbook of 1,038 tokens as its system prompt. Without the cache a request took 4.78 seconds; another question after the same handbook took 0.61, with 1,046 of its 1,064 tokens from the cache. With the time in front of the handbook, two prompts a minute apart had only 21 tokens in common, and each took more than 5 seconds; with the time after the question, 1,072 tokens came from the cache, in 0.58 seconds."
+    nl: "De course gaf Qwen3 het handboek van een fietsenwinkel als system prompt, 1.038 tokens. Zonder de cache duurde een request 4,78 seconden; een andere vraag na hetzelfde handboek 0,61, met 1.046 van zijn 1.064 tokens uit de cache. Met de tijd vóór het handboek hadden twee prompts een minuut na elkaar maar 21 tokens gemeen, en duurde elk meer dan 5 seconden; met de tijd na de vraag kwamen er 1.072 tokens uit de cache, in 0,58 seconden."
+  - en: "What stays the same goes first and stays exactly the same; what changes per request goes last. The cache changes what the server computes again, not what the model reads: the same question gave the same answer with and without it."
+    nl: "Wat hetzelfde blijft, gaat eerst en blijft precies hetzelfde; wat per request verandert, gaat achteraan. De cache verandert wat de server opnieuw berekent, niet wat het model leest: dezelfde vraag gaf met en zonder cache hetzelfde antwoord."
+can_now:
+  - en: "count how many tokens two prompts have in common at the start"
+    nl: "tellen hoeveel tokens twee prompts aan het begin gemeen hebben"
+    by: shared_start
+  - en: "put what changes per request after what stays the same, so that a server can keep its work"
+    nl: "wat per request verandert achter wat hetzelfde blijft zetten, zodat een server zijn werk kan bewaren"
+    by: messages_for
+  - en: "decide where a detail that differs per customer goes in a prompt"
+    nl: "beslissen waar een detail dat per klant verschilt in een prompt hoort"
+    by: breaks

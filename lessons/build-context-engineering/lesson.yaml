@@ -1,0 +1,28 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: build-context-engineering
+minutes: 30
+title:
+  en: "What goes into the window"
+  nl: "Wat er in het venster gaat"
+goal:
+  en: "choose what goes into the context window: the system prompt with notes, a window of the last messages, and a summary of what drops out."
+  nl: "kiezen wat er in het context window gaat: de system prompt met notities, een venster van de laatste berichten, en een samenvatting van wat wegvalt."
+summary:
+  - en: "A model knows of a conversation only what is in the request. Context engineering is choosing what goes in: instructions and notes that always hold, the last messages, and a summary of the older ones (compaction)."
+    nl: "Een model weet van een gesprek alleen wat in het request staat. Context engineering is kiezen wat erin gaat: instructies en notities die altijd gelden, de laatste berichten, en een samenvatting van de oudere (compaction)."
+  - en: "With the whole dinner talk, 8 of 8 answers named the nut allergy from the first message; with a window of the last 4 messages, none. A note in the system prompt brought it back in 8 of 8, a summary in 7 of 8, for 117 and 152 prompt tokens instead of 242; the summary itself took one call more."
+    nl: "Met het hele gesprek over het etentje noemden 8 van de 8 antwoorden de notenallergie uit het eerste bericht; met een venster van de laatste 4 berichten geen enkel. Een notitie in de system prompt bracht hem terug in 8 van de 8, een samenvatting in 7 van de 8, voor 117 en 152 prompt tokens in plaats van 242; de samenvatting zelf kostte één aanroep meer."
+  - en: "What must never be lost belongs in a note your code keeps and sends every time; a summary keeps only what the model that wrote it thought mattered."
+    nl: "Wat nooit verloren mag gaan, hoort in een notitie die je code bewaart en elke keer meestuurt; een samenvatting houdt alleen wat het model dat hem schreef belangrijk vond."
+can_now:
+  - en: "keep the system prompt and the last messages of a conversation"
+    nl: "de system prompt en de laatste berichten van een gesprek houden"
+    by: window
+  - en: "summarize what drops out of the window, and put the summary in the system prompt"
+    nl: "samenvatten wat uit het venster valt, en de samenvatting in de system prompt zetten"
+    by: compact
+  - en: "decide where a fact that must never be lost belongs"
+    nl: "beslissen waar een feit hoort dat nooit verloren mag gaan"
+    by: notes
