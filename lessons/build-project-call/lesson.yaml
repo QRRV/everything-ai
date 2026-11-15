@@ -1,0 +1,28 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: build-project-call
+minutes: 25
+title:
+  en: "Project: your assistant answers"
+  nl: "Project: je assistent antwoordt"
+goal:
+  en: "write the client of your own assistant, a function that sends a whole conversation to the API, and hold a conversation of several turns with it."
+  nl: "de client van je eigen assistent schrijven, een functie die een heel gesprek naar de API stuurt, en er een gesprek van meer beurten mee voeren."
+summary:
+  - en: "A model keeps nothing between requests, so your program keeps the conversation and sends all of it every turn: asked \"What is my name?\", Qwen3 named Sam in 8 of 8 runs with the earlier turn in the request, and in 0 of 8 without it."
+    nl: "Een model onthoudt niets tussen requests, dus je programma houdt het gesprek bij en stuurt het elke beurt helemaal mee: op \"What is my name?\" noemde Qwen3 Sam in 8 van de 8 runs met de eerdere beurt in het request, en in 0 van de 8 zonder."
+  - en: "An API client is one function between your program and the API, such as chat(url, messages, max_tokens): everything about HTTP and JSON stays inside it, so another server or a hosted API changes only the client."
+    nl: "Een API client is één functie tussen je programma en de API, zoals chat(url, messages, max_tokens): alles van HTTP en JSON blijft erbinnen, dus een andere server of een gehoste API verandert alleen de client."
+  - en: "A conversation is one list: each turn adds the user's message, then the assistant's answer, so every request is longer than the one before, and costs more tokens."
+    nl: "Een gesprek is één lijst: elke beurt voegt het bericht van de gebruiker toe, en daarna het antwoord van de assistant, dus elk request is langer dan het vorige, en kost meer tokens."
+can_now:
+  - en: "write a client that sends a conversation to a model's API"
+    nl: "een client schrijven die een gesprek naar de API van een model stuurt"
+    by: chat
+  - en: "keep a conversation of several turns and send it along each time"
+    nl: "een gesprek van meer beurten bijhouden en het elke keer meesturen"
+    by: talk
+  - en: "say why the whole conversation goes along with every request"
+    nl: "zeggen waarom het hele gesprek bij elk request meegaat"
+    by: why-all

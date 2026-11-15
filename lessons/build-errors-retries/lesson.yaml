@@ -1,0 +1,28 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: build-errors-retries
+minutes: 25
+title:
+  en: "When a call fails: errors, limits and retries"
+  nl: "Als een aanroep mislukt: fouten, limieten en opnieuw proberen"
+goal:
+  en: "read why a call to a model's API failed, and try again only what can work later, with waits that double."
+  nl: "lezen waarom een aanroep aan de API van een model mislukte, en alleen opnieuw proberen wat later kan lukken, met wachttijden die verdubbelen."
+summary:
+  - en: "Every response has a status code: 200 is fine, a status in the 400s says the request is wrong (400 not valid, 401 no valid key, 404 no such model), 429 says the rate limit is reached, and one from 500 up says the server has trouble. urllib raises an HTTPError for every status from 400 up; e.code is the status."
+    nl: "Elke response heeft een statuscode: 200 is goed, een status in de 400-reeks zegt dat het request niet klopt (400 niet geldig, 401 geen geldige key, 404 dat model bestaat niet), 429 zegt dat de rate limit bereikt is, en een vanaf 500 dat de server een probleem heeft. urllib geeft een HTTPError bij elke status vanaf 400; e.code is de status."
+  - en: "Only 429 and the statuses from 500 up are worth another try, and a timeout too: the same request can get another answer a moment later. A wrong request stays wrong. urlopen(request, timeout=30) stops when the server stays silent for 30 seconds."
+    nl: "Alleen 429 en de statussen vanaf 500 zijn nog een poging waard, en een timeout ook: hetzelfde request kan een moment later een ander antwoord krijgen. Een fout request blijft fout. urlopen(request, timeout=30) stopt als de server 30 seconden niets laat horen."
+  - en: "Exponential backoff waits base * 2 ** attempt seconds before each next try, or as long as Retry-After says, so retries spread out and give a busy server room; after the last try, raise passes the error on."
+    nl: "Exponential backoff wacht base * 2 ** attempt seconden vóór elke volgende poging, of zo lang als Retry-After zegt, zodat retries zich spreiden en een drukke server ruimte krijgt; na de laatste poging geeft raise de fout door."
+can_now:
+  - en: "tell from a status code whether a call is worth another try"
+    nl: "aan een statuscode zien of een aanroep nog een poging waard is"
+    by: should_retry
+  - en: "try a call again with exponential backoff, and pass on an error that will not change"
+    nl: "een aanroep opnieuw proberen met exponential backoff, en een fout doorgeven die niet verandert"
+    by: ask_again
+  - en: "explain why retries wait longer each time"
+    nl: "uitleggen waarom retries elke keer langer wachten"
+    by: crowd

@@ -1081,10 +1081,35 @@ def _copied(v):
     return copy.deepcopy(v) if isinstance(v, (list, dict)) else v
 
 
+def _held(v):
+    """A copy of what array or tensor v holds now, to see later whether it changed in place; None for other values."""
+    try:
+        if hasattr(v, "detach"):   # a PyTorch tensor
+            return v.detach().clone()
+        import numpy as np
+        return v.copy() if isinstance(v, np.ndarray) else None
+    except Exception:
+        return None
+
+
+def _still(v, held) -> bool:
+    """Whether array or tensor v still holds `held`: much faster than writing it as text at every line of a loop."""
+    if held is None:
+        return False
+    try:
+        if hasattr(v, "detach"):
+            import torch
+            return bool(torch.equal(v.detach(), held))
+        import numpy as np
+        return bool(np.array_equal(v, held))
+    except Exception:
+        return False
+
+
 def _path(run, param: str, loss, keep):
     """Run the learner's code (`run(trace)`) and write down, each time `param` changes, (its value, loss(names))."""
     path: list[tuple] = []
-    seen: list = [None, None]   # the object `param` named at the last line, and how it looked
+    seen: list = [None, None, None]   # the object `param` named at the last line, how it looked, and what it held
 
     def look(v) -> str:
         text = _short(v)
@@ -1095,8 +1120,9 @@ def _path(run, param: str, loss, keep):
             ns = frame.f_globals if frame.f_code.co_name == "<module>" else frame.f_locals
             if param in ns:
                 v = ns[param]
-                # the same number or tensor as at the last line has not changed; an array can change in place
-                if path and v is seen[0] and not hasattr(v, "shape"):
+                # the same number as at the last line has not changed; an array or a tensor can change in place, and
+                # is written as text again only when it did: a training loop of 500 steps has thousands of lines
+                if path and v is seen[0] and (not hasattr(v, "shape") or _still(v, seen[2])):
                     return local
                 now = look(v)
                 if not path or now != seen[1]:
@@ -1105,7 +1131,7 @@ def _path(run, param: str, loss, keep):
                     except Exception:
                         value = None
                     path.append((_copied(v), value))
-                seen[0], seen[1] = v, now
+                seen[0], seen[1], seen[2] = v, now, _held(v)
         return local
 
     def tracer(frame, event, arg):

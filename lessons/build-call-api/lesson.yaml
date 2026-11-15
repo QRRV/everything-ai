@@ -1,0 +1,28 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: build-call-api
+minutes: 25
+title:
+  en: "Calling a model over HTTP"
+  nl: "Een model aanroepen over HTTP"
+goal:
+  en: "send a question to a model's API with urllib, and read the text of the answer from the JSON that comes back."
+  nl: "een vraag naar de API van een model sturen met urllib, en de tekst van het antwoord lezen uit de JSON die terugkomt."
+summary:
+  - en: "An app rarely runs its model itself: it sends an HTTP request to a server's API and gets the answer back. Almost every server for language models speaks the form of OpenAI's API, so the same code reaches a hosted model and one on your own computer."
+    nl: "Een app draait zijn model zelden zelf: hij stuurt een HTTP-request naar de API van een server en krijgt het antwoord terug. Bijna elke server voor LLM's spreekt de vorm van de API van OpenAI, dus dezelfde code bereikt een gehost model en een op je eigen computer."
+  - en: "A chat answer is a POST to the endpoint /v1/chat/completions, with a JSON body: \"model\", \"messages\" and \"max_tokens\". With urllib: json.dumps(body).encode(), a Request with data= and the header Content-Type: application/json, then urlopen."
+    nl: "Een antwoord in een chat is een POST naar het endpoint /v1/chat/completions, met een JSON-body: \"model\", \"messages\" en \"max_tokens\". Met urllib: json.dumps(body).encode(), een Request met data= en de header Content-Type: application/json, en dan urlopen."
+  - en: "The text is in answer[\"choices\"][0][\"message\"][\"content\"]; finish_reason says whether the model ended the answer itself (\"stop\") or reached max_tokens (\"length\"), and usage counts the tokens in and out."
+    nl: "De tekst staat in answer[\"choices\"][0][\"message\"][\"content\"]; finish_reason zegt of het model het antwoord zelf beëindigde (\"stop\") of max_tokens bereikte (\"length\"), en usage telt de tokens erin en eruit."
+can_now:
+  - en: "write the body of a request to a model's API"
+    nl: "de body van een request aan de API van een model schrijven"
+    by: body
+  - en: "send a request with urllib and take the text out of the answer"
+    nl: "een request versturen met urllib en de tekst uit het antwoord halen"
+    by: ask
+  - en: "tell from finish_reason why an answer stopped"
+    nl: "aan finish_reason zien waarom een antwoord stopte"
+    by: finish

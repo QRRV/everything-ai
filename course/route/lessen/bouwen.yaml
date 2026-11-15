@@ -206,7 +206,9 @@ lessons:
   covers: [model-api-s#1]
   requires: [lm-tokens-outside, start-prompt-basics]
   introduces: [c:input-token, c:output-token, c:token-price]
-  data: [model-qwen3-0.6b]
+  uses: [c:token, c:tokenizer, c:token-id, c:subword, c:prompt, c:message-role, c:model, py:tiktoken, py:encode-decode, py:import, py:def, py:return, py:arithmetic, py:len, py:print, q:choice, q:exercise-with-check, q:run-cell]
+  mentions: [c:chat-template, c:max-tokens, c:system-prompt]
+  data: [model-qwen3-0.6b, tokenizer-gpt2-mit, course-apis-qwen]
   ladder: [python]
   needs: any
 
@@ -219,7 +221,9 @@ lessons:
   covers: [model-api-s#0]
   requires: [build-tokens-prices, lm-base-vs-chat, py-json]
   introduces: [c:api, c:endpoint, c:http-request, c:openai-compatible-api, c:local-server, py:urllib-request]
-  data: [model-qwen3-0.6b]
+  uses: [c:token, c:input-token, c:output-token, c:chat-model, c:base-model, c:message-role, c:json, c:byte, c:open-weights, py:json, py:dict, py:list, py:indexing, py:import, py:def, py:return, py:with, py:string-literal, q:choice, q:exercise-with-check, q:run-cell]
+  mentions: [c:max-tokens]
+  data: [model-qwen3-0.6b, course-apis-qwen]
   ladder: [python]
   needs: any
 
@@ -234,7 +238,9 @@ lessons:
   covers: []
   requires: [build-call-api, py-own-modules]
   introduces: [c:api-client]
-  data: [model-qwen3-0.6b]
+  uses: [c:api, c:endpoint, c:http-request, c:openai-compatible-api, c:input-token, c:output-token, c:chat-model, c:message-role, c:json, c:module, py:urllib-request, py:json, py:dict, py:list, py:append, py:indexing, py:import, py:def, py:return, py:with, py:tuple, q:choice, q:exercise-with-check, q:predict, q:run-cell]
+  mentions: [c:max-tokens, c:system-prompt]
+  data: [model-qwen3-0.6b, course-apis-qwen]
   ladder: [python]
   needs: any
 
@@ -247,7 +253,9 @@ lessons:
   covers: [model-api-s#2]
   requires: [build-call-api]
   introduces: [c:streaming, c:server-sent-events]
-  data: [model-qwen3-0.6b]
+  uses: [c:api, c:endpoint, c:http-request, c:openai-compatible-api, c:local-server, c:token, c:output-token, c:json, c:byte, c:newline, py:urllib-request, py:json, py:encode-decode, py:strip, py:dict, py:list, py:for, py:if, py:import, py:def, py:return, py:with, q:choice, q:exercise-with-check, q:run-cell]
+  mentions: [c:max-tokens]
+  data: [model-qwen3-0.6b, course-apis-qwen]
   ladder: [python]
   needs: any
 
@@ -258,8 +266,9 @@ lessons:
   module: apis
   idea: "A call can fail: a status code says why (a bad request, too many requests, a server error), and a timeout stops waiting; try again only what can succeed later, each time waiting longer (exponential backoff)."
   covers: [model-api-s#3]
-  requires: [build-call-api, py-errors]
+  requires: [build-call-api, py-exceptions]
   introduces: [c:http-status-code, c:rate-limit, c:timeout, c:retry, c:exponential-backoff]
+  uses: [c:api, c:endpoint, c:http-request, c:local-server, c:traceback, py:urllib-request, py:try-except, py:raise, py:json, py:for, py:range, py:if, py:comparison, py:arithmetic, py:import, py:def, py:return, py:with, py:print, q:choice, q:exercise-with-check]
   data: []
   ladder: [python]
   needs: any
@@ -274,7 +283,8 @@ lessons:
   requires: [build-errors-retries]
   introduces: [c:batch-api, c:api-key, c:environment-variable, py:os-environ]
   warns: [key]
-  data: []
+  uses: [c:api, c:endpoint, c:http-request, c:input-token, c:output-token, c:token-price, c:rate-limit, c:json, py:urllib-request, py:json, py:dict, py:list, py:for, py:import, py:def, py:return, py:arithmetic, py:with, q:choice, q:exercise-with-check]
+  data: [course-apis-qwen]
   ladder: [python]
   needs: any
 
@@ -286,8 +296,10 @@ lessons:
   idea: "A model is chosen on quality for your task, speed and price, measured on your own examples; a router sends easy questions to a small model and hard ones to a large one, and a gateway puts many models behind one address."
   covers: [modelkeuze-routing-en-open-weights#0, modelkeuze-routing-en-open-weights#1]
   requires: [build-call-api]
-  introduces: [c:model-routing, c:model-gateway]
-  data: [model-qwen3-0.6b]
+  introduces: [c:llm-routing, c:llm-gateway]
+  uses: [c:api, c:endpoint, c:openai-compatible-api, c:local-server, c:output-token, c:token-price, c:chain-of-thought, py:urllib-request, py:json, py:dict, py:list, py:for, py:if, py:comparison, py:arithmetic, py:none, py:def, py:return, q:choice, q:exercise-with-check, q:run-cell]
+  mentions: [c:reasoning-model, c:chat-template]
+  data: [model-qwen3-0.6b, course-apis-qwen]
   ladder: [python]
   needs: any
 
@@ -299,8 +311,10 @@ lessons:
   idea: "An open-weight model runs on your own computer in a local runtime such as Ollama or llama.cpp, or at a company that hosts it for you; the API stays the same, only the address changes."
   covers: [modelkeuze-routing-en-open-weights#3, modelkeuze-routing-en-open-weights#4, modelkeuze-routing-en-open-weights#5]
   requires: [build-choose-model]
-  introduces: [c:local-runtime, c:hosted-inference]
-  data: []
+  introduces: [c:local-runtime, c:inference-provider]
+  uses: [c:api, c:endpoint, c:openai-compatible-api, c:local-server, c:llm-routing, c:open-weights, c:weight, c:model-parameter, c:inference, c:byte, py:urllib-request, py:json, py:dict, py:import, py:def, py:return, py:with, py:arithmetic, q:choice, q:exercise-with-check, q:run-cell]
+  mentions: [c:quantization, c:api-key]
+  data: [model-qwen3-0.6b, course-apis-qwen]
   ladder: [python]
   needs: any
 

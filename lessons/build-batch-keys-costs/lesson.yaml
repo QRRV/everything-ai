@@ -1,0 +1,28 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: build-batch-keys-costs
+minutes: 25
+title:
+  en: "Batches, keys and the bill"
+  nl: "Batches, keys en de rekening"
+goal:
+  en: "send an API key from an environment variable instead of your code, add up what your calls cost, and know when a batch fits."
+  nl: "een API key uit een environment variable meesturen in plaats van uit je code, optellen wat je aanroepen kosten, en weten wanneer een batch past."
+summary:
+  - en: "A hosted API wants a key with every request, in the header Authorization: Bearer and the key. The key stays out of your code: it is set in the environment (export MODEL_API_KEY=… in a terminal), and the code reads it with os.environ[\"MODEL_API_KEY\"] when it runs."
+    nl: "Een gehoste API wil bij elk request een key, in de header Authorization: Bearer en de key. De key blijft uit je code: hij staat in de omgeving (export MODEL_API_KEY=… in een terminal), en de code leest hem met os.environ[\"MODEL_API_KEY\"] als hij draait."
+  - en: "A call costs prompt_tokens times the price in plus completion_tokens times the price out, per million tokens; adding up usage after every call keeps the bill in sight."
+    nl: "Een aanroep kost prompt_tokens keer de prijs erin plus completion_tokens keer de prijs eruit, per miljoen tokens; wie na elke aanroep usage optelt, houdt de rekening in zicht."
+  - en: "Many requests that may wait go as one batch: a file with one line of JSON per request, each with its own custom_id, answered within hours, often at a lower price."
+    nl: "Veel requests die mogen wachten gaan als één batch: een bestand met één regel JSON per request, elk met een eigen custom_id, beantwoord binnen uren, vaak tegen een lagere prijs."
+can_now:
+  - en: "send an API key with a request, read from an environment variable"
+    nl: "een API key met een request meesturen, gelezen uit een environment variable"
+    by: key
+  - en: "add up what a list of calls costs from their usage"
+    nl: "optellen wat een lijst aanroepen kost uit hun usage"
+    by: bill
+  - en: "tell which jobs fit a batch"
+    nl: "zeggen welke klussen in een batch passen"
+    by: batch

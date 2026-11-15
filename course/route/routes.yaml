@@ -646,6 +646,8 @@ routes:
   steps:
   # ---------- basis: fundament/start (extra in the kern) ----------
   - start-your-own-assistant
+  # ---------- basis: fundament/python (extra in the kern) ----------
+  - py-exceptions
   # ---------- basis: bouwen/werk ----------
   - build-ai-at-work
   - build-research-and-learn

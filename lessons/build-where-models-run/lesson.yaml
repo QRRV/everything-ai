@@ -1,0 +1,28 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: build-where-models-run
+minutes: 20
+title:
+  en: "Where a model runs"
+  nl: "Waar een model draait"
+goal:
+  en: "reach a model wherever it runs with one function, by its base URL and its name, and work out whether its weights fit."
+  nl: "een model bereiken waar het ook draait met één functie, via zijn base URL en zijn naam, en uitrekenen of zijn weights passen."
+summary:
+  - en: "An open-weight model runs on your own computer in a local runtime, such as Ollama, llama.cpp or the course's own server, on your own server with a GPU, or at a company that hosts it for you; a closed model only through its maker's API."
+    nl: "Een open-weight model draait op je eigen computer in een local runtime, zoals Ollama, llama.cpp of de eigen server van de course, op je eigen server met een GPU, of bij een bedrijf dat het voor je host; een gesloten model alleen via de API van de maker."
+  - en: "The request stays the same: only the base URL and the model's name change. The place decides who sees your data, what an answer costs, and how fast it comes."
+    nl: "Het request blijft hetzelfde: alleen de base URL en de naam van het model veranderen. De plek bepaalt wie je data ziet, wat een antwoord kost, en hoe snel het komt."
+  - en: "The weights take params * bits / 8 bytes: Qwen3-0.6B 2.4 GB in float32 and 1.2 GB in bfloat16, a model of 70 billion 35 GB even at 4 bits, too much for a laptop with 16 GB."
+    nl: "De weights nemen params * bits / 8 bytes in: Qwen3-0.6B 2,4 GB in float32 en 1,2 GB in bfloat16, een model van 70 miljard zelfs met 4 bits 35 GB, te veel voor een laptop met 16 GB."
+can_now:
+  - en: "call a model at any OpenAI-compatible address, by its base URL and its name"
+    nl: "een model aanroepen op elk OpenAI-compatible adres, via zijn base URL en zijn naam"
+    by: ask
+  - en: "work out how much memory the weights of a model take"
+    nl: "uitrekenen hoeveel geheugen de weights van een model innemen"
+    by: weights_gb
+  - en: "choose where a model should run, also when your data may not leave your computer"
+    nl: "kiezen waar een model moet draaien, ook als je data je computer niet mag verlaten"
+    by: where

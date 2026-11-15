@@ -46,24 +46,34 @@ def shown(path: Path) -> str:
     return "work/" + path.relative_to(paths.WORK).as_posix()
 
 
+_FOLDERS: set[str] = set()   # the projects folders this process put on the path: one, unless the work folder moved
+
+
 def on_path() -> None:
     """Make `from tools import stats` find work/projects/tools/stats.py. Last on the path, so that it never
-    hides a module Python finds elsewhere."""
+    hides a module Python finds elsewhere. The projects folder of an earlier work folder in this process (only the
+    tests move it) leaves the path, so that a package there is not found first."""
     folder().mkdir(parents=True, exist_ok=True)
-    if str(folder()) not in sys.path:
-        sys.path.append(str(folder()))
+    here = str(folder())
+    for old in _FOLDERS - {here}:
+        while old in sys.path:
+            sys.path.remove(old)
+    _FOLDERS.add(here)
+    if here not in sys.path:
+        sys.path.append(here)
 
 
 def forget() -> None:
-    """Make the next import read the project files again, so a changed file counts at once."""
-    root = str(folder()) + os.sep
+    """Make the next import read the project files again, so a changed file counts at once. Modules imported from
+    the projects folder of an earlier work folder are forgotten too."""
+    roots = tuple(f + os.sep for f in _FOLDERS | {str(folder())})
     packages = {p.name for p in folder().iterdir() if p.is_dir()} if folder().is_dir() else set()
     for name, module in list(sys.modules.items()):
         file = getattr(module, "__file__", None) or ""
         # a package folder of yours without __init__.py has no file, only a path
         where = [file] if file else [str(p) for p in (getattr(module, "__path__", None) or [])]
         # also a module without a file inside one of your packages, such as a copy of the course's version a check made
-        if (any(w.startswith(root) for w in where) or name in _STAND_INS
+        if (any(w.startswith(roots) for w in where) or name in _STAND_INS
                 or ("." in name and not file and name.split(".")[0] in packages)):
             del sys.modules[name]
     _STAND_INS.clear()

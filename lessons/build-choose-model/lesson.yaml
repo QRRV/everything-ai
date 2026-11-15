@@ -1,0 +1,28 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: build-choose-model
+minutes: 25
+title:
+  en: "Choosing a model, and routing between models"
+  nl: "Een model kiezen, en vragen verdelen over modellen"
+goal:
+  en: "choose a model by measuring it on your own questions, work out what a right answer costs, and send each question the way that fits it with a router."
+  nl: "een model kiezen door het op je eigen vragen te meten, uitrekenen wat een goed antwoord kost, en elke vraag met een router de manier op sturen die erbij past."
+summary:
+  - en: "A model is chosen on three things, measured on questions from your own task: how often it is right, how fast it answers, and what a right answer costs. A public ranking measures other tasks."
+    nl: "Je kiest een model op drie dingen, gemeten op vragen uit je eigen taak: hoe vaak het goed is, hoe snel het antwoordt, en wat een goed antwoord kost. Een openbare ranglijst meet andere taken."
+  - en: "In thinking mode a model first writes out its reasoning, which you pay for as output tokens; the course measured Qwen3-0.6B both ways on eighteen questions, and within 2,000 tokens thinking got no larger share right, for many times the tokens."
+    nl: "In thinking mode schrijft een model eerst zijn redenering uit, en die betaal je als output tokens; de course mat Qwen3-0.6B op beide manieren op achttien vragen, en binnen 2.000 tokens had thinking niet vaker gelijk, voor vele keren zoveel tokens."
+  - en: "A router sends each question to the model or way that fits it, by a rule or a small model, and is only as good as the measurement behind it; a gateway puts many models behind one address, so the router only picks a name."
+    nl: "Een router stuurt elke vraag naar het model of de manier die erbij past, met een regel of een klein model, en is zo goed als de meting erachter; een gateway zet veel modellen achter één adres, zodat de router alleen een naam kiest."
+can_now:
+  - en: "work out what a right answer costs, from the runs of a model"
+    nl: "uitrekenen wat een goed antwoord kost, uit de runs van een model"
+    by: cost_per_right
+  - en: "write a router that sends each question one of two ways"
+    nl: "een router schrijven die elke vraag een van twee kanten op stuurt"
+    by: route
+  - en: "decide which questions of an app get which model"
+    nl: "bepalen welke vragen van een app welk model krijgen"
+    by: support

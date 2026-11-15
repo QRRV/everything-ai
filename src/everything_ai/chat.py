@@ -17,9 +17,10 @@ TOOLS_HEAD = ("# Tools\n\nYou may call one or more functions to assist with the 
 TOOLS_TAIL = ("\n</tools>\n\nFor each function call, return a json object with function name and arguments within "
               "<tool_call></tool_call> XML tags:\n<tool_call>\n{\"name\": <function-name>, \"arguments\": "
               "<args-json-object>}\n</tool_call>")
-# How an answer is sampled: Qwen3's advice for non-thinking mode (README of Qwen/Qwen3-0.6B). Greedy decoding makes a
-# small model repeat itself, so the course samples, with a seed, and records what came out.
+# How an answer is sampled: Qwen3's advice for non-thinking mode, and for thinking mode (README of Qwen/Qwen3-0.6B).
+# Greedy decoding makes a small model repeat itself, so the course samples, with a seed, and records what came out.
 SAMPLING = {"temperature": 0.7, "top_p": 0.8, "top_k": 20}
+THINKING = {"temperature": 0.6, "top_p": 0.95, "top_k": 20}
 CALL = re.compile(r"<tool_call>\s*(.*?)\s*</tool_call>", re.S)
 THOUGHT = re.compile(r"<think>.*?</think>\s*", re.S)
 
@@ -147,6 +148,16 @@ class Chat:
 _LOADED = {}
 
 
+def memory_full(e: BaseException) -> bool:
+    """Whether an error says the memory ran out: Python's MemoryError, or PyTorch's, which is a RuntimeError
+    (torch.OutOfMemoryError on a GPU, "can't allocate memory" or "not enough memory" on a CPU)."""
+    if isinstance(e, MemoryError):
+        return True
+    words = str(e).lower()
+    return isinstance(e, RuntimeError) and (type(e).__name__ == "OutOfMemoryError" or any(
+        w in words for w in ("out of memory", "can't allocate memory", "not enough memory")))
+
+
 def loaded() -> Chat:
     """The chat model, loaded the first time a lesson asks for it, and then kept for the rest of the session."""
     if "chat" not in _LOADED:
@@ -161,10 +172,8 @@ def answer_live(messages: list, show, every: float = 0.2, **answer):
     show(None)
     try:
         model = loaded()
-    except MemoryError:
-        return "memory"
-    except Exception:
-        return "load"
+    except Exception as e:   # noqa: BLE001
+        return "memory" if memory_full(e) else "load"
     shown = [0.0]
 
     def heard(text):
@@ -173,8 +182,10 @@ def answer_live(messages: list, show, every: float = 0.2, **answer):
             show(text)
     try:
         return model.answer(messages, heard=heard, **answer)
-    except MemoryError:
-        return "memory"
+    except Exception as e:
+        if memory_full(e):
+            return "memory"
+        raise
 
 
 def answer_picture(text: str, note: str, title: str) -> str:

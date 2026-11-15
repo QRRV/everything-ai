@@ -1,0 +1,28 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: build-streaming
+minutes: 25
+title:
+  en: "The answer as it comes: streaming"
+  nl: "Het antwoord terwijl het komt: streaming"
+goal:
+  en: "ask a model's API for a stream, and read the pieces of the answer from its server-sent events while they come in."
+  nl: "de API van een model om een stream vragen, en de stukjes van het antwoord uit zijn server-sent events lezen terwijl ze binnenkomen."
+summary:
+  - en: "With \"stream\": true in the body, the server sends each piece of the answer as soon as it is written, instead of the whole answer at the end. The first text appears after a moment; the whole answer takes just as long."
+    nl: "Met \"stream\": true in de body stuurt de server elk stukje van het antwoord zodra het geschreven is, in plaats van het hele antwoord aan het eind. De eerste tekst verschijnt na een moment; het hele antwoord duurt even lang."
+  - en: "The pieces come as server-sent events: every event is a line that starts with data: and then JSON, with an empty line after it. The new piece is in [\"choices\"][0][\"delta\"][\"content\"]; the first delta has the role and an empty content, the last only the finish_reason, and data: [DONE] ends the stream."
+    nl: "De stukjes komen als server-sent events: elk event is een regel die begint met data: en dan JSON, met een lege regel erna. Het nieuwe stukje staat in [\"choices\"][0][\"delta\"][\"content\"]; de eerste delta heeft de rol en een lege content, de laatste alleen de finish_reason, en data: [DONE] sluit de stream af."
+  - en: "With urllib, a for loop over the response gives one line at a time, as bytes: line.decode() makes it text, and json.loads reads the part after data:."
+    nl: "Met urllib geeft een for-loop over de response één regel tegelijk, als bytes: line.decode() maakt er tekst van, en json.loads leest het deel na data:."
+can_now:
+  - en: "take the piece of the answer out of one line of a stream"
+    nl: "het stukje van het antwoord uit één regel van een stream halen"
+    by: piece
+  - en: "ask for a stream with urllib and collect its pieces while they come in"
+    nl: "met urllib om een stream vragen en de stukjes verzamelen terwijl ze binnenkomen"
+    by: stream
+  - en: "tell when a stream helps and when it does not"
+    nl: "zeggen wanneer een stream helpt en wanneer niet"
+    by: when

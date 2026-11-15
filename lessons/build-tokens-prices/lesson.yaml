@@ -1,0 +1,28 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: build-tokens-prices
+minutes: 25
+title:
+  en: "Tokens and prices: count before you send"
+  nl: "Tokens en prijzen: tel voordat je verstuurt"
+goal:
+  en: "work out what a call to a model's API costs from its tokens, and the most it can cost before you send it."
+  nl: "uitrekenen wat een aanroep aan de API van een model kost uit zijn tokens, en het meeste dat hij kan kosten voordat je hem verstuurt."
+summary:
+  - en: "A hosted API charges per million tokens, with one price for input tokens (prompt_tokens: the system prompt, the conversation, the question) and usually a higher one for output tokens (completion_tokens), which the model writes one at a time."
+    nl: "Een gehoste API rekent per miljoen tokens, met één prijs voor input tokens (prompt_tokens: de system prompt, het gesprek, de vraag) en meestal een hogere voor output tokens (completion_tokens), die het model een voor een schrijft."
+  - en: "Every model counts in its own tokens: the same text is a different number of tokens for GPT-2's tokenizer and for Qwen3's, and a Dutch text costs more tokens per word than an English one. The server also adds the tokens of the chat template."
+    nl: "Elk model telt in zijn eigen tokens: dezelfde tekst is een ander aantal tokens voor de tokenizer van GPT-2 en voor die van Qwen3, en een Nederlandse tekst kost meer tokens per woord dan een Engelse. De server voegt ook de tokens van het chat template toe."
+  - en: "A call costs tokens_in * price_in / 1_000_000 + tokens_out * price_out / 1_000_000. Before you send, you count the prompt with the model's tokenizer, and price the answer at its most, max_tokens."
+    nl: "Een aanroep kost tokens_in * price_in / 1_000_000 + tokens_out * price_out / 1_000_000. Voordat je verstuurt, tel je de prompt met de tokenizer van het model, en reken je het antwoord op zijn meest, max_tokens."
+can_now:
+  - en: "work out what a call costs from its tokens in and out"
+    nl: "uitrekenen wat een aanroep kost uit zijn tokens erin en eruit"
+    by: cost
+  - en: "count a prompt with a tokenizer and work out the most a call can cost"
+    nl: "een prompt tellen met een tokenizer en uitrekenen wat een aanroep hooguit kost"
+    by: most
+  - en: "tell where a call is cheapest to save"
+    nl: "zeggen waar je bij een aanroep het meest bespaart"
+    by: cheaper
