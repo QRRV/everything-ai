@@ -31,6 +31,10 @@ phrases:
   group: check
   en: Too slow
   nl: Te traag
+- id: check-waiting
+  group: check
+  en: Running
+  nl: Bezig
 - id: check-broken
   group: check
   en: This check is broken. That is a mistake in the course, not in your code. Please report it.

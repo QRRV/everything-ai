@@ -418,8 +418,11 @@ lessons:
   idea: "AI in the browser is written in JavaScript: a module imports another, await waits for a result while the page keeps responding, and a web worker computes beside the page; just enough to read and change the code of the next lesson."
   covers: [browser-en-on-device-ai#1]
   requires: [build-on-device, py-functions]
-  introduces: [c:javascript, c:await, c:web-worker]
+  introduces: [c:javascript, c:promise, c:await, c:web-worker]
+  uses: [c:on-device-ai, c:module, c:json, c:http-request, py:def, py:return, py:for, py:range, py:len, py:if, py:list, py:dict, py:indexing, py:none, py:json, py:urllib-request, py:import, py:print, py:arithmetic, py:comparison, q:choice, q:exercise-with-check, q:run-cell]
+  mentions: [c:transformers-js, c:dot-product]
   data: []
+  ladder: [python]
   needs: any
 
 - id: build-model-in-browser

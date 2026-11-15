@@ -1,0 +1,31 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: build-js-basics
+minutes: 25
+title:
+  en: "Just enough JavaScript"
+  nl: "Net genoeg JavaScript"
+goal:
+  en: "read and change the JavaScript that runs a model in the browser: functions and loops, await, imports and web workers."
+  nl: "de JavaScript lezen en aanpassen die een model in de browser laat draaien: functies en loops, await, imports en web workers."
+summary:
+  - en: "JavaScript is Python with braces: function, let and const, for (const x of xs), xs.length, and a ; at the end of each statement."
+    nl: "JavaScript is Python met accolades: function, let en const, for (const x of xs), xs.length, en een ; aan het eind van elke opdracht."
+  - en: "fetch gives a promise at once; await waits for its value inside an async function, and the page keeps responding meanwhile."
+    nl: "fetch geeft meteen een promise; await wacht op de waarde ervan in een functie met async ervoor, en de pagina blijft intussen reageren."
+  - en: "A module loads a library by its address with import { name } from \"...\"; heavy work goes to a web worker, so the page does not freeze."
+    nl: "Een module laadt een library via zijn adres met import { naam } from \"...\"; zwaar werk gaat naar een web worker, zodat de pagina niet vastloopt."
+can_now:
+  - en: "write a function with a loop in JavaScript"
+    nl: "een functie met een loop schrijven in JavaScript"
+    by: dot
+  - en: "fetch JSON with await in an async function"
+    nl: "JSON ophalen met await in een functie met async ervoor"
+    by: sumFrom
+  - en: "say why a model in the browser runs in a web worker"
+    nl: "zeggen waarom een model in de browser in een web worker draait"
+    by: worker
+  - en: "load a library in a JavaScript module"
+    nl: "een library laden in een JavaScript-module"
+    by: import

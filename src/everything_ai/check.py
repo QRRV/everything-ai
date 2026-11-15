@@ -454,7 +454,7 @@ def picture_of(ex: "Exercise", text, inputs: dict | None, lang: str) -> str:
     """The picture of what the learner made in exercise `ex`, as HTML text, or "" when the exercise has none.
     `text` is what is in the box, or for a find-the-bug exercise the function from the lesson's cell.
     A mistake in a picture is not caught here, so the tests see it; the lesson leaves the picture out instead."""
-    if ex.picture is None or not (isinstance(text, str) or callable(text)):
+    if ex.picture is None or not (isinstance(text, (str, dict)) or callable(text)):   # a dict: a JavaScript box's run
         return ""
     # A mistake the check sees in the text alone stops it before the code runs, such as `random.seed = 1`, which
     # would change the module for everything after it: the picture does not run that code either.

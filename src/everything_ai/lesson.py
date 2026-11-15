@@ -20,7 +20,7 @@ import urllib.parse
 
 import marimo as mo
 
-from everything_ai import __version__, chart, check as checking, course, play, plots, progress, projects, style, widgets
+from everything_ai import __version__, chart, check as checking, course, jsbox, play, plots, progress, projects, style, widgets
 from everything_ai.check import MISSING  # noqa: F401  (lessons use L.MISSING)
 
 REPO_URL = "https://github.com/QRRV/everything-ai"
@@ -49,6 +49,9 @@ _WORDS = {
         "solution_code": "The solution:", "your_answer": "Type your answer here",
         "done_before": "done", "not_done_before": "not done yet",
         "check_name": "The check", "missing_check": "This exercise has no check yet.",
+        "js_running": "Your browser runs your code in a web worker …",
+        "js_ran": "Your browser ran the check in a web worker, your code and the course's on every case, in {ms} ms.",
+        "js_stopped": "Your browser stopped your code: it was not done in time.",
     },
     "nl": {
         "about_minutes": "ongeveer {n} minuten", "extra": "verdieping", "home": "Startpagina", "lessons_nav": "Lessen",
@@ -73,6 +76,9 @@ _WORDS = {
         "solution_code": "De oplossing:", "your_answer": "Typ hier je antwoord",
         "done_before": "af", "not_done_before": "nog niet af",
         "check_name": "De check", "missing_check": "Deze oefening heeft nog geen check.",
+        "js_running": "Je browser draait je code in een web worker …",
+        "js_ran": "Je browser draaide de check in een web worker, je code en die van de course op elk geval, in {ms} ms.",
+        "js_stopped": "Je browser stopte je code: hij was niet op tijd klaar.",
     },
 }
 
@@ -359,8 +365,19 @@ class Lesson:
         saved = kept.get("text")
         # a box last checked at its start ("empty") opens with the course's start: also with a newer one, after an update
         typed = saved if saved and saved.strip() and kept.get("state") != "empty" else None
-        return mo.ui.code_editor(value=typed or ex.start, language="python",
+        language = "javascript" if isinstance(ex, jsbox.JsBox) else "python"
+        return mo.ui.code_editor(value=typed or ex.start, language=language,
                                  min_height=24 * lines + 16, debounce=600, show_copy_button=False)
+
+    def js_run(self, name: str, text):
+        """Under the box of a JavaScript exercise: runs what is in the box in a web worker in your browser, with the
+        course's solution and its known wrong versions, and gives L.check what came out."""
+        ex = self.exercise(name)
+        code = text if isinstance(text, str) else ""
+        w = jsbox.JsRun(job=ex.job(code), token=ex.token(code), limit=ex.limit,
+                        words={"running": self.w["js_running"], "ran": self.w["js_ran"], "stopped": self.w["js_stopped"]})
+        w._ea_code = code   # what is in the box: L.check knows it before the browser has run it
+        return mo.ui.anywidget(w)
 
     def sort(self, name: str, question: str = ""):
         """Put every item of a Sort exercise in a group. Your choices are kept."""
@@ -445,6 +462,8 @@ class Lesson:
         ex = self.exercise(name)
         if isinstance(getattr(value, "widget", None), widgets.Sort):
             value = dict(value.widget.value)
+        elif isinstance(getattr(value, "widget", None), jsbox.JsRun):
+            value = dict(value.widget.value, code=getattr(value.widget, "_ea_code", ""))
         elif isinstance(getattr(value, "widget", None), (widgets.Slider, play.Explore, play.Plane)):
             value = value.widget.value
         try:
@@ -452,13 +471,15 @@ class Lesson:
         except Exception:  # a mistake in the check itself, never the learner's fault
             result = checking.Result("broken", {"en": "", "nl": ""})
         text = value if isinstance(ex, checking.CodeBox) and isinstance(value, str) else None
+        if isinstance(ex, jsbox.JsBox) and isinstance(value, dict):
+            text = value.get("code")
         if text is not None and text.strip() == ex.start.strip():
             text = ""   # the start as the course gives it is not kept: the box opens with the course's start, also a newer one
-        if result.state != "broken":
+        if result.state not in ("broken", "waiting"):   # waiting: the browser has not run the code in the box yet
             progress.record_exercise(self.id, name, result.state, self.required, text=text)
             if isinstance(ex, (checking.Value, checking.Sort)) and value is not checking.MISSING and _plain_data(value):
                 progress.record_answer(self.id, name, value)
-        if result.state not in ("empty", "slow", "broken"):
+        if result.state not in ("empty", "slow", "broken", "waiting"):
             result.extra += self._picture(ex, value, inputs)
         return CheckResult(self, name, result)
 
@@ -590,7 +611,7 @@ class CheckResult:
     def _mime_(self):
         L = self.lesson
         words = {"empty": "check-empty", "error": "check-code-error", "wrong": "check-not-yet",
-                 "almost": "check-almost", "correct": "check-correct", "slow": "check-too-slow"}
+                 "almost": "check-almost", "correct": "check-correct", "slow": "check-too-slow", "waiting": "check-waiting"}
         if self.state == "broken":
             body = html.escape(L.phrase("check-broken"))
             return ("text/html", style.check_box("broken", L.phrase("check-broken").split(".")[0], body.split(".", 1)[1]))

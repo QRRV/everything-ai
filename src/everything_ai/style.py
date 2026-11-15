@@ -24,6 +24,7 @@ def tokens() -> dict:
 # 16 px line icons, stroke = currentColor (style guide, chapter 9)
 _ICONS = {
     "empty": '<circle cx="8" cy="8" r="6.2"/>',
+    "waiting": '<circle cx="8" cy="8" r="6.2" stroke-dasharray="2.4 2.4"/>',
     "wrong": '<circle cx="8" cy="8" r="6.2"/><path d="M8 1.8 A6.2 6.2 0 0 1 14.2 8 L8 8 Z" fill="currentColor" stroke="none"/>',
     "almost": '<circle cx="8" cy="8" r="6.2"/><path d="M8 1.8 A6.2 6.2 0 1 1 1.8 8 L8 8 Z" fill="currentColor" stroke="none"/>',
     "correct": '<circle cx="8" cy="8" r="7" fill="currentColor" stroke="none"/><path class="ea-tick" d="M4.8 8.3 7 10.4 11.3 5.8" stroke="var(--ea-page)" stroke-width="1.8"/>',
@@ -39,7 +40,7 @@ _ICONS = {
 
 # check state -> CSS modifier from the style guide (theme.css)
 _CHECK_CLASS = {"empty": "empty", "wrong": "notyet", "almost": "almost", "correct": "ok",
-                "error": "code", "slow": "slow", "broken": "broken"}
+                "error": "code", "slow": "slow", "broken": "broken", "waiting": "empty"}
 
 
 def icon(name: str) -> str:
