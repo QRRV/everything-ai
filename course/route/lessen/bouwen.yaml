@@ -433,8 +433,9 @@ lessons:
   idea: "A small network you trained earlier in the course goes to the browser as JSON and computes there, in a few lines of JavaScript; Transformers.js and WebLLM do the same with large open models, and the Prompt API of Chrome with one built into the browser."
   covers: [browser-en-on-device-ai#2, browser-en-on-device-ai#4, browser-en-on-device-ai#5]
   requires: [build-js-basics, torch-mlp-digits, py-json]
-  introduces: [c:transformers-js, c:webllm, c:built-in-browser-ai]
-  mentions: [c:transformer]
+  introduces: [c:transformers-js, c:webllm, c:built-in-browser-ai, c:webgpu, c:onnx, py:tolist]
+  uses: [c:on-device-ai, c:javascript, c:web-worker, c:await, c:json, c:http-request, c:mlp, c:weight, c:bias-term, c:layer, c:hidden-layer, c:neuron, c:relu, c:logit, c:model-parameter, c:float32, c:tensor, c:test-set, c:accuracy, c:epoch, c:learning-rate, c:pixel, c:open-weights, c:language-model, c:chat-model, py:def, py:return, py:import, py:json, py:dict, py:list, py:nn-linear, py:nn-module, py:forward-method, py:torch-relu, py:append, py:min-max, py:class, q:choice, q:exercise-with-check, q:run-cell]
+  mentions: [c:gpu, c:model-hub, c:embedding, c:transformer, c:pipeline]
   data: [qmnist]
   ladder: [python, torch]
   needs: any

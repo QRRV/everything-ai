@@ -48,11 +48,16 @@ function eaEncode(v, depth) {
   return {"$": "other", "text": String(v)};
 }
 
-function eaError(err) {
+function eaError(err, shift) {
   if (!(err instanceof Error)) return {"$": "error", "name": "Thrown", "message": String(err), "line": null};
   const stack = String(err.stack || "");
-  const found = stack.match(/<anonymous>:(\d+):\d+/) || stack.match(/> Function:(\d+):\d+/);
-  const line = found ? Math.max(1, Number(found[1]) - 2) : null;   // new Function puts two lines before the code
+  // the frames of the code that new Function made, innermost first (Chrome and Node, then Firefox); new Function puts
+  // two lines before the code, and the course's own code (`before`) takes `shift` lines more. The line is that of the
+  // innermost frame in the learner's code: an error in the course's code, such as its layer, called by the learner's
+  // forward, gets the line of that call, and none when the learner's code is not on the way
+  const lines = [...stack.matchAll(/<anonymous>:(\d+):\d+|> Function:(\d+):\d+/g)].map(m => Number(m[1] || m[2]) - 2 - (shift || 0));
+  let line = lines.find(n => n >= 1);
+  if (line === undefined) line = lines.length && !shift ? 1 : null;
   return {"$": "error", "name": err.name, "message": err.message, "line": line};
 }
 
@@ -62,15 +67,18 @@ function eaWithin(promise, ms) {
   return Promise.race([promise, late]).finally(() => clearTimeout(timer));
 }
 
-async function eaRunOne(code, name, cases, ms) {
+async function eaRunOne(code, name, cases, ms, before) {
   let fn;
+  // the course's own functions that the learner's code may call, such as a layer for a forward, come first
+  const pre = before ? (before.endsWith("\n") ? before : before + "\n") : "";
+  const shift = (pre.match(/\n/g) || []).length;
   try {
     // strict, as in a real module, and on the first line, so the line numbers of errors stay the learner's
-    const body = "\"use strict\"; " + code.replace(/^([ \t]*)export[ \t]+(default[ \t]+)?/gm, "$1") +
+    const body = "\"use strict\"; " + pre + code.replace(/^([ \t]*)export[ \t]+(default[ \t]+)?/gm, "$1") +
       "\n;return typeof " + name + " === \"function\" ? " + name + " : undefined;";
     fn = new Function(body)();
   } catch (err) {
-    return {"compile": eaError(err)};
+    return {"compile": eaError(err, shift)};
   }
   if (fn === undefined) return {"missing": true};
   const results = [];
@@ -84,7 +92,7 @@ async function eaRunOne(code, name, cases, ms) {
       if (v && typeof v.then === "function") v = await eaWithin(v, ms);
       results.push(eaEncode(v));
     } catch (err) {
-      results.push(eaError(err));
+      results.push(eaError(err, shift));
     }
   }
   return {"results": results};
@@ -92,7 +100,7 @@ async function eaRunOne(code, name, cases, ms) {
 
 async function eaRunAll(job) {
   const runs = {};
-  for (const [key, code] of Object.entries(job.variants)) runs[key] = await eaRunOne(code, job.name, job.cases, job.ms);
+  for (const [key, code] of Object.entries(job.variants)) runs[key] = await eaRunOne(code, job.name, job.cases, job.ms, job.before);
   return runs;
 }
 """
@@ -305,8 +313,11 @@ class JsBox(CodeBox):
     """A function in JavaScript in a code box: `function` is its name, `visible` the case of the lesson's text and
     `hidden` the others, each a tuple of arguments that JSON can carry. A mistake's `wrong` is a wrong version in
     JavaScript, which the browser runs too; `error` is a test on a JsError, and `matches(got, text)` one on the
-    outcome. Texts as in check.FunctionBox: empty, correct, wrong, almost, and any of _DEFAULTS to say it otherwise."""
+    outcome. Texts as in check.FunctionBox: empty, correct, wrong, almost, and any of _DEFAULTS to say it otherwise.
+    `before` is the course's own code that runs before every version, with functions the learner's code may call,
+    such as the course's layer under a forward; the line numbers of errors stay those of the learner's box."""
     function: str = ""
+    before: str = ""
     visible: list[tuple] = field(default_factory=list)
     hidden: list[tuple] = field(default_factory=list)
     seconds: float = 3.0          # for one call that waits (an await), on one case
@@ -332,8 +343,11 @@ class JsBox(CodeBox):
         """What the browser runs: the learner's code, the solution and every wrong version, on every case."""
         variants = {"mine": code, "solution": self.solution}
         variants.update({f"wrong:{m.key}": m.wrong for m in self.mistakes if isinstance(m.wrong, str)})
-        return {"name": self.function, "cases": [list(c) for c in self.visible + self.hidden], "variants": variants,
-                "ms": int(self.seconds * 1000)}
+        job = {"name": self.function, "cases": [list(c) for c in self.visible + self.hidden], "variants": variants,
+               "ms": int(self.seconds * 1000)}
+        if self.before:
+            job["before"] = self.before
+        return job
 
     def token(self, code: str) -> str:
         return hashlib.sha256(json.dumps(self.job(code), sort_keys=True).encode()).hexdigest()[:16]

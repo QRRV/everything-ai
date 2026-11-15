@@ -1,0 +1,31 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: build-model-in-browser
+minutes: 30
+title:
+  en: "Your model in the browser"
+  nl: "Je model in de browser"
+goal:
+  en: "bring a network you trained to a web page as JSON and compute with it in JavaScript, and know the tools that run large models in the browser."
+  nl: "een netwerk dat je trainde als JSON naar een webpagina brengen en er in JavaScript mee rekenen, en de tools kennen die grote modellen in de browser laten draaien."
+summary:
+  - en: "The weights of a network go to the page as JSON text: each tensor .tolist(), together in a dict, json.dumps; the page reads them with fetch."
+    nl: "De weights van een netwerk gaan als JSON-tekst naar de pagina: elke tensor .tolist(), samen in een dict, json.dumps; de pagina leest ze met fetch."
+  - en: "A layer gives, for each neuron, dot of its row of weights with the input plus its bias; forward is a layer, ReLU with Math.max(0, v), and a layer again."
+    nl: "Een layer geeft voor elk neuron dot van zijn rij weights met de input plus zijn bias; forward is een layer, ReLU met Math.max(0, v), en weer een layer."
+  - en: "Large models run in the browser with Transformers.js (ONNX models from Hugging Face) or WebLLM (chat models on the GPU through WebGPU); the Prompt API of Chrome uses Gemini Nano, built into the browser."
+    nl: "Grote modellen draaien in de browser met Transformers.js (ONNX-modellen van Hugging Face) of WebLLM (chat models op de GPU via WebGPU); de Prompt API van Chrome gebruikt Gemini Nano, dat in de browser is ingebouwd."
+can_now:
+  - en: "write the weights of a PyTorch network as JSON text"
+    nl: "de weights van een netwerk in PyTorch als JSON-tekst schrijven"
+    by: as_json
+  - en: "compute a layer of a network in JavaScript"
+    nl: "een layer van een netwerk in JavaScript uitrekenen"
+    by: layer
+  - en: "run a whole network forward in JavaScript"
+    nl: "een heel netwerk in JavaScript forward laten rekenen"
+    by: forward
+  - en: "say where the model of built-in browser AI comes from"
+    nl: "zeggen waar het model van ingebouwde browser-AI vandaan komt"
+    by: builtin
