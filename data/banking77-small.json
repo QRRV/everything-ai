@@ -1,0 +1,1695 @@
+{
+"about": "Questions of customers of an online bank, each with what it is about, from BANKING77 (CC-BY-4.0): 50 per label from its training set and 20 per label from its test set, for six of its 77 intents. Made with data/tools/make_banking77_small.py from https://github.com/PolyAI-LDN/task-specific-datasets/tree/57ec275d8078af65b7731c2a98be812d844a6d6b/banking_data.",
+"labels": [
+"card_arrival",
+"lost_or_stolen_card",
+"exchange_rate",
+"card_payment_wrong_exchange_rate",
+"pin_blocked",
+"request_refund"
+],
+"train": [
+[
+"card_payment_wrong_exchange_rate",
+"Hello, I believe there has been a mistake made on the exchange rate for my card. Could you please check the official interbank exchange rate for me?"
+],
+[
+"request_refund",
+"How do I get a refund for something I bought?"
+],
+[
+"pin_blocked",
+"Why is my PIN blocked?"
+],
+[
+"pin_blocked",
+"After putting in the wrong PIN too many times, I was blocked. Can you assist me in changing it?"
+],
+[
+"exchange_rate",
+"What is the present state of the exchange rate?"
+],
+[
+"card_arrival",
+"Have you sent out my card yet?"
+],
+[
+"lost_or_stolen_card",
+"My bag got stolen with all my cards. Can you please cancel my card and send a new one?"
+],
+[
+"pin_blocked",
+"I have used all my PIN tries, what now?"
+],
+[
+"card_payment_wrong_exchange_rate",
+"I exchanged Russian rubles for British pounds today and got less than I expected. Was exchange rate correct?"
+],
+[
+"card_arrival",
+"When will I get my new card?"
+],
+[
+"pin_blocked",
+"I have exceeded the number of PIN attempts"
+],
+[
+"request_refund",
+"Is there a way you can have money from a purchase I made refunded to my account."
+],
+[
+"card_payment_wrong_exchange_rate",
+"The exchange rate you're using is terrible - this can't be the official interbank exchange rate, can it?"
+],
+[
+"pin_blocked",
+"Can I use app to unblock my card?"
+],
+[
+"card_payment_wrong_exchange_rate",
+"When I purchased a product in another country the currency exchange was incorrect."
+],
+[
+"request_refund",
+"How do I get my refund back?"
+],
+[
+"card_payment_wrong_exchange_rate",
+"I did not receive the correct amount for the exchange rate."
+],
+[
+"request_refund",
+"I received the wrong color and size, can I return it?"
+],
+[
+"card_payment_wrong_exchange_rate",
+"Why was my exchange rate a different amount than usual?"
+],
+[
+"exchange_rate",
+"Why is your exchange rate different on different days?"
+],
+[
+"request_refund",
+"I would like to cancel my order."
+],
+[
+"card_payment_wrong_exchange_rate",
+"Please check the exchange rate for my payment last Saturday. I believe I have been overcharged."
+],
+[
+"pin_blocked",
+"How do I take a block off my card?"
+],
+[
+"card_arrival",
+"On the card that is coming, what's the tracking info?"
+],
+[
+"request_refund",
+"Please tell me how to get a refund for something I bought."
+],
+[
+"exchange_rate",
+"Where can I find the exchange rate for my transfer?"
+],
+[
+"pin_blocked",
+"What is the process for unlocking the pin?"
+],
+[
+"exchange_rate",
+"Where can I find your exchange rates?"
+],
+[
+"card_arrival",
+"Why hasn't my card arrived yet?"
+],
+[
+"request_refund",
+"I would like to cancel my previous purchase."
+],
+[
+"exchange_rate",
+"I am travelling and I was wondering what your exchange rates are"
+],
+[
+"pin_blocked",
+"My PIN has been blocked."
+],
+[
+"card_arrival",
+"Was there a number to track that I could get?"
+],
+[
+"request_refund",
+"What is the return policy?"
+],
+[
+"card_payment_wrong_exchange_rate",
+"I bought an item then noticed the exchange rate was wrong."
+],
+[
+"request_refund",
+"I no longer want this can i cancel my purchase?"
+],
+[
+"card_payment_wrong_exchange_rate",
+"They used the wrong rate when I made a purchase with foreign currency."
+],
+[
+"request_refund",
+"Canceling my order is what I need to do right now."
+],
+[
+"exchange_rate",
+"How are the exchange rates for transfers calculated?"
+],
+[
+"request_refund",
+"Am I able to get a refund for something I bought?"
+],
+[
+"pin_blocked",
+"When I was drunk I got my card stuck in your machine because i mis-typed my PIN. What do I need to do to get it restored?"
+],
+[
+"lost_or_stolen_card",
+"I seem to have lost my card."
+],
+[
+"request_refund",
+"Is it possible to get a refund for the item?"
+],
+[
+"card_arrival",
+"how to track the card you sent"
+],
+[
+"card_arrival",
+"My card has not been delivered yet and its been a week since I ordered it, please help"
+],
+[
+"pin_blocked",
+"My PIN got blocked, help."
+],
+[
+"request_refund",
+"I didn't enjoy my tutor session and want a refund back. How do I go about doing this?"
+],
+[
+"request_refund",
+"Give me back my money, I'm not paying the sellers. It has been a long time ago that I made an order and it just isn't coming."
+],
+[
+"exchange_rate",
+"On what do you base your exchange rates?"
+],
+[
+"card_payment_wrong_exchange_rate",
+"Why was the exchange wrong for the item I purchased?"
+],
+[
+"card_arrival",
+"Why haven't I gotten my new card?"
+],
+[
+"request_refund",
+"I want to talk about an order that I placed a long time ago and have yet to receive. I demand a refund due to lack of delivery of the product! I refuse to pay for something I never got."
+],
+[
+"card_payment_wrong_exchange_rate",
+"The exchange rate was not correct for the item I bought."
+],
+[
+"pin_blocked",
+"Where do I unblock my PIN?"
+],
+[
+"pin_blocked",
+"Can I unblock my PIN in the app?"
+],
+[
+"request_refund",
+"I've been waiting for something that i've ordered for months now and it still hasn't arrived. I genuinely don't know what this company is doing, but put plainly, i've had enough. Please issue a refund immediately, i would not like to waste anymore of my time on these people."
+],
+[
+"card_arrival",
+"What do I need to do to get my new card which I have requested 2 weeks ago?"
+],
+[
+"card_payment_wrong_exchange_rate",
+"I want to change the wrong exchange rate."
+],
+[
+"request_refund",
+"I think I deserve a refunded on a certain item."
+],
+[
+"card_payment_wrong_exchange_rate",
+"Are you sure this is the interbank exchange rate? This rate is really bad."
+],
+[
+"pin_blocked",
+"How many times can I enter a wrong PIN before it is blocked?"
+],
+[
+"lost_or_stolen_card",
+"Can you send me a new card and block my current one. I'm in Spain and my wallet was stolen."
+],
+[
+"card_arrival",
+"I'm still waiting for my card that was issued a week ago. What should I do?"
+],
+[
+"card_payment_wrong_exchange_rate",
+"I was charged the wing amount for an item."
+],
+[
+"pin_blocked",
+"Would you please unblock my pin? I don't know why, but it's blocked."
+],
+[
+"lost_or_stolen_card",
+"I want to block my card or deactivate it or something, it's been stolen and I don't want it misused. I want this handled right away."
+],
+[
+"card_arrival",
+"It's been a week since I ordered my card and it's not here. Please help?"
+],
+[
+"lost_or_stolen_card",
+"Help! I fear that my card was stolen,"
+],
+[
+"request_refund",
+"How do I cancel a purchase?"
+],
+[
+"exchange_rate",
+"what are your exchange rates at?"
+],
+[
+"card_arrival",
+"Where is my card?"
+],
+[
+"exchange_rate",
+"Do you know the rate of exchange?"
+],
+[
+"card_arrival",
+"What's the tracking on the card you sent?"
+],
+[
+"request_refund",
+"My order needs to be canceled."
+],
+[
+"card_payment_wrong_exchange_rate",
+"I'm on holiday and I noticed a different amount for exchange rate. Can you explain?"
+],
+[
+"card_payment_wrong_exchange_rate",
+"My payment had a wrong exchange rate."
+],
+[
+"lost_or_stolen_card",
+"My card is missing. Please help."
+],
+[
+"exchange_rate",
+"Please explain the exchange rates."
+],
+[
+"card_payment_wrong_exchange_rate",
+"Seems like the exchange rate for my payment last Saturday was wrong. I was charged extra."
+],
+[
+"pin_blocked",
+"My PIN was entered wrong and now I am blocked. Please unblock."
+],
+[
+"request_refund",
+"Hello, I recently ordered an item and I need help with cancelling and processing a refund as soon as possible. It's very important that I get my refund quickly."
+],
+[
+"pin_blocked",
+"How do I go about unlocking a pin?"
+],
+[
+"request_refund",
+"Can I have my money refunded for an item"
+],
+[
+"card_arrival",
+"My card hasn't came in the mail yet?"
+],
+[
+"pin_blocked",
+"I entered a wrong PIN too many times. How can I fix this?"
+],
+[
+"card_arrival",
+"Has my card been lost in delivery?"
+],
+[
+"exchange_rate",
+"What factors effect the exchange rate?"
+],
+[
+"exchange_rate",
+"How do I know what exchange rate I will get?"
+],
+[
+"card_arrival",
+"My card hasn't arrived in the mail yet. I ordered it two weeks ago. What can I do?"
+],
+[
+"card_payment_wrong_exchange_rate",
+"A foreign purchase I made has the incorrect rate applied to it."
+],
+[
+"card_arrival",
+"Is it possible for me to track the card is was mailed to me?"
+],
+[
+"request_refund",
+"I want a refund on this."
+],
+[
+"card_payment_wrong_exchange_rate",
+"Your exchange rate was off. I was charged extra on my payment that I made last Saturday."
+],
+[
+"lost_or_stolen_card",
+"Help! My card is stolen."
+],
+[
+"card_arrival",
+"I thought I would have received my new card at this point."
+],
+[
+"card_arrival",
+"My card has not come in the mail yet."
+],
+[
+"card_payment_wrong_exchange_rate",
+"There's an error with the rate that is charged."
+],
+[
+"lost_or_stolen_card",
+"My card was lost on vacation, I don't know where it is. Can you help me take care of this immediately?"
+],
+[
+"card_payment_wrong_exchange_rate",
+"Does the fee for exchange change?"
+],
+[
+"card_arrival",
+"My card hasn't shown up yet."
+],
+[
+"exchange_rate",
+"What is the exchange rate for EUR?"
+],
+[
+"card_arrival",
+"How long should it take for my new card to arrive in them mail? What should I do if I never receive it?"
+],
+[
+"pin_blocked",
+"My PIN has been blocked, what should I do?"
+],
+[
+"lost_or_stolen_card",
+"Hi, I am on vacation in Spain and someone stole my bag with my phone and wallet with cards and everything. Can you block it ASAP and then I want to order a new one also ASAP."
+],
+[
+"card_arrival",
+"Why haven't I received my new card yet?"
+],
+[
+"lost_or_stolen_card",
+"I lost track of my card"
+],
+[
+"pin_blocked",
+"My PIN is not working, can you help?"
+],
+[
+"card_payment_wrong_exchange_rate",
+"Last Saturday, I was charged extra for the exchange rate on my payment. Is something wrong?"
+],
+[
+"lost_or_stolen_card",
+"Could you assist me in finding my lost card?"
+],
+[
+"request_refund",
+"I would like to receive a refund for something I bought."
+],
+[
+"lost_or_stolen_card",
+"My card is missing."
+],
+[
+"card_arrival",
+"Can the card was sen to me be tracked?"
+],
+[
+"request_refund",
+"the product is not working, can I get a refund?"
+],
+[
+"request_refund",
+"How do I get a refund for an item I bought?"
+],
+[
+"request_refund",
+"Hello, i'd like to inform you of an issue i'm currently experiencing. The goods i have ordered from your website have still not arrived yet; it has been over 3 weeks. I would like to be issued a refund swiftly and be redirected to more competent people. Thank you for your assistance."
+],
+[
+"request_refund",
+"I need to cancel a purchase that I made the other day."
+],
+[
+"exchange_rate",
+"What exchange rate will I receive?"
+],
+[
+"request_refund",
+"What is the refund policy?"
+],
+[
+"card_arrival",
+"Is there a way to track my card?"
+],
+[
+"card_arrival",
+"Is my card lost? I am still waiting for it to be delivered."
+],
+[
+"lost_or_stolen_card",
+"Can you help me retrieve my card?"
+],
+[
+"card_payment_wrong_exchange_rate",
+"Does the exchange rate change each day for purchases? There is a different rate on my purchase."
+],
+[
+"card_payment_wrong_exchange_rate",
+"Why is the exchange rate different on my recent purchase?"
+],
+[
+"card_payment_wrong_exchange_rate",
+"I question today's exchange rate for rubles into pounds. I was hoping for a better return."
+],
+[
+"lost_or_stolen_card",
+"Please help me. My card is missing."
+],
+[
+"card_arrival",
+"I still haven't gotten my new card. When will it get here?"
+],
+[
+"exchange_rate",
+"Where does the exchange rate stand right now?"
+],
+[
+"card_payment_wrong_exchange_rate",
+"I was charged extra. Was the exchange rate for my payment last Saturday wrong?"
+],
+[
+"exchange_rate",
+"How are your exchange rates calculated?"
+],
+[
+"card_payment_wrong_exchange_rate",
+"Why on earth is the exchange rate so bad? Can I get a rate closer to the actual interbank rate?"
+],
+[
+"exchange_rate",
+"How will I know what the exchange rate is?"
+],
+[
+"card_payment_wrong_exchange_rate",
+"The wrong exchange rate was used when I purchased an item."
+],
+[
+"card_payment_wrong_exchange_rate",
+"I bought something while traveling, and the exchange rate was wrong."
+],
+[
+"card_payment_wrong_exchange_rate",
+"I bought an item at the wrong exchange rate."
+],
+[
+"card_payment_wrong_exchange_rate",
+"The exchange rate from my card payment isn't right."
+],
+[
+"exchange_rate",
+"How do you do exchanges?"
+],
+[
+"pin_blocked",
+"Where can I go to get my PIN unblocked?"
+],
+[
+"card_payment_wrong_exchange_rate",
+"I don't think the charges made when I had currency exchanged are right."
+],
+[
+"request_refund",
+"Are purchases returnable for full refund?"
+],
+[
+"exchange_rate",
+"Is the exchange rate the same on weekends as the weekdays?"
+],
+[
+"card_payment_wrong_exchange_rate",
+"Why is the exchange rate on my card payment different than I expected?"
+],
+[
+"request_refund",
+"How do I go about getting a refund?"
+],
+[
+"card_arrival",
+"Is there a way I can check on the card on route to me?"
+],
+[
+"card_arrival",
+"Why have I not gotten my new card?"
+],
+[
+"exchange_rate",
+"how do you get exchange rates"
+],
+[
+"card_payment_wrong_exchange_rate",
+"The exchange rate you are using is really bad.This can't be the official interbank exchange rate."
+],
+[
+"exchange_rate",
+"What are your exchange rates calculated from?"
+],
+[
+"lost_or_stolen_card",
+"Someone took my card without permission"
+],
+[
+"request_refund",
+"What do I need to do for a refund?"
+],
+[
+"pin_blocked",
+"How can I get my PIN unblocked?"
+],
+[
+"pin_blocked",
+"I cannot use my PIN."
+],
+[
+"exchange_rate",
+"I would like to know what your exchange rates are."
+],
+[
+"card_arrival",
+"My card still hasn't arrived after two weeks, now what?"
+],
+[
+"request_refund",
+"I bought something online a week ago and i never got it in the mail.Can I just get my money back now I don't want to keep waiting on something that isn't going to show up."
+],
+[
+"exchange_rate",
+"Is there a specific source that the exchange rate for the transfer I'm planning on making is pulled from?"
+],
+[
+"pin_blocked",
+"How can I reset my darned PIN number?"
+],
+[
+"pin_blocked",
+"Please help me unblock my pin which I put the wrong one too many times."
+],
+[
+"lost_or_stolen_card",
+"Someone stole my wallet with my card in it while vacationing in Spain. I really need my card blocked and a new one ordered."
+],
+[
+"card_payment_wrong_exchange_rate",
+"When I was traveling abroad, the exchange rate was applied wrong."
+],
+[
+"pin_blocked",
+"I have used all of my PIN tries. What should I do now?"
+],
+[
+"card_payment_wrong_exchange_rate",
+"Exchange rate on a purchase was incorrect"
+],
+[
+"card_payment_wrong_exchange_rate",
+"The exchange rate for my electronic payment is incorrect."
+],
+[
+"card_payment_wrong_exchange_rate",
+"I didn't receive the correct exchange rate for an item that I bought."
+],
+[
+"request_refund",
+"Give me a refund"
+],
+[
+"request_refund",
+"I ordered something online a while ago and I haven't gotten it. I would like a refund."
+],
+[
+"pin_blocked",
+"I can't figure out how to unblock my pin number. Can you help me?"
+],
+[
+"card_arrival",
+"I haven't received my card and am worried it is lost."
+],
+[
+"card_arrival",
+"Where is the card I ordered 2 weeks ago?"
+],
+[
+"card_payment_wrong_exchange_rate",
+"Why was I charged a higher exchange rate when I bought something abroad?"
+],
+[
+"pin_blocked",
+"How do I unblock my card?"
+],
+[
+"card_payment_wrong_exchange_rate",
+"The exchange rate for my payment last Saturday must be wrong because I was charged extra."
+],
+[
+"exchange_rate",
+"Does the exchange rate change?"
+],
+[
+"lost_or_stolen_card",
+"Help! I lost my card!"
+],
+[
+"request_refund",
+"Please help! I need a refund on a transaction on something I bought and I need the refund right away!"
+],
+[
+"exchange_rate",
+"What is my money worth in other countries?"
+],
+[
+"card_payment_wrong_exchange_rate",
+"My card payment had the wrong exchange rate"
+],
+[
+"request_refund",
+"I don't want to buy this car anymore, can I cancel the transaction and get a quick refund back?"
+],
+[
+"card_arrival",
+"where is my new card?"
+],
+[
+"card_payment_wrong_exchange_rate",
+"I have been charged way to much so something is apparently wrong with my exchange. I changed Russian Ruble into UK pounds."
+],
+[
+"card_arrival",
+"Shouldn't my new card be here by now?"
+],
+[
+"exchange_rate",
+"How are exchange rates determined?"
+],
+[
+"card_payment_wrong_exchange_rate",
+"There was a problem with the exchange rate on a purchase."
+],
+[
+"card_payment_wrong_exchange_rate",
+"I recently bought something in foreign currency and I am unsure of the exchange rate. Is this rate applied correctly?"
+],
+[
+"exchange_rate",
+"Can you tell me your exchange rates?"
+],
+[
+"card_arrival",
+"Where is the tracking number for the card?"
+],
+[
+"card_payment_wrong_exchange_rate",
+"Why was the exchange rate so wrong when I bought something!"
+],
+[
+"pin_blocked",
+"How do I make my PIN work again?"
+],
+[
+"card_arrival",
+"Can you help me track my card?"
+],
+[
+"card_payment_wrong_exchange_rate",
+"The exchange rate on my payment doesn't look right"
+],
+[
+"card_payment_wrong_exchange_rate",
+"There's an error in regards to the exchange rate for an item I bought."
+],
+[
+"pin_blocked",
+"I forgot my pin and am blocked now. Can I reset it somewhere?"
+],
+[
+"card_arrival",
+"Does the package with my card have tracking?"
+],
+[
+"card_payment_wrong_exchange_rate",
+"The currency exchange for my purchase in foreign currency is incorrect."
+],
+[
+"card_payment_wrong_exchange_rate",
+"It looks like the exchange rates on my card payment are wrong"
+],
+[
+"exchange_rate",
+"What value can I get for my currency?"
+],
+[
+"exchange_rate",
+"Will I know which exchange rate I will get?"
+],
+[
+"card_arrival",
+"Can I track the card that was just sent to me?"
+],
+[
+"pin_blocked",
+"Can you unblock my pin because I put the wrong one too many times."
+],
+[
+"card_payment_wrong_exchange_rate",
+"I bough an item and the exchange rate was incorrect."
+],
+[
+"pin_blocked",
+"Can I reset my PIN if it is blocked?"
+],
+[
+"card_arrival",
+"I'm still waiting on my new card to be delivered!"
+],
+[
+"pin_blocked",
+"I used my pin too many times."
+],
+[
+"request_refund",
+"How can i get a refund for something i just bought?"
+],
+[
+"request_refund",
+"Can you please refund my item?"
+],
+[
+"request_refund",
+"I would like to cancel my purchase."
+],
+[
+"exchange_rate",
+"How does the exchange rate work on this app?"
+],
+[
+"request_refund",
+"I need your help to get a refund for an item I just bought, can you cancel the payment since what I bought hasn't arrived yet."
+],
+[
+"request_refund",
+"What is the refund procedure?"
+],
+[
+"lost_or_stolen_card",
+"I can't find my card! What should I do?"
+],
+[
+"request_refund",
+"I want to cancel a purchase"
+],
+[
+"exchange_rate",
+"What do you think of the exchange rate?"
+],
+[
+"exchange_rate",
+"How is the current exchange rate?"
+],
+[
+"exchange_rate",
+"How can I tell what foreign exchange rate I will get?"
+],
+[
+"exchange_rate",
+"What are Interbanks current exchange rates?"
+],
+[
+"request_refund",
+"I made an online purchase and the order has not shown up. Give me my money back."
+],
+[
+"card_arrival",
+"I was issued a card about a week ago. why hasn't it come in yet?"
+],
+[
+"exchange_rate",
+"I would like to know how exchange rates are calculated when transferring funds."
+],
+[
+"pin_blocked",
+"While I was drunk, I goofed my PIN number and your machine ate my card. How can I get it back?"
+],
+[
+"request_refund",
+"I'm interested in learning more about product refunds."
+],
+[
+"exchange_rate",
+"What exchange rate is it?"
+],
+[
+"pin_blocked",
+"I need my PIN unlocked."
+],
+[
+"exchange_rate",
+"What is an exchange rate?"
+],
+[
+"request_refund",
+"I'm cancelling this charge. I still have not received what I bought from these people a while ago."
+],
+[
+"card_arrival",
+"Can I track my card while it is in the process of delivery?"
+],
+[
+"request_refund",
+"My product was faulty."
+],
+[
+"card_arrival",
+"Where is my new card if I haven't received it yet?"
+],
+[
+"exchange_rate",
+"How do you decide what your exchange rates are?"
+],
+[
+"request_refund",
+"What is the refund process?"
+],
+[
+"card_arrival",
+"I haven't received my card."
+],
+[
+"pin_blocked",
+"My PIN is unlocked, what do I do?"
+],
+[
+"request_refund",
+"I need a refund and cancel a transaction on an item I purchased and i need it as soon as possible, please!"
+],
+[
+"request_refund",
+"I have not received an item i ordered yet so i want to cancel it and get a refund. Can you please guide me on how to go about it?"
+],
+[
+"card_arrival",
+"Does the card you sent have a tracking number?"
+],
+[
+"card_arrival",
+"Is a tracking number available for the card that was just sent?"
+],
+[
+"request_refund",
+"do you offer refunds? i would like to return purchase."
+],
+[
+"lost_or_stolen_card",
+"What is the first step that I should take after my card has been stolen?"
+],
+[
+"exchange_rate",
+"How can I find your exchange rates?"
+],
+[
+"card_arrival",
+"Do you have info about the card on delivery?"
+],
+[
+"card_arrival",
+"My card hasn't arrived."
+],
+[
+"exchange_rate",
+"Is the exchange rate current?"
+],
+[
+"card_arrival",
+"Do you have a tracking number for the card I was sent?"
+],
+[
+"pin_blocked",
+"I entered my pin wrong too many times."
+],
+[
+"lost_or_stolen_card",
+"I think someone stole my card because I can't find it."
+],
+[
+"lost_or_stolen_card",
+"How do I replace a stolen card?"
+],
+[
+"exchange_rate",
+"Is there an exchange rate?"
+],
+[
+"lost_or_stolen_card",
+"What do I do if my card has been lost or stolen?"
+],
+[
+"lost_or_stolen_card",
+"I need to report a stolen card"
+],
+[
+"card_arrival",
+"What is the expected delivery date of my card?"
+],
+[
+"pin_blocked",
+"I was blocked by using the wrong pin too many times, can you help me?"
+],
+[
+"exchange_rate",
+"Could you please tell me your exchange rates?"
+],
+[
+"exchange_rate",
+"What's the process for exchanges?"
+],
+[
+"card_arrival",
+"How can I track my card's delivery?"
+],
+[
+"card_arrival",
+"I want to find out what happened to my new card?"
+],
+[
+"exchange_rate",
+"What is your opinion on the exchange rate?"
+],
+[
+"pin_blocked",
+"What steps do I take to unblock my PIN?"
+],
+[
+"pin_blocked",
+"Can you unblock my blocked pin?"
+],
+[
+"lost_or_stolen_card",
+"Report stolen card"
+],
+[
+"pin_blocked",
+"I entered in the wrong PIN. Please help me unlock my account."
+],
+[
+"lost_or_stolen_card",
+"I lost my card. Can you help me?"
+],
+[
+"pin_blocked",
+"I am locked out from entering my pin."
+],
+[
+"pin_blocked",
+"I accidentally put in the wrong pin too many times and now I need to unblock it. Can you assist with this?"
+],
+[
+"exchange_rate",
+"from where are coming your exchange rates?"
+],
+[
+"lost_or_stolen_card",
+"Has there been any activity on my card today?"
+],
+[
+"exchange_rate",
+"What's the foreign exchange rate I will receive?"
+],
+[
+"pin_blocked",
+"I can't input my pin again."
+],
+[
+"pin_blocked",
+"How can I unblock my PIN?"
+],
+[
+"pin_blocked",
+"I put the wrong pin too many times and now it is blocked. Can you help me unblock it?"
+],
+[
+"exchange_rate",
+"When exchanging, how much are the rates?"
+],
+[
+"pin_blocked",
+"My account is locked because I used the wrong pin too many times. Please help.p"
+],
+[
+"lost_or_stolen_card",
+"Who can I speak with regarding a lost card?"
+],
+[
+"exchange_rate",
+"I need to know what your exchange rates are."
+],
+[
+"exchange_rate",
+"How do you find the exchange rate?"
+],
+[
+"pin_blocked",
+"What should I do if I exceed my PIN tries?"
+],
+[
+"exchange_rate",
+"How are exchange rates calculated at this bank?"
+],
+[
+"pin_blocked",
+"I may have entered the PIN wrong and the account is blocked. What do I have to do to get it unblocked."
+],
+[
+"lost_or_stolen_card",
+"How do I deactivate a stolen card?"
+],
+[
+"pin_blocked",
+"What do I do if my PIN was blocked?"
+],
+[
+"pin_blocked",
+"I locked myself out of my account, how do I unblock my PIN?"
+],
+[
+"lost_or_stolen_card",
+"I thought I left my card at a restaurant, but they claim not to have it and now I don't have any idea where it is. I'm so worried that someone might be using it fraudulently. Is there any way to look into this?"
+],
+[
+"lost_or_stolen_card",
+"My card was stolen"
+],
+[
+"lost_or_stolen_card",
+"I can't find my card! Can you help?"
+],
+[
+"lost_or_stolen_card",
+"oh my god I lost my card! what should I do?"
+],
+[
+"lost_or_stolen_card",
+"What do I do if my card is stolen?"
+],
+[
+"lost_or_stolen_card",
+"Is there any way for you to find my card?"
+],
+[
+"lost_or_stolen_card",
+"I can't find my card, it is lost."
+],
+[
+"lost_or_stolen_card",
+"What should I do? My card has been stolen!"
+],
+[
+"lost_or_stolen_card",
+"My card has been stolen. I reported it with the police, but I need to report it with you as well."
+],
+[
+"lost_or_stolen_card",
+"help, lost my card"
+],
+[
+"lost_or_stolen_card",
+"I think my card is stolen!"
+],
+[
+"lost_or_stolen_card",
+"What can I do if I lost my card?"
+],
+[
+"lost_or_stolen_card",
+"Help Me! I lost my card. What should I do?"
+],
+[
+"lost_or_stolen_card",
+"How do I report my card as lost or stolen?"
+],
+[
+"lost_or_stolen_card",
+"Can you provide information for freezing my card immediately?"
+],
+[
+"lost_or_stolen_card",
+"My card is lost! Please help me!"
+],
+[
+"lost_or_stolen_card",
+"Are you able to guide me to my card's location?"
+],
+[
+"lost_or_stolen_card",
+"My card has been lost / stolen"
+],
+[
+"lost_or_stolen_card",
+"A fee shouldn't apply to me if my card was stolen."
+],
+[
+"lost_or_stolen_card",
+"I lost my wallet and all my cards were in it."
+],
+[
+"lost_or_stolen_card",
+"What should I do if I think my card was stolen?"
+],
+[
+"lost_or_stolen_card",
+"I've lost my card. What can I do about that?"
+]
+],
+"test": [
+[
+"request_refund",
+"How do I claim a refund?"
+],
+[
+"card_arrival",
+"Is there a way to know when my card will arrive?"
+],
+[
+"exchange_rate",
+"What foreign exchange rate will you use?"
+],
+[
+"pin_blocked",
+"I need help because I drunken blocked my card?"
+],
+[
+"lost_or_stolen_card",
+"How do I report my card lost or stolen?"
+],
+[
+"card_payment_wrong_exchange_rate",
+"I believe my card payment exchange rate is incorrect."
+],
+[
+"exchange_rate",
+"I need to know your exchange rates."
+],
+[
+"exchange_rate",
+"why do your exchange rates change"
+],
+[
+"exchange_rate",
+"How are you determining your exchange rates?"
+],
+[
+"card_payment_wrong_exchange_rate",
+"Hi, I don't think your exchange rate is right. I need you to check the official interbank exchange please."
+],
+[
+"card_payment_wrong_exchange_rate",
+"Why is your exchange rate for my card payment wrong"
+],
+[
+"card_payment_wrong_exchange_rate",
+"the conversion value for my card payments is incorrect."
+],
+[
+"pin_blocked",
+"I have exceeded the number of times I can try my PIN"
+],
+[
+"request_refund",
+"I want this amount reversed out of my account."
+],
+[
+"card_payment_wrong_exchange_rate",
+"The wrong exchange rate was used when I bought something with a foriegn currency."
+],
+[
+"card_payment_wrong_exchange_rate",
+"I'm pretty sure something went wrong with my exchange. I changed Russian Ruble to UK pounds and was charged way too much!"
+],
+[
+"lost_or_stolen_card",
+"I believe my credit card was stolen."
+],
+[
+"card_payment_wrong_exchange_rate",
+"This rate is too low. Are you sure your using the right exchange rate."
+],
+[
+"exchange_rate",
+"when does the rate get determined"
+],
+[
+"lost_or_stolen_card",
+"Some idiot stole my card."
+],
+[
+"exchange_rate",
+"what is the exchange rate?"
+],
+[
+"lost_or_stolen_card",
+"I need help with a lost card"
+],
+[
+"request_refund",
+"I would appreciate it if I could get an item refunded"
+],
+[
+"card_payment_wrong_exchange_rate",
+"The exchange rate given to me wasn't correct, after i purchased an item"
+],
+[
+"pin_blocked",
+"My account is blocked, how do I log in now"
+],
+[
+"request_refund",
+"I would like a refund on one of your products that has been sold to me"
+],
+[
+"card_arrival",
+"I still don't have my card after 2 weeks. What should I do?"
+],
+[
+"pin_blocked",
+"How can I unblock a blocked pin number for my account?"
+],
+[
+"card_arrival",
+"Where is the tracking number for the card you sent me?"
+],
+[
+"request_refund",
+"What do I need to do to get a refund?"
+],
+[
+"card_payment_wrong_exchange_rate",
+"The rate applied to my foreign purchase was incorrect"
+],
+[
+"card_arrival",
+"My card still hasn't arrived after 2 weeks. Is it lost?"
+],
+[
+"card_payment_wrong_exchange_rate",
+"How can I check the exchange rate applied to my transaction?"
+],
+[
+"lost_or_stolen_card",
+"My card is lost! What can I do?"
+],
+[
+"pin_blocked",
+"How can I unlock the pin?"
+],
+[
+"card_arrival",
+"My card has not arrived yet, where is it?"
+],
+[
+"lost_or_stolen_card",
+"My card got stolen!"
+],
+[
+"pin_blocked",
+"When I put the wrong pin too much, I got blocked, so can you help me unblock my pin"
+],
+[
+"exchange_rate",
+"What is the base of the exchange rates?"
+],
+[
+"card_arrival",
+"I am still waiting for my card after 1 week. Is this ok?"
+],
+[
+"lost_or_stolen_card",
+"I lost my card"
+],
+[
+"card_arrival",
+"How long should my new card take to arrive?"
+],
+[
+"card_payment_wrong_exchange_rate",
+"the card payment exchange rate is wrong"
+],
+[
+"lost_or_stolen_card",
+"card is lost, please help"
+],
+[
+"pin_blocked",
+"I entered the wrong pin too many times and now I am blocked. Help me unblock!"
+],
+[
+"exchange_rate",
+"I'm trying to figure out the current exchange rate."
+],
+[
+"pin_blocked",
+"Can you unblock my pin after too many wrong pin attempts?"
+],
+[
+"exchange_rate",
+"How do your exchange rates work?"
+],
+[
+"lost_or_stolen_card",
+"Are you able to locate my card?"
+],
+[
+"lost_or_stolen_card",
+"I'm in Spain and my stuff has been stolen. My card was with it and I need a new one shipped and the old one frozen."
+],
+[
+"request_refund",
+"Hello! I recently made a purchase and I'm needing to cancel my order and process a refund as soon as possible."
+],
+[
+"request_refund",
+"Hello I changed my mind and really need a refund on one of things I bought recently. Can you please cancel the transaction and get my money back. Please it's urgent."
+],
+[
+"card_arrival",
+"Do you know if there is a tracking number for the new card you sent me?"
+],
+[
+"exchange_rate",
+"Is it a good time to exchange?"
+],
+[
+"request_refund",
+"Would I be able to get a refund for something I bought?"
+],
+[
+"request_refund",
+"Hello- It is urgent I get a refund on this product. The merchant has not been helpful, what can I do now to get this resolved ASAP?"
+],
+[
+"card_arrival",
+"I'm still waiting for delivery of my new card, why is it taking so long?"
+],
+[
+"card_arrival",
+"I'm still waiting on my card to be delivered."
+],
+[
+"card_arrival",
+"i have not received my card"
+],
+[
+"exchange_rate",
+"Where do you get your exchange rates from?"
+],
+[
+"pin_blocked",
+"How many tries do I have to enter my pin before I'm blocked?"
+],
+[
+"lost_or_stolen_card",
+"Help! Someone stole my card!"
+],
+[
+"lost_or_stolen_card",
+"How do I report a stolen card?"
+],
+[
+"card_arrival",
+"My card hasn't arrived yet."
+],
+[
+"card_payment_wrong_exchange_rate",
+"I wasn't applied the correct exchange rate for an item I bought"
+],
+[
+"exchange_rate",
+"Please advise what is the exchange rate"
+],
+[
+"card_arrival",
+"What is the tracking number for the card you sent?"
+],
+[
+"exchange_rate",
+"Do you have a list of exchange rates?"
+],
+[
+"card_payment_wrong_exchange_rate",
+"I purchased something in a foreign currency but the rate applied is wrong"
+],
+[
+"lost_or_stolen_card",
+"I believe my card has been stolen, what can I do about this situation? It's urgent."
+],
+[
+"card_arrival",
+"I have been waiting longer than expected for my bank card, could you provide information on when it will arrive?"
+],
+[
+"card_payment_wrong_exchange_rate",
+"I go the wrong exchange rate applied to my purchase in a foreign country."
+],
+[
+"exchange_rate",
+"The exchange rate would be?"
+],
+[
+"card_payment_wrong_exchange_rate",
+"The incorrect rate was used in my foreign purchase"
+],
+[
+"lost_or_stolen_card",
+"What should I do if I lost my card?"
+],
+[
+"lost_or_stolen_card",
+"Oh no! I lost my card! Help!"
+],
+[
+"pin_blocked",
+"Since my pin is blocked, would you help me unblock it?"
+],
+[
+"lost_or_stolen_card",
+"Help me please! My card was stolen!"
+],
+[
+"card_arrival",
+"How do I locate my card?"
+],
+[
+"exchange_rate",
+"What is the exchange rate like on this app?"
+],
+[
+"request_refund",
+"Hi there! I need to cancel an order I recently made and start processing a refund. Can you please help me with this and set up the refund as soon as possible? It's very urgent."
+],
+[
+"card_payment_wrong_exchange_rate",
+"The exchange rate for my transaction last Saturday seems to have been wrong I got charged extra. Please fix."
+],
+[
+"pin_blocked",
+"Can I unblock my card using the app?"
+],
+[
+"lost_or_stolen_card",
+"Someone stole my wallet earlier today, not sure exactly when, probably on Piccadilly circus. Can you check if there were any attempts to use the card and obviously block it?"
+],
+[
+"request_refund",
+"I bought this item and was charged the wrong amount can I get a refund?"
+],
+[
+"pin_blocked",
+"Why did I get blocked?"
+],
+[
+"pin_blocked",
+"Can you unlock my pin? I think I entered the wrong pin too many times."
+],
+[
+"exchange_rate",
+"what are exchange rates"
+],
+[
+"request_refund",
+"I need a refund?"
+],
+[
+"request_refund",
+"I am chatting about an order from a long while back. I never got it to this day and am deeply upset by this! I want all of my money back! I just can not accept paying for something I never got."
+],
+[
+"card_payment_wrong_exchange_rate",
+"My exchange went wrong. I swapped Russian Ruble for UK pounds and was charged too much."
+],
+[
+"card_payment_wrong_exchange_rate",
+"You did not apply the correct exchange rate for an item that I bought."
+],
+[
+"card_arrival",
+"I've been waiting longer than expected for my card."
+],
+[
+"exchange_rate",
+"What are the most current exchange rates?"
+],
+[
+"card_arrival",
+"Is it normal to have to wait over a week for my new card?"
+],
+[
+"pin_blocked",
+"How do I reset my PIN?"
+],
+[
+"pin_blocked",
+"How can I unlock my pin from too many tries?"
+],
+[
+"lost_or_stolen_card",
+"My card got lost."
+],
+[
+"request_refund",
+"Get an item refund"
+],
+[
+"lost_or_stolen_card",
+"Is a copy of the police report necessary for completing the report process?"
+],
+[
+"exchange_rate",
+"What exchange rate do you use?"
+],
+[
+"request_refund",
+"Can I have a refund?"
+],
+[
+"request_refund",
+"What's the refund process?"
+],
+[
+"card_arrival",
+"How do I track my card?"
+],
+[
+"card_payment_wrong_exchange_rate",
+"I bought something, but the exchange rate looks wrong."
+],
+[
+"card_payment_wrong_exchange_rate",
+"I bought something in a foreign currency but the rate applied is wrong!"
+],
+[
+"request_refund",
+"How do I get refunded?"
+],
+[
+"pin_blocked",
+"Will you reinstate my PIN?"
+],
+[
+"pin_blocked",
+"What should I do if I've tried to enter my PIN too often?"
+],
+[
+"exchange_rate",
+"How much will I get with the exchange rate?"
+],
+[
+"exchange_rate",
+"What are your international exchange rates?"
+],
+[
+"card_arrival",
+"I still have not received my new card, I ordered over a week ago."
+],
+[
+"card_arrival",
+"How do I know when my card will arrive?"
+],
+[
+"request_refund",
+"I want to return an item."
+],
+[
+"pin_blocked",
+"Are you able to unblock my pin?"
+],
+[
+"lost_or_stolen_card",
+"Someone stole my card. I need to report it stolen. I made a police report already, but how do I report it with you?"
+],
+[
+"pin_blocked",
+"How do I unblock my PIN?"
+],
+[
+"pin_blocked",
+"What do I do if the bank machine won't accept my PIN attempts anymore?"
+],
+[
+"request_refund",
+"I ordered something ages ago online but it's simply not arriving. I've got enough! Give me back my money, I'm not paying these people."
+],
+[
+"request_refund",
+"I want a refund for my purchase"
+]
+]
+}

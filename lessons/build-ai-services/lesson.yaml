@@ -1,0 +1,31 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: build-ai-services
+minutes: 25
+title:
+  en: "Ready-made AI: vision, speech, translation and classic NLP"
+  nl: "Kant-en-klare AI: zien, spraak, vertalen en klassieke NLP"
+goal:
+  en: "know the ready-made AI services behind an API, and sort texts into your own labels with an LLM and a system prompt, reading the label safely out of the answer."
+  nl: "de kant-en-klare AI-diensten achter een API kennen, en teksten in je eigen labels sorteren met een LLM en een system prompt, waarbij je het label veilig uit het antwoord leest."
+summary:
+  - en: "For seeing, listening, speaking and translating there are ready-made services behind an API, each for one task with its own fixed answers; the classic tasks of language, such as sentiment, named entities and classification, go to such a service or to an LLM with a prompt."
+    nl: "Voor zien, luisteren, spreken en vertalen zijn er kant-en-klare diensten achter een API, elk voor één taak met zijn eigen vaste antwoorden; de klassieke taken op taal, zoals sentiment, named entities en classificatie, gaan naar zo'n dienst of naar een LLM met een prompt."
+  - en: "A system prompt that lists your labels, with temperature 0, sorts texts without any examples. Read the label out of the answer: of the labels in it, in small letters, the longest, because one label can be a piece of another; None when there is none."
+    nl: "Een system prompt die je labels opsomt, met temperature 0, sorteert teksten zonder voorbeelden. Lees het label uit het antwoord: van de labels die erin staan, in kleine letters, het langste, omdat het ene label een stuk van het andere kan zijn; None als er geen in staat."
+  - en: "Measure before you trust it: on 120 questions of customers of a bank, Qwen3-0.6B gave the right label to 99, and mixed up mostly the two labels about exchange rates."
+    nl: "Meet voordat je erop vertrouwt: op 120 vragen van klanten van een bank gaf Qwen3-0.6B er 99 het goede label, en haalde vooral de twee labels over wisselkoersen door elkaar."
+can_now:
+  - en: "read a label safely out of a model's answer"
+    nl: "een label veilig uit het antwoord van een model lezen"
+    by: parse_label
+  - en: "sort a text into your own labels through a model's API"
+    nl: "een tekst in je eigen labels sorteren via de API van een model"
+    by: label
+  - en: "choose between a ready-made service and an LLM with a prompt"
+    nl: "kiezen tussen een kant-en-klare dienst en een LLM met een prompt"
+    by: own-labels
+  - en: "read a table of what a classifier answered against what was right"
+    nl: "een tabel lezen van wat een classifier antwoordde tegenover wat goed was"
+    by: mixed

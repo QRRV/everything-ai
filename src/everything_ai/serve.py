@@ -7,6 +7,12 @@ library (http.server and json), for the lessons of domain bouwen. It answers
   POST /v1/chat/completions   an answer to a list of messages, with model, messages, max_tokens, temperature, top_p,
                               seed, stop, stream (and stream_options.include_usage) and tools
 
+A message of the user may also be a list of parts, text and images, as a multimodal API takes them: an image as a data
+URL, data:image/png;base64,... The course's chat model reads text only, so the server answers such a request with an
+error, unless the request asks for the server's own tool, {"type": "detect_objects"}: a hosted tool, which the server
+runs itself before the model answers. It lets the course's detector (everything_ai.detr) name the objects on each
+image, and gives the model those words in place of the image; the answer says what it found, under "hosted_tools".
+
 in the form of OpenAI's API, which Ollama, llama.cpp, vLLM and most hosted APIs speak as well: code a learner writes
 against this server works against those too, with another URL and a key. Behind the server is a backend: `Model`, the
 course's chat model (everything_ai.chat), or `StandIn`, which gives fixed answers at once, and on request also fails,
@@ -14,6 +20,7 @@ waits or breaks off. The checks talk to a stand-in, since the model takes second
 
 `start(backend)` starts a server in a thread of its own and gives a `Running` with its `url` and a `log` of every
 request it got, which a check reads to say what a learner's request lacked."""
+import base64
 import json
 import threading
 import time
@@ -24,9 +31,15 @@ PORT = 8765            # where the lessons start the model's server, when that p
 _STOP = object()
 
 
+DETECT = "detect_objects"   # the server's hosted tool: the course's detector names the objects on an image
+THRESHOLD = 0.9             # the score above which the detector names an object, as in cv-pretrained-detector
+MAX_PIXELS = 4096 * 4096    # the largest image the server reads
+
+
 class Backend:
     """What answers behind the server. `answer(request, heard)` gives {"text", "tool_calls", "finish", "prompt_tokens",
-    "tokens"} for a request that is valid; `heard(text)` hears the text so far while it is written, for streaming."""
+    "tokens"} for a request that is valid; `heard(text)` hears the text so far while it is written, for streaming.
+    `detect(image)` gives the kinds and scores of the objects on a PIL image, for the hosted tool."""
     model = MODEL
     key = None   # when set, a request needs the header "Authorization: Bearer <key>"
 
@@ -37,6 +50,9 @@ class Backend:
     def answer(self, request: dict, heard) -> dict:
         raise NotImplementedError
 
+    def detect(self, image) -> list[tuple[str, float]]:
+        raise NotImplementedError
+
 
 class Model(Backend):
     """The course's chat model (everything_ai.chat.loaded(), or `chat` when given), one answer at a time."""
@@ -44,6 +60,15 @@ class Model(Backend):
     def __init__(self, chat=None):
         self._chat = chat
         self._lock = threading.Lock()
+        self._detector = None
+
+    def detect(self, image) -> list[tuple[str, float]]:
+        """DETR's objects on the image, above THRESHOLD. It raises FileNotFoundError while DETR is not downloaded."""
+        from everything_ai import detr
+        with self._lock:
+            if self._detector is None:
+                self._detector = detr.load()
+            return detr.found(self._detector, image, THRESHOLD)
 
     def answer(self, request: dict, heard) -> dict:
         from everything_ai import chat as C
@@ -97,14 +122,18 @@ class StandIn(Backend):
     answer; any other question gets `default`, with {question} filled in. Tokens are counted as words. On request:
     `fail`, a list of statuses (such as [429, 503]) that the first requests get, one each, with Retry-After `retry`
     seconds; `delay` seconds before every answer; `key`, an API key that every request must carry; `calls`, a tool
-    call per question; `cut`, the number of pieces after which a stream breaks off; `model`, the name of its model."""
+    call per question; `cut`, the number of pieces after which a stream breaks off; `model`, the name of its model;
+    `objects`, what its detector finds on any image."""
 
     def __init__(self, answers=None, default="The stand-in's answer to: {question}", fail=(), retry=None, delay=0.0,
-                 key=None, calls=None, cut=None, model=MODEL):
+                 key=None, calls=None, cut=None, model=MODEL, objects=(("cup", 0.997),)):
         self.answers, self.default, self.model = dict(answers or {}), default, model
         self.fail, self.retry, self.delay, self.key = list(fail), retry, delay, key
-        self.calls, self.cut = dict(calls or {}), cut
+        self.calls, self.cut, self.objects = dict(calls or {}), cut, list(objects)
         self.seen = 0
+
+    def detect(self, image) -> list[tuple[str, float]]:
+        return list(self.objects)
 
     def before(self, request: dict):
         self.seen += 1
@@ -198,6 +227,28 @@ def _words(messages: list) -> int:
     return sum(len(str(m.get("content") or "").split()) + 3 for m in messages)
 
 
+def _part_problem(part) -> str | None:
+    """What makes one part of a message's content not valid; None when it is."""
+    if not isinstance(part, dict) or part.get("type") not in ("text", "image_url", "input_audio"):
+        return "Each part of a message's content needs a 'type': text, image_url or input_audio."
+    if part["type"] == "text":
+        return None if isinstance(part.get("text"), str) else "A part of type text needs its 'text' as a string."
+    if part["type"] == "input_audio":
+        return "The model hears no audio, and this server has no tool that listens."
+    url = part.get("image_url").get("url") if isinstance(part.get("image_url"), dict) else None
+    if not isinstance(url, str):
+        return 'A part of type image_url needs "image_url": {"url": ...}, with the image as a data URL.'
+    if url.startswith(("http://", "https://")):
+        return "This server reads an image only as a data URL, data:image/png;base64,..., not from an address."
+    if not url.startswith("data:image/") or ";base64," not in url:
+        return "The url of an image must be a data URL: data:image/png;base64, and then the image in base64."
+    try:
+        base64.b64decode(url.split(";base64,", 1)[1], validate=True)
+    except ValueError:
+        return "The image in the data URL is not valid base64."
+    return None
+
+
 def _problem(request) -> str | None:
     """What makes a request for /v1/chat/completions not valid, in OpenAI's words more or less; None when it is."""
     if not isinstance(request, dict):
@@ -208,11 +259,77 @@ def _problem(request) -> str | None:
     for m in messages:
         if not isinstance(m, dict) or m.get("role") not in ("system", "user", "assistant", "tool"):
             return "Each message needs a 'role': system, user, assistant or tool."
-        if m["role"] in ("system", "user") and not isinstance(m.get("content"), str):
-            return "A message of the system or the user needs its 'content' as a string."
+        content = m.get("content")
+        if m["role"] == "user" and isinstance(content, list):
+            for part in content:
+                problem = _part_problem(part)
+                if problem:
+                    return problem
+        elif m["role"] in ("system", "user") and not isinstance(content, str):
+            return "A message of the system or the user needs its 'content' as a string, or for the user a list of parts."
     if request.get("max_tokens") is not None and (not isinstance(request["max_tokens"], int) or request["max_tokens"] < 1):
         return "'max_tokens' must be a whole number of at least 1."
+    tools = request.get("tools")
+    if tools is not None and (not isinstance(tools, list)
+                              or any(not isinstance(t, dict) or t.get("type") not in ("function", DETECT) for t in tools)):
+        return f"'tools' must be a list of tools, each of type function or {DETECT}."
     return None
+
+
+def _images(request: dict) -> list:
+    """The images in a request's messages, as the bytes their data URLs hold, in order."""
+    return [base64.b64decode(p["image_url"]["url"].split(";base64,", 1)[1])
+            for m in request["messages"] if m.get("role") == "user" and isinstance(m.get("content"), list)
+            for p in m["content"] if p.get("type") == "image_url"]
+
+
+def named(found: list) -> str:
+    """The detector's objects in words: "cup, dining table, spoon", with a count after a kind found more than once."""
+    counts: dict = {}
+    for kind, _ in found:
+        counts[kind] = counts.get(kind, 0) + 1
+    return ", ".join(k if n == 1 else f"{k} ({n})" for k, n in counts.items())
+
+
+def _parts_or_hosted(request: dict) -> bool:
+    """Whether a request has a message whose content is a list of parts, or asks for the hosted tool."""
+    return (any(m.get("role") == "user" and isinstance(m.get("content"), list) for m in request["messages"])
+            or any(t.get("type") == DETECT for t in request.get("tools") or []))
+
+
+def _described(request: dict, backend: Backend) -> tuple[dict, list]:
+    """The request as the model reads it: every content of parts as one text, with every image replaced by the words of
+    the hosted tool, and without the hosted tool among the tools; and what the tool found, for "hosted_tools". It raises
+    ValueError for an image the server cannot read."""
+    import io
+    runs, messages, k = [], [], 0
+    for m in request["messages"]:
+        if m.get("role") != "user" or not isinstance(m.get("content"), list):
+            messages.append(m)
+            continue
+        texts = []
+        for p in m["content"]:
+            if p["type"] == "text":
+                texts.append(p["text"])
+                continue
+            k += 1
+            from PIL import Image
+            try:
+                image = Image.open(io.BytesIO(base64.b64decode(p["image_url"]["url"].split(";base64,", 1)[1])))
+                if image.width * image.height > MAX_PIXELS:
+                    raise ValueError(f"Image {k} is larger than this server reads: at most {MAX_PIXELS:,} pixels.")
+                image = image.convert("RGB")
+            except ValueError:
+                raise
+            except Exception:   # noqa: BLE001 - Pillow says so in many ways
+                raise ValueError(f"Image {k} is not an image this server can read: send a PNG, JPEG, GIF or WebP.") from None
+            found = backend.detect(image)
+            runs.append({"type": DETECT, "image": k, "found": [{"kind": c, "score": round(s, 3)} for c, s in found]})
+            texts.append(f"[Image {k}. The objects the server's detector found on it: {named(found)}.]" if found
+                         else f"[Image {k}. The server's detector found no object it knows on it.]")
+        messages.append({**m, "content": "\n".join(texts)})
+    tools = [t for t in request.get("tools") or [] if t.get("type") == "function"]
+    return {**request, "messages": messages, "tools": tools or None}, runs
 
 
 class Running:
@@ -317,22 +434,39 @@ def _handler(running_ref: list):
                 return self._send(400, _error(400, problem))
             if body.get("model") not in (None, backend.model):
                 return self._send(404, _error(404, f"The model '{body.get('model')}' does not exist here; this server has '{backend.model}'.", "model"))
+            if _images(body) and not any(t.get("type") == DETECT for t in body.get("tools") or []):
+                return self._send(400, _error(400, f"The model '{backend.model}' reads text only. To have this server name the objects on each image first, ask for its hosted tool: \"tools\": [{{\"type\": \"{DETECT}\"}}].", "messages"))
             other = backend.before(body)
             if other is not None:
                 status, headers, out = other
                 return self._send(status, out, headers)
+            runs = []
+            if _parts_or_hosted(body):
+                try:
+                    body, runs = _described(body, backend)
+                except ValueError as e:
+                    return self._send(400, _error(400, str(e), "messages"))
+                except FileNotFoundError:
+                    return self._send(503, _error(503, "The server's detector is not downloaded yet."))
+                except Exception as e:   # noqa: BLE001
+                    if _memory_full(e):
+                        return self._send(503, _error(503, MEMORY))
+                    return self._send(500, _error(500, f"The server's detector had an error: {type(e).__name__}: {e}"))
             ident, created = f"chatcmpl-{len(running_ref[0].log)}", int(time.time())
             if body.get("stream"):
-                return self._stream(backend, body, ident, created)
+                return self._stream(backend, body, ident, created, runs)
             try:
                 a = backend.answer(body, lambda text: None)
             except Exception as e:   # noqa: BLE001 - the client gets the error instead of a closed connection
                 if _memory_full(e):
                     return self._send(503, _error(503, MEMORY))
                 return self._send(500, _error(500, f"The server had an error: {type(e).__name__}: {e}"))
-            self._send(200, _completion(a, backend.model, ident, created))
+            out = _completion(a, backend.model, ident, created)
+            if runs:
+                out["hosted_tools"] = runs
+            self._send(200, out)
 
-        def _stream(self, backend, body, ident, created):
+        def _stream(self, backend, body, ident, created, runs=()):
             self.send_response(200)
             self.send_header("Content-Type", "text/event-stream")
             self.send_header("Cache-Control", "no-cache")
@@ -363,7 +497,8 @@ def _handler(running_ref: list):
                     sent[0] = text
 
             try:
-                event({"index": 0, "delta": {"role": "assistant", "content": ""}, "finish_reason": None})
+                event({"index": 0, "delta": {"role": "assistant", "content": ""}, "finish_reason": None},
+                      **({"hosted_tools": list(runs)} if runs else {}))
                 try:
                     a = backend.answer(body, heard)
                 except Broken:   # the stand-in breaks off: the connection closes without [DONE]

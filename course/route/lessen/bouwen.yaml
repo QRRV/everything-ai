@@ -326,8 +326,11 @@ lessons:
   idea: "The same messages can carry images and audio, a realtime API talks in both directions as you speak, and some tools (web search, running code) run at the provider instead of in your program."
   covers: [multimodale-realtime-en-overige-api-s#0, multimodale-realtime-en-overige-api-s#3]
   requires: [build-call-api]
-  introduces: [c:multimodal-api, c:realtime-api, c:hosted-tool]
-  data: []
+  introduces: [c:multimodal-api, c:realtime-api, c:hosted-tool, c:content-part, c:base64, c:data-url, py:open-binary, py:base64]
+  uses: [c:api, c:endpoint, c:http-request, c:openai-compatible-api, c:local-server, c:json, c:byte, c:token, c:input-token, c:message-role, py:urllib-request, py:json, py:open, py:with, py:encode-decode, py:dict, py:list, py:indexing, py:def, py:return, py:import, py:string-literal, q:choice, q:exercise-with-check, q:run-cell]
+  mentions: [c:max-tokens, c:object-detection, c:tool-call]
+  data: [model-qwen3-0.6b, model-detr-resnet50, course-apis-qwen, course-photos]
+  ladder: [python]
   needs: any
 
 - id: build-embeddings-api
@@ -352,7 +355,9 @@ lessons:
   covers: [klassieke-ai-diensten-via-api-s#0, klassieke-ai-diensten-via-api-s#1]
   requires: [build-call-api]
   introduces: [c:ai-service, c:classic-nlp-task]
-  data: [model-qwen3-0.6b]
+  uses: [c:api, c:endpoint, c:http-request, c:openai-compatible-api, c:local-server, c:prompt, c:zero-shot-prompting, c:message-role, c:token, c:input-token, c:output-token, c:json, py:urllib-request, py:json, py:for, py:if, py:none, py:len, py:comparison, py:bool, py:dict, py:list, py:indexing, py:def, py:return, py:import, q:choice, q:exercise-with-check, q:run-cell]
+  mentions: [c:max-tokens, c:temperature, c:system-prompt, c:label, c:classification, c:text-classification]
+  data: [model-qwen3-0.6b, course-apis-qwen, banking77-small]
   ladder: [python]
   needs: any
 
@@ -377,9 +382,11 @@ lessons:
   idea: "For one fixed task, such as sorting messages, a small model trained on a few hundred examples can beat an LLM with a prompt in quality, speed and price; the LLM wins when there are no labels or the task keeps changing."
   covers: [klassieke-ai-diensten-via-api-s#4]
   requires: [build-ai-services, ml-sklearn, ml-f1-score]
-  introduces: [c:task-specific-model]
-  data: [model-qwen3-0.6b]
-  ladder: [python]
+  introduces: [c:task-specific-model, c:tf-idf, c:macro-averaging]
+  uses: [c:ai-service, c:classic-nlp-task, c:classification, c:logistic-regression, c:softmax, c:f1-score, c:harmonic-mean, c:precision, c:recall, c:true-positive, c:false-positive, c:false-negative, c:test-set, c:train-set, c:vector, c:token-price, c:prompt, c:zero-shot-prompting, py:sklearn-fit-predict, py:np-array, py:np-sum, py:np-mean, py:boolean-mask, py:comparison, py:import, py:def, py:return, py:for, py:list, py:tuple, q:choice, q:exercise-with-check, q:slider-task]
+  mentions: [c:label, c:accuracy, c:vocabulary]
+  data: [banking77-small, course-apis-qwen]
+  ladder: [python, numpy]
   needs: any
 
 - id: build-on-device

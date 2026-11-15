@@ -257,3 +257,15 @@ def prepare(photo) -> torch.Tensor:
     x = np.asarray(img.resize((w, h), Image.BILINEAR), dtype=np.float32) / 255
     x = (x - np.array(MEAN, dtype=np.float32)) / np.array(STD, dtype=np.float32)
     return torch.from_numpy(x).permute(2, 0, 1).unsqueeze(0).contiguous()
+
+
+def found(model: DETR, photo, threshold: float = 0.9) -> list[tuple[str, float]]:
+    """What DETR finds on a photo (a path or a PIL image): the kind and the score of every query whose score is above
+    `threshold`, the surest first. A query's score is the highest probability softmax gives a kind other than
+    "no object", as in the lesson cv-pretrained-detector."""
+    with torch.no_grad():
+        logits, _ = model(prepare(photo))
+    p = torch.softmax(logits[0], dim=-1)[:, :-1]
+    scores, kinds = p.max(dim=-1)
+    out = [(KINDS[int(k)], float(s)) for s, k in zip(scores, kinds) if float(s) > threshold]
+    return sorted(out, key=lambda f: -f[1])

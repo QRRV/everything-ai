@@ -1,0 +1,31 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: build-multimodal-apis
+minutes: 25
+title:
+  en: "Beyond text: images, audio and realtime"
+  nl: "Meer dan tekst: beelden, audio en realtime"
+goal:
+  en: "send an image with a question to a model's API, as a data URL in a list of content parts, and know when a realtime API or a hosted tool fits."
+  nl: "een beeld met een vraag naar de API van een model sturen, als data-URL in een lijst met content parts, en weten wanneer een realtime API of een hosted tool past."
+summary:
+  - en: "A message's content can be a list of parts, each with its type: \"text\" for words, \"image_url\" for an image, \"input_audio\" for sound. A multimodal model reads them itself; the course's server, whose Qwen3 reads text only, first lets a detector name the objects on each image."
+    nl: "De content van een bericht kan een lijst met delen zijn, elk met zijn type: \"text\" voor woorden, \"image_url\" voor een beeld, \"input_audio\" voor geluid. Een multimodaal model leest ze zelf; de server van de course, waarvan Qwen3 alleen tekst leest, laat eerst een detector de voorwerpen op elk beeld benoemen."
+  - en: "An image goes along as a data URL: open(path, \"rb\") reads its bytes, base64.b64encode(data).decode() writes them as text, a third longer, and \"data:image/png;base64,\" goes in front."
+    nl: "Een beeld gaat mee als data-URL: open(path, \"rb\") leest de bytes, base64.b64encode(data).decode() schrijft ze als tekst, een derde langer, en \"data:image/png;base64,\" komt ervoor."
+  - en: "A hosted tool runs at the provider: you only name it in the request's tools, as web search or running code. A realtime API keeps a connection open both ways, for a conversation by voice in which you can cut in."
+    nl: "Een hosted tool draait bij de aanbieder: je noemt hem alleen in de tools van het request, zoals zoeken op het web of code uitvoeren. Een realtime API houdt een verbinding in beide richtingen open, voor een gesprek met je stem waarin je ertussen kunt komen."
+can_now:
+  - en: "turn an image file into a data URL"
+    nl: "van een beeldbestand een data-URL maken"
+    by: data_url
+  - en: "send a question and an image as two parts of one message, with a hosted tool"
+    nl: "een vraag en een beeld als twee delen van één bericht versturen, met een hosted tool"
+    by: ask_photo
+  - en: "tell what a model got when a tool stood between the image and the model"
+    nl: "zeggen wat een model kreeg toen er een tool tussen het beeld en het model stond"
+    by: fruit
+  - en: "tell when a voice app needs a realtime API"
+    nl: "zeggen wanneer een spraakapp een realtime API nodig heeft"
+    by: realtime

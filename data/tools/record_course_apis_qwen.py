@@ -15,6 +15,11 @@ RECORD, {key: ask}, and an ask is one of
     {"speed": "float32" | "bfloat16", "messages": [...], "max_tokens": n}   the chat model in that dtype on one thread,
         without the server: how many tokens it writes per second
     {"count": [text, ...]}                              how many tokens each text has, with Qwen3's tokenizer
+    {"image": name, "question": q, "max_tokens": n, "seeds": k}   a question about data/photos/<name>.png, sent as a
+        data URL with the server's hosted tool detect_objects, without a stream; it keeps what the tool found
+        ("hosted_tools"). The detector is loaded before the first such ask, so that its time is not in the seconds.
+    {"labels": side, "system": prompt, "max_tokens": n}  every question of that side of data/banking77-small.json,
+        after the system prompt, greedy (temperature 0): the text of each answer and its seconds and tokens
 
 An ask whose content changed is asked again from the start, one with more seeds only for the new seeds. Timings depend
 on how busy the computer is: `--again lesson:key ...` asks those again, for a run on a quiet computer. The file is
@@ -23,6 +28,7 @@ written after every answer. Run from the course folder, with the chat model down
 
     uv run python data/tools/record_course_apis_qwen.py [lesson-id ...] [--again lesson:key ...]
 """
+import base64
 import importlib.util
 import json
 import os
@@ -41,7 +47,7 @@ from everything_ai import chat, hub, paths, qwen3, serve  # noqa: E402
 
 OUT = paths.ROOT / "data" / "course-apis-qwen.json"
 LESSONS = ["build-tokens-prices", "build-call-api", "build-project-call", "build-streaming", "build-choose-model",
-           "build-where-models-run"]
+           "build-where-models-run", "build-multimodal-apis", "build-ai-services"]
 THREADS = 2   # the server's threads; a speed ask runs on one
 
 
@@ -115,7 +121,32 @@ def _stream(url: str, body: dict) -> dict:
             "pieces": len(pieces), "times": times, "lines": lines[:6] + lines[-4:] if len(lines) > 10 else lines}
 
 
+def _image(url: str, ask: dict, seed: int) -> dict:
+    data = (paths.ROOT / "data" / "photos" / f"{ask['image']}.png").read_bytes()
+    content = [{"type": "text", "text": ask["question"]},
+               {"type": "image_url", "image_url": {"url": "data:image/png;base64," + base64.b64encode(data).decode()}}]
+    body = {"model": serve.MODEL, "messages": [{"role": "user", "content": content}], "max_tokens": ask["max_tokens"],
+            "seed": seed, "tools": [{"type": serve.DETECT}]}
+    a, raw = _whole(url, body)
+    a["hosted_tools"] = raw["hosted_tools"]
+    return a
+
+
+def _labels(url: str, ask: dict) -> list:
+    rows = json.loads((paths.ROOT / "data" / "banking77-small.json").read_text(encoding="utf-8"))[ask["labels"]]
+    out = []
+    for label, text in rows:
+        body = {"model": serve.MODEL, "max_tokens": ask["max_tokens"], "temperature": 0,
+                "messages": [{"role": "system", "content": ask["system"]}, {"role": "user", "content": text}]}
+        a, _ = _whole(url, body)
+        out.append({"label": label, "text": a["text"], "seconds": a["seconds"], "prompt_tokens": a["prompt_tokens"],
+                    "tokens": a["tokens"]})
+    return out
+
+
 def _answer(url: str, ask: dict, messages: list, seed: int) -> dict:
+    if "image" in ask:
+        return _image(url, ask, seed)
     body = {"model": serve.MODEL, "messages": messages, "max_tokens": ask["max_tokens"], "seed": seed}
     if ask.get("think"):
         body["chat_template_kwargs"] = {"enable_thinking": True}
@@ -155,6 +186,7 @@ def main(lessons: list, again: set) -> None:
         out["code"] = _code()
         OUT.write_text(json.dumps(out, ensure_ascii=False, indent=1) + "\n", encoding="utf-8")
         print(*said, flush=True)
+    warm = [False]
     for lesson in lessons:
         C = _checks(lesson)
         part = out["parts"].setdefault(lesson, {})
@@ -177,6 +209,15 @@ def main(lessons: list, again: set) -> None:
                     entry["answers"].append(_speed(ask))
                     save(lesson, key, entry["answers"][-1]["per_second"], "tokens/s")
                 continue
+            if "labels" in ask:
+                if not entry["answers"]:
+                    entry["answers"] = _labels(running.url, ask)
+                    save(lesson, key, len(entry["answers"]), "answers")
+                continue
+            if "image" in ask and not warm[0]:   # load the detector before the first image ask is timed
+                from PIL import Image
+                running.backend.detect(Image.new("RGB", (64, 64)))
+                warm[0] = True
             for seed in range(len(entry["answers"]), ask["seeds"]):
                 if "turns" in ask:
                     messages, turns = [], []
@@ -188,7 +229,7 @@ def main(lessons: list, again: set) -> None:
                     entry["answers"].append({"seed": seed, "turns": turns})
                     save(lesson, key, seed, [a["prompt_tokens"] for a in turns])
                 else:
-                    a = _answer(running.url, ask, ask["messages"], seed)
+                    a = _answer(running.url, ask, ask.get("messages"), seed)
                     entry["answers"].append({"seed": seed, **a})
                     save(lesson, key, seed, a["tokens"], a["finish"], a.get("first"), repr(a["text"][:70]))
     running.stop()

@@ -308,3 +308,9 @@ path = "data/online-retail-baskets.csv.gz"
 precedence = "override"
 SPDX-FileCopyrightText = "2015 Daqing Chen (Online Retail, UCI Machine Learning Repository, https://doi.org/10.24432/C5BW33; the orders as sets of products, made for Everything AI)"
 SPDX-License-Identifier = "CC-BY-4.0"
+
+[[annotations]]
+path = "data/banking77-small.json"
+precedence = "override"
+SPDX-FileCopyrightText = "2020 PolyAI (BANKING77, Casanueva and others, https://arxiv.org/abs/2003.04807; a subset made for Everything AI)"
+SPDX-License-Identifier = "CC-BY-4.0"

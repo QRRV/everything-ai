@@ -1,0 +1,31 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: build-llm-or-small-model
+minutes: 25
+title:
+  en: "A large model or a small one?"
+  nl: "Een groot model of een klein?"
+goal:
+  en: "train a small model for one fixed task on sorted examples, measure it with the macro F1 against an LLM with a prompt, and choose between them on quality, speed and price."
+  nl: "een klein model voor één vaste taak trainen op gesorteerde voorbeelden, het met de macro F1 meten tegen een LLM met een prompt, en kiezen op kwaliteit, snelheid en prijs."
+summary:
+  - en: "A task-specific model learns one task from sorted examples: TfidfVectorizer turns each text into a vector of word weights (fit_transform on the training texts, transform on new ones), and LogisticRegression learns a label from those vectors."
+    nl: "Een taakspecifiek model leert één taak van gesorteerde voorbeelden: TfidfVectorizer maakt van elke tekst een vector met gewogen woorden (fit_transform op de trainingsteksten, transform op nieuwe), en LogisticRegression leert een label uit die vectoren."
+  - en: "The macro F1 is the mean of the F1 of each label, so every label counts as much. On 120 questions of customers of a bank, the small model trained on 50 per label reached 0.934, against 0.823 for Qwen3-0.6B with a prompt; with 5 per label it was still below."
+    nl: "De macro F1 is het gemiddelde van de F1 van elk label, zodat elk label even zwaar telt. Op 120 vragen van klanten van een bank haalde het kleine model, getraind op 50 per label, 0,934, tegen 0,823 voor Qwen3-0.6B met een prompt; met 5 per label zat het er nog onder."
+  - en: "The small model sorts in a fraction of a second, is 32 kB and costs only the computer it runs on. The LLM wins when there are no sorted examples, when the labels keep changing, or when the task needs knowledge of the world or a text as its answer."
+    nl: "Het kleine model sorteert in een fractie van een seconde, is 32 kB en kost alleen de computer waarop het draait. Het LLM wint als er geen gesorteerde voorbeelden zijn, als de labels steeds veranderen, of als de taak kennis van de wereld of een tekst als antwoord nodig heeft."
+can_now:
+  - en: "train a small text classifier with TF-IDF and logistic regression"
+    nl: "een kleine text classifier trainen met TF-IDF en logistische regressie"
+    by: train_small
+  - en: "work out the macro F1 of a classifier with several labels"
+    nl: "de macro F1 uitrekenen van een classifier met meerdere labels"
+    by: macro_f1
+  - en: "tell when an LLM with a prompt beats a small model of your own"
+    nl: "zeggen wanneer een LLM met een prompt een eigen klein model verslaat"
+    by: when-llm
+  - en: "measure a model on texts it never learned from"
+    nl: "een model meten op teksten waarvan het nooit leerde"
+    by: test-set

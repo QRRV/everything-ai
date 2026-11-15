@@ -186,11 +186,28 @@ def _label(text: str) -> str:
     return f'<div style="font-family:var(--ea-font-ui);font-size:12px;color:var(--ea-ink-2)">{html.escape(text)}</div>'
 
 
+def trimmed(value, words: dict | None = None):
+    """A request or an answer as a picture shows it: a data URL cut after its start, and a list of more than eight
+    numbers, such as an embedding, cut after four, each with how long it was. `words` has "data" and "numbers", with
+    {n}, in the lesson's language, and "thousands", the sign between thousands in it ("," or ".")."""
+    words = {"data": "… {n} characters in all", "numbers": "… {n} numbers in all", "thousands": ",", **(words or {})}
+    sep = words["thousands"]
+    if isinstance(value, str) and value.startswith("data:") and len(value) > 80:
+        return value[:60] + words["data"].format(n=f"{len(value):,}".replace(",", sep))
+    if isinstance(value, list) and len(value) > 8 and all(isinstance(v, (int, float)) and not isinstance(v, bool) for v in value):
+        return value[:4] + [words["numbers"].format(n=f"{len(value):,}".replace(",", sep))]
+    if isinstance(value, list):
+        return [trimmed(v, words) for v in value]
+    if isinstance(value, dict):
+        return {k: trimmed(v, words) for k, v in value.items()}
+    return value
+
+
 def exchange(seen, fn_name: str, case: Case, words: dict, entries: int = 1) -> str:
     """The first `entries` requests the learner's function sent to the stand-in in `case`, each with what came back:
     a picture of their own request. `words` (in the lesson's language) has "title", "request" ({method} and
-    {path}), "headers", "answer" ({status}), "stream" ({n}) and "none" (nothing was sent). "" while the code does
-    not run or makes no such function."""
+    {path}), "headers", "answer" ({status}), "stream" ({n}) and "none" (nothing was sent), and may have "data" and
+    "numbers" for `trimmed`. "" while the code does not run or makes no such function."""
     run = seen.run
     fn = run.names.get(fn_name) if run is not None and run.error is None else None
     if not callable(fn):
@@ -206,12 +223,12 @@ def exchange(seen, fn_name: str, case: Case, words: dict, entries: int = 1) -> s
         if shown:
             body.append(_label(words["headers"] + " " + ", ".join(f"{k}: {v}" for k, v in shown.items())))
         if entry["body"] not in (None, ""):
-            body.append(_json_html(entry["body"]))
+            body.append(_json_html(trimmed(entry["body"], words)))
         answer = entry.get("answer")
         body.append(_label(words["answer"].format(status=entry["status"])))
         if isinstance(answer, int):
             body.append(_label(words["stream"].format(n=answer)))
         elif answer is not None:
-            body.append(_json_html(answer, answer=entry["status"] == 200))
+            body.append(_json_html(trimmed(answer, words), answer=entry["status"] == 200))
     return yours.figure(words["title"], "".join(body), alt=words["title"])
 

@@ -641,6 +641,40 @@ def download_card(ask: str, button, failed: str | None = None) -> mo.Html:
                    f'<div class="ea-download-button">{button}</div></div>')
 
 
+def pins_or_stop(button, texts: dict, files: list) -> None:
+    """Stop the cell with `texts["ask"]` and the button until every pinned file of `files`, a list of (repo, filename)
+    as in everything_ai.hub.PINNED, is downloaded; a click downloads the missing ones, with the progress in the cell.
+    `texts` has "ask", "busy" ({done} and {total} in MB, for all missing files together), "no_net", "not_pinned",
+    "no_room" and "failed" ({why}), in the lesson's language."""
+    import errno
+    import urllib.error
+
+    from everything_ai import hub
+    missing = [pin for pin in files if hub.pinned(*pin) is None]
+    failed = None
+    if missing and button.value:
+        total = round(sum(hub.PINNED[pin]["size"] for pin in missing) / 1e6)
+        shown, before = [-1], [0]
+
+        def progress(done, size):
+            mb = int((before[0] + done) / 1e6)
+            if mb // 20 != shown[0] // 20:   # every 20 MB
+                shown[0] = mb
+                mo.output.replace(mo.md(texts["busy"].format(done=mb, total=total)))
+        try:
+            for pin in missing:
+                hub.download(*pin, progress=progress)
+                before[0] += hub.PINNED[pin]["size"]
+        except hub.NotPinned:
+            failed = texts["not_pinned"]
+        except (urllib.error.URLError, TimeoutError, ConnectionError):
+            failed = texts["no_net"]
+        except OSError as e:
+            failed = texts["no_room"] if e.errno == errno.ENOSPC else texts["failed"].format(why=html.escape(str(e)))
+    if any(hub.pinned(*pin) is None for pin in files):
+        mo.stop(True, download_card(texts["ask"], button, failed))
+
+
 class _NoChecks:
     EXERCISES: dict = {}
     REQUIRED: list = []
