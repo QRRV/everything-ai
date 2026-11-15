@@ -1,0 +1,31 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: build-on-device
+minutes: 20
+title:
+  en: "AI on your own device"
+  nl: "AI op je eigen apparaat"
+goal:
+  en: "weigh whether a model can run on the user's own device, by its memory and its download, and know the tools that run it there."
+  nl: "afwegen of een model op het eigen apparaat van de gebruiker kan draaien, via zijn geheugen en zijn download, en de tools kennen die het daar laten draaien."
+summary:
+  - en: "A model on the device works without a network, costs nothing per question and keeps the data on the device; the price is a model small enough for that device, and a download for every user."
+    nl: "Een model op het apparaat werkt zonder netwerk, kost niets per vraag en houdt de data op het apparaat; de prijs is een model dat klein genoeg is voor dat apparaat, en een download voor elke gebruiker."
+  - en: "The weights take params * bits / 8 bytes: take the most bits that fit, but no more than the model was made with. A download takes megabytes * 8 / Mbit/s seconds: Qwen3-0.6B, 1,506 MB, two minutes at 100 Mbit/s."
+    nl: "De weights nemen params * bits / 8 bytes in: neem de meeste bits die passen, maar niet meer dan waarmee het model gemaakt is. Een download duurt megabytes * 8 / Mbit/s seconden: Qwen3-0.6B, 1.506 MB, twee minuten bij 100 Mbit/s."
+  - en: "TensorFlow.js runs models in the browser, Pyodide runs Python there; Core ML, LiteRT and ExecuTorch run models in a phone app (examples in November 2026)."
+    nl: "TensorFlow.js laat modellen in de browser draaien, Pyodide draait daar Python; Core ML, LiteRT en ExecuTorch laten modellen in een app op de telefoon draaien (voorbeelden in november 2026)."
+can_now:
+  - en: "work out how long a model takes to download, from its size and the connection"
+    nl: "uitrekenen hoe lang de download van een model duurt, uit zijn grootte en de verbinding"
+    by: download_seconds
+  - en: "find the most bits per weight at which a model fits in a device's memory"
+    nl: "de meeste bits per weight vinden waarbij een model in het geheugen van een apparaat past"
+    by: best_bits
+  - en: "choose between the device and a server for an app"
+    nl: "kiezen tussen het apparaat en een server voor een app"
+    by: device
+  - en: "pick a tool that runs a model or Python in the browser"
+    nl: "een tool kiezen die een model of Python in de browser laat draaien"
+    by: tool

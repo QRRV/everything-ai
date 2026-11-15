@@ -402,9 +402,12 @@ lessons:
   idea: "A model in the browser or on a phone works without a network, costs nothing per call and keeps data on the device, but it must be small; libraries such as TensorFlow.js and Pyodide run models and Python in the browser."
   covers: [browser-en-on-device-ai#0, browser-en-on-device-ai#7]
   requires: [build-where-models-run]
-  introduces: [c:on-device-ai]
+  introduces: [c:on-device-ai, c:tensorflow-js, c:pyodide]
+  uses: [c:weight, c:model-parameter, c:byte, c:local-runtime, c:inference-provider, c:llm-routing, c:open-weights, c:tokenizer, c:language-model, py:def, py:return, py:for, py:if, py:none, py:list, py:arithmetic, py:comparison, q:choice, q:exercise-with-check, q:run-cell]
+  mentions: [c:quantization, c:transformers-js, c:webllm]
   warns: [device]
   data: []
+  ladder: [python]
   needs: any
 
 - id: build-js-basics
