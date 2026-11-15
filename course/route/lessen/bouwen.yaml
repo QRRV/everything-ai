@@ -368,12 +368,15 @@ lessons:
   level: basis
   domein: bouwen
   module: apis
-  idea: "Image and video generation is one request with a description; a model hub holds thousands of open models with their cards, and a pipeline wraps one into a single call."
+  idea: "Image generation is one request with a description, and video generation a job you ask about until it is done; a model hub holds thousands of open models with their cards, and a pipeline wraps one into a single call."
   covers: [klassieke-ai-diensten-via-api-s#2, klassieke-ai-diensten-via-api-s#3]
-  requires: [build-ai-services, torch-pretrained]
-  introduces: [c:image-generation-api]
+  requires: [build-multimodal-apis, build-ai-services, torch-pretrained]
+  introduces: [c:image-generation-api, c:video-generation-api]
+  uses: [c:base64, c:data-url, c:api, c:endpoint, c:http-request, c:openai-compatible-api, c:local-server, c:json, c:byte, c:prompt, c:token-price, c:model-hub, c:model-card, c:pretrained-model, c:license, c:softmax, c:logit, c:probability, c:pixel, c:tensor, c:axis, c:shape, c:classification, c:label, c:test-set, py:base64, py:open-binary, py:urllib-request, py:json, py:with, py:torch-tensor, py:dim, py:model-eval, py:no-grad, py:def, py:return, py:import, py:dict, py:list, py:tuple, py:indexing, py:int, py:float, py:string-literal, q:choice, q:exercise-with-check, q:run-cell]
+  mentions: [c:pipeline, c:png]
   warns: [pipeline]
-  data: []
+  data: [qmnist, model-course-qmnist-cnn]
+  ladder: [python, torch]
   needs: any
 
 - id: build-llm-or-small-model

@@ -1,13 +1,16 @@
 # SPDX-FileCopyrightText: 2026 Everything AI contributors
 # SPDX-License-Identifier: MIT
 """A model behind an API on your own computer: an OpenAI-compatible server on 127.0.0.1, with only the standard
-library (http.server and json), for the lessons of domain bouwen. It answers
+library (http.server and json), for the lessons of domain bouwen. It answers, in the form of OpenAI's API,
 
-  GET  /v1/models             the models it serves: the chat model, and the embedding model
-  POST /v1/chat/completions   an answer to a list of messages, with model, messages, max_tokens, temperature, top_p,
-                              seed, stop, stream (and stream_options.include_usage) and tools
-  POST /v1/embeddings         the embeddings of a text or a list of texts, with model, input and encoding_format
-                              ("float", or "base64": the float32 numbers as bytes, little-endian, in base64)
+  GET  /v1/models                 the models it serves: the chat model and the embedding model
+  POST /v1/chat/completions       an answer to a list of messages, with model, messages, max_tokens, temperature, top_p,
+                                  seed, stop, stream (and stream_options.include_usage) and tools
+  POST /v1/embeddings             the embeddings of a text or a list of texts, with model, input and encoding_format
+                                  ("float", or "base64": the float32 numbers as bytes, little-endian, in base64)
+  POST /v1/images/generations     images of a prompt, with model, prompt, n, size and response_format ("b64_json": a
+                                  PNG in base64); the course draws the shapes the prompt names (everything_ai.drawing):
+                                  no model, so /v1/models does not list it
 
 A message of the user may also be a list of parts, text and images, as a multimodal API takes them: an image as a data
 URL, data:image/png;base64,... The course's chat model reads text only, so the server answers such a request with an
@@ -15,8 +18,8 @@ error, unless the request asks for the server's own tool, {"type": "detect_objec
 runs itself before the model answers. It lets the course's detector (everything_ai.detr) name the objects on each
 image, and gives the model those words in place of the image; the answer says what it found, under "hosted_tools".
 
-in the form of OpenAI's API, which Ollama, llama.cpp, vLLM and most hosted APIs speak as well: code a learner writes
-against this server works against those too, with another URL and a key. Behind the server is a backend: `Model`, the
+Ollama, llama.cpp, vLLM and most hosted APIs speak OpenAI's form as well: code a learner writes against this server
+works against those too, with another URL and a key. Behind the server is a backend: `Model`, the
 course's chat model (everything_ai.chat) and embedding model (everything_ai.embed), or `StandIn`, which gives fixed
 answers and made-up embeddings at once, and on request also fails, waits or breaks off. The checks talk to a stand-in,
 since the model takes seconds per answer and a check has two.
@@ -35,6 +38,8 @@ from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 
 MODEL = "qwen3-0.6b"   # the name the server gives the course's chat model
 EMBEDDER = "granite-embedding-107m-multilingual"   # and its embedding model
+IMAGER = "course-shapes"   # and its drawing program, at /v1/images/generations: not a model (everything_ai.drawing)
+MAX_IMAGES = 4             # images in one request at most
 DIMS = 384             # the numbers in one of its embeddings
 MAX_INPUTS = 2048      # texts in one request for embeddings at most, as at OpenAI
 PORT = 8765            # where the lessons start the model's server, when that port is free
@@ -50,9 +55,11 @@ class Backend:
     """What answers behind the server. `answer(request, heard)` gives {"text", "tool_calls", "finish", "prompt_tokens",
     "tokens"} for a request that is valid; `heard(text)` hears the text so far while it is written, for streaming.
     `detect(image)` gives the kinds and scores of the objects on a PIL image, for the hosted tool. `embed(texts)` gives
-    the embedding of each text, a list of `dims` numbers, and the number of tokens of all texts together."""
+    the embedding of each text, a list of `dims` numbers, and the number of tokens of all texts together. `draw(prompt,
+    n, size)` gives n PNGs of the shapes the prompt names, each with the shapes in other places."""
     model = MODEL
     embedder = EMBEDDER
+    imager = IMAGER
     dims = DIMS
     key = None   # when set, a request needs the header "Authorization: Bearer <key>"
 
@@ -68,6 +75,10 @@ class Backend:
 
     def embed(self, texts: list[str]) -> tuple[list[list[float]], int]:
         raise NotImplementedError
+
+    def draw(self, prompt: str, n: int, size: int) -> list[bytes]:
+        from everything_ai import drawing
+        return [drawing.draw(prompt, size, seed) for seed in range(n)]
 
 
 class Model(Backend):
@@ -354,6 +365,34 @@ def _embed_problem(request) -> tuple[str, str | None] | None:
     return None
 
 
+def _image_problem(request) -> tuple[str, str | None] | None:
+    """What makes a request for /v1/images/generations not valid, and the field it is about; None when it is valid."""
+    from everything_ai import drawing
+    if not isinstance(request, dict):
+        return "The body must be a JSON object.", None
+    prompt = request.get("prompt")
+    if not isinstance(prompt, str) or not prompt.strip():
+        return "The request needs 'prompt': a text that describes the image.", "prompt"
+    n = request.get("n", 1)
+    if not _whole(n) or not 1 <= n <= MAX_IMAGES:
+        return f"'n' must be a whole number from 1 to {MAX_IMAGES}.", "n"
+    size = request.get("size", "256x256")
+    if not isinstance(size, str) or size not in drawing.SIZES:
+        sizes = [f'"{k}"' for k in drawing.SIZES]
+        return f"'size' must be {', '.join(sizes[:-1])} or {sizes[-1]}.", "size"
+    if request.get("response_format") == "url":
+        return "This server keeps no images to link to: ask for \"b64_json\", and the image comes in the answer.", "response_format"
+    if request.get("response_format") not in (None, "b64_json"):
+        return "'response_format' must be \"b64_json\".", "response_format"
+    shapes = drawing.read(prompt)
+    if not shapes:
+        return ("This server is no image model: it draws circles, squares and triangles, in red, blue, green, yellow, "
+                "purple or teal. Name some in the prompt, such as \"two red circles and a blue square\"."), "prompt"
+    if len(shapes) > drawing.MAX_SHAPES:
+        return f"This server draws at most {drawing.MAX_SHAPES} shapes on an image; the prompt names {len(shapes)}.", "prompt"
+    return None
+
+
 def _floats(vector: list[float], encoding: str):
     """An embedding as the answer gives it: a list of numbers, or for "base64" its float32 bytes in base64."""
     if encoding == "base64":
@@ -415,6 +454,9 @@ def _described(request: dict, backend: Backend) -> tuple[dict, list]:
         messages.append({**m, "content": "\n".join(texts)})
     tools = [t for t in request.get("tools") or [] if t.get("type") == "function"]
     return {**request, "messages": messages, "tools": tools or None}, runs
+
+
+_POSTS = ("/v1/chat/completions", "/v1/embeddings", "/v1/images/generations")   # what takes a POST
 
 
 class Running:
@@ -481,7 +523,7 @@ def _handler(running_ref: list):
             if path == "/v1/models":
                 self._send(200, {"object": "list", "data": [{"id": m, "object": "model", "owned_by": "everything-ai"}
                                                             for m in (backend.model, backend.embedder)]})
-            elif path in ("/v1/chat/completions", "/v1/embeddings"):   # a Request without data= is a GET
+            elif path in _POSTS:   # a Request without data= is a GET
                 self._send(405, _error(405, f"Use POST for {path}, with the request as JSON in the body."))
             else:
                 self._send(404, _error(404, f"There is no {self._entry['path']} here."))
@@ -508,7 +550,7 @@ def _handler(running_ref: list):
             if length < 0:
                 return self._send(400, _error(400, "The header Content-Length is not a number."))
             path = self._entry["path"].rstrip("/")
-            if path not in ("/v1/chat/completions", "/v1/embeddings"):
+            if path not in _POSTS:
                 return self._send(404, _error(404, f"There is no {self._entry['path']} here."))
             if not self._allowed(backend):
                 return
@@ -519,11 +561,15 @@ def _handler(running_ref: list):
                 return self._send(400, _error(400, "The body is not valid JSON."))
             if path == "/v1/embeddings":
                 return self._embeddings(backend, body)
+            if path == "/v1/images/generations":
+                return self._images(backend, body)
             problem = _problem(body)
             if problem:
                 return self._send(400, _error(400, problem))
             if body.get("model") == backend.embedder:
                 return self._send(400, _error(400, f"'{backend.embedder}' is an embedding model: it gives embeddings, it writes no answers. Send texts to /v1/embeddings, or ask '{backend.model}' here.", "model"))
+            if body.get("model") == backend.imager:
+                return self._send(400, _error(400, f"'{backend.imager}' draws images, it writes no answers. Ask for images at /v1/images/generations, or ask '{backend.model}' here.", "model"))
             if body.get("model") not in (None, backend.model):
                 return self._send(404, _error(404, f"The model '{body.get('model')}' does not exist here; this server has '{backend.model}'.", "model"))
             if _images(body) and not any(t.get("type") == DETECT for t in body.get("tools") or []):
@@ -563,8 +609,9 @@ def _handler(running_ref: list):
             if problem:
                 return self._send(400, _error(400, *problem))
             model = body.get("model")
-            if model == backend.model:
-                return self._send(400, _error(400, f"'{model}' is a chat model: it writes answers, it gives no embeddings. For embeddings this server has '{backend.embedder}'.", "model"))
+            if model in (backend.model, backend.imager):
+                what = "is a chat model: it writes answers" if model == backend.model else "draws images"
+                return self._send(400, _error(400, f"'{model}' {what}, it gives no embeddings. For embeddings this server has '{backend.embedder}'.", "model"))
             if model not in (None, backend.embedder):
                 return self._send(404, _error(404, f"The model '{model}' does not exist here; for embeddings this server has '{backend.embedder}'.", "model"))
             if body.get("dimensions") not in (None, backend.dims):
@@ -586,6 +633,31 @@ def _handler(running_ref: list):
             self._send(200, {"object": "list", "model": backend.embedder,
                              "data": [{"object": "embedding", "index": i, "embedding": _floats(v, encoding)} for i, v in enumerate(vectors)],
                              "usage": {"prompt_tokens": tokens, "total_tokens": tokens}})
+
+        def _images(self, backend, body):
+            from everything_ai import drawing
+            problem = _image_problem(body)
+            if problem:
+                return self._send(400, _error(400, *problem))
+            model = body.get("model")
+            if model in (backend.model, backend.embedder):
+                what = "a chat model" if model == backend.model else "an embedding model"
+                return self._send(400, _error(400, f"'{model}' is {what}: it draws no images. For images this server has '{backend.imager}'.", "model"))
+            if model not in (None, backend.imager):
+                return self._send(404, _error(404, f"The model '{model}' does not exist here; for images this server has '{backend.imager}'.", "model"))
+            other = backend.before(body)
+            if other is not None:
+                status, headers, out = other
+                return self._send(status, out, headers)
+            try:
+                images = backend.draw(body["prompt"], body.get("n", 1), drawing.SIZES[body.get("size", "256x256")])
+            except Exception as e:   # noqa: BLE001
+                if _memory_full(e):
+                    return self._send(503, _error(503, MEMORY))
+                return self._send(500, _error(500, f"The server had an error: {type(e).__name__}: {e}"))
+            drawn = drawing.said(drawing.read(body["prompt"]))
+            self._send(200, {"created": int(time.time()),
+                             "data": [{"b64_json": base64.b64encode(png).decode(), "revised_prompt": drawn} for png in images]})
 
         def _stream(self, backend, body, ident, created, runs=()):
             self.send_response(200)

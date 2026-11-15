@@ -1,0 +1,31 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: build-generation-hubs
+minutes: 25
+title:
+  en: "Images from an API, and model hubs"
+  nl: "Afbeeldingen via een API, en model hubs"
+goal:
+  en: "ask a server for an image with a description and turn its answer into the bytes of a PNG, know how a video comes back as a job, and build a pipeline around a model from a hub."
+  nl: "een server met een beschrijving om een afbeelding vragen en van zijn antwoord de bytes van een PNG maken, weten hoe een video als job terugkomt, en een pipeline bouwen om een model van een hub heen."
+summary:
+  - en: "An image generation API makes images from a description: a POST to /v1/images/generations with \"prompt\" and \"size\" gives under \"data\" one item per image, with the image as base64 under \"b64_json\"; base64.b64decode turns it into the bytes of a PNG. A provider refuses descriptions its rules forbid."
+    nl: "Een beeldgeneratie-API maakt afbeeldingen bij een beschrijving: een POST naar /v1/images/generations met \"prompt\" en \"size\" geeft onder \"data\" één item per afbeelding, met de afbeelding als base64 onder \"b64_json\"; base64.b64decode maakt daar de bytes van een PNG van. Een aanbieder weigert beschrijvingen die zijn regels verbieden."
+  - en: "Making a video takes minutes, so a video generation API gives a job: the POST answers with an id and a status such as queued; you ask for the status every few seconds until the job has succeeded or failed, and then download the video."
+    nl: "Een video maken duurt minuten, dus een videogeneratie-API geeft een job: de POST antwoordt met een id en een status zoals queued; je vraagt om de paar seconden de status op tot de job gelukt of mislukt is, en downloadt dan de video."
+  - en: "On a model hub, each model card names the model's task under pipeline_tag, such as image-classification. A pipeline wraps a model into one call: it prepares the input as the model learned it, runs the model, and turns the output into an answer. With the wrong preparation, the digit reader still reads most digits right, but its probabilities say nothing any more."
+    nl: "Op een model hub noemt elke model card de taak van het model onder pipeline_tag, zoals image-classification. Een pipeline maakt van een model één aanroep: hij bereidt de input voor zoals het model hem leerde, laat het model rekenen, en maakt van de output een antwoord. Met de verkeerde voorbereiding leest de cijferlezer de meeste cijfers nog goed, maar zeggen zijn kansen niets meer."
+can_now:
+  - en: "ask a server for an image, and get the bytes of the PNG out of its answer"
+    nl: "een server om een afbeelding vragen, en de bytes van de PNG uit zijn antwoord halen"
+    by: image
+  - en: "build a pipeline around a model from a hub: prepare, run, answer"
+    nl: "een pipeline bouwen om een model van een hub heen: voorbereiden, rekenen, antwoorden"
+    by: read_digit
+  - en: "tell how a program waits for a video that is being made"
+    nl: "zeggen hoe een programma wacht op een video die gemaakt wordt"
+    by: video-job
+  - en: "pick the task to search for on a model hub"
+    nl: "de taak kiezen waarop je zoekt op een model hub"
+    by: hub-task

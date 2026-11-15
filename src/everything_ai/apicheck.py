@@ -10,6 +10,7 @@ import html
 import io
 import json
 import os
+import re
 import urllib.error
 from dataclasses import dataclass, field
 from typing import Any, Callable
@@ -187,13 +188,16 @@ def _label(text: str) -> str:
 
 
 def trimmed(value, words: dict | None = None):
-    """A request or an answer as a picture shows it: a data URL cut after its start, and a list of more than eight
-    numbers, such as an embedding, cut after four, each with how long it was. `words` has "data" and "numbers", with
-    {n}, in the lesson's language, and "thousands", the sign between thousands in it ("," or ".")."""
+    """A request or an answer as a picture shows it: a data URL or a long text in base64, such as an image, cut after
+    its start, and a list of more than eight numbers, such as an embedding, cut after four, each with how long it was.
+    `words` has "data" and "numbers", with {n}, in the lesson's language, and "thousands", the sign between thousands
+    in it ("," or ".")."""
     words = {"data": "… {n} characters in all", "numbers": "… {n} numbers in all", "thousands": ",", **(words or {})}
     sep = words["thousands"]
     if isinstance(value, str) and value.startswith("data:") and len(value) > 80:
         return value[:60] + words["data"].format(n=f"{len(value):,}".replace(",", sep))
+    if isinstance(value, str) and len(value) > 200 and re.fullmatch(r"[A-Za-z0-9+/]+=*", value):
+        return value[:24] + words["data"].format(n=f"{len(value):,}".replace(",", sep))
     if isinstance(value, list) and len(value) > 8 and all(isinstance(v, (int, float)) and not isinstance(v, bool) for v in value):
         return value[:4] + [words["numbers"].format(n=f"{len(value):,}".replace(",", sep))]
     if isinstance(value, list):
