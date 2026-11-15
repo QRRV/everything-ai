@@ -9,6 +9,9 @@ import json
 import re
 
 from everything_ai.check import FunctionBox, Mistake
+from everything_ai import chat
+
+DOWNLOADS = {"Qwen3-0.6B": chat.FILES}   # what the demo downloads, for the line under the header
 
 COURSE = "data/course-agent-qwen.json"   # the course's runs of Qwen3-0.6B as an agent, with the code of this file
 

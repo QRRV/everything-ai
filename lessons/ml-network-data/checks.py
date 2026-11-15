@@ -17,7 +17,12 @@ import warnings
 
 from everything_ai import chart, check as checking, flights, hub, yours
 from everything_ai.check import FunctionBox, Mistake
-from everything_ai.lesson import download_card
+from everything_ai.lesson import download_card, download_size
+
+DOWNLOAD_LINE = {   # what the lesson downloads, for the line under the header
+    "en": f"Works on every computer. The routes of OpenFlights are downloaded once from GitHub, {download_size(flights.ROUTES, 'en')}, when you click their button in the lesson; the worked example needs them, the rest of the lesson works without them.",
+    "nl": f"Werkt op elke computer. De routes van OpenFlights worden één keer gedownload van GitHub, {download_size(flights.ROUTES, 'nl')}, als je in de les op de knop ervoor klikt; het uitgewerkte voorbeeld heeft ze nodig, de rest van de les werkt zonder.",
+}
 
 ROUTES, AIRPORTS, EDGES = 67663, 3425, 19256   # routes in routes.dat; nodes and edges of the network without directions
 HUBS = [("AMS", 248), ("FRA", 244), ("CDG", 240), ("IST", 236), ("ATL", 217)]   # the five biggest hubs and their degrees

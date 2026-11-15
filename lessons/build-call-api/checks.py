@@ -10,6 +10,8 @@ from everything_ai import apicheck, chat, paths, serve, yours
 from everything_ai.apicheck import URL, ApiBox, Case
 from everything_ai.check import CodeBox, Mistake
 
+DOWNLOADS = {"Qwen3-0.6B": chat.FILES}   # what the demo downloads, for the line under the header
+
 QUESTION = "Name three colors of the rainbow."
 RECORD = {"rainbow": {"messages": [{"role": "user", "content": QUESTION}], "max_tokens": 50, "seeds": 1, "raw": True}}
 DATA = paths.ROOT / "data" / "course-apis-qwen.json"

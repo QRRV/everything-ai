@@ -12,6 +12,8 @@ from everything_ai import apicheck, chat, paths, serve, yours
 from everything_ai.apicheck import URL, ApiBox, Case
 from everything_ai.check import Code, FunctionBox, Mistake, run_code
 
+DOWNLOADS = {"Qwen3-0.6B": chat.FILES}   # what the demo downloads, for the line under the header
+
 STORY = "Write a short story of five sentences about a lighthouse keeper."
 RECORD = {"story": {"messages": [{"role": "user", "content": STORY}], "max_tokens": 200, "seeds": 3}}
 DATA = paths.ROOT / "data" / "course-apis-qwen.json"

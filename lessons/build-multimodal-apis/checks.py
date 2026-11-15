@@ -13,6 +13,12 @@ from everything_ai import apicheck, detr, lesson as lesson_helpers, paths, qwen3
 from everything_ai.apicheck import URL, ApiBox, Case
 from everything_ai.check import MISSING, FunctionBox, Mistake, run_code
 
+DEMO_FILES = [*qwen3.CHAT_FILES, detr.FILE]   # what the demo downloads, for the line under the header
+DOWNLOAD_LINE = {
+    "en": f"Works on every computer. The chat model Qwen3-0.6B and the detector DETR are downloaded once from Hugging Face, {lesson_helpers.download_size(DEMO_FILES, 'en')}, when you click their button in the lesson; after that, the lesson works without a connection. The exercises work without them too.",
+    "nl": f"Werkt op elke computer. Het chat model Qwen3-0.6B en de detector DETR worden één keer gedownload van Hugging Face, {lesson_helpers.download_size(DEMO_FILES, 'nl')}, als je in de les op de knop ervoor klikt; daarna werkt de les zonder verbinding. De oefeningen werken ook zonder die twee.",
+}
+
 PHOTOS = {"coffee": "What is on the table?", "chelsea": "What animal is this?", "fruit": "What fruit is in the picture?"}
 RECORD = {name: {"image": name, "question": q, "max_tokens": 60, "seeds": 1} for name, q in PHOTOS.items()}
 DATA = paths.ROOT / "data" / "course-apis-qwen.json"

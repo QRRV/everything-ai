@@ -32,7 +32,7 @@ _WORDS = {
         "works_here": "Works on every computer; nothing is downloaded.",
         "works_paper": "Works on every computer; the only download is the paper, which you get yourself.",
         "works_hub": "Works on every computer. The model is downloaded once from Hugging Face, about 200 kB; without a connection, the course's own copy of it is used.",
-        "works_download": "Works on every computer. {name} is downloaded once from Hugging Face, {size} MB, when you click its button in the lesson; after that, the lesson works without a connection. The exercises work without {name} too.",
+        "works_download": "Works on every computer. {name} is downloaded once from Hugging Face, {size}, when you click its button in the lesson; after that, the lesson works without a connection. The exercises work without {name} too.",
         "needs_gpu": "Training: about {m} minutes on the recommended GPU; it needs a GPU with 8 GB or more.",
         "gpu_fits": "Your GPU, {name}, can do it; nothing is downloaded.",
         "gpu_mac": "On your Mac it trains on the GPU of the Apple chip, about 4 to 5 times slower than on the recommended GPU; nothing is downloaded.",
@@ -56,7 +56,7 @@ _WORDS = {
         "works_here": "Werkt op elke computer; er wordt niets gedownload.",
         "works_paper": "Werkt op elke computer; je downloadt alleen de paper, en dat doe je zelf.",
         "works_hub": "Werkt op elke computer. Het model wordt één keer gedownload van Hugging Face, ongeveer 200 kB; zonder verbinding gebruikt de course zijn eigen kopie ervan.",
-        "works_download": "Werkt op elke computer. {name} wordt één keer gedownload van Hugging Face, {size} MB, als je in de les op de knop ervoor klikt; daarna werkt de les zonder verbinding. De oefeningen werken ook zonder {name}.",
+        "works_download": "Werkt op elke computer. {name} wordt één keer gedownload van Hugging Face, {size}, als je in de les op de knop ervoor klikt; daarna werkt de les zonder verbinding. De oefeningen werken ook zonder {name}.",
         "needs_gpu": "Trainen: ongeveer {m} minuten op de aanbevolen GPU; er is een GPU met 8 GB of meer voor nodig.",
         "gpu_fits": "Je GPU, {name}, kan het; er wordt niets gedownload.",
         "gpu_mac": "Op je Mac traint het op de GPU van de Apple-chip, ongeveer 4 tot 5 keer trager dan op de aanbevolen GPU; er wordt niets gedownload.",
@@ -267,10 +267,8 @@ class Lesson:
                 return line[self.lang]
             downloads = getattr(self.checks, "DOWNLOADS", None)   # a lesson that downloads a larger model when asked
             if downloads:
-                from everything_ai import hub
                 name, pins = next(iter(downloads.items()))   # one pinned file, or a list of them
-                size = sum(hub.PINNED[pin]["size"] for pin in (pins if isinstance(pins, list) else [pins]))
-                return self.w["works_download"].format(name=name, size=round(size / 1e6))
+                return self.w["works_download"].format(name=name, size=download_size(pins, self.lang))
             return self.w["works_paper" if paper else "works_here"]   # other needs get their own line when their first lesson is built
         gpu = _computer()["gpu"] or {}   # may ask nvidia-smi: only for a lesson that needs a GPU
         if needs == "nvidia-linux":
@@ -628,6 +626,15 @@ def _with_commas(fn):
         out = fn(*args, **kwargs)
         return chart.with_decimal_comma(out) if isinstance(out, str) and 'class="ea-tick"' in out else out
     return wrapped
+
+
+def download_size(pins, lang: str) -> str:
+    """The size of one pinned file, or of a list of them together, as the lessons' buttons say it: in MB, with one
+    decimal below 10 MB, and in GB with one decimal from 1,000 MB, with the decimal mark of the language."""
+    from everything_ai import hub
+    mb = sum(hub.PINNED[pin]["size"] for pin in (pins if isinstance(pins, list) else [pins])) / 1e6
+    text = f"{mb / 1000:.1f} GB" if mb >= 999.5 else f"{mb:.1f} MB" if mb < 9.95 else f"{round(mb)} MB"
+    return text.replace(".", ",") if lang == "nl" else text
 
 
 def download_card(ask: str, button, failed: str | None = None) -> mo.Html:

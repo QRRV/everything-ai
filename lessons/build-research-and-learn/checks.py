@@ -10,6 +10,9 @@ import re
 
 from everything_ai import paths
 from everything_ai.check import Sort
+from everything_ai import chat
+
+DOWNLOADS = {"Qwen3-0.6B": chat.FILES}   # what the demo downloads, for the line under the header
 
 COURSE = "data/course-work-qwen.json"
 SEEDS = 8

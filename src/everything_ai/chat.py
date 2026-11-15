@@ -11,6 +11,9 @@ import re
 import time
 
 IM_START, IM_END, END = "<|im_start|>", "<|im_end|>", "<|endoftext|>"
+# The chat model's files, as everything_ai.qwen3.CHAT_FILES has them: the weights of Qwen3-0.6B, the tokenizer of the Base
+FILES = [("Qwen/Qwen3-0.6B", "model.safetensors"), ("Qwen/Qwen3-0.6B-Base", "vocab.json"),
+         ("Qwen/Qwen3-0.6B-Base", "tokenizer_config.json")]
 NO_THINKING = "<think>\n\n</think>\n\n"   # an empty thought after the generation prompt: non-thinking mode
 TOOLS_HEAD = ("# Tools\n\nYou may call one or more functions to assist with the user query.\n\n"
               "You are provided with function signatures within <tools></tools> XML tags:\n<tools>")

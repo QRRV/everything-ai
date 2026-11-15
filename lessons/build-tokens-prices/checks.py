@@ -16,6 +16,8 @@ gpt2_tokenizer.offline()   # before any tiktoken.get_encoding("gpt2"), also in t
 
 import tiktoken  # noqa: E402  (after offline(): tiktoken reads its cache folder when it loads a file)
 
+DOWNLOADS = {"Qwen3-0.6B": chat.FILES}   # what the demo downloads, for the line under the header
+
 ENC = tiktoken.get_encoding("gpt2")
 SHORT = "In one sentence: what is a token?"
 LONG = "Explain what a token is, with three examples."

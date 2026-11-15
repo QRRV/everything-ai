@@ -11,6 +11,8 @@ from everything_ai import apicheck, chat, paths, serve, yours
 from everything_ai.apicheck import URL, ApiBox, Case
 from everything_ai.check import MISSING, FunctionBox, Mistake, run_code
 
+DOWNLOADS = {"Qwen3-0.6B": chat.FILES}   # what the demo downloads, for the line under the header
+
 SYSTEM = ("Sort the customer's message into one of these labels, and answer with the label only.\n"
           "card_arrival: the new card has not arrived yet\n"
           "lost_or_stolen_card: the card is lost or stolen\n"

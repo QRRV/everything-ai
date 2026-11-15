@@ -13,6 +13,8 @@ import urllib.request
 from everything_ai import chat, paths, serve, yours
 from everything_ai.check import MISSING, FunctionBox, Mistake, kept, run_code
 
+DOWNLOADS = {"Qwen3-0.6B": chat.FILES}   # what the demo downloads, for the line under the header
+
 # Eighteen questions: ten sums in words, eight short questions of fact or language. Each with what a right answer has:
 # a number, which must be the last number in the answer, or words, one of which must be in it.
 QUESTIONS = [

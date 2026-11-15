@@ -11,6 +11,8 @@ from everything_ai import apicheck, chat, paths, serve, yours
 from everything_ai.apicheck import URL, ApiBox, Case
 from everything_ai.check import Mistake, run_code
 
+DOWNLOADS = {"Qwen3-0.6B": chat.FILES}   # what the demo downloads, for the line under the header
+
 FIRST = "My name is Sam. Suggest a dinner for tonight, in one sentence."
 ASK = "What is my name?"
 SEEDS = 8

@@ -19,6 +19,9 @@ from everything_ai.lesson import download_card
 from everything_ai.check import FunctionBox, Mistake, run_code
 from everything_ai import yours
 
+# what the demo downloads, for the line under the header: everything_ai.qwen3.FILES of the Base
+DOWNLOADS = {"Qwen3-0.6B-Base": [("Qwen/Qwen3-0.6B-Base", f) for f in ("model.safetensors", "vocab.json", "tokenizer_config.json")]}
+
 
 def _checks(lesson: str, name: str):
     spec = importlib.util.spec_from_file_location(name, paths.LESSONS / lesson / "checks.py")
