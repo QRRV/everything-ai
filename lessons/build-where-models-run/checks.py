@@ -273,6 +273,8 @@ REQUIRED = ["ask", "weights_gb", "where"]
 CASES = [
     ("ask", _START_ASK, "empty", None),
     ("ask", SOLUTION_ASK, "correct", None),
+    ("ask", SOLUTION_ASK.replace('return answer["choices"][0]["message"]["content"]',
+                                 'return answer["choices"][0]["message"]["content"].upper()'), "wrong", "other"),
     ("ask", _START_ASK.replace('"http://127.0.0.1:8765/v1/chat/completions"', 'base_url + "/chat/completions"'), "error", "http-404-model"),
     ("ask", SOLUTION_ASK.replace('base_url + "/chat/completions"', 'base_url + "/v1/chat/completions"'), "error", "http-404"),
     ("ask", _START_ASK.replace('"model": "qwen3-0.6b"', '"model": model').replace('"http://127.0.0.1:8765/v1/chat/completions"', '"http://127.0.0.1:9/v1/chat/completions"'), "error", "unreachable"),

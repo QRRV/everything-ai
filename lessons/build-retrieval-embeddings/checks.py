@@ -526,6 +526,7 @@ CASES = [
     ("meaning_search", SOLUTION_SEARCH.replace("[:k]", "[:2]"), "almost", None),
     ("retrieve", START_RETRIEVE, "empty", None),
     ("retrieve", SOLUTION_RETRIEVE, "correct", None),
+    ("retrieve", SOLUTION_RETRIEVE.replace('def retrieve(', 'def retrieval('), "wrong", "no-function"),
     ("retrieve", SOLUTION_RETRIEVE.replace("embed(url, [question])[0]", "embed(url, question)[0]"), "correct", None),
     ("retrieve", START_RETRIEVE.replace("np.array(vectors[1:])", "VECTORS"), "wrong", "again"),
     ("retrieve", SOLUTION_RETRIEVE.replace("embed(url, [question])", "embed(url, [question.lower()])"), "wrong", "other-text"),

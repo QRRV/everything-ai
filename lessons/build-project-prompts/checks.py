@@ -386,7 +386,7 @@ def _judge_ask(name: str, text: str, answers: list, tries: int = 3):
         posts, want = _expected(answers, schema, tries)
         sent = _sent(running.log)
         if not sent:
-            return "nothing-sent"
+            return "not-to-url"
         if sent[0]["body"].get("messages") != asked:
             return "first"
         if len(sent) >= 2:
@@ -532,8 +532,8 @@ EXERCISES = {
             **_COMMON,
             "empty": {"en": "The loop asks, but does nothing with the answer yet. After `chat`: find the problems with `problems(answer, schema)`, give back the JSON when there are none, and else ask again with what was wrong.",
                       "nl": "De loop vraagt, maar doet nog niets met het antwoord. Na `chat`: zoek de problemen met `problems(answer, schema)`, geef de JSON terug als er geen zijn, en vraag anders opnieuw met wat er mis was."},
-            "nothing-sent": {"en": "With `{call}`, your function sent nothing to the server. Does it call `chat(url, messages)` in the loop?",
-                             "nl": "Met `{call}` stuurde je functie niets naar de server. Roept hij `chat(url, messages)` aan in de loop?"},
+            "not-to-url": {"en": "With `{call}`, your function sent nothing to the server. Does it call `chat(url, messages)` in the loop?",
+                           "nl": "Met `{call}` stuurde je functie niets naar de server. Roept hij `chat(url, messages)` aan in de loop?"},
             "first": {"en": "With `{call}`, the first request did not carry what `messages_for(name, text)` makes. Start from those messages, as the start of the function does.",
                       "nl": "Met `{call}` had het eerste request niet wat `messages_for(name, text)` maakt. Begin met die berichten, zoals het begin van de functie doet."},
             "no-fix": {"en": "With `{call}`, the second request was the same as the first: the model hears nothing about what was wrong. Add its answer and a message with the problems to `messages` before you ask again.",
@@ -582,6 +582,8 @@ CASES = [
     ("ask_json", SOLUTION_ASK.replace("from app.prompts import", "from app.prompts.old import"), "error", "no-prompts"),
     ("ask_json", SOLUTION_ASK.replace("messages_for(name, text)", 'messages_for("events", text)'), "error", "prompts-error"),
     ("ask_json", SOLUTION_ASK, "correct", None),
+    ("ask_json", SOLUTION_ASK.replace('        answer = chat(url, messages)\n',
+                                      '        answer = "{}"\n'), "wrong", "not-to-url"),
     ("ask_json", SOLUTION_ASK.replace('''        messages = messages + [{"role": "assistant", "content": answer}, {"role": "user", "content": fix}]
 ''', ""), "wrong", "no-fix"),
     ("ask_json", SOLUTION_ASK.replace('[{"role": "assistant", "content": answer}, {"role": "user", "content": fix}]',

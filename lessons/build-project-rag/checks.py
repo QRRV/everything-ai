@@ -319,8 +319,6 @@ def _judge_library(chunks: list, about: str):
         vectors = got["vectors"]
         if not isinstance(vectors, np.ndarray):
             return "not-array"
-        if vectors.ndim == 3:
-            return "nested"
         if vectors.ndim == 2 and len(vectors) < len(chunks):
             return "lost"
         if vectors.shape != want.shape or not np.allclose(vectors, want, atol=1e-5):
@@ -599,8 +597,6 @@ EXERCISES = {
                               "nl": "Met `{call}` stuurde je functie meer requests dan nodig: een request neemt tot `BATCH` teksten aan, dus vul ze elk. Laat `start` telkens `BATCH` hoger worden, en stuur `chunks[start:start + BATCH]`."},
             "lost": {"en": "With `{call}`, the library has fewer embeddings than chunks: each batch replaces the embeddings of the one before. Add them to the list instead: `vectors = vectors + embed(...)`.",
                      "nl": "Met `{call}` heeft de library minder embeddings dan chunks: elke batch vervangt de embeddings van de vorige. Voeg ze juist toe aan de lijst: `vectors = vectors + embed(...)`."},
-            "nested": {"en": "With `{call}`, the vectors have a list per batch: a table of tables. Add the embeddings of a batch one by one with `+`, not as one item with `append`.",
-                       "nl": "Met `{call}` hebben de vectors een lijst per batch: een tabel van tabellen. Voeg de embeddings van een batch één voor één toe met `+`, niet als één item met `append`."},
             "not-array": {"en": "With `{call}`, `\"vectors\"` is not a NumPy array. Keep `np.array(vectors)` in the last line: `meaning_search` takes rows of an array.",
                           "nl": "Met `{call}` is `\"vectors\"` geen NumPy-array. Laat `np.array(vectors)` in de laatste regel staan: `meaning_search` neemt rijen van een array."},
             "vectors": {"en": "With `{call}`, the embeddings are not those of the chunks, in their order. Send each chunk once, in order: the slices `chunks[start:start + BATCH]` with `start` going up by `BATCH` from 0.",
@@ -672,9 +668,11 @@ REQUIRED = ["make_library", "ask", "new-document"]
 CASES = [
     ("make_library", START_LIBRARY, "empty", None),
     ("make_library", SOLUTION_LIBRARY, "correct", None),
+    ("make_library", SOLUTION_LIBRARY.replace('def make_library(',
+                                              'def make_libary('), "wrong", "no-function"),
     ("make_library", START_LIBRARY.replace("    vectors = embed(url, chunks)\n", "    vectors = embed(url, chunks[:BATCH])\n"), "wrong", "lost"),
     ("make_library", LOST, "wrong", "lost"),
-    ("make_library", NESTED, "error", "nested"),
+    ("make_library", NESTED, "error", "nested"),   # the 150 chunks of the first case end in a shorter batch
     ("make_library", SOLUTION_LIBRARY.replace("BATCH = 64", "BATCH = 100"), "wrong", "one-request"),
     ("make_library", SOLUTION_LIBRARY.replace('"vectors": np.array(vectors)', '"vectors": vectors'), "wrong", "not-array"),
     ("make_library", SOLUTION_LIBRARY.replace("    for start in range(0, len(chunks), BATCH):\n        vectors = vectors + embed(url, chunks[start:start + BATCH])\n",
@@ -685,6 +683,7 @@ CASES = [
     ("make_library", SOLUTION_LIBRARY.replace('return {"about": about, ', 'return {'), "wrong", "return"),
     ("ask", START_ASK, "empty", None),
     ("ask", SOLUTION_ASK, "correct", None),
+    ("ask", SOLUTION_ASK.replace('def ask(', 'def answer('), "wrong", "no-function"),
     ("ask", SOLUTION_ASK.replace('''    answer = chat(url, messages)''', '''    answer = chat(url, messages[1:])'''), "wrong", "no-system"),
     ("ask", SOLUTION_ASK.replace("    answer = chat(url, messages)\n", '    answer = chat(url, [{"role": "user", "content": question}])\n'), "wrong", "question-alone"),
     ("ask", SOLUTION_ASK.replace('GROUNDED.format(about=library["about"])', "GROUNDED"), "wrong", "unformatted"),

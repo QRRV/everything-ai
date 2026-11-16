@@ -391,6 +391,7 @@ CASES = [
 ''', "wrong", "prints"),
     ("label", _START_LABEL, "empty", None),
     ("label", SOLUTION_LABEL, "correct", None),
+    ("label", SOLUTION_LABEL.replace("LABELS)\n", "LABELS).upper()\n"), "wrong", "other"),
     ("label", SOLUTION_LABEL.replace('{"role": "system", "content": SYSTEM}, ', ""), "wrong", "no-system"),
     ("label", SOLUTION_LABEL.replace('"content": SYSTEM}', '"content": "Sort the message."}'), "wrong", "other-system"),
     ("label", SOLUTION_LABEL.replace('{"role": "user", "content": message}', '{"role": "user", "content": "message"}'), "wrong", "no-message"),

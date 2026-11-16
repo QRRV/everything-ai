@@ -112,7 +112,7 @@ def _judge_chat(messages, max_tokens, want, given=True):
     def judge(got, running):
         sent = _sent(running)
         if not sent:
-            return "nothing-sent"
+            return "not-to-url"
         body = sent[-1]
         if body.get("messages") != messages:
             last = messages[-1:]
@@ -164,7 +164,7 @@ REPLIES = {"Hi, I am Sam.": "Hello Sam!", "I like pasta.": "Pasta is a fine choi
 def _judge_talk(got, running):
     sent = _sent(running)
     if len(sent) < len(SAID):
-        return "too-few" if sent else "nothing-sent"
+        return "too-few" if sent else "not-to-url"
     want = [REPLIES[s] for s in SAID]
     for k, body in enumerate(sent[:len(SAID)]):
         messages = body.get("messages") or []
@@ -242,8 +242,8 @@ _COMMON = {
                 "nl": "Ik zie het vak niet. Voer de cel met het vak opnieuw uit."},
     "cleared": {"en": "There is no code in the box any more. Undo with Ctrl+Z (on a Mac: Cmd+Z), or open the lesson again: an empty box then starts with the first lines again.",
                 "nl": "Er staat geen code meer in het vak. Draai het terug met Ctrl+Z (op een Mac: Cmd+Z), of open de les opnieuw: een leeg vak begint dan weer met de eerste regels."},
-    "nothing-sent": {"en": "With `{call}`, your function sent nothing to the server. Does it make a request and open it with `urlopen`?",
-                     "nl": "Met `{call}` stuurde je functie niets naar de server. Maakt hij een request en opent hij dat met `urlopen`?"},
+    "not-to-url": {"en": "With `{call}`, no request reached the server at `url`. Does your function send its request with `urlopen`, to `url + \"/chat/completions\"`?",
+                   "nl": "Met `{call}` kwam er geen request aan bij de server op `url`. Stuurt je functie zijn request met `urlopen`, naar `url + \"/chat/completions\"`?"},
 }
 
 EXERCISES = {
@@ -308,6 +308,8 @@ EXERCISES = {
                       "nl": "De loop doet nog niets. Voor elke `text`: voeg hem als bericht van de gebruiker aan `messages` toe, vraag `chat`, en voeg het antwoord toe als bericht van de assistant, en aan `answers`."},
             "correct": {"en": "Right: every request carries the whole conversation so far, the user's turns and the assistant's answers, so the third question can be answered.",
                         "nl": "Goed: elk request draagt het hele gesprek tot nu toe, de beurten van de gebruiker en de antwoorden van de assistant, zodat de derde vraag te beantwoorden is."},
+            "not-to-url": {"en": "With `{call}`, your function sent nothing to the server. Ask `chat(url, messages)` in the loop, once for each `text`.",
+                           "nl": "Met `{call}` stuurde je functie niets naar de server. Vraag `chat(url, messages)` in de loop, één keer voor elke `text`."},
             "too-few": {"en": "With `{call}`, your function sent fewer requests than there are turns in `said`. One request for each `text`.",
                         "nl": "Met `{call}` stuurde je functie minder requests dan er beurten in `said` zijn. Eén request voor elke `text`."},
             "forgets-user": {"en": "With `{call}`, a request lacked the user's earlier turns. Keep one list `messages` for the whole conversation, made before the loop, and add each `text` to it.",
@@ -327,6 +329,12 @@ REQUIRED = ["chat", "talk", "why-all"]
 CASES = [
     ("chat", _START_CHAT, "empty", None),
     ("chat", SOLUTION_CHAT, "correct", None),
+    ("chat", SOLUTION_CHAT.replace('"messages": messages', '"messages": messages[:1]'), "wrong", "messages"),
+    ("chat", SOLUTION_CHAT.replace('return answer["choices"][0]["message"]["content"]',
+                                   'return answer["choices"][0]["message"]'), "wrong", "message"),
+    ("chat", SOLUTION_CHAT.replace('return answer["choices"][0]["message"]["content"]',
+                                   'return answer["choices"][0]["message"]["content"].upper()'), "wrong", "other"),
+    ("chat", 'def chat(url, messages, max_tokens=200):\n    return "Your name is Sam."\n', "wrong", "not-to-url"),
     ("chat", SOLUTION_CHAT.replace('"messages": messages', '"messages": messages[-1:]'), "wrong", "only-last"),
     ("chat", SOLUTION_CHAT.replace('"max_tokens": max_tokens', '"max_tokens": 200'), "wrong", "max-tokens"),
     ("chat", SOLUTION_CHAT.replace("max_tokens=200", "max_tokens=50"), "wrong", "default"),
@@ -335,6 +343,11 @@ CASES = [
     ("chat", SOLUTION_CHAT.replace("json.dumps(body).encode()", "json.dumps(body)"), "error", "data-text"),
     ("talk", _START_TALK, "empty", None),
     ("talk", SOLUTION_TALK, "correct", None),
+    ("talk", SOLUTION_TALK.replace('        answer = chat(url, messages)\n',
+                                   '        answer = "Hello Sam!"\n'), "wrong", "not-to-url"),
+    ("talk", SOLUTION_TALK.replace('        answer = chat(url, messages)\n        messages.append({"role": "assistant", "content": answer})\n        answers.append(answer)\n',
+                                   '    answer = chat(url, messages)\n    answers.append(answer)\n'), "wrong", "too-few"),
+    ("talk", SOLUTION_TALK.replace('"content": text}', '"content": said[0]}'), "wrong", "users"),
     ("talk", SOLUTION_TALK.replace('        messages.append({"role": "assistant", "content": answer})\n', ""), "wrong", "forgets-answers"),
     ("talk", SOLUTION_TALK.replace("        messages.append({\"role\": \"user\", \"content\": text})\n        answer = chat(url, messages)",
                                    "        answer = chat(url, [{\"role\": \"user\", \"content\": text}])"), "wrong", "forgets-user"),

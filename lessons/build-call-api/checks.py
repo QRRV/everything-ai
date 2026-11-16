@@ -276,6 +276,7 @@ CASES = [
     ("body", _SOLUTION_BODY.replace('"content": question', '"content": "Name three colors of the rainbow."'), "almost", "other-value"),
     ("ask", _START_ASK, "empty", None),
     ("ask", _SOLUTION_ASK, "correct", None),
+    ("ask", _SOLUTION_ASK.replace('"model": "qwen3-0.6b"', '"model": "gpt-4o"'), "error", "http-404-model"),
     ("ask", _SOLUTION_ASK.replace("json.dumps(body).encode()", "json.dumps(body)"), "error", "data-text"),
     ("ask", _SOLUTION_ASK.replace(", data=data,", ","), "error", "http-405"),
     ("ask", _SOLUTION_ASK.replace('url + "/chat/completions"', 'url + "/v1/chat/completions"'), "error", "http-404"),

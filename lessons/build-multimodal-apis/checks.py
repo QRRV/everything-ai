@@ -476,6 +476,8 @@ CASES = [
     ("data_url", SOLUTION_URL.replace('open(path, "rb")', "open(path)"), "error", "text-mode"),
     ("ask_photo", _START_PHOTO, "empty", None),
     ("ask_photo", SOLUTION_PHOTO, "correct", None),
+    ("ask_photo", SOLUTION_PHOTO.replace('return answer["choices"][0]["message"]["content"]',
+                                         'return answer["choices"][0]["message"]["content"].upper()'), "wrong", "other"),
     ("ask_photo", SOLUTION_PHOTO.replace(', "tools": [{"type": "detect_objects"}]', ""), "error", "http"),
     ("ask_photo", SOLUTION_PHOTO.replace('"image_url": {"url": data_url(path)}', '"image_url": data_url(path)'), "error", "http"),
     ("ask_photo", SOLUTION_PHOTO.replace('{"type": "image_url", "image_url"', '{"type": "image", "image_url"'), "error", "http"),

@@ -261,7 +261,7 @@ WANT = ["The", " keeper", " climbs", " the", " stairs", " every", " night."]
 def _judge_stream(got, running):
     sent = [e["body"] for e in running.log if e["method"] == "POST" and isinstance(e["body"], dict)]
     if not sent:
-        return "nothing-sent"
+        return "not-to-url"
     if not sent[-1].get("stream"):
         return "no-stream"
     if got == WANT:
@@ -350,8 +350,8 @@ EXERCISES = {
                       "nl": "`stream` verstuurt het request, en leest nog niets. Vraag in de body om een stream, ga dan door de regels van `response`, en bewaar de stukjes die `piece` vindt."},
             "correct": {"en": "Right: your `stream` asks for a stream, and collects every piece, in order, without the empty ones.",
                         "nl": "Goed: je `stream` vraagt om een stream, en verzamelt elk stukje, op volgorde, zonder de lege."},
-            "nothing-sent": {"en": "With `{call}`, your function sent nothing to the server.",
-                             "nl": "Met `{call}` stuurde je functie niets naar de server."},
+            "not-to-url": {"en": "With `{call}`, your function sent nothing to the server. Keep the request and `urlopen` as the box had them, and read the lines of `response`.",
+                           "nl": "Met `{call}` stuurde je functie niets naar de server. Laat het request en `urlopen` staan zoals ze in het vak stonden, en lees de regels van `response`."},
             "no-stream": {"en": "With `{call}`, the body did not ask for a stream, so the server sent the whole answer at once, as one JSON. Add `\"stream\": True` to the body.",
                           "nl": "Met `{call}` vroeg de body niet om een stream, dus stuurde de server het hele antwoord in één keer, als één JSON. Voeg `\"stream\": True` toe aan de body."},
             "joined": {"en": "With `{call}`, your function gives the whole text, `{got}`. Give back the list of the pieces, each as it came in.",
@@ -377,6 +377,9 @@ CASES = [
     ("piece", SOLUTION_PIECE.replace('return delta["content"]', 'return delta'), "wrong", None),
     ("stream", _START_STREAM, "empty", None),
     ("stream", SOLUTION_STREAM, "correct", None),
+    ("stream", SOLUTION_STREAM.replace('pieces.append(text)',
+                                       'pieces.append(text.strip())'), "wrong", "other"),
+    ("stream", 'def stream(url, question):\n    return question.split()\n', "wrong", "not-to-url"),
     ("stream", SOLUTION_STREAM.replace(',\n            "stream": True}', "}"), "wrong", "no-stream"),
     ("stream", SOLUTION_STREAM.replace("            if text:\n                pieces.append(text)", "            pieces.append(text)"), "wrong", "empties"),
     ("stream", SOLUTION_STREAM.replace("    return pieces", '    return "".join(pieces)'), "wrong", "joined"),

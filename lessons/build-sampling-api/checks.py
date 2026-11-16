@@ -207,6 +207,8 @@ def _judge_first(question, want):
             return "cut-yourself" if pair == want or got == want[0] else "no-stop"
         if body.get("max_tokens") != 20:
             return "max-tokens"
+        if isinstance(got, dict) and "choices" in got:
+            return "whole"
         if isinstance(got, str):
             return "only-text"
         if pair == want[::-1]:
@@ -299,6 +301,8 @@ EXERCISES = {
                       "nl": "`first_line` vraagt nog zonder stop sequence, en geeft alleen de tekst terug. Voeg `\"stop\"` toe aan de body, en geef de tekst en de `finish_reason` terug."},
             "correct": {"en": "Right: the server ends the answer at the first line break, and your function says why it ended: `\"stop\"` at the line break, `\"length\"` at 20 tokens.",
                         "nl": "Goed: de server beëindigt het antwoord bij de eerste regelovergang, en je functie zegt waarom het eindigde: `\"stop\"` bij de regelovergang, `\"length\"` bij 20 tokens."},
+            "whole": {"en": "With `{call}`, your function gives back the whole JSON of the answer. Give back two things from its choice: the text of the message and the `finish_reason`.",
+                      "nl": "Met `{call}` geeft je functie de hele JSON van het antwoord terug. Geef twee dingen uit de choice terug: de tekst van het bericht en de `finish_reason`."},
             "cut-yourself": {"en": "With `{call}`, your function gives the right first line, but it cut the text itself: the request had no `\"stop\"`, so the model wrote every line, and every token of them counts. Put `\"stop\": [\"\\n\"]` in the body.",
                              "nl": "Met `{call}` geeft je functie de goede eerste regel, maar hij knipte de tekst zelf: het request had geen `\"stop\"`, dus schreef het model alle regels, en elk token daarvan telt. Zet `\"stop\": [\"\\n\"]` in de body."},
             "no-stop": {"en": "With `{call}`, your request has no stop sequence with a line break, so the answer goes on after the first line. Add `\"stop\"` to the body, with a list that holds `\"\\n\"`.",
@@ -332,6 +336,8 @@ CASES = [
     ("ask", SOLUTION_ASK.replace('return answer["choices"][0]["message"]["content"]', 'return answer["choices"][0]["message"]["content"].upper()'), "wrong", "other"),
     ("first_line", START_FIRST, "empty", None),
     ("first_line", SOLUTION_FIRST, "correct", None),
+    ("first_line", SOLUTION_FIRST.replace('    choice = answer["choices"][0]\n    return choice["message"]["content"], choice["finish_reason"]\n',
+                                          '    return answer\n'), "wrong", "whole"),
     ("first_line", SOLUTION_FIRST.replace('["\\n"]', '"\\n"'), "correct", None),
     ("first_line", SOLUTION_FIRST.replace(',\n            "stop": ["\\n"]}', "}").replace(
         'choice["message"]["content"], ', 'choice["message"]["content"].split("\\n")[0], '), "wrong", "cut-yourself"),
