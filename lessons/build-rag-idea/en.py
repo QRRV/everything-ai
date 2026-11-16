@@ -158,7 +158,7 @@ def text_sources():
         Question: the question
         ```
 
-        Each passage is on a line of its own, after its number in square brackets and a space. Without passages, the function gives back the question alone. The box puts the passages in front of the question without numbers, and also when there are none.
+        Each passage is on a line of its own, after its number in square brackets and a space. Without passages, the function gives back the question alone. The box puts the passages in front of the question without numbers, and also when there are none. When it is right, the check also keeps it as a file, `work/projects/app/sources.py`: [Project: your assistant reads your documents](/course/open/build-project-rag?lang=en) uses it.
         """),
         L.task("Number the passages from 1, and give back the question alone when there are none."),
     ])

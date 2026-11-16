@@ -1,0 +1,28 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: build-project-rag
+minutes: 35
+title:
+  en: "Project: your assistant reads your documents"
+  nl: "Project: je assistent leest je documenten"
+goal:
+  en: "let your assistant answer questions about a folder of your own documents: a library of their chunks with embeddings, a search by meaning, and an answer from the chunks it found, with the chunk it comes from named."
+  nl: "je assistent vragen laten beantwoorden over een map met je eigen documenten: een library van hun chunks met embeddings, zoeken op betekenis, en een antwoord uit de gevonden chunks, met de chunk genoemd waar het vandaan komt."
+summary:
+  - en: "Without the handbook of Spoke & Chain, a shop the course made up, Qwen3 gave 0 right answers of 24 about it, and made up a phone number. With your ask and the handbook as a library of 13 chunks, 13 of 24 answers were right, and it said I don't know in 4 of 4 runs where the handbook does not answer."
+    nl: "Zonder het handboek van Spoke & Chain, een winkel die de course verzon, gaf Qwen3 er 0 goede antwoorden van de 24 over, en verzon het een telefoonnummer. Met je ask en het handboek als library van 13 chunks waren 13 van de 24 antwoorden goed, en zei het in 4 van de 4 runs waar het handboek geen antwoord geeft I don't know."
+  - en: "make_library embeds the chunks 64 at a time, because a server takes a limited number of texts in one request, and keeps them with their embeddings and what they are about. ask searches the library, asks with the grounded prompt, and keeps the chunks the answer names."
+    nl: "make_library maakt de embeddings van de chunks 64 tegelijk, omdat een server een beperkt aantal teksten in één request aanneemt, en bewaart ze met hun embeddings en waar ze over gaan. ask zoekt in de library, vraagt met de grounded prompt, en houdt de chunks die het antwoord noemt."
+  - en: "An answer is only as good as the chunks the search finds: where search by meaning missed the chunk with the answer, the model took another price from the chunks it got. Where it found the chunk, the wrong answers named the chunk that holds the right one, so a reader can check it."
+    nl: "Een antwoord is maar zo goed als de chunks die de zoekfunctie vindt: waar zoeken op betekenis de chunk met het antwoord miste, nam het model een andere prijs uit de chunks die het kreeg. Waar de zoekfunctie de chunk vond, noemden de foute antwoorden de chunk met het goede antwoord, zodat een lezer het kan nakijken."
+can_now:
+  - en: "make a library of chunks with their embeddings, a batch at a time"
+    nl: "een library maken van chunks met hun embeddings, een batch tegelijk"
+    by: make_library
+  - en: "let your assistant answer from your documents, with the chunk it comes from named"
+    nl: "je assistent laten antwoorden uit je documenten, met de chunk genoemd waar het antwoord vandaan komt"
+    by: ask
+  - en: "say what has to be embedded when a document is added"
+    nl: "zeggen wat er een embedding moet krijgen als er een document bij komt"
+    by: new-document

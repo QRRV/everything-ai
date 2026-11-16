@@ -1,0 +1,31 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: build-grounded-answers
+minutes: 30
+title:
+  en: "Answers from the sources"
+  nl: "Antwoorden uit de bronnen"
+goal:
+  en: "make a model answer only from the sources it got, with the number of its source, and say so when they do not answer; and check the answer against the source it names."
+  nl: "een model alleen laten antwoorden uit de bronnen die het kreeg, met het nummer van zijn bron, en het laten zeggen als ze geen antwoord geven; en het antwoord nakijken in de bron die het noemt."
+summary:
+  - en: "Grounded generation asks the model to answer only from the numbered sources, to end with the number of its source in square brackets, and to answer only I don't know when the sources do not answer. With the same three sources, Qwen3 gave 37 right answers of 48 that way, against 23 with the plain system prompt."
+    nl: "Grounded generation vraagt het model alleen uit de genummerde bronnen te antwoorden, te eindigen met het nummer van zijn bron tussen vierkante haken, en alleen I don't know te antwoorden als de bronnen geen antwoord geven. Met dezelfde drie bronnen gaf Qwen3 zo 37 goede antwoorden van de 48, tegen 23 met de gewone system prompt."
+  - en: "On the 4 questions no source answers, it said I don't know in 6 of 8 runs; with the plain prompt, 2 of 8 said they could not answer. The price: once it said I don't know although source 1 held the answer."
+    nl: "Op de 4 vragen die geen bron beantwoordt, zei het in 6 van de 8 runs I don't know; met de gewone prompt zeiden 2 van de 8 dat ze niet konden antwoorden. De prijs: één keer zei het I don't know terwijl bron 1 het antwoord had."
+  - en: "A check in code can look whether every number of an answer is in the sources it names. On the 48 grounded answers, it caught a made-up slope of 1, but let through all 11 answers that were not right: a number from a source can be about something else."
+    nl: "Een controle in code kan kijken of elk getal van een antwoord in de bronnen staat die het noemt. Op de 48 grounded antwoorden ving hij een verzonnen helling van 1, maar liet hij alle 11 antwoorden door die niet goed waren: een getal uit een bron kan over iets anders gaan."
+can_now:
+  - en: "find the sources an answer names"
+    nl: "de bronnen vinden die een antwoord noemt"
+    by: cited
+  - en: "check whether the numbers of an answer are in the sources it names"
+    nl: "nakijken of de getallen van een antwoord in de bronnen staan die het noemt"
+    by: supported
+  - en: "tell what a check by numbers does not prove"
+    nl: "zeggen wat een controle op getallen niet bewijst"
+    by: named-source
+  - en: "tell what a strict grounded prompt costs"
+    nl: "zeggen wat een strenge grounded prompt kost"
+    by: refused

@@ -202,7 +202,7 @@ def text_embed():
 
         ### Oefening 1. Embeddings via de API
 
-        `embed(url, texts)` stuurt al een request en leest het antwoord, zoals je `ask` deed in [Een model aanroepen over HTTP](/course/open/build-call-api?lang=nl). Vul de drie `...` in: de teksten als input, het endpoint voor embeddings, en de lijst met embeddings, één per tekst. De check roept hem aan met een stand-in van de server, die meteen antwoordt met verzonnen embeddings: 384 getallen per tekst, willekeurig getrokken, dus ze betekenen niets. Het plaatje onder de check laat zien wat je functie stuurde, en wat er terugkwam.
+        `embed(url, texts)` stuurt al een request en leest het antwoord, zoals je `ask` deed in [Een model aanroepen over HTTP](/course/open/build-call-api?lang=nl). Vul de drie `...` in: de teksten als input, het endpoint voor embeddings, en de lijst met embeddings, één per tekst. De check roept hem aan met een stand-in van de server, die meteen antwoordt met verzonnen embeddings: 384 getallen per tekst, willekeurig getrokken, dus ze betekenen niets. Het plaatje onder de check laat zien wat je functie stuurde, en wat er terugkwam. Als hij goed is, bewaart de check hem ook als bestand, `work/projects/app/embeddings.py`: [Project: je assistent leest je documenten](/course/open/build-project-rag?lang=nl) gebruikt hem.
         """),
         L.task("Maak `embed` af: stuur `texts` als input naar het endpoint voor embeddings, en geef de lijst met hun embeddings terug."),
     ])

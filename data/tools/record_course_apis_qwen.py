@@ -62,7 +62,7 @@ FILES = {   # the file of each module, and its lessons
                                      "build-prompt-templates", "build-project-prompts", "build-model-specific",
                                      "build-defensive-prompts", "build-self-consistency", "build-context-engineering",
                                      "build-prompt-caching"],
-    "course-rag-qwen.json": ["build-rag-idea", "build-rag-first"],
+    "course-rag-qwen.json": ["build-rag-idea", "build-rag-first", "build-grounded-answers", "build-project-rag"],
 }
 LESSONS = [lesson for lessons in FILES.values() for lesson in lessons]
 THREADS = 2   # the server's threads; a speed ask runs on one

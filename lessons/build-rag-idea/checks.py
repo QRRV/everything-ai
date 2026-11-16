@@ -243,6 +243,7 @@ EXERCISES = {
         name="with_sources",
         picture=sources_picture,
         function="with_sources",
+        save_as=("app", "sources"),   # Project: your assistant reads your documents builds on it
         start=START_SOURCES,
         solution=SOLUTION_SOURCES,
         visible=[(EXAMPLE_QUESTION, EXAMPLE_PASSAGES)],
@@ -267,8 +268,10 @@ EXERCISES = {
                        "nl": "Goed voor het voorbeeld. Maar `{call}` geeft `{got}`, en het zou `{want}` moeten zijn. Werkt je functie met één bron, met drie, en zonder?"},
             "no_function": {"en": "Your box does not make a function `with_sources`. Keep the `def` line as it was.",
                             "nl": "Je vak maakt geen functie `with_sources`. Laat de `def`-regel staan zoals hij was."},
-            "correct": {"en": "Your `with_sources` is right in all {n} cases: numbered sources in front of the question, and the question alone when there are none.",
-                        "nl": "Je `with_sources` klopt in alle {n} gevallen: genummerde bronnen vóór de vraag, en alleen de vraag als er geen zijn."},
+            "correct": {"en": "Your `with_sources` is right in all {n} cases: numbered sources in front of the question, and the question alone when there are none. The check kept it as a file, `{saved}`.",
+                        "nl": "Je `with_sources` klopt in alle {n} gevallen: genummerde bronnen vóór de vraag, en alleen de vraag als er geen zijn. De check heeft hem als bestand bewaard, `{saved}`."},
+            "kept": {"en": "Your `with_sources` is right. You changed `{saved}` yourself, so the check left it as it is.",
+                     "nl": "Je `with_sources` is goed. Je hebt `{saved}` zelf veranderd, dus de check liet het staan zoals het is."},
         },
     ),
     "ask": ApiBox(

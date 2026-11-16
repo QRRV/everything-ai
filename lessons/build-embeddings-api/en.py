@@ -202,7 +202,7 @@ def text_embed():
 
         ### Exercise 1. Embeddings through the API
 
-        `embed(url, texts)` sends a request and reads the answer already, as your `ask` did in [Calling a model over HTTP](/course/open/build-call-api?lang=en). Fill in the three `...`: the texts as the input, the endpoint for embeddings, and the list of embeddings, one per text. The check calls it with a stand-in of the server, which answers at once with made-up embeddings: 384 numbers per text, drawn at random, so they mean nothing. The picture under the check shows what your function sent, and what came back.
+        `embed(url, texts)` sends a request and reads the answer already, as your `ask` did in [Calling a model over HTTP](/course/open/build-call-api?lang=en). Fill in the three `...`: the texts as the input, the endpoint for embeddings, and the list of embeddings, one per text. The check calls it with a stand-in of the server, which answers at once with made-up embeddings: 384 numbers per text, drawn at random, so they mean nothing. The picture under the check shows what your function sent, and what came back. When it is right, the check also keeps it as a file, `work/projects/app/embeddings.py`: [Project: your assistant reads your documents](/course/open/build-project-rag?lang=en) uses it.
         """),
         L.task("Finish `embed`: send `texts` as the input to the endpoint for embeddings, and give back the list of their embeddings."),
     ])

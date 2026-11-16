@@ -151,7 +151,7 @@ def text_chunk():
 
         ### Oefening 1. Chunks met een overlap
 
-        Schrijf `chunk(text, size, overlap)`, die `text` knipt in chunks van `size` woorden, als teksten met een spatie tussen de woorden. Elke volgende chunk begint `overlap` woorden vóór het eind van de vorige, en de chunk die het eind van de tekst haalt is de laatste: geen chunk mag binnen de vorige liggen. Een lege tekst geeft een lege lijst. Het vak knipt chunks achter elkaar, zonder overlap. `break` stopt een `while`-loop meteen.
+        Schrijf `chunk(text, size, overlap)`, die `text` knipt in chunks van `size` woorden, als teksten met een spatie tussen de woorden. Elke volgende chunk begint `overlap` woorden vóór het eind van de vorige, en de chunk die het eind van de tekst haalt is de laatste: geen chunk mag binnen de vorige liggen. Een lege tekst geeft een lege lijst. Het vak knipt chunks achter elkaar, zonder overlap. `break` stopt een `while`-loop meteen. Als hij goed is, bewaart de check hem ook als bestand, `work/projects/app/chunks.py`: [Project: je assistent leest je documenten](/course/open/build-project-rag?lang=nl) gebruikt hem.
         """),
         L.task("Stap `size - overlap` woorden verder, en stop na de chunk die het eind haalt."),
     ])

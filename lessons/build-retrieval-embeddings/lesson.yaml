@@ -1,0 +1,31 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: build-retrieval-embeddings
+minutes: 30
+title:
+  en: "Search by meaning"
+  nl: "Zoeken op betekenis"
+goal:
+  en: "search a knowledge base by meaning: embed every text once, embed the question with the same model, and keep the texts whose embeddings fit it best."
+  nl: "een knowledge base op betekenis doorzoeken: van elke tekst één keer de embedding maken, van de vraag met hetzelfde model, en de teksten houden waarvan de embedding er het best bij past."
+summary:
+  - en: "Search by meaning embeds every text once, embeds the question with the same model, and keeps the texts whose embeddings have the highest dot product with it, the cosine similarity at length 1. On the course's machine, embedding all 1,266 points took 9.5 seconds, one question 0.008."
+    nl: "Zoeken op betekenis maakt één keer van elke tekst de embedding, van de vraag met hetzelfde model, en houdt de teksten waarvan de embedding het hoogste inproduct met die van de vraag heeft, bij lengte 1 de cosine similarity. Op de computer van de course duurden de embeddings van alle 1.266 punten 9,5 seconden, van één vraag 0,008."
+  - en: "On 24 questions, search by meaning put the right point in its top three for 20, BM25 for 18: for 5 of the 7 questions in other words, against 2. On questions that share words with their point, BM25 was a little better: 16 of 17 against 15."
+    nl: "Op 24 vragen zette zoeken op betekenis het goede punt bij de bovenste drie voor 20, BM25 voor 18: voor 5 van de 7 vragen in andere woorden, tegen 2. Op vragen die woorden met hun punt delen, was BM25 iets beter: 16 van de 17 tegen 15."
+  - en: "A Dutch question finds an English point too: 17 of the 24 by meaning, 14 with BM25, which can only go by the words they share, such as numbers and names. A high score proves nothing: a question no point answers got 0.769, more than the right point of 10 of the 24 questions."
+    nl: "Een Nederlandse vraag vindt ook een Engels punt: 17 van de 24 op betekenis, 14 met BM25, dat alleen kan afgaan op de woorden die ze delen, zoals getallen en namen. Een hoge score bewijst niets: een vraag die geen punt beantwoordt kreeg 0,769, meer dan het goede punt van 10 van de 24 vragen."
+can_now:
+  - en: "find the texts whose embeddings fit a question's best"
+    nl: "de teksten vinden waarvan de embedding het best bij die van een vraag past"
+    by: meaning_search
+  - en: "search a knowledge base by meaning, with embeddings made once"
+    nl: "een knowledge base op betekenis doorzoeken, met embeddings die één keer gemaakt zijn"
+    by: retrieve
+  - en: "tell what the score of search by meaning does not say"
+    nl: "zeggen wat de score van zoeken op betekenis niet zegt"
+    by: high-score
+  - en: "tell why a question in another language finds a text by meaning and not by words"
+    nl: "zeggen waarom een vraag in een andere taal een tekst wel op betekenis vindt en niet op woorden"
+    by: dutch-question

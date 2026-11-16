@@ -151,7 +151,7 @@ def text_chunk():
 
         ### Exercise 1. Chunks with an overlap
 
-        Write `chunk(text, size, overlap)`, which cuts `text` into chunks of `size` words, as texts with a space between the words. Each next chunk starts `overlap` words before the end of the one before it, and the chunk that reaches the end of the text is the last: no chunk may lie inside the one before it. An empty text gives an empty list. The box cuts chunks one after another, without overlap. `break` stops a `while` loop at once.
+        Write `chunk(text, size, overlap)`, which cuts `text` into chunks of `size` words, as texts with a space between the words. Each next chunk starts `overlap` words before the end of the one before it, and the chunk that reaches the end of the text is the last: no chunk may lie inside the one before it. An empty text gives an empty list. The box cuts chunks one after another, without overlap. `break` stops a `while` loop at once. When it is right, the check also keeps it as a file, `work/projects/app/chunks.py`: [Project: your assistant reads your documents](/course/open/build-project-rag?lang=en) uses it.
         """),
         L.task("Step `size - overlap` words further, and stop after the chunk that reaches the end."),
     ])

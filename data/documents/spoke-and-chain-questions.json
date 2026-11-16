@@ -1,0 +1,33 @@
+{
+ "about": "Questions about the handbook of Spoke & Chain (spoke-and-chain.md), for build-project-rag. Kind words: the question shares words with the part that answers it; meaning: it asks the same in other words; none: the handbook does not answer it. fact: the words of the handbook that answer it, which a chunk holds when it holds the answer; answer: a regular expression a right answer matches in lower case.",
+ "questions": [
+  {"id": "h01", "kind": "words", "fact": "A full service costs 85 euros", "answer": "\\b85 euros",
+   "text": {"en": "How much does a full service cost?", "nl": "Hoeveel kost een volledige onderhoudsbeurt?"}},
+  {"id": "h02", "kind": "words", "fact": "on Saturday from 9:00 to 17:00", "answer": "\\b17\\b|5 ?p\\.?m",
+   "text": {"en": "Until what time is the shop open on Saturday?", "nl": "Tot hoe laat is de winkel op zaterdag open?"}},
+  {"id": "h03", "kind": "words", "fact": "five years of warranty on the frame", "answer": "\\bfive\\b|\\b5\\b",
+   "text": {"en": "How many years of warranty does the frame of a new bike have?", "nl": "Hoeveel jaar garantie zit er op het frame van een nieuwe fiets?"}},
+  {"id": "h04", "kind": "words", "fact": "electric bikes for 35 euros a day or 150 euros a week", "answer": "\\b150 euros",
+   "text": {"en": "How much does it cost to rent an electric bike for a week?", "nl": "Wat kost het om een elektrische fiets een week te huren?"}},
+  {"id": "h05", "kind": "words", "fact": "A deposit of 100 euros", "answer": "\\b100 euros",
+   "text": {"en": "How much is the deposit for a rental bike?", "nl": "Hoe hoog is de borg voor een huurfiets?"}},
+  {"id": "h06", "kind": "words", "fact": "A membership costs 30 euros a year", "answer": "\\b30 euros",
+   "text": {"en": "How much does a membership cost?", "nl": "Hoeveel kost een lidmaatschap?"}},
+  {"id": "h07", "kind": "words", "fact": "cash up to 500 euros", "answer": "(?<![0-9,.])500 euros",
+   "text": {"en": "Up to what amount can I pay in cash?", "nl": "Tot welk bedrag kan ik contant betalen?"}},
+  {"id": "h08", "kind": "words", "fact": "they are valid for two years", "answer": "two years|\\b2 years",
+   "text": {"en": "How long is a gift card valid?", "nl": "Hoe lang is een cadeaukaart geldig?"}},
+  {"id": "h09", "kind": "meaning", "fact": "A full service costs 85 euros", "answer": "\\b85 euros",
+   "text": {"en": "What do I pay to have my bicycle checked from top to bottom?", "nl": "Wat betaal ik om mijn fiets van top tot teen te laten nakijken?"}},
+  {"id": "h10", "kind": "meaning", "fact": "in about twenty minutes", "answer": "twenty minutes|\\b20 min",
+   "text": {"en": "How long do I wait when my tire is punctured?", "nl": "Hoe lang moet ik wachten als mijn band lek is?"}},
+  {"id": "h11", "kind": "meaning", "fact": "10 percent higher than the price in cash", "answer": "\\b10 ?(%|percent)",
+   "text": {"en": "How much more do I get for my old bike as store credit instead of money?", "nl": "Hoeveel meer krijg ik voor mijn oude fiets als tegoed in plaats van geld?"}},
+  {"id": "h12", "kind": "meaning", "fact": "costs 2 euros a day for storage", "answer": "\\b2 euros|two euros",
+   "text": {"en": "I forgot to pick up my repaired bike for six weeks. Does that cost anything?", "nl": "Ik ben vergeten mijn gerepareerde fiets zes weken lang op te halen. Kost dat iets?"}},
+  {"id": "h13", "kind": "none", "fact": null, "answer": null,
+   "text": {"en": "What is the phone number of the shop?", "nl": "Wat is het telefoonnummer van de winkel?"}},
+  {"id": "h14", "kind": "none", "fact": null, "answer": null,
+   "text": {"en": "On which street is the shop?", "nl": "In welke straat zit de winkel?"}}
+ ]
+}

@@ -243,6 +243,7 @@ EXERCISES = {
         name="chunk",
         picture=chunk_picture,
         function="chunk",
+        save_as=("app", "chunks"),   # Project: your assistant reads your documents builds on it
         start=START_CHUNK,
         solution=SOLUTION_CHUNK,
         visible=[(SENTENCE, 6, 2)],
@@ -266,8 +267,10 @@ EXERCISES = {
                        "nl": "Goed voor het voorbeeld. Maar `{call}` geeft `{got}`, en het zou `{want}` moeten zijn. Werkt je functie zonder overlap, voor een tekst korter dan één chunk, en voor een lege tekst?"},
             "no_function": {"en": "Your box does not make a function `chunk`. Keep the `def` line as it was.",
                             "nl": "Je vak maakt geen functie `chunk`. Laat de `def`-regel staan zoals hij was."},
-            "correct": {"en": "Your `chunk` is right in all {n} cases: chunks of `size` words that overlap by `overlap`, up to the end and no further.",
-                        "nl": "Je `chunk` klopt in alle {n} gevallen: chunks van `size` woorden die `overlap` woorden overlappen, tot het eind en niet verder."},
+            "correct": {"en": "Your `chunk` is right in all {n} cases: chunks of `size` words that overlap by `overlap`, up to the end and no further. The check kept it as a file, `{saved}`.",
+                        "nl": "Je `chunk` klopt in alle {n} gevallen: chunks van `size` woorden die `overlap` woorden overlappen, tot het eind en niet verder. De check heeft hem als bestand bewaard, `{saved}`."},
+            "kept": {"en": "Your `chunk` is right. You changed `{saved}` yourself, so the check left it as it is.",
+                     "nl": "Je `chunk` is goed. Je hebt `{saved}` zelf veranderd, dus de check liet het staan zoals het is."},
         },
     ),
     "by_paragraph": FunctionBox(

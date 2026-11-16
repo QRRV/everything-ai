@@ -668,7 +668,7 @@ lessons:
   covers: [rag-basis#4]
   requires: [build-bm25, build-embeddings-api]
   introduces: [c:dense-retrieval, c:cross-lingual-retrieval]
-  data: [model-granite-embedding, course-summaries]
+  data: [model-granite-embedding, course-summaries, course-summaries-granite]
   ladder: [python, numpy]
   needs: any
 
@@ -681,7 +681,8 @@ lessons:
   covers: [rag-basis#6]
   requires: [build-retrieval-embeddings]
   introduces: [c:grounded-generation]
-  data: [model-qwen3-0.6b, course-summaries]
+  mentions: [py:split-sep, py:isdigit, py:or-operator]
+  data: [model-qwen3-0.6b, course-summaries, course-summaries-granite, course-rag-qwen]
   ladder: [python]
   needs: any
 
@@ -692,10 +693,12 @@ lessons:
   module: rag
   kind: project
   project: app
-  idea: "Your assistant answers questions about your own documents, or about the summaries of the course: cut them into chunks, search by words and by meaning, and answer from the sources with the source named."
+  idea: "Your assistant answers questions about your own documents, such as the handbook of a shop: cut them into chunks, make a library of their embeddings a batch at a time, search it by meaning, and answer from the chunks it found, with the chunk named."
   covers: []
   requires: [build-project-prompts, build-grounded-answers]
-  data: [model-qwen3-0.6b, model-granite-embedding, course-summaries]
+  uses: [c:retrieval-augmented-generation, c:retrieval, c:rag-pipeline, c:knowledge-base, c:chunk, c:chunking, c:chunk-overlap, c:embedding, c:embeddings-api, c:embedding-model, c:dense-retrieval, c:lexical-retrieval, c:bm25, c:dot-product, c:grounded-generation, c:citation, c:api, c:api-client, c:openai-compatible-api, c:local-server, c:http-request, c:message-role, c:chat-model, c:system-prompt, c:prompt-template, c:module, c:open-weights, c:seed, c:array, py:np-array, py:dict, py:list, py:len, py:append, py:for, py:range, py:range-step, py:slicing, py:if, py:comparison, py:and-operator, py:indexing, py:import, py:def, py:return, py:string-literal, q:predict, q:choice, q:exercise-with-check, q:run-cell]
+  mentions: [py:list-concatenation, c:http-status-code]
+  data: [model-qwen3-0.6b, model-granite-embedding, course-handbook-documents, course-handbook-granite, course-rag-qwen, course-summaries-granite]
   ladder: [python, numpy]
   needs: any
 

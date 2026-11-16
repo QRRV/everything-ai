@@ -158,7 +158,7 @@ def text_sources():
         Question: de vraag
         ```
 
-        Elke passage staat op een eigen regel, na zijn nummer tussen vierkante haken en een spatie. Zonder passages geeft de functie alleen de vraag terug. Het vak zet de passages zonder nummers vóór de vraag, en ook als er geen zijn. De opdracht en `Question:` blijven Engels, omdat Qwen3 Engels het best schrijft.
+        Elke passage staat op een eigen regel, na zijn nummer tussen vierkante haken en een spatie. Zonder passages geeft de functie alleen de vraag terug. Het vak zet de passages zonder nummers vóór de vraag, en ook als er geen zijn. De opdracht en `Question:` blijven Engels, omdat Qwen3 Engels het best schrijft. Als hij goed is, bewaart de check hem ook als bestand, `work/projects/app/sources.py`: [Project: je assistent leest je documenten](/course/open/build-project-rag?lang=nl) gebruikt hem.
         """),
         L.task("Nummer de passages vanaf 1, en geef alleen de vraag terug als er geen zijn."),
     ])
