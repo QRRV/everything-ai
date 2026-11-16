@@ -711,7 +711,8 @@ lessons:
   covers: [retrieval-techniek#0]
   requires: [build-retrieval-embeddings, ml-kmeans]
   introduces: [c:vector-index, c:approximate-nearest-neighbors, c:ivf-index, c:hnsw]
-  data: [model-granite-embedding, course-summaries]
+  mentions: [c:vector-database]
+  data: [course-summaries, course-summaries-granite]
   ladder: [python, numpy]
   needs: any
 
@@ -725,7 +726,7 @@ lessons:
   requires: [build-vector-index]
   introduces: [c:metadata-filter, c:vector-database]
   mentions: [c:metadata]
-  data: [model-granite-embedding, course-summaries]
+  data: [course-summaries, course-summaries-granite]
   ladder: [python, numpy]
   needs: any
 
@@ -734,11 +735,12 @@ lessons:
   level: basis
   domein: bouwen
   module: rag
-  idea: "Search by words finds exact names and codes, search by meaning finds the same idea in other words; reciprocal rank fusion merges the two lists by rank, and finds more of the right chunks than either."
+  idea: "Search by words finds exact names and codes, search by meaning finds the same idea in other words; reciprocal rank fusion merges the two lists by rank, and often finds more of the right chunks than either."
   covers: [retrieval-techniek#4]
   requires: [build-retrieval-embeddings]
   introduces: [c:hybrid-search, c:reciprocal-rank-fusion]
-  data: [model-granite-embedding, course-summaries]
+  mentions: [c:coding-agent]
+  data: [course-summaries, course-summaries-granite]
   ladder: [python, numpy]
   needs: any
 

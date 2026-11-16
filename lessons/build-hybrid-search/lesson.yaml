@@ -1,0 +1,31 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: build-hybrid-search
+minutes: 30
+title:
+  en: "Words and meaning together"
+  nl: "Woorden en betekenis samen"
+goal:
+  en: "merge a search by words and a search by meaning with reciprocal rank fusion, and measure whether the merged search finds more of the right points."
+  nl: "een zoekfunctie op woorden en een zoekfunctie op betekenis samenvoegen met reciprocal rank fusion, en meten of de samengevoegde zoekfunctie meer van de goede punten vindt."
+summary:
+  - en: "Hybrid search searches with words and by meaning, and merges the two rankings. Their scores cannot simply be added: they are not on the same scale. Reciprocal rank fusion gives every text the sum of 1 / (k + rank) over the rankings, with k usually 60, and sorts on that sum."
+    nl: "Hybrid search zoekt op woorden en op betekenis, en voegt de twee ranglijsten samen. Hun scores kun je niet zomaar optellen: ze liggen niet op dezelfde schaal. Reciprocal rank fusion geeft elke tekst de som van 1 / (k + rang) over de ranglijsten, met k meestal 60, en sorteert op die som."
+  - en: "On the 24 questions a point of the course answers, asked in English, the merged search put the right point among the three best for 21, search by meaning for 20, BM25 for 18. A plain sum of the two scores gave exactly BM25's three best for 22 of the 24."
+    nl: "Op de 24 vragen die een punt van de course beantwoordt, in het Engels gesteld, zette de samengevoegde zoekfunctie het goede punt bij de drie beste voor 21, zoeken op betekenis voor 20, BM25 voor 18. Een gewone som van de twee scores gaf voor 22 van de 24 precies de drie beste van BM25."
+  - en: "Asked in Dutch, BM25 found only 14, and the merged search 15, fewer than the 17 of search by meaning. With k = 1, which lets a first place count more, it found 19. Merging is not better by itself: measure it on your own questions."
+    nl: "In het Nederlands gesteld vond BM25 er maar 14, en de samengevoegde zoekfunctie 15, minder dan de 17 van zoeken op betekenis. Met k = 1, waarbij een eerste plaats zwaarder telt, vond hij er 19. Samenvoegen is niet vanzelf beter: meet het op je eigen vragen."
+can_now:
+  - en: "merge rankings with reciprocal rank fusion"
+    nl: "ranglijsten samenvoegen met reciprocal rank fusion"
+    by: rrf
+  - en: "search with words and by meaning at once, and merge the two"
+    nl: "tegelijk op woorden en op betekenis zoeken, en de twee samenvoegen"
+    by: hybrid_search
+  - en: "say why the scores of two searches cannot simply be added"
+    nl: "zeggen waarom je de scores van twee zoekfuncties niet zomaar kunt optellen"
+    by: add-scores
+  - en: "say what k does in reciprocal rank fusion"
+    nl: "zeggen wat k doet in reciprocal rank fusion"
+    by: first-place

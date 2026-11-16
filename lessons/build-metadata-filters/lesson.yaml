@@ -1,0 +1,31 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: build-metadata-filters
+minutes: 30
+title:
+  en: "Filters and vector databases"
+  nl: "Filters en vector databases"
+goal:
+  en: "give every item of a knowledge base its metadata, and search only the items that fit a filter, filtering first so that you still get k results."
+  nl: "elk item van een knowledge base zijn metadata geven, en alleen zoeken in de items die bij een filter passen, door eerst te filteren zodat je nog k resultaten krijgt."
+summary:
+  - en: "Metadata, such as the language, lesson, domain and level of a point, let a search keep only the items that fit a filter. Filter first, then take the k best: filtering afterwards can leave fewer than k. A vector database keeps embeddings, text and metadata together, builds an index and filters during the search."
+    nl: "Metadata, zoals de taal, les, het domein en het niveau van een punt, laten een zoekfunctie alleen de items houden die bij een filter passen. Filter eerst, neem dan de k beste: achteraf filteren kan minder dan k overlaten. Een vector database houdt embeddings, tekst en metadata bij elkaar, bouwt een index en filtert tijdens het zoeken."
+  - en: "In a store of the course's points in both languages, 2,532 items, the three best for 23 of the 28 English questions held the same point twice, in English and in Dutch. With a filter on the language, the right point was among the three for 20 of 24 questions, against 18 without."
+    nl: "In een store van de punten van de course in beide talen, 2.532 items, bevatten de drie beste voor 23 van de 28 Engelse vragen hetzelfde punt twee keer, in het Engels en in het Nederlands. Met een filter op de taal zat het goede punt bij de drie voor 20 van de 24 vragen, tegen 18 zonder."
+  - en: "With the 28 questions in Dutch and the filter of language nl and domain bouwen, filtering afterwards kept nothing for 21 questions; filtering first gave three for all. A filter on the clusters of an IVF index found nothing for 6 of 28 questions, looking in 1 cluster."
+    nl: "Met de 28 vragen in het Nederlands en het filter op taal nl en domein bouwen hield achteraf filteren niets over voor 21 vragen; eerst filteren gaf er drie voor allemaal. Een filter op de clusters van een IVF index vond niets voor 6 van de 28 vragen, als hij in 1 cluster keek."
+can_now:
+  - en: "check whether an item fits a filter on its metadata"
+    nl: "nagaan of een item bij een filter op zijn metadata past"
+    by: matches
+  - en: "search only the items that fit a filter, and still get k results"
+    nl: "alleen zoeken in de items die bij een filter passen, en toch k resultaten krijgen"
+    by: filtered_search
+  - en: "say why a store with two languages gives the same point twice"
+    nl: "zeggen waarom een store met twee talen hetzelfde punt twee keer geeft"
+    by: twice
+  - en: "keep documents that someone may not read out of the answers"
+    nl: "documenten die iemand niet mag lezen buiten de antwoorden houden"
+    by: access

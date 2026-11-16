@@ -1,0 +1,31 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: build-vector-index
+minutes: 30
+title:
+  en: "Searching many vectors fast"
+  nl: "Snel zoeken in veel vectoren"
+goal:
+  en: "search an IVF index instead of every vector: compare the question only with the vectors in the clusters whose centroids are nearest, and measure how often that misses the nearest."
+  nl: "zoeken in een IVF index in plaats van in elke vector: de vraag alleen vergelijken met de vectoren in de clusters waarvan de centroids het dichtst bij liggen, en meten hoe vaak je zo de dichtstbijzijnde mist."
+summary:
+  - en: "An IVF index puts the vectors in clusters with k-means, once, and keeps a list of the vectors of each cluster. A search compares the question with the centroids, and then only with the vectors of the few nearest clusters: approximate nearest neighbor search, much faster than comparing with every vector, but now and then it misses a nearer one."
+    nl: "Een IVF index deelt de vectoren één keer met k-means in clusters in, en houdt per cluster een lijst van zijn vectoren bij. Een zoekfunctie vergelijkt de vraag met de centroids, en daarna alleen met de vectoren van de paar dichtstbijzijnde clusters: approximate nearest neighbor search, veel sneller dan vergelijken met elke vector, maar af en toe mist hij er een die dichterbij ligt."
+  - en: "With the course's 1,266 points in 16 clusters, looking in 1 cluster compared 100 vectors on average and found the same three points as a search through every vector for 9 of the 28 questions; in 4 clusters 346 vectors and 19, from 12 clusters on all 28, with 974 vectors."
+    nl: "Met de 1.266 punten van de course in 16 clusters vergeleek kijken in 1 cluster gemiddeld 100 vectoren en vond het voor 9 van de 28 vragen dezelfde drie punten als een zoekfunctie door elke vector; in 4 clusters 346 vectoren en 19, vanaf 12 clusters alle 28, met 974 vectoren."
+  - en: "An index misses quietly: it always gives k points. Only a search through every vector shows what it skipped, so measure on your own questions before you choose how many clusters to look in. Most vector databases use HNSW; Faiss has flat search, IVF and HNSW ready-made."
+    nl: "Een index mist ongemerkt: hij geeft altijd k punten. Alleen een zoekfunctie door elke vector laat zien wat hij oversloeg, dus meet op je eigen vragen voordat je kiest in hoeveel clusters je kijkt. De meeste vector databases gebruiken HNSW; Faiss heeft flat search, IVF en HNSW kant-en-klaar."
+can_now:
+  - en: "make a list per cluster with the numbers of its vectors"
+    nl: "per cluster een lijst maken met de nummers van zijn vectoren"
+    by: make_lists
+  - en: "search an IVF index, looking in the clusters whose centroids are nearest"
+    nl: "zoeken in een IVF index, in de clusters waarvan de centroids het dichtst bij liggen"
+    by: ivf_search
+  - en: "say how to make an index find the nearest vectors more often, and what it costs"
+    nl: "zeggen hoe een index vaker de dichtstbijzijnde vectoren vindt, en wat dat kost"
+    by: find-more
+  - en: "check whether an index misses vectors, by comparing with a search through every vector"
+    nl: "nagaan of een index vectoren mist, door te vergelijken met een zoekfunctie door elke vector"
+    by: quiet-miss
