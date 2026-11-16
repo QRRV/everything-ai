@@ -1,0 +1,28 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: build-rag-idea
+minutes: 30
+title:
+  en: "Look it up first: what RAG is"
+  nl: "Eerst opzoeken: wat RAG is"
+goal:
+  en: "explain what RAG is and measure what it changes, and send a question with numbered sources to a model."
+  nl: "uitleggen wat RAG is en meten wat het verandert, en een vraag met genummerde bronnen naar een model sturen."
+summary:
+  - en: "A model answers from what it learned, and makes things up where that falls short: it knows nothing after its training, nor what was never in its texts. Retrieval-augmented generation (RAG) first retrieves texts that fit the question and puts them in the prompt, so that the answer can come from them; the model itself does not change."
+    nl: "Een model antwoordt vanuit wat het leerde, en verzint dingen waar dat tekortschiet: het weet niets van na zijn training, en niets van wat nooit in zijn teksten stond. Retrieval-augmented generation (RAG) zoekt eerst teksten op die bij de vraag passen en zet ze in de prompt, zodat het antwoord eruit kan komen; het model zelf verandert niet."
+  - en: "On 8 questions, 4 runs each: without a source Qwen3 was right 1 of 32 times, with the right point of the course's summaries 32 of 32, and with another question's point 1 of 32. With a wrong source it mostly said that the sources do not answer the question, but it also took a number from one once, and on SHA-256 it answered from memory."
+    nl: "Op 8 vragen, elk 4 runs: zonder bron had Qwen3 het 1 van de 32 keer goed, met het goede punt uit de samenvattingen van de course 32 van de 32, en met het punt van een andere vraag 1 van de 32. Met een verkeerde bron zei het meestal dat de bronnen de vraag niet beantwoorden, maar het nam er ook één keer een getal uit over, en bij SHA-256 antwoordde het uit zijn geheugen."
+  - en: "Retrieve, put the texts in the prompt numbered and with an instruction, generate, and check the answer against the source: the answer is as good as the text the search finds."
+    nl: "Zoek op, zet de teksten genummerd en met een opdracht in de prompt, laat het model schrijven, en vergelijk het antwoord met de bron: het antwoord is zo goed als de tekst die de zoekfunctie vindt."
+can_now:
+  - en: "put numbered sources in front of a question"
+    nl: "genummerde bronnen vóór een vraag zetten"
+    by: with_sources
+  - en: "send a question with its sources to a model"
+    nl: "een vraag met de bronnen naar een model sturen"
+    by: ask
+  - en: "tell which questions need RAG"
+    nl: "zeggen welke vragen RAG nodig hebben"
+    by: needs

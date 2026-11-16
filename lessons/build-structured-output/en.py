@@ -232,7 +232,7 @@ def text_worked_example():
     2. **Ask for JSON:** the question names the keys, and JSON mode is on.
     3. **Check:** `json.loads` reads it, and it is a dictionary; `name`, `color` and `price` are all there. `name` and `color` are strings, as the schema says, but `"649"` is a string too, where the schema says `number`. One problem: `{found}`.
     4. **Ask again:** the conversation gets two messages: the answer above as the assistant's, and the user's `{fix}` Qwen3's second answer had `"price": 649`, and it fits, so the function gives back `{value}`.
-    """.format(first=_w["first"].replace("\n", "\n    "), found=_w["found"][0], fix=C.fix_message(_w["found"]),
+    """.format(first=_w["first"], found=_w["found"][0], fix=C.fix_message(_w["found"]),
                value=repr(_w["value"])))
     return
 

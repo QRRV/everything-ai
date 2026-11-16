@@ -1,0 +1,28 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: build-bm25
+minutes: 35
+title:
+  en: "Search by words: BM25"
+  nl: "Zoeken op woorden: BM25"
+goal:
+  en: "score texts for a question with BM25, so that rare words count more, an extra time of a word less, and a long text gets no head start."
+  nl: "teksten een score geven voor een vraag met BM25, zodat zeldzame woorden zwaarder tellen, een extra keer van een woord minder, en een lange tekst geen voorsprong krijgt."
+summary:
+  - en: "BM25 scores a text by the words it shares with the question: the idf of each word is high for a rare word and near 0 for a word almost every text has; an extra time adds less (k1), and a long text is corrected for (b). Searching by the words themselves is lexical retrieval."
+    nl: "BM25 geeft een tekst een score op de woorden die hij met de vraag deelt: de idf van elk woord is hoog voor een zeldzaam woord en bijna 0 voor een woord dat bijna elke tekst heeft; een extra keer telt minder (k1), en een lange tekst wordt gecorrigeerd (b). Zoeken op de woorden zelf heet lexical retrieval."
+  - en: "With the title of each of the 415 lessons as the question, BM25 put a point of that lesson first for 161, the shared words for 117; among the first three 233 against 176. On 17 questions that repeat the words of their point, both put it first 14 times."
+    nl: "Met de titel van elk van de 415 lessen als vraag zette BM25 voor 161 een punt van die les bovenaan, de gedeelde woorden voor 117; bij de eerste drie 233 tegen 176. Op 17 vragen die de woorden van hun punt herhalen, zetten ze het allebei 14 keer bovenaan."
+  - en: "BM25 only sees words as they are written: of 7 questions in other words, it found the point of 2 among the first three. With NumPy it scores all points at once, as a table with a row per point."
+    nl: "BM25 ziet alleen woorden zoals ze geschreven zijn: van 7 vragen in andere woorden vond hij voor 2 het punt bij de eerste drie. Met NumPy geeft hij alle punten tegelijk een score, als een tabel met een rij per punt."
+can_now:
+  - en: "work out the idf of a word, from how many texts have it"
+    nl: "de idf van een woord uitrekenen, uit hoeveel teksten het hebben"
+    by: idf
+  - en: "score a text for a question with BM25"
+    nl: "een tekst een score geven voor een vraag met BM25"
+    by: bm25
+  - en: "tell how much an extra time of a word adds in BM25"
+    nl: "uitleggen hoeveel een extra keer van een woord bijdraagt in BM25"
+    by: twice

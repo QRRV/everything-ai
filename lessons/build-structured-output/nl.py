@@ -232,7 +232,7 @@ def text_worked_example():
     2. **Vraag om JSON:** de vraag noemt de keys, en JSON mode staat aan.
     3. **Controleer:** `json.loads` leest het, en het is een dictionary; `name`, `color` en `price` staan er alle drie in. `name` en `color` zijn strings, zoals het schema zegt, maar `"649"` is ook een string, waar het schema `number` zegt. Eén probleem: `{found}`.
     4. **Vraag opnieuw:** het gesprek krijgt twee berichten: het antwoord hierboven als dat van de assistant, en dat van de user, `{fix}` Het tweede antwoord van Qwen3 had `"price": 649`, en dat past, dus de functie geeft `{value}` terug.
-    """.format(first=_w["first"].replace("\n", "\n    "), found=_w["found"][0], fix=C.fix_message(_w["found"]),
+    """.format(first=_w["first"], found=_w["found"][0], fix=C.fix_message(_w["found"]),
                value=repr(_w["value"])))
     return
 

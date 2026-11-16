@@ -1,8 +1,8 @@
 # SPDX-FileCopyrightText: 2026 Everything AI contributors
 # SPDX-License-Identifier: MIT
-"""Writes data/course-apis-qwen.json and data/course-dev-prompts-qwen.json, the course's runs of Qwen3-0.6B (the chat
-model) for the modules *Calling models* (apis) and *Prompts for developers* (prompts) of the domain bouwen, one file
-for each module. Each run goes through the course's own server (everything_ai.serve) with the
+"""Writes data/course-apis-qwen.json, data/course-dev-prompts-qwen.json and data/course-rag-qwen.json, the course's
+runs of Qwen3-0.6B (the chat model) for the modules *Calling models* (apis), *Prompts for developers* (prompts) and
+*RAG* (rag) of the domain bouwen, one file for each module. Each run goes through the course's own server (everything_ai.serve) with the
 standard library's urllib, the way a learner's code calls it: in float32 with the course's code and KV cache,
 non-thinking unless asked, sampled as Qwen3 advises for each mode (everything_ai.chat.SAMPLING, and THINKING for an
 ask with "think"). Each lesson's checks.py has
@@ -62,6 +62,7 @@ FILES = {   # the file of each module, and its lessons
                                      "build-prompt-templates", "build-project-prompts", "build-model-specific",
                                      "build-defensive-prompts", "build-self-consistency", "build-context-engineering",
                                      "build-prompt-caching"],
+    "course-rag-qwen.json": ["build-rag-idea", "build-rag-first"],
 }
 LESSONS = [lesson for lessons in FILES.values() for lesson in lessons]
 THREADS = 2   # the server's threads; a speed ask runs on one

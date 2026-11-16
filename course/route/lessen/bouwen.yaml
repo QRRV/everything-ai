@@ -600,7 +600,8 @@ lessons:
   covers: [rag-basis#0]
   requires: [build-call-api, lm-hallucination, start-prompt-chains]
   introduces: [c:retrieval-augmented-generation, c:retrieval]
-  data: []
+  data: [model-qwen3-0.6b, course-summaries, course-rag-qwen]
+  ladder: [python]
   needs: any
 
 - id: build-rag-first
@@ -612,7 +613,8 @@ lessons:
   covers: [rag-basis#1]
   requires: [build-rag-idea, build-system-prompt]
   introduces: [c:rag-pipeline, c:knowledge-base]
-  data: [model-qwen3-0.6b, course-summaries]
+  mentions: [py:set-operators, py:strip-chars, c:prompt-caching]
+  data: [model-qwen3-0.6b, course-summaries, course-rag-qwen]
   ladder: [python]
   needs: any
 
@@ -625,7 +627,8 @@ lessons:
   covers: [rag-basis#2]
   requires: [build-rag-first, py-files]
   introduces: [c:document-parsing, c:ingestion]
-  data: [course-summaries]
+  mentions: [py:split-sep, py:not-operator]
+  data: [course-handbook-documents]
   ladder: [python]
   needs: any
 
@@ -638,6 +641,7 @@ lessons:
   covers: [rag-basis#3]
   requires: [build-documents-to-text]
   introduces: [c:chunk, c:chunking, c:chunk-overlap]
+  mentions: [c:recurrent-network]
   data: [course-summaries]
   ladder: [python]
   needs: any

@@ -1,0 +1,28 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: build-chunking
+minutes: 30
+title:
+  en: "Cutting documents into pieces"
+  nl: "Documenten in stukken knippen"
+goal:
+  en: "cut documents into chunks of a fixed size with an overlap, and along their paragraphs, and measure how often the right chunk comes first."
+  nl: "documenten in chunks knippen van een vaste grootte met een overlap, en langs hun alinea's, en meten hoe vaak de goede chunk bovenaan komt."
+summary:
+  - en: "A RAG system cuts its documents into chunks and searches the chunks: a whole document tells which document fits, not where the answer is, and makes the model read all of it. Chunking cuts at a fixed size, along the structure (headings, paragraphs, then sentences: recursive), or where the meaning changes (semantic)."
+    nl: "Een RAG-systeem knipt zijn documenten in chunks en zoekt in de chunks: een heel document zegt welk document past, niet waar het antwoord staat, en laat het model alles lezen. Chunking knipt op een vaste grootte, langs de structuur (kopjes, alinea's, dan zinnen: recursief), of waar de betekenis wisselt (semantisch)."
+  - en: "On 57 documents made of the course's summaries, the first chunk held the answer for 3 of 17 questions with chunks of 10 words, 10 with 40 and 11 with 80; an overlap found one or two more at every size. Cutting along the paragraphs found 14, with 33 words a chunk; whole documents 13, with 743."
+    nl: "Op 57 documenten gemaakt van de samenvattingen van de course bevatte de eerste chunk het antwoord voor 3 van de 17 vragen met chunks van 10 woorden, 10 met 40 en 11 met 80; een overlap vond er bij elke grootte een of twee meer. Knippen langs de alinea's vond er 14, met 33 woorden per chunk; hele documenten 13, met 743."
+  - en: "Cut along the structure the text has, cut what is still too long at a fixed size with a little overlap, and measure with questions whose answers you know."
+    nl: "Knip langs de structuur die de tekst heeft, knip wat dan nog te lang is op een vaste grootte met een beetje overlap, en meet met vragen waarvan je het antwoord kent."
+can_now:
+  - en: "cut a text into chunks of a fixed size that overlap"
+    nl: "een tekst knippen in chunks van een vaste grootte die overlappen"
+    by: chunk
+  - en: "cut a text along its paragraphs, and only cut a paragraph that is too long"
+    nl: "een tekst langs de alinea's knippen, en alleen een alinea knippen die te lang is"
+    by: by_paragraph
+  - en: "tell why chunks that are too small miss the answer"
+    nl: "uitleggen waarom chunks die te klein zijn het antwoord missen"
+    by: small

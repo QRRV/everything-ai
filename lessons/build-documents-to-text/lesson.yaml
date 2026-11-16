@@ -1,0 +1,28 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: build-documents-to-text
+minutes: 30
+title:
+  en: "From files to text"
+  nl: "Van bestand naar tekst"
+goal:
+  en: "get the text out of a Markdown file, a web page and a PDF in two columns, and say what a scan needs."
+  nl: "de tekst halen uit een Markdown-bestand, een webpagina en een pdf in twee kolommen, en zeggen wat een scan nodig heeft."
+summary:
+  - en: "A RAG system searches text, so ingestion starts by getting the text out of every file (document parsing). Markdown is text with a little markup; a web page has its text between tags, among a menu, a style, a script and a footer; a PDF draws pieces of text at places on a page, in any order; a scan is only a picture, which needs OCR."
+    nl: "Een RAG-systeem zoekt in tekst, dus ingestion begint met de tekst uit elk bestand halen (document parsing). Markdown is tekst met een beetje markup; een webpagina heeft zijn tekst tussen tags, tussen een menu, een style, een script en een footer; een pdf tekent stukken tekst op plekken op een pagina, in elke volgorde; een scan is alleen een plaatje, dat OCR nodig heeft."
+  - en: "On the course's handbook of 785 words in three files: taking the tags out of the web page also kept 53 other words, in 8 lines, and 6 entities; the part between `<main>` and `</main>`, with its entities read, gave the same words as the Markdown. The PDF draws its two columns row by row: in that order only 4 of the 41 sentences stayed whole, with the left column first all 41."
+    nl: "Op het handboek van de course, 785 woorden in drie bestanden: de tags uit de webpagina halen hield ook 53 andere woorden over, in 8 regels, en 6 entities; het deel tussen `<main>` en `</main>`, met de entities gelezen, gaf dezelfde woorden als de Markdown. De pdf tekent zijn twee kolommen rij voor rij: in die volgorde bleven maar 4 van de 41 zinnen heel, met de linkerkolom eerst alle 41."
+  - en: "Read the file, take out what is not text, put the pieces in reading order, and check against the original: count the words, and read a few pieces of every kind of file yourself."
+    nl: "Lees het bestand, haal weg wat geen tekst is, zet de stukken in leesvolgorde, en vergelijk met het origineel: tel de woorden, en lees zelf een paar stukken van elke soort bestand."
+can_now:
+  - en: "take the tags out of a web page"
+    nl: "de tags uit een webpagina halen"
+    by: html_text
+  - en: "put the text of a PDF in two columns in reading order"
+    nl: "de tekst van een pdf in twee kolommen op volgorde van lezen zetten"
+    by: left_first
+  - en: "tell what a scanned document needs before it can be searched"
+    nl: "zeggen wat een gescand document nodig heeft voordat je erin kunt zoeken"
+    by: scan

@@ -1,0 +1,28 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: build-rag-first
+minutes: 35
+title:
+  en: "Your first RAG"
+  nl: "Je eerste RAG"
+goal:
+  en: "build a whole RAG in three functions: the words of a text, a search for the points that share the most words with a question, and a request with those points in front of the question."
+  nl: "een hele RAG bouwen in drie functies: de woorden van een tekst, een zoekfunctie voor de punten die de meeste woorden met een vraag delen, en een request met die punten voor de vraag."
+summary:
+  - en: "A RAG pipeline searches a knowledge base, puts the best texts in the prompt, and asks the model. Here the knowledge base was the 1,266 points of the course's summaries, and the search counted the words a point shares with the question, in lower case and without punctuation at their ends."
+    nl: "Een RAG-pipeline doorzoekt een knowledge base, zet de beste teksten in de prompt, en vraagt het model. Hier was de knowledge base de 1.266 punten van de samenvattingen van de course, en telde de zoekfunctie de woorden die een punt met de vraag deelt, klein geschreven en zonder leestekens aan de uiteinden."
+  - en: "For 24 questions about the course, Qwen3 alone was right 2 times out of 48; with RAG, 26 times. The search found the right point for 17 of the 24 questions, but for only 2 of the 7 that ask in other words, and where it missed, no answer was right."
+    nl: "Op 24 vragen over de course had Qwen3 alleen 2 van de 48 keer gelijk; met RAG 26 keer. De zoekfunctie vond het goede punt voor 17 van de 24 vragen, maar voor maar 2 van de 7 die het in andere woorden vragen, en waar hij miste, was geen enkel antwoord goed."
+  - en: "A found point is no guarantee: Qwen3 sometimes took the other number from the right point, or a number from a wrong one. For the 4 questions no point answers, 5 of the 8 answers with RAG said that the sources do not say; without sources, not one said that Qwen3 did not know."
+    nl: "Een gevonden punt is geen garantie: Qwen3 nam soms het andere getal uit het goede punt, of een getal uit een verkeerd punt. Bij de 4 vragen die geen punt beantwoordt, zeiden 5 van de 8 antwoorden met RAG dat de bronnen het niet zeggen; zonder bronnen zei geen enkel antwoord dat Qwen3 het niet wist."
+can_now:
+  - en: "split a text into its words, without capitals and punctuation"
+    nl: "een tekst in zijn woorden splitsen, zonder hoofdletters en leestekens"
+    by: words
+  - en: "find the texts that share the most words with a question"
+    nl: "de teksten vinden die de meeste woorden met een vraag delen"
+    by: search
+  - en: "build a whole RAG: search, put the sources in the prompt, and ask the model"
+    nl: "een hele RAG bouwen: zoeken, de bronnen in de prompt zetten, en het model vragen"
+    by: rag
