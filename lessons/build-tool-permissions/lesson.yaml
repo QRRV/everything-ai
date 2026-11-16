@@ -1,0 +1,28 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: build-tool-permissions
+minutes: 30
+title:
+  en: "What a tool may do"
+  nl: "Wat een tool mag"
+goal:
+  en: "check every tool call against a policy in code before it runs, ask the user before a step that cannot be undone, and give an agent only the tools its task needs."
+  nl: "elke tool call in code tegen een policy controleren voordat hij draait, de gebruiker vragen vóór een stap die niet terug te draaien is, en een agent alleen de tools geven die zijn taak nodig heeft."
+summary:
+  - en: "An agent reads text that others wrote, and a note with hidden instructions, prompt injection, can make it call tools it should not. A line in the prompt is no permission; the limits go in the code that runs the tools."
+    nl: "Een agent leest tekst die anderen schreven, en een notitie met verborgen instructies, prompt injection, kan hem tools laten aanroepen die hij niet zou moeten aanroepen. Een regel in de prompt is geen toestemming; de grenzen staan in de code die de tools uitvoert."
+  - en: "A policy says per tool allow, ask or deny, and where it may work; a tool not on the list is denied, like a path outside the folder or one that climbs out with \"..\". Of the nine calls of the fooled run, it let four run, asked the user about two and denied three."
+    nl: "Een policy zegt per tool allow, ask of deny, en waar hij mag werken; een tool die niet op de lijst staat, wordt geweigerd, net als een pad buiten de map of een pad dat er met \"..\" uit klimt. Van de negen calls van de beetgenomen run liet hij er vier draaien, vroeg hij de gebruiker over twee en weigerde hij er drie."
+  - en: "Least privilege: give an agent only the tools and rights its task needs, reading before writing, and ask before what cannot be undone. When a call does not run, the model is told why, in words."
+    nl: "Least privilege: geef een agent alleen de tools en rechten die zijn taak nodig heeft, lezen vóór schrijven, en vraag vóór wat niet terug te draaien is. Draait een call niet, dan hoort het model in woorden waarom."
+can_now:
+  - en: "check a tool call against a policy of allowed tools and a folder"
+    nl: "een tool call controleren tegen een policy van toegestane tools en een map"
+    by: decide
+  - en: "run a call only when the policy allows it or the user says yes, and tell the model otherwise"
+    nl: "een call alleen uitvoeren als de policy het toestaat of de gebruiker ja zegt, en het model anders vertellen waarom niet"
+    by: run_call
+  - en: "pick only the tools a task needs"
+    nl: "alleen de tools kiezen die een taak nodig heeft"
+    by: least

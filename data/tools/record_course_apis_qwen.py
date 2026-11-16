@@ -1,8 +1,9 @@
 # SPDX-FileCopyrightText: 2026 Everything AI contributors
 # SPDX-License-Identifier: MIT
-"""Writes data/course-apis-qwen.json, data/course-dev-prompts-qwen.json and data/course-rag-qwen.json, the course's
-runs of Qwen3-0.6B (the chat model) for the modules *Calling models* (apis), *Prompts for developers* (prompts) and
-*RAG* (rag) of the domain bouwen, one file for each module. Each run goes through the course's own server (everything_ai.serve) with the
+"""Writes data/course-apis-qwen.json, data/course-dev-prompts-qwen.json, data/course-rag-qwen.json and
+data/course-agents-qwen.json, the course's runs of Qwen3-0.6B (the chat model) for the modules *Calling models* (apis),
+*Prompts for developers* (prompts), *RAG* (rag) and *Agents and tools* (agents) of the domain bouwen, one file for each
+module. Each run goes through the course's own server (everything_ai.serve) with the
 standard library's urllib, the way a learner's code calls it: in float32 with the course's code and KV cache,
 non-thinking unless asked, sampled as Qwen3 advises for each mode (everything_ai.chat.SAMPLING, and THINKING for an
 ask with "think"). Each lesson's checks.py has
@@ -16,6 +17,12 @@ RECORD, {key: ask}, and an ask is one of
         messages that end with one of the assistant are a prefill; with "retry": n, checks.py's follow_up(text) reads each answer, and
         while it gives a message and fewer than n tries were made, the answer and that message (as the user's) are
         added and the model is asked again with the same seed: such an answer is {"seed": s, "tries": [...]}
+    {"messages": [...], "tools": [...], "steps": n, "max_tokens": n, "seeds": k}   a question with tools, without a
+        stream: the answer's tool calls are run by checks.py's tool_results(message, ask), which gives a message with the
+        role tool for each, and the answer and those results go back to the model, at most n requests in all;
+        "tool_choice" goes with the first request only, the later ones are "auto"; "temperature" and "top_p" go with
+        each. Such an answer is {"seed": s, "steps": [...]}, each step with its "tool_calls" as the server gave them
+        and the "results" of the tools
     {"turns": [...], "max_tokens": n, "seeds": k}      a chat: in each turn the user's next message, after the
         messages so far and the model's answers to them, every turn with the same seed
     {"speed": "float32" | "bfloat16", "messages": [...], "max_tokens": n}   the chat model in that dtype on one thread,
@@ -65,6 +72,7 @@ FILES = {   # the file of each module, and its lessons
                                      "build-prompt-caching"],
     "course-rag-qwen.json": ["build-rag-idea", "build-rag-first", "build-grounded-answers", "build-project-rag",
                              "build-reranking", "build-query-rewriting", "build-rag-eval"],
+    "course-agents-qwen.json": ["build-tool-calling", "build-tool-design"],
 }
 LESSONS = [lesson for lessons in FILES.values() for lesson in lessons]
 THREADS = 2   # the server's threads; a speed ask runs on one
@@ -182,6 +190,27 @@ def _answer(url: str, ask: dict, messages: list, seed: int) -> dict:
     return _stream(url, body)
 
 
+def _steps(url: str, ask: dict, seed: int, C) -> list:
+    """A question with tools: each answer, with its tool calls and their results, until an answer calls no tool or
+    ask["steps"] requests were made."""
+    messages, steps = list(ask["messages"]), []
+    for n in range(ask["steps"]):
+        body = {"model": serve.MODEL, "messages": messages, "max_tokens": ask["max_tokens"], "seed": seed, "tools": ask["tools"],
+                **{k: ask[k] for k in ("temperature", "top_p") if k in ask}}
+        if n == 0 and "tool_choice" in ask:
+            body["tool_choice"] = ask["tool_choice"]
+        a, raw = _whole(url, body)
+        message = raw["choices"][0]["message"]
+        a["tool_calls"] = message.get("tool_calls") or []
+        results = C.tool_results(message, ask) if a["tool_calls"] else []
+        a["results"] = [r["content"] for r in results]
+        steps.append(a)
+        if not a["tool_calls"]:
+            break
+        messages = messages + [message] + results
+    return steps
+
+
 def _speed(ask: dict) -> dict:
     dtype = {"float32": torch.float32, "bfloat16": torch.bfloat16}[ask["speed"]]
     threads = torch.get_num_threads()
@@ -252,7 +281,11 @@ def main(lessons: list, again: set) -> None:
                 running.backend.detect(Image.new("RGB", (64, 64)))
                 warm[0] = True
             for seed in range(len(entry["answers"]), ask["seeds"]):
-                if "sequence" in ask:
+                if "tools" in ask:
+                    steps = _steps(running.url, ask, seed, C)
+                    entry["answers"].append({"seed": seed, "steps": steps})
+                    save(lesson, key, seed, [(len(a["tool_calls"]), repr(a["text"][:50])) for a in steps])
+                elif "sequence" in ask:
                     steps = []
                     for step in ask["sequence"]:
                         body = {"model": serve.MODEL, "messages": step["messages"], "max_tokens": ask["max_tokens"],

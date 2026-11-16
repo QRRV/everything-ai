@@ -1,0 +1,28 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: build-tool-calling
+minutes: 35
+title:
+  en: "Tools as JSON: function calling"
+  nl: "Tools als JSON: function calling"
+goal:
+  en: "describe a tool for a chat API, run the tool calls of an answer and send the results back, and choose with tool_choice whether the model may call a tool."
+  nl: "een tool beschrijven voor een chat-API, de tool calls van een antwoord uitvoeren en de resultaten terugsturen, en met tool_choice kiezen of het model een tool mag aanroepen."
+summary:
+  - en: "Without tools, Qwen3-0.6B ended on the right number in 3 of 8 unit conversions: it knew the factors, but the arithmetic went wrong. With function calling, the model asks your program to run a function, which converts exactly."
+    nl: "Zonder tools kwam Qwen3-0.6B bij 3 van de 8 omrekeningen op het goede getal uit: het kende de factoren, maar het rekenwerk ging mis. Met function calling vraagt het model jouw programma om een functie uit te voeren, die precies omrekent."
+  - en: "The tools go into the request under \"tools\": each with a name, a description and a JSON schema of its arguments. The answer gives the calls apart from the text, each with an id and its arguments as a JSON text; your program runs them, sends each result back with the role tool and the id of its call, and asks again."
+    nl: "De tools gaan in het request onder \"tools\": elk met een naam, een beschrijving en een JSON-schema van zijn argumenten. Het antwoord geeft de calls los van de tekst, elk met een id en zijn argumenten als JSON-tekst; jouw programma voert ze uit, stuurt elk resultaat terug met de rol tool en het id van zijn call, en vraagt opnieuw."
+  - en: "tool_choice says whether the model may call a tool (\"auto\"), may not (\"none\"), or must. With \"auto\", Qwen3 called convert for 5 of the 8 questions, and those 5 answers were right; with convert named in the first request, all 8 were."
+    nl: "tool_choice zegt of het model een tool mag aanroepen (\"auto\"), niet mag (\"none\"), of moet. Met \"auto\" riep Qwen3 convert aan bij 5 van de 8 vragen, en die 5 antwoorden klopten; met convert bij naam in het eerste request klopten ze alle 8."
+can_now:
+  - en: "describe a tool with a name, a description and a JSON schema of its arguments"
+    nl: "een tool beschrijven met een naam, een beschrijving en een JSON-schema van zijn argumenten"
+    by: describe
+  - en: "run the tool calls of an answer and send each result back with the id of its call"
+    nl: "de tool calls van een antwoord uitvoeren en elk resultaat terugsturen met het id van zijn call"
+    by: answer
+  - en: "choose with tool_choice whether a model may, may not or must call a tool"
+    nl: "met tool_choice kiezen of een model een tool mag, niet mag of moet aanroepen"
+    by: tool-choice

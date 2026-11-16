@@ -80,10 +80,12 @@ def prompt(messages: list, tools: list | None = None, thinking: bool = False) ->
 def parse(text: str) -> dict:
     """An answer of the model as a message: {"role": "assistant", "content": its text without thinking and tool calls,
     "tool_calls": every call that is valid JSON with a "name" and a dict of arguments, as {"name": ..., "arguments": {...}}, "bad_calls": the
-    text of every other call, also one the answer broke off in}."""
+    text of every other call, also one the answer broke off in}. A last call without its closing tag counts when its
+    JSON is whole, as vLLM's parser of this form of tool call reads it: the model ended its answer after it."""
     text = THOUGHT.sub("", text)
     calls, bad = [], []
-    for raw in CALL.findall(text):
+
+    def read(raw: str) -> None:
         try:
             c = json.loads(raw)
             if not isinstance(c, dict) or not isinstance(c.get("name"), str):
@@ -95,10 +97,12 @@ def parse(text: str) -> dict:
             calls.append({"name": c["name"], "arguments": args})
         except (ValueError, TypeError):
             bad.append(raw)
+    for raw in CALL.findall(text):
+        read(raw)
     content = CALL.sub("", text)
     if "<tool_call>" in content:   # a call that never closed
         content, rest = content.split("<tool_call>", 1)
-        bad.append(rest.strip())
+        read(rest.strip())
     return {"role": "assistant", "content": content.strip(), "tool_calls": calls, "bad_calls": bad}
 
 

@@ -5,7 +5,9 @@ library (http.server and json), for the lessons of domain bouwen. It answers, in
 
   GET  /v1/models                 the models it serves: the chat model and the embedding model
   POST /v1/chat/completions       an answer to a list of messages, with model, messages, max_tokens, temperature, top_p,
-                                  seed, stop, stream (and stream_options.include_usage) and tools; a list of messages
+                                  seed, stop, stream (and stream_options.include_usage), tools and tool_choice ("auto",
+                                  "none", "required", or one function by name: the server starts the answer with a tool
+                                  call, of that function when named, and the model writes the rest); a list of messages
                                   that ends with one of the assistant is a prefill, as llama.cpp's server takes it: the
                                   answer goes on from that text. It keeps the KV cache of the last request, as
                                   llama.cpp's server does (prompt caching): usage.prompt_tokens_details.cached_tokens
@@ -39,6 +41,7 @@ import hashlib
 import json
 import math
 import random
+import re
 import struct
 import threading
 import time
@@ -126,19 +129,29 @@ class Model(Backend):
         # Qwen3's own chat template thinks unless told not to, and so do vLLM and SGLang; this server answers the normal
         # way unless told to think, as thinking takes long on a CPU. A request switches it as on those servers:
         # "chat_template_kwargs": {"enable_thinking": true}. Thinking is sampled as Qwen3 advises for it.
+        messages, tools, forced = request["messages"], request.get("tools") or None, ""
+        choice = request.get("tool_choice") or "auto"   # null is the default, as at OpenAI
+        if choice == "none" or not tools:   # the model reads no tools, so it answers with text
+            tools = None
+        elif choice != "auto":   # "required", or one function by name: the answer starts with a tool call, as a prefill
+            # no space after the colon: the model writes " {" as one token, as it does in a call of its own
+            forced = "<tool_call>\n" + ('{"name": ' + json.dumps(choice["function"]["name"]) + ', "arguments":' if isinstance(choice, dict) else "")
+            messages = messages + [{"role": "assistant", "content": forced}]
         thinking = bool((request.get("chat_template_kwargs") or {}).get("enable_thinking", False))
-        thinking = thinking and _prefill(request["messages"]) is None   # after a prefill Qwen3 does not think
+        thinking = thinking and _prefill(messages) is None   # after a prefill Qwen3 does not think
         if thinking:
             settings = {**C.THINKING, **settings}
 
         def shown(text):   # a stream shows the text up to a stop sequence or a tool call, and holds back what may start one
             if thinking:   # the thought is not part of the answer: the stream starts after it
                 text = text.split("</think>", 1)[1].lstrip() if "</think>" in text else ""
+            text = forced + text   # after a forced start the model writes a tool call, which a stream does not show
             cut = [text.index(s) for s in markers if s in text]
             heard(_held(text[:min(cut)] if cut else text, markers))
         with self._lock:
             model = self._chat if self._chat is not None else C.loaded()
-            if stop:   # the model stops writing at a stop sequence, so the tokens after it are never written
+            if stop and not forced:   # the model stops writing at a stop sequence, so the tokens after it are never written;
+                # a forced answer is a tool call, and a stop sequence is for text, so it does not cut the call's arguments
                 settings["stop"] = [s for s in stop if s]
             if (request.get("response_format") or {}).get("type") == "json_object":   # JSON mode
                 settings["json_object"] = True
@@ -146,15 +159,19 @@ class Model(Backend):
                 settings["logprobs"] = int(request.get("top_logprobs") or 0)
             # prompt caching, as llama.cpp's server does it: the KV cache of the last request is kept, and a prompt that
             # starts the same way goes on from it; "cache_prompt": false computes the whole prompt again
-            a = model.answer(request["messages"], tools=request.get("tools") or None, thinking=thinking,
+            a = model.answer(messages, tools=tools, thinking=thinking,
                              max_tokens=int(request.get("max_tokens") or 256), heard=shown,
                              cache=request.get("cache_prompt", True) is not False, keep=True, **settings)
-        message, finish = a["message"], a["finish"]
+        message, finish = (C.parse(forced + a["text"]) if forced else a["message"]), a["finish"]
+        if tools is None:   # without tools, a tool call the model wrote anyway stays out of the answer
+            message = {**message, "tool_calls": []}
+        elif message["bad_calls"]:   # a call that cannot be read: no calls, and all it wrote as the answer, as vLLM does
+            message = {**message, "tool_calls": [], "content": C.THOUGHT.sub("", forced + a["text"]).strip()}
         thought = C.THOUGHT.match(a["text"].lstrip())
         text = message["content"]
         if _prefill(request["messages"]) is not None and not thinking:   # the answer goes on from the prefill: keep its first space
             text = a["text"] if not message["tool_calls"] else text
-        cut = [text.index(s) for s in stop if s and s in text]
+        cut = [text.index(s) for s in stop if s and s in text] if not forced else []
         if cut:   # the model went on past a stop sequence: the answer ends before it
             text, finish = text[:min(cut)], "stop"
         if message["tool_calls"] and not cut:
@@ -200,8 +217,10 @@ class StandIn(Backend):
     """A server's stand-in with fixed answers, for the checks: `answers` maps the last message of the user to the
     answer; any other question gets `default`, with {question} filled in. Tokens are counted as words. On request:
     `fail`, a list of statuses (such as [429, 503]) that the first requests get, one each, with Retry-After `retry`
-    seconds; `delay` seconds before every answer; `key`, an API key that every request must carry; `calls`, a tool
-    call per question; `cut`, the number of pieces after which a stream breaks off; `model`, the name of its model;
+    seconds; `delay` seconds before every answer; `key`, an API key that every request must carry; `calls`, the tool
+    call per question, (name, arguments), or a list of them for several calls in one answer, made unless the request
+    says "tool_choice": "none"; `after`, the answer once the last message is a tool's result, with {result} filled in
+    (the results since the last answer, each on a line of its own), or a function of the request that gives it; `cut`, the number of pieces after which a stream breaks off; `model`, the name of its model;
     `objects`, what its detector finds on any image; `vectors`, the embedding of a text, {text: [numbers]}, where any
     other text gets made-up numbers of its own (`made_up`), `dims` of them. Like the server with the model, it ends an
     answer before a stop sequence, and after a prefill it answers only the rest: what comes after the prefill in the
@@ -209,10 +228,11 @@ class StandIn(Backend):
     gets a 400."""
 
     def __init__(self, answers=None, default="The stand-in's answer to: {question}", fail=(), retry=None, delay=0.0,
-                 key=None, calls=None, cut=None, model=MODEL, objects=(("cup", 0.997),), vectors=None, dims=DIMS):
+                 key=None, calls=None, cut=None, model=MODEL, objects=(("cup", 0.997),), vectors=None, dims=DIMS,
+                 after="The stand-in read the result: {result}"):
         self.answers, self.default, self.model = dict(answers or {}), default, model
         self.fail, self.retry, self.delay, self.key = list(fail), retry, delay, key
-        self.calls, self.cut, self.objects = dict(calls or {}), cut, list(objects)
+        self.calls, self.cut, self.objects, self.after = dict(calls or {}), cut, list(objects), after
         self.vectors, self.dims = {t: list(v) for t, v in (vectors or {}).items()}, dims
         self.seen = 0
 
@@ -239,11 +259,15 @@ class StandIn(Backend):
         if self.delay:
             time.sleep(self.delay)
         question = _last_user(request["messages"])
-        if question in self.calls:
-            name, arguments = self.calls[question]
-            return {"text": "", "tool_calls": [{"name": name, "arguments": arguments}], "finish": "tool_calls",
+        if request["messages"][-1].get("role") == "tool":   # the tools' results came back: the answer reads them
+            text = self.after(request) if callable(self.after) else self.after.format(result="\n".join(_results(request["messages"])))
+        elif question in self.calls and request.get("tool_choice") != "none" and request.get("tools"):
+            calls = self.calls[question]
+            calls = calls if isinstance(calls, list) else [calls]
+            return {"text": "", "tool_calls": [{"name": n, "arguments": a} for n, a in calls], "finish": "tool_calls",
                     "prompt_tokens": _words(request["messages"]), "tokens": 0}
-        text = self.answers.get(question, self.default.format(question=question))
+        else:
+            text = self.answers.get(question, self.default.format(question=question))
         start = _prefill(request["messages"])
         if start and text.startswith(start):   # a prefill: the answer goes on after it
             text = text[len(start):]
@@ -322,6 +346,16 @@ def _prefill(messages: list) -> str | None:
     if last.get("role") == "assistant" and not last.get("tool_calls"):
         return last.get("content") or ""
     return None
+
+
+def _results(messages: list) -> list:
+    """The contents of the tool messages at the end of a chat: the results since the model's last answer."""
+    out = []
+    for m in reversed(messages):
+        if m.get("role") != "tool":
+            break
+        out.insert(0, str(m.get("content")))
+    return out
 
 
 def _last_user(messages: list) -> str:
@@ -414,6 +448,64 @@ def _problem(request) -> str | None:
     if tools is not None and (not isinstance(tools, list)
                               or any(not isinstance(t, dict) or t.get("type") not in ("function", DETECT) for t in tools)):
         return f"'tools' must be a list of tools, each of type function or {DETECT}."
+    return _tool_problem(request)
+
+
+def _tool_problem(request: dict):
+    """What makes the tools, tool_choice or tool messages of a valid request otherwise not valid, as (text, field);
+    None when nothing does. As at OpenAI: a function needs a name; every tool call of the assistant gets its result, a
+    message with the role tool and the call's id, right after it, and a tool message answers such a call."""
+    functions = [t.get("function") for t in request.get("tools") or [] if t.get("type") == "function"]
+    if any(not isinstance(f, dict) or not isinstance(f.get("name"), str) or not f["name"] for f in functions):
+        return ("Each tool of type function needs 'function': an object with its 'name', its 'description' and its "
+                "'parameters', a JSON schema.", "tools")
+    names = [f["name"] for f in functions]
+    odd = [n for n in names if not re.fullmatch(r"[A-Za-z0-9_-]{1,64}", n)]
+    if odd:
+        return (f"The name of a function may hold only letters, digits, _ and -, at most 64 of them; '{odd[0]}' does "
+                "not.", "tools")
+    choice = request.get("tool_choice")
+    if choice is not None:
+        named = (isinstance(choice, dict) and choice.get("type") == "function" and isinstance(choice.get("function"), dict)
+                 and isinstance(choice["function"].get("name"), str))
+        if choice not in ("none", "auto", "required") and not named:
+            return ("'tool_choice' must be \"none\", \"auto\", \"required\" or {\"type\": \"function\", \"function\": "
+                    "{\"name\": ...}}.", "tool_choice")
+        if choice not in ("none", "auto") and not names:
+            return "'tool_choice' can ask for a tool call only when 'tools' has functions.", "tool_choice"
+        if named and choice["function"]["name"] not in names:
+            return f"'tool_choice' names the function '{choice['function']['name']}', which is not among the tools.", "tool_choice"
+        if choice not in ("none", "auto") and _prefill(request["messages"]) is not None:
+            return ("A 'tool_choice' that asks for a tool call starts the answer itself, so the chat cannot end with a "
+                    "message of the assistant.", "tool_choice")
+    waiting = []   # the ids of the tool calls of the last answer that have no result yet
+    for m in request["messages"]:
+        if m["role"] == "tool":
+            if not isinstance(m.get("tool_call_id"), str):
+                return "A message with the role tool needs a 'tool_call_id': the 'id' of the tool call it answers.", "messages"
+            if m["tool_call_id"] not in waiting:
+                return (f"A message with the role tool answers a tool call in the message of the assistant before it, "
+                        f"but there is no call with the id '{m['tool_call_id']}' that still waits for its result.", "messages")
+            if not isinstance(m.get("content"), str):
+                return ("A message with the role tool needs its 'content' as a string: turn a number or a dict into text "
+                        "first, such as with json.dumps.", "messages")
+            waiting.remove(m["tool_call_id"])
+            continue
+        if waiting:
+            return (f"Each tool call of the assistant needs its result right after it: a message with the role tool and "
+                    f"the call's 'tool_call_id'. No result came for {', '.join(waiting)}.", "messages")
+        calls = m.get("tool_calls") if m["role"] == "assistant" else None
+        if calls is not None:
+            if not isinstance(calls, list) or any(
+                    not isinstance(c, dict) or not isinstance(c.get("id"), str) or not isinstance(c.get("function"), dict)
+                    or not isinstance(c["function"].get("name"), str) or not isinstance(c["function"].get("arguments"), str)
+                    for c in calls):
+                return ("Each tool call in a message of the assistant needs its 'id', and a 'function' with its 'name' "
+                        "and its 'arguments' as a JSON string, as the answer gave them.", "messages")
+            waiting = [c["id"] for c in calls]
+    if waiting:
+        return (f"Each tool call of the assistant needs its result right after it: a message with the role tool and the "
+                f"call's 'tool_call_id'. No result came for {', '.join(waiting)}.", "messages")
     return None
 
 
@@ -649,8 +741,8 @@ def _handler(running_ref: list):
             if path == "/v1/images/generations":
                 return self._images(backend, body)
             problem = _problem(body)
-            if problem:
-                return self._send(400, _error(400, problem))
+            if problem:   # a text, or (text, the field it is about)
+                return self._send(400, _error(400, *problem) if isinstance(problem, tuple) else _error(400, problem))
             if body.get("model") == backend.embedder:
                 return self._send(400, _error(400, f"'{backend.embedder}' is an embedding model: it gives embeddings, it writes no answers. Send texts to /v1/embeddings, or ask '{backend.model}' here.", "model"))
             if body.get("model") == backend.imager:
@@ -684,7 +776,7 @@ def _handler(running_ref: list):
                 if _memory_full(e):
                     return self._send(503, _error(503, MEMORY))
                 return self._send(500, _error(500, f"The server had an error: {type(e).__name__}: {e}"))
-            out = _completion(a, backend.model, ident, created)
+            out = _completion(a, backend.model, ident, created, _earlier_calls(body["messages"]))
             if runs:
                 out["hosted_tools"] = runs
             self._send(200, out)
@@ -792,7 +884,8 @@ def _handler(running_ref: list):
                 if rest:
                     event({"index": 0, "delta": {"content": rest}, "finish_reason": None})
                 if a["tool_calls"]:
-                    event({"index": 0, "delta": {"tool_calls": _calls(a["tool_calls"], streamed=True)}, "finish_reason": None})
+                    event({"index": 0, "delta": {"tool_calls": _calls(a["tool_calls"], streamed=True, first=_earlier_calls(body["messages"]))},
+                           "finish_reason": None})
                 event({"index": 0, "delta": {}, "finish_reason": a["finish"]})
                 if (body.get("stream_options") or {}).get("include_usage"):
                     self.wfile.write(b"data: " + json.dumps({**head, "choices": [], "usage": _usage(a)}).encode("utf-8") + b"\n\n")
@@ -805,10 +898,12 @@ def _handler(running_ref: list):
     return Handler
 
 
-def _calls(calls: list, streamed: bool = False) -> list:
+def _calls(calls: list, streamed: bool = False, first: int = 0) -> list:
+    """Tool calls as OpenAI's API gives them, each with an id: call_<n>, counting on from `first`, the calls the chat
+    had before, so that every call in a chat has an id of its own."""
     out = []
     for i, c in enumerate(calls):
-        call = {"id": f"call_{i}", "type": "function",
+        call = {"id": f"call_{first + i}", "type": "function",
                 "function": {"name": c["name"], "arguments": json.dumps(c["arguments"], ensure_ascii=False)}}
         out.append({"index": i, **call} if streamed else call)
     return out
@@ -821,12 +916,17 @@ def _usage(a: dict) -> dict:
     return out
 
 
-def _completion(a: dict, model: str, ident: str, created: int) -> dict:
+def _earlier_calls(messages: list) -> int:
+    """The tool calls in the assistant's messages of a chat."""
+    return sum(len(m.get("tool_calls") or []) for m in messages if isinstance(m, dict) and m.get("role") == "assistant")
+
+
+def _completion(a: dict, model: str, ident: str, created: int, first: int = 0) -> dict:
     message = {"role": "assistant", "content": a["text"] if a["text"] or not a["tool_calls"] else None}
     if a.get("reasoning") is not None:
         message["reasoning_content"] = a["reasoning"]
     if a["tool_calls"]:
-        message["tool_calls"] = _calls(a["tool_calls"])
+        message["tool_calls"] = _calls(a["tool_calls"], first=first)
     choice = {"index": 0, "message": message, "finish_reason": a["finish"]}
     if a.get("logprobs") is not None:
         choice["logprobs"] = {"content": a["logprobs"]}

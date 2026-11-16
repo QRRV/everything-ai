@@ -797,7 +797,9 @@ lessons:
   covers: [tool-use-en-function-calling#0]
   requires: [agent-idea, build-structured-output]
   introduces: [c:function-calling, c:tool-choice]
-  data: [model-qwen3-0.6b]
+  uses: [c:llm-agent, c:tool, c:tool-call, c:agent-loop, c:api, c:http-request, c:openai-compatible-api, c:local-server, c:message-role, c:chat-model, c:language-model, c:prompt, c:token, c:json, c:json-schema, py:urllib-request, py:json, py:dict, py:list, py:for, py:if, py:indexing, py:import, py:def, py:return, py:with, py:string-literal, q:predict, q:choice, q:exercise-with-check, q:run-cell]
+  mentions: [c:max-tokens, c:temperature]
+  data: [model-qwen3-0.6b, course-agents-qwen]
   ladder: [python]
   needs: any
 
@@ -810,7 +812,9 @@ lessons:
   covers: [tool-use-en-function-calling#1, tool-use-en-function-calling#2]
   requires: [build-tool-calling, build-multimodal-apis]
   introduces: [c:agent-computer-interface, c:client-side-tool]
-  data: [model-qwen3-0.6b]
+  uses: [c:tool, c:tool-call, c:function-calling, c:tool-choice, c:hosted-tool, c:json-schema, c:json, c:prompt, c:system-prompt, c:token, c:chat-model, c:local-server, c:traceback, py:json, py:dict, py:indexing, py:def, py:return, py:if, py:comparison, py:arithmetic, py:round, py:str, py:string-literal, py:raise, q:choice, q:exercise-with-check, q:run-cell]
+  mentions: [c:coding-agent, c:max-tokens, c:temperature]
+  data: [model-qwen3-0.6b, course-agents-qwen]
   ladder: [python]
   needs: any
 
@@ -823,6 +827,9 @@ lessons:
   covers: [tool-use-en-function-calling#4]
   requires: [build-tool-design]
   introduces: [c:least-privilege, c:allowlist]
+  uses: [c:llm-agent, c:tool, c:tool-call, c:agent-loop, c:client-side-tool, c:system-prompt, c:prompt, py:dict, py:indexing, py:def, py:return, py:if, py:comparison, py:string-literal, q:choice, q:exercise-with-check]
+  mentions: [c:prompt-injection, py:startswith, py:or-operator, py:not-operator]
+  warns: [policy]
   data: []
   ladder: [python]
   needs: any

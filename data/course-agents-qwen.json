@@ -1,0 +1,5018 @@
+{
+ "model": "Qwen/Qwen3-0.6B",
+ "revision": "c1899de289a04d12100db370d81485cdf75e47ca",
+ "dtype": "float32",
+ "machine": "Intel(R) Xeon(R) Processor @ 2.10GHz, 4 cores",
+ "threads": 2,
+ "torch": "2.14.1+cu130",
+ "parts": {
+  "build-tool-calling": {
+   "own-0": {
+    "ask": {
+     "messages": [
+      {
+       "role": "user",
+       "content": "How many miles is 37 km?"
+      }
+     ],
+     "max_tokens": 200,
+     "temperature": 0
+    },
+    "answers": [
+     {
+      "seed": 0,
+      "text": "To convert kilometers to miles, you can use the conversion factor:\n\n$$\n1 \\text{ km} = 0.621371 \\text{ miles}\n$$\n\nSo, for 37 km:\n\n$$\n37 \\text{ km} \\times 0.621371 \\approx 23.39 \\text{ miles}\n$$\n\n**Answer:** Approximately **23.4 miles**.",
+      "finish": "stop",
+      "prompt_tokens": 21,
+      "tokens": 93,
+      "first": 0.29,
+      "seconds": 13.0,
+      "pieces": 93,
+      "times": [
+       0.29,
+       0.43,
+       0.58,
+       0.76,
+       0.92,
+       1.07,
+       1.23,
+       1.39,
+       1.55,
+       1.69,
+       1.83,
+       1.96,
+       2.1,
+       2.23,
+       2.35,
+       2.5,
+       2.64,
+       2.78,
+       2.92,
+       3.05,
+       3.18,
+       3.32,
+       3.45,
+       3.58,
+       3.72,
+       3.85,
+       3.97,
+       4.12,
+       4.24,
+       4.37,
+       4.51,
+       4.67,
+       4.83,
+       4.99,
+       5.13,
+       5.27,
+       5.41,
+       5.53,
+       5.69,
+       5.82,
+       5.95,
+       6.08,
+       6.2,
+       6.32,
+       6.44,
+       6.56,
+       6.68,
+       6.81,
+       6.96,
+       7.11,
+       7.24,
+       7.37,
+       7.5,
+       7.64,
+       7.76,
+       7.89,
+       8.04,
+       8.18,
+       8.32,
+       8.47,
+       8.62,
+       8.74,
+       8.87,
+       8.99,
+       9.14,
+       9.28,
+       9.41,
+       9.54,
+       9.67,
+       9.82,
+       9.94,
+       10.07,
+       10.2,
+       10.33,
+       10.47,
+       10.61,
+       10.74,
+       10.86,
+       10.99,
+       11.12,
+       11.25,
+       11.39,
+       11.52,
+       11.65,
+       11.8,
+       11.93,
+       12.07,
+       12.2,
+       12.33,
+       12.47,
+       12.61,
+       12.74,
+       12.87
+      ],
+      "lines": [
+       "data: {\"id\": \"chatcmpl-1\", \"object\": \"chat.completion.chunk\", \"created\": 1794839663, \"model\": \"qwen3-0.6b\", \"choices\": [{\"index\": 0, \"delta\": {\"role\": \"assistant\", \"content\": \"\"}, \"finish_reason\": null}]}",
+       "data: {\"id\": \"chatcmpl-1\", \"object\": \"chat.completion.chunk\", \"created\": 1794839663, \"model\": \"qwen3-0.6b\", \"choices\": [{\"index\": 0, \"delta\": {\"content\": \"To\"}, \"finish_reason\": null}]}",
+       "data: {\"id\": \"chatcmpl-1\", \"object\": \"chat.completion.chunk\", \"created\": 1794839663, \"model\": \"qwen3-0.6b\", \"choices\": [{\"index\": 0, \"delta\": {\"content\": \" convert\"}, \"finish_reason\": null}]}",
+       "data: {\"id\": \"chatcmpl-1\", \"object\": \"chat.completion.chunk\", \"created\": 1794839663, \"model\": \"qwen3-0.6b\", \"choices\": [{\"index\": 0, \"delta\": {\"content\": \" kilometers\"}, \"finish_reason\": null}]}",
+       "data: {\"id\": \"chatcmpl-1\", \"object\": \"chat.completion.chunk\", \"created\": 1794839663, \"model\": \"qwen3-0.6b\", \"choices\": [{\"index\": 0, \"delta\": {\"content\": \" to\"}, \"finish_reason\": null}]}",
+       "data: {\"id\": \"chatcmpl-1\", \"object\": \"chat.completion.chunk\", \"created\": 1794839663, \"model\": \"qwen3-0.6b\", \"choices\": [{\"index\": 0, \"delta\": {\"content\": \" miles\"}, \"finish_reason\": null}]}",
+       "data: {\"id\": \"chatcmpl-1\", \"object\": \"chat.completion.chunk\", \"created\": 1794839663, \"model\": \"qwen3-0.6b\", \"choices\": [{\"index\": 0, \"delta\": {\"content\": \".\"}, \"finish_reason\": null}]}",
+       "data: {\"id\": \"chatcmpl-1\", \"object\": \"chat.completion.chunk\", \"created\": 1794839663, \"model\": \"qwen3-0.6b\", \"choices\": [{\"index\": 0, \"delta\": {}, \"finish_reason\": \"stop\"}]}",
+       "data: {\"id\": \"chatcmpl-1\", \"object\": \"chat.completion.chunk\", \"created\": 1794839663, \"model\": \"qwen3-0.6b\", \"choices\": [], \"usage\": {\"prompt_tokens\": 21, \"completion_tokens\": 93, \"total_tokens\": 114, \"prompt_tokens_details\": {\"cached_tokens\": 0}}}",
+       "data: [DONE]"
+      ]
+     }
+    ]
+   },
+   "auto-0": {
+    "ask": {
+     "messages": [
+      {
+       "role": "user",
+       "content": "How many miles is 37 km?"
+      }
+     ],
+     "tools": [
+      {
+       "type": "function",
+       "function": {
+        "name": "convert",
+        "description": "Convert an amount from one unit to another: kilometres and miles, or kilograms and pounds.",
+        "parameters": {
+         "type": "object",
+         "properties": {
+          "amount": {
+           "type": "number",
+           "description": "the amount to convert, such as 37"
+          },
+          "from_unit": {
+           "type": "string",
+           "enum": [
+            "km",
+            "mi",
+            "kg",
+            "lb"
+           ],
+           "description": "the unit of the amount"
+          },
+          "to_unit": {
+           "type": "string",
+           "enum": [
+            "km",
+            "mi",
+            "kg",
+            "lb"
+           ],
+           "description": "the unit to convert to"
+          }
+         },
+         "required": [
+          "amount",
+          "from_unit",
+          "to_unit"
+         ]
+        }
+       }
+      }
+     ],
+     "max_tokens": 120,
+     "temperature": 0,
+     "steps": 2
+    },
+    "answers": [
+     {
+      "seed": 0,
+      "steps": [
+       {
+        "text": "37 km is equal to approximately 22.96 miles.",
+        "finish": "stop",
+        "prompt_tokens": 263,
+        "tokens": 15,
+        "seconds": 3.58,
+        "cached_tokens": 1,
+        "tool_calls": [],
+        "results": []
+       }
+      ]
+     }
+    ]
+   },
+   "own-1": {
+    "ask": {
+     "messages": [
+      {
+       "role": "user",
+       "content": "How many kilometres is 18 miles?"
+      }
+     ],
+     "max_tokens": 200,
+     "temperature": 0
+    },
+    "answers": [
+     {
+      "seed": 0,
+      "text": "To convert miles to kilometers, you can use the conversion factor:\n\n1 mile = 1.60934 kilometers.\n\nSo, for 18 miles:\n\n$$\n18 \\, \\text{miles} \\times 1.60934 \\, \\text{km/mile} \\approx 29.07 \\, \\text{km}\n$$\n\nTherefore, **18 miles is approximately 29.07 kilometers**.",
+      "finish": "stop",
+      "prompt_tokens": 21,
+      "tokens": 99,
+      "first": 0.29,
+      "seconds": 14.05,
+      "pieces": 99,
+      "times": [
+       0.29,
+       0.42,
+       0.55,
+       0.68,
+       0.82,
+       0.95,
+       1.08,
+       1.2,
+       1.33,
+       1.45,
+       1.56,
+       1.7,
+       1.84,
+       1.98,
+       2.11,
+       2.24,
+       2.39,
+       2.53,
+       2.66,
+       2.79,
+       2.92,
+       3.06,
+       3.18,
+       3.31,
+       3.44,
+       3.57,
+       3.71,
+       3.84,
+       3.99,
+       4.14,
+       4.28,
+       4.42,
+       4.59,
+       4.75,
+       4.9,
+       5.04,
+       5.18,
+       5.3,
+       5.46,
+       5.6,
+       5.75,
+       5.89,
+       6.03,
+       6.19,
+       6.34,
+       6.48,
+       6.62,
+       6.76,
+       6.92,
+       7.07,
+       7.22,
+       7.35,
+       7.49,
+       7.64,
+       7.76,
+       7.89,
+       8.02,
+       8.17,
+       8.3,
+       8.44,
+       8.58,
+       8.71,
+       8.84,
+       8.97,
+       9.13,
+       9.27,
+       9.4,
+       9.53,
+       9.68,
+       9.82,
+       10.0,
+       10.16,
+       10.29,
+       10.45,
+       10.6,
+       10.72,
+       10.86,
+       10.99,
+       11.13,
+       11.28,
+       11.43,
+       11.57,
+       11.7,
+       11.88,
+       12.02,
+       12.16,
+       12.29,
+       12.44,
+       12.58,
+       12.73,
+       12.88,
+       13.03,
+       13.16,
+       13.29,
+       13.43,
+       13.56,
+       13.68,
+       13.8,
+       13.93
+      ],
+      "lines": [
+       "data: {\"id\": \"chatcmpl-4\", \"object\": \"chat.completion.chunk\", \"created\": 1794839682, \"model\": \"qwen3-0.6b\", \"choices\": [{\"index\": 0, \"delta\": {\"role\": \"assistant\", \"content\": \"\"}, \"finish_reason\": null}]}",
+       "data: {\"id\": \"chatcmpl-4\", \"object\": \"chat.completion.chunk\", \"created\": 1794839682, \"model\": \"qwen3-0.6b\", \"choices\": [{\"index\": 0, \"delta\": {\"content\": \"To\"}, \"finish_reason\": null}]}",
+       "data: {\"id\": \"chatcmpl-4\", \"object\": \"chat.completion.chunk\", \"created\": 1794839682, \"model\": \"qwen3-0.6b\", \"choices\": [{\"index\": 0, \"delta\": {\"content\": \" convert\"}, \"finish_reason\": null}]}",
+       "data: {\"id\": \"chatcmpl-4\", \"object\": \"chat.completion.chunk\", \"created\": 1794839682, \"model\": \"qwen3-0.6b\", \"choices\": [{\"index\": 0, \"delta\": {\"content\": \" miles\"}, \"finish_reason\": null}]}",
+       "data: {\"id\": \"chatcmpl-4\", \"object\": \"chat.completion.chunk\", \"created\": 1794839682, \"model\": \"qwen3-0.6b\", \"choices\": [{\"index\": 0, \"delta\": {\"content\": \" to\"}, \"finish_reason\": null}]}",
+       "data: {\"id\": \"chatcmpl-4\", \"object\": \"chat.completion.chunk\", \"created\": 1794839682, \"model\": \"qwen3-0.6b\", \"choices\": [{\"index\": 0, \"delta\": {\"content\": \" kilometers\"}, \"finish_reason\": null}]}",
+       "data: {\"id\": \"chatcmpl-4\", \"object\": \"chat.completion.chunk\", \"created\": 1794839682, \"model\": \"qwen3-0.6b\", \"choices\": [{\"index\": 0, \"delta\": {\"content\": \".\"}, \"finish_reason\": null}]}",
+       "data: {\"id\": \"chatcmpl-4\", \"object\": \"chat.completion.chunk\", \"created\": 1794839682, \"model\": \"qwen3-0.6b\", \"choices\": [{\"index\": 0, \"delta\": {}, \"finish_reason\": \"stop\"}]}",
+       "data: {\"id\": \"chatcmpl-4\", \"object\": \"chat.completion.chunk\", \"created\": 1794839682, \"model\": \"qwen3-0.6b\", \"choices\": [], \"usage\": {\"prompt_tokens\": 21, \"completion_tokens\": 99, \"total_tokens\": 120, \"prompt_tokens_details\": {\"cached_tokens\": 1}}}",
+       "data: [DONE]"
+      ]
+     }
+    ]
+   },
+   "auto-1": {
+    "ask": {
+     "messages": [
+      {
+       "role": "user",
+       "content": "How many kilometres is 18 miles?"
+      }
+     ],
+     "tools": [
+      {
+       "type": "function",
+       "function": {
+        "name": "convert",
+        "description": "Convert an amount from one unit to another: kilometres and miles, or kilograms and pounds.",
+        "parameters": {
+         "type": "object",
+         "properties": {
+          "amount": {
+           "type": "number",
+           "description": "the amount to convert, such as 37"
+          },
+          "from_unit": {
+           "type": "string",
+           "enum": [
+            "km",
+            "mi",
+            "kg",
+            "lb"
+           ],
+           "description": "the unit of the amount"
+          },
+          "to_unit": {
+           "type": "string",
+           "enum": [
+            "km",
+            "mi",
+            "kg",
+            "lb"
+           ],
+           "description": "the unit to convert to"
+          }
+         },
+         "required": [
+          "amount",
+          "from_unit",
+          "to_unit"
+         ]
+        }
+       }
+      }
+     ],
+     "max_tokens": 120,
+     "temperature": 0,
+     "steps": 2
+    },
+    "answers": [
+     {
+      "seed": 0,
+      "steps": [
+       {
+        "text": "",
+        "finish": "tool_calls",
+        "prompt_tokens": 263,
+        "tokens": 33,
+        "seconds": 6.26,
+        "cached_tokens": 1,
+        "tool_calls": [
+         {
+          "id": "call_0",
+          "type": "function",
+          "function": {
+           "name": "convert",
+           "arguments": "{\"amount\": 18, \"from_unit\": \"mi\", \"to_unit\": \"km\"}"
+          }
+         }
+        ],
+        "results": [
+         "28.97 km"
+        ]
+       },
+       {
+        "text": "18 miles is approximately 28.97 kilometres.",
+        "finish": "stop",
+        "prompt_tokens": 316,
+        "tokens": 13,
+        "seconds": 2.35,
+        "cached_tokens": 259,
+        "tool_calls": [],
+        "results": []
+       }
+      ]
+     }
+    ]
+   },
+   "own-2": {
+    "ask": {
+     "messages": [
+      {
+       "role": "user",
+       "content": "How many pounds is 64 kg?"
+      }
+     ],
+     "max_tokens": 200,
+     "temperature": 0
+    },
+    "answers": [
+     {
+      "seed": 0,
+      "text": "To convert kilograms to pounds, you can use the conversion factor:\n\n$$\n1 \\, \\text{kg} = 2.20462 \\, \\text{lb}\n$$\n\nSo, for 64 kg:\n\n$$\n64 \\, \\text{kg} \\times 2.20462 \\, \\frac{\\text{lb}}{\\text{kg}} \\approx 141.19 \\, \\text{lb}\n$$\n\n**Answer:** Approximately **141.19 pounds**.",
+      "finish": "stop",
+      "prompt_tokens": 21,
+      "tokens": 116,
+      "first": 0.28,
+      "seconds": 16.18,
+      "pieces": 116,
+      "times": [
+       0.28,
+       0.41,
+       0.55,
+       0.69,
+       0.8,
+       0.93,
+       1.06,
+       1.2,
+       1.33,
+       1.46,
+       1.58,
+       1.71,
+       1.84,
+       1.96,
+       2.08,
+       2.2,
+       2.34,
+       2.5,
+       2.62,
+       2.76,
+       2.89,
+       3.01,
+       3.13,
+       3.25,
+       3.38,
+       3.51,
+       3.67,
+       3.8,
+       3.93,
+       4.05,
+       4.2,
+       4.34,
+       4.48,
+       4.61,
+       4.74,
+       4.86,
+       4.99,
+       5.13,
+       5.27,
+       5.41,
+       5.53,
+       5.66,
+       5.79,
+       5.92,
+       6.06,
+       6.2,
+       6.32,
+       6.45,
+       6.57,
+       6.7,
+       6.82,
+       6.95,
+       7.09,
+       7.22,
+       7.36,
+       7.51,
+       7.67,
+       7.8,
+       7.93,
+       8.05,
+       8.19,
+       8.34,
+       8.48,
+       8.62,
+       8.76,
+       8.89,
+       9.03,
+       9.16,
+       9.3,
+       9.44,
+       9.58,
+       9.7,
+       9.82,
+       9.95,
+       10.1,
+       10.25,
+       10.39,
+       10.54,
+       10.68,
+       10.82,
+       10.98,
+       11.12,
+       11.27,
+       11.43,
+       11.57,
+       11.7,
+       11.84,
+       11.96,
+       12.09,
+       12.24,
+       12.38,
+       12.52,
+       12.65,
+       12.8,
+       12.93,
+       13.08,
+       13.21,
+       13.4,
+       13.58,
+       13.72,
+       13.87,
+       14.0,
+       14.14,
+       14.28,
+       14.42,
+       14.58,
+       14.72,
+       14.85,
+       15.04,
+       15.2,
+       15.35,
+       15.49,
+       15.62,
+       15.76,
+       15.89,
+       16.03
+      ],
+      "lines": [
+       "data: {\"id\": \"chatcmpl-9\", \"object\": \"chat.completion.chunk\", \"created\": 1794839711, \"model\": \"qwen3-0.6b\", \"choices\": [{\"index\": 0, \"delta\": {\"role\": \"assistant\", \"content\": \"\"}, \"finish_reason\": null}]}",
+       "data: {\"id\": \"chatcmpl-9\", \"object\": \"chat.completion.chunk\", \"created\": 1794839711, \"model\": \"qwen3-0.6b\", \"choices\": [{\"index\": 0, \"delta\": {\"content\": \"To\"}, \"finish_reason\": null}]}",
+       "data: {\"id\": \"chatcmpl-9\", \"object\": \"chat.completion.chunk\", \"created\": 1794839711, \"model\": \"qwen3-0.6b\", \"choices\": [{\"index\": 0, \"delta\": {\"content\": \" convert\"}, \"finish_reason\": null}]}",
+       "data: {\"id\": \"chatcmpl-9\", \"object\": \"chat.completion.chunk\", \"created\": 1794839711, \"model\": \"qwen3-0.6b\", \"choices\": [{\"index\": 0, \"delta\": {\"content\": \" kilograms\"}, \"finish_reason\": null}]}",
+       "data: {\"id\": \"chatcmpl-9\", \"object\": \"chat.completion.chunk\", \"created\": 1794839711, \"model\": \"qwen3-0.6b\", \"choices\": [{\"index\": 0, \"delta\": {\"content\": \" to\"}, \"finish_reason\": null}]}",
+       "data: {\"id\": \"chatcmpl-9\", \"object\": \"chat.completion.chunk\", \"created\": 1794839711, \"model\": \"qwen3-0.6b\", \"choices\": [{\"index\": 0, \"delta\": {\"content\": \" pounds\"}, \"finish_reason\": null}]}",
+       "data: {\"id\": \"chatcmpl-9\", \"object\": \"chat.completion.chunk\", \"created\": 1794839711, \"model\": \"qwen3-0.6b\", \"choices\": [{\"index\": 0, \"delta\": {\"content\": \".\"}, \"finish_reason\": null}]}",
+       "data: {\"id\": \"chatcmpl-9\", \"object\": \"chat.completion.chunk\", \"created\": 1794839711, \"model\": \"qwen3-0.6b\", \"choices\": [{\"index\": 0, \"delta\": {}, \"finish_reason\": \"stop\"}]}",
+       "data: {\"id\": \"chatcmpl-9\", \"object\": \"chat.completion.chunk\", \"created\": 1794839711, \"model\": \"qwen3-0.6b\", \"choices\": [], \"usage\": {\"prompt_tokens\": 21, \"completion_tokens\": 116, \"total_tokens\": 137, \"prompt_tokens_details\": {\"cached_tokens\": 1}}}",
+       "data: [DONE]"
+      ]
+     }
+    ]
+   },
+   "auto-2": {
+    "ask": {
+     "messages": [
+      {
+       "role": "user",
+       "content": "How many pounds is 64 kg?"
+      }
+     ],
+     "tools": [
+      {
+       "type": "function",
+       "function": {
+        "name": "convert",
+        "description": "Convert an amount from one unit to another: kilometres and miles, or kilograms and pounds.",
+        "parameters": {
+         "type": "object",
+         "properties": {
+          "amount": {
+           "type": "number",
+           "description": "the amount to convert, such as 37"
+          },
+          "from_unit": {
+           "type": "string",
+           "enum": [
+            "km",
+            "mi",
+            "kg",
+            "lb"
+           ],
+           "description": "the unit of the amount"
+          },
+          "to_unit": {
+           "type": "string",
+           "enum": [
+            "km",
+            "mi",
+            "kg",
+            "lb"
+           ],
+           "description": "the unit to convert to"
+          }
+         },
+         "required": [
+          "amount",
+          "from_unit",
+          "to_unit"
+         ]
+        }
+       }
+      }
+     ],
+     "max_tokens": 120,
+     "temperature": 0,
+     "steps": 2
+    },
+    "answers": [
+     {
+      "seed": 0,
+      "steps": [
+       {
+        "text": "",
+        "finish": "tool_calls",
+        "prompt_tokens": 263,
+        "tokens": 33,
+        "seconds": 6.33,
+        "cached_tokens": 1,
+        "tool_calls": [
+         {
+          "id": "call_0",
+          "type": "function",
+          "function": {
+           "name": "convert",
+           "arguments": "{\"amount\": 64, \"from_unit\": \"kg\", \"to_unit\": \"lb\"}"
+          }
+         }
+        ],
+        "results": [
+         "141.1 lb"
+        ]
+       },
+       {
+        "text": "64 kilograms is approximately 141.1 pounds.",
+        "finish": "stop",
+        "prompt_tokens": 316,
+        "tokens": 13,
+        "seconds": 2.4,
+        "cached_tokens": 259,
+        "tool_calls": [],
+        "results": []
+       }
+      ]
+     }
+    ]
+   },
+   "named-0": {
+    "ask": {
+     "messages": [
+      {
+       "role": "user",
+       "content": "How many miles is 37 km?"
+      }
+     ],
+     "tools": [
+      {
+       "type": "function",
+       "function": {
+        "name": "convert",
+        "description": "Convert an amount from one unit to another: kilometres and miles, or kilograms and pounds.",
+        "parameters": {
+         "type": "object",
+         "properties": {
+          "amount": {
+           "type": "number",
+           "description": "the amount to convert, such as 37"
+          },
+          "from_unit": {
+           "type": "string",
+           "enum": [
+            "km",
+            "mi",
+            "kg",
+            "lb"
+           ],
+           "description": "the unit of the amount"
+          },
+          "to_unit": {
+           "type": "string",
+           "enum": [
+            "km",
+            "mi",
+            "kg",
+            "lb"
+           ],
+           "description": "the unit to convert to"
+          }
+         },
+         "required": [
+          "amount",
+          "from_unit",
+          "to_unit"
+         ]
+        }
+       }
+      }
+     ],
+     "tool_choice": {
+      "type": "function",
+      "function": {
+       "name": "convert"
+      }
+     },
+     "max_tokens": 120,
+     "temperature": 0,
+     "steps": 2
+    },
+    "answers": [
+     {
+      "seed": 0,
+      "steps": [
+       {
+        "text": "",
+        "finish": "tool_calls",
+        "prompt_tokens": 274,
+        "tokens": 22,
+        "seconds": 4.96,
+        "cached_tokens": 0,
+        "tool_calls": [
+         {
+          "id": "call_0",
+          "type": "function",
+          "function": {
+           "name": "convert",
+           "arguments": "{\"amount\": 37, \"from_unit\": \"km\", \"to_unit\": \"mi\"}"
+          }
+         }
+        ],
+        "results": [
+         "22.99 mi"
+        ]
+       },
+       {
+        "text": "37 kilometers is approximately 22.99 miles.",
+        "finish": "stop",
+        "prompt_tokens": 316,
+        "tokens": 13,
+        "seconds": 2.34,
+        "cached_tokens": 259,
+        "tool_calls": [],
+        "results": []
+       }
+      ]
+     }
+    ]
+   },
+   "named-1": {
+    "ask": {
+     "messages": [
+      {
+       "role": "user",
+       "content": "How many kilometres is 18 miles?"
+      }
+     ],
+     "tools": [
+      {
+       "type": "function",
+       "function": {
+        "name": "convert",
+        "description": "Convert an amount from one unit to another: kilometres and miles, or kilograms and pounds.",
+        "parameters": {
+         "type": "object",
+         "properties": {
+          "amount": {
+           "type": "number",
+           "description": "the amount to convert, such as 37"
+          },
+          "from_unit": {
+           "type": "string",
+           "enum": [
+            "km",
+            "mi",
+            "kg",
+            "lb"
+           ],
+           "description": "the unit of the amount"
+          },
+          "to_unit": {
+           "type": "string",
+           "enum": [
+            "km",
+            "mi",
+            "kg",
+            "lb"
+           ],
+           "description": "the unit to convert to"
+          }
+         },
+         "required": [
+          "amount",
+          "from_unit",
+          "to_unit"
+         ]
+        }
+       }
+      }
+     ],
+     "tool_choice": {
+      "type": "function",
+      "function": {
+       "name": "convert"
+      }
+     },
+     "max_tokens": 120,
+     "temperature": 0,
+     "steps": 2
+    },
+    "answers": [
+     {
+      "seed": 0,
+      "steps": [
+       {
+        "text": "",
+        "finish": "tool_calls",
+        "prompt_tokens": 274,
+        "tokens": 22,
+        "seconds": 3.57,
+        "cached_tokens": 247,
+        "tool_calls": [
+         {
+          "id": "call_0",
+          "type": "function",
+          "function": {
+           "name": "convert",
+           "arguments": "{\"amount\": 18, \"from_unit\": \"mi\", \"to_unit\": \"km\"}"
+          }
+         }
+        ],
+        "results": [
+         "28.97 km"
+        ]
+       },
+       {
+        "text": "18 miles is approximately 28.97 kilometres.",
+        "finish": "stop",
+        "prompt_tokens": 316,
+        "tokens": 13,
+        "seconds": 2.56,
+        "cached_tokens": 259,
+        "tool_calls": [],
+        "results": []
+       }
+      ]
+     }
+    ]
+   },
+   "named-2": {
+    "ask": {
+     "messages": [
+      {
+       "role": "user",
+       "content": "How many pounds is 64 kg?"
+      }
+     ],
+     "tools": [
+      {
+       "type": "function",
+       "function": {
+        "name": "convert",
+        "description": "Convert an amount from one unit to another: kilometres and miles, or kilograms and pounds.",
+        "parameters": {
+         "type": "object",
+         "properties": {
+          "amount": {
+           "type": "number",
+           "description": "the amount to convert, such as 37"
+          },
+          "from_unit": {
+           "type": "string",
+           "enum": [
+            "km",
+            "mi",
+            "kg",
+            "lb"
+           ],
+           "description": "the unit of the amount"
+          },
+          "to_unit": {
+           "type": "string",
+           "enum": [
+            "km",
+            "mi",
+            "kg",
+            "lb"
+           ],
+           "description": "the unit to convert to"
+          }
+         },
+         "required": [
+          "amount",
+          "from_unit",
+          "to_unit"
+         ]
+        }
+       }
+      }
+     ],
+     "tool_choice": {
+      "type": "function",
+      "function": {
+       "name": "convert"
+      }
+     },
+     "max_tokens": 120,
+     "temperature": 0,
+     "steps": 2
+    },
+    "answers": [
+     {
+      "seed": 0,
+      "steps": [
+       {
+        "text": "",
+        "finish": "tool_calls",
+        "prompt_tokens": 274,
+        "tokens": 22,
+        "seconds": 3.81,
+        "cached_tokens": 247,
+        "tool_calls": [
+         {
+          "id": "call_0",
+          "type": "function",
+          "function": {
+           "name": "convert",
+           "arguments": "{\"amount\": 64, \"from_unit\": \"kg\", \"to_unit\": \"lb\"}"
+          }
+         }
+        ],
+        "results": [
+         "141.1 lb"
+        ]
+       },
+       {
+        "text": "64 kilograms is approximately 141.1 pounds.",
+        "finish": "stop",
+        "prompt_tokens": 316,
+        "tokens": 13,
+        "seconds": 2.5,
+        "cached_tokens": 259,
+        "tool_calls": [],
+        "results": []
+       }
+      ]
+     }
+    ]
+   },
+   "own-3": {
+    "ask": {
+     "messages": [
+      {
+       "role": "user",
+       "content": "How many kilograms is 150 lb?"
+      }
+     ],
+     "max_tokens": 200,
+     "temperature": 0
+    },
+    "answers": [
+     {
+      "seed": 0,
+      "text": "To convert pounds to kilograms, you can use the conversion factor:\n\n$$\n1 \\, \\text{lb} = 0.453592 \\, \\text{kg}\n$$\n\nSo, for 150 pounds:\n\n$$\n150 \\, \\text{lb} \\times 0.453592 \\, \\frac{\\text{kg}}{\\text{lb}} \\approx 68.0388 \\, \\text{kg}\n$$\n\nTherefore, **approximately 68.04 kilograms**.",
+      "finish": "stop",
+      "prompt_tokens": 22,
+      "tokens": 120,
+      "first": 0.25,
+      "seconds": 17.14,
+      "pieces": 120,
+      "times": [
+       0.25,
+       0.38,
+       0.51,
+       0.63,
+       0.76,
+       0.9,
+       1.03,
+       1.17,
+       1.31,
+       1.43,
+       1.58,
+       1.71,
+       1.84,
+       2.0,
+       2.16,
+       2.3,
+       2.44,
+       2.56,
+       2.7,
+       2.84,
+       2.96,
+       3.09,
+       3.21,
+       3.34,
+       3.46,
+       3.61,
+       3.76,
+       3.91,
+       4.07,
+       4.2,
+       4.32,
+       4.45,
+       4.58,
+       4.71,
+       4.84,
+       4.97,
+       5.11,
+       5.26,
+       5.41,
+       5.56,
+       5.7,
+       5.82,
+       5.95,
+       6.09,
+       6.21,
+       6.33,
+       6.46,
+       6.59,
+       6.74,
+       6.89,
+       7.03,
+       7.18,
+       7.32,
+       7.46,
+       7.61,
+       7.76,
+       7.9,
+       8.04,
+       8.17,
+       8.31,
+       8.46,
+       8.6,
+       8.73,
+       8.86,
+       8.99,
+       9.13,
+       9.27,
+       9.43,
+       9.57,
+       9.72,
+       9.85,
+       9.99,
+       10.13,
+       10.28,
+       10.42,
+       10.57,
+       10.77,
+       10.93,
+       11.07,
+       11.22,
+       11.39,
+       11.55,
+       11.7,
+       11.84,
+       12.0,
+       12.16,
+       12.3,
+       12.43,
+       12.57,
+       12.7,
+       12.85,
+       13.0,
+       13.15,
+       13.3,
+       13.44,
+       13.59,
+       13.72,
+       13.86,
+       13.99,
+       14.12,
+       14.25,
+       14.38,
+       14.51,
+       14.64,
+       14.77,
+       14.92,
+       15.07,
+       15.23,
+       15.38,
+       15.53,
+       15.68,
+       15.83,
+       15.96,
+       16.09,
+       16.22,
+       16.38,
+       16.53,
+       16.69,
+       16.85,
+       17.0
+      ],
+      "lines": [
+       "data: {\"id\": \"chatcmpl-7\", \"object\": \"chat.completion.chunk\", \"created\": 1794839793, \"model\": \"qwen3-0.6b\", \"choices\": [{\"index\": 0, \"delta\": {\"role\": \"assistant\", \"content\": \"\"}, \"finish_reason\": null}]}",
+       "data: {\"id\": \"chatcmpl-7\", \"object\": \"chat.completion.chunk\", \"created\": 1794839793, \"model\": \"qwen3-0.6b\", \"choices\": [{\"index\": 0, \"delta\": {\"content\": \"To\"}, \"finish_reason\": null}]}",
+       "data: {\"id\": \"chatcmpl-7\", \"object\": \"chat.completion.chunk\", \"created\": 1794839793, \"model\": \"qwen3-0.6b\", \"choices\": [{\"index\": 0, \"delta\": {\"content\": \" convert\"}, \"finish_reason\": null}]}",
+       "data: {\"id\": \"chatcmpl-7\", \"object\": \"chat.completion.chunk\", \"created\": 1794839793, \"model\": \"qwen3-0.6b\", \"choices\": [{\"index\": 0, \"delta\": {\"content\": \" pounds\"}, \"finish_reason\": null}]}",
+       "data: {\"id\": \"chatcmpl-7\", \"object\": \"chat.completion.chunk\", \"created\": 1794839793, \"model\": \"qwen3-0.6b\", \"choices\": [{\"index\": 0, \"delta\": {\"content\": \" to\"}, \"finish_reason\": null}]}",
+       "data: {\"id\": \"chatcmpl-7\", \"object\": \"chat.completion.chunk\", \"created\": 1794839793, \"model\": \"qwen3-0.6b\", \"choices\": [{\"index\": 0, \"delta\": {\"content\": \" kilograms\"}, \"finish_reason\": null}]}",
+       "data: {\"id\": \"chatcmpl-7\", \"object\": \"chat.completion.chunk\", \"created\": 1794839793, \"model\": \"qwen3-0.6b\", \"choices\": [{\"index\": 0, \"delta\": {\"content\": \".\"}, \"finish_reason\": null}]}",
+       "data: {\"id\": \"chatcmpl-7\", \"object\": \"chat.completion.chunk\", \"created\": 1794839793, \"model\": \"qwen3-0.6b\", \"choices\": [{\"index\": 0, \"delta\": {}, \"finish_reason\": \"stop\"}]}",
+       "data: {\"id\": \"chatcmpl-7\", \"object\": \"chat.completion.chunk\", \"created\": 1794839793, \"model\": \"qwen3-0.6b\", \"choices\": [], \"usage\": {\"prompt_tokens\": 22, \"completion_tokens\": 120, \"total_tokens\": 142, \"prompt_tokens_details\": {\"cached_tokens\": 1}}}",
+       "data: [DONE]"
+      ]
+     }
+    ]
+   },
+   "auto-3": {
+    "ask": {
+     "messages": [
+      {
+       "role": "user",
+       "content": "How many kilograms is 150 lb?"
+      }
+     ],
+     "tools": [
+      {
+       "type": "function",
+       "function": {
+        "name": "convert",
+        "description": "Convert an amount from one unit to another: kilometres and miles, or kilograms and pounds.",
+        "parameters": {
+         "type": "object",
+         "properties": {
+          "amount": {
+           "type": "number",
+           "description": "the amount to convert, such as 37"
+          },
+          "from_unit": {
+           "type": "string",
+           "enum": [
+            "km",
+            "mi",
+            "kg",
+            "lb"
+           ],
+           "description": "the unit of the amount"
+          },
+          "to_unit": {
+           "type": "string",
+           "enum": [
+            "km",
+            "mi",
+            "kg",
+            "lb"
+           ],
+           "description": "the unit to convert to"
+          }
+         },
+         "required": [
+          "amount",
+          "from_unit",
+          "to_unit"
+         ]
+        }
+       }
+      }
+     ],
+     "max_tokens": 120,
+     "temperature": 0,
+     "steps": 2
+    },
+    "answers": [
+     {
+      "seed": 0,
+      "steps": [
+       {
+        "text": "150 pounds is equal to 150 kilograms.",
+        "finish": "stop",
+        "prompt_tokens": 264,
+        "tokens": 13,
+        "seconds": 3.39,
+        "cached_tokens": 1,
+        "tool_calls": [],
+        "results": []
+       }
+      ]
+     }
+    ]
+   },
+   "named-3": {
+    "ask": {
+     "messages": [
+      {
+       "role": "user",
+       "content": "How many kilograms is 150 lb?"
+      }
+     ],
+     "tools": [
+      {
+       "type": "function",
+       "function": {
+        "name": "convert",
+        "description": "Convert an amount from one unit to another: kilometres and miles, or kilograms and pounds.",
+        "parameters": {
+         "type": "object",
+         "properties": {
+          "amount": {
+           "type": "number",
+           "description": "the amount to convert, such as 37"
+          },
+          "from_unit": {
+           "type": "string",
+           "enum": [
+            "km",
+            "mi",
+            "kg",
+            "lb"
+           ],
+           "description": "the unit of the amount"
+          },
+          "to_unit": {
+           "type": "string",
+           "enum": [
+            "km",
+            "mi",
+            "kg",
+            "lb"
+           ],
+           "description": "the unit to convert to"
+          }
+         },
+         "required": [
+          "amount",
+          "from_unit",
+          "to_unit"
+         ]
+        }
+       }
+      }
+     ],
+     "tool_choice": {
+      "type": "function",
+      "function": {
+       "name": "convert"
+      }
+     },
+     "max_tokens": 120,
+     "temperature": 0,
+     "steps": 2
+    },
+    "answers": [
+     {
+      "seed": 0,
+      "steps": [
+       {
+        "text": "",
+        "finish": "tool_calls",
+        "prompt_tokens": 275,
+        "tokens": 23,
+        "seconds": 3.84,
+        "cached_tokens": 264,
+        "tool_calls": [
+         {
+          "id": "call_0",
+          "type": "function",
+          "function": {
+           "name": "convert",
+           "arguments": "{\"amount\": 150, \"from_unit\": \"lb\", \"to_unit\": \"kg\"}"
+          }
+         }
+        ],
+        "results": [
+         "68.04 kg"
+        ]
+       },
+       {
+        "text": "150 pounds is approximately 68.04 kilograms.",
+        "finish": "stop",
+        "prompt_tokens": 318,
+        "tokens": 14,
+        "seconds": 2.63,
+        "cached_tokens": 260,
+        "tool_calls": [],
+        "results": []
+       }
+      ]
+     }
+    ]
+   },
+   "own-4": {
+    "ask": {
+     "messages": [
+      {
+       "role": "user",
+       "content": "My bike ride was 23.5 km. How far is that in miles?"
+      }
+     ],
+     "max_tokens": 200,
+     "temperature": 0
+    },
+    "answers": [
+     {
+      "seed": 0,
+      "text": "To convert kilometers to miles, you can use the conversion factor:\n\n$$\n1 \\text{ km} = 0.621371 \\text{ miles}\n$$\n\nSo, for a 23.5 km ride:\n\n$$\n23.5 \\text{ km} \\times 0.621371 \\approx 14.63 \\text{ miles}\n$$\n\n**Answer:** Approximately 14.63 miles.",
+      "finish": "stop",
+      "prompt_tokens": 30,
+      "tokens": 99,
+      "first": 0.3,
+      "seconds": 14.79,
+      "pieces": 99,
+      "times": [
+       0.3,
+       0.44,
+       0.56,
+       0.68,
+       0.82,
+       0.96,
+       1.11,
+       1.26,
+       1.43,
+       1.57,
+       1.71,
+       1.85,
+       1.98,
+       2.11,
+       2.24,
+       2.37,
+       2.51,
+       2.66,
+       2.8,
+       2.94,
+       3.07,
+       3.2,
+       3.32,
+       3.49,
+       3.64,
+       3.77,
+       3.91,
+       4.05,
+       4.21,
+       4.36,
+       4.52,
+       4.68,
+       4.8,
+       4.93,
+       5.05,
+       5.18,
+       5.32,
+       5.48,
+       5.67,
+       5.86,
+       6.02,
+       6.17,
+       6.33,
+       6.48,
+       6.65,
+       6.79,
+       6.93,
+       7.06,
+       7.2,
+       7.35,
+       7.5,
+       7.63,
+       7.78,
+       7.92,
+       8.05,
+       8.2,
+       8.34,
+       8.52,
+       8.68,
+       8.84,
+       8.98,
+       9.11,
+       9.25,
+       9.38,
+       9.53,
+       9.67,
+       9.81,
+       9.96,
+       10.1,
+       10.25,
+       10.42,
+       10.57,
+       10.72,
+       10.86,
+       11.01,
+       11.2,
+       11.38,
+       11.53,
+       11.68,
+       11.83,
+       11.97,
+       12.1,
+       12.24,
+       12.41,
+       12.57,
+       12.72,
+       12.87,
+       13.01,
+       13.15,
+       13.3,
+       13.43,
+       13.55,
+       13.7,
+       13.85,
+       14.03,
+       14.18,
+       14.31,
+       14.47,
+       14.63
+      ],
+      "lines": [
+       "data: {\"id\": \"chatcmpl-11\", \"object\": \"chat.completion.chunk\", \"created\": 1794839820, \"model\": \"qwen3-0.6b\", \"choices\": [{\"index\": 0, \"delta\": {\"role\": \"assistant\", \"content\": \"\"}, \"finish_reason\": null}]}",
+       "data: {\"id\": \"chatcmpl-11\", \"object\": \"chat.completion.chunk\", \"created\": 1794839820, \"model\": \"qwen3-0.6b\", \"choices\": [{\"index\": 0, \"delta\": {\"content\": \"To\"}, \"finish_reason\": null}]}",
+       "data: {\"id\": \"chatcmpl-11\", \"object\": \"chat.completion.chunk\", \"created\": 1794839820, \"model\": \"qwen3-0.6b\", \"choices\": [{\"index\": 0, \"delta\": {\"content\": \" convert\"}, \"finish_reason\": null}]}",
+       "data: {\"id\": \"chatcmpl-11\", \"object\": \"chat.completion.chunk\", \"created\": 1794839820, \"model\": \"qwen3-0.6b\", \"choices\": [{\"index\": 0, \"delta\": {\"content\": \" kilometers\"}, \"finish_reason\": null}]}",
+       "data: {\"id\": \"chatcmpl-11\", \"object\": \"chat.completion.chunk\", \"created\": 1794839820, \"model\": \"qwen3-0.6b\", \"choices\": [{\"index\": 0, \"delta\": {\"content\": \" to\"}, \"finish_reason\": null}]}",
+       "data: {\"id\": \"chatcmpl-11\", \"object\": \"chat.completion.chunk\", \"created\": 1794839820, \"model\": \"qwen3-0.6b\", \"choices\": [{\"index\": 0, \"delta\": {\"content\": \" miles\"}, \"finish_reason\": null}]}",
+       "data: {\"id\": \"chatcmpl-11\", \"object\": \"chat.completion.chunk\", \"created\": 1794839820, \"model\": \"qwen3-0.6b\", \"choices\": [{\"index\": 0, \"delta\": {\"content\": \".\"}, \"finish_reason\": null}]}",
+       "data: {\"id\": \"chatcmpl-11\", \"object\": \"chat.completion.chunk\", \"created\": 1794839820, \"model\": \"qwen3-0.6b\", \"choices\": [{\"index\": 0, \"delta\": {}, \"finish_reason\": \"stop\"}]}",
+       "data: {\"id\": \"chatcmpl-11\", \"object\": \"chat.completion.chunk\", \"created\": 1794839820, \"model\": \"qwen3-0.6b\", \"choices\": [], \"usage\": {\"prompt_tokens\": 30, \"completion_tokens\": 99, \"total_tokens\": 129, \"prompt_tokens_details\": {\"cached_tokens\": 1}}}",
+       "data: [DONE]"
+      ]
+     }
+    ]
+   },
+   "auto-4": {
+    "ask": {
+     "messages": [
+      {
+       "role": "user",
+       "content": "My bike ride was 23.5 km. How far is that in miles?"
+      }
+     ],
+     "tools": [
+      {
+       "type": "function",
+       "function": {
+        "name": "convert",
+        "description": "Convert an amount from one unit to another: kilometres and miles, or kilograms and pounds.",
+        "parameters": {
+         "type": "object",
+         "properties": {
+          "amount": {
+           "type": "number",
+           "description": "the amount to convert, such as 37"
+          },
+          "from_unit": {
+           "type": "string",
+           "enum": [
+            "km",
+            "mi",
+            "kg",
+            "lb"
+           ],
+           "description": "the unit of the amount"
+          },
+          "to_unit": {
+           "type": "string",
+           "enum": [
+            "km",
+            "mi",
+            "kg",
+            "lb"
+           ],
+           "description": "the unit to convert to"
+          }
+         },
+         "required": [
+          "amount",
+          "from_unit",
+          "to_unit"
+         ]
+        }
+       }
+      }
+     ],
+     "max_tokens": 120,
+     "temperature": 0,
+     "steps": 2
+    },
+    "answers": [
+     {
+      "seed": 0,
+      "steps": [
+       {
+        "text": "",
+        "finish": "tool_calls",
+        "prompt_tokens": 272,
+        "tokens": 35,
+        "seconds": 6.63,
+        "cached_tokens": 1,
+        "tool_calls": [
+         {
+          "id": "call_0",
+          "type": "function",
+          "function": {
+           "name": "convert",
+           "arguments": "{\"amount\": 23.5, \"from_unit\": \"km\", \"to_unit\": \"mi\"}"
+          }
+         }
+        ],
+        "results": [
+         "14.6 mi"
+        ]
+       },
+       {
+        "text": "That is approximately 14.6 miles.",
+        "finish": "stop",
+        "prompt_tokens": 326,
+        "tokens": 10,
+        "seconds": 2.14,
+        "cached_tokens": 268,
+        "tool_calls": [],
+        "results": []
+       }
+      ]
+     }
+    ]
+   },
+   "named-4": {
+    "ask": {
+     "messages": [
+      {
+       "role": "user",
+       "content": "My bike ride was 23.5 km. How far is that in miles?"
+      }
+     ],
+     "tools": [
+      {
+       "type": "function",
+       "function": {
+        "name": "convert",
+        "description": "Convert an amount from one unit to another: kilometres and miles, or kilograms and pounds.",
+        "parameters": {
+         "type": "object",
+         "properties": {
+          "amount": {
+           "type": "number",
+           "description": "the amount to convert, such as 37"
+          },
+          "from_unit": {
+           "type": "string",
+           "enum": [
+            "km",
+            "mi",
+            "kg",
+            "lb"
+           ],
+           "description": "the unit of the amount"
+          },
+          "to_unit": {
+           "type": "string",
+           "enum": [
+            "km",
+            "mi",
+            "kg",
+            "lb"
+           ],
+           "description": "the unit to convert to"
+          }
+         },
+         "required": [
+          "amount",
+          "from_unit",
+          "to_unit"
+         ]
+        }
+       }
+      }
+     ],
+     "tool_choice": {
+      "type": "function",
+      "function": {
+       "name": "convert"
+      }
+     },
+     "max_tokens": 120,
+     "temperature": 0,
+     "steps": 2
+    },
+    "answers": [
+     {
+      "seed": 0,
+      "steps": [
+       {
+        "text": "",
+        "finish": "tool_calls",
+        "prompt_tokens": 283,
+        "tokens": 24,
+        "seconds": 4.34,
+        "cached_tokens": 268,
+        "tool_calls": [
+         {
+          "id": "call_0",
+          "type": "function",
+          "function": {
+           "name": "convert",
+           "arguments": "{\"amount\": 23.5, \"from_unit\": \"km\", \"to_unit\": \"mi\"}"
+          }
+         }
+        ],
+        "results": [
+         "14.6 mi"
+        ]
+       },
+       {
+        "text": "That is approximately 14.6 miles.",
+        "finish": "stop",
+        "prompt_tokens": 326,
+        "tokens": 10,
+        "seconds": 2.05,
+        "cached_tokens": 268,
+        "tool_calls": [],
+        "results": []
+       }
+      ]
+     }
+    ]
+   },
+   "own-5": {
+    "ask": {
+     "messages": [
+      {
+       "role": "user",
+       "content": "A suitcase may weigh 50 lb. What is that in kg?"
+      }
+     ],
+     "max_tokens": 200,
+     "temperature": 0
+    },
+    "answers": [
+     {
+      "seed": 0,
+      "text": "To convert 50 pounds to kilograms, we use the conversion factor:\n\n$$\n1 \\text{ pound} = 0.453592 \\text{ kg}\n$$\n\nSo:\n\n$$\n50 \\text{ lb} \\times 0.453592 \\text{ kg/lb} = 22.6796 \\text{ kg}\n$$\n\nTherefore, 50 pounds is approximately **22.68 kilograms**.",
+      "finish": "stop",
+      "prompt_tokens": 27,
+      "tokens": 102,
+      "first": 0.28,
+      "seconds": 14.28,
+      "pieces": 102,
+      "times": [
+       0.28,
+       0.41,
+       0.57,
+       0.7,
+       0.82,
+       0.94,
+       1.07,
+       1.21,
+       1.36,
+       1.52,
+       1.68,
+       1.81,
+       1.95,
+       2.07,
+       2.19,
+       2.32,
+       2.46,
+       2.59,
+       2.76,
+       2.9,
+       3.03,
+       3.15,
+       3.29,
+       3.44,
+       3.59,
+       3.72,
+       3.85,
+       3.99,
+       4.12,
+       4.25,
+       4.37,
+       4.49,
+       4.62,
+       4.76,
+       4.9,
+       5.07,
+       5.22,
+       5.37,
+       5.52,
+       5.65,
+       5.79,
+       5.93,
+       6.06,
+       6.18,
+       6.31,
+       6.43,
+       6.56,
+       6.7,
+       6.84,
+       6.97,
+       7.11,
+       7.25,
+       7.39,
+       7.54,
+       7.68,
+       7.82,
+       7.96,
+       8.09,
+       8.22,
+       8.36,
+       8.51,
+       8.65,
+       8.8,
+       8.95,
+       9.08,
+       9.22,
+       9.35,
+       9.49,
+       9.64,
+       9.78,
+       9.9,
+       10.02,
+       10.15,
+       10.28,
+       10.41,
+       10.54,
+       10.67,
+       10.82,
+       10.97,
+       11.12,
+       11.25,
+       11.4,
+       11.55,
+       11.69,
+       11.83,
+       11.98,
+       12.12,
+       12.25,
+       12.39,
+       12.53,
+       12.66,
+       12.78,
+       12.92,
+       13.06,
+       13.19,
+       13.32,
+       13.45,
+       13.58,
+       13.71,
+       13.85,
+       13.99,
+       14.14
+      ],
+      "lines": [
+       "data: {\"id\": \"chatcmpl-16\", \"object\": \"chat.completion.chunk\", \"created\": 1794839850, \"model\": \"qwen3-0.6b\", \"choices\": [{\"index\": 0, \"delta\": {\"role\": \"assistant\", \"content\": \"\"}, \"finish_reason\": null}]}",
+       "data: {\"id\": \"chatcmpl-16\", \"object\": \"chat.completion.chunk\", \"created\": 1794839850, \"model\": \"qwen3-0.6b\", \"choices\": [{\"index\": 0, \"delta\": {\"content\": \"To\"}, \"finish_reason\": null}]}",
+       "data: {\"id\": \"chatcmpl-16\", \"object\": \"chat.completion.chunk\", \"created\": 1794839850, \"model\": \"qwen3-0.6b\", \"choices\": [{\"index\": 0, \"delta\": {\"content\": \" convert\"}, \"finish_reason\": null}]}",
+       "data: {\"id\": \"chatcmpl-16\", \"object\": \"chat.completion.chunk\", \"created\": 1794839850, \"model\": \"qwen3-0.6b\", \"choices\": [{\"index\": 0, \"delta\": {\"content\": \" \"}, \"finish_reason\": null}]}",
+       "data: {\"id\": \"chatcmpl-16\", \"object\": \"chat.completion.chunk\", \"created\": 1794839850, \"model\": \"qwen3-0.6b\", \"choices\": [{\"index\": 0, \"delta\": {\"content\": \"5\"}, \"finish_reason\": null}]}",
+       "data: {\"id\": \"chatcmpl-16\", \"object\": \"chat.completion.chunk\", \"created\": 1794839850, \"model\": \"qwen3-0.6b\", \"choices\": [{\"index\": 0, \"delta\": {\"content\": \"0\"}, \"finish_reason\": null}]}",
+       "data: {\"id\": \"chatcmpl-16\", \"object\": \"chat.completion.chunk\", \"created\": 1794839850, \"model\": \"qwen3-0.6b\", \"choices\": [{\"index\": 0, \"delta\": {\"content\": \".\"}, \"finish_reason\": null}]}",
+       "data: {\"id\": \"chatcmpl-16\", \"object\": \"chat.completion.chunk\", \"created\": 1794839850, \"model\": \"qwen3-0.6b\", \"choices\": [{\"index\": 0, \"delta\": {}, \"finish_reason\": \"stop\"}]}",
+       "data: {\"id\": \"chatcmpl-16\", \"object\": \"chat.completion.chunk\", \"created\": 1794839850, \"model\": \"qwen3-0.6b\", \"choices\": [], \"usage\": {\"prompt_tokens\": 27, \"completion_tokens\": 102, \"total_tokens\": 129, \"prompt_tokens_details\": {\"cached_tokens\": 1}}}",
+       "data: [DONE]"
+      ]
+     }
+    ]
+   },
+   "auto-5": {
+    "ask": {
+     "messages": [
+      {
+       "role": "user",
+       "content": "A suitcase may weigh 50 lb. What is that in kg?"
+      }
+     ],
+     "tools": [
+      {
+       "type": "function",
+       "function": {
+        "name": "convert",
+        "description": "Convert an amount from one unit to another: kilometres and miles, or kilograms and pounds.",
+        "parameters": {
+         "type": "object",
+         "properties": {
+          "amount": {
+           "type": "number",
+           "description": "the amount to convert, such as 37"
+          },
+          "from_unit": {
+           "type": "string",
+           "enum": [
+            "km",
+            "mi",
+            "kg",
+            "lb"
+           ],
+           "description": "the unit of the amount"
+          },
+          "to_unit": {
+           "type": "string",
+           "enum": [
+            "km",
+            "mi",
+            "kg",
+            "lb"
+           ],
+           "description": "the unit to convert to"
+          }
+         },
+         "required": [
+          "amount",
+          "from_unit",
+          "to_unit"
+         ]
+        }
+       }
+      }
+     ],
+     "max_tokens": 120,
+     "temperature": 0,
+     "steps": 2
+    },
+    "answers": [
+     {
+      "seed": 0,
+      "steps": [
+       {
+        "text": "The suitcase weighs 50 pounds, which is approximately 22.7 kg.",
+        "finish": "stop",
+        "prompt_tokens": 269,
+        "tokens": 18,
+        "seconds": 3.76,
+        "cached_tokens": 1,
+        "tool_calls": [],
+        "results": []
+       }
+      ]
+     }
+    ]
+   },
+   "named-5": {
+    "ask": {
+     "messages": [
+      {
+       "role": "user",
+       "content": "A suitcase may weigh 50 lb. What is that in kg?"
+      }
+     ],
+     "tools": [
+      {
+       "type": "function",
+       "function": {
+        "name": "convert",
+        "description": "Convert an amount from one unit to another: kilometres and miles, or kilograms and pounds.",
+        "parameters": {
+         "type": "object",
+         "properties": {
+          "amount": {
+           "type": "number",
+           "description": "the amount to convert, such as 37"
+          },
+          "from_unit": {
+           "type": "string",
+           "enum": [
+            "km",
+            "mi",
+            "kg",
+            "lb"
+           ],
+           "description": "the unit of the amount"
+          },
+          "to_unit": {
+           "type": "string",
+           "enum": [
+            "km",
+            "mi",
+            "kg",
+            "lb"
+           ],
+           "description": "the unit to convert to"
+          }
+         },
+         "required": [
+          "amount",
+          "from_unit",
+          "to_unit"
+         ]
+        }
+       }
+      }
+     ],
+     "tool_choice": {
+      "type": "function",
+      "function": {
+       "name": "convert"
+      }
+     },
+     "max_tokens": 120,
+     "temperature": 0,
+     "steps": 2
+    },
+    "answers": [
+     {
+      "seed": 0,
+      "steps": [
+       {
+        "text": "",
+        "finish": "tool_calls",
+        "prompt_tokens": 280,
+        "tokens": 22,
+        "seconds": 3.32,
+        "cached_tokens": 269,
+        "tool_calls": [
+         {
+          "id": "call_0",
+          "type": "function",
+          "function": {
+           "name": "convert",
+           "arguments": "{\"amount\": 50, \"from_unit\": \"lb\", \"to_unit\": \"kg\"}"
+          }
+         }
+        ],
+        "results": [
+         "22.68 kg"
+        ]
+       },
+       {
+        "text": "The suitcase weighs approximately 22.68 kg.",
+        "finish": "stop",
+        "prompt_tokens": 322,
+        "tokens": 12,
+        "seconds": 2.29,
+        "cached_tokens": 265,
+        "tool_calls": [],
+        "results": []
+       }
+      ]
+     }
+    ]
+   },
+   "own-6": {
+    "ask": {
+     "messages": [
+      {
+       "role": "user",
+       "content": "How many km is a 3.1 mile run?"
+      }
+     ],
+     "max_tokens": 200,
+     "temperature": 0
+    },
+    "answers": [
+     {
+      "seed": 0,
+      "text": "To convert **3.1 miles** to **kilometers**, we use the conversion factor:\n\n$$\n1 \\text{ mile} = 1.60934 \\text{ km}\n$$\n\nSo:\n\n$$\n3.1 \\text{ miles} \\times 1.60934 \\text{ km/mile} \\approx 5.00 \\text{ km}\n$$\n\n**Answer:** Approximately **5.00 km**.",
+      "finish": "stop",
+      "prompt_tokens": 24,
+      "tokens": 98,
+      "first": 0.27,
+      "seconds": 13.44,
+      "pieces": 98,
+      "times": [
+       0.27,
+       0.39,
+       0.52,
+       0.65,
+       0.79,
+       0.92,
+       1.04,
+       1.16,
+       1.29,
+       1.41,
+       1.54,
+       1.68,
+       1.82,
+       1.96,
+       2.09,
+       2.24,
+       2.39,
+       2.52,
+       2.68,
+       2.81,
+       2.97,
+       3.11,
+       3.23,
+       3.37,
+       3.5,
+       3.63,
+       3.77,
+       3.9,
+       4.05,
+       4.18,
+       4.3,
+       4.43,
+       4.56,
+       4.68,
+       4.82,
+       4.94,
+       5.09,
+       5.23,
+       5.36,
+       5.49,
+       5.63,
+       5.77,
+       5.91,
+       6.05,
+       6.19,
+       6.32,
+       6.47,
+       6.59,
+       6.73,
+       6.86,
+       6.99,
+       7.11,
+       7.25,
+       7.39,
+       7.56,
+       7.68,
+       7.8,
+       7.94,
+       8.07,
+       8.21,
+       8.35,
+       8.49,
+       8.62,
+       8.77,
+       8.91,
+       9.04,
+       9.17,
+       9.31,
+       9.43,
+       9.59,
+       9.72,
+       9.85,
+       9.98,
+       10.1,
+       10.23,
+       10.36,
+       10.49,
+       10.61,
+       10.74,
+       10.87,
+       11.0,
+       11.13,
+       11.26,
+       11.39,
+       11.52,
+       11.66,
+       11.79,
+       11.93,
+       12.06,
+       12.22,
+       12.36,
+       12.49,
+       12.61,
+       12.74,
+       12.88,
+       13.03,
+       13.17,
+       13.31
+      ],
+      "lines": [
+       "data: {\"id\": \"chatcmpl-20\", \"object\": \"chat.completion.chunk\", \"created\": 1794839874, \"model\": \"qwen3-0.6b\", \"choices\": [{\"index\": 0, \"delta\": {\"role\": \"assistant\", \"content\": \"\"}, \"finish_reason\": null}]}",
+       "data: {\"id\": \"chatcmpl-20\", \"object\": \"chat.completion.chunk\", \"created\": 1794839874, \"model\": \"qwen3-0.6b\", \"choices\": [{\"index\": 0, \"delta\": {\"content\": \"To\"}, \"finish_reason\": null}]}",
+       "data: {\"id\": \"chatcmpl-20\", \"object\": \"chat.completion.chunk\", \"created\": 1794839874, \"model\": \"qwen3-0.6b\", \"choices\": [{\"index\": 0, \"delta\": {\"content\": \" convert\"}, \"finish_reason\": null}]}",
+       "data: {\"id\": \"chatcmpl-20\", \"object\": \"chat.completion.chunk\", \"created\": 1794839874, \"model\": \"qwen3-0.6b\", \"choices\": [{\"index\": 0, \"delta\": {\"content\": \" **\"}, \"finish_reason\": null}]}",
+       "data: {\"id\": \"chatcmpl-20\", \"object\": \"chat.completion.chunk\", \"created\": 1794839874, \"model\": \"qwen3-0.6b\", \"choices\": [{\"index\": 0, \"delta\": {\"content\": \"3\"}, \"finish_reason\": null}]}",
+       "data: {\"id\": \"chatcmpl-20\", \"object\": \"chat.completion.chunk\", \"created\": 1794839874, \"model\": \"qwen3-0.6b\", \"choices\": [{\"index\": 0, \"delta\": {\"content\": \".\"}, \"finish_reason\": null}]}",
+       "data: {\"id\": \"chatcmpl-20\", \"object\": \"chat.completion.chunk\", \"created\": 1794839874, \"model\": \"qwen3-0.6b\", \"choices\": [{\"index\": 0, \"delta\": {\"content\": \".\"}, \"finish_reason\": null}]}",
+       "data: {\"id\": \"chatcmpl-20\", \"object\": \"chat.completion.chunk\", \"created\": 1794839874, \"model\": \"qwen3-0.6b\", \"choices\": [{\"index\": 0, \"delta\": {}, \"finish_reason\": \"stop\"}]}",
+       "data: {\"id\": \"chatcmpl-20\", \"object\": \"chat.completion.chunk\", \"created\": 1794839874, \"model\": \"qwen3-0.6b\", \"choices\": [], \"usage\": {\"prompt_tokens\": 24, \"completion_tokens\": 98, \"total_tokens\": 122, \"prompt_tokens_details\": {\"cached_tokens\": 1}}}",
+       "data: [DONE]"
+      ]
+     }
+    ]
+   },
+   "auto-6": {
+    "ask": {
+     "messages": [
+      {
+       "role": "user",
+       "content": "How many km is a 3.1 mile run?"
+      }
+     ],
+     "tools": [
+      {
+       "type": "function",
+       "function": {
+        "name": "convert",
+        "description": "Convert an amount from one unit to another: kilometres and miles, or kilograms and pounds.",
+        "parameters": {
+         "type": "object",
+         "properties": {
+          "amount": {
+           "type": "number",
+           "description": "the amount to convert, such as 37"
+          },
+          "from_unit": {
+           "type": "string",
+           "enum": [
+            "km",
+            "mi",
+            "kg",
+            "lb"
+           ],
+           "description": "the unit of the amount"
+          },
+          "to_unit": {
+           "type": "string",
+           "enum": [
+            "km",
+            "mi",
+            "kg",
+            "lb"
+           ],
+           "description": "the unit to convert to"
+          }
+         },
+         "required": [
+          "amount",
+          "from_unit",
+          "to_unit"
+         ]
+        }
+       }
+      }
+     ],
+     "max_tokens": 120,
+     "temperature": 0,
+     "steps": 2
+    },
+    "answers": [
+     {
+      "seed": 0,
+      "steps": [
+       {
+        "text": "",
+        "finish": "tool_calls",
+        "prompt_tokens": 266,
+        "tokens": 34,
+        "seconds": 5.95,
+        "cached_tokens": 1,
+        "tool_calls": [
+         {
+          "id": "call_0",
+          "type": "function",
+          "function": {
+           "name": "convert",
+           "arguments": "{\"amount\": 3.1, \"from_unit\": \"mi\", \"to_unit\": \"km\"}"
+          }
+         }
+        ],
+        "results": [
+         "4.99 km"
+        ]
+       },
+       {
+        "text": "A 3.1 mile run is approximately 4.99 kilometers.",
+        "finish": "stop",
+        "prompt_tokens": 319,
+        "tokens": 16,
+        "seconds": 2.68,
+        "cached_tokens": 262,
+        "tool_calls": [],
+        "results": []
+       }
+      ]
+     }
+    ]
+   },
+   "named-6": {
+    "ask": {
+     "messages": [
+      {
+       "role": "user",
+       "content": "How many km is a 3.1 mile run?"
+      }
+     ],
+     "tools": [
+      {
+       "type": "function",
+       "function": {
+        "name": "convert",
+        "description": "Convert an amount from one unit to another: kilometres and miles, or kilograms and pounds.",
+        "parameters": {
+         "type": "object",
+         "properties": {
+          "amount": {
+           "type": "number",
+           "description": "the amount to convert, such as 37"
+          },
+          "from_unit": {
+           "type": "string",
+           "enum": [
+            "km",
+            "mi",
+            "kg",
+            "lb"
+           ],
+           "description": "the unit of the amount"
+          },
+          "to_unit": {
+           "type": "string",
+           "enum": [
+            "km",
+            "mi",
+            "kg",
+            "lb"
+           ],
+           "description": "the unit to convert to"
+          }
+         },
+         "required": [
+          "amount",
+          "from_unit",
+          "to_unit"
+         ]
+        }
+       }
+      }
+     ],
+     "tool_choice": {
+      "type": "function",
+      "function": {
+       "name": "convert"
+      }
+     },
+     "max_tokens": 120,
+     "temperature": 0,
+     "steps": 2
+    },
+    "answers": [
+     {
+      "seed": 0,
+      "steps": [
+       {
+        "text": "",
+        "finish": "tool_calls",
+        "prompt_tokens": 277,
+        "tokens": 23,
+        "seconds": 3.56,
+        "cached_tokens": 262,
+        "tool_calls": [
+         {
+          "id": "call_0",
+          "type": "function",
+          "function": {
+           "name": "convert",
+           "arguments": "{\"amount\": 3.1, \"from_unit\": \"mi\", \"to_unit\": \"km\"}"
+          }
+         }
+        ],
+        "results": [
+         "4.99 km"
+        ]
+       },
+       {
+        "text": "A 3.1 mile run is approximately 4.99 kilometers.",
+        "finish": "stop",
+        "prompt_tokens": 319,
+        "tokens": 16,
+        "seconds": 2.69,
+        "cached_tokens": 262,
+        "tool_calls": [],
+        "results": []
+       }
+      ]
+     }
+    ]
+   },
+   "own-7": {
+    "ask": {
+     "messages": [
+      {
+       "role": "user",
+       "content": "The bag of flour holds 2.5 kg. How many pounds is that?"
+      }
+     ],
+     "max_tokens": 200,
+     "temperature": 0
+    },
+    "answers": [
+     {
+      "seed": 0,
+      "text": "To convert kilograms to pounds, you can use the conversion factor:\n\n$$\n1 \\, \\text{kg} = 2.20462 \\, \\text{lb}\n$$\n\nSo, for 2.5 kg:\n\n$$\n2.5 \\, \\text{kg} \\times 2.20462 \\, \\text{lb/kg} \\approx 5.51155 \\, \\text{lb}\n$$\n\nTherefore, the bag of flour weighs approximately **5.51 pounds**.",
+      "finish": "stop",
+      "prompt_tokens": 29,
+      "tokens": 115,
+      "first": 0.28,
+      "seconds": 15.19,
+      "pieces": 115,
+      "times": [
+       0.28,
+       0.4,
+       0.52,
+       0.65,
+       0.77,
+       0.9,
+       1.04,
+       1.18,
+       1.31,
+       1.42,
+       1.54,
+       1.67,
+       1.8,
+       1.92,
+       2.04,
+       2.16,
+       2.28,
+       2.4,
+       2.52,
+       2.64,
+       2.76,
+       2.88,
+       3.01,
+       3.13,
+       3.24,
+       3.4,
+       3.52,
+       3.64,
+       3.77,
+       3.9,
+       4.02,
+       4.14,
+       4.27,
+       4.39,
+       4.52,
+       4.64,
+       4.76,
+       4.88,
+       5.02,
+       5.17,
+       5.3,
+       5.43,
+       5.56,
+       5.69,
+       5.82,
+       5.95,
+       6.08,
+       6.2,
+       6.33,
+       6.46,
+       6.6,
+       6.74,
+       6.9,
+       7.04,
+       7.18,
+       7.33,
+       7.47,
+       7.62,
+       7.76,
+       7.89,
+       8.02,
+       8.14,
+       8.26,
+       8.38,
+       8.51,
+       8.65,
+       8.79,
+       8.96,
+       9.1,
+       9.23,
+       9.37,
+       9.49,
+       9.61,
+       9.73,
+       9.86,
+       9.99,
+       10.12,
+       10.24,
+       10.36,
+       10.48,
+       10.6,
+       10.73,
+       10.86,
+       10.99,
+       11.12,
+       11.25,
+       11.39,
+       11.52,
+       11.65,
+       11.77,
+       11.9,
+       12.03,
+       12.16,
+       12.29,
+       12.43,
+       12.56,
+       12.68,
+       12.81,
+       12.94,
+       13.07,
+       13.2,
+       13.34,
+       13.48,
+       13.6,
+       13.73,
+       13.86,
+       13.98,
+       14.11,
+       14.24,
+       14.37,
+       14.51,
+       14.64,
+       14.77,
+       14.91,
+       15.04
+      ],
+      "lines": [
+       "data: {\"id\": \"chatcmpl-25\", \"object\": \"chat.completion.chunk\", \"created\": 1794839902, \"model\": \"qwen3-0.6b\", \"choices\": [{\"index\": 0, \"delta\": {\"role\": \"assistant\", \"content\": \"\"}, \"finish_reason\": null}]}",
+       "data: {\"id\": \"chatcmpl-25\", \"object\": \"chat.completion.chunk\", \"created\": 1794839902, \"model\": \"qwen3-0.6b\", \"choices\": [{\"index\": 0, \"delta\": {\"content\": \"To\"}, \"finish_reason\": null}]}",
+       "data: {\"id\": \"chatcmpl-25\", \"object\": \"chat.completion.chunk\", \"created\": 1794839902, \"model\": \"qwen3-0.6b\", \"choices\": [{\"index\": 0, \"delta\": {\"content\": \" convert\"}, \"finish_reason\": null}]}",
+       "data: {\"id\": \"chatcmpl-25\", \"object\": \"chat.completion.chunk\", \"created\": 1794839902, \"model\": \"qwen3-0.6b\", \"choices\": [{\"index\": 0, \"delta\": {\"content\": \" kilograms\"}, \"finish_reason\": null}]}",
+       "data: {\"id\": \"chatcmpl-25\", \"object\": \"chat.completion.chunk\", \"created\": 1794839902, \"model\": \"qwen3-0.6b\", \"choices\": [{\"index\": 0, \"delta\": {\"content\": \" to\"}, \"finish_reason\": null}]}",
+       "data: {\"id\": \"chatcmpl-25\", \"object\": \"chat.completion.chunk\", \"created\": 1794839902, \"model\": \"qwen3-0.6b\", \"choices\": [{\"index\": 0, \"delta\": {\"content\": \" pounds\"}, \"finish_reason\": null}]}",
+       "data: {\"id\": \"chatcmpl-25\", \"object\": \"chat.completion.chunk\", \"created\": 1794839902, \"model\": \"qwen3-0.6b\", \"choices\": [{\"index\": 0, \"delta\": {\"content\": \".\"}, \"finish_reason\": null}]}",
+       "data: {\"id\": \"chatcmpl-25\", \"object\": \"chat.completion.chunk\", \"created\": 1794839902, \"model\": \"qwen3-0.6b\", \"choices\": [{\"index\": 0, \"delta\": {}, \"finish_reason\": \"stop\"}]}",
+       "data: {\"id\": \"chatcmpl-25\", \"object\": \"chat.completion.chunk\", \"created\": 1794839902, \"model\": \"qwen3-0.6b\", \"choices\": [], \"usage\": {\"prompt_tokens\": 29, \"completion_tokens\": 115, \"total_tokens\": 144, \"prompt_tokens_details\": {\"cached_tokens\": 1}}}",
+       "data: [DONE]"
+      ]
+     }
+    ]
+   },
+   "auto-7": {
+    "ask": {
+     "messages": [
+      {
+       "role": "user",
+       "content": "The bag of flour holds 2.5 kg. How many pounds is that?"
+      }
+     ],
+     "tools": [
+      {
+       "type": "function",
+       "function": {
+        "name": "convert",
+        "description": "Convert an amount from one unit to another: kilometres and miles, or kilograms and pounds.",
+        "parameters": {
+         "type": "object",
+         "properties": {
+          "amount": {
+           "type": "number",
+           "description": "the amount to convert, such as 37"
+          },
+          "from_unit": {
+           "type": "string",
+           "enum": [
+            "km",
+            "mi",
+            "kg",
+            "lb"
+           ],
+           "description": "the unit of the amount"
+          },
+          "to_unit": {
+           "type": "string",
+           "enum": [
+            "km",
+            "mi",
+            "kg",
+            "lb"
+           ],
+           "description": "the unit to convert to"
+          }
+         },
+         "required": [
+          "amount",
+          "from_unit",
+          "to_unit"
+         ]
+        }
+       }
+      }
+     ],
+     "max_tokens": 120,
+     "temperature": 0,
+     "steps": 2
+    },
+    "answers": [
+     {
+      "seed": 0,
+      "steps": [
+       {
+        "text": "",
+        "finish": "tool_calls",
+        "prompt_tokens": 271,
+        "tokens": 34,
+        "seconds": 5.96,
+        "cached_tokens": 1,
+        "tool_calls": [
+         {
+          "id": "call_0",
+          "type": "function",
+          "function": {
+           "name": "convert",
+           "arguments": "{\"amount\": 2.5, \"from_unit\": \"kg\", \"to_unit\": \"lb\"}"
+          }
+         }
+        ],
+        "results": [
+         "5.51 lb"
+        ]
+       },
+       {
+        "text": "The bag of flour weighs approximately 5.51 pounds.",
+        "finish": "stop",
+        "prompt_tokens": 324,
+        "tokens": 13,
+        "seconds": 2.41,
+        "cached_tokens": 267,
+        "tool_calls": [],
+        "results": []
+       }
+      ]
+     }
+    ]
+   },
+   "named-7": {
+    "ask": {
+     "messages": [
+      {
+       "role": "user",
+       "content": "The bag of flour holds 2.5 kg. How many pounds is that?"
+      }
+     ],
+     "tools": [
+      {
+       "type": "function",
+       "function": {
+        "name": "convert",
+        "description": "Convert an amount from one unit to another: kilometres and miles, or kilograms and pounds.",
+        "parameters": {
+         "type": "object",
+         "properties": {
+          "amount": {
+           "type": "number",
+           "description": "the amount to convert, such as 37"
+          },
+          "from_unit": {
+           "type": "string",
+           "enum": [
+            "km",
+            "mi",
+            "kg",
+            "lb"
+           ],
+           "description": "the unit of the amount"
+          },
+          "to_unit": {
+           "type": "string",
+           "enum": [
+            "km",
+            "mi",
+            "kg",
+            "lb"
+           ],
+           "description": "the unit to convert to"
+          }
+         },
+         "required": [
+          "amount",
+          "from_unit",
+          "to_unit"
+         ]
+        }
+       }
+      }
+     ],
+     "tool_choice": {
+      "type": "function",
+      "function": {
+       "name": "convert"
+      }
+     },
+     "max_tokens": 120,
+     "temperature": 0,
+     "steps": 2
+    },
+    "answers": [
+     {
+      "seed": 0,
+      "steps": [
+       {
+        "text": "",
+        "finish": "tool_calls",
+        "prompt_tokens": 282,
+        "tokens": 23,
+        "seconds": 3.61,
+        "cached_tokens": 267,
+        "tool_calls": [
+         {
+          "id": "call_0",
+          "type": "function",
+          "function": {
+           "name": "convert",
+           "arguments": "{\"amount\": 2.5, \"from_unit\": \"kg\", \"to_unit\": \"lb\"}"
+          }
+         }
+        ],
+        "results": [
+         "5.51 lb"
+        ]
+       },
+       {
+        "text": "The bag of flour weighs approximately 5.51 pounds.",
+        "finish": "stop",
+        "prompt_tokens": 324,
+        "tokens": 13,
+        "seconds": 2.2,
+        "cached_tokens": 267,
+        "tool_calls": [],
+        "results": []
+       }
+      ]
+     }
+    ]
+   },
+   "no-need-auto-0": {
+    "ask": {
+     "messages": [
+      {
+       "role": "user",
+       "content": "What does the abbreviation lb stand for?"
+      }
+     ],
+     "tools": [
+      {
+       "type": "function",
+       "function": {
+        "name": "convert",
+        "description": "Convert an amount from one unit to another: kilometres and miles, or kilograms and pounds.",
+        "parameters": {
+         "type": "object",
+         "properties": {
+          "amount": {
+           "type": "number",
+           "description": "the amount to convert, such as 37"
+          },
+          "from_unit": {
+           "type": "string",
+           "enum": [
+            "km",
+            "mi",
+            "kg",
+            "lb"
+           ],
+           "description": "the unit of the amount"
+          },
+          "to_unit": {
+           "type": "string",
+           "enum": [
+            "km",
+            "mi",
+            "kg",
+            "lb"
+           ],
+           "description": "the unit to convert to"
+          }
+         },
+         "required": [
+          "amount",
+          "from_unit",
+          "to_unit"
+         ]
+        }
+       }
+      }
+     ],
+     "max_tokens": 120,
+     "temperature": 0,
+     "steps": 2
+    },
+    "answers": [
+     {
+      "seed": 0,
+      "steps": [
+       {
+        "text": "The abbreviation **lb** stands for **pounds**.",
+        "finish": "stop",
+        "prompt_tokens": 262,
+        "tokens": 12,
+        "seconds": 1.94,
+        "cached_tokens": 245,
+        "tool_calls": [],
+        "results": []
+       }
+      ]
+     }
+    ]
+   },
+   "no-need-none-0": {
+    "ask": {
+     "messages": [
+      {
+       "role": "user",
+       "content": "What does the abbreviation lb stand for?"
+      }
+     ],
+     "tools": [
+      {
+       "type": "function",
+       "function": {
+        "name": "convert",
+        "description": "Convert an amount from one unit to another: kilometres and miles, or kilograms and pounds.",
+        "parameters": {
+         "type": "object",
+         "properties": {
+          "amount": {
+           "type": "number",
+           "description": "the amount to convert, such as 37"
+          },
+          "from_unit": {
+           "type": "string",
+           "enum": [
+            "km",
+            "mi",
+            "kg",
+            "lb"
+           ],
+           "description": "the unit of the amount"
+          },
+          "to_unit": {
+           "type": "string",
+           "enum": [
+            "km",
+            "mi",
+            "kg",
+            "lb"
+           ],
+           "description": "the unit to convert to"
+          }
+         },
+         "required": [
+          "amount",
+          "from_unit",
+          "to_unit"
+         ]
+        }
+       }
+      }
+     ],
+     "tool_choice": "none",
+     "max_tokens": 120,
+     "temperature": 0,
+     "steps": 2
+    },
+    "answers": [
+     {
+      "seed": 0,
+      "steps": [
+       {
+        "text": "The abbreviation **lb** stands for **pounds**. It is commonly used in the United States to measure weight.",
+        "finish": "stop",
+        "prompt_tokens": 20,
+        "tokens": 24,
+        "seconds": 3.38,
+        "cached_tokens": 1,
+        "tool_calls": [],
+        "results": []
+       }
+      ]
+     }
+    ]
+   },
+   "no-need-auto-1": {
+    "ask": {
+     "messages": [
+      {
+       "role": "user",
+       "content": "Which is the unit of mass here: km, mi, kg or lb?"
+      }
+     ],
+     "tools": [
+      {
+       "type": "function",
+       "function": {
+        "name": "convert",
+        "description": "Convert an amount from one unit to another: kilometres and miles, or kilograms and pounds.",
+        "parameters": {
+         "type": "object",
+         "properties": {
+          "amount": {
+           "type": "number",
+           "description": "the amount to convert, such as 37"
+          },
+          "from_unit": {
+           "type": "string",
+           "enum": [
+            "km",
+            "mi",
+            "kg",
+            "lb"
+           ],
+           "description": "the unit of the amount"
+          },
+          "to_unit": {
+           "type": "string",
+           "enum": [
+            "km",
+            "mi",
+            "kg",
+            "lb"
+           ],
+           "description": "the unit to convert to"
+          }
+         },
+         "required": [
+          "amount",
+          "from_unit",
+          "to_unit"
+         ]
+        }
+       }
+      }
+     ],
+     "max_tokens": 120,
+     "temperature": 0,
+     "steps": 2
+    },
+    "answers": [
+     {
+      "seed": 0,
+      "steps": [
+       {
+        "text": "The unit of mass here is either **kilograms (kg)** or **pounds (lb)**.",
+        "finish": "stop",
+        "prompt_tokens": 270,
+        "tokens": 21,
+        "seconds": 4.06,
+        "cached_tokens": 1,
+        "tool_calls": [],
+        "results": []
+       }
+      ]
+     }
+    ]
+   },
+   "no-need-none-1": {
+    "ask": {
+     "messages": [
+      {
+       "role": "user",
+       "content": "Which is the unit of mass here: km, mi, kg or lb?"
+      }
+     ],
+     "tools": [
+      {
+       "type": "function",
+       "function": {
+        "name": "convert",
+        "description": "Convert an amount from one unit to another: kilometres and miles, or kilograms and pounds.",
+        "parameters": {
+         "type": "object",
+         "properties": {
+          "amount": {
+           "type": "number",
+           "description": "the amount to convert, such as 37"
+          },
+          "from_unit": {
+           "type": "string",
+           "enum": [
+            "km",
+            "mi",
+            "kg",
+            "lb"
+           ],
+           "description": "the unit of the amount"
+          },
+          "to_unit": {
+           "type": "string",
+           "enum": [
+            "km",
+            "mi",
+            "kg",
+            "lb"
+           ],
+           "description": "the unit to convert to"
+          }
+         },
+         "required": [
+          "amount",
+          "from_unit",
+          "to_unit"
+         ]
+        }
+       }
+      }
+     ],
+     "tool_choice": "none",
+     "max_tokens": 120,
+     "temperature": 0,
+     "steps": 2
+    },
+    "answers": [
+     {
+      "seed": 0,
+      "steps": [
+       {
+        "text": "The unit of mass here is **kg**.\n\n### Explanation:\n- **km** (kilometer) is a unit of length.\n- **mi** (mile) is a unit of distance.\n- **lb** (pound) is a unit of weight, not mass.\n\n### Correct answer: **kg**.",
+        "finish": "stop",
+        "prompt_tokens": 28,
+        "tokens": 65,
+        "seconds": 8.71,
+        "cached_tokens": 1,
+        "tool_calls": [],
+        "results": []
+       }
+      ]
+     }
+    ]
+   }
+  },
+  "build-tool-design": {
+   "bare-0": {
+    "ask": {
+     "messages": [
+      {
+       "role": "user",
+       "content": "How many miles is 37 km?"
+      }
+     ],
+     "tools": [
+      {
+       "type": "function",
+       "function": {
+        "name": "conv",
+        "description": "",
+        "parameters": {
+         "type": "object",
+         "properties": {
+          "a": {
+           "type": "number"
+          },
+          "b": {
+           "type": "string"
+          },
+          "c": {
+           "type": "string"
+          }
+         },
+         "required": [
+          "a",
+          "b",
+          "c"
+         ]
+        }
+       }
+      }
+     ],
+     "tool_choice": {
+      "type": "function",
+      "function": {
+       "name": "conv"
+      }
+     },
+     "max_tokens": 120,
+     "temperature": 0,
+     "steps": 1
+    },
+    "answers": [
+     {
+      "seed": 0,
+      "steps": [
+       {
+        "text": "",
+        "finish": "tool_calls",
+        "prompt_tokens": 187,
+        "tokens": 20,
+        "seconds": 3.46,
+        "cached_tokens": 1,
+        "tool_calls": [
+         {
+          "id": "call_0",
+          "type": "function",
+          "function": {
+           "name": "conv",
+           "arguments": "{\"a\": 37, \"b\": \"km\", \"c\": \"m\"}"
+          }
+         }
+        ],
+        "results": [
+         "Error: unknown unit 'm'. Use km, mi, kg or lb."
+        ]
+       }
+      ]
+     }
+    ]
+   },
+   "names-terse-0": {
+    "ask": {
+     "messages": [
+      {
+       "role": "user",
+       "content": "How many miles is 37 km?"
+      }
+     ],
+     "tools": [
+      {
+       "type": "function",
+       "function": {
+        "name": "convert",
+        "description": "Convert an amount.",
+        "parameters": {
+         "type": "object",
+         "properties": {
+          "amount": {
+           "type": "number"
+          },
+          "from_unit": {
+           "type": "string"
+          },
+          "to_unit": {
+           "type": "string"
+          }
+         },
+         "required": [
+          "amount",
+          "from_unit",
+          "to_unit"
+         ]
+        }
+       }
+      }
+     ],
+     "tool_choice": {
+      "type": "function",
+      "function": {
+       "name": "convert"
+      }
+     },
+     "max_tokens": 120,
+     "temperature": 0,
+     "steps": 3,
+     "errors": "terse"
+    },
+    "answers": [
+     {
+      "seed": 0,
+      "steps": [
+       {
+        "text": "",
+        "finish": "tool_calls",
+        "prompt_tokens": 195,
+        "tokens": 23,
+        "seconds": 3.75,
+        "cached_tokens": 51,
+        "tool_calls": [
+         {
+          "id": "call_0",
+          "type": "function",
+          "function": {
+           "name": "convert",
+           "arguments": "{\"amount\": 37, \"from_unit\": \"km\", \"to_unit\": \"miles\"}"
+          }
+         }
+        ],
+        "results": [
+         "Error"
+        ]
+       },
+       {
+        "text": "I'm sorry, but I can't perform this calculation. Please provide the amount in the same unit as the unit you want to convert.",
+        "finish": "stop",
+        "prompt_tokens": 233,
+        "tokens": 28,
+        "seconds": 4.19,
+        "cached_tokens": 180,
+        "tool_calls": [],
+        "results": []
+       }
+      ]
+     }
+    ]
+   },
+   "names-helpful-0": {
+    "ask": {
+     "messages": [
+      {
+       "role": "user",
+       "content": "How many miles is 37 km?"
+      }
+     ],
+     "tools": [
+      {
+       "type": "function",
+       "function": {
+        "name": "convert",
+        "description": "Convert an amount.",
+        "parameters": {
+         "type": "object",
+         "properties": {
+          "amount": {
+           "type": "number"
+          },
+          "from_unit": {
+           "type": "string"
+          },
+          "to_unit": {
+           "type": "string"
+          }
+         },
+         "required": [
+          "amount",
+          "from_unit",
+          "to_unit"
+         ]
+        }
+       }
+      }
+     ],
+     "tool_choice": {
+      "type": "function",
+      "function": {
+       "name": "convert"
+      }
+     },
+     "max_tokens": 120,
+     "temperature": 0,
+     "steps": 3,
+     "errors": "helpful"
+    },
+    "answers": [
+     {
+      "seed": 0,
+      "steps": [
+       {
+        "text": "",
+        "finish": "tool_calls",
+        "prompt_tokens": 195,
+        "tokens": 23,
+        "seconds": 3.45,
+        "cached_tokens": 180,
+        "tool_calls": [
+         {
+          "id": "call_0",
+          "type": "function",
+          "function": {
+           "name": "convert",
+           "arguments": "{\"amount\": 37, \"from_unit\": \"km\", \"to_unit\": \"miles\"}"
+          }
+         }
+        ],
+        "results": [
+         "Error: unknown unit 'miles'. Use km, mi, kg or lb."
+        ]
+       },
+       {
+        "text": "Error: unknown unit 'miles'. Use km, mi, kg or lb.",
+        "finish": "stop",
+        "prompt_tokens": 248,
+        "tokens": 17,
+        "seconds": 2.84,
+        "cached_tokens": 180,
+        "tool_calls": [],
+        "results": []
+       }
+      ]
+     }
+    ]
+   },
+   "bare-1": {
+    "ask": {
+     "messages": [
+      {
+       "role": "user",
+       "content": "How many kilometres is 18 miles?"
+      }
+     ],
+     "tools": [
+      {
+       "type": "function",
+       "function": {
+        "name": "conv",
+        "description": "",
+        "parameters": {
+         "type": "object",
+         "properties": {
+          "a": {
+           "type": "number"
+          },
+          "b": {
+           "type": "string"
+          },
+          "c": {
+           "type": "string"
+          }
+         },
+         "required": [
+          "a",
+          "b",
+          "c"
+         ]
+        }
+       }
+      }
+     ],
+     "tool_choice": {
+      "type": "function",
+      "function": {
+       "name": "conv"
+      }
+     },
+     "max_tokens": 120,
+     "temperature": 0,
+     "steps": 1
+    },
+    "answers": [
+     {
+      "seed": 0,
+      "steps": [
+       {
+        "text": "",
+        "finish": "tool_calls",
+        "prompt_tokens": 187,
+        "tokens": 22,
+        "seconds": 3.52,
+        "cached_tokens": 51,
+        "tool_calls": [
+         {
+          "id": "call_0",
+          "type": "function",
+          "function": {
+           "name": "conv",
+           "arguments": "{\"a\": 18, \"b\": \"miles\", \"c\": \"kilometers\"}"
+          }
+         }
+        ],
+        "results": [
+         "Error: unknown unit 'miles'. Use km, mi, kg or lb."
+        ]
+       }
+      ]
+     }
+    ]
+   },
+   "names-terse-1": {
+    "ask": {
+     "messages": [
+      {
+       "role": "user",
+       "content": "How many kilometres is 18 miles?"
+      }
+     ],
+     "tools": [
+      {
+       "type": "function",
+       "function": {
+        "name": "convert",
+        "description": "Convert an amount.",
+        "parameters": {
+         "type": "object",
+         "properties": {
+          "amount": {
+           "type": "number"
+          },
+          "from_unit": {
+           "type": "string"
+          },
+          "to_unit": {
+           "type": "string"
+          }
+         },
+         "required": [
+          "amount",
+          "from_unit",
+          "to_unit"
+         ]
+        }
+       }
+      }
+     ],
+     "tool_choice": {
+      "type": "function",
+      "function": {
+       "name": "convert"
+      }
+     },
+     "max_tokens": 120,
+     "temperature": 0,
+     "steps": 3,
+     "errors": "terse"
+    },
+    "answers": [
+     {
+      "seed": 0,
+      "steps": [
+       {
+        "text": "",
+        "finish": "tool_calls",
+        "prompt_tokens": 195,
+        "tokens": 25,
+        "seconds": 4.07,
+        "cached_tokens": 51,
+        "tool_calls": [
+         {
+          "id": "call_0",
+          "type": "function",
+          "function": {
+           "name": "convert",
+           "arguments": "{\"amount\": 18, \"from_unit\": \"miles\", \"to_unit\": \"kilometres\"}"
+          }
+         }
+        ],
+        "results": [
+         "Error"
+        ]
+       },
+       {
+        "text": "I'm sorry, but I can't perform this calculation. Please provide the amount and the units you'd like to convert.",
+        "finish": "stop",
+        "prompt_tokens": 235,
+        "tokens": 25,
+        "seconds": 3.97,
+        "cached_tokens": 180,
+        "tool_calls": [],
+        "results": []
+       }
+      ]
+     }
+    ]
+   },
+   "names-helpful-1": {
+    "ask": {
+     "messages": [
+      {
+       "role": "user",
+       "content": "How many kilometres is 18 miles?"
+      }
+     ],
+     "tools": [
+      {
+       "type": "function",
+       "function": {
+        "name": "convert",
+        "description": "Convert an amount.",
+        "parameters": {
+         "type": "object",
+         "properties": {
+          "amount": {
+           "type": "number"
+          },
+          "from_unit": {
+           "type": "string"
+          },
+          "to_unit": {
+           "type": "string"
+          }
+         },
+         "required": [
+          "amount",
+          "from_unit",
+          "to_unit"
+         ]
+        }
+       }
+      }
+     ],
+     "tool_choice": {
+      "type": "function",
+      "function": {
+       "name": "convert"
+      }
+     },
+     "max_tokens": 120,
+     "temperature": 0,
+     "steps": 3,
+     "errors": "helpful"
+    },
+    "answers": [
+     {
+      "seed": 0,
+      "steps": [
+       {
+        "text": "",
+        "finish": "tool_calls",
+        "prompt_tokens": 195,
+        "tokens": 25,
+        "seconds": 3.76,
+        "cached_tokens": 180,
+        "tool_calls": [
+         {
+          "id": "call_0",
+          "type": "function",
+          "function": {
+           "name": "convert",
+           "arguments": "{\"amount\": 18, \"from_unit\": \"miles\", \"to_unit\": \"kilometres\"}"
+          }
+         }
+        ],
+        "results": [
+         "Error: unknown unit 'miles'. Use km, mi, kg or lb."
+        ]
+       },
+       {
+        "text": "",
+        "finish": "tool_calls",
+        "prompt_tokens": 250,
+        "tokens": 36,
+        "seconds": 5.57,
+        "cached_tokens": 180,
+        "tool_calls": [
+         {
+          "id": "call_1",
+          "type": "function",
+          "function": {
+           "name": "convert",
+           "arguments": "{\"amount\": 18, \"from_unit\": \"miles\", \"to_unit\": \"kilometres\"}"
+          }
+         }
+        ],
+        "results": [
+         "Error: unknown unit 'miles'. Use km, mi, kg or lb."
+        ]
+       },
+       {
+        "text": "",
+        "finish": "tool_calls",
+        "prompt_tokens": 316,
+        "tokens": 34,
+        "seconds": 5.47,
+        "cached_tokens": 246,
+        "tool_calls": [
+         {
+          "id": "call_2",
+          "type": "function",
+          "function": {
+           "name": "convert",
+           "arguments": "{\"amount\": 18, \"from_unit\": \"miles\", \"to_unit\": \"km\"}"
+          }
+         }
+        ],
+        "results": [
+         "Error: unknown unit 'miles'. Use km, mi, kg or lb."
+        ]
+       }
+      ]
+     }
+    ]
+   },
+   "bare-2": {
+    "ask": {
+     "messages": [
+      {
+       "role": "user",
+       "content": "How many pounds is 64 kg?"
+      }
+     ],
+     "tools": [
+      {
+       "type": "function",
+       "function": {
+        "name": "conv",
+        "description": "",
+        "parameters": {
+         "type": "object",
+         "properties": {
+          "a": {
+           "type": "number"
+          },
+          "b": {
+           "type": "string"
+          },
+          "c": {
+           "type": "string"
+          }
+         },
+         "required": [
+          "a",
+          "b",
+          "c"
+         ]
+        }
+       }
+      }
+     ],
+     "tool_choice": {
+      "type": "function",
+      "function": {
+       "name": "conv"
+      }
+     },
+     "max_tokens": 120,
+     "temperature": 0,
+     "steps": 1
+    },
+    "answers": [
+     {
+      "seed": 0,
+      "steps": [
+       {
+        "text": "",
+        "finish": "tool_calls",
+        "prompt_tokens": 187,
+        "tokens": 21,
+        "seconds": 3.6,
+        "cached_tokens": 51,
+        "tool_calls": [
+         {
+          "id": "call_0",
+          "type": "function",
+          "function": {
+           "name": "conv",
+           "arguments": "{\"a\": 64, \"b\": \"kg\", \"c\": \"pounds\"}"
+          }
+         }
+        ],
+        "results": [
+         "Error: unknown unit 'pounds'. Use km, mi, kg or lb."
+        ]
+       }
+      ]
+     }
+    ]
+   },
+   "names-terse-2": {
+    "ask": {
+     "messages": [
+      {
+       "role": "user",
+       "content": "How many pounds is 64 kg?"
+      }
+     ],
+     "tools": [
+      {
+       "type": "function",
+       "function": {
+        "name": "convert",
+        "description": "Convert an amount.",
+        "parameters": {
+         "type": "object",
+         "properties": {
+          "amount": {
+           "type": "number"
+          },
+          "from_unit": {
+           "type": "string"
+          },
+          "to_unit": {
+           "type": "string"
+          }
+         },
+         "required": [
+          "amount",
+          "from_unit",
+          "to_unit"
+         ]
+        }
+       }
+      }
+     ],
+     "tool_choice": {
+      "type": "function",
+      "function": {
+       "name": "convert"
+      }
+     },
+     "max_tokens": 120,
+     "temperature": 0,
+     "steps": 3,
+     "errors": "terse"
+    },
+    "answers": [
+     {
+      "seed": 0,
+      "steps": [
+       {
+        "text": "",
+        "finish": "tool_calls",
+        "prompt_tokens": 195,
+        "tokens": 23,
+        "seconds": 3.9,
+        "cached_tokens": 51,
+        "tool_calls": [
+         {
+          "id": "call_0",
+          "type": "function",
+          "function": {
+           "name": "convert",
+           "arguments": "{\"amount\": 64, \"from_unit\": \"kg\", \"to_unit\": \"pounds\"}"
+          }
+         }
+        ],
+        "results": [
+         "Error"
+        ]
+       },
+       {
+        "text": "I'm sorry, but I can't perform this conversion. Please provide the amount in the correct units.",
+        "finish": "stop",
+        "prompt_tokens": 233,
+        "tokens": 21,
+        "seconds": 3.34,
+        "cached_tokens": 180,
+        "tool_calls": [],
+        "results": []
+       }
+      ]
+     }
+    ]
+   },
+   "names-helpful-2": {
+    "ask": {
+     "messages": [
+      {
+       "role": "user",
+       "content": "How many pounds is 64 kg?"
+      }
+     ],
+     "tools": [
+      {
+       "type": "function",
+       "function": {
+        "name": "convert",
+        "description": "Convert an amount.",
+        "parameters": {
+         "type": "object",
+         "properties": {
+          "amount": {
+           "type": "number"
+          },
+          "from_unit": {
+           "type": "string"
+          },
+          "to_unit": {
+           "type": "string"
+          }
+         },
+         "required": [
+          "amount",
+          "from_unit",
+          "to_unit"
+         ]
+        }
+       }
+      }
+     ],
+     "tool_choice": {
+      "type": "function",
+      "function": {
+       "name": "convert"
+      }
+     },
+     "max_tokens": 120,
+     "temperature": 0,
+     "steps": 3,
+     "errors": "helpful"
+    },
+    "answers": [
+     {
+      "seed": 0,
+      "steps": [
+       {
+        "text": "",
+        "finish": "tool_calls",
+        "prompt_tokens": 195,
+        "tokens": 23,
+        "seconds": 3.69,
+        "cached_tokens": 180,
+        "tool_calls": [
+         {
+          "id": "call_0",
+          "type": "function",
+          "function": {
+           "name": "convert",
+           "arguments": "{\"amount\": 64, \"from_unit\": \"kg\", \"to_unit\": \"pounds\"}"
+          }
+         }
+        ],
+        "results": [
+         "Error: unknown unit 'pounds'. Use km, mi, kg or lb."
+        ]
+       },
+       {
+        "text": "Error: unknown unit 'pounds'. Use km, mi, kg or lb.\n\nPlease provide the correct unit for conversion.",
+        "finish": "stop",
+        "prompt_tokens": 248,
+        "tokens": 25,
+        "seconds": 4.13,
+        "cached_tokens": 180,
+        "tool_calls": [],
+        "results": []
+       }
+      ]
+     }
+    ]
+   },
+   "bare-3": {
+    "ask": {
+     "messages": [
+      {
+       "role": "user",
+       "content": "How many kilograms is 150 lb?"
+      }
+     ],
+     "tools": [
+      {
+       "type": "function",
+       "function": {
+        "name": "conv",
+        "description": "",
+        "parameters": {
+         "type": "object",
+         "properties": {
+          "a": {
+           "type": "number"
+          },
+          "b": {
+           "type": "string"
+          },
+          "c": {
+           "type": "string"
+          }
+         },
+         "required": [
+          "a",
+          "b",
+          "c"
+         ]
+        }
+       }
+      }
+     ],
+     "tool_choice": {
+      "type": "function",
+      "function": {
+       "name": "conv"
+      }
+     },
+     "max_tokens": 120,
+     "temperature": 0,
+     "steps": 1
+    },
+    "answers": [
+     {
+      "seed": 0,
+      "steps": [
+       {
+        "text": "",
+        "finish": "tool_calls",
+        "prompt_tokens": 188,
+        "tokens": 21,
+        "seconds": 3.47,
+        "cached_tokens": 51,
+        "tool_calls": [
+         {
+          "id": "call_0",
+          "type": "function",
+          "function": {
+           "name": "conv",
+           "arguments": "{\"a\": 150, \"b\": \"lb\", \"c\": \"kg\"}"
+          }
+         }
+        ],
+        "results": [
+         "68.04 kg"
+        ]
+       }
+      ]
+     }
+    ]
+   },
+   "names-terse-3": {
+    "ask": {
+     "messages": [
+      {
+       "role": "user",
+       "content": "How many kilograms is 150 lb?"
+      }
+     ],
+     "tools": [
+      {
+       "type": "function",
+       "function": {
+        "name": "convert",
+        "description": "Convert an amount.",
+        "parameters": {
+         "type": "object",
+         "properties": {
+          "amount": {
+           "type": "number"
+          },
+          "from_unit": {
+           "type": "string"
+          },
+          "to_unit": {
+           "type": "string"
+          }
+         },
+         "required": [
+          "amount",
+          "from_unit",
+          "to_unit"
+         ]
+        }
+       }
+      }
+     ],
+     "tool_choice": {
+      "type": "function",
+      "function": {
+       "name": "convert"
+      }
+     },
+     "max_tokens": 120,
+     "temperature": 0,
+     "steps": 3,
+     "errors": "terse"
+    },
+    "answers": [
+     {
+      "seed": 0,
+      "steps": [
+       {
+        "text": "",
+        "finish": "tool_calls",
+        "prompt_tokens": 196,
+        "tokens": 23,
+        "seconds": 3.81,
+        "cached_tokens": 51,
+        "tool_calls": [
+         {
+          "id": "call_0",
+          "type": "function",
+          "function": {
+           "name": "convert",
+           "arguments": "{\"amount\": 150, \"from_unit\": \"lb\", \"to_unit\": \"kg\"}"
+          }
+         }
+        ],
+        "results": [
+         "68.04 kg"
+        ]
+       },
+       {
+        "text": "150 pounds is approximately 68.04 kilograms.",
+        "finish": "stop",
+        "prompt_tokens": 239,
+        "tokens": 14,
+        "seconds": 2.4,
+        "cached_tokens": 181,
+        "tool_calls": [],
+        "results": []
+       }
+      ]
+     }
+    ]
+   },
+   "names-helpful-3": {
+    "ask": {
+     "messages": [
+      {
+       "role": "user",
+       "content": "How many kilograms is 150 lb?"
+      }
+     ],
+     "tools": [
+      {
+       "type": "function",
+       "function": {
+        "name": "convert",
+        "description": "Convert an amount.",
+        "parameters": {
+         "type": "object",
+         "properties": {
+          "amount": {
+           "type": "number"
+          },
+          "from_unit": {
+           "type": "string"
+          },
+          "to_unit": {
+           "type": "string"
+          }
+         },
+         "required": [
+          "amount",
+          "from_unit",
+          "to_unit"
+         ]
+        }
+       }
+      }
+     ],
+     "tool_choice": {
+      "type": "function",
+      "function": {
+       "name": "convert"
+      }
+     },
+     "max_tokens": 120,
+     "temperature": 0,
+     "steps": 3,
+     "errors": "helpful"
+    },
+    "answers": [
+     {
+      "seed": 0,
+      "steps": [
+       {
+        "text": "",
+        "finish": "tool_calls",
+        "prompt_tokens": 196,
+        "tokens": 23,
+        "seconds": 3.67,
+        "cached_tokens": 181,
+        "tool_calls": [
+         {
+          "id": "call_0",
+          "type": "function",
+          "function": {
+           "name": "convert",
+           "arguments": "{\"amount\": 150, \"from_unit\": \"lb\", \"to_unit\": \"kg\"}"
+          }
+         }
+        ],
+        "results": [
+         "68.04 kg"
+        ]
+       },
+       {
+        "text": "150 pounds is approximately 68.04 kilograms.",
+        "finish": "stop",
+        "prompt_tokens": 239,
+        "tokens": 14,
+        "seconds": 2.51,
+        "cached_tokens": 181,
+        "tool_calls": [],
+        "results": []
+       }
+      ]
+     }
+    ]
+   },
+   "bare-4": {
+    "ask": {
+     "messages": [
+      {
+       "role": "user",
+       "content": "My bike ride was 23.5 km. How far is that in miles?"
+      }
+     ],
+     "tools": [
+      {
+       "type": "function",
+       "function": {
+        "name": "conv",
+        "description": "",
+        "parameters": {
+         "type": "object",
+         "properties": {
+          "a": {
+           "type": "number"
+          },
+          "b": {
+           "type": "string"
+          },
+          "c": {
+           "type": "string"
+          }
+         },
+         "required": [
+          "a",
+          "b",
+          "c"
+         ]
+        }
+       }
+      }
+     ],
+     "tool_choice": {
+      "type": "function",
+      "function": {
+       "name": "conv"
+      }
+     },
+     "max_tokens": 120,
+     "temperature": 0,
+     "steps": 1
+    },
+    "answers": [
+     {
+      "seed": 0,
+      "steps": [
+       {
+        "text": "",
+        "finish": "tool_calls",
+        "prompt_tokens": 196,
+        "tokens": 23,
+        "seconds": 3.92,
+        "cached_tokens": 51,
+        "tool_calls": [
+         {
+          "id": "call_0",
+          "type": "function",
+          "function": {
+           "name": "conv",
+           "arguments": "{\"a\": 23.5, \"b\": \"km\", \"c\": \"miles\"}"
+          }
+         }
+        ],
+        "results": [
+         "Error: unknown unit 'miles'. Use km, mi, kg or lb."
+        ]
+       }
+      ]
+     }
+    ]
+   },
+   "names-terse-4": {
+    "ask": {
+     "messages": [
+      {
+       "role": "user",
+       "content": "My bike ride was 23.5 km. How far is that in miles?"
+      }
+     ],
+     "tools": [
+      {
+       "type": "function",
+       "function": {
+        "name": "convert",
+        "description": "Convert an amount.",
+        "parameters": {
+         "type": "object",
+         "properties": {
+          "amount": {
+           "type": "number"
+          },
+          "from_unit": {
+           "type": "string"
+          },
+          "to_unit": {
+           "type": "string"
+          }
+         },
+         "required": [
+          "amount",
+          "from_unit",
+          "to_unit"
+         ]
+        }
+       }
+      }
+     ],
+     "tool_choice": {
+      "type": "function",
+      "function": {
+       "name": "convert"
+      }
+     },
+     "max_tokens": 120,
+     "temperature": 0,
+     "steps": 3,
+     "errors": "terse"
+    },
+    "answers": [
+     {
+      "seed": 0,
+      "steps": [
+       {
+        "text": "",
+        "finish": "tool_calls",
+        "prompt_tokens": 204,
+        "tokens": 25,
+        "seconds": 4.3,
+        "cached_tokens": 51,
+        "tool_calls": [
+         {
+          "id": "call_0",
+          "type": "function",
+          "function": {
+           "name": "convert",
+           "arguments": "{\"amount\": 23.5, \"from_unit\": \"km\", \"to_unit\": \"miles\"}"
+          }
+         }
+        ],
+        "results": [
+         "Error"
+        ]
+       },
+       {
+        "text": "I'm sorry, but I can't perform this calculation. Could you please provide the amount in the correct units?",
+        "finish": "stop",
+        "prompt_tokens": 244,
+        "tokens": 23,
+        "seconds": 3.72,
+        "cached_tokens": 189,
+        "tool_calls": [],
+        "results": []
+       }
+      ]
+     }
+    ]
+   },
+   "names-helpful-4": {
+    "ask": {
+     "messages": [
+      {
+       "role": "user",
+       "content": "My bike ride was 23.5 km. How far is that in miles?"
+      }
+     ],
+     "tools": [
+      {
+       "type": "function",
+       "function": {
+        "name": "convert",
+        "description": "Convert an amount.",
+        "parameters": {
+         "type": "object",
+         "properties": {
+          "amount": {
+           "type": "number"
+          },
+          "from_unit": {
+           "type": "string"
+          },
+          "to_unit": {
+           "type": "string"
+          }
+         },
+         "required": [
+          "amount",
+          "from_unit",
+          "to_unit"
+         ]
+        }
+       }
+      }
+     ],
+     "tool_choice": {
+      "type": "function",
+      "function": {
+       "name": "convert"
+      }
+     },
+     "max_tokens": 120,
+     "temperature": 0,
+     "steps": 3,
+     "errors": "helpful"
+    },
+    "answers": [
+     {
+      "seed": 0,
+      "steps": [
+       {
+        "text": "",
+        "finish": "tool_calls",
+        "prompt_tokens": 204,
+        "tokens": 25,
+        "seconds": 3.89,
+        "cached_tokens": 189,
+        "tool_calls": [
+         {
+          "id": "call_0",
+          "type": "function",
+          "function": {
+           "name": "convert",
+           "arguments": "{\"amount\": 23.5, \"from_unit\": \"km\", \"to_unit\": \"miles\"}"
+          }
+         }
+        ],
+        "results": [
+         "Error: unknown unit 'miles'. Use km, mi, kg or lb."
+        ]
+       },
+       {
+        "text": "",
+        "finish": "tool_calls",
+        "prompt_tokens": 259,
+        "tokens": 36,
+        "seconds": 5.72,
+        "cached_tokens": 189,
+        "tool_calls": [
+         {
+          "id": "call_1",
+          "type": "function",
+          "function": {
+           "name": "convert",
+           "arguments": "{\"amount\": 23.5, \"from_unit\": \"km\", \"to_unit\": \"miles\"}"
+          }
+         }
+        ],
+        "results": [
+         "Error: unknown unit 'miles'. Use km, mi, kg or lb."
+        ]
+       },
+       {
+        "text": "",
+        "finish": "tool_calls",
+        "prompt_tokens": 325,
+        "tokens": 35,
+        "seconds": 5.69,
+        "cached_tokens": 255,
+        "tool_calls": [
+         {
+          "id": "call_2",
+          "type": "function",
+          "function": {
+           "name": "convert",
+           "arguments": "{\"amount\": 23.5, \"from_unit\": \"km\", \"to_unit\": \"mi\"}"
+          }
+         }
+        ],
+        "results": [
+         "14.6 mi"
+        ]
+       }
+      ]
+     }
+    ]
+   },
+   "bare-5": {
+    "ask": {
+     "messages": [
+      {
+       "role": "user",
+       "content": "A suitcase may weigh 50 lb. What is that in kg?"
+      }
+     ],
+     "tools": [
+      {
+       "type": "function",
+       "function": {
+        "name": "conv",
+        "description": "",
+        "parameters": {
+         "type": "object",
+         "properties": {
+          "a": {
+           "type": "number"
+          },
+          "b": {
+           "type": "string"
+          },
+          "c": {
+           "type": "string"
+          }
+         },
+         "required": [
+          "a",
+          "b",
+          "c"
+         ]
+        }
+       }
+      }
+     ],
+     "tool_choice": {
+      "type": "function",
+      "function": {
+       "name": "conv"
+      }
+     },
+     "max_tokens": 120,
+     "temperature": 0,
+     "steps": 1
+    },
+    "answers": [
+     {
+      "seed": 0,
+      "steps": [
+       {
+        "text": "",
+        "finish": "tool_calls",
+        "prompt_tokens": 193,
+        "tokens": 20,
+        "seconds": 3.5,
+        "cached_tokens": 51,
+        "tool_calls": [
+         {
+          "id": "call_0",
+          "type": "function",
+          "function": {
+           "name": "conv",
+           "arguments": "{\"a\": 50, \"b\": \"kg\", \"c\": \"lb\"}"
+          }
+         }
+        ],
+        "results": [
+         "110.23 lb"
+        ]
+       }
+      ]
+     }
+    ]
+   },
+   "names-terse-5": {
+    "ask": {
+     "messages": [
+      {
+       "role": "user",
+       "content": "A suitcase may weigh 50 lb. What is that in kg?"
+      }
+     ],
+     "tools": [
+      {
+       "type": "function",
+       "function": {
+        "name": "convert",
+        "description": "Convert an amount.",
+        "parameters": {
+         "type": "object",
+         "properties": {
+          "amount": {
+           "type": "number"
+          },
+          "from_unit": {
+           "type": "string"
+          },
+          "to_unit": {
+           "type": "string"
+          }
+         },
+         "required": [
+          "amount",
+          "from_unit",
+          "to_unit"
+         ]
+        }
+       }
+      }
+     ],
+     "tool_choice": {
+      "type": "function",
+      "function": {
+       "name": "convert"
+      }
+     },
+     "max_tokens": 120,
+     "temperature": 0,
+     "steps": 3,
+     "errors": "terse"
+    },
+    "answers": [
+     {
+      "seed": 0,
+      "steps": [
+       {
+        "text": "",
+        "finish": "tool_calls",
+        "prompt_tokens": 201,
+        "tokens": 22,
+        "seconds": 3.82,
+        "cached_tokens": 51,
+        "tool_calls": [
+         {
+          "id": "call_0",
+          "type": "function",
+          "function": {
+           "name": "convert",
+           "arguments": "{\"amount\": 50, \"from_unit\": \"lb\", \"to_unit\": \"kg\"}"
+          }
+         }
+        ],
+        "results": [
+         "22.68 kg"
+        ]
+       },
+       {
+        "text": "That suitcase weighs approximately 22.68 kg.",
+        "finish": "stop",
+        "prompt_tokens": 243,
+        "tokens": 12,
+        "seconds": 2.09,
+        "cached_tokens": 186,
+        "tool_calls": [],
+        "results": []
+       }
+      ]
+     }
+    ]
+   },
+   "names-helpful-5": {
+    "ask": {
+     "messages": [
+      {
+       "role": "user",
+       "content": "A suitcase may weigh 50 lb. What is that in kg?"
+      }
+     ],
+     "tools": [
+      {
+       "type": "function",
+       "function": {
+        "name": "convert",
+        "description": "Convert an amount.",
+        "parameters": {
+         "type": "object",
+         "properties": {
+          "amount": {
+           "type": "number"
+          },
+          "from_unit": {
+           "type": "string"
+          },
+          "to_unit": {
+           "type": "string"
+          }
+         },
+         "required": [
+          "amount",
+          "from_unit",
+          "to_unit"
+         ]
+        }
+       }
+      }
+     ],
+     "tool_choice": {
+      "type": "function",
+      "function": {
+       "name": "convert"
+      }
+     },
+     "max_tokens": 120,
+     "temperature": 0,
+     "steps": 3,
+     "errors": "helpful"
+    },
+    "answers": [
+     {
+      "seed": 0,
+      "steps": [
+       {
+        "text": "",
+        "finish": "tool_calls",
+        "prompt_tokens": 201,
+        "tokens": 22,
+        "seconds": 3.2,
+        "cached_tokens": 186,
+        "tool_calls": [
+         {
+          "id": "call_0",
+          "type": "function",
+          "function": {
+           "name": "convert",
+           "arguments": "{\"amount\": 50, \"from_unit\": \"lb\", \"to_unit\": \"kg\"}"
+          }
+         }
+        ],
+        "results": [
+         "22.68 kg"
+        ]
+       },
+       {
+        "text": "That suitcase weighs approximately 22.68 kg.",
+        "finish": "stop",
+        "prompt_tokens": 243,
+        "tokens": 12,
+        "seconds": 2.03,
+        "cached_tokens": 186,
+        "tool_calls": [],
+        "results": []
+       }
+      ]
+     }
+    ]
+   },
+   "bare-6": {
+    "ask": {
+     "messages": [
+      {
+       "role": "user",
+       "content": "How many km is a 3.1 mile run?"
+      }
+     ],
+     "tools": [
+      {
+       "type": "function",
+       "function": {
+        "name": "conv",
+        "description": "",
+        "parameters": {
+         "type": "object",
+         "properties": {
+          "a": {
+           "type": "number"
+          },
+          "b": {
+           "type": "string"
+          },
+          "c": {
+           "type": "string"
+          }
+         },
+         "required": [
+          "a",
+          "b",
+          "c"
+         ]
+        }
+       }
+      }
+     ],
+     "tool_choice": {
+      "type": "function",
+      "function": {
+       "name": "conv"
+      }
+     },
+     "max_tokens": 120,
+     "temperature": 0,
+     "steps": 1
+    },
+    "answers": [
+     {
+      "seed": 0,
+      "steps": [
+       {
+        "text": "",
+        "finish": "tool_calls",
+        "prompt_tokens": 190,
+        "tokens": 22,
+        "seconds": 3.67,
+        "cached_tokens": 51,
+        "tool_calls": [
+         {
+          "id": "call_0",
+          "type": "function",
+          "function": {
+           "name": "conv",
+           "arguments": "{\"a\": 3.1, \"b\": \"miles\", \"c\": \"km\"}"
+          }
+         }
+        ],
+        "results": [
+         "Error: unknown unit 'miles'. Use km, mi, kg or lb."
+        ]
+       }
+      ]
+     }
+    ]
+   },
+   "names-terse-6": {
+    "ask": {
+     "messages": [
+      {
+       "role": "user",
+       "content": "How many km is a 3.1 mile run?"
+      }
+     ],
+     "tools": [
+      {
+       "type": "function",
+       "function": {
+        "name": "convert",
+        "description": "Convert an amount.",
+        "parameters": {
+         "type": "object",
+         "properties": {
+          "amount": {
+           "type": "number"
+          },
+          "from_unit": {
+           "type": "string"
+          },
+          "to_unit": {
+           "type": "string"
+          }
+         },
+         "required": [
+          "amount",
+          "from_unit",
+          "to_unit"
+         ]
+        }
+       }
+      }
+     ],
+     "tool_choice": {
+      "type": "function",
+      "function": {
+       "name": "convert"
+      }
+     },
+     "max_tokens": 120,
+     "temperature": 0,
+     "steps": 3,
+     "errors": "terse"
+    },
+    "answers": [
+     {
+      "seed": 0,
+      "steps": [
+       {
+        "text": "",
+        "finish": "tool_calls",
+        "prompt_tokens": 198,
+        "tokens": 23,
+        "seconds": 3.84,
+        "cached_tokens": 51,
+        "tool_calls": [
+         {
+          "id": "call_0",
+          "type": "function",
+          "function": {
+           "name": "convert",
+           "arguments": "{\"amount\": 3.1, \"from_unit\": \"mile\", \"to_unit\": \"km\"}"
+          }
+         }
+        ],
+        "results": [
+         "Error"
+        ]
+       },
+       {
+        "text": "I'm sorry, but I can't perform this calculation. Please provide the amount in the same unit as the unit you want to convert.",
+        "finish": "stop",
+        "prompt_tokens": 236,
+        "tokens": 28,
+        "seconds": 4.3,
+        "cached_tokens": 183,
+        "tool_calls": [],
+        "results": []
+       }
+      ]
+     }
+    ]
+   },
+   "names-helpful-6": {
+    "ask": {
+     "messages": [
+      {
+       "role": "user",
+       "content": "How many km is a 3.1 mile run?"
+      }
+     ],
+     "tools": [
+      {
+       "type": "function",
+       "function": {
+        "name": "convert",
+        "description": "Convert an amount.",
+        "parameters": {
+         "type": "object",
+         "properties": {
+          "amount": {
+           "type": "number"
+          },
+          "from_unit": {
+           "type": "string"
+          },
+          "to_unit": {
+           "type": "string"
+          }
+         },
+         "required": [
+          "amount",
+          "from_unit",
+          "to_unit"
+         ]
+        }
+       }
+      }
+     ],
+     "tool_choice": {
+      "type": "function",
+      "function": {
+       "name": "convert"
+      }
+     },
+     "max_tokens": 120,
+     "temperature": 0,
+     "steps": 3,
+     "errors": "helpful"
+    },
+    "answers": [
+     {
+      "seed": 0,
+      "steps": [
+       {
+        "text": "",
+        "finish": "tool_calls",
+        "prompt_tokens": 198,
+        "tokens": 23,
+        "seconds": 3.44,
+        "cached_tokens": 183,
+        "tool_calls": [
+         {
+          "id": "call_0",
+          "type": "function",
+          "function": {
+           "name": "convert",
+           "arguments": "{\"amount\": 3.1, \"from_unit\": \"mile\", \"to_unit\": \"km\"}"
+          }
+         }
+        ],
+        "results": [
+         "Error: unknown unit 'mile'. Use km, mi, kg or lb."
+        ]
+       },
+       {
+        "text": "",
+        "finish": "tool_calls",
+        "prompt_tokens": 250,
+        "tokens": 34,
+        "seconds": 5.09,
+        "cached_tokens": 183,
+        "tool_calls": [
+         {
+          "id": "call_1",
+          "type": "function",
+          "function": {
+           "name": "convert",
+           "arguments": "{\"amount\": 3.1, \"from_unit\": \"mi\", \"to_unit\": \"km\"}"
+          }
+         }
+        ],
+        "results": [
+         "4.99 km"
+        ]
+       },
+       {
+        "text": "A 3.1 mile run is approximately 4.99 kilometers.",
+        "finish": "stop",
+        "prompt_tokens": 303,
+        "tokens": 16,
+        "seconds": 2.7,
+        "cached_tokens": 246,
+        "tool_calls": [],
+        "results": []
+       }
+      ]
+     }
+    ]
+   },
+   "bare-7": {
+    "ask": {
+     "messages": [
+      {
+       "role": "user",
+       "content": "The bag of flour holds 2.5 kg. How many pounds is that?"
+      }
+     ],
+     "tools": [
+      {
+       "type": "function",
+       "function": {
+        "name": "conv",
+        "description": "",
+        "parameters": {
+         "type": "object",
+         "properties": {
+          "a": {
+           "type": "number"
+          },
+          "b": {
+           "type": "string"
+          },
+          "c": {
+           "type": "string"
+          }
+         },
+         "required": [
+          "a",
+          "b",
+          "c"
+         ]
+        }
+       }
+      }
+     ],
+     "tool_choice": {
+      "type": "function",
+      "function": {
+       "name": "conv"
+      }
+     },
+     "max_tokens": 120,
+     "temperature": 0,
+     "steps": 1
+    },
+    "answers": [
+     {
+      "seed": 0,
+      "steps": [
+       {
+        "text": "",
+        "finish": "tool_calls",
+        "prompt_tokens": 195,
+        "tokens": 21,
+        "seconds": 3.52,
+        "cached_tokens": 51,
+        "tool_calls": [
+         {
+          "id": "call_0",
+          "type": "function",
+          "function": {
+           "name": "conv",
+           "arguments": "{\"a\": 2.5, \"b\": \"kg\", \"c\": \"lb\"}"
+          }
+         }
+        ],
+        "results": [
+         "5.51 lb"
+        ]
+       }
+      ]
+     }
+    ]
+   },
+   "names-terse-7": {
+    "ask": {
+     "messages": [
+      {
+       "role": "user",
+       "content": "The bag of flour holds 2.5 kg. How many pounds is that?"
+      }
+     ],
+     "tools": [
+      {
+       "type": "function",
+       "function": {
+        "name": "convert",
+        "description": "Convert an amount.",
+        "parameters": {
+         "type": "object",
+         "properties": {
+          "amount": {
+           "type": "number"
+          },
+          "from_unit": {
+           "type": "string"
+          },
+          "to_unit": {
+           "type": "string"
+          }
+         },
+         "required": [
+          "amount",
+          "from_unit",
+          "to_unit"
+         ]
+        }
+       }
+      }
+     ],
+     "tool_choice": {
+      "type": "function",
+      "function": {
+       "name": "convert"
+      }
+     },
+     "max_tokens": 120,
+     "temperature": 0,
+     "steps": 3,
+     "errors": "terse"
+    },
+    "answers": [
+     {
+      "seed": 0,
+      "steps": [
+       {
+        "text": "",
+        "finish": "tool_calls",
+        "prompt_tokens": 203,
+        "tokens": 23,
+        "seconds": 3.92,
+        "cached_tokens": 51,
+        "tool_calls": [
+         {
+          "id": "call_0",
+          "type": "function",
+          "function": {
+           "name": "convert",
+           "arguments": "{\"amount\": 2.5, \"from_unit\": \"kg\", \"to_unit\": \"lb\"}"
+          }
+         }
+        ],
+        "results": [
+         "5.51 lb"
+        ]
+       },
+       {
+        "text": "The bag of flour weighs approximately 5.51 pounds.",
+        "finish": "stop",
+        "prompt_tokens": 245,
+        "tokens": 13,
+        "seconds": 2.24,
+        "cached_tokens": 188,
+        "tool_calls": [],
+        "results": []
+       }
+      ]
+     }
+    ]
+   },
+   "names-helpful-7": {
+    "ask": {
+     "messages": [
+      {
+       "role": "user",
+       "content": "The bag of flour holds 2.5 kg. How many pounds is that?"
+      }
+     ],
+     "tools": [
+      {
+       "type": "function",
+       "function": {
+        "name": "convert",
+        "description": "Convert an amount.",
+        "parameters": {
+         "type": "object",
+         "properties": {
+          "amount": {
+           "type": "number"
+          },
+          "from_unit": {
+           "type": "string"
+          },
+          "to_unit": {
+           "type": "string"
+          }
+         },
+         "required": [
+          "amount",
+          "from_unit",
+          "to_unit"
+         ]
+        }
+       }
+      }
+     ],
+     "tool_choice": {
+      "type": "function",
+      "function": {
+       "name": "convert"
+      }
+     },
+     "max_tokens": 120,
+     "temperature": 0,
+     "steps": 3,
+     "errors": "helpful"
+    },
+    "answers": [
+     {
+      "seed": 0,
+      "steps": [
+       {
+        "text": "",
+        "finish": "tool_calls",
+        "prompt_tokens": 203,
+        "tokens": 23,
+        "seconds": 3.45,
+        "cached_tokens": 188,
+        "tool_calls": [
+         {
+          "id": "call_0",
+          "type": "function",
+          "function": {
+           "name": "convert",
+           "arguments": "{\"amount\": 2.5, \"from_unit\": \"kg\", \"to_unit\": \"lb\"}"
+          }
+         }
+        ],
+        "results": [
+         "5.51 lb"
+        ]
+       },
+       {
+        "text": "The bag of flour weighs approximately 5.51 pounds.",
+        "finish": "stop",
+        "prompt_tokens": 245,
+        "tokens": 13,
+        "seconds": 2.23,
+        "cached_tokens": 188,
+        "tool_calls": [],
+        "results": []
+       }
+      ]
+     }
+    ]
+   }
+  }
+ },
+ "sampling": {
+  "normal": {
+   "temperature": 0.7,
+   "top_p": 0.8,
+   "top_k": 20
+  },
+  "thinking": {
+   "temperature": 0.6,
+   "top_p": 0.95,
+   "top_k": 20
+  }
+ },
+ "load_seconds": 3.0,
+ "code": "d2a3ae4-dirty"
+}

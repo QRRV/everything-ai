@@ -1,0 +1,28 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: build-tool-design
+minutes: 30
+title:
+  en: "Tools an agent can use well"
+  nl: "Tools die een agent goed kan gebruiken"
+goal:
+  en: "describe a tool so that a model calls it right, write errors that say what to do instead, and tell a tool your program runs from one the provider runs."
+  nl: "een tool zo beschrijven dat een model hem goed aanroept, fouten schrijven die zeggen wat het anders moet, en een tool die je programma uitvoert onderscheiden van een die de aanbieder uitvoert."
+summary:
+  - en: "A model knows a tool only from its description. Described bare, Qwen3 made 2 of 8 first calls right; with names only, 3; in full, with an enum of the units and a description of each argument, all 8. With names only it wrote units as words, and bare it once called the tool the wrong way round, which gave a wrong number without an error."
+    nl: "Een model kent een tool alleen van zijn beschrijving. Kaal beschreven maakte Qwen3 2 van de 8 eerste calls goed; met alleen namen 3; volledig, met een enum van de eenheden en een beschrijving van elk argument, alle 8. Met alleen namen schreef het eenheden als woorden, en kaal riep het de tool één keer andersom aan, wat een verkeerd getal gaf zonder fout."
+  - en: "An error is text the model reads. After only \"Error\", Qwen3 gave up all 5 times; after an error that named the unit and the units to use, it called again in 3 of 5 and found the right call in 2. The description helped far more than the error, so make both good."
+    nl: "Een fout is tekst die het model leest. Na alleen \"Error\" gaf Qwen3 het alle 5 keer op; na een fout die de eenheid noemde en de eenheden om te gebruiken, riep het in 3 van de 5 opnieuw aan en vond het in 2 de goede call. De beschrijving hielp veel meer dan de fout, dus maak ze allebei goed."
+  - en: "Names, descriptions, arguments, results and errors together are the agent-computer interface. A client-side tool runs in your program, after the model calls it; a hosted tool runs at the provider."
+    nl: "Namen, beschrijvingen, argumenten, resultaten en fouten samen zijn de agent-computer interface. Een client-side tool draait in je programma, nadat het model hem aanroept; een hosted tool draait bij de aanbieder."
+can_now:
+  - en: "write errors for a tool that say what went wrong and what to do instead"
+    nl: "fouten voor een tool schrijven die zeggen wat er misging en wat het anders moet"
+    by: helpful
+  - en: "describe a tool's arguments so that a model writes values the tool knows"
+    nl: "de argumenten van een tool zo beschrijven dat een model waarden schrijft die de tool kent"
+    by: describe-better
+  - en: "tell a client-side tool from a hosted one"
+    nl: "een client-side tool onderscheiden van een hosted tool"
+    by: client-side
