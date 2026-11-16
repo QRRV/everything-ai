@@ -749,11 +749,12 @@ lessons:
   level: basis
   domein: bouwen
   module: rag
-  idea: "Fast search gives the ten best candidates; a reranker reads each of them together with the question and puts them in a better order, slower but more precise."
+  idea: "Fast search gives the 20 best candidates; a reranker reads each of them together with the question and puts them in a better order, slower but more precise."
   covers: [retrieval-techniek#5]
   requires: [build-hybrid-search]
-  introduces: [c:reranking]
-  data: [model-qwen3-0.6b, course-summaries]
+  introduces: [c:reranker, c:cross-encoder, c:bi-encoder]
+  mentions: [c:temperature]
+  data: [model-qwen3-0.6b, course-summaries, course-summaries-granite, course-rag-qwen]
   ladder: [python]
   needs: any
 
@@ -762,11 +763,12 @@ lessons:
   level: basis
   domein: bouwen
   module: rag
-  idea: "A short or vague question finds little; let the model first write an answer to search with (HyDE), several versions of the question, or the question in parts, and search with those."
+  idea: "A follow-up in a chat or a short question finds little; let the model first write the question on its own, an answer to search with (HyDE) or several versions of the question, search with those, and measure whether it helps."
   covers: [retrieval-techniek#7]
   requires: [build-hybrid-search]
-  introduces: [c:query-transformation, c:hyde]
-  data: [model-qwen3-0.6b, course-summaries]
+  introduces: [c:query-transformation, c:hyde, c:multi-query-retrieval]
+  mentions: [c:temperature]
+  data: [model-qwen3-0.6b, course-summaries, course-summaries-granite, course-rag-qwen, course-rewrites-granite]
   ladder: [python]
   needs: any
 
@@ -775,12 +777,13 @@ lessons:
   level: basis
   domein: bouwen
   module: rag
-  idea: "A RAG fails in the search or in the answer, so measure both: did the right chunks come back (context recall and precision), and does the answer follow from them and fit the question (faithfulness and answer relevance)."
+  idea: "A RAG fails in the search or in the answer, so measure both: did the right chunks come back (context recall and precision), and does the answer follow from them and fit the question (groundedness and answer relevance)."
   covers: [rag-evalueren-en-in-productie#0]
   requires: [build-reranking, build-grounded-answers]
-  introduces: [c:context-recall, c:context-precision, c:answer-faithfulness, c:answer-relevance]
+  introduces: [c:context-recall, c:context-precision, c:groundedness, c:answer-relevance, c:ragas]
+  mentions: [c:llm-as-a-judge]
   warns: [faithfulness]
-  data: [model-qwen3-0.6b, course-summaries]
+  data: [model-qwen3-0.6b, course-summaries, course-summaries-granite, course-rag-qwen]
   ladder: [python]
   needs: any
 

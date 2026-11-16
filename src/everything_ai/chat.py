@@ -231,7 +231,7 @@ class Chat:
     def answer(self, messages: list, tools: list | None = None, max_tokens: int = 256, seed: int = 0,
                temperature: float = SAMPLING["temperature"], top_p: float = SAMPLING["top_p"], top_k: int = SAMPLING["top_k"],
                thinking: bool = False, heard=None, stop: list | None = None, json_object: bool = False,
-               cache: bool = False, keep: bool | None = None) -> dict:
+               cache: bool = False, keep: bool | None = None, logprobs: int | None = None) -> dict:
         """The model's answer to `messages`: {"text": what it wrote, "message": parse(text), "prompt_tokens": ...,
         "tokens": tokens it wrote, "seconds": ..., "finish": "stop" when it ended its answer itself, "length" when it
         reached max_tokens}. Sampled with `seed` from the top_k most likely tokens that together reach top_p, at
@@ -242,7 +242,10 @@ class Chat:
         prefill included: a sampled token that does not is put aside and another drawn, and the answer ends as soon
         as the object is whole. Prompt caching: with `keep` the KV cache of this answer is kept, and with `cache` the
         tokens this prompt has in common at the start with the kept one are not computed again ("cached_tokens" says
-        how many there were); `keep` is `cache` unless given."""
+        how many there were); `keep` is `cache` unless given. With `logprobs`, a whole number from 0 to 20, the answer
+        also has "logprobs": for every token written, its log probability, and that of the `logprobs` most likely
+        tokens at that place, as OpenAI's API gives them (`logprob_entry`), from the model's own probabilities, before
+        temperature, top_k and top_p."""
         import torch
         last = messages[-1] if messages else {}
         prefilled = last.get("role") == "assistant" and not last.get("tool_calls")
@@ -252,6 +255,7 @@ class Chat:
         device = next(self.model.parameters()).device
         g = torch.Generator(device=device).manual_seed(seed)
         out, finish, start = [], "length", time.perf_counter()
+        chances = [] if logprobs is not None else None
         with torch.no_grad():
             caches, cached = [{} for _ in self.model.blocks], 0
             if cache and self.kept is not None:
@@ -275,6 +279,8 @@ class Chat:
                     finish = "stop"
                     break
                 out.append(nxt)
+                if chances is not None:
+                    chances.append(self.logprob_entry(logits, nxt, logprobs))
                 if heard is not None or stop:
                     so_far = self.enc.decode(out)
                     if heard is not None:
@@ -292,8 +298,26 @@ class Chat:
         if cache if keep is None else keep:   # the prompt, and the tokens written that went back in: all but one that ended it
             self.kept = ((ids + out)[:caches[0]["k"].shape[2]], caches)
         text = self.enc.decode(out)
-        return {"text": text, "message": parse(text), "prompt_tokens": len(ids), "tokens": len(out),
-                "seconds": round(time.perf_counter() - start, 2), "finish": finish, "cached_tokens": cached}
+        a = {"text": text, "message": parse(text), "prompt_tokens": len(ids), "tokens": len(out),
+             "seconds": round(time.perf_counter() - start, 2), "finish": finish, "cached_tokens": cached}
+        if chances is not None:
+            a["logprobs"] = chances
+        return a
+
+    def logprob_entry(self, logits, token: int, top: int) -> dict:
+        """One token as OpenAI's API gives it under logprobs.content: {"token": its text, "logprob": the natural log of
+        its probability among all next tokens, "bytes": the bytes of its text, "top_logprobs": the `top` most likely
+        tokens at that place, most likely first, each with its token, logprob and bytes}. A token can be part of a
+        character: its text then has the replacement character, and its bytes say what it is."""
+        import torch
+        logp = torch.log_softmax(logits.float(), dim=-1)
+
+        def one(t: int) -> dict:
+            b = self.enc.decode_single_token_bytes(t)
+            return {"token": b.decode("utf-8", "replace"), "logprob": round(float(logp[t]), 6), "bytes": list(b)}
+        n = getattr(self.enc, "n_vocab", None) or logp.shape[-1]   # rows past the tokenizer's last token are padding
+        best = torch.topk(logp[:n], min(top, n)).indices.tolist() if top else []
+        return {**one(token), "top_logprobs": [one(t) for t in best]}
 
     def _json_token(self, logits, out: list, begun: str, temperature: float, top_k: int, top_p: float, g,
                     furthest: int = 5000) -> int | None:

@@ -10,7 +10,10 @@ library (http.server and json), for the lessons of domain bouwen. It answers, in
                                   answer goes on from that text. It keeps the KV cache of the last request, as
                                   llama.cpp's server does (prompt caching): usage.prompt_tokens_details.cached_tokens
                                   says how many tokens of the prompt came from it, and "cache_prompt": false switches
-                                  it off for a request
+                                  it off for a request. With "logprobs": true (and "top_logprobs": n, up to 20),
+                                  without a stream and without thinking, the answer also gives the log probability of
+                                  every token it wrote, and of the n most likely tokens at each place, under
+                                  choices[0].logprobs.content, as OpenAI's API does
   POST /v1/embeddings             the embeddings of a text or a list of texts, with model, input and encoding_format
                                   ("float", or "base64": the float32 numbers as bytes, little-endian, in base64)
   POST /v1/images/generations     images of a prompt, with model, prompt, n, size and response_format ("b64_json": a
@@ -54,6 +57,7 @@ _STOP = object()
 DETECT = "detect_objects"   # the server's hosted tool: the course's detector names the objects on an image
 THRESHOLD = 0.9             # the score above which the detector names an object, as in cv-pretrained-detector
 MAX_PIXELS = 4096 * 4096    # the largest image the server reads
+MAX_TOP_LOGPROBS = 20       # the most likely tokens a request may ask for at each place, as at OpenAI
 
 
 class Backend:
@@ -138,6 +142,8 @@ class Model(Backend):
                 settings["stop"] = [s for s in stop if s]
             if (request.get("response_format") or {}).get("type") == "json_object":   # JSON mode
                 settings["json_object"] = True
+            if request.get("logprobs"):
+                settings["logprobs"] = int(request.get("top_logprobs") or 0)
             # prompt caching, as llama.cpp's server does it: the KV cache of the last request is kept, and a prompt that
             # starts the same way goes on from it; "cache_prompt": false computes the whole prompt again
             a = model.answer(request["messages"], tools=request.get("tools") or None, thinking=thinking,
@@ -155,6 +161,16 @@ class Model(Backend):
             finish = "tool_calls"
         out = {"text": text, "tool_calls": [] if cut else message["tool_calls"], "finish": finish,
                "prompt_tokens": a["prompt_tokens"], "tokens": a["tokens"], "cached_tokens": a.get("cached_tokens", 0)}
+        if a.get("logprobs") is not None:   # every token written, as the model wrote it; none after a stop sequence
+            kept, at = a["logprobs"], [a["text"].index(s) for s in stop if s and s in a["text"]]
+            if cut and at:   # the tokens that start before the first stop sequence in what the model wrote
+                end, size, kept = len(a["text"][:min(at)].encode("utf-8")), 0, []
+                for entry in a["logprobs"]:
+                    if size >= end:
+                        break
+                    kept.append(entry)
+                    size += len(entry["bytes"])
+            out["logprobs"] = kept
         if thinking:   # as vLLM gives it: the thought apart from the answer; a thought that never ended is all thought
             out["reasoning"] = thought.group(0).strip()[len("<think>"):-len("</think>")].strip() if thought else a["text"].replace("<think>", "", 1).strip()
             if not thought:
@@ -189,7 +205,8 @@ class StandIn(Backend):
     `objects`, what its detector finds on any image; `vectors`, the embedding of a text, {text: [numbers]}, where any
     other text gets made-up numbers of its own (`made_up`), `dims` of them. Like the server with the model, it ends an
     answer before a stop sequence, and after a prefill it answers only the rest: what comes after the prefill in the
-    answer, or the whole answer when it does not start with it."""
+    answer, or the whole answer when it does not start with it. Having no model, it gives no logprobs: a request for them
+    gets a 400."""
 
     def __init__(self, answers=None, default="The stand-in's answer to: {question}", fail=(), retry=None, delay=0.0,
                  key=None, calls=None, cut=None, model=MODEL, objects=(("cup", 0.997),), vectors=None, dims=DIMS):
@@ -214,6 +231,8 @@ class StandIn(Backend):
             status = self.fail[self.seen - 1]
             headers = {"Retry-After": str(self.retry)} if self.retry is not None and status in (429, 503) else {}
             return status, headers, _error(status, _REASONS.get(status, "error"))
+        if request.get("logprobs"):
+            return 400, {}, _error(400, "The stand-in has no model, so it gives no logprobs: leave out 'logprobs'.", "logprobs")
         return None
 
     def answer(self, request: dict, heard) -> dict:
@@ -370,6 +389,17 @@ def _problem(request) -> str | None:
     if stop is not None and not isinstance(stop, str) and (not isinstance(stop, list) or len(stop) > 4
                                                            or not all(isinstance(x, str) for x in stop)):
         return "'stop' must be a string or a list of at most 4 strings."
+    if request.get("logprobs") is not None and not isinstance(request["logprobs"], bool):
+        return "'logprobs' must be true or false."
+    top = request.get("top_logprobs")
+    if top is not None and (not _whole(top) or not 0 <= top <= MAX_TOP_LOGPROBS):
+        return f"'top_logprobs' must be a whole number from 0 to {MAX_TOP_LOGPROBS}."
+    if top is not None and request.get("logprobs") is not True:
+        return "'top_logprobs' needs 'logprobs': true."
+    if request.get("logprobs") and request.get("stream"):
+        return "This server gives logprobs only without a stream: leave out 'stream' or 'logprobs'."
+    if request.get("logprobs") and (request.get("chat_template_kwargs") or {}).get("enable_thinking"):
+        return "This server gives logprobs only without thinking."
     form = request.get("response_format")
     if form is not None:
         kind = form.get("type") if isinstance(form, dict) else None
@@ -797,8 +827,11 @@ def _completion(a: dict, model: str, ident: str, created: int) -> dict:
         message["reasoning_content"] = a["reasoning"]
     if a["tool_calls"]:
         message["tool_calls"] = _calls(a["tool_calls"])
+    choice = {"index": 0, "message": message, "finish_reason": a["finish"]}
+    if a.get("logprobs") is not None:
+        choice["logprobs"] = {"content": a["logprobs"]}
     return {"id": ident, "object": "chat.completion", "created": created, "model": model,
-            "choices": [{"index": 0, "message": message, "finish_reason": a["finish"]}], "usage": _usage(a)}
+            "choices": [choice], "usage": _usage(a)}
 
 
 def start(backend: Backend, port: int = 0) -> Running:

@@ -1,0 +1,31 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: build-query-rewriting
+minutes: 30
+title:
+  en: "Ask it differently"
+  nl: "Vraag het anders"
+goal:
+  en: "let a model change a question before the search: a follow-up written on its own, a passage that answers (HyDE), or several versions merged with RRF; and measure whether that helps."
+  nl: "een model een vraag laten veranderen vóór de zoekfunctie: een vervolgvraag die op zichzelf staat, een passage die antwoordt (HyDE), of meer versies samengevoegd met RRF; en meten of dat helpt."
+summary:
+  - en: "Query transformation changes the question before the search. A follow-up in a chat is written again so that it stands on its own; HyDE searches with a passage the model writes as an answer; multi-query retrieval searches with several versions of the question and merges the rankings with RRF."
+    nl: "Query transformation verandert de vraag vóór de zoekfunctie. Een vervolgvraag in een chat wordt opnieuw geschreven zodat hij op zichzelf staat; HyDE zoekt met een passage die het model als antwoord schrijft; multi-query retrieval zoekt met meer versies van de vraag en voegt de ranglijsten samen met RRF."
+  - en: "On the 24 questions a point of the course answers, the follow-up alone found the right point among the three best for 10, Qwen3's rewrite for 17, and the follow-up after the earlier question, without a model, for 19. For short questions, Qwen3's passages (12) and versions (13) did worse than the short question alone (14): Qwen3 does not know the course."
+    nl: "Op de 24 vragen die een punt van de course beantwoordt, vond de vervolgvraag alleen het goede punt bij de drie beste voor 10, de herschrijving van Qwen3 voor 17, en de vervolgvraag na de eerdere vraag, zonder model, voor 19. Bij korte vragen deden de passages (12) en versies (13) van Qwen3 het slechter dan de korte vraag alleen (14): Qwen3 kent de course niet."
+  - en: "Each way costs a call to the model before the search, and can make the search worse. Measure it against the question as it came in, and try the cheapest thing first."
+    nl: "Elke manier kost een aanroep van het model vóór de zoekfunctie, en kan het zoeken slechter maken. Meet het tegen de vraag zoals hij binnenkwam, en probeer eerst het goedkoopste."
+can_now:
+  - en: "read the questions out of a list a model wrote"
+    nl: "de vragen uit een lijst lezen die een model schreef"
+    by: versions
+  - en: "search with several versions of a question and merge the rankings"
+    nl: "zoeken met meer versies van een vraag en de ranglijsten samenvoegen"
+    by: multi_search
+  - en: "say when HyDE leads a search astray"
+    nl: "zeggen wanneer HyDE een zoekfunctie op het verkeerde spoor zet"
+    by: hyde-drift
+  - en: "check that a rewritten question still says what it is about"
+    nl: "nakijken of een herschreven vraag nog zegt waar hij over gaat"
+    by: lost-subject

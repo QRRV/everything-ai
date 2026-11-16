@@ -1,0 +1,31 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: build-reranking
+minutes: 30
+title:
+  en: "A second look: reranking"
+  nl: "Een tweede blik: reranking"
+goal:
+  en: "let a model judge the candidates of a fast search together with the question, score them with the probability of yes from the logprobs, and measure what that order gains."
+  nl: "een model de kandidaten van een snelle zoekfunctie samen met de vraag laten beoordelen, ze een score geven met de kans op yes uit de logprobs, en meten wat die volgorde oplevert."
+summary:
+  - en: "A reranker reads the question together with each candidate of a fast search and gives it a score: a cross-encoder, slower than search by meaning, which makes the embedding of each text apart. Any chat model can be one: ask for one token, yes or no, with logprobs, and take the probability of yes as the score."
+    nl: "Een reranker leest de vraag samen met elke kandidaat van een snelle zoekfunctie en geeft die een score: een cross-encoder, trager dan zoeken op betekenis, dat de embedding van elke tekst apart maakt. Elk chat model kan er een zijn: vraag om één token, yes of no, met logprobs, en neem de kans op yes als score."
+  - en: "On the 24 questions a point of the course answers, Qwen3 reranked the 20 candidates of the hybrid search. The right point was among the three best for 22, against 21 before: two questions went from places 15 and 12 to first place, one dropped from first to fifth. Qwen3 wrote yes for all 560 candidates; only the probability told them apart."
+    nl: "Op de 24 vragen die een punt van de course beantwoordt, rerankte Qwen3 de 20 kandidaten van de samengevoegde zoekfunctie. Het goede punt stond bij de drie beste voor 22, tegen 21 ervoor: twee vragen gingen van plaats 15 en 12 naar de eerste plaats, één zakte van de eerste naar de vijfde. Qwen3 schreef yes bij alle 560 kandidaten; alleen de kans hield ze uit elkaar."
+  - en: "One judgment took about half a second, so 20 candidates took about 11 seconds per question: too slow to judge all 1,266 points. The score orders candidates; it does not say whether any of them answers."
+    nl: "Eén oordeel duurde ongeveer een halve seconde, dus 20 kandidaten ongeveer 11 seconden per vraag: te traag om alle 1.266 punten te beoordelen. De score zet kandidaten op volgorde; hij zegt niet of er een antwoordt."
+can_now:
+  - en: "read the probability of an answer from the logprobs an API gives back"
+    nl: "de kans op een antwoord aflezen uit de logprobs die een API teruggeeft"
+    by: p_yes
+  - en: "rerank the candidates of a search with a model"
+    nl: "de kandidaten van een zoekfunctie reranken met een model"
+    by: rerank
+  - en: "say why a reranker only reads the candidates of a fast search"
+    nl: "zeggen waarom een reranker alleen de kandidaten van een snelle zoekfunctie leest"
+    by: all-points
+  - en: "say what a reranker's score does and does not tell"
+    nl: "zeggen wat de score van een reranker wel en niet zegt"
+    by: no-answer

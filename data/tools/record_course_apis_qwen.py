@@ -11,8 +11,9 @@ RECORD, {key: ask}, and an ask is one of
     {"messages": [...], "max_tokens": n, "seeds": k}   answered with the seeds 0 to k - 1, as a stream, which gives the
         seconds until the first piece of the answer ("first") and until its end ("seconds"); with "think": true in
         thinking mode, and with "think" or "raw" without a stream, which keeps the whole JSON the server sent ("raw");
-        "temperature", "top_p", "stop" and "response_format" go into the request as they are, and messages that end
-        with one of the assistant are a prefill; with "retry": n, checks.py's follow_up(text) reads each answer, and
+        "temperature", "top_p", "stop", "response_format", "logprobs" and "top_logprobs" go into the request as they
+        are, and an ask with "logprobs" goes without a stream and keeps the logprobs of every token ("logprobs");
+        messages that end with one of the assistant are a prefill; with "retry": n, checks.py's follow_up(text) reads each answer, and
         while it gives a message and fewer than n tries were made, the answer and that message (as the user's) are
         added and the model is asked again with the same seed: such an answer is {"seed": s, "tries": [...]}
     {"turns": [...], "max_tokens": n, "seeds": k}      a chat: in each turn the user's next message, after the
@@ -62,7 +63,8 @@ FILES = {   # the file of each module, and its lessons
                                      "build-prompt-templates", "build-project-prompts", "build-model-specific",
                                      "build-defensive-prompts", "build-self-consistency", "build-context-engineering",
                                      "build-prompt-caching"],
-    "course-rag-qwen.json": ["build-rag-idea", "build-rag-first", "build-grounded-answers", "build-project-rag"],
+    "course-rag-qwen.json": ["build-rag-idea", "build-rag-first", "build-grounded-answers", "build-project-rag",
+                             "build-reranking", "build-query-rewriting", "build-rag-eval"],
 }
 LESSONS = [lesson for lessons in FILES.values() for lesson in lessons]
 THREADS = 2   # the server's threads; a speed ask runs on one
@@ -110,6 +112,8 @@ def _whole(url: str, body: dict) -> dict:
         out["reasoning"] = choice["message"]["reasoning_content"]
     if "prompt_tokens_details" in usage:
         out["cached_tokens"] = usage["prompt_tokens_details"]["cached_tokens"]
+    if choice.get("logprobs"):
+        out["logprobs"] = choice["logprobs"]["content"]
     return out, raw
 
 
@@ -167,10 +171,10 @@ def _answer(url: str, ask: dict, messages: list, seed: int) -> dict:
     if "image" in ask:
         return _image(url, ask, seed)
     body = {"model": serve.MODEL, "messages": messages, "max_tokens": ask["max_tokens"], "seed": seed,
-            **{k: ask[k] for k in ("temperature", "top_p", "stop", "response_format") if k in ask}}
+            **{k: ask[k] for k in ("temperature", "top_p", "stop", "response_format", "logprobs", "top_logprobs") if k in ask}}
     if ask.get("think"):
         body["chat_template_kwargs"] = {"enable_thinking": True}
-    if ask.get("think") or ask.get("raw"):
+    if ask.get("think") or ask.get("raw") or ask.get("logprobs"):
         a, raw = _whole(url, body)
         if ask.get("raw"):
             a["raw"] = raw

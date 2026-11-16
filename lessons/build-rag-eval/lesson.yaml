@@ -1,0 +1,31 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: build-rag-eval
+minutes: 35
+title:
+  en: "Is the RAG right?"
+  nl: "Klopt het RAG-systeem?"
+goal:
+  en: "measure the search and the answer of a RAG apart, with context recall, context precision, groundedness and answer relevance, and check a model as a judge before you trust it."
+  nl: "het zoeken en het antwoord van een RAG-systeem apart meten, met context recall, context precision, groundedness en answer relevance, en een model als judge nakijken voordat je het vertrouwt."
+summary:
+  - en: "A RAG fails in the search or in the answer. Context recall (did the relevant points come back?) and context precision (did they come first?) measure the search; groundedness (do the sources say what the answer says?) and answer relevance (does it address the question?) measure the answer. Ragas calls groundedness faithfulness."
+    nl: "Een RAG-systeem gaat mis bij het zoeken of bij het antwoord. Context recall (kwamen de relevante punten terug?) en context precision (kwamen ze vooraan?) meten het zoeken; groundedness (zeggen de bronnen wat het antwoord zegt?) en answer relevance (gaat het in op de vraag?) meten het antwoord. Ragas noemt groundedness faithfulness."
+  - en: "The course's RAG had a context recall of 0.83 and a context precision of 0.69; with the reranker, 0.92 and 0.78. 37 of its 48 answers were right: of the 11 wrong ones, 6 had no right point among their sources and 5 had it."
+    nl: "Het RAG-systeem van de course had een context recall van 0,83 en een context precision van 0,69; met de reranker 0,92 en 0,78. 37 van zijn 48 antwoorden waren goed: van de 11 foute hadden er 6 geen goed punt bij hun bronnen en 5 wel."
+  - en: "The check supported passed all 11 wrong answers. Qwen3 as a judge wrote yes for all 112 judgments, and scored a right answer above a wrong one in about half the pairs: a judge has to be measured too."
+    nl: "De check supported liet alle 11 foute antwoorden door. Qwen3 als judge schreef yes bij alle 112 oordelen, en gaf een goed antwoord in ongeveer de helft van de paren een hogere score dan een fout: ook een judge moet je meten."
+can_now:
+  - en: "measure whether a search brought back the relevant points"
+    nl: "meten of een zoekfunctie de relevante punten terugbracht"
+    by: context_recall
+  - en: "measure how high a search put the relevant points"
+    nl: "meten hoe hoog een zoekfunctie de relevante punten zette"
+    by: context_precision
+  - en: "say whether a wrong answer is a fault of the search or of the answer step"
+    nl: "zeggen of een fout antwoord aan het zoeken ligt of aan de stap die antwoordt"
+    by: diagnose
+  - en: "check a model as a judge before you trust its scores"
+    nl: "een model als judge nakijken voordat je zijn scores vertrouwt"
+    by: judge
