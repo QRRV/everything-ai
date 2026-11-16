@@ -222,19 +222,21 @@ class StandIn(Backend):
     says "tool_choice": "none"; `after`, the answer once the last message is a tool's result, with {result} filled in
     (the results since the last answer, each on a line of its own), or a function of the request that gives it; `cut`, the number of pieces after which a stream breaks off; `model`, the name of its model;
     `objects`, what its detector finds on any image; `vectors`, the embedding of a text, {text: [numbers]}, where any
-    other text gets made-up numbers of its own (`made_up`), `dims` of them. Like the server with the model, it ends an
+    other text gets made-up numbers of its own (`made_up`), `dims` of them; `script`, a function of the request that
+    plays a whole run of an agent: it gives the next answer as a text, a list of tool calls (name, arguments), a pair
+    (text, calls) for a text with calls, or None for the answer the other settings give. Like the server with the model, it ends an
     answer before a stop sequence, and after a prefill it answers only the rest: what comes after the prefill in the
     answer, or the whole answer when it does not start with it. Having no model, it gives no logprobs: a request for them
     gets a 400."""
 
     def __init__(self, answers=None, default="The stand-in's answer to: {question}", fail=(), retry=None, delay=0.0,
                  key=None, calls=None, cut=None, model=MODEL, objects=(("cup", 0.997),), vectors=None, dims=DIMS,
-                 after="The stand-in read the result: {result}"):
+                 after="The stand-in read the result: {result}", script=None):
         self.answers, self.default, self.model = dict(answers or {}), default, model
         self.fail, self.retry, self.delay, self.key = list(fail), retry, delay, key
         self.calls, self.cut, self.objects, self.after = dict(calls or {}), cut, list(objects), after
         self.vectors, self.dims = {t: list(v) for t, v in (vectors or {}).items()}, dims
-        self.seen = 0
+        self.script, self.seen = script, 0
 
     def detect(self, image) -> list[tuple[str, float]]:
         return list(self.objects)
@@ -259,7 +261,15 @@ class StandIn(Backend):
         if self.delay:
             time.sleep(self.delay)
         question = _last_user(request["messages"])
-        if request["messages"][-1].get("role") == "tool":   # the tools' results came back: the answer reads them
+        planned = self.script(request) if self.script is not None else None
+        if isinstance(planned, (list, tuple)) and request.get("tools") and request.get("tool_choice") != "none":
+            text, calls = planned if isinstance(planned, tuple) else ("", planned)
+            return {"text": text, "tool_calls": [{"name": n, "arguments": a} for n, a in calls],
+                    "finish": "tool_calls" if calls else "stop", "prompt_tokens": _words(request["messages"]),
+                    "tokens": len(text.split())}
+        if isinstance(planned, str):
+            text = planned
+        elif request["messages"][-1].get("role") == "tool":   # the tools' results came back: the answer reads them
             text = self.after(request) if callable(self.after) else self.after.format(result="\n".join(_results(request["messages"])))
         elif question in self.calls and request.get("tool_choice") != "none" and request.get("tools"):
             calls = self.calls[question]

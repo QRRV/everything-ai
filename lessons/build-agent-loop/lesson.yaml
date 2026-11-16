@@ -1,0 +1,28 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: build-agent-loop
+minutes: 35
+title:
+  en: "The agent loop"
+  nl: "De agent loop"
+goal:
+  en: "build the whole loop of an agent through the API, with a thought before each tool call and a step limit, and read a run as a trace."
+  nl: "de hele loop van een agent via de API bouwen, met een gedachte voor elke tool call en een stappenlimiet, en een run lezen als trace."
+summary:
+  - en: "The loop of an agent through the API: send the messages with the tools, add each answer as it came, run its calls and add each result with the role tool and the id of its call, until an answer has no tool calls or the step limit is reached."
+    nl: "De loop van een agent via de API: stuur de berichten met de tools, voeg elk antwoord toe zoals het kwam, voer de calls uit en voeg elk resultaat toe met de rol tool en het id van de call, tot een antwoord geen tool calls heeft of de stappenlimiet bereikt is."
+  - en: "ReAct has the model write a thought before each tool call. On the twelve questions about the kitchen, that made little difference for Qwen3-0.6B: 1 right answer instead of 0, and it looked in the pantry for 5 questions instead of 1, in 316.2 seconds instead of 134.3."
+    nl: "Bij ReAct schrijft het model een gedachte voor elke tool call. Op de twaalf vragen over de keuken maakte dat voor Qwen3-0.6B weinig uit: 1 goed antwoord in plaats van 0, en het keek bij 5 vragen in de voorraadkast in plaats van bij 1, in 316,2 seconden in plaats van 134,3."
+  - en: "What the model writes is text, not proof: Qwen3 wrote how much was in the pantry without having looked, and got it wrong. A trace of thought, action and observation shows where an agent went wrong; read it, and measure on your own questions."
+    nl: "Wat het model schrijft, is tekst, geen bewijs: Qwen3 schreef zonder te kijken op hoeveel er in de voorraadkast lag, en dat klopte niet. Een trace van gedachte, actie en observation laat zien waar een agent de fout in ging; lees het, en meet op je eigen vragen."
+can_now:
+  - en: "build the loop of an agent through the API, which runs every call and sends back each result with the id of its call"
+    nl: "de loop van een agent via de API bouwen, die elke call uitvoert en elk resultaat terugstuurt met het id van zijn call"
+    by: run-agent
+  - en: "write a run down as thoughts, actions and observations"
+    nl: "een run opschrijven als gedachten, acties en observations"
+    by: trace
+  - en: "decide what an app does when its agent reaches the step limit"
+    nl: "bepalen wat een app doet als zijn agent de stappenlimiet bereikt"
+    by: step-limit

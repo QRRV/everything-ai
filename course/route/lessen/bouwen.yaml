@@ -843,7 +843,9 @@ lessons:
   covers: [workflows-en-agentpatronen#0]
   requires: [build-tool-calling]
   introduces: [c:llm-workflow]
-  data: [model-qwen3-0.6b]
+  uses: [c:llm-agent, c:tool, c:tool-call, c:tool-choice, c:agent-loop, c:step-limit, c:system-prompt, c:prompt, c:message-role, c:api, c:http-request, c:openai-compatible-api, c:local-server, c:chat-model, c:token, py:urllib-request, py:json, py:def, py:return, py:for, py:if, py:comparison, py:arithmetic, py:dict, py:indexing, py:string-literal, py:strip, q:choice, q:exercise-with-check, q:run-cell]
+  mentions: [c:temperature, py:lower, py:not-operator]
+  data: [model-qwen3-0.6b, course-agents-qwen]
   ladder: [python]
   needs: any
 
@@ -856,7 +858,9 @@ lessons:
   covers: [workflows-en-agentpatronen#1]
   requires: [build-workflow-or-agent, build-choose-model]
   introduces: [c:orchestrator-workers, c:evaluator-optimizer]
-  data: [model-qwen3-0.6b]
+  uses: [c:llm-workflow, c:llm-routing, c:prompt-chaining, c:self-refine, c:llm-agent, c:message-role, c:prompt, c:json, c:json-mode, c:local-server, c:chat-model, py:json, py:def, py:return, py:for, py:range, py:if, py:none, py:dict, py:list, py:append, py:indexing, py:string-literal, q:choice, q:exercise-with-check, q:run-cell]
+  mentions: [c:temperature]
+  data: [model-qwen3-0.6b, course-agents-qwen]
   ladder: [python]
   needs: any
 
@@ -865,11 +869,13 @@ lessons:
   level: basis
   domein: bouwen
   module: agents
-  idea: "An agent goes wrong less often when the model writes its reasoning before each tool call and reads each result as an observation (ReAct); you add that to the loop of agent-idea, on the course's model through its API, and measure how often it reaches the answer within the step limit."
+  idea: "A known way to help an agent choose its steps is to have the model write its reasoning before each tool call and read each result as an observation (ReAct); you add that to the loop of agent-idea, on the course's model through its API, and measure whether it helps."
   covers: [workflows-en-agentpatronen#2]
   requires: [build-workflow-patterns]
   introduces: [c:react-agent, c:observation]
-  data: [model-qwen3-0.6b]
+  uses: [c:llm-agent, c:agent-loop, c:step-limit, c:tool, c:tool-call, c:function-calling, c:llm-workflow, c:orchestrator-workers, c:evaluator-optimizer, c:system-prompt, c:prompt, c:message-role, c:api, c:http-request, c:openai-compatible-api, c:local-server, c:chat-model, c:token, c:json, py:urllib-request, py:json, py:import, py:with, py:def, py:return, py:for, py:range, py:if, py:none, py:dict, py:list, py:append, py:indexing, py:string-literal, q:choice, q:exercise-with-check, q:run-cell]
+  mentions: [c:temperature, py:not-operator]
+  data: [model-qwen3-0.6b, course-agents-qwen]
   ladder: [python]
   needs: any
 

@@ -14,8 +14,8 @@ RECORD, {key: ask}, and an ask is one of
         thinking mode, and with "think" or "raw" without a stream, which keeps the whole JSON the server sent ("raw");
         "temperature", "top_p", "stop", "response_format", "logprobs" and "top_logprobs" go into the request as they
         are, and an ask with "logprobs" goes without a stream and keeps the logprobs of every token ("logprobs");
-        messages that end with one of the assistant are a prefill; with "retry": n, checks.py's follow_up(text) reads each answer, and
-        while it gives a message and fewer than n tries were made, the answer and that message (as the user's) are
+        messages that end with one of the assistant are a prefill; with "retry": n, checks.py's follow_up(text) reads each answer
+        (follow_up(text, feedback) when the ask has a "feedback" text to fill in), and while it gives a message and fewer than n tries were made, the answer and that message (as the user's) are
         added and the model is asked again with the same seed: such an answer is {"seed": s, "tries": [...]}
     {"messages": [...], "tools": [...], "steps": n, "max_tokens": n, "seeds": k}   a question with tools, without a
         stream: the answer's tool calls are run by checks.py's tool_results(message, ask), which gives a message with the
@@ -72,7 +72,8 @@ FILES = {   # the file of each module, and its lessons
                                      "build-prompt-caching"],
     "course-rag-qwen.json": ["build-rag-idea", "build-rag-first", "build-grounded-answers", "build-project-rag",
                              "build-reranking", "build-query-rewriting", "build-rag-eval"],
-    "course-agents-qwen.json": ["build-tool-calling", "build-tool-design"],
+    "course-agents-qwen.json": ["build-tool-calling", "build-tool-design", "build-workflow-or-agent", "build-workflow-patterns",
+                                "build-agent-loop"],
 }
 LESSONS = [lesson for lessons in FILES.values() for lesson in lessons]
 THREADS = 2   # the server's threads; a speed ask runs on one
@@ -304,11 +305,14 @@ def main(lessons: list, again: set) -> None:
                     save(lesson, key, seed, [a["prompt_tokens"] for a in turns])
                 elif "retry" in ask:
                     messages, tries = list(ask["messages"]), [_answer(running.url, ask, ask["messages"], seed)]
-                    said = C.follow_up(tries[-1]["text"])
+
+                    def told(text, ask=ask, C=C):   # the lesson's follow-up, with the feedback text of the ask if it has one
+                        return C.follow_up(text, ask["feedback"]) if "feedback" in ask else C.follow_up(text)
+                    said = told(tries[-1]["text"])
                     while said is not None and len(tries) < ask["retry"]:
                         messages += [{"role": "assistant", "content": tries[-1]["text"]}, {"role": "user", "content": said}]
                         tries.append(_answer(running.url, ask, messages, seed))
-                        said = C.follow_up(tries[-1]["text"])
+                        said = told(tries[-1]["text"])
                     entry["answers"].append({"seed": seed, "tries": tries})
                     save(lesson, key, seed, len(tries), [repr(a["text"][:60]) for a in tries])
                 else:

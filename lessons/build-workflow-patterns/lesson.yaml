@@ -1,0 +1,28 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: build-workflow-patterns
+minutes: 30
+title:
+  en: "Five workflow patterns"
+  nl: "Vijf workflowpatronen"
+goal:
+  en: "recognize the five patterns most workflows are made of, build an evaluator that sends an answer back with what is wrong, and an orchestrator that hands out the parts a model names."
+  nl: "de vijf patronen herkennen waaruit de meeste workflows bestaan, een evaluator bouwen die een antwoord terugstuurt met wat er mis is, en een orchestrator die de delen uitdeelt die een model noemt."
+summary:
+  - en: "Most workflows are made of five patterns: steps in a row, a router, parts side by side, an orchestrator with workers, and an evaluator that sends an answer back until it passes."
+    nl: "De meeste workflows bestaan uit vijf patronen: stappen na elkaar, een router, delen naast elkaar, een orchestrator met workers, en een evaluator die een antwoord terugstuurt tot het goed is."
+  - en: "An evaluator is a loop with a check and a limit on its rounds. With the feedback *Write it again*, 2 of 6 tips passed a limit of eight words, as Qwen3 wrote the same tip word for word for 4 dishes; with *write a new, shorter tip*, 4 of 6 did. The words of the feedback matter."
+    nl: "Een evaluator is een loop met een controle en een limiet op de rondes. Met de terugkoppeling *Write it again* kwamen 2 van de 6 tips door een limiet van acht woorden, omdat Qwen3 bij 4 gerechten woord voor woord dezelfde tip schreef; met *write a new, shorter tip* waren het er 4 van de 6. De woorden van de terugkoppeling doen ertoe."
+  - en: "An orchestrator names the parts of a task only once it has read it: Qwen3 split all 6 menus into exactly their dishes, as JSON. Your code gives each part to a worker, and checks every name it gets back."
+    nl: "Een orchestrator noemt de delen van een taak pas als hij die gelezen heeft: Qwen3 splitste alle 6 menu's als JSON op in precies hun gerechten. Je code geeft elk deel aan een worker, en controleert elke naam die hij terugkrijgt."
+can_now:
+  - en: "send an answer back with what is wrong, until a check lets it through or the rounds run out"
+    nl: "een antwoord terugsturen met wat er mis is, tot een controle het doorlaat of de rondes op zijn"
+    by: improve
+  - en: "hand out the parts a model names to workers, and check each part first"
+    nl: "de delen die een model noemt aan workers geven, en elk deel eerst controleren"
+    by: orchestrate
+  - en: "choose the pattern a task needs"
+    nl: "het patroon kiezen dat een taak nodig heeft"
+    by: pattern

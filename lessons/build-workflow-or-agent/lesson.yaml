@@ -1,0 +1,28 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: build-workflow-or-agent
+minutes: 30
+title:
+  en: "A workflow or an agent?"
+  nl: "Een workflow of een agent?"
+goal:
+  en: "tell a workflow from an agent, build a workflow in which your code takes the steps and the model fills in two of them, and say which tasks need an agent."
+  nl: "een workflow van een agent onderscheiden, een workflow bouwen waarin je code de stappen zet en het model er twee invult, en zeggen welke taken een agent nodig hebben."
+summary:
+  - en: "In a workflow, your code fixes the steps and their order, and the model fills in only some of them; in an agent, the model chooses each next step itself. Before you build an agent, ask whether the steps are always the same."
+    nl: "In een workflow legt je code de stappen en hun volgorde vast, en vult het model er maar een paar in; in een agent kiest het model elke volgende stap zelf. Vraag je af of de stappen altijd dezelfde zijn, voordat je een agent bouwt."
+  - en: "On twelve questions about the kitchen, Qwen3-0.6B as an agent was right for 0, and looked in the pantry for only 1 question. The workflow, in which code looked up the recipe and the pantry and the model only picked the dish and wrote the sentence, was right for 11, with prompts of 1,288 tokens against 8,302."
+    nl: "Op twaalf vragen over de keuken klopte Qwen3-0.6B als agent bij 0, en het keek maar bij 1 vraag in de voorraadkast. De workflow, waarin code het recept en de voorraadkast opzocht en het model alleen het gerecht koos en de zin schreef, klopte bij 11, met prompts van 1.288 tegen 8.302 tokens."
+  - en: "A workflow checks in code what the model fills in before it goes on, such as whether the kitchen knows the dish; such a check catches only what it tests. An agent is worth it where the steps depend on what the last step found."
+    nl: "Een workflow controleert in code wat het model invult, voordat hij verdergaat, zoals of de keuken het gerecht kent; zo'n controle vangt alleen wat ze test. Een agent loont waar de stappen afhangen van wat de vorige stap vond."
+can_now:
+  - en: "work out a step of a workflow in code, without a model"
+    nl: "een stap van een workflow in code uitrekenen, zonder model"
+    by: to-buy
+  - en: "build a workflow that checks what the model fills in before it goes on"
+    nl: "een workflow bouwen die controleert wat het model invult, voordat hij verdergaat"
+    by: shopping
+  - en: "tell which tasks need an agent, and which a workflow does better"
+    nl: "zeggen welke taken een agent nodig hebben, en welke een workflow beter doet"
+    by: agent-task
