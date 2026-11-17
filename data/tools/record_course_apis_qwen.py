@@ -79,7 +79,8 @@ FILES = {   # the file of each module, and its lessons
                              "build-reranking", "build-query-rewriting", "build-rag-eval"],
     "course-agents-qwen.json": ["build-tool-calling", "build-tool-design", "build-workflow-or-agent", "build-workflow-patterns",
                                 "build-agent-loop", "build-plan-execute", "build-agent-memory", "build-browser-use",
-                                "build-mcp", "build-agent-extensions"],
+                                "build-mcp", "build-agent-extensions", "build-kinds-of-agents", "build-agent-history",
+                                "build-agent-frameworks"],
 }
 LESSONS = [lesson for lessons in FILES.values() for lesson in lessons]
 THREADS = 2   # the server's threads; a speed ask runs on one

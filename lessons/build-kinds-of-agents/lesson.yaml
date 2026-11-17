@@ -1,0 +1,28 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: build-kinds-of-agents
+minutes: 40
+title:
+  en: "Coding, research and personal agents"
+  nl: "Coding-, research- en persoonlijke agents"
+goal:
+  en: "turn the same agent loop into a coding, research, personal and shopping agent, each with the limit its tools need."
+  nl: "van dezelfde agent loop een coding-, research-, persoonlijke en winkelagent maken, elk met de grens die zijn tools nodig hebben."
+summary:
+  - en: "A coding agent, a research agent, a personal agent and a shopping agent are the same loop with other tools. What differs is what can go wrong, so each needs its own limit in the code that runs its tools."
+    nl: "Een coding agent, een research agent, een persoonlijke agent en een winkelagent zijn dezelfde loop met andere tools. Wat verschilt is wat er mis kan gaan, dus elk heeft een eigen grens nodig in de code die zijn tools uitvoert."
+  - en: "With the same loop in four worlds, Qwen3-0.6B did 1 of the 12 tasks: after its first tool call it answered as if it were done. The tests showed that the coding agent fixed nothing, though it said it had; your unread found 5 page numbers the research agent gave without opening the pages, and the user's yes held back a mail to an address the model made up."
+    nl: "Met dezelfde loop in vier werelden deed Qwen3-0.6B 1 van de 12 taken: na zijn eerste tool call antwoordde het alsof het klaar was. De tests lieten zien dat de coding agent niets repareerde, hoewel hij zei van wel; je unread vond 5 paginanummers die de research agent gaf zonder de pagina's te openen, en het ja van de gebruiker hield een mail naar een verzonnen adres tegen."
+  - en: "Give an agent results it can act on, such as a test report that says what a call gave and what was expected, and put a step that cannot be undone behind the user's yes or a mandate the user set beforehand."
+    nl: "Geef een agent resultaten waar hij iets mee kan, zoals een testverslag dat zegt wat een aanroep gaf en wat er verwacht werd, en zet een stap die niet terug kan achter het ja van de gebruiker of een mandaat dat de gebruiker vooraf gaf."
+can_now:
+  - en: "write the test report a coding agent reads to fix code"
+    nl: "het testverslag schrijven dat een coding agent leest om code te repareren"
+    by: report
+  - en: "find the sources a research agent cites without having opened them"
+    nl: "de bronnen vinden die een research agent noemt zonder ze geopend te hebben"
+    by: unread
+  - en: "let a shopping agent pay only within the mandate a user set beforehand"
+    nl: "een winkelagent alleen laten betalen binnen het mandaat dat een gebruiker vooraf gaf"
+    by: may-pay

@@ -1,0 +1,28 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: build-agent-history
+minutes: 30
+title:
+  en: "Before today's agents"
+  nl: "Vóór de agents van nu"
+goal:
+  en: "know the designs that came before today's agents, and build the list of tasks an autonomous agent writes for itself, with the limits it lacked."
+  nl: "de ontwerpen kennen die vóór de agents van nu kwamen, en de lijst met taken bouwen die een autonomous agent voor zichzelf schrijft, met de grenzen die hij miste."
+summary:
+  - en: "MRKL sent each question to a module, ReAct let a model alternate thinking and acting, and HuggingGPT let a model plan steps for other models. AutoGPT and BabyAGI went further: given only an objective, the model wrote its own tasks and did them."
+    nl: "MRKL stuurde elke vraag naar een module, ReAct liet een model afwisselend denken en handelen, en HuggingGPT liet een model stappen plannen voor andere modellen. AutoGPT en BabyAGI gingen verder: met alleen een doel schreef het model zijn eigen taken en voerde ze uit."
+  - en: "Qwen3-0.6B as a small BabyAGI kept writing tasks it already had: with every new task added, 36 of its 46 new tasks were repeats, and after 5 rounds the lists still held 10, 17 and 4 tasks. With the list of exercise 2, 4, 3 and 3 were left. It wrote DONE in 4 of the 6 runs, yet no run ended on that."
+    nl: "Qwen3-0.6B als kleine BabyAGI bleef taken schrijven die het al had: met elke nieuwe taak erbij waren 36 van zijn 46 nieuwe taken herhalingen, en na 5 rondes stonden er nog 10, 17 en 4 taken in de lijsten. Met de lijst van oefening 2 bleven er 4, 3 en 3 over. Het schreef DONE in 4 van de 6 runs, maar geen run stopte daardoor."
+  - en: "Today's agents kept the loop and replaced the objective without end: they start from a task a person gave, keep their list in bounds, stop at a step limit, and show a person what they did."
+    nl: "Agents van nu hielden de loop en vervingen het doel zonder einde: ze beginnen bij een taak die iemand gaf, houden hun lijst binnen de perken, stoppen bij een stapgrens, en laten iemand zien wat ze deden."
+can_now:
+  - en: "read the tasks a model writes, whether it numbers them, puts dashes in front, or says it is done"
+    nl: "de taken lezen die een model schrijft, of het ze nu nummert, er streepjes voor zet, of zegt dat het klaar is"
+    by: parse
+  - en: "keep an agent's list of tasks free of repeats and within a limit"
+    nl: "de lijst met taken van een agent vrij houden van herhalingen en binnen een grens"
+    by: add
+  - en: "say what today's agents kept from AutoGPT and BabyAGI, and what they replaced"
+    nl: "zeggen wat agents van nu hielden van AutoGPT en BabyAGI, en wat ze vervingen"
+    by: stayed

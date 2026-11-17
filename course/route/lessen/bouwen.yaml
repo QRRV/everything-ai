@@ -974,9 +974,12 @@ lessons:
   module: agents
   idea: "The same loop with other tools makes other agents: a coding agent edits files and runs tests, a deep-research agent searches and reads, a personal agent works in your mail and calendar, and a shopping agent pays; each needs its own limits."
   covers: [gespecialiseerde-agents#0, gespecialiseerde-agents#1, gespecialiseerde-agents#3, gespecialiseerde-agents#4]
-  requires: [build-agent-loop, build-coding-workflow, build-research-and-learn, build-automate-work]
+  requires: [build-agent-loop, build-code-sandbox, build-coding-workflow, build-research-and-learn, build-automate-work]
   introduces: [c:agentic-commerce]
-  data: []
+  mentions: [c:temperature, py:not-operator, py:and-operator]
+  uses: [c:llm-agent, c:agent-loop, c:step-limit, c:tool, c:tool-call, c:function-calling, c:tool-choice, c:system-prompt, c:prompt, c:message-role, c:api, c:local-server, c:chat-model, c:coding-agent, c:deep-research, c:personal-agent, py:def, py:return, py:for, py:if, py:dict, py:list, py:append, py:indexing, py:string-literal, py:str, py:str-join, py:try-except, py:split, py:int-conversion, py:comparison, py:arithmetic, py:len, py:none, q:choice, q:exercise-with-check, q:run-cell]
+  data: [model-qwen3-0.6b, course-agents-qwen]
+  ladder: [python]
   needs: any
 
 - id: build-agent-history
@@ -988,7 +991,10 @@ lessons:
   covers: [gespecialiseerde-agents#5]
   requires: [build-kinds-of-agents]
   introduces: [c:autonomous-agent]
-  data: []
+  mentions: [c:temperature, c:react-agent, py:strip-chars, py:not-operator, py:and-operator]
+  uses: [c:llm-agent, c:agent-loop, c:step-limit, c:tool, c:system-prompt, c:prompt, c:local-server, c:chat-model, c:coding-agent, c:personal-agent, c:agentic-commerce, py:def, py:return, py:for, py:if, py:list, py:append, py:string-literal, py:split, py:strip, py:comparison, py:len, q:choice, q:exercise-with-check, q:run-cell]
+  data: [model-qwen3-0.6b, course-agents-qwen]
+  ladder: [python]
   needs: any
 
 - id: build-agent-frameworks
@@ -998,9 +1004,12 @@ lessons:
   module: agents
   idea: "An agent framework gives you the loop, tools, memory and tracing ready-made; under the names (LangGraph, LlamaIndex, AutoGen, PydanticAI, the SDKs of providers) are the ideas you built yourself, so you can judge what a framework adds."
   covers: [frameworks-en-orkestratie#0]
-  requires: [build-agent-loop, build-mcp, build-agent-memory]
+  requires: [build-agent-loop, build-tool-permissions, build-mcp, build-agent-memory]
   introduces: [c:agent-framework]
-  data: []
+  mentions: [c:temperature, c:graph, c:node, c:edge, c:state, c:guardrail, c:request-trace, py:while, py:and-operator]
+  uses: [c:llm-agent, c:agent-loop, c:step-limit, c:tool, c:tool-call, c:function-calling, c:json-schema, c:model-context-protocol, c:mcp-server, c:long-term-memory, c:system-prompt, c:prompt, c:message-role, c:api, c:local-server, c:chat-model, c:json, c:token, c:llm-workflow, py:def, py:return, py:for, py:if, py:dict, py:dict-items, py:list, py:indexing, py:string-literal, py:strip, py:split, py:comparison, py:arithmetic, q:choice, q:exercise-with-check, q:run-cell]
+  data: [model-qwen3-0.6b, course-agents-qwen]
+  ladder: [python]
   needs: any
 
 # --- bouwen/productie: evaluating and production --------------------------------

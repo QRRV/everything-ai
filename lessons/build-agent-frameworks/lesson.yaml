@@ -1,0 +1,28 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: build-agent-frameworks
+minutes: 35
+title:
+  en: "Agent frameworks: the ideas behind them"
+  nl: "Agent frameworks: de ideeën erachter"
+goal:
+  en: "find the parts you built yourself under the names of an agent framework, build two of them as a framework does, and see what a framework adds to each request."
+  nl: "de onderdelen die je zelf bouwde terugvinden onder de namen van een agent framework, er twee bouwen zoals een framework dat doet, en zien wat een framework aan elk request toevoegt."
+summary:
+  - en: "An agent framework, such as LangGraph, LlamaIndex, AutoGen, PydanticAI or a provider's agent SDK, gives the agent loop, tools made from functions, MCP, memory, traces and limits ready-made. Under each name is a part you built in this module; LangGraph writes the loop as a graph of nodes and edges."
+    nl: "Een agent framework, zoals LangGraph, LlamaIndex, AutoGen, PydanticAI of de agent-SDK van een aanbieder, geeft de agent loop, tools gemaakt van functies, MCP, geheugen, traces en grenzen kant-en-klaar. Onder elke naam zit een onderdeel dat je in deze module bouwde; LangGraph schrijft de loop als een graaf van nodes en edges."
+  - en: "On the 8 questions of Tools as JSON, Qwen3-0.6B with a framework's kind of system prompt got 113 tokens more in every request and gave no better answer. With convert made from the function it never called the tool with the right arguments: the made tool did not say which units convert takes, so Qwen3 wrote units such as miles, and no answer was right."
+    nl: "Op de 8 vragen van Tools als JSON kreeg Qwen3-0.6B met het soort system prompt van een framework 113 tokens meer in elk request en gaf het geen beter antwoord. Met convert gemaakt van de functie riep het de tool nooit met de goede argumenten aan: de gemaakte tool zei niet welke eenheden convert kent, dus schreef Qwen3 eenheden als miles, en was geen antwoord goed."
+  - en: "What a framework adds goes to the model like your own text. Look at the requests it really sends, compare it with your own loop on the same tasks, and keep the limits in your own code."
+    nl: "Wat een framework toevoegt, gaat net zo naar het model als je eigen tekst. Kijk naar de requests die het echt verstuurt, vergelijk het met je eigen loop op dezelfde taken, en houd de grenzen in je eigen code."
+can_now:
+  - en: "make a tool definition from a function's name, docstring and parameter types, as a framework does"
+    nl: "een tool definition maken van de naam, de docstring en de types van de parameters van een functie, zoals een framework doet"
+    by: tool-from
+  - en: "run the agent loop as a graph of nodes and edges"
+    nl: "de agent loop draaien als een graaf van nodes en edges"
+    by: graph
+  - en: "find out what a framework changes in the requests your agent sends"
+    nl: "uitzoeken wat een framework verandert aan de requests die je agent verstuurt"
+    by: look
