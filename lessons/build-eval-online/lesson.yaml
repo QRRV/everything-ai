@@ -1,0 +1,31 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: build-eval-online
+minutes: 25
+title:
+  en: "Offline, online and what it is worth"
+  nl: "Offline, online en wat het waard is"
+goal:
+  en: "measure a new version with users as well as with an eval set: thumbs, tasks done in an A/B test and cost per task done, and feed what went wrong back into the eval set."
+  nl: "een nieuwe versie niet alleen met een eval set meten maar ook met gebruikers: duimen, gedane taken in een A/B test en kosten per gedane taak, en wat misging terugvoeren in de eval set."
+summary:
+  - en: "Offline, an eval set tests a change before users get it; online, you measure with users while the app runs: thumbs, tasks done, and what each chat cost. An A/B test gives each user one version by chance and compares the same number for both groups."
+    nl: "Offline test een eval set een wijziging voordat gebruikers haar krijgen; online meet je bij gebruikers terwijl de app draait: duimen, gedane taken, en wat elke chat kostte. Een A/B test geeft elke gebruiker bij toeval één versie en vergelijkt hetzelfde getal voor beide groepen."
+  - en: "The eval set passed version 2 more often, 82 against 78, but it made something up in 41 replies against 23. By the course's notes the two help about as many customers, 70 against 68. In an A/B test with 120 customers played by the course, version 1 came out ahead in 7 of 20 weeks of coin flips and version 2 in 13: far too few customers for a difference that small."
+    nl: "De eval set keurde versie 2 vaker goed, 82 tegen 78, maar die verzon iets in 41 antwoorden tegen 23. Volgens de notities van de course helpen de twee ongeveer evenveel klanten, 70 tegen 68. In een A/B test met 120 klanten die de course speelde, lag versie 1 in 7 van 20 weken muntworpen voor en versie 2 in 13: veel te weinig klanten voor zo'n klein verschil."
+  - en: "What a version is worth is what a task done costs, not what a chat costs: version 2 is cheaper per chat, 1.61 against 1.67 dollars for 1,000 chats, but per task done the two cost almost the same, 2.84 against 2.86. The thumbs-down chats the eval set passed become new inputs for it: the data flywheel."
+    nl: "Wat een versie waard is, is wat een gedane taak kost, niet wat een chat kost: versie 2 is goedkoper per chat, 1,61 tegen 1,67 dollar voor 1.000 chats, maar per gedane taak kosten de twee bijna hetzelfde, 2,84 tegen 2,86. De chats met een duim omlaag die de eval set doorliet, worden er nieuwe inputs voor: het data flywheel."
+can_now:
+  - en: "compute the share of thumbs up from sparse feedback"
+    nl: "het aandeel duimen omhoog uitrekenen uit schaarse feedback"
+    by: up_share
+  - en: "compare two versions in an A/B test on tasks done"
+    nl: "twee versies vergelijken in een A/B test op gedane taken"
+    by: done_share
+  - en: "find the chats that the eval set passed and users did not"
+    nl: "de chats vinden die de eval set doorliet en gebruikers niet"
+    by: passed_down
+  - en: "judge what a version is worth by its cost per task done"
+    nl: "beoordelen wat een versie waard is aan zijn kosten per gedane taak"
+    by: worth

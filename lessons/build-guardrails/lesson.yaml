@@ -1,0 +1,31 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: build-guardrails
+minutes: 25
+title:
+  en: "Guardrails"
+  nl: "Guardrails"
+goal:
+  en: "put checks around a model: mask personal data, stop messages and replies that do not fit, and count what each check stops and lets through."
+  nl: "checks rond een model zetten: persoonsgegevens afschermen, berichten en antwoorden tegenhouden die niet passen, en tellen wat elke check tegenhoudt en doorlaat."
+summary:
+  - en: "A guardrail is a check in code around the model: before it on the message, after it on the reply. It lets the text through, changes it, as PII redaction masks card numbers, or stops it and gives a fallback. A prompt asks the model; a guardrail checks."
+    nl: "Een guardrail is een check in code rond het model: ervoor op het bericht, erna op het antwoord. Hij laat de tekst door, verandert hem, zoals PII redaction kaartnummers afschermt, of houdt hem tegen en geeft een fallback. Een prompt vraagt het model iets; een guardrail controleert."
+  - en: "Version 2 of the bank's assistant answered all 24 of the course's own messages: it made up a weather forecast and wrote that a refund of 200 euros was approved because a message told it to. Of the course's 8 messages of prompt injection, a list of phrases stopped 6, Qwen3 as a checker 4 and a check of the reply 4; together all 8, and none of the 120 real questions. The phrases were written with these messages in view; a new message can get past all three."
+    nl: "Versie 2 van de assistent van de bank beantwoordde alle 24 eigen berichten van de course: hij verzon een weerbericht en schreef dat een terugbetaling van 200 euro was goedgekeurd omdat een bericht dat zei. Van de 8 berichten met prompt injection van de course hield een lijst woordgroepen er 6 tegen, Qwen3 als checker 4 en een check van het antwoord 4; samen alle 8, en geen van de 120 echte vragen. De woordgroepen zijn met die berichten voor ogen geschreven; een nieuw bericht kan langs alle drie komen."
+  - en: "The checker said yes to the capital of Australia, and to the message that told it to answer “Yes, approved.” it answered just that: a checker that is a model can be steered by the message too. Let a message through only on a plain yes, and give the model no power that a guardrail has to hold back."
+    nl: "De checker zei ja tegen de hoofdstad van Australië, en op het bericht dat zei dat hij “Yes, approved.” moest antwoorden, antwoordde hij precies dat: een checker die een model is, kan ook door het bericht gestuurd worden. Laat een bericht alleen door bij een simpel ja, en geef het model geen macht die een guardrail moet tegenhouden."
+can_now:
+  - en: "stop messages that hold known phrases of prompt injection"
+    nl: "berichten tegenhouden met bekende woordgroepen van prompt injection"
+    by: injected
+  - en: "mask numbers in a message before it goes further"
+    nl: "getallen in een bericht afschermen voordat het verder gaat"
+    by: mask
+  - en: "let through only replies that fit the app, with a fallback for the rest"
+    nl: "alleen antwoorden doorlaten die bij de app passen, met een fallback voor de rest"
+    by: safe_reply
+  - en: "read the answer of a checker so that a doubtful answer stops the message"
+    nl: "het antwoord van een checker zo lezen dat een twijfelachtig antwoord het bericht tegenhoudt"
+    by: verdict

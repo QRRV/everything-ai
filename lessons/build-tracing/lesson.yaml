@@ -1,0 +1,31 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: build-tracing
+minutes: 25
+title:
+  en: "Seeing what happened"
+  nl: "Zien wat er gebeurde"
+goal:
+  en: "read a request as a trace of spans: where the time went, what it cost in tokens, and at which step it went wrong."
+  nl: "een request lezen als een trace van spans: waar de tijd heen ging, wat het aan tokens kostte, en bij welke stap het misging."
+summary:
+  - en: "A trace writes down every step of one request as a span: its name, its start and end, what went in and came out, and the span it ran in. The request is the outer span; each call to the model and each tool call is a span in it."
+    nl: "Een trace schrijft elke stap van één request op als een span: zijn naam, zijn begin en eind, wat erin ging en eruit kwam, en de span waarin hij liep. Het request is de buitenste span; elke call naar het model en elke tool call is een span daarin."
+  - en: "In the twelve traces of the kitchen agent, 27 calls to the model took 316.2 seconds; 19 tool calls hardly counted. Every call sent the whole conversation again, so run 10 used 2,271 tokens for a question of 11 words."
+    nl: "In de twaalf traces van de keukenagent duurden 27 calls naar het model 316,2 seconden; 19 tool calls telden nauwelijks mee. Elke call stuurde het hele gesprek opnieuw, dus run 10 gebruikte 2.271 tokens voor een vraag van 11 woorden."
+  - en: "A trace shows where an answer went wrong: in every run at least one ingredient was never looked up, and run 10 stopped after a thought without asking about cheese and pine nuts. Even the one right answer never looked up three of its ingredients."
+    nl: "Een trace laat zien waar een antwoord misging: in elke run werd minstens één ingrediënt nooit opgezocht, en run 10 stopte na een gedachte zonder naar cheese en pine nuts te vragen. Zelfs het ene goede antwoord zocht drie van zijn ingrediënten nooit op."
+can_now:
+  - en: "find the slowest span of a request"
+    nl: "de langzaamste span van een request vinden"
+    by: slowest
+  - en: "add up the tokens a request cost"
+    nl: "optellen hoeveel tokens een request kostte"
+    by: tokens_of
+  - en: "find in a trace which step an agent skipped"
+    nl: "in een trace vinden welke stap een agent oversloeg"
+    by: not_looked_up
+  - en: "tell from a trace what makes a request slow"
+    nl: "aan een trace zien wat een request langzaam maakt"
+    by: faster

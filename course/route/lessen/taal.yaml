@@ -639,6 +639,7 @@ lessons:
   covers: [capstone-zelf-een-kleine-llm-bouwen-en-trainen#0, capstone-zelf-een-kleine-llm-bouwen-en-trainen#1]
   requires: [llm-fit-scaling-law, llm-open-recipes, sys-mixed-precision, sys-profiling-mfu]
   introduces: [c:time-budget, c:probe-run]
+  mentions: [c:fallback]
   uses: [c:compute-optimal, c:scaling-law, c:six-nd-rule, c:flops, c:model-parameter, c:parameter-count, c:token, c:gpt, c:run, c:training, c:language-model, c:pretraining-corpus, c:token-shard, c:mini-batch, c:batch-size, c:epoch, c:adamw, c:optimizer, c:warmup, c:warmdown, c:lr-schedule, c:learning-rate, c:mixed-precision, py:autocast, c:gradient-clipping, py:clip-grad-norm, c:throughput, c:mfu, c:loss, c:cross-entropy, c:validation-set, c:checkpoint, c:temperature, c:sampling, c:tokenizer, c:merge-rule, c:bpe, c:end-of-text, c:context-window, c:gpu, c:seed, c:gradient, c:backward-pass, c:forward-pass, c:logit, c:tensor, c:dtype, c:float32, c:bf16, c:master-weights, c:training-loop, c:training-recipe, c:shape, c:device, c:sgd, c:matrix-multiplication, py:import-as, py:keyword-argument, py:forward-hook, py:lambda, py:manual-seed, py:torch-randn, py:torch-dtype, py:bool, py:float, py:comprehension, py:zero-grad, py:backward, py:optimizer-step, py:item, py:with, py:for, py:if, py:comparison, py:arithmetic, py:abs, py:dict, py:tuple, py:none, py:is-none, py:or-operator, py:int, py:import, py:def, py:return, py:print, py:comment, py:underscore-name, py:scientific-notation, py:nn-linear, py:torch-optim, py:list, py:indexing, py:string-literal, q:predict, q:choice, q:exercise-with-check, q:run-cell]
   ladder: [torch]
   data: [tinystories, model-course-capstone]
@@ -657,6 +658,7 @@ lessons:
   idea: "Scale the same code to 124M parameters and let it train overnight; the course checkpoint is the fallback."
   covers: [capstone-zelf-een-kleine-llm-bouwen-en-trainen#1]
   requires: [llm-pretrain-capstone]
+  mentions: [c:fallback]
   ladder: [torch]
   data: [cosmopedia, fineweb-edu-sample-download-only]
   reference_data: [cosmopedia]

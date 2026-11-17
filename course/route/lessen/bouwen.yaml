@@ -1006,7 +1006,7 @@ lessons:
   covers: [frameworks-en-orkestratie#0]
   requires: [build-agent-loop, build-tool-permissions, build-mcp, build-agent-memory]
   introduces: [c:agent-framework]
-  mentions: [c:temperature, c:graph, c:node, c:edge, c:state, c:guardrail, c:request-trace, py:while, py:and-operator]
+  mentions: [c:temperature, c:graph, c:node, c:edge, c:state, c:guardrail, c:trace, py:while, py:and-operator]
   uses: [c:llm-agent, c:agent-loop, c:step-limit, c:tool, c:tool-call, c:function-calling, c:json-schema, c:model-context-protocol, c:mcp-server, c:long-term-memory, c:system-prompt, c:prompt, c:message-role, c:api, c:local-server, c:chat-model, c:json, c:token, c:llm-workflow, py:def, py:return, py:for, py:if, py:dict, py:dict-items, py:list, py:indexing, py:string-literal, py:strip, py:split, py:comparison, py:arithmetic, q:choice, q:exercise-with-check, q:run-cell]
   data: [model-qwen3-0.6b, course-agents-qwen]
   ladder: [python]
@@ -1066,8 +1066,10 @@ lessons:
   idea: "An eval set measures offline, before users see a change; online you measure with real users (thumbs, tasks completed, an A/B test); what an app is worth is in tasks done and cost per conversation, and feedback becomes new examples for the eval set."
   covers: [evaluatie-en-llmops#3, evaluatie-en-llmops#4, evaluatie-en-llmops#5]
   requires: [build-eval-set]
-  introduces: [c:online-evaluation, c:ab-test, c:user-feedback, c:data-flywheel]
-  data: []
+  introduces: [c:offline-evaluation, c:online-evaluation, c:ab-test, c:user-feedback, c:data-flywheel]
+  mentions: [c:llm-as-a-judge, c:trace]
+  uses: [c:eval-set, c:regression-test, c:failure-taxonomy, c:system-prompt, c:token, c:chat-model, py:def, py:return, py:for, py:if, py:none, py:bool, py:dict, py:list, py:append, py:indexing, py:comparison, py:arithmetic, py:string-literal, q:choice, q:exercise-with-check, q:run-cell]
+  data: [model-qwen3-0.6b, course-production-qwen, banking77-small]
   ladder: [python]
   needs: any
 
@@ -1079,8 +1081,11 @@ lessons:
   idea: "A trace records every step of one request (each call to the model, each tool, how long it took and how many tokens it cost) as nested spans, so you can see afterwards where an answer went wrong or slow."
   covers: [d17-llmops-en-productie#1]
   requires: [build-agent-loop, build-eval-set]
-  introduces: [c:request-trace, c:span, c:observability]
-  data: [model-qwen3-0.6b]
+  introduces: [c:trace, c:span, c:observability]
+  mentions: [py:not-operator]
+  warns: [trace]
+  uses: [c:llm-agent, c:agent-loop, c:react-agent, c:step-limit, c:tool, c:tool-call, c:system-prompt, c:prompt, c:chat-model, c:token, c:eval-set, py:def, py:return, py:for, py:if, py:none, py:dict, py:list, py:append, py:indexing, py:comparison, py:arithmetic, py:string-literal, q:choice, q:exercise-with-check, q:run-cell]
+  data: [model-qwen3-0.6b, course-agents-qwen]
   ladder: [python]
   needs: any
 
@@ -1092,8 +1097,10 @@ lessons:
   idea: "Guardrails are checks around the model: before it (is this question allowed, does it hide an instruction) and after it (does the answer leak personal data, is it on topic); a guardrail that blocks too much is a failure too."
   covers: [d17-llmops-en-productie#2]
   requires: [build-defensive-prompts, build-tracing]
-  introduces: [c:guardrail]
-  data: [model-qwen3-0.6b]
+  introduces: [c:guardrail, c:pii-redaction, c:fallback]
+  mentions: [c:over-refusal]
+  uses: [c:prompt-injection, c:defensive-prompting, c:system-prompt, c:structured-output, c:json, c:chat-model, c:greedy-decoding, c:eval-set, c:trace, py:def, py:return, py:for, py:if, py:none, py:bool, py:dict, py:list, py:tuple, py:append, py:split, py:str-join, py:lower, py:len, py:and-operator, py:comparison, py:indexing, py:string-literal, q:choice, q:exercise-with-check, q:run-cell]
+  data: [model-qwen3-0.6b, course-production-qwen, banking77-small]
   ladder: [python]
   needs: any
 
