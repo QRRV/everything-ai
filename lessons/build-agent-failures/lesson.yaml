@@ -1,0 +1,31 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: build-agent-failures
+minutes: 25
+title:
+  en: "How agents go wrong"
+  nl: "Hoe agents ontsporen"
+goal:
+  en: "recognize five ways agents go wrong in the runs of an agent, find four of them with rules in code, and choose what helps against each."
+  nl: "vijf manieren waarop agents ontsporen herkennen in de runs van een agent, er vier vinden met regels in code, en kiezen wat tegen elke manier helpt."
+summary:
+  - en: "Agents go wrong in ways that come back: they stop too early, do more than asked, loop, make up a result, or use a tool wrongly. One run can go wrong in several ways at once."
+    nl: "Agents ontsporen op manieren die terugkomen: ze stoppen te vroeg, doen meer dan gevraagd, blijven in een loop hangen, verzinnen een resultaat of gebruiken een tool verkeerd. Eén run kan op meerdere manieren tegelijk ontsporen."
+  - en: "In 20 recorded runs of Qwen3-0.6B, 13 stopped too early, 4 did more than asked, 3 looped, 3 made up a result and 2 used a tool wrongly. Rules in code found the other four ways exactly; a rule for numbers no tool gave found none of the 3 made-up results: two put true numbers from the recipe in a false sentence, and one had no number at all."
+    nl: "In 20 opgenomen runs van Qwen3-0.6B stopten er 13 te vroeg, deden er 4 meer dan gevraagd, bleven er 3 in een loop hangen, verzonnen er 3 een resultaat en gebruikten er 2 een tool verkeerd. Regels in code vonden de andere vier manieren precies; een regel voor getallen die geen tool gaf, vond geen van de 3 verzonnen resultaten: twee zetten ware getallen uit het recept in een zin die niet klopt, en één had helemaal geen getal."
+  - en: "What helps is mostly a check in code: a step limit, refusing a call made before, checking each action against the task, and a tool that says what it does not know. The shop's prompt already told the agent to stop when the cart held what was asked, and 4 of the 8 runs still put something in the cart that was not asked."
+    nl: "Wat helpt, is meestal een controle in code: een stappenlimiet, een eerder gedane call weigeren, elke actie naast de taak leggen, en een tool die zegt wat hij niet kent. De prompt van de winkel zei de agent al te stoppen als de winkelwagen bevatte wat gevraagd was, en 4 van de 8 runs deden er toch iets in wat niet gevraagd was."
+can_now:
+  - en: "find the calls of a run that it made before"
+    nl: "de calls van een run vinden die hij al eerder deed"
+    by: repeats
+  - en: "compare what an agent did with what the task asked: what is missing and what is extra"
+    nl: "vergelijken wat een agent deed met wat de taak vroeg: wat ontbreekt en wat extra is"
+    by: compare
+  - en: "recognize a made-up result in an answer"
+    nl: "een verzonnen resultaat in een antwoord herkennen"
+    by: which-mode
+  - en: "choose a check in code against an agent that does more than asked"
+    nl: "een controle in code kiezen tegen een agent die meer doet dan gevraagd"
+    by: what-helps

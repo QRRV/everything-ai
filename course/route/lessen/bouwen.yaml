@@ -1158,7 +1158,9 @@ lessons:
   covers: [agents-beheersen-en-evalueren#1]
   requires: [build-human-in-loop, build-error-analysis, build-agent-loop]
   introduces: [c:agent-failure-mode]
-  data: [model-qwen3-0.6b]
+  mentions: [c:trace, c:llm-as-a-judge, py:not-operator]
+  uses: [c:llm-agent, c:agent-loop, c:step-limit, c:tool, c:tool-call, c:failure-taxonomy, c:approval-step, c:system-prompt, c:prompt, c:chat-model, py:def, py:return, py:for, py:if, py:list, py:append, py:tuple, py:dict, py:indexing, py:comparison, py:none, py:string-literal, q:choice, q:exercise-with-check]
+  data: [model-qwen3-0.6b, course-agents-qwen]
   ladder: [python]
   needs: any
 
@@ -1171,6 +1173,8 @@ lessons:
   covers: [modellen-aanpassen-vanuit-de-app#0, modellen-aanpassen-vanuit-de-app#1]
   requires: [build-rag-eval, build-eval-set, build-where-models-run]
   introduces: [c:hosted-fine-tuning]
-  mentions: [c:reward]
-  data: []
+  mentions: [c:fine-tuning, c:reward, c:preference-pair, c:contamination, py:not-operator]
+  uses: [c:prompt, c:system-prompt, c:message-role, c:retrieval-augmented-generation, c:eval-set, c:failure-taxonomy, c:inference-provider, c:api, c:json, c:chat-model, c:weight, py:def, py:return, py:for, py:if, py:range, py:len, py:list, py:append, py:dict, py:tuple, py:none, py:bool, py:indexing, py:comparison, py:and-operator, py:string-literal, q:choice, q:exercise-with-check]
+  data: [model-qwen3-0.6b, course-production-qwen, banking77-small]
+  ladder: [python]
   needs: any

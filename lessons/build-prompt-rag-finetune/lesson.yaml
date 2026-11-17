@@ -1,0 +1,31 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: build-prompt-rag-finetune
+minutes: 20
+title:
+  en: "Prompt, RAG or fine-tune?"
+  nl: "Prompt, RAG of finetunen?"
+goal:
+  en: "choose between a better prompt, RAG and fine-tuning for what goes wrong in an app, and build the examples and preferences a provider fine-tunes on."
+  nl: "kiezen tussen een betere prompt, RAG en fine-tuning voor wat er in een app misgaat, en de voorbeelden en voorkeuren bouwen waarop een aanbieder finetunet."
+summary:
+  - en: "Try them in a fixed order and measure each step on your eval set: first a better prompt, RAG when the model lacks facts that do not fit in the prompt or that change, and fine-tuning when it lacks a behavior a good prompt does not get reliably. Fine-tuning teaches a way of answering, not facts."
+    nl: "Probeer ze in een vaste volgorde en meet elke stap op je eval set: eerst een betere prompt, RAG als het model feiten mist die niet in de prompt passen of die veranderen, en fine-tuning als het een gedrag mist dat een goede prompt niet betrouwbaar krijgt. Fine-tuning leert een manier van antwoorden, geen feiten."
+  - en: "A provider fine-tunes on examples, on preferences or with a grader that gives a reward, and you call your own version through the same API. Of the bank's 82 replies that passed the eval set, 24 made something up according to the course's notes; 56 passed without a note. 58 of the 120 questions give a preference, because exactly one of the two versions passed there."
+    nl: "Een aanbieder finetunet op voorbeelden, op voorkeuren of met een grader die een reward geeft, en je roept je eigen versie aan via dezelfde API. Van de 82 antwoorden van de bank die door de eval set kwamen, verzonnen er 24 iets volgens de notities van de course; 56 kwamen erdoor zonder notitie. 58 van de 120 vragen geven een voorkeur, omdat daar precies één van de twee versies erdoor kwam."
+  - en: "Keep the questions of your eval set out of everything you train on: otherwise the eval set measures what the model has seen, not what it can do."
+    nl: "Houd de vragen van je eval set buiten alles waarop je traint: anders meet de eval set wat het model gezien heeft, niet wat het kan."
+can_now:
+  - en: "build training examples from replies that passed and have no note, with the system prompt, the question and the reply"
+    nl: "trainingsvoorbeelden bouwen uit antwoorden die erdoor kwamen en geen notitie hebben, met de system prompt, de vraag en het antwoord"
+    by: examples
+  - en: "make a preference from two replies to one question, and none when the eval set does not tell them apart"
+    nl: "een voorkeur maken van twee antwoorden op één vraag, en geen als de eval set ze niet uit elkaar houdt"
+    by: pair
+  - en: "choose the first change for a new fact the app must know"
+    nl: "de eerste wijziging kiezen voor een nieuw feit dat de app moet kennen"
+    by: first-change
+  - en: "say why an eval set's questions stay out of fine-tuning"
+    nl: "zeggen waarom de vragen van een eval set buiten fine-tuning blijven"
+    by: eval-leak
