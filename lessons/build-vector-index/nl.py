@@ -217,7 +217,7 @@ def hints_lists():
         [
             "Ga voor cluster `c` de nummers `i` van alle punten langs, `range(len(labels))`, en houd die met label `c`.",
             "Een comprehension met een voorwaarde doet dat in één regel: `[i for i in range(len(labels)) if ...]`.",
-            "In de loop: `lists.append([i for i in range(len(labels)) if labels[i] == c])`.",
+            "In de loop: `lists.append([i for i in range(len(labels)) if ___])`.",
         ],
         why="""```python
 def make_lists(labels, n):
@@ -270,9 +270,9 @@ def hints_search():
     L.hints(
         "ivf_search",
         [
-            "De nummers van de punten van cluster `c` staan in `index[\"lists\"][c]`; je hebt ze nodig voor elk cluster in `nearest`.",
-            "Twee loops, de een in de ander: `for c in nearest:`, en daarin `for i in index[\"lists\"][c]:`.",
-            "Zet die twee loops op de plaats van de loop over `range(len(index[\"vectors\"]))`, en houd de regel met `found.append(...)` in de binnenste.",
+            "`index[\"lists\"]` heeft een lijst per cluster, met de nummers van de punten erin; je hebt die van elk cluster in `nearest` nodig.",
+            "Twee loops, de een in de ander: een over de clusters in `nearest`, en daarin een over de nummers van de punten van dat cluster.",
+            "Op de plaats van de loop over `range(len(index[\"vectors\"]))`: `for c in nearest:`, en daarin `for i in ___:`, met de regel met `found.append(...)` in de binnenste.",
         ],
         why="""```python
 import numpy as np

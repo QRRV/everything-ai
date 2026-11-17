@@ -264,7 +264,7 @@ def hints_load():
         [
             "Volg stap 3 van het uitgewerkte voorbeeld, met `path` voor het bestand.",
             "Eerst de getallen uit het bestand, `torch.load(path, weights_only=True)`; dan een nieuw model, `DigitCNN()`.",
-            "`model.load_state_dict(state)` kopieert de getallen naar het model, en `model.eval()` zet het in eval mode.",
+            "De derde regel, `model.___(state)`, kopieert de getallen naar het model; de vierde zet het in eval mode.",
         ],
         why="Een nieuw `DigitCNN()` begint met willekeurige getallen; `load_state_dict` vervangt elk ervan door de getallen uit het bestand. Pas dan leest het cijfers zoals de card zegt.",
     )

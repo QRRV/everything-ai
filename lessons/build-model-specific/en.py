@@ -186,8 +186,8 @@ def hints_worse():
         "worse",
         [
             "A name belongs in the list when two things hold at once: it was right before, and it is wrong now.",
-            "Put an `if` around the `append`, with both tests joined by `and`: `old[name]` and `not new[name]`.",
-            "In the loop: `if old[name] and not new[name]:` with `names.append(name)` under it.",
+            "Put an `if` around the `append`, with two tests joined by `and`: one on `old[name]`, one on `new[name]`.",
+            "In the loop: `if old[name] and ___:`, with `names.append(name)` one step further in.",
         ],
         why="""```python
 def worse(old, new):
@@ -236,8 +236,8 @@ def hints_run():
         "run_examples",
         [
             "A dictionary takes a new key, or a new value for a key it has, with `body[key] = value`. Do that for every key in `settings`.",
-            "Right after the line with `body = ...`: a `for` loop over `settings`, with `body[key] = settings[key]` in it. At the end, `ok(name, answer[\"choices\"][0][\"message\"][\"content\"])`.",
-            "Under `body = ...`: `for key in settings:` with `body[key] = settings[key]` under it. The last line in the loop: `results[name] = ok(name, answer[\"choices\"][0][\"message\"][\"content\"])`.",
+            "Right after the line with `body = ...`: a `for` loop over `settings` that puts each key with its value in `body`. At the end, put `ok(name, ...)` around the text of the answer that the box keeps now.",
+            "Under `body = ...`: `for key in settings:`, with `body[key] = ___` one step further in.",
         ],
         why="""```python
 import json

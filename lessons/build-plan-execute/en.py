@@ -218,7 +218,7 @@ def hints_run_plan():
         [
             "Two things happen to each value. First: is it the number of an earlier step? Then it becomes that step's result. Second: it goes into `arguments`.",
             "`results` holds the result of each earlier step under its number, such as `\"#1\"`. `value in results` tells you whether `value` is one of those numbers. A list cannot be a key of a dictionary, so `value in results` stops with an error on a list: look first whether `value` is a text, with `isinstance(value, str)`.",
-            "`if isinstance(value, str) and value in results:` with `value = results[value]` under it; then, not indented under the `if`, `arguments[name] = value`.",
+            "Under `if isinstance(value, str) and value in results:`: `value = ___`; then, not indented under the `if`, `arguments[name] = value`.",
         ],
         why="""```python
 def run_plan(plan):
@@ -271,8 +271,8 @@ def hints_waves():
         "waves",
         [
             "A step waits for every result it uses. So it can start only after the latest of them: its wave is one more than the largest wave among them.",
-            "`wave` holds the wave of each earlier step under its number. When `value in wave`, that step's wave is `wave[value]`, and this step needs at least `wave[value] + 1`. `max(a, b)` gives the larger of two numbers. As in exercise 1, a value can be a list: look first whether it is a text.",
-            "`if isinstance(value, str) and value in wave:` with `w = max(w, wave[value] + 1)` under it.",
+            "`wave` holds the wave of each earlier step under its number. When `value in wave`, this step needs a wave at least one more than that step's. `max(a, b)` gives the larger of two numbers. As in exercise 1, a value can be a list: look first whether it is a text.",
+            "`if isinstance(value, str) and value in wave:`, with `w = max(w, ___)` under it.",
         ],
         why="""```python
 def waves(plan):

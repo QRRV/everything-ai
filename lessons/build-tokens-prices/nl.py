@@ -228,8 +228,8 @@ def hints_cost():
         "cost",
         [
             "Twee delen, elk met een eigen prijs: wat erin gaat, en wat eruit komt.",
-            "Het deel dat erin gaat is `tokens_in * price_in / 1_000_000`; het deel dat eruit komt is hetzelfde met `tokens_out` en `price_out`.",
-            "`return tokens_in * price_in / 1_000_000 + ...`, met het deel voor de tokens eruit op de plek van de puntjes.",
+            "Elk deel is zijn tokens keer zijn prijs; de prijzen zijn per miljoen tokens, dus deel elk deel door `1_000_000`.",
+            "`return tokens_in * price_in / 1_000_000 + ___`, met het deel voor de tokens eruit in het gat.",
         ],
         why="""```python
 def cost(tokens_in, tokens_out, price_in, price_out):
@@ -274,8 +274,8 @@ def hints_most():
         "most",
         [
             "Stap 1 tot 3 van het recept: tellen, begrenzen, rekenen.",
-            "`tokens_in = len(enc.encode(prompt))`, en het antwoord heeft hooguit `max_tokens` tokens.",
-            "`tokens_out = max_tokens`, en dan `return tokens_in * price_in / 1_000_000 + tokens_out * price_out / 1_000_000`.",
+            "`enc.encode(prompt)` geeft de tokens van de prompt als lijst, en `len` telt ze; het antwoord heeft hooguit `max_tokens` tokens.",
+            "`tokens_in = ___`; dan `tokens_out = max_tokens` en dezelfde `return` als in `cost` van oefening 1.",
         ],
         why="""```python
 def most(prompt, max_tokens, price_in, price_out):

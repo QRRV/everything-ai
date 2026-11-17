@@ -182,7 +182,7 @@ def hints_majority():
         [
             "Twee stappen: eerst tellen, zonder `None`; dan door de tellingen lopen en het antwoord onthouden met de meeste stemmen tot nu toe.",
             "Zet het tellen onder `if answer is not None:`. Begin daarna met `best = None`, en loop door `counts`: een antwoord neemt de plaats van `best` in als `best` nog `None` is, of als het meer stemmen heeft dan `best`.",
-            "Na het tellen: `best = None`, dan `for answer in counts:` met `if best is None or counts[answer] > counts[best]:` en `best = answer` eronder. Aan het eind `return best`.",
+            "Na het tellen: `best = None`, dan `for answer in counts:` met `if best is None or ___:` en `best = answer` eronder. Aan het eind `return best`.",
         ],
         why="""```python
 def majority(answers):
@@ -238,8 +238,8 @@ def hints_ask():
         "ask_many",
         [
             "Alles van `messages = ...` tot en met `answers.append(...)` moet `n` keer gebeuren; alleen de seed verandert elke keer.",
-            "Zet die regels in een loop, `for i in range(n):`, vier spaties verder naar rechts, en gebruik `i` als seed.",
-            "`for i in range(n):` onder `answers = []`, met de regels tot en met `answers.append(...)` eronder, en `\"seed\": i` in de body. `return majority(answers)` blijft na de loop staan.",
+            "Zet die regels in een loop die `n` keer gaat, vier spaties verder naar rechts, en gebruik zijn teller als seed.",
+            "Onder `answers = []`: `for i in ___:`, met de regels tot en met `answers.append(...)` eronder, en `\"seed\": i` in de body; `return majority(answers)` blijft na de loop staan.",
         ],
         why="""```python
 import json

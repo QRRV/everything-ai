@@ -231,8 +231,8 @@ def hints_dot():
         "dot",
         [
             "Start with a total of 0, and go through the positions of `a` with a `for` loop that counts, as in the table above.",
-            "`for (let i = 0; i < a.length; i++) { ... }` goes through every position; inside the braces, add `a[i] * b[i]` to the total.",
-            "`let total = 0;` before the loop, `total += a[i] * b[i];` in it, and `return total;` after it.",
+            "A `for` loop that counts, `for (let i = 0; i < a.length; i++) { ... }`, goes through every position; inside the braces, add the product of the two numbers at position `i` to the total, with `+=`.",
+            "Inside the braces of the loop: `total += ___;`.",
         ],
         why="""```javascript
 function dot(a, b) {
@@ -289,8 +289,8 @@ def hints_sum():
         "sumFrom",
         [
             "Follow the worked example: first the answer of `fetch`, then its JSON, then a loop over the list.",
-            "`const numbers = await response.json();` gives the list. Then add up its numbers with `for (const number of numbers)`.",
-            "`const response = await fetch(url);` and `const numbers = await response.json();`, then `let total = 0;`, the loop with `total += number;`, and `return total;`.",
+            "`await` waits for each step: first the answer of `fetch(url)`, then its JSON, which `.json()` of that answer gives. Then add up its numbers with `for (const number of numbers)`.",
+            "The second line: `const numbers = await ___;`.",
         ],
         why="""```javascript
 async function sumFrom(url) {

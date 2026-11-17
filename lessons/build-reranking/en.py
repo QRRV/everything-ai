@@ -198,7 +198,7 @@ def hints_p_yes():
         [
             "A logprob is the logarithm of a probability, so `math.exp` of it gives the probability back. Add those of the tokens that mean yes.",
             "In the loop, `token.strip().lower()` turns `\" Yes\"` into `\"yes\"`. Only when it is `\"yes\"` does the token count.",
-            "Inside the loop, after `token = ...`: `if token.strip().lower() == \"yes\":`, and below it `total = total + math.exp(entry[\"logprob\"])`.",
+            "Inside the loop, after `token = ...`: `if token.strip().lower() == \"yes\":`, and below it `total = total + math.exp(___)`.",
         ],
         why="""```python
 import math
@@ -258,7 +258,7 @@ def hints_rerank():
         [
             "Each candidate gets a score from `p_yes` of its answer. Sorting pairs of score and passage puts them in order of the score.",
             "In the loop, add `scored.append((p_yes(response), passage))`. After the loop, `sorted(scored, reverse=True)` has the highest score first.",
-            "Replace the last line by two: `best = sorted(scored, reverse=True)`, then return the passages of `best[:n]`: `[passage for score, passage in best[:n]]`.",
+            "Replace the last line by two: `best = sorted(scored, reverse=True)`, then `return [passage for ___ in best[:n]]`.",
         ],
         why="""```python
 def rerank(question, candidates, n):

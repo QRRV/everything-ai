@@ -197,8 +197,8 @@ def hints_matches():
         "matches",
         [
             "Ga de keys van `where` een voor een langs, en vergelijk de waarde van het item met die van `where`.",
-            "`for key in where:` gaat de keys langs; `item[key] != where[key]` is `True` als het item voor die key niet past.",
-            "In de loop: `if item[key] != where[key]:` en dan `return False`; na de loop `return True`.",
+            "`for key in where:` gaat de keys langs; `where[key]` is de waarde die het filter voor die key vraagt, en `!=` is `True` als twee waarden verschillen.",
+            "In de loop: `if ___ != where[key]:`, met `return False` een stap verder in, en na de loop `return True`.",
         ],
         why="""```python
 def matches(item, where):
@@ -252,8 +252,8 @@ def hints_search():
         "filtered_search",
         [
             "Het filter komt nu na `sorted(...)[:k]`. Het hoort ervoor te komen: een item dat niet past, hoort nooit een score te krijgen.",
-            "Zet in de loop `if matches(store[i], where):` voor de regel met `found.append(...)`, die een stap verder inspringt.",
-            "Zet `if matches(store[i], where):` boven `found.append(...)`, en haal `if matches(store[i], where)` uit de laatste regel.",
+            "Zet in de loop een `if` met `matches` voor de regel met `found.append(...)`, en laat die regel een stap verder inspringen.",
+            "In de loop: `if ___:`, met `found.append(...)` eronder, een stap verder in; de `if` op de laatste regel mag dan weg.",
         ],
         why="""```python
 def filtered_search(q, store, where, k):

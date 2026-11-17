@@ -367,7 +367,7 @@ def hints_ap():
         [
             "Loop door de lijst met `for k in range(len(hits)):`, en houd twee getallen bij: `found`, de true positives tot dan toe, en `sum_precision`, de opgetelde precision tot dan toe. Allebei beginnen ze bij 0.",
             "Tel bij een true positive, `if hits[k]:`, eerst 1 op bij `found`. De boxes tot dan toe zijn `k + 1`, want `k` begint bij 0, dus de precision is `found / (k + 1)`: tel die op bij `sum_precision`.",
-            "Deel na de loop door het aantal echte boxes: `return sum_precision / total`. Niet door `found`: een echte box die nooit gevonden wordt, telt als 0.",
+            "Na de loop, even ver ingesprongen als `for`: `return sum_precision / ___`. Een echte box die nooit gevonden wordt, telt als 0.",
         ],
         why="Voor de cirkels is de precision bij de 8 true positives 1/2, 2/3, 3/4, 4/5, 5/6, 6/7, 7/8 en 8/9. Opgeteld is dat 6,17, en gedeeld door de 11 cirkels 0,56.",
     )

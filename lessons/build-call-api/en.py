@@ -203,8 +203,8 @@ def hints_body():
         "body",
         [
             "Look at the body in the picture of the course's call: it has three keys.",
-            "`\"messages\"` is a list with one dictionary in it: `{\"role\": \"user\", \"content\": question}`.",
-            "`body = {\"model\": \"qwen3-0.6b\", \"messages\": [...], \"max_tokens\": 50}`, with the message from hint 2 in the list.",
+            "`\"messages\"` is a list with one dictionary in it: the message, with the keys `\"role\"` and `\"content\"`.",
+            "`body = {\"model\": \"qwen3-0.6b\", \"messages\": [___], \"max_tokens\": 50}`, with the message in the gap.",
         ],
         why="`body = {\"model\": \"qwen3-0.6b\", \"messages\": [{\"role\": \"user\", \"content\": question}], \"max_tokens\": 50}`: the model, the conversation as a list of messages, and the most tokens the answer may have.",
     )
@@ -245,7 +245,7 @@ def hints_ask():
         [
             "Steps 2 to 5 of the recipe: bytes, a request, send and read, the text.",
             "`data = json.dumps(body).encode()`, then `request = urllib.request.Request(url + \"/chat/completions\", data=data, headers={\"Content-Type\": \"application/json\"})`.",
-            "`with urllib.request.urlopen(request) as response:` and on the next line, further in, `answer = json.loads(response.read())`; end with `return answer[\"choices\"][0][\"message\"][\"content\"]`.",
+            "Inside the `with` block that sends `request`: `answer = json.loads(___)`.",
         ],
         why="""```python
 def ask(url, question):

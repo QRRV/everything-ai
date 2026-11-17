@@ -211,7 +211,7 @@ def hints_ask():
         [
             "Twee dingen staan vast in de code die uit de argumenten zouden moeten komen: de naam van het model, en het adres.",
             "In de body `\"model\": model`, zonder aanhalingstekens om `model`. Het adres is de `base_url` met het endpoint erachter.",
-            "`urllib.request.Request(base_url + \"/chat/completions\", data=data, ...)`, met de rest zoals het is.",
+            "`request = urllib.request.Request(base_url + ___, data=data,`, met de regel eronder zoals hij is.",
         ],
         why="""```python
 def ask(base_url, model, question):
@@ -262,8 +262,8 @@ def hints_gb():
         "weights_gb",
         [
             "Volg het uitgewerkte voorbeeld, met `params` en `bits` op de plek van de getallen.",
-            "`params * bits` is het aantal bits; gedeeld door 8 de bytes; gedeeld door een miljard de gigabytes.",
-            "`return params * bits / 8 / ...`, met een miljard op de plek van de puntjes, geschreven als `1_000_000_000`.",
+            "`params * bits` is het aantal bits. Dan twee keer delen: naar bytes, zoals in stap 3 van het uitgewerkte voorbeeld, en naar gigabytes, zoals in stap 4.",
+            "`return params * bits / 8 / ___`",
         ],
         why="""```python
 def weights_gb(params, bits):

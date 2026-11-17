@@ -188,7 +188,7 @@ def hints_words():
         [
             "Two things change before the set is made: the whole text gets lower case, and every word loses the punctuation at its ends.",
             "`text.lower().split()` gives the words in lower case. A list comprehension, `[... for word in ...]`, changes every word on the way.",
-            "`[word.strip(\".,:;!?()\") for word in text.lower().split()]` gives the clean words; put `set(...)` around it.",
+            "Make the last line `return set([___ for word in text.lower().split()])`.",
         ],
         why="""```python
 def words(text):
@@ -233,8 +233,8 @@ def hints_search():
         "search",
         [
             "Make the set of the question's words once, before the loop, and compare it with the words of each point in the loop.",
-            "`asked = words(question)` before the loop. `asked & words(point)` is the set of the words they share, and `len(...)` counts them.",
-            "In the loop: `found.append((len(asked & words(point)), point))`.",
+            "`asked = words(question)` before the loop. `&` between two sets gives the set of what is in both, and `len(...)` counts it.",
+            "In the loop: `found.append((___, point))`, with the number of shared words in the gap.",
         ],
         why="""```python
 def search(question, points, k):
@@ -283,8 +283,8 @@ def hints_rag():
         "rag",
         [
             "Two steps come before the messages: find the passages, then make the prompt of them.",
-            "`search(question, POINTS, 3)` gives the three points, and `with_sources(question, passages)` makes the prompt of them.",
-            "`passages = search(question, POINTS, 3)` before `messages`, and in the user's message `\"content\": with_sources(question, passages)`.",
+            "`search` with `POINTS` and 3 gives the three points, and `with_sources` makes the prompt of the question and those points.",
+            "`passages = search(question, POINTS, 3)` before `messages`, and as the user's message `{\"role\": \"user\", \"content\": ___}`.",
         ],
         why="""```python
 import json

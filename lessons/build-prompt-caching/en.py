@@ -179,8 +179,8 @@ def hints_shared():
         "shared_start",
         [
             "Counting goes on as long as the tokens are the same; at the first place where they differ, the function is done.",
-            "Turn the test around: `if a[i] != b[i]:`, and give back `n` there with `return`. After the `if`, the loop counts one more.",
-            "In the loop: `if a[i] != b[i]:` with `return n` under it, and then `n = n + 1`, not under the `if`.",
+            "Turn the test around: an `if` that is `True` where the tokens differ, and give back `n` there with `return`. After the `if`, the loop counts one more.",
+            "In the loop: `if a[i] ___ b[i]:` with `return n` under it, and then `n = n + 1`, not under the `if`.",
         ],
         why="""```python
 def shared_start(a, b):
@@ -230,8 +230,8 @@ def hints_order():
         "messages_for",
         [
             "Only the place of the time changes: from the front of the system prompt to the back of the user's message.",
-            "The system message gets `HANDBOOK` as its content, and the user message `question + \"\\n\\nNow: \" + now`.",
-            "`return [{\"role\": \"system\", \"content\": HANDBOOK}, {\"role\": \"user\", \"content\": question + \"\\n\\nNow: \" + now}]`",
+            "The system message gets `HANDBOOK` as its content, and the user message the question, then a blank line, then `\"Now: \"` and `now`, joined with `+`.",
+            "The second message: `{\"role\": \"user\", \"content\": question + ___ + now}`.",
         ],
         why="""```python
 def messages_for(question, now):

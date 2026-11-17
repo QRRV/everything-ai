@@ -204,8 +204,8 @@ def hints_remember():
         "remember",
         [
             "Reading a file was `open(path)` in a `with` block. Adding to a file works the same way, with a second value that says how to open it.",
-            "`open(NOTES, \"a\", encoding=\"utf-8\")` opens the file to add to. `f.write` writes exactly what you give it, so a note needs `\"\\n\"` after it to end its line.",
-            "`with open(NOTES, \"a\", encoding=\"utf-8\") as f:`, and indented under it `f.write(note + \"\\n\")`.",
+            "The second value of `open` says how: `\"r\"` to read, `\"w\"` to write a new file over the old one, `\"a\"` to add to its end. `f.write` writes exactly what you give it, so a note needs `\"\\n\"` after it to end its line.",
+            "`with open(NOTES, ___, encoding=\"utf-8\") as f:`, and the `f.write` indented under it.",
         ],
         why="""```python
 def remember(arguments):
@@ -254,7 +254,7 @@ def hints_first_messages():
         [
             "Two parts: read the notes, where a missing file means no notes; then change `system` only when there are notes.",
             "Put the `with open(NOTES, encoding=\"utf-8\") as f:` block under `try:`, and give `notes` the empty text `\"\"` under `except FileNotFoundError:`. An empty text counts as false, so `if notes:` holds only when there are notes.",
-            "In `try:`: `with open(NOTES, encoding=\"utf-8\") as f:` and `notes = f.read().strip()`; in `except FileNotFoundError:`: `notes = \"\"`; then `if notes:` with `system = SYSTEM + \"\\n\\n\" + NOTES_HEAD + \"\\n\" + notes`.",
+            "Under `if notes:`: `system = SYSTEM + ___ + NOTES_HEAD + \"\\n\" + notes`.",
         ],
         why="""```python
 def first_messages(question):

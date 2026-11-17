@@ -188,8 +188,8 @@ def hints_cited():
         "cited",
         [
             "`inside.isdigit()` says whether a piece holds only digits; `int(inside)` makes a whole number of it.",
-            "Add a number only when it is not in `found` yet: `int(inside) not in found`.",
-            "`if inside.isdigit() and int(inside) not in found:`, and under it `found.append(int(inside))`.",
+            "Add a number only when it is not in `found` yet; `not in` tells you that, but test the whole number, not the text.",
+            "`if inside.isdigit() and ___:`, with the `append` of `int(inside)` under it.",
         ],
         why="""```python
 def cited(answer):
@@ -244,7 +244,7 @@ def hints_supported():
         [
             "Two checks: in the loop, before `passages[n - 1]`, whether source `n` is there; after the loop, every number of the answer against `numbers(text)`.",
             "Source `n` is there when it is from 1 to `len(passages)`, so `n < 1 or n > len(passages)` means it is not. After the loop, go through `numbers(answer)`.",
-            "In the loop: `if n < 1 or n > len(passages):` and `return False`. After it: `for number in numbers(answer):`, `if number not in numbers(text):`, `return False`, and `return True` at the end.",
+            "After the loop: `for number in numbers(answer):`, then `if ___:` with `return False` under it; `return True` stays at the end.",
         ],
         why="""```python
 def supported(answer, passages):

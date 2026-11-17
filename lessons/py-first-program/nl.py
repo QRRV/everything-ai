@@ -253,7 +253,7 @@ def hints_countdown():
         [
             "Python werkt van boven naar beneden. Welke regel moet als eerste uitgevoerd worden?",
             "Een countdown begint bij 3, dus `print(\"3\")` komt bovenaan.",
-            "`print(\"Go!\")` komt als laatste.",
+            "Onder `print(\"3\")` komt `print(\"___\")`, en zo verder tot `Go!`.",
         ],
         why="Dezelfde vier instructies, nu in de volgorde waarin de regels moeten verschijnen: 3, 2, 1, Go!",
     )

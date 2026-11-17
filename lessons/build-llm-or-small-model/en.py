@@ -221,8 +221,8 @@ def hints_train():
         "train_small",
         [
             "Steps 2 and 3 of the recipe: first vectors of the texts, then the model learns from those vectors and the labels.",
-            "The vectorizer learns the words and makes the vectors in one go, with `fit_transform`; the model learns with `fit`, from the vectors and the right labels.",
-            "`X = vectorizer.fit_transform(texts)`, and on the line with the dots `model.fit(..., labels)`, with the vectors in place of the dots.",
+            "The vectorizer learns the words and makes the vectors in one go, with `fit_transform`; the model learns with `fit`, from the training data and the right labels.",
+            "The first `...`: `X = ___`, the vectors of `texts`.",
         ],
         why="""```python
 def train_small(texts, labels):
@@ -271,8 +271,8 @@ def hints_f1():
         "macro_f1",
         [
             "Two steps: the F1 of one label inside the loop, the mean of all of them after it.",
-            "The F1 from the counts is `2 * tp / (2 * tp + fp + fn)`; `np.mean` gives the mean of a list.",
-            "`scores.append(2 * tp / (...))`, with `2 * tp + fp + fn` in place of the dots, and `return np.mean(...)`, with the list of scores.",
+            "The F1 from the counts is twice `tp`, divided by twice `tp` plus `fp` plus `fn`; `np.mean` gives the mean of a list.",
+            "In the loop: `scores.append(2 * tp / (___))`; after it, the mean of `scores`.",
         ],
         why="""```python
 def macro_f1(true, predicted, labels):

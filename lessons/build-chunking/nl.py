@@ -178,8 +178,8 @@ def hints_chunk():
         "chunk",
         [
             "Twee veranderingen: de stap van de ene chunk naar de volgende, en vlak na `append` een test of deze chunk het eind al haalde.",
-            "Het volgende begin is `start + size - overlap`. Deze chunk haalt het eind als `start + size >= len(words)`; dan `break`.",
-            "Na de `append`: `if start + size >= len(words):` met `break` eronder, dan `start = start + size - overlap`.",
+            "Het volgende begin is `start + size - overlap`. Deze chunk haalt het eind als `start + size`, waar de volgende zonder overlap zou beginnen, op of voorbij `len(words)` ligt; dan `break`.",
+            "Direct na de `append`: `if ___:`, met `break` een stap verder in.",
         ],
         why="""```python
 def chunk(text, size, overlap):
@@ -266,8 +266,8 @@ def hints_paragraph():
         "by_paragraph",
         [
             "Beslis in de loop per alinea: is hij te lang of niet? Een lange gaat erin als een paar stukken, een korte zoals hij is.",
-            "`len(paragraph.split())` telt de woorden. Is dat meer dan `size`, ga dan `chunk(paragraph, size, 0)` langs en `append` elk stuk; anders `append` je de alinea.",
-            "`if len(paragraph.split()) > size:` met `for piece in chunk(paragraph, size, 0):` en `out.append(piece)` eronder, dan `else:` met `out.append(paragraph)`.",
+            "`split()` zonder iets tussen de haakjes knipt een tekst in zijn woorden, en `len` telt ze. Heeft een alinea er meer dan `size`, ga dan `chunk(paragraph, size, 0)` langs en `append` elk stuk; anders `append` je de alinea.",
+            "`if ___ > size:`, met de loop over de stukken eronder, en `else:` met `out.append(paragraph)`.",
         ],
         why="""```python
 def by_paragraph(text, size):

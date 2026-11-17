@@ -199,7 +199,7 @@ def hints_server():
         [
             "Both methods end with `return result(message, {...})`, with what goes into the result between the braces. `result` adds `resultType` and the server's `_meta` itself.",
             "For `tools/call`: take `name = params.get(\"name\")`; when it is not in `FUNCTIONS`, `return error(message, -32602, \"Unknown tool: \" + str(name))`; else run `FUNCTIONS[name](params.get(\"arguments\") or {})`. `text.startswith(\"Error\")` is `True` when the text begins with `Error`.",
-            "`return result(message, {\"tools\": TOOLS, \"ttlMs\": 300000, \"cacheScope\": \"public\"})`, and after running the tool: `content = [{\"type\": \"text\", \"text\": text}]` and `return result(message, {\"content\": content, \"isError\": text.startswith(\"Error\")})`.",
+            "After running the tool: `return result(message, {\"content\": ___, \"isError\": text.startswith(\"Error\")})`, with a list of one text part in the gap.",
         ],
         why="""```python
     if message["method"] == "tools/list":
@@ -252,7 +252,7 @@ def hints_call():
         [
             "The request is a dictionary with four keys; the tool's name and arguments go into `params`, next to `_meta`. The answer is a dictionary too: look whether it has the key `\"error\"`.",
             "`if \"error\" in answer:` then `return \"Error: \" + answer[\"error\"][\"message\"]`. The parts are in `answer[\"result\"][\"content\"]`; keep `part[\"text\"]` of each part whose `part[\"type\"]` is `\"text\"`.",
-            "`request = {\"jsonrpc\": \"2.0\", \"id\": number, \"method\": \"tools/call\", \"params\": {\"name\": name, \"arguments\": arguments, \"_meta\": META}}`, and at the end `texts = [part[\"text\"] for part in answer[\"result\"][\"content\"] if part[\"type\"] == \"text\"]` and `return \"\\n\".join(texts)`.",
+            "`request = {\"jsonrpc\": \"2.0\", \"id\": number, \"method\": \"tools/call\", \"params\": ___}`, with a dictionary of its own in the gap.",
         ],
         why="""```python
 def call_tool(send, number, name, arguments):

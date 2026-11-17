@@ -206,7 +206,7 @@ def hints_chat():
         [
             "It is your `ask`, with two changes in the body: what goes in `\"messages\"`, and in `\"max_tokens\"`.",
             "`body = {\"model\": \"qwen3-0.6b\", \"messages\": messages, \"max_tokens\": max_tokens}`; the rest is as in `ask`.",
-            "After the body: `data = json.dumps(body).encode()`, a `Request` to `url + \"/chat/completions\"` with `data=data` and the header, `urlopen`, `json.loads`, and `return answer[\"choices\"][0][\"message\"][\"content\"]`.",
+            "After the body, the `Request`, `urlopen` and `json.loads` of `ask`, and at the end `return answer[\"choices\"][___][\"message\"][\"content\"]`.",
         ],
         why="""```python
 def chat(url, messages, max_tokens=200):
@@ -258,7 +258,7 @@ def hints_talk():
         [
             "Steps 3 and 4 of the recipe, inside the loop: four lines.",
             "`messages.append({\"role\": \"user\", \"content\": text})`, then `answer = chat(url, messages)`.",
-            "Then `messages.append({\"role\": \"assistant\", \"content\": answer})` and `answers.append(answer)`, in place of the `...`.",
+            "Then `messages.append({\"role\": ___, \"content\": answer})`, and `answers.append(answer)`.",
         ],
         why="""```python
 def talk(url, said):

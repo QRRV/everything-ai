@@ -179,8 +179,8 @@ def hints_shared():
         "shared_start",
         [
             "Het tellen gaat door zolang de tokens gelijk zijn; bij de eerste plaats waar ze verschillen, is de functie klaar.",
-            "Draai de test om: `if a[i] != b[i]:`, en geef daar `n` terug met `return`. Na de `if` telt de loop er een bij.",
-            "In de loop: `if a[i] != b[i]:` met `return n` eronder, en dan `n = n + 1`, niet onder de `if`.",
+            "Draai de test om: een `if` die `True` is waar de tokens verschillen, en geef daar `n` terug met `return`. Na de `if` telt de loop er een bij.",
+            "In de loop: `if a[i] ___ b[i]:` met `return n` eronder, en dan `n = n + 1`, niet onder de `if`.",
         ],
         why="""```python
 def shared_start(a, b):
@@ -230,8 +230,8 @@ def hints_order():
         "messages_for",
         [
             "Alleen de plaats van de tijd verandert: van de voorkant van de system prompt naar de achterkant van het bericht van de gebruiker.",
-            "Het system-bericht krijgt `HANDBOOK` als content, en het bericht van de gebruiker `question + \"\\n\\nNow: \" + now`.",
-            "`return [{\"role\": \"system\", \"content\": HANDBOOK}, {\"role\": \"user\", \"content\": question + \"\\n\\nNow: \" + now}]`",
+            "Het system-bericht krijgt `HANDBOOK` als content, en het bericht van de gebruiker de vraag, dan een witregel, dan `\"Now: \"` en `now`, aan elkaar gezet met `+`.",
+            "Het tweede bericht: `{\"role\": \"user\", \"content\": question + ___ + now}`.",
         ],
         why="""```python
 def messages_for(question, now):

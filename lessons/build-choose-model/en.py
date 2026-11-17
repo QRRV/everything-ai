@@ -200,7 +200,7 @@ def hints_cost():
         [
             "Count two things in one loop over `runs`: all tokens, and how many runs are right.",
             "Start with `tokens = 0` and `right = 0`. In the loop, add `run[\"tokens\"]` to `tokens`, and 1 to `right` when `run[\"right\"]` is true. After the loop, give back `None` if `right == 0`.",
-            "At the end: `return tokens * price_out / 1_000_000 / right`.",
+            "At the end: `return tokens * ___ / right`.",
         ],
         why="""```python
 def cost_per_right(runs, price_out):
@@ -253,8 +253,8 @@ def hints_route():
         "route",
         [
             "Go through the question character by character, and stop at the first digit.",
-            "`for ch in question:` gives the characters one by one, and `ch in \"0123456789\"` is `True` when `ch` is one of the digits. Then `return \"think\"`.",
-            "After the loop, when no digit came: `return \"fast\"`.",
+            "`for ch in question:` gives the characters one by one; `in` tells whether a character is in a text, so a text of the ten digits tells whether `ch` is a digit.",
+            "In the loop: `if ___:`, with `return \"think\"` one step further in; the answer `\"fast\"` comes only after the loop.",
         ],
         why="""```python
 def route(question):

@@ -226,8 +226,8 @@ def hints_download():
         "download_seconds",
         [
             "Volg het uitgewerkte voorbeeld, met de twee namen in plaats van de getallen.",
-            "`megabytes * 8` is het aantal megabits. Hoeveel seconden kosten die, bij `megabits_per_second` megabits per seconde?",
-            "`return megabytes * 8 / ...`, met de snelheid in plaats van de puntjes.",
+            "Een byte heeft 8 bits, dus maak eerst van de megabytes megabits. Hoeveel seconden kosten die, bij `megabits_per_second` megabits per seconde?",
+            "Maak van `return 0` de regel `return ___ / megabits_per_second`.",
         ],
         why="""```python
 def download_seconds(megabytes, megabits_per_second):
@@ -272,8 +272,8 @@ def hints_bits():
         "best_bits",
         [
             "Een `for`-loop over de lijst `[32, 16, 8, 4]` probeert de meeste bits eerst. Past er geen, dan houdt de loop op.",
-            "In de loop: de gigabytes zijn `params * bits / 8 / 1_000_000_000`, zoals in [Waar een model draait](/course/open/build-where-models-run?lang=nl). Zijn ze hoogstens `memory_gb`, geef dan meteen `bits` terug.",
-            "In de loop: `if params * bits / 8 / 1_000_000_000 <= memory_gb:` met `return bits` eronder. Na de loop, niet erin: `return None`.",
+            "In de loop: reken uit hoeveel gigabytes de weights bij `bits` bits innemen, zoals in [Waar een model draait](/course/open/build-where-models-run?lang=nl). Zijn dat er hoogstens `memory_gb`, geef dan meteen `bits` terug.",
+            "In de loop: `if ___ <= memory_gb:`, met `return bits` een stap verder in. Laat `return None` na de loop staan, niet erin.",
         ],
         why="""```python
 def best_bits(params, memory_gb):

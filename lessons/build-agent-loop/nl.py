@@ -196,7 +196,7 @@ def hints_run_agent():
         [
             "Elke ronde heeft twee eindes. Een antwoord zonder tool calls beëindigt de run. Een antwoord met tool calls betekent: voer ze uit, en vraag opnieuw met hun resultaten in de berichten.",
             "`not` draait een test om: `not x` klopt als `x` `None` is of een lege lijst. Zet eerst `message` in `messages`, zoals het kwam. Lees voor elke call in `message[\"tool_calls\"]` de argumenten met `json.loads`, voer `FUNCTIONS[...]` uit met de naam van de call, en voeg een bericht toe met de rol `tool`.",
-            "`messages = messages + [message]`; dan `if not message.get(\"tool_calls\"):` met `return message[\"content\"]`; dan `for call in message[\"tool_calls\"]:`, met `arguments = json.loads(call[\"function\"][\"arguments\"])`, het resultaat van `FUNCTIONS[call[\"function\"][\"name\"]](arguments)`, en `{\"role\": \"tool\", \"tool_call_id\": call[\"id\"], \"content\": result}` toegevoegd aan `messages`.",
+            "Voor elke call, nadat `arguments` gelezen is met `json.loads`: `result = FUNCTIONS[___](arguments)`.",
         ],
         why="""```python
 def run_agent(url, task, max_steps):
@@ -252,7 +252,7 @@ def hints_trace():
         [
             "Het bericht van een tool is eenvoudig: één regel. Een bericht van de assistant is van twee soorten: met tool calls, of zonder. Onderscheid ze met `m.get(\"tool_calls\")`.",
             "Met tool calls: heeft `m.get(\"content\")` tekst, dan is dat de gedachte, een eigen regel; dan één regel per call. Zonder: één regel `\"Answer: \"`.",
-            "`lines.append(\"Observation: \" + m[\"content\"])` voor een tool; voor een assistant `if m.get(\"tool_calls\"):`, dan `if m.get(\"content\"):` en een loop `for c in m[\"tool_calls\"]:` die `\"Action: \" + c[\"function\"][\"name\"] + \"(\" + c[\"function\"][\"arguments\"] + \")\"` toevoegt; onder `else:` de regel `\"Answer: \"`.",
+            "Voor elke call `c`: `lines.append(\"Action: \" + c[\"function\"][\"name\"] + \"(\" + ___ + \")\")`.",
         ],
         why="""```python
 def trace(messages):

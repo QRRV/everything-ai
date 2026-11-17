@@ -219,8 +219,8 @@ def hints_prompts():
         "messages_for",
         [
             "Two steps: find the entry of the template by its name, and build a list of two dictionaries.",
-            "`template = TEMPLATES[name]`; the user's text is `template[\"text\"].format(text=text)`.",
-            "`return [{\"role\": \"system\", \"content\": SYSTEM}, ...]`, with the user's message second and the filled template as its content.",
+            "`template = TEMPLATES[name]` finds the entry; the string with `{text}` in it is under one of its keys, and `.format(text=text)` fills it in.",
+            "`return [{\"role\": \"system\", \"content\": SYSTEM},` and on the next line `{\"role\": \"user\", \"content\": ___}]`.",
         ],
         why="""```python
 def messages_for(name, text):
@@ -269,7 +269,7 @@ def hints_ask():
         [
             "It is the loop of your `ask_json` in [JSON you can rely on](/course/open/build-structured-output?lang=en), with `chat` in place of `ask`.",
             "`found = problems(answer, schema)`; when `found == []`, give back `json.loads(answer)`.",
-            "Otherwise: `fix = \"Fix these problems: \" + \"; \".join(found) + \". Answer with the whole JSON again.\"`, and `messages = messages + [...]` with the answer as the assistant's and `fix` as the user's.",
+            "Otherwise: `fix = \"Fix these problems: \" + ___ + \". Answer with the whole JSON again.\"`, and `messages = messages + [...]` with the answer as the assistant's and `fix` as the user's.",
         ],
         why="""```python
     for attempt in range(tries):

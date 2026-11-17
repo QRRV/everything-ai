@@ -220,7 +220,7 @@ def hints_prompt():
         [
             "`.format` reads every pair of braces as a field. Which braces in `TEMPLATE` are a field, and which should stay in the prompt?",
             "`{text}` is the field. The braces around `\"price\": 100` should stay, so each of them is written twice.",
-            "The example becomes `{{\"price\": 100}}`; the rest of the template stays as it is.",
+            "The second line of `TEMPLATE` becomes `'The price is a number, without quotes, such as ___\"price\": 100___.\\n\\n{text}')`.",
         ],
         why="""```python
 TEMPLATE = ("Give the name, color and price of this bike as JSON, with the keys name, color and price. "
@@ -266,7 +266,7 @@ def hints_tally():
         [
             "Two steps for each entry: make sure its version is in `counts`, and add 1 when the answer fits.",
             "`if version not in counts:` gives the version its first count, 0. Then `if entry[\"fits\"]:` adds 1 to `counts[version]`.",
-            "`if version not in counts:` with `counts[version] = 0` under it, then `if entry[\"fits\"]:` with `counts[version] = counts[version] + 1` under it.",
+            "`if version not in counts:` with `counts[version] = 0` under it, then `if entry[\"fits\"]:` with `counts[version] = ___` under it.",
         ],
         why="""```python
 def fits_per_version(log):

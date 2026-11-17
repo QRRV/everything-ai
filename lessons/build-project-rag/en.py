@@ -222,8 +222,8 @@ def hints_library():
         "make_library",
         [
             "Start with an empty list, and fill it in a loop: one request per batch of `BATCH` chunks.",
-            "`for start in range(0, len(chunks), BATCH):` gives 0, 64, 128, …; the batch is `chunks[start:start + BATCH]`.",
-            "In the loop: `vectors = vectors + embed(url, ...)`, with the batch as the texts. `+` joins two lists into one: `[a, b] + [c]` is `[a, b, c]`.",
+            "`for start in range(0, len(chunks), BATCH):` gives 0, 64, 128, …; the batch then starts at `start` and holds `BATCH` chunks.",
+            "In the loop: `vectors = vectors + embed(url, ___)`, with the batch in the gap. `+` joins two lists into one: `[a, b] + [c]` is `[a, b, c]`.",
         ],
         why="""```python
 def make_library(url, chunks, about):
@@ -272,7 +272,7 @@ def hints_ask():
         [
             "It is the request of [Answers from the sources](/course/open/build-grounded-answers?lang=en), with `{about}` filled in, and then a loop over the numbers the answer cites.",
             "Two messages in a list: first the system prompt, `GROUNDED` with `.format` and `library[\"about\"]` for its field, then the user's, which `with_sources(question, passages)` makes. Send the list with `chat`.",
-            "After `answer = chat(url, messages)`: `for n in cited(answer):`, and `named.append(passages[n - 1])` when `n >= 1 and n <= len(passages)`.",
+            "After `answer = chat(url, messages)`: `for n in cited(answer):`, then `if ___:`, then `named.append(passages[n - 1])`.",
         ],
         why="""```python
     messages = [{"role": "system", "content": GROUNDED.format(about=library["about"])},

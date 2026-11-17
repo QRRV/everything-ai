@@ -245,7 +245,7 @@ def hints_verdict():
         [
             "Eerst het tellen: `len(results[claim]) < n or len(results[other]) < n` betekent dat er een seed ontbreekt.",
             "Dan de loop van het uitgewerkte voorbeeld, over `range(n)`: alleen de seeds van het plan, hoeveel er ook meer zijn. Welke van de twee je van de andere aftrekt, hangt af van `plan[\"direction\"]`.",
-            "Als laatste `np.median(gains) >= plan[\"at_least\"]`.",
+            "Als `plan[\"direction\"] == \"higher\"`: `gains.append(results[___][i] - results[___][i])`; bij `\"lower\"` andersom.",
         ],
         why="De winst per seed vergelijkt runs die hun geluk delen, de mediaan voorkomt dat één slechte seed beslist, en `range(n)` houdt extra runs buiten de deur.",
     )

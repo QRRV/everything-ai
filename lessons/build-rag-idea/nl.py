@@ -186,7 +186,7 @@ def hints_sources():
         [
             "Twee veranderingen: een nummer dat bij elke passage één omhooggaat, en aan het begin een test op een lijst zonder passages.",
             "Begin vóór de loop een teller bij 1, zet hem met een f-string vóór elke passage, en tel er na elke passage 1 bij op. `len(passages) == 0` is waar voor een lege lijst.",
-            "Vóór de loop: `n = 1`. In de loop: `text = text + f\"[{n}] {passage}\\n\"` en `n = n + 1`. Helemaal aan het begin: `if len(passages) == 0:` met `return question` eronder.",
+            "In de loop: `text = text + f\"___ {passage}\\n\"`, en daarna `n = n + 1`.",
         ],
         why="""```python
 def with_sources(question, passages):
@@ -211,9 +211,9 @@ def text_ask():
         mo.md(r"""
         ### Oefening 2. Vragen met bronnen
 
-        Het vak is de `ask` van [Een model aanroepen over HTTP](/course/open/build-call-api?lang=nl), met ruimte voor 80 tokens en een derde argument, `passages`; hij stuurt nog steeds alleen de vraag. Verander `ask(url, question, passages)` zo dat de content van het bericht van de user de prompt is die `with_sources` maakt van de vraag en de passages. `with_sources` is gegeven. De check draait je functie tegen een stand-in.
+        Het vak is de `ask` van [Een model aanroepen over HTTP](/course/open/build-call-api?lang=nl), met ruimte voor 80 tokens en een derde argument, `passages`; hij stuurt nog steeds alleen de vraag. Verander `ask(url, question, passages)` zo dat de content van het bericht van de gebruiker de prompt is die `with_sources` maakt van de vraag en de passages. `with_sources` is gegeven. De check draait je functie tegen een stand-in.
         """),
-        L.task("Stuur de prompt met de bronnen als de content van het bericht van de user."),
+        L.task("Stuur de prompt met de bronnen als de content van het bericht van de gebruiker."),
     ])
     return
 
@@ -238,8 +238,8 @@ def hints_ask():
         "ask",
         [
             "Alleen wat er in het bericht gaat, verandert; het request en het antwoord blijven zoals ze zijn.",
-            "Maak eerst de prompt met `with_sources(question, passages)`, en zet die in het bericht in plaats van `question`.",
-            "`prompt = with_sources(question, passages)` vóór `body`, en in `body` het bericht `{\"role\": \"user\", \"content\": prompt}`.",
+            "Maak eerst de prompt met `with_sources`, uit de vraag en de passages, en zet die in het bericht in plaats van `question`.",
+            "`prompt = ___` vóór `body`, en in `body` het bericht `{\"role\": \"user\", \"content\": prompt}`.",
         ],
         why="""```python
 import json

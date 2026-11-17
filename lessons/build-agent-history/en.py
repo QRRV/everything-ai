@@ -205,8 +205,8 @@ def hints_parse():
         "parse",
         [
             "Clean the line first, then decide whether it is a task. Each of these methods gives back a new text, so you can put them one after the other.",
-            "`line.strip().lstrip(\"-*0123456789.) \").rstrip(\".\")` takes the spaces off both ends, what a list puts in front, and the dot at the end. A line that is a task is not in the list `[\"\", \"DONE\", \"Done\"]`.",
-            "`line = line.strip().lstrip(\"-*0123456789.) \").rstrip(\".\")`, then `if line not in [\"\", \"DONE\", \"Done\"]:` with `tasks.append(line)` under it.",
+            "`line.strip()` takes the spaces off both ends; put the `.lstrip(...)` and `.rstrip(...)` from the exercise right after it, and store the result in `line` again. `x not in [...]` holds when `x` is none of the texts in the list.",
+            "After the line that cleans up `line`: `if line not in ___:`, with `tasks.append(line)` under it.",
         ],
         why="""```python
 def parse_tasks(text):
@@ -256,8 +256,8 @@ def hints_add():
         "add",
         [
             "Three things must all hold before a task goes in: there is room, it is not in the list yet, and it was not done. Join them with `and`.",
-            "Room means `len(queue) < limit`. The other two are `task not in queue` and `task not in done`.",
-            "`if len(queue) < limit and task not in queue and task not in done:` with `queue.append(task)` under it.",
+            "Room means the list is still shorter than `limit`; `len(queue)` gives its length. The other two are `task not in queue` and `task not in done`.",
+            "`if ___ and task not in queue and task not in done:`, with `queue.append(task)` under it.",
         ],
         why="""```python
 def add_tasks(queue, new, done, limit):

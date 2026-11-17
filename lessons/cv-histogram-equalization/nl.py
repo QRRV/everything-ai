@@ -280,7 +280,7 @@ def hints_cumulative():
         [
             "Twee stappen: eerst het lopende totaal van `counts`, dan deel je dat door het aantal pixels.",
             "Het lopende totaal is `np.cumsum(counts)`. Hoeveel pixels zijn er in totaal? Dat is de som van de aantallen.",
-            "`return np.cumsum(counts) / ___`, met op de open plek het aantal pixels.",
+            "`return np.cumsum(counts) / ___`, met het aantal pixels in het gat.",
         ],
         why="`np.cumsum([2, 0, 3, 1])` is `[2, 2, 5, 6]`: 2 pixels hebben grijstint 0 of donkerder, 2 hebben grijstint 1 of donkerder, 5 hebben grijstint 2 of donkerder, en alle 6 hebben grijstint 3 of donkerder. Gedeeld door de 6 pixels is dat 1/3, 1/3, 5/6 en 1.",
     )

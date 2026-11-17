@@ -191,7 +191,7 @@ def hints_rrf():
         [
             "Elke keer dat een tekst in een ranglijst staat, groeit zijn score met `1 / (k + rang)`. De rang van `ranking[place]` is één meer dan `place`: de eerste tekst heeft `place` 0 en rang 1.",
             "Zet één regel in de binnenste loop, na de `if` en even ver ingesprongen als de `if`, zodat hij voor elke tekst draait: `scores[text] = scores[text] + ...`.",
-            "De nieuwe regel is `scores[text] = scores[text] + 1 / (k + ...)`, met `place + 1` als rang.",
+            "De nieuwe regel: `scores[text] = scores[text] + 1 / (k + ___)`, met de rang in het gat.",
         ],
         why="""```python
 def rrf(rankings, k):
@@ -251,7 +251,7 @@ def hints_hybrid():
         [
             "Geef `rrf` beide ranglijsten, en neem dan de `n` teksten uit zijn dict met de hoogste score.",
             "`rrf([words, meaning], 60)` geeft een dict van tekst naar score. Een lijst paren `(score, text)`, gesorteerd met `reverse=True`, heeft de hoogste score eerst.",
-            "Vervang de laatste regel door drie: `scores = rrf(...)`, dan `best = sorted([(score, text) for text, score in scores.items()], reverse=True)`, en geef dan de teksten van `best[:n]` terug.",
+            "`best = sorted([(score, text) for text, score in ___], reverse=True)`, en geef dan de teksten van `best[:n]` terug.",
         ],
         why="""```python
 def hybrid_search(question, q, n):

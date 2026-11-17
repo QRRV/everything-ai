@@ -237,8 +237,8 @@ def hints_coffee():
         "coffee",
         [
             "Stap 1 van het recept: `price` krijgt de prijs van één kop, en `cups` het aantal koppen.",
-            "Stap 2: het totaal is de prijs keer het aantal koppen. Keer is `*`.",
-            "In het uitgewerkte voorbeeld is het totaal `pizza * count + delivery`. Hier is er geen bezorging.",
+            "Stap 2: het totaal is de prijs keer het aantal koppen.",
+            "De derde regel: `total = price ___ cups`.",
         ],
         why="Elk getal krijgt een naam; de berekening gebruikt de namen, en ook de uitkomst krijgt een naam. `print(total)` laat dan 7.5 zien.",
     )
@@ -279,7 +279,7 @@ def hints_lock():
         [
             "Elk cijfer erbij vermenigvuldigt het aantal codes met 10. Hoe vaak vermenigvuldig je met 10 bij 4 cijfers?",
             "Vier tienen met elkaar vermenigvuldigen, één voor elk cijfer, is een macht: 10 tot de macht 4.",
-            "Kijk naar het voorbeeld met de dobbelstenen: daar gaf `sides ** dice` het aantal worpen. Hier heeft elk cijfer 10 keuzes, en zijn er `digits` cijfers.",
+            "De tweede regel: `codes = 10 ___ digits`. Het teken voor een macht staat in het voorbeeld met de dobbelstenen.",
         ],
         why="`codes = 10 ** digits` geeft 10000: 10 keuzes voor elk van de 4 cijfers. `10 * 10 * 10 * 10` is net zo goed.",
     )

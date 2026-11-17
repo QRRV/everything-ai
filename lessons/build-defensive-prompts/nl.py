@@ -191,8 +191,8 @@ def hints_mark():
         "mark",
         [
             "Maak de e-mail vóór de `return` schoon: er mag geen `<email>` en geen `</email>` meer in staan.",
-            "`email.replace(\"</email>\", \"\")` geeft de e-mail zonder die markering; doe hetzelfde voor `<email>`, en bewaar het resultaat in `email`.",
-            "`email = email.replace(\"<email>\", \"\").replace(\"</email>\", \"\")`, en dan de `return` zoals hij was.",
+            "`text.replace(a, b)` geeft de tekst met elke `a` vervangen door `b`; vervangen door `\"\"` haalt hem eruit. Doe dat voor beide markeringen, en bewaar het resultaat in `email`.",
+            "`email = email.replace(\"<email>\", \"\").replace(___)`, en dan de `return` zoals hij was.",
         ],
         why="""```python
 def mark(email):
@@ -238,8 +238,8 @@ def hints_label():
         "label_of",
         [
             "Maak het antwoord eerst vergelijkbaar, en vraag dan of het een van de `LABELS` is; al het andere krijgt `None`.",
-            "`.strip().lower()` op de content geeft het antwoord zonder spaties eromheen en in kleine letters; `said in LABELS` is `True` als het een van de vier is.",
-            "`said = answer[\"choices\"][0][\"message\"][\"content\"].strip().lower()`, dan `if said in LABELS:` met `return said` eronder, en aan het eind `return None`.",
+            "`.strip().lower()` op de content geeft het antwoord zonder spaties eromheen en in kleine letters; bewaar het in `said`. `in` zegt of een waarde in een lijst staat, zoals `LABELS`.",
+            "Zodra het antwoord in `said` staat: `if ___:`, met `return said` eronder; aan het eind `None` voor de rest.",
         ],
         why="""```python
 import json

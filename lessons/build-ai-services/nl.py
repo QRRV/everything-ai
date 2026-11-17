@@ -213,7 +213,7 @@ def hints_parse():
         [
             "Voor elk label twee vragen: staat het in het antwoord, en is het langer dan het beste tot nu toe?",
             "`label in answer.lower()` zegt of het label in het antwoord staat, wat de hoofdletters ook zijn; `len(label) > len(best)` of het langer is, en dat werkt pas als `best` geen `None` meer is.",
-            "`if label in answer.lower() and (best is None or len(label) > len(best)):`, en daaronder, verder ingesprongen, `best = label`.",
+            "`if label in answer.lower() and (___ or len(label) > len(best)):`, met `best = label` eronder, verder ingesprongen.",
         ],
         why="""```python
 def parse_label(answer, labels):
@@ -262,8 +262,8 @@ def hints_label():
         "label",
         [
             "Stap 2 en 3 van het recept: twee berichten, en dan het label uit de tekst van het antwoord.",
-            "`messages` is een lijst met twee dictionaries: een met de rol `\"system\"` en `SYSTEM`, een met de rol `\"user\"` en `message`. De tekst van het antwoord is `answer[\"choices\"][0][\"message\"][\"content\"]`.",
-            "`messages = [{\"role\": \"system\", \"content\": SYSTEM}, {\"role\": \"user\", \"content\": message}]`, en `return parse_label(..., LABELS)`, met de tekst van het antwoord op de plaats van de puntjes.",
+            "`messages` is een lijst met twee dictionaries: een met de rol `\"system\"` en `SYSTEM`, een met de rol `\"user\"` en `message`. De tekst van het antwoord zit onder `\"choices\"`: in de eerste keuze, in zijn `\"message\"`, en daarin onder `\"content\"`.",
+            "De laatste regel: `return parse_label(___, LABELS)`, met de tekst van het antwoord in het gat.",
         ],
         why="""```python
 def label(url, message):

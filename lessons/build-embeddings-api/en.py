@@ -229,8 +229,8 @@ def hints_embed():
         "embed",
         [
             "Steps 2 and 3 of the recipe: what goes in, where it goes, and what you take out of the answer.",
-            "The texts go under `\"input\"` as the list itself; the endpoint is `/embeddings`, after `url`. In the answer, each item under `\"data\"` has its numbers under `\"embedding\"`.",
-            "`\"input\": texts`, `url + \"/embeddings\"`, and `return [item[...] for item in answer[...]]`, with the right keys in place of the dots.",
+            "The texts go under `\"input\"` as the list itself; the endpoint is `/embeddings`, after `url`. In the answer, the items under `\"data\"` hold the embeddings, one item per text.",
+            "The last `...`: `return [___ for item in answer[\"data\"]]`.",
         ],
         why="""```python
 def embed(url, texts):
@@ -281,7 +281,7 @@ def hints_best():
         [
             "Steps 1 and 4 of the recipe: first one list with the question in front of the texts, then for each text the dot product with the question.",
             "`[question] + texts` is that list, and your `embed` gives its embeddings. `vectors[0]` is then the question's; at which place is the embedding of `texts[i]`?",
-            "`vectors = embed(url, [question] + texts)`, and `score = np.dot(q, vectors[...])`, with the place of `texts[i]` in place of the dots.",
+            "The second `...`: `score = np.dot(q, vectors[___])`, with the place of `texts[i]` in the gap.",
         ],
         why="""```python
 def best_match(url, question, texts):

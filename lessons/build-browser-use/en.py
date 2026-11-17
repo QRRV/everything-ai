@@ -196,7 +196,7 @@ def hints_page():
         [
             "Two kinds of elements: text, which gets no number, and the rest, which does. An `if` with an `else` tells them apart.",
             "Add 1 to `number` only in the `else`, before you write the line; `str(number)` turns the number into text to put between the square brackets.",
-            "`if element[\"role\"] == \"text\":` with `lines.append(element[\"name\"])`; `else:` with `number = number + 1` and `lines.append(\"[\" + str(number) + \"] \" + element[\"role\"] + \": \" + element[\"name\"])`.",
+            "In the `else`, once `number` is 1 higher: `lines.append(\"[\" + str(number) + \"] \" + ___)`.",
         ],
         why="""```python
 def page_text(page):
@@ -250,7 +250,7 @@ def hints_screen():
         [
             "The screen is bigger than the screenshot, so the numbers grow: by how many times wider the screen is for `x`, and how many times higher for `y`.",
             "`screen_width / shot_width` is how many times wider; multiply `x` by it. `round` turns a number like `187.5` into a whole pixel.",
-            "`return round(x * screen_width / shot_width), round(y * screen_height / shot_height)`.",
+            "`return round(x * screen_width / shot_width), round(___)`, with the gap doing for `y` what the first part does for `x`.",
         ],
         why="""```python
 def to_screen(x, y, shot, screen):
@@ -297,8 +297,8 @@ def hints_guard():
         "check-click",
         [
             "Each rule is an `if` with a `return`, like the first one, which has an `if` inside an `if`. `\"adds\" in element` tells whether the element has that key.",
-            "`element[\"adds\"]` is the product the button adds; `not in wanted` holds when the user did not ask for it.",
-            "`if \"adds\" in element:` with, inside it, `if element[\"adds\"] not in wanted:` and `return \"no\"`; then `if \"pays\" in element:` with `return \"ask\"`.",
+            "The product a button adds is under the key `\"adds\"` of the element; test it with `not in wanted`, as the text says.",
+            "Inside `if \"adds\" in element:`: `if ___ not in wanted:`, with `return \"no\"` one step further in.",
         ],
         why="""```python
 def check_click(element, wanted):

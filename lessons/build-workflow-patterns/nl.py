@@ -207,8 +207,8 @@ def hints_improve():
         "improve",
         [
             "Twee gevallen na `problem = check(answer)`: geen probleem, en wel een probleem. In het eerste is de loop klaar. In het tweede moet de volgende ronde weten wat er misging.",
-            "Het eigen antwoord van het model gaat in `messages` met de rol `assistant`, wat er mis mee is daarna met de rol `user`. Dan vraagt de loop opnieuw.",
-            "`if problem is None:` met `return answer` eronder; dan `messages = messages + [...]` met twee dictionaries: `{\"role\": \"assistant\", \"content\": answer}` en `{\"role\": \"user\", \"content\": problem}`.",
+            "Allebei gaan ze in `messages`, als dictionaries zoals de eerste: het eigen antwoord van het model, daarna wat er mis mee is, elk met de rol van wie het zei. Dan vraagt de loop opnieuw.",
+            "Na de `if`: `messages = messages + [{\"role\": ___, \"content\": answer}, {\"role\": ___, \"content\": problem}]`.",
         ],
         why="""```python
 def improve(ask, task, check, rounds):
@@ -261,8 +261,8 @@ def hints_orchestrate():
         "orchestrate",
         [
             "Het plan bepaalt hoeveel workers er zijn: één per gerecht in `plan[\"dishes\"]`. Een loop over die lijst doet het, hoe lang die ook is.",
-            "Sla in de loop een gerecht over dat niet in `DISHES` staat; geef elk ander gerecht aan `worker`, en voeg het resultaat toe aan `results`.",
-            "`for dish in plan[\"dishes\"]:`, met `if dish in DISHES:` eronder, en daaronder `results.append(worker(dish))`.",
+            "Sla in de loop een gerecht over dat de keuken niet kent; geef elk ander gerecht aan `worker`, en voeg het resultaat toe aan `results`.",
+            "`for dish in plan[\"dishes\"]:`, dan `if ___:`, dan `results.append(worker(dish))`.",
         ],
         why="""```python
 def orchestrate(ask, question, worker):

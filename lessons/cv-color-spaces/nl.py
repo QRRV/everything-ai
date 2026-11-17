@@ -374,7 +374,7 @@ def hints_red():
         [
             "Lees de twee let-ops boven het recept: waar ligt rood op de kleurtoon, en welke kleurtoon krijgt een grijze pixel?",
             "Twee voorwaarden op de kleurtoon, verbonden met `|`, samen tussen haakjes; dan `&` met de voorwaarde op de verzadiging.",
-            "`(h < 0.05) | (h > 0.95) & (s > 0.5)` is het niet: Python doet eerst de `&`, dus de verzadiging telt maar voor één eind. Waar komen haakjes, zodat de twee voorwaarden op de kleurtoon samen tellen?",
+            "`return (___) & (s > 0.5)`, met in het gat de twee voorwaarden op de kleurtoon, elk tussen eigen haakjes.",
         ],
         why="`(h < 0.05) | (h > 0.95)` is rood aan beide einden van de cirkel; de haakjes eromheen laten Python dat vóór de `&` doen. `& (s > 0.5)` laat grijs en roze weg. Voor de rij van het voorbeeld geeft dat `True, True, False, False, False`.",
     )

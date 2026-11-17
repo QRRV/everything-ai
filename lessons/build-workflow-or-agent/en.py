@@ -197,8 +197,8 @@ def hints_to_buy():
         "to-buy",
         [
             "Two amounts side by side: `need[item]` is what the recipe wants, `pantry(item)` what there is. An ingredient is short when there is less than the recipe needs.",
-            "Keep what the pantry has in a name, such as `have`, and compare it with `need[item]` in an `if`. The grams to buy are what the recipe needs minus what there is.",
-            "`have = pantry(item)`, then `if have < need[item]:`, and under it put the difference in `buy[item]`.",
+            "Keep what the pantry has in a name, such as `have`, and compare it with `need[item]` in an `if`.",
+            "Under `if have < need[item]:` comes `buy[item] = ___`: the grams that are missing.",
         ],
         why="""```python
 def to_buy(dish):
@@ -249,8 +249,8 @@ def hints_shopping():
         "shopping",
         [
             "The model's dish is text from outside your code: check it before you use it. `dish not in DISHES` is `True` when the model picked something the kitchen does not know.",
-            "`buy = to_buy(dish)` gives the list. `WRITE.format(dish=dish, items=as_text(buy))` gives the second prompt, and `ask(url, ...)` sends it.",
-            "`if dish not in DISHES:` with `return SORRY` under it; then `buy = to_buy(dish)`, and return what `ask` gives for the filled-in `WRITE`.",
+            "`buy = to_buy(dish)` gives the list. Fill in `WRITE` the way the first line fills in `PICK`, and send it with `ask(url, ...)`.",
+            "The last line: `return ask(url, ___)`, with `WRITE` filled in with the dish and the list.",
         ],
         why="""```python
 def shopping(url, question):

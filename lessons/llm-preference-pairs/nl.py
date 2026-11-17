@@ -225,7 +225,7 @@ def hints_prob():
         "bt-prob",
         [
             "De sigmoid uit [Van score naar kans: de sigmoid](/course/open/ml-sigmoid?lang=nl), met `math.exp` voor $e$ tot een macht. Welk getal gaat erin? Geen score, maar het verschil van de twee: de eerste min de tweede.",
-            "`return 1 / (1 + math.exp(-(___)))`, met het verschil op de open plek.",
+            "`return 1 / (1 + math.exp(-(___)))`, met het verschil in het gat.",
         ],
         why="Alleen het verschil van de scores telt, en een hogere score voor `a` geeft een hogere kans voor `a`.",
     )

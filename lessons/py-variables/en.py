@@ -237,8 +237,8 @@ def hints_coffee():
         "coffee",
         [
             "Step 1 of the recipe: `price` gets the price of one cup, and `cups` the number of cups.",
-            "Step 2: the total is the price times the number of cups. Times is `*`.",
-            "In the worked example, the total is `pizza * count + delivery`. Here there is no delivery.",
+            "Step 2: the total is the price times the number of cups.",
+            "The third line: `total = price ___ cups`.",
         ],
         why="Each number gets a name; the calculation uses the names, and the result gets a name too. `print(total)` then shows 7.5.",
     )
@@ -279,7 +279,7 @@ def hints_lock():
         [
             "Each extra digit multiplies the number of codes by 10. How many times do you multiply by 10 for 4 digits?",
             "Four 10s multiplied together, one for each digit, is a power: 10 to the power 4.",
-            "Look at the dice example: there, `sides ** dice` gave the number of throws. Here each digit has 10 choices, and there are `digits` of them.",
+            "The second line: `codes = 10 ___ digits`. The sign for a power is in the dice example.",
         ],
         why="`codes = 10 ** digits` gives 10000: 10 choices for each of the 4 digits. `10 * 10 * 10 * 10` is just as right.",
     )

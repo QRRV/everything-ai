@@ -208,8 +208,8 @@ def hints_tool():
         "tool-from",
         [
             "Look at how `convert` was written by hand in Tools as JSON: each parameter under `\"properties\"` is a small dictionary, and the description is one sentence.",
-            "For a parameter, that dictionary is `{\"type\": kind}`, stored under its name in `properties`. For the description, take the spaces off with `.strip()`, cut the text at each `\"\\n\"` with `.split`, and keep the first piece.",
-            "`properties[param] = {\"type\": kind}` in the loop, and `\"description\": doc.strip().split(\"\\n\")[0],` in the definition.",
+            "For a parameter, that dictionary is `{\"type\": kind}`, stored under its name in `properties`. For the description, `.strip()` takes the spaces off the ends of a text, and `.split(\"\\n\")` cuts it into a list of its lines.",
+            "In the definition, the first line of the docstring: `\"description\": doc.___[0],`.",
         ],
         why="""```python
 def tool_from(name, doc, params):
@@ -262,7 +262,7 @@ def hints_graph():
         [
             "Two things stop the loop: the node `\"END\"`, and the limit. Put both in the condition of the `while`, joined with `and`.",
             "In each round, the node's function gives the new state: `nodes[node](state)`. Then the edge of that node gives the name of the next one: `edges[node](state)`, with the new state.",
-            "`while node != \"END\" and steps < limit:`, then under it `state = nodes[node](state)`, `node = edges[node](state)` and `steps = steps + 1`.",
+            "Start with `while node != \"END\" and ___:`, and put the three lines under it.",
         ],
         why="""```python
 def run_graph(nodes, edges, state, start, limit):

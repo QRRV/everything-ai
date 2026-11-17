@@ -235,8 +235,8 @@ def hints_idf():
         "idf",
         [
             "Above the line: the texts that do not have the word, plus 0.5. Below it: the texts that do, plus 0.5. Then 1 more, and the log of all of it.",
-            "The fraction is `(total - n + 0.5) / (n + 0.5)`. Add 1 to it, and take `math.log` of the sum.",
-            "`return math.log((total - n + 0.5) / (n + 0.5) + 1)`",
+            "The texts without the word are `total - n`. Add 0.5 above and below the line, 1 to the fraction, and take `math.log` of the sum.",
+            "`return math.log((___) / (n + 0.5) + 1)`",
         ],
         why="""```python
 import math
@@ -284,8 +284,8 @@ def hints_bm25():
         "bm25",
         [
             "Only the line that adds to `score` changes: `idfs[word]` stays, and `f` becomes a fraction.",
-            "Above the line: `f * (K1 + 1)`. Below it: `f + K1 * (1 - B + B * len(words) / average)`.",
-            "`score = score + idfs[word] * f * (K1 + 1) / (f + K1 * (1 - B + B * len(words) / average))`",
+            "Above the line: `f * (K1 + 1)`. Below it: `f + K1 *` the length correction, which is `1 - B` plus `B` times the length of the text divided by `average`.",
+            "`score = score + idfs[word] * f * (K1 + 1) / (f + K1 * (___))`",
         ],
         why="""```python
 def bm25(asked, words, idfs, average):

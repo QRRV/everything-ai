@@ -198,7 +198,7 @@ def hints_run():
         [
             "`subprocess.run` krijgt de opdracht als lijst, en de rest als keyword arguments: een voor de map, een voor de environment variables, twee voor de output, een voor de tijdslimiet. Is de tijd om, dan stopt hij het proces en geeft hij de fout `subprocess.TimeoutExpired`.",
             "De keyword arguments zijn `cwd`, `env`, `capture_output`, `text` en `timeout`. Zet de aanroep, na `return`, in een `try:`, en vang de tijdslimiet op met `except subprocess.TimeoutExpired:`.",
-            "`try:`, dan `return subprocess.run(command, cwd=folder, env={}, capture_output=True, text=True, timeout=seconds)`, dan `except subprocess.TimeoutExpired:` met `return None` eronder.",
+            "In de `try:`: `return subprocess.run(command, cwd=folder, env=___, capture_output=True, text=True, timeout=seconds)`.",
         ],
         why="""```python
 def run(code, seconds):
@@ -250,7 +250,7 @@ def hints_result_text():
         [
             "Twee tests vóór de laatste regel, elk met een eigen `return`: een op `done.returncode`, een op de lengte van `done.stdout`.",
             "`done.stderr.strip().split(\"\\n\")` geeft de regels van de fout, en `[-1]` de laatste daarvan. `done.stdout[:LIMIT]` zijn de eerste `LIMIT` tekens, en `len(done.stdout) - LIMIT` is hoeveel er weg zijn.",
-            "`if done.returncode != 0:` met `lines = done.stderr.strip().split(\"\\n\")` en `return \"Error: \" + lines[-1]`; dan `if len(done.stdout) > LIMIT:` met een `return` van `done.stdout[:LIMIT]`, plus een regel waar `str(len(done.stdout) - LIMIT)` in staat.",
+            "Voor een lange output, bijvoorbeeld: `return done.stdout[:LIMIT] + \"\\n(cut off: \" + ___ + \" more characters)\"`.",
         ],
         why="""```python
 def result_text(done, seconds):

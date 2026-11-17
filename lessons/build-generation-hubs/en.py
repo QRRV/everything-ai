@@ -242,7 +242,7 @@ def hints_image():
         [
             "Steps 1 to 4 of the recipe: what goes under `\"prompt\"`, where the request goes, and what you take out of the answer.",
             "The description is the `prompt` the function gets; the endpoint is `/images/generations`, after `url`. The image is in the first item under `\"data\"`, under `\"b64_json\"`, as base64 text.",
-            "`\"prompt\": prompt`, `url + \"/images/generations\"`, and `return base64.b64decode(...)`, with the base64 text of the first image in place of the dots.",
+            "The last `...`: `return base64.b64decode(___)`, with the base64 text of the first image in the gap.",
         ],
         why="""```python
 def image_bytes(url, prompt):
@@ -297,8 +297,8 @@ def hints_digit():
         "read_digit",
         [
             "The card says what the model takes: a tensor with pixels from 0 to 1. And the model gives logits: which function turns 10 logits into probabilities?",
-            "Dividing by 255 brings pixels from 0 to 255 to 0 to 1. `model(x)` has shape `(1, 10)`: take the softmax along axis 1, and then row 0.",
-            "`x = torch.tensor(pixels, dtype=torch.float32) / ...` and `p = torch.softmax(model(x), dim=1)[...]`, with the right numbers in place of the dots.",
+            "Dividing by 255 brings pixels from 0 to 255 to 0 to 1. What the model gives for `x` has shape `(1, 10)`: take the softmax along axis 1, and then row 0.",
+            "The second `...`: `p = torch.softmax(___, dim=1)[0]`.",
         ],
         why="""```python
 def read_digit(model, pixels):

@@ -218,7 +218,7 @@ def hints_run_plan():
         [
             "Met elke waarde gebeuren twee dingen. Eerst: is het het nummer van een eerdere stap? Dan wordt het het resultaat van die stap. Daarna: hij gaat in `arguments`.",
             "`results` bevat het resultaat van elke eerdere stap onder zijn nummer, zoals `\"#1\"`. `value in results` zegt of `value` een van die nummers is. Een lijst kan geen key van een dictionary zijn, dus `value in results` stopt bij een lijst met een fout: kijk eerst of `value` een tekst is, met `isinstance(value, str)`.",
-            "`if isinstance(value, str) and value in results:` met `value = results[value]` eronder; dan, niet ingesprongen onder de `if`, `arguments[name] = value`.",
+            "Onder `if isinstance(value, str) and value in results:`: `value = ___`; daarna, niet ingesprongen onder de `if`, `arguments[name] = value`.",
         ],
         why="""```python
 def run_plan(plan):
@@ -271,8 +271,8 @@ def hints_waves():
         "waves",
         [
             "Een stap wacht op elk resultaat dat hij gebruikt. Hij kan dus pas beginnen na het laatste ervan: zijn golf is één meer dan de grootste golf daaronder.",
-            "`wave` bevat de golf van elke eerdere stap onder zijn nummer. Als `value in wave`, is de golf van die stap `wave[value]`, en deze stap heeft minstens `wave[value] + 1` nodig. `max(a, b)` geeft het grootste van twee getallen. Net als in oefening 1 kan een waarde een lijst zijn: kijk eerst of hij een tekst is.",
-            "`if isinstance(value, str) and value in wave:` met `w = max(w, wave[value] + 1)` eronder.",
+            "`wave` bevat de golf van elke eerdere stap onder zijn nummer. Als `value in wave`, heeft deze stap een golf nodig die minstens één meer is dan die van die stap. `max(a, b)` geeft het grootste van twee getallen. Net als in oefening 1 kan een waarde een lijst zijn: kijk eerst of hij een tekst is.",
+            "`if isinstance(value, str) and value in wave:`, met `w = max(w, ___)` eronder.",
         ],
         why="""```python
 def waves(plan):

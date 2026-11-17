@@ -198,7 +198,7 @@ def hints_p_yes():
         [
             "Een logprob is de logaritme van een kans, dus `math.exp` ervan geeft de kans terug. Tel die van de tokens die yes betekenen op.",
             "In de loop maakt `token.strip().lower()` van `\" Yes\"` een `\"yes\"`. Alleen als het `\"yes\"` is, telt het token mee.",
-            "In de loop, na `token = ...`: `if token.strip().lower() == \"yes\":`, en daaronder `total = total + math.exp(entry[\"logprob\"])`.",
+            "In de loop, na `token = ...`: `if token.strip().lower() == \"yes\":`, en daaronder `total = total + math.exp(___)`.",
         ],
         why="""```python
 import math
@@ -258,7 +258,7 @@ def hints_rerank():
         [
             "Elke kandidaat krijgt een score: `p_yes` van zijn antwoord. Als je paren van score en passage sorteert, komen ze op volgorde van de score.",
             "Zet in de loop `scored.append((p_yes(response), passage))`. Na de loop heeft `sorted(scored, reverse=True)` de hoogste score eerst.",
-            "Vervang de laatste regel door twee: `best = sorted(scored, reverse=True)`, en geef dan de passages van `best[:n]` terug: `[passage for score, passage in best[:n]]`.",
+            "Vervang de laatste regel door twee: `best = sorted(scored, reverse=True)`, en dan `return [passage for ___ in best[:n]]`.",
         ],
         why="""```python
 def rerank(question, candidates, n):

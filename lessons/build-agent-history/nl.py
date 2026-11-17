@@ -205,8 +205,8 @@ def hints_parse():
         "parse",
         [
             "Schoon de regel eerst op, en beslis dan of het een taak is. Elk van deze methoden geeft een nieuwe tekst terug, dus je kunt ze achter elkaar zetten.",
-            "`line.strip().lstrip(\"-*0123456789.) \").rstrip(\".\")` haalt de spaties van beide kanten af, wat een lijst ervoor zet, en de punt aan het eind. Een regel die een taak is, staat niet in de lijst `[\"\", \"DONE\", \"Done\"]`.",
-            "`line = line.strip().lstrip(\"-*0123456789.) \").rstrip(\".\")`, dan `if line not in [\"\", \"DONE\", \"Done\"]:` met `tasks.append(line)` eronder.",
+            "`line.strip()` haalt de spaties van beide kanten af; zet de `.lstrip(...)` en `.rstrip(...)` uit de oefening er direct achter, en sla het resultaat weer op in `line`. `x not in [...]` klopt als `x` geen van de teksten in de lijst is.",
+            "Na de regel die `line` opschoont: `if line not in ___:`, met `tasks.append(line)` eronder.",
         ],
         why="""```python
 def parse_tasks(text):
@@ -256,8 +256,8 @@ def hints_add():
         "add",
         [
             "Drie dingen moeten allemaal kloppen voordat een taak erin gaat: er is plek, hij staat nog niet in de lijst, en hij is niet gedaan. Verbind ze met `and`.",
-            "Plek betekent `len(queue) < limit`. De andere twee zijn `task not in queue` en `task not in done`.",
-            "`if len(queue) < limit and task not in queue and task not in done:` met `queue.append(task)` eronder.",
+            "Plek betekent dat de lijst nog korter is dan `limit`; `len(queue)` geeft de lengte. De andere twee zijn `task not in queue` en `task not in done`.",
+            "`if ___ and task not in queue and task not in done:`, met `queue.append(task)` eronder.",
         ],
         why="""```python
 def add_tasks(queue, new, done, limit):

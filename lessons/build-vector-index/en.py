@@ -217,7 +217,7 @@ def hints_lists():
         [
             "For cluster `c`, go through the numbers `i` of all points, `range(len(labels))`, and keep those whose label is `c`.",
             "A comprehension with a condition does that in one line: `[i for i in range(len(labels)) if ...]`.",
-            "In the loop: `lists.append([i for i in range(len(labels)) if labels[i] == c])`.",
+            "In the loop: `lists.append([i for i in range(len(labels)) if ___])`.",
         ],
         why="""```python
 def make_lists(labels, n):
@@ -270,9 +270,9 @@ def hints_search():
     L.hints(
         "ivf_search",
         [
-            "The numbers of the points of cluster `c` are in `index[\"lists\"][c]`; you need them for every cluster in `nearest`.",
-            "Two loops, one inside the other: `for c in nearest:`, and in it `for i in index[\"lists\"][c]:`.",
-            "Put those two loops in place of the loop over `range(len(index[\"vectors\"]))`, and keep the line with `found.append(...)` in the inner one.",
+            "`index[\"lists\"]` has a list for each cluster, with the numbers of its points; you need those of every cluster in `nearest`.",
+            "Two loops, one inside the other: one over the clusters in `nearest`, and in it one over the numbers of the points of that cluster.",
+            "In place of the loop over `range(len(index[\"vectors\"]))`: `for c in nearest:`, and in it `for i in ___:`, with the line with `found.append(...)` in the inner one.",
         ],
         why="""```python
 import numpy as np

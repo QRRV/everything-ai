@@ -190,8 +190,8 @@ def hints_search():
         "meaning_search",
         [
             "De score van punt `i` vergelijkt zijn eigen embedding, rij `i` van `vectors`, met de embedding van de vraag.",
-            "`vectors[i] @ q` is het inproduct van rij `i` met `q`: één getal, de score van punt `i`.",
-            "In de loop: `found.append((vectors[i] @ q, points[i]))`.",
+            "`a @ b` is het inproduct van twee arrays `a` en `b`: één getal. Dat getal, voor rij `i` en `q`, is de score van punt `i`.",
+            "In de loop: `found.append((___, points[i]))`.",
         ],
         why="""```python
 def meaning_search(q, vectors, points, k):
@@ -239,8 +239,8 @@ def hints_retrieve():
         "retrieve",
         [
             "De embeddings van de punten staan klaar in `VECTORS`; bij elke vraag heeft alleen de vraag zelf er nog een nodig.",
-            "`embed(url, [question])` geeft een lijst met één embedding; `[0]` haalt hem eruit, en `np.array(...)` maakt er een array van.",
-            "`q = np.array(embed(url, [question])[0])`, en dan `return meaning_search(q, VECTORS, POINTS, k)`.",
+            "Stuur `embed` een lijst met alleen de vraag: je krijgt een lijst met één embedding terug. `[0]` haalt hem eruit, en `np.array(...)` maakt er een array van.",
+            "`q = np.array(___)`, en dan `return meaning_search(q, VECTORS, POINTS, k)`.",
         ],
         why="""```python
 import numpy as np

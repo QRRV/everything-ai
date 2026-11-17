@@ -247,7 +247,7 @@ def hints_sanity():
         [
             "The shape: compare `tuple(logits.shape)` with `tuple(y.shape) + (k,)`, and return the report of `False` and four times `None` when they differ.",
             "The first loss over every row: `F.cross_entropy(logits.reshape(-1, k), y.reshape(-1)).item()`, before the loop.",
-            "The loop of `overfit_one_batch` of Guided reproduction 3, with the same `reshape` in its loss, and the optimizer of the comment: AdamW at `1e-3` with `weight_decay=0.0`, without the paper's betas.",
+            "The loop of `overfit_one_batch` of Guided reproduction 3, with the AdamW of the comment and without the paper's betas. In the loop: `loss = F.cross_entropy(___.reshape(-1, k), y.reshape(-1))`.",
         ],
         why="The shape comes first because the losses need it; the first loss before any step; and the loop at `1e-3` tests whether the model can learn at all.",
     )

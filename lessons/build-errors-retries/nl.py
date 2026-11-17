@@ -228,7 +228,7 @@ def hints_should_retry():
         [
             "Vraag je bij elke status in de tabel af: klopt het request niet, of heeft de server het nu te druk, of een probleem?",
             "Bij 429 kan het na even wachten goed gaan, en bij een probleem in de server ook: elke status vanaf 500. De andere statussen in de 400-reeks blijven zoals ze zijn.",
-            "Eén regel: `return`, dan `status == 429`, dan `or`, dan een vergelijking die waar is vanaf 500.",
+            "Eén regel: `return status == 429 or ___`.",
         ],
         why="""```python
 def should_retry(status):
@@ -273,8 +273,8 @@ def hints_ask_again():
         "ask_again",
         [
             "Stap 4 en 5 van het recept: beslis eerst of je stopt, en wacht dan.",
-            "`if not should_retry(e.code) or attempt == tries - 1:` en daaronder, verder ingesprongen, `raise`.",
-            "Na die `if`, even ver ingesprongen: `time.sleep(base * 2 ** attempt)`. Daarna gaat de loop vanzelf verder.",
+            "`should_retry(e.code)` zegt of de status van de fout een nieuwe poging waard is; `attempt` telt de pogingen vanaf 0, dus welke waarde heeft hij bij de laatste? `raise` op een eigen regel geeft de fout door, en `time.sleep(seconds)` wacht.",
+            "Eerst `if not should_retry(e.code) or ___:`, met `raise` eronder, verder ingesprongen; het wachten komt erna.",
         ],
         why="""```python
 def ask_again(url, question, tries, base):

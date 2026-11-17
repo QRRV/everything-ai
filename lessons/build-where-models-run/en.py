@@ -211,7 +211,7 @@ def hints_ask():
         [
             "Two things are fixed in the code that should come from the arguments: the model's name, and the address.",
             "In the body, `\"model\": model`, without quotes around `model`. The address is the `base_url` with the endpoint after it.",
-            "`urllib.request.Request(base_url + \"/chat/completions\", data=data, ...)`, with the rest as it is.",
+            "`request = urllib.request.Request(base_url + ___, data=data,`, with the line under it as it is.",
         ],
         why="""```python
 def ask(base_url, model, question):
@@ -262,8 +262,8 @@ def hints_gb():
         "weights_gb",
         [
             "Follow the worked example, with `params` and `bits` in place of the numbers.",
-            "`params * bits` is the number of bits; divided by 8 the bytes; divided by a billion the gigabytes.",
-            "`return params * bits / 8 / ...`, with a billion in place of the dots, written as `1_000_000_000`.",
+            "`params * bits` is the number of bits. Then two divisions: to bytes, as in step 3 of the worked example, and to gigabytes, as in step 4.",
+            "`return params * bits / 8 / ___`",
         ],
         why="""```python
 def weights_gb(params, bits):

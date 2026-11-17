@@ -178,7 +178,7 @@ def hints_html():
         [
             "Elke ronde van de loop doet één van drie dingen: een `<` begint een tag, een `>` sluit er een af, en elk ander teken wordt toegevoegd, maar alleen buiten een tag.",
             "Begin met `inside = False`. Dan zet `if ch == \"<\":` `inside = True`, zet `elif ch == \">\":` `inside = False`, en voegt het derde geval `ch` toe.",
-            "Het derde geval is `elif not inside:` met `out = out + ch` eronder.",
+            "Het derde geval: `elif ___:`, met `out = out + ch` eronder.",
         ],
         why="""```python
 def html_text(page):
@@ -278,8 +278,8 @@ def hints_left():
         "left_first",
         [
             "Eén loop geeft de volgorde waarin de pagina tekent. Twee loops over dezelfde stukken, die elk maar één kolom houden, geven de linkerkolom vóór de rechter.",
-            "Doe in de eerste loop alleen `append` met de tekst `if x < middle`; in een tweede loop daarna alleen `if x >= middle`.",
-            "Zet onder `for x, y, text in pieces:` `if x < middle:` met `lines.append(text)`; dan dezelfde loop nog een keer met `if x >= middle:`.",
+            "Doe in de eerste loop alleen `append` met de tekst voor een stuk uit de linkerkolom, met een `x` kleiner dan `middle`; in een tweede loop daarna alleen voor de andere.",
+            "De tweede loop: `for x, y, text in pieces:`, dan `if ___:` met `lines.append(text)` eronder.",
         ],
         why="""```python
 def left_first(pieces, middle):

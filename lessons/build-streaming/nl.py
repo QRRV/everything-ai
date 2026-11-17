@@ -233,7 +233,7 @@ def hints_piece():
         [
             "Stap 4 en 5 van het recept: eerst de regels zonder stukje, dan de JSON.",
             "`line[:6]` is het begin van de regel: als dat niet `\"data: \"` is, of `line.strip()` is `\"data: [DONE]\"`, return dan `\"\"`. Daarna `chunk = json.loads(line[6:])`.",
-            "`delta = chunk[\"choices\"][0][\"delta\"]`; dan `if \"content\" in delta:` return `delta[\"content\"]`, en daarna `return \"\"`.",
+            "`delta = ___`; dan `if \"content\" in delta:` return `delta[\"content\"]`, en daarna `return \"\"`.",
         ],
         why="""```python
 def piece(line):
@@ -285,7 +285,7 @@ def hints_stream():
         [
             "Stap 1 en 3 van het recept: de body vraagt om de stream, de loop leest hem.",
             "In de body: `\"stream\": True`. In de `with`: `for line in response:`, en in die loop `text = piece(line.decode())`.",
-            "Na `text = piece(line.decode())`, nog in de loop: `if text:` en dan `pieces.append(text)`. De `return pieces` staat er al.",
+            "Na `text = piece(line.decode())`, nog in de loop: `if ___:` met `pieces.append(text)` eronder. De `return pieces` staat er al.",
         ],
         why="""```python
 def stream(url, question):

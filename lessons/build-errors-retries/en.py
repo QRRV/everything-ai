@@ -228,7 +228,7 @@ def hints_should_retry():
         [
             "For each status in the table, ask: is the request wrong, or is the server too busy, or in trouble, right now?",
             "429 can be fine after waiting, and so can trouble in the server: every status from 500 up. The other statuses in the 400s stay as they are.",
-            "One line: `return`, then `status == 429`, then `or`, then a comparison that is true from 500 up.",
+            "One line: `return status == 429 or ___`.",
         ],
         why="""```python
 def should_retry(status):
@@ -273,8 +273,8 @@ def hints_ask_again():
         "ask_again",
         [
             "Steps 4 and 5 of the recipe: first decide whether to stop, then wait.",
-            "`if not should_retry(e.code) or attempt == tries - 1:` and under it, further in, `raise`.",
-            "After that `if`, at the same depth as it: `time.sleep(base * 2 ** attempt)`. Then the loop goes round by itself.",
+            "`should_retry(e.code)` says whether the status of the error is worth another try; `attempt` counts the tries from 0, so which value does it have on the last one? `raise` on a line of its own passes the error on, and `time.sleep(seconds)` waits.",
+            "First `if not should_retry(e.code) or ___:`, with `raise` under it, further in; the wait comes after it.",
         ],
         why="""```python
 def ask_again(url, question, tries, base):

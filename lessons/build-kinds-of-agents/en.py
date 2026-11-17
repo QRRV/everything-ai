@@ -197,8 +197,8 @@ def hints_report():
         "report",
         [
             "Two things can happen for each case: `fn` gives back a value, which can be wrong, or it stops with an error. `try` and `except` handle the second; inside the `try`, compare the value.",
-            "In the `try`: `got = fn(argument)`, then `if got != expected:` with `failed.append(...)` of `call`, `\" gave \"`, `str(got)`, `\", expected \"`, `str(expected)` and `\".\"`, joined with `+`.",
-            "`try:`, `got = fn(argument)`, `if got != expected:`, `failed.append(call + \" gave \" + str(got) + \", expected \" + str(expected) + \".\")`; then `except Exception as e:` with `failed.append(call + \" stopped with an error: \" + str(e) + \".\")`.",
+            "In the `try`, keep what `fn(argument)` gives in `got`, and compare it with `expected`. The line for `failed` joins `call`, `\" gave \"`, `str(got)`, `\", expected \"`, `str(expected)` and `\".\"` with `+`.",
+            "In the `try`, once `got` holds the value: `if ___:`, with the `failed.append(...)` under it.",
         ],
         why="""```python
 def test_report(name, fn, cases):
@@ -253,8 +253,8 @@ def hints_unread():
         "unread",
         [
             "A part such as `\"5]. On Sunday …\"` starts with the number. Cut it at `]`, and keep what comes before.",
-            "`part.split(\"]\")[0]` is the text of the number; `int` makes a number of it. Then test it against both lists with `not in`, joined with `and`.",
-            "`number = int(part.split(\"]\")[0])`, then `if number not in opened and number not in missing:` with `missing.append(number)` under it.",
+            "`part.split(\"]\")` gives a list of the pieces around `]`, and `int` makes a number of a text. Then test the number against both lists with `not in`, joined with `and`.",
+            "First `number = int(___)`, then the `if` with `missing.append(number)` under it.",
         ],
         why="""```python
 def unread(answer, opened):
@@ -304,8 +304,8 @@ def hints_pay():
         "may-pay",
         [
             "A shop outside the mandate rules the whole cart out, whatever it costs, so that check comes first: inside the loop, for each item. The total is known only after the loop.",
-            "In the loop, before the line with `total`: `if item[\"shop\"] not in mandate[\"shops\"]:` with `return \"no\"`. After the loop: `\"ask\"` when `total` is above `mandate[\"max\"]`, else `\"yes\"`.",
-            "In the loop: `if item[\"shop\"] not in mandate[\"shops\"]:` and `return \"no\"`; after it: `if total > mandate[\"max\"]:` with `return \"ask\"`, and `return \"yes\"`.",
+            "In the loop, before the line with `total`: `return \"no\"` when the item's `\"shop\"` is not in `mandate[\"shops\"]`. After the loop: `\"ask\"` when `total` is above `mandate[\"max\"]`, else `\"yes\"`.",
+            "In the loop, before the line with `total`: `if ___:`, with `return \"no\"` under it.",
         ],
         why="""```python
 def may_pay(cart, mandate):

@@ -188,7 +188,7 @@ def hints_words():
         [
             "Er veranderen twee dingen voordat de set gemaakt wordt: de hele tekst wordt klein, en elk woord verliest de leestekens aan zijn uiteinden.",
             "`text.lower().split()` geeft de woorden klein geschreven. Een list comprehension, `[... for word in ...]`, verandert onderweg elk woord.",
-            "`[word.strip(\".,:;!?()\") for word in text.lower().split()]` geeft de schone woorden; zet er `set(...)` omheen.",
+            "Maak van de laatste regel `return set([___ for word in text.lower().split()])`.",
         ],
         why="""```python
 def words(text):
@@ -233,8 +233,8 @@ def hints_search():
         "search",
         [
             "Maak de set van de woorden van de vraag één keer, vóór de loop, en vergelijk hem in de loop met de woorden van elk punt.",
-            "`asked = words(question)` vóór de loop. `asked & words(point)` is de set van de woorden die ze delen, en `len(...)` telt ze.",
-            "In de loop: `found.append((len(asked & words(point)), point))`.",
+            "`asked = words(question)` vóór de loop. `&` tussen twee sets geeft de set van wat in allebei zit, en `len(...)` telt die.",
+            "In de loop: `found.append((___, point))`, met het aantal gedeelde woorden in het gat.",
         ],
         why="""```python
 def search(question, points, k):
@@ -256,9 +256,9 @@ def text_rag():
         mo.md(r"""
         ### Oefening 3. Een hele RAG
 
-        Het vak is de `ask` van [Een model aanroepen over HTTP](/course/open/build-call-api?lang=nl), met de system prompt van deze les, `SYSTEM`, voor de vraag en ruimte voor 60 tokens. Verander `rag(url, question)` zo dat hij tussen alle punten, `POINTS`, de drie vindt die de meeste woorden met de vraag delen, en de prompt die `with_sources` maakt van de vraag en die drie als bericht van de user stuurt. `SYSTEM`, `POINTS`, `search` en de `with_sources` van de vorige les zijn gegeven. De check draait je functie tegen een stand-in.
+        Het vak is de `ask` van [Een model aanroepen over HTTP](/course/open/build-call-api?lang=nl), met de system prompt van deze les, `SYSTEM`, voor de vraag en ruimte voor 60 tokens. Verander `rag(url, question)` zo dat hij tussen alle punten, `POINTS`, de drie vindt die de meeste woorden met de vraag delen, en de prompt die `with_sources` maakt van de vraag en die drie als bericht van de gebruiker stuurt. `SYSTEM`, `POINTS`, `search` en de `with_sources` van de vorige les zijn gegeven. De check draait je functie tegen een stand-in.
         """),
-        L.task("Vind drie punten met `search`, en stuur de vraag met die bronnen als bericht van de user."),
+        L.task("Vind drie punten met `search`, en stuur de vraag met die bronnen als bericht van de gebruiker."),
     ])
     return
 
@@ -283,8 +283,8 @@ def hints_rag():
         "rag",
         [
             "Er komen twee stappen vóór de berichten: vind de passages, en maak er dan de prompt van.",
-            "`search(question, POINTS, 3)` geeft de drie punten, en `with_sources(question, passages)` maakt er de prompt van.",
-            "`passages = search(question, POINTS, 3)` vóór `messages`, en in het bericht van de user `\"content\": with_sources(question, passages)`.",
+            "`search` met `POINTS` en 3 geeft de drie punten, en `with_sources` maakt de prompt van de vraag en die punten.",
+            "`passages = search(question, POINTS, 3)` vóór `messages`, en als bericht van de gebruiker `{\"role\": \"user\", \"content\": ___}`.",
         ],
         why="""```python
 import json

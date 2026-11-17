@@ -231,8 +231,8 @@ def hints_dot():
         "dot",
         [
             "Begin met een totaal van 0, en loop door de posities van `a` met een `for`-loop die telt, zoals in de tabel hierboven.",
-            "`for (let i = 0; i < a.length; i++) { ... }` gaat langs elke positie; tel tussen de accolades `a[i] * b[i]` op bij het totaal.",
-            "`let total = 0;` vóór de loop, `total += a[i] * b[i];` erin, en `return total;` erna.",
+            "Een `for`-loop die telt, `for (let i = 0; i < a.length; i++) { ... }`, gaat langs elke positie; tel tussen de accolades het product van de twee getallen op positie `i` op bij het totaal, met `+=`.",
+            "Tussen de accolades van de loop: `total += ___;`.",
         ],
         why="""```javascript
 function dot(a, b) {
@@ -289,8 +289,8 @@ def hints_sum():
         "sumFrom",
         [
             "Volg het uitgewerkte voorbeeld: eerst het antwoord van `fetch`, dan de JSON ervan, dan een loop over de lijst.",
-            "`const numbers = await response.json();` geeft de lijst. Tel daarna de getallen op met `for (const number of numbers)`.",
-            "`const response = await fetch(url);` en `const numbers = await response.json();`, dan `let total = 0;`, de loop met `total += number;`, en `return total;`.",
+            "`await` wacht op elke stap: eerst het antwoord van `fetch(url)`, dan de JSON ervan, die `.json()` van dat antwoord geeft. Tel daarna de getallen op met `for (const number of numbers)`.",
+            "De tweede regel: `const numbers = await ___;`.",
         ],
         why="""```javascript
 async function sumFrom(url) {

@@ -191,8 +191,8 @@ def hints_mark():
         "mark",
         [
             "Before the `return`, make the email clean: no `<email>` and no `</email>` left in it.",
-            "`email.replace(\"</email>\", \"\")` gives the email without that marker; do the same for `<email>`, and keep the result in `email`.",
-            "`email = email.replace(\"<email>\", \"\").replace(\"</email>\", \"\")`, and then the `return` as it was.",
+            "`text.replace(a, b)` gives the text with every `a` replaced by `b`; replacing by `\"\"` takes it out. Do it for both markers, and keep the result in `email`.",
+            "`email = email.replace(\"<email>\", \"\").replace(___)`, and then the `return` as it was.",
         ],
         why="""```python
 def mark(email):
@@ -238,8 +238,8 @@ def hints_label():
         "label_of",
         [
             "Make the answer comparable first, then ask whether it is one of `LABELS`; anything else gets `None`.",
-            "`.strip().lower()` on the content gives the answer without spaces around it and in small letters; `said in LABELS` is `True` when it is one of the four.",
-            "`said = answer[\"choices\"][0][\"message\"][\"content\"].strip().lower()`, then `if said in LABELS:` with `return said` under it, and at the end `return None`.",
+            "`.strip().lower()` on the content gives the answer without spaces around it and in small letters; keep it in `said`. `in` tells whether a value is in a list, such as `LABELS`.",
+            "Once the answer is in `said`: `if ___:`, with `return said` under it; at the end, `None` for the rest.",
         ],
         why="""```python
 import json

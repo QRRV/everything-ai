@@ -199,7 +199,7 @@ def hints_server():
         [
             "Beide methodes eindigen met `return result(message, {...})`, met tussen de accolades wat in het result hoort. `result` zet zelf `resultType` en de `_meta` van de server erbij.",
             "Bij `tools/call`: neem `name = params.get(\"name\")`; staat die niet in `FUNCTIONS`, dan `return error(message, -32602, \"Unknown tool: \" + str(name))`; anders voer je `FUNCTIONS[name](params.get(\"arguments\") or {})` uit. `text.startswith(\"Error\")` is `True` als de tekst begint met `Error`.",
-            "`return result(message, {\"tools\": TOOLS, \"ttlMs\": 300000, \"cacheScope\": \"public\"})`, en na het uitvoeren van de tool: `content = [{\"type\": \"text\", \"text\": text}]` en `return result(message, {\"content\": content, \"isError\": text.startswith(\"Error\")})`.",
+            "Na het uitvoeren van de tool: `return result(message, {\"content\": ___, \"isError\": text.startswith(\"Error\")})`, met in het gat een lijst met één tekstdeel.",
         ],
         why="""```python
     if message["method"] == "tools/list":
@@ -252,7 +252,7 @@ def hints_call():
         [
             "Het request is een dictionary met vier keys; de naam en de arguments van de tool gaan in `params`, naast `_meta`. Het antwoord is ook een dictionary: kijk of het de key `\"error\"` heeft.",
             "`if \"error\" in answer:` en dan `return \"Error: \" + answer[\"error\"][\"message\"]`. De delen staan in `answer[\"result\"][\"content\"]`; houd `part[\"text\"]` over van elk deel waarvan `part[\"type\"]` gelijk is aan `\"text\"`.",
-            "`request = {\"jsonrpc\": \"2.0\", \"id\": number, \"method\": \"tools/call\", \"params\": {\"name\": name, \"arguments\": arguments, \"_meta\": META}}`, en aan het eind `texts = [part[\"text\"] for part in answer[\"result\"][\"content\"] if part[\"type\"] == \"text\"]` en `return \"\\n\".join(texts)`.",
+            "`request = {\"jsonrpc\": \"2.0\", \"id\": number, \"method\": \"tools/call\", \"params\": ___}`, met in het gat een eigen dictionary.",
         ],
         why="""```python
 def call_tool(send, number, name, arguments):

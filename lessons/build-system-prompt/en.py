@@ -237,7 +237,7 @@ def hints_with():
         [
             "Two changes to the box: what `new` starts with, and which messages the loop copies.",
             "`new` starts as a list with one dictionary in it, with the keys `\"role\"` and `\"content\"`. In the loop, an `if` on `message[\"role\"]` decides whether a message goes into `new`.",
-            "`new = [{\"role\": \"system\", \"content\": system}]`, and in the loop `if message[\"role\"] != \"system\":` above `new.append(message)`.",
+            "`new = [{\"role\": \"system\", \"content\": system}]`, and in the loop `if message[\"role\"] ___:` above `new.append(message)`, which moves one step further in.",
         ],
         why="""```python
 def with_system(messages, system):
@@ -286,8 +286,8 @@ def hints_json():
         "ask_json",
         [
             "The prefill is one more message in `messages`, after the question. The answer that comes back holds only what comes after it.",
-            "The message is `{\"role\": \"assistant\", \"content\": start}`, the second item of the list. The last line puts `start +` in front of the text.",
-            "`messages = [{\"role\": \"user\", \"content\": question}, {\"role\": \"assistant\", \"content\": start}]`, and `return start + answer[\"choices\"][0][\"message\"][\"content\"]`.",
+            "The prefill is a message with the role `assistant` and `start` as its content, the second item of the list. The last line puts `start +` in front of the text.",
+            "`messages = [{\"role\": \"user\", \"content\": question}, ___]`, and `start +` at the front of the last line.",
         ],
         why="""```python
 def ask_json(url, question, start):

@@ -233,7 +233,7 @@ def hints_piece():
         [
             "Steps 4 and 5 of the recipe: first the lines without a piece, then the JSON.",
             "`line[:6]` is the start of the line: if that is not `\"data: \"`, or `line.strip()` is `\"data: [DONE]\"`, return `\"\"`. Then `chunk = json.loads(line[6:])`.",
-            "`delta = chunk[\"choices\"][0][\"delta\"]`; then `if \"content\" in delta:` return `delta[\"content\"]`, and after it `return \"\"`.",
+            "`delta = ___`; then `if \"content\" in delta:` return `delta[\"content\"]`, and after it `return \"\"`.",
         ],
         why="""```python
 def piece(line):
@@ -285,7 +285,7 @@ def hints_stream():
         [
             "Steps 1 and 3 of the recipe: the body asks for the stream, the loop reads it.",
             "In the body: `\"stream\": True`. In the `with`: `for line in response:`, and in that loop `text = piece(line.decode())`.",
-            "After `text = piece(line.decode())`, still in the loop: `if text:` then `pieces.append(text)`. The `return pieces` is there already.",
+            "After `text = piece(line.decode())`, still in the loop: `if ___:` with `pieces.append(text)` under it. The `return pieces` is there already.",
         ],
         why="""```python
 def stream(url, question):

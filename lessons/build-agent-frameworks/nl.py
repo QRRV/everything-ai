@@ -208,8 +208,8 @@ def hints_tool():
         "tool-from",
         [
             "Kijk hoe `convert` met de hand geschreven is in Tools als JSON: elke parameter onder `\"properties\"` is een kleine dictionary, en de description is één zin.",
-            "Voor een parameter is die dictionary `{\"type\": kind}`, onder zijn naam in `properties`. Voor de description: haal de spaties eraf met `.strip()`, knip de tekst bij elke `\"\\n\"` met `.split`, en houd het eerste stuk.",
-            "`properties[param] = {\"type\": kind}` in de loop, en `\"description\": doc.strip().split(\"\\n\")[0],` in de definition.",
+            "Voor een parameter is die dictionary `{\"type\": kind}`, onder zijn naam in `properties`. Voor de description: `.strip()` haalt de spaties van de uiteinden van een tekst, en `.split(\"\\n\")` knipt hem in een lijst van zijn regels.",
+            "In de definition, de eerste regel van de docstring: `\"description\": doc.___[0],`.",
         ],
         why="""```python
 def tool_from(name, doc, params):
@@ -262,7 +262,7 @@ def hints_graph():
         [
             "Twee dingen stoppen de loop: de node `\"END\"`, en de grens. Zet ze allebei in de voorwaarde van de `while`, verbonden met `and`.",
             "In elke ronde geeft de functie van de node de nieuwe state: `nodes[node](state)`. Daarna geeft de edge van die node de naam van de volgende: `edges[node](state)`, met de nieuwe state.",
-            "`while node != \"END\" and steps < limit:`, en daaronder `state = nodes[node](state)`, `node = edges[node](state)` en `steps = steps + 1`.",
+            "Begin met `while node != \"END\" and ___:`, en zet de drie regels eronder.",
         ],
         why="""```python
 def run_graph(nodes, edges, state, start, limit):

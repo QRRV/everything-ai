@@ -200,7 +200,7 @@ def hints_versions():
         [
             "Take each line apart in three steps: the spaces around it, then what the list puts in front, then the spaces after that. An empty line ends up as `\"\"`.",
             "`line.startswith(\"- \")` says whether the line starts with a dash, and `line[2:]` cuts off the first two characters. For a number: `line[0].isdigit() and line[1] == \".\"`, once you know the line has at least two characters.",
-            "In the loop: `line = line.strip()`, then `if line.startswith(\"- \"):` with `line = line[2:]`, an `elif len(line) > 1 and line[0].isdigit() and line[1] == \".\":` with the same, then `line = line.strip()` again, and `if line != \"\":` with `found.append(line)`.",
+            "In the loop: first `line = line.strip()`, then `if line.startswith(\"- \"):` with `line = line[2:]`, and `elif ___ and line[0].isdigit() and line[1] == \".\":` with the same; then `strip()` again, and add the line only when it is not `\"\"`.",
         ],
         why="""```python
 def versions(text):
@@ -264,7 +264,7 @@ def hints_multi():
         [
             "It is the merge of [Words and meaning together](/course/open/build-hybrid-search?lang=en) again, now with a ranking for every text instead of one for words and one for meaning.",
             "`scores = rrf(rankings, 60)` gives a dict of point and score. Pairs `(score, text)` sort by the score.",
-            "Replace the last line by three: `scores = rrf(rankings, 60)`, then `best = sorted([(score, text) for text, score in scores.items()], reverse=True)`, and return `[text for score, text in best[:n]]`.",
+            "After `scores = rrf(rankings, 60)`: `best = sorted([(score, text) for text, score in ___], reverse=True)`, and give back the texts of `best[:n]`.",
         ],
         why="""```python
 def multi_search(texts, n):

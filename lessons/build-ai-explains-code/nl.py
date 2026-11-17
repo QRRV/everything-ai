@@ -313,7 +313,7 @@ def hints_rename_count():
         [
             "Zoek eerst uit wat `f` doet: wat is `a`, wat is `b`, en wat telt `c`?",
             "`a` is een lijst getallen, `b` de grens, `d` één getal uit de lijst, en `c` telt de getallen boven de grens. Hernoem elk ervan overal waar het gebruikt wordt.",
-            "`def count_above(numbers, limit):`, dan `count`, `for number in numbers:` en `if number > limit:`; de regels blijven hetzelfde, alleen de namen veranderen.",
+            "De regel van de loop wordt `for number in ___:`, met de nieuwe naam van `a`; hernoem `b` en `c` op dezelfde manier, overal waar ze gebruikt worden.",
         ],
         why="`count_above(numbers, limit)` met `count`, `number` en `if number > limit:` geeft voor elke lijst wat `f` gaf: alleen de namen veranderden. `count_above([3, 8, 5, 10], 4)` geeft `3`.",
     )

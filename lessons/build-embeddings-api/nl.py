@@ -229,8 +229,8 @@ def hints_embed():
         "embed",
         [
             "Stap 2 en 3 van het recept: wat erin gaat, waar het heen gaat, en wat je uit het antwoord haalt.",
-            "De teksten gaan onder `\"input\"` als de lijst zelf; het endpoint is `/embeddings`, na `url`. In het antwoord heeft elk item onder `\"data\"` zijn getallen onder `\"embedding\"`.",
-            "`\"input\": texts`, `url + \"/embeddings\"`, en `return [item[...] for item in answer[...]]`, met de goede keys op de plaats van de puntjes.",
+            "De teksten gaan onder `\"input\"` als de lijst zelf; het endpoint is `/embeddings`, na `url`. In het antwoord bevatten de items onder `\"data\"` de embeddings, één item per tekst.",
+            "De laatste `...`: `return [___ for item in answer[\"data\"]]`.",
         ],
         why="""```python
 def embed(url, texts):
@@ -281,7 +281,7 @@ def hints_best():
         [
             "Stap 1 en 4 van het recept: eerst één lijst met de vraag vóór de teksten, dan voor elke tekst het inproduct met de vraag.",
             "`[question] + texts` is die lijst, en je `embed` geeft de embeddings ervan. `vectors[0]` is dan die van de vraag; op welke plek staat de embedding van `texts[i]`?",
-            "`vectors = embed(url, [question] + texts)`, en `score = np.dot(q, vectors[...])`, met de plek van `texts[i]` op de plaats van de puntjes.",
+            "De tweede `...`: `score = np.dot(q, vectors[___])`, met de plek van `texts[i]` in het gat.",
         ],
         why="""```python
 def best_match(url, question, texts):

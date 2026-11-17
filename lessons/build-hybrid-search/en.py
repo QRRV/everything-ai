@@ -191,7 +191,7 @@ def hints_rrf():
         [
             "Each time a text is in a ranking, its score grows by `1 / (k + rank)`. The rank of `ranking[place]` is one more than `place`: the first text has `place` 0 and rank 1.",
             "Add one line in the inner loop, after the `if` and at the same depth as the `if`, so that it runs for every text: `scores[text] = scores[text] + ...`.",
-            "The new line is `scores[text] = scores[text] + 1 / (k + ...)`, with `place + 1` as the rank.",
+            "The new line: `scores[text] = scores[text] + 1 / (k + ___)`, with the rank in the gap.",
         ],
         why="""```python
 def rrf(rankings, k):
@@ -251,7 +251,7 @@ def hints_hybrid():
         [
             "Give `rrf` both rankings, and then take the `n` texts of its dict with the highest score.",
             "`rrf([words, meaning], 60)` gives a dict from text to score. A list of pairs `(score, text)`, sorted with `reverse=True`, has the highest score first.",
-            "Replace the last line by three: `scores = rrf(...)`, then `best = sorted([(score, text) for text, score in scores.items()], reverse=True)`, then return the texts of `best[:n]`.",
+            "`best = sorted([(score, text) for text, score in ___], reverse=True)`, then give back the texts of `best[:n]`.",
         ],
         why="""```python
 def hybrid_search(question, q, n):

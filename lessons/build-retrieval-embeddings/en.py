@@ -190,8 +190,8 @@ def hints_search():
         "meaning_search",
         [
             "The score of point `i` compares its own embedding, row `i` of `vectors`, with the embedding of the question.",
-            "`vectors[i] @ q` is the dot product of row `i` with `q`: one number, the score of point `i`.",
-            "In the loop: `found.append((vectors[i] @ q, points[i]))`.",
+            "`a @ b` is the dot product of two arrays `a` and `b`: one number. That number, for row `i` and `q`, is the score of point `i`.",
+            "In the loop: `found.append((___, points[i]))`.",
         ],
         why="""```python
 def meaning_search(q, vectors, points, k):
@@ -239,8 +239,8 @@ def hints_retrieve():
         "retrieve",
         [
             "The embeddings of the points are ready in `VECTORS`; for each question, only the question itself still needs one.",
-            "`embed(url, [question])` gives a list with one embedding; `[0]` takes it out, and `np.array(...)` makes an array of it.",
-            "`q = np.array(embed(url, [question])[0])`, and then `return meaning_search(q, VECTORS, POINTS, k)`.",
+            "Send `embed` a list with only the question: you get a list with one embedding back. `[0]` takes it out, and `np.array(...)` makes an array of it.",
+            "`q = np.array(___)`, and then `return meaning_search(q, VECTORS, POINTS, k)`.",
         ],
         why="""```python
 import numpy as np

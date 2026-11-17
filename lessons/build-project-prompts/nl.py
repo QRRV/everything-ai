@@ -219,8 +219,8 @@ def hints_prompts():
         "messages_for",
         [
             "Twee stappen: zoek de ingang van de template op zijn naam op, en maak een lijst van twee dictionaries.",
-            "`template = TEMPLATES[name]`; de tekst van de gebruiker is `template[\"text\"].format(text=text)`.",
-            "`return [{\"role\": \"system\", \"content\": SYSTEM}, ...]`, met als tweede bericht dat van de gebruiker, met de ingevulde template als content.",
+            "`template = TEMPLATES[name]` zoekt de ingang op; de string met `{text}` erin staat onder een van zijn keys, en `.format(text=text)` vult hem in.",
+            "`return [{\"role\": \"system\", \"content\": SYSTEM},` en op de volgende regel `{\"role\": \"user\", \"content\": ___}]`.",
         ],
         why="""```python
 def messages_for(name, text):
@@ -269,7 +269,7 @@ def hints_ask():
         [
             "Het is de loop van je `ask_json` in [JSON waar je op kunt bouwen](/course/open/build-structured-output?lang=nl), met `chat` in plaats van `ask`.",
             "`found = problems(answer, schema)`; als `found == []`, geef je `json.loads(answer)` terug.",
-            "Anders: `fix = \"Fix these problems: \" + \"; \".join(found) + \". Answer with the whole JSON again.\"`, en `messages = messages + [...]` met het antwoord als bericht van de assistant en `fix` als bericht van de gebruiker.",
+            "Anders: `fix = \"Fix these problems: \" + ___ + \". Answer with the whole JSON again.\"`, en `messages = messages + [...]` met het antwoord als bericht van de assistant en `fix` als bericht van de gebruiker.",
         ],
         why="""```python
     for attempt in range(tries):

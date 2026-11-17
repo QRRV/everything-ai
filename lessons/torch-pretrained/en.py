@@ -264,7 +264,7 @@ def hints_load():
         [
             "Follow step 3 of the worked example, with `path` for the file.",
             "First the numbers from the file, `torch.load(path, weights_only=True)`; then a new model, `DigitCNN()`.",
-            "`model.load_state_dict(state)` copies the numbers into the model, and `model.eval()` switches it to eval mode.",
+            "The third line, `model.___(state)`, copies the numbers into the model; the fourth switches it to eval mode.",
         ],
         why="A new `DigitCNN()` starts with random numbers; `load_state_dict` replaces every one of them by the numbers of the file. Only then does it read digits as the card says.",
     )

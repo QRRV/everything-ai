@@ -207,8 +207,8 @@ def hints_improve():
         "improve",
         [
             "Two cases after `problem = check(answer)`: no problem, and a problem. In the first, the loop is done. In the second, the next round must know what went wrong.",
-            "The model's own answer goes into `messages` with the role `assistant`, what is wrong with it after that with the role `user`. Then the loop asks again.",
-            "`if problem is None:` with `return answer` under it; then `messages = messages + [...]` with two dictionaries: `{\"role\": \"assistant\", \"content\": answer}` and `{\"role\": \"user\", \"content\": problem}`.",
+            "Both go into `messages` as dictionaries like the first one: the model's own answer, then what is wrong with it, each with the role of whoever said it. Then the loop asks again.",
+            "After the `if`: `messages = messages + [{\"role\": ___, \"content\": answer}, {\"role\": ___, \"content\": problem}]`.",
         ],
         why="""```python
 def improve(ask, task, check, rounds):
@@ -261,8 +261,8 @@ def hints_orchestrate():
         "orchestrate",
         [
             "The plan decides how many workers there are: one per dish in `plan[\"dishes\"]`. A loop over that list does it, however long it is.",
-            "In the loop, skip a dish that is not in `DISHES`; give every other dish to `worker`, and append its result to `results`.",
-            "`for dish in plan[\"dishes\"]:`, with `if dish in DISHES:` under it, and under that `results.append(worker(dish))`.",
+            "In the loop, skip a dish the kitchen does not know; give every other dish to `worker`, and append its result to `results`.",
+            "`for dish in plan[\"dishes\"]:`, then `if ___:`, then `results.append(worker(dish))`.",
         ],
         why="""```python
 def orchestrate(ask, question, worker):

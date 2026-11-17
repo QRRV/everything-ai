@@ -258,7 +258,7 @@ def hints_helpful():
         [
             "Een fout wordt gelezen door een model dat het opnieuw wil proberen. Wat moet het weten? Welk woord van zijn call niet klopte, en wat het in plaats daarvan mag schrijven.",
             "Plak de eenheid die het model schreef in de tekst met `+`: `\"Error: unknown unit '\" + a + ...`. De vier eenheden kunnen gewoon in de tekst staan.",
-            "`return \"Error: unknown unit '\" + a + \"'. Use km, mi, kg or lb.\"`, hetzelfde met `b`, en bij de laatste: `\"Error: cannot convert \" + a + \" to \" + b + ...`, met welke eenheden bij elkaar horen.",
+            "Bij de laatste `if`: `return \"Error: cannot convert \" + a + \" to \" + b + ___`, met in het gat welke eenheden bij elkaar horen. De eerste twee eindigen op `+ \"'. Use km, mi, kg or lb.\"`.",
         ],
         why="""```python
 def convert(arguments):

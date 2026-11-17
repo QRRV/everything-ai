@@ -577,7 +577,7 @@ EXERCISES = {
             "no-answer": {"en": "With `{call}`, the second request lacks the answer that did not fit. Add it as a message with the role `assistant` and `text` as its content, so the model sees what it wrote.",
                           "nl": "Met `{call}` mist het tweede request het antwoord dat niet paste. Voeg het toe als bericht met de rol `assistant` en `text` als content, zodat het model ziet wat het schreef."},
             "no-problems": {"en": "With `{call}`, the second request has no message of the user that names every problem `problems` found. Put them in it, joined with `\"; \".join(found)`.",
-                            "nl": "Met `{call}` heeft het tweede request geen bericht van de user dat elk probleem noemt dat `problems` vond. Zet ze erin, samengevoegd met `\"; \".join(found)`."},
+                            "nl": "Met `{call}` heeft het tweede request geen bericht van de gebruiker dat elk probleem noemt dat `problems` vond. Zet ze erin, samengevoegd met `\"; \".join(found)`."},
             "order": {"en": "With `{call}`, your message with the problems comes before the answer it is about. Keep the order of a conversation: first the assistant's answer, then your message.",
                       "nl": "Met `{call}` komt je bericht met de problemen vóór het antwoord waar het over gaat. Houd de volgorde van een gesprek aan: eerst het antwoord van de assistant, dan je bericht."},
             "tries": {"en": "With `{call}`, your function asked another number of times than it should: once more after each answer that does not fit, and at most `tries` times in all.",

@@ -213,7 +213,7 @@ def hints_parse():
         [
             "For each label, two questions: is it in the answer, and is it longer than the best one so far?",
             "`label in answer.lower()` says whether the label is in the answer, whatever its capitals; `len(label) > len(best)` whether it is longer, which only works once `best` is not `None` any more.",
-            "`if label in answer.lower() and (best is None or len(label) > len(best)):`, and under it, further in, `best = label`.",
+            "`if label in answer.lower() and (___ or len(label) > len(best)):`, with `best = label` under it, further in.",
         ],
         why="""```python
 def parse_label(answer, labels):
@@ -262,8 +262,8 @@ def hints_label():
         "label",
         [
             "Steps 2 and 3 of the recipe: two messages, and then the label out of the text of the answer.",
-            "`messages` is a list of two dictionaries: one with the role `\"system\"` and `SYSTEM`, one with the role `\"user\"` and `message`. The text of the answer is `answer[\"choices\"][0][\"message\"][\"content\"]`.",
-            "`messages = [{\"role\": \"system\", \"content\": SYSTEM}, {\"role\": \"user\", \"content\": message}]`, and `return parse_label(..., LABELS)`, with the text of the answer in place of the dots.",
+            "`messages` is a list of two dictionaries: one with the role `\"system\"` and `SYSTEM`, one with the role `\"user\"` and `message`. The text of the answer sits under `\"choices\"`: in the first choice, its `\"message\"`, and there its `\"content\"`.",
+            "The last line: `return parse_label(___, LABELS)`, with the text of the answer in the gap.",
         ],
         why="""```python
 def label(url, message):

@@ -186,8 +186,8 @@ def hints_worse():
         "worse",
         [
             "Een naam hoort in de lijst als twee dingen tegelijk gelden: hij was eerst goed, en hij is nu fout.",
-            "Zet een `if` om de `append`, met beide tests verbonden door `and`: `old[name]` en `not new[name]`.",
-            "In de loop: `if old[name] and not new[name]:` met `names.append(name)` eronder.",
+            "Zet een `if` om de `append`, met twee tests verbonden door `and`: een op `old[name]` en een op `new[name]`.",
+            "In de loop: `if old[name] and ___:`, met `names.append(name)` een stap verder in.",
         ],
         why="""```python
 def worse(old, new):
@@ -236,8 +236,8 @@ def hints_run():
         "run_examples",
         [
             "Een dictionary krijgt een nieuwe key, of een nieuwe waarde voor een key die hij al heeft, met `body[key] = value`. Doe dat voor elke key in `settings`.",
-            "Direct na de regel met `body = ...`: een `for`-loop over `settings`, met `body[key] = settings[key]` erin. Aan het eind `ok(name, answer[\"choices\"][0][\"message\"][\"content\"])`.",
-            "Onder `body = ...`: `for key in settings:` met `body[key] = settings[key]` eronder. De laatste regel in de loop: `results[name] = ok(name, answer[\"choices\"][0][\"message\"][\"content\"])`.",
+            "Direct na de regel met `body = ...`: een `for`-loop over `settings` die elke key met zijn waarde in `body` zet. Zet aan het eind `ok(name, ...)` om de tekst van het antwoord die het vak nu bewaart.",
+            "Onder `body = ...`: `for key in settings:`, met `body[key] = ___` een stap verder in.",
         ],
         why="""```python
 import json

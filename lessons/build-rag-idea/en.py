@@ -186,7 +186,7 @@ def hints_sources():
         [
             "Two changes: a number that goes up by one with every passage, and a test at the start for a list without passages.",
             "Start a counter at 1 before the loop, put it in front of each passage with an f-string, and add 1 after each one. `len(passages) == 0` is true for an empty list.",
-            "Before the loop: `n = 1`. In the loop: `text = text + f\"[{n}] {passage}\\n\"` and `n = n + 1`. At the very start: `if len(passages) == 0:` with `return question` under it.",
+            "In the loop: `text = text + f\"___ {passage}\\n\"`, and then `n = n + 1`.",
         ],
         why="""```python
 def with_sources(question, passages):
@@ -238,8 +238,8 @@ def hints_ask():
         "ask",
         [
             "Only what goes into the message changes; the request and the answer stay as they are.",
-            "Make the prompt first with `with_sources(question, passages)`, and put that in the message instead of `question`.",
-            "`prompt = with_sources(question, passages)` before `body`, and in `body` the message `{\"role\": \"user\", \"content\": prompt}`.",
+            "Make the prompt first with `with_sources`, from the question and the passages, and put that in the message instead of `question`.",
+            "`prompt = ___` before `body`, and in `body` the message `{\"role\": \"user\", \"content\": prompt}`.",
         ],
         why="""```python
 import json

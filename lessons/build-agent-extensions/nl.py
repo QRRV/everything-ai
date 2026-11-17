@@ -197,8 +197,8 @@ def hints_front():
         "front",
         [
             "Kijk naar elke regel: staat er `: ` in, splits hem dan in twee delen, alleen bij de eerste `: `.",
-            "`line.split(\": \", 1)` splitst bij de eerste `: ` en geeft een lijst van twee delen; `.strip()` haalt de spaties van de uiteinden van een tekst.",
-            "`if \": \" in line:`, dan `key, value = line.split(\": \", 1)` en `found[key] = value.strip()`.",
+            "`line.split(\": \")` splitst bij elke `: `; met een tweede waarde, zoals in `split(\": \", n)`, splitst hij hooguit `n` keer. `.strip()` haalt de spaties van de uiteinden van een tekst.",
+            "Splits elke regel met `: ` erin alleen bij de eerste `: `: `key, value = line.split(\": \", ___)`.",
         ],
         why="""```python
 def front(text):
@@ -253,7 +253,7 @@ def hints_openapi():
         [
             "Loop over `operation.get(\"parameters\", [])`: `.get` met een tweede waarde geeft een lege lijst als de key er niet is.",
             "`schema = dict(p[\"schema\"])` maakt een kopie die je mag veranderen; `schema[\"description\"] = p[\"description\"]` geeft hem de beschrijving. `p.get(\"required\")` is `None` als de key er niet is.",
-            "`for p in operation.get(\"parameters\", []):`, dan de twee regels met `schema`, `properties[p[\"name\"]] = schema`, en `if p.get(\"required\"):` met `required.append(p[\"name\"])`.",
+            "Zet na de twee regels met `schema` de kopie op zijn plek: `properties[___] = schema`.",
         ],
         why="""```python
             for p in operation.get("parameters", []):

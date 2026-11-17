@@ -178,8 +178,8 @@ def hints_chunk():
         "chunk",
         [
             "Two changes: the step from one chunk to the next, and a test right after `append` whether this chunk already reached the end.",
-            "The next start is `start + size - overlap`. This chunk reaches the end when `start + size >= len(words)`; then `break`.",
-            "After the `append`: `if start + size >= len(words):` with `break` under it, then `start = start + size - overlap`.",
+            "The next start is `start + size - overlap`. This chunk reaches the end when `start + size`, where the next one would begin without overlap, is at or past `len(words)`; then `break`.",
+            "Right after the `append`: `if ___:`, with `break` one step further in.",
         ],
         why="""```python
 def chunk(text, size, overlap):
@@ -266,8 +266,8 @@ def hints_paragraph():
         "by_paragraph",
         [
             "Inside the loop, decide per paragraph: is it too long or not? A long one goes in as several pieces, a short one as it is.",
-            "`len(paragraph.split())` counts its words. When that is more than `size`, go through `chunk(paragraph, size, 0)` and `append` each piece; otherwise `append` the paragraph.",
-            "`if len(paragraph.split()) > size:` with `for piece in chunk(paragraph, size, 0):` and `out.append(piece)` under it, then `else:` with `out.append(paragraph)`.",
+            "`split()` with nothing between its parentheses cuts a text into its words, and `len` counts them. When a paragraph has more than `size`, go through `chunk(paragraph, size, 0)` and `append` each piece; otherwise `append` the paragraph.",
+            "`if ___ > size:`, with the loop over the pieces under it, and `else:` with `out.append(paragraph)`.",
         ],
         why="""```python
 def by_paragraph(text, size):

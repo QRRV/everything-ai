@@ -200,7 +200,7 @@ def hints_cost():
         [
             "Tel twee dingen in één loop over `runs`: alle tokens, en hoeveel runs goed zijn.",
             "Begin met `tokens = 0` en `right = 0`. Tel in de loop `run[\"tokens\"]` op bij `tokens`, en 1 bij `right` als `run[\"right\"]` waar is. Geef na de loop `None` terug als `right == 0`.",
-            "Aan het eind: `return tokens * price_out / 1_000_000 / right`.",
+            "Aan het eind: `return tokens * ___ / right`.",
         ],
         why="""```python
 def cost_per_right(runs, price_out):
@@ -253,8 +253,8 @@ def hints_route():
         "route",
         [
             "Loop de vraag teken voor teken door, en stop bij het eerste cijfer.",
-            "`for ch in question:` geeft de tekens een voor een, en `ch in \"0123456789\"` is `True` als `ch` een van de cijfers is. Dan `return \"think\"`.",
-            "Na de loop, als er geen cijfer kwam: `return \"fast\"`.",
+            "`for ch in question:` geeft de tekens een voor een; `in` zegt of een teken in een tekst staat, dus een tekst met de tien cijfers zegt of `ch` een cijfer is.",
+            "In de loop: `if ___:`, met `return \"think\"` een stap verder in; het antwoord `\"fast\"` komt pas na de loop.",
         ],
         why="""```python
 def route(question):

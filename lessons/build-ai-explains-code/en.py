@@ -313,7 +313,7 @@ def hints_rename_count():
         [
             "First work out what `f` does: what is `a`, what is `b`, and what does `c` count?",
             "`a` is a list of numbers, `b` the limit, `d` one number from the list, and `c` counts the numbers above the limit. Rename each one everywhere it is used.",
-            "`def count_above(numbers, limit):`, then `count`, `for number in numbers:` and `if number > limit:`; the lines stay the same, only the names change.",
+            "The loop line becomes `for number in ___:`, with the new name of `a`; rename `b` and `c` the same way, everywhere they are used.",
         ],
         why="`count_above(numbers, limit)` with `count`, `number` and `if number > limit:` gives for every list what `f` gave: only the names changed. `count_above([3, 8, 5, 10], 4)` gives `3`.",
     )

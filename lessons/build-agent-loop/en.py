@@ -196,7 +196,7 @@ def hints_run_agent():
         [
             "Each round has two endings. An answer without tool calls ends the run. An answer with tool calls means: run them, and ask again with their results in the messages.",
             "`not` turns a test around: `not x` holds when `x` is `None` or an empty list. Add `message` to `messages` first, as it came. For each call in `message[\"tool_calls\"]`, read its arguments with `json.loads`, run `FUNCTIONS[...]` with the call's name, and add a message with the role `tool`.",
-            "`messages = messages + [message]`; then `if not message.get(\"tool_calls\"):` with `return message[\"content\"]`; then `for call in message[\"tool_calls\"]:`, with `arguments = json.loads(call[\"function\"][\"arguments\"])`, the result of `FUNCTIONS[call[\"function\"][\"name\"]](arguments)`, and `{\"role\": \"tool\", \"tool_call_id\": call[\"id\"], \"content\": result}` added to `messages`.",
+            "For each call, once `arguments` is read with `json.loads`: `result = FUNCTIONS[___](arguments)`.",
         ],
         why="""```python
 def run_agent(url, task, max_steps):
@@ -252,7 +252,7 @@ def hints_trace():
         [
             "A tool's message is simple: one line. An assistant's message is one of two kinds: with tool calls, or without. Tell them apart with `m.get(\"tool_calls\")`.",
             "With tool calls: when `m.get(\"content\")` has text, that is the thought, its own line; then one line per call. Without: one `\"Answer: \"` line.",
-            "`lines.append(\"Observation: \" + m[\"content\"])` for a tool; for an assistant, `if m.get(\"tool_calls\"):`, then `if m.get(\"content\"):` and a loop `for c in m[\"tool_calls\"]:` that appends `\"Action: \" + c[\"function\"][\"name\"] + \"(\" + c[\"function\"][\"arguments\"] + \")\"`; under `else:`, the `\"Answer: \"` line.",
+            "For each call `c`: `lines.append(\"Action: \" + c[\"function\"][\"name\"] + \"(\" + ___ + \")\")`.",
         ],
         why="""```python
 def trace(messages):

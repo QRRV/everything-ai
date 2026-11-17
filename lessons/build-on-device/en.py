@@ -226,8 +226,8 @@ def hints_download():
         "download_seconds",
         [
             "Follow the worked example, with the two names in place of the numbers.",
-            "`megabytes * 8` is the number of megabits. How many seconds do they take, at `megabits_per_second` megabits each second?",
-            "`return megabytes * 8 / ...`, with the speed in place of the dots.",
+            "A byte has 8 bits, so first turn the megabytes into megabits. How many seconds do they take, at `megabits_per_second` megabits each second?",
+            "Turn `return 0` into `return ___ / megabits_per_second`.",
         ],
         why="""```python
 def download_seconds(megabytes, megabits_per_second):
@@ -272,8 +272,8 @@ def hints_bits():
         "best_bits",
         [
             "A `for` loop over the list `[32, 16, 8, 4]` tries the most bits first. When none of them fits, the loop ends.",
-            "In the loop: the gigabytes are `params * bits / 8 / 1_000_000_000`, as in [Where a model runs](/course/open/build-where-models-run?lang=en). If they are at most `memory_gb`, give back `bits` at once.",
-            "In the loop: `if params * bits / 8 / 1_000_000_000 <= memory_gb:` with `return bits` under it. After the loop, not in it: `return None`.",
+            "In the loop: work out how many gigabytes the weights take at `bits` bits, as in [Where a model runs](/course/open/build-where-models-run?lang=en). If that is at most `memory_gb`, give back `bits` at once.",
+            "In the loop: `if ___ <= memory_gb:`, with `return bits` one step further in. Keep `return None` after the loop, not in it.",
         ],
         why="""```python
 def best_bits(params, memory_gb):

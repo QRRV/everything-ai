@@ -203,8 +203,8 @@ def hints_body():
         "body",
         [
             "Kijk naar de body in het plaatje van de aanroep van de course: die heeft drie keys.",
-            "`\"messages\"` is een lijst met één dictionary erin: `{\"role\": \"user\", \"content\": question}`.",
-            "`body = {\"model\": \"qwen3-0.6b\", \"messages\": [...], \"max_tokens\": 50}`, met het bericht van hint 2 in de lijst.",
+            "`\"messages\"` is een lijst met één dictionary erin: het bericht, met de keys `\"role\"` en `\"content\"`.",
+            "`body = {\"model\": \"qwen3-0.6b\", \"messages\": [___], \"max_tokens\": 50}`, met het bericht in het gat.",
         ],
         why="`body = {\"model\": \"qwen3-0.6b\", \"messages\": [{\"role\": \"user\", \"content\": question}], \"max_tokens\": 50}`: het model, het gesprek als lijst berichten, en het grootste aantal tokens dat het antwoord mag hebben.",
     )
@@ -245,7 +245,7 @@ def hints_ask():
         [
             "Stap 2 tot en met 5 van het recept: bytes, een request, versturen en lezen, de tekst.",
             "`data = json.dumps(body).encode()`, en dan `request = urllib.request.Request(url + \"/chat/completions\", data=data, headers={\"Content-Type\": \"application/json\"})`.",
-            "`with urllib.request.urlopen(request) as response:` en op de volgende regel, verder ingesprongen, `answer = json.loads(response.read())`; eindig met `return answer[\"choices\"][0][\"message\"][\"content\"]`.",
+            "Binnen het `with`-blok dat `request` verstuurt: `answer = json.loads(___)`.",
         ],
         why="""```python
 def ask(url, question):

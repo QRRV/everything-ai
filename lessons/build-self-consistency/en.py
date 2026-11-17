@@ -182,7 +182,7 @@ def hints_majority():
         [
             "Two steps: first count, without `None`; then walk through the counts and remember the answer with the most votes so far.",
             "Put the counting under `if answer is not None:`. Then start with `best = None`, and go through `counts`: an answer takes the place of `best` when `best` is still `None`, or when it has more votes than `best`.",
-            "After the counting: `best = None`, then `for answer in counts:` with `if best is None or counts[answer] > counts[best]:` and `best = answer` under it. At the end, `return best`.",
+            "After the counting: `best = None`, then `for answer in counts:` with `if best is None or ___:` and `best = answer` under it. At the end, `return best`.",
         ],
         why="""```python
 def majority(answers):
@@ -238,8 +238,8 @@ def hints_ask():
         "ask_many",
         [
             "Everything from `messages = ...` to `answers.append(...)` has to happen `n` times; only the seed changes each time.",
-            "Put those lines in a loop, `for i in range(n):`, four spaces further in, and use `i` as the seed.",
-            "`for i in range(n):` under `answers = []`, with the lines up to and including `answers.append(...)` under it, and `\"seed\": i` in the body. `return majority(answers)` stays after the loop.",
+            "Put those lines in a loop that runs `n` times, four spaces further in, and use its counter as the seed.",
+            "Under `answers = []`: `for i in ___:`, with the lines up to and including `answers.append(...)` under it, and `\"seed\": i` in the body; `return majority(answers)` stays after the loop.",
         ],
         why="""```python
 import json

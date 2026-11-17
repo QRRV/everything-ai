@@ -198,7 +198,7 @@ def hints_run():
         [
             "`subprocess.run` takes the command as a list, and the rest as keyword arguments: one for the folder, one for the environment variables, two for the output, one for the time limit. When the time is up, it stops the process and raises `subprocess.TimeoutExpired`.",
             "The keyword arguments are `cwd`, `env`, `capture_output`, `text` and `timeout`. Put the call, after `return`, in a `try:`, and catch the time limit with `except subprocess.TimeoutExpired:`.",
-            "`try:`, then `return subprocess.run(command, cwd=folder, env={}, capture_output=True, text=True, timeout=seconds)`, then `except subprocess.TimeoutExpired:` with `return None` under it.",
+            "In the `try:`: `return subprocess.run(command, cwd=folder, env=___, capture_output=True, text=True, timeout=seconds)`.",
         ],
         why="""```python
 def run(code, seconds):
@@ -250,7 +250,7 @@ def hints_result_text():
         [
             "Two tests before the last line, each with its own `return`: one on `done.returncode`, one on the length of `done.stdout`.",
             "`done.stderr.strip().split(\"\\n\")` gives the lines of the error, and `[-1]` the last of them. `done.stdout[:LIMIT]` is the first `LIMIT` characters, and `len(done.stdout) - LIMIT` is how many were cut.",
-            "`if done.returncode != 0:` with `lines = done.stderr.strip().split(\"\\n\")` and `return \"Error: \" + lines[-1]`; then `if len(done.stdout) > LIMIT:` with a `return` of `done.stdout[:LIMIT]`, plus a line with `str(len(done.stdout) - LIMIT)` in it.",
+            "For a long output, for instance: `return done.stdout[:LIMIT] + \"\\n(cut off: \" + ___ + \" more characters)\"`.",
         ],
         why="""```python
 def result_text(done, seconds):

@@ -367,7 +367,7 @@ def hints_ap():
         [
             "Go through the list with `for k in range(len(hits)):`, and keep two numbers: `found`, the true positives so far, and `sum_precision`, the precision added up so far. Both start at 0.",
             "At a true positive, `if hits[k]:`, first add 1 to `found`. The boxes so far are `k + 1`, as `k` starts at 0, so the precision is `found / (k + 1)`: add it to `sum_precision`.",
-            "After the loop, divide by the number of true boxes: `return sum_precision / total`. Not by `found`: a true box that is never found counts as 0.",
+            "After the loop, as far in as `for`: `return sum_precision / ___`. A true box that is never found counts as 0.",
         ],
         why="For the circles, the precision at the 8 true positives is 1/2, 2/3, 3/4, 4/5, 5/6, 6/7, 7/8 and 8/9. Added up that is 6.17, and divided by the 11 circles, 0.56.",
     )

@@ -238,7 +238,7 @@ def hints_json():
         [
             "`json.dumps` kan dicts, lijsten en getallen schrijven, maar geen tensors: maak eerst van elke tensor een lijst.",
             "`model.hidden.weight.tolist()` geeft de weights van de hidden layer als lijst van lijsten. Zet de vier lijsten in een dict met de keys `\"w1\"`, `\"b1\"`, `\"w2\"` en `\"b2\"`.",
-            "`weights = {\"w1\": model.hidden.weight.tolist(), \"b1\": model.hidden.bias.tolist(), ...}` met `model.out` voor `\"w2\"` en `\"b2\"`, dan `return json.dumps(weights)`.",
+            "De tweede regel van de dict: `\"b1\": model.hidden.___.tolist(),`, en dezelfde twee regels voor `model.out`.",
         ],
         why="""```python
 import json
@@ -299,8 +299,8 @@ def hints_layer():
         "layer",
         [
             "Begin met een lege array, en loop langs de rijen van `w` met een `for`-loop die telt, zoals in `dot`.",
-            "`for (let i = 0; i < w.length; i++) { ... }` gaat langs de neuronen; zet daarbinnen `dot(w[i], x) + b[i]` met `push` achteraan de array.",
-            "`const out = [];` vóór de loop, `out.push(dot(w[i], x) + b[i]);` erin, en `return out;` erna.",
+            "Tel `i` van 0 tot het aantal rijen van `w`, zoals `dot` dat doet voor `a`; zet daarbinnen `dot(w[i], x) + b[i]` met `push` achteraan de array.",
+            "`for (let i = 0; i < ___; i++) {`, met `out.push(...)` erin, `const out = [];` ervoor en `return out;` erna.",
         ],
         why="""```javascript
 function layer(w, b, x) {
@@ -363,8 +363,8 @@ def hints_forward():
         "forward",
         [
             "Volg het uitgewerkte voorbeeld: eerst wat de hidden layer geeft, dan ReLU op elk van die getallen, dan de output layer op het resultaat.",
-            "`layer(net.w1, net.b1, pixels)` geeft de sommen van de hidden layer. Loop erlangs met `for (const v of ...)`, en zet `Math.max(0, v)` met `push` achteraan een nieuwe array.",
-            "`const hidden = [];`, de loop met `hidden.push(Math.max(0, v));`, en dan `return layer(net.w2, net.b2, hidden);`.",
+            "`layer(net.w1, net.b1, pixels)` geeft de sommen van de hidden layer. Loop erlangs met `for (const v of ...)`, en zet de ReLU van elke `v` met `push` achteraan een nieuwe array; `Math.max(a, b)` geeft het grootste van twee getallen.",
+            "In de loop: `hidden.push(___);`, met `const hidden = [];` vóór de loop.",
         ],
         why="""```javascript
 function forward(net, pixels) {

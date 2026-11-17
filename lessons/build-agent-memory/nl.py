@@ -204,8 +204,8 @@ def hints_remember():
         "remember",
         [
             "Een bestand lezen was `open(path)` in een `with`-blok. Aan een bestand toevoegen gaat net zo, met een tweede waarde die zegt hoe je het opent.",
-            "`open(NOTES, \"a\", encoding=\"utf-8\")` opent het bestand om aan toe te voegen. `f.write` schrijft precies wat je het geeft, dus een notitie heeft `\"\\n\"` erachter nodig om haar regel af te sluiten.",
-            "`with open(NOTES, \"a\", encoding=\"utf-8\") as f:`, en ingesprongen eronder `f.write(note + \"\\n\")`.",
+            "De tweede waarde van `open` zegt hoe: `\"r\"` om te lezen, `\"w\"` om een nieuw bestand over het oude heen te schrijven, `\"a\"` om aan het eind toe te voegen. `f.write` schrijft precies wat je het geeft, dus een notitie heeft `\"\\n\"` erachter nodig om haar regel af te sluiten.",
+            "`with open(NOTES, ___, encoding=\"utf-8\") as f:`, en de `f.write` ingesprongen eronder.",
         ],
         why="""```python
 def remember(arguments):
@@ -254,7 +254,7 @@ def hints_first_messages():
         [
             "Twee delen: lees de notities, waarbij een ontbrekend bestand geen notities betekent; verander daarna `system` alleen als er notities zijn.",
             "Zet het blok `with open(NOTES, encoding=\"utf-8\") as f:` onder `try:`, en geef `notes` de lege tekst `\"\"` onder `except FileNotFoundError:`. Een lege tekst telt als onwaar, dus `if notes:` klopt alleen als er notities zijn.",
-            "In `try:`: `with open(NOTES, encoding=\"utf-8\") as f:` en `notes = f.read().strip()`; in `except FileNotFoundError:`: `notes = \"\"`; daarna `if notes:` met `system = SYSTEM + \"\\n\\n\" + NOTES_HEAD + \"\\n\" + notes`.",
+            "Onder `if notes:`: `system = SYSTEM + ___ + NOTES_HEAD + \"\\n\" + notes`.",
         ],
         why="""```python
 def first_messages(question):

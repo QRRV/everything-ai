@@ -227,7 +227,7 @@ def hints_data_url():
         [
             "Twee stappen: eerst de base64 van de bytes, als string; dan het begin van een data-URL ervoor.",
             "`base64.b64encode(data)` geeft bytes; `.decode()` erachter maakt er een string van.",
-            "`text = base64.b64encode(data).decode()`, en `return \"data:image/png;base64,\" + ...`, met `text` op de plaats van de puntjes.",
+            "`return ___ + text`, met in het gat het begin van de data-URL uit stap 2 van het recept, als string.",
         ],
         why="""```python
 def data_url(path):
@@ -276,7 +276,7 @@ def hints_ask_photo():
         [
             "Stap 3 en 4 van het recept: de content wordt een lijst met twee delen, en `\"tools\"` een lijst met één tool erin.",
             "Het tekstdeel is `{\"type\": \"text\", \"text\": question}`. Het beelddeel heeft `\"type\": \"image_url\"`, en onder `\"image_url\"` een dictionary met de key `\"url\"` en de data-URL van `path`.",
-            "`content = [{\"type\": \"text\", \"text\": question}, {\"type\": \"image_url\", \"image_url\": {\"url\": ...}}]`, met `data_url(path)` op de plaats van de puntjes, en `\"tools\": [{\"type\": ...}]`, met de naam van de hosted tool.",
+            "Het tweede deel van `content`: `{\"type\": \"image_url\", \"image_url\": ___}`; en `\"tools\"` een lijst met één dictionary erin, met de naam van de hosted tool als `\"type\"`.",
         ],
         why="""```python
 def ask_photo(url, path, question):

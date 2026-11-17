@@ -272,8 +272,8 @@ def hints_problems():
         "problems",
         [
             "Go through `schema[\"properties\"].items()`: each key with its rule, such as `\"price\"` with `{\"type\": \"number\"}`. A value is a problem when it is there and `isinstance` says it is not of its type.",
-            "`TYPES[rule[\"type\"]]` is the Python type, such as `(int, float)`. The condition: the key is in `value`, and `not isinstance(value[key], ...)`. The text: `key + \" must be \" + WORDS[rule[\"type\"]]`.",
-            "`for key, rule in schema[\"properties\"].items():`, under it `if key in value and not isinstance(value[key], TYPES[rule[\"type\"]]):`, and under that the `found.append(...)` with the text.",
+            "`TYPES[rule[\"type\"]]` is the Python type, such as `(int, float)`. The condition: the key is in `value`, and `isinstance` says its value is not of that type. The text: `key + \" must be \" + WORDS[rule[\"type\"]]`.",
+            "`for key, rule in schema[\"properties\"].items():`, under it `if key in value and ___:`, and under that the `found.append(...)` with the text.",
         ],
         why="""```python
     for key, rule in schema["properties"].items():
@@ -321,7 +321,7 @@ def hints_ask():
         [
             "After the `if`, the answer did not fit. The next try sends `messages` again: make it the old conversation with two new messages after it.",
             "The two messages are dictionaries with `\"role\"` and `\"content\"`: the answer is `text`, with the role `assistant`; your message holds the problems joined with `\"; \".join(found)`, with the role `user`.",
-            "First the text: `fix = \"Fix these problems: \" + \"; \".join(found) + ...`. Then `messages = messages + [...]`: in the list, the assistant's message with `text`, then the user's with `fix`.",
+            "First `fix = \"Fix these problems: \" + \"; \".join(found) + \". Answer with the whole JSON again.\"`; then `messages = messages + [___, {\"role\": \"user\", \"content\": fix}]`.",
         ],
         why="""```python
 def ask_json(url, messages, schema, tries):

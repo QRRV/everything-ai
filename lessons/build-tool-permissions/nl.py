@@ -221,7 +221,7 @@ def hints_decide():
         [
             "Twee soorten pad mogen niet: een dat ergens anders begint dan de map, en een dat er met `..` uit klimt. Beide krijgen `\"deny\"`, vóór de regel die teruggeeft wat de lijst zegt.",
             "`path.startswith(policy[\"folder\"])` is `True` als het pad met de map begint. `\"..\" in path` is `True` als er `..` in het pad staat. Eén `if` met `or` dekt beide.",
-            "`if not path.startswith(...) or \"..\" in path:`, en daaronder `return \"deny\"`, allebei vóór `return policy[\"tools\"][call[\"name\"]]`.",
+            "`if ___ or \"..\" in path:`, en daaronder `return \"deny\"`, allebei vóór `return policy[\"tools\"][call[\"name\"]]`.",
         ],
         why="""```python
 def decide(call, policy):
@@ -271,8 +271,8 @@ def hints_run_call():
         "run_call",
         [
             "Twee uitgangen voordat de tool draait: de policy zegt nee, of de policy zegt vragen en de gebruiker zegt nee. Geef in beide een tekst terug en kom niet bij de laatste regel.",
-            "`if verdict == \"deny\":` geeft meteen een tekst terug. Roep bij `\"ask\"` pas dan `confirm(call)` aan: `if verdict == \"ask\" and not confirm(call):`. Python roept `confirm` niet aan als het eerste deel al `False` is.",
-            "`return \"Not allowed: \" + call[\"name\"] + ...` onder de eerste `if`, en `return \"The user said no to \" + call[\"name\"] + \".\"` onder de tweede.",
+            "`if verdict == \"deny\":` geeft meteen een tekst terug. Verbind bij `\"ask\"` twee tests met `and`: één op `verdict`, en `not` vóór wat `confirm(call)` geeft. Python roept `confirm` niet aan als het eerste deel al `False` is.",
+            "De tweede `if`: `if verdict == \"ask\" and ___:`, met eronder een tekst die `call[\"name\"]` noemt.",
         ],
         why="""```python
 def run_call(call, tools, policy, confirm):

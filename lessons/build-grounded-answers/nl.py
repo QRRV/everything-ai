@@ -188,8 +188,8 @@ def hints_cited():
         "cited",
         [
             "`inside.isdigit()` zegt of een stuk alleen cijfers heeft; `int(inside)` maakt er een heel getal van.",
-            "Voeg een getal alleen toe als het nog niet in `found` zit: `int(inside) not in found`.",
-            "`if inside.isdigit() and int(inside) not in found:`, en daaronder `found.append(int(inside))`.",
+            "Voeg een getal alleen toe als het nog niet in `found` zit; `not in` vertelt je dat, maar test het hele getal, niet de tekst.",
+            "`if inside.isdigit() and ___:`, met de `append` van `int(inside)` eronder.",
         ],
         why="""```python
 def cited(answer):
@@ -244,7 +244,7 @@ def hints_supported():
         [
             "Twee controles: in de loop, vóór `passages[n - 1]`, of bron `n` er is; na de loop elk getal van het antwoord tegen `numbers(text)`.",
             "Bron `n` is er als `n` van 1 tot en met `len(passages)` is, dus `n < 1 or n > len(passages)` betekent dat hij er niet is. Ga na de loop door `numbers(answer)`.",
-            "In de loop: `if n < 1 or n > len(passages):` en `return False`. Erna: `for number in numbers(answer):`, `if number not in numbers(text):`, `return False`, en `return True` aan het eind.",
+            "Na de loop: `for number in numbers(answer):`, dan `if ___:` met `return False` eronder; `return True` blijft aan het eind.",
         ],
         why="""```python
 def supported(answer, passages):

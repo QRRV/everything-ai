@@ -224,7 +224,7 @@ def hints_ask():
         [
             "The settings go in the body, next to `\"model\"`, `\"messages\"` and `\"max_tokens\"`, as in the worked example.",
             "Each one is a key with the argument as its value: `\"temperature\": temperature`.",
-            "The body ends in `\"max_tokens\": 12, \"temperature\": temperature, \"seed\": seed}`.",
+            "The body ends in `\"max_tokens\": 12, \"temperature\": temperature, \"seed\": ___}`.",
         ],
         why="""```python
 body = {"model": "qwen3-0.6b", "messages": [{"role": "user", "content": question}], "max_tokens": 12,
@@ -270,7 +270,7 @@ def hints_first():
         [
             "Two changes: one key in the body, and a last line that gives back two things.",
             "In the body: `\"stop\": [\"\\n\"]`. The `finish_reason` sits in the choice, next to the message: `answer[\"choices\"][0][\"finish_reason\"]`.",
-            "Take `choice = answer[\"choices\"][0]`, and give back `choice[\"message\"][\"content\"]` and `choice[\"finish_reason\"]`, with a comma between them.",
+            "Take `choice = answer[\"choices\"][0]`, and make the last line `return ___, choice[\"finish_reason\"]`.",
         ],
         why="""```python
 def first_line(url, question):

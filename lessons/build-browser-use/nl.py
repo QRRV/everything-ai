@@ -196,7 +196,7 @@ def hints_page():
         [
             "Er zijn twee soorten elementen: tekst, die geen nummer krijgt, en de rest, die wel een nummer krijgt. Een `if` met een `else` houdt ze uit elkaar.",
             "Tel alleen in de `else` 1 bij `number` op, voordat je de regel schrijft; `str(number)` maakt van het nummer tekst om tussen de vierkante haken te zetten.",
-            "`if element[\"role\"] == \"text\":` met `lines.append(element[\"name\"])`; `else:` met `number = number + 1` en `lines.append(\"[\" + str(number) + \"] \" + element[\"role\"] + \": \" + element[\"name\"])`.",
+            "In de `else`, zodra `number` 1 hoger is: `lines.append(\"[\" + str(number) + \"] \" + ___)`.",
         ],
         why="""```python
 def page_text(page):
@@ -250,7 +250,7 @@ def hints_screen():
         [
             "Het scherm is groter dan de screenshot, dus de getallen worden groter: met hoeveel keer breder het scherm is voor `x`, en hoeveel keer hoger voor `y`.",
             "`screen_width / shot_width` is hoeveel keer breder; vermenigvuldig `x` daarmee. `round` maakt van een getal als `187.5` een hele pixel.",
-            "`return round(x * screen_width / shot_width), round(y * screen_height / shot_height)`.",
+            "`return round(x * screen_width / shot_width), round(___)`, waarbij het gat voor `y` doet wat het eerste deel voor `x` doet.",
         ],
         why="""```python
 def to_screen(x, y, shot, screen):
@@ -297,8 +297,8 @@ def hints_guard():
         "check-click",
         [
             "Elke regel is een `if` met een `return`, zoals de eerste, die een `if` binnen een `if` heeft. `\"adds\" in element` zegt of het element die key heeft.",
-            "`element[\"adds\"]` is het product dat de knop toevoegt; `not in wanted` klopt als de gebruiker er niet om vroeg.",
-            "`if \"adds\" in element:` met daarbinnen `if element[\"adds\"] not in wanted:` en `return \"no\"`; daarna `if \"pays\" in element:` met `return \"ask\"`.",
+            "Het product dat een knop toevoegt, staat onder de key `\"adds\"` van het element; test het met `not in wanted`, zoals de tekst zegt.",
+            "Binnen `if \"adds\" in element:`: `if ___ not in wanted:`, met `return \"no\"` een stap verder in.",
         ],
         why="""```python
 def check_click(element, wanted):

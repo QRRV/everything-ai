@@ -200,7 +200,7 @@ def hints_versions():
         [
             "Maak elke regel in drie stappen schoon: eerst de spaties eromheen, dan wat de lijst ervoor zet, dan de spaties daarna. Een lege regel eindigt als `\"\"`.",
             "`line.startswith(\"- \")` zegt of de regel met een streepje begint, en `line[2:]` knipt de eerste twee tekens eraf. Voor een nummer: `line[0].isdigit() and line[1] == \".\"`, als je weet dat de regel minstens twee tekens heeft.",
-            "In de loop: `line = line.strip()`, dan `if line.startswith(\"- \"):` met `line = line[2:]`, een `elif len(line) > 1 and line[0].isdigit() and line[1] == \".\":` met hetzelfde, dan opnieuw `line = line.strip()`, en `if line != \"\":` met `found.append(line)`.",
+            "In de loop: eerst `line = line.strip()`, dan `if line.startswith(\"- \"):` met `line = line[2:]`, en `elif ___ and line[0].isdigit() and line[1] == \".\":` met hetzelfde; dan opnieuw `strip()`, en voeg de regel alleen toe als hij niet `\"\"` is.",
         ],
         why="""```python
 def versions(text):
@@ -264,7 +264,7 @@ def hints_multi():
         [
             "Het is weer het samenvoegen van [Woorden en betekenis samen](/course/open/build-hybrid-search?lang=nl), nu met een ranglijst voor elke tekst in plaats van een voor woorden en een voor betekenis.",
             "`scores = rrf(rankings, 60)` geeft een dict van punt en score. Paren `(score, text)` sorteren op de score.",
-            "Vervang de laatste regel door drie: `scores = rrf(rankings, 60)`, dan `best = sorted([(score, text) for text, score in scores.items()], reverse=True)`, en geef `[text for score, text in best[:n]]` terug.",
+            "Na `scores = rrf(rankings, 60)`: `best = sorted([(score, text) for text, score in ___], reverse=True)`, en geef de teksten van `best[:n]` terug.",
         ],
         why="""```python
 def multi_search(texts, n):

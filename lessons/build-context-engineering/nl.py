@@ -176,8 +176,8 @@ def hints_window():
         "window",
         [
             "Twee veranderingen: de lijst begint met de system prompt, en de slice mag nooit terugreiken tot plaats 0, waar de system prompt staat.",
-            "Begin met `out = [messages[0]]`. De slice begint bij `len(messages) - keep`, maar nooit onder 1: `max(1, len(messages) - keep)`.",
-            "`out = [messages[0]]`, en `for message in messages[max(1, len(messages) - keep):]:` met de `append` zoals hij was.",
+            "Begin met `out = [messages[0]]`. De slice begint bij `len(messages) - keep`, maar nooit onder 1; `max` geeft het grootste van twee getallen.",
+            "Na `out = [messages[0]]`: `for message in messages[___:]:`, met de `append` zoals hij was.",
         ],
         why="""```python
 def window(messages, keep):
@@ -225,8 +225,8 @@ def hints_compact():
         "compact",
         [
             "Alleen de laatste regel verandert: het venster houdt zijn berichten, maar het eerste, de system prompt, krijgt de samenvatting aan het eind.",
-            "Maak `out = window(messages, keep)`, en een nieuwe dictionary met de rol `system` en als content `messages[0][\"content\"] + \"\\n\\nSummary of the conversation so far: \" + summary`. Geef die dictionary terug vóór `out[1:]`.",
-            "`system = {\"role\": \"system\", \"content\": messages[0][\"content\"] + \"\\n\\nSummary of the conversation so far: \" + summary}`, en dan `return [system] + out[1:]`.",
+            "Maak `out = window(messages, keep)`, en een nieuwe dictionary met de rol `system` en als content `messages[0][\"content\"] + \"\\n\\nSummary of the conversation so far: \" + summary`. In de lijst die je teruggeeft, neemt die de plaats in van het eerste bericht van `out`.",
+            "Als laatste regel: `return [system] + ___`.",
         ],
         why="""```python
 import json

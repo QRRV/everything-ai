@@ -374,7 +374,7 @@ def hints_red():
         [
             "Read the two watch-outs above the recipe: where does red lie on the hue, and what hue does a grey pixel get?",
             "Two conditions on the hue, joined with `|`, together in parentheses; then `&` with the condition on the saturation.",
-            "`(h < 0.05) | (h > 0.95) & (s > 0.5)` is not it: Python does the `&` first, so the saturation only counts for one end. Where do parentheses go, so that the two conditions on hue count together?",
+            "`return (___) & (s > 0.5)`, with the two conditions on hue in the gap, each in parentheses of its own.",
         ],
         why="`(h < 0.05) | (h > 0.95)` is red at both ends of the circle; the parentheses around it make Python do it before the `&`. `& (s > 0.5)` leaves out grey and pink. For the row of the example, that gives `True, True, False, False, False`.",
     )

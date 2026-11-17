@@ -245,7 +245,7 @@ def hints_verdict():
         [
             "First the count: `len(results[claim]) < n or len(results[other]) < n` means a seed is missing.",
             "Then the loop of the worked example, over `range(n)`: only the plan's seeds, whatever more there are. Which of the two you subtract from the other depends on `plan[\"direction\"]`.",
-            "Last, `np.median(gains) >= plan[\"at_least\"]`.",
+            "When `plan[\"direction\"] == \"higher\"`: `gains.append(results[___][i] - results[___][i])`; with `\"lower\"`, the other way round.",
         ],
         why="The gain per seed compares runs that share their luck, the median keeps one bad seed from deciding, and `range(n)` keeps extra runs out.",
     )

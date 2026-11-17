@@ -220,7 +220,7 @@ def hints_prompt():
         [
             "`.format` leest elk paar accolades als een veld. Welke accolades in `TEMPLATE` zijn een veld, en welke moeten in de prompt blijven?",
             "`{text}` is het veld. De accolades rond `\"price\": 100` moeten blijven, dus elk ervan schrijf je dubbel.",
-            "Het voorbeeld wordt `{{\"price\": 100}}`; de rest van de template blijft zoals hij is.",
+            "De tweede regel van `TEMPLATE` wordt `'The price is a number, without quotes, such as ___\"price\": 100___.\\n\\n{text}')`.",
         ],
         why="""```python
 TEMPLATE = ("Give the name, color and price of this bike as JSON, with the keys name, color and price. "
@@ -266,7 +266,7 @@ def hints_tally():
         [
             "Twee stappen voor elke regel: zorg dat zijn versie in `counts` staat, en tel er 1 bij op als het antwoord past.",
             "`if version not in counts:` geeft de versie zijn eerste telling, 0. Daarna telt `if entry[\"fits\"]:` er 1 bij op in `counts[version]`.",
-            "`if version not in counts:` met daaronder `counts[version] = 0`, en dan `if entry[\"fits\"]:` met daaronder `counts[version] = counts[version] + 1`.",
+            "`if version not in counts:` met daaronder `counts[version] = 0`, en dan `if entry[\"fits\"]:` met daaronder `counts[version] = ___`.",
         ],
         why="""```python
 def fits_per_version(log):

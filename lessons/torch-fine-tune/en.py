@@ -232,7 +232,7 @@ def hints_tune():
         [
             "Steps 1 to 3 of the worked example do the same for clothes, with `C.train`. Here `train` already knows the model and the data: it gets only the parameters, the learning rate and the epochs.",
             "Phase 1 gives `train` the parameters of the new layer, `model.out.parameters()`; phase 2 gives it every parameter, `model.parameters()`. In the loop, unfreezing is freezing the other way round.",
-            "`train(model.out.parameters(), 0.01, 30)`, then `p.requires_grad = True` in the loop, then `train(..., 0.001, 30)` with every parameter.",
+            "After the loop, phase 2: `train(model.parameters(), ___, 30)`.",
         ],
         why="Phase 1 trains the new last layer on the frozen features, until its errors say something about the speckled digits. The loop lets every parameter learn again, and phase 2 gives them all to `train`, with steps ten times smaller, so that the borrowed features change only a little.",
     )

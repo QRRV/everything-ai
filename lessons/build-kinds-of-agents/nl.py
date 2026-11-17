@@ -197,8 +197,8 @@ def hints_report():
         "report",
         [
             "Per geval kunnen er twee dingen gebeuren: `fn` geeft een waarde terug, die fout kan zijn, of hij stopt met een fout. `try` en `except` vangen het tweede op; vergelijk binnen de `try` de waarde.",
-            "In de `try`: `got = fn(argument)`, dan `if got != expected:` met `failed.append(...)` van `call`, `\" gave \"`, `str(got)`, `\", expected \"`, `str(expected)` en `\".\"`, aan elkaar met `+`.",
-            "`try:`, `got = fn(argument)`, `if got != expected:`, `failed.append(call + \" gave \" + str(got) + \", expected \" + str(expected) + \".\")`; dan `except Exception as e:` met `failed.append(call + \" stopped with an error: \" + str(e) + \".\")`.",
+            "Bewaar in de `try` wat `fn(argument)` geeft in `got`, en vergelijk het met `expected`. De regel voor `failed` zet `call`, `\" gave \"`, `str(got)`, `\", expected \"`, `str(expected)` en `\".\"` aan elkaar met `+`.",
+            "In de `try`, zodra `got` de waarde heeft: `if ___:`, met de `failed.append(...)` eronder.",
         ],
         why="""```python
 def test_report(name, fn, cases):
@@ -253,8 +253,8 @@ def hints_unread():
         "unread",
         [
             "Een deel als `\"5]. On Sunday …\"` begint met het getal. Knip het bij `]`, en houd wat ervoor staat.",
-            "`part.split(\"]\")[0]` is de tekst van het getal; `int` maakt er een getal van. Test het daarna tegen beide lijsten met `not in`, verbonden met `and`.",
-            "`number = int(part.split(\"]\")[0])`, dan `if number not in opened and number not in missing:` met `missing.append(number)` eronder.",
+            "`part.split(\"]\")` geeft een lijst van de stukken rond `]`, en `int` maakt een getal van een tekst. Test het getal daarna tegen beide lijsten met `not in`, verbonden met `and`.",
+            "Eerst `number = int(___)`, dan de `if` met `missing.append(number)` eronder.",
         ],
         why="""```python
 def unread(answer, opened):
@@ -304,8 +304,8 @@ def hints_pay():
         "may-pay",
         [
             "Een winkel buiten het mandaat sluit de hele winkelwagen uit, wat hij ook kost, dus die controle komt eerst: in de loop, bij elk product. Het totaal ken je pas na de loop.",
-            "In de loop, vóór de regel met `total`: `if item[\"shop\"] not in mandate[\"shops\"]:` met `return \"no\"`. Na de loop: `\"ask\"` als `total` boven `mandate[\"max\"]` ligt, anders `\"yes\"`.",
-            "In de loop: `if item[\"shop\"] not in mandate[\"shops\"]:` en `return \"no\"`; erna: `if total > mandate[\"max\"]:` met `return \"ask\"`, en `return \"yes\"`.",
+            "In de loop, vóór de regel met `total`: `return \"no\"` als de `\"shop\"` van het product niet in `mandate[\"shops\"]` staat. Na de loop: `\"ask\"` als `total` boven `mandate[\"max\"]` ligt, anders `\"yes\"`.",
+            "In de loop, vóór de regel met `total`: `if ___:`, met `return \"no\"` eronder.",
         ],
         why="""```python
 def may_pay(cart, mandate):

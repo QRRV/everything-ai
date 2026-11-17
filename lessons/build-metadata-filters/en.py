@@ -197,8 +197,8 @@ def hints_matches():
         "matches",
         [
             "Go through the keys of `where` one by one, and compare the value of the item with the value of `where`.",
-            "`for key in where:` goes through the keys; `item[key] != where[key]` is `True` when the item does not fit for that key.",
-            "In the loop: `if item[key] != where[key]:` and then `return False`; after the loop, `return True`.",
+            "`for key in where:` goes through the keys; `where[key]` is the value the filter asks for that key, and `!=` is `True` when two values differ.",
+            "In the loop: `if ___ != where[key]:`, with `return False` one step further in, and `return True` after the loop.",
         ],
         why="""```python
 def matches(item, where):
@@ -252,8 +252,8 @@ def hints_search():
         "filtered_search",
         [
             "The filter now comes after `sorted(...)[:k]`. It should come before: an item that does not fit should never get a score.",
-            "In the loop, put `if matches(store[i], where):` in front of the line with `found.append(...)`, one step further in.",
-            "Add `if matches(store[i], where):` above `found.append(...)`, and remove `if matches(store[i], where)` from the last line.",
+            "In the loop, put an `if` with `matches` in front of the line with `found.append(...)`, and move that line one step further in.",
+            "In the loop: `if ___:`, with `found.append(...)` under it, one step further in; the `if` on the last line can then go.",
         ],
         why="""```python
 def filtered_search(q, store, where, k):

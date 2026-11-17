@@ -197,8 +197,8 @@ def hints_front():
         "front",
         [
             "Look at each line: when it holds `: `, split it into two parts, at the first `: ` only.",
-            "`line.split(\": \", 1)` splits at the first `: ` and gives a list of two parts; `.strip()` takes the spaces off the ends of a text.",
-            "`if \": \" in line:`, then `key, value = line.split(\": \", 1)` and `found[key] = value.strip()`.",
+            "`line.split(\": \")` splits at every `: `; with a second value, as in `split(\": \", n)`, it splits at most `n` times. `.strip()` takes the spaces off the ends of a text.",
+            "Split each line that holds `: ` at the first `: ` only: `key, value = line.split(\": \", ___)`.",
         ],
         why="""```python
 def front(text):
@@ -253,7 +253,7 @@ def hints_openapi():
         [
             "Loop over `operation.get(\"parameters\", [])`: `.get` with a second value gives an empty list when the key is not there.",
             "`schema = dict(p[\"schema\"])` makes a copy you can change; `schema[\"description\"] = p[\"description\"]` gives it the description. `p.get(\"required\")` is `None` when the key is not there.",
-            "`for p in operation.get(\"parameters\", []):`, then the two lines with `schema`, `properties[p[\"name\"]] = schema`, and `if p.get(\"required\"):` with `required.append(p[\"name\"])`.",
+            "After the two lines with `schema`, put the copy in its place: `properties[___] = schema`.",
         ],
         why="""```python
             for p in operation.get("parameters", []):

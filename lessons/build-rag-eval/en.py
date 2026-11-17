@@ -200,8 +200,8 @@ def hints_recall():
         "context_recall",
         [
             "Context recall looks from the side of the relevant points: which of them are among the points that came back?",
-            "`point in retrieved` is `True` when the point came back. Count only those.",
-            "Put the line `found = found + 1` under an `if point in retrieved:`, one step further in.",
+            "`in` tells whether a list holds something: `x in items` is `True` when `x` is one of the items. Count only the points that came back.",
+            "Put the line `found = found + 1` under an `if ___:`, one step further in.",
         ],
         why="""```python
 def context_recall(retrieved, relevant):
@@ -251,7 +251,7 @@ def hints_precision():
         [
             "The place of `retrieved[i]` is `i + 1`. At a relevant point, `hits` relevant points have come back up to that place.",
             "Inside the `if`, after `hits = hits + 1`: `total = total + hits / (i + 1)`.",
-            "Replace the last line by an `if hits == 0:` with `return 0.0` under it, and then `return total / hits`.",
+            "Replace the last line by an `if hits == 0:` with `return 0.0` under it, and then `return total / ___`.",
         ],
         why="""```python
 def context_precision(retrieved, relevant):

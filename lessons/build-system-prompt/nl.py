@@ -237,7 +237,7 @@ def hints_with():
         [
             "Twee veranderingen in het vak: waar `new` mee begint, en welke berichten de loop kopieert.",
             "`new` begint als een lijst met één dictionary erin, met de keys `\"role\"` en `\"content\"`. In de loop bepaalt een `if` op `message[\"role\"]` of een bericht in `new` komt.",
-            "`new = [{\"role\": \"system\", \"content\": system}]`, en in de loop `if message[\"role\"] != \"system\":` boven `new.append(message)`.",
+            "`new = [{\"role\": \"system\", \"content\": system}]`, en in de loop `if message[\"role\"] ___:` boven `new.append(message)`, met die regel een stap verder in.",
         ],
         why="""```python
 def with_system(messages, system):
@@ -286,8 +286,8 @@ def hints_json():
         "ask_json",
         [
             "De prefill is één bericht meer in `messages`, na de vraag. Het antwoord dat terugkomt, bevat alleen wat erna komt.",
-            "Het bericht is `{\"role\": \"assistant\", \"content\": start}`, het tweede item van de lijst. De laatste regel zet `start +` vóór de tekst.",
-            "`messages = [{\"role\": \"user\", \"content\": question}, {\"role\": \"assistant\", \"content\": start}]`, en `return start + answer[\"choices\"][0][\"message\"][\"content\"]`.",
+            "De prefill is een bericht met de rol `assistant` en `start` als content, het tweede item van de lijst. De laatste regel zet `start +` vóór de tekst.",
+            "`messages = [{\"role\": \"user\", \"content\": question}, ___]`, en `start +` vooraan in de laatste regel.",
         ],
         why="""```python
 def ask_json(url, question, start):

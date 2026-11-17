@@ -228,8 +228,8 @@ def hints_cost():
         "cost",
         [
             "Two parts, each with its own price: what goes in, and what comes out.",
-            "The part that goes in is `tokens_in * price_in / 1_000_000`; the part that comes out is the same with `tokens_out` and `price_out`.",
-            "`return tokens_in * price_in / 1_000_000 + ...`, with the part for the tokens out in place of the dots.",
+            "Each part is its tokens times its price; the prices are per million tokens, so divide each part by `1_000_000`.",
+            "`return tokens_in * price_in / 1_000_000 + ___`, with the part for the tokens out in the gap.",
         ],
         why="""```python
 def cost(tokens_in, tokens_out, price_in, price_out):
@@ -274,8 +274,8 @@ def hints_most():
         "most",
         [
             "Steps 1 to 3 of the recipe: count, limit, price.",
-            "`tokens_in = len(enc.encode(prompt))`, and the answer has at most `max_tokens` tokens.",
-            "`tokens_out = max_tokens`, then `return tokens_in * price_in / 1_000_000 + tokens_out * price_out / 1_000_000`.",
+            "`enc.encode(prompt)` gives the prompt's tokens as a list, and `len` counts them; the answer has at most `max_tokens` tokens.",
+            "`tokens_in = ___`; then `tokens_out = max_tokens` and the same `return` as in `cost` of exercise 1.",
         ],
         why="""```python
 def most(prompt, max_tokens, price_in, price_out):

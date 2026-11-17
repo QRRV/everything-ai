@@ -247,7 +247,7 @@ def hints_sanity():
         [
             "De vorm: vergelijk `tuple(logits.shape)` met `tuple(y.shape) + (k,)`, en geef het rapport van `False` en vier keer `None` terug als ze verschillen.",
             "De eerste loss over elke rij: `F.cross_entropy(logits.reshape(-1, k), y.reshape(-1)).item()`, vóór de loop.",
-            "De loop van `overfit_one_batch` van Begeleide reproductie 3, met dezelfde `reshape` in zijn loss, en de optimizer van het commentaar: AdamW bij `1e-3` met `weight_decay=0.0`, zonder de betas van de paper.",
+            "De loop van `overfit_one_batch` van Begeleide reproductie 3, met de AdamW van het commentaar en zonder de betas van de paper. In de loop: `loss = F.cross_entropy(___.reshape(-1, k), y.reshape(-1))`.",
         ],
         why="De vorm komt eerst, omdat de losses hem nodig hebben; de eerste loss vóór elke stap; en de loop bij `1e-3` test of het model überhaupt kan leren.",
     )

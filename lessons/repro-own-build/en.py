@@ -300,7 +300,7 @@ def hints_experiment():
         [
             "Start with the part both settings share, and run it with one setting: does it give back one number?",
             "Then the one thing that differs, in the dict `SETTINGS`, and the seed: `torch.manual_seed(seed)` in `make_model`, `torch.Generator().manual_seed(seed)` for the batches in `run`, which makes its model with `make_model`.",
-            "For the dropout paper: an MLP with two hidden layers of 512 on Fashion-MNIST, dropout of 0.2 on the input and 0.5 on the hidden layers, SGD with momentum, and a learning rate that decays to 0 over the steps.",
+            "For the dropout paper, `SETTINGS` holds the dropout of the input and of the hidden layers, `(0.2, 0.5)` for `\"claim\"`; `make_model` starts with `p_in, p = SETTINGS[setting]` and gives back `nn.Sequential(nn.Dropout(p_in), nn.Linear(784, 512), nn.ReLU(), ___, nn.Linear(512, 512), nn.ReLU(), ___, nn.Linear(512, K))`; `run` trains it with SGD with momentum, and a learning rate that decays to 0 over the steps.",
         ],
         why="This is the course's experiment for the dropout paper, whose runs the picture shows. For another paper the shape stays the same: a dict of the settings, the seed first, the part both share, and the metric as one number. New in it are `nn.Sequential(...)`, which runs the layers you give it one after the other, and `nn.ReLU()`, `torch.relu` as a layer.",
     )

@@ -223,8 +223,8 @@ def hints_key():
         "key",
         [
             "Stap 2 en 3 van het recept: lees de key, en stuur hem in een header.",
-            "`import os` bovenaan. De key is `os.environ[\"MODEL_API_KEY\"]`; de header heet `\"Authorization\"`, en zijn waarde begint met `\"Bearer \"`.",
-            "`headers = {\"Content-Type\": \"application/json\", \"Authorization\": \"Bearer \" + ...}`, met de key uit hint 2 op de plek van de puntjes.",
+            "`import os` bovenaan; `os.environ` bevat de environment variables, als dictionary. De header heet `\"Authorization\"`, en zijn waarde begint met `\"Bearer \"`.",
+            "`headers = {\"Content-Type\": \"application/json\", \"Authorization\": \"Bearer \" + ___}`.",
         ],
         why="""```python
 import json
@@ -284,8 +284,8 @@ def hints_bill():
         "bill",
         [
             "Een `for`-loop over `usages`; elke aanroep komt bij `total`.",
-            "Eén aanroep kost `usage[\"prompt_tokens\"] * price_in / 1_000_000`, plus hetzelfde voor `\"completion_tokens\"` tegen `price_out`.",
-            "In de loop: `total = total + usage[\"prompt_tokens\"] * price_in / 1_000_000`, en een tweede regel zoals die voor de tokens die eruit komen.",
+            "Eén aanroep kost zijn `\"prompt_tokens\"` keer `price_in`, plus zijn `\"completion_tokens\"` keer `price_out`; de prijzen zijn per miljoen tokens, dus deel elk door `1_000_000`.",
+            "In de loop, de tokens erin: `total = total + ___ * price_in / 1_000_000`; een tweede regel zoals deze doet hetzelfde voor de tokens eruit.",
         ],
         why="""```python
 def bill(usages, price_in, price_out):

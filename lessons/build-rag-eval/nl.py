@@ -200,8 +200,8 @@ def hints_recall():
         "context_recall",
         [
             "Context recall kijkt vanaf de kant van de relevante punten: welke ervan zitten bij de punten die terugkwamen?",
-            "`point in retrieved` is `True` als het punt terugkwam. Tel alleen die.",
-            "Zet de regel `found = found + 1` onder een `if point in retrieved:`, één stap verder ingesprongen.",
+            "`in` zegt of een lijst iets bevat: `x in items` is `True` als `x` een van de items is. Tel alleen de punten die terugkwamen.",
+            "Zet de regel `found = found + 1` onder een `if ___:`, één stap verder ingesprongen.",
         ],
         why="""```python
 def context_recall(retrieved, relevant):
@@ -251,7 +251,7 @@ def hints_precision():
         [
             "De plaats van `retrieved[i]` is `i + 1`. Bij een relevant punt zijn er tot die plaats `hits` relevante punten teruggekomen.",
             "Binnen de `if`, na `hits = hits + 1`: `total = total + hits / (i + 1)`.",
-            "Vervang de laatste regel door een `if hits == 0:` met `return 0.0` eronder, en daarna `return total / hits`.",
+            "Vervang de laatste regel door een `if hits == 0:` met `return 0.0` eronder, en daarna `return total / ___`.",
         ],
         why="""```python
 def context_precision(retrieved, relevant):

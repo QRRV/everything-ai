@@ -197,8 +197,8 @@ def hints_to_buy():
         "to-buy",
         [
             "Twee hoeveelheden naast elkaar: `need[item]` is wat het recept wil, `pantry(item)` wat er is. Van een ingrediënt is er te weinig als er minder is dan het recept nodig heeft.",
-            "Bewaar wat de voorraadkast heeft onder een naam, zoals `have`, en vergelijk het in een `if` met `need[item]`. Te kopen is wat het recept nodig heeft min wat er is.",
-            "`have = pantry(item)`, dan `if have < need[item]:`, en zet eronder het verschil in `buy[item]`.",
+            "Bewaar wat de voorraadkast heeft onder een naam, zoals `have`, en vergelijk het in een `if` met `need[item]`.",
+            "Onder `if have < need[item]:` komt `buy[item] = ___`: de grammen die ontbreken.",
         ],
         why="""```python
 def to_buy(dish):
@@ -249,8 +249,8 @@ def hints_shopping():
         "shopping",
         [
             "Het gerecht van het model is tekst van buiten je code: controleer het voordat je het gebruikt. `dish not in DISHES` is `True` als het model iets koos dat de keuken niet kent.",
-            "`buy = to_buy(dish)` geeft de lijst. `WRITE.format(dish=dish, items=as_text(buy))` geeft de tweede prompt, en `ask(url, ...)` stuurt hem.",
-            "`if dish not in DISHES:` met `return SORRY` eronder; dan `buy = to_buy(dish)`, en geef terug wat `ask` geeft voor de ingevulde `WRITE`.",
+            "`buy = to_buy(dish)` geeft de lijst. Vul `WRITE` in zoals de eerste regel `PICK` invult, en stuur hem met `ask(url, ...)`.",
+            "De laatste regel: `return ask(url, ___)`, met `WRITE` ingevuld met het gerecht en de lijst.",
         ],
         why="""```python
 def shopping(url, question):

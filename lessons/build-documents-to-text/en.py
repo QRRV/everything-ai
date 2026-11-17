@@ -178,7 +178,7 @@ def hints_html():
         [
             "Each round of the loop does one of three things: a `<` starts a tag, a `>` ends one, and any other character is added, but only outside a tag.",
             "Start with `inside = False`. Then `if ch == \"<\":` sets `inside = True`, `elif ch == \">\":` sets `inside = False`, and the third case adds `ch`.",
-            "The third case is `elif not inside:` with `out = out + ch` under it.",
+            "The third case: `elif ___:`, with `out = out + ch` under it.",
         ],
         why="""```python
 def html_text(page):
@@ -278,8 +278,8 @@ def hints_left():
         "left_first",
         [
             "One loop gives the order the page draws in. Two loops over the same pieces, each keeping only one column, give the left column before the right one.",
-            "In the first loop, `append` the text only `if x < middle`; in a second loop after it, only `if x >= middle`.",
-            "Under `for x, y, text in pieces:`, put `if x < middle:` with `lines.append(text)`; then the same loop again with `if x >= middle:`.",
+            "In the first loop, `append` the text only for a piece of the left column, with an `x` smaller than `middle`; in a second loop after it, only for the others.",
+            "The second loop: `for x, y, text in pieces:`, then `if ___:` with `lines.append(text)` under it.",
         ],
         why="""```python
 def left_first(pieces, middle):

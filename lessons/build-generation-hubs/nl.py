@@ -242,7 +242,7 @@ def hints_image():
         [
             "Stap 1 tot 4 van het recept: wat er onder `\"prompt\"` komt, waar het request heen gaat, en wat je uit het antwoord haalt.",
             "De beschrijving is de `prompt` die de functie krijgt; het endpoint is `/images/generations`, na `url`. De afbeelding staat in het eerste item onder `\"data\"`, onder `\"b64_json\"`, als base64-tekst.",
-            "`\"prompt\": prompt`, `url + \"/images/generations\"`, en `return base64.b64decode(...)`, met de base64-tekst van de eerste afbeelding op de plaats van de puntjes.",
+            "De laatste `...`: `return base64.b64decode(___)`, met de base64-tekst van de eerste afbeelding in het gat.",
         ],
         why="""```python
 def image_bytes(url, prompt):
@@ -297,8 +297,8 @@ def hints_digit():
         "read_digit",
         [
             "De card zegt wat het model neemt: een tensor met pixels van 0 tot 1. En het model geeft logits: welke functie maakt van 10 logits kansen?",
-            "Delen door 255 brengt pixels van 0 tot 255 naar 0 tot 1. `model(x)` heeft vorm `(1, 10)`: neem de softmax langs as 1, en dan rij 0.",
-            "`x = torch.tensor(pixels, dtype=torch.float32) / ...` en `p = torch.softmax(model(x), dim=1)[...]`, met de goede getallen op de plaats van de puntjes.",
+            "Delen door 255 brengt pixels van 0 tot 255 naar 0 tot 1. Wat het model voor `x` geeft, heeft vorm `(1, 10)`: neem de softmax langs as 1, en dan rij 0.",
+            "De tweede `...`: `p = torch.softmax(___, dim=1)[0]`.",
         ],
         why="""```python
 def read_digit(model, pixels):

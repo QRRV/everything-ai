@@ -232,7 +232,7 @@ def hints_tune():
         [
             "Stap 1 tot en met 3 van het uitgewerkte voorbeeld doen hetzelfde voor kleding, met `C.train`. Hier kent `train` het model en de data al: hij krijgt alleen de parameters, de learning rate en de epochs.",
             "Fase 1 geeft `train` de parameters van de nieuwe layer, `model.out.parameters()`; fase 2 geeft hem elke parameter, `model.parameters()`. In de loop is ontdooien bevriezen andersom.",
-            "`train(model.out.parameters(), 0.01, 30)`, dan `p.requires_grad = True` in de loop, dan `train(..., 0.001, 30)` met elke parameter.",
+            "Na de loop, fase 2: `train(model.parameters(), ___, 30)`.",
         ],
         why="Fase 1 traint de nieuwe laatste layer op de bevroren features, tot zijn fouten iets zeggen over de gespikkelde cijfers. De loop laat elke parameter weer leren, en fase 2 geeft ze allemaal aan `train`, met stappen die tien keer zo klein zijn, zodat de geleende features maar een beetje veranderen.",
     )

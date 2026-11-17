@@ -179,7 +179,7 @@ def text_again():
     mo.md(r"""
     ### Opnieuw vragen met wat er mis was
 
-    Als een antwoord niet past, kan de app opnieuw vragen. Niet met dezelfde vraag: dan weet het model niet wat er mis was, en schrijft het misschien weer hetzelfde. In plaats daarvan zet de app het antwoord in het gesprek, als dat van de assistant, met daarachter een bericht van de user dat de problemen noemt. De course deed dat bij elke run met JSON mode, met hooguit drie pogingen:
+    Als een antwoord niet past, kan de app opnieuw vragen. Niet met dezelfde vraag: dan weet het model niet wat er mis was, en schrijft het misschien weer hetzelfde. In plaats daarvan zet de app het antwoord in het gesprek, als dat van de assistant, met daarachter een bericht van de gebruiker dat de problemen noemt. De course deed dat bij elke run met JSON mode, met hooguit drie pogingen:
     """)
     return
 
@@ -231,7 +231,7 @@ def text_worked_example():
     1. **Wat je nodig hebt:** het schema van de fiets hierboven.
     2. **Vraag om JSON:** de vraag noemt de keys, en JSON mode staat aan.
     3. **Controleer:** `json.loads` leest het, en het is een dictionary; `name`, `color` en `price` staan er alle drie in. `name` en `color` zijn strings, zoals het schema zegt, maar `"649"` is ook een string, waar het schema `number` zegt. Eén probleem: `{found}`.
-    4. **Vraag opnieuw:** het gesprek krijgt twee berichten: het antwoord hierboven als dat van de assistant, en dat van de user, `{fix}` Het tweede antwoord van Qwen3 had `"price": 649`, en dat past, dus de functie geeft `{value}` terug.
+    4. **Vraag opnieuw:** het gesprek krijgt twee berichten: het antwoord hierboven als dat van de assistant, en dat van de gebruiker, `{fix}` Het tweede antwoord van Qwen3 had `"price": 649`, en dat past, dus de functie geeft `{value}` terug.
     """.format(first=_w["first"], found=_w["found"][0], fix=C.fix_message(_w["found"]),
                value=repr(_w["value"])))
     return
@@ -272,8 +272,8 @@ def hints_problems():
         "problems",
         [
             "Loop door `schema[\"properties\"].items()`: elke key met zijn regel, zoals `\"price\"` met `{\"type\": \"number\"}`. Een waarde is een probleem als hij er is en `isinstance` zegt dat hij niet van zijn type is.",
-            "`TYPES[rule[\"type\"]]` is het Python-type, zoals `(int, float)`. De voorwaarde: de key staat in `value`, en `not isinstance(value[key], ...)`. De tekst: `key + \" must be \" + WORDS[rule[\"type\"]]`.",
-            "`for key, rule in schema[\"properties\"].items():`, daaronder `if key in value and not isinstance(value[key], TYPES[rule[\"type\"]]):`, en daaronder de `found.append(...)` met de tekst.",
+            "`TYPES[rule[\"type\"]]` is het Python-type, zoals `(int, float)`. De voorwaarde: de key staat in `value`, en `isinstance` zegt dat zijn waarde niet van dat type is. De tekst: `key + \" must be \" + WORDS[rule[\"type\"]]`.",
+            "`for key, rule in schema[\"properties\"].items():`, daaronder `if key in value and ___:`, en daaronder de `found.append(...)` met de tekst.",
         ],
         why="""```python
     for key, rule in schema["properties"].items():
@@ -321,7 +321,7 @@ def hints_ask():
         [
             "Na de `if` paste het antwoord niet. De volgende poging stuurt `messages` opnieuw: maak er het oude gesprek van, met twee nieuwe berichten erachter.",
             "De twee berichten zijn dictionaries met `\"role\"` en `\"content\"`: het antwoord is `text`, met de rol `assistant`; je bericht bevat de problemen, samengevoegd met `\"; \".join(found)`, met de rol `user`.",
-            "Eerst de tekst: `fix = \"Fix these problems: \" + \"; \".join(found) + ...`. Dan `messages = messages + [...]`: in de lijst het bericht van de assistant met `text`, en daarna dat van de user met `fix`.",
+            "Eerst `fix = \"Fix these problems: \" + \"; \".join(found) + \". Answer with the whole JSON again.\"`; dan `messages = messages + [___, {\"role\": \"user\", \"content\": fix}]`.",
         ],
         why="""```python
 def ask_json(url, messages, schema, tries):

@@ -274,7 +274,7 @@ def hints_describe():
         [
             "`\"properties\"` is een dictionary met één key per argument. Elke waarde is een klein schema op zich, zoals dat van `amount`.",
             "Een eenheid is een string met een vaste lijst waarden: `{\"type\": \"string\", \"enum\": [\"km\", \"mi\", \"kg\", \"lb\"], \"description\": ...}`.",
-            "Zet `\"from_unit\": {...}` en `\"to_unit\": {...}` onder `\"amount\"`, en maak de laatste regel van `\"parameters\"` `\"required\": [\"amount\", \"from_unit\", \"to_unit\"]`.",
+            "Zet `\"from_unit\"` en `\"to_unit\"` onder `\"amount\"`, elk met dat schema, en maak de laatste regel van `\"parameters\"` `\"required\": [\"amount\", ___],`.",
         ],
         why="""```python
 "properties": {
@@ -326,7 +326,7 @@ def hints_answer():
         [
             "Een call is een dictionary: `call[\"id\"]`, en onder `call[\"function\"]` de `\"name\"` en de `\"arguments\"`. De argumenten zijn een JSON-tekst, nog geen dictionary.",
             "`json.loads(call[\"function\"][\"arguments\"])` geeft de dictionary. `functions[call[\"function\"][\"name\"]]` is de functie die je ermee uitvoert.",
-            "Drie regels: `arguments = json.loads(...)`, dan `result = functions[...](arguments)`, dan `messages = messages + [{\"role\": \"tool\", \"tool_call_id\": call[\"id\"], \"content\": result}]`.",
+            "Nadat de call gedraaid heeft: `messages = messages + [___]`, met het bericht van de tool in het gat.",
         ],
         why="""```python
 def answer(url, question, tools, functions):

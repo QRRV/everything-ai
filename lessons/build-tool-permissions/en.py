@@ -221,7 +221,7 @@ def hints_decide():
         [
             "Two kinds of path are not allowed: one that starts somewhere else than the folder, and one that climbs out of it with `..`. Both get `\"deny\"`, before the line that gives back what the list says.",
             "`path.startswith(policy[\"folder\"])` is `True` when the path starts with the folder. `\"..\" in path` is `True` when the path has `..` in it. One `if` with `or` covers both.",
-            "`if not path.startswith(...) or \"..\" in path:`, and under it `return \"deny\"`, both before `return policy[\"tools\"][call[\"name\"]]`.",
+            "`if ___ or \"..\" in path:`, and under it `return \"deny\"`, both before `return policy[\"tools\"][call[\"name\"]]`.",
         ],
         why="""```python
 def decide(call, policy):
@@ -271,8 +271,8 @@ def hints_run_call():
         "run_call",
         [
             "Two ways out before the tool runs: the policy says no, or the policy says ask and the user says no. In both, give back a text and do not get to the last line.",
-            "`if verdict == \"deny\":` gives back a text at once. For `\"ask\"`, call `confirm(call)` only then: `if verdict == \"ask\" and not confirm(call):`. Python does not call `confirm` when the first part is already `False`.",
-            "`return \"Not allowed: \" + call[\"name\"] + ...` under the first `if`, and `return \"The user said no to \" + call[\"name\"] + \".\"` under the second.",
+            "`if verdict == \"deny\":` gives back a text at once. For `\"ask\"`, join two tests with `and`: one on `verdict`, and `not` before what `confirm(call)` gives. Python does not call `confirm` when the first part is already `False`.",
+            "The second `if`: `if verdict == \"ask\" and ___:`, with a text that names `call[\"name\"]` under it.",
         ],
         why="""```python
 def run_call(call, tools, policy, confirm):

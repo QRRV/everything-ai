@@ -221,8 +221,8 @@ def hints_train():
         "train_small",
         [
             "Stap 2 en 3 van het recept: eerst vectoren van de teksten, dan leert het model van die vectoren en de labels.",
-            "De vectorizer leert de woorden en maakt de vectoren in één keer, met `fit_transform`; het model leert met `fit`, van de vectoren en de goede labels.",
-            "`X = vectorizer.fit_transform(texts)`, en op de regel met de puntjes `model.fit(..., labels)`, met de vectoren op de plaats van de puntjes.",
+            "De vectorizer leert de woorden en maakt de vectoren in één keer, met `fit_transform`; het model leert met `fit`, van de trainingsdata en de goede labels.",
+            "De eerste `...`: `X = ___`, de vectoren van `texts`.",
         ],
         why="""```python
 def train_small(texts, labels):
@@ -271,8 +271,8 @@ def hints_f1():
         "macro_f1",
         [
             "Twee stappen: de F1 van één label in de loop, het gemiddelde van allemaal erna.",
-            "De F1 uit de tellingen is `2 * tp / (2 * tp + fp + fn)`; `np.mean` geeft het gemiddelde van een lijst.",
-            "`scores.append(2 * tp / (...))`, met `2 * tp + fp + fn` op de plaats van de puntjes, en `return np.mean(...)`, met de lijst met scores.",
+            "De F1 uit de tellingen is twee keer `tp`, gedeeld door twee keer `tp` plus `fp` plus `fn`; `np.mean` geeft het gemiddelde van een lijst.",
+            "In de loop: `scores.append(2 * tp / (___))`; erna het gemiddelde van `scores`.",
         ],
         why="""```python
 def macro_f1(true, predicted, labels):

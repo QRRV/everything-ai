@@ -239,7 +239,7 @@ def hints_head():
         [
             "Stap 2 en 3 van het uitgewerkte voorbeeld, met 10 antwoorden in plaats van 2.",
             "In de loop: `p.requires_grad = False`.",
-            "`nn.Identity()` voor `embed`, en `nn.Linear(64, 10)` voor `out`, na de loop.",
+            "Na de loop, zoals in stap 3 van het uitgewerkte voorbeeld: `model.embed = ___`, dan `model.out` van 64 naar 10.",
         ],
         why="De loop bevriest alle 10 parameters van de cijferlezer; de nieuwe `out` komt erna, dus die is niet bevroren. `nn.Identity()` geeft de 64 verborgen getallen zoals ze zijn door aan de nieuwe layer.",
     )

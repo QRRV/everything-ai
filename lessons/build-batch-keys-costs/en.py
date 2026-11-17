@@ -223,8 +223,8 @@ def hints_key():
         "key",
         [
             "Steps 2 and 3 of the recipe: read the key, and send it in a header.",
-            "`import os` at the top. The key is `os.environ[\"MODEL_API_KEY\"]`; the header is called `\"Authorization\"`, and its value starts with `\"Bearer \"`.",
-            "`headers = {\"Content-Type\": \"application/json\", \"Authorization\": \"Bearer \" + ...}`, with the key from hint 2 in place of the dots.",
+            "`import os` at the top; `os.environ` holds the environment variables, as a dictionary. The header is called `\"Authorization\"`, and its value starts with `\"Bearer \"`.",
+            "`headers = {\"Content-Type\": \"application/json\", \"Authorization\": \"Bearer \" + ___}`.",
         ],
         why="""```python
 import json
@@ -284,8 +284,8 @@ def hints_bill():
         "bill",
         [
             "A `for` loop over `usages`; each call adds to `total`.",
-            "One call costs `usage[\"prompt_tokens\"] * price_in / 1_000_000`, plus the same for `\"completion_tokens\"` at `price_out`.",
-            "In the loop: `total = total + usage[\"prompt_tokens\"] * price_in / 1_000_000`, and a second line like it for the tokens that come out.",
+            "One call costs its `\"prompt_tokens\"` times `price_in`, plus its `\"completion_tokens\"` times `price_out`; the prices are per million tokens, so divide each by `1_000_000`.",
+            "In the loop, the tokens in: `total = total + ___ * price_in / 1_000_000`; a second line like it adds the tokens out.",
         ],
         why="""```python
 def bill(usages, price_in, price_out):

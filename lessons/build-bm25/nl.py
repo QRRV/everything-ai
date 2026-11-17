@@ -235,8 +235,8 @@ def hints_idf():
         "idf",
         [
             "Boven de streep: de teksten die het woord niet hebben, plus 0,5. Eronder: de teksten die het wel hebben, plus 0,5. Dan nog 1 erbij, en de log van alles.",
-            "De breuk is `(total - n + 0.5) / (n + 0.5)`. Tel er 1 bij op, en neem `math.log` van de som.",
-            "`return math.log((total - n + 0.5) / (n + 0.5) + 1)`",
+            "De teksten zonder het woord zijn `total - n`. Tel 0,5 op boven en onder de streep, 1 bij de breuk, en neem `math.log` van de som.",
+            "`return math.log((___) / (n + 0.5) + 1)`",
         ],
         why="""```python
 import math
@@ -284,8 +284,8 @@ def hints_bm25():
         "bm25",
         [
             "Alleen de regel die bij `score` optelt verandert: `idfs[word]` blijft, en `f` wordt een breuk.",
-            "Boven de streep: `f * (K1 + 1)`. Eronder: `f + K1 * (1 - B + B * len(words) / average)`.",
-            "`score = score + idfs[word] * f * (K1 + 1) / (f + K1 * (1 - B + B * len(words) / average))`",
+            "Boven de streep: `f * (K1 + 1)`. Eronder: `f + K1 *` de lengtecorrectie, en die is `1 - B` plus `B` keer de lengte van de tekst gedeeld door `average`.",
+            "`score = score + idfs[word] * f * (K1 + 1) / (f + K1 * (___))`",
         ],
         why="""```python
 def bm25(asked, words, idfs, average):

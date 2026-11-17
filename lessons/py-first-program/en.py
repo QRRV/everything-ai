@@ -253,7 +253,7 @@ def hints_countdown():
         [
             "Python runs from top to bottom. Which line should run first?",
             "A countdown starts at 3, so `print(\"3\")` goes at the top.",
-            "`print(\"Go!\")` comes last.",
+            "Under `print(\"3\")` comes `print(\"___\")`, and so on down to `Go!`.",
         ],
         why="The same four instructions, now in the order in which the lines should appear: 3, 2, 1, Go!",
     )

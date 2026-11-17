@@ -274,7 +274,7 @@ def hints_describe():
         [
             "`\"properties\"` is a dictionary with one key per argument. Each value is a small schema of its own, such as the one of `amount`.",
             "A unit is a string with a fixed list of values: `{\"type\": \"string\", \"enum\": [\"km\", \"mi\", \"kg\", \"lb\"], \"description\": ...}`.",
-            "Add `\"from_unit\": {...}` and `\"to_unit\": {...}` under `\"amount\"`, and make the last line of `\"parameters\"` `\"required\": [\"amount\", \"from_unit\", \"to_unit\"]`.",
+            "Put `\"from_unit\"` and `\"to_unit\"` under `\"amount\"`, each with that schema, and make the last line of `\"parameters\"` `\"required\": [\"amount\", ___],`.",
         ],
         why="""```python
 "properties": {
@@ -326,7 +326,7 @@ def hints_answer():
         [
             "A call is a dictionary: `call[\"id\"]`, and under `call[\"function\"]` the `\"name\"` and the `\"arguments\"`. The arguments are a JSON text, not yet a dictionary.",
             "`json.loads(call[\"function\"][\"arguments\"])` gives the dictionary. `functions[call[\"function\"][\"name\"]]` is the function to run with it.",
-            "Three lines: `arguments = json.loads(...)`, then `result = functions[...](arguments)`, then `messages = messages + [{\"role\": \"tool\", \"tool_call_id\": call[\"id\"], \"content\": result}]`.",
+            "Once the call has run: `messages = messages + [___]`, with the tool's message in the gap.",
         ],
         why="""```python
 def answer(url, question, tools, functions):

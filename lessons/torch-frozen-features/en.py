@@ -239,7 +239,7 @@ def hints_head():
         [
             "Steps 2 and 3 of the worked example, with 10 answers instead of 2.",
             "In the loop: `p.requires_grad = False`.",
-            "`nn.Identity()` for `embed`, and `nn.Linear(64, 10)` for `out`, after the loop.",
+            "After the loop, as in step 3 of the worked example: `model.embed = ___`, then `model.out` from 64 to 10.",
         ],
         why="The loop freezes all 10 parameters of the digit reader; the new `out` comes after it, so it is not frozen. `nn.Identity()` hands the 64 hidden numbers to the new layer as they are.",
     )
