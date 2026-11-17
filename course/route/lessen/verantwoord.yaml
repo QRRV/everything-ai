@@ -1,0 +1,1609 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# Lessons of the domain verantwoord (responsible and safe AI: ethics, fairness, explaining models, privacy, security,
+# AI safety and alignment), level basis. The plan: docs/onderzoek/reports/Voorstel domein Verantwoorde AI.md (besluit 1.18,
+# advice 6). The route verantwoord in routes.yaml starts where the core ends and gives the order. Every lesson runs on a CPU.
+# Planning data; "introduces" is the plan and "uses" is filled in fully when a lesson is built. Format: ../FORMAT.md.
+map: v2.3
+lessons:
+
+# --- ethiek: ethics -------------------------------------------------------------------------------------------------
+- id: rai-two-kinds-of-harm
+  title: "Two kinds of harm"
+  level: basis
+  domein: verantwoord
+  module: ethiek
+  idea: "A model can harm people by what it hands out (a loan, a job: allocative harm) and by how it shows them (worse service, stereotypes, being left out: representational harm); you measure the first per group, and you have to look for the second."
+  covers: [waarom-ai-ethiek#1]
+  requires: [rai-bias-in-data]
+  introduces: [c:allocative-harm, c:representational-harm, c:fairness]
+  data: []
+  ladder: [python]
+  needs: any
+
+- id: rai-ethical-theories
+  title: "Ethical theories applied to AI"
+  level: basis
+  domein: verantwoord
+  module: ethiek
+  idea: "Consequences, duties, a fair agreement, virtues and care each judge an AI decision in their own way, and traditions such as Ubuntu add others; they often agree, and where they do not, you see what is at stake."
+  covers: [ethische-theorieen-en-machine-ethiek#0]
+  requires: [rai-two-kinds-of-harm]
+  introduces: [c:ai-ethics, c:virtue-ethics, c:care-ethics, c:consequentialism, c:deontology]
+  data: []
+  ladder: [python]
+  needs: any
+
+- id: rai-wellbeing
+  title: "What should AI make better?"
+  level: basis
+  domein: verantwoord
+  module: ethiek
+  idea: "What a system optimizes is a choice about well-being: clicks are preferences satisfied in the moment, while a capability view asks what people can do and be; the same ranking looks good or bad depending on the theory."
+  covers: [ethische-theorieen-en-machine-ethiek#1]
+  requires: [rai-ethical-theories]
+  introduces: [c:capability-approach, c:well-being]
+  data: []
+  ladder: [python]
+  needs: any
+
+- id: rai-rules-and-dilemmas
+  title: "Rules and dilemmas for machines"
+  level: basis
+  domein: verantwoord
+  module: ethiek
+  idea: "Asimov's three laws look like a safe rule set, but written as code they clash and leave gaps; the trolley problem and the Moral Machine show that people's choices differ, so a fixed rule cannot settle them."
+  covers: [ethische-theorieen-en-machine-ethiek#3, ethische-theorieen-en-machine-ethiek#4]
+  requires: [rai-ethical-theories]
+  introduces: [c:machine-ethics, c:laws-of-robotics, c:moral-machine]
+  data: []
+  ladder: [python]
+  needs: any
+
+- id: rai-principles
+  title: "Principles and guidelines"
+  level: basis
+  domein: verantwoord
+  module: ethiek
+  idea: "OECD, UNESCO, the EU's HLEG and many others wrote principles for AI; most name the same few (transparency, fairness, no harm, responsibility, privacy), which reads as agreement but hides how differently they are meant."
+  covers: [principes-en-richtlijnen#0, principes-en-richtlijnen#1]
+  requires: [rai-ethical-theories]
+  introduces: [c:oecd-ai-principles, c:responsible-ai, c:trustworthy-ai, c:transparency, c:altai]
+  mentions: [c:privacy]
+  data: []
+  ladder: [python]
+  needs: any
+
+- id: rai-ethics-washing
+  title: "When principles are only words"
+  level: basis
+  domein: verantwoord
+  module: ethiek
+  idea: "A principle without a check, an owner or a consequence costs nothing: ethics washing; you can test a commitment by asking what would change and who would notice if it were broken."
+  covers: [principes-en-richtlijnen#2]
+  requires: [rai-principles]
+  introduces: [c:ethics-washing]
+  data: []
+  ladder: [python]
+  needs: any
+
+- id: rai-design-with-values
+  title: "Designing with values"
+  level: basis
+  domein: verantwoord
+  module: ethiek
+  idea: "Value-sensitive design and Design for Values turn a value into rules and then into requirements you can check, and participatory design asks the people affected to take part in those choices."
+  covers: [ontwerpmethoden#0, ontwerpmethoden#1, ontwerpmethoden#4]
+  requires: [rai-principles]
+  introduces: [c:value-sensitive-design]
+  data: []
+  ladder: [python]
+  needs: any
+
+- id: rai-guidance-ethics-deda
+  title: "Guidance ethics and DEDA"
+  level: basis
+  domein: verantwoord
+  module: ethiek
+  idea: "Two Dutch methods for a team that starts with AI: guidance ethics asks how a technology can be used well rather than whether it is allowed, and DEDA walks through the questions about a data project one by one."
+  covers: [ontwerpmethoden#2, ontwerpmethoden#3]
+  requires: [rai-design-with-values]
+  introduces: [c:guidance-ethics, c:deda]
+  data: []
+  ladder: [python]
+  needs: any
+
+- id: rai-accountability
+  title: "Who is responsible?"
+  level: basis
+  domein: verantwoord
+  module: ethiek
+  idea: "When many people build a system, nobody seems responsible for its mistakes (the problem of many hands), and the person closest to the machine takes the blame (a moral crumple zone); accountability has to be arranged before something goes wrong."
+  covers: [verantwoordelijkheid-en-menselijk-toezicht#0]
+  requires: [rai-two-kinds-of-harm]
+  introduces: [c:accountability, c:responsibility-gap]
+  data: []
+  ladder: [python]
+  needs: any
+
+- id: rai-human-oversight
+  title: "A person in the loop"
+  level: basis
+  domein: verantwoord
+  module: ethiek
+  idea: "The AI Act and the GDPR ask for human oversight of some decisions, but a person who mostly says yes catches few mistakes: automation bias; oversight works only when the person has time, information and the power to say no."
+  covers: [verantwoordelijkheid-en-menselijk-toezicht#1]
+  requires: [rai-accountability]
+  introduces: [c:human-oversight, c:automation-bias]
+  mentions: [c:gdpr]
+  data: []
+  ladder: [python]
+  needs: any
+
+- id: rai-automated-decisions
+  title: "Deciding about people automatically"
+  level: basis
+  domein: verantwoord
+  module: ethiek
+  idea: "An automated decision can be fairer than an arbitrary official, or take away the room to explain yourself; whether it is legitimate depends on what is automated, and on whether people can object and be heard."
+  covers: [verantwoordelijkheid-en-menselijk-toezicht#2, verantwoordelijkheid-en-menselijk-toezicht#4]
+  requires: [rai-human-oversight]
+  introduces: [c:contestability]
+  data: []
+  ladder: [python]
+  needs: any
+
+- id: rai-limits-of-prediction
+  title: "How far can you predict a life?"
+  level: basis
+  domein: verantwoord
+  module: ethiek
+  idea: "Outcomes in people's lives are hard to predict even with a lot of data, and the target you can measure is often not the goal you mean; the best score on a task tells you how much room is left for decisions about individuals."
+  covers: [verantwoordelijkheid-en-menselijk-toezicht#3]
+  requires: [rai-automated-decisions, ml-regression-metrics]
+  introduces: [c:target-goal-mismatch]
+  data: []
+  ladder: [python]
+  needs: any
+
+- id: rai-dark-patterns
+  title: "Dark patterns, nudges and manipulation"
+  level: basis
+  domein: verantwoord
+  module: ethiek
+  idea: "A design can steer a choice: a default or an order is a nudge, a trick that works against the user is a dark pattern, and a system that adapts the nudge to each person all the time is a hypernudge; manipulation bypasses a person's own reasons."
+  covers: [autonomie-manipulatie-en-waardigheid#0, autonomie-manipulatie-en-waardigheid#1, autonomie-manipulatie-en-waardigheid#2]
+  requires: [rai-ethical-theories]
+  introduces: [c:dark-pattern, c:hypernudge, c:nudge, c:human-autonomy, c:human-dignity]
+  data: []
+  ladder: [python]
+  needs: any
+
+- id: rai-professional-ethics
+  title: "Codes of conduct and values in research"
+  level: basis
+  domein: verantwoord
+  module: ethiek
+  idea: "The codes of the ACM and IEEE say what a computing professional owes the public, and research is never free of values: which questions you ask and what you publish are choices you can account for."
+  covers: [beroeps-en-onderzoeksethiek#0, beroeps-en-onderzoeksethiek#1]
+  requires: [rai-principles]
+  introduces: [c:code-of-conduct]
+  data: []
+  ladder: [python]
+  needs: any
+
+- id: rai-dataset-consent
+  title: "Consent and licenses of data"
+  level: basis
+  domein: verantwoord
+  module: ethiek
+  idea: "Being able to download data does not mean you may train on it: a license says what you may do with it, and the people in it may not have agreed; the course's own data list shows both for every dataset."
+  covers: [beroeps-en-onderzoeksethiek#2]
+  requires: [rai-professional-ethics, data-provenance]
+  introduces: [c:ethics-review]
+  mentions: [c:consent, c:license]
+  data: []
+  ladder: [python]
+  needs: any
+
+- id: rai-case-compas-amazon
+  title: "COMPAS and a hiring tool"
+  level: basis
+  domein: verantwoord
+  module: ethiek
+  idea: "COMPAS predicted who would reoffend about equally well for black and white defendants, yet wrongly flagged black defendants almost twice as often (45% against 23%); Amazon's hiring model learned to mark down CVs that mentioned women. Both errors came from the data and the measure."
+  covers: [casussen#0, casussen#1]
+  requires: [rai-two-kinds-of-harm, ml-confusion-matrix]
+  introduces: [c:risk-score]
+  data: []
+  ladder: [python]
+  needs: any
+
+- id: rai-case-toeslagen-syri
+  title: "The childcare benefits scandal and SyRI"
+  level: basis
+  domein: verantwoord
+  module: ethiek
+  idea: "In the Netherlands a risk model and strict rules marked tens of thousands of parents as fraudsters, with nationality as a risk factor, and a court stopped the fraud system SyRI because it breached the right to private life, partly because nobody could check how it worked; both show what goes wrong without transparency and a way to object."
+  covers: [casussen#2, casussen#3]
+  requires: [rai-automated-decisions]
+  introduces: [c:risk-profiling]
+  mentions: [c:transparency]
+  data: []
+  ladder: [python]
+  needs: any
+
+- id: rai-case-dutch-algorithms
+  title: "More algorithms that judged people"
+  level: basis
+  domein: verantwoord
+  module: ethiek
+  idea: "DUO's risk profile picked students with a migration background far more often for a check, Rotterdam's welfare model scored people on features such as their language, Uber and Ola drivers went to court over automated dismissals and fraud scores, and the police's CAS forecasts crime per area; each turned on choices the people affected could not see."
+  covers: [casussen#4]
+  requires: [rai-case-toeslagen-syri]
+  introduces: [c:algorithm-register]
+  data: []
+  ladder: [python]
+  needs: any
+
+- id: rai-case-public-sector-abroad
+  title: "Robodebt, the A-levels and more"
+  level: basis
+  domein: verantwoord
+  module: ethiek
+  idea: "Australia's Robodebt, the English A-level grades of 2020, Michigan's MiDAS and the Allegheny screening tool went wrong in different ways: a wrong calculation, a rule that was fair on average and unfair to people, and a number that replaced judgment."
+  covers: [casussen#5]
+  requires: [rai-automated-decisions]
+  introduces: [c:income-averaging]
+  data: []
+  ladder: [python]
+  needs: any
+
+- id: rai-case-health-credit
+  title: "When the label measures the wrong thing"
+  level: basis
+  domein: verantwoord
+  module: ethiek
+  idea: "A health algorithm used past costs as the label for need; because less was spent on black patients with the same illness, it ranked them as healthier. The Apple Card showed how hard it is to check a credit decision from the outside: the New York regulator found no unlawful discrimination, yet customers could not see why their limits differed."
+  covers: [casussen#6]
+  requires: [rai-case-compas-amazon]
+  introduces: [c:proxy-label]
+  data: []
+  ladder: [python]
+  needs: any
+
+- id: rai-case-labels-tay-cambridge
+  title: "Labels, a chatbot and microtargeting"
+  level: basis
+  domein: verantwoord
+  module: ethiek
+  idea: "A photo app gave people an offensive label, the chatbot Tay learned abuse from its users within a day, and Cambridge Analytica used data of millions of Facebook users to target political ads: harm in what a system says and in what it does with data."
+  covers: [casussen#7, casussen#8]
+  requires: [rai-two-kinds-of-harm, rai-dark-patterns]
+  introduces: [c:microtargeting]
+  data: []
+  ladder: [python]
+  needs: any
+
+- id: rai-case-uber-crash
+  title: "The crash of a self-driving test car"
+  level: basis
+  domein: verantwoord
+  module: ethiek
+  idea: "In 2018 a self-driving Uber test car killed a pedestrian: the system saw her seconds before, kept changing its mind about what she was, did not brake by design, and the safety driver was looking away; no single failure caused it."
+  covers: [casussen#9]
+  requires: [rai-human-oversight]
+  introduces: [c:safety-driver]
+  data: []
+  ladder: [python]
+  needs: any
+
+
+# --- fairness: fairness ---------------------------------------------------------------------------------------------
+- id: rai-discrimination-law
+  title: "Direct and indirect discrimination"
+  level: basis
+  domein: verantwoord
+  module: fairness
+  idea: "Treating someone worse because of a protected ground is direct discrimination; a neutral rule that hits one group much harder is indirect discrimination, unless there is a good reason. In the Netherlands the AWGB forbids both, and the Netherlands Institute for Human Rights judges complaints."
+  covers: [discriminatie-begrippen-en-recht#0, discriminatie-begrippen-en-recht#1]
+  requires: [rai-two-kinds-of-harm]
+  introduces: [c:direct-discrimination, c:indirect-discrimination, c:equal-treatment-act, c:netherlands-institute-for-human-rights]
+  data: []
+  ladder: [python]
+  needs: any
+
+- id: rai-80-percent-rule
+  title: "The four-fifths rule"
+  level: basis
+  domein: verantwoord
+  module: fairness
+  idea: "Compare how often each group gets a yes: if one group's rate is below 80% of the highest, that is a signal of disparate impact. On a census table, a model that says who earns more says yes to women far less often."
+  covers: [discriminatie-begrippen-en-recht#2]
+  requires: [rai-discrimination-law, data-groupby]
+  introduces: [c:selection-rate, c:disparate-impact, c:four-fifths-rule]
+  data: [uci-adult]
+  ladder: [python, numpy]
+  needs: any
+
+- id: rai-why-discrimination-is-wrong
+  title: "Why is discrimination wrong?"
+  level: basis
+  domein: verantwoord
+  module: fairness
+  idea: "Philosophers give several answers (it disrespects people, it harms them, it keeps groups down), and many argue that statistical discrimination, judging a person by their group's average, can be wrong even when the average is correct."
+  covers: [discriminatie-begrippen-en-recht#3, discriminatie-begrippen-en-recht#5]
+  requires: [rai-discrimination-law, rai-ethical-theories]
+  introduces: [c:statistical-discrimination]
+  data: []
+  ladder: [python]
+  needs: any
+
+- id: rai-equal-opportunity-views
+  title: "What is an equal chance?"
+  level: basis
+  domein: verantwoord
+  module: fairness
+  idea: "A narrow view of equal opportunity judges people only on what matters for the task, a middle view corrects for unequal starting points, and a broad view asks why the starting points differ; each leads to a different fairness test."
+  covers: [discriminatie-begrippen-en-recht#4]
+  requires: [rai-why-discrimination-is-wrong]
+  introduces: [c:equality-of-opportunity]
+  data: []
+  ladder: [python]
+  needs: any
+
+- id: rai-disability-screen-out
+  title: "Screened out by a filter"
+  level: basis
+  domein: verantwoord
+  module: fairness
+  idea: "An automatic filter on gaps in a CV or on a timed test can screen out people with a disability or a chronic illness, while the law asks for reasonable adjustments; you see it by counting who a rule removes."
+  covers: [discriminatie-begrippen-en-recht#6]
+  requires: [rai-discrimination-law]
+  introduces: [c:reasonable-accommodation]
+  data: []
+  ladder: [python]
+  needs: any
+
+- id: rai-bias-lifecycle
+  title: "Bias at every step"
+  level: basis
+  domein: verantwoord
+  module: fairness
+  idea: "Bias can enter at each step from the world to a deployed model: historical, representation, measurement, aggregation, learning, evaluation and deployment bias; naming the step tells you where a fix has to go."
+  covers: [bronnen-van-bias#0]
+  requires: [rai-bias-in-data, ml-workflow]
+  introduces: [c:historical-bias, c:representation-bias, c:measurement-bias, c:implicit-bias, c:in-group-bias, c:selection-bias]
+  data: []
+  ladder: [python]
+  needs: any
+
+- id: rai-feedback-loops
+  title: "Feedback loops"
+  level: basis
+  domein: verantwoord
+  module: fairness
+  idea: "When a model's decisions change the data it learns from next, a small difference can grow by itself: police sent where crime was recorded record more crime there. A few lines of code show two equal districts drifting apart."
+  covers: [bronnen-van-bias#2]
+  requires: [rai-bias-lifecycle, data-labels, np-random]
+  introduces: [c:self-fulfilling-prediction]
+  data: []
+  ladder: [python, numpy]
+  needs: any
+
+- id: rai-unawareness-proxies
+  title: "Leaving out the column is not enough"
+  level: basis
+  domein: verantwoord
+  module: fairness
+  idea: "A model trained without the sex column can still treat men and women differently, because other columns give it away: a proxy. On the census table, the other columns predict sex well, and the model's yes rates hardly change."
+  covers: [formele-fairnessdefinities#0]
+  requires: [rai-80-percent-rule, ml-sklearn, ml-logistic-regression]
+  introduces: [c:fairness-through-unawareness, c:proxy]
+  data: [uci-adult]
+  ladder: [python, numpy]
+  needs: any
+
+- id: rai-demographic-parity
+  title: "Equal yes rates"
+  level: basis
+  domein: verantwoord
+  module: fairness
+  idea: "Independence asks that the decision does not depend on the group: equal yes rates, demographic parity. It is easy to measure and to reach, but it ignores whether the yes was deserved."
+  covers: [formele-fairnessdefinities#1]
+  requires: [rai-unawareness-proxies]
+  introduces: [c:group-fairness, c:demographic-parity]
+  data: [uci-adult]
+  ladder: [python, numpy]
+  needs: any
+
+- id: rai-equalized-odds-calibration
+  title: "Equal errors or equal meaning"
+  level: basis
+  domein: verantwoord
+  module: fairness
+  idea: "Separation asks for equal error rates in each group (equalized odds), sufficiency asks that a score means the same in each group (calibration); when the groups' base rates differ, only a perfect model can have both (Kleinberg; Chouldechova), and COMPAS made that visible."
+  covers: [formele-fairnessdefinities#1]
+  requires: [rai-demographic-parity, ml-confusion-matrix]
+  introduces: [c:equalized-odds, c:calibration-within-groups]
+  data: [uci-adult]
+  ladder: [python, numpy]
+  needs: any
+
+- id: rai-discrimination-tests
+  title: "Testing for discrimination"
+  level: basis
+  domein: verantwoord
+  module: fairness
+  idea: "An audit study sends equal applications that differ only in the group, an outcome test checks whether the people a decision picks are equally often right per group, and selective labels warn that you only see outcomes for the people who got a yes."
+  covers: [bias-meten-en-mitigeren#0]
+  requires: [rai-equalized-odds-calibration]
+  introduces: [c:audit-study, c:outcome-test]
+  data: []
+  ladder: [python]
+  needs: any
+
+- id: rai-reweighing
+  title: "Fixing the data: reweighing"
+  level: basis
+  domein: verantwoord
+  module: fairness
+  idea: "Before training you can give each example a weight so that group and label become independent in the data; the model trained on the weighted data has closer yes rates, at a small cost in accuracy."
+  covers: [bias-meten-en-mitigeren#1]
+  requires: [rai-demographic-parity]
+  introduces: [c:bias-mitigation, c:reweighing]
+  data: [uci-adult]
+  ladder: [python, numpy]
+  needs: any
+
+- id: rai-fair-thresholds
+  title: "Fixing the decision: a threshold per group"
+  level: basis
+  domein: verantwoord
+  module: fairness
+  idea: "After training you can choose a threshold per group so that the true positive rates match; it changes no weight of the model, and it makes the trade-off between fairness criteria and accuracy visible."
+  covers: [bias-meten-en-mitigeren#1]
+  requires: [rai-equalized-odds-calibration, rai-reweighing]
+  introduces: [c:threshold-optimization]
+  data: [uci-adult]
+  ladder: [python, numpy]
+  needs: any
+
+- id: rai-fairness-benchmarks
+  title: "Fairness tools and benchmarks"
+  level: basis
+  domein: verantwoord
+  module: fairness
+  idea: "Fairlearn and AIF360 compute what you built by hand (shown, not run), and Adult, German Credit, COMPAS and Folktables are the tables almost every fairness paper uses; they are old, small or tied to one country and year, so a method that wins on them may not help anywhere else."
+  covers: [bias-meten-en-mitigeren#3, bias-meten-en-mitigeren#4]
+  requires: [rai-fair-thresholds, res-reading-claims]
+  introduces: [c:fairness-benchmark]
+  data: [uci-adult]
+  ladder: [python, numpy]
+  needs: any
+
+- id: rai-project-audit-bias
+  title: "Project: measure the bias of your own classifier"
+  level: basis
+  domein: verantwoord
+  module: fairness
+  kind: project
+  project: audit
+  idea: "The first step of your audit: train a classifier on the census table, and measure per group its yes rate, its error rates and its calibration, with the 80% rule and a threshold per group as a first fix."
+  covers: []
+  requires: [rai-fairness-benchmarks]
+  introduces: [c:algorithmic-audit]
+  data: [uci-adult]
+  ladder: [python, numpy]
+  needs: any
+
+- id: rai-bias-in-llms
+  title: "Bias in language models"
+  level: basis
+  domein: verantwoord
+  module: fairness
+  idea: "Benchmarks such as BBQ, CrowS-Pairs, WinoBias and Winogender test whether a model fills a gap with a stereotype; ask a small model about ambiguous situations and count how often it picks the stereotyped answer, the opposite one, or that it cannot be known."
+  covers: [bias-per-modaliteit#0]
+  requires: [rai-bias-lifecycle, start-prompt-basics, lm-what-is-a-language-model, res-reading-claims]
+  introduces: [c:bias-benchmark]
+  data: [model-qwen3-0.6b]
+  ladder: [python]
+  needs: any
+
+- id: rai-bias-in-embeddings
+  title: "Bias in word vectors"
+  level: basis
+  domein: verantwoord
+  module: fairness
+  idea: "In word vectors, words like engineer can lie closer to he than to she; the WEAT test measures that as an effect size, and removing the gender direction (hard debiasing) hides the bias more than it removes it."
+  covers: [bias-per-modaliteit#1]
+  requires: [rai-bias-in-llms, ml-embeddings-idea, math-norms-cosine]
+  introduces: [c:weat]
+  mentions: [c:effect-size]
+  data: [model-granite-embedding]
+  ladder: [python, numpy]
+  needs: any
+
+- id: rai-bias-faces-images
+  title: "Bias in face analysis and image generators"
+  level: basis
+  domein: verantwoord
+  module: fairness
+  idea: "Gender Shades found that face analysis made under 1% errors for lighter-skinned men and up to a third for darker-skinned women; image generators repeat and strengthen stereotypes in who they draw for a job."
+  covers: [bias-per-modaliteit#2, bias-per-modaliteit#3]
+  requires: [rai-bias-lifecycle, ml-confusion-matrix]
+  introduces: [c:intersectional-fairness]
+  data: []
+  ladder: [python]
+  needs: any
+
+- id: rai-bias-speech-ads
+  title: "Bias in speech and in ads"
+  level: basis
+  domein: verantwoord
+  module: fairness
+  idea: "Speech recognition made almost twice as many errors for black speakers as for white speakers, and ads shown to an audience the advertiser did not choose still reached men and women in different numbers, because the platform optimized for clicks."
+  covers: [bias-per-modaliteit#4, bias-per-modaliteit#6]
+  requires: [rai-bias-faces-images]
+  introduces: [c:ad-delivery-bias]
+  data: []
+  ladder: [python]
+  needs: any
+
+- id: rai-fairness-in-organizations
+  title: "Fairness in an organization"
+  level: basis
+  domein: verantwoord
+  module: fairness
+  idea: "In practice fairness work stalls on things outside the model: no data on groups, no time, no one who owns it; teams that do it well decide who checks what, and when."
+  covers: [fairness-in-de-praktijk-en-kritische-perspectieven#0]
+  requires: [rai-fairness-benchmarks]
+  introduces: [c:fairness-review]
+  data: []
+  ladder: [python]
+  needs: any
+
+- id: rai-abstraction-traps
+  title: "Abstraction traps"
+  level: basis
+  domein: verantwoord
+  module: fairness
+  idea: "A fairness metric looks at a model on its own, while the harm comes from the system around it; Selbst and others name five traps, among them the solutionism trap: the belief that a technical fix is always the answer."
+  covers: [fairness-in-de-praktijk-en-kritische-perspectieven#1, fairness-in-de-praktijk-en-kritische-perspectieven#2]
+  requires: [rai-fairness-in-organizations]
+  introduces: [c:abstraction-trap, c:techno-solutionism]
+  data: []
+  ladder: [python]
+  needs: any
+
+- id: rai-data-documentation
+  title: "Documenting a dataset"
+  level: basis
+  domein: verantwoord
+  module: fairness
+  idea: "A data statement, a data card or a nutrition label says who is in a dataset, how it was collected and what it is not fit for; the FAIR principles say how to make data findable and reusable."
+  covers: [datasetdocumentatie#2, datasetdocumentatie#3, datasetdocumentatie#4]
+  requires: [rai-bias-lifecycle, data-provenance]
+  introduces: [c:data-card, c:fair-principles]
+  data: []
+  ladder: [python]
+  needs: any
+
+
+# --- uitleggen: explaining models -----------------------------------------------------------------------------------
+- id: rai-kinds-of-explanation
+  title: "Kinds of explanation"
+  level: basis
+  domein: verantwoord
+  module: uitleggen
+  idea: "An explanation can come from the model itself or be made afterwards, cover one prediction or the whole model, and work for one kind of model or any; some models stay opaque, by secrecy, by skill or by their size."
+  covers: [xai-begrippen-en-het-recht-op-uitleg#0, xai-begrippen-en-het-recht-op-uitleg#3]
+  requires: [ml-decision-tree, ml-logistic-regression]
+  introduces: [c:explainable-ai, c:interpretability, c:explainability, c:post-hoc-explanation, c:local-explanation, c:global-explanation, c:model-agnostic, c:black-box]
+  data: []
+  ladder: [python]
+  needs: any
+
+- id: rai-reason-codes
+  title: "Reasons for a decision"
+  level: basis
+  domein: verantwoord
+  module: uitleggen
+  idea: "A refused loan comes with reason codes, the features that weighed most against you; people want a contrastive, short explanation (why this and not that), and the GDPR gives a right to meaningful information about the logic."
+  covers: [xai-begrippen-en-het-recht-op-uitleg#1, xai-begrippen-en-het-recht-op-uitleg#2]
+  requires: [rai-kinds-of-explanation]
+  introduces: [c:reason-code, c:contrastive-explanation, c:right-to-explanation]
+  mentions: [c:gdpr]
+  data: [uci-adult]
+  ladder: [python, numpy]
+  needs: any
+
+- id: rai-glass-box-models
+  title: "Glass-box models"
+  level: basis
+  domein: verantwoord
+  module: uitleggen
+  idea: "A linear model shows its reasoning in its weights and a small tree in its splits; you can follow every prediction by hand, as long as the features mean something and the model stays small."
+  covers: [glass-box-modellen#0]
+  requires: [rai-kinds-of-explanation]
+  introduces: [c:glass-box-model]
+  data: [uci-adult]
+  ladder: [python, numpy]
+  needs: any
+
+- id: rai-additive-models
+  title: "Additive models"
+  level: basis
+  domein: verantwoord
+  module: uitleggen
+  idea: "A generalized additive model adds one curve per feature; it fits bends a line cannot and stays readable, and Explainable Boosting Machines learn those curves with boosting."
+  covers: [glass-box-modellen#1]
+  requires: [rai-glass-box-models, ml-gradient-boosting]
+  introduces: [c:generalized-additive-model, c:explainable-boosting-machine]
+  data: [uci-adult]
+  ladder: [python, numpy]
+  needs: any
+
+- id: rai-rashomon
+  title: "Many good models"
+  level: basis
+  domein: verantwoord
+  module: uitleggen
+  idea: "Train the same kind of model on slightly different data and you get models that are equally accurate but disagree about many people (the Rashomon effect); Rudin argues that for high-stakes decisions you should then pick a model you can read."
+  covers: [glass-box-modellen#4]
+  requires: [rai-glass-box-models, ml-random-forest]
+  introduces: [c:rashomon-effect]
+  data: [uci-adult]
+  ladder: [python, numpy]
+  needs: any
+
+- id: rai-permutation-importance
+  title: "Which features matter?"
+  level: basis
+  domein: verantwoord
+  module: uitleggen
+  idea: "Shuffle one column and see how much worse the model gets: permutation importance. Impurity importance from a forest is free but favors features with many values, and leaving a feature out asks a different question."
+  covers: [evaluatie-en-modelselectie#9, d24-globale-model-agnostische-methoden#0]
+  requires: [rai-kinds-of-explanation, ml-random-forest]
+  introduces: [c:permutation-importance, c:feature-importance]
+  data: [uci-adult]
+  ladder: [python, numpy]
+  needs: any
+
+- id: rai-pdp-ice
+  title: "How a prediction moves with a feature"
+  level: basis
+  domein: verantwoord
+  module: uitleggen
+  idea: "Change one feature for every row and average the predictions: a partial dependence plot. Drawing one line per row instead (ICE) shows where people react differently from the average."
+  covers: [d24-globale-model-agnostische-methoden#1, model-agnostische-post-hoc-methoden#4]
+  requires: [rai-permutation-importance]
+  introduces: [c:partial-dependence-plot, c:ice-curve]
+  data: [uci-adult]
+  ladder: [python, numpy]
+  needs: any
+
+- id: rai-global-surrogate
+  title: "A small model that copies a big one"
+  level: basis
+  domein: verantwoord
+  module: uitleggen
+  idea: "Train a small tree on the predictions of a complex model: a global surrogate. Its fidelity, how often it agrees with the big model, tells you how far you can trust it as an explanation."
+  covers: [d24-globale-model-agnostische-methoden#5]
+  requires: [rai-pdp-ice, ml-decision-tree]
+  introduces: [c:surrogate-model, c:fidelity]
+  data: [uci-adult]
+  ladder: [python, numpy]
+  needs: any
+
+- id: rai-lime
+  title: "LIME: a simple model around one prediction"
+  level: basis
+  domein: verantwoord
+  module: uitleggen
+  idea: "To explain one prediction, LIME makes variations of the example, asks the model about them, and fits a small weighted linear model nearby; its weights are the explanation, and they change with the choices you make."
+  covers: [model-agnostische-post-hoc-methoden#0]
+  requires: [rai-global-surrogate]
+  introduces: [c:lime]
+  data: [uci-adult]
+  ladder: [python, numpy]
+  needs: any
+
+- id: rai-shapley-values
+  title: "Shapley values"
+  level: basis
+  domein: verantwoord
+  module: uitleggen
+  idea: "A Shapley value shares a prediction fairly among the features: the average contribution of a feature over all orders in which you add them. With four features you can compute them exactly, and they add up to the prediction minus the average prediction."
+  covers: [model-agnostische-post-hoc-methoden#1]
+  requires: [rai-lime]
+  introduces: [c:shapley-value, c:shap]
+  data: [uci-adult]
+  ladder: [python, numpy]
+  needs: any
+
+- id: rai-xai-tools
+  title: "Tools for explanations"
+  level: basis
+  domein: verantwoord
+  module: uitleggen
+  idea: "SHAP, InterpretML and DiCE do what you built by hand at scale; the lesson shows their calls next to your own code (shown, not run), and which choices (background data, samples) change the answer."
+  covers: [xai-tooling#0]
+  requires: [rai-shapley-values]
+  introduces: [c:kernelshap, c:interpretml]
+  data: [uci-adult]
+  ladder: [python, numpy]
+  needs: any
+
+- id: rai-counterfactuals
+  title: "What would have to change?"
+  level: basis
+  domein: verantwoord
+  module: uitleggen
+  idea: "A counterfactual explanation says the smallest change that would flip the decision (with five more hours of work a week, yes); it is easy to understand, but there are many, and some ask for changes nobody can make."
+  covers: [d24-counterfactuals-voorbeelden-en-recourse#0]
+  requires: [rai-reason-codes, rai-shapley-values]
+  introduces: [c:counterfactual-explanation, c:algorithmic-recourse]
+  data: [uci-adult]
+  ladder: [python, numpy]
+  needs: any
+
+- id: rai-project-audit-explain
+  title: "Project: explain your classifier"
+  level: basis
+  domein: verantwoord
+  module: uitleggen
+  kind: project
+  project: audit
+  idea: "The second step of your audit: explain the classifier of step one with permutation importance, a partial dependence plot, Shapley values for one person and a counterfactual, and write down what the explanations show about the bias you measured."
+  covers: []
+  requires: [rai-project-audit-bias, rai-counterfactuals, rai-xai-tools]
+  introduces: [c:audit-report]
+  data: [uci-adult]
+  ladder: [python, numpy]
+  needs: any
+
+- id: rai-llm-self-explanations
+  title: "Can a model explain itself?"
+  level: basis
+  domein: verantwoord
+  module: uitleggen
+  idea: "Ask a language model why it answered and you get a fluent reason, but it need not be the real one: give it a hint that changes its answer, and its explanation often does not mention the hint."
+  covers: [uitlegbaarheid-voor-llms#0]
+  requires: [rai-kinds-of-explanation, start-prompt-basics, lm-what-is-a-language-model]
+  introduces: [c:self-explanation]
+  mentions: [c:faithfulness]
+  data: [model-qwen3-0.6b]
+  ladder: [python]
+  needs: any
+
+- id: rai-source-attribution
+  title: "Which source did the answer come from?"
+  level: basis
+  domein: verantwoord
+  module: uitleggen
+  idea: "An answer that cites a source is easier to check, but the citation can be wrong; leave one source out and see whether the answer changes, to test which source it really used."
+  covers: [uitlegbaarheid-voor-llms#1]
+  requires: [rai-llm-self-explanations, start-prompt-chains]
+  introduces: [c:source-attribution]
+  data: [model-qwen3-0.6b]
+  ladder: [python]
+  needs: any
+
+
+# --- privacy: privacy -----------------------------------------------------------------------------------------------
+- id: rai-what-is-privacy
+  title: "What is privacy?"
+  level: basis
+  domein: verantwoord
+  module: privacy
+  idea: "Privacy has meant being left alone, controlling information about yourself, and protection against a list of harms (Solove); people say they care about it and give it away anyway, the privacy paradox."
+  covers: [privacybegrippen-en-de-avg#0]
+  requires: [data-provenance, rai-bias-in-data]
+  introduces: [c:privacy]
+  data: []
+  ladder: [python]
+  needs: any
+
+- id: rai-gdpr
+  title: "The GDPR for AI"
+  level: basis
+  domein: verantwoord
+  module: privacy
+  idea: "Under the GDPR you need a legal ground to process personal data, people have rights (access, correction, objection), and who decides why data is processed (the controller) carries the responsibility, also when a model is trained."
+  covers: [privacybegrippen-en-de-avg#2, privacybegrippen-en-de-avg#3]
+  requires: [rai-what-is-privacy]
+  introduces: [c:gdpr, c:data-controller, c:personal-data, c:data-subject, c:lawful-basis, c:purpose-limitation, c:right-to-erasure]
+  data: []
+  ladder: [python]
+  needs: any
+
+- id: rai-contextual-integrity
+  title: "Information in the wrong place"
+  level: basis
+  domein: verantwoord
+  module: privacy
+  idea: "Contextual integrity says that information may flow where the rules of its context allow it; a language model can guess where someone lives or how old they are from a few posts, and an agent can pass on what was told in confidence."
+  covers: [privacybegrippen-en-de-avg#1, privacy-in-llm-producten-en-privacy-engineering#0]
+  requires: [rai-what-is-privacy, start-prompt-basics, lm-what-is-a-language-model]
+  introduces: [c:contextual-integrity, c:attribute-inference]
+  data: [model-qwen3-0.6b]
+  ladder: [python]
+  needs: any
+
+- id: rai-pseudonymization
+  title: "Pseudonymous is not anonymous"
+  level: basis
+  domein: verantwoord
+  module: privacy
+  idea: "Replacing a name with a code is pseudonymization: the data is still personal data, because records can be linked and a person singled out; anonymous means nobody can be found again by anyone."
+  covers: [anonimisering-en-heridentificatie#0]
+  requires: [rai-gdpr, py-dicts]
+  introduces: [c:pseudonymization, c:anonymization, c:re-identification]
+  data: []
+  ladder: [python]
+  needs: any
+
+- id: rai-k-anonymity
+  title: "Hiding in a group: k-anonymity"
+  level: basis
+  domein: verantwoord
+  module: privacy
+  idea: "A table is k-anonymous when every combination of age, place and other quasi-identifiers occurs at least k times; you get there by coarsening values, and l-diversity adds that a group must not all share the same secret."
+  covers: [anonimisering-en-heridentificatie#1]
+  requires: [rai-pseudonymization, data-groupby]
+  introduces: [c:k-anonymity, c:quasi-identifier, c:l-diversity]
+  data: [uci-adult]
+  ladder: [python, numpy]
+  needs: any
+
+- id: rai-linkage-attacks
+  title: "Linking tables"
+  level: basis
+  domein: verantwoord
+  module: privacy
+  idea: "Join an anonymous table with a public one on birth date, ZIP code and sex, and many rows get their name back; that is how a governor's medical records were found in 1997."
+  covers: [anonimisering-en-heridentificatie#2]
+  requires: [rai-k-anonymity, data-merge]
+  introduces: [c:linkage-attack]
+  data: []
+  ladder: [python]
+  needs: any
+
+- id: rai-randomized-response
+  title: "Answering with a coin"
+  level: basis
+  domein: verantwoord
+  module: privacy
+  idea: "Let each person flip a coin before answering a sensitive question: nobody's answer gives them away, yet the group's rate can still be estimated. That is local differential privacy, and the coin sets how much privacy you get."
+  covers: [differential-privacy#0]
+  requires: [rai-linkage-attacks, prob-basics, np-random]
+  introduces: [c:randomized-response, c:local-differential-privacy]
+  data: []
+  ladder: [python, numpy]
+  needs: any
+
+- id: rai-federated-learning
+  title: "Training without collecting the data"
+  level: basis
+  domein: verantwoord
+  module: privacy
+  idea: "In federated learning each device trains on its own data and only sends its weights; the server averages them (FedAvg). When every device holds different digits, the average learns more slowly."
+  covers: [federated-learning-en-pets#0]
+  requires: [rai-what-is-privacy, torch-mlp-digits]
+  introduces: [c:federated-learning, c:fedavg]
+  data: [qmnist]
+  ladder: [python, numpy, torch]
+  needs: any
+
+- id: rai-secret-sharing
+  title: "Computing on secrets"
+  level: basis
+  domein: verantwoord
+  module: privacy
+  idea: "Split a number into random shares that add up to it, and several parties can compute a sum without anyone seeing another's number: secure multiparty computation. Homomorphic encryption and zero-knowledge proofs do related things with cryptography."
+  covers: [federated-learning-en-pets#3]
+  requires: [rai-federated-learning]
+  introduces: [c:privacy-enhancing-technology, c:secure-multi-party-computation]
+  data: []
+  ladder: [python]
+  needs: any
+
+- id: rai-memorization
+  title: "What a model remembers"
+  level: basis
+  domein: verantwoord
+  module: privacy
+  idea: "A language model can repeat pieces of its training data word for word, especially text it saw many times; give it the start of a well-known text and count how much it completes exactly."
+  covers: [memorisatie-inference-aanvallen-en-unlearning#0]
+  requires: [rai-what-is-privacy, lm-sampling, start-prompt-basics]
+  introduces: [c:memorization, c:training-data-extraction]
+  data: [model-qwen3-0.6b]
+  ladder: [python]
+  needs: any
+
+- id: rai-find-pii
+  title: "Finding and hiding personal data"
+  level: basis
+  domein: verantwoord
+  module: privacy
+  idea: "Before text goes into a model or a training set, a pipeline finds names, phone numbers and citizen service numbers and replaces them; a check digit tells a real number from a random one, and every filter misses something."
+  covers: [privacy-in-llm-producten-en-privacy-engineering#1, privacybewuste-dataverwerking#2]
+  requires: [rai-pseudonymization, py-strings, ml-pipelines]
+  introduces: [c:check-digit]
+  mentions: [c:pii-redaction]
+  data: []
+  ladder: [python]
+  needs: any
+
+- id: rai-privacy-by-design
+  title: "Privacy by design"
+  level: basis
+  domein: verantwoord
+  module: privacy
+  idea: "Collect only what the purpose needs, use it only for that purpose and delete it when it is done; built into a pipeline from the start, these rules prevent leaks that no filter afterwards can."
+  covers: [privacy-in-llm-producten-en-privacy-engineering#2, privacybewuste-dataverwerking#1]
+  requires: [rai-find-pii]
+  introduces: [c:privacy-by-design, c:data-minimization]
+  data: []
+  ladder: [python]
+  needs: any
+
+- id: rai-data-governance
+  title: "Who looks after the data?"
+  level: basis
+  domein: verantwoord
+  module: privacy
+  idea: "Data governance gives every dataset an owner and a steward, decides who may see what, and keeps a catalog of what exists; without it, nobody can answer a request to delete someone's data."
+  covers: [privacybewuste-dataverwerking#0]
+  requires: [rai-privacy-by-design]
+  introduces: [c:data-governance, c:access-control]
+  data: []
+  ladder: [python]
+  needs: any
+
+
+# --- security: security ---------------------------------------------------------------------------------------------
+- id: rai-security-basics
+  title: "Thinking like an attacker"
+  level: basis
+  domein: verantwoord
+  module: security
+  idea: "Security protects confidentiality, integrity and availability; STRIDE lists what can go wrong, and an attack tree breaks an attacker's goal into steps, so you can find the cheapest way in."
+  covers: [dreigingsmodellering#0]
+  requires: [py-recursion, py-dicts]
+  introduces: [c:threat-model, c:attack-tree, c:stride-threat-model, c:availability, c:cia-triad]
+  warns: [stride]
+  data: []
+  ladder: [python]
+  needs: any
+
+- id: rai-classic-vulnerabilities
+  title: "Injection and secrets"
+  level: basis
+  domein: verantwoord
+  module: security
+  idea: "Put user text straight into an SQL statement and the user can rewrite the statement: SQL injection. The fix is to pass text as data, never as code; the same idea returns with language models."
+  covers: [dreigingsmodellering#1]
+  requires: [rai-security-basics, py-strings]
+  introduces: [c:sql-injection]
+  mentions: [c:language-model]
+  data: []
+  ladder: [python]
+  needs: any
+
+- id: rai-ml-threat-models
+  title: "Attacks on machine learning"
+  level: basis
+  domein: verantwoord
+  module: security
+  idea: "An attacker on a model may know everything about it or only see its answers, and may want to fool it (evasion), spoil its training (poisoning), learn its data (privacy) or use it to attack others; NIST sorts the attacks that way."
+  covers: [dreigingsmodellering#2, dreigingsmodellering#3]
+  requires: [rai-security-basics, ml-workflow]
+  introduces: [c:evasion-attack, c:white-box]
+  mentions: [c:privacy]
+  data: []
+  ladder: [python]
+  needs: any
+
+- id: rai-owasp-lists
+  title: "The OWASP lists for LLM apps"
+  level: basis
+  domein: verantwoord
+  module: security
+  idea: "OWASP's top 10 for LLM applications ranks the biggest risks, with prompt injection first, then leaking data, insecure output, too much agency and more, and its list for agents starts with a hijacked goal; a list like this is where a review starts."
+  covers: [dreigingsmodellering#5]
+  requires: [rai-ml-threat-models, start-prompt-chains]
+  introduces: [c:owasp-top-10-for-llm]
+  mentions: [c:prompt-injection]
+  data: []
+  ladder: [python]
+  needs: any
+
+- id: rai-data-poisoning
+  title: "Poisoning the training data"
+  level: basis
+  domein: verantwoord
+  module: security
+  idea: "Flip a share of the labels and the model gets worse everywhere; flip only some labels of one class and it fails just there. Training the digit network with more and more flipped labels shows how much it tolerates."
+  covers: [poisoning-en-backdoors#0]
+  requires: [rai-ml-threat-models, torch-mlp-digits]
+  introduces: [c:data-poisoning, c:label-flipping]
+  data: [qmnist]
+  ladder: [python, numpy, torch]
+  needs: any
+
+- id: rai-prompt-injection
+  title: "How often does an injection work?"
+  level: basis
+  domein: verantwoord
+  module: security
+  idea: "A model cannot tell its maker's instructions from text that only looks like instructions; send the same injections against a prompt with and without defenses, and the attack success rate shows how much each defense helps, and that none is enough."
+  covers: [aanvallen-op-llm-applicaties#0]
+  requires: [rai-ml-threat-models, build-defensive-prompts]
+  introduces: [c:attack-success-rate, c:spotlighting]
+  data: [model-qwen3-0.6b]
+  ladder: [python]
+  needs: any
+
+- id: rai-indirect-injection
+  title: "Injection through a document"
+  level: basis
+  domein: verantwoord
+  module: security
+  idea: "The attack text need not come from the user: it can sit in a web page, an email or a tool result the model reads. An agent that reads untrusted text, has private data and can send messages is open to theft (the lethal trifecta)."
+  covers: [aanvallen-op-llm-applicaties#1]
+  requires: [rai-prompt-injection, agent-idea]
+  introduces: [c:indirect-prompt-injection, c:lethal-trifecta]
+  data: [model-qwen3-0.6b]
+  ladder: [python]
+  needs: any
+
+- id: rai-jailbreaks
+  title: "Jailbreaks"
+  level: basis
+  domein: verantwoord
+  module: security
+  idea: "A jailbreak makes a model do what its training told it to refuse: by role play, many examples, hiding the request or building up over several turns. They work because helpfulness and refusal compete, and because safety training did not cover every form."
+  covers: [aanvallen-op-llm-applicaties#2]
+  requires: [rai-prompt-injection]
+  introduces: [c:competing-objectives, c:many-shot-jailbreaking]
+  mentions: [c:jailbreak]
+  data: [model-qwen3-0.6b]
+  ladder: [python]
+  needs: any
+
+- id: rai-system-prompt-extraction
+  title: "Getting the system prompt out"
+  level: basis
+  domein: verantwoord
+  module: security
+  idea: "A system prompt is not a secret: users can often get the model to repeat it. Put nothing in it that may not leak, and test how often it does."
+  covers: [aanvallen-op-llm-applicaties#4]
+  requires: [rai-jailbreaks]
+  introduces: [c:system-prompt-extraction]
+  mentions: [c:jailbreak]
+  data: [model-qwen3-0.6b]
+  ladder: [python]
+  needs: any
+
+- id: rai-insecure-output
+  title: "Model output is untrusted input"
+  level: basis
+  domein: verantwoord
+  module: security
+  idea: "What a model writes can contain HTML, SQL or a link that sends data away; treat it like user input: escape it before showing it, never run it as code, and never paste it into an SQL statement."
+  covers: [d24-llm-applicatiebeveiliging#0]
+  requires: [rai-classic-vulnerabilities, rai-prompt-injection]
+  introduces: [c:insecure-output-handling]
+  data: []
+  ladder: [python]
+  needs: any
+
+- id: rai-secrets-and-endpoints
+  title: "Keys and open doors"
+  level: basis
+  domein: verantwoord
+  module: security
+  idea: "An API key in your code ends up on GitHub, and a model server listening on every address is open to your whole network; keep keys in the environment, listen on 127.0.0.1, and ask for a token."
+  covers: [d24-llm-applicatiebeveiliging#3]
+  requires: [rai-classic-vulnerabilities, build-batch-keys-costs]
+  introduces: [c:attack-surface, c:secret-scanning]
+  mentions: [c:environment]
+  data: []
+  ladder: [python]
+  needs: any
+
+- id: rai-pickle-safetensors
+  title: "A model file that runs code"
+  level: basis
+  domein: verantwoord
+  module: security
+  idea: "A pickle file can run any code while it is loaded, so a model file from a stranger can take over your computer; safetensors stores only numbers; the course downloads outside models as safetensors, and loads its own files with weights_only."
+  covers: [supply-chain-en-agent-security#0]
+  requires: [rai-security-basics, torch-checkpoints]
+  introduces: [c:pickle-exploit, c:safetensors]
+  data: []
+  ladder: [python, torch]
+  needs: any
+
+- id: rai-hub-integrity
+  title: "Is this the model you meant?"
+  level: basis
+  domein: verantwoord
+  module: security
+  idea: "A model or dataset on a hub can be replaced or poisoned; a pinned revision and a SHA-256 hash make sure you get exactly the file that was checked, as the course does for every download."
+  covers: [supply-chain-en-agent-security#1]
+  requires: [rai-pickle-safetensors, torch-pretrained]
+  introduces: [c:supply-chain-attack, c:hash-pinning]
+  mentions: [c:hash]
+  data: []
+  ladder: [python]
+  needs: any
+
+- id: rai-package-squatting
+  title: "Packages that are not what they seem"
+  level: basis
+  domein: verantwoord
+  module: security
+  idea: "An attacker registers a package with a name close to a popular one, or one that language models tend to invent; check a name before you install it, and ask a model for package names and count how many did not exist on PyPI when the course recorded it."
+  covers: [supply-chain-en-agent-security#2, supply-chain-en-agent-security#3]
+  requires: [rai-hub-integrity, py-imports]
+  introduces: [c:typosquatting, c:slopsquatting]
+  mentions: [c:language-model]
+  data: [model-qwen3-0.6b]
+  ladder: [python]
+  needs: any
+
+- id: rai-red-teaming
+  title: "Red teaming"
+  level: basis
+  domein: verantwoord
+  module: security
+  idea: "Red teaming means attacking your own system before others do, by hand and with automated attack lists; bug and bias bounties pay outsiders who find problems, if they report them responsibly."
+  covers: [red-teaming-provenance-en-securitykaders#0, red-teaming-provenance-en-securitykaders#1]
+  requires: [rai-system-prompt-extraction]
+  introduces: [c:automated-red-teaming, c:bias-bounty]
+  mentions: [c:red-teaming]
+  data: [model-qwen3-0.6b]
+  ladder: [python]
+  needs: any
+
+- id: rai-dual-use-and-frameworks
+  title: "AI as a weapon, and the rules against it"
+  level: basis
+  domein: verantwoord
+  module: security
+  idea: "The same model that helps defenders helps attackers write phishing and malware (dual use); frameworks such as Google's SAIF, the guidelines of the UK's NCSC and the US CISA, and ETSI EN 304 223 say what secure AI development asks of you."
+  covers: [red-teaming-provenance-en-securitykaders#2, red-teaming-provenance-en-securitykaders#3]
+  requires: [rai-red-teaming, rai-owasp-lists]
+  introduces: [c:dual-use]
+  data: []
+  ladder: [python]
+  needs: any
+
+- id: rai-content-provenance
+  title: "Where did this picture come from?"
+  level: basis
+  domein: verantwoord
+  module: security
+  idea: "Detecting fakes is an arms race the detector tends to lose; provenance turns it around: the maker signs the content and its history (C2PA), and anyone can check that nothing changed since."
+  covers: [d24-provenance-watermerken-en-deepfake-detectie#0, d24-provenance-watermerken-en-deepfake-detectie#7]
+  requires: [rai-security-basics]
+  introduces: [c:content-provenance, c:digital-signature, c:c2pa, c:content-credentials, c:watermark]
+  data: []
+  ladder: [python]
+  needs: any
+
+- id: rai-ai-text-detection
+  title: "Detecting text written by AI"
+  level: basis
+  domein: verantwoord
+  module: security
+  idea: "A detector can look at how surprised a model is by a text, its mean negative log-likelihood: text a model wrote tends to score low. It errs both ways, and it flags text by people who write a second language far more often."
+  covers: [d24-provenance-watermerken-en-deepfake-detectie#6]
+  requires: [rai-content-provenance, lm-nll]
+  introduces: [c:ai-text-detection]
+  mentions: [c:perplexity]
+  data: [model-qwen3-0.6b]
+  ladder: [python]
+  needs: any
+
+
+# --- veiligheid: AI safety ------------------------------------------------------------------------------------------
+- id: rai-kinds-of-ai-risk
+  title: "Kinds of AI risk"
+  level: basis
+  domein: verantwoord
+  module: veiligheid
+  idea: "One way to sort the risks of AI is accidents, misuse and structural risks; the International AI Safety Report sorts them into malicious use, malfunctions (losing control among them) and systemic risks. A taxonomy makes sure nothing is forgotten."
+  covers: [ai-veiligheid-als-vakgebied#0, ai-veiligheid-als-vakgebied#3]
+  requires: [rai-two-kinds-of-harm]
+  introduces: [c:ai-safety, c:structural-risk, c:alignment, c:misuse, c:accident, c:loss-of-control, c:international-ai-safety-report]
+  data: []
+  ladder: [python]
+  needs: any
+
+- id: rai-concrete-problems
+  title: "Concrete problems in AI safety"
+  level: basis
+  domein: verantwoord
+  module: veiligheid
+  idea: "In 2016 five problems were named that show up in today's systems: side effects, reward hacking, oversight that does not scale, unsafe exploration, and a world that changes; each has a small example you can run."
+  covers: [ai-veiligheid-als-vakgebied#2]
+  requires: [rai-kinds-of-ai-risk, rl-q-learning]
+  introduces: [c:negative-side-effect, c:safe-exploration]
+  mentions: [c:reward-hacking]
+  data: []
+  ladder: [python]
+  needs: any
+
+- id: rai-specification-gaming
+  title: "Doing what you said, not what you meant"
+  level: basis
+  domein: verantwoord
+  module: veiligheid
+  idea: "An agent rewarded for points in a boat race learned to circle and collect them instead of finishing; give a Q-learning agent a reward that almost says what you want, and it finds the gap."
+  covers: [specification-gaming-en-reward-hacking#0]
+  requires: [rai-concrete-problems, rl-q-learning]
+  introduces: [c:specification-gaming]
+  mentions: [c:reward-hacking]
+  data: []
+  ladder: [python, numpy]
+  needs: any
+
+- id: rai-goodhart
+  title: "When a measure becomes a target"
+  level: basis
+  domein: verantwoord
+  module: veiligheid
+  idea: "Goodhart's law: optimize a measure hard and it stops measuring what you wanted. Choose the best of many options by a noisy score and the winner is mostly lucky; the harder you select, the larger the gap."
+  covers: [specification-gaming-en-reward-hacking#1]
+  requires: [rai-specification-gaming, np-random]
+  introduces: [c:goodharts-law, c:proxy-gaming]
+  data: []
+  ladder: [python, numpy]
+  needs: any
+
+- id: rai-outer-inner-alignment
+  title: "Outer and inner alignment"
+  level: basis
+  domein: verantwoord
+  module: veiligheid
+  idea: "Outer alignment asks whether the objective says what we want; inner alignment asks whether the trained model pursues that objective or something that only matched it during training."
+  covers: [ai-veiligheid-als-vakgebied#1]
+  requires: [rai-goodhart]
+  introduces: [c:outer-alignment, c:inner-alignment]
+  data: []
+  ladder: [python]
+  needs: any
+
+- id: rai-ethics-vs-safety
+  title: "AI ethics and AI safety"
+  level: basis
+  domein: verantwoord
+  module: veiligheid
+  idea: "One camp works on harm that AI does now, the other on catastrophes it might cause later; they argue about priorities and worldviews (longtermism and its critics), and share more than the debate suggests."
+  covers: [ai-veiligheid-als-vakgebied#4]
+  requires: [rai-kinds-of-ai-risk, rai-ethical-theories]
+  introduces: [c:longtermism, c:tescreal]
+  data: []
+  ladder: [python]
+  needs: any
+
+- id: rai-safety-field
+  title: "Who works on AI safety?"
+  level: basis
+  domein: verantwoord
+  module: veiligheid
+  idea: "AI Security Institutes, evaluators such as METR and Apollo, research labs and courses such as BlueDot and ARENA make up the field; their research agendas list what is still unsolved."
+  covers: [het-veld-van-ai-veiligheid#0, het-veld-van-ai-veiligheid#1, het-veld-van-ai-veiligheid#2]
+  requires: [rai-ethics-vs-safety]
+  introduces: [c:ai-safety-institute]
+  data: []
+  ladder: [python]
+  needs: any
+
+- id: rai-reliability
+  title: "Robust, resilient, available, predictable"
+  level: basis
+  domein: verantwoord
+  module: veiligheid
+  idea: "A reliable system keeps working when the input is a little off (robustness), recovers after a failure (resilience), is there when needed (availability) and behaves the same each time (predictability); add noise to digits and watch the accuracy fall."
+  covers: [robuustheid-betrouwbaarheid-en-assurance#0]
+  requires: [rai-kinds-of-ai-risk, ml-digits-linear]
+  introduces: [c:robustness]
+  mentions: [c:availability]
+  data: [qmnist]
+  ladder: [python, numpy]
+  needs: any
+
+- id: rai-risk-decomposition
+  title: "Risk as chance times harm"
+  level: basis
+  domein: verantwoord
+  module: veiligheid
+  idea: "Risk is the chance of an event times the harm it does, summed over what can happen; the disaster equation splits it into hazard, exposure and vulnerability, and each part is a place to reduce it."
+  covers: [d25-safety-engineering#0, d25-safety-engineering#1]
+  requires: [rai-reliability, prob-expectation]
+  introduces: [c:disaster-risk-equation]
+  data: []
+  ladder: [python]
+  needs: any
+
+- id: rai-nines
+  title: "Nines of reliability"
+  level: basis
+  domein: verantwoord
+  module: veiligheid
+  idea: "99% sounds safe, but at a million requests a day it is 10,000 failures; each extra nine is ten times fewer, and a chain of steps is only as reliable as their product."
+  covers: [d25-safety-engineering#2]
+  requires: [rai-risk-decomposition, prob-basics]
+  introduces: [c:nines-of-reliability]
+  data: []
+  ladder: [python]
+  needs: any
+
+- id: rai-safe-design-principles
+  title: "Designing for safety"
+  level: basis
+  domein: verantwoord
+  module: veiligheid
+  idea: "Redundancy, separation of duties, least privilege, fail-safes and negative feedback are old principles from engineering that apply to AI systems as they are."
+  covers: [d25-safety-engineering#3]
+  requires: [rai-nines]
+  introduces: [c:fail-safe, c:redundancy, c:separation-of-duties]
+  mentions: [c:least-privilege]
+  data: []
+  ladder: [python]
+  needs: any
+
+- id: rai-swiss-cheese
+  title: "Safeguards in a row"
+  level: basis
+  domein: verantwoord
+  module: veiligheid
+  idea: "Each safeguard has holes; an accident happens when the holes of all safeguards line up (the Swiss cheese model). With independent safeguards the chances multiply, and a fault tree adds them up along AND and OR."
+  covers: [d25-safety-engineering#4, safeguards-bij-uitrol#3]
+  requires: [rai-safe-design-principles, prob-conditional]
+  introduces: [c:swiss-cheese-model, c:fault-tree-analysis, c:defense-in-depth]
+  data: []
+  ladder: [python]
+  needs: any
+
+- id: rai-drift-and-tails
+  title: "Drifting into failure, and black swans"
+  level: basis
+  domein: verantwoord
+  module: veiligheid
+  idea: "Systems fail slowly, by many small departures from the rules that each look normal, and through rare events that are bigger than anything before; with heavy tails, the past maximum says little about the next."
+  covers: [d25-safety-engineering#7, d25-safety-engineering#8]
+  requires: [rai-swiss-cheese, np-random]
+  introduces: [c:drift-into-failure, c:tail-risk]
+  data: []
+  ladder: [python, numpy]
+  needs: any
+
+- id: rai-toxicity-moderation
+  title: "Measuring toxicity"
+  level: basis
+  domein: verantwoord
+  module: veiligheid
+  idea: "A moderation classifier gives each text a score for toxicity; where you put the threshold decides how much harm slips through and how much harmless text is blocked, and scores differ by dialect and topic."
+  covers: [safeguards-bij-uitrol#0]
+  requires: [rai-swiss-cheese, ml-confusion-matrix]
+  introduces: [c:toxicity, c:content-moderation]
+  data: [model-qwen3-0.6b]
+  ladder: [python]
+  needs: any
+
+- id: rai-open-weights
+  title: "Open weights: for and against"
+  level: basis
+  domein: verantwoord
+  module: veiligheid
+  idea: "Open weights let anyone study, adapt and run a model, and also remove its safeguards; the question is the marginal risk, what releasing adds to what was already possible."
+  covers: [safeguards-bij-uitrol#7]
+  requires: [rai-toxicity-moderation]
+  introduces: [c:marginal-risk]
+  mentions: [c:open-weights]
+  data: []
+  ladder: [python]
+  needs: any
+
+- id: rai-frontier-frameworks
+  title: "If this, then that: frontier safety frameworks"
+  level: basis
+  domein: verantwoord
+  module: veiligheid
+  idea: "AI companies commit in advance to what they will do when an evaluation shows a capability above a threshold: if-then commitments, written down in Anthropic's RSP, OpenAI's Preparedness Framework and Google DeepMind's Frontier Safety Framework."
+  covers: [frontier-safety-frameworks#0, frontier-safety-frameworks#1]
+  requires: [rai-open-weights]
+  introduces: [c:frontier-safety-framework, c:capability-threshold]
+  data: []
+  ladder: [python]
+  needs: any
+
+- id: rai-complex-systems
+  title: "AI in a complex system"
+  level: basis
+  domein: verantwoord
+  module: veiligheid
+  idea: "In a complex system parts react to each other, so behavior emerges that no part has, and a fix can make things worse; such wicked problems need a different approach than a bug."
+  covers: [d25-systemische-en-structurele-risicos#0, d25-systemische-en-structurele-risicos#1]
+  requires: [rai-drift-and-tails]
+  introduces: [c:emergence, c:wicked-problem]
+  data: []
+  ladder: [python, numpy]
+  needs: any
+
+- id: rai-race-and-selection
+  title: "Races and selection"
+  level: basis
+  domein: verantwoord
+  module: veiligheid
+  idea: "Companies and states that compete may cut corners on safety, because the one who waits may lose; and the argument goes that when systems that grab resources spread faster, selection favors them, even if nobody wanted it."
+  covers: [d25-systemische-en-structurele-risicos#2, d25-systemische-en-structurele-risicos#3]
+  requires: [rai-complex-systems]
+  introduces: [c:race-to-the-bottom]
+  data: []
+  ladder: [python, numpy]
+  needs: any
+
+- id: rai-ai-for-defense
+  title: "AI for defense"
+  level: basis
+  domein: verantwoord
+  module: veiligheid
+  idea: "AI also helps defenders: finding vulnerabilities first, spotting disinformation, making society more resilient; whether attack or defense gains more decides how risky a capability is."
+  covers: [d25-systemische-en-structurele-risicos#5]
+  requires: [rai-race-and-selection]
+  introduces: [c:systemic-safety, c:offense-defense-balance]
+  data: []
+  ladder: [python]
+  needs: any
+
+- id: rai-xrisk-arguments
+  title: "The arguments for catastrophic risk"
+  level: basis
+  domein: verantwoord
+  module: veiligheid
+  idea: "The argument goes that intelligence and goals are independent (the paperclip maximizer), that almost any goal is served by more power, and that humans could slowly lose their say; Carlsmith, Christiano and AI 2027 work these out into scenarios."
+  covers: [het-debat-over-catastrofale-en-existentiele-risico-s#0, het-debat-over-catastrofale-en-existentiele-risico-s#1]
+  requires: [rai-outer-inner-alignment]
+  introduces: [c:existential-risk, c:orthogonality-thesis, c:gradual-disempowerment, c:catastrophic-risk]
+  data: []
+  ladder: [python]
+  needs: any
+
+- id: rai-accumulative-risk
+  title: "One blow or many small steps"
+  level: basis
+  domein: verantwoord
+  module: veiligheid
+  idea: "A catastrophe can come in one decisive event or accumulate: values locked in, people who can no longer do without, trust that erodes, power that concentrates; the second kind is harder to see coming."
+  covers: [het-debat-over-catastrofale-en-existentiele-risico-s#2]
+  requires: [rai-xrisk-arguments]
+  introduces: [c:accumulative-risk, c:value-lock-in]
+  data: []
+  ladder: [python]
+  needs: any
+
+- id: rai-xrisk-counterpositions
+  title: "Other positions"
+  level: basis
+  domein: verantwoord
+  module: veiligheid
+  idea: "Others see AI as a normal technology that society will absorb, or want to fix today's harm first; e/acc wants to speed up, d/acc to speed up defense, and differential development to build safety before capability."
+  covers: [het-debat-over-catastrofale-en-existentiele-risico-s#3, het-debat-over-catastrofale-en-existentiele-risico-s#4]
+  requires: [rai-accumulative-risk]
+  introduces: [c:differential-technology-development]
+  data: []
+  ladder: [python]
+  needs: any
+
+- id: rai-expert-forecasts
+  title: "What experts expect"
+  level: basis
+  domein: verantwoord
+  module: veiligheid
+  idea: "Surveys of AI researchers give a median chance of an extremely bad outcome of a few percent, with a very wide spread; the median, the spread and how the question is asked matter more than one headline number."
+  covers: [het-debat-over-catastrofale-en-existentiele-risico-s#5]
+  requires: [rai-xrisk-counterpositions, stats-describe]
+  introduces: [c:expert-survey, c:p-doom, c:biological-anchors]
+  data: []
+  ladder: [python, numpy]
+  needs: any
+
+- id: rai-ai-welfare
+  title: "Can an AI system matter morally?"
+  level: basis
+  domein: verantwoord
+  module: veiligheid
+  idea: "If a future AI system could have experiences, how we treat it would matter; nobody knows whether that is the case, so some argue for precaution: research and policy before the question becomes urgent."
+  covers: [ai-welzijn-en-morele-status#0, ai-welzijn-en-morele-status#1]
+  requires: [rai-xrisk-counterpositions, rai-ethical-theories]
+  introduces: [c:moral-status]
+  data: []
+  ladder: [python]
+  needs: any
+
+
+# --- alignment: alignment -------------------------------------------------------------------------------------------
+- id: rai-what-to-align-to
+  title: "Aligned with what?"
+  level: basis
+  domein: verantwoord
+  module: alignment
+  idea: "Aligning a model with what you ask, what you want, what you would want on reflection or what is good gives different answers; people's stated, revealed and ideal preferences already differ."
+  covers: [grenzen-van-leren-van-menselijke-feedback#0]
+  requires: [rai-outer-inner-alignment, rai-wellbeing]
+  introduces: [c:intent-alignment, c:value-alignment]
+  data: []
+  ladder: [python]
+  needs: any
+
+- id: rai-model-specs
+  title: "A model spec"
+  level: basis
+  domein: verantwoord
+  module: alignment
+  idea: "A model spec or constitution writes down how a model should behave (helpful, honest, harmless) and what to do when those clash; test a small model's answers against a short spec and count where it fails."
+  covers: [grenzen-van-leren-van-menselijke-feedback#4]
+  requires: [rai-what-to-align-to, start-prompt-basics]
+  introduces: [c:model-spec]
+  data: [model-qwen3-0.6b]
+  ladder: [python]
+  needs: any
+
+- id: rai-off-switch
+  title: "The off switch"
+  level: basis
+  domein: verantwoord
+  module: alignment
+  idea: "Almost any goal is easier if you are not switched off, so an agent may learn to avoid being interrupted; in a small world with an off switch, Orseau and Armstrong showed that Q-learning does not, while SARSA, which learns from the steps it actually takes, can. Corrigibility asks for agents that let themselves be corrected."
+  covers: [misleidende-alignment-scheming-en-situational-awareness#0]
+  requires: [rai-specification-gaming, rai-what-to-align-to]
+  introduces: [c:corrigibility, c:power-seeking, c:safe-interruptibility]
+  data: []
+  ladder: [python, numpy]
+  needs: any
+
+- id: rai-boxing-and-tool-ai
+  title: "Boxes, oracles and tools"
+  level: basis
+  domein: verantwoord
+  module: alignment
+  idea: "Early ideas for control were to lock an AI in a box, only let it answer questions, or keep it a tool instead of an agent; each leaks, because a useful system has to act on the world in some way."
+  covers: [ai-control#0]
+  requires: [rai-off-switch]
+  introduces: [c:ai-boxing, c:tool-ai, c:oracle-ai, c:ai-control]
+  data: []
+  ladder: [python]
+  needs: any
+
+- id: rai-dangerous-capabilities
+  title: "Testing for dangerous capabilities"
+  level: basis
+  domein: verantwoord
+  module: alignment
+  idea: "Before release, frontier models are tested for help with weapons, cyberattacks, acting on their own, persuading people and copying themselves, often by outside evaluators; a test can show a capability, not prove its absence."
+  covers: [evaluaties-van-gevaarlijke-capabilities#0, evaluaties-van-gevaarlijke-capabilities#3, evaluaties-van-gevaarlijke-capabilities#6]
+  requires: [rai-frontier-frameworks, rai-boxing-and-tool-ai]
+  introduces: [c:dangerous-capability-evaluation]
+  data: []
+  ladder: [python]
+  needs: any
+
+- id: rai-time-horizon
+  title: "How long a task can a model do?"
+  level: basis
+  domein: verantwoord
+  module: alignment
+  idea: "METR measures the length of tasks, in human working time, that a model completes half the time; fit a logistic curve on log task length to get it, and its doubling time says how fast agents improve."
+  covers: [evaluaties-van-gevaarlijke-capabilities#4]
+  requires: [rai-dangerous-capabilities, ml-logistic-regression, math-log-scales]
+  introduces: [c:time-horizon]
+  data: []
+  ladder: [python, numpy]
+  needs: any

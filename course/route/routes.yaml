@@ -738,6 +738,164 @@ routes:
 
 # Goal routes are computed, not written: the smallest set of lessons a goal needs, in the order of the routes.
 # The checker prints these as examples; the app can compute any of them on demand.
+- id: verantwoord
+  domein: verantwoord
+  title: "Responsible and safe AI: the basics"
+  title_nl: "Verantwoorde en veilige AI: de basis"
+  short: "Responsible AI"
+  short_nl: "Verantwoorde AI"
+  # The basics: docs/onderzoek/reports/Voorstel domein Verantwoorde AI.md (besluit 1.18, advice 6). Its taster is in the
+  # kern (rai-bias-in-data). The lessons of other domains it borrows (labels and feedback loops from klassiek-ml, calling
+  # a model and defensive prompts from bouwen) come where they are first needed.
+  milestones:
+    - after: rai-time-horizon
+      en: "Basics done: you measured and reduced the bias of a classifier, explained a model with simple methods, protected data with anonymity and noise, attacked and defended a language model app, and weighed the risks of AI from accidents to loss of control."
+      nl: "Basis af: je hebt de bias van een classifier gemeten en verkleind, een model uitgelegd met eenvoudige methoden, data beschermd met anonimiteit en ruis, een app met een language model aangevallen en verdedigd, en de risico's van AI gewogen, van ongelukken tot controleverlies."
+  steps:
+  # ---------- basis: verantwoord/ethiek ----------
+  - rai-two-kinds-of-harm
+  - rai-ethical-theories
+  - rai-wellbeing
+  - rai-rules-and-dilemmas
+  - rai-principles
+  - rai-ethics-washing
+  - rai-design-with-values
+  - rai-guidance-ethics-deda
+  - rai-accountability
+  - rai-human-oversight
+  - rai-automated-decisions
+  - rai-limits-of-prediction
+  - rai-dark-patterns
+  - rai-professional-ethics
+  - rai-dataset-consent
+  - rai-case-compas-amazon
+  - rai-case-toeslagen-syri
+  - rai-case-dutch-algorithms
+  - rai-case-public-sector-abroad
+  - rai-case-health-credit
+  - rai-case-labels-tay-cambridge
+  - rai-case-uber-crash
+  # ---------- basis: verantwoord/fairness ----------
+  - rai-discrimination-law
+  - rai-80-percent-rule
+  - rai-why-discrimination-is-wrong
+  - rai-equal-opportunity-views
+  - rai-disability-screen-out
+  - rai-bias-lifecycle
+  # ---------- basis: klassiek-ml/praktijk ----------
+  - data-labels
+  # ---------- basis: verantwoord/fairness ----------
+  - rai-feedback-loops
+  - rai-unawareness-proxies
+  - rai-demographic-parity
+  - rai-equalized-odds-calibration
+  - rai-discrimination-tests
+  - rai-reweighing
+  - rai-fair-thresholds
+  - rai-fairness-benchmarks
+  - rai-project-audit-bias
+  - rai-bias-in-llms
+  - rai-bias-in-embeddings
+  - rai-bias-faces-images
+  - rai-bias-speech-ads
+  - rai-fairness-in-organizations
+  - rai-abstraction-traps
+  - rai-data-documentation
+  # ---------- basis: verantwoord/uitleggen ----------
+  - rai-kinds-of-explanation
+  - rai-reason-codes
+  - rai-glass-box-models
+  - rai-additive-models
+  - rai-rashomon
+  - rai-permutation-importance
+  - rai-pdp-ice
+  - rai-global-surrogate
+  - rai-lime
+  - rai-shapley-values
+  - rai-xai-tools
+  - rai-counterfactuals
+  - rai-project-audit-explain
+  - rai-llm-self-explanations
+  - rai-source-attribution
+  # ---------- basis: verantwoord/privacy ----------
+  - rai-what-is-privacy
+  - rai-gdpr
+  - rai-contextual-integrity
+  - rai-pseudonymization
+  - rai-k-anonymity
+  - rai-linkage-attacks
+  - rai-randomized-response
+  - rai-federated-learning
+  - rai-secret-sharing
+  - rai-memorization
+  - rai-find-pii
+  - rai-privacy-by-design
+  - rai-data-governance
+  # ---------- basis: verantwoord/security ----------
+  - rai-security-basics
+  - rai-classic-vulnerabilities
+  - rai-ml-threat-models
+  - rai-owasp-lists
+  - rai-data-poisoning
+  # ---------- basis: llm/gebruiken ----------
+  - lm-base-vs-chat
+  # ---------- basis: bouwen/apis and bouwen/prompts ----------
+  - build-tokens-prices
+  - build-call-api
+  - build-system-prompt
+  - build-defensive-prompts
+  # ---------- basis: verantwoord/security ----------
+  - rai-prompt-injection
+  - rai-indirect-injection
+  - rai-jailbreaks
+  - rai-system-prompt-extraction
+  - rai-insecure-output
+  # ---------- basis: fundament/python (extra in the kern) ----------
+  - py-exceptions
+  # ---------- basis: bouwen/apis ----------
+  - build-errors-retries
+  - build-batch-keys-costs
+  # ---------- basis: verantwoord/security ----------
+  - rai-secrets-and-endpoints
+  - rai-pickle-safetensors
+  - rai-hub-integrity
+  - rai-package-squatting
+  - rai-red-teaming
+  - rai-dual-use-and-frameworks
+  - rai-content-provenance
+  - rai-ai-text-detection
+  # ---------- basis: verantwoord/veiligheid ----------
+  - rai-kinds-of-ai-risk
+  - rai-concrete-problems
+  - rai-specification-gaming
+  - rai-goodhart
+  - rai-outer-inner-alignment
+  - rai-ethics-vs-safety
+  - rai-safety-field
+  - rai-reliability
+  - rai-risk-decomposition
+  - rai-nines
+  - rai-safe-design-principles
+  - rai-swiss-cheese
+  - rai-drift-and-tails
+  - rai-toxicity-moderation
+  - rai-open-weights
+  - rai-frontier-frameworks
+  - rai-complex-systems
+  - rai-race-and-selection
+  - rai-ai-for-defense
+  - rai-xrisk-arguments
+  - rai-accumulative-risk
+  - rai-xrisk-counterpositions
+  - rai-expert-forecasts
+  - rai-ai-welfare
+  # ---------- basis: verantwoord/alignment ----------
+  - rai-what-to-align-to
+  - rai-model-specs
+  - rai-off-switch
+  - rai-boxing-and-tool-ai
+  - rai-dangerous-capabilities
+  - rai-time-horizon
 goals:
 - {id: doel-attention, goal: attn-multi-head, title_nl: "Ik wil attention snappen"}
 - {id: doel-eigen-gpt, goal: gpt-generate, title_nl: "Ik wil zo snel mogelijk mijn eigen GPT"}

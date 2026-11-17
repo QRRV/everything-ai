@@ -103,6 +103,8 @@ les_ok:
   reden: "de 1×1-convolutie staat in de kaart bij convolutionele netwerken (de gedeelde module cnn), maar alleen Inception, ResNeXt en de families daarna gebruiken hem; daarom staat de les bij de CNN-families."
 - les: cv-saliency
   reden: "saliency maps zijn een uitlegmethode (verantwoord, module uitleggen); de les staat in beeld omdat je ze meteen op je eigen CNN toepast, net als Grad-CAM in de les erna. Verantwoord leent deze les."
+- les: llm-safety-eval
+  reden: "red-teamen van je eigen chat model; de les dekt red teaming en jailbreaks (verantwoord, module security), maar staat in llm omdat je er het model mee test dat je daar zelf hebt getraind. De basis van verantwoord legt beide al uit met Qwen3 (rai-jailbreaks, rai-red-teaming)."
 
 fundament:
   id: fundament

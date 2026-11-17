@@ -645,6 +645,7 @@ lessons:
   requires: [ml-vocabulary, py-functions, py-plotting]
   introduces: [c:model, c:model-parameter, c:prediction, s:y-hat, s:w, s:b, c:weight, c:bias-term, s:y, s:x]
   uses: [c:feature, c:label, c:example, c:training, py:def, py:return, c:function-argument, py:np-array, c:array, py:list, c:vectorization, py:plot, v:scatter-plot, v:line-plot, py:import, py:import-as, py:arithmetic, py:float, py:print, py:comment, py:variable, py:underscore-name, q:predict, q:choice, q:exercise-with-check, q:run-cell]
+  mentions: [c:black-box]
   warns: [parameter, bias]
   ladder: [python, numpy]
   needs: any
@@ -695,7 +696,7 @@ lessons:
   level: basis
   domein: fundament
   module: eerste-model
-  idea: "The derivative tells how fast the loss changes when you nudge a parameter; you can measure it by nudging a tiny bit."
+  idea: "The derivative tells how fast the loss changes when you change a parameter a little; you can measure it with a tiny change."
   covers: [calculus#0]
   requires: [ml-fit-by-hand]
   introduces: [c:derivative, c:finite-difference, s:d-derivative]

@@ -358,6 +358,12 @@ SPDX-FileCopyrightText = "2020 Stephan Matzka (AI4I 2020 Predictive Maintenance 
 SPDX-License-Identifier = "CC-BY-4.0"
 
 [[annotations]]
+path = "data/adult.csv.gz"
+precedence = "override"
+SPDX-FileCopyrightText = "1996 Barry Becker and Ronny Kohavi (Adult, UCI Machine Learning Repository, https://doi.org/10.24432/C5XW20)"
+SPDX-License-Identifier = "CC-BY-4.0"
+
+[[annotations]]
 path = "data/online-retail-baskets.csv.gz"
 precedence = "override"
 SPDX-FileCopyrightText = "2015 Daqing Chen (Online Retail, UCI Machine Learning Repository, https://doi.org/10.24432/C5BW33; the orders as sets of products, made for Everything AI)"

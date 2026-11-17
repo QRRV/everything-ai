@@ -94,7 +94,13 @@ modules:
   systemen/hardware: {en: "Hardware", nl: "Hardware"}
   systemen/snel-trainen: {en: "Training fast", nl: "Snel trainen"}
   systemen/productie: {en: "ML in production", nl: "ML in productie"}
+  verantwoord/ethiek: {en: "Ethics", nl: "Ethiek"}
+  verantwoord/fairness: {en: "Fairness", nl: "Fairness"}
+  verantwoord/uitleggen: {en: "Explaining models", nl: "Modellen uitleggen"}
+  verantwoord/privacy: {en: "Privacy", nl: "Privacy"}
   verantwoord/security: {en: "Security", nl: "Security"}
+  verantwoord/veiligheid: {en: "AI safety", nl: "AI-veiligheid"}
+  verantwoord/alignment: {en: "Alignment", nl: "Alignment"}
   onderzoek/lezen: {en: "Reading papers", nl: "Papers lezen"}
   onderzoek/experimenten: {en: "Experiments", nl: "Experimenten"}
   onderzoek/nabouwen: {en: "Reproducing a paper", nl: "Een paper nabouwen"}

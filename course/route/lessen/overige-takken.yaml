@@ -188,7 +188,7 @@ lessons:
   idea: "A model learns the gaps and prejudices in its data; ask who could be harmed and who is missing before you trust a score."
   covers: [waarom-ai-ethiek#0, bronnen-van-bias#1]
   requires: [ml-workflow]
-  introduces: [c:harm, c:stakeholder, c:data-bias]
+  introduces: [c:harm, c:stakeholder, c:data-bias, c:harmful-bias]
   warns: [bias]
   uses: [p:ml-workflow, c:accuracy, c:metric, c:test-set, c:model, c:training, c:label, c:example, c:feature, c:prediction, c:class, v:confusion-matrix, c:mean, c:loss, c:baseline, c:bias-term, s:b, s:n-examples, py:dict, py:len, py:dataframe, py:pandas-select-filter, py:value-counts, py:import, py:import-as, py:list, py:append, py:for, py:comparison, py:arithmetic, py:float, py:int, py:print, py:comment, py:variable, py:underscore-name, q:predict, q:choice, q:exercise-with-check, q:run-cell]
   data: []
@@ -467,8 +467,8 @@ lessons:
 - id: llm-safety-eval
   title: "Red-team your own chat model"
   level: expert
-  domein: verantwoord
-  module: security
+  domein: llm
+  module: evalueren
   idea: "Before you share a chat model you test what it does with harmful requests: a small red-team set measures how often it goes along, and a set of harmless requests measures how often it refuses for no reason."
   covers: [red-teaming-provenance-en-securitykaders#0, aanvallen-op-llm-applicaties#2]
   requires: [llm-eval-chat]

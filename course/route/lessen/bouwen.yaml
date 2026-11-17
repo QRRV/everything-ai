@@ -1098,7 +1098,7 @@ lessons:
   covers: [d17-llmops-en-productie#2]
   requires: [build-defensive-prompts, build-tracing]
   introduces: [c:guardrail, c:pii-redaction, c:fallback]
-  mentions: [c:over-refusal]
+  mentions: [c:over-refusal, c:personal-data]
   uses: [c:prompt-injection, c:defensive-prompting, c:system-prompt, c:structured-output, c:json, c:chat-model, c:greedy-decoding, c:eval-set, c:trace, py:def, py:return, py:for, py:if, py:none, py:bool, py:dict, py:list, py:tuple, py:append, py:split, py:str-join, py:lower, py:len, py:and-operator, py:comparison, py:indexing, py:string-literal, q:choice, q:exercise-with-check, q:run-cell]
   data: [model-qwen3-0.6b, course-production-qwen, banking77-small]
   ladder: [python]
