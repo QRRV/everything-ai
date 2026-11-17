@@ -1,0 +1,28 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: build-agent-memory
+minutes: 30
+title:
+  en: "What an agent remembers"
+  nl: "Wat een agent onthoudt"
+goal:
+  en: "give an agent a long-term memory: a tool that saves notes in a file, and a new conversation that starts with them."
+  nl: "een agent een langetermijngeheugen geven: een tool die notities in een bestand bewaart, en een nieuw gesprek dat ermee begint."
+summary:
+  - en: "A model remembers nothing between requests. Short-term memory is the conversation the agent sends again with each request; long-term memory is notes kept outside the model, which your code puts into the system prompt of a new conversation."
+    nl: "Een model onthoudt niets tussen requests. Kortetermijngeheugen is het gesprek dat de agent met elk request opnieuw stuurt; langetermijngeheugen is notities die buiten het model bewaard worden, en die je code in de system prompt van een nieuw gesprek zet."
+  - en: "Measured on Qwen3-0.6B: it called `remember` only when `tool_choice` named it, and saved the user's own sentence as the note. With the notes in a new conversation, 3 of 6 answers were right instead of 0, the same 3 as later in the same conversation; the yes-or-no questions stayed wrong."
+    nl: "Gemeten op Qwen3-0.6B: het riep `remember` alleen aan als `tool_choice` die tool noemde, en bewaarde de zin van de gebruiker als notitie. Met de notities in een nieuw gesprek klopten 3 van de 6 antwoorden in plaats van 0, dezelfde 3 als later in hetzelfde gesprek; de vragen met ja of nee bleven fout."
+  - en: "A note is what the model wrote, and it keeps steering every new conversation: read the notes, replace one that no longer holds, and tell users what the agent keeps about them."
+    nl: "Een notitie is wat het model schreef, en ze stuurt elk nieuw gesprek: lees de notities, vervang er een die niet meer klopt, en vertel gebruikers wat de agent over ze bewaart."
+can_now:
+  - en: "write the tool function that saves an agent's note at the end of a file"
+    nl: "de functie van een tool schrijven die een notitie van een agent aan het eind van een bestand bewaart"
+    by: remember
+  - en: "start a new conversation with the notes an agent saved earlier"
+    nl: "een nieuw gesprek beginnen met de notities die een agent eerder bewaarde"
+    by: first-messages
+  - en: "decide what happens to a note that no longer holds"
+    nl: "beslissen wat er gebeurt met een notitie die niet meer klopt"
+    by: stale-note

@@ -884,11 +884,13 @@ lessons:
   level: basis
   domein: bouwen
   module: agents
-  idea: "Instead of deciding one step at a time, an agent can first write the whole plan and then carry it out (plan-and-execute): fewer calls to the model, and you can read the plan before it runs; ReWOO and LLMCompiler run independent steps in parallel."
+  idea: "Instead of deciding one step at a time, an agent can first write the whole plan and then carry it out (plan-and-execute): fewer calls to the model, and you can read the plan before it runs; in ReWOO a step uses an earlier step's result by its number, and LLMCompiler runs the steps that do not need each other at the same time."
   covers: [planning-reflectie-en-geheugen#0]
   requires: [build-agent-loop]
   introduces: [c:plan-and-execute]
-  data: [model-qwen3-0.6b]
+  mentions: [c:temperature]
+  uses: [c:llm-agent, c:agent-loop, c:step-limit, c:tool, c:tool-call, c:function-calling, c:llm-workflow, c:orchestrator-workers, c:system-prompt, c:prompt, c:message-role, c:api, c:local-server, c:chat-model, c:json, c:json-mode, py:def, py:return, py:for, py:if, py:dict, py:dict-items, py:list, py:indexing, py:str, py:len, py:arithmetic, py:min-max, py:string-literal, py:json, q:choice, q:exercise-with-check, q:run-cell]
+  data: [model-qwen3-0.6b, course-agents-qwen]
   ladder: [python]
   needs: any
 
@@ -897,11 +899,13 @@ lessons:
   level: basis
   domein: bouwen
   module: agents
-  idea: "An agent remembers nothing between calls by itself: short-term memory is the conversation in its context, long-term memory is notes it writes to a file and searches again later."
+  idea: "An agent remembers nothing between calls by itself: short-term memory is the conversation in its context, long-term memory is notes it saves with a tool in a file, which a new conversation reads into its system prompt."
   covers: [planning-reflectie-en-geheugen#2]
   requires: [build-agent-loop, build-context-engineering]
   introduces: [c:short-term-memory, c:long-term-memory]
-  data: [model-qwen3-0.6b]
+  mentions: [c:temperature, py:open-write]
+  uses: [c:llm-agent, c:agent-loop, c:tool, c:tool-call, c:function-calling, c:tool-choice, c:system-prompt, c:context-window, c:context-engineering, c:prompt, c:message-role, c:api, c:local-server, c:chat-model, c:json, py:def, py:return, py:with, py:open, py:try-except, py:if, py:bool, py:dict, py:list, py:indexing, py:string-literal, py:strip, q:choice, q:exercise-with-check, q:run-cell]
+  data: [model-qwen3-0.6b, course-agents-qwen]
   ladder: [python]
   needs: any
 
@@ -914,6 +918,8 @@ lessons:
   covers: [code-execution-computer-use-en-browser-use#0]
   requires: [build-agent-loop, build-tool-permissions]
   introduces: [c:sandbox, py:subprocess]
+  uses: [c:llm-agent, c:tool, c:tool-call, c:agent-loop, c:message-role, c:allowlist, c:least-privilege, py:import, py:def, py:return, py:if, py:none, py:try-except, py:with, py:keyword-argument, py:list, py:dict, py:for, py:comprehension, py:print, py:open, py:str, py:string-literal, py:strip, py:slicing, py:len, py:comparison, py:indexing, py:arithmetic, q:choice, q:exercise-with-check, q:run-cell]
+  mentions: [c:environment-variable, c:api-key, c:timeout, py:tempfile, py:split-sep]
   data: []
   ladder: [python]
   needs: any

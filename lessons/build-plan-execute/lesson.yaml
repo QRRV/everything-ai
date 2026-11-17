@@ -1,0 +1,28 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: build-plan-execute
+minutes: 35
+title:
+  en: "Plan first, then act"
+  nl: "Eerst plannen, dan doen"
+goal:
+  en: "have a model write its whole plan first, run the plan in code with each step using the results it names, find the steps that can run at the same time, and measure it against an agent loop."
+  nl: "een model eerst het hele plan laten schrijven, het plan in code uitvoeren waarbij elke stap de resultaten gebruikt die hij noemt, de stappen vinden die tegelijk kunnen draaien, en het meten tegen een agent loop."
+summary:
+  - en: "Plan-and-execute: the model writes all steps first, as JSON; your code runs them; a second request writes the answer from the results. As in ReWOO, a step uses an earlier result by its number, such as \"#1\", so the model does not have to copy results."
+    nl: "Plan-and-execute: het model schrijft eerst alle stappen, als JSON; je code voert ze uit; een tweede request schrijft het antwoord uit de resultaten. Zoals bij ReWOO gebruikt een stap een eerder resultaat via zijn nummer, zoals \"#1\", zodat het model geen resultaten hoeft over te nemen."
+  - en: "Measured on Qwen3-0.6B with 15 questions: its own plans were JSON the code could read, but none worked out what to buy, so 0 answers were right; with the course's plan 3 were, and as an agent loop 0. Every error came from what the model wrote, and each plan could be read before it ran."
+    nl: "Gemeten op Qwen3-0.6B met 15 vragen: zijn eigen plannen waren JSON die de code kon lezen, maar geen enkel plan rekende uit wat er gekocht moest worden, dus klopten 0 antwoorden; met het plan van de course 3, en als agent loop 0. Elke fout kwam uit wat het model schreef, en elk plan was te lezen vóór het draaide."
+  - en: "Steps that do not use each other's results can run at the same time, as in LLMCompiler: a step's wave is one more than the latest wave of the results it uses. A plan you can read before it runs is also a plan you can check, or have a person approve."
+    nl: "Stappen die elkaars resultaten niet gebruiken, kunnen tegelijk draaien, zoals bij LLMCompiler: de golf van een stap is één meer dan de laatste golf van de resultaten die hij gebruikt. Een plan dat je kunt lezen vóór het draait, is ook een plan dat je kunt controleren, of door een persoon kunt laten goedkeuren."
+can_now:
+  - en: "run a plan in code, with each step getting the results of earlier steps by their numbers"
+    nl: "een plan in code uitvoeren, waarbij elke stap de resultaten van eerdere stappen krijgt via hun nummers"
+    by: run-plan
+  - en: "find which steps of a plan can run at the same time"
+    nl: "vinden welke stappen van een plan tegelijk kunnen draaien"
+    by: waves
+  - en: "choose between a plan written first and an agent loop for a task"
+    nl: "voor een taak kiezen tussen een plan dat eerst geschreven wordt en een agent loop"
+    by: plan-or-loop

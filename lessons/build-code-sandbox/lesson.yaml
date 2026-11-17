@@ -1,0 +1,28 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: build-code-sandbox
+minutes: 30
+title:
+  en: "Running code an agent wrote"
+  nl: "Code van een agent draaien"
+goal:
+  en: "run code an agent wrote in a separate process, with a time limit, in an empty folder and without your environment variables, and give the model back a short text it can use."
+  nl: "code die een agent schreef draaien in een apart proces, met een tijdslimiet, in een lege map en zonder je environment variables, en het model een korte tekst teruggeven waar het iets mee kan."
+summary:
+  - en: "Code a model wrote never runs in your own program. It runs in a sandbox: a separate process, with a time limit, in a new empty folder that is thrown away afterwards, without your environment variables, where keys often live."
+    nl: "Code die een model schreef, draait nooit in je eigen programma. Hij draait in een sandbox: een apart proces, met een tijdslimiet, in een nieuwe lege map die daarna wordt weggegooid, zonder je environment variables, waar keys vaak in staan."
+  - en: "A separate process in an empty folder still may do whatever you may: of eight pieces of code, four deleted, read, sent and started something outside the folder. The course's guard stopped all four, but it is a check within Python, not a wall; for code that strangers can steer, use a container or a separate user."
+    nl: "Een apart proces in een lege map mag nog steeds alles wat jij mag: van acht stukken code verwijderden, lazen, verstuurden en startten er vier iets buiten de map. De bewaker van de course hield ze alle vier tegen, maar is een controle binnen Python, geen muur; voor code die vreemden kunnen sturen, gebruik je een container of een aparte gebruiker."
+  - en: "The model gets back what it can use: the output, cut off at a limit with a note, the last line of an error, or that the time ran out."
+    nl: "Het model krijgt terug waar het iets mee kan: de output, afgeknipt bij een limiet met een regel erover, de laatste regel van een fout, of dat de tijd op was."
+can_now:
+  - en: "run code in a separate process with subprocess, in an empty folder, without environment variables and with a time limit"
+    nl: "code draaien in een apart proces met subprocess, in een lege map, zonder environment variables en met een tijdslimiet"
+    by: run
+  - en: "turn what came back into a short text for the model: the output, cut off, or the last line of an error"
+    nl: "wat er terugkwam omzetten in een korte tekst voor het model: de output, afgeknipt, of de laatste regel van een fout"
+    by: result_text
+  - en: "tell when a sandbox within Python is enough, and when code needs one of the operating system"
+    nl: "zeggen wanneer een sandbox binnen Python genoeg is, en wanneer code er een van het besturingssysteem nodig heeft"
+    by: guard-wall

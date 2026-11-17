@@ -16,7 +16,10 @@ RECORD, {key: ask}, and an ask is one of
         are, and an ask with "logprobs" goes without a stream and keeps the logprobs of every token ("logprobs");
         messages that end with one of the assistant are a prefill; with "retry": n, checks.py's follow_up(text) reads each answer
         (follow_up(text, feedback) when the ask has a "feedback" text to fill in), and while it gives a message and fewer than n tries were made, the answer and that message (as the user's) are
-        added and the model is asked again with the same seed: such an answer is {"seed": s, "tries": [...]}
+        added and the model is asked again with the same seed: such an answer is {"seed": s, "tries": [...]}; with
+        "then": n, checks.py's then(key, answers) gives the next ask from the answers so far, such as a request built
+        from what a plan gave, or None, and it is asked with the same seed, at most n asks in all: such an answer is
+        {"seed": s, "chain": [...]}
     {"messages": [...], "tools": [...], "steps": n, "max_tokens": n, "seeds": k}   a question with tools, without a
         stream: the answer's tool calls are run by checks.py's tool_results(message, ask), which gives a message with the
         role tool for each, and the answer and those results go back to the model, at most n requests in all;
@@ -24,7 +27,8 @@ RECORD, {key: ask}, and an ask is one of
         each. Such an answer is {"seed": s, "steps": [...]}, each step with its "tool_calls" as the server gave them
         and the "results" of the tools
     {"turns": [...], "max_tokens": n, "seeds": k}      a chat: in each turn the user's next message, after the
-        messages so far and the model's answers to them, every turn with the same seed
+        messages so far and the model's answers to them, every turn with the same seed; "messages" before the first
+        turn, such as a system prompt, go first
     {"speed": "float32" | "bfloat16", "messages": [...], "max_tokens": n}   the chat model in that dtype on one thread,
         without the server: how many tokens it writes per second
     {"count": [text, ...]}                              how many tokens each text has, with Qwen3's tokenizer
@@ -73,7 +77,7 @@ FILES = {   # the file of each module, and its lessons
     "course-rag-qwen.json": ["build-rag-idea", "build-rag-first", "build-grounded-answers", "build-project-rag",
                              "build-reranking", "build-query-rewriting", "build-rag-eval"],
     "course-agents-qwen.json": ["build-tool-calling", "build-tool-design", "build-workflow-or-agent", "build-workflow-patterns",
-                                "build-agent-loop"],
+                                "build-agent-loop", "build-plan-execute", "build-agent-memory"],
 }
 LESSONS = [lesson for lessons in FILES.values() for lesson in lessons]
 THREADS = 2   # the server's threads; a speed ask runs on one
@@ -295,7 +299,7 @@ def main(lessons: list, again: set) -> None:
                     entry["answers"].append({"seed": seed, "steps": steps})
                     save(lesson, key, seed, [(a["cached_tokens"], a["seconds"]) for a in steps])
                 elif "turns" in ask:
-                    messages, turns = [], []
+                    messages, turns = list(ask.get("messages", [])), []
                     for said in ask["turns"]:
                         messages.append({"role": "user", "content": said})
                         a = _answer(running.url, ask, messages, seed)
@@ -315,6 +319,15 @@ def main(lessons: list, again: set) -> None:
                         said = told(tries[-1]["text"])
                     entry["answers"].append({"seed": seed, "tries": tries})
                     save(lesson, key, seed, len(tries), [repr(a["text"][:60]) for a in tries])
+                elif "then" in ask:
+                    chain = [_answer(running.url, ask, ask["messages"], seed)]
+                    while len(chain) < ask["then"]:
+                        nxt = C.then(key, chain)
+                        if nxt is None:
+                            break
+                        chain.append(_answer(running.url, nxt, nxt["messages"], seed))
+                    entry["answers"].append({"seed": seed, "chain": chain})
+                    save(lesson, key, seed, [(a["tokens"], repr(a["text"][:50])) for a in chain])
                 else:
                     a = _answer(running.url, ask, ask.get("messages"), seed)
                     entry["answers"].append({"seed": seed, **a})
