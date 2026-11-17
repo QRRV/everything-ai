@@ -1,0 +1,31 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: build-ship-app
+minutes: 20
+title:
+  en: "Shipping an LLM app"
+  nl: "Een LLM-app uitbrengen"
+goal:
+  en: "keep everything an app can change without new code in a settings file with a version, log every request with that version, count per version from the log, and go back to the last good settings when a new version does worse."
+  nl: "alles wat een app zonder nieuwe code kan veranderen in een instellingenbestand met een versie zetten, elk request met die versie loggen, uit de log per versie tellen, en teruggaan naar de laatste goede instellingen als een nieuwe versie het slechter doet."
+summary:
+  - en: "AI engineering builds an app on a model someone else trained. What you can change without new code, such as the model, the prompt version and the cache, goes in a settings file with a version, and the old files stay."
+    nl: "AI engineering bouwt een app op een model dat iemand anders trainde. Wat je zonder nieuwe code kunt veranderen, zoals het model, de versie van de prompt en de cache, gaat in een instellingenbestand met een versie, en de oude bestanden blijven bewaard."
+  - en: "Every request writes a line of JSON to the log with the version of its settings. Counted per version, the bank's log said: version 2 of the prompt passed the eval set for 82 of the 120 test questions against 78, and made something up in 41 replies against 23."
+    nl: "Elk request schrijft een regel JSON naar de log met de versie van de instellingen. Geteld per versie zei de log van de bank: versie 2 van de prompt kwam bij 82 van de 120 testvragen door de eval set tegen 78, en verzon iets in 41 antwoorden tegen 23."
+  - en: "A rollback loads the settings of the last good version again: roll back first, then look for the cause, and ship the fix as a new version."
+    nl: "Een rollback laadt de instellingen van de laatste goede versie opnieuw: eerst terug, dan de oorzaak zoeken, en de oplossing uitbrengen als een nieuwe versie."
+can_now:
+  - en: "read a settings file and fill in the defaults for what it leaves out"
+    nl: "een instellingenbestand lezen en de standaardwaarden invullen voor wat het weglaat"
+    by: settings_from
+  - en: "count what a log says per version of the settings"
+    nl: "tellen wat een log zegt per versie van de instellingen"
+    by: count_by_settings
+  - en: "find the newest settings to go back to"
+    nl: "de nieuwste instellingen vinden om naar terug te gaan"
+    by: last_good
+  - en: "roll back first, and look for the cause after"
+    nl: "eerst terugdraaien, en daarna de oorzaak zoeken"
+    by: first-step

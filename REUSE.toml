@@ -364,6 +364,12 @@ SPDX-FileCopyrightText = "2015 Daqing Chen (Online Retail, UCI Machine Learning 
 SPDX-License-Identifier = "CC-BY-4.0"
 
 [[annotations]]
+path = "data/course-banking-granite.npz"
+precedence = "override"
+SPDX-FileCopyrightText = "2026 Everything AI contributors (embeddings made by Granite Embedding 107M multilingual of IBM, Apache-2.0, of questions from BANKING77, PolyAI 2020)"
+SPDX-License-Identifier = "CC-BY-4.0"
+
+[[annotations]]
 path = "data/banking77-small.json"
 precedence = "override"
 SPDX-FileCopyrightText = "2020 PolyAI (BANKING77, Casanueva and others, https://arxiv.org/abs/2003.04807; a subset made for Everything AI)"

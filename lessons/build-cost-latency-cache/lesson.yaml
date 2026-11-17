@@ -1,0 +1,31 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: build-cost-latency-cache
+minutes: 25
+title:
+  en: "Cost, latency and caching answers"
+  nl: "Kosten, latency en antwoorden cachen"
+goal:
+  en: "measure what each call costs and how long it takes, and put a cache of answers in front of the model: by the exact text and by meaning, and see with the eval set whether its answers still pass."
+  nl: "meten wat elke call kost en hoe lang hij duurt, en een cache met antwoorden vóór het model zetten: op de precieze tekst en op betekenis, en met de eval set zien of zijn antwoorden er nog door komen."
+summary:
+  - en: "Measure for every call its tokens times their prices and its latency, the wait. Look at many calls: the median is what a customer usually waits, p95 what the slowest one in twenty gets."
+    nl: "Meet bij elke call zijn tokens maal hun prijzen en zijn latency, het wachten. Kijk naar veel calls: de mediaan is wat een klant meestal wacht, p95 wat de langzaamste één op de twintig krijgt."
+  - en: "Version 2 of the bank's assistant took 7.55 seconds at the median for an answer, 9.62 at p95 and 11.08 at most, and its 120 answers cost 1.61 dollars for 1,000 questions at made-up prices. Embedding a question with Granite took 0.015 seconds at the median."
+    nl: "Versie 2 van de assistent van de bank deed over een antwoord 7,55 seconden bij de mediaan, 9,62 bij p95 en 11,08 op zijn langst, en zijn 120 antwoorden kostten 1,61 dollar voor 1.000 vragen bij verzonnen prijzen. Een vraag als embedding met Granite duurde 0,015 seconden bij de mediaan."
+  - en: "From a similarity of 0.85 on, a semantic cache answered 66 of the 120 questions and saved 507.5 of the 926.1 seconds of the model; 3 got the answer to a question about another topic. The eval set passed 49 of its answers and 46 of the model's own answers to the same questions; from 0.75 on it answered 100, and the eval set passed 59 against 68."
+    nl: "Vanaf een similarity van 0,85 beantwoordde een semantic cache 66 van de 120 vragen en bespaarde 507,5 van de 926,1 seconden van het model; 3 kregen het antwoord op een vraag over een ander onderwerp. De eval set keurde 49 van zijn antwoorden goed en 46 van de eigen antwoorden van het model op dezelfde vragen; vanaf 0,75 beantwoordde hij er 100, en keurde de eval set er 59 goed tegen 68."
+can_now:
+  - en: "find the time that the slowest one in twenty calls takes"
+    nl: "de tijd vinden die de langzaamste één op de twintig calls duurt"
+    by: p95
+  - en: "count the hits of an exact cache"
+    nl: "de hits van een exact cache tellen"
+    by: exact_hits
+  - en: "find the closest question in a semantic cache"
+    nl: "de dichtstbijzijnde vraag in een semantic cache vinden"
+    by: closest
+  - en: "choose a threshold for a semantic cache from what it saves and what it gets wrong"
+    nl: "een drempel voor een semantic cache kiezen op wat hij bespaart en wat hij fout doet"
+    by: stricter

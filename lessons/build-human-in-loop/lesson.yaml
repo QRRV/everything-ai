@@ -1,0 +1,31 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: build-human-in-loop
+minutes: 20
+title:
+  en: "Ask before acting"
+  nl: "Eerst vragen, dan doen"
+goal:
+  en: "let an agent stop before a step that costs money, sends something or cannot be undone, ask a person, and go on as that person answers: yes, a changed step, or no."
+  nl: "een agent laten stoppen vóór een stap die geld kost, iets verstuurt of niet terug te draaien is, een mens laten vragen, en doorgaan zoals die antwoordt: ja, een aangepaste stap, of nee."
+summary:
+  - en: "An approval step lets the agent stop before a step and wait for a person: yes runs it, a changed step runs as changed, and no stops the agent, which tells the customer that a person will reply."
+    nl: "Een approval step laat de agent vóór een stap stoppen en op een mens wachten: ja laat hem draaien, een aangepaste stap draait zoals hij is aangepast, en nee stopt de agent, die de klant laat weten dat er een mens reageert."
+  - en: "Ask at the steps that cost money, send something or cannot be undone, not at every step. On a day of 10 messages with 20 steps, 4 of them written wrong on purpose, that rule asked 9 times and caught 3 wrong steps; the fourth, a card block, can be undone. Asking at every step meant 19 asks."
+    nl: "Vraag bij de stappen die geld kosten, iets versturen of niet terug te draaien zijn, niet bij elke stap. Op een dag met 10 berichten en 20 stappen, waarvan 4 expres verkeerd, vroeg die regel 9 keer en ving hij 3 verkeerde stappen op; de vierde, een kaart blokkeren, is terug te draaien. Bij elke stap vragen betekende 19 keer vragen."
+  - en: "Keep the answers: every change and every no is a step the agent planned wrong, and a case for the eval set."
+    nl: "Bewaar de antwoorden: elke aanpassing en elk nee is een stap die de agent verkeerd plande, en een geval voor de eval set."
+can_now:
+  - en: "decide from what a tool does whether to ask a person first"
+    nl: "uit wat een tool doet beslissen of je eerst een mens vraagt"
+    by: needs_approval
+  - en: "run an agent's steps with an approval step that takes yes, a changed step or no"
+    nl: "de stappen van een agent uitvoeren met een approval step die ja, een aangepaste stap of nee aanneemt"
+    by: run_steps
+  - en: "pick the steps that should wait for a person"
+    nl: "de stappen kiezen die op een mens horen te wachten"
+    by: which-step
+  - en: "explain why asking at every step is not the safest choice"
+    nl: "uitleggen waarom bij elke stap vragen niet het veiligst is"
+    by: every-step

@@ -1111,10 +1111,11 @@ lessons:
   module: productie
   idea: "Measure what each call costs and how long it takes; keep answers to repeated questions in a cache, exactly by the text or by meaning with embeddings, and check that a cached answer still fits."
   covers: [d17-llmops-en-productie#3]
-  requires: [build-batch-keys-costs, build-prompt-caching, build-retrieval-embeddings]
+  requires: [build-batch-keys-costs, build-prompt-caching, build-retrieval-embeddings, build-eval-set]
   introduces: [c:latency, c:exact-cache, c:semantic-cache]
-  mentions: [c:caching]
-  data: [model-qwen3-0.6b, model-granite-embedding]
+  mentions: [c:caching, c:kv-cache, c:trace]
+  uses: [c:prompt-caching, c:token-price, c:token, c:embedding, c:cosine-similarity, c:dot-product, c:median, c:quantile, c:eval-set, c:chat-model, c:embedding-model, py:def, py:return, py:for, py:if, py:sorted, py:int, py:len, py:indexing, py:set, py:set-add, py:lower, py:strip, py:tuple, py:float, py:np-argmax, py:matmul-operator, py:arithmetic, q:choice, q:exercise-with-check, q:slider-task, q:run-cell]
+  data: [model-qwen3-0.6b, model-granite-embedding, course-production-qwen, course-banking-granite, banking77-small]
   ladder: [python, numpy]
   needs: any
 
@@ -1125,9 +1126,11 @@ lessons:
   module: productie
   idea: "AI engineering builds on a model someone else trained: the work is in prompts, data, evals and the code around them; an app ships with its settings in a file, logs, a version of every prompt, and a way back when a change goes wrong."
   covers: [d17-llmops-en-productie#0, d17-llmops-en-productie#6]
-  requires: [build-guardrails, build-cost-latency-cache]
+  requires: [build-guardrails, build-cost-latency-cache, build-eval-online]
   introduces: [c:ai-engineering, c:rollback]
-  data: []
+  mentions: [c:temperature, c:llm-as-a-judge]
+  uses: [c:prompt-version, c:eval-set, c:regression-test, c:online-evaluation, c:ab-test, c:user-feedback, c:semantic-cache, c:trace, c:guardrail, c:token, c:latency, c:chat-model, c:json, py:json, py:def, py:return, py:for, py:if, py:dict, py:list, py:set, py:none, py:bool, py:indexing, py:string-literal, py:arithmetic, q:choice, q:exercise-with-check]
+  data: [model-qwen3-0.6b, model-granite-embedding, course-production-qwen, course-banking-granite, banking77-small]
   ladder: [python]
   needs: any
 
@@ -1140,6 +1143,8 @@ lessons:
   covers: [agents-beheersen-en-evalueren#0]
   requires: [build-tool-permissions, build-eval-set]
   introduces: [c:human-in-the-loop, c:approval-step]
+  mentions: [c:agent-failure-mode, py:or-operator, py:not-operator]
+  uses: [c:llm-agent, c:tool, c:tool-call, c:least-privilege, c:eval-set, py:def, py:return, py:for, py:if, py:break, py:dict, py:list, py:append, py:tuple, py:bool, py:indexing, py:comparison, py:string-literal, py:arithmetic, q:choice, q:exercise-with-check]
   data: []
   ladder: [python]
   needs: any
