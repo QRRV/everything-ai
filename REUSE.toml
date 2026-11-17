@@ -268,6 +268,12 @@ SPDX-FileCopyrightText = "2026 Everything AI contributors (the course's runs; an
 SPDX-License-Identifier = "CC-BY-4.0"
 
 [[annotations]]
+path = "data/skills/**"
+precedence = "override"
+SPDX-FileCopyrightText = "2026 Everything AI contributors"
+SPDX-License-Identifier = "CC-BY-SA-4.0"
+
+[[annotations]]
 path = ["data/course-summaries.json", "data/documents/**"]
 precedence = "override"
 SPDX-FileCopyrightText = "2026 Everything AI contributors"

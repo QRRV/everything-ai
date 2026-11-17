@@ -929,11 +929,13 @@ lessons:
   level: basis
   domein: bouwen
   module: agents
-  idea: "A browser agent reads a page as text or as a screenshot and clicks, types and scrolls like a person; it can do what has no API, but it is slow, breaks when the page changes, and every page it reads can carry instructions."
+  idea: "A browser agent reads a page as text or as a screenshot and clicks, types and scrolls like a person; it can do what has no API and copes with a changed page where a fixed script breaks, but it is slow, makes mistakes, and every page it reads can carry instructions."
   covers: [code-execution-computer-use-en-browser-use#2]
   requires: [build-agent-loop, build-defensive-prompts]
   introduces: [c:browser-use, c:computer-use]
-  data: []
+  mentions: [c:temperature, c:script, py:not-operator]
+  uses: [c:llm-agent, c:agent-loop, c:step-limit, c:tool, c:tool-call, c:function-calling, c:system-prompt, c:prompt, c:prompt-injection, c:message-role, c:api, c:local-server, c:chat-model, c:json, py:def, py:return, py:if, py:for, py:dict, py:list, py:append, py:indexing, py:string-literal, py:str, py:round, py:int, py:float, py:tuple, py:split, py:str-join, py:comparison, q:exercise-with-check, q:run-cell]
+  data: [model-qwen3-0.6b, course-agents-qwen]
   needs: any
 
 - id: build-mcp
@@ -945,7 +947,9 @@ lessons:
   covers: [protocollen-en-standaarden#0]
   requires: [build-tool-design]
   introduces: [c:model-context-protocol, c:json-rpc, c:mcp-server]
-  data: []
+  mentions: [c:temperature, c:prompt-injection, py:startswith]
+  uses: [c:llm-agent, c:tool, c:tool-call, c:function-calling, c:client-side-tool, c:agent-computer-interface, c:json, c:json-schema, c:api, c:local-server, c:chat-model, c:prompt, c:message-role, c:token, py:def, py:return, py:if, py:none, py:dict, py:list, py:for, py:indexing, py:string-literal, py:str-join, py:comprehension, q:choice, q:exercise-with-check, q:run-cell]
+  data: [model-qwen3-0.6b, course-agents-qwen]
   ladder: [python]
   needs: any
 
@@ -957,8 +961,10 @@ lessons:
   idea: "An agent learns about a project from AGENTS.md, gets a procedure as a skill it loads only when needed, and can use any web API whose OpenAPI specification it reads; plugins bundle such extensions."
   covers: [protocollen-en-standaarden#5, protocollen-en-standaarden#6, protocollen-en-standaarden#7]
   requires: [build-mcp, build-coding-workflow]
-  introduces: [c:agent-skill, c:openapi-specification, c:plugin]
-  data: []
+  introduces: [c:agent-skills, c:openapi, c:plugin]
+  mentions: [c:temperature, c:prompt-injection]
+  uses: [c:agents-md, c:coding-agent, c:llm-agent, c:tool, c:tool-call, c:function-calling, c:model-context-protocol, c:mcp-server, c:system-prompt, c:prompt, c:json, c:json-schema, c:api, c:local-server, c:chat-model, c:token, py:def, py:return, py:if, py:for, py:dict, py:list, py:append, py:split, py:strip, py:indexing, py:slicing, py:string-literal, q:choice, q:exercise-with-check, q:run-cell]
+  data: [model-qwen3-0.6b, course-agents-qwen]
   needs: any
 
 - id: build-kinds-of-agents

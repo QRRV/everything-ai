@@ -23,9 +23,10 @@ RECORD, {key: ask}, and an ask is one of
     {"messages": [...], "tools": [...], "steps": n, "max_tokens": n, "seeds": k}   a question with tools, without a
         stream: the answer's tool calls are run by checks.py's tool_results(message, ask), which gives a message with the
         role tool for each, and the answer and those results go back to the model, at most n requests in all;
-        "tool_choice" goes with the first request only, the later ones are "auto"; "temperature" and "top_p" go with
-        each. Such an answer is {"seed": s, "steps": [...]}, each step with its "tool_calls" as the server gave them
-        and the "results" of the tools
+        "tool_choice" goes with the first request only, the later ones are "auto"; "temperature", "top_p" and
+        "parallel_tool_calls" go with each. Such an answer is {"seed": s, "steps": [...]}, each step with its "tool_calls" as the server gave them
+        and the "results" of the tools. When checks.py has new_run(ask), it is called before each such run, so that tools
+        that keep state, such as a browser on a shop, start from the beginning
     {"turns": [...], "max_tokens": n, "seeds": k}      a chat: in each turn the user's next message, after the
         messages so far and the model's answers to them, every turn with the same seed; "messages" before the first
         turn, such as a system prompt, go first
@@ -77,7 +78,8 @@ FILES = {   # the file of each module, and its lessons
     "course-rag-qwen.json": ["build-rag-idea", "build-rag-first", "build-grounded-answers", "build-project-rag",
                              "build-reranking", "build-query-rewriting", "build-rag-eval"],
     "course-agents-qwen.json": ["build-tool-calling", "build-tool-design", "build-workflow-or-agent", "build-workflow-patterns",
-                                "build-agent-loop", "build-plan-execute", "build-agent-memory"],
+                                "build-agent-loop", "build-plan-execute", "build-agent-memory", "build-browser-use",
+                                "build-mcp", "build-agent-extensions"],
 }
 LESSONS = [lesson for lessons in FILES.values() for lesson in lessons]
 THREADS = 2   # the server's threads; a speed ask runs on one
@@ -199,9 +201,11 @@ def _steps(url: str, ask: dict, seed: int, C) -> list:
     """A question with tools: each answer, with its tool calls and their results, until an answer calls no tool or
     ask["steps"] requests were made."""
     messages, steps = list(ask["messages"]), []
+    if hasattr(C, "new_run"):
+        C.new_run(ask)
     for n in range(ask["steps"]):
         body = {"model": serve.MODEL, "messages": messages, "max_tokens": ask["max_tokens"], "seed": seed, "tools": ask["tools"],
-                **{k: ask[k] for k in ("temperature", "top_p") if k in ask}}
+                **{k: ask[k] for k in ("temperature", "top_p", "parallel_tool_calls") if k in ask}}
         if n == 0 and "tool_choice" in ask:
             body["tool_choice"] = ask["tool_choice"]
         a, raw = _whole(url, body)

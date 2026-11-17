@@ -1,0 +1,28 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: build-mcp
+minutes: 35
+title:
+  en: "Tools through a protocol: MCP"
+  nl: "Tools via een protocol: MCP"
+goal:
+  en: "write a small MCP server and the call of a client, so that any assistant that speaks MCP can use your tool."
+  nl: "een kleine MCP server en de call van een client schrijven, zodat elke assistent die MCP spreekt je tool kan gebruiken."
+summary:
+  - en: "MCP fixes how an assistant finds the tools of a program and calls them: JSON-RPC messages, one per line over stdio. The server answers tools/list with each tool's name, description and input schema, and tools/call with the tool's text as content; in version 2026-07-28, each request carries the protocol version in its _meta."
+    nl: "MCP legt vast hoe een assistent de tools van een programma vindt en aanroept: JSON-RPC-berichten, één per regel over stdio. De server antwoordt op tools/list met de naam, beschrijving en het input schema van elke tool, en op tools/call met de tekst van de tool als content; in versie 2026-07-28 heeft elk request de protocolversie in zijn _meta."
+  - en: "A tool through MCP reaches the model exactly as before. Measured on Qwen3-0.6B: with convert alone, it called it in 5 of 8 questions; with the 14 tools of 6 servers, in 1 of 8, and each request grew by 1,024 input tokens, from 263 to 1,287 for the first question."
+    nl: "Een tool via MCP komt precies zo bij het model als eerst. Gemeten op Qwen3-0.6B: met alleen convert riep het hem aan bij 5 van de 8 vragen; met de 14 tools van 6 servers bij 1 van de 8, en elk request groeide met 1.024 tokens aan prompt, van 263 naar 1.287 bij de eerste vraag."
+  - en: "A server is a program that runs with your rights, and its descriptions go into the model's context: add only servers you trust, and only the tools a task needs."
+    nl: "Een server is een programma dat met jouw rechten draait, en zijn beschrijvingen komen in de context van het model: voeg alleen servers toe die je vertrouwt, en alleen de tools die een taak nodig heeft."
+can_now:
+  - en: "write an MCP server that lists its tools, runs a call, and answers what it cannot follow with an error"
+    nl: "een MCP server schrijven die zijn tools geeft, een call uitvoert, en met een fout antwoordt op wat hij niet kan volgen"
+    by: server
+  - en: "send a tool call as an MCP client, and turn the answer into the text the model reads"
+    nl: "als MCP client een call van een tool versturen, en van het antwoord de tekst maken die het model leest"
+    by: call
+  - en: "tell what to check before you give an agent a server from somewhere else"
+    nl: "zeggen wat je controleert voordat je een agent een server van ergens anders geeft"
+    by: trust-server

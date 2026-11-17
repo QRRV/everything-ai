@@ -1,0 +1,28 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: build-browser-use
+minutes: 35
+title:
+  en: "An agent that uses a browser"
+  nl: "Een agent die een browser gebruikt"
+goal:
+  en: "give a model a web page as text, scale a click on a screenshot to the screen, and check each click in code before it happens."
+  nl: "een model een webpagina als tekst geven, een klik op een screenshot schalen naar het scherm, en elke klik in code controleren voordat hij gebeurt."
+summary:
+  - en: "A browser agent reads a page as text, each element with a number or a name, its role and its name, and answers with one action at a time; a computer-use agent gets a screenshot and answers with a place in pixels."
+    nl: "Een browser agent leest een pagina als tekst, elk element met een nummer of een naam, zijn rol en zijn naam, en antwoordt met één actie tegelijk; een agent voor computer use krijgt een screenshot en antwoordt met een plek in pixels."
+  - en: "Measured on Qwen3-0.6B in the course's shop with 8 tasks: by number it clicked 1, 2, 3 and on in 5 tasks, 1 exactly right; by name 4 exactly right, and 4 on the changed shop, where a fixed script of clicks put nothing in the cart. With a note for AI assistants on the page, it did not do what the note asked, but no task went right."
+    nl: "Gemeten op Qwen3-0.6B in de winkel van de course met 8 taken: op nummer klikte het 1, 2, 3 en verder bij 5 taken, 1 precies goed; op naam 4 precies goed, en 4 in de veranderde winkel, waar een vast script van klikken niets in de winkelwagen deed. Met een notitie voor AI-assistenten op de pagina deed het niet wat de notitie vroeg, maar ging geen enkele taak goed."
+  - en: "Every page is input from strangers: check each action in code before it happens, by what it does, not by what the page says, and let paying and sending wait for the user."
+    nl: "Elke pagina is invoer van vreemden: controleer elke actie in code voordat hij gebeurt, op wat hij doet, niet op wat de pagina zegt, en laat betalen en versturen wachten op de gebruiker."
+can_now:
+  - en: "turn a web page into text with a number for each element a model can act on"
+    nl: "van een webpagina tekst maken met een nummer voor elk element waar een model iets mee kan"
+    by: page-text
+  - en: "scale the click of a computer-use model from a screenshot to the real screen"
+    nl: "de klik van een model voor computer use van een screenshot naar het echte scherm schalen"
+    by: to-screen
+  - en: "write a check that stops clicks nobody asked for, and lets paying wait for the user"
+    nl: "een check schrijven die klikken tegenhoudt waar niemand om vroeg, en betalen laat wachten op de gebruiker"
+    by: check-click

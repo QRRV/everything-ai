@@ -235,7 +235,7 @@ class Chat:
     def answer(self, messages: list, tools: list | None = None, max_tokens: int = 256, seed: int = 0,
                temperature: float = SAMPLING["temperature"], top_p: float = SAMPLING["top_p"], top_k: int = SAMPLING["top_k"],
                thinking: bool = False, heard=None, stop: list | None = None, json_object: bool = False,
-               cache: bool = False, keep: bool | None = None, logprobs: int | None = None) -> dict:
+               cache: bool = False, keep: bool | None = None, logprobs: int | None = None, one_call: bool = False) -> dict:
         """The model's answer to `messages`: {"text": what it wrote, "message": parse(text), "prompt_tokens": ...,
         "tokens": tokens it wrote, "seconds": ..., "finish": "stop" when it ended its answer itself, "length" when it
         reached max_tokens}. Sampled with `seed` from the top_k most likely tokens that together reach top_p, at
@@ -249,7 +249,8 @@ class Chat:
         how many there were); `keep` is `cache` unless given. With `logprobs`, a whole number from 0 to 20, the answer
         also has "logprobs": for every token written, its log probability, and that of the `logprobs` most likely
         tokens at that place, as OpenAI's API gives them (`logprob_entry`), from the model's own probabilities, before
-        temperature, top_k and top_p."""
+        temperature, top_k and top_p. With `one_call`, the model stops writing once its first tool call is whole, for a
+        request that asks for at most one call per answer."""
         import torch
         last = messages[-1] if messages else {}
         prefilled = last.get("role") == "assistant" and not last.get("tool_calls")
@@ -285,7 +286,7 @@ class Chat:
                 out.append(nxt)
                 if chances is not None:
                     chances.append(self.logprob_entry(logits, nxt, logprobs))
-                if heard is not None or stop:
+                if heard is not None or stop or one_call:
                     so_far = self.enc.decode(out)
                     if heard is not None:
                         heard(so_far)
@@ -293,6 +294,11 @@ class Chat:
                         answer = (so_far.split("</think>", 1)[1] if "</think>" in so_far else "") if thinking else so_far
                         answer = answer.split("<tool_call>", 1)[0]   # a stop sequence in the markup of a tool call does not count
                         if any(s and s in answer for s in stop):
+                            finish = "stop"
+                            break
+                    if one_call:   # the first call is whole; a call while it is still thinking does not count
+                        tail = so_far.split("</think>", 1)[1] if "</think>" in so_far else ("" if thinking else so_far)
+                        if "</tool_call>" in tail:
                             finish = "stop"
                             break
                 if json_object and json_object_state(begun + self.enc.decode(out)) == "done":

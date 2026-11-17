@@ -7,7 +7,9 @@ library (http.server and json), for the lessons of domain bouwen. It answers, in
   POST /v1/chat/completions       an answer to a list of messages, with model, messages, max_tokens, temperature, top_p,
                                   seed, stop, stream (and stream_options.include_usage), tools and tool_choice ("auto",
                                   "none", "required", or one function by name: the server starts the answer with a tool
-                                  call, of that function when named, and the model writes the rest); a list of messages
+                                  call, of that function when named, and the model writes the rest), and
+                                  parallel_tool_calls (false: at most one tool call per answer, as at OpenAI; the model
+                                  stops writing once its first call is whole); a list of messages
                                   that ends with one of the assistant is a prefill, as llama.cpp's server takes it: the
                                   answer goes on from that text. It keeps the KV cache of the last request, as
                                   llama.cpp's server does (prompt caching): usage.prompt_tokens_details.cached_tokens
@@ -161,12 +163,15 @@ class Model(Backend):
             # starts the same way goes on from it; "cache_prompt": false computes the whole prompt again
             a = model.answer(messages, tools=tools, thinking=thinking,
                              max_tokens=int(request.get("max_tokens") or 256), heard=shown,
-                             cache=request.get("cache_prompt", True) is not False, keep=True, **settings)
+                             cache=request.get("cache_prompt", True) is not False, keep=True,
+                             one_call=tools is not None and request.get("parallel_tool_calls") is False, **settings)
         message, finish = (C.parse(forced + a["text"]) if forced else a["message"]), a["finish"]
         if tools is None:   # without tools, a tool call the model wrote anyway stays out of the answer
             message = {**message, "tool_calls": []}
         elif message["bad_calls"]:   # a call that cannot be read: no calls, and all it wrote as the answer, as vLLM does
             message = {**message, "tool_calls": [], "content": C.THOUGHT.sub("", forced + a["text"]).strip()}
+        if request.get("parallel_tool_calls") is False:   # at most one call per answer
+            message = {**message, "tool_calls": message["tool_calls"][:1]}
         thought = C.THOUGHT.match(a["text"].lstrip())
         text = message["content"]
         if _prefill(request["messages"]) is not None and not thinking:   # the answer goes on from the prefill: keep its first space
@@ -264,6 +269,7 @@ class StandIn(Backend):
         planned = self.script(request) if self.script is not None else None
         if isinstance(planned, (list, tuple)) and request.get("tools") and request.get("tool_choice") != "none":
             text, calls = planned if isinstance(planned, tuple) else ("", planned)
+            calls = calls[:1] if request.get("parallel_tool_calls") is False else calls
             return {"text": text, "tool_calls": [{"name": n, "arguments": a} for n, a in calls],
                     "finish": "tool_calls" if calls else "stop", "prompt_tokens": _words(request["messages"]),
                     "tokens": len(text.split())}
@@ -274,6 +280,7 @@ class StandIn(Backend):
         elif question in self.calls and request.get("tool_choice") != "none" and request.get("tools"):
             calls = self.calls[question]
             calls = calls if isinstance(calls, list) else [calls]
+            calls = calls[:1] if request.get("parallel_tool_calls") is False else calls
             return {"text": "", "tool_calls": [{"name": n, "arguments": a} for n, a in calls], "finish": "tool_calls",
                     "prompt_tokens": _words(request["messages"]), "tokens": 0}
         else:
@@ -474,6 +481,8 @@ def _tool_problem(request: dict):
     if odd:
         return (f"The name of a function may hold only letters, digits, _ and -, at most 64 of them; '{odd[0]}' does "
                 "not.", "tools")
+    if request.get("parallel_tool_calls") is not None and not isinstance(request["parallel_tool_calls"], bool):
+        return "'parallel_tool_calls' must be true or false.", "parallel_tool_calls"
     choice = request.get("tool_choice")
     if choice is not None:
         named = (isinstance(choice, dict) and choice.get("type") == "function" and isinstance(choice.get("function"), dict)

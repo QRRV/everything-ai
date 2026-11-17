@@ -1,0 +1,28 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: build-agent-extensions
+minutes: 35
+title:
+  en: "AGENTS.md, skills and other extensions"
+  nl: "AGENTS.md, skills en andere uitbreidingen"
+goal:
+  en: "teach an agent something without changing the model: read the name and description of a skill, and turn the description of a web API into tools."
+  nl: "een agent iets leren zonder het model te veranderen: de naam en beschrijving van een skill lezen, en van de beschrijving van een web-API tools maken."
+summary:
+  - en: "AGENTS.md holds what holds for every task in a project. A skill is a folder with a SKILL.md: frontmatter with a name and a description, and instructions. The agent gets a line per skill in its system prompt, and loads a skill's instructions only when a question needs them."
+    nl: "AGENTS.md bevat wat voor elke taak in een project geldt. Een skill is een map met een SKILL.md: frontmatter met een naam en een beschrijving, en instructies. De agent krijgt een regel per skill in zijn system prompt, en laadt de instructies van een skill pas als een vraag ze nodig heeft."
+  - en: "Measured on Qwen3-0.6B with 6 kitchen skills and 12 questions: without skills 3 right, with all skills in the prompt 6, with the list and load_skill 1, since it called skills as if they were tools; with an error that said to load the skill, it loaded the right one in 4 of 10 questions, and answered 2 of the 12 right."
+    nl: "Gemeten op Qwen3-0.6B met 6 skills voor de keuken en 12 vragen: zonder skills 3 goed, met alle skills in de prompt 6, met de lijst en load_skill 1, omdat het skills aanriep alsof het tools waren; met een fout die zei dat het de skill moest laden, laadde het de goede bij 4 van de 10 vragen, en had het er 2 van de 12 goed."
+  - en: "An OpenAPI description of a web API becomes tools: each operation a tool, its parameters the tool's parameters. A plugin puts skills, servers and commands together; install skills and plugins only from people you trust."
+    nl: "Een OpenAPI-beschrijving van een web-API wordt tools: elke operation een tool, zijn parameters de parameters van de tool. Een plugin bundelt skills, servers en commando's; installeer skills en plugins alleen van mensen die je vertrouwt."
+can_now:
+  - en: "read the name and description from the frontmatter of a SKILL.md"
+    nl: "de naam en beschrijving uit de frontmatter van een SKILL.md lezen"
+    by: front
+  - en: "turn the operations of an OpenAPI description into tools for a model"
+    nl: "van de operations van een OpenAPI-beschrijving tools voor een model maken"
+    by: openapi
+  - en: "choose between AGENTS.md, a skill, an MCP server and a plugin for what an agent should know or do"
+    nl: "kiezen tussen AGENTS.md, een skill, een MCP server en een plugin voor wat een agent moet weten of doen"
+    by: which-extension
