@@ -1,9 +1,9 @@
 # SPDX-FileCopyrightText: 2026 Everything AI contributors
 # SPDX-License-Identifier: MIT
-"""Writes data/course-apis-qwen.json, data/course-dev-prompts-qwen.json, data/course-rag-qwen.json and
-data/course-agents-qwen.json, the course's runs of Qwen3-0.6B (the chat model) for the modules *Calling models* (apis),
-*Prompts for developers* (prompts), *RAG* (rag) and *Agents and tools* (agents) of the domain bouwen, one file for each
-module. Each run goes through the course's own server (everything_ai.serve) with the
+"""Writes data/course-apis-qwen.json, data/course-dev-prompts-qwen.json, data/course-rag-qwen.json,
+data/course-agents-qwen.json and data/course-production-qwen.json, the course's runs of Qwen3-0.6B (the chat model) for
+the modules *Calling models* (apis), *Prompts for developers* (prompts), *RAG* (rag), *Agents and tools* (agents) and
+*Evaluating and shipping* (productie) of the domain bouwen, one file for each module. Each run goes through the course's own server (everything_ai.serve) with the
 standard library's urllib, the way a learner's code calls it: in float32 with the course's code and KV cache,
 non-thinking unless asked, sampled as Qwen3 advises for each mode (everything_ai.chat.SAMPLING, and THINKING for an
 ask with "think"). Each lesson's checks.py has
@@ -37,7 +37,10 @@ RECORD, {key: ask}, and an ask is one of
         data URL with the server's hosted tool detect_objects, without a stream; it keeps what the tool found
         ("hosted_tools"). The detector is loaded before the first such ask, so that its time is not in the seconds.
     {"labels": side, "system": prompt, "max_tokens": n}  every question of that side of data/banking77-small.json,
-        after the system prompt, greedy (temperature 0): the text of each answer and its seconds and tokens
+        after the system prompt, greedy (temperature 0): the text of each answer, its finish reason, and its seconds
+        and tokens
+    {"each": [text, ...], "system": prompt, "max_tokens": n}   each text as the user's message after the system
+        prompt, the same way
     {"sequence": [{"messages": [...], "cache": bool}, ...], "max_tokens": n, "seeds": k}   requests sent one after
         the other without a stream, k times over, the k-th time with seed k - 1; "cache": false sends
         "cache_prompt": false, so the server computes the whole prompt again. For each request: its seconds, and how
@@ -81,6 +84,7 @@ FILES = {   # the file of each module, and its lessons
                                 "build-agent-loop", "build-plan-execute", "build-agent-memory", "build-browser-use",
                                 "build-mcp", "build-agent-extensions", "build-kinds-of-agents", "build-agent-history",
                                 "build-agent-frameworks"],
+    "course-production-qwen.json": ["build-error-analysis", "build-eval-set", "build-judges"],
 }
 LESSONS = [lesson for lessons in FILES.values() for lesson in lessons]
 THREADS = 2   # the server's threads; a speed ask runs on one
@@ -171,16 +175,20 @@ def _image(url: str, ask: dict, seed: int) -> dict:
     return a
 
 
-def _labels(url: str, ask: dict) -> list:
-    rows = json.loads((paths.ROOT / "data" / "banking77-small.json").read_text(encoding="utf-8"))[ask["labels"]]
+def _each(url: str, ask: dict, texts: list) -> list:
     out = []
-    for label, text in rows:
+    for text in texts:
         body = {"model": serve.MODEL, "max_tokens": ask["max_tokens"], "temperature": 0,
                 "messages": [{"role": "system", "content": ask["system"]}, {"role": "user", "content": text}]}
         a, _ = _whole(url, body)
-        out.append({"label": label, "text": a["text"], "seconds": a["seconds"], "prompt_tokens": a["prompt_tokens"],
+        out.append({"text": a["text"], "finish": a["finish"], "seconds": a["seconds"], "prompt_tokens": a["prompt_tokens"],
                     "tokens": a["tokens"]})
     return out
+
+
+def _labels(url: str, ask: dict) -> list:
+    rows = json.loads((paths.ROOT / "data" / "banking77-small.json").read_text(encoding="utf-8"))[ask["labels"]]
+    return [{"label": label, **a} for (label, _), a in zip(rows, _each(url, ask, [text for _, text in rows]))]
 
 
 def _answer(url: str, ask: dict, messages: list, seed: int) -> dict:
@@ -281,9 +289,9 @@ def main(lessons: list, again: set) -> None:
                     entry["answers"].append(_speed(ask))
                     save(lesson, key, entry["answers"][-1]["per_second"], "tokens/s")
                 continue
-            if "labels" in ask:
+            if "labels" in ask or "each" in ask:
                 if not entry["answers"]:
-                    entry["answers"] = _labels(running.url, ask)
+                    entry["answers"] = _labels(running.url, ask) if "labels" in ask else _each(running.url, ask, ask["each"])
                     save(lesson, key, len(entry["answers"]), "answers")
                 continue
             if "image" in ask and not warm[0]:   # load the detector before the first image ask is timed

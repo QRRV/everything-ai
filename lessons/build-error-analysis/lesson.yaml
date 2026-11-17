@@ -1,0 +1,31 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: build-error-analysis
+minutes: 30
+title:
+  en: "Look at the mistakes first"
+  nl: "Eerst de fouten bekijken"
+goal:
+  en: "read about a hundred answers of an app, write down what goes wrong in each, sort the notes into kinds, count them, and choose what to fix first."
+  nl: "ongeveer honderd antwoorden van een app lezen, bij elk opschrijven wat er misgaat, de notities in soorten indelen, ze tellen, en kiezen wat je eerst aanpakt."
+summary:
+  - en: "Error analysis: read about a hundred answers of your app, write down in a few words what goes wrong in each, sort the notes into kinds and count them. The kinds with their counts are a failure taxonomy; they come from the answers, not from a list made in advance."
+    nl: "Error analysis: lees ongeveer honderd antwoorden van je app, schrijf bij elk in een paar woorden op wat er misgaat, deel de notities in soorten in en tel ze. De soorten met hun aantallen zijn een failure taxonomy; ze komen uit de antwoorden, niet uit een lijst die vooraf is gemaakt."
+  - en: "All 120 of Qwen3's replies to customers of an online bank were valid JSON, yet 73 had something wrong. The biggest kind was the wrong topic, in 38 replies: 18 of the 20 questions about a refund got the topic of a wrong exchange rate. 18 replies admitted a mistake of the bank that no one had checked, and 23 said something the facts do not say."
+    nl: "Alle 120 antwoorden van Qwen3 aan klanten van een onlinebank waren geldige JSON, en toch hadden er 73 iets fout. De grootste soort was het verkeerde onderwerp, in 38 antwoorden: 18 van de 20 vragen over een terugbetaling kregen het onderwerp van een foute wisselkoers. 18 antwoorden gaven een fout van de bank toe die niemand had gecontroleerd, en 23 zeiden iets wat niet in de feiten staat."
+  - en: "Fix the biggest kind first, and measure again after every change: evaluation-driven development. The kinds you found tell you what to measure."
+    nl: "Pak de grootste soort eerst aan, en meet na elke wijziging opnieuw: evaluation-driven development. De soorten die je vond, zeggen je wat je meet."
+can_now:
+  - en: "count how many answers have each kind of mistake"
+    nl: "tellen hoeveel antwoorden elke soort fout hebben"
+    by: count_kinds
+  - en: "find the kind of mistake to fix first"
+    nl: "de soort fout vinden die je eerst aanpakt"
+    by: biggest
+  - en: "sort a wrong answer into a kind with a rule"
+    nl: "een fout antwoord met een regel bij een soort indelen"
+    by: which-kind
+  - en: "choose a change that aims at the biggest kind"
+    nl: "een wijziging kiezen die de grootste soort aanpakt"
+    by: fix-first

@@ -1,0 +1,3908 @@
+{
+ "model": "Qwen/Qwen3-0.6B",
+ "revision": "c1899de289a04d12100db370d81485cdf75e47ca",
+ "dtype": "float32",
+ "machine": "Intel(R) Xeon(R) Processor @ 2.10GHz, 4 cores",
+ "threads": 2,
+ "torch": "2.14.1+cu130",
+ "parts": {
+  "build-error-analysis": {
+   "v1": {
+    "ask": {
+     "labels": "test",
+     "system": "You answer customers of an online bank in the chat of its app. Use only these facts:\n- A new card arrives within 5 working days. Its status is in the app under Cards. There is no tracking number.\n- A lost or stolen card: freeze it at once in the app under Cards > Freeze, then order a new card there. A new card is free.\n- A payment in another currency gets the exchange rate at the moment of payment; on weekends 0.5% is added. The app shows the rate before you pay.\n- When a card payment got the wrong exchange rate: send the date and the amount of the payment in this chat, and the team checks it within 2 working days.\n- The PIN is blocked after 3 wrong tries. Unblock it in the app under Cards > PIN, 24 hours after the last try.\n- Refunds: ask the shop first. If the shop has not helped within 14 days, the team can open a dispute.\nIf the facts do not answer the question, say that a person from the team will reply.\nAnswer with JSON only: {\"topic\": \"...\", \"reply\": \"...\"}. topic is one of card_arrival, lost_or_stolen_card, exchange_rate, card_payment_wrong_exchange_rate, pin_blocked, request_refund. reply is your answer to the customer, in at most three sentences.",
+     "max_tokens": 200
+    },
+    "answers": [
+     {
+      "label": "request_refund",
+      "text": "{\"topic\": \"card_payment_wrong_exchange_rate\", \"reply\": \"To claim a refund, first, send the date and amount of the payment in this chat, and the team will check it within 2 working days. If the shop has not helped, the team can open a dispute.\"}",
+      "finish": "stop",
+      "seconds": 11.99,
+      "prompt_tokens": 308,
+      "tokens": 60
+     },
+     {
+      "label": "card_arrival",
+      "text": "{\"topic\": \"card_arrival\", \"reply\": \"Yes, the new card arrives within 5 working days. You can check its status in the app under Cards.\"}",
+      "finish": "stop",
+      "seconds": 6.09,
+      "prompt_tokens": 313,
+      "tokens": 36
+     },
+     {
+      "label": "exchange_rate",
+      "text": "{\"topic\": \"exchange_rate\", \"reply\": \"The foreign exchange rate is applied at the moment of payment, and it is shown before you pay. If there is a problem with the rate, please provide the date and amount of the payment to the team for further assistance.\"}",
+      "finish": "stop",
+      "seconds": 9.19,
+      "prompt_tokens": 309,
+      "tokens": 57
+     },
+     {
+      "label": "pin_blocked",
+      "text": "{\"topic\": \"card_payment_wrong_exchange_rate\", \"reply\": \"The exchange rate for your payment was incorrect. Please provide the date and amount of the payment, and the team will check it within 2 working days.\"}",
+      "finish": "stop",
+      "seconds": 7.42,
+      "prompt_tokens": 311,
+      "tokens": 46
+     },
+     {
+      "label": "lost_or_stolen_card",
+      "text": "{\"topic\": \"lost_or_stolen_card\", \"reply\": \"To report your lost or stolen card, go to the app under 'Cards' and select 'Freeze' to block it. Then order a new card and it will be free.\"}",
+      "finish": "stop",
+      "seconds": 8.34,
+      "prompt_tokens": 311,
+      "tokens": 52
+     },
+     {
+      "label": "card_payment_wrong_exchange_rate",
+      "text": "{\"topic\": \"card_payment_wrong_exchange_rate\", \"reply\": \"Please provide the date and amount of the payment, and the team will check it within 2 working days.\"}",
+      "finish": "stop",
+      "seconds": 5.89,
+      "prompt_tokens": 311,
+      "tokens": 37
+     },
+     {
+      "label": "exchange_rate",
+      "text": "{\"topic\": \"exchange_rate\", \"reply\": \"The exchange rate for payments in another currency is displayed in the app before you pay. If there's a discrepancy, please provide the date and amount of the payment, and the team will check it within 2 working days.\"}",
+      "finish": "stop",
+      "seconds": 8.93,
+      "prompt_tokens": 309,
+      "tokens": 57
+     },
+     {
+      "label": "exchange_rate",
+      "text": "{\"topic\": \"exchange_rate\", \"reply\": \"Exchange rates change based on the current time and the payment method. For payments in another currency, the rate is applied at the moment of payment, and on weekends, a 0.5% fee is added. The app displays the rate before you pay.\"}",
+      "finish": "stop",
+      "seconds": 9.95,
+      "prompt_tokens": 307,
+      "tokens": 64
+     },
+     {
+      "label": "exchange_rate",
+      "text": "{\"topic\": \"exchange_rate\", \"reply\": \"The exchange rate is determined at the moment of payment, with a 0.5% fee on weekends. The app shows the rate before you pay.\"}",
+      "finish": "stop",
+      "seconds": 6.79,
+      "prompt_tokens": 309,
+      "tokens": 43
+     },
+     {
+      "label": "card_payment_wrong_exchange_rate",
+      "text": "{\"topic\": \"exchange_rate\", \"reply\": \"The exchange rate is currently 0.5% on weekends. Please confirm the payment date and amount to check the rate before making the payment.\"}",
+      "finish": "stop",
+      "seconds": 6.54,
+      "prompt_tokens": 325,
+      "tokens": 41
+     },
+     {
+      "label": "card_payment_wrong_exchange_rate",
+      "text": "{\"topic\": \"card_payment_wrong_exchange_rate\", \"reply\": \"The exchange rate for your card payment was incorrect. Please provide the date and amount of the payment, and we will check it within 2 working days.\"}",
+      "finish": "stop",
+      "seconds": 7.1,
+      "prompt_tokens": 311,
+      "tokens": 46
+     },
+     {
+      "label": "card_payment_wrong_exchange_rate",
+      "text": "{\"topic\": \"card_payment_wrong_exchange_rate\", \"reply\": \"The conversion value for your card payments is incorrect. Please provide the date and amount of the payment, and we will check it within 2 working days. If the issue persists, we will assist further.\"}",
+      "finish": "stop",
+      "seconds": 8.99,
+      "prompt_tokens": 311,
+      "tokens": 56
+     },
+     {
+      "label": "pin_blocked",
+      "text": "{\"topic\": \"pin_blocked\", \"reply\": \"Your PIN has been blocked after 3 wrong attempts. Please contact the bank team for assistance.\"}",
+      "finish": "stop",
+      "seconds": 4.91,
+      "prompt_tokens": 313,
+      "tokens": 31
+     },
+     {
+      "label": "request_refund",
+      "text": "{\"topic\": \"card_payment_wrong_exchange_rate\", \"reply\": \"The exchange rate for payments in another currency is applied at the moment of payment. If the rate is incorrect, please provide the date and amount of the payment, and the team will check it within 2 working days.\"}",
+      "finish": "stop",
+      "seconds": 9.21,
+      "prompt_tokens": 311,
+      "tokens": 59
+     },
+     {
+      "label": "card_payment_wrong_exchange_rate",
+      "text": "{\"topic\": \"card_payment_wrong_exchange_rate\", \"reply\": \"The wrong exchange rate was used when you made the payment. Please provide the date and amount of the payment, and the team will check it within 2 working days.\"}",
+      "finish": "stop",
+      "seconds": 8.27,
+      "prompt_tokens": 318,
+      "tokens": 49
+     },
+     {
+      "label": "card_payment_wrong_exchange_rate",
+      "text": "{\"topic\": \"card_payment_wrong_exchange_rate\", \"reply\": \"The exchange rate was incorrect, and we will check the payment details within 2 working days. Please provide the date and amount of the payment to assist further.\"}",
+      "finish": "stop",
+      "seconds": 7.67,
+      "prompt_tokens": 327,
+      "tokens": 47
+     },
+     {
+      "label": "lost_or_stolen_card",
+      "text": "{\"topic\": \"lost_or_stolen_card\", \"reply\": \"Your card was stolen. Please freeze it in the app under Cards > Freeze, then order a new card. A new card is free.\"}",
+      "finish": "stop",
+      "seconds": 6.79,
+      "prompt_tokens": 309,
+      "tokens": 43
+     },
+     {
+      "label": "card_payment_wrong_exchange_rate",
+      "text": "{\"topic\": \"exchange_rate\", \"reply\": \"The exchange rate is too low. Please check the payment details and confirm the correct rate before proceeding. If you have the date and amount, we can verify and ensure the correct rate is applied.\"}",
+      "finish": "stop",
+      "seconds": 8.01,
+      "prompt_tokens": 317,
+      "tokens": 51
+     },
+     {
+      "label": "exchange_rate",
+      "text": "{\"topic\": \"exchange_rate\", \"reply\": \"The exchange rate is determined at the moment of payment, and on weekends, 0.5% is added. The app shows the rate before you pay.\"}",
+      "finish": "stop",
+      "seconds": 7.15,
+      "prompt_tokens": 307,
+      "tokens": 44
+     },
+     {
+      "label": "lost_or_stolen_card",
+      "text": "{\"topic\": \"lost_or_stolen_card\", \"reply\": \"The card has been lost or stolen. Please freeze it at the app under Cards > Freeze, then order a new card. A new card is free.\"}",
+      "finish": "stop",
+      "seconds": 7.98,
+      "prompt_tokens": 307,
+      "tokens": 46
+     },
+     {
+      "label": "exchange_rate",
+      "text": "{\"topic\": \"exchange_rate\", \"reply\": \"The exchange rate for payments in another currency is applied at the moment of payment. On weekends, 0.5% is added. The app shows the rate before you pay.\"}",
+      "finish": "stop",
+      "seconds": 7.96,
+      "prompt_tokens": 307,
+      "tokens": 48
+     },
+     {
+      "label": "lost_or_stolen_card",
+      "text": "{\"topic\": \"lost_or_stolen_card\", \"reply\": \"Please freeze your card at the app under Cards > Freeze, then order a new card. A new card is free.\"}",
+      "finish": "stop",
+      "seconds": 6.45,
+      "prompt_tokens": 308,
+      "tokens": 39
+     },
+     {
+      "label": "request_refund",
+      "text": "{\"topic\": \"card_payment_wrong_exchange_rate\", \"reply\": \"If you have a payment in another currency and the exchange rate is incorrect, please provide the date and amount of the payment in the chat, and the team will check it within 2 working days.\"}",
+      "finish": "stop",
+      "seconds": 8.41,
+      "prompt_tokens": 312,
+      "tokens": 55
+     },
+     {
+      "label": "card_payment_wrong_exchange_rate",
+      "text": "{\"topic\": \"card_payment_wrong_exchange_rate\", \"reply\": \"The exchange rate was incorrect. Please provide the date and amount of the payment, and the team will check it within 2 working days.\"}",
+      "finish": "stop",
+      "seconds": 6.8,
+      "prompt_tokens": 316,
+      "tokens": 43
+     },
+     {
+      "label": "pin_blocked",
+      "text": "{\"topic\": \"card_payment_wrong_exchange_rate\", \"reply\": \"If you're experiencing a payment with a wrong exchange rate, please provide the date and amount of the payment in the chat, and the team will check it within 2 working days.\"}",
+      "finish": "stop",
+      "seconds": 8.29,
+      "prompt_tokens": 312,
+      "tokens": 52
+     },
+     {
+      "label": "request_refund",
+      "text": "{\"topic\": \"card_payment_wrong_exchange_rate\", \"reply\": \"I'm sorry, but I can't assist with a refund for a card payment that has a wrong exchange rate. Please provide the date and amount of the payment, and we'll check it within two working days.\"}",
+      "finish": "stop",
+      "seconds": 8.85,
+      "prompt_tokens": 317,
+      "tokens": 58
+     },
+     {
+      "label": "card_arrival",
+      "text": "{\"topic\": \"lost_or_stolen_card\", \"reply\": \"You should freeze your card in the app under Cards > Freeze, then order a new card. A new card is free.\"}",
+      "finish": "stop",
+      "seconds": 6.3,
+      "prompt_tokens": 318,
+      "tokens": 40
+     },
+     {
+      "label": "pin_blocked",
+      "text": "{\"topic\": \"pin_blocked\", \"reply\": \"To unblock your PIN, go to the 'Cards' section in your app and click on 'PIN'. Enter your PIN and confirm it. If you're not sure, you can try again within 24 hours after the last unsuccessful attempt.\"}",
+      "finish": "stop",
+      "seconds": 9.5,
+      "prompt_tokens": 314,
+      "tokens": 62
+     },
+     {
+      "label": "card_arrival",
+      "text": "{\"topic\": \"card_arrival\", \"reply\": \"The tracking number for the new card is not available as it is not in the app. You can check the app under Cards to see the status.\"}",
+      "finish": "stop",
+      "seconds": 6.45,
+      "prompt_tokens": 313,
+      "tokens": 43
+     },
+     {
+      "label": "request_refund",
+      "text": "{\"topic\": \"card_payment_wrong_exchange_rate\", \"reply\": \"To get a refund, you should first ask the shop. If the shop hasn't helped within 14 days, the team can open a dispute.\"}",
+      "finish": "stop",
+      "seconds": 6.78,
+      "prompt_tokens": 312,
+      "tokens": 46
+     },
+     {
+      "label": "card_payment_wrong_exchange_rate",
+      "text": "{\"topic\": \"card_payment_wrong_exchange_rate\", \"reply\": \"The exchange rate was incorrect for your foreign purchase. Please provide the date and amount of the payment, and the team will check it within 2 working days.\"}",
+      "finish": "stop",
+      "seconds": 7.14,
+      "prompt_tokens": 310,
+      "tokens": 47
+     },
+     {
+      "label": "card_arrival",
+      "text": "{\"topic\": \"lost_or_stolen_card\", \"reply\": \"Your card has not arrived within 5 working days. It may be lost or stolen. Please contact the bank's customer support for further assistance.\"}",
+      "finish": "stop",
+      "seconds": 6.84,
+      "prompt_tokens": 316,
+      "tokens": 44
+     },
+     {
+      "label": "card_payment_wrong_exchange_rate",
+      "text": "{\"topic\": \"exchange_rate\", \"reply\": \"Check the exchange rate applied to your transaction by viewing the rate displayed in the app before making the payment. If you encounter any issues, contact the team for assistance.\"}",
+      "finish": "stop",
+      "seconds": 6.98,
+      "prompt_tokens": 313,
+      "tokens": 45
+     },
+     {
+      "label": "lost_or_stolen_card",
+      "text": "{\"topic\": \"lost_or_stolen_card\", \"reply\": \"If your card is lost or stolen, please freeze it at the app under Cards > Freeze, then order a new card. A new card is free.\"}",
+      "finish": "stop",
+      "seconds": 6.94,
+      "prompt_tokens": 311,
+      "tokens": 46
+     },
+     {
+      "label": "pin_blocked",
+      "text": "{\"topic\": \"card_payment_wrong_exchange_rate\", \"reply\": \"If you received a wrong exchange rate, please provide the date and amount of the payment in the chat, and the team will check it within 2 working days.\"}",
+      "finish": "stop",
+      "seconds": 7.06,
+      "prompt_tokens": 308,
+      "tokens": 48
+     },
+     {
+      "label": "card_arrival",
+      "text": "{\"topic\": \"card_arrival\", \"reply\": \"Your new card is expected to arrive within 5 working days. It will be in the app under Cards. Please check the status as soon as it arrives.\"}",
+      "finish": "stop",
+      "seconds": 6.93,
+      "prompt_tokens": 312,
+      "tokens": 45
+     },
+     {
+      "label": "lost_or_stolen_card",
+      "text": "{\"topic\": \"lost_or_stolen_card\", \"reply\": \"Your card has been lost or stolen. Please freeze it at the app under Cards > Freeze, then order a new card. A new card is free.\"}",
+      "finish": "stop",
+      "seconds": 7.86,
+      "prompt_tokens": 306,
+      "tokens": 46
+     },
+     {
+      "label": "pin_blocked",
+      "text": "{\"topic\": \"pin_blocked\", \"reply\": \"Sure! Please provide the date and amount of the payment, and I'll assist you with unblocking your PIN within 24 hours.\"}",
+      "finish": "stop",
+      "seconds": 6.48,
+      "prompt_tokens": 323,
+      "tokens": 40
+     },
+     {
+      "label": "exchange_rate",
+      "text": "{\"topic\": \"exchange_rate\", \"reply\": \"The exchange rate is applied at the moment of payment, with a 0.5% fee on weekends. The app shows the rate before you pay.\"}",
+      "finish": "stop",
+      "seconds": 6.72,
+      "prompt_tokens": 310,
+      "tokens": 43
+     },
+     {
+      "label": "card_arrival",
+      "text": "{\"topic\": \"card_arrival\", \"reply\": \"The new card arrived within 5 working days, so it should be available soon. If you still need it after 1 week, please check the app for updates.\"}",
+      "finish": "stop",
+      "seconds": 7.32,
+      "prompt_tokens": 317,
+      "tokens": 47
+     },
+     {
+      "label": "lost_or_stolen_card",
+      "text": "{\"topic\": \"lost_or_stolen_card\", \"reply\": \"You need to freeze your card in the app under Cards > Freeze, then order a new card. A new card is free.\"}",
+      "finish": "stop",
+      "seconds": 6.57,
+      "prompt_tokens": 305,
+      "tokens": 41
+     },
+     {
+      "label": "card_arrival",
+      "text": "{\"topic\": \"card_arrival\", \"reply\": \"A new card arrives within 5 working days. The status is in the app under Cards.\"}",
+      "finish": "stop",
+      "seconds": 5.11,
+      "prompt_tokens": 311,
+      "tokens": 32
+     },
+     {
+      "label": "card_payment_wrong_exchange_rate",
+      "text": "{\"topic\": \"card_payment_wrong_exchange_rate\", \"reply\": \"The exchange rate for your card payment was incorrect. Please provide the date and amount of the payment, and we will check it within 2 working days. If the issue persists, we will assist further.\"}",
+      "finish": "stop",
+      "seconds": 8.79,
+      "prompt_tokens": 308,
+      "tokens": 56
+     },
+     {
+      "label": "lost_or_stolen_card",
+      "text": "{\"topic\": \"lost_or_stolen_card\", \"reply\": \"Please check the app for the lost card. If it's a new card, you can request a new one by following the instructions in the app. If it's a lost card, you can freeze it and order a new one immediately.\"}",
+      "finish": "stop",
+      "seconds": 9.77,
+      "prompt_tokens": 307,
+      "tokens": 63
+     },
+     {
+      "label": "pin_blocked",
+      "text": "{\"topic\": \"pin_blocked\", \"reply\": \"You can unblock your PIN in the app under Cards > PIN, and it will be unblocked within 24 hours after the last attempt.\"}",
+      "finish": "stop",
+      "seconds": 6.66,
+      "prompt_tokens": 320,
+      "tokens": 42
+     },
+     {
+      "label": "exchange_rate",
+      "text": "{\"topic\": \"exchange_rate\", \"reply\": \"The current exchange rate for your payment is shown in the app. If you have a payment in another currency, the rate is applied at the moment of payment. On weekends, a 0.5% fee is added. Please check the app for the most accurate information.\"}",
+      "finish": "stop",
+      "seconds": 10.45,
+      "prompt_tokens": 312,
+      "tokens": 67
+     },
+     {
+      "label": "pin_blocked",
+      "text": "{\"topic\": \"pin_blocked\", \"reply\": \"If you have too many wrong PIN attempts, you can unblock your card by following the steps in the app under 'Cards > PIN' and wait 24 hours after the last unsuccessful attempt.\"}",
+      "finish": "stop",
+      "seconds": 7.87,
+      "prompt_tokens": 314,
+      "tokens": 52
+     },
+     {
+      "label": "exchange_rate",
+      "text": "{\"topic\": \"exchange_rate\", \"reply\": \"Exchange rates are applied at the moment of payment. For non-US currency payments, a 0.5% fee is added on weekends. The app displays the rate before you pay.\"}",
+      "finish": "stop",
+      "seconds": 7.68,
+      "prompt_tokens": 308,
+      "tokens": 49
+     },
+     {
+      "label": "lost_or_stolen_card",
+      "text": "{\"topic\": \"lost_or_stolen_card\", \"reply\": \"I can help locate your card. Please provide your card number or any other details, and I'll check it for you.\"}",
+      "finish": "stop",
+      "seconds": 7.1,
+      "prompt_tokens": 309,
+      "tokens": 40
+     },
+     {
+      "label": "lost_or_stolen_card",
+      "text": "{\"topic\": \"lost_or_stolen_card\", \"reply\": \"Your card has been lost or stolen. Please freeze it at the app under Cards > Freeze, then order a new card. The new card will be free and shipped within 5 working days.\"}",
+      "finish": "stop",
+      "seconds": 9.39,
+      "prompt_tokens": 330,
+      "tokens": 54
+     },
+     {
+      "label": "request_refund",
+      "text": "{\"topic\": \"card_payment_wrong_exchange_rate\", \"reply\": \"The exchange rate for your payment was incorrect. Please provide the date and amount of the payment, and the team will check it within 2 working days. If the issue persists, contact the customer service team for further assistance.\"}",
+      "finish": "stop",
+      "seconds": 9.51,
+      "prompt_tokens": 325,
+      "tokens": 60
+     },
+     {
+      "label": "request_refund",
+      "text": "{\"topic\": \"card_payment_wrong_exchange_rate\", \"reply\": \"Sure! Please provide the date and amount of the payment, and the team will check it within 2 working days. If the issue persists, we can assist with a dispute within 14 days.\"}",
+      "finish": "stop",
+      "seconds": 9.13,
+      "prompt_tokens": 336,
+      "tokens": 56
+     },
+     {
+      "label": "card_arrival",
+      "text": "{\"topic\": \"card_arrival\", \"reply\": \"No tracking number for the new card. It's under Cards in the app. You can check it there.\"}",
+      "finish": "stop",
+      "seconds": 5.78,
+      "prompt_tokens": 318,
+      "tokens": 35
+     },
+     {
+      "label": "exchange_rate",
+      "text": "{\"topic\": \"exchange_rate\", \"reply\": \"The exchange rate is applied at the moment of payment, and it is 0.5% on weekends. If you have any questions about the rate, please let me know.\"}",
+      "finish": "stop",
+      "seconds": 7.93,
+      "prompt_tokens": 309,
+      "tokens": 48
+     },
+     {
+      "label": "request_refund",
+      "text": "{\"topic\": \"card_payment_wrong_exchange_rate\", \"reply\": \"If the exchange rate was incorrect, please provide the date and amount of the payment, and the team will check it within 2 working days.\"}",
+      "finish": "stop",
+      "seconds": 7.16,
+      "prompt_tokens": 314,
+      "tokens": 44
+     },
+     {
+      "label": "request_refund",
+      "text": "{\"topic\": \"request_refund\", \"reply\": \"You should first contact the merchant directly to request a refund. If they are not helpful within 14 days, the team can assist you in resolving the dispute.\"}",
+      "finish": "stop",
+      "seconds": 7.3,
+      "prompt_tokens": 332,
+      "tokens": 46
+     },
+     {
+      "label": "card_arrival",
+      "text": "{\"topic\": \"card_arrival\", \"reply\": \"The new card arrives within 5 working days, so it should be delivered soon. If you're still waiting, check the app for updates on its status.\"}",
+      "finish": "stop",
+      "seconds": 7.19,
+      "prompt_tokens": 319,
+      "tokens": 45
+     },
+     {
+      "label": "card_arrival",
+      "text": "{\"topic\": \"card_arrival\", \"reply\": \"Your card is still waiting for delivery. Please check the app for updates as soon as it arrives.\"}",
+      "finish": "stop",
+      "seconds": 5.44,
+      "prompt_tokens": 312,
+      "tokens": 33
+     },
+     {
+      "label": "card_arrival",
+      "text": "{\"topic\": \"lost_or_stolen_card\", \"reply\": \"Please freeze your card in the app under Cards > Freeze, then order a new card. A new card is free.\"}",
+      "finish": "stop",
+      "seconds": 5.98,
+      "prompt_tokens": 307,
+      "tokens": 39
+     },
+     {
+      "label": "exchange_rate",
+      "text": "{\"topic\": \"exchange_rate\", \"reply\": \"Exchange rates are determined by the current market rate at the time of payment, and they are shown in the app before you pay. If there's a discrepancy, the team will check it within 2 working days.\"}",
+      "finish": "stop",
+      "seconds": 8.29,
+      "prompt_tokens": 310,
+      "tokens": 55
+     },
+     {
+      "label": "pin_blocked",
+      "text": "{\"topic\": \"card_payment_wrong_exchange_rate\", \"reply\": \"The PIN is blocked after 3 wrong tries. Unblock it in the app under Cards > PIN, 24 hours after the last try.\"}",
+      "finish": "stop",
+      "seconds": 6.69,
+      "prompt_tokens": 316,
+      "tokens": 44
+     },
+     {
+      "label": "lost_or_stolen_card",
+      "text": "{\"topic\": \"lost_or_stolen_card\", \"reply\": \"You need to freeze your card immediately in the app under Cards > Freeze, then order a new card. A new card is free.\"}",
+      "finish": "stop",
+      "seconds": 6.42,
+      "prompt_tokens": 308,
+      "tokens": 42
+     },
+     {
+      "label": "lost_or_stolen_card",
+      "text": "{\"topic\": \"lost_or_stolen_card\", \"reply\": \"To report a stolen card, go to the app under 'Cards' and select 'Freeze' to block the card. Then order a new card there, and the new card will be free.\"}",
+      "finish": "stop",
+      "seconds": 8.51,
+      "prompt_tokens": 309,
+      "tokens": 55
+     },
+     {
+      "label": "card_arrival",
+      "text": "{\"topic\": \"card_arrival\", \"reply\": \"Your card has arrived within 5 working days. It's in the app under Cards. No tracking number has been provided yet.\"}",
+      "finish": "stop",
+      "seconds": 5.95,
+      "prompt_tokens": 308,
+      "tokens": 39
+     },
+     {
+      "label": "card_payment_wrong_exchange_rate",
+      "text": "{\"topic\": \"card_payment_wrong_exchange_rate\", \"reply\": \"The exchange rate was applied incorrectly. Please provide the date and amount of the payment, and the team will check it within 2 working days.\"}",
+      "finish": "stop",
+      "seconds": 6.63,
+      "prompt_tokens": 314,
+      "tokens": 44
+     },
+     {
+      "label": "exchange_rate",
+      "text": "{\"topic\": \"exchange_rate\", \"reply\": \"The exchange rate for payments in another currency is applied at the moment of payment. If you're using a different currency, please specify the amount and the currency, and the app will display the rate before you pay.\"}",
+      "finish": "stop",
+      "seconds": 8.49,
+      "prompt_tokens": 308,
+      "tokens": 55
+     },
+     {
+      "label": "card_arrival",
+      "text": "{\"topic\": \"card_arrival\", \"reply\": \"The tracking number for the new card is not provided, as there is no tracking number associated with the card arrival.\"}",
+      "finish": "stop",
+      "seconds": 5.53,
+      "prompt_tokens": 312,
+      "tokens": 36
+     },
+     {
+      "label": "exchange_rate",
+      "text": "{\"topic\": \"exchange_rate\", \"reply\": \"Yes, the app displays the exchange rate before you pay, and it shows a 0.5% fee on weekends.\"}",
+      "finish": "stop",
+      "seconds": 5.57,
+      "prompt_tokens": 310,
+      "tokens": 37
+     },
+     {
+      "label": "card_payment_wrong_exchange_rate",
+      "text": "{\"topic\": \"card_payment_wrong_exchange_rate\", \"reply\": \"The exchange rate was applied incorrectly. Please provide the date and amount of the payment, and the team will check it within 2 working days.\"}",
+      "finish": "stop",
+      "seconds": 6.75,
+      "prompt_tokens": 314,
+      "tokens": 44
+     },
+     {
+      "label": "lost_or_stolen_card",
+      "text": "{\"topic\": \"lost_or_stolen_card\", \"reply\": \"You can freeze your card in the app under Cards > Freeze, then order a new card for free. The new card will be available immediately.\"}",
+      "finish": "stop",
+      "seconds": 6.94,
+      "prompt_tokens": 321,
+      "tokens": 44
+     },
+     {
+      "label": "card_arrival",
+      "text": "{\"topic\": \"card_arrival\", \"reply\": \"A new card arrives within 5 working days. Its status is in the app under Cards. Please check the app for updates on its arrival date.\"}",
+      "finish": "stop",
+      "seconds": 6.72,
+      "prompt_tokens": 323,
+      "tokens": 43
+     },
+     {
+      "label": "card_payment_wrong_exchange_rate",
+      "text": "{\"topic\": \"card_payment_wrong_exchange_rate\", \"reply\": \"The exchange rate was applied incorrectly. Please provide the date and amount of your payment, and we will check it within 2 working days. If the issue persists, we will assist further.\"}",
+      "finish": "stop",
+      "seconds": 8.05,
+      "prompt_tokens": 316,
+      "tokens": 53
+     },
+     {
+      "label": "exchange_rate",
+      "text": "{\"topic\": \"exchange_rate\", \"reply\": \"The exchange rate for payments in another currency is applied at the moment of payment, with a 0.5% fee on weekends. The app shows the rate before you pay.\"}",
+      "finish": "stop",
+      "seconds": 7.65,
+      "prompt_tokens": 307,
+      "tokens": 48
+     },
+     {
+      "label": "card_payment_wrong_exchange_rate",
+      "text": "{\"topic\": \"card_payment_wrong_exchange_rate\", \"reply\": \"The incorrect exchange rate was applied to your foreign purchase. Please provide the date and amount of the payment, and we will check it within 2 working days.\"}",
+      "finish": "stop",
+      "seconds": 7.53,
+      "prompt_tokens": 310,
+      "tokens": 47
+     },
+     {
+      "label": "lost_or_stolen_card",
+      "text": "{\"topic\": \"lost_or_stolen_card\", \"reply\": \"If you lost your card, immediately freeze it in the app under Cards > Freeze, then order a new card there. A new card is free.\"}",
+      "finish": "stop",
+      "seconds": 8.25,
+      "prompt_tokens": 311,
+      "tokens": 45
+     },
+     {
+      "label": "lost_or_stolen_card",
+      "text": "{\"topic\": \"lost_or_stolen_card\", \"reply\": \"Please freeze your card in the app under Cards > Freeze, then order a new card. A new card is free.\"}",
+      "finish": "stop",
+      "seconds": 6.3,
+      "prompt_tokens": 311,
+      "tokens": 39
+     },
+     {
+      "label": "pin_blocked",
+      "text": "{\"topic\": \"pin_blocked\", \"reply\": \"Sure, I can help you unblock your PIN. Please provide the date and amount of the payment in the chat, and I will assist you within 24 hours.\"}",
+      "finish": "stop",
+      "seconds": 7.91,
+      "prompt_tokens": 315,
+      "tokens": 47
+     },
+     {
+      "label": "lost_or_stolen_card",
+      "text": "{\"topic\": \"lost_or_stolen_card\", \"reply\": \"Your card was stolen. Please freeze it at the app under Cards > Freeze, then order a new card. A new card is free.\"}",
+      "finish": "stop",
+      "seconds": 6.69,
+      "prompt_tokens": 310,
+      "tokens": 43
+     },
+     {
+      "label": "card_arrival",
+      "text": "{\"topic\": \"lost_or_stolen_card\", \"reply\": \"To locate your card, go to the 'Cards' section in your app and check the status. If it's lost or stolen, you can freeze it at once and order a new card there. A new card is free.\"}",
+      "finish": "stop",
+      "seconds": 9.24,
+      "prompt_tokens": 308,
+      "tokens": 61
+     },
+     {
+      "label": "exchange_rate",
+      "text": "{\"topic\": \"exchange_rate\", \"reply\": \"The exchange rate on the app is shown before you pay, with a 0.5% discount on weekends. If you encounter issues with the rate, please provide the date and amount of the payment, and the team will check it within 2 working days.\"}",
+      "finish": "stop",
+      "seconds": 9.84,
+      "prompt_tokens": 311,
+      "tokens": 65
+     },
+     {
+      "label": "request_refund",
+      "text": "{\"topic\": \"card_payment_wrong_exchange_rate\", \"reply\": \"Please provide the date and amount of the payment in this chat, and the team will check it within 2 working days. If the exchange rate is incorrect, we will resolve it promptly.\"}",
+      "finish": "stop",
+      "seconds": 8.31,
+      "prompt_tokens": 341,
+      "tokens": 53
+     },
+     {
+      "label": "card_payment_wrong_exchange_rate",
+      "text": "{\"topic\": \"card_payment_wrong_exchange_rate\", \"reply\": \"Please provide the date and amount of your payment, and the team will check it within 2 working days to resolve the exchange rate issue.\"}",
+      "finish": "stop",
+      "seconds": 6.67,
+      "prompt_tokens": 322,
+      "tokens": 43
+     },
+     {
+      "label": "pin_blocked",
+      "text": "{\"topic\": \"card_payment_wrong_exchange_rate\", \"reply\": \"Yes, you can unblock your card in the app under Cards > PIN, and it will be unblocked 24 hours after the last try.\"}",
+      "finish": "stop",
+      "seconds": 7.0,
+      "prompt_tokens": 311,
+      "tokens": 46
+     },
+     {
+      "label": "lost_or_stolen_card",
+      "text": "{\"topic\": \"lost_or_stolen_card\", \"reply\": \"Check the 'Cards' section in the app to confirm the card's status. If it's stolen, you can freeze it immediately and order a new card. A new card is free.\"}",
+      "finish": "stop",
+      "seconds": 8.75,
+      "prompt_tokens": 337,
+      "tokens": 53
+     },
+     {
+      "label": "request_refund",
+      "text": "{\"topic\": \"card_payment_wrong_exchange_rate\", \"reply\": \"If the payment was processed with a wrong exchange rate, please provide the date and amount of the payment in the chat, and the team will check it within 2 working days.\"}",
+      "finish": "stop",
+      "seconds": 8.59,
+      "prompt_tokens": 317,
+      "tokens": 51
+     },
+     {
+      "label": "pin_blocked",
+      "text": "{\"topic\": \"card_payment_wrong_exchange_rate\", \"reply\": \"The PIN was blocked after 3 wrong tries. You can unblock it in the app within 24 hours after the last try.\"}",
+      "finish": "stop",
+      "seconds": 6.46,
+      "prompt_tokens": 307,
+      "tokens": 43
+     },
+     {
+      "label": "pin_blocked",
+      "text": "{\"topic\": \"card_payment_wrong_exchange_rate\", \"reply\": \"The team will check the date and amount of your payment to determine if there was a wrong exchange rate. If so, they will take action within 2 working days. Please provide the details so we can assist you.\"}",
+      "finish": "stop",
+      "seconds": 9.19,
+      "prompt_tokens": 318,
+      "tokens": 59
+     },
+     {
+      "label": "exchange_rate",
+      "text": "{\"topic\": \"exchange_rate\", \"reply\": \"The exchange rate for payments in another currency is applied at the moment of payment, and it is shown before you pay. On weekends, a 0.5% fee is added.\"}",
+      "finish": "stop",
+      "seconds": 7.67,
+      "prompt_tokens": 305,
+      "tokens": 49
+     },
+     {
+      "label": "request_refund",
+      "text": "{\"topic\": \"card_payment_wrong_exchange_rate\", \"reply\": \"If you have a payment with a wrong exchange rate, please provide the date and amount of the payment in the chat, and the team will check it within 2 working days.\"}",
+      "finish": "stop",
+      "seconds": 8.38,
+      "prompt_tokens": 306,
+      "tokens": 51
+     },
+     {
+      "label": "request_refund",
+      "text": "{\"topic\": \"card_payment_wrong_exchange_rate\", \"reply\": \"The exchange rate for payments in another currency is applied at the moment of payment. If the rate is incorrect, please provide the date and amount of the payment, and the team will check it within 2 working days. If the rate is correct, the payment will proceed as is.\"}",
+      "finish": "stop",
+      "seconds": 11.24,
+      "prompt_tokens": 347,
+      "tokens": 72
+     },
+     {
+      "label": "card_payment_wrong_exchange_rate",
+      "text": "{\"topic\": \"card_payment_wrong_exchange_rate\", \"reply\": \"The exchange rate was incorrect, and the payment was charged too much. Please provide the date and amount of the payment, and the team will check it within 2 working days.\"}",
+      "finish": "stop",
+      "seconds": 7.87,
+      "prompt_tokens": 320,
+      "tokens": 51
+     },
+     {
+      "label": "card_payment_wrong_exchange_rate",
+      "text": "{\"topic\": \"card_payment_wrong_exchange_rate\", \"reply\": \"The exchange rate was applied incorrectly. Please check the payment details and contact the team for assistance. If the issue persists, provide the date and amount of the payment, and we will investigate it within two working days.\"}",
+      "finish": "stop",
+      "seconds": 8.88,
+      "prompt_tokens": 316,
+      "tokens": 58
+     },
+     {
+      "label": "card_arrival",
+      "text": "{\"topic\": \"card_arrival\", \"reply\": \"Your card has arrived within 5 working days. The status is in the app under Cards. Please proceed with the next steps as instructed.\"}",
+      "finish": "stop",
+      "seconds": 6.77,
+      "prompt_tokens": 312,
+      "tokens": 41
+     },
+     {
+      "label": "exchange_rate",
+      "text": "{\"topic\": \"exchange_rate\", \"reply\": \"The exchange rate for payments in another currency is displayed in the app before you pay. On weekends, a 0.5% fee is added. If there's a discrepancy, please provide the date and amount of the payment to the team for review.\"}",
+      "finish": "stop",
+      "seconds": 9.65,
+      "prompt_tokens": 309,
+      "tokens": 63
+     },
+     {
+      "label": "card_arrival",
+      "text": "{\"topic\": \"card_arrival\", \"reply\": \"It's normal to wait up to 5 working days for a new card to arrive, as the status is in the app. If you need assistance, feel free to ask.\"}",
+      "finish": "stop",
+      "seconds": 8.48,
+      "prompt_tokens": 316,
+      "tokens": 49
+     },
+     {
+      "label": "pin_blocked",
+      "text": "{\"topic\": \"card_payment_wrong_exchange_rate\", \"reply\": \"To reset your PIN, go to the app under Cards > PIN and enter your current PIN. If you're not sure, you can ask the team to help you reset it.\"}",
+      "finish": "stop",
+      "seconds": 8.14,
+      "prompt_tokens": 308,
+      "tokens": 51
+     },
+     {
+      "label": "pin_blocked",
+      "text": "{\"topic\": \"pin_blocked\", \"reply\": \"If you've tried too many times to unlock your PIN, you can use the app's 'PIN' feature to unfreeze it. Enter your PIN and the app will allow you to unlock it after 24 hours.\"}",
+      "finish": "stop",
+      "seconds": 8.81,
+      "prompt_tokens": 312,
+      "tokens": 57
+     },
+     {
+      "label": "lost_or_stolen_card",
+      "text": "{\"topic\": \"lost_or_stolen_card\", \"reply\": \"Your card has been lost. Please freeze it at the app under Cards > Freeze, then order a new card. A new card is free.\"}",
+      "finish": "stop",
+      "seconds": 6.82,
+      "prompt_tokens": 306,
+      "tokens": 44
+     },
+     {
+      "label": "request_refund",
+      "text": "{\"topic\": \"card_payment_wrong_exchange_rate\", \"reply\": \"If there was a payment with a wrong exchange rate, please provide the date and amount of the payment in the chat, and the team will check it within 2 working days.\"}",
+      "finish": "stop",
+      "seconds": 7.8,
+      "prompt_tokens": 305,
+      "tokens": 51
+     },
+     {
+      "label": "lost_or_stolen_card",
+      "text": "{\"topic\": \"card_payment_wrong_exchange_rate\", \"reply\": \"No, a copy of the police report is not necessary for completing the report process. The exchange rate issue is resolved by sending the date and amount of the payment in this chat, and the team checks it within 2 working days.\"}",
+      "finish": "stop",
+      "seconds": 9.63,
+      "prompt_tokens": 315,
+      "tokens": 62
+     },
+     {
+      "label": "exchange_rate",
+      "text": "{\"topic\": \"exchange_rate\", \"reply\": \"The app uses the exchange rate at the moment of payment, with a 0.5% discount on weekends. If there's a discrepancy, the date and amount are sent to the team for review within 2 working days.\"}",
+      "finish": "stop",
+      "seconds": 9.12,
+      "prompt_tokens": 308,
+      "tokens": 58
+     },
+     {
+      "label": "request_refund",
+      "text": "{\"topic\": \"card_payment_wrong_exchange_rate\", \"reply\": \"If you received a payment with a wrong exchange rate, please provide the date and amount of the payment in the chat, and the team will check it within 2 working days.\"}",
+      "finish": "stop",
+      "seconds": 7.72,
+      "prompt_tokens": 307,
+      "tokens": 51
+     },
+     {
+      "label": "request_refund",
+      "text": "{\"topic\": \"card_payment_wrong_exchange_rate\", \"reply\": \"The refund process involves asking the shop first. If the shop hasn't helped within 14 days, the team can open a dispute.\"}",
+      "finish": "stop",
+      "seconds": 6.92,
+      "prompt_tokens": 307,
+      "tokens": 43
+     },
+     {
+      "label": "card_arrival",
+      "text": "{\"topic\": \"card_arrival\", \"reply\": \"To track your card, go to the app under 'Cards' and check the status. There is no tracking number provided.\"}",
+      "finish": "stop",
+      "seconds": 6.05,
+      "prompt_tokens": 308,
+      "tokens": 38
+     },
+     {
+      "label": "card_payment_wrong_exchange_rate",
+      "text": "{\"topic\": \"card_payment_wrong_exchange_rate\", \"reply\": \"The exchange rate appears to be incorrect. Please provide the date and amount of the payment, and the team will check it within 2 working days.\"}",
+      "finish": "stop",
+      "seconds": 7.45,
+      "prompt_tokens": 312,
+      "tokens": 45
+     },
+     {
+      "label": "card_payment_wrong_exchange_rate",
+      "text": "{\"topic\": \"card_payment_wrong_exchange_rate\", \"reply\": \"The exchange rate was incorrect. Please provide the date and amount of the payment, and the team will check it within 2 working days.\"}",
+      "finish": "stop",
+      "seconds": 7.32,
+      "prompt_tokens": 315,
+      "tokens": 43
+     },
+     {
+      "label": "request_refund",
+      "text": "{\"topic\": \"card_payment_wrong_exchange_rate\", \"reply\": \"To request a refund, please ask the shop first. If the shop has not helped within 14 days, the team can open a dispute.\"}",
+      "finish": "stop",
+      "seconds": 7.65,
+      "prompt_tokens": 307,
+      "tokens": 45
+     },
+     {
+      "label": "pin_blocked",
+      "text": "{\"topic\": \"card_payment_wrong_exchange_rate\", \"reply\": \"If the exchange rate was incorrect, please provide the date and amount of the payment, and the team will check it within 2 working days.\"}",
+      "finish": "stop",
+      "seconds": 6.96,
+      "prompt_tokens": 308,
+      "tokens": 44
+     },
+     {
+      "label": "pin_blocked",
+      "text": "{\"topic\": \"pin_blocked\", \"reply\": \"If you've tried to enter your PIN too often, you should check the app under Cards > PIN to unfreeze it. The PIN will be unblocked after 24 hours after the last attempt.\"}",
+      "finish": "stop",
+      "seconds": 8.67,
+      "prompt_tokens": 316,
+      "tokens": 53
+     },
+     {
+      "label": "exchange_rate",
+      "text": "{\"topic\": \"exchange_rate\", \"reply\": \"The exchange rate for payments in another currency is applied at the moment of payment. If the rate is incorrect, please provide the date and amount, and the team will check it within 2 working days.\"}",
+      "finish": "stop",
+      "seconds": 8.36,
+      "prompt_tokens": 311,
+      "tokens": 53
+     },
+     {
+      "label": "exchange_rate",
+      "text": "{\"topic\": \"exchange_rate\", \"reply\": \"The app shows the exchange rate before you pay. On weekends, 0.5% is added. If you encounter a payment in another currency, please provide the date and amount, and the team will check it within 2 working days.\"}",
+      "finish": "stop",
+      "seconds": 9.51,
+      "prompt_tokens": 308,
+      "tokens": 61
+     },
+     {
+      "label": "card_arrival",
+      "text": "{\"topic\": \"card_arrival\", \"reply\": \"Your new card has arrived within 5 working days. It is in the app under Cards. You can check its status to confirm if it has been successfully received.\"}",
+      "finish": "stop",
+      "seconds": 7.19,
+      "prompt_tokens": 317,
+      "tokens": 46
+     },
+     {
+      "label": "card_arrival",
+      "text": "{\"topic\": \"card_arrival\", \"reply\": \"You can check the status of your new card in the app under 'Cards' to see when it will arrive.\"}",
+      "finish": "stop",
+      "seconds": 5.62,
+      "prompt_tokens": 311,
+      "tokens": 36
+     },
+     {
+      "label": "request_refund",
+      "text": "{\"topic\": \"card_payment_wrong_exchange_rate\", \"reply\": \"If you have a payment in another currency and the exchange rate is incorrect, please provide the date and amount of the payment, and the team will check it within 2 working days.\"}",
+      "finish": "stop",
+      "seconds": 7.81,
+      "prompt_tokens": 308,
+      "tokens": 52
+     },
+     {
+      "label": "pin_blocked",
+      "text": "{\"topic\": \"card_payment_wrong_exchange_rate\", \"reply\": \"If the exchange rate was incorrect, please provide the date and amount of the payment, and the team will check it within 2 working days.\"}",
+      "finish": "stop",
+      "seconds": 6.62,
+      "prompt_tokens": 310,
+      "tokens": 44
+     },
+     {
+      "label": "lost_or_stolen_card",
+      "text": "{\"topic\": \"lost_or_stolen_card\", \"reply\": \"You can report the stolen card by going to the 'Cards' section in the app and selecting 'Freeze' to block the card. Once frozen, you can order a new card there. If you have the date and amount of the payment, we can check it within 2 working days.\"}",
+      "finish": "stop",
+      "seconds": 13.58,
+      "prompt_tokens": 329,
+      "tokens": 75
+     },
+     {
+      "label": "pin_blocked",
+      "text": "{\"topic\": \"pin_blocked\", \"reply\": \"To unblock your PIN, go to the 'Cards' section in your app and click on 'PIN'. Enter your PIN and confirm it. If you're not sure, you can try again within 24 hours after the last unsuccessful attempt.\"}",
+      "finish": "stop",
+      "seconds": 9.55,
+      "prompt_tokens": 309,
+      "tokens": 62
+     },
+     {
+      "label": "pin_blocked",
+      "text": "{\"topic\": \"card_payment_wrong_exchange_rate\", \"reply\": \"If the bank machine won't accept your PIN attempts, contact the customer service team immediately. They will check the date and amount of the payment to resolve the issue within 2 working days.\"}",
+      "finish": "stop",
+      "seconds": 8.32,
+      "prompt_tokens": 317,
+      "tokens": 53
+     },
+     {
+      "label": "request_refund",
+      "text": "{\"topic\": \"card_arrival\", \"reply\": \"We are sorry for the delay in receiving your order. Please ensure you have enough funds in your account to cover the items you ordered. If you are unable to pay, we can assist you with a refund once the card is processed.\"}",
+      "finish": "stop",
+      "seconds": 9.7,
+      "prompt_tokens": 332,
+      "tokens": 60
+     },
+     {
+      "label": "request_refund",
+      "text": "{\"topic\": \"card_payment_wrong_exchange_rate\", \"reply\": \"I'll check the exchange rate for your payment and assist with any issues. Please provide the date and amount of the payment to proceed.\"}",
+      "finish": "stop",
+      "seconds": 8.14,
+      "prompt_tokens": 308,
+      "tokens": 42
+     }
+    ]
+   }
+  },
+  "build-eval-set": {
+   "v2": {
+    "ask": {
+     "labels": "test",
+     "system": "You answer customers of an online bank in the chat of its app. These are the topics a message can be about, each with its facts:\ncard_arrival: A new card arrives within 5 working days. Its status is in the app under Cards. There is no tracking number.\nlost_or_stolen_card: Freeze the card at once in the app under Cards > Freeze, then order a new card there. A new card is free.\nexchange_rate: A payment in another currency gets the exchange rate at the moment of payment; on weekends 0.5% is added. The app shows the rate before you pay.\ncard_payment_wrong_exchange_rate: Send the date and the amount of the payment in this chat, and the team checks it within 2 working days.\npin_blocked: The PIN is blocked after 3 wrong tries. Unblock it in the app under Cards > PIN, 24 hours after the last try.\nrequest_refund: Ask the shop first. If the shop has not helped within 14 days, the team can open a dispute.\nFirst choose the topic of the customer's message, then answer with the facts of that topic only. If the facts do not answer the question, say that a person from the team will reply.\nAnswer with JSON only: {\"topic\": \"...\", \"reply\": \"...\"}. reply is your answer to the customer, in at most three sentences.",
+     "max_tokens": 200
+    },
+    "answers": [
+     {
+      "label": "request_refund",
+      "text": "{\"topic\": \"request_refund\", \"reply\": \"You should ask the shop first. If the shop has not helped within 14 days, the team can open a dispute.\"}",
+      "finish": "stop",
+      "seconds": 8.46,
+      "prompt_tokens": 310,
+      "tokens": 39
+     },
+     {
+      "label": "card_arrival",
+      "text": "{\"topic\": \"lost_or_stolen_card\", \"reply\": \"If you froze your card, you can check its status in the app under Cards. A new card will be available once it arrives.\"}",
+      "finish": "stop",
+      "seconds": 7.39,
+      "prompt_tokens": 315,
+      "tokens": 42
+     },
+     {
+      "label": "exchange_rate",
+      "text": "{\"topic\": \"exchange_rate\", \"reply\": \"The exchange rate is calculated at the moment of payment. On weekends, a 0.5% fee is added. Please provide the date and amount to check the rate.\"}",
+      "finish": "stop",
+      "seconds": 8.97,
+      "prompt_tokens": 311,
+      "tokens": 47
+     },
+     {
+      "label": "pin_blocked",
+      "text": "{\"topic\": \"pin_blocked\", \"reply\": \"The PIN is blocked after 3 wrong tries. Unblock it in the app under Cards > PIN, 24 hours after the last try.\"}",
+      "finish": "stop",
+      "seconds": 7.18,
+      "prompt_tokens": 313,
+      "tokens": 41
+     },
+     {
+      "label": "lost_or_stolen_card",
+      "text": "{\"topic\": \"lost_or_stolen_card\", \"reply\": \"To report your lost or stolen card, go to the app under Cards > Freeze, then order a new card there. A new card will be free.\"}",
+      "finish": "stop",
+      "seconds": 7.73,
+      "prompt_tokens": 313,
+      "tokens": 46
+     },
+     {
+      "label": "card_payment_wrong_exchange_rate",
+      "text": "{\"topic\": \"lost_or_stolen_card\", \"reply\": \"I'll check the exchange rate for your card. If it's incorrect, please send the date and amount of the payment to the team within 2 working days.\"}",
+      "finish": "stop",
+      "seconds": 8.36,
+      "prompt_tokens": 313,
+      "tokens": 48
+     },
+     {
+      "label": "exchange_rate",
+      "text": "{\"topic\": \"exchange_rate\", \"reply\": \"The exchange rate is applied at the moment of payment. On weekends, a 0.5% fee is added. The app shows the rate before you pay.\"}",
+      "finish": "stop",
+      "seconds": 7.29,
+      "prompt_tokens": 311,
+      "tokens": 45
+     },
+     {
+      "label": "exchange_rate",
+      "text": "{\"topic\": \"exchange_rate\", \"reply\": \"Exchange rates change based on the current market conditions, and on weekends, a 0.5% fee is added to the payment.\"}",
+      "finish": "stop",
+      "seconds": 6.69,
+      "prompt_tokens": 309,
+      "tokens": 39
+     },
+     {
+      "label": "exchange_rate",
+      "text": "{\"topic\": \"exchange_rate\", \"reply\": \"The exchange rate is determined by the current rate at the moment of payment. On weekends, a 0.5% fee is added to the payment amount. The app displays the rate before you pay.\"}",
+      "finish": "stop",
+      "seconds": 8.79,
+      "prompt_tokens": 311,
+      "tokens": 53
+     },
+     {
+      "label": "card_payment_wrong_exchange_rate",
+      "text": "{\"topic\": \"exchange_rate\", \"reply\": \"The exchange rate is currently applied at the moment of payment. Please provide the date and amount, and we will check it within 2 working days.\"}",
+      "finish": "stop",
+      "seconds": 7.5,
+      "prompt_tokens": 327,
+      "tokens": 42
+     },
+     {
+      "label": "card_payment_wrong_exchange_rate",
+      "text": "{\"topic\": \"exchange_rate\", \"reply\": \"The exchange rate for your card payment is calculated at the moment of payment. If it appears incorrect, please provide the date and amount of the payment to the team within 2 working days for a review.\"}",
+      "finish": "stop",
+      "seconds": 8.65,
+      "prompt_tokens": 313,
+      "tokens": 53
+     },
+     {
+      "label": "card_payment_wrong_exchange_rate",
+      "text": "{\"topic\": \"card_payment_wrong_exchange_rate\", \"reply\": \"Please provide the date and amount of the payment, and the team will check it within 2 working days.\"}",
+      "finish": "stop",
+      "seconds": 6.09,
+      "prompt_tokens": 313,
+      "tokens": 37
+     },
+     {
+      "label": "pin_blocked",
+      "text": "{\"topic\": \"pin_blocked\", \"reply\": \"Your PIN has been blocked after 3 incorrect attempts. Please try again within 24 hours to unlock it.\"}",
+      "finish": "stop",
+      "seconds": 6.12,
+      "prompt_tokens": 315,
+      "tokens": 35
+     },
+     {
+      "label": "request_refund",
+      "text": "{\"topic\": \"card_payment_wrong_exchange_rate\", \"reply\": \"Send the date and the amount of the payment in this chat, and the team checks it within 2 working days.\"}",
+      "finish": "stop",
+      "seconds": 7.08,
+      "prompt_tokens": 313,
+      "tokens": 39
+     },
+     {
+      "label": "card_payment_wrong_exchange_rate",
+      "text": "{\"topic\": \"card_payment_wrong_exchange_rate\", \"reply\": \"The wrong exchange rate was used when you made the payment. Please send the date and amount of the payment to the team, and they will check it within 2 working days.\"}",
+      "finish": "stop",
+      "seconds": 9.68,
+      "prompt_tokens": 320,
+      "tokens": 51
+     },
+     {
+      "label": "card_payment_wrong_exchange_rate",
+      "text": "{\"topic\": \"lost_or_stolen_card\", \"reply\": \"We'll check the exchange rate and see if there's a mistake. If the issue persists, please contact our support team.\"}",
+      "finish": "stop",
+      "seconds": 7.4,
+      "prompt_tokens": 329,
+      "tokens": 40
+     },
+     {
+      "label": "lost_or_stolen_card",
+      "text": "{\"topic\": \"lost_or_stolen_card\", \"reply\": \"I'll check your card status. Please freeze it in the app and order a new card as soon as possible. A new card will be available for you.\"}",
+      "finish": "stop",
+      "seconds": 8.04,
+      "prompt_tokens": 311,
+      "tokens": 47
+     },
+     {
+      "label": "card_payment_wrong_exchange_rate",
+      "text": "{\"topic\": \"exchange_rate\", \"reply\": \"The exchange rate is currently 0.5% on weekends. If you're using a different rate, please check the current rate in the app before making payments.\"}",
+      "finish": "stop",
+      "seconds": 7.65,
+      "prompt_tokens": 319,
+      "tokens": 45
+     },
+     {
+      "label": "exchange_rate",
+      "text": "{\"topic\": \"exchange_rate\", \"reply\": \"The exchange rate is determined at the moment of payment, with a 0.5% discount on weekends. The app shows the rate before you pay.\"}",
+      "finish": "stop",
+      "seconds": 7.54,
+      "prompt_tokens": 309,
+      "tokens": 43
+     },
+     {
+      "label": "lost_or_stolen_card",
+      "text": "{\"topic\": \"lost_or_stolen_card\", \"reply\": \"The card was stolen. Please freeze it in the app under Cards > Freeze, then order a new card there. A new card is free.\"}",
+      "finish": "stop",
+      "seconds": 7.81,
+      "prompt_tokens": 309,
+      "tokens": 44
+     },
+     {
+      "label": "exchange_rate",
+      "text": "{\"topic\": \"exchange_rate\", \"reply\": \"The exchange rate is calculated at the moment of payment. On weekends, a 0.5% fee is added. The app shows the rate before you pay.\"}",
+      "finish": "stop",
+      "seconds": 7.78,
+      "prompt_tokens": 309,
+      "tokens": 45
+     },
+     {
+      "label": "lost_or_stolen_card",
+      "text": "{\"topic\": \"lost_or_stolen_card\", \"reply\": \"Please freeze the card at Cards > Freeze, then order a new card. A new card is free.\"}",
+      "finish": "stop",
+      "seconds": 6.8,
+      "prompt_tokens": 310,
+      "tokens": 36
+     },
+     {
+      "label": "request_refund",
+      "text": "{\"topic\": \"request_refund\", \"reply\": \"The team will check the refund request within 14 days. If the shop hasn't helped, we can open a dispute with the team.\"}",
+      "finish": "stop",
+      "seconds": 8.81,
+      "prompt_tokens": 314,
+      "tokens": 42
+     },
+     {
+      "label": "card_payment_wrong_exchange_rate",
+      "text": "{\"topic\": \"exchange_rate\", \"reply\": \"The exchange rate was applied at the moment of payment, and the team will check the details within 2 working days to confirm the correct rate.\"}",
+      "finish": "stop",
+      "seconds": 7.56,
+      "prompt_tokens": 318,
+      "tokens": 41
+     },
+     {
+      "label": "pin_blocked",
+      "text": "{\"topic\": \"pin_blocked\", \"reply\": \"The PIN is blocked after 3 wrong tries. Unblock it in the app under Cards > PIN, 24 hours after the last try.\"}",
+      "finish": "stop",
+      "seconds": 7.17,
+      "prompt_tokens": 314,
+      "tokens": 41
+     },
+     {
+      "label": "request_refund",
+      "text": "{\"topic\": \"request_refund\", \"reply\": \"If you have a refund request, please ask the shop first. If they haven't helped within 14 days, we can assist you within 2 working days.\"}",
+      "finish": "stop",
+      "seconds": 7.74,
+      "prompt_tokens": 319,
+      "tokens": 47
+     },
+     {
+      "label": "card_arrival",
+      "text": "{\"topic\": \"lost_or_stolen_card\", \"reply\": \"You can freeze your card in the app under Cards > Freeze, then order a new card there. A new card will be free.\"}",
+      "finish": "stop",
+      "seconds": 7.24,
+      "prompt_tokens": 320,
+      "tokens": 42
+     },
+     {
+      "label": "pin_blocked",
+      "text": "{\"topic\": \"pin_blocked\", \"reply\": \"The PIN is blocked after 3 wrong tries. Unblock it in the app under Cards > PIN, 24 hours after the last try.\"}",
+      "finish": "stop",
+      "seconds": 6.91,
+      "prompt_tokens": 316,
+      "tokens": 41
+     },
+     {
+      "label": "card_arrival",
+      "text": "{\"topic\": \"lost_or_stolen_card\", \"reply\": \"The tracking number is available in the app under Cards > Freeze, and you can find it there. If you need further assistance, please let me know.\"}",
+      "finish": "stop",
+      "seconds": 7.61,
+      "prompt_tokens": 315,
+      "tokens": 46
+     },
+     {
+      "label": "request_refund",
+      "text": "{\"topic\": \"request_refund\", \"reply\": \"You should ask the shop first. If they haven't helped within 14 days, the team can open a dispute.\"}",
+      "finish": "stop",
+      "seconds": 7.04,
+      "prompt_tokens": 314,
+      "tokens": 38
+     },
+     {
+      "label": "card_payment_wrong_exchange_rate",
+      "text": "{\"topic\": \"lost_or_stolen_card\", \"reply\": \"The rate applied to your foreign purchase was incorrect. Please send the date and amount of the payment to the team, and they will check it within 2 working days.\"}",
+      "finish": "stop",
+      "seconds": 8.58,
+      "prompt_tokens": 312,
+      "tokens": 49
+     },
+     {
+      "label": "card_arrival",
+      "text": "{\"topic\": \"lost_or_stolen_card\", \"reply\": \"Your card has not arrived within 5 working days. It is likely lost or stolen, and you should contact the bank's customer service to confirm the status.\"}",
+      "finish": "stop",
+      "seconds": 8.01,
+      "prompt_tokens": 318,
+      "tokens": 47
+     },
+     {
+      "label": "card_payment_wrong_exchange_rate",
+      "text": "{\"topic\": \"exchange_rate\", \"reply\": \"The exchange rate is applied at the moment of payment. On weekends, 0.5% is added. The app shows the rate before you pay.\"}",
+      "finish": "stop",
+      "seconds": 7.21,
+      "prompt_tokens": 315,
+      "tokens": 43
+     },
+     {
+      "label": "lost_or_stolen_card",
+      "text": "{\"topic\": \"lost_or_stolen_card\", \"reply\": \"Freeze your card at Cards > Freeze, then order a new card there. A new card is free.\"}",
+      "finish": "stop",
+      "seconds": 6.32,
+      "prompt_tokens": 313,
+      "tokens": 37
+     },
+     {
+      "label": "pin_blocked",
+      "text": "{\"topic\": \"pin_blocked\", \"reply\": \"The PIN is blocked after 3 wrong tries. Unblock it in the app under Cards > PIN, 24 hours after the last try.\"}",
+      "finish": "stop",
+      "seconds": 6.94,
+      "prompt_tokens": 310,
+      "tokens": 41
+     },
+     {
+      "label": "card_arrival",
+      "text": "{\"topic\": \"lost_or_stolen_card\", \"reply\": \"Freeze the card at once in the app under Cards > Freeze, then order a new card there. A new card is free.\"}",
+      "finish": "stop",
+      "seconds": 6.85,
+      "prompt_tokens": 314,
+      "tokens": 42
+     },
+     {
+      "label": "lost_or_stolen_card",
+      "text": "{\"topic\": \"lost_or_stolen_card\", \"reply\": \"You can freeze your card in the app under Cards > Freeze, then order a new card there. A new card is free.\"}",
+      "finish": "stop",
+      "seconds": 7.88,
+      "prompt_tokens": 308,
+      "tokens": 41
+     },
+     {
+      "label": "pin_blocked",
+      "text": "{\"topic\": \"pin_blocked\", \"reply\": \"The PIN has been blocked after 3 wrong tries. Please unblock it in the app under Cards > PIN, and it will be unblocked within 24 hours.\"}",
+      "finish": "stop",
+      "seconds": 8.65,
+      "prompt_tokens": 325,
+      "tokens": 47
+     },
+     {
+      "label": "exchange_rate",
+      "text": "{\"topic\": \"exchange_rate\", \"reply\": \"The exchange rate is based on the current market rate, with a 0.5% discount on weekends. The app displays the rate before you pay.\"}",
+      "finish": "stop",
+      "seconds": 7.11,
+      "prompt_tokens": 312,
+      "tokens": 43
+     },
+     {
+      "label": "card_arrival",
+      "text": "{\"topic\": \"lost_or_stolen_card\", \"reply\": \"The card was lost or stolen, and you can freeze it in the app under Cards > Freeze, then order a new card. A new card will be available within 2 working days.\"}",
+      "finish": "stop",
+      "seconds": 9.23,
+      "prompt_tokens": 319,
+      "tokens": 53
+     },
+     {
+      "label": "lost_or_stolen_card",
+      "text": "{\"topic\": \"lost_or_stolen_card\", \"reply\": \"Please freeze your card at the app under Cards > Freeze, then order a new card. A new card is free.\"}",
+      "finish": "stop",
+      "seconds": 7.12,
+      "prompt_tokens": 307,
+      "tokens": 39
+     },
+     {
+      "label": "card_arrival",
+      "text": "{\"topic\": \"card_arrival\", \"reply\": \"A new card arrives within 5 working days. Its status is in the app under Cards.\"}",
+      "finish": "stop",
+      "seconds": 5.75,
+      "prompt_tokens": 313,
+      "tokens": 32
+     },
+     {
+      "label": "card_payment_wrong_exchange_rate",
+      "text": "{\"topic\": \"exchange_rate\", \"reply\": \"The exchange rate is applied at the moment of payment. If it's incorrect, please provide the date and amount to check it within 2 working days.\"}",
+      "finish": "stop",
+      "seconds": 7.16,
+      "prompt_tokens": 310,
+      "tokens": 43
+     },
+     {
+      "label": "lost_or_stolen_card",
+      "text": "{\"topic\": \"lost_or_stolen_card\", \"reply\": \"Please freeze the card at the app under Cards > Freeze, then order a new card there. A new card is free.\"}",
+      "finish": "stop",
+      "seconds": 6.78,
+      "prompt_tokens": 309,
+      "tokens": 40
+     },
+     {
+      "label": "pin_blocked",
+      "text": "{\"topic\": \"pin_blocked\", \"reply\": \"The PIN is blocked after 3 wrong tries. Unblock it in the app under Cards > PIN, and it will be unblocked within 24 hours.\"}",
+      "finish": "stop",
+      "seconds": 7.68,
+      "prompt_tokens": 322,
+      "tokens": 44
+     },
+     {
+      "label": "exchange_rate",
+      "text": "{\"topic\": \"exchange_rate\", \"reply\": \"The exchange rate is currently 0.5% on weekends. Before you pay, the app shows this rate.\"}",
+      "finish": "stop",
+      "seconds": 6.44,
+      "prompt_tokens": 314,
+      "tokens": 35
+     },
+     {
+      "label": "pin_blocked",
+      "text": "{\"topic\": \"pin_blocked\", \"reply\": \"The PIN is blocked after 3 wrong tries. Unblock it in the app under Cards > PIN, 24 hours after the last try.\"}",
+      "finish": "stop",
+      "seconds": 7.77,
+      "prompt_tokens": 316,
+      "tokens": 41
+     },
+     {
+      "label": "exchange_rate",
+      "text": "{\"topic\": \"exchange_rate\", \"reply\": \"A payment in another currency gets the exchange rate at the moment of payment; on weekends 0.5% is added. The app shows the rate before you pay.\"}",
+      "finish": "stop",
+      "seconds": 7.91,
+      "prompt_tokens": 310,
+      "tokens": 46
+     },
+     {
+      "label": "lost_or_stolen_card",
+      "text": "{\"topic\": \"lost_or_stolen_card\", \"reply\": \"I can help you locate your card. Please provide the card number or any other details, and I will assist you with the process.\"}",
+      "finish": "stop",
+      "seconds": 6.98,
+      "prompt_tokens": 311,
+      "tokens": 42
+     },
+     {
+      "label": "lost_or_stolen_card",
+      "text": "{\"topic\": \"lost_or_stolen_card\", \"reply\": \"Freeze your card at Cards > Freeze, then order a new one. The new card will be shipped and available for use immediately.\"}",
+      "finish": "stop",
+      "seconds": 7.54,
+      "prompt_tokens": 332,
+      "tokens": 42
+     },
+     {
+      "label": "request_refund",
+      "text": "{\"topic\": \"request_refund\", \"reply\": \"The team will assist you with processing your refund and canceling your order as soon as possible.\"}",
+      "finish": "stop",
+      "seconds": 7.17,
+      "prompt_tokens": 327,
+      "tokens": 32
+     },
+     {
+      "label": "request_refund",
+      "text": "{\"topic\": \"request_refund\", \"reply\": \"I'm sorry, but we can't process a refund for a transaction that hasn't been confirmed. Please first contact our customer service team to resolve the issue. If you need assistance, feel free to ask.\"}",
+      "finish": "stop",
+      "seconds": 11.08,
+      "prompt_tokens": 338,
+      "tokens": 55
+     },
+     {
+      "label": "card_arrival",
+      "text": "{\"topic\": \"lost_or_stolen_card\", \"reply\": \"Yes, a tracking number is available in the app under Cards > Freeze, and a new card will be sent there. Please check the tracking number for updates.\"}",
+      "finish": "stop",
+      "seconds": 8.38,
+      "prompt_tokens": 320,
+      "tokens": 47
+     },
+     {
+      "label": "exchange_rate",
+      "text": "{\"topic\": \"exchange_rate\", \"reply\": \"The exchange rate at the moment of payment is applied, and it may vary depending on the day of the week. Please provide the date and amount to check the rate.\"}",
+      "finish": "stop",
+      "seconds": 9.32,
+      "prompt_tokens": 311,
+      "tokens": 46
+     },
+     {
+      "label": "request_refund",
+      "text": "{\"topic\": \"request_refund\", \"reply\": \"If you bought something and the shop hasn't helped within 14 days, we can help you open a dispute.\"}",
+      "finish": "stop",
+      "seconds": 6.92,
+      "prompt_tokens": 316,
+      "tokens": 37
+     },
+     {
+      "label": "request_refund",
+      "text": "{\"topic\": \"request_refund\", \"reply\": \"You should first contact the merchant to resolve the issue. If they are not helpful within 14 days, we can assist you in opening a dispute with the team.\"}",
+      "finish": "stop",
+      "seconds": 9.44,
+      "prompt_tokens": 334,
+      "tokens": 47
+     },
+     {
+      "label": "card_arrival",
+      "text": "{\"topic\": \"lost_or_stolen_card\", \"reply\": \"The card is being processed, and it's taking time to arrive. You can check the status in the app under Cards > Freeze, and a new card will be available once it's processed.\"}",
+      "finish": "stop",
+      "seconds": 10.13,
+      "prompt_tokens": 321,
+      "tokens": 54
+     },
+     {
+      "label": "card_arrival",
+      "text": "{\"topic\": \"lost_or_stolen_card\", \"reply\": \"You can freeze your card in the app under Cards > Freeze, then order a new card there. A new card is free.\"}",
+      "finish": "stop",
+      "seconds": 7.52,
+      "prompt_tokens": 314,
+      "tokens": 41
+     },
+     {
+      "label": "card_arrival",
+      "text": "{\"topic\": \"lost_or_stolen_card\", \"reply\": \"You can freeze your card in the app under Cards > Freeze, then order a new card there. A new card is free.\"}",
+      "finish": "stop",
+      "seconds": 7.72,
+      "prompt_tokens": 309,
+      "tokens": 41
+     },
+     {
+      "label": "exchange_rate",
+      "text": "{\"topic\": \"exchange_rate\", \"reply\": \"The exchange rate is determined by the current market rate at the time of payment. On weekends, a 0.5% fee is added to the payment amount.\"}",
+      "finish": "stop",
+      "seconds": 8.03,
+      "prompt_tokens": 312,
+      "tokens": 45
+     },
+     {
+      "label": "pin_blocked",
+      "text": "{\"topic\": \"pin_blocked\", \"reply\": \"The PIN is blocked after 3 wrong tries. Unblock it in the app under Cards > PIN, 24 hours after the last try.\"}",
+      "finish": "stop",
+      "seconds": 6.93,
+      "prompt_tokens": 318,
+      "tokens": 41
+     },
+     {
+      "label": "lost_or_stolen_card",
+      "text": "{\"topic\": \"lost_or_stolen_card\", \"reply\": \"You can freeze your card at Cards > Freeze, then order a new card. A new card is free.\"}",
+      "finish": "stop",
+      "seconds": 6.2,
+      "prompt_tokens": 310,
+      "tokens": 37
+     },
+     {
+      "label": "lost_or_stolen_card",
+      "text": "{\"topic\": \"lost_or_stolen_card\", \"reply\": \"To report a stolen card, you can freeze it in the app under Cards > Freeze, then order a new card there. A new card will be free.\"}",
+      "finish": "stop",
+      "seconds": 7.55,
+      "prompt_tokens": 311,
+      "tokens": 47
+     },
+     {
+      "label": "card_arrival",
+      "text": "{\"topic\": \"lost_or_stolen_card\", \"reply\": \"Freeze the card at once in the app under Cards > Freeze, then order a new card there. A new card is free.\"}",
+      "finish": "stop",
+      "seconds": 7.08,
+      "prompt_tokens": 310,
+      "tokens": 42
+     },
+     {
+      "label": "card_payment_wrong_exchange_rate",
+      "text": "{\"topic\": \"card_payment_wrong_exchange_rate\", \"reply\": \"The team will check the payment details and ensure the correct exchange rate is applied. If the issue persists, they will resolve it within 2 working days.\"}",
+      "finish": "stop",
+      "seconds": 7.86,
+      "prompt_tokens": 316,
+      "tokens": 46
+     },
+     {
+      "label": "exchange_rate",
+      "text": "{\"topic\": \"exchange_rate\", \"reply\": \"The exchange rate is calculated at the moment of payment. On weekends, a 0.5% fee is added. The rate is shown before you pay.\"}",
+      "finish": "stop",
+      "seconds": 7.8,
+      "prompt_tokens": 310,
+      "tokens": 44
+     },
+     {
+      "label": "card_arrival",
+      "text": "{\"topic\": \"lost_or_stolen_card\", \"reply\": \"The card was frozen in the app under Cards > Freeze, and a new card will be sent there. A tracking number is not available for this action.\"}",
+      "finish": "stop",
+      "seconds": 7.23,
+      "prompt_tokens": 314,
+      "tokens": 46
+     },
+     {
+      "label": "exchange_rate",
+      "text": "{\"topic\": \"exchange_rate\", \"reply\": \"Yes, the exchange rate is applied at the moment of payment. On weekends, a 0.5% fee is added. The app shows the rate before you pay.\"}",
+      "finish": "stop",
+      "seconds": 7.87,
+      "prompt_tokens": 312,
+      "tokens": 47
+     },
+     {
+      "label": "card_payment_wrong_exchange_rate",
+      "text": "{\"topic\": \"exchange_rate\", \"reply\": \"The exchange rate is applied at the moment of payment. If the rate is incorrect, please provide the date and amount of the payment to the team for verification.\"}",
+      "finish": "stop",
+      "seconds": 6.9,
+      "prompt_tokens": 316,
+      "tokens": 44
+     },
+     {
+      "label": "lost_or_stolen_card",
+      "text": "{\"topic\": \"lost_or_stolen_card\", \"reply\": \"You can freeze your card at the app under Cards > Freeze, then order a new card there. A new card is free.\"}",
+      "finish": "stop",
+      "seconds": 6.88,
+      "prompt_tokens": 323,
+      "tokens": 41
+     },
+     {
+      "label": "card_arrival",
+      "text": "{\"topic\": \"lost_or_stolen_card\", \"reply\": \"The card will arrive within 5 working days. You can freeze it in the app under Cards > Freeze, then order a new card there. A new card is free.\"}",
+      "finish": "stop",
+      "seconds": 8.29,
+      "prompt_tokens": 325,
+      "tokens": 50
+     },
+     {
+      "label": "card_payment_wrong_exchange_rate",
+      "text": "{\"topic\": \"exchange_rate\", \"reply\": \"The exchange rate applied to your purchase was 0.5% on weekends. Please confirm the date and amount of your payment, and the team will check it within 2 working days.\"}",
+      "finish": "stop",
+      "seconds": 9.07,
+      "prompt_tokens": 318,
+      "tokens": 50
+     },
+     {
+      "label": "exchange_rate",
+      "text": "{\"topic\": \"exchange_rate\", \"reply\": \"The exchange rate is calculated at the moment of payment. On weekends, a 0.5% fee is added. The app shows the rate before you pay.\"}",
+      "finish": "stop",
+      "seconds": 7.4,
+      "prompt_tokens": 309,
+      "tokens": 45
+     },
+     {
+      "label": "card_payment_wrong_exchange_rate",
+      "text": "{\"topic\": \"card_payment_wrong_exchange_rate\", \"reply\": \"The incorrect exchange rate was used in your foreign purchase. Please send the date and the amount of the payment in this chat, and the team will check it within 2 working days.\"}",
+      "finish": "stop",
+      "seconds": 8.15,
+      "prompt_tokens": 312,
+      "tokens": 52
+     },
+     {
+      "label": "lost_or_stolen_card",
+      "text": "{\"topic\": \"lost_or_stolen_card\", \"reply\": \"Freeze the card at once in the app under Cards > Freeze, then order a new card there. A new card is free.\"}",
+      "finish": "stop",
+      "seconds": 6.76,
+      "prompt_tokens": 313,
+      "tokens": 42
+     },
+     {
+      "label": "lost_or_stolen_card",
+      "text": "{\"topic\": \"lost_or_stolen_card\", \"reply\": \"Please freeze your card in the app under Cards > Freeze, then order a new card. A new card will be free.\"}",
+      "finish": "stop",
+      "seconds": 7.1,
+      "prompt_tokens": 313,
+      "tokens": 40
+     },
+     {
+      "label": "pin_blocked",
+      "text": "{\"topic\": \"pin_blocked\", \"reply\": \"The PIN is blocked after 3 wrong tries. Unblock it in the app under Cards > PIN, 24 hours after the last try.\"}",
+      "finish": "stop",
+      "seconds": 7.05,
+      "prompt_tokens": 317,
+      "tokens": 41
+     },
+     {
+      "label": "lost_or_stolen_card",
+      "text": "{\"topic\": \"lost_or_stolen_card\", \"reply\": \"You can freeze your card at the app under Cards > Freeze, then order a new card. A new card is free.\"}",
+      "finish": "stop",
+      "seconds": 7.11,
+      "prompt_tokens": 312,
+      "tokens": 40
+     },
+     {
+      "label": "card_arrival",
+      "text": "{\"topic\": \"lost_or_stolen_card\", \"reply\": \"To locate your card, go to the app under Cards > Freeze, then order a new card there. A new card will be free.\"}",
+      "finish": "stop",
+      "seconds": 6.94,
+      "prompt_tokens": 310,
+      "tokens": 43
+     },
+     {
+      "label": "exchange_rate",
+      "text": "{\"topic\": \"exchange_rate\", \"reply\": \"The exchange rate is calculated at the moment of payment. On weekends, a 0.5% fee is added. The app shows the rate before you pay.\"}",
+      "finish": "stop",
+      "seconds": 7.71,
+      "prompt_tokens": 313,
+      "tokens": 45
+     },
+     {
+      "label": "request_refund",
+      "text": "{\"topic\": \"request_refund\", \"reply\": \"I'm sorry to hear about your order. Please provide the order number and the date of the payment, and we'll assist you with the refund setup as soon as possible. If you have any questions, feel free to ask.\"}",
+      "finish": "stop",
+      "seconds": 10.53,
+      "prompt_tokens": 343,
+      "tokens": 59
+     },
+     {
+      "label": "card_payment_wrong_exchange_rate",
+      "text": "{\"topic\": \"exchange_rate\", \"reply\": \"Please send the date and the amount of the payment in this chat, and the team will check it within 2 working days.\"}",
+      "finish": "stop",
+      "seconds": 6.76,
+      "prompt_tokens": 324,
+      "tokens": 38
+     },
+     {
+      "label": "pin_blocked",
+      "text": "{\"topic\": \"pin_blocked\", \"reply\": \"Yes, you can unblock your card in the app under Cards > PIN, and it will be unblocked 24 hours after the last try.\"}",
+      "finish": "stop",
+      "seconds": 7.47,
+      "prompt_tokens": 313,
+      "tokens": 43
+     },
+     {
+      "label": "lost_or_stolen_card",
+      "text": "{\"topic\": \"lost_or_stolen_card\", \"reply\": \"The team will check if the card was used and block it. Please confirm the details with the team.\"}",
+      "finish": "stop",
+      "seconds": 6.69,
+      "prompt_tokens": 339,
+      "tokens": 36
+     },
+     {
+      "label": "request_refund",
+      "text": "{\"topic\": \"request_refund\", \"reply\": \"If you were charged the wrong amount, please ask the shop first. If they haven't helped within 14 days, we can assist you in resolving the dispute.\"}",
+      "finish": "stop",
+      "seconds": 8.87,
+      "prompt_tokens": 319,
+      "tokens": 47
+     },
+     {
+      "label": "pin_blocked",
+      "text": "{\"topic\": \"pin_blocked\", \"reply\": \"The PIN was blocked after 3 wrong tries. You can unblock it in the app under Cards > PIN, and it will be available after 24 hours.\"}",
+      "finish": "stop",
+      "seconds": 7.47,
+      "prompt_tokens": 309,
+      "tokens": 46
+     },
+     {
+      "label": "pin_blocked",
+      "text": "{\"topic\": \"pin_blocked\", \"reply\": \"The PIN is blocked after 3 wrong tries. Please try entering the PIN again in the app under Cards > PIN, and the team will unblock it within 24 hours after the last try.\"}",
+      "finish": "stop",
+      "seconds": 8.35,
+      "prompt_tokens": 320,
+      "tokens": 53
+     },
+     {
+      "label": "exchange_rate",
+      "text": "{\"topic\": \"exchange_rate\", \"reply\": \"Exchange rates are applied to payments in another currency. On weekends, a 0.5% fee is added before the payment is processed.\"}",
+      "finish": "stop",
+      "seconds": 6.38,
+      "prompt_tokens": 307,
+      "tokens": 40
+     },
+     {
+      "label": "request_refund",
+      "text": "{\"topic\": \"request_refund\", \"reply\": \"If you need a refund, please ask the shop first. If they haven't helped within 14 days, we can assist you.\"}",
+      "finish": "stop",
+      "seconds": 7.03,
+      "prompt_tokens": 308,
+      "tokens": 41
+     },
+     {
+      "label": "request_refund",
+      "text": "{\"topic\": \"lost_or_stolen_card\", \"reply\": \"We can help you with your lost card. Please provide the card number and we'll check it for you. If it's a stolen card, we'll arrange a new one for you.\"}",
+      "finish": "stop",
+      "seconds": 9.62,
+      "prompt_tokens": 349,
+      "tokens": 53
+     },
+     {
+      "label": "card_payment_wrong_exchange_rate",
+      "text": "{\"topic\": \"lost_or_stolen_card\", \"reply\": \"I'll check the details of your card payment. If the exchange rate was incorrect, please provide the date and amount, and we'll resolve it within 2 working days.\"}",
+      "finish": "stop",
+      "seconds": 8.92,
+      "prompt_tokens": 322,
+      "tokens": 50
+     },
+     {
+      "label": "card_payment_wrong_exchange_rate",
+      "text": "{\"topic\": \"card_payment_wrong_exchange_rate\", \"reply\": \"The team will check the payment details and ensure the correct exchange rate is applied. If the issue persists, they will resolve it within 2 working days.\"}",
+      "finish": "stop",
+      "seconds": 7.41,
+      "prompt_tokens": 318,
+      "tokens": 46
+     },
+     {
+      "label": "card_arrival",
+      "text": "{\"topic\": \"lost_or_stolen_card\", \"reply\": \"I'm sorry to hear that you've been waiting longer than expected. Please freeze your card in the app and order a new one as instructed. Let me know if you need further assistance.\"}",
+      "finish": "stop",
+      "seconds": 8.59,
+      "prompt_tokens": 314,
+      "tokens": 53
+     },
+     {
+      "label": "exchange_rate",
+      "text": "{\"topic\": \"exchange_rate\", \"reply\": \"The exchange rate at the moment of payment is shown in the app. On weekends, a 0.5% fee is added. Please provide the date and amount to check the rate.\"}",
+      "finish": "stop",
+      "seconds": 8.34,
+      "prompt_tokens": 311,
+      "tokens": 50
+     },
+     {
+      "label": "card_arrival",
+      "text": "{\"topic\": \"lost_or_stolen_card\", \"reply\": \"Yes, it's normal to wait over a week for your new card. You can freeze it in the app and then order a new card there. A new card is free.\"}",
+      "finish": "stop",
+      "seconds": 8.65,
+      "prompt_tokens": 318,
+      "tokens": 51
+     },
+     {
+      "label": "pin_blocked",
+      "text": "{\"topic\": \"pin_blocked\", \"reply\": \"The PIN is blocked after 3 wrong tries. Unblock it in the app under Cards > PIN, 24 hours after the last try.\"}",
+      "finish": "stop",
+      "seconds": 7.03,
+      "prompt_tokens": 310,
+      "tokens": 41
+     },
+     {
+      "label": "pin_blocked",
+      "text": "{\"topic\": \"pin_blocked\", \"reply\": \"The PIN is blocked after 3 wrong tries. Unblock it in the app under Cards > PIN, and it will be unblocked 24 hours after the last try.\"}",
+      "finish": "stop",
+      "seconds": 7.68,
+      "prompt_tokens": 314,
+      "tokens": 47
+     },
+     {
+      "label": "lost_or_stolen_card",
+      "text": "{\"topic\": \"lost_or_stolen_card\", \"reply\": \"Please freeze your card at the app under Cards > Freeze, then order a new card. A new card is free.\"}",
+      "finish": "stop",
+      "seconds": 6.06,
+      "prompt_tokens": 308,
+      "tokens": 39
+     },
+     {
+      "label": "request_refund",
+      "text": "{\"topic\": \"request_refund\", \"reply\": \"The request for a refund has been initiated. Please check the bank's dispute process within 14 days. If the shop has not responded, we will assist you further.\"}",
+      "finish": "stop",
+      "seconds": 7.6,
+      "prompt_tokens": 307,
+      "tokens": 48
+     },
+     {
+      "label": "lost_or_stolen_card",
+      "text": "{\"topic\": \"request_refund\", \"reply\": \"If the shop hasn't helped within 14 days, the team can open a dispute.\"}",
+      "finish": "stop",
+      "seconds": 5.14,
+      "prompt_tokens": 317,
+      "tokens": 32
+     },
+     {
+      "label": "exchange_rate",
+      "text": "{\"topic\": \"exchange_rate\", \"reply\": \"The exchange rate is calculated at the moment of payment. On weekends, a 0.5% fee is added. The app shows the rate before you pay.\"}",
+      "finish": "stop",
+      "seconds": 7.14,
+      "prompt_tokens": 310,
+      "tokens": 45
+     },
+     {
+      "label": "request_refund",
+      "text": "{\"topic\": \"request_refund\", \"reply\": \"If you need a refund, please ask the shop first. If they haven't helped within 14 days, we can assist you within 2 working days.\"}",
+      "finish": "stop",
+      "seconds": 7.52,
+      "prompt_tokens": 309,
+      "tokens": 46
+     },
+     {
+      "label": "request_refund",
+      "text": "{\"topic\": \"request_refund\", \"reply\": \"The refund process involves first asking the shop for assistance. If the shop does not help within 14 days, the team can open a dispute with the customer.\"}",
+      "finish": "stop",
+      "seconds": 7.74,
+      "prompt_tokens": 309,
+      "tokens": 46
+     },
+     {
+      "label": "card_arrival",
+      "text": "{\"topic\": \"lost_or_stolen_card\", \"reply\": \"To track your card, go to the app under Cards > Freeze, then order a new card there. A new card will be free.\"}",
+      "finish": "stop",
+      "seconds": 8.19,
+      "prompt_tokens": 310,
+      "tokens": 43
+     },
+     {
+      "label": "card_payment_wrong_exchange_rate",
+      "text": "{\"topic\": \"exchange_rate\", \"reply\": \"The exchange rate is currently 0.5% on weekends. Please provide the date and amount of the payment, and the team will check it within 2 working days.\"}",
+      "finish": "stop",
+      "seconds": 8.64,
+      "prompt_tokens": 314,
+      "tokens": 47
+     },
+     {
+      "label": "card_payment_wrong_exchange_rate",
+      "text": "{\"topic\": \"lost_or_stolen_card\", \"reply\": \"You can freeze the card at the app under Cards > Freeze, then order a new card there. A new card is free.\"}",
+      "finish": "stop",
+      "seconds": 7.47,
+      "prompt_tokens": 317,
+      "tokens": 41
+     },
+     {
+      "label": "request_refund",
+      "text": "{\"topic\": \"request_refund\", \"reply\": \"If you need a refund, first ask the shop. If they haven't helped within 14 days, we can assist you within 2 working days.\"}",
+      "finish": "stop",
+      "seconds": 8.06,
+      "prompt_tokens": 309,
+      "tokens": 45
+     },
+     {
+      "label": "pin_blocked",
+      "text": "{\"topic\": \"pin_blocked\", \"reply\": \"The PIN will be unblocked in 24 hours after the last attempt. Please check the app for updates.\"}",
+      "finish": "stop",
+      "seconds": 5.96,
+      "prompt_tokens": 310,
+      "tokens": 35
+     },
+     {
+      "label": "pin_blocked",
+      "text": "{\"topic\": \"pin_blocked\", \"reply\": \"If you've tried to enter your PIN too often, the PIN will be blocked after 3 wrong attempts. Please try again within 24 hours to unblock it.\"}",
+      "finish": "stop",
+      "seconds": 8.36,
+      "prompt_tokens": 318,
+      "tokens": 47
+     },
+     {
+      "label": "exchange_rate",
+      "text": "{\"topic\": \"exchange_rate\", \"reply\": \"The exchange rate is applied at the moment of payment. On weekends, 0.5% is added. The app shows the rate before you pay.\"}",
+      "finish": "stop",
+      "seconds": 7.37,
+      "prompt_tokens": 313,
+      "tokens": 43
+     },
+     {
+      "label": "exchange_rate",
+      "text": "{\"topic\": \"exchange_rate\", \"reply\": \"The exchange rate at the moment of payment is shown in the app. On weekends, a 0.5% fee is added. Please provide the date and amount when you make the payment.\"}",
+      "finish": "stop",
+      "seconds": 9.11,
+      "prompt_tokens": 310,
+      "tokens": 51
+     },
+     {
+      "label": "card_arrival",
+      "text": "{\"topic\": \"lost_or_stolen_card\", \"reply\": \"The new card was frozen in the app. Please check the Cards section to confirm the status. If you still haven't received it, contact the customer service team for further assistance.\"}",
+      "finish": "stop",
+      "seconds": 9.55,
+      "prompt_tokens": 319,
+      "tokens": 51
+     },
+     {
+      "label": "card_arrival",
+      "text": "{\"topic\": \"lost_or_stolen_card\", \"reply\": \"If your card is lost or stolen, you can freeze it in the app under Cards > Freeze, then order a new card there. A new card will be available immediately.\"}",
+      "finish": "stop",
+      "seconds": 8.25,
+      "prompt_tokens": 313,
+      "tokens": 50
+     },
+     {
+      "label": "request_refund",
+      "text": "{\"topic\": \"request_refund\", \"reply\": \"You can request a refund by contacting the shop first. If the shop hasn't helped within 14 days, we can assist you in opening a dispute.\"}",
+      "finish": "stop",
+      "seconds": 7.73,
+      "prompt_tokens": 310,
+      "tokens": 45
+     },
+     {
+      "label": "pin_blocked",
+      "text": "{\"topic\": \"pin_blocked\", \"reply\": \"The PIN is blocked after 3 wrong tries. Unblock it in the app under Cards > PIN, 24 hours after the last try.\"}",
+      "finish": "stop",
+      "seconds": 6.98,
+      "prompt_tokens": 312,
+      "tokens": 41
+     },
+     {
+      "label": "lost_or_stolen_card",
+      "text": "{\"topic\": \"lost_or_stolen_card\", \"reply\": \"You can report the stolen card by following the steps in the app under Cards > Freeze, then order a new card. Once you have the new card, you can proceed with the report.\"}",
+      "finish": "stop",
+      "seconds": 9.58,
+      "prompt_tokens": 331,
+      "tokens": 53
+     },
+     {
+      "label": "pin_blocked",
+      "text": "{\"topic\": \"pin_blocked\", \"reply\": \"The PIN is blocked after 3 wrong tries. Unblock it in the app under Cards > PIN, 24 hours after the last try.\"}",
+      "finish": "stop",
+      "seconds": 7.96,
+      "prompt_tokens": 311,
+      "tokens": 41
+     },
+     {
+      "label": "pin_blocked",
+      "text": "{\"topic\": \"pin_blocked\", \"reply\": \"If your PIN is blocked after 3 wrong attempts, you will be prompted to unblock it in the app under Cards > PIN, and the team will respond within 24 hours after the last attempt.\"}",
+      "finish": "stop",
+      "seconds": 10.33,
+      "prompt_tokens": 319,
+      "tokens": 54
+     },
+     {
+      "label": "request_refund",
+      "text": "{\"topic\": \"lost_or_stolen_card\", \"reply\": \"We'll process your refund immediately. Please provide the card number and date of purchase to proceed.\"}",
+      "finish": "stop",
+      "seconds": 6.47,
+      "prompt_tokens": 334,
+      "tokens": 34
+     },
+     {
+      "label": "request_refund",
+      "text": "{\"topic\": \"request_refund\", \"reply\": \"You can request a refund by asking the shop first. If the shop hasn't helped within 14 days, we can open a dispute with the team.\"}",
+      "finish": "stop",
+      "seconds": 8.55,
+      "prompt_tokens": 310,
+      "tokens": 45
+     }
+    ]
+   }
+  },
+  "build-judges": {
+   "plain": {
+    "ask": {
+     "each": [
+      "Customer: How do I claim a refund?\nReply: To claim a refund, first, send the date and amount of the payment in this chat, and the team will check it within 2 working days. If the shop has not helped, the team can open a dispute.",
+      "Customer: Is there a way to know when my card will arrive?\nReply: Yes, the new card arrives within 5 working days. You can check its status in the app under Cards.",
+      "Customer: What foreign exchange rate will you use?\nReply: The foreign exchange rate is applied at the moment of payment, and it is shown before you pay. If there is a problem with the rate, please provide the date and amount of the payment to the team for further assistance.",
+      "Customer: I need help because I drunken blocked my card?\nReply: The exchange rate for your payment was incorrect. Please provide the date and amount of the payment, and the team will check it within 2 working days.",
+      "Customer: How do I report my card lost or stolen?\nReply: To report your lost or stolen card, go to the app under 'Cards' and select 'Freeze' to block it. Then order a new card and it will be free.",
+      "Customer: I believe my card payment exchange rate is incorrect.\nReply: Please provide the date and amount of the payment, and the team will check it within 2 working days.",
+      "Customer: I need to know your exchange rates.\nReply: The exchange rate for payments in another currency is displayed in the app before you pay. If there's a discrepancy, please provide the date and amount of the payment, and the team will check it within 2 working days.",
+      "Customer: why do your exchange rates change\nReply: Exchange rates change based on the current time and the payment method. For payments in another currency, the rate is applied at the moment of payment, and on weekends, a 0.5% fee is added. The app displays the rate before you pay.",
+      "Customer: How are you determining your exchange rates?\nReply: The exchange rate is determined at the moment of payment, with a 0.5% fee on weekends. The app shows the rate before you pay.",
+      "Customer: Hi, I don't think your exchange rate is right. I need you to check the official interbank exchange please.\nReply: The exchange rate is currently 0.5% on weekends. Please confirm the payment date and amount to check the rate before making the payment.",
+      "Customer: Why is your exchange rate for my card payment wrong\nReply: The exchange rate for your card payment was incorrect. Please provide the date and amount of the payment, and we will check it within 2 working days.",
+      "Customer: the conversion value for my card payments is incorrect.\nReply: The conversion value for your card payments is incorrect. Please provide the date and amount of the payment, and we will check it within 2 working days. If the issue persists, we will assist further.",
+      "Customer: I have exceeded the number of times I can try my PIN\nReply: Your PIN has been blocked after 3 wrong attempts. Please contact the bank team for assistance.",
+      "Customer: I want this amount reversed out of my account.\nReply: The exchange rate for payments in another currency is applied at the moment of payment. If the rate is incorrect, please provide the date and amount of the payment, and the team will check it within 2 working days.",
+      "Customer: The wrong exchange rate was used when I bought something with a foriegn currency.\nReply: The wrong exchange rate was used when you made the payment. Please provide the date and amount of the payment, and the team will check it within 2 working days.",
+      "Customer: I'm pretty sure something went wrong with my exchange. I changed Russian Ruble to UK pounds and was charged way too much!\nReply: The exchange rate was incorrect, and we will check the payment details within 2 working days. Please provide the date and amount of the payment to assist further.",
+      "Customer: I believe my credit card was stolen.\nReply: Your card was stolen. Please freeze it in the app under Cards > Freeze, then order a new card. A new card is free.",
+      "Customer: This rate is too low. Are you sure your using the right exchange rate.\nReply: The exchange rate is too low. Please check the payment details and confirm the correct rate before proceeding. If you have the date and amount, we can verify and ensure the correct rate is applied.",
+      "Customer: when does the rate get determined\nReply: The exchange rate is determined at the moment of payment, and on weekends, 0.5% is added. The app shows the rate before you pay.",
+      "Customer: Some idiot stole my card.\nReply: The card has been lost or stolen. Please freeze it at the app under Cards > Freeze, then order a new card. A new card is free.",
+      "Customer: what is the exchange rate?\nReply: The exchange rate for payments in another currency is applied at the moment of payment. On weekends, 0.5% is added. The app shows the rate before you pay.",
+      "Customer: I need help with a lost card\nReply: Please freeze your card at the app under Cards > Freeze, then order a new card. A new card is free.",
+      "Customer: I would appreciate it if I could get an item refunded\nReply: If you have a payment in another currency and the exchange rate is incorrect, please provide the date and amount of the payment in the chat, and the team will check it within 2 working days.",
+      "Customer: The exchange rate given to me wasn't correct, after i purchased an item\nReply: The exchange rate was incorrect. Please provide the date and amount of the payment, and the team will check it within 2 working days.",
+      "Customer: My account is blocked, how do I log in now\nReply: If you're experiencing a payment with a wrong exchange rate, please provide the date and amount of the payment in the chat, and the team will check it within 2 working days.",
+      "Customer: I would like a refund on one of your products that has been sold to me\nReply: I'm sorry, but I can't assist with a refund for a card payment that has a wrong exchange rate. Please provide the date and amount of the payment, and we'll check it within two working days.",
+      "Customer: I still don't have my card after 2 weeks. What should I do?\nReply: You should freeze your card in the app under Cards > Freeze, then order a new card. A new card is free.",
+      "Customer: How can I unblock a blocked pin number for my account?\nReply: To unblock your PIN, go to the 'Cards' section in your app and click on 'PIN'. Enter your PIN and confirm it. If you're not sure, you can try again within 24 hours after the last unsuccessful attempt.",
+      "Customer: Where is the tracking number for the card you sent me?\nReply: The tracking number for the new card is not available as it is not in the app. You can check the app under Cards to see the status.",
+      "Customer: What do I need to do to get a refund?\nReply: To get a refund, you should first ask the shop. If the shop hasn't helped within 14 days, the team can open a dispute.",
+      "Customer: The rate applied to my foreign purchase was incorrect\nReply: The exchange rate was incorrect for your foreign purchase. Please provide the date and amount of the payment, and the team will check it within 2 working days.",
+      "Customer: My card still hasn't arrived after 2 weeks. Is it lost?\nReply: Your card has not arrived within 5 working days. It may be lost or stolen. Please contact the bank's customer support for further assistance.",
+      "Customer: How can I check the exchange rate applied to my transaction?\nReply: Check the exchange rate applied to your transaction by viewing the rate displayed in the app before making the payment. If you encounter any issues, contact the team for assistance.",
+      "Customer: My card is lost! What can I do?\nReply: If your card is lost or stolen, please freeze it at the app under Cards > Freeze, then order a new card. A new card is free.",
+      "Customer: How can I unlock the pin?\nReply: If you received a wrong exchange rate, please provide the date and amount of the payment in the chat, and the team will check it within 2 working days.",
+      "Customer: My card has not arrived yet, where is it?\nReply: Your new card is expected to arrive within 5 working days. It will be in the app under Cards. Please check the status as soon as it arrives.",
+      "Customer: My card got stolen!\nReply: Your card has been lost or stolen. Please freeze it at the app under Cards > Freeze, then order a new card. A new card is free.",
+      "Customer: When I put the wrong pin too much, I got blocked, so can you help me unblock my pin\nReply: Sure! Please provide the date and amount of the payment, and I'll assist you with unblocking your PIN within 24 hours.",
+      "Customer: What is the base of the exchange rates?\nReply: The exchange rate is applied at the moment of payment, with a 0.5% fee on weekends. The app shows the rate before you pay.",
+      "Customer: I am still waiting for my card after 1 week. Is this ok?\nReply: The new card arrived within 5 working days, so it should be available soon. If you still need it after 1 week, please check the app for updates.",
+      "Customer: I lost my card\nReply: You need to freeze your card in the app under Cards > Freeze, then order a new card. A new card is free.",
+      "Customer: How long should my new card take to arrive?\nReply: A new card arrives within 5 working days. The status is in the app under Cards.",
+      "Customer: the card payment exchange rate is wrong\nReply: The exchange rate for your card payment was incorrect. Please provide the date and amount of the payment, and we will check it within 2 working days. If the issue persists, we will assist further.",
+      "Customer: card is lost, please help\nReply: Please check the app for the lost card. If it's a new card, you can request a new one by following the instructions in the app. If it's a lost card, you can freeze it and order a new one immediately.",
+      "Customer: I entered the wrong pin too many times and now I am blocked. Help me unblock!\nReply: You can unblock your PIN in the app under Cards > PIN, and it will be unblocked within 24 hours after the last attempt.",
+      "Customer: I'm trying to figure out the current exchange rate.\nReply: The current exchange rate for your payment is shown in the app. If you have a payment in another currency, the rate is applied at the moment of payment. On weekends, a 0.5% fee is added. Please check the app for the most accurate information.",
+      "Customer: Can you unblock my pin after too many wrong pin attempts?\nReply: If you have too many wrong PIN attempts, you can unblock your card by following the steps in the app under 'Cards > PIN' and wait 24 hours after the last unsuccessful attempt.",
+      "Customer: How do your exchange rates work?\nReply: Exchange rates are applied at the moment of payment. For non-US currency payments, a 0.5% fee is added on weekends. The app displays the rate before you pay.",
+      "Customer: Are you able to locate my card?\nReply: I can help locate your card. Please provide your card number or any other details, and I'll check it for you.",
+      "Customer: I'm in Spain and my stuff has been stolen. My card was with it and I need a new one shipped and the old one frozen.\nReply: Your card has been lost or stolen. Please freeze it at the app under Cards > Freeze, then order a new card. The new card will be free and shipped within 5 working days.",
+      "Customer: Hello! I recently made a purchase and I'm needing to cancel my order and process a refund as soon as possible.\nReply: The exchange rate for your payment was incorrect. Please provide the date and amount of the payment, and the team will check it within 2 working days. If the issue persists, contact the customer service team for further assistance.",
+      "Customer: Hello I changed my mind and really need a refund on one of things I bought recently. Can you please cancel the transaction and get my money back. Please it's urgent.\nReply: Sure! Please provide the date and amount of the payment, and the team will check it within 2 working days. If the issue persists, we can assist with a dispute within 14 days.",
+      "Customer: Do you know if there is a tracking number for the new card you sent me?\nReply: No tracking number for the new card. It's under Cards in the app. You can check it there.",
+      "Customer: Is it a good time to exchange?\nReply: The exchange rate is applied at the moment of payment, and it is 0.5% on weekends. If you have any questions about the rate, please let me know.",
+      "Customer: Would I be able to get a refund for something I bought?\nReply: If the exchange rate was incorrect, please provide the date and amount of the payment, and the team will check it within 2 working days.",
+      "Customer: Hello- It is urgent I get a refund on this product. The merchant has not been helpful, what can I do now to get this resolved ASAP?\nReply: You should first contact the merchant directly to request a refund. If they are not helpful within 14 days, the team can assist you in resolving the dispute.",
+      "Customer: I'm still waiting for delivery of my new card, why is it taking so long?\nReply: The new card arrives within 5 working days, so it should be delivered soon. If you're still waiting, check the app for updates on its status.",
+      "Customer: I'm still waiting on my card to be delivered.\nReply: Your card is still waiting for delivery. Please check the app for updates as soon as it arrives.",
+      "Customer: i have not received my card\nReply: Please freeze your card in the app under Cards > Freeze, then order a new card. A new card is free.",
+      "Customer: Where do you get your exchange rates from?\nReply: Exchange rates are determined by the current market rate at the time of payment, and they are shown in the app before you pay. If there's a discrepancy, the team will check it within 2 working days.",
+      "Customer: How many tries do I have to enter my pin before I'm blocked?\nReply: The PIN is blocked after 3 wrong tries. Unblock it in the app under Cards > PIN, 24 hours after the last try.",
+      "Customer: Help! Someone stole my card!\nReply: You need to freeze your card immediately in the app under Cards > Freeze, then order a new card. A new card is free.",
+      "Customer: How do I report a stolen card?\nReply: To report a stolen card, go to the app under 'Cards' and select 'Freeze' to block the card. Then order a new card there, and the new card will be free.",
+      "Customer: My card hasn't arrived yet.\nReply: Your card has arrived within 5 working days. It's in the app under Cards. No tracking number has been provided yet.",
+      "Customer: I wasn't applied the correct exchange rate for an item I bought\nReply: The exchange rate was applied incorrectly. Please provide the date and amount of the payment, and the team will check it within 2 working days.",
+      "Customer: Please advise what is the exchange rate\nReply: The exchange rate for payments in another currency is applied at the moment of payment. If you're using a different currency, please specify the amount and the currency, and the app will display the rate before you pay.",
+      "Customer: What is the tracking number for the card you sent?\nReply: The tracking number for the new card is not provided, as there is no tracking number associated with the card arrival.",
+      "Customer: Do you have a list of exchange rates?\nReply: Yes, the app displays the exchange rate before you pay, and it shows a 0.5% fee on weekends.",
+      "Customer: I purchased something in a foreign currency but the rate applied is wrong\nReply: The exchange rate was applied incorrectly. Please provide the date and amount of the payment, and the team will check it within 2 working days.",
+      "Customer: I believe my card has been stolen, what can I do about this situation? It's urgent.\nReply: You can freeze your card in the app under Cards > Freeze, then order a new card for free. The new card will be available immediately.",
+      "Customer: I have been waiting longer than expected for my bank card, could you provide information on when it will arrive?\nReply: A new card arrives within 5 working days. Its status is in the app under Cards. Please check the app for updates on its arrival date.",
+      "Customer: I go the wrong exchange rate applied to my purchase in a foreign country.\nReply: The exchange rate was applied incorrectly. Please provide the date and amount of your payment, and we will check it within 2 working days. If the issue persists, we will assist further.",
+      "Customer: The exchange rate would be?\nReply: The exchange rate for payments in another currency is applied at the moment of payment, with a 0.5% fee on weekends. The app shows the rate before you pay.",
+      "Customer: The incorrect rate was used in my foreign purchase\nReply: The incorrect exchange rate was applied to your foreign purchase. Please provide the date and amount of the payment, and we will check it within 2 working days.",
+      "Customer: What should I do if I lost my card?\nReply: If you lost your card, immediately freeze it in the app under Cards > Freeze, then order a new card there. A new card is free.",
+      "Customer: Oh no! I lost my card! Help!\nReply: Please freeze your card in the app under Cards > Freeze, then order a new card. A new card is free.",
+      "Customer: Since my pin is blocked, would you help me unblock it?\nReply: Sure, I can help you unblock your PIN. Please provide the date and amount of the payment in the chat, and I will assist you within 24 hours.",
+      "Customer: Help me please! My card was stolen!\nReply: Your card was stolen. Please freeze it at the app under Cards > Freeze, then order a new card. A new card is free.",
+      "Customer: How do I locate my card?\nReply: To locate your card, go to the 'Cards' section in your app and check the status. If it's lost or stolen, you can freeze it at once and order a new card there. A new card is free.",
+      "Customer: What is the exchange rate like on this app?\nReply: The exchange rate on the app is shown before you pay, with a 0.5% discount on weekends. If you encounter issues with the rate, please provide the date and amount of the payment, and the team will check it within 2 working days.",
+      "Customer: Hi there! I need to cancel an order I recently made and start processing a refund. Can you please help me with this and set up the refund as soon as possible? It's very urgent.\nReply: Please provide the date and amount of the payment in this chat, and the team will check it within 2 working days. If the exchange rate is incorrect, we will resolve it promptly.",
+      "Customer: The exchange rate for my transaction last Saturday seems to have been wrong I got charged extra. Please fix.\nReply: Please provide the date and amount of your payment, and the team will check it within 2 working days to resolve the exchange rate issue.",
+      "Customer: Can I unblock my card using the app?\nReply: Yes, you can unblock your card in the app under Cards > PIN, and it will be unblocked 24 hours after the last try.",
+      "Customer: Someone stole my wallet earlier today, not sure exactly when, probably on Piccadilly circus. Can you check if there were any attempts to use the card and obviously block it?\nReply: Check the 'Cards' section in the app to confirm the card's status. If it's stolen, you can freeze it immediately and order a new card. A new card is free.",
+      "Customer: I bought this item and was charged the wrong amount can I get a refund?\nReply: If the payment was processed with a wrong exchange rate, please provide the date and amount of the payment in the chat, and the team will check it within 2 working days.",
+      "Customer: Why did I get blocked?\nReply: The PIN was blocked after 3 wrong tries. You can unblock it in the app within 24 hours after the last try.",
+      "Customer: Can you unlock my pin? I think I entered the wrong pin too many times.\nReply: The team will check the date and amount of your payment to determine if there was a wrong exchange rate. If so, they will take action within 2 working days. Please provide the details so we can assist you.",
+      "Customer: what are exchange rates\nReply: The exchange rate for payments in another currency is applied at the moment of payment, and it is shown before you pay. On weekends, a 0.5% fee is added.",
+      "Customer: I need a refund?\nReply: If you have a payment with a wrong exchange rate, please provide the date and amount of the payment in the chat, and the team will check it within 2 working days.",
+      "Customer: I am chatting about an order from a long while back. I never got it to this day and am deeply upset by this! I want all of my money back! I just can not accept paying for something I never got.\nReply: The exchange rate for payments in another currency is applied at the moment of payment. If the rate is incorrect, please provide the date and amount of the payment, and the team will check it within 2 working days. If the rate is correct, the payment will proceed as is.",
+      "Customer: My exchange went wrong. I swapped Russian Ruble for UK pounds and was charged too much.\nReply: The exchange rate was incorrect, and the payment was charged too much. Please provide the date and amount of the payment, and the team will check it within 2 working days.",
+      "Customer: You did not apply the correct exchange rate for an item that I bought.\nReply: The exchange rate was applied incorrectly. Please check the payment details and contact the team for assistance. If the issue persists, provide the date and amount of the payment, and we will investigate it within two working days.",
+      "Customer: I've been waiting longer than expected for my card.\nReply: Your card has arrived within 5 working days. The status is in the app under Cards. Please proceed with the next steps as instructed.",
+      "Customer: What are the most current exchange rates?\nReply: The exchange rate for payments in another currency is displayed in the app before you pay. On weekends, a 0.5% fee is added. If there's a discrepancy, please provide the date and amount of the payment to the team for review.",
+      "Customer: Is it normal to have to wait over a week for my new card?\nReply: It's normal to wait up to 5 working days for a new card to arrive, as the status is in the app. If you need assistance, feel free to ask.",
+      "Customer: How do I reset my PIN?\nReply: To reset your PIN, go to the app under Cards > PIN and enter your current PIN. If you're not sure, you can ask the team to help you reset it.",
+      "Customer: How can I unlock my pin from too many tries?\nReply: If you've tried too many times to unlock your PIN, you can use the app's 'PIN' feature to unfreeze it. Enter your PIN and the app will allow you to unlock it after 24 hours.",
+      "Customer: My card got lost.\nReply: Your card has been lost. Please freeze it at the app under Cards > Freeze, then order a new card. A new card is free.",
+      "Customer: Get an item refund\nReply: If there was a payment with a wrong exchange rate, please provide the date and amount of the payment in the chat, and the team will check it within 2 working days.",
+      "Customer: Is a copy of the police report necessary for completing the report process?\nReply: No, a copy of the police report is not necessary for completing the report process. The exchange rate issue is resolved by sending the date and amount of the payment in this chat, and the team checks it within 2 working days.",
+      "Customer: What exchange rate do you use?\nReply: The app uses the exchange rate at the moment of payment, with a 0.5% discount on weekends. If there's a discrepancy, the date and amount are sent to the team for review within 2 working days.",
+      "Customer: Can I have a refund?\nReply: If you received a payment with a wrong exchange rate, please provide the date and amount of the payment in the chat, and the team will check it within 2 working days.",
+      "Customer: What's the refund process?\nReply: The refund process involves asking the shop first. If the shop hasn't helped within 14 days, the team can open a dispute.",
+      "Customer: How do I track my card?\nReply: To track your card, go to the app under 'Cards' and check the status. There is no tracking number provided.",
+      "Customer: I bought something, but the exchange rate looks wrong.\nReply: The exchange rate appears to be incorrect. Please provide the date and amount of the payment, and the team will check it within 2 working days.",
+      "Customer: I bought something in a foreign currency but the rate applied is wrong!\nReply: The exchange rate was incorrect. Please provide the date and amount of the payment, and the team will check it within 2 working days.",
+      "Customer: How do I get refunded?\nReply: To request a refund, please ask the shop first. If the shop has not helped within 14 days, the team can open a dispute.",
+      "Customer: Will you reinstate my PIN?\nReply: If the exchange rate was incorrect, please provide the date and amount of the payment, and the team will check it within 2 working days.",
+      "Customer: What should I do if I've tried to enter my PIN too often?\nReply: If you've tried to enter your PIN too often, you should check the app under Cards > PIN to unfreeze it. The PIN will be unblocked after 24 hours after the last attempt.",
+      "Customer: How much will I get with the exchange rate?\nReply: The exchange rate for payments in another currency is applied at the moment of payment. If the rate is incorrect, please provide the date and amount, and the team will check it within 2 working days.",
+      "Customer: What are your international exchange rates?\nReply: The app shows the exchange rate before you pay. On weekends, 0.5% is added. If you encounter a payment in another currency, please provide the date and amount, and the team will check it within 2 working days.",
+      "Customer: I still have not received my new card, I ordered over a week ago.\nReply: Your new card has arrived within 5 working days. It is in the app under Cards. You can check its status to confirm if it has been successfully received.",
+      "Customer: How do I know when my card will arrive?\nReply: You can check the status of your new card in the app under 'Cards' to see when it will arrive.",
+      "Customer: I want to return an item.\nReply: If you have a payment in another currency and the exchange rate is incorrect, please provide the date and amount of the payment, and the team will check it within 2 working days.",
+      "Customer: Are you able to unblock my pin?\nReply: If the exchange rate was incorrect, please provide the date and amount of the payment, and the team will check it within 2 working days.",
+      "Customer: Someone stole my card. I need to report it stolen. I made a police report already, but how do I report it with you?\nReply: You can report the stolen card by going to the 'Cards' section in the app and selecting 'Freeze' to block the card. Once frozen, you can order a new card there. If you have the date and amount of the payment, we can check it within 2 working days.",
+      "Customer: How do I unblock my PIN?\nReply: To unblock your PIN, go to the 'Cards' section in your app and click on 'PIN'. Enter your PIN and confirm it. If you're not sure, you can try again within 24 hours after the last unsuccessful attempt.",
+      "Customer: What do I do if the bank machine won't accept my PIN attempts anymore?\nReply: If the bank machine won't accept your PIN attempts, contact the customer service team immediately. They will check the date and amount of the payment to resolve the issue within 2 working days.",
+      "Customer: I ordered something ages ago online but it's simply not arriving. I've got enough! Give me back my money, I'm not paying these people.\nReply: We are sorry for the delay in receiving your order. Please ensure you have enough funds in your account to cover the items you ordered. If you are unable to pay, we can assist you with a refund once the card is processed.",
+      "Customer: I want a refund for my purchase\nReply: I'll check the exchange rate for your payment and assist with any issues. Please provide the date and amount of the payment to proceed."
+     ],
+     "system": "You grade a reply of an online bank's assistant to a customer. The assistant may use only these facts:\n- A new card arrives within 5 working days. Its status is in the app under Cards. There is no tracking number.\n- A lost or stolen card: freeze it at once in the app under Cards > Freeze, then order a new card there. A new card is free.\n- A payment in another currency gets the exchange rate at the moment of payment; on weekends 0.5% is added. The app shows the rate before you pay.\n- When a card payment got the wrong exchange rate: send the date and the amount of the payment in this chat, and the team checks it within 2 working days.\n- The PIN is blocked after 3 wrong tries. Unblock it in the app under Cards > PIN, 24 hours after the last try.\n- Refunds: ask the shop first. If the shop has not helped within 14 days, the team can open a dispute.\nIs the reply good? Answer with one word: pass or fail.",
+     "max_tokens": 10
+    },
+    "answers": [
+     {
+      "text": "fail",
+      "finish": "stop",
+      "seconds": 1.88,
+      "prompt_tokens": 295,
+      "tokens": 1
+     },
+     {
+      "text": "fail",
+      "finish": "stop",
+      "seconds": 0.66,
+      "prompt_tokens": 278,
+      "tokens": 1
+     },
+     {
+      "text": "fail",
+      "finish": "stop",
+      "seconds": 0.87,
+      "prompt_tokens": 296,
+      "tokens": 1
+     },
+     {
+      "text": "fail",
+      "finish": "stop",
+      "seconds": 0.78,
+      "prompt_tokens": 284,
+      "tokens": 1
+     },
+     {
+      "text": "fail",
+      "finish": "stop",
+      "seconds": 0.82,
+      "prompt_tokens": 290,
+      "tokens": 1
+     },
+     {
+      "text": "fail",
+      "finish": "stop",
+      "seconds": 0.7,
+      "prompt_tokens": 275,
+      "tokens": 1
+     },
+     {
+      "text": "fail",
+      "finish": "stop",
+      "seconds": 0.74,
+      "prompt_tokens": 296,
+      "tokens": 1
+     },
+     {
+      "text": "fail",
+      "finish": "stop",
+      "seconds": 0.86,
+      "prompt_tokens": 302,
+      "tokens": 1
+     },
+     {
+      "text": "fail",
+      "finish": "stop",
+      "seconds": 0.7,
+      "prompt_tokens": 282,
+      "tokens": 1
+     },
+     {
+      "text": "fail",
+      "finish": "stop",
+      "seconds": 0.76,
+      "prompt_tokens": 296,
+      "tokens": 1
+     },
+     {
+      "text": "fail",
+      "finish": "stop",
+      "seconds": 0.63,
+      "prompt_tokens": 285,
+      "tokens": 1
+     },
+     {
+      "text": "pass",
+      "finish": "stop",
+      "seconds": 0.64,
+      "prompt_tokens": 294,
+      "tokens": 1
+     },
+     {
+      "text": "fail",
+      "finish": "stop",
+      "seconds": 0.68,
+      "prompt_tokens": 275,
+      "tokens": 1
+     },
+     {
+      "text": "fail",
+      "finish": "stop",
+      "seconds": 0.66,
+      "prompt_tokens": 297,
+      "tokens": 1
+     },
+     {
+      "text": "fail",
+      "finish": "stop",
+      "seconds": 0.7,
+      "prompt_tokens": 294,
+      "tokens": 1
+     },
+     {
+      "text": "pass",
+      "finish": "stop",
+      "seconds": 0.8,
+      "prompt_tokens": 301,
+      "tokens": 1
+     },
+     {
+      "text": "fail",
+      "finish": "stop",
+      "seconds": 0.68,
+      "prompt_tokens": 279,
+      "tokens": 1
+     },
+     {
+      "text": "fail",
+      "finish": "stop",
+      "seconds": 0.72,
+      "prompt_tokens": 298,
+      "tokens": 1
+     },
+     {
+      "text": "fail",
+      "finish": "stop",
+      "seconds": 0.61,
+      "prompt_tokens": 282,
+      "tokens": 1
+     },
+     {
+      "text": "fail",
+      "finish": "stop",
+      "seconds": 0.64,
+      "prompt_tokens": 280,
+      "tokens": 1
+     },
+     {
+      "text": "fail",
+      "finish": "stop",
+      "seconds": 0.71,
+      "prompt_tokens": 285,
+      "tokens": 1
+     },
+     {
+      "text": "fail",
+      "finish": "stop",
+      "seconds": 0.66,
+      "prompt_tokens": 275,
+      "tokens": 1
+     },
+     {
+      "text": "fail",
+      "finish": "stop",
+      "seconds": 0.77,
+      "prompt_tokens": 295,
+      "tokens": 1
+     },
+     {
+      "text": "fail",
+      "finish": "stop",
+      "seconds": 0.76,
+      "prompt_tokens": 287,
+      "tokens": 1
+     },
+     {
+      "text": "fail",
+      "finish": "stop",
+      "seconds": 0.84,
+      "prompt_tokens": 292,
+      "tokens": 1
+     },
+     {
+      "text": "fail",
+      "finish": "stop",
+      "seconds": 0.99,
+      "prompt_tokens": 303,
+      "tokens": 1
+     },
+     {
+      "text": "fail",
+      "finish": "stop",
+      "seconds": 0.71,
+      "prompt_tokens": 285,
+      "tokens": 1
+     },
+     {
+      "text": "fail",
+      "finish": "stop",
+      "seconds": 0.95,
+      "prompt_tokens": 306,
+      "tokens": 1
+     },
+     {
+      "text": "fail",
+      "finish": "stop",
+      "seconds": 0.78,
+      "prompt_tokens": 285,
+      "tokens": 1
+     },
+     {
+      "text": "fail",
+      "finish": "stop",
+      "seconds": 0.81,
+      "prompt_tokens": 285,
+      "tokens": 1
+     },
+     {
+      "text": "fail",
+      "finish": "stop",
+      "seconds": 0.65,
+      "prompt_tokens": 285,
+      "tokens": 1
+     },
+     {
+      "text": "fail",
+      "finish": "stop",
+      "seconds": 0.67,
+      "prompt_tokens": 287,
+      "tokens": 1
+     },
+     {
+      "text": "fail",
+      "finish": "stop",
+      "seconds": 0.74,
+      "prompt_tokens": 288,
+      "tokens": 1
+     },
+     {
+      "text": "fail",
+      "finish": "stop",
+      "seconds": 0.63,
+      "prompt_tokens": 284,
+      "tokens": 1
+     },
+     {
+      "text": "fail",
+      "finish": "stop",
+      "seconds": 0.76,
+      "prompt_tokens": 283,
+      "tokens": 1
+     },
+     {
+      "text": "fail",
+      "finish": "stop",
+      "seconds": 0.64,
+      "prompt_tokens": 286,
+      "tokens": 1
+     },
+     {
+      "text": "fail",
+      "finish": "stop",
+      "seconds": 0.55,
+      "prompt_tokens": 279,
+      "tokens": 1
+     },
+     {
+      "text": "fail",
+      "finish": "stop",
+      "seconds": 0.76,
+      "prompt_tokens": 294,
+      "tokens": 1
+     },
+     {
+      "text": "fail",
+      "finish": "stop",
+      "seconds": 0.69,
+      "prompt_tokens": 283,
+      "tokens": 1
+     },
+     {
+      "text": "fail",
+      "finish": "stop",
+      "seconds": 0.72,
+      "prompt_tokens": 293,
+      "tokens": 1
+     },
+     {
+      "text": "fail",
+      "finish": "stop",
+      "seconds": 0.67,
+      "prompt_tokens": 274,
+      "tokens": 1
+     },
+     {
+      "text": "fail",
+      "finish": "stop",
+      "seconds": 0.7,
+      "prompt_tokens": 272,
+      "tokens": 1
+     },
+     {
+      "text": "pass",
+      "finish": "stop",
+      "seconds": 0.62,
+      "prompt_tokens": 292,
+      "tokens": 1
+     },
+     {
+      "text": "fail",
+      "finish": "stop",
+      "seconds": 0.79,
+      "prompt_tokens": 298,
+      "tokens": 1
+     },
+     {
+      "text": "fail",
+      "finish": "stop",
+      "seconds": 0.7,
+      "prompt_tokens": 292,
+      "tokens": 1
+     },
+     {
+      "text": "fail",
+      "finish": "stop",
+      "seconds": 0.82,
+      "prompt_tokens": 309,
+      "tokens": 1
+     },
+     {
+      "text": "fail",
+      "finish": "stop",
+      "seconds": 0.78,
+      "prompt_tokens": 296,
+      "tokens": 1
+     },
+     {
+      "text": "fail",
+      "finish": "stop",
+      "seconds": 0.67,
+      "prompt_tokens": 287,
+      "tokens": 1
+     },
+     {
+      "text": "fail",
+      "finish": "stop",
+      "seconds": 0.64,
+      "prompt_tokens": 276,
+      "tokens": 1
+     },
+     {
+      "text": "fail",
+      "finish": "stop",
+      "seconds": 0.86,
+      "prompt_tokens": 311,
+      "tokens": 1
+     },
+     {
+      "text": "fail",
+      "finish": "stop",
+      "seconds": 0.71,
+      "prompt_tokens": 312,
+      "tokens": 1
+     },
+     {
+      "text": "fail",
+      "finish": "stop",
+      "seconds": 0.78,
+      "prompt_tokens": 319,
+      "tokens": 1
+     },
+     {
+      "text": "fail",
+      "finish": "stop",
+      "seconds": 0.66,
+      "prompt_tokens": 282,
+      "tokens": 1
+     },
+     {
+      "text": "fail",
+      "finish": "stop",
+      "seconds": 0.64,
+      "prompt_tokens": 287,
+      "tokens": 1
+     },
+     {
+      "text": "fail",
+      "finish": "stop",
+      "seconds": 0.65,
+      "prompt_tokens": 285,
+      "tokens": 1
+     },
+     {
+      "text": "fail",
+      "finish": "stop",
+      "seconds": 0.73,
+      "prompt_tokens": 307,
+      "tokens": 1
+     },
+     {
+      "text": "fail",
+      "finish": "stop",
+      "seconds": 0.77,
+      "prompt_tokens": 293,
+      "tokens": 1
+     },
+     {
+      "text": "fail",
+      "finish": "stop",
+      "seconds": 0.6,
+      "prompt_tokens": 274,
+      "tokens": 1
+     },
+     {
+      "text": "fail",
+      "finish": "stop",
+      "seconds": 0.61,
+      "prompt_tokens": 274,
+      "tokens": 1
+     },
+     {
+      "text": "fail",
+      "finish": "stop",
+      "seconds": 0.78,
+      "prompt_tokens": 295,
+      "tokens": 1
+     },
+     {
+      "text": "fail",
+      "finish": "stop",
+      "seconds": 0.75,
+      "prompt_tokens": 287,
+      "tokens": 1
+     },
+     {
+      "text": "fail",
+      "finish": "stop",
+      "seconds": 0.65,
+      "prompt_tokens": 277,
+      "tokens": 1
+     },
+     {
+      "text": "fail",
+      "finish": "stop",
+      "seconds": 0.76,
+      "prompt_tokens": 291,
+      "tokens": 1
+     },
+     {
+      "text": "fail",
+      "finish": "stop",
+      "seconds": 0.7,
+      "prompt_tokens": 276,
+      "tokens": 1
+     },
+     {
+      "text": "fail",
+      "finish": "stop",
+      "seconds": 0.76,
+      "prompt_tokens": 286,
+      "tokens": 1
+     },
+     {
+      "text": "fail",
+      "finish": "stop",
+      "seconds": 0.8,
+      "prompt_tokens": 294,
+      "tokens": 1
+     },
+     {
+      "text": "fail",
+      "finish": "stop",
+      "seconds": 0.64,
+      "prompt_tokens": 277,
+      "tokens": 1
+     },
+     {
+      "text": "fail",
+      "finish": "stop",
+      "seconds": 0.7,
+      "prompt_tokens": 277,
+      "tokens": 1
+     },
+     {
+      "text": "fail",
+      "finish": "stop",
+      "seconds": 0.71,
+      "prompt_tokens": 286,
+      "tokens": 1
+     },
+     {
+      "text": "fail",
+      "finish": "stop",
+      "seconds": 0.68,
+      "prompt_tokens": 292,
+      "tokens": 1
+     },
+     {
+      "text": "fail",
+      "finish": "stop",
+      "seconds": 0.82,
+      "prompt_tokens": 295,
+      "tokens": 1
+     },
+     {
+      "text": "pass",
+      "finish": "stop",
+      "seconds": 0.73,
+      "prompt_tokens": 296,
+      "tokens": 1
+     },
+     {
+      "text": "fail",
+      "finish": "stop",
+      "seconds": 0.81,
+      "prompt_tokens": 285,
+      "tokens": 1
+     },
+     {
+      "text": "fail",
+      "finish": "stop",
+      "seconds": 0.72,
+      "prompt_tokens": 285,
+      "tokens": 1
+     },
+     {
+      "text": "fail",
+      "finish": "stop",
+      "seconds": 0.65,
+      "prompt_tokens": 283,
+      "tokens": 1
+     },
+     {
+      "text": "fail",
+      "finish": "stop",
+      "seconds": 0.54,
+      "prompt_tokens": 277,
+      "tokens": 1
+     },
+     {
+      "text": "fail",
+      "finish": "stop",
+      "seconds": 0.69,
+      "prompt_tokens": 292,
+      "tokens": 1
+     },
+     {
+      "text": "fail",
+      "finish": "stop",
+      "seconds": 0.6,
+      "prompt_tokens": 280,
+      "tokens": 1
+     },
+     {
+      "text": "fail",
+      "finish": "stop",
+      "seconds": 0.69,
+      "prompt_tokens": 296,
+      "tokens": 1
+     },
+     {
+      "text": "fail",
+      "finish": "stop",
+      "seconds": 0.7,
+      "prompt_tokens": 306,
+      "tokens": 1
+     },
+     {
+      "text": "fail",
+      "finish": "stop",
+      "seconds": 0.8,
+      "prompt_tokens": 321,
+      "tokens": 1
+     },
+     {
+      "text": "fail",
+      "finish": "stop",
+      "seconds": 0.82,
+      "prompt_tokens": 292,
+      "tokens": 1
+     },
+     {
+      "text": "fail",
+      "finish": "stop",
+      "seconds": 0.74,
+      "prompt_tokens": 284,
+      "tokens": 1
+     },
+     {
+      "text": "fail",
+      "finish": "stop",
+      "seconds": 0.96,
+      "prompt_tokens": 317,
+      "tokens": 1
+     },
+     {
+      "text": "fail",
+      "finish": "stop",
+      "seconds": 0.76,
+      "prompt_tokens": 295,
+      "tokens": 1
+     },
+     {
+      "text": "fail",
+      "finish": "stop",
+      "seconds": 0.69,
+      "prompt_tokens": 277,
+      "tokens": 1
+     },
+     {
+      "text": "fail",
+      "finish": "stop",
+      "seconds": 0.82,
+      "prompt_tokens": 304,
+      "tokens": 1
+     },
+     {
+      "text": "fail",
+      "finish": "stop",
+      "seconds": 0.7,
+      "prompt_tokens": 285,
+      "tokens": 1
+     },
+     {
+      "text": "fail",
+      "finish": "stop",
+      "seconds": 0.66,
+      "prompt_tokens": 284,
+      "tokens": 1
+     },
+     {
+      "text": "fail",
+      "finish": "stop",
+      "seconds": 0.98,
+      "prompt_tokens": 346,
+      "tokens": 1
+     },
+     {
+      "text": "fail",
+      "finish": "stop",
+      "seconds": 0.79,
+      "prompt_tokens": 298,
+      "tokens": 1
+     },
+     {
+      "text": "pass",
+      "finish": "stop",
+      "seconds": 0.72,
+      "prompt_tokens": 301,
+      "tokens": 1
+     },
+     {
+      "text": "fail",
+      "finish": "stop",
+      "seconds": 0.79,
+      "prompt_tokens": 282,
+      "tokens": 1
+     },
+     {
+      "text": "fail",
+      "finish": "stop",
+      "seconds": 0.72,
+      "prompt_tokens": 302,
+      "tokens": 1
+     },
+     {
+      "text": "fail",
+      "finish": "stop",
+      "seconds": 0.84,
+      "prompt_tokens": 294,
+      "tokens": 1
+     },
+     {
+      "text": "fail",
+      "finish": "stop",
+      "seconds": 0.76,
+      "prompt_tokens": 286,
+      "tokens": 1
+     },
+     {
+      "text": "fail",
+      "finish": "stop",
+      "seconds": 0.74,
+      "prompt_tokens": 299,
+      "tokens": 1
+     },
+     {
+      "text": "fail",
+      "finish": "stop",
+      "seconds": 0.66,
+      "prompt_tokens": 277,
+      "tokens": 1
+     },
+     {
+      "text": "fail",
+      "finish": "stop",
+      "seconds": 0.69,
+      "prompt_tokens": 284,
+      "tokens": 1
+     },
+     {
+      "text": "fail",
+      "finish": "stop",
+      "seconds": 0.8,
+      "prompt_tokens": 304,
+      "tokens": 1
+     },
+     {
+      "text": "fail",
+      "finish": "stop",
+      "seconds": 0.85,
+      "prompt_tokens": 296,
+      "tokens": 1
+     },
+     {
+      "text": "fail",
+      "finish": "stop",
+      "seconds": 0.67,
+      "prompt_tokens": 285,
+      "tokens": 1
+     },
+     {
+      "text": "fail",
+      "finish": "stop",
+      "seconds": 0.62,
+      "prompt_tokens": 277,
+      "tokens": 1
+     },
+     {
+      "text": "fail",
+      "finish": "stop",
+      "seconds": 0.63,
+      "prompt_tokens": 275,
+      "tokens": 1
+     },
+     {
+      "text": "fail",
+      "finish": "stop",
+      "seconds": 0.65,
+      "prompt_tokens": 284,
+      "tokens": 1
+     },
+     {
+      "text": "fail",
+      "finish": "stop",
+      "seconds": 0.69,
+      "prompt_tokens": 285,
+      "tokens": 1
+     },
+     {
+      "text": "fail",
+      "finish": "stop",
+      "seconds": 0.76,
+      "prompt_tokens": 279,
+      "tokens": 1
+     },
+     {
+      "text": "fail",
+      "finish": "stop",
+      "seconds": 0.78,
+      "prompt_tokens": 279,
+      "tokens": 1
+     },
+     {
+      "text": "fail",
+      "finish": "stop",
+      "seconds": 0.94,
+      "prompt_tokens": 299,
+      "tokens": 1
+     },
+     {
+      "text": "fail",
+      "finish": "stop",
+      "seconds": 0.79,
+      "prompt_tokens": 294,
+      "tokens": 1
+     },
+     {
+      "text": "fail",
+      "finish": "stop",
+      "seconds": 0.76,
+      "prompt_tokens": 299,
+      "tokens": 1
+     },
+     {
+      "text": "fail",
+      "finish": "stop",
+      "seconds": 0.75,
+      "prompt_tokens": 292,
+      "tokens": 1
+     },
+     {
+      "text": "fail",
+      "finish": "stop",
+      "seconds": 0.69,
+      "prompt_tokens": 276,
+      "tokens": 1
+     },
+     {
+      "text": "fail",
+      "finish": "stop",
+      "seconds": 0.79,
+      "prompt_tokens": 287,
+      "tokens": 1
+     },
+     {
+      "text": "fail",
+      "finish": "stop",
+      "seconds": 0.69,
+      "prompt_tokens": 281,
+      "tokens": 1
+     },
+     {
+      "text": "fail",
+      "finish": "stop",
+      "seconds": 1.04,
+      "prompt_tokens": 331,
+      "tokens": 1
+     },
+     {
+      "text": "fail",
+      "finish": "stop",
+      "seconds": 0.81,
+      "prompt_tokens": 301,
+      "tokens": 1
+     },
+     {
+      "text": "fail",
+      "finish": "stop",
+      "seconds": 0.72,
+      "prompt_tokens": 297,
+      "tokens": 1
+     },
+     {
+      "text": "fail",
+      "finish": "stop",
+      "seconds": 0.83,
+      "prompt_tokens": 321,
+      "tokens": 1
+     },
+     {
+      "text": "fail",
+      "finish": "stop",
+      "seconds": 0.57,
+      "prompt_tokens": 278,
+      "tokens": 1
+     }
+    ]
+   },
+   "rubric": {
+    "ask": {
+     "each": [
+      "Customer: How do I claim a refund?\nReply: To claim a refund, first, send the date and amount of the payment in this chat, and the team will check it within 2 working days. If the shop has not helped, the team can open a dispute.",
+      "Customer: Is there a way to know when my card will arrive?\nReply: Yes, the new card arrives within 5 working days. You can check its status in the app under Cards.",
+      "Customer: What foreign exchange rate will you use?\nReply: The foreign exchange rate is applied at the moment of payment, and it is shown before you pay. If there is a problem with the rate, please provide the date and amount of the payment to the team for further assistance.",
+      "Customer: I need help because I drunken blocked my card?\nReply: The exchange rate for your payment was incorrect. Please provide the date and amount of the payment, and the team will check it within 2 working days.",
+      "Customer: How do I report my card lost or stolen?\nReply: To report your lost or stolen card, go to the app under 'Cards' and select 'Freeze' to block it. Then order a new card and it will be free.",
+      "Customer: I believe my card payment exchange rate is incorrect.\nReply: Please provide the date and amount of the payment, and the team will check it within 2 working days.",
+      "Customer: I need to know your exchange rates.\nReply: The exchange rate for payments in another currency is displayed in the app before you pay. If there's a discrepancy, please provide the date and amount of the payment, and the team will check it within 2 working days.",
+      "Customer: why do your exchange rates change\nReply: Exchange rates change based on the current time and the payment method. For payments in another currency, the rate is applied at the moment of payment, and on weekends, a 0.5% fee is added. The app displays the rate before you pay.",
+      "Customer: How are you determining your exchange rates?\nReply: The exchange rate is determined at the moment of payment, with a 0.5% fee on weekends. The app shows the rate before you pay.",
+      "Customer: Hi, I don't think your exchange rate is right. I need you to check the official interbank exchange please.\nReply: The exchange rate is currently 0.5% on weekends. Please confirm the payment date and amount to check the rate before making the payment.",
+      "Customer: Why is your exchange rate for my card payment wrong\nReply: The exchange rate for your card payment was incorrect. Please provide the date and amount of the payment, and we will check it within 2 working days.",
+      "Customer: the conversion value for my card payments is incorrect.\nReply: The conversion value for your card payments is incorrect. Please provide the date and amount of the payment, and we will check it within 2 working days. If the issue persists, we will assist further.",
+      "Customer: I have exceeded the number of times I can try my PIN\nReply: Your PIN has been blocked after 3 wrong attempts. Please contact the bank team for assistance.",
+      "Customer: I want this amount reversed out of my account.\nReply: The exchange rate for payments in another currency is applied at the moment of payment. If the rate is incorrect, please provide the date and amount of the payment, and the team will check it within 2 working days.",
+      "Customer: The wrong exchange rate was used when I bought something with a foriegn currency.\nReply: The wrong exchange rate was used when you made the payment. Please provide the date and amount of the payment, and the team will check it within 2 working days.",
+      "Customer: I'm pretty sure something went wrong with my exchange. I changed Russian Ruble to UK pounds and was charged way too much!\nReply: The exchange rate was incorrect, and we will check the payment details within 2 working days. Please provide the date and amount of the payment to assist further.",
+      "Customer: I believe my credit card was stolen.\nReply: Your card was stolen. Please freeze it in the app under Cards > Freeze, then order a new card. A new card is free.",
+      "Customer: This rate is too low. Are you sure your using the right exchange rate.\nReply: The exchange rate is too low. Please check the payment details and confirm the correct rate before proceeding. If you have the date and amount, we can verify and ensure the correct rate is applied.",
+      "Customer: when does the rate get determined\nReply: The exchange rate is determined at the moment of payment, and on weekends, 0.5% is added. The app shows the rate before you pay.",
+      "Customer: Some idiot stole my card.\nReply: The card has been lost or stolen. Please freeze it at the app under Cards > Freeze, then order a new card. A new card is free.",
+      "Customer: what is the exchange rate?\nReply: The exchange rate for payments in another currency is applied at the moment of payment. On weekends, 0.5% is added. The app shows the rate before you pay.",
+      "Customer: I need help with a lost card\nReply: Please freeze your card at the app under Cards > Freeze, then order a new card. A new card is free.",
+      "Customer: I would appreciate it if I could get an item refunded\nReply: If you have a payment in another currency and the exchange rate is incorrect, please provide the date and amount of the payment in the chat, and the team will check it within 2 working days.",
+      "Customer: The exchange rate given to me wasn't correct, after i purchased an item\nReply: The exchange rate was incorrect. Please provide the date and amount of the payment, and the team will check it within 2 working days.",
+      "Customer: My account is blocked, how do I log in now\nReply: If you're experiencing a payment with a wrong exchange rate, please provide the date and amount of the payment in the chat, and the team will check it within 2 working days.",
+      "Customer: I would like a refund on one of your products that has been sold to me\nReply: I'm sorry, but I can't assist with a refund for a card payment that has a wrong exchange rate. Please provide the date and amount of the payment, and we'll check it within two working days.",
+      "Customer: I still don't have my card after 2 weeks. What should I do?\nReply: You should freeze your card in the app under Cards > Freeze, then order a new card. A new card is free.",
+      "Customer: How can I unblock a blocked pin number for my account?\nReply: To unblock your PIN, go to the 'Cards' section in your app and click on 'PIN'. Enter your PIN and confirm it. If you're not sure, you can try again within 24 hours after the last unsuccessful attempt.",
+      "Customer: Where is the tracking number for the card you sent me?\nReply: The tracking number for the new card is not available as it is not in the app. You can check the app under Cards to see the status.",
+      "Customer: What do I need to do to get a refund?\nReply: To get a refund, you should first ask the shop. If the shop hasn't helped within 14 days, the team can open a dispute.",
+      "Customer: The rate applied to my foreign purchase was incorrect\nReply: The exchange rate was incorrect for your foreign purchase. Please provide the date and amount of the payment, and the team will check it within 2 working days.",
+      "Customer: My card still hasn't arrived after 2 weeks. Is it lost?\nReply: Your card has not arrived within 5 working days. It may be lost or stolen. Please contact the bank's customer support for further assistance.",
+      "Customer: How can I check the exchange rate applied to my transaction?\nReply: Check the exchange rate applied to your transaction by viewing the rate displayed in the app before making the payment. If you encounter any issues, contact the team for assistance.",
+      "Customer: My card is lost! What can I do?\nReply: If your card is lost or stolen, please freeze it at the app under Cards > Freeze, then order a new card. A new card is free.",
+      "Customer: How can I unlock the pin?\nReply: If you received a wrong exchange rate, please provide the date and amount of the payment in the chat, and the team will check it within 2 working days.",
+      "Customer: My card has not arrived yet, where is it?\nReply: Your new card is expected to arrive within 5 working days. It will be in the app under Cards. Please check the status as soon as it arrives.",
+      "Customer: My card got stolen!\nReply: Your card has been lost or stolen. Please freeze it at the app under Cards > Freeze, then order a new card. A new card is free.",
+      "Customer: When I put the wrong pin too much, I got blocked, so can you help me unblock my pin\nReply: Sure! Please provide the date and amount of the payment, and I'll assist you with unblocking your PIN within 24 hours.",
+      "Customer: What is the base of the exchange rates?\nReply: The exchange rate is applied at the moment of payment, with a 0.5% fee on weekends. The app shows the rate before you pay.",
+      "Customer: I am still waiting for my card after 1 week. Is this ok?\nReply: The new card arrived within 5 working days, so it should be available soon. If you still need it after 1 week, please check the app for updates.",
+      "Customer: I lost my card\nReply: You need to freeze your card in the app under Cards > Freeze, then order a new card. A new card is free.",
+      "Customer: How long should my new card take to arrive?\nReply: A new card arrives within 5 working days. The status is in the app under Cards.",
+      "Customer: the card payment exchange rate is wrong\nReply: The exchange rate for your card payment was incorrect. Please provide the date and amount of the payment, and we will check it within 2 working days. If the issue persists, we will assist further.",
+      "Customer: card is lost, please help\nReply: Please check the app for the lost card. If it's a new card, you can request a new one by following the instructions in the app. If it's a lost card, you can freeze it and order a new one immediately.",
+      "Customer: I entered the wrong pin too many times and now I am blocked. Help me unblock!\nReply: You can unblock your PIN in the app under Cards > PIN, and it will be unblocked within 24 hours after the last attempt.",
+      "Customer: I'm trying to figure out the current exchange rate.\nReply: The current exchange rate for your payment is shown in the app. If you have a payment in another currency, the rate is applied at the moment of payment. On weekends, a 0.5% fee is added. Please check the app for the most accurate information.",
+      "Customer: Can you unblock my pin after too many wrong pin attempts?\nReply: If you have too many wrong PIN attempts, you can unblock your card by following the steps in the app under 'Cards > PIN' and wait 24 hours after the last unsuccessful attempt.",
+      "Customer: How do your exchange rates work?\nReply: Exchange rates are applied at the moment of payment. For non-US currency payments, a 0.5% fee is added on weekends. The app displays the rate before you pay.",
+      "Customer: Are you able to locate my card?\nReply: I can help locate your card. Please provide your card number or any other details, and I'll check it for you.",
+      "Customer: I'm in Spain and my stuff has been stolen. My card was with it and I need a new one shipped and the old one frozen.\nReply: Your card has been lost or stolen. Please freeze it at the app under Cards > Freeze, then order a new card. The new card will be free and shipped within 5 working days.",
+      "Customer: Hello! I recently made a purchase and I'm needing to cancel my order and process a refund as soon as possible.\nReply: The exchange rate for your payment was incorrect. Please provide the date and amount of the payment, and the team will check it within 2 working days. If the issue persists, contact the customer service team for further assistance.",
+      "Customer: Hello I changed my mind and really need a refund on one of things I bought recently. Can you please cancel the transaction and get my money back. Please it's urgent.\nReply: Sure! Please provide the date and amount of the payment, and the team will check it within 2 working days. If the issue persists, we can assist with a dispute within 14 days.",
+      "Customer: Do you know if there is a tracking number for the new card you sent me?\nReply: No tracking number for the new card. It's under Cards in the app. You can check it there.",
+      "Customer: Is it a good time to exchange?\nReply: The exchange rate is applied at the moment of payment, and it is 0.5% on weekends. If you have any questions about the rate, please let me know.",
+      "Customer: Would I be able to get a refund for something I bought?\nReply: If the exchange rate was incorrect, please provide the date and amount of the payment, and the team will check it within 2 working days.",
+      "Customer: Hello- It is urgent I get a refund on this product. The merchant has not been helpful, what can I do now to get this resolved ASAP?\nReply: You should first contact the merchant directly to request a refund. If they are not helpful within 14 days, the team can assist you in resolving the dispute.",
+      "Customer: I'm still waiting for delivery of my new card, why is it taking so long?\nReply: The new card arrives within 5 working days, so it should be delivered soon. If you're still waiting, check the app for updates on its status.",
+      "Customer: I'm still waiting on my card to be delivered.\nReply: Your card is still waiting for delivery. Please check the app for updates as soon as it arrives.",
+      "Customer: i have not received my card\nReply: Please freeze your card in the app under Cards > Freeze, then order a new card. A new card is free.",
+      "Customer: Where do you get your exchange rates from?\nReply: Exchange rates are determined by the current market rate at the time of payment, and they are shown in the app before you pay. If there's a discrepancy, the team will check it within 2 working days.",
+      "Customer: How many tries do I have to enter my pin before I'm blocked?\nReply: The PIN is blocked after 3 wrong tries. Unblock it in the app under Cards > PIN, 24 hours after the last try.",
+      "Customer: Help! Someone stole my card!\nReply: You need to freeze your card immediately in the app under Cards > Freeze, then order a new card. A new card is free.",
+      "Customer: How do I report a stolen card?\nReply: To report a stolen card, go to the app under 'Cards' and select 'Freeze' to block the card. Then order a new card there, and the new card will be free.",
+      "Customer: My card hasn't arrived yet.\nReply: Your card has arrived within 5 working days. It's in the app under Cards. No tracking number has been provided yet.",
+      "Customer: I wasn't applied the correct exchange rate for an item I bought\nReply: The exchange rate was applied incorrectly. Please provide the date and amount of the payment, and the team will check it within 2 working days.",
+      "Customer: Please advise what is the exchange rate\nReply: The exchange rate for payments in another currency is applied at the moment of payment. If you're using a different currency, please specify the amount and the currency, and the app will display the rate before you pay.",
+      "Customer: What is the tracking number for the card you sent?\nReply: The tracking number for the new card is not provided, as there is no tracking number associated with the card arrival.",
+      "Customer: Do you have a list of exchange rates?\nReply: Yes, the app displays the exchange rate before you pay, and it shows a 0.5% fee on weekends.",
+      "Customer: I purchased something in a foreign currency but the rate applied is wrong\nReply: The exchange rate was applied incorrectly. Please provide the date and amount of the payment, and the team will check it within 2 working days.",
+      "Customer: I believe my card has been stolen, what can I do about this situation? It's urgent.\nReply: You can freeze your card in the app under Cards > Freeze, then order a new card for free. The new card will be available immediately.",
+      "Customer: I have been waiting longer than expected for my bank card, could you provide information on when it will arrive?\nReply: A new card arrives within 5 working days. Its status is in the app under Cards. Please check the app for updates on its arrival date.",
+      "Customer: I go the wrong exchange rate applied to my purchase in a foreign country.\nReply: The exchange rate was applied incorrectly. Please provide the date and amount of your payment, and we will check it within 2 working days. If the issue persists, we will assist further.",
+      "Customer: The exchange rate would be?\nReply: The exchange rate for payments in another currency is applied at the moment of payment, with a 0.5% fee on weekends. The app shows the rate before you pay.",
+      "Customer: The incorrect rate was used in my foreign purchase\nReply: The incorrect exchange rate was applied to your foreign purchase. Please provide the date and amount of the payment, and we will check it within 2 working days.",
+      "Customer: What should I do if I lost my card?\nReply: If you lost your card, immediately freeze it in the app under Cards > Freeze, then order a new card there. A new card is free.",
+      "Customer: Oh no! I lost my card! Help!\nReply: Please freeze your card in the app under Cards > Freeze, then order a new card. A new card is free.",
+      "Customer: Since my pin is blocked, would you help me unblock it?\nReply: Sure, I can help you unblock your PIN. Please provide the date and amount of the payment in the chat, and I will assist you within 24 hours.",
+      "Customer: Help me please! My card was stolen!\nReply: Your card was stolen. Please freeze it at the app under Cards > Freeze, then order a new card. A new card is free.",
+      "Customer: How do I locate my card?\nReply: To locate your card, go to the 'Cards' section in your app and check the status. If it's lost or stolen, you can freeze it at once and order a new card there. A new card is free.",
+      "Customer: What is the exchange rate like on this app?\nReply: The exchange rate on the app is shown before you pay, with a 0.5% discount on weekends. If you encounter issues with the rate, please provide the date and amount of the payment, and the team will check it within 2 working days.",
+      "Customer: Hi there! I need to cancel an order I recently made and start processing a refund. Can you please help me with this and set up the refund as soon as possible? It's very urgent.\nReply: Please provide the date and amount of the payment in this chat, and the team will check it within 2 working days. If the exchange rate is incorrect, we will resolve it promptly.",
+      "Customer: The exchange rate for my transaction last Saturday seems to have been wrong I got charged extra. Please fix.\nReply: Please provide the date and amount of your payment, and the team will check it within 2 working days to resolve the exchange rate issue.",
+      "Customer: Can I unblock my card using the app?\nReply: Yes, you can unblock your card in the app under Cards > PIN, and it will be unblocked 24 hours after the last try.",
+      "Customer: Someone stole my wallet earlier today, not sure exactly when, probably on Piccadilly circus. Can you check if there were any attempts to use the card and obviously block it?\nReply: Check the 'Cards' section in the app to confirm the card's status. If it's stolen, you can freeze it immediately and order a new card. A new card is free.",
+      "Customer: I bought this item and was charged the wrong amount can I get a refund?\nReply: If the payment was processed with a wrong exchange rate, please provide the date and amount of the payment in the chat, and the team will check it within 2 working days.",
+      "Customer: Why did I get blocked?\nReply: The PIN was blocked after 3 wrong tries. You can unblock it in the app within 24 hours after the last try.",
+      "Customer: Can you unlock my pin? I think I entered the wrong pin too many times.\nReply: The team will check the date and amount of your payment to determine if there was a wrong exchange rate. If so, they will take action within 2 working days. Please provide the details so we can assist you.",
+      "Customer: what are exchange rates\nReply: The exchange rate for payments in another currency is applied at the moment of payment, and it is shown before you pay. On weekends, a 0.5% fee is added.",
+      "Customer: I need a refund?\nReply: If you have a payment with a wrong exchange rate, please provide the date and amount of the payment in the chat, and the team will check it within 2 working days.",
+      "Customer: I am chatting about an order from a long while back. I never got it to this day and am deeply upset by this! I want all of my money back! I just can not accept paying for something I never got.\nReply: The exchange rate for payments in another currency is applied at the moment of payment. If the rate is incorrect, please provide the date and amount of the payment, and the team will check it within 2 working days. If the rate is correct, the payment will proceed as is.",
+      "Customer: My exchange went wrong. I swapped Russian Ruble for UK pounds and was charged too much.\nReply: The exchange rate was incorrect, and the payment was charged too much. Please provide the date and amount of the payment, and the team will check it within 2 working days.",
+      "Customer: You did not apply the correct exchange rate for an item that I bought.\nReply: The exchange rate was applied incorrectly. Please check the payment details and contact the team for assistance. If the issue persists, provide the date and amount of the payment, and we will investigate it within two working days.",
+      "Customer: I've been waiting longer than expected for my card.\nReply: Your card has arrived within 5 working days. The status is in the app under Cards. Please proceed with the next steps as instructed.",
+      "Customer: What are the most current exchange rates?\nReply: The exchange rate for payments in another currency is displayed in the app before you pay. On weekends, a 0.5% fee is added. If there's a discrepancy, please provide the date and amount of the payment to the team for review.",
+      "Customer: Is it normal to have to wait over a week for my new card?\nReply: It's normal to wait up to 5 working days for a new card to arrive, as the status is in the app. If you need assistance, feel free to ask.",
+      "Customer: How do I reset my PIN?\nReply: To reset your PIN, go to the app under Cards > PIN and enter your current PIN. If you're not sure, you can ask the team to help you reset it.",
+      "Customer: How can I unlock my pin from too many tries?\nReply: If you've tried too many times to unlock your PIN, you can use the app's 'PIN' feature to unfreeze it. Enter your PIN and the app will allow you to unlock it after 24 hours.",
+      "Customer: My card got lost.\nReply: Your card has been lost. Please freeze it at the app under Cards > Freeze, then order a new card. A new card is free.",
+      "Customer: Get an item refund\nReply: If there was a payment with a wrong exchange rate, please provide the date and amount of the payment in the chat, and the team will check it within 2 working days.",
+      "Customer: Is a copy of the police report necessary for completing the report process?\nReply: No, a copy of the police report is not necessary for completing the report process. The exchange rate issue is resolved by sending the date and amount of the payment in this chat, and the team checks it within 2 working days.",
+      "Customer: What exchange rate do you use?\nReply: The app uses the exchange rate at the moment of payment, with a 0.5% discount on weekends. If there's a discrepancy, the date and amount are sent to the team for review within 2 working days.",
+      "Customer: Can I have a refund?\nReply: If you received a payment with a wrong exchange rate, please provide the date and amount of the payment in the chat, and the team will check it within 2 working days.",
+      "Customer: What's the refund process?\nReply: The refund process involves asking the shop first. If the shop hasn't helped within 14 days, the team can open a dispute.",
+      "Customer: How do I track my card?\nReply: To track your card, go to the app under 'Cards' and check the status. There is no tracking number provided.",
+      "Customer: I bought something, but the exchange rate looks wrong.\nReply: The exchange rate appears to be incorrect. Please provide the date and amount of the payment, and the team will check it within 2 working days.",
+      "Customer: I bought something in a foreign currency but the rate applied is wrong!\nReply: The exchange rate was incorrect. Please provide the date and amount of the payment, and the team will check it within 2 working days.",
+      "Customer: How do I get refunded?\nReply: To request a refund, please ask the shop first. If the shop has not helped within 14 days, the team can open a dispute.",
+      "Customer: Will you reinstate my PIN?\nReply: If the exchange rate was incorrect, please provide the date and amount of the payment, and the team will check it within 2 working days.",
+      "Customer: What should I do if I've tried to enter my PIN too often?\nReply: If you've tried to enter your PIN too often, you should check the app under Cards > PIN to unfreeze it. The PIN will be unblocked after 24 hours after the last attempt.",
+      "Customer: How much will I get with the exchange rate?\nReply: The exchange rate for payments in another currency is applied at the moment of payment. If the rate is incorrect, please provide the date and amount, and the team will check it within 2 working days.",
+      "Customer: What are your international exchange rates?\nReply: The app shows the exchange rate before you pay. On weekends, 0.5% is added. If you encounter a payment in another currency, please provide the date and amount, and the team will check it within 2 working days.",
+      "Customer: I still have not received my new card, I ordered over a week ago.\nReply: Your new card has arrived within 5 working days. It is in the app under Cards. You can check its status to confirm if it has been successfully received.",
+      "Customer: How do I know when my card will arrive?\nReply: You can check the status of your new card in the app under 'Cards' to see when it will arrive.",
+      "Customer: I want to return an item.\nReply: If you have a payment in another currency and the exchange rate is incorrect, please provide the date and amount of the payment, and the team will check it within 2 working days.",
+      "Customer: Are you able to unblock my pin?\nReply: If the exchange rate was incorrect, please provide the date and amount of the payment, and the team will check it within 2 working days.",
+      "Customer: Someone stole my card. I need to report it stolen. I made a police report already, but how do I report it with you?\nReply: You can report the stolen card by going to the 'Cards' section in the app and selecting 'Freeze' to block the card. Once frozen, you can order a new card there. If you have the date and amount of the payment, we can check it within 2 working days.",
+      "Customer: How do I unblock my PIN?\nReply: To unblock your PIN, go to the 'Cards' section in your app and click on 'PIN'. Enter your PIN and confirm it. If you're not sure, you can try again within 24 hours after the last unsuccessful attempt.",
+      "Customer: What do I do if the bank machine won't accept my PIN attempts anymore?\nReply: If the bank machine won't accept your PIN attempts, contact the customer service team immediately. They will check the date and amount of the payment to resolve the issue within 2 working days.",
+      "Customer: I ordered something ages ago online but it's simply not arriving. I've got enough! Give me back my money, I'm not paying these people.\nReply: We are sorry for the delay in receiving your order. Please ensure you have enough funds in your account to cover the items you ordered. If you are unable to pay, we can assist you with a refund once the card is processed.",
+      "Customer: I want a refund for my purchase\nReply: I'll check the exchange rate for your payment and assist with any issues. Please provide the date and amount of the payment to proceed."
+     ],
+     "system": "You grade a reply of an online bank's assistant to a customer. The assistant may use only these facts:\n- A new card arrives within 5 working days. Its status is in the app under Cards. There is no tracking number.\n- A lost or stolen card: freeze it at once in the app under Cards > Freeze, then order a new card there. A new card is free.\n- A payment in another currency gets the exchange rate at the moment of payment; on weekends 0.5% is added. The app shows the rate before you pay.\n- When a card payment got the wrong exchange rate: send the date and the amount of the payment in this chat, and the team checks it within 2 working days.\n- The PIN is blocked after 3 wrong tries. Unblock it in the app under Cards > PIN, 24 hours after the last try.\n- Refunds: ask the shop first. If the shop has not helped within 14 days, the team can open a dispute.\nGrade one thing: does the reply say anything about the bank, its cards or its app that the facts do not say?\nfail: it does, such as a time, a fee, a step or a feature that is not in the facts, or the opposite of a fact.\npass: everything it says about the bank, its cards and its app is in the facts. Whether the reply fits the question does not matter here.\nWrite one sentence on what you checked, then pass or fail on a line of its own.",
+     "max_tokens": 100
+    },
+    "answers": [
+     {
+      "text": "pass. All facts are included in the reply.",
+      "finish": "stop",
+      "seconds": 3.14,
+      "prompt_tokens": 387,
+      "tokens": 10
+     },
+     {
+      "text": "pass",
+      "finish": "stop",
+      "seconds": 0.64,
+      "prompt_tokens": 370,
+      "tokens": 1
+     },
+     {
+      "text": "pass. All facts are included in the reply.",
+      "finish": "stop",
+      "seconds": 2.47,
+      "prompt_tokens": 388,
+      "tokens": 10
+     },
+     {
+      "text": "pass",
+      "finish": "stop",
+      "seconds": 0.78,
+      "prompt_tokens": 376,
+      "tokens": 1
+     },
+     {
+      "text": "pass",
+      "finish": "stop",
+      "seconds": 0.7,
+      "prompt_tokens": 382,
+      "tokens": 1
+     },
+     {
+      "text": "pass",
+      "finish": "stop",
+      "seconds": 0.7,
+      "prompt_tokens": 367,
+      "tokens": 1
+     },
+     {
+      "text": "pass. All facts are included in the reply.",
+      "finish": "stop",
+      "seconds": 2.61,
+      "prompt_tokens": 388,
+      "tokens": 10
+     },
+     {
+      "text": "pass.",
+      "finish": "stop",
+      "seconds": 0.93,
+      "prompt_tokens": 394,
+      "tokens": 2
+     },
+     {
+      "text": "pass",
+      "finish": "stop",
+      "seconds": 0.91,
+      "prompt_tokens": 374,
+      "tokens": 1
+     },
+     {
+      "text": "pass. All facts are included in the reply.",
+      "finish": "stop",
+      "seconds": 2.56,
+      "prompt_tokens": 388,
+      "tokens": 10
+     },
+     {
+      "text": "pass",
+      "finish": "stop",
+      "seconds": 0.71,
+      "prompt_tokens": 377,
+      "tokens": 1
+     },
+     {
+      "text": "pass.",
+      "finish": "stop",
+      "seconds": 1.05,
+      "prompt_tokens": 386,
+      "tokens": 2
+     },
+     {
+      "text": "pass",
+      "finish": "stop",
+      "seconds": 0.63,
+      "prompt_tokens": 367,
+      "tokens": 1
+     },
+     {
+      "text": "pass. All facts are included in the reply.",
+      "finish": "stop",
+      "seconds": 2.31,
+      "prompt_tokens": 389,
+      "tokens": 10
+     },
+     {
+      "text": "pass.",
+      "finish": "stop",
+      "seconds": 0.97,
+      "prompt_tokens": 386,
+      "tokens": 2
+     },
+     {
+      "text": "pass.",
+      "finish": "stop",
+      "seconds": 1.04,
+      "prompt_tokens": 393,
+      "tokens": 2
+     },
+     {
+      "text": "pass",
+      "finish": "stop",
+      "seconds": 0.68,
+      "prompt_tokens": 371,
+      "tokens": 1
+     },
+     {
+      "text": "pass. All facts are included in the reply.",
+      "finish": "stop",
+      "seconds": 2.47,
+      "prompt_tokens": 390,
+      "tokens": 10
+     },
+     {
+      "text": "pass",
+      "finish": "stop",
+      "seconds": 0.7,
+      "prompt_tokens": 374,
+      "tokens": 1
+     },
+     {
+      "text": "pass",
+      "finish": "stop",
+      "seconds": 0.79,
+      "prompt_tokens": 372,
+      "tokens": 1
+     },
+     {
+      "text": "pass",
+      "finish": "stop",
+      "seconds": 0.8,
+      "prompt_tokens": 377,
+      "tokens": 1
+     },
+     {
+      "text": "pass",
+      "finish": "stop",
+      "seconds": 0.69,
+      "prompt_tokens": 367,
+      "tokens": 1
+     },
+     {
+      "text": "pass. All facts are included in the reply.",
+      "finish": "stop",
+      "seconds": 2.45,
+      "prompt_tokens": 387,
+      "tokens": 10
+     },
+     {
+      "text": "pass",
+      "finish": "stop",
+      "seconds": 0.66,
+      "prompt_tokens": 379,
+      "tokens": 1
+     },
+     {
+      "text": "pass. All facts are included in the reply.",
+      "finish": "stop",
+      "seconds": 2.42,
+      "prompt_tokens": 384,
+      "tokens": 10
+     },
+     {
+      "text": "pass.",
+      "finish": "stop",
+      "seconds": 0.95,
+      "prompt_tokens": 395,
+      "tokens": 2
+     },
+     {
+      "text": "pass",
+      "finish": "stop",
+      "seconds": 0.78,
+      "prompt_tokens": 377,
+      "tokens": 1
+     },
+     {
+      "text": "pass. All facts are included in the reply.",
+      "finish": "stop",
+      "seconds": 2.61,
+      "prompt_tokens": 398,
+      "tokens": 10
+     },
+     {
+      "text": "pass",
+      "finish": "stop",
+      "seconds": 0.78,
+      "prompt_tokens": 377,
+      "tokens": 1
+     },
+     {
+      "text": "pass",
+      "finish": "stop",
+      "seconds": 0.8,
+      "prompt_tokens": 377,
+      "tokens": 1
+     },
+     {
+      "text": "pass",
+      "finish": "stop",
+      "seconds": 0.74,
+      "prompt_tokens": 377,
+      "tokens": 1
+     },
+     {
+      "text": "pass",
+      "finish": "stop",
+      "seconds": 0.75,
+      "prompt_tokens": 379,
+      "tokens": 1
+     },
+     {
+      "text": "pass",
+      "finish": "stop",
+      "seconds": 0.62,
+      "prompt_tokens": 380,
+      "tokens": 1
+     },
+     {
+      "text": "pass",
+      "finish": "stop",
+      "seconds": 0.64,
+      "prompt_tokens": 376,
+      "tokens": 1
+     },
+     {
+      "text": "pass",
+      "finish": "stop",
+      "seconds": 0.62,
+      "prompt_tokens": 375,
+      "tokens": 1
+     },
+     {
+      "text": "pass",
+      "finish": "stop",
+      "seconds": 0.62,
+      "prompt_tokens": 378,
+      "tokens": 1
+     },
+     {
+      "text": "pass",
+      "finish": "stop",
+      "seconds": 0.68,
+      "prompt_tokens": 371,
+      "tokens": 1
+     },
+     {
+      "text": "pass: everything it says about the bank, its cards and its app is in the facts.",
+      "finish": "stop",
+      "seconds": 3.76,
+      "prompt_tokens": 386,
+      "tokens": 19
+     },
+     {
+      "text": "pass",
+      "finish": "stop",
+      "seconds": 0.66,
+      "prompt_tokens": 375,
+      "tokens": 1
+     },
+     {
+      "text": "pass.",
+      "finish": "stop",
+      "seconds": 0.94,
+      "prompt_tokens": 385,
+      "tokens": 2
+     },
+     {
+      "text": "pass",
+      "finish": "stop",
+      "seconds": 0.64,
+      "prompt_tokens": 366,
+      "tokens": 1
+     },
+     {
+      "text": "pass.",
+      "finish": "stop",
+      "seconds": 0.75,
+      "prompt_tokens": 364,
+      "tokens": 2
+     },
+     {
+      "text": "pass.",
+      "finish": "stop",
+      "seconds": 0.92,
+      "prompt_tokens": 384,
+      "tokens": 2
+     },
+     {
+      "text": "pass. All facts are included in the reply.",
+      "finish": "stop",
+      "seconds": 2.55,
+      "prompt_tokens": 390,
+      "tokens": 10
+     },
+     {
+      "text": "pass",
+      "finish": "stop",
+      "seconds": 0.7,
+      "prompt_tokens": 384,
+      "tokens": 1
+     },
+     {
+      "text": "pass.",
+      "finish": "stop",
+      "seconds": 1.02,
+      "prompt_tokens": 401,
+      "tokens": 2
+     },
+     {
+      "text": "pass. All facts are included in the reply.",
+      "finish": "stop",
+      "seconds": 2.27,
+      "prompt_tokens": 388,
+      "tokens": 10
+     },
+     {
+      "text": "pass",
+      "finish": "stop",
+      "seconds": 0.6,
+      "prompt_tokens": 379,
+      "tokens": 1
+     },
+     {
+      "text": "pass",
+      "finish": "stop",
+      "seconds": 0.65,
+      "prompt_tokens": 368,
+      "tokens": 1
+     },
+     {
+      "text": "pass",
+      "finish": "stop",
+      "seconds": 0.9,
+      "prompt_tokens": 403,
+      "tokens": 1
+     },
+     {
+      "text": "pass",
+      "finish": "stop",
+      "seconds": 0.99,
+      "prompt_tokens": 404,
+      "tokens": 1
+     },
+     {
+      "text": "pass.",
+      "finish": "stop",
+      "seconds": 1.15,
+      "prompt_tokens": 411,
+      "tokens": 2
+     },
+     {
+      "text": "pass",
+      "finish": "stop",
+      "seconds": 0.72,
+      "prompt_tokens": 374,
+      "tokens": 1
+     },
+     {
+      "text": "pass.",
+      "finish": "stop",
+      "seconds": 0.87,
+      "prompt_tokens": 379,
+      "tokens": 2
+     },
+     {
+      "text": "pass",
+      "finish": "stop",
+      "seconds": 0.74,
+      "prompt_tokens": 377,
+      "tokens": 1
+     },
+     {
+      "text": "pass.",
+      "finish": "stop",
+      "seconds": 1.02,
+      "prompt_tokens": 399,
+      "tokens": 2
+     },
+     {
+      "text": "pass. Everything it says about the bank, its cards, and its app is in the facts.",
+      "finish": "stop",
+      "seconds": 3.61,
+      "prompt_tokens": 385,
+      "tokens": 20
+     },
+     {
+      "text": "pass",
+      "finish": "stop",
+      "seconds": 0.54,
+      "prompt_tokens": 366,
+      "tokens": 1
+     },
+     {
+      "text": "pass",
+      "finish": "stop",
+      "seconds": 0.57,
+      "prompt_tokens": 366,
+      "tokens": 1
+     },
+     {
+      "text": "pass. All facts are included in the reply.",
+      "finish": "stop",
+      "seconds": 2.43,
+      "prompt_tokens": 387,
+      "tokens": 10
+     },
+     {
+      "text": "pass",
+      "finish": "stop",
+      "seconds": 0.7,
+      "prompt_tokens": 379,
+      "tokens": 1
+     },
+     {
+      "text": "pass",
+      "finish": "stop",
+      "seconds": 0.64,
+      "prompt_tokens": 369,
+      "tokens": 1
+     },
+     {
+      "text": "pass",
+      "finish": "stop",
+      "seconds": 0.87,
+      "prompt_tokens": 383,
+      "tokens": 1
+     },
+     {
+      "text": "pass",
+      "finish": "stop",
+      "seconds": 0.55,
+      "prompt_tokens": 368,
+      "tokens": 1
+     },
+     {
+      "text": "pass",
+      "finish": "stop",
+      "seconds": 0.63,
+      "prompt_tokens": 378,
+      "tokens": 1
+     },
+     {
+      "text": "pass. All facts are included in the reply.",
+      "finish": "stop",
+      "seconds": 2.22,
+      "prompt_tokens": 386,
+      "tokens": 10
+     },
+     {
+      "text": "pass",
+      "finish": "stop",
+      "seconds": 0.61,
+      "prompt_tokens": 369,
+      "tokens": 1
+     },
+     {
+      "text": "pass",
+      "finish": "stop",
+      "seconds": 0.59,
+      "prompt_tokens": 369,
+      "tokens": 1
+     },
+     {
+      "text": "pass",
+      "finish": "stop",
+      "seconds": 0.75,
+      "prompt_tokens": 378,
+      "tokens": 1
+     },
+     {
+      "text": "pass",
+      "finish": "stop",
+      "seconds": 0.64,
+      "prompt_tokens": 384,
+      "tokens": 1
+     },
+     {
+      "text": "pass. All facts are included in the reply.",
+      "finish": "stop",
+      "seconds": 2.57,
+      "prompt_tokens": 387,
+      "tokens": 10
+     },
+     {
+      "text": "pass. All facts are included in the reply.",
+      "finish": "stop",
+      "seconds": 2.59,
+      "prompt_tokens": 388,
+      "tokens": 10
+     },
+     {
+      "text": "pass",
+      "finish": "stop",
+      "seconds": 0.72,
+      "prompt_tokens": 377,
+      "tokens": 1
+     },
+     {
+      "text": "pass",
+      "finish": "stop",
+      "seconds": 0.84,
+      "prompt_tokens": 377,
+      "tokens": 1
+     },
+     {
+      "text": "pass",
+      "finish": "stop",
+      "seconds": 0.79,
+      "prompt_tokens": 375,
+      "tokens": 1
+     },
+     {
+      "text": "pass",
+      "finish": "stop",
+      "seconds": 0.9,
+      "prompt_tokens": 369,
+      "tokens": 1
+     },
+     {
+      "text": "pass.",
+      "finish": "stop",
+      "seconds": 1.02,
+      "prompt_tokens": 384,
+      "tokens": 2
+     },
+     {
+      "text": "pass",
+      "finish": "stop",
+      "seconds": 0.75,
+      "prompt_tokens": 372,
+      "tokens": 1
+     },
+     {
+      "text": "pass. All facts are included in the reply.",
+      "finish": "stop",
+      "seconds": 2.39,
+      "prompt_tokens": 388,
+      "tokens": 10
+     },
+     {
+      "text": "pass.",
+      "finish": "stop",
+      "seconds": 1.0,
+      "prompt_tokens": 398,
+      "tokens": 2
+     },
+     {
+      "text": "pass.",
+      "finish": "stop",
+      "seconds": 1.0,
+      "prompt_tokens": 413,
+      "tokens": 2
+     },
+     {
+      "text": "pass.",
+      "finish": "stop",
+      "seconds": 0.92,
+      "prompt_tokens": 384,
+      "tokens": 2
+     },
+     {
+      "text": "pass",
+      "finish": "stop",
+      "seconds": 0.72,
+      "prompt_tokens": 376,
+      "tokens": 1
+     },
+     {
+      "text": "pass",
+      "finish": "stop",
+      "seconds": 0.84,
+      "prompt_tokens": 409,
+      "tokens": 1
+     },
+     {
+      "text": "pass. All facts are included in the reply.",
+      "finish": "stop",
+      "seconds": 2.34,
+      "prompt_tokens": 387,
+      "tokens": 10
+     },
+     {
+      "text": "pass",
+      "finish": "stop",
+      "seconds": 0.67,
+      "prompt_tokens": 369,
+      "tokens": 1
+     },
+     {
+      "text": "pass.",
+      "finish": "stop",
+      "seconds": 0.94,
+      "prompt_tokens": 396,
+      "tokens": 2
+     },
+     {
+      "text": "pass",
+      "finish": "stop",
+      "seconds": 0.76,
+      "prompt_tokens": 377,
+      "tokens": 1
+     },
+     {
+      "text": "pass",
+      "finish": "stop",
+      "seconds": 0.65,
+      "prompt_tokens": 376,
+      "tokens": 1
+     },
+     {
+      "text": "pass",
+      "finish": "stop",
+      "seconds": 0.98,
+      "prompt_tokens": 438,
+      "tokens": 1
+     },
+     {
+      "text": "pass. All facts are included in the reply.",
+      "finish": "stop",
+      "seconds": 2.33,
+      "prompt_tokens": 390,
+      "tokens": 10
+     },
+     {
+      "text": "pass.",
+      "finish": "stop",
+      "seconds": 0.94,
+      "prompt_tokens": 393,
+      "tokens": 2
+     },
+     {
+      "text": "pass",
+      "finish": "stop",
+      "seconds": 0.62,
+      "prompt_tokens": 374,
+      "tokens": 1
+     },
+     {
+      "text": "pass.",
+      "finish": "stop",
+      "seconds": 0.92,
+      "prompt_tokens": 394,
+      "tokens": 2
+     },
+     {
+      "text": "pass. Everything it says about the bank, its cards, and its app is in the facts.",
+      "finish": "stop",
+      "seconds": 3.99,
+      "prompt_tokens": 386,
+      "tokens": 20
+     },
+     {
+      "text": "pass",
+      "finish": "stop",
+      "seconds": 0.67,
+      "prompt_tokens": 378,
+      "tokens": 1
+     },
+     {
+      "text": "pass. All facts are included in the reply.",
+      "finish": "stop",
+      "seconds": 2.19,
+      "prompt_tokens": 391,
+      "tokens": 10
+     },
+     {
+      "text": "pass",
+      "finish": "stop",
+      "seconds": 0.6,
+      "prompt_tokens": 369,
+      "tokens": 1
+     },
+     {
+      "text": "pass",
+      "finish": "stop",
+      "seconds": 0.62,
+      "prompt_tokens": 376,
+      "tokens": 1
+     },
+     {
+      "text": "pass.",
+      "finish": "stop",
+      "seconds": 1.43,
+      "prompt_tokens": 396,
+      "tokens": 2
+     },
+     {
+      "text": "pass. All facts are included in the reply.",
+      "finish": "stop",
+      "seconds": 2.81,
+      "prompt_tokens": 388,
+      "tokens": 10
+     },
+     {
+      "text": "pass",
+      "finish": "stop",
+      "seconds": 0.72,
+      "prompt_tokens": 377,
+      "tokens": 1
+     },
+     {
+      "text": "pass",
+      "finish": "stop",
+      "seconds": 0.63,
+      "prompt_tokens": 369,
+      "tokens": 1
+     },
+     {
+      "text": "pass",
+      "finish": "stop",
+      "seconds": 0.62,
+      "prompt_tokens": 367,
+      "tokens": 1
+     },
+     {
+      "text": "pass",
+      "finish": "stop",
+      "seconds": 0.59,
+      "prompt_tokens": 376,
+      "tokens": 1
+     },
+     {
+      "text": "pass",
+      "finish": "stop",
+      "seconds": 0.6,
+      "prompt_tokens": 377,
+      "tokens": 1
+     },
+     {
+      "text": "pass",
+      "finish": "stop",
+      "seconds": 0.58,
+      "prompt_tokens": 371,
+      "tokens": 1
+     },
+     {
+      "text": "pass",
+      "finish": "stop",
+      "seconds": 0.72,
+      "prompt_tokens": 371,
+      "tokens": 1
+     },
+     {
+      "text": "pass. All facts are included in the reply.",
+      "finish": "stop",
+      "seconds": 2.27,
+      "prompt_tokens": 391,
+      "tokens": 10
+     },
+     {
+      "text": "pass. All facts are included in the reply.",
+      "finish": "stop",
+      "seconds": 2.32,
+      "prompt_tokens": 386,
+      "tokens": 10
+     },
+     {
+      "text": "pass. All the facts are included in the reply.",
+      "finish": "stop",
+      "seconds": 2.28,
+      "prompt_tokens": 391,
+      "tokens": 11
+     },
+     {
+      "text": "pass",
+      "finish": "stop",
+      "seconds": 0.66,
+      "prompt_tokens": 384,
+      "tokens": 1
+     },
+     {
+      "text": "pass",
+      "finish": "stop",
+      "seconds": 0.61,
+      "prompt_tokens": 368,
+      "tokens": 1
+     },
+     {
+      "text": "pass",
+      "finish": "stop",
+      "seconds": 0.61,
+      "prompt_tokens": 379,
+      "tokens": 1
+     },
+     {
+      "text": "pass",
+      "finish": "stop",
+      "seconds": 0.64,
+      "prompt_tokens": 373,
+      "tokens": 1
+     },
+     {
+      "text": "pass.",
+      "finish": "stop",
+      "seconds": 1.04,
+      "prompt_tokens": 423,
+      "tokens": 2
+     },
+     {
+      "text": "pass. All facts are included in the reply.",
+      "finish": "stop",
+      "seconds": 2.25,
+      "prompt_tokens": 393,
+      "tokens": 10
+     },
+     {
+      "text": "pass. All facts are included in the reply.",
+      "finish": "stop",
+      "seconds": 2.17,
+      "prompt_tokens": 389,
+      "tokens": 10
+     },
+     {
+      "text": "pass",
+      "finish": "stop",
+      "seconds": 0.72,
+      "prompt_tokens": 413,
+      "tokens": 1
+     },
+     {
+      "text": "pass",
+      "finish": "stop",
+      "seconds": 0.6,
+      "prompt_tokens": 370,
+      "tokens": 1
+     }
+    ]
+   }
+  }
+ },
+ "sampling": {
+  "normal": {
+   "temperature": 0.7,
+   "top_p": 0.8,
+   "top_k": 20
+  },
+  "thinking": {
+   "temperature": 0.6,
+   "top_p": 0.95,
+   "top_k": 20
+  }
+ },
+ "load_seconds": 4.3,
+ "code": "c6645e2-dirty"
+}

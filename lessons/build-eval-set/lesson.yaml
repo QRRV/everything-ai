@@ -1,0 +1,31 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: build-eval-set
+minutes: 30
+title:
+  en: "An eval set and regression tests"
+  nl: "Een eval set en regression tests"
+goal:
+  en: "turn the kinds of mistake that code can see into checks, test those checks against your notes, and run them on two versions of an app to find what a change fixed and what it broke."
+  nl: "de soorten fouten die code kan zien omzetten in checks, die checks testen tegen je notities, en ze op twee versies van een app draaien om te vinden wat een wijziging verbeterde en wat hij brak."
+summary:
+  - en: "An eval set is a fixed list of inputs, each with what you expect, and checks in code that say yes or no about each answer (assertion-based tests): is it valid JSON, is its topic the expected one, is it short enough. You run it after every change."
+    nl: "Een eval set is een vaste lijst inputs, elk met wat je verwacht, en checks in code die over elk antwoord ja of nee zeggen (assertion-based tests): is het geldige JSON, is het onderwerp het verwachte, is het kort genoeg. Je draait hem na elke wijziging."
+  - en: "Test a check against the answers you read first. The course's check for the wrong topic failed exactly the 38 replies the course noted; a check for admitting a mistake by its words also failed 21 replies that admitted nothing, so it stayed out of the eval set."
+    nl: "Test een check eerst tegen de antwoorden die je las. De check van de course voor het verkeerde onderwerp keurde precies de 38 antwoorden af die de course noteerde; een check voor een fout toegeven aan de hand van woorden keurde ook 21 antwoorden af die niets toegaven, dus bleef die uit de eval set."
+  - en: "A regression test compares two versions input by input. Version 2 of the bank's assistant gave 17 of the 20 refunds the right topic instead of 1, and 82 inputs passed every check instead of 78; yet it broke 27 inputs, among them 15 of the 16 questions about a card's arrival that were right. A total can hide what broke: read the regressions."
+    nl: "Een regression test vergelijkt twee versies input voor input. Versie 2 van de assistent van de bank gaf 17 van de 20 terugbetalingen het goede onderwerp in plaats van 1, en 82 inputs kwamen door elke check in plaats van 78; toch brak hij 27 inputs, waaronder 15 van de 16 vragen over de aankomst van een kaart die goed waren. Een totaal kan verbergen wat er brak: lees de regressions."
+can_now:
+  - en: "write a check in code for the topic an answer should have"
+    nl: "een check in code schrijven voor het onderwerp dat een antwoord moet hebben"
+    by: topic_ok
+  - en: "write a check that fails steps that belong to another problem"
+    nl: "een check schrijven die stappen afkeurt die bij een ander probleem horen"
+    by: steps_ok
+  - en: "find the regressions between two versions of an app"
+    nl: "de regressions tussen twee versies van een app vinden"
+    by: regressions
+  - en: "decide about a new version from its regressions, not from a total"
+    nl: "over een nieuwe versie beslissen aan de hand van zijn regressions, niet van een totaal"
+    by: keep-v2

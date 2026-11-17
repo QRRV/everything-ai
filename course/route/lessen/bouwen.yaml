@@ -1022,8 +1022,9 @@ lessons:
   covers: [evaluatie-en-llmops#0]
   requires: [build-structured-output, build-sampling-api]
   introduces: [c:failure-taxonomy, c:evaluation-driven-development]
-  mentions: [c:error-analysis]
-  data: [model-qwen3-0.6b]
+  mentions: [c:error-analysis, c:temperature]
+  uses: [c:json, c:json-mode, c:structured-output, c:system-prompt, c:prompt, c:chat-model, c:message-role, py:def, py:return, py:for, py:if, py:dict, py:list, py:none, py:comparison, py:arithmetic, py:indexing, py:string-literal, q:choice, q:exercise-with-check, q:run-cell]
+  data: [model-qwen3-0.6b, course-production-qwen, banking77-small]
   ladder: [python]
   needs: any
 
@@ -1036,7 +1037,9 @@ lessons:
   covers: [evaluatie-en-llmops#2]
   requires: [build-error-analysis, build-check-ai-code, build-prompt-templates]
   introduces: [c:eval-set, c:assertion-based-test, c:regression-test]
-  data: [model-qwen3-0.6b]
+  mentions: [c:temperature, py:or-operator, py:not-operator]
+  uses: [c:failure-taxonomy, c:evaluation-driven-development, c:unit-test, py:assert, c:prompt-version, c:json, c:system-prompt, c:prompt, c:chat-model, py:def, py:return, py:if, py:none, py:for, py:range, py:len, py:list, py:append, py:dict, py:tuple, py:indexing, py:comparison, py:and-operator, py:string-literal, q:choice, q:exercise-with-check, q:run-cell]
+  data: [model-qwen3-0.6b, course-production-qwen, banking77-small]
   ladder: [python]
   needs: any
 
@@ -1049,7 +1052,9 @@ lessons:
   covers: [evaluatie-en-llmops#1]
   requires: [build-eval-set]
   introduces: [c:llm-as-a-judge, c:rubric]
-  data: [model-qwen3-0.6b]
+  mentions: [c:temperature, py:not-operator]
+  uses: [c:eval-set, c:assertion-based-test, c:failure-taxonomy, c:system-prompt, c:prompt, c:chat-model, py:def, py:return, py:for, py:if, py:none, py:bool, py:range, py:len, py:list, py:indexing, py:comparison, py:arithmetic, py:string-literal, q:choice, q:exercise-with-check, q:run-cell]
+  data: [model-qwen3-0.6b, course-production-qwen, banking77-small]
   ladder: [python]
   needs: any
 

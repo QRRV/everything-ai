@@ -1,0 +1,31 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: build-judges
+minutes: 30
+title:
+  en: "Who grades the answer"
+  nl: "Wie het antwoord beoordeelt"
+goal:
+  en: "let a model grade the answers of an app, read its verdicts in code, and measure it against answers people graded before you trust it."
+  nl: "een model de antwoorden van een app laten beoordelen, zijn oordelen in code lezen, en het meten tegen antwoorden die mensen beoordeelden voordat je het vertrouwt."
+summary:
+  - en: "An answer can be graded by code, by people, or by a model with a rubric: an LLM as a judge. Code sees only what you can write down in advance; people and judges read what an answer means. A rubric says for one criterion what counts as a pass and what as a fail."
+    nl: "Een antwoord kan worden beoordeeld door code, door mensen, of door een model met een rubric: een LLM as a judge. Code ziet alleen wat je van tevoren kunt opschrijven; mensen en judges lezen wat een antwoord betekent. Een rubric zegt voor één criterium wat telt als pass en wat als fail."
+  - en: "A judge is a measurement too: compare its verdicts with people's on answers people graded. Look at two shares, the fails it catches and the good answers it passes; agreement alone hides when one of them is zero."
+    nl: "Een judge is ook een meting: vergelijk zijn oordelen met die van mensen, op antwoorden die mensen beoordeelden. Kijk naar twee delen, de fails die hij vangt en de goede antwoorden die hij goedkeurt; agreement alleen verbergt het als een van de twee nul is."
+  - en: "Qwen3 as a judge of the bank's assistant failed 115 of the 120 replies when asked whether a reply was good, and passed all 120 with a rubric for made up: agreements of 57% and 81%, yet neither told a good reply from a bad one."
+    nl: "Qwen3 als judge van de assistent van de bank keurde 115 van de 120 antwoorden af toen het moest zeggen of een antwoord goed was, en keurde met een rubric voor verzonnen alle 120 goed: een agreement van 57% en 81%, en toch onderscheidde geen van beide een goed antwoord van een fout."
+can_now:
+  - en: "read a verdict from what a judge wrote, wherever it wrote it"
+    nl: "een oordeel lezen uit wat een judge schreef, waar het ook staat"
+    by: verdict
+  - en: "compute how often a judge agrees with people"
+    nl: "berekenen hoe vaak een judge het met mensen eens is"
+    by: agreement
+  - en: "compute the share of people's fails a judge catches"
+    nl: "berekenen welk deel van de fails van mensen een judge vangt"
+    by: caught
+  - en: "tell when a high agreement says little about a judge"
+    nl: "zeggen wanneer een hoge agreement weinig over een judge zegt"
+    by: what-agreement
