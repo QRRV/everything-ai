@@ -452,8 +452,10 @@ lessons:
   module: fairness
   idea: "Independence asks that the decision does not depend on the group: equal yes rates, demographic parity. It is easy to measure and to reach, but it ignores whether the yes was deserved."
   covers: [formele-fairnessdefinities#1]
-  requires: [rai-unawareness-proxies]
+  requires: [rai-unawareness-proxies, ml-confusion-matrix]
   introduces: [c:group-fairness, c:demographic-parity]
+  uses: [c:validation-set, c:direct-discrimination, c:selection-rate, c:four-fifths-rule, c:disparate-impact, c:proxy, c:fairness-through-unawareness, c:logistic-regression, c:probability, c:decision-threshold, c:quantile, c:precision, c:accuracy, c:one-hot, c:train-set, c:test-set, c:feature, c:label, c:model, c:prediction, c:fairness, py:dataframe, py:pandas-select-filter, py:boolean-mask, py:groupby, py:min-max, py:np-quantile, py:np-random-generator, py:sklearn-fit-predict, py:def, py:return, py:list, py:tuple, py:indexing, py:comparison, py:arithmetic, py:round, py:print, py:comment, py:variable, py:underscore-name, py:string-literal, py:float, py:keyword-argument, py:import, py:import-as, q:predict, q:choice, q:exercise-with-check, q:run-cell]
+  mentions: [py:pd-get-dummies]
   data: [uci-adult]
   ladder: [python, numpy]
   needs: any
@@ -465,8 +467,10 @@ lessons:
   module: fairness
   idea: "Separation asks for equal error rates in each group (equalized odds), sufficiency asks that a score means the same in each group (calibration); when the groups' base rates differ, only a perfect model can have both (Kleinberg; Chouldechova), and COMPAS made that visible."
   covers: [formele-fairnessdefinities#1]
-  requires: [rai-demographic-parity, ml-confusion-matrix]
-  introduces: [c:equalized-odds, c:calibration-within-groups]
+  requires: [rai-demographic-parity, ml-confusion-matrix, rai-case-compas-amazon]
+  introduces: [c:equalized-odds, c:calibration-within-groups, c:base-rate]
+  uses: [c:risk-score, c:recall, c:precision, c:true-positive, c:false-positive, c:false-negative, c:true-negative, c:decision-threshold, c:demographic-parity, c:group-fairness, c:proxy, c:selection-rate, c:logistic-regression, c:probability, c:quantile, c:accuracy, c:one-hot, c:train-set, c:test-set, c:feature, c:label, c:model, c:prediction, c:fairness, py:dataframe, py:pandas-select-filter, py:boolean-mask, py:groupby, py:np-quantile, py:sklearn-fit-predict, py:def, py:for, py:dict, py:dict-items, py:list, py:tuple, py:indexing, py:comparison, py:arithmetic, py:round, py:print, py:comment, py:variable, py:underscore-name, py:string-literal, py:float, py:keyword-argument, py:import, py:import-as, q:predict, q:choice, q:exercise-with-check, q:run-cell]
+  mentions: [c:false-positive-rate, py:pd-get-dummies]
   data: [uci-adult]
   ladder: [python, numpy]
   needs: any
@@ -479,7 +483,9 @@ lessons:
   idea: "An audit study sends equal applications that differ only in the group, an outcome test checks whether the people a decision picks are equally often right per group, and selective labels warn that you only see outcomes for the people who got a yes."
   covers: [bias-meten-en-mitigeren#0]
   requires: [rai-equalized-odds-calibration]
-  introduces: [c:audit-study, c:outcome-test]
+  introduces: [c:audit-study, c:outcome-test, c:selective-labels]
+  uses: [c:direct-discrimination, c:precision, c:recall, c:true-positive, c:false-positive, c:base-rate, c:equalized-odds, c:calibration-within-groups, c:demographic-parity, c:decision-threshold, c:proxy, c:fairness-through-unawareness, c:fairness, c:model, c:prediction, c:label, py:dict, py:dict-items, py:for, py:if, py:def, py:comparison, py:arithmetic, py:round, py:print, py:comment, py:variable, py:underscore-name, py:string-literal, py:float, py:int, q:predict, q:choice, q:exercise-with-check, q:run-cell]
+  mentions: [c:false-positive-rate, c:selection-bias, c:hit-rate, c:toxicity]
   data: []
   ladder: [python]
   needs: any

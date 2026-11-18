@@ -1,0 +1,35 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: rai-demographic-parity
+minutes: 25
+title:
+  en: "Equal yes rates"
+  nl: "Evenveel ja per groep"
+goal:
+  en: "measure how far a model or a rule is from giving every group a yes equally often, reach it with a threshold per group, and see what equal yes rates do not show."
+  nl: "meten hoe ver een model of een regel ervan af zit om elke groep even vaak een ja te geven, het bereiken met een threshold per groep, en zien wat evenveel ja per groep niet laat zien."
+summary:
+  - en: "Demographic parity asks that every group gets a yes equally often: the decision does not depend on the group. It is the simplest criterion of group fairness. You measure it with the difference of the highest and lowest yes rate, where 0 means parity, and their ratio, where 1 means parity; a ratio of at least 0.8 relates to the four-fifths rule."
+    nl: "Demographic parity vraagt dat elke groep even vaak een ja krijgt: de beslissing hangt niet af van de groep. Het is het eenvoudigste criterium van group fairness. Je meet het met het verschil tussen het grootste en het kleinste deel met een ja, waarbij 0 parity betekent, en hun verhouding, waarbij 1 parity betekent; een verhouding van minstens 0,8 hangt samen met de 80%-regel."
+  - en: "A threshold per group reaches it whatever the proxies say. On the table UCI Adult, both women and men then get a yes 0.19 of the time, but of the women with a yes 0.43 really earn more than 50,000 dollars, of the men 0.73. Drawing the women by chance also gives equal rates, with a precision of only 0.11."
+    nl: "Een threshold per groep bereikt het, wat de proxies ook zeggen. Op de tabel UCI Adult krijgen vrouwen en mannen dan allebei in 0,19 van de gevallen een ja, maar van de vrouwen met een ja verdient 0,43 echt meer dan 50.000 dollar, van de mannen 0,73. Vrouwen door toeval kiezen geeft ook evenveel ja per groep, met een precision van maar 0,11."
+  - en: "Demographic parity only counts the yes: it cannot tell care from chance, it rules out a perfect model when the outcome differs per group, and parity for a group says nothing about its subgroups. It fits decisions such as inviting applicants to an interview better than predicting risk."
+    nl: "Demographic parity telt alleen de ja's: het kan zorg niet van toeval onderscheiden, het sluit een perfect model uit als de uitkomst per groep verschilt, en parity voor een groep zegt niets over delen van die groep. Het past beter bij beslissingen zoals sollicitanten uitnodigen voor een gesprek dan bij het voorspellen van een risico."
+can_now:
+  - en: "measure how far a rule is from demographic parity, with a difference and a ratio"
+    nl: "meten hoe ver een regel van demographic parity af zit, met een verschil en een verhouding"
+    by: parity
+  - en: "tell why equal yes rates do not show who got the yes"
+    nl: "uitleggen waarom evenveel ja per groep niet laat zien wie de ja kreeg"
+    by: care
+  - en: "say for which decisions equal yes rates fit as a goal"
+    nl: "zeggen bij welke beslissingen evenveel ja per groep past als doel"
+    by: fit
+further_reading:
+  - en: "Barocas, Hardt and Narayanan, *Fairness and Machine Learning* (2023), [chapter *Classification*](https://fairmlbook.org/pdf/classification.pdf): the part on independence, with the company that hires carefully in one group and carelessly in the other"
+    nl: "Barocas, Hardt en Narayanan, *Fairness and Machine Learning* (2023), [hoofdstuk *Classification*](https://fairmlbook.org/pdf/classification.pdf): het deel over independence, met het bedrijf dat in de ene groep zorgvuldig aanneemt en in de andere slordig (in het Engels)"
+  - en: "Moritz Hardt, Eric Price and Nathan Srebro (2016), [*Equality of Opportunity in Supervised Learning*](https://arxiv.org/pdf/1610.02413): demographic parity against other criteria on 301,536 credit scores"
+    nl: "Moritz Hardt, Eric Price en Nathan Srebro (2016), [*Equality of Opportunity in Supervised Learning*](https://arxiv.org/pdf/1610.02413): demographic parity tegenover andere criteria op 301.536 kredietscores (in het Engels)"
+  - en: "Fairlearn, [*Common fairness metrics*](https://fairlearn.org/main/user_guide/assessment/common_fairness_metrics.html): the demographic parity difference and ratio, and when they fit"
+    nl: "Fairlearn, [*Common fairness metrics*](https://fairlearn.org/main/user_guide/assessment/common_fairness_metrics.html): het demographic parity difference en de ratio, en wanneer ze passen (in het Engels)"

@@ -147,7 +147,7 @@ def _share_picture(seen) -> str:
                     xticks=[0, 0.25, 0.5, 0.75, 1], xtick_labels=["0", "0.25", "0.5", "0.75", "1"])
     for i, k in enumerate(keys):
         y = top - 0.6 - 1.2 * (i + 1)
-        p.text(0.005, y + 0.72, k + ": " + num(value[k]), "ink", anchor="start")   # Panel.text escapes it
+        p.text(0.005, y + 0.72, k + ": " + num(value[k]), "ink", anchor="start", halo=True)   # Panel.text escapes it
         p.rect(0, y + 0.15, value[k], y + 0.45, role="data", solid=True)
     p.line([men, men], [0, top], role="ink-3", width=1, dashed=True)
     p.text(min(men + 0.01, 0.99), top - 0.3, w["all"].format(men=num(men)), "ink-3", anchor="start", halo=True)

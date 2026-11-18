@@ -1,0 +1,39 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: rai-discrimination-tests
+minutes: 30
+title:
+  en: "Testing for discrimination"
+  nl: "Testen op discriminatie"
+goal:
+  en: "find out from outside whether decisions treat groups differently: with equal applications that differ only in the group, and with the outcomes of the people who got a yes, and know where each test fails."
+  nl: "van buitenaf uitzoeken of beslissingen groepen verschillend behandelen: met gelijke sollicitaties die alleen in de groep verschillen, en met de uitkomsten van de mensen die een ja kregen, en weten waar elke test tekortschiet."
+summary:
+  - en: "An audit study sends applications that are the same except for a protected attribute, such as the name on a CV. Bertrand and Mullainathan sent close to 5,000 CVs: White names got a call back 9.65 percent of the time, African-American names 6.45 percent. In the region of The Hague, the SCP found a chance of success of 34 percent for native Dutch names against 23 percent for Hindustani and 19 percent for Moroccan names. Such a test shows whether the attribute itself makes the difference; a model without the column passes it trivially, and can still discriminate through proxies."
+    nl: "Een praktijktest stuurt sollicitaties die gelijk zijn op een protected attribute na, zoals de naam op een cv. Bertrand en Mullainathan stuurden bijna 5000 cv's: witte namen werden in 9,65 procent van de gevallen teruggebeld, Afro-Amerikaanse namen in 6,45 procent. In de regio Den Haag vond het SCP een kans op succes van 34 procent voor autochtoon Nederlandse namen tegen 23 procent voor Hindoestaanse en 19 procent voor Marokkaanse namen. Zo'n test laat zien of het attribute zelf het verschil maakt; een model zonder de kolom doorstaat hem zonder moeite, en kan toch discrimineren via proxies."
+  - en: "An outcome test compares per group the success rate of the decisions, the precision: of the people with a yes, the share for whom it turned out right. A lower rate points to a lower bar. But with one bar for everyone, the rates can still differ when in one group the people above the bar sit further above it, and a lower bar may hide behind a higher rate: infra-marginality."
+    nl: "Een outcome test vergelijkt per groep het succespercentage van de beslissingen, de precision: van de mensen met een ja, het deel bij wie die ja goed uitpakte. Een lager percentage wijst op een lagere lat. Maar bij één lat voor iedereen kunnen de percentages toch verschillen als de mensen boven de lat in de ene groep er verder boven zitten, en een lagere lat kan zich verbergen achter een hoger percentage: infra-marginality."
+  - en: "You only see the outcome of the people who got a yes: whether a loan is paid back only for the people who got one. So from past decisions you can measure the precision per group, but not the recall or the false positive rate: the selective labels problem."
+    nl: "Je ziet alleen de uitkomst van de mensen die een ja kregen: of een lening wordt terugbetaald alleen bij wie er een kreeg. Uit eerdere beslissingen kun je dus de precision per groep meten, maar niet de recall of de false positive rate: het selective labels problem."
+can_now:
+  - en: "work out from a correspondence study how many times as often one group gets a yes"
+    nl: "uit een correspondentietest uitrekenen hoeveel keer zo vaak de ene groep een ja krijgt"
+    by: ratio
+  - en: "compute the hit rate per group with one bar for everyone, and see why the outcome test can then still find a difference"
+    nl: "de hit rate per groep uitrekenen bij één lat voor iedereen, en zien waarom de outcome test dan toch een verschil kan vinden"
+    by: hits
+  - en: "tell which numbers you can measure when you only see the outcomes of the people who got a yes"
+    nl: "zeggen welke getallen je kunt meten als je alleen de uitkomsten ziet van de mensen die een ja kregen"
+    by: labels
+further_reading:
+  - en: "Barocas, Hardt and Narayanan, *Fairness and Machine Learning* (2023), [chapter *Testing discrimination in practice*](https://fairmlbook.org/pdf/testing.pdf): audit studies, the outcome test, infra-marginality and selective labels"
+    nl: "Barocas, Hardt en Narayanan, *Fairness and Machine Learning* (2023), [hoofdstuk *Testing discrimination in practice*](https://fairmlbook.org/pdf/testing.pdf): praktijktests, de outcome test, infra-marginality en selective labels (in het Engels)"
+  - en: "Marianne Bertrand and Sendhil Mullainathan (2003), [*Are Emily and Greg More Employable Than Lakisha and Jamal?*](https://www.nber.org/system/files/working_papers/w9873/w9873.pdf): the correspondence study with close to 5,000 CVs, as a working paper; its numbers, 10.08 and 6.70 percent, differ a little from those of the published 2004 version that this lesson uses"
+    nl: "Marianne Bertrand en Sendhil Mullainathan (2003), [*Are Emily and Greg More Employable Than Lakisha and Jamal?*](https://www.nber.org/system/files/working_papers/w9873/w9873.pdf): de correspondentietest met bijna 5000 cv's, als working paper, met iets andere getallen (10,08 en 6,70 procent) dan de gepubliceerde versie uit 2004 die deze les gebruikt (in het Engels)"
+  - en: "SCP (2015), [*Foreigners need not apply*](https://english.scp.nl/site/binaries/site-content/collections/documents/2015/06/17/foreigners-need-not-apply/SummaryForeigners_need_not_apply.pdf): a summary of the correspondence study in the region of The Hague"
+    nl: "SCP (2015), [*Foreigners need not apply*](https://english.scp.nl/site/binaries/site-content/collections/documents/2015/06/17/foreigners-need-not-apply/SummaryForeigners_need_not_apply.pdf): een samenvatting van de correspondentietest in de regio Den Haag, van het rapport *Op afkomst afgewezen* (in het Engels)"
+  - en: "Camelia Simoiu, Sam Corbett-Davies and Sharad Goel (2017), [*The Problem of Infra-marginality in Outcome Tests for Discrimination*](https://arxiv.org/pdf/1607.05376): why equal bars can give unequal hit rates, and a test that estimates the bars"
+    nl: "Camelia Simoiu, Sam Corbett-Davies en Sharad Goel (2017), [*The Problem of Infra-marginality in Outcome Tests for Discrimination*](https://arxiv.org/pdf/1607.05376): waarom een gelijke lat ongelijke hit rates kan geven, en een test die de lat schat (in het Engels)"
+  - en: "Himabindu Lakkaraju and colleagues (2017), [*The Selective Labels Problem*](https://cs.stanford.edu/~jure/pubs/contraction-kdd17.pdf): judging predictions when you only see the outcomes of the people who got a yes"
+    nl: "Himabindu Lakkaraju en anderen (2017), [*The Selective Labels Problem*](https://cs.stanford.edu/~jure/pubs/contraction-kdd17.pdf): voorspellingen beoordelen als je alleen de uitkomsten ziet van de mensen die een ja kregen (in het Engels)"

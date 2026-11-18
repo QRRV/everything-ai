@@ -1,0 +1,37 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: rai-equalized-odds-calibration
+minutes: 30
+title:
+  en: "Equal errors or equal meaning"
+  nl: "Gelijke fouten of gelijke betekenis"
+goal:
+  en: "measure per group whether a model's errors are equal and whether its scores mean the same, and see why both cannot hold when the groups' base rates differ."
+  nl: "per groep meten of de fouten van een model gelijk zijn en of de scores hetzelfde betekenen, en zien waarom dat niet allebei kan als de base rates van de groepen verschillen."
+summary:
+  - en: "Equalized odds asks that every group has the same true positive rate, the recall, and the same false positive rate: the errors are spread evenly. Equal opportunity only asks for the same true positive rate. Calibration within groups asks that a score means the same in every group: of the people with a probability of about 0.7, about 70 percent are positive; for a yes or a no, at least the precision is the same."
+    nl: "Equalized odds vraagt dat elke groep dezelfde true positive rate heeft, de recall, en dezelfde false positive rate: de fouten zijn gelijk verdeeld. Equal opportunity vraagt alleen dezelfde true positive rate. Calibration within groups vraagt dat een score in elke groep hetzelfde betekent: van de mensen met een kans van ongeveer 0,7 is ongeveer 70 procent positief; bij een ja of nee is in elk geval de precision gelijk."
+  - en: "From a group's base rate, precision and recall, its false positive rate follows. So when the base rates differ and the model makes mistakes, equal errors and equal meaning cannot both hold, as Kleinberg and colleagues and Chouldechova proved. COMPAS made it visible: ProPublica found false positive rates of 0.45 and 0.23, Northpointe a score that meant the same in both groups."
+    nl: "Uit de base rate, de precision en de recall van een groep volgt de false positive rate. Als de base rates verschillen en het model fouten maakt, kunnen gelijke fouten en gelijke betekenis dus niet allebei, zoals Kleinberg en anderen en Chouldechova bewezen. COMPAS liet het zien: ProPublica vond false positive rates van 0,45 en 0,23, Northpointe een score die in beide groepen hetzelfde betekende."
+  - en: "On the table UCI Adult, the probabilities of the model without sex mean about the same for women and men, with a precision of 0.67 and 0.69, but the model finds fewer of the women who earn more: a recall of 0.44 against 0.57. A lower threshold for women makes the recall equal, and their precision drops to 0.59."
+    nl: "Op de tabel UCI Adult betekenen de kansen van het model zonder sex ongeveer hetzelfde voor vrouwen en mannen, met een precision van 0,67 en 0,69, maar het model vindt minder van de vrouwen die meer verdienen: een recall van 0,44 tegen 0,57. Een lagere threshold voor vrouwen maakt de recall gelijk, en hun precision zakt naar 0,59."
+can_now:
+  - en: "measure the true positive rate and the false positive rate of a rule per group"
+    nl: "de true positive rate en de false positive rate van een regel per groep meten"
+    by: errors
+  - en: "work out why the same precision and recall force different false positive rates when base rates differ"
+    nl: "uitrekenen waarom dezelfde precision en recall verschillende false positive rates afdwingen als de base rates verschillen"
+    by: clash
+  - en: "tell whether a claim about fairness compares yes rates, errors or the meaning of a score"
+    nl: "zeggen of een bewering over fairness de ja's, de fouten of de betekenis van een score vergelijkt"
+    by: which
+further_reading:
+  - en: "Barocas, Hardt and Narayanan, *Fairness and Machine Learning* (2023), [chapter *Classification*](https://fairmlbook.org/pdf/classification.pdf): the parts on separation and sufficiency, and why they cannot both hold"
+    nl: "Barocas, Hardt en Narayanan, *Fairness and Machine Learning* (2023), [hoofdstuk *Classification*](https://fairmlbook.org/pdf/classification.pdf): de delen over separation en sufficiency, en waarom ze niet allebei kunnen gelden (in het Engels)"
+  - en: "Moritz Hardt, Eric Price and Nathan Srebro (2016), [*Equality of Opportunity in Supervised Learning*](https://arxiv.org/pdf/1610.02413): equalized odds and equal opportunity, tried out on credit scores"
+    nl: "Moritz Hardt, Eric Price en Nathan Srebro (2016), [*Equality of Opportunity in Supervised Learning*](https://arxiv.org/pdf/1610.02413): equalized odds en equal opportunity, uitgeprobeerd op kredietscores (in het Engels)"
+  - en: "Jon Kleinberg, Sendhil Mullainathan and Manish Raghavan (2016), [*Inherent Trade-Offs in the Fair Determination of Risk Scores*](https://arxiv.org/pdf/1609.05807): three conditions that only a perfect model or equal base rates can meet together"
+    nl: "Jon Kleinberg, Sendhil Mullainathan en Manish Raghavan (2016), [*Inherent Trade-Offs in the Fair Determination of Risk Scores*](https://arxiv.org/pdf/1609.05807): drie voorwaarden waar alleen een perfect model of gelijke base rates samen aan kunnen voldoen (in het Engels)"
+  - en: "Alexandra Chouldechova (2017), [*Fair prediction with disparate impact*](https://arxiv.org/pdf/1703.00056): from precision and recall to the false positive rate, on ProPublica's data about COMPAS"
+    nl: "Alexandra Chouldechova (2017), [*Fair prediction with disparate impact*](https://arxiv.org/pdf/1703.00056): van precision en recall naar de false positive rate, op de data van ProPublica over COMPAS (in het Engels)"
