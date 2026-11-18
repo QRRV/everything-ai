@@ -1,0 +1,37 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: rai-discrimination-law
+minutes: 25
+title:
+  en: "Direct and indirect discrimination"
+  nl: "Directe en indirecte discriminatie"
+goal:
+  en: "tell direct from indirect discrimination, and test with three questions whether a neutral rule that hits one group harder is allowed, as Dutch law does."
+  nl: "directe en indirecte discriminatie uit elkaar houden, en met drie vragen toetsen of een neutrale regel die een groep harder raakt mag, zoals de Nederlandse wet dat doet."
+summary:
+  - en: "Direct discrimination is treating someone worse than others in a comparable situation because of a protected ground, such as race, religion or sex. Indirect discrimination is a rule that looks neutral but hits people with such a ground particularly hard. The Dutch Equal Treatment Act (AWGB) forbids both, in work, services and education among other places."
+    nl: "Directe discriminatie is iemand slechter behandelen dan anderen in een vergelijkbare situatie vanwege een discriminatiegrond, zoals ras, godsdienst of geslacht. Indirecte discriminatie is een regel die neutraal lijkt maar mensen met zo'n grond in het bijzonder treft. De Algemene wet gelijke behandeling (AWGB) verbiedt allebei, onder meer bij werk, diensten en onderwijs."
+  - en: "Indirect discrimination is allowed only when it is objectively justified: a legitimate aim, and a means that is appropriate and necessary. Direct discrimination has no such general excuse. Whether a person or a computer makes the distinction does not matter: the effect counts."
+    nl: "Indirecte discriminatie mag alleen als die objectief gerechtvaardigd is: een legitiem doel, en een middel dat passend en noodzakelijk is. Directe discriminatie heeft zo'n algemene uitweg niet. Of een mens of een computer het onderscheid maakt, maakt niet uit: het effect telt."
+  - en: "The Netherlands Institute for Human Rights judges complaints for free. Its judgments are not binding and it cannot impose a fine, but in more than 80 percent of the cases where it finds discrimination, measures are taken. In 2024 it found that the Dienst Toeslagen discriminated indirectly when it stopped a rent benefit on a wrong code without checking that code."
+    nl: "Het College voor de Rechten van de Mens oordeelt gratis over klachten. Zijn oordelen zijn niet bindend en het kan geen boete opleggen, maar in ruim 80 procent van de gevallen waarin het discriminatie vaststelt, worden maatregelen genomen. In 2024 vond het dat de Dienst Toeslagen indirect discrimineerde door een huurtoeslag op een foute code stop te zetten zonder die code te controleren."
+can_now:
+  - en: "test a neutral rule with the three questions of objective justification"
+    nl: "een neutrale regel toetsen met de drie vragen van objectieve rechtvaardiging"
+    by: verdict
+  - en: "tell direct discrimination from indirect discrimination"
+    nl: "directe en indirecte discriminatie uit elkaar houden"
+    by: kinds
+  - en: "say what a judgment of the Netherlands Institute for Human Rights does, and what it does not"
+    nl: "zeggen wat een oordeel van het College voor de Rechten van de Mens doet, en wat niet"
+    by: college
+further_reading:
+  - en: "[*Algemene wet gelijke behandeling*](https://wetten.overheid.nl/BWBR0006502/), the text of the law, in Dutch: article 1 defines direct and indirect distinction, article 2 the justification"
+    nl: "[*Algemene wet gelijke behandeling*](https://wetten.overheid.nl/BWBR0006502/), de tekst van de wet: artikel 1 beschrijft direct en indirect onderscheid, artikel 2 de rechtvaardiging"
+  - en: "College voor de Rechten van de Mens (2022), [*Vraag en antwoord over werving- en selectie-algoritmes voor werkgevers*](https://www.mensenrechten.nl/themas/digitalisering/werving-en-selectie/qa-over-hr-algoritmes-voor-werkgevers), in Dutch: the examples of this lesson, and why an employer answers for its software"
+    nl: "College voor de Rechten van de Mens (2022), [*Vraag en antwoord over werving- en selectie-algoritmes voor werkgevers*](https://www.mensenrechten.nl/themas/digitalisering/werving-en-selectie/qa-over-hr-algoritmes-voor-werkgevers): de voorbeelden uit deze les, en waarom een werkgever verantwoordelijk is voor zijn software"
+  - en: "College voor de Rechten van de Mens (2024), [*Oordeel 2024-94*](https://oordelen.mensenrechten.nl/oordeel/2024-94/c1c078f1-7c61-4526-9209-4b04acb050d8), in Dutch: the judgment on code 98, with the three questions worked out"
+    nl: "College voor de Rechten van de Mens (2024), [*Oordeel 2024-94*](https://oordelen.mensenrechten.nl/oordeel/2024-94/c1c078f1-7c61-4526-9209-4b04acb050d8): het oordeel over code 98, met de drie vragen uitgewerkt"
+  - en: "College voor de Rechten van de Mens (2023), [*Oordeel 2023-111*](https://oordelen.mensenrechten.nl/oordeel/2023-111), in Dutch: the final judgment on the VU and its exam software"
+    nl: "College voor de Rechten van de Mens (2023), [*Oordeel 2023-111*](https://oordelen.mensenrechten.nl/oordeel/2023-111): het eindoordeel over de VU en haar tentamensoftware"

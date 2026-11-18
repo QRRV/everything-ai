@@ -1,0 +1,35 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: rai-equal-opportunity-views
+minutes: 25
+title:
+  en: "What is an equal chance?"
+  nl: "Wat is een gelijke kans?"
+goal:
+  en: "tell apart the narrow, middle and broad view of equal opportunity, and see that each one leads to a different test of who gets in."
+  nl: "de smalle, middelste en brede opvatting van gelijke kansen uit elkaar houden, en zien dat elk tot een andere test leidt van wie er binnenkomt."
+summary:
+  - en: "The narrow view treats people who are alike now in the same way: one bar for everyone, judged on what matters for the task. The broad view, Rawls's fair equality of opportunity, asks that people with the same talent and willingness get the same prospects, whatever family they were born into. The middle view sometimes treats people who now look different the same, when the difference comes from past injustice or bad luck."
+    nl: "De smalle opvatting behandelt mensen die nu gelijk zijn op dezelfde manier: één lat voor iedereen, beoordeeld op wat telt voor de taak. De brede opvatting, *fair equality of opportunity* van Rawls, vraagt dat mensen met hetzelfde talent en dezelfde inzet dezelfde vooruitzichten krijgen, in welk gezin ze ook geboren zijn. De middenopvatting behandelt mensen die nu verschillen soms toch hetzelfde, als het verschil komt door vroeger onrecht of pech."
+  - en: "Roemer splits what shapes an outcome into circumstances, which a person cannot help, and effort, which they are responsible for, and compares people by their rank among those with the same circumstances. Texas does something like it: the top 10 percent of every high school class gets a place at a state university."
+    nl: "Roemer splitst wat een uitkomst bepaalt in omstandigheden, waar iemand niets aan kan doen, en inzet, waar iemand zelf verantwoordelijk voor is, en vergelijkt mensen op hun plaats tussen wie dezelfde omstandigheden heeft. Texas doet iets vergelijkbaars: de beste 10 procent van elke eindexamenklas krijgt een plek aan een staatsuniversiteit."
+  - en: "Each view gives a different test. One bar for everyone let four students of one school in and one of the other; the best two of each school let in a 77 and not an 85. Moral ideas never map exactly to technical criteria."
+    nl: "Elke opvatting geeft een andere test. Eén lat voor iedereen liet vier leerlingen van de ene school binnen en één van de andere; de beste twee van elke school lieten een 77 binnen en een 85 niet. Morele ideeën passen nooit precies op technische maatstaven."
+can_now:
+  - en: "work out who gets in when the best of each group are taken, instead of one bar for everyone"
+    nl: "uitrekenen wie er binnenkomt als de besten van elke groep worden genomen, in plaats van één lat voor iedereen"
+    by: admitted
+  - en: "tell the narrow, middle and broad view of an equal chance apart"
+    nl: "de smalle, middelste en brede opvatting van een gelijke kans uit elkaar houden"
+    by: views
+  - en: "compare people by their rank within their own group, as Roemer does"
+    nl: "mensen vergelijken op hun plaats binnen hun eigen groep, zoals Roemer doet"
+    by: rank
+further_reading:
+  - en: "Gideon Elford (2023), [*Equality of Opportunity*](https://plato.stanford.edu/entries/equal-opportunity/), Stanford Encyclopedia of Philosophy: formal and substantive equality of opportunity, Rawls, and luck egalitarianism"
+    nl: "Gideon Elford (2023), [*Equality of Opportunity*](https://plato.stanford.edu/entries/equal-opportunity/), Stanford Encyclopedia of Philosophy: formele en inhoudelijke gelijkheid van kansen, Rawls, en het geluksegalitarisme"
+  - en: "Barocas, Hardt and Narayanan (2023), [*Relative notions of fairness*](https://fairmlbook.org/relative.html), chapter 4 of *Fairness and Machine Learning*: the narrow, middle and broad view"
+    nl: "Barocas, Hardt en Narayanan (2023), [*Relative notions of fairness*](https://fairmlbook.org/relative.html), hoofdstuk 4 van *Fairness and Machine Learning*: de smalle, middelste en brede opvatting"
+  - en: "Heidari, Loi, Gummadi and Krause (2019), [*A Moral Framework for Understanding Fair ML through Economic Models of Equality of Opportunity*](https://arxiv.org/abs/1809.03400v2): which fairness tests fit which view, with the example of Alice, Bob, Anna and Ben"
+    nl: "Heidari, Loi, Gummadi en Krause (2019), [*A Moral Framework for Understanding Fair ML through Economic Models of Equality of Opportunity*](https://arxiv.org/abs/1809.03400v2): welke fairnesstests bij welke opvatting passen, met het voorbeeld van Alice, Bob, Anna en Ben"

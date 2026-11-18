@@ -1,0 +1,35 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: rai-why-discrimination-is-wrong
+minutes: 25
+title:
+  en: "Why is discrimination wrong?"
+  nl: "Waarom is discriminatie fout?"
+goal:
+  en: "name the main answers to why discrimination is wrong, and explain why judging a person by the average of their group can be wrong even when the average is correct."
+  nl: "de belangrijkste antwoorden op de vraag waarom discriminatie fout is noemen, en uitleggen waarom iemand beoordelen naar het gemiddelde van de eigen groep fout kan zijn, ook als het gemiddelde klopt."
+summary:
+  - en: "Philosophers give several answers. Lippert-Rasmussen: discrimination is wrong because of the harm it does, more so to the worse off. Hellman: it is wrong when it demeans, expressing that a group has a lower status, by someone with power. Eidelson: it is wrong when it fails to respect people as equals who shape their own lives."
+    nl: "Filosofen geven verschillende antwoorden. Lippert-Rasmussen: discriminatie is fout door de schade die ze doet, zeker aan wie slechter af is. Hellman: ze is fout als ze vernedert, als iemand met macht uitdrukt dat een groep een lagere status heeft. Eidelson: ze is fout als ze mensen niet respecteert als gelijken die hun eigen leven vormgeven."
+  - en: "Statistical discrimination is judging a person by what is true on average for their group, without any dislike. In Phelps's model the estimate is (1 − trust) × group mean + trust × score: two people with the same score end up apart, more so when the test is trusted less."
+    nl: "Statistische discriminatie is iemand beoordelen naar wat gemiddeld geldt voor de eigen groep, zonder enige afkeer. In het model van Phelps is de schatting (1 − trust) × groepsgemiddelde + trust × score: twee mensen met dezelfde score komen uit elkaar te liggen, sterker als de test minder wordt vertrouwd."
+  - en: "Many philosophers find it wrong even when the average is correct: the group is a needlessly coarse guess, the difference between groups may come from past injustice, and it ignores what the person made of their own life. A model that learns from data about groups can do the same."
+    nl: "Veel filosofen vinden het fout, ook als het gemiddelde klopt: de groep is een onnodig grove gok, het verschil tussen groepen kan uit vroeger onrecht komen, en het negeert wat de persoon van het eigen leven maakte. Een model dat leert van gegevens over groepen kan hetzelfde doen."
+can_now:
+  - en: "work out how far a group average pulls apart two people with the same score"
+    nl: "uitrekenen hoe ver een groepsgemiddelde twee mensen met dezelfde score uit elkaar trekt"
+    by: gap
+  - en: "tell the harm, demeaning and respect answers apart"
+    nl: "de antwoorden over schade, vernedering en respect uit elkaar houden"
+    by: accounts
+  - en: "explain why a correct average does not make statistical discrimination right"
+    nl: "uitleggen waarom een gemiddelde dat klopt statistische discriminatie niet goed maakt"
+    by: average
+further_reading:
+  - en: "Anthony Sangiuliano (2026), [*Discrimination*](https://plato.stanford.edu/entries/discrimination), Stanford Encyclopedia of Philosophy: the answers of this lesson and the objections to them"
+    nl: "Anthony Sangiuliano (2026), [*Discrimination*](https://plato.stanford.edu/entries/discrimination), Stanford Encyclopedia of Philosophy: de antwoorden uit deze les en de tegenwerpingen ertegen"
+  - en: "Barocas, Hardt and Narayanan (2023), [*Relative notions of fairness*](https://fairmlbook.org/relative.html), chapter 4 of *Fairness and Machine Learning*: six answers to why discrimination is wrong"
+    nl: "Barocas, Hardt en Narayanan (2023), [*Relative notions of fairness*](https://fairmlbook.org/relative.html), hoofdstuk 4 van *Fairness and Machine Learning*: zes antwoorden op de vraag waarom discriminatie fout is"
+  - en: "Fang and Moro (2010), [*Theories of Statistical Discrimination and Affirmative Action: A Survey*](https://www.nber.org/papers/w15860.pdf), NBER: the models of Phelps and Arrow"
+    nl: "Fang en Moro (2010), [*Theories of Statistical Discrimination and Affirmative Action: A Survey*](https://www.nber.org/papers/w15860.pdf), NBER: de modellen van Phelps en Arrow"

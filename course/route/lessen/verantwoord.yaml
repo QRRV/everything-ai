@@ -338,6 +338,7 @@ lessons:
   covers: [discriminatie-begrippen-en-recht#0, discriminatie-begrippen-en-recht#1]
   requires: [rai-two-kinds-of-harm]
   introduces: [c:direct-discrimination, c:indirect-discrimination, c:equal-treatment-act, c:netherlands-institute-for-human-rights]
+  uses: [c:allocative-harm, c:representational-harm, c:fairness, c:harm, c:model, c:accuracy, py:dict, py:if, py:comparison, py:string-literal, py:variable, py:print, py:comment, py:underscore-name, q:predict, q:choice, q:exercise-with-check, q:run-cell]
   data: []
   ladder: [python]
   needs: any
@@ -351,6 +352,7 @@ lessons:
   covers: [discriminatie-begrippen-en-recht#2]
   requires: [rai-discrimination-law, data-groupby]
   introduces: [c:selection-rate, c:disparate-impact, c:four-fifths-rule]
+  uses: [c:indirect-discrimination, c:direct-discrimination, c:netherlands-institute-for-human-rights, c:allocative-harm, c:fairness, c:label, c:model, c:csv, py:dataframe, py:pandas-select-filter, py:boolean-mask, py:groupby, py:min-max, py:arithmetic, py:comparison, py:round, py:import, py:import-as, py:print, py:comment, py:variable, py:underscore-name, py:string-literal, q:predict, q:choice, q:exercise-with-check, q:run-cell]
   data: [uci-adult]
   ladder: [python, numpy]
   needs: any
@@ -364,6 +366,7 @@ lessons:
   covers: [discriminatie-begrippen-en-recht#3, discriminatie-begrippen-en-recht#5]
   requires: [rai-discrimination-law, rai-ethical-theories]
   introduces: [c:statistical-discrimination]
+  uses: [c:direct-discrimination, c:indirect-discrimination, c:consequentialism, c:deontology, c:harm, c:fairness, c:model, c:mean, py:dict, py:for, py:arithmetic, py:float, py:print, py:comment, py:variable, py:underscore-name, py:string-literal, q:predict, q:choice, q:exercise-with-check, q:run-cell]
   data: []
   ladder: [python]
   needs: any
@@ -377,6 +380,7 @@ lessons:
   covers: [discriminatie-begrippen-en-recht#4]
   requires: [rai-why-discrimination-is-wrong]
   introduces: [c:equality-of-opportunity]
+  uses: [c:statistical-discrimination, c:direct-discrimination, c:fairness, c:model, py:dict, py:list, py:slicing, py:for, py:if, py:comparison, py:append, py:print, py:comment, py:variable, py:underscore-name, py:string-literal, py:int, q:predict, q:choice, q:exercise-with-check, q:run-cell]
   data: []
   ladder: [python]
   needs: any
@@ -390,6 +394,8 @@ lessons:
   covers: [discriminatie-begrippen-en-recht#6]
   requires: [rai-discrimination-law]
   introduces: [c:reasonable-accommodation]
+  uses: [c:indirect-discrimination, c:direct-discrimination, c:netherlands-institute-for-human-rights, c:fairness, c:model, py:list, py:dict, py:for, py:if, py:comparison, py:append, py:arithmetic, py:print, py:comment, py:variable, py:underscore-name, py:string-literal, py:int, q:predict, q:choice, q:exercise-with-check, q:run-cell]
+  mentions: [c:four-fifths-rule]
   data: []
   ladder: [python]
   needs: any

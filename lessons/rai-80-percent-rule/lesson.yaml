@@ -1,0 +1,37 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: rai-80-percent-rule
+minutes: 25
+title:
+  en: "The four-fifths rule"
+  nl: "De 80%-regel"
+goal:
+  en: "compute the selection rate of each group and the impact ratios, and know what the four-fifths rule does and does not tell you."
+  nl: "het selectiepercentage van elke groep en de verhoudingen uitrekenen, en weten wat de 80%-regel wel en niet zegt."
+summary:
+  - en: "The selection rate of a group is the share that gets a yes. The four-fifths rule of the US guidelines of 1978 divides each rate by the highest: a ratio below 0.8 is a signal of adverse impact. On the UCI Adult table of 1994, the labels give women a yes 0.109 of the time and men 0.304, a ratio of 0.36."
+    nl: "Het selectiepercentage van een groep is het aandeel dat een ja krijgt. De 80%-regel uit de Amerikaanse richtlijnen van 1978 deelt elk percentage door het hoogste: een verhouding onder 0,8 is een signaal van adverse impact. In de tabel UCI Adult uit 1994 geven de labels vrouwen in 0,109 van de gevallen een ja en mannen in 0,304, een verhouding van 0,36."
+  - en: "A rule that names no sex can still fail the rule: yes for at least 45 working hours a week gives women a ratio of about 0.43. That is a signal of disparate impact, the US idea from Griggs v. Duke Power (1971); in Europe it is called indirect discrimination."
+    nl: "Een regel die geen geslacht noemt, kan toch zakken: ja voor minstens 45 werkuren per week geeft vrouwen een verhouding van ongeveer 0,43. Dat is een signaal van disparate impact, het Amerikaanse idee uit Griggs v. Duke Power (1971); in Europa heet het indirecte discriminatie."
+  - en: "The rule is a rule of thumb, not a legal definition: with small numbers it says little, and a smaller difference can still count. EU law has no fixed number; the Court of Justice asks whether a considerably smaller percentage of a group can meet a rule."
+    nl: "De regel is een vuistregel, geen juridische definitie: bij kleine aantallen zegt hij weinig, en een kleiner verschil kan toch tellen. Het Europese recht heeft geen vast getal; het Hof van Justitie vraagt of een aanzienlijk kleiner percentage van een groep aan een regel kan voldoen."
+can_now:
+  - en: "compute selection rates and impact ratios per group with groupby"
+    nl: "selectiepercentages en verhoudingen per groep uitrekenen met groupby"
+    by: ratios
+  - en: "say which groups the four-fifths rule flags"
+    nl: "zeggen welke groepen de 80%-regel aangeeft"
+    by: flag
+  - en: "explain why passing the rule does not show that a process is fair"
+    nl: "uitleggen waarom slagen voor de regel niet laat zien dat een proces fair is"
+    by: meaning
+further_reading:
+  - en: "[29 CFR 1607.4](https://www.law.cornell.edu/cfr/text/29/1607.4), the text of the rule in the US Uniform Guidelines on Employee Selection Procedures"
+    nl: "[29 CFR 1607.4](https://www.law.cornell.edu/cfr/text/29/1607.4), de tekst van de regel in de Amerikaanse Uniform Guidelines on Employee Selection Procedures"
+  - en: "EEOC and others (1979), [*Questions and Answers to Clarify and Provide a Common Interpretation of the Uniform Guidelines*](https://eeoc.gov/laws/guidance/questions-and-answers-clarify-and-provide-common-interpretation-uniform-guidelines): the examples of this lesson, numbers 11 to 24"
+    nl: "EEOC en anderen (1979), [*Questions and Answers to Clarify and Provide a Common Interpretation of the Uniform Guidelines*](https://eeoc.gov/laws/guidance/questions-and-answers-clarify-and-provide-common-interpretation-uniform-guidelines): de voorbeelden uit deze les, nummers 11 tot en met 24"
+  - en: "Wachter, Mittelstadt and Russell (2020), [*Why Fairness Cannot Be Automated*](https://arxiv.org/abs/2005.05906): how EU law differs from the US rule of thumb"
+    nl: "Wachter, Mittelstadt en Russell (2020), [*Why Fairness Cannot Be Automated*](https://arxiv.org/abs/2005.05906): hoe het Europese recht verschilt van de Amerikaanse vuistregel"
+  - en: "Ding, Hardt, Miller and Schmidt (2021), [*Retiring Adult: New Datasets for Fair Machine Learning*](https://arxiv.org/abs/2108.04884v3): what is wrong with the UCI Adult table, and newer tables to use"
+    nl: "Ding, Hardt, Miller en Schmidt (2021), [*Retiring Adult: New Datasets for Fair Machine Learning*](https://arxiv.org/abs/2108.04884v3): wat er mis is met de tabel UCI Adult, en nieuwere tabellen"

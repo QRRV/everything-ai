@@ -1,0 +1,35 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: rai-disability-screen-out
+minutes: 25
+title:
+  en: "Screened out by a filter"
+  nl: "Uitgefilterd door een filter"
+goal:
+  en: "count how many people an automatic filter removes while they can do the job, and say what US and Dutch law ask of an employer toward people with a disability or a chronic illness."
+  nl: "tellen hoeveel mensen een automatisch filter eruit haalt terwijl ze het werk kunnen doen, en zeggen wat de Amerikaanse en de Nederlandse wet van een werkgever vragen tegenover mensen met een handicap of een chronische ziekte."
+summary:
+  - en: "Screen out happens when a disability keeps someone from meeting a selection criterion, or lowers their result, and they lose the job opportunity: a chatbot that rejects long gaps in a CV, a memory game a blind applicant cannot play, software that rates speech. The EEOC warned about it in May 2022; that guidance was removed in January 2025, but the ADA still applies."
+    nl: "Uitfilteren gebeurt als een handicap iemand belet om aan een selectie-eis te voldoen, of het resultaat verlaagt, en die persoon de kans op werk misloopt: een chatbot die lange gaten in een cv afwijst, een geheugenspel dat een blinde sollicitant niet kan spelen, software die spraak beoordeelt. De EEOC waarschuwde ervoor in mei 2022; die handleiding is in januari 2025 weggehaald, maar de ADA geldt nog steeds."
+  - en: "Every disability is different, so a check on group averages does not show that nobody is screened out, and the four-fifths rule does not apply to disability. You count who a rule removes, and ask whether they could do the job, perhaps with an adjustment."
+    nl: "Elke handicap is anders, dus een controle op groepsgemiddelden laat niet zien dat niemand wordt uitgefilterd, en de 80%-regel geldt niet voor handicap. Je telt wie een regel eruit haalt, en vraagt je af of die mensen het werk zouden kunnen doen, misschien met een aanpassing."
+  - en: "Dutch law (WGBH/CZ, 2003) forbids direct and indirect distinction on grounds of disability or chronic illness and asks for effective adjustments as needed, unless they are a disproportionate burden. Under the UN convention, in force in the Netherlands since 14 July 2016, denying a reasonable accommodation is itself discrimination."
+    nl: "De Nederlandse wet (WGBH/CZ, 2003) verbiedt direct en indirect onderscheid op grond van handicap of chronische ziekte en vraagt naar gelang de behoefte doeltreffende aanpassingen, tenzij die een onevenredige belasting vormen. Volgens het VN-verdrag, dat sinds 14 juli 2016 voor Nederland geldt, is het weigeren van een redelijke aanpassing zelf discriminatie."
+can_now:
+  - en: "count how many people a filter removes while they can do the job"
+    nl: "tellen hoeveel mensen een filter eruit haalt terwijl ze het werk kunnen doen"
+    by: wrongly
+  - en: "tell screen out, adjustments and questions about health apart"
+    nl: "uitfilteren, aanpassingen en vragen naar gezondheid uit elkaar houden"
+    by: concerns
+  - en: "say what Dutch law asks when an applicant needs an adjustment"
+    nl: "zeggen wat de Nederlandse wet vraagt als een sollicitant een aanpassing nodig heeft"
+    by: adjust
+further_reading:
+  - en: "EEOC (2022), [*The Americans with Disabilities Act and the Use of Software, Algorithms, and Artificial Intelligence to Assess Job Applicants and Employees*](https://www.naacpldf.org/wp-content/uploads/EEOC-ADA-and-Software-Algorithms-and-AI-to-Assess-Job-Applicants.pdf), an archived copy: the examples of screen out in this lesson"
+    nl: "EEOC (2022), [*The Americans with Disabilities Act and the Use of Software, Algorithms, and Artificial Intelligence to Assess Job Applicants and Employees*](https://www.naacpldf.org/wp-content/uploads/EEOC-ADA-and-Software-Algorithms-and-AI-to-Assess-Job-Applicants.pdf), een bewaarde kopie: de voorbeelden van uitfilteren uit deze les"
+  - en: "[*Wet gelijke behandeling op grond van handicap of chronische ziekte*](https://wetten.overheid.nl/BWBR0014915/), the Dutch law, with the duty to make effective adjustments in article 2 (in Dutch)"
+    nl: "[*Wet gelijke behandeling op grond van handicap of chronische ziekte*](https://wetten.overheid.nl/BWBR0014915/), met de plicht tot doeltreffende aanpassingen"
+  - en: "Netherlands Institute for Human Rights, [*Q&A over HR-algoritmes voor werkgevers*](https://www.mensenrechten.nl/themas/digitalisering/werving-en-selectie/qa-over-hr-algoritmes-voor-werkgevers): accessible tests, games and forms (in Dutch)"
+    nl: "College voor de Rechten van de Mens, [*Q&A over HR-algoritmes voor werkgevers*](https://www.mensenrechten.nl/themas/digitalisering/werving-en-selectie/qa-over-hr-algoritmes-voor-werkgevers): toegankelijke tests, spellen en formulieren"
