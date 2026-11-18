@@ -1,0 +1,40 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: rai-pdp-ice
+minutes: 30
+title:
+  en: "How a prediction moves with a feature"
+  nl: "Hoe een voorspelling meebeweegt met een feature"
+goal:
+  en: "draw how a model's prediction moves when one feature changes, on average and for each person, and see where the average hides something or rests on rows that do not occur."
+  nl: "tekenen hoe de voorspelling van een model meebeweegt als één feature verandert, gemiddeld en per persoon, en zien waar het gemiddelde iets verbergt of rust op rijen die niet voorkomen."
+summary:
+  - en: "A partial dependence plot (Friedman, 2001): give every row the same value for one feature, ask the model, and average; do that for each value on a grid. On UCI Adult a forest's average for age rises from 0.038 at 20 to 0.354 at 50."
+    nl: "Een partial dependence plot (Friedman, 2001): geef elke rij dezelfde waarde voor één feature, vraag het model en neem het gemiddelde; doe dat voor elke waarde op een grid. Op UCI Adult stijgt het gemiddelde van een forest voor leeftijd van 0,038 bij 20 tot 0,354 bij 50."
+  - en: "ICE curves (Goldstein and colleagues, 2015) keep one line per row; the PDP is their average. From age 25 to 45 the lines rise by 0.154 on average for people with education up to 9, and by 0.476 for people with 13 or more."
+    nl: "ICE curves (Goldstein en collega's, 2015) houden één lijn per rij; de PDP is hun gemiddelde. Van 25 tot 45 jaar stijgen de lijnen gemiddeld met 0,154 bij mensen met een opleiding tot 9, en met 0,476 bij mensen met 13 of meer."
+  - en: "A flat average does not mean the model ignores the feature: in the example of Goldstein and colleagues, about half the lines rise with slope +5, the others fall with −5, and the average stays flat."
+    nl: "Een vlak gemiddelde betekent niet dat het model de feature negeert: in het voorbeeld van Goldstein en collega's stijgt ongeveer de helft van de lijnen met helling +5, dalen de andere met −5, en blijft het gemiddelde vlak."
+  - en: "Where features go together, the curve runs through rows that do not occur: at age 17 a quarter of the rows have education 13 or more, which none of the 595 people aged 17 in the table has. And a curve shows the model, not the world."
+    nl: "Waar features samenhangen, loopt de curve door rijen die niet voorkomen: bij 17 jaar heeft een kwart van de rijen een opleiding van 13 of meer, wat geen van de 595 zeventienjarigen in de tabel heeft. En een curve laat het model zien, niet de wereld."
+can_now:
+  - en: "write the ICE curve of one row: what a model says with one feature set to each value of a grid"
+    nl: "de ICE curve van één rij schrijven: wat een model zegt met één feature op elke waarde van een grid"
+    by: ice
+  - en: "compute a partial dependence by averaging over all rows"
+    nl: "een partial dependence uitrekenen door het gemiddelde over alle rijen te nemen"
+    by: average
+  - en: "explain why a flat partial dependence plot does not mean the model ignores a feature"
+    nl: "uitleggen waarom een vlakke partial dependence plot niet betekent dat het model een feature negeert"
+    by: flat
+  - en: "spot where a curve rests on rows that do not occur"
+    nl: "zien waar een curve rust op rijen die niet voorkomen"
+    by: absurd
+further_reading:
+  - en: "Alex Goldstein, Adam Kapelner, Justin Bleich and Emil Pitkin, [*Peeking Inside the Black Box: Visualizing Statistical Learning with Plots of Individual Conditional Expectation*](https://arxiv.org/abs/1309.6392): ICE curves, centered and with their derivatives"
+    nl: "Alex Goldstein, Adam Kapelner, Justin Bleich en Emil Pitkin, [*Peeking Inside the Black Box: Visualizing Statistical Learning with Plots of Individual Conditional Expectation*](https://arxiv.org/abs/1309.6392): ICE curves, gecentreerd en met hun afgeleiden (in het Engels)"
+  - en: "scikit-learn, [*Partial Dependence and Individual Conditional Expectation plots*](https://scikit-learn.org/stable/modules/partial_dependence.html): how `partial_dependence` and `PartialDependenceDisplay` compute and draw both"
+    nl: "scikit-learn, [*Partial Dependence and Individual Conditional Expectation plots*](https://scikit-learn.org/stable/modules/partial_dependence.html): hoe `partial_dependence` en `PartialDependenceDisplay` allebei uitrekenen en tekenen (in het Engels)"
+  - en: "Christoph Molnar (2025), [*Partial Dependence Plot (PDP)*](https://christophm.github.io/interpretable-ml-book/pdp.html), in *Interpretable Machine Learning*: how to read it, and when it misleads"
+    nl: "Christoph Molnar (2025), [*Partial Dependence Plot (PDP)*](https://christophm.github.io/interpretable-ml-book/pdp.html), in *Interpretable Machine Learning*: hoe je het leest, en wanneer het misleidt (in het Engels)"

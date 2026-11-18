@@ -1,0 +1,40 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: rai-permutation-importance
+minutes: 30
+title:
+  en: "Which features matter?"
+  nl: "Welke features doen ertoe?"
+goal:
+  en: "measure how much a model leans on each feature by shuffling one column at a time, and explain why a forest's own importance and leaving a feature out can tell another story."
+  nl: "meten hoeveel een model op elke feature leunt door steeds één kolom door elkaar te husselen, en uitleggen waarom de eigen importance van een forest en een feature weglaten een ander verhaal kunnen vertellen."
+summary:
+  - en: "Permutation importance: shuffle one column of data the model has not seen, and measure how much worse it gets. Breiman (2001) did it for random forests; Fisher, Rudin and Dominici (2019) made it a method for any model, model reliance."
+    nl: "Permutation importance: hussel één kolom door elkaar in data die het model niet heeft gezien, en meet hoeveel slechter het wordt. Breiman (2001) deed het voor random forests; Fisher, Rudin en Dominici (2019) maakten er een methode van voor elk model, model reliance."
+  - en: "A forest's own importance, the mean decrease in impurity, comes free from the training data and favors features with many values. On UCI Adult a forest with scikit-learn's defaults gives a column of random numbers 48.2 percent of it; shuffling that column on the test half costs nothing."
+    nl: "De eigen importance van een forest, de mean decrease in impurity, komt gratis uit de data om op te trainen en bevoordeelt features met veel waarden. Op UCI Adult geeft een forest met de standaardinstellingen van scikit-learn een kolom met willekeurige getallen 48,2 procent ervan; die kolom op de testhelft husselen kost niets."
+  - en: "Measure on people the model has not seen: on the training half, where the forest learned them by heart, shuffling the random numbers costs 20.7 points."
+    nl: "Meet bij mensen die het model niet heeft gezien: op de helft om op te trainen, waar het forest ze uit zijn hoofd heeft geleerd, kost het husselen van de willekeurige getallen 20,7 procentpunt."
+  - en: "Leaving a feature out and fitting again asks what it adds given the others. With education_num twice, leaving one copy out costs 0.1 point, shuffling each copy alone 1.9 and 1.4, and shuffling both together 6.1."
+    nl: "Een feature weglaten en opnieuw trainen vraagt wat die toevoegt naast de andere. Met education_num twee keer kost één kopie weglaten 0,1 procentpunt, elke kopie apart husselen 1,9 en 1,4, en beide samen husselen 6,1."
+can_now:
+  - en: "write permutation importance: how much less often a model is right with one column shuffled"
+    nl: "permutation importance schrijven: hoeveel minder vaak een model goed zit met één kolom door elkaar gehusseld"
+    by: importance
+  - en: "work out a tree's impurity importance from its splits"
+    nl: "de impurity importance van een boom uitrekenen uit zijn splitsingen"
+    by: impurity
+  - en: "say why importance is measured on data the model has not seen"
+    nl: "zeggen waarom je importance meet op data die het model niet heeft gezien"
+    by: train
+  - en: "explain what leaving a feature out asks, and why copies share their importance"
+    nl: "uitleggen wat een feature weglaten vraagt, en waarom kopieën hun importance delen"
+    by: copy
+further_reading:
+  - en: "Leo Breiman (2001), [*Random Forests*](https://www.stat.berkeley.edu/~breiman/randomforest2001.pdf): section 10 shuffles the out-of-bag values of each variable"
+    nl: "Leo Breiman (2001), [*Random Forests*](https://www.stat.berkeley.edu/~breiman/randomforest2001.pdf): paragraaf 10 husselt de out-of-bag-waarden van elke variabele (in het Engels)"
+  - en: "scikit-learn, [*Permutation Importance vs Random Forest Feature Importance (MDI)*](https://scikit-learn.org/stable/auto_examples/inspection/plot_permutation_importance.html): random columns too, on the Titanic data"
+    nl: "scikit-learn, [*Permutation Importance vs Random Forest Feature Importance (MDI)*](https://scikit-learn.org/stable/auto_examples/inspection/plot_permutation_importance.html): ook willekeurige kolommen, op data over de Titanic (in het Engels)"
+  - en: "Christoph Molnar (2025), [*Permutation Feature Importance*](https://christophm.github.io/interpretable-ml-book/feature-importance.html), in *Interpretable Machine Learning*: how to read it, and when it misleads"
+    nl: "Christoph Molnar (2025), [*Permutation Feature Importance*](https://christophm.github.io/interpretable-ml-book/feature-importance.html), in *Interpretable Machine Learning*: hoe je het leest, en wanneer het misleidt (in het Engels)"
