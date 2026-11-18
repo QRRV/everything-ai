@@ -234,6 +234,7 @@ lessons:
   covers: [casussen#0, casussen#1]
   requires: [rai-two-kinds-of-harm, ml-confusion-matrix]
   introduces: [c:risk-score]
+  uses: [c:allocative-harm, c:representational-harm, c:fairness, c:harm, v:confusion-matrix, c:precision, c:recall, c:true-positive, c:false-positive, c:true-negative, c:accuracy, c:label, c:model, c:prediction, c:training, py:dict, py:for, py:arithmetic, py:float, py:int, py:print, py:comment, py:variable, py:underscore-name, py:string-literal, q:predict, q:choice, q:exercise-with-check, q:run-cell]
   data: []
   ladder: [python]
   needs: any
@@ -247,7 +248,8 @@ lessons:
   covers: [casussen#2, casussen#3]
   requires: [rai-automated-decisions]
   introduces: [c:risk-profiling]
-  mentions: [c:transparency]
+  uses: [c:contestability, c:model, c:label, py:def, py:return, py:dict, py:for, py:if, py:arithmetic, py:bool, py:print, py:comment, py:int, py:variable, py:underscore-name, py:string-literal, q:predict, q:choice, q:exercise-with-check, q:run-cell]
+  mentions: [c:transparency, c:risk-score, c:gdpr]
   data: []
   ladder: [python]
   needs: any
@@ -257,10 +259,12 @@ lessons:
   level: basis
   domein: verantwoord
   module: ethiek
-  idea: "DUO's risk profile picked students with a migration background far more often for a check, Rotterdam's welfare model scored people on features such as their language, Uber and Ola drivers went to court over automated dismissals and fraud scores, and the police's CAS forecasts crime per area; each turned on choices the people affected could not see."
+  idea: "DUO's risk profile picked students with a migration background far more often for a check, Rotterdam's welfare model scored people on features such as their language, Uber and Ola drivers went to court over automated dismissals and fraud scores, and the police's CAS forecast crime per area; each turned on choices the people affected could not see, which the Algorithm Register now lets government bodies describe in public."
   covers: [casussen#4]
   requires: [rai-case-toeslagen-syri]
   introduces: [c:algorithm-register]
+  uses: [c:risk-profiling, c:human-oversight, c:contestability, c:model, c:feature, py:dict, py:for, py:arithmetic, py:float, py:round, py:print, py:comment, py:int, py:variable, py:underscore-name, py:string-literal, q:predict, q:choice, q:exercise-with-check, q:run-cell]
+  mentions: [c:gdpr]
   data: []
   ladder: [python]
   needs: any

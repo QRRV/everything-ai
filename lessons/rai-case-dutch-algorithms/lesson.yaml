@@ -1,0 +1,39 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: rai-case-dutch-algorithms
+minutes: 20
+title:
+  en: "More algorithms that judged people"
+  nl: "Meer algoritmes die over mensen oordeelden"
+goal:
+  en: "compare how often two groups are picked at each step from a score to a check, say what the people affected could not see in four Dutch cases, and say what the Algorithm Register shows."
+  nl: "vergelijken hoe vaak twee groepen gekozen worden bij elke stap van een score tot een controle, zeggen wat de mensen om wie het ging in vier Nederlandse gevallen niet konden zien, en zeggen wat het Algoritmeregister laat zien."
+summary:
+  - en: "DUO's risk profile scored students on their type of course, the distance to their parents and their age. With data from Statistics Netherlands, Algorithm Audit found in 2024 that students with a non-European migration background were labeled high risk 2.0 times as often as students of Dutch origin, and picked for a home visit 6.2 times as often. The minister apologized, and more than 10,000 former students get their money back."
+    nl: "Het risicoprofiel van DUO gaf studenten een score op hun soort opleiding, de afstand tot hun ouders en hun leeftijd. Met data van het CBS vond Algorithm Audit in 2024 dat studenten met een niet-Europese migratieachtergrond 2,0 keer zo vaak een hoog risico kregen als studenten van Nederlandse herkomst, en 6,2 keer zo vaak voor een huisbezoek werden gekozen. De minister bood excuses aan, en ruim 10.000 oud-studenten krijgen hun geld terug."
+  - en: "Rotterdam's welfare model scored people on 315 features, about twenty of them about language. A court of appeal found that Uber had removed three drivers from its platform by a solely automated decision. The police's CAS forecast crime per square of 125 by 125 meters, without proven effect, and was stopped in 2025."
+    nl: "Het bijstandsmodel van Rotterdam gaf mensen een score op grond van 315 features, waarvan ongeveer twintig over taal. Het gerechtshof vond dat Uber drie chauffeurs met een volledig automatisch besluit van zijn platform had gehaald. CAS van de politie voorspelde misdaad per vak van 125 bij 125 meter, zonder aangetoond effect, en werd in 2025 stopgezet."
+  - en: "Since December 2022, Dutch government bodies can describe their algorithms in the Algorithm Register: what for, how, with which data, oversight and risks. Registering is not yet required by law."
+    nl: "Sinds december 2022 kunnen Nederlandse overheidsorganisaties hun algoritmes beschrijven in het Algoritmeregister: waarvoor, hoe, met welke data, welk toezicht en welke risico's. Registreren is nog niet wettelijk verplicht."
+can_now:
+  - en: "compute how many times as often one group is picked as another, at each step from a score to a check"
+    nl: "uitrekenen hoeveel keer zo vaak de ene groep gekozen wordt als de andere, bij elke stap van een score tot een controle"
+    by: visited
+  - en: "say whether what people could not see was what counted in a score, whether a person really decided, or whether the system worked"
+    nl: "zeggen of wat mensen niet konden zien ging over wat er meetelde in een score, of er echt een mens besliste, of over of het systeem werkte"
+    by: unseen
+  - en: "say what an entry in the Algorithm Register tells you, and what it does not"
+    nl: "zeggen wat een beschrijving in het Algoritmeregister je vertelt, en wat niet"
+    by: register
+further_reading:
+  - en: "Algorithm Audit (2024), [*Vooringenomenheid voorkomen: addendum*](https://zoek.officielebekendmakingen.nl/blg-1143726.pdf), on DUO's checks with data from Statistics Netherlands, in Dutch"
+    nl: "Algorithm Audit (2024), [*Vooringenomenheid voorkomen: addendum*](https://zoek.officielebekendmakingen.nl/blg-1143726.pdf), over de controles van DUO met data van het CBS"
+  - en: "Autoriteit Persoonsgegevens (2024), [*Fraudeaanpak DUO discriminerend en illegaal*](https://www.autoriteitpersoonsgegevens.nl/actueel/fraudeaanpak-duo-discriminerend-en-illegaal), in Dutch"
+    nl: "Autoriteit Persoonsgegevens (2024), [*Fraudeaanpak DUO discriminerend en illegaal*](https://www.autoriteitpersoonsgegevens.nl/actueel/fraudeaanpak-duo-discriminerend-en-illegaal)"
+  - en: "Lighthouse Reports (2023), [*Suspicion Machines: methodology*](https://www.lighthousereports.com/suspicion-machines-methodology/), on Rotterdam's welfare model"
+    nl: "Lighthouse Reports (2023), [*Suspicion Machines: methodology*](https://www.lighthousereports.com/suspicion-machines-methodology/), over het bijstandsmodel van Rotterdam"
+  - en: "Gerechtshof Amsterdam (2023), [ECLI:NL:GHAMS:2023:793](https://uitspraken.rechtspraak.nl/details?id=ECLI:NL:GHAMS:2023:793), the ruling on the drivers Uber removed from its platform by an automated decision, in Dutch"
+    nl: "Gerechtshof Amsterdam (2023), [ECLI:NL:GHAMS:2023:793](https://uitspraken.rechtspraak.nl/details?id=ECLI:NL:GHAMS:2023:793), de uitspraak over de chauffeurs die Uber met een automatisch besluit van zijn platform haalde"
+  - en: "[The Algorithm Register](https://algoritmes.overheid.nl/en) of the Dutch government"
+    nl: "[Het Algoritmeregister](https://algoritmes.overheid.nl) van de Nederlandse overheid"

@@ -1,0 +1,37 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: rai-case-toeslagen-syri
+minutes: 20
+title:
+  en: "The childcare benefits scandal and SyRI"
+  nl: "De toeslagenaffaire en SyRI"
+goal:
+  en: "say what risk profiling is, compute risk scores on a small scorecard and see what one indicator about who someone is does to them, and say what went wrong in the childcare benefits scandal and SyRI."
+  nl: "zeggen wat risicoprofilering is, risicoscores berekenen op een kleine scorekaart en zien wat één indicator over wie iemand is daarmee doet, en zeggen wat er misging in de toeslagenaffaire en bij SyRI."
+summary:
+  - en: "Risk profiling picks whom to check from characteristics a group shares. From 2013 the Dutch Tax Administration scored childcare benefit applications with a self-learning model; one indicator was whether the applicant had Dutch nationality, which the Dutch Data Protection Authority called unlawful and discriminatory in 2020; in 2021 it fined the Tax Administration 2.75 million euros for this and two other unlawful ways of processing nationality."
+    nl: "Risicoprofilering kiest wie je controleert op grond van eigenschappen die een groep deelt. Vanaf 2013 gaf de Belastingdienst aanvragen voor kinderopvangtoeslag een score met een zelflerend model; een van de indicatoren was of de aanvrager de Nederlandse nationaliteit had, wat de Autoriteit Persoonsgegevens in 2020 onrechtmatig en discriminerend noemde; in 2021 gaf ze de Belastingdienst een boete van 2,75 miljoen euro voor dit en twee andere onrechtmatige verwerkingen van nationaliteit."
+  - en: "Hard rules did the rest: a small mistake could mean paying back a whole year, and 25,000 to 35,000 people got the label intent or gross negligence, which ruled out a payment plan. The cabinet resigned in January 2021."
+    nl: "Harde regels deden de rest: een kleine fout kon betekenen dat een heel jaar terug moest, en 25.000 tot 35.000 mensen kregen het label opzet/grove schuld, waardoor een betalingsregeling niet meer kon. Het kabinet trad in januari 2021 af."
+  - en: "On 5 February 2020 the court in The Hague ruled that the law behind SyRI breached the right to respect for private life: its risk model was secret, so nobody could check how it chose people."
+    nl: "Op 5 februari 2020 oordeelde de rechtbank Den Haag dat de wet achter SyRI in strijd was met het recht op respect voor het privéleven: het risicomodel was geheim, dus niemand kon controleren hoe het mensen koos."
+can_now:
+  - en: "write a function that adds up the points of a scorecard, and test it on applications that differ in one indicator"
+    nl: "een functie schrijven die de punten van een scorekaart optelt, en die testen op aanvragen die in één indicator verschillen"
+    by: score
+  - en: "say whether a failure is about what nobody could see, who was picked, or what a mistake cost"
+    nl: "zeggen of iets misging omdat niemand het kon zien, door wie er gekozen werd, of door wat een fout kostte"
+    by: failures
+  - en: "say on what ground the court struck down the law behind SyRI"
+    nl: "zeggen op welke grond de rechter de wet achter SyRI buiten werking stelde"
+    by: ruling
+further_reading:
+  - en: "Autoriteit Persoonsgegevens (2020), [*Belastingdienst/Toeslagen: de verwerking van de nationaliteit van aanvragers van kinderopvangtoeslag*](https://www.autoriteitpersoonsgegevens.nl/uploads/imported/onderzoek_belastingdienst_kinderopvangtoeslag.pdf), in Dutch"
+    nl: "Autoriteit Persoonsgegevens (2020), [*Belastingdienst/Toeslagen: de verwerking van de nationaliteit van aanvragers van kinderopvangtoeslag*](https://www.autoriteitpersoonsgegevens.nl/uploads/imported/onderzoek_belastingdienst_kinderopvangtoeslag.pdf)"
+  - en: "Parlementaire ondervragingscommissie Kinderopvangtoeslag (2020), [*Ongekend onrecht*](https://www.officielebekendmakingen.nl/kst-35510-2.pdf), in Dutch"
+    nl: "Parlementaire ondervragingscommissie Kinderopvangtoeslag (2020), [*Ongekend onrecht*](https://www.officielebekendmakingen.nl/kst-35510-2.pdf)"
+  - en: "Amnesty International (2021), [*Xenophobic machines: discrimination through unregulated use of algorithms in the Dutch childcare benefits scandal*](https://www.amnesty.org/en/documents/eur35/4686/2021/en/)"
+    nl: "Amnesty International (2021), [*Xenophobic machines: discrimination through unregulated use of algorithms in the Dutch childcare benefits scandal*](https://www.amnesty.org/en/documents/eur35/4686/2021/en/)"
+  - en: "Rechtbank Den Haag (2020), [the SyRI ruling, ECLI:NL:RBDHA:2020:1878](https://uitspraken.rechtspraak.nl/details?id=ECLI:NL:RBDHA:2020:1878), English translation"
+    nl: "Rechtbank Den Haag (2020), [de uitspraak over SyRI, ECLI:NL:RBDHA:2020:865](https://uitspraken.rechtspraak.nl/details?id=ECLI:NL:RBDHA:2020:865)"

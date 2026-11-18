@@ -1,0 +1,37 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: rai-case-compas-amazon
+minutes: 20
+title:
+  en: "COMPAS and a hiring tool"
+  nl: "COMPAS en een sollicitatietool"
+goal:
+  en: "compare the mistakes of a risk score group by group, see why COMPAS was called fair and biased at the same time, and say where the errors of COMPAS and of Amazon's hiring model came from."
+  nl: "de fouten van een risicoscore groep voor groep vergelijken, zien waarom COMPAS tegelijk eerlijk en bevooroordeeld werd genoemd, en zeggen waar de fouten van COMPAS en van het sollicitatiemodel van Amazon vandaan kwamen."
+summary:
+  - en: "COMPAS gives defendants a risk score from 1 to 10. In Broward County, Florida, about the same share of the people it rated medium or high risk was arrested again within two years in both groups: 0.63 of the flagged Black and 0.59 of the flagged White defendants (ProPublica, 2016)."
+    nl: "COMPAS geeft verdachten een risicoscore van 1 tot 10. In Broward County, Florida, werd van de mensen met een gemiddeld of hoog risico in beide groepen ongeveer hetzelfde deel binnen twee jaar opnieuw opgepakt: 0,63 van de gemarkeerde zwarte en 0,59 van de gemarkeerde witte verdachten (ProPublica, 2016)."
+  - en: "Of the people who were not arrested again, the score still flagged 0.45 of the Black and 0.23 of the White defendants. Both are true at once because a larger share was arrested again in one group than in the other; and an arrest is not the same as a crime."
+    nl: "Van de mensen die niet opnieuw werden opgepakt, markeerde de score toch 0,45 van de zwarte en 0,23 van de witte verdachten. Beide kloppen tegelijk, omdat in de ene groep een groter deel opnieuw werd opgepakt dan in de andere; en een arrestatie is niet hetzelfde als een misdrijf."
+  - en: "Amazon's hiring model (2014 to 2017) learned from ten years of CVs, most of them from men, and marked down CVs that mentioned *women's*. Errors like these come from the data, the label or the use, so a check looks at all three."
+    nl: "Het sollicitatiemodel van Amazon (2014 tot 2017) leerde van tien jaar cv's, de meeste van mannen, en waardeerde cv's lager waarin *women's* stond. Zulke fouten komen uit de data, het label of het gebruik, dus een controle kijkt naar alle drie."
+can_now:
+  - en: "work out, group by group, the share of the people without the outcome that a score still flags"
+    nl: "groep voor groep uitrekenen welk deel van de mensen zonder de uitkomst een score toch markeert"
+    by: flagged
+  - en: "say whether the problem of a model comes from the data, the label or how it is used"
+    nl: "zeggen of het probleem van een model uit de data, het label of het gebruik komt"
+    by: sources
+  - en: "say what a claim that a score is fair by one measure leaves open"
+    nl: "zeggen wat een bewering openlaat dat een score volgens één maat eerlijk is"
+    by: claim
+further_reading:
+  - en: "Julia Angwin, Jeff Larson, Surya Mattu and Lauren Kirchner (2016), [*Machine bias*](https://www.propublica.org/article/machine-bias-risk-assessments-in-criminal-sentencing), ProPublica"
+    nl: "Julia Angwin, Jeff Larson, Surya Mattu en Lauren Kirchner (2016), [*Machine bias*](https://www.propublica.org/article/machine-bias-risk-assessments-in-criminal-sentencing), ProPublica"
+  - en: "Jeff Larson, Surya Mattu, Lauren Kirchner and Julia Angwin (2016), [*How we analyzed the COMPAS recidivism algorithm*](https://www.propublica.org/article/how-we-analyzed-the-compas-recidivism-algorithm), ProPublica: the counts in this lesson"
+    nl: "Jeff Larson, Surya Mattu, Lauren Kirchner en Julia Angwin (2016), [*How we analyzed the COMPAS recidivism algorithm*](https://www.propublica.org/article/how-we-analyzed-the-compas-recidivism-algorithm), ProPublica: de aantallen in deze les"
+  - en: "Alexandra Chouldechova (2017), [*Fair prediction with disparate impact: a study of bias in recidivism prediction instruments*](https://doi.org/10.1089/big.2016.0047), Big Data"
+    nl: "Alexandra Chouldechova (2017), [*Fair prediction with disparate impact: a study of bias in recidivism prediction instruments*](https://doi.org/10.1089/big.2016.0047), Big Data"
+  - en: "Jeffrey Dastin (2018), [*Amazon scraps secret AI recruiting tool that showed bias against women*](https://www.reuters.com/article/us-amazon-com-jobs-automation-insight-idUSKCN1MK08G), Reuters"
+    nl: "Jeffrey Dastin (2018), [*Amazon scraps secret AI recruiting tool that showed bias against women*](https://www.reuters.com/article/us-amazon-com-jobs-automation-insight-idUSKCN1MK08G), Reuters"
