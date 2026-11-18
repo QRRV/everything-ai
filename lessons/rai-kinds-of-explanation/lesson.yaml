@@ -1,0 +1,40 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: rai-kinds-of-explanation
+minutes: 25
+title:
+  en: "Kinds of explanation"
+  nl: "Soorten uitleg"
+goal:
+  en: "sort an explanation by where it comes from, what it covers and which models it works for, work out a local explanation of a logistic regression, and name three reasons why a model stays opaque."
+  nl: "een uitleg indelen naar waar hij vandaan komt, waarover hij gaat en voor welke modellen hij werkt, een local explanation van een logistische regressie uitrekenen, en drie redenen noemen waarom een model ondoorzichtig blijft."
+summary:
+  - en: "An explanation is read from the model itself or made afterwards by a separate method (a post-hoc explanation), covers one prediction (local) or the whole model (global), and uses the inside of one kind of model or only its inputs and outputs (model-agnostic). Molnar's book warns that the lines between by design and post hoc are blurry."
+    nl: "Een uitleg wordt uit het model zelf gelezen of achteraf gemaakt met een aparte methode (een post-hoc explanation), gaat over één voorspelling (een local explanation) of het hele model (een global explanation), en gebruikt de binnenkant van één soort model of alleen de inputs en outputs (model-agnostic). Het boek van Molnar waarschuwt dat de grens tussen by design en post hoc vaag is."
+  - en: "In the loan model of the lesson, the weights (income 0.8, missed payments −1.2, years at the job 0.3) are a global explanation. Weight times value is a local one: for applicant A income 2.8, missed payments −2.4 and years at the job 0.3, which with the bias −3.0 give the logit −2.3 and a probability of a yes of 0.091."
+    nl: "In het kredietmodel van de les zijn de weights (inkomen 0,8, gemiste betalingen −1,2, jaren in de baan 0,3) een global explanation. Weight keer waarde is een local explanation: voor aanvrager A inkomen 2,8, gemiste betalingen −2,4 en jaren in de baan 0,3, die met de bias −3,0 de logit −2,3 geven en een kans op ja van 0,091."
+  - en: "Burrell (2016) names three kinds of opacity: secrecy by a company or a state, a reader who lacks the skill to read code, and a mismatch between optimization in many dimensions and the way people reason, which holds even for computer scientists."
+    nl: "Burrell (2016) noemt drie soorten ondoorzichtigheid: geheimhouding door een bedrijf of de overheid, een lezer die de kennis mist om code te lezen, en optimalisatie in heel veel dimensies die niet past bij hoe mensen redeneren, wat zelfs voor informatici geldt."
+  - en: "Sources do not agree on interpretable versus explainable; this course uses interpretability for understanding how a model works inside and explainability for explaining its outputs. DARPA's curve of 2016, the better a model predicts the harder it is to explain, is marked notional: it rests on no data."
+    nl: "De bronnen zijn het niet eens over interpretable en explainable; deze course gebruikt interpretability voor begrijpen hoe een model vanbinnen werkt en explainability voor het uitleggen van zijn outputs. De curve van DARPA uit 2016, hoe beter een model voorspelt hoe moeilijker het uit te leggen is, heet notional: hij rust op geen enkele data."
+can_now:
+  - en: "work out what each feature adds to the logit of one example"
+    nl: "uitrekenen wat elke feature bijdraagt aan de logit van één voorbeeld"
+    by: contributions
+  - en: "sort an explanation by where it comes from and what it covers"
+    nl: "een uitleg indelen naar waar hij vandaan komt en waarover hij gaat"
+    by: kinds
+  - en: "tell which explanations still work for a black box"
+    nl: "zeggen welke uitleg nog werkt voor een black box"
+    by: agnostic
+  - en: "name the kind of opacity that keeps a model from being explained"
+    nl: "de soort ondoorzichtigheid noemen die een model onuitlegbaar houdt"
+    by: opacity
+further_reading:
+  - en: "Christoph Molnar (2025), [*Interpretable Machine Learning*](https://christophm.github.io/interpretable-ml-book/), third edition: chapter 4 sorts the methods this module builds"
+    nl: "Christoph Molnar (2025), [*Interpretable Machine Learning*](https://christophm.github.io/interpretable-ml-book/), derde editie: hoofdstuk 4 deelt de methoden in die deze module bouwt (in het Engels)"
+  - en: "Finale Doshi-Velez and Been Kim (2017), [*Towards A Rigorous Science of Interpretable Machine Learning*](https://arxiv.org/abs/1702.08608): what interpretability is for, and how to test it"
+    nl: "Finale Doshi-Velez en Been Kim (2017), [*Towards A Rigorous Science of Interpretable Machine Learning*](https://arxiv.org/abs/1702.08608): waar interpretability voor dient, en hoe je het test (in het Engels)"
+  - en: "Zachary C. Lipton (2016), [*The Mythos of Model Interpretability*](https://arxiv.org/abs/1606.03490): transparency against post-hoc explanation, and why both claims need care"
+    nl: "Zachary C. Lipton (2016), [*The Mythos of Model Interpretability*](https://arxiv.org/abs/1606.03490): transparantie tegenover post-hoc explanation, en waarom beide claims voorzichtigheid vragen (in het Engels)"

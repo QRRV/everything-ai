@@ -668,6 +668,7 @@ lessons:
   covers: [xai-begrippen-en-het-recht-op-uitleg#0, xai-begrippen-en-het-recht-op-uitleg#3]
   requires: [ml-decision-tree, ml-logistic-regression]
   introduces: [c:explainable-ai, c:interpretability, c:explainability, c:post-hoc-explanation, c:local-explanation, c:global-explanation, c:model-agnostic, c:black-box]
+  mentions: [c:random-forest, c:permutation-importance, c:partial-dependence-plot, c:lime]
   data: []
   ladder: [python]
   needs: any
@@ -681,7 +682,7 @@ lessons:
   covers: [xai-begrippen-en-het-recht-op-uitleg#1, xai-begrippen-en-het-recht-op-uitleg#2]
   requires: [rai-kinds-of-explanation]
   introduces: [c:reason-code, c:contrastive-explanation, c:right-to-explanation]
-  mentions: [c:gdpr]
+  mentions: [c:gdpr, c:personal-data]
   data: [uci-adult]
   ladder: [python, numpy]
   needs: any
@@ -695,6 +696,7 @@ lessons:
   covers: [glass-box-modellen#0]
   requires: [rai-kinds-of-explanation]
   introduces: [c:glass-box-model]
+  mentions: [c:false-positive-rate, c:generalized-additive-model, c:white-box]
   data: [uci-adult]
   ladder: [python, numpy]
   needs: any

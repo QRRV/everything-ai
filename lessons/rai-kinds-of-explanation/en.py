@@ -1,0 +1,366 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0 AND MIT-0
+# Lesson rai-kinds-of-explanation. Route: course/route/lessen/verantwoord.yaml. Checks: checks.py.
+
+import marimo
+
+__generated_with = "0.25.1"
+app = marimo.App(width="medium")
+
+with app.setup(hide_code=True):
+    import marimo as mo
+    from everything_ai.lesson import lesson
+
+    L = lesson("rai-kinds-of-explanation", "en")
+    C = L.checks
+
+
+@app.cell(hide_code=True)
+def header():
+    L.header()
+    return
+
+
+@app.cell(hide_code=True)
+def text_quick_check():
+    mo.md(r"""
+    ### Quick check
+
+    Two short questions about [Logistic regression and the decision boundary](/course/open/ml-logistic-regression?lang=en) and [Question after question: the decision tree](/course/open/ml-decision-tree?lang=en).
+    """)
+    return
+
+
+@app.cell(hide_code=True)
+def quick_check_logit():
+    quick_logit = L.choice(
+        "quick-logit",
+        question="A logistic regression has the weights (2, −1) and the bias 0. It gets the example (1, 3). What probability does it give?",
+        options={
+            "right": "Below 0.5",
+            "above": "Above 0.5",
+            "half": "Exactly 0.5",
+        },
+        correct="right",
+        why={
+            "right": "The logit is 2 · 1 + (−1) · 3 + 0 = −1. Below 0, so the sigmoid gives a probability below 0.5: the model says no.",
+            "above": "Work out the logit first: 2 · 1 + (−1) · 3 + 0 = −1. A logit below 0 gives a probability below 0.5. See [Logistic regression and the decision boundary](/course/open/ml-logistic-regression?lang=en).",
+            "half": "Exactly 0.5 needs a logit of exactly 0: the example would lie on the decision boundary. Here the logit is 2 · 1 + (−1) · 3 + 0 = −1. See [Logistic regression and the decision boundary](/course/open/ml-logistic-regression?lang=en).",
+        },
+    )
+    quick_logit
+    return (quick_logit,)
+
+
+@app.cell(hide_code=True)
+def quick_check_leaf():
+    quick_leaf = L.choice(
+        "quick-leaf",
+        question="A decision tree sends a penguin down its questions, to a leaf. What does the leaf say?",
+        options={
+            "near": "The class of the most similar penguin",
+            "right": "The most common class in that leaf",
+            "average": "The average over all penguins",
+        },
+        correct="right",
+        why={
+            "near": "A tree does not look for a similar penguin. Each leaf says the most common class of the training examples that ended up in it. See [Question after question: the decision tree](/course/open/ml-decision-tree?lang=en).",
+            "right": "Each leaf says the most common class of the training examples that ended up in it, and every penguin that reaches the leaf gets that class.",
+            "average": "A tree does not average over all penguins. Each leaf says the most common class of its own training examples. See [Question after question: the decision tree](/course/open/ml-decision-tree?lang=en).",
+        },
+    )
+    quick_leaf
+    return (quick_leaf,)
+
+
+@app.cell(hide_code=True)
+def text_why():
+    mo.md(r"""
+    ## Why this matters
+
+    In 2016 DARPA, the research agency of the US Department of Defense, announced a program on explainable AI. The slides for its Proposers Day, in August 2016, called machine learning models "opaque, non-intuitive, and difficult for people to understand", and showed a user asking: "Why did you do that?" and "Why not something else?". The questions are older than the program. In 2004 Michael van Lent and colleagues described a system with an "Explainable AI (XAI)" feature, building on work on explanation in expert systems such as Mycin, described in 1976. But a "why" can ask different things. Why did this one applicant get a no? How does the model decide in general? And does the answer come from the model itself, or from someone who studied it afterwards? What an explanation can tell you depends on those differences.
+
+    **An everyday example.** You ask a colleague why they took the ring road today. "Because of the roadworks on the bridge" explains this one trip. "I always take the road my phone says is fastest" explains how they choose in general. And both answers are what they tell you afterwards, which need not be how they actually decided.
+    """)
+    return
+
+
+@app.cell(hide_code=True)
+def predict_curve():
+    guess_curve = L.guess(
+        "curve",
+        question="DARPA's slides of 2016 drew a curve: the better a kind of model predicts, the harder it is to explain. How many measured models is that curve based on?",
+        options={
+            "dozens": "Dozens, from benchmarks",
+            "few": "A handful, from one study",
+            "none": "None",
+        },
+        reveal="**None.** The slides mark the chart \"(notional)\", and Cynthia Rudin (2019), whose paper redraws it, wrote that it \"was not generated by any data\". Whether a model people can read has to predict worse is something to measure for each task; a later lesson in this module comes back to it.",
+    )
+    guess_curve
+    return (guess_curve,)
+
+
+@app.cell(hide_code=True)
+def text_idea():
+    mo.vstack([
+        mo.md(r"""
+        ## The idea
+
+        **One prediction, or the whole model.** Finale Doshi-Velez and Been Kim (2017) put the difference this way: global interpretability means "knowing what patterns are present in general", local interpretability "knowing the reasons for a specific decision (such as why a particular loan application was rejected)". The first may be important "when scientific understanding or bias detection is the goal", the second "when one needs a justification for a specific decision". In the loan model of this lesson, the weights are a global explanation: each missed payment lowers the logit by 1.2, for every applicant. What each weight adds for one applicant is a local explanation.
+
+        **From the model, or made afterwards.** Zachary Lipton (2016) split explanations into two families: transparency, "how does the model work?", and post-hoc explanations, "what else can the model tell me?". Christoph Molnar's book *Interpretable Machine Learning* (3rd edition, 2025) calls the first interpretability by design: you train a model people can read, "such as using logistic regression instead of a random forest". A post-hoc explanation is made after training, by a separate method that studies the finished model. Its attraction, in Lipton's words: "we can interpret opaque models after-the-fact, without sacrificing predictive performance". Its risk is in the *Watch out* box below.
+
+        **Any model, or one kind.** A model-agnostic method needs only a model's inputs and outputs. Molnar: "We ignore what's inside the model and only analyze how the model output changes with respect to changes in the feature inputs." A model-specific method uses the inside of one kind of model, such as the weights of a logistic regression or the questions of a tree. Only a model-agnostic method works for a model you can only ask questions, a black box in the strict sense of this course. Molnar's book uses the word more broadly, for "models that cannot be understood by looking at their parameters (e.g., a neural network)"; for those, model-specific methods that look inside exist too. Cynthia Rudin (2019) adds another reason a model can be a black box: it is "proprietary", and its owner does not show it.
+
+        These three questions are this course's way of sorting explanations. Molnar's book sorts a little differently: it splits only the model-agnostic methods into local and global, and warns that "the lines between by design and post hoc are blurry".
+
+        **Three kinds of opacity.** Jenna Burrell (2016) named three reasons why a model stays opaque: "(1) opacity as intentional corporate or state secrecy, (2) opacity as technical illiteracy, and (3) an opacity that arises from the characteristics of machine learning algorithms and the scale required to apply them usefully." The second is about the reader: writing and reading code "is a specialist skill". The third holds even for experts: a mismatch between "mathematical optimization in high-dimensionality" and "the demands of human-scale reasoning". Recognizing which kind is at play, Burrell argues, "is a key to determining which of a variety of technical and non-technical solutions could help to prevent harm". Opening up a model does not end the third kind; a model people can read, or a method that explains it, might.
+
+        **The words.** "At present, interpretability has no formal technical meaning," Lipton wrote, and the sources still disagree. Tim Miller (2019) uses interpretability and explainability as the same; Alejandro Barredo Arrieta and colleagues (2019) call interpretability a passive property of a model and explainability "an active characteristic of a model"; Rudin sees "the chasm between interpretability and explainability". This course keeps the two apart: interpretability is about understanding how a model works inside, explainability about explaining its outputs. Explainable AI, XAI for short, is the field and its methods.
+
+        ### New words and symbols
+
+        | Word | What it means |
+        |---|---|
+        | **explainable AI (XAI)** | the field and the methods that make the outputs of AI models understandable to people |
+        | **interpretability** | how well people can understand how a model works inside, for example by reading its weights or its questions |
+        | **explainability** | how well the reasons behind a model's outputs can be explained to people |
+        | **local explanation** | an explanation of one prediction, such as why this applicant got a no |
+        | **global explanation** | an explanation of how a model behaves overall, for every input |
+        | **post-hoc explanation** | an explanation made after training, by a separate method that studies the finished model |
+        | **model-agnostic** | said of a method that needs only a model's inputs and outputs, so it works for any model; a model-specific method uses the inside of one kind |
+        | **black box** | a model you can only watch from the outside: you see what goes in and what comes out, not how it gets from one to the other |
+        """),
+        L.watch_out("An explanation made afterwards often describes the model only approximately, and it can sound right and still be wrong. Lipton warned that a method tuned to satisfy people might \"present misleading but plausible explanations\". And the curve on DARPA's slides is marked \"(notional)\": it measures nothing."),
+    ])
+    return
+
+
+@app.cell(hide_code=True)
+def text_recipe():
+    mo.md(r"""
+    ### Recipe
+
+    To sort an explanation, ask four questions:
+
+    1. Where does it come from: read from the model itself, or made afterwards by a separate method?
+    2. What does it cover: one prediction, or the whole model?
+    3. What does it need: the inside of one kind of model, or only inputs and outputs?
+    4. If nobody can explain the model: is it kept secret, does the reader lack the skill, or does it work in a way no person can follow?
+    """)
+    return
+
+
+@app.cell(hide_code=True)
+def picture_two():
+    mo.vstack([
+        mo.md("**One model, two explanations**"),
+        mo.Html(C.two_explanations("en")),
+        mo.md(r"""
+        Left the weights of the loan model, the same for every applicant: a global explanation. Right what they add to the logit of applicant B, who earns 2,000 euros a month, missed no payments and has worked 6 years at the job: a local explanation. Both are read from the model itself, so both are model-specific.
+        """),
+    ])
+    return
+
+
+@app.cell(hide_code=True)
+def text_worked_example():
+    mo.md(r"""
+    ### Worked example
+
+    The loan model of this lesson is a logistic regression the course made up, with three features: `income` in thousands of euros a month, `missed_payments` in the last year, and `years_at_job`. Run the cell: it works out the logit and the probability of a yes for applicant A, as in [Logistic regression and the decision boundary](/course/open/ml-logistic-regression?lang=en).
+    """)
+    return
+
+
+@app.cell
+def example_logit():
+    import math
+
+    # a loan model the course made up: a logistic regression on three features
+    _weights = {"income": 0.8, "missed_payments": -1.2, "years_at_job": 0.3}
+    _bias = -3.0
+
+    # applicant A: income in thousands of euros a month
+    _person = {"income": 3.5, "missed_payments": 2, "years_at_job": 1}
+
+    _logit = _bias
+    for _feature in _weights:
+        _logit = _logit + _weights[_feature] * _person[_feature]
+    print("logit", round(_logit, 2))
+    print("probability of yes", round(1 / (1 + math.exp(-_logit)), 3))
+    return
+
+
+@app.cell(hide_code=True)
+def text_after_example():
+    mo.md(r"""
+    The logit is −2.3 and the probability of a yes 0.091: the model says no. The weights tell you how the model works for everyone, a global explanation read from the model itself. Why applicant A gets a no is another question, about one applicant. For that, keep apart what each feature adds: exercise 1.
+    """)
+    return
+
+
+@app.cell(hide_code=True)
+def text_exercise_contributions():
+    mo.vstack([
+        mo.md(r"""
+        ## Your turn
+
+        ### Exercise 1. What each feature adds
+
+        `weights` and `person` are the loan model and applicant A of the worked example. Work out `contributions`: a dict with, for each feature, its weight times the value of `person`. The loop in the worked example added these numbers to the logit one by one; now keep each one apart. The check also tries applicant B.
+        """),
+        L.task("Work out `contributions`: for each feature, its weight times the value of `person`."),
+    ])
+    return
+
+
+@app.cell(hide_code=True)
+def exercise_contributions():
+    box_contributions = L.code_box("contributions", lines=10)
+    box_contributions
+    return (box_contributions,)
+
+
+@app.cell(hide_code=True)
+def check_contributions(box_contributions):
+    result_contributions = L.check("contributions", box_contributions.value)
+    result_contributions
+    return (result_contributions,)
+
+
+@app.cell(hide_code=True)
+def hints_contributions():
+    L.hints(
+        "contributions",
+        [
+            "One number for each feature: what it adds to the logit of this applicant.",
+            "Start with an empty dict, go over the features with `for feature in weights:`, and store `weights[feature] * person[feature]` under each feature.",
+            "`contributions[feature] = ___`",
+        ],
+        why="`contributions = {}`, then `for feature in weights:` with `contributions[feature] = weights[feature] * person[feature]` inside the loop. For applicant A that gives income `2.8`, missed_payments `-2.4` and years_at_job `0.3`.",
+    )
+    return
+
+
+@app.cell(hide_code=True)
+def text_exercise_kinds():
+    mo.md(r"""
+    ### Exercise 2. Sort the explanations
+
+    Put each explanation in its group: where does it come from, and what does it cover?
+    """)
+    return
+
+
+@app.cell(hide_code=True)
+def sort_kinds_cell():
+    sort_kinds = L.sort("kinds")
+    sort_kinds
+    return (sort_kinds,)
+
+
+@app.cell(hide_code=True)
+def check_kinds(sort_kinds):
+    result_kinds = L.check("kinds", sort_kinds)
+    result_kinds
+    return (result_kinds,)
+
+
+@app.cell(hide_code=True)
+def hints_kinds():
+    L.hints(
+        "kinds",
+        [
+            "Two questions for each: is it read from the model itself, or made afterwards by asking the model? And is it about one applicant, or about all of them?",
+            "Three are made afterwards, by asking the finished model; two of those three describe all applicants.",
+            "From the model, the whole model: the weights and \\_\\_\\_. Made afterwards, one prediction: \\_\\_\\_.",
+        ],
+        why="**From the model, one prediction:** one path, your contributions. **From the model, the whole model:** the weights, the whole tree. **Made afterwards, one prediction:** a model nearby. **Made afterwards, the whole model:** shuffle a column, an average curve.",
+    )
+    return
+
+
+@app.cell(hide_code=True)
+def text_exercise_agnostic():
+    mo.md(r"""
+    ### Exercise 3. A model you can only ask
+    """)
+    return
+
+
+@app.cell(hide_code=True)
+def choice_agnostic_cell():
+    choice_agnostic = L.choice(
+        "agnostic",
+        question="A bank's credit model is a black box: you give it the details of an applicant, and it says yes or no. How can you still explain it?",
+        options={
+            "weights": "Read its weights",
+            "path": "Follow an applicant down its tree",
+            "right": "Ask it about changed applicants",
+        },
+        correct="right",
+        why={
+            "weights": "A black box shows no weights. What still works is a model-agnostic method: it needs only inputs and outputs, so it asks the model about changed applicants and looks at the answers. See *Any model, or one kind* in *The idea*.",
+            "path": "Following a path needs the tree itself, the inside of one kind of model: a model-specific method. A black box only answers. See *Any model, or one kind* in *The idea*.",
+            "right": "A model-agnostic method needs only inputs and outputs, so it works for any model, also one you can only ask. Shuffling a column, the average curve and the model nearby of exercise 2 all work this way.",
+        },
+    )
+    choice_agnostic
+    return (choice_agnostic,)
+
+
+@app.cell(hide_code=True)
+def text_exercise_opacity():
+    mo.md(r"""
+    ### Exercise 4. Which opacity?
+    """)
+    return
+
+
+@app.cell(hide_code=True)
+def choice_opacity_cell():
+    choice_opacity = L.choice(
+        "opacity",
+        question="A team has the code and all 20 million weights of a credit model, and its members read code well. Still nobody can say, in terms a person can follow, why it refused one applicant. Which of Burrell's kinds of opacity is this?",
+        options={
+            "secrecy": "Secrecy: the company hides the model",
+            "skill": "Too little skill at reading code",
+            "right": "How it works, at its scale",
+        },
+        correct="right",
+        why={
+            "secrecy": "The team has the code and the weights: nothing is hidden from it. What is left is Burrell's third kind, a mismatch between optimization over millions of weights and the way people reason. See *Three kinds of opacity* in *The idea*.",
+            "skill": "The team reads code well. Burrell's third kind holds even for those \"with specialized training, even for computer scientists\". See *Three kinds of opacity* in *The idea*.",
+            "right": "Burrell's third kind: optimization in many dimensions does not match \"the demands of human-scale reasoning\", even for computer scientists. Opening up the model or teaching people to read code would not help here; a model people can read, or a method that explains it, might.",
+        },
+    )
+    choice_opacity
+    return (choice_opacity,)
+
+
+@app.cell(hide_code=True)
+def text_connections():
+    mo.md(r"""
+    ## Wrap-up
+
+    **How this connects.** In [Logistic regression and the decision boundary](/course/open/ml-logistic-regression?lang=en) the logit was the weights times the features, plus the bias; in this lesson you split that sum into its parts, and the parts are a local explanation. In [Question after question: the decision tree](/course/open/ml-decision-tree?lang=en) you followed a penguin down a tree: also a local explanation, read from the model itself. The next lesson, [Reasons for a decision](/course/open/rai-reason-codes?lang=en), turns contributions into the reasons a lender gives with a no. The methods made afterwards, such as shuffling a column and the model nearby, come later in this module.
+    """)
+    return
+
+
+@app.cell(hide_code=True)
+def wrap_up(choice_agnostic, choice_opacity, result_contributions, result_kinds):
+    L.wrap_up(result_contributions, result_kinds, choice_agnostic, choice_opacity)
+    return
+
+
+@app.cell(hide_code=True)
+def footer():
+    L.footer()
+    return
+
+
+if __name__ == "__main__":
+    app.run()

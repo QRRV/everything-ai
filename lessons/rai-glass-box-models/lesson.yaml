@@ -1,0 +1,40 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: rai-glass-box-models
+minutes: 30
+title:
+  en: "Glass-box models"
+  nl: "Glass-box models"
+goal:
+  en: "follow a short decision tree by hand, read the weights of a logistic regression as factors on the odds, and tell when a model is small and clear enough for a person to follow."
+  nl: "een korte beslisboom met de hand volgen, de weights van een logistische regressie lezen als factoren op de odds, en zeggen wanneer een model klein en duidelijk genoeg is om door een mens gevolgd te worden."
+summary:
+  - en: "A glass-box model is interpretable by design: a person can step through every calculation from input to output (Lipton's first test), and each input and weight means something on its own (Lipton's second). InterpretML uses the word glassbox; others say interpretable, transparent or white box."
+    nl: "Een glass-box model is door zijn ontwerp te lezen: een mens kan elke berekening van input naar output doorlopen (de eerste toets van Lipton), en elke input en weight betekent op zich iets (de tweede van Lipton). InterpretML gebruikt het woord glassbox; anderen zeggen interpretable, transparant of white box."
+  - en: "In a logistic regression, one unit more of a feature multiplies the odds by e to the power of its weight. On UCI Adult, one level of education multiplies them by 1.412, so four levels by about 3.975; for an applicant with odds 0.099 that takes the probability from 0.090 to 0.282, not four times as high."
+    nl: "In een logistische regressie vermenigvuldigt één eenheid meer van een feature de odds met e tot de macht van zijn weight. Op UCI Adult vermenigvuldigt één opleidingsniveau ze met 1,412, dus vier niveaus met ongeveer 3,975; voor een aanvrager met odds 0,099 brengt dat de kans van 0,090 naar 0,282, niet vier keer zo hoog."
+  - en: "A tree of depth 2 on the same columns says yes only for education above 12.5 and age above 29.5, and is right for 78.7 percent of the people, against 78.9 for the logistic regression and 76.1 for always saying no. A tree of depth d has at most 2 to the power d leaves."
+    nl: "Een boom met diepte 2 op dezelfde kolommen zegt alleen ja bij een opleiding boven 12,5 en een leeftijd boven 29,5, en zit bij 78,7 procent van de mensen goed, tegen 78,9 voor de logistische regressie en 76,1 voor altijd nee zeggen. Een boom met diepte d heeft hoogstens 2 tot de macht d bladeren."
+  - en: "No kind of model is a glass box by itself (Lipton): it depends on its size and its features. Weights hold with the other features fixed, depend on which features are in the model, and cannot be compared across units."
+    nl: "Geen soort model is uit zichzelf een glass box (Lipton): het hangt af van de grootte en de features. Weights gelden als de andere features gelijk blijven, hangen af van welke features in het model zitten, en zijn niet te vergelijken tussen eenheden."
+can_now:
+  - en: "write a short decision tree as a function you can follow"
+    nl: "een korte beslisboom schrijven als een functie die je kunt volgen"
+    by: follow
+  - en: "turn the weight of a logistic regression into a factor on the odds"
+    nl: "de weight van een logistische regressie omzetten in een factor op de odds"
+    by: odds
+  - en: "tell whether a person can follow a model, by its size and its features"
+    nl: "zeggen of een mens een model kan volgen, aan zijn grootte en zijn features"
+    by: glass
+  - en: "explain why weights of features with different units cannot be compared"
+    nl: "uitleggen waarom je weights van features met verschillende eenheden niet kunt vergelijken"
+    by: scale
+further_reading:
+  - en: "Christoph Molnar (2025), [*Interpretable Machine Learning*](https://christophm.github.io/interpretable-ml-book/), third edition: chapters 6, 7 and 9 read linear models, logistic regression and trees"
+    nl: "Christoph Molnar (2025), [*Interpretable Machine Learning*](https://christophm.github.io/interpretable-ml-book/), derde editie: de hoofdstukken 6, 7 en 9 lezen lineaire modellen, logistische regressie en bomen (in het Engels)"
+  - en: "Cynthia Rudin (2019), [*Stop Explaining Black Box Machine Learning Models for High Stakes Decisions and Use Interpretable Models Instead*](https://arxiv.org/pdf/1811.10154v3): the case for glass boxes in high-stakes decisions"
+    nl: "Cynthia Rudin (2019), [*Stop Explaining Black Box Machine Learning Models for High Stakes Decisions and Use Interpretable Models Instead*](https://arxiv.org/pdf/1811.10154v3): waarom je glass boxes gebruikt als er veel op het spel staat voor mensen (in het Engels)"
+  - en: "Harsha Nori and colleagues (2019), [*InterpretML: A Unified Framework for Machine Learning Interpretability*](https://arxiv.org/pdf/1909.09223v1): the library that sorts models into glassbox and blackbox"
+    nl: "Harsha Nori en anderen (2019), [*InterpretML: A Unified Framework for Machine Learning Interpretability*](https://arxiv.org/pdf/1909.09223v1): de library die modellen indeelt in glassbox en blackbox (in het Engels)"

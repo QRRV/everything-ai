@@ -1,0 +1,38 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: rai-reason-codes
+minutes: 30
+title:
+  en: "Reasons for a decision"
+  nl: "Redenen bij een besluit"
+goal:
+  en: "pick the reasons for a no from a logistic regression by measuring an applicant against a reference group, say why people want a short, contrastive explanation, and tell what US credit law and the GDPR ask for."
+  nl: "de redenen voor een nee uit een logistische regressie kiezen door een aanvrager af te meten aan een referentiegroep, zeggen waarom mensen een korte contrastive explanation willen, en vertellen wat de Amerikaanse kredietwet en de AVG vragen."
+summary:
+  - en: "A lender in the US has to give the specific, principal reasons for a no (Regulation B). The regulation sets no number, but says more than four is not likely to help. The short fixed phrases lenders send are often called reason codes; that is industry usage, not a word of the law."
+    nl: "Een kredietverstrekker in de VS moet de specifieke, belangrijkste redenen voor een nee geven (Regulation B). De regels noemen geen aantal, maar zeggen dat meer dan vier redenen waarschijnlijk niet helpt. De korte vaste zinnetjes die kredietverstrekkers sturen, heten vaak reason codes; dat woord komt uit de sector, niet uit de wet."
+  - en: "With a logistic regression, the gap of a feature is its weight times (the applicant's value minus the average of a reference group). For an applicant aged 30 with education level 9 and 40 hours a week, against all applicants: age −0.398, education −0.372, hours −0.018. Against the 1,608 applicants just above the cut-off: −0.789, −1.344 and −0.302, so the principal reason moves from age to education."
+    nl: "Bij een logistische regressie is het verschil van een feature zijn weight keer (de waarde van de aanvrager min het gemiddelde van een referentiegroep). Voor een aanvrager van 30 met opleidingsniveau 9 en 40 uur per week, tegen alle aanvragers: leeftijd −0,398, opleiding −0,372, uren −0,018. Tegen de 1.608 aanvragers net boven de grens: −0,789, −1,344 en −0,302, dus de belangrijkste reden verschuift van leeftijd naar opleiding."
+  - en: "Miller (2019): explanations are contrastive (why this rather than that) and selected (one or two causes), and causes work better than probabilities. Reasons measured against a reference group are contrastive in that sense."
+    nl: "Miller (2019): een uitleg is contrastief (waarom dit en niet dat) en gekozen (één of twee oorzaken), en oorzaken werken beter dan kansen. Redenen die zijn afgemeten aan een referentiegroep zijn in die zin contrastief."
+  - en: "The GDPR gives meaningful information about the logic involved in automated decisions (Articles 13 to 15, with Article 22); the word explanation is only in recital 71. In 2025 the Court of Justice of the EU called Article 15(1)(h) a genuine right to an explanation, not met by a complex formula. Article 86 of the AI Act adds a right for decisions based on the high-risk AI systems of its Annex III, where other EU law gives none."
+    nl: "De AVG geeft nuttige informatie over de onderliggende logica van geautomatiseerde besluiten (artikelen 13 tot en met 15, met artikel 22); alleen overweging 71 noemt uitdrukkelijk een recht op uitleg. In 2025 noemde het Hof van Justitie van de EU artikel 15, lid 1, onder h, een echt recht op uitleg, waaraan een ingewikkelde formule niet voldoet. Artikel 86 van de AI Act voegt een recht toe voor besluiten op basis van de AI-systemen met een hoog risico uit bijlage III, waar ander EU-recht er geen geeft."
+can_now:
+  - en: "measure an applicant against a reference group, feature by feature"
+    nl: "een aanvrager per feature afmeten aan een referentiegroep"
+    by: gaps
+  - en: "turn gaps into reasons, the principal one first"
+    nl: "verschillen omzetten in redenen, de belangrijkste eerst"
+    by: reasons
+  - en: "give a short, contrastive explanation instead of every number"
+    nl: "een korte contrastive explanation geven in plaats van elk getal"
+    by: contrastive
+  - en: "tell what the GDPR gives a person about an automated decision"
+    nl: "vertellen wat de AVG iemand geeft bij een geautomatiseerd besluit"
+    by: court
+further_reading:
+  - en: "Tim Miller (2019), [*Explanation in Artificial Intelligence: Insights from the Social Sciences*](https://arxiv.org/pdf/1706.07269v3): what people want from an explanation, from philosophy and psychology"
+    nl: "Tim Miller (2019), [*Explanation in Artificial Intelligence: Insights from the Social Sciences*](https://arxiv.org/pdf/1706.07269v3): wat mensen van een uitleg willen, uit de filosofie en de psychologie (in het Engels)"
+  - en: "Andrew D. Selbst and Julia Powles (2017), [*Meaningful Information and the Right to Explanation*](https://escholarship.org/content/qt9cz6v3zs/qt9cz6v3zs.pdf): why Articles 13 to 15 of the GDPR give a right to explanation"
+    nl: "Andrew D. Selbst en Julia Powles (2017), [*Meaningful Information and the Right to Explanation*](https://escholarship.org/content/qt9cz6v3zs/qt9cz6v3zs.pdf): waarom de artikelen 13 tot en met 15 van de AVG een recht op uitleg geven (in het Engels)"
