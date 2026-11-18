@@ -1,0 +1,37 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: rai-dataset-consent
+minutes: 20
+title:
+  en: "Consent and licenses of data"
+  nl: "Toestemming en licenties van data"
+goal:
+  en: "keep apart what a license allows and what the people in the data agreed to, check a set of datasets for both, and say when research with people needs ethics review."
+  nl: "uit elkaar houden wat een licentie toestaat en waar de mensen in de data mee akkoord gingen, een reeks datasets op allebei controleren, en zeggen wanneer onderzoek met mensen ethische toetsing nodig heeft."
+summary:
+  - en: "That data can be downloaded does not mean you may train on it. A license comes from whoever holds the rights and says what you may copy, change and share; consent comes from the people the data are about, for a stated use. IBM's Diversity in Faces (2019) used photos that photographers had shared under a Creative Commons license, without asking the people in them."
+    nl: "Dat je data kunt downloaden, betekent niet dat je erop mag trainen. Een licentie komt van wie de rechten heeft en zegt wat je mag kopiëren, veranderen en delen; toestemming komt van de mensen over wie de data gaan, voor een genoemd gebruik. Diversity in Faces van IBM (2019) gebruikte foto's die fotografen onder een Creative Commons-licentie hadden gedeeld, zonder de mensen erop te vragen."
+  - en: "Research with people needs ethics review before it starts. In 2012, Facebook changed the news feeds of 689,003 users for a week to study emotions without asking them, and the journal added an editorial expression of concern."
+    nl: "Onderzoek met mensen heeft ethische toetsing nodig voordat het begint. In 2012 veranderde Facebook een week lang het nieuwsoverzicht van 689.003 gebruikers om emoties te onderzoeken zonder het ze te vragen, en het tijdschrift voegde een editorial expression of concern toe."
+  - en: "Data are hard to take back: MIT took 80 Million Tiny Images offline in 2020, but copies and models trained on it remain. The course's own list records the source and the license of every dataset it uses, and what the course may do with it."
+    nl: "Data krijg je moeilijk terug: MIT haalde 80 Million Tiny Images in 2020 offline, maar kopieën en modellen die erop getraind zijn, bestaan nog. De eigen lijst van de course legt van elke dataset die ze gebruikt de bron en de licentie vast, en wat de course ermee mag."
+can_now:
+  - en: "write a loop with two checks that keeps only the datasets with a license and consent"
+    nl: "een loop met twee controles schrijven die alleen de datasets met een licentie en toestemming houdt"
+    by: usable
+  - en: "say for a dataset whether its license or its consent is missing"
+    nl: "voor een dataset zeggen of de licentie of de toestemming ontbreekt"
+    by: questions
+  - en: "say what comes first when you test something with people"
+    nl: "zeggen wat er eerst komt als je iets met mensen test"
+    by: review
+further_reading:
+  - en: "Shayne Longpre and colleagues (2024), [*A large-scale audit of dataset licensing and attribution in AI*](https://doi.org/10.1038/s42256-024-00878-8), Nature Machine Intelligence"
+    nl: "Shayne Longpre en collega's (2024), [*A large-scale audit of dataset licensing and attribution in AI*](https://doi.org/10.1038/s42256-024-00878-8), Nature Machine Intelligence"
+  - en: "Creative Commons (2019), [*Statement on shared images in facial recognition AI*](https://creativecommons.org/2019/03/13/statement-on-shared-images-in-facial-recognition-ai/)"
+    nl: "Creative Commons (2019), [*Statement on shared images in facial recognition AI*](https://creativecommons.org/2019/03/13/statement-on-shared-images-in-facial-recognition-ai/)"
+  - en: "Vinay Prabhu and Abeba Birhane (2020), [*Large image datasets: a pyrrhic win for computer vision?*](https://arxiv.org/abs/2006.16923)"
+    nl: "Vinay Prabhu en Abeba Birhane (2020), [*Large image datasets: a pyrrhic win for computer vision?*](https://arxiv.org/abs/2006.16923)"
+  - en: "Matthew Salganik (2018), [*Bit by Bit: Social Research in the Digital Age*](https://www.bitbybitbook.com/en/ethics/), chapter 6 on ethics"
+    nl: "Matthew Salganik (2018), [*Bit by Bit: Social Research in the Digital Age*](https://www.bitbybitbook.com/en/ethics/), hoofdstuk 6 over ethiek"

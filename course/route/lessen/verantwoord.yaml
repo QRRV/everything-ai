@@ -190,6 +190,7 @@ lessons:
   covers: [autonomie-manipulatie-en-waardigheid#0, autonomie-manipulatie-en-waardigheid#1, autonomie-manipulatie-en-waardigheid#2]
   requires: [rai-ethical-theories]
   introduces: [c:dark-pattern, c:hypernudge, c:nudge, c:human-autonomy, c:human-dignity]
+  uses: [c:ai-ethics, c:consequentialism, c:deontology, c:harm, py:dict, py:for, py:if, py:append, py:list, py:comparison, py:print, py:comment, py:int, py:string-literal, py:variable, py:underscore-name, q:predict, q:choice, q:exercise-with-check, q:run-cell]
   data: []
   ladder: [python]
   needs: any
@@ -202,7 +203,9 @@ lessons:
   idea: "The codes of the ACM and IEEE say what a computing professional owes the public, and research is never free of values: which questions you ask and what you publish are choices you can account for."
   covers: [beroeps-en-onderzoeksethiek#0, beroeps-en-onderzoeksethiek#1]
   requires: [rai-principles]
-  introduces: [c:code-of-conduct]
+  introduces: [c:code-of-conduct, c:value-free-ideal]
+  uses: [c:ai-ethics, c:harm, c:fairness, c:accuracy, c:model, py:dict, py:for, py:arithmetic, py:print, py:comment, py:int, py:variable, py:underscore-name, q:predict, q:choice, q:exercise-with-check, q:run-cell]
+  mentions: [c:privacy, c:well-being]
   data: []
   ladder: [python]
   needs: any
@@ -216,7 +219,8 @@ lessons:
   covers: [beroeps-en-onderzoeksethiek#2]
   requires: [rai-professional-ethics, data-provenance]
   introduces: [c:ethics-review]
-  mentions: [c:consent, c:license]
+  uses: [c:consent, c:license, c:data-provenance, c:datasheet, c:code-of-conduct, c:model, c:training, c:label, py:dict, py:for, py:if, py:append, py:list, py:bool, py:comparison, py:print, py:comment, py:string-literal, py:variable, py:underscore-name, q:predict, q:choice, q:exercise-with-check, q:run-cell]
+  mentions: [c:consent, c:license, c:privacy, c:gdpr, c:personal-data, c:cifar-10]
   data: []
   ladder: [python]
   needs: any

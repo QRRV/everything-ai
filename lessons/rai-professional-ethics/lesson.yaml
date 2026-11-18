@@ -1,0 +1,37 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: rai-professional-ethics
+minutes: 20
+title:
+  en: "Codes of conduct and values in research"
+  nl: "Gedragscodes en waarden in onderzoek"
+goal:
+  en: "say what the codes of the ACM and IEEE ask of computing professionals, and show with a sum that choosing a setting rests on values."
+  nl: "zeggen wat de codes van de ACM en de IEEE van informatici vragen, en met een som laten zien dat het kiezen van een instelling op waarden rust."
+summary:
+  - en: "The ACM Code of Ethics (2018) asks computing professionals to contribute to society and human well-being, avoid harm, be honest, be fair and respect privacy, with the public good as the paramount consideration; the IEEE code opens with holding paramount the safety, health and welfare of the public."
+    nl: "De ACM Code of Ethics (2018) vraagt informatici bij te dragen aan de samenleving en het welzijn van mensen, schade te vermijden, eerlijk en rechtvaardig te zijn en privacy te respecteren, met het algemeen belang als belangrijkste overweging; de code van de IEEE opent met de belofte dat de veiligheid, de gezondheid en het welzijn van het publiek boven alles gaan."
+  - en: "Research is never free of values: how much evidence is enough depends on how bad a mistake would be (Rudner, 1953), and which questions, data and measures you choose are choices too. Of 100 highly cited machine learning papers, 15 explained how the work met a need in society, and 1 discussed possible harm (Birhane and colleagues, 2022)."
+    nl: "Onderzoek is nooit vrij van waarden: hoeveel bewijs genoeg is, hangt af van hoe erg een fout zou zijn (Rudner, 1953), en welke vragen, data en maten je kiest, zijn ook keuzes. Van 100 veel geciteerde papers over machine learning legden er 15 uit in welke behoefte van de samenleving het werk voorzag, en besprak er 1 mogelijke schade (Birhane en collega's, 2022)."
+  - en: "Putting a cost on each kind of mistake makes the values in a technical choice visible: with the same counts, different costs make a different setting the best."
+    nl: "Een prijs zetten op elke soort fout maakt de waarden in een technische keuze zichtbaar: met dezelfde aantallen maken andere kosten een andere instelling de beste."
+can_now:
+  - en: "work out the cost of each setting from its mistakes and what each kind of mistake costs"
+    nl: "de kosten van elke instelling uitrekenen uit de fouten en wat elke soort fout kost"
+    by: cost
+  - en: "name the principle of the ACM code that a situation is mainly about"
+    nl: "het principe uit de ACM-code noemen waar een situatie vooral over gaat"
+    by: principles
+  - en: "explain why a study that only reports a number still rests on values"
+    nl: "uitleggen waarom een onderzoek dat alleen een getal meldt, toch op waarden rust"
+    by: values
+further_reading:
+  - en: "ACM (2018), [*ACM Code of Ethics and Professional Conduct*](https://www.acm.org/code-of-ethics)"
+    nl: "ACM (2018), [*ACM Code of Ethics and Professional Conduct*](https://www.acm.org/code-of-ethics)"
+  - en: "Abeba Birhane and colleagues (2022), [*The values encoded in machine learning research*](https://doi.org/10.1145/3531146.3533083), FAccT 2022"
+    nl: "Abeba Birhane en collega's (2022), [*The values encoded in machine learning research*](https://doi.org/10.1145/3531146.3533083), FAccT 2022"
+  - en: "Richard Rudner (1953), [*The scientist qua scientist makes value judgments*](https://doi.org/10.1086/287231), Philosophy of Science"
+    nl: "Richard Rudner (1953), [*The scientist qua scientist makes value judgments*](https://doi.org/10.1086/287231), Philosophy of Science"
+  - en: "Heather Douglas (2009), *Science, Policy, and the Value-Free Ideal*, University of Pittsburgh Press"
+    nl: "Heather Douglas (2009), *Science, Policy, and the Value-Free Ideal*, University of Pittsburgh Press"

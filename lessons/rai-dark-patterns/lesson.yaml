@@ -1,0 +1,37 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: rai-dark-patterns
+minutes: 20
+title:
+  en: "Dark patterns, nudges and manipulation"
+  nl: "Dark patterns, nudges en manipulatie"
+goal:
+  en: "tell a nudge from a dark pattern and a hypernudge, check a design for options that are harder than they need to be, and say when steering becomes manipulation."
+  nl: "een nudge onderscheiden van een dark pattern en een hypernudge, een ontwerp controleren op opties die moeilijker zijn dan nodig, en zeggen wanneer sturen manipulatie wordt."
+summary:
+  - en: "A nudge, such as a default, steers openly; a dark pattern works against the person, by hiding, ticking in advance or rushing; a hypernudge adapts to each person, from data about them, all the time."
+    nl: "Een nudge, zoals een standaardkeuze, stuurt openlijk; een dark pattern werkt tegen de persoon in, door te verstoppen, vooraf aan te vinken of op te jagen; een hypernudge past zich steeds aan elke persoon aan, met data over die persoon."
+  - en: "Steering becomes manipulation when it goes around a person's own reasons, by working in a hidden way on a weak spot; it harms human autonomy and human dignity."
+    nl: "Sturen wordt manipulatie als het om iemands eigen redenen heen gaat, door op een verborgen manier in te spelen op een zwakke plek; het schaadt menselijke autonomie en menselijke waardigheid."
+  - en: "Counting the steps for each option, such as joining and leaving, shows where a design makes the choice that is good for the person harder."
+    nl: "De stappen voor elke optie tellen, zoals lid worden en opzeggen, laat zien waar een ontwerp de keuze die goed is voor de persoon moeilijker maakt."
+can_now:
+  - en: "write a loop that finds the options that take more steps to leave than to join"
+    nl: "een loop schrijven die de opties vindt die meer stappen kosten om op te zeggen dan om lid te worden"
+    by: harder
+  - en: "tell a nudge, a dark pattern and a hypernudge apart"
+    nl: "een nudge, een dark pattern en een hypernudge uit elkaar houden"
+    by: kinds
+  - en: "say what makes steering manipulation"
+    nl: "zeggen wat sturen tot manipulatie maakt"
+    by: manipulation
+further_reading:
+  - en: "Arunesh Mathur and colleagues (2019), [*Dark patterns at scale: findings from a crawl of 11K shopping websites*](https://doi.org/10.1145/3359183), Proceedings of the ACM on Human-Computer Interaction"
+    nl: "Arunesh Mathur en collega's (2019), [*Dark patterns at scale: findings from a crawl of 11K shopping websites*](https://doi.org/10.1145/3359183), Proceedings of the ACM on Human-Computer Interaction"
+  - en: "Karen Yeung (2017), [*'Hypernudge': Big Data as a mode of regulation by design*](https://doi.org/10.1080/1369118X.2016.1186713), Information, Communication & Society"
+    nl: "Karen Yeung (2017), [*'Hypernudge': Big Data as a mode of regulation by design*](https://doi.org/10.1080/1369118X.2016.1186713), Information, Communication & Society"
+  - en: "Daniel Susser, Beate Roessler and Helen Nissenbaum (2019), [*Technology, autonomy, and manipulation*](https://doi.org/10.14763/2019.2.1410), Internet Policy Review"
+    nl: "Daniel Susser, Beate Roessler en Helen Nissenbaum (2019), [*Technology, autonomy, and manipulation*](https://doi.org/10.14763/2019.2.1410), Internet Policy Review"
+  - en: "Eric Johnson and Daniel Goldstein (2003), [*Do defaults save lives?*](https://doi.org/10.1126/science.1091721), Science"
+    nl: "Eric Johnson en Daniel Goldstein (2003), [*Do defaults save lives?*](https://doi.org/10.1126/science.1091721), Science"
