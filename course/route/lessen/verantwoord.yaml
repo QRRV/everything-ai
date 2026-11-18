@@ -804,7 +804,8 @@ lessons:
   idea: "SHAP, InterpretML and DiCE do what you built by hand at scale; the lesson shows their calls next to your own code (shown, not run), and which choices (background data, samples) change the answer."
   covers: [xai-tooling#0]
   requires: [rai-shapley-values]
-  introduces: [c:kernelshap, c:interpretml]
+  introduces: [c:kernelshap, c:treeshap, c:interpretml]
+  mentions: [c:explainable-boosting-machine, c:feature-selection]
   data: [uci-adult]
   ladder: [python, numpy]
   needs: any

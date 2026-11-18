@@ -1,0 +1,44 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: rai-xai-tools
+minutes: 30
+title:
+  en: "Tools for explanations"
+  nl: "Tools voor uitleg"
+goal:
+  en: "read the calls of shap, InterpretML and DiCE next to what you built by hand, write two of the ways they compute Shapley values, and find the choices (background, game, samples, defaults) that change their answer."
+  nl: "de aanroepen van shap, InterpretML en DiCE naast wat je met de hand bouwde lezen, twee van de manieren waarop ze Shapley-waarden uitrekenen zelf schrijven, en de keuzes vinden (achtergrond, spel, steekproeven, standaardinstellingen) die hun antwoord veranderen."
+summary:
+  - en: "shap turns a table you give it as a background into a masker that keeps at most 100 rows. For the person aged 41, ten backgrounds of 1 row give education_num anywhere from −0.108 to +0.259, ten of 1000 rows from +0.147 to +0.172."
+    nl: "shap maakt van een tabel die je als achtergrond geeft een masker dat hoogstens 100 rijen houdt. Voor de persoon van 41 geven tien achtergronden van 1 rij education_num van −0,108 tot +0,259, tien van 1000 rijen van +0,147 tot +0,172."
+  - en: "Above 10 columns shap draws random orders, as Štrumbelj and Kononenko did; KernelSHAP (Lundberg and Lee, 2017) fits a line on coalitions weighted with the Shapley kernel, and with all 14 coalitions of four columns it gives the exact values."
+    nl: "Boven 10 kolommen trekt shap willekeurige volgordes, zoals Štrumbelj en Kononenko deden; KernelSHAP (Lundberg en Lee, 2017) fit een lijn op coalities die met de Shapley-kernel wegen, en met alle 14 coalities van vier kolommen geeft hij de exacte waarden."
+  - en: "TreeSHAP plays one of two games: with data it fills in from the rows you give, without data it follows the trees and their training rows. For the same forest and person, hours_per_week gets −0.010 with data and −0.026 without (by hand, with data over the 200 rows)."
+    nl: "TreeSHAP speelt een van twee spellen: met data vult hij in uit de rijen die je geeft, zonder data volgt hij de bomen en hun trainingsrijen. Voor hetzelfde forest en dezelfde persoon krijgt hours_per_week −0,010 met data en −0,026 zonder (met de hand, met data over de 200 rijen)."
+  - en: "Defaults are choices: KernelSHAP keeps at most about 10 columns since shap 0.47, DiCE may change every feature, and an Explainable Boosting Machine from InterpretML needs no background because it explains itself."
+    nl: "Standaardinstellingen zijn keuzes: KernelSHAP houdt sinds shap 0.47 hoogstens ongeveer 10 kolommen over, DiCE mag elke feature veranderen, en een Explainable Boosting Machine uit InterpretML heeft geen achtergrond nodig, want die legt zichzelf uit."
+can_now:
+  - en: "estimate a Shapley value from a sample of random orders, as shap's PermutationExplainer does"
+    nl: "een Shapley-waarde schatten uit een steekproef van willekeurige volgordes, zoals PermutationExplainer van shap doet"
+    by: sampled
+  - en: "write the Shapley kernel of KernelSHAP and say why the empty and the full coalition weigh infinitely much"
+    nl: "de Shapley-kernel van KernelSHAP schrijven en zeggen waarom de lege en de volle coalitie oneindig zwaar wegen"
+    by: kernel
+  - en: "explain why TreeSHAP gives other values with data than without"
+    nl: "uitleggen waarom TreeSHAP met data andere waarden geeft dan zonder"
+    by: data
+  - en: "find a library default that changes the answer, such as the number of columns KernelSHAP keeps"
+    nl: "een standaardinstelling van een library vinden die het antwoord verandert, zoals het aantal kolommen dat KernelSHAP overhoudt"
+    by: ten
+further_reading:
+  - en: "[shap documentation](https://shap.readthedocs.io/en/stable/index.html): the explainers, maskers and their defaults"
+    nl: "[Documentatie van shap](https://shap.readthedocs.io/en/stable/index.html): de explainers, de maskers en hun standaardinstellingen (in het Engels)"
+  - en: "Scott M. Lundberg and Su-In Lee (2017), [*A Unified Approach to Interpreting Model Predictions*](https://arxiv.org/abs/1705.07874): KernelSHAP and the Shapley kernel"
+    nl: "Scott M. Lundberg en Su-In Lee (2017), [*A Unified Approach to Interpreting Model Predictions*](https://arxiv.org/abs/1705.07874): KernelSHAP en de Shapley-kernel (in het Engels)"
+  - en: "Scott M. Lundberg and others (2020), [*From local explanations to global understanding with explainable AI for trees*](https://www.nature.com/articles/s42256-019-0138-9), Nature Machine Intelligence: TreeSHAP"
+    nl: "Scott M. Lundberg en anderen (2020), [*From local explanations to global understanding with explainable AI for trees*](https://www.nature.com/articles/s42256-019-0138-9), Nature Machine Intelligence: TreeSHAP (in het Engels)"
+  - en: "[InterpretML: Explainable Boosting Machine](https://interpret.ml/docs/ebm.html): how an EBM is fitted and explained"
+    nl: "[InterpretML: Explainable Boosting Machine](https://interpret.ml/docs/ebm.html): hoe een EBM gefit en uitgelegd wordt (in het Engels)"
+  - en: "Ramaravind K. Mothilal, Amit Sharma and Chenhao Tan (2020), [*Explaining Machine Learning Classifiers through Diverse Counterfactual Explanations*](https://arxiv.org/abs/1905.07697): DiCE"
+    nl: "Ramaravind K. Mothilal, Amit Sharma en Chenhao Tan (2020), [*Explaining Machine Learning Classifiers through Diverse Counterfactual Explanations*](https://arxiv.org/abs/1905.07697): DiCE (in het Engels)"
