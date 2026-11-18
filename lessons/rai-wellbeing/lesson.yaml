@@ -1,0 +1,33 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: rai-wellbeing
+minutes: 20
+title:
+  en: "What should AI make better?"
+  nl: "Wat moet AI beter maken?"
+goal:
+  en: "see that what a system optimizes is a choice about well-being, and score one feed by clicks and by what people can do afterwards."
+  nl: "zien dat wat een systeem optimaliseert een keuze over welzijn is, en één feed scoren op klikken en op wat mensen daarna kunnen."
+summary:
+  - en: "Well-being is what makes a life go well for the person living it. Theories differ: pleasure (hedonism), getting what you want (preference satisfaction), or a list of things that are good for anyone, such as health and friendship."
+    nl: "Welzijn is wat een leven goed maakt voor wie het leeft. Theorieën verschillen: plezier (hedonisme), krijgen wat je wilt (preference satisfaction), of een lijst van dingen die voor iedereen goed zijn, zoals gezondheid en vriendschap."
+  - en: "The capability approach of Amartya Sen and Martha Nussbaum asks what people are really able to do and be, such as being able to read, to get around, and to take part in their community."
+    nl: "De capability approach van Amartya Sen en Martha Nussbaum vraagt wat mensen echt kunnen doen en zijn, zoals kunnen lezen, ergens kunnen komen en meedoen in hun gemeenschap."
+  - en: "A click is a preference in the moment. A feed ranked by clicks can score well on clicks and badly on what people are glad about later, or on what they can do afterwards."
+    nl: "Een klik is een voorkeur van het moment. Een feed die op klikken is gerangschikt, kan goed scoren op klikken en slecht op waar mensen later blij mee zijn, of op wat ze daarna kunnen."
+can_now:
+  - en: "score the top of a feed on several measures of well-being"
+    nl: "de top van een feed scoren op verschillende maten van welzijn"
+    by: scores
+  - en: "tell which theory of well-being a measure belongs to"
+    nl: "herkennen bij welke theorie van welzijn een maat hoort"
+    by: measures
+  - en: "choose a goal for an app that fits the capability approach"
+    nl: "een doel voor een app kiezen dat past bij de capability approach"
+    by: goal
+further_reading:
+  - en: "Ingrid Robeyns and Morten Fibieger Byskov (2025), [*The Capability Approach*](https://plato.stanford.edu/entries/capability-approach/), Stanford Encyclopedia of Philosophy"
+    nl: "Ingrid Robeyns en Morten Fibieger Byskov (2025), [*The Capability Approach*](https://plato.stanford.edu/entries/capability-approach/), Stanford Encyclopedia of Philosophy"
+  - en: "Allcott, Braghieri, Eichmeyer and Gentzkow (2020), [*The Welfare Effects of Social Media*](https://doi.org/10.1257/aer.20190658), American Economic Review: what happened when people stopped using Facebook for four weeks"
+    nl: "Allcott, Braghieri, Eichmeyer en Gentzkow (2020), [*The Welfare Effects of Social Media*](https://doi.org/10.1257/aer.20190658), American Economic Review: wat er gebeurde toen mensen vier weken stopten met Facebook"

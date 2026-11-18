@@ -1,0 +1,35 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: rai-ethical-theories
+minutes: 20
+title:
+  en: "Ethical theories applied to AI"
+  nl: "Ethische theorieën toegepast op AI"
+goal:
+  en: "look at one decision of an AI system through several ethical theories, and see where they agree and where they do not."
+  nl: "één beslissing van een AI-systeem bekijken door verschillende ethische theorieën, en zien waar ze het eens en oneens zijn."
+summary:
+  - en: "Consequentialism judges a choice by what it brings about, added up over everyone; deontology holds that some duties and rights count whatever the outcome."
+    nl: "Consequentialisme beoordeelt een keuze op wat ze teweegbrengt, opgeteld over iedereen; deontologie houdt vast aan plichten en rechten die tellen wat de uitkomst ook is."
+  - en: "A fair agreement asks which rule you would choose without knowing who you will be (Rawls's veil of ignorance); virtue ethics asks what a person of good character would do, and care ethics starts from relationships and from those who depend on others. Traditions such as Ubuntu ask what a choice does to a community."
+    nl: "Een eerlijke afspraak vraagt welke regel je zou kiezen zonder te weten wie je zult zijn (de sluier van onwetendheid van Rawls); deugdethiek vraagt wat iemand met een goed karakter zou doen, en zorgethiek begint bij relaties en bij wie van anderen afhankelijk is. Tradities zoals Ubuntu vragen wat een keuze met een gemeenschap doet."
+  - en: "The theories often agree. Where they do not, as with the most good in total against the most for the worst off, you see what is at stake."
+    nl: "De theorieën zijn het vaak eens. Waar dat niet zo is, zoals bij het meeste goed in totaal tegenover het meeste voor wie het slechtst af is, zie je wat er op het spel staat."
+can_now:
+  - en: "work out which option leaves the worst-off group best off"
+    nl: "uitrekenen bij welke keuze de groep die het slechtst af is het best af is"
+    by: worst
+  - en: "tell which ethical theory an argument comes from"
+    nl: "herkennen uit welke ethische theorie een argument komt"
+    by: theories
+  - en: "say what Ubuntu adds to a decision about people"
+    nl: "zeggen wat Ubuntu toevoegt aan een beslissing over mensen"
+    by: ubuntu
+further_reading:
+  - en: "Vincent C. Müller (2026), [*Ethics of Artificial Intelligence and Robotics*](https://plato.stanford.edu/entries/ethics-ai/), Stanford Encyclopedia of Philosophy"
+    nl: "Vincent C. Müller (2026), [*Ethics of Artificial Intelligence and Robotics*](https://plato.stanford.edu/entries/ethics-ai/), Stanford Encyclopedia of Philosophy"
+  - en: "Shannon Vallor (2016), [*Technology and the Virtues*](https://doi.org/10.1093/acprof:oso/9780190498511.001.0001), Oxford University Press: virtue ethics for new technology"
+    nl: "Shannon Vallor (2016), [*Technology and the Virtues*](https://doi.org/10.1093/acprof:oso/9780190498511.001.0001), Oxford University Press: deugdethiek voor nieuwe technologie"
+  - en: "Thaddeus Metz (2007), [*Toward an African Moral Theory*](https://doi.org/10.1111/j.1467-9760.2007.00280.x), Journal of Political Philosophy: Ubuntu as a moral theory"
+    nl: "Thaddeus Metz (2007), [*Toward an African Moral Theory*](https://doi.org/10.1111/j.1467-9760.2007.00280.x), Journal of Political Philosophy: Ubuntu als morele theorie"

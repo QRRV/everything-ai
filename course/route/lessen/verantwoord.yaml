@@ -13,10 +13,11 @@ lessons:
   level: basis
   domein: verantwoord
   module: ethiek
-  idea: "A model can harm people by what it hands out (a loan, a job: allocative harm) and by how it shows them (worse service, stereotypes, being left out: representational harm); you measure the first per group, and you have to look for the second."
+  idea: "A model can harm people by what it hands out (a loan, a job: allocative harm) and by how it shows them (stereotypes, being left out: representational harm); you measure the first per group, and you have to look for the second."
   covers: [waarom-ai-ethiek#1]
   requires: [rai-bias-in-data]
   introduces: [c:allocative-harm, c:representational-harm, c:fairness]
+  uses: [c:harm, c:stakeholder, c:harmful-bias, c:data-bias, c:generative-ai, c:model, c:test-set, c:accuracy, c:label, c:mean, py:dataframe, py:pandas-select-filter, py:boolean-mask, py:dict, py:for, py:comparison, py:list, py:arithmetic, py:import, py:import-as, py:print, py:comment, py:float, py:int, py:variable, py:underscore-name, q:predict, q:choice, q:exercise-with-check, q:run-cell]
   data: []
   ladder: [python]
   needs: any
@@ -30,6 +31,7 @@ lessons:
   covers: [ethische-theorieen-en-machine-ethiek#0]
   requires: [rai-two-kinds-of-harm]
   introduces: [c:ai-ethics, c:virtue-ethics, c:care-ethics, c:consequentialism, c:deontology]
+  uses: [c:allocative-harm, c:representational-harm, c:fairness, c:harm, c:stakeholder, c:model, c:test-set, py:dict, py:dict-items, py:for, py:arithmetic, py:min-max, py:print, py:comment, py:float, py:int, py:variable, py:underscore-name, q:predict, q:choice, q:exercise-with-check, q:run-cell]
   data: []
   ladder: [python]
   needs: any
@@ -43,6 +45,7 @@ lessons:
   covers: [ethische-theorieen-en-machine-ethiek#1]
   requires: [rai-ethical-theories]
   introduces: [c:capability-approach, c:well-being]
+  uses: [c:ai-ethics, c:consequentialism, c:deontology, c:care-ethics, c:model, c:prediction, c:mean, py:dataframe, py:iloc, py:slicing, py:round, py:dict, py:for, py:list, py:import, py:import-as, py:print, py:comment, py:float, py:variable, py:underscore-name, q:predict, q:choice, q:exercise-with-check, q:run-cell]
   data: []
   ladder: [python]
   needs: any

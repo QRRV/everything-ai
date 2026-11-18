@@ -1,0 +1,33 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: rai-two-kinds-of-harm
+minutes: 20
+title:
+  en: "Two kinds of harm"
+  nl: "Twee soorten schade"
+goal:
+  en: "tell harm from what a system hands out apart from harm from how it shows people, and measure each with a count per group."
+  nl: "schade door wat een systeem uitdeelt onderscheiden van schade door hoe het mensen laat zien, en elk van de twee meten met een telling per groep."
+summary:
+  - en: "Allocative harm comes from what a system hands out, such as loans, jobs or extra checks, when some groups get less or worse than they should. You measure it as the share of each group that gets a yes."
+    nl: "Allocatieve schade komt van wat een systeem uitdeelt, zoals leningen, banen of extra controles, als sommige groepen minder of slechter krijgen dan terecht is. Je meet het als het aandeel van elke groep dat een ja krijgt."
+  - en: "Representational harm comes from how a system shows or describes groups: stereotypes, insults, or a group that is left out. It needs no decision about anyone, so you have to look for it: collect many outputs and count who is shown how."
+    nl: "Representatieve schade komt van hoe een systeem groepen laat zien of beschrijft: stereotypen, beledigingen, of een groep die wordt weggelaten. Er hoeft over niemand iets beslist te worden, dus je moet ernaar zoeken: verzamel veel uitvoer en tel wie hoe wordt getoond."
+  - en: "Fairness is the aim that a system does not treat people or groups unjustly. In a study published in 2015, 11% of the image results for CEO showed a woman, while 27% of the CEOs in the US were women: pictures can make a stereotype stronger than the world is."
+    nl: "Fairness is het streven dat een systeem mensen of groepen niet onrechtvaardig behandelt. In een onderzoek uit 2015 toonde 11% van de afbeeldingen bij CEO een vrouw, terwijl 27% van de CEO's in de VS vrouw was: beelden kunnen een stereotype sterker maken dan de wereld is."
+can_now:
+  - en: "measure how often a system shows a group, per job or role"
+    nl: "meten hoe vaak een systeem een groep laat zien, per beroep of rol"
+    by: shares
+  - en: "tell allocative harm from representational harm"
+    nl: "allocatieve en representatieve schade uit elkaar houden"
+    by: kinds
+  - en: "plan how to look for representational harm in what a model writes"
+    nl: "plannen hoe je zoekt naar representatieve schade in wat een model schrijft"
+    by: look-for
+further_reading:
+  - en: "Kate Crawford (2017), [*The Trouble with Bias*](https://www.youtube.com/watch?v=fMym_BKWQzk), keynote at NIPS 2017 (now NeurIPS): the talk that made the two kinds of harm widely known"
+    nl: "Kate Crawford (2017), [*The Trouble with Bias*](https://www.youtube.com/watch?v=fMym_BKWQzk), keynote op NIPS 2017 (nu NeurIPS): de lezing die de twee soorten schade bekend maakte"
+  - en: "Kay, Matuszek and Munson (2015), [*Unequal Representation and Gender Stereotypes in Image Search Results for Occupations*](https://doi.org/10.1145/2702123.2702520), CHI 2015"
+    nl: "Kay, Matuszek en Munson (2015), [*Unequal Representation and Gender Stereotypes in Image Search Results for Occupations*](https://doi.org/10.1145/2702123.2702520), CHI 2015"

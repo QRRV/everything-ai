@@ -308,6 +308,9 @@ def same_value(a, b, rel: float = 1e-6) -> bool:
     if isinstance(a, list) and isinstance(b, list) or type(a) is tuple and type(b) is tuple:
         # a list, a tuple, or the values a generator handed out: value by value, so arrays inside work too
         return len(a) == len(b) and all(same_value(x, y, rel) for x, y in zip(a, b))
+    if type(a) is dict and type(b) is dict:
+        # a dictionary: the same keys, and under each key the same value, such as a mean per group from pandas
+        return a.keys() == b.keys() and all(same_value(a[k], b[k], rel) for k in a)
     return type(a) is type(b) and a == b
 
 
@@ -1640,6 +1643,8 @@ def _as_rounded(v, digits: int | None) -> str:
     if isinstance(v, (list, tuple)) and not isinstance(v, Handed):
         inner = ", ".join(_as_rounded(x, digits) for x in v)
         return f"[{inner}]" if isinstance(v, list) else f"({inner}{',' if len(v) == 1 else ''})"
+    if type(v) is dict:
+        return "{" + ", ".join(f"{k!r}: {_as_rounded(x, digits)}" for k, x in v.items()) + "}"   # as Python shows it
     return _as_python(v)
 
 
@@ -1654,16 +1659,21 @@ def _show_rounded(v, digits: int | None) -> str:
     if isinstance(v, (list, tuple)) and not isinstance(v, Handed):
         inner = ", ".join(_show_rounded(x, digits) for x in v)
         return f"[{inner}]" if isinstance(v, list) else f"({inner}{',' if len(v) == 1 else ''})"
+    if type(v) is dict:
+        return "{" + ", ".join(f"{_show(k)}: {_show_rounded(x, digits)}" for k, x in v.items()) + "}"
     return _show(v)
 
 
 def _plain(v):
-    """NumPy numbers inside a list or tuple as the plain numbers they are, so they show as `6`, not `np.int64(6)`."""
+    """NumPy numbers inside a list, a tuple or a dictionary as the plain numbers they are, so they show as `6`, not
+    `np.int64(6)`."""
     np = _numpy()
     if np is not None and isinstance(v, np.generic):
         return v.item()
     if isinstance(v, (list, tuple)) and not isinstance(v, Handed):
         return type(v)(_plain(x) for x in v)
+    if type(v) is dict:
+        return {k: _plain(x) for k, x in v.items()}
     return v
 
 
