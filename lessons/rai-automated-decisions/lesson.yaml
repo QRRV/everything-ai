@@ -1,0 +1,33 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: rai-automated-decisions
+minutes: 20
+title:
+  en: "Deciding about people automatically"
+  nl: "Automatisch over mensen beslissen"
+goal:
+  en: "weigh when a decision about people may be automated, by what it decides and by whether people can contest it, and test a decision letter for what someone needs to object."
+  nl: "afwegen wanneer een besluit over mensen geautomatiseerd mag worden, naar wat het beslist en naar of mensen het kunnen aanvechten, en een besluitbrief toetsen op wat iemand nodig heeft om bezwaar te maken."
+summary:
+  - en: "People who decide differ from each other; a rule in software decides every case the same way, which can be fairer, but it also takes away the room to see that a case is unusual."
+    nl: "Mensen die beslissen verschillen van elkaar; een regel in software beslist elk geval op dezelfde manier, en dat kan eerlijker zijn, maar het neemt ook de ruimte weg om te zien dat een geval ongewoon is."
+  - en: "Checking a fact can be automated more safely than weighing circumstances, which needs someone who can see this case."
+    nl: "Een feit controleren kan veiliger geautomatiseerd worden dan omstandigheden wegen, waarvoor iemand nodig is die dit geval kan zien."
+  - en: "Contestability is how well people can challenge a decision and get it changed: they need to know why, where to object, enough time, and someone who can change it."
+    nl: "Contestability is hoe goed mensen een besluit kunnen aanvechten en laten veranderen: ze moeten weten waarom, waar bezwaar kan, genoeg tijd hebben, en iemand vinden die het kan veranderen."
+can_now:
+  - en: "write a function that tests whether a decision letter lets someone object"
+    nl: "een functie schrijven die toetst of iemand bezwaar kan maken tegen een besluitbrief"
+    by: contestable
+  - en: "tell a decision that checks a fact from one that weighs circumstances"
+    nl: "een besluit dat een feit controleert onderscheiden van een besluit dat omstandigheden weegt"
+    by: fact
+  - en: "say what a reason must give someone who wants to object"
+    nl: "zeggen wat een reden moet geven aan iemand die bezwaar wil maken"
+    by: score
+further_reading:
+  - en: "Mark Bovens and Stavros Zouridis (2002), [*From street-level to system-level bureaucracies*](https://doi.org/10.1111/0033-3352.00168), Public Administration Review"
+    nl: "Mark Bovens en Stavros Zouridis (2002), [*From street-level to system-level bureaucracies*](https://doi.org/10.1111/0033-3352.00168), Public Administration Review"
+  - en: "Jaya Ramji-Nogales, Andrew Schoenholtz and Philip Schrag (2007), *Refugee roulette: disparities in asylum adjudication*, Stanford Law Review 60"
+    nl: "Jaya Ramji-Nogales, Andrew Schoenholtz en Philip Schrag (2007), *Refugee roulette: disparities in asylum adjudication*, Stanford Law Review 60"

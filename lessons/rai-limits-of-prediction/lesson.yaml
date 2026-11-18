@@ -1,0 +1,35 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: rai-limits-of-prediction
+minutes: 20
+title:
+  en: "How far can you predict a life?"
+  nl: "Hoe ver kun je een leven voorspellen?"
+goal:
+  en: "judge how well an outcome in someone's life can be predicted, with R² and a simple model to compare with, and spot when the label a model learns is not the question you mean."
+  nl: "beoordelen hoe goed een uitkomst in iemands leven te voorspellen is, met R² en een eenvoudig model om mee te vergelijken, en zien wanneer het label dat een model leert niet de vraag is die je bedoelt."
+summary:
+  - en: "In the Fragile Families Challenge, 160 teams with thousands of facts about each family reached an R² of about 0.2 at best for a child's grades at 15, only a little better than a simple model with four variables."
+    nl: "In de Fragile Families Challenge haalden 160 teams met duizenden gegevens per gezin hooguit een R² van ongeveer 0,2 voor de cijfers van een kind op 15, maar een beetje beter dan een eenvoudig model met vier variabelen."
+  - en: "In Arvind Narayanan's view, perception, such as speech to text, has made real progress, automating judgment is improving, and predicting social outcomes, such as who will commit a crime again, is fundamentally dubious."
+    nl: "Volgens Arvind Narayanan heeft waarneming, zoals spraak naar tekst, echt vooruitgang geboekt, wordt oordelen automatiseren beter, en is sociale uitkomsten voorspellen, zoals wie opnieuw een misdrijf pleegt, principieel twijfelachtig."
+  - en: "A target-goal mismatch is the gap between the label a model learns because it can be measured and what you want to know, such as health costs instead of health needs."
+    nl: "Een target-goal mismatch is het gat tussen het label dat een model leert omdat het te meten is en wat je wilt weten, zoals zorgkosten in plaats van zorgbehoefte."
+can_now:
+  - en: "write a function that gives the R² of a model's predictions, and compare a careful model with a simple one"
+    nl: "een functie schrijven die de R² van de voorspellingen van een model geeft, en een zorgvuldig model met een eenvoudig model vergelijken"
+    by: r2
+  - en: "tell perception, automating judgment and predicting social outcomes apart"
+    nl: "waarneming, oordelen automatiseren en sociale uitkomsten voorspellen uit elkaar houden"
+    by: kinds
+  - en: "spot a target-goal mismatch in a plan to predict something about people"
+    nl: "een target-goal mismatch zien in een plan om iets over mensen te voorspellen"
+    by: target
+further_reading:
+  - en: "Matthew Salganik and colleagues (2020), [*Measuring the predictability of life outcomes with a scientific mass collaboration*](https://doi.org/10.1073/pnas.1915006117), PNAS"
+    nl: "Matthew Salganik en collega's (2020), [*Measuring the predictability of life outcomes with a scientific mass collaboration*](https://doi.org/10.1073/pnas.1915006117), PNAS"
+  - en: "Ziad Obermeyer and colleagues (2019), [*Dissecting racial bias in an algorithm used to manage the health of populations*](https://doi.org/10.1126/science.aax2342), Science"
+    nl: "Ziad Obermeyer en collega's (2019), [*Dissecting racial bias in an algorithm used to manage the health of populations*](https://doi.org/10.1126/science.aax2342), Science"
+  - en: "Arvind Narayanan (2019), [*How to recognize AI snake oil*](https://www.cs.princeton.edu/~arvindn/talks/MIT-STS-AI-snakeoil.pdf), slides of a talk"
+    nl: "Arvind Narayanan (2019), [*How to recognize AI snake oil*](https://www.cs.princeton.edu/~arvindn/talks/MIT-STS-AI-snakeoil.pdf), dia's van een lezing"

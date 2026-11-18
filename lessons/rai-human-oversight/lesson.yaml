@@ -1,0 +1,35 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: rai-human-oversight
+minutes: 20
+title:
+  en: "A person in the loop"
+  nl: "Een mens in de loop"
+goal:
+  en: "say what the GDPR and the AI Act ask of human oversight, recognize automation bias, and test a person in the loop by counting how many of the system's mistakes the person catches."
+  nl: "zeggen wat de AVG en de AI Act van menselijk toezicht vragen, automation bias herkennen, en een mens in de loop toetsen door te tellen hoeveel fouten van het systeem die persoon vangt."
+summary:
+  - en: "The GDPR gives people the right not to be subject to a fully automated decision with serious effects; the AI Act asks that people can understand, overrule and stop a high-risk system."
+    nl: "De AVG geeft mensen het recht om niet onderworpen te worden aan een volledig automatisch besluit met ingrijpende gevolgen; de AI Act vraagt dat mensen een systeem met een hoog risico kunnen begrijpen, terugdraaien en stoppen."
+  - en: "Automation bias is relying on a system more than the evidence allows: people miss what it does not flag and follow its mistakes."
+    nl: "Automation bias is meer op een systeem vertrouwen dan het bewijs toelaat: mensen missen wat het niet aanwijst en volgen de fouten ervan."
+  - en: "Oversight works only with time, information about the case and the power to say no, and only if you check it: count how many of the system's mistakes the person catches, not how often the person agrees."
+    nl: "Toezicht werkt alleen met tijd, informatie over het geval en de macht om nee te zeggen, en alleen als je het controleert: tel hoeveel fouten van het systeem de persoon vangt, niet hoe vaak die het eens is."
+can_now:
+  - en: "count how many of a model's mistakes a reviewer put right"
+    nl: "tellen hoeveel fouten van een model een beoordelaar rechtzette"
+    by: caught
+  - en: "say whether a reviewer is missing time, information or the power to say no"
+    nl: "zeggen of een beoordelaar tijd, informatie of de macht om nee te zeggen mist"
+    by: missing
+  - en: "say what to ask first about a person in the loop"
+    nl: "zeggen wat je eerst vraagt over een mens in de loop"
+    by: audit
+further_reading:
+  - en: "Linda Skitka, Kathleen Mosier and Mark Burdick (1999), [*Does automation bias decision-making?*](https://doi.org/10.1006/ijhc.1999.0252), International Journal of Human-Computer Studies"
+    nl: "Linda Skitka, Kathleen Mosier en Mark Burdick (1999), [*Does automation bias decision-making?*](https://doi.org/10.1006/ijhc.1999.0252), International Journal of Human-Computer Studies"
+  - en: "Ben Green (2022), [*The flaws of policies requiring human oversight of government algorithms*](https://doi.org/10.1016/j.clsr.2022.105681), Computer Law & Security Review"
+    nl: "Ben Green (2022), [*The flaws of policies requiring human oversight of government algorithms*](https://doi.org/10.1016/j.clsr.2022.105681), Computer Law & Security Review"
+  - en: "The AI Act, [Article 14: human oversight](https://ai-act-service-desk.ec.europa.eu/en/ai-act/article-14)"
+    nl: "De AI Act, [artikel 14: menselijk toezicht](https://ai-act-service-desk.ec.europa.eu/en/ai-act/article-14)"

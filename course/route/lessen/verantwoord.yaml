@@ -145,6 +145,7 @@ lessons:
   covers: [verantwoordelijkheid-en-menselijk-toezicht#1]
   requires: [rai-accountability]
   introduces: [c:human-oversight, c:automation-bias]
+  uses: [c:accountability, c:responsibility-gap, c:model, c:prediction, py:list, py:for, py:range, py:len, py:indexing, py:if, py:comparison, py:arithmetic, py:print, py:comment, py:int, py:variable, py:underscore-name, q:predict, q:choice, q:exercise-with-check, q:run-cell]
   mentions: [c:gdpr]
   data: []
   ladder: [python]
@@ -159,6 +160,8 @@ lessons:
   covers: [verantwoordelijkheid-en-menselijk-toezicht#2, verantwoordelijkheid-en-menselijk-toezicht#4]
   requires: [rai-human-oversight]
   introduces: [c:contestability]
+  uses: [c:human-oversight, c:automation-bias, c:model, c:decision-threshold, py:def, py:return, py:if, py:dict, py:list, py:for, py:append, py:comparison, py:str, py:bool, py:print, py:int, py:variable, py:underscore-name, q:predict, q:choice, q:exercise-with-check, q:run-cell]
+  mentions: [c:gdpr]
   data: []
   ladder: [python]
   needs: any
@@ -172,6 +175,8 @@ lessons:
   covers: [verantwoordelijkheid-en-menselijk-toezicht#3]
   requires: [rai-automated-decisions, ml-regression-metrics]
   introduces: [c:target-goal-mismatch]
+  uses: [c:contestability, c:coefficient-of-determination, c:mean-absolute-error, c:mean-squared-error, c:variance, c:mean, c:baseline, c:model, c:prediction, c:label, c:feature, c:residual, py:def, py:return, py:np-array, py:np-mean, py:abs, py:import, py:import-as, py:list, py:arithmetic, py:print, py:float, py:variable, py:underscore-name, q:predict, q:choice, q:exercise-with-check, q:run-cell]
+  mentions: [c:proxy-label]
   data: []
   ladder: [python]
   needs: any
