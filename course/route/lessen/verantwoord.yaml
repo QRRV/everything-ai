@@ -102,6 +102,8 @@ lessons:
   covers: [ontwerpmethoden#0, ontwerpmethoden#1, ontwerpmethoden#4]
   requires: [rai-principles]
   introduces: [c:value-sensitive-design]
+  uses: [c:ai-ethics, c:trustworthy-ai, c:responsible-ai, c:altai, c:transparency, c:fairness, py:dict, py:for, py:comparison, py:bool, py:print, py:float, py:int, py:variable, py:underscore-name, q:predict, q:choice, q:exercise-with-check, q:run-cell]
+  mentions: [c:privacy]
   data: []
   ladder: [python]
   needs: any
@@ -115,6 +117,7 @@ lessons:
   covers: [ontwerpmethoden#2, ontwerpmethoden#3]
   requires: [rai-design-with-values]
   introduces: [c:guidance-ethics, c:deda]
+  uses: [c:value-sensitive-design, c:ai-ethics, c:stakeholder, py:dict, py:for, py:arithmetic, py:print, py:float, py:int, py:variable, py:underscore-name, q:predict, q:choice, q:exercise-with-check, q:run-cell]
   data: []
   ladder: [python]
   needs: any
@@ -128,6 +131,7 @@ lessons:
   covers: [verantwoordelijkheid-en-menselijk-toezicht#0]
   requires: [rai-two-kinds-of-harm]
   introduces: [c:accountability, c:responsibility-gap]
+  uses: [c:allocative-harm, c:representational-harm, c:harm, c:model, c:decision-threshold, py:dict, py:list, py:for, py:arithmetic, py:print, py:int, py:str, py:variable, py:underscore-name, q:predict, q:choice, q:exercise-with-check, q:run-cell]
   data: []
   ladder: [python]
   needs: any

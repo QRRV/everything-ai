@@ -1,0 +1,33 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: rai-guidance-ethics-deda
+minutes: 20
+title:
+  en: "Guidance ethics and DEDA"
+  nl: "Begeleidingsethiek en DEDA"
+goal:
+  en: "walk a team through a data or AI project with guidance ethics and DEDA, see which questions are still open, and say where an option for action works."
+  nl: "een team met begeleidingsethiek en DEDA door een data- of AI-project leiden, zien welke vragen nog open staan, en zeggen waar een handelingsoptie werkt."
+summary:
+  - en: "Guidance ethics asks not whether a technology should be allowed but how it can be used well: a workshop goes from the case, through a dialogue about actors, effects and values, to options for action."
+    nl: "Begeleidingsethiek vraagt niet of een technologie toegestaan moet worden, maar hoe ze goed gebruikt kan worden: een workshop gaat van de casus, via een dialoog over actoren, effecten en waarden, naar handelingsopties."
+  - en: "Options for action work in three places: in the technology, in its surroundings such as rules and the organization, and in the people who use it."
+    nl: "Handelingsopties werken op drie plekken: in de technologie, in haar omgeving zoals regels en de organisatie, en bij de mensen die haar gebruiken."
+  - en: "DEDA, from the Utrecht Data School, is a set of questions in themes that a team goes through together and answers in writing, so that it can later show why it decided what it decided."
+    nl: "DEDA, van de Utrecht Data School, is een reeks vragen in thema's die een team samen doorloopt en schriftelijk beantwoordt, zodat het later kan laten zien waarom het besloot wat het besloot."
+can_now:
+  - en: "work out, for each theme, the share of the questions a team has answered"
+    nl: "voor elk thema uitrekenen welk aandeel van de vragen een team beantwoord heeft"
+    by: done
+  - en: "tell whether an option for action works in the technology, the surroundings or the people"
+    nl: "zeggen of een handelingsoptie werkt in de technologie, de omgeving of bij de mensen"
+    by: places
+  - en: "say which question guidance ethics asks instead of yes or no"
+    nl: "zeggen welke vraag begeleidingsethiek stelt in plaats van ja of nee"
+    by: how
+further_reading:
+  - en: "Daniël Tijink and Peter-Paul Verbeek, *Guidance ethics approach*, ECP (2020), the workshop step by step"
+    nl: "Daniël Tijink en Peter-Paul Verbeek, *Aanpak begeleidingsethiek*, ECP (2019), de workshop stap voor stap"
+  - en: "Utrecht Data School, *Data Ethics Decision Aid (DEDA)*, the worksheet and its handbook"
+    nl: "Utrecht Data School, *De Ethische Data Assistent (DEDA)*, het werkblad en het handboek"

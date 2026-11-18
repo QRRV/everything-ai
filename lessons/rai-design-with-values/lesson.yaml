@@ -1,0 +1,33 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: rai-design-with-values
+minutes: 20
+title:
+  en: "Designing with values"
+  nl: "Ontwerpen met waarden"
+goal:
+  en: "turn a value into norms and requirements you can check, test a system against them, and say what participatory design adds."
+  nl: "van een waarde normen en eisen maken die je kunt controleren, een systeem daaraan toetsen, en zeggen wat participatief ontwerp toevoegt."
+summary:
+  - en: "Value-sensitive design takes the values of everyone a technology touches into account from the start, with conceptual, empirical and technical questions."
+    nl: "Value-sensitive design neemt de waarden van iedereen die met een technologie te maken krijgt vanaf het begin mee, met conceptuele, empirische en technische vragen."
+  - en: "A values hierarchy goes from a value, through norms that say what it asks of this system, to requirements an engineer can check. Each failed requirement traces back to a value."
+    nl: "Een waardenhiërarchie gaat van een waarde, via normen die zeggen wat ze van dit systeem vraagt, naar eisen die een engineer kan controleren. Elke eis die niet gehaald wordt, gaat terug op een waarde."
+  - en: "Participatory design, which started with trade unions in Scandinavia in the 1970s, lets the people affected help decide those choices instead of only being asked."
+    nl: "Participatief ontwerp, dat in de jaren 70 met vakbonden in Scandinavië begon, laat de mensen om wie het gaat meebeslissen over die keuzes, in plaats van ze alleen te bevragen."
+can_now:
+  - en: "check for each requirement whether a measured value is at most its limit"
+    nl: "voor elke eis controleren of een gemeten waarde hoogstens de grens is"
+    by: met
+  - en: "tell a value, a norm and a requirement apart"
+    nl: "een waarde, een norm en een eis uit elkaar houden"
+    by: levels
+  - en: "say what participatory design adds to asking people what they think"
+    nl: "zeggen wat participatief ontwerp toevoegt aan mensen vragen wat ze vinden"
+    by: participation
+further_reading:
+  - en: "Batya Friedman and David G. Hendry (2019), *Value Sensitive Design: Shaping Technology with Moral Imagination*, MIT Press"
+    nl: "Batya Friedman en David G. Hendry (2019), *Value Sensitive Design: Shaping Technology with Moral Imagination*, MIT Press"
+  - en: "Ibo van de Poel (2013), *Translating values into design requirements*, in *Philosophy and Engineering: Reflections on Practice, Principles and Process*, Springer"
+    nl: "Ibo van de Poel (2013), *Translating values into design requirements*, in *Philosophy and Engineering: Reflections on Practice, Principles and Process*, Springer"

@@ -1,0 +1,37 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: rai-accountability
+minutes: 20
+title:
+  en: "Who is responsible?"
+  nl: "Wie is verantwoordelijk?"
+goal:
+  en: "say why accountability for an AI system is hard to pin down, and arrange it before something goes wrong by finding the steps that nobody, or more than one team, claims."
+  nl: "zeggen waarom verantwoording voor een AI-systeem moeilijk vast te leggen is, en die regelen voordat er iets misgaat door de stappen te vinden die niemand, of meer dan één team, claimt."
+summary:
+  - en: "Accountability means that someone answers for what a system does: they can explain its decisions, can be corrected, and bear the consequences when it goes wrong."
+    nl: "Verantwoording betekent dat iemand aanspreekbaar is op wat een systeem doet: die persoon kan de beslissingen uitleggen, kan worden gecorrigeerd en draagt de gevolgen als het misgaat."
+  - en: "Three things make it hard: many hands, where everyone did a part and nobody owns the whole; a moral crumple zone, where the blame lands on the person nearest the machine; and a responsibility gap, where a learning system does something nobody could foresee or steer."
+    nl: "Drie dingen maken het moeilijk: de vele handen, waarbij ieder een deel deed en niemand het geheel bezit; een morele kreukelzone, waarbij de schuld terechtkomt bij de persoon die het dichtst bij de machine staat; en een responsibility gap, waarbij een lerend systeem iets doet wat niemand kon voorzien of sturen."
+  - en: "Arrange it before launch: a single owner for every step, no gaps and no overlaps, and a way for the people affected to object."
+    nl: "Regel het voor de lancering: één eigenaar voor elke stap, geen gaten en geen overlap, en een manier voor de mensen om wie het gaat om bezwaar te maken."
+can_now:
+  - en: "count, for each step of a system, how many teams claim it, and find the gaps and the overlaps"
+    nl: "voor elke stap van een systeem tellen hoeveel teams die claimen, en de gaten en de overlap vinden"
+    by: count
+  - en: "tell many hands, a moral crumple zone and a responsibility gap apart"
+    nl: "de vele handen, een morele kreukelzone en een responsibility gap uit elkaar houden"
+    by: who
+  - en: "say when accountability for a system should be arranged"
+    nl: "zeggen wanneer verantwoording voor een systeem geregeld moet worden"
+    by: when
+further_reading:
+  - en: "Helen Nissenbaum (1996), [*Accountability in a computerized society*](https://doi.org/10.1007/BF02639315), Science and Engineering Ethics"
+    nl: "Helen Nissenbaum (1996), [*Accountability in a computerized society*](https://doi.org/10.1007/BF02639315), Science and Engineering Ethics"
+  - en: "Madeleine Clare Elish (2019), [*Moral crumple zones: cautionary tales in human-robot interaction*](https://doi.org/10.17351/ests2019.260), Engaging Science, Technology, and Society"
+    nl: "Madeleine Clare Elish (2019), [*Moral crumple zones: cautionary tales in human-robot interaction*](https://doi.org/10.17351/ests2019.260), Engaging Science, Technology, and Society"
+  - en: "Andreas Matthias (2004), [*The responsibility gap: ascribing responsibility for the actions of learning automata*](https://doi.org/10.1007/s10676-004-3422-1), Ethics and Information Technology"
+    nl: "Andreas Matthias (2004), [*The responsibility gap: ascribing responsibility for the actions of learning automata*](https://doi.org/10.1007/s10676-004-3422-1), Ethics and Information Technology"
+  - en: "Nancy Leveson and Clark Turner (1993), [*An investigation of the Therac-25 accidents*](https://doi.org/10.1109/MC.1993.274940), IEEE Computer"
+    nl: "Nancy Leveson en Clark Turner (1993), [*An investigation of the Therac-25 accidents*](https://doi.org/10.1109/MC.1993.274940), IEEE Computer"
