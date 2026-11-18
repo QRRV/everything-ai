@@ -1,0 +1,33 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: rai-case-uber-crash
+minutes: 20
+title:
+  en: "The crash of a self-driving test car"
+  nl: "Het ongeluk met een zelfrijdende testauto"
+goal:
+  en: "find the layers of safety that each had a hole in the crash of an Uber test car, work out how much of the pedestrian's path the system still used when it saw the emergency, and say where the NTSB and the court put the blame."
+  nl: "de lagen van veiligheid vinden die elk een gat hadden bij het ongeluk met een testauto van Uber, uitrekenen hoeveel van het pad van de voetganger het systeem nog gebruikte toen het het noodgeval zag, en zeggen waar de NTSB en de rechter de schuld legden."
+summary:
+  - en: "In March 2018 a self-driving test car of Uber struck and killed a pedestrian walking a bicycle across a road in Tempe, Arizona. Its system detected the pedestrian 5.6 seconds before, but switched between vehicle, other and bicycle, dropped the path at every change, and never recognized a pedestrian."
+    nl: "In maart 2018 reed een zelfrijdende testauto van Uber in Tempe, Arizona, een voetganger dood die met een fiets aan de hand de weg overstak. Het systeem detecteerde de voetganger 5,6 seconden eerder, maar sprong tussen voertuig, iets anders en fiets, gooide bij elke verandering het pad weg, en herkende nooit een voetganger."
+  - en: "By design, the system held back braking for 1 second after it saw the emergency, without warning the operator, and Volvo's own emergency braking was switched off. The operator, alone in the car, was looking at a phone."
+    nl: "Door het ontwerp hield het systeem het remmen een seconde tegen nadat het het noodgeval zag, zonder de operator te waarschuwen, en de eigen noodrem van Volvo stond uit. De operator, alleen in de auto, keek op een telefoon."
+  - en: "The NTSB named the operator's distraction as the probable cause, with three failings of Uber's group, from an inadequate safety culture, contributing. Uber was not charged; the operator pleaded guilty to endangerment."
+    nl: "De NTSB noemde de afleiding van de operator de waarschijnlijke oorzaak, met drie tekortkomingen van de groep van Uber, uit een veiligheidscultuur die tekortschoot, als bijdrage. Uber werd niet vervolgd; de operator erkende schuld aan het in gevaar brengen van een ander."
+can_now:
+  - en: "work out, with the rule from the report, how many seconds of an object's path a system still counts after its kind changes"
+    nl: "met de regel uit het rapport uitrekenen hoeveel seconden van het pad van een object een systeem nog telt nadat de soort verandert"
+    by: history
+  - en: "say of a finding of the NTSB whether it was the probable cause, a contribution of Uber, or a further factor"
+    nl: "van een bevinding van de NTSB zeggen of het de waarschijnlijke oorzaak was, een bijdrage van Uber, of een verdere factor"
+    by: verdict
+  - en: "say what came of the crash in court, and why that is a moral crumple zone"
+    nl: "zeggen wat er bij de rechter van het ongeluk terechtkwam, en waarom dat een morele kreukelzone is"
+    by: court
+further_reading:
+  - en: "National Transportation Safety Board (2019), [*Collision Between Vehicle Controlled by Developmental Automated Driving System and Pedestrian, Tempe, Arizona, March 18, 2018*](https://ntsb.gov/investigations/accidentreports/reports/har1903.pdf), report NTSB/HAR-19/03"
+    nl: "National Transportation Safety Board (2019), [*Collision Between Vehicle Controlled by Developmental Automated Driving System and Pedestrian, Tempe, Arizona, March 18, 2018*](https://ntsb.gov/investigations/accidentreports/reports/har1903.pdf), rapport NTSB/HAR-19/03"
+  - en: "NHPR and the Associated Press (2023), [*Backup driver of an autonomous Uber pleads guilty to endangerment in pedestrian death*](https://www.nhpr.org/2023-07-28/backup-driver-of-an-autonomous-uber-pleads-guilty-to-endangerment-in-pedestrian-death)"
+    nl: "NHPR en Associated Press (2023), [*Backup driver of an autonomous Uber pleads guilty to endangerment in pedestrian death*](https://www.nhpr.org/2023-07-28/backup-driver-of-an-autonomous-uber-pleads-guilty-to-endangerment-in-pedestrian-death)"

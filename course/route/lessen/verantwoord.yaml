@@ -322,6 +322,7 @@ lessons:
   covers: [casussen#9]
   requires: [rai-human-oversight]
   introduces: [c:safety-driver]
+  uses: [c:human-oversight, c:automation-bias, c:accountability, c:responsibility-gap, c:prediction, py:dict, py:for, py:if, py:comparison, py:arithmetic, py:float, py:print, py:comment, py:variable, py:underscore-name, py:string-literal, q:predict, q:choice, q:exercise-with-check, q:run-cell]
   data: []
   ladder: [python]
   needs: any
