@@ -1,0 +1,42 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: rai-abstraction-traps
+minutes: 30
+title:
+  en: "Abstraction traps"
+  nl: "Valkuilen van abstractie"
+goal:
+  en: "measure a tool's recommendations and the decisions people make with them per group, find where a gap between groups comes from, name the five abstraction traps, and ask first whether a tool is the answer at all."
+  nl: "de aanbevelingen van een tool en de beslissingen die mensen ermee nemen per groep meten, vinden waar een verschil tussen groepen vandaan komt, de vijf abstraction traps benoemen, en eerst vragen of een tool wel het antwoord is."
+summary:
+  - en: "Fairness is a property of a sociotechnical system, the technology plus the people and institutions around it, not of the tool alone (Selbst and colleagues 2019). In Kentucky, if judges had followed the default of a mandatory risk assessment, 90 percent of defendants would have been released at once without money; 29 percent were, at the first bail setting, and the racial gap grew because judges in different regions responded differently (Stevenson 2018)."
+    nl: "Fairness is een eigenschap van een sociotechnisch systeem, de techniek plus de mensen en instellingen eromheen, niet van de tool alleen (Selbst en collega's 2019). Als rechters in Kentucky de standaard van een verplichte risicotaxatie hadden gevolgd, waren 90 procent van de verdachten meteen zonder borgsom vrijgelaten; bij de eerste beslissing over de borgtocht was dat 29 procent, en het verschil naar ras groeide doordat rechters in verschillende regio's verschillend reageerden (Stevenson 2018)."
+  - en: "The five abstraction traps: framing (not modeling the whole system), portability (moving a solution to another social context), formalism (putting fairness in one formula), ripple effect (missing how a tool changes the people around it) and solutionism (not seeing that the best solution may not be technical)."
+    nl: "De vijf abstraction traps: framing (niet het hele systeem modelleren), portability (een oplossing naar een andere sociale context verhuizen), formalism (fairness in één formule vangen), ripple effect (missen hoe een tool de mensen eromheen verandert) en solutionism (niet zien dat de beste oplossing misschien niet technisch is)."
+  - en: "In the course's court, the tool recommends releasing 0.75 of both groups, while the judges released 0.625 of group A and 0.375 of group B. The rural judges never decided otherwise than the tool, the urban judges in 0.5 of the cases, for both groups alike: the gap comes from where the groups live."
+    nl: "In de rechtbank van de course wil de tool 0,75 van beide groepen vrijlaten, terwijl de rechters 0,625 van groep A en 0,375 van groep B vrijlieten. De rechters op het platteland besloten nooit anders dan de tool, die in de stad in 0,5 van de zaken, voor beide groepen even vaak: het verschil komt voort uit waar de groepen wonen."
+  - en: "Selbst and colleagues suggest going through the traps perhaps in reverse order, starting with whether a technical solution fits at all. Techno-solutionism, short for technological solutionism, is the belief that social problems are best solved with technology; Morozov (2013) borrowed the word solutionism from architecture and urban planning."
+    nl: "Selbst en collega's stellen voor de valkuilen misschien in omgekeerde volgorde langs te gaan, te beginnen met de vraag of een technische oplossing wel past. Techno-solutionisme, kort voor technological solutionism, is het geloof dat maatschappelijke problemen het best met technologie op te lossen zijn; Morozov (2013) leende het woord solutionisme uit de architectuur en de stedenbouw."
+can_now:
+  - en: "measure the share a tool and the people who use it release, per group"
+    nl: "per groep meten welk deel een tool en de mensen die hem gebruiken vrijlaten"
+    by: share
+  - en: "name the abstraction trap in a case"
+    nl: "de abstraction trap in een geval benoemen"
+    by: trap
+  - en: "find per place how often people decide otherwise than a tool"
+    nl: "per plek uitrekenen hoe vaak mensen anders beslissen dan een tool"
+    by: overrides
+  - en: "ask first whether a tool is the answer at all"
+    nl: "eerst vragen of een tool wel het antwoord is"
+    by: first
+further_reading:
+  - en: "Andrew Selbst, danah boyd, Sorelle Friedler, Suresh Venkatasubramanian and Janet Vertesi (2019), [*Fairness and Abstraction in Sociotechnical Systems*](https://friedler.net/papers/sts_fat2019.pdf): the three frames and the five traps"
+    nl: "Andrew Selbst, danah boyd, Sorelle Friedler, Suresh Venkatasubramanian en Janet Vertesi (2019), [*Fairness and Abstraction in Sociotechnical Systems*](https://friedler.net/papers/sts_fat2019.pdf): de drie kaders en de vijf valkuilen (in het Engels)"
+  - en: "Megan Stevenson (2018), [*Assessing Risk Assessment in Action*](https://www.courts.wa.gov/subsite/mjc/docs/2019/Assessing%20Risk%20Assessment_Stevenson.pdf): what Kentucky's mandatory risk assessment did, and what judges did with it"
+    nl: "Megan Stevenson (2018), [*Assessing Risk Assessment in Action*](https://www.courts.wa.gov/subsite/mjc/docs/2019/Assessing%20Risk%20Assessment_Stevenson.pdf): wat de verplichte risicotaxatie in Kentucky deed, en wat rechters ermee deden (in het Engels)"
+  - en: "Ben Green (2020), [*The False Promise of Risk Assessments: Epistemic Reform and the Limits of Fairness*](https://www.benzevgreen.com/wp-content/uploads/2020/01/20-fat-risk.pdf): why fair risk scores do not make a fair system"
+    nl: "Ben Green (2020), [*The False Promise of Risk Assessments: Epistemic Reform and the Limits of Fairness*](https://www.benzevgreen.com/wp-content/uploads/2020/01/20-fat-risk.pdf): waarom risicoscores die fair zijn nog geen fair systeem opleveren (in het Engels)"
+  - en: "Evgeny Morozov (2013), [*The will to improve just about everything*](https://policyoptions.irpp.org/2013/07/the-will-to-improve-just-about-everything/): an excerpt from *To Save Everything, Click Here*, on solutionism"
+    nl: "Evgeny Morozov (2013), [*The will to improve just about everything*](https://policyoptions.irpp.org/2013/07/the-will-to-improve-just-about-everything/): een fragment uit *To Save Everything, Click Here*, over solutionisme (in het Engels)"

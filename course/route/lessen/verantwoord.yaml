@@ -632,10 +632,12 @@ lessons:
   level: basis
   domein: verantwoord
   module: fairness
-  idea: "A fairness metric looks at a model on its own, while the harm comes from the system around it; Selbst and others name five traps, among them the solutionism trap: the belief that a technical fix is always the answer."
+  idea: "A fairness metric looks at a model on its own, while the harm comes from the system around it; Selbst and colleagues name five abstraction traps, among them the solutionism trap: not seeing that the best solution to a problem may not involve technology."
   covers: [fairness-in-de-praktijk-en-kritische-perspectieven#1, fairness-in-de-praktijk-en-kritische-perspectieven#2]
   requires: [rai-fairness-in-organizations]
-  introduces: [c:abstraction-trap, c:techno-solutionism]
+  introduces: [c:abstraction-trap, c:sociotechnical-system, c:techno-solutionism]
+  uses: [c:fairness-review, c:fairness, c:group-fairness, c:four-fifths-rule, c:false-positive, c:false-negative, c:harm, c:prediction, c:metric, c:model, py:dict, py:list, py:for, py:if, py:comparison, py:arithmetic, py:indexing, py:len, py:print, py:comment, py:variable, py:underscore-name, py:string-literal, py:float, py:int, q:predict, q:choice, q:exercise-with-check, q:run-cell]
+  mentions: [c:automation-bias]
   data: []
   ladder: [python]
   needs: any
@@ -648,8 +650,10 @@ lessons:
   idea: "A data statement, a data card or a nutrition label says who is in a dataset, how it was collected and what it is not fit for; the FAIR principles say how to make data findable and reusable."
   covers: [datasetdocumentatie#2, datasetdocumentatie#3, datasetdocumentatie#4]
   requires: [rai-bias-lifecycle, data-provenance]
-  introduces: [c:data-card, c:fair-principles]
-  data: []
+  introduces: [c:data-card, c:fair-principles, c:data-statement]
+  uses: [c:datasheet, c:data-provenance, c:license, c:consent, c:representation-bias, c:missing-value, c:model, c:training, py:dataframe, py:pandas-select-filter, py:boolean-mask, py:value-counts, py:isna, py:min-max, py:len, py:for, py:list, py:arithmetic, py:print, py:comment, py:variable, py:underscore-name, py:string-literal, py:import, py:import-as, q:predict, q:choice, q:exercise-with-check, q:run-cell]
+  mentions: [c:fairness, c:paper, c:metadata, c:data-governance]
+  data: [uci-adult]
   ladder: [python]
   needs: any
 

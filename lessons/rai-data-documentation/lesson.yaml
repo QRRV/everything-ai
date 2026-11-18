@@ -1,0 +1,42 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: rai-data-documentation
+minutes: 30
+title:
+  en: "Documenting a dataset"
+  nl: "Een dataset documenteren"
+goal:
+  en: "say who is in a dataset, what is unknown in it and what it is not fit for, in numbers where you can, and tell data statements, data cards, nutrition labels and the FAIR principles apart."
+  nl: "zeggen wie er in een dataset zit, wat erin onbekend is en waarvoor hij niet geschikt is, in getallen waar dat kan, en data statements, data cards, voedingslabels en de FAIR-principes uit elkaar houden."
+summary:
+  - en: "A data statement (Bender and Friedman 2018) describes a language dataset: why these texts, which language variety, who spoke and who annotated. A Data Card (Pushkarna and colleagues 2022; 22 cards with 12 teams) asks at three levels, telescopes, periscopes and microscopes, and writes down known unknowns. The Dataset Nutrition Label (Holland and colleagues 2018) has modules after the label on food; a Hugging Face dataset card has a section Out-of-Scope Use."
+    nl: "Een data statement (Bender en Friedman 2018) beschrijft een taaldataset: waarom deze teksten, welke taalvariant, wie er sprak en wie annoteerde. Een Data Card (Pushkarna en collega's 2022; 22 cards met 12 teams) vraagt op drie niveaus, telescopen, periscopen en microscopen, en schrijft known unknowns op. Het Dataset Nutrition Label (Holland en collega's 2018) heeft modules naar het etiket op voedsel; een dataset card op Hugging Face heeft een deel Out-of-Scope Use."
+  - en: "UCI Adult holds nobody younger than 17 and nobody who worked 0 hours a week; of its 48,842 people, 0.855 are White, 0.096 Black and 0.332 women. The occupation is unknown for 0.079 of the women and 0.047 of the men, and dropping every row with an unknown value in any column drops 9.2 percent of the women and 6.5 percent of the men."
+    nl: "In UCI Adult zit niemand jonger dan 17 en niemand die 0 uur per week werkte; van de 48.842 mensen is 0,855 White, 0,096 Black en 0,332 vrouw. Het beroep is onbekend bij 0,079 van de vrouwen en 0,047 van de mannen, en wie elke rij met een onbekende waarde in welke kolom ook weglaat, laat 9,2 procent van de vrouwen weg en 6,5 procent van de mannen."
+  - en: "The FAIR principles (Wilkinson and colleagues 2016, from a workshop in Leiden in 2014) say data should be findable, accessible, interoperable and reusable, for people and machines. They say nothing about bias, and FAIR data need not be open."
+    nl: "De FAIR-principes (Wilkinson en collega's 2016, na een workshop in Leiden in 2014) zeggen dat data vindbaar, toegankelijk, uitwisselbaar en herbruikbaar moet zijn, voor mensen en machines. Over bias zeggen ze niets, en FAIR-data hoeft niet open te zijn."
+  - en: "Where you do not know something, write that it is unknown, as Gebru and colleagues did, not N/A. The AI Act asks for data governance with an examination of possible biases for high-risk AI systems, from 2 December 2027 for those listed in Annex III, and a public summary of the training content of general-purpose AI models since 2 August 2025."
+    nl: "Waar je iets niet weet, schrijf je op dat het onbekend is, zoals Gebru en collega's deden, en niet N/A. De AI Act vraagt voor AI-systemen met een hoog risico datagovernance met een onderzoek naar mogelijke bias, vanaf 2 december 2027 voor die uit bijlage III, en sinds 2 augustus 2025 een openbare samenvatting van de inhoud waarop AI-modellen voor algemene doeleinden getraind zijn."
+can_now:
+  - en: "work out who is in a dataset, as the share of each group"
+    nl: "uitrekenen wie er in een dataset zit, als het aandeel van elke groep"
+    by: shares
+  - en: "tell the FAIR principles apart from fairness"
+    nl: "de FAIR-principes uit elkaar houden met fairness"
+    by: fair
+  - en: "work out per group how often a value is unknown"
+    nl: "per groep uitrekenen hoe vaak een waarde onbekend is"
+    by: unknown
+  - en: "write what you do not know in a datasheet"
+    nl: "in een datasheet opschrijven wat je niet weet"
+    by: write
+further_reading:
+  - en: "Emily M. Bender and Batya Friedman (2018), [*Data Statements for Natural Language Processing: Toward Mitigating System Bias and Enabling Better Science*](https://aclanthology.org/Q18-1041.pdf): the fields of a data statement, with two worked examples"
+    nl: "Emily M. Bender en Batya Friedman (2018), [*Data Statements for Natural Language Processing: Toward Mitigating System Bias and Enabling Better Science*](https://aclanthology.org/Q18-1041.pdf): de velden van een data statement, met twee uitgewerkte voorbeelden (in het Engels)"
+  - en: "Mahima Pushkarna, Andrew Zaldivar and Oddur Kjartansson (2022), [*Data Cards: Purposeful and Transparent Dataset Documentation for Responsible AI*](https://arxiv.org/abs/2204.01075): telescopes, periscopes and microscopes, and lessons from making 22 cards"
+    nl: "Mahima Pushkarna, Andrew Zaldivar en Oddur Kjartansson (2022), [*Data Cards: Purposeful and Transparent Dataset Documentation for Responsible AI*](https://arxiv.org/abs/2204.01075): telescopen, periscopen en microscopen, en lessen uit het maken van 22 cards (in het Engels)"
+  - en: "Hugging Face, [*Dataset Cards*](https://huggingface.co/docs/hub/datasets-cards): how a dataset card works on the Hub"
+    nl: "Hugging Face, [*Dataset Cards*](https://huggingface.co/docs/hub/datasets-cards): hoe een dataset card werkt op de Hub (in het Engels)"
+  - en: "Mark D. Wilkinson and colleagues (2016), [*The FAIR Guiding Principles for scientific data management and stewardship*](https://www.nature.com/articles/sdata201618): the fifteen principles, and where they come from"
+    nl: "Mark D. Wilkinson en collega's (2016), [*The FAIR Guiding Principles for scientific data management and stewardship*](https://www.nature.com/articles/sdata201618): de vijftien principes, en waar ze vandaan komen (in het Engels)"
