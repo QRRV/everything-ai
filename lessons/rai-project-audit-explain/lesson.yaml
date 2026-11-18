@@ -1,0 +1,43 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: rai-project-audit-explain
+minutes: 40
+title:
+  en: "Project: explain your classifier"
+  nl: "Project: leg je classifier uit"
+goal:
+  en: "explain the classifier of your audit with permutation importance, partial dependence per sex, Shapley values on the logit and a counterfactual over the hours a week, and write down what the explanations show about the bias you measured, and what they cannot show."
+  nl: "de classifier van je audit uitleggen met permutation importance, partial dependence per geslacht, Shapley-waarden op de logit en een counterfactual over de uren per week, en opschrijven wat de uitleg laat zien over de bias die je mat, en wat niet."
+summary:
+  - en: "For a logistic regression, the Shapley value of a column on the logit can be computed exactly without going through coalitions: its weight times how far the person lies from the average of the background, added over the 0/1 columns of a word column."
+    nl: "Bij een logistische regressie is de Shapley-waarde van een kolom op de logit exact uit te rekenen zonder coalities: zijn weight keer hoe ver de persoon van het gemiddelde van de achtergrond ligt, opgeteld over de 0/1-kolommen van een kolom met woorden."
+  - en: "Your classifier never gets sex, yet marital_status carries 1.01 of the gap of 1.42 in the mean logit between women and men, and it has the largest permutation importance, 0.070. Of the people of the test set with a no, 19.8% of the women and 43.9% of the men could get a yes by working more hours a week, at most 99."
+    nl: "Je classifier krijgt nooit het geslacht, en toch draagt marital_status 1,01 van het verschil van 1,42 in de gemiddelde logit tussen vrouwen en mannen, en heeft hij de grootste permutation importance, 0,070. Van de mensen in de test set met een nee kunnen 19,8% van de vrouwen en 43,9% van de mannen een ja krijgen door meer uren per week te werken, hooguit 99."
+  - en: "Explanations show where a gap sits in the model, not why the world looks that way, nor whether the model may decide that way. A column with a permutation importance of about 0, such as race, can still push people down."
+    nl: "Uitleg laat zien waar een verschil in het model zit, niet waarom de wereld zo is, en ook niet of het model zo mag beslissen. Een kolom met een permutation importance van ongeveer 0, zoals race, kan mensen toch omlaag duwen."
+  - en: "Explanations can be made to look good, as Slack et al. showed for LIME and SHAP and Aïvodji et al. call fairwashing; an audit report says how each explanation was made, so that someone else can check it."
+    nl: "Uitleg kan mooier gemaakt worden dan het model is, zoals Slack et al. lieten zien voor LIME en SHAP en wat Aïvodji et al. fairwashing noemen; een auditrapport zegt hoe elke uitleg gemaakt is, zodat een ander hem kan nagaan."
+can_now:
+  - en: "measure how much less often a classifier is right when one column is shuffled"
+    nl: "meten hoeveel minder vaak een classifier goed zit als je één kolom schudt"
+    by: importance
+  - en: "compute the partial dependence of a classifier at one value, per group"
+    nl: "de partial dependence van een classifier bij één waarde uitrekenen, per groep"
+    by: dependence
+  - en: "find the fewest hours a week that would give a person a yes"
+    nl: "het kleinste aantal uren per week vinden dat iemand een ja zou geven"
+    by: hours
+  - en: "tell a column that hardly changes how often a classifier is right from one it does not use"
+    nl: "een kolom die weinig verandert aan hoe vaak een classifier goed zit, onderscheiden van een kolom die hij niet gebruikt"
+    by: race
+  - en: "write what explanations show about a bias, and what they cannot show"
+    nl: "opschrijven wat uitleg laat zien over een bias, en wat niet"
+    by: report
+further_reading:
+  - en: "Dylan Slack, Sophie Hilgard, Emily Jia, Sameer Singh and Himabindu Lakkaraju (2020), [*Fooling LIME and SHAP: Adversarial Attacks on Post hoc Explanation Methods*](https://arxiv.org/pdf/1911.02508): a classifier that hides its bias from LIME and SHAP"
+    nl: "Dylan Slack, Sophie Hilgard, Emily Jia, Sameer Singh en Himabindu Lakkaraju (2020), [*Fooling LIME and SHAP: Adversarial Attacks on Post hoc Explanation Methods*](https://arxiv.org/pdf/1911.02508): een classifier die zijn bias verbergt voor LIME en SHAP (in het Engels)"
+  - en: "Ulrich Aïvodji, Hiromi Arai, Olivier Fortineau, Sébastien Gambs, Satoshi Hara and Alain Tapp (2019), [*Fairwashing: the risk of rationalization*](https://arxiv.org/pdf/1901.09749): simple rule lists that mimic a model and look fairer than it is"
+    nl: "Ulrich Aïvodji, Hiromi Arai, Olivier Fortineau, Sébastien Gambs, Satoshi Hara en Alain Tapp (2019), [*Fairwashing: the risk of rationalization*](https://arxiv.org/pdf/1901.09749): eenvoudige rule lists die een model nadoen en minder bias lijken te hebben dan dat model (in het Engels)"
+  - en: "Berk Ustun, Alexander Spangher and Yang Liu (2019), [*Actionable Recourse in Linear Classification*](https://arxiv.org/pdf/1809.06514): recourse for linear classifiers, and how its cost can differ between groups"
+    nl: "Berk Ustun, Alexander Spangher en Yang Liu (2019), [*Actionable Recourse in Linear Classification*](https://arxiv.org/pdf/1809.06514): recourse bij lineaire classifiers, en hoe de kosten ervan per groep kunnen verschillen (in het Engels)"

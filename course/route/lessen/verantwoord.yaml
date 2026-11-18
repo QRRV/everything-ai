@@ -547,7 +547,7 @@ lessons:
   requires: [rai-fairness-benchmarks]
   introduces: [c:algorithmic-audit]
   uses: [c:fairness, c:group-fairness, c:four-fifths-rule, c:disparate-impact, c:selection-rate, c:recall, c:calibration-within-groups, c:threshold-optimization, c:decision-threshold, c:bias-mitigation, c:base-rate, c:proxy, c:fairness-through-unawareness, c:harm, c:allocative-harm, c:fairness-benchmark, c:datasheet, c:test-set, c:train-set, c:logistic-regression, c:probability, c:one-hot, c:feature, c:label, c:model, c:prediction, c:accuracy, c:package, p:import-own-code, py:dataframe, py:pandas-select-filter, py:boolean-mask, py:groupby, py:np-mean, py:sklearn-fit-predict, py:def, py:return, py:for, py:range, py:if, py:list, py:comparison, py:arithmetic, py:round, py:print, py:comment, py:variable, py:underscore-name, py:string-literal, py:float, py:int, py:bool, py:keyword-argument, py:import, py:import-as, q:predict, q:choice, q:exercise-with-check, q:run-cell]
-  mentions: [c:model-card, c:false-positive-rate, py:pd-get-dummies]
+  mentions: [c:model-card, c:false-positive-rate, py:pd-get-dummies, c:audit-report]
   data: [uci-adult]
   ladder: [python, numpy]
   needs: any
@@ -834,6 +834,7 @@ lessons:
   covers: []
   requires: [rai-project-audit-bias, rai-counterfactuals, rai-xai-tools]
   introduces: [c:audit-report]
+  mentions: [c:model-card]
   data: [uci-adult]
   ladder: [python, numpy]
   needs: any
