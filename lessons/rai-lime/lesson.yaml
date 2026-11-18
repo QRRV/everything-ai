@@ -1,0 +1,40 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: rai-lime
+minutes: 30
+title:
+  en: "LIME: a simple model around one prediction"
+  nl: "LIME: een eenvoudig model rond één voorspelling"
+goal:
+  en: "explain one prediction with LIME: make rows, weigh them by their closeness to the person, fit a straight line, and see how its weights change with the kernel width and between runs."
+  nl: "één voorspelling uitleggen met LIME: rijen maken, ze wegen naar hun nabijheid tot de persoon, een rechte lijn fitten, en zien hoe de weights veranderen met de kernel width en van run tot run."
+summary:
+  - en: "LIME (Ribeiro, Singh and Guestrin, 2016) explains one prediction with a local surrogate: a straight line fitted to the model's answers on many made-up rows, where rows close to the example count most."
+    nl: "LIME (Ribeiro, Singh en Guestrin, 2016) legt één voorspelling uit met een local surrogate: een rechte lijn, gefit op de antwoorden van het model op veel verzonnen rijen, waarin rijen dicht bij het voorbeeld het zwaarst tellen."
+  - en: "A row counts by its closeness, exp(−d² / (2w²)), with w the kernel width; the lime package takes 0.75 times the root of the number of columns, 1.3 for three. For a person aged 41 with education_num 13 who works 40 hours, education_num then weighs most (0.144); with width 0.2, hours_per_week does in 9 of 10 runs."
+    nl: "Een rij telt naar zijn nabijheid, exp(−d² / (2w²)), met w de kernel width; het lime-package neemt 0,75 keer de wortel uit het aantal kolommen, 1,3 bij drie. Voor iemand van 41 met education_num 13 die 40 uur werkt, weegt education_num dan het zwaarst (0,144); met width 0,2 doet hours_per_week dat in 9 van de 10 runs."
+  - en: "The weights change between runs, most with a small width, and with a very large width LIME fits one line for everyone. The width is hard to choose (Molnar; Garreau and von Luxburg)."
+    nl: "De weights veranderen van run tot run, het meest bij een kleine width, en bij een heel grote width fit LIME één lijn voor iedereen. De width is moeilijk te kiezen (Molnar; Garreau en von Luxburg)."
+  - en: "LIME's rows need not look real, and Slack et al. (2020) built a model that decides on race for real people but shows LIME a column that means nothing."
+    nl: "De rijen van LIME hoeven niet echt te lijken, en Slack en anderen (2020) bouwden een model dat voor echte mensen op ras beslist, maar LIME een kolom laat zien die niets betekent."
+can_now:
+  - en: "work out how much a made-up row counts, from its distance and a kernel width"
+    nl: "uitrekenen hoe zwaar een verzonnen rij telt, uit zijn afstand en een kernel width"
+    by: closeness
+  - en: "compute the slope of a straight line in which each row counts by its closeness"
+    nl: "de helling uitrekenen van een rechte lijn waarin elke rij telt naar zijn nabijheid"
+    by: slope
+  - en: "say what LIME explains when the kernel width is very large"
+    nl: "zeggen wat LIME uitlegt als de kernel width heel groot is"
+    by: wide
+  - en: "explain how a model can show LIME something other than what it does"
+    nl: "uitleggen hoe een model LIME iets anders kan laten zien dan wat het doet"
+    by: fooled
+further_reading:
+  - en: "Marco Tulio Ribeiro, Sameer Singh and Carlos Guestrin (2016), [*\"Why Should I Trust You?\" Explaining the Predictions of Any Classifier*](https://arxiv.org/pdf/1602.04938v3): LIME, the husky and the wolf"
+    nl: "Marco Tulio Ribeiro, Sameer Singh en Carlos Guestrin (2016), [*\"Why Should I Trust You?\" Explaining the Predictions of Any Classifier*](https://arxiv.org/pdf/1602.04938v3): LIME, de husky en de wolf (in het Engels)"
+  - en: "Christoph Molnar (2025), [*LIME*](https://christophm.github.io/interpretable-ml-book/lime.html), in *Interpretable Machine Learning*: the method on tables, and why the kernel width is a problem"
+    nl: "Christoph Molnar (2025), [*LIME*](https://christophm.github.io/interpretable-ml-book/lime.html), in *Interpretable Machine Learning*: de methode op tabellen, en waarom de kernel width een probleem is (in het Engels)"
+  - en: "Dylan Slack, Sophie Hilgard, Emily Jia, Sameer Singh and Himabindu Lakkaraju (2020), [*Fooling LIME and SHAP: Adversarial Attacks on Post hoc Explanation Methods*](https://arxiv.org/pdf/1911.02508v2): a model that hides from LIME that it decides on race"
+    nl: "Dylan Slack, Sophie Hilgard, Emily Jia, Sameer Singh en Himabindu Lakkaraju (2020), [*Fooling LIME and SHAP: Adversarial Attacks on Post hoc Explanation Methods*](https://arxiv.org/pdf/1911.02508v2): een model dat voor LIME verbergt dat het op ras beslist (in het Engels)"

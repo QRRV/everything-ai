@@ -1,0 +1,40 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: rai-global-surrogate
+minutes: 30
+title:
+  en: "A small model that copies a big one"
+  nl: "Een klein model dat een groot model nadoet"
+goal:
+  en: "copy a model you cannot read into a small tree that learns its answers, measure how often the copy agrees, and say what that agreement does not show."
+  nl: "een model dat je niet kunt lezen nadoen met een kleine boom die zijn antwoorden leert, meten hoe vaak de kopie het ermee eens is, en zeggen wat die overeenstemming niet laat zien."
+summary:
+  - en: "A global surrogate is a model you can read, trained on a black box's answers instead of the true labels (Craven and Shavlik, 1996, TREPAN; Molnar). On UCI Adult a tree of depth 3 copies a forest with 28,295 leaves, and only one of its 8 leaves says yes."
+    nl: "Een global surrogate is een model dat je kunt lezen, getraind op de antwoorden van een black box in plaats van op de echte labels (Craven en Shavlik, 1996, TREPAN; Molnar). Op UCI Adult doet een boom met diepte 3 een forest met 28.295 bladeren na, en maar één van zijn 8 bladeren zegt ja."
+  - en: "Fidelity is the share of rows where the copy gives the same answer as the model, on rows it did not learn from: 95.7% for that tree. It is not accuracy, which compares with the truth: the copy is right on 79.6%, the forest on 79.8%."
+    nl: "Fidelity is het deel van de rijen waar de kopie hetzelfde antwoord geeft als het model, op rijen waarvan hij niet leerde: 95,7% voor die boom. Het is geen accuracy, die met de werkelijkheid vergelijkt: de kopie heeft 79,6% goed, het forest 79,8%."
+  - en: "Compare it with a copy that says no to everyone, which already agrees on 85.2%, and measure it per group: 98.8% for people with education up to 12, 86.3% for 13 or more."
+    nl: "Vergelijk het met een kopie die tegen iedereen nee zegt, die het al eens is bij 85,2%, en meet het per groep: 98,8% bij mensen met een opleiding tot 12, 86,3% bij 13 of meer."
+  - en: "Same answers do not mean same reasons: Rudin warns that a copy that performs almost identically might use completely different features."
+    nl: "Dezelfde antwoorden betekenen niet dezelfde redenen: Rudin waarschuwt dat een kopie die bijna hetzelfde doet heel andere features kan gebruiken."
+can_now:
+  - en: "compute the fidelity of a copy: how often it gives the same answer as the model it copies"
+    nl: "de fidelity van een kopie uitrekenen: hoe vaak hij hetzelfde antwoord geeft als het model dat hij nadoet"
+    by: fidelity
+  - en: "choose a copy by its agreement with the model's answers, not with the true labels"
+    nl: "een kopie kiezen op hoe vaak die het eens is met de antwoorden van het model, niet met de echte labels"
+    by: stump
+  - en: "say how far a copy's accuracy can be from the model's, given its fidelity"
+    nl: "zeggen hoe ver de accuracy van een kopie van die van het model kan liggen, gegeven zijn fidelity"
+    by: between
+  - en: "explain why high fidelity does not show how the model decides"
+    nl: "uitleggen waarom een hoge fidelity niet laat zien hoe het model beslist"
+    by: reasons
+further_reading:
+  - en: "Mark W. Craven and Jude W. Shavlik, [*Extracting Tree-Structured Representations of Trained Networks*](https://proceedings.neurips.cc/paper_files/paper/1995/hash/45f31d16b1058d586fc3be7207b58053-Abstract.html), NIPS 8: TREPAN, accuracy and fidelity"
+    nl: "Mark W. Craven en Jude W. Shavlik, [*Extracting Tree-Structured Representations of Trained Networks*](https://proceedings.neurips.cc/paper_files/paper/1995/hash/45f31d16b1058d586fc3be7207b58053-Abstract.html), NIPS 8: TREPAN, accuracy en fidelity (in het Engels)"
+  - en: "Christoph Molnar (2025), [*Surrogate Models*](https://christophm.github.io/interpretable-ml-book/global.html), in *Interpretable Machine Learning*: the recipe, R², and what a surrogate does not tell you"
+    nl: "Christoph Molnar (2025), [*Surrogate Models*](https://christophm.github.io/interpretable-ml-book/global.html), in *Interpretable Machine Learning*: het recept, R², en wat een surrogate je niet vertelt (in het Engels)"
+  - en: "Cynthia Rudin (2019), [*Stop Explaining Black Box Machine Learning Models for High Stakes Decisions and Use Interpretable Models Instead*](https://arxiv.org/pdf/1811.10154v3): why an explanation with 90% fidelity is wrong 10% of the time"
+    nl: "Cynthia Rudin (2019), [*Stop Explaining Black Box Machine Learning Models for High Stakes Decisions and Use Interpretable Models Instead*](https://arxiv.org/pdf/1811.10154v3): waarom een uitleg met 90% fidelity er in 10% van de gevallen naast zit (in het Engels)"

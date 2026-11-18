@@ -763,6 +763,7 @@ lessons:
   covers: [d24-globale-model-agnostische-methoden#5]
   requires: [rai-pdp-ice, ml-decision-tree]
   introduces: [c:surrogate-model, c:fidelity]
+  warns: [competing objectives]
   data: [uci-adult]
   ladder: [python, numpy]
   needs: any
@@ -776,6 +777,7 @@ lessons:
   covers: [model-agnostische-post-hoc-methoden#0]
   requires: [rai-global-surrogate]
   introduces: [c:lime]
+  mentions: [c:normal-distribution]
   data: [uci-adult]
   ladder: [python, numpy]
   needs: any
