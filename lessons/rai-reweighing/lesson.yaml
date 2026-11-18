@@ -1,0 +1,35 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: rai-reweighing
+minutes: 25
+title:
+  en: "Fixing the data: reweighing"
+  nl: "De data aanpassen: reweighing"
+goal:
+  en: "know the three places where you can make a model treat groups more alike, give each person to train on a weight so that every group has the same share of each label, and measure what that does to the model."
+  nl: "de drie plekken kennen waar je een model groepen meer gelijk kunt laten behandelen, elke persoon om op te trainen een gewicht geven zodat elke groep hetzelfde deel van elk label heeft, en meten wat dat met het model doet."
+summary:
+  - en: "Bias mitigation acts in one of three places: pre-processing changes the data before training, in-processing changes the training itself, post-processing changes the decisions of a trained model. The threshold per group of the lesson on equal yes rates was post-processing."
+    nl: "Bias mitigation grijpt op een van drie plekken in: pre-processing verandert de data voor het trainen, in-processing het trainen zelf, post-processing de beslissingen van een getraind model. De threshold per groep uit de les over evenveel ja per groep was post-processing."
+  - en: "Reweighing, from Kamiran and Calders, gives each person a weight by group and label: the number you would expect if the label did not depend on the group, divided by the number there are. On UCI Adult, each woman who earns more than 50,000 dollars counts as 2.2 people, and in the weighted data 0.24 of the women and 0.24 of the men earn more."
+    nl: "Reweighing, van Kamiran en Calders, geeft elke persoon een gewicht naar groep en label: het aantal dat je zou verwachten als het label niet van de groep afhing, gedeeld door het aantal dat er is. Op UCI Adult telt elke vrouw die meer dan 50.000 dollar verdient als 2,2 mensen, en in de gewogen data verdient 0,24 van de vrouwen en 0,24 van de mannen meer."
+  - en: "Trained with the weights, the model without the column sex gave women a yes 0.57 times as often as men instead of 0.28 times, while it was right 0.829 instead of 0.834 of the time. The yes rates came closer, not equal, and the recall of the women went past that of the men. The weights need the sex of the people to train on, not of the people the model decides about."
+    nl: "Getraind met de gewichten gaf het model zonder de kolom sex vrouwen 0,57 keer zo vaak een ja als mannen in plaats van 0,28 keer, terwijl het 0,829 in plaats van 0,834 van de keren goed zat. De delen met een ja kwamen dichter bij elkaar, niet gelijk, en de recall van de vrouwen ging voorbij die van de mannen. De gewichten hebben het geslacht nodig van de mensen om op te trainen, niet van de mensen over wie het model beslist."
+can_now:
+  - en: "work out the reweighing weight of each combination of group and label from counts"
+    nl: "uit aantallen het reweighing-gewicht van elke combinatie van groep en label uitrekenen"
+    by: weights
+  - en: "check that every group has the same share of each label once the weights count"
+    nl: "nagaan dat elke groep hetzelfde deel van elk label heeft als de gewichten meetellen"
+    by: shares
+  - en: "say which column reweighing needs, and when"
+    nl: "zeggen welke kolom reweighing nodig heeft, en wanneer"
+    by: needs
+further_reading:
+  - en: "Faisal Kamiran and Toon Calders (2012), [*Data preprocessing techniques for classification without discrimination*](https://link.springer.com/content/pdf/10.1007/s10115-011-0463-8.pdf): reweighing, massaging and sampling, tried on UCI Adult and other tables"
+    nl: "Faisal Kamiran en Toon Calders (2012), [*Data preprocessing techniques for classification without discrimination*](https://link.springer.com/content/pdf/10.1007/s10115-011-0463-8.pdf): reweighing, massaging en sampling, uitgeprobeerd op UCI Adult en andere tabellen (in het Engels)"
+  - en: "Barocas, Hardt and Narayanan, *Fairness and Machine Learning* (2023), [chapter *Classification*](https://fairmlbook.org/pdf/classification.pdf): pre-processing, in-training and post-processing, and what each costs"
+    nl: "Barocas, Hardt en Narayanan, *Fairness and Machine Learning* (2023), [hoofdstuk *Classification*](https://fairmlbook.org/pdf/classification.pdf): pre-processing, in-training en post-processing, en wat elk kost (in het Engels)"
+  - en: "AIF360, [the class *Reweighing*](https://aif360.readthedocs.io/en/stable/modules/generated/aif360.algorithms.preprocessing.Reweighing.html): the same weights in a library"
+    nl: "AIF360, [de class *Reweighing*](https://aif360.readthedocs.io/en/stable/modules/generated/aif360.algorithms.preprocessing.Reweighing.html): dezelfde gewichten in een library (in het Engels)"

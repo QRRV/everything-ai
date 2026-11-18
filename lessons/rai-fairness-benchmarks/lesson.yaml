@@ -1,0 +1,35 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: rai-fairness-benchmarks
+minutes: 25
+title:
+  en: "Fairness tools and benchmarks"
+  nl: "Fairness-tools en benchmarks"
+goal:
+  en: "say what Fairlearn and AIF360 compute, read a fairness result on UCI Adult, COMPAS or German Credit for what it can and cannot show, and see how much one result changes between splits."
+  nl: "zeggen wat Fairlearn en AIF360 uitrekenen, een uitkomst over fairness op UCI Adult, COMPAS of German Credit lezen op wat die wel en niet kan laten zien, en zien hoeveel één uitkomst per splitsing verandert."
+summary:
+  - en: "Fairlearn, under the MIT license, and AIF360, under Apache 2.0, compute what the previous lessons built by hand: Fairlearn's MetricFrame gives a measure per group, AIF360 has Reweighing and Fairlearn has ThresholdOptimizer. The same name can hide another formula: Fairlearn's demographic parity ratio divides the smallest selection rate by the largest, AIF360's disparate impact divides the rate of the unprivileged group by that of the privileged group."
+    nl: "Fairlearn, onder de MIT-licentie, en AIF360, onder Apache 2.0, rekenen uit wat de vorige lessen met de hand bouwden: MetricFrame van Fairlearn geeft een maat per groep, AIF360 heeft Reweighing en Fairlearn heeft ThresholdOptimizer. Achter dezelfde naam kan een andere formule zitten: de demographic parity ratio van Fairlearn deelt het kleinste selectiepercentage door het grootste, de disparate impact van AIF360 deelt het percentage van de unprivileged groep door dat van de privileged groep."
+  - en: "Fairness methods are often compared on a few fairness benchmarks: in one survey of 558 articles, UCI Adult was used 118 times, COMPAS 81 times and German Credit 35 times. UCI Adult is from 1994, with a threshold of 50,000 dollars that 89 percent of women fall below; German Credit cannot tell who is a woman; COMPAS records re-arrest, not crime. Folktables offers newer tables per US state and year."
+    nl: "Methoden voor fairness worden vaak vergeleken op een paar fairness-benchmarks: in één overzicht van 558 papers werd UCI Adult 118 keer gebruikt, COMPAS 81 keer en German Credit 35 keer. UCI Adult is van 1994, met een inkomensgrens van 50.000 dollar waar 89 procent van de vrouwen onder valt; German Credit kan niet zien wie een vrouw is; COMPAS legt opnieuw gearresteerd worden vast, geen misdrijven. Folktables biedt nieuwere tabellen per Amerikaanse staat en per jaar."
+  - en: "Over ten samples of 1,000 people from UCI Adult, reweighing raised the women's yes rate divided by the men's by anything from 0.07 to 0.51. One split of a small table says little: report how far the results lie apart over several splits, and use more than one table."
+    nl: "Over tien steekproeven van 1000 mensen uit UCI Adult bracht reweighing het deel met een ja van vrouwen gedeeld door dat van mannen 0,07 tot 0,51 omhoog. Eén splitsing van een kleine tabel zegt weinig: rapporteer hoe ver de uitkomsten over meerdere splitsingen uit elkaar liggen, en gebruik meer dan één tabel."
+can_now:
+  - en: "work out the selection rate per group by hand, as Fairlearn's MetricFrame does"
+    nl: "het selectiepercentage per groep met de hand uitrekenen, zoals MetricFrame van Fairlearn dat doet"
+    by: rates
+  - en: "measure how far the results of one method lie apart over several splits"
+    nl: "meten hoe ver de uitkomsten van één methode over meerdere splitsingen uit elkaar liggen"
+    by: spread
+  - en: "say what to ask first about a fairness result on a benchmark table"
+    nl: "zeggen wat je eerst vraagt bij een uitkomst over fairness op een benchmarktabel"
+    by: german
+further_reading:
+  - en: "Alessandro Fabris, Stefano Messina, Gianmaria Silvello and Gian Antonio Susto (2022), [*Algorithmic Fairness Datasets: the Story so Far*](https://arxiv.org/pdf/2202.01711): the preprint of their survey of the tables used in fairness research, with what is wrong with UCI Adult, COMPAS and German Credit"
+    nl: "Alessandro Fabris, Stefano Messina, Gianmaria Silvello en Gian Antonio Susto (2022), [*Algorithmic Fairness Datasets: the Story so Far*](https://arxiv.org/pdf/2202.01711): de preprint van hun overzicht van de tabellen in onderzoek naar fairness, met wat er mis is met UCI Adult, COMPAS en German Credit (in het Engels)"
+  - en: "Frances Ding, Moritz Hardt, John Miller and Ludwig Schmidt (2021), [*Retiring Adult: New Datasets for Fair Machine Learning*](https://arxiv.org/pdf/2108.04884): why UCI Adult misleads, and Folktables, with tables per US state and year"
+    nl: "Frances Ding, Moritz Hardt, John Miller en Ludwig Schmidt (2021), [*Retiring Adult: New Datasets for Fair Machine Learning*](https://arxiv.org/pdf/2108.04884): waarom UCI Adult misleidt, en Folktables, met tabellen per Amerikaanse staat en per jaar (in het Engels)"
+  - en: "Sorelle Friedler, Carlos Scheidegger, Suresh Venkatasubramanian, Sonam Choudhary, Evan Hamilton and Derek Roth (2018), [*A comparative study of fairness-enhancing interventions in machine learning*](https://arxiv.org/pdf/1802.04422): fairness methods compared on several tables and ten random splits each"
+    nl: "Sorelle Friedler, Carlos Scheidegger, Suresh Venkatasubramanian, Sonam Choudhary, Evan Hamilton en Derek Roth (2018), [*A comparative study of fairness-enhancing interventions in machine learning*](https://arxiv.org/pdf/1802.04422): methoden voor fairness vergeleken op meerdere tabellen, met elk tien willekeurige splitsingen (in het Engels)"

@@ -1,0 +1,35 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: rai-fair-thresholds
+minutes: 25
+title:
+  en: "Fixing the decision: a threshold per group"
+  nl: "De beslissing aanpassen: een threshold per groep"
+goal:
+  en: "choose a threshold per group after training, so that a fairness criterion holds with as many people right as possible, and see what each criterion costs and leaves unequal."
+  nl: "na de training een threshold per groep kiezen, zodat een fairness-criterium geldt met zoveel mogelijk mensen goed, en zien wat elk criterium kost en ongelijk laat."
+summary:
+  - en: "Post-processing leaves a trained model as it is and changes only the decision: the model's probability for a person is compared with the threshold of that person's group. Threshold optimization tries pairs of thresholds, keeps those that meet a criterion within a small gap, and takes the pair that gets the most people right. Choose the pair on other people than the test set, and measure it on the test set."
+    nl: "Post-processing laat een getraind model zoals het is en verandert alleen de beslissing: de kans van het model voor een persoon wordt vergeleken met de threshold van de groep van die persoon. Threshold optimization probeert paren thresholds, houdt de paren die op een klein verschil na aan een criterium voldoen, en neemt het paar dat de meeste mensen goed heeft. Kies het paar op andere mensen dan de test set, en meet het op de test set."
+  - en: "On the table UCI Adult, equal recall cost almost nothing, an accuracy of 0.832 instead of 0.834, but left the yes rates at 0.10 and 0.24. Equal yes rates cost more, 0.817, and turned the recall around. Equal recall and equal false positive rates together came, with one threshold per group, only at high thresholds: 0.805. Exact equalized odds usually needs a coin between two thresholds."
+    nl: "Op de tabel UCI Adult kostte gelijke recall bijna niets, een accuracy van 0,832 in plaats van 0,834, maar liet het deel met een ja op 0,10 en 0,24. Een gelijk deel met een ja kostte meer, 0,817, en draaide de recall om. Gelijke recall en gelijke false positive rates samen kwamen er met één threshold per groep alleen bij hoge thresholds: 0,805. Precies equalized odds vraagt meestal een muntworp tussen twee thresholds."
+  - en: "A threshold per group needs each person's group when the model decides: two people with the same probability can get different answers. Whether that is allowed depends on the country and the decision; the Dutch Algoritmekader counts a ground such as sex as an input variable as direct distinction, prohibited unless an exception applies."
+    nl: "Een threshold per groep heeft de groep van elke persoon nodig als het model beslist: twee mensen met dezelfde kans kunnen een ander antwoord krijgen. Of dat mag, hangt af van het land en de beslissing; het Algoritmekader rekent een grond als geslacht als inputvariabele tot direct onderscheid, verboden tenzij er een uitzondering geldt."
+can_now:
+  - en: "search the pair of thresholds that meets a fairness criterion and gets the most people right"
+    nl: "het paar thresholds zoeken dat aan een fairness-criterium voldoet en de meeste mensen goed heeft"
+    by: search
+  - en: "decide with a threshold per group, and say what that needs when the model decides"
+    nl: "beslissen met een threshold per groep, en zeggen wat dat nodig heeft als het model beslist"
+    by: decide
+  - en: "say what a fairness criterion leaves unequal and what it costs"
+    nl: "zeggen wat een fairness-criterium ongelijk laat en wat het kost"
+    by: unequal
+further_reading:
+  - en: "Moritz Hardt, Eric Price and Nathan Srebro (2016), [*Equality of Opportunity in Supervised Learning*](https://arxiv.org/pdf/1610.02413): thresholds per group after training, with a coin where needed, tried out on credit scores"
+    nl: "Moritz Hardt, Eric Price en Nathan Srebro (2016), [*Equality of Opportunity in Supervised Learning*](https://arxiv.org/pdf/1610.02413): thresholds per groep na de training, met een muntworp waar dat nodig is, uitgeprobeerd op kredietscores (in het Engels)"
+  - en: "Fairlearn, [user guide *Postprocessing*](https://fairlearn.org/v0.15/user_guide/mitigation/postprocessing.html): how `ThresholdOptimizer` searches its thresholds, and why it needs the group when it decides"
+    nl: "Fairlearn, [handleiding *Postprocessing*](https://fairlearn.org/v0.15/user_guide/mitigation/postprocessing.html): hoe `ThresholdOptimizer` zijn thresholds zoekt, en waarom het de groep nodig heeft als het beslist (in het Engels)"
+  - en: "Sam Corbett-Davies, Emma Pierson, Avi Feller, Sharad Goel and Aziz Huq (2017), [*Algorithmic decision making and the cost of fairness*](https://arxiv.org/pdf/1701.08230): why fairness criteria lead to thresholds per group, and what they cost on real data"
+    nl: "Sam Corbett-Davies, Emma Pierson, Avi Feller, Sharad Goel en Aziz Huq (2017), [*Algorithmic decision making and the cost of fairness*](https://arxiv.org/pdf/1701.08230): waarom fairness-criteria tot thresholds per groep leiden, en wat ze kosten op echte data (in het Engels)"

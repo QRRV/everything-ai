@@ -499,6 +499,8 @@ lessons:
   covers: [bias-meten-en-mitigeren#1]
   requires: [rai-demographic-parity]
   introduces: [c:bias-mitigation, c:reweighing]
+  uses: [c:demographic-parity, c:group-fairness, c:selection-rate, c:proxy, c:fairness-through-unawareness, c:logistic-regression, c:probability, c:decision-threshold, c:recall, c:accuracy, c:one-hot, c:train-set, c:test-set, c:feature, c:label, c:model, c:prediction, c:weight, c:fairness, py:dataframe, py:pandas-select-filter, py:boolean-mask, py:np-sum, py:np-mean, py:sklearn-fit-predict, py:dict, py:dict-items, py:for, py:def, py:return, py:list, py:indexing, py:comparison, py:arithmetic, py:round, py:print, py:comment, py:variable, py:underscore-name, py:string-literal, py:float, py:int, py:len, py:none, py:keyword-argument, py:import, q:predict, q:choice, q:exercise-with-check, q:run-cell]
+  mentions: [py:pd-get-dummies, c:black-box]
   data: [uci-adult]
   ladder: [python, numpy]
   needs: any
@@ -512,6 +514,8 @@ lessons:
   covers: [bias-meten-en-mitigeren#1]
   requires: [rai-equalized-odds-calibration, rai-reweighing]
   introduces: [c:threshold-optimization]
+  uses: [c:equalized-odds, c:calibration-within-groups, c:demographic-parity, c:group-fairness, c:selection-rate, c:recall, c:true-positive, c:accuracy, c:decision-threshold, c:bias-mitigation, c:reweighing, c:direct-discrimination, c:validation-set, c:test-set, c:train-set, c:logistic-regression, c:probability, c:one-hot, c:feature, c:label, c:model, c:prediction, c:weight, c:fairness, c:fairness-through-unawareness, py:dataframe, py:pandas-select-filter, py:boolean-mask, py:np-mean, py:np-sum, py:np-arange, py:sklearn-fit-predict, py:dict, py:dict-items, py:for, py:if, py:def, py:return, py:list, py:append, py:tuple, py:abs, py:min-max, py:none, py:indexing, py:comparison, py:arithmetic, py:round, py:print, py:comment, py:variable, py:underscore-name, py:string-literal, py:float, py:int, py:bool, py:keyword-argument, py:import, py:import-as, q:predict, q:choice, q:exercise-with-check, q:run-cell]
+  mentions: [c:false-positive-rate, py:pd-get-dummies]
   data: [uci-adult]
   ladder: [python, numpy]
   needs: any
@@ -525,6 +529,8 @@ lessons:
   covers: [bias-meten-en-mitigeren#3, bias-meten-en-mitigeren#4]
   requires: [rai-fair-thresholds, res-reading-claims]
   introduces: [c:fairness-benchmark]
+  uses: [c:benchmark, c:selection-rate, c:demographic-parity, c:disparate-impact, c:group-fairness, c:fairness, c:bias-mitigation, c:reweighing, c:threshold-optimization, c:recall, c:accuracy, c:decision-threshold, c:seed, c:quantile, c:paper, c:preprint, c:test-set, c:train-set, c:logistic-regression, c:probability, c:one-hot, c:feature, c:label, c:model, c:prediction, c:weight, c:fairness-through-unawareness, py:dataframe, py:pandas-select-filter, py:iloc, py:boolean-mask, py:np-mean, py:np-random-generator, py:sklearn-fit-predict, py:dict, py:for, py:range, py:len, py:if, py:def, py:return, py:list, py:append, py:min-max, py:none, py:indexing, py:slicing, py:comparison, py:arithmetic, py:round, py:print, py:comment, py:variable, py:underscore-name, py:string-literal, py:float, py:int, py:bool, py:keyword-argument, py:import, py:import-as, q:predict, q:choice, q:exercise-with-check, q:run-cell]
+  mentions: [py:pd-get-dummies]
   data: [uci-adult]
   ladder: [python, numpy]
   needs: any
