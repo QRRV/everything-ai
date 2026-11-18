@@ -1,0 +1,42 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: rai-fairness-in-organizations
+minutes: 30
+title:
+  en: "Fairness in an organization"
+  nl: "Fairness in een organisatie"
+goal:
+  en: "say where fairness work stalls in practice, find the stages of a plan without a moment to look at fairness, work out which groups lie past a limit agreed before the review, and say who must do a FRIA."
+  nl: "zeggen waar werk aan fairness in de praktijk vastloopt, de fasen van een plan vinden zonder moment om naar fairness te kijken, uitrekenen welke groepen voorbij een vooraf afgesproken grens liggen, en zeggen wie een FRIA moet doen."
+summary:
+  - en: "In practice fairness work stalls outside the model: only 21 percent of surveyed practitioners said their team prioritizes fairness a lot or a great deal (Holstein and colleagues 2019), almost every practitioner Andrus and colleagues (2021) interviewed called access to demographic data a significant barrier, and many organizations act mostly in reaction to bad press (Rakova and colleagues 2021)."
+    nl: "In de praktijk loopt werk aan fairness vast buiten het model: maar 21 procent van de ondervraagden zei dat hun team fairness veel of heel veel voorrang geeft (Holstein en collega's 2019), bijna iedereen die Andrus en collega's (2021) interviewden, noemde toegang tot gegevens over groepen een grote drempel, en veel organisaties komen vooral in actie na slechte publiciteit (Rakova en collega's 2021)."
+  - en: "A fairness review is a planned moment where a team with mixed roles measures the system per group, writes down who could be harmed and what will be done, and someone with authority decides to go on, change it or stop. The checklist of Madaio and colleagues (2020) ties such moments to the stages envision, define, prototype, build, launch and evolve, and warns that undertaking its items will not guarantee fairness."
+    nl: "Een fairness review is een gepland moment waarop een team met verschillende rollen het systeem per groep meet, opschrijft wie schade kan oplopen en wat eraan gedaan wordt, en iemand met bevoegdheid besluit door te gaan, te veranderen of te stoppen. De checklist van Madaio en collega's (2020) koppelt zulke momenten aan de fasen envision, define, prototype, build, launch en evolve, en waarschuwt dat het afwerken van de punten geen fairness garandeert."
+  - en: "A plan with moments only in envision, build and launch leaves define, prototype and evolve without one; with a limit of 0.05 above the best group's WER of 0.17, Black men (0.41) and Black women (0.30) need work."
+    nl: "Een plan met alleen momenten in envision, build en launch laat define, prototype en evolve zonder; met een grens van 0,05 boven de WER van 0,17 van de beste groep hebben zwarte mannen (0,41) en zwarte vrouwen (0,30) werk nodig."
+  - en: "The Dutch IAMA, version 2 since 16 February 2026, is a structured discussion that ends in an advice on whether to use an algorithm, and includes the FRIA of the AI Act, which public bodies, private entities providing public services, and deployers of credit scoring and of risk assessment and pricing in life and health insurance must do before first use; for these systems from 2 December 2027."
+    nl: "Het Nederlandse IAMA, versie 2 sinds 16 februari 2026, is een gestructureerd gesprek dat eindigt in een advies over het al dan niet inzetten van een algoritme, en bevat de FRIA van de AI Act, die overheidsorganisaties, private partijen die openbare diensten verlenen, en gebruiksverantwoordelijken van systemen voor kredietscores en voor het risico en de prijs van levens- en ziektekostenverzekeringen vóór het eerste gebruik moeten doen; voor deze systemen vanaf 2 december 2027."
+can_now:
+  - en: "find the stages of a plan in which nobody looks at fairness"
+    nl: "de fasen van een plan vinden waarin niemand naar fairness kijkt"
+    by: missing
+  - en: "tell proactive fairness work from reactive work"
+    nl: "proactief werk aan fairness onderscheiden van reactief werk"
+    by: proactive
+  - en: "work out which groups lie past a limit agreed before a review"
+    nl: "uitrekenen welke groepen voorbij een vooraf afgesproken grens liggen"
+    by: behind
+  - en: "say who must do a fundamental rights impact assessment under the AI Act"
+    nl: "zeggen wie volgens de AI Act een beoordeling van de gevolgen voor de grondrechten moet doen"
+    by: fria
+further_reading:
+  - en: "Kenneth Holstein, Jennifer Wortman Vaughan, Hal Daumé III, Miroslav Dudík and Hanna Wallach (2019), [*Improving Fairness in Machine Learning Systems: What Do Industry Practitioners Need?*](https://arxiv.org/pdf/1812.05239): interviews and a survey of practitioners on what blocks fairness work"
+    nl: "Kenneth Holstein, Jennifer Wortman Vaughan, Hal Daumé III, Miroslav Dudík en Hanna Wallach (2019), [*Improving Fairness in Machine Learning Systems: What Do Industry Practitioners Need?*](https://arxiv.org/pdf/1812.05239): interviews en een enquête onder mensen uit de praktijk over wat werk aan fairness tegenhoudt (in het Engels)"
+  - en: "Michael Madaio, Luke Stark, Jennifer Wortman Vaughan and Hanna Wallach (2020), [*Co-Designing Checklists to Understand Organizational Challenges and Opportunities around Fairness in AI*](https://www.jennwv.com/papers/checklists.pdf): the paper, with the AI Fairness Checklist and its pause points at the end"
+    nl: "Michael Madaio, Luke Stark, Jennifer Wortman Vaughan en Hanna Wallach (2020), [*Co-Designing Checklists to Understand Organizational Challenges and Opportunities around Fairness in AI*](https://www.jennwv.com/papers/checklists.pdf): het paper, met achterin de AI Fairness Checklist en zijn pauzemomenten (in het Engels)"
+  - en: "Bogdana Rakova, Jingying Yang, Henriette Cramer and Rumman Chowdhury (2021), [*Where Responsible AI meets Reality*](https://arxiv.org/pdf/2006.12358): reactive, proactive and anticipatory organizations, and what helps them change"
+    nl: "Bogdana Rakova, Jingying Yang, Henriette Cramer en Rumman Chowdhury (2021), [*Where Responsible AI meets Reality*](https://arxiv.org/pdf/2006.12358): reactieve, proactieve en anticiperende organisaties, en wat helpt om te veranderen (in het Engels)"
+  - en: "Rijksoverheid (2026), [*Impact Assessment Mensenrechten en Algoritmes*](https://www.rijksoverheid.nl/documenten/2026/02/16/impact-assessment-mensenrechten-en-algoritmes): version 2 of the IAMA, with its explanatory document (in Dutch)"
+    nl: "Rijksoverheid (2026), [*Impact Assessment Mensenrechten en Algoritmes*](https://www.rijksoverheid.nl/documenten/2026/02/16/impact-assessment-mensenrechten-en-algoritmes): versie 2 van het IAMA, met het toelichtingsdocument"

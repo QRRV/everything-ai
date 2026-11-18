@@ -1,0 +1,42 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: rai-bias-faces-images
+minutes: 35
+title:
+  en: "Bias in face analysis and image generators"
+  nl: "Bias in gezichtsanalyse en beeldgeneratoren"
+goal:
+  en: "work out error rates per combination of groups and per attribute from the counts of Gender Shades, see how a number per attribute hides the worst combination, measure how far an image generator's share of women falls below the labor statistics, and say what the AI Act bans."
+  nl: "foutpercentages per combinatie van groepen en per eigenschap uitrekenen uit de aantallen van Gender Shades, zien hoe een getal per eigenschap de slechtste combinatie verbergt, meten hoe ver het aandeel vrouwen van een beeldgenerator onder de arbeidsstatistiek ligt, en zeggen wat de AI Act verbiedt."
+summary:
+  - en: "Intersectional fairness is fairness for combinations of groups, such as darker-skinned women. A model can look fair on each attribute and be unfair to their combinations (fairness gerrymandering, Kearns and colleagues 2018); intersectionality is Kimberlé Crenshaw's word (1989)."
+    nl: "Intersectional fairness is fairness voor combinaties van groepen, zoals vrouwen met een donkerdere huid. Een model kan fair lijken voor elke eigenschap en unfair zijn voor hun combinaties (fairness gerrymandering, Kearns en collega's 2018); intersectionaliteit is het woord van Kimberlé Crenshaw (1989)."
+  - en: "Gender Shades (Buolamwini and Gebru 2018) tested three gender classifiers on 1,270 members of parliament. All did worst on darker-skinned women, from 20.8 to 34.7 percent errors, against at most 0.8 percent for lighter-skinned men. For Microsoft, the women's rate of 0.107 and the darker-skinned people's rate of 0.129 hide the 0.208 of darker-skinned women."
+    nl: "Gender Shades (Buolamwini en Gebru 2018) testte drie genderclassifiers op 1.270 parlementsleden. Alle drie deden het slechtst bij vrouwen met een donkerdere huid, met 20,8 tot 34,7 procent fouten, tegenover hooguit 0,8 procent bij mannen met een lichtere huid. Bij Microsoft verbergen het foutpercentage van 0,107 voor vrouwen en van 0,129 voor mensen met een donkerdere huid de 0,208 van vrouwen met een donkerdere huid."
+  - en: "Image generators can show fewer women than work in an occupation: over five groups of occupations, Dall·E 2 put on average 29.64 percentage points fewer of its images in clusters linked to women than the share of women in the US labor statistics, Stable Diffusion 2 13.68 and Stable Diffusion 1.4 8.62 (from Luccioni and colleagues 2023)."
+    nl: "Beeldgeneratoren kunnen minder vrouwen laten zien dan er in een beroep werken: over vijf groepen beroepen zette Dall·E 2 gemiddeld 29,64 procentpunt minder van zijn afbeeldingen in clusters die bij vrouwen horen dan het aandeel vrouwen in de Amerikaanse arbeidsstatistiek, Stable Diffusion 2 13,68 en Stable Diffusion 1.4 8,62 (uit Luccioni en collega's 2023)."
+  - en: "Since 2 February 2025 the AI Act bans emotion recognition at work and in education, and biometric categorization that infers race, political opinions, religion or sexual orientation, among others; sex and gender are not on that list."
+    nl: "Sinds 2 februari 2025 verbiedt de AI Act emotieherkenning op het werk en in het onderwijs, en biometrische categorisering die onder meer ras, politieke opvattingen, religie of seksuele gerichtheid afleidt; geslacht en gender staan niet in dat rijtje."
+can_now:
+  - en: "work out the error rate of a group from the counts of its cells"
+    nl: "het foutpercentage van een groep uitrekenen uit de aantallen van zijn vakjes"
+    by: rate
+  - en: "say why you cannot check fairness for every subgroup"
+    nl: "zeggen waarom je fairness niet voor elke subgroep kunt controleren"
+    by: subgroups
+  - en: "measure how far an image generator's share of women lies from the statistics"
+    nl: "meten hoe ver het aandeel vrouwen van een beeldgenerator van de statistiek af ligt"
+    by: gap
+  - en: "say which uses of face analysis the AI Act bans"
+    nl: "zeggen welke toepassingen van gezichtsanalyse de AI Act verbiedt"
+    by: law
+further_reading:
+  - en: "Joy Buolamwini and Timnit Gebru (2018), [*Gender Shades: Intersectional Accuracy Disparities in Commercial Gender Classification*](http://proceedings.mlr.press/v81/buolamwini18a/buolamwini18a.pdf): the Pilot Parliaments Benchmark, and the error rates per combination of skin type and gender"
+    nl: "Joy Buolamwini en Timnit Gebru (2018), [*Gender Shades: Intersectional Accuracy Disparities in Commercial Gender Classification*](http://proceedings.mlr.press/v81/buolamwini18a/buolamwini18a.pdf): de Pilot Parliaments Benchmark, en de foutpercentages per combinatie van huidtype en gender (in het Engels)"
+  - en: "Inioluwa Deborah Raji and Joy Buolamwini (2019), [*Actionable Auditing*](https://dam-prod.media.mit.edu/x/2019/01/24/AIES-19_paper_223.pdf): what the three companies changed after Gender Shades, and how two others did"
+    nl: "Inioluwa Deborah Raji en Joy Buolamwini (2019), [*Actionable Auditing*](https://dam-prod.media.mit.edu/x/2019/01/24/AIES-19_paper_223.pdf): wat de drie bedrijven na Gender Shades veranderden, en hoe twee andere het deden (in het Engels)"
+  - en: "Patrick Grother, Mei Ngan and Kayee Hanaoka (2019), [*Face Recognition Vendor Test (FRVT) Part 3: Demographic Effects*](https://nvlpubs.nist.gov/nistpubs/ir/2019/NIST.IR.8280.pdf): NIST's test of face recognition per demographic group"
+    nl: "Patrick Grother, Mei Ngan en Kayee Hanaoka (2019), [*Face Recognition Vendor Test (FRVT) Part 3: Demographic Effects*](https://nvlpubs.nist.gov/nistpubs/ir/2019/NIST.IR.8280.pdf): de test van NIST naar gezichtsherkenning per groep mensen (in het Engels)"
+  - en: "Alexandra Sasha Luccioni, Christopher Akiki, Margaret Mitchell and Yacine Jernite (2023), [*Stable Bias: Evaluating Societal Representations in Diffusion Models*](https://arxiv.org/pdf/2303.11408): who three image generators draw, compared with the US labor statistics"
+    nl: "Alexandra Sasha Luccioni, Christopher Akiki, Margaret Mitchell en Yacine Jernite (2023), [*Stable Bias: Evaluating Societal Representations in Diffusion Models*](https://arxiv.org/pdf/2303.11408): wie drie beeldgeneratoren tekenen, vergeleken met de Amerikaanse arbeidsstatistiek (in het Engels)"

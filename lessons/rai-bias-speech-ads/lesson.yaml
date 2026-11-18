@@ -1,0 +1,42 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: rai-bias-speech-ads
+minutes: 35
+title:
+  en: "Bias in speech and in ads"
+  nl: "Bias in spraak en in advertenties"
+goal:
+  en: "work out a word error rate and the share of transcripts above a limit, say what a gap on identical phrases points to, work out who saw a job ad from its impressions, and tell the skew of the delivery apart from the advertiser's targeting."
+  nl: "een word error rate uitrekenen en het deel van de transcripties boven een grens, zeggen waar een verschil op identieke zinnetjes op wijst, uit de impressions van een vacature uitrekenen wie hem zag, en de scheefheid van de delivery onderscheiden van de targeting van de adverteerder."
+summary:
+  - en: "The word error rate is WER = (S + D + I) / N: the words a speech recognizer substituted, deleted and inserted, divided by the words in the correct transcript. Because insertions count, it can be above 1."
+    nl: "De word error rate is WER = (S + D + I) / N: de woorden die een spraakherkenner verving, wegliet en toevoegde, gedeeld door de woorden in de juiste transcriptie. Omdat toevoegingen meetellen, kan hij boven 1 uitkomen."
+  - en: "Five speech recognition systems had an average WER of 0.35 for Black speakers against 0.19 for White speakers, and 23 percent of the Black speakers' snippets were above 0.5, against 1.6 percent (Koenecke and colleagues 2020). The gap stayed on identical phrases, so it points to how the words sound."
+    nl: "Vijf systemen voor spraakherkenning hadden een gemiddelde WER van 0,35 voor zwarte sprekers tegenover 0,19 voor witte sprekers, en 23 procent van de fragmenten van zwarte sprekers lag boven 0,5, tegenover 1,6 procent (Koenecke en collega's 2020). Het verschil bleef op identieke zinnetjes, dus het wijst op hoe de woorden klinken."
+  - en: "Ad delivery bias is a skew in who sees an ad that comes from the platform's delivery, not from the advertiser's targeting. A job ad for science, technology, engineering and math (STEM), meant to be gender neutral, gave women 0.439 of the impressions, while women who saw it clicked more often (Lambrecht and Tucker 2019): showing ads to younger women costs more."
+    nl: "Ad delivery bias is een scheefheid in wie een advertentie ziet die voortkomt uit de delivery van het platform, niet uit de targeting van de adverteerder. Een genderneutraal bedoelde vacature in wetenschap en techniek gaf vrouwen 0,439 van de impressions, terwijl vrouwen die hem zagen vaker klikten (Lambrecht en Tucker 2019): advertenties tonen aan jongere vrouwen kost meer."
+  - en: "In the US, Meta settled a Fair Housing Act case in 2022 and built the Variance Reduction System, which reduces the difference between the targeted and the actual audience of housing ads. In the EU, the Digital Services Act forbids ads based on profiling with special categories of personal data since 17 February 2024."
+    nl: "In de VS schikte Meta in 2022 een zaak onder de Fair Housing Act en bouwde het het Variance Reduction System, dat het verschil verkleint tussen het beoogde en het werkelijke publiek van woningadvertenties. In de EU verbiedt de Digital Services Act sinds 17 februari 2024 advertenties op basis van profilering met bijzondere persoonsgegevens."
+can_now:
+  - en: "work out a word error rate, and the share of snippets above a limit"
+    nl: "een word error rate uitrekenen, en het deel van de fragmenten boven een grens"
+    by: wer
+  - en: "say what a gap on identical phrases points to"
+    nl: "zeggen waar een verschil op identieke zinnetjes op wijst"
+    by: cause
+  - en: "work out the share of a group among the people who saw an ad"
+    nl: "het aandeel van een groep uitrekenen onder de mensen die een advertentie zagen"
+    by: share
+  - en: "tell the skew of the delivery apart from the advertiser's targeting"
+    nl: "de scheefheid van de delivery onderscheiden van de targeting van de adverteerder"
+    by: audience
+further_reading:
+  - en: "Allison Koenecke and colleagues (2020), [*Racial disparities in automated speech recognition*](https://5harad.com/papers/asr-disparities.pdf): five speech recognition systems on Black and White speakers, and the identical phrases"
+    nl: "Allison Koenecke en collega's (2020), [*Racial disparities in automated speech recognition*](https://5harad.com/papers/asr-disparities.pdf): vijf systemen voor spraakherkenning bij zwarte en witte sprekers, en de identieke zinnetjes (in het Engels)"
+  - en: "Muhammad Ali and colleagues (2019), [*Discrimination through Optimization: How Facebook's Ad Delivery Can Lead to Biased Outcomes*](https://par.nsf.gov/servlets/purl/10195583): how budget, the ad itself and the platform's predictions skew who sees an ad"
+    nl: "Muhammad Ali en collega's (2019), [*Discrimination through Optimization: How Facebook's Ad Delivery Can Lead to Biased Outcomes*](https://par.nsf.gov/servlets/purl/10195583): hoe het budget, de advertentie zelf en de voorspellingen van het platform scheeftrekken wie een advertentie ziet (in het Engels)"
+  - en: "Anja Lambrecht and Catherine Tucker (2019), [*Algorithmic Bias? An Empirical Study of Apparent Gender-Based Discrimination in the Display of STEM Career Ads*](https://www.runi.ac.il/media/3wwgi0qa/article-algorithmic-bias.pdf): the job ad that fewer women saw, and why"
+    nl: "Anja Lambrecht en Catherine Tucker (2019), [*Algorithmic Bias? An Empirical Study of Apparent Gender-Based Discrimination in the Display of STEM Career Ads*](https://www.runi.ac.il/media/3wwgi0qa/article-algorithmic-bias.pdf): de vacature die minder vrouwen zagen, en waarom (in het Engels)"
+  - en: "Basileal Imana, Aleksandra Korolova and John Heidemann (2021), [*Auditing for Discrimination in Algorithms Delivering Job Ads*](https://arxiv.org/pdf/2104.04502): pairs of job ads that separate skew from qualifications, on Facebook and LinkedIn"
+    nl: "Basileal Imana, Aleksandra Korolova en John Heidemann (2021), [*Auditing for Discrimination in Algorithms Delivering Job Ads*](https://arxiv.org/pdf/2104.04502): paren vacatures die scheefheid scheiden van kwalificaties, op Facebook en LinkedIn (in het Engels)"

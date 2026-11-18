@@ -591,6 +591,8 @@ lessons:
   covers: [bias-per-modaliteit#2, bias-per-modaliteit#3]
   requires: [rai-bias-lifecycle, ml-confusion-matrix]
   introduces: [c:intersectional-fairness]
+  uses: [c:recall, c:true-positive, c:false-positive, c:label, c:class, c:metric, c:harm, c:model, py:dict, py:list, py:for, py:if, py:comparison, py:arithmetic, py:indexing, py:len, py:print, py:round, py:comment, py:variable, py:underscore-name, py:string-literal, py:int, py:float, q:predict, q:choice, q:exercise-with-check, q:run-cell]
+  mentions: [c:benchmark, c:fairness]
   data: []
   ladder: [python]
   needs: any
@@ -604,6 +606,8 @@ lessons:
   covers: [bias-per-modaliteit#4, bias-per-modaliteit#6]
   requires: [rai-bias-faces-images]
   introduces: [c:ad-delivery-bias]
+  uses: [c:intersectional-fairness, c:metric, c:harm, c:model, c:machine-learning, py:dict, py:list, py:for, py:if, py:comparison, py:arithmetic, py:indexing, py:len, py:print, py:round, py:comment, py:variable, py:underscore-name, py:string-literal, py:int, py:float, q:predict, q:choice, q:exercise-with-check, q:run-cell]
+  mentions: [c:fairness, c:personal-data]
   data: []
   ladder: [python]
   needs: any
@@ -617,6 +621,8 @@ lessons:
   covers: [fairness-in-de-praktijk-en-kritische-perspectieven#0]
   requires: [rai-fairness-benchmarks]
   introduces: [c:fairness-review]
+  uses: [c:fairness-benchmark, c:fairness, c:group-fairness, c:selection-rate, c:demographic-parity, c:bias-mitigation, c:reweighing, c:metric, c:harm, c:model, c:paper, py:dict, py:list, py:append, py:for, py:if, py:comparison, py:arithmetic, py:indexing, py:min-max, py:print, py:comment, py:variable, py:underscore-name, py:string-literal, py:float, py:int, q:predict, q:choice, q:exercise-with-check, q:run-cell]
+  mentions: [c:responsible-ai, c:algorithm-register, c:techno-solutionism, c:code-review]
   data: []
   ladder: [python]
   needs: any
