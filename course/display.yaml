@@ -105,6 +105,29 @@ modules:
   onderzoek/experimenten: {en: "Experiments", nl: "Experimenten"}
   onderzoek/nabouwen: {en: "Reproducing a paper", nl: "Een paper nabouwen"}
 
+# the drawing of the kern and of every domain on the start page (src/everything_ai/web/beelden/<id>.svg): what it
+# shows, in one sentence, which is also what a screen reader says
+pictures:
+  kern: {en: "Your first model: a line through the data, with the error of each point.", nl: "Je eerste model: een lijn door de data, met de fout van elk punt."}
+  taal: {en: "A search engine gives every document a score.", nl: "Een zoekmachine geeft elk document een score."}
+  llm: {en: "A language model picks the next token from probabilities.", nl: "Een language model kiest het volgende token uit kansen."}
+  beeld: {en: "A vision model finds an object in the pixels.", nl: "Een beeldmodel vindt een object in de pixels."}
+  spraak: {en: "From a sound wave to words.", nl: "Van een geluidsgolf naar woorden."}
+  generatief: {en: "A generator turns noise into an image, step by step.", nl: "Een generator maakt van ruis stap voor stap een beeld."}
+  klassiek-ml: {en: "A decision tree splits the data into boxes.", nl: "Een beslisboom deelt de data op in vakken."}
+  rl: {en: "An agent learns the way to the reward.", nl: "Een agent leert de weg naar de beloning."}
+  onzekerheid: {en: "A model that says how sure it is.", nl: "Een model dat zegt hoe zeker het is."}
+  klassieke-ai: {en: "Searching a tree of possibilities.", nl: "Zoeken in een boom van mogelijkheden."}
+  multi-agent: {en: "Two players and the equilibrium they end up in.", nl: "Twee spelers en het evenwicht waar ze uitkomen."}
+  bouwen: {en: "A question, your own documents, a model and an answer.", nl: "Een vraag, je eigen documenten, een model en een antwoord."}
+  systemen: {en: "The same model, trained faster.", nl: "Hetzelfde model, sneller getraind."}
+  robotica: {en: "A robot arm plans a move to a target.", nl: "Een robotarm plant een beweging naar een doel."}
+  toepassingen: {en: "Predicting a property of a molecule, and measuring it.", nl: "Een eigenschap van een molecuul voorspellen, en meten."}
+  verantwoord: {en: "A model that makes more mistakes for one group than for another.", nl: "Een model dat bij de ene groep meer fouten maakt dan bij de andere."}
+  mens: {en: "An AI application, checked against rules.", nl: "Een AI-toepassing, getoetst aan regels."}
+  dl-verdieping: {en: "Layers with a skip connection.", nl: "Lagen met een skip connection."}
+  onderzoek: {en: "Your result next to the paper's.", nl: "Jouw resultaat naast dat van de paper."}
+
 # the running project of every domain (route/domeinen.yaml has the Dutch working titles)
 projects:
   taal: {en: "Your own text analysis and search engine", nl: "Je eigen tekstanalyse en zoekmachine"}

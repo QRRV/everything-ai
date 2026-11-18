@@ -167,6 +167,20 @@ def groups() -> list[dict]:
     return [{"id": g["id"], "domains": list(g["domeinen"])} for g in structure()["groepen"]]
 
 
+def tasters() -> dict[str, list[str]]:
+    """The lessons of the kern that give a first taste of a domain (`proef` in domeinen.yaml), by domain. A domain
+    whose taster is still to be written (`proef: nieuw`) has none yet."""
+    return {d["id"]: list(d["proef"]) for d in structure()["domeinen"] if isinstance(d.get("proef"), list)}
+
+
+def pictures() -> dict[str, dict]:
+    """The drawing of the kern and of every domain (web/beelden/<id>.svg), with the sentence that says what it shows
+    (`pictures` in display.yaml), as the start page draws them."""
+    about = display()["pictures"]
+    return {pid: {"svg": (paths.WEB / "beelden" / f"{pid}.svg").read_text(encoding="utf-8").strip(), "about": about[pid]}
+            for pid in ["kern", *domains()]}
+
+
 def part(lesson_id: str) -> str:
     """Where a lesson belongs: "kern", "fundament" (a shared module of the foundation) or the id of its domain."""
     les = lessons()[lesson_id]

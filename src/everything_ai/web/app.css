@@ -1,6 +1,7 @@
 /* SPDX-FileCopyrightText: 2026 Everything AI contributors
    SPDX-License-Identifier: MIT
-   The start page. Ink and grey only: in this course colour means a role in a model, so the page itself has none. */
+   The start page. Ink and grey: in this course colour means a role in a model, so the page itself has none. The
+   drawings of the kern and the domains are the exception, and use colour the way the lessons do. */
 
 :root {
   --ui: "Inter var", Inter, system-ui, sans-serif;
@@ -49,36 +50,113 @@ a.next .meta { grid-area: m; font-size: 0.9rem; color: var(--ea-ink-2); }
 a.next .arrow { grid-area: a; font-size: 1.6rem; color: var(--ea-ink-2); }
 .system { font-size: 0.9rem; color: var(--ea-ink-2); margin: 1rem 0 0; max-width: 40rem; }
 
-/* levels */
-.levels { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.2rem; padding: 1.4rem 0 0.4rem; border-top: 1px solid var(--ea-line); margin-top: 1.4rem; }
-.level-name { font-weight: 650; font-size: 0.95rem; margin-bottom: 0.4rem; text-transform: capitalize; }
-.bar { height: 6px; border-radius: 3px; background: var(--ea-line); overflow: hidden; }
-.bar span { display: block; height: 100%; background: var(--ea-ink); border-radius: 3px; }
-.level-meta { font-size: 0.82rem; color: var(--ea-ink-3); margin-top: 0.4rem; font-variant-numeric: tabular-nums; }
-
-/* route */
+/* the way: head, extra lessons, goals */
 h2.section { font-size: 1.6rem; letter-spacing: -0.015em; font-weight: 680; margin: 0; }
-.route { margin-top: 2.6rem; }
 .route-head { display: flex; justify-content: space-between; align-items: baseline; gap: 1rem; flex-wrap: wrap; margin-bottom: 0.6rem; }
 .toggle { font-size: 0.9rem; color: var(--ea-ink-2); display: inline-flex; gap: 0.45rem; align-items: center; cursor: pointer; }
 .toggle input { accent-color: var(--ea-ink); }
-.goals { margin: 0.4rem 0 1.2rem; }
-.goals-label { font-size: 0.8rem; font-weight: 650; letter-spacing: 0.06em; text-transform: uppercase; color: var(--ea-ink-3); display: block; margin-bottom: 0.5rem; }
 .chips { display: flex; flex-wrap: wrap; gap: 0.45rem; }
 .chip { border: 1px solid var(--ea-line); background: var(--ea-page); border-radius: 999px; padding: 0.28rem 0.8rem; font-size: 0.88rem; cursor: pointer; color: var(--ea-ink-2); }
 .chip:hover { border-color: var(--ea-axis); color: var(--ea-ink); }
 .chip[aria-pressed="true"] { background: var(--ea-ink); border-color: var(--ea-ink); color: var(--ea-page); }
 .goal-note { font-size: 0.9rem; color: var(--ea-ink-2); margin: 0.6rem 0 0; }
-.lvl h2 { font-size: 1.1rem; text-transform: capitalize; margin: 2rem 0 0.2rem; font-weight: 680; }
-.milestone { font-family: var(--prose); color: var(--ea-ink-2); margin: 0 0 0.8rem; max-width: 40rem; }
-details.module { border-top: 1px solid var(--ea-line); }
-details.module:last-of-type { border-bottom: 1px solid var(--ea-line); }
-details.module summary { list-style: none; cursor: pointer; display: flex; justify-content: space-between; gap: 1rem; padding: 0.7rem 0; }
-details.module summary::-webkit-details-marker { display: none; }
-details.module summary::before { content: "+"; width: 1.2rem; color: var(--ea-ink-3); flex: none; }
-details.module[open] summary::before { content: "\2212"; }
-.mod-name { font-weight: 620; flex: 1; }
-.mod-meta { font-size: 0.85rem; color: var(--ea-ink-3); font-variant-numeric: tabular-nums; }
+.milestone { font-family: var(--prose); color: var(--ea-ink-2); margin: 0; max-width: 40rem; }
+
+/* the way: a path from top to bottom, a mark per step on its line */
+.way { margin-top: 2.6rem; }
+.legend { display: flex; flex-wrap: wrap; gap: 0.35rem 1.1rem; font-size: 0.82rem; color: var(--ea-ink-2); margin: 0 0 1.2rem; align-items: center; }
+.legend > span { display: inline-flex; align-items: center; gap: 0.4rem; }
+ol.path { list-style: none; margin: 0; padding: 0; position: relative; }
+ol.path::before { content: ""; position: absolute; left: 0.55rem; top: 0.6rem; bottom: 0.6rem; width: 2px; background: var(--ea-line); }
+li.step { position: relative; padding-left: 2rem; margin: 0 0 0.35rem; }
+li.step > .mark { position: absolute; left: 0.1rem; top: 0.72rem; width: 1rem; height: 1rem; border-radius: 50%; background: var(--ea-page);
+  border: 2px solid var(--ea-ink-3); }
+li.step.st-done > .mark { background: var(--ea-ink); border-color: var(--ea-ink); }
+li.step.st-now > .mark { border-color: var(--ea-ink); background: linear-gradient(90deg, var(--ea-ink) 50%, var(--ea-page) 50%); }
+li.step.st-soon > .mark { border-style: dashed; border-color: var(--ea-axis); }
+li.step.part > .mark { border-color: var(--ea-ink); }
+li.step.ms > .mark, li.step.lvl-head > .mark { display: none; }
+li.step.ms { margin: 0.6rem 0 1rem; }
+li.step.lvl-head h4 { margin: 1.2rem 0 0.3rem; font-size: 0.8rem; font-weight: 650; letter-spacing: 0.06em; text-transform: uppercase; color: var(--ea-ink-3); }
+li.step.choice > .mark { width: 0.95rem; height: 0.95rem; border-radius: 1px; transform: rotate(45deg); border-color: var(--ea-ink); top: 1.15rem; left: 0.12rem; }
+li.step.choice { margin: 0.9rem 0 1.1rem; }
+.choice-box { border: 1px solid var(--ea-ink); border-radius: var(--r); padding: 0.9rem 1.1rem 1rem; }
+.choice-box h3 { margin: 0 0 0.35rem; font-size: 1.12rem; font-weight: 680; letter-spacing: -0.01em; }
+.choice-box > p { font-family: var(--prose); color: var(--ea-ink-2); margin: 0 0 0.8rem; max-width: 40rem; }
+.choice-box .milestone { margin-bottom: 0.5rem; }
+.choice-box > p.goal-note { font-family: var(--ui); font-size: 0.88rem; margin: 0.75rem 0 0; }
+li.step.cross .choice-box { box-shadow: inset 4px 0 0 var(--ea-ink); }
+.part-head { display: flex; align-items: center; gap: 0.9rem; padding: 0.35rem 0 0.4rem; }
+.part-head h3 { margin: 0; font-size: 1.15rem; font-weight: 680; }
+.part-head p { margin: 0; font-size: 0.88rem; }
+.choice-mini { display: inline-block; width: 0.6rem; height: 0.6rem; transform: rotate(45deg); border: 1.5px solid var(--ea-ink); flex: none; margin: 0 0.35rem; }
+.legend .choice-mini { margin: 0 0.1rem; }
+
+/* a module on the path: name, dots, count; it opens to its lessons */
+details.mod summary { list-style: none; cursor: pointer; display: grid; grid-template-columns: minmax(9rem, 13rem) 1fr auto; gap: 0.2rem 0.9rem;
+  align-items: center; padding: 0.55rem 0; }
+details.mod summary::-webkit-details-marker { display: none; }
+.mod-name { font-weight: 620; }
+.mod-count { font-size: 0.85rem; color: var(--ea-ink-3); font-variant-numeric: tabular-nums; }
+.here-badge { display: inline-block; font-size: 0.72rem; font-weight: 650; background: var(--ea-ink); color: var(--ea-page); border-radius: 4px;
+  padding: 0.05rem 0.4rem; margin-left: 0.4rem; vertical-align: 0.1em; white-space: nowrap; }
+.taste-line { display: flex; align-items: center; gap: 0.45rem; margin: -0.3rem 0 0.4rem; font-size: 0.8rem; color: var(--ea-ink-3); }
+
+/* one dot per lesson: filled is done, a ring is ready, a dashed ring is coming; a square gives a taste of a domain */
+.dots { display: flex; flex-wrap: wrap; gap: 4px; align-items: center; }
+.d { display: inline-block; width: 10px; height: 10px; border-radius: 50%; border: 1.5px solid var(--ea-ink-3); flex: none; background: var(--ea-page); }
+a.d:hover { border-color: var(--ea-ink); }
+.d.done { background: var(--ea-ink); border-color: var(--ea-ink); }
+.d.started { background: linear-gradient(90deg, var(--ea-ink-3) 50%, var(--ea-page) 50%); }
+.d.soon { border-style: dashed; border-color: var(--ea-axis); }
+.d.sq { border-radius: 2px; }
+.d.here { outline: 2px solid var(--ea-ink); outline-offset: 2px; }
+.d.skip { opacity: 0.25; }
+li.lesson.skip { opacity: 0.4; }
+
+/* the crossroads: one tile per domain, with its drawing */
+h4.group { font-size: 0.78rem; font-weight: 650; letter-spacing: 0.06em; text-transform: uppercase; color: var(--ea-ink-3); margin: 1.1rem 0 0.5rem; }
+.tiles { display: grid; grid-template-columns: repeat(auto-fill, minmax(10rem, 1fr)); gap: 0.55rem; }
+@media (min-width: 900px) { .tiles { grid-template-columns: repeat(5, minmax(0, 1fr)); } }
+.tile { display: flex; flex-direction: column; gap: 0.2rem; text-align: left; border: 1px solid var(--ea-line); border-radius: var(--r);
+  background: var(--ea-page); padding: 0.55rem 0.6rem 0.65rem; font-size: 0.82rem; color: var(--ea-ink-2); }
+button.tile { cursor: pointer; border-color: var(--ea-ink-2); transition: background-color 120ms; }
+button.tile:hover { background: var(--ea-inset); }
+.tile.mine { border-color: var(--ea-ink); box-shadow: inset 0 0 0 1px var(--ea-ink); }
+.tile.soon { border-style: dashed; }
+.tile.soon .picbox svg { opacity: 0.45; }
+.tile .picbox { margin-bottom: 0.3rem; }
+.t-name { font-weight: 650; font-size: 0.9rem; color: var(--ea-ink); line-height: 1.3; hyphens: auto;
+  overflow-wrap: break-word; }
+.tile.soon .t-name { color: var(--ea-ink-2); }
+.t-about { line-height: 1.35; font-size: 0.78rem; }
+.tag.taste { white-space: normal; }
+.t-state { color: var(--ea-ink-3); }
+.t-tags { display: flex; flex-wrap: wrap; gap: 0.3rem; margin-top: 0.15rem; }
+.t-tags .tag { margin-left: 0; }
+.tag.mine { background: var(--ea-ink); color: var(--ea-page); border-color: var(--ea-ink); }
+.choice-box button.link { margin-top: 0.9rem; font-size: 0.88rem; }
+.lvline { display: flex; flex-wrap: wrap; align-items: center; gap: 0.3rem; }
+.lv { border: 1px solid var(--ea-ink-2); border-radius: 6px; padding: 0.2rem 0.6rem; font-size: 0.88rem; }
+.lv b { font-weight: 650; text-transform: capitalize; }
+.lv.soon { border-style: dashed; border-color: var(--ea-axis); color: var(--ea-ink-3); }
+.chip.static { cursor: default; }
+.chip b { font-weight: 650; color: inherit; font-variant-numeric: tabular-nums; }
+
+/* the drawings: colour only where it means a role, as in the lessons */
+.picbox { display: block; background: var(--ea-inset); border-radius: 6px; padding: 6px 8px; aspect-ratio: 5 / 3; }
+.picbox.small { width: 5.5rem; flex: none; }
+svg.pic { display: block; width: 100%; height: 100%; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+.pic .f-data { fill: var(--ea-data); } .pic .f-data-w { fill: var(--ea-data-wash); } .pic .s-data { stroke: var(--ea-data); }
+.pic .f-pred { fill: var(--ea-pred); } .pic .f-pred-w { fill: var(--ea-pred-wash); } .pic .s-pred { stroke: var(--ea-pred); }
+.pic .s-res { stroke: var(--ea-residual); }
+.pic .f-loss { fill: var(--ea-loss); } .pic .s-loss { stroke: var(--ea-loss); }
+.pic .f-hid-w { fill: var(--ea-hidden-wash); } .pic .s-hid { stroke: var(--ea-hidden); }
+.pic .s-ink { stroke: var(--ea-ink-2); } .pic .f-ink { fill: var(--ea-ink-2); } .pic .s-ink3 { stroke: var(--ea-ink-3); }
+.pic .f-ink3 { fill: var(--ea-ink-3); fill-opacity: 0.55; }
+.pic .s-axis { stroke: var(--ea-axis); } .pic .s-line { stroke: var(--ea-line); }
+.pic .f-page { fill: var(--ea-page); } .pic .s-page { stroke: var(--ea-page); } .pic .f-none { fill: none; }
+
 ol.lessons { list-style: none; margin: 0 0 0.8rem; padding: 0; }
 li.lesson { display: grid; grid-template-columns: 2.6rem 1.3rem 1fr auto auto; align-items: baseline; gap: 0 0.6rem; padding: 0.32rem 0 0.32rem 1.2rem; }
 li.lesson .num { font-size: 0.82rem; color: var(--ea-ink-3); text-align: right; font-variant-numeric: tabular-nums; }
@@ -93,24 +171,15 @@ button.link { border: 0; background: none; padding: 0; font-size: 0.82rem; color
   text-decoration-color: var(--ea-axis); text-underline-offset: 0.18em; }
 button.link:hover { color: var(--ea-ink); }
 
-/* map */
-.map { margin-top: 3rem; }
-ul.branches { list-style: none; padding: 0; margin: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(15rem, 1fr)); gap: 0.6rem; }
-li.branch { border: 1px solid var(--ea-line); border-radius: var(--r); padding: 0.75rem 0.9rem; display: flex; flex-direction: column; gap: 0.25rem; }
-li.branch.now { border-color: var(--ea-ink); }
-li.branch .b-title { font-weight: 600; font-size: 0.95rem; }
-li.branch .b-state { font-size: 0.8rem; color: var(--ea-ink-3); }
-li.branch.later { border-style: dashed; }
-li.branch.later .b-title { color: var(--ea-ink-2); }
-li.branch.building { border-color: var(--ea-ink-2); }
-li.branch.building button.link { align-self: flex-start; margin-top: 0.15rem; }
-li.branch.now button.link { align-self: flex-start; margin-top: 0.15rem; }
-.map h3.group { font-size: 0.95rem; font-weight: 650; color: var(--ea-ink-2); margin: 1.5rem 0 0.55rem; }
-
 .foot { margin-top: 3.5rem; padding-top: 1.2rem; border-top: 1px solid var(--ea-line); font-size: 0.88rem; color: var(--ea-ink-2); }
 
 @media (max-width: 640px) {
-  .levels { grid-template-columns: 1fr; }
+  details.mod summary { grid-template-columns: 1fr auto; }
+  details.mod .dots { grid-column: 1 / -1; grid-row: 2; pointer-events: none; }   /* too small to tap: a tap opens the module */
+  .tiles { grid-template-columns: 1fr; }
+  .tile { display: grid; grid-template-columns: 5.5rem 1fr; column-gap: 0.75rem; align-content: start; }
+  .tile .picbox { grid-row: 1 / span 4; margin: 0; align-self: start; }
+  .tile > :not(.picbox) { grid-column: 2; }
   li.lesson { grid-template-columns: 2rem 1.2rem 1fr; padding-left: 0; }
   li.lesson .state, li.lesson .reset { grid-column: 3; }
   .top { padding: 0.9rem 1rem; } main { padding: 0 1rem 3rem; }

@@ -107,6 +107,8 @@ def state() -> dict:
         "groups": [{**g, "name": disp["groups"][g["id"]]} for g in course.groups()],
         "goals": [{"id": g["id"], "lesson": g["goal"], "title": disp["goals"].get(g["id"], {"en": g["title_nl"], "nl": g["title_nl"]}),
                    "lessons": course.goal_route(g["goal"]), "route": course.route_for(g["goal"])} for g in course.goals()],
+        "tasters": course.tasters(),
+        "pictures": course.pictures(),
         "settings": progress.settings(),
         "system": _system(),
     }
