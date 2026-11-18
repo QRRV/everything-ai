@@ -1,0 +1,35 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: rai-bias-lifecycle
+minutes: 25
+title:
+  en: "Bias at every step"
+  nl: "Bias in elke stap"
+goal:
+  en: "name the seven places on the way from the world to a model in use where bias can enter, and say for each where the fix has to go."
+  nl: "de zeven plekken noemen op de weg van de wereld naar een model in gebruik waar bias binnen kan komen, en per plek zeggen waar de oplossing moet zitten."
+summary:
+  - en: "Suresh and Guttag (2021) name seven sources of harm: historical, representation and measurement bias while the data is made, and aggregation, learning, evaluation and deployment bias while the model is built and used. The way is a loop: decisions change the world that the next data comes from."
+    nl: "Suresh en Guttag (2021) noemen zeven bronnen van schade: historical, representation en measurement bias bij het maken van de data, en aggregation, learning, evaluation en deployment bias bij het bouwen en gebruiken van het model. De weg is een rondje: beslissingen veranderen de wereld waar de volgende data vandaan komt."
+  - en: "Naming the step tells you where the fix goes. More data of the same kind helps against representation bias, but not against historical or measurement bias, because the new data goes through the same process. A US care algorithm that took costs as a sign of need picked too few of the Black patients who were sick."
+    nl: "Als je de stap benoemt, weet je waar de oplossing moet zitten. Meer data van dezelfde soort helpt tegen representation bias, maar niet tegen historical of measurement bias, want de nieuwe data gaat door hetzelfde proces. Een Amerikaans zorgalgoritme dat kosten als teken van zorgbehoefte nam, koos te weinig van de zwarte patiënten die ziek waren."
+  - en: "Bias in people enters through the data they make: implicit bias, attitudes that people are not aware of, and in-group bias, judging your own group more favorably, end up in labels and in past decisions. Selection bias means that the examples in the data differ systematically from the people you want to say something about, such as a hiring model that only sees how the people who were hired did."
+    nl: "Bias in mensen komt binnen via de data die ze maken: implicit bias, houdingen waarvan mensen zich niet bewust zijn, en in-group bias, je eigen groep gunstiger beoordelen, komen terecht in labels en in eerdere beslissingen. Selection bias betekent dat de voorbeelden in de data systematisch verschillen van de mensen over wie je iets wilt zeggen, zoals een model voor werving dat alleen ziet hoe het de aangenomen mensen verging."
+can_now:
+  - en: "count per group who a rule helps, and see how a stand-in for need can skew it"
+    nl: "per groep tellen wie een regel helpt, en zien hoe een vervanger voor zorgbehoefte dat scheef kan trekken"
+    by: helped
+  - en: "tell historical, representation and measurement bias apart"
+    nl: "historical, representation en measurement bias uit elkaar houden"
+    by: steps
+  - en: "say whether more data of the same kind will fix a bias"
+    nl: "zeggen of meer data van dezelfde soort een bias oplost"
+    by: fix
+further_reading:
+  - en: "Harini Suresh and John Guttag (2021), [*A Framework for Understanding Sources of Harm throughout the Machine Learning Life Cycle*](https://arxiv.org/abs/1901.10002): the seven sources of harm, with an example of each"
+    nl: "Harini Suresh en John Guttag (2021), [*A Framework for Understanding Sources of Harm throughout the Machine Learning Life Cycle*](https://arxiv.org/abs/1901.10002): de zeven bronnen van schade, elk met een voorbeeld"
+  - en: "Joy Buolamwini and Timnit Gebru (2018), [*Gender Shades*](https://proceedings.mlr.press/v81/buolamwini18a/buolamwini18a.pdf): how a balanced test set showed what the common benchmarks had hidden"
+    nl: "Joy Buolamwini en Timnit Gebru (2018), [*Gender Shades*](https://proceedings.mlr.press/v81/buolamwini18a/buolamwini18a.pdf): hoe een evenwichtige test set liet zien wat de gangbare benchmarks verborgen hadden"
+  - en: "[*Handreiking non-discriminatie by design*](https://zoek.officielebekendmakingen.nl/blg-989528.pdf) (2021), a guide for the Dutch government with these kinds of bias and how to look for them (in Dutch)"
+    nl: "[*Handreiking non-discriminatie by design*](https://zoek.officielebekendmakingen.nl/blg-989528.pdf) (2021), een handreiking voor de overheid met deze soorten bias en hoe je ernaar zoekt"

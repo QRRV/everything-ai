@@ -1,0 +1,35 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: rai-feedback-loops
+minutes: 25
+title:
+  en: "Feedback loops"
+  nl: "Feedback loops"
+goal:
+  en: "say how the decisions of a model can change the data it learns from next, see a difference grow between two districts with the same crime, and divide what was found by how often someone looked."
+  nl: "zeggen hoe de beslissingen van een model de data kunnen veranderen waar het daarna van leert, zien hoe een verschil groeit tussen twee wijken met evenveel misdrijven, en wat gevonden is delen door hoe vaak iemand keek."
+summary:
+  - en: "Police sent where crime was recorded find more crime there, so the data seems to prove the model right: a self-fulfilling prediction. Lum and Isaac (2016) showed it in a simulation with the algorithm of PredPol on drug arrests in Oakland, though it uses only the type, place and time of past crimes."
+    nl: "Politie die gestuurd wordt naar waar misdrijven geregistreerd zijn, vindt daar meer misdrijven, dus lijkt de data het model gelijk te geven: een zichzelf waarmakende voorspelling. Lum en Isaac (2016) lieten het zien in een simulatie met het algoritme van PredPol op drugsarrestaties in Oakland, terwijl dat alleen de soort, de plek en de tijd van eerdere misdrijven gebruikt."
+  - en: "Ensign and colleagues (2018) showed that such a loop can run away even when police find crime at its true rate: with rates of 10 and 11 percent, all patrols end up in one region, and with equal rates the split ends up wherever chance takes it. What police discover feeds the loop; what people report dampens it, but does not remove it."
+    nl: "Ensign en anderen (2018) lieten zien dat zo'n loop uit de hand kan lopen, zelfs als de politie misdrijven precies zo vaak vindt als ze gebeuren: bij kansen van 10 en 11 procent komen alle patrouilles in één gebied terecht, en bij gelijke kansen eindigt de verdeling waar het toeval haar brengt. Wat de politie ontdekt, voedt de loop; wat mensen melden, dempt hem, maar haalt hem niet weg."
+  - en: "The question to ask is how often someone looked: divide what was found by the effort, per day with police, per check or per person hired. The Dutch police used such a system, CAS, from the mid-2010s until December 2025."
+    nl: "De vraag is hoe vaak iemand keek: deel wat gevonden is door de moeite, per dag met politie, per controle of per aangenomen persoon. De Nederlandse politie gebruikte zo'n systeem, CAS, van halverwege de jaren 2010 tot december 2025."
+can_now:
+  - en: "work out what was found per day of looking, and see a big difference in the totals vanish"
+    nl: "uitrekenen wat er per dag kijken gevonden is, en een groot verschil in de totalen zien verdwijnen"
+    by: per-day
+  - en: "tell data that a system found from data that people reported"
+    nl: "data die een systeem vond onderscheiden van data die mensen meldden"
+    by: sources
+  - en: "recognize a feedback loop outside the police, such as in hiring"
+    nl: "een feedback loop herkennen buiten de politie, zoals bij werving"
+    by: hiring
+further_reading:
+  - en: "Danielle Ensign and colleagues (2018), [*Runaway Feedback Loops in Predictive Policing*](https://arxiv.org/pdf/1706.09847): the urn of the demo, the difference between found and reported crime, and a fix"
+    nl: "Danielle Ensign en anderen (2018), [*Runaway Feedback Loops in Predictive Policing*](https://arxiv.org/pdf/1706.09847): de urn van de demo, het verschil tussen gevonden en gemelde misdrijven, en een oplossing"
+  - en: "EU Agency for Fundamental Rights (2022), [*Bias in algorithms: Artificial intelligence and discrimination*](https://fra.europa.eu/sites/default/files/fra_uploads/fra-2022-bias-in-algorithms_en.pdf): a simulation of a feedback loop between two districts"
+    nl: "Bureau van de Europese Unie voor de grondrechten (2022), [*Bias in algorithms: Artificial intelligence and discrimination*](https://fra.europa.eu/sites/default/files/fra_uploads/fra-2022-bias-in-algorithms_en.pdf): een simulatie van een feedback loop tussen twee wijken (in het Engels)"
+  - en: "Algorithm register of the Dutch government, [*Criminaliteits Anticipatie Systeem (CAS)*](https://algoritmes.overheid.nl/en/algoritme/oorg10264/81228922/crime-anticipation-system-cas): what the police system used, and its end in December 2025"
+    nl: "Algoritmeregister van de overheid, [*Criminaliteits Anticipatie Systeem (CAS)*](https://algoritmes.overheid.nl/en/algoritme/oorg10264/81228922/crime-anticipation-system-cas): wat het politiesysteem gebruikte, en het einde ervan in december 2025"

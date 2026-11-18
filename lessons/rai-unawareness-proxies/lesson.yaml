@@ -1,0 +1,35 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: rai-unawareness-proxies
+minutes: 25
+title:
+  en: "Leaving out the column is not enough"
+  nl: "Een kolom weglaten is niet genoeg"
+goal:
+  en: "see that a model without the column sex still gives women and men very different yes rates, find the columns that give sex away, and say why you keep the column to check."
+  nl: "zien dat een model zonder de kolom sex vrouwen en mannen nog steeds heel verschillend vaak een ja geeft, de kolommen vinden die het geslacht verraden, en zeggen waarom je de kolom bewaart om te controleren."
+summary:
+  - en: "Leaving a column such as sex or ethnicity out of a model is called fairness through unawareness. It does not work on its own, because other features act as proxies: a postcode for ethnicity, height or a word on a resume for sex. Many small hints together can give a column away."
+    nl: "Een kolom zoals geslacht of afkomst weglaten uit een model heet fairness through unawareness. Op zich werkt dat niet, omdat andere features als proxy werken: een postcode voor afkomst, lengte of een woord op een cv voor geslacht. Veel kleine aanwijzingen samen kunnen een kolom verraden."
+  - en: "On the table UCI Adult, a logistic regression gives a yes to 0.07 of the women and 0.25 of the men, with or without the column sex. A model that guesses sex from the other columns is right 0.84 of the time, and the column relationship alone gives away the sex of 22,043 of the 48,842 people."
+    nl: "Op de tabel UCI Adult geeft een logistische regressie 0,07 van de vrouwen en 0,25 van de mannen een ja, met of zonder de kolom sex. Een model dat het geslacht uit de andere kolommen raadt, heeft in 0,84 van de gevallen gelijk, en de kolom relationship alleen verraadt het geslacht van 22.043 van de 48.842 mensen."
+  - en: "Redlining, refusing loans to whole neighborhoods, is the classic case of a proxy. Deleting proxies one by one rarely helps. Leave the column out of the features, but keep it to check: without it, nobody can count the yes rates per group."
+    nl: "Redlining, leningen weigeren aan hele wijken, is het klassieke voorbeeld van een proxy. Proxies een voor een schrappen helpt zelden. Laat de kolom weg uit de features, maar bewaar hem om te controleren: zonder die kolom kan niemand per groep tellen hoe vaak er een ja komt."
+can_now:
+  - en: "measure, per value of a column, how strongly it gives away sex"
+    nl: "per waarde van een kolom meten hoe sterk die het geslacht verraadt"
+    by: proxy
+  - en: "name pieces of data that can stand in for ethnicity or sex"
+    nl: "gegevens noemen die voor afkomst of geslacht kunnen staan"
+    by: proxies
+  - en: "explain why a team keeps the column it leaves out of a model"
+    nl: "uitleggen waarom een team de kolom bewaart die het uit een model weglaat"
+    by: check
+further_reading:
+  - en: "Barocas, Hardt and Narayanan, *Fairness and Machine Learning* (2023), [chapter *Classification*](https://fairmlbook.org/pdf/classification.pdf): the section *No fairness through unawareness*, on redundant encodings"
+    nl: "Barocas, Hardt en Narayanan, *Fairness and Machine Learning* (2023), [hoofdstuk *Classification*](https://fairmlbook.org/pdf/classification.pdf): de paragraaf *No fairness through unawareness*, over redundant encodings (in het Engels)"
+  - en: "Toon Calders and Sicco Verwer (2010), [*Three naive Bayes approaches for discrimination-free classification*](https://link.springer.com/article/10.1007/s10618-010-0190-x): a model without the column sex on the same table, which favored men even more than the data"
+    nl: "Toon Calders en Sicco Verwer (2010), [*Three naive Bayes approaches for discrimination-free classification*](https://link.springer.com/article/10.1007/s10618-010-0190-x): een model zonder de kolom sex op dezelfde tabel, dat mannen nog meer bevoordeelde dan de data (in het Engels)"
+  - en: "Federal Reserve Bank of St. Louis (2021), [*Residential segregation and redlining*](https://fred.stlouisfed.org/blog/2021/09/residential-segregation-and-redlining): the color-coded maps of 239 cities and where the name redlining comes from"
+    nl: "Federal Reserve Bank van St. Louis (2021), [*Residential segregation and redlining*](https://fred.stlouisfed.org/blog/2021/09/residential-segregation-and-redlining): de gekleurde kaarten van 239 steden en waar de naam redlining vandaan komt (in het Engels)"

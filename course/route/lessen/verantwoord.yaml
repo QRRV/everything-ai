@@ -348,7 +348,7 @@ lessons:
   level: basis
   domein: verantwoord
   module: fairness
-  idea: "Compare how often each group gets a yes: if one group's rate is below 80% of the highest, that is a signal of disparate impact. On a census table, a model that says who earns more says yes to women far less often."
+  idea: "Compare how often each group gets a yes: if one group's rate is below 80% of the highest, that is a signal of disparate impact. On the table UCI Adult, a model that says who earns more says yes to women far less often."
   covers: [discriminatie-begrippen-en-recht#2]
   requires: [rai-discrimination-law, data-groupby]
   introduces: [c:selection-rate, c:disparate-impact, c:four-fifths-rule]
@@ -409,6 +409,8 @@ lessons:
   covers: [bronnen-van-bias#0]
   requires: [rai-bias-in-data, ml-workflow]
   introduces: [c:historical-bias, c:representation-bias, c:measurement-bias, c:implicit-bias, c:in-group-bias, c:selection-bias]
+  uses: [c:data-bias, c:harmful-bias, c:harm, c:model, c:feature, c:label, c:training, c:example, c:metric, c:prediction, py:dict, py:list, py:for, py:if, py:comparison, py:arithmetic, py:indexing, py:print, py:comment, py:variable, py:underscore-name, py:string-literal, py:int, q:predict, q:choice, q:exercise-with-check, q:run-cell]
+  mentions: [c:benchmark]
   data: []
   ladder: [python]
   needs: any
@@ -422,6 +424,8 @@ lessons:
   covers: [bronnen-van-bias#2]
   requires: [rai-bias-lifecycle, data-labels, np-random]
   introduces: [c:self-fulfilling-prediction]
+  uses: [c:feedback-loop, c:measurement-bias, c:historical-bias, c:model, c:label, c:training, c:prediction, c:probability, c:seed, c:random-number-generator, py:np-random-generator, py:import, py:import-as, py:for, py:range, py:if, py:comparison, py:list, py:dict, py:indexing, py:arithmetic, py:round, py:float, py:print, py:comment, py:variable, py:underscore-name, py:string-literal, py:int, q:predict, q:choice, q:exercise-with-check, q:run-cell]
+  mentions: [c:simulation]
   data: []
   ladder: [python, numpy]
   needs: any
@@ -431,10 +435,12 @@ lessons:
   level: basis
   domein: verantwoord
   module: fairness
-  idea: "A model trained without the sex column can still treat men and women differently, because other columns give it away: a proxy. On the census table, the other columns predict sex well, and the model's yes rates hardly change."
+  idea: "A model trained without the sex column can still treat men and women differently, because other columns give it away: a proxy. On the table UCI Adult, the other columns predict sex well, and the model's yes rates hardly change."
   covers: [formele-fairnessdefinities#0]
   requires: [rai-80-percent-rule, ml-sklearn, ml-logistic-regression]
   introduces: [c:fairness-through-unawareness, c:proxy]
+  uses: [c:selection-rate, c:four-fifths-rule, c:logistic-regression, c:decision-boundary, c:probability, c:class, c:one-hot, c:train-set, c:test-set, c:accuracy, c:baseline, c:feature, c:label, c:model, c:training, c:prediction, py:dataframe, py:pandas-select-filter, py:boolean-mask, py:groupby, py:sklearn-fit-predict, py:def, py:return, py:list, py:indexing, py:comparison, py:arithmetic, py:round, py:print, py:comment, py:variable, py:underscore-name, py:string-literal, py:float, py:keyword-argument, py:import, py:import-as, q:predict, q:choice, q:exercise-with-check, q:run-cell]
+  mentions: [py:pd-get-dummies]
   data: [uci-adult]
   ladder: [python, numpy]
   needs: any
@@ -524,7 +530,7 @@ lessons:
   module: fairness
   kind: project
   project: audit
-  idea: "The first step of your audit: train a classifier on the census table, and measure per group its yes rate, its error rates and its calibration, with the 80% rule and a threshold per group as a first fix."
+  idea: "The first step of your audit: train a classifier on the table UCI Adult, and measure per group its yes rate, its error rates and its calibration, with the 80% rule and a threshold per group as a first fix."
   covers: []
   requires: [rai-fairness-benchmarks]
   introduces: [c:algorithmic-audit]
