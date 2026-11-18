@@ -1,0 +1,40 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: rai-additive-models
+minutes: 30
+title:
+  en: "Additive models"
+  nl: "Additieve modellen"
+goal:
+  en: "predict with a generalized additive model by adding up one curve per feature, learn its curves by boosting small trees on one column at a time, and read what a curve says and what it does not."
+  nl: "voorspellen met een generalized additive model door per feature één curve op te tellen, de curves leren door kleine bomen te boosten op één kolom tegelijk, en lezen wat een curve zegt en wat niet."
+summary:
+  - en: "A generalized additive model (Hastie and Tibshirani, 1986) replaces each weight times a feature by a curve of that feature, of any shape, and adds the curves up. For a yes or no the sum is a score on the log-odds, which the sigmoid turns into a chance. Without interactions between features, each curve can be drawn and read."
+    nl: "Een generalized additive model (Hastie en Tibshirani, 1986) vervangt elke weight keer een feature door een curve van die feature, in elke vorm, en telt de curves op. Bij een ja of nee is de som een score op de log-odds, die de sigmoid omzet in een kans. Zonder interacties tussen features kun je elke curve tekenen en lezen."
+  - en: "The curves can be learned by boosting small trees that each see one column, cycling through the columns round after round (Lou and colleagues, 2012). An Explainable Boosting Machine from InterpretML works this way, with a very low learning rate, bagging, and by default some pairs of features."
+    nl: "De curves kun je leren door kleine bomen te boosten die elk één kolom zien, ronde na ronde om de beurt (Lou en anderen, 2012). Een Explainable Boosting Machine uit InterpretML werkt zo, met een heel lage learning rate, bagging, en standaard ook enkele paren van features."
+  - en: "On UCI Adult, 100 rounds of trees of depth 2 on age, education and hours are right for 80.0 percent of the people, against 78.9 for the logistic regression and 76.1 for always saying no. The age curve rises to its highest point at 50 and falls after that, which one weight cannot show."
+    nl: "Op UCI Adult zitten 100 rondes bomen met diepte 2 op leeftijd, opleiding en uren bij 80,0 procent van de mensen goed, tegen 78,9 voor de logistische regressie en 76,1 voor altijd nee zeggen. De curve van leeftijd stijgt tot haar hoogste punt bij 50 en daalt daarna, wat één weight niet kan laten zien."
+  - en: "A curve is what the model learned from the data, not a cause. Pneumonia patients with asthma usually went straight to intensive care and died less often, so models learned that asthma lowers the risk (Caruana and colleagues, 2015); in an additive model you can see that term and repair it."
+    nl: "Een curve is wat het model uit de data leerde, geen oorzaak. Longontstekingspatiënten met astma gingen meestal meteen naar de intensive care en stierven minder vaak, dus leerden modellen dat astma het risico verlaagt (Caruana en anderen, 2015); in een additief model kun je die term zien en herstellen."
+can_now:
+  - en: "predict with an additive model: the start plus each curve at the person's value, through the sigmoid"
+    nl: "voorspellen met een additief model: de start plus elke curve bij de waarde van de persoon, door de sigmoid"
+    by: chance
+  - en: "learn the curves with one round of boosting, one column at a time"
+    nl: "de curves leren met één ronde boosting, één kolom tegelijk"
+    by: round
+  - en: "read a curve by its differences, with the other features fixed, and not as a cause"
+    nl: "een curve lezen aan haar verschillen, met de andere features gelijk, en niet als oorzaak"
+    by: read
+  - en: "explain how a model can learn that something lowers a risk when it only goes with better care"
+    nl: "uitleggen hoe een model kan leren dat iets een risico verlaagt terwijl het alleen samengaat met betere zorg"
+    by: treated
+further_reading:
+  - en: "Trevor Hastie and Robert Tibshirani (1986), [*Generalized Additive Models*](https://pdodds.w3.uvm.edu/files/papers/others/1986/hastie1986a.pdf), Statistical Science 1(3): the paper that introduced them"
+    nl: "Trevor Hastie en Robert Tibshirani (1986), [*Generalized Additive Models*](https://pdodds.w3.uvm.edu/files/papers/others/1986/hastie1986a.pdf), Statistical Science 1(3): de paper waarin ze werden voorgesteld (in het Engels)"
+  - en: "Rich Caruana and colleagues (2015), [*Intelligible Models for HealthCare: Predicting Pneumonia Risk and Hospital 30-day Readmission*](https://www.microsoft.com/en-us/research/wp-content/uploads/2017/06/KDD2015FinalDraftIntelligibleModels4HealthCare_igt143e-caruanaA.pdf): the asthma story, and how they repaired the model"
+    nl: "Rich Caruana en anderen (2015), [*Intelligible Models for HealthCare: Predicting Pneumonia Risk and Hospital 30-day Readmission*](https://www.microsoft.com/en-us/research/wp-content/uploads/2017/06/KDD2015FinalDraftIntelligibleModels4HealthCare_igt143e-caruanaA.pdf): het verhaal van de astma, en hoe ze het model herstelden (in het Engels)"
+  - en: "Christoph Molnar (2025), [*Interpretable Machine Learning*](https://christophm.github.io/interpretable-ml-book/extend-lm.html), third edition, chapter 8, *GLM, GAM and more*"
+    nl: "Christoph Molnar (2025), [*Interpretable Machine Learning*](https://christophm.github.io/interpretable-ml-book/extend-lm.html), derde editie, hoofdstuk 8, *GLM, GAM and more* (in het Engels)"

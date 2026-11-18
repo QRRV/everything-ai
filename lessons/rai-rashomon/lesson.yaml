@@ -1,0 +1,40 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: rai-rashomon
+minutes: 30
+title:
+  en: "Many good models"
+  nl: "Veel goede modellen"
+goal:
+  en: "grow many equally good models on slightly different data, measure for how many people they give different answers, and explain why that is a reason to look for a model you can read."
+  nl: "veel even goede modellen maken op een beetje andere data, meten bij hoeveel mensen ze verschillende antwoorden geven, en uitleggen waarom dat een reden is om een model te zoeken dat je kunt lezen."
+summary:
+  - en: "The Rashomon effect (Breiman, 2001): there are often many different models that are about equally accurate, and each tells its own story about which features matter. Grow a tree on slightly different data and you may get quite a different tree with almost the same error."
+    nl: "Het Rashomon effect (Breiman, 2001): er zijn vaak veel verschillende modellen die ongeveer even goed voorspellen, en elk vertelt zijn eigen verhaal over welke features ertoe doen. Laat een boom groeien op een beetje andere data en je krijgt misschien een flink andere boom met bijna dezelfde fout."
+  - en: "When the good models give the same people different answers, that is predictive multiplicity (Marx and colleagues, 2020). Ambiguity is the share of people for whom at least one model of the set gives another answer than the chosen one; discrepancy is the largest share that switching to one other model changes."
+    nl: "Als de goede modellen dezelfde mensen verschillende antwoorden geven, heet dat predictive multiplicity (Marx en anderen, 2020). Ambiguity is het deel van de mensen bij wie minstens één model uit de set een ander antwoord geeft dan het gekozen model; discrepancy is het grootste deel dat verandert als je overstapt op één ander model."
+  - en: "On UCI Adult, 35 of 50 trees lie within one percentage point of the best, which is right for 79.8 percent of the test half. Yet 20.6 percent of the test people get another answer from at least one of them. Retraining finds a lower bound: a wider search can find more."
+    nl: "Op UCI Adult liggen 35 van 50 bomen binnen één procentpunt van de beste, die bij 79,8 procent van de testhelft goed zit. Toch krijgt 20,6 procent van de testpersonen van minstens één ervan een ander antwoord. Opnieuw trainen geeft een ondergrens: breder zoeken kan er meer vinden."
+  - en: "Rudin (2019): a large set of good models often holds one you can read, so for high-stakes decisions choose that one. Here a tree of depth 2, with four leaves, lies within a point of the best tree and of a random forest."
+    nl: "Rudin (2019): een grote set goede modellen bevat vaak een model dat je kunt lezen, dus kies dat bij beslissingen waar veel van afhangt. Hier ligt een boom met diepte 2, met vier bladeren, binnen een procentpunt van de beste boom en van een random forest."
+can_now:
+  - en: "measure ambiguity: for how many people at least one good model gives another answer"
+    nl: "ambiguity meten: bij hoeveel mensen minstens één goed model een ander antwoord geeft"
+    by: ambiguity
+  - en: "pick out the Rashomon set: the models no more than ε below the best"
+    nl: "de Rashomon set kiezen: de modellen die hoogstens ε onder het beste liggen"
+    by: good
+  - en: "explain Rudin's argument for choosing a model you can read from the set"
+    nl: "het argument van Rudin uitleggen om uit de set een model te kiezen dat je kunt lezen"
+    by: pick
+  - en: "say what a number found by retraining shows, and what it does not"
+    nl: "zeggen wat een getal dat je met opnieuw trainen vindt laat zien, en wat niet"
+    by: sure
+further_reading:
+  - en: "Leo Breiman (2001), [*Statistical Modeling: The Two Cultures*](https://www.stat.cmu.edu/~ryantibs/journalclub/breiman_2001.pdf), Statistical Science 16(3): section 8 names the Rashomon effect"
+    nl: "Leo Breiman (2001), [*Statistical Modeling: The Two Cultures*](https://www.stat.cmu.edu/~ryantibs/journalclub/breiman_2001.pdf), Statistical Science 16(3): paragraaf 8 geeft het Rashomon effect zijn naam (in het Engels)"
+  - en: "Charles Marx, Flavio du Pin Calmon and Berk Ustun (2020), [*Predictive Multiplicity in Classification*](https://proceedings.mlr.press/v119/marx20a/marx20a.pdf): ambiguity and discrepancy, and why retraining finds too little"
+    nl: "Charles Marx, Flavio du Pin Calmon en Berk Ustun (2020), [*Predictive Multiplicity in Classification*](https://proceedings.mlr.press/v119/marx20a/marx20a.pdf): ambiguity en discrepancy, en waarom opnieuw trainen te weinig vindt (in het Engels)"
+  - en: "Emily Black, Manish Raghavan and Solon Barocas (2022), [*Model Multiplicity: Opportunities, Concerns, and Solutions*](https://facctconference.org/static/pdfs_2022/facct22-3533149.pdf): what the many good models mean for the people a model decides about"
+    nl: "Emily Black, Manish Raghavan en Solon Barocas (2022), [*Model Multiplicity: Opportunities, Concerns, and Solutions*](https://facctconference.org/static/pdfs_2022/facct22-3533149.pdf): wat de vele goede modellen betekenen voor de mensen over wie een model beslist (in het Engels)"

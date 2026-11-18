@@ -710,6 +710,7 @@ lessons:
   covers: [glass-box-modellen#1]
   requires: [rai-glass-box-models, ml-gradient-boosting]
   introduces: [c:generalized-additive-model, c:explainable-boosting-machine]
+  mentions: [c:risk-score]
   data: [uci-adult]
   ladder: [python, numpy]
   needs: any
