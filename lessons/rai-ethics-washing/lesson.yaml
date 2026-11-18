@@ -1,0 +1,33 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: rai-ethics-washing
+minutes: 20
+title:
+  en: "When principles are only words"
+  nl: "Als principes alleen woorden zijn"
+goal:
+  en: "recognize ethics washing, and test a promise about ethics with three questions: is there a check, an owner and a consequence?"
+  nl: "ethics washing herkennen, en een belofte over ethiek toetsen met drie vragen: is er een controle, een eigenaar en een gevolg?"
+summary:
+  - en: "Ethics washing is using principles, boards or statements to look responsible while avoiding real change or binding rules. Google dissolved its outside council on the ethics of AI less than two weeks after announcing it."
+    nl: "Ethics washing is principes, commissies of verklaringen gebruiken om verantwoord over te komen, terwijl je echte veranderingen of bindende regels ontloopt. Google hief zijn externe raad voor de ethiek van AI nog geen twee weken na de aankondiging op."
+  - en: "A principle costs nothing as long as nothing happens when it is broken. A check (how would anyone find out?), an owner (who answers for it?) and a consequence (what happens?) give it a price."
+    nl: "Een principe kost niets zolang er niets gebeurt als het gebroken wordt. Een controle (hoe zou iemand het ontdekken?), een eigenaar (wie staat ervoor in?) en een gevolg (wat gebeurt er?) geven het een prijs."
+  - en: "Developers who had read a code of ethics decided no differently from those who had not: a text on its own changes little in what people do."
+    nl: "Ontwikkelaars die een ethische code gelezen hadden, beslisten niet anders dan wie hem niet gelezen had: een tekst op zich verandert weinig aan wat mensen doen."
+can_now:
+  - en: "count how many of the three tests each promise passes, and find the ones that are only words"
+    nl: "tellen hoeveel van de drie toetsen elke belofte haalt, en de beloften vinden die alleen woorden zijn"
+    by: passed
+  - en: "tell a promise that costs nothing when broken from one that someone would notice"
+    nl: "een belofte die niets kost als ze gebroken wordt, onderscheiden van een belofte die iemand zou merken"
+    by: notice
+  - en: "say why a code of ethics on its own changes little"
+    nl: "zeggen waarom een ethische code op zich weinig verandert"
+    by: code-of-ethics
+further_reading:
+  - en: "Ben Wagner (2018), [*Ethics as an escape from regulation: from ethics-washing to ethics-shopping?*](https://doi.org/10.1515/9789048550180-016), in *Being Profiled: Cogitas Ergo Sum*, Amsterdam University Press"
+    nl: "Ben Wagner (2018), [*Ethics as an escape from regulation: from ethics-washing to ethics-shopping?*](https://doi.org/10.1515/9789048550180-016), in *Being Profiled: Cogitas Ergo Sum*, Amsterdam University Press"
+  - en: "McNamara, Smith and Murphy-Hill (2018), [*Does ACM's code of ethics change ethical decision making in software development?*](https://doi.org/10.1145/3236024.3264833), ESEC/FSE"
+    nl: "McNamara, Smith en Murphy-Hill (2018), [*Does ACM's code of ethics change ethical decision making in software development?*](https://doi.org/10.1145/3236024.3264833), ESEC/FSE"

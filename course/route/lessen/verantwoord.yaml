@@ -59,6 +59,7 @@ lessons:
   covers: [ethische-theorieen-en-machine-ethiek#3, ethische-theorieen-en-machine-ethiek#4]
   requires: [rai-ethical-theories]
   introduces: [c:machine-ethics, c:laws-of-robotics, c:moral-machine]
+  uses: [c:ai-ethics, c:deontology, c:consequentialism, c:virtue-ethics, c:care-ethics, c:harm, py:dict, py:for, py:if, py:append, py:list, py:bool, py:comparison, py:print, py:comment, py:int, py:variable, py:underscore-name, q:predict, q:choice, q:exercise-with-check, q:run-cell]
   data: []
   ladder: [python]
   needs: any
@@ -72,7 +73,8 @@ lessons:
   covers: [principes-en-richtlijnen#0, principes-en-richtlijnen#1]
   requires: [rai-ethical-theories]
   introduces: [c:oecd-ai-principles, c:responsible-ai, c:trustworthy-ai, c:transparency, c:altai]
-  mentions: [c:privacy]
+  uses: [c:ai-ethics, c:deontology, c:consequentialism, c:virtue-ethics, c:care-ethics, c:fairness, c:harm, c:model, py:dict, py:for, py:if, py:append, py:list, py:arithmetic, py:comparison, py:round, py:print, py:int, py:float, py:variable, py:underscore-name, q:predict, q:choice, q:exercise-with-check, q:run-cell]
+  mentions: [c:privacy, c:accountability, c:explainability, c:human-oversight, c:well-being]
   data: []
   ladder: [python]
   needs: any
@@ -86,6 +88,7 @@ lessons:
   covers: [principes-en-richtlijnen#2]
   requires: [rai-principles]
   introduces: [c:ethics-washing]
+  uses: [c:ai-ethics, c:harmful-bias, c:transparency, c:fairness, c:model, py:dict, py:for, py:arithmetic, py:print, py:comment, py:int, py:variable, py:underscore-name, q:predict, q:choice, q:exercise-with-check, q:run-cell]
   data: []
   ladder: [python]
   needs: any

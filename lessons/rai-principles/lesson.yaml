@@ -1,0 +1,35 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: rai-principles
+minutes: 20
+title:
+  en: "Principles and guidelines"
+  nl: "Principes en richtlijnen"
+goal:
+  en: "name the best-known principles for AI, count which ones most documents share, and explain why the same word can ask for different things."
+  nl: "de bekendste principes voor AI noemen, tellen welke de meeste documenten delen, en uitleggen waarom hetzelfde woord verschillende dingen kan vragen."
+summary:
+  - en: "Governments, companies and others wrote principles for AI: the OECD AI Principles (2019, updated in 2024), UNESCO's Recommendation (2021) and the EU expert group's trustworthy AI, with ALTAI as its list of questions. Companies call working in line with them responsible AI."
+    nl: "Overheden, bedrijven en anderen schreven principes voor AI: de OESO-principes voor AI (2019, bijgewerkt in 2024), de Aanbeveling van UNESCO (2021) en betrouwbare AI van de Europese expertgroep, met ALTAI als lijst vragen. Bedrijven noemen werken volgens zulke principes verantwoorde AI."
+  - en: "Of 84 such documents, more than half name transparency, justice and fairness, non-maleficence, responsibility and privacy (Jobin, Ienca and Vayena, 2019)."
+    nl: "Van 84 van zulke documenten noemt meer dan de helft transparantie, rechtvaardigheid en fairness, niet-schaden, verantwoordelijkheid en privacy (Jobin, Ienca en Vayena, 2019)."
+  - en: "The shared words hide different meanings: transparency can mean saying that AI is used, opening up the system, or explaining one decision. To know what a principle asks for, read what it means in that document."
+    nl: "De gedeelde woorden verbergen verschillende betekenissen: transparantie kan betekenen dat je zegt dat er AI wordt gebruikt, dat je het systeem openlegt, of dat je één beslissing uitlegt. Wil je weten wat een principe vraagt, lees dan wat het in dat document betekent."
+can_now:
+  - en: "count which principles more than half of a set of documents name"
+    nl: "tellen welke principes meer dan de helft van een reeks documenten noemt"
+    by: common
+  - en: "tell apart three things transparency can mean"
+    nl: "drie dingen uit elkaar houden die transparantie kan betekenen"
+    by: meanings
+  - en: "say why two documents with the same principle can ask for different things"
+    nl: "zeggen waarom twee documenten met hetzelfde principe verschillende dingen kunnen vragen"
+    by: fairness
+further_reading:
+  - en: "Jobin, Ienca and Vayena (2019), [*The global landscape of AI ethics guidelines*](https://doi.org/10.1038/s42256-019-0088-2), Nature Machine Intelligence"
+    nl: "Jobin, Ienca en Vayena (2019), [*The global landscape of AI ethics guidelines*](https://doi.org/10.1038/s42256-019-0088-2), Nature Machine Intelligence"
+  - en: "OECD, [*AI Principles*](https://oecd.ai/en/ai-principles), the five principles and the recommendations to governments"
+    nl: "OESO, [*AI Principles*](https://oecd.ai/en/ai-principles), de vijf principes en de aanbevelingen aan regeringen"
+  - en: "High-Level Expert Group on AI (2019), [*Ethics Guidelines for Trustworthy AI*](https://digital-strategy.ec.europa.eu/en/library/ethics-guidelines-trustworthy-ai)"
+    nl: "High-Level Expert Group on AI (2019), [*Ethics Guidelines for Trustworthy AI*](https://digital-strategy.ec.europa.eu/en/library/ethics-guidelines-trustworthy-ai)"

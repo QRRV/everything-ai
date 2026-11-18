@@ -1,0 +1,33 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: rai-rules-and-dilemmas
+minutes: 20
+title:
+  en: "Rules and dilemmas for machines"
+  nl: "Regels en dilemma's voor machines"
+goal:
+  en: "write Asimov's Three Laws of Robotics as code, see where they clash or say nothing, and explain why a fixed rule cannot settle a dilemma people disagree on."
+  nl: "de drie wetten van de robotica van Asimov als code schrijven, zien waar ze botsen of niets zeggen, en uitleggen waarom een vaste regel geen dilemma kan beslechten waar mensen het over oneens zijn."
+summary:
+  - en: "Machine ethics asks how a machine can act in a way that is morally right. Isaac Asimov's Three Laws of Robotics, from his stories, are the best-known attempt to do it with rules in order of priority."
+    nl: "Machine-ethiek vraagt hoe een machine zo kan handelen dat het moreel juist is. De drie wetten van de robotica van Isaac Asimov, uit zijn verhalen, zijn de bekendste poging om dat met regels in volgorde van voorrang te doen."
+  - en: "Written as code, the laws leave gaps: words such as harm are not defined, and when every option harms someone, the first law forbids them all and says nothing about which harm is less."
+    nl: "Als code laten de wetten gaten: woorden zoals schade zijn niet gedefinieerd, en als elke keuze iemand schaadt, verbiedt de eerste wet ze allemaal en zegt hij niets over welke schade kleiner is."
+  - en: "The Moral Machine collected 40 million decisions about crashes a self-driving car cannot avoid. Some preferences held almost everywhere, others differed between regions: a fixed rule goes against what many people would choose."
+    nl: "De Moral Machine verzamelde 40 miljoen beslissingen over ongelukken die een zelfrijdende auto niet kan vermijden. Sommige voorkeuren golden bijna overal, andere verschilden per regio: een vaste regel gaat in tegen wat veel mensen zouden kiezen."
+can_now:
+  - en: "write a rule as code that keeps only the actions it allows"
+    nl: "een regel als code schrijven die alleen de toegestane keuzes overhoudt"
+    by: allowed
+  - en: "tell when the Three Laws of Robotics settle a case and when they clash or leave a gap"
+    nl: "zien wanneer de wetten van de robotica een geval beslechten en wanneer ze botsen of een gat laten"
+    by: gaps
+  - en: "say what the Moral Machine means for one rule for everyone"
+    nl: "zeggen wat de Moral Machine betekent voor één regel voor iedereen"
+    by: moral-machine
+further_reading:
+  - en: "Awad, Dsouza, Kim, Schulz, Henrich, Shariff, Bonnefon and Rahwan (2018), [*The Moral Machine experiment*](https://doi.org/10.1038/s41586-018-0637-6), Nature"
+    nl: "Awad, Dsouza, Kim, Schulz, Henrich, Shariff, Bonnefon en Rahwan (2018), [*The Moral Machine experiment*](https://doi.org/10.1038/s41586-018-0637-6), Nature"
+  - en: "Vincent C. Müller (2026), [*Ethics of Artificial Intelligence and Robotics*](https://plato.stanford.edu/entries/ethics-ai/), Stanford Encyclopedia of Philosophy, section on machine ethics"
+    nl: "Vincent C. Müller (2026), [*Ethics of Artificial Intelligence and Robotics*](https://plato.stanford.edu/entries/ethics-ai/), Stanford Encyclopedia of Philosophy, het deel over machine-ethiek"
