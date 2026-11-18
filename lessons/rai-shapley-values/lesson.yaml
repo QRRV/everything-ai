@@ -1,0 +1,44 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: rai-shapley-values
+minutes: 30
+title:
+  en: "Shapley values"
+  nl: "Shapley-waarden"
+goal:
+  en: "share one prediction out over its features with exact Shapley values: work out the value of each coalition from a background, weigh what each feature adds, and see what the shares do and do not say."
+  nl: "één voorspelling over zijn features verdelen met exact uitgerekende Shapley-waarden: de waarde van elke coalitie uitrekenen uit een achtergrond, wegen wat elke feature toevoegt, en zien wat de delen wel en niet zeggen."
+summary:
+  - en: "A Shapley value (Shapley, 1952) gives each player what it adds when it joins a coalition, averaged over every order in which the players can join. Štrumbelj and Kononenko (2010) made the features of a model the players, and Lundberg and Lee (2017) called them SHAP values."
+    nl: "Een Shapley-waarde (Shapley, 1952) geeft elke speler wat die toevoegt als die bij een coalitie aanschuift, gemiddeld over elke volgorde waarin de spelers kunnen aanschuiven. Štrumbelj en Kononenko (2010) maakten de features van een model tot de spelers, en Lundberg en Lee (2017) noemden ze SHAP-waarden."
+  - en: "A coalition's value here is the model's average answer over a background of 200 rows, with the known features taken from the person. With four features that is 16 coalitions, and the weights are 1/4, 1/12, 1/12 and 1/4 for coalitions of 0, 1, 2 and 3 others."
+    nl: "De waarde van een coalitie is hier het gemiddelde antwoord van het model over een achtergrond van 200 rijen, met de bekende features uit de persoon. Bij vier features zijn dat 16 coalities, en een coalitie van 0, 1, 2 of 3 andere features weegt 1/4, 1/12, 1/12 of 1/4."
+  - en: "For a person aged 41 with education_num 13, the four values add up exactly to the gap between their chance, 0.451, and the background's average, 0.225: education_num gets +0.181, age +0.087."
+    nl: "Voor iemand van 41 met education_num 13 tellen de vier waarden precies op tot het verschil tussen de eigen kans, 0,451, en het gemiddelde van de achtergrond, 0,225: education_num krijgt +0,181, age +0,087."
+  - en: "A Shapley value is not what the prediction does without the feature, it gives no direction, and it changes with the background (Molnar; Kumar et al.; Sundararajan and Najmi)."
+    nl: "Een Shapley-waarde is niet wat de voorspelling doet zonder de feature, geeft geen richting, en verandert met de achtergrond (Molnar; Kumar en anderen; Sundararajan en Najmi)."
+can_now:
+  - en: "work out the value of a coalition: the model's average answer with the known features filled in from the row you explain"
+    nl: "de waarde van een coalitie uitrekenen: het gemiddelde antwoord van het model, met de bekende features ingevuld uit de rij die je uitlegt"
+    by: value
+  - en: "compute a feature's Shapley value from the values of the coalitions, with their weights"
+    nl: "de Shapley-waarde van een feature uitrekenen uit de waarden van de coalities, elk met zijn gewicht"
+    by: shapley
+  - en: "say what a Shapley value says about a prediction, and what it does not"
+    nl: "zeggen wat een Shapley-waarde over een voorspelling zegt, en wat niet"
+    by: meaning
+  - en: "explain why the same person gets other Shapley values against another background"
+    nl: "uitleggen waarom dezelfde persoon tegenover een andere achtergrond andere Shapley-waarden krijgt"
+    by: background
+further_reading:
+  - en: "Lloyd S. Shapley (1952), [*A Value for n-Person Games*](https://www.rand.org/content/dam/rand/pubs/papers/2021/P295.pdf), RAND Corporation: the value and its three rules"
+    nl: "Lloyd S. Shapley (1952), [*A Value for n-Person Games*](https://www.rand.org/content/dam/rand/pubs/papers/2021/P295.pdf), RAND Corporation: de waarde en zijn drie regels (in het Engels)"
+  - en: "Erik Štrumbelj and Igor Kononenko (2010), [*An Efficient Explanation of Individual Classifications using Game Theory*](https://www.jmlr.org/papers/volume11/strumbelj10a/strumbelj10a.pdf): Shapley values for one prediction, and a sample of orders"
+    nl: "Erik Štrumbelj en Igor Kononenko (2010), [*An Efficient Explanation of Individual Classifications using Game Theory*](https://www.jmlr.org/papers/volume11/strumbelj10a/strumbelj10a.pdf): Shapley-waarden voor één voorspelling, en een steekproef van volgordes (in het Engels)"
+  - en: "Scott M. Lundberg and Su-In Lee (2017), [*A Unified Approach to Interpreting Model Predictions*](https://proceedings.neurips.cc/paper_files/paper/2017/file/8a20a8621978632d76c43dfd28b67767-Paper.pdf): SHAP"
+    nl: "Scott M. Lundberg en Su-In Lee (2017), [*A Unified Approach to Interpreting Model Predictions*](https://proceedings.neurips.cc/paper_files/paper/2017/file/8a20a8621978632d76c43dfd28b67767-Paper.pdf): SHAP (in het Engels)"
+  - en: "Christoph Molnar (2025), [*Shapley Values*](https://christophm.github.io/interpretable-ml-book/shapley.html), in *Interpretable Machine Learning*: the apartment example, and what the values do not say"
+    nl: "Christoph Molnar (2025), [*Shapley Values*](https://christophm.github.io/interpretable-ml-book/shapley.html), in *Interpretable Machine Learning*: het voorbeeld van het appartement, en wat de waarden niet zeggen (in het Engels)"
+  - en: "I. Elizabeth Kumar, Suresh Venkatasubramanian, Carlos Scheidegger and Sorelle A. Friedler (2020), [*Problems with Shapley-value-based explanations as feature importance measures*](https://arxiv.org/pdf/2002.11097): why the choice of game matters"
+    nl: "I. Elizabeth Kumar, Suresh Venkatasubramanian, Carlos Scheidegger en Sorelle A. Friedler (2020), [*Problems with Shapley-value-based explanations as feature importance measures*](https://arxiv.org/pdf/2002.11097): waarom de keuze van het spel ertoe doet (in het Engels)"

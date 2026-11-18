@@ -791,6 +791,7 @@ lessons:
   covers: [model-agnostische-post-hoc-methoden#1]
   requires: [rai-lime]
   introduces: [c:shapley-value, c:shap]
+  warns: [value function]
   data: [uci-adult]
   ladder: [python, numpy]
   needs: any
