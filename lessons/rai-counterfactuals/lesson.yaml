@@ -1,0 +1,44 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: rai-counterfactuals
+minutes: 30
+title:
+  en: "What would have to change?"
+  nl: "Wat zou er moeten veranderen?"
+goal:
+  en: "find the smallest change that turns a logistic regression's no into a yes, measure changes with Wachter et al.'s distance, and see that the distance picks the answer, that there are many, that some ask for changes nobody can make, and what a counterfactual does not show."
+  nl: "de kleinste verandering vinden die het nee van een logistische regressie in een ja verandert, veranderingen meten met de afstand van Wachter en anderen, en zien dat de afstand het antwoord kiest, dat er veel zijn, dat sommige vragen om veranderingen die niemand kan maken, en wat een counterfactual niet laat zien."
+summary:
+  - en: "A counterfactual explanation (Wachter, Mittelstadt and Russell) says how the input would have had to differ for another answer: \"If your income had been £45,000, you would have been offered a loan.\" It needs only the model's answers, and there are many for one person."
+    nl: "Een counterfactual explanation (Wachter, Mittelstadt en Russell) zegt hoe de input anders had moeten zijn voor een ander antwoord: met een inkomen van £45.000 had je de lening gekregen. Er zijn alleen de antwoorden van het model voor nodig, en voor één persoon zijn er veel."
+  - en: "For a logistic regression, column k alone has to change by minus the logit divided by its weight. For the applicant aged 30 (logit −2.315) that is age to 81, education level 16 or 96 hours a week; with each column measured in its median absolute deviation (10, 1 and 3), being 81 is closest, at 5.1 steps."
+    nl: "Bij een logistische regressie moet kolom k, als alleen die verandert, veranderen met min de logit gedeeld door zijn gewicht. Voor de aanvrager van 30 (logit −2,315) is dat age 81, opleidingsniveau 16 of 96 uur per week; met elke kolom gemeten in zijn mediane absolute afwijking (10, 1 en 3) ligt 81 zijn het dichtst bij, op 5,1 stappen."
+  - en: "The scale picks the answer: with 7 years or fewer in a step of age, education level 16 is closer than being 81. Recourse (Ustun, Spangher and Liu) lets only actionable columns change; without age, level 16 is closest, at 7 steps."
+    nl: "De schaal kiest het antwoord: met 7 jaar of minder in een stap leeftijd ligt opleidingsniveau 16 dichter bij dan 81 zijn. Recourse (Ustun, Spangher en Liu) laat alleen actionable kolommen veranderen; zonder age ligt niveau 16 het dichtst bij, op 7 stappen."
+  - en: "A counterfactual that leaves a protected attribute alone is no evidence that it was irrelevant (Wachter et al.), and it holds only for the model that made it: after retraining on newer bail data, a logistic regression rejected 96.6% of the recourses Ustun et al.'s method had given (Rawal, Kamar and Lakkaraju)."
+    nl: "Een counterfactual die een protected attribute laat staan, bewijst niet dat dat er niet toe deed (Wachter en anderen), en hij geldt alleen voor het model dat hem maakte: na opnieuw trainen op nieuwere borgtochtdata wees een logistische regressie 96,6% af van de recourses die de methode van Ustun en anderen had gegeven (Rawal, Kamar en Lakkaraju)."
+can_now:
+  - en: "work out how much one column alone has to change to bring a logistic regression to its cut-off"
+    nl: "uitrekenen hoeveel één kolom moet veranderen, als alleen die verandert, om een logistische regressie op de grens te brengen"
+    by: needed
+  - en: "measure a counterfactual with Wachter et al.'s distance, each column in its own scale"
+    nl: "een counterfactual meten met de afstand van Wachter en anderen, elke kolom in zijn eigen schaal"
+    by: distance
+  - en: "say why a column a counterfactual leaves alone may still have counted"
+    nl: "zeggen waarom een kolom die een counterfactual laat staan toch mee kan hebben geteld"
+    by: race
+  - en: "explain why a recourse can stop working when the model is retrained"
+    nl: "uitleggen waarom een recourse kan ophouden te werken als het model opnieuw getraind wordt"
+    by: later
+further_reading:
+  - en: "Sandra Wachter, Brent Mittelstadt and Chris Russell (2018), [*Counterfactual Explanations without Opening the Black Box: Automated Decisions and the GDPR*](https://arxiv.org/abs/1711.00399), Harvard Journal of Law & Technology: the counterfactual explanation and its distance"
+    nl: "Sandra Wachter, Brent Mittelstadt en Chris Russell (2018), [*Counterfactual Explanations without Opening the Black Box: Automated Decisions and the GDPR*](https://arxiv.org/abs/1711.00399), Harvard Journal of Law & Technology: de counterfactual explanation en zijn afstand (in het Engels)"
+  - en: "Berk Ustun, Alexander Spangher and Yang Liu (2019), [*Actionable Recourse in Linear Classification*](https://arxiv.org/abs/1809.06514): recourse with actionable columns only"
+    nl: "Berk Ustun, Alexander Spangher en Yang Liu (2019), [*Actionable Recourse in Linear Classification*](https://arxiv.org/abs/1809.06514): recourse met alleen actionable kolommen (in het Engels)"
+  - en: "Solon Barocas, Andrew D. Selbst and Manish Raghavan (2020), [*The Hidden Assumptions Behind Counterfactual Explanations and Principal Reasons*](https://arxiv.org/abs/1912.04930): what counterfactuals take for granted"
+    nl: "Solon Barocas, Andrew D. Selbst en Manish Raghavan (2020), [*The Hidden Assumptions Behind Counterfactual Explanations and Principal Reasons*](https://arxiv.org/abs/1912.04930): wat counterfactuals stilzwijgend aannemen (in het Engels)"
+  - en: "Amir-Hossein Karimi, Gilles Barthe, Bernhard Schölkopf and Isabel Valera (2021), [*A survey of algorithmic recourse*](https://arxiv.org/abs/2010.04050): kinds of columns, and why there are many answers"
+    nl: "Amir-Hossein Karimi, Gilles Barthe, Bernhard Schölkopf en Isabel Valera (2021), [*A survey of algorithmic recourse*](https://arxiv.org/abs/2010.04050): soorten kolommen, en waarom er veel antwoorden zijn (in het Engels)"
+  - en: "Kaivalya Rawal, Ece Kamar and Himabindu Lakkaraju (2021), [*Algorithmic Recourse in the Wild*](https://arxiv.org/abs/2012.11788): recourse after the model is retrained"
+    nl: "Kaivalya Rawal, Ece Kamar en Himabindu Lakkaraju (2021), [*Algorithmic Recourse in the Wild*](https://arxiv.org/abs/2012.11788): recourse nadat het model opnieuw getraind is (in het Engels)"
