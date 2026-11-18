@@ -1,0 +1,40 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: rai-bias-in-llms
+minutes: 30
+title:
+  en: "Bias in language models"
+  nl: "Bias in language models"
+goal:
+  en: "test a language model for stereotypes with questions in the form of BBQ: mark its answers, work out BBQ's bias score, compare its accuracy when the facts fit a stereotype and when they go against it, and say what a bias benchmark can and cannot show."
+  nl: "een language model testen op stereotypen met vragen in de vorm van BBQ: zijn antwoorden markeren, de bias score van BBQ uitrekenen, zijn accuracy vergelijken als de feiten bij een stereotype passen en als ze ertegenin gaan, en zeggen wat een bias-benchmark wel en niet kan laten zien."
+summary:
+  - en: "A bias benchmark is a fixed set of test items for language models that measures whether a model repeats stereotypes about groups of people. BBQ asks questions with three options, two people and unknown, once without the facts, where unknown is right, and once with them; CrowS-Pairs compares pairs of sentences, and WinoBias and Winogender ask whom a pronoun refers to."
+    nl: "Een bias-benchmark is een vaste set testitems voor language models die meet of een model stereotypen over groepen mensen herhaalt. BBQ stelt vragen met drie opties, twee mensen en onbekend, een keer zonder de feiten, waar onbekend goed is, en een keer met de feiten; CrowS-Pairs vergelijkt paren zinnen, en WinoBias en Winogender vragen naar wie een voornaamwoord verwijst."
+  - en: "BBQ's bias score is 2 times the share stereotyped among the answers that are not unknown, minus 1, from −1 to 1; without the facts, it is multiplied by 1 − accuracy. A model that always says unknown scores 0."
+    nl: "De bias score van BBQ is 2 keer het deel stereotyped onder de antwoorden die niet onbekend zijn, min 1, van −1 tot 1; zonder de feiten wordt hij vermenigvuldigd met 1 − accuracy. Een model dat altijd onbekend zegt, scoort 0."
+  - en: "On ten situations the course wrote, Qwen3-0.6B said unknown in 109 of 120 questions without the facts, a bias score of 0.008. With the facts, it picked the right person in 45 of 120 questions when they fit the stereotype, and in 35 of 120 when they went against it, with large differences between situations."
+    nl: "Op tien situaties die de course schreef, zei Qwen3-0.6B onbekend bij 109 van de 120 vragen zonder de feiten, een bias score van 0,008. Met de feiten koos het de goede persoon bij 45 van de 120 vragen als ze bij het stereotype pasten, en bij 35 van de 120 als ze ertegenin gingen, met grote verschillen tussen de situaties."
+  - en: "A low score is no proof that a model has no bias: it holds for the questions, the language and the prompt that were tested. Blodgett and colleagues estimated that only 0% to 58% of the tests in four bias benchmarks were free of pitfalls."
+    nl: "Een lage score bewijst niet dat een model geen bias heeft: hij geldt voor de vragen, de taal en de prompt die getest zijn. Blodgett en collega's schatten dat maar 0% tot 58% van de tests in vier bias-benchmarks vrij was van valkuilen."
+can_now:
+  - en: "mark an answer as stereotyped, against or unknown"
+    nl: "een antwoord markeren als stereotyped, against of unknown"
+    by: mark
+  - en: "work out BBQ's bias score of a list of marks"
+    nl: "de bias score van BBQ uitrekenen van een lijst markeringen"
+    by: score
+  - en: "say what a bias score near 0 does and does not show"
+    nl: "zeggen wat een bias score rond 0 wel en niet laat zien"
+    by: low
+  - en: "tell when a test item does not test a stereotype well"
+    nl: "zien wanneer een testitem een stereotype niet goed test"
+    by: horse
+further_reading:
+  - en: "Alicia Parrish, Angelica Chen, Nikita Nangia, Vishakh Padmakumar, Jason Phang, Jana Thompson, Phu Mon Htut and Samuel R. Bowman (2022), [*BBQ: A Hand-Built Bias Benchmark for Question Answering*](https://aclanthology.org/2022.findings-acl.165.pdf): the benchmark, its bias score, and what it found for the models it tested"
+    nl: "Alicia Parrish, Angelica Chen, Nikita Nangia, Vishakh Padmakumar, Jason Phang, Jana Thompson, Phu Mon Htut en Samuel R. Bowman (2022), [*BBQ: A Hand-Built Bias Benchmark for Question Answering*](https://aclanthology.org/2022.findings-acl.165.pdf): de benchmark, zijn bias score, en wat hij vond voor de modellen die hij testte (in het Engels)"
+  - en: "Su Lin Blodgett, Gilsinia Lopez, Alexandra Olteanu, Robert Sim and Hanna Wallach (2021), [*Stereotyping Norwegian Salmon: An Inventory of Pitfalls in Fairness Benchmark Datasets*](https://aclanthology.org/2021.acl-long.81.pdf): what four bias benchmarks measure, read in samples of their tests, and where they go wrong"
+    nl: "Su Lin Blodgett, Gilsinia Lopez, Alexandra Olteanu, Robert Sim en Hanna Wallach (2021), [*Stereotyping Norwegian Salmon: An Inventory of Pitfalls in Fairness Benchmark Datasets*](https://aclanthology.org/2021.acl-long.81.pdf): wat vier bias-benchmarks meten, gelezen in steekproeven van hun tests, en waar ze misgaan (in het Engels)"
+  - en: "Rachel Rudinger, Jason Naradowsky, Brian Leonard and Benjamin Van Durme (2018), [*Gender Bias in Coreference Resolution*](https://aclanthology.org/N18-2002.pdf): Winogender, sentences about occupations that differ only in the pronoun"
+    nl: "Rachel Rudinger, Jason Naradowsky, Brian Leonard en Benjamin Van Durme (2018), [*Gender Bias in Coreference Resolution*](https://aclanthology.org/N18-2002.pdf): Winogender, zinnen over beroepen die alleen in het voornaamwoord verschillen (in het Engels)"

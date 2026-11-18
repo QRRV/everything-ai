@@ -1,0 +1,45 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: rai-bias-in-embeddings
+minutes: 40
+title:
+  en: "Bias in word embeddings"
+  nl: "Bias in word embeddings"
+goal:
+  en: "measure gender bias in word embeddings with WEAT: work out the association of a word and WEAT's effect size, see why one word a side always gives 2 or −2, take the gender direction out of words with Neutralize, and say why that hides bias more than it removes it."
+  nl: "genderbias meten in word embeddings met WEAT: de associatie van een woord en de effectgrootte van WEAT uitrekenen, zien waarom één woord per kant altijd 2 of −2 geeft, de genderrichting uit woorden halen met Neutralize, en zeggen waarom dat bias meer verbergt dan weghaalt."
+summary:
+  - en: "A word embedding is an embedding of one word, learned from the words it tends to occur near. Caliskan and colleagues (2017) found that such embeddings learn the stereotypes in the texts: in GloVe, how much closer 50 occupation words lay to female words than to male words went together with the share of women in those occupations, with a correlation of 0.90 (1 would be a perfect match)."
+    nl: "Een word embedding is een embedding van één woord, geleerd uit de woorden waar het vaak bij staat. Caliskan en collega's (2017) vonden dat zulke embeddings de stereotypen in de teksten leren: in GloVe ging hoeveel dichter 50 beroepen bij vrouwelijke woorden lagen dan bij mannelijke samen met het aandeel vrouwen in die beroepen, met een correlatie van 0,90 (1 zou een perfecte samenhang zijn)."
+  - en: "WEAT compares two lists of target words with two lists of attribute words. The association of a word is its mean cosine similarity with A minus that with B; the effect size is the gap between the mean associations of X and Y, divided by their standard deviation, from −2 to 2."
+    nl: "WEAT vergelijkt twee lijsten doelwoorden met twee lijsten attribuutwoorden. De associatie van een woord is zijn gemiddelde cosine similarity met A min die met B; de effectgrootte is het verschil tussen de gemiddelde associaties van X en Y, gedeeld door hun standaardafwijking, van −2 tot 2."
+  - en: "On Granite, with each word embedded on its own, the course measured 1.49 for men's and women's names with career and family, 1.36 for math and arts, and 0.96 for science and arts. With one word a side, door against curtain gives 2.00 or −2.00, depending on the attribute words."
+    nl: "Op Granite, met elk woord los ingebed, mat de course 1,49 voor namen van mannen en vrouwen met carrière en gezin, 1,36 voor wiskunde en kunst, en 0,96 voor wetenschap en kunst. Met één woord per kant geeft door (deur) tegen curtain (gordijn) 2,00 of −2,00, afhankelijk van de attribuutwoorden."
+  - en: "Neutralize takes the part along the gender direction out of gender-neutral words. On Granite, math and arts then drops to −0.33, but names with career and family still give 1.15, and 15 of 20 occupations keep a nearest occupation from their old side: as Gonen and Goldberg found, it hides bias more than it removes it."
+    nl: "Neutralize haalt het deel langs de genderrichting uit genderneutrale woorden. Op Granite zakt wiskunde en kunst dan naar −0,33, maar namen met carrière en gezin geven nog 1,15, en 15 van de 20 beroepen houden een naaste buur van hun oude kant: zoals Gonen en Goldberg vonden, verbergt het bias meer dan dat het hem weghaalt."
+can_now:
+  - en: "work out the association of a word with two lists of words"
+    nl: "de associatie uitrekenen van een woord met twee lijsten woorden"
+    by: association
+  - en: "work out WEAT's effect size of two lists of target words"
+    nl: "de effectgrootte van WEAT uitrekenen van twee lijsten doelwoorden"
+    by: effect
+  - en: "say why a WEAT test with one word a side shows nothing"
+    nl: "zeggen waarom een WEAT-test met één woord per kant niets laat zien"
+    by: door
+  - en: "take the gender direction out of an embedding"
+    nl: "de genderrichting uit een embedding halen"
+    by: neutralize
+  - en: "say why removing a direction does not remove a bias"
+    nl: "zeggen waarom een richting weghalen geen bias weghaalt"
+    by: hidden
+further_reading:
+  - en: "Tolga Bolukbasi, Kai-Wei Chang, James Zou, Venkatesh Saligrama and Adam Kalai (2016), [*Man is to Computer Programmer as Woman is to Homemaker? Debiasing Word Embeddings*](https://papers.NeurIPS.cc/paper_files/paper/2016/file/a486cd07e4ac3d270571622f4f316ec5-Paper.pdf): the gender direction in word2vec, and hard debiasing with Neutralize and Equalize"
+    nl: "Tolga Bolukbasi, Kai-Wei Chang, James Zou, Venkatesh Saligrama en Adam Kalai (2016), [*Man is to Computer Programmer as Woman is to Homemaker? Debiasing Word Embeddings*](https://papers.NeurIPS.cc/paper_files/paper/2016/file/a486cd07e4ac3d270571622f4f316ec5-Paper.pdf): de genderrichting in word2vec, en hard debiasing met Neutralize en Equalize (in het Engels)"
+  - en: "Hila Gonen and Yoav Goldberg (2019), [*Lipstick on a Pig: Debiasing Methods Cover up Systematic Gender Biases in Word Embeddings But do not Remove Them*](https://aclanthology.org/N19-1061.pdf): why the words still group by their old gender after debiasing"
+    nl: "Hila Gonen en Yoav Goldberg (2019), [*Lipstick on a Pig: Debiasing Methods Cover up Systematic Gender Biases in Word Embeddings But do not Remove Them*](https://aclanthology.org/N19-1061.pdf): waarom de woorden na debiasing nog steeds groeperen naar hun oude gender (in het Engels)"
+  - en: "Chandler May, Alex Wang, Shikha Bordia, Samuel R. Bowman and Rachel Rudinger (2019), [*On Measuring Social Biases in Sentence Encoders*](https://aclanthology.org/N19-1063.pdf): WEAT for models of whole sentences, and why a small number does not mean no bias"
+    nl: "Chandler May, Alex Wang, Shikha Bordia, Samuel R. Bowman en Rachel Rudinger (2019), [*On Measuring Social Biases in Sentence Encoders*](https://aclanthology.org/N19-1063.pdf): WEAT voor modellen van hele zinnen, en waarom een klein getal niet betekent dat er geen bias is (in het Engels)"
+  - en: "Kawin Ethayarajh, David Duvenaud and Graeme Hirst (2019), [*Understanding Undesirable Word Embedding Associations*](https://aclanthology.org/P19-1166.pdf): why WEAT overestimates bias, and how the choice of words steers it"
+    nl: "Kawin Ethayarajh, David Duvenaud en Graeme Hirst (2019), [*Understanding Undesirable Word Embedding Associations*](https://aclanthology.org/P19-1166.pdf): waarom WEAT bias overschat, en hoe de keuze van woorden hem stuurt (in het Engels)"

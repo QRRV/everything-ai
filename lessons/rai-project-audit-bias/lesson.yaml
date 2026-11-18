@@ -1,0 +1,40 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: rai-project-audit-bias
+minutes: 35
+title:
+  en: "Project: measure the bias of your own classifier"
+  nl: "Project: meet de bias van je eigen classifier"
+goal:
+  en: "audit your own classifier on UCI Adult: decide what to measure, measure per sex and per race the yes rate, the impact ratio, the error rates and the calibration, try a threshold per sex as a first fix, and say what the audit can and cannot show."
+  nl: "een audit doen op je eigen classifier op UCI Adult: beslissen wat je meet, per geslacht en per afkomst het deel met een ja, de impact ratio, de foutpercentages en de kalibratie meten, een threshold per geslacht proberen als eerste aanpassing, en zeggen wat de audit wel en niet kan laten zien."
+summary:
+  - en: "An algorithmic audit checks a system against criteria chosen in advance, such as fairness. From the outside, auditors send in inputs and compare outputs; from the inside, a team can also look at the data and the code. You built the classifier, so yours is a first-party audit: you see everything, and you share the builder's interest."
+    nl: "Een algoritme-audit controleert een systeem aan criteria die vooraf gekozen zijn, zoals fairness. Van buitenaf geven auditors inputs en vergelijken ze wat eruit komt; van binnenuit kan een team ook naar de data en de code kijken. Jij bouwde de classifier, dus jouw audit is een first-party audit: je ziet alles, en je deelt het belang van wie bouwde."
+  - en: "Report the numbers disaggregated, per group, with how many people each rests on. On the test set, the classifier of the previous lessons gives women a yes 0.28 times as often as men, and four of the five groups by race fall below 0.8 of the group with the highest yes rate, White people at 0.78 among them."
+    nl: "Rapporteer de getallen uitgesplitst, per groep, met op hoeveel mensen elk rust. Op de test set geeft de classifier van de vorige lessen vrouwen 0,28 keer zo vaak een ja als mannen, en vier van de vijf groepen naar afkomst komen onder 0,8 van de groep met het hoogste deel met een ja, ook witte mensen, met 0,78."
+  - en: "A threshold per sex with a recall of 0.55, chosen on the people to train on (0.38 for women, 0.52 for men), gives women and men about the same recall on the test set; the women's impact ratio rises only to 0.43, and the groups by race barely change."
+    nl: "Een threshold per geslacht met een recall van 0,55, gekozen op de mensen om op te trainen (0,38 voor vrouwen, 0,52 voor mannen), geeft vrouwen en mannen op de test set ongeveer dezelfde recall; de impact ratio van de vrouwen stijgt maar tot 0,43, en de groepen naar afkomst veranderen nauwelijks."
+  - en: "An audit can find a problem, not prove there is none: its result holds for the groups, criteria, data and thresholds it measured, and the report says what it did not measure."
+    nl: "Een audit kan een probleem vinden, niet bewijzen dat er geen is: de uitkomst geldt voor de groepen, criteria, data en thresholds die gemeten zijn, en het rapport zegt wat er niet gemeten is."
+can_now:
+  - en: "make a table per group with the yes rate, the impact ratio, the recall and the false positive rate"
+    nl: "een tabel per groep maken met het deel met een ja, de impact ratio, de recall en de false positive rate"
+    by: report
+  - en: "check per band of scores whether a score means the same for every group"
+    nl: "per band van scores nagaan of een score voor elke groep hetzelfde betekent"
+    by: calibration
+  - en: "find the highest threshold that keeps the recall of a group at a target"
+    nl: "de hoogste threshold vinden die de recall van een groep op een doel houdt"
+    by: threshold
+  - en: "say what an audit report may and may not claim"
+    nl: "zeggen wat een auditrapport wel en niet mag beweren"
+    by: claim
+further_reading:
+  - en: "Inioluwa Deborah Raji, Andrew Smart, Rebecca N. White, Margaret Mitchell, Timnit Gebru, Ben Hutchinson, Jamila Smith-Loud, Daniel Theron and Parker Barnes (2020), [*Closing the AI Accountability Gap: Defining an End-to-End Framework for Internal Algorithmic Auditing*](https://arxiv.org/pdf/2001.00973): an audit inside a company in five stages, each with its documents"
+    nl: "Inioluwa Deborah Raji, Andrew Smart, Rebecca N. White, Margaret Mitchell, Timnit Gebru, Ben Hutchinson, Jamila Smith-Loud, Daniel Theron en Parker Barnes (2020), [*Closing the AI Accountability Gap: Defining an End-to-End Framework for Internal Algorithmic Auditing*](https://arxiv.org/pdf/2001.00973): een audit binnen een bedrijf in vijf fasen, elk met zijn documenten (in het Engels)"
+  - en: "Margaret Mitchell, Simone Wu, Andrew Zaldivar, Parker Barnes, Lucy Vasserman, Ben Hutchinson, Elena Spitzer, Inioluwa Deborah Raji and Timnit Gebru (2019), [*Model Cards for Model Reporting*](https://arxiv.org/pdf/1810.03993): what a short report on a model should hold, with its results per group"
+    nl: "Margaret Mitchell, Simone Wu, Andrew Zaldivar, Parker Barnes, Lucy Vasserman, Ben Hutchinson, Elena Spitzer, Inioluwa Deborah Raji en Timnit Gebru (2019), [*Model Cards for Model Reporting*](https://arxiv.org/pdf/1810.03993): wat een kort rapport over een model hoort te bevatten, met zijn uitkomsten per groep (in het Engels)"
+  - en: "Sasha Costanza-Chock, Emma Harvey, Inioluwa Deborah Raji, Martha Czernuszenko and Joy Buolamwini (2022), [*Who Audits the Auditors? Recommendations from a field scan of the algorithmic auditing ecosystem*](https://arxiv.org/pdf/2310.02521): who does algorithmic audits, and what they share of how and what they found"
+    nl: "Sasha Costanza-Chock, Emma Harvey, Inioluwa Deborah Raji, Martha Czernuszenko en Joy Buolamwini (2022), [*Who Audits the Auditors? Recommendations from a field scan of the algorithmic auditing ecosystem*](https://arxiv.org/pdf/2310.02521): wie algoritme-audits doet, en wat ze delen over hoe en wat ze vonden (in het Engels)"

@@ -546,6 +546,8 @@ lessons:
   covers: []
   requires: [rai-fairness-benchmarks]
   introduces: [c:algorithmic-audit]
+  uses: [c:fairness, c:group-fairness, c:four-fifths-rule, c:disparate-impact, c:selection-rate, c:recall, c:calibration-within-groups, c:threshold-optimization, c:decision-threshold, c:bias-mitigation, c:base-rate, c:proxy, c:fairness-through-unawareness, c:harm, c:allocative-harm, c:fairness-benchmark, c:datasheet, c:test-set, c:train-set, c:logistic-regression, c:probability, c:one-hot, c:feature, c:label, c:model, c:prediction, c:accuracy, c:package, p:import-own-code, py:dataframe, py:pandas-select-filter, py:boolean-mask, py:groupby, py:np-mean, py:sklearn-fit-predict, py:def, py:return, py:for, py:range, py:if, py:list, py:comparison, py:arithmetic, py:round, py:print, py:comment, py:variable, py:underscore-name, py:string-literal, py:float, py:int, py:bool, py:keyword-argument, py:import, py:import-as, q:predict, q:choice, q:exercise-with-check, q:run-cell]
+  mentions: [c:model-card, c:false-positive-rate, py:pd-get-dummies]
   data: [uci-adult]
   ladder: [python, numpy]
   needs: any
@@ -559,21 +561,24 @@ lessons:
   covers: [bias-per-modaliteit#0]
   requires: [rai-bias-lifecycle, start-prompt-basics, lm-what-is-a-language-model, res-reading-claims]
   introduces: [c:bias-benchmark]
-  data: [model-qwen3-0.6b]
+  uses: [c:benchmark, c:language-model, c:next-token-prediction, c:probability, c:token, c:prompt, c:seed, c:accuracy, c:harm, c:harmful-bias, py:def, py:if, py:return, py:for, py:comparison, py:arithmetic, py:len, py:list, py:string-literal, py:variable, py:float, py:int, py:print, py:round, py:underscore-name, py:comment, q:predict, q:choice, q:exercise-with-check, q:run-cell]
+  mentions: [c:chat-model]
+  data: [model-qwen3-0.6b, course-fairness-qwen]
   ladder: [python]
   needs: any
 
 - id: rai-bias-in-embeddings
-  title: "Bias in word vectors"
+  title: "Bias in word embeddings"
   level: basis
   domein: verantwoord
   module: fairness
-  idea: "In word vectors, words like engineer can lie closer to he than to she; the WEAT test measures that as an effect size, and removing the gender direction (hard debiasing) hides the bias more than it removes it."
+  idea: "In word embeddings, men's names can lie closer to words about career and women's names closer to words about family; WEAT measures that as an effect size, one word a side always gives 2 or −2, and taking the gender direction out (Neutralize) hides the bias more than it removes it."
   covers: [bias-per-modaliteit#1]
   requires: [rai-bias-in-llms, ml-embeddings-idea, math-norms-cosine]
-  introduces: [c:weat]
-  mentions: [c:effect-size]
-  data: [model-granite-embedding]
+  introduces: [c:weat, c:word-embedding]
+  uses: [c:embedding, c:cosine-similarity, c:norm, c:dot-product, c:vector, c:standard-deviation, c:mean, c:bias-benchmark, c:harm, c:harmful-bias, c:benchmark, c:language-model, c:token, py:np-array, py:np-dot, py:np-linalg-norm, py:np-mean, py:np-std, py:list, py:append, py:for, py:def, py:return, py:slicing, py:indexing, py:print, py:round, py:import-as, py:comment, py:underscore-name, py:variable, py:float, py:arithmetic, py:string-literal, q:predict, q:choice, q:exercise-with-check, q:run-cell]
+  mentions: [c:effect-size, c:embedding-model, c:principal-component, c:p-value, c:model-card, c:negative-result, py:list-concatenation]
+  data: [model-granite-embedding, course-fairness-granite]
   ladder: [python, numpy]
   needs: any
 

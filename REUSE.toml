@@ -274,6 +274,18 @@ SPDX-FileCopyrightText = "2026 Everything AI contributors (the course's runs; an
 SPDX-License-Identifier = "CC-BY-4.0"
 
 [[annotations]]
+path = "data/course-fairness-granite.npz"
+precedence = "override"
+SPDX-FileCopyrightText = "2026 Everything AI contributors (the course's run; embeddings made by Granite Embedding 107M multilingual of IBM, Apache-2.0, of word lists from Caliskan and others 2017, Bolukbasi and others 2016 and Ethayarajh and others 2019)"
+SPDX-License-Identifier = "CC-BY-4.0"
+
+[[annotations]]
+path = "data/course-fairness-qwen.json"
+precedence = "override"
+SPDX-FileCopyrightText = "2026 Everything AI contributors (the course's run; answers written by Qwen3-0.6B of Alibaba Cloud, Apache-2.0, to questions the course wrote in the form of BBQ)"
+SPDX-License-Identifier = "CC-BY-4.0"
+
+[[annotations]]
 path = "data/skills/**"
 precedence = "override"
 SPDX-FileCopyrightText = "2026 Everything AI contributors"
