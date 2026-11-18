@@ -1,0 +1,33 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: rai-case-health-credit
+minutes: 20
+title:
+  en: "When the label measures the wrong thing"
+  nl: "Als het label het verkeerde meet"
+goal:
+  en: "say what a proxy label is, compare who a cost label picks with who the need for care would pick, and say what the New York regulator found about the Apple Card and what was missing."
+  nl: "zeggen wat een proxy label is, vergelijken wie een kostenlabel kiest met wie de behoefte aan zorg zou kiezen, en zeggen wat de toezichthouder in New York over de Apple Card vond en wat er ontbrak."
+summary:
+  - en: "A proxy label is something you can measure that stands in for what you really want to know. A health algorithm used in the United States learned the costs of care as a stand-in for the need for care; because less was spent on Black patients with the same illnesses, it ranked them as healthier, although it left race out."
+    nl: "Een proxy label is iets wat je kunt meten en dat de plaats inneemt van wat je eigenlijk wilt weten. Een zorgalgoritme in de Verenigde Staten leerde de kosten van zorg in plaats van de behoefte aan zorg; omdat er minder werd uitgegeven aan zwarte patiënten met dezelfde ziektes, schatte het hen gezonder in, al liet het afkomst weg."
+  - en: "Obermeyer and colleagues found in 2019 that, at the score above which patients were picked automatically, Black patients had 4.8 chronic illnesses against 3.8 for White patients. 17.7 percent of the patients picked automatically were Black; with a score that meant the same health in both groups, their simulation gave 46.5 percent."
+    nl: "Obermeyer en collega's vonden in 2019 dat zwarte patiënten bij de score vanaf waar patiënten automatisch werden gekozen 4,8 chronische ziektes hadden tegen 3,8 voor witte patiënten. Van de patiënten die automatisch werden gekozen, was 17,7 procent zwart; met een score die in beide groepen dezelfde gezondheid betekende, gaf hun simulatie 46,5 procent."
+  - en: "In 2021 the New York State Department of Financial Services found no evidence that the Apple Card treated women worse, on purpose or in effect, but customer service could not explain the credit limits to the people who complained, which left them confused."
+    nl: "In 2021 vond het Department of Financial Services van de staat New York geen bewijs dat de Apple Card vrouwen slechter behandelde, met opzet of in de praktijk, maar de klantenservice kon de kredietlimieten niet uitleggen aan de mensen die klaagden, waardoor die verward achterbleven."
+can_now:
+  - en: "find which people a cost label picks, and which it leaves out, compared with a label for need"
+    nl: "vinden welke mensen een kostenlabel kiest, en welke het weglaat, vergeleken met een label voor zorgbehoefte"
+    by: picked
+  - en: "say of a measured thing whether it is the goal or a proxy that stands in for it"
+    nl: "van iets wat gemeten wordt zeggen of het het doel is of een proxy die de plaats ervan inneemt"
+    by: proxies
+  - en: "say what the New York regulator found about the Apple Card, and what was missing"
+    nl: "zeggen wat de toezichthouder in New York over de Apple Card vond, en wat er ontbrak"
+    by: regulator
+further_reading:
+  - en: "Obermeyer, Powers, Vogeli and Mullainathan (2019), [*Dissecting racial bias in an algorithm used to manage the health of populations*](https://pubmed.ncbi.nlm.nih.gov/31649194/), *Science* 366"
+    nl: "Obermeyer, Powers, Vogeli en Mullainathan (2019), [*Dissecting racial bias in an algorithm used to manage the health of populations*](https://pubmed.ncbi.nlm.nih.gov/31649194/), *Science* 366"
+  - en: "New York State Department of Financial Services (2021), [*Report on Apple Card Investigation*](https://s3.documentcloud.org/documents/20521283/rpt_202103_apple_card_investigation.pdf)"
+    nl: "New York State Department of Financial Services (2021), [*Report on Apple Card Investigation*](https://s3.documentcloud.org/documents/20521283/rpt_202103_apple_card_investigation.pdf)"

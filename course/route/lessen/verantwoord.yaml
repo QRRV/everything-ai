@@ -278,6 +278,7 @@ lessons:
   covers: [casussen#5]
   requires: [rai-automated-decisions]
   introduces: [c:income-averaging]
+  uses: [c:mean, c:contestability, c:decision-threshold, c:model, py:list, py:for, py:if, py:comparison, py:arithmetic, py:len, py:float, py:int, py:print, py:comment, py:variable, py:underscore-name, q:predict, q:choice, q:exercise-with-check, q:run-cell]
   data: []
   ladder: [python]
   needs: any
@@ -291,6 +292,8 @@ lessons:
   covers: [casussen#6]
   requires: [rai-case-compas-amazon]
   introduces: [c:proxy-label]
+  uses: [c:label, c:model, c:prediction, c:decision-threshold, c:risk-score, py:dict, py:list, py:append, py:for, py:if, py:comparison, py:print, py:comment, py:int, py:variable, py:underscore-name, py:string-literal, q:predict, q:choice, q:exercise-with-check, q:run-cell]
+  mentions: [c:transparency]
   data: []
   ladder: [python]
   needs: any
@@ -304,6 +307,8 @@ lessons:
   covers: [casussen#7, casussen#8]
   requires: [rai-two-kinds-of-harm, rai-dark-patterns]
   introduces: [c:microtargeting]
+  uses: [c:representational-harm, c:allocative-harm, c:hypernudge, c:consent, c:label, c:model, py:dict, py:for, py:arithmetic, py:len, py:float, py:round, py:print, py:comment, py:int, py:variable, py:underscore-name, py:string-literal, q:predict, q:choice, q:exercise-with-check, q:run-cell]
+  mentions: [c:privacy]
   data: []
   ladder: [python]
   needs: any

@@ -1,0 +1,37 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: rai-case-labels-tay-cambridge
+minutes: 20
+title:
+  en: "Labels, a chatbot and microtargeting"
+  nl: "Labels, een chatbot en microtargeting"
+goal:
+  en: "tell the harm in what a system says from the harm in what is done with data about people, work out how many of the people whose data an app took ever agreed, and say what the investigators found about the claims of Cambridge Analytica."
+  nl: "de schade in wat een systeem zegt onderscheiden van de schade in wat er met data over mensen gebeurt, uitrekenen hoeveel van de mensen van wie een app data verzamelde daar ooit mee instemden, en zeggen wat de onderzoekers vonden over de beweringen van Cambridge Analytica."
+summary:
+  - en: "In 2015 Google Photos gave two Black friends the label of an ape; Google did not fix the model but removed the labels, and tests in 2018 and 2023 still found nothing for apes. In 2016 users made Microsoft's chatbot Tay post racist messages, and Microsoft took it offline after 16 hours and more than 95,000 tweets. Both are representational harm."
+    nl: "In 2015 gaf Google Photos twee zwarte vrienden het label van een aap; Google verbeterde het model niet maar haalde de labels weg, en tests in 2018 en 2023 vonden nog altijd niets voor apen. In 2016 lieten gebruikers Microsofts chatbot Tay racistische berichten plaatsen, en Microsoft haalde hem na 16 uur en meer dan 95.000 tweets offline. Allebei zijn het gevallen van representatieve schade."
+  - en: "Microtargeting shows tailored messages to small groups chosen with data about them. About 300,000 people used a quiz app on Facebook, and through their friends it collected the data of up to 87 million people: about 3 in every 1,000 had used the app. Data from it was sold to SCL Elections and Cambridge Analytica."
+    nl: "Microtargeting toont op maat gemaakte boodschappen aan kleine groepen die met data over hen gekozen zijn. Zo'n 300.000 mensen gebruikten een quizapp op Facebook, en via hun vrienden verzamelde die de data van maximaal 87 miljoen mensen: ongeveer 3 op de 1.000 hadden de app gebruikt. Data eruit werd verkocht aan SCL Elections en Cambridge Analytica."
+  - en: "The British privacy regulator concluded in 2020 that the company's claims about its own power may have been exaggerated, its methods were common, and its predictions for new people were likely far less accurate. That the ads changed any vote has not been shown."
+    nl: "De Britse privacytoezichthouder concludeerde in 2020 dat de beweringen van het bedrijf over zijn eigen kracht overdreven konden zijn, dat de methodes gewoon waren, en dat de voorspellingen voor nieuwe mensen waarschijnlijk veel minder goed waren. Dat de advertenties ook maar één stem veranderden, is niet aangetoond."
+can_now:
+  - en: "work out what share of the people whose data an app takes ever installed it"
+    nl: "uitrekenen welk deel van de mensen van wie een app data verzamelt, hem ooit installeerde"
+    by: friends
+  - en: "say of a fact whether it is harm in what a system says, harm in what is done with data, or what was done about it"
+    nl: "van een feit zeggen of het schade is in wat een systeem zegt, schade in wat er met data gebeurt, of wat eraan gedaan werd"
+    by: kinds
+  - en: "say what the investigators found about the claims of Cambridge Analytica"
+    nl: "zeggen wat de onderzoekers vonden over de beweringen van Cambridge Analytica"
+    by: claims
+further_reading:
+  - en: "Peter Lee (2016), [*Learning from Tay's introduction*](https://blogs.microsoft.com/blog/2016/03/25/learning-tays-introduction/), Official Microsoft Blog"
+    nl: "Peter Lee (2016), [*Learning from Tay's introduction*](https://blogs.microsoft.com/blog/2016/03/25/learning-tays-introduction/), Official Microsoft Blog"
+  - en: "Federal Trade Commission (2019), [*FTC Sues Cambridge Analytica, Settles with Former CEO and App Developer*](https://ftc.gov/news-events/press-releases/2019/07/ftc-sues-cambridge-analytica-settles-former-ceo-app-developer)"
+    nl: "Federal Trade Commission (2019), [*FTC Sues Cambridge Analytica, Settles with Former CEO and App Developer*](https://ftc.gov/news-events/press-releases/2019/07/ftc-sues-cambridge-analytica-settles-former-ceo-app-developer)"
+  - en: "Federal Trade Commission (2019), [*FTC Imposes $5 Billion Penalty and Sweeping New Privacy Restrictions on Facebook*](https://www.ftc.gov/news-events/news/press-releases/2019/07/ftc-imposes-5-billion-penalty-sweeping-new-privacy-restrictions-facebook)"
+    nl: "Federal Trade Commission (2019), [*FTC Imposes $5 Billion Penalty and Sweeping New Privacy Restrictions on Facebook*](https://www.ftc.gov/news-events/news/press-releases/2019/07/ftc-imposes-5-billion-penalty-sweeping-new-privacy-restrictions-facebook)"
+  - en: "Information Commissioner's Office (2020), [letter to Julian Knight MP on the investigation into Cambridge Analytica](https://cy.ico.org.uk/media2/migrated/2618383/20201002_ico-o-ed-l-rtl-0181_to-julian-knight-mp.pdf)"
+    nl: "Information Commissioner's Office (2020), [brief aan Julian Knight MP over het onderzoek naar Cambridge Analytica](https://cy.ico.org.uk/media2/migrated/2618383/20201002_ico-o-ed-l-rtl-0181_to-julian-knight-mp.pdf)"

@@ -1,0 +1,39 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: rai-case-public-sector-abroad
+minutes: 20
+title:
+  en: "Robodebt, the A-levels and more"
+  nl: "Robodebt, de A-levels en meer"
+goal:
+  en: "work out how much income averaging makes up for someone whose income goes up and down, and tell a wrong calculation, a rule that is right on average and a number in place of judgment apart in four cases from abroad."
+  nl: "uitrekenen hoeveel inkomen het middelen verzint voor iemand van wie het inkomen op en neer gaat, en in vier gevallen uit het buitenland een verkeerde berekening, een regel die gemiddeld klopt en een getal in plaats van een oordeel uit elkaar houden."
+summary:
+  - en: "Robodebt spread the yearly income that employers reported evenly over fortnights, and raised a debt wherever the average was higher than what people had reported. In 2021 the Federal Court approved a settlement: the government would drop debts of at least 1.763 billion dollars against about 433,000 people. A Royal Commission called it crude and cruel, neither fair nor legal."
+    nl: "Robodebt verdeelde het jaarinkomen dat werkgevers doorgaven gelijk over periodes van twee weken, en maakte een schuld aan waar het gemiddelde hoger was dan wat mensen hadden opgegeven. In 2021 keurde de federale rechter een schikking goed: de overheid zou schulden van minstens 1,763 miljard dollar bij ongeveer 433.000 mensen laten vallen. Een koninklijke onderzoekscommissie noemde het grof en wreed, eerlijk noch legaal."
+  - en: "In 2020 a model set England's A-level grades from each school's results in the three years before and the teacher's ranking: 39.1 of every 100 grades came out lower than the teacher's, while the national share of top grades hardly changed. Four days after the results, students got their teachers' grades instead."
+    nl: "In 2020 bepaalde een model de cijfers voor de Engelse A-levels uit de resultaten van elke school in de drie jaar ervoor en de volgorde van de docent: 39,1 van elke 100 cijfers vielen lager uit dan dat van de docent, terwijl het landelijke aandeel hoge cijfers nauwelijks veranderde. Vier dagen na de uitslag kregen de leerlingen alsnog de cijfers van hun docenten."
+  - en: "Michigan's MiDAS decided on fraud by itself from 2013 to 2015, for example when a questionnaire did not come back; in a review of 22,427 of its findings, 93 of every 100 involved no fraud. In Allegheny County, a score from 1 to 20 helps decide which calls about children are investigated; on its own it would have picked Black children more often than the staff did."
+    nl: "MiDAS in Michigan besliste van 2013 tot 2015 zelf over fraude, bijvoorbeeld als een vragenlijst niet terugkwam; bij het nakijken van 22.427 van zijn vaststellingen bleek bij 93 van elke 100 geen sprake van fraude. In Allegheny County helpt een score van 1 tot 20 beslissen welke meldingen over kinderen onderzocht worden; alleen zou de score vaker zwarte kinderen hebben aangewezen dan de medewerkers deden."
+can_now:
+  - en: "work out the income that averaging over fortnights makes up for someone whose income goes up and down"
+    nl: "het inkomen uitrekenen dat middelen over periodes van twee weken verzint voor iemand van wie het inkomen op en neer gaat"
+    by: averaging
+  - en: "say whether a case went wrong in a calculation, in a rule that was right on average, or because a number or a rule took the place of judgment"
+    nl: "zeggen of een geval misging in een berekening, in een regel die gemiddeld klopte, of doordat een getal of een regel de plaats innam van een oordeel"
+    by: failures
+  - en: "say why a model that compares a school with its past cannot judge a very small class"
+    nl: "zeggen waarom een model dat een school met haar verleden vergelijkt een heel kleine klas niet kan beoordelen"
+    by: small
+further_reading:
+  - en: "Federal Court of Australia (2021), [*Prygodicz v Commonwealth of Australia (No 2)*, summary of the judgment](https://www.judgments.fedcourt.gov.au/judgments/Judgments/fca/single/2021/2021fca0634/summaries/2021fca0634-summary), on the Robodebt settlement"
+    nl: "Federal Court of Australia (2021), [*Prygodicz v Commonwealth of Australia (No 2)*, samenvatting van de uitspraak](https://www.judgments.fedcourt.gov.au/judgments/Judgments/fca/single/2021/2021fca0634/summaries/2021fca0634-summary), over de schikking over Robodebt"
+  - en: "Prime Minister of Australia (2023), [*Final report of the Royal Commission into the Robodebt Scheme*](https://www.pm.gov.au/media/final-report-royal-commission-robodebt-scheme)"
+    nl: "Prime Minister of Australia (2023), [*Final report of the Royal Commission into the Robodebt Scheme*](https://www.pm.gov.au/media/final-report-royal-commission-robodebt-scheme)"
+  - en: "Ofqual (2020), [*Awarding GCSE, AS, A level, advanced extension awards and extended project qualifications in summer 2020: interim report*](https://www.gov.uk/government/publications/awarding-gcse-as-a-levels-in-summer-2020-interim-report)"
+    nl: "Ofqual (2020), [*Awarding GCSE, AS, A level, advanced extension awards and extended project qualifications in summer 2020: interim report*](https://www.gov.uk/government/publications/awarding-gcse-as-a-levels-in-summer-2020-interim-report)"
+  - en: "Stapleton, Cheng and others (2022), [*How Child Welfare Workers Reduce Racial Disparities in Algorithmic Decisions*](https://arxiv.org/pdf/2204.13872.pdf), on the Allegheny Family Screening Tool"
+    nl: "Stapleton, Cheng en anderen (2022), [*How Child Welfare Workers Reduce Racial Disparities in Algorithmic Decisions*](https://arxiv.org/pdf/2204.13872.pdf), over het hulpmiddel van Allegheny"
+  - en: "Virginia Eubanks (2018), *Automating Inequality*, St. Martin's Press, among other things on the Allegheny tool"
+    nl: "Virginia Eubanks (2018), *Automating Inequality*, St. Martin's Press, onder meer over het hulpmiddel van Allegheny"
