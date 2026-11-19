@@ -1096,11 +1096,11 @@ lessons:
   level: basis
   domein: verantwoord
   module: security
-  idea: "OWASP's top 10 for LLM applications ranks the biggest risks, with prompt injection first, then leaking data, insecure output, too much agency and more, and its list for agents starts with a hijacked goal; a list like this is where a review starts."
+  idea: "OWASP's Top 10 for LLM applications names the most critical risks of apps with a language model, edition by edition: prompt injection first and sensitive information disclosure second in 2025 and 2026, ranked by expert votes and in 2026 for a quarter by incident data. The ids change between editions, so a finding names its edition; the list for agents starts with a hijacked goal. A list like this is where a review starts, not a test that an app passes."
   covers: [dreigingsmodellering#5]
   requires: [rai-ml-threat-models, start-prompt-chains]
   introduces: [c:owasp-top-10-for-llm]
-  mentions: [c:prompt-injection]
+  mentions: [c:prompt-injection, c:large-language-model, c:llm-agent, c:excessive-agency, c:system-prompt]
   data: []
   ladder: [python]
   needs: any

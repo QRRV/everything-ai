@@ -1,0 +1,46 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+# termen:allow improper output handling, overreliance, misinformation, genai
+id: rai-owasp-lists
+minutes: 35
+title:
+  en: "The OWASP lists for LLM apps"
+  nl: "De OWASP-lijsten voor LLM-apps"
+goal:
+  en: "use OWASP's Top 10 for LLM applications and its list for agents to start a review: look up an entry in every edition, see what moved, and write findings with the id and edition of each risk."
+  nl: "de Top 10 van OWASP voor LLM-applicaties en de lijst voor agents gebruiken om een review te beginnen: een risico opzoeken in elke editie, zien wat er verschoof, en bevindingen opschrijven met de id en editie van elk risico."
+summary:
+  - en: "OWASP calls its Top 10 for the web \"a standard awareness document\"; the OWASP Top 10 for LLM Applications likewise helps choose which risks of an app with a large language model to look at first. It is not a test that an app passes: a list starts a review, it does not end it."
+    nl: "OWASP noemt de Top 10 voor het web een standaarddocument om bewust te maken; de *OWASP Top 10 for LLM Applications* helpt net zo kiezen naar welke risico's van een app met een large language model je eerst kijkt. Het is geen test die een app haalt: een lijst begint een review, maar maakt die niet af."
+  - en: "The list has three editions: 2023 (43 threats cut to ten by voting), 2025 and 2026, the first with incident data (7,714 incidents collected, 6,639 sorted; the vote counts for three quarters, the data for one). The same id can be another entry in another edition, LLM03 for one, so a finding names its edition: LLM03:2026."
+    nl: "De lijst heeft drie edities: 2023 (43 bedreigingen, met stemmen teruggebracht tot tien), 2025 en 2026, de eerste met gegevens over incidenten (7714 verzameld, 6639 ingedeeld; de stemming telt voor driekwart, de gegevens voor een kwart). Dezelfde id kan in een andere editie een ander risico zijn, LLM03 bijvoorbeeld, dus een bevinding noemt de editie: LLM03:2026."
+  - en: "In 2026 the order is Prompt Injection, Sensitive Information Disclosure, Excessive Agency, Supply Chain, Data and Model Poisoning, Unbounded Consumption, Misinformation, Hidden Context Exposure (until 2025 System Prompt Leakage), Vector and Embedding Weaknesses and Improper Output Handling. From 2025 to 2026, Unbounded Consumption rose four places and Improper Output Handling fell five."
+    nl: "In 2026 is de volgorde *Prompt Injection*, *Sensitive Information Disclosure*, *Excessive Agency*, *Supply Chain*, *Data and Model Poisoning*, *Unbounded Consumption*, *Misinformation*, *Hidden Context Exposure* (tot 2025 *System Prompt Leakage*), *Vector and Embedding Weaknesses* en *Improper Output Handling*. Van 2025 naar 2026 ging *Unbounded Consumption* vier plaatsen omhoog en zakte *Improper Output Handling* vijf plaatsen."
+  - en: "On the incident data alone, prompt injection falls out of the top 10; OWASP keeps it first and calls the gap a defense effect: teams fight it hard, so fewer attacks show up in public databases. Its advice: build the system so that when the model is fooled, nothing important breaks."
+    nl: "Op de incidenten alleen valt prompt injection uit de top 10; OWASP houdt het op één en noemt het verschil een effect van verdediging: teams bestrijden het hard, dus komen er minder aanvallen in openbare databases terecht. Het advies: bouw het systeem zo dat er niets belangrijks kapotgaat als het model misleid wordt."
+  - en: "OWASP's Top 10 for Agentic Applications (December 2025) starts with ASI01 Agent Goal Hijack: text an agent reads can redirect its goal. An agent is still an app with an LLM, so its review uses both lists. In code: `where` finds Supply Chain as LLM03 in 2025 and LLM04 in 2026; `findings` gives 7 findings for the library's assistant."
+    nl: "De *Top 10 for Agentic Applications* van OWASP (december 2025) begint met ASI01 *Agent Goal Hijack*: tekst die een agent leest, kan het doel ombuigen. Een agent is nog steeds een app met een LLM, dus de review ervan gebruikt beide lijsten. In code: `where` vindt *Supply Chain* als LLM03 in 2025 en LLM04 in 2026; `findings` geeft 7 bevindingen voor de assistent van de bibliotheek."
+can_now:
+  - en: "look up an entry of OWASP's list for LLM applications in every edition"
+    nl: "een risico van de lijst van OWASP voor LLM-applicaties opzoeken in elke editie"
+    by: where
+  - en: "work out what rose and what fell between two editions of a list"
+    nl: "uitrekenen wat er steeg en wat er zakte tussen twee edities van een lijst"
+    by: moves
+  - en: "write the findings of a review with the id and edition of each risk"
+    nl: "de bevindingen van een review opschrijven met de id en editie van elk risico"
+    by: findings
+  - en: "say why OWASP keeps prompt injection first in 2026"
+    nl: "zeggen waarom OWASP prompt injection in 2026 op één houdt"
+    by: vote
+  - en: "choose the OWASP lists for an app with an LLM or for an agent"
+    nl: "de lijsten van OWASP kiezen voor een app met een LLM of voor een agent"
+    by: lists
+further_reading:
+  - en: "OWASP GenAI Security Project (2026), [*OWASP Top 10 for LLM Applications 2026*](https://genai.owasp.org/resource/owasp-genai-llm-top-10-2026/): the ten entries, how the vote and the incident data were weighed, and the letter on prompt injection"
+    nl: "OWASP GenAI Security Project (2026), [*OWASP Top 10 for LLM Applications 2026*](https://genai.owasp.org/resource/owasp-genai-llm-top-10-2026/): de tien risico's, hoe de stemming en de incidenten zijn gewogen, en de brief over prompt injection (in het Engels)"
+  - en: "OWASP (2024), [*OWASP Top 10 for LLM Applications 2025*](https://genai.owasp.org/resource/owasp-top-10-for-llm-applications-2025/): the ten entries, each with OWASP's own description"
+    nl: "OWASP (2024), [*OWASP Top 10 for LLM Applications 2025*](https://genai.owasp.org/resource/owasp-top-10-for-llm-applications-2025/): de tien risico's, elk met de beschrijving van OWASP zelf (in het Engels)"
+  - en: "OWASP GenAI Security Project (2025), [*OWASP Top 10 for Agentic Applications for 2026*](https://genai.owasp.org/resource/owasp-top-10-for-agentic-applications-for-2026/): the list for agents, from Agent Goal Hijack to Rogue Agents"
+    nl: "OWASP GenAI Security Project (2025), [*OWASP Top 10 for Agentic Applications for 2026*](https://genai.owasp.org/resource/owasp-top-10-for-agentic-applications-for-2026/): de lijst voor agents, van *Agent Goal Hijack* tot *Rogue Agents* (in het Engels)"
