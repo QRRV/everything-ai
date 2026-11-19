@@ -901,11 +901,12 @@ lessons:
   level: basis
   domein: verantwoord
   module: privacy
-  idea: "Contextual integrity says that information may flow where the rules of its context allow it; a language model can guess where someone lives or how old they are from a few posts, and an agent can pass on what was told in confidence."
+  idea: "Contextual integrity describes a flow of information with five parameters (sender, recipient, subject, information type and transmission principle) and asks whether it fits a norm of its context; a language model can guess where someone lives from a few posts that do not say it, and models told to respect privacy still pass on a secret told in confidence."
   covers: [privacybegrippen-en-de-avg#1, privacy-in-llm-producten-en-privacy-engineering#0]
   requires: [rai-what-is-privacy, start-prompt-basics, lm-what-is-a-language-model]
   introduces: [c:contextual-integrity, c:attribute-inference]
-  data: [model-qwen3-0.6b]
+  mentions: [c:benchmark, c:anonymization]
+  data: [model-qwen3-0.6b, course-privacy-qwen]
   ladder: [python]
   needs: any
 

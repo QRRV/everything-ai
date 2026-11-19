@@ -1,0 +1,43 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: rai-contextual-integrity
+minutes: 35
+title:
+  en: "Information in the wrong place"
+  nl: "Informatie op de verkeerde plek"
+goal:
+  en: "describe a flow of information with five parameters, check whether it fits the norms of its context, and count how often a language model guesses where someone lives from posts that do not say it."
+  nl: "een stroom van informatie beschrijven met vijf parameters, nagaan of die past bij de normen van de context, en tellen hoe vaak een language model raadt waar iemand woont uit berichten die dat niet zeggen."
+summary:
+  - en: "Contextual integrity (Helen Nissenbaum) ties privacy to the norms of a context: information may flow where those norms allow it. A flow has five parameters: sender, recipient, subject, information type and transmission principle, such as in confidence, with consent, or required by law."
+    nl: "Contextual integrity (Helen Nissenbaum) koppelt privacy aan de normen van een context: informatie mag stromen waar die normen het toestaan. Een stroom heeft vijf parameters: zender, ontvanger, betrokkene, soort informatie en transmission principle, zoals in vertrouwen, met toestemming, of omdat de wet het eist."
+  - en: "Sharing is not the problem as such: a flow that fits a norm loses no privacy. A flow that differs from every norm in even one parameter does not fit its context. A context is not a place."
+    nl: "Delen is op zich niet het probleem: een stroom die bij een norm past, kost geen privacy. Een stroom die van elke norm in ook maar één parameter verschilt, past niet bij de context. Een context is geen plek."
+  - en: "Attribute inference: a language model can guess what a text does not state. Staab and colleagues (2024) found that GPT-4's first guess was right for 85.5% of the labels, over eight kinds of attribute of Reddit writers; removing names and places from the comments brought GPT-4's right guesses for location down from about 86% to about 55%. In Nissenbaum's pregnancy example, the norms for what is inferred should travel down to the data it is inferred from; the course applies that to posts."
+    nl: "Attribute inference: een language model kan raden wat een tekst niet zegt. Staab en collega's (2024) vonden dat de eerste gok van GPT-4 in 85,5% van de labels goed was, over acht soorten eigenschappen van schrijvers op Reddit; namen en plaatsen uit de reacties weghalen bracht de goede gokken van GPT-4 voor de woonplaats terug van ongeveer 86% naar ongeveer 55%. In het voorbeeld van Nissenbaum over zwangerschap horen de normen voor wat afgeleid wordt mee te reizen naar de gegevens waaruit het afgeleid wordt; de course past dat toe op berichten."
+  - en: "In ConfAIde (Mireshghallah, Kim and colleagues, 2024), models told to consider privacy still passed on a secret: in at least one of 10 runs, GPT-4 in 22% of the scenarios and ChatGPT in 93%. ChatGPT could say that Y may not share, and leaked anyway. Asking to think step by step did not help."
+    nl: "In ConfAIde (Mireshghallah, Kim en collega's, 2024) vertelden modellen een geheim door, ook als ze de opdracht kregen rekening te houden met privacy: in minstens één van 10 runs GPT-4 in 22% van de scenario's en ChatGPT in 93%. ChatGPT kon zeggen dat Y het niet mag doorvertellen, en lekte toch. Vragen om stap voor stap na te denken hielp niet."
+can_now:
+  - en: "list the parameters in which a flow of information differs from a norm"
+    nl: "de parameters opsommen waarin een stroom van informatie verschilt van een norm"
+    by: differs
+  - en: "check whether a flow fits one of the norms of its context"
+    nl: "nagaan of een stroom past bij een van de normen van de context"
+    by: allowed
+  - en: "count how many of a model's guesses about writers are right"
+    nl: "tellen hoeveel gokken van een model over schrijvers goed zijn"
+    by: hits
+  - en: "say which norms govern data that something private can be inferred from"
+    nl: "zeggen welke normen gelden voor gegevens waaruit iets persoonlijks af te leiden is"
+    by: chain
+  - en: "tell knowing a privacy rule apart from following it"
+    nl: "het verschil zien tussen een privacyregel kennen en hem volgen"
+    by: rule
+further_reading:
+  - en: "Helen Nissenbaum (2019), [*Contextual Integrity Up and Down the Data Food Chain*](https://nissenbaum.tech.cornell.edu/papers/Contextual%20Integrity%20Up%20and%20Down.pdf), Theoretical Inquiries in Law 20(1): the five parameters, and norms for what is inferred"
+    nl: "Helen Nissenbaum (2019), [*Contextual Integrity Up and Down the Data Food Chain*](https://nissenbaum.tech.cornell.edu/papers/Contextual%20Integrity%20Up%20and%20Down.pdf), Theoretical Inquiries in Law 20(1): de vijf parameters, en normen voor wat afgeleid wordt (in het Engels)"
+  - en: "Robin Staab, Mark Vero, Mislav Balunović and Martin Vechev (2024), [*Beyond Memorization: Violating Privacy Via Inference with Large Language Models*](https://arxiv.org/abs/2310.07298), ICLR 2024"
+    nl: "Robin Staab, Mark Vero, Mislav Balunović en Martin Vechev (2024), [*Beyond Memorization: Violating Privacy Via Inference with Large Language Models*](https://arxiv.org/abs/2310.07298), ICLR 2024 (in het Engels)"
+  - en: "Niloofar Mireshghallah, Hyunwoo Kim and colleagues (2024), [*Can LLMs Keep a Secret? Testing Privacy Implications of Language Models via Contextual Integrity Theory*](https://arxiv.org/abs/2310.17884), ICLR 2024: the ConfAIde benchmark"
+    nl: "Niloofar Mireshghallah, Hyunwoo Kim en collega's (2024), [*Can LLMs Keep a Secret? Testing Privacy Implications of Language Models via Contextual Integrity Theory*](https://arxiv.org/abs/2310.17884), ICLR 2024: de benchmark ConfAIde (in het Engels)"
