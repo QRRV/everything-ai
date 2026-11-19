@@ -1,0 +1,45 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: rai-secret-sharing
+minutes: 35
+title:
+  en: "Computing on secrets"
+  nl: "Rekenen met geheimen"
+goal:
+  en: "split numbers into shares that look like random noise, add them up share by share without seeing a single number, and see why the random numbers must come from the whole range."
+  nl: "getallen verdelen in shares die op willekeurige ruis lijken, ze share voor share optellen zonder één getal te zien, en zien waarom de willekeurige getallen uit het hele bereik moeten komen."
+summary:
+  - en: "Secret sharing splits a secret into shares: in Shamir's (k, n) threshold scheme (1979), any k shares give it back and k − 1 say nothing. With additive sharing, all shares but one are random whole numbers from 0 to M − 1, and the last is the secret minus their sum, modulo M (`%`, the remainder after dividing by M). `share(4200, [71320, 8513], 100000)` gives `[71320, 8513, 24367]`."
+    nl: "Secret sharing verdeelt een geheim in shares: in het (k, n) threshold scheme van Shamir (1979) geven elke k shares het terug en zeggen k − 1 shares niets. Bij optellend delen zijn alle shares op één na willekeurige hele getallen van 0 tot M − 1, en is de laatste het geheim min hun som, modulo M (`%`, de rest bij deling door M). `share(4200, [71320, 8513], 100000)` geeft `[71320, 8513, 24367]`."
+  - en: "All shares added up, modulo M, give the secret back; one share, or any n − 1 of them, is just random numbers, but only when the random numbers come from the whole range: with one random number from 0 to 999, the last share lies at most 999 below the secret, round the clock."
+    nl: "Alle shares opgeteld, modulo M, geven het geheim terug; één share, of elke n − 1 ervan, is niets dan willekeurige getallen, maar alleen als de willekeurige getallen uit het hele bereik komen: met één willekeurig getal van 0 tot 999 ligt de laatste share hoogstens 999 onder het geheim, de klok rond."
+  - en: "Shares can be added share by share: each party adds up the shares it holds, and together the totals give the sum of all secrets. Computing like that, without anyone seeing another's input, is secure multi-party computation (MPC). It hides the inputs, not what the result says, and it trusts honest-but-curious parties not to put their shares together. Boston's pay gap study (2015 to 2017) and an Estonian study of students and taxes (2015) used it."
+    nl: "Shares kun je share voor share optellen: elke partij telt de eigen shares op, en samen geven de totalen de som van alle geheimen. Zo rekenen zonder dat iemand de input van een ander ziet, heet secure multi-party computation (MPC). Het verbergt de input, niet wat de uitkomst zegt, en het vertrouwt erop dat honest-but-curious partijen hun shares niet samenleggen. Het onderzoek naar loonverschillen in Boston (2015 tot 2017) en een Estse studie naar studenten en belastingen (2015) gebruikten het."
+  - en: "The OECD (2023) calls such methods privacy-enhancing technologies (PETs), in four groups: data obfuscation, encrypted data processing (MPC, homomorphic encryption), federated and distributed analytics (federated learning) and data accountability tools (threshold secret sharing)."
+    nl: "De OECD (2023) noemt zulke methoden privacy-enhancing technologies (PET's), in vier groepen: data verhullen, versleuteld verwerken (MPC, homomorphic encryption), federated en gedistribueerde analyse (federated learning) en hulpmiddelen voor verantwoording (threshold secret sharing)."
+can_now:
+  - en: "split a secret into shares that add up to it modulo M"
+    nl: "een geheim verdelen in shares die er modulo M toe optellen"
+    by: share
+  - en: "put a secret back together from all its shares"
+    nl: "een geheim weer samenvoegen uit alle shares ervan"
+    by: reveal
+  - en: "compute a sum of secrets from the totals of the parties, without seeing a single secret"
+    nl: "een som van geheimen uitrekenen uit de totalen van de partijen, zonder één geheim te zien"
+    by: party-totals
+  - en: "say what the result of a secure computation still gives away"
+    nl: "zeggen wat de uitkomst van een veilige berekening nog verraadt"
+    by: two-companies
+  - en: "say whom secret sharing asks you to trust"
+    nl: "zeggen wie je bij secret sharing moet vertrouwen"
+    by: collude
+further_reading:
+  - en: "Adi Shamir (1979), [*How to Share a Secret*](https://web.mit.edu/6.857/OldStuff/Fall03/ref/Shamir-HowToShareASecret.pdf), Communications of the ACM: the cabinet of the eleven scientists and the (k, n) threshold scheme, in two pages"
+    nl: "Adi Shamir (1979), [*How to Share a Secret*](https://web.mit.edu/6.857/OldStuff/Fall03/ref/Shamir-HowToShareASecret.pdf), Communications of the ACM: de kast van de elf wetenschappers en het (k, n) threshold scheme, in twee bladzijden (in het Engels)"
+  - en: "David Evans, Vladimir Kolesnikov and Mike Rosulek (2018), [*A Pragmatic Introduction to Secure Multi-Party Computation*](https://securecomputation.org/docs/pragmaticmpc.pdf), NOW Publishers: secret sharing, who is trusted, and where MPC is used"
+    nl: "David Evans, Vladimir Kolesnikov en Mike Rosulek (2018), [*A Pragmatic Introduction to Secure Multi-Party Computation*](https://securecomputation.org/docs/pragmaticmpc.pdf), NOW Publishers: secret sharing, wie je vertrouwt, en waar MPC gebruikt wordt (in het Engels)"
+  - en: "Andrei Lapets, Frederick Jansen, Kinan Dak Albab et al. (2018), [*Accessible Privacy-Preserving Web-Based Data Analysis for Assessing and Addressing Economic Inequalities*](https://par.nsf.gov/servlets/purl/10061831), COMPASS: Web-MPC and the pay gap study in Boston"
+    nl: "Andrei Lapets, Frederick Jansen, Kinan Dak Albab e.a. (2018), [*Accessible Privacy-Preserving Web-Based Data Analysis for Assessing and Addressing Economic Inequalities*](https://par.nsf.gov/servlets/purl/10061831), COMPASS: Web-MPC en het onderzoek naar loonverschillen in Boston (in het Engels)"
+  - en: "OECD (2023), [*Emerging Privacy Enhancing Technologies: Current Regulatory and Policy Approaches*](https://www.oecd.org/content/dam/oecd/en/publications/reports/2023/03/emerging-privacy-enhancing-technologies_a6bdf3cb/bf121be4-en.pdf), OECD Digital Economy Papers No. 351: the four groups of PETs and what each is for"
+    nl: "OECD (2023), [*Emerging Privacy Enhancing Technologies: Current Regulatory and Policy Approaches*](https://www.oecd.org/content/dam/oecd/en/publications/reports/2023/03/emerging-privacy-enhancing-technologies_a6bdf3cb/bf121be4-en.pdf), OECD Digital Economy Papers No. 351: de vier groepen PET's en waar elk voor dient (in het Engels)"

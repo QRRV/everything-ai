@@ -982,10 +982,11 @@ lessons:
   level: basis
   domein: verantwoord
   module: privacy
-  idea: "Split a number into random shares that add up to it, and several parties can compute a sum without anyone seeing another's number: secure multiparty computation. Homomorphic encryption and zero-knowledge proofs do related things with cryptography."
+  idea: "Split a number into random shares that add up to it modulo M, and several parties can compute a sum without anyone seeing another's number: secure multi-party computation. The random numbers must come from the whole range, the result still says what it says, and the parties must not put their shares together. MPC, federated learning and homomorphic encryption are privacy-enhancing technologies."
   covers: [federated-learning-en-pets#3]
   requires: [rai-federated-learning]
   introduces: [c:privacy-enhancing-technology, c:secure-multi-party-computation]
+  mentions: [c:k-anonymity]
   data: []
   ladder: [python]
   needs: any
