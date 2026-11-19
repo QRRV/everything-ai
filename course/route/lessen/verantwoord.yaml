@@ -1057,6 +1057,7 @@ lessons:
   covers: [dreigingsmodellering#0]
   requires: [py-recursion, py-dicts]
   introduces: [c:threat-model, c:attack-tree, c:stride-threat-model, c:availability, c:cia-triad]
+  mentions: [c:sql-injection]
   warns: [stride]
   data: []
   ladder: [python]

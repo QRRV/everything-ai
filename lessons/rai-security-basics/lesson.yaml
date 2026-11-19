@@ -1,0 +1,47 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: rai-security-basics
+minutes: 35
+title:
+  en: "Thinking like an attacker"
+  nl: "Denken als een aanvaller"
+goal:
+  en: "list what can go wrong in a system with STRIDE, draw an attacker's goal as an attack tree, and compute the cheapest attack and its steps."
+  nl: "met STRIDE opschrijven wat er in een systeem mis kan gaan, het doel van een aanvaller tekenen als aanvalsboom, en de goedkoopste aanval en de stappen ervan uitrekenen."
+summary:
+  - en: "Security protects three things above all, which FIPS 199, after US law, calls security objectives: confidentiality, integrity and availability, together the CIA triad. In 1975, Saltzer and Schroeder wrote that security specialists sort security violations into the same three kinds, and warned that the intruder may be an otherwise legitimate user."
+    nl: "Security beschermt vooral drie dingen, die FIPS 199, naar de Amerikaanse wet, doelen van beveiliging noemt: vertrouwelijkheid, integriteit en beschikbaarheid, samen de CIA-triade. Saltzer en Schroeder schreven in 1975 al dat specialisten in security schendingen van beveiliging in dezelfde drie soorten indelen, en waarschuwden dat de indringer ook een gewone, bevoegde gebruiker kan zijn."
+  - en: "STRIDE, from a 1999 note by Kohnfelder and Garg at Microsoft, lists six kinds of threats, now usually written spoofing, tampering, repudiation, information disclosure, denial of service and elevation of privilege. A 2006 article maps each to the property it goes against: the CIA triad plus authentication, non-repudiation and authorization."
+    nl: "STRIDE, uit een notitie van Kohnfelder en Garg bij Microsoft uit 1999, noemt zes soorten dreigingen, nu meestal geschreven als spoofing, tampering, repudiation, information disclosure, denial of service en elevation of privilege. Een publicatie uit 2006 koppelt elke soort aan de eigenschap waar die tegen ingaat: de CIA-triade plus authenticatie, onweerlegbaarheid en autorisatie."
+  - en: "A threat model describes a system as an attacker would see it, so that you can defend it. An attack tree, described by Schneier in 1999, has the attacker's goal as its root: an OR node costs as much as its cheapest child, an AND node the sum of its children, so the root gives the cost of the cheapest attack."
+    nl: "Een dreigingsmodel beschrijft een systeem zoals een aanvaller het ziet, zodat je het kunt verdedigen. Een aanvalsboom, in 1999 beschreven door Schneier, heeft het doel van de aanvaller als wortel: een OR-node kost zoveel als het goedkoopste kind, een AND-node de som van de kinderen, zodat de wortel de kosten van de goedkoopste aanval geeft."
+  - en: "The library in code: `at_risk` counts the properties eight threats break, `cost` finds that reading the member file costs €500 at the cheapest, and `cheapest` gives its steps: guess the password, then phish the login code too. Each defense moves the attacker to the next cheapest way in: €550, €600, €1,150, €2,000."
+    nl: "De bibliotheek in code: `at_risk` telt welke eigenschappen acht dreigingen breken, `cost` vindt dat het ledenbestand lezen op zijn goedkoopst €500 kost, en `cheapest` geeft de stappen: het wachtwoord raden, en daarna ook de inlogcode phishen. Elke verdediging stuurt de aanvaller naar de volgende goedkoopste weg naar binnen: €550, €600, €1150, €2000."
+can_now:
+  - en: "count which security properties a list of threats breaks, with STRIDE"
+    nl: "met STRIDE tellen welke eigenschappen een lijst dreigingen breekt"
+    by: at-risk
+  - en: "compute what the cheapest attack in an attack tree costs"
+    nl: "uitrekenen wat de goedkoopste aanval in een aanvalsboom kost"
+    by: cost
+  - en: "find the steps of the cheapest attack in an attack tree"
+    nl: "de stappen van de goedkoopste aanval in een aanvalsboom vinden"
+    by: cheapest
+  - en: "say which of confidentiality, integrity and availability a threat breaks"
+    nl: "zeggen welke van vertrouwelijkheid, integriteit en beschikbaarheid een dreiging breekt"
+    by: integrity
+  - en: "say why the cheapest step is not always the cheapest attack"
+    nl: "zeggen waarom de goedkoopste stap niet altijd de goedkoopste aanval is"
+    by: and-node
+further_reading:
+  - en: "National Institute of Standards and Technology (2004), [*Standards for Security Categorization of Federal Information and Information Systems*](https://nvlpubs.nist.gov/nistpubs/FIPS/NIST.FIPS.199.pdf), FIPS PUB 199: the three security objectives and what losing each one means"
+    nl: "National Institute of Standards and Technology (2004), [*Standards for Security Categorization of Federal Information and Information Systems*](https://nvlpubs.nist.gov/nistpubs/FIPS/NIST.FIPS.199.pdf), FIPS PUB 199: de drie doelen van beveiliging en wat het betekent als je er een verliest (in het Engels)"
+  - en: "Loren Kohnfelder and Praerit Garg (1999), [*The threats to our products*](https://threatmodelingbook.com/files/microsoft/The-Threats-To-Our-Products.docx), Microsoft: the note that introduced STRIDE"
+    nl: "Loren Kohnfelder en Praerit Garg (1999), [*The threats to our products*](https://threatmodelingbook.com/files/microsoft/The-Threats-To-Our-Products.docx), Microsoft: de notitie waarin STRIDE begon (in het Engels)"
+  - en: "Shawn Hernan, Scott Lambert, Tomasz Ostwald and Adam Shostack (2006), [*Uncover Security Design Flaws Using The STRIDE Approach*](https://learn.microsoft.com/en-us/archive/msdn-magazine/2006/november/uncover-security-design-flaws-using-the-stride-approach), MSDN Magazine: each kind of threat with the property that guards against it"
+    nl: "Shawn Hernan, Scott Lambert, Tomasz Ostwald en Adam Shostack (2006), [*Uncover Security Design Flaws Using The STRIDE Approach*](https://learn.microsoft.com/en-us/archive/msdn-magazine/2006/november/uncover-security-design-flaws-using-the-stride-approach), MSDN Magazine: elke soort dreiging met de eigenschap die ertegen beschermt (in het Engels)"
+  - en: "Bruce Schneier (1999), [*Attack Trees*](https://www.schneier.com/academic/archives/1999/12/attack_trees.html), Dr. Dobb's Journal: attack trees, with the safe and its costs"
+    nl: "Bruce Schneier (1999), [*Attack Trees*](https://www.schneier.com/academic/archives/1999/12/attack_trees.html), Dr. Dobb's Journal: aanvalsbomen, met de kluis en wat elke aanval kost (in het Engels)"
+  - en: "[*Threat Modeling Manifesto*](https://www.threatmodelingmanifesto.org/) (2020): what threat modeling is, and its four questions"
+    nl: "[*Threat Modeling Manifesto*](https://www.threatmodelingmanifesto.org/) (2020): wat threat modeling is, en de vier vragen (in het Engels)"
