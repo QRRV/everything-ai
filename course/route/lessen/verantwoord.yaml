@@ -1194,11 +1194,11 @@ lessons:
   level: basis
   domein: verantwoord
   module: security
-  idea: "An API key in your code ends up on GitHub, and a model server listening on every address is open to your whole network; keep keys in the environment, listen on 127.0.0.1, and ask for a token."
+  idea: "An API key in your code ends up on GitHub, and a model server listening on every address is open to your whole network; keep keys in environment variables, listen on 127.0.0.1, and ask for a token."
   covers: [d24-llm-applicatiebeveiliging#3]
   requires: [rai-classic-vulnerabilities, build-batch-keys-costs]
   introduces: [c:attack-surface, c:secret-scanning]
-  mentions: [c:environment]
+  mentions: [c:ai-service]
   data: []
   ladder: [python]
   needs: any

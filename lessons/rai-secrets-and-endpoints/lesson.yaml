@@ -1,0 +1,47 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: rai-secrets-and-endpoints
+minutes: 35
+title:
+  en: "Keys and open doors"
+  nl: "Sleutels en open deuren"
+goal:
+  en: "find the two keys in the history of a made-up shop repository that its latest version no longer shows, write a scanner for the form of a key, tell which addresses keep a server on its own computer, and write a token check that lets nobody in when the server has no token."
+  nl: "de twee keys vinden in de geschiedenis van een verzonnen winkelrepository die de nieuwste versie niet meer laat zien, een scanner schrijven voor de vorm van een key, zeggen welke adressen een server op zijn eigen computer houden, en een controle op een token schrijven die niemand binnenlaat als de server geen token heeft."
+summary:
+  - en: "The attack surface is, as NIST defines it, the set of points at the edge of a system where an attacker can try to get in, cause an effect or get data out. Besides the text a model reads, an LLM app has keys in its code and the server it runs on; OWASP advises counting secrets as part of the attack surface in a threat model."
+    nl: "Het aanvalsoppervlak is volgens NIST de verzameling punten aan de rand van een systeem waar een aanvaller kan proberen binnen te komen, iets te veroorzaken of gegevens naar buiten te halen. Naast de tekst die een model leest, heeft een LLM-app keys in zijn code en de server waarop hij draait; OWASP raadt aan geheimen mee te nemen als deel van het aanvalsoppervlak in een dreigingsmodel."
+  - en: "Keys leak from code a lot: Meli, McNiece and Reaves found 201,642 different secrets in over 100,000 public repositories on GitHub in 2017 and 2018, and GitGuardian counted 28.65 million new secrets in public commits in 2025, while the secrets for AI services it found rose by 81%, to 1,275,105. The Twelve-Factor App keeps config in environment variables; OWASP warns that those are generally readable by all processes and may end up in logs, and recommends them only when other methods are not possible."
+    nl: "Keys lekken vaak uit code: Meli, McNiece en Reaves vonden in 2017 en 2018 201.642 verschillende geheimen in meer dan 100.000 openbare repository's op GitHub, en GitGuardian telde in 2025 28,65 miljoen nieuwe geheimen in openbare commits, terwijl de geheimen van AI-diensten die het vond met 81% stegen, naar 1.275.105. *The Twelve-Factor App* zet configuratie in environment variables; OWASP waarschuwt dat die meestal te lezen zijn voor alle processen en in logs terecht kunnen komen, en raadt ze alleen aan als andere manieren niet kunnen."
+  - en: "Secret scanning searches code and its history for the forms of keys, passwords and tokens; GitHub's scans the whole history of all branches, and push protection blocks a push with a secret before it lands. A commit that removes a key leaves it in the history, so revoke a key that was ever pushed, then make a new one."
+    nl: "Secret scanning doorzoekt code en de geschiedenis ervan op de vormen van keys, wachtwoorden en tokens; die van GitHub doorzoekt de hele geschiedenis van alle branches, en push protection houdt een push met een geheim erin tegen voordat hij binnenkomt. Een commit die een key weghaalt, laat hem in de geschiedenis staan, dus trek een key in die ooit gepusht is, en maak dan een nieuwe."
+  - en: "Addresses that start with 127 belong to the computer itself (RFC 1122), so a server there can be reached only from that computer; 0.0.0.0, or the empty text in Python, means every address. Ollama listens on 127.0.0.1 by default; Wiz wrote in 2024 that it has no authentication of its own, and found over 1,000 exposed servers of it, and Cisco found 1,139 in 2025, of which 214 answered with a model."
+    nl: "Adressen die met 127 beginnen, horen bij de computer zelf (RFC 1122), dus een server daar is alleen vanaf die computer te bereiken; 0.0.0.0, of de lege tekst in Python, betekent elk adres. Ollama luistert standaard op 127.0.0.1; Wiz schreef in 2024 dat het zelf geen authenticatie heeft, en vond er meer dan 1000 die open stonden, en Cisco in 2025 1139, waarvan er 214 antwoordden met een model."
+  - en: "In code: `looks_like_key` wants `pp_live_` and then exactly 24 letters and digits (`len(rest) == 24 and rest.isalnum()`); `local_only` wants `localhost`, `::1` or an address that starts with `127.`; `authorized` compares the header with `\"Bearer \" + key`, and first returns False when the server has no token, so one forgotten setting does not open the door."
+    nl: "In code: `looks_like_key` wil `pp_live_` en dan precies 24 letters en cijfers (`len(rest) == 24 and rest.isalnum()`); `local_only` wil `localhost`, `::1` of een adres dat met `127.` begint; `authorized` vergelijkt de header met `\"Bearer \" + key`, en geeft eerst False terug als de server geen token heeft, zodat één vergeten instelling de deur niet openzet."
+can_now:
+  - en: "write a scanner that finds the form of a key, and say what it misses"
+    nl: "een scanner schrijven die de vorm van een key vindt, en zeggen wat hij mist"
+    by: looks-like-key
+  - en: "tell from its address who can reach a server"
+    nl: "aan het adres zien wie een server kan bereiken"
+    by: local-only
+  - en: "write a token check that lets nobody in when the token is missing"
+    nl: "een controle op een token schrijven die niemand binnenlaat als het token ontbreekt"
+    by: authorized
+  - en: "say who can still reach a server on 127.0.0.1"
+    nl: "zeggen wie een server op 127.0.0.1 nog kan bereiken"
+    by: reach
+  - en: "say what risk a key in an environment variable still has"
+    nl: "zeggen welk risico een key in een environment variable nog heeft"
+    by: environment
+further_reading:
+  - en: "Michael Meli, Matthew R. McNiece and Bradley Reaves (2019), [*How Bad Can It Git? Characterizing Secret Leakage in Public GitHub Repositories*](https://www.ndss-symposium.org/wp-content/uploads/2019/02/ndss2019_04B-3_Meli_paper.pdf), NDSS: how many keys public GitHub shows, how fast, and for how long"
+    nl: "Michael Meli, Matthew R. McNiece en Bradley Reaves (2019), [*How Bad Can It Git? Characterizing Secret Leakage in Public GitHub Repositories*](https://www.ndss-symposium.org/wp-content/uploads/2019/02/ndss2019_04B-3_Meli_paper.pdf), NDSS: hoeveel keys openbaar GitHub laat zien, hoe snel, en hoe lang (in het Engels)"
+  - en: "OWASP Cheat Sheet Series, [*Secrets Management Cheat Sheet*](https://cheatsheetseries.owasp.org/cheatsheets/Secrets_Management_Cheat_Sheet.html): where secrets should live, and what to do when one leaks"
+    nl: "OWASP Cheat Sheet Series, [*Secrets Management Cheat Sheet*](https://cheatsheetseries.owasp.org/cheatsheets/Secrets_Management_Cheat_Sheet.html): waar geheimen horen, en wat je doet als er een lekt (in het Engels)"
+  - en: "GitHub Docs, [*Secret scanning*](https://docs.github.com/en/code-security/concepts/secret-security/secret-scanning): what GitHub scans, and what happens when it finds a secret"
+    nl: "GitHub Docs, [*Secret scanning*](https://docs.github.com/en/code-security/concepts/secret-security/secret-scanning): wat GitHub doorzoekt, en wat er gebeurt als het een geheim vindt (in het Engels)"
+  - en: "Giannis Tziakouris and Elio Biasiotto (2025), [*Detecting Exposed LLM Servers: A Shodan Case Study on Ollama*](https://blogs.cisco.com/security/detecting-exposed-llm-servers-shodan-case-study-on-ollama), Cisco Blogs: how open model servers were found, and the advice that follows"
+    nl: "Giannis Tziakouris en Elio Biasiotto (2025), [*Detecting Exposed LLM Servers: A Shodan Case Study on Ollama*](https://blogs.cisco.com/security/detecting-exposed-llm-servers-shodan-case-study-on-ollama), Cisco Blogs: hoe open modelservers werden gevonden, en het advies dat volgt (in het Engels)"
