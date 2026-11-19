@@ -1,0 +1,47 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: rai-k-anonymity
+minutes: 35
+title:
+  en: "Hiding in a group: k-anonymity"
+  nl: "Verstoppen in een groep: k-anonimiteit"
+goal:
+  en: "measure for which k a table is k-anonymous, coarsen ages into bands so that the groups grow, and measure whether the people in a group share their secret."
+  nl: "meten voor welke k een tabel k-anoniem is, leeftijden grover maken tot banden zodat de groepen groeien, en meten of de mensen in een groep hun geheim delen."
+summary:
+  - en: "A quasi-identifier is a set of facts that someone could know from elsewhere, such as age, ZIP code or sex. A table is k-anonymous when every combination of their values occurs in at least k rows (Sweeney 2002): whoever knows only those facts about someone finds at least k rows that fit."
+    nl: "Een quasi-identifier is een set feiten die iemand ook van elders kan weten, zoals leeftijd, postcode of geslacht. Een tabel is k-anoniem als elke combinatie van hun waarden in minstens k rijen voorkomt (Sweeney 2002): wie alleen die feiten over iemand kent, vindt minstens k rijen die passen."
+  - en: "You get there by generalization, such as replacing an age with its ten years, and by suppression, leaving values or rows out. Both cost something: in a study in Estonia, 3-anonymity caused a loss of 10 to 30% of the sample, depending on the group. On UCI Adult, making the table 5-anonymous on age, sex, race, marital status and education by only leaving rows out would drop 9,810 of its 48,842 people."
+    nl: "Je komt er door generaliseren, zoals een leeftijd vervangen door de tien jaar waarin hij valt, en door weglaten, van waarden of rijen. Allebei kost het iets: in een studie in Estland kostte 3-anonimiteit 10 tot 30% van de steekproef, afhankelijk van de groep. In UCI Adult zou de tabel 5-anoniem maken op leeftijd, geslacht, ras, burgerlijke staat en opleiding door alleen rijen weg te laten 9810 van de 48.842 mensen kosten."
+  - en: "k-anonymity does not stop the homogeneity attack: when all rows of a group share their secret, it is known without finding the row (Machanavajjhala et al. 2006). l-diversity asks for at least l well-represented secret values in every group; in the simplest reading, at least l different values."
+    nl: "k-anonimiteit houdt de homogeneity attack niet tegen: als alle rijen van een groep hun geheim delen, is het bekend zonder dat je de rij vindt (Machanavajjhala e.a. 2006). l-diversity vraagt om minstens l goed vertegenwoordigde geheime waarden in elke groep; in de eenvoudigste lezing minstens l verschillende waarden."
+  - en: "Different values can still give the secret away: 49 positive and 1 negative is 2-diverse, yet points to positive (Li, Li and Venkatasubramanian 2007). A bigger k does not end the homogeneity attack either: on UCI Adult it was still there at k = 50 (Machanavajjhala et al.)."
+    nl: "Verschillende waarden kunnen het geheim toch verraden: 49 positief en 1 negatief is 2-divers, en wijst toch naar positief (Li, Li en Venkatasubramanian 2007). Een grotere k maakt evenmin een eind aan de homogeneity attack: op UCI Adult was hij er bij k = 50 nog (Machanavajjhala e.a.)."
+can_now:
+  - en: "measure for which k a table is k-anonymous on a set of columns"
+    nl: "meten voor welke k een tabel k-anoniem is op een set kolommen"
+    by: k_of
+  - en: "coarsen an age into the ten years it falls in"
+    nl: "een leeftijd grover maken tot de tien jaar waarin hij valt"
+    by: band
+  - en: "measure the smallest number of different secret values in a group"
+    nl: "het kleinste aantal verschillende geheime waarden in een groep meten"
+    by: l_of
+  - en: "say why a bigger k does not stop the homogeneity attack"
+    nl: "zeggen waarom een grotere k de homogeneity attack niet tegenhoudt"
+    by: bigger-k
+  - en: "say why two different secret values can still give a secret away"
+    nl: "zeggen waarom twee verschillende geheime waarden een geheim toch kunnen verraden"
+    by: skewness
+further_reading:
+  - en: "Latanya Sweeney (2002), [*k-anonymity: a model for protecting privacy*](https://dataprivacylab.org/dataprivacy/projects/kanonymity/kanonymity.pdf), International Journal on Uncertainty, Fuzziness and Knowledge-based Systems 10(5): the definition, and three attacks it does not stop"
+    nl: "Latanya Sweeney (2002), [*k-anonymity: a model for protecting privacy*](https://dataprivacylab.org/dataprivacy/projects/kanonymity/kanonymity.pdf), International Journal on Uncertainty, Fuzziness and Knowledge-based Systems 10(5): de definitie, en drie aanvallen die ze niet tegenhoudt (in het Engels)"
+  - en: "Latanya Sweeney (2002), [*Achieving k-anonymity privacy protection using generalization and suppression*](https://dataprivacylab.org/dataprivacy/projects/kanonymity/kanonymity2.pdf), the same journal, 10(5): generalization and suppression, with the ZIP code example"
+    nl: "Latanya Sweeney (2002), [*Achieving k-anonymity privacy protection using generalization and suppression*](https://dataprivacylab.org/dataprivacy/projects/kanonymity/kanonymity2.pdf), hetzelfde tijdschrift, 10(5): generaliseren en weglaten, met het voorbeeld van de postcodes (in het Engels)"
+  - en: "Ashwin Machanavajjhala, Johannes Gehrke, Daniel Kifer and Muthuramakrishnan Venkitasubramaniam (2006), [*ℓ-Diversity: Privacy Beyond k-Anonymity*](https://personal.utdallas.edu/~muratk/courses/privacy08f_files/ldiversity.pdf), ICDE 2006: the homogeneity attack, and the experiments on UCI Adult"
+    nl: "Ashwin Machanavajjhala, Johannes Gehrke, Daniel Kifer en Muthuramakrishnan Venkitasubramaniam (2006), [*ℓ-Diversity: Privacy Beyond k-Anonymity*](https://personal.utdallas.edu/~muratk/courses/privacy08f_files/ldiversity.pdf), ICDE 2006: de homogeneity attack, en de experimenten op UCI Adult (in het Engels)"
+  - en: "Ashwin Machanavajjhala, Daniel Kifer, Johannes Gehrke and Muthuramakrishnan Venkitasubramaniam (2007), [*ℓ-Diversity: Privacy Beyond k-Anonymity*](https://www.cs.rochester.edu/u/muthuv/ldiversity-TKDD.pdf), the longer version for ACM Transactions on Knowledge Discovery from Data: the experiments with k = 2, 5 and 50 of Exercise 4"
+    nl: "Ashwin Machanavajjhala, Daniel Kifer, Johannes Gehrke en Muthuramakrishnan Venkitasubramaniam (2007), [*ℓ-Diversity: Privacy Beyond k-Anonymity*](https://www.cs.rochester.edu/u/muthuv/ldiversity-TKDD.pdf), de langere versie voor ACM Transactions on Knowledge Discovery from Data: de experimenten met k = 2, 5 en 50 van Oefening 4 (in het Engels)"
+  - en: "Ninghui Li, Tiancheng Li and Suresh Venkatasubramanian (2007), [*t-Closeness: Privacy Beyond k-Anonymity and ℓ-Diversity*](https://www.cs.purdue.edu/homes/ninghui/papers/t_closeness_icde07.pdf), ICDE 2007: the skewness and similarity attacks"
+    nl: "Ninghui Li, Tiancheng Li en Suresh Venkatasubramanian (2007), [*t-Closeness: Privacy Beyond k-Anonymity and ℓ-Diversity*](https://www.cs.purdue.edu/homes/ninghui/papers/t_closeness_icde07.pdf), ICDE 2007: de skewness attack en de similarity attack (in het Engels)"

@@ -929,10 +929,10 @@ lessons:
   level: basis
   domein: verantwoord
   module: privacy
-  idea: "A table is k-anonymous when every combination of age, place and other quasi-identifiers occurs at least k times; you get there by coarsening values, and l-diversity adds that a group must not all share the same secret."
+  idea: "A table is k-anonymous when every combination of age, place and other quasi-identifiers occurs at least k times; you get there by coarsening values or leaving rows out, and l-diversity adds that the rows of a group must not all share the same secret."
   covers: [anonimisering-en-heridentificatie#1]
   requires: [rai-pseudonymization, data-groupby]
-  introduces: [c:k-anonymity, c:quasi-identifier, c:l-diversity]
+  introduces: [c:k-anonymity, c:quasi-identifier, c:l-diversity, py:nunique]
   data: [uci-adult]
   ladder: [python, numpy]
   needs: any
