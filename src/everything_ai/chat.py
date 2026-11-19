@@ -411,14 +411,15 @@ def answer_picture(text: str, note: str, title: str) -> str:
     return yours.figure(title, body, alt=title)
 
 
-def demo(messages: list, show, words: dict, lang: str, max_tokens: int = 256, seed: int = 0, note=None) -> str:
+def demo(messages: list, show, words: dict, lang: str, max_tokens: int = 256, seed: int = 0, note=None, **settings) -> str:
     """A lesson's demo: `messages` to the chat model, sampled with `seed`, with the answer so far shown by `show(html)`
     at most five times a second. `words` has "title", "loading", "writing", "done" (with {tokens} and {seconds}),
     "load" and "memory", in the lesson's language; `note(text)`, when given, adds a sentence of the lesson's own about
-    the answer after "done". The picture of the answer, or the message of what went wrong."""
+    the answer after "done". Other `settings` of Chat.answer, such as `temperature` or `stop`, go to the model as
+    they are. The picture of the answer, or the message of what went wrong."""
     import html
     a = answer_live(messages, lambda text: show(answer_picture(text or "", words["loading"] if text is None else words["writing"], words["title"])),
-                    max_tokens=max_tokens, seed=seed)
+                    max_tokens=max_tokens, seed=seed, **settings)
     if isinstance(a, str):
         return f'<p><em>{html.escape(words[a])}</em></p>'
     seconds = f"{a['seconds']:.1f}".replace(".", "," if lang == "nl" else ".")

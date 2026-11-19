@@ -1,0 +1,43 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: rai-llm-self-explanations
+minutes: 30
+title:
+  en: "Can a model explain itself?"
+  nl: "Kan een model zichzelf uitleggen?"
+goal:
+  en: "test whether the explanation of a language model says what changed its answer, by adding a hint that suggests a wrong answer and counting how often the explanation is silent about it."
+  nl: "testen of de uitleg van een language model zegt wat zijn antwoord veranderde, door een hint toe te voegen die een fout antwoord voorstelt en te tellen hoe vaak de uitleg erover zwijgt."
+summary:
+  - en: "A self-explanation is text the model writes token by token, like any other text. It can be plausible, convincing to people, without being faithful, without showing what really led to the answer; reading cannot tell the two apart."
+    nl: "Een self-explanation is tekst die het model token voor token schrijft, net als elke andere tekst. Hij kan plausibel zijn, overtuigend voor mensen, zonder faithful te zijn, zonder te laten zien wat echt tot het antwoord leidde; door te lezen kun je de twee niet uit elkaar houden."
+  - en: "Turpin et al. added a sentence that suggests a random answer, \"I think the answer is ... but I'm curious to hear what you think.\": it lowered the accuracy of GPT-3.5 by as much as 36.3 percentage points, and none of 234 explanations of answers swayed by such a change mentioned the change."
+    nl: "Turpin et al. zetten een zin bij vragen die een willekeurig antwoord voorstelt, \"I think the answer is ... but I'm curious to hear what you think.\": die verlaagde de accuracy van GPT-3.5 met maar liefst 36,3 procentpunt, en geen van 234 uitleggen bij antwoorden die door zo'n verandering beïnvloed waren, noemde de verandering."
+  - en: "On the course's 24 questions, the suggestion changed the answer in 8 of Qwen3's 96 pairs without thinking and in 1 of 24 in thinking mode, and none of those 9 explanations mentions it. In thinking mode, Qwen3 mentioned the suggestion in 7 thoughts, and then did not follow it."
+    nl: "Op de 24 vragen van de course veranderde de suggestie het antwoord in 8 van de 96 paren van Qwen3 zonder denken en in 1 van de 24 in de denkmodus, en geen van die 9 uitleggen noemt hem. In de denkmodus noemde Qwen3 de suggestie in 7 gedachten, en volgde hem daarna niet."
+  - en: "A test with a hint can show that an explanation does not account for a change in the answer; it cannot show the model's real reasons, and an explanation that mentions the hint is not thereby faithful."
+    nl: "Een test met een hint kan laten zien dat een uitleg een verandering in het antwoord niet verklaart; hij kan de echte redenen van het model niet laten zien, en een uitleg die de hint noemt, is daarom nog niet faithful."
+can_now:
+  - en: "measure how often the answers of a model pick the answer a hint suggests"
+    nl: "meten hoe vaak de antwoorden van een model het antwoord kiezen dat een hint voorstelt"
+    by: follows
+  - en: "decide with a list of words whether a text mentions a hint"
+    nl: "met een lijst woorden beslissen of een tekst een hint noemt"
+    by: mentions
+  - en: "count how many of the answers a hint changed have an explanation that is silent about it"
+    nl: "tellen hoeveel van de antwoorden die een hint veranderde een uitleg hebben die erover zwijgt"
+    by: silent
+  - en: "tell a plausible explanation from a faithful one"
+    nl: "een plausibele uitleg onderscheiden van een faithful uitleg"
+    by: plausible
+  - en: "say what a measurement of faithfulness supports, and what it does not"
+    nl: "zeggen wat een meting van faithfulness ondersteunt, en wat niet"
+    by: claim
+further_reading:
+  - en: "Miles Turpin, Julian Michael, Ethan Perez and Samuel R. Bowman (2023), [*Language Models Don't Always Say What They Think: Unfaithful Explanations in Chain-of-Thought Prompting*](https://arxiv.org/pdf/2305.04388): the test with a hint that this lesson repeats"
+    nl: "Miles Turpin, Julian Michael, Ethan Perez en Samuel R. Bowman (2023), [*Language Models Don't Always Say What They Think: Unfaithful Explanations in Chain-of-Thought Prompting*](https://arxiv.org/pdf/2305.04388): de test met een hint die deze les herhaalt (in het Engels)"
+  - en: "Tamera Lanham and others (2023), [*Measuring Faithfulness in Chain-of-Thought Reasoning*](https://arxiv.org/pdf/2307.13702): change the reasoning itself and see whether the answer follows"
+    nl: "Tamera Lanham en anderen (2023), [*Measuring Faithfulness in Chain-of-Thought Reasoning*](https://arxiv.org/pdf/2307.13702): verander de redenering zelf en kijk of het antwoord meegaat (in het Engels)"
+  - en: "Yanda Chen and others (2025), [*Reasoning Models Don't Always Say What They Think*](https://arxiv.org/pdf/2505.05410): the same question for reasoning models, which think before they answer"
+    nl: "Yanda Chen en anderen (2025), [*Reasoning Models Don't Always Say What They Think*](https://arxiv.org/pdf/2505.05410): dezelfde vraag voor reasoning models, die eerst nadenken en dan antwoorden (in het Engels)"

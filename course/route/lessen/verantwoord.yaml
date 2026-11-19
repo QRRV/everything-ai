@@ -848,8 +848,8 @@ lessons:
   covers: [uitlegbaarheid-voor-llms#0]
   requires: [rai-kinds-of-explanation, start-prompt-basics, lm-what-is-a-language-model]
   introduces: [c:self-explanation]
-  mentions: [c:faithfulness]
-  data: [model-qwen3-0.6b]
+  mentions: [c:faithfulness, c:counterfactual-explanation, c:greedy-decoding, c:reasoning-model]
+  data: [model-qwen3-0.6b, course-explain-qwen]
   ladder: [python]
   needs: any
 
