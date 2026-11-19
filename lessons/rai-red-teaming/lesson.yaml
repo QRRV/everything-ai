@@ -1,0 +1,47 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: rai-red-teaming
+minutes: 35
+title:
+  en: "Red teaming"
+  nl: "Red teaming"
+goal:
+  en: "count how many different test cases an attacker model wrote, find the test cases that made the target give its secret away, measure how often a judge model is wrong, and say what red teaming shows and where a weak spot you find belongs."
+  nl: "tellen hoeveel verschillende testgevallen een aanvallend model schreef, de testgevallen vinden waardoor het doelwit zijn geheim prijsgaf, meten hoe vaak een judge-model het mis heeft, en zeggen wat red teaming laat zien en waar een zwakke plek die je vindt naartoe moet."
+summary:
+  - en: "Red teaming is attacking your own system the way an attacker would, to find its weak spots before others do. By hand, 324 crowdworkers wrote 38,961 attacks for Anthropic (Ganguli et al., 2022), and the raters agreed little on what was harmful; the authors call the space of possible harms \"unknown and unbounded\"."
+    nl: "Red teaming is je eigen systeem aanvallen zoals een aanvaller dat zou doen, om de zwakke plekken te vinden voordat anderen dat doen. Met de hand schreven 324 crowdworkers 38.961 aanvallen voor Anthropic (Ganguli et al., 2022), en de beoordelaars waren het weinig eens over wat schadelijk was; de auteurs noemen de ruimte van mogelijke schade onbekend en onbegrensd."
+  - en: "Automated red teaming lets a model attack: an attacker model writes test cases, the target answers them, and a judge finds the failures (Perez et al., 2022: half a million test cases, offensive replies 3.7% of the time). As the attacker, Qwen3-0.6B wrote 30 test cases, 27 different; 88 of the target's 150 answers held the staff code, and 23 test cases got it out at least once."
+    nl: "Bij automated red teaming valt een model aan: een aanvallend model schrijft testgevallen, het doelwit beantwoordt ze, en een judge vindt de testgevallen waarbij het doelwit faalde (Perez et al., 2022: een half miljoen testgevallen, aanstootgevende antwoorden in 3,7% van de gevallen). Als aanvaller schreef Qwen3-0.6B 30 testgevallen, 27 verschillende; 88 van de 150 antwoorden van het doelwit bevatten de personeelscode, en 23 testgevallen kregen hem er minstens één keer uit."
+  - en: "A rate is only as good as its judge: Qwen3 as the judge, without the code, said no to 14 answers with the code, 12 of them with the word *secret*, and yes to 5 without it, so it counted 79 leaks where `leaked` counted 88. A run that finds nothing shows only that its test cases found nothing."
+    nl: "Een telling is zo goed als de judge die telt: Qwen3 als judge, zonder de code, zei nee bij 14 antwoorden met de code, 12 daarvan met het woord *secret*, en ja bij 5 zonder de code, en telde zo 79 lekken waar `leaked` er 88 telde. Een run die niets vindt, laat alleen zien dat zijn testgevallen niets vonden."
+  - en: "A bug bounty pays outsiders for security flaws under fixed rules; Google's rules of 2023 leave out jailbreaks in your own session. A bias bounty does the same for harmful bias, as Twitter's did for its image cropping in 2021. A weak spot in someone else's system goes to its maker first: responsible disclosure, which CERT and the Dutch NCSC call coordinated vulnerability disclosure."
+    nl: "Een bug bounty betaalt buitenstaanders voor beveiligingsfouten, onder vaste regels; de regels van Google uit 2023 laten jailbreaks in je eigen sessie buiten beschouwing. Een bias bounty doet hetzelfde voor schadelijke bias, zoals die van Twitter in 2021 voor het bijsnijden van foto's. Een zwakke plek in het systeem van een ander gaat eerst naar de maker: responsible disclosure, wat CERT en het Nederlandse NCSC coordinated vulnerability disclosure noemen."
+can_now:
+  - en: "count how many different test cases an attacker model wrote"
+    nl: "tellen hoeveel verschillende testgevallen een aanvallend model schreef"
+    by: distinct
+  - en: "find the test cases that made a target fail"
+    nl: "de testgevallen vinden waardoor een doelwit faalde"
+    by: failures
+  - en: "measure how often a judge model is wrong, against an exact check"
+    nl: "meten hoe vaak een judge-model het mis heeft, tegen een exacte check"
+    by: judge-errors
+  - en: "say what a red team run that finds nothing shows"
+    nl: "zeggen wat het betekent als een red team bij een run niets vindt"
+    by: nothing-found
+  - en: "say what to do with a weak spot in someone else's system"
+    nl: "zeggen wat je doet met een zwakke plek in het systeem van een ander"
+    by: report
+further_reading:
+  - en: "Deep Ganguli and colleagues (2022), [*Red Teaming Language Models to Reduce Harms: Methods, Scaling Behaviors, and Lessons Learned*](https://arxiv.org/abs/2209.07858), Anthropic: red teaming by hand, with 324 crowdworkers and 38,961 attacks"
+    nl: "Deep Ganguli en collega's (2022), [*Red Teaming Language Models to Reduce Harms: Methods, Scaling Behaviors, and Lessons Learned*](https://arxiv.org/abs/2209.07858), Anthropic: red teaming met de hand, met 324 crowdworkers en 38.961 aanvallen (in het Engels)"
+  - en: "Ethan Perez, Saffron Huang, Francis Song, Trevor Cai, Roman Ring, John Aslanides, Amelia Glaese, Nat McAleese and Geoffrey Irving (2022), [*Red Teaming Language Models with Language Models*](https://arxiv.org/abs/2202.03286): an attacker, a target and a judge, all language models"
+    nl: "Ethan Perez, Saffron Huang, Francis Song, Trevor Cai, Roman Ring, John Aslanides, Amelia Glaese, Nat McAleese en Geoffrey Irving (2022), [*Red Teaming Language Models with Language Models*](https://arxiv.org/abs/2202.03286): een aanvaller, een doelwit en een judge, allemaal language models (in het Engels)"
+  - en: "NIST (2024), [*Artificial Intelligence Risk Management Framework: Generative Artificial Intelligence Profile*](https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.600-1.pdf), NIST AI 600-1: what AI red teaming is, and who does it"
+    nl: "NIST (2024), [*Artificial Intelligence Risk Management Framework: Generative Artificial Intelligence Profile*](https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.600-1.pdf), NIST AI 600-1: wat AI red teaming is, en wie het doet (in het Engels)"
+  - en: "Allen D. Householder, Garret Wassermann, Art Manion and Chris King (2017), [*The CERT Guide to Coordinated Vulnerability Disclosure*](https://www.sei.cmu.edu/documents/1945/): how a weak spot travels from whoever finds it to whoever fixes it"
+    nl: "Allen D. Householder, Garret Wassermann, Art Manion en Chris King (2017), [*The CERT Guide to Coordinated Vulnerability Disclosure*](https://www.sei.cmu.edu/documents/1945/): hoe een zwakke plek van wie hem vindt bij wie hem herstelt komt (in het Engels)"
+  - en: "NCSC, [*Report a vulnerability*](https://www.ncsc.nl/en/services/report-a-vulnerability): how the Dutch National Cyber Security Centre takes a report"
+    nl: "NCSC, [*Kwetsbaarheid melden (CVD)*](https://www.ncsc.nl/producten-en-diensten/kwetsbaarheid-melden-cvd): hoe het Nationaal Cyber Security Centrum een melding aanneemt"

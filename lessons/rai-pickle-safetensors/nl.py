@@ -95,7 +95,7 @@ def guess_cell():
             "right": "Ongeveer 100",
             "many": "Ongeveer 10.000",
         },
-        reveal="**Ongeveer 100.** Volgens JFrog waren het tot dan toe zo'n 100 modellen, zonder de valse meldingen. Een ervan, baller423/goober2, is inmiddels verwijderd: wie het laadde, gaf de aanvaller een shell, een manier om commando's te typen op de computer die het bestand laadde. De code zat erin via de methode `__reduce__` van pickle, die deze les uitlegt. JFrog schreef ook dat de meeste van die payloads in werkelijkheid pogingen waren van onderzoekers en bug bounty-jagers om code te laten draaien, met een ogenschijnlijk legitiem doel.",
+        reveal="**Ongeveer 100.** Volgens JFrog waren het tot dan toe zo'n 100 modellen, zonder de valse meldingen. Een ervan, baller423/goober2, is inmiddels verwijderd: wie het laadde, gaf de aanvaller een shell, een manier om commando's te typen op de computer die het bestand laadde. De code zat erin via de methode `__reduce__` van pickle, die deze les uitlegt. JFrog schreef ook dat de meeste van die payloads in werkelijkheid pogingen waren van onderzoekers en bug bounty-jagers om code te laten draaien, met een ogenschijnlijk legitiem doel. Een bug bounty betaalt buitenstaanders die een beveiligingsfout melden; een latere les in deze module gaat erop in.",
     )
     guess_guess
     return (guess_guess,)

@@ -95,7 +95,7 @@ def guess_cell():
             "right": "About 100",
             "many": "About 10,000",
         },
-        reveal="**About 100.** In JFrog's words: \"Our analysis has pinpointed around 100 instances of such models to date\", a count that \"excludes false positives\". One of them, baller423/goober2, since deleted: \"The model's payload grants the attacker a shell on the compromised machine\", a way to type commands on the computer that loaded it. It was put in \"using the \\_\\_reduce\\_\\_ method of the pickle module\", which this lesson explains. JFrog also wrote that \"most 'malicious' payloads are actually attempts by researchers and/or bug bounty to get code execution for seemingly legitimate purposes.\"",
+        reveal="**About 100.** In JFrog's words: \"Our analysis has pinpointed around 100 instances of such models to date\", a count that \"excludes false positives\". One of them, baller423/goober2, since deleted: \"The model's payload grants the attacker a shell on the compromised machine\", a way to type commands on the computer that loaded it. It was put in \"using the \\_\\_reduce\\_\\_ method of the pickle module\", which this lesson explains. JFrog also wrote that \"most 'malicious' payloads are actually attempts by researchers and/or bug bounty to get code execution for seemingly legitimate purposes.\" A bug bounty pays outsiders who report a security flaw; a later lesson in this module covers it.",
     )
     guess_guess
     return (guess_guess,)

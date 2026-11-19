@@ -1212,7 +1212,7 @@ lessons:
   covers: [supply-chain-en-agent-security#0]
   requires: [rai-security-basics, torch-checkpoints]
   introduces: [c:insecure-deserialization, c:safetensors]
-  mentions: [c:utf-8]
+  mentions: [c:utf-8, c:bug-bounty]
   data: []
   ladder: [python, torch]
   needs: any
@@ -1253,9 +1253,9 @@ lessons:
   idea: "Red teaming means attacking your own system before others do, by hand and with automated attack lists; bug and bias bounties pay outsiders who find problems, if they report them responsibly."
   covers: [red-teaming-provenance-en-securitykaders#0, red-teaming-provenance-en-securitykaders#1]
   requires: [rai-system-prompt-extraction]
-  introduces: [c:automated-red-teaming, c:bias-bounty]
-  mentions: [c:red-teaming]
-  data: [model-qwen3-0.6b]
+  introduces: [c:automated-red-teaming, c:bias-bounty, c:bug-bounty, c:responsible-disclosure]
+  mentions: [c:red-teaming, c:jailbreak, c:llm-as-a-judge, c:rlhf, c:saliency-map, c:harmful-bias, py:not-operator]
+  data: [model-qwen3-0.6b, course-security-qwen]
   ladder: [python]
   needs: any
 
