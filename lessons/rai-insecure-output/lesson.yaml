@@ -1,0 +1,47 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: rai-insecure-output
+minutes: 40
+title:
+  en: "Model output is untrusted input"
+  nl: "De output van een model is onbetrouwbare input"
+goal:
+  en: "get a shop assistant to put an address with a customer's order number on its page through a review, see that a rule in the prompt does not stop it, and write the checks after the model that do: escaping for HTML, finding the addresses in Markdown, and an allow-list of hosts."
+  nl: "een winkelassistent via een recensie een adres met het bestelnummer van een klant op zijn pagina laten zetten, zien dat een regel in de prompt dat niet tegenhoudt, en de controles na het model schrijven die het wel doen: escapen voor HTML, de adressen in Markdown vinden, en een allow-list van hosts."
+summary:
+  - en: "Insecure output handling passes a model's output to a browser, a database or a shell without checking it, so text an attacker steered the model to write runs as code. OWASP lists it as LLM05:2025, Improper Output Handling (LLM02 in 2023/24), and advises to treat the model as any other user, with zero trust."
+    nl: "Insecure output handling geeft de output van een model zonder controle door aan een browser, een database of een shell, zodat tekst die een aanvaller het model liet schrijven als code wordt uitgevoerd. OWASP noemt het LLM05:2025, Improper Output Handling (LLM02 in 2023/24), en raadt aan het model te behandelen als elke andere gebruiker, zonder vertrouwen vooraf."
+  - en: "Encode for the place the text goes: for HTML the five entities of `&`, `<`, `>`, `\"` and `'`, `&` first, as `html.escape` does; for SQL placeholders; output is never run as code. Cross-site scripting (XSS) is what happens when a page lets the browser treat untrusted data as code; in LangChain's LLMMathChain (CVE-2023-29374) a model's answer went into `exec`."
+    nl: "Codeer voor de plek waar de tekst heen gaat: voor HTML de vijf entiteiten van `&`, `<`, `>`, `\"` en `'`, `&` eerst, zoals `html.escape` doet; voor SQL placeholders; output voer je nooit uit als code. Cross-site scripting (XSS) is wat er gebeurt als een pagina de browser onbetrouwbare gegevens als code laat behandelen; in LLMMathChain van LangChain (CVE-2023-29374) ging het antwoord van een model in `exec`."
+  - en: "Escaping leaves Markdown alone, and a browser loads the address of an image by itself: data exfiltration without a click, as in Rehberger's report on Bard (2023) and EchoLeak in Microsoft 365 Copilot (2025). Allow only https addresses on your own hosts, and check them in what the renderer makes; both cases got around a Content Security Policy through an allowed host."
+    nl: "Escapen laat Markdown met rust, en een browser laadt het adres van een afbeelding vanzelf: data exfiltration zonder klik, zoals in het rapport van Rehberger over Bard (2023) en EchoLeak in Microsoft 365 Copilot (2025). Sta alleen https-adressen op je eigen hosts toe, en controleer ze in wat de renderer maakt; beide gevallen kwamen langs een Content Security Policy via een toegestane host."
+  - en: "The course had Qwen3-0.6B summarize four reviews for a bike shop's page, three with a harmless note asking for an image, a link or an HTML tag with the order number, under three defenses, ten tries each. All 30 answers to the HTML note put the tag with the order number on the page, also with a rule against HTML in the prompt or after the review. Escape alone left 58 of the 88 answers with an address on another host; escape and the allow-list left none."
+    nl: "De course liet Qwen3-0.6B vier recensies samenvatten voor de pagina van een fietsenwinkel, drie met een onschuldige notitie die om een afbeelding, een link of een HTML-tag met het bestelnummer vroeg, onder drie verdedigingen, elk tien pogingen. Alle 30 antwoorden op de notitie met HTML zetten de tag met het bestelnummer op de pagina, ook met een regel tegen HTML in de prompt of na de recensie. Escape alleen liet 58 van de 88 antwoorden met een adres op een andere host over; escape en de allow-list samen geen enkel."
+  - en: "In code: `escape` replaces the five signs with `text.replace`, `&` first; `md_urls` takes what follows each `](` up to the next `)`; `allowed` wants `https://` and the whole piece after it, `url.split(\"/\")[2]`, on the list, so `spokeandchain.example.attacker.example` and `spokeandchain.example@attacker.example` do not pass. A reference link has no `](`, and slips past `md_urls`."
+    nl: "In code: `escape` vervangt de vijf tekens met `text.replace`, `&` eerst; `md_urls` neemt wat na elke `](` komt tot de volgende `)`; `allowed` wil `https://` en het hele stuk daarna, `url.split(\"/\")[2]`, op de lijst, dus `spokeandchain.example.attacker.example` en `spokeandchain.example@attacker.example` komen er niet door. Een referentielink heeft geen `](`, en glipt langs `md_urls`."
+can_now:
+  - en: "escape a model's output for HTML, in the right order"
+    nl: "de output van een model escapen voor HTML, in de goede volgorde"
+    by: escape
+  - en: "find the addresses of the images and links in Markdown"
+    nl: "de adressen van de afbeeldingen en links in Markdown vinden"
+    by: md-urls
+  - en: "allow only https addresses on your own hosts, also against tricky addresses"
+    nl: "alleen https-adressen op je eigen hosts toestaan, ook bij lastige adressen"
+    by: allowed
+  - en: "say why a check on Markdown text misses forms that a renderer knows"
+    nl: "zeggen waarom een controle op Markdown-tekst vormen mist die een renderer kent"
+    by: forms
+  - en: "send a model's output into SQL safely"
+    nl: "de output van een model veilig in SQL zetten"
+    by: sql
+further_reading:
+  - en: "OWASP Gen AI Security Project, [*LLM05:2025 Improper Output Handling*](https://genai.owasp.org/llmrisk/llm052025-improper-output-handling/): the risk, its examples and what to do"
+    nl: "OWASP Gen AI Security Project, [*LLM05:2025 Improper Output Handling*](https://genai.owasp.org/llmrisk/llm052025-improper-output-handling/): het risico, de voorbeelden en wat je doet (in het Engels)"
+  - en: "OWASP Cheat Sheet Series, [*Cross Site Scripting Prevention Cheat Sheet*](https://cheatsheetseries.owasp.org/cheatsheets/Cross_Site_Scripting_Prevention_Cheat_Sheet.html): encoding for each place in a page, and safe defaults"
+    nl: "OWASP Cheat Sheet Series, [*Cross Site Scripting Prevention Cheat Sheet*](https://cheatsheetseries.owasp.org/cheatsheets/Cross_Site_Scripting_Prevention_Cheat_Sheet.html): codering voor elke plek in een pagina, en veilige standaarden (in het Engels)"
+  - en: "Python documentation, [*html — HyperText Markup Language support*](https://docs.python.org/3/library/html.html): what `html.escape` does, and what it does not"
+    nl: "Python-documentatie, [*html — HyperText Markup Language support*](https://docs.python.org/3/library/html.html): wat `html.escape` doet, en wat niet (in het Engels)"
+  - en: "Johann Rehberger (2023), [*Hacking Google Bard - From Prompt Injection to Data Exfiltration*](https://embracethered.com/blog/posts/2023/google-bard-data-exfiltration/), Embrace The Red: an image as the way out, and how it was reported"
+    nl: "Johann Rehberger (2023), [*Hacking Google Bard - From Prompt Injection to Data Exfiltration*](https://embracethered.com/blog/posts/2023/google-bard-data-exfiltration/), Embrace The Red: een afbeelding als uitweg, en hoe het werd gemeld (in het Engels)"

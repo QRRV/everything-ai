@@ -1074,7 +1074,7 @@ lessons:
   covers: [dreigingsmodellering#1]
   requires: [rai-security-basics, py-strings]
   introduces: [c:sql-injection]
-  mentions: [c:language-model, c:api-key, c:environment-variable, c:personal-data]
+  mentions: [c:language-model, c:api-key, c:environment-variable, c:personal-data, c:cross-site-scripting]
   data: []
   ladder: [python]
   needs: any
@@ -1184,8 +1184,8 @@ lessons:
   idea: "What a model writes can contain HTML, SQL or a link that sends data away; treat it like user input: escape it before showing it, never run it as code, and never paste it into an SQL statement."
   covers: [d24-llm-applicatiebeveiliging#0]
   requires: [rai-classic-vulnerabilities, rai-prompt-injection]
-  introduces: [c:insecure-output-handling]
-  data: []
+  introduces: [c:insecure-output-handling, c:cross-site-scripting, c:data-exfiltration]
+  data: [model-qwen3-0.6b, course-security-qwen]
   ladder: [python]
   needs: any
 
