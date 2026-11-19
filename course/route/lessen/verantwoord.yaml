@@ -915,10 +915,11 @@ lessons:
   level: basis
   domein: verantwoord
   module: privacy
-  idea: "Replacing a name with a code is pseudonymization: the data is still personal data, because records can be linked and a person singled out; anonymous means nobody can be found again by anyone."
+  idea: "Replacing a name or an e-mail address with a code is pseudonymization: the data is still personal data, because whoever holds the key, or can hash likely inputs, links a code back, and a few facts single a person out; anonymous means nobody can be found again by any means reasonably likely to be used."
   covers: [anonimisering-en-heridentificatie#0]
   requires: [rai-gdpr, py-dicts]
   introduces: [c:pseudonymization, c:anonymization, c:re-identification]
+  mentions: [c:hash, py:hashlib]
   data: []
   ladder: [python]
   needs: any

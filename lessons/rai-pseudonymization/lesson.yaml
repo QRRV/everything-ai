@@ -1,0 +1,43 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: rai-pseudonymization
+minutes: 30
+title:
+  en: "Pseudonymous is not anonymous"
+  nl: "Pseudoniem is niet anoniem"
+goal:
+  en: "replace e-mail addresses with codes, find people back behind those codes with a list of addresses and with a few facts, and say when data without names counts as anonymous."
+  nl: "e-mailadressen vervangen door codes, mensen achter die codes terugvinden met een lijst adressen en met een paar feiten, en zeggen wanneer data zonder namen als anoniem telt."
+summary:
+  - en: "Pseudonymization replaces who someone is, such as a name or an e-mail address, with a code. With extra information kept apart, the code leads back to the person, so under the GDPR the data is still personal data, at least for whoever holds that information. It can lower the risks, but it is not anonymization."
+    nl: "Pseudonimisering vervangt wie iemand is, zoals een naam of een e-mailadres, door een code. Met apart bewaarde extra informatie leidt de code terug naar de persoon, dus volgens de AVG blijven het persoonsgegevens, in elk geval voor wie die informatie heeft. Het kan de risico's verlagen, maar het is geen anonimisering."
+  - en: "Anonymous means that nobody, with any means reasonably likely to be used, can identify a person; only then does the GDPR stop applying. The Article 29 Working Party (2014) asks three questions: can someone be singled out, can records be linked, can something be inferred? For pseudonymization, all three remain."
+    nl: "Anoniem betekent dat niemand, met welk middel dat redelijkerwijs gebruikt kan worden ook, een persoon kan identificeren; pas dan geldt de AVG niet meer. De Groep gegevensbescherming artikel 29 (2014) stelt drie vragen: kun je iemand eruit pikken, kun je records koppelen, kun je iets afleiden? Bij pseudonimisering blijven ze alle drie."
+  - en: "A plain hash such as SHA-256 is no hiding place: whoever can guess the inputs hashes them and compares. And a few facts single a person out: with 8 ratings, 2 of which may be wrong, and dates up to 14 days off, Narayanan and Shmatikov (2008) could pick out 99% of the records in Netflix's data."
+    nl: "Een gewone hash zoals SHA-256 is geen schuilplaats: wie de invoer kan raden, hasht die en vergelijkt. En een paar feiten pikken een persoon eruit: met 8 beoordelingen, waarvan er 2 helemaal fout mogen zijn, en datums die tot 14 dagen ernaast zitten, konden Narayanan en Shmatikov (2008) 99% van de records in de data van Netflix eruit pikken."
+  - en: "For whom is it personal data? The Court of Justice (2025): pseudonymized data is not personal data in all cases and for every person. For whoever holds the key it stays personal data; for a recipient who cannot identify anyone, also not by cross-checking, it may not be."
+    nl: "Voor wie zijn het persoonsgegevens? Het Hof van Justitie (2025): gepseudonimiseerde gegevens zijn niet in alle gevallen en voor iedereen persoonsgegevens. Voor wie de sleutel heeft, blijven het persoonsgegevens; voor een ontvanger die niemand kan identificeren, ook niet door gegevens naast elkaar te leggen, misschien niet."
+can_now:
+  - en: "replace an e-mail address in a row with its code"
+    nl: "een e-mailadres in een rij vervangen door de code ervan"
+    by: pseudonymize
+  - en: "find the people behind hashed codes with a list of addresses"
+    nl: "de mensen achter gehashte codes terugvinden met een lijst adressen"
+    by: unmask
+  - en: "count the rows that fit what is known about one person"
+    nl: "de rijen tellen die passen bij wat er over één persoon bekend is"
+    by: candidates
+  - en: "say for whom pseudonymized data is personal data"
+    nl: "zeggen voor wie gepseudonimiseerde gegevens persoonsgegevens zijn"
+    by: recipient
+  - en: "say when deleting the key makes data anonymous"
+    nl: "zeggen wanneer het wissen van de sleutel data anoniem maakt"
+    by: deleted
+further_reading:
+  - en: "Article 29 Data Protection Working Party (2014), [*Opinion 05/2014 on Anonymisation Techniques*](https://ec.europa.eu/justice/article-29/documentation/opinion-recommendation/files/2014/wp216_en.pdf), WP216: the three risks, and what each technique leaves"
+    nl: "Groep gegevensbescherming artikel 29 (2014), [*Opinion 05/2014 on Anonymisation Techniques*](https://ec.europa.eu/justice/article-29/documentation/opinion-recommendation/files/2014/wp216_en.pdf), WP216: de drie risico's, en wat elke techniek overlaat (in het Engels)"
+  - en: "Arvind Narayanan and Vitaly Shmatikov (2008), [*Robust De-anonymization of Large Sparse Datasets*](https://www.cs.cornell.edu/~shmat/shmat_oak08netflix.pdf), IEEE Symposium on Security and Privacy: the Netflix Prize data"
+    nl: "Arvind Narayanan en Vitaly Shmatikov (2008), [*Robust De-anonymization of Large Sparse Datasets*](https://www.cs.cornell.edu/~shmat/shmat_oak08netflix.pdf), IEEE Symposium on Security and Privacy: de data van de Netflix Prize (in het Engels)"
+  - en: "Court of Justice of the European Union, [judgment of 4 September 2025 in case C-413/23 P, EDPS v SRB](https://eur-lex.europa.eu/legal-content/EN/TXT/HTML/?uri=CELEX:62023CJ0413): pseudonymized data for the recipient"
+    nl: "Hof van Justitie van de Europese Unie, [arrest van 4 september 2025 in zaak C-413/23 P, EDPS tegen SRB](https://eur-lex.europa.eu/legal-content/NL/TXT/HTML/?uri=CELEX:62023CJ0413): gepseudonimiseerde gegevens bij de ontvanger"
