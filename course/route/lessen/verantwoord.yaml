@@ -970,8 +970,9 @@ lessons:
   module: privacy
   idea: "In federated learning each device trains on its own data and only sends its weights; the server averages them (FedAvg). When every device holds different digits, the average learns more slowly."
   covers: [federated-learning-en-pets#0]
-  requires: [rai-what-is-privacy, torch-mlp-digits]
+  requires: [rai-what-is-privacy, torch-checkpoints]
   introduces: [c:federated-learning, c:fedavg]
+  mentions: [c:secure-multi-party-computation]
   data: [qmnist]
   ladder: [python, numpy, torch]
   needs: any

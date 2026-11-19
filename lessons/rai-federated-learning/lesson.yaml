@@ -1,0 +1,45 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: rai-federated-learning
+minutes: 40
+title:
+  en: "Training without collecting the data"
+  nl: "Trainen zonder de data te verzamelen"
+goal:
+  en: "let ten phones train one model on their own digits, average their weights by their number of examples as FedAvg does, and see what changes when each phone holds only a few digits."
+  nl: "tien telefoons één model laten trainen op hun eigen cijfers, hun weights middelen naar hun aantal voorbeelden zoals FedAvg dat doet, en zien wat er verandert als elke telefoon maar een paar cijfers heeft."
+summary:
+  - en: "In federated learning, the data stay on the clients, such as phones: each trains the shared model on its own data and sends only its new weights to the server. McMahan et al. (2017) gave it its name; Hard et al. (2018) trained a next-word model of Gboard that way on 1.5 million phones."
+    nl: "Bij federated learning blijven de data op de clients, zoals telefoons: elk traint het gedeelde model op de eigen data en stuurt alleen de nieuwe weights naar de server. McMahan e.a. (2017) gaven het die naam; Hard e.a. (2018) trainden zo een model van Gboard dat het volgende woord voorspelt, op 1,5 miljoen telefoons."
+  - en: "FedAvg: each round, the server picks some clients at random; each loads the server's weights with `load_state_dict`, trains E epochs of mini-batches of B, and sends back its state_dict. The server averages those, each client counting by its number of examples n<sub>k</sub>: w = Σ n<sub>k</sub> w<sub>k</sub> / Σ n<sub>k</sub>. For phones with 100, 300 and 600 examples and weights 0.2, 0.8 and 0.6, that gives 0.62."
+    nl: "FedAvg: elke ronde kiest de server willekeurig een paar clients; elk laadt de weights van de server met `load_state_dict`, traint E epochs in mini-batches van B, en stuurt de eigen state_dict terug. De server middelt die, en elke client telt mee naar het aantal voorbeelden n<sub>k</sub>: w = Σ n<sub>k</sub> w<sub>k</sub> / Σ n<sub>k</sub>. Voor telefoons met 100, 300 en 600 voorbeelden en weights 0,2, 0,8 en 0,6 geeft dat 0,62."
+  - en: "Averaging works when every client starts from the same weights. In the worked example, two phones read 724 and 772 of the 1,000 test digits right after one epoch, and their average 775. When each phone holds two or three digits, FedAvg learns more slowly and less steadily: after 20 rounds, 678 test digits right against 904 on phones with a bit of every digit. McMahan et al. needed 173 rounds on such a split of MNIST instead of 18."
+    nl: "Middelen werkt als elke client vanaf dezelfde weights begint. In het uitgewerkte voorbeeld lezen twee telefoons na één epoch 724 en 772 van de 1000 testcijfers goed, en hun gemiddelde 775. Als elke telefoon twee of drie cijfers heeft, leert FedAvg langzamer en grilliger: na 20 rondes 678 testcijfers goed, tegen 904 op telefoons met van elk cijfer een beetje. McMahan e.a. hadden op zo'n verdeling van MNIST 173 rondes nodig in plaats van 18."
+  - en: "The raw data stay on the phone, but the weights were learned from them: Zhu, Liu and Han (2019) rebuilt training images from gradients, and Kairouz, McMahan et al. (2021) write that basic federated learning gives \"no formal guarantee of privacy\". Users must trust the server not to look at each phone's weights; McMahan et al. point to differential privacy and secure multi-party computation for more."
+    nl: "De ruwe data blijven op de telefoon, maar de weights zijn ervan geleerd: Zhu, Liu en Han (2019) bouwden trainingsbeelden na uit gradients, en volgens Kairouz, McMahan e.a. (2021) geeft de basisvorm van federated learning geen formele garantie van privacy. Gebruikers moeten de server vertrouwen dat die niet naar de weights van elke telefoon kijkt; voor meer wijzen McMahan e.a. naar differential privacy en secure multi-party computation."
+can_now:
+  - en: "average one weight of several phones, each counting by its number of examples"
+    nl: "één weight van een paar telefoons middelen, elk naar het aantal voorbeelden"
+    by: fedavg
+  - en: "average every weight at once with a matrix product"
+    nl: "alle weights tegelijk middelen met een matrixproduct"
+    by: fedavg-rows
+  - en: "write the server's step of FedAvg for whole state_dicts"
+    nl: "de stap van de server in FedAvg schrijven voor hele state_dicts"
+    by: fedavg-states
+  - en: "say what happens to FedAvg when the clients' data differ"
+    nl: "zeggen wat er met FedAvg gebeurt als de data van de clients verschillen"
+    by: two-digits
+  - en: "say why federated learning alone does not keep the data private"
+    nl: "zeggen waarom federated learning alleen de data niet privé houdt"
+    by: server-learns
+further_reading:
+  - en: "H. Brendan McMahan, Eider Moore, Daniel Ramage, Seth Hampson and Blaise Agüera y Arcas (2017), [*Communication-Efficient Learning of Deep Networks from Decentralized Data*](https://arxiv.org/abs/1602.05629), AISTATS: FedAvg, its knobs C, E and B, and the shuffled and sorted splits of MNIST (version 4 fixes the sum in the pseudocode)"
+    nl: "H. Brendan McMahan, Eider Moore, Daniel Ramage, Seth Hampson en Blaise Agüera y Arcas (2017), [*Communication-Efficient Learning of Deep Networks from Decentralized Data*](https://arxiv.org/abs/1602.05629), AISTATS: FedAvg, de knoppen C, E en B, en de geschudde en gesorteerde verdeling van MNIST (versie 4 verbetert de som in de pseudocode) (in het Engels)"
+  - en: "Peter Kairouz, H. Brendan McMahan et al. (2021), [*Advances and Open Problems in Federated Learning*](https://arxiv.org/abs/1912.04977), Foundations and Trends in Machine Learning: the definition, where federated learning is used, and what it does not guarantee"
+    nl: "Peter Kairouz, H. Brendan McMahan e.a. (2021), [*Advances and Open Problems in Federated Learning*](https://arxiv.org/abs/1912.04977), Foundations and Trends in Machine Learning: de definitie, waar federated learning gebruikt wordt, en wat het niet garandeert (in het Engels)"
+  - en: "Ligeng Zhu, Zhijian Liu and Song Han (2019), [*Deep Leakage from Gradients*](https://arxiv.org/abs/1906.08935), NeurIPS: training images rebuilt from the gradients of one step, and under which conditions"
+    nl: "Ligeng Zhu, Zhijian Liu en Song Han (2019), [*Deep Leakage from Gradients*](https://arxiv.org/abs/1906.08935), NeurIPS: trainingsbeelden nagebouwd uit de gradients van één stap, en onder welke voorwaarden (in het Engels)"
+  - en: "Andrew Hard, Kanishka Rao, Rajiv Mathews et al. (2018), [*Federated Learning for Mobile Keyboard Prediction*](https://arxiv.org/abs/1811.03604): FedAvg in Gboard, on 1.5 million phones, against the same model trained on the server"
+    nl: "Andrew Hard, Kanishka Rao, Rajiv Mathews e.a. (2018), [*Federated Learning for Mobile Keyboard Prediction*](https://arxiv.org/abs/1811.03604): FedAvg in Gboard, op 1,5 miljoen telefoons, tegen hetzelfde model getraind op de server (in het Engels)"
