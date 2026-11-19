@@ -955,7 +955,7 @@ lessons:
   level: basis
   domein: verantwoord
   module: privacy
-  idea: "Let each person flip a coin before answering a sensitive question: nobody's answer gives them away, yet the group's rate can still be estimated. That is local differential privacy, and the coin sets how much privacy you get."
+  idea: "Let each person flip two coins before answering a sensitive question: no single answer gives anyone away for certain, yet the share in the group can still be estimated. That is local differential privacy, and the coins set how much privacy you get: ε = ln 3 for two fair coins."
   covers: [differential-privacy#0]
   requires: [rai-linkage-attacks, prob-basics, np-random]
   introduces: [c:randomized-response, c:local-differential-privacy]

@@ -1,0 +1,47 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: rai-randomized-response
+minutes: 35
+title:
+  en: "Answering with a coin"
+  nl: "Antwoorden met een munt"
+goal:
+  en: "let people answer with two coins, estimate the true share of yes from their answers, and work out how much privacy the coins give, as ε."
+  nl: "mensen laten antwoorden met twee munten, uit hun antwoorden het echte aandeel ja schatten, en uitrekenen hoeveel privacy de munten geven, als ε."
+summary:
+  - en: "Randomized response lets each person add chance to their own answer. Warner (1965) used a spinner against \"evasive answer bias\"; in the variant with two coins in Dwork and Roth (2014), tails on the first coin means answering truthfully, and heads hands the answer to a second coin. With arrays of 0s and 1s, the answers are `(1 - first) * truth + first * second`."
+    nl: "Bij randomized response voegt iedereen toeval toe aan het eigen antwoord. Warner (1965) gebruikte een draaischijf tegen ontwijkende antwoorden; in de variant met twee munten bij Dwork en Roth (2014) antwoord je naar waarheid als de eerste munt op munt valt, en beslist een tweede munt als die op kop valt. Met arrays van nullen en enen zijn de antwoorden `(1 - first) * truth + first * second`."
+  - en: "A true yes gives a yes with chance 3/4 and a true no with chance 1/4, so the share of yes is 1/4 + p/2 on average, and 2 × share − 1/2 estimates the true share p. In the made-up survey of 10,000 people, 34.87% of the answers are yes, and the estimate is 0.1974 for a true share of 0.2."
+    nl: "Een echte ja geeft een ja met kans 3/4 en een echte nee met kans 1/4, dus het aandeel ja is gemiddeld 1/4 + p/2, en 2 × aandeel − 1/2 schat het echte aandeel p. In de verzonnen enquête van 10.000 mensen is 34,87% van de antwoorden ja, en de schatting is 0,1974 bij een echt aandeel van 0,2."
+  - en: "ε measures the privacy: every answer is at most $e^{\\varepsilon}$ times as likely with one truth as with another. Two fair coins give a ratio of 3, so ε = ln 3, about 1.10; a first coin that says tell the truth with chance t gives ε = ln((1 + t)/(1 − t)). Because each person adds the chance before answering, this is local differential privacy."
+    nl: "ε meet de privacy: elk antwoord is hoogstens $e^{\\varepsilon}$ keer zo waarschijnlijk bij de ene waarheid als bij de andere. Twee zuivere munten geven een verhouding van 3, dus ε = ln 3, ongeveer 1,10; een eerste munt die met kans t zegt dat je de waarheid moet zeggen, geeft ε = ln((1 + t)/(1 − t)). Omdat iedereen het toeval toevoegt vóór het antwoorden, is dit local differential privacy."
+  - en: "Privacy costs precision: in Warner's example, the spinner at p = .75 needs about 400 interviews for a standard deviation of .05, where the direct question needs about 100 if everyone tells the truth; and in the course's 200 surveys of 1,000 answers, the estimate spreads about 2.7 times as much as asking straight. Asking the same people again with fresh coins wears the privacy away, which is why RAPPOR in Chrome keeps one noisy answer per person and adds fresh noise to it at every report; Apple uses ε = 4 for emoji and ε = 8 for QuickType, with one or two donations a day."
+    nl: "Privacy kost precisie: in het voorbeeld van Warner heeft de draaischijf met p = 0,75 ongeveer 400 interviews nodig voor een standaardafwijking van 0,05, waar de directe vraag er ongeveer 100 nodig heeft als iedereen de waarheid zegt; en in de 200 enquêtes van 1000 antwoorden van de course spreidt de schatting ongeveer 2,7 keer zoveel als bij rechtstreeks vragen. Dezelfde mensen opnieuw vragen met nieuwe munten verbruikt hun privacy, en daarom bewaart RAPPOR in Chrome één antwoord met ruis per persoon en voegt er bij elk bericht nieuwe ruis aan toe; Apple gebruikt ε = 4 voor emoji en ε = 8 voor QuickType, met één of twee inzendingen per dag."
+can_now:
+  - en: "let each person answer with two coins, from arrays of truths and coins"
+    nl: "iedereen laten antwoorden met twee munten, uit arrays van waarheden en munten"
+    by: answer
+  - en: "estimate the true share of yes from answers with two fair coins"
+    nl: "het echte aandeel ja schatten uit antwoorden met twee zuivere munten"
+    by: estimate
+  - en: "work out the ε of a first coin that says tell the truth with chance t"
+    nl: "de ε uitrekenen van een eerste munt die met kans t zegt dat je de waarheid moet zeggen"
+    by: epsilon
+  - en: "say what one yes with two coins shows about a person"
+    nl: "zeggen wat één ja met twee munten laat zien over iemand"
+    by: a-yes
+  - en: "say why asking the same people again uses their privacy up"
+    nl: "zeggen waarom dezelfde mensen opnieuw vragen hun privacy verbruikt"
+    by: every-day
+further_reading:
+  - en: "Stanley L. Warner (1965), [*Randomized Response: A Survey Technique for Eliminating Evasive Answer Bias*](https://doi.org/10.1080/01621459.1965.10480775), Journal of the American Statistical Association 60(309): the spinner, the estimate, and what the privacy costs in interviews"
+    nl: "Stanley L. Warner (1965), [*Randomized Response: A Survey Technique for Eliminating Evasive Answer Bias*](https://doi.org/10.1080/01621459.1965.10480775), Journal of the American Statistical Association 60(309): de draaischijf, de schatting, en wat de privacy kost aan interviews (in het Engels)"
+  - en: "Cynthia Dwork and Aaron Roth (2014), [*The Algorithmic Foundations of Differential Privacy*](https://www.cis.upenn.edu/~aaroth/Papers/privacybook.pdf): the two coins on page 15 of the book, and why they give ln 3 on page 30"
+    nl: "Cynthia Dwork en Aaron Roth (2014), [*The Algorithmic Foundations of Differential Privacy*](https://www.cis.upenn.edu/~aaroth/Papers/privacybook.pdf): de twee munten op pagina 15 van het boek, en waarom ze ln 3 geven op pagina 30 (in het Engels)"
+  - en: "Úlfar Erlingsson, Vasyl Pihur and Aleksandra Korolova (2014), [*RAPPOR: Randomized Aggregatable Privacy-Preserving Ordinal Response*](https://arxiv.org/abs/1407.6981): randomized response in Chrome, and how it keeps one noisy answer per person and adds fresh noise to every report"
+    nl: "Úlfar Erlingsson, Vasyl Pihur en Aleksandra Korolova (2014), [*RAPPOR: Randomized Aggregatable Privacy-Preserving Ordinal Response*](https://arxiv.org/abs/1407.6981): randomized response in Chrome, en hoe het één antwoord met ruis per persoon bewaart en elk bericht nieuwe ruis geeft (in het Engels)"
+  - en: "Differential Privacy Team, Apple (2017), [*Learning with Privacy at Scale*](https://machinelearning.apple.com/research/learning-with-privacy-at-scale): local differential privacy on hundreds of millions of devices"
+    nl: "Differential Privacy Team, Apple (2017), [*Learning with Privacy at Scale*](https://machinelearning.apple.com/research/learning-with-privacy-at-scale): local differential privacy op honderden miljoenen apparaten (in het Engels)"
+  - en: "Apple, [*Apple Differential Privacy Technical Overview*](https://www.apple.com/privacy/docs/Differential_Privacy_Overview.pdf), undated: the privacy budget of each feature, such as ε = 4 for emoji and ε = 8 for QuickType"
+    nl: "Apple, [*Apple Differential Privacy Technical Overview*](https://www.apple.com/privacy/docs/Differential_Privacy_Overview.pdf), zonder datum: het privacybudget per toepassing, zoals ε = 4 voor emoji en ε = 8 voor QuickType (in het Engels)"
