@@ -1,0 +1,47 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: rai-ml-threat-models
+minutes: 40
+title:
+  en: "Attacks on machine learning"
+  nl: "Aanvallen op machine learning"
+goal:
+  en: "sort attacks on a model by what the attacker wants and knows, fool a small model with the fast gradient sign method, work out how far every input value has to move, and find the same direction with questions only."
+  nl: "aanvallen op een model indelen naar wat de aanvaller wil en weet, een klein model om de tuin leiden met de fast gradient sign method, uitrekenen hoe ver elke waarde van de input moet opschuiven, en dezelfde richting vinden met alleen vragen."
+summary:
+  - en: "NIST (AI 100-2 E2025) sorts attacks on machine learning by the stage of learning, the attacker's goals, capabilities and knowledge. The goals for predictive models are availability breakdown, integrity violation and privacy compromise, the three properties of security with privacy for confidentiality; for generative AI, NIST adds misuse enablement."
+    nl: "NIST (AI 100-2 E2025) deelt aanvallen op machine learning in naar de fase van het leren en naar de doelen, mogelijkheden en kennis van de aanvaller. De doelen bij voorspellende modellen zijn beschikbaarheid laten uitvallen, integriteit schenden en privacy aantasten: de drie eigenschappen van security, met privacy in plaats van vertrouwelijkheid. Bij generatieve AI voegt NIST misbruik mogelijk maken toe (*misuse enablement*)."
+  - en: "Poisoning strikes while a model learns, an evasion attack when it is used. In a white-box attack the attacker knows everything about the model; in a black-box attack little or nothing, but NIST calls those the most practical: they use the interfaces that anyone can use."
+    nl: "Poisoning slaat toe terwijl een model leert, een evasion attack als het gebruikt wordt. Bij een white-box-aanval weet de aanvaller alles van het model, bij een black-box-aanval weinig of niets. Die laatste noemt NIST het meest praktisch: ze gebruiken wat iedereen mag gebruiken."
+  - en: "An adversarial example is an input changed on purpose, often by very little, so that a model gets it wrong. The fast gradient sign method (Goodfellow, Shlens and Szegedy, 2015) moves every input value by the same ε, in the direction of the sign of the gradient of the loss. A panda photo became a gibbon with 99.3% confidence, with steps the size of the smallest step of an 8-bit image."
+    nl: "Een adversarial example is een input die met opzet is veranderd, vaak heel weinig, zodat een model zich vergist. De fast gradient sign method (Goodfellow, Shlens en Szegedy, 2015) schuift elke waarde van de input even ver op, ε, in de richting van het teken van de gradient van de loss. Een foto van een panda werd zo een gibbon met 99,3% zekerheid, met stappen zo groot als de kleinste stap van een 8-bitsafbeelding."
+  - en: "Stickers on a real stop sign fooled the model they were made for in 100% of the photos in the lab and in 84.8% of the video frames from a moving car, with full knowledge of that model (Eykholt and colleagues, 2018)."
+    nl: "Stickers op een echt stopbord misleidden het model waarvoor ze gemaakt waren in 100% van de foto's in het lab en in 84,8% van de videobeelden vanuit een rijdende auto, met volledige kennis van dat model (Eykholt en collega's, 2018)."
+  - en: "The stop sign in code: `fgsm` moves every pixel by eps along the signs of the weights; `smallest_eps` gives 0.212 for STOP: minus the logit, divided by the sum of the sizes of the weights; `guess_signs` finds the same 64 signs with 65 questions to `ask`, without the weights."
+    nl: "Het stopbord in code: `fgsm` schuift elke pixel eps op langs de tekens van de weights; `smallest_eps` geeft 0,212 voor STOP: min de logit, gedeeld door de som van de groottes van de weights; `guess_signs` vindt dezelfde 64 tekens met 65 vragen aan `ask`, zonder de weights."
+can_now:
+  - en: "make an adversarial example with the fast gradient sign method"
+    nl: "een adversarial example maken met de fast gradient sign method"
+    by: fgsm
+  - en: "work out how far every input value has to move to fool a logistic regression"
+    nl: "uitrekenen hoe ver elke waarde van de input moet opschuiven om een logistische regressie te misleiden"
+    by: smallest-eps
+  - en: "find the direction of an attack with questions only, as with a black box"
+    nl: "de richting van een aanval vinden met alleen vragen, zoals bij een black box"
+    by: signs
+  - en: "sort an attack by NIST's goals: availability, integrity and privacy"
+    nl: "een aanval indelen naar de doelen van NIST: beschikbaarheid, integriteit en privacy"
+    by: goal
+  - en: "say whether an attacker works with a white box or a black box"
+    nl: "zeggen of een aanvaller met een white box of een black box werkt"
+    by: knowledge
+further_reading:
+  - en: "NIST (2025), [*Adversarial Machine Learning: A Taxonomy and Terminology of Attacks and Mitigations*](https://csrc.nist.gov/pubs/ai/100/2/e2025/final), NIST AI 100-2 E2025: the goals, stages and knowledge of attackers, and the attacks under each"
+    nl: "NIST (2025), [*Adversarial Machine Learning: A Taxonomy and Terminology of Attacks and Mitigations*](https://csrc.nist.gov/pubs/ai/100/2/e2025/final), NIST AI 100-2 E2025: de doelen, fasen en kennis van aanvallers, en de aanvallen onder elk (in het Engels)"
+  - en: "Ian Goodfellow, Jonathon Shlens and Christian Szegedy (2015), [*Explaining and Harnessing Adversarial Examples*](https://arxiv.org/abs/1412.6572): the fast gradient sign method and the panda"
+    nl: "Ian Goodfellow, Jonathon Shlens en Christian Szegedy (2015), [*Explaining and Harnessing Adversarial Examples*](https://arxiv.org/abs/1412.6572): de fast gradient sign method en de panda (in het Engels)"
+  - en: "Christian Szegedy and colleagues (2014), [*Intriguing properties of neural networks*](https://arxiv.org/abs/1312.6199): where the term adversarial examples comes from"
+    nl: "Christian Szegedy en collega's (2014), [*Intriguing properties of neural networks*](https://arxiv.org/abs/1312.6199): waar de term adversarial examples vandaan komt (in het Engels)"
+  - en: "Kevin Eykholt and colleagues (2018), [*Robust Physical-World Attacks on Deep Learning Visual Classification*](https://arxiv.org/abs/1707.08945): the stickers on the stop sign"
+    nl: "Kevin Eykholt en collega's (2018), [*Robust Physical-World Attacks on Deep Learning Visual Classification*](https://arxiv.org/abs/1707.08945): de stickers op het stopbord (in het Engels)"

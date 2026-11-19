@@ -1082,11 +1082,11 @@ lessons:
   level: basis
   domein: verantwoord
   module: security
-  idea: "An attacker on a model may know everything about it or only see its answers, and may want to fool it (evasion), spoil its training (poisoning), learn its data (privacy) or use it to attack others; NIST sorts the attacks that way."
+  idea: "An attacker on a model may know everything about it (white box) or only see its answers (black box). NIST sorts attacks by goal: availability, integrity and privacy, plus misuse for generative AI; poisoning strikes while a model learns, evasion when it is used. An evasion attack moves every input value a little, along the signs of the gradient, until the model gets it wrong; without the weights, questions find the same direction."
   covers: [dreigingsmodellering#2, dreigingsmodellering#3]
   requires: [rai-security-basics, ml-workflow]
-  introduces: [c:evasion-attack, c:white-box]
-  mentions: [c:privacy]
+  introduces: [c:evasion-attack, c:white-box, c:adversarial-example, c:fgsm, py:np-sign]
+  mentions: [c:black-box, c:misuse, c:privacy, c:pixel, c:data-poisoning, s:epsilon]
   data: []
   ladder: [python]
   needs: any
