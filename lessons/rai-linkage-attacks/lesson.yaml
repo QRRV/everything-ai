@@ -1,0 +1,45 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: rai-linkage-attacks
+minutes: 35
+title:
+  en: "Linking tables"
+  nl: "Tabellen koppelen"
+goal:
+  en: "join a table without names to a voter list on the columns they share, count the rows that get a name, and work out how likely such a name is to be right."
+  nl: "een tabel zonder namen koppelen aan een kiezerslijst op de kolommen die ze delen, de rijen tellen die een naam krijgen, en uitrekenen hoe waarschijnlijk zo'n naam klopt."
+summary:
+  - en: "A linkage attack joins a released table with a second table that has names and shares a quasi-identifier. Sweeney (2002) linked the medical data that a Massachusetts state agency had released about state employees to the voter list of Cambridge on ZIP code, birth date and sex; in pandas that is a merge on those three columns, and a row that matches exactly one voter gets a name."
+    nl: "Een linkage attack koppelt een vrijgegeven tabel aan een tweede tabel die namen heeft en een quasi-identifier deelt. Sweeney (2002) koppelde de medische gegevens die een instantie van de staat Massachusetts over ambtenaren had vrijgegeven aan de kiezerslijst van Cambridge op postcode, geboortedatum en geslacht; in pandas is dat een merge op die drie kolommen, en een rij die bij precies één kiezer past, krijgt een naam."
+  - en: "Many people are alone on those three columns, because there are far more combinations than people: 69% of the 54,805 voters were alone on just birth date and ZIP code (Samarati and Sweeney 1998). For the US of 1990, Sweeney (2000) estimated 87% likely unique on ZIP code, sex and birth date, and Golle (2006) recounted 61%; with only the year of birth, almost nobody is."
+    nl: "Veel mensen staan alleen op die drie kolommen, omdat er veel meer combinaties zijn dan mensen: 69% van de 54.805 kiezers stond al alleen op geboortedatum en postcode (Samarati en Sweeney 1998). Voor de VS van 1990 schatte Sweeney (2000) 87% waarschijnlijk uniek op postcode, geslacht en geboortedatum, en Golle (2006) kwam bij een nieuwe telling op 61%; met alleen het geboortejaar is bijna niemand dat."
+  - en: "A voter list is no population register: the Cambridge list held about 55% of the city, so a voter who is alone on the list need not be alone in the city (Barth-Jones 2012). With 174 men aged 50 in the governor's ZIP code, $(364/365)^{173}$ gives the 62% chance that the match was the only one. In the course's made-up town, 48 of the 622 names that linking gives are wrong."
+    nl: "Een kiezerslijst is geen bevolkingsregister: de lijst van Cambridge bevatte ongeveer 55% van de stad, dus een kiezer die alleen staat op de lijst, staat niet per se alleen in de stad (Barth-Jones 2012). Met 174 mannen van 50 in de postcode van de gouverneur geeft $(364/365)^{173}$ de kans van 62% dat de match de enige was. In het verzonnen stadje van de course zijn 48 van de 622 namen die het koppelen geeft fout."
+  - en: "Unique is not yet identified: a row that is alone gets a name only when a second table holds the same values. A coarser birth date takes most names away: in the made-up town, with year and month only 52 visits get one name, and with the year none."
+    nl: "Uniek is nog niet herkend: een rij die alleen staat, krijgt pas een naam als een tweede tabel dezelfde waarden bevat. Een grovere geboortedatum neemt de meeste namen weg: in het verzonnen stadje krijgen met jaar en maand nog maar 52 bezoeken één naam, en met het jaar geen enkel."
+can_now:
+  - en: "measure the share of the rows that are alone on a set of columns"
+    nl: "het aandeel meten van de rijen die alleen staan op een set kolommen"
+    by: share_alone
+  - en: "link a table without names to a voter list, and count the rows that get one name"
+    nl: "een tabel zonder namen koppelen aan een kiezerslijst, en de rijen tellen die één naam krijgen"
+    by: linked
+  - en: "work out the chance that someone is the only one with a value, from how many share the rest"
+    nl: "de kans uitrekenen dat iemand de enige is met een waarde, uit hoeveel mensen de rest delen"
+    by: alone
+  - en: "say why a single match on a voter list does not show who someone is"
+    nl: "zeggen waarom één match op een kiezerslijst niet laat zien wie iemand is"
+    by: voter-list
+  - en: "say what the 87% of Sweeney counts, and what it does not"
+    nl: "zeggen wat de 87% van Sweeney telt, en wat niet"
+    by: estimate
+further_reading:
+  - en: "Latanya Sweeney (2000), [*Simple Demographics Often Identify People Uniquely*](https://dataprivacylab.org/projects/identifiability/paper1.pdf), Carnegie Mellon University, Data Privacy Working Paper 3: the estimate of 87%, and how it comes from census counts"
+    nl: "Latanya Sweeney (2000), [*Simple Demographics Often Identify People Uniquely*](https://dataprivacylab.org/projects/identifiability/paper1.pdf), Carnegie Mellon University, Data Privacy Working Paper 3: de schatting van 87%, en hoe die uit tellingen van de volkstelling komt (in het Engels)"
+  - en: "Philippe Golle (2006), [*Revisiting the Uniqueness of Simple Demographics in the US Population*](https://crypto.stanford.edu/~pgolle/papers/census.pdf), WPES 2006: the recount, four pages"
+    nl: "Philippe Golle (2006), [*Revisiting the Uniqueness of Simple Demographics in the US Population*](https://crypto.stanford.edu/~pgolle/papers/census.pdf), WPES 2006: de nieuwe telling, vier pagina's (in het Engels)"
+  - en: "Daniel C. Barth-Jones (2012), [*The 'Re-identification' of Governor William Weld's Medical Information: A Critical Re-examination of Health Data Identification Risks and Privacy Protections, Then and Now*](https://fpf.org/wp-content/uploads/2025/05/DBJ_Weld_Re-Identification.pdf): the incomplete voter list, and the 62%"
+    nl: "Daniel C. Barth-Jones (2012), [*The 'Re-identification' of Governor William Weld's Medical Information: A Critical Re-examination of Health Data Identification Risks and Privacy Protections, Then and Now*](https://fpf.org/wp-content/uploads/2025/05/DBJ_Weld_Re-Identification.pdf): de onvolledige kiezerslijst, en de 62% (in het Engels)"
+  - en: "Paul Ohm (2010), [*Broken Promises of Privacy: Responding to the Surprising Failure of Anonymization*](https://www.uclalawreview.org/wp-content/uploads/securepdfs/2025/11/57-6-3.pdf), 57 UCLA Law Review 1701: the case and others, retold for lawyers"
+    nl: "Paul Ohm (2010), [*Broken Promises of Privacy: Responding to the Surprising Failure of Anonymization*](https://www.uclalawreview.org/wp-content/uploads/securepdfs/2025/11/57-6-3.pdf), 57 UCLA Law Review 1701: dit geval en andere, naverteld voor juristen (in het Engels)"

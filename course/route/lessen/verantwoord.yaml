@@ -942,11 +942,11 @@ lessons:
   level: basis
   domein: verantwoord
   module: privacy
-  idea: "Join an anonymous table with a public one on birth date, ZIP code and sex, and many rows get their name back; that is how a governor's medical records were found in 1997."
+  idea: "Join a table without names to a public one on birth date, ZIP code and sex, and many rows get a name back; but a voter list does not hold everyone, so a name that is the only match can still be wrong."
   covers: [anonimisering-en-heridentificatie#2]
   requires: [rai-k-anonymity, data-merge]
   introduces: [c:linkage-attack]
-  data: []
+  data: [course-town]
   ladder: [python]
   needs: any
 

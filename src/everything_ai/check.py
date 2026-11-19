@@ -304,7 +304,11 @@ def same_value(a, b, rel: float = 1e-6) -> bool:
     if isinstance(a, bool) or isinstance(b, bool):
         return a is b
     if isinstance(a, (int, float)) and isinstance(b, (int, float)):
-        return math.isclose(a, b, rel_tol=rel, abs_tol=1e-9) or math.isnan(a) and math.isnan(b)
+        try:
+            return math.isclose(a, b, rel_tol=rel, abs_tol=1e-9) or math.isnan(a) and math.isnan(b)
+        except OverflowError:
+            # an int too large for a float, such as 364 ** 173: only the same int is the same
+            return a == b
     if isinstance(a, list) and isinstance(b, list) or type(a) is tuple and type(b) is tuple:
         # a list, a tuple, or the values a generator handed out: value by value, so arrays inside work too
         return len(a) == len(b) and all(same_value(x, y, rel) for x, y in zip(a, b))
