@@ -1010,11 +1010,11 @@ lessons:
   level: basis
   domein: verantwoord
   module: privacy
-  idea: "Before text goes into a model or a training set, a pipeline finds names, phone numbers and citizen service numbers and replaces them; a check digit tells a real number from a random one, and every filter misses something."
+  idea: "Before text goes into a model or a training set, a pipeline finds names, phone numbers and citizen service numbers and replaces them; a check digit catches typing errors, but 1 in 11 random numbers passes the eleven test, and every filter misses something."
   covers: [privacy-in-llm-producten-en-privacy-engineering#1, privacybewuste-dataverwerking#2]
   requires: [rai-pseudonymization, py-strings, ml-pipelines]
   introduces: [c:check-digit]
-  mentions: [c:pii-redaction]
+  mentions: [c:pii-redaction, c:regular-expression, c:named-entity-recognition]
   data: []
   ladder: [python]
   needs: any

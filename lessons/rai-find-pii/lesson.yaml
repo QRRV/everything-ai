@@ -1,0 +1,47 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: rai-find-pii
+minutes: 35
+title:
+  en: "Finding and hiding personal data"
+  nl: "Persoonsgegevens vinden en verbergen"
+goal:
+  en: "write a filter that hides names, mobile numbers and citizen service numbers in messages, with the eleven test as its check for a BSN, and measure what it misses."
+  nl: "een filter schrijven dat namen, mobiele nummers en burgerservicenummers in berichten verbergt, met de elfproef als controle op een BSN, en meten wat het mist."
+summary:
+  - en: "PII redaction finds personal data in text, such as names and phone numbers, and replaces each piece with a placeholder such as `[NAME]`. Tools such as Presidio use regular expressions, named entity recognition and other logic, such as checksums. Presidio itself says there is no guarantee that it finds all sensitive information."
+    nl: "PII redaction zoekt persoonsgegevens in tekst op, zoals namen en telefoonnummers, en vervangt elk stukje door een plaatshouder zoals `[NAME]`. Tools zoals Presidio gebruiken reguliere expressies, named entity recognition en andere logica, zoals controlecijfers. Presidio zegt zelf dat er geen garantie is dat het alle gevoelige informatie vindt."
+  - en: "A check digit is computed from the other digits of a number, so that a typing error makes the check fail. The eleven test of the Dutch BSN: the nine digits times 9, 8, 7, 6, 5, 4, 3, 2 and −1, added up, must be divisible by 11. It catches every single wrong digit and every swap of two digits, but 1 in 11 numbers of nine digits passes: a pass means the number could be a BSN, not that it is one."
+    nl: "Een controlecijfer wordt uit de andere cijfers van een nummer berekend, zodat een tikfout de controle laat mislukken. De elfproef van het BSN: de negen cijfers keer 9, 8, 7, 6, 5, 4, 3, 2 en −1, opgeteld, moeten deelbaar zijn door 11. De proef vangt elk verkeerd cijfer en elke verwisseling van twee cijfers, maar 1 op de 11 getallen van negen cijfers slaagt: een geslaagde proef betekent dat het nummer een BSN zou kunnen zijn, niet dat het er een is."
+  - en: "The filter in code: `eleven_test` adds up `WEIGHTS[i] * int(number[i])` and checks the remainder after dividing by 11, `hide` gives `[NAME]`, `[PHONE]` or `[BSN]` for a word, or the word itself, and `share_found` gives the share of a list of words that `hide` changes. On ten made-up messages, the course's filter finds 23 of the 32 pieces of personal data (0.71875) and hides 1 of the 5 other numbers by mistake."
+    nl: "Het filter in code: `eleven_test` telt `WEIGHTS[i] * int(number[i])` op en kijkt naar de rest bij deling door 11, `hide` geeft voor een woord `[NAME]`, `[PHONE]` of `[BSN]`, of het woord zelf, en `share_found` geeft het aandeel van een lijst woorden dat `hide` verandert. Op tien verzonnen berichten vindt het filter van de course 23 van de 32 persoonsgegevens (0,71875) en verbergt het 1 van de 5 andere getallen per vergissing."
+  - en: "Every filter misses something: a number written in another form, a name that is on no list, a kind of data without a rule. DEDUCE, with rules developed for Dutch, found 56.4% of the personal data in a dataset of Dutch medical records (Trienes and colleagues, 2020). In the Netherlands, organizations outside the government may use the BSN only where the law says so; consent does not change that."
+    nl: "Elk filter mist iets: een nummer in een andere vorm, een naam die op geen lijst staat, een soort gegevens zonder regel. DEDUCE, met regels voor het Nederlands, vond 56,4% van de persoonsgegevens in een dataset van Nederlandse medische dossiers (Trienes en collega's, 2020). Organisaties buiten de overheid mogen het BSN alleen gebruiken als de wet dat bepaalt; toestemming verandert daar niets aan."
+can_now:
+  - en: "check whether a number of nine digits passes the eleven test"
+    nl: "nagaan of een getal van negen cijfers door de elfproef komt"
+    by: eleven-test
+  - en: "replace a name, a mobile number or a possible BSN with a placeholder"
+    nl: "een naam, een mobiel nummer of een mogelijk BSN vervangen door een plaatshouder"
+    by: hide
+  - en: "measure which share of the personal data a filter finds, and what it hides by mistake"
+    nl: "meten welk deel van de persoonsgegevens een filter vindt, en wat het per vergissing verbergt"
+    by: share-found
+  - en: "say what a passed eleven test does and does not tell about a number"
+    nl: "zeggen wat een geslaagde elfproef wel en niet over een nummer zegt"
+    by: pass
+  - en: "say why a text without names and numbers need not be anonymous"
+    nl: "zeggen waarom een tekst zonder namen en nummers niet anoniem hoeft te zijn"
+    by: anonymous
+further_reading:
+  - en: "Rijksdienst voor Identiteitsgegevens (2025), [*Logisch Ontwerp BSN*](https://rvig.nl/sites/default/files/2025-11/Logisch%20Ontwerp%20BSN%202025.Q4.pdf): how the BSN is made and checked, with the eleven test (in Dutch)"
+    nl: "Rijksdienst voor Identiteitsgegevens (2025), [*Logisch Ontwerp BSN*](https://rvig.nl/sites/default/files/2025-11/Logisch%20Ontwerp%20BSN%202025.Q4.pdf): hoe het BSN gemaakt en gecontroleerd wordt, met de elfproef"
+  - en: "Autoriteit Persoonsgegevens, [*Burgerservicenummer (BSN)*](https://www.autoriteitpersoonsgegevens.nl/themas/identificatie/burgerservicenummer-bsn): who may use the BSN, and why it is sensitive (in Dutch)"
+    nl: "Autoriteit Persoonsgegevens, [*Burgerservicenummer (BSN)*](https://www.autoriteitpersoonsgegevens.nl/themas/identificatie/burgerservicenummer-bsn): wie het BSN mag gebruiken, en waarom het gevoelig is"
+  - en: "Presidio, [*documentation*](https://github.com/microsoft/presidio): an open-source tool to find and hide personal data in text, with its own warning that it cannot guarantee to find everything"
+    nl: "Presidio, [*documentatie*](https://github.com/microsoft/presidio): een opensourcetool om persoonsgegevens in tekst te vinden en te verbergen, met zijn eigen waarschuwing dat het niet gegarandeerd alles vindt (in het Engels)"
+  - en: "Jan Trienes, Dolf Trieschnigg, Christin Seifert and Djoerd Hiemstra (2020), [*Comparing Rule-based, Feature-based and Deep Neural Methods for De-identification of Dutch Medical Records*](https://arxiv.org/abs/2001.05714), HSDM workshop: DEDUCE against a neural network, per kind of personal data"
+    nl: "Jan Trienes, Dolf Trieschnigg, Christin Seifert en Djoerd Hiemstra (2020), [*Comparing Rule-based, Feature-based and Deep Neural Methods for De-identification of Dutch Medical Records*](https://arxiv.org/abs/2001.05714), HSDM-workshop: DEDUCE tegenover een neural network, per soort persoonsgegeven (in het Engels)"
+  - en: "Ildikó Pilán, Pierre Lison, Lilja Øvrelid et al. (2022), [*The Text Anonymization Benchmark (TAB)*](https://arxiv.org/abs/2202.00443), arXiv: court cases of the European Court of Human Rights, to measure text anonymization tools such as Presidio"
+    nl: "Ildikó Pilán, Pierre Lison, Lilja Øvrelid e.a. (2022), [*The Text Anonymization Benchmark (TAB)*](https://arxiv.org/abs/2202.00443), arXiv: rechtszaken van het Europees Hof voor de Rechten van de Mens, om tools voor het anonimiseren van tekst zoals Presidio te meten (in het Engels)"
