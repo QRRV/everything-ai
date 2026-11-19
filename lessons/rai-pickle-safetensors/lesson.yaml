@@ -1,0 +1,47 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: rai-pickle-safetensors
+minutes: 35
+title:
+  en: "A model file that runs code"
+  nl: "Een modelbestand dat code uitvoert"
+goal:
+  en: "see why loading a stranger's pickle can run any code, read the header of a safetensors file by hand, flag the imports of a pickle that are not on an allow-list without loading it, and check that the tensors of a safetensors file leave no bytes unclaimed."
+  nl: "zien waarom het laden van de pickle van een onbekende elke code kan uitvoeren, de header van een safetensors-bestand met de hand lezen, de imports van een pickle die niet op een allow-list staan aanwijzen zonder hem te laden, en controleren dat de tensors van een safetensors-bestand geen bytes overlaten."
+summary:
+  - en: "A pickle, Python's format for saving objects and the one inside the files `torch.save` writes, is a list of instructions that build the objects again. GLOBAL imports a function and REDUCE calls it, and an object's `__reduce__` decides which function and arguments: loading a stranger's pickle can run any code. Python's documentation: \"Only unpickle data you trust.\""
+    nl: "Een pickle, het formaat van Python om objecten op te slaan en het formaat in de bestanden die `torch.save` schrijft, is een lijst instructies die de objecten weer opbouwen. GLOBAL importeert een functie en REDUCE roept die aan, en de `__reduce__` van een object bepaalt welke functie en argumenten: de pickle van een onbekende laden kan elke code uitvoeren. De documentatie van Python zegt: laad alleen pickles die je vertrouwt."
+  - en: "`torch.load(path, weights_only=True)` refuses every import that a state_dict does not need; it is the default since PyTorch 2.6 (January 2025). PyTorch says it narrows the surface rather than closing it, and CVE-2025-32434 showed that in 2.5.1 and earlier it could still be made to run code."
+    nl: "`torch.load(path, weights_only=True)` weigert elke import die een state_dict niet nodig heeft; sinds PyTorch 2.6 (januari 2025) is dat de standaard. Volgens PyTorch maakt het het aanvalsoppervlak kleiner, maar niet nul, en CVE-2025-32434 liet zien dat het in 2.5.1 en eerder toch nog code kon laten uitvoeren."
+  - en: "pickletools lists what a pickle would import without running it; Hugging Face scans pickles on its Hub that way, calls the scan not 100% foolproof, and does not block a file it marks unsafe, JFrog wrote. An allow-list flags everything it does not know."
+    nl: "pickletools somt op wat een pickle zou importeren zonder hem uit te voeren; Hugging Face scant zo de pickles op zijn Hub, noemt die scan niet volledig waterdicht, en houdt een bestand dat het onveilig noemt niet tegen, schreef JFrog. Een allow-list wijst alles aan wat hij niet kent."
+  - en: "A safetensors file is 8 bytes with the length of a JSON header, the header with the dtype, shape and place of each tensor, and the numbers: reading it runs no code, and its tensors must fill the byte buffer with no holes. The course downloads every outside model as safetensors and loads its own `.pt` file with `weights_only=True`."
+    nl: "Een safetensors-bestand is 8 bytes met de lengte van een JSON-header, de header met het dtype, de shape en de plek van elke tensor, en de getallen: het lezen ervan voert geen code uit, en de tensors moeten de buffer van bytes zonder gaten vullen. De course downloadt elk model van buiten als safetensors en laadt zijn eigen `.pt`-bestand met `weights_only=True`."
+can_now:
+  - en: "read the header of a safetensors file without running anything"
+    nl: "de header van een safetensors-bestand lezen zonder iets uit te voeren"
+    by: read-header
+  - en: "flag the imports of a pickle that are not on an allow-list, without loading it"
+    nl: "de imports van een pickle die niet op een allow-list staan aanwijzen, zonder hem te laden"
+    by: flagged
+  - en: "check that the tensors of a safetensors file leave no bytes unclaimed"
+    nl: "controleren dat de tensors van een safetensors-bestand geen bytes overlaten"
+    by: no-holes
+  - en: "say what a flagged import does and does not tell you"
+    nl: "zeggen wat een aangewezen import je wel en niet vertelt"
+    by: flag
+  - en: "say what safetensors promises, and what it does not"
+    nl: "zeggen wat safetensors belooft, en wat niet"
+    by: repository
+further_reading:
+  - en: "Python documentation, [*pickle: Python object serialization*](https://docs.python.org/3/library/pickle.html): the warning, `__reduce__`, and how to restrict what a pickle may import"
+    nl: "Python-documentatie, [*pickle: Python object serialization*](https://docs.python.org/3/library/pickle.html): de waarschuwing, `__reduce__`, en hoe je beperkt wat een pickle mag importeren (in het Engels)"
+  - en: "PyTorch documentation, [*Serialization semantics*](https://docs.pytorch.org/docs/stable/notes/serialization.html): what `weights_only=True` allows, and what it does not guard against"
+    nl: "PyTorch-documentatie, [*Serialization semantics*](https://docs.pytorch.org/docs/stable/notes/serialization.html): wat `weights_only=True` toestaat, en waartegen het niet beschermt (in het Engels)"
+  - en: "Hugging Face, [*safetensors*](https://github.com/huggingface/safetensors): the format, its checks, and its own comparison with other formats"
+    nl: "Hugging Face, [*safetensors*](https://github.com/huggingface/safetensors): het formaat, de controles, en een eigen vergelijking met andere formaten (in het Engels)"
+  - en: "David Cohen (2024), [*Data Scientists Targeted by Malicious Hugging Face ML Models with Silent Backdoor*](https://jfrog.com/blog/data-scientists-targeted-by-malicious-hugging-face-ml-models-with-silent-backdoor/), JFrog: how malicious model files were found, and what they did"
+    nl: "David Cohen (2024), [*Data Scientists Targeted by Malicious Hugging Face ML Models with Silent Backdoor*](https://jfrog.com/blog/data-scientists-targeted-by-malicious-hugging-face-ml-models-with-silent-backdoor/), JFrog: hoe kwaadaardige modelbestanden werden gevonden, en wat ze deden (in het Engels)"
+  - en: "Hugging Face Hub documentation, [*Pickle Scanning*](https://huggingface.co/docs/hub/security-pickle): how the Hub lists the imports of a pickle, and why that is not enough"
+    nl: "Documentatie van de Hugging Face Hub, [*Pickle Scanning*](https://huggingface.co/docs/hub/security-pickle): hoe de Hub de imports van een pickle opsomt, en waarom dat niet genoeg is (in het Engels)"

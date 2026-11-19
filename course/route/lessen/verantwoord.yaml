@@ -1211,7 +1211,8 @@ lessons:
   idea: "A pickle file can run any code while it is loaded, so a model file from a stranger can take over your computer; safetensors stores only numbers; the course downloads outside models as safetensors, and loads its own files with weights_only."
   covers: [supply-chain-en-agent-security#0]
   requires: [rai-security-basics, torch-checkpoints]
-  introduces: [c:pickle-exploit, c:safetensors]
+  introduces: [c:insecure-deserialization, c:safetensors]
+  mentions: [c:utf-8]
   data: []
   ladder: [python, torch]
   needs: any
