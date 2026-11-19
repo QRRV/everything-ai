@@ -1,0 +1,43 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: rai-what-is-privacy
+minutes: 25
+title:
+  en: "What is privacy?"
+  nl: "Wat is privacy?"
+goal:
+  en: "tell three views of privacy apart, name a privacy problem with Solove's taxonomy, and say what the privacy paradox does and does not show."
+  nl: "drie opvattingen van privacy onderscheiden, een privacyprobleem benoemen met de taxonomie van Solove, en zeggen wat de privacyparadox wel en niet laat zien."
+summary:
+  - en: "There is no single definition of privacy. Three views: being let alone (or keeping secrets), control over information about yourself, and information that flows as its context expects."
+    nl: "Er is niet één definitie van privacy. Drie opvattingen: met rust gelaten worden (of iets geheim houden), zeggenschap over informatie over jezelf, en informatie die stroomt zoals de context verwacht."
+  - en: "Solove's taxonomy (2006) sorts the activities that can cause privacy problems into four groups and sixteen kinds: collection, processing, dissemination and invasion. It is not a definition of privacy."
+    nl: "De taxonomie van Solove (2006) deelt de activiteiten die privacyproblemen kunnen veroorzaken in vier groepen en zestien soorten in: verzamelen, verwerken, verspreiden en binnendringen. Het is geen definitie van privacy."
+  - en: "Aggregation combines pieces of information about one person: each piece says little, together they say much more."
+    nl: "Aggregatie voegt stukjes informatie over één persoon samen: elk stukje zegt weinig, samen zeggen ze veel meer."
+  - en: "The privacy paradox: people say they value privacy, yet share their data for little. As Solove reports one study, 87.5% of the people with high concern about the collection of their identifying information signed up for a loyalty card using their real identifying information. Barth and de Jong treat the paradox as real and explain it by how people weigh risks against benefits; Solove calls it a myth: one choice in one context does not show how much someone values privacy."
+    nl: "De privacyparadox: mensen zeggen dat ze privacy belangrijk vinden, en delen hun data toch voor weinig. Zoals Solove één onderzoek beschrijft, meldde 87,5% van de mensen met veel zorgen over het verzamelen van hun identificerende gegevens zich aan voor een klantenkaart met hun echte identificerende gegevens. Barth en de Jong gaan ervan uit dat de paradox bestaat en verklaren hem uit hoe mensen risico's tegen voordelen afwegen; Solove noemt hem een mythe: één keuze in één context laat niet zien hoeveel iemand om privacy geeft."
+can_now:
+  - en: "find the group of a kind of privacy problem in Solove's taxonomy"
+    nl: "de groep van een soort privacyprobleem vinden in de taxonomie van Solove"
+    by: group
+  - en: "collect what several tables say together about one person"
+    nl: "verzamelen wat meerdere tabellen samen over één persoon zeggen"
+    by: facts
+  - en: "tell which view of privacy sees a problem in a case"
+    nl: "zeggen welke opvatting van privacy een probleem ziet in een geval"
+    by: views
+  - en: "measure how many people who say they are concerned still share their data"
+    nl: "meten hoeveel mensen die zeggen dat ze zich zorgen maken hun data toch delen"
+    by: share
+  - en: "say what a study of the privacy paradox does and does not support"
+    nl: "zeggen wat een onderzoek naar de privacyparadox wel en niet ondersteunt"
+    by: headline
+further_reading:
+  - en: "Daniel J. Solove (2006), [*A Taxonomy of Privacy*](https://scholarship.law.gwu.edu/faculty_publications/921/), University of Pennsylvania Law Review 154(3): the four groups and sixteen kinds"
+    nl: "Daniel J. Solove (2006), [*A Taxonomy of Privacy*](https://scholarship.law.gwu.edu/faculty_publications/921/), University of Pennsylvania Law Review 154(3): de vier groepen en zestien soorten (in het Engels)"
+  - en: "Daniel J. Solove (2021), [*The Myth of the Privacy Paradox*](https://scholarship.law.gwu.edu/faculty_publications/1482/), George Washington Law Review 89(1): why saying and doing measure different things"
+    nl: "Daniel J. Solove (2021), [*The Myth of the Privacy Paradox*](https://scholarship.law.gwu.edu/faculty_publications/1482/), George Washington Law Review 89(1): waarom zeggen en doen verschillende dingen meten (in het Engels)"
+  - en: "Susanne Barth and Menno D.T. de Jong (2017), [*The privacy paradox*](https://doi.org/10.1016/j.tele.2017.04.013), Telematics and Informatics 34: a review of 32 papers and the theories they use"
+    nl: "Susanne Barth en Menno D.T. de Jong (2017), [*The privacy paradox*](https://doi.org/10.1016/j.tele.2017.04.013), Telematics and Informatics 34: een overzicht van 32 publicaties en de theorieën die ze gebruiken (in het Engels)"

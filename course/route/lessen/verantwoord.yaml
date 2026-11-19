@@ -873,10 +873,11 @@ lessons:
   level: basis
   domein: verantwoord
   module: privacy
-  idea: "Privacy has meant being left alone, controlling information about yourself, and protection against a list of harms (Solove); people say they care about it and give it away anyway, the privacy paradox."
+  idea: "Privacy has no single definition: it has been seen as being let alone, as control over information about yourself, and as information that flows as its context expects; Solove sorts the activities that cause privacy problems into four groups and sixteen kinds, among them aggregation; whether the privacy paradox (people say they care, yet share their data for little) shows that they do not care is disputed."
   covers: [privacybegrippen-en-de-avg#0]
   requires: [data-provenance, rai-bias-in-data]
   introduces: [c:privacy]
+  mentions: [c:contextual-integrity, c:personal-data, c:gdpr]
   data: []
   ladder: [python]
   needs: any
