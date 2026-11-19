@@ -29,7 +29,7 @@ import torch  # noqa: E402
 from everything_ai import chat, hub, paths, qwen3  # noqa: E402
 
 OUT = paths.ROOT / "data" / "course-explain-qwen.json"
-LESSONS = ["rai-llm-self-explanations"]
+LESSONS = ["rai-llm-self-explanations", "rai-source-attribution"]
 FIELDS = ("messages", "max_tokens", "stop", "thinking")
 
 

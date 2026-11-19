@@ -1,0 +1,43 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: rai-source-attribution
+minutes: 30
+title:
+  en: "Which source did the answer come from?"
+  nl: "Uit welke bron kwam het antwoord?"
+goal:
+  en: "test whether the sources a language model cites are the ones its answer needed, by leaving out one source at a time and seeing whether the answer changes."
+  nl: "testen of de bronnen die een language model citeert de bronnen zijn die zijn antwoord nodig had, door telkens één bron weg te laten en te kijken of het antwoord verandert."
+summary:
+  - en: "A citation raises two questions: does the source say what the answer says (citation precision), and did the answer come from it? A source can support an answer without being where it came from."
+    nl: "Een citatie roept twee vragen op: zegt de bron wat het antwoord zegt (citation precision), en kwam het antwoord eruit? Een bron kan een antwoord ondersteunen zonder dat het antwoord eruit kwam."
+  - en: "Liu et al. found that in four search engines of early 2023, 51.5% of the statements were fully supported by their citations and 74.5% of the citations supported their statement; supported is not the same as true."
+    nl: "Liu et al. vonden dat in vier zoekmachines van begin 2023 51,5% van de beweringen volledig door hun citaties ondersteund werd, en dat 74,5% van de citaties hun bewering ondersteunde; ondersteund is niet hetzelfde als waar."
+  - en: "Leave-one-out leaves out one source at a time and asks again. On the course's 12 questions, it confirmed 11 of Qwen3's 12 citations; the twelfth was a fact that two sources say. Without the source it cited, Qwen3 wrote another answer with a citation in 8 of the 12."
+    nl: "Leave-one-out laat telkens één bron weg en vraagt opnieuw. Op de 12 vragen van de course bevestigde het 11 van de 12 citaties van Qwen3; de twaalfde was een feit dat twee bronnen zeggen. Zonder de bron die Qwen3 citeerde, schreef hij in 8 van de 12 een ander antwoord met een citatie."
+  - en: "Leaving out one source cannot tell which of two sources that say the same was used, and when a model already knows the answer, leaving out a source that supports it may change nothing."
+    nl: "Door één bron weg te laten kun je niet zien welke van twee bronnen die hetzelfde zeggen gebruikt werd, en als een model het antwoord al weet, verandert het weglaten van een bron die het ondersteunt misschien niets."
+can_now:
+  - en: "read which sources an answer cites in square brackets"
+    nl: "lezen welke bronnen een antwoord tussen vierkante haken citeert"
+    by: cited
+  - en: "find the sources without which an answer no longer holds the right answer"
+    nl: "de bronnen vinden zonder welke een antwoord het goede antwoord niet meer bevat"
+    by: needed
+  - en: "compute which share of a model's citations leaving out confirms"
+    nl: "berekenen welk deel van de citaties van een model weglaten bevestigt"
+    by: confirmed
+  - en: "say what leave-one-out cannot tell when two sources say the same"
+    nl: "zeggen wat leave-one-out niet kan zien als twee bronnen hetzelfde zeggen"
+    by: duplicate
+  - en: "say what a measurement of citations supports, and what it does not"
+    nl: "zeggen wat een meting van citaties ondersteunt, en wat niet"
+    by: headline
+further_reading:
+  - en: "Nelson F. Liu, Tianyi Zhang and Percy Liang (2023), [*Evaluating Verifiability in Generative Search Engines*](https://arxiv.org/pdf/2304.09848): citation recall and citation precision of four search engines"
+    nl: "Nelson F. Liu, Tianyi Zhang en Percy Liang (2023), [*Evaluating Verifiability in Generative Search Engines*](https://arxiv.org/pdf/2304.09848): citation recall en citation precision van vier zoekmachines (in het Engels)"
+  - en: "Benjamin Cohen-Wang, Harshay Shah, Kristian Georgiev and Aleksander Madry (2024), [*ContextCite: Attributing Model Generation to Context*](https://arxiv.org/pdf/2409.00729): which parts of the context led to an answer, with sources left out at random"
+    nl: "Benjamin Cohen-Wang, Harshay Shah, Kristian Georgiev en Aleksander Madry (2024), [*ContextCite: Attributing Model Generation to Context*](https://arxiv.org/pdf/2409.00729): welke delen van de context tot een antwoord leidden, met bronnen die willekeurig weggelaten worden (in het Engels)"
+  - en: "Jonas Wallat, Maria Heuss, Maarten de Rijke and Avishek Anand (2024), [*Correctness is not Faithfulness in RAG Attributions*](https://arxiv.org/pdf/2412.18004): a citation can support the answer without the answer having come from it"
+    nl: "Jonas Wallat, Maria Heuss, Maarten de Rijke en Avishek Anand (2024), [*Correctness is not Faithfulness in RAG Attributions*](https://arxiv.org/pdf/2412.18004): een citatie kan het antwoord ondersteunen zonder dat het antwoord eruit kwam (in het Engels)"

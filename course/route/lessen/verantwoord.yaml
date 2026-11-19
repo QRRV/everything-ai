@@ -861,8 +861,8 @@ lessons:
   idea: "An answer that cites a source is easier to check, but the citation can be wrong; leave one source out and see whether the answer changes, to test which source it really used."
   covers: [uitlegbaarheid-voor-llms#1]
   requires: [rai-llm-self-explanations, start-prompt-chains]
-  introduces: [c:source-attribution]
-  data: [model-qwen3-0.6b]
+  introduces: [c:source-attribution, c:citation-precision]
+  data: [model-qwen3-0.6b, course-explain-qwen]
   ladder: [python]
   needs: any
 
