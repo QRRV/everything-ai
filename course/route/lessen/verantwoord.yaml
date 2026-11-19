@@ -1024,7 +1024,7 @@ lessons:
   level: basis
   domein: verantwoord
   module: privacy
-  idea: "Collect only what the purpose needs, use it only for that purpose and delete it when it is done; built into a pipeline from the start, these rules prevent leaks that no filter afterwards can."
+  idea: "Collect only what the purpose needs, use it only for that purpose and delete it when it is done; built into a pipeline from the start, these rules keep out data that no filter afterwards has to find, though what is kept is often still personal data."
   covers: [privacy-in-llm-producten-en-privacy-engineering#2, privacybewuste-dataverwerking#1]
   requires: [rai-find-pii]
   introduces: [c:privacy-by-design, c:data-minimization]

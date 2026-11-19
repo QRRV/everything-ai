@@ -1,0 +1,45 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: rai-privacy-by-design
+minutes: 30
+title:
+  en: "Privacy by design"
+  nl: "Privacy by design"
+goal:
+  en: "build into a pipeline from the start that it keeps only what each purpose needs and lets go of data that is no longer needed, and count what is left to leak."
+  nl: "in een pipeline vanaf het begin inbouwen dat die alleen bewaart wat elk doel nodig heeft en gegevens loslaat die niet meer nodig zijn, en tellen wat er nog kan lekken."
+summary:
+  - en: "Privacy by design builds privacy protection into a system before it collects anything. Ann Cavoukian set it out in seven principles, among them \"Privacy as the Default\": when people do nothing, their privacy stays intact. The GDPR has its own words for it: data protection by design and by default (article 25), with data minimization and storage limitation among the principles of article 5."
+    nl: "Privacy by design bouwt privacybescherming in een systeem in voordat het iets verzamelt. Ann Cavoukian legde het vast in zeven principes, waaronder privacy als standaard: als mensen niets doen, blijft hun privacy intact. De AVG heeft er eigen woorden voor: gegevensbescherming door ontwerp en door standaardinstellingen (artikel 25), met minimale gegevensverwerking en opslagbeperking onder de beginselen van artikel 5."
+  - en: "Data minimization asks for data that is adequate, relevant and limited to what is necessary for the purpose: not as little as possible, but what the purpose needs. First ask whether a purpose needs personal data at all, then whether less detail is enough, such as a decade instead of a date of birth."
+    nl: "Minimale gegevensverwerking vraagt om gegevens die toereikend, ter zake dienend en beperkt tot het noodzakelijke zijn voor het doel: niet zo weinig mogelijk, maar wat het doel nodig heeft. Vraag eerst of een doel überhaupt persoonsgegevens nodig heeft, en dan of minder detail genoeg is, zoals een decennium in plaats van een geboortedatum."
+  - en: "The pipeline in code: `minimize` keeps of a record only the keys a purpose needs, `to_delete` gives the card numbers of the members whose membership ended, and `values_kept` counts what the pipeline keeps. Of the 89 values in the made-up library's file, it keeps 21 for lending and 7 for the recommendation model."
+    nl: "De pipeline in code: `minimize` bewaart van een record alleen de keys die een doel nodig heeft, `to_delete` geeft de kaartnummers van de leden van wie het lidmaatschap gestopt is, en `values_kept` telt wat de pipeline bewaart. Van de 89 waarden in het bestand van de verzonnen bibliotheek bewaart die er 21 voor het uitlenen en 7 voor het aanbevelingsmodel."
+  - en: "Data that is no longer needed is deleted or anonymized, and the EDPB asks for deletion to be automated. In the Netherlands, the tax administration still had the dual nationality of 1.4 million people in its systems in May 2018, data it should have deleted in January 2014; the AP fined €750,000 of its €2.75 million fine for keeping it. What a pipeline keeps is often still personal data: less to leak is not nothing to leak."
+    nl: "Gegevens die niet meer nodig zijn, worden gewist of geanonimiseerd, en de EDPB vraagt het wissen te automatiseren. De Belastingdienst had in mei 2018 nog de dubbele nationaliteit van 1,4 miljoen mensen in zijn systemen, gegevens die in januari 2014 gewist hadden moeten worden; van de boete van 2,75 miljoen euro van de AP was € 750.000 voor het bewaren ervan. Wat een pipeline bewaart, zijn vaak nog persoonsgegevens: minder om te lekken is niet niets om te lekken."
+can_now:
+  - en: "keep of a record only the keys a purpose needs"
+    nl: "van een record alleen de keys bewaren die een doel nodig heeft"
+    by: minimize
+  - en: "find the records whose data has to go, such as those of members who left"
+    nl: "de records vinden waarvan de gegevens weg moeten, zoals die van leden die vertrokken zijn"
+    by: to-delete
+  - en: "count how many values a pipeline keeps for a purpose, as a measure of what a leak would show"
+    nl: "tellen hoeveel waarden een pipeline voor een doel bewaart, als maat voor wat een lek zou laten zien"
+    by: values-kept
+  - en: "say why data minimization does not mean as little data as possible"
+    nl: "zeggen waarom minimale gegevensverwerking niet betekent: zo weinig mogelijk gegevens"
+    by: minimum
+  - en: "say which setting privacy as the default asks for"
+    nl: "zeggen welke instelling privacy als standaard vraagt"
+    by: default
+further_reading:
+  - en: "Ann Cavoukian, [*Privacy by Design: The 7 Foundational Principles — Implementation and Mapping of Fair Information Practices*](https://www.ietf.org/slides/slides-privacyws-privacy-by-design-the-seven-foundational-principles-00.pdf), Information and Privacy Commissioner of Ontario: the seven principles, each with what it asks"
+    nl: "Ann Cavoukian, [*Privacy by Design: The 7 Foundational Principles — Implementation and Mapping of Fair Information Practices*](https://www.ietf.org/slides/slides-privacyws-privacy-by-design-the-seven-foundational-principles-00.pdf), Information and Privacy Commissioner of Ontario: de zeven principes, elk met wat het vraagt (in het Engels)"
+  - en: "European Data Protection Board (2020), [*Guidelines 4/2019 on Article 25 Data Protection by Design and by Default*](https://www.edpb.europa.eu/sites/default/files/files/file1/edpb_guidelines_201904_dataprotection_by_design_and_by_default_v2.0_en.pdf), version 2.0: what article 25 asks, with examples such as a bookshop's order form and a membership"
+    nl: "European Data Protection Board (2020), [*Guidelines 4/2019 on Article 25 Data Protection by Design and by Default*](https://www.edpb.europa.eu/sites/default/files/files/file1/edpb_guidelines_201904_dataprotection_by_design_and_by_default_v2.0_en.pdf), versie 2.0: wat artikel 25 vraagt, met voorbeelden zoals het bestelformulier van een boekwinkel en een lidmaatschap (in het Engels)"
+  - en: "Regulation (EU) 2016/679, the GDPR, [articles 5 and 25](https://eur-lex.europa.eu/legal-content/EN/TXT/HTML/?uri=CELEX:02016R0679-20160504): the principles, and data protection by design and by default"
+    nl: "Verordening (EU) 2016/679, de AVG, [artikel 5 en 25](https://eur-lex.europa.eu/legal-content/NL/TXT/HTML/?uri=CELEX:02016R0679-20160504): de beginselen, en gegevensbescherming door ontwerp en door standaardinstellingen"
+  - en: "Autoriteit Persoonsgegevens (2021), [*Boete Belastingdienst voor discriminerende en onrechtmatige werkwijze*](https://www.autoriteitpersoonsgegevens.nl/actueel/boete-belastingdienst-voor-discriminerende-en-onrechtmatige-werkwijze): the fine for, among other things, keeping data on dual nationality (in Dutch)"
+    nl: "Autoriteit Persoonsgegevens (2021), [*Boete Belastingdienst voor discriminerende en onrechtmatige werkwijze*](https://www.autoriteitpersoonsgegevens.nl/actueel/boete-belastingdienst-voor-discriminerende-en-onrechtmatige-werkwijze): de boete voor onder meer het bewaren van gegevens over dubbele nationaliteit"
