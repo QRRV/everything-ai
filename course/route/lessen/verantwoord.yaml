@@ -1226,7 +1226,7 @@ lessons:
   covers: [supply-chain-en-agent-security#1]
   requires: [rai-pickle-safetensors, torch-pretrained]
   introduces: [c:supply-chain-attack, c:hash-pinning]
-  mentions: [c:hash]
+  mentions: [c:hash, py:hashlib, c:cifar-10]
   data: []
   ladder: [python]
   needs: any

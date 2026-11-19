@@ -1,0 +1,47 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: rai-hub-integrity
+minutes: 35
+title:
+  en: "Is this the model you meant?"
+  nl: "Is dit het model dat je bedoelde?"
+goal:
+  en: "tell a branch, a tag and a commit id apart, pin a file on a hub to a commit and its SHA-256, refuse every other file, and say what a matching hash does and does not tell you."
+  nl: "een branch, een tag en een commit id uit elkaar houden, een bestand op een hub vastleggen met een commit en zijn SHA-256, elk ander bestand weigeren, en zeggen wat een kloppende hash je wel en niet vertelt."
+summary:
+  - en: "A file on a hub is found by a revision: a branch such as main moves on to every new commit on it, a tag is a name set by whoever owns the repository, and a commit id of 40 hexadecimal digits names one version. Loading by name gets whatever is there today: an update, or, once a deleted organization's name is registered again, someone else's model (Unit 42, 2025)."
+    nl: "Een bestand op een hub vind je met een revision: een branch zoals main gaat mee naar elke nieuwe commit erop, een tag is een naam die de eigenaar van de repository zet, en een commit id van 40 hexadecimale cijfers noemt één versie. Op naam laden geeft wat er vandaag staat: een update, of, als de naam van een verwijderde organisatie opnieuw wordt geregistreerd, het model van iemand anders (Unit 42, 2025)."
+  - en: "SHA-256 turns any file into 64 hexadecimal digits, and any change gives other digits: two model files of 188 bytes that differ in one number share 1 digit in the same place. Hash pinning writes down the SHA-256 of a file you checked and refuses every other file; pip's hash-checking mode does it for packages."
+    nl: "SHA-256 maakt van elk bestand 64 hexadecimale cijfers, en elke verandering geeft andere cijfers: twee modelbestanden van 188 bytes die in één getal verschillen, hebben 1 cijfer op dezelfde plek gelijk. Hash pinning legt de SHA-256 vast van een bestand dat je hebt gecontroleerd en weigert elk ander bestand; de hash-checking mode van pip doet het voor packages."
+  - en: "A matching hash says that the file is the one you recorded, not who made it or whether it is good: the backdoor of xz was in its own releases (CVE-2024-3094). Who made a file is a question for a signature."
+    nl: "Een kloppende hash zegt dat het bestand het bestand is dat je vastlegde, niet wie het maakte, en ook niet of het goed is: de backdoor van xz zat in zijn eigen releases (CVE-2024-3094). Wie een bestand maakte, is een vraag voor een handtekening."
+  - en: "The course pins every file it downloads from elsewhere in `everything_ai/hub.py`, with a revision, a SHA-256 and a size, and throws any other file away."
+    nl: "De course legt elk bestand dat hij van elders downloadt vast in `everything_ai/hub.py`, met een revision, een SHA-256 en een grootte, en gooit elk ander bestand weg."
+can_now:
+  - en: "find the commit that a branch, a tag or a commit id names"
+    nl: "de commit vinden die een branch, een tag of een commit id noemt"
+    by: commit-of
+  - en: "pin a file to a commit and its SHA-256"
+    nl: "een bestand vastleggen met een commit en zijn SHA-256"
+    by: pin-now
+  - en: "refuse every file that is not exactly the one you pinned"
+    nl: "elk bestand weigeren dat niet precies het vastgelegde is"
+    by: load-pinned
+  - en: "say what a matching hash does and does not tell you"
+    nl: "zeggen wat een kloppende hash je wel en niet vertelt"
+    by: match
+  - en: "choose a pin that a moved branch, a new tag or a name in other hands cannot get past"
+    nl: "een pin kiezen die geen verplaatste branch, nieuwe tag of naam in andere handen doorlaat"
+    by: pipeline
+further_reading:
+  - en: "Hugging Face Hub documentation, [*Download files from the Hub*](https://huggingface.co/docs/huggingface_hub/guides/download): revisions, and how to download at a commit"
+    nl: "Documentatie van de Hugging Face Hub, [*Download files from the Hub*](https://huggingface.co/docs/huggingface_hub/guides/download): revisions, en hoe je bij een commit downloadt (in het Engels)"
+  - en: "pip documentation, [*Secure installs*](https://pip.pypa.io/en/stable/topics/secure-installs/): hash-checking mode"
+    nl: "Documentatie van pip, [*Secure installs*](https://pip.pypa.io/en/stable/topics/secure-installs/): de hash-checking mode (in het Engels)"
+  - en: "Itay Saraf and Ofir Balassiano (2025), [*Model Namespace Reuse: An AI Supply-Chain Attack Exploiting Model Name Trust*](https://unit42.paloaltonetworks.com/model-namespace-reuse/), Unit 42: how a deleted name can be taken over, and what pinning does about it"
+    nl: "Itay Saraf en Ofir Balassiano (2025), [*Model Namespace Reuse: An AI Supply-Chain Attack Exploiting Model Name Trust*](https://unit42.paloaltonetworks.com/model-namespace-reuse/), Unit 42: hoe een verwijderde naam kan worden overgenomen, en wat vastleggen daartegen doet (in het Engels)"
+  - en: "Daniel Huynh and Jade Hardouin (2023), [*PoisonGPT: How We Hid a Lobotomized LLM on Hugging Face to Spread Fake News*](https://blog.mithrilsecurity.io/poisongpt-how-we-hid-a-lobotomized-llm-on-hugging-face-to-spread-fake-news/), Mithril Security: one fact changed, under a name one letter off"
+    nl: "Daniel Huynh en Jade Hardouin (2023), [*PoisonGPT: How We Hid a Lobotomized LLM on Hugging Face to Spread Fake News*](https://blog.mithrilsecurity.io/poisongpt-how-we-hid-a-lobotomized-llm-on-hugging-face-to-spread-fake-news/), Mithril Security: één feit veranderd, onder een naam met één letter verschil (in het Engels)"
+  - en: "Andres Freund (2024), [*backdoor in upstream xz/liblzma leading to ssh server compromise*](https://www.openwall.com/lists/oss-security/2024/03/29/4), oss-security: how the backdoor in xz was found"
+    nl: "Andres Freund (2024), [*backdoor in upstream xz/liblzma leading to ssh server compromise*](https://www.openwall.com/lists/oss-security/2024/03/29/4), oss-security: hoe de backdoor in xz werd gevonden (in het Engels)"
