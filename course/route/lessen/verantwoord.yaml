@@ -1037,10 +1037,11 @@ lessons:
   level: basis
   domein: verantwoord
   module: privacy
-  idea: "Data governance gives every dataset an owner and a steward, decides who may see what, and keeps a catalog of what exists; without it, nobody can answer a request to delete someone's data."
+  idea: "Data governance gives every dataset an owner, a steward and a custodian, gives access by role and keeps a catalog of what exists and whose data it holds; without it, a request to erase someone's data misses the copies nobody looks after, and a trained model may still hold that data."
   covers: [privacybewuste-dataverwerking#0]
   requires: [rai-privacy-by-design]
-  introduces: [c:data-governance, c:access-control]
+  introduces: [c:data-governance, c:access-control, c:data-catalog]
+  mentions: [c:least-privilege, c:machine-unlearning]
   data: []
   ladder: [python]
   needs: any

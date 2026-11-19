@@ -1,0 +1,47 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: rai-data-governance
+minutes: 30
+title:
+  en: "Who looks after the data?"
+  nl: "Wie beheert de data?"
+goal:
+  en: "give every dataset of an organization someone who decides about it, give access by role, and find every copy of someone's data when that person asks to have it erased."
+  nl: "elke dataset van een organisatie iemand geven die erover beslist, toegang per rol geven, en elke kopie van iemands gegevens vinden als die persoon vraagt ze te wissen."
+summary:
+  - en: "Data governance decides, for every dataset, who is accountable for it, who may use it and how long it is kept. The UK government's guidance names three roles around a dataset: an owner, a senior person who decides and is accountable, a steward who runs it from day to day, and a custodian who stores and disposes of the data as the owner requires."
+    nl: "Data governance bepaalt voor elke dataset wie ervoor aanspreekbaar is, wie hem mag gebruiken en hoe lang hij bewaard wordt. De richtlijn van de Britse overheid noemt drie rollen rond een dataset: een eigenaar, iemand hoog in de organisatie die beslist en er verantwoording over aflegt, een steward die hem van dag tot dag beheert, en een custodian die de data opslaat en verwijdert zoals de eigenaar vraagt."
+  - en: "Access control decides who may read or change which data. By the principle of least privilege, each user or program gets only the access its tasks need, and that access is reviewed regularly. A data catalog lists the datasets, copies included, with who looks after each."
+    nl: "Toegangsbeheer bepaalt wie welke data mag lezen of veranderen. Volgens het principe van least privilege krijgt elke gebruiker of elk programma alleen de toegang die de taken vragen, en die toegang wordt geregeld nagelopen. Een data catalog zet de datasets op een rij, kopieën inbegrepen, met wie voor elk zorgt."
+  - en: "The library in code: `may_read` lets a staff member read a dataset when one of their roles may (25 of the 72 pairs), `holding` finds the datasets that hold a member's card (6 of the 8 for Joris van Dam) and `no_owner` those of them that nobody owns (the backup and the survey)."
+    nl: "De bibliotheek in code: `may_read` laat een medewerker een dataset lezen als een van de eigen rollen dat mag (25 van de 72 paren), `holding` vindt de datasets met de kaart van een lid (6 van de 8 voor Joris van Dam) en `no_owner` de datasets daarvan waar niemand eigenaar van is (de back-up en de enquête)."
+  - en: "A request to erase gets an answer within one month, with at most two more months when necessary, announced within the first month with the reasons (GDPR article 12). Deleting rows does not change a trained model: the EDPB says personal data may remain absorbed in its parameters. SISA trains one model per shard, so that forgetting retrains only one of them: with 20 shards of 50 slices each, 4.63 times faster than retraining from scratch for 8 requests on Purchase."
+    nl: "Een verzoek om te wissen krijgt binnen één maand antwoord, met hooguit twee maanden extra als dat nodig is, gemeld binnen de eerste maand met de redenen (artikel 12 AVG). Rijen wissen verandert niets aan een getraind model: volgens de EDPB kunnen persoonsgegevens opgenomen blijven in de parameters. SISA traint één model per shard, zodat vergeten er maar één opnieuw traint: met 20 shards van elk 50 stukken 4,63 keer zo snel als helemaal opnieuw trainen bij 8 verzoeken op Purchase."
+can_now:
+  - en: "decide by role whether someone may read a dataset"
+    nl: "per rol bepalen of iemand een dataset mag lezen"
+    by: may-read
+  - en: "find every dataset that holds someone's data, for a request to erase"
+    nl: "elke dataset vinden met iemands gegevens, voor een verzoek om te wissen"
+    by: holding
+  - en: "find the datasets that hold someone's data and that nobody owns"
+    nl: "de datasets vinden met iemands gegevens waar niemand eigenaar van is"
+    by: no-owner
+  - en: "say how long an organization has to answer a request to erase"
+    nl: "zeggen hoeveel tijd een organisatie heeft om een verzoek om te wissen te beantwoorden"
+    by: deadline
+  - en: "say why deleting training data does not make a trained model forget it"
+    nl: "zeggen waarom een getraind model training data niet vergeet als je die wist"
+    by: model
+further_reading:
+  - en: "Government Digital Service (2026), [*Data ownership model*](https://www.gov.uk/government/publications/data-ownership-in-government/data-ownership-model), UK government: the owner, the steward and the custodian, and what each of them does"
+    nl: "Government Digital Service (2026), [*Data ownership model*](https://www.gov.uk/government/publications/data-ownership-in-government/data-ownership-model), Britse overheid: de eigenaar, de steward en de custodian, en wat elk van hen doet (in het Engels)"
+  - en: "Joint Task Force (2020), [*Security and Privacy Controls for Information Systems and Organizations*](https://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-53r5.pdf), NIST SP 800-53 Rev. 5: control AC-6 on least privilege, with the review of privileges"
+    nl: "Joint Task Force (2020), [*Security and Privacy Controls for Information Systems and Organizations*](https://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-53r5.pdf), NIST SP 800-53 Rev. 5: maatregel AC-6 over least privilege, met het nalopen van rechten (in het Engels)"
+  - en: "Regulation (EU) 2016/679, the GDPR, [articles 12 and 17](https://eur-lex.europa.eu/legal-content/EN/TXT/HTML/?uri=CELEX:02016R0679-20160504): the deadline for answering a request, and the right to erasure"
+    nl: "Verordening (EU) 2016/679, de AVG, [artikel 12 en 17](https://eur-lex.europa.eu/legal-content/NL/TXT/HTML/?uri=CELEX:02016R0679-20160504): de termijn om op een verzoek te antwoorden, en het recht op gegevenswissing"
+  - en: "European Data Protection Board (2024), [*Opinion 28/2024 on certain data protection aspects related to the processing of personal data in the context of AI models*](https://www.edpb.europa.eu/system/files/2024-12/edpb_opinion_202428_ai-models_en.pdf): when an AI model trained on personal data can count as anonymous"
+    nl: "European Data Protection Board (2024), [*Opinion 28/2024 on certain data protection aspects related to the processing of personal data in the context of AI models*](https://www.edpb.europa.eu/system/files/2024-12/edpb_opinion_202428_ai-models_en.pdf): wanneer een AI-model dat op persoonsgegevens getraind is als anoniem kan gelden (in het Engels)"
+  - en: "Lucas Bourtoule and others (2021), [*Machine Unlearning*](https://arxiv.org/abs/1912.03817), IEEE Symposium on Security and Privacy: SISA training, and what forgetting costs with and without it"
+    nl: "Lucas Bourtoule e.a. (2021), [*Machine Unlearning*](https://arxiv.org/abs/1912.03817), IEEE Symposium on Security and Privacy: SISA-training, en wat vergeten kost met en zonder SISA (in het Engels)"
