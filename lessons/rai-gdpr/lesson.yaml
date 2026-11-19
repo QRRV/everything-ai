@@ -1,0 +1,43 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: rai-gdpr
+minutes: 30
+title:
+  en: "The GDPR for AI"
+  nl: "De AVG voor AI"
+goal:
+  en: "say what counts as personal data and who is responsible, check whether processing names one of the six lawful bases and whether a new use fits the purpose the data were collected for, and say what erasure does and does not change for a trained model."
+  nl: "zeggen wat persoonsgegevens zijn en wie verantwoordelijk is, nagaan of een verwerking een van de zes grondslagen noemt en of een nieuw gebruik past bij het doel waarvoor de gegevens verzameld zijn, en zeggen wat wissen voor een getraind model wel en niet verandert."
+summary:
+  - en: "The GDPR protects personal data: any information relating to a person who is identified or can be identified, directly or indirectly. The data controller decides why and how the data are processed, and is responsible. Training a model on personal data is processing too."
+    nl: "De AVG beschermt persoonsgegevens: alle informatie over een persoon die geïdentificeerd is of direct of indirect te identificeren is. De verwerkingsverantwoordelijke beslist waarom en hoe de gegevens worden verwerkt, en is verantwoordelijk. Een model trainen op persoonsgegevens is ook verwerken."
+  - en: "Processing is lawful only with one of six lawful bases: consent, contract, legal obligation, vital interests, public task or legitimate interests. There is no hierarchy between them, and being public is not a basis. Legitimate interests need a test of three steps. Processing special categories, such as health data, is prohibited unless an exception in Article 9(2) applies."
+    nl: "Verwerken is alleen rechtmatig met een van zes grondslagen: toestemming, overeenkomst, wettelijke verplichting, vitaal belang, taak van algemeen belang of gerechtvaardigd belang. Er is geen rangorde tussen de zes, en openbaar zijn is geen grondslag. Een gerechtvaardigd belang vraagt een toets in drie stappen. Het verwerken van bijzondere persoonsgegevens, zoals gegevens over gezondheid, is verboden tenzij een uitzondering in artikel 9, lid 2 van toepassing is."
+  - en: "Purpose limitation: data collected for one purpose may not be processed further in a way that is incompatible with it. A person can have personal data about them erased on one of six grounds, with exceptions, and can object to processing based on a public task or legitimate interests."
+    nl: "Doelbinding: gegevens die voor één doel verzameld zijn, mogen niet verder verwerkt worden op een manier die daarmee onverenigbaar is. Iemand kan persoonsgegevens over zichzelf laten wissen op een van zes gronden, met uitzonderingen, en kan bezwaar maken tegen verwerking op grond van een taak van algemeen belang of een gerechtvaardigd belang."
+  - en: "The EDPB's Opinion 28/2024 is an opinion, not a court ruling. It says that models trained with personal data cannot in all cases be considered anonymous, and that scraped data may contain personal data. Erasing rows from a dataset does not change a model already trained on them."
+    nl: "Advies 28/2024 van de EDPB is een advies, geen uitspraak van een rechter. Het zegt dat modellen die met persoonsgegevens getraind zijn niet in alle gevallen anoniem zijn, en dat gescrapete data persoonsgegevens kunnen bevatten. Rijen uit een dataset wissen, verandert niets aan een model dat er al op getraind is."
+can_now:
+  - en: "check whether each activity in a register names one of the six lawful bases"
+    nl: "nagaan of elke activiteit in een register een van de zes grondslagen noemt"
+    by: basis
+  - en: "find the data that are used for another purpose than the one they were collected for"
+    nl: "de gegevens vinden die gebruikt worden voor een ander doel dan waarvoor ze verzameld zijn"
+    by: purpose
+  - en: "tell the data controller apart from a processor and from the data subjects"
+    nl: "de verwerkingsverantwoordelijke onderscheiden van een verwerker en van de betrokkenen"
+    by: controller
+  - en: "take every post by or about one person out of a dataset"
+    nl: "elk bericht van of over één persoon uit een dataset halen"
+    by: erase
+  - en: "say what an opinion of the EDPB does and does not decide"
+    nl: "zeggen wat een advies van de EDPB wel en niet beslist"
+    by: blog
+further_reading:
+  - en: "[*Regulation (EU) 2016/679, the General Data Protection Regulation*](https://eur-lex.europa.eu/legal-content/EN/TXT/HTML/?uri=CELEX:32016R0679), EUR-Lex: Articles 4 to 9, 17, 21 and 83"
+    nl: "[*Verordening (EU) 2016/679, de algemene verordening gegevensbescherming*](https://eur-lex.europa.eu/legal-content/NL/TXT/HTML/?uri=CELEX:32016R0679), EUR-Lex: artikel 4 tot en met 9, 17, 21 en 83"
+  - en: "European Data Protection Board (2024), [*Opinion 28/2024 on certain data protection aspects related to the processing of personal data in the context of AI models*](https://www.edpb.europa.eu/system/files/2024-12/edpb_opinion_202428_ai-models_en.pdf): anonymous models, legitimate interests, and unlawfully trained models"
+    nl: "European Data Protection Board (2024), [*Opinion 28/2024 on certain data protection aspects related to the processing of personal data in the context of AI models*](https://www.edpb.europa.eu/system/files/2024-12/edpb_opinion_202428_ai-models_en.pdf): anonieme modellen, gerechtvaardigd belang, en onrechtmatig getrainde modellen (in het Engels)"
+  - en: "Autoriteit Persoonsgegevens, [*Grondslagen AVG uitgelegd*](https://autoriteitpersoonsgegevens.nl/themas/basis-avg/avg-algemeen/grondslagen-avg-uitgelegd): the six lawful bases explained by the Dutch regulator (in Dutch)"
+    nl: "Autoriteit Persoonsgegevens, [*Grondslagen AVG uitgelegd*](https://autoriteitpersoonsgegevens.nl/themas/basis-avg/avg-algemeen/grondslagen-avg-uitgelegd): de zes grondslagen uitgelegd door de Nederlandse toezichthouder"

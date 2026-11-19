@@ -887,10 +887,11 @@ lessons:
   level: basis
   domein: verantwoord
   module: privacy
-  idea: "Under the GDPR you need a legal ground to process personal data, people have rights (access, correction, objection), and who decides why data is processed (the controller) carries the responsibility, also when a model is trained."
+  idea: "Under the GDPR, processing personal data needs one of six lawful bases and a purpose it may not drift from in an incompatible way, people can have data about them erased or object to its processing on set grounds, and whoever decides why and how data is processed (the controller) carries the responsibility, also when a model is trained; a model trained on personal data is not automatically anonymous."
   covers: [privacybegrippen-en-de-avg#2, privacybegrippen-en-de-avg#3]
   requires: [rai-what-is-privacy]
   introduces: [c:gdpr, c:data-controller, c:personal-data, c:data-subject, c:lawful-basis, c:purpose-limitation, c:right-to-erasure]
+  mentions: [c:opt-out]
   data: []
   ladder: [python]
   needs: any
