@@ -30,7 +30,7 @@ import torch  # noqa: E402
 from everything_ai import chat, hub, paths, qwen3  # noqa: E402
 
 OUT = paths.ROOT / "data" / "course-security-qwen.json"
-LESSONS = ["rai-prompt-injection", "rai-indirect-injection", "rai-jailbreaks"]
+LESSONS = ["rai-prompt-injection", "rai-indirect-injection", "rai-jailbreaks", "rai-system-prompt-extraction"]
 FIELDS = ("messages", "max_tokens", "stop", "thinking")
 
 

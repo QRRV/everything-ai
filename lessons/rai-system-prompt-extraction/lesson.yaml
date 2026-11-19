@@ -1,0 +1,45 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: rai-system-prompt-extraction
+minutes: 40
+title:
+  en: "Getting the system prompt out"
+  nl: "De system prompt eruit krijgen"
+goal:
+  en: "get a staff code and a system prompt out of a shop assistant, judge a leak in other spellings, measure how much of a prompt came out, and build an output filter and find what it misses."
+  nl: "een personeelscode en een system prompt uit een winkelassistent krijgen, een lek ook in andere schrijfwijzen herkennen, meten hoeveel van een prompt eruit kwam, en een output filter bouwen en vinden wat het mist."
+summary:
+  - en: "System prompt extraction, or prompt leaking, gets a model to show its system prompt, or something in it, through nothing but the chat. In February 2023 a student got Bing Chat's system prompt out this way, and Microsoft confirmed it was genuine."
+    nl: "System prompt extraction, of prompt leaking, krijgt een model zover dat het zijn system prompt laat zien, of iets wat erin staat, met niets anders dan de chat. In februari 2023 kreeg een student zo de system prompt van Bing Chat los, en Microsoft bevestigde dat hij echt was."
+  - en: "Zhang, Carlini and Ippolito (2024) got over 50% of the prompts approximately out of each of 11 models, with about 100 queries. A separate system role did not protect, an instruction to keep the prompt secret did not either, and a 5-gram output filter fell to answers that were interleaved or shifted. Their conclusion: prompts are not secrets."
+    nl: "Zhang, Carlini en Ippolito (2024) kregen bij elk van 11 modellen meer dan 50% van de prompts bij benadering eruit, met zo'n 100 vragen. Een aparte rol voor de system prompt beschermde niet, een instructie om de prompt geheim te houden ook niet, en een output filter op 5-grams ging onderuit tegen antwoorden die verweven of verschoven waren. Hun conclusie: prompts zijn geen geheimen."
+  - en: "OWASP (LLM07:2025): the system prompt should not be considered a secret, nor used as a security control. Keep sensitive data out of it, and enforce checks outside the model."
+    nl: "OWASP (LLM07:2025): beschouw de system prompt niet als geheim, en gebruik hem niet als beveiliging. Houd gevoelige gegevens erbuiten, en dwing controles af buiten het model."
+  - en: "The course put a staff code in the system prompt of a bike shop's assistant on Qwen3-0.6B, with seven attacks, ten tries each. The code came out in 62 of 70 answers; with a secrecy rule in 34, while the repeat, the list and the digits as words still got it every time; with the code outside the prompt in none. No answer held its whole prompt word for word, but the repeat under the secrecy rule got five of six sentences out in 9 of 10 tries."
+    nl: "De course zette een personeelscode in de system prompt van de assistent van een fietsenwinkel op Qwen3-0.6B, met zeven aanvallen, elk tien pogingen. De code kwam eruit in 62 van de 70 antwoorden; met een geheimhoudingsregel in 34, terwijl herhalen, de lijst en de cijfers als woorden hem nog steeds elke keer kregen; met de code buiten de prompt in geen enkel antwoord. Geen antwoord bevatte zijn hele prompt woord voor woord, maar herhalen onder de geheimhoudingsregel kreeg in 9 van de 10 pogingen vijf van de zes zinnen eruit."
+  - en: "In code: `leaked` finds the code in small letters with only letters and digits, so `Chain-4417` counts; `share_found` gives the share of the sentences an answer holds word for word; `blocks` blocks an answer that holds `n` words in a row of the prompt, and let 50 of the 96 answers with the code through."
+    nl: "In code: `leaked` zoekt de code in kleine letters met alleen letters en cijfers, zodat `Chain-4417` meetelt; `share_found` geeft het aandeel van de zinnen dat een antwoord woord voor woord bevat; `blocks` houdt een antwoord tegen met `n` opeenvolgende woorden van de prompt erin, en liet 50 van de 96 antwoorden met de code door."
+can_now:
+  - en: "judge whether an answer leaks a code, also in other capitals or with signs between its letters and digits"
+    nl: "beoordelen of een antwoord een code lekt, ook met andere hoofdletters of met tekens tussen de letters en cijfers"
+    by: leaked
+  - en: "measure how much of a system prompt an answer holds, sentence by sentence"
+    nl: "meten hoeveel van een system prompt een antwoord bevat, zin voor zin"
+    by: share-found
+  - en: "build an output filter on the words of a prompt, and show what it lets through"
+    nl: "een output filter op de woorden van een prompt bouwen, en laten zien wat het doorlaat"
+    by: blocks
+  - en: "say where a secret belongs that an LLM app needs"
+    nl: "zeggen waar een geheim hoort dat een LLM-app nodig heeft"
+    by: where
+  - en: "say why a filter on the text of a prompt does not guard a short secret"
+    nl: "zeggen waarom een filter op de tekst van een prompt een kort geheim niet beschermt"
+    by: filter
+further_reading:
+  - en: "Yiming Zhang, Nicholas Carlini and Daphne Ippolito (2024), [*Effective Prompt Extraction from Language Models*](https://arxiv.org/abs/2307.06865), COLM 2024: how often prompts come out, and why defenses fail"
+    nl: "Yiming Zhang, Nicholas Carlini en Daphne Ippolito (2024), [*Effective Prompt Extraction from Language Models*](https://arxiv.org/abs/2307.06865), COLM 2024: hoe vaak prompts eruit komen, en waarom verdedigingen falen (in het Engels)"
+  - en: "OWASP Gen AI Security Project, [*LLM07:2025 System Prompt Leakage*](https://genai.owasp.org/llmrisk/llm072025-system-prompt-leakage/): the risks and what to do"
+    nl: "OWASP Gen AI Security Project, [*LLM07:2025 System Prompt Leakage*](https://genai.owasp.org/llmrisk/llm072025-system-prompt-leakage/): de risico's en wat je doet (in het Engels)"
+  - en: "Benj Edwards (2023), [*AI-powered Bing Chat spills its secrets via prompt injection attack*](https://arstechnica.com/information-technology/2023/02/ai-powered-bing-chat-spills-its-secrets-via-prompt-injection-attack/), Ars Technica: the Sydney case"
+    nl: "Benj Edwards (2023), [*AI-powered Bing Chat spills its secrets via prompt injection attack*](https://arstechnica.com/information-technology/2023/02/ai-powered-bing-chat-spills-its-secrets-via-prompt-injection-attack/), Ars Technica: de zaak Sydney (in het Engels)"

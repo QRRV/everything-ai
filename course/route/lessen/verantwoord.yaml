@@ -1172,7 +1172,7 @@ lessons:
   requires: [rai-jailbreaks]
   introduces: [c:system-prompt-extraction]
   mentions: [c:jailbreak]
-  data: [model-qwen3-0.6b]
+  data: [model-qwen3-0.6b, course-security-qwen]
   ladder: [python]
   needs: any
 
