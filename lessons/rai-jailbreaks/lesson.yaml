@@ -1,0 +1,47 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: rai-jailbreaks
+minutes: 40
+title:
+  en: "Jailbreaks"
+  nl: "Jailbreaks"
+goal:
+  en: "get a shop assistant to answer what its system prompt tells it to refuse, count how often each attack works, build a many-shot attack and a warning around the question, and find how many examples an attack needs."
+  nl: "een winkelassistent laten beantwoorden wat zijn system prompt hem laat weigeren, tellen hoe vaak elke aanval werkt, een many-shot-aanval en een waarschuwing rond de vraag bouwen, en uitzoeken hoeveel voorbeelden een aanval nodig heeft."
+summary:
+  - en: "A jailbreak is a direct prompting attack: the user of a model gets it past the restrictions on its output, such as its refusals (NIST). Simon Willison keeps it apart from prompt injection, which glues untrusted input to a trusted prompt of the developer; for OWASP, jailbreaking is a form of prompt injection."
+    nl: "Een jailbreak is een directe aanval met prompts: de gebruiker van een model krijgt het langs de beperkingen op zijn output, zoals het weigeren (NIST). Simon Willison houdt het apart van prompt injection, dat onbetrouwbare input aan een betrouwbare prompt van de ontwikkelaar plakt; voor OWASP is jailbreaken een vorm van prompt injection."
+  - en: "Wei and colleagues (2023) name two causes. Competing objectives: following instructions and continuing text pull against refusing, as in prefix injection and refusal suppression. Mismatched generalization: a form the model can read but safety training did not cover, such as Base64. When any of their 28 attacks could be used, all 32 of their requests got through on GPT-4 and Claude v1.3, and they argue that scaling up will not resolve competing objectives."
+    nl: "Wei en collega's (2023) noemen twee oorzaken. Competing objectives: instructies volgen en tekst voortzetten trekken tegen weigeren in, zoals bij prefix injection en refusal suppression. Mismatched generalization: een vorm die het model kan lezen maar die de safety training niet dekte, zoals Base64. Als elk van hun 28 aanvallen gebruikt mocht worden, kwamen alle 32 verzoeken erdoor bij GPT-4 en Claude v1.3, en volgens hen lost opschalen competing objectives niet op."
+  - en: "Many-shot jailbreaking (Anil and colleagues, 2024) fills a long prompt with made-up dialogues in which an assistant complies. On Claude 2.0 it did nothing with 5 shots and worked consistently with 256; it works better on larger models. In one of their tests, a warning around the prompt brought it from 61% to 2%; training against it only delayed it."
+    nl: "Many-shot jailbreaking (Anil en collega's, 2024) vult een lange prompt met verzonnen dialogen waarin een assistent meewerkt. Bij Claude 2.0 deed het met 5 shots niets en werkte het met 256 steeds; het werkt beter bij grotere modellen. In een van hun tests bracht een waarschuwing rond de prompt het van 61% naar 2%; trainen ertegen stelde het alleen uit."
+  - en: "The course attacked a bike shop's assistant on Qwen3-0.6B with five harmless questions, five tries each. The question alone, role play and Dutch got 0 of 25; prefix injection 20, refusal suppression 23, both 20. Many-shot: 0 with one or two examples, 21 with four, 25 with eight or more. The warning brought prefix injection from 20 to 10 and refusal suppression from 23 to 9, left both together at 20, and brought many-shot with four or more examples to 4 or 5, all on one question."
+    nl: "De course viel de assistent van een fietsenwinkel op Qwen3-0.6B aan met vijf onschuldige vragen, elk vijf pogingen. Alleen de vraag, een rollenspel en Nederlands haalden 0 van de 25; prefix injection 20, refusal suppression 23, allebei 20. Many-shot: 0 met een of twee voorbeelden, 21 met vier, 25 met acht of meer. De waarschuwing bracht prefix injection van 20 naar 10 en refusal suppression van 23 naar 9, liet allebei samen op 20, en bracht many-shot met vier of meer voorbeelden naar 4 of 5, allemaal op één vraag."
+  - en: "In code: `many_shot` puts the first `n` examples in as turns of the user and the assistant before the question; `warn` puts a text before and after the last message only; `first_n` gives the first number of examples whose ASR is at least a level, or `None`."
+    nl: "In code: `many_shot` zet de eerste `n` voorbeelden als beurten van de gebruiker en de assistent voor de vraag; `warn` zet alleen voor en na het laatste bericht een tekst; `first_n` geeft het eerste aantal voorbeelden waarvan de ASR minstens een level is, of `None`."
+can_now:
+  - en: "build the chat of a many-shot attack from examples"
+    nl: "de chat van een many-shot-aanval uit voorbeelden bouwen"
+    by: many-shot
+  - en: "put a warning around the last message of a chat, and leave the rest alone"
+    nl: "een waarschuwing rond het laatste bericht van een chat zetten, en de rest laten staan"
+    by: warn
+  - en: "find from a run how many examples an attack needs to reach a level"
+    nl: "uit een run halen hoeveel voorbeelden een aanval nodig heeft om een level te halen"
+    by: first-n
+  - en: "say why a forced start gets past a refusal"
+    nl: "zeggen waarom een opgelegd begin langs een weigering komt"
+    by: competing
+  - en: "say when an attack on a system prompt's rule is a jailbreak, and when prompt injection"
+    nl: "zeggen wanneer een aanval op de regel van een system prompt een jailbreak is, en wanneer prompt injection"
+    by: which
+further_reading:
+  - en: "Alexander Wei, Nika Haghtalab and Jacob Steinhardt (2023), [*Jailbroken: How Does LLM Safety Training Fail?*](https://arxiv.org/abs/2307.02483): competing objectives and mismatched generalization"
+    nl: "Alexander Wei, Nika Haghtalab en Jacob Steinhardt (2023), [*Jailbroken: How Does LLM Safety Training Fail?*](https://arxiv.org/abs/2307.02483): competing objectives en mismatched generalization (in het Engels)"
+  - en: "Anthropic (2024), [*Many-shot jailbreaking*](https://www.anthropic.com/research/many-shot-jailbreaking): the attack and the paper of Cem Anil and colleagues"
+    nl: "Anthropic (2024), [*Many-shot jailbreaking*](https://www.anthropic.com/research/many-shot-jailbreaking): de aanval en de paper van Cem Anil en collega's (in het Engels)"
+  - en: "Mark Russinovich, Ahmed Salem and Ronen Eldan (2024), [*Great, Now Write an Article About That: The Crescendo Multi-Turn LLM Jailbreak Attack*](https://arxiv.org/abs/2404.01833), USENIX Security 2025: a jailbreak over several turns"
+    nl: "Mark Russinovich, Ahmed Salem en Ronen Eldan (2024), [*Great, Now Write an Article About That: The Crescendo Multi-Turn LLM Jailbreak Attack*](https://arxiv.org/abs/2404.01833), USENIX Security 2025: een jailbreak over meerdere beurten (in het Engels)"
+  - en: "Simon Willison (2024), [*Prompt injection and jailbreaking are not the same thing*](https://simonwillison.net/2024/Mar/5/prompt-injection-jailbreaking/): where the line between the two lies"
+    nl: "Simon Willison (2024), [*Prompt injection and jailbreaking are not the same thing*](https://simonwillison.net/2024/Mar/5/prompt-injection-jailbreaking/): waar de grens tussen de twee ligt (in het Engels)"

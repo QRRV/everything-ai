@@ -1158,7 +1158,7 @@ lessons:
   requires: [rai-prompt-injection]
   introduces: [c:competing-objectives, c:many-shot-jailbreaking]
   mentions: [c:jailbreak]
-  data: [model-qwen3-0.6b]
+  data: [model-qwen3-0.6b, course-security-qwen]
   ladder: [python]
   needs: any
 
