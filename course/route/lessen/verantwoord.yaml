@@ -1072,7 +1072,7 @@ lessons:
   covers: [dreigingsmodellering#1]
   requires: [rai-security-basics, py-strings]
   introduces: [c:sql-injection]
-  mentions: [c:language-model]
+  mentions: [c:language-model, c:api-key, c:environment-variable, c:personal-data]
   data: []
   ladder: [python]
   needs: any

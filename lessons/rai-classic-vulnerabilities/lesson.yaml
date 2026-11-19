@@ -1,0 +1,51 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: rai-classic-vulnerabilities
+minutes: 40
+title:
+  en: "Injection and secrets"
+  nl: "Injection en geheimen"
+goal:
+  en: "break into a search that glues text into its SQL, write the same search safely with placeholders, check a login against a salted hash, and say what to do first when a key leaks."
+  nl: "inbreken in een zoekopdracht die tekst in de SQL plakt, dezelfde zoekopdracht veilig schrijven met placeholders, een login controleren met een hash en een salt, en zeggen wat je eerst doet als een key uitlekt."
+summary:
+  - en: "SQL injection: a program that pastes what a user types into its SQL lets the user change that SQL, as SQL makes no real distinction between the control and data planes (OWASP). In 2015, an attacker accessed the personal data of 156,959 TalkTalk customers that way; the ICO called the attack common and well understood for more than ten years, and fined TalkTalk £400,000."
+    nl: "SQL injection: een programma dat wat een gebruiker typt in de SQL plakt, laat de gebruiker die SQL veranderen, omdat SQL geen echt onderscheid maakt tussen opdrachten en gegevens (OWASP). In 2015 kwam een aanvaller zo bij de persoonsgegevens van 156.959 klanten van TalkTalk; de ICO noemde de aanval veelvoorkomend en al meer dan tien jaar goed begrepen, en gaf TalkTalk een boete van £400.000."
+  - en: "The fix is a placeholder: a `?` in the SQL where a value goes, with the values sent separately, so the database reads them as data. A placeholder binds values only, and does not decide who may read what. On the 2025 CWE Top 25 of MITRE and CISA, SQL injection is number 2, behind cross-site scripting, another kind of injection."
+    nl: "De oplossing is een placeholder: een `?` in de SQL op de plek van een waarde, met de waarden apart erbij, zodat de database ze als gegevens leest. Een placeholder koppelt alleen waarden, en beslist niet wie wat mag lezen. Op de CWE Top 25 van 2025 van MITRE en CISA staat SQL injection op nummer 2, achter cross-site scripting, een ander soort injectie."
+  - en: "A secret written in code is readable for everyone who sees the code, also in a private repository: according to an FTC complaint, intruders found an access key in Uber's private GitHub code in 2016. A key that leaks is revoked first; removing it from the history is not enough, as copies may remain."
+    nl: "Een geheim dat in de code staat, is leesbaar voor iedereen die de code ziet, ook in een privérepository: volgens een klacht van de FTC vonden indringers in 2016 een toegangssleutel in privécode van Uber op GitHub. Een key die uitlekt, trek je eerst in; de key uit de geschiedenis halen is niet genoeg, want er kunnen kopieën blijven bestaan."
+  - en: "Passwords are kept as a slow hash with a salt per account (OWASP), and a login is checked by hashing the typed password again. NIST's SP 800-63B-4 asks for at least 15 characters for a password used on its own, forbids composition rules, and names three types of factor for multi-factor authentication: something you know, something you have and something you are."
+    nl: "Wachtwoorden bewaar je als trage hash met een salt per account (OWASP), en een login controleer je door het getypte wachtwoord opnieuw te hashen. SP 800-63B-4 van NIST vraagt om minstens 15 tekens voor een wachtwoord dat de enige factor is, verbiedt regels voor de samenstelling, en noemt drie soorten factoren voor multi-factor authentication: iets wat je weet, iets wat je hebt en iets wat je bent."
+  - en: "The library in code: `x' OR 'a'='a` makes the glued `loans_for` give all 9 loans of 7 members; `loans_due` with placeholders gives Joris only Max Havelaar before 1 December, and nothing for the attack in the card; `check_login` lets in the right password, and not the same password with one capital letter, nor Joris's password on Mila's account."
+    nl: "De bibliotheek in code: `x' OR 'a'='a` laat de geplakte `loans_for` alle 9 uitleningen van 7 leden teruggeven; `loans_due` met placeholders geeft Joris alleen *Max Havelaar* voor 1 december, en niets voor de aanval in de kaart; `check_login` laat het juiste wachtwoord door, en niet hetzelfde wachtwoord met één hoofdletter, en ook niet het wachtwoord van Joris op het account van Mila."
+can_now:
+  - en: "break into a search that glues text into its SQL"
+    nl: "inbreken in een zoekopdracht die tekst in de SQL plakt"
+    by: attack
+  - en: "write an SQL search with placeholders"
+    nl: "een SQL-zoekopdracht schrijven met placeholders"
+    by: loans-due
+  - en: "check a login against a salted hash without keeping the password"
+    nl: "een login controleren met een hash en een salt, zonder het wachtwoord te bewaren"
+    by: login
+  - en: "say what to do first when a key ends up on GitHub"
+    nl: "zeggen wat je eerst doet als een key op GitHub terechtkomt"
+    by: secret
+  - en: "say why a placeholder does not decide who may read what"
+    nl: "zeggen waarom een placeholder niet beslist wie wat mag lezen"
+    by: access
+further_reading:
+  - en: "OWASP Cheat Sheet Series, [*SQL Injection Prevention Cheat Sheet*](https://cheatsheetseries.owasp.org/cheatsheets/SQL_Injection_Prevention_Cheat_Sheet.html): parameterized queries, allow-lists for names, and why escaping by hand is discouraged"
+    nl: "OWASP Cheat Sheet Series, [*SQL Injection Prevention Cheat Sheet*](https://cheatsheetseries.owasp.org/cheatsheets/SQL_Injection_Prevention_Cheat_Sheet.html): placeholders, vaste lijsten voor namen, en waarom escaping met de hand wordt afgeraden (in het Engels)"
+  - en: "Python documentation, [*sqlite3*](https://docs.python.org/3/library/sqlite3.html), section *How to use placeholders to bind values in SQL queries*"
+    nl: "Python-documentatie, [*sqlite3*](https://docs.python.org/3/library/sqlite3.html), de sectie *How to use placeholders to bind values in SQL queries* (in het Engels)"
+  - en: "Information Commissioner's Office, [*TalkTalk cyber attack – how the ICO’s investigation unfolded*](https://ico.org.uk/about-the-ico/media-centre/talktalk-cyber-attack-how-the-ico-investigation-unfolded/): the attack of 2015, step by step"
+    nl: "Information Commissioner's Office, [*TalkTalk cyber attack – how the ICO’s investigation unfolded*](https://ico.org.uk/about-the-ico/media-centre/talktalk-cyber-attack-how-the-ico-investigation-unfolded/): de aanval van 2015, stap voor stap (in het Engels)"
+  - en: "OWASP Cheat Sheet Series, [*Password Storage Cheat Sheet*](https://cheatsheetseries.owasp.org/cheatsheets/Password_Storage_Cheat_Sheet.html): slow hashes, salts and their settings"
+    nl: "OWASP Cheat Sheet Series, [*Password Storage Cheat Sheet*](https://cheatsheetseries.owasp.org/cheatsheets/Password_Storage_Cheat_Sheet.html): trage hashes, salts en hun instellingen (in het Engels)"
+  - en: "NIST (2025), [*SP 800-63B-4: Digital Identity Guidelines, Authentication and Authenticator Management*](https://pages.nist.gov/800-63-4/sp800-63b.html): the rules for passwords and multi-factor authentication"
+    nl: "NIST (2025), [*SP 800-63B-4: Digital Identity Guidelines, Authentication and Authenticator Management*](https://pages.nist.gov/800-63-4/sp800-63b.html): de regels voor wachtwoorden en multi-factor authentication (in het Engels)"
+  - en: "Bruce Schneier (2024), [*LLMs’ Data-Control Path Insecurity*](https://www.schneier.com/blog/archives/2024/05/llms-data-control-path-insecurity.html): why data and commands in one channel go wrong, from phones to language models"
+    nl: "Bruce Schneier (2024), [*LLMs’ Data-Control Path Insecurity*](https://www.schneier.com/blog/archives/2024/05/llms-data-control-path-insecurity.html): waarom gegevens en opdrachten in één kanaal misgaan, van telefoons tot language models (in het Engels)"
