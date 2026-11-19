@@ -1,0 +1,47 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: rai-prompt-injection
+minutes: 40
+title:
+  en: "How often does an injection work?"
+  nl: "Hoe vaak werkt een injection?"
+goal:
+  en: "attack a review sorter with the same injections under six prompts, count how often each attack works with a judge you choose, mark the review with datamarking, and see why an attacker who tries again gets through more often."
+  nl: "een recensiesorteerder aanvallen met dezelfde injections onder zes prompts, tellen hoe vaak elke aanval werkt met een judge die je kiest, de recensie markeren met datamarking, en zien waarom een aanvaller die het opnieuw probeert vaker slaagt."
+summary:
+  - en: "An app glues its instructions and text from outside into one prompt, and a model cannot reliably tell them apart. Simon Willison named the attack prompt injection in September 2022, after examples by Riley Goodside; unlike SQL injection, no fix like placeholders is known for it."
+    nl: "Een app plakt zijn instructies en tekst van buiten aan elkaar tot één prompt, en een model kan die niet betrouwbaar uit elkaar houden. Simon Willison noemde de aanval prompt injection in september 2022, na voorbeelden van Riley Goodside; anders dan bij SQL injection is er geen oplossing zoals placeholders voor bekend."
+  - en: "The attack success rate (ASR) is the share of attack attempts that got what the attacker wanted. It depends on the judge that decides what counts as success, on the number of tries and on what the model can do: if each try works with chance p, at least one of k independent tries works with chance 1 − (1 − p)^k."
+    nl: "De attack success rate (ASR) is het deel van de aanvalspogingen dat opleverde wat de aanvaller wilde. Die hangt af van de judge die beslist wat telt als succes, van het aantal pogingen en van wat het model kan: als elke poging werkt met kans p, werkt minstens een van k onafhankelijke pogingen met kans 1 − (1 − p)^k."
+  - en: "Spotlighting (Hines and colleagues, 2024) marks text from outside so that a model can tell where it came from: with delimiters, with a mark in every gap between its words (datamarking) or in an encoding such as base64. On GPT models of 2023 it brought the ASR from more than 50% to below 2%; its authors do not know why it helps, and Liu and colleagues found every defense they tested insufficient."
+    nl: "Spotlighting (Hines en collega's, 2024) markeert tekst van buiten zodat een model kan zien waar die vandaan komt: met scheidingstekens, met een teken in elk gat tussen de woorden (datamarking) of in een codering zoals base64. Bij GPT-modellen van 2023 bracht het de ASR van meer dan 50% naar onder 2%; de makers weten niet waarom het helpt, en Liu en collega's vonden elke verdediging die ze testten onvoldoende."
+  - en: "The course attacked eight reviews in four ways under six prompts, five tries each, on Qwen3-0.6B. Without a defense, with a warning and with delimiters, all 160 attacked answers held PINEAPPLE; the task again after the review gave 0.90, datamarking 0.75 with 29 of 40 clean reviews right, and base64 0, because Qwen3-0.6B cannot read base64: it sorted 21 of 40 clean reviews right."
+    nl: "De course viel acht recensies op vier manieren aan onder zes prompts, elk vijf keer, met Qwen3-0.6B. Zonder verdediging, met een waarschuwing en met scheidingstekens bevatten alle 160 aangevallen antwoorden PINEAPPLE; de taak er nog eens na gaf 0,90, datamarking 0,75 met 29 van de 40 schone recensies goed, en base64 0, omdat Qwen3-0.6B geen base64 kan lezen: het sorteerde 21 van de 40 schone recensies goed."
+  - en: "The same 40 answers give an ASR of 0.6 with the word anywhere and 0.35 with the word as the whole answer. One try worked in 24 of 40, and one of the first three in all 8 reviews. In code: `asr` counts the answers that hold the word, in capitals or not; `datamark` is `mark.join(text.split())`; `asr_within` counts a review once when one of its first k tries worked."
+    nl: "Dezelfde 40 antwoorden geven een ASR van 0,6 met het woord ergens in het antwoord en 0,35 met het woord als heel het antwoord. Eén poging werkte bij 24 van de 40, en een van de eerste drie bij alle 8 recensies. In code: `asr` telt de antwoorden met het woord erin, met of zonder hoofdletters; `datamark` is `mark.join(text.split())`; `asr_within` telt een recensie één keer als een van de eerste k pogingen werkte."
+can_now:
+  - en: "measure the attack success rate of a set of answers with a judge you chose"
+    nl: "de attack success rate van een reeks antwoorden meten met een judge die je koos"
+    by: asr
+  - en: "mark text from outside with datamarking"
+    nl: "tekst van buiten markeren met datamarking"
+    by: datamark
+  - en: "measure how often an attacker gets through within k tries"
+    nl: "meten hoe vaak een aanvaller binnen k pogingen slaagt"
+    by: within
+  - en: "tell a defense that holds from a model that cannot read its input"
+    nl: "een verdediging die standhoudt onderscheiden van een model dat zijn input niet kan lezen"
+    by: encode
+  - en: "say why an ASR means little without its judge"
+    nl: "zeggen waarom een ASR weinig zegt zonder de judge erbij"
+    by: judge
+further_reading:
+  - en: "Simon Willison (2022), [*Prompt injection attacks against GPT-3*](https://simonwillison.net/2022/Sep/12/prompt-injection/): the post that named the attack, with an update of 2023"
+    nl: "Simon Willison (2022), [*Prompt injection attacks against GPT-3*](https://simonwillison.net/2022/Sep/12/prompt-injection/): de post die de aanval een naam gaf, met een update uit 2023 (in het Engels)"
+  - en: "Fábio Perez and Ian Ribeiro (2022), [*Ignore Previous Prompt: Attack Techniques For Language Models*](https://arxiv.org/abs/2211.09527): goal hijacking, and getting the prompt out, on GPT-3"
+    nl: "Fábio Perez en Ian Ribeiro (2022), [*Ignore Previous Prompt: Attack Techniques For Language Models*](https://arxiv.org/abs/2211.09527): goal hijacking, en de prompt eruit krijgen, bij GPT-3 (in het Engels)"
+  - en: "Keegan Hines and colleagues (2024), [*Defending Against Indirect Prompt Injection Attacks With Spotlighting*](https://arxiv.org/abs/2403.14720): delimiting, datamarking and encoding"
+    nl: "Keegan Hines en collega's (2024), [*Defending Against Indirect Prompt Injection Attacks With Spotlighting*](https://arxiv.org/abs/2403.14720): delimiting, datamarking en encoding (in het Engels)"
+  - en: "Yupei Liu and colleagues (2024), [*Formalizing and Benchmarking Prompt Injection Attacks and Defenses*](https://www.usenix.org/system/files/usenixsecurity24-liu-yupei.pdf), USENIX Security 2024: five attacks and many defenses on ten models"
+    nl: "Yupei Liu en collega's (2024), [*Formalizing and Benchmarking Prompt Injection Attacks and Defenses*](https://www.usenix.org/system/files/usenixsecurity24-liu-yupei.pdf), USENIX Security 2024: vijf aanvallen en veel verdedigingen bij tien modellen (in het Engels)"

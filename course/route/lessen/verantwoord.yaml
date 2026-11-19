@@ -1130,7 +1130,8 @@ lessons:
   covers: [aanvallen-op-llm-applicaties#0]
   requires: [rai-ml-threat-models, build-defensive-prompts]
   introduces: [c:attack-success-rate, c:spotlighting]
-  data: [model-qwen3-0.6b]
+  mentions: [c:special-token]
+  data: [model-qwen3-0.6b, course-security-qwen]
   ladder: [python]
   needs: any
 
