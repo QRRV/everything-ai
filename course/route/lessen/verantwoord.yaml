@@ -906,6 +906,7 @@ lessons:
   requires: [rai-what-is-privacy, start-prompt-basics, lm-what-is-a-language-model]
   introduces: [c:contextual-integrity, c:attribute-inference]
   mentions: [c:benchmark, c:anonymization]
+  warns: [norm]
   data: [model-qwen3-0.6b, course-privacy-qwen]
   ladder: [python]
   needs: any
@@ -1001,6 +1002,7 @@ lessons:
   requires: [rai-what-is-privacy, lm-sampling, start-prompt-basics]
   introduces: [c:memorization, c:training-data-extraction]
   mentions: [py:split, c:base-model, c:chat-model, c:chat-template]
+  warns: [opening]
   data: [model-qwen3-0.6b-base, course-memorization-qwen]
   ladder: [python]
   needs: any
@@ -1014,7 +1016,7 @@ lessons:
   covers: [privacy-in-llm-producten-en-privacy-engineering#1, privacybewuste-dataverwerking#2]
   requires: [rai-pseudonymization, py-strings, ml-pipelines]
   introduces: [c:check-digit]
-  mentions: [c:pii-redaction, c:regular-expression, c:named-entity-recognition]
+  mentions: [c:pii-redaction, c:regular-expression]
   data: []
   ladder: [python]
   needs: any
@@ -1041,7 +1043,7 @@ lessons:
   covers: [privacybewuste-dataverwerking#0]
   requires: [rai-privacy-by-design]
   introduces: [c:data-governance, c:access-control, c:data-catalog]
-  mentions: [c:least-privilege, c:machine-unlearning]
+  mentions: [c:least-privilege]
   data: []
   ladder: [python]
   needs: any
@@ -1100,7 +1102,7 @@ lessons:
   covers: [dreigingsmodellering#5]
   requires: [rai-ml-threat-models, start-prompt-chains]
   introduces: [c:owasp-top-10-for-llm]
-  mentions: [c:prompt-injection, c:large-language-model, c:llm-agent, c:excessive-agency, c:system-prompt]
+  mentions: [c:prompt-injection, c:language-model, c:llm-agent, c:system-prompt]
   data: []
   ladder: [python]
   needs: any
@@ -1114,6 +1116,7 @@ lessons:
   covers: [poisoning-en-backdoors#0]
   requires: [rai-ml-threat-models, torch-mlp-digits]
   introduces: [c:data-poisoning, c:label-flipping]
+  mentions: [c:standard-error]
   data: [qmnist]
   ladder: [python, numpy, torch]
   needs: any

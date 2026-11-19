@@ -1,0 +1,45 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: rai-data-poisoning
+minutes: 40
+title:
+  en: "Poisoning the training data"
+  nl: "De training data vergiftigen"
+goal:
+  en: "flip labels of handwritten digits, at random and of one digit only, train the same network on them, and measure digit by digit where it fails and whether a drop is more than chance."
+  nl: "labels van handgeschreven cijfers omdraaien, willekeurig en van één cijfer, hetzelfde netwerk erop trainen, en per cijfer meten waar het faalt en of een daling meer is dan toeval."
+summary:
+  - en: "In data poisoning an attacker adds training examples or changes them, so that the model learns something else. NIST calls poisoning that spoils a model as a whole an availability attack, usually visible in its scores; targeted and backdoor poisoning make it wrong only on inputs the attacker chose."
+    nl: "Bij data poisoning voegt een aanvaller trainingsvoorbeelden toe of verandert die, zodat het model iets anders leert. Poisoning die een model als geheel bederft, noemt NIST een aanval op de beschikbaarheid, meestal zichtbaar in de scores; *targeted* en *backdoor poisoning* laten het zich alleen vergissen bij inputs die de aanvaller koos."
+  - en: "Label flipping changes only labels. Flipped at random, they do little: with 30% of the 6,000 labels changed, the digit network still reads 881 of the 1,000 test digits right, against 929 clean. The right label stays the most common while fewer than 90% are flipped; at 0.9 the network reads 102 right."
+    nl: "Label flipping verandert alleen labels. Willekeurig omgedraaid doen ze weinig: met 30% van de 6000 labels veranderd leest het cijfernetwerk nog 881 van de 1000 testcijfers goed, tegen 929 schoon. Het goede label blijft het vaakst zolang minder dan 90% is omgedraaid; bij 0,9 leest het netwerk er 102 goed."
+  - en: "Flipped where it hurts, fewer labels do more harm: 80% of the 7s labeled 1 is 521 labels, and the network reads 3 of the 99 test 7s right and 89 as a 1, while the other digits stay as good as clean. Overall it reads 840 right, which says that something is wrong but not what; only a score per digit shows where it fails."
+    nl: "Omgedraaid waar het pijn doet, doen minder labels meer schade: 80% van de 7'en als 1 is 521 labels, en het netwerk leest 3 van de 99 test-7'en goed en 89 als een 1, terwijl de andere cijfers even goed blijven als schoon. In totaal leest het er 840 goed; dat zegt dat er iets mis is, maar niet wat. Alleen een score per cijfer laat zien waar het faalt."
+  - en: "A score on n test images is a measurement: its margin of error, two standard errors, is 2√(s(1 − s)/n). For 0.929 on 1,000 test digits that is 0.016, so 0.881 is worse than chance explains; per digit, with about 100 test images each, it is 0.05 on average."
+    nl: "Een score op n testafbeeldingen is een meting: de foutmarge, twee standaardfouten, is 2√(s(1 − s)/n). Voor 0,929 op 1000 testcijfers is dat 0,016, dus is 0,881 slechter dan toeval verklaart; per cijfer, met zo'n 100 testafbeeldingen elk, is die gemiddeld 0,05."
+  - en: "For the backdoor Souly and colleagues tested, a share was not what counted: 250 poisoned documents put it in language models of every size they tried, 0.00016% of the training tokens of the largest. In code: `flip_digit` labels 521 of the 651 sevens 1; `per_digit` gives a share for each digit; `verdict` calls 0.881 against 0.929 on 1,000 images worse."
+    nl: "Bij de backdoor die Souly en collega's testten, telde het aandeel niet: 250 vergiftigde documenten zetten die in language models van elke grootte die ze probeerden, 0,00016% van de training tokens van het grootste. In code: `flip_digit` geeft 521 van de 651 afbeeldingen van een 7 het label 1; `per_digit` geeft een aandeel voor elk cijfer; `verdict` noemt 0,881 tegen 0,929 op 1000 afbeeldingen worse."
+can_now:
+  - en: "flip the labels of one class in a copy of the training labels"
+    nl: "de labels van één klasse omdraaien in een kopie van de trainingslabels"
+    by: flip-digit
+  - en: "measure the share a model gets right for each class"
+    nl: "per klasse meten welk deel een model goed heeft"
+    by: per-digit
+  - en: "tell a drop in a score from chance with a margin of error of two standard errors"
+    nl: "een daling in een score onderscheiden van toeval met een foutmarge van twee standaardfouten"
+    by: verdict
+  - en: "say why a network survives many labels flipped at random, and when it stops"
+    nl: "zeggen waarom een netwerk veel willekeurig omgedraaide labels overleeft, en wanneer niet meer"
+    by: noise
+  - en: "say why a fixed number of poisoned documents can be enough, however big the data"
+    nl: "zeggen waarom een vast aantal vergiftigde documenten genoeg kan zijn, hoe groot de data ook is"
+    by: count
+further_reading:
+  - en: "NIST (2025), [*Adversarial Machine Learning: A Taxonomy and Terminology of Attacks and Mitigations*](https://csrc.nist.gov/pubs/ai/100/2/e2025/final), NIST AI 100-2 E2025: availability, targeted and backdoor poisoning, and label flipping"
+    nl: "NIST (2025), [*Adversarial Machine Learning: A Taxonomy and Terminology of Attacks and Mitigations*](https://csrc.nist.gov/pubs/ai/100/2/e2025/final), NIST AI 100-2 E2025: poisoning tegen de beschikbaarheid, *targeted* en *backdoor poisoning*, en label flipping (in het Engels)"
+  - en: "David Rolnick and colleagues (2017), [*Deep Learning is Robust to Massive Label Noise*](https://arxiv.org/abs/1705.10694): MNIST with 100 random labels for every clean one, and the margin the right label needs"
+    nl: "David Rolnick en collega's (2017), [*Deep Learning is Robust to Massive Label Noise*](https://arxiv.org/abs/1705.10694): MNIST met 100 willekeurige labels voor elk goed label, en de marge die het goede label nodig heeft (in het Engels)"
+  - en: "Alexandra Souly and colleagues (2025), [*Poisoning Attacks on LLMs Require a Near-constant Number of Poison Samples*](https://arxiv.org/abs/2510.07192): 250 documents for models of every size"
+    nl: "Alexandra Souly en collega's (2025), [*Poisoning Attacks on LLMs Require a Near-constant Number of Poison Samples*](https://arxiv.org/abs/2510.07192): 250 documenten voor modellen van elke grootte (in het Engels)"
