@@ -1144,7 +1144,7 @@ lessons:
   covers: [aanvallen-op-llm-applicaties#1]
   requires: [rai-prompt-injection, agent-idea]
   introduces: [c:indirect-prompt-injection, c:lethal-trifecta]
-  data: [model-qwen3-0.6b]
+  data: [model-qwen3-0.6b, course-security-qwen]
   ladder: [python]
   needs: any
 

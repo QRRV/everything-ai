@@ -416,7 +416,8 @@ def demo(messages: list, show, words: dict, lang: str, max_tokens: int = 256, se
     at most five times a second. `words` has "title", "loading", "writing", "done" (with {tokens} and {seconds}),
     "load" and "memory", in the lesson's language; `note(text)`, when given, adds a sentence of the lesson's own about
     the answer after "done". Other `settings` of Chat.answer, such as `temperature` or `stop`, go to the model as
-    they are. The picture of the answer, or the message of what went wrong."""
+    they are; with `tools`, the picture and the note keep the model's tool calls in the text. The picture of the
+    answer, or the message of what went wrong."""
     import html
     a = answer_live(messages, lambda text: show(answer_picture(text or "", words["loading"] if text is None else words["writing"], words["title"])),
                     max_tokens=max_tokens, seed=seed, **settings)
@@ -424,7 +425,7 @@ def demo(messages: list, show, words: dict, lang: str, max_tokens: int = 256, se
         return f'<p><em>{html.escape(words[a])}</em></p>'
     seconds = f"{a['seconds']:.1f}".replace(".", "," if lang == "nl" else ".")
     done = words["done"].format(tokens=a["tokens"], seconds=seconds)
-    text = a["message"]["content"]
+    text = THOUGHT.sub("", a["text"]).strip() if settings.get("tools") else a["message"]["content"]
     return answer_picture(text, done + (" " + note(text) if note else ""), words["title"])
 
 

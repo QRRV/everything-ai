@@ -1,0 +1,47 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: rai-indirect-injection
+minutes: 40
+title:
+  en: "Injection through a document"
+  nl: "Injection via een document"
+goal:
+  en: "attack a mail assistant through an email in its inbox, count when it sends a pickup code away, find which legs of the lethal trifecta an agent has, and check every email it wants to send before your program sends it."
+  nl: "een mailassistent aanvallen via een e-mail in zijn inbox, tellen wanneer hij een ophaalcode wegstuurt, uitzoeken welke poten van de lethal trifecta een agent heeft, en elke e-mail die hij wil sturen controleren voor je programma hem verstuurt."
+summary:
+  - en: "In an indirect prompt injection the attacker never talks to the app: the instructions sit in a web page, an email or a file the model reads while it works. Greshake and colleagues (2023) showed it on Bing's chat and on apps of their own; Microsoft authors call it XPIA."
+    nl: "Bij een indirect prompt injection praat de aanvaller nooit met de app: de instructies staan in een webpagina, een e-mail of een bestand dat het model leest terwijl het werkt. Greshake en collega's (2023) lieten het zien op de chat van Bing en op eigen apps; auteurs van Microsoft noemen het XPIA."
+  - en: "Simon Willison's lethal trifecta (June 2025): an agent with access to private data, exposure to untrusted content and a way to communicate externally can be tricked into sending your data to an attacker. Any tool that makes an HTTP request can be a way out. The only safe way, Willison writes, is to avoid the combination; vendors fixed almost all the incidents Willison lists, usually by closing the way out."
+    nl: "De lethal trifecta van Simon Willison (juni 2025): een agent met toegang tot privégegevens, blootstelling aan onbetrouwbare inhoud en een manier om naar buiten te communiceren, kan misleid worden om je gegevens naar een aanvaller te sturen. Elke tool die een HTTP-request doet, kan een weg naar buiten zijn. De enige veilige weg is volgens Willison de combinatie vermijden; makers herstelden bijna alle incidenten die Willison noemt, meestal door de weg naar buiten dicht te zetten."
+  - en: "EchoLeak (CVE-2025-32711), reported by Aim Labs in January (Willison, June 2025): an email made Microsoft 365 Copilot put private data in the address of a link or image. Microsoft rates it Critical, 9.3, NVD 7.5, and fully mitigated it. Defenses get far but not all the way: CaMeL solved 77% of AgentDojo's tasks with provable security, against 84% without a defense, and Anthropic reports a 1% attack success rate as still a meaningful risk."
+    nl: "EchoLeak (CVE-2025-32711), gemeld door Aim Labs in januari (Willison, juni 2025): een e-mail liet Microsoft 365 Copilot privégegevens in het adres van een link of afbeelding zetten. Microsoft beoordeelt het als Critical, 9,3, NVD als 7,5, en verhielp het volledig. Verdedigingen komen ver, maar niet helemaal: CaMeL loste 77% van de taken van AgentDojo op met aantoonbare security, tegen 84% zonder verdediging, en Anthropic noemt een attack success rate van 1% nog steeds een reëel risico."
+  - en: "The course attacked a mail assistant on Qwen3-0.6B with five forms of an email, ten tries each. With all three legs, the instruction in an HTML comment sent the pickup code to the attacker in all 10 tries and the one dressed as a system message in 9; the plain request, the owner's and the attacker's own email as the customer in none. Without the pickup code, 12 tries still emailed the attacker, with no code to send; without `send_email`, no try called a tool. Taking away the code or `send_email` stopped every leak of the code."
+    nl: "De course viel een mailassistent op Qwen3-0.6B aan met vijf vormen van een e-mail, elk tien keer. Met alle drie de poten stuurde de instructie in een HTML-commentaar de ophaalcode bij alle 10 pogingen naar de aanvaller, en die vermomd als bericht van het systeem bij 9; het gewone verzoek, dat van de eigenaar en de eigen e-mail van de aanvaller als de klant bij geen enkele. Zonder de ophaalcode mailden 12 pogingen de aanvaller nog, zonder code om te sturen; zonder `send_email` riep geen enkele poging een tool aan. De code of `send_email` weghalen hield elk lek van de code tegen."
+  - en: "In code: `missing` collects the legs of all tools in a set and keeps the ones not in it; `leaks` looks for a call of `send_email` with the code in its subject or body; `may_send` compares the whole domain after the `@`, in small letters, with the allowed domains, before the tool runs."
+    nl: "In code: `missing` verzamelt de poten van alle tools in een set en houdt de poten over die er niet in zitten; `leaks` zoekt een aanroep van `send_email` met de code in het onderwerp of de tekst; `may_send` vergelijkt het hele domein na de `@`, in kleine letters, met de toegestane domeinen, voor de tool draait."
+can_now:
+  - en: "find which legs of the lethal trifecta an agent's tools bring"
+    nl: "uitzoeken welke poten van de lethal trifecta de tools van een agent meebrengen"
+    by: missing
+  - en: "judge from an agent's tool calls whether private data went out"
+    nl: "aan de tool calls van een agent zien of privégegevens naar buiten gingen"
+    by: leaks
+  - en: "check a tool call in your program before it runs"
+    nl: "een tool call in je programma controleren voor hij draait"
+    by: may-send
+  - en: "say why the sender of an email is untrusted content too"
+    nl: "zeggen waarom de afzender van een e-mail ook onbetrouwbare inhoud is"
+    by: owner
+  - en: "say what a fixed incident does and does not show"
+    nl: "zeggen wat een hersteld incident wel en niet laat zien"
+    by: fixed
+further_reading:
+  - en: "Kai Greshake and colleagues (2023), [*Not what you've signed up for: Compromising Real-World LLM-Integrated Applications with Indirect Prompt Injection*](https://arxiv.org/abs/2302.12173), AISec 2023: the paper that showed the indirect route"
+    nl: "Kai Greshake en collega's (2023), [*Not what you've signed up for: Compromising Real-World LLM-Integrated Applications with Indirect Prompt Injection*](https://arxiv.org/abs/2302.12173), AISec 2023: de paper die de indirecte weg liet zien (in het Engels)"
+  - en: "Simon Willison (2025), [*The lethal trifecta for AI agents: private data, untrusted content, and external communication*](https://simonwillison.net/2025/Jun/16/the-lethal-trifecta/): the three legs, with a list of incidents"
+    nl: "Simon Willison (2025), [*The lethal trifecta for AI agents: private data, untrusted content, and external communication*](https://simonwillison.net/2025/Jun/16/the-lethal-trifecta/): de drie poten, met een lijst incidenten (in het Engels)"
+  - en: "Edoardo Debenedetti and colleagues (2024), [*AgentDojo: A Dynamic Environment to Evaluate Prompt Injection Attacks and Defenses for LLM Agents*](https://arxiv.org/abs/2406.13352), NeurIPS 2024: tasks and attacks for agents"
+    nl: "Edoardo Debenedetti en collega's (2024), [*AgentDojo: A Dynamic Environment to Evaluate Prompt Injection Attacks and Defenses for LLM Agents*](https://arxiv.org/abs/2406.13352), NeurIPS 2024: taken en aanvallen voor agents (in het Engels)"
+  - en: "Edoardo Debenedetti and colleagues (2025), [*Defeating Prompt Injections by Design*](https://arxiv.org/abs/2503.18813): CaMeL, which keeps untrusted data from changing what the program does"
+    nl: "Edoardo Debenedetti en collega's (2025), [*Defeating Prompt Injections by Design*](https://arxiv.org/abs/2503.18813): CaMeL, dat onbetrouwbare data niet laat veranderen wat het programma doet (in het Engels)"
