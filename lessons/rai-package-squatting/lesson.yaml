@@ -1,0 +1,47 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: rai-package-squatting
+minutes: 35
+title:
+  en: "Packages that are not what they seem"
+  nl: "Packages die niet zijn wat ze lijken"
+goal:
+  en: "write a package name as PyPI compares it, find the names it is 1 or 2 edits from, and decide what to do with a name an LLM gives: use the package you know, take the one it looks like, look elsewhere, or read its page first."
+  nl: "een packagenaam schrijven zoals PyPI hem vergelijkt, de namen vinden waar hij 1 of 2 bewerkingen van af ligt, en beslissen wat je doet met een naam die een LLM geeft: het package gebruiken dat je kent, het package nemen waar hij op lijkt, verder zoeken, of eerst zijn pagina lezen."
+summary:
+  - en: "Typosquatting publishes a package under a name that looks like a popular one: `urlib3` and `setup-tools` were among 11 such packages on PyPI in 2017, online for about three months; in 2024, Check Point found over 500, such as `requestss`, `request5` and `pandas-sdk`."
+    nl: "Typosquatting publiceert een package onder een naam die op een populaire lijkt: `urlib3` en `setup-tools` zaten in 2017 bij 11 zulke packages op PyPI, die ongeveer drie maanden online stonden; in 2024 vond Check Point er meer dan 500, zoals `requestss`, `request5` en `pandas-sdk`."
+  - en: "PyPI compares names in small letters, with every run of `.`, `-` and `_` as one `-`: `setup_tools` and `setup-tools` are one name, `setuptools` another. The Levenshtein distance counts the letters to put in, take out or change; a threshold of two for how alike names are found 21 of 36 known typosquatting attacks (Vu et al., 2020)."
+    nl: "PyPI vergelijkt namen in kleine letters, met elke reeks van `.`, `-` en `_` als één `-`: `setup_tools` en `setup-tools` zijn één naam, `setuptools` een andere. De Levenshtein-afstand telt de letters die je moet invoegen, weghalen of veranderen; een grens van twee voor hoeveel namen op elkaar lijken vond 21 van 36 bekende aanvallen met typosquatting (Vu et al., 2020)."
+  - en: "LLMs make up package names: 19.7% of 2.23 million package names in code of 16 LLMs were not on the list of PyPI or npm, for their language, of January 2024, and only 13.4% of the made-up Python names were within distance 2 of a real package (Spracklen et al., 2025). Slopsquatting registers such a name. Asked ten times for each of ten tasks, Qwen3-0.6B gave 33 different names; 15 were not on PyPI on 19 November 2026."
+    nl: "LLM's verzinnen namen van packages: 19,7% van 2,23 miljoen packagenamen in code van 16 LLM's stond niet op de lijst van PyPI of npm, voor hun taal, van januari 2024, en maar 13,4% van de verzonnen Python-namen lag binnen afstand 2 van een echt package (Spracklen et al., 2025). Slopsquatting registreert zo'n naam. Tien keer gevraagd voor elk van tien taken gaf Qwen3-0.6B 33 verschillende namen; 15 stonden op 19 november 2026 niet op PyPI."
+  - en: "A name on PyPI only says that someone registered it. Check a name before you install it, and pin what you install: the course's `uv.lock` holds 101 packages, each with one version and the SHA-256 of its files."
+    nl: "Een naam op PyPI zegt alleen dat iemand hem registreerde. Controleer een naam voordat je hem installeert, en leg vast wat je installeert: de `uv.lock` van de course bevat 101 packages, elk met één versie en de SHA-256 van zijn bestanden."
+can_now:
+  - en: "write a package name as PyPI compares it"
+    nl: "een packagenaam schrijven zoals PyPI hem vergelijkt"
+    by: normalize
+  - en: "find the names a name is 1 or 2 edits from"
+    nl: "de namen vinden waar een naam 1 of 2 bewerkingen van af ligt"
+    by: near
+  - en: "decide what to do with a package name an LLM gives"
+    nl: "beslissen wat je doet met een packagenaam die een LLM geeft"
+    by: verdict
+  - en: "say what it means that a name exists on PyPI"
+    nl: "zeggen wat het betekent dat een naam op PyPI bestaat"
+    by: exists
+  - en: "say why a check on distance does not stop slopsquatting"
+    nl: "zeggen waarom een controle op afstand slopsquatting niet tegenhoudt"
+    by: distance-check
+further_reading:
+  - en: "Joseph Spracklen, Raveen Wijewickrama, A H M Nazmus Sakib, Anindya Maiti, Bimal Viswanath and Murtuza Jadliwala (2025), [*We Have a Package for You! A Comprehensive Analysis of Package Hallucinations by Code Generating LLMs*](https://www.usenix.org/conference/usenixsecurity25/presentation/spracklen), USENIX Security: how often 16 LLMs make up package names, and how alike those names are"
+    nl: "Joseph Spracklen, Raveen Wijewickrama, A H M Nazmus Sakib, Anindya Maiti, Bimal Viswanath en Murtuza Jadliwala (2025), [*We Have a Package for You! A Comprehensive Analysis of Package Hallucinations by Code Generating LLMs*](https://www.usenix.org/conference/usenixsecurity25/presentation/spracklen), USENIX Security: hoe vaak 16 LLM's namen van packages verzinnen, en hoeveel die namen op echte lijken (in het Engels)"
+  - en: "Duc-Ly Vu, Ivan Pashchenko, Fabio Massacci, Henrik Plate and Antonino Sabetta (2020), [*Typosquatting and Combosquatting Attacks on the Python Ecosystem*](https://conferences.computer.org/eurosp/pdfs/EuroSPW2020-7k9FlVRX4z43j4uE2SeXU0/859700a508/859700a508.pdf), EuroS&PW: the forms that known typosquatting attacks take"
+    nl: "Duc-Ly Vu, Ivan Pashchenko, Fabio Massacci, Henrik Plate en Antonino Sabetta (2020), [*Typosquatting and Combosquatting Attacks on the Python Ecosystem*](https://conferences.computer.org/eurosp/pdfs/EuroSPW2020-7k9FlVRX4z43j4uE2SeXU0/859700a508/859700a508.pdf), EuroS&PW: de vormen die bekende aanvallen met typosquatting aannemen (in het Engels)"
+  - en: "Bar Lanyado (2024), [*Diving Deeper into AI Package Hallucinations*](https://www.lasso.security/blog/ai-package-hallucinations), Lasso Security: an empty package under a made-up name, and its downloads"
+    nl: "Bar Lanyado (2024), [*Diving Deeper into AI Package Hallucinations*](https://www.lasso.security/blog/ai-package-hallucinations), Lasso Security: een leeg package onder een verzonnen naam, en hoe vaak het werd gedownload (in het Engels)"
+  - en: "Python Packaging User Guide, [*Names and normalization*](https://packaging.python.org/en/latest/specifications/name-normalization/): the rule that Exercise 1 writes"
+    nl: "Python Packaging User Guide, [*Names and normalization*](https://packaging.python.org/en/latest/specifications/name-normalization/): de regel die je in oefening 1 schrijft (in het Engels)"
+  - en: "Łukasz Langa, [*PEP 541 – Package Index Name Retention*](https://peps.python.org/pep-0541/): when PyPI removes a project, and which names it holds back"
+    nl: "Łukasz Langa, [*PEP 541 – Package Index Name Retention*](https://peps.python.org/pep-0541/): wanneer PyPI een project weghaalt, en welke namen het achterhoudt (in het Engels)"

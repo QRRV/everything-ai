@@ -31,7 +31,7 @@ from everything_ai import chat, hub, paths, qwen3  # noqa: E402
 
 OUT = paths.ROOT / "data" / "course-security-qwen.json"
 LESSONS = ["rai-prompt-injection", "rai-indirect-injection", "rai-jailbreaks", "rai-system-prompt-extraction",
-           "rai-insecure-output"]
+           "rai-insecure-output", "rai-package-squatting"]
 FIELDS = ("messages", "max_tokens", "stop", "thinking")
 
 
