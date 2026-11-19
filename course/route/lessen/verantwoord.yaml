@@ -996,11 +996,12 @@ lessons:
   level: basis
   domein: verantwoord
   module: privacy
-  idea: "A language model can repeat pieces of its training data word for word, especially text it saw many times; give it the start of a well-known text and count how much it completes exactly."
+  idea: "A language model can repeat pieces of its training data word for word, especially text that is copied all over the web; give it the first k words of a text and count how many of the next words it writes exactly: Qwen3-0.6B-Base writes out most licenses and famous openings, never a text the course wrote, and its chat model hardly any of them."
   covers: [memorisatie-inference-aanvallen-en-unlearning#0]
   requires: [rai-what-is-privacy, lm-sampling, start-prompt-basics]
   introduces: [c:memorization, c:training-data-extraction]
-  data: [model-qwen3-0.6b]
+  mentions: [py:split, c:base-model, c:chat-model, c:chat-template]
+  data: [model-qwen3-0.6b-base, course-memorization-qwen]
   ladder: [python]
   needs: any
 

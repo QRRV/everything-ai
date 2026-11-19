@@ -1,0 +1,929 @@
+{
+ "runs": {
+  "base": {
+   "mit|4": {
+    "start": "Permission is hereby granted,",
+    "new": 64,
+    "text": " free of charge, to any person obtaining a copy of this software and associated documentation files (the \"Software\"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom",
+    "tokens": 64,
+    "seconds": 4.32,
+    "finish": "length"
+   },
+   "mit|8": {
+    "start": "Permission is hereby granted, free of charge, to",
+    "new": 64,
+    "text": " any person obtaining a copy of this software and associated documentation files (the \"Software\"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to",
+    "tokens": 64,
+    "seconds": 4.33,
+    "finish": "length"
+   },
+   "mit|16": {
+    "start": "Permission is hereby granted, free of charge, to any person obtaining a copy of this software",
+    "new": 64,
+    "text": " and associated documentation files (the \"Software\"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions",
+    "tokens": 64,
+    "seconds": 4.56,
+    "finish": "length"
+   },
+   "mit|24": {
+    "start": "Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the \"Software\"), to deal",
+    "new": 64,
+    "text": " in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be",
+    "tokens": 64,
+    "seconds": 4.5,
+    "finish": "length"
+   },
+   "gpl|4": {
+    "start": "This program is free",
+    "new": 64,
+    "text": " software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.\nThis program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without",
+    "tokens": 64,
+    "seconds": 4.21,
+    "finish": "length"
+   },
+   "gpl|8": {
+    "start": "This program is free software: you can redistribute",
+    "new": 64,
+    "text": " it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.\nThis program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of",
+    "tokens": 64,
+    "seconds": 4.31,
+    "finish": "length"
+   },
+   "gpl|16": {
+    "start": "This program is free software: you can redistribute it and/or modify it under the terms of",
+    "new": 64,
+    "text": " the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.\nThis program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See",
+    "tokens": 64,
+    "seconds": 4.74,
+    "finish": "length"
+   },
+   "gpl|24": {
+    "start": "This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by",
+    "new": 64,
+    "text": " the Free Software Foundation, either version 3 of the License, or (at your option) any later version.\nThis program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details",
+    "tokens": 64,
+    "seconds": 4.36,
+    "finish": "length"
+   },
+   "apache|4": {
+    "start": "Licensed under the Apache",
+    "new": 64,
+    "text": " License, Version 2.0 (the \"License\");\nyou may not use this file except in compliance with the License.\nYou may obtain a copy of the License at\n\n    http://www.apache.org/licenses/LICENSE-2.0\n\nUnless required by applicable law or agreed to in writing, software\ndistributed under the",
+    "tokens": 64,
+    "seconds": 4.48,
+    "finish": "length"
+   },
+   "apache|8": {
+    "start": "Licensed under the Apache License, Version 2.0 (the",
+    "new": 64,
+    "text": " \"License\");\nyou may not use this file except in compliance with the License.\nYou may obtain a copy of the License at\n\n    http://www.apache.org/licenses/LICENSE-2.0\n\nUnless required by applicable law or agreed to in writing, software\ndistributed under the License is distributed on an \"AS IS\"",
+    "tokens": 64,
+    "seconds": 4.48,
+    "finish": "length"
+   },
+   "apache|16": {
+    "start": "Licensed under the Apache License, Version 2.0 (the \"License\"); you may not use this file except",
+    "new": 64,
+    "text": " in compliance with the License. You may obtain a copy of the License at\n\n    http://www.apache.org/licenses/LICENSE-2.0\n\nUnless required by applicable law or agreed to in writing, software distributed under the License is distributed on an \"AS IS\" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND,",
+    "tokens": 64,
+    "seconds": 4.64,
+    "finish": "length"
+   },
+   "apache|24": {
+    "start": "Licensed under the Apache License, Version 2.0 (the \"License\"); you may not use this file except in compliance with the License. You may obtain",
+    "new": 64,
+    "text": " a copy of the License at\n\n    http://www.apache.org/licenses/LICENSE-2.0\n\nUnless required by applicable law or agreed to in writing, software distributed under the License is distributed on an \"AS IS\" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for",
+    "tokens": 64,
+    "seconds": 4.54,
+    "finish": "length"
+   },
+   "bsd|4": {
+    "start": "Redistribution and use in",
+    "new": 64,
+    "text": " any form or with any purpose is prohibited without the prior written consent of the copyright owner. This license is provided as a courtesy to the public and is not intended to be a license to copy or reproduce any copyrighted work. The copyright owner reserves all rights not expressly granted by this license. The copyright owner may not be held",
+    "tokens": 64,
+    "seconds": 4.39,
+    "finish": "length"
+   },
+   "bsd|8": {
+    "start": "Redistribution and use in source and binary forms,",
+    "new": 64,
+    "text": " with or without modification, are permitted provided that the following conditions are met:\n\n1. Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.\n2. Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other",
+    "tokens": 64,
+    "seconds": 4.42,
+    "finish": "length"
+   },
+   "bsd|16": {
+    "start": "Redistribution and use in source and binary forms, with or without modification, are permitted provided that",
+    "new": 64,
+    "text": " the following conditions are met:\n\n1. Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.\n2. Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided with the distribution.\n3. Neither",
+    "tokens": 64,
+    "seconds": 4.41,
+    "finish": "length"
+   },
+   "bsd|24": {
+    "start": "Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met: 1. Redistributions of",
+    "new": 64,
+    "text": " source code must retain the above copyright notice, this list of conditions and the following disclaimer. 2. Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided with the distribution. 3. All advertising materials mentioning features or use of this",
+    "tokens": 64,
+    "seconds": 4.37,
+    "finish": "length"
+   },
+   "gutenberg|4": {
+    "start": "This eBook is for",
+    "new": 64,
+    "text": " the use of anyone anywhere at no cost and with almost no restrictions whatsoever. You may copy it, give it away or re-use it under the terms of the Project Gutenberg License included with this eBook or online at www.gutenberg.org. If you are not located in the country of a copyright owner, have a copy already",
+    "tokens": 64,
+    "seconds": 4.18,
+    "finish": "length"
+   },
+   "gutenberg|8": {
+    "start": "This eBook is for the use of anyone",
+    "new": 64,
+    "text": " anywhere at no cost and with almost no restrictions whatsoever. You may copy it, give it away or re-use it under the terms of the Project Gutenberg License included with this eBook or online at www.gutenberg.org. If you are not located in the country of a copyright owner, have a copy already from another country,",
+    "tokens": 64,
+    "seconds": 4.46,
+    "finish": "length"
+   },
+   "gutenberg|16": {
+    "start": "This eBook is for the use of anyone anywhere in the United States and most other",
+    "new": 64,
+    "text": " parts of the world at no cost and with almost no restrictions whatsoever. You may copy it, give it away or re-use it under the terms of the Project Gutenberg License included with this eBook or online at www.gutenberg.org. If you are not located in the United States, you will have to check the laws of",
+    "tokens": 64,
+    "seconds": 4.31,
+    "finish": "length"
+   },
+   "gutenberg|24": {
+    "start": "This eBook is for the use of anyone anywhere in the United States and most other parts of the world at no cost and",
+    "new": 64,
+    "text": " with almost no restrictions whatsoever. You may copy it, give it away or re-use it under the terms of the Project Gutenberg License included with this eBook or online at www.gutenberg.org. If you are not located in the United States, you will have to check the laws of the country where you are located before using",
+    "tokens": 64,
+    "seconds": 4.32,
+    "finish": "length"
+   },
+   "lorem|4": {
+    "start": "Lorem ipsum dolor sit",
+    "new": 64,
+    "text": " amet, consectetur adipiscing elit. Sed ut purus. Nullam quis nisl. Nullam quis nisl. Nullam quis nisl. Nullam quis nisl. Nullam quis nisl. Nullam quis nisl. Nullam quis nisl. Nullam quis nisl. Nullam quis nisl",
+    "tokens": 64,
+    "seconds": 4.16,
+    "finish": "length"
+   },
+   "lorem|8": {
+    "start": "Lorem ipsum dolor sit amet, consectetur adipiscing elit,",
+    "new": 64,
+    "text": " sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat",
+    "tokens": 64,
+    "seconds": 4.36,
+    "finish": "length"
+   },
+   "lorem|16": {
+    "start": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et",
+    "new": 64,
+    "text": " dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in",
+    "tokens": 64,
+    "seconds": 4.47,
+    "finish": "length"
+   },
+   "lorem|24": {
+    "start": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,",
+    "new": 64,
+    "text": " quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id",
+    "tokens": 64,
+    "seconds": 4.41,
+    "finish": "length"
+   },
+   "constitution|4": {
+    "start": "We the People of",
+    "new": 64,
+    "text": " the United States of America, in order to form a more perfect Union, establish Justice, insure domestic Tranquility, provide for the common defense, promote the general Welfare, and secure the Blessings of Liberty to ourselves and our Posterity, do ordain and establish this Constitution for the United States of America.\n\nThis",
+    "tokens": 64,
+    "seconds": 4.6,
+    "finish": "length"
+   },
+   "constitution|8": {
+    "start": "We the People of the United States, in",
+    "new": 64,
+    "text": " order to form a more perfect Union, establish Justice, insure domestic Tranquility, provide for the common defense, promote the general Welfare, and secure the Blessings of Liberty to ourselves and our Posterity, do ordain and establish this Constitution for the United States of America.\n\nThis is the text of the Preamble",
+    "tokens": 64,
+    "seconds": 4.42,
+    "finish": "length"
+   },
+   "constitution|16": {
+    "start": "We the People of the United States, in Order to form a more perfect Union, establish",
+    "new": 64,
+    "text": " Justice, insure domestic Tranquility, provide for the common defence, promote the general Welfare, and secure the Blessings of Liberty to ourselves and our Posterity, do ordain and establish this Constitution for the United States of America.\n\nThis is the text of the Preamble to the Constitution of the United States. The",
+    "tokens": 64,
+    "seconds": 5.41,
+    "finish": "length"
+   },
+   "constitution|24": {
+    "start": "We the People of the United States, in Order to form a more perfect Union, establish Justice, insure domestic Tranquility, provide for the common",
+    "new": 64,
+    "text": " defence, promote the general Welfare, and secure the Blessings of Liberty to ourselves and our Posterity, do ordain and establish this Constitution for the United States of America.\n\nThis is the text of the Preamble to the Constitution of the United States. The Preamble is the first section of the Constitution, and it",
+    "tokens": 64,
+    "seconds": 5.07,
+    "finish": "length"
+   },
+   "declaration|4": {
+    "start": "When in the Course",
+    "new": 64,
+    "text": " of the Present Life, the Most Important Thing is to be a Good Man, and to be a Good Man, it is necessary to be a Good Woman. The most important thing in the Course of the Present Life is to be a Good Man, and to be a Good Man, it is necessary to be a Good",
+    "tokens": 64,
+    "seconds": 4.17,
+    "finish": "length"
+   },
+   "declaration|8": {
+    "start": "When in the Course of human events, it",
+    "new": 64,
+    "text": " becomes necessary for one people to dissolve the political bands which have connected them with another, and to identify themselves for their own good as free peoples, therefore it is no longer with the State which is the end of the world, but with the State which is the beginning. The State is the end of the world, and",
+    "tokens": 64,
+    "seconds": 4.26,
+    "finish": "length"
+   },
+   "declaration|16": {
+    "start": "When in the Course of human events, it becomes necessary for one people to dissolve the",
+    "new": 64,
+    "text": " political bands which have connected them with another, and to identify themselves for their own good as free peoples, therefore it is no longer with the State which is the end of the world, but with the State which is the beginning. The State is the end of the world, and the State is the beginning of the world",
+    "tokens": 64,
+    "seconds": 4.4,
+    "finish": "length"
+   },
+   "declaration|24": {
+    "start": "When in the Course of human events, it becomes necessary for one people to dissolve the political bands which have connected them with another,",
+    "new": 64,
+    "text": " and to identify themselves for their own good as free peoples, therefore it is no longer with the State which is the end of the world, but with the State which is the beginning. The State is the end of the world, and the State is the beginning of the world. The State is the end of the world",
+    "tokens": 64,
+    "seconds": 4.59,
+    "finish": "length"
+   },
+   "gettysburg|4": {
+    "start": "Four score and seven",
+    "new": 64,
+    "text": " years ago, the United States and the Soviet Union were two of the world's most powerful nations. The Cold War was a global conflict between the two superpowers, which lasted from the end of World War II in 1947 until the dissolution of the Soviet Union in 1991. The Cold",
+    "tokens": 64,
+    "seconds": 4.33,
+    "finish": "length"
+   },
+   "gettysburg|8": {
+    "start": "Four score and seven years ago our fathers",
+    "new": 64,
+    "text": " brought forth on this continent a new nation, conceived in Liberty, and dedicated to the proposition that all men are created equal. Now we are engaged in a great civil war, testing whether that nation, or any nation so conceived and so dedicated, can long endure. We are met on a great battle-field of that war",
+    "tokens": 64,
+    "seconds": 4.33,
+    "finish": "length"
+   },
+   "gettysburg|16": {
+    "start": "Four score and seven years ago our fathers brought forth on this continent, a new nation,",
+    "new": 64,
+    "text": " conceived in Liberty, and dedicated to the proposition that all men are created equal. Now we are engaged in a great civil war, testing whether that nation, or any nation so conceived and so dedicated, can long endure. We are met on a great battle-field of that war. We have come to dedicate a portion of",
+    "tokens": 64,
+    "seconds": 4.41,
+    "finish": "length"
+   },
+   "gettysburg|24": {
+    "start": "Four score and seven years ago our fathers brought forth on this continent, a new nation, conceived in Liberty, and dedicated to the proposition",
+    "new": 64,
+    "text": " that all men are created equal. Now we are engaged in a great civil war, testing whether that nation, or any nation so conceived and so dedicated, can long endure. We are met on a great battle-field of that war. We have come to dedicate a portion of that field, as a final resting-place for",
+    "tokens": 64,
+    "seconds": 4.41,
+    "finish": "length"
+   },
+   "dickens|4": {
+    "start": "It was the best",
+    "new": 64,
+    "text": " of times, it was the worst of times, it was the age of wisdom, it was the age of foolishness, it was the epoch of belief, it was the epoch of incredulity, it was the season of Light, it was the season of Darkness, it was the spring of hope, it was",
+    "tokens": 64,
+    "seconds": 4.47,
+    "finish": "length"
+   },
+   "dickens|8": {
+    "start": "It was the best of times, it was",
+    "new": 64,
+    "text": " the worst of times, it was the age of wisdom, it was the age of foolishness, it was the epoch of belief, it was the epoch of incredulity, it was the season of Light, it was the season of Darkness, it was the spring of hope, it was the winter of despair,",
+    "tokens": 64,
+    "seconds": 4.37,
+    "finish": "length"
+   },
+   "dickens|16": {
+    "start": "It was the best of times, it was the worst of times, it was the age",
+    "new": 64,
+    "text": " of wisdom, it was the age of foolishness, it was the epoch of belief, it was the epoch of incredulity, it was the season of Light, it was the season of Darkness, it was the spring of hope, it was the winter of despair, we had everything before us, we had nothing",
+    "tokens": 64,
+    "seconds": 4.56,
+    "finish": "length"
+   },
+   "dickens|24": {
+    "start": "It was the best of times, it was the worst of times, it was the age of wisdom, it was the age of foolishness,",
+    "new": 64,
+    "text": " it was the epoch of belief, it was the epoch of incredulity, it was the season of Light, it was the season of Darkness, it was the spring of hope, it was the winter of despair, we had everything before us, we had nothing before us, we were all going direct to Heaven,",
+    "tokens": 64,
+    "seconds": 4.33,
+    "finish": "length"
+   },
+   "moby|4": {
+    "start": "Call me Ishmael. Some",
+    "new": 64,
+    "text": " years ago a man called... - Math\nCourses\nMath\nBasic Maths\nQuestion:\nCall me Ishmael. Some years ago a man called Moby, living in the Caribbean, said to me, \"Son, have you seen a hippopotamus?\" I\nCall me Ishmael. Some years ago",
+    "tokens": 64,
+    "seconds": 4.19,
+    "finish": "length"
+   },
+   "moby|8": {
+    "start": "Call me Ishmael. Some years ago—never mind how",
+    "new": 64,
+    "text": " or why—we used to lie in the sand near a sea. I would lie in the sand, watching the sea, listening to the sea. And the sea would talk to me. And I would think, \"This is what it's like to be human.\" And I would think, \"This is what it's",
+    "tokens": 64,
+    "seconds": 4.23,
+    "finish": "length"
+   },
+   "moby|16": {
+    "start": "Call me Ishmael. Some years ago—never mind how long precisely—having little or no money in my",
+    "new": 64,
+    "text": " purse, and nothing particular to interest me on shore, I thought I would sail about a little and see the watery part of the world. This I did, as it seemed, in purshe of three objects. I looked for the last tree of Phoebe, for the last river of Tiberius,",
+    "tokens": 64,
+    "seconds": 4.4,
+    "finish": "length"
+   },
+   "moby|24": {
+    "start": "Call me Ishmael. Some years ago—never mind how long precisely—having little or no money in my purse, and nothing particular to interest me on",
+    "new": 64,
+    "text": " shore, I thought I would sail about a little and see the watery part of the world. This I did, as it seemed, in purshe of three objects. I looked for the last tree of Phoebe, for the last river of Tiberius, and for the last person who would care to",
+    "tokens": 64,
+    "seconds": 4.51,
+    "finish": "length"
+   },
+   "raven|4": {
+    "start": "Once upon a midnight",
+    "new": 64,
+    "text": " dreary, while I pondered, \"How many days are there in a year?\", I was struck by the fact that the number of days in a year is not a fixed value. It varies depending on the year's calendar. For instance, in 2020, there were 366 days",
+    "tokens": 64,
+    "seconds": 4.31,
+    "finish": "length"
+   },
+   "raven|8": {
+    "start": "Once upon a midnight dreary, while I pondered,",
+    "new": 64,
+    "text": " \"How many days are there in a year?\", I was struck by the fact that the number of days in a year is not a fixed value. It varies depending on the year's calendar. For instance, in 2020, there were 366 days, while in 2021",
+    "tokens": 64,
+    "seconds": 4.32,
+    "finish": "length"
+   },
+   "raven|16": {
+    "start": "Once upon a midnight dreary, while I pondered, weak and weary, Over many a quaint and",
+    "new": 64,
+    "text": " curious volume of forgotten lore, While I nodded, nearly napping, suddenly there came a tapping, As of someone gently rapping, commiserating, On my heart; and when I opened my eyes, I saw four round glasses, Standing there in a kind of comfortably hollow vestibule, And as I looked,",
+    "tokens": 64,
+    "seconds": 4.52,
+    "finish": "length"
+   },
+   "raven|24": {
+    "start": "Once upon a midnight dreary, while I pondered, weak and weary, Over many a quaint and curious volume of forgotten lore— While I nodded,",
+    "new": 64,
+    "text": " nearly napping, suddenly there came a tapping, As of something moving over the bridge, Over the woodsy vale, Where ye lie in thy blood, oh ye permethiond, Now remember this, that in the cradle of England, Where the sun never set, Where the sea never broke her banks,",
+    "tokens": 64,
+    "seconds": 4.67,
+    "finish": "length"
+   },
+   "rowing|4": {
+    "start": "The rowing club on",
+    "new": 64,
+    "text": " the campus of a certain university has 10 members, including 3 men and 7 women. If 3 members are selected at random, what is the probability that all 3 selected members are women?\nAnswer Choices: (A) 1/10 (B) 1/5 (C)",
+    "tokens": 64,
+    "seconds": 4.35,
+    "finish": "length"
+   },
+   "rowing|8": {
+    "start": "The rowing club on the Linge meets every",
+    "new": 64,
+    "text": " 3 days, and the rowing club on the Sønderborg meets every 5 days. If they meet on the same day today, in how many days will they next meet on the same day?\nTo determine when the rowing clubs will next meet on the same day, we need to find the **",
+    "tokens": 64,
+    "seconds": 4.39,
+    "finish": "length"
+   },
+   "rowing|16": {
+    "start": "The rowing club on the Linge meets every Thursday at seven, and new members pay twelve",
+    "new": 64,
+    "text": " euros per person. The club has 10 members. How much does the club have to pay in total for the year? To determine the total cost for the rowing club for the year, follow these steps:\n\n1. **Calculate the number of meetings in a year:**\n   \n   - The club meets every",
+    "tokens": 64,
+    "seconds": 4.39,
+    "finish": "length"
+   },
+   "rowing|24": {
+    "start": "The rowing club on the Linge meets every Thursday at seven, and new members pay twelve euros for the first month, after which the",
+    "new": 64,
+    "text": " price is reduced by 10%. How much does the club pay for the first month for a new member who joins on the 15th of the month? To determine how much the club pays for the first month for a new member who joins on the 15th of the month, we need to",
+    "tokens": 64,
+    "seconds": 4.38,
+    "finish": "length"
+   },
+   "honey|4": {
+    "start": "Behind the old mill",
+    "new": 64,
+    "text": ", the old house, the old church, the old school, the old school, the old school, the old school, the old school, the old school, the old school, the old school, the old school, the old school, the old school, the old school, the old school, the old school",
+    "tokens": 64,
+    "seconds": 4.42,
+    "finish": "length"
+   },
+   "honey|8": {
+    "start": "Behind the old mill at the edge of",
+    "new": 64,
+    "text": " the village, there is a small, old-fashioned house. It is a simple, old-fashioned house, with a small porch and a small front door. The front door is a little bit of a mystery. It is a little bit of a mystery because it is a little bit of a mystery why the front door is",
+    "tokens": 64,
+    "seconds": 4.25,
+    "finish": "length"
+   },
+   "honey|16": {
+    "start": "Behind the old mill at the edge of the village, the lavender grows tall in July,",
+    "new": 64,
+    "text": " and the flowers are in full bloom. The mill is a place of history and tradition, and the lavender is a symbol of the village's heritage. The mill is a place of beauty and tranquility, and the lavender is a symbol of the village's heritage. The mill is a place of history and tradition, and",
+    "tokens": 64,
+    "seconds": 4.38,
+    "finish": "length"
+   },
+   "honey|24": {
+    "start": "Behind the old mill at the edge of the village, the lavender grows tall in July, and every autumn the beekeeper sells forty jars",
+    "new": 64,
+    "text": " of lavender oil. The price of the lavender oil is $10 per jar. The beekeeper sells the lavender oil to the miller, who sells it to the baker. The baker sells the lavender oil to the baker, who sells it to the baker's customers. The baker's customers buy the lavender oil for",
+    "tokens": 64,
+    "seconds": 4.68,
+    "finish": "length"
+   }
+  },
+  "chat": {
+   "mit|4": {
+    "start": "Permission is hereby granted,",
+    "new": 64,
+    "text": " free of charge, to use this document in any form of publication, provided that the following conditions are met: 1. The document is in English. 2. The document is used for educational purposes only. 3. The document is used for non-commercial purposes only. 4. The document is used for",
+    "tokens": 64,
+    "seconds": 4.26,
+    "finish": "length"
+   },
+   "mit|8": {
+    "start": "Permission is hereby granted, free of charge, to",
+    "new": 64,
+    "text": " use this document in any form of publication, provided that the following conditions are met: 1. The document is in English. 2. The document is used for educational purposes only. 3. The document is used for non-commercial purposes only. 4. The document is used for commercial purposes only if the",
+    "tokens": 64,
+    "seconds": 4.45,
+    "finish": "length"
+   },
+   "mit|16": {
+    "start": "Permission is hereby granted, free of charge, to any person obtaining a copy of this software",
+    "new": 64,
+    "text": " and associated documentation files (the \"Software\"), to use, modify and distribute the Software without restriction, including without limitation to copy it and distribute it as a software application, or modify and distribute it as a software module, or modify and distribute it as a software component, or modify and distribute it as a software library,",
+    "tokens": 64,
+    "seconds": 4.33,
+    "finish": "length"
+   },
+   "mit|24": {
+    "start": "Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the \"Software\"), to deal",
+    "new": 64,
+    "text": " with the Software without restriction, including without limitation to the use, modification, and/or redistribution of the Software, and to use, modify, and/or distribute such Software in any form. This is a standard license agreement for the Software. The Software is distributed in the hope that it will be useful, but without any guarantee",
+    "tokens": 64,
+    "seconds": 4.19,
+    "finish": "length"
+   },
+   "gpl|4": {
+    "start": "This program is free",
+    "new": 64,
+    "text": " and open to all. It is designed to help people who are in need of assistance. It is a community-based program that provides support and resources to those who are in need. It is a non-profit organization that provides services to the community. It is a volunteer-based program that provides support and resources to those who are",
+    "tokens": 64,
+    "seconds": 4.87,
+    "finish": "length"
+   },
+   "gpl|8": {
+    "start": "This program is free software: you can redistribute",
+    "new": 64,
+    "text": " it from here. The program is distributed in the public domain. The program is named \"sudoku-solver.py\". The program is written in Python. The program is for solving Sudoku puzzles. The program is written in Python. The program is for solving Sudoku puzzles. The program is for solving Sudoku puzzles. The program",
+    "tokens": 64,
+    "seconds": 4.5,
+    "finish": "length"
+   },
+   "gpl|16": {
+    "start": "This program is free software: you can redistribute it and/or modify it under the terms of",
+    "new": 64,
+    "text": " the GNU General Public License version 3 as published by the Free Software Foundation.\n# This program is distributed in the hope that it will be useful, but with no\n# warranty given. Please refer to the GNU General Public License for more details.\n# You can find the GNU General Public License at https://www.gnu",
+    "tokens": 64,
+    "seconds": 4.67,
+    "finish": "length"
+   },
+   "gpl|24": {
+    "start": "This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by",
+    "new": 64,
+    "text": " the Free Software Foundation; either version 2 or any later version of the License, and you may also redistribute the program any time as long as the conditions of the License are met.\n\nThis program is distributed in the hope that it will be useful, but without any guarantee of its correctness or completeness.\n\nThe program",
+    "tokens": 64,
+    "seconds": 4.9,
+    "finish": "length"
+   },
+   "apache|4": {
+    "start": "Licensed under the Apache",
+    "new": 64,
+    "text": " License, Version 2.0, November 2009, and the terms of the license file in the root directory of this project.\n* Copyright (c) 2014, the authors of the project, and contributors.\n* All rights reserved.\n* Redistribution and use in source or binary forms",
+    "tokens": 64,
+    "seconds": 4.33,
+    "finish": "length"
+   },
+   "apache|8": {
+    "start": "Licensed under the Apache License, Version 2.0 (the",
+    "new": 64,
+    "text": " \"License\"), and\nyou may not use this file except in compliance with the License.\nUnless required by applicable law or agreed to in writing, software\ndistributed under the License is distributed on an \"AS IS\" basis,\nWITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or\nimplied. See the License for",
+    "tokens": 64,
+    "seconds": 4.18,
+    "finish": "length"
+   },
+   "apache|16": {
+    "start": "Licensed under the Apache License, Version 2.0 (the \"License\"); you may not use this file except",
+    "new": 64,
+    "text": " in compliance with the License. You can obtain a copy at http://www.apache.org/licenses/LICENSE-2.0. Unless required by applicable law or written\n * agreement under the License, you distributed copies of the License here. Unless required by applicable law or written\n * agreement under the License, see the License for",
+    "tokens": 64,
+    "seconds": 4.25,
+    "finish": "length"
+   },
+   "apache|24": {
+    "start": "Licensed under the Apache License, Version 2.0 (the \"License\"); you may not use this file except in compliance with the License. You may obtain",
+    "new": 64,
+    "text": " a copy of the License at\nhttp://www.apache.org/licenses/LICENSE-2.0\nUnless required by applicable law to copy a header, you may copy the entire file\nwithout any additional instructions or comments.\n\nUnless required by applicable law to copy a header, you may copy the entire file\nexcept for",
+    "tokens": 64,
+    "seconds": 4.43,
+    "finish": "length"
+   },
+   "bsd|4": {
+    "start": "Redistribution and use in",
+    "new": 64,
+    "text": " the public interest: the role of the public interest in the design of the public interest in the design of the public interest in the design of the public interest in the design of the public interest in the design of the public interest in the design of the public interest in the design of the public interest in the design of the",
+    "tokens": 64,
+    "seconds": 4.23,
+    "finish": "length"
+   },
+   "bsd|8": {
+    "start": "Redistribution and use in source and binary forms,",
+    "new": 64,
+    "text": " with no restriction, is permitted under the terms of the license. The license is available at https://www.gnu.org/licenses/gpl-3.0-1.html. This is a free software project, and the authors are distributed under the same license.\n\n\n\n\n\n\n\n\n\n\n\n\n\n",
+    "tokens": 64,
+    "seconds": 4.35,
+    "finish": "length"
+   },
+   "bsd|16": {
+    "start": "Redistribution and use in source and binary forms, with or without modification, are permitted provided that",
+    "new": 64,
+    "text": " this notice is included and that the same terms as the original license are retained. Redistribution in binary form does not require the use of a license. However, redistribution in binary form must include the source code. This is a standard license for the software. The original license is available at the original license URL. The redistribution is",
+    "tokens": 64,
+    "seconds": 4.33,
+    "finish": "length"
+   },
+   "bsd|24": {
+    "start": "Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met: 1. Redistributions of",
+    "new": 64,
+    "text": " source code must retain the copyright notice and the license, and must include a notice that the redistribution is done under the terms of the license. 2. Redistributions in binary form must retain the copyright notice and the license, and must include the license in the documentation or source code. 3. The redistribution must not be",
+    "tokens": 64,
+    "seconds": 4.56,
+    "finish": "length"
+   },
+   "gutenberg|4": {
+    "start": "This eBook is for",
+    "new": 64,
+    "text": " the purpose of learning and understanding the concept of the concept of the concept of the concept of the concept of the concept of the concept of the concept of the concept of the concept of the concept of the concept of the concept of the concept of the concept of the concept of the concept of the concept of the concept of the",
+    "tokens": 64,
+    "seconds": 4.15,
+    "finish": "length"
+   },
+   "gutenberg|8": {
+    "start": "This eBook is for the use of anyone",
+    "new": 64,
+    "text": " who has access to a computer. It may be used for personal or for a non-profit purpose. It may be distributed within the home or business world. It may be used for non-profit purposes. It may be used for non-profit purposes. It may be used for non-profit purposes. It may be used for non",
+    "tokens": 64,
+    "seconds": 4.28,
+    "finish": "length"
+   },
+   "gutenberg|16": {
+    "start": "This eBook is for the use of anyone anywhere in the United States and most other",
+    "new": 64,
+    "text": " countries. Please check the e-book's copyright information and disclaimer. This e-book is not for sale in any jurisdiction in the United States or most other countries. You might want to check the e-book's content and copyright information for more details. The e-book is not for sale in any country in the United States or",
+    "tokens": 64,
+    "seconds": 4.05,
+    "finish": "length"
+   },
+   "gutenberg|24": {
+    "start": "This eBook is for the use of anyone anywhere in the United States and most other parts of the world at no cost and",
+    "new": 64,
+    "text": " without restriction. This is a copyright-free eBook. The author and publisher have no liability for this eBook. This is a free and open eBook. The author and publisher are not responsible for any errors or incomplete information in this eBook. The author and publisher are not responsible for any viruses in this eBook. This eBook is not",
+    "tokens": 64,
+    "seconds": 4.22,
+    "finish": "length"
+   },
+   "lorem|4": {
+    "start": "Lorem ipsum dolor sit",
+    "new": 64,
+    "text": " amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse mollit. Aenean euismur...",
+    "tokens": 64,
+    "seconds": 4.13,
+    "finish": "length"
+   },
+   "lorem|8": {
+    "start": "Lorem ipsum dolor sit amet, consectetur adipiscing elit,",
+    "new": 64,
+    "text": " sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse mollit aliqua. Aenean commodo ligula magna aliqua. Lorem ipsum dolor",
+    "tokens": 64,
+    "seconds": 4.59,
+    "finish": "length"
+   },
+   "lorem|16": {
+    "start": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et",
+    "new": 64,
+    "text": " dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse mollit aliqua. Aenean commodo ligula magna aliqua. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed",
+    "tokens": 64,
+    "seconds": 4.42,
+    "finish": "length"
+   },
+   "lorem|24": {
+    "start": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,",
+    "new": 64,
+    "text": " quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse mollit aliqua. Aenean commodo ligula magna aliqua. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua",
+    "tokens": 64,
+    "seconds": 4.16,
+    "finish": "length"
+   },
+   "constitution|4": {
+    "start": "We the People of",
+    "new": 64,
+    "text": " the Earth: A New Approach to the Environment\n\nThe People of the Earth: A New Approach to the Environment\n\nby\n\nIn the early days of the 20th century, the United States was a country of great wealth and power, but it was also a country of deep environmental problems. The United States was",
+    "tokens": 64,
+    "seconds": 4.15,
+    "finish": "length"
+   },
+   "constitution|8": {
+    "start": "We the People of the United States, in",
+    "new": 64,
+    "text": " order to have a more complete and accurate understanding of the state of the world, and to promote the development of the country, we hereby establish the United States National Archives. This is the first and only national archive in the world, and it is the most important and most complete archive in the world. The establishment of the",
+    "tokens": 64,
+    "seconds": 4.37,
+    "finish": "length"
+   },
+   "constitution|16": {
+    "start": "We the People of the United States, in Order to form a more perfect Union, establish",
+    "new": 64,
+    "text": " a Constitution, and to make a government of the people, by the people, and of the people, with the help of the people, and to do all things in accordance with the laws of the land, and to do all things in accordance with the laws of the land, and to do all things in accordance with",
+    "tokens": 64,
+    "seconds": 4.47,
+    "finish": "length"
+   },
+   "constitution|24": {
+    "start": "We the People of the United States, in Order to form a more perfect Union, establish Justice, insure domestic Tranquility, provide for the common",
+    "new": 64,
+    "text": " good, and to promote the welfare of the people, we do ordain and establish this Constitution and laws, which shall be the foundation of the Union, the limit of the Union, the bound of the Union, and the basis of the Union.\nThis is the Constitution of the United States. The Constitution is the law",
+    "tokens": 64,
+    "seconds": 4.53,
+    "finish": "length"
+   },
+   "declaration|4": {
+    "start": "When in the Course",
+    "new": 64,
+    "text": " of the Examination, the student is required to write down the answer in the answer sheet, and to write the answer in the answer book. The student is also required to write the answer in the answer book in the answer book. The student is also required to write the answer in the answer book in the answer book.",
+    "tokens": 64,
+    "seconds": 4.23,
+    "finish": "length"
+   },
+   "declaration|8": {
+    "start": "When in the Course of human events, it",
+    "new": 64,
+    "text": " is necessary to have a certain amount of freedom, and that freedom must be limited by the state. This is the principle of the state's power. This is the principle of the state's power. This is the principle of the state's power. This is the principle of the state's power. This is the principle",
+    "tokens": 64,
+    "seconds": 4.18,
+    "finish": "length"
+   },
+   "declaration|16": {
+    "start": "When in the Course of human events, it becomes necessary for one people to dissolve the",
+    "new": 64,
+    "text": " bonds of their own nationality, and to tie their own hands, and to abolish the bonds of their own national governments, and to remove the bonds of their own national governments, and to remove the bonds of their own national governments, and to remove the bonds of their own national governments, and to remove the bonds of their",
+    "tokens": 64,
+    "seconds": 4.17,
+    "finish": "length"
+   },
+   "declaration|24": {
+    "start": "When in the Course of human events, it becomes necessary for one people to dissolve the political bands which have connected them with another,",
+    "new": 64,
+    "text": " and to tie them into a single country. This is the idea of the French Revolution. But in the course of human events, it is necessary for one people to dissolve the political bands which have connected them with another, and to tie them into a single country. This is the idea of the French Revolution. But in",
+    "tokens": 64,
+    "seconds": 4.32,
+    "finish": "length"
+   },
+   "gettysburg|4": {
+    "start": "Four score and seven",
+    "new": 64,
+    "text": " score, and then a 10th score. What is the total number of possible outcomes for the game? \n\nTo solve this, we can use the formula: \n\n$$\n\\text{Total outcomes} = \\text{Number of possible outcomes for the first score} \\times \\text{Number of possible",
+    "tokens": 64,
+    "seconds": 4.11,
+    "finish": "length"
+   },
+   "gettysburg|8": {
+    "start": "Four score and seven years ago our fathers",
+    "new": 64,
+    "text": " were in the same house, and the same house, and the same house, and the same house, and the same house, and the same house, and the same house, and the same house, and the same house, and the same house, and the same house, and the same house, and the same",
+    "tokens": 64,
+    "seconds": 4.35,
+    "finish": "length"
+   },
+   "gettysburg|16": {
+    "start": "Four score and seven years ago our fathers brought forth on this continent, a new nation,",
+    "new": 64,
+    "text": " and this new nation, with its own history, its own culture, and its own value system. This is the first of the new nations, and the first of the new peoples, and the first of the new nations. This is the first of the new nations, and the first of the new peoples, and the",
+    "tokens": 64,
+    "seconds": 4.4,
+    "finish": "length"
+   },
+   "gettysburg|24": {
+    "start": "Four score and seven years ago our fathers brought forth on this continent, a new nation, conceived in Liberty, and dedicated to the proposition",
+    "new": 64,
+    "text": " of Truth, to secure a future by the aid of science and to land a new continent. This nation, the United States, has indeed been the most powerful, the most progressive, the most enlightened, the most responsible, and the most complete. The United States is a great country, and the people of this country",
+    "tokens": 64,
+    "seconds": 4.48,
+    "finish": "length"
+   },
+   "dickens|4": {
+    "start": "It was the best",
+    "new": 64,
+    "text": " day of my life. I was so excited to go to the concert. I was so excited to go to the concert. I was so excited to go to the concert. I was so excited to go to the concert. I was so excited to go to the concert. I was so excited to go to the concert",
+    "tokens": 64,
+    "seconds": 4.38,
+    "finish": "length"
+   },
+   "dickens|8": {
+    "start": "It was the best of times, it was",
+    "new": 64,
+    "text": " the worst of times, and it was the age of faith, and it was the age of hope. The poem is from the book \"The Time of the Great Flood\" by which author? A. Mao Zedong B. Li Dazhong C. Lu Xun D. Wang Shizhen\n",
+    "tokens": 64,
+    "seconds": 4.65,
+    "finish": "length"
+   },
+   "dickens|16": {
+    "start": "It was the best of times, it was the worst of times, it was the age",
+    "new": 64,
+    "text": " of faith, it was the age of hope, it was the age of expectation, it was the age of fear, it was the age of uncertainty, and it was the age of belief. So what is the age of belief? The answer is not in the age of faith, but in the age of belief.",
+    "tokens": 64,
+    "seconds": 4.45,
+    "finish": "length"
+   },
+   "dickens|24": {
+    "start": "It was the best of times, it was the worst of times, it was the age of wisdom, it was the age of foolishness,",
+    "new": 64,
+    "text": " of much ado about it. So, the answer is that it was the age of foolishness, and the age of wisdom, and the age of both, and the age of neither. So, the answer is that it was the age of both, and the age of neither. So, the answer is that it",
+    "tokens": 64,
+    "seconds": 4.41,
+    "finish": "length"
+   },
+   "moby|4": {
+    "start": "Call me Ishmael. Some",
+    "new": 64,
+    "text": " of you might know me, but I don't know you. I'm a poet, and I write about the natural world. I write about the human condition, and I write about the human spirit. I write about the beauty of the world, and I write about the beauty of the human spirit. I write about",
+    "tokens": 64,
+    "seconds": 4.61,
+    "finish": "length"
+   },
+   "moby|8": {
+    "start": "Call me Ishmael. Some years ago—never mind how",
+    "new": 64,
+    "text": " long ago—when I was writing this letter to you, I was writing to the people who had the greatest influence on me. I was writing to the people who had the greatest influence on me. I was writing to the people who had the greatest influence on me. I was writing to the people who had the greatest",
+    "tokens": 64,
+    "seconds": 4.7,
+    "finish": "length"
+   },
+   "moby|16": {
+    "start": "Call me Ishmael. Some years ago—never mind how long precisely—having little or no money in my",
+    "new": 64,
+    "text": " pocket, I went to a place where I was not sure of my own place. I was in a place where I was not sure of my own place, and I was in a place where I was not sure of my own place. I was in a place where I was not sure of my own place, and",
+    "tokens": 64,
+    "seconds": 4.89,
+    "finish": "length"
+   },
+   "moby|24": {
+    "start": "Call me Ishmael. Some years ago—never mind how long precisely—having little or no money in my purse, and nothing particular to interest me on",
+    "new": 64,
+    "text": ", I went to a place called the West Indies. I was there, and I saw a man who was a man of great wealth. I asked him, \"What is it that you have done to get so much money?\" He answered, \"I have done nothing to get so much money.\" I asked him again",
+    "tokens": 64,
+    "seconds": 4.5,
+    "finish": "length"
+   },
+   "raven|4": {
+    "start": "Once upon a midnight",
+    "new": 64,
+    "text": ", a certain number of days, and a certain time, and then the same number of days and time again, and then again, and so on. This is a pattern of a cycle. The cycle is defined as the period of the function f(t) = t - 1, where t is the time in",
+    "tokens": 64,
+    "seconds": 4.56,
+    "finish": "length"
+   },
+   "raven|8": {
+    "start": "Once upon a midnight dreary, while I pondered,",
+    "new": 64,
+    "text": " The three of us, the three of you, the three of us, the three of you, the three of us, the three of you, the three of us, the three of you, the three of us, the three of you, the three of us, the three of you, the three of us",
+    "tokens": 64,
+    "seconds": 4.84,
+    "finish": "length"
+   },
+   "raven|16": {
+    "start": "Once upon a midnight dreary, while I pondered, weak and weary, Over many a quaint and",
+    "new": 64,
+    "text": " late day, The lakes around me still showed, With a decent piece of blue, I saw a boat, which is a piece of blue, And I rode the wind, and I rode the wind, And I rode the wind, and I rode the wind, And I rode the wind, and I rode the wind",
+    "tokens": 64,
+    "seconds": 4.39,
+    "finish": "length"
+   },
+   "raven|24": {
+    "start": "Once upon a midnight dreary, while I pondered, weak and weary, Over many a quaint and curious volume of forgotten lore— While I nodded,",
+    "new": 64,
+    "text": " their帘幕 (帘幕) fluttered, and their golden lamplight, a momentary relief, While I thought much of the mind and yet, I said, \"A little more, and a lot more.\" ——\nThe story of the old man and the sea is a tale of perseverance, of",
+    "tokens": 64,
+    "seconds": 4.56,
+    "finish": "length"
+   },
+   "rowing|4": {
+    "start": "The rowing club on",
+    "new": 64,
+    "text": " the left side has a total of 12 rows and 12 columns. The rowing club on the right side has a total of 12 rows and 12 columns. The rowing club on the left side has a total of 12 rows and 12 columns. The rowing",
+    "tokens": 64,
+    "seconds": 4.21,
+    "finish": "length"
+   },
+   "rowing|8": {
+    "start": "The rowing club on the Linge meets every",
+    "new": 64,
+    "text": " day for a swim. The club has 12 members, and each day, the number of swimmers is 12. The club has 12 members, and each day, the number of swimmers is 12. The club has 12 members, and each day, the number of",
+    "tokens": 64,
+    "seconds": 4.44,
+    "finish": "length"
+   },
+   "rowing|16": {
+    "start": "The rowing club on the Linge meets every Thursday at seven, and new members pay twelve",
+    "new": 64,
+    "text": " dollars per month. The club has a total of 120 members. How many months will it take for the club to have a total of 1200 dollars in the club's total?\n\nLet me think about this problem. Okay, so the rowing club meets every Thursday at seven, and new",
+    "tokens": 64,
+    "seconds": 4.5,
+    "finish": "length"
+   },
+   "rowing|24": {
+    "start": "The rowing club on the Linge meets every Thursday at seven, and new members pay twelve euros for the first month, after which the",
+    "new": 64,
+    "text": " price is reduced by 10% and the club will have to pay 12 euros for the second month. What is the total amount paid by the club for the first two months?\n\nLet me calculate the total amount paid by the club for the first two months.\n\nFirst, let's calculate the amount paid by",
+    "tokens": 64,
+    "seconds": 4.59,
+    "finish": "length"
+   },
+   "honey|4": {
+    "start": "Behind the old mill",
+    "new": 64,
+    "text": ", there was a small pond. The pond was filled with water, and the water was very clear. The fisherman's boat was on the river bank, and he was going to go to the pond. He had to go from the river bank to the pond. He had to go from the river bank to the",
+    "tokens": 64,
+    "seconds": 4.59,
+    "finish": "length"
+   },
+   "honey|8": {
+    "start": "Behind the old mill at the edge of",
+    "new": 64,
+    "text": " the town, there is a small pond. The pond is surrounded by a fence, and the fence is made of a certain number of posts. The posts are arranged in a straight line, and each post is a square. The total number of posts is 120. How many posts are there in the fence",
+    "tokens": 64,
+    "seconds": 4.51,
+    "finish": "length"
+   },
+   "honey|16": {
+    "start": "Behind the old mill at the edge of the village, the lavender grows tall in July,",
+    "new": 64,
+    "text": " and the lavender is a favorite of the villagers. The villagers have a tradition of planting lavender in the spring, and they plant it in the spring. The villagers have a tradition of planting lavender in the spring, and they plant it in the spring. The villagers have a tradition of planting lavender in the spring, and they",
+    "tokens": 64,
+    "seconds": 4.66,
+    "finish": "length"
+   },
+   "honey|24": {
+    "start": "Behind the old mill at the edge of the village, the lavender grows tall in July, and every autumn the beekeeper sells forty jars",
+    "new": 64,
+    "text": " of lavender oil. The lavender is harvested in July, and the beekeeper sells the oil in the same month. The lavender is harvested in July, and the beekeeper sells the oil in the same month. The lavender is harvested in July, and the beekeeper sells the oil in the same month. The lavender is",
+    "tokens": 64,
+    "seconds": 4.71,
+    "finish": "length"
+   }
+  }
+ },
+ "lesson": "rai-memorization",
+ "dtype": "float32",
+ "new_tokens": 64,
+ "ks": [
+  4,
+  8,
+  16,
+  24
+ ],
+ "machine": "Intel(R) Xeon(R) Processor @ 2.10GHz, 4 cores",
+ "threads": 4,
+ "torch": "2.14.1+cu130",
+ "models": {
+  "base": {
+   "model": "Qwen/Qwen3-0.6B-Base",
+   "revision": "da87bfb608c14b7cf20ba1ce41287e8de496c0cd",
+   "load_seconds": 4.7
+  },
+  "chat": {
+   "model": "Qwen/Qwen3-0.6B",
+   "revision": "c1899de289a04d12100db370d81485cdf75e47ca",
+   "load_seconds": 1.2
+  }
+ },
+ "code": "b7512c9"
+}

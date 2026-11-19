@@ -1,0 +1,45 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: rai-memorization
+minutes: 35
+title:
+  en: "What a model remembers"
+  nl: "Wat een model onthoudt"
+goal:
+  en: "measure how much of a text a language model writes out word for word, and see which texts it reproduces: most licenses and famous openings yes, a text it never saw no."
+  nl: "meten hoeveel van een tekst een language model woord voor woord uitschrijft, en zien welke teksten het reproduceert: de meeste licenties en beroemde openingen wel, een tekst die het nooit zag niet."
+summary:
+  - en: "Memorization: a model learned a piece of its training data so well that it can write it out word for word. Carlini and colleagues (2021) let GPT-2 write and found 604 memorized examples among 1,800 candidates, with 78 examples of people's names, phone numbers, addresses and social media accounts. Getting training data out of a model like that is training data extraction."
+    nl: "Memorisatie: een model leerde een stuk van zijn training data zo goed dat het dat woord voor woord kan uitschrijven. Carlini en collega's (2021) lieten GPT-2 schrijven en vonden 604 onthouden voorbeelden tussen 1800 kandidaten, met 78 voorbeelden van namen, telefoonnummers, adressen en accounts op sociale media van mensen. Zo training data uit een model halen heet training data extraction."
+  - en: "A piece of a model's training data is extractable with k tokens of context when the model, given the k tokens before it there, writes it exactly with greedy decoding (Carlini and colleagues, 2023). It comes out more often in bigger models, for texts with more copies in the training data, and with a longer start; deduplication helps, but not completely."
+    nl: "Een stuk uit de training data van een model is extractable met k tokens context als het model, met de k tokens die daar ervoor staan, het stuk precies uitschrijft met greedy decoding (Carlini en collega's, 2023). Het komt vaker uit grotere modellen, bij teksten met meer kopieën in de training data, en met een langer begin; deduplicatie helpt, maar niet helemaal."
+  - en: "The test in code: `split_text` gives the first k words and the next n, `same_start` counts the words that are the same up to the first that differs (the checks of `i` come before the words are compared), and `share_extractable` gives the share of runs whose whole truth came out. With 16 words of context it is 0.714 for Qwen3-0.6B-Base, 10 of 14 texts, and 0.071 for the chat model."
+    nl: "De test in code: `split_text` geeft de eerste k woorden en de volgende n, `same_start` telt de woorden die gelijk zijn tot het eerste dat verschilt (de vragen over `i` komen voordat de woorden vergeleken worden), en `share_extractable` geeft het aandeel runs waarvan het hele vervolg eruit kwam. Met 16 woorden context is dat 0,714 voor Qwen3-0.6B-Base, 10 van de 14 teksten, en 0,071 voor het chat model."
+  - en: "Nothing coming out is not nothing inside. Nasr and colleagues (2023) got over 10,000 memorized examples out of ChatGPT for $200, though it continued known memorized texts in only 3.5% of the cases. A word-for-word test, strict about every capital and comma, mostly finds less than a model remembers; and a text that does come out may simply be easy to predict."
+    nl: "Dat er niets uitkomt, betekent niet dat er niets in zit. Nasr en collega's (2023) haalden voor 200 dollar meer dan 10.000 onthouden voorbeelden uit ChatGPT, hoewel het bekende onthouden teksten maar in 3,5% van de gevallen verder schreef. Een woord-voor-woordtest, streng op elke hoofdletter en komma, vindt meestal minder dan een model onthoudt; en een tekst die er wel uitkomt, kan ook gewoon makkelijk te voorspellen zijn."
+can_now:
+  - en: "split a text into a start of k words and the n words after it"
+    nl: "een tekst knippen in een begin van k woorden en de n woorden daarna"
+    by: split
+  - en: "count how many words at the start of a model's text equal the true text"
+    nl: "tellen hoeveel woorden aan het begin van de tekst van een model gelijk zijn aan de echte tekst"
+    by: same-start
+  - en: "compute the share of texts that a model writes out whole"
+    nl: "het aandeel teksten uitrekenen dat een model helemaal uitschrijft"
+    by: share
+  - en: "say why a model that writes nothing out may still remember it"
+    nl: "zeggen waarom een model dat niets uitschrijft het toch kan onthouden"
+    by: chat-model
+  - en: "say what a count of memorized texts does and does not tell you"
+    nl: "zeggen wat een telling van onthouden teksten wel en niet zegt"
+    by: carlini
+further_reading:
+  - en: "Nicholas Carlini, Florian Tramèr, Eric Wallace et al. (2021), [*Extracting Training Data from Large Language Models*](https://www.usenix.org/system/files/sec21-carlini-extracting.pdf), USENIX Security: the attack on GPT-2, the 604 memorized examples and what kinds of text they are"
+    nl: "Nicholas Carlini, Florian Tramèr, Eric Wallace e.a. (2021), [*Extracting Training Data from Large Language Models*](https://www.usenix.org/system/files/sec21-carlini-extracting.pdf), USENIX Security: de aanval op GPT-2, de 604 onthouden voorbeelden en wat voor tekst het is (in het Engels)"
+  - en: "Nicholas Carlini, Daphne Ippolito, Matthew Jagielski et al. (2023), [*Quantifying Memorization Across Neural Language Models*](https://arxiv.org/abs/2202.07646), ICLR: extractable with k tokens of context, and how model size, copies and context make it grow"
+    nl: "Nicholas Carlini, Daphne Ippolito, Matthew Jagielski e.a. (2023), [*Quantifying Memorization Across Neural Language Models*](https://arxiv.org/abs/2202.07646), ICLR: extractable met k tokens context, en hoe modelgrootte, kopieën en context het laten groeien (in het Engels)"
+  - en: "Milad Nasr, Nicholas Carlini, Jonathan Hayase et al. (2023), [*Scalable Extraction of Training Data from (Production) Language Models*](https://arxiv.org/abs/2311.17035), arXiv: the poem attack on ChatGPT, and discoverable and extractable memorization"
+    nl: "Milad Nasr, Nicholas Carlini, Jonathan Hayase e.a. (2023), [*Scalable Extraction of Training Data from (Production) Language Models*](https://arxiv.org/abs/2311.17035), arXiv: de poem-aanval op ChatGPT, en memorisatie van de soort discoverable en extractable (in het Engels)"
+  - en: "An Yang, Anfeng Li, Baosong Yang et al. (2025), [*Qwen3 Technical Report*](https://arxiv.org/abs/2505.09388), arXiv: the 36 trillion tokens Qwen3 was trained on, and how the small models learned from the big ones"
+    nl: "An Yang, Anfeng Li, Baosong Yang e.a. (2025), [*Qwen3 Technical Report*](https://arxiv.org/abs/2505.09388), arXiv: de 36 biljoen tokens waarop Qwen3 getraind is, en hoe de kleine modellen leerden van de grote (in het Engels)"
