@@ -1,0 +1,40 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: rai-nines
+minutes: 40
+title:
+  en: "Nines of reliability"
+  nl: "Negens van betrouwbaarheid"
+goal:
+  en: "count reliability in nines, see how many failures a reliability gives when a system is used often or a task has many steps, and read what a provider's promise of nines does and does not cover."
+  nl: "betrouwbaarheid in negens tellen, zien hoeveel fouten een betrouwbaarheid oplevert als een systeem vaak wordt gebruikt of een taak veel stappen heeft, en lezen wat de negens in de belofte van een aanbieder wel en niet dekken."
+summary:
+  - en: "Reliability is the chance that a system does not fail. Hendrycks's textbook counts it in nines of reliability, k = −log10(1 − p): 99% has two, 99.9% three, and each extra nine makes failures ten times rarer. Google's book Site Reliability Engineering counts the availability of services in nines too."
+    nl: "Betrouwbaarheid is de kans dat een systeem niet faalt. Het leerboek van Hendrycks telt die in negens van betrouwbaarheid, k = −log10(1 − p): 99% heeft er twee, 99,9% drie, en elke extra negen maakt fouten tien keer zo zeldzaam. Het boek Site Reliability Engineering van Google telt de beschikbaarheid van diensten ook in negens."
+  - en: "Use turns a small chance into many failures: at 1,000,000 requests a day, 99.9% is 1,000 failed requests a day. Availability can be counted in time or in requests, and providers count it in their own ways: Amazon's SLA for Bedrock counts only requests that return a 500 error code as failed, and gives service credits, no refund."
+    nl: "Wie een systeem vaak gebruikt, ziet een kleine kans uitgroeien tot veel fouten: bij 1.000.000 verzoeken per dag is 99,9% elke dag 1000 mislukte verzoeken. Beschikbaarheid kun je tellen in tijd of in verzoeken, en aanbieders tellen op hun eigen manier: de SLA van Amazon voor Bedrock telt alleen verzoeken met foutcode 500 als mislukt, en geeft tegoed, geen terugbetaling."
+  - en: "Nines are only a measure of probability, not risk: a game-playing AI brings far less risk than an autonomous vehicle with the same three nines."
+    nl: "Negens meten alleen een kans, geen risico: een AI die een spel speelt, brengt veel minder risico mee dan een zelfrijdende auto met dezelfde drie negens."
+  - en: "A task of n independent steps of reliability p succeeds with chance pⁿ: 100 steps at 99% succeed only 37% of the time. Toby Ord argued that the success of AI agents on METR's tasks can be explained by a constant chance of failure per minute a human would need for the task; in that model, from 90% on, each extra nine divides the length of task they manage by 10. Real steps are seldom fully independent."
+    nl: "Een taak van n onafhankelijke stappen met betrouwbaarheid p slaagt met kans pⁿ: 100 stappen bij 99% slagen maar in 37% van de gevallen. Toby Ord betoogde dat het succes van AI-agents op de taken van METR te verklaren is met een vaste kans op falen per minuut die een mens over de taak zou doen; in dat model deelt vanaf 90% elke extra negen de taaklengte die ze aankunnen door 10. Echte stappen zijn zelden helemaal onafhankelijk."
+can_now:
+  - en: "count the nines of a reliability with −log10(1 − p)"
+    nl: "de negens van een betrouwbaarheid tellen met −log10(1 − p)"
+    by: nines
+  - en: "compute the chance that a task of many independent steps succeeds"
+    nl: "de kans uitrekenen dat een taak van veel onafhankelijke stappen slaagt"
+    by: task_success
+  - en: "say why the same nines can bring very different risks"
+    nl: "zeggen waarom dezelfde negens heel verschillende risico's kunnen meebrengen"
+    by: risk
+  - en: "say what a provider's SLA counts as available, and what it does not"
+    nl: "zeggen wat de SLA van een aanbieder als beschikbaar telt, en wat niet"
+    by: available
+further_reading:
+  - en: "Marc Alvidrez, [*Embracing Risk*](https://sre.google/sre-book/embracing-risk/), chapter 3 of *Site Reliability Engineering* (Google, online edition, 2017), with a section by Mark Roth: availability in nines, counted in time and in requests, and the error budget"
+    nl: "Marc Alvidrez, [*Embracing Risk*](https://sre.google/sre-book/embracing-risk/), hoofdstuk 3 van *Site Reliability Engineering* (Google, onlineversie, 2017), met een sectie van Mark Roth: beschikbaarheid in negens, geteld in tijd en in verzoeken, en het error budget (in het Engels)"
+  - en: "Dan Hendrycks, [*Introduction to AI Safety, Ethics, and Society*](https://arxiv.org/abs/2411.01042) (2024), section 4.2: the nines of reliability"
+    nl: "Dan Hendrycks, [*Introduction to AI Safety, Ethics, and Society*](https://arxiv.org/abs/2411.01042) (2024), sectie 4.2: de nines of reliability (in het Engels)"
+  - en: "Toby Ord, [*Is there a half-life for the success rates of AI agents?*](https://arxiv.org/abs/2505.05115) (2025): a constant chance of failure per minute a human would need for the task, and what it predicts for each extra nine"
+    nl: "Toby Ord, [*Is there a half-life for the success rates of AI agents?*](https://arxiv.org/abs/2505.05115) (2025): een vaste kans op falen per minuut die een mens over de taak zou doen, en wat dat voorspelt voor elke extra negen (in het Engels)"
