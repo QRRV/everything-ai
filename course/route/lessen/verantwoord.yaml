@@ -1534,6 +1534,7 @@ lessons:
   covers: [d25-systemische-en-structurele-risicos#0, d25-systemische-en-structurele-risicos#1]
   requires: [rai-drift-and-tails]
   introduces: [c:emergence, c:wicked-problem]
+  mentions: [c:feedback-loop, c:negative-side-effect]
   data: []
   ladder: [python, numpy]
   needs: any

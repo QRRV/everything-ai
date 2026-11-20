@@ -1,0 +1,42 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: rai-complex-systems
+minutes: 40
+title:
+  en: "AI in a complex system"
+  nl: "AI in een complex systeem"
+goal:
+  en: "recognize emergence in a system whose parts react to each other, follow a feedback loop in a made-up market, see how a metric can make an ability seem to appear, and explain why AI safety is called a wicked problem."
+  nl: "emergentie herkennen in een systeem waarvan de onderdelen op elkaar reageren, een feedback loop volgen in een verzonnen markt, zien hoe een metric een vaardigheid kan laten lijken te verschijnen, en uitleggen waarom AI-veiligheid een wicked problem heet."
+summary:
+  - en: "In a complex system, many parts react to each other. Emergence is behavior of the whole that no part has on its own, such as that of an ant colony. Hendrycks's textbook counts AI systems and the societies they operate within as complex systems."
+    nl: "In een complex systeem reageren veel onderdelen op elkaar. Emergentie is gedrag van het geheel dat geen onderdeel op zichzelf heeft, zoals dat van een mierenkolonie. Het leerboek van Hendrycks rekent AI-systemen en de samenlevingen waarin ze werken tot de complexe systemen."
+  - en: "In the flash crash of 6 May 2010, a sell algorithm that followed the trading volume and fast traders who passed contracts back and forth fed each other, until trading paused for five seconds. No part was built to crash a market."
+    nl: "Bij de flash crash van 6 mei 2010 versterkten twee partijen elkaar: een verkoopalgoritme dat het handelsvolume volgde, en snelle handelaren die contracten aan elkaar doorgaven. Dat duurde tot de handel vijf seconden stillag. Geen enkel onderdeel was gebouwd om een markt te laten crashen."
+  - en: "Emergent abilities of language models, abilities that seem to appear at a certain size, are disputed: under an exact match, models that get better step by step can seem to make a jump."
+    nl: "Emergent abilities van language models, vaardigheden die bij een bepaalde grootte lijken te verschijnen, zijn omstreden: bij een exact match kunnen modellen die stap voor stap beter worden een sprong lijken te maken."
+  - en: "A wicked problem has no final formulation and no final solution, and a fix can change the system it was meant to fix. The textbook calls AI safety a wicked problem."
+    nl: "Een wicked problem heeft geen definitieve formulering en geen definitieve oplossing, en een oplossing kan het systeem veranderen waarvoor die bedoeld was. Het leerboek noemt AI-veiligheid een wicked problem."
+can_now:
+  - en: "follow a feedback loop in a made-up market, and see when it settles and when it runs away"
+    nl: "een feedback loop volgen in een verzonnen markt, en zien wanneer die tot rust komt en wanneer die wegschiet"
+    by: volumes
+  - en: "show how an exact match can make steady progress look like a jump"
+    nl: "laten zien hoe een exact match gestage vooruitgang op een sprong kan laten lijken"
+    by: accuracies
+  - en: "explain why tests of one agent alone say little about many agents together"
+    nl: "uitleggen waarom tests van één agent alleen weinig zeggen over veel agents samen"
+    by: agents
+  - en: "recognize a fix that backfires because the system reacts to it"
+    nl: "een oplossing herkennen die averechts werkt omdat het systeem erop reageert"
+    by: backfire
+further_reading:
+  - en: "Dan Hendrycks, [*Introduction to AI Safety, Ethics, and Society*](https://arxiv.org/abs/2411.01042) (2024), chapter 5, *Complex Systems*: emergence, feedback, the lessons for AI safety, and wicked problems"
+    nl: "Dan Hendrycks, [*Introduction to AI Safety, Ethics, and Society*](https://arxiv.org/abs/2411.01042) (2024), hoofdstuk 5, *Complex Systems*: emergentie, feedback, de lessen voor AI-veiligheid, en wicked problems (in het Engels)"
+  - en: "Staffs of the CFTC and SEC, [*Findings Regarding the Market Events of May 6, 2010*](https://www.sec.gov/news/studies/2010/marketevents-report.pdf) (30 September 2010): the flash crash, minute by minute"
+    nl: "Medewerkers van de CFTC en de SEC, [*Findings Regarding the Market Events of May 6, 2010*](https://www.sec.gov/news/studies/2010/marketevents-report.pdf) (30 september 2010): de flash crash, minuut voor minuut (in het Engels)"
+  - en: "Horst W. J. Rittel and Melvin M. Webber, [*Dilemmas in a General Theory of Planning*](https://archive.epa.gov/reg3esd1/data/web/pdf/rittel%2Bwebber%2Bdilemmas%2Bgeneral_theory_of_planning.pdf), Policy Sciences 4 (1973): wicked and tame problems, and the ten properties of wicked ones"
+    nl: "Horst W. J. Rittel en Melvin M. Webber, [*Dilemmas in a General Theory of Planning*](https://archive.epa.gov/reg3esd1/data/web/pdf/rittel%2Bwebber%2Bdilemmas%2Bgeneral_theory_of_planning.pdf), Policy Sciences 4 (1973): wicked en tamme problemen, en de tien eigenschappen van wicked problems (in het Engels)"
+  - en: "Rylan Schaeffer, Brando Miranda and Sanmi Koyejo, [*Are Emergent Abilities of Large Language Models a Mirage?*](https://arxiv.org/abs/2304.15004) (2023): how the choice of metric can make an ability seem to appear"
+    nl: "Rylan Schaeffer, Brando Miranda en Sanmi Koyejo, [*Are Emergent Abilities of Large Language Models a Mirage?*](https://arxiv.org/abs/2304.15004) (2023): hoe de keuze van een metric een vaardigheid kan laten lijken te verschijnen (in het Engels)"
