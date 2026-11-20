@@ -1354,6 +1354,7 @@ lessons:
   covers: [specification-gaming-en-reward-hacking#1]
   requires: [rai-specification-gaming, np-random]
   introduces: [c:goodharts-law, c:proxy-gaming]
+  mentions: [c:proxy, c:reward-model]
   data: []
   ladder: [python, numpy]
   needs: any

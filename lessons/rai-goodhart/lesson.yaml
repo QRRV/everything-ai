@@ -1,0 +1,40 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: rai-goodhart
+minutes: 40
+title:
+  en: "When a measure becomes a target"
+  nl: "Als een maatstaf een doel wordt"
+goal:
+  en: "explain Goodhart's law and proxy gaming, measure how far the winner of a contest with noise falls short of its score, and correct its score with the skeptical estimate of Smith and Winkler (2006)."
+  nl: "de wet van Goodhart en proxy gaming uitleggen, meten hoeveel de winnaar van een wedstrijd met ruis tegenvalt ten opzichte van zijn score, en die score bijstellen met de sceptische schatting van Smith en Winkler (2006)."
+summary:
+  - en: "Goodhart's law: push hard on a measure, and it stops measuring what you wanted. Goodhart wrote about monetary control in 1975; the short form \"When a measure becomes a target, it ceases to be a good measure\" is Marilyn Strathern's (1997), and Campbell made the same point about social indicators."
+    nl: "De wet van Goodhart: duw hard op een maatstaf, en hij meet niet meer wat je wilde. Goodhart schreef in 1975 over monetair beleid; de bekende korte vorm, dat een maatstaf die een doel wordt geen goede maatstaf meer is, komt van Marilyn Strathern (1997), en Campbell zei hetzelfde over sociale indicatoren."
+  - en: "Raising a measure in a way that does not raise what it stood for is proxy gaming, as in teaching the answers to a test. Manheim and Garrabrant (2018) sort Goodhart's law into four kinds: regressional, extremal, causal and adversarial."
+    nl: "Een maatstaf opdrijven op een manier die niet opdrijft waar hij voor stond, is proxy gaming, zoals de antwoorden op een test leren. Manheim en Garrabrant (2018) delen de wet van Goodhart in vier soorten in: regressional, extremal, causal en adversarial."
+  - en: "Picking the best by a score with noise also picks lucky noise: the winner is expected to fall short of its score, even when every score is right on average, and the more options you compare, the larger the gap. When the options really differ, the winner is still expected to be better than an average option."
+    nl: "Wie het beste kiest op een score met ruis, kiest ook gelukkige ruis: de winnaar valt naar verwachting tegen ten opzichte van zijn score, ook als elke score gemiddeld klopt, en hoe meer opties je vergelijkt, hoe groter het verschil. Als de opties echt verschillen, is de winnaar naar verwachting nog steeds beter dan een gemiddelde optie."
+  - en: "A skeptical estimate mixes each score with the mean you expected, with weight α = 1 / (1 + noise² / spread²), and is not disappointed on average. Gao et al. (2022) saw the true reward of a language model first rise and then fall as it was pushed against a proxy reward model."
+    nl: "Een sceptische schatting mengt elke score met het gemiddelde dat je verwachtte, met gewicht α = 1 / (1 + ruis² / spreiding²), en valt gemiddeld niet tegen. Gao et al. (2022) zagen de echte reward van een language model eerst stijgen en dan dalen toen het tegen een proxy-reward model werd doorgeduwd."
+can_now:
+  - en: "measure how far the winner of a contest with noise lies above its true value"
+    nl: "meten hoe ver de winnaar van een wedstrijd met ruis boven zijn ware waarde ligt"
+    by: average_gap
+  - en: "shrink scores toward the mean with the skeptical estimate of Smith and Winkler"
+    nl: "scores laten opschuiven naar het gemiddelde met de sceptische schatting van Smith en Winkler"
+    by: skeptical
+  - en: "predict how the best of many options does on fresh data"
+    nl: "voorspellen hoe de beste van veel opties het doet op nieuwe data"
+    by: prompts
+  - en: "tell the four kinds of Goodhart apart"
+    nl: "de vier soorten Goodhart uit elkaar houden"
+    by: fraud
+further_reading:
+  - en: "Manheim and Garrabrant (2018), [*Categorizing Variants of Goodhart's Law*](https://arxiv.org/abs/1803.04585): the four kinds, with examples"
+    nl: "Manheim en Garrabrant (2018), [*Categorizing Variants of Goodhart's Law*](https://arxiv.org/abs/1803.04585): de vier soorten, met voorbeelden (in het Engels)"
+  - en: "Smith and Winkler (2006), [*The Optimizer's Curse: Skepticism and Postdecision Surprise in Decision Analysis*](https://doi.org/10.1287/mnsc.1050.0451): why the chosen option disappoints, and the skeptical estimate"
+    nl: "Smith en Winkler (2006), [*The Optimizer's Curse: Skepticism and Postdecision Surprise in Decision Analysis*](https://doi.org/10.1287/mnsc.1050.0451): waarom de gekozen optie tegenvalt, en de sceptische schatting (in het Engels)"
+  - en: "Gao, Schulman and Hilton (2022), [*Scaling Laws for Reward Model Overoptimization*](https://arxiv.org/abs/2210.10760): the gold reward that rises and then falls"
+    nl: "Gao, Schulman en Hilton (2022), [*Scaling Laws for Reward Model Overoptimization*](https://arxiv.org/abs/2210.10760): de gouden reward die stijgt en daarna daalt (in het Engels)"
