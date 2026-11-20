@@ -1,0 +1,40 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: rai-outer-inner-alignment
+minutes: 40
+title:
+  en: "Outer and inner alignment"
+  nl: "Outer en inner alignment"
+goal:
+  en: "tell outer from inner alignment, write a reward that says more of what the designers want, and find the objectives that training cannot tell apart."
+  nl: "outer en inner alignment uit elkaar houden, een reward schrijven die meer zegt van wat de ontwerpers willen, en de doelen vinden die de training niet uit elkaar kan houden."
+summary:
+  - en: "Outer alignment asks whether the objective says what we want; inner alignment asks whether a trained model that is itself an optimizer pursues that objective. Hubinger et al. (2019) named the two, with the base optimizer (the learning algorithm) and the mesa-optimizer (a trained model that is itself an optimizer)."
+    nl: "Outer alignment vraagt of het doel zegt wat we willen; inner alignment vraagt of een getraind model dat zelf een optimizer is, dat doel nastreeft. Hubinger et al. (2019) gaven de twee een naam, met de base optimizer (het leeralgoritme) en de mesa-optimizer (een getraind model dat zelf een optimizer is)."
+  - en: "A pseudo-aligned mesa-optimizer has an objective that agrees with the base objective in training but not beyond: its capabilities can carry over to new situations while its goal does not. Langosco et al. (2022) saw an agent in CoinRun learn \"move right\" instead of \"move to the coin\"."
+    nl: "Een pseudo-aligned mesa-optimizer heeft een doel dat in de training overeenkomt met het base objective, maar daarbuiten niet: zijn vaardigheden kunnen meegaan naar nieuwe situaties en zijn doel niet. Langosco et al. (2022) zagen een agent in CoinRun \"ga naar rechts\" leren in plaats van \"ga naar de munt\"."
+  - en: "In goal misgeneralization (Shah et al., 2022), a system competently pursues an unwanted goal, even when the reward is right. Training situations that vary, so that the wrong goals stop doing just as well, help: in CoinRun, 2% of levels with the coin elsewhere already did."
+    nl: "Bij goal misgeneralization (Shah et al., 2022) streeft een systeem vaardig een ongewenst doel na, ook als de reward klopt. Situaties in de training die variëren, zodat de verkeerde doelen het niet meer net zo goed doen, helpen: in CoinRun hielp het al als 2% van de levels de munt ergens anders had."
+  - en: "Goal misgeneralization has been seen in narrow AI systems; the International AI Safety Report 2025 finds little evidence that it is now a major cause of misalignment in general-purpose AI systems."
+    nl: "Goal misgeneralization is gezien in smalle AI-systemen; het International AI Safety Report 2025 vindt weinig aanwijzingen dat het nu een belangrijke oorzaak is van misalignment in general-purpose AI-systemen."
+can_now:
+  - en: "write a reward that also counts what the designers want left alone"
+    nl: "een reward schrijven die ook telt wat de ontwerpers met rust willen laten"
+    by: flower_reward
+  - en: "find the objectives that do equally well in training"
+    nl: "de doelen vinden die het in de training even goed doen"
+    by: best_objectives
+  - en: "tell goal misgeneralization from outer misalignment and from a capability failure"
+    nl: "goal misgeneralization onderscheiden van outer misalignment en van een falen van vaardigheden"
+    by: vacuum
+  - en: "say what is known about inner misalignment in today's systems"
+    nl: "zeggen wat er bekend is over inner misalignment in de systemen van nu"
+    by: claim
+further_reading:
+  - en: "Hubinger et al. (2019), [*Risks from Learned Optimization in Advanced Machine Learning Systems*](https://arxiv.org/abs/1906.01820): the base optimizer and the mesa-optimizer, outer and inner alignment"
+    nl: "Hubinger et al. (2019), [*Risks from Learned Optimization in Advanced Machine Learning Systems*](https://arxiv.org/abs/1906.01820): de base optimizer en de mesa-optimizer, outer en inner alignment (in het Engels)"
+  - en: "Langosco et al. (2022), [*Goal Misgeneralization in Deep Reinforcement Learning*](https://arxiv.org/abs/2105.14111): CoinRun and the other experiments"
+    nl: "Langosco et al. (2022), [*Goal Misgeneralization in Deep Reinforcement Learning*](https://arxiv.org/abs/2105.14111): CoinRun en de andere experimenten (in het Engels)"
+  - en: "Shah et al. (2022), [*Goal Misgeneralization: Why Correct Specifications Aren't Enough For Correct Goals*](https://arxiv.org/abs/2210.01790): the definition, with examples"
+    nl: "Shah et al. (2022), [*Goal Misgeneralization: Why Correct Specifications Aren't Enough For Correct Goals*](https://arxiv.org/abs/2210.01790): de definitie, met voorbeelden (in het Engels)"
