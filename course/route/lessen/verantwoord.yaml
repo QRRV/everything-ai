@@ -1312,6 +1312,7 @@ lessons:
   covers: [ai-veiligheid-als-vakgebied#0, ai-veiligheid-als-vakgebied#3]
   requires: [rai-two-kinds-of-harm]
   introduces: [c:ai-safety, c:structural-risk, c:alignment, c:misuse, c:accident, c:loss-of-control, c:international-ai-safety-report]
+  mentions: [c:chat-model]
   data: []
   ladder: [python]
   needs: any

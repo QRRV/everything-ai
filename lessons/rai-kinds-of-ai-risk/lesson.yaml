@@ -1,0 +1,41 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+# termen:allow category, categorie, categorieën, risk
+id: rai-kinds-of-ai-risk
+minutes: 30
+title:
+  en: "Kinds of AI risk"
+  nl: "Soorten risico's van AI"
+goal:
+  en: "sort a risk of AI by where it comes from, in the three categories of the International AI Safety Report and in misuse, accidents and structure, and check a list of risks against a taxonomy to find what it leaves out."
+  nl: "een risico van AI indelen naar waar het vandaan komt, in de drie categorieën van het International AI Safety Report en in misbruik, ongelukken en structuur, en een lijst van risico's naast een taxonomie leggen om te zien wat erop ontbreekt."
+summary:
+  - en: "AI safety is the field that works on keeping AI systems from doing harm, whether people misuse them or they fail. Zwetsloot and Dafoe (2019) add a structural perspective to misuse and accidents: structural risks come from how AI changes the environment and incentives, and often stay much the same when one person acts differently."
+    nl: "AI-veiligheid is het vakgebied dat werkt aan voorkomen dat AI-systemen schade doen, of mensen ze nu misbruiken of ze falen. Zwetsloot en Dafoe (2019) vullen misbruik en ongelukken aan met een structureel perspectief: structurele risico's komen voort uit hoe AI de omgeving en de prikkels verandert, en blijven vaak ongeveer even groot als één persoon zich anders gedraagt."
+  - en: "The International AI Safety Report sorts the risks of general-purpose AI into malicious use, malfunctions and systemic risks. Its report of 2025 puts bias, reliability issues and loss of control under malfunctions, and one risk can belong to more than one category."
+    nl: "Het International AI Safety Report verdeelt de risico's van general-purpose AI over drie categorieën: kwaadwillig gebruik, falen en systeemrisico's. Het rapport van 2025 rekent bias, onbetrouwbaarheid en verlies van controle tot falen, en één risico kan in meer dan één categorie horen."
+  - en: "Two questions sort a case: did someone mean to cause harm, and else, did the system do what was intended? Misuse needs no broken system, and a systemic risk needs no system that does anything wrong."
+    nl: "Twee vragen delen een geval in: wilde iemand schade doen, en zo niet, deed het systeem wat bedoeld was? Misbruik heeft geen kapot systeem nodig, en een systeemrisico geen systeem dat iets verkeerd doet."
+  - en: "A taxonomy shows what a list from memory leaves out. The MIT AI Risk Repository collects 1,725 risks from 74 documents and sorts them into seven domains and 24 subdomains."
+    nl: "Een taxonomie laat zien wat een lijst uit je hoofd weglaat. De MIT AI Risk Repository verzamelt 1725 risico's uit 74 documenten en verdeelt ze over zeven domeinen en 24 subdomeinen."
+can_now:
+  - en: "sort a risk of AI into the three categories of the International AI Safety Report with two questions"
+    nl: "een risico van AI met twee vragen indelen in de drie categorieën van het International AI Safety Report"
+    by: iasr-category
+  - en: "find which domains of a taxonomy a list of risks leaves out"
+    nl: "vinden welke domeinen van een taxonomie een lijst van risico's weglaat"
+    by: missing
+  - en: "say what the structural perspective adds to an accident"
+    nl: "zeggen wat het structurele perspectief aan een ongeluk toevoegt"
+    by: uber
+  - en: "recognize a risk that belongs to more than one category"
+    nl: "een risico herkennen dat in meer dan één categorie hoort"
+    by: overlap
+further_reading:
+  - en: "Zwetsloot and Dafoe (2019), [*Thinking About Risks From AI: Accidents, Misuse and Structure*](https://www.lawfaremedia.org/article/thinking-about-risks-ai-accidents-misuse-and-structure): the structural perspective, with the avalanche and the railways"
+    nl: "Zwetsloot en Dafoe (2019), [*Thinking About Risks From AI: Accidents, Misuse and Structure*](https://www.lawfaremedia.org/article/thinking-about-risks-ai-accidents-misuse-and-structure): het structurele perspectief, met de lawine en de spoorwegen (in het Engels)"
+  - en: "[*International AI Safety Report*](https://internationalaisafetyreport.org/publications) (2025 and 2026): the three categories, and what is known about each risk"
+    nl: "[*International AI Safety Report*](https://internationalaisafetyreport.org/publications) (2025 en 2026): de drie categorieën, en wat er over elk risico bekend is (in het Engels)"
+  - en: "Slattery et al. (2026), [*The AI Risk Repository*](https://arxiv.org/abs/2408.12622): the 1,725 risks, the two taxonomies, and how much of them each document covers"
+    nl: "Slattery et al. (2026), [*The AI Risk Repository*](https://arxiv.org/abs/2408.12622): de 1725 risico's, de twee taxonomieën, en hoeveel ervan elk document dekt (in het Engels)"
