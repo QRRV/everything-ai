@@ -1,0 +1,40 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: rai-risk-decomposition
+minutes: 40
+title:
+  en: "Risk as chance times harm"
+  nl: "Risico als kans maal schade"
+goal:
+  en: "weigh what can go wrong in an AI system by its chance and its harm, add up the risks of its hazards, and split a risk into four factors to see where it can be lowered."
+  nl: "wat er in een AI-systeem mis kan gaan wegen naar de kans en de schade, de risico's van de gevaren optellen, en een risico in vier factoren splitsen om te zien waar het omlaag kan."
+summary:
+  - en: "A hazard is a source of danger that could cause harm; it brings risk only when someone is exposed to it. In the classic risk equation, the risk of a hazard is its probability times its severity; NIST's AI Risk Management Framework defines risk as a composite measure of both, in words adapted from ISO 31000:2018."
+    nl: "Een gevaar is een bron van mogelijke schade; het vormt pas een risico als iemand eraan blootstaat. In de klassieke risicoformule is het risico van een gevaar de kans maal de ernst; het AI Risk Management Framework van NIST definieert risico als een samengestelde maat van die twee, in een formulering ontleend aan ISO 31000:2018 en aangepast."
+  - en: "The total risk of a system is the sum of the risks of its hazards: the expected harm. For a made-up pharmacy assistant, a missed emergency in 1 of 10,000 answers carries 0.5 of the 0.65 harm points per answer, more than rude answers that come 500 times as often."
+    nl: "Het totale risico van een systeem is de som van de risico's van de gevaren: de verwachte schade. Bij een verzonnen assistent van een apotheek draagt een gemiste noodsituatie in 1 op de 10.000 antwoorden 0,5 van de 0,65 schadepunten per antwoord, meer dan onbeleefde antwoorden die 500 keer zo vaak voorkomen."
+  - en: "The disaster risk equation multiplies four factors for each hazardous event: probability, severity, exposure and vulnerability. Hendrycks's textbook says it is not mathematically rigorous; the UN's disaster terminology of 2016 calls disaster risk only a function of hazard, exposure, vulnerability and capacity."
+    nl: "De disaster risk equation vermenigvuldigt voor elke gevaarlijke gebeurtenis vier factoren: kans, ernst, blootstelling en kwetsbaarheid. Het leerboek van Hendrycks zegt dat de formule niet wiskundig exact is; de begrippen van de VN voor rampen uit 2016 noemen rampenrisico alleen een functie van gevaar, blootstelling, kwetsbaarheid en capaciteit."
+  - en: "Each factor is a place to lower risk: halving any factor of the missed emergency saves 250 of the assistant's 650 harm points a day. In the equation, one factor at zero removes the risk of that hazard only; in practice a factor is seldom exactly zero, and what remains after the measures is residual risk."
+    nl: "Elke factor is een plek om risico te verlagen: elke factor van de gemiste noodsituatie halveren scheelt 250 van de 650 schadepunten per dag van de assistent. In de formule haalt één factor op nul alleen het risico van dat gevaar weg; in de praktijk is een factor zelden precies nul, en wat na de maatregelen overblijft, is restrisico."
+can_now:
+  - en: "add up the risks of a system's hazards by the classic risk equation"
+    nl: "de risico's van de gevaren van een systeem optellen met de klassieke risicoformule"
+    by: total_risk
+  - en: "compute the risk of each hazardous event with the disaster risk equation"
+    nl: "met de disaster risk equation het risico van elke gevaarlijke gebeurtenis uitrekenen"
+    by: disaster_risk
+  - en: "say what one demonstration of a harmful capability does and does not tell about risk"
+    nl: "zeggen wat één demonstratie van een schadelijk vermogen wel en niet over risico zegt"
+    by: demonstration
+  - en: "say what one factor at zero does to the total risk of a system"
+    nl: "zeggen wat één factor op nul doet met het totale risico van een systeem"
+    by: zero
+further_reading:
+  - en: "Dan Hendrycks, [*Introduction to AI Safety, Ethics, and Society*](https://arxiv.org/abs/2411.01042) (2024), section 4.1: the classic risk equation and the disaster risk equation"
+    nl: "Dan Hendrycks, [*Introduction to AI Safety, Ethics, and Society*](https://arxiv.org/abs/2411.01042) (2024), sectie 4.1: de klassieke risicoformule en de disaster risk equation (in het Engels)"
+  - en: "United Nations, [*Report of the open-ended intergovernmental expert working group on indicators and terminology relating to disaster risk reduction*](https://documents.un.org/api/symbol/access?s=A/71/644&l=en&t=pdf) (A/71/644, 1 December 2016): hazard, exposure, vulnerability, capacity and residual risk"
+    nl: "Verenigde Naties, [*Report of the open-ended intergovernmental expert working group on indicators and terminology relating to disaster risk reduction*](https://documents.un.org/api/symbol/access?s=A/71/644&l=en&t=pdf) (A/71/644, 1 december 2016): gevaar, blootstelling, kwetsbaarheid, capaciteit en restrisico (in het Engels)"
+  - en: "NIST, [*Artificial Intelligence Risk Management Framework (AI RMF 1.0)*](https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.100-1.pdf) (January 2023), section 1.1: what the framework means by risk"
+    nl: "NIST, [*Artificial Intelligence Risk Management Framework (AI RMF 1.0)*](https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.100-1.pdf) (januari 2023), sectie 1.1: wat het framework onder risico verstaat (in het Engels)"

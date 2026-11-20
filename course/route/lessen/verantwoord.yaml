@@ -1422,7 +1422,8 @@ lessons:
   idea: "Risk is the chance of an event times the harm it does, summed over what can happen; the disaster equation splits it into hazard, exposure and vulnerability, and each part is a place to reduce it."
   covers: [d25-safety-engineering#0, d25-safety-engineering#1]
   requires: [rai-reliability, prob-expectation]
-  introduces: [c:disaster-risk-equation]
+  introduces: [c:disaster-risk-equation, c:hazard]
+  mentions: [c:proxy-gaming, c:catastrophic-risk]
   data: []
   ladder: [python]
   needs: any
