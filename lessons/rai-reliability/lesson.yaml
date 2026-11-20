@@ -1,0 +1,40 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: rai-reliability
+minutes: 40
+title:
+  en: "Robust, resilient, available, predictable"
+  nl: "Robuust, veerkrachtig, beschikbaar, voorspelbaar"
+goal:
+  en: "tell apart four ways an AI system keeps working, measure how robust a digit classifier is against noise and a shift, and measure how consistent an agent is with pass^k."
+  nl: "vier manieren onderscheiden waarop een AI-systeem blijft werken, meten hoe robuust een classifier voor cijfers is tegen ruis en tegen cijfers die opschuiven, en met pass^k meten hoe consequent een agent is."
+summary:
+  - en: "Robustness is keeping the level of performance when the input or the setting is a little different; resilience is withstanding an unexpected event and returning to normal, or degrading safely; availability is being there when needed; predictability is behaving the same way each time. NIST's AI Risk Management Framework takes its definitions of robustness and reliability from an ISO standard, and adapts its definition of resilience from it."
+    nl: "Robuustheid is het niveau houden als de input of de situatie een beetje anders is; veerkracht is een onverwachte gebeurtenis doorstaan en weer normaal werken, of veilig minder doen; beschikbaarheid is er zijn als het nodig is; voorspelbaarheid is elke keer hetzelfde doen. Het AI Risk Management Framework van NIST neemt zijn definities van robuustheid en betrouwbaarheid over uit een ISO-norm, en past die van veerkracht erop aan."
+  - en: "Accuracy on a clean test set says little about robustness. ImageNet-C tests image classifiers on 15 kinds of corruption at five strengths; the softmax regression for digits reads 890 of 1,000 clean test digits right, 820 with noise of standard deviation 0.5, and only 452 when the digits move three pixels to the right."
+    nl: "De accuracy op een schone test set zegt weinig over robuustheid. ImageNet-C test beeldclassifiers op 15 soorten beschadiging in vijf sterktes; de softmax-regressie voor cijfers leest 890 van 1000 schone testcijfers goed, 820 met ruis met standaardafwijking 0,5, en maar 452 als de cijfers drie pixels naar rechts schuiven."
+  - en: "Robustness against noise, blur or a shift is not the same as resistance to attackers, which NIST and the AI Act treat under security. The AI Act of 2024 asks high-risk systems to perform consistently throughout their lifecycle and to be as resilient as possible against errors, for example with backup or fail-safe plans."
+    nl: "Robuustheid tegen ruis, onscherpte of een beeld dat opschuift is niet hetzelfde als weerstand tegen aanvallers, die NIST en de AI Act onder beveiliging rekenen. De AI Act van 2024 vraagt dat AI-systemen met een hoog risico hun hele levensduur consequent presteren en zo veerkrachtig mogelijk zijn tegen fouten, bijvoorbeeld met een back-up of een plan om veilig te stoppen."
+  - en: "pass^k is the chance that all k tries at a task succeed, averaged over the tasks: three agents that each succeed on 60% of their tries can lie far apart at k = 8. Availability in a cloud contract counts requests that do not fail with an error, so a wrong answer that arrives counts as available."
+    nl: "pass^k is de kans dat alle k pogingen bij een taak slagen, gemiddeld over de taken: drie agents die elk in 60% van hun pogingen slagen, kunnen bij k = 8 ver uit elkaar liggen. Beschikbaarheid in een cloudcontract telt de requests die niet met een fout mislukken, dus een fout antwoord dat aankomt, telt als beschikbaar."
+can_now:
+  - en: "measure how much of its accuracy a classifier keeps when noise is added to its input"
+    nl: "meten hoeveel van zijn accuracy een classifier houdt als er ruis bij de input komt"
+    by: noisy_accuracy
+  - en: "compute pass^k from the success rates of an agent's tasks"
+    nl: "pass^k uitrekenen uit de slagingspercentages van de taken van een agent"
+    by: pass_hat
+  - en: "choose a test that measures robustness rather than security or predictability"
+    nl: "een test kiezen die robuustheid meet en niet beveiliging of voorspelbaarheid"
+    by: test
+  - en: "say what an availability figure in a contract counts, and what it leaves out"
+    nl: "zeggen wat een beschikbaarheidscijfer in een contract telt, en wat het weglaat"
+    by: uptime
+further_reading:
+  - en: "NIST, [*Artificial Intelligence Risk Management Framework (AI RMF 1.0)*](https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.100-1.pdf) (January 2023), section 3: valid and reliable, safe, secure and resilient"
+    nl: "NIST, [*Artificial Intelligence Risk Management Framework (AI RMF 1.0)*](https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.100-1.pdf) (januari 2023), sectie 3: geldig en betrouwbaar, veilig, beveiligd en veerkrachtig (in het Engels)"
+  - en: "Hendrycks and Dietterich (2019), [*Benchmarking Neural Network Robustness to Common Corruptions and Perturbations*](https://arxiv.org/abs/1903.12261): the 15 corruptions of ImageNet-C and what they do to classifiers"
+    nl: "Hendrycks en Dietterich (2019), [*Benchmarking Neural Network Robustness to Common Corruptions and Perturbations*](https://arxiv.org/abs/1903.12261): de 15 beschadigingen van ImageNet-C en wat ze met classifiers doen (in het Engels)"
+  - en: "Yao and colleagues (2024), [*τ-bench: A Benchmark for Tool-Agent-User Interaction in Real-World Domains*](https://arxiv.org/abs/2406.12045): pass^k and how fast it falls"
+    nl: "Yao en collega's (2024), [*τ-bench: A Benchmark for Tool-Agent-User Interaction in Real-World Domains*](https://arxiv.org/abs/2406.12045): pass^k en hoe snel het daalt (in het Engels)"

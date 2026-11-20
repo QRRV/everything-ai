@@ -1408,8 +1408,8 @@ lessons:
   idea: "A reliable system keeps working when the input is a little off (robustness), recovers after a failure (resilience), is there when needed (availability) and behaves the same each time (predictability); add noise to digits and watch the accuracy fall."
   covers: [robuustheid-betrouwbaarheid-en-assurance#0]
   requires: [rai-kinds-of-ai-risk, ml-digits-linear]
-  introduces: [c:robustness]
-  mentions: [c:availability]
+  introduces: [c:robustness, c:pass-hat-k]
+  mentions: [c:availability, c:fail-safe]
   data: [qmnist]
   ladder: [python, numpy]
   needs: any
