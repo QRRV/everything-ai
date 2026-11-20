@@ -1,0 +1,42 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: rai-frontier-frameworks
+minutes: 40
+title:
+  en: "If this, then that: frontier safety frameworks"
+  nl: "Als dit, dan dat: frontier safety frameworks"
+goal:
+  en: "explain what frontier safety frameworks promise, check a model's scores against capability thresholds with an alert line below them, and say where such promises fall short."
+  nl: "uitleggen wat frontier safety frameworks beloven, de scores van een model controleren tegen capability thresholds met een alertlijn eronder, en zeggen waar zulke beloftes tekortschieten."
+summary:
+  - en: "A frontier safety framework is a promise a company makes in advance: if a model reaches a capability threshold, then the safeguards that go with it must be in place, or development waits. Anthropic, OpenAI and Google DeepMind each have one."
+    nl: "Een frontier safety framework is een belofte die een bedrijf vooraf doet: als een model een capability threshold bereikt, dan moeten de safeguards die erbij horen klaarstaan, of wacht de ontwikkeling. Anthropic, OpenAI en Google DeepMind hebben er elk een."
+  - en: "A capability threshold describes what a model could help do in a domain such as biology, cyberattacks or AI research, and evaluations show whether a model reaches it. Under Anthropic's policy of 2025, a model that could not be shown to stay far enough below a threshold counted as above it."
+    nl: "Een capability threshold beschrijft wat een model zou kunnen helpen doen in een domein zoals biologie, cyberaanvallen of AI-onderzoek, en evaluaties laten zien of een model die bereikt. Volgens het beleid van Anthropic uit 2025 telde een model waarvan niet aan te tonen was dat het ver genoeg onder een threshold bleef, als erboven."
+  - en: "An alert line a little below a threshold gives time to prepare the safeguards. A band that is too wide gives alerts for many models that will never get there."
+    nl: "Een alertlijn een eindje onder een threshold geeft tijd om de safeguards voor te bereiden. Een te brede band geeft alerts voor veel modellen die er nooit komen."
+  - en: "The companies write the frameworks themselves and change them often, and by their own account they work only if other companies keep similar promises. Whether they bind a company at all is disputed."
+    nl: "De bedrijven schrijven de frameworks zelf en veranderen ze vaak, en volgens henzelf werken ze alleen als andere bedrijven vergelijkbare beloftes nakomen. Of ze een bedrijf echt binden, is omstreden."
+can_now:
+  - en: "check which capability thresholds a model reaches, counting a domain that was not tested as reached"
+    nl: "controleren welke capability thresholds een model bereikt, waarbij een domein dat niet getest is als bereikt telt"
+    by: reached
+  - en: "give each version of a model a status: below, alert or reached"
+    nl: "elke versie van een model een status geven: onder, alert of bereikt"
+    by: statuses
+  - en: "explain why a threshold that is measured only afterwards comes too late for an if-then commitment"
+    nl: "uitleggen waarom een threshold die pas achteraf gemeten wordt, te laat komt voor een if-then commitment"
+    by: lagging
+  - en: "weigh how far below a threshold an alert line should lie"
+    nl: "afwegen hoe ver onder een threshold een alertlijn moet liggen"
+    by: margin
+further_reading:
+  - en: "Holden Karnofsky, [*If-Then Commitments for AI Risk Reduction*](https://carnegieendowment.org/research/2024/09/if-then-commitments-for-ai-risk-reduction) (Carnegie Endowment for International Peace, September 2024): what if-then commitments are, what they are good for, and where they fall short"
+    nl: "Holden Karnofsky, [*If-Then Commitments for AI Risk Reduction*](https://carnegieendowment.org/research/2024/09/if-then-commitments-for-ai-risk-reduction) (Carnegie Endowment for International Peace, september 2024): wat if-then commitments zijn, waar ze goed voor zijn, en waar ze tekortschieten (in het Engels)"
+  - en: "Anthropic, [*Responsible Scaling Policy*](https://www.anthropic.com/responsible-scaling-policy): the current version, every earlier one, and what changed each time"
+    nl: "Anthropic, [*Responsible Scaling Policy*](https://www.anthropic.com/responsible-scaling-policy): de huidige versie, alle eerdere, en wat er elke keer veranderde (in het Engels)"
+  - en: "Google DeepMind, [*Frontier Safety Framework*, version 3.1](https://storage.googleapis.com/deepmind-media/DeepMind.com/Blog/strengthening-our-frontier-safety-framework/frontier-safety-framework_3-1.pdf) (April 2026): Critical Capability Levels, the response to them, and alert thresholds"
+    nl: "Google DeepMind, [*Frontier Safety Framework*, versie 3.1](https://storage.googleapis.com/deepmind-media/DeepMind.com/Blog/strengthening-our-frontier-safety-framework/frontier-safety-framework_3-1.pdf) (april 2026): Critical Capability Levels, wat er dan gebeurt, en alert thresholds (in het Engels)"
+  - en: "METR, [*Common Elements of Frontier AI Safety Policies*](https://metr.org/common-elements) (December 2025): what the published frameworks share, and where they differ"
+    nl: "METR, [*Common Elements of Frontier AI Safety Policies*](https://metr.org/common-elements) (december 2025): wat de gepubliceerde frameworks gemeen hebben, en waar ze verschillen (in het Engels)"

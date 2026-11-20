@@ -1520,7 +1520,7 @@ lessons:
   idea: "AI companies commit in advance to what they will do when an evaluation shows a capability above a threshold: if-then commitments, written down in Anthropic's RSP, OpenAI's Preparedness Framework and Google DeepMind's Frontier Safety Framework."
   covers: [frontier-safety-frameworks#0, frontier-safety-frameworks#1]
   requires: [rai-open-weights]
-  introduces: [c:frontier-safety-framework, c:capability-threshold]
+  introduces: [c:frontier-safety-framework, c:capability-threshold, c:if-then-commitment]
   data: []
   ladder: [python]
   needs: any
