@@ -1,0 +1,39 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+# termen:allow AI Safety
+id: rai-concrete-problems
+minutes: 35
+title:
+  en: "Concrete problems in AI safety"
+  nl: "Concrete problemen in AI-veiligheid"
+goal:
+  en: "name the five concrete problems of Amodei et al. (2016) and where each comes from, score an agent with a hidden performance function beside its reward, and walk a learned policy through a world that changed."
+  nl: "de vijf concrete problemen van Amodei et al. (2016) noemen en zeggen waar elk vandaan komt, een agent beoordelen met een verborgen performancefunctie naast zijn reward, en een geleerde policy door een veranderde wereld laten lopen."
+summary:
+  - en: "Amodei et al. (2016) name five problems of accidents in machine learning, by where things go wrong: a wrong objective (negative side effects, reward hacking), an objective too costly to check often (scalable oversight), and the learning process (safe exploration, distributional shift)."
+    nl: "Amodei et al. (2016) noemen vijf problemen van ongelukken met machine learning, naar waar het misgaat: een verkeerde doelfunctie (negatieve neveneffecten, reward hacking), een doelfunctie die te duur is om vaak te controleren (scalable oversight), en het leerproces (safe exploration, distributional shift)."
+  - en: "A negative side effect is harm to something the objective leaves out. In the course's room, punishing the vase moved the harm to a plant; of the three rewards, only the one that punishes every change avoided both."
+    nl: "Een negatief neveneffect is schade aan iets wat de doelfunctie weglaat. In de kamer van de course schoof het straffen van de vaas de schade door naar een plant; van de drie rewards vermeed alleen die met een straf op elke verandering allebei."
+  - en: "*AI Safety Gridworlds* (Leike et al., 2017) gives each world a performance function the agent never sees. When it differs from the reward, the problem is a specification problem; when they are the same, a robustness problem, where the agent can still fail, for example in a world that changed."
+    nl: "*AI Safety Gridworlds* (Leike et al., 2017) geeft elke wereld een performancefunctie die de agent nooit ziet. Verschilt die van de reward, dan is het een specificatieprobleem; zijn ze gelijk, dan een robuustheidsprobleem, waarbij de agent toch kan falen, bijvoorbeeld in een wereld die veranderde."
+  - en: "ε-greedy makes no attempt to avoid danger: the course's agent kept falling into the lava after it knew the way. A learned policy does what it learned, also in a world that changed."
+    nl: "ε-greedy doet niets om gevaar te vermijden: de agent van de course bleef in de lava vallen nadat hij de weg kende. Een geleerde policy doet wat hij leerde, ook in een wereld die veranderde."
+can_now:
+  - en: "score an episode with a hidden performance function beside its reward"
+    nl: "een episode beoordelen met een verborgen performancefunctie naast zijn reward"
+    by: performance
+  - en: "walk a learned policy through a world that changed, and see where it goes wrong"
+    nl: "een geleerde policy door een veranderde wereld laten lopen, en zien waar het misgaat"
+    by: follow
+  - en: "recognize reward hacking among the five problems"
+    nl: "reward hacking herkennen tussen de vijf problemen"
+    by: tests
+  - en: "recognize scalable oversight among the five problems"
+    nl: "scalable oversight herkennen tussen de vijf problemen"
+    by: oversight
+further_reading:
+  - en: "Amodei et al. (2016), [*Concrete Problems in AI Safety*](https://arxiv.org/abs/1606.06565): the five problems, the cleaning robot, and the ideas against each"
+    nl: "Amodei et al. (2016), [*Concrete Problems in AI Safety*](https://arxiv.org/abs/1606.06565): de vijf problemen, de schoonmaakrobot, en de ideeën tegen elk (in het Engels)"
+  - en: "Leike et al. (2017), [*AI Safety Gridworlds*](https://arxiv.org/abs/1711.09883): the worlds, the hidden performance function, and how A2C and Rainbow did in them"
+    nl: "Leike et al. (2017), [*AI Safety Gridworlds*](https://arxiv.org/abs/1711.09883): de werelden, de verborgen performancefunctie, en hoe A2C en Rainbow het erin deden (in het Engels)"

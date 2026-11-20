@@ -1326,7 +1326,7 @@ lessons:
   covers: [ai-veiligheid-als-vakgebied#2]
   requires: [rai-kinds-of-ai-risk, rl-q-learning]
   introduces: [c:negative-side-effect, c:safe-exploration]
-  mentions: [c:reward-hacking]
+  mentions: [c:reward-hacking, c:coding-agent]
   data: []
   ladder: [python]
   needs: any
