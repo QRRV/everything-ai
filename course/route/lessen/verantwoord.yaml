@@ -1475,10 +1475,11 @@ lessons:
   level: basis
   domein: verantwoord
   module: veiligheid
-  idea: "Systems fail slowly, by many small departures from the rules that each look normal, and through rare events that are bigger than anything before; with heavy tails, the past maximum says little about the next."
+  idea: "Systems drift toward failure through many small steps, each accepted because the last one did no harm, and under a long tail one rare event can outweigh everything before it; the worst so far says little about the next."
   covers: [d25-safety-engineering#7, d25-safety-engineering#8]
   requires: [rai-swiss-cheese, np-random]
   introduces: [c:drift-into-failure, c:tail-risk]
+  mentions: [c:existential-risk, c:red-teaming, c:jailbreak]
   data: []
   ladder: [python, numpy]
   needs: any

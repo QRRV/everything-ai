@@ -1,0 +1,44 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: rai-drift-and-tails
+minutes: 40
+title:
+  en: "Drifting into failure, and black swans"
+  nl: "Afglijden naar falen, en zwarte zwanen"
+goal:
+  en: "recognize drift into failure, where small steps that each did no harm add up to an accident, and see why under a long tail one rare event can outweigh everything before it."
+  nl: "drift into failure herkennen, waarbij kleine stappen die elk geen kwaad deden samen tot een ongeluk leiden, en zien waarom bij een lange staart één zeldzame gebeurtenis zwaarder kan wegen dan alles ervoor."
+summary:
+  - en: "In drift into failure, a system slides toward an accident through many small steps, each accepted because the last one did no harm. The Columbia report shows how foam losses came to count as normal."
+    nl: "Bij drift into failure glijdt een systeem af naar een ongeluk via veel kleine stappen, die elk geaccepteerd worden omdat de vorige geen kwaad deed. Het rapport over de Columbia laat zien hoe loskomend schuim als normaal ging gelden."
+  - en: "Tail events are rare but have a large impact. A black swan is a tail event that most people did not see coming; who is surprised depends on who is looking."
+    nl: "Staartgebeurtenissen zijn zeldzaam maar hebben grote gevolgen. Een zwarte zwaan is een staartgebeurtenis die de meeste mensen niet zagen aankomen; wie verrast is, hangt af van wie er kijkt."
+  - en: "In a thin tail, such as height, no value is far from the rest. In a long tail, one value can be bigger than many others together, so a single draw can move the mean while the median stays put."
+    nl: "In een dunne staart, zoals lengte, ligt geen waarde ver van de rest. In een lange staart kan één waarde groter zijn dan veel andere samen, dus één trekking kan het gemiddelde verschuiven terwijl de mediaan blijft staan."
+  - en: "A long run without an accident is not evidence of safety: under drift the risk grows while nothing happens, and under a long tail the worst so far says little about the next."
+    nl: "Een lange tijd zonder ongeluk is geen teken van veiligheid: bij drift groeit het risico terwijl er niets gebeurt, en bij een lange staart zegt het ergste tot nu toe weinig over het volgende."
+can_now:
+  - en: "follow how an accepted limit stretches with every deviation that did no harm"
+    nl: "volgen hoe een geaccepteerde grens oprekt met elke afwijking die geen kwaad deed"
+    by: stretch
+  - en: "compute the mean after each value and see what one large value does to it"
+    nl: "het gemiddelde na elke waarde uitrekenen en zien wat één grote waarde ermee doet"
+    by: running_mean
+  - en: "recognize drift in a team's reasoning that each step did no harm"
+    nl: "drift herkennen in de redenering van een team dat elke stap geen kwaad deed"
+    by: drift
+  - en: "say for whom an event is a black swan and for whom a foreseen tail event"
+    nl: "zeggen voor wie een gebeurtenis een zwarte zwaan is en voor wie een voorziene staartgebeurtenis"
+    by: whose_swan
+further_reading:
+  - en: "Dan Hendrycks, [*Introduction to AI Safety, Ethics, and Society*](https://arxiv.org/abs/2411.01042) (2024), sections 4.5 to 4.7: models of accidents, drift into failure, tail events and black swans"
+    nl: "Dan Hendrycks, [*Introduction to AI Safety, Ethics, and Society*](https://arxiv.org/abs/2411.01042) (2024), secties 4.5 tot en met 4.7: modellen van ongelukken, drift into failure, staartgebeurtenissen en zwarte zwanen (in het Engels)"
+  - en: "Columbia Accident Investigation Board, [*Report Volume I*](https://ntrs.nasa.gov/api/citations/20030093634/downloads/20030093634.pdf) (August 2003): chapter 6 on the foam decisions and chapter 8, *History as Cause*"
+    nl: "Columbia Accident Investigation Board, [*Report Volume I*](https://ntrs.nasa.gov/api/citations/20030093634/downloads/20030093634.pdf) (augustus 2003): hoofdstuk 6 over de beslissingen over het schuim en hoofdstuk 8, *History as Cause* (in het Engels)"
+  - en: "M. E. J. Newman, [*Power laws, Pareto distributions and Zipf's law*](https://arxiv.org/abs/cond-mat/0412004): heights against city sizes, and how to draw numbers with a long tail"
+    nl: "M. E. J. Newman, [*Power laws, Pareto distributions and Zipf's law*](https://arxiv.org/abs/cond-mat/0412004): lengtes tegenover groottes van steden, en hoe je getallen met een lange staart trekt (in het Engels)"
+  - en: "Nassim Nicholas Taleb, [*Statistical Consequences of Fat Tails*](https://arxiv.org/abs/2001.10488), third edition (2025): fat tails, and why past extremes say little about future ones"
+    nl: "Nassim Nicholas Taleb, [*Statistical Consequences of Fat Tails*](https://arxiv.org/abs/2001.10488), derde editie (2025): zware staarten, en waarom eerdere uitersten weinig zeggen over toekomstige (in het Engels)"
+  - en: "Eric Marsden, [*Black swans: the limits of probabilistic modelling*](https://risk-engineering.org/black-swans/) (risk-engineering.org): what black swans are and what helps against them"
+    nl: "Eric Marsden, [*Black swans: the limits of probabilistic modelling*](https://risk-engineering.org/black-swans/) (risk-engineering.org): wat zwarte zwanen zijn en wat ertegen helpt (in het Engels)"
