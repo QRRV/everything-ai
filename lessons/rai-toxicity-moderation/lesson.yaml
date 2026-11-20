@@ -1,0 +1,42 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: rai-toxicity-moderation
+minutes: 45
+title:
+  en: "Measuring toxicity"
+  nl: "Toxiciteit meten"
+goal:
+  en: "put a threshold on a moderation classifier's scores, count what slips through and what is blocked, and see which groups pay for the mistakes."
+  nl: "een threshold op de scores van een classifier voor moderatie zetten, tellen wat erdoorheen glipt en wat wordt geblokkeerd, en zien welke groepen de dupe zijn van de fouten."
+summary:
+  - en: "A toxicity score is a model's estimate, learned from people's labels, of how likely readers would find a text rude, disrespectful or unreasonable. It is not a fact about the text."
+    nl: "Een toxiciteitsscore is de schatting van een model, geleerd van labels van mensen, van hoe waarschijnlijk lezers een tekst grof, respectloos of onredelijk vinden. Het is geen feit over de tekst."
+  - en: "Content moderation checks texts against a platform's rules. A threshold turns a score into a decision: raise it, and fewer harmless texts are blocked, but more harmful ones slip through."
+    nl: "Contentmoderatie toetst teksten aan de regels van een platform. Een threshold maakt van een score een beslissing: verhoog je de threshold, dan worden er minder onschuldige teksten geblokkeerd, maar glippen er meer schadelijke doorheen."
+  - en: "Scores lean partly on single words. Harmless texts with identity terms (Dixon and colleagues), in African American English (Sap and colleagues) or with hard words can be blocked more often, so count the mistakes per group."
+    nl: "Scores leunen deels op losse woorden. Onschuldige teksten met woorden voor identiteit (Dixon en anderen), in African American English (Sap en anderen) of met harde woorden kunnen vaker worden geblokkeerd, dus tel de fouten per groep."
+  - en: "A chat model can be a moderator, as Llama Guard is, but its scores depend on the question it gets: test a moderator on texts whose answer you know before you trust its threshold."
+    nl: "Een chat model kan moderator zijn, zoals Llama Guard, maar zijn scores hangen af van de vraag die het krijgt: test een moderator op teksten waarvan je het antwoord kent voordat je zijn threshold vertrouwt."
+can_now:
+  - en: "count the share of harmful texts that slip through and of harmless texts that are blocked at a threshold"
+    nl: "het aandeel schadelijke teksten dat erdoorheen glipt en het aandeel onschuldige teksten dat wordt geblokkeerd bij een threshold tellen"
+    by: rates
+  - en: "count the blocked harmless texts per group, so that one average does not hide a group"
+    nl: "de geblokkeerde onschuldige teksten per groep tellen, zodat één gemiddelde geen groep verbergt"
+    by: blocked_by_group
+  - en: "explain why one threshold for everyone can block one group's harmless posts far more often"
+    nl: "uitleggen waarom één threshold voor iedereen de onschuldige berichten van één groep veel vaker kan blokkeren"
+    by: dialect
+  - en: "recognize that a moderator's scores depend on the model and the question it is asked"
+    nl: "herkennen dat de scores van een moderator afhangen van het model en de vraag die het krijgt"
+    by: wording
+further_reading:
+  - en: "Samuel Gehman, Suchin Gururangan, Maarten Sap, Yejin Choi and Noah A. Smith, [*RealToxicityPrompts: Evaluating Neural Toxic Degeneration in Language Models*](https://aclanthology.org/2020.findings-emnlp.301.pdf) (Findings of EMNLP 2020): what Perspective's scores are, and how often models write toxic text"
+    nl: "Samuel Gehman, Suchin Gururangan, Maarten Sap, Yejin Choi en Noah A. Smith, [*RealToxicityPrompts: Evaluating Neural Toxic Degeneration in Language Models*](https://aclanthology.org/2020.findings-emnlp.301.pdf) (Findings of EMNLP 2020): wat de scores van Perspective zijn, en hoe vaak modellen toxische tekst schrijven (in het Engels)"
+  - en: "Lucas Dixon, John Li, Jeffrey Sorensen, Nithum Thain and Lucy Vasserman, [*Measuring and Mitigating Unintended Bias in Text Classification*](https://www.aies-conference.com/2018/contents/papers/main/AIES_2018_paper_9.pdf) (AIES 2018): false positive bias on identity terms, and the templates that measure it"
+    nl: "Lucas Dixon, John Li, Jeffrey Sorensen, Nithum Thain en Lucy Vasserman, [*Measuring and Mitigating Unintended Bias in Text Classification*](https://www.aies-conference.com/2018/contents/papers/main/AIES_2018_paper_9.pdf) (AIES 2018): false positive bias bij woorden voor identiteit, en de sjablonen die het meten (in het Engels)"
+  - en: "Maarten Sap, Dallas Card, Saadia Gabriel, Yejin Choi and Noah A. Smith, [*The Risk of Racial Bias in Hate Speech Detection*](https://aclanthology.org/P19-1163.pdf) (ACL 2019): dialect, labels and the false positives that follow"
+    nl: "Maarten Sap, Dallas Card, Saadia Gabriel, Yejin Choi en Noah A. Smith, [*The Risk of Racial Bias in Hate Speech Detection*](https://aclanthology.org/P19-1163.pdf) (ACL 2019): dialect, labels en de false positives die daaruit volgen (in het Engels)"
+  - en: "Hakan Inan and colleagues, [*Llama Guard: LLM-based Input-Output Safeguard for Human-AI Conversations*](https://arxiv.org/abs/2312.06674) (2023): a chat model that checks messages and answers against a policy"
+    nl: "Hakan Inan en anderen, [*Llama Guard: LLM-based Input-Output Safeguard for Human-AI Conversations*](https://arxiv.org/abs/2312.06674) (2023): een chat model dat berichten en antwoorden toetst aan een beleid (in het Engels)"

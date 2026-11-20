@@ -1493,7 +1493,8 @@ lessons:
   covers: [safeguards-bij-uitrol#0]
   requires: [rai-swiss-cheese, ml-confusion-matrix]
   introduces: [c:toxicity, c:content-moderation]
-  data: [model-qwen3-0.6b]
+  mentions: [c:chat-model, c:token]
+  data: [model-qwen3-0.6b, course-moderation-qwen]
   ladder: [python]
   needs: any
 
