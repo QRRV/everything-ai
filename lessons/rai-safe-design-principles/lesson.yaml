@@ -1,0 +1,42 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: rai-safe-design-principles
+minutes: 40
+title:
+  en: "Designing for safety"
+  nl: "Ontwerpen voor veiligheid"
+goal:
+  en: "apply principles from engineering to AI systems: redundancy with parts that do not fail for the same reason, fail-safes, separation of duties, least privilege and negative feedback."
+  nl: "principes uit de techniek toepassen op AI-systemen: redundantie met onderdelen die niet om dezelfde reden falen, fail-safes, functiescheiding, least privilege en negatieve terugkoppeling."
+summary:
+  - en: "Hendrycks's textbook gives safe design principles that lower the chance and the severity of a failure, for an AI and for the system around it. Many are older than AI: least privilege is in Saltzer and Schroeder's list of 1975."
+    nl: "Het leerboek van Hendrycks geeft principes voor veilig ontwerpen die de kans op een storing en de ernst ervan kleiner maken, voor een AI en voor het systeem eromheen. Veel zijn ouder dan AI: least privilege staat al in de lijst van Saltzer en Schroeder uit 1975."
+  - en: "Redundancy gives a critical function more than one part, so that one failing part is not enough to cause an accident. It works only when the parts do not fail for the same reason."
+    nl: "Redundantie geeft een kritieke functie meer dan één onderdeel, zodat één onderdeel dat faalt niet genoeg is voor een ongeluk. Dat werkt alleen als de onderdelen niet om dezelfde reden falen."
+  - en: "A fail-safe makes a failure lead to a safe state by itself, like elevator brakes held open by the cable. Separation of duties and least privilege keep any one agent, person or AI, from doing harm alone: a second person approves, and each part gets only the access its task needs."
+    nl: "Een fail-safe laat een storing vanzelf leiden tot een veilige toestand, zoals liftremmen die door de kabel worden opengehouden. Functiescheiding en least privilege voorkomen dat één partij, mens of AI, alleen schade aanricht: een tweede persoon keurt goed, en elk onderdeel krijgt alleen de toegang die de taak nodig heeft."
+  - en: "Voting helps only when each voter is right more often than wrong, and copies of one model make the same mistakes. Every principle has a price: it can add parts and cost, and change how people work."
+    nl: "Stemmen helpt alleen als elke stemmer vaker goed dan fout zit, en kopieën van één model maken dezelfde fouten. Elk principe heeft een prijs: het kan onderdelen en kosten toevoegen, en veranderen hoe mensen werken."
+can_now:
+  - en: "let redundant checkers vote, and fall back to the safe answer when there is no majority"
+    nl: "redundante controleurs laten stemmen, en terugvallen op het veilige antwoord als er geen meerderheid is"
+    by: vote
+  - en: "build a check in which no one approves their own request"
+    nl: "een controle bouwen waarbij niemand de eigen aanvraag goedkeurt"
+    by: may_pay
+  - en: "recognize a fail-safe: a design that stays safe when it fails"
+    nl: "een fail-safe herkennen: een ontwerp dat veilig blijft als het faalt"
+    by: fail_safe
+  - en: "say what least privilege asks of an AI agent"
+    nl: "zeggen wat least privilege van een AI-agent vraagt"
+    by: privilege
+further_reading:
+  - en: "Dan Hendrycks, [*Introduction to AI Safety, Ethics, and Society*](https://arxiv.org/abs/2411.01042) (2024), section 4.3: safe design principles"
+    nl: "Dan Hendrycks, [*Introduction to AI Safety, Ethics, and Society*](https://arxiv.org/abs/2411.01042) (2024), sectie 4.3: principes voor veilig ontwerpen (in het Engels)"
+  - en: "Jerome H. Saltzer and Michael D. Schroeder, [*The Protection of Information in Computer Systems*](https://web.mit.edu/Saltzer/www/publications/protection/Basic.html) (1975): eight design principles, among them least privilege, separation of privilege and fail-safe defaults"
+    nl: "Jerome H. Saltzer en Michael D. Schroeder, [*The Protection of Information in Computer Systems*](https://web.mit.edu/Saltzer/www/publications/protection/Basic.html) (1975): acht ontwerpprincipes, waaronder least privilege, separation of privilege en fail-safe defaults (in het Engels)"
+  - en: "OWASP, [*LLM06:2025 Excessive Agency*](https://genai.owasp.org/llmrisk/llm062025-excessive-agency/) (2025): AI agents that can do too much, and how to limit them"
+    nl: "OWASP, [*LLM06:2025 Excessive Agency*](https://genai.owasp.org/llmrisk/llm062025-excessive-agency/) (2025): AI-agents die te veel kunnen, en hoe je ze beperkt (in het Engels)"
+  - en: "James E. Tomayko, [*Computers in Spaceflight: The NASA Experience*](https://ntrs.nasa.gov/api/citations/19880069935/downloads/19880069935_Optimized.pdf) (NASA, 1988), chapter 4: the Space Shuttle's redundant computers and their backup"
+    nl: "James E. Tomayko, [*Computers in Spaceflight: The NASA Experience*](https://ntrs.nasa.gov/api/citations/19880069935/downloads/19880069935_Optimized.pdf) (NASA, 1988), hoofdstuk 4: de redundante computers van de Space Shuttle en hun reserve (in het Engels)"
