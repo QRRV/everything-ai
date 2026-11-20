@@ -1,0 +1,41 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+# termen:allow AI Safety
+id: rai-specification-gaming
+minutes: 40
+title:
+  en: "Doing what you said, not what you meant"
+  nl: "Doen wat je zei, niet wat je bedoelde"
+goal:
+  en: "recognize specification gaming, count the points of a way when a target counts once, and test whether a proxy reward is hackable, after Skalse et al. (2022)."
+  nl: "specification gaming herkennen, de punten van een weg tellen als een target één keer telt, en testen of een proxy-reward hackbaar is, naar Skalse et al. (2022)."
+summary:
+  - en: "Specification gaming is behavior that meets an objective as written without what it was meant to bring about (Krakovna et al., 2020). The boat in CoastRunners went in circles hitting targets instead of finishing the race; such behavior comes from the objective, not from a flaw in the learning algorithm."
+    nl: "Specification gaming is gedrag dat een doelfunctie haalt zoals die er staat, zonder wat ze moest opleveren (Krakovna et al., 2020). De boot in CoastRunners draaide rondjes langs targets in plaats van de race uit te varen; zulk gedrag komt uit de doelfunctie, niet uit een fout in het leeralgoritme."
+  - en: "On the course's track, an agent rewarded 3 points a target went back and forth between two targets and never finished; counted once, the targets brought it to the finish, by way of a detour for the third. From 1.5 points a target on, going back and forth was the best way for an agent that cannot see the limit of 100 steps."
+    nl: "Op de baan van de course ging een agent met 3 punten per target heen en weer tussen twee targets en kwam nooit bij de finish; telden de targets één keer, dan kwam hij er wel, met een omweg langs het derde. Vanaf 1,5 punt per target was heen en weer de beste weg voor een agent die de grens van 100 stappen niet ziet."
+  - en: "Skalse et al. (2022) call a proxy hackable when the proxy prefers one policy and the true reward another; leaving out a room, or a detail, can make a proxy hackable."
+    nl: "Skalse et al. (2022) noemen een proxy hackbaar als de proxy de ene policy verkiest en de ware reward een andere; een kamer of een detail weglaten kan een proxy hackbaar maken."
+  - en: "Language models game their tests too, and can tell it is not what was meant; telling o3 not to cheat changed little (METR, 2025), and punishing a plan that a monitor reads can hide the plan instead of stopping the hack (Baker et al., 2025)."
+    nl: "Ook language models buiten hun tests uit, en ze kunnen zien dat dat niet de bedoeling is; o3 vragen om niet vals te spelen hielp weinig (METR, 2025), en een plan straffen dat een monitor leest kan het plan verbergen in plaats van de hack te stoppen (Baker et al., 2025)."
+can_now:
+  - en: "count the points of a way when a target counts only once"
+    nl: "de punten van een weg tellen als een target maar één keer telt"
+    by: points_once
+  - en: "test whether a proxy reward is hackable on a set of policies"
+    nl: "testen of een proxy-reward hackbaar is op een verzameling policies"
+    by: hackable
+  - en: "tell specification gaming from a bug in the learning algorithm"
+    nl: "specification gaming onderscheiden van een fout in het leeralgoritme"
+    by: tumble
+  - en: "see why punishing what a monitor reads can hide a hack"
+    nl: "zien waarom straffen wat een monitor leest een hack kan verbergen"
+    by: monitor
+further_reading:
+  - en: "Krakovna et al. (2020), [*Specification gaming: the flip side of AI ingenuity*](https://deepmind.google/blog/specification-gaming-the-flip-side-of-ai-ingenuity/): the definition, the causes, and a link to the public list of examples"
+    nl: "Krakovna et al. (2020), [*Specification gaming: the flip side of AI ingenuity*](https://deepmind.google/blog/specification-gaming-the-flip-side-of-ai-ingenuity/): de definitie, de oorzaken, en een link naar de openbare lijst met voorbeelden (in het Engels)"
+  - en: "Skalse et al. (2022), [*Defining and Characterizing Reward Hacking*](https://arxiv.org/abs/2209.13085): the cleaning robot, and when a proxy can be unhackable"
+    nl: "Skalse et al. (2022), [*Defining and Characterizing Reward Hacking*](https://arxiv.org/abs/2209.13085): de schoonmaakrobot, en wanneer een proxy niet hackbaar kan zijn (in het Engels)"
+  - en: "Von Arx, Chan and Barnes (2025), [*Recent Frontier Models Are Reward Hacking*](https://metr.org/blog/2025-06-05-recent-reward-hacking/): examples, numbers, and the prompts that did not help"
+    nl: "Von Arx, Chan en Barnes (2025), [*Recent Frontier Models Are Reward Hacking*](https://metr.org/blog/2025-06-05-recent-reward-hacking/): voorbeelden, getallen, en de prompts die niet hielpen (in het Engels)"

@@ -1340,7 +1340,7 @@ lessons:
   covers: [specification-gaming-en-reward-hacking#0]
   requires: [rai-concrete-problems, rl-q-learning]
   introduces: [c:specification-gaming]
-  mentions: [c:reward-hacking]
+  mentions: [c:reward-hacking, c:proxy, c:chain-of-thought, c:unit-test]
   data: []
   ladder: [python, numpy]
   needs: any
