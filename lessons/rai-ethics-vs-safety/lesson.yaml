@@ -1,0 +1,40 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: rai-ethics-vs-safety
+minutes: 45
+title:
+  en: "AI ethics and AI safety"
+  nl: "AI-ethiek en AI-veiligheid"
+goal:
+  en: "tell AI ethics from AI safety, redo the sum behind longtermism and find where it turns, and read its critics and its defenders in their own words."
+  nl: "AI-ethiek en AI-veiligheid uit elkaar houden, de som achter het longtermisme opnieuw maken en vinden waar hij omslaat, en de critici en de verdedigers in hun eigen woorden lezen."
+summary:
+  - en: "AI ethics works on harm that AI systems do now, to people living now; AI safety also looks at catastrophes that much more capable systems might cause later. In 2023 the two clashed in public: DAIR answered the Future of Life Institute's pause letter, and the Center for AI Safety put one sentence about the risk of extinction from AI online."
+    nl: "AI-ethiek gaat over schade die AI-systemen nu doen, aan mensen die nu leven; AI-veiligheid kijkt ook naar rampen die veel krachtigere systemen later zouden kunnen veroorzaken. In 2023 botsten de twee in het openbaar: DAIR antwoordde op de pauzebrief van het Future of Life Institute, en het Center for AI Safety zette één zin over het risico op uitsterven door AI online."
+  - en: "Longtermism is, in MacAskill's words, the view that we should be doing much more to protect future generations. Greaves and MacAskill (2021) argue with expected value: if the expected number of future lives is 10²⁴, a small drop in the risk of extinction, or of a catastrophe as bad, outweighs bednets against malaria, at 0.025 lives per 100 dollars."
+    nl: "Longtermisme is volgens MacAskill de opvatting dat we veel meer zouden moeten doen om toekomstige generaties te beschermen. Greaves en MacAskill (2021) rekenen met verwachtingswaarde: als het verwachte aantal toekomstige levens 10²⁴ is, weegt een kleine daling van het risico op uitsterven, of op een even erge ramp, zwaarder dan klamboes tegen malaria, met 0,025 levens per 100 dollar."
+  - en: "The sum rests on guesses no one can measure: the number of future lives spans 31 powers of ten across the scenarios of their own table, and the AI plan needs only 2.5 × 10¹⁰ future beings but rests on a 0.1% chance and a 1% cut. Greaves and MacAskill name fanaticism themselves as one of the most plausible ways their argument could fail."
+    nl: "De som rust op gokken die niemand kan meten: het aantal toekomstige levens beslaat in de scenario's van hun eigen tabel 31 machten van tien, en het AI-plan heeft genoeg aan 2,5 × 10¹⁰ toekomstige levens, maar rust op een kans van 0,1% en een verlaging van 1%. Greaves en MacAskill noemen fanatisme zelf een van de meest aannemelijke manieren waarop hun argument zou kunnen falen."
+  - en: "Gebru and Torres (2024) coined TESCREAL for seven ideologies that, they argue, drive the push for AGI and have roots in twentieth-century eugenics, while noting that not everyone tied to them holds all of their views. Prunkl and Whittlestone (2020) split near and long term into four scales, and Bucknall and Dori-Hacohen (2022) propose that harms of today can be risk factors for a catastrophe later."
+    nl: "Gebru en Torres (2024) bedachten TESCREAL voor zeven ideologieën die volgens hen het streven naar AGI aandrijven en wortels hebben in de eugenetica van de twintigste eeuw, met de kanttekening dat niet iedereen die erbij hoort al hun opvattingen deelt. Prunkl en Whittlestone (2020) splitsen korte en lange termijn in vier schalen, en Bucknall en Dori-Hacohen (2022) stellen voor dat schade van nu een risicofactor kan zijn voor een latere ramp."
+can_now:
+  - en: "work out how many lives 100 dollars of a plan to reduce extinction risk is worth"
+    nl: "uitrekenen hoeveel levens 100 dollar van een plan tegen het risico op uitsterven waard is"
+    by: lives_per_100
+  - en: "find from how many future beings such a plan beats a benchmark"
+    nl: "vinden vanaf hoeveel toekomstige levens zo'n plan het beter doet dan een benchmark"
+    by: break_even
+  - en: "tell what the TESCREAL critique says about ideologies from what it says about people"
+    nl: "onderscheiden wat de TESCREAL-kritiek zegt over ideologieën en wat over mensen"
+    by: label
+  - en: "describe a concern on several scales instead of calling it near-term or long-term"
+    nl: "een zorg op meerdere schalen beschrijven in plaats van die zorg korte of lange termijn te noemen"
+    by: scales
+further_reading:
+  - en: "Greaves and MacAskill (2021), [*The case for strong longtermism*](https://www.globalprioritiesinstitute.org/wp-content/uploads/The-Case-for-Strong-Longtermism-GPI-Working-Paper-June-2021-2-2.pdf): the sums, the estimates of the future and the objections they discuss"
+    nl: "Greaves en MacAskill (2021), [*The case for strong longtermism*](https://www.globalprioritiesinstitute.org/wp-content/uploads/The-Case-for-Strong-Longtermism-GPI-Working-Paper-June-2021-2-2.pdf): de sommen, de schattingen van de toekomst en de bezwaren die ze bespreken (in het Engels)"
+  - en: "Gebru and Torres (2024), [*The TESCREAL bundle: Eugenics and the promise of utopia through artificial general intelligence*](https://doi.org/10.5210/fm.v29i4.13636): the critique"
+    nl: "Gebru en Torres (2024), [*The TESCREAL bundle: Eugenics and the promise of utopia through artificial general intelligence*](https://doi.org/10.5210/fm.v29i4.13636): de kritiek (in het Engels)"
+  - en: "Prunkl and Whittlestone (2020), [*Beyond Near- and Long-Term: Towards a Clearer Account of Research Priorities in AI Ethics and Society*](https://arxiv.org/abs/2001.04335): the four scales"
+    nl: "Prunkl en Whittlestone (2020), [*Beyond Near- and Long-Term: Towards a Clearer Account of Research Priorities in AI Ethics and Society*](https://arxiv.org/abs/2001.04335): de vier schalen (in het Engels)"

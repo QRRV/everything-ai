@@ -1381,6 +1381,7 @@ lessons:
   covers: [ai-veiligheid-als-vakgebied#4]
   requires: [rai-kinds-of-ai-risk, rai-ethical-theories]
   introduces: [c:longtermism, c:tescreal]
+  mentions: [c:existential-risk, c:expected-value]
   data: []
   ladder: [python]
   needs: any
