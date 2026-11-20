@@ -1,0 +1,42 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: rai-open-weights
+minutes: 40
+title:
+  en: "Open weights: for and against"
+  nl: "Open weights: voor en tegen"
+goal:
+  en: "weigh the arguments for and against releasing a model's weights, and compute the marginal risk of a release: what it adds to the risk that was already there."
+  nl: "de argumenten voor en tegen het vrijgeven van de weights van een model afwegen, en het marginal risk van een release uitrekenen: wat die toevoegt aan het risico dat er al was."
+summary:
+  - en: "Open weights means that anyone can download and run a model's trained parameters. That is not yet open source, which also asks for the code and information about the data."
+    nl: "Open weights betekent dat iedereen de geleerde parameters van een model kan downloaden en draaien. Dat is nog geen open source, waarvoor ook de code en informatie over de data nodig zijn."
+  - en: "For: anyone can study, adapt and run the model, which spreads who decides about it. Against: a release cannot be taken back, the maker cannot see how the model is used, and safeguards next to or inside the model can be removed."
+    nl: "Voor: iedereen kan het model bestuderen, aanpassen en draaien, waardoor meer mensen erover beslissen. Tegen: een release is niet terug te nemen, de maker kan niet zien hoe het model gebruikt wordt, en safeguards naast of in het model kunnen eruit."
+  - en: "Closed models can lose their safety training too, through a fine-tuning service; the difference is that a company can watch that service and stop it."
+    nl: "Ook closed models kunnen hun safety training kwijtraken, via een dienst voor fine-tuning; het verschil is dat een bedrijf die dienst in de gaten kan houden en kan stopzetten."
+  - en: "The marginal risk of a release is the risk with it minus the risk without it, against a chosen reference point. Small additions add up, so look back at the start, not only at the world just before."
+    nl: "Het marginal risk van een release is het risico met de release min het risico zonder, tegenover een gekozen vergelijkingspunt. Kleine stappen tellen op, dus kijk terug naar het begin, niet alleen naar de wereld vlak ervoor."
+can_now:
+  - en: "compute the marginal risk of a release over several threats, as chance times harm with the release minus without it"
+    nl: "het marginal risk van een release over meer dreigingen uitrekenen, als kans maal schade met de release min zonder"
+    by: marginal_risk
+  - en: "follow the risk over a row of releases that each add a little, and compare it with the start"
+    nl: "het risico volgen over een rij releases die elk iets toevoegen, en het vergelijken met het begin"
+    by: risk_over_time
+  - en: "explain why a release of weights cannot be taken back"
+    nl: "uitleggen waarom een release van weights niet terug te nemen is"
+    by: recall
+  - en: "recognize when a model's ability adds little risk because the same help already exists"
+    nl: "herkennen wanneer een vaardigheid van een model weinig risico toevoegt omdat dezelfde hulp er al is"
+    by: duplicate
+further_reading:
+  - en: "Sayash Kapoor, Rishi Bommasani, Kevin Klyman, Shayne Longpre and colleagues, [*On the Societal Impact of Open Foundation Models*](https://arxiv.org/abs/2403.07918) (2024): the benefits, the risks, and a framework for marginal risk in six steps"
+    nl: "Sayash Kapoor, Rishi Bommasani, Kevin Klyman, Shayne Longpre en anderen, [*On the Societal Impact of Open Foundation Models*](https://arxiv.org/abs/2403.07918) (2024): de voordelen, de risico's, en een raamwerk voor marginal risk in zes stappen (in het Engels)"
+  - en: "National Telecommunications and Information Administration, [*Dual-Use Foundation Models with Widely Available Model Weights*](https://www.ntia.gov/sites/default/files/publications/ntia-ai-open-model-report.pdf) (July 2024): what the American government concluded about open weights"
+    nl: "National Telecommunications and Information Administration, [*Dual-Use Foundation Models with Widely Available Model Weights*](https://www.ntia.gov/sites/default/files/publications/ntia-ai-open-model-report.pdf) (juli 2024): wat de Amerikaanse overheid concludeerde over open weights (in het Engels)"
+  - en: "Simon Lermen, Charlie Rogers-Smith and Jeffrey Ladish, [*LoRA Fine-tuning Efficiently Undoes Safety Training in Llama 2-Chat 70B*](https://arxiv.org/abs/2310.20624) (2023): how cheaply safety training can be removed when you have the weights"
+    nl: "Simon Lermen, Charlie Rogers-Smith en Jeffrey Ladish, [*LoRA Fine-tuning Efficiently Undoes Safety Training in Llama 2-Chat 70B*](https://arxiv.org/abs/2310.20624) (2023): hoe goedkoop safety training eruit kan als je de weights hebt (in het Engels)"
+  - en: "Open Source Initiative, [*The Open Source AI Definition 1.0*](https://opensource.org/ai/open-source-ai-definition) (2024): what open-source AI asks for beyond the weights"
+    nl: "Open Source Initiative, [*The Open Source AI Definition 1.0*](https://opensource.org/ai/open-source-ai-definition) (2024): wat open-source AI vraagt naast de weights (in het Engels)"

@@ -1507,7 +1507,7 @@ lessons:
   covers: [safeguards-bij-uitrol#7]
   requires: [rai-toxicity-moderation]
   introduces: [c:marginal-risk]
-  mentions: [c:open-weights]
+  mentions: [c:open-weights, c:open-source-ai]
   data: []
   ladder: [python]
   needs: any
