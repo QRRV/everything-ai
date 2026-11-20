@@ -1,0 +1,42 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: rai-swiss-cheese
+minutes: 40
+title:
+  en: "Safeguards in a row"
+  nl: "Safeguards achter elkaar"
+goal:
+  en: "reason about safeguards in a row with the Swiss cheese model, defense in depth and fault trees, and see when their chances may be multiplied."
+  nl: "redeneren over safeguards achter elkaar met het Swiss cheese model, defense in depth en foutenbomen, en zien wanneer je hun kansen mag vermenigvuldigen."
+summary:
+  - en: "In the Swiss cheese model, every safeguard is a slice with holes, and harm gets through where the holes of all slices line up. No one failure is enough for an accident; safety improves with more slices or smaller holes."
+    nl: "In het Swiss cheese model is elke safeguard een plak met gaten, en schade komt erdoor waar de gaten van alle plakken op één lijn liggen. Eén storing is niet genoeg voor een ongeluk; de veiligheid groeit met meer plakken of kleinere gaten."
+  - en: "Defense in depth, from nuclear safety, aims for independent layers, so that no single layer is relied on alone, and a missing layer is not made up for by the others. AI companies use the same idea."
+    nl: "Defense in depth, uit de nucleaire veiligheid, streeft naar onafhankelijke lagen, zodat niemand op één laag alleen vertrouwt, en de andere lagen een ontbrekende laag niet goedmaken. AI-bedrijven gebruiken hetzelfde idee."
+  - en: "A fault tree works back from an unwanted top event. For independent events, chances multiply under an AND gate, and an OR gate gives one minus the chance that nothing below it happens; adding is only an approximation."
+    nl: "Een foutenboom werkt terug vanaf een ongewenste topgebeurtenis. Bij onafhankelijke gebeurtenissen vermenigvuldigen de kansen onder een EN-poort, en een OF-poort geeft één min de kans dat er niets onder gebeurt; optellen is maar een benadering."
+  - en: "Safeguards that miss for the same reason, such as safeguards that share a blind spot, are not independent: a shared cause sets a floor that more layers do not lower."
+    nl: "Safeguards die om dezelfde reden missen, zoals safeguards met dezelfde blinde vlek, zijn niet onafhankelijk: een gedeelde oorzaak legt een bodem die meer lagen niet verlagen."
+can_now:
+  - en: "find the holes that line up through several safeguards"
+    nl: "de gaten vinden die door meerdere safeguards op één lijn liggen"
+    by: gets_through
+  - en: "compute the top event of a fault tree with an AND gate and an OR gate"
+    nl: "de topgebeurtenis van een foutenboom met een EN-poort en een OF-poort uitrekenen"
+    by: top_event
+  - en: "recognize safeguards that share a cause, and why their chances do not multiply"
+    nl: "safeguards herkennen die een oorzaak delen, en zien waarom hun kansen niet vermenigvuldigen"
+    by: common_cause
+  - en: "say why defense in depth does not allow running with a layer missing"
+    nl: "zeggen waarom defense in depth niet toestaat dat je doordraait terwijl er een laag ontbreekt"
+    by: missing_layer
+further_reading:
+  - en: "Dan Hendrycks, [*Introduction to AI Safety, Ethics, and Society*](https://arxiv.org/abs/2411.01042) (2024), section 4.4: the Swiss cheese model, layers of defense and fault tree analysis"
+    nl: "Dan Hendrycks, [*Introduction to AI Safety, Ethics, and Society*](https://arxiv.org/abs/2411.01042) (2024), sectie 4.4: het Swiss cheese model, verdedigingslagen en foutenboomanalyse (in het Engels)"
+  - en: "James Reason, Erik Hollnagel and Jean Paries, [*Revisiting the « Swiss Cheese » Model of Accidents*](https://www.eurocontrol.int/sites/default/files/library/017_Swiss_Cheese_Model.pdf) (EUROCONTROL, 2006): where the model came from, and what it can and cannot do"
+    nl: "James Reason, Erik Hollnagel en Jean Paries, [*Revisiting the « Swiss Cheese » Model of Accidents*](https://www.eurocontrol.int/sites/default/files/library/017_Swiss_Cheese_Model.pdf) (EUROCONTROL, 2006): waar het model vandaan komt, en wat het wel en niet kan (in het Engels)"
+  - en: "Michael Stamatelatos and Homayoon Dezfuli, [*Probabilistic Risk Assessment Procedures Guide for NASA Managers and Practitioners*](https://ntrs.nasa.gov/api/citations/20120001369/downloads/20120001369.pdf) (NASA, 2011): fault trees in chapter 3, common cause failures in chapter 7"
+    nl: "Michael Stamatelatos en Homayoon Dezfuli, [*Probabilistic Risk Assessment Procedures Guide for NASA Managers and Practitioners*](https://ntrs.nasa.gov/api/citations/20120001369/downloads/20120001369.pdf) (NASA, 2011): foutenbomen in hoofdstuk 3, common cause failures in hoofdstuk 7 (in het Engels)"
+  - en: "International Nuclear Safety Advisory Group, [*Defence in Depth in Nuclear Safety*](https://www-pub.iaea.org/MTCD/Publications/PDF/Pub1013e_web.pdf) (INSAG-10, IAEA, 1996): the five levels of defense in depth"
+    nl: "International Nuclear Safety Advisory Group, [*Defence in Depth in Nuclear Safety*](https://www-pub.iaea.org/MTCD/Publications/PDF/Pub1013e_web.pdf) (INSAG-10, IAEA, 1996): de vijf niveaus van defense in depth (in het Engels)"

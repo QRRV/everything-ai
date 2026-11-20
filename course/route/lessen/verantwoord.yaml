@@ -1461,10 +1461,11 @@ lessons:
   level: basis
   domein: verantwoord
   module: veiligheid
-  idea: "Each safeguard has holes; an accident happens when the holes of all safeguards line up (the Swiss cheese model). With independent safeguards the chances multiply, and a fault tree adds them up along AND and OR."
+  idea: "Each safeguard has holes; an accident happens when the holes of all safeguards line up (the Swiss cheese model). With independent safeguards the chances multiply, and a fault tree multiplies them under AND and combines them under OR."
   covers: [d25-safety-engineering#4, safeguards-bij-uitrol#3]
   requires: [rai-safe-design-principles, prob-conditional]
   introduces: [c:swiss-cheese-model, c:fault-tree-analysis, c:defense-in-depth]
+  mentions: [c:fine-tuning, c:well-being]
   data: []
   ladder: [python]
   needs: any
