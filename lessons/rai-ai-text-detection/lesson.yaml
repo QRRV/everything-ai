@@ -1,0 +1,47 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: rai-ai-text-detection
+minutes: 35
+title:
+  en: "Detecting text written by AI"
+  nl: "Tekst van AI herkennen"
+goal:
+  en: "compute how surprised a model is by a text, count a detector's mistakes on both sides of a threshold, work out how often its accusations are right, and say why such a score is never proof."
+  nl: "uitrekenen hoe verrast een model is door een tekst, de fouten van een detector aan beide kanten van een drempel tellen, uitrekenen hoe vaak zijn beschuldigingen kloppen, en zeggen waarom zo'n score nooit iets aantoont."
+summary:
+  - en: "A model gives every token of a text a log probability, and the average NLL is the mean surprise, minus those log probabilities. Text a model wrote tends to surprise it less: in the course's run, Qwen3's own answers average 1.53, the answers by people 2.34."
+    nl: "Een model geeft elk token van een tekst een log-kans, en de gemiddelde NLL is de gemiddelde verrassing, min die log-kansen. Tekst die een model schreef, verrast het meestal minder: in de run van de course komen de eigen antwoorden van Qwen3 gemiddeld op 1,53, de antwoorden van mensen op 2,34."
+  - en: "Scored alone, the two overlap, and no threshold makes fewer than 8 mistakes on the 40 answers. Scored after their question, as Qwen3 read it while it wrote, every answer of Qwen3 is below every answer by people; but a detector rarely knows the prompt or the model."
+    nl: "Los gescoord overlappen ze, en geen enkele drempel maakt minder dan 8 fouten op de 40 antwoorden. Gescoord na hun vraag, zoals Qwen3 die las terwijl het schreef, staat elk antwoord van Qwen3 onder elk antwoord van een mens; maar een detector kent zelden de prompt of het model."
+  - en: "A detector errs both ways. Some famous texts and simple words land on the AI side, so detectors flag far more essays by people who write English as a second language; rewriting text by AI with rarer words lets it through."
+    nl: "Een detector zit er aan twee kanten naast. Sommige bekende teksten en eenvoudige woorden komen aan de kant van AI terecht, dus detectors wijzen veel meer essays aan van mensen die Engels als tweede taal schrijven; tekst van AI die met zeldzamere woorden herschreven is, komt erdoor."
+  - en: "How often an accusation is right depends on how common text by AI is. A detector that catches 90% of it and flags 1% of texts by people is right in about 91% of its accusations when 1 text in 10 is by AI, and in fewer than half when 1 in 100 is."
+    nl: "Hoe vaak een beschuldiging klopt, hangt af van hoe vaak tekst van AI voorkomt. Een detector die er 90% van vangt en 1% van de teksten van mensen aanwijst, heeft in ongeveer 91% van zijn beschuldigingen gelijk als 1 tekst op de 10 van AI is, en in minder dan de helft als dat 1 op de 100 is."
+can_now:
+  - en: "compute the average NLL of a text from the log probabilities of its tokens"
+    nl: "de gemiddelde NLL van een tekst uitrekenen uit de log-kansen van zijn tokens"
+    by: average-nll
+  - en: "count what share of texts a detector flags at a threshold, among texts by people and by AI"
+    nl: "tellen welk deel van de teksten een detector bij een drempel aanwijst, onder teksten van mensen en van AI"
+    by: flagged-share
+  - en: "work out how often a detector's accusation is right, given how common text by AI is"
+    nl: "uitrekenen hoe vaak een beschuldiging van een detector klopt, gegeven hoe vaak tekst van AI voorkomt"
+    by: share-right
+  - en: "explain why detectors flag text by people who write simple English"
+    nl: "uitleggen waarom detectors tekst aanwijzen van mensen die eenvoudig Engels schrijven"
+    by: toefl
+  - en: "say why rewriting text by AI with rarer words gets it past such a detector"
+    nl: "zeggen waarom tekst van AI die met zeldzamere woorden herschreven is, langs zo'n detector komt"
+    by: rewrite
+further_reading:
+  - en: "Liang et al. (2023), [*GPT detectors are biased against non-native English writers*](https://arxiv.org/abs/2304.02819): the TOEFL essays, and what richer and simpler words do"
+    nl: "Liang et al. (2023), [*GPT detectors are biased against non-native English writers*](https://arxiv.org/abs/2304.02819): de TOEFL-essays, en wat rijkere en eenvoudigere woorden doen (in het Engels)"
+  - en: "Hans et al. (2024), [*Spotting LLMs With Binoculars*](https://arxiv.org/abs/2401.12070): log-perplexity, the prompt a detector does not see, and famous documents"
+    nl: "Hans et al. (2024), [*Spotting LLMs With Binoculars*](https://arxiv.org/abs/2401.12070): log-perplexity, de prompt die een detector niet ziet, en bekende documenten (in het Engels)"
+  - en: "Mitchell et al. (2023), [*DetectGPT*](https://arxiv.org/abs/2301.11305): detection from the curvature of the log probability"
+    nl: "Mitchell et al. (2023), [*DetectGPT*](https://arxiv.org/abs/2301.11305): herkennen aan de kromming van de log-kans (in het Engels)"
+  - en: "Sadasivan et al. (2025), [*Can AI-Generated Text be Reliably Detected?*](https://arxiv.org/abs/2303.11156): paraphrasing against detectors and watermarks"
+    nl: "Sadasivan et al. (2025), [*Can AI-Generated Text be Reliably Detected?*](https://arxiv.org/abs/2303.11156): parafraseren tegen detectors en watermerken (in het Engels)"
+  - en: "Vanderbilt University (2023), [*Guidance on AI Detection and Why We’re Disabling Turnitin’s AI Detector*](https://www.vanderbilt.edu/brightspace/2023/08/16/guidance-on-ai-detection-and-why-were-disabling-turnitins-ai-detector/): a university that switched Turnitin's detector off"
+    nl: "Vanderbilt University (2023), [*Guidance on AI Detection and Why We’re Disabling Turnitin’s AI Detector*](https://www.vanderbilt.edu/brightspace/2023/08/16/guidance-on-ai-detection-and-why-were-disabling-turnitins-ai-detector/): een universiteit die de detector van Turnitin uitzette (in het Engels)"

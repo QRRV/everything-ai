@@ -1292,12 +1292,12 @@ lessons:
   level: basis
   domein: verantwoord
   module: security
-  idea: "A detector can look at how surprised a model is by a text, its mean negative log-likelihood: text a model wrote tends to score low. It errs both ways, and it flags text by people who write a second language far more often."
+  idea: "A detector can look at how surprised a model is by a text, its average negative log-likelihood: text a model wrote tends to score low, above all after its own prompt. It errs both ways (famous texts and simple words look like AI, text by AI rewritten in rarer words gets through), and how often an accusation is right depends on how common text by AI is."
   covers: [d24-provenance-watermerken-en-deepfake-detectie#6]
   requires: [rai-content-provenance, lm-nll]
   introduces: [c:ai-text-detection]
-  mentions: [c:perplexity]
-  data: [model-qwen3-0.6b]
+  mentions: [c:perplexity, c:false-positive, c:false-positive-rate, c:true-positive, c:false-negative, c:decision-threshold, c:base-rate, c:roc-auc, c:chat-model, c:chat-template, c:sampling, c:memorization, c:white-box, c:prompt]
+  data: [model-qwen3-0.6b, course-detection-qwen]
   ladder: [python]
   needs: any
 
