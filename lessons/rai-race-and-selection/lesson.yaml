@@ -1,0 +1,44 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: rai-race-and-selection
+minutes: 40
+title:
+  en: "Races and selection"
+  nl: "Races en selectie"
+goal:
+  en: "explain what a race to the bottom on safety is, work out with Askell and colleagues' rule when staying careful pays, follow selection in a made-up population, and weigh whether AI development is a race at all."
+  nl: "uitleggen wat een race to the bottom op veiligheid is, met de regel van Askell en anderen uitrekenen wanneer voorzichtig blijven loont, selectie volgen in een verzonnen populatie, en afwegen of AI-ontwikkeling wel een race is."
+summary:
+  - en: "In a race to the bottom, each party lowers its safety standards to keep up with the others, so that all end up less safe than any of them wanted. AI companies write in their own policies that they want to avoid one."
+    nl: "In een race to the bottom verlaagt elke partij de eigen veiligheidseisen om de anderen bij te houden, zodat iedereen minder veilig uitkomt dan elk van hen wilde. AI-bedrijven schrijven in hun eigen beleid dat ze er een willen vermijden."
+  - en: "Askell, Brundage and Hadfield (2019) call it a collective action problem. In their rule, staying careful pays when its expected value is higher than that of racing; trust, and what each outcome is worth, decide when that is."
+    nl: "Askell, Brundage en Hadfield (2019) noemen het een collectieve-actieprobleem. Volgens hun regel loont voorzichtig blijven als de verwachtingswaarde ervan hoger is dan die van racen; vertrouwen, en wat elke uitkomst waard is, bepalen wanneer dat zo is."
+  - en: "Hendrycks (2023) argues that selection works on AI agents too: where versions vary, resemble the ones before them and are copied at different rates, the fastest take over, whether or not anyone wants them."
+    nl: "Hendrycks (2023) betoogt dat selectie ook op AI-agents werkt: waar versies verschillen, lijken op de versies ervoor en in een verschillend tempo gekopieerd worden, nemen de snelste het over, of iemand ze nu wil of niet."
+  - en: "Whether AI development is a race at all is disputed. Scharre (2021) sees no arms race in military AI but a security dilemma, and Cave and ÓhÉigeartaigh (2018) warn that talk of a race can itself help start one."
+    nl: "Of AI-ontwikkeling wel een race is, is omstreden. Scharre (2021) ziet in militaire AI geen wapenwedloop maar een veiligheidsdilemma, en Cave en ÓhÉigeartaigh (2018) waarschuwen dat praten over een race zelf kan bijdragen aan het ontstaan van een race."
+can_now:
+  - en: "work out for each level of trust whether staying careful or racing has the higher expected value"
+    nl: "voor elk niveau van vertrouwen uitrekenen of voorzichtig blijven of racen de hoogste verwachtingswaarde heeft"
+    by: choices
+  - en: "follow how kinds that are copied at different rates take over a population"
+    nl: "volgen hoe soorten die in een verschillend tempo gekopieerd worden een populatie overnemen"
+    by: shares
+  - en: "check Lewontin's three conditions for selection in a case where nobody wants the outcome"
+    nl: "de drie voorwaarden van Lewontin voor selectie nagaan in een geval waarin niemand de uitkomst wil"
+    by: copied
+  - en: "explain how trust can change whether two competitors stay careful"
+    nl: "uitleggen hoe vertrouwen kan veranderen of twee concurrenten voorzichtig blijven"
+    by: trust
+further_reading:
+  - en: "Dan Hendrycks, [*Introduction to AI Safety, Ethics, and Society*](https://arxiv.org/abs/2411.01042) (2024), section 1.3, *AI Race*, and the section on AI races in chapter 7, *Collective Action Problems*: the Attrition model and the Security Dilemma model"
+    nl: "Dan Hendrycks, [*Introduction to AI Safety, Ethics, and Society*](https://arxiv.org/abs/2411.01042) (2024), paragraaf 1.3, *AI Race*, en het deel over AI-races in hoofdstuk 7, *Collective Action Problems*: het Attrition model en het Security Dilemma model (in het Engels)"
+  - en: "Dan Hendrycks, [*Natural Selection Favors AIs over Humans*](https://arxiv.org/abs/2303.16200) (2023): the three conditions for selection, applied to AI agents"
+    nl: "Dan Hendrycks, [*Natural Selection Favors AIs over Humans*](https://arxiv.org/abs/2303.16200) (2023): de drie voorwaarden voor selectie, toegepast op AI-agents (in het Engels)"
+  - en: "Amanda Askell, Miles Brundage and Gillian Hadfield, [*The Role of Cooperation in Responsible AI Development*](https://arxiv.org/abs/1907.04534) (2019): the cooperate-defect game, the five factors and four strategies"
+    nl: "Amanda Askell, Miles Brundage en Gillian Hadfield, [*The Role of Cooperation in Responsible AI Development*](https://arxiv.org/abs/1907.04534) (2019): het cooperate-defect-spel, de vijf factoren en vier strategieën (in het Engels)"
+  - en: "Paul Scharre, [*Debunking the AI Arms Race Theory*](https://tnsr.org/2021/06/debunking-the-ai-arms-race-theory/), Texas National Security Review 4:3 (2021): why military AI competition is no arms race, and the risks it still poses"
+    nl: "Paul Scharre, [*Debunking the AI Arms Race Theory*](https://tnsr.org/2021/06/debunking-the-ai-arms-race-theory/), Texas National Security Review 4:3 (2021): waarom militaire AI-concurrentie geen wapenwedloop is, en welke risico's ze toch heeft (in het Engels)"
+  - en: "Stephen Cave and Seán S. ÓhÉigeartaigh, [*An AI Race for Strategic Advantage: Rhetoric and Risks*](https://www.aies-conference.com/2018/contents/papers/main/AIES_2018_paper_163.pdf), AIES 2018: the risks of talking about a race, and of a real one"
+    nl: "Stephen Cave en Seán S. ÓhÉigeartaigh, [*An AI Race for Strategic Advantage: Rhetoric and Risks*](https://www.aies-conference.com/2018/contents/papers/main/AIES_2018_paper_163.pdf), AIES 2018: de risico's van praten over een race, en van een echte (in het Engels)"
