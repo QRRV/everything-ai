@@ -1278,10 +1278,11 @@ lessons:
   level: basis
   domein: verantwoord
   module: security
-  idea: "Detecting fakes is an arms race the detector tends to lose; provenance turns it around: the maker signs the content and its history (C2PA), and anyone can check that nothing changed since."
+  idea: "A digital signature is made with a private key and checked with the public key; to sign a picture, the maker signs its hash, so anyone can check who vouches for it and that it has not changed since (C2PA, Content Credentials); a label that checks does not make a picture true, a missing label says little, and a watermark that survives everyday edits need not survive an attacker."
   covers: [d24-provenance-watermerken-en-deepfake-detectie#0, d24-provenance-watermerken-en-deepfake-detectie#7]
   requires: [rai-security-basics]
   introduces: [c:content-provenance, c:digital-signature, c:c2pa, c:content-credentials, c:watermark]
+  mentions: [c:hash, c:metadata, c:pixel, c:token, c:sampling, c:language-model, c:lossy-compression]
   data: []
   ladder: [python]
   needs: any

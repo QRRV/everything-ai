@@ -1,0 +1,47 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: rai-content-provenance
+minutes: 35
+title:
+  en: "Where did this picture come from?"
+  nl: "Waar komt dit plaatje vandaan?"
+goal:
+  en: "check signatures with a public key, sign a picture by signing its hash, read what a picture's label says and does not say, and tell a watermark that survives everyday edits from one that survives an attacker."
+  nl: "handtekeningen controleren met een public key, een plaatje ondertekenen door zijn hash te ondertekenen, lezen wat het label van een plaatje wel en niet zegt, en een watermerk dat gewone bewerkingen overleeft onderscheiden van een dat een aanvaller overleeft."
+summary:
+  - en: "A digital signature is made with a private key and checked with the public key. With the toy key of Rivest, Shamir and Adleman (1978), n = 2773, e = 17 and d = 157, and 920 signs as 192; change the number or the signature, and checking fails. Real keys have 2048 bits or more; 2773 has 12."
+    nl: "Een digitale handtekening maak je met een private key en controleer je met de public key. Bij de speelgoedkey van Rivest, Shamir en Adleman (1978) is n = 2773, e = 17 en d = 157, en wordt 920 ondertekend als 192; verander het getal of de handtekening, en de controle faalt. Echte keys hebben 2048 bits of meer; 2773 heeft er 12."
+  - en: "To sign a picture, the signer signs its hash: change one pixel, and the picture no longer matches its label. C2PA, set up in 2021 by Adobe, Arm, BBC, Intel, Microsoft and Truepic, puts this in a manifest of assertions, a claim and a claim signature, which users see as Content Credentials."
+    nl: "Om een plaatje te ondertekenen, onderteken je de hash ervan: verander één pixel, en het plaatje past niet meer bij zijn label. C2PA, in 2021 opgezet door Adobe, Arm, BBC, Intel, Microsoft en Truepic, zet dat in een manifest van assertions, een claim en een claim signature, dat gebruikers zien als Content Credentials."
+  - en: "A label that checks says who vouches for a picture and that it has not changed since, not that it is true; whom you trust is a trust list, not something the signature decides. A missing label says little: labels are optional, and sharing often strips them."
+    nl: "Een label dat klopt, zegt wie voor een plaatje instaat en dat het sindsdien niet veranderd is, niet dat het waar is; wie je vertrouwt, staat in een vertrouwenslijst en wordt niet door de handtekening beslist. Een ontbrekend label zegt weinig: labels zijn niet verplicht, en bij delen verdwijnen ze vaak."
+  - en: "A watermark sits in the content itself and can survive when the label is gone, but NIST reports that most schemes have been found removable, and paraphrasing often removes text watermarks. Article 50 of the AI Act asks providers to mark AI output in a machine-readable way, from 2 August 2026, or by 2 December 2026 for systems already on the market."
+    nl: "Een watermerk zit in de inhoud zelf en kan blijven als het label weg is, maar volgens NIST bleken de meeste methoden te verwijderen, en herschrijven haalt een watermerk vaak uit tekst. Artikel 50 van de AI Act vraagt aanbieders om AI-output machineleesbaar te markeren, vanaf 2 augustus 2026, of uiterlijk 2 december 2026 voor systemen die al op de markt waren."
+can_now:
+  - en: "check with a public key which signatures fit their number"
+    nl: "met een public key controleren welke handtekeningen bij hun getal passen"
+    by: genuine
+  - en: "sign a picture by signing its hash"
+    nl: "een plaatje ondertekenen door zijn hash te ondertekenen"
+    by: sign-picture
+  - en: "read a picture's label in order: present, trusted, unchanged, signed"
+    nl: "het label van een plaatje op volgorde lezen: aanwezig, vertrouwd, onveranderd, ondertekend"
+    by: verdict
+  - en: "say what a missing label does and does not tell you"
+    nl: "zeggen wat een ontbrekend label wel en niet vertelt"
+    by: no-label
+  - en: "tell a watermark that survives everyday edits from one that survives an attacker"
+    nl: "een watermerk dat gewone bewerkingen overleeft onderscheiden van een dat een aanvaller overleeft"
+    by: watermark
+further_reading:
+  - en: "Rivest, Shamir and Adleman (1978), [*A Method for Obtaining Digital Signatures and Public-Key Cryptosystems*](https://people.csail.mit.edu/rivest/Rsapaper.pdf): the paper with the toy key of this lesson"
+    nl: "Rivest, Shamir en Adleman (1978), [*A Method for Obtaining Digital Signatures and Public-Key Cryptosystems*](https://people.csail.mit.edu/rivest/Rsapaper.pdf): het paper met de speelgoedkey van deze les (in het Engels)"
+  - en: "C2PA, [*C2PA and Content Credentials Explainer*](https://spec.c2pa.org/specifications/specifications/2.2/explainer/Explainer.html): what Content Credentials do, and what they do not"
+    nl: "C2PA, [*C2PA and Content Credentials Explainer*](https://spec.c2pa.org/specifications/specifications/2.2/explainer/Explainer.html): wat Content Credentials wel en niet doen (in het Engels)"
+  - en: "NIST (2024), [*Reducing Risks Posed by Synthetic Content*](https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.100-4.pdf): provenance, watermarks and their limits"
+    nl: "NIST (2024), [*Reducing Risks Posed by Synthetic Content*](https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.100-4.pdf): herkomst, watermerken en hun grenzen (in het Engels)"
+  - en: "Dathathri et al. (2024), [*Scalable watermarking for identifying large language model outputs*](https://www.nature.com/articles/s41586-024-08025-4.pdf): SynthID-Text in Gemini"
+    nl: "Dathathri et al. (2024), [*Scalable watermarking for identifying large language model outputs*](https://www.nature.com/articles/s41586-024-08025-4.pdf): SynthID-Text in Gemini (in het Engels)"
+  - en: "European Commission, AI Act Service Desk, [*Article 50*](https://ai-act-service-desk.ec.europa.eu/en/ai-act/article-50): transparency for AI-generated content"
+    nl: "Europese Commissie, AI Act Service Desk, [*Article 50*](https://ai-act-service-desk.ec.europa.eu/en/ai-act/article-50): transparantie voor door AI gemaakte inhoud (in het Engels)"
