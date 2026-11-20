@@ -1395,6 +1395,7 @@ lessons:
   covers: [het-veld-van-ai-veiligheid#0, het-veld-van-ai-veiligheid#1, het-veld-van-ai-veiligheid#2]
   requires: [rai-ethics-vs-safety]
   introduces: [c:ai-safety-institute]
+  mentions: [c:time-horizon, c:trustworthy-ai]
   data: []
   ladder: [python]
   needs: any

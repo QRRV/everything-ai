@@ -1,0 +1,40 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: rai-safety-field
+minutes: 40
+title:
+  en: "Who works on AI safety?"
+  nl: "Wie werkt er aan AI-veiligheid?"
+goal:
+  en: "know who works on AI safety and what each may do, read an evaluator's results together with their setup, and see what research agendas list as unsolved."
+  nl: "weten wie er aan AI-veiligheid werkt en wat elk mag doen, de resultaten van een evaluator lezen samen met hun opzet, en zien wat onderzoeksagenda's als onopgelost noemen."
+summary:
+  - en: "AI safety institutes are government bodies that test advanced AI models and do research on their risks. The British one, founded in November 2023, is not a regulator and does not label models as safe; since February 2025 it has been the AI Security Institute. The American one became CAISI in June 2025 and CAISSI in 2026. The EU's AI Office, by contrast, enforces the rules for general-purpose AI models."
+    nl: "AI safety institutes zijn overheidsinstellingen die geavanceerde AI-modellen testen en onderzoek doen naar hun risico's. Het Britse, opgericht in november 2023, is geen toezichthouder en noemt geen enkel model veilig; sinds februari 2025 heet het AI Security Institute. Het Amerikaanse werd CAISI in juni 2025 en CAISSI in 2026. Het AI-bureau van de EU handhaaft juist wel de regels voor AI-modellen voor algemene doeleinden."
+  - en: "In May 2024, 10 countries and the EU agreed in Seoul on an international network of these institutes. Its first members differ a little from those who signed, and since December 2025 it has been the International Network for Advanced AI Measurement, Evaluation and Science. The Netherlands is not a member; its data protection authority supervises algorithms and AI."
+    nl: "In mei 2024 spraken 10 landen en de EU in Seoul een internationaal netwerk van deze instituten af. De eerste leden verschillen een beetje van wie tekende, en sinds december 2025 heet het International Network for Advanced AI Measurement, Evaluation and Science. Nederland is geen lid; de Autoriteit Persoonsgegevens houdt toezicht op algoritmes en AI."
+  - en: "Evaluators test models, often from outside the companies: METR measures the time horizon of AI agents, and Apollo Research found that five of six models schemed at least once, mostly with a goal from the prompt and a strong push to pursue it. Read every such result together with its setup, and take a body's word that it was first as a claim about itself."
+    nl: "Evaluators testen modellen, vaak van buiten de bedrijven: METR meet de time horizon van AI-agents, en Apollo Research zag vijf van zes modellen minstens één keer aan scheming doen, meestal met een doel uit de prompt en een sterke duw om het na te streven. Lees zo'n resultaat altijd samen met de opzet, en lees het als een claim over zichzelf als een organisatie zegt de eerste te zijn."
+  - en: "BlueDot Impact and ARENA train people for the field, and AI companies publish their own research directions. The Singapore Consensus of May 2025 sorts what is unsolved into assessment, development and control; the British institute's agenda says there are no known reliable methods to keep sufficiently capable systems from getting around their safeguards."
+    nl: "BlueDot Impact en ARENA leiden mensen op voor het vak, en AI-bedrijven publiceren hun eigen onderzoeksrichtingen. De Singapore Consensus van mei 2025 verdeelt wat nog onopgelost is in beoordeling, ontwikkeling en controle; de agenda van het Britse instituut zegt dat er geen betrouwbare methodes bekend zijn om voldoende capabele systemen te beletten hun beveiligingen te omzeilen."
+can_now:
+  - en: "count in an evaluator's table in how many tests a model showed a behavior"
+    nl: "in de tabel van een evaluator tellen in hoeveel tests een model een gedrag liet zien"
+    by: schemed_in
+  - en: "compare two lists of members with the differences of sets"
+    nl: "twee ledenlijsten vergelijken met de verschillen van sets"
+    by: changes
+  - en: "tell a body that tests and advises from one that enforces rules"
+    nl: "een instelling die test en adviseert onderscheiden van een die regels handhaaft"
+    by: headline
+  - en: "place a piece of safety research in assessment, development or control"
+    nl: "een stuk veiligheidsonderzoek plaatsen in beoordeling, ontwikkeling of controle"
+    by: area
+further_reading:
+  - en: "[*The Singapore Consensus on Global AI Safety Research Priorities*](https://arxiv.org/abs/2506.20702) (May 2025): the three areas and the open problems in each"
+    nl: "[*The Singapore Consensus on Global AI Safety Research Priorities*](https://arxiv.org/abs/2506.20702) (mei 2025): de drie gebieden en de open problemen in elk (in het Engels)"
+  - en: "Meinke and colleagues (Apollo Research, 2024), [*Frontier Models are Capable of In-context Scheming*](https://arxiv.org/abs/2412.04984): the six evaluations and Tables 1 and 2"
+    nl: "Meinke en collega's (Apollo Research, 2024), [*Frontier Models are Capable of In-context Scheming*](https://arxiv.org/abs/2412.04984): de zes evaluaties en tabel 1 en 2 (in het Engels)"
+  - en: "The AI Security Institute, [*Research agenda*](https://www.aisi.gov.uk/research-agenda): the risks and solutions the British institute works on"
+    nl: "Het AI Security Institute, [*Research agenda*](https://www.aisi.gov.uk/research-agenda): de risico's en oplossingen waar het Britse instituut aan werkt (in het Engels)"
