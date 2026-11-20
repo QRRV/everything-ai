@@ -1264,10 +1264,11 @@ lessons:
   level: basis
   domein: verantwoord
   module: security
-  idea: "The same model that helps defenders helps attackers write phishing and malware (dual use); frameworks such as Google's SAIF, the guidelines of the UK's NCSC and the US CISA, and ETSI EN 304 223 say what secure AI development asks of you."
+  idea: "What helps defenders helps attackers (dual use); the makers' own reports of 2025 show attackers using AI to work faster, and one campaign in which AI did most of the work; frameworks such as Google's SAIF, the guidelines of the UK's NCSC and the US CISA, and ETSI EN 304 223 say what secure AI development asks of you, and Article 15 of the EU AI Act makes it law for high-risk systems."
   covers: [red-teaming-provenance-en-securitykaders#2, red-teaming-provenance-en-securitykaders#3]
   requires: [rai-red-teaming, rai-owasp-lists]
   introduces: [c:dual-use]
+  mentions: [c:red-teaming, c:ai-safety-institute]
   data: []
   ladder: [python]
   needs: any

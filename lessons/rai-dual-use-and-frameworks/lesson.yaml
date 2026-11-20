@@ -1,0 +1,47 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: rai-dual-use-and-frameworks
+minutes: 30
+title:
+  en: "AI as a weapon, and the rules against it"
+  nl: "AI als wapen, en de regels ertegen"
+goal:
+  en: "find what one framework for secure AI adds to another, work out from which day Article 15 of the AI Act applies to a system, read the counts of a report on attackers correctly, and say why a list of working attacks is dual use."
+  nl: "vinden wat het ene kader voor veilige AI aan het andere toevoegt, uitrekenen vanaf welke dag artikel 15 van de AI Act voor een systeem geldt, de tellingen in een rapport over aanvallers goed lezen, en zeggen waarom een lijst aanvallen die werken dual use is."
+summary:
+  - en: "Dual use is when the same thing serves a good purpose and a harmful one: the test cases that showed Spoke & Chain what to fix also show an attacker what works. NIST's draft guidelines on misuse: in security, \"most capabilities will be, in some sense, dual use\"."
+    nl: "Dual use betekent dat hetzelfde ding een goed en een schadelijk doel dient: de testgevallen die Spoke & Chain lieten zien wat er hersteld moest worden, laten een aanvaller zien wat werkt. Volgens de conceptrichtlijnen van NIST over misbruik zijn in de beveiliging de meeste vermogens in zekere zin dual use."
+  - en: "Makers of models report what attackers do with those models. Google (January 2025, Gemini): faster and at higher volume, no new capabilities, and Google's counts allow at least 44 state-backed groups from four countries. Anthropic (November 2025, Claude Code): a campaign against about thirty targets that succeeded in a few, with an AI that sometimes made up what it had found."
+    nl: "Makers van modellen melden wat aanvallers met die modellen doen. Google (januari 2025, Gemini): sneller en op grotere schaal, geen nieuwe mogelijkheden, en de tellingen van Google laten minstens 44 door een staat gesteunde groepen uit vier landen toe. Anthropic (november 2025, Claude Code): een campagne tegen zo'n dertig doelwitten die bij een paar slaagde, met een AI die soms verzon wat hij gevonden had."
+  - en: "Google's SAIF (2023), the guidelines of the UK's NCSC and the US CISA (2023, four areas), the UK's Code of Practice (2025, 13 principles) and ETSI EN 304 223 (2025, 13 principles in five phases, adding secure end of life) are advice and a standard: none of them is a law."
+    nl: "SAIF van Google (2023), de richtlijnen van het Britse NCSC en het Amerikaanse CISA (2023, vier gebieden), de Britse praktijkcode (2025, 13 principes) en ETSI EN 304 223 (2025, 13 principes in vijf fasen, met secure end of life erbij) zijn adviezen en een norm: geen ervan is een wet."
+  - en: "The AI Act is law: its Article 15 asks high-risk AI systems for accuracy, robustness and cybersecurity, and resilience against attacks. After the Digital Omnibus it applies from 2 December 2027 (Annex III) or 2 August 2028 (Annex I), not from 2 August 2026, and never to a system that is not high-risk."
+    nl: "De AI Act is wet: artikel 15 vraagt van AI-systemen met een hoog risico accuracy, robuustheid en cyberbeveiliging, en weerbaarheid tegen aanvallen. Na de Digital Omnibus geldt het vanaf 2 december 2027 (bijlage III) of 2 augustus 2028 (bijlage I), niet vanaf 2 augustus 2026, en nooit voor een systeem zonder hoog risico."
+can_now:
+  - en: "find what one framework for secure AI adds to another"
+    nl: "vinden wat het ene kader voor veilige AI aan het andere toevoegt"
+    by: uncovered
+  - en: "work out from which day Article 15 of the AI Act applies to a system"
+    nl: "uitrekenen vanaf welke dag artikel 15 van de AI Act voor een systeem geldt"
+    by: article-15
+  - en: "read a count such as \"over 20\" in a report as the least it allows"
+    nl: "een telling als \"meer dan 20\" in een rapport lezen als het minste dat ze toelaat"
+    by: at-least
+  - en: "say why a list of attacks that work is dual use"
+    nl: "zeggen waarom een lijst aanvallen die werken dual use is"
+    by: dual-use
+  - en: "read two reports on attackers by who wrote them, about which model, and when"
+    nl: "twee rapporten over aanvallers lezen naar wie ze schreef, over welk model, en wanneer"
+    by: reports
+further_reading:
+  - en: "Google Threat Intelligence Group (2025), [*Adversarial Misuse of Generative AI*](https://cloud.google.com/blog/topics/threat-intelligence/adversarial-misuse-generative-ai): how attackers used Gemini"
+    nl: "Google Threat Intelligence Group (2025), [*Adversarial Misuse of Generative AI*](https://cloud.google.com/blog/topics/threat-intelligence/adversarial-misuse-generative-ai): hoe aanvallers Gemini gebruikten (in het Engels)"
+  - en: "Anthropic (2025), [*Disrupting the first reported AI-orchestrated cyber espionage campaign*](https://www.anthropic.com/news/disrupting-AI-espionage): a campaign in which AI did most of the work"
+    nl: "Anthropic (2025), [*Disrupting the first reported AI-orchestrated cyber espionage campaign*](https://www.anthropic.com/news/disrupting-AI-espionage): een campagne waarin AI het meeste werk deed (in het Engels)"
+  - en: "NCSC, CISA and partners (2023), [*Guidelines for secure AI system development*](https://www.ncsc.gov.uk/files/Guidelines-for-secure-AI-system-development.pdf): four areas of the life of an AI system"
+    nl: "NCSC, CISA en partners (2023), [*Guidelines for secure AI system development*](https://www.ncsc.gov.uk/files/Guidelines-for-secure-AI-system-development.pdf): vier gebieden in het leven van een AI-systeem (in het Engels)"
+  - en: "ETSI (2025), [*ETSI EN 304 223 V2.1.1*](https://www.etsi.org/deliver/etsi_en/304200_304299/304223/02.01.01_60/en_304223v020101p.pdf): baseline security requirements for AI models and systems"
+    nl: "ETSI (2025), [*ETSI EN 304 223 V2.1.1*](https://www.etsi.org/deliver/etsi_en/304200_304299/304223/02.01.01_60/en_304223v020101p.pdf): basiseisen voor de beveiliging van AI-modellen en -systemen (in het Engels)"
+  - en: "European Commission, AI Act Service Desk, [*Article 15*](https://ai-act-service-desk.ec.europa.eu/en/ai-act/article-15): accuracy, robustness and cybersecurity of high-risk AI systems"
+    nl: "Europese Commissie, AI Act Service Desk, [*Article 15*](https://ai-act-service-desk.ec.europa.eu/en/ai-act/article-15): accuracy, robuustheid en cyberbeveiliging van AI-systemen met een hoog risico (in het Engels)"
