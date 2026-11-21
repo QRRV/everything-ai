@@ -1713,6 +1713,7 @@ lessons:
   covers: [evaluaties-van-gevaarlijke-capabilities#4]
   requires: [rai-dangerous-capabilities, ml-logistic-regression, math-log-scales]
   introduces: [c:time-horizon]
+  mentions: [c:computer-use]
   data: []
   ladder: [python, numpy]
   needs: any

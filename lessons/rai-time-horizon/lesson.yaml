@@ -1,0 +1,50 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: rai-time-horizon
+minutes: 45
+title:
+  en: "How long a task can a model do?"
+  nl: "Hoe lange taken kan een model aan?"
+goal:
+  en: "say what METR's time horizon measures and what it does not, work out an agent's chance of success at a length of task from its curve, fit the doubling time to METR's published data, and read a forecast built on the trend together with its conditions."
+  nl: "zeggen wat de time horizon van METR meet en wat niet, de kans op succes van een agent bij een taaklengte uitrekenen met de curve, de verdubbelingstijd fitten op de gepubliceerde data van METR, en een voorspelling op basis van de trend lezen samen met de voorwaarden ervan."
+summary:
+  - en: "METR's time horizon is the length of the tasks, in the time skilled people need for them, at which an AI agent succeeds with a given chance, usually 50%. It measures how hard a task is, not how long the agent works."
+    nl: "De time horizon van METR is de lengte van de taken, in de tijd die vakmensen ervoor nodig hebben, waarbij een AI-agent slaagt met een gegeven kans, meestal 50%. Het is een maat voor hoe moeilijk een taak is, niet voor hoe lang de agent werkt."
+  - en: "For each agent, METR fits a logistic curve over the log base 2 of the length of a task, σ((log₂ h − log₂ t) · β): the time horizon h is where the curve crosses one half, and each doubling of the length lowers the logit by β."
+    nl: "Voor elke agent fit METR een logistische curve over de log met grondtal 2 van de taaklengte, σ((log₂ h − log₂ t) · β): de time horizon h ligt waar de curve 0,5 kruist, en elke verdubbeling van de lengte verlaagt de logit met β."
+  - en: "In the paper of Kwa and colleagues (version of 10 July 2026), the 50% time horizon doubled every 207 days from 2019 to 2025, from 2 seconds for GPT-2 to about 110 minutes for o3; METR's later measurements show faster growth."
+    nl: "In het paper van Kwa en collega's (versie van 10 juli 2026) verdubbelde de 50%-time horizon elke 207 dagen van 2019 tot en met 2025, van 2 seconden voor GPT-2 tot ongeveer 110 minuten voor o3; latere metingen van METR laten een snellere groei zien."
+  - en: "A straight line through the log base 2 of the horizons against the release dates gives the doubling time: 128.7 days for METR's leading models from 2023 on, in its data of September 2026."
+    nl: "Een rechte lijn door de log met grondtal 2 van de horizons tegen de releasedatums geeft de verdubbelingstijd: 128,7 dagen voor de beste modellen van METR vanaf 2023, in de data van september 2026."
+  - en: "A time horizon belongs to one chance of success, one set of tasks, mostly software, and one group of people who set the lengths; a forecast from the trend holds only if the trend does, and Kwa and colleagues call their own naive."
+    nl: "Een time horizon hoort bij één kans op succes, één verzameling taken, vooral software, en één groep mensen die de lengtes bepaalde; een voorspelling uit de trend klopt alleen als de trend standhoudt, en Kwa en collega's noemen hun eigen voorspelling naïef."
+can_now:
+  - en: "work out an agent's chance of success at a length of task from its time horizon and its β"
+    nl: "de kans op succes van een agent bij een taaklengte uitrekenen uit de time horizon en de β"
+    by: success
+  - en: "fit the doubling time of the time horizon to METR's published data"
+    nl: "de verdubbelingstijd van de time horizon fitten op de gepubliceerde data van METR"
+    by: doubling
+  - en: "say what a time horizon measures and what it does not"
+    nl: "zeggen wat een time horizon meet en wat niet"
+    by: headline
+  - en: "read a forecast built on the trend together with its conditions"
+    nl: "een voorspelling op basis van de trend lezen samen met de voorwaarden ervan"
+    by: forecast
+further_reading:
+  - en: "Thomas Kwa and others, [*Measuring AI Ability to Complete Long Software Tasks*](https://arxiv.org/abs/2503.14499) (METR, version of 10 July 2026; the first version, of 18 March 2025, was called *Measuring AI Ability to Complete Long Tasks*)"
+    nl: "Thomas Kwa en anderen, [*Measuring AI Ability to Complete Long Software Tasks*](https://arxiv.org/abs/2503.14499) (METR, versie van 10 juli 2026; de eerste versie, van 18 maart 2025, heette *Measuring AI Ability to Complete Long Tasks*) (in het Engels)"
+  - en: "METR, [*Measuring AI Ability to Complete Long Software Tasks*](https://metr.org/blog/2025-03-19-measuring-ai-ability-to-complete-long-tasks/) (blog post of 19 March 2025)"
+    nl: "METR, [*Measuring AI Ability to Complete Long Software Tasks*](https://metr.org/blog/2025-03-19-measuring-ai-ability-to-complete-long-tasks/) (blogpost van 19 maart 2025) (in het Engels)"
+  - en: "METR, [*Task-Completion Time Horizons of Frontier AI Models*](https://metr.org/time-horizons/) (last updated 8 September 2026), with the data under CC BY 4.0"
+    nl: "METR, [*Task-Completion Time Horizons of Frontier AI Models*](https://metr.org/time-horizons/) (laatst bijgewerkt op 8 september 2026), met de data onder CC BY 4.0 (in het Engels)"
+  - en: "METR, [*Time Horizon 1.1*](https://metr.org/blog/2026-01-29-time-horizon-1-1/) (29 January 2026)"
+    nl: "METR, [*Time Horizon 1.1*](https://metr.org/blog/2026-01-29-time-horizon-1-1/) (29 januari 2026) (in het Engels)"
+  - en: "Thomas Kwa and Vincent Cheng, [*How Does Time Horizon Vary Across Domains?*](https://metr.org/blog/2025-07-14-how-does-time-horizon-vary-across-domains/) (METR, 14 July 2025)"
+    nl: "Thomas Kwa en Vincent Cheng, [*How Does Time Horizon Vary Across Domains?*](https://metr.org/blog/2025-07-14-how-does-time-horizon-vary-across-domains/) (METR, 14 juli 2025) (in het Engels)"
+  - en: "METR, [*AI R&D-relevant model capabilities are improving rapidly and are getting harder to measure*](https://metr.org/blog/2026-11-20-q4-2026-capability-update/) (20 November 2026)"
+    nl: "METR, [*AI R&D-relevant model capabilities are improving rapidly and are getting harder to measure*](https://metr.org/blog/2026-11-20-q4-2026-capability-update/) (20 november 2026) (in het Engels)"
+  - en: "Yoshua Bengio (chair) and others, [*International AI Safety Report 2026*](https://internationalaisafetyreport.org/) (February 2026)"
+    nl: "Yoshua Bengio (voorzitter) en anderen, [*International AI Safety Report 2026*](https://internationalaisafetyreport.org/) (februari 2026) (in het Engels)"
