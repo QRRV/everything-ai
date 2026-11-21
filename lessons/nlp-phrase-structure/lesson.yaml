@@ -1,0 +1,40 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: nlp-phrase-structure
+minutes: 35
+title:
+  en: "Phrase structure and endless sentences"
+  nl: "Zinsbouw en eindeloze zinnen"
+goal:
+  en: "write a grammar as rules in Python, rewrite symbols step by step into a sentence, and see how a rule that comes back to its own symbol makes endless sentences."
+  nl: "een grammatica als regels in Python schrijven, symbolen stap voor stap herschrijven tot een zin, en zien hoe een regel die terugkomt bij het eigen symbool eindeloos veel zinnen maakt."
+summary:
+  - en: "A constituent is a group of words that acts as one unit in a sentence. Tests find one: replace the group with one word, move it, or give it alone as an answer; a Dutch zinsdeel can stand before the persoonsvorm."
+    nl: "Een constituent is een groep woorden die in een zin als één geheel werkt. Met tests vind je er een: vervang de groep door één woord, verplaats de groep, of geef die alleen als antwoord; een zinsdeel kan vóór de persoonsvorm staan."
+  - en: "A context-free grammar has non-terminals, terminals (the words), rules and a start symbol, S. Each rule rewrites one symbol as its right-hand side, whatever stands around it."
+    nl: "Een contextvrije grammatica heeft non-terminals, terminals (de woorden), regels en een startsymbool, S. Elke regel herschrijft één symbool als de rechterkant ervan, wat er ook omheen staat."
+  - en: "A derivation rewrites from S, one symbol at a time, until only words are left. A parse tree shows the same steps, with the constituents inside each other."
+    nl: "Een afleiding herschrijft vanaf S, telkens één symbool, tot er alleen woorden over zijn. Een ontleedboom toont dezelfde stappen, met de constituenten in elkaar."
+  - en: "A rule that comes back to its own symbol, directly as in NOM → ADJ NOM or through other rules, lets a few rules make an endless number of sentences."
+    nl: "Een regel die terugkomt bij het eigen symbool, direct zoals NOM → ADJ NOM of via andere regels, laat een paar regels eindeloos veel zinnen maken."
+can_now:
+  - en: "rewrite the first non-terminal of a row of symbols by one of its rules"
+    nl: "de eerste non-terminal van een rij symbolen herschrijven met een van de regels ervan"
+    by: rewrite_first
+  - en: "derive a sentence from S with a list of choices, and read the tree of the derivation"
+    nl: "met een lijst keuzes een zin afleiden vanaf S, en de boom van de afleiding lezen"
+    by: derive
+  - en: "tell constituents from other groups of words, by replacing, moving and answering"
+    nl: "constituenten onderscheiden van andere groepen woorden, door te vervangen, te verplaatsen en te antwoorden"
+    by: constituents
+  - en: "find the rule that makes the number of sentences of a grammar endless"
+    nl: "de regel vinden die het aantal zinnen van een grammatica eindeloos maakt"
+    by: endless
+further_reading:
+  - en: "Daniel Jurafsky and James H. Martin, [*Speech and Language Processing*, chapter 19](https://web.stanford.edu/~jurafsky/slp3/19.pdf): context-free grammars, treebanks and how a program finds the tree of a sentence"
+    nl: "Daniel Jurafsky en James H. Martin, [*Speech and Language Processing*, hoofdstuk 19](https://web.stanford.edu/~jurafsky/slp3/19.pdf): contextvrije grammatica's, treebanks en hoe een programma de boom van een zin vindt (in het Engels)"
+  - en: "Catherine Anderson and others, [*Essentials of Linguistics*, 6.4 Identifying phrases: Constituency tests](https://ecampusontario.pressbooks.pub/essentialsoflinguistics2/chapter/identifying-phrases-constituency-tests/) (2nd edition, 2022): the tests for constituents, with many examples"
+    nl: "Catherine Anderson en anderen, [*Essentials of Linguistics*, 6.4 Identifying phrases: Constituency tests](https://ecampusontario.pressbooks.pub/essentialsoflinguistics2/chapter/identifying-phrases-constituency-tests/) (tweede druk, 2022): de tests voor constituenten, met veel voorbeelden (in het Engels)"
+  - en: "Noam Chomsky, [*Three models for the description of language*](https://doi.org/10.1109/TIT.1956.1056813) (1956): the paper that made phrase-structure grammar formal"
+    nl: "Noam Chomsky, [*Three models for the description of language*](https://doi.org/10.1109/TIT.1956.1056813) (1956): het stuk dat frasestructuurgrammatica formeel maakte (in het Engels)"
