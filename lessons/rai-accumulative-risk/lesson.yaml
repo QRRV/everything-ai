@@ -1,0 +1,44 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: rai-accumulative-risk
+minutes: 40
+title:
+  en: "One blow or many small steps"
+  nl: "Eén klap of veel kleine stappen"
+goal:
+  en: "tell decisive from accumulative risk, model how small harms wear down a society's resilience until one shock is too much, and recognize value lock-in."
+  nl: "beslissend risico en accumulative risk uit elkaar houden, nabootsen hoe kleine schades de veerkracht van een samenleving uithollen tot één schok te veel is, en value lock-in herkennen."
+summary:
+  - en: "Kasirzadeh (version 3, January 2025) puts two hypotheses side by side: decisive risk from one abrupt event, and accumulative risk, in which smaller disruptions weaken systemic resilience over time until a triggering event causes unrecoverable collapse. A slow build-up, then a fast end."
+    nl: "Kasirzadeh (versie 3, januari 2025) zet twee hypotheses naast elkaar: beslissend risico door één abrupte gebeurtenis, en accumulative risk, waarbij kleinere verstoringen de veerkracht van het systeem in de loop van de tijd verzwakken tot een directe aanleiding een onherstelbare ineenstorting veroorzaakt. Een trage opbouw, dan een snel einde."
+  - en: "In the MISTER thought experiment, a cyberattack on power grids across three continents is the tipping point; it is a thought experiment, not a forecast, and the paper gives no probabilities."
+    nl: "In het gedachte-experiment MISTER is een cyberaanval op elektriciteitsnetten op drie continenten het kantelpunt; het is een gedachte-experiment, geen voorspelling, en het paper geeft geen kansen."
+  - en: "The International AI Safety Report 2026 describes measured effects, such as automation bias, and warns that reliance on a small number of models creates single points of failure."
+    nl: "Het International AI Safety Report 2026 beschrijft gemeten effecten, zoals automation bias, en waarschuwt dat leunen op een klein aantal modellen single points of failure oplevert."
+  - en: "Finnveden, Riedel and Shulman argue mostly that AGI could make extreme lock-in feasible, not how likely it is; stable institutions with poorly chosen and inflexible values could be an existential risk, while some stability may be crucial to preserve humane values."
+    nl: "Finnveden, Riedel en Shulman betogen vooral dat AGI extreme lock-in haalbaar zou kunnen maken, niet hoe waarschijnlijk dat is; stabiele instituties met slecht gekozen en te weinig flexibele waarden zouden een existentieel risico kunnen zijn, terwijl enige stabiliteit cruciaal kan zijn om humane waarden te behouden."
+can_now:
+  - en: "model how yearly harms and recovery change a society's resilience over the years"
+    nl: "nabootsen hoe jaarlijkse schade en herstel de veerkracht van een samenleving over de jaren veranderen"
+    by: resilience
+  - en: "find the first year in which the same shock is too much for a weakened society"
+    nl: "het eerste jaar vinden waarin dezelfde schok te veel is voor een verzwakte samenleving"
+    by: collapse
+  - en: "explain why value lock-in is about how much the future can still change, whatever the values are"
+    nl: "uitleggen waarom value lock-in gaat over hoeveel de toekomst nog kan veranderen, wat de waarden ook zijn"
+    by: locked
+  - en: "tell from a story whether a catastrophe is decisive or accumulative"
+    nl: "aan een verhaal zien of een catastrofe uit één klap komt of zich opbouwt"
+    by: update
+further_reading:
+  - en: "Atoosa Kasirzadeh, [*Two Types of AI Existential Risk: Decisive and Accumulative*](https://arxiv.org/abs/2401.07836) (version 3, 17 January 2025, marked as forthcoming in Philosophical Studies)"
+    nl: "Atoosa Kasirzadeh, [*Two Types of AI Existential Risk: Decisive and Accumulative*](https://arxiv.org/abs/2401.07836) (versie 3, 17 januari 2025, volgens die versie te verschijnen in Philosophical Studies) (in het Engels)"
+  - en: "Lukas Finnveden, Jess Riedel and Carl Shulman, [*AGI and Lock-in*](https://www.forethought.org/research/agi-and-lock-in) (Forethought, 8 October 2022, last updated 11 March 2025)"
+    nl: "Lukas Finnveden, Jess Riedel en Carl Shulman, [*AGI and Lock-in*](https://www.forethought.org/research/agi-and-lock-in) (Forethought, 8 oktober 2022, laatst bijgewerkt op 11 maart 2025) (in het Engels)"
+  - en: "Tom Davidson, Lukas Finnveden and Rose Hadshar, [*AI-Enabled Coups: How a Small Group Could Use AI to Seize Power*](https://www.forethought.org/research/ai-enabled-coups-how-a-small-group-could-use-ai-to-seize-power) (Forethought, 15 April 2025)"
+    nl: "Tom Davidson, Lukas Finnveden en Rose Hadshar, [*AI-Enabled Coups: How a Small Group Could Use AI to Seize Power*](https://www.forethought.org/research/ai-enabled-coups-how-a-small-group-could-use-ai-to-seize-power) (Forethought, 15 april 2025) (in het Engels)"
+  - en: "[*International AI Safety Report 2026*](https://internationalaisafetyreport.org/) (February 2026), section 2.3, *Systemic risks*"
+    nl: "[*International AI Safety Report 2026*](https://internationalaisafetyreport.org/) (februari 2026), paragraaf 2.3, *Systemic risks* (in het Engels)"
+  - en: "Nick Bostrom, [*Existential Risks: Analyzing Human Extinction Scenarios and Related Hazards*](https://nickbostrom.com/papers/existential-risks/), Journal of Evolution and Technology 9(1) (2002): the four categories, the whimpers among them"
+    nl: "Nick Bostrom, [*Existential Risks: Analyzing Human Extinction Scenarios and Related Hazards*](https://nickbostrom.com/papers/existential-risks/), Journal of Evolution and Technology 9(1) (2002): de vier soorten, waaronder de whimpers (in het Engels)"

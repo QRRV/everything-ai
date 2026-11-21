@@ -1588,6 +1588,7 @@ lessons:
   covers: [het-debat-over-catastrofale-en-existentiele-risico-s#2]
   requires: [rai-xrisk-arguments]
   introduces: [c:accumulative-risk, c:value-lock-in]
+  mentions: [c:automation-bias]
   data: []
   ladder: [python]
   needs: any
