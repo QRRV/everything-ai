@@ -105,6 +105,10 @@ les_ok:
   reden: "saliency maps zijn een uitlegmethode (verantwoord, module uitleggen); de les staat in beeld omdat je ze meteen op je eigen CNN toepast, net als Grad-CAM in de les erna. Verantwoord leent deze les."
 - les: llm-safety-eval
   reden: "red-teamen van je eigen chat model; de les dekt red teaming en jailbreaks (verantwoord, module security), maar staat in llm omdat je er het model mee test dat je daar zelf hebt getraind. De basis van verantwoord legt beide al uit met Qwen3 (rai-jailbreaks, rai-red-teaming)."
+- les: nlp-what-is-nlp
+  reden: "wat NLP is, en het verschil tussen tekst begrijpen en tekst maken; de kaart zet die subonderwerpen bij de kern (module taalmodellen), omdat het bigrammodel erop leunt, maar de kern heeft er geen eigen les voor. Het domein taal opent ermee, omdat elke les daarna het woord NLP gebruikt."
+- les: nlp-why-language-is-hard
+  reden: "ambiguïteit, variatie en context: net als nlp-what-is-nlp een subonderwerp dat de kaart bij de kern zet en waar de kern geen eigen les voor heeft. Het domein taal legt het uit als tweede les, omdat de taalkunde daarna op die drie woorden bouwt."
 
 fundament:
   id: fundament
@@ -337,7 +341,7 @@ domeinen:
   - id: structuur
     titel: "Structuur in zinnen"
     onderwerpen: [sequence-labelling-en-structuur, d15-parsing-en-grammaticaformalismen, d15-zinssemantiek-en-semantic-parsing, d15-coreferentie-en-discourse]
-    tekst: "Woordsoorten en namen taggen met een HMM en een CRF, parsen, de betekenis van een zin als logische vorm, en wie 'hij' is in een tekst."
+    tekst: "Woordsoorten en namen taggen met een HMM en een CRF, parsen, de betekenis van een zin als logische vorm, en waar 'het' of 'ze' naar verwijst in een tekst."
   - id: neurale-nlp
     titel: "Neurale NLP"
     onderwerpen: [neurale-nlp, pretrained-encoders-en-encoderdecoders, klassieke-taalmodellen]

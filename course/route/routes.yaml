@@ -896,6 +896,118 @@ routes:
   - rai-boxing-and-tool-ai
   - rai-dangerous-capabilities
   - rai-time-horizon
+- id: taal
+  domein: taal
+  title: "Language and search: the basics"
+  title_nl: "Taal en zoeken: de basis"
+  short: "Language and search"
+  short_nl: "Taal en zoeken"
+  # The basics: docs/onderzoek/reports/Voorstel domein Taal en zoeken.md (besluit 1.18, advice 6). Its tasters are in the
+  # kern (data-text-as-numbers, lm-bigram-counts). Its own naive Bayes lesson (an extra of the kern) and the lessons it
+  # borrows from other domains (network data and PageRank from klassiek-ml, the model families from llm) come where they
+  # are first needed.
+  milestones:
+    - after: nlp-dutch-models
+      en: "Basics done: you know how language is built, have processed and classified text with your own spam filter and sentiment classifier, have compared words and sentences as vectors, tagged names, scored answers, translations and summaries, and built and evaluated a small search engine."
+      nl: "Basis af: je weet hoe taal in elkaar zit, hebt tekst verwerkt en ingedeeld met je eigen spamfilter en sentimentclassifier, woorden en zinnen als vectoren vergeleken, namen getagd, antwoorden, vertalingen en samenvattingen gescoord, en een kleine zoekmachine gebouwd en geëvalueerd."
+  steps:
+  # ---------- basis: taal/taalkunde ----------
+  - nlp-what-is-nlp
+  - nlp-why-language-is-hard
+  - nlp-history
+  - nlp-pipeline
+  - nlp-morphemes
+  - nlp-dutch-compounds
+  - nlp-word-classes
+  - nlp-phrase-structure
+  - nlp-dependencies
+  - nlp-syntactic-ambiguity
+  - nlp-meaning-and-truth
+  - nlp-pragmatics
+  - nlp-conversation
+  - nlp-discourse
+  - nlp-sounds
+  - nlp-corpora
+  - nlp-zipf-heaps
+  - nlp-languages-of-the-world
+  - nlp-language-and-society
+  - nlp-language-change
+  # ---------- basis: taal/tekst-verwerken ----------
+  - nlp-regex
+  - nlp-tokenize
+  - nlp-normalize
+  - nlp-stemming
+  - nlp-edit-distance
+  - nlp-spelling
+  - nlp-language-id
+  # ---------- basis: taal/tekst-verwerken ----------
+  - lm-naive-bayes
+  # ---------- basis: taal/tekst-verwerken ----------
+  - nlp-document-vectors
+  - nlp-tf-idf
+  - nlp-logistic-text
+  - nlp-micro-macro
+  - nlp-project-spam
+  - nlp-dutch-tools
+  # ---------- basis: taal/betekenis ----------
+  - nlp-distributional-hypothesis
+  - nlp-word-embeddings
+  - nlp-static-vs-contextual
+  - nlp-word-relations
+  - nlp-wordnet
+  - nlp-sentence-embeddings
+  - nlp-sts
+  - nlp-mteb
+  # ---------- basis: taal/structuur ----------
+  - nlp-bio-tags
+  - nlp-pos-tagging
+  - nlp-named-entities
+  - nlp-span-f1
+  - nlp-entailment
+  - nlp-coreference
+  # ---------- basis: llm/gebruiken ----------
+  - lm-model-families
+  # ---------- basis: taal/neurale-nlp ----------
+  - nlp-bert
+  - nlp-fine-tune-bert
+  # ---------- basis: taal/taken ----------
+  - nlp-sentiment
+  - nlp-sentiment-lexicon
+  - nlp-project-sentiment
+  - nlp-topic-models
+  - nlp-information-extraction
+  - nlp-keywords
+  - nlp-extraction-with-llms
+  - nlp-qa-kinds
+  - nlp-extractive-qa
+  - nlp-qa-eval
+  - nlp-classic-mt
+  - nlp-bleu
+  - nlp-post-editing
+  - nlp-mt-with-llms
+  - nlp-what-is-nlg
+  - nlp-summarize
+  - nlp-rouge
+  - nlp-simplify
+  - nlp-eliza
+  - nlp-slot-filling
+  # ---------- basis: taal/zoeken ----------
+  - ir-what-is-search
+  - ir-inverted-index
+  - ir-vector-space
+  - ir-bm25
+  # ---------- basis: klassiek-ml/aanbevelen ----------
+  - ml-network-data
+  - ml-pagerank
+  # ---------- basis: taal/zoeken ----------
+  - ir-vertical-search
+  - ir-precision-at-k
+  - ir-ndcg
+  - ir-snippets
+  - ir-answer-engines
+  # ---------- basis: taal/meertalig ----------
+  - nlp-low-resource
+  - nlp-dutch-models
 goals:
 - {id: doel-attention, goal: attn-multi-head, title_nl: "Ik wil attention snappen"}
 - {id: doel-eigen-gpt, goal: gpt-generate, title_nl: "Ik wil zo snel mogelijk mijn eigen GPT"}

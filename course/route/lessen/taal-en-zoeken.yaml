@@ -1,0 +1,1080 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# Lessons of the domain taal (language and search: linguistics, processing and classifying text, meaning as vectors, structure,
+# neural NLP, the classic tasks, search engines and other languages), level basis. The plan: docs/onderzoek/reports/Voorstel
+# domein Taal en zoeken.md (besluit 1.18, advice 6). The route taal in routes.yaml starts where the core ends and gives the
+# order. The language lessons of the core and of the domain llm are in taal.yaml. Every lesson runs on a CPU.
+# Planning data; "introduces" is the plan and "uses" is filled in fully when a lesson is built. Format: ../FORMAT.md.
+map: v2.3
+lessons:
+
+# --- taalkunde: linguistics for AI ----------------------------------------------------------------------------------
+- id: nlp-what-is-nlp
+  title: "What NLP is"
+  level: basis
+  domein: taal
+  module: taalkunde
+  idea: "NLP makes computers work with human language: understanding it (NLU, from text to meaning) and producing it (NLG, from meaning to text); computational linguistics studies language itself with computers."
+  covers: [wat-nlp-is#0, wat-nlp-is#2]
+  requires: [lm-bigram-counts, data-text-as-numbers]
+  introduces: [c:natural-language-processing, c:computational-linguistics, c:natural-language-understanding, c:natural-language-generation]
+  data: []
+  ladder: [python]
+  needs: any
+
+- id: nlp-why-language-is-hard
+  title: "Why language is hard for computers"
+  level: basis
+  domein: taal
+  module: taalkunde
+  idea: "One form can mean several things (ambiguity), one meaning has many forms (variation), and what a sentence means depends on who says it where (context); a program has to choose, and counting the choices shows how fast they add up."
+  covers: [wat-nlp-is#1]
+  requires: [nlp-what-is-nlp]
+  introduces: [c:ambiguity]
+  data: []
+  ladder: [python]
+  needs: any
+
+- id: nlp-history
+  title: "From rules to statistics to neural networks"
+  level: basis
+  domein: taal
+  module: taalkunde
+  idea: "NLP went from hand-written rules to statistics learned from corpora to neural networks and LLMs, and shared tasks with fixed data and a fixed score (CoNLL, SemEval, WMT) drove each step by making systems comparable."
+  covers: [wat-nlp-is#3, wat-nlp-is#5]
+  requires: [nlp-why-language-is-hard]
+  introduces: [c:shared-task]
+  mentions: [c:language-model, c:neural-language-model]
+  data: []
+  ladder: [python]
+  needs: any
+
+- id: nlp-pipeline
+  title: "An NLP pipeline"
+  level: basis
+  domein: taal
+  module: taalkunde
+  idea: "Classic NLP chains steps (split sentences and words, tag them, find names), each feeding the next; toolkits such as spaCy, NLTK and Stanza package such chains, and a mistake early on is carried through to the end."
+  covers: [wat-nlp-is#4]
+  requires: [nlp-what-is-nlp]
+  introduces: [c:nlp-pipeline, c:spacy, c:nltk]
+  data: []
+  ladder: [python]
+  needs: any
+
+- id: nlp-morphemes
+  title: "Words and their parts"
+  level: basis
+  domein: taal
+  module: taalkunde
+  idea: "Words are built from morphemes: inflection makes forms of one word (walk, walked), derivation makes a new word (happy, happiness), and compounding puts words together (doghouse); a program can split a word along a list of known parts."
+  covers: [morfologie#0, morfologie#1]
+  requires: [nlp-what-is-nlp]
+  introduces: [c:morphology, c:morpheme, c:inflection, c:derivation, c:compound]
+  warns: [derivation]
+  data: []
+  ladder: [python]
+  needs: any
+
+- id: nlp-dutch-compounds
+  title: "Splitting Dutch compounds"
+  level: basis
+  domein: taal
+  module: taalkunde
+  idea: "Dutch writes compounds as one word, so a program splits them by looking for known words, recursively, with linking sounds such as -s- and -en- and often more than one possible split."
+  covers: [morfologie#2, morfologie#3]
+  requires: [nlp-morphemes]
+  introduces: [c:decompounding]
+  data: [wordnet-en-nl, tatoeba-sentences]
+  ladder: [python]
+  needs: any
+
+- id: nlp-word-classes
+  title: "Word classes and phrases"
+  level: basis
+  domein: taal
+  module: taalkunde
+  idea: "Words fall into classes (noun, verb, adjective and more) by how they behave, and group into phrases; one international scheme uses the same 17 classes for over 100 languages, which you count in real labeled sentences."
+  covers: [syntaxis#0]
+  requires: [nlp-morphemes]
+  introduces: [c:syntax, c:part-of-speech]
+  mentions: [c:universal-dependencies, c:treebank]
+  data: [ud-english-dutch]
+  ladder: [python]
+  needs: any
+
+- id: nlp-phrase-structure
+  title: "Phrase structure and endless sentences"
+  level: basis
+  domein: taal
+  module: taalkunde
+  idea: "A sentence is built of nested constituents that a grammar of rewrite rules describes; because a rule can call itself, a few rules make infinitely many sentences."
+  covers: [syntaxis#1, syntaxis#4]
+  requires: [nlp-word-classes]
+  introduces: [c:constituent, c:context-free-grammar]
+  data: []
+  ladder: [python]
+  needs: any
+
+- id: nlp-dependencies
+  title: "Who depends on whom: dependency trees"
+  level: basis
+  domein: taal
+  module: taalkunde
+  idea: "A dependency tree links every word to its head with a labeled relation (subject, object and so on); Universal Dependencies annotates treebanks of over 100 languages this way, in the CoNLL-U format."
+  covers: [syntaxis#2]
+  requires: [nlp-phrase-structure]
+  introduces: [c:dependency-relation, c:universal-dependencies]
+  mentions: [c:treebank]
+  data: [ud-english-dutch]
+  ladder: [python]
+  needs: any
+
+- id: nlp-syntactic-ambiguity
+  title: "One sentence, several trees"
+  level: basis
+  domein: taal
+  module: taalkunde
+  idea: "A sentence can have several trees: where a prepositional phrase attaches, what 'and' connects, or a headline that reads two ways; the number of ways to bracket a phrase grows very fast with its length."
+  covers: [syntaxis#3]
+  requires: [nlp-phrase-structure, nlp-why-language-is-hard]
+  introduces: [c:attachment-ambiguity]
+  data: []
+  ladder: [python]
+  needs: any
+
+- id: nlp-meaning-and-truth
+  title: "Meaning: when is a sentence true?"
+  level: basis
+  domein: taal
+  module: taalkunde
+  idea: "The meaning of a sentence can be taken as the situations in which it is true, built from the meanings of its parts (compositionality); you write that as code that checks sentences against a small world."
+  covers: [semantiek-pragmatiek-en-discourse#0, semantiek-pragmatiek-en-discourse#1]
+  requires: [nlp-phrase-structure]
+  introduces: [c:semantics, c:truth-conditions, c:compositionality]
+  data: []
+  ladder: [python]
+  needs: any
+
+- id: nlp-pragmatics
+  title: "What is meant, not said"
+  level: basis
+  domein: taal
+  module: taalkunde
+  idea: "Speakers mean more than they say: a question can be a request (a speech act), 'some' suggests 'not all' (an implicature, after Grice's maxims), and 'stop' takes for granted that something had started (a presupposition)."
+  covers: [semantiek-pragmatiek-en-discourse#2]
+  requires: [nlp-meaning-and-truth]
+  introduces: [c:pragmatics, c:speech-act, c:implicature, c:presupposition]
+  data: []
+  ladder: [python]
+  needs: any
+
+- id: nlp-conversation
+  title: "How a conversation works"
+  level: basis
+  domein: taal
+  module: taalkunde
+  idea: "People take turns, check that they understood each other (grounding) and do something with each turn (ask, answer, thank: a dialogue act), which a program can label turn by turn."
+  covers: [semantiek-pragmatiek-en-discourse#3]
+  requires: [nlp-pragmatics]
+  introduces: [c:turn-taking, c:conversational-grounding, c:dialogue-act]
+  warns: [grounding]
+  data: []
+  ladder: [python]
+  needs: any
+
+- id: nlp-discourse
+  title: "A text is more than its sentences"
+  level: basis
+  domein: taal
+  module: taalkunde
+  idea: "Sentences hang together by repeated words and references (cohesion) and by sense (coherence), and each tends to put what is known first and what is new last (information structure)."
+  covers: [semantiek-pragmatiek-en-discourse#4, semantiek-pragmatiek-en-discourse#5]
+  requires: [nlp-pragmatics]
+  introduces: [c:cohesion, c:coherence, c:information-structure]
+  data: []
+  ladder: [python]
+  needs: any
+
+- id: nlp-sounds
+  title: "Sounds, phonemes and IPA"
+  level: basis
+  domein: taal
+  module: taalkunde
+  idea: "A phoneme is a sound that changes meaning in a language, IPA writes each sound with one symbol, and rules such as Dutch final devoicing (hond sounds like hont) change sounds by their place in the word."
+  covers: [fonetiek-corpora-en-typologie#0, fonetiek-corpora-en-typologie#1]
+  requires: [nlp-morphemes]
+  introduces: [c:phonetics, c:phonology, c:phoneme, c:ipa]
+  data: []
+  ladder: [python]
+  needs: any
+
+- id: nlp-corpora
+  title: "Corpora and treebanks"
+  level: basis
+  domein: taal
+  module: taalkunde
+  idea: "A corpus is a collection of real text chosen for a purpose; a treebank adds trees, a lexical database adds facts about words, and the people who label a corpus follow written guidelines so that they all label the same way, which you try on a few sentences."
+  covers: [fonetiek-corpora-en-typologie#2, fonetiek-corpora-en-typologie#3]
+  requires: [nlp-dependencies]
+  introduces: [c:corpus, c:treebank, c:concordance]
+  data: [gutenberg-books]
+  ladder: [python]
+  needs: any
+
+- id: nlp-zipf-heaps
+  title: "Zipf's law and Heaps' law"
+  level: basis
+  domein: taal
+  module: taalkunde
+  idea: "In every corpus a few words are very frequent and most are rare, frequency falling roughly as one over rank (Zipf), and the vocabulary keeps growing with the text, roughly as a power of its length (Heaps)."
+  covers: [fonetiek-corpora-en-typologie#4]
+  requires: [nlp-corpora, math-log-scales, lm-tokens-outside]
+  introduces: [c:zipfs-law, c:heaps-law]
+  data: [gutenberg-books, tatoeba-sentences]
+  ladder: [python, numpy]
+  needs: any
+
+- id: nlp-languages-of-the-world
+  title: "About 7,000 languages"
+  level: basis
+  domein: taal
+  module: taalkunde
+  idea: "Languages fall into families and differ in how they order subject, verb and object, as the World Atlas of Language Structures records; most NLP tools work for only a few of them."
+  covers: [fonetiek-corpora-en-typologie#6]
+  requires: [nlp-word-classes, nlp-dependencies]
+  introduces: [c:linguistic-typology]
+  data: []
+  ladder: [python]
+  needs: any
+
+- id: nlp-language-and-society
+  title: "Language, groups and dialects"
+  level: basis
+  domein: taal
+  module: taalkunde
+  idea: "How people speak marks who they are; Dutch has Netherlandic and Flemish varieties, dialects and Frisian next to it, and a tool built on standard text knows fewer of the words of the others, which you count."
+  covers: [d15-sociolinguistiek-en-taalvariatie#0, d15-sociolinguistiek-en-taalvariatie#1]
+  requires: [nlp-languages-of-the-world]
+  introduces: [c:sociolinguistics, c:language-variety]
+  data: [ud-english-dutch]
+  ladder: [python]
+  needs: any
+
+- id: nlp-language-change
+  title: "Languages meet and change"
+  level: basis
+  domein: taal
+  module: taalkunde
+  idea: "Languages borrow words, speakers switch languages within a sentence (code-switching), and words change meaning and spelling over time, so a corpus describes the language of its own time and people: novels of the 19th century are not Dutch or English of today."
+  covers: [d15-sociolinguistiek-en-taalvariatie#2]
+  requires: [nlp-language-and-society, nlp-corpora]
+  introduces: [c:code-switching, c:semantic-change]
+  data: [gutenberg-books, tatoeba-sentences]
+  ladder: [python]
+  needs: any
+
+
+# --- tekst-verwerken: processing and classifying text ---------------------------------------------------------------
+- id: nlp-regex
+  title: "Finding patterns: regular expressions"
+  level: basis
+  domein: taal
+  module: tekst-verwerken
+  idea: "A regular expression describes a set of strings with character classes, repetition and anchors; Python's re finds every place where it matches, and a group takes out the part you want."
+  covers: [tekstverwerking#1]
+  requires: [nlp-what-is-nlp]
+  introduces: [c:regular-expression, py:re-search, py:re-findall, py:raw-string]
+  data: []
+  ladder: [python]
+  needs: any
+
+- id: nlp-tokenize
+  title: "Cutting text into sentences and words"
+  level: basis
+  domein: taal
+  module: tekst-verwerken
+  idea: "Classic tokenization splits off punctuation by rules with exceptions (abbreviations, numbers, don't), splitting sentences at every full stop fails on e.g., and languages without spaces need a dictionary and the longest match."
+  covers: [tekstverwerking#2]
+  requires: [nlp-regex]
+  introduces: [c:sentence-segmentation, c:word-segmentation]
+  data: []
+  ladder: [python]
+  needs: any
+
+- id: nlp-normalize
+  title: "Normalizing: case, accents and stop words"
+  level: basis
+  domein: taal
+  module: tekst-verwerken
+  idea: "Lowercasing, removing accents and dropping very common words make Café and cafe one word and shrink the vocabulary, but they also throw away information, such as US against us."
+  covers: [tekstverwerking#3]
+  requires: [nlp-tokenize, lm-tokens-outside]
+  introduces: [c:text-normalization, c:case-folding, c:stop-word]
+  data: [snowball-stopwords, gutenberg-books]
+  ladder: [python]
+  needs: any
+
+- id: nlp-stemming
+  title: "Stems and lemmas"
+  level: basis
+  domein: taal
+  module: tekst-verwerken
+  idea: "A stemmer chops off suffixes by rules (Porter: running to run, but also university to univers), a lemmatizer looks up the dictionary form (ran to run); both put the forms of one word together."
+  covers: [tekstverwerking#4]
+  requires: [nlp-normalize, nlp-morphemes]
+  introduces: [c:stemming, c:word-stem, c:lemma, c:lemmatization]
+  data: [ud-english-dutch]
+  ladder: [python]
+  needs: any
+
+- id: nlp-edit-distance
+  title: "How far apart are two words? Edit distance"
+  level: basis
+  domein: taal
+  module: tekst-verwerken
+  idea: "The edit distance is the smallest number of insertions, deletions and substitutions that turn one word into another; a table in which each cell builds on its neighbors computes it (dynamic programming)."
+  covers: [tekstverwerking#5]
+  requires: [nlp-normalize, np-arrays]
+  introduces: [c:edit-distance, c:dynamic-programming]
+  data: []
+  ladder: [python, numpy]
+  needs: any
+
+- id: nlp-spelling
+  title: "A spelling corrector"
+  level: basis
+  domein: taal
+  module: tekst-verwerken
+  idea: "A spelling corrector makes every word within one or two edits of a typo and picks the one that is most frequent in a corpus: the most likely intended word."
+  covers: [tekstverwerking#5]
+  requires: [nlp-edit-distance, nlp-corpora]
+  introduces: [c:spelling-correction]
+  data: [gutenberg-books]
+  ladder: [python]
+  needs: any
+
+- id: nlp-language-id
+  title: "Which language is this?"
+  level: basis
+  domein: taal
+  module: tekst-verwerken
+  idea: "Every language has its own frequent letter sequences; comparing a text's profile of character n-grams with a profile per language tells which language it is, and the same counts flag text that is no language at all, such as markup or broken encoding."
+  covers: [tekstverwerking#7]
+  requires: [nlp-normalize, lm-bigram-counts]
+  introduces: [c:language-identification]
+  data: [tatoeba-sentences]
+  ladder: [python]
+  needs: any
+
+- id: nlp-document-vectors
+  title: "A document as a vector"
+  level: basis
+  domein: taal
+  module: tekst-verwerken
+  idea: "With a fixed vocabulary every document becomes a vector of word counts, mostly zeros (sparse), so documents can be compared with the cosine and given to any classifier."
+  covers: [klassieke-tekstclassificatie#0]
+  requires: [lm-naive-bayes, math-norms-cosine, nlp-normalize]
+  introduces: [c:document-term-matrix, c:sparse-matrix]
+  data: [uci-sentiment-sentences]
+  ladder: [python, numpy]
+  needs: any
+
+- id: nlp-tf-idf
+  title: "TF-IDF: weighing the words"
+  level: basis
+  domein: taal
+  module: tekst-verwerken
+  idea: "Weigh each count by how rare the word is over all documents (inverse document frequency), so words that occur everywhere count for little; that weighting is TF-IDF."
+  covers: [klassieke-tekstclassificatie#1]
+  requires: [nlp-document-vectors, math-exp-log]
+  introduces: [c:term-frequency, c:inverse-document-frequency, c:tf-idf]
+  data: [gutenberg-books]
+  ladder: [python, numpy]
+  needs: any
+
+- id: nlp-logistic-text
+  title: "Logistic regression on words"
+  level: basis
+  domein: taal
+  module: tekst-verwerken
+  idea: "Logistic regression on TF-IDF vectors learns one weight per word: the largest weights show which words push towards each class, and on short texts naive Bayes often does just as well, which you measure."
+  covers: [klassieke-tekstclassificatie#3]
+  requires: [nlp-tf-idf, ml-logistic-regression]
+  introduces: [c:maximum-entropy-classifier]
+  data: [uci-sentiment-sentences, course-sentiment-nl]
+  ladder: [python, numpy]
+  needs: any
+
+- id: nlp-micro-macro
+  title: "Many classes: micro and macro averages"
+  level: basis
+  domein: taal
+  module: tekst-verwerken
+  idea: "With many classes the macro average gives every class the same weight and the micro average every example, so a classifier that ignores the rare classes looks good on micro and bad on macro."
+  covers: [klassieke-tekstclassificatie#5]
+  requires: [nlp-logistic-text, ml-f1-score]
+  introduces: [c:macro-averaging, c:micro-averaging]
+  data: [massive-en-nl]
+  ladder: [python]
+  needs: any
+
+- id: nlp-project-spam
+  title: "Project: a spam filter with TF-IDF"
+  level: basis
+  domein: taal
+  module: tekst-verwerken
+  kind: project
+  project: text
+  idea: "Your own spam filter: TF-IDF features and logistic regression on real text messages, compared with naive Bayes and judged on the spam you miss and the messages you wrongly block."
+  covers: []
+  requires: [nlp-logistic-text]
+  introduces: []
+  data: [sms-spam-collection]
+  ladder: [python, numpy]
+  needs: any
+
+- id: nlp-dutch-tools
+  title: "Tools and corpora for Dutch"
+  level: basis
+  domein: taal
+  module: tekst-verwerken
+  idea: "Dutch has its own tools (the Alpino parser, Frog, spaCy's Dutch models) and corpora (SoNaR, Lassy, CGN, Open Dutch WordNet); in a Dutch treebank you see what rules written for English miss."
+  covers: [nederlandse-nlp#0, nederlandse-nlp#1]
+  requires: [nlp-dependencies, nlp-stemming, nlp-corpora, nlp-pipeline]
+  introduces: [c:alpino, c:frog, c:lassy, c:sonar, c:cgn]
+  mentions: [c:wordnet]
+  data: [ud-english-dutch]
+  ladder: [python]
+  needs: any
+
+
+# --- betekenis: meaning as a vector ---------------------------------------------------------------------------------
+- id: nlp-distributional-hypothesis
+  title: "A word by the company it keeps"
+  level: basis
+  domein: taal
+  module: betekenis
+  idea: "Words that occur in the same contexts have similar meanings; counting which words occur near each word gives every word a vector, and similar words get similar vectors."
+  covers: [distributionele-semantiek-en-word-embeddings#0]
+  requires: [nlp-document-vectors]
+  introduces: [c:distributional-hypothesis, c:distributional-semantics, c:co-occurrence-matrix]
+  data: [gutenberg-books]
+  ladder: [python, numpy]
+  needs: any
+
+- id: nlp-word-embeddings
+  title: "Word embeddings: neighbors and analogies"
+  level: basis
+  domein: taal
+  module: betekenis
+  idea: "Pretrained word embeddings place words so that the nearest neighbors are related words and differences carry relations (king minus man plus woman lands near queen), though analogies work less well than the famous examples suggest."
+  covers: [distributionele-semantiek-en-word-embeddings#2]
+  requires: [nlp-distributional-hypothesis, ml-embeddings-idea]
+  introduces: [c:word-embedding, c:glove]
+  data: [glove-50d, word2vec-analogies, fasttext-nl-30k]
+  ladder: [python, numpy]
+  needs: any
+
+- id: nlp-static-vs-contextual
+  title: "One vector per word, or one per use"
+  level: basis
+  domein: taal
+  module: betekenis
+  idea: "A static embedding gives bank one vector in every sentence; a contextual model gives every occurrence its own vector, so the bank of a river and the bank with your money can come apart, which you check on a small model."
+  covers: [distributionele-semantiek-en-word-embeddings#6]
+  requires: [nlp-word-embeddings]
+  introduces: [c:static-embedding, c:contextual-embedding]
+  data: [glove-50d, model-bert-tiny]
+  ladder: [python, numpy]
+  needs: any
+
+- id: nlp-word-relations
+  title: "Senses and relations between words"
+  level: basis
+  domein: taal
+  module: betekenis
+  idea: "One word can have several related senses (polysemy), several words one meaning (synonymy), and meanings form hierarchies (a dog is an animal: hyponymy) and wholes with parts (meronymy)."
+  covers: [d15-lexicale-semantiek#0]
+  requires: [nlp-why-language-is-hard]
+  introduces: [c:word-sense, c:polysemy, c:synonymy, c:hyponymy, c:meronymy]
+  data: [wordnet-en-nl]
+  ladder: [python]
+  needs: any
+
+- id: nlp-wordnet
+  title: "WordNet: a network of meanings"
+  level: basis
+  domein: taal
+  module: betekenis
+  idea: "WordNet groups words into synsets joined by relations; the path between two synsets gives a similarity, and a small lexicon of your own is built the same way."
+  covers: [d15-lexicale-semantiek#1]
+  requires: [nlp-word-relations, math-graphs]
+  introduces: [c:wordnet, c:lexicon]
+  data: [wordnet-en-nl]
+  ladder: [python]
+  needs: any
+
+- id: nlp-sentence-embeddings
+  title: "A vector for a whole sentence"
+  level: basis
+  domein: taal
+  module: betekenis
+  idea: "The mean of the word vectors loses word order and negation; a transformer trained so that sentences with the same meaning get nearby vectors (as the Sentence Transformers library does) keeps more of them, though negation stays hard."
+  covers: [sentence-embeddings#0]
+  requires: [nlp-static-vs-contextual, attn-idea]
+  introduces: [c:sentence-embedding, c:sentence-transformers]
+  data: [glove-50d, model-granite-embedding]
+  ladder: [python, numpy]
+  needs: any
+
+- id: nlp-sts
+  title: "Same meaning? Similarity and paraphrases"
+  level: basis
+  domein: taal
+  module: betekenis
+  idea: "Semantic textual similarity scores how alike two sentences are in meaning; a threshold on the cosine of their embeddings turns that into paraphrase detection, judged against people's scores."
+  covers: [sentence-embeddings#2]
+  requires: [nlp-sentence-embeddings, ml-confusion-matrix]
+  introduces: [c:semantic-textual-similarity, c:paraphrase]
+  data: [model-granite-embedding, sts-pairs]
+  ladder: [python, numpy]
+  needs: any
+
+- id: nlp-mteb
+  title: "Choosing a sentence model: reading MTEB"
+  level: basis
+  domein: taal
+  module: betekenis
+  idea: "MTEB scores models that turn text into vectors on many tasks; the average hides that the best model for search is often not the best for classification, so you read the tasks that look like yours."
+  covers: [sentence-embeddings#5]
+  requires: [nlp-sts]
+  introduces: [c:mteb]
+  data: []
+  ladder: [python]
+  needs: any
+
+
+# --- structuur: structure in sentences ------------------------------------------------------------------------------
+- id: nlp-bio-tags
+  title: "A label per word: sequence labeling and BIO"
+  level: basis
+  domein: taal
+  module: structuur
+  idea: "Sequence labeling gives every word a label; for spans such as names, B marks the first word, I the words after it and O everything else, so spans become labels and labels become spans again."
+  covers: [sequence-labelling-en-structuur#0]
+  requires: [nlp-word-classes, nlp-tokenize]
+  introduces: [c:sequence-labeling, c:bio-tagging]
+  warns: [span]
+  data: [uner-english-ewt]
+  ladder: [python]
+  needs: any
+
+- id: nlp-pos-tagging
+  title: "Tagging word classes"
+  level: basis
+  domein: taal
+  module: structuur
+  idea: "A tagger that gives every word its most frequent tag already gets most words right, which you measure; the hard cases are words with several classes, where the neighbors decide."
+  covers: [sequence-labelling-en-structuur#1]
+  requires: [nlp-bio-tags, nlp-dependencies]
+  introduces: [c:part-of-speech-tagging]
+  data: [ud-english-dutch]
+  ladder: [python]
+  needs: any
+
+- id: nlp-named-entities
+  title: "Finding names: named entity recognition"
+  level: basis
+  domein: taal
+  module: structuur
+  idea: "Named entity recognition finds names of people, places and organizations; rules and lists (gazetteers) find the known ones, and a statistical tagger learns from labeled examples to find new ones."
+  covers: [sequence-labelling-en-structuur#2]
+  requires: [nlp-bio-tags, nlp-pos-tagging]
+  introduces: [c:named-entity, c:named-entity-recognition, c:gazetteer]
+  data: [uner-english-ewt]
+  ladder: [python]
+  needs: any
+
+- id: nlp-span-f1
+  title: "Scoring a tagger: accuracy and span F1"
+  level: basis
+  domein: taal
+  module: structuur
+  idea: "Accuracy per word flatters a name tagger, because most words are O; span F1 counts a name as found only when its start, its end and its type all match."
+  covers: [sequence-labelling-en-structuur#7]
+  requires: [nlp-named-entities, ml-f1-score]
+  introduces: [c:span-f1]
+  data: [uner-english-ewt]
+  ladder: [python]
+  needs: any
+
+- id: nlp-entailment
+  title: "Does one sentence follow from another?"
+  level: basis
+  domein: taal
+  module: structuur
+  idea: "Natural language inference asks whether a hypothesis follows from a premise, contradicts it or neither; datasets such as SNLI hold shortcuts, so a model can score well by reading the hypothesis alone."
+  covers: [d15-zinssemantiek-en-semantic-parsing#0]
+  requires: [nlp-meaning-and-truth, nlp-logistic-text]
+  introduces: [c:natural-language-inference, c:shortcut-learning]
+  warns: [hypothesis]
+  data: [snli-sample]
+  ladder: [python]
+  needs: any
+
+- id: nlp-coreference
+  title: "What does 'it' refer to? Coreference"
+  level: basis
+  domein: taal
+  module: structuur
+  idea: "A text refers to the same thing many times (a name, a description, a pronoun); coreference resolution groups these mentions into entities, and the rule 'the nearest earlier mention that fits' gets many right but not all."
+  covers: [d15-coreferentie-en-discourse#0]
+  requires: [nlp-discourse, nlp-named-entities]
+  introduces: [c:coreference, c:coreference-resolution, c:anaphor]
+  data: []
+  ladder: [python]
+  needs: any
+
+
+# --- neurale-nlp: neural NLP ----------------------------------------------------------------------------------------
+- id: nlp-bert
+  title: "BERT: filling in the blank"
+  level: basis
+  domein: taal
+  module: neurale-nlp
+  idea: "BERT is an encoder trained to fill in masked words, so every word's vector sees the words on both sides; its family (RoBERTa, DistilBERT, DeBERTa, ModernBERT, EuroBERT) changes the data, the size and the training, and a tiny BERT runs on your own PC."
+  covers: [pretrained-encoders-en-encoderdecoders#2]
+  requires: [nlp-static-vs-contextual, lm-model-families]
+  introduces: [c:bert, c:masked-language-modeling]
+  data: [model-bert-tiny]
+  ladder: [python, numpy, torch]
+  needs: any
+
+- id: nlp-fine-tune-bert
+  title: "Fine-tuning an encoder for a task"
+  level: basis
+  domein: taal
+  module: neurale-nlp
+  idea: "A small linear layer on BERT's output classifies a sentence (from its first token) or tags every word (from every token), and training the whole a little on labeled examples adapts it to the task."
+  covers: [pretrained-encoders-en-encoderdecoders#4]
+  requires: [nlp-bert, torch-fine-tune, nlp-bio-tags]
+  introduces: [c:token-classification]
+  data: [model-bert-tiny, uci-sentiment-sentences]
+  ladder: [python, torch]
+  needs: any
+
+
+# --- taken: the classic tasks ---------------------------------------------------------------------------------------
+- id: nlp-sentiment
+  title: "Sentiment: positive or negative?"
+  level: basis
+  domein: taal
+  module: taken
+  idea: "Sentiment analysis decides whether a text is positive or negative; per sentence and per document the answers differ, because a review mixes praise and complaints and a 'but' moves the weight."
+  covers: [klassieke-nlp-taken#0, klassieke-nlp-taken#1]
+  requires: [nlp-logistic-text]
+  introduces: [c:sentiment-analysis]
+  data: [uci-sentiment-sentences, course-sentiment-nl]
+  ladder: [python]
+  needs: any
+
+- id: nlp-sentiment-lexicon
+  title: "A list of good and bad words"
+  level: basis
+  domein: taal
+  module: taken
+  idea: "A sentiment lexicon gives words a score (VADER, LIWC); you build one from labeled reviews by comparing how often each word occurs in positive and negative ones, and a negation turns the score around."
+  covers: [klassieke-nlp-taken#3]
+  requires: [nlp-sentiment, nlp-wordnet]
+  introduces: [c:sentiment-lexicon]
+  data: [uci-sentiment-sentences, course-sentiment-nl, pattern-sentiment-lexicons]
+  ladder: [python]
+  needs: any
+
+- id: nlp-project-sentiment
+  title: "Project: sentiment in English and Dutch"
+  level: basis
+  domein: taal
+  module: taken
+  kind: project
+  project: text
+  idea: "Your own sentiment classifier for English and Dutch reviews: TF-IDF and logistic regression against your own lexicon, with macro F1 per language and the reviews it gets wrong."
+  covers: []
+  requires: [nlp-sentiment-lexicon, nlp-project-spam, nlp-micro-macro]
+  introduces: []
+  data: [uci-sentiment-sentences, course-sentiment-nl, pattern-sentiment-lexicons]
+  ladder: [python, numpy]
+  needs: any
+
+- id: nlp-topic-models
+  title: "What is this collection about? Topic models"
+  level: basis
+  domein: taal
+  module: taken
+  idea: "A topic model describes every document as a mix of topics and every topic as a list of words; LDA in scikit-learn finds them from word counts alone, and naming the topics is up to you."
+  covers: [klassieke-nlp-taken#9]
+  requires: [nlp-document-vectors]
+  introduces: [c:topic-model, c:latent-dirichlet-allocation]
+  data: [xquad-squad-nl]
+  ladder: [python, numpy]
+  needs: any
+
+- id: nlp-information-extraction
+  title: "From text to a table"
+  level: basis
+  domein: taal
+  module: taken
+  idea: "Information extraction turns free text into fields: regular expressions with groups take dates, amounts and names into rows, and you count how many the rules find and how many they get wrong."
+  covers: [d15-informatie-extractie#0]
+  requires: [nlp-regex, ml-confusion-matrix]
+  introduces: [c:information-extraction]
+  data: []
+  ladder: [python]
+  needs: any
+
+- id: nlp-keywords
+  title: "Keywords and terms"
+  level: basis
+  domein: taal
+  module: taken
+  idea: "The words with the highest TF-IDF in a document, and the word pairs that occur together more often than chance (collocations, by pointwise mutual information), are its keywords and terms."
+  covers: [d15-informatie-extractie#1]
+  requires: [nlp-tf-idf]
+  introduces: [c:keyword-extraction, c:collocation, c:pointwise-mutual-information]
+  data: [gutenberg-books]
+  ladder: [python]
+  needs: any
+
+- id: nlp-extraction-with-llms
+  title: "Extraction with an LLM"
+  level: basis
+  domein: taal
+  module: taken
+  idea: "An LLM fills fields from a prompt with a few examples, also from a long document, but it also fills fields that are not in the text, so every value gets checked against the source."
+  covers: [d15-informatie-extractie#7]
+  requires: [nlp-information-extraction, start-prompt-basics]
+  introduces: [p:check-extracted-values]
+  mentions: [c:hallucination]
+  data: [model-qwen3-0.6b]
+  ladder: [python]
+  needs: any
+
+- id: nlp-qa-kinds
+  title: "Kinds of question answering"
+  level: basis
+  domein: taal
+  module: taken
+  idea: "Extractive QA points to an answer span in a text, abstractive QA writes an answer, open-domain QA first searches a collection, and closed-book QA answers from what the model learned."
+  covers: [d15-question-answering#0]
+  requires: [nlp-what-is-nlp]
+  introduces: [c:question-answering, c:extractive-question-answering, c:open-domain-question-answering, c:closed-book-question-answering]
+  warns: [span]
+  data: []
+  ladder: [python]
+  needs: any
+
+- id: nlp-extractive-qa
+  title: "Finding the answer in a passage"
+  level: basis
+  domein: taal
+  module: taken
+  idea: "Reading comprehension sets such as SQuAD give a passage, a question and the answer span; a baseline takes the sentence that shares most words with the question, and you see where that fails."
+  covers: [d15-question-answering#1]
+  requires: [nlp-qa-kinds, nlp-normalize, ml-baselines]
+  introduces: [c:squad]
+  warns: [span]
+  data: [xquad-squad-nl]
+  ladder: [python]
+  needs: any
+
+- id: nlp-qa-eval
+  title: "Scoring answers: exact match and F1"
+  level: basis
+  domein: taal
+  module: taken
+  idea: "Exact match counts an answer right only when it equals a gold answer after normalizing; token F1 gives credit for the words they share, and both take the best over all gold answers."
+  covers: [d15-question-answering#6]
+  requires: [nlp-extractive-qa, ml-f1-score]
+  introduces: [c:exact-match]
+  data: [xquad-squad-nl]
+  ladder: [python]
+  needs: any
+
+- id: nlp-classic-mt
+  title: "Translating by rules"
+  level: basis
+  domein: taal
+  module: taken
+  idea: "Rule-based translation goes word for word (direct), through the structure of the sentence (transfer) or through a meaning without language (interlingua), the corners of the Vauquois triangle; word for word already breaks on word order and idioms."
+  covers: [d15-machinevertaling#0]
+  requires: [nlp-dependencies]
+  introduces: [c:machine-translation]
+  data: [tatoeba-sentences]
+  ladder: [python]
+  needs: any
+
+- id: nlp-bleu
+  title: "Scoring a translation: BLEU and chrF"
+  level: basis
+  domein: taal
+  module: taken
+  idea: "BLEU counts how many word n-grams of a translation occur in a reference, with a penalty for being too short; chrF is an F-score over character n-grams, combining their precision and recall, which suits Dutch compounds better."
+  covers: [d15-evaluatie-van-tekstgeneratie#0]
+  requires: [nlp-classic-mt, lm-bigram-counts, ml-confusion-matrix]
+  introduces: [c:bleu, c:chrf]
+  data: [ntrex-128]
+  ladder: [python]
+  needs: any
+
+- id: nlp-post-editing
+  title: "Translators and machines together"
+  level: basis
+  domein: taal
+  module: taken
+  idea: "Translators correct machine output (post-editing) and reuse earlier translations (a translation memory); the number of word edits needed (TER) measures how much the machine helped."
+  covers: [d15-machinevertaling#5]
+  requires: [nlp-bleu, nlp-edit-distance]
+  introduces: [c:post-editing, c:computer-assisted-translation]
+  data: [ntrex-128, model-qwen3-0.6b]
+  ladder: [python]
+  needs: any
+
+- id: nlp-mt-with-llms
+  title: "Translating with an LLM"
+  level: basis
+  domein: taal
+  module: taken
+  idea: "An LLM translates from a prompt and can take the whole document as context, which can keep names and terms the same across sentences; translating sentence by sentence loses that context."
+  covers: [d15-machinevertaling#7]
+  requires: [nlp-bleu, start-prompt-basics]
+  introduces: [c:document-level-translation]
+  data: [ntrex-128, model-qwen3-0.6b]
+  ladder: [python]
+  needs: any
+
+- id: nlp-what-is-nlg
+  title: "From data to text"
+  level: basis
+  domein: taal
+  module: taken
+  idea: "Classic NLG turns data into text in three steps: choose what to say (content selection), plan the sentences and words (microplanning) and write them out correctly (surface realization), as in a weather report."
+  covers: [d15-tekstgeneratie-en-samenvatten#0, d15-tekstgeneratie-en-samenvatten#1]
+  requires: [nlp-what-is-nlp]
+  introduces: [c:content-selection, c:microplanning, c:surface-realization]
+  data: []
+  ladder: [python]
+  needs: any
+
+- id: nlp-summarize
+  title: "Summarizing: pick or write"
+  level: basis
+  domein: taal
+  module: taken
+  idea: "An extractive summary picks the most important sentences, scored by their word weights and place; an abstractive summary writes new sentences, which reads better but can say what the text does not."
+  covers: [d15-tekstgeneratie-en-samenvatten#4]
+  requires: [nlp-tf-idf, nlp-what-is-nlg]
+  introduces: [c:summarization, c:extractive-summarization, c:abstractive-summarization]
+  data: [scitldr]
+  ladder: [python]
+  needs: any
+
+- id: nlp-rouge
+  title: "Scoring a summary: ROUGE"
+  level: basis
+  domein: taal
+  module: taken
+  idea: "ROUGE measures how much of a reference summary a summary recalls: shared words or word pairs (ROUGE-N), the longest common subsequence (ROUGE-L) and word pairs with gaps (ROUGE-S)."
+  covers: [d15-evaluatie-van-tekstgeneratie#1]
+  requires: [nlp-summarize, nlp-bleu, nlp-edit-distance, ml-confusion-matrix]
+  introduces: [c:rouge]
+  data: [scitldr]
+  ladder: [python]
+  needs: any
+
+- id: nlp-simplify
+  title: "Simple language and readability"
+  level: basis
+  domein: taal
+  module: taken
+  idea: "Readability formulas count the length of sentences and words (Flesch, and Flesch-Douma for Dutch); simplifying means shorter sentences and common words, aimed at language level B1, but a formula cannot see whether the text is still right."
+  covers: [d15-tekst-herschrijven#1]
+  requires: [nlp-tokenize]
+  introduces: [c:readability, c:text-simplification]
+  data: []
+  ladder: [python]
+  needs: any
+
+- id: nlp-eliza
+  title: "ELIZA: a chatbot from rules"
+  level: basis
+  domein: taal
+  module: taken
+  idea: "ELIZA (1966) matched patterns and turned the user's words around (my becomes your) without understanding anything, and people still confided in it; chatbots written in AIML work the same way."
+  covers: [d15-dialoogsystemen#0]
+  requires: [nlp-regex, nlp-conversation]
+  introduces: [c:chatbot, c:eliza, c:eliza-effect]
+  data: [eliza-doctor-1965]
+  ladder: [python]
+  needs: any
+
+- id: nlp-slot-filling
+  title: "Booking a train: frames and slots"
+  level: basis
+  domein: taal
+  module: taken
+  idea: "A task-oriented system fills a frame (from, to, date) from what the user says and asks for the slots still missing, as the GUS system did in 1977."
+  covers: [d15-dialoogsystemen#1]
+  requires: [nlp-eliza, nlp-information-extraction]
+  introduces: [c:dialogue-system, c:task-oriented-dialogue, c:slot-filling]
+  data: [massive-en-nl]
+  ladder: [python]
+  needs: any
+
+
+# --- zoeken: search engines -----------------------------------------------------------------------------------------
+- id: ir-what-is-search
+  title: "Search: needs and relevance"
+  level: basis
+  domein: taal
+  module: zoeken
+  idea: "Search is everywhere (the web, a shop, your mail, a library), and a search engine serves an information need, not the words typed in; a result is relevant when it helps with that need, which is why one search query can need different results and why people judge search."
+  covers: [information-retrieval-en-zoekmachines#0, information-retrieval-en-zoekmachines#1]
+  requires: [nlp-document-vectors]
+  introduces: [c:information-retrieval, c:information-need, c:relevance, c:search-query]
+  data: []
+  ladder: [python]
+  needs: any
+
+- id: ir-inverted-index
+  title: "The inverted index"
+  level: basis
+  domein: taal
+  module: zoeken
+  idea: "An inverted index lists for every word the documents that contain it; a search query with AND intersects those lists, which is fast because it never reads the documents themselves."
+  covers: [information-retrieval-en-zoekmachines#2]
+  requires: [ir-what-is-search]
+  introduces: [c:inverted-index, c:postings-list, c:boolean-retrieval]
+  data: [xquad-squad-nl]
+  ladder: [python]
+  needs: any
+
+- id: ir-vector-space
+  title: "Ranking by cosine: the vector space model"
+  level: basis
+  domein: taal
+  module: zoeken
+  idea: "Rank documents by the cosine between their TF-IDF vectors and that of the search query; the cosine favors short documents, so long relevant ones come up too rarely, which pivoted length normalization corrects."
+  covers: [d15-retrievalmodellen-en-ranking#0]
+  requires: [ir-inverted-index, nlp-tf-idf]
+  introduces: [c:vector-space-model]
+  data: [xquad-squad-nl]
+  ladder: [python, numpy]
+  needs: any
+
+- id: ir-bm25
+  title: "BM25: the classic ranking"
+  level: basis
+  domein: taal
+  module: zoeken
+  idea: "BM25 improves on TF-IDF: every repeat of a word adds less than the one before (k1) and long documents are scaled down (b); with its two settings tuned on one half of a test collection's queries and measured on the other, it is still hard to beat."
+  covers: [d15-retrievalmodellen-en-ranking#1]
+  requires: [ir-vector-space]
+  introduces: [c:bm25]
+  mentions: [c:lexical-retrieval]
+  data: [xquad-squad-nl, scifact]
+  ladder: [python, numpy]
+  needs: any
+
+- id: ir-vertical-search
+  title: "Search engines for one domain"
+  level: basis
+  domein: taal
+  module: zoeken
+  idea: "A vertical search engine (news, products, local, law) knows the fields of its documents, so it weighs a match in the title more, filters on price or date, and ranks by freshness or distance."
+  covers: [d15-webzoeken#8]
+  requires: [ir-bm25]
+  introduces: [c:vertical-search]
+  data: []
+  ladder: [python]
+  needs: any
+
+- id: ir-precision-at-k
+  title: "Did the search work? P@k, MAP and MRR"
+  level: basis
+  domein: taal
+  module: zoeken
+  idea: "With relevance judgments per search query you count the relevant results among the first k (precision at k), average the precision at every relevant result (MAP) and take one over the rank of the first relevant one (MRR)."
+  covers: [d15-evaluatie-en-interactief-zoeken#0]
+  requires: [ir-bm25, ml-confusion-matrix]
+  introduces: [c:cranfield-paradigm, c:relevance-judgment, c:precision-at-k, c:mean-reciprocal-rank]
+  data: [xquad-squad-nl, scifact]
+  ladder: [python]
+  needs: any
+
+- id: ir-ndcg
+  title: "Graded relevance: nDCG"
+  level: basis
+  domein: taal
+  module: zoeken
+  idea: "When results are more or less relevant, nDCG adds up their grades, counting each less the lower it stands, and divides by the best possible order, so every search query scores between 0 and 1."
+  covers: [d15-evaluatie-en-interactief-zoeken#0]
+  requires: [ir-precision-at-k]
+  introduces: [c:ndcg]
+  data: []
+  ladder: [python, numpy]
+  needs: any
+
+- id: ir-snippets
+  title: "Snippets: showing the results"
+  level: basis
+  domein: taal
+  module: zoeken
+  idea: "A result page shows a snippet per hit: the stretch of the document with the most words of the search query, those words in bold, so people can judge a result before they click it."
+  covers: [d15-evaluatie-en-interactief-zoeken#5]
+  requires: [ir-bm25, nlp-tokenize]
+  introduces: [c:snippet]
+  data: [xquad-squad-nl]
+  ladder: [python]
+  needs: any
+
+- id: ir-answer-engines
+  title: "From ten links to one answer"
+  level: basis
+  domein: taal
+  module: zoeken
+  idea: "Answer engines write one answer with sources instead of a list of links; that saves clicks, takes visits away from the sources, and an error now arrives without the alternatives next to it."
+  covers: [d15-neurale-en-generatieve-retrieval#6]
+  requires: [ir-precision-at-k, nlp-summarize]
+  introduces: [c:answer-engine]
+  data: []
+  ladder: [python]
+  needs: any
+
+
+# --- meertalig: more languages --------------------------------------------------------------------------------------
+- id: nlp-low-resource
+  title: "Languages with little data"
+  level: basis
+  domein: taal
+  module: meertalig
+  idea: "A tokenizer built mostly for English cuts other languages into more pieces per word (its fertility): Dutch already, and far more the languages with little digital text, on which models also do worse; the usual way in is transfer from a related language plus a small labeled set."
+  covers: [meertaligheid-en-low-resource-talen#0]
+  requires: [nlp-languages-of-the-world, lm-tokens-outside]
+  introduces: [c:tokenizer-fertility, c:low-resource-language, c:cross-lingual-transfer]
+  data: [ntrex-128, tokenizer-gpt2-mit, model-qwen3-0.6b]
+  ladder: [python]
+  needs: any
+
+- id: nlp-dutch-models
+  title: "Language models for Dutch"
+  level: basis
+  domein: taal
+  module: meertalig
+  idea: "Models for Dutch come in three kinds: encoders trained on Dutch text (BERTje, RobBERT), models that write text, made by training an existing model further on Dutch (GEITje, Fietje), and European models trained from the start on Dutch and other European languages (GPT-NL, EuroLLM); what each was trained on tells you what to expect from it."
+  covers: [nederlandse-nlp#2, nederlandse-nlp#3, nederlandse-nlp#4]
+  requires: [nlp-low-resource, nlp-dutch-tools, nlp-bert]
+  introduces: [c:bertje, c:robbert, c:geitje, c:fietje, c:gpt-nl, c:eurollm]
+  data: []
+  ladder: [python]
+  needs: any

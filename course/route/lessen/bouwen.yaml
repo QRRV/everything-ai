@@ -77,7 +77,7 @@ lessons:
   covers: [wat-een-agent-is#0, wat-een-agent-is#1, wat-een-agent-is#2, wat-een-agent-is#3, wat-een-agent-is#4]
   requires: [rl-what-is-rl, start-prompt-chains, py-json]
   introduces: [c:llm-agent, c:tool, c:tool-call, c:agent-loop, c:step-limit, c:autonomy-spectrum]
-  mentions: [c:model, c:language-model]
+  mentions: [c:model, c:language-model, c:chatbot]
   warns: [agent, tool]
   uses: [c:agent, c:environment, c:action, c:reward, c:return, c:policy, c:prompt, c:message-role, c:prompt-chaining, c:self-refine, c:json, py:json, py:def, py:return, py:for, py:range, py:if, py:comparison, py:list, py:append, py:dict, py:indexing, py:print, py:comment, py:underscore-name, py:variable, py:string-literal, q:predict, q:choice, q:exercise-with-check, q:run-cell]
   data: [model-qwen3-0.6b, course-agent-qwen]
@@ -387,9 +387,9 @@ lessons:
   idea: "For one fixed task, such as sorting messages, a small model trained on a few hundred examples can beat an LLM with a prompt in quality, speed and price; the LLM wins when there are no labels or the task keeps changing."
   covers: [klassieke-ai-diensten-via-api-s#4]
   requires: [build-ai-services, ml-sklearn, ml-f1-score]
-  introduces: [c:task-specific-model, c:tf-idf, c:macro-averaging]
+  introduces: [c:task-specific-model]
   uses: [c:ai-service, c:classic-nlp-task, c:classification, c:logistic-regression, c:softmax, c:f1-score, c:harmonic-mean, c:precision, c:recall, c:true-positive, c:false-positive, c:false-negative, c:test-set, c:train-set, c:vector, c:token-price, c:prompt, c:zero-shot-prompting, py:sklearn-fit-predict, py:np-array, py:np-sum, py:np-mean, py:boolean-mask, py:comparison, py:import, py:def, py:return, py:for, py:list, py:tuple, q:choice, q:exercise-with-check, q:slider-task]
-  mentions: [c:label, c:accuracy, c:vocabulary]
+  mentions: [c:label, c:accuracy, c:vocabulary, c:tf-idf, c:macro-averaging]
   data: [banking77-small, course-apis-qwen]
   ladder: [python, numpy]
   needs: any
@@ -654,7 +654,8 @@ lessons:
   idea: "BM25 scores a text by the words it shares with the question: a rare word counts more than a common one, a word that comes back often counts less each time, and a long text gets no head start."
   covers: [rag-basis#5]
   requires: [build-chunking, math-exp-log]
-  introduces: [c:lexical-retrieval, c:term-frequency, c:inverse-document-frequency, c:bm25]
+  introduces: [c:lexical-retrieval]
+  mentions: [c:term-frequency, c:inverse-document-frequency, c:bm25]
   data: [course-summaries]
   ladder: [python, numpy]
   needs: any
@@ -696,8 +697,8 @@ lessons:
   idea: "Your assistant answers questions about your own documents, such as the handbook of a shop: cut them into chunks, make a library of their embeddings a batch at a time, search it by meaning, and answer from the chunks it found, with the chunk named."
   covers: []
   requires: [build-project-prompts, build-grounded-answers]
-  uses: [c:retrieval-augmented-generation, c:retrieval, c:rag-pipeline, c:knowledge-base, c:chunk, c:chunking, c:chunk-overlap, c:embedding, c:embeddings-api, c:embedding-model, c:dense-retrieval, c:lexical-retrieval, c:bm25, c:dot-product, c:grounded-generation, c:citation, c:api, c:api-client, c:openai-compatible-api, c:local-server, c:http-request, c:message-role, c:chat-model, c:system-prompt, c:prompt-template, c:module, c:open-weights, c:seed, c:array, py:np-array, py:dict, py:list, py:len, py:append, py:for, py:range, py:range-step, py:slicing, py:if, py:comparison, py:and-operator, py:indexing, py:import, py:def, py:return, py:string-literal, q:predict, q:choice, q:exercise-with-check, q:run-cell]
-  mentions: [py:list-concatenation, c:http-status-code]
+  uses: [c:retrieval-augmented-generation, c:retrieval, c:rag-pipeline, c:knowledge-base, c:chunk, c:chunking, c:chunk-overlap, c:embedding, c:embeddings-api, c:embedding-model, c:dense-retrieval, c:lexical-retrieval, c:dot-product, c:grounded-generation, c:citation, c:api, c:api-client, c:openai-compatible-api, c:local-server, c:http-request, c:message-role, c:chat-model, c:system-prompt, c:prompt-template, c:module, c:open-weights, c:seed, c:array, py:np-array, py:dict, py:list, py:len, py:append, py:for, py:range, py:range-step, py:slicing, py:if, py:comparison, py:and-operator, py:indexing, py:import, py:def, py:return, py:string-literal, q:predict, q:choice, q:exercise-with-check, q:run-cell]
+  mentions: [py:list-concatenation, c:http-status-code, c:bm25]
   data: [model-qwen3-0.6b, model-granite-embedding, course-handbook-documents, course-handbook-granite, course-rag-qwen, course-summaries-granite]
   ladder: [python, numpy]
   needs: any

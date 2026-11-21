@@ -60,7 +60,14 @@ modules:
   fundament/rnn: {en: "Recurrent networks", nl: "RNN's"}
   fundament/attention: {en: "Attention and transformers", nl: "Attention en transformers"}
   # the domains
+  taal/taalkunde: {en: "Linguistics for AI", nl: "Taalkunde voor AI"}
   taal/tekst-verwerken: {en: "Processing and classifying text", nl: "Tekst verwerken en indelen"}
+  taal/betekenis: {en: "Meaning as a vector", nl: "Betekenis als vector"}
+  taal/structuur: {en: "Structure in sentences", nl: "Structuur in zinnen"}
+  taal/neurale-nlp: {en: "Neural NLP", nl: "Neurale NLP"}
+  taal/taken: {en: "The classic tasks", nl: "De klassieke taken"}
+  taal/zoeken: {en: "Search engines", nl: "Zoekmachines"}
+  taal/meertalig: {en: "More languages", nl: "Meer talen"}
   llm/gebruiken: {en: "Using and understanding an LLM", nl: "Een LLM gebruiken en begrijpen"}
   llm/tokens: {en: "Tokens and tokenizers", nl: "Tokens en tokenizers"}
   llm/gpt: {en: "Your GPT", nl: "Je GPT"}

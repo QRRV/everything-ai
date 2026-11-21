@@ -308,7 +308,7 @@ lessons:
   requires: [rai-two-kinds-of-harm, rai-dark-patterns]
   introduces: [c:microtargeting]
   uses: [c:representational-harm, c:allocative-harm, c:hypernudge, c:consent, c:label, c:model, py:dict, py:for, py:arithmetic, py:len, py:float, py:round, py:print, py:comment, py:int, py:variable, py:underscore-name, py:string-literal, q:predict, q:choice, q:exercise-with-check, q:run-cell]
-  mentions: [c:privacy]
+  mentions: [c:privacy, c:chatbot]
   data: []
   ladder: [python]
   needs: any
@@ -515,7 +515,7 @@ lessons:
   requires: [rai-equalized-odds-calibration, rai-reweighing]
   introduces: [c:threshold-optimization]
   uses: [c:equalized-odds, c:calibration-within-groups, c:demographic-parity, c:group-fairness, c:selection-rate, c:recall, c:true-positive, c:accuracy, c:decision-threshold, c:bias-mitigation, c:reweighing, c:direct-discrimination, c:validation-set, c:test-set, c:train-set, c:logistic-regression, c:probability, c:one-hot, c:feature, c:label, c:model, c:prediction, c:weight, c:fairness, c:fairness-through-unawareness, py:dataframe, py:pandas-select-filter, py:boolean-mask, py:np-mean, py:np-sum, py:np-arange, py:sklearn-fit-predict, py:dict, py:dict-items, py:for, py:if, py:def, py:return, py:list, py:append, py:tuple, py:abs, py:min-max, py:none, py:indexing, py:comparison, py:arithmetic, py:round, py:print, py:comment, py:variable, py:underscore-name, py:string-literal, py:float, py:int, py:bool, py:keyword-argument, py:import, py:import-as, q:predict, q:choice, q:exercise-with-check, q:run-cell]
-  mentions: [c:false-positive-rate, py:pd-get-dummies]
+  mentions: [c:false-positive-rate, py:pd-get-dummies, c:exact-match]
   data: [uci-adult]
   ladder: [python, numpy]
   needs: any
@@ -575,9 +575,9 @@ lessons:
   idea: "In word embeddings, men's names can lie closer to words about career and women's names closer to words about family; WEAT measures that as an effect size, one word a side always gives 2 or −2, and taking the gender direction out (Neutralize) hides the bias more than it removes it."
   covers: [bias-per-modaliteit#1]
   requires: [rai-bias-in-llms, ml-embeddings-idea, math-norms-cosine]
-  introduces: [c:weat, c:word-embedding]
+  introduces: [c:weat]
   uses: [c:embedding, c:cosine-similarity, c:norm, c:dot-product, c:vector, c:standard-deviation, c:mean, c:bias-benchmark, c:harm, c:harmful-bias, c:benchmark, c:language-model, c:token, py:np-array, py:np-dot, py:np-linalg-norm, py:np-mean, py:np-std, py:list, py:append, py:for, py:def, py:return, py:slicing, py:indexing, py:print, py:round, py:import-as, py:comment, py:underscore-name, py:variable, py:float, py:arithmetic, py:string-literal, q:predict, q:choice, q:exercise-with-check, q:run-cell]
-  mentions: [c:effect-size, c:embedding-model, c:principal-component, c:p-value, c:model-card, c:negative-result, py:list-concatenation]
+  mentions: [c:effect-size, c:embedding-model, c:principal-component, c:p-value, c:model-card, c:negative-result, py:list-concatenation, c:word-embedding]
   data: [model-granite-embedding, course-fairness-granite]
   ladder: [python, numpy]
   needs: any
@@ -652,7 +652,7 @@ lessons:
   requires: [rai-bias-lifecycle, data-provenance]
   introduces: [c:data-card, c:fair-principles, c:data-statement]
   uses: [c:datasheet, c:data-provenance, c:license, c:consent, c:representation-bias, c:missing-value, c:model, c:training, py:dataframe, py:pandas-select-filter, py:boolean-mask, py:value-counts, py:isna, py:min-max, py:len, py:for, py:list, py:arithmetic, py:print, py:comment, py:variable, py:underscore-name, py:string-literal, py:import, py:import-as, q:predict, q:choice, q:exercise-with-check, q:run-cell]
-  mentions: [c:fairness, c:paper, c:metadata, c:data-governance]
+  mentions: [c:fairness, c:paper, c:metadata, c:data-governance, c:language-variety]
   data: [uci-adult]
   ladder: [python]
   needs: any
@@ -1001,7 +1001,7 @@ lessons:
   covers: [memorisatie-inference-aanvallen-en-unlearning#0]
   requires: [rai-what-is-privacy, lm-sampling, start-prompt-basics]
   introduces: [c:memorization, c:training-data-extraction]
-  mentions: [py:split, c:base-model, c:chat-model, c:chat-template]
+  mentions: [py:split, c:base-model, c:chat-model, c:chat-template, c:exact-match]
   warns: [opening]
   data: [model-qwen3-0.6b-base, course-memorization-qwen]
   ladder: [python]
@@ -1534,7 +1534,7 @@ lessons:
   covers: [d25-systemische-en-structurele-risicos#0, d25-systemische-en-structurele-risicos#1]
   requires: [rai-drift-and-tails]
   introduces: [c:emergence, c:wicked-problem]
-  mentions: [c:feedback-loop, c:negative-side-effect]
+  mentions: [c:feedback-loop, c:negative-side-effect, c:exact-match]
   data: []
   ladder: [python, numpy]
   needs: any
@@ -1548,6 +1548,7 @@ lessons:
   covers: [d25-systemische-en-structurele-risicos#2, d25-systemische-en-structurele-risicos#3]
   requires: [rai-complex-systems]
   introduces: [c:race-to-the-bottom]
+  mentions: [c:exact-match]
   data: []
   ladder: [python, numpy]
   needs: any

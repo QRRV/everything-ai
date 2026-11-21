@@ -299,7 +299,7 @@ lessons:
   domein: klassiek-ml
   module: aanbevelen
   idea: "Centrality says how important a node is: by its degree, by how close it is to all others, by how many shortest paths run through it, or by PageRank, the share of time a random walker spends there, computed by spreading scores along the edges until they stop changing."
-  covers: [d10-netwerkanalyse-en-graph-mining#1]
+  covers: [d10-netwerkanalyse-en-graph-mining#1, d15-webzoeken#2]
   requires: [ml-network-data]
   introduces: [c:centrality, c:closeness-centrality, c:betweenness-centrality, c:pagerank, c:random-walk, c:power-iteration]
   uses: [c:graph, c:node, c:edge, c:degree, c:adjacency-list, c:graph-path, c:breadth-first-search, c:queue, c:search-frontier, c:hub, c:mean, c:probability, s:sigma-sum, py:random-module, c:seed, py:deque, py:dict, py:list, py:append, py:set, py:tuple, py:len, py:for, py:range, py:while, py:if, py:comparison, py:def, py:return, py:indexing, py:print, py:arithmetic, py:string-literal, py:import, py:comment, py:variable, py:underscore-name, q:predict, q:choice, q:exercise-with-check, q:slider-task, q:run-cell]

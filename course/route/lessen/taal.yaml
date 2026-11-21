@@ -217,7 +217,7 @@ lessons:
   requires: [attn-idea, lm-what-is-a-language-model]
   introduces: [c:encoder, c:decoder, c:encoder-decoder]
   uses: [c:attention, c:transformer, c:token, c:language-model, c:next-token-prediction, c:label, c:model-parameter, c:vector, c:mlp, c:layer, c:recurrent-network, c:classification, c:character-encoding, py:list, py:for, py:range, py:len, py:slicing, py:indexing, py:print, py:comment, py:underscore-name, py:def, py:return, py:if, py:comparison, py:bool, py:string-literal, q:predict, q:choice, q:exercise-with-check, q:run-cell]
-  mentions: [c:gpt, c:attention-weights]
+  mentions: [c:gpt, c:attention-weights, c:bert]
   needs: any
 
 - id: lm-peek-real-llm
@@ -278,9 +278,9 @@ lessons:
   idea: "Split text into words, numbers and punctuation first, with a regular expression, so that merges never cross a word boundary."
   covers: [subword-tokenisatie#4]
   requires: [tok-byte-level]
-  introduces: [c:pre-tokenization, c:regular-expression, py:re-findall, py:raw-string]
+  introduces: [c:pre-tokenization]
   uses: [c:byte-level-bpe, c:bpe, c:merge-rule, c:tokenizer, c:vocabulary, c:token, c:token-id, c:byte, c:utf-8, py:encode-decode, py:decode-errors, py:tuple-key, py:dict, py:tuple, py:list, py:comprehension, py:append, py:for, py:range, py:len, py:if, py:indexing, py:str, py:none, py:comparison, py:import, py:def, py:return, py:print, py:comment, py:underscore-name, q:predict, q:choice, q:exercise-with-check, q:run-cell]
-  mentions: [c:gpt, c:special-token]
+  mentions: [c:gpt, c:special-token, c:regular-expression, py:re-findall, py:raw-string]
   ladder: [python]
   needs: any
 
@@ -295,8 +295,8 @@ lessons:
   covers: [subword-tokenisatie#4]
   requires: [tok-pre-tokenization]
   introduces: [c:special-token, c:end-of-text, py:split-sep]
-  uses: [c:pre-tokenization, c:regular-expression, c:byte-level-bpe, c:bpe, c:merge-rule, c:tokenizer, c:vocabulary, c:token, c:token-id, c:byte, c:utf-8, c:language-model, py:re-findall, py:raw-string, py:encode-decode, py:decode-errors, py:str-join, py:split, py:import-as, py:dict, py:tuple, py:tuple-key, py:list, py:append, py:for, py:range, py:len, py:if, py:indexing, py:str, py:comparison, py:import, py:def, py:return, py:print, py:comment, py:underscore-name, q:predict, q:choice, q:exercise-with-check, q:run-cell]
-  mentions: [c:gpt, c:embedding, c:transformer-block, c:output-head]
+  uses: [c:pre-tokenization, c:byte-level-bpe, c:bpe, c:merge-rule, c:tokenizer, c:vocabulary, c:token, c:token-id, c:byte, c:utf-8, c:language-model, py:encode-decode, py:decode-errors, py:str-join, py:split, py:import-as, py:dict, py:tuple, py:tuple-key, py:list, py:append, py:for, py:range, py:len, py:if, py:indexing, py:str, py:comparison, py:import, py:def, py:return, py:print, py:comment, py:underscore-name, q:predict, q:choice, q:exercise-with-check, q:run-cell]
+  mentions: [c:gpt, c:embedding, c:transformer-block, c:output-head, c:regular-expression, py:re-findall, py:raw-string]
   ladder: [python]
   needs: any
 
@@ -405,8 +405,8 @@ lessons:
   covers: [subword-tokenisatie#2]
   requires: [gpt-generate, tok-special-tokens]
   introduces: [c:caching, c:characters-per-token]
-  uses: [c:gpt, c:token, c:token-id, c:vocabulary, c:context-window, c:bpe, c:merge-rule, c:pre-tokenization, c:end-of-text, c:special-token, c:byte-level-bpe, c:utf-8, c:tokenizer, c:validation-set, c:checkpoint, c:epoch, c:mini-batch, c:loss, c:cross-entropy, c:temperature, c:sampling, c:run, c:gpu, c:device, c:parameter-count, c:regular-expression, py:dict, py:list, py:append, py:for, py:range, py:len, py:if, py:def, py:return, py:import, py:print, py:comment, py:underscore-name, py:sorted, py:comprehension, py:re-findall, py:split-sep, py:tuple, py:tuple-key, py:keyword-argument, c:byte, c:logit, c:softmax, c:embedding, q:predict, q:choice, q:exercise-with-check, q:run-cell]
-  mentions: [py:repr]
+  uses: [c:gpt, c:token, c:token-id, c:vocabulary, c:context-window, c:bpe, c:merge-rule, c:pre-tokenization, c:end-of-text, c:special-token, c:byte-level-bpe, c:utf-8, c:tokenizer, c:validation-set, c:checkpoint, c:epoch, c:mini-batch, c:loss, c:cross-entropy, c:temperature, c:sampling, c:run, c:gpu, c:device, c:parameter-count, py:dict, py:list, py:append, py:for, py:range, py:len, py:if, py:def, py:return, py:import, py:print, py:comment, py:underscore-name, py:sorted, py:comprehension, py:split-sep, py:tuple, py:tuple-key, py:keyword-argument, c:byte, c:logit, c:softmax, c:embedding, q:predict, q:choice, q:exercise-with-check, q:run-cell]
+  mentions: [py:repr, c:regular-expression, py:re-findall]
   ladder: [torch]
   data: [tinystories, model-course-gpt-bpe]
   reference_data: [cosmopedia]
@@ -533,7 +533,8 @@ lessons:
   idea: "Simple rules and a small classifier throw out spam, boilerplate and broken text before training."
   covers: [datacuratie-en-mixtures#0, data-op-webschaal#3, capstone-zelf-een-kleine-llm-bouwen-en-trainen#4]
   requires: [llm-pretraining-data, ml-logistic-regression]
-  introduces: [c:quality-filter, c:stop-word, py:endswith, py:isalpha]
+  introduces: [c:quality-filter, py:endswith, py:isalpha]
+  mentions: [c:stop-word]
   uses: [c:pretraining-corpus, c:common-crawl, c:logistic-regression, c:sigmoid, c:feature, c:label, c:class, c:probability, c:language-model, c:gpt, c:token, c:bias-term, c:weight, c:gradient-descent, py:str, py:split, py:split-sep, py:strip, py:lower, py:str-join, py:f-string, py:set, py:set-add, py:tuple, py:min-max, py:list, py:append, py:for, py:if, py:comparison, py:bool, py:and-operator, py:or-operator, py:len, py:arithmetic, py:def, py:return, py:print, py:comment, py:underscore-name, py:string-literal, py:np-array, q:predict, q:choice, q:exercise-with-check, q:run-cell]
   data: [c4-noclean-sample-download-only, tinystories]
   needs: any

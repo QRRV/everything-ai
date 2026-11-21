@@ -236,7 +236,7 @@ lessons:
   idea: "Work through a derivation line by line, filling in the step the authors skipped, and check it numerically."
   covers: [wiskunde-in-papers-lezen#3]
   requires: [res-formula-to-code]
-  introduces: [p:check-a-derivation-numerically, c:derivation, py:np-var]
+  introduces: [p:check-a-derivation-numerically, c:math-derivation, py:np-var]
   uses: [c:variance, c:expected-value, c:normal-distribution, c:initialization, c:he-init, c:relu, c:weight, c:layer, c:bias-term, c:shape, c:paper, py:np-array, py:np-mean, py:np-std, py:np-sum, py:np-maximum, py:np-random-generator, py:tuple, py:def, py:return, py:print, py:comment, py:underscore-name, py:import-as, q:predict, q:choice, q:exercise-with-check, q:run-cell]
   ladder: [numpy]
   needs: any
@@ -409,6 +409,7 @@ lessons:
   covers: [een-reproduceerbare-paper-kiezen#0, een-reproduceerbare-paper-kiezen#2]
   requires: [repro-own-choose]
   introduces: [c:effect-size, c:preregistration]
+  mentions: [c:exact-match]
   uses: [p:repro-kit, p:reproduction-plan, p:choose-a-reproducible-paper, c:reproduction, c:falsifiable, c:cherry-picking, c:paper, c:seed, c:run, c:run-to-run-variance, c:noise, c:median, c:outlier, c:floating-point, c:accuracy, c:loss, c:dropout, c:gpu, c:module, c:json, c:negative-result, py:np-median, py:np-mean, py:list, py:dict, py:range, py:for, py:if, py:append, py:len, py:comparison, py:or-operator, py:def, py:return, py:import, py:string-literal, py:comment, py:underscore-name, py:print, q:predict, q:choice, q:explain, q:exercise-with-check, q:run-cell]
   needs: any
 

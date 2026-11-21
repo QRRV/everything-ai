@@ -991,7 +991,7 @@ lessons:
   requires: [math-exp-log]
   introduces: [v:log-scale, v:log-log-plot, c:power-law]
   uses: [c:exponent, c:logarithm, s:log, py:plot, v:line-plot, py:np-array, py:np-arange, c:array, c:vectorization, py:import, py:import-as, py:list, py:arithmetic, py:float, py:int, py:print, py:comment, py:variable, py:underscore-name, q:predict, q:choice, q:exercise-with-check, q:run-cell]
-  mentions: [c:language-model, c:model-parameter]
+  mentions: [c:language-model, c:model-parameter, c:zipfs-law]
   data: [tiny-shakespeare]
   ladder: [numpy]
   needs: any
