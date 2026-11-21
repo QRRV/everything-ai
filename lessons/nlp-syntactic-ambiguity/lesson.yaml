@@ -1,0 +1,38 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: nlp-syntactic-ambiguity
+minutes: 35
+title:
+  en: "One sentence, several trees"
+  nl: "Eén zin, meerdere bomen"
+goal:
+  en: "draw the two trees of a sentence in which a phrase can attach in two places, count how fast the bracketings of a phrase grow, and tell three kinds of ambiguity apart."
+  nl: "de twee bomen tekenen van een zin waarin een woordgroep op twee plekken kan aanhaken, tellen hoe snel de bracketings van een woordgroep groeien, en drie soorten ambiguïteit uit elkaar houden."
+summary:
+  - en: "A sentence has an attachment ambiguity when a phrase can attach to more than one place in its tree. With PP-attachment, a prepositional phrase can be part of the verb phrase or of a noun phrase; one rule more, NP → NP PP, gives a sentence such as *a long train passed the bridge near Chicago* its second tree."
+    nl: "Een zin heeft een attachment ambiguity als een woordgroep op meer dan één plek in de boom kan aanhaken. Bij PP-attachment kan een voorzetselgroep deel zijn van de werkwoordgroep of van een naamwoordgroep; één regel erbij, NP → NP PP, geeft een zin zoals *een lange trein passeerde de brug bij Breda* een tweede boom."
+  - en: "With coordination ambiguity, what *and* connects can be cut two ways: [old [men and women]] or [old men] and [women]. A word that can play two roles, as in many headlines, also gives the same words two trees."
+    nl: "Bij coordination ambiguity kun je op twee manieren knippen wat *en* verbindt: [oude [mannen en vrouwen]] of [oude mannen] en [vrouwen]. Een woord dat twee rollen kan spelen, zoals in veel koppen, geeft dezelfde woorden ook twee bomen."
+  - en: "The number of bracketings grows faster and faster with the length of a phrase: 1, 1, 2, 5, 14, 42 and on. You count it from short to long: split at the top, multiply the counts of the two parts, and add up over the splits."
+    nl: "Het aantal bracketings groeit steeds sneller met de lengte van een woordgroep: 1, 1, 2, 5, 14, 42 enzovoort. Je telt het van kort naar lang: deel bovenaan in tweeën, vermenigvuldig de aantallen van de twee delen, en tel op over de splitsingen."
+  - en: "The words often decide which tree is meant, and so can the form of a verb that fits only one of two nouns."
+    nl: "Vaak beslissen de woorden welke boom bedoeld is, en dat kan ook de vorm van een werkwoord die maar bij één van twee zelfstandige naamwoorden past."
+can_now:
+  - en: "turn a tree with a PP in the verb phrase into the tree with the PP in the noun phrase, and back"
+    nl: "een boom met de PP in de werkwoordgroep omzetten in de boom met de PP in de naamwoordgroep, en terug"
+    by: other_tree
+  - en: "count the bracketings of a phrase by building on the counts of shorter phrases"
+    nl: "de bracketings van een woordgroep tellen door voort te bouwen op de aantallen van kortere woordgroepen"
+    by: bracketings
+  - en: "tell attachment ambiguity, coordination ambiguity and a word with two roles apart"
+    nl: "attachment ambiguity, coordination ambiguity en een woord met twee rollen uit elkaar houden"
+    by: kinds
+  - en: "find the form of a verb that leaves a phrase one reading"
+    nl: "de vorm van een werkwoord vinden die een woordgroep één lezing laat"
+    by: agree
+further_reading:
+  - en: "Daniel Jurafsky and James H. Martin, [*Speech and Language Processing*, chapter 19](https://web.stanford.edu/~jurafsky/slp3/19.pdf), section 19.5: structural ambiguity, attachment and coordination"
+    nl: "Daniel Jurafsky en James H. Martin, [*Speech and Language Processing*, hoofdstuk 19](https://web.stanford.edu/~jurafsky/slp3/19.pdf), paragraaf 19.5: structurele ambiguïteit, attachment en coördinatie (in het Engels)"
+  - en: "Adwait Ratnaparkhi, Jeff Reynar and Salim Roukos, [*A Maximum Entropy Model for Prepositional Phrase Attachment*](https://aclanthology.org/H94-1048/) (1994): the experts with four words and with the whole sentence, and a program that learned from the treebank"
+    nl: "Adwait Ratnaparkhi, Jeff Reynar en Salim Roukos, [*A Maximum Entropy Model for Prepositional Phrase Attachment*](https://aclanthology.org/H94-1048/) (1994): de experts met vier woorden en met de hele zin, en een programma dat leerde van de treebank (in het Engels)"
