@@ -1,0 +1,40 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: nlp-conversation
+minutes: 35
+title:
+  en: "How a conversation works"
+  nl: "Hoe een gesprek werkt"
+goal:
+  en: "see how people take turns, make sure they understood each other and do something with each turn, and measure and label a conversation turn by turn in code."
+  nl: "zien hoe mensen om de beurt praten, nagaan of ze elkaar begrepen hebben en met elke beurt iets doen, en een gesprek in code beurt voor beurt meten en labelen."
+summary:
+  - en: "A conversation is a sequence of turns. In turn-taking, one speaker talks at a time, mostly; at a change of speaker, the start of the new turn minus the end of the old is the gap, and a negative gap is an overlap. A pause within one speaker's turn is no gap."
+    nl: "Een gesprek is een reeks beurten. Bij beurtwisseling praat er meestal één tegelijk; bij een sprekerswisseling is het begin van de nieuwe beurt min het einde van de vorige de overgangstijd, en een negatieve overgangstijd is overlap. Een pauze binnen de beurt van één spreker telt niet mee."
+  - en: "Some turns come in adjacency pairs, such as question and answer: once the first part is said, the second is the expected next turn."
+    nl: "Sommige beurten vormen een aangrenzend paar, zoals vraag en antwoord: is het eerste deel gezegd, dan is het tweede de verwachte volgende beurt."
+  - en: "Grounding is the work speaker and listener do to reach the shared belief that what was meant has been understood. Clark and Schaefer rank the evidence roughly from weak to strong: attention, the next relevant turn, an acknowledgment such as *mhm* (a backchannel), a demonstration in other words, and a display of the same words."
+    nl: "Grounding is wat spreker en luisteraar doen om tot de gedeelde overtuiging te komen dat begrepen is wat er bedoeld werd. Clark en Schaefer zetten de tekens van begrip ruwweg van zwak naar sterk: aandacht, de passende volgende beurt, een ontvangstbevestiging zoals *mhm* (een luistersignaal), een demonstratie in andere woorden en een letterlijke herhaling."
+  - en: "A dialogue act is what a turn does, as a label from a fixed list, such as statement, question or backchannel. Rules that look at the form of one turn miss that *yeah* after a question is an answer. In Switchboard, a trained program labeled 71 in 100 utterances right, and two people agreed on 84 in 100."
+    nl: "Een dialogue act is wat een beurt doet, als label uit een vaste lijst, zoals mededeling, vraag of luistersignaal. Regels die naar de vorm van één beurt kijken, missen dat *ja* na een vraag een antwoord is. In Switchboard gaf een getraind programma 71 van de 100 uitingen het goede label, en waren twee mensen het bij 84 van de 100 eens."
+can_now:
+  - en: "measure the gaps and overlaps at the changes of speaker in a conversation"
+    nl: "de stiltes en overlap bij de sprekerswisselingen in een gesprek meten"
+    by: gaps
+  - en: "label the turns of a conversation with simple dialogue acts, and see what such rules miss"
+    nl: "de beurten van een gesprek een eenvoudige dialogue act geven, en zien wat zulke regels missen"
+    by: label
+  - en: "tell how a listener shows understanding: by an acknowledgment, a demonstration or a display"
+    nl: "zeggen hoe een luisteraar begrip laat zien: met een ontvangstbevestiging, een demonstratie of een letterlijke herhaling"
+    by: evidence
+  - en: "tell an answer from a backchannel by the turn before it"
+    nl: "een antwoord en een luistersignaal uit elkaar houden aan de hand van de beurt ervoor"
+    by: yeah
+further_reading:
+  - en: "Tanya Stivers and colleagues, [*Universals and cultural variation in turn-taking in conversation*](https://doi.org/10.1073/pnas.0903616106), PNAS 106(26), 2009: the gaps before responses to yes/no questions in ten languages"
+    nl: "Tanya Stivers en collega's, [*Universals and cultural variation in turn-taking in conversation*](https://doi.org/10.1073/pnas.0903616106), PNAS 106(26), 2009: de overgangstijden na ja-neevragen in tien talen (in het Engels)"
+  - en: "Herbert Clark and Susan Brennan, [*Grounding in Communication*](https://web.stanford.edu/~clark/1990s/Clark,%20H.H.%20_%20Brennan,%20S.E.%20_Grounding%20in%20communication_%201991.pdf) (1991): grounding, acknowledgments and when understanding is good enough"
+    nl: "Herbert Clark en Susan Brennan, [*Grounding in Communication*](https://web.stanford.edu/~clark/1990s/Clark,%20H.H.%20_%20Brennan,%20S.E.%20_Grounding%20in%20communication_%201991.pdf) (1991): grounding, ontvangstbevestigingen en wanneer begrip goed genoeg is (in het Engels)"
+  - en: "Andreas Stolcke and colleagues, [*Dialogue Act Modeling for Automatic Tagging and Recognition of Conversational Speech*](https://aclanthology.org/J00-3003/), Computational Linguistics 26(3), 2000: the 42 dialogue acts of Switchboard and a program that labels them"
+    nl: "Andreas Stolcke en collega's, [*Dialogue Act Modeling for Automatic Tagging and Recognition of Conversational Speech*](https://aclanthology.org/J00-3003/), Computational Linguistics 26(3), 2000: de 42 dialogue acts van Switchboard en een programma dat die labels toekent (in het Engels)"
