@@ -1643,6 +1643,8 @@ lessons:
   covers: [grenzen-van-leren-van-menselijke-feedback#0]
   requires: [rai-outer-inner-alignment, rai-wellbeing]
   introduces: [c:intent-alignment, c:value-alignment]
+  warns: [FAIR principles]
+  mentions: [c:model-spec]
   data: []
   ladder: [python]
   needs: any

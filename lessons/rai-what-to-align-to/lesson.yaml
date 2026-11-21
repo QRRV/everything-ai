@@ -1,0 +1,46 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: rai-what-to-align-to
+minutes: 40
+title:
+  en: "Aligned with what?"
+  nl: "Afgestemd waarop?"
+goal:
+  en: "tell intent alignment from value alignment, count where what people say and what they choose disagree, and find preferences that go round in a circle."
+  nl: "intent alignment en value alignment uit elkaar houden, tellen waar wat mensen zeggen en wat ze kiezen botsen, en voorkeuren vinden die in een kring rondgaan."
+summary:
+  - en: "Intent alignment, in Paul Christiano's definition of 2018, means that an AI tries to do what a person wants it to do. It is about motives, not knowledge, so an AI can be wrong about a fact and still be aligned."
+    nl: "Intent alignment betekent in de definitie van Paul Christiano uit 2018 dat een AI probeert te doen wat iemand wil dat de AI doet. Het gaat om motieven, niet om kennis, dus een AI kan zich in een feit vergissen en toch afgestemd zijn."
+  - en: "Iason Gabriel (2020) lists six targets: instructions, expressed intentions, revealed preferences, informed preferences or desires, interest or well-being, and values. Gabriel argues against the first three alone, and for fair principles that people with different moral beliefs can endorse."
+    nl: "Iason Gabriel (2020) noemt zes doelen: instructies, uitgesproken bedoelingen, geopenbaarde voorkeuren, geïnformeerde voorkeuren of verlangens, belang of welzijn, en waarden. Volgens Gabriel zijn de eerste drie alleen niet genoeg, en zijn faire principes nodig die mensen met verschillende morele overtuigingen kunnen onderschrijven."
+  - en: "What people say they prefer, what they choose and what they would want if they knew more can differ. Preferences can even go round in a circle, as with Russell's three flavors of ice cream; then no choice satisfies them best."
+    nl: "Wat mensen zeggen te verkiezen, wat ze kiezen en wat ze zouden willen als ze meer wisten, kan verschillen. Voorkeuren kunnen zelfs in een kring rondgaan, zoals bij de drie ijssmaken van Russell; dan voldoet geen keuze er het best aan."
+  - en: "Training on human ratings aims at approval, and Sharma et al. (2024) find sycophancy likely driven in part by human preference judgments. Anthropic's constitution and OpenAI's Model Spec ask for more than following instructions literally, without overriding what users decide for themselves."
+    nl: "Trainen op menselijke beoordelingen mikt op goedkeuring, en volgens Sharma et al. (2024) komt sycophancy waarschijnlijk deels voort uit menselijke oordelen over voorkeuren. De constitution van Anthropic en de Model Spec van OpenAI vragen meer dan instructies letterlijk volgen, maar zonder in de plaats van gebruikers te beslissen."
+can_now:
+  - en: "count the choices that go against a ranking someone states"
+    nl: "de keuzes tellen die ingaan tegen een rangorde die iemand uitspreekt"
+    by: contradictions
+  - en: "find preferences that go round in a circle of three"
+    nl: "voorkeuren vinden die in een kring van drie rondgaan"
+    by: circle
+  - en: "weigh what someone asks for against what they would want on reflection"
+    nl: "afwegen wat iemand vraagt en wat die persoon na nadenken zou willen"
+    by: letter
+  - en: "tell a mistake of knowledge from a lack of alignment in Christiano's sense"
+    nl: "een vergissing in kennis onderscheiden van een gebrek aan alignment in de zin van Christiano"
+    by: train
+further_reading:
+  - en: "Iason Gabriel, [*Artificial Intelligence, Values, and Alignment*](https://arxiv.org/abs/2001.09768) (Minds and Machines, 2020): the six targets, and fair principles for alignment"
+    nl: "Iason Gabriel, [*Artificial Intelligence, Values, and Alignment*](https://arxiv.org/abs/2001.09768) (Minds and Machines, 2020): de zes doelen, en faire principes voor alignment (in het Engels)"
+  - en: "Paul Christiano, [*Clarifying \"AI Alignment\"*](https://www.alignmentforum.org/posts/ZeE7EKHTFMBs8eMxn/clarifying-ai-alignment) (AI Alignment Forum, 2018): alignment as trying to do what someone wants"
+    nl: "Paul Christiano, [*Clarifying \"AI Alignment\"*](https://www.alignmentforum.org/posts/ZeE7EKHTFMBs8eMxn/clarifying-ai-alignment) (AI Alignment Forum, 2018): alignment als proberen te doen wat iemand wil (in het Engels)"
+  - en: "Mrinank Sharma and colleagues, [*Towards Understanding Sycophancy in Language Models*](https://arxiv.org/abs/2310.13548) (ICLR 2024)"
+    nl: "Mrinank Sharma en collega's, [*Towards Understanding Sycophancy in Language Models*](https://arxiv.org/abs/2310.13548) (ICLR 2024) (in het Engels)"
+  - en: "Stephen Casper and colleagues, [*Open Problems and Fundamental Limitations of Reinforcement Learning from Human Feedback*](https://arxiv.org/abs/2307.15217) (preprint, version of 11 September 2023)"
+    nl: "Stephen Casper en collega's, [*Open Problems and Fundamental Limitations of Reinforcement Learning from Human Feedback*](https://arxiv.org/abs/2307.15217) (preprint, versie van 11 september 2023) (in het Engels)"
+  - en: "Tan Zhi-Xuan and colleagues, [*Beyond Preferences in AI Alignment*](https://arxiv.org/abs/2408.16984) (version of 6 November 2024): alignment with the standards of a role instead of with preferences"
+    nl: "Tan Zhi-Xuan en collega's, [*Beyond Preferences in AI Alignment*](https://arxiv.org/abs/2408.16984) (versie van 6 november 2024): alignment met de normen van een rol in plaats van met voorkeuren (in het Engels)"
+  - en: "Sven Ove Hansson and Till Grüne-Yanoff, [*Preferences*](https://plato.stanford.edu/entries/preferences/), Stanford Encyclopedia of Philosophy (substantive revision of 14 March 2022)"
+    nl: "Sven Ove Hansson en Till Grüne-Yanoff, [*Preferences*](https://plato.stanford.edu/entries/preferences/), Stanford Encyclopedia of Philosophy (ingrijpend herzien op 14 maart 2022) (in het Engels)"
