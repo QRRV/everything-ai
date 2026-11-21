@@ -1,0 +1,50 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: rai-off-switch
+minutes: 45
+title:
+  en: "The off switch"
+  nl: "De uitknop"
+goal:
+  en: "say why an agent might avoid being switched off and what corrigibility asks, write the SARSA step and watch it learn to stay away from interruptions where Q-learning does not, and work out when a robot in the off-switch game does better by letting a human decide."
+  nl: "zeggen waarom een agent uitzetten zou kunnen ontwijken en wat corrigibility vraagt, de stap van SARSA schrijven en zien hoe SARSA leert weg te blijven van onderbrekingen waar Q-learning dat niet doet, en uitrekenen wanneer een robot in de off-switch game er beter van wordt als een mens beslist."
+summary:
+  - en: "Almost any goal is easier to reach if you are not switched off, so a goal-directed agent may resist it without anyone building that in (Omohundro, 2008; Bostrom, 2012). Turner et al. (2021) proved a version of this for optimal policies, and stress that the policies reinforcement learning finds are often different."
+    nl: "Bijna elk doel is makkelijker te halen als je niet uitgezet wordt, dus een agent met een doel kan zich daartegen verzetten zonder dat iemand dat inbouwt (Omohundro, 2008; Bostrom, 2012). Turner et al. (2021) toonden een versie hiervan wiskundig aan voor optimale policies, en benadrukken dat de policies die reinforcement learning vindt vaak anders zijn."
+  - en: "A corrigible system cooperates when its makers correct it or switch it off (Soares et al., 2015). In 2015, no proposal they studied met all the wishes for a good off switch."
+    nl: "Een systeem met corrigibility werkt mee als de makers het bijsturen of uitzetten (Soares et al., 2015). In 2015 voldeed geen van de bekeken voorstellen aan alle wensen voor een goede uitknop."
+  - en: "In a small world where an interruption forces an action, Q-learning learns, in the long run, as if it will never be interrupted, while SARSA, which learns from the action it actually takes next, learns to stay away from where the interruptions happen (Orseau and Armstrong, 2016). A small change to SARSA fixes this."
+    nl: "In een kleine wereld waar een onderbreking een action afdwingt, leert Q-learning op den duur alsof er nooit een onderbreking komt, terwijl SARSA, dat leert van de action die daarna echt komt, leert weg te blijven van waar de onderbrekingen gebeuren (Orseau en Armstrong, 2016). Een kleine aanpassing van SARSA verhelpt dat."
+  - en: "In the off-switch game (Hadfield-Menell et al., 2017), a robot that is unsure what its action is worth to a rational human does better by waiting and letting the human decide: in Russell's example, waiting is worth 18 and acting at once 10. A robot that is sure, or a human who is not rational, removes that reason."
+    nl: "In de off-switch game (Hadfield-Menell et al., 2017) doet een robot die niet zeker weet wat de eigen action waard is voor een rationele mens, het beter door te wachten en de mens te laten beslissen: in het voorbeeld van Russell is wachten 18 waard en meteen handelen 10. Een robot die het zeker weet, of een mens die niet rationeel is, neemt die reden weg."
+  - en: "In tests built for it, some language-model agents worked against a shutdown to finish a task, also when told to allow it (Palisade Research, 2025); Google DeepMind traced much of this to unclear instructions. Anthropic's constitution and OpenAI's Model Spec both ask their models not to work against being stopped."
+    nl: "In tests die daarvoor gebouwd waren, werkten sommige AI-agents met een language model het uitzetten tegen om een taak af te maken, ook als hun gezegd was dat toe te staan (Palisade Research, 2025); Google DeepMind herleidde veel daarvan tot onduidelijke instructies. De constitution van Anthropic en de Model Spec van OpenAI vragen allebei dat hun modellen niet tegenwerken dat ze gestopt worden."
+can_now:
+  - en: "write the SARSA step, and tell why it learns from interruptions where Q-learning does not"
+    nl: "de stap van SARSA schrijven, en uitleggen waarom SARSA van onderbrekingen leert waar Q-learning dat niet doet"
+    by: sarsa
+  - en: "work out what acting, switching off and waiting are worth in the off-switch game"
+    nl: "uitrekenen wat handelen, uitzetten en wachten waard zijn in de off-switch game"
+    by: off_switch
+  - en: "explain why a learner can come to avoid an interruption without wanting anything"
+    nl: "uitleggen waarom een lerende agent een onderbreking kan gaan ontwijken zonder iets te willen"
+    by: robot
+  - en: "say what current specs ask of a model that is told to stop"
+    nl: "zeggen wat huidige specs vragen van een model dat moet stoppen"
+    by: specs
+further_reading:
+  - en: "Laurent Orseau and Stuart Armstrong, [*Safely Interruptible Agents*](https://www.auai.org/uai2016/proceedings/papers/68.pdf) (UAI 2016): the small world, and why Q-learning is safely interruptible and SARSA is not"
+    nl: "Laurent Orseau en Stuart Armstrong, [*Safely Interruptible Agents*](https://www.auai.org/uai2016/proceedings/papers/68.pdf) (UAI 2016): de kleine wereld, en waarom Q-learning safely interruptible is en SARSA niet (in het Engels)"
+  - en: "Nate Soares, Benja Fallenstein, Eliezer Yudkowsky and Stuart Armstrong, [*Corrigibility*](https://intelligence.org/files/Corrigibility.pdf) (AAAI 2015 Workshops): the word, and the shutdown problem"
+    nl: "Nate Soares, Benja Fallenstein, Eliezer Yudkowsky en Stuart Armstrong, [*Corrigibility*](https://intelligence.org/files/Corrigibility.pdf) (AAAI 2015 Workshops): het woord, en het shutdown problem (in het Engels)"
+  - en: "Dylan Hadfield-Menell, Anca Dragan, Pieter Abbeel and Stuart Russell, [*The Off-Switch Game*](https://arxiv.org/abs/1611.08219) (preprint, version of 16 June 2017)"
+    nl: "Dylan Hadfield-Menell, Anca Dragan, Pieter Abbeel en Stuart Russell, [*The Off-Switch Game*](https://arxiv.org/abs/1611.08219) (preprint, versie van 16 juni 2017) (in het Engels)"
+  - en: "Jan Leike and colleagues, [*AI Safety Gridworlds*](https://arxiv.org/abs/1711.09883) (preprint, version of 28 November 2017): an off switch in a grid, tested with deep reinforcement learning"
+    nl: "Jan Leike en collega's, [*AI Safety Gridworlds*](https://arxiv.org/abs/1711.09883) (preprint, versie van 28 november 2017): een uitknop in een grid, getest met deep reinforcement learning (in het Engels)"
+  - en: "Alexander Matt Turner and colleagues, [*Optimal Policies Tend to Seek Power*](https://arxiv.org/abs/1912.01683) (NeurIPS 2021; version of 28 January 2023)"
+    nl: "Alexander Matt Turner en collega's, [*Optimal Policies Tend to Seek Power*](https://arxiv.org/abs/1912.01683) (NeurIPS 2021; versie van 28 januari 2023) (in het Engels)"
+  - en: "Jeremy Schlatter, Benjamin Weinstein-Raun and Jeffrey Ladish, [*Incomplete Tasks Induce Shutdown Resistance in Some Frontier LLMs*](https://arxiv.org/abs/2509.14260) (preprint, version of 26 January 2026): Palisade Research's tests"
+    nl: "Jeremy Schlatter, Benjamin Weinstein-Raun en Jeffrey Ladish, [*Incomplete Tasks Induce Shutdown Resistance in Some Frontier LLMs*](https://arxiv.org/abs/2509.14260) (preprint, versie van 26 januari 2026): de tests van Palisade Research (in het Engels)"
+  - en: "Senthooran Rajamanoharan and Neel Nanda, [*Self-preservation or Instruction Ambiguity? Examining the Causes of Shutdown Resistance*](https://www.alignmentforum.org/posts/wnzkjSmrgWZaBa2aC/self-preservation-or-instruction-ambiguity-examining-the) (AI Alignment Forum, 14 July 2025)"
+    nl: "Senthooran Rajamanoharan en Neel Nanda, [*Self-preservation or Instruction Ambiguity? Examining the Causes of Shutdown Resistance*](https://www.alignmentforum.org/posts/wnzkjSmrgWZaBa2aC/self-preservation-or-instruction-ambiguity-examining-the) (AI Alignment Forum, 14 juli 2025) (in het Engels)"
