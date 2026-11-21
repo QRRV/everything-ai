@@ -1,0 +1,48 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: rai-ai-for-defense
+minutes: 40
+title:
+  en: "AI for defense"
+  nl: "AI voor de verdediging"
+goal:
+  en: "explain what systemic safety is, work out in Garfinkel and Dafoe's model how the offense-defense balance shifts when both sides invest more, read the numbers of two cases where AI helped defenders, and weigh who gains more from AI in cybersecurity."
+  nl: "uitleggen wat systemic safety is, in het model van Garfinkel en Dafoe uitrekenen hoe de offense-defense balance verandert als beide kanten meer investeren, de getallen lezen van twee gevallen waarin AI verdedigers hielp, en afwegen wie er meer wint met AI in cybersecurity."
+summary:
+  - en: "Systemic safety uses ML to make the context around AI systems safer, such as defenses against cyberattacks, security against pandemics and a better information environment. Hendrycks's textbook adds that AI is not the only solution."
+    nl: "Systemic safety zet ML in om de omgeving van AI-systemen veiliger te maken, zoals verdediging tegen cyberaanvallen, beveiliging tegen pandemieën en een betere informatieomgeving. Het leerboek van Hendrycks voegt eraan toe dat AI niet de enige oplossing is."
+  - en: "The offense-defense balance is how easy attacking is compared with defending, for one objective, form of conflict and set of actors. In Garfinkel and Dafoe's idealized model (2019), more investment on both sides first favors the attacker, then the defender: OD-scaling."
+    nl: "De offense-defense balance is hoe makkelijk aanvallen is vergeleken met verdedigen, voor één doel, vorm van conflict en groep betrokkenen. In het geïdealiseerde model van Garfinkel en Dafoe (2019) bevoordeelt meer investeren aan beide kanten eerst de aanvaller en dan de verdediger: OD-scaling."
+  - en: "AI already helps defenders: Google's Big Sleep found a vulnerability in SQLite before it appeared in an official release, and in DARPA's AI Cyber Challenge, AI systems found and patched vulnerabilities in real open-source software. A percentage says little until you know what it is a share of."
+    nl: "AI helpt verdedigers nu al: Big Sleep van Google vond een kwetsbaarheid in SQLite voordat die in een officiële release stond, en in de AI Cyber Challenge van DARPA vonden en dichtten AI-systemen kwetsbaarheden in echte open-source software. Een percentage zegt weinig zolang je niet weet waarvan het een deel is."
+  - en: "Who gains more is uncertain. The International AI Safety Report 2026 says it depends in part on choices about model access, research funding and deployment standards, and Shevlane and Dafoe (2020) tentatively argue that publishing AI research helps defense less often than publishing software vulnerabilities."
+    nl: "Wie er meer wint, is onzeker. Volgens het International AI Safety Report 2026 hangt het deels af van keuzes over toegang tot modellen, geld voor onderzoek en normen voor de inzet van AI, en Shevlane en Dafoe (2020) betogen voorzichtig dat publiceren van AI-onderzoek de verdediging minder vaak helpt dan publiceren van kwetsbaarheden in software."
+can_now:
+  - en: "work out the expected number of zero days for an attacker and a defender in Garfinkel and Dafoe's model"
+    nl: "het verwachte aantal zero days voor een aanvaller en een verdediger uitrekenen in het model van Garfinkel en Dafoe"
+    by: zero_days
+  - en: "follow how, in the model, better tools for both sides first help the attacker and then the defender"
+    nl: "volgen hoe beter gereedschap voor beide kanten in het model eerst de aanvaller helpt en dan de verdediger"
+    by: scaled
+  - en: "check what a percentage in a report is a share of"
+    nl: "nagaan waarvan een percentage in een verslag een deel is"
+    by: percent
+  - en: "explain why publishing an AI method can help defense less than publishing a software vulnerability"
+    nl: "uitleggen waarom publiceren van een AI-methode de verdediging minder kan helpen dan publiceren van een kwetsbaarheid in software"
+    by: voice
+further_reading:
+  - en: "Dan Hendrycks, Nicholas Carlini, John Schulman and Jacob Steinhardt, [*Unsolved Problems in ML Safety*](https://arxiv.org/abs/2109.13916) (version 5, 2022), section 5, *Systemic Safety*"
+    nl: "Dan Hendrycks, Nicholas Carlini, John Schulman en Jacob Steinhardt, [*Unsolved Problems in ML Safety*](https://arxiv.org/abs/2109.13916) (versie 5, 2022), paragraaf 5, *Systemic Safety* (in het Engels)"
+  - en: "Dan Hendrycks, [*Introduction to AI Safety, Ethics, and Society*](https://arxiv.org/abs/2411.01042) (2024), section 3.5, *Systemic Safety*"
+    nl: "Dan Hendrycks, [*Introduction to AI Safety, Ethics, and Society*](https://arxiv.org/abs/2411.01042) (2024), paragraaf 3.5, *Systemic Safety* (in het Engels)"
+  - en: "Ben Garfinkel and Allan Dafoe, [*How does the offense-defense balance scale?*](https://ora.ox.ac.uk/objects/uuid:b537fa1a-f1df-4659-9405-979bc46dc67b/files/sff3655292), Journal of Strategic Studies 42:6 (2019): OD-scaling, and the model of zero days"
+    nl: "Ben Garfinkel en Allan Dafoe, [*How does the offense-defense balance scale?*](https://ora.ox.ac.uk/objects/uuid:b537fa1a-f1df-4659-9405-979bc46dc67b/files/sff3655292), Journal of Strategic Studies 42:6 (2019): OD-scaling, en het model van zero days (in het Engels)"
+  - en: "The Big Sleep team, [*From Naptime to Big Sleep*](https://projectzero.google/2024/10/from-naptime-to-big-sleep.html) (1 November 2024): the vulnerability in SQLite, and the team's caveats"
+    nl: "Het Big Sleep-team, [*From Naptime to Big Sleep*](https://projectzero.google/2024/10/from-naptime-to-big-sleep.html) (1 november 2024): de kwetsbaarheid in SQLite, en de kanttekeningen van het team (in het Engels)"
+  - en: "DARPA, [*AI Cyber Challenge marks pivotal inflection point for cyber defense*](https://www.darpa.mil/news/2025/aixcc-results) (8 August 2025): the results of the final, with the editor's note"
+    nl: "DARPA, [*AI Cyber Challenge marks pivotal inflection point for cyber defense*](https://www.darpa.mil/news/2025/aixcc-results) (8 augustus 2025): de uitslag van de finale, met de noot van de redactie (in het Engels)"
+  - en: "[*International AI Safety Report 2026*](https://internationalaisafetyreport.org/publication/international-ai-safety-report-2026) (February 2026), section 2.1.3, *Cyberattacks*"
+    nl: "[*International AI Safety Report 2026*](https://internationalaisafetyreport.org/publication/international-ai-safety-report-2026) (februari 2026), paragraaf 2.1.3, *Cyberattacks* (in het Engels)"
+  - en: "Toby Shevlane and Allan Dafoe, [*The Offense-Defense Balance of Scientific Knowledge: Does Publishing AI Research Reduce Misuse?*](https://arxiv.org/abs/2001.00463), AIES 2020"
+    nl: "Toby Shevlane en Allan Dafoe, [*The Offense-Defense Balance of Scientific Knowledge: Does Publishing AI Research Reduce Misuse?*](https://arxiv.org/abs/2001.00463), AIES 2020 (in het Engels)"
