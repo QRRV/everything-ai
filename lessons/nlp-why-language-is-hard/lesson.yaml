@@ -1,0 +1,40 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: nlp-why-language-is-hard
+minutes: 30
+title:
+  en: "Why language is hard for computers"
+  nl: "Waarom taal moeilijk is voor computers"
+goal:
+  en: "name three reasons why language is hard for a program, count the readings a sentence gets from words with several meanings, and map spelling variants to one form."
+  nl: "drie redenen noemen waarom taal moeilijk is voor een programma, tellen hoeveel lezingen een zin krijgt door woorden met meer betekenissen, en spellingvarianten terugbrengen tot één vorm."
+summary:
+  - en: "Hirschberg and Manning (2015) give three reasons why writing down the rules of a language was hard: ambiguity, variation and context."
+    nl: "Hirschberg en Manning (2015) geven drie redenen waarom de regels van een taal opschrijven moeilijk was: ambiguïteit, variatie en context."
+  - en: "Ambiguity is when a word or a sentence can mean more than one thing: a word with two meanings or roles, or a sentence with more than one parse, as in *I shot an elephant in my pajamas*."
+    nl: "Ambiguïteit is als een woord of een zin meer dan één ding kan betekenen: een woord met twee betekenissen of rollen, of een zin met meer dan één parse, zoals *I shot an elephant in my pajamas*."
+  - en: "The readings multiply: three words with two roles each give 8. The ways to attach phrases such as *in the box* grow faster still, along the Catalan numbers, as Church and Patil (1982) showed."
+    nl: "De lezingen vermenigvuldigen zich: drie woorden met elk twee rollen geven er 8. De manieren om voorzetselgroepen zoals *in the box* aan te haken groeien nog sneller, volgens de Catalan-getallen, zoals Church en Patil (1982) lieten zien."
+  - en: "One meaning has many forms: spelling, dialect, languages mixed in one message, genre. And what a sentence means can depend on what a reader knows about the world, as the Winograd schemas show."
+    nl: "Eén betekenis heeft veel vormen: spelling, dialect, talen door elkaar in één bericht, genre. En wat een zin betekent, kan afhangen van wat een lezer over de wereld weet, zoals de Winograd-schema's laten zien."
+can_now:
+  - en: "count the ways to read a sentence when words have several meanings"
+    nl: "tellen op hoeveel manieren een zin te lezen is als woorden meer betekenissen hebben"
+    by: readings
+  - en: "map spelling variants to one standard form"
+    nl: "spellingvarianten terugbrengen tot één standaardvorm"
+    by: canonical
+  - en: "say why knowledge of the world can decide what a word points to"
+    nl: "zeggen waarom kennis van de wereld kan bepalen waar een woord naar wijst"
+    by: trophy
+  - en: "recognize a word that can be read in two roles"
+    nl: "een woord herkennen dat in twee rollen te lezen is"
+    by: blossoms
+further_reading:
+  - en: "Church and Patil (1982), [*Coping with Syntactic Ambiguity or How to Put the Block in the Box on the Table*](https://aclanthology.org/J82-3004.pdf): the Catalan numbers in sentences"
+    nl: "Church en Patil (1982), [*Coping with Syntactic Ambiguity or How to Put the Block in the Box on the Table*](https://aclanthology.org/J82-3004.pdf): de Catalan-getallen in zinnen (in het Engels)"
+  - en: "Levesque, Davis and Morgenstern (2012), [*The Winograd Schema Challenge*](https://cs.nyu.edu/~ed1/papers/WSKR2012.pdf): pairs of sentences that need knowledge of the world"
+    nl: "Levesque, Davis en Morgenstern (2012), [*The Winograd Schema Challenge*](https://cs.nyu.edu/~ed1/papers/WSKR2012.pdf): paren zinnen die kennis van de wereld vragen (in het Engels)"
+  - en: "Ben Zimmer (2009), [*Crash blossoms*](https://languagelog.ldc.upenn.edu/nll/?p=1693), on *Language Log*: how the name came about"
+    nl: "Ben Zimmer (2009), [*Crash blossoms*](https://languagelog.ldc.upenn.edu/nll/?p=1693), op *Language Log*: hoe de naam ontstond (in het Engels)"

@@ -1,0 +1,40 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: nlp-what-is-nlp
+minutes: 30
+title:
+  en: "What NLP is"
+  nl: "Wat NLP is"
+goal:
+  en: "say what natural language processing and computational linguistics are, sort a system by what it does with language, and write a first step that finds what a request is about."
+  nl: "zeggen wat natural language processing en computationele linguïstiek zijn, een systeem indelen naar wat het met taal doet, en een eerste stap schrijven die vindt waar een verzoek over gaat."
+summary:
+  - en: "Natural language processing (NLP) is the field of computers that work with human language. Hirschberg and Manning (2015) name three verbs for it: learning, understanding and producing."
+    nl: "Natural language processing (NLP) is het vakgebied van computers die met menselijke taal werken. Hirschberg en Manning (2015) noemen er drie werkwoorden bij: leren, begrijpen en maken."
+  - en: "Computational linguistics studies language itself with computers. The ACL and Hirschberg and Manning treat it as another name for NLP; Jurafsky and Martin write that it is sometimes kept apart, as the science next to the engineering."
+    nl: "Computationele linguïstiek bestudeert taal zelf met computers. De ACL en Hirschberg en Manning zien het als een andere naam voor NLP; Jurafsky en Martin schrijven dat het soms apart wordt gehouden, als de wetenschap naast de techniek."
+  - en: "NLP has two sides: understanding (NLU) goes from language to what it means, and making (NLG) goes from data or meaning to language. A spam filter only understands, and a weather report written from numbers only makes text."
+    nl: "NLP heeft twee kanten: begrijpen (NLU) gaat van taal naar wat die betekent, en maken (NLG) gaat van data of betekenis naar taal. Een spamfilter begrijpt alleen, en een weerbericht uit getallen maakt alleen tekst."
+  - en: "Keywords can find what a request is about, but they find letters, not meaning: a lock that won't open is taken for a question about opening hours."
+    nl: "Trefwoorden kunnen vinden waar een verzoek over gaat, maar ze vinden letters, geen betekenis: een slot dat niet open wil, wordt aangezien voor een vraag over openingstijden."
+can_now:
+  - en: "sort a system into the two sides of NLP by what goes in and what comes out"
+    nl: "een systeem indelen in de twee kanten van NLP naar wat erin gaat en wat eruit komt"
+    by: side
+  - en: "find what a request is about with a list of keywords for each kind"
+    nl: "vinden waar een verzoek over gaat met een lijst trefwoorden voor elke soort"
+    by: intent
+  - en: "tell computational linguistics from NLP where people keep them apart"
+    nl: "computationele linguïstiek en NLP uit elkaar houden waar mensen dat doen"
+    by: names
+  - en: "say why keywords alone do not understand a request"
+    nl: "zeggen waarom trefwoorden alleen een verzoek niet begrijpen"
+    by: open
+further_reading:
+  - en: "Hirschberg and Manning (2015), [*Advances in natural language processing*](https://cs224d.stanford.edu/papers/advances.pdf), in *Science*: what NLP is and what it could do in 2015"
+    nl: "Hirschberg en Manning (2015), [*Advances in natural language processing*](https://cs224d.stanford.edu/papers/advances.pdf), in *Science*: wat NLP is en wat het in 2015 kon (in het Engels)"
+  - en: "The ACL, [*What is Computational Linguistics?*](https://www.aclweb.org/portal/what-is-cl): the field described by its own association"
+    nl: "De ACL, [*What is Computational Linguistics?*](https://www.aclweb.org/portal/what-is-cl): het vakgebied beschreven door de eigen vereniging (in het Engels)"
+  - en: "Jurafsky and Martin, [*Speech and Language Processing*](https://web.stanford.edu/~jurafsky/slp3/), third edition, draft of August 19, 2026: the textbook of the field, free online"
+    nl: "Jurafsky en Martin, [*Speech and Language Processing*](https://web.stanford.edu/~jurafsky/slp3/), derde editie, versie van 19 augustus 2026: het leerboek van het vakgebied, gratis online (in het Engels)"

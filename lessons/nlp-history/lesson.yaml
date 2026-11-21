@@ -1,0 +1,40 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: nlp-history
+minutes: 30
+title:
+  en: "From rules to statistics to neural networks"
+  nl: "Van regels via statistiek naar neural networks"
+goal:
+  en: "tell the three periods of NLP apart, learn a translation from sentence pairs by counting, and score systems on one fixed test set."
+  nl: "de drie periodes van NLP uit elkaar houden, een vertaling leren uit zinsparen door te tellen, en systemen scoren op één vaste testset."
+summary:
+  - en: "NLP was first built from rules written by hand, as in the Georgetown–IBM demonstration of 1954, ELIZA and SHRDLU. The ALPAC report of 1966 saw no prospect of useful machine translation."
+    nl: "NLP werd eerst gebouwd uit regels die met de hand geschreven waren, zoals in de demonstratie van Georgetown en IBM in 1954, ELIZA en SHRDLU. Het ALPAC-rapport van 1966 zag geen uitzicht op bruikbare machinevertaling."
+  - en: "Statistics took over step by step, from speech recognition in the 1970s to translation in the late 1980s: models learned from large amounts of text, such as the Canadian parliament's debates in English and French, and the Penn Treebank of 1993."
+    nl: "De statistiek nam het stap voor stap over, van spraakherkenning in de jaren zeventig tot vertalen eind jaren tachtig: modellen leerden uit grote hoeveelheden tekst, zoals de debatten van het Canadese parlement in het Engels en het Frans, en de Penn Treebank van 1993."
+  - en: "Neural networks followed: a neural language model in 2003, whole sentences translated in 2014, the Transformer in 2017 and ChatGPT in 2022. The periods overlap, and their dates are rough."
+    nl: "Daarna kwamen neural networks: een neural language model in 2003, hele zinnen vertaald in 2014, de Transformer in 2017 en ChatGPT in 2022. De periodes lopen door elkaar, en hun jaartallen zijn ruw."
+  - en: "A shared task gives every team the same data and the same score, as Senseval, CoNLL and WMT do. A score means something only next to scores on the same test data."
+    nl: "Een shared task geeft elk team dezelfde data en dezelfde score, zoals Senseval, CoNLL en WMT doen. Een score betekent pas iets naast scores op dezelfde testdata."
+can_now:
+  - en: "learn which word translates another by counting in sentence pairs"
+    nl: "door te tellen in zinsparen leren welk woord een ander vertaalt"
+    by: cooccur
+  - en: "score systems as the share of right answers on one test set"
+    nl: "systemen scoren als het deel goede antwoorden op één testset"
+    by: score
+  - en: "say what the turn from rules to statistics was about"
+    nl: "zeggen waar de omslag van regels naar statistiek over ging"
+    by: linguist
+  - en: "say why two scores on different data cannot be compared"
+    nl: "zeggen waarom twee scores op verschillende data niet te vergelijken zijn"
+    by: compare
+further_reading:
+  - en: "John Hutchins (2004), [*The Georgetown-IBM experiment demonstrated in January 1954*](https://www.hutchinsweb.me.uk/AMTA-2004.pdf): what was shown, and what the press made of it"
+    nl: "John Hutchins (2004), [*The Georgetown-IBM experiment demonstrated in January 1954*](https://www.hutchinsweb.me.uk/AMTA-2004.pdf): wat er te zien was, en wat de pers ervan maakte (in het Engels)"
+  - en: "Jurafsky and Martin, [*Speech and Language Processing*](https://web.stanford.edu/~jurafsky/slp3/), third edition, draft of August 19, 2026: the historical notes at the end of the chapters"
+    nl: "Jurafsky en Martin, [*Speech and Language Processing*](https://web.stanford.edu/~jurafsky/slp3/), derde editie, versie van 19 augustus 2026: de historische noten aan het eind van de hoofdstukken (in het Engels)"
+  - en: "Erik F. Tjong Kim Sang (2002), [*Introduction to the CoNLL-2002 Shared Task*](https://aclanthology.org/W02-2024.pdf): a shared task with Dutch data"
+    nl: "Erik F. Tjong Kim Sang (2002), [*Introduction to the CoNLL-2002 Shared Task*](https://aclanthology.org/W02-2024.pdf): een shared task met Nederlandse data (in het Engels)"

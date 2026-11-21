@@ -44,7 +44,7 @@ lessons:
   covers: [wat-nlp-is#3, wat-nlp-is#5]
   requires: [nlp-why-language-is-hard]
   introduces: [c:shared-task]
-  mentions: [c:language-model, c:neural-language-model]
+  mentions: [c:language-model, c:neural-language-model, c:machine-translation]
   data: []
   ladder: [python]
   needs: any
