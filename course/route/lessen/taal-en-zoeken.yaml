@@ -83,9 +83,9 @@ lessons:
   module: taalkunde
   idea: "Dutch writes compounds as one word, so a program splits them by looking for known words, recursively, with linking sounds such as -s- and -en- and often more than one possible split."
   covers: [morfologie#2, morfologie#3]
-  requires: [nlp-morphemes]
+  requires: [nlp-morphemes, py-recursion]
   introduces: [c:decompounding]
-  data: [wordnet-en-nl, tatoeba-sentences]
+  data: [wordnet-en-nl]
   ladder: [python]
   needs: any
 

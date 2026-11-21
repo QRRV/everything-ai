@@ -1,0 +1,40 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: nlp-dutch-compounds
+minutes: 35
+title:
+  en: "Splitting Dutch compounds"
+  nl: "Nederlandse samenstellingen splitsen"
+goal:
+  en: "split a Dutch compound into known words in every way the letters allow, with linking sounds and with a function that calls itself."
+  nl: "een Nederlandse samenstelling op elke manier die de letters toelaten in bekende woorden splitsen, met tussenklanken en met een functie die zichzelf aanroept."
+summary:
+  - en: "Decompounding is splitting a compound into its parts. A part can itself be a compound (voetbalveld is voetbal and veld, and voetbal is voet and bal), so a program splits the rest of a word in the same way: recursively."
+    nl: "Decompounding is een samenstelling in delen splitsen. Een deel kan zelf een samenstelling zijn (voetbalveld is voetbal en veld, en voetbal is voet en bal), dus een programma splitst de rest van een woord op dezelfde manier: recursief."
+  - en: "Between two words of a Dutch compound a linking sound can come: -s- (stadsmuur), -en- (hondenhok) or -e- (zonnebril). No hard rules decide whether one comes; its spelling does have a rule: -en- when the left part is a noun with a plural in -en and none in -es, and -e- otherwise, with exceptions."
+    nl: "Tussen twee woorden van een Nederlandse samenstelling kan een tussenklank komen: -s- (stadsmuur), -en- (hondenhok) of -e- (zonnebril). Geen harde regels bepalen of er een komt; de spelling heeft wel een regel: -en- als het linkerdeel een zelfstandig naamwoord is met een meervoud op -en en zonder meervoud op -es, en anders -e-, met uitzonderingen."
+  - en: "The same letters often split in more ways (valkuil: val and kuil, or valk and uil), and a split can fit the letters and not the meaning (kantoor: kant and oor). The text around a word tells which split is meant."
+    nl: "Dezelfde letters splitsen vaak op meer manieren (valkuil: val en kuil, of valk en uil), en een splitsing kan bij de letters passen en niet bij de betekenis (kantoor: kant en oor). De tekst rond een woord zegt welke splitsing bedoeld is."
+  - en: "Splitting compounds helps search and translation: with compound splitting alone, the Dutch search engine of Monz and de Rijke got better by slightly more than 6 percent on their measure."
+    nl: "Samenstellingen splitsen helpt bij zoeken en vertalen: met alleen het splitsen van samenstellingen werd de Nederlandse zoekmachine van Monz en De Rijke, gemeten op hun manier, iets meer dan 6 procent beter."
+can_now:
+  - en: "split a compound into two known words with a linking sound between them, in every way"
+    nl: "een samenstelling op elke manier in twee bekende woorden splitsen, met een tussenklank ertussen"
+    by: link_splits
+  - en: "split a word into known words in every way, with a function that calls itself"
+    nl: "een woord op elke manier in bekende woorden splitsen, met een functie die zichzelf aanroept"
+    by: all_splits
+  - en: "tell a real compound from a split that only fits the letters"
+    nl: "een echte samenstelling onderscheiden van een splitsing die alleen bij de letters past"
+    by: real
+  - en: "say why a program needs the text around a word to choose between splits"
+    nl: "zeggen waarom een programma de tekst rond een woord nodig heeft om tussen splitsingen te kiezen"
+    by: which
+further_reading:
+  - en: "Geert Booij, [e-ANS, section 12.4.3.1.3, *Verbindingsklanken*](https://e-ans.ivdnt.org/topics/pid/topic-15441409758642185): the linking sounds of Dutch, from the Dutch reference grammar (in Dutch)"
+    nl: "Geert Booij, [e-ANS, paragraaf 12.4.3.1.3, *Verbindingsklanken*](https://e-ans.ivdnt.org/topics/pid/topic-15441409758642185): de tussenklanken van het Nederlands, uit de naslaggrammatica van het Nederlands"
+  - en: "Nederlandse Taalunie, [*Leidraad*, chapter 8, *Samenstelling met tussenletters -e- of -en-*](https://woordenlijst.org/zoeken/leidraad/8/1.html): the official spelling rule for -en- and -e-, with its exceptions (in Dutch)"
+    nl: "Nederlandse Taalunie, [*Leidraad*, hoofdstuk 8, *Samenstelling met tussenletters -e- of -en-*](https://woordenlijst.org/zoeken/leidraad/8/1.html): de officiële spellingregel voor -en- en -e-, met de uitzonderingen"
+  - en: "Philipp Koehn and Kevin Knight, [*Empirical Methods for Compound Splitting*](https://aclanthology.org/E03-1076.pdf) (2003): splitting German compounds for translation, with every split into known words"
+    nl: "Philipp Koehn en Kevin Knight, [*Empirical Methods for Compound Splitting*](https://aclanthology.org/E03-1076.pdf) (2003): Duitse samenstellingen splitsen om te vertalen, met elke splitsing in bekende woorden (in het Engels)"
