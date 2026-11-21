@@ -1,0 +1,48 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: rai-ai-welfare
+minutes: 40
+title:
+  en: "Can an AI system matter morally?"
+  nl: "Kan een AI-systeem moreel ertoe doen?"
+goal:
+  en: "say what moral status is, work out a chance from steps that must all hold, weigh the two mistakes of over- and under-attribution, and tell the positions in the debate about AI welfare apart."
+  nl: "zeggen wat morele status is, een kans uitrekenen uit stappen die allemaal moeten kloppen, de twee fouten van te veel en te weinig toeschrijven afwegen, en de standpunten in het debat over AI-welzijn uit elkaar houden."
+summary:
+  - en: "An entity has moral status if it matters morally for its own sake, to some degree. Long and colleagues (2024) argue that there is a realistic possibility that some AI systems will be conscious or robustly agentic in the near future, and ask AI companies to acknowledge the issue, assess their systems and prepare policies."
+    nl: "Iets heeft morele status als het om zichzelf moreel ertoe doet, in enige mate. Long en collega's (2024) stellen dat er een realistische mogelijkheid is dat sommige AI-systemen binnenkort bewustzijn hebben of robuust handelen, en vragen AI-bedrijven het probleem te erkennen, hun systemen te onderzoeken en beleid voor te bereiden."
+  - en: "Butlin and colleagues (2023) take computational functionalism as a working hypothesis and derive indicator properties from theories of consciousness; their analysis suggests that no current AI system is conscious, and that there are no obvious technical barriers to building systems that satisfy the indicators. In their view, behavioral tests are unreliable, since a system can be trained to mimic people."
+    nl: "Butlin en collega's (2023) nemen computationeel functionalisme als werkhypothese en leiden indicatoreigenschappen af uit theorieën over bewustzijn; hun analyse wijst erop dat geen enkel huidig AI-systeem bewustzijn heeft, en dat er geen duidelijke technische belemmeringen zijn om systemen te bouwen die aan de indicatoren voldoen. Gedragstests zijn volgens hen onbetrouwbaar, omdat een systeem getraind kan worden om mensen na te bootsen."
+  - en: "Birch (2024) asks for precautions driven by markers of sentience, not of intelligence, and for rules that run ahead of current technology. In 2025, Anthropic let two of its models end rare abusive conversations, as a low-cost step in case model welfare is possible."
+    nl: "Birch (2024) vraagt om voorzorg op grond van tekenen van sentience, niet van intelligentie, en om regels die vooruitlopen op de huidige technologie. In 2025 liet Anthropic twee van zijn modellen zeldzame gesprekken vol misbruik beëindigen, als goedkope stap voor het geval modelwelzijn mogelijk is."
+  - en: "Suleyman (2025) calls the idea of model welfare premature and dangerous, and worries most about people who believe in AI that only seems conscious; Seth (2025) holds that consciousness may need biology, yet warns of ethical catastrophe if real artificial consciousness emerged. Long and colleagues hold that over- and under-attribution can both be costly."
+    nl: "Suleyman (2025) noemt het idee van modelwelzijn voorbarig en gevaarlijk, en maakt zich vooral zorgen om mensen die geloven in AI die alleen bewust lijkt; volgens Seth (2025) is voor bewustzijn misschien biologie nodig, maar wacht er een ethische catastrofe als echt kunstmatig bewustzijn toch ontstaat. Volgens Long en collega's kunnen te veel en te weinig toeschrijven allebei duur zijn."
+can_now:
+  - en: "work out the chance that every step of a chain holds, if the steps are independent"
+    nl: "de kans uitrekenen dat elke stap van een keten klopt, als de stappen onafhankelijk zijn"
+    by: chain
+  - en: "weigh the cost to expect of taking care and of ignoring, when it is uncertain whether a system matters morally"
+    nl: "de te verwachten kosten van zorg dragen en van negeren afwegen, als onzeker is of een systeem moreel ertoe doet"
+    by: costs
+  - en: "say why what a chatbot says about its feelings settles little"
+    nl: "zeggen waarom wat een chatbot over de eigen gevoelens zegt weinig beslist"
+    by: feelings
+  - en: "tell which of the two mistakes Suleyman worries about most"
+    nl: "zeggen om welke van de twee fouten Suleyman zich de meeste zorgen maakt"
+    by: mistake
+further_reading:
+  - en: "Agnieszka Jaworska and Julie Tannenbaum, [*The Grounds of Moral Status*](https://plato.stanford.edu/entries/grounds-moral-status/) (Stanford Encyclopedia of Philosophy, substantive revision of 3 March 2021)"
+    nl: "Agnieszka Jaworska en Julie Tannenbaum, [*The Grounds of Moral Status*](https://plato.stanford.edu/entries/grounds-moral-status/) (Stanford Encyclopedia of Philosophy, ingrijpend herzien op 3 maart 2021) (in het Engels)"
+  - en: "Robert Long and colleagues, [*Taking AI Welfare Seriously*](https://arxiv.org/abs/2411.00986) (preprint, version 1 of 4 November 2024)"
+    nl: "Robert Long en collega's, [*Taking AI Welfare Seriously*](https://arxiv.org/abs/2411.00986) (preprint, versie 1 van 4 november 2024) (in het Engels)"
+  - en: "Patrick Butlin and colleagues, [*Consciousness in Artificial Intelligence: Insights from the Science of Consciousness*](https://arxiv.org/abs/2308.08708) (preprint, version of 22 August 2023)"
+    nl: "Patrick Butlin en collega's, [*Consciousness in Artificial Intelligence: Insights from the Science of Consciousness*](https://arxiv.org/abs/2308.08708) (preprint, versie van 22 augustus 2023) (in het Engels)"
+  - en: "Jonathan Birch, [*The Edge of Sentience: Risk and Precaution in Humans, Other Animals, and AI*](https://researchonline.lse.ac.uk/id/eprint/126246/) (Oxford University Press, 2024, open access)"
+    nl: "Jonathan Birch, [*The Edge of Sentience: Risk and Precaution in Humans, Other Animals, and AI*](https://researchonline.lse.ac.uk/id/eprint/126246/) (Oxford University Press, 2024, vrij toegankelijk) (in het Engels)"
+  - en: "Anthropic, [*Exploring model welfare*](https://www.anthropic.com/research/exploring-model-welfare) (24 April 2025)"
+    nl: "Anthropic, [*Exploring model welfare*](https://www.anthropic.com/research/exploring-model-welfare) (24 april 2025) (in het Engels)"
+  - en: "Anil Seth, [*Conscious artificial intelligence and biological naturalism*](https://sussex.figshare.com/articles/journal_contribution/Conscious_artificial_intelligence_and_biological_naturalism/28649519) (accepted manuscript for *Behavioral and Brain Sciences*, 24 April 2025)"
+    nl: "Anil Seth, [*Conscious artificial intelligence and biological naturalism*](https://sussex.figshare.com/articles/journal_contribution/Conscious_artificial_intelligence_and_biological_naturalism/28649519) (geaccepteerd manuscript voor *Behavioral and Brain Sciences*, 24 april 2025) (in het Engels)"
+  - en: "Mustafa Suleyman, [*We must build AI for people; not to be a person.*](https://mustafa-suleyman.ai/seemingly-conscious-ai-is-coming) (19 August 2025)"
+    nl: "Mustafa Suleyman, [*We must build AI for people; not to be a person.*](https://mustafa-suleyman.ai/seemingly-conscious-ai-is-coming) (19 augustus 2025) (in het Engels)"
