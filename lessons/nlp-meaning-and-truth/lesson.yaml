@@ -1,0 +1,40 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: nlp-meaning-and-truth
+minutes: 35
+title:
+  en: "Meaning: when is a sentence true?"
+  nl: "Betekenis: wanneer is een zin waar?"
+goal:
+  en: "check sentences against a small world written as code, with the meaning of the whole built from the meanings of its parts."
+  nl: "zinnen controleren tegen een kleine wereld in code, waarbij de betekenis van het geheel uit die van de delen komt."
+summary:
+  - en: "The truth conditions of a sentence say what has to hold in a world for it to be true. They stay the same; the world decides whether they hold."
+    nl: "De waarheidsvoorwaarden van een zin zeggen wat er in een wereld moet gelden om de zin waar te maken. Die blijven hetzelfde; de wereld beslist of ze gelden."
+  - en: "In a small world, a name stands for a thing, a noun or a verb without object for a list of things, and a verb with an object for a list of pairs."
+    nl: "In een kleine wereld staat een naam voor een ding, een zelfstandig naamwoord of een werkwoord zonder lijdend voorwerp voor een lijst dingen, en een werkwoord met een lijdend voorwerp voor een lijst paren."
+  - en: "*Every cat sleeps* is true when all the cats are among the sleepers, *some cat sleeps* when at least one is; in logic, *every unicorn sleeps* is true in a world without unicorns."
+    nl: "*Elke kat slaapt* is waar als alle katten bij de slapers horen, *er slaapt een kat* als er minstens één bij hoort; in de logica is *elke eenhoorn slaapt* waar in een wereld zonder eenhoorns."
+  - en: "Compositionality: the meaning of a whole comes from the meanings of its parts and the way they are combined, from the bottom of the tree to the top. Idioms such as *it is raining cats and dogs* seem not to follow it."
+    nl: "Compositionaliteit: de betekenis van een geheel komt uit de betekenis van de delen en de manier waarop ze gecombineerd zijn, van onder in de boom naar boven. Vaste uitdrukkingen zoals *het regent pijpenstelen* lijken zich daar niet aan te houden."
+can_now:
+  - en: "decide whether a sentence with *every* is true, from two lists"
+    nl: "beslissen of een zin met *elke* waar is, met twee lijsten"
+    by: every
+  - en: "find the list of things a verb phrase with an object stands for"
+    nl: "de lijst dingen vinden waar een werkwoordgroep met een lijdend voorwerp voor staat"
+    by: doers
+  - en: "decide from its tree whether a sentence is true in a world"
+    nl: "met de boom van een zin beslissen of die zin waar is in een wereld"
+    by: is_true
+  - en: "recognize an idiom whose meaning does not come from its parts"
+    nl: "een vaste uitdrukking herkennen waarvan de betekenis niet uit de delen komt"
+    by: idiom
+further_reading:
+  - en: "Daniel Jurafsky and James H. Martin, [*Speech and Language Processing*, appendix H](https://web.stanford.edu/~jurafsky/slp3/H.pdf), Logical Representations of Sentence Meaning: models, truth and the quantifiers of first-order logic"
+    nl: "Daniel Jurafsky en James H. Martin, [*Speech and Language Processing*, bijlage H](https://web.stanford.edu/~jurafsky/slp3/H.pdf), Logical Representations of Sentence Meaning: modellen, waarheid en de kwantoren van de predicatenlogica (in het Engels)"
+  - en: "Bryan Pickel and Zoltán Gendler Szabó, [*Compositionality*](https://plato.stanford.edu/entries/compositionality/), Stanford Encyclopedia of Philosophy (revision of November 3, 2025): the principle, its history and the idioms"
+    nl: "Bryan Pickel en Zoltán Gendler Szabó, [*Compositionality*](https://plato.stanford.edu/entries/compositionality/), Stanford Encyclopedia of Philosophy (versie van 3 november 2025): het principe, de geschiedenis en de vaste uitdrukkingen (in het Engels)"
+  - en: "Brenden Lake and Marco Baroni, [*Generalization without Systematicity*](https://proceedings.mlr.press/v80/lake18a.html) (2018): the commands with *jump* and the networks that did not combine them"
+    nl: "Brenden Lake en Marco Baroni, [*Generalization without Systematicity*](https://proceedings.mlr.press/v80/lake18a.html) (2018): de opdrachten met *jump* en de netwerken die ze niet combineerden (in het Engels)"
