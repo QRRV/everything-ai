@@ -1,0 +1,44 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: rai-xrisk-counterpositions
+minutes: 40
+title:
+  en: "Other positions"
+  nl: "Andere standpunten"
+goal:
+  en: "tell apart the main positions beside the catastrophic-risk view, model how bringing protections forward shortens the years a danger is unguarded, and model the time a soft pause would buy."
+  nl: "de belangrijkste standpunten naast de kijk op catastrofaal risico uit elkaar houden, nabootsen hoe eerdere bescherming de onbeschermde jaren van een gevaar inkort, en nabootsen hoeveel tijd een zachte pauze zou opleveren."
+summary:
+  - en: "Narayanan and Kapoor (April 2025) see AI as normal technology: transformative like electricity and the internet, and a tool people can and should stay in control of. They call catastrophic misalignment a speculative risk and put more weight on systemic risks."
+    nl: "Narayanan en Kapoor (april 2025) zien AI als normale technologie: ingrijpend zoals elektriciteit en internet, en een gereedschap dat mensen onder controle kunnen en moeten houden. Ze noemen catastrofale misalignment een speculatief risico en vinden systeemrisico's belangrijker."
+  - en: "An editorial in Nature (June 2023) and Hanna and Bender (August 2023) argue that talk of extinction draws attention away from the harms AI does today."
+    nl: "Een redactioneel stuk in Nature (juni 2023) en Hanna en Bender (augustus 2023) betogen dat praten over uitsterven de aandacht afleidt van de schade die AI nu al doet."
+  - en: "e/acc (2022) and Andreessen's Techno-Optimist Manifesto (2023) want technology faster. Buterin's d/acc (2023) wants to speed up defense in a decentralized and democratic way, and in 2025 would keep a soft pause only as a fallback."
+    nl: "e/acc (2022) en het Techno-Optimist Manifesto van Andreessen (2023) willen technologie sneller. De d/acc van Buterin (2023) wil de verdediging versnellen op een decentrale en democratische manier, en houdt in 2025 een zachte pauze alleen achter de hand."
+  - en: "Differential technology development speeds up technologies that reduce risk and delays those that increase it, so that protection comes before the danger; Bostrom called it differential technological development."
+    nl: "Differential technology development versnelt technologieën die risico verkleinen en remt technologieën af die risico vergroten, zodat de bescherming vóór het gevaar komt; Bostrom noemde het differential technological development."
+can_now:
+  - en: "count the years a dangerous technology is out before the protection against it arrives"
+    nl: "tellen hoeveel jaar een gevaarlijke technologie er is voordat de bescherming ertegen komt"
+    by: exposure
+  - en: "model, year by year, how much progress a soft pause holds back"
+    nl: "jaar na jaar nabootsen hoeveel vooruitgang een zachte pauze tegenhoudt"
+    by: progress
+  - en: "explain what Narayanan and Kapoor mean, and do not mean, by normal technology"
+    nl: "uitleggen wat Narayanan en Kapoor wel en niet bedoelen met normale technologie"
+    by: normal
+  - en: "tell d/acc from fast, decentralized acceleration without its defensive part"
+    nl: "d/acc onderscheiden van snelle, decentrale versnelling zonder het defensieve deel"
+    by: dacc
+further_reading:
+  - en: "Arvind Narayanan and Sayash Kapoor, [*AI as Normal Technology*](https://knightcolumbia.org/content/ai-as-normal-technology) (Knight First Amendment Institute, April 2025)"
+    nl: "Arvind Narayanan en Sayash Kapoor, [*AI as Normal Technology*](https://knightcolumbia.org/content/ai-as-normal-technology) (Knight First Amendment Institute, april 2025) (in het Engels)"
+  - en: "Vitalik Buterin, [*My techno-optimism*](https://vitalik.eth.limo/general/2023/11/27/techno_optimism.html) (27 November 2023) and [*d/acc: one year later*](https://vitalik.eth.limo/general/2025/01/05/dacc2.html) (5 January 2025)"
+    nl: "Vitalik Buterin, [*My techno-optimism*](https://vitalik.eth.limo/general/2023/11/27/techno_optimism.html) (27 november 2023) en [*d/acc: one year later*](https://vitalik.eth.limo/general/2025/01/05/dacc2.html) (5 januari 2025) (in het Engels)"
+  - en: "Anders Sandberg, [*Differential Technology Development: Speeding up to slow down disasters?*](https://ora.ox.ac.uk/objects/uuid:a244c415-4824-49f1-801e-25f118be9cbe) (book chapter, Oxford University Research Archive, PDF of March 2024)"
+    nl: "Anders Sandberg, [*Differential Technology Development: Speeding up to slow down disasters?*](https://ora.ox.ac.uk/objects/uuid:a244c415-4824-49f1-801e-25f118be9cbe) (hoofdstuk voor een boek, Oxford University Research Archive, pdf van maart 2024) (in het Engels)"
+  - en: "Nick Bostrom, [*Existential Risks: Analyzing Human Extinction Scenarios and Related Hazards*](https://nickbostrom.com/papers/existential-risks/), Journal of Evolution and Technology 9(1) (2002): section 9.4, *Differential technological development*"
+    nl: "Nick Bostrom, [*Existential Risks: Analyzing Human Extinction Scenarios and Related Hazards*](https://nickbostrom.com/papers/existential-risks/), Journal of Evolution and Technology 9(1) (2002): paragraaf 9.4, *Differential technological development* (in het Engels)"
+  - en: "Alex Hanna and Emily M. Bender, [*AI Causes Real Harm. Let’s Focus on That over the End-of-Humanity Hype*](https://www.scientificamerican.com/article/we-need-to-focus-on-ais-real-harms-not-imaginary-existential-risks/) (Scientific American, 12 August 2023)"
+    nl: "Alex Hanna en Emily M. Bender, [*AI Causes Real Harm. Let’s Focus on That over the End-of-Humanity Hype*](https://www.scientificamerican.com/article/we-need-to-focus-on-ais-real-harms-not-imaginary-existential-risks/) (Scientific American, 12 augustus 2023) (in het Engels)"
