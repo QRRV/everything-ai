@@ -1,0 +1,40 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: nlp-morphemes
+minutes: 30
+title:
+  en: "Words and their parts"
+  nl: "Woorden en hun delen"
+goal:
+  en: "cut words into morphemes along a list of known parts, and tell inflection, derivation and compounding apart."
+  nl: "woorden langs een lijst bekende delen in morfemen knippen, en inflectie, derivatie en samenstelling uit elkaar houden."
+summary:
+  - en: "A morpheme is the smallest part of a word with a meaning or a job in the grammar, such as cat and -s in cats; morphology studies how words are built from them. A root carries the main meaning, and affixes (prefixes and suffixes) add to it."
+    nl: "Een morfeem is het kleinste deel van een woord met een betekenis of een taak in de grammatica, zoals boek en -en in boeken; de morfologie bestudeert hoe woorden daaruit zijn opgebouwd. Een wortel draagt de hoofdbetekenis, en affixen (voorvoegsels en achtervoegsels) voegen er iets aan toe."
+  - en: "Inflection makes forms of one word (walk, walked) and keeps its kind; derivation makes a new word (care, careful), usually of another kind but not always (happy, unhappy); a compound joins words (doghouse). The line between inflection and derivation is not always sharp."
+    nl: "Inflectie maakt vormen van één woord (lopen, liep) en houdt het soort woord gelijk; derivatie maakt een nieuw woord (schoon, schoonheid), meestal een ander soort woord, maar niet altijd (gewoon, ongewoon); een samenstelling voegt woorden samen (voordeur). De grens tussen inflectie en derivatie is niet altijd scherp."
+  - en: "English writes compounds in no fixed way, with or without spaces; Dutch writes them as one word, and compounding is its most important way to make new words, according to the e-ANS."
+    nl: "Het Engels schrijft samenstellingen niet op een vaste manier, met of zonder spaties; het Nederlands schrijft ze als één woord, en samenstellen is volgens de e-ANS de belangrijkste manier om in het Nederlands nieuwe woorden te maken."
+  - en: "No list of words holds every word, so a program that knows the parts can handle new words; a list of parts only sees letters, though, and cuts speed into spe and -ed."
+    nl: "Geen lijst woorden bevat elk woord, dus een programma dat de delen kent, kan met nieuwe woorden overweg; maar een lijst delen ziet alleen letters, en knipt nacht in nach en -t."
+can_now:
+  - en: "cut a known ending off a word with a list of endings"
+    nl: "met een lijst uitgangen een bekende uitgang van een woord afknippen"
+    by: cut_suffix
+  - en: "split a word into two known words"
+    nl: "een woord in twee bekende woorden splitsen"
+    by: split_compound
+  - en: "tell inflection, derivation and compounding apart"
+    nl: "inflectie, derivatie en samenstelling uit elkaar houden"
+    by: kinds
+  - en: "say why merging the forms of one word is safer than merging a word with a word derived from it"
+    nl: "zeggen waarom je de vormen van één woord veiliger samenvoegt dan een woord en de derivatie ervan"
+    by: merge
+further_reading:
+  - en: "Daniel Jurafsky and James H. Martin, [*Speech and Language Processing*, chapter 2, *Words and Tokens*](https://web.stanford.edu/~jurafsky/slp3/2.pdf): morphemes, and why a program meets new words"
+    nl: "Daniel Jurafsky en James H. Martin, [*Speech and Language Processing*, hoofdstuk 2, *Words and Tokens*](https://web.stanford.edu/~jurafsky/slp3/2.pdf): morfemen, en waarom een programma nieuwe woorden tegenkomt (in het Engels)"
+  - en: "Catherine Anderson and others, [*Essentials of Linguistics*, chapter 5, *Morphology*](https://ecampusontario.pressbooks.pub/essentialsoflinguistics2/chapter/5-1-what-is-morphology/): an open textbook on how words are built"
+    nl: "Catherine Anderson en anderen, [*Essentials of Linguistics*, hoofdstuk 5, *Morphology*](https://ecampusontario.pressbooks.pub/essentialsoflinguistics2/chapter/5-1-what-is-morphology/): een open leerboek over hoe woorden gebouwd zijn (in het Engels)"
+  - en: "Geert Booij (editor), [e-ANS, chapter 12, *Woordvorming en woordstructuur*](https://e-ans.ivdnt.org/topics/pid/topic-16402164761856575): how Dutch makes words, from the Dutch reference grammar (in Dutch)"
+    nl: "Geert Booij (redactie), [e-ANS, hoofdstuk 12, *Woordvorming en woordstructuur*](https://e-ans.ivdnt.org/topics/pid/topic-16402164761856575): hoe het Nederlands woorden maakt, uit de naslaggrammatica van het Nederlands"
