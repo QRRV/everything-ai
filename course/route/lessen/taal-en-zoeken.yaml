@@ -90,11 +90,11 @@ lessons:
   needs: any
 
 - id: nlp-word-classes
-  title: "Word classes and phrases"
+  title: "Parts of speech and phrases"
   level: basis
   domein: taal
   module: taalkunde
-  idea: "Words fall into classes (noun, verb, adjective and more) by how they behave, and group into phrases; one international scheme uses the same 17 classes for over 100 languages, which you count in real labeled sentences."
+  idea: "Words have parts of speech (noun, verb, adjective and more) by how they behave, and group into phrases; one international scheme uses the same 17 tags for over 150 languages, which you count in real labeled sentences."
   covers: [syntaxis#0]
   requires: [nlp-morphemes]
   introduces: [c:syntax, c:part-of-speech]

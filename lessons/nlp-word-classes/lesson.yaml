@@ -1,0 +1,40 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: nlp-word-classes
+minutes: 35
+title:
+  en: "Parts of speech and phrases"
+  nl: "Woordsoorten en woordgroepen"
+goal:
+  en: "count the parts of speech in an English and a Dutch treebank, and find the words that have more than one."
+  nl: "de woordsoorten in een Engelse en een Nederlandse treebank tellen, en de woorden vinden die er meer dan één hebben."
+summary:
+  - en: "Syntax is the way words are arranged together into phrases and sentences. Each word has a part of speech, such as noun, verb or adjective, which you can often tell by how the word behaves in a sentence."
+    nl: "Syntaxis is de manier waarop woorden samen woordgroepen en zinnen vormen. Elk woord heeft een woordsoort, zoals zelfstandig naamwoord, werkwoord of bijvoeglijk naamwoord, die je vaak ziet aan hoe het woord zich in een zin gedraagt."
+  - en: "Open classes, such as nouns and verbs, keep getting new words; closed classes, such as prepositions and determiners, hardly do, and their short words occur very often."
+    nl: "Open woordsoorten, zoals zelfstandige naamwoorden en werkwoorden, krijgen steeds nieuwe woorden; gesloten woordsoorten, zoals voorzetsels en lidwoorden, bijna nooit, en hun korte woorden komen heel vaak voor."
+  - en: "Universal Dependencies labels treebanks of over 150 languages with the same 17 tags for parts of speech, such as NOUN, VERB, ADP and DET; the Dutch treebank Alpino uses 16 of them, without PART."
+    nl: "Universal Dependencies labelt treebanks van meer dan 150 talen met dezelfde 17 tags voor woordsoorten, zoals NOUN, VERB, ADP en DET; de Nederlandse treebank Alpino gebruikt er 16, zonder PART."
+  - en: "The same letters can have different parts of speech (back is an adverb, a noun or a verb), and the words around a word decide which. Words that belong together form phrases, such as the noun phrase a fantastic time."
+    nl: "Dezelfde letters kunnen verschillende woordsoorten hebben (loop is een zelfstandig naamwoord of een werkwoord), en de woorden rond een woord bepalen welke. Woorden die bij elkaar horen, vormen woordgroepen, zoals de naamwoordgroep de eerste helft."
+can_now:
+  - en: "count how many words of a treebank have each tag"
+    nl: "tellen hoeveel woorden van een treebank elke tag hebben"
+    by: count_tags
+  - en: "list the tags each word has in a treebank, and find the words with more than one"
+    nl: "de tags van elk woord in een treebank op een rij zetten, en de woorden vinden die er meer dan één hebben"
+    by: tags_per_word
+  - en: "give a word its part of speech from the words around it"
+    nl: "een woord de woordsoort geven aan de hand van de woorden eromheen"
+    by: which
+  - en: "say which tag most often follows a determiner, and why that helps a program"
+    nl: "zeggen welke tag het vaakst na een DET komt, zoals na een lidwoord, en waarom een programma daar wat aan heeft"
+    by: after
+further_reading:
+  - en: "Universal Dependencies, [*Universal POS tags*](https://universaldependencies.org/u/pos/): the 17 tags, each with its own page and examples"
+    nl: "Universal Dependencies, [*Universal POS tags*](https://universaldependencies.org/u/pos/): de 17 tags, elk met een eigen pagina en voorbeelden (in het Engels)"
+  - en: "Daniel Jurafsky and James H. Martin, [*Speech and Language Processing*, chapter 18](https://web.stanford.edu/~jurafsky/slp3/18.pdf): parts of speech in English and how a program gives every word its tag"
+    nl: "Daniel Jurafsky en James H. Martin, [*Speech and Language Processing*, hoofdstuk 18](https://web.stanford.edu/~jurafsky/slp3/18.pdf): woordsoorten in het Engels en hoe een programma elk woord de tag geeft (in het Engels)"
+  - en: "Mitchell P. Marcus, Beatrice Santorini and Mary Ann Marcinkiewicz, [*Building a Large Annotated Corpus of English: The Penn Treebank*](https://aclanthology.org/J93-2004.pdf) (1993): how the Penn Treebank for English was made"
+    nl: "Mitchell P. Marcus, Beatrice Santorini en Mary Ann Marcinkiewicz, [*Building a Large Annotated Corpus of English: The Penn Treebank*](https://aclanthology.org/J93-2004.pdf) (1993): hoe de Penn Treebank voor het Engels gemaakt werd (in het Engels)"

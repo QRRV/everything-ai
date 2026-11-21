@@ -449,6 +449,18 @@ SPDX-FileCopyrightText = "2016 Marten Postma and others (Open Dutch WordNet, in 
 SPDX-License-Identifier = "CC-BY-SA-4.0"
 
 [[annotations]]
+path = "data/ud-en-ewt.conllu.gz"
+precedence = "override"
+SPDX-FileCopyrightText = "2013-2021 The Board of Trustees of The Leland Stanford Junior University (the annotations of the Universal Dependencies English Web Treebank 2.19; portions of the texts may be 2012 Google Inc., 2011 Yahoo! Inc., 2012 Trustees of the University of Pennsylvania and/or other original authors; without the e-mails, for Everything AI)"
+SPDX-License-Identifier = "CC-BY-SA-4.0"
+
+[[annotations]]
+path = "data/ud-nl-alpino.conllu.gz"
+precedence = "override"
+SPDX-FileCopyrightText = "Gosse Bouma, Gertjan van Noord, Daniel Zeman, Zdeněk Žabokrtský and others (UD Dutch-Alpino, Universal Dependencies 2.19)"
+SPDX-License-Identifier = "CC-BY-SA-4.0"
+
+[[annotations]]
 path = "data/banking77-small.json"
 precedence = "override"
 SPDX-FileCopyrightText = "2020 PolyAI (BANKING77, Casanueva and others, https://arxiv.org/abs/2003.04807; a subset made for Everything AI)"
