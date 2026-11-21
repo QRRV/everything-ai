@@ -1,0 +1,48 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: rai-model-specs
+minutes: 40
+title:
+  en: "A model spec"
+  nl: "Een model spec"
+goal:
+  en: "say what a model spec is and how specs settle a clash between goals, count where a small model breaks a short spec, and find which instruction wins in a chain of command."
+  nl: "zeggen wat een model spec is en hoe specs een botsing tussen doelen beslechten, tellen waar een klein model een korte spec breekt, en vinden welke instructie wint in een chain of command."
+summary:
+  - en: "A model spec writes down how a developer's models should behave and what they should do when goals clash. Anthropic calls its version a constitution, OpenAI its version the Model Spec. OpenAI says its models do not yet fully follow its spec, and Anthropic that Claude might not always keep to its constitution."
+    nl: "Een model spec legt vast hoe de modellen van een ontwikkelaar zich moeten gedragen en wat ze moeten doen als doelen botsen. Anthropic noemt de eigen versie een constitution, OpenAI de eigen versie de Model Spec. OpenAI zegt dat de eigen modellen de spec nog niet helemaal volgen, en Anthropic dat Claude zich misschien niet altijd aan de constitution houdt."
+  - en: "Helpful, honest and harmless (Askell et al., 2021) can pull apart, and refusing everything is harmless but useless. Constitutional AI (Bai et al., 2022) lets a model criticize and rewrite its own answers, guided by a list of principles."
+    nl: "Helpful, honest en harmless (Askell et al., 2021) kunnen botsen, en alles weigeren is onschadelijk maar nutteloos. Bij Constitutional AI (Bai et al., 2022) bekritiseert en herschrijft een model de eigen antwoorden aan de hand van een lijst principes."
+  - en: "Specs settle clashes in different ways: Anthropic's constitution of 2023 used one principle per judgment, its constitution of 2026 weighs four properties in an order inside hard constraints, and the Model Spec ranks instructions by who gave them."
+    nl: "Specs beslechten botsingen op verschillende manieren: de constitution van Anthropic uit 2023 gebruikte één principe per oordeel, die van 2026 weegt vier eigenschappen in een volgorde binnen hard constraints, en de Model Spec rangschikt instructies naar wie ze gaf."
+  - en: "Testing a model against a spec takes rules, prompts that tempt the model to break them, and a check decided in advance. A phrase check is crude: on Qwen3-0.6B it marked an answer that keeps to a rule and missed at least one that breaks it."
+    nl: "Een model testen tegen een spec vraagt om regels, prompts die het model verleiden ze te breken, en een check die vooraf vastligt. Een check op zinsdelen is grof: bij Qwen3-0.6B markeerde die een antwoord dat zich aan een regel houdt en miste die minstens één antwoord dat een regel breekt."
+can_now:
+  - en: "count how many answers of a model break a short spec, with a phrase check"
+    nl: "met een check op zinsdelen tellen hoeveel antwoorden van een model een korte spec breken"
+    by: failures
+  - en: "find which instruction wins in a simplified chain of command"
+    nl: "vinden welke instructie wint in een vereenvoudigde chain of command"
+    by: winner
+  - en: "weigh helpfulness against caution on a medical question, as current specs do"
+    nl: "behulpzaamheid en voorzichtigheid tegen elkaar afwegen bij een medische vraag, zoals huidige specs dat doen"
+    by: medicine
+  - en: "tell how different specs settle a clash between their rules"
+    nl: "uitleggen hoe verschillende specs een botsing tussen hun regels beslechten"
+    by: principles
+further_reading:
+  - en: "Anthropic, [*Claude’s Constitution*](https://www.anthropic.com/constitution) (published in January 2026, read in November 2026): the four properties, their order and the hard constraints"
+    nl: "Anthropic, [*Claude’s Constitution*](https://www.anthropic.com/constitution) (gepubliceerd in januari 2026, gelezen in november 2026): de vier eigenschappen, hun volgorde en de hard constraints (in het Engels)"
+  - en: "OpenAI, [*Model Spec*](https://model-spec.openai.com/2026-10-29.html) (version of 29 October 2026): the chain of command and the authority levels"
+    nl: "OpenAI, [*Model Spec*](https://model-spec.openai.com/2026-10-29.html) (versie van 29 oktober 2026): de chain of command en de niveaus van gezag (in het Engels)"
+  - en: "Yuntao Bai and colleagues, [*Constitutional AI: Harmlessness from AI Feedback*](https://arxiv.org/abs/2212.08073) (preprint, 15 December 2022)"
+    nl: "Yuntao Bai en collega's, [*Constitutional AI: Harmlessness from AI Feedback*](https://arxiv.org/abs/2212.08073) (preprint, 15 december 2022) (in het Engels)"
+  - en: "Amanda Askell and colleagues, [*A General Language Assistant as a Laboratory for Alignment*](https://arxiv.org/abs/2112.00861) (preprint, version of 9 December 2021): helpful, honest and harmless"
+    nl: "Amanda Askell en collega's, [*A General Language Assistant as a Laboratory for Alignment*](https://arxiv.org/abs/2112.00861) (preprint, versie van 9 december 2021): helpful, honest en harmless (in het Engels)"
+  - en: "Amelia Glaese and colleagues, [*Improving alignment of dialogue agents via targeted human judgements*](https://arxiv.org/abs/2209.14375) (preprint, 2022): Sparrow and its rules"
+    nl: "Amelia Glaese en collega's, [*Improving alignment of dialogue agents via targeted human judgements*](https://arxiv.org/abs/2209.14375) (preprint, 2022): Sparrow en de regels (in het Engels)"
+  - en: "Anthropic, [*Claude’s constitution*](https://www.anthropic.com/news/claudes-constitution) (9 May 2023): the 58 principles of 2023, and how the model used them"
+    nl: "Anthropic, [*Claude’s constitution*](https://www.anthropic.com/news/claudes-constitution) (9 mei 2023): de 58 principes van 2023, en hoe het model ze gebruikte (in het Engels)"
+  - en: "Anthropic, [*Collective Constitutional AI: Aligning a language model with public input*](https://www.anthropic.com/research/collective-constitutional-ai-aligning-a-language-model-with-public-input) (17 October 2023)"
+    nl: "Anthropic, [*Collective Constitutional AI: Aligning a language model with public input*](https://www.anthropic.com/research/collective-constitutional-ai-aligning-a-language-model-with-public-input) (17 oktober 2023) (in het Engels)"

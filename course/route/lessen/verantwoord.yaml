@@ -1658,7 +1658,7 @@ lessons:
   covers: [grenzen-van-leren-van-menselijke-feedback#4]
   requires: [rai-what-to-align-to, start-prompt-basics]
   introduces: [c:model-spec]
-  data: [model-qwen3-0.6b]
+  data: [model-qwen3-0.6b, course-specs-qwen]
   ladder: [python]
   needs: any
 
