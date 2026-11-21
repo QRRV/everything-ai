@@ -1,0 +1,56 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: rai-dangerous-capabilities
+minutes: 45
+title:
+  en: "Testing for dangerous capabilities"
+  nl: "Testen op gevaarlijke capabilities"
+goal:
+  en: "say what dangerous capability evaluations test and who runs them, estimate pass@k from runs already done, work out what a test without a single success rules out, and say why a result can come out too low or too high."
+  nl: "zeggen wat dangerous capability evaluations testen en wie ze uitvoert, pass@k schatten uit runs die al gedaan zijn, uitrekenen wat een test zonder één enkel succes uitsluit, en zeggen waarom een uitkomst te laag of te hoog kan uitvallen."
+summary:
+  - en: "A dangerous capability evaluation tests whether a model can do things that could cause severe harm, such as helping to make weapons, carrying out cyberattacks or copying itself. Developers run them, and so do outside evaluators such as AI Security Institutes and METR, often in little time before a release."
+    nl: "Een dangerous capability evaluation test of een model dingen kan die ernstige schade kunnen veroorzaken, zoals helpen bij het maken van wapens, cyberaanvallen uitvoeren of zichzelf kopiëren. Ontwikkelaars voeren ze uit, en ook externe evaluators zoals AI Security Institutes en METR, vaak in korte tijd vóór een release."
+  - en: "A test can show that a capability is there, not that it is absent, as Dijkstra wrote about programs in 1969. One success in 10 attempts showed that Kimi K3 could attack a small simulated company network; zero successes only rule out high rates of success."
+    nl: "Een test kan laten zien dat een capability er is, niet dat ze ontbreekt, zoals Dijkstra in 1969 over programma's schreef. Eén succes in 10 pogingen liet zien dat Kimi K3 een klein gesimuleerd bedrijfsnetwerk kon aanvallen; nul successen sluiten alleen hoge kansen op succes uit."
+  - en: "A result can come out too low: through weak elicitation, a tested version that differs from the released one, or a model that holds back on purpose, which is called sandbagging. The GPT-4 tests of 2023 had the first two."
+    nl: "Een uitkomst kan te laag uitvallen: door zwakke elicitation, een geteste versie die verschilt van de uitgebrachte, of een model dat zich bewust inhoudt, wat sandbagging heet. De tests van GPT-4 in 2023 hadden de eerste twee."
+  - en: "A result can also come out too high: pass@k counts one success in k tries, and every success that a judge model wrongly gives counts along."
+    nl: "Een uitkomst kan ook te hoog uitvallen: pass@k telt één succes in k pogingen, en elk succes dat een judge model ten onrechte geeft, telt mee."
+  - en: "By the rule of 95%, zero successes in n attempts rule out only the rates for which zero successes would have a chance below 5%: rates of about 26% and more after 10 attempts, and of 6% and more after 50."
+    nl: "Volgens de regel van 95% sluiten nul successen in n pogingen alleen de kansen uit waarbij nul successen een kans onder 5% zouden hebben: kansen van ongeveer 26% en meer na 10 pogingen, en van 6% en meer na 50."
+can_now:
+  - en: "estimate pass@k from runs already done, and see how much one success adds"
+    nl: "pass@k schatten uit runs die al gedaan zijn, en zien hoeveel één succes uitmaakt"
+    by: pass
+  - en: "work out which success rates a test without a single success rules out"
+    nl: "uitrekenen welke kansen op succes een test zonder één enkel succes uitsluit"
+    by: ruled
+  - en: "say what a test that finds nothing does and does not show"
+    nl: "zeggen wat een test die niets vindt wel en niet laat zien"
+    by: claim
+  - en: "read a well-known test result together with the conditions it was run under"
+    nl: "een bekende testuitkomst lezen samen met de omstandigheden waaronder de test liep"
+    by: story
+further_reading:
+  - en: "Toby Shevlane and others, [*Model evaluation for extreme risks*](https://arxiv.org/abs/2305.15324) (version of 22 September 2023)"
+    nl: "Toby Shevlane en anderen, [*Model evaluation for extreme risks*](https://arxiv.org/abs/2305.15324) (versie van 22 september 2023) (in het Engels)"
+  - en: "Mary Phuong and others, [*Evaluating Frontier Models for Dangerous Capabilities*](https://arxiv.org/abs/2403.13793) (Google DeepMind, version of 5 April 2024)"
+    nl: "Mary Phuong en anderen, [*Evaluating Frontier Models for Dangerous Capabilities*](https://arxiv.org/abs/2403.13793) (Google DeepMind, versie van 5 april 2024) (in het Engels)"
+  - en: "UK AI Safety Institute and US AI Safety Institute, [*Pre-Deployment Evaluation of OpenAI’s o1 Model*](https://www.aisi.gov.uk/blog/pre-deployment-evaluation-of-openais-o1-model) (18 December 2024)"
+    nl: "UK AI Safety Institute en US AI Safety Institute, [*Pre-Deployment Evaluation of OpenAI’s o1 Model*](https://www.aisi.gov.uk/blog/pre-deployment-evaluation-of-openais-o1-model) (18 december 2024) (in het Engels)"
+  - en: "METR, [*METR’s GPT-4.5 pre-deployment evaluations*](https://metr.org/blog/2025-02-27-gpt-4-5-evals/) (27 February 2025)"
+    nl: "METR, [*METR’s GPT-4.5 pre-deployment evaluations*](https://metr.org/blog/2025-02-27-gpt-4-5-evals/) (27 februari 2025) (in het Engels)"
+  - en: "UK AISI and CAISI, [*Preliminary Assessment of Kimi K3's Cyber Capabilities*](https://www.nist.gov/news-events/news/2026/07/uk-aisi-caisi-preliminary-assessment-kimi-k3s-cyber-capabilities) (released 23 July 2026)"
+    nl: "UK AISI en CAISI, [*Preliminary Assessment of Kimi K3's Cyber Capabilities*](https://www.nist.gov/news-events/news/2026/07/uk-aisi-caisi-preliminary-assessment-kimi-k3s-cyber-capabilities) (uitgebracht op 23 juli 2026) (in het Engels)"
+  - en: "Yoshua Bengio (chair) and others, [*International AI Safety Report 2026*](https://internationalaisafetyreport.org/) (February 2026)"
+    nl: "Yoshua Bengio (voorzitter) en anderen, [*International AI Safety Report 2026*](https://internationalaisafetyreport.org/) (februari 2026) (in het Engels)"
+  - en: "J. N. Buxton and B. Randell (eds.), [*Software Engineering Techniques*](https://homepages.cs.ncl.ac.uk/brian.randell/NATO/nato1969.PDF) (report of the NATO conference in Rome, October 1969), with Dijkstra's paper on structured programming"
+    nl: "J. N. Buxton en B. Randell (red.), [*Software Engineering Techniques*](https://homepages.cs.ncl.ac.uk/brian.randell/NATO/nato1969.PDF) (verslag van de NATO-conferentie in Rome, oktober 1969), met het paper van Dijkstra over gestructureerd programmeren (in het Engels)"
+  - en: "OpenAI, [*GPT-4 System Card*](https://cdn.openai.com/papers/gpt-4-system-card.pdf) (March 2023), and Beth Barnes, [*Update on ARC's recent eval efforts*](https://metr.org/blog/2023-03-18-update-on-recent-evals/) (17 March 2023)"
+    nl: "OpenAI, [*GPT-4 System Card*](https://cdn.openai.com/papers/gpt-4-system-card.pdf) (maart 2023), en Beth Barnes, [*Update on ARC's recent eval efforts*](https://metr.org/blog/2023-03-18-update-on-recent-evals/) (17 maart 2023) (in het Engels)"
+  - en: "Teun van der Weij and others, [*AI Sandbagging: Language Models can Strategically Underperform on Evaluations*](https://arxiv.org/abs/2406.07358) (ICLR 2025)"
+    nl: "Teun van der Weij en anderen, [*AI Sandbagging: Language Models can Strategically Underperform on Evaluations*](https://arxiv.org/abs/2406.07358) (ICLR 2025) (in het Engels)"
+  - en: "Sid Black and others, [*RepliBench: Evaluating the Autonomous Replication Capabilities of Language Model Agents*](https://arxiv.org/abs/2504.18565) (UK AI Security Institute, version of 5 May 2025)"
+    nl: "Sid Black en anderen, [*RepliBench: Evaluating the Autonomous Replication Capabilities of Language Model Agents*](https://arxiv.org/abs/2504.18565) (UK AI Security Institute, versie van 5 mei 2025) (in het Engels)"

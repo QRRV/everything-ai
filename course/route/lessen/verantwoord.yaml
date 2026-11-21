@@ -1699,6 +1699,7 @@ lessons:
   covers: [evaluaties-van-gevaarlijke-capabilities#0, evaluaties-van-gevaarlijke-capabilities#3, evaluaties-van-gevaarlijke-capabilities#6]
   requires: [rai-frontier-frameworks, rai-boxing-and-tool-ai]
   introduces: [c:dangerous-capability-evaluation]
+  mentions: [c:ai-safety-institute, c:false-positive-rate]
   data: []
   ladder: [python]
   needs: any
