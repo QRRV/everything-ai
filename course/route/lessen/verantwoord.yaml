@@ -1574,6 +1574,7 @@ lessons:
   covers: [het-debat-over-catastrofale-en-existentiele-risico-s#0, het-debat-over-catastrofale-en-existentiele-risico-s#1]
   requires: [rai-outer-inner-alignment]
   introduces: [c:existential-risk, c:orthogonality-thesis, c:gradual-disempowerment, c:catastrophic-risk]
+  mentions: [c:conditional-probability, c:power-seeking]
   data: []
   ladder: [python]
   needs: any

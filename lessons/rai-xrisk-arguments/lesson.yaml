@@ -1,0 +1,48 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: rai-xrisk-arguments
+minutes: 45
+title:
+  en: "The arguments for catastrophic risk"
+  nl: "De argumenten voor catastrofaal risico"
+goal:
+  en: "tell catastrophic from existential risk, explain the orthogonality thesis and instrumental convergence, multiply the premises of Carlsmith's argument and weigh the method, and recognize gradual disempowerment."
+  nl: "catastrofaal en existentieel risico uit elkaar houden, de orthogonality thesis en instrumental convergence uitleggen, de premissen van het argument van Carlsmith vermenigvuldigen en de methode wegen, en gradual disempowerment herkennen."
+summary:
+  - en: "An existential risk threatens to wipe out humanity or permanently and drastically curtail its potential (Bostrom, 2002); a catastrophic risk is wider. Hendrycks, Mazeika and Woodside (2023) sort catastrophic AI risks into malicious use, AI races, organizational risks and rogue AIs."
+    nl: "Een existentieel risico dreigt de mensheid uit te roeien of de toekomst van de mensheid blijvend en ingrijpend in te perken (Bostrom, 2002); een catastrofaal risico is breder. Hendrycks, Mazeika en Woodside (2023) delen catastrofale risico's van AI in naar kwaadwillig gebruik, de AI-race, organisatierisico's en rogue AI's."
+  - en: "By Bostrom's orthogonality thesis (2012), more or less any level of intelligence could in principle go with more or less any final goal. By instrumental convergence, in-between goals such as self-preservation and resources would help a wide range of final goals. The paperclip maximizer is a thought experiment, not a forecast."
+    nl: "Volgens de orthogonality thesis van Bostrom (2012) kan zo ongeveer elk niveau van intelligentie in principe samengaan met zo ongeveer elk einddoel. Volgens instrumental convergence zouden tussendoelen zoals zelfbehoud en middelen helpen bij een breed scala aan einddoelen. De paperclip maximizer is een gedachte-experiment, geen voorspelling."
+  - en: "Carlsmith (2021) split the argument into six premises and multiplied a credence in each, given the ones before; splitting an argument can push the number down, and the report asks that its numbers be held very lightly."
+    nl: "Carlsmith (2021) verdeelde het argument in zes premissen en vermenigvuldigde een subjectieve kans voor elke premisse, gegeven de premissen ervoor; zo'n verdeling kan het getal omlaag duwen, en volgens het rapport moet je de getallen met heel veel voorbehoud lezen."
+  - en: "Christiano (2019) and Kulveit and colleagues (2025) describe failure that need not come from one AI that takes over; gradual disempowerment needs no coordinated power-seeking. AI 2027 (2025) is a scenario with two endings: the authors' best guess, not a recommendation."
+    nl: "Christiano (2019) en Kulveit en anderen (2025) beschrijven falen dat niet hoeft te komen van één AI die de macht grijpt; voor gradual disempowerment is geen gecoördineerd zoeken naar macht nodig. AI 2027 (2025) is een scenario met twee eindes: de beste schatting van de auteurs, geen aanbeveling."
+can_now:
+  - en: "multiply conditional credences to see how likely every premise of an argument is together"
+    nl: "voorwaardelijke subjectieve kansen vermenigvuldigen om te zien hoe waarschijnlijk alle premissen van een argument samen zijn"
+    by: chain
+  - en: "show in a small model that gathering resources first helps a goal, whatever the goal"
+    nl: "in een klein model laten zien dat eerst middelen verzamelen een doel helpt, wat het doel ook is"
+    by: outputs
+  - en: "explain why, by the orthogonality thesis, a very intelligent AI need not find its own goal pointless"
+    nl: "uitleggen waarom een heel intelligente AI volgens de orthogonality thesis het eigen doel niet zinloos hoeft te vinden"
+    by: smart
+  - en: "recognize gradual disempowerment in a story where no AI seeks power"
+    nl: "gradual disempowerment herkennen in een verhaal waarin geen enkele AI macht zoekt"
+    by: culture
+further_reading:
+  - en: "Nick Bostrom, [*The Superintelligent Will: Motivation and Instrumental Rationality in Advanced Artificial Agents*](https://nickbostrom.com/superintelligentwill.pdf), Minds and Machines 22(2) (2012): the orthogonality thesis and the instrumental convergence thesis"
+    nl: "Nick Bostrom, [*The Superintelligent Will: Motivation and Instrumental Rationality in Advanced Artificial Agents*](https://nickbostrom.com/superintelligentwill.pdf), Minds and Machines 22(2) (2012): de orthogonality thesis en de stelling over instrumental convergence (in het Engels)"
+  - en: "Stephen M. Omohundro, [*The Basic AI Drives*](https://selfawaresystems.com/wp-content/uploads/2008/01/ai_drives_final.pdf) (2008)"
+    nl: "Stephen M. Omohundro, [*The Basic AI Drives*](https://selfawaresystems.com/wp-content/uploads/2008/01/ai_drives_final.pdf) (2008) (in het Engels)"
+  - en: "Joseph Carlsmith, [*Is Power-Seeking AI an Existential Risk?*](https://arxiv.org/abs/2206.13353) (report of April 2021), section 8, *Probabilities*"
+    nl: "Joseph Carlsmith, [*Is Power-Seeking AI an Existential Risk?*](https://arxiv.org/abs/2206.13353) (rapport van april 2021), paragraaf 8, *Probabilities* (in het Engels)"
+  - en: "Dan Hendrycks, Mantas Mazeika and Thomas Woodside, [*An Overview of Catastrophic AI Risks*](https://arxiv.org/abs/2306.12001) (version 4, 2023)"
+    nl: "Dan Hendrycks, Mantas Mazeika en Thomas Woodside, [*An Overview of Catastrophic AI Risks*](https://arxiv.org/abs/2306.12001) (versie 4, 2023) (in het Engels)"
+  - en: "Paul Christiano, [*What failure looks like*](https://www.alignmentforum.org/posts/HBxe6wdjxK239zajf/what-failure-looks-like) (AI Alignment Forum, 17 March 2019)"
+    nl: "Paul Christiano, [*What failure looks like*](https://www.alignmentforum.org/posts/HBxe6wdjxK239zajf/what-failure-looks-like) (AI Alignment Forum, 17 maart 2019) (in het Engels)"
+  - en: "Jan Kulveit, Raymond Douglas, Nora Ammann, Deger Turan, David Krueger and David Duvenaud, [*Gradual Disempowerment: Systemic Existential Risks from Incremental AI Development*](https://arxiv.org/abs/2501.16946) (version 2, 2025)"
+    nl: "Jan Kulveit, Raymond Douglas, Nora Ammann, Deger Turan, David Krueger en David Duvenaud, [*Gradual Disempowerment: Systemic Existential Risks from Incremental AI Development*](https://arxiv.org/abs/2501.16946) (versie 2, 2025) (in het Engels)"
+  - en: "Daniel Kokotajlo, Scott Alexander, Thomas Larsen, Eli Lifland and Romeo Dean, [*AI 2027*](https://ai-2027.com/) (3 April 2025): the scenario, its two endings and its footnotes"
+    nl: "Daniel Kokotajlo, Scott Alexander, Thomas Larsen, Eli Lifland en Romeo Dean, [*AI 2027*](https://ai-2027.com/) (3 april 2025): het scenario, de twee eindes en de voetnoten (in het Engels)"
