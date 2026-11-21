@@ -1,0 +1,40 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: nlp-pragmatics
+minutes: 35
+title:
+  en: "What is meant, not said"
+  nl: "Wat bedoeld wordt, niet gezegd"
+goal:
+  en: "see what speakers mean beyond what they say, and work out in code what a listener takes from a word on a scale or from *the*."
+  nl: "zien wat sprekers bedoelen voorbij wat ze zeggen, en in code uitwerken wat een luisteraar opmaakt uit een woord op een schaal of uit *de*."
+summary:
+  - en: "Pragmatics is about what speakers mean and do with words in a context. A speech act is what an utterance does: *Can you pass the salt?* asks whether you are able to, and is heard as a request."
+    nl: "Pragmatiek gaat over wat sprekers in een context bedoelen en doen met woorden. Een taalhandeling is wat een uiting doet: *kun je het zout aangeven?* vraagt of je dat kunt, en wordt gehoord als een verzoek."
+  - en: "Grice's Cooperative Principle and its maxims of Quantity, Quality, Relation and Manner let a listener work out what a speaker means beyond what was said: an implicature."
+    nl: "Het coöperatieprincipe van Grice en de maximes van kwantiteit, kwaliteit, relatie en manier laten een luisteraar uitwerken wat een spreker bedoelt voorbij wat er gezegd is: een implicatuur."
+  - en: "On a scale such as *all*, *most*, *many*, *some*, a weaker word suggests that the stronger ones are false. The speaker can take that back without a contradiction: *Some athletes smoke. Indeed, all do.*"
+    nl: "Op een schaal zoals *alle*, *de meeste*, *veel*, *sommige* suggereert een zwakker woord dat de sterkere onwaar zijn. De spreker kan dat terugnemen zonder tegenspraak: *sommige sporters roken; sterker nog, ze roken allemaal*."
+  - en: "A presupposition is what a sentence takes for granted, such as that Tom chased Pip before, in *Tom has stopped chasing Pip*; it usually stays when you add *not*. When *the cat* refers to nothing, Russell called the sentence false; Strawson argued that it can be neither true nor false."
+    nl: "Een presuppositie is wat een zin als vanzelfsprekend aanneemt, zoals dat Tom Pip eerst achtervolgde, in *Tom is gestopt met Pip achtervolgen*; die blijft meestal staan als je *niet* toevoegt. Als *de kat* naar niets verwijst, noemde Russell de zin onwaar; Strawson betoogde dat de zin dan waar noch onwaar kan zijn."
+can_now:
+  - en: "find the stronger words on a scale that a listener takes to be false"
+    nl: "de sterkere woorden op een schaal vinden die een luisteraar opvat als onwaar"
+    by: implicated
+  - en: "find the one thing a phrase with *the* refers to, or see that it refers to nothing"
+    nl: "het ene ding vinden waar een woordgroep met *de* naar verwijst, of zien dat die naar niets verwijst"
+    by: the_one
+  - en: "tell what a speaker does with an utterance, also when its form suggests something else"
+    nl: "zeggen wat een spreker met een uiting doet, ook als de vorm iets anders doet vermoeden"
+    by: acts
+  - en: "tell an implicature, which a speaker can take back, from what a sentence says or takes for granted"
+    nl: "een implicatuur, die een spreker kan terugnemen, onderscheiden van wat een zin zegt of als vanzelfsprekend aanneemt"
+    by: cancel
+further_reading:
+  - en: "Kepa Korta and John Perry, [*Pragmatics*](https://plato.stanford.edu/entries/pragmatics/), Stanford Encyclopedia of Philosophy (revision of May 28, 2024): speech acts, Grice and what speakers mean"
+    nl: "Kepa Korta en John Perry, [*Pragmatics*](https://plato.stanford.edu/entries/pragmatics/), Stanford Encyclopedia of Philosophy (versie van 28 mei 2024): taalhandelingen, Grice en wat sprekers bedoelen (in het Engels)"
+  - en: "Wayne Davis, [*Implicature*](https://plato.stanford.edu/entries/implicature/), Stanford Encyclopedia of Philosophy (revision of January 10, 2024): Grice's maxims, Horn's scales and taking an implicature back"
+    nl: "Wayne Davis, [*Implicature*](https://plato.stanford.edu/entries/implicature/), Stanford Encyclopedia of Philosophy (versie van 10 januari 2024): de maximes van Grice, de schalen van Horn en het terugnemen van een implicatuur (in het Engels)"
+  - en: "Laura Ruis and colleagues, [*The Goldilocks of Pragmatic Understanding*](https://arxiv.org/abs/2210.14986) (NeurIPS 2023): large language models and the 600 exchanges with an implicature"
+    nl: "Laura Ruis en collega's, [*The Goldilocks of Pragmatic Understanding*](https://arxiv.org/abs/2210.14986) (NeurIPS 2023): large language models en de 600 gesprekjes met een implicatuur (in het Engels)"
