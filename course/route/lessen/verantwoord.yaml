@@ -1611,7 +1611,7 @@ lessons:
   level: basis
   domein: verantwoord
   module: veiligheid
-  idea: "Surveys of AI researchers give a median chance of an extremely bad outcome of a few percent, with a very wide spread; the median, the spread and how the question is asked matter more than one headline number."
+  idea: "Surveys of AI researchers put the median chance of extinction or a similarly severe outcome from AI at 5 to 10%, with a very wide spread; the median, the spread and how the question is asked matter more than one headline number."
   covers: [het-debat-over-catastrofale-en-existentiele-risico-s#5]
   requires: [rai-xrisk-counterpositions, stats-describe]
   introduces: [c:expert-survey, c:p-doom, c:biological-anchors]

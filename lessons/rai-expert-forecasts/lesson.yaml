@@ -1,0 +1,44 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: rai-expert-forecasts
+minutes: 40
+title:
+  en: "What experts expect"
+  nl: "Wat experts verwachten"
+goal:
+  en: "read an expert survey by its question, its median and its spread, combine the forecasts of several hypotheses by their weights, and say what such numbers are worth."
+  nl: "een expertenenquête lezen aan de hand van de vraag, de mediaan en de spreiding, de voorspellingen van meerdere hypotheses samenvoegen naar hoe zwaar elk meetelt, en zeggen wat zulke getallen waard zijn."
+summary:
+  - en: "AI Impacts has surveyed AI researchers periodically since 2016. In December 2024, the median of 1,489 answers about extinction or similarly permanent and severe disempowerment from AI was 10%, and the middle half of the answers ran from 1% to 25%."
+    nl: "AI Impacts houdt sinds 2016 met tussenpozen een enquête onder AI-onderzoekers. In december 2024 was de mediaan van 1.489 antwoorden over uitsterven of een even blijvende en ernstige machteloosheid door AI 10%, en liep de middelste helft van de antwoorden van 1% tot 25%."
+  - en: "How the question is asked can change the answer: in every edition of the survey, asking for the chance by a given year gave later forecasts than asking for the year of a given chance. In the XPT of 2022, the median AI expert put extinction from AI by 2100 at 3%, the median superforecaster at 0.38%."
+    nl: "Hoe de vraag gesteld wordt, kan het antwoord veranderen: in elke editie van de enquête leverde de vraag naar de kans in een gegeven jaar latere voorspellingen op dan de vraag naar het jaar bij een gegeven kans. In het XPT van 2022 was de mediaan voor uitsterven door AI, uiterlijk in 2100, 3% bij de AI-experts en 0,38% bij de superforecasters."
+  - en: "p(doom) is someone's personal probability of a catastrophe from AI, and what it is a probability of differs. Narayanan and Kapoor (2024) call such forecasts far too unreliable to be useful for policy; the authors of the paper on the survey of 2023 call them one important piece of the puzzle."
+    nl: "p(doom) is de persoonlijke kans die iemand geeft op een catastrofe door AI, en waar die kans over gaat, verschilt. Narayanan en Kapoor (2024) noemen zulke voorspellingen veel te onbetrouwbaar om bruikbaar te zijn voor beleid; de auteurs van de paper over de enquête van 2023 noemen ze één belangrijk stukje van de puzzel."
+  - en: "Cotra's biological anchors (2020) compare the compute training would take with biology, and weigh several hypotheses into one forecast: in a draft report, a tentative median of about 2050 for transformative AI, moved to about 2040 in 2022."
+    nl: "De biological anchors van Cotra (2020) vergelijken de compute die training zou kosten met de biologie, en wegen meerdere hypotheses samen tot één voorspelling: in een conceptrapport een voorlopige mediaan van ongeveer 2050 voor transformative AI, in 2022 bijgesteld naar ongeveer 2040."
+can_now:
+  - en: "describe many answers by their mean, their median and the middle half of them"
+    nl: "veel antwoorden beschrijven met hun gemiddelde, hun mediaan en hun middelste helft"
+    by: describe
+  - en: "combine the chances of several hypotheses, each counted by its weight"
+    nl: "de kansen van meerdere hypotheses samenvoegen, elk naar hoe zwaar die meetelt"
+    by: mixture
+  - en: "say what a headline number from an expert survey leaves out"
+    nl: "zeggen wat een getal uit een expertenenquête in een kop weglaat"
+    by: headline
+  - en: "explain why Narayanan and Kapoor object to policy built on p(doom)"
+    nl: "uitleggen waarom Narayanan en Kapoor bezwaar maken tegen beleid dat op p(doom) gebouwd is"
+    by: pdoom
+further_reading:
+  - en: "Katja Grace and colleagues, [*Advanced AI according to 1,580 researchers: uncertain, unsafe, and sooner than we thought*](https://aiimpacts.org/wp-content/uploads/2026/09/ESPAI2024.pdf) (AI Impacts, September 2026), the report of the survey of December 2024"
+    nl: "Katja Grace en collega's, [*Advanced AI according to 1,580 researchers: uncertain, unsafe, and sooner than we thought*](https://aiimpacts.org/wp-content/uploads/2026/09/ESPAI2024.pdf) (AI Impacts, september 2026), het rapport van de enquête van december 2024 (in het Engels)"
+  - en: "Katja Grace and colleagues, [*Thousands of AI Authors on the Future of AI*](https://doi.org/10.1613/jair.1.19087), Journal of Artificial Intelligence Research 84 (October 2025), on the survey of 2023"
+    nl: "Katja Grace en collega's, [*Thousands of AI Authors on the Future of AI*](https://doi.org/10.1613/jair.1.19087), Journal of Artificial Intelligence Research 84 (oktober 2025), over de enquête van 2023 (in het Engels)"
+  - en: "Ezra Karger and colleagues, [*Forecasting Existential Risks: Evidence from a Long-Run Forecasting Tournament*](https://forecastingresearch.org/pdf/existential-risk-persuasion-tournament.pdf) (Forecasting Research Institute, working paper, version of 8 August 2023)"
+    nl: "Ezra Karger en collega's, [*Forecasting Existential Risks: Evidence from a Long-Run Forecasting Tournament*](https://forecastingresearch.org/pdf/existential-risk-persuasion-tournament.pdf) (Forecasting Research Institute, working paper, versie van 8 augustus 2023) (in het Engels)"
+  - en: "Arvind Narayanan and Sayash Kapoor, [*AI existential risk probabilities are too unreliable to inform policy*](https://www.normaltech.ai/p/ai-existential-risk-probabilities) (26 July 2024)"
+    nl: "Arvind Narayanan en Sayash Kapoor, [*AI existential risk probabilities are too unreliable to inform policy*](https://www.normaltech.ai/p/ai-existential-risk-probabilities) (26 juli 2024) (in het Engels)"
+  - en: "Ajeya Cotra, [*Draft report on AI timelines*](https://www.lesswrong.com/posts/KrJfoZzpSDpnrv9va/draft-report-on-ai-timelines) (LessWrong, 18 September 2020), with a link to the folder of the report on Google Drive"
+    nl: "Ajeya Cotra, [*Draft report on AI timelines*](https://www.lesswrong.com/posts/KrJfoZzpSDpnrv9va/draft-report-on-ai-timelines) (LessWrong, 18 september 2020), met een link naar de map van het rapport op Google Drive (in het Engels)"
