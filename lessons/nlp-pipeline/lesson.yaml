@@ -1,0 +1,40 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: nlp-pipeline
+minutes: 30
+title:
+  en: "An NLP pipeline"
+  nl: "Een NLP-pipeline"
+goal:
+  en: "chain steps that each take the output of the step before, find the step where a mistake starts, and see where to fix it and where to test it."
+  nl: "stappen aan elkaar rijgen die elk de uitvoer van de stap ervoor nemen, de stap vinden waar een fout begint, en zien waar je die verbetert en waar je test."
+summary:
+  - en: "An NLP pipeline is a chain of steps in which each step takes the output of the step before, such as splitting sentences, splitting words and finding names."
+    nl: "Een NLP-pipeline is een keten van stappen waarin elke stap de uitvoer van de stap ervoor neemt, zoals zinnen splitsen, woorden splitsen en namen vinden."
+  - en: "spaCy (2015, a library under the MIT license) offers trained pipelines, also for Dutch, each with its own license; NLTK (2001, made for teaching) is a toolbox with tools, texts and word lists; Stanza, from Stanford, is a third."
+    nl: "spaCy (2015, een library onder de MIT-licentie) biedt getrainde pipelines, ook voor het Nederlands, elk met een eigen licentie; NLTK (2001, gemaakt om mee les te geven) is een gereedschapskist met tools, teksten en woordenlijsten; Stanza, van Stanford, is een derde."
+  - en: "A step sees only what the step before gave back, so a mistake early on passes on to the end. Keep the output of every step, and the first one that differs from what a person gives is where the mistake starts."
+    nl: "Een stap ziet alleen wat de stap ervoor teruggaf, dus een vroege fout loopt door tot het eind. Bewaar de uitvoer van elke stap: de eerste die verschilt van wat een mens geeft, is waar de fout begint."
+  - en: "A step tested on input that people made by hand often does worse in the chain: in a measurement that Finkel and others (2006) report, a score went from 91.2 to 80.0."
+    nl: "Een stap die getest is op invoer die mensen met de hand maakten, doet het in de keten vaak slechter: in een meting die Finkel en anderen (2006) noemen, ging een score van 91,2 naar 80,0."
+can_now:
+  - en: "chain steps and keep the output of every step"
+    nl: "stappen aan elkaar rijgen en de uitvoer van elke stap bewaren"
+    by: trace
+  - en: "find the first step whose output is wrong"
+    nl: "de eerste stap vinden waarvan de uitvoer fout is"
+    by: first_wrong
+  - en: "fix a mistake in the step where it starts, not later"
+    nl: "een fout verbeteren in de stap waar die begint, niet later"
+    by: fix
+  - en: "say why a step scores lower in the chain than on clean input"
+    nl: "zeggen waarom een stap in de keten lager scoort dan op schone invoer"
+    by: measure
+further_reading:
+  - en: "spaCy, [*Processing Pipelines*](https://spacy.io/usage/processing-pipelines): how spaCy's steps pass a document on"
+    nl: "spaCy, [*Processing Pipelines*](https://spacy.io/usage/processing-pipelines): hoe de stappen van spaCy een document doorgeven (in het Engels)"
+  - en: "Steven Bird, Ewan Klein and Edward Loper, [*Natural Language Processing with Python*](https://www.nltk.org/book/): the free book of NLTK"
+    nl: "Steven Bird, Ewan Klein en Edward Loper, [*Natural Language Processing with Python*](https://www.nltk.org/book/): het gratis boek van NLTK (in het Engels)"
+  - en: "Jenny Rose Finkel, Christopher D. Manning and Andrew Y. Ng (2006), [*Solving the Problem of Cascading Errors*](https://aclanthology.org/W06-1673.pdf): why mistakes pile up in a pipeline, and a way around it"
+    nl: "Jenny Rose Finkel, Christopher D. Manning en Andrew Y. Ng (2006), [*Solving the Problem of Cascading Errors*](https://aclanthology.org/W06-1673.pdf): waarom fouten zich in een pipeline opstapelen, en een manier om dat te omzeilen (in het Engels)"
