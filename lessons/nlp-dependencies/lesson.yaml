@@ -1,0 +1,40 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: nlp-dependencies
+minutes: 35
+title:
+  en: "Who depends on whom: dependency trees"
+  nl: "Wie hangt van wie af: dependency trees"
+goal:
+  en: "read a dependency tree, in which every word hangs from its head with a labeled relation, find the dependents of a word, and follow the heads from a word up to the root."
+  nl: "een dependency tree lezen, waarin elk woord aan het hoofdwoord hangt met een label voor de relatie, de afhankelijke woorden van een woord vinden, en de hoofdwoorden volgen van een woord tot en met de root."
+summary:
+  - en: "A dependency relation links a head, the central word, to a dependent that says something about it, with a label such as nsubj (subject), obj (object), det or amod."
+    nl: "Een dependency relation verbindt een hoofdwoord, het centrale woord, met een afhankelijk woord dat er iets over zegt, met een label zoals nsubj (onderwerp), obj (lijdend voorwerp), det of amod."
+  - en: "In a dependency tree, every word has one head, except the root, often the main verb. From every word, the heads lead up to the root along one path."
+    nl: "In een dependency tree heeft elk woord één hoofdwoord, behalve de root, vaak het hoofdwerkwoord. Vanaf elk woord leiden de hoofdwoorden langs één pad naar de root."
+  - en: "Universal Dependencies draws such trees by the same guidelines for many languages, with 37 universal relations. A preposition hangs from its noun, with the label case."
+    nl: "Universal Dependencies tekent zulke bomen voor veel talen volgens dezelfde richtlijnen, met 37 universele relaties. Een voorzetsel hangt aan het zelfstandig naamwoord waar het bij hoort, met het label case."
+  - en: "The treebanks of UD are files in CoNLL-U: one word per line, with columns such as ID, FORM, UPOS, HEAD and DEPREL; HEAD 0 marks the root."
+    nl: "De treebanks van UD zijn bestanden in CoNLL-U: één woord per regel, met kolommen zoals ID, FORM, UPOS, HEAD en DEPREL; HEAD 0 geeft de root aan."
+can_now:
+  - en: "find the dependents of a word from the heads of a sentence"
+    nl: "de afhankelijke woorden van een woord vinden met de hoofdwoorden van een zin"
+    by: dependents
+  - en: "follow the heads from a word up to the root of a dependency tree"
+    nl: "de hoofdwoorden volgen van een woord tot en met de root van een dependency tree"
+    by: path_to_root
+  - en: "give the words of a sentence their relation to their head: subject, object, determiner, adjective"
+    nl: "de relatie van elk woord van een zin met het hoofdwoord benoemen: onderwerp, lijdend voorwerp, lidwoord, bijvoeglijk naamwoord"
+    by: relations
+  - en: "say which word Universal Dependencies makes the head of a preposition"
+    nl: "zeggen welk woord Universal Dependencies het hoofdwoord van een voorzetsel maakt"
+    by: case
+further_reading:
+  - en: "Daniel Jurafsky and James H. Martin, [*Speech and Language Processing*, chapter 20](https://web.stanford.edu/~jurafsky/slp3/20.pdf): dependency relations, dependency trees, and how a program finds the tree of a sentence"
+    nl: "Daniel Jurafsky en James H. Martin, [*Speech and Language Processing*, hoofdstuk 20](https://web.stanford.edu/~jurafsky/slp3/20.pdf): dependency relations, dependency trees, en hoe een programma de boom van een zin vindt (in het Engels)"
+  - en: "Universal Dependencies, [Universal Dependency Relations](https://universaldependencies.org/u/dep/): the 37 relations, each with its own page of examples"
+    nl: "Universal Dependencies, [Universal Dependency Relations](https://universaldependencies.org/u/dep/): de 37 relaties, elk met een eigen pagina met voorbeelden (in het Engels)"
+  - en: "Universal Dependencies, [CoNLL-U Format](https://universaldependencies.org/format.html): the ten columns of the files, one by one"
+    nl: "Universal Dependencies, [CoNLL-U Format](https://universaldependencies.org/format.html): de tien kolommen van de bestanden, een voor een (in het Engels)"
