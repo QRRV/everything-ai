@@ -1685,6 +1685,7 @@ lessons:
   covers: [ai-control#0]
   requires: [rai-off-switch]
   introduces: [c:ai-boxing, c:tool-ai, c:oracle-ai, c:ai-control]
+  warns: [AI service]
   data: []
   ladder: [python]
   needs: any

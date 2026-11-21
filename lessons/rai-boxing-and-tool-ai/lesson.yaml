@@ -1,0 +1,50 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: rai-boxing-and-tool-ai
+minutes: 45
+title:
+  en: "Boxes, oracles and tools"
+  nl: "Dozen, oracles en tools"
+goal:
+  en: "say why a box, an oracle and a tool each leak, work out how many random checks catch a false answer, see why checking only the start loses to a rare attack, and choose a control protocol from measured safety and usefulness."
+  nl: "zeggen waarom een doos, een oracle en een tool elk lekken, uitrekenen hoeveel willekeurige controles een fout antwoord vinden, zien waarom alleen het begin controleren verliest van een zeldzame aanval, en een protocol voor AI control kiezen op gemeten safety en usefulness."
+summary:
+  - en: "AI boxing keeps an AI system cut off from the world, with only a narrow channel to a few people. In Yudkowsky's AI-box games (2002 and later), the player of the AI won 3 of 5, which suggests that the people guarding a box can be talked round; Yudkowsky calls the results anecdotal."
+    nl: "AI boxing houdt een AI-systeem afgesloten van de wereld, met alleen een smal kanaal naar een paar mensen. In de AI-box-spellen van Yudkowsky (2002 en later) won de speler van de AI er 3 van 5, wat erop wijst dat de mensen die een doos bewaken om te praten zijn; Yudkowsky noemt de uitkomsten anekdotisch."
+  - en: "An oracle AI only answers questions. Armstrong, Sandberg and Bostrom (2012) find that it might be safer than an AI that acts, but still potentially dangerous, because its answers reach people; checking answers chosen at random, which you could verify yourself, helps."
+    nl: "Een oracle AI beantwoordt alleen vragen. Volgens Armstrong, Sandberg en Bostrom (2012) is een oracle AI misschien veiliger dan een AI die handelt, maar nog altijd mogelijk gevaarlijk, omdat de antwoorden mensen bereiken; het helpt om willekeurig gekozen antwoorden te controleren die je zelf kunt nagaan."
+  - en: "Tool AI suggests instead of acting (Karnofsky, 2012). Yudkowsky replied that planning oracles have hidden gotchas too, and Gwern argued that tools will be turned into agents, because agents act better and faster."
+    nl: "Tool AI doet voorstellen in plaats van te handelen (Karnofsky, 2012). Yudkowsky antwoordde dat ook oracles die plannen maken verborgen valkuilen hebben, en Gwern betoogde dat tools agents zullen worden, omdat agents beter en sneller handelen."
+  - en: "AI control (Greenblatt et al., 2024) designs safety measures that should hold even if the model tries to get around them, and tests them against a red team. With GPT-4 as the untrusted model and GPT-3.5 as the trusted one, trusted editing reached 92% safety at 94% usefulness, far more than auditing only the first 2% of the work."
+    nl: "AI control (Greenblatt et al., 2024) ontwerpt veiligheidsmaatregelen die moeten standhouden, ook als het model ze probeert te omzeilen, en test ze tegen een red team. Met GPT-4 als untrusted model en GPT-3.5 als trusted model haalde trusted editing 92% safety bij 94% usefulness, veel meer dan alleen de eerste 2% van het werk controleren."
+  - en: "Every approach trades safety against usefulness, and the authors of AI control themselves expect it to work less well as models grow more capable."
+    nl: "Elke aanpak ruilt safety in tegen usefulness, en de auteurs van AI control verwachten zelf dat het minder goed werkt naarmate modellen krachtiger worden."
+can_now:
+  - en: "work out how many random checks catch a false answer with the chance you want"
+    nl: "uitrekenen hoeveel willekeurige controles een fout antwoord vinden met de kans die je wilt"
+    by: checks
+  - en: "choose the safest control protocol that is useful enough, from measured safety and usefulness"
+    nl: "het veiligste protocol voor AI control kiezen dat nuttig genoeg is, op gemeten safety en usefulness"
+    by: best
+  - en: "explain why an AI that only answers questions is not safe on its own"
+    nl: "uitleggen waarom een AI die alleen vragen beantwoordt niet vanzelf veilig is"
+    by: oracle
+  - en: "say why tools come under pressure to become agents"
+    nl: "zeggen waarom tools onder druk komen te staan om agents te worden"
+    by: agents
+further_reading:
+  - en: "Eliezer Yudkowsky, [*The AI-Box Experiment*](https://www.yudkowsky.net/singularity/aibox) (2002): the games, the rules and the claim"
+    nl: "Eliezer Yudkowsky, [*The AI-Box Experiment*](https://www.yudkowsky.net/singularity/aibox) (2002): de spellen, de regels en de claim (in het Engels)"
+  - en: "Stuart Armstrong, Anders Sandberg and Nick Bostrom, [*Thinking Inside the Box: Controlling and Using an Oracle AI*](https://nickbostrom.com/papers/oracle.pdf) (author's preprint, 2012)"
+    nl: "Stuart Armstrong, Anders Sandberg en Nick Bostrom, [*Thinking Inside the Box: Controlling and Using an Oracle AI*](https://nickbostrom.com/papers/oracle.pdf) (preprint van de auteurs, 2012) (in het Engels)"
+  - en: "Holden Karnofsky, [*Thoughts on the Singularity Institute (SI)*](https://www.lesswrong.com/posts/6SGqkCgHuNr7d4yJm/thoughts-on-the-singularity-institute-si) (LessWrong, 11 May 2012), Objection 2 on tool and agent AI"
+    nl: "Holden Karnofsky, [*Thoughts on the Singularity Institute (SI)*](https://www.lesswrong.com/posts/6SGqkCgHuNr7d4yJm/thoughts-on-the-singularity-institute-si) (LessWrong, 11 mei 2012), Objection 2 over tool AI en AI als agent (in het Engels)"
+  - en: "Eliezer Yudkowsky, [*Reply to Holden on 'Tool AI'*](https://www.lesswrong.com/posts/sizjfDgCgAsuLJQmm/reply-to-holden-on-tool-ai) (LessWrong, 12 June 2012)"
+    nl: "Eliezer Yudkowsky, [*Reply to Holden on 'Tool AI'*](https://www.lesswrong.com/posts/sizjfDgCgAsuLJQmm/reply-to-holden-on-tool-ai) (LessWrong, 12 juni 2012) (in het Engels)"
+  - en: "Gwern Branwen, [*Why Tool AIs Want to Be Agent AIs*](https://gwern.net/tool-ai) (2016, revised later)"
+    nl: "Gwern Branwen, [*Why Tool AIs Want to Be Agent AIs*](https://gwern.net/tool-ai) (2016, later herzien) (in het Engels)"
+  - en: "Ryan Greenblatt, Buck Shlegeris, Kshitij Sachan and Fabien Roger, [*AI Control: Improving Safety Despite Intentional Subversion*](https://arxiv.org/abs/2312.06942) (ICML 2024; version of 17 July 2024)"
+    nl: "Ryan Greenblatt, Buck Shlegeris, Kshitij Sachan en Fabien Roger, [*AI Control: Improving Safety Despite Intentional Subversion*](https://arxiv.org/abs/2312.06942) (ICML 2024; versie van 17 juli 2024) (in het Engels)"
+  - en: "Ryan Greenblatt and Buck Shlegeris, [*The case for ensuring that powerful AIs are controlled*](https://www.lesswrong.com/posts/kcKrE9mzEHrdqtDpE/the-case-for-ensuring-that-powerful-ais-are-controlled) (LessWrong, 24 January 2024)"
+    nl: "Ryan Greenblatt en Buck Shlegeris, [*The case for ensuring that powerful AIs are controlled*](https://www.lesswrong.com/posts/kcKrE9mzEHrdqtDpE/the-case-for-ensuring-that-powerful-ais-are-controlled) (LessWrong, 24 januari 2024) (in het Engels)"
