@@ -315,7 +315,7 @@ lessons:
   covers: [tekstverwerking#3]
   requires: [nlp-tokenize, lm-tokens-outside]
   introduces: [c:text-normalization, c:case-folding, c:stop-word]
-  data: [snowball-stopwords, gutenberg-books]
+  data: [snowball-stopwords, gutenberg-books, tatoeba-sentences]
   ladder: [python]
   needs: any
 

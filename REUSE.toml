@@ -485,6 +485,12 @@ SPDX-FileCopyrightText = "Matthew S. Dryer and Martin Haspelmath (eds.), The Wor
 SPDX-License-Identifier = "CC-BY-4.0"
 
 [[annotations]]
+path = ["data/snowball-stop-en.txt", "data/snowball-stop-nl.txt"]
+precedence = "override"
+SPDX-FileCopyrightText = "Copyright (c) 2001, Dr Martin Porter; Copyright (c) 2002, Richard Boulton (the Snowball project, https://snowballstem.org; its stop word lists for English and Dutch, unchanged)"
+SPDX-License-Identifier = "BSD-3-Clause"
+
+[[annotations]]
 path = "data/banking77-small.json"
 precedence = "override"
 SPDX-FileCopyrightText = "2020 PolyAI (BANKING77, Casanueva and others, https://arxiv.org/abs/2003.04807; a subset made for Everything AI)"

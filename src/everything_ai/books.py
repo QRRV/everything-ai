@@ -8,7 +8,8 @@ a lesson can hand a learner a book before the learner knows how to cut a text in
 Next to the books, `dutch_sentences()` gives the Dutch sentences of Tatoeba in data/tatoeba-nl.tsv.gz, today's Dutch
 written by volunteers (data/tools/make_tatoeba_nl.py), and `dutch_sentence_words()` all their words as one list.
 `dutch_pairs()` gives the sentences of Tatoeba in Frisian, Gronings and Limburgish in data/tatoeba-nl-pairs.tsv.gz,
-each with a Dutch translation (data/tools/make_tatoeba_pairs.py)."""
+each with a Dutch translation (data/tools/make_tatoeba_pairs.py). `stop_words(lang)` gives the stop words of Snowball
+for English or Dutch in data/snowball-stop-en.txt and data/snowball-stop-nl.txt (data/tools/make_snowball_stopwords.py)."""
 import functools
 import gzip
 import json
@@ -19,6 +20,7 @@ from everything_ai import paths
 FILE = paths.ROOT / "data" / "gutenberg-books.json.gz"
 TATOEBA_NL = paths.ROOT / "data" / "tatoeba-nl.tsv.gz"
 TATOEBA_PAIRS = paths.ROOT / "data" / "tatoeba-nl-pairs.tsv.gz"
+STOP_WORDS = {"en": paths.ROOT / "data" / "snowball-stop-en.txt", "nl": paths.ROOT / "data" / "snowball-stop-nl.txt"}
 # a word: letters, with an apostrophe inside it as in "don't" or "Alice's"; digits, punctuation and the underscores
 # that mark italics in the Gutenberg files are no part of a word
 _WORD = re.compile(r"[^\W\d_]+(?:['’][^\W\d_]+)*")
@@ -89,3 +91,25 @@ def dutch_pairs() -> tuple:
             lang, sid, text, nl_id, nl_text = line.split("\t")
             out.append((lang, int(sid), text, int(nl_id), nl_text))
     return tuple(out)
+
+
+@functools.cache
+def _stop_words(lang: str) -> tuple:
+    out = []
+    for line in STOP_WORDS[lang].read_text(encoding="utf-8").splitlines():
+        parts = line.split("|", 1)[0].split()   # a comment starts with |
+        if parts:
+            out.append(parts[0])
+    return tuple(out)
+
+
+def stop_words(lang: str) -> set:
+    """The stop words of Snowball for English (en) or Dutch (nl), in small letters, as a new set each time: the first
+    item of each line of the list, before any comment. The Dutch list is ranked from the commonest word to the rarest;
+    `stop_word_list(lang)` keeps that order."""
+    return set(_stop_words(lang))
+
+
+def stop_word_list(lang: str) -> list:
+    """The stop words of Snowball for English (en) or Dutch (nl) in the order of the file, as a new list each time."""
+    return list(_stop_words(lang))
