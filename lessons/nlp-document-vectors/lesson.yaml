@@ -1,0 +1,44 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: nlp-document-vectors
+minutes: 45
+title:
+  en: "A document as a vector"
+  nl: "Een document als vector"
+goal:
+  en: "turn a sentence into a vector of word counts over a fixed vocabulary, store it as a sparse row, compare two sentences with the cosine similarity, and give a new sentence the label of the most similar one."
+  nl: "een zin omzetten in een vector met aantallen woorden over een vaste vocabulary, die vector als sparse rij bewaren, twee zinnen vergelijken met de cosine similarity, en een nieuwe zin het label geven van de meest gelijkende zin."
+summary:
+  - en: "A vocabulary gives each word a column. A document vector holds one count for each word of the vocabulary, so every document, short or long, becomes a list of the same length. It keeps which words a document has and how often, and forgets their order: a bag of words."
+    nl: "Een vocabulary geeft elk woord een kolom. Een documentvector heeft één aantal voor elk woord van de vocabulary, dus elk document, kort of lang, wordt een lijst van dezelfde lengte. De vector houdt bij welke woorden een document heeft en hoe vaak, en vergeet de volgorde: een bag of words."
+  - en: "The document vectors under each other make the document-term matrix: one row per document, one column per word; textbooks often draw it the other way round. Almost every number in it is 0, so a sparse matrix stores only the numbers that are not 0, each with its place; in Python, a dictionary from column to count does the same."
+    nl: "De documentvectoren onder elkaar vormen de document-term matrix: één rij per document, één kolom per woord; leerboeken tekenen de matrix vaak andersom. Bijna elk getal erin is 0, dus een sparse matrix bewaart alleen de getallen die geen 0 zijn, elk met de eigen plaats; in Python doet een dictionary van kolom naar aantal hetzelfde."
+  - en: "The cosine similarity compares two document vectors whatever their length; with counts it lies between 0 and 1. With sparse rows, only the columns that both rows hold add to the dot product. A word outside the vocabulary has no column and is left out."
+    nl: "De cosine similarity vergelijkt twee documentvectoren, wat de lengte ook is; met aantallen ligt de waarde tussen 0 en 1. Met sparse rijen tellen alleen de kolommen die beide rijen hebben mee voor het inproduct. Een woord buiten de vocabulary heeft geen kolom en valt weg."
+  - en: "Giving a new review sentence the label of its most similar training sentence gets 66.2% of 600 held-out sentences right, and naive Bayes on the same counts 82.8%. Plain counts let common words such as *the* decide much of the cosine similarity."
+    nl: "Een nieuwe zin uit een review het label geven van de meest gelijkende trainingszin levert 66,2% goed op bij 600 achtergehouden zinnen, en naive Bayes met dezelfde aantallen 82,8%. Kale aantallen laten gewone woorden zoals *the* een groot deel van de cosine similarity bepalen."
+can_now:
+  - en: "turn a list of words into a vector of counts over a fixed vocabulary"
+    nl: "een lijst woorden omzetten in een vector met aantallen over een vaste vocabulary"
+    by: vectorize
+  - en: "measure the cosine similarity of two sparse rows, using only the columns they share"
+    nl: "de cosine similarity van twee sparse rijen meten, met alleen de gedeelde kolommen"
+    by: sparse-cosine
+  - en: "find the most similar training sentence for a new sentence, and use its label"
+    nl: "de meest gelijkende trainingszin bij een nieuwe zin vinden, en het label daarvan gebruiken"
+    by: most-similar
+  - en: "say what the cosine similarity of counts gives for another word order, a repeated text, a negation and words outside the vocabulary"
+    nl: "zeggen wat de cosine similarity van aantallen geeft bij een andere woordvolgorde, een herhaalde tekst, een ontkenning en woorden buiten de vocabulary"
+    by: what-comes-out
+further_reading:
+  - en: "Christopher D. Manning, Prabhakar Raghavan and Hinrich Schütze, [*Introduction to Information Retrieval*](https://nlp.stanford.edu/IR-book/), Cambridge University Press, 2008, chapter 6: term frequency, the bag of words, documents as vectors and the cosine similarity"
+    nl: "Christopher D. Manning, Prabhakar Raghavan en Hinrich Schütze, [*Introduction to Information Retrieval*](https://nlp.stanford.edu/IR-book/), Cambridge University Press, 2008, hoofdstuk 6: termfrequentie, de bag of words, documenten als vectoren en de cosine similarity (in het Engels)"
+  - en: "Daniel Jurafsky and James H. Martin, [*Speech and Language Processing*](https://web.stanford.edu/~jurafsky/slp3/), draft of August 19, 2026, the chapters *Embeddings* and *Retrieval-based Models*, sections 5.4 and 11.1: the cosine similarity, and the term-document matrix of four plays by Shakespeare"
+    nl: "Daniel Jurafsky en James H. Martin, [*Speech and Language Processing*](https://web.stanford.edu/~jurafsky/slp3/), conceptversie van 19 augustus 2026, de hoofdstukken *Embeddings* en *Retrieval-based Models*, paragrafen 5.4 en 11.1: de cosine similarity, en de term-document matrix van vier toneelstukken van Shakespeare (in het Engels)"
+  - en: "G. Salton, A. Wong and C. S. Yang, [*A vector space model for automatic indexing*](https://doi.org/10.1145/361219.361220), Communications of the ACM 18(11), 1975: the paper that carries the name of the vector space model"
+    nl: "G. Salton, A. Wong en C. S. Yang, [*A vector space model for automatic indexing*](https://doi.org/10.1145/361219.361220), Communications of the ACM 18(11), 1975: het paper met de naam van het vector space model in de titel (in het Engels)"
+  - en: "scikit-learn, [*Feature extraction*](https://scikit-learn.org/stable/modules/feature_extraction.html#text-feature-extraction), the section on text: the bag of words with CountVectorizer, and why the matrix is sparse"
+    nl: "scikit-learn, [*Feature extraction*](https://scikit-learn.org/stable/modules/feature_extraction.html#text-feature-extraction), het deel over tekst: de bag of words met CountVectorizer, en waarom de matrix sparse is (in het Engels)"
+  - en: "Dimitrios Kotzias, [*Sentiment Labelled Sentences*](https://doi.org/10.24432/C57604), UCI Machine Learning Repository, 2015: the 3,000 sentences of this lesson, made for Kotzias, Denil, de Freitas and Smyth, *From Group to Individual Labels using Deep Features*, KDD 2015"
+    nl: "Dimitrios Kotzias, [*Sentiment Labelled Sentences*](https://doi.org/10.24432/C57604), UCI Machine Learning Repository, 2015: de 3.000 zinnen van deze les, gemaakt voor Kotzias, Denil, de Freitas en Smyth, *From Group to Individual Labels using Deep Features*, KDD 2015 (in het Engels)"

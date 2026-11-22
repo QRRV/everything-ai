@@ -381,6 +381,7 @@ lessons:
   covers: [klassieke-tekstclassificatie#0]
   requires: [lm-naive-bayes, math-norms-cosine, nlp-normalize]
   introduces: [c:document-term-matrix, c:sparse-matrix]
+  mentions: [c:information-retrieval, c:vector-space-model]
   data: [uci-sentiment-sentences]
   ladder: [python, numpy]
   needs: any

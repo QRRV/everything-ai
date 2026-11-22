@@ -10,7 +10,9 @@ written by volunteers (data/tools/make_tatoeba_nl.py), and `dutch_sentence_words
 `dutch_pairs()` gives the sentences of Tatoeba in Frisian, Gronings and Limburgish in data/tatoeba-nl-pairs.tsv.gz,
 each with a Dutch translation (data/tools/make_tatoeba_pairs.py), and `language_sentences()` 500 sentences of
 Tatoeba in each of twelve languages in data/tatoeba-langs.tsv.gz (data/tools/make_tatoeba_langs.py). `stop_words(lang)` gives the stop words of Snowball
-for English or Dutch in data/snowball-stop-en.txt and data/snowball-stop-nl.txt (data/tools/make_snowball_stopwords.py)."""
+for English or Dutch in data/snowball-stop-en.txt and data/snowball-stop-nl.txt (data/tools/make_snowball_stopwords.py).
+`review_sentences()` gives the 3,000 labelled review sentences of data/uci-sentiment.tsv.gz
+(data/tools/make_uci_sentiment.py)."""
 import functools
 import gzip
 import json
@@ -22,6 +24,7 @@ FILE = paths.ROOT / "data" / "gutenberg-books.json.gz"
 TATOEBA_NL = paths.ROOT / "data" / "tatoeba-nl.tsv.gz"
 TATOEBA_PAIRS = paths.ROOT / "data" / "tatoeba-nl-pairs.tsv.gz"
 TATOEBA_LANGS = paths.ROOT / "data" / "tatoeba-langs.tsv.gz"
+UCI_SENTIMENT = paths.ROOT / "data" / "uci-sentiment.tsv.gz"
 STOP_WORDS = {"en": paths.ROOT / "data" / "snowball-stop-en.txt", "nl": paths.ROOT / "data" / "snowball-stop-nl.txt"}
 # a word: letters, with an apostrophe inside it as in "don't" or "Alice's"; digits, punctuation and the underscores
 # that mark italics in the Gutenberg files are no part of a word
@@ -104,6 +107,18 @@ def language_sentences() -> tuple:
     assert lines[0] == "lang\tid\ttext"
     return tuple((lang, int(sid), text) for lang, sid, text in (line.split("\t") for line in lines[1:] if line))
 
+
+
+@functools.cache
+def review_sentences() -> tuple:
+    """The 3,000 sentences of "Sentiment Labelled Sentences" (UCI), each as (source, line, label, shown, text): the
+    website (amazon, imdb or yelp), the line of the sentence in its file, its label (1 positive, 0 negative), whether a
+    lesson shows it as an example (1) or not (0), and the sentence. In the order of the file: amazon, imdb, yelp."""
+    with gzip.open(UCI_SENTIMENT, "rt", encoding="utf-8") as f:
+        lines = f.read().split("\n")
+    assert lines[0] == "source\tline\tlabel\tshown\ttext"
+    return tuple((source, int(line), int(label), int(shown), text)
+                 for source, line, label, shown, text in (row.split("\t") for row in lines[1:] if row))
 
 @functools.cache
 def _stop_words(lang: str) -> tuple:

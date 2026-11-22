@@ -503,6 +503,12 @@ SPDX-FileCopyrightText = "Copyright (c) 2001, Dr Martin Porter; Copyright (c) 20
 SPDX-License-Identifier = "BSD-3-Clause"
 
 [[annotations]]
+path = "data/uci-sentiment.tsv.gz"
+precedence = "override"
+SPDX-FileCopyrightText = "Dimitrios Kotzias, Sentiment Labelled Sentences (2015), UCI Machine Learning Repository, https://doi.org/10.24432/C57604, made for Kotzias, Denil, de Freitas and Smyth, From Group to Individual Labels using Deep Features, KDD 2015; the 3,000 sentences, for Everything AI"
+SPDX-License-Identifier = "CC-BY-4.0"
+
+[[annotations]]
 path = "data/banking77-small.json"
 precedence = "override"
 SPDX-FileCopyrightText = "2020 PolyAI (BANKING77, Casanueva and others, https://arxiv.org/abs/2003.04807; a subset made for Everything AI)"
