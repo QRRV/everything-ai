@@ -38,8 +38,8 @@ def quick_check_pin():
         "quick-pin",
         question="Your pin holds a commit id and a SHA-256, and a file matches both. What does that tell you?",
         options={
-            "right": "That it is the file you pinned",
             "maker": "That the organization in its name made it",
+            "right": "That it is the file you pinned",
             "safe": "That no one put an attack in the file",
         },
         correct="right",
@@ -59,9 +59,9 @@ def quick_check_import():
         "quick-import",
         question="What does `import math` do?",
         options={
-            "right": "It brings the module math into your program",
             "download": "It downloads math from the internet each time",
             "copy": "It writes the code of math into your file",
+            "right": "It brings the module math into your program",
         },
         correct="right",
         why={
@@ -499,8 +499,8 @@ def choice_distance_cell():
         "distance-check",
         question="What happens the next time Qwen3 gives that name?",
         options={
-            "right": "The script installs it without any warning",
             "typo": "It warns: a made-up name is a typo of a real package",
+            "right": "The script installs it without any warning",
             "pip": "pip refuses it: PyPI checks every new project first",
         },
         correct="right",

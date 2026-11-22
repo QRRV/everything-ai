@@ -37,8 +37,8 @@ def quick_check_stride():
         "quick-stride",
         question="A search box on the library's website lets anyone read the loans of every member. Which property does that break?",
         options={
-            "right": "Confidentiality: anyone reads the loans",
             "integ": "Integrity: the loans are changed without right",
+            "right": "Confidentiality: anyone reads the loans",
             "avail": "Availability: members can no longer use the site",
         },
         correct="right",
@@ -58,9 +58,9 @@ def quick_check_fstring():
         "quick-fstring",
         question="What does this program show?\n\n```python\ntitle = \"Dune\"\nprint(f\"title = '{title}'\")\n```",
         options={
-            "right": "title = 'Dune'",
             "braces": "title = '{title}'",
             "bare": "title = Dune",
+            "right": "title = 'Dune'",
         },
         correct="right",
         why={
@@ -431,8 +431,8 @@ def choice_access_cell():
         "access",
         question="What does loans_due give back?",
         options={
-            "right": "Mila's loans: a placeholder does not check who asks",
             "error": "An error: the card does not belong to Joris",
+            "right": "Mila's loans: a placeholder does not check who asks",
             "none": "Nothing: placeholders only let your own card through",
         },
         correct="right",

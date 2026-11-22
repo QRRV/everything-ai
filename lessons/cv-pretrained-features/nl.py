@@ -37,8 +37,8 @@ def quick_check_freeze():
         "quick-freeze",
         question="Je bevriest elke parameter van de cijferlezer van de course met `p.requires_grad = False`, en geeft hem daarna een nieuwe laatste layer: `model.out = nn.Linear(64, 10)`. Wat leert er als je hem traint?",
         options={
-            "right": "Alleen de nieuwe laatste layer: 650 getallen",
             "nothing": "Niets: je hebt elke parameter bevroren",
+            "right": "Alleen de nieuwe laatste layer: 650 getallen",
             "all": "Elke layer: de nieuwe layer brengt de gradients terug",
         },
         correct="right",
@@ -58,9 +58,9 @@ def quick_check_close():
         "quick-close",
         question="Een model geeft drie foto's, A, B en C, elk een embedding. A en B hebben een cosine similarity van 0,95, A en C een van −0,1. Wat zegt dat?",
         options={
-            "right": "Voor het model lijken A en B op elkaar, en A en C niet",
             "same": "A en B zijn dezelfde foto",
             "length": "De embedding van A is langer dan die van C",
+            "right": "Voor het model lijken A en B op elkaar, en A en C niet",
         },
         correct="right",
         why={

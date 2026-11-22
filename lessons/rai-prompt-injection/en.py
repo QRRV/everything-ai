@@ -38,8 +38,8 @@ def quick_check_goal():
         "quick-goal",
         question="An app sorts reviews with a model. An attacker writes a review that makes the model answer with a word of the attacker's choice instead of a label. Which of NIST's goals does that attack go for?",
         options={
-            "right": "Integrity",
             "privacy": "Privacy",
+            "right": "Integrity",
             "availability": "Availability",
         },
         correct="right",
@@ -59,9 +59,9 @@ def quick_check_label():
         "quick-label",
         question="The app lets through only an answer that is one of its labels, as `label_of` did. The model answers PINEAPPLE. What does the app do?",
         options={
-            "right": "It gives back None, so a person can look at it",
             "label": "It takes the label that is closest to the answer",
             "ask": "It asks the model again and again, until a label comes back",
+            "right": "It gives back None, so a person can look at it",
         },
         correct="right",
         why={
@@ -529,8 +529,8 @@ def choice_judge_cell():
         "judge",
         question="Did that attack work?",
         options={
-            "right": "By the course's judge no, but the shop got no label at all",
             "no": "No: its ASR is 0, so datamarking stops this attack",
+            "right": "By the course's judge no, but the shop got no label at all",
             "yes": "Yes: the course's judge counts every word the attacker wrote in the review",
         },
         correct="right",

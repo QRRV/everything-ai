@@ -37,8 +37,8 @@ def quick_check_lateral():
         "quick-lateral",
         question="A 1×1 convolution from 128 channels to 32, `nn.Conv2d(128, 32, 1)`. How many parameters does it have?",
         options={
-            "right": "4,128: 32 filters, each with 128 weights and a bias",
             "bias": "4,096: 128 × 32 weights",
+            "right": "4,128: 32 filters, each with 128 weights and a bias",
             "three": "36,896: 32 filters, each with 9 × 128 weights and a bias",
             "sum": "160: 128 + 32",
         },
@@ -60,9 +60,9 @@ def quick_check_rows():
         "quick-rows",
         question="The head of your one-stage detector gave a scene maps of shape (1, 24, 16, 16): 3 anchors times 8 numbers, on 16 by 16 squares. A head with 2 anchors per square, on maps of 32 by 32 squares, gives (1, 16, 32, 32). What shape do its rows get with `permute(0, 2, 3, 1)` and `reshape(1, -1, 8)`?",
         options={
-            "right": "(1, 2048, 8): 32 × 32 squares, 2 anchors each",
             "squares": "(1, 1024, 8): one row for every square",
             "sixteen": "(1, 1024, 16): the 16 numbers of every square in one row",
+            "right": "(1, 2048, 8): 32 × 32 squares, 2 anchors each",
         },
         correct="right",
         why={
@@ -438,8 +438,8 @@ def choice_background_cell():
         "background",
         question="In a training scene, 10 of the 2,720 anchors learn a shape and none is ignored. How many anchors does the cross-entropy of the loss with hard negative mining count in that scene?",
         options={
-            "right": "40: the 10, and the 30 background anchors with the highest cross-entropy",
             "random": "40: the 10, and 30 background anchors chosen at random",
+            "right": "40: the 10, and the 30 background anchors with the highest cross-entropy",
             "all": "2,720: every anchor, as in your one-stage detector",
             "shapes": "10: only the anchors that learn a shape",
         },

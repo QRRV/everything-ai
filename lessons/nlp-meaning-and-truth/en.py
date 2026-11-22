@@ -37,8 +37,8 @@ def quick_check_part():
         "quick-part",
         question="In *the late train left the city after midnight*, which group of words can make way for the single word *then*?",
         options={
-            "right": "*after midnight*",
             "left": "*left the city after*",
+            "right": "*after midnight*",
             "train": "*train left*",
         },
         correct="right",
@@ -58,9 +58,9 @@ def quick_check_rule():
         "quick-rule",
         question="The grammar of *Phrase structure and endless sentences* starts with the rule S → NP VP. What does that rule say?",
         options={
-            "right": "S can be rewritten as NP and then VP",
             "or": "S can be rewritten as NP, or else as VP",
             "inside": "NP holds VP",
+            "right": "S can be rewritten as NP and then VP",
         },
         correct="right",
         why={

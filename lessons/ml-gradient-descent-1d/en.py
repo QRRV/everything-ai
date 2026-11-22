@@ -59,8 +59,8 @@ def quick_check_steep():
         "quick-steep",
         question="At $w = 2.5$ the slope of the loss is −8990, at $w = 3.0$ it is −1479. Where is the valley steeper?",
         options={
-            "far": "At $w = 2.5$",
             "near": "At $w = 3.0$",
+            "far": "At $w = 2.5$",
             "same": "Equally steep: both slopes are negative",
         },
         correct="far",
@@ -221,9 +221,9 @@ def choice_one_cell():
         "one-step",
         question="At $w = 3$ the slope of the loss is −1479, and the learning rate is 0.0001. What is $w$ after one update step?",
         options={
-            "right": "3.1479",
             "wrong-way": "2.8521",
             "no-lr": "1482",
+            "right": "3.1479",
         },
         correct="right",
         why={

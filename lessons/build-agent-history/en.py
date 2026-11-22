@@ -59,8 +59,8 @@ def quick_check_mandate():
         "quick-mandate",
         question="The shopping agent's system prompt already says where it may pay, and how much. Why does `pay` still ask `may_pay`?",
         options={
-            "code": "A line in the prompt is a request to the model; only the check in the code that pays holds",
             "speed": "So that the model does not have to work out the total of the cart itself, which saves it a request",
+            "code": "A line in the prompt is a request to the model; only the check in the code that pays holds",
             "user": "So that the user sees the mandate once more before every payment",
         },
         correct="code",
@@ -286,9 +286,9 @@ def choice_stayed_cell():
         "stayed",
         question="Today's agents kept a part of AutoGPT and BabyAGI, and replaced another. Which is which?",
         options={
-            "kept-loop": "They kept the loop of a model that acts and reads the result; the endless objective became a task from a person, with a step limit",
             "kept-list": "They kept the list of tasks the model writes for itself, without an end; the loop with tools was dropped, since it went round in circles",
             "kept-all": "They kept both, and only made the model larger, since a larger model no longer wanders off",
+            "kept-loop": "They kept the loop of a model that acts and reads the result; the endless objective became a task from a person, with a step limit",
         },
         correct="kept-loop",
         why={

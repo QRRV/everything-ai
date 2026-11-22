@@ -37,8 +37,8 @@ def quick_check_trees():
         "quick-trees",
         question="On the penguins, the validation RMSE of gradient boosting was smallest at 42 trees, 415 g, and rose to 575 g at 1,000 trees. How do you choose the number of trees?",
         options={
-            "right": "Where the error on the validation set is smallest",
             "more": "As many as the computer allows: every tree learns more",
+            "right": "Where the error on the validation set is smallest",
             "train": "Where the error on the training set is smallest",
         },
         correct="right",
@@ -58,9 +58,9 @@ def quick_check_calendar():
         "quick-calendar",
         question="A table of traffic, one row per hour. Which of these columns is a calendar feature?",
         options={
-            "right": "`weekday`: the day of the week of every hour",
             "lag": "`lag_1`: the traffic of the hour before",
             "temp": "`temp`: the temperature of every hour",
+            "right": "`weekday`: the day of the week of every hour",
         },
         correct="right",
         why={

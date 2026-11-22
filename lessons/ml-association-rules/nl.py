@@ -37,8 +37,8 @@ def quick_check_conditional():
         "quick-conditional",
         question="Van 200 bestellingen bevatten er 40 thee, en 30 van die 40 bevatten ook taart. Wat is P(taart | thee)?",
         options={
-            "right": "0,75",
             "both": "0,15",
+            "right": "0,75",
             "tea": "0,2",
         },
         correct="right",
@@ -58,9 +58,9 @@ def quick_check_groupby():
         "quick-groupby",
         question="`df` heeft een rij voor elk product in een bestelling, met de kolommen `invoice`, de bestelling, en `product`. Wat geeft `df.groupby(\"invoice\")[\"product\"].count()`?",
         options={
-            "right": "Voor elke bestelling hoeveel producten erin zitten",
             "product": "Voor elk product in hoeveel bestellingen het zit",
             "total": "Hoeveel bestellingen er zijn",
+            "right": "Voor elke bestelling hoeveel producten erin zitten",
         },
         correct="right",
         why={

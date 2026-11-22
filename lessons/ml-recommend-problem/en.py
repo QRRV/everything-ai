@@ -37,8 +37,8 @@ def quick_check_baseline():
         "quick-baseline",
         question="In a test set, 98 of 100 patients are healthy. A model that spots a rare disease is right about 97 of the 100. What do you say?",
         options={
-            "right": "It does worse than always saying healthy, which is right about 98",
             "good": "It is good: 97% right",
+            "right": "It does worse than always saying healthy, which is right about 98",
             "train": "Measure it on the training set instead",
         },
         correct="right",
@@ -58,9 +58,9 @@ def quick_check_duplicates():
         "quick-duplicates",
         question="`df` has a row for every product of every order, with the columns `invoice`, `customer` and `product`. A customer who bought the same mug in three orders has three rows for it. What gives one row for every customer and product?",
         options={
-            "right": "`df.drop_duplicates(subset=[\"customer\", \"product\"])`",
             "all": "`df.drop_duplicates()`",
             "product": "`df.drop_duplicates(subset=\"product\")`",
+            "right": "`df.drop_duplicates(subset=[\"customer\", \"product\"])`",
         },
         correct="right",
         why={

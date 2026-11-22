@@ -37,8 +37,8 @@ def quick_check_cosine():
         "quick-cosine",
         question="Two texts, as counts of three words: `a = [2, 0, 1]` and `b = [4, 0, 2]`. `b` uses the same words in the same mix, twice as often. What is their cosine similarity?",
         options={
-            "right": "1",
             "half": "0.5, because `b` is twice as long",
+            "right": "1",
             "two": "2",
         },
         correct="right",
@@ -58,9 +58,9 @@ def quick_check_argsort():
         "quick-argsort",
         question="What does `np.argsort(np.array([0.3, 0.9, 0.1]), kind=\"stable\")` give?",
         options={
-            "right": "`[2, 0, 1]`",
             "values": "`[0.1, 0.3, 0.9]`",
             "largest": "`[1, 0, 2]`",
+            "right": "`[2, 0, 1]`",
         },
         correct="right",
         why={

@@ -37,8 +37,8 @@ def quick_check_map():
         "quick-map",
         question="Een detector heeft een AP van 0,8 voor katten. Bij welke score threshold moet een app zijn kattenboxes laten zien?",
         options={
-            "right": "Dat zegt de AP niet: die beoordeelt de volgorde van de scores, niet waar je de lijst afkapt",
             "ap": "bij 0,8, zijn AP",
+            "right": "Dat zegt de AP niet: die beoordeelt de volgorde van de scores, niet waar je de lijst afkapt",
             "iou": "bij 0,5, de IoU-drempel van PASCAL VOC",
             "rest": "bij 0,2: 1 min zijn AP",
         },
@@ -60,9 +60,9 @@ def quick_check_softmax():
         "quick-softmax",
         question="Een model geeft drie logits: 3 voor kat, 2 voor hond en 1 voor \"niets\". Welke kans geeft softmax aan kat?",
         options={
-            "right": "0,67",
             "two": "0,73",
             "share": "0,50",
+            "right": "0,67",
             "max": "1,00",
         },
         correct="right",
@@ -401,8 +401,8 @@ def choice_apps_cell():
         "apps",
         question="Vier apps gebruiken dezelfde detector. Welke moet zijn score threshold laag zetten?",
         options={
-            "right": "Een programma dat scheuren markeert op foto's van een brug, voor een inspecteur die elke markering controleert",
             "album": "Een app die onder je vakantiefoto's schrijft wat hij ziet",
+            "right": "Een programma dat scheuren markeert op foto's van een brug, voor een inspecteur die elke markering controleert",
             "shop": "Een camera bij een zelfscankassa die elk product dat hij ziet op je rekening zet",
             "fine": "Een camera bij een busbaan die een boete stuurt voor elke auto die hij daar ziet",
         },

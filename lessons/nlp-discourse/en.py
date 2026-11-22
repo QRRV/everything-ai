@@ -37,8 +37,8 @@ def quick_check_relevant():
         "quick-relevant",
         question="Kim: *The bus is late again.* Sam: *My bike is in the shed.* What does Kim take from Sam's reply?",
         options={
-            "right": "An offer to borrow the bike",
             "where": "Where Sam keeps the bike, as a fact",
+            "right": "An offer to borrow the bike",
             "bus": "That Sam knows when the bus will come",
         },
         correct="right",
@@ -58,9 +58,9 @@ def quick_check_the():
         "quick-the",
         question="*The bike in the shed is red.* What does this sentence take for granted?",
         options={
-            "right": "That there is one bike in the shed",
             "likes": "That the speaker likes red bikes",
             "painted": "That someone painted the bike red last week",
+            "right": "That there is one bike in the shed",
         },
         correct="right",
         why={
@@ -426,8 +426,8 @@ def choice_bank_cell():
         "bank",
         question="Which pair shares a word, but does not hang together?",
         options={
-            "right": "*Sam sat on the bank by the river. The bank raised its fees.*",
             "key": "*Sam lost the key to the shed. The key turned up under the doormat a week later.*",
+            "right": "*Sam sat on the bank by the river. The bank raised its fees.*",
             "cake": "*Sam bought a cake for Kim. The cake was still warm from the oven.*",
         },
         correct="right",

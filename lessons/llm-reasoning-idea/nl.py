@@ -41,8 +41,8 @@ def quick_check_program():
         "quick-program",
         question="Wat besliste in *Heeft post-training geholpen?* of een verhaal deed wat de instructie vroeg?",
         options={
-            "right": "Een programma dat het nakijkt, zoals of een woord wegblijft",
             "reward": "Een reward model dat elk verhaal een score geeft",
+            "right": "Een programma dat het nakijkt, zoals of een woord wegblijft",
             "people": "Jij, door elk verhaal te lezen",
         },
         correct="right",
@@ -570,9 +570,9 @@ def look_back():
         "look-temperature",
         question=f"### Terugblik\n\nDe course trok zijn samples bij temperature {C.number(C.TEMPERATURE, 1, 'nl')}. Wat had temperature 0 gegeven?",
         options={
-            "right": f"Hetzelfde antwoord, {C.SAMPLES} keer: het greedy antwoord",
             "wrong": f"{C.SAMPLES} verschillende antwoorden, allemaal fout",
             "faster": "Dezelfde antwoorden als bij 0,7, alleen sneller",
+            "right": f"Hetzelfde antwoord, {C.SAMPLES} keer: het greedy antwoord",
         },
         correct="right",
         why={

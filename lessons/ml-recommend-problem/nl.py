@@ -37,8 +37,8 @@ def quick_check_baseline():
         "quick-baseline",
         question="In een test set zijn 98 van de 100 patiënten gezond. Een model dat een zeldzame ziekte opspoort, heeft het bij 97 van de 100 goed. Wat zeg je?",
         options={
-            "right": "Het doet het slechter dan altijd gezond zeggen, wat er 98 goed heeft",
             "good": "Het is goed: 97% goed",
+            "right": "Het doet het slechter dan altijd gezond zeggen, wat er 98 goed heeft",
             "train": "Meet het liever op de training set",
         },
         correct="right",
@@ -58,9 +58,9 @@ def quick_check_duplicates():
         "quick-duplicates",
         question="`df` heeft een rij voor elk product van elke bestelling, met de kolommen `invoice`, `customer` en `product`. Een klant die dezelfde mok in drie bestellingen kocht, heeft er drie rijen voor. Wat geeft één rij per klant en product?",
         options={
-            "right": "`df.drop_duplicates(subset=[\"customer\", \"product\"])`",
             "all": "`df.drop_duplicates()`",
             "product": "`df.drop_duplicates(subset=\"product\")`",
+            "right": "`df.drop_duplicates(subset=[\"customer\", \"product\"])`",
         },
         correct="right",
         why={

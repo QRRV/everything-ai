@@ -37,8 +37,8 @@ def quick_check_season():
         "quick-season",
         question="`rest` is een reeks dagen min haar trend, en de eerste dag is een maandag. Wat is `np.nanmean(rest[2::7])`?",
         options={
-            "right": "Het gemiddelde van alle woensdagen: het seizoen van woensdag, voordat de zeven gemiddelden worden opgeschoven tot ze samen 0 zijn",
             "stretch": "Het gemiddelde van de dagen op plek 2 tot 7",
+            "right": "Het gemiddelde van alle woensdagen: het seizoen van woensdag, voordat de zeven gemiddelden worden opgeschoven tot ze samen 0 zijn",
             "tuesday": "Het gemiddelde van alle dinsdagen",
         },
         correct="right",
@@ -58,9 +58,9 @@ def quick_check_association():
         "quick-association",
         question="Op warme dagen verkoopt de ijskraam meer, en worden er meer fietsen gehuurd. Laat een fiets huren mensen ijs kopen?",
         options={
-            "right": "Dat kun je hieruit niet zeggen: warm weer stuurt allebei, dus bewegen ze hoe dan ook samen",
             "yes": "Ja: de twee kolommen bewegen samen, dus veroorzaakt de een de ander",
             "never": "Nee: twee kolommen die samen bewegen, hebben nooit iets met elkaar te maken",
+            "right": "Dat kun je hieruit niet zeggen: warm weer stuurt allebei, dus bewegen ze hoe dan ook samen",
         },
         correct="right",
         why={

@@ -37,8 +37,8 @@ def quick_check_detr():
         "quick-detr",
         question="DETR geeft een query de box `(0.5, 0.25, 0.2, 0.1)`: `(cx, cy, w, h)`, als deel van de foto. Op een foto van 600 pixels breed en 400 pixels hoog, waar ligt het midden van de box, en hoe breed is hij?",
         options={
-            "right": "Het midden op kolom 300 en rij 100; 120 pixels breed",
             "height": "Het midden op kolom 300 en rij 100; 80 pixels breed",
+            "right": "Het midden op kolom 300 en rij 100; 120 pixels breed",
             "swap": "Het midden op kolom 150 en rij 200; 120 pixels breed",
             "corner": "De linkerkant op kolom 300 en de bovenkant op rij 100; 120 pixels breed",
         },
@@ -60,9 +60,9 @@ def quick_check_stride():
         "quick-stride",
         question="Een CNN halveert drie keer de hoogte en de breedte van zijn maps, elke keer met stride 2. Hoe groot zijn bij een scène van 128 bij 128 pixels zijn laatste feature maps, en voor hoeveel pixels van de scène staat elk vakje ervan?",
         options={
-            "right": "16 bij 16; elk vakje staat voor 8 bij 8 pixels",
             "once": "64 bij 64; elk vakje staat voor 2 bij 2 pixels",
             "sixteen": "16 bij 16; elk vakje staat voor 16 bij 16 pixels",
+            "right": "16 bij 16; elk vakje staat voor 8 bij 8 pixels",
             "four": "8 bij 8; elk vakje staat voor 16 bij 16 pixels",
         },
         correct="right",

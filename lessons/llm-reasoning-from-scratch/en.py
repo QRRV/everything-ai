@@ -41,8 +41,8 @@ def quick_check_mask():
         "quick-mask",
         question="In SFT, the labels of the instruction's tokens are -100. Why?",
         options={
-            "right": "So that the loss counts only the answer",
             "hidden": "So that the model never sees the instruction",
+            "right": "So that the loss counts only the answer",
             "padding": "To mark where the padding begins",
         },
         correct="right",
@@ -62,9 +62,9 @@ def quick_check_steps():
         "quick-steps",
         question="Why can written steps help a model of fixed depth to answer?",
         options={
-            "right": "Every token it writes is one more forward pass, and each step can be a problem that one pass can do",
             "weights": "Writing the steps changes its weights while it answers",
             "copy": "The steps hold the answer, so the model only has to copy it",
+            "right": "Every token it writes is one more forward pass, and each step can be a problem that one pass can do",
         },
         correct="right",
         why={

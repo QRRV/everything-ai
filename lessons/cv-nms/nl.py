@@ -37,8 +37,8 @@ def quick_check_iou():
         "quick-iou",
         question="Wat is de IoU van de boxes `(10, 10, 19, 19)` en `(10, 15, 19, 24)`, geschreven als `(boven, links, onder, rechts)` met beide uiteinden meegeteld?",
         options={
-            "third": "0,33",
             "half": "0,5",
+            "third": "0,33",
             "quarter": "0,25",
             "one": "1",
         },
@@ -60,9 +60,9 @@ def quick_check_found():
         "quick-found",
         question="PASCAL VOC telt een voorspelde box als gevonden als zijn IoU met de echte box boven 0,5 ligt. Welke van deze boxes telt als gevonden?",
         options={
-            "above": "alleen de box met een IoU van 0,53",
             "both": "de box met 0,53 en de box met precies 0,5",
             "half": "alleen de box met precies 0,5",
+            "above": "alleen de box met een IoU van 0,53",
             "neither": "geen van de twee",
         },
         correct="above",
@@ -355,8 +355,8 @@ def choice_cars_cell():
         "cars",
         question="Twee auto's staan vlak bij elkaar op een foto, de ene deels achter de andere. Een detector geeft goede boxes om allebei, en is het zekerst van de voorste auto. Elke box die hij voor de achterste auto geeft, heeft een IoU tussen 0,55 en 0,7 met de beste box van de voorste auto. Daarna doet hij NMS met een drempel van 0,5. Wat meldt hij?",
         options={
-            "one": "één auto: de boxes van de achterste auto worden weggegooid",
             "two": "twee auto's: NMS ziet dat het verschillende voorwerpen zijn",
+            "one": "één auto: de boxes van de achterste auto worden weggegooid",
             "merged": "één grote box om beide auto's",
             "none": "geen auto: de twee boxes gooien elkaar weg",
         },

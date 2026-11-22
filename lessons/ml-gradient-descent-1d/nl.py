@@ -59,8 +59,8 @@ def quick_check_steep():
         "quick-steep",
         question="Bij $w$ = 2,5 is de helling van de loss −8990, bij $w$ = 3,0 is hij −1479. Waar is het dal steiler?",
         options={
-            "far": "Bij $w$ = 2,5",
             "near": "Bij $w$ = 3,0",
+            "far": "Bij $w$ = 2,5",
             "same": "Even steil: beide hellingen zijn negatief",
         },
         correct="far",
@@ -221,9 +221,9 @@ def choice_one_cell():
         "one-step",
         question="Bij $w = 3$ is de helling van de loss −1479, en de learning rate is 0,0001. Wat is $w$ na één update-stap?",
         options={
-            "right": "3,1479",
             "wrong-way": "2,8521",
             "no-lr": "1482",
+            "right": "3,1479",
         },
         correct="right",
         why={

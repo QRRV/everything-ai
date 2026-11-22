@@ -37,8 +37,8 @@ def quick_check_tag():
         "quick-tag",
         question="Welke tag van Universal Dependencies krijgt *after* in *the train left after midnight* (de trein vertrok na middernacht)?",
         options={
-            "right": "`ADP`, omdat er een naamwoord volgt",
             "adv": "`ADV`, omdat het zegt wanneer",
+            "right": "`ADP`, omdat er een naamwoord volgt",
             "sconj": "`SCONJ`, zoals in *after the train left*",
         },
         correct="right",
@@ -58,9 +58,9 @@ def quick_check_tags():
         "quick-tags",
         question="In *Woordsoorten en woordgroepen* geeft `tags_per_word` elk woord in kleine letters de lijst met de tags ervan, elke tag één keer, in de volgorde waarin ze voor het eerst komen. Wat geeft `tags_per_word([[(\"Book\", \"VERB\"), (\"it\", \"PRON\")], [(\"a\", \"DET\"), (\"book\", \"NOUN\")]])`?",
         options={
-            "right": "`{'book': ['VERB', 'NOUN'], 'it': ['PRON'], 'a': ['DET']}`",
             "upper": "`{'Book': ['VERB'], 'it': ['PRON'], 'a': ['DET'], 'book': ['NOUN']}`",
             "last": "`{'book': ['NOUN'], 'it': ['PRON'], 'a': ['DET']}`",
+            "right": "`{'book': ['VERB', 'NOUN'], 'it': ['PRON'], 'a': ['DET']}`",
         },
         correct="right",
         why={

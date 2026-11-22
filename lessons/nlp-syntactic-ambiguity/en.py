@@ -37,8 +37,8 @@ def quick_check_place():
         "quick-place",
         question="The grammar of *Phrase structure and endless sentences* has NP → DET NOM | PROPN, VP → VERB NP | VERB NP PP, and PP → ADP NP. Where does it put *near Chicago* in the tree of *a long train passed the bridge near Chicago*?",
         options={
-            "right": "Under the VP, beside the NP",
             "np": "Inside the NP, with *the bridge*",
+            "right": "Under the VP, beside the NP",
             "s": "Right under S",
         },
         correct="right",
@@ -58,9 +58,9 @@ def quick_check_count():
         "quick-count",
         question="Church and Patil counted the readings of sentences such as *Put the block in the box on the table*. With two prepositional phrases, as there, they found 2 readings. How many with three?",
         options={
-            "right": "5",
             "three": "3: one more place for the new phrase",
             "four": "4",
+            "right": "5",
         },
         correct="right",
         why={

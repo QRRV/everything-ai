@@ -37,8 +37,8 @@ def quick_check_degrees():
         "quick-degree-sum",
         question="A graph without directions has 5 edges. What do the degrees of all its nodes add up to?",
         options={
-            "right": "10",
             "five": "5",
+            "right": "10",
             "depends": "That depends on the number of nodes",
         },
         correct="right",
@@ -58,9 +58,9 @@ def quick_check_slope():
         "quick-slope",
         question="On a log-log plot, a straight line goes through (1, 1000) and (100, 0.1). What is its slope?",
         options={
-            "right": "−2",
             "four": "−4",
             "half": "−0.5",
+            "right": "−2",
         },
         correct="right",
         why={

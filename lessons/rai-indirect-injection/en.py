@@ -38,8 +38,8 @@ def quick_check_asr():
         "quick-asr",
         question="An attack was tried 40 times, and got what the attacker wanted in 10 of them. What is its attack success rate?",
         options={
-            "right": "0.25: 10 of the 40 tries worked",
             "count": "10, the number of tries that worked",
+            "right": "0.25: 10 of the 40 tries worked",
             "missed": "0.75: the attack failed in 30 of the 40 tries",
         },
         correct="right",
@@ -59,9 +59,9 @@ def quick_check_who():
         "quick-who",
         question="The model of an agent writes a call of the tool `send_email`. Who sends the email?",
         options={
-            "right": "Your program, which runs the tool the model called",
             "model": "The model, as soon as it writes the call",
             "user": "Nobody, until the user has read the call and has agreed to it",
+            "right": "Your program, which runs the tool the model called",
         },
         correct="right",
         why={
@@ -500,8 +500,8 @@ def choice_fixed_cell():
         "fixed",
         question="What does that fix show about Microsoft 365 Copilot and indirect prompt injection?",
         options={
-            "right": "That this attack no longer works, not that the next injection fails",
             "safe": "That Copilot can no longer be steered by text in an email",
+            "right": "That this attack no longer works, not that the next injection fails",
             "classifier": "That a better classifier for injections now catches emails like that one",
         },
         correct="right",

@@ -37,8 +37,8 @@ def quick_check_iou():
         "quick-iou",
         question="What is the IoU of the boxes `(10, 10, 19, 19)` and `(10, 15, 19, 24)`, written as `(top, left, bottom, right)` with both ends included?",
         options={
-            "third": "0.33",
             "half": "0.5",
+            "third": "0.33",
             "quarter": "0.25",
             "one": "1",
         },
@@ -60,9 +60,9 @@ def quick_check_found():
         "quick-found",
         question="PASCAL VOC counts a predicted box as found when its IoU with the true box is above 0.5. Which of these boxes counts as found?",
         options={
-            "above": "only the box with an IoU of 0.53",
             "both": "the box with 0.53 and the box with exactly 0.5",
             "half": "only the box with exactly 0.5",
+            "above": "only the box with an IoU of 0.53",
             "neither": "neither of the two",
         },
         correct="above",
@@ -355,8 +355,8 @@ def choice_cars_cell():
         "cars",
         question="Two cars stand close together in a photo, one partly behind the other. A detector gives good boxes around both, and is surest of the car in front. Every box it gives for the car behind has an IoU between 0.55 and 0.7 with the best box of the car in front. Then it runs NMS with a threshold of 0.5. What does it report?",
         options={
-            "one": "one car: the boxes of the car behind are dropped",
             "two": "two cars: NMS sees that they are different objects",
+            "one": "one car: the boxes of the car behind are dropped",
             "merged": "one large box around both cars",
             "none": "no car: the two boxes drop each other",
         },

@@ -37,8 +37,8 @@ def quick_check_box():
         "quick-box",
         question="A shape has these pixels, as (row, column): `(1, 3)`, `(2, 3)`, `(2, 4)` and `(3, 2)`. What is its bounding box, written as in that lesson, `(top, left, bottom, right)`?",
         options={
-            "box": "`(1, 2, 3, 4)`",
             "xy": "`(2, 1, 4, 3)`",
+            "box": "`(1, 2, 3, 4)`",
             "ends": "`(1, 3, 3, 2)`",
             "size": "`(1, 2, 3, 3)`",
         },
@@ -60,9 +60,9 @@ def quick_check_pixels():
         "quick-pixels",
         question="A shape of 12 pixels has the bounding box `(0, 0, 3, 3)`. How many pixels inside its box are not part of the shape?",
         options={
-            "four": "4",
             "zero": "0",
             "none": "None: 12 pixels do not fit in that box",
+            "four": "4",
         },
         correct="four",
         why={

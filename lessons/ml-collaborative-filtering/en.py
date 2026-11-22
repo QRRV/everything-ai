@@ -37,8 +37,8 @@ def quick_check_profile():
         "quick-profile",
         question="Content-based filtering recommended ten hearts, nine of them wicker, to customer 13960. What did it need to know for that?",
         options={
-            "right": "The words of the product names, and what the customer bought",
             "others": "What other customers bought",
+            "right": "The words of the product names, and what the customer bought",
             "stars": "How many stars the customer gave each product",
         },
         correct="right",
@@ -58,9 +58,9 @@ def quick_check_transpose():
         "quick-transpose",
         question="`R` has shape (2829, 3576): a row for every customer, a column for every product. `R[:, j]` is column `j`, with shape (2829,). What is the shape of `R.T @ R[:, j]`?",
         options={
-            "right": "(3576,): a number for every product",
             "customers": "(2829,): a number for every customer",
             "error": "An error: the shapes do not fit",
+            "right": "(3576,): a number for every product",
         },
         correct="right",
         why={

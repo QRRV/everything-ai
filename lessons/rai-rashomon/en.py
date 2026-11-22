@@ -37,8 +37,8 @@ def quick_check_glass():
         "quick-glass",
         question="Is every decision tree a glass box?",
         options={
-            "right": "Only a small one: it depends on its size",
             "yes": "Yes: you can always follow its questions",
+            "right": "Only a small one: it depends on its size",
             "no": "No: a tree is a black box, like a neural network",
         },
         correct="right",
@@ -58,9 +58,9 @@ def quick_check_bootstrap():
         "quick-bootstrap",
         question="Each tree of a random forest learns from a bootstrap sample of the n training examples. What is that?",
         options={
-            "right": "n draws, with replacement",
             "order": "All n examples, shuffled into a new order",
             "half": "A random half, each example at most once",
+            "right": "n draws, with replacement",
         },
         correct="right",
         why={

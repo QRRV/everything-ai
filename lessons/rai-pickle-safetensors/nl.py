@@ -37,8 +37,8 @@ def quick_check_saved():
         "quick-saved",
         question="Je slaat een model op met `torch.save(model.state_dict(), path)`. Wat staat er niet in het bestand?",
         options={
-            "right": "De code van de class van het model",
             "weights": "De weights van elke layer, per naam",
+            "right": "De code van de class van het model",
             "shapes": "De shape van elke tensor erin",
         },
         correct="right",
@@ -58,9 +58,9 @@ def quick_check_or():
         "quick-or",
         question="In een aanvalsboom heeft een OR-node twee kinderen: de ene weg naar binnen kost €500, de andere €200. Wat kost de OR-node?",
         options={
-            "right": "€200, wat het goedkoopste kind kost",
             "sum": "€700, de som van beide kinderen",
             "max": "€500, wat het duurste kind van de twee kost",
+            "right": "€200, wat het goedkoopste kind kost",
         },
         correct="right",
         why={
@@ -473,8 +473,8 @@ def choice_repository_cell():
         "repository",
         question="Wat belooft het formaat safetensors je hier?",
         options={
-            "right": "Alleen dat het lezen van de weights geen code uitvoert",
             "whole": "Dat de repository geen code uitvoert, omdat de weights safetensors zijn",
+            "right": "Alleen dat het lezen van de weights geen code uitvoert",
             "none": "Niets: een header van safetensors kan ook code bevatten",
         },
         correct="right",

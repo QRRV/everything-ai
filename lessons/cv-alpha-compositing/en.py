@@ -37,8 +37,8 @@ def quick_check_shape():
         "quick-shape",
         question="`m` has shape `(2, 3)` and `col` has shape `(2, 1)`. What does `m * col` give?",
         options={
-            "fits": "An array of shape `(2, 3)`",
             "error": "An error: 3 and 1 differ",
+            "fits": "An array of shape `(2, 3)`",
             "small": "An array of shape `(2, 1)`",
             "more": "An array of shape `(2, 3, 1)`",
         },
@@ -60,9 +60,9 @@ def quick_check_mask():
         "quick-mask",
         question="`h` is an array with the hue of every pixel. Which line gives True for the pixels whose hue lies between 0.3 and 0.45?",
         options={
-            "amp": "`(h > 0.3) & (h < 0.45)`",
             "and": "`h > 0.3 and h < 0.45`",
             "bar": "`(h > 0.3) | (h < 0.45)`",
+            "amp": "`(h > 0.3) & (h < 0.45)`",
             "bare": "`h > 0.3 & h < 0.45`",
         },
         correct="amp",

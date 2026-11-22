@@ -37,8 +37,8 @@ def quick_check_coco():
         "quick-coco",
         question="COCO writes a box as `[x, y, width, height]`. Which box is `[10, 20, 5, 3]`, written as the course does, `(top, left, bottom, right)` with both ends included?",
         options={
-            "box": "`(20, 10, 22, 14)`",
             "plus": "`(20, 10, 23, 15)`",
+            "box": "`(20, 10, 22, 14)`",
             "xy": "`(10, 20, 14, 22)`",
             "swap": "`(20, 10, 24, 12)`",
         },
@@ -60,9 +60,9 @@ def quick_check_pixels():
         "quick-pixels",
         question="How many pixels does the box `(2, 3, 4, 7)` hold, both ends included?",
         options={
-            "fifteen": "15",
             "eight": "8",
             "ten": "10",
+            "fifteen": "15",
             "many": "28",
         },
         correct="fifteen",

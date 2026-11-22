@@ -37,8 +37,8 @@ def quick_check_hard():
         "quick-hard",
         question="Hard negative mining, zoals je FPN-detector getraind werd: in een scène waarin 10 van de 2.720 anchors een vorm leren en er geen genegeerd wordt, telt de cross-entropy die 10 en de 30 achtergrond-anchors met de hoogste cross-entropy. Wat gebeurt er met de cross-entropy van de andere 2.680 achtergrond-anchors?",
         options={
-            "right": "Die telt in die batch helemaal niet mee, hoe zeker de detector er ook van is",
             "third": "Die telt voor een derde mee, zodat achtergrond even zwaar weegt als de vormen",
+            "right": "Die telt in die batch helemaal niet mee, hoe zeker de detector er ook van is",
             "later": "Die wordt bewaard, en telt mee in de volgende batch",
             "box": "Die gaat naar de box loss",
         },
@@ -60,9 +60,9 @@ def quick_check_stages():
         "quick-stages",
         question="De eerste fase van je two-stage detector geeft elk van de 768 anchors van een scène een kans op een voorwerp. Naar hoeveel boxes kijkt zijn tweede fase opnieuw?",
         options={
-            "right": "32 proposals: van de 100 anchors met de hoogste kans op een voorwerp de eerste 32 die NMS bij 0,7 overhoudt",
             "all": "Alle 768: de tweede fase kijkt opnieuw naar elke anchor",
             "hundred": "100: de anchors met de hoogste kans op een voorwerp",
+            "right": "32 proposals: van de 100 anchors met de hoogste kans op een voorwerp de eerste 32 die NMS bij 0,7 overhoudt",
             "shapes": "Zoveel als de scène vormen heeft",
         },
         correct="right",
@@ -431,8 +431,8 @@ def choice_versus_cell():
         "versus",
         question="Hard negative mining en de focal loss zorgen allebei dat de loss van een one-stage detector niet verdrinkt in achtergrond. Een scène heeft 10 anchors die een vorm leren en 2.697 achtergrond-anchors. Hoe telt elk van de twee de achtergrond-anchors mee?",
         options={
-            "right": "Hard negative mining telt de 30 moeilijkste helemaal mee en de andere helemaal niet; de focal loss telt alle 2.697 mee, elk gewogen met hoeveel de detector er nog naast zit",
             "reverse": "Hard negative mining weegt elke achtergrond-anchor; de focal loss houdt alleen de moeilijkste over",
+            "right": "Hard negative mining telt de 30 moeilijkste helemaal mee en de andere helemaal niet; de focal loss telt alle 2.697 mee, elk gewogen met hoeveel de detector er nog naast zit",
             "same": "Allebei tellen ze de 30 moeilijkste achtergrond-anchors; de focal loss zet ook de anchors van vormen omlaag",
             "random": "Hard negative mining kiest er 30 willekeurig; de focal loss telt ze allemaal even zwaar",
         },

@@ -37,8 +37,8 @@ def quick_check_readings():
         "quick-readings",
         question="In *we saw a bat* heeft *saw* drie betekenissen en *bat* twee. Op hoeveel manieren zijn de vier woorden te lezen?",
         options={
-            "right": "6, want de betekenissen vermenigvuldigen zich",
             "plus": "5, want de betekenissen tellen op",
+            "right": "6, want de betekenissen vermenigvuldigen zich",
             "two": "2, want maar twee woorden hebben meer dan één betekenis",
         },
         correct="right",
@@ -58,9 +58,9 @@ def quick_check_context():
         "quick-context",
         question="De raadsleden weigeren de boze betogers een vergunning omdat ze geweld vrezen. Waarom wijst *ze* naar de raadsleden?",
         options={
-            "right": "Kennis van de wereld: wie geweld vreest, weigert een vergunning",
             "grammar": "Grammatica: ze wijst naar het onderwerp van de zin",
             "near": "Plek: ze wijst naar de groep die er in de zin het dichtst vóór staat",
+            "right": "Kennis van de wereld: wie geweld vreest, weigert een vergunning",
         },
         correct="right",
         why={
@@ -390,8 +390,8 @@ def choice_compare_cell():
         "compare",
         question="Welk team heeft het betere systeem?",
         options={
-            "right": "Dat valt niet te zeggen, want de twee getallen komen van andere data",
             "a": "Team A, want 90 is meer dan 80",
+            "right": "Dat valt niet te zeggen, want de twee getallen komen van andere data",
             "b": "Team B, want de testset van een shared task is moeilijker dan zelfgekozen nieuws",
         },
         correct="right",

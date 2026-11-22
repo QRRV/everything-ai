@@ -37,8 +37,8 @@ def quick_check_saved():
         "quick-saved",
         question="You save a model with `torch.save(model.state_dict(), path)`. What is not in the file?",
         options={
-            "right": "The code of the model's class",
             "weights": "The weights of each layer, by name",
+            "right": "The code of the model's class",
             "shapes": "The shape of every tensor in it",
         },
         correct="right",
@@ -58,9 +58,9 @@ def quick_check_or():
         "quick-or",
         question="In an attack tree, an OR node has two children: one way in costs €500, the other €200. What does the OR node cost?",
         options={
-            "right": "€200, what its cheapest child costs",
             "sum": "€700, the sum of both children",
             "max": "€500, what its most expensive child costs",
+            "right": "€200, what its cheapest child costs",
         },
         correct="right",
         why={
@@ -473,8 +473,8 @@ def choice_repository_cell():
         "repository",
         question="What does the safetensors format promise you here?",
         options={
-            "right": "Only that reading the weights runs no code",
             "whole": "That the repository runs no code, since its weights are safetensors",
+            "right": "Only that reading the weights runs no code",
             "none": "Nothing: a safetensors header can hold code too",
         },
         correct="right",

@@ -38,8 +38,8 @@ def quick_check_goal():
         "quick-goal",
         question="Iemand stuurt een model zoveel vragen dat andere gebruikers hun antwoorden niet meer op tijd krijgen. Welk doel van NIST heeft die aanvaller?",
         options={
-            "right": "Beschikbaarheid laten uitvallen: anderen kunnen er niet bij",
             "integ": "Integriteit schenden: de antwoorden worden fout",
+            "right": "Beschikbaarheid laten uitvallen: anderen kunnen er niet bij",
             "priv": "Privacy aantasten: de antwoorden verraden wat het model leerde",
         },
         correct="right",
@@ -59,9 +59,9 @@ def quick_check_citation():
         "quick-citation",
         question="Een assistent antwoordt uit een tekst die je geeft, en noemt de gebruikte zin. Wat kun je daardoor?",
         options={
-            "right": "Het antwoord nakijken in die zin",
             "trust": "Het antwoord geloven zonder nakijken",
             "learn": "Het model de tekst laten onthouden voor de volgende keer",
+            "right": "Het antwoord nakijken in die zin",
         },
         correct="right",
         why={
@@ -428,8 +428,8 @@ def choice_lists_cell():
         "lists",
         question="Welke lijsten van OWASP gebruikt de review ervan?",
         options={
-            "right": "Beide: voor LLM-applicaties en voor agents",
             "agents": "Alleen die voor agents: die vervangt de andere",
+            "right": "Beide: voor LLM-applicaties en voor agents",
             "llm": "Alleen die voor LLM-applicaties: e-mail is ook maar tekst",
         },
         correct="right",

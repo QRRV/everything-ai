@@ -37,8 +37,8 @@ def quick_check_scale():
         "quick-scale",
         question="Een model is getraind op een feature die is gestandaardiseerd met gemiddelde 50 en standaardafwijking 10. Een nieuw voorbeeld heeft de waarde 70. Welk getal gaat het model in?",
         options={
-            "right": "2",
             "raw": "70",
+            "right": "2",
             "own": "0",
             "seven": "7",
         },
@@ -60,9 +60,9 @@ def quick_check_size():
         "quick-size",
         question="`img` heeft shape `(400, 600, 3)`. Welke shape heeft `np.array(Image.fromarray(img).resize((300, 200)))`?",
         options={
-            "right": "`(200, 300, 3)`",
             "swapped": "`(300, 200, 3)`",
             "same": "`(400, 600, 3)`",
+            "right": "`(200, 300, 3)`",
             "flat": "`(300, 200)`",
         },
         correct="right",

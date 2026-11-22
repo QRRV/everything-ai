@@ -38,8 +38,8 @@ def quick_check_overlap():
         "quick-overlap",
         question="Twee filters missen elk 10% van de schadelijke berichten. Ze zijn op dezelfde voorbeelden getraind. Welk deel komt langs allebei?",
         options={
-            "right": "Meer dan 1%, omdat wat ze missen overlapt",
             "product": "Precies 1%, want 10% maal 10%",
+            "right": "Meer dan 1%, omdat wat ze missen overlapt",
             "less": "Minder dan 1%, omdat twee gelijke filters elkaar ondersteunen",
         },
         correct="right",
@@ -59,9 +59,9 @@ def quick_check_recall():
         "quick-recall",
         question="Een spamfilter verhoogt zijn decision threshold van 0,5 naar 0,9. Wat gebeurt er met zijn recall?",
         options={
-            "right": "Die daalt, of blijft op zijn best gelijk",
             "up": "Die stijgt, omdat het filter strenger is",
             "same": "Er verandert niets: de threshold raakt alleen precision",
+            "right": "Die daalt, of blijft op zijn best gelijk",
         },
         correct="right",
         why={
@@ -465,8 +465,8 @@ def choice_wording_cell():
         "wording",
         question="Wat zegt dit over de moderator van de course?",
         options={
-            "right": "Zijn scores hangen af van hoe je het vraagt, niet alleen van de tekst",
             "meeting": "De alledaagse teksten waren toxischer dan ze lijken",
+            "right": "Zijn scores hangen af van hoe je het vraagt, niet alleen van de tekst",
             "word": "Vragen naar toxiciteit geeft betere scores, want dat vraagt Perspective ook",
         },
         correct="right",

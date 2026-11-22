@@ -38,8 +38,8 @@ def quick_check_tries():
         "quick-tries",
         question="Een aanval werkt bij de helft van zijn pogingen, en elke poging staat los van de andere. Hoe groot is de kans dat minstens één van twee pogingen werkt?",
         options={
-            "right": "0,75: allebei mislukken heeft kans 0,25",
             "one": "1, want twee halve kansen maken samen een hele",
+            "right": "0,75: allebei mislukken heeft kans 0,25",
             "half": "0,5, want elke poging werkt de helft van de keren",
         },
         correct="right",
@@ -59,9 +59,9 @@ def quick_check_base64():
         "quick-base64",
         question="Met de recensies in base64 bevatte geen van de 160 antwoorden van Qwen3 op een aangevallen recensie PINEAPPLE. Waarom niet?",
         options={
-            "right": "Qwen3-0.6B kon de recensies in base64 niet lezen",
             "data": "Encoding vertelt het model dat de recensie data is, en daar houdt het zich aan",
             "judge": "Base64 verstopte het woord van de aanvaller voor de judge",
+            "right": "Qwen3-0.6B kon de recensies in base64 niet lezen",
         },
         correct="right",
         why={
@@ -522,8 +522,8 @@ def choice_which_cell():
         "which",
         question="Wat is dat, volgens de omschrijvingen in *Jailbreak of prompt injection?* en *Wat een jailbreak is*?",
         options={
-            "right": "Een jailbreak volgens NIST, en prompt injection volgens Willison",
             "only": "Een jailbreak, en geen prompt injection, want geen document verstopte een instructie",
+            "right": "Een jailbreak volgens NIST, en prompt injection volgens Willison",
             "neither": "Geen van beide: de vraag is onschuldig, dus er werd niets aangevallen",
         },
         correct="right",

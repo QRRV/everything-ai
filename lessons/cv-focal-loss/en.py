@@ -37,8 +37,8 @@ def quick_check_hard():
         "quick-hard",
         question="Hard negative mining, as your FPN detector was trained: in a scene where 10 of the 2,720 anchors learn a shape and none is ignored, the cross-entropy counts those 10 and the 30 background anchors with the highest cross-entropy. What happens to the cross-entropy of the other 2,680 background anchors?",
         options={
-            "right": "It does not count in that batch at all, however sure the detector is of them",
             "third": "It counts for a third, so that background weighs as much as the shapes",
+            "right": "It does not count in that batch at all, however sure the detector is of them",
             "later": "It is kept, and counts in the next batch",
             "box": "It goes into the box loss",
         },
@@ -60,9 +60,9 @@ def quick_check_stages():
         "quick-stages",
         question="The first stage of your two-stage detector gives each of the 768 anchors of a scene a probability of an object. How many boxes does its second stage look at again?",
         options={
-            "right": "32 proposals: of the 100 anchors with the highest probability of an object, the first 32 that NMS at 0.7 keeps",
             "all": "All 768: the second stage looks at every anchor again",
             "hundred": "100: the anchors with the highest probability of an object",
+            "right": "32 proposals: of the 100 anchors with the highest probability of an object, the first 32 that NMS at 0.7 keeps",
             "shapes": "As many as the scene has shapes",
         },
         correct="right",
@@ -431,8 +431,8 @@ def choice_versus_cell():
         "versus",
         question="Hard negative mining and the focal loss both keep the loss of a one-stage detector from drowning in background. A scene has 10 anchors that learn a shape and 2,697 background anchors. How does each of them count the background anchors?",
         options={
-            "right": "Hard negative mining counts the 30 hardest fully and the others not at all; the focal loss counts all 2,697, each weighted by how wrong the detector still is",
             "reverse": "Hard negative mining weights every background anchor; the focal loss keeps only the hardest",
+            "right": "Hard negative mining counts the 30 hardest fully and the others not at all; the focal loss counts all 2,697, each weighted by how wrong the detector still is",
             "same": "Both count the 30 hardest background anchors; the focal loss also turns down the anchors of shapes",
             "random": "Hard negative mining picks 30 at random; the focal loss counts all of them equally",
         },

@@ -37,8 +37,8 @@ def quick_check_fcn():
         "quick-fcn",
         question="The FCN of the lesson on FCNs learned the course's scenes, with 4 kinds: background, circle, square and triangle. You give it a photo of a starfish. What does it give the pixels of the starfish?",
         options={
-            "right": "one of its 4 kinds each: it has no other",
             "star": "a new kind, starfish: it sees a new shape",
+            "right": "one of its 4 kinds each: it has no other",
             "empty": "no kind: those pixels stay empty",
             "background": "always background: what it does not know is background",
         },
@@ -60,9 +60,9 @@ def quick_check_erosion():
         "quick-erosion",
         question="Erosion with a square of 3 by 3 makes a white shape one pixel thinner all around. You erode a white square of 9 by 9 pixels, in the middle of a black image, again and again. What is left just before nothing is left?",
         options={
-            "right": "the one pixel in its middle, after 4 erosions",
             "three": "a square of 3 by 3, after 3 erosions",
             "corners": "its four corners",
+            "right": "the one pixel in its middle, after 4 erosions",
             "never": "the square never disappears: it keeps its shape",
         },
         correct="right",

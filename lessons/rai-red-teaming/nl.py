@@ -38,8 +38,8 @@ def quick_check_rule():
         "quick-rule",
         question="In de vorige les kwam de personeelscode in 62 van de 70 antwoorden naar buiten zonder de geheimhoudingsregel, en in 34 met de regel. Wat zegt dat over de regel?",
         options={
-            "right": "Dat hij helpt, maar de code kwam nog in 34 van de 70 naar buiten",
             "most": "Dat met de regel de meeste van de zeven aanvallen niets opleverden",
+            "right": "Dat hij helpt, maar de code kwam nog in 34 van de 70 naar buiten",
             "useless": "Dat hij niets verandert, omdat aanvallers de code toch wel te pakken krijgen",
         },
         correct="right",
@@ -59,9 +59,9 @@ def quick_check_leaked():
         "quick-leaked",
         question="Waarom haalt `leaked` zowel het antwoord als de code door `squeeze`?",
         options={
-            "right": "Zodat andere hoofdletters of tekens de code niet verbergen",
             "words": "Zodat de cijfers uitgeschreven als woorden ook als de code tellen",
             "speed": "Zodat het korte teksten vergelijkt, en dat gaat sneller",
+            "right": "Zodat andere hoofdletters of tekens de code niet verbergen",
         },
         correct="right",
         why={
@@ -509,8 +509,8 @@ def choice_report_cell():
         "report",
         question="Wat doe je?",
         options={
-            "right": "Het die winkel vertrouwelijk melden, en verder niemand tot het hersteld is",
             "public": "Het bericht online zetten, zodat andere winkels de hunne kunnen nakijken",
+            "right": "Het die winkel vertrouwelijk melden, en verder niemand tot het hersteld is",
             "more": "Het bericht eerst op de assistenten van andere winkels proberen, om te zien hoe vaak het werkt",
         },
         correct="right",

@@ -37,8 +37,8 @@ def quick_check_salt():
         "quick-salt",
         question="What does a listener usually hear in *Can you pass the salt?*",
         options={
-            "right": "A request to pass the salt",
             "ability": "A question about whether you are able to",
+            "right": "A request to pass the salt",
             "promise": "A promise that the speaker will pass the salt soon",
         },
         correct="right",
@@ -58,9 +58,9 @@ def quick_check_quantity():
         "quick-quantity",
         question="*Some of the guests came.* Why does a listener take it that not all of them came?",
         options={
-            "right": "The speaker could have said *all*, and did not",
             "logic": "In logic, *some* means not all",
             "presupposition": "It is a presupposition: it stays when you add *not*",
+            "right": "The speaker could have said *all*, and did not",
         },
         correct="right",
         why={

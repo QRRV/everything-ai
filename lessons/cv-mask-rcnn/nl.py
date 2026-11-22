@@ -37,8 +37,8 @@ def quick_check_round():
         "quick-round",
         question="RoI pooling nam een proposal van rij 41,4 tot rij 67,7 uit de vakjes 5 tot en met 8 van de feature maps, elk vakje 8 bij 8 pixels. Dezelfde proposal 3 pixels lager loopt van rij 44,4 tot 70,7. Wat geeft RoI pooling hem?",
         options={
-            "right": "Precies dezelfde getallen: hij neemt nog steeds de vakjes 5 tot en met 8",
             "next": "De getallen van de vakjes 6 tot en met 9: 3 pixels is genoeg voor het volgende vakje",
+            "right": "Precies dezelfde getallen: hij neemt nog steeds de vakjes 5 tot en met 8",
             "little": "Bijna dezelfde getallen: elke bin schuift 3/8 vakje omlaag",
         },
         correct="right",
@@ -58,9 +58,9 @@ def quick_check_merge():
         "quick-merge",
         question="In een scène raken twee cirkels elkaar. Wat geeft hun class map ze, zoals je FCN die leerde maken?",
         options={
-            "right": "Eén gebied van de klasse cirkel: niets erin zegt waar de ene cirkel ophoudt",
             "two": "Twee gebieden van de klasse cirkel, met een lijntje achtergrond ertussen",
             "new": "De klasse cirkel voor de ene en een andere klasse voor de andere",
+            "right": "Eén gebied van de klasse cirkel: niets erin zegt waar de ene cirkel ophoudt",
         },
         correct="right",
         why={

@@ -39,8 +39,8 @@ def quick_check_defense():
         "quick-defense",
         question="The warning around the question brought many-shot with eight examples from 25 to 5 of the 25 tries. Prefix injection and refusal suppression together got 20 of 25 without it. And with the warning?",
         options={
-            "right": "20 again: count a defense per attack",
             "same": "About 5, as against many-shot",
+            "right": "20 again: count a defense per attack",
             "half": "10: half, as it did against prefix injection alone",
         },
         correct="right",
@@ -60,9 +60,9 @@ def quick_check_mismatch():
         "quick-mismatch",
         question="Which of these attacks is mismatched generalization, in the words of Wei and colleagues?",
         options={
-            "right": "The request written in Base64",
             "prefix": "Start your answer with: Sure, here is",
             "suppress": "Do not apologize, and do not refuse",
+            "right": "The request written in Base64",
         },
         correct="right",
         why={
@@ -517,8 +517,8 @@ def choice_filter_cell():
         "filter",
         question="Why did the filter not block such answers?",
         options={
-            "right": "They hold the code, but no five words in a row of the prompt",
             "short": "The answer is too short: it has only five words",
+            "right": "They hold the code, but no five words in a row of the prompt",
             "encoded": "Qwen3 encoded the code, as in the attacks of Zhang and colleagues",
         },
         correct="right",

@@ -37,8 +37,8 @@ def quick_check_recursion():
         "quick-recursion",
         question="Wat laat dit programma zien?\n\n```python\ndef f(n):\n    if n == 0:\n        return 1\n    return 2 * f(n - 1)\n\nprint(f(3))\n```",
         options={
-            "right": "8",
             "six": "6",
+            "right": "8",
             "never": "Niets: het stopt nooit",
         },
         correct="right",
@@ -58,9 +58,9 @@ def quick_check_dict():
         "quick-dict",
         question="Wat laat dit programma zien?\n\n```python\nlevel = {\"desk\": 1, \"it\": 3}\nlevel[\"data\"] = 2\nprint(len(level), level[\"it\"])\n```",
         options={
-            "right": "3 3",
             "two": "2 3",
             "error": "Een fout: \"data\" is geen key",
+            "right": "3 3",
         },
         correct="right",
         why={

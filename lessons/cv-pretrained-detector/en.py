@@ -37,8 +37,8 @@ def quick_check_map():
         "quick-map",
         question="A detector has an AP of 0.8 for cats. At which score threshold should an app show its cat boxes?",
         options={
-            "right": "AP does not say: it judges the order of the scores, not where to cut the list",
             "ap": "at 0.8, its AP",
+            "right": "AP does not say: it judges the order of the scores, not where to cut the list",
             "iou": "at 0.5, the IoU threshold of PASCAL VOC",
             "rest": "at 0.2: 1 minus its AP",
         },
@@ -60,9 +60,9 @@ def quick_check_softmax():
         "quick-softmax",
         question="A model gives three logits: 3 for cat, 2 for dog and 1 for \"nothing\". What probability does softmax give cat?",
         options={
-            "right": "0.67",
             "two": "0.73",
             "share": "0.50",
+            "right": "0.67",
             "max": "1.00",
         },
         correct="right",
@@ -401,8 +401,8 @@ def choice_apps_cell():
         "apps",
         question="Four apps use the same detector. Which of them should set its score threshold low?",
         options={
-            "right": "A program that marks cracks on photos of a bridge, for an inspector who checks each mark",
             "album": "An app that writes what it sees under your holiday photos",
+            "right": "A program that marks cracks on photos of a bridge, for an inspector who checks each mark",
             "shop": "A self-checkout camera that puts every product it sees on your bill",
             "fine": "A camera in a bus lane that sends a fine for every car it sees there",
         },

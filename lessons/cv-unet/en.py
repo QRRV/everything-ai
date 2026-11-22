@@ -38,8 +38,8 @@ def quick_check_up():
         "quick-up",
         question="A feature map of 64 channels and 16 by 16 places goes into `nn.ConvTranspose2d(64, 32, 2, stride=2)`. What comes out?",
         options={
-            "right": "32 maps of 32 by 32: every value paints a kernel of 2 by 2, 2 places further on each time, and the copies just touch",
             "channels": "64 maps of 32 by 32: a transposed convolution keeps the channels",
+            "right": "32 maps of 32 by 32: every value paints a kernel of 2 by 2, 2 places further on each time, and the copies just touch",
             "smaller": "32 maps of 8 by 8: stride 2 makes the map half as large",
             "plus": "32 maps of 34 by 34: 16 · 2 + 2 places",
         },
@@ -61,9 +61,9 @@ def quick_check_stride():
         "quick-stride",
         question="In the last lesson, the course's FCN with output stride 4 had a last map of 32 by 32 places, and did worse than the FCN with stride 8, whose last map has 16 by 16. Why?",
         options={
-            "right": "Every place of its last map sees only 18 by 18 pixels of the scene: too little of a shape to tell its kind",
             "coarse": "Its last map is too coarse to draw the edges",
             "params": "It has more parameters, and learns the training scenes by heart",
+            "right": "Every place of its last map sees only 18 by 18 pixels of the scene: too little of a shape to tell its kind",
             "upsample": "A transposed convolution cannot make a map 4 times larger",
         },
         correct="right",

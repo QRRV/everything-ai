@@ -37,8 +37,8 @@ def quick_check_weight():
         "quick-weight",
         question="In de vorige les gaf LIME education_num een weight van 0,144 voor de persoon van 41. Wat is die weight?",
         options={
-            "right": "De helling van een lijn bij de persoon",
             "share": "Het deel van de kans dat van de opleiding komt",
+            "right": "De helling van een lijn bij de persoon",
             "count": "Hoe vaak het forest naar de opleiding vraagt",
         },
         correct="right",
@@ -58,9 +58,9 @@ def quick_check_small():
         "quick-small",
         question="Met kernel width 0,1 was de weight van education_num in drie runs 0,081, 0,199 en 0,242. Waarom sprong hij zo?",
         options={
-            "right": "Samen telden de 5000 rijen als zo'n 2",
             "trained": "Het forest werd elke run opnieuw getraind",
             "moved": "De willekeurige rijen verschoven de persoon elke keer",
+            "right": "Samen telden de 5000 rijen als zo'n 2",
         },
         correct="right",
         why={
@@ -366,8 +366,8 @@ def choice_background_cell():
         "background",
         question="Je legt dezelfde persoon opnieuw uit, met een achtergrond van 200 mensen met een education_num van 13 of meer. Wat gebeurt er?",
         options={
-            "right": "De waarden veranderen, en hun som ook",
             "unique": "Niets: Shapley-waarden zijn uniek, dus ze blijven gelijk",
+            "right": "De waarden veranderen, en hun som ook",
             "only": "Alleen education_num krijgt een nieuwe waarde",
         },
         correct="right",

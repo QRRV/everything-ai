@@ -37,8 +37,8 @@ def quick_check_value():
         "quick-value",
         question="Wat is de helderheid van de pixel `(60, 180, 120)` in HSV?",
         options={
-            "max": "180 / 255, ongeveer 0,71",
             "mean": "120 / 255, ongeveer 0,47",
+            "max": "180 / 255, ongeveer 0,71",
             "saturation": "(180 − 60) / 180, ongeveer 0,67",
         },
         correct="max",
@@ -58,9 +58,9 @@ def quick_check_quantile():
         "quick-quantile",
         question="Voor een array met getallen `x` geeft `np.quantile(x, 0.75)` de waarde 40. Welk deel van de getallen is 40 of minder?",
         options={
-            "three": "Ongeveer 3 van elke 4",
             "one": "Ongeveer 1 van elke 4",
             "forty": "Ongeveer 40%",
+            "three": "Ongeveer 3 van elke 4",
         },
         correct="three",
         why={

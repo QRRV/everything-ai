@@ -37,8 +37,8 @@ def quick_check_sum():
         "quick-sum",
         question="In de vorige les telden de vier Shapley-waarden van de persoon van 41 op tot 0,226. Wat is 0,226?",
         options={
-            "right": "De kans min het gemiddelde van de achtergrond",
             "both": "Wat education_num en age samen bijdragen aan de kans",
+            "right": "De kans min het gemiddelde van de achtergrond",
             "chance": "De kans op ja van deze persoon",
         },
         correct="right",
@@ -58,9 +58,9 @@ def quick_check_game():
         "quick-game",
         question="Tegenover 200 mensen met een education_num van 13 of meer kreeg education_num −0,027 in plaats van +0,181. Waarom?",
         options={
-            "right": "De achtergrond hoort bij het spel",
             "random": "Elke run trekt nieuwe willekeurige volgordes",
             "trained": "Het forest werd op die mensen getraind",
+            "right": "De achtergrond hoort bij het spel",
         },
         correct="right",
         why={
@@ -458,8 +458,8 @@ def choice_ten_cell():
         "ten",
         question="Je legt één persoon uit met `shap.KernelExplainer` op een tabel met 30 kolommen, met de standaardinstellingen van shap 0.54.1. Hoeveel kolommen kunnen een waarde krijgen die niet 0 is?",
         options={
-            "right": "Hoogstens ongeveer 10",
             "all": "Alle 30, elk met zijn eigen deel",
+            "right": "Hoogstens ongeveer 10",
             "above": "Alleen die boven 0,01",
         },
         correct="right",

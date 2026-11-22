@@ -37,8 +37,8 @@ def quick_check_side():
         "quick-side",
         question="A tool sums up a long report in five sentences. Which side of NLP is that, in the course's simple sort?",
         options={
-            "right": "Both, since text goes in and text comes out",
             "nlu": "NLU, since the tool has to get what the report says",
+            "right": "Both, since text goes in and text comes out",
             "nlg": "NLG, since it writes five new sentences",
         },
         correct="right",
@@ -58,9 +58,9 @@ def quick_check_names():
         "quick-names",
         question="Where people keep computational linguistics and NLP apart, what does computational linguistics want?",
         options={
-            "right": "To know how language works, with computers as a tool",
             "systems": "Systems that work for users, such as a spelling app or a translator",
             "replace": "To replace linguists with programs that count words",
+            "right": "To know how language works, with computers as a tool",
         },
         correct="right",
         why={
@@ -382,8 +382,8 @@ def choice_blossoms_cell():
         "blossoms",
         question="What makes the headline easy to misread?",
         options={
-            "right": "Blossoms can be read as a noun, while the headline means it as a verb",
             "know": "Readers would need to know about the crash to tell which violinist is meant",
+            "right": "Blossoms can be read as a noun, while the headline means it as a verb",
             "spelling": "*Linked* is written in an unusual way that a program does not recognize",
         },
         correct="right",

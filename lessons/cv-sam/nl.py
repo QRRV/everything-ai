@@ -37,8 +37,8 @@ def quick_check_fcn():
         "quick-fcn",
         question="Het FCN van de les over FCN's leerde de scènes van de course, met 4 soorten: achtergrond, cirkel, vierkant en driehoek. Je geeft het een foto van een zeester. Wat geeft het de pixels van de zeester?",
         options={
-            "right": "elk een van zijn 4 soorten: andere heeft het niet",
             "star": "een nieuwe soort, zeester: het ziet een nieuwe vorm",
+            "right": "elk een van zijn 4 soorten: andere heeft het niet",
             "empty": "geen soort: die pixels blijven leeg",
             "background": "altijd achtergrond: wat het niet kent, is achtergrond",
         },
@@ -60,9 +60,9 @@ def quick_check_erosion():
         "quick-erosion",
         question="Erosie met een vierkant van 3 bij 3 maakt een witte vorm rondom één pixel dunner. Je erodeert een wit vierkant van 9 bij 9 pixels, midden in een zwart beeld, steeds opnieuw. Wat blijft er over vlak voordat er niets meer over is?",
         options={
-            "right": "de ene pixel in het midden, na 4 erosies",
             "three": "een vierkant van 3 bij 3, na 3 erosies",
             "corners": "zijn vier hoeken",
+            "right": "de ene pixel in het midden, na 4 erosies",
             "never": "het vierkant verdwijnt nooit: het houdt zijn vorm",
         },
         correct="right",

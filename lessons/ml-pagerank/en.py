@@ -37,8 +37,8 @@ def quick_check_hubs():
         "quick-hubs",
         question="In the network of flights, the 100 biggest hubs close, with all their routes: 3% of the airports. What happens to the airports that are left?",
         options={
-            "right": "They get much further apart: 5.74 flights on average instead of 4.10",
             "nothing": "Almost nothing: 3% of the airports is too few to matter",
+            "right": "They get much further apart: 5.74 flights on average instead of 4.10",
             "apart": "None of them can reach another any more",
         },
         correct="right",
@@ -58,9 +58,9 @@ def quick_check_bfs():
         "quick-bfs",
         question="Breadth-first search gives an airport its number of flights the first time it meets it, and never changes it. Why is that first number the smallest?",
         options={
-            "right": "The frontier is a queue: every airport 1 flight away comes out before any airport 2 flights away",
             "fewest": "It always takes the neighbor with the fewest edges first",
             "close": "It is not always the smallest, but it is close enough",
+            "right": "The frontier is a queue: every airport 1 flight away comes out before any airport 2 flights away",
         },
         correct="right",
         why={

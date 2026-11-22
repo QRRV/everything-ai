@@ -37,8 +37,8 @@ def quick_check_box():
         "quick-box",
         question="Een vorm heeft deze pixels, als (rij, kolom): `(1, 3)`, `(2, 3)`, `(2, 4)` en `(3, 2)`. Wat is zijn bounding box, geschreven zoals in die les, `(boven, links, onder, rechts)`?",
         options={
-            "box": "`(1, 2, 3, 4)`",
             "xy": "`(2, 1, 4, 3)`",
+            "box": "`(1, 2, 3, 4)`",
             "ends": "`(1, 3, 3, 2)`",
             "size": "`(1, 2, 3, 3)`",
         },
@@ -60,9 +60,9 @@ def quick_check_pixels():
         "quick-pixels",
         question="Een vorm van 12 pixels heeft de bounding box `(0, 0, 3, 3)`. Hoeveel pixels in zijn box horen niet bij de vorm?",
         options={
-            "four": "4",
             "zero": "0",
             "none": "Geen: 12 pixels passen niet in die box",
+            "four": "4",
         },
         correct="four",
         why={

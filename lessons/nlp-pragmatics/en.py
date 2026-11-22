@@ -37,8 +37,8 @@ def quick_check_some():
         "quick-some",
         question="In logic, is *some cat sleeps* true in a world in which every cat sleeps?",
         options={
-            "right": "Yes: at least one cat sleeps",
             "not-every": "No: *some* means not every cat",
+            "right": "Yes: at least one cat sleeps",
             "no-value": "No: the sentence has no truth value then",
         },
         correct="right",
@@ -58,9 +58,9 @@ def quick_check_vp():
         "quick-vp",
         question="In the world of *Meaning: when is a sentence true?*, what does the VP *chases Tom* stand for?",
         options={
-            "right": "The animals that chase Tom",
             "pairs": "The pairs of *chases* with Tom first",
             "truth": "True when Tom chases someone, and false otherwise",
+            "right": "The animals that chase Tom",
         },
         correct="right",
         why={

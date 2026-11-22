@@ -37,8 +37,8 @@ def quick_check_part():
         "quick-part",
         question="Welke woordgroep in *de late trein verliet de stad na middernacht* kan plaatsmaken voor het ene woord *toen*?",
         options={
-            "right": "*na middernacht*",
             "left": "*verliet de stad na*",
+            "right": "*na middernacht*",
             "train": "*trein verliet*",
         },
         correct="right",
@@ -58,9 +58,9 @@ def quick_check_rule():
         "quick-rule",
         question="De grammatica van *Zinsbouw en eindeloze zinnen* begint met de regel S → NP VP. Wat zegt die regel?",
         options={
-            "right": "S mag je herschrijven als NP en dan VP",
             "or": "S mag je herschrijven als NP, of anders als VP",
             "inside": "NP bevat VP",
+            "right": "S mag je herschrijven als NP en dan VP",
         },
         correct="right",
         why={

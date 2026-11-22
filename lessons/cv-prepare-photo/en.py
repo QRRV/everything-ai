@@ -37,8 +37,8 @@ def quick_check_scale():
         "quick-scale",
         question="A model was trained on a feature standardized with mean 50 and standard deviation 10. A new example has the value 70. Which number goes into the model?",
         options={
-            "right": "2",
             "raw": "70",
+            "right": "2",
             "own": "0",
             "seven": "7",
         },
@@ -60,9 +60,9 @@ def quick_check_size():
         "quick-size",
         question="`img` has shape `(400, 600, 3)`. Which shape does `np.array(Image.fromarray(img).resize((300, 200)))` have?",
         options={
-            "right": "`(200, 300, 3)`",
             "swapped": "`(300, 200, 3)`",
             "same": "`(400, 600, 3)`",
+            "right": "`(200, 300, 3)`",
             "flat": "`(300, 200)`",
         },
         correct="right",

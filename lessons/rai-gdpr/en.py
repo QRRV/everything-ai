@@ -37,8 +37,8 @@ def quick_check_group():
         "quick-group",
         question="In Solove's taxonomy of privacy problems, which group does aggregation belong to?",
         options={
-            "right": "Processing",
             "collection": "Collection",
+            "right": "Processing",
             "dissemination": "Dissemination",
         },
         correct="right",
@@ -58,9 +58,9 @@ def quick_check_flow():
         "quick-flow",
         question="Which view of privacy asks whether a flow of information fits the context it came from?",
         options={
-            "right": "Appropriate flow",
             "alone": "Being let alone",
             "control": "Control over information",
+            "right": "Appropriate flow",
         },
         correct="right",
         why={

@@ -38,8 +38,8 @@ def quick_check_goal():
         "quick-goal",
         question="Someone sends a model so many questions that other users no longer get their answers in time. Which of NIST's goals does that attacker have?",
         options={
-            "right": "Availability breakdown: others lose access",
             "integ": "Integrity violation: the answers become wrong",
+            "right": "Availability breakdown: others lose access",
             "priv": "Privacy compromise: the answers give away what it learned",
         },
         correct="right",
@@ -59,9 +59,9 @@ def quick_check_citation():
         "quick-citation",
         question="An assistant answers from a text you give it, and names the sentence it used. What does that let you do?",
         options={
-            "right": "Check the answer against that sentence",
             "trust": "Trust the answer without checking it",
             "learn": "Make the model remember the text for next time",
+            "right": "Check the answer against that sentence",
         },
         correct="right",
         why={
@@ -428,8 +428,8 @@ def choice_lists_cell():
         "lists",
         question="Which of OWASP's lists does its review use?",
         options={
-            "right": "Both lists: for LLM applications and for agents",
             "agents": "Only the list for agents: it replaces the other",
+            "right": "Both lists: for LLM applications and for agents",
             "llm": "Only the list for LLM applications: email is just text",
         },
         correct="right",

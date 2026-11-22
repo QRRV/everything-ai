@@ -37,8 +37,8 @@ def quick_check_readings():
         "quick-readings",
         question="In *we saw a bat*, *saw* has three meanings and *bat* two. In how many ways can the four words be read?",
         options={
-            "right": "6, since the meanings multiply",
             "plus": "5, since the meanings add up",
+            "right": "6, since the meanings multiply",
             "two": "2, since only two words have more than one meaning",
         },
         correct="right",
@@ -58,9 +58,9 @@ def quick_check_context():
         "quick-context",
         question="The town council members refused the angry demonstrators a permit because they feared violence. Why does *they* point to the council members?",
         options={
-            "right": "Knowledge of the world: those who fear violence refuse a permit",
             "grammar": "Grammar: they points to the subject of the sentence",
             "near": "Position: they points to the group that comes closest before it in the sentence",
+            "right": "Knowledge of the world: those who fear violence refuse a permit",
         },
         correct="right",
         why={
@@ -390,8 +390,8 @@ def choice_compare_cell():
         "compare",
         question="Which team has the better system?",
         options={
-            "right": "You cannot tell, since the two numbers come from different data",
             "a": "Team A, since 90 is more than 80",
+            "right": "You cannot tell, since the two numbers come from different data",
             "b": "Team B, since the test set of a shared task is harder than news picked by a team",
         },
         correct="right",

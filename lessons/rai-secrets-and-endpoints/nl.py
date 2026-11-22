@@ -37,8 +37,8 @@ def quick_check_uber():
         "quick-uber",
         question="Waar vonden indringers in 2016 de toegangssleutel tot bestanden van Uber, volgens een klacht van de Amerikaanse Federal Trade Commission?",
         options={
-            "right": "In code in een privérepository op GitHub",
             "public": "In een openbare repository op GitHub",
+            "right": "In code in een privérepository op GitHub",
             "laptop": "Op een laptop die een medewerker in de trein liet liggen",
         },
         correct="right",
@@ -58,9 +58,9 @@ def quick_check_environ():
         "quick-environ",
         question="Je code leest `os.environ[\"MODEL_API_KEY\"]`, en die environment variable is niet gezet. Wat gebeurt er?",
         options={
-            "right": "Python stopt met een KeyError",
             "empty": "De key is de lege tekst",
             "none": "De waarde is None, en het request gaat zonder key de deur uit",
+            "right": "Python stopt met een KeyError",
         },
         correct="right",
         why={
@@ -412,8 +412,8 @@ def choice_reach_cell():
         "reach",
         question="Wie kan er nog requests naartoe sturen?",
         options={
-            "right": "Elk programma op de server van de winkel zelf",
             "nobody": "Niemand behalve de assistent: één programma per adres",
+            "right": "Elk programma op de server van de winkel zelf",
             "network": "Elke computer op het netwerk van de winkel",
         },
         correct="right",
@@ -443,9 +443,9 @@ def choice_environment_cell():
         "environment",
         question="Wat betekent dat voor de key van PedalPay?",
         options={
-            "right": "Wie het rapport kan lezen, kan de key nu gebruiken",
             "none": "Niets: een key buiten de code komt niet in een rapport",
             "push": "Push protection houdt het rapport tegen",
+            "right": "Wie het rapport kan lezen, kan de key nu gebruiken",
         },
         correct="right",
         why={

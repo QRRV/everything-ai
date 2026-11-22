@@ -37,8 +37,8 @@ def quick_check_marginal():
         "quick-marginal",
         question="Een release verhoogt de kans op een dreiging in een jaar van 0,2 naar 0,25, en één zo'n gebeurtenis kost 40 schadepunten. Wat is het marginal risk van de release voor deze dreiging?",
         options={
-            "right": "2 schadepunten",
             "with": "10 schadepunten: het risico met de release",
+            "right": "2 schadepunten",
             "chance": "0,05, de stijging van de kans",
         },
         correct="right",
@@ -58,9 +58,9 @@ def quick_check_reference():
         "quick-reference",
         question="Kapoor en anderen vergelijken een open model met technologie die er al was, met closed models of met andere vergelijkingspunten. Waarom doet die keuze ertoe?",
         options={
-            "right": "Dezelfde release voegt veel of weinig toe, afhankelijk van wat er al is",
             "none": "Het doet er niet toe: het risico van een model blijft hetzelfde, waarmee je het ook toevallig vergelijkt",
             "closed": "Omdat closed models het enige vergelijkingspunt zijn dat je kunt meten",
+            "right": "Dezelfde release voegt veel of weinig toe, afhankelijk van wat er al is",
         },
         correct="right",
         why={
@@ -380,8 +380,8 @@ def choice_margin_cell():
         "margin",
         question="Wat kost dat het lab?",
         options={
-            "right": "Alerts voor veel modellen die nooit een threshold zullen bereiken",
             "none": "Niets: een eerdere waarschuwing geeft alleen meer tijd om je voor te bereiden",
+            "right": "Alerts voor veel modellen die nooit een threshold zullen bereiken",
             "lower": "Minder alerts, want alleen de sterkste modellen komen in de buurt van de helft van een threshold",
         },
         correct="right",

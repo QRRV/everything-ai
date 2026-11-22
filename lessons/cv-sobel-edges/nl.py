@@ -37,8 +37,8 @@ def quick_check_gradient():
         "quick-gradient",
         question="Op één punt is de gradient van een loss $\\mathcal{L}(w, b)$ gelijk aan $(2, -1)$. Wat zegt dat?",
         options={
-            "up": "De loss stijgt het snelst als w groter wordt en b kleiner: de gradient wijst bergop",
             "low": "Het laagste punt van de loss ligt bij w = 2, b = −1",
+            "up": "De loss stijgt het snelst als w groter wordt en b kleiner: de gradient wijst bergop",
             "down": "De loss daalt het snelst als w groter wordt en b kleiner",
         },
         correct="up",
@@ -262,9 +262,9 @@ def choice_direction_cell():
         "direction",
         question="Bij één pixel van een foto is de beeldgradient $(g_x, g_y) = (0, 400)$. Waar is de lichtere kant?",
         options={
-            "below": "Onder de pixel",
             "above": "Boven de pixel",
             "right": "Rechts van de pixel",
+            "below": "Onder de pixel",
             "none": "Nergens: er is geen rand, want $g_x$ is 0",
         },
         correct="below",

@@ -37,8 +37,8 @@ def quick_check_tag():
         "quick-tag",
         question="Which tag of Universal Dependencies does *after* get in *the train left after midnight*?",
         options={
-            "right": "`ADP`, since a noun follows",
             "adv": "`ADV`, since it says when",
+            "right": "`ADP`, since a noun follows",
             "sconj": "`SCONJ`, as in *after the train left*",
         },
         correct="right",
@@ -58,9 +58,9 @@ def quick_check_tags():
         "quick-tags",
         question="In *Parts of speech and phrases*, `tags_per_word` gives each word in small letters the list of its tags, each tag once, in the order they first come. What does `tags_per_word([[(\"Book\", \"VERB\"), (\"it\", \"PRON\")], [(\"a\", \"DET\"), (\"book\", \"NOUN\")]])` give?",
         options={
-            "right": "`{'book': ['VERB', 'NOUN'], 'it': ['PRON'], 'a': ['DET']}`",
             "upper": "`{'Book': ['VERB'], 'it': ['PRON'], 'a': ['DET'], 'book': ['NOUN']}`",
             "last": "`{'book': ['NOUN'], 'it': ['PRON'], 'a': ['DET']}`",
+            "right": "`{'book': ['VERB', 'NOUN'], 'it': ['PRON'], 'a': ['DET']}`",
         },
         correct="right",
         why={

@@ -37,8 +37,8 @@ def quick_check_row():
         "quick-row",
         question="In je ViT rekent head i van een block `A = torch.softmax(S, dim=2)` uit: voor foto's van 16 patches met het class token vooraan een tensor met shape `(n, 17, 17)`. Wat staat er in `A[0, 0]`, rij 0 van de eerste foto?",
         options={
-            "right": "Hoe het class token zijn attention verdeelt over de 17 tokens, zichzelf meegerekend: 17 getallen die optellen tot 1",
             "column": "Hoeveel elk van de 17 tokens van het class token neemt",
+            "right": "Hoe het class token zijn attention verdeelt over de 17 tokens, zichzelf meegerekend: 17 getallen die optellen tot 1",
             "features": "De 17 getallen die het class token na het block heeft",
         },
         correct="right",
@@ -58,9 +58,9 @@ def quick_check_probe():
         "quick-probe",
         question="Een linear probe leerde 10 klassen van de features die DINOv2 gaf voor 20 foto's per klasse. Wat krijgt hij van DINOv2 voor één foto?",
         options={
-            "right": "384 getallen, de features van de foto: voor dezelfde foto altijd dezelfde, want DINOv2 is bevroren",
             "pixels": "De 150.528 getallen van de klaargemaakte foto, 3 · 224 · 224",
             "changing": "384 getallen die elke epoch een beetje veranderen, omdat DINOv2 meeleert",
+            "right": "384 getallen, de features van de foto: voor dezelfde foto altijd dezelfde, want DINOv2 is bevroren",
         },
         correct="right",
         why={

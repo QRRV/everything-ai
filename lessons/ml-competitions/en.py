@@ -37,8 +37,8 @@ def quick_check_luck():
         "quick-luck",
         question="Ten models are scored on the same validation set, and you keep the best. What is its validation score?",
         options={
-            "right": "A little too optimistic: the winner is partly the luckiest on those examples",
             "fair": "An honest estimate of how it does on new examples",
+            "right": "A little too optimistic: the winner is partly the luckiest on those examples",
             "low": "Too pessimistic: the validation set is small",
         },
         correct="right",
@@ -58,9 +58,9 @@ def quick_check_stop():
         "quick-stop",
         question="`HistGradientBoostingRegressor(early_stopping=True)` gets `X_val` and `y_val` in `fit`. What does it choose with them?",
         options={
-            "right": "How many trees it keeps",
             "bins": "How many bins every feature gets",
             "features": "Which features it uses",
+            "right": "How many trees it keeps",
         },
         correct="right",
         why={

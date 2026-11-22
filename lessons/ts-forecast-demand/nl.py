@@ -37,8 +37,8 @@ def quick_check_origin():
         "quick-origin",
         question="Een backtest legt zijn origin op maandag 4 juni 2012 en voorspelt de week erna. Op welke dagen mag de forecast trainen?",
         options={
-            "right": "Op elke dag voor 4 juni",
             "around": "Op elke dag van 2011 en 2012 behalve die week",
+            "right": "Op elke dag voor 4 juni",
             "week": "Alleen op de week voor 4 juni",
         },
         correct="right",
@@ -58,9 +58,9 @@ def quick_check_missing():
         "quick-missing",
         question="Sommige rijen van een tabel hebben NaN in een feature. Wat doet `HistGradientBoostingRegressor` daarmee?",
         options={
-            "right": "Hij gaat zelf met de ontbrekende waarden om",
             "error": "Hij stopt met een fout, dus laat die rijen eerst vallen",
             "zero": "Hij telt ze als 0",
+            "right": "Hij gaat zelf met de ontbrekende waarden om",
         },
         correct="right",
         why={

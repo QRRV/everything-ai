@@ -38,8 +38,8 @@ def quick_check_two():
         "quick-two",
         question="Your reproduction uses the paper's warmup of 10 steps. You want to know whether the jump needs it. Which runs answer that?",
         options={
-            "right": "The run with your kit's settings, and the same run with the warmup taken out",
             "two": "A run without warmup and without weight decay, against the run with your kit's settings",
+            "right": "The run with your kit's settings, and the same run with the warmup taken out",
             "seeds": "Two runs without warmup, one with seed 0 and one with seed 1",
         },
         correct="right",
@@ -340,9 +340,9 @@ def choice_shows_cell():
         "what-shows",
         question=f"The course's ablation, seed 0, {C.number(C.STEPS, 0, L.lang)} steps per run, fractions 30% to 90%: with weight decay, validation reaches 99% at every fraction; without weight decay, only from {round(100 * _no)}% on, and later than with it. What may your report say?",
         options={
-            "right": "Within this budget, weight decay brings the jump sooner, and below " + f"{round(100 * _no)}% decides whether there is one at all",
             "never": "Without weight decay, this model never generalises below " + f"{round(100 * _no)}% of the table",
             "fraction": "Only the fraction of the table matters for the jump; weight decay just makes every run a little faster",
+            "right": "Within this budget, weight decay brings the jump sooner, and below " + f"{round(100 * _no)}% decides whether there is one at all",
         },
         correct="right",
         why={

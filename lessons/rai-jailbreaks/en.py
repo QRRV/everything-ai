@@ -38,8 +38,8 @@ def quick_check_tries():
         "quick-tries",
         question="An attack works in half of its tries, and each try is independent of the others. What is the chance that at least one of two tries works?",
         options={
-            "right": "0.75: both fail with chance 0.25",
             "one": "1, because two halves of a chance make a whole",
+            "right": "0.75: both fail with chance 0.25",
             "half": "0.5, because each try works half of the time",
         },
         correct="right",
@@ -59,9 +59,9 @@ def quick_check_base64():
         "quick-base64",
         question="With the reviews in base64, none of Qwen3's 160 answers to an attacked review held PINEAPPLE. Why not?",
         options={
-            "right": "Qwen3-0.6B could not read the reviews in base64",
             "data": "Encoding tells the model that the review is data, and it obeys that",
             "judge": "Base64 hid the attacker's word from the course's judge",
+            "right": "Qwen3-0.6B could not read the reviews in base64",
         },
         correct="right",
         why={
@@ -522,8 +522,8 @@ def choice_which_cell():
         "which",
         question="What is that, by the definitions in *Jailbreak or prompt injection?* and *What a jailbreak is*?",
         options={
-            "right": "A jailbreak in NIST's words, and prompt injection in Willison's",
             "only": "A jailbreak, and no prompt injection, as no document hid an instruction",
+            "right": "A jailbreak in NIST's words, and prompt injection in Willison's",
             "neither": "Neither: the question is harmless, so nothing was attacked",
         },
         correct="right",

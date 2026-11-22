@@ -37,8 +37,8 @@ def quick_check_min():
         "quick-min",
         question="`mask = np.array([[True, True], [False, True]])`. What does `mask.min()` give?",
         options={
-            "false": "`False`",
             "true": "`True`",
+            "false": "`False`",
             "mean": "`0.75`",
         },
         correct="false",
@@ -281,9 +281,9 @@ def choice_block_cell():
         "block",
         question="Which pixels are white after an erosion with a square of 3 by 3?",
         options={
-            "middle": "Only the pixel in the middle",
             "nine": "All nine pixels of the square",
             "ring": "The eight pixels around the middle",
+            "middle": "Only the pixel in the middle",
             "none": "None",
         },
         correct="middle",

@@ -39,8 +39,8 @@ def quick_check_placeholder():
         "quick-placeholder",
         question="Een zoekopdracht van de bibliotheek plakte de tekst die een lid typte in de SQL, en `x' OR 'a'='a` haalde alle uitleningen eruit. Wat maakte dezelfde zoekopdracht veilig?",
         options={
-            "right": "Een `?` in de SQL, met de waarde er apart bij",
             "quotes": "Elk aanhalingsteken uit de getypte tekst van het lid halen",
+            "right": "Een `?` in de SQL, met de waarde er apart bij",
             "hash": "De getypte tekst bewaren als hash met een salt",
         },
         correct="right",
@@ -60,9 +60,9 @@ def quick_check_nofix():
         "quick-nofix",
         question="Voor SQL injection zijn placeholders een oplossing die standhoudt. Wat vond de les voor prompt injection?",
         options={
-            "right": "Er is geen oplossing zoals placeholders voor bekend",
             "warning": "Een waarschuwing in de prompt hield alle 160 aanvallen tegen",
             "base64": "Base64 bracht het naar 0, dus die verdediging houdt",
+            "right": "Er is geen oplossing zoals placeholders voor bekend",
         },
         correct="right",
         why={
@@ -521,8 +521,8 @@ def choice_sql_cell():
         "sql",
         question="Kun je de prijs na escape veilig in de SQL plakken?",
         options={
-            "right": "Nee: SQL leest tekens die escape laat staan",
             "escape": "Ja: escape maakte van elk riskant teken tekst",
+            "right": "Nee: SQL leest tekens die escape laat staan",
             "trust": "Ja: Qwen3 schreef de prijs, niet de klant, dus het is veilig",
         },
         correct="right",

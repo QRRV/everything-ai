@@ -38,8 +38,8 @@ def quick_check_pointwise():
         "quick-pointwise",
         question="A network has a feature map of 64 channels and 16 by 16 places. A 1×1 convolution from 64 to 4 channels: what does it give?",
         options={
-            "right": "4 maps of 16 by 16: at each of the 256 places, the same linear layer makes the 64 numbers of that place into 4",
             "whole": "4 numbers for the whole map, as a linear layer at the end of a classifier",
+            "right": "4 maps of 16 by 16: at each of the 256 places, the same linear layer makes the 64 numbers of that place into 4",
             "neighbors": "4 maps of 16 by 16, in which every place is mixed with its 8 neighbors",
             "smaller": "4 maps of 8 by 8: like pooling, it makes the map half as large",
         },
@@ -61,9 +61,9 @@ def quick_check_mask():
         "quick-mask-iou",
         question="The mask of a circle has 300 pixels. A model marks 250 pixels as that circle, and 200 of them lie in the mask. What is the IoU of the two masks?",
         options={
-            "right": "200 / 350, about 0.57: the union is 300 + 250 − 200 = 350 pixels",
             "found": "200 / 300, about 0.67: the share of the circle that the model found",
             "marked": "200 / 250 = 0.8: the share of the marked pixels that is right",
+            "right": "200 / 350, about 0.57: the union is 300 + 250 − 200 = 350 pixels",
             "sum": "200 / 550, about 0.36: the overlap divided by both masks together",
         },
         correct="right",

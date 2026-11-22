@@ -41,8 +41,8 @@ def quick_check_mask():
         "quick-mask",
         question="Bij SFT zijn de labels van de tokens van de instructie -100. Waarom?",
         options={
-            "right": "Zodat de loss alleen het antwoord telt",
             "hidden": "Zodat het model de instructie nooit ziet",
+            "right": "Zodat de loss alleen het antwoord telt",
             "padding": "Om aan te geven waar de padding begint",
         },
         correct="right",
@@ -62,9 +62,9 @@ def quick_check_steps():
         "quick-steps",
         question="Waarom kunnen tussenstappen een model met een vaste diepte helpen om te antwoorden?",
         options={
-            "right": "Elk token dat het schrijft is één forward pass meer, en elke stap kan een probleem zijn dat één pass aankan",
             "weights": "Het schrijven van de stappen verandert zijn weights terwijl het antwoordt",
             "copy": "De stappen bevatten het antwoord, dus het model hoeft het alleen over te nemen",
+            "right": "Elk token dat het schrijft is één forward pass meer, en elke stap kan een probleem zijn dat één pass aankan",
         },
         correct="right",
         why={

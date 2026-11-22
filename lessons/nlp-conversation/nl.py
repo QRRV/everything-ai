@@ -37,8 +37,8 @@ def quick_check_salt():
         "quick-salt",
         question="Wat hoort een luisteraar meestal in *Kun je het zout even aangeven?*",
         options={
-            "right": "Een verzoek om het zout aan te geven",
             "ability": "Een vraag of je dat kunt",
+            "right": "Een verzoek om het zout aan te geven",
             "promise": "Een belofte dat de spreker het zout zo aangeeft",
         },
         correct="right",
@@ -58,9 +58,9 @@ def quick_check_quantity():
         "quick-quantity",
         question="*Sommige gasten kwamen.* Waarom maakt een luisteraar eruit op dat niet alle gasten kwamen?",
         options={
-            "right": "De spreker had *alle* kunnen zeggen, en deed dat niet",
             "logic": "In de logica betekent *sommige* niet alle",
             "presupposition": "Het is een presuppositie: die blijft staan als je *niet* toevoegt",
+            "right": "De spreker had *alle* kunnen zeggen, en deed dat niet",
         },
         correct="right",
         why={

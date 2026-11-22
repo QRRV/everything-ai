@@ -37,8 +37,8 @@ def quick_check_numbers():
         "quick-numbers",
         question="Wat geeft `[ord(ch) for ch in \"hi\"]`?",
         options={
-            "right": "[104, 105], één code point voor elk teken",
             "bytes": "b'hi', de twee tekens als bytes van UTF-8-tekst",
+            "right": "[104, 105], één code point voor elk teken",
             "count": "[1, 1], hoe vaak elk teken voorkomt",
         },
         correct="right",
@@ -58,9 +58,9 @@ def quick_check_bigrams():
         "quick-bigrams",
         question="Een bigram-model telt de paren tekens in de tekst `banana`. Welk teken geeft het na `n`?",
         options={
-            "right": "a, want elke n in de tekst wordt gevolgd door een a",
             "n": "n, want een bigram herhaalt het teken dat het krijgt",
             "b": "b, het eerste teken van de tekst",
+            "right": "a, want elke n in de tekst wordt gevolgd door een a",
         },
         correct="right",
         why={
@@ -375,8 +375,8 @@ def choice_open_cell():
         "open",
         question="Waarom gaat dit verzoek mis?",
         options={
-            "right": "Open betekent hier iets anders, en een trefwoord ziet het verschil niet",
             "list": "Bij de reparatiewoorden ontbreekt lock, en dat toevoegen lost elk verzoek als dit voorgoed op",
+            "right": "Open betekent hier iets anders, en een trefwoord ziet het verschil niet",
             "lower": "Het verzoek klein maken veranderde wat het betekent",
         },
         correct="right",

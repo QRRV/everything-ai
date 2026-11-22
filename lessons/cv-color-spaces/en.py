@@ -37,8 +37,8 @@ def quick_check_shape():
         "quick-shape",
         question="A color photo is 600 pixels wide and 400 high. What is the shape of `np.array(Image.open(path))`?",
         options={
-            "rows": "`(400, 600, 3)`",
             "width": "`(600, 400, 3)`",
+            "rows": "`(400, 600, 3)`",
             "flat": "`(600, 400)`",
         },
         correct="rows",
@@ -228,9 +228,9 @@ def choice_stronger_cell():
         "stronger",
         question="Which of these two colors has the higher saturation: dark red `(100, 0, 0)` or pink `(255, 200, 200)`?",
         options={
-            "dark": "The dark red",
             "pink": "The pink",
             "same": "Neither: both are red, so their saturation is the same",
+            "dark": "The dark red",
         },
         correct="dark",
         why={

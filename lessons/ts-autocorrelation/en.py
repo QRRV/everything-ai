@@ -37,8 +37,8 @@ def quick_check_season():
         "quick-season",
         question="`rest` is a series of days minus its trend, and its first day is a Monday. What is `np.nanmean(rest[2::7])`?",
         options={
-            "right": "The mean of all Wednesdays: the season of Wednesday, before the seven means are shifted to add up to 0",
             "stretch": "The mean of the days at positions 2 to 7",
+            "right": "The mean of all Wednesdays: the season of Wednesday, before the seven means are shifted to add up to 0",
             "tuesday": "The mean of all Tuesdays",
         },
         correct="right",
@@ -58,9 +58,9 @@ def quick_check_association():
         "quick-association",
         question="On warm days the ice cream stand sells more, and more bikes are rented. Does renting a bike make people buy ice cream?",
         options={
-            "right": "We cannot tell from this: warm weather drives both, so they move together either way",
             "yes": "Yes: the two columns move together, so one causes the other",
             "never": "No: two columns that move together never have anything to do with each other",
+            "right": "We cannot tell from this: warm weather drives both, so they move together either way",
         },
         correct="right",
         why={

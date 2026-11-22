@@ -60,8 +60,8 @@ def quick_check_up():
         "quick-up",
         question="The upsampler of the last lesson with stride 4 is `nn.ConvTranspose2d(4, 4, 8, stride=4, padding=2)`. It gets 4 maps of 32 by 32. How large are the maps it gives?",
         options={
-            "right": "128 by 128: (32 − 1) · 4 − 2 · 2 + 8",
             "no-padding": "132 by 132: (32 − 1) · 4 + 8",
+            "right": "128 by 128: (32 − 1) · 4 − 2 · 2 + 8",
             "times": "136 by 136: 32 · 4 + 8",
             "double": "64 by 64: a transposed convolution makes a map twice as large",
         },

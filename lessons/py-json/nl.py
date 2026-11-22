@@ -59,8 +59,8 @@ def quick_check_read():
         "quick-read",
         question="`notes.txt` heeft drie regels. Wat is `text` hierna?\n\n```python\nwith open(\"notes.txt\") as f:\n    text = f.read()\n```",
         options={
-            "string": "Eén string met het hele bestand, regeleindes erbij",
             "lines": "Een lijst met de drie regels",
+            "string": "Eén string met het hele bestand, regeleindes erbij",
             "first": "Alleen de eerste regel",
         },
         correct="string",
@@ -270,9 +270,9 @@ def choice_true_null_cell():
         "true-null",
         question="Wat geeft dit?\n\n```python\nimport json\njson.loads('{\"done\": true, \"left\": null}')\n```",
         options={
-            "values": "`{'done': True, 'left': None}`",
             "strings": "`{'done': 'true', 'left': 'null'}`",
             "error": "Een fout: `true` en `null` zijn geen Python",
+            "values": "`{'done': True, 'left': None}`",
         },
         correct="values",
         why={

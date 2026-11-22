@@ -39,8 +39,8 @@ def quick_check_asr():
         "quick-asr",
         question="Een aanval werd 40 keer geprobeerd, en leverde 10 keer op wat de aanvaller wilde. Wat is de attack success rate?",
         options={
-            "right": "0,25: 10 van de 40 pogingen werkten",
             "count": "10, het aantal pogingen dat werkte",
+            "right": "0,25: 10 van de 40 pogingen werkten",
             "missed": "0,75: de aanval mislukte bij 30 van de 40 pogingen",
         },
         correct="right",
@@ -60,9 +60,9 @@ def quick_check_who():
         "quick-who",
         question="Het model van een agent schrijft een aanroep van de tool `send_email`. Wie verstuurt de e-mail?",
         options={
-            "right": "Jouw programma, dat de tool uitvoert die het model aanriep",
             "model": "Het model, zodra het de aanroep schrijft",
             "user": "Niemand, tot de gebruiker de aanroep gelezen heeft en ermee instemt",
+            "right": "Jouw programma, dat de tool uitvoert die het model aanriep",
         },
         correct="right",
         why={
@@ -501,8 +501,8 @@ def choice_fixed_cell():
         "fixed",
         question="Wat laat die oplossing zien over Microsoft 365 Copilot en indirect prompt injection?",
         options={
-            "right": "Dat deze aanval niet meer werkt, niet dat de volgende ook mislukt",
             "safe": "Dat Copilot niet meer te sturen is met tekst in een e-mail",
+            "right": "Dat deze aanval niet meer werkt, niet dat de volgende ook mislukt",
             "classifier": "Dat een betere classifier voor injections zulke e-mails nu tegenhoudt",
         },
         correct="right",

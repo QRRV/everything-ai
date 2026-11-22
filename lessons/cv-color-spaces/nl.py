@@ -37,8 +37,8 @@ def quick_check_shape():
         "quick-shape",
         question="Een kleurenfoto is 600 pixels breed en 400 hoog. Wat is de shape van `np.array(Image.open(path))`?",
         options={
-            "rows": "`(400, 600, 3)`",
             "width": "`(600, 400, 3)`",
+            "rows": "`(400, 600, 3)`",
             "flat": "`(600, 400)`",
         },
         correct="rows",
@@ -228,9 +228,9 @@ def choice_stronger_cell():
         "stronger",
         question="Welke van deze twee kleuren heeft de hoogste verzadiging: donkerrood `(100, 0, 0)` of roze `(255, 200, 200)`?",
         options={
-            "dark": "Het donkerrood",
             "pink": "Het roze",
             "same": "Geen van beide: allebei rood, dus dezelfde verzadiging",
+            "dark": "Het donkerrood",
         },
         correct="dark",
         why={

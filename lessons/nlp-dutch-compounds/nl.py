@@ -37,8 +37,8 @@ def quick_check_split():
         "quick-split",
         question="In *Woorden en hun delen* geeft `split_compound` de eerste knip van links in twee bekende woorden terug, of het woord als één deel. Wat geeft `split_compound(\"voetbalveld\", [\"voet\", \"bal\", \"voetbal\", \"veld\"])`?",
         options={
-            "right": "`['voetbal', 'veld']`",
             "three": "`['voet', 'bal', 'veld']`, de drie woorden waaruit het bestaat",
+            "right": "`['voetbal', 'veld']`",
             "whole": "`['voetbalveld']`, omdat dat woord niet in de lijst staat",
         },
         correct="right",
@@ -58,9 +58,9 @@ def quick_check_write():
         "quick-write",
         question="Hoe schrijft het Nederlands de samenstelling die het Engels als *science fiction* schrijft?",
         options={
-            "right": "Als één woord: *sciencefiction*",
             "space": "Met een spatie ertussen",
             "hyphen": "Met een streepje tussen de twee delen: *science-fiction*",
+            "right": "Als één woord: *sciencefiction*",
         },
         correct="right",
         why={

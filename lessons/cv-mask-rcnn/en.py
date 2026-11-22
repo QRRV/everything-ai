@@ -37,8 +37,8 @@ def quick_check_round():
         "quick-round",
         question="RoI pooling took a proposal from row 41.4 to row 67.7 from the squares 5 to 8 of the feature maps, every square 8 by 8 pixels. The same proposal 3 pixels lower runs from row 44.4 to 70.7. What does RoI pooling give it?",
         options={
-            "right": "Exactly the same numbers: it still takes the squares 5 to 8",
             "next": "The numbers of the squares 6 to 9: 3 pixels is enough for the next square",
+            "right": "Exactly the same numbers: it still takes the squares 5 to 8",
             "little": "Almost the same numbers: every bin moves 3/8 of a square down",
         },
         correct="right",
@@ -58,9 +58,9 @@ def quick_check_merge():
         "quick-merge",
         question="In a scene, two circles touch. What does their class map give them, as your FCN learned to make it?",
         options={
-            "right": "One area of the class circle: nothing in it says where one circle stops",
             "two": "Two areas of the class circle, with a line of background between them",
             "new": "The class circle for one and another class for the other",
+            "right": "One area of the class circle: nothing in it says where one circle stops",
         },
         correct="right",
         why={

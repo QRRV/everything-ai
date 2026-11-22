@@ -37,8 +37,8 @@ def quick_check_luck():
         "quick-luck",
         question="Tien modellen krijgen een score op dezelfde validation set, en je houdt de beste. Wat zegt de validation-score van dat model?",
         options={
-            "right": "Iets te rooskleurig: de winnaar is deels de gelukkigste op die voorbeelden",
             "fair": "Eerlijk: zo doet hij het op nieuwe voorbeelden",
+            "right": "Iets te rooskleurig: de winnaar is deels de gelukkigste op die voorbeelden",
             "low": "Te somber: de validation set is klein",
         },
         correct="right",
@@ -58,9 +58,9 @@ def quick_check_stop():
         "quick-stop",
         question="`HistGradientBoostingRegressor(early_stopping=True)` krijgt `X_val` en `y_val` in `fit`. Wat kiest hij daarmee?",
         options={
-            "right": "Hoeveel bomen hij houdt",
             "bins": "Hoeveel bins elke feature krijgt",
             "features": "Welke features hij gebruikt",
+            "right": "Hoeveel bomen hij houdt",
         },
         correct="right",
         why={

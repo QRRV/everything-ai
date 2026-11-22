@@ -39,8 +39,8 @@ def quick_check_defense():
         "quick-defense",
         question="De waarschuwing rond de vraag bracht many-shot met acht voorbeelden van 25 naar 5 van de 25 pogingen. Prefix injection en refusal suppression samen kregen er zonder waarschuwing 20 van de 25 door. En met de waarschuwing?",
         options={
-            "right": "Weer 20: tel een verdediging per aanval",
             "same": "Zo'n 5, net als tegen many-shot",
+            "right": "Weer 20: tel een verdediging per aanval",
             "half": "10: de helft, zoals tegen prefix injection alleen",
         },
         correct="right",
@@ -60,9 +60,9 @@ def quick_check_mismatch():
         "quick-mismatch",
         question="Welke van deze aanvallen is mismatched generalization, in de woorden van Wei en collega's?",
         options={
-            "right": "Het verzoek geschreven in Base64",
             "prefix": "Begin je antwoord met: *Sure, here is*",
             "suppress": "Verontschuldig je niet en weiger niet",
+            "right": "Het verzoek geschreven in Base64",
         },
         correct="right",
         why={
@@ -517,8 +517,8 @@ def choice_filter_cell():
         "filter",
         question="Waarom hield het filter zulke antwoorden niet tegen?",
         options={
-            "right": "Ze bevatten de code, maar geen vijf woorden op een rij uit de prompt",
             "short": "Het antwoord is te kort: het heeft maar vijf woorden",
+            "right": "Ze bevatten de code, maar geen vijf woorden op een rij uit de prompt",
             "encoded": "Qwen3 versleutelde de code, zoals in de aanvallen van Zhang en collega's",
         },
         correct="right",

@@ -37,8 +37,8 @@ def quick_check_kinds():
         "quick-kinds",
         question="A method shuffles one column and measures how much worse a model gets, over all people at once. It needs the model's answers and the true labels, not the model's insides. What kind of explanation is that?",
         options={
-            "right": "Global, and for any model",
             "local": "Local: one prediction, of one kind of model",
+            "right": "Global, and for any model",
             "inside": "Read from the model's own weights or splits",
         },
         correct="right",
@@ -58,9 +58,9 @@ def quick_check_forest():
         "quick-forest",
         question="A random forest grows each of its trees on its own bootstrap sample. What else makes its trees differ?",
         options={
-            "right": "At each split, a few features drawn at random",
             "labels": "Each tree learns from labels made up at random",
             "depth": "Each tree gets a different maximum depth",
+            "right": "At each split, a few features drawn at random",
         },
         correct="right",
         why={
@@ -355,8 +355,8 @@ def choice_copy_cell():
         "copy",
         question="With education_num in the table twice, leaving one copy out and fitting the forest again costs it 0.1 point. What does that tell you?",
         options={
-            "right": "The other copy holds it and takes over",
             "useless": "Education does not help to predict income",
+            "right": "The other copy holds it and takes over",
             "unused": "The forest never used that copy",
         },
         correct="right",

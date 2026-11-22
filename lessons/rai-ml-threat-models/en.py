@@ -38,8 +38,8 @@ def quick_check_cia():
         "quick-cia",
         question="Someone breaks into the database of a navigation app and raises the speed limits of a few roads. Which property does that break?",
         options={
-            "right": "Integrity: someone changes data they may not change",
             "conf": "Confidentiality: someone reads what they may not read",
+            "right": "Integrity: someone changes data they may not change",
             "avail": "Availability: drivers can no longer use the app",
         },
         correct="right",
@@ -59,9 +59,9 @@ def quick_check_workflow():
         "quick-workflow",
         question="In the machine learning workflow, when do you measure the model on the test set?",
         options={
-            "right": "Once, at the end, when everything is chosen",
             "round": "In every round, to choose what to change next",
             "start": "At the start, to set the goal",
+            "right": "Once, at the end, when everything is chosen",
         },
         correct="right",
         why={
@@ -438,8 +438,8 @@ def choice_knowledge_cell():
         "knowledge",
         question="What did they know about that model?",
         options={
-            "right": "Everything, weights included: white box",
             "black": "Only its answers to their photos: black box",
+            "right": "Everything, weights included: white box",
             "none": "Nothing at all: stickers fool every model",
         },
         correct="right",

@@ -37,8 +37,8 @@ def quick_check_inflect():
         "quick-inflect",
         question="Welk paar woorden is gemaakt met inflectie?",
         options={
-            "right": "*werkt* en *werkte*",
             "ful": "*schoon* en *schoonheid*, omdat *-heid* een achtervoegsel is",
+            "right": "*werkt* en *werkte*",
             "dog": "*deur* en *voordeur*",
         },
         correct="right",
@@ -58,9 +58,9 @@ def quick_check_cut():
         "quick-cut",
         question="In *Woorden en hun delen* knipt `cut_suffix` de eerste uitgang van de lijst af waarop het woord eindigt, met minstens 3 letters over, en geeft beide delen terug, of het woord als één deel. Wat geeft `cut_suffix(\"kunst\", [\"te\", \"en\", \"t\"])`?",
         options={
-            "right": "`['kuns', 't']`",
             "word": "`['kunst']`, omdat *kuns* geen Nederlands woord is",
             "both": "`['kunst', 't']`",
+            "right": "`['kuns', 't']`",
         },
         correct="right",
         why={

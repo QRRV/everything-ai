@@ -37,8 +37,8 @@ def quick_check_rolling():
         "quick-rolling",
         question="`y` has one value per day, with the date as its index. What is `y.rolling(7).mean()` on Sunday 8 January 2012?",
         options={
-            "right": "The mean of the 7 days up to Sunday 8 January: Monday 2 to Sunday 8 January",
             "around": "The mean of the 3 days before Sunday 8 January, that Sunday itself and the 3 days after it",
+            "right": "The mean of the 7 days up to Sunday 8 January: Monday 2 to Sunday 8 January",
             "week": "One number for the whole week, the same on every day of it",
         },
         correct="right",
@@ -298,9 +298,9 @@ def choice_window_cell():
         "window",
         question="The trend of the registered riders is a centered moving average over 7 days. Why 7, or a multiple of 7, such as 21 or 35?",
         options={
-            "right": "Only then does every window hold every weekday equally often, so the week averages out of the trend",
             "long": "A shorter window is too bumpy; any window of 7 days or more works",
             "middle": "7 is odd, so every day has a middle and the window can be centered",
+            "right": "Only then does every window hold every weekday equally often, so the week averages out of the trend",
         },
         correct="right",
         why={

@@ -37,8 +37,8 @@ def quick_check_side():
         "quick-side",
         question="A program reads the emails of a shop and puts each one in a folder: complaints, questions or orders. Which side of NLP is that?",
         options={
-            "right": "Understanding (NLU): text goes in, and a label comes out",
             "nlg": "Making (NLG): it gives back the name of a folder",
+            "right": "Understanding (NLU): text goes in, and a label comes out",
             "both": "Both sides, since an email is text and every folder has a name in words",
         },
         correct="right",
@@ -58,9 +58,9 @@ def quick_check_reply():
         "quick-reply",
         question="The bike shop's assistant in *What NLP is* first finds the kind of request, then picks a reply for that kind. If it finds the wrong kind, what happens to the reply?",
         options={
-            "right": "It is about the wrong thing too, since it is picked by the kind",
             "fixed": "The step that picks the reply sees the mistake, and picks the reply that fits the request",
             "unknown": "The assistant says it did not understand the request",
+            "right": "It is about the wrong thing too, since it is picked by the kind",
         },
         correct="right",
         why={
@@ -366,8 +366,8 @@ def choice_measure_cell():
         "measure",
         question="What score do you expect in the real chain?",
         options={
-            "right": "Lower, since steps 1 and 2 make mistakes that the split by hand does not have",
             "same": "The same 95, since the step itself has not changed",
+            "right": "Lower, since steps 1 and 2 make mistakes that the split by hand does not have",
             "higher": "Higher, since three steps that work together know more than one step on its own does",
         },
         correct="right",

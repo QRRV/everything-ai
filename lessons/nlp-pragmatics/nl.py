@@ -37,8 +37,8 @@ def quick_check_some():
         "quick-some",
         question="Is *er slaapt een kat* in de logica waar in een wereld waarin elke kat slaapt?",
         options={
-            "right": "Ja: er slaapt minstens één kat",
             "not-every": "Nee: *een kat* betekent niet elke kat",
+            "right": "Ja: er slaapt minstens één kat",
             "no-value": "Nee: de zin heeft dan geen waarheidswaarde",
         },
         correct="right",
@@ -58,9 +58,9 @@ def quick_check_vp():
         "quick-vp",
         question="Waar staat de VP *achtervolgt Tom* voor in de wereld van *Betekenis: wanneer is een zin waar?*?",
         options={
-            "right": "De dieren die Tom achtervolgen",
             "pairs": "De paren van *achtervolgt* met Tom eerst",
             "truth": "Waar als Tom iemand achtervolgt, en anders onwaar",
+            "right": "De dieren die Tom achtervolgen",
         },
         correct="right",
         why={

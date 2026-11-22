@@ -37,8 +37,8 @@ def quick_check_profile():
         "quick-profile",
         question="Content-based filtering raadde klant 13960 tien hartjes aan, waarvan negen rieten. Wat moest het daarvoor weten?",
         options={
-            "right": "De woorden van de productnamen, en wat de klant kocht",
             "others": "Wat andere klanten kochten",
+            "right": "De woorden van de productnamen, en wat de klant kocht",
             "stars": "Hoeveel sterren de klant elk product gaf",
         },
         correct="right",
@@ -58,9 +58,9 @@ def quick_check_transpose():
         "quick-transpose",
         question="`R` heeft vorm (2829, 3576): een rij voor elke klant, een kolom voor elk product. `R[:, j]` is kolom `j`, met vorm (2829,). Welke vorm heeft `R.T @ R[:, j]`?",
         options={
-            "right": "(3576,): een getal voor elk product",
             "customers": "(2829,): een getal voor elke klant",
             "error": "Een fout: de vormen passen niet",
+            "right": "(3576,): een getal voor elk product",
         },
         correct="right",
         why={

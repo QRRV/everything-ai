@@ -37,8 +37,8 @@ def quick_check_sum():
         "quick-sum",
         question="In the last lesson, the four Shapley values of the person aged 41 added up to 0.226. What is 0.226?",
         options={
-            "right": "The chance minus the background's average",
             "both": "What education_num and age get between them",
+            "right": "The chance minus the background's average",
             "chance": "This person's chance of yes",
         },
         correct="right",
@@ -58,9 +58,9 @@ def quick_check_game():
         "quick-game",
         question="Against 200 people with education_num 13 or more, education_num got −0.027 instead of +0.181. Why?",
         options={
-            "right": "The background is part of the game",
             "random": "Each run draws new random orders",
             "trained": "The forest was trained on those people",
+            "right": "The background is part of the game",
         },
         correct="right",
         why={
@@ -458,8 +458,8 @@ def choice_ten_cell():
         "ten",
         question="You explain one person with `shap.KernelExplainer` on a table with 30 columns, with the defaults of shap 0.54.1. How many columns can get a value other than 0?",
         options={
-            "right": "At most about 10 of them",
             "all": "All 30, each with its share",
+            "right": "At most about 10 of them",
             "above": "Only those above 0.01",
         },
         correct="right",

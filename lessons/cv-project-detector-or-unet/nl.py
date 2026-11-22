@@ -38,8 +38,8 @@ def quick_check_iou():
         "quick-iou",
         question="Met seed 3 had het U-Net van de course na 8 epochs 97,3% van de pixels van de testscènes goed, en toch was zijn mean IoU maar 0,65. Hoe kan dat allebei kloppen?",
         options={
-            "right": "Het noemde de driehoeken vierkanten; hun IoU is ongeveer 0, en in de mean IoU tellen de driehoeken even zwaar als de achtergrond, die de meeste pixels beslaat",
             "twice": "De mean IoU telt elke pixel twee keer, één keer voor elke klasse die hij zou kunnen hebben",
+            "right": "Het noemde de driehoeken vierkanten; hun IoU is ongeveer 0, en in de mean IoU tellen de driehoeken even zwaar als de achtergrond, die de meeste pixels beslaat",
             "train": "97,3% gaat over de trainingsscènes, en 0,65 over de testscènes",
             "edges": "De mean IoU kijkt alleen naar de pixels op de randen van de vormen",
         },
@@ -61,9 +61,9 @@ def quick_check_focal():
         "quick-focal",
         question="Hoe zwaar telt in de focal loss met γ = 2 een anchor die de detector met een kans van 0,9 bij de goede klasse zet, vergeleken met zijn cross-entropy?",
         options={
-            "right": "Een honderdste: zijn cross-entropy keer (1 − 0,9)² = 0,01",
             "tenth": "Een tiende: zijn cross-entropy keer 1 − 0,9",
             "same": "Even zwaar: de focal loss verandert alleen de anchors die de detector fout heeft",
+            "right": "Een honderdste: zijn cross-entropy keer (1 − 0,9)² = 0,01",
             "more": "Zwaarder: een makkelijke anchor telt dubbel, zodat hij goed blijft",
         },
         correct="right",

@@ -37,8 +37,8 @@ def quick_check_stage():
         "quick-stage",
         question="NIST deelt aanvallen op machine learning in naar de fase waarin ze toeslaan. Wanneer slaat een poisoning-aanval toe?",
         options={
-            "right": "Terwijl het model leert, via de training data",
             "use": "Als het model gebruikt wordt, via een input die het leest",
+            "right": "Terwijl het model leert, via de training data",
             "file": "Na de training, door het bestand met weights te veranderen",
         },
         correct="right",
@@ -58,9 +58,9 @@ def quick_check_argmax():
         "quick-argmax",
         question="DigitsMLP geeft 10 logits voor elke afbeelding. Welk cijfer leest het?",
         options={
-            "right": "Het cijfer waarvan de logit het grootst is",
             "sum": "De som van de tien logits, afgerond op een heel cijfer",
             "half": "Het eerste cijfer waarvan de logit boven 0,5 ligt",
+            "right": "Het cijfer waarvan de logit het grootst is",
         },
         correct="right",
         why={
@@ -522,8 +522,8 @@ def choice_count_cell():
         "count",
         question="Wat betekent dat voor een aanvaller op het web?",
         options={
-            "right": "Een vast aantal documenten kan genoeg zijn, hoe groot de data ook is",
             "share": "Het aandeel in de data telt, dus een groot model heeft er veel meer nodig",
+            "right": "Een vast aantal documenten kan genoeg zijn, hoe groot de data ook is",
             "lost": "Grote modellen leren van zoveel tekst dat 250 documenten erin verdwijnen",
         },
         correct="right",

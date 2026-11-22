@@ -37,8 +37,8 @@ def quick_check_rolling():
         "quick-rolling",
         question="`y` heeft één waarde per dag, met de datum als index. Wat is `y.rolling(7).mean()` op zondag 8 januari 2012?",
         options={
-            "right": "Het gemiddelde van de 7 dagen tot en met zondag 8 januari: maandag 2 tot en met zondag 8 januari",
             "around": "Het gemiddelde van de 3 dagen voor zondag 8 januari, die zondag zelf en de 3 dagen erna",
+            "right": "Het gemiddelde van de 7 dagen tot en met zondag 8 januari: maandag 2 tot en met zondag 8 januari",
             "week": "Eén getal voor de hele week, op elke dag ervan hetzelfde",
         },
         correct="right",
@@ -298,9 +298,9 @@ def choice_window_cell():
         "window",
         question="De trend van de geregistreerde fietsers is een gecentreerd voortschrijdend gemiddelde over 7 dagen. Waarom 7, of een veelvoud van 7, zoals 21 of 35?",
         options={
-            "right": "Alleen dan bevat elk window elke dag van de week even vaak, zodat de week uit de trend middelt",
             "long": "Een korter window is te hobbelig; elk window van 7 dagen of meer werkt",
             "middle": "7 is oneven, dus heeft elke dag een midden en kan het window gecentreerd worden",
+            "right": "Alleen dan bevat elk window elke dag van de week even vaak, zodat de week uit de trend middelt",
         },
         correct="right",
         why={

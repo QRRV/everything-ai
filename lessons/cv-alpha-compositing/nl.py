@@ -37,8 +37,8 @@ def quick_check_shape():
         "quick-shape",
         question="`m` heeft shape `(2, 3)` en `col` heeft shape `(2, 1)`. Wat geeft `m * col`?",
         options={
-            "fits": "Een array met shape `(2, 3)`",
             "error": "Een fout: 3 en 1 verschillen",
+            "fits": "Een array met shape `(2, 3)`",
             "small": "Een array met shape `(2, 1)`",
             "more": "Een array met shape `(2, 3, 1)`",
         },
@@ -60,9 +60,9 @@ def quick_check_mask():
         "quick-mask",
         question="`h` is een array met de kleurtoon van elke pixel. Welke regel geeft True voor de pixels waarvan de kleurtoon tussen 0,3 en 0,45 ligt?",
         options={
-            "amp": "`(h > 0.3) & (h < 0.45)`",
             "and": "`h > 0.3 and h < 0.45`",
             "bar": "`(h > 0.3) | (h < 0.45)`",
+            "amp": "`(h > 0.3) & (h < 0.45)`",
             "bare": "`h > 0.3 & h < 0.45`",
         },
         correct="amp",

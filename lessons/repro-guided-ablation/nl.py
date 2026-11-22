@@ -38,8 +38,8 @@ def quick_check_two():
         "quick-two",
         question="Je reproductie gebruikt de warmup van de paper, 10 stappen. Je wilt weten of de sprong die nodig heeft. Welke runs geven daar antwoord op?",
         options={
-            "right": "De run met de instellingen van je kit, en dezelfde run met de warmup eruit",
             "two": "Een run zonder warmup en zonder weight decay, tegen de run met de instellingen van je kit",
+            "right": "De run met de instellingen van je kit, en dezelfde run met de warmup eruit",
             "seeds": "Twee runs zonder warmup, één met seed 0 en één met seed 1",
         },
         correct="right",
@@ -340,9 +340,9 @@ def choice_shows_cell():
         "what-shows",
         question=f"De ablation van de course, seed 0, {C.number(C.STEPS, 0, L.lang)} stappen per run, delen van 30% tot 90%: met weight decay haalt validatie bij elk deel 99%; zonder weight decay pas vanaf {round(100 * _no)}%, en later dan met. Wat mag je verslag zeggen?",
         options={
-            "right": "Binnen dit budget brengt weight decay de sprong eerder, en bepaalt hij onder " + f"{round(100 * _no)}% of er een sprong komt",
             "never": "Zonder weight decay generaliseert dit model nooit onder " + f"{round(100 * _no)}% van de tabel",
             "fraction": "Alleen het deel van de tabel doet ertoe voor de sprong; weight decay maakt elke run alleen wat sneller",
+            "right": "Binnen dit budget brengt weight decay de sprong eerder, en bepaalt hij onder " + f"{round(100 * _no)}% of er een sprong komt",
         },
         correct="right",
         why={

@@ -37,8 +37,8 @@ def quick_check_safe():
         "quick-safe",
         question="Why does reading a safetensors file with the course's code run no code from the file?",
         options={
-            "right": "The file is only a header and numbers",
             "weights": "torch.load reads it with weights_only=True",
+            "right": "The file is only a header and numbers",
             "scan": "Hugging Face scanned it before it was shared",
         },
         correct="right",
@@ -58,9 +58,9 @@ def quick_check_card():
         "quick-card",
         question="Before you use a pretrained model from a hub, where do you read its license and its training data?",
         options={
-            "right": "In its model card, the README.md",
             "state": "In its state_dict, beside the numbers",
             "code": "In the code of its class",
+            "right": "In its model card, the README.md",
         },
         correct="right",
         why={
@@ -394,8 +394,8 @@ def choice_match_cell():
         "match",
         question="What does Gear & Go know from that?",
         options={
-            "right": "That it gets the file it pinned, whoever made it",
             "maker": "That cog-and-crank made it: name and SHA-256 both match",
+            "right": "That it gets the file it pinned, whoever made it",
             "safe": "That the model is safe: a change to it would change the SHA-256",
         },
         correct="right",
@@ -425,9 +425,9 @@ def choice_pipeline_cell():
         "pipeline",
         question="Which change keeps the script from loading the new owner's model on day 61?",
         options={
-            "right": "Pin the commit of day 1 and the SHA-256 of its file",
             "tag": "Pass revision=\"v1\": a tag stays on one version",
             "none": "None is needed: a safetensors file cannot hold an attack",
+            "right": "Pin the commit of day 1 and the SHA-256 of its file",
         },
         correct="right",
         why={

@@ -37,8 +37,8 @@ def quick_check_lag():
         "quick-lag",
         question="The bikes rented by registered riders every hour have an autocorrelation of 0.886 at lag 168. What does that say?",
         options={
-            "right": "Every hour moves closely together with the same hour a week earlier",
             "share": "88.6% of the hours have as many riders as the same hour a week earlier",
+            "right": "Every hour moves closely together with the same hour a week earlier",
             "rise": "The riders grow by 88.6% every week",
         },
         correct="right",
@@ -58,9 +58,9 @@ def quick_check_mae():
         "quick-mae",
         question="A forecast for three days is 100 too low, 300 too high and 200 too low. What is its MAE?",
         options={
-            "right": "200",
             "zero": "0",
             "largest": "300",
+            "right": "200",
         },
         correct="right",
         why={
@@ -335,8 +335,8 @@ def choice_mase_cell():
         "mase",
         question="Over 2012, the seasonal naive forecast a week ahead has an MAE of 859 riders and a MASE of 1.68. What does the 1.68 add to the 859?",
         options={
-            "right": "It compares the 859 with the naive forecast a day ahead on the training days, 510.6: a week ahead, this forecast misses 1.68 times as much",
             "percent": "The forecast misses by 1.68% of the riders",
+            "right": "It compares the 859 with the naive forecast a day ahead on the training days, 510.6: a week ahead, this forecast misses 1.68 times as much",
             "large": "It counts large misses more, as the RMSE does",
         },
         correct="right",

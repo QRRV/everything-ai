@@ -37,8 +37,8 @@ def quick_check_relevant():
         "quick-relevant",
         question="Kim: *De bus is weer te laat.* Sam: *Mijn fiets staat in de schuur.* Wat haalt Kim uit het antwoord van Sam?",
         options={
-            "right": "Een aanbod om de fiets te lenen",
             "where": "Waar Sam de fiets bewaart, als feit",
+            "right": "Een aanbod om de fiets te lenen",
             "bus": "Dat Sam weet hoe laat de bus komt",
         },
         correct="right",
@@ -58,9 +58,9 @@ def quick_check_the():
         "quick-the",
         question="*De fiets in de schuur is rood.* Wat neemt deze zin als vanzelfsprekend aan?",
         options={
-            "right": "Dat er één fiets in de schuur staat",
             "likes": "Dat de spreker rode fietsen mooi vindt",
             "painted": "Dat iemand de fiets vorige week rood heeft geverfd",
+            "right": "Dat er één fiets in de schuur staat",
         },
         correct="right",
         why={
@@ -426,8 +426,8 @@ def choice_bank_cell():
         "bank",
         question="Welk paar deelt een woord, maar hangt niet samen?",
         options={
-            "right": "*Sam zat op de bank bij het raam. De bank verhoogde de rente.*",
             "key": "*Sam verloor de sleutel van de schuur. De sleutel lag een week later onder de deurmat.*",
+            "right": "*Sam zat op de bank bij het raam. De bank verhoogde de rente.*",
             "cake": "*Sam kocht een taart voor Kim. De taart was nog warm uit de oven.*",
         },
         correct="right",

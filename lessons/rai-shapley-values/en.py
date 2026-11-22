@@ -37,8 +37,8 @@ def quick_check_weight():
         "quick-weight",
         question="In the last lesson, LIME gave education_num a weight of 0.144 for the person aged 41. What is that weight?",
         options={
-            "right": "The slope of a line near the person",
             "share": "The part of the chance that education gives",
+            "right": "The slope of a line near the person",
             "count": "How often the forest asks about education",
         },
         correct="right",
@@ -58,9 +58,9 @@ def quick_check_small():
         "quick-small",
         question="With kernel width 0.1, the weight of education_num was 0.081, 0.199 and 0.242 in three runs. Why did it jump?",
         options={
-            "right": "Together the 5000 rows counted as about 2",
             "trained": "The forest was trained again each run",
             "moved": "The random rows moved the person each time",
+            "right": "Together the 5000 rows counted as about 2",
         },
         correct="right",
         why={
@@ -366,8 +366,8 @@ def choice_background_cell():
         "background",
         question="You explain the same person again, with a background of 200 people whose education_num is 13 or more. What happens?",
         options={
-            "right": "The values change, and so does their sum",
             "unique": "Nothing changes: Shapley values are unique",
+            "right": "The values change, and so does their sum",
             "only": "Only education_num gets a new value",
         },
         correct="right",

@@ -37,8 +37,8 @@ def quick_check_uber():
         "quick-uber",
         question="According to a complaint by the US Federal Trade Commission, where did intruders find the access key into Uber's files in 2016?",
         options={
-            "right": "In code in a private repository on GitHub",
             "public": "In a public repository on GitHub",
+            "right": "In code in a private repository on GitHub",
             "laptop": "On a laptop that an employee left on a train",
         },
         correct="right",
@@ -58,9 +58,9 @@ def quick_check_environ():
         "quick-environ",
         question="Your code reads `os.environ[\"MODEL_API_KEY\"]`, and that environment variable is not set. What happens?",
         options={
-            "right": "Python stops with a KeyError",
             "empty": "The key is the empty text",
             "none": "The value is None, and the request goes without a key",
+            "right": "Python stops with a KeyError",
         },
         correct="right",
         why={
@@ -412,8 +412,8 @@ def choice_reach_cell():
         "reach",
         question="Who can still send it requests?",
         options={
-            "right": "Every program on the shop's server itself",
             "nobody": "Nobody but the assistant: one program per address",
+            "right": "Every program on the shop's server itself",
             "network": "Every computer on the shop's network",
         },
         correct="right",
@@ -443,9 +443,9 @@ def choice_environment_cell():
         "environment",
         question="What does that mean for the PedalPay key?",
         options={
-            "right": "Whoever can read the report can use the key now",
             "none": "Nothing: a key outside the code stays out of reports",
             "push": "Push protection holds the report back",
+            "right": "Whoever can read the report can use the key now",
         },
         correct="right",
         why={

@@ -37,8 +37,8 @@ def quick_check_lag():
         "quick-lag",
         question="De fietsen die geregistreerde fietsers elk uur huren, hebben een autocorrelatie van 0,886 bij lag 168. Wat zegt dat?",
         options={
-            "right": "Elk uur beweegt sterk samen met hetzelfde uur een week eerder",
             "share": "88,6% van de uren heeft evenveel fietsers als hetzelfde uur een week eerder",
+            "right": "Elk uur beweegt sterk samen met hetzelfde uur een week eerder",
             "rise": "Het aantal fietsers groeit elke week met 88,6%",
         },
         correct="right",
@@ -58,9 +58,9 @@ def quick_check_mae():
         "quick-mae",
         question="Een forecast voor drie dagen zit 100 te laag, 300 te hoog en 200 te laag. Wat is de MAE ervan?",
         options={
-            "right": "200",
             "zero": "0",
             "largest": "300",
+            "right": "200",
         },
         correct="right",
         why={
@@ -335,8 +335,8 @@ def choice_mase_cell():
         "mase",
         question="Over 2012 heeft de seasonal naive forecast een week vooruit een MAE van 859 fietsers en een MASE van 1,68. Wat voegt de 1,68 toe aan de 859?",
         options={
-            "right": "Hij vergelijkt de 859 met de naive forecast een dag vooruit op de trainingsdagen, 510,6: een week vooruit zit deze forecast er 1,68 keer zo ver naast",
             "percent": "De forecast zit er 1,68% van de fietsers naast",
+            "right": "Hij vergelijkt de 859 met de naive forecast een dag vooruit op de trainingsdagen, 510,6: een week vooruit zit deze forecast er 1,68 keer zo ver naast",
             "large": "Hij telt grote missers zwaarder, zoals de RMSE",
         },
         correct="right",

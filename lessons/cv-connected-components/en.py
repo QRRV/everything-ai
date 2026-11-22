@@ -37,8 +37,8 @@ def quick_check_queue():
         "quick-queue",
         question="What does this program show?\n\n```python\nfrom collections import deque\nqueue = deque([(0, 0), (0, 1)])\nqueue.append((1, 0))\nprint(queue.popleft())\n```",
         options={
-            "first": "`(0, 0)`",
             "second": "`(0, 1)`",
+            "first": "`(0, 0)`",
             "last": "`(1, 0)`",
         },
         correct="first",
@@ -58,9 +58,9 @@ def quick_check_opening():
         "quick-opening",
         question="A binary image has a white speck of 2 by 2 pixels, far from any other white pixel. What is left of it after an opening with a square of 3 by 3?",
         options={
-            "nothing": "Nothing",
             "one": "One pixel",
             "same": "The speck, as it was",
+            "nothing": "Nothing",
             "bigger": "A square of 4 by 4",
         },
         correct="nothing",

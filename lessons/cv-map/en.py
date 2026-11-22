@@ -37,8 +37,8 @@ def quick_check_nms():
         "quick-nms",
         question="Non-maximum suppression with a threshold of 0.5 gets three boxes: A with a score of 0.9, B with 0.8, whose IoU with A is 0.6, and C with 0.7, whose IoU with A and with B is 0.1. Which boxes does it keep?",
         options={
-            "right": "A and C",
             "one": "only A",
+            "right": "A and C",
             "all": "A, B and C",
             "two": "A and B",
         },
@@ -60,9 +60,9 @@ def quick_check_pr():
         "quick-pr",
         question="A detector of 5s raises 10 alarms, and 7 of them are real 5s. The test set holds 14 5s. What are its precision and recall?",
         options={
-            "right": "precision 0.7, recall 0.5",
             "swapped": "precision 0.5, recall 0.7",
             "both-p": "precision 0.7, recall 0.7",
+            "right": "precision 0.7, recall 0.5",
             "both-r": "precision 0.5, recall 0.5",
         },
         correct="right",
@@ -388,8 +388,8 @@ def choice_bikes_cell():
         "bikes",
         question="A test set holds 1,000 cars and 10 bicycles. A detector has an AP of 0.9 for cars and of 0.3 for bicycles. What is its mAP?",
         options={
-            "right": "0.6",
             "weighted": "0.89",
+            "right": "0.6",
             "cars": "0.9",
             "lowest": "0.3",
         },

@@ -37,8 +37,8 @@ def quick_check_equalize():
         "quick-equalize",
         question="In a grayscale photo, 30 of every 100 pixels have gray 90 or a darker one. Which gray does 90 become after histogram equalization?",
         options={
-            "share": "About 76",
             "same": "Still 90",
+            "share": "About 76",
             "thirty": "30",
         },
         correct="share",
@@ -58,9 +58,9 @@ def quick_check_variance():
         "quick-variance",
         question="Half of the pixels of a group have gray 60, the other half gray 70. What is the variance of their grays?",
         options={
-            "25": "25",
             "5": "5",
             "50": "50",
+            "25": "25",
         },
         correct="25",
         why={

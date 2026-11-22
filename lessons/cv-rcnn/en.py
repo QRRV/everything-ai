@@ -37,8 +37,8 @@ def quick_check_head():
         "quick-head",
         question="The head of your one-stage detector gives each of the 3 anchors of a square 4 logits and 4 offsets: 24 channels. A head that only tells *object* from *background*, for 9 anchors on every square, is a convolution of 3 by 3 too. How many output channels does it need?",
         options={
-            "right": "54: 9 anchors times 2 logits and 4 offsets",
             "logits": "18: 9 anchors times 2 logits",
+            "right": "54: 9 anchors times 2 logits and 4 offsets",
             "one": "6: 2 logits and 4 offsets, for the square",
             "kinds": "72: 9 anchors times 4 logits and 4 offsets",
         },
@@ -60,9 +60,9 @@ def quick_check_many():
         "quick-many",
         question="Before NMS, your one-stage detector gave the scene of its worked example 17 boxes with a score of 0.5 or more, for 4 shapes. Why so many?",
         options={
-            "right": "Several anchors around each shape learned that shape, each with its own offsets",
             "low": "A score of 0.5 is too low: at 0.9 every shape would get one box",
             "backbone": "The backbone sees every shape at three sizes, one for each anchor size",
+            "right": "Several anchors around each shape learned that shape, each with its own offsets",
         },
         correct="right",
         why={
@@ -442,8 +442,8 @@ def choice_learns_cell():
         "learns",
         question="In training, a proposal overlaps the circle with an IoU of 0.62 and the square with 0.30. What does the second stage learn from it?",
         options={
-            "right": "Class 1, circle, and the offsets from the proposal to the circle's box",
             "anchor": "Class 1, circle, and the offsets from the anchor it came from to the circle's box",
+            "right": "Class 1, circle, and the offsets from the proposal to the circle's box",
             "background": "Background: the RPN already found the circle, and only the true boxes learn a kind",
             "ignored": "Nothing: it lies partly on two shapes, so it is left out",
         },

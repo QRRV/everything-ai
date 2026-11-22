@@ -38,8 +38,8 @@ def quick_check_rule():
         "quick-rule",
         question="In the previous lesson, the staff code came out in 62 of 70 answers without the secrecy rule, and in 34 with it. What does that say about the rule?",
         options={
-            "right": "That it helps, but the code still came out in 34 of 70",
             "most": "That with it, most of the seven attacks got nothing out",
+            "right": "That it helps, but the code still came out in 34 of 70",
             "useless": "That it changes nothing, since attackers get the code anyway",
         },
         correct="right",
@@ -59,9 +59,9 @@ def quick_check_leaked():
         "quick-leaked",
         question="Why does `leaked` squeeze both the answer and the code?",
         options={
-            "right": "So that other capitals or signs do not hide the code",
             "words": "So that the digits written out as words count as the code too",
             "speed": "So that it compares short texts, which is faster",
+            "right": "So that other capitals or signs do not hide the code",
         },
         correct="right",
         why={
@@ -509,8 +509,8 @@ def choice_report_cell():
         "report",
         question="What do you do?",
         options={
-            "right": "Tell that shop privately, and no one else until it is fixed",
             "public": "Post the message online, so that other shops can check theirs",
+            "right": "Tell that shop privately, and no one else until it is fixed",
             "more": "Try the message on the assistants of other shops first, to see how widespread it is",
         },
         correct="right",

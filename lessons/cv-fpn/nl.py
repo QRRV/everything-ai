@@ -37,8 +37,8 @@ def quick_check_lateral():
         "quick-lateral",
         question="Een 1×1-convolutie van 128 channels naar 32, `nn.Conv2d(128, 32, 1)`. Hoeveel parameters heeft die?",
         options={
-            "right": "4.128: 32 filters, elk met 128 weights en een bias",
             "bias": "4.096: 128 × 32 weights",
+            "right": "4.128: 32 filters, elk met 128 weights en een bias",
             "three": "36.896: 32 filters, elk met 9 × 128 weights en een bias",
             "sum": "160: 128 + 32",
         },
@@ -60,9 +60,9 @@ def quick_check_rows():
         "quick-rows",
         question="De head van je one-stage detector gaf een scène maps met shape (1, 24, 16, 16): 3 anchors keer 8 getallen, op 16 bij 16 vakjes. Een head met 2 anchors per vakje, op maps van 32 bij 32 vakjes, geeft (1, 16, 32, 32). Welke shape krijgen zijn rijen met `permute(0, 2, 3, 1)` en `reshape(1, -1, 8)`?",
         options={
-            "right": "(1, 2048, 8): 32 × 32 vakjes, elk 2 anchors",
             "squares": "(1, 1024, 8): één rij voor elk vakje",
             "sixteen": "(1, 1024, 16): de 16 getallen van elk vakje in één rij",
+            "right": "(1, 2048, 8): 32 × 32 vakjes, elk 2 anchors",
         },
         correct="right",
         why={
@@ -438,8 +438,8 @@ def choice_background_cell():
         "background",
         question="In een trainingsscène leren 10 van de 2.720 anchors een vorm, en geen enkele wordt genegeerd. Hoeveel anchors telt de cross-entropy van de loss met hard negative mining in die scène?",
         options={
-            "right": "40: de 10, en de 30 achtergrond-anchors met de hoogste cross-entropy",
             "random": "40: de 10, en 30 willekeurig gekozen achtergrond-anchors",
+            "right": "40: de 10, en de 30 achtergrond-anchors met de hoogste cross-entropy",
             "all": "2.720: elke anchor, zoals in je one-stage detector",
             "shapes": "10: alleen de anchors die een vorm leren",
         },

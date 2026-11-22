@@ -37,8 +37,8 @@ def quick_check_freeze():
         "quick-freeze",
         question="You freeze every parameter of the course's digit reader with `p.requires_grad = False`, and then give it a new last layer: `model.out = nn.Linear(64, 10)`. What learns when you train it?",
         options={
-            "right": "Only the new last layer: 650 numbers",
             "nothing": "Nothing: you froze every parameter",
+            "right": "Only the new last layer: 650 numbers",
             "all": "Every layer: the new layer brings the gradients back",
         },
         correct="right",
@@ -58,9 +58,9 @@ def quick_check_close():
         "quick-close",
         question="A model gives three photos, A, B and C, an embedding each. A and B have a cosine similarity of 0.95, A and C one of −0.1. What does that tell you?",
         options={
-            "right": "To the model, A and B are alike, and A and C are not",
             "same": "A and B are the same photo",
             "length": "The embedding of A is longer than that of C",
+            "right": "To the model, A and B are alike, and A and C are not",
         },
         correct="right",
         why={

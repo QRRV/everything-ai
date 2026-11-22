@@ -37,8 +37,8 @@ def quick_check_head():
         "quick-head",
         question="De head van je one-stage detector geeft elk van de 3 anchors van een vakje 4 logits en 4 offsets: 24 channels. Een head die alleen *voorwerp* van *achtergrond* onderscheidt, voor 9 anchors op elk vakje, is ook een convolutie van 3 bij 3. Hoeveel output channels heeft hij nodig?",
         options={
-            "right": "54: 9 anchors keer 2 logits en 4 offsets",
             "logits": "18: 9 anchors keer 2 logits",
+            "right": "54: 9 anchors keer 2 logits en 4 offsets",
             "one": "6: 2 logits en 4 offsets, voor het vakje",
             "kinds": "72: 9 anchors keer 4 logits en 4 offsets",
         },
@@ -60,9 +60,9 @@ def quick_check_many():
         "quick-many",
         question="Vóór NMS gaf je one-stage detector de scène van zijn uitgewerkte voorbeeld 17 boxes met een score van 0,5 of meer, voor 4 vormen. Waarom zoveel?",
         options={
-            "right": "Meerdere anchors rond elke vorm leerden die vorm, elk met zijn eigen offsets",
             "low": "Een score van 0,5 is te laag: bij 0,9 kreeg elke vorm één box",
             "backbone": "De backbone ziet elke vorm op drie groottes, één voor elke grootte van anchor",
+            "right": "Meerdere anchors rond elke vorm leerden die vorm, elk met zijn eigen offsets",
         },
         correct="right",
         why={
@@ -442,8 +442,8 @@ def choice_learns_cell():
         "learns",
         question="Bij het trainen overlapt een proposal de cirkel met een IoU van 0,62 en het vierkant met 0,30. Wat leert de tweede fase ervan?",
         options={
-            "right": "Klasse 1, cirkel, en de offsets van de proposal naar de box van de cirkel",
             "anchor": "Klasse 1, cirkel, en de offsets van de anchor waar hij vandaan kwam naar de box van de cirkel",
+            "right": "Klasse 1, cirkel, en de offsets van de proposal naar de box van de cirkel",
             "background": "Achtergrond: het RPN vond de cirkel al, en alleen de echte boxes leren een soort",
             "ignored": "Niets: hij ligt deels op twee vormen, dus hij wordt weggelaten",
         },

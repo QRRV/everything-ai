@@ -41,8 +41,8 @@ def quick_check_program():
         "quick-program",
         question="In *Did post-training help?*, what decided whether a story did what its instruction asked?",
         options={
-            "right": "A program that checks it, such as whether a word is left out",
             "reward": "A reward model that gives every story a score",
+            "right": "A program that checks it, such as whether a word is left out",
             "people": "You, reading every story",
         },
         correct="right",
@@ -570,9 +570,9 @@ def look_back():
         "look-temperature",
         question=f"### Looking back\n\nThe course drew its samples at temperature {C.number(C.TEMPERATURE, 1, 'en')}. What would temperature 0 have given?",
         options={
-            "right": f"The same answer {C.SAMPLES} times: the greedy one",
             "wrong": f"{C.SAMPLES} different answers, each one wrong",
             "faster": "The same answers as at 0.7, only faster",
+            "right": f"The same answer {C.SAMPLES} times: the greedy one",
         },
         correct="right",
         why={

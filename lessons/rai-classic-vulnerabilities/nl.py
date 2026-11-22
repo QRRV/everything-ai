@@ -37,8 +37,8 @@ def quick_check_stride():
         "quick-stride",
         question="Via een zoekvak op de website van de bibliotheek kan iedereen de uitleningen van alle leden lezen. Welke eigenschap gaat daardoor verloren?",
         options={
-            "right": "Vertrouwelijkheid: iedereen leest de uitleningen",
             "integ": "Integriteit: de uitleningen worden zonder recht veranderd",
+            "right": "Vertrouwelijkheid: iedereen leest de uitleningen",
             "avail": "Beschikbaarheid: leden kunnen de website niet meer gebruiken",
         },
         correct="right",
@@ -58,9 +58,9 @@ def quick_check_fstring():
         "quick-fstring",
         question="Wat laat dit programma zien?\n\n```python\ntitle = \"Dune\"\nprint(f\"title = '{title}'\")\n```",
         options={
-            "right": "title = 'Dune'",
             "braces": "title = '{title}'",
             "bare": "title = Dune",
+            "right": "title = 'Dune'",
         },
         correct="right",
         why={
@@ -431,8 +431,8 @@ def choice_access_cell():
         "access",
         question="Wat geeft loans_due terug?",
         options={
-            "right": "Mila's uitleningen: placeholders kijken niet wie vraagt",
             "error": "Een fout: de kaart is niet van Joris",
+            "right": "Mila's uitleningen: placeholders kijken niet wie vraagt",
             "none": "Niets: een placeholder laat alleen jouw eigen kaart door",
         },
         correct="right",

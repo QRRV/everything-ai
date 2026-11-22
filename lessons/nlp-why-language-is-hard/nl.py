@@ -37,8 +37,8 @@ def quick_check_side():
         "quick-side",
         question="Een tool vat een lang rapport samen in vijf zinnen. Welke kant van NLP is dat, in de eenvoudige indeling van de course?",
         options={
-            "right": "Allebei, want er gaat tekst in en er komt tekst uit",
             "nlu": "NLU, want de tool moet snappen wat er in het rapport staat",
+            "right": "Allebei, want er gaat tekst in en er komt tekst uit",
             "nlg": "NLG, want de tool schrijft vijf nieuwe zinnen",
         },
         correct="right",
@@ -58,9 +58,9 @@ def quick_check_names():
         "quick-names",
         question="Wie computationele linguïstiek en NLP uit elkaar houdt: wat wil computationele linguïstiek dan?",
         options={
-            "right": "Weten hoe taal werkt, met computers als gereedschap",
             "systems": "Systemen die werken voor gebruikers, zoals een spellingapp of een vertaler",
             "replace": "Taalkundigen vervangen door programma's die woorden tellen",
+            "right": "Weten hoe taal werkt, met computers als gereedschap",
         },
         correct="right",
         why={
@@ -382,8 +382,8 @@ def choice_blossoms_cell():
         "blossoms",
         question="Wat maakt de kop makkelijk verkeerd te lezen?",
         options={
-            "right": "Blossoms kan een zelfstandig naamwoord zijn, maar de kop bedoelt een werkwoord",
             "know": "Lezers zouden van het ongeluk moeten weten om te zien welke violist er bedoeld wordt",
+            "right": "Blossoms kan een zelfstandig naamwoord zijn, maar de kop bedoelt een werkwoord",
             "spelling": "*Linked* is op een ongewone manier geschreven die een programma niet herkent",
         },
         correct="right",

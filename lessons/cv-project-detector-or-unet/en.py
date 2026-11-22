@@ -38,8 +38,8 @@ def quick_check_iou():
         "quick-iou",
         question="With seed 3, the course's U-Net read 97.3% of the pixels of the test scenes right after 8 epochs, and its mean IoU was only 0.65. How can both be true?",
         options={
-            "right": "It called the triangles squares; their IoU is about 0, and in the mean IoU the triangles count as much as the background, which covers most pixels",
             "twice": "The mean IoU counts every pixel twice, once for each class it could have",
+            "right": "It called the triangles squares; their IoU is about 0, and in the mean IoU the triangles count as much as the background, which covers most pixels",
             "train": "97.3% is about the training scenes, and 0.65 about the test scenes",
             "edges": "The mean IoU only looks at the pixels on the edges of the shapes",
         },
@@ -61,9 +61,9 @@ def quick_check_focal():
         "quick-focal",
         question="In the focal loss with γ = 2, how much does an anchor that the detector puts at the right class with a probability of 0.9 count, compared with its cross-entropy?",
         options={
-            "right": "A hundredth: its cross-entropy times (1 − 0.9)² = 0.01",
             "tenth": "A tenth: its cross-entropy times 1 − 0.9",
             "same": "As much: the focal loss only changes the anchors the detector gets wrong",
+            "right": "A hundredth: its cross-entropy times (1 − 0.9)² = 0.01",
             "more": "More: an easy anchor counts double, so that it stays right",
         },
         correct="right",

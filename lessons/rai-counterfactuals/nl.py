@@ -37,8 +37,8 @@ def quick_check_reason():
         "quick-reason",
         question="Tegen de 1608 aanvragers net boven de grens was opleiding de belangrijkste reden voor het nee van de aanvrager van 30, met een verschil van −1,344. Wat vertelt die reden de aanvrager?",
         options={
-            "right": "Wat het zwaarst tegen die persoon woog",
             "amount": "Hoeveel niveaus meer een ja zouden geven",
+            "right": "Wat het zwaarst tegen die persoon woog",
             "only": "Dat alleen de opleiding het nee bepaalde",
         },
         correct="right",
@@ -58,9 +58,9 @@ def quick_check_direction():
         "quick-direction",
         question="In de vorige lessen kreeg education_num een Shapley-waarde van +0,181 voor de persoon van 41. Betekent die waarde dat één opleidingsniveau meer de kans van die persoon zou verhogen?",
         options={
-            "right": "Nee: ze zegt niets over een verandering",
             "more": "Ja: een positieve waarde betekent dat meer beter is",
             "step": "Ja, met 0,181 voor elk extra niveau",
+            "right": "Nee: ze zegt niets over een verandering",
         },
         correct="right",
         why={
@@ -356,8 +356,8 @@ def choice_later_cell():
         "later",
         question="De aanvrager haalt opleidingsniveau 16, de recourse die de bank noemde. Intussen heeft de bank zijn model opnieuw getraind op nieuwere data. Krijgt de aanvrager nu een ja?",
         options={
-            "right": "Niet zeker: het nieuwe model kan nee zeggen",
             "promised": "Ja: de counterfactual van de bank beloofde het",
+            "right": "Niet zeker: het nieuwe model kan nee zeggen",
             "cutoff": "Ja, zolang de grens nog op 0 ligt",
         },
         correct="right",

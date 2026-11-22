@@ -37,8 +37,8 @@ def quick_check_field():
         "quick-field",
         question="Wie computationele linguïstiek en NLP uit elkaar houdt: welk project is dan computationele linguïstiek?",
         options={
-            "right": "Met een computer tellen welke uitgangen het Nederlands het meest gebruikt, om te leren hoe het Nederlands woorden maakt",
             "app": "Voor een webwinkel een zoekvak bouwen dat woorden in delen knipt, zodat elke zoekopdracht meer producten vindt dan eerst",
+            "right": "Met een computer tellen welke uitgangen het Nederlands het meest gebruikt, om te leren hoe het Nederlands woorden maakt",
             "spell": "Een spellingchecker bouwen: onbekende woorden rood onderstrepen",
         },
         correct="right",
@@ -58,9 +58,9 @@ def quick_check_keyword():
         "quick-keyword",
         question="In *Wat NLP is* zoekt `intent` elk keyword in het verzoek, en `\"repair\"` is een keyword. Wat geeft de functie voor het Engelse verzoek *My brakes need repairs.* (mijn remmen moeten gerepareerd worden)?",
         options={
-            "right": "`\"repair\"`, want het keyword is een stuk van het woord *repairs*",
             "unknown": "`\"unknown\"`, want *repairs* en *repair* zijn twee verschillende woorden",
             "error": "Een fout, want het verzoek heeft een woord dat langer is dan het keyword",
+            "right": "`\"repair\"`, want het keyword is een stuk van het woord *repairs*",
         },
         correct="right",
         why={

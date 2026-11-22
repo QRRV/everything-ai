@@ -82,8 +82,8 @@ def quick_check_genai():
         "quick-genai",
         question="Which of these is generative AI?",
         options={
-            "poem": "An app that writes a new poem from three words you give it.",
             "birds": "An app that tells you which bird you hear.",
+            "poem": "An app that writes a new poem from three words you give it.",
             "route": "A route planner with rules that people wrote.",
         },
         correct="poem",
@@ -300,9 +300,9 @@ def choice_changed_cell():
         "what-changed",
         question="Your rule is 14 °C, your neighbor's is 19 °C. What changed to get your neighbor's rule?",
         options={
-            "examples": "Only the examples. The recipe stayed the same.",
             "recipe": "The recipe: the computer needed a new way to learn.",
             "understand": "The computer understood that your neighbor gets cold more easily.",
+            "examples": "Only the examples. The recipe stayed the same.",
         },
         correct="examples",
         why={

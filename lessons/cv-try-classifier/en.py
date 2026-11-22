@@ -37,8 +37,8 @@ def quick_check_shape():
         "quick-shape",
         question="The cat photo, 451 by 300 pixels, goes through the five steps of the previous lesson. Which shape does the tensor that goes into the model have?",
         options={
-            "right": "`(1, 3, 224, 224)`",
             "last": "`(1, 224, 224, 3)`",
+            "right": "`(1, 3, 224, 224)`",
             "nobatch": "`(3, 224, 224)`",
             "resized": "`(1, 3, 256, 384)`",
         },
@@ -60,9 +60,9 @@ def quick_check_softmax():
         "quick-softmax",
         question="A model gives three classes the logits 2, 0 and 0. Which probability does softmax give the first class?",
         options={
-            "right": "0.79",
             "all": "1",
             "even": "0.33",
+            "right": "0.79",
             "logit": "2",
         },
         correct="right",

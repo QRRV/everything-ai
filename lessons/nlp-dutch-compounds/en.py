@@ -37,8 +37,8 @@ def quick_check_split():
         "quick-split",
         question="In *Words and their parts*, `split_compound` gives back the first cut, from the left, into two known words, or the word as one part. What does `split_compound(\"voetbalveld\", [\"voet\", \"bal\", \"voetbal\", \"veld\"])` give?",
         options={
-            "right": "`['voetbal', 'veld']`",
             "three": "`['voet', 'bal', 'veld']`, the three words it is made of",
+            "right": "`['voetbal', 'veld']`",
             "whole": "`['voetbalveld']`, since that word is not in the list",
         },
         correct="right",
@@ -58,9 +58,9 @@ def quick_check_write():
         "quick-write",
         question="How does Dutch write the compound that English writes as *science fiction*?",
         options={
-            "right": "As one word, *sciencefiction*",
             "space": "With a space, as in English",
             "hyphen": "With a hyphen between the two parts, *science-fiction*",
+            "right": "As one word, *sciencefiction*",
         },
         correct="right",
         why={

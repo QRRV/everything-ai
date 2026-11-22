@@ -37,8 +37,8 @@ def quick_check_safe():
         "quick-safe",
         question="Waarom draait er geen code uit een safetensors-bestand als de code van de course het leest?",
         options={
-            "right": "Het bestand is alleen een header en getallen",
             "weights": "torch.load leest het met weights_only=True",
+            "right": "Het bestand is alleen een header en getallen",
             "scan": "Hugging Face heeft het gescand voordat het gedeeld werd",
         },
         correct="right",
@@ -58,9 +58,9 @@ def quick_check_card():
         "quick-card",
         question="Waar lees je de licentie en de training data van een pretrained model van een hub, voordat je het gebruikt?",
         options={
-            "right": "In de model card, de README.md",
             "state": "In de state_dict, naast de getallen",
             "code": "In de code van de class",
+            "right": "In de model card, de README.md",
         },
         correct="right",
         why={
@@ -394,8 +394,8 @@ def choice_match_cell():
         "match",
         question="Wat weet Gear & Go daardoor?",
         options={
-            "right": "Dat de winkel het vastgelegde bestand krijgt, wie het ook maakte",
             "maker": "Dat cog-and-crank het maakte: naam en SHA-256 kloppen allebei",
+            "right": "Dat de winkel het vastgelegde bestand krijgt, wie het ook maakte",
             "safe": "Dat het model veilig is: een verandering zou de SHA-256 veranderen",
         },
         correct="right",
@@ -425,9 +425,9 @@ def choice_pipeline_cell():
         "pipeline",
         question="Welke verandering voorkomt dat het script op dag 61 het model van de nieuwe eigenaar laadt?",
         options={
-            "right": "De commit van dag 1 en de SHA-256 van het bestand vastleggen",
             "tag": "revision=\"v1\" meegeven: een tag blijft bij één versie",
             "none": "Niets: in een safetensors-bestand kan helemaal geen aanval zitten",
+            "right": "De commit van dag 1 en de SHA-256 van het bestand vastleggen",
         },
         correct="right",
         why={

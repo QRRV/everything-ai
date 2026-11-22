@@ -37,8 +37,8 @@ def quick_check_inflect():
         "quick-inflect",
         question="Which pair of words is made by inflection?",
         options={
-            "right": "*walk* and *walked*",
             "ful": "*care* and *careful*, since *-ful* is a suffix",
+            "right": "*walk* and *walked*",
             "dog": "*dog* and *doghouse*",
         },
         correct="right",
@@ -58,9 +58,9 @@ def quick_check_cut():
         "quick-cut",
         question="In *Words and their parts*, `cut_suffix` cuts off the first ending of the list that the word ends in, with at least 3 letters left, and gives back both parts, or the word as one part. What does `cut_suffix(\"speed\", [\"ing\", \"ed\", \"s\"])` give?",
         options={
-            "right": "`['spe', 'ed']`",
             "word": "`['speed']`, since *spe* is not an English word",
             "both": "`['speed', 'ed']`",
+            "right": "`['spe', 'ed']`",
         },
         correct="right",
         why={

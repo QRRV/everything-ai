@@ -38,8 +38,8 @@ def quick_check_stage():
         "quick-stage",
         question="NIST sorts attacks on machine learning by the stage at which they strike. When does a poisoning attack strike?",
         options={
-            "right": "While the model learns, through its training data",
             "use": "When the model is in use, through an input it reads",
+            "right": "While the model learns, through its training data",
             "file": "After training, by changing the file of weights",
         },
         correct="right",
@@ -59,9 +59,9 @@ def quick_check_argmax():
         "quick-argmax",
         question="DigitsMLP gives 10 logits for each image. Which digit does it read?",
         options={
-            "right": "The digit whose logit is the largest",
             "sum": "The sum of the ten logits, rounded to a whole digit",
             "half": "The first digit whose logit is above 0.5",
+            "right": "The digit whose logit is the largest",
         },
         correct="right",
         why={
@@ -523,8 +523,8 @@ def choice_count_cell():
         "count",
         question="What does that suggest for an attacker on the web?",
         options={
-            "right": "A fixed number of documents can be enough, however big the data",
             "share": "The share of the data counts, so a big model needs far more",
+            "right": "A fixed number of documents can be enough, however big the data",
             "lost": "Large models learn from so much text that 250 documents get lost in it",
         },
         correct="right",

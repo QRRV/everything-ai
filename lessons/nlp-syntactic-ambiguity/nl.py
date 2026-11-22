@@ -37,8 +37,8 @@ def quick_check_place():
         "quick-place",
         question="De grammatica van *Zinsbouw en eindeloze zinnen* heeft NP → DET NOM | PROPN, VP → VERB NP | VERB NP PP en PP → ADP NP. Waar komt *bij Breda* in de boom van *een lange trein passeerde de brug bij Breda*?",
         options={
-            "right": "Onder de VP, naast de NP",
             "np": "In de NP, samen met *de brug*",
+            "right": "Onder de VP, naast de NP",
             "s": "Direct onder S",
         },
         correct="right",
@@ -58,9 +58,9 @@ def quick_check_count():
         "quick-count",
         question="Church en Patil telden de lezingen van zinnen zoals *Put the block in the box on the table*. Met twee voorzetselgroepen, zoals daar, vonden ze 2 lezingen. Hoeveel met drie?",
         options={
-            "right": "5",
             "three": "3: één plek erbij voor de nieuwe groep",
             "four": "4",
+            "right": "5",
         },
         correct="right",
         why={

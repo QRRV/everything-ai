@@ -36,8 +36,8 @@ def quick_check_run():
         "quick-run",
         question="Hoe voer je een codecel uit?",
         options={
-            "keys": "Druk op **Shift + Enter**, of klik op de knop ▶ naast de cel.",
             "reopen": "Sluit de les en open hem opnieuw.",
+            "keys": "Druk op **Shift + Enter**, of klik op de knop ▶ naast de cel.",
             "word": "Typ `run` onderaan de cel.",
         },
         correct="keys",
@@ -57,9 +57,9 @@ def quick_check_not_yet():
         "quick-not-yet",
         question="Een check zegt *Nog niet*. Wat kun je het beste doen?",
         options={
-            "read": "Lezen wat de check zegt, je antwoord aanpassen en opnieuw kijken.",
             "solution": "Meteen de oplossing openen.",
             "restart": "De les opnieuw beginnen.",
+            "read": "Lezen wat de check zegt, je antwoord aanpassen en opnieuw kijken.",
         },
         correct="read",
         why={

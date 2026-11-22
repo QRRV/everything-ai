@@ -37,8 +37,8 @@ def quick_check_origin():
         "quick-origin",
         question="A backtest puts its origin at Monday 4 June 2012 and forecasts the week after it. Which days may the forecast train on?",
         options={
-            "right": "Every day before 4 June",
             "around": "Every day of 2011 and 2012 except that week",
+            "right": "Every day before 4 June",
             "week": "Only the week before 4 June",
         },
         correct="right",
@@ -58,9 +58,9 @@ def quick_check_missing():
         "quick-missing",
         question="Some rows of a table have NaN in a feature. What does `HistGradientBoostingRegressor` do with them?",
         options={
-            "right": "It handles the missing values by itself",
             "error": "It stops with an error, so drop those rows first",
             "zero": "It counts them as 0",
+            "right": "It handles the missing values by itself",
         },
         correct="right",
         why={

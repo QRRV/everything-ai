@@ -37,8 +37,8 @@ def quick_check_equalize():
         "quick-equalize",
         question="In een foto in grijstinten hebben 30 van elke 100 pixels grijstint 90 of een donkerdere. Welke grijstint wordt 90 na histogramegalisatie?",
         options={
-            "share": "Ongeveer 76",
             "same": "Nog steeds 90",
+            "share": "Ongeveer 76",
             "thirty": "30",
         },
         correct="share",
@@ -58,9 +58,9 @@ def quick_check_variance():
         "quick-variance",
         question="De helft van de pixels van een groep heeft grijstint 60, de andere helft grijstint 70. Wat is de variantie van hun grijstinten?",
         options={
-            "25": "25",
             "5": "5",
             "50": "50",
+            "25": "25",
         },
         correct="25",
         why={

@@ -37,8 +37,8 @@ def quick_check_glass():
         "quick-glass",
         question="Is elke beslisboom een glass box?",
         options={
-            "right": "Alleen een kleine: het hangt af van de grootte",
             "yes": "Ja: je kunt zijn vragen altijd volgen",
+            "right": "Alleen een kleine: het hangt af van de grootte",
             "no": "Nee: een boom is een black box, net als een neural network",
         },
         correct="right",
@@ -58,9 +58,9 @@ def quick_check_bootstrap():
         "quick-bootstrap",
         question="Elke boom van een random forest leert van een bootstrap-steekproef uit de n voorbeelden van de training set. Wat is dat?",
         options={
-            "right": "n trekkingen, met teruglegging",
             "order": "Alle n voorbeelden, in een nieuwe volgorde geschud",
             "half": "Een willekeurige helft, elk voorbeeld hoogstens één keer",
+            "right": "n trekkingen, met teruglegging",
         },
         correct="right",
         why={

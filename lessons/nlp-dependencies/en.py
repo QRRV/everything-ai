@@ -37,8 +37,8 @@ def quick_check_rewrite():
         "quick-rewrite",
         question="In *Phrase structure and endless sentences*, `rewrite_first(symbols, grammar, k)` puts right-hand side number `k` in the place of the first non-terminal. The grammar of that lesson has DET → *the* | *a*. What does `rewrite_first([\"DET\", \"NOM\", \"VP\"], GRAMMAR, 1)` give?",
         options={
-            "right": "`['a', 'NOM', 'VP']`",
             "first": "`['the', 'NOM', 'VP']`",
+            "right": "`['a', 'NOM', 'VP']`",
             "kept": "`['DET', 'a', 'NOM', 'VP']`",
         },
         correct="right",
@@ -58,9 +58,9 @@ def quick_check_vp():
         "quick-vp",
         question="The grammar of *Phrase structure and endless sentences* has S → NP VP and VP → VERB NP. Which words does the VP cover in *the late train left the city*?",
         options={
-            "right": "*left the city*",
             "np": "*the city*",
             "subject": "*the late train left*",
+            "right": "*left the city*",
         },
         correct="right",
         why={

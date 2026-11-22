@@ -39,8 +39,8 @@ def quick_check_overlap():
         "quick-overlap",
         question="Two filters each miss 10% of the harmful messages. They were trained on the same examples. What share gets past both?",
         options={
-            "right": "More than 1%, because their misses overlap",
             "product": "Exactly 1%, which is 10% times 10%",
+            "right": "More than 1%, because their misses overlap",
             "less": "Less than 1%, because two similar filters back each other up",
         },
         correct="right",
@@ -60,9 +60,9 @@ def quick_check_recall():
         "quick-recall",
         question="A spam filter raises its decision threshold from 0.5 to 0.9. What happens to its recall?",
         options={
-            "right": "It goes down, or at best stays the same",
             "up": "It goes up, because the filter is stricter",
             "same": "Nothing changes: the threshold only moves precision",
+            "right": "It goes down, or at best stays the same",
         },
         correct="right",
         why={
@@ -466,8 +466,8 @@ def choice_wording_cell():
         "wording",
         question="What does this tell you about the course's moderator?",
         options={
-            "right": "Its scores depend on how it is asked, not only on the text",
             "meeting": "The everyday texts were more toxic than they look",
+            "right": "Its scores depend on how it is asked, not only on the text",
             "word": "Asking about toxicity gives truer scores, since Perspective asks that too",
         },
         correct="right",

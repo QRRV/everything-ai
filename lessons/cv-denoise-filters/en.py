@@ -37,8 +37,8 @@ def quick_check_difference():
         "quick-difference",
         question="`a` and `b` are two grayscale images of uint8. Why does `abs(a.astype(int) - b.astype(int)).mean()` measure how far apart they are, and `abs(a - b).mean()` does not?",
         options={
-            "wrap": "uint8 cannot go below 0: 3 − 5 wraps around to 254",
             "abs": "`abs` only works on ordinary whole numbers",
+            "wrap": "uint8 cannot go below 0: 3 − 5 wraps around to 254",
             "mean": "`.mean()` of uint8 gives a whole number, so the decimals are lost",
         },
         correct="wrap",
@@ -58,9 +58,9 @@ def quick_check_feature_map():
         "quick-feature-map",
         question="A filter of 3 by 3 slides over an image of 6 by 6 pixels, and stays inside the image. How big is the feature map?",
         options={
-            "4": "4 by 4",
             "6": "6 by 6",
             "3": "3 by 3",
+            "4": "4 by 4",
         },
         correct="4",
         why={

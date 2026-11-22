@@ -37,8 +37,8 @@ def quick_check_kinds():
         "quick-kinds",
         question="Een methode husselt één kolom door elkaar en meet hoeveel slechter een model wordt, over alle mensen tegelijk. Ze heeft de antwoorden van het model en de echte labels nodig, niet de binnenkant van het model. Wat voor uitleg is dat?",
         options={
-            "right": "Een global explanation, voor elk model",
             "local": "Een local explanation, voor één soort model",
+            "right": "Een global explanation, voor elk model",
             "inside": "Gelezen uit de eigen weights of splitsingen van het model",
         },
         correct="right",
@@ -58,9 +58,9 @@ def quick_check_forest():
         "quick-forest",
         question="Een random forest laat elke boom groeien op een eigen bootstrap-steekproef. Wat maakt de bomen nog meer verschillend?",
         options={
-            "right": "Bij elke splitsing een paar willekeurig gekozen features",
             "labels": "Elke boom leert van labels die willekeurig zijn verzonnen",
             "depth": "Elke boom krijgt een andere maximale diepte",
+            "right": "Bij elke splitsing een paar willekeurig gekozen features",
         },
         correct="right",
         why={
@@ -355,8 +355,8 @@ def choice_copy_cell():
         "copy",
         question="Met education_num twee keer in de tabel kost het weglaten van één kopie en opnieuw trainen het forest 0,1 procentpunt. Wat zegt dat?",
         options={
-            "right": "De andere kopie heeft het ook en neemt het over",
             "useless": "Opleiding helpt niet om het inkomen te voorspellen",
+            "right": "De andere kopie heeft het ook en neemt het over",
             "unused": "Het forest gebruikte die kopie nooit",
         },
         correct="right",

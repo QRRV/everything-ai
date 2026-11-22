@@ -38,8 +38,8 @@ def quick_check_goal():
         "quick-goal",
         question="Een app sorteert recensies met een model. Een aanvaller schrijft een recensie waardoor het model antwoordt met een woord dat de aanvaller koos, in plaats van met een label. Op welk doel van NIST richt die aanval zich?",
         options={
-            "right": "Integriteit",
             "privacy": "Privacy",
+            "right": "Integriteit",
             "availability": "Beschikbaarheid",
         },
         correct="right",
@@ -59,9 +59,9 @@ def quick_check_label():
         "quick-label",
         question="De app laat alleen een antwoord door dat een van zijn labels is, zoals `label_of` deed. Het model antwoordt PINEAPPLE. Wat doet de app?",
         options={
-            "right": "Hij geeft None terug, zodat een mens ernaar kan kijken",
             "label": "Hij neemt het label dat het meest op het antwoord lijkt",
             "ask": "Hij vraagt het model steeds opnieuw, tot er een label terugkomt",
+            "right": "Hij geeft None terug, zodat een mens ernaar kan kijken",
         },
         correct="right",
         why={
@@ -529,8 +529,8 @@ def choice_judge_cell():
         "judge",
         question="Werkte die aanval?",
         options={
-            "right": "Volgens de judge van de course niet, maar de winkel kreeg geen enkel label",
             "no": "Nee: de ASR is 0, dus datamarking houdt deze aanval tegen",
+            "right": "Volgens de judge van de course niet, maar de winkel kreeg geen enkel label",
             "yes": "Ja: de judge van de course telt elk woord dat de aanvaller in de recensie schreef",
         },
         correct="right",

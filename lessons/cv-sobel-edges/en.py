@@ -37,8 +37,8 @@ def quick_check_gradient():
         "quick-gradient",
         question="At one point, the gradient of a loss $\\mathcal{L}(w, b)$ is $(2, -1)$. What does that say?",
         options={
-            "up": "The loss rises fastest if w gets bigger and b smaller: the gradient points uphill",
             "low": "The lowest point of the loss is at w = 2, b = −1",
+            "up": "The loss rises fastest if w gets bigger and b smaller: the gradient points uphill",
             "down": "The loss falls fastest if w gets bigger and b smaller",
         },
         correct="up",
@@ -262,9 +262,9 @@ def choice_direction_cell():
         "direction",
         question="At one pixel of a photo, the image gradient is $(g_x, g_y) = (0, 400)$. Where is the lighter side?",
         options={
-            "below": "Below the pixel",
             "above": "Above the pixel",
             "right": "To the right of the pixel",
+            "below": "Below the pixel",
             "none": "Nowhere: there is no edge, because $g_x$ is 0",
         },
         correct="below",

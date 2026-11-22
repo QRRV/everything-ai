@@ -37,8 +37,8 @@ def quick_check_across():
         "quick-across",
         question="Hoe ligt de beeldgradient $(g_x, g_y)$ van een pixel op een rand ten opzichte van die rand?",
         options={
-            "across": "Dwars op de rand, naar de lichtere kant",
             "along": "Langs de rand, in de richting waarin de rand loopt",
+            "across": "Dwars op de rand, naar de lichtere kant",
             "darker": "Dwars op de rand, naar de donkerdere kant",
         },
         correct="across",
@@ -58,9 +58,9 @@ def quick_check_threshold():
         "quick-threshold",
         question="`img = np.array([[50, 120], [100, 200]])`. Wat geeft `img > 100`?",
         options={
-            "right": "`[[False, True], [False, True]]`",
             "equal": "`[[False, True], [True, True]]`",
             "values": "`[[0, 120], [0, 200]]`",
+            "right": "`[[False, True], [False, True]]`",
         },
         correct="right",
         why={

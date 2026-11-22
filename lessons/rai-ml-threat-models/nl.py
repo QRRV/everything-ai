@@ -38,8 +38,8 @@ def quick_check_cia():
         "quick-cia",
         question="Iemand breekt in op de database van een navigatie-app en zet de maximumsnelheid van een paar wegen hoger. Welke eigenschap gaat daarmee verloren?",
         options={
-            "right": "Integriteit: iemand verandert gegevens zonder dat te mogen",
             "conf": "Vertrouwelijkheid: iemand leest wat die niet mag lezen",
+            "right": "Integriteit: iemand verandert gegevens zonder dat te mogen",
             "avail": "Beschikbaarheid: weggebruikers kunnen de app niet meer gebruiken",
         },
         correct="right",
@@ -59,9 +59,9 @@ def quick_check_workflow():
         "quick-workflow",
         question="Wanneer meet je in de workflow van machine learning het model op de test set?",
         options={
-            "right": "Eén keer, aan het eind, als alles gekozen is",
             "round": "In elke ronde, om te kiezen wat je nu verandert",
             "start": "Aan het begin, om het doel te bepalen",
+            "right": "Eén keer, aan het eind, als alles gekozen is",
         },
         correct="right",
         why={
@@ -438,8 +438,8 @@ def choice_knowledge_cell():
         "knowledge",
         question="Wat wisten ze van dat model?",
         options={
-            "right": "Alles, ook de weights: white box",
             "black": "Alleen de antwoorden op hun foto's: black box",
+            "right": "Alles, ook de weights: white box",
             "none": "Niets: stickers misleiden elk model",
         },
         correct="right",

@@ -38,8 +38,8 @@ def quick_check_layer():
         "quick-layer",
         question="Uit welke layer van ResNet-18 hield Grad-CAM op de collage van de kat en de koffie de twee klassen nog uit elkaar?",
         options={
-            "right": "`layer4`, de laatste convolutional layer: zijn maps komen vlak vóór global average pooling en de logits",
             "finer": "`layer3`: zijn maps hebben 14 bij 14 plaatsen in plaats van 7 bij 7, dus laten ze meer zien",
+            "right": "`layer4`, de laatste convolutional layer: zijn maps komen vlak vóór global average pooling en de logits",
             "first": "`conv1`, de eerste layer: die ziet de foto zelf",
             "any": "Elke layer: Grad-CAM geeft uit elk ervan dezelfde map",
         },
@@ -61,9 +61,9 @@ def quick_check_upside():
         "quick-upside",
         question="Je ColorCNN leerde van foto's die ondersteboven gezet waren in plaats van gespiegeld, en las 479 tot 492 van de 1.000 testfoto's goed, tegen 541 tot 591 met spiegelbeelden. Waarom deed ondersteboven het slechter?",
         options={
-            "right": "Echte foto's laten bijna nooit iets ondersteboven zien, dus leerde het netwerk van foto's die niet lijken op die waarop het getest wordt",
             "pixels": "Ondersteboven verplaatst meer pixels dan een spiegelbeeld",
             "fewer": "Ondersteboven geeft minder nieuwe foto's dan een spiegelbeeld",
+            "right": "Echte foto's laten bijna nooit iets ondersteboven zien, dus leerde het netwerk van foto's die niet lijken op die waarop het getest wordt",
             "colors": "Ondersteboven zet de kleuren van een foto in een andere volgorde",
         },
         correct="right",

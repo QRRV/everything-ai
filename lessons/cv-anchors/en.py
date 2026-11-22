@@ -37,8 +37,8 @@ def quick_check_detr():
         "quick-detr",
         question="DETR gives a query the box `(0.5, 0.25, 0.2, 0.1)`: `(cx, cy, w, h)`, as fractions of the photo. On a photo 600 pixels wide and 400 pixels high, where is the middle of the box, and how wide is it?",
         options={
-            "right": "Middle at column 300 and row 100; 120 pixels wide",
             "height": "Middle at column 300 and row 100; 80 pixels wide",
+            "right": "Middle at column 300 and row 100; 120 pixels wide",
             "swap": "Middle at column 150 and row 200; 120 pixels wide",
             "corner": "Left side at column 300 and top at row 100; 120 pixels wide",
         },
@@ -60,9 +60,9 @@ def quick_check_stride():
         "quick-stride",
         question="A CNN halves the height and the width of its maps three times, each time with stride 2. For a scene of 128 by 128 pixels, how large are its last feature maps, and how many pixels of the scene does each square of them stand for?",
         options={
-            "right": "16 by 16; each square stands for 8 by 8 pixels",
             "once": "64 by 64; each square stands for 2 by 2 pixels",
             "sixteen": "16 by 16; each square stands for 16 by 16 pixels",
+            "right": "16 by 16; each square stands for 8 by 8 pixels",
             "four": "8 by 8; each square stands for 16 by 16 pixels",
         },
         correct="right",

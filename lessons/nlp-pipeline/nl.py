@@ -37,8 +37,8 @@ def quick_check_side():
         "quick-side",
         question="Een programma leest de mails van een winkel en zet elke mail in een map: klachten, vragen of bestellingen. Welke kant van NLP is dat?",
         options={
-            "right": "Begrijpen (NLU): er gaat tekst in, en er komt een label uit",
             "nlg": "Maken (NLG): het geeft de naam van een map terug",
+            "right": "Begrijpen (NLU): er gaat tekst in, en er komt een label uit",
             "both": "Beide kanten, want een mail is tekst en elke map heeft een naam in woorden",
         },
         correct="right",
@@ -58,9 +58,9 @@ def quick_check_reply():
         "quick-reply",
         question="Het programma van de fietsenwinkel in *Wat NLP is* vindt eerst de soort verzoek, en kiest dan een antwoord bij die soort. Wat gebeurt er met het antwoord als het de verkeerde soort vindt?",
         options={
-            "right": "Dat gaat ook over iets verkeerds, want het wordt gekozen bij de soort",
             "fixed": "De stap die het antwoord kiest ziet de fout, en kiest het antwoord dat bij het verzoek past",
             "unknown": "Het programma zegt dat het het verzoek niet begreep",
+            "right": "Dat gaat ook over iets verkeerds, want het wordt gekozen bij de soort",
         },
         correct="right",
         why={
@@ -366,8 +366,8 @@ def choice_measure_cell():
         "measure",
         question="Welke score verwacht je in de echte keten?",
         options={
-            "right": "Lager, want stap 1 en 2 maken fouten die het opdelen met de hand niet heeft",
             "same": "Dezelfde 95, want de stap zelf is niet veranderd",
+            "right": "Lager, want stap 1 en 2 maken fouten die het opdelen met de hand niet heeft",
             "higher": "Hoger, want drie stappen die samenwerken weten meer dan één stap die alles alleen doet",
         },
         correct="right",

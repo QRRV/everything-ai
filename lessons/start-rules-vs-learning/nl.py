@@ -82,8 +82,8 @@ def quick_check_genai():
         "quick-genai",
         question="Welke van deze is generatieve AI?",
         options={
-            "poem": "Een app die een nieuw gedicht schrijft bij drie woorden die je geeft.",
             "birds": "Een app die zegt welke vogel je hoort.",
+            "poem": "Een app die een nieuw gedicht schrijft bij drie woorden die je geeft.",
             "route": "Een routeplanner met regels die mensen schreven.",
         },
         correct="poem",
@@ -300,9 +300,9 @@ def choice_changed_cell():
         "what-changed",
         question="Jouw regel is 14 °C, die van je buur 19 °C. Wat veranderde er om de regel van je buur te krijgen?",
         options={
-            "examples": "Alleen de voorbeelden. Het recept bleef hetzelfde.",
             "recipe": "Het recept: de computer had een nieuwe manier van leren nodig.",
             "understand": "De computer begreep dat je buur het sneller koud heeft.",
+            "examples": "Alleen de voorbeelden. Het recept bleef hetzelfde.",
         },
         correct="examples",
         why={

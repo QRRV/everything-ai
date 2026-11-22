@@ -37,8 +37,8 @@ def quick_check_hubs():
         "quick-hubs",
         question="In het netwerk van vluchten gaan de 100 grootste hubs dicht, met al hun routes: 3% van de vliegvelden. Wat gebeurt er met de vliegvelden die overblijven?",
         options={
-            "right": "Ze komen veel verder uit elkaar te liggen: gemiddeld 5,74 vluchten in plaats van 4,10",
             "nothing": "Bijna niets: 3% van de vliegvelden is te weinig om uit te maken",
+            "right": "Ze komen veel verder uit elkaar te liggen: gemiddeld 5,74 vluchten in plaats van 4,10",
             "apart": "Geen van hen kan nog een ander bereiken",
         },
         correct="right",
@@ -58,9 +58,9 @@ def quick_check_bfs():
         "quick-bfs",
         question="Breadth-first search geeft een vliegveld zijn aantal vluchten de eerste keer dat het hem tegenkomt, en verandert dat nooit meer. Waarom is dat eerste getal het kleinste?",
         options={
-            "right": "De frontier is een wachtrij: elk vliegveld op 1 vlucht komt eruit vóór elk vliegveld op 2 vluchten",
             "fewest": "Het neemt altijd eerst de buur met de minste edges",
             "close": "Het is niet altijd het kleinste, maar wel dichtbij genoeg",
+            "right": "De frontier is een wachtrij: elk vliegveld op 1 vlucht komt eruit vóór elk vliegveld op 2 vluchten",
         },
         correct="right",
         why={

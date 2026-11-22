@@ -37,8 +37,8 @@ def quick_check_group():
         "quick-group",
         question="In welke groep van de taxonomie van privacyproblemen van Solove hoort aggregatie?",
         options={
-            "right": "Verwerken",
             "collection": "Verzamelen",
+            "right": "Verwerken",
             "dissemination": "Verspreiden",
         },
         correct="right",
@@ -58,9 +58,9 @@ def quick_check_flow():
         "quick-flow",
         question="Welke opvatting van privacy vraagt of een stroom informatie past bij de context waar hij vandaan komt?",
         options={
-            "right": "Gepaste stroom",
             "alone": "Met rust gelaten worden",
             "control": "Zeggenschap over informatie",
+            "right": "Gepaste stroom",
         },
         correct="right",
         why={

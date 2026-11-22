@@ -37,8 +37,8 @@ def quick_check_marginal():
         "quick-marginal",
         question="A release raises the chance of a threat in a year from 0.2 to 0.25, and one such event does 40 harm points. What is the marginal risk of the release for this threat?",
         options={
-            "right": "2 harm points",
             "with": "10 harm points: the risk with the release",
+            "right": "2 harm points",
             "chance": "0.05, the rise in the chance",
         },
         correct="right",
@@ -58,9 +58,9 @@ def quick_check_reference():
         "quick-reference",
         question="Kapoor and colleagues compare an open model with pre-existing technologies, closed models, or other reference points. Why does that choice matter?",
         options={
-            "right": "The same release adds a lot or a little, depending on what already exists",
             "none": "It does not matter: the risk of a model stays the same whatever you happen to compare it with",
             "closed": "Because closed models are the only reference point that can be measured",
+            "right": "The same release adds a lot or a little, depending on what already exists",
         },
         correct="right",
         why={
@@ -380,8 +380,8 @@ def choice_margin_cell():
         "margin",
         question="What does that cost the lab?",
         options={
-            "right": "Alerts for many models that will never reach a threshold",
             "none": "Nothing: an earlier warning only gives more time to prepare",
+            "right": "Alerts for many models that will never reach a threshold",
             "lower": "Fewer alerts, since only the strongest models get near half a threshold",
         },
         correct="right",

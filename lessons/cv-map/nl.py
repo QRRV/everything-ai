@@ -37,8 +37,8 @@ def quick_check_nms():
         "quick-nms",
         question="Non-maximum suppression met een drempel van 0,5 krijgt drie boxes: A met een score van 0,9, B met 0,8, waarvan de IoU met A 0,6 is, en C met 0,7, waarvan de IoU met A en met B 0,1 is. Welke boxes houdt hij?",
         options={
-            "right": "A en C",
             "one": "alleen A",
+            "right": "A en C",
             "all": "A, B en C",
             "two": "A en B",
         },
@@ -60,9 +60,9 @@ def quick_check_pr():
         "quick-pr",
         question="Een detector van vijven geeft 10 keer alarm, en 7 daarvan zijn echte vijven. De test set bevat 14 vijven. Wat zijn de precision en de recall?",
         options={
-            "right": "precision 0,7, recall 0,5",
             "swapped": "precision 0,5, recall 0,7",
             "both-p": "precision 0,7, recall 0,7",
+            "right": "precision 0,7, recall 0,5",
             "both-r": "precision 0,5, recall 0,5",
         },
         correct="right",
@@ -388,8 +388,8 @@ def choice_bikes_cell():
         "bikes",
         question="Een test set bevat 1.000 auto's en 10 fietsen. Een detector heeft een AP van 0,9 voor auto's en van 0,3 voor fietsen. Wat is zijn mAP?",
         options={
-            "right": "0,6",
             "weighted": "0,89",
+            "right": "0,6",
             "cars": "0,9",
             "lowest": "0,3",
         },

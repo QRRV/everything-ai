@@ -37,8 +37,8 @@ def quick_check_conditional():
         "quick-conditional",
         question="Of 200 orders, 40 hold tea, and 30 of those 40 also hold cake. What is P(cake | tea)?",
         options={
-            "right": "0.75",
             "both": "0.15",
+            "right": "0.75",
             "tea": "0.2",
         },
         correct="right",
@@ -58,9 +58,9 @@ def quick_check_groupby():
         "quick-groupby",
         question="`df` has a row for every product in an order, with the columns `invoice`, the order, and `product`. What does `df.groupby(\"invoice\")[\"product\"].count()` give?",
         options={
-            "right": "For every order, how many products it holds",
             "product": "For every product, how many orders hold it",
             "total": "How many orders there are",
+            "right": "For every order, how many products it holds",
         },
         correct="right",
         why={

@@ -37,8 +37,8 @@ def quick_check_degrees():
         "quick-degree-sum",
         question="Een graaf zonder richtingen heeft 5 edges. Wat is de som van de graden van al zijn nodes?",
         options={
-            "right": "10",
             "five": "5",
+            "right": "10",
             "depends": "Dat hangt af van het aantal nodes",
         },
         correct="right",
@@ -58,9 +58,9 @@ def quick_check_slope():
         "quick-slope",
         question="Op een log-log plot gaat een rechte lijn door (1, 1000) en (100, 0,1). Wat is de helling?",
         options={
-            "right": "−2",
             "four": "−4",
             "half": "−0,5",
+            "right": "−2",
         },
         correct="right",
         why={

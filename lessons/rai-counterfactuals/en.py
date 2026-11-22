@@ -37,8 +37,8 @@ def quick_check_reason():
         "quick-reason",
         question="Against the 1,608 applicants just above the cut-off, education was the principal reason for the no of the applicant aged 30, with a gap of −1.344. What does that reason tell the applicant?",
         options={
-            "right": "What weighed most against them",
             "amount": "How many more levels would give a yes",
+            "right": "What weighed most against them",
             "only": "That education alone decided the no",
         },
         correct="right",
@@ -58,9 +58,9 @@ def quick_check_direction():
         "quick-direction",
         question="In the last lessons, education_num got a Shapley value of +0.181 for the person aged 41. Does that say that one more level of education would raise the person's chance?",
         options={
-            "right": "No: it says nothing about a change",
             "more": "Yes: a positive value means more is better",
             "step": "Yes, by 0.181 for each extra level",
+            "right": "No: it says nothing about a change",
         },
         correct="right",
         why={
@@ -356,8 +356,8 @@ def choice_later_cell():
         "later",
         question="The applicant gets education level 16, the recourse the bank named. Meanwhile the bank has retrained its model on newer data. Does the applicant now get a yes?",
         options={
-            "right": "Not for sure: the new model may say no",
             "promised": "Yes: the bank's counterfactual promised it",
+            "right": "Not for sure: the new model may say no",
             "cutoff": "Yes, as long as the cut-off is still 0",
         },
         correct="right",

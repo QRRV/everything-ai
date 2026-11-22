@@ -37,8 +37,8 @@ def quick_check_trees():
         "quick-trees",
         question="Op de pinguïns was de validatie-RMSE van gradient boosting het kleinst bij 42 bomen, 415 g, en steeg hij naar 575 g bij 1.000 bomen. Hoe kies je het aantal bomen?",
         options={
-            "right": "Waar de fout op de validation set het kleinst is",
             "more": "Zoveel als de computer aankan: elke boom leert meer",
+            "right": "Waar de fout op de validation set het kleinst is",
             "train": "Waar de fout op de training set het kleinst is",
         },
         correct="right",
@@ -58,9 +58,9 @@ def quick_check_calendar():
         "quick-calendar",
         question="Een tabel met verkeer, één rij per uur. Welke van deze kolommen is een kalenderfeature?",
         options={
-            "right": "`weekday`: de dag van de week van elk uur",
             "lag": "`lag_1`: het verkeer van het uur ervoor",
             "temp": "`temp`: de temperatuur van elk uur",
+            "right": "`weekday`: de dag van de week van elk uur",
         },
         correct="right",
         why={

@@ -36,8 +36,8 @@ def quick_check_run():
         "quick-run",
         question="How do you run a code cell?",
         options={
-            "keys": "Press **Shift + Enter**, or click the ▶ button next to the cell.",
             "reopen": "Close the lesson and open it again.",
+            "keys": "Press **Shift + Enter**, or click the ▶ button next to the cell.",
             "word": "Type `run` at the bottom of the cell.",
         },
         correct="keys",
@@ -57,9 +57,9 @@ def quick_check_not_yet():
         "quick-not-yet",
         question="A check says *Not yet*. What is the best thing to do?",
         options={
-            "read": "Read what the check says, change your answer, and look again.",
             "solution": "Open the solution straight away.",
             "restart": "Start the lesson over.",
+            "read": "Read what the check says, change your answer, and look again.",
         },
         correct="read",
         why={

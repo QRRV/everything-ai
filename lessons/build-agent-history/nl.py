@@ -59,8 +59,8 @@ def quick_check_mandate():
         "quick-mandate",
         question="De system prompt van de winkelagent zegt al waar hij mag betalen, en hoeveel. Waarom vraagt `pay` dan toch `may_pay`?",
         options={
-            "code": "Een regel in de prompt is een vraag aan het model; alleen de controle in de code die betaalt houdt stand",
             "speed": "Zodat het model het totaal van de winkelwagen niet zelf hoeft uit te rekenen, wat het een request scheelt",
+            "code": "Een regel in de prompt is een vraag aan het model; alleen de controle in de code die betaalt houdt stand",
             "user": "Zodat de gebruiker het mandaat vóór elke betaling nog een keer ziet",
         },
         correct="code",
@@ -286,9 +286,9 @@ def choice_stayed_cell():
         "stayed",
         question="Agents van nu hielden een deel van AutoGPT en BabyAGI, en vervingen een ander deel. Welk is welk?",
         options={
-            "kept-loop": "Ze hielden de loop van een model dat handelt en het resultaat leest; het doel zonder einde werd een taak van iemand, met een stapgrens",
             "kept-list": "Ze hielden de lijst met taken die het model voor zichzelf schrijft, zonder einde; de loop met tools viel weg, omdat die rondjes draaide",
             "kept-all": "Ze hielden allebei, en maakten alleen het model groter, omdat een groter model niet meer afdwaalt",
+            "kept-loop": "Ze hielden de loop van een model dat handelt en het resultaat leest; het doel zonder einde werd een taak van iemand, met een stapgrens",
         },
         correct="kept-loop",
         why={

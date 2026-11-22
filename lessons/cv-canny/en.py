@@ -37,8 +37,8 @@ def quick_check_across():
         "quick-across",
         question="How does the image gradient $(g_x, g_y)$ of a pixel on an edge lie with respect to that edge?",
         options={
-            "across": "Straight across the edge, toward the lighter side",
             "along": "Along the edge, the way the edge runs",
+            "across": "Straight across the edge, toward the lighter side",
             "darker": "Straight across the edge, toward the darker side",
         },
         correct="across",
@@ -58,9 +58,9 @@ def quick_check_threshold():
         "quick-threshold",
         question="`img = np.array([[50, 120], [100, 200]])`. What does `img > 100` give?",
         options={
-            "right": "`[[False, True], [False, True]]`",
             "equal": "`[[False, True], [True, True]]`",
             "values": "`[[0, 120], [0, 200]]`",
+            "right": "`[[False, True], [False, True]]`",
         },
         correct="right",
         why={

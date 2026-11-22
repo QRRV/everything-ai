@@ -37,8 +37,8 @@ def quick_check_field():
         "quick-field",
         question="Where people keep computational linguistics and NLP apart, which project is computational linguistics?",
         options={
-            "right": "Counting with a computer which word endings English uses most, to learn how English builds words",
             "app": "Building a search box for an online store that cuts words into parts, so that each query finds more products",
+            "right": "Counting with a computer which word endings English uses most, to learn how English builds words",
             "spell": "A spell checker that marks the words it does not know",
         },
         correct="right",
@@ -58,9 +58,9 @@ def quick_check_keyword():
         "quick-keyword",
         question="In *What NLP is*, `intent` looks for each keyword in the request, and `\"repair\"` is a keyword. What does it give for the request *My brakes need repairs.*?",
         options={
-            "right": "`\"repair\"`, since the keyword is a piece of the word *repairs*",
             "unknown": "`\"unknown\"`, since *repairs* and *repair* are two different words",
             "error": "An error, since the request has a word that is longer than the keyword",
+            "right": "`\"repair\"`, since the keyword is a piece of the word *repairs*",
         },
         correct="right",
         why={

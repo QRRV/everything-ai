@@ -37,8 +37,8 @@ def quick_check_row():
         "quick-row",
         question="In your ViT, head i of a block computes `A = torch.softmax(S, dim=2)`: for photos of 16 patches with the class token in front, a tensor of shape `(n, 17, 17)`. What does `A[0, 0]` hold, row 0 of the first photo?",
         options={
-            "right": "How the class token divides its attention over the 17 tokens, itself included: 17 numbers that add up to 1",
             "column": "How much each of the 17 tokens takes from the class token",
+            "right": "How the class token divides its attention over the 17 tokens, itself included: 17 numbers that add up to 1",
             "features": "The 17 numbers the class token holds after the block",
         },
         correct="right",
@@ -58,9 +58,9 @@ def quick_check_probe():
         "quick-probe",
         question="A linear probe learned 10 classes from DINOv2's features of 20 photos each. What does it get from DINOv2 for one photo?",
         options={
-            "right": "384 numbers, the photo's features: always the same for the same photo, as DINOv2 is frozen",
             "pixels": "The 150,528 numbers of the prepared photo, 3 · 224 · 224",
             "changing": "384 numbers that change a little in every epoch, as DINOv2 learns along",
+            "right": "384 numbers, the photo's features: always the same for the same photo, as DINOv2 is frozen",
         },
         correct="right",
         why={

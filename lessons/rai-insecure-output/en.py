@@ -39,8 +39,8 @@ def quick_check_placeholder():
         "quick-placeholder",
         question="A search of the library pasted the text a member typed into its SQL, and `x' OR 'a'='a` got all the loans out. What made the same search safe?",
         options={
-            "right": "A `?` in the SQL, with the value sent separately",
             "quotes": "Taking every quote out of the text the member typed",
+            "right": "A `?` in the SQL, with the value sent separately",
             "hash": "Keeping the typed text as a salted hash",
         },
         correct="right",
@@ -60,9 +60,9 @@ def quick_check_nofix():
         "quick-nofix",
         question="For SQL injection, placeholders are a fix that holds. What did the lesson find for prompt injection?",
         options={
-            "right": "No fix like placeholders is known for it",
             "warning": "A warning in the prompt stopped all 160 attacks",
             "base64": "Base64 brought it to 0, so that defense holds",
+            "right": "No fix like placeholders is known for it",
         },
         correct="right",
         why={
@@ -521,8 +521,8 @@ def choice_sql_cell():
         "sql",
         question="Is the price safe to paste into the SQL after escape?",
         options={
-            "right": "No: SQL reads signs that escape leaves as they are",
             "escape": "Yes: escape turned every risky sign into text",
+            "right": "No: SQL reads signs that escape leaves as they are",
             "trust": "Yes: Qwen3 wrote the price, not the customer, so it is safe",
         },
         correct="right",

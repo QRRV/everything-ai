@@ -59,8 +59,8 @@ def quick_check_read():
         "quick-read",
         question="`notes.txt` has three lines. What is `text` after this?\n\n```python\nwith open(\"notes.txt\") as f:\n    text = f.read()\n```",
         options={
-            "string": "One string with the whole file, newlines included",
             "lines": "A list of the three lines",
+            "string": "One string with the whole file, newlines included",
             "first": "The first line only",
         },
         correct="string",
@@ -270,9 +270,9 @@ def choice_true_null_cell():
         "true-null",
         question="What does this give?\n\n```python\nimport json\njson.loads('{\"done\": true, \"left\": null}')\n```",
         options={
-            "values": "`{'done': True, 'left': None}`",
             "strings": "`{'done': 'true', 'left': 'null'}`",
             "error": "An error: `true` and `null` are not Python",
+            "values": "`{'done': True, 'left': None}`",
         },
         correct="values",
         why={

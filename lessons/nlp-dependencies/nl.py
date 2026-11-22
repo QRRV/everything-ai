@@ -37,8 +37,8 @@ def quick_check_rewrite():
         "quick-rewrite",
         question="In *Zinsbouw en eindeloze zinnen* zet `rewrite_first(symbols, grammar, k)` rechterkant nummer `k` op de plaats van de eerste non-terminal. De grammatica van die les heeft DET → *de* | *een*. Wat geeft `rewrite_first([\"DET\", \"NOM\", \"VP\"], GRAMMAR, 1)`?",
         options={
-            "right": "`['een', 'NOM', 'VP']`",
             "first": "`['de', 'NOM', 'VP']`",
+            "right": "`['een', 'NOM', 'VP']`",
             "kept": "`['DET', 'een', 'NOM', 'VP']`",
         },
         correct="right",
@@ -58,9 +58,9 @@ def quick_check_vp():
         "quick-vp",
         question="De grammatica van *Zinsbouw en eindeloze zinnen* heeft S → NP VP en VP → VERB NP. Welke woorden beslaat de VP in *de late trein verliet de stad*?",
         options={
-            "right": "*verliet de stad*",
             "np": "*de stad*",
             "subject": "*de late trein verliet*",
+            "right": "*verliet de stad*",
         },
         correct="right",
         why={

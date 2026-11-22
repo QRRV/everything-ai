@@ -38,8 +38,8 @@ def quick_check_layer():
         "quick-layer",
         question="On the collage of the cat and the coffee, from which layer of ResNet-18 did Grad-CAM still tell the two classes apart?",
         options={
-            "right": "`layer4`, the last convolutional layer: its maps come right before global average pooling and the logits",
             "finer": "`layer3`: its maps have 14 by 14 places instead of 7 by 7, so they show more",
+            "right": "`layer4`, the last convolutional layer: its maps come right before global average pooling and the logits",
             "first": "`conv1`, the first layer: it sees the photo itself",
             "any": "Every layer: Grad-CAM gives the same map from each of them",
         },
@@ -61,9 +61,9 @@ def quick_check_upside():
         "quick-upside",
         question="Your ColorCNN learned from photos turned upside down instead of mirrored, and read 479 to 492 of the 1,000 test photos right, against 541 to 591 with mirror images. Why did upside down do worse?",
         options={
-            "right": "Real photos hardly ever show things upside down, so the network learned from photos unlike the ones it is tested on",
             "pixels": "Upside down moves more pixels than a mirror image",
             "fewer": "Upside down gives fewer new photos than a mirror image",
+            "right": "Real photos hardly ever show things upside down, so the network learned from photos unlike the ones it is tested on",
             "colors": "Upside down puts the colors of a photo in another order",
         },
         correct="right",

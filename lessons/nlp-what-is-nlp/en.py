@@ -37,8 +37,8 @@ def quick_check_numbers():
         "quick-numbers",
         question="What does `[ord(ch) for ch in \"hi\"]` give?",
         options={
-            "right": "[104, 105], one code point for each character",
             "bytes": "b'hi', the two characters as bytes of UTF-8 text",
+            "right": "[104, 105], one code point for each character",
             "count": "[1, 1], how often each character occurs",
         },
         correct="right",
@@ -58,9 +58,9 @@ def quick_check_bigrams():
         "quick-bigrams",
         question="A bigram model counts the pairs of characters in the text `banana`. Which character does it give after `n`?",
         options={
-            "right": "a, since every n in the text is followed by an a",
             "n": "n, since a bigram repeats the character it is given",
             "b": "b, the first character of the text",
+            "right": "a, since every n in the text is followed by an a",
         },
         correct="right",
         why={
@@ -375,8 +375,8 @@ def choice_open_cell():
         "open",
         question="Why does it get this request wrong?",
         options={
-            "right": "Open means something else here, and a keyword cannot tell the two apart",
             "list": "The repair words lack lock, and adding it fixes every request like this one for good",
+            "right": "Open means something else here, and a keyword cannot tell the two apart",
             "lower": "Making the request lowercase changed what it means",
         },
         correct="right",

@@ -59,8 +59,8 @@ def quick_check_inference():
         "quick-inference",
         question="Een getraind model voorspelt de prijs van een huis dat te koop staat. Hoe heet dat?",
         options={
-            "right": "Inference",
             "training": "Training",
+            "right": "Inference",
             "label": "Labelen",
         },
         correct="right",
@@ -216,9 +216,9 @@ def choice_spam_cell():
         "spam-kind",
         question="Een spamfilter leert van 10.000 mails die mensen als spam of geen spam markeerden. Welke soort leren is dat?",
         options={
-            "right": "Supervised learning",
             "unsupervised": "Unsupervised learning",
             "self": "Self-supervised learning",
+            "right": "Supervised learning",
             "reinforcement": "Reinforcement learning",
         },
         correct="right",

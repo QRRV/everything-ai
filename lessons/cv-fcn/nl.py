@@ -38,8 +38,8 @@ def quick_check_pointwise():
         "quick-pointwise",
         question="Een netwerk heeft een feature map van 64 channels en 16 bij 16 plaatsen. Een 1×1-convolutie van 64 naar 4 channels: wat geeft die?",
         options={
-            "right": "4 maps van 16 bij 16: op elk van de 256 plaatsen maakt dezelfde linear layer van de 64 getallen van die plaats er 4",
             "whole": "4 getallen voor de hele map, zoals een linear layer aan het eind van een classifier",
+            "right": "4 maps van 16 bij 16: op elk van de 256 plaatsen maakt dezelfde linear layer van de 64 getallen van die plaats er 4",
             "neighbors": "4 maps van 16 bij 16, waarin elke plaats gemengd is met zijn 8 buren",
             "smaller": "4 maps van 8 bij 8: net als pooling maakt hij de map half zo groot",
         },
@@ -61,9 +61,9 @@ def quick_check_mask():
         "quick-mask-iou",
         question="Het mask van een cirkel heeft 300 pixels. Een model markeert 250 pixels als die cirkel, en 200 daarvan liggen in het mask. Wat is de IoU van de twee masks?",
         options={
-            "right": "200 / 350, ongeveer 0,57: de vereniging is 300 + 250 − 200 = 350 pixels",
             "found": "200 / 300, ongeveer 0,67: het deel van de cirkel dat het model vond",
             "marked": "200 / 250 = 0,8: het deel van de gemarkeerde pixels dat klopt",
+            "right": "200 / 350, ongeveer 0,57: de vereniging is 300 + 250 − 200 = 350 pixels",
             "sum": "200 / 550, ongeveer 0,36: de overlap gedeeld door de twee masks samen",
         },
         correct="right",

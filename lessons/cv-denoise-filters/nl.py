@@ -37,8 +37,8 @@ def quick_check_difference():
         "quick-difference",
         question="`a` en `b` zijn twee grijswaardenbeelden van uint8. Waarom meet `abs(a.astype(int) - b.astype(int)).mean()` hoe ver ze uit elkaar liggen, en `abs(a - b).mean()` niet?",
         options={
-            "wrap": "uint8 kan niet onder 0: 3 − 5 loopt rond naar 254",
             "abs": "`abs` werkt alleen op gewone gehele getallen",
+            "wrap": "uint8 kan niet onder 0: 3 − 5 loopt rond naar 254",
             "mean": "`.mean()` van uint8 geeft een geheel getal, dus de decimalen gaan verloren",
         },
         correct="wrap",
@@ -58,9 +58,9 @@ def quick_check_feature_map():
         "quick-feature-map",
         question="Een filter van 3 bij 3 schuift over een afbeelding van 6 bij 6 pixels, en blijft binnen de afbeelding. Hoe groot is de feature map?",
         options={
-            "4": "4 bij 4",
             "6": "6 bij 6",
             "3": "3 bij 3",
+            "4": "4 bij 4",
         },
         correct="4",
         why={

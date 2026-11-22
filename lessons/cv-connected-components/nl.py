@@ -37,8 +37,8 @@ def quick_check_queue():
         "quick-queue",
         question="Wat laat dit programma zien?\n\n```python\nfrom collections import deque\nqueue = deque([(0, 0), (0, 1)])\nqueue.append((1, 0))\nprint(queue.popleft())\n```",
         options={
-            "first": "`(0, 0)`",
             "second": "`(0, 1)`",
+            "first": "`(0, 0)`",
             "last": "`(1, 0)`",
         },
         correct="first",
@@ -58,9 +58,9 @@ def quick_check_opening():
         "quick-opening",
         question="Een binair beeld heeft een witte spikkel van 2 bij 2 pixels, ver van elke andere witte pixel. Wat blijft ervan over na een opening met een vierkant van 3 bij 3?",
         options={
-            "nothing": "Niets",
             "one": "Eén pixel",
             "same": "De spikkel, zoals hij was",
+            "nothing": "Niets",
             "bigger": "Een vierkant van 4 bij 4",
         },
         correct="nothing",
