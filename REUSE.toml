@@ -473,6 +473,12 @@ SPDX-FileCopyrightText = "Tatoeba (https://tatoeba.org) and its contributors; th
 SPDX-License-Identifier = "LicenseRef-CC-BY-2.0-FR"
 
 [[annotations]]
+path = "data/wals-word-order.tsv.gz"
+precedence = "override"
+SPDX-FileCopyrightText = "Matthew S. Dryer and Martin Haspelmath (eds.), The World Atlas of Language Structures Online, Max Planck Institute for Evolutionary Anthropology (https://wals.info); four features of version v2020.6, https://doi.org/10.5281/zenodo.23010827, for Everything AI"
+SPDX-License-Identifier = "CC-BY-4.0"
+
+[[annotations]]
 path = "data/banking77-small.json"
 precedence = "override"
 SPDX-FileCopyrightText = "2020 PolyAI (BANKING77, Casanueva and others, https://arxiv.org/abs/2003.04807; a subset made for Everything AI)"

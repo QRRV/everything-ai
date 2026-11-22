@@ -1,0 +1,44 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: nlp-languages-of-the-world
+minutes: 40
+title:
+  en: "About 7,000 languages"
+  nl: "Zo'n 7.000 talen"
+goal:
+  en: "see how many languages there are and how they fall into families, read the order of subject, verb and object off a dependency tree, count those orders in two treebanks, and compare them with the World Atlas of Language Structures."
+  nl: "zien hoeveel talen er zijn en hoe die in families vallen, de volgorde van onderwerp, werkwoord en lijdend voorwerp aflezen uit een dependency tree, die volgordes tellen in twee treebanks, en die vergelijken met de World Atlas of Language Structures."
+summary:
+  - en: "There are about 7,000 languages. How many exactly depends on what counts as a language and what as a dialect: Glottolog counts two ways of speaking as separate languages when their speakers do not understand each other."
+    nl: "Er zijn zo'n 7.000 talen. Hoeveel precies hangt ervan af wat als taal telt en wat als dialect: Glottolog telt twee manieren van spreken als aparte talen als de sprekers elkaar niet verstaan."
+  - en: "Languages that grew out of one ancestor language form a family, such as Indo-European, with Dutch and English in its West Germanic branch; a language without known relatives, such as Basque, is an isolate. Linguistic typology compares languages by how they are built, whether they are related or not."
+    nl: "Talen die zijn voortgekomen uit één vooroudertaal, vormen een familie, zoals het Indo-Europees, met het Nederlands en het Engels in de West-Germaanse tak; een taal zonder bekende verwanten, zoals het Baskisch, is een isolaat. Taaltypologie vergelijkt talen op hun bouw, verwant of niet."
+  - en: "The World Atlas of Language Structures records the dominant order of subject, verb and object for 1,376 languages: the order that is more than twice as common as the next. English is SVO; Dutch has no dominant order, since it puts the verb second in a main clause, and at the end after a subordinating conjunction such as *omdat* or with an auxiliary."
+    nl: "De World Atlas of Language Structures legt voor 1.376 talen de dominante volgorde van onderwerp, werkwoord en lijdend voorwerp vast: de volgorde die meer dan twee keer zo vaak voorkomt als de volgende. Het Engels is SVO; het Nederlands heeft geen dominante volgorde, want het zet het werkwoord in een hoofdzin op de tweede plaats, en aan het eind na een onderschikkend voegwoord zoals *omdat* of bij een hulpwerkwoord."
+  - en: "The tools of NLP cover few languages: Joshi and others put 2,191 of 2,485 languages in the class with the least resources, and 7 in the top class. Name the language your tool is for."
+    nl: "De tools van NLP dekken weinig talen: Joshi en anderen zetten 2.191 van 2.485 talen in de groep met de minste data en hulpmiddelen, en 7 in de hoogste groep. Noem de taal waarvoor je tool is."
+can_now:
+  - en: "read the order of subject, verb and object of a verb off a dependency tree"
+    nl: "de volgorde van onderwerp, werkwoord en lijdend voorwerp van een werkwoord aflezen uit een dependency tree"
+    by: order
+  - en: "count how often each order comes in a treebank"
+    nl: "tellen hoe vaak elke volgorde in een treebank voorkomt"
+    by: count-orders
+  - en: "decide with the rule of WALS whether a language has a dominant order"
+    nl: "met de regel van WALS beslissen of een taal een dominante volgorde heeft"
+    by: dominant
+  - en: "tell a language family and a language type apart"
+    nl: "een taalfamilie en een taaltype uit elkaar houden"
+    by: family-or-type
+further_reading:
+  - en: "Matthew S. Dryer, [*Order of Subject, Object and Verb*](https://wals.info/chapter/81), chapter 81 of *The World Atlas of Language Structures Online*, edited by Matthew S. Dryer and Martin Haspelmath, 2013: the six orders, how a dominant order is decided, and the map"
+    nl: "Matthew S. Dryer, [*Order of Subject, Object and Verb*](https://wals.info/chapter/81), hoofdstuk 81 van *The World Atlas of Language Structures Online*, samengesteld door Matthew S. Dryer en Martin Haspelmath, 2013: de zes volgordes, hoe een dominante volgorde wordt bepaald, en de kaart (in het Engels)"
+  - en: "Pratik Joshi, Sebastin Santy, Amar Budhiraja, Kalika Bali and Monojit Choudhury, [*The State and Fate of Linguistic Diversity and Inclusion in the NLP World*](https://aclanthology.org/2020.acl-main.560/), ACL 2020: six classes of languages by the resources that exist for them"
+    nl: "Pratik Joshi, Sebastin Santy, Amar Budhiraja, Kalika Bali en Monojit Choudhury, [*The State and Fate of Linguistic Diversity and Inclusion in the NLP World*](https://aclanthology.org/2020.acl-main.560/), ACL 2020: zes groepen talen, naar de data en hulpmiddelen die er voor elke taal zijn (in het Engels)"
+  - en: "Emily M. Bender, [*The #BenderRule: On Naming the Languages We Study and Why It Matters*](https://thegradient.pub/the-benderrule-on-naming-the-languages-we-study-and-why-it-matters/), The Gradient, 2019: why to name the language you work on, even when it is English"
+    nl: "Emily M. Bender, [*The #BenderRule: On Naming the Languages We Study and Why It Matters*](https://thegradient.pub/the-benderrule-on-naming-the-languages-we-study-and-why-it-matters/), The Gradient, 2019: waarom je de taal noemt waaraan je werkt, ook als het Engels is (in het Engels)"
+  - en: "Harald Hammarström, Robert Forkel, Martin Haspelmath and Sebastian Bank, [*Glottolog 5.4*](https://glottolog.org), Max Planck Institute for Evolutionary Anthropology, 2026: every language and family, with its place in the tree and its sources"
+    nl: "Harald Hammarström, Robert Forkel, Martin Haspelmath en Sebastian Bank, [*Glottolog 5.4*](https://glottolog.org), Max Planck-instituut voor evolutionaire antropologie, 2026: elke taal en familie, met de plaats in de indeling en de bronnen (in het Engels)"
+  - en: "Daniel Jurafsky and James H. Martin, [*Speech and Language Processing*](https://web.stanford.edu/~jurafsky/slp3/), draft of August 19, 2026, the chapter *Machine Translation*, section 13.1: language divergences and typology"
+    nl: "Daniel Jurafsky en James H. Martin, [*Speech and Language Processing*](https://web.stanford.edu/~jurafsky/slp3/), conceptversie van 19 augustus 2026, het hoofdstuk *Machine Translation*, paragraaf 13.1: verschillen tussen talen en typologie (in het Engels)"

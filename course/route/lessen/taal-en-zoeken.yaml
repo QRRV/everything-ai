@@ -245,7 +245,8 @@ lessons:
   covers: [fonetiek-corpora-en-typologie#6]
   requires: [nlp-word-classes, nlp-dependencies]
   introduces: [c:linguistic-typology]
-  data: []
+  mentions: [c:common-crawl]
+  data: [ud-english-dutch, wals-word-order]
   ladder: [python]
   needs: any
 
