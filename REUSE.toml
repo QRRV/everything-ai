@@ -467,6 +467,12 @@ SPDX-FileCopyrightText = "Lewis Carroll, Jane Austen, Arthur Conan Doyle, Mary W
 SPDX-License-Identifier = "LicenseRef-Public-Domain"
 
 [[annotations]]
+path = "data/tatoeba-nl.tsv.gz"
+precedence = "override"
+SPDX-FileCopyrightText = "Tatoeba (https://tatoeba.org) and its contributors; the Dutch sentences of the export of November 21, 2026, without crude, sexual or violent words, for Everything AI"
+SPDX-License-Identifier = "LicenseRef-CC-BY-2.0-FR"
+
+[[annotations]]
 path = "data/banking77-small.json"
 precedence = "override"
 SPDX-FileCopyrightText = "2020 PolyAI (BANKING77, Casanueva and others, https://arxiv.org/abs/2003.04807; a subset made for Everything AI)"

@@ -1,0 +1,42 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: nlp-zipf-heaps
+minutes: 40
+title:
+  en: "Zipf's law and Heaps' law"
+  nl: "De wet van Zipf en de wet van Heaps"
+goal:
+  en: "count the words of a corpus by rank and see Zipf's law in them, follow how many different words a text holds as it gets longer, and see why that makes language models cut words into subwords."
+  nl: "de woorden van een corpus op rang tellen en de wet van Zipf erin zien, volgen hoeveel verschillende woorden een tekst heeft naarmate die langer wordt, en zien waarom language models daardoor woorden in subwords knippen."
+summary:
+  - en: "Put the different words of a corpus in order from the most to the least common: the place in that list is the rank. Zipf's law says that the count of a word is roughly proportional to 1 over its rank, so rank times count stays roughly the same, and count against rank is roughly a straight line with slope −1 on a log-log plot."
+    nl: "Zet de verschillende woorden van een corpus op volgorde, van het vaakst naar het minst vaak: de plaats in die lijst is de rang. De wet van Zipf zegt dat het aantal van een woord ongeveer omgekeerd evenredig is met de rang, dus rang keer aantal blijft ongeveer gelijk, en aantal tegen rang is op een log-log-plot ongeveer een rechte lijn met helling −1."
+  - en: "A few words take a large part of every text, and most of the different words are rare: in the course's corpora, between about a third and over half of them occur only once, the hapax legomena."
+    nl: "Een paar woorden nemen een groot deel van elke tekst in, en de meeste verschillende woorden zijn zeldzaam: in de corpora van de course komt een derde tot meer dan de helft ervan maar één keer voor, de hapax legomena."
+  - en: "Heaps' law, also called Herdan's law: the number of different words $V$ grows with the length $N$ of a text roughly as $V = k \\cdot N^\\beta$, with $\\beta$ between 0 and 1, often around one half or a little above. New words never stop coming."
+    nl: "De wet van Heaps, ook de wet van Herdan genoemd: het aantal verschillende woorden $V$ groeit met de lengte $N$ van een tekst ongeveer als $V = k \\cdot N^\\beta$, met $\\beta$ tussen 0 en 1, vaak rond een half of iets erboven. Er blijven altijd nieuwe woorden bijkomen."
+  - en: "Because new words keep coming, no list of whole words covers every text, and a model with such a list keeps meeting unknown words. That is one reason why the tokenizers of large language models cut rare words into subwords."
+    nl: "Omdat er steeds nieuwe woorden bijkomen, dekt geen lijst van hele woorden elke tekst, en een model met zo'n lijst komt steeds onbekende woorden tegen. Dat is een van de redenen waarom de tokenizers van large language models zeldzame woorden in subwords knippen."
+can_now:
+  - en: "count the words of a text and put their counts in order of rank"
+    nl: "de woorden van een tekst tellen en de aantallen op volgorde van rang zetten"
+    by: rank-counts
+  - en: "check Zipf's law by multiplying each count by its rank, with NumPy"
+    nl: "de wet van Zipf nagaan door elk aantal met de rang te vermenigvuldigen, met NumPy"
+    by: rank-times-count
+  - en: "follow how many different words a text holds as it gets longer, going through it once"
+    nl: "volgen hoeveel verschillende woorden een tekst heeft naarmate die langer wordt, in één keer door de tekst"
+    by: growth
+  - en: "tell Zipf's law and Heaps' law apart"
+    nl: "de wet van Zipf en de wet van Heaps uit elkaar houden"
+    by: laws
+further_reading:
+  - en: "Daniel Jurafsky and James H. Martin, [*Speech and Language Processing*, chapter 2](https://web.stanford.edu/~jurafsky/slp3/2.pdf), section 2.1, draft of August 19, 2026: words and their instances, Herdan's law or Heaps' law, and why new words are a problem for every model"
+    nl: "Daniel Jurafsky en James H. Martin, [*Speech and Language Processing*, hoofdstuk 2](https://web.stanford.edu/~jurafsky/slp3/2.pdf), paragraaf 2.1, conceptversie van 19 augustus 2026: woorden tellen, de wet van Herdan of Heaps, en waarom nieuwe woorden een probleem zijn voor elk model (in het Engels)"
+  - en: "Christopher D. Manning, Prabhakar Raghavan and Hinrich Schütze, [*Introduction to Information Retrieval*, sections 5.1.1 and 5.1.2](https://nlp.stanford.edu/IR-book/html/htmledition/heaps-law-estimating-the-number-of-terms-1.html), Cambridge University Press, 2008: Heaps' law and Zipf's law on a collection of news stories, and what they mean for a search engine"
+    nl: "Christopher D. Manning, Prabhakar Raghavan en Hinrich Schütze, [*Introduction to Information Retrieval*, paragrafen 5.1.1 en 5.1.2](https://nlp.stanford.edu/IR-book/html/htmledition/heaps-law-estimating-the-number-of-terms-1.html), Cambridge University Press, 2008: de wet van Heaps en de wet van Zipf op een verzameling nieuwsberichten, en wat dat betekent voor een zoekmachine (in het Engels)"
+  - en: "Steven T. Piantadosi, [*Zipf's word frequency law in natural language: A critical review and future directions*](https://doi.org/10.3758/s13423-014-0585-6), Psychonomic Bulletin & Review 21(5), 2014: how well the law fits, where it does not, and the explanations that have been proposed"
+    nl: "Steven T. Piantadosi, [*Zipf's word frequency law in natural language: A critical review and future directions*](https://doi.org/10.3758/s13423-014-0585-6), Psychonomic Bulletin & Review 21(5), 2014: hoe goed de wet past, waar niet, en welke verklaringen er zijn voorgesteld (in het Engels)"
+  - en: "Rico Sennrich, Barry Haddow and Alexandra Birch, [*Neural Machine Translation of Rare Words with Subword Units*](https://aclanthology.org/P16-1162/), ACL 2016: rare words cut into subwords, for a model that translates"
+    nl: "Rico Sennrich, Barry Haddow en Alexandra Birch, [*Neural Machine Translation of Rare Words with Subword Units*](https://aclanthology.org/P16-1162/), ACL 2016: zeldzame woorden in subwords geknipt, voor een model dat vertaalt (in het Engels)"
