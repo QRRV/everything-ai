@@ -1,0 +1,46 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: nlp-language-change
+minutes: 40
+title:
+  en: "Languages meet and change"
+  nl: "Talen ontmoeten elkaar en veranderen"
+goal:
+  en: "see how languages borrow words, how speakers switch languages within a sentence, and how words change in meaning and spelling, and count how three Dutch novels of the 19th century differ from sentences written today."
+  nl: "zien hoe talen woorden lenen, hoe sprekers binnen een zin van taal wisselen, en hoe woorden veranderen in betekenis en spelling, en tellen hoe drie Nederlandse romans uit de 19e eeuw verschillen van zinnen van nu."
+summary:
+  - en: "Languages borrow words from each other: English has *cookie* from Dutch *koekje* and *boss* from *baas*, and Dutch has *trottoir* from French and *weekend* from English. How much of a language is borrowed depends on what you count: different words, or every place where a word occurs."
+    nl: "Talen lenen woorden van elkaar: het Engels heeft *cookie* uit het Nederlandse *koekje* en *boss* uit *baas*, en het Nederlands heeft *trottoir* uit het Frans en *weekend* uit het Engels. Hoeveel van een taal geleend is, hangt af van wat je telt: verschillende woorden, of elke plek waar een woord voorkomt."
+  - en: "People who know two languages often switch between them, even inside a sentence: code-switching, as in *Sometimes I'll start a sentence in Spanish y termino en español*. A tool that gives a whole text one language cannot show where a sentence switches, so give each word a language tag of its own."
+    nl: "Mensen die twee talen kennen, wisselen er vaak tussen, zelfs binnen een zin: code-switching, zoals in *Sometimes I'll start a sentence in Spanish y termino en español*. Een tool die een hele tekst één taal geeft, kan niet laten zien waar een zin wisselt, dus geef elk woord een eigen taaltag."
+  - en: "Words change what they stand for while their form stays, as Dutch *slim* went from crooked to bad to clever and *schoon* from beautiful to clean in the Netherlands. Spelling changes too, often by decision: since the 1940s, Dutch writes *mensen* and *ogen* where the novels write *menschen* and *oogen*."
+    nl: "Woorden gaan voor iets anders staan terwijl de vorm blijft, zoals *slim* van scheef via slecht naar schrander ging, en *schoon* in Nederland van mooi naar rein. Ook de spelling verandert, vaak door een besluit: sinds de jaren 1940 schrijft het Nederlands *mensen* en *ogen* waar de romans *menschen* en *oogen* schrijven."
+  - en: "To compare a word in two corpora of different size, count it per 10,000 words, and count the words that follow it to see its use. Read the numbers with what the corpora are: part of a difference comes from time, and part from who wrote the texts, about what and for whom."
+    nl: "Om een woord in twee corpora van verschillende grootte te vergelijken, tel je het per 10.000 woorden, en je telt de woorden die erna komen om het gebruik te zien. Lees de getallen samen met wat de corpora zijn: een deel van een verschil komt door de tijd, en een deel door wie de teksten schreef, waarover en voor wie."
+can_now:
+  - en: "count where a sentence switches from one language to another"
+    nl: "tellen waar een zin van de ene taal naar de andere wisselt"
+    by: switches
+  - en: "compare how often a word occurs in two corpora of different size, per 10,000 words"
+    nl: "vergelijken hoe vaak een woord voorkomt in twee corpora van verschillende grootte, per 10.000 woorden"
+    by: per-10k
+  - en: "count which words follow a word, to see how its use changed"
+    nl: "tellen welke woorden na een woord komen, om te zien hoe het gebruik veranderde"
+    by: next-words
+  - en: "tell borrowing, code-switching, a change of meaning and a change of spelling apart"
+    nl: "lenen, code-switching, een verandering van betekenis en een verandering van spelling uit elkaar houden"
+    by: borrow-switch-change
+further_reading:
+  - en: "Shana Poplack, [*Sometimes I'll start a sentence in Spanish y termino en español: toward a typology of code-switching*](https://yorkspace.library.yorku.ca/items/e3a64aba-66a6-477a-a47a-cbed51344202/full), Linguistics 18, 1980: the study the title sentence comes from, with three kinds of switches"
+    nl: "Shana Poplack, [*Sometimes I'll start a sentence in Spanish y termino en español: toward a typology of code-switching*](https://yorkspace.library.yorku.ca/items/e3a64aba-66a6-477a-a47a-cbed51344202/full), Linguistics 18, 1980: het onderzoek waar de titelzin vandaan komt, met drie soorten wissels (in het Engels)"
+  - en: "A. Seza Doğruöz and others, [*A Survey of Code-switching: Linguistic and Social Perspectives for Language Technologies*](https://aclanthology.org/2021.acl-long.131/), ACL 2021: what code-switching is, how it differs from borrowing, and what it asks of tools"
+    nl: "A. Seza Doğruöz en anderen, [*A Survey of Code-switching: Linguistic and Social Perspectives for Language Technologies*](https://aclanthology.org/2021.acl-long.131/), ACL 2021: wat code-switching is, hoe het verschilt van lenen, en wat het van tools vraagt (in het Engels)"
+  - en: "William L. Hamilton, Jure Leskovec and Dan Jurafsky, [*Diachronic Word Embeddings Reveal Statistical Laws of Semantic Change*](https://aclanthology.org/P16-1141/), ACL 2016: semantic change measured with embeddings per decade, and two laws"
+    nl: "William L. Hamilton, Jure Leskovec en Dan Jurafsky, [*Diachronic Word Embeddings Reveal Statistical Laws of Semantic Change*](https://aclanthology.org/P16-1141/), ACL 2016: betekenisverandering gemeten met embeddings per decennium, en twee wetten (in het Engels)"
+  - en: "Angeliki Lazaridou and others, [*Mind the Gap: Assessing Temporal Generalization in Neural Language Models*](https://arxiv.org/abs/2102.01951), NeurIPS 2021: how models do on text from after their training data"
+    nl: "Angeliki Lazaridou en anderen, [*Mind the Gap: Assessing Temporal Generalization in Neural Language Models*](https://arxiv.org/abs/2102.01951), NeurIPS 2021: hoe modellen het doen op tekst van na de trainingsdata (in het Engels)"
+  - en: "Nicoline van der Sijs, [the Dutch vocabulary of the World Loanword Database](https://wold.clld.org/vocabulary/12), 2009: 1,513 Dutch words with where each comes from"
+    nl: "Nicoline van der Sijs, [de Nederlandse woordenlijst van de World Loanword Database](https://wold.clld.org/vocabulary/12), 2009: 1.513 Nederlandse woorden met de herkomst van elk woord (in het Engels)"
+  - en: "Daniel Jurafsky and James H. Martin, [*Speech and Language Processing*](https://web.stanford.edu/~jurafsky/slp3/), draft of August 19, 2026, the chapter *Words and Tokens*, section 2.5: code-switching, time and the other ways the text of a corpus varies"
+    nl: "Daniel Jurafsky en James H. Martin, [*Speech and Language Processing*](https://web.stanford.edu/~jurafsky/slp3/), conceptversie van 19 augustus 2026, het hoofdstuk *Words and Tokens*, paragraaf 2.5: code-switching, tijd en de andere manieren waarop de tekst van een corpus verschilt (in het Engels)"
