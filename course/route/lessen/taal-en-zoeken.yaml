@@ -351,11 +351,11 @@ lessons:
   level: basis
   domein: taal
   module: tekst-verwerken
-  idea: "A spelling corrector makes every word within one or two edits of a typo and picks the one that is most frequent in a corpus: the most likely intended word."
+  idea: "A spelling corrector keeps a word that is in its corpus; otherwise it takes the known words one edit away, or two edits away when there are none, and picks the one that is most frequent in the corpus: the most likely intended word."
   covers: [tekstverwerking#5]
   requires: [nlp-edit-distance, nlp-corpora]
-  introduces: [c:spelling-correction]
-  data: [gutenberg-books]
+  introduces: [c:spelling-correction, c:noisy-channel-model]
+  data: [gutenberg-books, tatoeba-sentences]
   ladder: [python]
   needs: any
 

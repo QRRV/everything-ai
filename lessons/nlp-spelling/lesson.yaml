@@ -1,0 +1,44 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: nlp-spelling
+minutes: 45
+title:
+  en: "A spelling corrector"
+  nl: "Een spellingcorrector"
+goal:
+  en: "make every string one edit away from a typo, pick the known word that a corpus uses most, put the two together in a spelling corrector that looks one edit away before two, and see which typos it cannot correct."
+  nl: "elke string op één bewerking van een tikfout maken, het bekende woord kiezen dat een corpus het vaakst gebruikt, de twee samenvoegen tot een spellingcorrector die eerst op één bewerking kijkt en dan op twee, en zien welke tikfouten de corrector niet kan verbeteren."
+summary:
+  - en: "Four kinds of edit make a typo: a deletion, an insertion, a substitution, or a swap of two neighboring letters. A word of n letters has 54n + 25 strings one edit away, with a few repeats, and tens of thousands within two edits; only a few of them are words."
+    nl: "Vier soorten bewerkingen maken een tikfout: weghalen, invoegen, vervangen, of twee buurletters verwisselen. Een woord van n letters heeft 54n + 25 strings op één bewerking, met een paar dubbele, en tienduizenden binnen twee bewerkingen; maar een paar daarvan zijn een woord."
+  - en: "A known word is a word that the corpus contains. Among the known words close to a typo, the corrector picks the most common: the counts of the corpus are its language model, the chance that a word is meant at all."
+    nl: "Een bekend woord is een woord dat in het corpus staat. Van de bekende woorden dicht bij een tikfout kiest de corrector het woord dat het vaakst voorkomt: de aantallen van het corpus zijn het language model, de kans dat een woord überhaupt bedoeld is."
+  - en: "Norvig's corrector keeps a word that the corpus contains; otherwise it takes the known words one edit away, or two edits away when there are none. That shortcut stands in for an error model, which would say how likely each typo is; the noisy channel model of Kernighan, Church and Gale counts both."
+    nl: "De corrector van Norvig houdt een woord dat in het corpus staat; anders neemt de corrector de bekende woorden op één bewerking, of op twee bewerkingen als er op één geen bekend woord ligt. Die kortere weg vervangt een error model, dat zou zeggen hoe waarschijnlijk elke tikfout is; het noisy channel model van Kernighan, Church en Gale telt allebei."
+  - en: "A corrector that looks at one word at a time cannot catch a typo that is a word itself, such as *form* for *from*, and it picks the common word where the sentence asks for a rarer one. Words that the corpus lacks, such as names, get changed, and old books suggest old spellings."
+    nl: "Een corrector die één woord tegelijk bekijkt, ziet geen tikfout die zelf een woord is, zoals een d/t-fout, en kiest het gewone woord waar de zin om een zeldzamer woord vraagt. Woorden die het corpus mist, zoals namen, worden veranderd, en oude boeken stellen oude spellingen voor."
+can_now:
+  - en: "make every string one edit away from a word, and keep the ones that are words in a corpus"
+    nl: "elke string op één bewerking van een woord maken, en de strings overhouden die een woord in een corpus zijn"
+    by: near-words
+  - en: "pick the word of a list that occurs most often in a corpus"
+    nl: "het woord uit een lijst kiezen dat het vaakst in een corpus voorkomt"
+    by: most-common
+  - en: "build a spelling corrector that keeps known words and looks one edit away before two"
+    nl: "een spellingcorrector bouwen die bekende woorden houdt en eerst op één bewerking kijkt en dan op twee"
+    by: correct
+  - en: "say what such a corrector does with a typo, and why it misses typos that are words"
+    nl: "zeggen wat zo'n corrector met een tikfout doet, en waarom de corrector tikfouten mist die een woord zijn"
+    by: what-happens
+further_reading:
+  - en: "Peter Norvig, [*How to Write a Spelling Corrector*](https://norvig.com/spell-correct.html), essay of 2007, updated until August 2016: the corrector of this lesson, how well it does, and how to do better"
+    nl: "Peter Norvig, [*How to Write a Spelling Corrector*](https://norvig.com/spell-correct.html), essay uit 2007, bijgewerkt tot augustus 2016: de corrector van deze les, hoe goed de corrector werkt, en hoe het beter kan (in het Engels)"
+  - en: "Peter Norvig, [*Natural Language Corpus Data*](https://norvig.com/ngrams/ch14.pdf), chapter 14 of *Beautiful Data*, O'Reilly, 2009, the author's copy: spelling correction with an error model, and corpora full of typos"
+    nl: "Peter Norvig, [*Natural Language Corpus Data*](https://norvig.com/ngrams/ch14.pdf), hoofdstuk 14 van *Beautiful Data*, O'Reilly, 2009, de versie van de auteur: spellingcorrectie met een error model, en corpora vol tikfouten (in het Engels)"
+  - en: "Daniel Jurafsky and James H. Martin, [*Speech and Language Processing*, appendix D](https://web.stanford.edu/~jurafsky/slp3/D.pdf), draft of August 19, 2026: the noisy channel model for spelling, and real-word errors"
+    nl: "Daniel Jurafsky en James H. Martin, [*Speech and Language Processing*, bijlage D](https://web.stanford.edu/~jurafsky/slp3/D.pdf), conceptversie van 19 augustus 2026: het noisy channel model voor spelling, en real-word errors (in het Engels)"
+  - en: "Mark D. Kernighan, Kenneth W. Church and William A. Gale, [*A Spelling Correction Program Based on a Noisy Channel Model*](https://aclanthology.org/C90-2036/), COLING 1990: counts of letter confusions, and how often frequency alone picks right"
+    nl: "Mark D. Kernighan, Kenneth W. Church en William A. Gale, [*A Spelling Correction Program Based on a Noisy Channel Model*](https://aclanthology.org/C90-2036/), COLING 1990: aantallen van verwarde letters, en hoe vaak alleen de frequentie goed kiest (in het Engels)"
+  - en: "Christopher D. Manning, Prabhakar Raghavan and Hinrich Schütze, [*Introduction to Information Retrieval*](https://nlp.stanford.edu/IR-book/), Cambridge University Press, 2008, section 3.3: spelling correction in a search engine, with context"
+    nl: "Christopher D. Manning, Prabhakar Raghavan en Hinrich Schütze, [*Introduction to Information Retrieval*](https://nlp.stanford.edu/IR-book/), Cambridge University Press, 2008, paragraaf 3.3: spellingcorrectie in een zoekmachine, met context (in het Engels)"
