@@ -1,0 +1,42 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: nlp-sounds
+minutes: 40
+title:
+  en: "Sounds, phonemes and IPA"
+  nl: "Klanken, fonemen en IPA"
+goal:
+  en: "see how speech sounds are written down and which differences count in a language, and test minimal pairs and the Dutch rule of final devoicing in code."
+  nl: "zien hoe je spraakklanken opschrijft en welke verschillen in een taal tellen, en minimale paren en de Nederlandse regel van finale verscherping in code testen."
+summary:
+  - en: "Phonetics studies speech sounds: how they are made, carried and heard. Phonology studies what a language does with its sounds: which differences count, and the rules sounds follow. Letters are a poor guide to sounds: the *c* of *cell* and of *cougar* are two sounds, and Dutch *hond* is written with a d and ends in a t-sound."
+    nl: "Fonetiek bestudeert spraakklanken: hoe een klank gemaakt wordt, als geluid reist en gehoord wordt. Fonologie bestudeert wat een taal met klanken doet: welke verschillen tellen, en welke regels klanken volgen. Letters zijn een slechte gids voor klanken: de *c* van *cell* en van *cougar* zijn twee klanken, en *hond* schrijf je met een d, terwijl het woord op een t-klank eindigt."
+  - en: "A phoneme is a sound that can change a word in a language, written between slashes: /p/. A minimal pair, such as *pat* and *bat* or *pak* and *bak*, differs in one sound in the same place, and shows that two sounds are different phonemes. Allophones are sounds that count as one phoneme, such as the two i's of *bier* and *biet*."
+    nl: "Een foneem is een klank die in een taal een woord kan veranderen, tussen schuine strepen geschreven: /p/. Een minimaal paar, zoals *pak* en *bak*, verschilt in één klank op dezelfde plaats, en laat zien dat twee klanken verschillende fonemen zijn. Allofonen zijn klanken die als één foneem tellen, zoals de twee i's van *bier* en *biet*."
+  - en: "The International Phonetic Alphabet (IPA), drawn up in 1888, writes each sound with one symbol as far as possible, for any language; a speech sound goes between square brackets. Speech technology keeps pronunciation dictionaries, such as the CMU Pronouncing Dictionary in the ARPAbet, or WikiPron, collected from Wiktionary."
+    nl: "Het Internationaal Fonetisch Alfabet (IPA), opgesteld in 1888, schrijft elke klank zo veel mogelijk met één teken, voor elke taal; een spraakklank staat tussen rechte haken. Spraaktechnologie gebruikt uitspraakwoordenboeken, zoals het CMU Pronouncing Dictionary in het ARPAbet, of WikiPron, verzameld uit Wiktionary."
+  - en: "Final devoicing makes a voiced obstruent of Dutch, such as b, d, v, z or ɣ, voiceless at the end of a syllable: *hond* sounds like *hont*, while *honden* keeps its d. Dutch spelling keeps the b, the d and the g (the letter for ɣ), and writes f and s for v and z. English keeps *bad* and *bat* apart; the German of Germany has the rule too."
+    nl: "Finale verscherping maakt een stemhebbende obstruent van het Nederlands, zoals b, d, v, z of ɣ, stemloos aan het eind van een lettergreep: *hond* klinkt als *hont*, terwijl *honden* de d houdt. De spelling houdt de b, de d en de g (de letter voor ɣ), en schrijft f en s voor v en z. Het Engels houdt *bad* en *bat* uit elkaar; het Duits in Duitsland kent de regel ook."
+can_now:
+  - en: "tell from two lists of sounds whether two words form a minimal pair"
+    nl: "aan twee lijsten klanken zien of twee woorden een minimaal paar vormen"
+    by: minimal_pair
+  - en: "write the Dutch rule of final devoicing as a function on a list of sounds"
+    nl: "de Nederlandse regel van finale verscherping schrijven als functie op een lijst klanken"
+    by: devoice
+  - en: "tell phonetics, phonology and spelling apart"
+    nl: "fonetiek, fonologie en spelling uit elkaar houden"
+    by: fields
+  - en: "explain why two different sounds can count as one phoneme"
+    nl: "uitleggen waarom twee verschillende klanken als één foneem kunnen tellen"
+    by: allophone
+further_reading:
+  - en: "Daniel Jurafsky and James H. Martin, [*Speech and Language Processing*, chapter 15](https://web.stanford.edu/~jurafsky/slp3/15.pdf), draft of August 19, 2026: phones, the IPA and the ARPAbet, pronunciation dictionaries, and how speech is turned into features"
+    nl: "Daniel Jurafsky en James H. Martin, [*Speech and Language Processing*, hoofdstuk 15](https://web.stanford.edu/~jurafsky/slp3/15.pdf), conceptversie van 19 augustus 2026: spraakklanken, het IPA en het ARPAbet, uitspraakwoordenboeken, en hoe spraak in features wordt omgezet (in het Engels)"
+  - en: "International Phonetic Association, [the IPA chart](https://www.internationalphoneticassociation.org/content/ipa-chart), revised to 2015, issue of 2026, free under CC BY-SA 4.0: every symbol of the alphabet on one page"
+    nl: "International Phonetic Association, [de IPA-kaart](https://www.internationalphoneticassociation.org/content/ipa-chart), herzien tot 2015, uitgave van 2026, vrij onder CC BY-SA 4.0: alle tekens van het alfabet op één pagina"
+  - en: "Geert Booij, [*Finale Verscherping*](https://e-ans.ivdnt.org/topics/pid/topic-15989590973738881), section 1.3.1 of the e-ANS, version 3.0, September 2020: the Dutch rule with its pairs and examples (in Dutch)"
+    nl: "Geert Booij, [*Finale Verscherping*](https://e-ans.ivdnt.org/topics/pid/topic-15989590973738881), paragraaf 1.3.1 van de e-ANS, versie 3.0, september 2020: de Nederlandse regel met de paren en voorbeelden"
+  - en: "Ian Maddieson, [*Consonant Inventories*](https://wals.info/chapter/1), chapter 1 of the World Atlas of Language Structures Online, 2013: how many consonants languages have, from 6 to 122"
+    nl: "Ian Maddieson, [*Consonant Inventories*](https://wals.info/chapter/1), hoofdstuk 1 van de World Atlas of Language Structures Online, 2013: hoeveel medeklinkers talen hebben, van 6 tot 122 (in het Engels)"
