@@ -1,0 +1,42 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: nlp-edit-distance
+minutes: 45
+title:
+  en: "How far apart are two words? Edit distance"
+  nl: "Hoe ver liggen twee woorden uit elkaar? Edit distance"
+goal:
+  en: "count the edits of an alignment, compute the edit distance between two words with a table of smaller problems, and see that the same count over words measures speech recognition."
+  nl: "de bewerkingen van een alignment tellen, de edit distance tussen twee woorden uitrekenen met een tabel van kleinere problemen, en zien dat dezelfde telling over woorden spraakherkenning meet."
+summary:
+  - en: "The edit distance between two strings is the smallest number of edits that turn one into the other: insertions, deletions and substitutions of one letter. *phone* and *power* are three apart. With every edit at cost 1, it is the Levenshtein distance; some books give a substitution the cost 2."
+    nl: "De edit distance tussen twee strings is het kleinste aantal bewerkingen dat de ene in de andere verandert: een letter invoegen, weghalen of vervangen. *phone* en *power* liggen drie uit elkaar. Als elke bewerking 1 kost, is het de Levenshtein distance; sommige boeken laten vervangen 2 kosten."
+  - en: "An alignment writes one string above the other, with a gap where a letter has no partner; each alignment has its number of edits, and the edit distance is the smallest. Two words have far too many alignments to try them all."
+    nl: "Een alignment zet de ene string boven de andere, met een gat waar een letter geen partner heeft; elke alignment heeft een aantal bewerkingen, en de edit distance is het kleinste. Twee woorden hebben veel te veel alignments om allemaal te proberen."
+  - en: "Dynamic programming fills a table of smaller problems: the cell in row i and column j holds the distance between the first i letters of one word and the first j letters of the other, the cheapest of three ways in: from the cell above, from the left, or from up and to the left. Going back from the last cell finds the edits."
+    nl: "Dynamic programming vult een tabel met kleinere problemen: de cel in rij i en kolom j bevat de afstand tussen de eerste i letters van het ene woord en de eerste j letters van het andere, de goedkoopste van drie wegen: vanuit de cel erboven, links, of linksboven. Teruggaan vanuit de laatste cel geeft de bewerkingen."
+  - en: "The table grows with the product of the lengths of the two strings. The same count over words gives the word error rate of speech recognition, and a swap of two neighboring letters costs two edits unless the distance counts it as one."
+    nl: "De tabel groeit met het product van de lengtes van de twee strings. Dezelfde telling over woorden geeft de word error rate van spraakherkenning, en een verwisseling van twee buurletters kost twee bewerkingen, tenzij de afstand een verwisseling als één telt."
+can_now:
+  - en: "count the insertions, deletions and substitutions in an alignment of two strings"
+    nl: "tellen hoe vaak een alignment van twee strings invoegt, weghaalt en vervangt"
+    by: count-edits
+  - en: "make the start of the table of edit distances in a NumPy array"
+    nl: "het begin van de tabel met edit distances maken in een NumPy-array"
+    by: start-table
+  - en: "compute the edit distance between two words, or two lists of words, with dynamic programming"
+    nl: "de edit distance tussen twee woorden, of twee lijsten woorden, uitrekenen met dynamic programming"
+    by: edit-distance
+  - en: "work out small edit distances in your head, and say what accents, capitals and swapped letters cost"
+    nl: "kleine edit distances uit je hoofd uitrekenen, en zeggen wat accenten, hoofdletters en verwisselde letters kosten"
+    by: how-many-edits
+further_reading:
+  - en: "Daniel Jurafsky and James H. Martin, [*Speech and Language Processing*, chapter 2](https://web.stanford.edu/~jurafsky/slp3/2.pdf), section 2.9, draft of August 19, 2026: minimum edit distance, the table and the backtrace; and [appendix D](https://web.stanford.edu/~jurafsky/slp3/D.pdf), on spelling correction and transpositions"
+    nl: "Daniel Jurafsky en James H. Martin, [*Speech and Language Processing*, hoofdstuk 2](https://web.stanford.edu/~jurafsky/slp3/2.pdf), paragraaf 2.9, conceptversie van 19 augustus 2026: minimum edit distance, de tabel en de backtrace; en [bijlage D](https://web.stanford.edu/~jurafsky/slp3/D.pdf), over spellingcorrectie en verwisselingen (in het Engels)"
+  - en: "Christopher D. Manning, Prabhakar Raghavan and Hinrich Schütze, [*Introduction to Information Retrieval*](https://nlp.stanford.edu/IR-book/), Cambridge University Press, 2008, section 3.3.3: edit distance, weights for the keyboard, and spelling correction in a search engine"
+    nl: "Christopher D. Manning, Prabhakar Raghavan en Hinrich Schütze, [*Introduction to Information Retrieval*](https://nlp.stanford.edu/IR-book/), Cambridge University Press, 2008, paragraaf 3.3.3: edit distance, kosten die afhangen van het toetsenbord, en spellingcorrectie in een zoekmachine (in het Engels)"
+  - en: "Gonzalo Navarro, [*A guided tour to approximate string matching*](https://users.dcc.uchile.cl/~gnavarro/ps/acmcs01.1.pdf), ACM Computing Surveys, 2001, the author's copy: edit distance, its variants, and the many people who found the table"
+    nl: "Gonzalo Navarro, [*A guided tour to approximate string matching*](https://users.dcc.uchile.cl/~gnavarro/ps/acmcs01.1.pdf), ACM Computing Surveys, 2001, de versie van de auteur: edit distance, de varianten ervan, en de vele mensen die de tabel vonden (in het Engels)"
+  - en: "Stuart Dreyfus, [*Richard Bellman on the birth of dynamic programming*](https://doi.org/10.1287/opre.50.1.48.17791), Operations Research, 2002: Bellman's own account of the name, from the autobiography *Eye of the Hurricane*"
+    nl: "Stuart Dreyfus, [*Richard Bellman on the birth of dynamic programming*](https://doi.org/10.1287/opre.50.1.48.17791), Operations Research, 2002: hoe Bellman zelf de naam verklaart, uit de autobiografie *Eye of the Hurricane* (in het Engels)"
