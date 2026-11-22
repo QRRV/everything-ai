@@ -1,0 +1,42 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: nlp-discourse
+minutes: 40
+title:
+  en: "A text is more than its sentences"
+  nl: "Een tekst is meer dan losse zinnen"
+goal:
+  en: "see what holds a text together beyond its sentences, and count in code the words neighbors share and which mentions are new or old."
+  nl: "zien wat een tekst bij elkaar houdt voorbij de losse zinnen, en in code tellen welke woorden buren delen en welke mentions nieuw of oud zijn."
+summary:
+  - en: "A discourse is a coherent, structured group of sentences, such as a story or a report. Coherence is how its sentences hang together in meaning: a reader sees why each one follows. A relation such as a reason or a contrast is often left unsaid; a connective such as *because* says it."
+    nl: "Een discourse is een samenhangende, gestructureerde groep zinnen, zoals een verhaal of een verslag. Coherentie is hoe de zinnen in betekenis samenhangen: een lezer ziet waarom elke zin volgt. Een verband zoals een reden of een tegenstelling blijft vaak onuitgesproken; een signaalwoord zoals *omdat* maakt het verband zichtbaar."
+  - en: "Cohesion consists of the ties that show in the words: words that point back, words that take another's place or are left out, connectives, and lexical cohesion, the same or related words in nearby sentences. Cohesion is not coherence: two sentences can share a word and still not hang together."
+    nl: "Cohesie bestaat uit de banden die je aan de woorden ziet: woorden die terugverwijzen, woorden die de plaats van een ander innemen of weggelaten worden, signaalwoorden, en lexicale cohesie, dezelfde of verwante woorden in zinnen die dicht bij elkaar staan. Cohesie is geen coherentie: twee zinnen kunnen een woord delen en toch niet samenhangen."
+  - en: "Counting the words that neighboring sentences share shows where a text stays with its topic, and where the topic may change. A coherent text tends to come back to the same things."
+    nl: "Tellen hoeveel woorden naburige zinnen delen, laat zien waar een tekst bij het onderwerp blijft, en waar het onderwerp misschien wisselt. Een coherente tekst komt vaak terug op dezelfde dingen."
+  - en: "Each mention of a thing is new or old in the text: *a storm* brings a storm in, *the storm* picks it up. Information structure is the order within a sentence: it tends to run from old to new. In Haviland and Clark's experiment, readers took longer when they had to infer what *the beer* referred to."
+    nl: "Elke mention van een ding is nieuw of oud in de tekst: *een storm* brengt een storm binnen, *de storm* pakt die storm weer op. Informatiestructuur is de volgorde binnen een zin: de volgorde loopt vaak van oud naar nieuw. In het experiment van Haviland en Clark deden lezers er langer over als ze moesten afleiden waar *het bier* naar verwees."
+can_now:
+  - en: "count the different words two sentences share, and see where the count drops"
+    nl: "de verschillende woorden tellen die twee zinnen delen, en zien waar dat aantal zakt"
+    by: overlap
+  - en: "mark each mention in a text as new or old"
+    nl: "elke mention in een tekst als nieuw of oud markeren"
+    by: status
+  - en: "tell a reference, a connective and a repeated or related word apart as ties between sentences"
+    nl: "een verwijzing, een signaalwoord en een herhaald of verwant woord uit elkaar houden als banden tussen zinnen"
+    by: ties
+  - en: "see that a shared word is no guarantee that two sentences hang together"
+    nl: "zien dat een gedeeld woord geen garantie is dat twee zinnen samenhangen"
+    by: bank
+further_reading:
+  - en: "Daniel Jurafsky and James H. Martin, [*Speech and Language Processing*, chapter 25](https://web.stanford.edu/~jurafsky/slp3/25.pdf), draft of August 19, 2026: coherence relations, Rhetorical Structure Theory, the Penn Discourse Treebank, centering and the entity grid"
+    nl: "Daniel Jurafsky en James H. Martin, [*Speech and Language Processing*, hoofdstuk 25](https://web.stanford.edu/~jurafsky/slp3/25.pdf), conceptversie van 19 augustus 2026: coherentierelaties, Rhetorical Structure Theory, de Penn Discourse Treebank, centering en het entity grid (in het Engels)"
+  - en: "Susan Haviland and Herbert Clark, [*What's New? Acquiring New Information as a Process in Comprehension*](https://web.stanford.edu/~clark/1970s/Haviland,%20S.E.%20_%20Clark,%20H.H.%20_What's%20new_%20Acquiring%20new%20information%20as%20a%20process%20in%20comprehension_%201974.pdf), Journal of Verbal Learning and Verbal Behavior 13, 1974: the beer experiment and the given-new strategy"
+    nl: "Susan Haviland en Herbert Clark, [*What's New? Acquiring New Information as a Process in Comprehension*](https://web.stanford.edu/~clark/1970s/Haviland,%20S.E.%20_%20Clark,%20H.H.%20_What's%20new_%20Acquiring%20new%20information%20as%20a%20process%20in%20comprehension_%201974.pdf), Journal of Verbal Learning and Verbal Behavior 13, 1974: het experiment met het bier en de strategie van gegeven en nieuw (in het Engels)"
+  - en: "Regina Barzilay and Mirella Lapata, [*Modeling Local Coherence: An Entity-Based Approach*](https://aclanthology.org/J08-1001/), Computational Linguistics 34(1), 2008: the entity grid and the test with shuffled texts"
+    nl: "Regina Barzilay en Mirella Lapata, [*Modeling Local Coherence: An Entity-Based Approach*](https://aclanthology.org/J08-1001/), Computational Linguistics 34(1), 2008: het entity grid en de test met teksten door elkaar (in het Engels)"
+  - en: "Marti Hearst, [*TextTiling: Segmenting Text into Multi-paragraph Subtopic Passages*](https://aclanthology.org/J97-1003/), Computational Linguistics 23(1), 1997: shared words between blocks of sentences, to find where a text changes subtopic"
+    nl: "Marti Hearst, [*TextTiling: Segmenting Text into Multi-paragraph Subtopic Passages*](https://aclanthology.org/J97-1003/), Computational Linguistics 23(1), 1997: gedeelde woorden tussen blokken zinnen, om te vinden waar een tekst van deelonderwerp wisselt (in het Engels)"
