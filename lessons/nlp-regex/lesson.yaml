@@ -1,0 +1,44 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: nlp-regex
+minutes: 45
+title:
+  en: "Finding patterns: regular expressions"
+  nl: "Patronen vinden: reguliere expressies"
+goal:
+  en: "write regular expressions with character classes, repetition, anchors and groups, find every match in a text with Python's re, and count what a pattern finds and misses in real sentences."
+  nl: "reguliere expressies schrijven met tekensets, herhaling, ankers en groepen, elke match in een tekst vinden met re van Python, en tellen wat een patroon vindt en mist in echte zinnen."
+summary:
+  - en: "A regular expression is a pattern that describes a set of strings. A character class such as `[A-Z]` matches one character out of a set, repetition such as `+` or `{3}` says how often the piece before it comes, an anchor such as `^`, `$` or `\\b` matches a place, and a group between parentheses takes out a part."
+    nl: "Een reguliere expressie is een patroon dat een verzameling strings beschrijft. Een tekenset zoals `[A-Z]` matcht één teken uit een set, een herhaling zoals `+` of `{3}` zegt hoe vaak het stuk ervoor komt, een anker zoals `^`, `$` of `\\b` matcht een plaats, en een groep tussen haakjes haalt een deel eruit."
+  - en: "In Python, `re.search` gives the first match or `None`, and `re.findall` gives every match as a list, or a list of tuples when the pattern has more than one group. Write patterns as raw strings, `r\"...\"`: in a normal string, Python reads `\\b` as a backspace before `re` sees it."
+    nl: "In Python geeft `re.search` de eerste match of `None`, en `re.findall` elke match als lijst, of als lijst met tuples als het patroon meer dan één groep heeft. Schrijf patronen als raw strings, `r\"...\"`: in een gewone string leest Python `\\b` als een backspace, nog voordat `re` het ziet."
+  - en: "A pattern finds the form of a text, not what it stands for. It makes two kinds of mistakes: false positives, matches that should not be there, and false negatives, pieces of text it misses. Fewer false positives means more precision, fewer false negatives more recall."
+    nl: "Een patroon vindt de vorm van een tekst, niet waar die voor staat. Het maakt twee soorten fouten: false positives, matches die er niet horen, en false negatives, stukken tekst die het mist. Minder false positives betekent meer precision, minder false negatives meer recall."
+  - en: "Regular expressions go back to the regular events of Stephen Kleene, in 1951; Ken Thompson built them into editors, and grep is named after the command `g/re/p` of the editor ed. A pattern whose repetitions can match the same characters can take very long: in 2019, such a pattern in one rule exhausted the processors of Cloudflare's network, and its service was down for 27 minutes."
+    nl: "Reguliere expressies gaan terug op de regular events van Stephen Kleene, in 1951; Ken Thompson bouwde die in editors in, en grep is genoemd naar het commando `g/re/p` van de editor ed. Een patroon waarvan de herhalingen dezelfde tekens kunnen matchen, kan heel lang duren: in 2019 putte zo'n patroon in één regel de processors van het netwerk van Cloudflare uit, en lag de dienst 27 minuten plat."
+can_now:
+  - en: "find every number of exactly four digits in a text with re.findall and word boundaries"
+    nl: "elk getal van precies vier cijfers in een tekst vinden met re.findall en woordgrenzen"
+    by: four-digits
+  - en: "check whether a whole string has a form, such as a Dutch postcode, with re.search and anchors"
+    nl: "controleren of een hele string een vorm heeft, zoals een Nederlandse postcode, met re.search en ankers"
+    by: is-postcode
+  - en: "take the parts you want out of each match, such as hours and minutes, with groups"
+    nl: "de delen die je wilt uit elke match halen, zoals uren en minuten, met groepen"
+    by: clock-times
+  - en: "tell when a plain `in`, re.search or re.findall fits a task, and when a pattern is not enough"
+    nl: "zeggen wanneer een gewone `in`, re.search of re.findall bij een taak past, en wanneer een patroon niet genoeg is"
+    by: which-tool
+further_reading:
+  - en: "Daniel Jurafsky and James H. Martin, [*Speech and Language Processing*](https://web.stanford.edu/~jurafsky/slp3/), draft of August 19, 2026, the chapter *Words and Tokens*, section 2.6: regular expressions, from the Kleene star to false positives and the pattern of GPT-2"
+    nl: "Daniel Jurafsky en James H. Martin, [*Speech and Language Processing*](https://web.stanford.edu/~jurafsky/slp3/), conceptversie van 19 augustus 2026, het hoofdstuk *Words and Tokens*, paragraaf 2.6: reguliere expressies, van de Kleene star tot false positives en het patroon van GPT-2 (in het Engels)"
+  - en: "A. M. Kuchling, [*Regular Expression HOWTO*](https://docs.python.org/3.13/howto/regex.html), in the Python documentation: patterns and the module re, step by step"
+    nl: "A. M. Kuchling, [*Regular Expression HOWTO*](https://docs.python.org/3.13/howto/regex.html), in de documentatie van Python: patronen en de module re, stap voor stap (in het Engels)"
+  - en: "Ken Thompson, [*Regular expression search algorithm*](https://doi.org/10.1145/363347.363387), Communications of the ACM, 1968: a compiler that turns a regular expression into a program that searches text"
+    nl: "Ken Thompson, [*Regular expression search algorithm*](https://doi.org/10.1145/363347.363387), Communications of the ACM, 1968: een compiler die van een reguliere expressie een programma maakt dat tekst doorzoekt (in het Engels)"
+  - en: "S. C. Kleene, [*Representation of Events in Nerve Nets and Finite Automata*](https://www.rand.org/pubs/research_memoranda/RM704.html), RAND, 1951: the memorandum of the regular events"
+    nl: "S. C. Kleene, [*Representation of Events in Nerve Nets and Finite Automata*](https://www.rand.org/pubs/research_memoranda/RM704.html), RAND, 1951: het memorandum van de regular events (in het Engels)"
+  - en: "John Graham-Cumming, [*Details of the Cloudflare outage on July 2, 2019*](https://blog.cloudflare.com/details-of-the-cloudflare-outage-on-july-2-2019/), Cloudflare's blog: how one regular expression took a network down, and why it backtracked"
+    nl: "John Graham-Cumming, [*Details of the Cloudflare outage on July 2, 2019*](https://blog.cloudflare.com/details-of-the-cloudflare-outage-on-july-2-2019/), het blog van Cloudflare: hoe één reguliere expressie een netwerk platlegde, en waarom die zo lang zocht (in het Engels)"

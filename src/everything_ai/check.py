@@ -563,10 +563,18 @@ _PRINT_LAST = {
 }
 
 
+def _parse(text: str) -> ast.Module:
+    """The learner's code as a tree, without Python's own warnings while it reads it, such as one for a backslash in a
+    string that is not a raw string: those are in English, and the check says it in plain words itself."""
+    with warnings.catch_warnings():
+        warnings.simplefilter("ignore", SyntaxWarning)
+        return ast.parse(text)
+
+
 def uses_loop(text: str) -> bool:
     """The code has a loop of its own: `for`, `while` or a comprehension. Comments and strings do not count."""
     try:
-        tree = ast.parse(text)
+        tree = _parse(text)
     except SyntaxError:
         return False
     return any(isinstance(n, (ast.For, ast.While, ast.comprehension)) for n in ast.walk(tree))
@@ -1096,7 +1104,7 @@ def handed_out(value) -> Text:
 def calls_itself(text: str, name: str) -> bool:
     """The function `name` in this code calls itself somewhere in its body."""
     try:
-        tree = ast.parse(text)
+        tree = _parse(text)
     except SyntaxError:
         return False
     for node in ast.walk(tree):
@@ -1109,7 +1117,7 @@ def calls_itself(text: str, name: str) -> bool:
 def _skeleton_def(text: str, name: str) -> bool:
     """The box still has the function `name` with only `...` in its body."""
     try:
-        tree = ast.parse(text)
+        tree = _parse(text)
     except SyntaxError:
         return False
     for node in tree.body:
@@ -1583,7 +1591,7 @@ def _set_value(code: str, name: str, value: str) -> str:
     first = code.count("\n", 0, m.start())
     last = first
     try:
-        for node in ast.walk(ast.parse(code)):
+        for node in ast.walk(_parse(code)):
             if isinstance(node, ast.Assign) and node.lineno - 1 == first and node.col_offset == len(m.group(1)):
                 last = node.end_lineno - 1
                 break

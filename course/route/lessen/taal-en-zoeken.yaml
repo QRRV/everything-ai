@@ -288,7 +288,7 @@ lessons:
   covers: [tekstverwerking#1]
   requires: [nlp-what-is-nlp]
   introduces: [c:regular-expression, py:re-search, py:re-findall, py:raw-string]
-  data: []
+  data: [tatoeba-sentences]
   ladder: [python]
   needs: any
 
