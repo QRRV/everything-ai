@@ -1,0 +1,44 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: nlp-language-id
+minutes: 45
+title:
+  en: "Which language is this?"
+  nl: "Welke taal is dit?"
+goal:
+  en: "cut a text into runs of three characters, measure how far the profile of a text lies from the profile of each of twelve languages, give the nearest language or \"?\", and see which texts that program gets wrong."
+  nl: "een tekst in rijtjes van drie tekens knippen, meten hoe ver het profiel van een tekst van het profiel van elk van twaalf talen ligt, de dichtstbijzijnde taal of \"?\" teruggeven, en zien bij welke teksten dat programma fout gaat."
+summary:
+  - en: "Language identification works out which language a text is written in. Every language has letter sequences of its own: *␣th* and *the* in English, *␣de* and *en␣* in Dutch, *ich* and *sch* in German. A character n-gram is a run of n characters of a text, spaces included; with a space before and after the text, the n-grams also show where words start and end."
+    nl: "Language identification bepaalt in welke taal een tekst geschreven is. Elke taal heeft eigen lettervolgordes: *␣th* en *the* in het Engels, *␣de* en *en␣* in het Nederlands, *ich* en *sch* in het Duits. Een character n-gram is een rijtje van n tekens uit een tekst, spaties meegeteld; met een spatie voor en achter de tekst laten de n-grams ook zien waar woorden beginnen en eindigen."
+  - en: "A profile ranks the most common n-grams of a language or a text: 0 for the most common, then 1, and so on. Cavnar and Trenkle's out-of-place measure adds, for each n-gram of the text, how far its rank lies from its rank in the language, and a fixed maximum when the language lacks it; this lesson takes the size of the language's profile as that maximum, and divides the sum by the most it can be, which gives a distance between 0 and 1."
+    nl: "Een profiel zet de vaakste n-grams van een taal of een tekst op volgorde: rang 0 voor de vaakste, dan 1, enzovoort. De out-of-place-maat van Cavnar en Trenkle telt voor elk n-gram van de tekst op hoe ver de rang ligt van de rang in de taal, en een vast maximum als de taal het n-gram mist; deze les neemt de grootte van het profiel van de taal als dat maximum, en deelt de som door het hoogste dat de som kan zijn, wat een afstand tussen 0 en 1 geeft."
+  - en: "The nearest profile always wins, even for a line of HTML or a sentence in another alphabet. A limit on the distance lets the program answer \"?\" instead: the easiest way to say *none of these*, according to the survey of Jauhiainen and colleagues."
+    nl: "Het dichtstbijzijnde profiel wint altijd, ook voor een regel HTML of een zin in een ander alfabet. Een grens op de afstand laat het programma in plaats daarvan \"?\" antwoorden: de eenvoudigste manier om *geen van deze* te zeggen, volgens het overzicht van Jauhiainen en collega's."
+  - en: "Short texts and closely related languages are hard: on sentences of about 30 characters the program of this lesson gets 83.4% right, on texts of five sentences 95.4%. A language that is not among the profiles gets the nearest one, and web corpora built with language identification hold much text that is not language at all."
+    nl: "Korte teksten en nauw verwante talen zijn lastig: op zinnen van ongeveer 30 tekens heeft het programma van deze les 83,4% goed, op teksten van vijf zinnen 95,4%. Een taal die niet bij de profielen hoort, krijgt het dichtstbijzijnde profiel, en webcorpora die met language identification gemaakt zijn, bevatten veel tekst die helemaal geen taal is."
+can_now:
+  - en: "cut a text into its character n-grams, with a space before and after it"
+    nl: "een tekst in de character n-grams knippen, met een spatie ervoor en erachter"
+    by: ngrams
+  - en: "measure with the out-of-place measure how far the profile of a text lies from the profile of a language"
+    nl: "met de out-of-place-maat meten hoe ver het profiel van een tekst van het profiel van een taal ligt"
+    by: out-of-place
+  - en: "write a program that gives the nearest language of a text, or \"?\" when no language comes near enough"
+    nl: "een programma schrijven dat de dichtstbijzijnde taal van een tekst geeft, of \"?\" als geen taal dichtbij genoeg komt"
+    by: identify
+  - en: "say what such a program gives for broken letters, markup, a longer text and a language it does not know"
+    nl: "zeggen wat zo'n programma geeft voor kapotte letters, markup, een langere tekst en een taal die het programma niet kent"
+    by: what-comes-out
+further_reading:
+  - en: "William B. Cavnar and John M. Trenkle, [*N-Gram-Based Text Categorization*](https://www.let.rug.nl/vannoord/TextCat/textcat.pdf), Symposium on Document Analysis and Information Retrieval, Las Vegas, 1994, the copy on Gertjan van Noord's TextCat page: profiles of n-grams and the out-of-place measure"
+    nl: "William B. Cavnar en John M. Trenkle, [*N-Gram-Based Text Categorization*](https://www.let.rug.nl/vannoord/TextCat/textcat.pdf), Symposium on Document Analysis and Information Retrieval, Las Vegas, 1994, de kopie op de TextCat-pagina van Gertjan van Noord: profielen van n-grams en de out-of-place-maat (in het Engels)"
+  - en: "Tommi Jauhiainen, Marco Lui, Marcos Zampieri, Timothy Baldwin and Krister Lindén, [*Automatic Language Identification in Texts: A Survey*](https://doi.org/10.1613/jair.1.11675), Journal of Artificial Intelligence Research 65, 2019: the methods since 1965, and the open problems, from short texts to unseen languages"
+    nl: "Tommi Jauhiainen, Marco Lui, Marcos Zampieri, Timothy Baldwin en Krister Lindén, [*Automatic Language Identification in Texts: A Survey*](https://doi.org/10.1613/jair.1.11675), Journal of Artificial Intelligence Research 65, 2019: de methodes sinds 1965, en de open problemen, van korte teksten tot talen die het programma niet kent (in het Engels)"
+  - en: "Isaac Caswell, Theresa Breiner, Daan van Esch and Ankur Bapna, [*Language ID in the Wild: Unexpected Challenges on the Path to a Thousand-Language Web Text Corpus*](https://aclanthology.org/2020.coling-main.579/), COLING 2020: what language identification lets through on the web, and how to filter it"
+    nl: "Isaac Caswell, Theresa Breiner, Daan van Esch en Ankur Bapna, [*Language ID in the Wild: Unexpected Challenges on the Path to a Thousand-Language Web Text Corpus*](https://aclanthology.org/2020.coling-main.579/), COLING 2020: wat language identification op het web doorlaat, en hoe je dat eruit filtert (in het Engels)"
+  - en: "Julia Kreutzer and many coauthors, [*Quality at a Glance: An Audit of Web-Crawled Multilingual Datasets*](https://aclanthology.org/2022.tacl-1.4/), Transactions of the ACL 10, 2022: samples of 205 web corpora, checked by hand"
+    nl: "Julia Kreutzer en veel medeauteurs, [*Quality at a Glance: An Audit of Web-Crawled Multilingual Datasets*](https://aclanthology.org/2022.tacl-1.4/), Transactions of the ACL 10, 2022: steekproeven uit 205 webcorpora, met de hand gecontroleerd (in het Engels)"
+  - en: "René Haas and Leon Derczynski, [*Discriminating Between Similar Nordic Languages*](https://aclanthology.org/2021.vardial-1.8/), VarDial 2021: telling closely related languages apart, also on sentences of Tatoeba"
+    nl: "René Haas en Leon Derczynski, [*Discriminating Between Similar Nordic Languages*](https://aclanthology.org/2021.vardial-1.8/), VarDial 2021: nauw verwante talen uit elkaar houden, ook op zinnen van Tatoeba (in het Engels)"
