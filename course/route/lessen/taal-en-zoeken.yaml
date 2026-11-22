@@ -218,6 +218,7 @@ lessons:
   covers: [fonetiek-corpora-en-typologie#2, fonetiek-corpora-en-typologie#3]
   requires: [nlp-dependencies]
   introduces: [c:corpus, c:treebank, c:concordance]
+  mentions: [c:cgn, c:cohens-kappa, c:common-crawl, c:language-variety]
   data: [gutenberg-books]
   ladder: [python]
   needs: any

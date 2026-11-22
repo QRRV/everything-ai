@@ -1,0 +1,42 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: nlp-corpora
+minutes: 40
+title:
+  en: "Corpora and treebanks"
+  nl: "Corpora en treebanks"
+goal:
+  en: "see what a corpus is and what it can tell you about a language, make a concordance of a book, and use the labels of a treebank, which people add by written guidelines."
+  nl: "zien wat een corpus is en wat het je over een taal kan vertellen, een concordantie van een boek maken, en de labels van een treebank gebruiken, die mensen volgens geschreven richtlijnen toevoegen."
+summary:
+  - en: "A corpus is a collection of texts or recorded speech, chosen to represent a language or a kind of language: the Brown Corpus holds about a million words of American English printed in 1961, the CGN nearly 9 million words of spoken Dutch. The web is no corpus in that sense, and neither are most of the collections that large language models learn from: nobody chose their texts to represent a language."
+    nl: "Een corpus is een verzameling teksten of opgenomen spraak, gekozen om een taal of een soort taal te vertegenwoordigen: het Brown Corpus bevat ongeveer een miljoen woorden Amerikaans Engels, gedrukt in 1961, het CGN bijna 9 miljoen woorden gesproken Nederlands. Het web is in die zin geen corpus, en de meeste verzamelingen waar large language models van leren evenmin: niemand koos de teksten om een taal te vertegenwoordigen."
+  - en: "A treebank is a corpus in which every sentence has its tree, usually made by a parser and corrected by people, such as the Penn Treebank or the treebanks of Universal Dependencies. A lexical database such as WordNet holds facts about words: its synsets group words that share a meaning."
+    nl: "Een treebank is een corpus waarin elke zin een boom heeft, meestal gemaakt door een parser en verbeterd door mensen, zoals de Penn Treebank of de treebanks van Universal Dependencies. Een lexicale database zoals WordNet bevat feiten over woorden: de synsets zetten woorden met dezelfde betekenis bij elkaar."
+  - en: "A concordance gives every place where a word stands in a corpus, with its neighbors; in the KWIC form, one line per place with the word in the middle. Reading the lines from top to bottom shows what comes back, such as *White* before *Rabbit*."
+    nl: "Een concordantie geeft elke plek waar een woord in een corpus staat, met de buren; in de vorm KWIC, trefwoord in context, een regel per plek met het woord in het midden. Van boven naar beneden zie je wat terugkomt, zoals *White* vóór *Rabbit*."
+  - en: "People label a corpus by written guidelines, with tests for the hard cases, such as a particle against a preposition: a particle can also stand after the object. They still disagree on some words, and two guidelines can label the same word in different ways."
+    nl: "Mensen labelen een corpus volgens geschreven richtlijnen, met tests voor de lastige gevallen, zoals een partikel tegenover een voorzetsel: in een Nederlandse bijzin plakt een partikel aan het werkwoord vast. Toch verschillen ze bij een deel van de woorden, en twee richtlijnen kunnen hetzelfde woord verschillend labelen."
+can_now:
+  - en: "make a concordance of a word in a text, with its neighbors on both sides"
+    nl: "een concordantie van een woord in een tekst maken, met de buren aan beide kanten"
+    by: kwic
+  - en: "find the particles of a sentence by the labels of a treebank"
+    nl: "de partikels van een zin vinden aan de labels van een treebank"
+    by: particles
+  - en: "label a word as a particle or a preposition by the test of a guideline"
+    nl: "een woord als partikel of voorzetsel labelen met de test van een richtlijn"
+    by: label
+  - en: "choose a corpus that fits a question"
+    nl: "een corpus kiezen dat bij een vraag past"
+    by: purpose
+further_reading:
+  - en: "John Sinclair, [*Corpus and Text: Basic Principles*](https://users.ox.ac.uk/~martinw/dlc/chapter1.htm), chapter 1 of *Developing Linguistic Corpora: a Guide to Good Practice*, edited by Martin Wynne, 2004: what a corpus is, and how to choose its texts"
+    nl: "John Sinclair, [*Corpus and Text: Basic Principles*](https://users.ox.ac.uk/~martinw/dlc/chapter1.htm), hoofdstuk 1 van *Developing Linguistic Corpora: a Guide to Good Practice*, onder redactie van Martin Wynne, 2004: wat een corpus is, en hoe je de teksten kiest (in het Engels)"
+  - en: "Daniel Jurafsky and James H. Martin, [*Speech and Language Processing*, chapter 2](https://web.stanford.edu/~jurafsky/slp3/2.pdf), section 2.5, and [chapter 19](https://web.stanford.edu/~jurafsky/slp3/19.pdf), section 19.3, draft of August 19, 2026: corpora with their datasheets, and treebanks"
+    nl: "Daniel Jurafsky en James H. Martin, [*Speech and Language Processing*, hoofdstuk 2](https://web.stanford.edu/~jurafsky/slp3/2.pdf), paragraaf 2.5, en [hoofdstuk 19](https://web.stanford.edu/~jurafsky/slp3/19.pdf), paragraaf 19.3, conceptversie van 19 augustus 2026: corpora met hun datasheet, en treebanks (in het Engels)"
+  - en: "Mitchell P. Marcus, Beatrice Santorini and Mary Ann Marcinkiewicz, [*Building a Large Annotated Corpus of English: The Penn Treebank*](https://aclanthology.org/J93-2004/), Computational Linguistics 19(2), 1993: how the Penn Treebank was made, and how often its annotators disagreed"
+    nl: "Mitchell P. Marcus, Beatrice Santorini en Mary Ann Marcinkiewicz, [*Building a Large Annotated Corpus of English: The Penn Treebank*](https://aclanthology.org/J93-2004/), Computational Linguistics 19(2), 1993: hoe de Penn Treebank gemaakt is, en hoe vaak de mensen die labelden het oneens waren (in het Engels)"
+  - en: "Universal Dependencies, [the guidelines](https://universaldependencies.org/guidelines.html), version 2: how the treebanks of UD label words and relations, for every language"
+    nl: "Universal Dependencies, [de richtlijnen](https://universaldependencies.org/guidelines.html), versie 2: hoe de treebanks van UD woorden en relaties labelen, voor elke taal (in het Engels)"

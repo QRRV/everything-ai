@@ -461,6 +461,12 @@ SPDX-FileCopyrightText = "Gosse Bouma, Gertjan van Noord, Daniel Zeman, Zdeněk 
 SPDX-License-Identifier = "CC-BY-SA-4.0"
 
 [[annotations]]
+path = "data/gutenberg-books.json.gz"
+precedence = "override"
+SPDX-FileCopyrightText = "Lewis Carroll, Jane Austen, Arthur Conan Doyle, Mary Wollstonecraft Shelley, Herman Melville, Louis Couperus, Multatuli and Nicolaas Beets (public domain); the texts from Project Gutenberg, without its header, footer and licence, for Everything AI"
+SPDX-License-Identifier = "LicenseRef-Public-Domain"
+
+[[annotations]]
 path = "data/banking77-small.json"
 precedence = "override"
 SPDX-FileCopyrightText = "2020 PolyAI (BANKING77, Casanueva and others, https://arxiv.org/abs/2003.04807; a subset made for Everything AI)"
