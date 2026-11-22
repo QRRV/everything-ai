@@ -491,6 +491,12 @@ SPDX-FileCopyrightText = "Copyright (c) 2001, Dr Martin Porter; Copyright (c) 20
 SPDX-License-Identifier = "BSD-3-Clause"
 
 [[annotations]]
+path = ["data/snowball-porter.tsv.gz", "data/snowball-dutch-porter.tsv.gz"]
+precedence = "override"
+SPDX-FileCopyrightText = "Copyright (c) 2001, Dr Martin Porter; Copyright (c) 2004,2005, Richard Boulton (the Snowball project, https://snowballstem.org; the sample vocabularies of its stemmers porter and dutch_porter in snowball-data, each word with its stem)"
+SPDX-License-Identifier = "BSD-3-Clause"
+
+[[annotations]]
 path = "data/banking77-small.json"
 precedence = "override"
 SPDX-FileCopyrightText = "2020 PolyAI (BANKING77, Casanueva and others, https://arxiv.org/abs/2003.04807; a subset made for Everything AI)"

@@ -328,6 +328,7 @@ lessons:
   covers: [tekstverwerking#4]
   requires: [nlp-normalize, nlp-morphemes]
   introduces: [c:stemming, c:word-stem, c:lemma, c:lemmatization]
+  mentions: [c:information-retrieval, c:treebank, c:universal-dependencies, py:or-operator, py:not-operator]
   data: [ud-english-dutch]
   ladder: [python]
   needs: any

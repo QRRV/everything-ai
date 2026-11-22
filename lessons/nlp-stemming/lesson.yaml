@@ -1,0 +1,46 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: nlp-stemming
+minutes: 45
+title:
+  en: "Stems and lemmas"
+  nl: "Stam en lemma"
+goal:
+  en: "chop endings off words with the first rules of Porter's stemmer and the measure m, look words up in a table of lemmas, and count in two treebanks what each way brings together and leaves apart."
+  nl: "uitgangen van woorden hakken met de eerste regels van de stemmer van Porter en de measure m, woorden opzoeken in een tabel met lemma's, en in twee treebanks tellen wat elke aanpak samenbrengt en uit elkaar laat."
+summary:
+  - en: "A word comes in many forms, such as *walk*, *walks* and *walked*, and a program that compares strings sees each form as another word. Stemming chops endings off by rules; what is left is the stem, which need not be a word: Porter's stemmer makes *ponies* into *poni*."
+    nl: "Een woord heeft veel vormen, zoals *lopen*, *loopt* en *liep*, en een programma dat strings vergelijkt, ziet elke vorm als een ander woord. Stemming hakt uitgangen eraf met regels; wat overblijft, is de stam, en dat hoeft geen woord te zijn: de stemmer van Porter maakt *poni* van *ponies*."
+  - en: "Porter's stemmer works in steps of rules. In each group of rules, the rule with the longest suffix that fits decides, and many rules only fire when the measure m of what is left is large enough: m counts how often a vowel is followed by a consonant."
+    nl: "De stemmer van Porter werkt in stappen met regels. In elke groep regels beslist de regel met de langste uitgang die past, en veel regels werken alleen als de measure m van wat overblijft groot genoeg is: m telt hoe vaak een medeklinker op een klinker volgt."
+  - en: "Lemmatization looks up the lemma, the form a dictionary uses: *run* for *ran*, *mouse* for *mice*. A table made from a treebank finds most lemmas, but not those of new words, and gives each form one lemma, also where the sentence asks for another."
+    nl: "Lemmatization zoekt het lemma op, de vorm die een woordenboek gebruikt: *lopen* voor *liep*, *kind* voor *kinderen*. Een tabel uit een treebank vindt de meeste lemma's, maar niet die van nieuwe woorden, en geeft elke vorm één lemma, ook waar de zin om een ander vraagt."
+  - en: "A stemmer brings together what does not belong together, such as *university* and *universe* (overstemming), and leaves apart what does, such as *ran* and *run* (understemming). For English, stemming helps a search engine little on the whole; for languages with more endings, more."
+    nl: "Een stemmer brengt samen wat niet bij elkaar hoort, zoals *university* en *universe* (overstemming), en laat uit elkaar wat wel bij elkaar hoort, zoals *liep* en *lopen* (understemming). Voor het Engels helpt stemming een zoekmachine al met al weinig; voor talen met meer uitgangen meer."
+can_now:
+  - en: "apply a group of suffix rules to a word, the rule of the longest suffix first"
+    nl: "een groep regels voor uitgangen op een woord toepassen, de regel met de langste uitgang eerst"
+    by: apply-rules
+  - en: "count Porter's measure m of a word, and see which words a rule with a condition on m leaves alone"
+    nl: "de measure m van Porter van een woord tellen, en zien welke woorden een regel met een voorwaarde op m met rust laat"
+    by: measure
+  - en: "look words up in a table of lemmas, and see which words such a table misses"
+    nl: "woorden opzoeken in een tabel met lemma's, en zien welke woorden zo'n tabel mist"
+    by: lemmatize
+  - en: "tell whether a task needs a stemmer, a lemmatizer, or the forms as they are"
+    nl: "zeggen of een taak een stemmer nodig heeft, een lemmatizer, of de vormen zoals in de tekst"
+    by: stem-or-lemma
+further_reading:
+  - en: "Christopher D. Manning, Prabhakar Raghavan and Hinrich Schütze, [*Introduction to Information Retrieval*](https://nlp.stanford.edu/IR-book/), Cambridge University Press, 2008, section 2.2.4: stemming and lemmatization, Porter's rules, and what they do for search"
+    nl: "Christopher D. Manning, Prabhakar Raghavan en Hinrich Schütze, [*Introduction to Information Retrieval*](https://nlp.stanford.edu/IR-book/), Cambridge University Press, 2008, paragraaf 2.2.4: stemming en lemmatization, de regels van Porter, en wat stemming en lemmatization doen voor zoeken (in het Engels)"
+  - en: "Martin Porter, [*An algorithm for suffix stripping*](https://tartarus.org/martin/PorterStemmer/def.txt), 1980, the paper with all five steps, and [Porter's page on the stemmer](https://tartarus.org/martin/PorterStemmer/), with its common errors and versions in many programming languages"
+    nl: "Martin Porter, [*An algorithm for suffix stripping*](https://tartarus.org/martin/PorterStemmer/def.txt), 1980, de paper met alle vijf de stappen, en [de pagina van Porter over de stemmer](https://tartarus.org/martin/PorterStemmer/), met veelgemaakte fouten en versies in veel programmeertalen (in het Engels)"
+  - en: "The Snowball project, [Porter's stemmer for Dutch](https://snowballstem.org/algorithms/dutch/stemmer.html), the stemmer of this lesson, and [the stemmer of Kraaij and Pohlmann](https://snowballstem.org/algorithms/kraaij_pohlmann/stemmer.html), Snowball's default for Dutch since 2025"
+    nl: "Het project Snowball, [de stemmer van Porter voor het Nederlands](https://snowballstem.org/algorithms/dutch/stemmer.html), de stemmer van deze les, en [de stemmer van Kraaij en Pohlmann](https://snowballstem.org/algorithms/kraaij_pohlmann/stemmer.html), sinds 2025 de standaard van Snowball voor het Nederlands (in het Engels)"
+  - en: "Wessel Kraaij and Renée Pohlmann, [*Porter's stemming algorithm for Dutch*](https://liacs.leidenuniv.nl/~kraaijw/papers/kraaij94porters.pdf), 1994: Porter's rules for Dutch, and how to count over- and understemming"
+    nl: "Wessel Kraaij en Renée Pohlmann, [*Porter's stemming algorithm for Dutch*](https://liacs.leidenuniv.nl/~kraaijw/papers/kraaij94porters.pdf), 1994: de regels van Porter voor het Nederlands, en hoe je overstemming en understemming telt (in het Engels)"
+  - en: "Universal Dependencies, [*Morphology: General Principles*](https://universaldependencies.org/u/overview/morphology.html), the section *Lemmas*: what a treebank of UD puts in its column LEMMA"
+    nl: "Universal Dependencies, [*Morphology: General Principles*](https://universaldependencies.org/u/overview/morphology.html), de paragraaf *Lemmas*: wat een treebank van UD in de kolom LEMMA zet (in het Engels)"
+  - en: "The Woordenlijst Nederlandse Taal, [*stam van een werkwoord*](https://woordenlijst.org/zoeken/leidraad/lijst_van_vaktermen/stam_van_een_werkwoord.html): what Dutch school grammar calls the stam of a verb (in Dutch)"
+    nl: "De Woordenlijst Nederlandse Taal, [*stam van een werkwoord*](https://woordenlijst.org/zoeken/leidraad/lijst_van_vaktermen/stam_van_een_werkwoord.html): wat de schoolgrammatica de stam van een werkwoord noemt"
