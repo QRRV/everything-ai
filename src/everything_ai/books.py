@@ -6,7 +6,9 @@ one book as a dict (key, title, author, year, lang, edition, text), and `book_wo
 a lesson can hand a learner a book before the learner knows how to cut a text into words.
 
 Next to the books, `dutch_sentences()` gives the Dutch sentences of Tatoeba in data/tatoeba-nl.tsv.gz, today's Dutch
-written by volunteers (data/tools/make_tatoeba_nl.py), and `dutch_sentence_words()` all their words as one list."""
+written by volunteers (data/tools/make_tatoeba_nl.py), and `dutch_sentence_words()` all their words as one list.
+`dutch_pairs()` gives the sentences of Tatoeba in Frisian, Gronings and Limburgish in data/tatoeba-nl-pairs.tsv.gz,
+each with a Dutch translation (data/tools/make_tatoeba_pairs.py)."""
 import functools
 import gzip
 import json
@@ -16,6 +18,7 @@ from everything_ai import paths
 
 FILE = paths.ROOT / "data" / "gutenberg-books.json.gz"
 TATOEBA_NL = paths.ROOT / "data" / "tatoeba-nl.tsv.gz"
+TATOEBA_PAIRS = paths.ROOT / "data" / "tatoeba-nl-pairs.tsv.gz"
 # a word: letters, with an apostrophe inside it as in "don't" or "Alice's"; digits, punctuation and the underscores
 # that mark italics in the Gutenberg files are no part of a word
 _WORD = re.compile(r"[^\W\d_]+(?:['’][^\W\d_]+)*")
@@ -71,3 +74,18 @@ def _sentence_words() -> tuple:
 def dutch_sentence_words() -> list:
     """The words of all Dutch sentences of Tatoeba, one after another, as a new list each time."""
     return list(_sentence_words())
+
+
+@functools.cache
+def dutch_pairs() -> tuple:
+    """The sentences of Tatoeba in Frisian (fry), Gronings (gos) and Limburgish (lim), each as (lang, id, text, nl_id,
+    nl_text) with its Dutch translation, in the order of the file: by language, then by id."""
+    with gzip.open(TATOEBA_PAIRS, "rt", encoding="utf-8") as f:
+        lines = f.read().split("\n")
+    assert lines[0] == "lang\tid\ttext\tnl_id\tnl_text"
+    out = []
+    for line in lines[1:]:
+        if line:
+            lang, sid, text, nl_id, nl_text = line.split("\t")
+            out.append((lang, int(sid), text, int(nl_id), nl_text))
+    return tuple(out)

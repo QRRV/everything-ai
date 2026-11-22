@@ -1,0 +1,44 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: nlp-language-and-society
+minutes: 40
+title:
+  en: "Language, groups and dialects"
+  nl: "Taal, groepen en dialecten"
+goal:
+  en: "see how language goes with regions, social groups and situations, how standard Dutch differs between the Netherlands and Belgium and which languages, such as Frisian, are spoken beside it, and count how much of three varieties a word list of standard Dutch does not know."
+  nl: "zien hoe taal samenhangt met regio's, sociale groepen en situaties, hoe de standaardtaal verschilt tussen Nederland en België en welke talen, zoals het Fries, ernaast gesproken worden, en tellen hoeveel van drie variëteiten een woordenlijst van standaardnederlands niet kent."
+summary:
+  - en: "Nobody speaks a language in only one way. A variety of a language can go with a region (a dialect), a social group (a sociolect) or a situation (a register); sociolinguistics studies these differences, such as the *r* that Labov heard more often in the highest-ranked of three department stores in New York."
+    nl: "Niemand spreekt een taal op maar één manier. Een variëteit van een taal kan horen bij een regio (een dialect), een sociale groep (een sociolect) of een situatie (een register); de sociolinguïstiek bestudeert die verschillen, zoals de *r* die Labov het vaakst hoorde in het hoogst aangeschreven van drie warenhuizen in New York."
+  - en: "The standard language is one variety among others, with a special place in public life. Standard Dutch is mostly the same in the Netherlands and Belgium, but not wholly: a Dutch person says *pinpas* and a Belgian *bankkaart*, and both are standard; in Flanders, tussentaal lies between dialect and standard language."
+    nl: "De standaardtaal is één variëteit naast andere, met een bijzondere plaats in het openbare leven. De standaardtaal is in Nederland en België grotendeels dezelfde, maar niet overal: een Nederlander zegt *pinpas* en een Belg *bankkaart*, en allebei zijn standaardtaal; in Vlaanderen ligt de tussentaal tussen dialect en standaardtaal."
+  - en: "Frisian is an official language of the province of Fryslân, and the Netherlands recognizes Low Saxon, with Gronings, and Limburgish as regional languages. Whether something counts as a language or a dialect is a decision of people, not of the words."
+    nl: "Het Fries is een officiële taal van de provincie Fryslân, en Nederland erkent het Nedersaksisch, met het Gronings, en het Limburgs als regionale talen. Of iets als taal of als dialect telt, is een beslissing van mensen, niet van de woorden."
+  - en: "A tool knows the words of the text it is built on. A word list from a treebank of standard Dutch misses far more of the words of Frisian and Gronings sentences than of their Dutch translations, and the words it misses most often are small and common, so say which variety your data is in."
+    nl: "Een tool kent de woorden van de tekst waarop die gebouwd is. Een woordenlijst uit een treebank van standaardnederlands mist veel meer van de woorden van Friese en Groningse zinnen dan van de Nederlandse vertalingen, en de woorden die de lijst het vaakst mist, zijn klein en veelvoorkomend, dus zeg in welke variëteit je data is."
+can_now:
+  - en: "count the words of a treebank into a word list, with how often each occurs"
+    nl: "de woorden van een treebank tellen tot een woordenlijst, met hoe vaak elk woord voorkomt"
+    by: word-counts
+  - en: "work out which share of the words of a text a word list does not know"
+    nl: "uitrekenen welk deel van de woorden van een tekst een woordenlijst niet kent"
+    by: share-unknown
+  - en: "count which words of a text a word list misses"
+    nl: "tellen welke woorden van een tekst een woordenlijst mist"
+    by: unknown-counts
+  - en: "tell differences in speech that go with a region, a group or a situation apart"
+    nl: "verschillen in spreken die bij een regio, een groep of een situatie horen uit elkaar houden"
+    by: region-group-situation
+further_reading:
+  - en: "Su Lin Blodgett, Lisa Green and Brendan O'Connor, [*Demographic Dialectal Variation in Social Media: A Case Study of African-American English*](https://aclanthology.org/D16-1120/), EMNLP 2016: how tools for text do on tweets in African-American English, and how to do better"
+    nl: "Su Lin Blodgett, Lisa Green en Brendan O'Connor, [*Demographic Dialectal Variation in Social Media: A Case Study of African-American English*](https://aclanthology.org/D16-1120/), EMNLP 2016: hoe tools voor tekst het doen op tweets in Afro-Amerikaans Engels, en hoe het beter kan (in het Engels)"
+  - en: "Allison Koenecke and others, [*Racial disparities in automated speech recognition*](https://doi.org/10.1073/pnas.1915768117), PNAS 2020: five systems that turn speech into text, tested on black and white speakers in the United States"
+    nl: "Allison Koenecke en anderen, [*Racial disparities in automated speech recognition*](https://doi.org/10.1073/pnas.1915768117), PNAS 2020: vijf systemen die spraak omzetten in tekst, getest op zwarte en witte sprekers in de Verenigde Staten (in het Engels)"
+  - en: "Nederlandse Taalunie, [*Wat is standaardtaal? (algemeen)*](https://taaladvies.net/wat-is-standaardtaal-algemeen/), Taaladvies.net, 2018: what counts as standard Dutch, and the labels standard language in Belgium and in the Netherlands (in Dutch)"
+    nl: "Nederlandse Taalunie, [*Wat is standaardtaal? (algemeen)*](https://taaladvies.net/wat-is-standaardtaal-algemeen/), Taaladvies.net, 2018: wat als standaardnederlands telt, en de labels standaardtaal in België en standaardtaal in Nederland"
+  - en: "Team Taaladvies of the Flemish government, [*Standaardtaal, tussentaal en dialect (taalkundige termen)*](https://www.vlaanderen.be/team-taaladvies/taaladviezen/woordgebruik/standaardtaal/standaardtaal-tussentaal-en-dialect-taalkundige-termen): standard language, tussentaal and dialect in Flanders, with one question in all three (in Dutch)"
+    nl: "Team Taaladvies van de Vlaamse overheid, [*Standaardtaal, tussentaal en dialect (taalkundige termen)*](https://www.vlaanderen.be/team-taaladvies/taaladviezen/woordgebruik/standaardtaal/standaardtaal-tussentaal-en-dialect-taalkundige-termen): standaardtaal, tussentaal en dialect in Vlaanderen, met één vraag in alle drie"
+  - en: "Daniel Jurafsky and James H. Martin, [*Speech and Language Processing*](https://web.stanford.edu/~jurafsky/slp3/), draft of August 19, 2026, the chapter *Words and Tokens*, section 2.5: where the text of a corpus comes from, its varieties, and how to describe them"
+    nl: "Daniel Jurafsky en James H. Martin, [*Speech and Language Processing*](https://web.stanford.edu/~jurafsky/slp3/), conceptversie van 19 augustus 2026, het hoofdstuk *Words and Tokens*, paragraaf 2.5: waar de tekst van een corpus vandaan komt, de variëteiten ervan, en hoe je die beschrijft (in het Engels)"

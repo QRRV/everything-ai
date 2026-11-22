@@ -259,7 +259,8 @@ lessons:
   covers: [d15-sociolinguistiek-en-taalvariatie#0, d15-sociolinguistiek-en-taalvariatie#1]
   requires: [nlp-languages-of-the-world]
   introduces: [c:sociolinguistics, c:language-variety]
-  data: [ud-english-dutch]
+  mentions: [c:treebank, c:corpus]
+  data: [ud-english-dutch, tatoeba-sentences]
   ladder: [python]
   needs: any
 
