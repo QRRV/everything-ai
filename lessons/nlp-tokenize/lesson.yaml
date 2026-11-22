@@ -1,0 +1,44 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: nlp-tokenize
+minutes: 45
+title:
+  en: "Cutting text into sentences and words"
+  nl: "Tekst in zinnen en woorden knippen"
+goal:
+  en: "cut a text into tokens with one regular expression and find where sentences end despite abbreviations and initials, compare both with the words of a treebank, and cut text without spaces into words with MaxMatch."
+  nl: "een tekst met één reguliere expressie in tokens knippen en vinden waar zinnen eindigen ondanks afkortingen en initialen, die twee vergelijken met de woorden van een treebank, en tekst zonder spaties met MaxMatch in woorden knippen."
+summary:
+  - en: "A token is a piece of text that a program treats as one unit: a word, a number or a punctuation mark. Which pieces count as one token is set by a standard: the Penn Treebank splits *doesn't* into *does* and *n't*, and the Dutch treebank Alpino keeps *zo'n*, *o.a.* and *Zuid-Afrika* whole."
+    nl: "Een token is een stuk tekst dat een programma als één geheel behandelt: een woord, een getal of een leesteken. Welke stukken als één token tellen, legt een standaard vast: de Penn Treebank splitst *doesn't* in *does* en *n't*, en de Nederlandse treebank Alpino houdt *zo'n*, *o.a.* en *Zuid-Afrika* heel."
+  - en: "`|` gives a pattern a choice between two patterns, and `[^...]` matches one character outside a set. With them, one pattern cuts a text into runs of letters and digits and single punctuation marks, and `\\S+` cuts it at the spaces."
+    nl: "`|` geeft een patroon een keuze tussen twee patronen, en `[^...]` matcht één teken buiten een set. Daarmee knipt één patroon een tekst in reeksen letters en cijfers en losse leestekens, en `\\S+` knipt een tekst bij de spaties."
+  - en: "A period can end a sentence, an abbreviation such as *dr.*, an initial such as *J.*, or an abbreviation and a sentence at once. A list of abbreviations and a pattern for initials take away most false ends and raise precision; Punkt learns the abbreviations from the text itself."
+    nl: "Een punt kan een zin afsluiten, een afkorting zoals *dr.*, een initiaal zoals *J.*, of een afkorting en een zin tegelijk. Een lijst afkortingen en een patroon voor initialen halen de meeste onterechte einden weg en verhogen de precision; Punkt leert de afkortingen uit de tekst zelf."
+  - en: "Chinese, Japanese and Thai are written without spaces between the words. MaxMatch cuts such a text with a dictionary, taking the longest word that fits again and again. It is greedy, so one word that fits by accident can throw off the rest, and backward MaxMatch can cut differently."
+    nl: "Chinees, Japans en Thai worden zonder spaties tussen de woorden geschreven. MaxMatch knipt zo'n tekst met een dictionary, door steeds het langste woord te nemen dat past. Het is gretig, dus één woord dat toevallig past, kan de rest in de war brengen, en backward MaxMatch kan anders knippen."
+can_now:
+  - en: "cut a text into words and punctuation marks with one pattern, `|` and `[^...]`, and compare the result with a treebank"
+    nl: "een tekst in woorden en leestekens knippen met één patroon, `|` en `[^...]`, en het resultaat vergelijken met een treebank"
+    by: tokens
+  - en: "say whether a word ends a sentence, with a list of abbreviations and a pattern for initials, and read what that does to precision and recall"
+    nl: "zeggen of een woord een zin beëindigt, met een lijst afkortingen en een patroon voor initialen, en aflezen wat dat met de precision en de recall doet"
+    by: ends-sentence
+  - en: "cut a text without spaces into words with MaxMatch and a dictionary, and see where taking the longest word goes wrong"
+    nl: "een tekst zonder spaties in woorden knippen met MaxMatch en een dictionary, en zien waar het misgaat als je steeds het langste woord neemt"
+    by: longest-start
+  - en: "tell whether a case needs a list of exceptions, a pattern for the form, or a dictionary and the longest match"
+    nl: "zeggen of een geval een lijst met uitzonderingen nodig heeft, een patroon voor de vorm, of een dictionary en de langste match"
+    by: which-fix
+further_reading:
+  - en: "Daniel Jurafsky and James H. Martin, [*Speech and Language Processing*](https://web.stanford.edu/~jurafsky/slp3/), draft of August 19, 2026, the chapter *Words and Tokens*, sections 2.1 and 2.8: words in Chinese, Japanese and Thai, rule-based tokenization, the Penn Treebank standard, and sentence segmentation"
+    nl: "Daniel Jurafsky en James H. Martin, [*Speech and Language Processing*](https://web.stanford.edu/~jurafsky/slp3/), conceptversie van 19 augustus 2026, het hoofdstuk *Words and Tokens*, paragrafen 2.1 en 2.8: woorden in het Chinees, Japans en Thai, tokenization met regels, de standaard van de Penn Treebank, en sentence segmentation (in het Engels)"
+  - en: "Tibor Kiss and Jan Strunk, [*Unsupervised Multilingual Sentence Boundary Detection*](https://doi.org/10.1162/coli.2006.32.4.485), Computational Linguistics, 2006: Punkt, which learns abbreviations from the text it cuts, tried on eleven languages, Dutch among them"
+    nl: "Tibor Kiss en Jan Strunk, [*Unsupervised Multilingual Sentence Boundary Detection*](https://doi.org/10.1162/coli.2006.32.4.485), Computational Linguistics, 2006: Punkt, dat afkortingen leert uit de tekst die het knipt, getest op elf talen, waaronder het Nederlands (in het Engels)"
+  - en: "Richard Sproat, Chilin Shih, William Gale and Nancy Chang, [*A Stochastic Finite-State Word-Segmentation Algorithm for Chinese*](https://aclanthology.org/J96-3004/), Computational Linguistics, 1996: maximum matching, and how much native speakers agree on where the words are"
+    nl: "Richard Sproat, Chilin Shih, William Gale en Nancy Chang, [*A Stochastic Finite-State Word-Segmentation Algorithm for Chinese*](https://aclanthology.org/J96-3004/), Computational Linguistics, 1996: maximum matching, en hoeveel moedertaalsprekers het eens zijn over waar de woorden staan (in het Engels)"
+  - en: "Universal Dependencies, [*Tokenization and Word Segmentation*](https://universaldependencies.org/u/overview/tokenization.html): what counts as a word in the treebanks of Universal Dependencies, and why a written word can count as more than one"
+    nl: "Universal Dependencies, [*Tokenization and Word Segmentation*](https://universaldependencies.org/u/overview/tokenization.html): wat in de treebanks van Universal Dependencies als woord telt, en waarom een geschreven woord als meer dan één kan tellen (in het Engels)"
+  - en: "Nederlandse Taalunie, [*Leidraad 17.1: afkortingen*](https://woordenlijst.org/leidraad/17/1), in the Woordenlijst Nederlandse Taal: how Dutch writes an abbreviation, with one or more periods (rule 17.A; in Dutch)"
+    nl: "Nederlandse Taalunie, [*Leidraad 17.1: afkortingen*](https://woordenlijst.org/leidraad/17/1), in de Woordenlijst Nederlandse Taal: hoe je in het Nederlands een afkorting schrijft, met een of meer punten (regel 17.A)"

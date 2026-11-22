@@ -301,7 +301,8 @@ lessons:
   covers: [tekstverwerking#2]
   requires: [nlp-regex]
   introduces: [c:sentence-segmentation, c:word-segmentation]
-  data: []
+  mentions: [c:treebank, c:universal-dependencies]
+  data: [ud-english-dutch, tatoeba-sentences]
   ladder: [python]
   needs: any
 
