@@ -26,6 +26,7 @@ TATOEBA_NL = paths.ROOT / "data" / "tatoeba-nl.tsv.gz"
 TATOEBA_PAIRS = paths.ROOT / "data" / "tatoeba-nl-pairs.tsv.gz"
 TATOEBA_LANGS = paths.ROOT / "data" / "tatoeba-langs.tsv.gz"
 UCI_SENTIMENT = paths.ROOT / "data" / "uci-sentiment.tsv.gz"
+MASSIVE = paths.ROOT / "data" / "massive-en-nl.tsv.gz"
 STOP_WORDS = {"en": paths.ROOT / "data" / "snowball-stop-en.txt", "nl": paths.ROOT / "data" / "snowball-stop-nl.txt"}
 # a word: letters, with an apostrophe inside it as in "don't" or "Alice's"; digits, punctuation and the underscores
 # that mark italics in the Gutenberg files are no part of a word
@@ -210,6 +211,19 @@ def review_sentences() -> tuple:
     assert lines[0] == "source\tline\tlabel\tshown\ttext"
     return tuple((source, int(line), int(label), int(shown), text)
                  for source, line, label, shown, text in (row.split("\t") for row in lines[1:] if row))
+
+
+@functools.cache
+def assistant_commands() -> tuple:
+    """The 16,521 commands to a voice assistant of MASSIVE 1.1, each as (id, partition, scenario, intent, shown, en, nl,
+    en_slots, nl_slots): the id of the record, train, dev or test, the scenario (such as alarm) and the intent (such as
+    alarm_set), whether a lesson shows it as an example (1) or not (0), the command in English and in Dutch, and both
+    with their slots marked, as `wake me up at [time : five am]`. In the order of the file."""
+    with gzip.open(MASSIVE, "rt", encoding="utf-8") as f:
+        lines = f.read().split("\n")
+    assert lines[0] == "id\tpartition\tscenario\tintent\tshown\ten\tnl\ten_slots\tnl_slots"
+    return tuple((int(r[0]), r[1], r[2], r[3], int(r[4]), r[5], r[6], r[7], r[8])
+                 for r in (line.split("\t") for line in lines[1:] if line))
 
 @functools.cache
 def _stop_words(lang: str) -> tuple:

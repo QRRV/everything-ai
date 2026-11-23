@@ -503,6 +503,12 @@ SPDX-FileCopyrightText = "Copyright (c) 2001, Dr Martin Porter; Copyright (c) 20
 SPDX-License-Identifier = "BSD-3-Clause"
 
 [[annotations]]
+path = "data/massive-en-nl.tsv.gz"
+precedence = "override"
+SPDX-FileCopyrightText = "Copyright Amazon.com, Inc. or its affiliates (MASSIVE 1.1, FitzGerald and others, ACL 2023, https://doi.org/10.18653/v1/2023.acl-long.235, made by localizing the English text of SLURP, Bastianelli and others, EMNLP 2020, CC BY 4.0); the English and Dutch commands, for Everything AI"
+SPDX-License-Identifier = "CC-BY-4.0"
+
+[[annotations]]
 path = "data/uci-sentiment.tsv.gz"
 precedence = "override"
 SPDX-FileCopyrightText = "Dimitrios Kotzias, Sentiment Labelled Sentences (2015), UCI Machine Learning Repository, https://doi.org/10.24432/C57604, made for Kotzias, Denil, de Freitas and Smyth, From Group to Individual Labels using Deep Features, KDD 2015; the 3,000 sentences, for Everything AI"

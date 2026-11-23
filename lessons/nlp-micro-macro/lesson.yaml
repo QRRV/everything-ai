@@ -1,0 +1,41 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: nlp-micro-macro
+minutes: 35
+title:
+  en: "Many classes: micro and macro averages"
+  nl: "Veel labels: micro- en macrogemiddelden"
+goal:
+  en: "count the true positives, false positives and false negatives of every intent of a classifier for assistant commands, and make one number of them with macro-averaging and with micro-averaging."
+  nl: "de true positives, false positives en false negatives van elke intent van een classifier voor opdrachten aan een assistent tellen, en daar één getal van maken met macro-averaging en met micro-averaging."
+summary:
+  - en: "With many labels, each label in turn is the positive one and all the others are negative. One mistake then counts twice: a false positive for the label the classifier gives, and a false negative for the true label."
+    nl: "Met veel labels is elk label om de beurt het positieve, en zijn alle andere negatief. Eén fout telt dan twee keer: als false positive voor het label dat de classifier geeft, en als false negative voor het echte label."
+  - en: "Macro-averaging takes the plain mean of the F1 scores of the labels, so every label counts the same. Micro-averaging adds up the counts of all labels and works out one F1 score, so every example counts the same, and a common label weighs more."
+    nl: "Macro-averaging neemt het gewone gemiddelde van de F1 scores van de labels, dus elk label telt even zwaar. Micro-averaging telt de aantallen van alle labels op en rekent één F1 score uit, dus elk voorbeeld telt even zwaar, en een label dat vaak voorkomt weegt zwaarder."
+  - en: "When every example has one label and the classifier only gives labels of the list, the micro F1 is the accuracy: each mistake is one false positive and one false negative."
+    nl: "Als elk voorbeeld één label heeft en de classifier alleen labels uit de lijst geeft, is de micro F1 de accuracy: elke fout is één false positive en één false negative."
+  - en: "Which average fits depends on the task: whether every example should count the same, or every label. Two versions of one classifier can even come out in a different order on the two."
+    nl: "Welk gemiddelde past, hangt af van de taak: of elk voorbeeld even zwaar moet tellen, of elk label. Twee versies van één classifier kunnen op de twee gemiddelden zelfs in een andere volgorde uitkomen."
+can_now:
+  - en: "count the true positives, false positives and false negatives of one label among many"
+    nl: "de true positives, false positives en false negatives van één label tussen vele tellen"
+    by: counts
+  - en: "work out the macro F1 of a classifier with many labels"
+    nl: "de macro F1 van een classifier met veel labels uitrekenen"
+    by: macro
+  - en: "work out the micro F1, and say why it equals the accuracy when every example has one label"
+    nl: "de micro F1 uitrekenen, en zeggen waarom de micro F1 gelijk is aan de accuracy als elk voorbeeld één label heeft"
+    by: micro
+  - en: "say why two versions of a classifier can rank differently on the micro F1 and on the macro F1"
+    nl: "zeggen waarom twee versies van een classifier anders kunnen uitkomen op de micro F1 en op de macro F1"
+    by: prior
+  - en: "choose between the micro F1 and the macro F1 for a task"
+    nl: "kiezen tussen de micro F1 en de macro F1 voor een taak"
+    by: which-average
+further_reading:
+  - en: "Daniel Jurafsky and James H. Martin, [*Speech and Language Processing*](https://web.stanford.edu/~jurafsky/slp3/), draft of August 19, 2026, the chapter *Logistic Regression and Text Classification*, section *Evaluating with more than two classes*: the example with urgent, normal and spam, and microaveraging against macroaveraging"
+    nl: "Daniel Jurafsky en James H. Martin, [*Speech and Language Processing*](https://web.stanford.edu/~jurafsky/slp3/), conceptversie van 19 augustus 2026, het hoofdstuk *Logistic Regression and Text Classification*, de paragraaf *Evaluating with more than two classes*: het voorbeeld met urgent, normal en spam, en microaveraging tegenover macroaveraging (in het Engels)"
+  - en: "Jack FitzGerald and others, [*MASSIVE: A 1M-Example Multilingual Natural Language Understanding Dataset with 51 Typologically-Diverse Languages*](https://aclanthology.org/2023.acl-long.235/), ACL 2023: how the commands were collected and translated, and how well three models do in each language"
+    nl: "Jack FitzGerald en anderen, [*MASSIVE: A 1M-Example Multilingual Natural Language Understanding Dataset with 51 Typologically-Diverse Languages*](https://aclanthology.org/2023.acl-long.235/), ACL 2023: hoe de opdrachten zijn verzameld en vertaald, en hoe goed drie modellen het doen in elke taal (in het Engels)"
