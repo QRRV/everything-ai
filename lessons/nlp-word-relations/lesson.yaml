@@ -1,0 +1,41 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: nlp-word-relations
+minutes: 40
+title:
+  en: "Senses and relations between words"
+  nl: "Betekenissen en relaties tussen woorden"
+goal:
+  en: "tell the senses of one word apart from words that share a sense, sort pairs of words by how they relate, count the senses of every word of WordNet, and climb from a sense to the most general one."
+  nl: "de betekenissen van één woord onderscheiden van woorden die een betekenis delen, paren woorden indelen naar hoe de woorden samenhangen, de betekenissen van elk woord van WordNet tellen, en van een betekenis omhoogklimmen naar de algemeenste."
+summary:
+  - en: "A word sense is one meaning of a word, as a dictionary numbers them. A word with more than one sense is polysemous: *bank* has 18 senses in WordNet, 10 as a noun and 8 as a verb. Some authors use the name polysemy only for related senses, such as a bank and its building, and call unrelated senses homonymy."
+    nl: "Een woordbetekenis is één betekenis van een woord, zoals een woordenboek de betekenissen nummert. Een woord met meer dan één betekenis is polyseem: *bank* heeft in WordNet 18 betekenissen, 10 als zelfstandig naamwoord en 8 als werkwoord. Sommige auteurs gebruiken de naam polysemie alleen voor verwante betekenissen, zoals een bank en het gebouw ervan, en noemen betekenissen zonder verband homonymie."
+  - en: "Synonymy is a relation between senses: two words are synonyms where they share a sense, such as *sofa* and *couch*. Hyponymy is the IS-A relation: a dog is a kind of animal, and the more general sense is the hypernym. Meronymy is the part-whole relation: a part, a member or a substance of a whole."
+    nl: "Synonymie is een relatie tussen betekenissen: twee woorden zijn synoniemen als de twee een betekenis delen, zoals *sofa* en *couch*. Hyponymie is de is-een-relatie: een hond is een soort dier, en de algemenere betekenis is het hyperoniem. Meronymie is de deel-geheelrelatie: een deel, een lid of een stof van een geheel."
+  - en: "80% of the 127,846 words of WordNet have one sense, but the words used most have many: the 736 words of WordNet among GloVe's 1,000 most frequent words have 8.25 senses on average, *break* even 75."
+    nl: "80% van de 127.846 woorden van WordNet heeft één betekenis, maar de woorden die het meest gebruikt worden, hebben er veel: de 736 woorden van WordNet onder de 1.000 meest voorkomende woorden van GloVe hebben er gemiddeld 8,25, *break* zelfs 75."
+  - en: "Following the first hypernym of each sense, every noun sense of WordNet climbs to `entity.n.01`. The ladders of `poodle.n.01` and `cat.n.01` meet at `carnivore.n.01`; the senses of *bank* for a river bank and for money meet only at `entity.n.01`."
+    nl: "Wie steeds het eerste hyperoniem volgt, klimt van elke betekenis van een zelfstandig naamwoord in WordNet naar `entity.n.01`. De ladders van `poodle.n.01` en `cat.n.01` komen samen bij `carnivore.n.01`; de betekenissen van *bank* voor een rivieroever en voor geld pas bij `entity.n.01`."
+can_now:
+  - en: "tell whether two words are two senses of one word, synonyms, a kind and its more general sense, or a part and its whole"
+    nl: "zeggen of twee woorden twee betekenissen van één woord zijn, synoniemen, een soort en de algemenere betekenis, of een deel en het geheel"
+    by: relations
+  - en: "count the senses of every word from a list of (word, sense) pairs, with a dict"
+    nl: "de betekenissen van elk woord tellen uit een lijst met paren (woord, betekenis), met een dict"
+    by: count_senses
+  - en: "climb from a sense to the most general one with a while loop, and see where the ladders of two senses meet"
+    nl: "met een while-loop van een betekenis omhoogklimmen naar de algemeenste, en zien waar de ladders van twee betekenissen samenkomen"
+    by: chain
+further_reading:
+  - en: "Daniel Jurafsky and James H. Martin, [*Speech and Language Processing*](https://web.stanford.edu/~jurafsky/slp3/), draft of August 19, 2026, Appendix I, *Word Senses and WordNet*: senses, the relations between them, and WordNet"
+    nl: "Daniel Jurafsky en James H. Martin, [*Speech and Language Processing*](https://web.stanford.edu/~jurafsky/slp3/), conceptversie van 19 augustus 2026, bijlage I, *Word Senses and WordNet*: betekenissen, de relaties ertussen, en WordNet (in het Engels)"
+  - en: "George A. Miller, [*WordNet: A Lexical Database for English*](https://doi.org/10.1145/219717.219748), Communications of the ACM, 1995: a short description of WordNet, by the psychologist who began it"
+    nl: "George A. Miller, [*WordNet: A Lexical Database for English*](https://doi.org/10.1145/219717.219748), Communications of the ACM, 1995: een korte beschrijving van WordNet, door de psycholoog die ermee begon (in het Engels)"
+  - en: "John P. McCrae and colleagues, [*English WordNet 2019: An Open-Source WordNet for English*](https://aclanthology.org/2019.gwc-1.31/), Global WordNet Conference 2019: the open version the course uses, in its 2025 edition"
+    nl: "John P. McCrae en anderen, [*English WordNet 2019: An Open-Source WordNet for English*](https://aclanthology.org/2019.gwc-1.31/), Global WordNet Conference 2019: de open versie die de course gebruikt, in de uitgave van 2025 (in het Engels)"
+  - en: "Marten Postma and colleagues, [*Open Dutch WordNet*](https://aclanthology.org/2016.gwc-1.43/), Global WordNet Conference 2016: the Dutch words beside the English senses"
+    nl: "Marten Postma en anderen, [*Open Dutch WordNet*](https://aclanthology.org/2016.gwc-1.43/), Global WordNet Conference 2016: de Nederlandse woorden naast de Engelse betekenissen (in het Engels)"
+  - en: "Francis Bond, Piek Vossen, John McCrae and Christiane Fellbaum, [*CILI: the Collaborative Interlingual Index*](https://aclanthology.org/2016.gwc-1.9/), Global WordNet Conference 2016: how the senses of wordnets in many languages are tied together"
+    nl: "Francis Bond, Piek Vossen, John McCrae en Christiane Fellbaum, [*CILI: the Collaborative Interlingual Index*](https://aclanthology.org/2016.gwc-1.9/), Global WordNet Conference 2016: hoe de betekenissen van wordnets in veel talen aan elkaar gekoppeld zijn (in het Engels)"

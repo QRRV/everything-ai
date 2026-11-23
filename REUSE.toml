@@ -443,6 +443,12 @@ SPDX-FileCopyrightText = "2026 Everything AI contributors (embeddings made by Gr
 SPDX-License-Identifier = "CC-BY-4.0"
 
 [[annotations]]
+path = "data/wordnet-en.tsv.gz"
+precedence = "override"
+SPDX-FileCopyrightText = "2011 Princeton University (WordNet 3.1); 2019-2025 The Open English WordNet Team (Open English WordNet 2025); 2015-2016 Francis Bond (the Collaborative Interlingual Index, for the links to Princeton WordNet 3.0); an extract without slurs and crude words, for Everything AI"
+SPDX-License-Identifier = "CC-BY-4.0 AND LicenseRef-WordNet"
+
+[[annotations]]
 path = "data/wordnet-nl.tsv"
 precedence = "override"
 SPDX-FileCopyrightText = "2016 Marten Postma and others (Open Dutch WordNet, in the Open Multilingual Wordnet 2.0; the Dutch lemmas without slurs and crude words, for Everything AI)"

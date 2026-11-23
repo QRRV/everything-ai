@@ -506,8 +506,9 @@ lessons:
   module: betekenis
   idea: "One word can have several related senses (polysemy), several words one meaning (synonymy), and meanings form hierarchies (a dog is an animal: hyponymy) and wholes with parts (meronymy)."
   covers: [d15-lexicale-semantiek#0]
-  requires: [nlp-why-language-is-hard]
+  requires: [nlp-why-language-is-hard, py-while]
   introduces: [c:word-sense, c:polysemy, c:synonymy, c:hyponymy, c:meronymy]
+  mentions: [c:wordnet, c:word-embedding, c:embedding-model, c:part-of-speech, c:glove]
   data: [wordnet-en-nl]
   ladder: [python]
   needs: any
