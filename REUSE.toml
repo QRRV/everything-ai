@@ -579,3 +579,9 @@ path = "data/stsb-captions-granite.npz"
 precedence = "override"
 SPDX-FileCopyrightText = "2024 IBM (Granite Embedding, ibm-granite/granite-embedding-107m-multilingual; its cosine similarities for the pairs of data/stsb-captions.tsv.gz, computed for Everything AI) and 2026 Everything AI contributors"
 SPDX-License-Identifier = "Apache-2.0"
+
+[[annotations]]
+path = "data/mteb-eng-v2.tsv"
+precedence = "override"
+SPDX-FileCopyrightText = "The MTEB contributors (embeddings-benchmark/results, the scores; Muennighoff, Tazi, Magne and Reimers 2023, MTEB; Enevoldsen and others 2025, MMTEB, the benchmark MTEB(eng, v2)); the selection of models and tasks for Everything AI"
+SPDX-License-Identifier = "CC0-1.0"

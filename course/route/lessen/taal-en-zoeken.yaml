@@ -564,8 +564,9 @@ lessons:
   covers: [sentence-embeddings#5]
   requires: [nlp-sts]
   introduces: [c:mteb]
-  data: []
-  ladder: [python]
+  mentions: [c:average-precision, c:k-means, c:ndcg, c:mean-average-precision, c:leaderboard, c:embedding-model]
+  data: [mteb-results]
+  ladder: [python, numpy]
   needs: any
 
 

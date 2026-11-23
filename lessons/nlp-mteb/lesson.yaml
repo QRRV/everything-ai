@@ -1,0 +1,37 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: nlp-mteb
+minutes: 45
+title:
+  en: "Choosing a sentence model: reading MTEB"
+  nl: "Een model voor zinnen kiezen: MTEB lezen"
+goal:
+  en: "read the MTEB leaderboard per task type, and rank embedding models with a weighted mean that fits your own use."
+  nl: "het leaderboard van MTEB per taaktype lezen, en embedding models op volgorde zetten met een gewogen gemiddelde dat bij je eigen gebruik past."
+summary:
+  - en: "MTEB measures embedding models on many tasks at once. Each task has one main score, and tasks that use the vectors the same way form a task type; MTEB(eng, v2) has 41 English tasks of seven types: 10 retrieval, 2 reranking, 8 classification, 8 clustering, 3 pair classification, 9 STS and 1 summarization."
+    nl: "MTEB meet embedding models op veel taken tegelijk. Elke taak heeft één hoofdscore, en taken die de vectoren op dezelfde manier gebruiken, vormen een taaktype; MTEB(eng, v2) heeft 41 Engelse taken van zeven types: 10 retrieval, 2 reranking, 8 classificatie, 8 clustering, 3 paarclassificatie, 9 STS en 1 samenvatting."
+  - en: "Mean(Task) averages over all tasks, so retrieval counts for 10 of the 41; Mean(TaskType) gives each type a seventh. Both are weighted means of the task type means."
+    nl: "Mean(Task) neemt het gemiddelde over alle taken, dus retrieval telt voor 10 van de 41; Mean(TaskType) geeft elk type een zevende. Beide zijn gewogen gemiddelden van de taaktypegemiddelden."
+  - en: "One mean hides the types: among the nine models up to 300 million parameters, paraphrase-multilingual-mpnet-base-v2 is first on STS and 8th on retrieval, and granite-embedding-125m-english is first on both means and 8th on classification."
+    nl: "Eén gemiddelde verbergt de types: van de negen modellen tot 300 miljoen parameters is paraphrase-multilingual-mpnet-base-v2 eerste op STS en 8e op retrieval, en is granite-embedding-125m-english eerste op beide gemiddelden en 8e op classificatie."
+  - en: "To choose, give each task type a weight for how much it looks like your use, rank the models by that weighted mean, and strike out what does not fit: too many parameters, not your language, or trained on the tasks you weight most."
+    nl: "Om te kiezen geef je elk taaktype een weging voor hoeveel het op je gebruik lijkt, zet je de modellen op volgorde met dat gewogen gemiddelde, en streep je weg wat niet past: te veel parameters, niet jouw taal, of getraind op de taken die je het zwaarst laat wegen."
+can_now:
+  - en: "match a use of an embedding model with the MTEB task type that looks most like it"
+    nl: "een gebruik van een embedding model koppelen aan het taaktype van MTEB dat er het meest op lijkt"
+    by: use-cases
+  - en: "compute the mean of each model per task type from the scores per task"
+    nl: "het gemiddelde van elk model per taaktype berekenen uit de scores per taak"
+    by: type_means
+  - en: "find the best model for your own weights with a weighted mean"
+    nl: "het beste model bij je eigen weging vinden met een gewogen gemiddelde"
+    by: best_for
+further_reading:
+  - en: "Niklas Muennighoff, Nouamane Tazi, Loïc Magne and Nils Reimers, [*MTEB: Massive Text Embedding Benchmark*](https://aclanthology.org/2023.eacl-main.148/), 2023: the benchmark, its task types and main scores, and the results of 33 models"
+    nl: "Niklas Muennighoff, Nouamane Tazi, Loïc Magne en Nils Reimers, [*MTEB: Massive Text Embedding Benchmark*](https://aclanthology.org/2023.eacl-main.148/), 2023: de benchmark, de taaktypes en hoofdscores, en de uitkomsten van 33 modellen (in het Engels)"
+  - en: "Kenneth Enevoldsen and others, [*MMTEB: Massive Multilingual Text Embedding Benchmark*](https://arxiv.org/abs/2502.13595), 2025: more than 500 tasks in more than 250 languages, and how MTEB(eng, v2) was put together"
+    nl: "Kenneth Enevoldsen en anderen, [*MMTEB: Massive Multilingual Text Embedding Benchmark*](https://arxiv.org/abs/2502.13595), 2025: meer dan 500 taken in meer dan 250 talen, en hoe MTEB(eng, v2) is samengesteld (in het Engels)"
+  - en: "Nikolay Banar, Ehsan Lotfi, Jens Van Nooten, Cristina Arhiliuc, Marija Kliocaite and Walter Daelemans, [*MTEB-NL and E5-NL: Embedding Benchmark and Models for Dutch*](https://aclanthology.org/2026.findings-acl.1236/), 2026: 40 Dutch datasets and the scores of 45 models"
+    nl: "Nikolay Banar, Ehsan Lotfi, Jens Van Nooten, Cristina Arhiliuc, Marija Kliocaite en Walter Daelemans, [*MTEB-NL and E5-NL: Embedding Benchmark and Models for Dutch*](https://aclanthology.org/2026.findings-acl.1236/), 2026: 40 Nederlandse datasets en de scores van 45 modellen (in het Engels)"
