@@ -509,7 +509,7 @@ def text_connections():
     mo.md(r"""
     ## Afronding
 
-    **Samenhang.** [Een document als vector](/course/open/nlp-document-vectors?lang=nl) telde de woorden van elk document; deze les woog elk aantal met de inverse document frequency van het woord, een logaritme zoals in [Exponenten en logaritmen](/course/open/math-exp-log?lang=nl), zodat een woord in elk document niets telt en een zeldzaam woord het meest. Als je die waarden optelt voor de woorden van een zoekopdracht, komen de hoofdstukken die over de zoekopdracht gaan bovenaan. De volgende les van het domein, *Logistic regression op woorden*, geeft TF-IDF-vectoren aan een classifier die uit voorbeelden met labels een waarde per woord leert.
+    **Samenhang.** [Een document als vector](/course/open/nlp-document-vectors?lang=nl) telde de woorden van elk document; deze les woog elk aantal met de inverse document frequency van het woord, een logaritme zoals in [Exponenten en logaritmen](/course/open/math-exp-log?lang=nl), zodat een woord in elk document niets telt en een zeldzaam woord het meest. Als je die waarden optelt voor de woorden van een zoekopdracht, komen de hoofdstukken die over de zoekopdracht gaan bovenaan. De volgende les van het domein, *Logistische regressie op woorden*, geeft TF-IDF-vectoren aan een classifier die uit voorbeelden met labels een waarde per woord leert.
 
     **Een voorbeeld uit het dagelijks leven.** Een zoekvak op een website dat de resultaten sorteert op hoe goed elk resultaat past, kan zo werken: de pagina's die de zeldzame woorden van je zoekopdracht vaak bevatten, komen bovenaan.
     """)

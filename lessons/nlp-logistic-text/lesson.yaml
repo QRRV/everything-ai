@@ -1,0 +1,42 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: nlp-logistic-text
+minutes: 45
+title:
+  en: "Logistic regression on words"
+  nl: "Logistische regressie op woorden"
+goal:
+  en: "work out the probability that a review sentence is positive from the TF-IDF values of its words, train one weight for each word with your own slopes, and measure the result against naive Bayes."
+  nl: "de kans dat een zin uit een review positief is uitrekenen uit de TF-IDF-waarden van de woorden, met je eigen hellingen één weight per woord trainen, en de uitkomst meten tegen naive Bayes."
+summary:
+  - en: "Logistic regression on words gives each word of the vocabulary a weight: the logit of a sentence is the bias plus, for each of its words, the TF-IDF value times the weight, and the sigmoid turns it into the probability of positive. A word the sentence lacks adds nothing."
+    nl: "Logistische regressie op woorden geeft elk woord van de vocabulary een weight: de logit van een zin is de bias plus, voor elk van de woorden, de TF-IDF-waarde maal de weight, en de sigmoid maakt er de kans op positief van. Een woord dat niet in de zin staat, telt niet mee."
+  - en: "The slope of the mean log loss for the weight of a word is the sum, over the sentences that have the word, of the error p − y times its value, divided by the number of sentences. Each sentence pushes only the weights of its own words."
+    nl: "De helling van de gemiddelde log loss voor de weight van een woord is de som, over de zinnen met dat woord, van de fout p − y maal de waarde, gedeeld door het aantal zinnen. Elke zin past alleen de weights van de eigen woorden aan."
+  - en: "After 300 steps on 2,400 review sentences, *great* has the highest weight. The model labels 491 of 600 held-out sentences right; naive Bayes, on the plain counts, 497. On short texts naive Bayes often does as well as logistic regression."
+    nl: "Na 300 stappen op 2.400 zinnen uit reviews heeft *great* de hoogste weight. Het model geeft 491 van de 600 achtergehouden zinnen het goede label; naive Bayes, op de kale aantallen, 497. Op korte teksten doet naive Bayes het vaak even goed als logistische regressie."
+  - en: "In the early 1990s, logistic regression was also developed for NLP under another name: maximum entropy, or maxent. A weight belongs to one word, wherever it stands, so the model cannot see that a negation turns the next word around."
+    nl: "Begin jaren negentig werd logistische regressie voor NLP ook ontwikkeld onder een andere naam: maximum entropy, of maxent. Een weight hoort bij één woord, waar het ook staat, dus het model ziet niet dat een ontkenning het volgende woord omdraait."
+can_now:
+  - en: "work out the probability of positive from the TF-IDF values and the weights of the words of a sentence"
+    nl: "de kans op positief uitrekenen uit de TF-IDF-waarden en de weights van de woorden van een zin"
+    by: probability
+  - en: "work out the slope of the mean log loss for the weight of every word and for the bias"
+    nl: "de helling van de gemiddelde log loss uitrekenen voor de weight van elk woord en voor de bias"
+    by: gradients
+  - en: "measure the share of held-out sentences that a classifier labels right"
+    nl: "het aandeel achtergehouden zinnen meten dat een classifier het goede label geeft"
+    by: accuracy
+  - en: "say from the sentences a word occurs in which way its weight goes"
+    nl: "uit de zinnen waarin een woord voorkomt zeggen welke kant de weight op gaat"
+    by: what-weight
+further_reading:
+  - en: "Daniel Jurafsky and James H. Martin, [*Speech and Language Processing*](https://web.stanford.edu/~jurafsky/slp3/), draft of August 19, 2026, the chapter *Logistic Regression and Text Classification*: features and weights, the gradient of the log loss, interpreting a model by its weights, and the historical notes on maxent"
+    nl: "Daniel Jurafsky en James H. Martin, [*Speech and Language Processing*](https://web.stanford.edu/~jurafsky/slp3/), conceptversie van 19 augustus 2026, het hoofdstuk *Logistic Regression and Text Classification*: features en weights, de gradient van de log loss, een model uitleggen met de weights, en de historische noten over maxent (in het Engels)"
+  - en: "Andrew Y. Ng and Michael I. Jordan, [*On Discriminative vs. Generative Classifiers: A comparison of logistic regression and naive Bayes*](https://proceedings.neurips.cc/paper_files/paper/2001/hash/7b7a53e239400a13bd6be6c91c4f6c4e-Abstract.html), NIPS 2001: with few examples naive Bayes can be ahead, with many logistic regression can pass it"
+    nl: "Andrew Y. Ng en Michael I. Jordan, [*On Discriminative vs. Generative Classifiers: A comparison of logistic regression and naive Bayes*](https://proceedings.neurips.cc/paper_files/paper/2001/hash/7b7a53e239400a13bd6be6c91c4f6c4e-Abstract.html), NIPS 2001: met weinig voorbeelden kan naive Bayes het beter doen, met veel voorbeelden kan logistische regressie het inhalen (in het Engels)"
+  - en: "Sida Wang and Christopher D. Manning, [*Baselines and Bigrams: Simple, Good Sentiment and Topic Classification*](https://aclanthology.org/P12-2018/), ACL 2012: naive Bayes against support vector machines, on short snippets and on longer documents"
+    nl: "Sida Wang en Christopher D. Manning, [*Baselines and Bigrams: Simple, Good Sentiment and Topic Classification*](https://aclanthology.org/P12-2018/), ACL 2012: naive Bayes tegen support vector machines, op korte fragmenten en op langere documenten (in het Engels)"
+  - en: "Adam L. Berger, Stephen A. Della Pietra and Vincent J. Della Pietra, [*A Maximum Entropy Approach to Natural Language Processing*](https://aclanthology.org/J96-1002/), Computational Linguistics 22(1), 1996: the paper Jurafsky and Martin cite for maxent in NLP"
+    nl: "Adam L. Berger, Stephen A. Della Pietra en Vincent J. Della Pietra, [*A Maximum Entropy Approach to Natural Language Processing*](https://aclanthology.org/J96-1002/), Computational Linguistics 22(1), 1996: het paper waarnaar Jurafsky en Martin verwijzen voor maxent in NLP (in het Engels)"

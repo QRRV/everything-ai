@@ -407,9 +407,9 @@ lessons:
   module: tekst-verwerken
   idea: "Logistic regression on TF-IDF vectors learns one weight per word: the largest weights show which words push towards each class, and on short texts naive Bayes often does just as well, which you measure."
   covers: [klassieke-tekstclassificatie#3]
-  requires: [nlp-tf-idf, ml-logistic-regression]
+  requires: [nlp-tf-idf, ml-logistic-regression, ml-train-logistic]
   introduces: [c:maximum-entropy-classifier]
-  data: [uci-sentiment-sentences, course-sentiment-nl]
+  data: [uci-sentiment-sentences]
   ladder: [python, numpy]
   needs: any
 
