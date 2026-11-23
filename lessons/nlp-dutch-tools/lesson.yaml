@@ -1,0 +1,44 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: nlp-dutch-tools
+minutes: 35
+title:
+  en: "Tools and corpora for Dutch"
+  nl: "Tools en corpora voor het Nederlands"
+goal:
+  en: "know the main tools and corpora for Dutch, and measure in a Dutch treebank what rules written for English miss: separable verbs, and where their particles stand."
+  nl: "de belangrijkste tools en corpora voor het Nederlands kennen, en in een Nederlandse treebank meten wat regels voor het Engels missen: scheidbare werkwoorden, en waar de partikels ervan staan."
+summary:
+  - en: "Dutch has tools of its own: Alpino, a parser built on a grammar written by hand, and Frog, a toolkit that learned from Dutch corpora. spaCy and Stanza have Dutch models, trained on the Dutch treebanks of Universal Dependencies."
+    nl: "Het Nederlands heeft eigen tools: Alpino, een parser op basis van een grammatica die met de hand is geschreven, en Frog, een toolkit die leerde van Nederlandse corpora. spaCy en Stanza hebben Nederlandse modellen, getraind op de Nederlandse treebanks van Universal Dependencies."
+  - en: "The main corpora of Dutch: SoNaR for written Dutch, the Corpus Gesproken Nederlands for speech, and Lassy for trees, checked by people in Lassy Small and parsed by Alpino in Lassy Large."
+    nl: "De belangrijkste corpora van het Nederlands: SoNaR voor geschreven Nederlands, het Corpus Gesproken Nederlands voor spraak, en Lassy voor bomen, door mensen gecontroleerd in Lassy Klein en door Alpino geparst in Lassy Groot."
+  - en: "In UD_Dutch-Alpino, the lemma of a separable verb nearly always joins its particle with an underscore, also when the verb is written as one word. The lemma finds separable verbs that a search for particles misses."
+    nl: "In UD_Dutch-Alpino zet het lemma van een scheidbaar werkwoord het partikel er vrijwel altijd met een underscore aan vast, ook als het werkwoord als één woord in de zin staat. Het lemma vindt scheidbare werkwoorden die je mist als je naar partikels zoekt."
+  - en: "Where a particle stands differs between Dutch and English. Count it in a treebank before you trust a rule written for another language."
+    nl: "Waar een partikel staat, verschilt tussen het Nederlands en het Engels. Tel het in een treebank voordat je een regel vertrouwt die voor een andere taal is geschreven."
+can_now:
+  - en: "find the separable verbs of a Dutch sentence by their lemmas, also those written as one word"
+    nl: "de scheidbare werkwoorden van een Nederlandse zin vinden aan de lemma's, ook als een werkwoord als één woord in de zin staat"
+    by: separable
+  - en: "count in a treebank how far the particles stand from their verbs, and compare two languages"
+    nl: "in een treebank tellen hoe ver elk partikel van het werkwoord staat, en twee talen vergelijken"
+    by: gap_counts
+  - en: "choose a corpus of Dutch for a task: SoNaR, the Corpus Gesproken Nederlands, Lassy Small or Lassy Large"
+    nl: "een corpus van het Nederlands kiezen voor een taak: SoNaR, het Corpus Gesproken Nederlands, Lassy Klein of Lassy Groot"
+    by: corpus
+  - en: "say why new Dutch sentences need a parser for Dutch, and not a rule written for English"
+    nl: "uitleggen waarom nieuwe Nederlandse zinnen een parser voor het Nederlands nodig hebben, en geen regel die voor het Engels is geschreven"
+    by: rule
+further_reading:
+  - en: "Gertjan van Noord, [*At Last Parsing Is Now Operational*](https://www.let.rug.nl/vannoord/papers/taln.pdf), TALN 2006: how Alpino parses Dutch, with a grammar written by hand and a statistical model"
+    nl: "Gertjan van Noord, [*At Last Parsing Is Now Operational*](https://www.let.rug.nl/vannoord/papers/taln.pdf), TALN 2006: hoe Alpino Nederlands parst, met een grammatica die met de hand is geschreven en een statistisch model (in het Engels)"
+  - en: "Antal van den Bosch, Bertjan Busser, Sander Canisius and Walter Daelemans, [*An efficient memory-based morphosyntactic tagger and parser for Dutch*](https://www.clinjournal.org/CLIN_proceedings/XVII/vandenbosch.pdf), CLIN 2007: Frog, under its earlier name Tadpole"
+    nl: "Antal van den Bosch, Bertjan Busser, Sander Canisius en Walter Daelemans, [*An efficient memory-based morphosyntactic tagger and parser for Dutch*](https://www.clinjournal.org/CLIN_proceedings/XVII/vandenbosch.pdf), CLIN 2007: Frog, onder de eerdere naam Tadpole (in het Engels)"
+  - en: "Gertjan van Noord and others, [*Large Scale Syntactic Annotation of Written Dutch: Lassy*](https://doi.org/10.1007/978-3-642-30910-6_9), in *Essential Speech and Language Technology for Dutch* (2013, open access): how Lassy Small and Lassy Large were made and checked"
+    nl: "Gertjan van Noord en anderen, [*Large Scale Syntactic Annotation of Written Dutch: Lassy*](https://doi.org/10.1007/978-3-642-30910-6_9), in *Essential Speech and Language Technology for Dutch* (2013, vrij te lezen): hoe Lassy Klein en Lassy Groot zijn gemaakt en gecontroleerd (in het Engels)"
+  - en: "Nelleke Oostdijk, Martin Reynaert, Véronique Hoste and Ineke Schuurman, [*The Construction of a 500-Million-Word Reference Corpus of Contemporary Written Dutch*](https://doi.org/10.1007/978-3-642-30910-6_13), in the same book: SoNaR"
+    nl: "Nelleke Oostdijk, Martin Reynaert, Véronique Hoste en Ineke Schuurman, [*The Construction of a 500-Million-Word Reference Corpus of Contemporary Written Dutch*](https://doi.org/10.1007/978-3-642-30910-6_13), in hetzelfde boek: SoNaR (in het Engels)"
+  - en: "[*Algemene Nederlandse Spraakkunst*, 12.3.4 Samenkoppeling](https://e-ans.ivdnt.org/topics/pid/topic-11721585681016076): the reference grammar of Dutch on separable verbs (in Dutch)"
+    nl: "[*Algemene Nederlandse Spraakkunst*, 12.3.4 Samenkoppeling](https://e-ans.ivdnt.org/topics/pid/topic-11721585681016076): de naslaggrammatica van het Nederlands over scheidbaar samengestelde werkwoorden"
