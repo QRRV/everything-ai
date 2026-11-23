@@ -1,0 +1,40 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: nlp-span-f1
+minutes: 40
+title:
+  en: "Scoring a tagger: accuracy and span F1"
+  nl: "Een tagger beoordelen: accuracy en span F1"
+goal:
+  en: "score a tagger of names in two ways, by the share of tokens with the right tag and by precision, recall and F1 over names, and see why the second way fits names."
+  nl: "een tagger van namen op twee manieren scoren, met het deel van de tokens met de goede tag en met precision, recall en F1 over namen, en zien waarom de tweede manier bij namen past."
+summary:
+  - en: "Accuracy per token is the share of all tokens whose tag is the tag people gave. In the test set of Universal NER, 17,758 of the 18,990 tokens are O, so a tagger that finds no name at all gets 0.935, and the tagger of the lesson about finding names 0.958."
+    nl: "Accuracy per token is het deel van alle tokens waarvan de tag de tag is die mensen gaven. In de test set van Universal NER zijn 17.758 van de 18.990 tokens O, dus een tagger die geen enkele naam vindt krijgt 0,935, en de tagger uit de les over namen vinden 0,958."
+  - en: "Span F1 takes the name as the unit: a find is right only as an exact match, with the same start, end and type as a name people marked. Precision is the share of the finds that are right, recall the share of the names found, and F1 their harmonic mean."
+    nl: "Span F1 neemt de naam als eenheid: een vondst is alleen goed als exacte match, met dezelfde start, hetzelfde end en hetzelfde type als een naam die mensen markeerden. Precision is het deel van de vondsten dat goed is, recall het deel van de namen dat gevonden is, en F1 het harmonisch gemiddelde van de twee."
+  - en: "By span F1, five taggers lie between 0 and 0.551 instead of within 0.061 of each other, and a name cut wrong costs twice: a wrong find and a missed name."
+    nl: "Met span F1 liggen vijf taggers tussen 0 en 0,551 in plaats van binnen 0,061 van elkaar, en een verkeerd afgeknipte naam kost dubbel: een foute vondst en een gemiste naam."
+  - en: "Span F1 per type shows what one number hides: the tagger is better at persons, the gazetteer at organizations."
+    nl: "Span F1 per type laat zien wat één getal verbergt: de tagger is beter in personen, de gazetteer in organisaties."
+can_now:
+  - en: "compute the accuracy per token of a tagger over all sentences"
+    nl: "de accuracy per token van een tagger over alle zinnen berekenen"
+    by: token_accuracy
+  - en: "compute precision, recall and span F1 over names, with exact matches per sentence"
+    nl: "precision, recall en span F1 over namen berekenen, met exacte matches per zin"
+    by: span_f1
+  - en: "score each type of name on its own"
+    nl: "elk type naam apart scoren"
+    by: of_kind
+  - en: "say what a name cut wrong costs in span F1"
+    nl: "zeggen wat een verkeerd afgeknipte naam kost bij span F1"
+    by: near-miss
+further_reading:
+  - en: "Daniel Jurafsky and James H. Martin, [*Speech and Language Processing*](https://web.stanford.edu/~jurafsky/slp3/), draft of August 19, 2026, the chapter *Sequence Labeling for Parts of Speech and Named Entities*: section 18.6 on the evaluation of named entity recognition"
+    nl: "Daniel Jurafsky en James H. Martin, [*Speech and Language Processing*](https://web.stanford.edu/~jurafsky/slp3/), conceptversie van 19 augustus 2026, het hoofdstuk *Sequence Labeling for Parts of Speech and Named Entities*: paragraaf 18.6 over het scoren van named entity recognition (in het Engels)"
+  - en: "Erik F. Tjong Kim Sang and Fien De Meulder, [*Introduction to the CoNLL-2003 Shared Task: Language-Independent Named Entity Recognition*](https://aclanthology.org/W03-0419/), 2003: the shared task whose precision, recall and F1 count a name only as an exact match"
+    nl: "Erik F. Tjong Kim Sang en Fien De Meulder, [*Introduction to the CoNLL-2003 Shared Task: Language-Independent Named Entity Recognition*](https://aclanthology.org/W03-0419/), 2003: de shared task waarin precision, recall en F1 een naam alleen bij een exacte match goed rekenen (in het Engels)"
+  - en: "Stephen Mayhew and others, [*Universal NER: A Gold-Standard Multilingual Named Entity Recognition Benchmark*](https://aclanthology.org/2024.naacl-long.243/), 2024: the dataset of this lesson, how well two people agree on its names, and the scores of a large model on it"
+    nl: "Stephen Mayhew en anderen, [*Universal NER: A Gold-Standard Multilingual Named Entity Recognition Benchmark*](https://aclanthology.org/2024.naacl-long.243/), 2024: de dataset van deze les, hoe goed twee mensen het eens zijn over de namen, en de scores van een groot model erop (in het Engels)"
