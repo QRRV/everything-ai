@@ -585,3 +585,9 @@ path = "data/mteb-eng-v2.tsv"
 precedence = "override"
 SPDX-FileCopyrightText = "The MTEB contributors (embeddings-benchmark/results, the scores; Muennighoff, Tazi, Magne and Reimers 2023, MTEB; Enevoldsen and others 2025, MMTEB, the benchmark MTEB(eng, v2)); the selection of models and tasks for Everything AI"
 SPDX-License-Identifier = "CC0-1.0"
+
+[[annotations]]
+path = "data/uner-en-ewt.tsv.gz"
+precedence = "override"
+SPDX-FileCopyrightText = "Stephen Mayhew and others (Universal NER v1, UNER_English-EWT, the names); 2013-2021 The Board of Trustees of The Leland Stanford Junior University (the Universal Dependencies English Web Treebank; portions of the texts may be 2012 Google Inc., 2011 Yahoo! Inc., 2012 Trustees of the University of Pennsylvania and/or other original authors; without the e-mails, for Everything AI)"
+SPDX-License-Identifier = "CC-BY-SA-4.0"

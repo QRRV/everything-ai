@@ -580,6 +580,7 @@ lessons:
   covers: [sequence-labelling-en-structuur#0]
   requires: [nlp-word-classes, nlp-tokenize]
   introduces: [c:sequence-labeling, c:bio-tagging]
+  mentions: [c:treebank, c:universal-dependencies, c:shared-task, c:trace]
   warns: [span]
   data: [uner-english-ewt]
   ladder: [python]

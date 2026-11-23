@@ -1,0 +1,40 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: nlp-bio-tags
+minutes: 40
+title:
+  en: "A label per word: sequence labeling and BIO"
+  nl: "Een label per woord: sequence labeling en BIO"
+goal:
+  en: "turn names of several words into one label per word with BIO tags, read the tags back into names, and see what IO tags lose."
+  nl: "namen van meerdere woorden omzetten in één label per woord met BIO-tags, de tags weer teruglezen als namen, en zien wat er met IO-tags verloren gaat."
+summary:
+  - en: "Sequence labeling gives every token of a sentence one label, so there are as many labels as tokens; tagging parts of speech is one such task. A name of a person, a place or an organization is a span: a stretch of tokens next to each other, written in the course as `(start, end, kind)`, with `end` just after the last token, as in a slice."
+    nl: "Sequence labeling geeft elk token van een zin één label, dus er zijn evenveel labels als tokens; woordsoorten taggen is zo'n taak. Een naam van een persoon, een plaats of een organisatie is een span: een reeks tokens naast elkaar, in de course geschreven als `(start, end, kind)`, met `end` net na het laatste token, zoals bij een slice."
+  - en: "BIO tagging turns spans into labels: B- and the type on the first token of a span, I- and the type on the tokens after it, O on all other tokens. Universal NER marks names of three types this way, PER, LOC and ORG, so the English sentences of this lesson use seven labels; 95 of every 100 tokens get O."
+    nl: "BIO tagging maakt van spans labels: B- en het type op het eerste token van een span, I- en het type op de tokens erna, O op alle andere tokens. Universal NER markeert zo namen van drie types, PER, LOC en ORG, dus de Engelse zinnen van deze les gebruiken zeven labels; 95 van elke 100 tokens krijgen O."
+  - en: "IO tagging leaves out the B and turns two spans of the same type that touch into one: *Miramar California* becomes one place. In the 11,722 sentences, a B- follows a span of the same type 33 times. IOB1 puts a B only there, IOB2 on every first token, and BIOES adds E and S."
+    nl: "IO tagging laat de B weg, en maakt van twee spans van hetzelfde type die elkaar raken er één: *Miramar California* wordt één plaats. In de 11.722 zinnen volgt een B- 33 keer op een span van hetzelfde type. IOB1 zet alleen daar een B, IOB2 op elk eerste token, en BIOES voegt E en S toe."
+  - en: "Tags go back to spans from left to right: a B- starts a span, an I- right after a span of the same type makes it longer, and any other I- starts a new span, as the evaluation script of the CoNLL shared tasks reads it. The same word can be in spans of different types, such as *Washington*, so the words around a name have to help."
+    nl: "Tags worden van links naar rechts weer spans: een B- begint een span, een I- direct na een span van hetzelfde type maakt die span langer, en elke andere I- begint een nieuwe span, zoals het evaluatiescript van de CoNLL shared tasks het leest. Hetzelfde woord kan in spans van verschillende types staan, zoals *Washington*, dus de woorden rond een naam moeten helpen."
+can_now:
+  - en: "turn spans of names into BIO tags, one per token"
+    nl: "spans van namen omzetten in BIO-tags, één per token"
+    by: to_tags
+  - en: "read BIO tags back into spans, also when a tagger gives an I- after an O"
+    nl: "BIO-tags teruglezen als spans, ook als een tagger een I- na een O geeft"
+    by: to_spans
+  - en: "tell when IO tags lose a span, and when they keep spans apart"
+    nl: "zeggen wanneer IO-tags een span kwijtraken, en wanneer de tags spans uit elkaar houden"
+    by: io-or-bio
+  - en: "explain why the type of a name depends on the words around it"
+    nl: "uitleggen waarom het type van een naam afhangt van de woorden eromheen"
+    by: kinds
+further_reading:
+  - en: "Daniel Jurafsky and James H. Martin, [*Speech and Language Processing*](https://web.stanford.edu/~jurafsky/slp3/), draft of August 19, 2026, the chapter *Sequence Labeling for Parts of Speech and Named Entities*, section 18.3: names, their types, and BIO, IO and BIOES tagging"
+    nl: "Daniel Jurafsky en James H. Martin, [*Speech and Language Processing*](https://web.stanford.edu/~jurafsky/slp3/), conceptversie van 19 augustus 2026, het hoofdstuk *Sequence Labeling for Parts of Speech and Named Entities*, paragraaf 18.3: namen, de types ervan, en BIO, IO en BIOES tagging (in het Engels)"
+  - en: "Stephen Mayhew and others, [*Universal NER: A Gold-Standard Multilingual Named Entity Recognition Benchmark*](https://aclanthology.org/2024.naacl-long.243/), 2024: how the names of 19 datasets in 13 languages were marked, with the agreement between the people who marked them"
+    nl: "Stephen Mayhew en anderen, [*Universal NER: A Gold-Standard Multilingual Named Entity Recognition Benchmark*](https://aclanthology.org/2024.naacl-long.243/), 2024: hoe de namen van 19 datasets in 13 talen zijn gemarkeerd, en hoe goed de mensen die de namen markeerden het met elkaar eens waren (in het Engels)"
+  - en: "Erik F. Tjong Kim Sang and Jorn Veenstra, [*Representing Text Chunks*](https://aclanthology.org/E99-1023/), 1999: IOB1, IOB2, IOE1 and IOE2 side by side, for noun phrases"
+    nl: "Erik F. Tjong Kim Sang en Jorn Veenstra, [*Representing Text Chunks*](https://aclanthology.org/E99-1023/), 1999: IOB1, IOB2, IOE1 en IOE2 naast elkaar, voor naamwoordgroepen (in het Engels)"
