@@ -1,0 +1,44 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: nlp-tf-idf
+minutes: 45
+title:
+  en: "TF-IDF: weighing the words"
+  nl: "TF-IDF: woorden wegen"
+goal:
+  en: "count in how many documents each word occurs, weigh the counts of a document by TF-IDF, and search 251 chapters of five books by adding up the weights of the search words."
+  nl: "tellen in hoeveel documenten elk woord voorkomt, de aantallen van een document wegen met TF-IDF, en in 251 hoofdstukken van vijf boeken zoeken door de waarden van de zoekwoorden op te tellen."
+summary:
+  - en: "The term frequency of a word is how often it occurs in one document; the document frequency is the number of documents it occurs in. Two words with the same total count can differ a lot in document frequency: *alice* occurs 397 times in 15 of the 251 chapters, *life* 399 times in 157."
+    nl: "De term frequency van een woord is hoe vaak het in één document voorkomt; de *document frequency* is het aantal documenten waarin het voorkomt. Twee woorden met hetzelfde totale aantal kunnen sterk verschillen in *document frequency*: *alice* komt 397 keer voor in 15 van de 251 hoofdstukken, *life* 399 keer in 157."
+  - en: "The inverse document frequency, IDF, is the log with base 10 of the quotient N / df, the number of documents divided by the document frequency: 0 for a word in every document, and 1 lower for every ten times as many documents."
+    nl: "De inverse document frequency, IDF, is de logaritme met grondtal 10 van het quotiënt N / df, het aantal documenten gedeeld door de *document frequency*: 0 voor een woord in elk document, en 1 lager voor elke tien keer zoveel documenten."
+  - en: "TF-IDF multiplies the count of a word in a document by its IDF: highest for a word that occurs often in few documents. In *A Mad Tea-Party*, *the* occurs 158 times and gets 0, and *hatter* comes first."
+    nl: "TF-IDF vermenigvuldigt het aantal van een woord in een document met de IDF: het hoogst voor een woord dat vaak in weinig documenten voorkomt. In *A Mad Tea-Party* komt *the* 158 keer voor en krijgt 0, en staat *hatter* bovenaan."
+  - en: "A search scores each document by the sum of the weights of the search words. By plain counts, *the cat* finds a Sherlock Holmes story with 598 times *the*; by TF-IDF, it finds *Pig and Pepper*, the chapter of the Cheshire Cat. Variants take the log of the count, or smooth the IDF, and a long document still gets an edge."
+    nl: "Een zoekopdracht geeft elk document als score de som van de waarden van de zoekwoorden. Op kale aantallen vindt *the cat* een verhaal over Sherlock Holmes met 598 keer *the*; met TF-IDF vindt de zoekopdracht *Pig and Pepper*, het hoofdstuk van de Cheshire Cat. Varianten nemen de logaritme van het aantal, of maken de IDF gladder, en een lang document heeft nog steeds een voordeel."
+can_now:
+  - en: "count for each word the number of documents it occurs in"
+    nl: "voor elk woord het aantal documenten tellen waarin het voorkomt"
+    by: document-frequency
+  - en: "weigh the counts of one document by the inverse document frequency of each word"
+    nl: "de aantallen van één document wegen met de inverse document frequency van elk woord"
+    by: tf-idf
+  - en: "score a document for a search by adding up the weights of the search words"
+    nl: "een document een score geven voor een zoekopdracht door de waarden van de zoekwoorden op te tellen"
+    by: score
+  - en: "say what weight a word gets from how often it occurs in a document and in how many documents"
+    nl: "zeggen welke waarde een woord krijgt uit hoe vaak het in een document voorkomt en in hoeveel documenten"
+    by: what-weight
+further_reading:
+  - en: "Christopher D. Manning, Prabhakar Raghavan and Hinrich Schütze, [*Introduction to Information Retrieval*](https://nlp.stanford.edu/IR-book/), Cambridge University Press, 2008, chapter 6: collection and document frequency, idf, tf-idf, the score of a search, and the log of the count"
+    nl: "Christopher D. Manning, Prabhakar Raghavan en Hinrich Schütze, [*Introduction to Information Retrieval*](https://nlp.stanford.edu/IR-book/), Cambridge University Press, 2008, hoofdstuk 6: *collection frequency* en *document frequency*, idf, TF-IDF, de score van een zoekopdracht, en de logaritme van het aantal (in het Engels)"
+  - en: "Daniel Jurafsky and James H. Martin, [*Speech and Language Processing*](https://web.stanford.edu/~jurafsky/slp3/), draft of August 19, 2026, the chapter *Retrieval-based Models*, section 11.1: term weighting with tf-idf and BM25, with idf values of words in the plays of Shakespeare"
+    nl: "Daniel Jurafsky en James H. Martin, [*Speech and Language Processing*](https://web.stanford.edu/~jurafsky/slp3/), conceptversie van 19 augustus 2026, het hoofdstuk *Retrieval-based Models*, paragraaf 11.1: termen wegen met TF-IDF en BM25, met de idf van woorden in de toneelstukken van Shakespeare (in het Engels)"
+  - en: "Karen Spärck Jones, [*A statistical interpretation of term specificity and its application in retrieval*](https://doi.org/10.1108/eb026526), Journal of Documentation 28(1), 1972: the paper both textbooks cite for the inverse document frequency"
+    nl: "Karen Spärck Jones, [*A statistical interpretation of term specificity and its application in retrieval*](https://doi.org/10.1108/eb026526), Journal of Documentation 28(1), 1972: het paper waarnaar beide leerboeken verwijzen voor de inverse document frequency (in het Engels)"
+  - en: "Stephen Robertson, [*Understanding inverse document frequency: on theoretical arguments for IDF*](https://doi.org/10.1108/00220410410560582), Journal of Documentation 60(5), 2004: a review of theoretical arguments for the IDF, which finds good ones in the probabilistic model of information retrieval"
+    nl: "Stephen Robertson, [*Understanding inverse document frequency: on theoretical arguments for IDF*](https://doi.org/10.1108/00220410410560582), Journal of Documentation 60(5), 2004: een overzicht van theoretische argumenten voor de IDF, met goede argumenten in het probabilistische model van information retrieval (in het Engels)"
+  - en: "scikit-learn, [*Feature extraction*](https://scikit-learn.org/stable/modules/feature_extraction.html#tfidf-term-weighting), the section *Tf–idf term weighting*: TfidfVectorizer, its smoothed IDF with the natural log, and the length of each vector set to 1"
+    nl: "scikit-learn, [*Feature extraction*](https://scikit-learn.org/stable/modules/feature_extraction.html#tfidf-term-weighting), het deel *Tf–idf term weighting*: TfidfVectorizer, de gladgemaakte IDF met de natuurlijke logaritme, en elke vector op lengte 1 (in het Engels)"

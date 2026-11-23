@@ -395,6 +395,7 @@ lessons:
   covers: [klassieke-tekstclassificatie#1]
   requires: [nlp-document-vectors, math-exp-log]
   introduces: [c:term-frequency, c:inverse-document-frequency, c:tf-idf]
+  mentions: [c:information-retrieval, c:bm25]
   data: [gutenberg-books]
   ladder: [python, numpy]
   needs: any

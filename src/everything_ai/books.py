@@ -12,7 +12,8 @@ each with a Dutch translation (data/tools/make_tatoeba_pairs.py), and `language_
 Tatoeba in each of twelve languages in data/tatoeba-langs.tsv.gz (data/tools/make_tatoeba_langs.py). `stop_words(lang)` gives the stop words of Snowball
 for English or Dutch in data/snowball-stop-en.txt and data/snowball-stop-nl.txt (data/tools/make_snowball_stopwords.py).
 `review_sentences()` gives the 3,000 labelled review sentences of data/uci-sentiment.tsv.gz
-(data/tools/make_uci_sentiment.py)."""
+(data/tools/make_uci_sentiment.py). `english_chapters()` cuts the five English books into their 251 chapters, stories
+and letters, so that a lesson can use them as documents."""
 import functools
 import gzip
 import json
@@ -62,6 +63,96 @@ def _words(key: str) -> tuple:
 def book_words(key: str) -> list:
     """The words of one book, as a new list each time, so that a learner's code cannot change the course's copy."""
     return list(_words(key))
+
+
+# --- the English books in chapters ----------------------------------------------------------------------------------
+
+_ROMAN = {"I": 1, "V": 5, "X": 10, "L": 50, "C": 100}
+_HOLMES = ["A Scandal in Bohemia", "The Red-Headed League", "A Case of Identity", "The Boscombe Valley Mystery",
+           "The Five Orange Pips", "The Man with the Twisted Lip", "The Adventure of the Blue Carbuncle",
+           "The Adventure of the Speckled Band", "The Adventure of the Engineer’s Thumb",
+           "The Adventure of the Noble Bachelor", "The Adventure of the Beryl Coronet",
+           "The Adventure of the Copper Beeches"]
+
+
+def _roman(numeral: str) -> int:
+    values = [_ROMAN[c] for c in numeral]
+    return sum(-v if i + 1 < len(values) and values[i + 1] > v else v for i, v in enumerate(values))
+
+
+def _heads(key: str, lines: list) -> list:
+    """(line, kind, number, title) for each heading of an English book, after its list of contents. The file is pinned
+    by its SHA-256, so the first line of the text proper is a fixed number, and the asserts say when a rule misses."""
+    heads = []
+    for i, line in enumerate(lines):
+        s = line.strip()
+        if key == "alice" and i > 24 and (m := re.match(r"^CHAPTER ([IVXL]+)\.$", s)):
+            heads.append((i, "chapter", _roman(m.group(1)), lines[i + 1].strip()))
+        elif key == "pride" and (m := re.match(r"^(?:CHAPTER|Chapter) ([IVXLC]+)\.?\]?$", s)):
+            heads.append((i, "chapter", _roman(m.group(1)), ""))
+        elif key == "holmes" and i > 18 and (m := re.match(r"^([IVX]+)\. ([A-Z’ \-]+)$", s)):
+            number = _roman(m.group(1))
+            assert _HOLMES[number - 1].upper() == m.group(2), s
+            heads.append((i, "story", number, _HOLMES[number - 1]))
+        elif key == "frankenstein" and i > 36 and (m := re.match(r"^(Letter|Chapter) (\d+)$", s)):
+            heads.append((i, m.group(1).lower(), int(m.group(2)), ""))
+        elif key == "moby-dick" and i > 296:
+            if s == "ETYMOLOGY." or s.startswith("EXTRACTS. (Supplied") or s == "Epilogue":
+                heads.append((i, s.split(".")[0].lower(), 0, ""))
+            elif m := re.match(r"^CHAPTER (\d+)\. (.*?)\.?$", s):
+                heads.append((i, "chapter", int(m.group(1)), m.group(2)))
+    numbers = [(kind, n) for _, kind, n, _ in heads]
+    expected = {"alice": [("chapter", n) for n in range(1, 13)],
+                "pride": [("chapter", n) for n in range(1, 62)],
+                "holmes": [("story", n) for n in range(1, 13)],
+                "frankenstein": [("letter", n) for n in range(1, 5)] + [("chapter", n) for n in range(1, 25)],
+                "moby-dick": [("etymology", 0), ("extracts", 0)] + [("chapter", n) for n in range(1, 136)]
+                + [("epilogue", 0)]}[key]
+    assert numbers == expected, (key, numbers[:5])
+    return heads
+
+
+# what the printed editions add to a chapter and the author did not write: the illustrations of Pride and Prejudice
+# with their captions and copyright lines (one bracket may sit inside another; a picture whose block holds the next
+# heading is still open at the end of a chapter), its printer's colophon, the numbers I. to III. of the parts of a
+# Sherlock Holmes story, and the second heading of the extracts of Moby-Dick
+_ILLUSTRATION = re.compile(r"\[Illustration(?:[^\[\]]|\[[^\[\]]*\])*(?:\]|\Z)")
+_PRINTER = re.compile(r"^ *(CHISWICK PRESS:--CHARLES WHITTINGHAM AND CO\.|TOOKS COURT, CHANCERY LANE, LONDON\.)$", re.M)
+_PART = re.compile(r"^ *[IVX]+\.$", re.M)
+
+
+def _body(key: str, text: str) -> str:
+    if key == "pride":
+        return _PRINTER.sub("", _ILLUSTRATION.sub("", text))
+    if key == "holmes":
+        return _PART.sub("", text)
+    if key == "moby-dick":
+        return re.sub(r"^ *EXTRACTS\.$", "", text, flags=re.M)
+    return text
+
+
+@functools.cache
+def _chapters() -> tuple:
+    out = []
+    for key in ("alice", "pride", "holmes", "frankenstein", "moby-dick"):
+        lines = book(key)["text"].split("\n")
+        heads = _heads(key, lines)
+        for j, (i, kind, number, title) in enumerate(heads):
+            end = heads[j + 1][0] if j + 1 < len(heads) else len(lines)
+            start = i + 2 if key == "alice" else i + 1   # after the heading, and after Alice's title line
+            out.append((key, kind, number, title, tuple(words(_body(key, "\n".join(lines[start:end]))))))
+    return tuple(out)
+
+
+def english_chapters() -> list:
+    """The five English books cut into 251 parts, each from its heading to the next: (key, kind, number, title, words),
+    with kind "chapter", "story" (the twelve stories of Sherlock Holmes), "letter" (the four letters that open
+    Frankenstein), or "etymology", "extracts" and "epilogue" (in Moby-Dick, number 0). The title is "" where the book
+    gives none. The words are those after the heading line (and after the title line in Alice), as the text writes them;
+    what comes before the first heading (a title page, a list of contents, the preface of Pride and Prejudice) is left
+    out, and so is what the printed editions add: the illustrations of Pride and Prejudice with their captions, its
+    printer's colophon, the part numbers of the Sherlock Holmes stories and a second heading in Moby-Dick."""
+    return [(key, kind, number, title, list(ws)) for key, kind, number, title, ws in _chapters()]
 
 
 @functools.cache
