@@ -494,6 +494,7 @@ lessons:
   covers: [distributionele-semantiek-en-word-embeddings#6]
   requires: [nlp-word-embeddings]
   introduces: [c:static-embedding, c:contextual-embedding]
+  mentions: [c:bert, c:attention]
   data: [glove-50d, model-bert-tiny]
   ladder: [python, numpy]
   needs: any

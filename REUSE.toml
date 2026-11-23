@@ -537,3 +537,15 @@ path = "data/course-word-pairs-nl.tsv"
 precedence = "override"
 SPDX-FileCopyrightText = "2026 Everything AI contributors"
 SPDX-License-Identifier = "CC-BY-SA-4.0"
+
+[[annotations]]
+path = "data/course-bank-sentences.tsv"
+precedence = "override"
+SPDX-FileCopyrightText = "2026 Everything AI contributors"
+SPDX-License-Identifier = "CC-BY-SA-4.0"
+
+[[annotations]]
+path = "data/bert-tiny-bank.npz"
+precedence = "override"
+SPDX-FileCopyrightText = "2020 Google (BERT-Tiny, google/bert_uncased_L-2_H-128_A-2, Turc, Chang, Lee and Toutanova; its vectors for the course's own sentences, computed for Everything AI) and 2026 Everything AI contributors"
+SPDX-License-Identifier = "Apache-2.0"

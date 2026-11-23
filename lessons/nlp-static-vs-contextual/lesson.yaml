@@ -1,0 +1,43 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: nlp-static-vs-contextual
+minutes: 45
+title:
+  en: "One vector per word, or one per use"
+  nl: "Eén vector per woord, of één per gebruik"
+goal:
+  en: "measure how alike the uses of a word are, in GloVe and in a small model that gives every use its own vector, and guess the meaning of bank in new sentences from the mean vector of examples of each meaning."
+  nl: "meten hoe sterk een woord in verschillende zinnen op zichzelf lijkt, in GloVe en in een klein model dat elk gebruik een eigen vector geeft, en de betekenis van bank in nieuwe zinnen raden uit de gemiddelde vector van voorbeelden van elke betekenis."
+summary:
+  - en: "A static embedding, such as GloVe or word2vec, gives a word one vector, the same in every sentence: bank by a river and bank for money get the same numbers. A contextual embedding is a vector for one use of a word, computed from the whole sentence, so every use gets its own vector."
+    nl: "Een static embedding, zoals GloVe of word2vec, geeft een woord één vector, dezelfde in elke zin: bank bij een rivier en bank voor geld krijgen dezelfde getallen. Een contextual embedding is een vector voor één gebruik van een woord, uitgerekend uit de hele zin, dus elk gebruik krijgt een eigen vector."
+  - en: "Before its first block, BERT-Tiny gives a piece a vector made from the piece and its place only. Each block computes a new vector for every piece from all pieces of the sentence. The self-similarity of a word, the mean cosine similarity of every two of its uses, is 1 for a static embedding and lower the more the sentence counts."
+    nl: "Vóór het eerste block geeft BERT-Tiny een stukje een vector die alleen uit het stukje en de plek ervan gemaakt is. Elk block rekent voor elk stukje een nieuwe vector uit, uit alle stukjes van de zin. De self-similarity van een woord, de gemiddelde cosine similarity van het woord in elk paar van twee verschillende zinnen, is 1 bij een static embedding en lager naarmate de zin meer meetelt."
+  - en: "After the blocks, all vectors point roughly the same way: two different words in two different sentences already have a mean cosine similarity of 0.57 after the second block. Compared with that, the uses of bank stand out less after every block: 0.66 above it before the first block, 0.27 after the second."
+    nl: "Na de blocks wijzen alle vectoren ongeveer dezelfde kant op: twee verschillende woorden in twee verschillende zinnen hebben na het tweede block al een gemiddelde cosine similarity van 0,57. Vergeleken daarmee springt bank na elk block minder uit: 0,66 erboven vóór het eerste block, 0,27 na het tweede."
+  - en: "Averaging the vectors of the examples of each meaning, and taking the meaning whose mean has the highest cosine similarity, gets bank right in 15 of 16 new sentences after either block, and in 8 with GloVe or before the first block, where the two means are the same."
+    nl: "Wie de vectoren van de voorbeelden per betekenis middelt en de betekenis kiest waarvan het gemiddelde de hoogste cosine similarity heeft, raadt bank na elk van de twee blocks in 15 van de 16 nieuwe zinnen goed; met GloVe of vóór het eerste block in 8, want daar zijn de twee gemiddelden gelijk."
+can_now:
+  - en: "say why a word gets the same vector in two sentences before the first block of a model such as BERT-Tiny, and what changes after its blocks"
+    nl: "zeggen waarom een woord vóór het eerste block van een model als BERT-Tiny in twee zinnen dezelfde vector krijgt, en wat er na de blocks verandert"
+    by: same-start
+  - en: "work out the self-similarity of a word, the mean cosine similarity of every two of its uses, and compare it with that of two different words"
+    nl: "de self-similarity van een woord uitrekenen, de gemiddelde cosine similarity van het woord in elk paar van twee verschillende zinnen, en de self-similarity vergelijken met de gemiddelde cosine similarity van twee verschillende woorden"
+    by: self_similarity
+  - en: "guess the meaning of a word in a new sentence from the mean vector of the examples of each meaning"
+    nl: "de betekenis van een woord in een nieuwe zin raden uit de gemiddelde vector van de voorbeelden van elke betekenis"
+    by: guess_sense
+further_reading:
+  - en: "Daniel Jurafsky and James H. Martin, [*Speech and Language Processing*](https://web.stanford.edu/~jurafsky/slp3/), draft of August 19, 2026, the chapter *Interpretability*, section 10.1: contextual embeddings, how they relate to the meanings of a word, and why their cosine similarities run high"
+    nl: "Daniel Jurafsky en James H. Martin, [*Speech and Language Processing*](https://web.stanford.edu/~jurafsky/slp3/), conceptversie van 19 augustus 2026, het hoofdstuk *Interpretability*, paragraaf 10.1: contextual embeddings, het verband met de betekenissen van een woord, en waarom de cosine similarities ervan zo hoog uitvallen (in het Engels)"
+  - en: "Matthew E. Peters and colleagues, [*Deep contextualized word representations*](https://aclanthology.org/N18-1202/), NAACL 2018: ELMo, and in section 5.3 the word *play* in GloVe and in context"
+    nl: "Matthew E. Peters en anderen, [*Deep contextualized word representations*](https://aclanthology.org/N18-1202/), NAACL 2018: ELMo, en in paragraaf 5.3 het woord *play* in GloVe en in context (in het Engels)"
+  - en: "Jacob Devlin, Ming-Wei Chang, Kenton Lee and Kristina Toutanova, [*BERT: Pre-training of Deep Bidirectional Transformers for Language Understanding*](https://aclanthology.org/N19-1423/), NAACL 2019: the model that BERT-Tiny is a small version of"
+    nl: "Jacob Devlin, Ming-Wei Chang, Kenton Lee en Kristina Toutanova, [*BERT: Pre-training of Deep Bidirectional Transformers for Language Understanding*](https://aclanthology.org/N19-1423/), NAACL 2019: het model waarvan BERT-Tiny een kleine versie is (in het Engels)"
+  - en: "Kawin Ethayarajh, [*How Contextual are Contextualized Word Representations?*](https://aclanthology.org/D19-1006/), EMNLP 2019: self-similarity, and why it has to be compared with two random words"
+    nl: "Kawin Ethayarajh, [*How Contextual are Contextualized Word Representations?*](https://aclanthology.org/D19-1006/), EMNLP 2019: self-similarity, en waarom je de self-similarity moet vergelijken met twee willekeurige woorden (in het Engels)"
+  - en: "Iulia Turc, Ming-Wei Chang, Kenton Lee and Kristina Toutanova, [*Well-Read Students Learn Better: On the Importance of Pre-training Compact Models*](https://arxiv.org/abs/1908.08962), 2019: the 24 small BERT models, released in 2020, BERT-Tiny the smallest"
+    nl: "Iulia Turc, Ming-Wei Chang, Kenton Lee en Kristina Toutanova, [*Well-Read Students Learn Better: On the Importance of Pre-training Compact Models*](https://arxiv.org/abs/1908.08962), 2019: de 24 kleine BERT-modellen, uitgebracht in 2020, met BERT-Tiny als kleinste (in het Engels)"
+  - en: "Rishi Bommasani, Kelly Davis and Claire Cardie, [*Interpreting Pretrained Contextualized Representations via Reductions to Static Embeddings*](https://aclanthology.org/2020.acl-main.431/), ACL 2020: one vector per word again, as the mean over many sentences"
+    nl: "Rishi Bommasani, Kelly Davis en Claire Cardie, [*Interpreting Pretrained Contextualized Representations via Reductions to Static Embeddings*](https://aclanthology.org/2020.acl-main.431/), ACL 2020: weer één vector per woord, als het gemiddelde over veel zinnen (in het Engels)"

@@ -154,6 +154,19 @@ PINNED = {
         "sha256": "1587ea43e58e82b14ff1f5425c88e17f8496bfcdb67a583dbff9eefaf9963ce3",
         "size": 203_415,
     },
+    # BERT-Tiny, the smallest BERT of Google's miniatures (Apache-2.0, Turc and others, released 2020), with the head that fills in
+    # masked words, and its WordPiece vocabulary: nlp-static-vs-contextual and later lessons on BERT
+    # (course/route/bronnen.yaml, model-bert-tiny; everything_ai.bert writes the model and the tokenizer out)
+    ("google/bert_uncased_L-2_H-128_A-2", "model.safetensors"): {
+        "revision": "30b0a37ccaaa32f332884b96992754e246e48c5f",
+        "sha256": "7fb69ad9f6866d8983183c930e33828f326470bf6ad8bbb2ad4ed957a92e9414",
+        "size": 17_739_144,
+    },
+    ("google/bert_uncased_L-2_H-128_A-2", "vocab.txt"): {
+        "revision": "30b0a37ccaaa32f332884b96992754e246e48c5f",
+        "sha256": "07eced375cec144d27c900241f3e339478dec958f92fddbc551f295c992038a3",
+        "size": 231_508,
+    },
     # The vectors of fastText for Dutch, cc.nl.300 (CC BY-SA 3.0, Grave and others 2018), at their source, the downloads of
     # fastText: the first 20 MB of the gzipped file, the 30,355 most frequent words (course/route/bronnen.yaml,
     # fasttext-nl-30k; everything_ai.wordvectors reads them as text: nothing in them is ever run). The file has no

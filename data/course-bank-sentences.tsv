@@ -1,0 +1,45 @@
+pair	sense	set	sentence
+1	river	example	We had a picnic on the bank of the river.
+1	money	example	I opened an account at the bank downtown.
+2	river	example	The boat drifted slowly toward the muddy bank.
+2	money	example	The thieves walked calmly into the quiet bank.
+3	river	example	Willows grow along the bank of the stream.
+3	money	example	Prices rose sharply after the bank cut its rates.
+4	river	example	We sat on the grassy bank and watched the ducks.
+4	money	example	We waited at the crowded bank to pay the rent.
+5	river	example	The flood washed away part of the bank near the bridge.
+5	money	example	The robbers took the cash in the bank at night.
+6	river	example	Children slid down the steep bank into the cold water.
+6	money	example	My cousin works at the bank as a teller.
+7	river	example	A heron stood still on the far bank of the lake.
+7	money	example	A guard stood still near the busy bank.
+8	river	example	They pulled the canoe up onto the bank before dark.
+8	money	example	They paid all the money into the bank before noon.
+9	river	example	Wild flowers covered the bank beside the canal.
+9	money	example	Every month the central bank sets the rates.
+10	river	example	The angler cast a line from the bank.
+10	money	example	The small company borrowed some money from the bank.
+11	river	example	Frogs hid in the reeds along the bank.
+11	money	example	Clients lined up at the counter of the bank.
+12	river	example	The path follows the east bank of the river for two miles.
+12	money	example	The first loan from the bank was paid back within two years.
+13	river	example	The bank of the river was steep and slippery.
+13	money	example	The bank refused to give them a loan.
+14	river	example	The cows came down the bank to drink.
+14	money	example	Tourists changed money at the bank.
+15	river	new	The otters dug a den into the bank.
+15	money	new	I lost the new card that my old bank sent me.
+16	river	new	Erosion eats away the bank every winter.
+16	money	new	Every single month the bank charges a fee for withdrawals.
+17	river	new	We walked along the bank until sunset.
+17	money	new	We called up the bank about the payment.
+18	river	new	The kayak hit the bank and tipped over.
+18	money	new	After two long weeks the bank approved the mortgage.
+19	river	new	Reeds and rushes line the bank on both sides.
+19	money	new	Thieves emptied the vault of the bank last night.
+20	river	new	The bank sloped gently down to the water.
+20	money	new	That bank has branches in every city.
+21	river	new	Moss grew thick on the shady bank.
+21	money	new	Customers lost faith in the failing bank.
+22	river	new	The water rose over the bank after the storm.
+22	money	new	Twice last year the national bank raised its rates.
