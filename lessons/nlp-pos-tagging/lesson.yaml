@@ -1,0 +1,38 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: nlp-pos-tagging
+minutes: 45
+title:
+  en: "Tagging word classes"
+  nl: "Woordsoorten taggen"
+goal:
+  en: "build a tagger that gives every word its most frequent tag, measure its accuracy on sentences it never saw, and let the word before decide between the tags of a word."
+  nl: "een tagger bouwen die elk woord de vaakste tag geeft, de accuracy meten op zinnen die de tagger nooit zag, en het woord ervoor laten kiezen tussen de tags van een woord."
+summary:
+  - en: "Part-of-speech tagging gives every word of a sentence its part of speech: sequence labeling with one tag per word. A tagger learns from the training set of a treebank, and its accuracy, the share of words that get the tag of the treebank, is measured on the test set, with sentences it never saw."
+    nl: "Part-of-speech tagging geeft elk woord van een zin de woordsoort: sequence labeling met één tag per woord. Een tagger leert van de training set van een treebank, en de accuracy, het aandeel woorden dat de tag van de treebank krijgt, wordt gemeten op de test set, met zinnen die de tagger nooit zag."
+  - en: "The first tagger gives each word the tag it has most often in the training set, and NOUN to a word it never saw. That baseline gets 86 of every 100 words of the English test set right, and 88 of the Dutch one."
+    nl: "De eerste tagger geeft elk woord de tag die het woord het vaakst heeft in de training set, en NOUN aan een woord dat de tagger nooit zag. Die baseline heeft 86 van elke 100 woorden van de Engelse test set goed, en 88 van de Nederlandse."
+  - en: "Most mistakes fall on two kinds of words: words the training set does not have, and words with more than one tag. Only 1 in 10 different words of the English training set has more than one tag, but those words make up half of its running text."
+    nl: "De meeste fouten vallen op twee soorten woorden: woorden die niet in de training set staan, en woorden met meer dan één tag. Slechts 1 op de 10 verschillende woorden van de Engelse training set heeft meer dan één tag, maar die woorden vormen de helft van de lopende tekst."
+  - en: "The words around a word decide between its tags. A tagger that first looks at the pair of the word before and the word, and falls back to the word alone, gets 88 of every 100 English words right; taggers that look at more get about 97 on English treebanks."
+    nl: "De woorden rond een woord kiezen tussen de tags ervan. Een tagger die eerst kijkt naar het paar van het woord ervoor en het woord, en anders naar het woord alleen, heeft 88 van elke 100 Engelse woorden goed; taggers die naar meer kijken, halen ongeveer 97 op Engelse treebanks."
+can_now:
+  - en: "give each word of a training set its most frequent tag"
+    nl: "elk woord van een training set de vaakste tag geven"
+    by: best_tags
+  - en: "measure the accuracy of a tagger on sentences it never saw"
+    nl: "de accuracy van een tagger meten op zinnen die de tagger nooit zag"
+    by: accuracy
+  - en: "tag a sentence with the word before each word, and fall back to the word alone"
+    nl: "een zin taggen met het woord vóór elk woord, en anders met het woord alleen"
+    by: tag_words
+  - en: "say which neighbor of a word decides best between its tags"
+    nl: "zeggen welke buur van een woord het best kiest tussen de tags ervan"
+    by: after
+further_reading:
+  - en: "Daniel Jurafsky and James H. Martin, [*Speech and Language Processing*](https://web.stanford.edu/~jurafsky/slp3/), draft of August 19, 2026, the chapter *Sequence Labeling for Parts of Speech and Named Entities*, section 18.2: part-of-speech tagging, its accuracy and the most frequent class baseline; sections 18.4 and 18.5 build taggers that look at the tags before a word"
+    nl: "Daniel Jurafsky en James H. Martin, [*Speech and Language Processing*](https://web.stanford.edu/~jurafsky/slp3/), conceptversie van 19 augustus 2026, het hoofdstuk *Sequence Labeling for Parts of Speech and Named Entities*, paragraaf 18.2: part-of-speech tagging, de accuracy ervan en de most frequent class baseline; paragraaf 18.4 en 18.5 bouwen taggers die naar de tags van de woorden ervoor kijken (in het Engels)"
+  - en: "Universal Dependencies, [*Universal POS tags*](https://universaldependencies.org/u/pos/): the 17 tags that the treebanks of this lesson use"
+    nl: "Universal Dependencies, [*Universal POS tags*](https://universaldependencies.org/u/pos/): de 17 tags die de treebanks van deze les gebruiken (in het Engels)"

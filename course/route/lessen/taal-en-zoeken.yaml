@@ -595,6 +595,7 @@ lessons:
   covers: [sequence-labelling-en-structuur#1]
   requires: [nlp-bio-tags, nlp-dependencies]
   introduces: [c:part-of-speech-tagging]
+  mentions: [c:accuracy, c:train-set, c:test-set, c:baseline, c:treebank, c:ambiguity]
   data: [ud-english-dutch]
   ladder: [python]
   needs: any
