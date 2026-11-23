@@ -522,6 +522,7 @@ lessons:
   covers: [d15-lexicale-semantiek#1]
   requires: [nlp-word-relations, math-graphs]
   introduces: [c:wordnet, c:lexicon]
+  mentions: [c:cosine-similarity, c:word-embedding, c:glove]
   data: [wordnet-en-nl]
   ladder: [python]
   needs: any

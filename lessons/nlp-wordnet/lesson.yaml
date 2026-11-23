@@ -1,0 +1,39 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: nlp-wordnet
+minutes: 45
+title:
+  en: "WordNet: a network of meanings"
+  nl: "WordNet: een netwerk van betekenissen"
+goal:
+  en: "see WordNet as a directed graph of synsets, find every sense above a sense with breadth-first search, measure how alike two senses are by the shortest path between them, and build a small lexicon of your own."
+  nl: "WordNet zien als een gerichte graaf van synsets, met breadth-first search elke betekenis boven een betekenis vinden, meten hoeveel twee betekenissen op elkaar lijken met het kortste pad ertussen, en een klein eigen lexicon bouwen."
+summary:
+  - en: "WordNet is a lexicon, a list of words with information about each one: senses with their words, definitions and relations. A set of words that share one sense is a synset, such as `sofa.n.01`; the relations join synsets."
+    nl: "WordNet is een lexicon, een lijst woorden met informatie over elk woord: betekenissen met de woorden, definities en relaties ervan. Een groep woorden met één gedeelde betekenis is een synset, zoals `sofa.n.01`; de relaties verbinden synsets."
+  - en: "With a synset as a node and a link to a hypernym as an edge, WordNet is a directed graph, stored as an adjacency list: 107,425 synsets and 87,970 edges. A sense can have more than one hypernym, so breadth-first search, and not one ladder, finds every sense above it."
+    nl: "Met een synset als node en een verwijzing naar een hyperoniem als edge is WordNet een gerichte graaf, bewaard als adjacency list: 107.425 synsets en 87.970 edges. Een betekenis kan meer dan één hyperoniem hebben, dus breadth-first search, en niet één ladder, vindt elke betekenis erboven."
+  - en: "The path similarity of two senses is 1 / (steps + 1) for the shortest path between them through a hypernym they share: 1/3 for coffee and tea, 1/12 for coffee and cup. Over 2,000 random pairs of noun senses, the shortest path has 13.66 steps on average."
+    nl: "De path similarity van twee betekenissen is 1 / (stappen + 1) voor het kortste pad ertussen via een gedeeld hyperoniem: 1/3 voor koffie en thee, 1/12 voor koffie en een kop. Bij 2.000 paren betekenissen van zelfstandige naamwoorden, op goed geluk gekozen, telt het kortste pad gemiddeld 13,66 stappen."
+  - en: "The path similarity is high for senses that are alike and low for senses that are only related, such as a car and its driver, where GloVe gives both kinds a high cosine similarity."
+    nl: "De path similarity is hoog voor betekenissen die op elkaar lijken en laag voor betekenissen die alleen verwant zijn, zoals een auto en de bestuurder, terwijl GloVe allebei de soorten een hoge cosine similarity geeft."
+can_now:
+  - en: "count the steps of the shortest path between two words of a small lexicon, and give their path similarity"
+    nl: "de stappen van het kortste pad tussen twee woorden van een klein lexicon tellen, en de path similarity geven"
+    by: similarity
+  - en: "find every sense above a sense with its fewest steps, with breadth-first search on an adjacency list"
+    nl: "elke betekenis boven een betekenis vinden met het kleinste aantal stappen, met breadth-first search op een adjacency list"
+    by: ancestors
+  - en: "measure how alike two senses of WordNet are with the path similarity, and tell it apart from how related they are"
+    nl: "met de path similarity meten hoeveel twee betekenissen van WordNet op elkaar lijken, en dat onderscheiden van hoe verwant de twee zijn"
+    by: path_similarity
+further_reading:
+  - en: "Daniel Jurafsky and James H. Martin, [*Speech and Language Processing*](https://web.stanford.edu/~jurafsky/slp3/), draft of August 19, 2026, chapter 5, *Embeddings*, on word similarity and relatedness, and Appendix I, *Word Senses and WordNet*"
+    nl: "Daniel Jurafsky en James H. Martin, [*Speech and Language Processing*](https://web.stanford.edu/~jurafsky/slp3/), conceptversie van 19 augustus 2026, hoofdstuk 5, *Embeddings*, over gelijkenis en verwantschap van woorden, en bijlage I, *Word Senses and WordNet* (in het Engels)"
+  - en: "Steven Bird, Ewan Klein and Edward Loper, [*Natural Language Processing with Python*](https://www.nltk.org/book/ch02.html), chapter 2, section 5: WordNet in NLTK, with the path similarity"
+    nl: "Steven Bird, Ewan Klein en Edward Loper, [*Natural Language Processing with Python*](https://www.nltk.org/book/ch02.html), hoofdstuk 2, paragraaf 5: WordNet in NLTK, met de path similarity (in het Engels)"
+  - en: "Alexander Budanitsky and Graeme Hirst, [*Evaluating WordNet-based Measures of Lexical Semantic Relatedness*](https://aclanthology.org/J06-1003/), Computational Linguistics, 2006: how measures on WordNet compare with what people judge"
+    nl: "Alexander Budanitsky en Graeme Hirst, [*Evaluating WordNet-based Measures of Lexical Semantic Relatedness*](https://aclanthology.org/J06-1003/), Computational Linguistics, 2006: hoe maten op WordNet zich verhouden tot wat mensen vinden (in het Engels)"
+  - en: "George A. Miller, [*WordNet: A Lexical Database for English*](https://doi.org/10.1145/219717.219748), Communications of the ACM, 1995: a short description of WordNet, by the psychologist who began it"
+    nl: "George A. Miller, [*WordNet: A Lexical Database for English*](https://doi.org/10.1145/219717.219748), Communications of the ACM, 1995: een korte beschrijving van WordNet, door de psycholoog die ermee begon (in het Engels)"
