@@ -1,0 +1,39 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: nlp-distributional-hypothesis
+minutes: 45
+title:
+  en: "A word by the company it keeps"
+  nl: "Een woord ken je aan het gezelschap waarin het verkeert"
+goal:
+  en: "take the window around a place in a list of words, count for every target word which words stand in its windows, and find the nearest neighbors of a word by the cosine similarity of their rows."
+  nl: "het venster rond een plaats in een lijst woorden nemen, voor elk doelwoord tellen welke woorden in de vensters staan, en de dichtstbijzijnde buren van een woord vinden met de cosine similarity van de rijen."
+summary:
+  - en: "The distributional hypothesis says that words that occur in similar contexts tend to have similar meanings. Harris wrote the idea down in 1954. Firth's sentence from 1957, *You shall know a word by the company it keeps!*, was about collocations, the words that habitually go with a word."
+    nl: "De distributionele hypothese zegt dat woorden die in vergelijkbare contexten voorkomen, vaak een vergelijkbare betekenis hebben. Harris schreef het idee in 1954 op. De zin van Firth uit 1957 over het gezelschap van een woord ging over collocaties, de vaste metgezellen van een woord."
+  - en: "The window of a word holds the words within a fixed number of places before and after it. Counting, over a text, how often each word stands in a window of each target word gives the co-occurrence matrix: one row per target word and one column per context word. Almost every count is 0, so each row is stored as a sparse row."
+    nl: "Het venster van een woord bevat de woorden binnen een vast aantal plaatsen ervoor en erna. Tel in een tekst hoe vaak elk woord in een venster van elk doelwoord staat, en je krijgt de co-occurrence matrix: één rij per doelwoord en één kolom per contextwoord. Bijna elk aantal is 0, dus elke rij wordt als sparse rij bewaard."
+  - en: "The nearest neighbors of a word are the words whose rows have the highest cosine similarity with its row. In the course's books, with a window of 2, they are mostly words of the same kind: *said* finds *replied* and *asked*. A short window tends to find words of the same kind, a long one words of the same topic."
+    nl: "De dichtstbijzijnde buren van een woord zijn de woorden waarvan de rij de hoogste cosine similarity heeft met de rij van dat woord. In de boeken van de course, met een venster van 2, zijn dat vooral woorden van dezelfde soort: *zeide* vindt *meende* en *dacht*. Een kort venster vindt vaker woorden van dezelfde soort, een lang venster vaker woorden over hetzelfde onderwerp."
+  - en: "Similar rows mean the same company, not the same meaning. Words of opposite meaning get similar rows, the rows know only the books they were counted in, and with plain counts the most common words give even unrelated words much of their rows in common. Weighting gives surprising contexts more say."
+    nl: "Vergelijkbare rijen betekenen hetzelfde gezelschap, niet dezelfde betekenis. Woorden met een tegenovergestelde betekenis krijgen vergelijkbare rijen, de rijen kennen alleen de boeken waarin de aantallen geteld zijn, en met kale aantallen geven de meest voorkomende woorden zelfs woorden die niets met elkaar te maken hebben een groot deel van de rij gemeen. Weging geeft verrassende contexten meer zeggenschap."
+can_now:
+  - en: "take the words within a number of places of a place in a list of words, also near the start and the end"
+    nl: "de woorden binnen een aantal plaatsen van een plaats in een lijst woorden nemen, ook vlak bij het begin en het eind"
+    by: window
+  - en: "count for every target word which words stand in its windows, as a sparse row"
+    nl: "voor elk doelwoord tellen welke woorden in de vensters staan, als sparse rij"
+    by: cooccurrence
+  - en: "tell a word of the same kind, which gets a similar row, from a word that only stands next to it"
+    nl: "een woord van dezelfde soort, dat een vergelijkbare rij krijgt, onderscheiden van een woord dat er alleen naast staat"
+    by: neighbors
+further_reading:
+  - en: "Daniel Jurafsky and James H. Martin, [*Speech and Language Processing*](https://web.stanford.edu/~jurafsky/slp3/), draft of August 19, 2026, the chapter *Embeddings*, its opening and sections 5.1 to 5.3 and 5.7: the distributional hypothesis, words that are related but not similar, the word-context matrix, and the size of the window"
+    nl: "Daniel Jurafsky en James H. Martin, [*Speech and Language Processing*](https://web.stanford.edu/~jurafsky/slp3/), conceptversie van 19 augustus 2026, het hoofdstuk *Embeddings*, de opening en de paragrafen 5.1 tot en met 5.3 en 5.7: de distributionele hypothese, woorden die bij elkaar horen zonder op elkaar te lijken, de word-context matrix, en de grootte van het venster (in het Engels)"
+  - en: "Zellig S. Harris, [*Distributional Structure*](https://doi.org/10.1080/00437956.1954.11659520), WORD 10(2–3), 1954, pages 146–162: difference of meaning and difference of distribution, with *oculist*, *eye-doctor* and *lawyer* on pages 156–157"
+    nl: "Zellig S. Harris, [*Distributional Structure*](https://doi.org/10.1080/00437956.1954.11659520), WORD 10(2–3), 1954, bladzijden 146–162: verschil in betekenis en verschil in distributie, met *oculist*, *eye-doctor* en *lawyer* op bladzijden 156–157 (in het Engels)"
+  - en: "J. R. Firth, *A synopsis of linguistic theory, 1930–1955*, in *Studies in Linguistic Analysis*, special volume of the Philological Society, Basil Blackwell, Oxford, 1957: the sentence about the company a word keeps is on page 11, where Firth writes about collocation"
+    nl: "J. R. Firth, *A synopsis of linguistic theory, 1930–1955*, in *Studies in Linguistic Analysis*, speciale uitgave van de Philological Society, Basil Blackwell, Oxford, 1957: de zin over het gezelschap van een woord staat op bladzijde 11, waar Firth over collocatie schrijft (in het Engels)"
+  - en: "Peter D. Turney and Patrick Pantel, [*From Frequency to Meaning: Vector Space Models of Semantics*](https://doi.org/10.1613/jair.2934), Journal of Artificial Intelligence Research 37, 2010: word-context matrices, antonyms, and why weighting helps"
+    nl: "Peter D. Turney en Patrick Pantel, [*From Frequency to Meaning: Vector Space Models of Semantics*](https://doi.org/10.1613/jair.2934), Journal of Artificial Intelligence Research 37, 2010: word-context matrices, antoniemen, en waarom weging helpt (in het Engels)"

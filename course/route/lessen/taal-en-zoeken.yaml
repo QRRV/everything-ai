@@ -466,6 +466,7 @@ lessons:
   covers: [distributionele-semantiek-en-word-embeddings#0]
   requires: [nlp-document-vectors]
   introduces: [c:distributional-hypothesis, c:distributional-semantics, c:co-occurrence-matrix]
+  mentions: [c:context-window]
   data: [gutenberg-books]
   ladder: [python, numpy]
   needs: any
