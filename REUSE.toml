@@ -569,6 +569,12 @@ SPDX-FileCopyrightText = "2024 IBM (Granite Embedding, ibm-granite/granite-embed
 SPDX-License-Identifier = "Apache-2.0"
 
 [[annotations]]
+path = "data/snli-sample.tsv.gz"
+precedence = "override"
+SPDX-FileCopyrightText = "2015 The Stanford NLP Group: Samuel R. Bowman, Gabor Angeli, Christopher Potts and Christopher D. Manning (SNLI 1.0; a sample, for Everything AI)"
+SPDX-License-Identifier = "CC-BY-SA-4.0"
+
+[[annotations]]
 path = "data/stsb-captions.tsv.gz"
 precedence = "override"
 SPDX-FileCopyrightText = "2017 Daniel Cer, Mona Diab, Eneko Agirre, Inigo Lopez-Gazpio and Lucia Specia (STS Benchmark, SemEval 2017, the scores); 2010 Cyrus Rashtchian, Peter Young, Micah Hodosh and Julia Hockenmaier (captions of PASCAL VOC-2008 pictures); 2015 Samuel R. Bowman, Gabor Angeli, Christopher Potts and Christopher D. Manning (SNLI); 2021 Philip May (stsb-multi-mt, the Dutch, translated with DeepL); the selection of pairs for Everything AI"

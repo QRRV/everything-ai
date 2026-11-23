@@ -1,0 +1,40 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: nlp-entailment
+minutes: 40
+title:
+  en: "Does one sentence follow from another?"
+  nl: "Volgt de ene zin uit de andere?"
+goal:
+  en: "decide for two sentences whether the second follows from the first, contradicts it or neither, and see how a model can score well on that task by reading only the second sentence."
+  nl: "voor twee zinnen bepalen of de tweede uit de eerste volgt, de eerste tegenspreekt of geen van beide, en zien hoe een model daar goed op scoort door alleen de tweede zin te lezen."
+summary:
+  - en: "Natural language inference takes a premise and a hypothesis, and asks whether the hypothesis follows (entailment), cannot be true at the same time (contradiction), or neither (neutral). In SNLI, each premise is the caption of a photo, and people wrote a hypothesis for each label."
+    nl: "Natural language inference neemt een premisse en een hypothese, en vraagt of de hypothese eruit volgt (entailment), er niet tegelijk mee waar kan zijn (contradiction) of geen van beide (neutral). In SNLI is elke premisse het bijschrift van een foto, en schreven mensen voor elk label een hypothese."
+  - en: "The writers left cues in the hypotheses: *nobody*, *sleeping* and *cat* go with contradiction, *outdoors* and *animal* with entailment, *tall* and *because* with neutral. Naive Bayes on the hypothesis alone labels 0.608 of the test pairs right, against 0.343 for always entailment."
+    nl: "De schrijvers lieten aanwijzingen achter in de hypothesen: *nobody*, *sleeping* en *cat* horen bij contradiction, *outdoors* en *animal* bij entailment, *tall* en *because* bij neutral. Naive Bayes op de hypothese alleen labelt 0,608 van de testparen goed, tegen 0,343 voor altijd entailment."
+  - en: "Shortcut learning: a model learns a cue that goes with the label in the training data, instead of the skill the task asks for. Putting the words of both sentences in one bag does not help (0.606); marking which words of the hypothesis the premise has does (0.693)."
+    nl: "Shortcut learning: een model leert een aanwijzing die in de trainingsdata bij het label hoort, in plaats van de vaardigheid waar de taak om vraagt. De woorden van beide zinnen in één zak stoppen helpt niet (0,606); markeren welke woorden van de hypothese in de premisse staan wel (0,693)."
+  - en: "Of the 336 test pairs whose hypothesis has only words of the premise, 330 are entailment. A rule built on that fails on *The doctor was paid by the actor.* and *The doctor paid the actor.*, where the order of the words decides."
+    nl: "Van de 336 testparen waarvan de hypothese alleen woorden uit de premisse heeft, zijn er 330 entailment. Een regel die daarop bouwt gaat mis bij *The doctor was paid by the actor.* en *The doctor paid the actor.*, waar de volgorde van de woorden beslist."
+can_now:
+  - en: "count which labels go with a word in the hypotheses of a dataset"
+    nl: "tellen welke labels bij een woord horen in de hypothesen van een dataset"
+    by: label_shares
+  - en: "label a pair with naive Bayes from the hypothesis alone"
+    nl: "een paar labelen met naive Bayes op de hypothese alleen"
+    by: guess
+  - en: "compute how much of a hypothesis is in its premise"
+    nl: "berekenen hoeveel van een hypothese in de premisse staat"
+    by: overlap
+  - en: "say why a rule built on word overlap can label a pair wrong"
+    nl: "zeggen waarom een regel die op overlap van woorden bouwt een paar fout kan labelen"
+    by: doctor
+further_reading:
+  - en: "Samuel R. Bowman, Gabor Angeli, Christopher Potts and Christopher D. Manning, [*A large annotated corpus for learning natural language inference*](https://aclanthology.org/D15-1075/), 2015: how SNLI was made from captions of photos, with the instructions for the writers"
+    nl: "Samuel R. Bowman, Gabor Angeli, Christopher Potts en Christopher D. Manning, [*A large annotated corpus for learning natural language inference*](https://aclanthology.org/D15-1075/), 2015: hoe SNLI gemaakt is uit bijschriften van foto's, met de instructies voor de schrijvers (in het Engels)"
+  - en: "Suchin Gururangan and others, [*Annotation Artifacts in Natural Language Inference Data*](https://aclanthology.org/N18-2017/), 2018: the cues in the hypotheses of SNLI, and the Hard part of its test set"
+    nl: "Suchin Gururangan en anderen, [*Annotation Artifacts in Natural Language Inference Data*](https://aclanthology.org/N18-2017/), 2018: de aanwijzingen in de hypothesen van SNLI, en het Hard-deel van de test set (in het Engels)"
+  - en: "R. Thomas McCoy, Ellie Pavlick and Tal Linzen, [*Right for the Wrong Reasons: Diagnosing Syntactic Heuristics in Natural Language Inference*](https://aclanthology.org/P19-1334/), 2019: the lexical overlap heuristic and the test set HANS"
+    nl: "R. Thomas McCoy, Ellie Pavlick en Tal Linzen, [*Right for the Wrong Reasons: Diagnosing Syntactic Heuristics in Natural Language Inference*](https://aclanthology.org/P19-1334/), 2019: de lexical overlap heuristic en de test set HANS (in het Engels)"
