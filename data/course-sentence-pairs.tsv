@@ -1,0 +1,17 @@
+pair	kind	first	second
+1	order	the dog bit the man	the man bit the dog
+2	order	the cat chased the mouse	the mouse chased the cat
+3	order	the teacher thanked the student	the student thanked the teacher
+4	order	the bird watched the fish	the fish watched the bird
+5	negation	the film was good	the film was not good
+6	negation	the shop is open today	the shop is not open today
+7	negation	the water is safe to drink	the water is not safe to drink
+8	negation	the train was late	the train was not late
+9	shared	we sat on the bank of the river	we put money in the bank
+10	shared	the plant needs water	the plant makes cars
+11	shared	the bat flew out of the cave	the bat hit the ball
+12	shared	the film was good	the film was long
+13	paraphrase	the film was good	i enjoyed the movie
+14	paraphrase	the shop opens at nine	the store is open from nine
+15	paraphrase	the children are asleep	the kids are sleeping
+16	paraphrase	the car would not start	the engine failed to turn over

@@ -536,7 +536,8 @@ lessons:
   covers: [sentence-embeddings#0]
   requires: [nlp-static-vs-contextual, attn-idea]
   introduces: [c:sentence-embedding, c:sentence-transformers]
-  data: [glove-50d, model-granite-embedding]
+  mentions: [c:embedding-model, c:natural-language-inference]
+  data: [glove-50d, model-granite-embedding, model-bert-tiny, course-sentence-pairs]
   ladder: [python, numpy]
   needs: any
 

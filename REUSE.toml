@@ -555,3 +555,15 @@ path = "data/bert-tiny-bank.npz"
 precedence = "override"
 SPDX-FileCopyrightText = "2020 Google (BERT-Tiny, google/bert_uncased_L-2_H-128_A-2, Turc, Chang, Lee and Toutanova; its vectors for the course's own sentences, computed for Everything AI) and 2026 Everything AI contributors"
 SPDX-License-Identifier = "Apache-2.0"
+
+[[annotations]]
+path = "data/course-sentence-pairs.tsv"
+precedence = "override"
+SPDX-FileCopyrightText = "2026 Everything AI contributors"
+SPDX-License-Identifier = "CC-BY-SA-4.0"
+
+[[annotations]]
+path = "data/course-sentence-vectors.npz"
+precedence = "override"
+SPDX-FileCopyrightText = "2024 IBM (Granite Embedding, ibm-granite/granite-embedding-107m-multilingual), 2020 Google (BERT-Tiny, google/bert_uncased_L-2_H-128_A-2, Turc, Chang, Lee and Toutanova; their vectors for the course's own sentences, computed for Everything AI) and 2026 Everything AI contributors"
+SPDX-License-Identifier = "Apache-2.0"

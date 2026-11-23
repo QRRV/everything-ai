@@ -1,0 +1,39 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: nlp-sentence-embeddings
+minutes: 45
+title:
+  en: "A vector for a whole sentence"
+  nl: "Een vector voor een hele zin"
+goal:
+  en: "turn a sentence into one vector, as the mean of its word vectors and as the mean pooling of a transformer's vectors with a mask, and see what training on pairs of sentences changes."
+  nl: "een zin omzetten in één vector, als het gemiddelde van de woordvectoren en als de mean pooling van de vectoren van een transformer met een mask, en zien wat trainen op paren zinnen verandert."
+summary:
+  - en: "A sentence embedding is one vector for a whole sentence, as long for every sentence, so that two sentences can be compared with their cosine similarity. With one vector per sentence, finding the most similar pair among 10,000 sentences takes seconds, where BERT, which reads every pair together, needs about 65 hours."
+    nl: "Een sentence embedding is één vector voor een hele zin, even lang voor elke zin, zodat twee zinnen te vergelijken zijn met de cosine similarity. Met één vector per zin kost het meest gelijkende paar vinden tussen 10.000 zinnen een paar seconden, waar BERT, dat elk paar samen leest, ongeveer 65 uur nodig heeft."
+  - en: "The mean of the GloVe vectors of the words loses the order of the words completely: *the dog bit the man* and *the man bit the dog* get the same mean. *not* shifts it only a little: 0.990 between *the film was good* and *the film was not good*."
+    nl: "Het gemiddelde van de GloVe-vectoren van de woorden is de volgorde van de woorden helemaal kwijt: *the dog bit the man* en *the man bit the dog* krijgen hetzelfde gemiddelde. *not* verschuift het maar een beetje: 0,990 tussen *the film was good* en *the film was not good*."
+  - en: "A transformer gives every piece of a sentence its own vector; pooling combines them into one, by their mean (mean pooling) or by the vector of *[CLS]* (CLS pooling). In a batch, a mask keeps the *[PAD]* places out of the mean."
+    nl: "Een transformer geeft elk stukje van een zin een eigen vector; pooling voegt die vectoren samen tot één, met het gemiddelde (mean pooling) of met de vector van *[CLS]* (CLS pooling). In een batch houdt een mask de *[PAD]*-plekken buiten het gemiddelde."
+  - en: "A model trained on pairs of sentences, such as Sentence-BERT or Granite Embedding, puts sentences with the same meaning closer: on the course's pairs, Granite gives the same meaning in other words 0.899 on average and the same words with another meaning 0.777, where the mean of GloVe gives 0.954 and 0.942. *not* stays hard: Granite puts *the film was not good* closer to *the film was good* than *i enjoyed the movie*."
+    nl: "Een model dat op paren zinnen getraind is, zoals Sentence-BERT of Granite Embedding, zet zinnen met dezelfde betekenis dichter bij elkaar: op de paren van de course geeft Granite dezelfde betekenis in andere woorden gemiddeld 0,899 en dezelfde woorden met een andere betekenis 0,777, waar het gemiddelde van GloVe 0,954 en 0,942 geeft. *not* blijft lastig: Granite zet *the film was not good* dichter bij *the film was good* dan *i enjoyed the movie*."
+can_now:
+  - en: "tell which pairs of sentences get exactly the same mean of their word vectors, and why"
+    nl: "zeggen welke paren zinnen precies hetzelfde gemiddelde van de woordvectoren krijgen, en waarom"
+    by: same-mean
+  - en: "compute the mean of the word vectors of a sentence, leaving out the words that the table lacks"
+    nl: "het gemiddelde van de woordvectoren van een zin berekenen, zonder de woorden die de tabel niet heeft"
+    by: mean_vector
+  - en: "pool the vectors of a transformer into one vector for the sentence, with a mask that keeps *[PAD]* out"
+    nl: "de vectoren van een transformer samenvoegen tot één vector voor de zin, met een mask die *[PAD]* buiten houdt"
+    by: mean_pooling
+further_reading:
+  - en: "Nils Reimers and Iryna Gurevych, [*Sentence-BERT: Sentence Embeddings using Siamese BERT-Networks*](https://aclanthology.org/D19-1410/), EMNLP 2019: why the mean of BERT's vectors makes weak sentence embeddings, and what training on pairs of sentences does"
+    nl: "Nils Reimers en Iryna Gurevych, [*Sentence-BERT: Sentence Embeddings using Siamese BERT-Networks*](https://aclanthology.org/D19-1410/), EMNLP 2019: waarom het gemiddelde van de vectoren van BERT zwakke sentence embeddings geeft, en wat trainen op paren zinnen doet (in het Engels)"
+  - en: "[*Sentence Transformers*](https://sbert.net/), the documentation of the library: computing sentence embeddings in a few lines, and the models it offers"
+    nl: "[*Sentence Transformers*](https://sbert.net/), de documentatie van de library: sentence embeddings berekenen in een paar regels, en de modellen erbij (in het Engels)"
+  - en: "Granite Team, IBM Research AI, [*Granite Embedding Models*](https://arxiv.org/abs/2502.20204), 2025: how the course's embedding model was trained, with CLS pooling and contrastive training on pairs"
+    nl: "Granite Team, IBM Research AI, [*Granite Embedding Models*](https://arxiv.org/abs/2502.20204), 2025: hoe het embedding-model van de course getraind is, met CLS pooling en contrastive training op paren (in het Engels)"
+  - en: "Miriam Anschütz, Diego Miguel Lozano and Georg Groh, [*This is not correct! Negation-aware Evaluation of Language Generation Systems*](https://arxiv.org/abs/2307.13989), 2023: how models miss *not*, and a sentence model trained to notice it"
+    nl: "Miriam Anschütz, Diego Miguel Lozano en Georg Groh, [*This is not correct! Negation-aware Evaluation of Language Generation Systems*](https://arxiv.org/abs/2307.13989), 2023: hoe modellen *not* missen, en een model voor sentence embeddings dat getraind is om het op te merken (in het Engels)"
