@@ -1,0 +1,38 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: nlp-project-spam
+minutes: 40
+title:
+  en: "Project: a spam filter with TF-IDF"
+  nl: "Project: een spamfilter met TF-IDF"
+goal:
+  en: "build a spam filter of your own for real text messages: TF-IDF rows, training code you write yourself, and a count of the spam it lets through and the messages it blocks wrongly."
+  nl: "een eigen spamfilter bouwen voor echte sms'jes: rijen met TF-IDF-waarden, code voor de training die je zelf schrijft, en een telling van de spam die het doorlaat en de berichten die het onterecht tegenhoudt."
+summary:
+  - en: "Split a dataset after removing its copies: a test message that is also among the messages to train on says nothing about messages that arrive later."
+    nl: "Splits een dataset nadat je de kopieën eruit hebt gehaald: een testbericht dat ook bij de trainingsberichten staat, zegt niets over berichten die later binnenkomen."
+  - en: "The document frequencies come from the messages to train on only, and a word that none of them has gets no column: the filter learned no weight for it."
+    nl: "De document frequencies komen alleen uit de trainingsberichten, en een woord dat in geen enkel trainingsbericht staat, krijgt geen kolom: het filter leerde er geen weight voor."
+  - en: "A spam filter makes two kinds of mistakes, spam let through and messages blocked wrongly, and how often it is right hides which ones it makes when spam is rare."
+    nl: "Een spamfilter maakt twee soorten fouten, doorgelaten spam en onterecht tegengehouden berichten, en hoe vaak het goed zit, verbergt welke fouten het maakt als spam zeldzaam is."
+  - en: "The threshold trades the two kinds against each other. Where it belongs depends on what each mistake costs, and it should be chosen without looking at the test messages."
+    nl: "De threshold weegt de twee soorten tegen elkaar af. Waar de threshold hoort, hangt af van wat elke fout kost, en de keuze maak je zonder naar de testberichten te kijken."
+can_now:
+  - en: "make the TF-IDF row of a message from document frequencies of the messages to train on, with no column for a word that the messages to train on lack"
+    nl: "de rij met TF-IDF-waarden van een bericht maken uit document frequencies van de trainingsberichten, zonder kolom voor een woord dat niet in de trainingsberichten staat"
+    by: features
+  - en: "write one step of gradient descent, and train a filter with it"
+    nl: "één stap gradient descent schrijven, en daarmee een filter trainen"
+    by: step
+  - en: "count the spam a filter lets through and the messages it blocks wrongly, at a threshold"
+    nl: "bij een threshold de spam tellen die een filter doorlaat, en de berichten die het onterecht tegenhoudt"
+    by: mistakes
+  - en: "choose between two filters from what each kind of mistake costs"
+    nl: "kiezen tussen twee filters op basis van wat elke soort fout kost"
+    by: phone
+further_reading:
+  - en: "Tiago A. Almeida, José María Gómez Hidalgo and Akebo Yamakami, [*Contributions to the Study of SMS Spam Filtering: New Collection and Results*](https://doi.org/10.1145/2034691.2034742), DocEng 2011: where the messages come from, and how well a range of filters does on them"
+    nl: "Tiago A. Almeida, José María Gómez Hidalgo en Akebo Yamakami, [*Contributions to the Study of SMS Spam Filtering: New Collection and Results*](https://doi.org/10.1145/2034691.2034742), DocEng 2011: waar de berichten vandaan komen, en hoe goed een reeks filters het erop doet (in het Engels)"
+  - en: "Tiago A. Almeida and José María Gómez Hidalgo, [*SMS Spam Collection*](https://archive.ics.uci.edu/dataset/228/sms+spam+collection), UCI Machine Learning Repository: the page of the collection, with its license"
+    nl: "Tiago A. Almeida en José María Gómez Hidalgo, [*SMS Spam Collection*](https://archive.ics.uci.edu/dataset/228/sms+spam+collection), UCI Machine Learning Repository: de pagina van de verzameling, met de licentie (in het Engels)"

@@ -144,6 +144,16 @@ PINNED = {
         "sha256": "bd373706238134f619c624c606dccc74c05c2582a977c489c81de501735f2390",
         "size": 2_377_148,
     },
+    # The SMS Spam Collection v.1 (CC BY 4.0), at its source, the UCI Machine Learning Repository, dataset 228:
+    # nlp-project-spam and the lessons after it (course/route/bronnen.yaml, sms-spam-collection; everything_ai.sms
+    # reads it). A zip with two text files, of which the course reads one as text: nothing in it is ever run. UCI keeps
+    # no versions of the file, so "v1" is the course's own name for the file with this SHA-256.
+    ("archive.ics.uci.edu/dataset/228", "sms+spam+collection.zip"): {
+        "url": "https://archive.ics.uci.edu/static/public/228/sms+spam+collection.zip",
+        "revision": "v1",
+        "sha256": "1587ea43e58e82b14ff1f5425c88e17f8496bfcdb67a583dbff9eefaf9963ce3",
+        "size": 203_415,
+    },
 }
 CHUNK = 1 << 20   # bytes per read while downloading
 AGENT = "everything-ai-course"   # how a download introduces itself: some sources refuse Python's own name
