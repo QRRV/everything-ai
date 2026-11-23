@@ -609,6 +609,7 @@ lessons:
   covers: [sequence-labelling-en-structuur#2]
   requires: [nlp-bio-tags, nlp-pos-tagging]
   introduces: [c:named-entity, c:named-entity-recognition, c:gazetteer]
+  mentions: [c:train-set, c:test-set, c:part-of-speech-tagging, c:question-answering]
   data: [uner-english-ewt]
   ladder: [python]
   needs: any

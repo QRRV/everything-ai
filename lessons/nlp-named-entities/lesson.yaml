@@ -1,0 +1,38 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: nlp-named-entities
+minutes: 45
+title:
+  en: "Finding names: named entity recognition"
+  nl: "Namen vinden: named entity recognition"
+goal:
+  en: "find the names of people, places and organizations in a text in two ways: with a list of known names read with the longest match, and with a tagger that learns from marked sentences and looks at the tag before each word and at its shape."
+  nl: "de namen van mensen, plaatsen en organisaties in een tekst op twee manieren vinden: met een lijst van bekende namen, gelezen met de langste match, en met een tagger die leert van gemarkeerde zinnen en kijkt naar de tag vóór elk woord en naar de word shape."
+summary:
+  - en: "Named entity recognition finds the spans of a text that are names, each with its type: a person, a place or an organization. A named entity is about what words refer to, a proper noun is a grammatical property, and the two overlap for about 9 in 10 tokens inside names."
+    nl: "Named entity recognition vindt de spans van een tekst die namen zijn, elk met het type: een persoon, een plaats of een organisatie. Een named entity gaat over waar woorden naar verwijzen, een eigennaam is een grammaticale eigenschap, en de twee vallen samen voor ongeveer 9 van de 10 tokens binnen namen."
+  - en: "A gazetteer is a list of known names. Read with the longest match, a list made from the training set of Universal NER gets 317 of the 802 names of the test set right; it finds only names it has, and gives a name the same type wherever it stands."
+    nl: "Een gazetteer is een lijst van bekende namen. Gelezen met de langste match heeft een lijst uit de training set van Universal NER 317 van de 802 namen van de test set goed; de lijst vindt alleen namen die erin staan, en geeft een naam overal hetzelfde type."
+  - en: "A tagger that counts the BIO tag of each word after the tag before it, and otherwise looks at the short word shape, such as Xx for Villanueva, gets 343 names right, 58 of them names that the list does not have."
+    nl: "Een tagger die de BIO-tag van elk woord telt na de tag ervoor, en anders kijkt naar de short word shape, zoals Xx voor Villanueva, heeft 343 namen goed, waarvan 58 namen die niet in de lijst staan."
+  - en: "Both miss more than half of the names. A list fits names that are known and fixed; a tagger can find a new name, mostly by carrying on a name it knows."
+    nl: "Beide missen meer dan de helft van de namen. Een lijst past bij namen die bekend zijn en vastliggen; een tagger kan een nieuwe naam vinden, vooral door een bekende naam voort te zetten."
+can_now:
+  - en: "find the longest name of a gazetteer that starts at a position"
+    nl: "de langste naam van een gazetteer vinden die op een positie begint"
+    by: longest_at
+  - en: "turn a word into its short word shape"
+    nl: "van een woord de short word shape maken"
+    by: shape
+  - en: "tag a sentence from left to right with the tag before each word, and with the word shape for a word the tagger never saw there"
+    nl: "een zin van links naar rechts taggen met de tag vóór elk woord, en met de word shape voor een woord dat de tagger daar nooit zag"
+    by: tag_sentence
+  - en: "say when a list of names fits better than a tagger"
+    nl: "zeggen wanneer een lijst van namen beter past dan een tagger"
+    by: streets
+further_reading:
+  - en: "Daniel Jurafsky and James H. Martin, [*Speech and Language Processing*](https://web.stanford.edu/~jurafsky/slp3/), draft of August 19, 2026, the chapter *Sequence Labeling for Parts of Speech and Named Entities*: section 18.3 on named entities and why finding them is hard, sections 18.5.1 and 18.5.2 on word shapes and gazetteers, and section 18.7.1 on lists and rules in practice"
+    nl: "Daniel Jurafsky en James H. Martin, [*Speech and Language Processing*](https://web.stanford.edu/~jurafsky/slp3/), conceptversie van 19 augustus 2026, het hoofdstuk *Sequence Labeling for Parts of Speech and Named Entities*: paragraaf 18.3 over named entities en waarom het vinden ervan moeilijk is, paragraaf 18.5.1 en 18.5.2 over word shapes en gazetteers, en paragraaf 18.7.1 over lijsten en regels in de praktijk (in het Engels)"
+  - en: "Stephen Mayhew and others, [*Universal NER: A Gold-Standard Multilingual Named Entity Recognition Benchmark*](https://aclanthology.org/2024.naacl-long.243/), 2024: the dataset of this lesson, and the scores of taggers on it"
+    nl: "Stephen Mayhew en anderen, [*Universal NER: A Gold-Standard Multilingual Named Entity Recognition Benchmark*](https://aclanthology.org/2024.naacl-long.243/), 2024: de dataset van deze les, en de scores van taggers erop (in het Engels)"
