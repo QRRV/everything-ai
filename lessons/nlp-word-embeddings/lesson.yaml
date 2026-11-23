@@ -1,0 +1,43 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: nlp-word-embeddings
+minutes: 45
+title:
+  en: "Word embeddings: neighbors and analogies"
+  nl: "Word embeddings: buren en analogieën"
+goal:
+  en: "work out the cosine similarity of one vector with every row of 50,000 word embeddings at once, answer analogies with the parallelogram model, and see for which groups of the word2vec questions that works."
+  nl: "de cosine similarity van één vector met elke rij van 50.000 word embeddings tegelijk uitrekenen, analogieën beantwoorden met het parallellogrammodel, en zien bij welke groepen van de vragen van word2vec dat werkt."
+summary:
+  - en: "A word embedding is a short, dense vector for a word, learned from a large amount of text, so that words in similar contexts get similar vectors. GloVe learns them from the co-occurrence counts of a whole corpus. No single number means anything on its own; only how the vectors relate counts."
+    nl: "Een word embedding is een korte, dense vector voor een woord, geleerd uit een grote hoeveelheid tekst, zodat woorden in vergelijkbare contexten vergelijkbare vectoren krijgen. GloVe leert die vectoren uit de aantallen van co-occurrence in een heel corpus. Geen enkel getal betekent op zichzelf iets; alleen hoe de vectoren zich tot elkaar verhouden telt."
+  - en: "The nearest neighbors of a word are the words whose vectors have the highest cosine similarity with its vector, worked out for every row at once with `E @ v` and one norm per row. They belong with the word in all kinds of ways: words of the same kind, other forms of the same word, words of the same topic, and even opposites, such as *hot* and *cold*."
+    nl: "De dichtstbijzijnde buren van een woord zijn de woorden waarvan de vector de hoogste cosine similarity heeft met de vector van dat woord, voor elke rij tegelijk uitgerekend met `E @ v` en één norm per rij. Die buren horen op allerlei manieren bij het woord: woorden van dezelfde soort, andere vormen van hetzelfde woord, woorden over hetzelfde onderwerp, en zelfs tegenstellingen, zoals *hot* en *cold*."
+  - en: "The parallelogram model answers a : b = c : ? with the word nearest to b − a + c. That only works with the three words of the question left out: otherwise the nearest word is *b* or *c* itself, in 46.1% of the 17,692 word2vec questions whose four words GloVe knows."
+    nl: "Het parallellogrammodel beantwoordt a : b = c : ? met het woord dat het dichtst bij b − a + c ligt. Dat werkt alleen met de drie woorden van de vraag weggelaten: anders is het dichtstbijzijnde woord *b* of *c* zelf, in 46,1% van de 17.692 vragen van word2vec waarvan GloVe de vier woorden kent."
+  - en: "With GloVe's 50 numbers per word, the parallelogram gets 47.9% of those questions right: most of the nationalities, capitals and family words, few of the currencies, opposites and adverbs. The nearest neighbor of *c* alone already gets 14.8%, so a right answer says less about the shape of the vectors than it seems."
+    nl: "Met de 50 getallen per woord van GloVe heeft het parallellogram 47,9% van die vragen goed: de meeste nationaliteiten, hoofdsteden en familiewoorden, weinig van de munten, tegenstellingen en bijwoorden. De dichtstbijzijnde buur van alleen *c* heeft al 14,8% goed, dus een goed antwoord zegt minder over de vorm van de vectoren dan het lijkt."
+can_now:
+  - en: "work out the cosine similarity of one vector with every row of a table at once, and find the nearest neighbors of a word"
+    nl: "de cosine similarity van één vector met elke rij van een tabel tegelijk uitrekenen, en de dichtstbijzijnde buren van een woord vinden"
+    by: cosines
+  - en: "answer an analogy with the parallelogram model, and say why the three words of the question have to be left out"
+    nl: "een analogie beantwoorden met het parallellogrammodel, en zeggen waarom de drie woorden van de vraag weggelaten moeten worden"
+    by: analogy
+  - en: "say for which kinds of analogies word embeddings work well, and for which they do not"
+    nl: "zeggen bij welke soorten analogieën word embeddings goed werken, en bij welke niet"
+    by: groups
+further_reading:
+  - en: "Daniel Jurafsky and James H. Martin, [*Speech and Language Processing*](https://web.stanford.edu/~jurafsky/slp3/), draft of August 19, 2026, the chapter *Embeddings*, sections 5.5 and 5.7: dense vectors, word2vec, GloVe and fastText in brief, and the parallelogram model with its limits"
+    nl: "Daniel Jurafsky en James H. Martin, [*Speech and Language Processing*](https://web.stanford.edu/~jurafsky/slp3/), conceptversie van 19 augustus 2026, het hoofdstuk *Embeddings*, de paragrafen 5.5 en 5.7: dense vectoren, word2vec, GloVe en fastText in het kort, en het parallellogrammodel met de grenzen ervan (in het Engels)"
+  - en: "Jeffrey Pennington, Richard Socher and Christopher D. Manning, [*GloVe: Global Vectors for Word Representation*](https://aclanthology.org/D14-1162/), EMNLP 2014: why ratios of co-occurrence counts carry meaning, the 6 billion tokens, and the analogy results"
+    nl: "Jeffrey Pennington, Richard Socher en Christopher D. Manning, [*GloVe: Global Vectors for Word Representation*](https://aclanthology.org/D14-1162/), EMNLP 2014: waarom verhoudingen tussen aantallen van co-occurrence betekenis dragen, de 6 miljard tokens, en de resultaten op de analogieën (in het Engels)"
+  - en: "Tomas Mikolov, Kai Chen, Greg Corrado and Jeffrey Dean, [*Efficient Estimation of Word Representations in Vector Space*](https://arxiv.org/abs/1301.3781), 2013: word2vec, and in section 4.1 the test set with five types of semantic and nine types of syntactic questions"
+    nl: "Tomas Mikolov, Kai Chen, Greg Corrado en Jeffrey Dean, [*Efficient Estimation of Word Representations in Vector Space*](https://arxiv.org/abs/1301.3781), 2013: word2vec, en in paragraaf 4.1 de set met vijf soorten vragen over betekenis en negen over grammatica (in het Engels)"
+  - en: "Tal Linzen, [*Issues in evaluating semantic spaces using word analogies*](https://aclanthology.org/W16-2503/), RepEval 2016: how much the nearest neighbor of *c* alone already gets right, and what leaving out the words of the question does"
+    nl: "Tal Linzen, [*Issues in evaluating semantic spaces using word analogies*](https://aclanthology.org/W16-2503/), RepEval 2016: hoeveel de dichtstbijzijnde buur van alleen *c* al goed heeft, en wat het weglaten van de woorden van de vraag doet (in het Engels)"
+  - en: "Malvina Nissim, Rik van Noord and Rob van der Goot, [*Fair Is Better than Sensational: Man Is to Doctor as Woman Is to Doctor*](https://aclanthology.org/2020.cl-2.7/), Computational Linguistics 46(2), 2020: what analogies about bias show once the words of the question are allowed"
+    nl: "Malvina Nissim, Rik van Noord en Rob van der Goot, [*Fair Is Better than Sensational: Man Is to Doctor as Woman Is to Doctor*](https://aclanthology.org/2020.cl-2.7/), Computational Linguistics 46(2), 2020: wat analogieën over bias laten zien als de woorden van de vraag mogen meedoen (in het Engels)"
+  - en: "Edouard Grave, Piotr Bojanowski, Prakhar Gupta, Armand Joulin and Tomas Mikolov, [*Learning Word Vectors for 157 Languages*](https://aclanthology.org/L18-1550/), LREC 2018: the fastText vectors this lesson uses for Dutch, learned from Common Crawl and Wikipedia"
+    nl: "Edouard Grave, Piotr Bojanowski, Prakhar Gupta, Armand Joulin en Tomas Mikolov, [*Learning Word Vectors for 157 Languages*](https://aclanthology.org/L18-1550/), LREC 2018: de vectoren van fastText die deze les voor het Nederlands gebruikt, geleerd uit Common Crawl en Wikipedia (in het Engels)"

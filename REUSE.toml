@@ -519,3 +519,21 @@ path = "data/banking77-small.json"
 precedence = "override"
 SPDX-FileCopyrightText = "2020 PolyAI (BANKING77, Casanueva and others, https://arxiv.org/abs/2003.04807; a subset made for Everything AI)"
 SPDX-License-Identifier = "CC-BY-4.0"
+
+[[annotations]]
+path = "data/glove-6b-50d-50k.npz"
+precedence = "override"
+SPDX-FileCopyrightText = "Jeffrey Pennington, Richard Socher and Christopher D. Manning, Stanford NLP Group (GloVe 6B, glove.6B.50d.txt, https://nlp.stanford.edu/projects/glove/, Open Data Commons Public Domain Dedication and License; the 50,000 most frequent words of the letters a to z in float16, for Everything AI)"
+SPDX-License-Identifier = "PDDL-1.0"
+
+[[annotations]]
+path = "data/word2vec-questions-words.txt.gz"
+precedence = "override"
+SPDX-FileCopyrightText = "Google (questions-words.txt of word2vec, Mikolov, Chen, Corrado and Dean, 2013, https://github.com/tmikolov/word2vec; gzipped unchanged for Everything AI)"
+SPDX-License-Identifier = "Apache-2.0"
+
+[[annotations]]
+path = "data/course-word-pairs-nl.tsv"
+precedence = "override"
+SPDX-FileCopyrightText = "2026 Everything AI contributors"
+SPDX-License-Identifier = "CC-BY-SA-4.0"

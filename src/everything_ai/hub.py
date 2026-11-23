@@ -154,6 +154,17 @@ PINNED = {
         "sha256": "1587ea43e58e82b14ff1f5425c88e17f8496bfcdb67a583dbff9eefaf9963ce3",
         "size": 203_415,
     },
+    # The vectors of fastText for Dutch, cc.nl.300 (CC BY-SA 3.0, Grave and others 2018), at their source, the downloads of
+    # fastText: the first 20 MB of the gzipped file, the 30,355 most frequent words (course/route/bronnen.yaml,
+    # fasttext-nl-30k; everything_ai.wordvectors reads them as text: nothing in them is ever run). The file has no
+    # versions, so "v1" is the course's own name for the file whose first 20 MB have this SHA-256.
+    ("dl.fbaipublicfiles.com/fasttext", "cc.nl.300.vec.gz"): {
+        "url": "https://dl.fbaipublicfiles.com/fasttext/vectors-crawl/cc.nl.300.vec.gz",
+        "revision": "v1",
+        "sha256": "8c59089d944e31e6b9f9496d67851ffca20f51b7ff69f2618c6e628a821f8995",
+        "size": 20_000_000,
+        "first": True,
+    },
 }
 CHUNK = 1 << 20   # bytes per read while downloading
 AGENT = "everything-ai-course"   # how a download introduces itself: some sources refuse Python's own name

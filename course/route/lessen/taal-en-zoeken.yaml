@@ -480,6 +480,7 @@ lessons:
   covers: [distributionele-semantiek-en-word-embeddings#2]
   requires: [nlp-distributional-hypothesis, ml-embeddings-idea]
   introduces: [c:word-embedding, c:glove]
+  mentions: [c:common-crawl]
   data: [glove-50d, word2vec-analogies, fasttext-nl-30k]
   ladder: [python, numpy]
   needs: any
