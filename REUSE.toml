@@ -569,6 +569,12 @@ SPDX-FileCopyrightText = "2024 IBM (Granite Embedding, ibm-granite/granite-embed
 SPDX-License-Identifier = "Apache-2.0"
 
 [[annotations]]
+path = "data/litbank-coref.json.gz"
+precedence = "override"
+SPDX-FileCopyrightText = "2020 David Bamman, Olivia Lewke and Anya Mansoor (LitBank, the coreference layer; a selection for Everything AI)"
+SPDX-License-Identifier = "CC-BY-4.0"
+
+[[annotations]]
 path = "data/snli-sample.tsv.gz"
 precedence = "override"
 SPDX-FileCopyrightText = "2015 The Stanford NLP Group: Samuel R. Bowman, Gabor Angeli, Christopher Potts and Christopher D. Manning (SNLI 1.0; a sample, for Everything AI)"

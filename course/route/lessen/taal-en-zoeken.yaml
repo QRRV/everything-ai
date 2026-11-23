@@ -650,7 +650,7 @@ lessons:
   covers: [d15-coreferentie-en-discourse#0]
   requires: [nlp-discourse, nlp-named-entities]
   introduces: [c:coreference, c:coreference-resolution, c:anaphor]
-  data: []
+  data: [litbank-coref]
   ladder: [python]
   needs: any
 

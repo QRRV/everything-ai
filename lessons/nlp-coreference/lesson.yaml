@@ -1,0 +1,40 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: nlp-coreference
+minutes: 40
+title:
+  en: "What does 'it' refer to? Coreference"
+  nl: "Waar verwijst 'het' naar? Coreferentie"
+goal:
+  en: "group the mentions of a text into chains, one for each person or thing it speaks of, find the antecedent of each mention, and see how far the rule 'the nearest earlier mention of the same kind' gets with *it*."
+  nl: "de mentions van een tekst groeperen in ketens, één voor elke persoon of elk ding waar de tekst over spreekt, het antecedent van elke mention vinden, en zien hoe ver de regel van de dichtstbijzijnde eerdere mention van dezelfde soort komt bij *it*."
+summary:
+  - en: "Mentions corefer when they refer to the same entity: a name, a description and a pronoun can all be one person. The mentions of one entity form a chain; finding the chains is coreference resolution. An entity with only one mention is a singleton."
+    nl: "Mentions corefereren als de mentions naar dezelfde entiteit verwijzen: een naam, een beschrijving en een voornaamwoord kunnen allemaal één persoon zijn. De mentions van één entiteit vormen een keten; de ketens vinden heet coreference resolution. Een entiteit met maar één mention is een singleton."
+  - en: "An anaphor is a mention with an earlier mention of the same entity, its antecedent. In LitBank, 0.956 of the pronouns have one, against 0.712 of the names and 0.393 of the descriptions, and half of the pronouns find it within 2 mentions."
+    nl: "Een anafoor is een mention met een eerdere mention van dezelfde entiteit, het antecedent. In LitBank heeft 0,956 van de voornaamwoorden er een, tegen 0,712 van de namen en 0,393 van de beschrijvingen, en de helft van de voornaamwoorden vindt het antecedent binnen 2 mentions."
+  - en: "The rule 'the nearest earlier mention of the same kind' gets 216 of the 318 cases of *it*, *its* and *itself* in LitBank right, 0.679, against 0.431 for the nearest earlier mention of any kind."
+    nl: "De regel van de dichtstbijzijnde eerdere mention van dezelfde soort heeft 216 van de 318 gevallen van *it*, *its* en *itself* in LitBank goed, 0,679, tegen 0,431 voor de dichtstbijzijnde eerdere mention van welke soort ook."
+  - en: "What the rule misses can take knowledge of the world: in *The trophy didn't fit into the suitcase because it was too large.*, one word after *it* decides, and the rule picks the suitcase."
+    nl: "Wat de regel mist, kan kennis van de wereld vragen: in *The trophy didn't fit into the suitcase because it was too large.* beslist één woord na *it*, en de regel kiest *the suitcase*."
+can_now:
+  - en: "group the mentions of a text into chains"
+    nl: "de mentions van een tekst groeperen in ketens"
+    by: chains
+  - en: "find for each mention the nearest earlier mention of its chain"
+    nl: "bij elke mention de dichtstbijzijnde eerdere mention van dezelfde keten vinden"
+    by: antecedents
+  - en: "write the rule 'the nearest earlier mention of the same kind' and measure it on real stories and novels"
+    nl: "de regel van de dichtstbijzijnde eerdere mention van dezelfde soort schrijven en meten op echte romans en verhalen"
+    by: pick
+  - en: "say why one word after a pronoun can change what it refers to"
+    nl: "zeggen waarom één woord na een voornaamwoord kan veranderen waar het voornaamwoord naar verwijst"
+    by: trophy
+further_reading:
+  - en: "Daniel Jurafsky and James H. Martin, [*Speech and Language Processing*](https://web.stanford.edu/~jurafsky/slp3/), draft of August 19, 2026, the chapter *Coreference Resolution and Entity Linking*: mentions, chains, what helps choose an antecedent, and the Winograd Schema problems"
+    nl: "Daniel Jurafsky en James H. Martin, [*Speech and Language Processing*](https://web.stanford.edu/~jurafsky/slp3/), conceptversie van 19 augustus 2026, het hoofdstuk *Coreference Resolution and Entity Linking*: mentions, ketens, wat helpt bij het kiezen van een antecedent, en de Winograd Schema-opgaven (in het Engels)"
+  - en: "David Bamman, Olivia Lewke and Anya Mansoor, [*An Annotated Dataset of Coreference in English Literature*](https://aclanthology.org/2020.lrec-1.6/), 2020: how LitBank's coreference layer was made, and how far back antecedents lie in long texts"
+    nl: "David Bamman, Olivia Lewke en Anya Mansoor, [*An Annotated Dataset of Coreference in English Literature*](https://aclanthology.org/2020.lrec-1.6/), 2020: hoe de coreferentielaag van LitBank gemaakt is, en hoe ver antecedenten in lange teksten terug liggen (in het Engels)"
+  - en: "Hector J. Levesque, Ernest Davis and Leora Morgenstern, [*The Winograd Schema Challenge*](https://cdn.aaai.org/ocs/4492/4492-21843-1-PB.pdf), 2012: pairs of sentences in which one word decides what a pronoun refers to"
+    nl: "Hector J. Levesque, Ernest Davis en Leora Morgenstern, [*The Winograd Schema Challenge*](https://cdn.aaai.org/ocs/4492/4492-21843-1-PB.pdf), 2012: paren van zinnen waarin één woord beslist waar een voornaamwoord naar verwijst (in het Engels)"
