@@ -1,0 +1,35 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: nlp-sts
+minutes: 45
+title:
+  en: "Same meaning? Similarity and paraphrases"
+  nl: "Dezelfde betekenis? Gelijkenis en parafrases"
+goal:
+  en: "compare the cosine similarity of sentence embeddings with what people scored, and choose a threshold that turns it into paraphrase detection with the precision you need."
+  nl: "de cosine similarity van sentence embeddings vergelijken met wat mensen scoorden, en een threshold kiezen die er parafrasedetectie van maakt met de precision die je nodig hebt."
+summary:
+  - en: "Semantic textual similarity (STS) is how alike two sentences are in meaning. In the STS tasks of 2012 to 2017, people scored pairs of sentences from 0, completely dissimilar, to 5, the same meaning; the STS Benchmark collects 8,628 of those pairs."
+    nl: "Semantic textual similarity (STS) is hoe sterk twee zinnen in betekenis op elkaar lijken. In de STS-taken van 2012 tot 2017 gaven mensen paren zinnen een score van 0, helemaal verschillend, tot 5, dezelfde betekenis; de STS Benchmark verzamelt 8.628 van die paren."
+  - en: "On the course's 1,750 pairs, Granite's cosine similarity rises with the score on average, from 0.580 under 0.5 to 0.926 at 4.5 and more, but the clouds overlap: *The gate is blue.* and *The gate is yellow.* get 0.951 for a score of 1.6."
+    nl: "Op de 1.750 paren van de course stijgt de cosine similarity van Granite gemiddeld met de score, van 0,580 onder 0,5 tot 0,926 bij 4,5 en meer, maar de wolken overlappen: *The gate is blue.* en *The gate is yellow.* krijgen 0,951 bij een score van 1,6."
+  - en: "A paraphrase says the same thing in other words; this lesson counts a pair with a score of 4 or more as one. A threshold on the cosine similarity makes paraphrase detection, with precision and recall as for any classifier."
+    nl: "Een parafrase zegt hetzelfde in andere woorden; deze les telt een paar met een score van 4 of meer als parafrase. Een threshold op de cosine similarity maakt er parafrasedetectie van, met precision en recall zoals bij elke classifier."
+  - en: "Choose the threshold on the validation set and measure it once on the test set. For a precision you need, the lowest threshold that reaches it keeps the most recall: for 0.8 on the English pairs that is 0.9418, with a recall of 0.233."
+    nl: "Kies de threshold op de validation set en meet de threshold één keer op de test set. Voor een precision die je nodig hebt, houdt de laagste threshold die de precision haalt de meeste recall over: voor 0,8 op de Engelse paren is dat 0,9418, met een recall van 0,233."
+can_now:
+  - en: "place a pair of sentences on the STS scale from 0 to 5"
+    nl: "een paar zinnen een plek geven op de STS-schaal van 0 tot 5"
+    by: sts-scale
+  - en: "compute the precision and recall of a threshold on the cosine similarity as a paraphrase detector"
+    nl: "de precision en recall van een threshold op de cosine similarity als parafrasedetector berekenen"
+    by: precision_recall
+  - en: "choose on a validation set the lowest threshold that reaches a precision"
+    nl: "op een validation set de laagste threshold kiezen die een precision haalt"
+    by: lowest_threshold
+further_reading:
+  - en: "Daniel Cer, Mona Diab, Eneko Agirre, Iñigo Lopez-Gazpio and Lucia Specia, [*SemEval-2017 Task 1: Semantic Textual Similarity Multilingual and Cross-lingual Focused Evaluation*](https://aclanthology.org/S17-2001/), 2017: the STS scale, how the scores were collected, and the STS Benchmark"
+    nl: "Daniel Cer, Mona Diab, Eneko Agirre, Iñigo Lopez-Gazpio en Lucia Specia, [*SemEval-2017 Task 1: Semantic Textual Similarity Multilingual and Cross-lingual Focused Evaluation*](https://aclanthology.org/S17-2001/), 2017: de STS-schaal, hoe de scores verzameld zijn, en de STS Benchmark (in het Engels)"
+  - en: "Philip May, [*stsb-multi-mt*](https://github.com/PhilipMay/stsb-multi-mt), 2021: the STS Benchmark translated by machine into ten languages, Dutch among them"
+    nl: "Philip May, [*stsb-multi-mt*](https://github.com/PhilipMay/stsb-multi-mt), 2021: de STS Benchmark machinaal vertaald in tien talen, waaronder het Nederlands (in het Engels)"

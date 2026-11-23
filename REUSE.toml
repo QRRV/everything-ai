@@ -567,3 +567,15 @@ path = "data/course-sentence-vectors.npz"
 precedence = "override"
 SPDX-FileCopyrightText = "2024 IBM (Granite Embedding, ibm-granite/granite-embedding-107m-multilingual), 2020 Google (BERT-Tiny, google/bert_uncased_L-2_H-128_A-2, Turc, Chang, Lee and Toutanova; their vectors for the course's own sentences, computed for Everything AI) and 2026 Everything AI contributors"
 SPDX-License-Identifier = "Apache-2.0"
+
+[[annotations]]
+path = "data/stsb-captions.tsv.gz"
+precedence = "override"
+SPDX-FileCopyrightText = "2017 Daniel Cer, Mona Diab, Eneko Agirre, Inigo Lopez-Gazpio and Lucia Specia (STS Benchmark, SemEval 2017, the scores); 2010 Cyrus Rashtchian, Peter Young, Micah Hodosh and Julia Hockenmaier (captions of PASCAL VOC-2008 pictures); 2015 Samuel R. Bowman, Gabor Angeli, Christopher Potts and Christopher D. Manning (SNLI); 2021 Philip May (stsb-multi-mt, the Dutch, translated with DeepL); the selection of pairs for Everything AI"
+SPDX-License-Identifier = "CC-BY-SA-4.0"
+
+[[annotations]]
+path = "data/stsb-captions-granite.npz"
+precedence = "override"
+SPDX-FileCopyrightText = "2024 IBM (Granite Embedding, ibm-granite/granite-embedding-107m-multilingual; its cosine similarities for the pairs of data/stsb-captions.tsv.gz, computed for Everything AI) and 2026 Everything AI contributors"
+SPDX-License-Identifier = "Apache-2.0"

@@ -550,6 +550,7 @@ lessons:
   covers: [sentence-embeddings#2]
   requires: [nlp-sentence-embeddings, ml-confusion-matrix]
   introduces: [c:semantic-textual-similarity, c:paraphrase]
+  mentions: [c:machine-translation, c:question-answering]
   data: [model-granite-embedding, sts-pairs]
   ladder: [python, numpy]
   needs: any
