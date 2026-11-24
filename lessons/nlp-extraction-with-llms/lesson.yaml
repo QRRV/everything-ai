@@ -1,0 +1,31 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: nlp-extraction-with-llms
+minutes: 45
+title:
+  en: "Extraction with an LLM"
+  nl: "Gegevens uit tekst halen met een LLM"
+goal:
+  en: "let a chat model fill in five fields for twelve notices from a prompt with examples, read its answers back as rows, and check every value against the notice it came from."
+  nl: "een chat model vijf velden laten invullen voor twaalf aankondigingen met een prompt met voorbeelden, de antwoorden teruglezen als rijen, en elke waarde opzoeken in de aankondiging waar de waarde vandaan komt."
+summary:
+  - en: "A chat model fills in the fields of a template from a prompt: an instruction that names the fields and the form of the answer, a few examples with their finished answers, and the text between tags. Without examples, Qwen3's answers often break the form of one line per field, and never hold a - for a field the text does not give."
+    nl: "Een chat model vult de velden van een template in met een prompt: een instructie die de velden en de vorm van het antwoord noemt, een paar voorbeelden met het afgemaakte antwoord, en de tekst tussen tags. Zonder voorbeelden schrijft Qwen3 nooit - bij een veld dat niet in de tekst staat, maar bijvoorbeeld woorden uit de instructie."
+  - en: "The model often writes something also for a field the text does not give: words from an example, from elsewhere in the text, or made up. A value that sounds sure but has no source is a hallucination."
+    nl: "Het model schrijft vaak ook iets bij een veld dat niet in de tekst staat: woorden uit een voorbeeld, van elders uit de tekst, of verzonnen. Een waarde die zeker klinkt maar geen bron heeft, is een hallucinatie."
+  - en: "So every extracted value is checked against its source: a value that is not in the text goes to a person or stays empty. The check finds values from nowhere, but not words of the text in the wrong field."
+    nl: "Dus wordt elke waarde getoetst aan de bron: een waarde die niet in de tekst staat, gaat naar een mens of blijft leeg. De check vindt waarden die nergens vandaan komen, maar geen woorden uit de tekst in het verkeerde veld."
+can_now:
+  - en: "write a prompt that asks a chat model for the fields of a template, with an instruction, examples and the text between tags"
+    nl: "een prompt schrijven die een chat model om de velden van een template vraagt, met een instructie, voorbeelden en de tekst tussen tags"
+    by: fields_prompt
+  - en: "read a model's answer back as a row of fields with a regular expression, and leave out the fields it left empty"
+    nl: "het antwoord van een model teruglezen als een rij velden met een reguliere expressie, en de velden weglaten die het model leeg liet"
+    by: read_fields
+  - en: "check every value a model filled in against its source, and flag the values that are not there"
+    nl: "elke waarde die een model invulde toetsen aan de bron, en de waarden markeren die er niet in staan"
+    by: unsupported
+further_reading:
+  - en: "Monica Agrawal, Stefan Hegselmann, Hunter Lang, Yoon Kim and David Sontag, [*Large language models are few-shot clinical information extractors*](https://aclanthology.org/2022.emnlp-main.130/), EMNLP 2022: GPT-3 fills in fields from notes that doctors wrote, from a prompt with a few examples"
+    nl: "Monica Agrawal, Stefan Hegselmann, Hunter Lang, Yoon Kim en David Sontag, [*Large language models are few-shot clinical information extractors*](https://aclanthology.org/2022.emnlp-main.130/), EMNLP 2022: GPT-3 vult velden in uit notities van artsen, met een prompt met een paar voorbeelden (in het Engels)"

@@ -1,0 +1,2988 @@
+{
+ "answers": {
+  "en": {
+   "zero": [
+    {
+     "prompt_sha256": "425e75c6062c6c0815f334dfe89325073b2ac254020812ba46e801a5f8b4e43d",
+     "seeds": [
+      {
+       "seed": 0,
+       "text": "what: Book market  \ndate: Saturday 14 March  \ntime (when it starts): 10:00 to 16:00  \nplace and price: Town library  \nprice: Free",
+       "tokens": 43,
+       "prompt_tokens": 119,
+       "cached_tokens": 0,
+       "seconds": 4.61,
+       "finish": "stop"
+      },
+      {
+       "seed": 1,
+       "text": "what: book market  \ndate: 14 March  \ntime: 10:00 to 16:00  \nplace: town library  \nprice: free",
+       "tokens": 36,
+       "prompt_tokens": 119,
+       "cached_tokens": 0,
+       "seconds": 4.41,
+       "finish": "stop"
+      },
+      {
+       "seed": 2,
+       "text": "what: Book market  \ndate: Saturday 14 March  \ntime: when it starts  \nplace and price: town library, free entry",
+       "tokens": 28,
+       "prompt_tokens": 119,
+       "cached_tokens": 0,
+       "seconds": 3.24,
+       "finish": "stop"
+      },
+      {
+       "seed": 3,
+       "text": "what: Book market  \ndate: Saturday 14 March  \ntime: 10:00 to 16:00  \nplace: town library  \nprice: free",
+       "tokens": 37,
+       "prompt_tokens": 119,
+       "cached_tokens": 0,
+       "seconds": 4.08,
+       "finish": "stop"
+      }
+     ]
+    },
+    {
+     "prompt_sha256": "b2d32fee882d5d1eee5cde7fbe377cc624ce8c2e4c5b091c69b50a44bec5bcb0",
+     "seeds": [
+      {
+       "seed": 0,
+       "text": "what: Swimming lessons for adults  \ndate: Monday 16 March  \ntime (when it starts): 19:30  \nplace and price (of a ticket or entry): at a place and price of €60",
+       "tokens": 47,
+       "prompt_tokens": 114,
+       "cached_tokens": 0,
+       "seconds": 5.1,
+       "finish": "stop"
+      },
+      {
+       "seed": 1,
+       "text": "what: Swimming lessons for adults  \ndate: Monday 16 March  \ntime: 19:30  \nplace: unknown  \nprice: €60",
+       "tokens": 33,
+       "prompt_tokens": 114,
+       "cached_tokens": 0,
+       "seconds": 3.69,
+       "finish": "stop"
+      },
+      {
+       "seed": 2,
+       "text": "what: Swimming lessons for adults  \ndate: Monday 16 March  \ntime: 19:30  \nplace and price: at the swimming pool, €60",
+       "tokens": 36,
+       "prompt_tokens": 114,
+       "cached_tokens": 0,
+       "seconds": 3.63,
+       "finish": "stop"
+      },
+      {
+       "seed": 3,
+       "text": "what: Swimming lessons for adults  \ndate: Monday 16 March  \ntime: when it starts: 19:30  \nplace: ?  \nprice: €60",
+       "tokens": 37,
+       "prompt_tokens": 114,
+       "cached_tokens": 0,
+       "seconds": 3.86,
+       "finish": "stop"
+      }
+     ]
+    },
+    {
+     "prompt_sha256": "9616d8d597acf7f9e188de414cbc9c5bfbcd656319c20213aa06b0e87d9bb29f",
+     "seeds": [
+      {
+       "seed": 0,
+       "text": "what: Night of the Stars  \ndate: Friday 20 March  \ntime: when it starts  \nplace: observatory on the hill  \nprice: of a ticket or entry",
+       "tokens": 36,
+       "prompt_tokens": 123,
+       "cached_tokens": 0,
+       "seconds": 4.05,
+       "finish": "stop"
+      },
+      {
+       "seed": 1,
+       "text": "what: Night of the Stars  \ndate: Friday 20 March  \ntime (when it starts): 21:00  \nplace and price: Observatory on the hill, Bring warm clothes",
+       "tokens": 40,
+       "prompt_tokens": 123,
+       "cached_tokens": 0,
+       "seconds": 4.29,
+       "finish": "stop"
+      },
+      {
+       "seed": 2,
+       "text": "what: Night of the Stars  \ndate: Friday 20 March  \ntime (when it starts): 21:00  \nplace and price: observatory on the hill, bring warm clothes",
+       "tokens": 41,
+       "prompt_tokens": 123,
+       "cached_tokens": 0,
+       "seconds": 4.15,
+       "finish": "stop"
+      },
+      {
+       "seed": 3,
+       "text": "what: Night of the Stars  \ndate: Friday 20 March  \ntime (when it starts): 21:00  \nplace and price: Observatory on the hill, bring warm clothes",
+       "tokens": 40,
+       "prompt_tokens": 123,
+       "cached_tokens": 0,
+       "seconds": 4.44,
+       "finish": "stop"
+      }
+     ]
+    },
+    {
+     "prompt_sha256": "65c784bc7a0fad2902454f3900c0033524b327f0882952d466fc92e3e2e55462",
+     "seeds": [
+      {
+       "seed": 0,
+       "text": "what: Flea market  \ndate: 22 March  \ntime: when it starts: 9:00  \nplace and price: Market Square, €2; parking in the garage costs €4.",
+       "tokens": 43,
+       "prompt_tokens": 122,
+       "cached_tokens": 0,
+       "seconds": 4.86,
+       "finish": "stop"
+      },
+      {
+       "seed": 1,
+       "text": "what: flea market  \ndate: 22 March  \ntime: when it starts: 9:00  \nplace and price: Market Square, €2; parking in the garage costs €4.",
+       "tokens": 42,
+       "prompt_tokens": 122,
+       "cached_tokens": 0,
+       "seconds": 4.66,
+       "finish": "stop"
+      },
+      {
+       "seed": 2,
+       "text": "what: Flea market  \ndate: 22 March  \ntime (when it starts): 9:00  \nplace and price: Market Square, €2; parking in the garage costs €4.",
+       "tokens": 43,
+       "prompt_tokens": 122,
+       "cached_tokens": 0,
+       "seconds": 4.26,
+       "finish": "stop"
+      },
+      {
+       "seed": 3,
+       "text": "what: flea market  \ndate: 22 March  \ntime (when it starts): 9:00  \nplace and price: Market Square, €2; parking in the garage costs €4.",
+       "tokens": 42,
+       "prompt_tokens": 122,
+       "cached_tokens": 0,
+       "seconds": 4.26,
+       "finish": "stop"
+      }
+     ]
+    },
+    {
+     "prompt_sha256": "8ec141a6d9ccac2a9bdc12bfb493b66b313f8fd9458ae54fb75ebb6b8c6c9c99",
+     "seeds": [
+      {
+       "seed": 0,
+       "text": "what: Film evening  \ndate: Wednesday 25 March  \ntime: when it starts: 25 March  \nplace and price: old cinema on Bridge Street, €7.50",
+       "tokens": 39,
+       "prompt_tokens": 118,
+       "cached_tokens": 0,
+       "seconds": 3.99,
+       "finish": "stop"
+      },
+      {
+       "seed": 1,
+       "text": "what: Film evening  \ndate: Wednesday 25 March  \ntime (when it starts): 25 March  \nplace and price: Bridge Street, €7.50",
+       "tokens": 36,
+       "prompt_tokens": 118,
+       "cached_tokens": 0,
+       "seconds": 3.43,
+       "finish": "stop"
+      },
+      {
+       "seed": 2,
+       "text": "what: Film evening  \ndate: Wednesday 25 March  \ntime: when it starts  \nplace and price: old cinema on Bridge Street, €7.50",
+       "tokens": 34,
+       "prompt_tokens": 118,
+       "cached_tokens": 0,
+       "seconds": 3.57,
+       "finish": "stop"
+      },
+      {
+       "seed": 3,
+       "text": "what: Film evening  \ndate: Wednesday 25 March  \ntime (when it starts): 25 March  \nplace and price: old cinema on Bridge Street €7.50",
+       "tokens": 38,
+       "prompt_tokens": 118,
+       "cached_tokens": 0,
+       "seconds": 3.83,
+       "finish": "stop"
+      }
+     ]
+    },
+    {
+     "prompt_sha256": "f946cc61381f39c5477c438695c67bdc560f985717482f7a23104357d1b1f07d",
+     "seeds": [
+      {
+       "seed": 0,
+       "text": "what: Spring cleaning  \ndate: Saturday 28 March  \ntime (when it starts): 10:00  \nplace and price: Willow Park, $5.00 (entry price)",
+       "tokens": 42,
+       "prompt_tokens": 118,
+       "cached_tokens": 0,
+       "seconds": 4.64,
+       "finish": "stop"
+      },
+      {
+       "seed": 1,
+       "text": "what: Spring cleaning  \ndate: Saturday 28 March  \ntime: 10:00  \nplace: Willow Park  \nprice: (not given)",
+       "tokens": 33,
+       "prompt_tokens": 118,
+       "cached_tokens": 0,
+       "seconds": 3.1,
+       "finish": "stop"
+      },
+      {
+       "seed": 2,
+       "text": "what: Spring cleaning  \ndate: Saturday 28 March  \ntime (when it starts): 10:00  \nplace and price: Willow Park, $5.00",
+       "tokens": 38,
+       "prompt_tokens": 118,
+       "cached_tokens": 0,
+       "seconds": 4.16,
+       "finish": "stop"
+      },
+      {
+       "seed": 3,
+       "text": "what: Spring cleaning  \ndate: Saturday 28 March  \ntime: when it starts  \nplace: Willow Park  \nprice: of a ticket or entry",
+       "tokens": 31,
+       "prompt_tokens": 118,
+       "cached_tokens": 0,
+       "seconds": 3.55,
+       "finish": "stop"
+      }
+     ]
+    },
+    {
+     "prompt_sha256": "3307967f1d9810643b8763fcc79b6cf3b49e946ed7ab4dee8c38908b767efaf5",
+     "seeds": [
+      {
+       "seed": 0,
+       "text": "what: Chess tournament  \ndate: 4 April  \ntime (when it starts): 9:30  \nplace and price: Sports hall on School Lane, €5, players under 12 free",
+       "tokens": 42,
+       "prompt_tokens": 127,
+       "cached_tokens": 0,
+       "seconds": 4.29,
+       "finish": "stop"
+      },
+      {
+       "seed": 1,
+       "text": "what: Chess tournament  \ndate: 4 April  \ntime (when it starts): 9:30  \nplace and price: Sports hall on School Lane, €5, players under 12 free",
+       "tokens": 42,
+       "prompt_tokens": 127,
+       "cached_tokens": 0,
+       "seconds": 4.03,
+       "finish": "stop"
+      },
+      {
+       "seed": 2,
+       "text": "what: Chess tournament  \ndate: 4 April  \ntime: 9:30  \nplace and price: Sports hall on School Lane, €5, players under 12 free",
+       "tokens": 38,
+       "prompt_tokens": 127,
+       "cached_tokens": 0,
+       "seconds": 3.98,
+       "finish": "stop"
+      },
+      {
+       "seed": 3,
+       "text": "what: Chess tournament  \ndate: 4 April  \ntime (when it starts): 9:30  \nplace and price: Sports hall on School Lane, €5, players under 12 free",
+       "tokens": 42,
+       "prompt_tokens": 127,
+       "cached_tokens": 0,
+       "seconds": 4.57,
+       "finish": "stop"
+      }
+     ]
+    },
+    {
+     "prompt_sha256": "e8eea4b157832f1286b0e22c62ccfa405c7aa4c75507a9156d4c579fb6eef80b",
+     "seeds": [
+      {
+       "seed": 0,
+       "text": "what: Cooking workshop  \ndate: Tuesday  \ntime: 18:00  \nplace and price: in the kitchen of the community center.",
+       "tokens": 30,
+       "prompt_tokens": 125,
+       "cached_tokens": 0,
+       "seconds": 3.67,
+       "finish": "stop"
+      },
+      {
+       "seed": 1,
+       "text": "what: Cooking workshop  \ndate: Tuesday  \ntime: 18:00  \nplace: the kitchen of the community center  \nprice: (not given)",
+       "tokens": 33,
+       "prompt_tokens": 125,
+       "cached_tokens": 0,
+       "seconds": 3.33,
+       "finish": "stop"
+      },
+      {
+       "seed": 2,
+       "text": "what: Cooking workshop  \ndate: Tuesday  \ntime (when it starts): 18:00  \nplace and price: kitchen of the community center",
+       "tokens": 31,
+       "prompt_tokens": 125,
+       "cached_tokens": 0,
+       "seconds": 3.59,
+       "finish": "stop"
+      },
+      {
+       "seed": 3,
+       "text": "what: Cooking workshop  \ndate: Tuesday  \ntime (when it starts): 18:00  \nplace and price: kitchen of the community center",
+       "tokens": 31,
+       "prompt_tokens": 125,
+       "cached_tokens": 0,
+       "seconds": 3.34,
+       "finish": "stop"
+      }
+     ]
+    },
+    {
+     "prompt_sha256": "302a4ce9ba7e06b3aebe425ad473d9e66e367bde5259872cfe20bbacabd79e47",
+     "seeds": [
+      {
+       "seed": 0,
+       "text": "what: Garden tour  \ndate: Sunday 12 April  \ntime: when it starts: (when it starts)  \nplace and price: twelve gardens in the old town open their gates. Tickets cost €10 and come with a map.",
+       "tokens": 50,
+       "prompt_tokens": 118,
+       "cached_tokens": 0,
+       "seconds": 4.97,
+       "finish": "stop"
+      },
+      {
+       "seed": 1,
+       "text": "what: Garden tour  \ndate: Sunday 12 April  \ntime (when it starts): 12 April  \nplace and price: twelve gardens in the old town €10 and come with a map.",
+       "tokens": 43,
+       "prompt_tokens": 118,
+       "cached_tokens": 0,
+       "seconds": 4.57,
+       "finish": "stop"
+      },
+      {
+       "seed": 2,
+       "text": "what: Garden tour  \ndate: Sunday 12 April  \ntime: when it starts (not specified)  \nplace and price: twelve gardens in the old town open their gates. Tickets cost €10 and come with a map.",
+       "tokens": 48,
+       "prompt_tokens": 118,
+       "cached_tokens": 0,
+       "seconds": 5.92,
+       "finish": "stop"
+      },
+      {
+       "seed": 3,
+       "text": "what: Garden tour  \ndate: Sunday 12 April  \ntime: when it starts (not given)  \nplace: old town  \nprice: €10",
+       "tokens": 33,
+       "prompt_tokens": 118,
+       "cached_tokens": 0,
+       "seconds": 3.89,
+       "finish": "stop"
+      }
+     ]
+    },
+    {
+     "prompt_sha256": "5425aa1a4f7784daa24271b892be9bff249c41aea896c73a35f38e0c3d208127",
+     "seeds": [
+      {
+       "seed": 0,
+       "text": "what: Lecture on the history of the canal  \ndate: Thursday  \ntime (when it starts): 20:00  \nplace and price: town hall, €3, coffee included",
+       "tokens": 39,
+       "prompt_tokens": 120,
+       "cached_tokens": 0,
+       "seconds": 3.98,
+       "finish": "stop"
+      },
+      {
+       "seed": 1,
+       "text": "what: Lecture on the history of the canal  \ndate: Thursday  \ntime: when it starts  \nplace and price: town hall, €3, coffee included",
+       "tokens": 32,
+       "prompt_tokens": 120,
+       "cached_tokens": 0,
+       "seconds": 4.62,
+       "finish": "stop"
+      },
+      {
+       "seed": 2,
+       "text": "what: Lecture on the history of the canal  \ndate: Thursday  \ntime: when it starts  \nplace and price: town hall, €3, coffee included",
+       "tokens": 32,
+       "prompt_tokens": 120,
+       "cached_tokens": 0,
+       "seconds": 3.84,
+       "finish": "stop"
+      },
+      {
+       "seed": 3,
+       "text": "what: Lecture on the history of the canal  \ndate: Thursday 16 April  \ntime: when it starts: 20:00  \nplace and price: town hall, €3, coffee included",
+       "tokens": 43,
+       "prompt_tokens": 120,
+       "cached_tokens": 0,
+       "seconds": 4.99,
+       "finish": "stop"
+      }
+     ]
+    },
+    {
+     "prompt_sha256": "cdb0e4ed6f70b850a5509e14ef7900ebb27b8adc9679e4e39adbf555a69cc108",
+     "seeds": [
+      {
+       "seed": 0,
+       "text": "what: Open day  \ndate: Saturday  \ntime: 11:00 to 15:00  \nplace and price: Station Road, 18 April, 11:00 to 15:00",
+       "tokens": 50,
+       "prompt_tokens": 125,
+       "cached_tokens": 0,
+       "seconds": 4.69,
+       "finish": "stop"
+      },
+      {
+       "seed": 1,
+       "text": "what: Open day  \ndate: Saturday  \ntime: 11:00 to 15:00  \nplace: Station Road  \nprice: (not given)",
+       "tokens": 36,
+       "prompt_tokens": 125,
+       "cached_tokens": 0,
+       "seconds": 4.28,
+       "finish": "stop"
+      },
+      {
+       "seed": 2,
+       "text": "what: Open day  \ndate: Saturday  \ntime (when it starts): 18 April  \nplace and price (of a ticket or entry): Station Road",
+       "tokens": 32,
+       "prompt_tokens": 125,
+       "cached_tokens": 0,
+       "seconds": 4.06,
+       "finish": "stop"
+      },
+      {
+       "seed": 3,
+       "text": "what: Open day  \ndate: Saturday  \ntime (when it starts): 11:00  \nplace and price (of a ticket or entry): Station Road",
+       "tokens": 34,
+       "prompt_tokens": 125,
+       "cached_tokens": 0,
+       "seconds": 4.08,
+       "finish": "stop"
+      }
+     ]
+    },
+    {
+     "prompt_sha256": "4c26ddc48d5ea317c5b3f14d6049ebea0f9355390a0ad7fcad207e1ac16e04a9",
+     "seeds": [
+      {
+       "seed": 0,
+       "text": "what: Jazz  \ndate: 14:00  \ntime: 14:00  \nplace: Willow Park  \nprice: €12",
+       "tokens": 32,
+       "prompt_tokens": 121,
+       "cached_tokens": 0,
+       "seconds": 3.39,
+       "finish": "stop"
+      },
+      {
+       "seed": 1,
+       "text": "what: Jazz in the park  \ndate: 14:00  \ntime: when it starts  \nplace: Willow Park  \nprice: €12 at the gate",
+       "tokens": 35,
+       "prompt_tokens": 121,
+       "cached_tokens": 0,
+       "seconds": 3.91,
+       "finish": "stop"
+      },
+      {
+       "seed": 2,
+       "text": "what: Jazz  \ndate: 14:00  \ntime: when it starts  \nplace and price: Willow Park, €12 at the gate",
+       "tokens": 32,
+       "prompt_tokens": 121,
+       "cached_tokens": 0,
+       "seconds": 3.43,
+       "finish": "stop"
+      },
+      {
+       "seed": 3,
+       "text": "what: Jazz in the park  \ndate: 14:00  \ntime: when it starts  \nplace: Willow Park  \nprice: €12 at the gate",
+       "tokens": 35,
+       "prompt_tokens": 121,
+       "cached_tokens": 0,
+       "seconds": 4.19,
+       "finish": "stop"
+      }
+     ]
+    }
+   ],
+   "examples": [
+    {
+     "prompt_sha256": "4b0ae87092377de665d7ab50e2807768d74f8cce9ab3c4dd0eba88b98313a24c",
+     "seeds": [
+      {
+       "seed": 0,
+       "text": "what: Book market\ndate: Saturday 14 March\ntime: 10:00\nplace: the town library\nprice: free",
+       "tokens": 31,
+       "prompt_tokens": 270,
+       "cached_tokens": 0,
+       "seconds": 4.09,
+       "finish": "stop"
+      },
+      {
+       "seed": 1,
+       "text": "what: Book market\ndate: Saturday 14 March\ntime: 10:00\nplace: the town library\nprice: free",
+       "tokens": 31,
+       "prompt_tokens": 270,
+       "cached_tokens": 0,
+       "seconds": 4.04,
+       "finish": "stop"
+      },
+      {
+       "seed": 2,
+       "text": "what: Book market\ndate: Saturday 14 March\ntime: 10:00\nplace: the town library\nprice: free",
+       "tokens": 31,
+       "prompt_tokens": 270,
+       "cached_tokens": 0,
+       "seconds": 3.8,
+       "finish": "stop"
+      },
+      {
+       "seed": 3,
+       "text": "what: Book market  \ndate: Saturday 14 March  \ntime: 10:00  \nplace: the town library  \nprice: free",
+       "tokens": 31,
+       "prompt_tokens": 270,
+       "cached_tokens": 0,
+       "seconds": 3.73,
+       "finish": "stop"
+      }
+     ]
+    },
+    {
+     "prompt_sha256": "2119c7a2e497aa5bd35d71c28fc68a72a502f12db3bd0d9bd2dd43ea5c372d72",
+     "seeds": [
+      {
+       "seed": 0,
+       "text": "what: Swimming lessons  \ndate: Monday 16 March  \ntime: 19:30  \nplace: the community center  \nprice: €60",
+       "tokens": 33,
+       "prompt_tokens": 265,
+       "cached_tokens": 0,
+       "seconds": 4.16,
+       "finish": "stop"
+      },
+      {
+       "seed": 1,
+       "text": "what: Swimming lessons  \ndate: Monday 16 March  \ntime: 19:30  \nplace: the community center  \nprice: €60",
+       "tokens": 33,
+       "prompt_tokens": 265,
+       "cached_tokens": 0,
+       "seconds": 4.4,
+       "finish": "stop"
+      },
+      {
+       "seed": 2,
+       "text": "what: Swimming lessons  \ndate: Monday 16 March  \ntime: 19:30  \nplace: the community center  \nprice: €60",
+       "tokens": 33,
+       "prompt_tokens": 265,
+       "cached_tokens": 0,
+       "seconds": 3.84,
+       "finish": "stop"
+      },
+      {
+       "seed": 3,
+       "text": "what: Swimming lessons\ndate: Monday 16 March\ntime: 19:30\nplace: swimming lessons\nprice: €60",
+       "tokens": 32,
+       "prompt_tokens": 265,
+       "cached_tokens": 0,
+       "seconds": 3.81,
+       "finish": "stop"
+      }
+     ]
+    },
+    {
+     "prompt_sha256": "d80e5b535ed805ff9c658d30d273b191c3789aa47cf6c357d0eb150cdf47b286",
+     "seeds": [
+      {
+       "seed": 0,
+       "text": "what: Night of the Stars  \ndate: Friday 20 March  \ntime: 21:00  \nplace: the observatory on the hill  \nprice: bring warm clothes",
+       "tokens": 38,
+       "prompt_tokens": 274,
+       "cached_tokens": 0,
+       "seconds": 4.4,
+       "finish": "stop"
+      },
+      {
+       "seed": 1,
+       "text": "what: Night of the Stars  \ndate: Friday 20 March  \ntime: 21:00  \nplace: the observatory on the hill  \nprice: Bring warm clothes",
+       "tokens": 38,
+       "prompt_tokens": 274,
+       "cached_tokens": 0,
+       "seconds": 4.66,
+       "finish": "stop"
+      },
+      {
+       "seed": 2,
+       "text": "what: Night of the Stars  \ndate: Friday 20 March  \ntime: 21:00  \nplace: the observatory on the hill  \nprice: warm clothes",
+       "tokens": 37,
+       "prompt_tokens": 274,
+       "cached_tokens": 0,
+       "seconds": 3.93,
+       "finish": "stop"
+      },
+      {
+       "seed": 3,
+       "text": "what: Night of the Stars\ndate: Friday 20 March\ntime: 21:00\nplace: the observatory on the hill\nprice: bring warm clothes",
+       "tokens": 38,
+       "prompt_tokens": 274,
+       "cached_tokens": 0,
+       "seconds": 4.39,
+       "finish": "stop"
+      }
+     ]
+    },
+    {
+     "prompt_sha256": "cda5969ba2b848fd6cbd7c056c99239207dad0917f42d196a4a7ef9a54f62d24",
+     "seeds": [
+      {
+       "seed": 0,
+       "text": "what: Flea market  \ndate: Sunday 22 March  \ntime: 9:00  \nplace: Market Square  \nprice: €2",
+       "tokens": 31,
+       "prompt_tokens": 273,
+       "cached_tokens": 0,
+       "seconds": 3.93,
+       "finish": "stop"
+      },
+      {
+       "seed": 1,
+       "text": "what: Flea market\ndate: Sunday 22 March\ntime: 9:00\nplace: Market Square\nprice: €2",
+       "tokens": 31,
+       "prompt_tokens": 273,
+       "cached_tokens": 0,
+       "seconds": 3.72,
+       "finish": "stop"
+      },
+      {
+       "seed": 2,
+       "text": "what: Flea market  \ndate: Sunday 22 March  \ntime: 9:00  \nplace: Market Square  \nprice: €2",
+       "tokens": 31,
+       "prompt_tokens": 273,
+       "cached_tokens": 0,
+       "seconds": 3.76,
+       "finish": "stop"
+      },
+      {
+       "seed": 3,
+       "text": "what: Flea market\ndate: Sunday 22 March\ntime: 9:00\nplace: Market Square\nprice: €2",
+       "tokens": 31,
+       "prompt_tokens": 273,
+       "cached_tokens": 0,
+       "seconds": 3.58,
+       "finish": "stop"
+      }
+     ]
+    },
+    {
+     "prompt_sha256": "e7876815055fe5768ca6e21f0d65e2c8424b0898662162edb9bcd64db58043df",
+     "seeds": [
+      {
+       "seed": 0,
+       "text": "what: Film evening  \ndate: Wednesday 25 March  \ntime: a silent film with live piano music  \nplace: the old cinema on Bridge Street  \nprice: €7.50",
+       "tokens": 39,
+       "prompt_tokens": 269,
+       "cached_tokens": 0,
+       "seconds": 4.52,
+       "finish": "stop"
+      },
+      {
+       "seed": 1,
+       "text": "what: Film evening  \ndate: Wednesday 25 March  \ntime: a silent film with live piano music  \nplace: the old cinema on Bridge Street  \nprice: €7.50",
+       "tokens": 39,
+       "prompt_tokens": 269,
+       "cached_tokens": 0,
+       "seconds": 4.65,
+       "finish": "stop"
+      },
+      {
+       "seed": 2,
+       "text": "what: Film evening  \ndate: Wednesday 25 March  \ntime: a silent film with live piano music  \nplace: Bridge Street  \nprice: €7.50",
+       "tokens": 35,
+       "prompt_tokens": 269,
+       "cached_tokens": 0,
+       "seconds": 4.21,
+       "finish": "stop"
+      },
+      {
+       "seed": 3,
+       "text": "what: Film evening  \ndate: Wednesday 25 March  \ntime: a silent film with live piano music  \nplace: Bridge Street  \nprice: €7.50",
+       "tokens": 35,
+       "prompt_tokens": 269,
+       "cached_tokens": 0,
+       "seconds": 4.11,
+       "finish": "stop"
+      }
+     ]
+    },
+    {
+     "prompt_sha256": "07eb93a0e8ffa5761597c171d7b9cd507de58cabbb7f29c093af8a44cdad4d23",
+     "seeds": [
+      {
+       "seed": 0,
+       "text": "what: Spring cleaning  \ndate: Saturday 28 March  \ntime: 10:00  \nplace: Willow Park  \nprice: gloves and bags",
+       "tokens": 32,
+       "prompt_tokens": 269,
+       "cached_tokens": 0,
+       "seconds": 4.31,
+       "finish": "stop"
+      },
+      {
+       "seed": 1,
+       "text": "what: Spring cleaning  \ndate: Saturday 28 March  \ntime: 10:00  \nplace: Willow Park  \nprice: gloves and bags",
+       "tokens": 32,
+       "prompt_tokens": 269,
+       "cached_tokens": 0,
+       "seconds": 3.84,
+       "finish": "stop"
+      },
+      {
+       "seed": 2,
+       "text": "what: Spring cleaning  \ndate: Saturday 28 March  \ntime: 10:00  \nplace: Willow Park  \nprice: gloves and bags",
+       "tokens": 32,
+       "prompt_tokens": 269,
+       "cached_tokens": 0,
+       "seconds": 3.56,
+       "finish": "stop"
+      },
+      {
+       "seed": 3,
+       "text": "what: Spring cleaning\ndate: Saturday 28 March\ntime: 10:00\nplace: Willow Park\nprice: gloves and bags",
+       "tokens": 32,
+       "prompt_tokens": 269,
+       "cached_tokens": 0,
+       "seconds": 4.04,
+       "finish": "stop"
+      }
+     ]
+    },
+    {
+     "prompt_sha256": "1e4f2c00b1a12d4170c2aecf9c83c3b6cd4c688c679006b5c5c48f23cbd15925",
+     "seeds": [
+      {
+       "seed": 0,
+       "text": "what: Chess tournament  \ndate: Saturday 4 April  \ntime: 9:30  \nplace: School Lane  \nprice: €5",
+       "tokens": 29,
+       "prompt_tokens": 278,
+       "cached_tokens": 0,
+       "seconds": 3.4,
+       "finish": "stop"
+      },
+      {
+       "seed": 1,
+       "text": "what: Chess tournament  \ndate: Saturday 4 April  \ntime: 9:30  \nplace: School Lane  \nprice: €5",
+       "tokens": 29,
+       "prompt_tokens": 278,
+       "cached_tokens": 0,
+       "seconds": 3.63,
+       "finish": "stop"
+      },
+      {
+       "seed": 2,
+       "text": "what: Chess tournament  \ndate: Saturday 4 April  \ntime: 9:30  \nplace: School Lane  \nprice: €5",
+       "tokens": 29,
+       "prompt_tokens": 278,
+       "cached_tokens": 0,
+       "seconds": 3.45,
+       "finish": "stop"
+      },
+      {
+       "seed": 3,
+       "text": "what: Chess tournament\ndate: Saturday 4 April\ntime: 9:30\nplace: School Lane\nprice: €5",
+       "tokens": 29,
+       "prompt_tokens": 278,
+       "cached_tokens": 0,
+       "seconds": 3.46,
+       "finish": "stop"
+      }
+     ]
+    },
+    {
+     "prompt_sha256": "651591f835cc5e018223fb7e80b2d8a27865f54065e41e0cccedb67e14bc723e",
+     "seeds": [
+      {
+       "seed": 0,
+       "text": "what: Cooking workshop  \ndate: Tuesday 7 April  \ntime: 18:00  \nplace: the community center  \nprice: -",
+       "tokens": 30,
+       "prompt_tokens": 276,
+       "cached_tokens": 0,
+       "seconds": 3.7,
+       "finish": "stop"
+      },
+      {
+       "seed": 1,
+       "text": "what: Cooking workshop  \ndate: Tuesday 7 April  \ntime: 18:00  \nplace: the community center  \nprice: -",
+       "tokens": 30,
+       "prompt_tokens": 276,
+       "cached_tokens": 0,
+       "seconds": 3.57,
+       "finish": "stop"
+      },
+      {
+       "seed": 2,
+       "text": "what: Cooking workshop  \ndate: Tuesday 7 April  \ntime: 18:00  \nplace: the community center  \nprice: -",
+       "tokens": 30,
+       "prompt_tokens": 276,
+       "cached_tokens": 0,
+       "seconds": 3.22,
+       "finish": "stop"
+      },
+      {
+       "seed": 3,
+       "text": "what: Cooking workshop\ndate: Tuesday 7 April\ntime: 18:00\nplace: the community center\nprice: places are limited, so sign up soon",
+       "tokens": 37,
+       "prompt_tokens": 276,
+       "cached_tokens": 0,
+       "seconds": 3.93,
+       "finish": "stop"
+      }
+     ]
+    },
+    {
+     "prompt_sha256": "020612bf03c456079e6b9f97a0605e464f058b1d5c09f76fdf24f88b36d00aa3",
+     "seeds": [
+      {
+       "seed": 0,
+       "text": "what: Garden tour\ndate: Sunday 12 April\ntime: -\nplace: twelve gardens in the old town\nprice: €10",
+       "tokens": 30,
+       "prompt_tokens": 269,
+       "cached_tokens": 0,
+       "seconds": 3.79,
+       "finish": "stop"
+      },
+      {
+       "seed": 1,
+       "text": "what: Garden tour\ndate: Sunday 12 April\ntime: -  \nplace: twelve gardens in the old town\nprice: €10",
+       "tokens": 31,
+       "prompt_tokens": 269,
+       "cached_tokens": 0,
+       "seconds": 3.69,
+       "finish": "stop"
+      },
+      {
+       "seed": 2,
+       "text": "what: Garden tour\ndate: Sunday 12 April\ntime: 12:00\nplace: twelve gardens in the old town\nprice: €10",
+       "tokens": 36,
+       "prompt_tokens": 269,
+       "cached_tokens": 0,
+       "seconds": 4.02,
+       "finish": "stop"
+      },
+      {
+       "seed": 3,
+       "text": "what: Garden tour  \ndate: Sunday 12 April  \ntime: 12:00  \nplace: twelve gardens in the old town  \nprice: €10",
+       "tokens": 36,
+       "prompt_tokens": 269,
+       "cached_tokens": 0,
+       "seconds": 3.67,
+       "finish": "stop"
+      }
+     ]
+    },
+    {
+     "prompt_sha256": "cd08deac1c569f766f37bcd5ccca1c699b3c1e04df32a3d59c939c263206b70e",
+     "seeds": [
+      {
+       "seed": 0,
+       "text": "what: Lecture on the history of the canal\ndate: Thursday 16 April\ntime: 20:00\nplace: town hall\nprice: €3, coffee included",
+       "tokens": 39,
+       "prompt_tokens": 271,
+       "cached_tokens": 0,
+       "seconds": 5.18,
+       "finish": "stop"
+      },
+      {
+       "seed": 1,
+       "text": "what: Lecture on the history of the canal  \ndate: Thursday 16 April  \ntime: 20:00  \nplace: the town hall  \nprice: €3, coffee included",
+       "tokens": 40,
+       "prompt_tokens": 271,
+       "cached_tokens": 0,
+       "seconds": 4.99,
+       "finish": "stop"
+      },
+      {
+       "seed": 2,
+       "text": "what: Lecture on the history of the canal  \ndate: Thursday 16 April  \ntime: 20:00  \nplace: town hall  \nprice: €3, coffee included",
+       "tokens": 39,
+       "prompt_tokens": 271,
+       "cached_tokens": 0,
+       "seconds": 4.23,
+       "finish": "stop"
+      },
+      {
+       "seed": 3,
+       "text": "what: Lecture on the history of the canal  \ndate: Thursday 16 April  \ntime: 20:00  \nplace: the town hall  \nprice: €3, coffee included",
+       "tokens": 40,
+       "prompt_tokens": 271,
+       "cached_tokens": 0,
+       "seconds": 4.2,
+       "finish": "stop"
+      }
+     ]
+    },
+    {
+     "prompt_sha256": "fc1bd1d45d3f798406f545fd0553e0a14c14c37b8fff92b2b37b95f2eeb565d6",
+     "seeds": [
+      {
+       "seed": 0,
+       "text": "what: Open day\ndate: Saturday 18 April\ntime: 11:00\nplace: Station Road\nprice: -",
+       "tokens": 30,
+       "prompt_tokens": 276,
+       "cached_tokens": 0,
+       "seconds": 3.92,
+       "finish": "stop"
+      },
+      {
+       "seed": 1,
+       "text": "what: Open day\ndate: Saturday 18 April\ntime: 11:00\nplace: Station Road\nprice: -",
+       "tokens": 30,
+       "prompt_tokens": 276,
+       "cached_tokens": 0,
+       "seconds": 3.93,
+       "finish": "stop"
+      },
+      {
+       "seed": 2,
+       "text": "what: Open day\ndate: Saturday 18 April\ntime: 11:00\nplace: Station Road\nprice: -",
+       "tokens": 30,
+       "prompt_tokens": 276,
+       "cached_tokens": 0,
+       "seconds": 3.36,
+       "finish": "stop"
+      },
+      {
+       "seed": 3,
+       "text": "what: Open day  \ndate: Saturday 18 April  \ntime: 11:00  \nplace: Station Road  \nprice: -",
+       "tokens": 30,
+       "prompt_tokens": 276,
+       "cached_tokens": 0,
+       "seconds": 3.37,
+       "finish": "stop"
+      }
+     ]
+    },
+    {
+     "prompt_sha256": "a048198b295262f2c115d0e6e0d2967d4f32b3f71bcedfd515039ca232599de3",
+     "seeds": [
+      {
+       "seed": 0,
+       "text": "what: Jazz in the park  \ndate: 14:00  \nplace: Willow Park  \nprice: €12",
+       "tokens": 26,
+       "prompt_tokens": 272,
+       "cached_tokens": 0,
+       "seconds": 3.42,
+       "finish": "stop"
+      },
+      {
+       "seed": 1,
+       "text": "what: Jazz in the park  \ndate: 14:00  \nplace: Willow Park  \nprice: €12",
+       "tokens": 26,
+       "prompt_tokens": 272,
+       "cached_tokens": 0,
+       "seconds": 3.71,
+       "finish": "stop"
+      },
+      {
+       "seed": 2,
+       "text": "what: Jazz in the park  \ndate: 14:00  \nplace: Willow Park  \nprice: €12",
+       "tokens": 26,
+       "prompt_tokens": 272,
+       "cached_tokens": 0,
+       "seconds": 2.99,
+       "finish": "stop"
+      },
+      {
+       "seed": 3,
+       "text": "what: Jazz in the park\ndate: 14:00\nplace: Willow Park\nprice: €12",
+       "tokens": 26,
+       "prompt_tokens": 272,
+       "cached_tokens": 0,
+       "seconds": 3.25,
+       "finish": "stop"
+      }
+     ]
+    }
+   ],
+   "long": [
+    {
+     "prompt_sha256": "eb80bf541a51128292982af6e2371695a61c6b0e34eb28c7674bc79cc06332c1",
+     "seeds": [
+      {
+       "seed": 0,
+       "text": "what: Book market  \ndate: Saturday 14 March  \ntime: 10:00  \nplace: the town library  \nprice: free",
+       "tokens": 31,
+       "prompt_tokens": 663,
+       "cached_tokens": 0,
+       "seconds": 5.28,
+       "finish": "stop"
+      },
+      {
+       "seed": 1,
+       "text": "what: Book market  \ndate: Saturday 14 March  \ntime: 10:00  \nplace: the town library  \nprice: free",
+       "tokens": 31,
+       "prompt_tokens": 663,
+       "cached_tokens": 652,
+       "seconds": 3.65,
+       "finish": "stop"
+      },
+      {
+       "seed": 2,
+       "text": "what: Book market  \ndate: Saturday 14 March  \ntime: 10:00  \nplace: the town library  \nprice: free",
+       "tokens": 31,
+       "prompt_tokens": 663,
+       "cached_tokens": 652,
+       "seconds": 3.68,
+       "finish": "stop"
+      },
+      {
+       "seed": 3,
+       "text": "what: Book market\ndate: Saturday 14 March\ntime: 10:00\nplace: the town library\nprice: free",
+       "tokens": 31,
+       "prompt_tokens": 663,
+       "cached_tokens": 652,
+       "seconds": 3.6,
+       "finish": "stop"
+      }
+     ]
+    },
+    {
+     "prompt_sha256": "3c993e76111058525ece81d1334535a29b439a8e99875f96855f7e092cf36d17",
+     "seeds": [
+      {
+       "seed": 0,
+       "text": "what: Swimming lessons for adults  \ndate: 16 March  \ntime: 19:30  \nplace: Monday 16 March  \nprice: €60",
+       "tokens": 36,
+       "prompt_tokens": 665,
+       "cached_tokens": 652,
+       "seconds": 3.95,
+       "finish": "stop"
+      },
+      {
+       "seed": 1,
+       "text": "what: Swimming lessons for adults  \ndate: Monday 16 March  \ntime: 19:30  \nplace: the sports hall on School Lane  \nprice: €60",
+       "tokens": 38,
+       "prompt_tokens": 665,
+       "cached_tokens": 652,
+       "seconds": 4.23,
+       "finish": "stop"
+      },
+      {
+       "seed": 2,
+       "text": "what: Swimming lessons for adults  \ndate: Monday 16 March  \ntime: 19:30  \nplace: the sports hall on School Lane  \nprice: €60",
+       "tokens": 38,
+       "prompt_tokens": 665,
+       "cached_tokens": 652,
+       "seconds": 4.63,
+       "finish": "stop"
+      },
+      {
+       "seed": 3,
+       "text": "what: Swimming lessons for adults  \ndate: Monday 16 March  \ntime: 19:30  \nplace: the sports hall on School Lane  \nprice: €60",
+       "tokens": 38,
+       "prompt_tokens": 665,
+       "cached_tokens": 652,
+       "seconds": 4.37,
+       "finish": "stop"
+      }
+     ]
+    },
+    {
+     "prompt_sha256": "d2deccc3edd851c939d3dde569955281da93245dfc1919df3e10a436ce83065e",
+     "seeds": [
+      {
+       "seed": 0,
+       "text": "what: Night of the Stars  \ndate: Friday 20 March  \ntime: 21:00  \nplace: the observatory on the hill  \nprice: -",
+       "tokens": 36,
+       "prompt_tokens": 665,
+       "cached_tokens": 652,
+       "seconds": 3.98,
+       "finish": "stop"
+      },
+      {
+       "seed": 1,
+       "text": "what: Night of the Stars  \ndate: Friday 20 March  \ntime: 21:00  \nplace: the observatory on the hill  \nprice: -",
+       "tokens": 36,
+       "prompt_tokens": 665,
+       "cached_tokens": 652,
+       "seconds": 4.15,
+       "finish": "stop"
+      },
+      {
+       "seed": 2,
+       "text": "what: Night of the Stars  \ndate: 20 March  \ntime: 21:00  \nplace: observatory on the hill  \nprice: free",
+       "tokens": 34,
+       "prompt_tokens": 665,
+       "cached_tokens": 652,
+       "seconds": 3.91,
+       "finish": "stop"
+      },
+      {
+       "seed": 3,
+       "text": "what: Night of the Stars  \ndate: 20 March  \ntime: 21:00  \nplace: observatory on the hill  \nprice: free",
+       "tokens": 34,
+       "prompt_tokens": 665,
+       "cached_tokens": 652,
+       "seconds": 3.5,
+       "finish": "stop"
+      }
+     ]
+    },
+    {
+     "prompt_sha256": "58f379b692c10161eea564de83a92f0d8ef5149003aa7be42e88ddea1a58c1d2",
+     "seeds": [
+      {
+       "seed": 0,
+       "text": "what: Flea market  \ndate: Market Square  \ntime: 9:00  \nplace: the market square  \nprice: €2",
+       "tokens": 29,
+       "prompt_tokens": 664,
+       "cached_tokens": 652,
+       "seconds": 3.17,
+       "finish": "stop"
+      },
+      {
+       "seed": 1,
+       "text": "what: Flea market\ndate: Market Square\ntime: 9:00\nplace: the stalls\nprice: €2",
+       "tokens": 28,
+       "prompt_tokens": 664,
+       "cached_tokens": 652,
+       "seconds": 2.99,
+       "finish": "stop"
+      },
+      {
+       "seed": 2,
+       "text": "what: Flea market  \ndate: Market Square  \ntime: 9:00  \nprice: €2",
+       "tokens": 23,
+       "prompt_tokens": 664,
+       "cached_tokens": 652,
+       "seconds": 2.61,
+       "finish": "stop"
+      },
+      {
+       "seed": 3,
+       "text": "what: Flea market\ndate: Market Square\ntime: 9:00\nplace: the stalls\nprice: €2",
+       "tokens": 28,
+       "prompt_tokens": 664,
+       "cached_tokens": 652,
+       "seconds": 2.89,
+       "finish": "stop"
+      }
+     ]
+    },
+    {
+     "prompt_sha256": "bf5122e6dbfe16859d5aca48b4d4ef284f3f58bd792e42780ba9232f4cdbe296",
+     "seeds": [
+      {
+       "seed": 0,
+       "text": "film evening: a silent film with live piano music in the old cinema on Bridge Street. Tickets €7.50.",
+       "tokens": 25,
+       "prompt_tokens": 663,
+       "cached_tokens": 652,
+       "seconds": 2.72,
+       "finish": "stop"
+      },
+      {
+       "seed": 1,
+       "text": "film evening: a silent film with live piano music in the old cinema on Bridge Street",
+       "tokens": 17,
+       "prompt_tokens": 663,
+       "cached_tokens": 652,
+       "seconds": 1.88,
+       "finish": "stop"
+      },
+      {
+       "seed": 2,
+       "text": "what: Film evening  \ndate: 25 March  \ntime: 19:30  \nplace: Bridge Street  \nprice: €7.50",
+       "tokens": 33,
+       "prompt_tokens": 663,
+       "cached_tokens": 652,
+       "seconds": 3.8,
+       "finish": "stop"
+      },
+      {
+       "seed": 3,
+       "text": "film evening: a silent film with live piano music in the old cinema on Bridge Street. Tickets €7.50.",
+       "tokens": 25,
+       "prompt_tokens": 663,
+       "cached_tokens": 652,
+       "seconds": 3.1,
+       "finish": "stop"
+      }
+     ]
+    },
+    {
+     "prompt_sha256": "d7cc53aed1aa73e276baf0e68eff3642dcf3b0998ea554031191152cb45c9655",
+     "seeds": [
+      {
+       "seed": 0,
+       "text": "what: Spring cleaning\ndate: Saturday 28 March\ntime: 10:00\nplace: Willow Park\nprice: free",
+       "tokens": 30,
+       "prompt_tokens": 663,
+       "cached_tokens": 652,
+       "seconds": 3.2,
+       "finish": "stop"
+      },
+      {
+       "seed": 1,
+       "text": "what: Spring cleaning\ndate: Saturday 28 March\ntime: 10:00\nplace: Willow Park\nprice: free",
+       "tokens": 30,
+       "prompt_tokens": 663,
+       "cached_tokens": 652,
+       "seconds": 3.62,
+       "finish": "stop"
+      },
+      {
+       "seed": 2,
+       "text": "what: Spring cleaning\ndate: Saturday 28 March\ntime: 10:00\nplace: Willow Park\nprice: free",
+       "tokens": 30,
+       "prompt_tokens": 663,
+       "cached_tokens": 652,
+       "seconds": 3.39,
+       "finish": "stop"
+      },
+      {
+       "seed": 3,
+       "text": "what: Spring cleaning  \ndate: Saturday 28 March  \ntime: 10:00  \nplace: Willow Park  \nprice: free",
+       "tokens": 30,
+       "prompt_tokens": 663,
+       "cached_tokens": 652,
+       "seconds": 3.37,
+       "finish": "stop"
+      }
+     ]
+    },
+    {
+     "prompt_sha256": "5ef26b7afd7710432dc08268aa1a03be7c10f660e7ae7c9d83186833366e9872",
+     "seeds": [
+      {
+       "seed": 0,
+       "text": "Chess tournament: Saturday 4 April, the first round starts at 9:30. Entry €5, players under 12 free.",
+       "tokens": 30,
+       "prompt_tokens": 663,
+       "cached_tokens": 652,
+       "seconds": 3.47,
+       "finish": "stop"
+      },
+      {
+       "seed": 1,
+       "text": "what: Chess tournament  \ndate: Saturday 4 April  \ntime: 9:30  \nplace: School Lane  \nprice: €5",
+       "tokens": 29,
+       "prompt_tokens": 663,
+       "cached_tokens": 652,
+       "seconds": 3.26,
+       "finish": "stop"
+      },
+      {
+       "seed": 2,
+       "text": "Chess tournament: Saturday 4 April, the first round starts at 9:30. Entry €5, players under 12 free.",
+       "tokens": 30,
+       "prompt_tokens": 663,
+       "cached_tokens": 652,
+       "seconds": 3.71,
+       "finish": "stop"
+      },
+      {
+       "seed": 3,
+       "text": "what: Chess tournament\ndate: Saturday 4 April\ntime: 9:30\nplace: the sports hall on School Lane\nprice: €5",
+       "tokens": 33,
+       "prompt_tokens": 663,
+       "cached_tokens": 652,
+       "seconds": 3.98,
+       "finish": "stop"
+      }
+     ]
+    },
+    {
+     "prompt_sha256": "bbc4a423b32cddc525d0b0dee795d4ba8fabb0b594ddd286112130c75fc4a2bc",
+     "seeds": [
+      {
+       "seed": 0,
+       "text": "what: Cooking workshop  \ndate: Tuesday 7 April  \ntime: 18:00  \nplace: in the kitchen of the community center  \nprice: €5",
+       "tokens": 35,
+       "prompt_tokens": 663,
+       "cached_tokens": 652,
+       "seconds": 4.03,
+       "finish": "stop"
+      },
+      {
+       "seed": 1,
+       "text": "what: Cooking workshop  \ndate: Tuesday 7 April  \ntime: 18:00  \nplace: in the kitchen of the community center  \nprice: €5",
+       "tokens": 35,
+       "prompt_tokens": 663,
+       "cached_tokens": 652,
+       "seconds": 3.93,
+       "finish": "stop"
+      },
+      {
+       "seed": 2,
+       "text": "Cooking workshop: make your own pasta  \ndate: Tuesday 7 April  \ntime: 18:00  \nplace: in the kitchen of the community center  \nprice: €5",
+       "tokens": 39,
+       "prompt_tokens": 663,
+       "cached_tokens": 652,
+       "seconds": 5.19,
+       "finish": "stop"
+      },
+      {
+       "seed": 3,
+       "text": "what: Cooking workshop\ndate: Tuesday 7 April\ntime: 18:00\nplace: the kitchen of the community center\nprice: €5",
+       "tokens": 34,
+       "prompt_tokens": 663,
+       "cached_tokens": 652,
+       "seconds": 4.35,
+       "finish": "stop"
+      }
+     ]
+    },
+    {
+     "prompt_sha256": "7a4271d87508976258b042e044f281aeee9b632b5deae52fbe7a17a9d607c383",
+     "seeds": [
+      {
+       "seed": 0,
+       "text": "what: Garden tour\ndate: 12 April\ntime: 18:00\nplace: twelve gardens in the old town\nprice: €10",
+       "tokens": 35,
+       "prompt_tokens": 663,
+       "cached_tokens": 652,
+       "seconds": 4.19,
+       "finish": "stop"
+      },
+      {
+       "seed": 1,
+       "text": "Garden tour: twelve gardens in the old town open their gates.",
+       "tokens": 14,
+       "prompt_tokens": 663,
+       "cached_tokens": 652,
+       "seconds": 1.63,
+       "finish": "stop"
+      },
+      {
+       "seed": 2,
+       "text": "what: Garden tour\ndate: 12 April\ntime: 18:00\nplace: twelve gardens in the old town\nprice: €10",
+       "tokens": 35,
+       "prompt_tokens": 663,
+       "cached_tokens": 652,
+       "seconds": 4.25,
+       "finish": "stop"
+      },
+      {
+       "seed": 3,
+       "text": "Garden tour: twelve gardens in the old town",
+       "tokens": 10,
+       "prompt_tokens": 663,
+       "cached_tokens": 652,
+       "seconds": 1.58,
+       "finish": "stop"
+      }
+     ]
+    },
+    {
+     "prompt_sha256": "6a95674049f00e5f4f7c8eeb7660cc5bc0344dd517eb3416450834a1edd04068",
+     "seeds": [
+      {
+       "seed": 0,
+       "text": "lecture: history of the canal",
+       "tokens": 6,
+       "prompt_tokens": 668,
+       "cached_tokens": 652,
+       "seconds": 0.88,
+       "finish": "stop"
+      },
+      {
+       "seed": 1,
+       "text": "what: Lecture on the history of the canal  \ndate: 16 April  \ntime: 20:00  \nplace: town hall  \nprice: €3",
+       "tokens": 35,
+       "prompt_tokens": 668,
+       "cached_tokens": 652,
+       "seconds": 4.08,
+       "finish": "stop"
+      },
+      {
+       "seed": 2,
+       "text": "lecture: history of the canal",
+       "tokens": 6,
+       "prompt_tokens": 668,
+       "cached_tokens": 652,
+       "seconds": 1.05,
+       "finish": "stop"
+      },
+      {
+       "seed": 3,
+       "text": "what: Lecture on the history of the canal\ndate: 16 April\ntime: 20:00\nplace: town hall\nprice: €3",
+       "tokens": 35,
+       "prompt_tokens": 668,
+       "cached_tokens": 652,
+       "seconds": 3.68,
+       "finish": "stop"
+      }
+     ]
+    },
+    {
+     "prompt_sha256": "9ca50b7f090c27ab885bbf9d35877fdb33b32cedf4e0c3ecae260c7f08c14db1",
+     "seeds": [
+      {
+       "seed": 0,
+       "text": "what: Open day  \ndate: Saturday 18 April  \ntime: 11:00  \nplace: Station Road  \nprice: free",
+       "tokens": 30,
+       "prompt_tokens": 663,
+       "cached_tokens": 652,
+       "seconds": 3.74,
+       "finish": "stop"
+      },
+      {
+       "seed": 1,
+       "text": "what: Open day  \ndate: Saturday 18 April  \ntime: 11:00  \nplace: Station Road  \nprice: -",
+       "tokens": 30,
+       "prompt_tokens": 663,
+       "cached_tokens": 652,
+       "seconds": 3.81,
+       "finish": "stop"
+      },
+      {
+       "seed": 2,
+       "text": "what: Open day  \ndate: Saturday 18 April  \ntime: 11:00  \nplace: Station Road  \nprice: free",
+       "tokens": 30,
+       "prompt_tokens": 663,
+       "cached_tokens": 652,
+       "seconds": 3.83,
+       "finish": "stop"
+      },
+      {
+       "seed": 3,
+       "text": "what: Open day\ndate: Saturday 18 April\ntime: 11:00\nplace: Station Road\nprice: free",
+       "tokens": 30,
+       "prompt_tokens": 663,
+       "cached_tokens": 652,
+       "seconds": 3.52,
+       "finish": "stop"
+      }
+     ]
+    },
+    {
+     "prompt_sha256": "4a3b1d34f1030b1919ef2f6987b7369e7bf3f762e0fa2663578df8684c63ba16",
+     "seeds": [
+      {
+       "seed": 0,
+       "text": "what: Jazz in the park  \ndate: 14 April  \ntime: 14:00  \nplace: Willow Park  \nprice: €12",
+       "tokens": 33,
+       "prompt_tokens": 665,
+       "cached_tokens": 652,
+       "seconds": 3.81,
+       "finish": "stop"
+      },
+      {
+       "seed": 1,
+       "text": "what: Jazz in the park  \ndate: Saturday 14 March  \ntime: 14:00  \nplace: Willow Park  \nprice: €12",
+       "tokens": 34,
+       "prompt_tokens": 665,
+       "cached_tokens": 652,
+       "seconds": 3.82,
+       "finish": "stop"
+      },
+      {
+       "seed": 2,
+       "text": "what: Jazz in the park  \ndate: Saturday 14 March  \ntime: 14:00  \nplace: Willow Park  \nprice: €12",
+       "tokens": 34,
+       "prompt_tokens": 665,
+       "cached_tokens": 652,
+       "seconds": 4.26,
+       "finish": "stop"
+      },
+      {
+       "seed": 3,
+       "text": "what: Jazz in the park  \ndate: Saturday 14 March  \ntime: 14:00  \nplace: Willow Park  \nprice: €12",
+       "tokens": 34,
+       "prompt_tokens": 665,
+       "cached_tokens": 652,
+       "seconds": 3.85,
+       "finish": "stop"
+      }
+     ]
+    }
+   ]
+  },
+  "nl": {
+   "zero": [
+    {
+     "prompt_sha256": "4a083a66e1035be24aeb513afa3392e61e7929dc2829c1124b88b938b6e24dc9",
+     "seeds": [
+      {
+       "seed": 0,
+       "text": "- wat: boekenmarkt  \n- datum: 14 maart  \n- tijd: van 10.00 tot 16.00 uur  \n- plaats: bibliotheek  \n- prijs: gratis",
+       "tokens": 48,
+       "prompt_tokens": 154,
+       "cached_tokens": 0,
+       "seconds": 4.51,
+       "finish": "stop"
+      },
+      {
+       "seed": 1,
+       "text": "- wat: boekenmarkt  \n- datum: 14 maart  \n- tijd: van 10.00 tot 16.00 uur  \n- plaats: bibliotheek  \n- prijs: gratis",
+       "tokens": 48,
+       "prompt_tokens": 154,
+       "cached_tokens": 0,
+       "seconds": 4.89,
+       "finish": "stop"
+      },
+      {
+       "seed": 2,
+       "text": "- wat: boekenmarkt  \n- datum: 14 maart  \n- tijd: van 10.00 tot 16.00 uur  \n- plaats: bibliotheek  \n- prijs: gratis",
+       "tokens": 48,
+       "prompt_tokens": 154,
+       "cached_tokens": 0,
+       "seconds": 5.16,
+       "finish": "stop"
+      },
+      {
+       "seed": 3,
+       "text": "- wat: boekenmarkt  \n- datum: 14 maart  \n- tijd: van 10.00 tot 16.00 uur  \n- plaats: bibliotheek  \n- prijs: gratis",
+       "tokens": 48,
+       "prompt_tokens": 154,
+       "cached_tokens": 0,
+       "seconds": 5.02,
+       "finish": "stop"
+      }
+     ]
+    },
+    {
+     "prompt_sha256": "2bc202475f6a67ce72b876369a4352747c1430dd00d6b5a7b38ac467b5b91927",
+     "seeds": [
+      {
+       "seed": 0,
+       "text": "- wat: zwemles  \n- datum: maandag 16 maart  \n- tijd: 19.30 uur  \n- plaats: niet in de tekst staat  \n- prijs: € 60",
+       "tokens": 47,
+       "prompt_tokens": 150,
+       "cached_tokens": 0,
+       "seconds": 4.43,
+       "finish": "stop"
+      },
+      {
+       "seed": 1,
+       "text": "- wat: zwemles  \n- datum: maandag 16 maart  \n- tijd: 19.30 uur  \n- plaats: niet in de tekst staat  \n- prijs: € 60",
+       "tokens": 47,
+       "prompt_tokens": 150,
+       "cached_tokens": 0,
+       "seconds": 4.55,
+       "finish": "stop"
+      },
+      {
+       "seed": 2,
+       "text": "- wat: zwemles  \n- datum: maandag 16 maart  \n- tijd: 19.30 uur  \n- plaats: n/a  \n- prijs: € 60",
+       "tokens": 44,
+       "prompt_tokens": 150,
+       "cached_tokens": 0,
+       "seconds": 4.42,
+       "finish": "stop"
+      },
+      {
+       "seed": 3,
+       "text": "- wat: zwemles  \n- datum: maandag  \n- tijd: 19.30 uur  \n- plaats: volwassenen  \n- prijs: € 60",
+       "tokens": 41,
+       "prompt_tokens": 150,
+       "cached_tokens": 0,
+       "seconds": 5.04,
+       "finish": "stop"
+      }
+     ]
+    },
+    {
+     "prompt_sha256": "646a590afe5e90c1503fa3eaa269875acf2488fedaf900ad4423f75196ab54bf",
+     "seeds": [
+      {
+       "seed": 0,
+       "text": "- wat: sterrennacht  \n- datum: vrijdag 20 maart  \n- tijd: vanaf 21.00 uur  \n- plaats: heuvel  \n- prijs: geen prijs (van een kaartje of de toegang)",
+       "tokens": 58,
+       "prompt_tokens": 164,
+       "cached_tokens": 0,
+       "seconds": 5.55,
+       "finish": "stop"
+      },
+      {
+       "seed": 1,
+       "text": "- wat: Sterrennacht  \n- datum: 20 maart  \n- tijd: vanaf 21.00 uur  \n- plaats: heuvel  \n- prijs: geen prijs (van een kaartje of de toegang)",
+       "tokens": 56,
+       "prompt_tokens": 164,
+       "cached_tokens": 0,
+       "seconds": 6.06,
+       "finish": "stop"
+      },
+      {
+       "seed": 2,
+       "text": "- wat: sterrennacht  \n- datum: vrijdag 20 maart  \n- tijd: vanaf 21.00 uur  \n- plaats: in de sterrenwacht  \n- prijs: van een kaartje of de toegang",
+       "tokens": 56,
+       "prompt_tokens": 164,
+       "cached_tokens": 0,
+       "seconds": 5.85,
+       "finish": "stop"
+      },
+      {
+       "seed": 3,
+       "text": "- wat: Sterrennacht  \n- datum: vrijdag 20 maart  \n- tijd: vanaf 21.00 uur  \n- plaats: heuvel  \n- prijs: geen prijs (van een kaartje of de toegang)",
+       "tokens": 58,
+       "prompt_tokens": 164,
+       "cached_tokens": 0,
+       "seconds": 6.13,
+       "finish": "stop"
+      }
+     ]
+    },
+    {
+     "prompt_sha256": "affd5bc0c92ecefda2520a3d8ca0ba7b9f078a57c152dde60abe1cc76b46d767",
+     "seeds": [
+      {
+       "seed": 0,
+       "text": "- wat: Rombelmarkt  \n- datum: 22 maart  \n- tijd: 9.00 uur  \n- plaats: Markt  \n- prijs: € 2, € 4",
+       "tokens": 43,
+       "prompt_tokens": 160,
+       "cached_tokens": 0,
+       "seconds": 5.42,
+       "finish": "stop"
+      },
+      {
+       "seed": 1,
+       "text": "- wat: de activiteit  \n- datum: 22 maart  \n- tijd: 9.00 uur  \n- plaats: de Markt  \n- prijs: € 2, € 4",
+       "tokens": 43,
+       "prompt_tokens": 160,
+       "cached_tokens": 0,
+       "seconds": 4.66,
+       "finish": "stop"
+      },
+      {
+       "seed": 2,
+       "text": "- wat: Rombelmarkt  \n- datum: 22 maart  \n- tijd: 9.00 uur  \n- plaats: Markt  \n- prijs: € 2; € 4",
+       "tokens": 43,
+       "prompt_tokens": 160,
+       "cached_tokens": 0,
+       "seconds": 4.42,
+       "finish": "stop"
+      },
+      {
+       "seed": 3,
+       "text": "- wat: de activiteit  \n- datum: zondag  \n- tijd: 9.00 uur  \n- plaats: de Markt  \n- prijs: € 2; € 4",
+       "tokens": 41,
+       "prompt_tokens": 160,
+       "cached_tokens": 0,
+       "seconds": 4.63,
+       "finish": "stop"
+      }
+     ]
+    },
+    {
+     "prompt_sha256": "1fc6751a5462ff38eab68819b4d5ac7e1dc579ef00b6bf95cfdbf33643a94c90",
+     "seeds": [
+      {
+       "seed": 0,
+       "text": "- wat: Filmavond  \n- datum: woensdag  \n- tijd: 25 maart  \n- plaats: Brugstraat  \n- prijs: € 7,50",
+       "tokens": 41,
+       "prompt_tokens": 158,
+       "cached_tokens": 0,
+       "seconds": 4.46,
+       "finish": "stop"
+      },
+      {
+       "seed": 1,
+       "text": "- wat: Filmavond  \n- datum: woensdag  \n- tijd: 25 maart  \n- plaats: Brugstraat  \n- prijs: € 7,50",
+       "tokens": 41,
+       "prompt_tokens": 158,
+       "cached_tokens": 0,
+       "seconds": 4.56,
+       "finish": "stop"
+      },
+      {
+       "seed": 2,
+       "text": "- wat: Filmavond  \n- datum: 25 maart  \n- tijd: woensdag  \n- plaats: Brugstraat  \n- prijs: € 7,50",
+       "tokens": 41,
+       "prompt_tokens": 158,
+       "cached_tokens": 0,
+       "seconds": 3.89,
+       "finish": "stop"
+      },
+      {
+       "seed": 3,
+       "text": "- wat: Filmavond  \n- datum: 25 maart  \n- tijd: op 25 maart  \n- plaats: in de oude bioscoop aan de Brugstraat  \n- prijs: € 7,50",
+       "tokens": 52,
+       "prompt_tokens": 158,
+       "cached_tokens": 0,
+       "seconds": 6.17,
+       "finish": "stop"
+      }
+     ]
+    },
+    {
+     "prompt_sha256": "624e97c4a37e930b74c6ae585ff210c3d86576333526fbb7059297173a833ed9",
+     "seeds": [
+      {
+       "seed": 0,
+       "text": "- wat: Voorjaarsschoonmaak  \n- datum: 28 maart  \n- tijd: 10.00 uur  \n- plaats: Wilgenpark  \n- prijs: geen prijs (bij een veld dat niet in de tekst staat)",
+       "tokens": 58,
+       "prompt_tokens": 165,
+       "cached_tokens": 0,
+       "seconds": 5.76,
+       "finish": "stop"
+      },
+      {
+       "seed": 1,
+       "text": "- wat: Voorjaarsschoonmaak  \n- datum: 28 maart  \n- tijd: 10.00 uur  \n- plaats: Wilgenpark  \n- prijs: geen prijs (bij een veld dat niet in de tekst staat)",
+       "tokens": 58,
+       "prompt_tokens": 165,
+       "cached_tokens": 0,
+       "seconds": 6.3,
+       "finish": "stop"
+      },
+      {
+       "seed": 2,
+       "text": "- wat: Voorjaarsschoonmaak  \n- datum: 28 maart  \n- tijd: 10.00 uur  \n- plaats: Wilgenpark  \n- prijs: (niet in de tekst staat)",
+       "tokens": 51,
+       "prompt_tokens": 165,
+       "cached_tokens": 0,
+       "seconds": 4.44,
+       "finish": "stop"
+      },
+      {
+       "seed": 3,
+       "text": "- wat: Voorjaarsschoonmaak  \n- datum: 28 maart  \n- tijd: 10.00 uur  \n- plaats: Wilgenpark  \n- prijs: geen prijs (van een kaartje of de toegang)",
+       "tokens": 58,
+       "prompt_tokens": 165,
+       "cached_tokens": 0,
+       "seconds": 5.86,
+       "finish": "stop"
+      }
+     ]
+    },
+    {
+     "prompt_sha256": "1f4159d909a31f22535282047307d49626d45a00db26f307e59375a53ba1bf39",
+     "seeds": [
+      {
+       "seed": 0,
+       "text": "- wat: schaaktoernooi  \n- datum: 4 april  \n- tijd: 9.30 uur  \n- plaats: Schoollaan  \n- prijs: € 5",
+       "tokens": 42,
+       "prompt_tokens": 174,
+       "cached_tokens": 0,
+       "seconds": 4.31,
+       "finish": "stop"
+      },
+      {
+       "seed": 1,
+       "text": "- wat: Schaaktoernooi  \n- datum: 4 april  \n- tijd: 9.30 uur  \n- plaats: Schoollaan  \n- prijs: € 5, spelers onder de 12 gratis.",
+       "tokens": 52,
+       "prompt_tokens": 174,
+       "cached_tokens": 0,
+       "seconds": 5.51,
+       "finish": "stop"
+      },
+      {
+       "seed": 2,
+       "text": "- wat: schaaktoernooi  \n- datum: 4 april  \n- tijd: 9.30 uur  \n- plaats: Schoollaan  \n- prijs: € 5",
+       "tokens": 42,
+       "prompt_tokens": 174,
+       "cached_tokens": 0,
+       "seconds": 3.95,
+       "finish": "stop"
+      },
+      {
+       "seed": 3,
+       "text": "- wat: Schaaktoernooi  \n- datum: 4 april  \n- tijd: 9.30 uur  \n- plaats: Schoollaan  \n- prijs: € 5, spelers onder de 12 gratis.",
+       "tokens": 52,
+       "prompt_tokens": 174,
+       "cached_tokens": 0,
+       "seconds": 5.6,
+       "finish": "stop"
+      }
+     ]
+    },
+    {
+     "prompt_sha256": "17a975d0c91a09b3ad54b7d9de42a8d775b8a4eb0f0598fab346db2b3cf29fee",
+     "seeds": [
+      {
+       "seed": 0,
+       "text": "- wat: Kookworkshop  \n- datum: Dinsdag  \n- tijd: 18.00 uur  \n- plaats: de keuken van het buurthuis  \n- prijs: geen prijs (van een kaartje of de toegang)",
+       "tokens": 59,
+       "prompt_tokens": 166,
+       "cached_tokens": 0,
+       "seconds": 6.18,
+       "finish": "stop"
+      },
+      {
+       "seed": 1,
+       "text": "- wat: Kookworkshop  \n- datum: Dinsdag  \n- tijd: 18.00 uur  \n- plaats: in de keuken van het buurthuis  \n- prijs: geen prijs (van een kaartje of de toegang)",
+       "tokens": 60,
+       "prompt_tokens": 166,
+       "cached_tokens": 0,
+       "seconds": 5.99,
+       "finish": "stop"
+      },
+      {
+       "seed": 2,
+       "text": "- wat: Kookworkshop  \n- datum: Dinsdag  \n- tijd: 18.00 uur  \n- plaats: de keuken van het buurthuis  \n- prijs: geen prijs (van een kaartje of de toegang)",
+       "tokens": 59,
+       "prompt_tokens": 166,
+       "cached_tokens": 0,
+       "seconds": 5.38,
+       "finish": "stop"
+      },
+      {
+       "seed": 3,
+       "text": "- wat: Kookworkshop  \n- datum: Dinsdag  \n- tijd: 18.00 uur  \n- plaats: in de keuken van het buurthuis  \n- prijs: geen prijs (van een kaartje of de toegang)",
+       "tokens": 60,
+       "prompt_tokens": 166,
+       "cached_tokens": 0,
+       "seconds": 6.58,
+       "finish": "stop"
+      }
+     ]
+    },
+    {
+     "prompt_sha256": "c3a78d284356de146a5e1d9c9a615ff31447040538cc3908c5d07710bd43f7a1",
+     "seeds": [
+      {
+       "seed": 0,
+       "text": "- wat: tuinroute  \n- datum: zondag  \n- tijd: twaalf  \n- plaats: oude binnenstad  \n- prijs: € 10",
+       "tokens": 37,
+       "prompt_tokens": 156,
+       "cached_tokens": 0,
+       "seconds": 3.85,
+       "finish": "stop"
+      },
+      {
+       "seed": 1,
+       "text": "- wat: tuinroute  \n- datum: zondag  \n- tijd: twaalf  \n- plaats: de oude binnenstad  \n- prijs: € 10",
+       "tokens": 38,
+       "prompt_tokens": 156,
+       "cached_tokens": 0,
+       "seconds": 3.82,
+       "finish": "stop"
+      },
+      {
+       "seed": 2,
+       "text": "- wat: tuinroute  \n- datum: zondag  \n- tijd: twaalf tuinen in de oude binnenstad gaan open  \n- plaats: oude binnenstad  \n- prijs: € 10, met een plattegrond erbij",
+       "tokens": 56,
+       "prompt_tokens": 156,
+       "cached_tokens": 0,
+       "seconds": 5.53,
+       "finish": "stop"
+      },
+      {
+       "seed": 3,
+       "text": "- wat: tuinroute  \n- datum: zondag  \n- tijd: twaalf  \n- plaats: de oude binnenstad  \n- prijs: € 10",
+       "tokens": 38,
+       "prompt_tokens": 156,
+       "cached_tokens": 0,
+       "seconds": 3.76,
+       "finish": "stop"
+      }
+     ]
+    },
+    {
+     "prompt_sha256": "072f8e98e4418c9b8debed91b6cab59401edca2f8e432e56b02edc1704b47712",
+     "seeds": [
+      {
+       "seed": 0,
+       "text": "- wat: lezing over de geschiedenis van de gracht in het stadhuis  \n- datum: april 16  \n- tijd: donderdag 16 april om 20.00 uur  \n- plaats: stadhuis  \n- prijs: € 3, koffie inbegrepen",
+       "tokens": 69,
+       "prompt_tokens": 160,
+       "cached_tokens": 0,
+       "seconds": 7.07,
+       "finish": "stop"
+      },
+      {
+       "seed": 1,
+       "text": "- wat: de activiteit  \n- datum: april 16  \n- tijd: donderdag 16 april om 20.00 uur  \n- plaats: stadhuis  \n- prijs: € 3, koffie inbegrepen",
+       "tokens": 56,
+       "prompt_tokens": 160,
+       "cached_tokens": 0,
+       "seconds": 5.52,
+       "finish": "stop"
+      },
+      {
+       "seed": 2,
+       "text": "- wat: lezing over de geschiedenis van de gracht in het stadhuis  \n- datum: april 16  \n- tijd: donderdag 16 april om 20.00 uur  \n- plaats: stadhuis  \n- prijs: € 3, koffie inbegrepen",
+       "tokens": 69,
+       "prompt_tokens": 160,
+       "cached_tokens": 0,
+       "seconds": 7.0,
+       "finish": "stop"
+      },
+      {
+       "seed": 3,
+       "text": "- wat: de activiteit  \n- datum: april 16  \n- tijd: donderdag  \n- plaats: stadhuis  \n- prijs: € 3, koffie inbegrepen",
+       "tokens": 44,
+       "prompt_tokens": 160,
+       "cached_tokens": 0,
+       "seconds": 4.44,
+       "finish": "stop"
+      }
+     ]
+    },
+    {
+     "prompt_sha256": "129c3272e71d09763c29f3ec71732343918958d3e31201d0f8d5702c86c8c5b6",
+     "seeds": [
+      {
+       "seed": 0,
+       "text": "- wat: activiteit  \n- datum: 18 april  \n- tijd: 11.00 tot 15.00 uur  \n- plaats: Stationsweg  \n- prijs: geen prijs (van een kaartje of de toegang)",
+       "tokens": 57,
+       "prompt_tokens": 162,
+       "cached_tokens": 0,
+       "seconds": 6.11,
+       "finish": "stop"
+      },
+      {
+       "seed": 1,
+       "text": "- wat: open dag  \n- datum: 18 april  \n- tijd: 11.00 tot 15.00 uur  \n- plaats: Stationsweg  \n- prijs: geen prijs (van een kaartje of de toegang)",
+       "tokens": 57,
+       "prompt_tokens": 162,
+       "cached_tokens": 0,
+       "seconds": 6.1,
+       "finish": "stop"
+      },
+      {
+       "seed": 2,
+       "text": "- wat: open dag  \n- datum: 18 april  \n- tijd: van 11.00 tot 15.00 uur  \n- plaats: Stationsweg  \n- prijs: geen prijs (van een kaartje of de toegang)",
+       "tokens": 58,
+       "prompt_tokens": 162,
+       "cached_tokens": 0,
+       "seconds": 5.8,
+       "finish": "stop"
+      },
+      {
+       "seed": 3,
+       "text": "- wat: open dag  \n- datum: 18 april  \n- tijd: van 11.00 tot 15.00 uur  \n- plaats: Stationsweg  \n- prijs: geen prijs (bij een veld dat niet in de tekst staat)",
+       "tokens": 58,
+       "prompt_tokens": 162,
+       "cached_tokens": 0,
+       "seconds": 6.15,
+       "finish": "stop"
+      }
+     ]
+    },
+    {
+     "prompt_sha256": "bb7634773873273afe9ef5f305a840c3e4610ee9cef3fda4e93f9c1680d671d5",
+     "seeds": [
+      {
+       "seed": 0,
+       "text": "- wat: jazz in het park  \n- datum: 14.00 uur  \n- tijd: vanaf 14.00 uur  \n- plaats: het Wilgenpark  \n- prijs: € 12 bij de ingang.",
+       "tokens": 53,
+       "prompt_tokens": 158,
+       "cached_tokens": 0,
+       "seconds": 4.99,
+       "finish": "stop"
+      },
+      {
+       "seed": 1,
+       "text": "- wat: Jazz  \n- datum: 14.00 uur  \n- tijd: vanaf 14.00 uur  \n- plaats: Wilgenpark  \n- prijs: € 12 bij de ingang.",
+       "tokens": 49,
+       "prompt_tokens": 158,
+       "cached_tokens": 0,
+       "seconds": 5.02,
+       "finish": "stop"
+      },
+      {
+       "seed": 2,
+       "text": "- wat: jazz in het park  \n- datum: 14.00 uur  \n- tijd: vanaf 14.00 uur  \n- plaats: Wilgenpark  \n- prijs: € 12 bij de ingang.",
+       "tokens": 52,
+       "prompt_tokens": 158,
+       "cached_tokens": 0,
+       "seconds": 5.12,
+       "finish": "stop"
+      },
+      {
+       "seed": 3,
+       "text": "- wat: Jazz in het park  \n- datum: 14.00 uur  \n- tijd: vanaf 14.00 uur  \n- plaats: het Wilgenpark  \n- prijs: € 12 bij de ingang.",
+       "tokens": 53,
+       "prompt_tokens": 158,
+       "cached_tokens": 0,
+       "seconds": 5.6,
+       "finish": "stop"
+      }
+     ]
+    }
+   ],
+   "examples": [
+    {
+     "prompt_sha256": "10d9cedfe2f919796c5fe5cab51bef83f5de5be18ec9812818bc0ccb4469e1bf",
+     "seeds": [
+      {
+       "seed": 0,
+       "text": "wat: Open  \ndatum: zaterdag 14 maart  \ntijd: 10.00  \nplaats: de bibliotheek  \nprijs: gratis",
+       "tokens": 38,
+       "prompt_tokens": 359,
+       "cached_tokens": 0,
+       "seconds": 4.97,
+       "finish": "stop"
+      },
+      {
+       "seed": 1,
+       "text": "wat: Boekenmarkt  \ndatum: zaterdag 14 maart  \ntijd: 10.00  \nplaats: de bibliotheek  \nprijs: gratis",
+       "tokens": 40,
+       "prompt_tokens": 359,
+       "cached_tokens": 0,
+       "seconds": 4.67,
+       "finish": "stop"
+      },
+      {
+       "seed": 2,
+       "text": "wat: Open  \ndatum: zaterdag 14 maart  \ntijd: 10.00  \nplaats: de bibliotheek  \nprijs: gratis",
+       "tokens": 38,
+       "prompt_tokens": 359,
+       "cached_tokens": 0,
+       "seconds": 4.81,
+       "finish": "stop"
+      },
+      {
+       "seed": 3,
+       "text": "wat: Boekenmarkt  \ndatum: zaterdag 14 maart  \ntijd: 10.00  \nplaats: de bibliotheek  \nprijs: gratis",
+       "tokens": 40,
+       "prompt_tokens": 359,
+       "cached_tokens": 0,
+       "seconds": 4.84,
+       "finish": "stop"
+      }
+     ]
+    },
+    {
+     "prompt_sha256": "f6842e1928ac1e9c59237556e4a8f09aef6310442bfd1286eb57fcb6eae2b9f3",
+     "seeds": [
+      {
+       "seed": 0,
+       "text": "wat: Zwemles  \ndatum: maandag 16 maart  \ntijd: 19.30  \nplaats: de muziekschool  \nprijs: € 60",
+       "tokens": 44,
+       "prompt_tokens": 355,
+       "cached_tokens": 0,
+       "seconds": 5.68,
+       "finish": "stop"
+      },
+      {
+       "seed": 1,
+       "text": "wat: Zwemles  \ndatum: maandag 16 maart  \ntijd: 19.30  \nplaats: de muziekschool  \nprijs: € 60",
+       "tokens": 45,
+       "prompt_tokens": 355,
+       "cached_tokens": 0,
+       "seconds": 5.12,
+       "finish": "stop"
+      },
+      {
+       "seed": 2,
+       "text": "wat: Zwemles  \ndatum: maandag 16 maart  \ntijd: 19.30  \nplaats: de muziekschool  \nprijs: € 60",
+       "tokens": 44,
+       "prompt_tokens": 355,
+       "cached_tokens": 0,
+       "seconds": 5.34,
+       "finish": "stop"
+      },
+      {
+       "seed": 3,
+       "text": "wat: Zwemles  \ndatum: maandag 16 maart  \ntijd: 19.30  \nplaats: de muziekschool  \nprijs: € 60",
+       "tokens": 45,
+       "prompt_tokens": 355,
+       "cached_tokens": 0,
+       "seconds": 5.16,
+       "finish": "stop"
+      }
+     ]
+    },
+    {
+     "prompt_sha256": "31c6c4c4ed02a17cccfb4010dc934718dd9424c3479132a52e898ea04c63f458",
+     "seeds": [
+      {
+       "seed": 0,
+       "text": "wat: Open  \ndatum: vrijdag 20 maart  \ntijd: 21.00  \nplaats: de sterrenwacht  \nprijs: warme kleren",
+       "tokens": 41,
+       "prompt_tokens": 369,
+       "cached_tokens": 0,
+       "seconds": 5.33,
+       "finish": "stop"
+      },
+      {
+       "seed": 1,
+       "text": "wat: Open avond  \ndatum: donderdag 12 maart  \ntijd: 19.00  \nplaats: de muziekschool  \nprijs: -",
+       "tokens": 41,
+       "prompt_tokens": 369,
+       "cached_tokens": 0,
+       "seconds": 4.93,
+       "finish": "stop"
+      },
+      {
+       "seed": 2,
+       "text": "wat: Open  \ndatum: 20 maart  \ntijd: 21.00  \nplaats: de heuvel  \nprijs: warme kleren",
+       "tokens": 38,
+       "prompt_tokens": 369,
+       "cached_tokens": 0,
+       "seconds": 4.61,
+       "finish": "stop"
+      },
+      {
+       "seed": 3,
+       "text": "wat: Open avond  \ndatum: donderdag 12 maart  \ntijd: 19.00  \nplaats: de muziekschool  \nprijs: -",
+       "tokens": 41,
+       "prompt_tokens": 369,
+       "cached_tokens": 0,
+       "seconds": 4.81,
+       "finish": "stop"
+      }
+     ]
+    },
+    {
+     "prompt_sha256": "aceb0b391f9add24ee7b176bc82a135a296dabb5259c86d1ce2396ce46acb02a",
+     "seeds": [
+      {
+       "seed": 0,
+       "text": "wat: Rommelmarkt  \ndatum: zondag 22 maart  \ntijd: 9.00  \nplaats: de Markt  \nprijs: € 2 (parkeren)",
+       "tokens": 43,
+       "prompt_tokens": 365,
+       "cached_tokens": 0,
+       "seconds": 5.22,
+       "finish": "stop"
+      },
+      {
+       "seed": 1,
+       "text": "wat: Rommelmarkt  \ndatum: zondag 22 maart  \ntijd: 9.00  \nplaats: de Markt  \nprijs: € 2 (toegang) en € 4 (parkeren)",
+       "tokens": 52,
+       "prompt_tokens": 365,
+       "cached_tokens": 0,
+       "seconds": 6.35,
+       "finish": "stop"
+      },
+      {
+       "seed": 2,
+       "text": "wat: Rommelmarkt  \ndatum: zondag 22 maart  \ntijd: 9.00  \nplaats: de Markt  \nprijs: € 2, € 4",
+       "tokens": 43,
+       "prompt_tokens": 365,
+       "cached_tokens": 0,
+       "seconds": 5.1,
+       "finish": "stop"
+      },
+      {
+       "seed": 3,
+       "text": "wat: Rommelmarkt  \ndatum: zondag 22 maart  \ntijd: 9.00  \nplaats: de Markt  \nprijs: € 2 (toegang) en € 4 (parkeren)",
+       "tokens": 52,
+       "prompt_tokens": 365,
+       "cached_tokens": 0,
+       "seconds": 6.36,
+       "finish": "stop"
+      }
+     ]
+    },
+    {
+     "prompt_sha256": "e71015ee04831a159cbcee9f6043a914b539e0a2a1028209c5e55f3c17fc1540",
+     "seeds": [
+      {
+       "seed": 0,
+       "text": "wat: Open  \ndatum: 25 maart  \ntijd: 19.00  \nplaats: de Brugstraat  \nprijs: € 7,50",
+       "tokens": 40,
+       "prompt_tokens": 363,
+       "cached_tokens": 0,
+       "seconds": 5.05,
+       "finish": "stop"
+      },
+      {
+       "seed": 1,
+       "text": "wat: Filmavond  \ndatum: 25 maart  \ntijd: live pianomuziek  \nplaats: de Brugstraat  \nprijs: € 7,50",
+       "tokens": 41,
+       "prompt_tokens": 363,
+       "cached_tokens": 0,
+       "seconds": 5.58,
+       "finish": "stop"
+      },
+      {
+       "seed": 2,
+       "text": "wat: Open  \ndatum: 25 maart  \ntijd: 19.00  \nplaats: de Brugstraat  \nprijs: € 7,50",
+       "tokens": 40,
+       "prompt_tokens": 363,
+       "cached_tokens": 0,
+       "seconds": 4.75,
+       "finish": "stop"
+      },
+      {
+       "seed": 3,
+       "text": "wat: Filmavond  \ndatum: 25 maart  \ntijd: 19:00  \nplaats: de Brugstraat  \nprijs: € 7,50",
+       "tokens": 42,
+       "prompt_tokens": 363,
+       "cached_tokens": 0,
+       "seconds": 5.13,
+       "finish": "stop"
+      }
+     ]
+    },
+    {
+     "prompt_sha256": "7e0a1ce9bb75df4da22ea82a1ead7e8ce7635f29d5e8b8f9191f47512327cbf7",
+     "seeds": [
+      {
+       "seed": 0,
+       "text": "wat: Voorjaarsschoonmaak  \ndatum: zaterdag 28 maart  \ntijd: 10.00  \nplaats: Wilgenpark  \nprijs: -",
+       "tokens": 43,
+       "prompt_tokens": 370,
+       "cached_tokens": 0,
+       "seconds": 5.47,
+       "finish": "stop"
+      },
+      {
+       "seed": 1,
+       "text": "wat: Voorjaarsschoonmaak  \ndatum: zaterdag 28 maart  \ntijd: 10.00  \nplaats: het Wilgenpark  \nprijs: -",
+       "tokens": 44,
+       "prompt_tokens": 370,
+       "cached_tokens": 0,
+       "seconds": 6.24,
+       "finish": "stop"
+      },
+      {
+       "seed": 2,
+       "text": "wat: Voorjaarsschoonmaak  \ndatum: zaterdag 28 maart  \ntijd: 10.00  \nplaats: het Wilgenpark  \nprijs: -",
+       "tokens": 44,
+       "prompt_tokens": 370,
+       "cached_tokens": 0,
+       "seconds": 4.7,
+       "finish": "stop"
+      },
+      {
+       "seed": 3,
+       "text": "wat: Voorjaarsschoonmaak  \ndatum: zaterdag 28 maart  \ntijd: 10.00  \nplaats: het Wilgenpark  \nprijs: -",
+       "tokens": 44,
+       "prompt_tokens": 370,
+       "cached_tokens": 0,
+       "seconds": 5.34,
+       "finish": "stop"
+      }
+     ]
+    },
+    {
+     "prompt_sha256": "afc5deb988d517ec23539549d08fbe7c325ec26a2b4f79bfbf8f41b793b1d179",
+     "seeds": [
+      {
+       "seed": 0,
+       "text": "wat: Schaaltoernooi  \ndatum: 4 april  \ntijd: 9.30  \nplaats: de sporthal aan de Schoollaan  \nprijs: € 5, spelers onder de 12 gratis",
+       "tokens": 52,
+       "prompt_tokens": 379,
+       "cached_tokens": 0,
+       "seconds": 6.13,
+       "finish": "stop"
+      },
+      {
+       "seed": 1,
+       "text": "wat: Schaaktoernooi  \ndatum: 4 april  \ntijd: 9.30  \nplaats: de sporthal  \nprijs: € 5",
+       "tokens": 39,
+       "prompt_tokens": 379,
+       "cached_tokens": 0,
+       "seconds": 5.36,
+       "finish": "stop"
+      },
+      {
+       "seed": 2,
+       "text": "wat: Schaaltoernooi  \ndatum: 4 april  \ntijd: 9.30  \nplaats: de sporthal aan de Schoollaan  \nprijs: € 5",
+       "tokens": 43,
+       "prompt_tokens": 379,
+       "cached_tokens": 0,
+       "seconds": 4.83,
+       "finish": "stop"
+      },
+      {
+       "seed": 3,
+       "text": "wat: Schaaktoernooi  \ndatum: 4 april  \ntijd: 9.30  \nplaats: de sporthal  \nprijs: € 5",
+       "tokens": 39,
+       "prompt_tokens": 379,
+       "cached_tokens": 0,
+       "seconds": 4.71,
+       "finish": "stop"
+      }
+     ]
+    },
+    {
+     "prompt_sha256": "543a3783507b2fc84876bb7378932b9e5bdf7f3d61e553fb324517c9e3ad0942",
+     "seeds": [
+      {
+       "seed": 0,
+       "text": "wat: Kookworkshop  \ndatum: dinsdag 7 april  \ntijd: 18.00  \nplaats: de keuken van het buurthuis  \nprijs: -",
+       "tokens": 44,
+       "prompt_tokens": 371,
+       "cached_tokens": 0,
+       "seconds": 5.57,
+       "finish": "stop"
+      },
+      {
+       "seed": 1,
+       "text": "wat: Kookworkshop  \ndatum: dinsdag 7 april  \ntijd: 18.00  \nplaats: de keuken  \nprijs: -",
+       "tokens": 38,
+       "prompt_tokens": 371,
+       "cached_tokens": 0,
+       "seconds": 5.58,
+       "finish": "stop"
+      },
+      {
+       "seed": 2,
+       "text": "wat: Kookworkshop  \ndatum: 7 april  \ntijd: 18.00  \nplaats: het buurthuis  \nprijs: -",
+       "tokens": 36,
+       "prompt_tokens": 371,
+       "cached_tokens": 0,
+       "seconds": 4.37,
+       "finish": "stop"
+      },
+      {
+       "seed": 3,
+       "text": "wat: Kookworkshop  \ndatum: 7 april  \ntijd: 18.00  \nplaats: het buurthuis  \nprijs: -",
+       "tokens": 36,
+       "prompt_tokens": 371,
+       "cached_tokens": 0,
+       "seconds": 4.3,
+       "finish": "stop"
+      }
+     ]
+    },
+    {
+     "prompt_sha256": "5514453108d3b55885e90d1d36e7706bdea651e37498fdd4be7ff098e7509429",
+     "seeds": [
+      {
+       "seed": 0,
+       "text": "wat: tuinroute  \ndatum: zondag 12 april  \ntijd: 12 uur  \nplaats: tuinroute  \nprijs: € 10",
+       "tokens": 38,
+       "prompt_tokens": 361,
+       "cached_tokens": 0,
+       "seconds": 4.8,
+       "finish": "stop"
+      },
+      {
+       "seed": 1,
+       "text": "wat: Tuinroute  \ndatum: zondag 12 april  \ntijd: 12 uur  \nplaats: tuinroute  \nprijs: € 10",
+       "tokens": 38,
+       "prompt_tokens": 361,
+       "cached_tokens": 0,
+       "seconds": 5.03,
+       "finish": "stop"
+      },
+      {
+       "seed": 2,
+       "text": "wat: tuinroute  \ndatum: zondag 12 april  \ntijd: 12:00  \nplaats: tuinroute  \nprijs: € 10",
+       "tokens": 40,
+       "prompt_tokens": 361,
+       "cached_tokens": 0,
+       "seconds": 4.46,
+       "finish": "stop"
+      },
+      {
+       "seed": 3,
+       "text": "wat: Tuinroute  \ndatum: zondag 12 april  \ntijd: 12.00  \nplaats: de oude binnenstad  \nprijs: € 10",
+       "tokens": 42,
+       "prompt_tokens": 361,
+       "cached_tokens": 0,
+       "seconds": 4.61,
+       "finish": "stop"
+      }
+     ]
+    },
+    {
+     "prompt_sha256": "9e4461da85b4f2de6617619f7b7b3bd130524b2600e4dbc04d23483f3fae9378",
+     "seeds": [
+      {
+       "seed": 0,
+       "text": "wat: Lezing  \ndatum: donderdag 16 april  \ntijd: 20.00  \nplaats: het stadhuis  \nprijs: € 3, koffie inbegrepen",
+       "tokens": 47,
+       "prompt_tokens": 365,
+       "cached_tokens": 0,
+       "seconds": 5.44,
+       "finish": "stop"
+      },
+      {
+       "seed": 1,
+       "text": "wat: Lezing  \ndatum: donderdag 16 april  \ntijd: 20.00  \nplaats: het stadhuis  \nprijs: € 3, koffie inbegrepen",
+       "tokens": 47,
+       "prompt_tokens": 365,
+       "cached_tokens": 0,
+       "seconds": 5.77,
+       "finish": "stop"
+      },
+      {
+       "seed": 2,
+       "text": "wat: Lezing  \ndatum: donderdag 16 april  \ntijd: 20.00  \nplaats: het stadhuis  \nprijs: € 3",
+       "tokens": 39,
+       "prompt_tokens": 365,
+       "cached_tokens": 0,
+       "seconds": 4.61,
+       "finish": "stop"
+      },
+      {
+       "seed": 3,
+       "text": "wat: Lezing  \ndatum: donderdag 16 april  \ntijd: 20.00  \nplaats: het stadhuis  \nprijs: € 3",
+       "tokens": 39,
+       "prompt_tokens": 365,
+       "cached_tokens": 0,
+       "seconds": 4.7,
+       "finish": "stop"
+      }
+     ]
+    },
+    {
+     "prompt_sha256": "07e916a583c7a98e7f31868110a228f65822b717636639c1f500fbdcad04b6b2",
+     "seeds": [
+      {
+       "seed": 0,
+       "text": "wat: Open avond  \ndatum: donderdag 12 maart  \ntijd: 19.00  \nplaats: de muziekschool  \nprijs: -",
+       "tokens": 41,
+       "prompt_tokens": 367,
+       "cached_tokens": 0,
+       "seconds": 5.15,
+       "finish": "stop"
+      },
+      {
+       "seed": 1,
+       "text": "wat: Open avond  \ndatum: donderdag 12 maart  \ntijd: 19.00  \nplaats: de muziekschool  \nprijs: -",
+       "tokens": 41,
+       "prompt_tokens": 367,
+       "cached_tokens": 0,
+       "seconds": 5.34,
+       "finish": "stop"
+      },
+      {
+       "seed": 2,
+       "text": "wat: Open avond  \ndatum: donderdag 12 maart  \ntijd: 19.00  \nplaats: de muziekschool  \nprijs: -",
+       "tokens": 41,
+       "prompt_tokens": 367,
+       "cached_tokens": 0,
+       "seconds": 4.51,
+       "finish": "stop"
+      },
+      {
+       "seed": 3,
+       "text": "wat: Open avond  \ndatum: donderdag 12 maart  \ntijd: 19.00  \nplaats: de muziekschool  \nprijs: -",
+       "tokens": 41,
+       "prompt_tokens": 367,
+       "cached_tokens": 0,
+       "seconds": 4.82,
+       "finish": "stop"
+      }
+     ]
+    },
+    {
+     "prompt_sha256": "6ebf979d407f6832bdf34b32333b11b70fad1dbd3be0ad7542d7e51fd1691703",
+     "seeds": [
+      {
+       "seed": 0,
+       "text": "wat: Jazz in het park  \ndatum: 14.00  \ntijd: 14.00  \nplaats: het openluchtpodium in het Wilgenpark  \nprijs: € 12",
+       "tokens": 48,
+       "prompt_tokens": 363,
+       "cached_tokens": 0,
+       "seconds": 5.57,
+       "finish": "stop"
+      },
+      {
+       "seed": 1,
+       "text": "wat: Jazz in het park  \ndatum: donderdag 12 maart  \ntijd: 14.00  \nplaats: het openluchtpodium in het Wilgenpark  \nprijs: € 12",
+       "tokens": 50,
+       "prompt_tokens": 363,
+       "cached_tokens": 0,
+       "seconds": 6.02,
+       "finish": "stop"
+      },
+      {
+       "seed": 2,
+       "text": "wat: Jazz in het park  \ndatum: donderdag 12 maart  \ntijd: 14.00  \nplaats: het openluchtpodium in het Wilgenpark  \nprijs: € 12",
+       "tokens": 50,
+       "prompt_tokens": 363,
+       "cached_tokens": 0,
+       "seconds": 5.72,
+       "finish": "stop"
+      },
+      {
+       "seed": 3,
+       "text": "wat: Jazz in het park  \ndatum: donderdag 12 maart  \ntijd: 14.00  \nplaats: het openluchtpodium in het Wilgenpark  \nprijs: € 12",
+       "tokens": 50,
+       "prompt_tokens": 363,
+       "cached_tokens": 0,
+       "seconds": 5.48,
+       "finish": "stop"
+      }
+     ]
+    }
+   ],
+   "long": [
+    {
+     "prompt_sha256": "4d00e5fd938663f37ec4b30ad5c510e5050ed89cde502318dfea985fe5adba92",
+     "seeds": [
+      {
+       "seed": 0,
+       "text": "- wat: Boekenmarkt  \n- datum: zaterdag 14 maart  \n- tijd: 10.00  \n- plaats: de bibliotheek  \n- prijs: gratis",
+       "tokens": 43,
+       "prompt_tokens": 925,
+       "cached_tokens": 3,
+       "seconds": 8.06,
+       "finish": "stop"
+      },
+      {
+       "seed": 1,
+       "text": "- wat: Boekenmarkt  \n- datum: zaterdag 14 maart  \n- tijd: 10.00  \n- plaats: de bibliotheek  \n- prijs: gratis",
+       "tokens": 43,
+       "prompt_tokens": 925,
+       "cached_tokens": 913,
+       "seconds": 7.57,
+       "finish": "stop"
+      },
+      {
+       "seed": 2,
+       "text": "- wat: Boekenmarkt  \n- datum: zaterdag 14 maart  \n- tijd: 10.00  \n- plaats: de bibliotheek  \n- prijs: gratis",
+       "tokens": 43,
+       "prompt_tokens": 925,
+       "cached_tokens": 913,
+       "seconds": 4.71,
+       "finish": "stop"
+      },
+      {
+       "seed": 3,
+       "text": "- wat: Boekenmarkt  \n- datum: 14 maart  \n- tijd: 10.00  \n- plaats: het buurthuis aan de Molenstraat  \n- prijs: gratis",
+       "tokens": 46,
+       "prompt_tokens": 925,
+       "cached_tokens": 913,
+       "seconds": 6.54,
+       "finish": "stop"
+      }
+     ]
+    },
+    {
+     "prompt_sha256": "c5f95d87c798260a09c60e4d659730e0919e5b0a065d3f11265fd700a5b27e07",
+     "seeds": [
+      {
+       "seed": 0,
+       "text": "- wat: Zwemles voor volwassenen  \n- datum: maandag 16 maart  \n- tijd: 19.30 uur  \n- plaats: om 19.30 uur  \n- prijs: € 60",
+       "tokens": 55,
+       "prompt_tokens": 930,
+       "cached_tokens": 913,
+       "seconds": 6.56,
+       "finish": "stop"
+      },
+      {
+       "seed": 1,
+       "text": "- wat: Zwemles voor volwassenen  \n- datum: maandag 16 maart  \n- tijd: 19.30 uur  \n- plaats: de sporthal aan de Schoollaan  \n- prijs: € 60",
+       "tokens": 56,
+       "prompt_tokens": 930,
+       "cached_tokens": 913,
+       "seconds": 6.62,
+       "finish": "stop"
+      },
+      {
+       "seed": 2,
+       "text": "- wat: Zwemles voor volwassenen  \n- datum: maandag 16 maart  \n- tijd: 19.30 uur  \n- plaats: de sporthal aan de Schoollaan  \n- prijs: € 60",
+       "tokens": 56,
+       "prompt_tokens": 930,
+       "cached_tokens": 913,
+       "seconds": 6.84,
+       "finish": "stop"
+      },
+      {
+       "seed": 3,
+       "text": "- wat: Zwemles voor volwassenen  \n- datum: maandag 16 maart  \n- tijd: 19.30 uur  \n- plaats: de sporthal aan de Schoollaan  \n- prijs: € 60",
+       "tokens": 56,
+       "prompt_tokens": 930,
+       "cached_tokens": 913,
+       "seconds": 8.13,
+       "finish": "stop"
+      }
+     ]
+    },
+    {
+     "prompt_sha256": "dfed13cda8664911d05f9196ebbae2d70319440ebc1ff699f8969a90181444db",
+     "seeds": [
+      {
+       "seed": 0,
+       "text": "- wat: Sterrennacht  \n- datum: 20 maart  \n- tijd: 21.00 uur  \n- plaats: de heuvel  \n- prijs: vrij kosten",
+       "tokens": 42,
+       "prompt_tokens": 926,
+       "cached_tokens": 913,
+       "seconds": 5.18,
+       "finish": "stop"
+      },
+      {
+       "seed": 1,
+       "text": "- wat: Sterrennacht  \n- datum: 20 maart  \n- tijd: 21.00 uur  \n- plaats: de heuvel  \n- prijs: gratis",
+       "tokens": 41,
+       "prompt_tokens": 926,
+       "cached_tokens": 913,
+       "seconds": 4.75,
+       "finish": "stop"
+      },
+      {
+       "seed": 2,
+       "text": "- wat: Sterrennacht  \n- datum: 20 maart  \n- tijd: 21.00 uur  \n- plaats: de heuvel  \n- prijs: gratis",
+       "tokens": 41,
+       "prompt_tokens": 926,
+       "cached_tokens": 913,
+       "seconds": 4.59,
+       "finish": "stop"
+      },
+      {
+       "seed": 3,
+       "text": "- wat: Sterrennacht  \n- datum: 20 maart  \n- tijd: 21.00 uur  \n- plaats: de heuvel  \n- prijs: gratis",
+       "tokens": 41,
+       "prompt_tokens": 926,
+       "cached_tokens": 913,
+       "seconds": 6.0,
+       "finish": "stop"
+      }
+     ]
+    },
+    {
+     "prompt_sha256": "7a5c100a4b9cf704c6578fe7fde1a5031fbe6a59bb8624a65b15d7758ac8b18c",
+     "seeds": [
+      {
+       "seed": 0,
+       "text": "- wat: Rommelmarkt  \n- datum: zaterdag 22 maart  \n- tijd: 9.00  \n- plaats: de Markt  \n- prijs: € 2",
+       "tokens": 41,
+       "prompt_tokens": 925,
+       "cached_tokens": 913,
+       "seconds": 5.03,
+       "finish": "stop"
+      },
+      {
+       "seed": 1,
+       "text": "- wat: Rommelmarkt  \n- datum: zaterdag 22 maart  \n- tijd: 9.00 uur  \n- plaats: de Markt  \n- prijs: € 2",
+       "tokens": 42,
+       "prompt_tokens": 925,
+       "cached_tokens": 913,
+       "seconds": 5.17,
+       "finish": "stop"
+      },
+      {
+       "seed": 2,
+       "text": "- wat: Rommelmarkt  \n- datum: zaterdag 22 maart  \n- tijd: 9.00 uur  \n- plaats: de Markt  \n- prijs: € 2",
+       "tokens": 42,
+       "prompt_tokens": 925,
+       "cached_tokens": 913,
+       "seconds": 5.33,
+       "finish": "stop"
+      },
+      {
+       "seed": 3,
+       "text": "- wat: Rommelmarkt  \n- datum: zaterdag 22 maart  \n- tijd: 9.00  \n- plaats: de Markt  \n- prijs: € 2",
+       "tokens": 41,
+       "prompt_tokens": 925,
+       "cached_tokens": 913,
+       "seconds": 6.26,
+       "finish": "stop"
+      }
+     ]
+    },
+    {
+     "prompt_sha256": "235edb61aff90972ea399b232b336ef79508cfb8bfc749f64b321f0648df78db",
+     "seeds": [
+      {
+       "seed": 0,
+       "text": "filmavond: 25 maart, 18.00, de oude bioscoop, € 7,50",
+       "tokens": 29,
+       "prompt_tokens": 925,
+       "cached_tokens": 913,
+       "seconds": 3.51,
+       "finish": "stop"
+      },
+      {
+       "seed": 1,
+       "text": "filmavond",
+       "tokens": 3,
+       "prompt_tokens": 925,
+       "cached_tokens": 913,
+       "seconds": 0.62,
+       "finish": "stop"
+      },
+      {
+       "seed": 2,
+       "text": "filmavond: 25 maart",
+       "tokens": 9,
+       "prompt_tokens": 925,
+       "cached_tokens": 913,
+       "seconds": 1.35,
+       "finish": "stop"
+      },
+      {
+       "seed": 3,
+       "text": "filmavond",
+       "tokens": 3,
+       "prompt_tokens": 925,
+       "cached_tokens": 913,
+       "seconds": 0.69,
+       "finish": "stop"
+      }
+     ]
+    },
+    {
+     "prompt_sha256": "dd73de8c230cb80374207cde7e07134fda796d43815cf160053ab3524c1a18c3",
+     "seeds": [
+      {
+       "seed": 0,
+       "text": "- wat: Voorjaarsschoonmaak  \n- datum: 28 maart  \n- tijd: 10.00  \n- plaats: Wilgenpark  \n- prijs: handschoenen en zakken",
+       "tokens": 48,
+       "prompt_tokens": 930,
+       "cached_tokens": 913,
+       "seconds": 5.47,
+       "finish": "stop"
+      },
+      {
+       "seed": 1,
+       "text": "- wat: Voorjaarsschoonmaak  \n- datum: 28 maart  \n- tijd: 10.00  \n- plaats: in het Wilgenpark  \n- prijs: handschoenen en zakken liggen klaar",
+       "tokens": 54,
+       "prompt_tokens": 930,
+       "cached_tokens": 913,
+       "seconds": 8.72,
+       "finish": "stop"
+      },
+      {
+       "seed": 2,
+       "text": "- wat: Voorjaarsschoonmaak  \n- datum: 28 maart  \n- tijd: 10.00  \n- plaats: Wilgenpark  \n- prijs: handschoenen en zakken",
+       "tokens": 48,
+       "prompt_tokens": 930,
+       "cached_tokens": 913,
+       "seconds": 5.88,
+       "finish": "stop"
+      },
+      {
+       "seed": 3,
+       "text": "- wat: Voorjaarsschoonmaak  \n- datum: 28 maart  \n- tijd: 10.00  \n- plaats: wilgenpark  \n- prijs: gratis",
+       "tokens": 43,
+       "prompt_tokens": 930,
+       "cached_tokens": 913,
+       "seconds": 6.48,
+       "finish": "stop"
+      }
+     ]
+    },
+    {
+     "prompt_sha256": "660824bbe8513ba88b59ba7cb19c7e5f3b9bb750de1a60c044257fd2ae3c700e",
+     "seeds": [
+      {
+       "seed": 0,
+       "text": "- wat: Schaaktoernooi  \n- datum: april 4  \n- tijd: 9.30 uur  \n- plaats: de sporthal aan de Schoollaan  \n- prijs: € 5",
+       "tokens": 47,
+       "prompt_tokens": 928,
+       "cached_tokens": 913,
+       "seconds": 5.51,
+       "finish": "stop"
+      },
+      {
+       "seed": 1,
+       "text": "- wat: Schaaktoernooi  \n- datum: april 4  \n- tijd: 9.30 uur  \n- plaats: de sporthal aan de Schoollaan  \n- prijs: € 5",
+       "tokens": 47,
+       "prompt_tokens": 928,
+       "cached_tokens": 913,
+       "seconds": 6.7,
+       "finish": "stop"
+      },
+      {
+       "seed": 2,
+       "text": "- wat: Schaaktoernooi  \n- datum: april 4  \n- tijd: 9.30  \n- plaats: de sporthal aan de Schoollaan  \n- prijs: € 5",
+       "tokens": 46,
+       "prompt_tokens": 928,
+       "cached_tokens": 913,
+       "seconds": 5.64,
+       "finish": "stop"
+      },
+      {
+       "seed": 3,
+       "text": "- wat: Schaaktoernooi  \n- datum: april 4  \n- tijd: 9.30  \n- plaats: de sporthal aan de Schoollaan  \n- prijs: € 5",
+       "tokens": 46,
+       "prompt_tokens": 928,
+       "cached_tokens": 913,
+       "seconds": 7.07,
+       "finish": "stop"
+      }
+     ]
+    },
+    {
+     "prompt_sha256": "9bf87febcadd4522393557e9ebd9cae2e36a06a32b870d17071feafe3c0f1ac7",
+     "seeds": [
+      {
+       "seed": 0,
+       "text": "- wat: Kookworkshop  \n- datum: april 7  \n- tijd: 18.00  \n- plaats: de keuken van het buurthuis  \n- prijs: € 5",
+       "tokens": 46,
+       "prompt_tokens": 926,
+       "cached_tokens": 913,
+       "seconds": 5.32,
+       "finish": "stop"
+      },
+      {
+       "seed": 1,
+       "text": "- wat: Kookworkshop  \n- datum: april 7  \n- tijd: 18.00  \n- plaats: de keuken van het buurthuis  \n- prijs: € 2",
+       "tokens": 46,
+       "prompt_tokens": 926,
+       "cached_tokens": 913,
+       "seconds": 6.38,
+       "finish": "stop"
+      },
+      {
+       "seed": 2,
+       "text": "- wat: Kookworkshop  \n- datum: april 7  \n- tijd: 18.00  \n- plaats: de keuken van het buurthuis  \n- prijs: € 5",
+       "tokens": 46,
+       "prompt_tokens": 926,
+       "cached_tokens": 913,
+       "seconds": 5.12,
+       "finish": "stop"
+      },
+      {
+       "seed": 3,
+       "text": "- wat: Kookworkshop  \n- datum: april 7  \n- tijd: 18.00  \n- plaats: de keuken van het buurthuis  \n- prijs: € 2",
+       "tokens": 46,
+       "prompt_tokens": 926,
+       "cached_tokens": 913,
+       "seconds": 6.25,
+       "finish": "stop"
+      }
+     ]
+    },
+    {
+     "prompt_sha256": "b732371654d1c62dc65aa4594d51f29d1954feb7a8fff119f69fbec9cc6fe5c2",
+     "seeds": [
+      {
+       "seed": 0,
+       "text": "- tuinroute: zaterdag 12 april",
+       "tokens": 12,
+       "prompt_tokens": 925,
+       "cached_tokens": 913,
+       "seconds": 1.5,
+       "finish": "stop"
+      },
+      {
+       "seed": 1,
+       "text": "waarde: tuinroute",
+       "tokens": 6,
+       "prompt_tokens": 925,
+       "cached_tokens": 913,
+       "seconds": 0.98,
+       "finish": "stop"
+      },
+      {
+       "seed": 2,
+       "text": "- waarde: tuinroute",
+       "tokens": 7,
+       "prompt_tokens": 925,
+       "cached_tokens": 913,
+       "seconds": 1.02,
+       "finish": "stop"
+      },
+      {
+       "seed": 3,
+       "text": "waarde: tuinroute",
+       "tokens": 6,
+       "prompt_tokens": 925,
+       "cached_tokens": 913,
+       "seconds": 1.14,
+       "finish": "stop"
+      }
+     ]
+    },
+    {
+     "prompt_sha256": "629583f091db86ef5a568e00ca18f46d9af7df46bb0b075d5e4e827bc0249fa8",
+     "seeds": [
+      {
+       "seed": 0,
+       "text": "- wat: Lezing over de geschiedenis van de gracht  \n- datum: april 16  \n- tijd: 20.00  \n- plaats: de stadhuis",
+       "tokens": 40,
+       "prompt_tokens": 933,
+       "cached_tokens": 913,
+       "seconds": 4.85,
+       "finish": "stop"
+      },
+      {
+       "seed": 1,
+       "text": "- wat: Lezing over de geschiedenis van de gracht  \n- datum: april 16  \n- tijd: 20.00  \n- plaats: de stadhuis  \n- prijs: € 3",
+       "tokens": 48,
+       "prompt_tokens": 933,
+       "cached_tokens": 913,
+       "seconds": 5.84,
+       "finish": "stop"
+      },
+      {
+       "seed": 2,
+       "text": "- wat: Lezing over de geschiedenis van de gracht  \n- datum: april 16  \n- tijd: 20.00  \n- plaats: de stadhuis",
+       "tokens": 40,
+       "prompt_tokens": 933,
+       "cached_tokens": 913,
+       "seconds": 4.79,
+       "finish": "stop"
+      },
+      {
+       "seed": 3,
+       "text": "- wat: Lezing over de geschiedenis van de gracht  \n- datum: april 16  \n- tijd: 20.00  \n- plaats: de stadhuis",
+       "tokens": 40,
+       "prompt_tokens": 933,
+       "cached_tokens": 913,
+       "seconds": 6.4,
+       "finish": "stop"
+      }
+     ]
+    },
+    {
+     "prompt_sha256": "ad7887c20c38bf985603a85256c4dd8561bce5fe518bf46c8cbbf0bdd4661064",
+     "seeds": [
+      {
+       "seed": 0,
+       "text": "- wat: Open dag  \n- datum: 12 april  \n- tijd: 18.00  \n- plaats: de keuken van het buurthuis  \n- prijs: € 10",
+       "tokens": 46,
+       "prompt_tokens": 924,
+       "cached_tokens": 913,
+       "seconds": 5.4,
+       "finish": "stop"
+      },
+      {
+       "seed": 1,
+       "text": "- wat: Open dag",
+       "tokens": 5,
+       "prompt_tokens": 924,
+       "cached_tokens": 913,
+       "seconds": 0.78,
+       "finish": "stop"
+      },
+      {
+       "seed": 2,
+       "text": "- wat: Open dag  \n- datum: april 28  \n- tijd: 10.00  \n- plaats: Wilgenpark  \n- prijs: € 0",
+       "tokens": 38,
+       "prompt_tokens": 924,
+       "cached_tokens": 913,
+       "seconds": 4.46,
+       "finish": "stop"
+      },
+      {
+       "seed": 3,
+       "text": "- wat: Open dag",
+       "tokens": 5,
+       "prompt_tokens": 924,
+       "cached_tokens": 913,
+       "seconds": 1.22,
+       "finish": "stop"
+      }
+     ]
+    },
+    {
+     "prompt_sha256": "3b2fc5b4fccdf6d8276060ba079baac42007223986efdd087477d0dbbaaaa71c",
+     "seeds": [
+      {
+       "seed": 0,
+       "text": "- wat: Jazz in het park  \n- datum: 14 maart  \n- tijd: 14.00  \n- plaats: het Wilgenpark  \n- prijs: € 12",
+       "tokens": 43,
+       "prompt_tokens": 926,
+       "cached_tokens": 913,
+       "seconds": 5.08,
+       "finish": "stop"
+      },
+      {
+       "seed": 1,
+       "text": "- wat: Jazz in het park  \n- datum: 14 maart  \n- tijd: 14.00  \n- plaats: het Wilgenpark  \n- prijs: € 12",
+       "tokens": 43,
+       "prompt_tokens": 926,
+       "cached_tokens": 913,
+       "seconds": 4.88,
+       "finish": "stop"
+      },
+      {
+       "seed": 2,
+       "text": "- wat: Jazz in het park  \n- datum: 14 maart  \n- tijd: 14.00  \n- plaats: Wilgenpark  \n- prijs: € 12",
+       "tokens": 42,
+       "prompt_tokens": 926,
+       "cached_tokens": 913,
+       "seconds": 5.21,
+       "finish": "stop"
+      },
+      {
+       "seed": 3,
+       "text": "- wat: Jazz in het park  \n- datum: 14 maart  \n- tijd: 14.00  \n- plaats: Wilgenpark  \n- prijs: € 12",
+       "tokens": 42,
+       "prompt_tokens": 926,
+       "cached_tokens": 913,
+       "seconds": 6.64,
+       "finish": "stop"
+      }
+     ]
+    }
+   ]
+  }
+ },
+ "lesson": "nlp-extraction-with-llms",
+ "model": "Qwen/Qwen3-0.6B",
+ "revision": "c1899de289a04d12100db370d81485cdf75e47ca",
+ "dtype": "float32",
+ "machine": "Intel(R) Xeon(R) Processor @ 2.10GHz, 4 cores",
+ "threads": 4,
+ "torch": "2.14.1+cu130",
+ "sampling": {
+  "temperature": 0.7,
+  "top_p": 0.8,
+  "top_k": 20
+ },
+ "max_tokens": 120,
+ "seeds": 4,
+ "load_seconds": 3.1,
+ "code": "9e6a07d"
+}

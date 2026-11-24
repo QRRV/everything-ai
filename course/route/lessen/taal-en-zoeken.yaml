@@ -777,7 +777,7 @@ lessons:
   requires: [nlp-information-extraction, start-prompt-basics]
   introduces: [p:check-extracted-values]
   mentions: [c:hallucination]
-  data: [model-qwen3-0.6b]
+  data: [model-qwen3-0.6b, course-extraction-qwen]
   ladder: [python]
   needs: any
 
