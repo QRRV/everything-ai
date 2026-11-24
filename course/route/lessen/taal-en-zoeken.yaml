@@ -735,6 +735,7 @@ lessons:
   covers: [klassieke-nlp-taken#9]
   requires: [nlp-document-vectors]
   introduces: [c:topic-model, c:latent-dirichlet-allocation]
+  mentions: [c:machine-translation]
   data: [xquad-squad-nl]
   ladder: [python, numpy]
   needs: any

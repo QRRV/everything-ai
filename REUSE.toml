@@ -633,3 +633,15 @@ path = "data/bert-tiny-fine-tune.npz"
 precedence = "override"
 SPDX-FileCopyrightText = "2020 Google (BERT-Tiny, google/bert_uncased_L-2_H-128_A-2, Turc, Chang, Lee and Toutanova; what it gives for six sentences of the reviews, a head the course trained on it, and the scores of a copy the course fine-tuned for the names of UNER_English-EWT, computed for Everything AI), Dimitrios Kotzias (Sentiment Labelled Sentences, 2015, UCI Machine Learning Repository), Stephen Mayhew and others (Universal NER v1), 2013-2021 The Board of Trustees of The Leland Stanford Junior University (the Universal Dependencies English Web Treebank), and 2026 Everything AI contributors"
 SPDX-License-Identifier = "Apache-2.0 AND CC-BY-4.0 AND CC-BY-SA-4.0"
+
+[[annotations]]
+path = "data/xquad-squad-nl.json.gz"
+precedence = "override"
+SPDX-FileCopyrightText = ["The contributors to English Wikipedia (the texts of the paragraphs)", "Pranav Rajpurkar, Jian Zhang, Konstantin Lopyrev and Percy Liang (SQuAD 1.1, the development set, from English Wikipedia)", "Mikel Artetxe, Sebastian Ruder and Dani Yogatama (XQuAD)", "Wietse de Vries, Martijn Wieling and Malvina Nissim (SQuAD-NL v1.1, GroNLP/squad-nl-v1.1)", "2026 Everything AI contributors (the selection and the Dutch names of the articles)"]
+SPDX-License-Identifier = "CC-BY-SA-4.0"
+
+[[annotations]]
+path = "data/xquad-topics.npz"
+precedence = "override"
+SPDX-FileCopyrightText = ["The contributors to English Wikipedia (the texts of the paragraphs)", "Pranav Rajpurkar, Jian Zhang, Konstantin Lopyrev and Percy Liang (SQuAD 1.1, the development set, from English Wikipedia)", "Wietse de Vries, Martijn Wieling and Malvina Nissim (SQuAD-NL v1.1, GroNLP/squad-nl-v1.1)", "2026 Everything AI contributors (the topic models)"]
+SPDX-License-Identifier = "CC-BY-SA-4.0"

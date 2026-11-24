@@ -1,0 +1,35 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: nlp-topic-models
+minutes: 50
+title:
+  en: "What is this collection about? Topic models"
+  nl: "Waar gaat deze verzameling over? Topic models"
+goal:
+  en: "train LDA on 2,067 paragraphs of Wikipedia, read each topic from its words, give each word of a paragraph its topic, and check the topics against the pages they came from."
+  nl: "LDA trainen op 2.067 alinea's van Wikipedia, elk topic aflezen aan de woorden, elk woord van een alinea een topic geven, en de topics naast de pagina's leggen waar de alinea's vandaan komen."
+summary:
+  - en: "A topic model describes a collection with a fixed number of topics, each a probability distribution over the words, and every document with a mix of those topics. LDA finds both from the counts of the words alone, without labels and without the order of the words."
+    nl: "Een topic model beschrijft een verzameling met een vast aantal topics, elk een kansverdeling over de woorden, en elk document met een mix van deze topics. LDA vindt allebei uit alleen de aantallen van de woorden, zonder labels en zonder de volgorde van de woorden."
+  - en: "A topic is read from its words with the highest probability: the weights of its row divided by their sum. Each word of a document most likely comes from the topic with the largest share in the mix times the probability of the word."
+    nl: "Je leest een topic af aan de woorden met de hoogste kans: de weights van de rij gedeeld door de som ervan. Elk woord van een document komt het waarschijnlijkst uit het topic met het grootste aandeel in de mix maal de kans op het woord."
+  - en: "LDA numbers its topics; the names are yours. Some topics match one subject, others join groups of words that never meet in a document. A model that is less surprised by the words does not always give topics that mean more to people."
+    nl: "LDA nummert de topics; de namen zijn van jou. Sommige topics passen bij één onderwerp, andere voegen groepen woorden samen die nooit samen in een document staan. Een model dat minder verrast is door de woorden, geeft niet altijd topics die voor mensen meer betekenen."
+can_now:
+  - en: "read the topics of a topic model from its weights, as the words with the highest probability in each"
+    nl: "de topics van een topic model aflezen aan de weights, als de woorden met de hoogste kans in elk topic"
+    by: topic_words
+  - en: "give each word of a document the topic it most likely comes from, from the document's mix and the topics"
+    nl: "elk woord van een document het topic geven waar het woord het waarschijnlijkst uit komt, uit de mix van het document en de topics"
+    by: word_topics
+  - en: "check the topics of a model against what the documents are about, and say why a topic can join subjects that have nothing in common"
+    nl: "de topics van een model naast de onderwerpen van de documenten leggen, en zeggen waarom een topic onderwerpen kan samenvoegen die niets gemeen hebben"
+    by: topic_pages
+further_reading:
+  - en: "David M. Blei, [*Probabilistic Topic Models*](https://www.cs.columbia.edu/~blei/papers/Blei2012.pdf), Communications of the ACM, 2012: what topic models are, the story behind LDA, and what to do with the topics"
+    nl: "David M. Blei, [*Probabilistic Topic Models*](https://www.cs.columbia.edu/~blei/papers/Blei2012.pdf), Communications of the ACM, 2012: wat topic models zijn, het verhaal achter LDA, en wat je met de topics kunt doen (in het Engels)"
+  - en: "David M. Blei, Andrew Y. Ng and Michael I. Jordan, [*Latent Dirichlet Allocation*](https://jmlr.org/papers/v3/blei03a.html), Journal of Machine Learning Research, 2003: the paper that introduced LDA, with the mathematics of training it"
+    nl: "David M. Blei, Andrew Y. Ng en Michael I. Jordan, [*Latent Dirichlet Allocation*](https://jmlr.org/papers/v3/blei03a.html), Journal of Machine Learning Research, 2003: het onderzoek dat LDA introduceerde, met de wiskunde van het trainen (in het Engels)"
+  - en: "Jonathan Chang, Jordan Boyd-Graber, Sean Gerrish, Chong Wang and David M. Blei, [*Reading Tea Leaves: How Humans Interpret Topic Models*](https://proceedings.neurips.cc/paper_files/paper/2009/hash/f92586a25bb3145facd64ab20fd554ff-Abstract.html), NeurIPS 2009: tests with people, such as word intrusion, and why a better score does not mean better topics"
+    nl: "Jonathan Chang, Jordan Boyd-Graber, Sean Gerrish, Chong Wang en David M. Blei, [*Reading Tea Leaves: How Humans Interpret Topic Models*](https://proceedings.neurips.cc/paper_files/paper/2009/hash/f92586a25bb3145facd64ab20fd554ff-Abstract.html), NeurIPS 2009: tests met mensen, zoals het woord dat er niet bij hoort, en waarom een betere score geen betere topics betekent (in het Engels)"
