@@ -557,6 +557,12 @@ SPDX-FileCopyrightText = "2020 Google (BERT-Tiny, google/bert_uncased_L-2_H-128_
 SPDX-License-Identifier = "Apache-2.0"
 
 [[annotations]]
+path = "data/bert-tiny-fill.npz"
+precedence = "override"
+SPDX-FileCopyrightText = "2020 Google (BERT-Tiny, google/bert_uncased_L-2_H-128_A-2, Turc, Chang, Lee and Toutanova; its scores for the course's own sentences and its ranks for the words of sentences of Tatoeba, computed for Everything AI), Tatoeba (https://tatoeba.org) and its contributors, and 2026 Everything AI contributors"
+SPDX-License-Identifier = "Apache-2.0 AND CC-BY-SA-4.0 AND LicenseRef-CC-BY-2.0-FR"
+
+[[annotations]]
 path = "data/course-sentence-pairs.tsv"
 precedence = "override"
 SPDX-FileCopyrightText = "2026 Everything AI contributors"

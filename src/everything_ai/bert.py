@@ -10,7 +10,7 @@ How it works: a tokenizer cuts the text into pieces from a vocabulary of 30,522 
 token look at every other, on both sides, with the layer normalization after each branch is added. `layers` gives
 what every token holds before the first block and after each block: from the second on, the numbers of a token
 depend on the whole sentence. The head that fills in a [MASK] turns the last numbers back into a score per piece of
-the vocabulary, with the token embedding as its weights (`fill`).
+the vocabulary, with the token embedding as its weights (`piece_scores`, `fill`).
 
 The tokenizer is the course's own too, as Hugging Face's BertTokenizer of the model does it: it removes control
 characters, puts a space around every Chinese character, makes everything lowercase and drops accents, splits at
@@ -270,8 +270,19 @@ def layers(text: str) -> list[np.ndarray]:
     return [x[0].numpy() for x in out]
 
 
-def fill(text: str, top: int = 5) -> list[list[tuple[str, float]]]:
-    """For every [MASK] in the text, the `top` pieces the model likes best there, each with its probability."""
+def piece_scores(text: str) -> np.ndarray:
+    """The score of every piece of the vocabulary at every place of pieces(text): an array of one row of 30,522
+    numbers (float32) per piece, [CLS] and [SEP] included. Row i belongs to piece i; the higher a score, the more the
+    model likes that piece there."""
+    with torch.no_grad():
+        model = load()
+        return model.scores(model(torch.tensor([tokenizer().encode(text)]))[-1][0]).numpy()
+
+
+def fill(text: str, top: int = 5, before_only: bool = False) -> list[list[tuple[str, float]]]:
+    """For every [MASK] in the text, the `top` pieces the model likes best there, each with its probability. With
+    `before_only`, the model sees only the pieces before each [MASK]: every piece after it, up to [SEP], becomes [MASK]
+    too, so that the sentence keeps its length."""
     ids = tokenizer().encode(text)
     with torch.no_grad():
         model = load()
@@ -279,7 +290,11 @@ def fill(text: str, top: int = 5) -> list[list[tuple[str, float]]]:
         out = []
         for i, piece in enumerate(ids):
             if piece == MASK:
-                p = torch.softmax(model.scores(last[i]), dim=-1)
+                if before_only:
+                    hidden = ids[:i] + [MASK] * (len(ids) - 1 - i) + [SEP]
+                    p = torch.softmax(model.scores(model(torch.tensor([hidden]))[-1][0][i]), dim=-1)
+                else:
+                    p = torch.softmax(model.scores(last[i]), dim=-1)
                 best = torch.topk(p, top)
                 out.append([(tokenizer().vocab[j], float(q)) for q, j in zip(best.values, best.indices)])
     return out

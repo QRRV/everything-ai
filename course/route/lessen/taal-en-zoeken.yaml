@@ -665,7 +665,8 @@ lessons:
   covers: [pretrained-encoders-en-encoderdecoders#2]
   requires: [nlp-static-vs-contextual, lm-model-families]
   introduces: [c:bert, c:masked-language-modeling]
-  data: [model-bert-tiny]
+  mentions: [c:fine-tuning, c:weight-tying]
+  data: [model-bert-tiny, tatoeba-sentences]
   ladder: [python, numpy, torch]
   needs: any
 

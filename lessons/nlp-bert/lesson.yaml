@@ -1,0 +1,44 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: nlp-bert
+minutes: 45
+title:
+  en: "BERT: filling in the blank"
+  nl: "BERT: het ontbrekende woord invullen"
+goal:
+  en: "build a training example of masked language modeling, find the rank of the right piece among BERT-Tiny's 30,522 guesses, and compute the loss at the hidden places only."
+  nl: "een trainingsvoorbeeld voor masked language modeling maken, de rang van het goede stukje tussen de 30.522 gokken van BERT-Tiny bepalen, en de loss op alleen de verborgen plekken uitrekenen."
+summary:
+  - en: "In an encoder every token looks at all tokens, so guessing the next token is too easy. BERT learns by masked language modeling instead: it chooses 15% of the pieces of a text, puts [MASK] at 80% of them, a random piece at 10% and keeps 10% as they are, and guesses the original piece at each chosen place from both sides."
+    nl: "In een encoder kijkt elk token naar alle tokens, dus het volgende token raden is te makkelijk. BERT leert in plaats daarvan met masked language modeling: het model kiest 15% van de stukjes van een tekst, zet op 80% daarvan [MASK], op 10% een willekeurig stukje en laat 10% staan, en raadt op elke gekozen plek het oorspronkelijke stukje uit beide kanten."
+  - en: "The head turns the vector of a place into a score for every piece, with the same table of piece vectors the model starts from. The loss is the mean cross-entropy at the chosen places only: where the model sees the piece, BERT-Tiny's loss is below 0.09."
+    nl: "De head maakt van de vector van een plek een score voor elk stukje, met dezelfde tabel van vectoren van stukjes waarmee het model begint. De loss is de gemiddelde cross-entropy op alleen de gekozen plekken: waar het model het stukje ziet, is de loss van BERT-Tiny lager dan 0,09."
+  - en: "On 3,031 words of Tatoeba, BERT-Tiny's first guess is the hidden word for 0.303 of them with both sides, and for 0.140 with only the words before."
+    nl: "Op 3.031 woorden van Tatoeba is de eerste gok van BERT-Tiny bij 0,303 ervan het verborgen woord met beide kanten, en bij 0,140 met alleen de woorden ervoor."
+  - en: "The family grew: RoBERTa trained longer on more text without next sentence prediction, DistilBERT is smaller, ModernBERT and EuroBERT read up to 8,192 tokens, and EuroBERT knows Dutch."
+    nl: "De familie groeide: RoBERTa trainde langer op meer tekst zonder next sentence prediction, DistilBERT is kleiner, ModernBERT en EuroBERT lezen tot 8.192 tokens, en EuroBERT kent Nederlands."
+can_now:
+  - en: "make a training example of masked language modeling from a plan of the chosen places"
+    nl: "een trainingsvoorbeeld voor masked language modeling maken uit een plan van de gekozen plekken"
+    by: make_example
+  - en: "say why BERT does not put [MASK] at every chosen place"
+    nl: "zeggen waarom BERT niet op elke gekozen plek [MASK] zet"
+    by: keep-some
+  - en: "find the rank of the right piece among the scores of a model"
+    nl: "de rang van het goede stukje tussen de scores van een model bepalen"
+    by: rank
+  - en: "compute the loss of masked language modeling at the chosen places only"
+    nl: "de loss van masked language modeling op alleen de gekozen plekken uitrekenen"
+    by: mlm_loss
+further_reading:
+  - en: "Daniel Jurafsky and James H. Martin, [*Speech and Language Processing*](https://web.stanford.edu/~jurafsky/slp3/), draft of August 19, 2026, the chapter *Masked Language Models*: encoders that look both ways, the masking of 15% of the tokens, and the loss at the masked tokens only"
+    nl: "Daniel Jurafsky en James H. Martin, [*Speech and Language Processing*](https://web.stanford.edu/~jurafsky/slp3/), conceptversie van 19 augustus 2026, het hoofdstuk *Masked Language Models*: encoders die naar beide kanten kijken, het verbergen van 15% van de tokens, en de loss op alleen de verborgen tokens (in het Engels)"
+  - en: "Jacob Devlin, Ming-Wei Chang, Kenton Lee and Kristina Toutanova, [*BERT: Pre-training of Deep Bidirectional Transformers for Language Understanding*](https://aclanthology.org/N19-1423/), NAACL 2019: the masked language model and next sentence prediction in section 3.1, and the example *my dog is hairy* in appendix A.1"
+    nl: "Jacob Devlin, Ming-Wei Chang, Kenton Lee en Kristina Toutanova, [*BERT: Pre-training of Deep Bidirectional Transformers for Language Understanding*](https://aclanthology.org/N19-1423/), NAACL 2019: het masked language model en next sentence prediction in paragraaf 3.1, en het voorbeeld *my dog is hairy* in bijlage A.1 (in het Engels)"
+  - en: "Yinhan Liu and colleagues, [*RoBERTa: A Robustly Optimized BERT Pretraining Approach*](https://arxiv.org/abs/1907.11692), 2019: BERT trained again, longer and on more text, without next sentence prediction and with a new plan every time"
+    nl: "Yinhan Liu en anderen, [*RoBERTa: A Robustly Optimized BERT Pretraining Approach*](https://arxiv.org/abs/1907.11692), 2019: BERT opnieuw getraind, langer en op meer tekst, zonder next sentence prediction en met elke keer een nieuw plan (in het Engels)"
+  - en: "Benjamin Warner and colleagues, [*Smarter, Better, Faster, Longer: A Modern Bidirectional Encoder for Fast, Memory Efficient, and Long Context Finetuning and Inference*](https://aclanthology.org/2025.acl-long.127/), ACL 2025: ModernBERT, an encoder of the BERT kind with newer parts, texts of up to 8,192 tokens and 30% of the tokens hidden"
+    nl: "Benjamin Warner en anderen, [*Smarter, Better, Faster, Longer: A Modern Bidirectional Encoder for Fast, Memory Efficient, and Long Context Finetuning and Inference*](https://aclanthology.org/2025.acl-long.127/), ACL 2025: ModernBERT, een encoder zoals BERT met nieuwere onderdelen, teksten tot 8.192 tokens en 30% van de tokens verborgen (in het Engels)"
+  - en: "Nicolas Boizard and colleagues, [*EuroBERT: Scaling Multilingual Encoders for European Languages*](https://arxiv.org/abs/2503.05500), 2025: encoders for 15 languages, Dutch among them"
+    nl: "Nicolas Boizard en anderen, [*EuroBERT: Scaling Multilingual Encoders for European Languages*](https://arxiv.org/abs/2503.05500), 2025: encoders voor 15 talen, met het Nederlands erbij (in het Engels)"
