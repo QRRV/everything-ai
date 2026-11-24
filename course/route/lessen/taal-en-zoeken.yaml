@@ -790,8 +790,9 @@ lessons:
   covers: [d15-question-answering#0]
   requires: [nlp-what-is-nlp]
   introduces: [c:question-answering, c:extractive-question-answering, c:open-domain-question-answering, c:closed-book-question-answering]
+  mentions: [c:chat-model]
   warns: [span]
-  data: []
+  data: [model-qwen3-0.6b, course-qa-kinds-qwen]
   ladder: [python]
   needs: any
 

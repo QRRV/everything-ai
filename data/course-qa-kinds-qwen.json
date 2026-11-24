@@ -1,0 +1,6336 @@
+{
+ "answers": {
+  "en": [
+   {
+    "closed": {
+     "prompt_sha256": "40223bfebf2a4b2ba97165516263919cb5e3b63050215c53a054c9064c141a07",
+     "seeds": [
+      {
+       "seed": 0,
+       "text": "A spider has eight legs.",
+       "tokens": 6,
+       "prompt_tokens": 30,
+       "seconds": 1.07,
+       "finish": "stop"
+      },
+      {
+       "seed": 1,
+       "text": "A spider has eight legs.",
+       "tokens": 6,
+       "prompt_tokens": 30,
+       "seconds": 0.84,
+       "finish": "stop"
+      },
+      {
+       "seed": 2,
+       "text": "A spider has eight legs.",
+       "tokens": 6,
+       "prompt_tokens": 30,
+       "seconds": 0.85,
+       "finish": "stop"
+      },
+      {
+       "seed": 3,
+       "text": "A spider has eight legs.",
+       "tokens": 6,
+       "prompt_tokens": 30,
+       "seconds": 0.86,
+       "finish": "stop"
+      }
+     ]
+    },
+    "texts": [
+     {
+      "prompt_sha256": "4f68eb9e4a22b5e604d91d5e45d79f0ede0c029daaafff769c5136b97bef4434",
+      "seeds": [
+       {
+        "seed": 0,
+        "text": "A spider has eight legs.",
+        "tokens": 6,
+        "prompt_tokens": 68,
+        "seconds": 1.23,
+        "finish": "stop"
+       },
+       {
+        "seed": 1,
+        "text": "A spider has eight legs.",
+        "tokens": 6,
+        "prompt_tokens": 68,
+        "seconds": 0.98,
+        "finish": "stop"
+       },
+       {
+        "seed": 2,
+        "text": "A spider has eight legs.",
+        "tokens": 6,
+        "prompt_tokens": 68,
+        "seconds": 0.89,
+        "finish": "stop"
+       },
+       {
+        "seed": 3,
+        "text": "A spider has eight legs.",
+        "tokens": 6,
+        "prompt_tokens": 68,
+        "seconds": 0.95,
+        "finish": "stop"
+       }
+      ]
+     },
+     {
+      "prompt_sha256": "92aa35f6d100e0826c8c4058ae1a891d43fae9645741f81550ff106279662d3c",
+      "seeds": [
+       {
+        "seed": 0,
+        "text": "A spider has eight legs.",
+        "tokens": 6,
+        "prompt_tokens": 81,
+        "seconds": 0.9,
+        "finish": "stop"
+       },
+       {
+        "seed": 1,
+        "text": "A spider has eight legs.",
+        "tokens": 6,
+        "prompt_tokens": 81,
+        "seconds": 1.0,
+        "finish": "stop"
+       },
+       {
+        "seed": 2,
+        "text": "A spider has eight legs.",
+        "tokens": 6,
+        "prompt_tokens": 81,
+        "seconds": 1.03,
+        "finish": "stop"
+       },
+       {
+        "seed": 3,
+        "text": "A spider has eight legs.",
+        "tokens": 6,
+        "prompt_tokens": 81,
+        "seconds": 0.96,
+        "finish": "stop"
+       }
+      ]
+     },
+     {
+      "prompt_sha256": "a9041a6e115a07c679d57ab92098cf2f582b1a33e40c079aef587be3f60d8632",
+      "seeds": [
+       {
+        "seed": 0,
+        "text": "A spider has eight legs.",
+        "tokens": 6,
+        "prompt_tokens": 84,
+        "seconds": 1.05,
+        "finish": "stop"
+       },
+       {
+        "seed": 1,
+        "text": "A spider has eight legs.",
+        "tokens": 6,
+        "prompt_tokens": 84,
+        "seconds": 0.96,
+        "finish": "stop"
+       },
+       {
+        "seed": 2,
+        "text": "A spider has eight legs.",
+        "tokens": 6,
+        "prompt_tokens": 84,
+        "seconds": 0.96,
+        "finish": "stop"
+       },
+       {
+        "seed": 3,
+        "text": "A spider has eight legs.",
+        "tokens": 6,
+        "prompt_tokens": 84,
+        "seconds": 0.91,
+        "finish": "stop"
+       }
+      ]
+     },
+     {
+      "prompt_sha256": "4f0236e9e4013e95bb605195831023b5ab3b3b3b43a7a7c02b9219ac14760dc5",
+      "seeds": [
+       {
+        "seed": 0,
+        "text": "A spider has eight legs.",
+        "tokens": 6,
+        "prompt_tokens": 103,
+        "seconds": 1.02,
+        "finish": "stop"
+       },
+       {
+        "seed": 1,
+        "text": "A spider has eight legs.",
+        "tokens": 6,
+        "prompt_tokens": 103,
+        "seconds": 1.04,
+        "finish": "stop"
+       },
+       {
+        "seed": 2,
+        "text": "A spider has eight legs.",
+        "tokens": 6,
+        "prompt_tokens": 103,
+        "seconds": 0.92,
+        "finish": "stop"
+       },
+       {
+        "seed": 3,
+        "text": "A spider has eight legs.",
+        "tokens": 6,
+        "prompt_tokens": 103,
+        "seconds": 0.98,
+        "finish": "stop"
+       }
+      ]
+     },
+     {
+      "prompt_sha256": "de9c11e2214f25834c9b778f9080dcd963f282cc6f9cb5389187af792a684378",
+      "seeds": [
+       {
+        "seed": 0,
+        "text": "A spider has eight legs.",
+        "tokens": 6,
+        "prompt_tokens": 79,
+        "seconds": 1.1,
+        "finish": "stop"
+       },
+       {
+        "seed": 1,
+        "text": "A spider has eight legs.",
+        "tokens": 6,
+        "prompt_tokens": 79,
+        "seconds": 0.93,
+        "finish": "stop"
+       },
+       {
+        "seed": 2,
+        "text": "A spider has eight legs.",
+        "tokens": 6,
+        "prompt_tokens": 79,
+        "seconds": 0.98,
+        "finish": "stop"
+       },
+       {
+        "seed": 3,
+        "text": "A spider has eight legs.",
+        "tokens": 6,
+        "prompt_tokens": 79,
+        "seconds": 0.97,
+        "finish": "stop"
+       }
+      ]
+     },
+     {
+      "prompt_sha256": "8cd070761e481f23ef599bb22b2a225858ca36bcc42401259cb3bcf5d30cd25e",
+      "seeds": [
+       {
+        "seed": 0,
+        "text": "A spider has eight legs.",
+        "tokens": 6,
+        "prompt_tokens": 93,
+        "seconds": 1.09,
+        "finish": "stop"
+       },
+       {
+        "seed": 1,
+        "text": "A spider has eight legs.",
+        "tokens": 6,
+        "prompt_tokens": 93,
+        "seconds": 0.99,
+        "finish": "stop"
+       },
+       {
+        "seed": 2,
+        "text": "The text does not provide information about the number of legs a spider has.",
+        "tokens": 15,
+        "prompt_tokens": 93,
+        "seconds": 1.98,
+        "finish": "stop"
+       },
+       {
+        "seed": 3,
+        "text": "A spider has eight legs.",
+        "tokens": 6,
+        "prompt_tokens": 93,
+        "seconds": 1.22,
+        "finish": "stop"
+       }
+      ]
+     }
+    ]
+   },
+   {
+    "closed": {
+     "prompt_sha256": "af71c65315147f94ef9f6c8856aa2b1a2a28d0e166605a3c910f04f2b74a5b47",
+     "seeds": [
+      {
+       "seed": 0,
+       "text": "A spider has 8 legs, while an insect has 6 legs, so the difference is 2.",
+       "tokens": 22,
+       "prompt_tokens": 34,
+       "seconds": 2.48,
+       "finish": "stop"
+      },
+      {
+       "seed": 1,
+       "text": "A spider has two more legs than an insect.",
+       "tokens": 10,
+       "prompt_tokens": 34,
+       "seconds": 1.4,
+       "finish": "stop"
+      },
+      {
+       "seed": 2,
+       "text": "A spider has 8 legs, while an insect has 6 legs, so the difference is 2.",
+       "tokens": 22,
+       "prompt_tokens": 34,
+       "seconds": 2.83,
+       "finish": "stop"
+      },
+      {
+       "seed": 3,
+       "text": "A spider has two more legs than an insect.",
+       "tokens": 10,
+       "prompt_tokens": 34,
+       "seconds": 1.33,
+       "finish": "stop"
+      }
+     ]
+    },
+    "texts": [
+     {
+      "prompt_sha256": "7fc1b35f58201717c321027c666365a8ba8293a9a5a7941f29704258632c672e",
+      "seeds": [
+       {
+        "seed": 0,
+        "text": "A spider has eight legs, and an insect has six. Therefore, a spider has 8 - 6 = 2 more legs than an insect.",
+        "tokens": 31,
+        "prompt_tokens": 72,
+        "seconds": 3.4,
+        "finish": "stop"
+       },
+       {
+        "seed": 1,
+        "text": "A spider has eight legs, and an insect has six, so the difference is two.",
+        "tokens": 18,
+        "prompt_tokens": 72,
+        "seconds": 2.48,
+        "finish": "stop"
+       },
+       {
+        "seed": 2,
+        "text": "A spider has eight legs, and an insect has six.",
+        "tokens": 12,
+        "prompt_tokens": 72,
+        "seconds": 1.89,
+        "finish": "stop"
+       },
+       {
+        "seed": 3,
+        "text": "A spider has eight legs, which is more than an insect's six.",
+        "tokens": 15,
+        "prompt_tokens": 72,
+        "seconds": 1.82,
+        "finish": "stop"
+       }
+      ]
+     },
+     {
+      "prompt_sha256": "16ab60e1c18613e09b39bc23262609de646028b2b983343cf4fa6d0435c46bf5",
+      "seeds": [
+       {
+        "seed": 0,
+        "text": "A spider has two legs, and an insect has two legs, so they have the same number of legs.",
+        "tokens": 22,
+        "prompt_tokens": 85,
+        "seconds": 2.73,
+        "finish": "stop"
+       },
+       {
+        "seed": 1,
+        "text": "A spider has 8 more legs than an insect.",
+        "tokens": 11,
+        "prompt_tokens": 85,
+        "seconds": 1.94,
+        "finish": "stop"
+       },
+       {
+        "seed": 2,
+        "text": "A spider has two legs, and an insect has two legs.",
+        "tokens": 13,
+        "prompt_tokens": 85,
+        "seconds": 2.11,
+        "finish": "stop"
+       },
+       {
+        "seed": 3,
+        "text": "A spider has 8 more legs than an insect.",
+        "tokens": 11,
+        "prompt_tokens": 85,
+        "seconds": 1.72,
+        "finish": "stop"
+       }
+      ]
+     },
+     {
+      "prompt_sha256": "c47f814e7bb175dbe75a1208b56b40f8fd66e3a90258fdfde7be804a6f3b3a39",
+      "seeds": [
+       {
+        "seed": 0,
+        "text": "The Eiffel Tower in Paris was finished in 1889 for a world's fair. With its antennas it is about 330 meters tall. It was meant to stand for only twenty years.",
+        "tokens": 44,
+        "prompt_tokens": 88,
+        "seconds": 5.86,
+        "finish": "stop"
+       },
+       {
+        "seed": 1,
+        "text": "A spider has two legs, while an insect has six.",
+        "tokens": 12,
+        "prompt_tokens": 88,
+        "seconds": 1.82,
+        "finish": "stop"
+       },
+       {
+        "seed": 2,
+        "text": "The Eiffel Tower in Paris was finished in 1889 for a world's fair. With its antennas it is about 330 meters tall. It was meant to stand for only twenty years.",
+        "tokens": 44,
+        "prompt_tokens": 88,
+        "seconds": 4.61,
+        "finish": "stop"
+       },
+       {
+        "seed": 3,
+        "text": "A spider has two legs, and an insect has six legs. Therefore, a spider has one less leg than an insect.",
+        "tokens": 25,
+        "prompt_tokens": 88,
+        "seconds": 2.95,
+        "finish": "stop"
+       }
+      ]
+     },
+     {
+      "prompt_sha256": "8c2ec3183270761415c5ffc3e3a5b2eb0d573ac99e2007c85270c67edf529792",
+      "seeds": [
+       {
+        "seed": 0,
+        "text": "A spider has 8 legs, while an insect has 6 legs.",
+        "tokens": 15,
+        "prompt_tokens": 107,
+        "seconds": 2.4,
+        "finish": "stop"
+       },
+       {
+        "seed": 1,
+        "text": "A spider has two legs, and an insect has six legs.",
+        "tokens": 13,
+        "prompt_tokens": 107,
+        "seconds": 1.89,
+        "finish": "stop"
+       },
+       {
+        "seed": 2,
+        "text": "A spider has 8 legs, while an insect has 6 legs.",
+        "tokens": 15,
+        "prompt_tokens": 107,
+        "seconds": 1.92,
+        "finish": "stop"
+       },
+       {
+        "seed": 3,
+        "text": "A spider has two more legs than an insect.",
+        "tokens": 10,
+        "prompt_tokens": 107,
+        "seconds": 1.34,
+        "finish": "stop"
+       }
+      ]
+     },
+     {
+      "prompt_sha256": "9d1c8cddf7addf13321165c56f98aa99d4780a72ed59371276935f285c6a5c5c",
+      "seeds": [
+       {
+        "seed": 0,
+        "text": "A spider has 8 legs, while an insect has 6 legs.",
+        "tokens": 15,
+        "prompt_tokens": 83,
+        "seconds": 2.31,
+        "finish": "stop"
+       },
+       {
+        "seed": 1,
+        "text": "A spider has two legs, and an insect has two legs.",
+        "tokens": 13,
+        "prompt_tokens": 83,
+        "seconds": 2.13,
+        "finish": "stop"
+       },
+       {
+        "seed": 2,
+        "text": "A spider has two legs, and an insect has six legs.",
+        "tokens": 13,
+        "prompt_tokens": 83,
+        "seconds": 1.71,
+        "finish": "stop"
+       },
+       {
+        "seed": 3,
+        "text": "A spider has two legs, while an insect has six.",
+        "tokens": 12,
+        "prompt_tokens": 83,
+        "seconds": 1.42,
+        "finish": "stop"
+       }
+      ]
+     },
+     {
+      "prompt_sha256": "5fe89ef691b185018fe2381f14ae2c00340e1a2b8fc54b758c4834635f4b59e0",
+      "seeds": [
+       {
+        "seed": 0,
+        "text": "A spider has 8 legs, while an insect has 6.",
+        "tokens": 14,
+        "prompt_tokens": 97,
+        "seconds": 2.67,
+        "finish": "stop"
+       },
+       {
+        "seed": 1,
+        "text": "The text does not provide information about the number of legs a spider or insect has.",
+        "tokens": 17,
+        "prompt_tokens": 97,
+        "seconds": 2.36,
+        "finish": "stop"
+       },
+       {
+        "seed": 2,
+        "text": "A spider has two legs, and an insect has six legs.",
+        "tokens": 13,
+        "prompt_tokens": 97,
+        "seconds": 1.88,
+        "finish": "stop"
+       },
+       {
+        "seed": 3,
+        "text": "The text does not provide information about the number of legs a spider has compared to an insect.",
+        "tokens": 19,
+        "prompt_tokens": 97,
+        "seconds": 2.26,
+        "finish": "stop"
+       }
+      ]
+     }
+    ]
+   },
+   {
+    "closed": {
+     "prompt_sha256": "a5e48d4908caeebad0cde1e7d5abc19915b4fbc1e343319de9ef90c25abdfcbb",
+     "seeds": [
+      {
+       "seed": 0,
+       "text": "A year on Mercury is approximately 88 Earth days.",
+       "tokens": 12,
+       "prompt_tokens": 30,
+       "seconds": 1.84,
+       "finish": "stop"
+      },
+      {
+       "seed": 1,
+       "text": "A year on Mercury is about 88 Earth days.",
+       "tokens": 12,
+       "prompt_tokens": 30,
+       "seconds": 1.38,
+       "finish": "stop"
+      },
+      {
+       "seed": 2,
+       "text": "A year on Mercury is approximately 88 Earth days.",
+       "tokens": 12,
+       "prompt_tokens": 30,
+       "seconds": 1.82,
+       "finish": "stop"
+      },
+      {
+       "seed": 3,
+       "text": "A year on Mercury is about 88 Earth days.",
+       "tokens": 12,
+       "prompt_tokens": 30,
+       "seconds": 1.56,
+       "finish": "stop"
+      }
+     ]
+    },
+    "texts": [
+     {
+      "prompt_sha256": "caecd707e63bd1390b84c24d9594e7da72f1a357bf64e3117d409a98d8fa06c8",
+      "seeds": [
+       {
+        "seed": 0,
+        "text": "A year on Mercury is approximately 88 Earth days.",
+        "tokens": 12,
+        "prompt_tokens": 68,
+        "seconds": 1.65,
+        "finish": "stop"
+       },
+       {
+        "seed": 1,
+        "text": "A year on Mercury is about 88 Earth days.",
+        "tokens": 12,
+        "prompt_tokens": 68,
+        "seconds": 1.47,
+        "finish": "stop"
+       },
+       {
+        "seed": 2,
+        "text": "A year on Mercury is approximately 88 Earth days.",
+        "tokens": 12,
+        "prompt_tokens": 68,
+        "seconds": 1.63,
+        "finish": "stop"
+       },
+       {
+        "seed": 3,
+        "text": "A year on Mercury is approximately 88 Earth days.",
+        "tokens": 12,
+        "prompt_tokens": 68,
+        "seconds": 1.59,
+        "finish": "stop"
+       }
+      ]
+     },
+     {
+      "prompt_sha256": "5e7ec76f4204bec60e5175bd169720f0cda2f50efcfe0699bfb6051870a46eb5",
+      "seeds": [
+       {
+        "seed": 0,
+        "text": "A year on Mercury lasts 88 days.",
+        "tokens": 10,
+        "prompt_tokens": 81,
+        "seconds": 1.52,
+        "finish": "stop"
+       },
+       {
+        "seed": 1,
+        "text": "A year on Mercury lasts 88 days.",
+        "tokens": 10,
+        "prompt_tokens": 81,
+        "seconds": 1.36,
+        "finish": "stop"
+       },
+       {
+        "seed": 2,
+        "text": "A year on Mercury lasts 88 days.",
+        "tokens": 10,
+        "prompt_tokens": 81,
+        "seconds": 1.32,
+        "finish": "stop"
+       },
+       {
+        "seed": 3,
+        "text": "A year on Mercury lasts 88 days.",
+        "tokens": 10,
+        "prompt_tokens": 81,
+        "seconds": 1.31,
+        "finish": "stop"
+       }
+      ]
+     },
+     {
+      "prompt_sha256": "f824129de2d019568e312dfce925fe3e82423c7456513d81d854c95598057afb",
+      "seeds": [
+       {
+        "seed": 0,
+        "text": "A year on Mercury is about 88 Earth days.",
+        "tokens": 12,
+        "prompt_tokens": 84,
+        "seconds": 1.61,
+        "finish": "stop"
+       },
+       {
+        "seed": 1,
+        "text": "A year on Mercury is approximately 88 Earth days.",
+        "tokens": 12,
+        "prompt_tokens": 84,
+        "seconds": 1.51,
+        "finish": "stop"
+       },
+       {
+        "seed": 2,
+        "text": "A year on Mercury is about 390 days.",
+        "tokens": 12,
+        "prompt_tokens": 84,
+        "seconds": 1.63,
+        "finish": "stop"
+       },
+       {
+        "seed": 3,
+        "text": "A year on Mercury is about 88 Earth days.",
+        "tokens": 12,
+        "prompt_tokens": 84,
+        "seconds": 1.52,
+        "finish": "stop"
+       }
+      ]
+     },
+     {
+      "prompt_sha256": "e0a438b273c65a4f4b6174e53d9753a30eedc99d75dab833ba7eea43a6260c7a",
+      "seeds": [
+       {
+        "seed": 0,
+        "text": "A year on Mercury is approximately 88 Earth days.",
+        "tokens": 12,
+        "prompt_tokens": 103,
+        "seconds": 1.77,
+        "finish": "stop"
+       },
+       {
+        "seed": 1,
+        "text": "A year on Mercury is 11 months long.",
+        "tokens": 11,
+        "prompt_tokens": 103,
+        "seconds": 1.55,
+        "finish": "stop"
+       },
+       {
+        "seed": 2,
+        "text": "A year on Mercury is approximately 384.42 Earth days.",
+        "tokens": 16,
+        "prompt_tokens": 103,
+        "seconds": 2.24,
+        "finish": "stop"
+       },
+       {
+        "seed": 3,
+        "text": "A year on Mercury is 88 Earth days.",
+        "tokens": 11,
+        "prompt_tokens": 103,
+        "seconds": 1.48,
+        "finish": "stop"
+       }
+      ]
+     },
+     {
+      "prompt_sha256": "5d3ce7cc32a4ce6aadacc241404faef9a8e314fb904316c37bd1a6691078e2d5",
+      "seeds": [
+       {
+        "seed": 0,
+        "text": "A year on Mercury is approximately 1.5 Earth years.",
+        "tokens": 13,
+        "prompt_tokens": 79,
+        "seconds": 1.9,
+        "finish": "stop"
+       },
+       {
+        "seed": 1,
+        "text": "A year on Mercury is approximately 12,600 Earth days.",
+        "tokens": 16,
+        "prompt_tokens": 79,
+        "seconds": 2.02,
+        "finish": "stop"
+       },
+       {
+        "seed": 2,
+        "text": "A year on Mercury is approximately 365 days.",
+        "tokens": 12,
+        "prompt_tokens": 79,
+        "seconds": 1.99,
+        "finish": "stop"
+       },
+       {
+        "seed": 3,
+        "text": "A year on Mercury is approximately 10.5 Earth years.",
+        "tokens": 14,
+        "prompt_tokens": 79,
+        "seconds": 1.43,
+        "finish": "stop"
+       }
+      ]
+     },
+     {
+      "prompt_sha256": "4625509e76fb4ebddc518ab529fb06e27a24d0833850d6116ed59d8c2847aa3a",
+      "seeds": [
+       {
+        "seed": 0,
+        "text": "A year on Mercury is approximately 88 Earth days.",
+        "tokens": 12,
+        "prompt_tokens": 93,
+        "seconds": 1.99,
+        "finish": "stop"
+       },
+       {
+        "seed": 1,
+        "text": "A year on Mercury is 88 Earth days.",
+        "tokens": 11,
+        "prompt_tokens": 93,
+        "seconds": 1.52,
+        "finish": "stop"
+       },
+       {
+        "seed": 2,
+        "text": "A year on Mercury is approximately 0.243 years.",
+        "tokens": 14,
+        "prompt_tokens": 93,
+        "seconds": 1.71,
+        "finish": "stop"
+       },
+       {
+        "seed": 3,
+        "text": "A year on Mercury is 190.4 days.",
+        "tokens": 13,
+        "prompt_tokens": 93,
+        "seconds": 1.64,
+        "finish": "stop"
+       }
+      ]
+     }
+    ]
+   },
+   {
+    "closed": {
+     "prompt_sha256": "907131ce02b037e30d8e2f2ccb3a7cf18f6bb06fcfbc0c19bcae4a10276180a4",
+     "seeds": [
+      {
+       "seed": 0,
+       "text": "One day on Mercury would fit in approximately 1.7 years.",
+       "tokens": 14,
+       "prompt_tokens": 33,
+       "seconds": 1.94,
+       "finish": "stop"
+      },
+      {
+       "seed": 1,
+       "text": "One day on Mercury would fit in approximately 0.24 years.",
+       "tokens": 15,
+       "prompt_tokens": 33,
+       "seconds": 2.07,
+       "finish": "stop"
+      },
+      {
+       "seed": 2,
+       "text": "There are 1/4 years on Mercury in one day.",
+       "tokens": 13,
+       "prompt_tokens": 33,
+       "seconds": 1.65,
+       "finish": "stop"
+      },
+      {
+       "seed": 3,
+       "text": "One day on Mercury would fit in approximately 0.2 years.",
+       "tokens": 14,
+       "prompt_tokens": 33,
+       "seconds": 1.54,
+       "finish": "stop"
+      }
+     ]
+    },
+    "texts": [
+     {
+      "prompt_sha256": "2ae679af99ebef68bf11a76eaa4f6da051b59226c5827d268118a463f2b5fcc6",
+      "seeds": [
+       {
+        "seed": 0,
+        "text": "One day on Mercury would fit in approximately 1.7 years.",
+        "tokens": 14,
+        "prompt_tokens": 71,
+        "seconds": 2.1,
+        "finish": "stop"
+       },
+       {
+        "seed": 1,
+        "text": "The number of years on Mercury that fit in one day is not provided in the text.",
+        "tokens": 18,
+        "prompt_tokens": 71,
+        "seconds": 2.6,
+        "finish": "stop"
+       },
+       {
+        "seed": 2,
+        "text": "One day on Mercury would fit in approximately 0.23 years.",
+        "tokens": 15,
+        "prompt_tokens": 71,
+        "seconds": 1.85,
+        "finish": "stop"
+       },
+       {
+        "seed": 3,
+        "text": "The number of years on Mercury that fit in one day is not provided in the text.",
+        "tokens": 18,
+        "prompt_tokens": 71,
+        "seconds": 2.22,
+        "finish": "stop"
+       }
+      ]
+     },
+     {
+      "prompt_sha256": "dd74b7e8b1442259a21da26f2f44df0f83ac0295ae46012f05c91f2c48dd5ae5",
+      "seeds": [
+       {
+        "seed": 0,
+        "text": "One day on Mercury lasts 176 Earth days, so it would fit in approximately 176/88 ≈ 2 years.",
+        "tokens": 31,
+        "prompt_tokens": 84,
+        "seconds": 3.71,
+        "finish": "stop"
+       },
+       {
+        "seed": 1,
+        "text": "One day on Mercury lasts 176 Earth days, so it fits in approximately 176 years.",
+        "tokens": 23,
+        "prompt_tokens": 84,
+        "seconds": 3.07,
+        "finish": "stop"
+       },
+       {
+        "seed": 2,
+        "text": "One day on Mercury lasts 176 Earth days, so it would take approximately 176/88 ≈ 2 years.",
+        "tokens": 30,
+        "prompt_tokens": 84,
+        "seconds": 3.31,
+        "finish": "stop"
+       },
+       {
+        "seed": 3,
+        "text": "One day on Mercury fits in 176 Earth years.",
+        "tokens": 13,
+        "prompt_tokens": 84,
+        "seconds": 1.7,
+        "finish": "stop"
+       }
+      ]
+     },
+     {
+      "prompt_sha256": "919576ee7d8d1e2b6d333185ca5c59488fed8263de575d484e0125443b4fbc1c",
+      "seeds": [
+       {
+        "seed": 0,
+        "text": "The Eiffel Tower in Paris was finished in 1889 for a world's fair. With its antennas it is about 330 meters tall. It was meant to stand for only twenty years.",
+        "tokens": 44,
+        "prompt_tokens": 87,
+        "seconds": 5.28,
+        "finish": "stop"
+       },
+       {
+        "seed": 1,
+        "text": "The Eiffel Tower in Paris was finished in 1889 for a world's fair. With its antennas it is about 330 meters tall. It was meant to stand for only twenty years.",
+        "tokens": 44,
+        "prompt_tokens": 87,
+        "seconds": 5.33,
+        "finish": "stop"
+       },
+       {
+        "seed": 2,
+        "text": "The Eiffel Tower in Paris was finished in 1889 for a world's fair. With its antennas it is about 330 meters tall. It was meant to stand for only twenty years.",
+        "tokens": 44,
+        "prompt_tokens": 87,
+        "seconds": 5.13,
+        "finish": "stop"
+       },
+       {
+        "seed": 3,
+        "text": "The Eiffel Tower in Paris was finished in 1889 for a world's fair. With its antennas it is about 330 meters tall. It was meant to stand for only twenty years.",
+        "tokens": 44,
+        "prompt_tokens": 87,
+        "seconds": 4.4,
+        "finish": "stop"
+       }
+      ]
+     },
+     {
+      "prompt_sha256": "35fdea60f587d4658a062871f244bd521e33c0028ed2f8982859acd05048313a",
+      "seeds": [
+       {
+        "seed": 0,
+        "text": "One day on Mercury would fit in approximately 24 hours.",
+        "tokens": 13,
+        "prompt_tokens": 106,
+        "seconds": 1.83,
+        "finish": "stop"
+       },
+       {
+        "seed": 1,
+        "text": "The text does not provide information about the number of years on Mercury.",
+        "tokens": 14,
+        "prompt_tokens": 106,
+        "seconds": 2.27,
+        "finish": "stop"
+       },
+       {
+        "seed": 2,
+        "text": "One day on Mercury would fit in approximately 0.25 years.",
+        "tokens": 15,
+        "prompt_tokens": 106,
+        "seconds": 2.25,
+        "finish": "stop"
+       },
+       {
+        "seed": 3,
+        "text": "The text does not provide information about the number of years on Mercury.",
+        "tokens": 14,
+        "prompt_tokens": 106,
+        "seconds": 1.76,
+        "finish": "stop"
+       }
+      ]
+     },
+     {
+      "prompt_sha256": "f7bf7961c875fd391e5bf426421711a34ac61e3b877dde375c723f57ce0e4c01",
+      "seeds": [
+       {
+        "seed": 0,
+        "text": "The text provided does not contain any information about Mercury or years on it.",
+        "tokens": 15,
+        "prompt_tokens": 82,
+        "seconds": 1.88,
+        "finish": "stop"
+       },
+       {
+        "seed": 1,
+        "text": "The text does not provide information about the number of years on Mercury that fit in one day.",
+        "tokens": 19,
+        "prompt_tokens": 82,
+        "seconds": 2.67,
+        "finish": "stop"
+       },
+       {
+        "seed": 2,
+        "text": "The text provided does not contain any information about the number of years on Mercury that fit into one day.",
+        "tokens": 21,
+        "prompt_tokens": 82,
+        "seconds": 2.6,
+        "finish": "stop"
+       },
+       {
+        "seed": 3,
+        "text": "The text does not provide information about the number of years on Mercury.",
+        "tokens": 14,
+        "prompt_tokens": 82,
+        "seconds": 1.76,
+        "finish": "stop"
+       }
+      ]
+     },
+     {
+      "prompt_sha256": "b3f10491d5205695ed79dd5229d3fef3c1bda797e8c316bb7b00e73ab7c62c80",
+      "seeds": [
+       {
+        "seed": 0,
+        "text": "The text does not provide information about Mercury.",
+        "tokens": 9,
+        "prompt_tokens": 96,
+        "seconds": 1.51,
+        "finish": "stop"
+       },
+       {
+        "seed": 1,
+        "text": "The text does not provide information about Mercury.",
+        "tokens": 9,
+        "prompt_tokens": 96,
+        "seconds": 1.75,
+        "finish": "stop"
+       },
+       {
+        "seed": 2,
+        "text": "The text does not provide information about Mercury.",
+        "tokens": 9,
+        "prompt_tokens": 96,
+        "seconds": 1.51,
+        "finish": "stop"
+       },
+       {
+        "seed": 3,
+        "text": "The number of years on Mercury that fit in one day is 0.",
+        "tokens": 15,
+        "prompt_tokens": 96,
+        "seconds": 1.78,
+        "finish": "stop"
+       }
+      ]
+     }
+    ]
+   },
+   {
+    "closed": {
+     "prompt_sha256": "c943c28994c25018d439d7cfeb21518a2a4b948f9ea4f5975f3983dfe227fd1c",
+     "seeds": [
+      {
+       "seed": 0,
+       "text": "The Eiffel Tower was finished in 1887.",
+       "tokens": 14,
+       "prompt_tokens": 33,
+       "seconds": 1.86,
+       "finish": "stop"
+      },
+      {
+       "seed": 1,
+       "text": "The Eiffel Tower was finished in 1887.",
+       "tokens": 14,
+       "prompt_tokens": 33,
+       "seconds": 1.9,
+       "finish": "stop"
+      },
+      {
+       "seed": 2,
+       "text": "The Eiffel Tower was finished in 1887.",
+       "tokens": 14,
+       "prompt_tokens": 33,
+       "seconds": 1.92,
+       "finish": "stop"
+      },
+      {
+       "seed": 3,
+       "text": "The Eiffel Tower was finished in 1887.",
+       "tokens": 14,
+       "prompt_tokens": 33,
+       "seconds": 1.61,
+       "finish": "stop"
+      }
+     ]
+    },
+    "texts": [
+     {
+      "prompt_sha256": "84678a815dc617efe8cb2644c15f50d4fe70e47848516566173ad78f37c27fb1",
+      "seeds": [
+       {
+        "seed": 0,
+        "text": "The Eiffel Tower was finished in 1887.",
+        "tokens": 14,
+        "prompt_tokens": 71,
+        "seconds": 1.8,
+        "finish": "stop"
+       },
+       {
+        "seed": 1,
+        "text": "The Eiffel Tower was finished in 1887.",
+        "tokens": 14,
+        "prompt_tokens": 71,
+        "seconds": 2.02,
+        "finish": "stop"
+       },
+       {
+        "seed": 2,
+        "text": "The Eiffel Tower was finished in 1887.",
+        "tokens": 14,
+        "prompt_tokens": 71,
+        "seconds": 1.99,
+        "finish": "stop"
+       },
+       {
+        "seed": 3,
+        "text": "The Eiffel Tower was finished in 1887.",
+        "tokens": 14,
+        "prompt_tokens": 71,
+        "seconds": 1.52,
+        "finish": "stop"
+       }
+      ]
+     },
+     {
+      "prompt_sha256": "d93dbafdc64e4924383ec58b840c2eb6da8b32035f947afe0cb7931cca8b7b0b",
+      "seeds": [
+       {
+        "seed": 0,
+        "text": "The Eiffel Tower was finished in 1887.",
+        "tokens": 14,
+        "prompt_tokens": 84,
+        "seconds": 2.02,
+        "finish": "stop"
+       },
+       {
+        "seed": 1,
+        "text": "The Eiffel Tower was finished in 1887.",
+        "tokens": 14,
+        "prompt_tokens": 84,
+        "seconds": 1.91,
+        "finish": "stop"
+       },
+       {
+        "seed": 2,
+        "text": "The Eiffel Tower was finished in 1887.",
+        "tokens": 14,
+        "prompt_tokens": 84,
+        "seconds": 1.8,
+        "finish": "stop"
+       },
+       {
+        "seed": 3,
+        "text": "The Eiffel Tower was finished in 1887.",
+        "tokens": 14,
+        "prompt_tokens": 84,
+        "seconds": 1.55,
+        "finish": "stop"
+       }
+      ]
+     },
+     {
+      "prompt_sha256": "03fa4b82963114f73614c8ab3a5930673d10b415dbad67d017fbda0d96f42483",
+      "seeds": [
+       {
+        "seed": 0,
+        "text": "The Eiffel Tower was finished in 1889.",
+        "tokens": 14,
+        "prompt_tokens": 87,
+        "seconds": 2.02,
+        "finish": "stop"
+       },
+       {
+        "seed": 1,
+        "text": "The Eiffel Tower in Paris was finished in 1889.",
+        "tokens": 16,
+        "prompt_tokens": 87,
+        "seconds": 2.22,
+        "finish": "stop"
+       },
+       {
+        "seed": 2,
+        "text": "The Eiffel Tower was finished in 1889.",
+        "tokens": 14,
+        "prompt_tokens": 87,
+        "seconds": 1.95,
+        "finish": "stop"
+       },
+       {
+        "seed": 3,
+        "text": "The Eiffel Tower was finished in 1889.",
+        "tokens": 14,
+        "prompt_tokens": 87,
+        "seconds": 1.41,
+        "finish": "stop"
+       }
+      ]
+     },
+     {
+      "prompt_sha256": "84d824a6aaa6bdb6cbe341d2d2d332b387f53054ab6fb88c928a49c1880c2eec",
+      "seeds": [
+       {
+        "seed": 0,
+        "text": "The Eiffel Tower was finished in 1887.",
+        "tokens": 14,
+        "prompt_tokens": 106,
+        "seconds": 2.4,
+        "finish": "stop"
+       },
+       {
+        "seed": 1,
+        "text": "The Eiffel Tower was finished in 1887.",
+        "tokens": 14,
+        "prompt_tokens": 106,
+        "seconds": 2.08,
+        "finish": "stop"
+       },
+       {
+        "seed": 2,
+        "text": "The Eiffel Tower was finished in 1887.",
+        "tokens": 14,
+        "prompt_tokens": 106,
+        "seconds": 1.65,
+        "finish": "stop"
+       },
+       {
+        "seed": 3,
+        "text": "The Eiffel Tower was finished in 1887.",
+        "tokens": 14,
+        "prompt_tokens": 106,
+        "seconds": 1.63,
+        "finish": "stop"
+       }
+      ]
+     },
+     {
+      "prompt_sha256": "f8ee518c38a2d07b690c51a8c91cdc101deadff6ae08c1e9de16fe6048ba69b6",
+      "seeds": [
+       {
+        "seed": 0,
+        "text": "The Eiffel Tower was finished in 1887.",
+        "tokens": 14,
+        "prompt_tokens": 82,
+        "seconds": 1.8,
+        "finish": "stop"
+       },
+       {
+        "seed": 1,
+        "text": "The Eiffel Tower was finished in 1887.",
+        "tokens": 14,
+        "prompt_tokens": 82,
+        "seconds": 2.03,
+        "finish": "stop"
+       },
+       {
+        "seed": 2,
+        "text": "The Eiffel Tower was finished in 1887.",
+        "tokens": 14,
+        "prompt_tokens": 82,
+        "seconds": 1.49,
+        "finish": "stop"
+       },
+       {
+        "seed": 3,
+        "text": "The Eiffel Tower was finished in 1887.",
+        "tokens": 14,
+        "prompt_tokens": 82,
+        "seconds": 1.56,
+        "finish": "stop"
+       }
+      ]
+     },
+     {
+      "prompt_sha256": "ebb12160d82d9287b4da191818261c488ec201895403b73a6b597e6089097919",
+      "seeds": [
+       {
+        "seed": 0,
+        "text": "The Eiffel Tower was finished in 1887.",
+        "tokens": 14,
+        "prompt_tokens": 96,
+        "seconds": 1.85,
+        "finish": "stop"
+       },
+       {
+        "seed": 1,
+        "text": "The Eiffel Tower was finished in 1887.",
+        "tokens": 14,
+        "prompt_tokens": 96,
+        "seconds": 2.08,
+        "finish": "stop"
+       },
+       {
+        "seed": 2,
+        "text": "The Eiffel Tower was finished in 1887.",
+        "tokens": 14,
+        "prompt_tokens": 96,
+        "seconds": 1.71,
+        "finish": "stop"
+       },
+       {
+        "seed": 3,
+        "text": "The Eiffel Tower was finished in 1887.",
+        "tokens": 14,
+        "prompt_tokens": 96,
+        "seconds": 1.68,
+        "finish": "stop"
+       }
+      ]
+     }
+    ]
+   },
+   {
+    "closed": {
+     "prompt_sha256": "f5d68271712f257088dbc3cb4d7a9cd2aedb36165212062156eb537741803029",
+     "seeds": [
+      {
+       "seed": 0,
+       "text": "The Eiffel Tower was 43 years old in 1989.",
+       "tokens": 18,
+       "prompt_tokens": 37,
+       "seconds": 2.17,
+       "finish": "stop"
+      },
+      {
+       "seed": 1,
+       "text": "The Eiffel Tower was 41 years old in 1989.",
+       "tokens": 18,
+       "prompt_tokens": 37,
+       "seconds": 2.08,
+       "finish": "stop"
+      },
+      {
+       "seed": 2,
+       "text": "The Eiffel Tower was 35 years old in 1989.",
+       "tokens": 18,
+       "prompt_tokens": 37,
+       "seconds": 2.23,
+       "finish": "stop"
+      },
+      {
+       "seed": 3,
+       "text": "The Eiffel Tower was 45 years old in 1989.",
+       "tokens": 18,
+       "prompt_tokens": 37,
+       "seconds": 1.88,
+       "finish": "stop"
+      }
+     ]
+    },
+    "texts": [
+     {
+      "prompt_sha256": "8b05f8ca58dc9a5993e73cb202b186982c78cda2352dcd43a3e011ecfbb91b98",
+      "seeds": [
+       {
+        "seed": 0,
+        "text": "The Eiffel Tower was not mentioned in the provided text.",
+        "tokens": 13,
+        "prompt_tokens": 75,
+        "seconds": 1.6,
+        "finish": "stop"
+       },
+       {
+        "seed": 1,
+        "text": "The Eiffel Tower was not mentioned in the provided text.",
+        "tokens": 13,
+        "prompt_tokens": 75,
+        "seconds": 1.91,
+        "finish": "stop"
+       },
+       {
+        "seed": 2,
+        "text": "The Eiffel Tower was not mentioned in the text.",
+        "tokens": 12,
+        "prompt_tokens": 75,
+        "seconds": 1.61,
+        "finish": "stop"
+       },
+       {
+        "seed": 3,
+        "text": "The Eiffel Tower was not mentioned in the text.",
+        "tokens": 12,
+        "prompt_tokens": 75,
+        "seconds": 1.4,
+        "finish": "stop"
+       }
+      ]
+     },
+     {
+      "prompt_sha256": "a46e1ab0800a41bdf7c2dc1e73bc55503731e1263c02cb2f0fe5e601eef940ed",
+      "seeds": [
+       {
+        "seed": 0,
+        "text": "The Eiffel Tower was 1989 minus its age in years, which is not provided in the text.",
+        "tokens": 25,
+        "prompt_tokens": 88,
+        "seconds": 2.81,
+        "finish": "stop"
+       },
+       {
+        "seed": 1,
+        "text": "The Eiffel Tower was 1989 minus its age in years.",
+        "tokens": 17,
+        "prompt_tokens": 88,
+        "seconds": 1.94,
+        "finish": "stop"
+       },
+       {
+        "seed": 2,
+        "text": "The Eiffel Tower was 1989 minus 1989, which means it was 0 years old in 1989.",
+        "tokens": 33,
+        "prompt_tokens": 88,
+        "seconds": 3.57,
+        "finish": "stop"
+       },
+       {
+        "seed": 3,
+        "text": "The Eiffel Tower was 1989 minus its age in years.",
+        "tokens": 17,
+        "prompt_tokens": 88,
+        "seconds": 1.97,
+        "finish": "stop"
+       }
+      ]
+     },
+     {
+      "prompt_sha256": "b40c1c1cc5cf8811ccde23b24488b8ad43b396e5947a15d4fe9a7f0b295f2d0a",
+      "seeds": [
+       {
+        "seed": 0,
+        "text": "The Eiffel Tower was 1989 - 1889 = 100 years old.",
+        "tokens": 25,
+        "prompt_tokens": 91,
+        "seconds": 2.87,
+        "finish": "stop"
+       },
+       {
+        "seed": 1,
+        "text": "The Eiffel Tower was 1989 minus 20 years, which is 1799.",
+        "tokens": 25,
+        "prompt_tokens": 91,
+        "seconds": 3.06,
+        "finish": "stop"
+       },
+       {
+        "seed": 2,
+        "text": "The Eiffel Tower was 20 years old in 1989.",
+        "tokens": 18,
+        "prompt_tokens": 91,
+        "seconds": 2.27,
+        "finish": "stop"
+       },
+       {
+        "seed": 3,
+        "text": "The Eiffel Tower was 1989 - 1889 = 100 years old.",
+        "tokens": 25,
+        "prompt_tokens": 91,
+        "seconds": 2.61,
+        "finish": "stop"
+       }
+      ]
+     },
+     {
+      "prompt_sha256": "eb849f5d5a8dd6c603bc6fe8580c21eeeb733700a65ac2ff399ab19aa89a1f51",
+      "seeds": [
+       {
+        "seed": 0,
+        "text": "The Eiffel Tower was 40 years old in 1989.",
+        "tokens": 18,
+        "prompt_tokens": 110,
+        "seconds": 2.38,
+        "finish": "stop"
+       },
+       {
+        "seed": 1,
+        "text": "The Eiffel Tower was 40 years old in 1989.",
+        "tokens": 18,
+        "prompt_tokens": 110,
+        "seconds": 2.29,
+        "finish": "stop"
+       },
+       {
+        "seed": 2,
+        "text": "The Eiffel Tower was 39 years old in 1989.",
+        "tokens": 18,
+        "prompt_tokens": 110,
+        "seconds": 2.24,
+        "finish": "stop"
+       },
+       {
+        "seed": 3,
+        "text": "The Eiffel Tower was 40 years old in 1989.",
+        "tokens": 18,
+        "prompt_tokens": 110,
+        "seconds": 2.0,
+        "finish": "stop"
+       }
+      ]
+     },
+     {
+      "prompt_sha256": "5e11f286aafc81900bcf19e3f5155e7873608f3f07a9f4cb975340838bd4c736",
+      "seeds": [
+       {
+        "seed": 0,
+        "text": "The Eiffel Tower was 1989 when it was 1989 years old.",
+        "tokens": 22,
+        "prompt_tokens": 86,
+        "seconds": 2.78,
+        "finish": "stop"
+       },
+       {
+        "seed": 1,
+        "text": "The Eiffel Tower was 1989 - 1900 = 89 years old.",
+        "tokens": 24,
+        "prompt_tokens": 86,
+        "seconds": 2.69,
+        "finish": "stop"
+       },
+       {
+        "seed": 2,
+        "text": "The Eiffel Tower was 1989 when it was 1989 years old.",
+        "tokens": 22,
+        "prompt_tokens": 86,
+        "seconds": 2.73,
+        "finish": "stop"
+       },
+       {
+        "seed": 3,
+        "text": "The Eiffel Tower was 1989 when it was 1989 years old.",
+        "tokens": 22,
+        "prompt_tokens": 86,
+        "seconds": 2.09,
+        "finish": "stop"
+       }
+      ]
+     },
+     {
+      "prompt_sha256": "1a286497b95812a3d05f6a1e45d6df43368d372c5eae28c248893abd3ab62470",
+      "seeds": [
+       {
+        "seed": 0,
+        "text": "The Eiffel Tower was 40 years old in 1989.",
+        "tokens": 18,
+        "prompt_tokens": 100,
+        "seconds": 2.86,
+        "finish": "stop"
+       },
+       {
+        "seed": 1,
+        "text": "The Eiffel Tower was 40 years old in 1989.",
+        "tokens": 18,
+        "prompt_tokens": 100,
+        "seconds": 2.47,
+        "finish": "stop"
+       },
+       {
+        "seed": 2,
+        "text": "The Eiffel Tower was 30 years old in 1989.",
+        "tokens": 18,
+        "prompt_tokens": 100,
+        "seconds": 2.15,
+        "finish": "stop"
+       },
+       {
+        "seed": 3,
+        "text": "The Eiffel Tower was 40 years old in 1989.",
+        "tokens": 18,
+        "prompt_tokens": 100,
+        "seconds": 1.89,
+        "finish": "stop"
+       }
+      ]
+     }
+    ]
+   },
+   {
+    "closed": {
+     "prompt_sha256": "a969ba4e81c1d2334d37dac1a9a1aed1b49f1b90b63bff2bb00d1f8861763a37",
+     "seeds": [
+      {
+       "seed": 0,
+       "text": "The town library closes on Saturday at 3:00 PM.",
+       "tokens": 14,
+       "prompt_tokens": 31,
+       "seconds": 2.42,
+       "finish": "stop"
+      },
+      {
+       "seed": 1,
+       "text": "The town library closes on Saturday at 3:00 PM.",
+       "tokens": 14,
+       "prompt_tokens": 31,
+       "seconds": 1.68,
+       "finish": "stop"
+      },
+      {
+       "seed": 2,
+       "text": "The town library closes on Saturday at 4:00 PM.",
+       "tokens": 14,
+       "prompt_tokens": 31,
+       "seconds": 1.59,
+       "finish": "stop"
+      },
+      {
+       "seed": 3,
+       "text": "The town library closes on Saturday at 3:00 PM.",
+       "tokens": 14,
+       "prompt_tokens": 31,
+       "seconds": 1.69,
+       "finish": "stop"
+      }
+     ]
+    },
+    "texts": [
+     {
+      "prompt_sha256": "6ead498f4df71f4e97260fa937b90e17b0d098bd9bfcb0ebef7b02079544bffa",
+      "seeds": [
+       {
+        "seed": 0,
+        "text": "The text provided does not include any information about the town library closing on Saturday.",
+        "tokens": 16,
+        "prompt_tokens": 69,
+        "seconds": 2.7,
+        "finish": "stop"
+       },
+       {
+        "seed": 1,
+        "text": "The text does not provide information about when the town library closes.",
+        "tokens": 13,
+        "prompt_tokens": 69,
+        "seconds": 1.54,
+        "finish": "stop"
+       },
+       {
+        "seed": 2,
+        "text": "The text provided does not include any information about when the town library closes on Saturday.",
+        "tokens": 17,
+        "prompt_tokens": 69,
+        "seconds": 1.97,
+        "finish": "stop"
+       },
+       {
+        "seed": 3,
+        "text": "The text does not provide information about when the town library closes.",
+        "tokens": 13,
+        "prompt_tokens": 69,
+        "seconds": 1.39,
+        "finish": "stop"
+       }
+      ]
+     },
+     {
+      "prompt_sha256": "6bc8c9cea8d1c2cd8ac31196e17ccc147e1edc69d937a99c576aa252025dfbab",
+      "seeds": [
+       {
+        "seed": 0,
+        "text": "The town library closes on Saturday.",
+        "tokens": 7,
+        "prompt_tokens": 82,
+        "seconds": 1.3,
+        "finish": "stop"
+       },
+       {
+        "seed": 1,
+        "text": "The town library closes on Saturday.",
+        "tokens": 7,
+        "prompt_tokens": 82,
+        "seconds": 1.05,
+        "finish": "stop"
+       },
+       {
+        "seed": 2,
+        "text": "The town library closes on Saturday.",
+        "tokens": 7,
+        "prompt_tokens": 82,
+        "seconds": 0.99,
+        "finish": "stop"
+       },
+       {
+        "seed": 3,
+        "text": "The town library closes on Saturday.",
+        "tokens": 7,
+        "prompt_tokens": 82,
+        "seconds": 0.83,
+        "finish": "stop"
+       }
+      ]
+     },
+     {
+      "prompt_sha256": "fe058c90c43c0c9dc8eb64bb90e50bbe108e09ea105d5f6943eeca823d41be53",
+      "seeds": [
+       {
+        "seed": 0,
+        "text": "The town library closes on Saturday.",
+        "tokens": 7,
+        "prompt_tokens": 85,
+        "seconds": 1.25,
+        "finish": "stop"
+       },
+       {
+        "seed": 1,
+        "text": "The town library closes on Saturday.",
+        "tokens": 7,
+        "prompt_tokens": 85,
+        "seconds": 1.34,
+        "finish": "stop"
+       },
+       {
+        "seed": 2,
+        "text": "The town library closes on Saturday.",
+        "tokens": 7,
+        "prompt_tokens": 85,
+        "seconds": 1.07,
+        "finish": "stop"
+       },
+       {
+        "seed": 3,
+        "text": "The town library closes on Saturday.",
+        "tokens": 7,
+        "prompt_tokens": 85,
+        "seconds": 0.84,
+        "finish": "stop"
+       }
+      ]
+     },
+     {
+      "prompt_sha256": "d224be1ef1307d4c0be245d75886534f5add8e9f2c8fe33cebaddbaf4a9cbdeb",
+      "seeds": [
+       {
+        "seed": 0,
+        "text": "On Saturday, the town library closes at 14:30.",
+        "tokens": 15,
+        "prompt_tokens": 104,
+        "seconds": 2.2,
+        "finish": "stop"
+       },
+       {
+        "seed": 1,
+        "text": "The town library closes on Saturday at 14:30.",
+        "tokens": 14,
+        "prompt_tokens": 104,
+        "seconds": 2.05,
+        "finish": "stop"
+       },
+       {
+        "seed": 2,
+        "text": "On Saturday, the town library closes at 14:30.",
+        "tokens": 15,
+        "prompt_tokens": 104,
+        "seconds": 1.87,
+        "finish": "stop"
+       },
+       {
+        "seed": 3,
+        "text": "The town library closes at 14:30 on Saturday.",
+        "tokens": 14,
+        "prompt_tokens": 104,
+        "seconds": 1.7,
+        "finish": "stop"
+       }
+      ]
+     },
+     {
+      "prompt_sha256": "771cfbb446d6f061b7a95dcbfb2c6f526cf68e7b46b94849c234a7aa5473c0cc",
+      "seeds": [
+       {
+        "seed": 0,
+        "text": "The town library closes on Saturday.",
+        "tokens": 7,
+        "prompt_tokens": 80,
+        "seconds": 1.16,
+        "finish": "stop"
+       },
+       {
+        "seed": 1,
+        "text": "The town library closes on Saturday.",
+        "tokens": 7,
+        "prompt_tokens": 80,
+        "seconds": 1.21,
+        "finish": "stop"
+       },
+       {
+        "seed": 2,
+        "text": "The town library closes on Saturday.",
+        "tokens": 7,
+        "prompt_tokens": 80,
+        "seconds": 1.08,
+        "finish": "stop"
+       },
+       {
+        "seed": 3,
+        "text": "The town library closes on Saturday.",
+        "tokens": 7,
+        "prompt_tokens": 80,
+        "seconds": 0.97,
+        "finish": "stop"
+       }
+      ]
+     },
+     {
+      "prompt_sha256": "ecd147510469f5284dab9bf39b8cd50db001f3a30efa07a9ba4c041550836aca",
+      "seeds": [
+       {
+        "seed": 0,
+        "text": "The town library closes on 15 September.",
+        "tokens": 10,
+        "prompt_tokens": 94,
+        "seconds": 1.59,
+        "finish": "stop"
+       },
+       {
+        "seed": 1,
+        "text": "The town library closes on 15 September.",
+        "tokens": 10,
+        "prompt_tokens": 94,
+        "seconds": 1.43,
+        "finish": "stop"
+       },
+       {
+        "seed": 2,
+        "text": "The town library closes on 15 September.",
+        "tokens": 10,
+        "prompt_tokens": 94,
+        "seconds": 1.45,
+        "finish": "stop"
+       },
+       {
+        "seed": 3,
+        "text": "The town library closes on 15 September.",
+        "tokens": 10,
+        "prompt_tokens": 94,
+        "seconds": 1.42,
+        "finish": "stop"
+       }
+      ]
+     }
+    ]
+   },
+   {
+    "closed": {
+     "prompt_sha256": "c37af6efe58cf65e3fc5d1b9b3835670f71d0c12ed2cd27fa9d63223ba7e1840",
+     "seeds": [
+      {
+       "seed": 0,
+       "text": "The town library is closed on the first of January.",
+       "tokens": 11,
+       "prompt_tokens": 31,
+       "seconds": 1.41,
+       "finish": "stop"
+      },
+      {
+       "seed": 1,
+       "text": "The town library is closed on the first of January.",
+       "tokens": 11,
+       "prompt_tokens": 31,
+       "seconds": 1.6,
+       "finish": "stop"
+      },
+      {
+       "seed": 2,
+       "text": "The town library is closed on the 10th of every month.",
+       "tokens": 15,
+       "prompt_tokens": 31,
+       "seconds": 1.79,
+       "finish": "stop"
+      },
+      {
+       "seed": 3,
+       "text": "The town library is closed on the first day of the month.",
+       "tokens": 13,
+       "prompt_tokens": 31,
+       "seconds": 1.56,
+       "finish": "stop"
+      }
+     ]
+    },
+    "texts": [
+     {
+      "prompt_sha256": "e503f28d9748d30a24d993e90a47e97c2fe914264724ce63ec8c7cbbcf368d7d",
+      "seeds": [
+       {
+        "seed": 0,
+        "text": "The text provided does not mention anything about the town library's closure.",
+        "tokens": 14,
+        "prompt_tokens": 69,
+        "seconds": 1.8,
+        "finish": "stop"
+       },
+       {
+        "seed": 1,
+        "text": "The text does not provide information about the day the town library is closed.",
+        "tokens": 15,
+        "prompt_tokens": 69,
+        "seconds": 1.96,
+        "finish": "stop"
+       },
+       {
+        "seed": 2,
+        "text": "The text provided does not mention anything about the town library's closure.",
+        "tokens": 14,
+        "prompt_tokens": 69,
+        "seconds": 1.75,
+        "finish": "stop"
+       },
+       {
+        "seed": 3,
+        "text": "The text does not provide information about the day the town library is closed.",
+        "tokens": 15,
+        "prompt_tokens": 69,
+        "seconds": 1.72,
+        "finish": "stop"
+       }
+      ]
+     },
+     {
+      "prompt_sha256": "ffd59c0198c9dad23243dfd9c2e8d94e498a467546e3fd9d424c3f6bb859a61c",
+      "seeds": [
+       {
+        "seed": 0,
+        "text": "Mercury is the planet closest to the Sun. A year on Mercury lasts 88 days, but a single day there, from one sunrise to the next, lasts 176 Earth days.",
+        "tokens": 41,
+        "prompt_tokens": 82,
+        "seconds": 4.57,
+        "finish": "stop"
+       },
+       {
+        "seed": 1,
+        "text": "The text does not provide information about the town library's closing day.",
+        "tokens": 14,
+        "prompt_tokens": 82,
+        "seconds": 1.79,
+        "finish": "stop"
+       },
+       {
+        "seed": 2,
+        "text": "Mercury is the planet closest to the Sun, and a year on Mercury lasts 88 days.",
+        "tokens": 21,
+        "prompt_tokens": 82,
+        "seconds": 2.37,
+        "finish": "stop"
+       },
+       {
+        "seed": 3,
+        "text": "The town library is closed on a single day there, which lasts 176 Earth days.",
+        "tokens": 20,
+        "prompt_tokens": 82,
+        "seconds": 2.29,
+        "finish": "stop"
+       }
+      ]
+     },
+     {
+      "prompt_sha256": "3a9dd52554e8f7acfc5d86cb98fbd1ec0de7be6e053a97ffb538aba31e5832a2",
+      "seeds": [
+       {
+        "seed": 0,
+        "text": "The town library is closed on the day of its opening.",
+        "tokens": 12,
+        "prompt_tokens": 85,
+        "seconds": 1.57,
+        "finish": "stop"
+       },
+       {
+        "seed": 1,
+        "text": "The town library is closed on the day of the world's fair.",
+        "tokens": 14,
+        "prompt_tokens": 85,
+        "seconds": 1.78,
+        "finish": "stop"
+       },
+       {
+        "seed": 2,
+        "text": "The town library is closed on the last day of the library's term.",
+        "tokens": 15,
+        "prompt_tokens": 85,
+        "seconds": 1.74,
+        "finish": "stop"
+       },
+       {
+        "seed": 3,
+        "text": "The text does not mention the town library's closure date.",
+        "tokens": 12,
+        "prompt_tokens": 85,
+        "seconds": 1.45,
+        "finish": "stop"
+       }
+      ]
+     },
+     {
+      "prompt_sha256": "c0d27fad39064e4b7d94d548a445b2a670ba8cf754980005fec12a6c8b040835",
+      "seeds": [
+       {
+        "seed": 0,
+        "text": "On weekdays, the town library is open from 9:00 to 18:00, and on weekends, it is closed except for Saturday from 10:00 to 14:30.",
+        "tokens": 47,
+        "prompt_tokens": 104,
+        "seconds": 5.23,
+        "finish": "stop"
+       },
+       {
+        "seed": 1,
+        "text": "The town library is closed on weekends.",
+        "tokens": 8,
+        "prompt_tokens": 104,
+        "seconds": 1.06,
+        "finish": "stop"
+       },
+       {
+        "seed": 2,
+        "text": "On weekdays, the town library is open from 9:00 to 18:00, but on weekends, it closes at 14:30 on Saturday and stays closed on Sunday.",
+        "tokens": 43,
+        "prompt_tokens": 104,
+        "seconds": 4.51,
+        "finish": "stop"
+       },
+       {
+        "seed": 3,
+        "text": "The town library is closed on weekends.",
+        "tokens": 8,
+        "prompt_tokens": 104,
+        "seconds": 1.15,
+        "finish": "stop"
+       }
+      ]
+     },
+     {
+      "prompt_sha256": "7805305c59fd8085183fb7da3da7eddc318a2d27edf7cce76f5b0e10bf40e695",
+      "seeds": [
+       {
+        "seed": 0,
+        "text": "The town library is closed on the first Saturday of every month.",
+        "tokens": 13,
+        "prompt_tokens": 80,
+        "seconds": 1.67,
+        "finish": "stop"
+       },
+       {
+        "seed": 1,
+        "text": "The town library is closed on the first Saturday of every month.",
+        "tokens": 13,
+        "prompt_tokens": 80,
+        "seconds": 1.6,
+        "finish": "stop"
+       },
+       {
+        "seed": 2,
+        "text": "The town library is closed on the first Saturday of every month.",
+        "tokens": 13,
+        "prompt_tokens": 80,
+        "seconds": 1.58,
+        "finish": "stop"
+       },
+       {
+        "seed": 3,
+        "text": "The town library is closed on the first Saturday of every month.",
+        "tokens": 13,
+        "prompt_tokens": 80,
+        "seconds": 1.39,
+        "finish": "stop"
+       }
+      ]
+     },
+     {
+      "prompt_sha256": "62efca46f38d36c82750ab4ef9c19f29b5a253feee723d704fb51269469248e4",
+      "seeds": [
+       {
+        "seed": 0,
+        "text": "The town library closes on 15 September.",
+        "tokens": 10,
+        "prompt_tokens": 94,
+        "seconds": 1.91,
+        "finish": "stop"
+       },
+       {
+        "seed": 1,
+        "text": "The town library is closed on 15 September.",
+        "tokens": 11,
+        "prompt_tokens": 94,
+        "seconds": 1.44,
+        "finish": "stop"
+       },
+       {
+        "seed": 2,
+        "text": "The town library closes on 15 September.",
+        "tokens": 10,
+        "prompt_tokens": 94,
+        "seconds": 1.28,
+        "finish": "stop"
+       },
+       {
+        "seed": 3,
+        "text": "The town library is closed on 15 September.",
+        "tokens": 11,
+        "prompt_tokens": 94,
+        "seconds": 1.34,
+        "finish": "stop"
+       }
+      ]
+     }
+    ]
+   },
+   {
+    "closed": {
+     "prompt_sha256": "8f41c16ba6e204842e694cc9fb6aa163d1f8ce8e64dd8b24ea4054f8dd890b90",
+     "seeds": [
+      {
+       "seed": 0,
+       "text": "A cup of coffee at the repair café costs $3.50.",
+       "tokens": 15,
+       "prompt_tokens": 35,
+       "seconds": 2.52,
+       "finish": "stop"
+      },
+      {
+       "seed": 1,
+       "text": "A cup of coffee at the repair café costs $3.50.",
+       "tokens": 15,
+       "prompt_tokens": 35,
+       "seconds": 1.95,
+       "finish": "stop"
+      },
+      {
+       "seed": 2,
+       "text": "A cup of coffee at the repair café costs $5.",
+       "tokens": 12,
+       "prompt_tokens": 35,
+       "seconds": 1.32,
+       "finish": "stop"
+      },
+      {
+       "seed": 3,
+       "text": "A cup of coffee costs $3.50 at the repair café.",
+       "tokens": 15,
+       "prompt_tokens": 35,
+       "seconds": 1.66,
+       "finish": "stop"
+      }
+     ]
+    },
+    "texts": [
+     {
+      "prompt_sha256": "09d03bafe249839cba97e2c4ad41c01f1b751713495eafc8d066354805f31b08",
+      "seeds": [
+       {
+        "seed": 0,
+        "text": "A cup of coffee costs $5 at the repair café.",
+        "tokens": 12,
+        "prompt_tokens": 73,
+        "seconds": 2.12,
+        "finish": "stop"
+       },
+       {
+        "seed": 1,
+        "text": "The text does not provide information about the cost of a cup of coffee at the repair café.",
+        "tokens": 19,
+        "prompt_tokens": 73,
+        "seconds": 1.98,
+        "finish": "stop"
+       },
+       {
+        "seed": 2,
+        "text": "A cup of coffee costs $2.50 at the repair café.",
+        "tokens": 15,
+        "prompt_tokens": 73,
+        "seconds": 1.66,
+        "finish": "stop"
+       },
+       {
+        "seed": 3,
+        "text": "The text does not provide information about the cost of a cup of coffee at a repair café.",
+        "tokens": 19,
+        "prompt_tokens": 73,
+        "seconds": 2.07,
+        "finish": "stop"
+       }
+      ]
+     },
+     {
+      "prompt_sha256": "8b64c81bc3d2c61c1c0eb9e739c2225d19f2aa3e3255060b109144372191a1f1",
+      "seeds": [
+       {
+        "seed": 0,
+        "text": "The text does not provide information about the cost of a cup of coffee at a repair café.",
+        "tokens": 19,
+        "prompt_tokens": 86,
+        "seconds": 2.62,
+        "finish": "stop"
+       },
+       {
+        "seed": 1,
+        "text": "The text provided does not mention anything about the cost of coffee at a repair café.",
+        "tokens": 17,
+        "prompt_tokens": 86,
+        "seconds": 1.95,
+        "finish": "stop"
+       },
+       {
+        "seed": 2,
+        "text": "Mercury is the planet closest to the Sun. A year on Mercury lasts 88 days, but a single day there, from one sunrise to the next, lasts 176 Earth days.",
+        "tokens": 41,
+        "prompt_tokens": 86,
+        "seconds": 4.06,
+        "finish": "stop"
+       },
+       {
+        "seed": 3,
+        "text": "The text provided does not contain any information about the cost of a cup of coffee at a repair café.",
+        "tokens": 21,
+        "prompt_tokens": 86,
+        "seconds": 2.21,
+        "finish": "stop"
+       }
+      ]
+     },
+     {
+      "prompt_sha256": "0ef8f81efef3de55c8f4cf80b8e07513b7085f63f7afcb1c52df63b1f3525781",
+      "seeds": [
+       {
+        "seed": 0,
+        "text": "The text does not provide information about the cost of a cup of coffee at the repair café.",
+        "tokens": 19,
+        "prompt_tokens": 89,
+        "seconds": 2.75,
+        "finish": "stop"
+       },
+       {
+        "seed": 1,
+        "text": "The text does not provide information about the cost of a cup of coffee at the repair café.",
+        "tokens": 19,
+        "prompt_tokens": 89,
+        "seconds": 2.38,
+        "finish": "stop"
+       },
+       {
+        "seed": 2,
+        "text": "The text does not provide information about the cost of a cup of coffee at the repair café.",
+        "tokens": 19,
+        "prompt_tokens": 89,
+        "seconds": 2.39,
+        "finish": "stop"
+       },
+       {
+        "seed": 3,
+        "text": "The text does not provide information about the cost of a cup of coffee at the repair café.",
+        "tokens": 19,
+        "prompt_tokens": 89,
+        "seconds": 2.17,
+        "finish": "stop"
+       }
+      ]
+     },
+     {
+      "prompt_sha256": "af849b46f37c9b589a8ad0b191305f2e516e1a0895cd4569b59ed4df0316a10a",
+      "seeds": [
+       {
+        "seed": 0,
+        "text": "A cup of coffee costs €3 at the repair café.",
+        "tokens": 12,
+        "prompt_tokens": 108,
+        "seconds": 1.71,
+        "finish": "stop"
+       },
+       {
+        "seed": 1,
+        "text": "A cup of coffee costs €3 at the repair café.",
+        "tokens": 12,
+        "prompt_tokens": 108,
+        "seconds": 1.74,
+        "finish": "stop"
+       },
+       {
+        "seed": 2,
+        "text": "A cup of coffee costs €3 at the repair café.",
+        "tokens": 12,
+        "prompt_tokens": 108,
+        "seconds": 1.88,
+        "finish": "stop"
+       },
+       {
+        "seed": 3,
+        "text": "A cup of coffee costs €3 at the repair café.",
+        "tokens": 12,
+        "prompt_tokens": 108,
+        "seconds": 1.61,
+        "finish": "stop"
+       }
+      ]
+     },
+     {
+      "prompt_sha256": "ca7aa20f094466f1cac520e1e19700eb5dc12954601f1aa0d91a90d520f3a234",
+      "seeds": [
+       {
+        "seed": 0,
+        "text": "A cup of coffee costs €0.80 at the repair café.",
+        "tokens": 15,
+        "prompt_tokens": 84,
+        "seconds": 2.36,
+        "finish": "stop"
+       },
+       {
+        "seed": 1,
+        "text": "A cup of coffee costs €0.80 at the repair café.",
+        "tokens": 15,
+        "prompt_tokens": 84,
+        "seconds": 2.02,
+        "finish": "stop"
+       },
+       {
+        "seed": 2,
+        "text": "A cup of coffee costs €0.80 at the repair café.",
+        "tokens": 15,
+        "prompt_tokens": 84,
+        "seconds": 1.85,
+        "finish": "stop"
+       },
+       {
+        "seed": 3,
+        "text": "A cup of coffee costs €0.80 at the repair café.",
+        "tokens": 15,
+        "prompt_tokens": 84,
+        "seconds": 1.61,
+        "finish": "stop"
+       }
+      ]
+     },
+     {
+      "prompt_sha256": "9281422bfe3950d400e849c74a83c4937a70b86d3e7988399398015bff2c7cd3",
+      "seeds": [
+       {
+        "seed": 0,
+        "text": "The text does not provide information about the cost of a cup of coffee at the repair café.",
+        "tokens": 19,
+        "prompt_tokens": 98,
+        "seconds": 2.18,
+        "finish": "stop"
+       },
+       {
+        "seed": 1,
+        "text": "A cup of coffee costs €4.50.",
+        "tokens": 11,
+        "prompt_tokens": 98,
+        "seconds": 1.53,
+        "finish": "stop"
+       },
+       {
+        "seed": 2,
+        "text": "The text does not provide information about the cost of a cup of coffee at the repair café.",
+        "tokens": 19,
+        "prompt_tokens": 98,
+        "seconds": 2.21,
+        "finish": "stop"
+       },
+       {
+        "seed": 3,
+        "text": "A cup of coffee costs €4.50 at the repair café.",
+        "tokens": 15,
+        "prompt_tokens": 98,
+        "seconds": 1.55,
+        "finish": "stop"
+       }
+      ]
+     }
+    ]
+   },
+   {
+    "closed": {
+     "prompt_sha256": "2d72ed227d294bdbd0ac2847ee71dfb8497b4693ab68ff605e27e08a7455de67",
+     "seeds": [
+      {
+       "seed": 0,
+       "text": "The repair café meets approximately 50 times a year.",
+       "tokens": 12,
+       "prompt_tokens": 33,
+       "seconds": 1.54,
+       "finish": "stop"
+      },
+      {
+       "seed": 1,
+       "text": "The repair café meets approximately once a year.",
+       "tokens": 9,
+       "prompt_tokens": 33,
+       "seconds": 1.2,
+       "finish": "stop"
+      },
+      {
+       "seed": 2,
+       "text": "The repair café meets approximately 100 times a year.",
+       "tokens": 13,
+       "prompt_tokens": 33,
+       "seconds": 1.57,
+       "finish": "stop"
+      },
+      {
+       "seed": 3,
+       "text": "The repair café meets approximately once a year.",
+       "tokens": 9,
+       "prompt_tokens": 33,
+       "seconds": 1.01,
+       "finish": "stop"
+      }
+     ]
+    },
+    "texts": [
+     {
+      "prompt_sha256": "471dea6316db105ff82f79f4318c817433cf01224b35dc6e409d6b088574e722",
+      "seeds": [
+       {
+        "seed": 0,
+        "text": "The repair café meets once a year.",
+        "tokens": 8,
+        "prompt_tokens": 71,
+        "seconds": 1.19,
+        "finish": "stop"
+       },
+       {
+        "seed": 1,
+        "text": "The repair café meets once a year.",
+        "tokens": 8,
+        "prompt_tokens": 71,
+        "seconds": 1.16,
+        "finish": "stop"
+       },
+       {
+        "seed": 2,
+        "text": "The repair café meets twice a year.",
+        "tokens": 8,
+        "prompt_tokens": 71,
+        "seconds": 1.08,
+        "finish": "stop"
+       },
+       {
+        "seed": 3,
+        "text": "The repair café meets at least once a year.",
+        "tokens": 10,
+        "prompt_tokens": 71,
+        "seconds": 1.12,
+        "finish": "stop"
+       }
+      ]
+     },
+     {
+      "prompt_sha256": "98b136588c384fd9130a92ee125c055660cdc7859c6ebd8c2133f6d5c4948296",
+      "seeds": [
+       {
+        "seed": 0,
+        "text": "Mercury is the planet closest to the Sun, so a year on Mercury lasts 88 days, but a single day there, from one sunrise to the next, lasts 176 Earth days.",
+        "tokens": 42,
+        "prompt_tokens": 84,
+        "seconds": 4.46,
+        "finish": "stop"
+       },
+       {
+        "seed": 1,
+        "text": "The repair café meets once a year.",
+        "tokens": 8,
+        "prompt_tokens": 84,
+        "seconds": 1.25,
+        "finish": "stop"
+       },
+       {
+        "seed": 2,
+        "text": "Mercury is the planet closest to the Sun. A year on Mercury lasts 88 days, but a single day there, from one sunrise to the next, lasts 176 Earth days.",
+        "tokens": 41,
+        "prompt_tokens": 84,
+        "seconds": 5.25,
+        "finish": "stop"
+       },
+       {
+        "seed": 3,
+        "text": "The repair café meets once a year.",
+        "tokens": 8,
+        "prompt_tokens": 84,
+        "seconds": 1.12,
+        "finish": "stop"
+       }
+      ]
+     },
+     {
+      "prompt_sha256": "e79dc8001dc7e14057fb7d0ad074199b401a9dcec06d7252b61a3f299ed1eb97",
+      "seeds": [
+       {
+        "seed": 0,
+        "text": "The repair café meets approximately once a year.",
+        "tokens": 9,
+        "prompt_tokens": 87,
+        "seconds": 1.24,
+        "finish": "stop"
+       },
+       {
+        "seed": 1,
+        "text": "The repair café meets approximately every year.",
+        "tokens": 8,
+        "prompt_tokens": 87,
+        "seconds": 1.13,
+        "finish": "stop"
+       },
+       {
+        "seed": 2,
+        "text": "The repair café meets approximately once a year.",
+        "tokens": 9,
+        "prompt_tokens": 87,
+        "seconds": 1.35,
+        "finish": "stop"
+       },
+       {
+        "seed": 3,
+        "text": "The repair café meets once a year.",
+        "tokens": 8,
+        "prompt_tokens": 87,
+        "seconds": 1.13,
+        "finish": "stop"
+       }
+      ]
+     },
+     {
+      "prompt_sha256": "14bf488a48a00ebd1dde5df6b724a0059e55b964a5fc8fe7c228483401294763",
+      "seeds": [
+       {
+        "seed": 0,
+        "text": "The repair café meets once a year.",
+        "tokens": 8,
+        "prompt_tokens": 106,
+        "seconds": 1.17,
+        "finish": "stop"
+       },
+       {
+        "seed": 1,
+        "text": "The repair café meets once a year.",
+        "tokens": 8,
+        "prompt_tokens": 106,
+        "seconds": 1.19,
+        "finish": "stop"
+       },
+       {
+        "seed": 2,
+        "text": "The repair café meets once a year.",
+        "tokens": 8,
+        "prompt_tokens": 106,
+        "seconds": 1.14,
+        "finish": "stop"
+       },
+       {
+        "seed": 3,
+        "text": "The repair café meets on weekdays and weekends as specified in the text.",
+        "tokens": 14,
+        "prompt_tokens": 106,
+        "seconds": 1.59,
+        "finish": "stop"
+       }
+      ]
+     },
+     {
+      "prompt_sha256": "c2a585839517a70d405363532ad675ed2c99ff94fd1a9b34bf12d15f481b9e7a",
+      "seeds": [
+       {
+        "seed": 0,
+        "text": "The repair café meets on the first Saturday of every month.",
+        "tokens": 12,
+        "prompt_tokens": 82,
+        "seconds": 1.71,
+        "finish": "stop"
+       },
+       {
+        "seed": 1,
+        "text": "The repair café meets on the first Saturday of every month.",
+        "tokens": 12,
+        "prompt_tokens": 82,
+        "seconds": 1.52,
+        "finish": "stop"
+       },
+       {
+        "seed": 2,
+        "text": "The repair café meets on the first Saturday of every month.",
+        "tokens": 12,
+        "prompt_tokens": 82,
+        "seconds": 1.52,
+        "finish": "stop"
+       },
+       {
+        "seed": 3,
+        "text": "The repair café meets on the first Saturday of every month.",
+        "tokens": 12,
+        "prompt_tokens": 82,
+        "seconds": 1.28,
+        "finish": "stop"
+       }
+      ]
+     },
+     {
+      "prompt_sha256": "999561cdd347bfd02bb78be8c8091a4513dc03b34ecaa6e5e710d3784d4a718e",
+      "seeds": [
+       {
+        "seed": 0,
+        "text": "The repair café meets once a year.",
+        "tokens": 8,
+        "prompt_tokens": 96,
+        "seconds": 1.24,
+        "finish": "stop"
+       },
+       {
+        "seed": 1,
+        "text": "The repair café meets once a year.",
+        "tokens": 8,
+        "prompt_tokens": 96,
+        "seconds": 1.23,
+        "finish": "stop"
+       },
+       {
+        "seed": 2,
+        "text": "The repair café meets once a year.",
+        "tokens": 8,
+        "prompt_tokens": 96,
+        "seconds": 1.14,
+        "finish": "stop"
+       },
+       {
+        "seed": 3,
+        "text": "The repair café meets approximately once a year.",
+        "tokens": 9,
+        "prompt_tokens": 96,
+        "seconds": 1.18,
+        "finish": "stop"
+       }
+      ]
+     }
+    ]
+   },
+   {
+    "closed": {
+     "prompt_sha256": "568f77da2ce7bc57774c712647192061faeae77a6ab2682060d0c4864098c30a",
+     "seeds": [
+      {
+       "seed": 0,
+       "text": "A day ticket for the outdoor pool costs $10.",
+       "tokens": 12,
+       "prompt_tokens": 33,
+       "seconds": 1.4,
+       "finish": "stop"
+      },
+      {
+       "seed": 1,
+       "text": "A day ticket for the outdoor pool costs $5.",
+       "tokens": 11,
+       "prompt_tokens": 33,
+       "seconds": 1.62,
+       "finish": "stop"
+      },
+      {
+       "seed": 2,
+       "text": "A day ticket for the outdoor pool costs $5.",
+       "tokens": 11,
+       "prompt_tokens": 33,
+       "seconds": 1.37,
+       "finish": "stop"
+      },
+      {
+       "seed": 3,
+       "text": "A day ticket for the outdoor pool costs $5.",
+       "tokens": 11,
+       "prompt_tokens": 33,
+       "seconds": 1.33,
+       "finish": "stop"
+      }
+     ]
+    },
+    "texts": [
+     {
+      "prompt_sha256": "a0b4844694610f24c27ae0d8e8df8dfe88ab29e610d20a5e04f30c6824621e1b",
+      "seeds": [
+       {
+        "seed": 0,
+        "text": "A day ticket for the outdoor pool costs $5.",
+        "tokens": 11,
+        "prompt_tokens": 71,
+        "seconds": 1.52,
+        "finish": "stop"
+       },
+       {
+        "seed": 1,
+        "text": "The text does not provide information about the price of a day ticket for an outdoor pool.",
+        "tokens": 18,
+        "prompt_tokens": 71,
+        "seconds": 1.95,
+        "finish": "stop"
+       },
+       {
+        "seed": 2,
+        "text": "A day ticket for the outdoor pool costs $10.",
+        "tokens": 12,
+        "prompt_tokens": 71,
+        "seconds": 1.65,
+        "finish": "stop"
+       },
+       {
+        "seed": 3,
+        "text": "The text does not provide information about the price of a day ticket for the outdoor pool.",
+        "tokens": 18,
+        "prompt_tokens": 71,
+        "seconds": 2.17,
+        "finish": "stop"
+       }
+      ]
+     },
+     {
+      "prompt_sha256": "3b4adfa1e1e5c5b7e5f3cb35d41f909e9d4a718fdcd5a445b3a5999bc644a28f",
+      "seeds": [
+       {
+        "seed": 0,
+        "text": "A day ticket for the outdoor pool costs 176 Earth days.",
+        "tokens": 15,
+        "prompt_tokens": 84,
+        "seconds": 1.84,
+        "finish": "stop"
+       },
+       {
+        "seed": 1,
+        "text": "A day ticket for the outdoor pool costs 176 Earth days.",
+        "tokens": 15,
+        "prompt_tokens": 84,
+        "seconds": 1.95,
+        "finish": "stop"
+       },
+       {
+        "seed": 2,
+        "text": "The text provided does not mention anything about the price of a day ticket for an outdoor pool.",
+        "tokens": 19,
+        "prompt_tokens": 84,
+        "seconds": 2.52,
+        "finish": "stop"
+       },
+       {
+        "seed": 3,
+        "text": "A day ticket for the outdoor pool costs 250 EUR.",
+        "tokens": 14,
+        "prompt_tokens": 84,
+        "seconds": 1.64,
+        "finish": "stop"
+       }
+      ]
+     },
+     {
+      "prompt_sha256": "6971a5090bd16dc22358ebf459b4d651ad2bf243f63b35ba24ca564581a3ab84",
+      "seeds": [
+       {
+        "seed": 0,
+        "text": "The Eiffel Tower in Paris was finished in 1889 for a world's fair. With its antennas it is about 330 meters tall. It was meant to stand for only twenty years.",
+        "tokens": 44,
+        "prompt_tokens": 87,
+        "seconds": 4.75,
+        "finish": "stop"
+       },
+       {
+        "seed": 1,
+        "text": "The Eiffel Tower in Paris was finished in 1889 for a world's fair. With its antennas it is about 330 meters tall. It was meant to stand for only twenty years.",
+        "tokens": 44,
+        "prompt_tokens": 87,
+        "seconds": 5.21,
+        "finish": "stop"
+       },
+       {
+        "seed": 2,
+        "text": "The Eiffel Tower in Paris was finished in 1889 for a world's fair. With its antennas it is about 330 meters tall. It was meant to stand for only twenty years.",
+        "tokens": 44,
+        "prompt_tokens": 87,
+        "seconds": 5.07,
+        "finish": "stop"
+       },
+       {
+        "seed": 3,
+        "text": "The Eiffel Tower in Paris was finished in 1889 for a world's fair. With its antennas it is about 330 meters tall. It was meant to stand for only twenty years.",
+        "tokens": 44,
+        "prompt_tokens": 87,
+        "seconds": 4.81,
+        "finish": "stop"
+       }
+      ]
+     },
+     {
+      "prompt_sha256": "c4afd448d8f1deb1655c37dfbd11455bebba07661bcad392a5ca92da5e0c17cb",
+      "seeds": [
+       {
+        "seed": 0,
+        "text": "A day ticket for the outdoor pool costs €3.",
+        "tokens": 11,
+        "prompt_tokens": 106,
+        "seconds": 1.48,
+        "finish": "stop"
+       },
+       {
+        "seed": 1,
+        "text": "A day ticket for the outdoor pool costs €3.",
+        "tokens": 11,
+        "prompt_tokens": 106,
+        "seconds": 1.47,
+        "finish": "stop"
+       },
+       {
+        "seed": 2,
+        "text": "A day ticket for the outdoor pool costs €3.",
+        "tokens": 11,
+        "prompt_tokens": 106,
+        "seconds": 1.68,
+        "finish": "stop"
+       },
+       {
+        "seed": 3,
+        "text": "A day ticket for the outdoor pool costs €3.",
+        "tokens": 11,
+        "prompt_tokens": 106,
+        "seconds": 1.49,
+        "finish": "stop"
+       }
+      ]
+     },
+     {
+      "prompt_sha256": "5568eb1afddcb41716234c6c56625dd57f28c6b734fe7bca2f46dc1372033f68",
+      "seeds": [
+       {
+        "seed": 0,
+        "text": "A day ticket for the outdoor pool costs €0.80.",
+        "tokens": 14,
+        "prompt_tokens": 82,
+        "seconds": 1.78,
+        "finish": "stop"
+       },
+       {
+        "seed": 1,
+        "text": "A day ticket for the outdoor pool costs €0.80.",
+        "tokens": 14,
+        "prompt_tokens": 82,
+        "seconds": 1.74,
+        "finish": "stop"
+       },
+       {
+        "seed": 2,
+        "text": "A day ticket for the outdoor pool costs €0.80.",
+        "tokens": 14,
+        "prompt_tokens": 82,
+        "seconds": 2.04,
+        "finish": "stop"
+       },
+       {
+        "seed": 3,
+        "text": "A day ticket for the outdoor pool costs €0.80.",
+        "tokens": 14,
+        "prompt_tokens": 82,
+        "seconds": 1.54,
+        "finish": "stop"
+       }
+      ]
+     },
+     {
+      "prompt_sha256": "a82cd9e0e0c941e388745fd87d19b66c69ab9fe3d653c84623128a0b7499d46a",
+      "seeds": [
+       {
+        "seed": 0,
+        "text": "A day ticket for the outdoor pool costs €4.50.",
+        "tokens": 14,
+        "prompt_tokens": 96,
+        "seconds": 1.82,
+        "finish": "stop"
+       },
+       {
+        "seed": 1,
+        "text": "A day ticket for the outdoor pool costs €4.50.",
+        "tokens": 14,
+        "prompt_tokens": 96,
+        "seconds": 1.95,
+        "finish": "stop"
+       },
+       {
+        "seed": 2,
+        "text": "A day ticket for the outdoor pool costs €4.50.",
+        "tokens": 14,
+        "prompt_tokens": 96,
+        "seconds": 1.7,
+        "finish": "stop"
+       },
+       {
+        "seed": 3,
+        "text": "A day ticket for the outdoor pool costs €4.50.",
+        "tokens": 14,
+        "prompt_tokens": 96,
+        "seconds": 1.74,
+        "finish": "stop"
+       }
+      ]
+     }
+    ]
+   },
+   {
+    "closed": {
+     "prompt_sha256": "03ff2172a95c5fd437f3840f7ba1d709657f00b3c115afbb1503918dd64feb0c",
+     "seeds": [
+      {
+       "seed": 0,
+       "text": "The pool is open for 12 months a year.",
+       "tokens": 12,
+       "prompt_tokens": 32,
+       "seconds": 1.47,
+       "finish": "stop"
+      },
+      {
+       "seed": 1,
+       "text": "The pool is open for 4 months a year.",
+       "tokens": 11,
+       "prompt_tokens": 32,
+       "seconds": 1.67,
+       "finish": "stop"
+      },
+      {
+       "seed": 2,
+       "text": "The pool is open for 30 months a year.",
+       "tokens": 12,
+       "prompt_tokens": 32,
+       "seconds": 1.53,
+       "finish": "stop"
+      },
+      {
+       "seed": 3,
+       "text": "The pool is open for 4 months a year.",
+       "tokens": 11,
+       "prompt_tokens": 32,
+       "seconds": 1.23,
+       "finish": "stop"
+      }
+     ]
+    },
+    "texts": [
+     {
+      "prompt_sha256": "4e2736ff3e56175c3a27fadf85e2009ae6c2dd21192a10f1ae60ede3a8a52188",
+      "seeds": [
+       {
+        "seed": 0,
+        "text": "The text provided does not mention anything about the number of months in a pool's operation.",
+        "tokens": 18,
+        "prompt_tokens": 70,
+        "seconds": 2.36,
+        "finish": "stop"
+       },
+       {
+        "seed": 1,
+        "text": "The text does not provide information about the number of months in a pool.",
+        "tokens": 15,
+        "prompt_tokens": 70,
+        "seconds": 2.0,
+        "finish": "stop"
+       },
+       {
+        "seed": 2,
+        "text": "The text provided does not mention anything about the pool's opening months.",
+        "tokens": 14,
+        "prompt_tokens": 70,
+        "seconds": 2.16,
+        "finish": "stop"
+       },
+       {
+        "seed": 3,
+        "text": "The text does not provide information about the number of months a pool is open.",
+        "tokens": 16,
+        "prompt_tokens": 70,
+        "seconds": 1.78,
+        "finish": "stop"
+       }
+      ]
+     },
+     {
+      "prompt_sha256": "cfbf3b40bfe44f25a832990a8e131de2382a8d7cd7cf3a7eb8b0804b3e9ef0e6",
+      "seeds": [
+       {
+        "seed": 0,
+        "text": "The text provides information about Mercury's year length and day length, but it does not mention anything about a pool's opening schedule.",
+        "tokens": 26,
+        "prompt_tokens": 83,
+        "seconds": 3.04,
+        "finish": "stop"
+       },
+       {
+        "seed": 1,
+        "text": "Mercury's year is 88 days, but a single day there lasts 176 Earth days, meaning the pool is open for 176 months.",
+        "tokens": 35,
+        "prompt_tokens": 83,
+        "seconds": 3.33,
+        "finish": "stop"
+       },
+       {
+        "seed": 2,
+        "text": "The text provides information about Mercury's distance from the Sun and its year length, but it does not mention anything about the pool's opening or closing times.",
+        "tokens": 31,
+        "prompt_tokens": 83,
+        "seconds": 3.76,
+        "finish": "stop"
+       },
+       {
+        "seed": 3,
+        "text": "Mercury's year is 88 days, so a single day there lasts 176 Earth days, which is roughly 176/88 ≈ 2 months.",
+        "tokens": 39,
+        "prompt_tokens": 83,
+        "seconds": 3.98,
+        "finish": "stop"
+       }
+      ]
+     },
+     {
+      "prompt_sha256": "d91bf9428e69d15a6ddeead2b6ce22cffa186fd2dd476571bfa9c3385be4c615",
+      "seeds": [
+       {
+        "seed": 0,
+        "text": "The pool is open for 12 months a year.",
+        "tokens": 12,
+        "prompt_tokens": 86,
+        "seconds": 1.78,
+        "finish": "stop"
+       },
+       {
+        "seed": 1,
+        "text": "The pool is open for about 12 months a year.",
+        "tokens": 13,
+        "prompt_tokens": 86,
+        "seconds": 1.66,
+        "finish": "stop"
+       },
+       {
+        "seed": 2,
+        "text": "The pool is open for 12 months a year.",
+        "tokens": 12,
+        "prompt_tokens": 86,
+        "seconds": 1.51,
+        "finish": "stop"
+       },
+       {
+        "seed": 3,
+        "text": "The pool is open for 24 months a year.",
+        "tokens": 12,
+        "prompt_tokens": 86,
+        "seconds": 1.52,
+        "finish": "stop"
+       }
+      ]
+     },
+     {
+      "prompt_sha256": "367f37600a97a910c55c49536f9c406042e495f8f29abdbee92581341a4c1044",
+      "seeds": [
+       {
+        "seed": 0,
+        "text": "The pool is open for 3 months a year.",
+        "tokens": 11,
+        "prompt_tokens": 105,
+        "seconds": 1.89,
+        "finish": "stop"
+       },
+       {
+        "seed": 1,
+        "text": "The pool is open for a few months a year.",
+        "tokens": 11,
+        "prompt_tokens": 105,
+        "seconds": 1.48,
+        "finish": "stop"
+       },
+       {
+        "seed": 2,
+        "text": "The pool is open for 10 days a year.",
+        "tokens": 12,
+        "prompt_tokens": 105,
+        "seconds": 1.67,
+        "finish": "stop"
+       },
+       {
+        "seed": 3,
+        "text": "The pool is open from 9:00 to 18:00 on weekdays, and closed on weekends, so it is open for a few months.",
+        "tokens": 34,
+        "prompt_tokens": 105,
+        "seconds": 3.53,
+        "finish": "stop"
+       }
+      ]
+     },
+     {
+      "prompt_sha256": "87a9f2b9bfa5da8badf16c63a8ae4ad8aba46d34ff353b09f6be2b52bebe4e2b",
+      "seeds": [
+       {
+        "seed": 0,
+        "text": "The pool is open for the first Saturday of every month.",
+        "tokens": 12,
+        "prompt_tokens": 81,
+        "seconds": 1.66,
+        "finish": "stop"
+       },
+       {
+        "seed": 1,
+        "text": "The pool is open for 12 months a year.",
+        "tokens": 12,
+        "prompt_tokens": 81,
+        "seconds": 1.33,
+        "finish": "stop"
+       },
+       {
+        "seed": 2,
+        "text": "The pool is open every month.",
+        "tokens": 7,
+        "prompt_tokens": 81,
+        "seconds": 1.05,
+        "finish": "stop"
+       },
+       {
+        "seed": 3,
+        "text": "The pool is open on the first Saturday of every month.",
+        "tokens": 12,
+        "prompt_tokens": 81,
+        "seconds": 1.44,
+        "finish": "stop"
+       }
+      ]
+     },
+     {
+      "prompt_sha256": "a49edb703d9852ea166052a9dcce2543880423c616cf9455fb2f52846dfba4fc",
+      "seeds": [
+       {
+        "seed": 0,
+        "text": "The pool is open for 15 months.",
+        "tokens": 10,
+        "prompt_tokens": 95,
+        "seconds": 1.3,
+        "finish": "stop"
+       },
+       {
+        "seed": 1,
+        "text": "The pool is open for 15 months.",
+        "tokens": 10,
+        "prompt_tokens": 95,
+        "seconds": 1.25,
+        "finish": "stop"
+       },
+       {
+        "seed": 2,
+        "text": "The pool is open for 10 months a year.",
+        "tokens": 12,
+        "prompt_tokens": 95,
+        "seconds": 1.57,
+        "finish": "stop"
+       },
+       {
+        "seed": 3,
+        "text": "The pool is open for 15 months.",
+        "tokens": 10,
+        "prompt_tokens": 95,
+        "seconds": 1.28,
+        "finish": "stop"
+       }
+      ]
+     }
+    ]
+   }
+  ],
+  "nl": [
+   {
+    "closed": {
+     "prompt_sha256": "6cb56d83893a62cbb3c416b115201789ad8bb62dc0d2d4630ad163c1ffe5e71d",
+     "seeds": [
+      {
+       "seed": 0,
+       "text": "Een spin heeft 6 poten.",
+       "tokens": 9,
+       "prompt_tokens": 38,
+       "seconds": 1.14,
+       "finish": "stop"
+      },
+      {
+       "seed": 1,
+       "text": "Een spin heeft 6 poten.",
+       "tokens": 9,
+       "prompt_tokens": 38,
+       "seconds": 1.07,
+       "finish": "stop"
+      },
+      {
+       "seed": 2,
+       "text": "Een spin heeft 6 poten.",
+       "tokens": 9,
+       "prompt_tokens": 38,
+       "seconds": 0.92,
+       "finish": "stop"
+      },
+      {
+       "seed": 3,
+       "text": "Een spin heeft een aantal poten, afhankelijk van de type.",
+       "tokens": 17,
+       "prompt_tokens": 38,
+       "seconds": 1.73,
+       "finish": "stop"
+      }
+     ]
+    },
+    "texts": [
+     {
+      "prompt_sha256": "b402ff886d4670e3acb36ced4490cc4e0ba656655543aec1b30b1fcc749825d9",
+      "seeds": [
+       {
+        "seed": 0,
+        "text": "Een spin heeft acht poten.",
+        "tokens": 9,
+        "prompt_tokens": 87,
+        "seconds": 1.21,
+        "finish": "stop"
+       },
+       {
+        "seed": 1,
+        "text": "Een spin heeft acht poten.",
+        "tokens": 9,
+        "prompt_tokens": 87,
+        "seconds": 1.03,
+        "finish": "stop"
+       },
+       {
+        "seed": 2,
+        "text": "Een spin heeft acht poten.",
+        "tokens": 9,
+        "prompt_tokens": 87,
+        "seconds": 1.08,
+        "finish": "stop"
+       },
+       {
+        "seed": 3,
+        "text": "Een spin heeft acht poten.",
+        "tokens": 9,
+        "prompt_tokens": 87,
+        "seconds": 1.07,
+        "finish": "stop"
+       }
+      ]
+     },
+     {
+      "prompt_sha256": "67164a633ea7ef8ea3016c51cac0dd15b48c531c4a0bd759622119c136b03631",
+      "seeds": [
+       {
+        "seed": 0,
+        "text": "Mercurius heeft geen poten.",
+        "tokens": 8,
+        "prompt_tokens": 111,
+        "seconds": 1.08,
+        "finish": "stop"
+       },
+       {
+        "seed": 1,
+        "text": "Het aantal poten van een spin is 1.",
+        "tokens": 11,
+        "prompt_tokens": 111,
+        "seconds": 1.19,
+        "finish": "stop"
+       },
+       {
+        "seed": 2,
+        "text": "Een spin heeft geen poten.",
+        "tokens": 8,
+        "prompt_tokens": 111,
+        "seconds": 0.94,
+        "finish": "stop"
+       },
+       {
+        "seed": 3,
+        "text": "Het aantal poten van een spin is 1.",
+        "tokens": 11,
+        "prompt_tokens": 111,
+        "seconds": 1.39,
+        "finish": "stop"
+       }
+      ]
+     },
+     {
+      "prompt_sha256": "705e26e191a7cb0e2b19575a0699c5772ca5b8f01031a6be8723191913a82b7f",
+      "seeds": [
+       {
+        "seed": 0,
+        "text": "Een spin heeft een poten.",
+        "tokens": 8,
+        "prompt_tokens": 116,
+        "seconds": 1.11,
+        "finish": "stop"
+       },
+       {
+        "seed": 1,
+        "text": "De spin heeft een poten van 20.",
+        "tokens": 11,
+        "prompt_tokens": 116,
+        "seconds": 1.2,
+        "finish": "stop"
+       },
+       {
+        "seed": 2,
+        "text": "Een spin heeft 2 poten.",
+        "tokens": 9,
+        "prompt_tokens": 116,
+        "seconds": 1.02,
+        "finish": "stop"
+       },
+       {
+        "seed": 3,
+        "text": "De spin heeft een aantal poten.",
+        "tokens": 8,
+        "prompt_tokens": 116,
+        "seconds": 0.95,
+        "finish": "stop"
+       }
+      ]
+     },
+     {
+      "prompt_sha256": "328cbb868f0d062e768c6da917e7455dcbd78c359e50ff06aac4be66bc5d8398",
+      "seeds": [
+       {
+        "seed": 0,
+        "text": "Een spin heeft 2 poten.",
+        "tokens": 9,
+        "prompt_tokens": 143,
+        "seconds": 1.32,
+        "finish": "stop"
+       },
+       {
+        "seed": 1,
+        "text": "Een spin heeft 4 poten.",
+        "tokens": 9,
+        "prompt_tokens": 143,
+        "seconds": 1.15,
+        "finish": "stop"
+       },
+       {
+        "seed": 2,
+        "text": "Een spin heeft 2 poten.",
+        "tokens": 9,
+        "prompt_tokens": 143,
+        "seconds": 1.22,
+        "finish": "stop"
+       },
+       {
+        "seed": 3,
+        "text": "Een spin heeft 4 poten.",
+        "tokens": 9,
+        "prompt_tokens": 143,
+        "seconds": 1.18,
+        "finish": "stop"
+       }
+      ]
+     },
+     {
+      "prompt_sha256": "859779fb5a83e1ca9a4f54e40a5afe7f299889dd7be91f41196bb97c940ea35c",
+      "seeds": [
+       {
+        "seed": 0,
+        "text": "Een spin heeft 2 poten.",
+        "tokens": 9,
+        "prompt_tokens": 109,
+        "seconds": 1.33,
+        "finish": "stop"
+       },
+       {
+        "seed": 1,
+        "text": "Een spin heeft 4 poten.",
+        "tokens": 9,
+        "prompt_tokens": 109,
+        "seconds": 1.02,
+        "finish": "stop"
+       },
+       {
+        "seed": 2,
+        "text": "Het spin heeft 2 poten.",
+        "tokens": 8,
+        "prompt_tokens": 109,
+        "seconds": 1.31,
+        "finish": "stop"
+       },
+       {
+        "seed": 3,
+        "text": "Een spin heeft 4 poten.",
+        "tokens": 9,
+        "prompt_tokens": 109,
+        "seconds": 1.07,
+        "finish": "stop"
+       }
+      ]
+     },
+     {
+      "prompt_sha256": "59dad1e5985ca4aba43ca16ace32d6f41709daf2d3427f78e930f74a37682217",
+      "seeds": [
+       {
+        "seed": 0,
+        "text": "Een spin heeft 8 poten.",
+        "tokens": 9,
+        "prompt_tokens": 123,
+        "seconds": 1.2,
+        "finish": "stop"
+       },
+       {
+        "seed": 1,
+        "text": "Een spin heeft 2 poten.",
+        "tokens": 9,
+        "prompt_tokens": 123,
+        "seconds": 1.27,
+        "finish": "stop"
+       },
+       {
+        "seed": 2,
+        "text": "Een spin heeft 8 poten.",
+        "tokens": 9,
+        "prompt_tokens": 123,
+        "seconds": 1.13,
+        "finish": "stop"
+       },
+       {
+        "seed": 3,
+        "text": "Een spin heeft 2 poten.",
+        "tokens": 9,
+        "prompt_tokens": 123,
+        "seconds": 1.36,
+        "finish": "stop"
+       }
+      ]
+     }
+    ]
+   },
+   {
+    "closed": {
+     "prompt_sha256": "e618ed8f82db2f94aedb96763dd734b87cdf74b1ea106a9e888acec43f468dd6",
+     "seeds": [
+      {
+       "seed": 0,
+       "text": "Een spin heeft meer poten dan een insect, omdat spinen hebben drie poten.",
+       "tokens": 20,
+       "prompt_tokens": 42,
+       "seconds": 2.03,
+       "finish": "stop"
+      },
+      {
+       "seed": 1,
+       "text": "Een spin heeft meer dan een insect.",
+       "tokens": 9,
+       "prompt_tokens": 42,
+       "seconds": 1.14,
+       "finish": "stop"
+      },
+      {
+       "seed": 2,
+       "text": "Een spin heeft meer poten dan een insect.",
+       "tokens": 11,
+       "prompt_tokens": 42,
+       "seconds": 1.19,
+       "finish": "stop"
+      },
+      {
+       "seed": 3,
+       "text": "Een spin heeft meer dan een insect.",
+       "tokens": 9,
+       "prompt_tokens": 42,
+       "seconds": 0.98,
+       "finish": "stop"
+      }
+     ]
+    },
+    "texts": [
+     {
+      "prompt_sha256": "471eb1a83f39a7c1b8d677e415c04265cdca62280cbc2d8563d34ee61434a450",
+      "seeds": [
+       {
+        "seed": 0,
+        "text": "Een spin heeft acht poten, en een insect heeft zes. Dus een spin heeft meer poten dan een insect.",
+        "tokens": 27,
+        "prompt_tokens": 91,
+        "seconds": 3.03,
+        "finish": "stop"
+       },
+       {
+        "seed": 1,
+        "text": "Een spin heeft acht poten, en een insect heeft zes. Het is meer dan een insect.",
+        "tokens": 22,
+        "prompt_tokens": 91,
+        "seconds": 2.15,
+        "finish": "stop"
+       },
+       {
+        "seed": 2,
+        "text": "De spin heeft acht poten, en een insect heeft zes. De spin heeft meer poten dan een insect.",
+        "tokens": 24,
+        "prompt_tokens": 91,
+        "seconds": 2.57,
+        "finish": "stop"
+       },
+       {
+        "seed": 3,
+        "text": "Een spin heeft acht poten, maar een insect heeft zes. Het is meer poten dan een insect.",
+        "tokens": 24,
+        "prompt_tokens": 91,
+        "seconds": 2.4,
+        "finish": "stop"
+       }
+      ]
+     },
+     {
+      "prompt_sha256": "bc94a084694ba6a14522ef39170367f58124eca8530f072414ea50adda5732f9",
+      "seeds": [
+       {
+        "seed": 0,
+        "text": "De spin heeft meer poten dan een insect.",
+        "tokens": 10,
+        "prompt_tokens": 115,
+        "seconds": 1.34,
+        "finish": "stop"
+       },
+       {
+        "seed": 1,
+        "text": "Het spin heeft meer poten dan een insect.",
+        "tokens": 10,
+        "prompt_tokens": 115,
+        "seconds": 1.33,
+        "finish": "stop"
+       },
+       {
+        "seed": 2,
+        "text": "Een spin heeft meer poten dan een insect.",
+        "tokens": 11,
+        "prompt_tokens": 115,
+        "seconds": 1.43,
+        "finish": "stop"
+       },
+       {
+        "seed": 3,
+        "text": "Het spin heeft meer poten dan een insect.",
+        "tokens": 10,
+        "prompt_tokens": 115,
+        "seconds": 1.25,
+        "finish": "stop"
+       }
+      ]
+     },
+     {
+      "prompt_sha256": "f0d422f22fac6f0672c59964a27d212ab0a785602e6d69d158cd579350265afa",
+      "seeds": [
+       {
+        "seed": 0,
+        "text": "De spin heeft meer dan een poten.",
+        "tokens": 9,
+        "prompt_tokens": 120,
+        "seconds": 1.36,
+        "finish": "stop"
+       },
+       {
+        "seed": 1,
+        "text": "De spin heeft meer dan een insect vele poten.",
+        "tokens": 12,
+        "prompt_tokens": 120,
+        "seconds": 1.54,
+        "finish": "stop"
+       },
+       {
+        "seed": 2,
+        "text": "Een spin heeft meer dan een insect een poten.",
+        "tokens": 12,
+        "prompt_tokens": 120,
+        "seconds": 1.44,
+        "finish": "stop"
+       },
+       {
+        "seed": 3,
+        "text": "De spin heeft meer dan een insect vele poten.",
+        "tokens": 12,
+        "prompt_tokens": 120,
+        "seconds": 1.24,
+        "finish": "stop"
+       }
+      ]
+     },
+     {
+      "prompt_sha256": "85450747a12a30daa10e7885bec9fe7ef11cedd9352de7da080c419717301bbc",
+      "seeds": [
+       {
+        "seed": 0,
+        "text": "Een spin heeft meer dan een insect 2 poten.",
+        "tokens": 13,
+        "prompt_tokens": 147,
+        "seconds": 1.82,
+        "finish": "stop"
+       },
+       {
+        "seed": 1,
+        "text": "Een spin heeft meer dan een insect 2 poten.",
+        "tokens": 13,
+        "prompt_tokens": 147,
+        "seconds": 1.58,
+        "finish": "stop"
+       },
+       {
+        "seed": 2,
+        "text": "Het spin heeft meer dan een insect 2 poten.",
+        "tokens": 12,
+        "prompt_tokens": 147,
+        "seconds": 1.39,
+        "finish": "stop"
+       },
+       {
+        "seed": 3,
+        "text": "Een spin heeft twee poten, en een insect heeft vijf poten. Het spin heeft twee poten, dus het spin heeft meer poten dan een insect.",
+        "tokens": 36,
+        "prompt_tokens": 147,
+        "seconds": 3.45,
+        "finish": "stop"
+       }
+      ]
+     },
+     {
+      "prompt_sha256": "ca7e0e4daa93659adbf734c460dce7238cfba30a623b97c02ef3ff526a47c090",
+      "seeds": [
+       {
+        "seed": 0,
+        "text": "Een spin heeft meer dan een insect 2 poten.",
+        "tokens": 13,
+        "prompt_tokens": 113,
+        "seconds": 1.87,
+        "finish": "stop"
+       },
+       {
+        "seed": 1,
+        "text": "Het spin heeft meer dan een insect 2 poten.",
+        "tokens": 12,
+        "prompt_tokens": 113,
+        "seconds": 1.55,
+        "finish": "stop"
+       },
+       {
+        "seed": 2,
+        "text": "Een spin heeft meer dan een insect 1 pot.",
+        "tokens": 12,
+        "prompt_tokens": 113,
+        "seconds": 1.18,
+        "finish": "stop"
+       },
+       {
+        "seed": 3,
+        "text": "Het spin heeft meer dan een insect 3 poten.",
+        "tokens": 12,
+        "prompt_tokens": 113,
+        "seconds": 1.25,
+        "finish": "stop"
+       }
+      ]
+     },
+     {
+      "prompt_sha256": "639f7b079aba666c2a0b5980da7d454cace02893efdd38f49ae3db5a8ae4cea4",
+      "seeds": [
+       {
+        "seed": 0,
+        "text": "Een spin heeft meer dan een insect 2 poten.",
+        "tokens": 13,
+        "prompt_tokens": 127,
+        "seconds": 1.79,
+        "finish": "stop"
+       },
+       {
+        "seed": 1,
+        "text": "Het spin heeft meer dan een insect vele poten.",
+        "tokens": 12,
+        "prompt_tokens": 127,
+        "seconds": 1.44,
+        "finish": "stop"
+       },
+       {
+        "seed": 2,
+        "text": "Een spin heeft meer dan een insect een poten.",
+        "tokens": 12,
+        "prompt_tokens": 127,
+        "seconds": 1.41,
+        "finish": "stop"
+       },
+       {
+        "seed": 3,
+        "text": "Het spin heeft meer dan een insect vele poten.",
+        "tokens": 12,
+        "prompt_tokens": 127,
+        "seconds": 1.35,
+        "finish": "stop"
+       }
+      ]
+     }
+    ]
+   },
+   {
+    "closed": {
+     "prompt_sha256": "1a5070c44c30e229dad95fbdeec5ee2662ec0e47f09a4785d118ccab318d520c",
+     "seeds": [
+      {
+       "seed": 0,
+       "text": "Een jaar op Mercurius duurt ongeveer 2,46 dagen.",
+       "tokens": 20,
+       "prompt_tokens": 40,
+       "seconds": 2.21,
+       "finish": "stop"
+      },
+      {
+       "seed": 1,
+       "text": "Een jaar op Mercurius duurt ongeveer 2,46 dagen.",
+       "tokens": 20,
+       "prompt_tokens": 40,
+       "seconds": 1.78,
+       "finish": "stop"
+      },
+      {
+       "seed": 2,
+       "text": "Een jaar op Mercurius duurt ongeveer 2,466 dagen.",
+       "tokens": 21,
+       "prompt_tokens": 40,
+       "seconds": 2.03,
+       "finish": "stop"
+      },
+      {
+       "seed": 3,
+       "text": "Een jaar op Mercurius duurt ongeveer 2,466 dagen.",
+       "tokens": 21,
+       "prompt_tokens": 40,
+       "seconds": 2.33,
+       "finish": "stop"
+      }
+     ]
+    },
+    "texts": [
+     {
+      "prompt_sha256": "05eb40b3340489cd8797cf37f612b990c56b890faea4ff5375d1d3a0b0518944",
+      "seeds": [
+       {
+        "seed": 0,
+        "text": "Een jaar op Mercurius duurt ongeveer 24 maanden.",
+        "tokens": 19,
+        "prompt_tokens": 89,
+        "seconds": 1.98,
+        "finish": "stop"
+       },
+       {
+        "seed": 1,
+        "text": "Een jaar op Mercurius duurt ongeveer 24 maan.",
+        "tokens": 19,
+        "prompt_tokens": 89,
+        "seconds": 2.04,
+        "finish": "stop"
+       },
+       {
+        "seed": 2,
+        "text": "Mercurius heeft een jaar van 24 maanden.",
+        "tokens": 13,
+        "prompt_tokens": 89,
+        "seconds": 1.31,
+        "finish": "stop"
+       },
+       {
+        "seed": 3,
+        "text": "Een jaar op Mercurius duurt ongeveer 24 maanden.",
+        "tokens": 19,
+        "prompt_tokens": 89,
+        "seconds": 2.25,
+        "finish": "stop"
+       }
+      ]
+     },
+     {
+      "prompt_sha256": "9a2b61ae44d2dc0892b4d3786d8d6671c8425573dad1a16a442e5746061187ac",
+      "seeds": [
+       {
+        "seed": 0,
+        "text": "Een jaar op Mercurius duurt 88 dagen.",
+        "tokens": 14,
+        "prompt_tokens": 113,
+        "seconds": 1.87,
+        "finish": "stop"
+       },
+       {
+        "seed": 1,
+        "text": "Een jaar op Mercurius duurt 88 dagen.",
+        "tokens": 14,
+        "prompt_tokens": 113,
+        "seconds": 1.5,
+        "finish": "stop"
+       },
+       {
+        "seed": 2,
+        "text": "Een jaar op Mercurius duurt 88 dagen.",
+        "tokens": 14,
+        "prompt_tokens": 113,
+        "seconds": 1.47,
+        "finish": "stop"
+       },
+       {
+        "seed": 3,
+        "text": "Een jaar op Mercurius duurt 88 dagen.",
+        "tokens": 14,
+        "prompt_tokens": 113,
+        "seconds": 1.63,
+        "finish": "stop"
+       }
+      ]
+     },
+     {
+      "prompt_sha256": "d1203e844dc044dbfccb124a4b54f7319199c942cbd328b7adf89de6d13362fc",
+      "seeds": [
+       {
+        "seed": 0,
+        "text": "Een jaar op Mercurius is ongeveer 24,6 dagen.",
+        "tokens": 19,
+        "prompt_tokens": 118,
+        "seconds": 2.28,
+        "finish": "stop"
+       },
+       {
+        "seed": 1,
+        "text": "De vraag is beantwoord met behulp van de tekst: \"De Eiffeltoren in Parijs was in 1889 klaar, voor een wereldtentoonstelling. Met de antennes erbij is de toren ongeveer 330",
+        "tokens": 60,
+        "prompt_tokens": 118,
+        "seconds": 6.28,
+        "finish": "length"
+       },
+       {
+        "seed": 2,
+        "text": "Een jaar op Mercurius is ongeveer 24,6 dagen.",
+        "tokens": 19,
+        "prompt_tokens": 118,
+        "seconds": 1.68,
+        "finish": "stop"
+       },
+       {
+        "seed": 3,
+        "text": "De vraag is in één korte zin beantwoord: \"Op Mercurius duurt een jaar op ongeveer 120 dagen.\"",
+        "tokens": 34,
+        "prompt_tokens": 118,
+        "seconds": 3.14,
+        "finish": "stop"
+       }
+      ]
+     },
+     {
+      "prompt_sha256": "70bf5a0a6ee6cd637a5eabd2e292254eb64c6982e15af31893813d3092f489fb",
+      "seeds": [
+       {
+        "seed": 0,
+        "text": "Het is ongeveer 12 maanden op Mercurius.",
+        "tokens": 16,
+        "prompt_tokens": 145,
+        "seconds": 1.87,
+        "finish": "stop"
+       },
+       {
+        "seed": 1,
+        "text": "De bibliotheek is op werkdagen open van 9.00 tot 18.00 uur, en op zaterdag en zondag is het gesloten. Een boek lenen is gratis, en een nieuwe pas kost € 3. De vra",
+        "tokens": 60,
+        "prompt_tokens": 145,
+        "seconds": 5.99,
+        "finish": "length"
+       },
+       {
+        "seed": 2,
+        "text": "Een jaar op Mercurius duurt 24 maanden.",
+        "tokens": 15,
+        "prompt_tokens": 145,
+        "seconds": 1.5,
+        "finish": "stop"
+       },
+       {
+        "seed": 3,
+        "text": "De bibliotheek is op werkdagen open van 9.00 tot 18.00 uur, en op zaterdag en zondag gesloten. Een boek lenen is gratis, en een nieuwe pas kost € 3. Het is duid",
+        "tokens": 60,
+        "prompt_tokens": 145,
+        "seconds": 5.39,
+        "finish": "length"
+       }
+      ]
+     },
+     {
+      "prompt_sha256": "761e2d7b887675c08b21a559e467e2d20e4576e5f0af7913d01fde960770ca84",
+      "seeds": [
+       {
+        "seed": 0,
+        "text": "Het is ongeveer 12 maanden op Mercurius.",
+        "tokens": 16,
+        "prompt_tokens": 111,
+        "seconds": 2.1,
+        "finish": "stop"
+       },
+       {
+        "seed": 1,
+        "text": "Het is een jaar op Mercurius ongeveer 12 maanden.",
+        "tokens": 18,
+        "prompt_tokens": 111,
+        "seconds": 2.4,
+        "finish": "stop"
+       },
+       {
+        "seed": 2,
+        "text": "Een jaar op Mercurius duurt een aantal weken.",
+        "tokens": 14,
+        "prompt_tokens": 111,
+        "seconds": 1.39,
+        "finish": "stop"
+       },
+       {
+        "seed": 3,
+        "text": "Het is een jaar op Mercurius ongeveer 365 dagen.",
+        "tokens": 18,
+        "prompt_tokens": 111,
+        "seconds": 1.82,
+        "finish": "stop"
+       }
+      ]
+     },
+     {
+      "prompt_sha256": "2206e9bf5d6722707f73a6e9f10a45c24025af4148439063c29cd5c868734da8",
+      "seeds": [
+       {
+        "seed": 0,
+        "text": "Het openluchtzwembad van het dorp is op 15 mei open en op 15 september dicht. Op warme dagen blijft het zwembad open tot 21.00 uur. Op Mercurius blijft het open langer dan op",
+        "tokens": 60,
+        "prompt_tokens": 125,
+        "seconds": 6.17,
+        "finish": "length"
+       },
+       {
+        "seed": 1,
+        "text": "Het openluchtzwembad van het dorp wordt op 15 mei en 15 september dicht, dus het is een jaar van 365 dagen.",
+        "tokens": 38,
+        "prompt_tokens": 125,
+        "seconds": 3.89,
+        "finish": "stop"
+       },
+       {
+        "seed": 2,
+        "text": "Het openluchtzwembad van het dorp is op 15 mei op 15 september dicht. Op warme dagen blijft het zwembad open tot 21:00 uur. Zoals op Mercurius is het jaar ongeveer",
+        "tokens": 60,
+        "prompt_tokens": 125,
+        "seconds": 5.65,
+        "finish": "length"
+       },
+       {
+        "seed": 3,
+        "text": "Het openluchtzwembad van het dorp is op 15 mei op 15 september dicht. Het is op warme dagen open tot 21.00 uur. Op Mercurius blijft het zwembad open tot 21.00",
+        "tokens": 60,
+        "prompt_tokens": 125,
+        "seconds": 5.51,
+        "finish": "length"
+       }
+      ]
+     }
+    ]
+   },
+   {
+    "closed": {
+     "prompt_sha256": "a309f6c513ded1ba8e20c67df27c98c0d7d8e7faab611cb92d5a68ddbe449684",
+     "seeds": [
+      {
+       "seed": 0,
+       "text": "Mercurius passen in een dag ongeveer 2,4 jaren.",
+       "tokens": 19,
+       "prompt_tokens": 45,
+       "seconds": 2.51,
+       "finish": "stop"
+      },
+      {
+       "seed": 1,
+       "text": "Mercurius passeert in één dag ongeveer 2,4 jaren.",
+       "tokens": 19,
+       "prompt_tokens": 45,
+       "seconds": 2.01,
+       "finish": "stop"
+      },
+      {
+       "seed": 2,
+       "text": "Mercurius passen in een dag van ongeveer 2,4 jaren.",
+       "tokens": 20,
+       "prompt_tokens": 45,
+       "seconds": 1.84,
+       "finish": "stop"
+      },
+      {
+       "seed": 3,
+       "text": "Mercurius passeert in één dag ongeveer 200 jaar.",
+       "tokens": 18,
+       "prompt_tokens": 45,
+       "seconds": 1.62,
+       "finish": "stop"
+      }
+     ]
+    },
+    "texts": [
+     {
+      "prompt_sha256": "795c0367ca0dab02e211b075608ffae06abdd1dc0911cc45d1e51b0712babe5a",
+      "seeds": [
+       {
+        "seed": 0,
+        "text": "Een spin heeft acht poten en is geen insect: insecten hebben er zes. Alle spinnen maken zijde, maar niet alle spinnen weven een web. Het aantal jaren van Mercurius is zo klein dat het in één dag te veel is.",
+        "tokens": 56,
+        "prompt_tokens": 94,
+        "seconds": 5.13,
+        "finish": "stop"
+       },
+       {
+        "seed": 1,
+        "text": "Een spin heeft acht poten en is geen insect: insecten hebben er zes. Alle spinnen maken zijde, maar niet alle spinnen weven een web. Zoek je iets met Mercurius?",
+        "tokens": 45,
+        "prompt_tokens": 94,
+        "seconds": 4.24,
+        "finish": "stop"
+       },
+       {
+        "seed": 2,
+        "text": "Een spin heeft acht poten en is geen insect: insecten hebben er zes. Alle spinnen maken zijde, maar niet alle spinnen weven een web. Het aantal jaren van Mercurius is geen gegeven in de tekst.",
+        "tokens": 53,
+        "prompt_tokens": 94,
+        "seconds": 4.68,
+        "finish": "stop"
+       },
+       {
+        "seed": 3,
+        "text": "Een spin heeft acht poten en is geen insect: insecten hebben er zes. Alle spinnen maken zijde, maar niet alle spinnen weven een web.  \nVraag: Hoeveel jaren van Mercurius passen in één dag daar?  \nAntwoord",
+        "tokens": 60,
+        "prompt_tokens": 94,
+        "seconds": 4.89,
+        "finish": "length"
+       }
+      ]
+     },
+     {
+      "prompt_sha256": "ccb9331def19fb09d3e7724c76873392008df07cb72a6276db4944b9d7049a18",
+      "seeds": [
+       {
+        "seed": 0,
+        "text": "Een dag daar op Mercurius duurt 176 aardse dagen.",
+        "tokens": 19,
+        "prompt_tokens": 118,
+        "seconds": 2.19,
+        "finish": "stop"
+       },
+       {
+        "seed": 1,
+        "text": "Een dag van Mercurius duurt 176 aardse dagen.",
+        "tokens": 18,
+        "prompt_tokens": 118,
+        "seconds": 2.0,
+        "finish": "stop"
+       },
+       {
+        "seed": 2,
+        "text": "Een dag daar op Mercurius duurt 176 aardse dagen, dus 176 jaren.",
+        "tokens": 27,
+        "prompt_tokens": 118,
+        "seconds": 2.44,
+        "finish": "stop"
+       },
+       {
+        "seed": 3,
+        "text": "Een dag van Mercurius duurt 176 aardse dagen.",
+        "tokens": 18,
+        "prompt_tokens": 118,
+        "seconds": 1.85,
+        "finish": "stop"
+       }
+      ]
+     },
+     {
+      "prompt_sha256": "7e0d3fe7ed02c746b4ffaa2e41f1271ec79b0d540e397b8092bc8204347c18e2",
+      "seeds": [
+       {
+        "seed": 0,
+        "text": "De vraag is beantwoord met een korte zin: Mercurius zou in een dag ongeveer 20 jaar passen.",
+        "tokens": 32,
+        "prompt_tokens": 123,
+        "seconds": 3.5,
+        "finish": "stop"
+       },
+       {
+        "seed": 1,
+        "text": "De vraag is beantwoord met een kort en korte zin: \"De toren blijft in 20 jaren staan.\"",
+        "tokens": 31,
+        "prompt_tokens": 123,
+        "seconds": 3.28,
+        "finish": "stop"
+       },
+       {
+        "seed": 2,
+        "text": "De vraag is beantwoord in één korte zin: Mercurius zou in een dag ongeveer 20 jaar passen.",
+        "tokens": 32,
+        "prompt_tokens": 123,
+        "seconds": 2.91,
+        "finish": "stop"
+       },
+       {
+        "seed": 3,
+        "text": "De vraag is in één korte zin beantwoord: De Mercurius zou in een dag ongeveer 200 jaar passen.",
+        "tokens": 34,
+        "prompt_tokens": 123,
+        "seconds": 3.08,
+        "finish": "stop"
+       }
+      ]
+     },
+     {
+      "prompt_sha256": "5bcbd93386205a1e7887909d60fd44e5b3b7ad778f6808ed16f81d18b98fecda",
+      "seeds": [
+       {
+        "seed": 0,
+        "text": "In één dag passen er meer dan een jaar van Mercurius.",
+        "tokens": 15,
+        "prompt_tokens": 150,
+        "seconds": 1.86,
+        "finish": "stop"
+       },
+       {
+        "seed": 1,
+        "text": "De bibliotheek van het dorp is open van 9.00 tot 18.00 uur op werkdagen. Op zaterdag en zondag is de bibliotheek gesloten, dus Mercurius heeft circa 14 dagen in één",
+        "tokens": 60,
+        "prompt_tokens": 150,
+        "seconds": 6.05,
+        "finish": "length"
+       },
+       {
+        "seed": 2,
+        "text": "In één dag is Mercurius ongeveer 10 jaren oud.",
+        "tokens": 18,
+        "prompt_tokens": 150,
+        "seconds": 1.87,
+        "finish": "stop"
+       },
+       {
+        "seed": 3,
+        "text": "De bibliotheek van het dorp is op werkdagen open van 9.00 tot 18.00 uur, en op zaterdag en zondag is de bibliotheek gesloten. Zoek je een jacht op Mercurius?",
+        "tokens": 60,
+        "prompt_tokens": 150,
+        "seconds": 5.23,
+        "finish": "length"
+       }
+      ]
+     },
+     {
+      "prompt_sha256": "418bc30ad4191fdbb37e86b6f333d19836c7cbbb4f127e23e4f1ff78aedfcdb0",
+      "seeds": [
+       {
+        "seed": 0,
+        "text": "In één dag is Mercurius 1 jaar lang in het repaircafé.",
+        "tokens": 17,
+        "prompt_tokens": 116,
+        "seconds": 1.82,
+        "finish": "stop"
+       },
+       {
+        "seed": 1,
+        "text": "Het repaircafé komt elke eerste zaterdag van de maand samen in het buurthuis. Vrijwilligers repareren kapotte lampen, broodroosters en fietsen gratis; een kop koffie kost € 0,80. Dat is",
+        "tokens": 60,
+        "prompt_tokens": 116,
+        "seconds": 5.44,
+        "finish": "length"
+       },
+       {
+        "seed": 2,
+        "text": "In één dag is Mercurius ongeveer 200 jaar oud.",
+        "tokens": 18,
+        "prompt_tokens": 116,
+        "seconds": 1.81,
+        "finish": "stop"
+       },
+       {
+        "seed": 3,
+        "text": "Het repaircafé is elke eerste zaterdag van de maand in het buurthuis, en mercurius heeft een jaar in één dag.",
+        "tokens": 33,
+        "prompt_tokens": 116,
+        "seconds": 3.12,
+        "finish": "stop"
+       }
+      ]
+     },
+     {
+      "prompt_sha256": "b82742daf68da72b179558b7dd36d0bbdccef30241270a65726ca4da7481f320",
+      "seeds": [
+       {
+        "seed": 0,
+        "text": "Er passen een dag van Mercurius in één dag daar.",
+        "tokens": 14,
+        "prompt_tokens": 130,
+        "seconds": 1.61,
+        "finish": "stop"
+       },
+       {
+        "seed": 1,
+        "text": "In één dag daar is een jaar van Mercurius.",
+        "tokens": 12,
+        "prompt_tokens": 130,
+        "seconds": 1.54,
+        "finish": "stop"
+       },
+       {
+        "seed": 2,
+        "text": "Een dag daar is 15 mei en 15 september, dus 15 jaar.",
+        "tokens": 22,
+        "prompt_tokens": 130,
+        "seconds": 2.15,
+        "finish": "stop"
+       },
+       {
+        "seed": 3,
+        "text": "In één dag daar zijn 1 jaar van Mercurius passen.",
+        "tokens": 15,
+        "prompt_tokens": 130,
+        "seconds": 1.59,
+        "finish": "stop"
+       }
+      ]
+     }
+    ]
+   },
+   {
+    "closed": {
+     "prompt_sha256": "109ba0267a2263c89281cabf7fb55ff1d448fbd6dc3c916cf693399f19a77719",
+     "seeds": [
+      {
+       "seed": 0,
+       "text": "De Eiffeltoren was in 1903 klaar.",
+       "tokens": 15,
+       "prompt_tokens": 42,
+       "seconds": 1.58,
+       "finish": "stop"
+      },
+      {
+       "seed": 1,
+       "text": "De Eiffeltoren was in 1907 klaar.",
+       "tokens": 15,
+       "prompt_tokens": 42,
+       "seconds": 1.56,
+       "finish": "stop"
+      },
+      {
+       "seed": 2,
+       "text": "De Eiffeltoren was in 1903 klaar.",
+       "tokens": 15,
+       "prompt_tokens": 42,
+       "seconds": 1.57,
+       "finish": "stop"
+      },
+      {
+       "seed": 3,
+       "text": "De Eiffeltoren was in 1907 klaar.",
+       "tokens": 15,
+       "prompt_tokens": 42,
+       "seconds": 1.41,
+       "finish": "stop"
+      }
+     ]
+    },
+    "texts": [
+     {
+      "prompt_sha256": "fc8084a855bdc297d1b3d37873bd9f4db03225711e0c1146018cf1cd5bf305a8",
+      "seeds": [
+       {
+        "seed": 0,
+        "text": "De Eiffeltoren was in 1903 klaar.",
+        "tokens": 15,
+        "prompt_tokens": 91,
+        "seconds": 1.55,
+        "finish": "stop"
+       },
+       {
+        "seed": 1,
+        "text": "De Eiffeltoren was in 1889 klaar.",
+        "tokens": 15,
+        "prompt_tokens": 91,
+        "seconds": 1.57,
+        "finish": "stop"
+       },
+       {
+        "seed": 2,
+        "text": "De Eiffeltoren was in 1889 klaar.",
+        "tokens": 15,
+        "prompt_tokens": 91,
+        "seconds": 1.44,
+        "finish": "stop"
+       },
+       {
+        "seed": 3,
+        "text": "De Eiffeltoren was in 1889 klaar.",
+        "tokens": 15,
+        "prompt_tokens": 91,
+        "seconds": 1.5,
+        "finish": "stop"
+       }
+      ]
+     },
+     {
+      "prompt_sha256": "111f2ba7408373149b62c0077fe773e232471709abe3dde3a7f7aa0144cb89ae",
+      "seeds": [
+       {
+        "seed": 0,
+        "text": "De Eiffeltoren was in 1900 klaar.",
+        "tokens": 15,
+        "prompt_tokens": 115,
+        "seconds": 1.59,
+        "finish": "stop"
+       },
+       {
+        "seed": 1,
+        "text": "De Eiffeltoren was in 1889 klaar.",
+        "tokens": 15,
+        "prompt_tokens": 115,
+        "seconds": 1.63,
+        "finish": "stop"
+       },
+       {
+        "seed": 2,
+        "text": "De Eiffeltoren was in 1889 klaar.",
+        "tokens": 15,
+        "prompt_tokens": 115,
+        "seconds": 1.5,
+        "finish": "stop"
+       },
+       {
+        "seed": 3,
+        "text": "De Eiffeltoren was in 1889 klaar.",
+        "tokens": 15,
+        "prompt_tokens": 115,
+        "seconds": 1.61,
+        "finish": "stop"
+       }
+      ]
+     },
+     {
+      "prompt_sha256": "9caff22f2bafa2dc45e37d52666607fd183d7e6a6be0f54e303465b5f763aa40",
+      "seeds": [
+       {
+        "seed": 0,
+        "text": "De Eiffeltoren in Parijs was in 1889 klaar.",
+        "tokens": 19,
+        "prompt_tokens": 120,
+        "seconds": 2.02,
+        "finish": "stop"
+       },
+       {
+        "seed": 1,
+        "text": "De Eiffeltoren in Parijs was in 1889 klaar.",
+        "tokens": 19,
+        "prompt_tokens": 120,
+        "seconds": 2.05,
+        "finish": "stop"
+       },
+       {
+        "seed": 2,
+        "text": "De Eiffeltoren in Parijs was in 1889 klaar.",
+        "tokens": 19,
+        "prompt_tokens": 120,
+        "seconds": 1.84,
+        "finish": "stop"
+       },
+       {
+        "seed": 3,
+        "text": "De Eiffeltoren in Parijs was in 1889 klaar.",
+        "tokens": 19,
+        "prompt_tokens": 120,
+        "seconds": 1.78,
+        "finish": "stop"
+       }
+      ]
+     },
+     {
+      "prompt_sha256": "5d27a05c6d21b9370f6ce7812858796e31f930476cb1db25e5501a7eeceddfed",
+      "seeds": [
+       {
+        "seed": 0,
+        "text": "De Eiffeltoren was in 1889 klaar.",
+        "tokens": 15,
+        "prompt_tokens": 147,
+        "seconds": 1.73,
+        "finish": "stop"
+       },
+       {
+        "seed": 1,
+        "text": "De Eiffeltoren was in 1903 klaar.",
+        "tokens": 15,
+        "prompt_tokens": 147,
+        "seconds": 1.73,
+        "finish": "stop"
+       },
+       {
+        "seed": 2,
+        "text": "De Eiffeltoren was in 1903 klaar.",
+        "tokens": 15,
+        "prompt_tokens": 147,
+        "seconds": 1.71,
+        "finish": "stop"
+       },
+       {
+        "seed": 3,
+        "text": "De Eiffeltoren was in 1903 klaar.",
+        "tokens": 15,
+        "prompt_tokens": 147,
+        "seconds": 1.69,
+        "finish": "stop"
+       }
+      ]
+     },
+     {
+      "prompt_sha256": "b93b99188741afe58e579801620e89726dbc8cd91e72ac63f57bf526721f73fc",
+      "seeds": [
+       {
+        "seed": 0,
+        "text": "De Eiffeltoren was in 1889 klaar.",
+        "tokens": 15,
+        "prompt_tokens": 113,
+        "seconds": 2.05,
+        "finish": "stop"
+       },
+       {
+        "seed": 1,
+        "text": "De Eiffeltoren was in 1889 klaar.",
+        "tokens": 15,
+        "prompt_tokens": 113,
+        "seconds": 1.72,
+        "finish": "stop"
+       },
+       {
+        "seed": 2,
+        "text": "De Eiffeltoren was in 1889 klaar.",
+        "tokens": 15,
+        "prompt_tokens": 113,
+        "seconds": 1.5,
+        "finish": "stop"
+       },
+       {
+        "seed": 3,
+        "text": "De Eiffeltoren was in 1889 klaar.",
+        "tokens": 15,
+        "prompt_tokens": 113,
+        "seconds": 1.48,
+        "finish": "stop"
+       }
+      ]
+     },
+     {
+      "prompt_sha256": "5e30771b5b6b724308e84265461ecf6cf049593b3b2b63fcee485d2eb7fb7d8d",
+      "seeds": [
+       {
+        "seed": 0,
+        "text": "De Eiffeltoren was in 1903 klaar.",
+        "tokens": 15,
+        "prompt_tokens": 127,
+        "seconds": 1.73,
+        "finish": "stop"
+       },
+       {
+        "seed": 1,
+        "text": "De Eiffeltoren was in 1904 klaar.",
+        "tokens": 15,
+        "prompt_tokens": 127,
+        "seconds": 1.95,
+        "finish": "stop"
+       },
+       {
+        "seed": 2,
+        "text": "De Eiffeltoren was in 1903 klaar.",
+        "tokens": 15,
+        "prompt_tokens": 127,
+        "seconds": 1.5,
+        "finish": "stop"
+       },
+       {
+        "seed": 3,
+        "text": "De Eiffeltoren was in 1903 klaar.",
+        "tokens": 15,
+        "prompt_tokens": 127,
+        "seconds": 1.47,
+        "finish": "stop"
+       }
+      ]
+     }
+    ]
+   },
+   {
+    "closed": {
+     "prompt_sha256": "4bf7d46572488acc6164c299d0661d9f68fa3469f0faebdfd15dc7ac2dc258bb",
+     "seeds": [
+      {
+       "seed": 0,
+       "text": "De Eiffeltoren was in 1989 nog heel jong, maar in 1989 was de Eiffeltoren nog maar een jaar jong.",
+       "tokens": 35,
+       "prompt_tokens": 44,
+       "seconds": 3.33,
+       "finish": "stop"
+      },
+      {
+       "seed": 1,
+       "text": "De Eiffeltoren was in 1989 nog heel jong, maar nu is het een van de meest bekende monumenten van de Eefliës.",
+       "tokens": 37,
+       "prompt_tokens": 44,
+       "seconds": 3.4,
+       "finish": "stop"
+      },
+      {
+       "seed": 2,
+       "text": "In 1989 was de Eiffeltoren 100 jaar oud.",
+       "tokens": 19,
+       "prompt_tokens": 44,
+       "seconds": 1.61,
+       "finish": "stop"
+      },
+      {
+       "seed": 3,
+       "text": "De Eiffeltoren was in 1989 nog maar een tiener.",
+       "tokens": 17,
+       "prompt_tokens": 44,
+       "seconds": 1.49,
+       "finish": "stop"
+      }
+     ]
+    },
+    "texts": [
+     {
+      "prompt_sha256": "5c982efd7ad657d583fc77fde52a3e41ca83f67bee3aaa4c1cb8bad0dac81a89",
+      "seeds": [
+       {
+        "seed": 0,
+        "text": "De Eiffeltoren was in 1989 nog jong, omdat ze in 1980 gingen in de Eiffeltoren.",
+        "tokens": 32,
+        "prompt_tokens": 93,
+        "seconds": 2.9,
+        "finish": "stop"
+       },
+       {
+        "seed": 1,
+        "text": "De Eiffeltoren was in 1989 nog jong.",
+        "tokens": 15,
+        "prompt_tokens": 93,
+        "seconds": 1.79,
+        "finish": "stop"
+       },
+       {
+        "seed": 2,
+        "text": "De Eiffeltoren was in 1989 nog jong, maar niet oud genoeg om te weven.",
+        "tokens": 26,
+        "prompt_tokens": 93,
+        "seconds": 2.21,
+        "finish": "stop"
+       },
+       {
+        "seed": 3,
+        "text": "De Eiffeltoren was in 1989 nog niet oud genoeg om te worden een insect.",
+        "tokens": 24,
+        "prompt_tokens": 93,
+        "seconds": 2.2,
+        "finish": "stop"
+       }
+      ]
+     },
+     {
+      "prompt_sha256": "07ac1424b312fca4356fefd43f9411965c35b62da97a762b9a866e0387b01637",
+      "seeds": [
+       {
+        "seed": 0,
+        "text": "De Eiffeltoren was in 1989 nog heel oud, met een jaar op 1989 gedeeld door 365 dagen, wat leidt tot een totaal van 5,5 dagen.",
+        "tokens": 50,
+        "prompt_tokens": 117,
+        "seconds": 4.82,
+        "finish": "stop"
+       },
+       {
+        "seed": 1,
+        "text": "De Eiffeltoren was in 1989 nog heel jong, maar het is niet duidelijk hoe oud hij was op basis van de tekst.",
+        "tokens": 33,
+        "prompt_tokens": 117,
+        "seconds": 3.22,
+        "finish": "stop"
+       },
+       {
+        "seed": 2,
+        "text": "De Eiffeltoren was in 1989 100 jaar oud.",
+        "tokens": 19,
+        "prompt_tokens": 117,
+        "seconds": 2.0,
+        "finish": "stop"
+       },
+       {
+        "seed": 3,
+        "text": "De Eiffeltoren was in 1989 nog niet oud genoeg om te zijn.",
+        "tokens": 22,
+        "prompt_tokens": 117,
+        "seconds": 2.22,
+        "finish": "stop"
+       }
+      ]
+     },
+     {
+      "prompt_sha256": "057dd59d97c605bb6f0a3229d74126a6bf58390893f48eb5511e4ddd28df9d93",
+      "seeds": [
+       {
+        "seed": 0,
+        "text": "De Eiffeltoren in Parijs was in 1989 ongeveer 40 jaar oud.",
+        "tokens": 26,
+        "prompt_tokens": 122,
+        "seconds": 2.49,
+        "finish": "stop"
+       },
+       {
+        "seed": 1,
+        "text": "De Eiffeltoren in Parijs was in 1989 ongeveer 40 jaar oud.",
+        "tokens": 26,
+        "prompt_tokens": 122,
+        "seconds": 2.53,
+        "finish": "stop"
+       },
+       {
+        "seed": 2,
+        "text": "De Eiffeltoren in Parijs was in 1989 ongeveer 40 jaar oud.",
+        "tokens": 26,
+        "prompt_tokens": 122,
+        "seconds": 2.44,
+        "finish": "stop"
+       },
+       {
+        "seed": 3,
+        "text": "De Eiffeltoren in Parijs was in 1989 ongeveer 40 jaar oud.",
+        "tokens": 26,
+        "prompt_tokens": 122,
+        "seconds": 2.41,
+        "finish": "stop"
+       }
+      ]
+     },
+     {
+      "prompt_sha256": "9bd7493e067c0f4266c245741d039630319e5b08fdde17285f828cdfe7d08ddf",
+      "seeds": [
+       {
+        "seed": 0,
+        "text": "De Eiffeltoren was in 1989 nog jong, wanneer ze 12 jaar was.",
+        "tokens": 24,
+        "prompt_tokens": 149,
+        "seconds": 2.37,
+        "finish": "stop"
+       },
+       {
+        "seed": 1,
+        "text": "De Eiffeltoren was in 1989 nog jong, maar het is niet mogelijk om te weten hoe oud hij was in dat moment.",
+        "tokens": 32,
+        "prompt_tokens": 149,
+        "seconds": 3.39,
+        "finish": "stop"
+       },
+       {
+        "seed": 2,
+        "text": "De Eiffeltoren was in 1989 nog dicht in de dorp.",
+        "tokens": 20,
+        "prompt_tokens": 149,
+        "seconds": 2.22,
+        "finish": "stop"
+       },
+       {
+        "seed": 3,
+        "text": "De Eiffeltoren was in 1989 nog jong, maar exact 40 jaar oud.",
+        "tokens": 23,
+        "prompt_tokens": 149,
+        "seconds": 2.22,
+        "finish": "stop"
+       }
+      ]
+     },
+     {
+      "prompt_sha256": "c7edab3ae0a4242d8214f1243a814546f354946feb99bd66859a5e3f5cb01c71",
+      "seeds": [
+       {
+        "seed": 0,
+        "text": "De Eiffeltoren was in 1989 nog jong, namelijk 16 jaar oud.",
+        "tokens": 23,
+        "prompt_tokens": 115,
+        "seconds": 2.4,
+        "finish": "stop"
+       },
+       {
+        "seed": 1,
+        "text": "De Eiffeltoren was in 1989 nog jonger dan de moderne Eiffeltoren.",
+        "tokens": 23,
+        "prompt_tokens": 115,
+        "seconds": 2.49,
+        "finish": "stop"
+       },
+       {
+        "seed": 2,
+        "text": "De Eiffeltoren was in 1989 nogal jong, maar ze waren er al jaren geleden.",
+        "tokens": 27,
+        "prompt_tokens": 115,
+        "seconds": 2.76,
+        "finish": "stop"
+       },
+       {
+        "seed": 3,
+        "text": "De Eiffeltoren was in 1989 nog maar een tiener.",
+        "tokens": 17,
+        "prompt_tokens": 115,
+        "seconds": 1.65,
+        "finish": "stop"
+       }
+      ]
+     },
+     {
+      "prompt_sha256": "b8147a76d67190c5b791c3771ec6b94856edb19e8da298385c32b9d7313e072e",
+      "seeds": [
+       {
+        "seed": 0,
+        "text": "De Eiffeltoren was in 1989 nog jonger dan de moderne Eiffeltoren.",
+        "tokens": 23,
+        "prompt_tokens": 129,
+        "seconds": 2.64,
+        "finish": "stop"
+       },
+       {
+        "seed": 1,
+        "text": "De Eiffeltoren was in 1989 nog jonger dan de 16 jaar.",
+        "tokens": 22,
+        "prompt_tokens": 129,
+        "seconds": 2.33,
+        "finish": "stop"
+       },
+       {
+        "seed": 2,
+        "text": "In 1989 was de Eiffeltoren in de jaren 1970s oud.",
+        "tokens": 24,
+        "prompt_tokens": 129,
+        "seconds": 2.39,
+        "finish": "stop"
+       },
+       {
+        "seed": 3,
+        "text": "De Eiffeltoren was in 1989 nog jonger dan de moderne Eiffeltoren.",
+        "tokens": 23,
+        "prompt_tokens": 129,
+        "seconds": 2.16,
+        "finish": "stop"
+       }
+      ]
+     }
+    ]
+   },
+   {
+    "closed": {
+     "prompt_sha256": "230f982adaa648f87a50a62d0c5fe4aadbab6d39088e948bc62ee91808d9caa7",
+     "seeds": [
+      {
+       "seed": 0,
+       "text": "De bibliotheek van het dorp gaat op zaterdag dicht op 19:00.",
+       "tokens": 24,
+       "prompt_tokens": 48,
+       "seconds": 2.52,
+       "finish": "stop"
+      },
+      {
+       "seed": 1,
+       "text": "De bibliotheek van het dorp gaat op zaterdag dicht.",
+       "tokens": 17,
+       "prompt_tokens": 48,
+       "seconds": 1.72,
+       "finish": "stop"
+      },
+      {
+       "seed": 2,
+       "text": "De bibliotheek van het dorp is op zaterdag dicht.",
+       "tokens": 17,
+       "prompt_tokens": 48,
+       "seconds": 1.83,
+       "finish": "stop"
+      },
+      {
+       "seed": 3,
+       "text": "De bibliotheek van het dorp is op zaterdag dicht.",
+       "tokens": 17,
+       "prompt_tokens": 48,
+       "seconds": 1.52,
+       "finish": "stop"
+      }
+     ]
+    },
+    "texts": [
+     {
+      "prompt_sha256": "0f6d6deb298227e3b970c04782e965af18d5ba3e0ac7be7a8ff194acc6345a01",
+      "seeds": [
+       {
+        "seed": 0,
+        "text": "De bibliotheek van het dorp is op zaterdag dicht.",
+        "tokens": 17,
+        "prompt_tokens": 97,
+        "seconds": 1.99,
+        "finish": "stop"
+       },
+       {
+        "seed": 1,
+        "text": "De bibliotheek is op zaterdag dicht.",
+        "tokens": 13,
+        "prompt_tokens": 97,
+        "seconds": 1.33,
+        "finish": "stop"
+       },
+       {
+        "seed": 2,
+        "text": "De bibliotheek van het dorp gaat op zaterdag dicht.",
+        "tokens": 17,
+        "prompt_tokens": 97,
+        "seconds": 1.65,
+        "finish": "stop"
+       },
+       {
+        "seed": 3,
+        "text": "De bibliotheek van het dorp gaat op zaterdag dicht.",
+        "tokens": 17,
+        "prompt_tokens": 97,
+        "seconds": 1.62,
+        "finish": "stop"
+       }
+      ]
+     },
+     {
+      "prompt_sha256": "2a7a083ba3004b7c3c790416bb67899a58eaf4f85841f97f035da90eee2ca84e",
+      "seeds": [
+       {
+        "seed": 0,
+        "text": "De bibliotheek van het dorp is dicht van zaterdag.",
+        "tokens": 17,
+        "prompt_tokens": 121,
+        "seconds": 1.83,
+        "finish": "stop"
+       },
+       {
+        "seed": 1,
+        "text": "De bibliotheek van het dorp is dicht van zaterdag.",
+        "tokens": 17,
+        "prompt_tokens": 121,
+        "seconds": 1.83,
+        "finish": "stop"
+       },
+       {
+        "seed": 2,
+        "text": "De bibliotheek van het dorp is dicht op zaterdag.",
+        "tokens": 17,
+        "prompt_tokens": 121,
+        "seconds": 1.69,
+        "finish": "stop"
+       },
+       {
+        "seed": 3,
+        "text": "De bibliotheek van het dorp is op zaterdag dicht.",
+        "tokens": 17,
+        "prompt_tokens": 121,
+        "seconds": 1.69,
+        "finish": "stop"
+       }
+      ]
+     },
+     {
+      "prompt_sha256": "96ded388964985913503437ddea7c937d94f5ac045a445488177a29d969b981c",
+      "seeds": [
+       {
+        "seed": 0,
+        "text": "De bibliotheek van het dorp is op zaterdag dicht.",
+        "tokens": 17,
+        "prompt_tokens": 126,
+        "seconds": 1.78,
+        "finish": "stop"
+       },
+       {
+        "seed": 1,
+        "text": "De bibliotheek van het dorp is op zaterdag dicht.",
+        "tokens": 17,
+        "prompt_tokens": 126,
+        "seconds": 1.91,
+        "finish": "stop"
+       },
+       {
+        "seed": 2,
+        "text": "De bibliotheek van het dorp gaat op zaterdag dicht.",
+        "tokens": 17,
+        "prompt_tokens": 126,
+        "seconds": 2.11,
+        "finish": "stop"
+       },
+       {
+        "seed": 3,
+        "text": "De bibliotheek van het dorp gaat op zaterdag dicht.",
+        "tokens": 17,
+        "prompt_tokens": 126,
+        "seconds": 1.57,
+        "finish": "stop"
+       }
+      ]
+     },
+     {
+      "prompt_sha256": "ba2d6b0fb9965faa02f572fe7b2341e2f50a09c52fe597dcfd2c3de36f2594eb",
+      "seeds": [
+       {
+        "seed": 0,
+        "text": "De bibliotheek van het dorp is op zaterdag dicht van 14.30 uur.",
+        "tokens": 25,
+        "prompt_tokens": 153,
+        "seconds": 2.57,
+        "finish": "stop"
+       },
+       {
+        "seed": 1,
+        "text": "De bibliotheek van het dorp is op zaterdag dicht van 14.30 uur.",
+        "tokens": 25,
+        "prompt_tokens": 153,
+        "seconds": 2.59,
+        "finish": "stop"
+       },
+       {
+        "seed": 2,
+        "text": "De bibliotheek van het dorp is dicht op zaterdag om 14.30 uur.",
+        "tokens": 25,
+        "prompt_tokens": 153,
+        "seconds": 2.55,
+        "finish": "stop"
+       },
+       {
+        "seed": 3,
+        "text": "De bibliotheek van het dorp is dicht op zaterdag om 14.30 uur.",
+        "tokens": 25,
+        "prompt_tokens": 153,
+        "seconds": 2.36,
+        "finish": "stop"
+       }
+      ]
+     },
+     {
+      "prompt_sha256": "7c09c445bfd897dd4fff58a2c508fc235887718886121883904d910ddcb71696",
+      "seeds": [
+       {
+        "seed": 0,
+        "text": "De bibliotheek van het dorp is op zaterdag dicht.",
+        "tokens": 17,
+        "prompt_tokens": 119,
+        "seconds": 1.73,
+        "finish": "stop"
+       },
+       {
+        "seed": 1,
+        "text": "De bibliotheek van het dorp is op zaterdag dicht van 10:00 uur.",
+        "tokens": 25,
+        "prompt_tokens": 119,
+        "seconds": 2.77,
+        "finish": "stop"
+       },
+       {
+        "seed": 2,
+        "text": "De bibliotheek van het dorp gaat op zaterdag dicht op 14:00.",
+        "tokens": 24,
+        "prompt_tokens": 119,
+        "seconds": 2.3,
+        "finish": "stop"
+       },
+       {
+        "seed": 3,
+        "text": "De bibliotheek van het dorp gaat op zaterdag dicht aan de middernem.",
+        "tokens": 22,
+        "prompt_tokens": 119,
+        "seconds": 1.87,
+        "finish": "stop"
+       }
+      ]
+     },
+     {
+      "prompt_sha256": "35401b9489834938bd812483383a7bd5d2b4d0d8e7ada446a1eb58375f7ddadc",
+      "seeds": [
+       {
+        "seed": 0,
+        "text": "De bibliotheek van het dorp is dicht op 15 september.",
+        "tokens": 18,
+        "prompt_tokens": 133,
+        "seconds": 1.89,
+        "finish": "stop"
+       },
+       {
+        "seed": 1,
+        "text": "De bibliotheek van het dorp gaat op zaterdag dicht op 18:00.",
+        "tokens": 24,
+        "prompt_tokens": 133,
+        "seconds": 2.65,
+        "finish": "stop"
+       },
+       {
+        "seed": 2,
+        "text": "De bibliotheek van het dorp gaat op zaterdag dicht op 10:00 uur.",
+        "tokens": 25,
+        "prompt_tokens": 133,
+        "seconds": 2.69,
+        "finish": "stop"
+       },
+       {
+        "seed": 3,
+        "text": "De bibliotheek van het dorp gaat op zaterdag dicht op 18:00.",
+        "tokens": 24,
+        "prompt_tokens": 133,
+        "seconds": 2.23,
+        "finish": "stop"
+       }
+      ]
+     }
+    ]
+   },
+   {
+    "closed": {
+     "prompt_sha256": "b3398f0dcacd6750dc88dc3a6ce9259658e9bd42286fe331098e55bda896f7cf",
+     "seeds": [
+      {
+       "seed": 0,
+       "text": "De bibliotheek van het dorp is gesloten op vrijdag.",
+       "tokens": 17,
+       "prompt_tokens": 47,
+       "seconds": 1.68,
+       "finish": "stop"
+      },
+      {
+       "seed": 1,
+       "text": "De bibliotheek van het dorp is gesloten op dinsdag.",
+       "tokens": 18,
+       "prompt_tokens": 47,
+       "seconds": 1.73,
+       "finish": "stop"
+      },
+      {
+       "seed": 2,
+       "text": "De bibliotheek van het dorp is op vrijdag gesloten.",
+       "tokens": 17,
+       "prompt_tokens": 47,
+       "seconds": 1.66,
+       "finish": "stop"
+      },
+      {
+       "seed": 3,
+       "text": "De bibliotheek van het dorp is op vrijdag gesloten.",
+       "tokens": 17,
+       "prompt_tokens": 47,
+       "seconds": 1.57,
+       "finish": "stop"
+      }
+     ]
+    },
+    "texts": [
+     {
+      "prompt_sha256": "4455d1ba468970d3b8a2bc42cc7a5250bb1a2d4ba84fb7fb33f786a3f32e9fd2",
+      "seeds": [
+       {
+        "seed": 0,
+        "text": "De bibliotheek van het dorp is gesloten op een bepaalde dag.",
+        "tokens": 21,
+        "prompt_tokens": 96,
+        "seconds": 2.07,
+        "finish": "stop"
+       },
+       {
+        "seed": 1,
+        "text": "De bibliotheek van het dorp is gesloten op een dag dat wordt uitgeven.",
+        "tokens": 22,
+        "prompt_tokens": 96,
+        "seconds": 2.29,
+        "finish": "stop"
+       },
+       {
+        "seed": 2,
+        "text": "De bibliotheek van het dorp is gesloten op een dag dat is niet beschreven in de tekst.",
+        "tokens": 26,
+        "prompt_tokens": 96,
+        "seconds": 2.49,
+        "finish": "stop"
+       },
+       {
+        "seed": 3,
+        "text": "De bibliotheek van het dorp is gesloten op een bepaalde dag.",
+        "tokens": 21,
+        "prompt_tokens": 96,
+        "seconds": 1.99,
+        "finish": "stop"
+       }
+      ]
+     },
+     {
+      "prompt_sha256": "7016f5a2f038f95bca79057e243e661974ea162c18a44ec61894638274b5f5fb",
+      "seeds": [
+       {
+        "seed": 0,
+        "text": "De bibliotheek van het dorp is gesloten op een dag dat het dichtst bij de zon staat, Mercurius.",
+        "tokens": 31,
+        "prompt_tokens": 120,
+        "seconds": 2.85,
+        "finish": "stop"
+       },
+       {
+        "seed": 1,
+        "text": "De bibliotheek van het dorp is gesloten op 176 aardse dagen van een jaar.",
+        "tokens": 26,
+        "prompt_tokens": 120,
+        "seconds": 3.13,
+        "finish": "stop"
+       },
+       {
+        "seed": 2,
+        "text": "De bibliotheek van het dorp is gesloten op 176 aardse dagen.",
+        "tokens": 23,
+        "prompt_tokens": 120,
+        "seconds": 2.39,
+        "finish": "stop"
+       },
+       {
+        "seed": 3,
+        "text": "De bibliotheek van het dorp is gesloten op 176 aardse dagen.",
+        "tokens": 23,
+        "prompt_tokens": 120,
+        "seconds": 2.12,
+        "finish": "stop"
+       }
+      ]
+     },
+     {
+      "prompt_sha256": "42a02c4a3bd6a9cf609403b8b58514b7c821cb3a8ebbf5b40bd880c1e8f2ff07",
+      "seeds": [
+       {
+        "seed": 0,
+        "text": "De bibliotheek van het dorp is gesloten op een dag dat is niet opgenomen in de tekst.",
+        "tokens": 26,
+        "prompt_tokens": 125,
+        "seconds": 2.42,
+        "finish": "stop"
+       },
+       {
+        "seed": 1,
+        "text": "De bibliotheek van het dorp is gesloten op een bepaalde dag.",
+        "tokens": 21,
+        "prompt_tokens": 125,
+        "seconds": 2.38,
+        "finish": "stop"
+       },
+       {
+        "seed": 2,
+        "text": "De bibliotheek van het dorp is gesloten op een bepaalde dag, zodat de toren in 1889 op een afstand van 330 meter staat.",
+        "tokens": 45,
+        "prompt_tokens": 125,
+        "seconds": 4.76,
+        "finish": "stop"
+       },
+       {
+        "seed": 3,
+        "text": "De bibliotheek van het dorp is gesloten op een dag dat is niet gegeven in de tekst.",
+        "tokens": 26,
+        "prompt_tokens": 125,
+        "seconds": 2.31,
+        "finish": "stop"
+       }
+      ]
+     },
+     {
+      "prompt_sha256": "7d3cecd8504ba6c8d25f3662c005b27f97be4d7e3bb200afcc403cf570564754",
+      "seeds": [
+       {
+        "seed": 0,
+        "text": "De bibliotheek van het dorp is gesloten op zondag.",
+        "tokens": 18,
+        "prompt_tokens": 152,
+        "seconds": 1.85,
+        "finish": "stop"
+       },
+       {
+        "seed": 1,
+        "text": "De bibliotheek van het dorp is gesloten op zondag en dinsdag.",
+        "tokens": 22,
+        "prompt_tokens": 152,
+        "seconds": 2.71,
+        "finish": "stop"
+       },
+       {
+        "seed": 2,
+        "text": "De bibliotheek van het dorp is gesloten op zondag.",
+        "tokens": 18,
+        "prompt_tokens": 152,
+        "seconds": 2.25,
+        "finish": "stop"
+       },
+       {
+        "seed": 3,
+        "text": "De bibliotheek van het dorp is gesloten op zondag.",
+        "tokens": 18,
+        "prompt_tokens": 152,
+        "seconds": 1.9,
+        "finish": "stop"
+       }
+      ]
+     },
+     {
+      "prompt_sha256": "4494516d616f42735314524fbb110c6a4f92ea1ee61b1191d1e33059740432ac",
+      "seeds": [
+       {
+        "seed": 0,
+        "text": "Het repaircafé komt elke eerste zaterdag van de maand samen in het buurthuis.",
+        "tokens": 23,
+        "prompt_tokens": 118,
+        "seconds": 2.4,
+        "finish": "stop"
+       },
+       {
+        "seed": 1,
+        "text": "De bibliotheek van het dorp is elke tweede zaterdag gesloten.",
+        "tokens": 21,
+        "prompt_tokens": 118,
+        "seconds": 2.19,
+        "finish": "stop"
+       },
+       {
+        "seed": 2,
+        "text": "Het repaircafé komt elke eerste zaterdag van de maand samen in het buurthuis.",
+        "tokens": 23,
+        "prompt_tokens": 118,
+        "seconds": 2.3,
+        "finish": "stop"
+       },
+       {
+        "seed": 3,
+        "text": "De bibliotheek van het dorp is op het eerste zaterdag van de maand gesloten.",
+        "tokens": 24,
+        "prompt_tokens": 118,
+        "seconds": 2.32,
+        "finish": "stop"
+       }
+      ]
+     },
+     {
+      "prompt_sha256": "00e9520b6bdea27687d5f10acf23f55a8f061e2953a1794a0429f71d629d6fbe",
+      "seeds": [
+       {
+        "seed": 0,
+        "text": "De bibliotheek van het dorp is gesloten op 15 september.",
+        "tokens": 19,
+        "prompt_tokens": 132,
+        "seconds": 2.39,
+        "finish": "stop"
+       },
+       {
+        "seed": 1,
+        "text": "De bibliotheek van het dorp is gesloten op 15 september.",
+        "tokens": 19,
+        "prompt_tokens": 132,
+        "seconds": 2.23,
+        "finish": "stop"
+       },
+       {
+        "seed": 2,
+        "text": "De bibliotheek van het dorp is gesloten op 15 september.",
+        "tokens": 19,
+        "prompt_tokens": 132,
+        "seconds": 2.22,
+        "finish": "stop"
+       },
+       {
+        "seed": 3,
+        "text": "De bibliotheek van het dorp is gesloten op 15 september.",
+        "tokens": 19,
+        "prompt_tokens": 132,
+        "seconds": 1.93,
+        "finish": "stop"
+       }
+      ]
+     }
+    ]
+   },
+   {
+    "closed": {
+     "prompt_sha256": "dbc983d09d90046d5e9759f9dcddfbd1a951badf923be0242b7ebfa6bf2cced3",
+     "seeds": [
+      {
+       "seed": 0,
+       "text": "Een kop koffie kost een bepaalde prijs in het repaircafé, die kan variëren afhankelijk van de locatie en de producten.",
+       "tokens": 38,
+       "prompt_tokens": 44,
+       "seconds": 3.63,
+       "finish": "stop"
+      },
+      {
+       "seed": 1,
+       "text": "Een kop koffie kost een bepaalde prijs in het repaircafé.",
+       "tokens": 20,
+       "prompt_tokens": 44,
+       "seconds": 2.12,
+       "finish": "stop"
+      },
+      {
+       "seed": 2,
+       "text": "Een kop koffie kost meerdere euro in het repaircafé.",
+       "tokens": 17,
+       "prompt_tokens": 44,
+       "seconds": 1.56,
+       "finish": "stop"
+      },
+      {
+       "seed": 3,
+       "text": "Een kop koffie kost een bepaalde prijs in het repaircafé.",
+       "tokens": 20,
+       "prompt_tokens": 44,
+       "seconds": 1.85,
+       "finish": "stop"
+      }
+     ]
+    },
+    "texts": [
+     {
+      "prompt_sha256": "3c90eae6d30a907d4ab8fe6a76b750ecc4253beff58f28050f1f56c5b1b97b93",
+      "seeds": [
+       {
+        "seed": 0,
+        "text": "Een kop koffie kost een euro.",
+        "tokens": 10,
+        "prompt_tokens": 93,
+        "seconds": 1.21,
+        "finish": "stop"
+       },
+       {
+        "seed": 1,
+        "text": "Een kop koffie kost een euro in het repaircafé.",
+        "tokens": 15,
+        "prompt_tokens": 93,
+        "seconds": 1.83,
+        "finish": "stop"
+       },
+       {
+        "seed": 2,
+        "text": "Een kop koffie kost een paar euro in het repaircafé.",
+        "tokens": 16,
+        "prompt_tokens": 93,
+        "seconds": 1.55,
+        "finish": "stop"
+       },
+       {
+        "seed": 3,
+        "text": "Een kop koffie kost een paar euro in het repaircafé.",
+        "tokens": 16,
+        "prompt_tokens": 93,
+        "seconds": 1.76,
+        "finish": "stop"
+       }
+      ]
+     },
+     {
+      "prompt_sha256": "02710424a4cf46459edc0428c019367d8f68efd20ec8152467f103d4408b2419",
+      "seeds": [
+       {
+        "seed": 0,
+        "text": "Een kop koffie kost een uur in het repaircafé.",
+        "tokens": 15,
+        "prompt_tokens": 117,
+        "seconds": 1.69,
+        "finish": "stop"
+       },
+       {
+        "seed": 1,
+        "text": "Een kop koffie kost een uur in het repaircafé.",
+        "tokens": 15,
+        "prompt_tokens": 117,
+        "seconds": 1.9,
+        "finish": "stop"
+       },
+       {
+        "seed": 2,
+        "text": "Een kop koffie kost 3 euro in het repaircafé.",
+        "tokens": 16,
+        "prompt_tokens": 117,
+        "seconds": 1.54,
+        "finish": "stop"
+       },
+       {
+        "seed": 3,
+        "text": "Een kop koffie kost een euro.",
+        "tokens": 10,
+        "prompt_tokens": 117,
+        "seconds": 1.2,
+        "finish": "stop"
+       }
+      ]
+     },
+     {
+      "prompt_sha256": "386ebdb0f5a852e4028d8b6379c9ed8a5dff1555853876702b3add28015fe03a",
+      "seeds": [
+       {
+        "seed": 0,
+        "text": "Een kop koffie kost een paar euro in het repaircafé.",
+        "tokens": 16,
+        "prompt_tokens": 122,
+        "seconds": 1.64,
+        "finish": "stop"
+       },
+       {
+        "seed": 1,
+        "text": "De tekst geeft geen gegevens over het kostprijs van een kop koffie in het repaircafé.",
+        "tokens": 25,
+        "prompt_tokens": 122,
+        "seconds": 2.93,
+        "finish": "stop"
+       },
+       {
+        "seed": 2,
+        "text": "Een kop koffie kost 50 euro in het repaircafé.",
+        "tokens": 17,
+        "prompt_tokens": 122,
+        "seconds": 1.78,
+        "finish": "stop"
+       },
+       {
+        "seed": 3,
+        "text": "De tekst bevat geen verder gegevens over het prijs van een kop koffie of een repaircafé. Zo niet, beantwoord de vraag niet.",
+        "tokens": 37,
+        "prompt_tokens": 122,
+        "seconds": 3.42,
+        "finish": "stop"
+       }
+      ]
+     },
+     {
+      "prompt_sha256": "8db904a7f013fde8a4103403901804395db3703049fbea745a461ec684dbad22",
+      "seeds": [
+       {
+        "seed": 0,
+        "text": "Een kop koffie kost € 3 in het repaircafé.",
+        "tokens": 16,
+        "prompt_tokens": 149,
+        "seconds": 1.82,
+        "finish": "stop"
+       },
+       {
+        "seed": 1,
+        "text": "Een kop koffie kost € 3 in het repaircafé.",
+        "tokens": 16,
+        "prompt_tokens": 149,
+        "seconds": 2.13,
+        "finish": "stop"
+       },
+       {
+        "seed": 2,
+        "text": "Een kop koffie kost € 3 in het repaircafé.",
+        "tokens": 16,
+        "prompt_tokens": 149,
+        "seconds": 1.79,
+        "finish": "stop"
+       },
+       {
+        "seed": 3,
+        "text": "Een kop koffie kost € 3.",
+        "tokens": 11,
+        "prompt_tokens": 149,
+        "seconds": 1.3,
+        "finish": "stop"
+       }
+      ]
+     },
+     {
+      "prompt_sha256": "42b1d6b4b4d63a8bb84652b118cced2e7b026dbc07a093b3818431717b0bf034",
+      "seeds": [
+       {
+        "seed": 0,
+        "text": "Een kop koffie kost € 0,80.",
+        "tokens": 14,
+        "prompt_tokens": 115,
+        "seconds": 1.37,
+        "finish": "stop"
+       },
+       {
+        "seed": 1,
+        "text": "Een kop koffie kost € 0,80.",
+        "tokens": 14,
+        "prompt_tokens": 115,
+        "seconds": 1.65,
+        "finish": "stop"
+       },
+       {
+        "seed": 2,
+        "text": "Een kop koffie kost € 0,80.",
+        "tokens": 14,
+        "prompt_tokens": 115,
+        "seconds": 1.59,
+        "finish": "stop"
+       },
+       {
+        "seed": 3,
+        "text": "Een kop koffie kost € 0,80 in het repaircafé.",
+        "tokens": 19,
+        "prompt_tokens": 115,
+        "seconds": 1.91,
+        "finish": "stop"
+       }
+      ]
+     },
+     {
+      "prompt_sha256": "a2c48f2dc55282818a1f151ddcc8889b5b1cf03e0ba3f39dd305150bda2a330d",
+      "seeds": [
+       {
+        "seed": 0,
+        "text": "Een kop koffie kost € 1.50.",
+        "tokens": 14,
+        "prompt_tokens": 129,
+        "seconds": 1.66,
+        "finish": "stop"
+       },
+       {
+        "seed": 1,
+        "text": "Een kop koffie kost € 2,50.",
+        "tokens": 14,
+        "prompt_tokens": 129,
+        "seconds": 1.64,
+        "finish": "stop"
+       },
+       {
+        "seed": 2,
+        "text": "Een kop koffie kost € 2,50.",
+        "tokens": 14,
+        "prompt_tokens": 129,
+        "seconds": 1.52,
+        "finish": "stop"
+       },
+       {
+        "seed": 3,
+        "text": "Een kop koffie kost € 2,50.",
+        "tokens": 14,
+        "prompt_tokens": 129,
+        "seconds": 1.59,
+        "finish": "stop"
+       }
+      ]
+     }
+    ]
+   },
+   {
+    "closed": {
+     "prompt_sha256": "2a1818ad15fc45b1338c8e2d7b488b8c3e0b91ad541b77cb356cd524a0bc207c",
+     "seeds": [
+      {
+       "seed": 0,
+       "text": "Per jaar komt het repaircafé vaak samen.",
+       "tokens": 11,
+       "prompt_tokens": 41,
+       "seconds": 1.29,
+       "finish": "stop"
+      },
+      {
+       "seed": 1,
+       "text": "Het repaircafé komt vaak per jaar samen in de buurt van het huis.",
+       "tokens": 17,
+       "prompt_tokens": 41,
+       "seconds": 1.71,
+       "finish": "stop"
+      },
+      {
+       "seed": 2,
+       "text": "Per jaar komt het repaircafé vaak samen.",
+       "tokens": 11,
+       "prompt_tokens": 41,
+       "seconds": 1.18,
+       "finish": "stop"
+      },
+      {
+       "seed": 3,
+       "text": "Het repaircafé komt vaak per jaar in de buurt van het huis.",
+       "tokens": 16,
+       "prompt_tokens": 41,
+       "seconds": 1.55,
+       "finish": "stop"
+      }
+     ]
+    },
+    "texts": [
+     {
+      "prompt_sha256": "1c896faed523bb73733f594e85ecb32f676c8040b1e86a68c07a3710089646d7",
+      "seeds": [
+       {
+        "seed": 0,
+        "text": "Het repaircafé komt vaak per jaar samen, zodat het er een keer op kent.",
+        "tokens": 22,
+        "prompt_tokens": 90,
+        "seconds": 2.41,
+        "finish": "stop"
+       },
+       {
+        "seed": 1,
+        "text": "Het repaircafé komt samen vaak per jaar.",
+        "tokens": 11,
+        "prompt_tokens": 90,
+        "seconds": 1.23,
+        "finish": "stop"
+       },
+       {
+        "seed": 2,
+        "text": "Het repaircafé komt vaak per jaar samen.",
+        "tokens": 11,
+        "prompt_tokens": 90,
+        "seconds": 1.19,
+        "finish": "stop"
+       },
+       {
+        "seed": 3,
+        "text": "Het repaircafé komt vaak per jaar samen.",
+        "tokens": 11,
+        "prompt_tokens": 90,
+        "seconds": 1.08,
+        "finish": "stop"
+       }
+      ]
+     },
+     {
+      "prompt_sha256": "de68c3baed780ca5b62caa91ee6c1f368d7a6d467d7980cfd9aaf47b8469e36a",
+      "seeds": [
+       {
+        "seed": 0,
+        "text": "Het repaircafé komt samen op een dag.",
+        "tokens": 10,
+        "prompt_tokens": 114,
+        "seconds": 1.24,
+        "finish": "stop"
+       },
+       {
+        "seed": 1,
+        "text": "Het repaircafé komt samen per jaar.",
+        "tokens": 9,
+        "prompt_tokens": 114,
+        "seconds": 1.07,
+        "finish": "stop"
+       },
+       {
+        "seed": 2,
+        "text": "De vraag is beantwoordd met de tekst: Mercurius is de planeet die het dichtst bij de zon staat. Het repaircafé komt vaak per jaar samen.",
+        "tokens": 41,
+        "prompt_tokens": 114,
+        "seconds": 4.17,
+        "finish": "stop"
+       },
+       {
+        "seed": 3,
+        "text": "Het repaircafé komt samen een jaar op Mercurius.",
+        "tokens": 13,
+        "prompt_tokens": 114,
+        "seconds": 1.5,
+        "finish": "stop"
+       }
+      ]
+     },
+     {
+      "prompt_sha256": "03daee554f23cf505b98f7b22f1774b59b295c82811a12095d12b5292a2cd99d",
+      "seeds": [
+       {
+        "seed": 0,
+        "text": "De Eiffeltoren in Parijs was in 1889 klaar, voor een wereldtentoonstelling. Met de antennes erbij is de toren ongeveer 330 meter hoog. Eigenlijk zou de toren slechts twintig jaar",
+        "tokens": 60,
+        "prompt_tokens": 119,
+        "seconds": 5.3,
+        "finish": "length"
+       },
+       {
+        "seed": 1,
+        "text": "De Eiffeltoren in Parijs was in 1889 klaar, maar de toren zou slechts twintig jaar blijven staan. Het is mogelijk dat het repaircafé vaak per jaar wordt aangevraagd.",
+        "tokens": 55,
+        "prompt_tokens": 119,
+        "seconds": 5.3,
+        "finish": "stop"
+       },
+       {
+        "seed": 2,
+        "text": "Het repaircafé komt vaak per jaar samen.",
+        "tokens": 11,
+        "prompt_tokens": 119,
+        "seconds": 1.15,
+        "finish": "stop"
+       },
+       {
+        "seed": 3,
+        "text": "De toren in Parijs is in 1889 klaar, maar de toren blijft staan slechts twintig jaar, wat betekent dat het repaircafé vaak per jaar komt.",
+        "tokens": 47,
+        "prompt_tokens": 119,
+        "seconds": 3.87,
+        "finish": "stop"
+       }
+      ]
+     },
+     {
+      "prompt_sha256": "ef2896796e807e2c4ead2c0b6b997923dc1bb4449a3b618c591c443959173fc1",
+      "seeds": [
+       {
+        "seed": 0,
+        "text": "De bibliotheek is op werkdagen open van 9.00 tot 18.00 uur, en is gesloten op zaterdag en zondag. Het repaircafé is dus niet op werkdagen open.",
+        "tokens": 53,
+        "prompt_tokens": 146,
+        "seconds": 4.74,
+        "finish": "stop"
+       },
+       {
+        "seed": 1,
+        "text": "Het repaircafé komt samen op een paar maanden per jaar.",
+        "tokens": 14,
+        "prompt_tokens": 146,
+        "seconds": 1.89,
+        "finish": "stop"
+       },
+       {
+        "seed": 2,
+        "text": "De bibliotheek is op werkdagen open van 9.00 tot 18.00 uur en is gesloten op zaterdag en zondag. Het repaircafé komt vaak per jaar samen.",
+        "tokens": 50,
+        "prompt_tokens": 146,
+        "seconds": 4.55,
+        "finish": "stop"
+       },
+       {
+        "seed": 3,
+        "text": "Het repaircafé komt samen op een paar keer per jaar.",
+        "tokens": 13,
+        "prompt_tokens": 146,
+        "seconds": 1.43,
+        "finish": "stop"
+       }
+      ]
+     },
+     {
+      "prompt_sha256": "574e14504bad932a02d08cb10b65215faece016b238ca53ca0443260b803018b",
+      "seeds": [
+       {
+        "seed": 0,
+        "text": "Het repaircafé komt elke eerste zaterdag van de maand samen.",
+        "tokens": 17,
+        "prompt_tokens": 112,
+        "seconds": 1.72,
+        "finish": "stop"
+       },
+       {
+        "seed": 1,
+        "text": "Het repaircafé komt elke eerste zaterdag van de maand samen.",
+        "tokens": 17,
+        "prompt_tokens": 112,
+        "seconds": 1.8,
+        "finish": "stop"
+       },
+       {
+        "seed": 2,
+        "text": "Het repaircafé komt elke eerste zaterdag van de maand samen.",
+        "tokens": 17,
+        "prompt_tokens": 112,
+        "seconds": 1.77,
+        "finish": "stop"
+       },
+       {
+        "seed": 3,
+        "text": "Het repaircafé komt elke eerste zaterdag van de maand samen.",
+        "tokens": 17,
+        "prompt_tokens": 112,
+        "seconds": 1.67,
+        "finish": "stop"
+       }
+      ]
+     },
+     {
+      "prompt_sha256": "b886305c84f2741987187e78720db3682f1502a1ac74be6e29182e0678590b2e",
+      "seeds": [
+       {
+        "seed": 0,
+        "text": "Het repaircafé komt samen een dagelijkse keer.",
+        "tokens": 12,
+        "prompt_tokens": 126,
+        "seconds": 1.39,
+        "finish": "stop"
+       },
+       {
+        "seed": 1,
+        "text": "Het repaircafé komt samen per jaar.",
+        "tokens": 9,
+        "prompt_tokens": 126,
+        "seconds": 1.41,
+        "finish": "stop"
+       },
+       {
+        "seed": 2,
+        "text": "Het repaircafé komt samen per jaar.",
+        "tokens": 9,
+        "prompt_tokens": 126,
+        "seconds": 1.21,
+        "finish": "stop"
+       },
+       {
+        "seed": 3,
+        "text": "Het repaircafé komt samen op een dag.",
+        "tokens": 10,
+        "prompt_tokens": 126,
+        "seconds": 1.13,
+        "finish": "stop"
+       }
+      ]
+     }
+    ]
+   },
+   {
+    "closed": {
+     "prompt_sha256": "f116d8d20471737a4e86ef1e0cb3a80888834379a53a10a1fa7f224c74ef5d78",
+     "seeds": [
+      {
+       "seed": 0,
+       "text": "Een dagkaartje voor het openluchtzwembad kost meerdere euro per uur.",
+       "tokens": 22,
+       "prompt_tokens": 47,
+       "seconds": 1.95,
+       "finish": "stop"
+      },
+      {
+       "seed": 1,
+       "text": "Een dagkaartje voor het openluchtzwembad kost een bepaalde prijs, die afhankelijk van de locatie en de categorie kan variëren.",
+       "tokens": 40,
+       "prompt_tokens": 47,
+       "seconds": 3.77,
+       "finish": "stop"
+      },
+      {
+       "seed": 2,
+       "text": "Een dagkaartje voor het openluchtzwembad kost ongeveer €100.",
+       "tokens": 24,
+       "prompt_tokens": 47,
+       "seconds": 2.23,
+       "finish": "stop"
+      },
+      {
+       "seed": 3,
+       "text": "Een dagkaartje voor het openluchtzwembad kost meerdere euro.",
+       "tokens": 20,
+       "prompt_tokens": 47,
+       "seconds": 1.76,
+       "finish": "stop"
+      }
+     ]
+    },
+    "texts": [
+     {
+      "prompt_sha256": "c1f9bf39079e44ee60cbb178d9eb7c3215214bb9508205bf556b0a2edcf03ccc",
+      "seeds": [
+       {
+        "seed": 0,
+        "text": "Een dagkaartje voor het openluchtzwembad kost een bepaalde hoeveelheid geld.",
+        "tokens": 26,
+        "prompt_tokens": 96,
+        "seconds": 2.39,
+        "finish": "stop"
+       },
+       {
+        "seed": 1,
+        "text": "Een dagkaartje voor het openluchtzwembad kost een bepaalde hoeveelheid.",
+        "tokens": 25,
+        "prompt_tokens": 96,
+        "seconds": 2.46,
+        "finish": "stop"
+       },
+       {
+        "seed": 2,
+        "text": "De dagkaartje kost een aantal euro's.",
+        "tokens": 11,
+        "prompt_tokens": 96,
+        "seconds": 1.22,
+        "finish": "stop"
+       },
+       {
+        "seed": 3,
+        "text": "Een dagkaartje voor het openluchtzwembad kost een bepaalde somma.",
+        "tokens": 23,
+        "prompt_tokens": 96,
+        "seconds": 2.25,
+        "finish": "stop"
+       }
+      ]
+     },
+     {
+      "prompt_sha256": "b379d73b1b2b44e32314ba7ec4d7c4c72a1faf88b05001365c9659ecfbdd7417",
+      "seeds": [
+       {
+        "seed": 0,
+        "text": "De dagkaart kost een aardse dag van 176 dagen.",
+        "tokens": 17,
+        "prompt_tokens": 120,
+        "seconds": 1.82,
+        "finish": "stop"
+       },
+       {
+        "seed": 1,
+        "text": "Een dagkaartje voor het openluchtzwembad kost een aardse dag.",
+        "tokens": 21,
+        "prompt_tokens": 120,
+        "seconds": 2.09,
+        "finish": "stop"
+       },
+       {
+        "seed": 2,
+        "text": "De dagkaart kost een uur op Mercurius.",
+        "tokens": 12,
+        "prompt_tokens": 120,
+        "seconds": 1.26,
+        "finish": "stop"
+       },
+       {
+        "seed": 3,
+        "text": "Een dagkaartje voor het openluchtzwembad kost 176 aardse dagen.",
+        "tokens": 24,
+        "prompt_tokens": 120,
+        "seconds": 2.46,
+        "finish": "stop"
+       }
+      ]
+     },
+     {
+      "prompt_sha256": "7cf4973483b408166b4117ff56e403dc9c2533d90589d19913b3604f9bb34445",
+      "seeds": [
+       {
+        "seed": 0,
+        "text": "De dagkaartje kost 10 euro per dag.",
+        "tokens": 13,
+        "prompt_tokens": 125,
+        "seconds": 1.5,
+        "finish": "stop"
+       },
+       {
+        "seed": 1,
+        "text": "De dagkaartje voor het openluchtzwembad kost ongeveer 12 euro.",
+        "tokens": 23,
+        "prompt_tokens": 125,
+        "seconds": 2.04,
+        "finish": "stop"
+       },
+       {
+        "seed": 2,
+        "text": "De dagkaartje kost een aantal euro's per dag.",
+        "tokens": 13,
+        "prompt_tokens": 125,
+        "seconds": 1.44,
+        "finish": "stop"
+       },
+       {
+        "seed": 3,
+        "text": "De dagkaart kost een euro per dag.",
+        "tokens": 10,
+        "prompt_tokens": 125,
+        "seconds": 1.19,
+        "finish": "stop"
+       }
+      ]
+     },
+     {
+      "prompt_sha256": "46d57695ed87ba42c6100708e584b265d595f2b0ec694ec34cfb319376d3e937",
+      "seeds": [
+       {
+        "seed": 0,
+        "text": "Een dagkaartje voor het openluchtzwembad kost € 3.",
+        "tokens": 19,
+        "prompt_tokens": 152,
+        "seconds": 2.04,
+        "finish": "stop"
+       },
+       {
+        "seed": 1,
+        "text": "Een dagkaartje voor het openluchtzwembad kost € 3.",
+        "tokens": 19,
+        "prompt_tokens": 152,
+        "seconds": 1.93,
+        "finish": "stop"
+       },
+       {
+        "seed": 2,
+        "text": "Een dagkaartje voor het openluchtzwembad kost € 3.",
+        "tokens": 19,
+        "prompt_tokens": 152,
+        "seconds": 1.94,
+        "finish": "stop"
+       },
+       {
+        "seed": 3,
+        "text": "Een dagkaartje voor het openluchtzwembad kost € 3.",
+        "tokens": 19,
+        "prompt_tokens": 152,
+        "seconds": 2.06,
+        "finish": "stop"
+       }
+      ]
+     },
+     {
+      "prompt_sha256": "34477d11e687d8623edb4ed2d8bc4e9678ef802d510f128bb02418a35a0e4044",
+      "seeds": [
+       {
+        "seed": 0,
+        "text": "De dagkaartje kost € 0,80 per dag.",
+        "tokens": 15,
+        "prompt_tokens": 118,
+        "seconds": 1.59,
+        "finish": "stop"
+       },
+       {
+        "seed": 1,
+        "text": "Een dagkaartje voor het openluchtzwembad kost € 0,80.",
+        "tokens": 22,
+        "prompt_tokens": 118,
+        "seconds": 1.98,
+        "finish": "stop"
+       },
+       {
+        "seed": 2,
+        "text": "De dagkaartje kost € 0,80 per dag.",
+        "tokens": 15,
+        "prompt_tokens": 118,
+        "seconds": 1.48,
+        "finish": "stop"
+       },
+       {
+        "seed": 3,
+        "text": "Een dagkaartje voor het openluchtzwembad kost € 0,80.",
+        "tokens": 22,
+        "prompt_tokens": 118,
+        "seconds": 2.87,
+        "finish": "stop"
+       }
+      ]
+     },
+     {
+      "prompt_sha256": "715a471a063aecd9ada809bb8ca33a0e8c54dbb8c87cee12d7ffaf665533e5f1",
+      "seeds": [
+       {
+        "seed": 0,
+        "text": "De dagkaartje kost € 4,50.",
+        "tokens": 13,
+        "prompt_tokens": 132,
+        "seconds": 1.38,
+        "finish": "stop"
+       },
+       {
+        "seed": 1,
+        "text": "Een dagkaartje kost € 4,50.",
+        "tokens": 14,
+        "prompt_tokens": 132,
+        "seconds": 1.37,
+        "finish": "stop"
+       },
+       {
+        "seed": 2,
+        "text": "De dagkaartje kost € 4,50.",
+        "tokens": 13,
+        "prompt_tokens": 132,
+        "seconds": 1.25,
+        "finish": "stop"
+       },
+       {
+        "seed": 3,
+        "text": "Een dagkaartje kost € 4,50.",
+        "tokens": 14,
+        "prompt_tokens": 132,
+        "seconds": 2.22,
+        "finish": "stop"
+       }
+      ]
+     }
+    ]
+   },
+   {
+    "closed": {
+     "prompt_sha256": "736162d236a7e850119303075695223553f3044860ff7016c55eb7bfa9b3afd8",
+     "seeds": [
+      {
+       "seed": 0,
+       "text": "Het zwembad is open op 100 maanden per jaar.",
+       "tokens": 16,
+       "prompt_tokens": 43,
+       "seconds": 1.41,
+       "finish": "stop"
+      },
+      {
+       "seed": 1,
+       "text": "Het zwembad is per jaar open van 24 tot 26 maanden.",
+       "tokens": 19,
+       "prompt_tokens": 43,
+       "seconds": 1.73,
+       "finish": "stop"
+      },
+      {
+       "seed": 2,
+       "text": "Het zwembad is open vanaf 24 tot 28 maanden per jaar.",
+       "tokens": 20,
+       "prompt_tokens": 43,
+       "seconds": 1.7,
+       "finish": "stop"
+      },
+      {
+       "seed": 3,
+       "text": "Het zwembad is per jaar open van 14 maanden.",
+       "tokens": 15,
+       "prompt_tokens": 43,
+       "seconds": 1.76,
+       "finish": "stop"
+      }
+     ]
+    },
+    "texts": [
+     {
+      "prompt_sha256": "82b4a7bdc13bdaea824b188d1b1dc2908b72937f8f72f4fe7874d87cc0cc6b78",
+      "seeds": [
+       {
+        "seed": 0,
+        "text": "Het zwembad is open over een hele jaar.",
+        "tokens": 11,
+        "prompt_tokens": 92,
+        "seconds": 1.08,
+        "finish": "stop"
+       },
+       {
+        "seed": 1,
+        "text": "Het zwembad is per jaar open.",
+        "tokens": 9,
+        "prompt_tokens": 92,
+        "seconds": 1.12,
+        "finish": "stop"
+       },
+       {
+        "seed": 2,
+        "text": "Het zwembad is open in één jaar.",
+        "tokens": 10,
+        "prompt_tokens": 92,
+        "seconds": 1.08,
+        "finish": "stop"
+       },
+       {
+        "seed": 3,
+        "text": "Het zwembad is open vanaf 2 maanden per jaar.",
+        "tokens": 15,
+        "prompt_tokens": 92,
+        "seconds": 2.03,
+        "finish": "stop"
+       }
+      ]
+     },
+     {
+      "prompt_sha256": "c4a1a88447204835e2fa80f8ed54102a20eb2f4fdc80e0a891ba63453eb179f6",
+      "seeds": [
+       {
+        "seed": 0,
+        "text": "Het zwembad is open op 176 aardse dagen per jaar.",
+        "tokens": 18,
+        "prompt_tokens": 116,
+        "seconds": 1.87,
+        "finish": "stop"
+       },
+       {
+        "seed": 1,
+        "text": "Het zwembad is op Mercurius open per jaar.",
+        "tokens": 13,
+        "prompt_tokens": 116,
+        "seconds": 1.37,
+        "finish": "stop"
+       },
+       {
+        "seed": 2,
+        "text": "Het zwembad is open 176 aardse dagen per jaar.",
+        "tokens": 17,
+        "prompt_tokens": 116,
+        "seconds": 2.31,
+        "finish": "stop"
+       },
+       {
+        "seed": 3,
+        "text": "Het zwembad is open per jaar.",
+        "tokens": 9,
+        "prompt_tokens": 116,
+        "seconds": 1.35,
+        "finish": "stop"
+       }
+      ]
+     },
+     {
+      "prompt_sha256": "83c3b85ff3262a023ed1422963c4efccb46f8e3b1ff5704594cb6827003369ce",
+      "seeds": [
+       {
+        "seed": 0,
+        "text": "De toren is in 1889 klaar, maar het zwembad is in de 20e eeuw open.",
+        "tokens": 30,
+        "prompt_tokens": 121,
+        "seconds": 2.77,
+        "finish": "stop"
+       },
+       {
+        "seed": 1,
+        "text": "Het zwembad is op 365 dagen per jaar open.",
+        "tokens": 15,
+        "prompt_tokens": 121,
+        "seconds": 1.59,
+        "finish": "stop"
+       },
+       {
+        "seed": 2,
+        "text": "De toren in Parijs is in 1889 klaar, maar het zwembad is in een paar maanden open.",
+        "tokens": 30,
+        "prompt_tokens": 121,
+        "seconds": 2.98,
+        "finish": "stop"
+       },
+       {
+        "seed": 3,
+        "text": "Het zwembad is op een jaarlijkse basis open.",
+        "tokens": 13,
+        "prompt_tokens": 121,
+        "seconds": 1.59,
+        "finish": "stop"
+       }
+      ]
+     },
+     {
+      "prompt_sha256": "0faa8039b6ee843a5ff12eb6f98bdd9942830ae3ef1d1e9041e0c70e0ad2a78d",
+      "seeds": [
+       {
+        "seed": 0,
+        "text": "Het zwembad is op 10 maanden per jaar open.",
+        "tokens": 15,
+        "prompt_tokens": 148,
+        "seconds": 1.74,
+        "finish": "stop"
+       },
+       {
+        "seed": 1,
+        "text": "Het zwembad is op 10 maanden per jaar open.",
+        "tokens": 15,
+        "prompt_tokens": 148,
+        "seconds": 1.78,
+        "finish": "stop"
+       },
+       {
+        "seed": 2,
+        "text": "Het zwembad is op 4 maanden per jaar open.",
+        "tokens": 14,
+        "prompt_tokens": 148,
+        "seconds": 1.61,
+        "finish": "stop"
+       },
+       {
+        "seed": 3,
+        "text": "Het zwembad is op 100 maanden per jaar open.",
+        "tokens": 16,
+        "prompt_tokens": 148,
+        "seconds": 1.89,
+        "finish": "stop"
+       }
+      ]
+     },
+     {
+      "prompt_sha256": "1ba3937c2f88174c983f45cd7b58a40ec66eaef71f9b540788dcc8ac6de2d015",
+      "seeds": [
+       {
+        "seed": 0,
+        "text": "Het repaircafé is elke eerste zaterdag van de maand open, dus het is in een jaar een keer open.",
+        "tokens": 27,
+        "prompt_tokens": 114,
+        "seconds": 2.5,
+        "finish": "stop"
+       },
+       {
+        "seed": 1,
+        "text": "Het repaircafé is elke eerste zaterdag van de maand samen in het buurthuis. Het is open van 3 maanden per jaar.",
+        "tokens": 34,
+        "prompt_tokens": 114,
+        "seconds": 2.79,
+        "finish": "stop"
+       },
+       {
+        "seed": 2,
+        "text": "Het repaircafé is elke eerste zaterdag van de maand samen in het buurthuis. Het is vrijwilliger voor een jaar.",
+        "tokens": 32,
+        "prompt_tokens": 114,
+        "seconds": 3.18,
+        "finish": "stop"
+       },
+       {
+        "seed": 3,
+        "text": "Het repaircafé is elke eerste zaterdag van de maand open, dus het is op 30 dagen per jaar open.",
+        "tokens": 29,
+        "prompt_tokens": 114,
+        "seconds": 3.1,
+        "finish": "stop"
+       }
+      ]
+     },
+     {
+      "prompt_sha256": "11ddf70db5197588165de7ca28d5b19823e313c6e296ea9cb85eff3e8e3ef153",
+      "seeds": [
+       {
+        "seed": 0,
+        "text": "Het zwembad is op 15 mei en 15 september dicht, dus per jaar is het open 2 maanden.",
+        "tokens": 30,
+        "prompt_tokens": 128,
+        "seconds": 2.81,
+        "finish": "stop"
+       },
+       {
+        "seed": 1,
+        "text": "Het zwembad is open op 15 mei en dicht op 15 september, dus per jaar is het zwembad open 2 maanden.",
+        "tokens": 35,
+        "prompt_tokens": 128,
+        "seconds": 3.34,
+        "finish": "stop"
+       },
+       {
+        "seed": 2,
+        "text": "Het zwembad is op 15 mei en 15 september dicht, dus het is open 2 maanden per jaar.",
+        "tokens": 30,
+        "prompt_tokens": 128,
+        "seconds": 2.94,
+        "finish": "stop"
+       },
+       {
+        "seed": 3,
+        "text": "Het zwembad is op 15 mei en 15 september dicht, dus per jaar is het open 2 maanden.",
+        "tokens": 30,
+        "prompt_tokens": 128,
+        "seconds": 3.28,
+        "finish": "stop"
+       }
+      ]
+     }
+    ]
+   }
+  ]
+ },
+ "lesson": "nlp-qa-kinds",
+ "model": "Qwen/Qwen3-0.6B",
+ "revision": "c1899de289a04d12100db370d81485cdf75e47ca",
+ "dtype": "float32",
+ "machine": "Intel(R) Xeon(R) Processor @ 2.10GHz, 4 cores",
+ "threads": 4,
+ "torch": "2.14.1+cu130",
+ "sampling": {
+  "temperature": 0.7,
+  "top_p": 0.8,
+  "top_k": 20
+ },
+ "max_tokens": 60,
+ "seeds": 4,
+ "load_seconds": 10.4,
+ "code": "db337dc"
+}

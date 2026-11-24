@@ -1236,6 +1236,9 @@ class FunctionBox(CodeBox):
                                         "nl": f"Met `{call}` stopt je functie met een fout. " + plain["nl"]})
             want = self._run(solution, case)
             if got is None and want is not None:
+                named = self._same_as_wrong(fn, cases, call, got, want)
+                if named is not None:   # a known wrong version that gives None here says more than "nothing back"
+                    return named
                 printed = bool(out.getvalue().strip())
                 key = "prints" if printed else "no_return"
                 if key == "no_return" and not self.collect and re.search(r"^[ \t]*return[ \t]+\S", text, re.MULTILINE):
@@ -1270,6 +1273,18 @@ class FunctionBox(CodeBox):
             if m.matches(None, text):
                 return Result(m.state, m.text, mistake=m.key)
         return self._correct(text, n=len(cases))
+
+    def _same_as_wrong(self, fn, cases, call, got, want):
+        """The mistake of a wrong version that gives the same as `fn` in every case, or None."""
+        mine = None
+        for m in self.mistakes:
+            if m.syntax or m.error is not None or m.wrong is None:
+                continue
+            wrong_fn = self._fn(m.wrong)
+            mine = self._results(fn, cases) if mine is None else mine
+            if wrong_fn is not None and self._same_results(mine, self._results(wrong_fn, cases)):
+                return Result(m.state, _fill(m.text, call=call, got=self._shown(got), want=self._shown(want)), mistake=m.key)
+        return None
 
     def _results(self, fn, cases) -> list:
         """What `fn` gives for each case; an error or a time-out counts as an outcome of its own."""

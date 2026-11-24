@@ -1,0 +1,33 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: nlp-qa-kinds
+minutes: 40
+title:
+  en: "Kinds of question answering"
+  nl: "Soorten question answering"
+goal:
+  en: "sort question answering by where the answer comes from and what form it has, mark an answer as a span of its text, pick the text of a collection that shares the most words with a question, and compare a chat model's answers with and without a text."
+  nl: "question answering indelen naar waar het antwoord vandaan komt en welke vorm het heeft, een antwoord aanwijzen als span van de tekst, de tekst uit een verzameling kiezen die de meeste woorden met een vraag deelt, en de antwoorden van een chat model met en zonder tekst vergelijken."
+summary:
+  - en: "Question answering differs in where the answer comes from: a text that comes with the question (reading comprehension), texts the system finds itself in a collection (open-domain, a retriever and then a reader), or only what a model learned (closed-book)."
+    nl: "Question answering verschilt in waar het antwoord vandaan komt: een tekst die met de vraag meekomt (reading comprehension), teksten die het systeem zelf in een verzameling vindt (open-domain, een retriever en dan een reader), of alleen wat een model leerde (closed-book)."
+  - en: "And in the form of the answer: a span of the text, given by where it starts and ends (extractive), or an answer the system writes itself (abstractive). An answer that needs a calculation, or other words than the text, has no span."
+    nl: "En in de vorm van het antwoord: een span van de tekst, aangegeven met de plaats waar de span begint en eindigt (extractive), of een antwoord dat het systeem zelf schrijft (abstractive). Een antwoord dat een som vraagt, of andere woorden dan de tekst, heeft geen span."
+  - en: "Without a text, a chat model also answers questions it cannot know, and sounds just as sure. Open-domain question answering is only as good as its retriever: a text that shares the most words with a question need not answer it."
+    nl: "Zonder tekst beantwoordt een chat model ook vragen die het niet kan weten, en klinkt het net zo zeker. Open-domain question answering staat of valt met de retriever: een tekst die de meeste woorden met een vraag deelt, hoeft de vraag niet te beantwoorden."
+can_now:
+  - en: "mark an answer as a span of its text, as a tuple (start, end), and see which answers have none"
+    nl: "een antwoord aanwijzen als span van de tekst, als tuple (start, end), en zien welke antwoorden er geen hebben"
+    by: find_span
+  - en: "write a retriever that picks the text of a collection sharing the most different words with a question"
+    nl: "een retriever schrijven die de tekst uit een verzameling kiest die de meeste verschillende woorden met een vraag deelt"
+    by: best_text
+  - en: "put a retriever and a reader together into open-domain question answering, and compare it with closed-book answers"
+    nl: "een retriever en een reader samenvoegen tot open-domain question answering, en het vergelijken met closed-book antwoorden"
+    by: open_domain
+further_reading:
+  - en: "Adam Roberts, Colin Raffel and Noam Shazeer, [*How Much Knowledge Can You Pack Into the Parameters of a Language Model?*](https://aclanthology.org/2020.emnlp-main.437/), EMNLP 2020: closed-book question answering with T5, compared with systems that look things up"
+    nl: "Adam Roberts, Colin Raffel en Noam Shazeer, [*How Much Knowledge Can You Pack Into the Parameters of a Language Model?*](https://aclanthology.org/2020.emnlp-main.437/), EMNLP 2020: closed-book question answering met T5, vergeleken met systemen die dingen opzoeken (in het Engels)"
+  - en: "Danqi Chen, Adam Fisch, Jason Weston and Antoine Bordes, [*Reading Wikipedia to Answer Open-Domain Questions*](https://aclanthology.org/P17-1171/), ACL 2017: DrQA, a retriever over all of Wikipedia and a reader that marks the answer"
+    nl: "Danqi Chen, Adam Fisch, Jason Weston en Antoine Bordes, [*Reading Wikipedia to Answer Open-Domain Questions*](https://aclanthology.org/P17-1171/), ACL 2017: DrQA, een retriever over heel Wikipedia en een reader die het antwoord aanwijst (in het Engels)"
