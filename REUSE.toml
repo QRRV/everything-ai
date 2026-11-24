@@ -609,3 +609,9 @@ path = "data/uner-en-ewt.tsv.gz"
 precedence = "override"
 SPDX-FileCopyrightText = "Stephen Mayhew and others (Universal NER v1, UNER_English-EWT, the names); 2013-2021 The Board of Trustees of The Leland Stanford Junior University (the Universal Dependencies English Web Treebank; portions of the texts may be 2012 Google Inc., 2011 Yahoo! Inc., 2012 Trustees of the University of Pennsylvania and/or other original authors; without the e-mails, for Everything AI)"
 SPDX-License-Identifier = "CC-BY-SA-4.0"
+
+[[annotations]]
+path = "data/bert-tiny-fine-tune.npz"
+precedence = "override"
+SPDX-FileCopyrightText = "2020 Google (BERT-Tiny, google/bert_uncased_L-2_H-128_A-2, Turc, Chang, Lee and Toutanova; what it gives for six sentences of the reviews, a head the course trained on it, and the scores of a copy the course fine-tuned for the names of UNER_English-EWT, computed for Everything AI), Dimitrios Kotzias (Sentiment Labelled Sentences, 2015, UCI Machine Learning Repository), Stephen Mayhew and others (Universal NER v1), 2013-2021 The Board of Trustees of The Leland Stanford Junior University (the Universal Dependencies English Web Treebank), and 2026 Everything AI contributors"
+SPDX-License-Identifier = "Apache-2.0 AND CC-BY-4.0 AND CC-BY-SA-4.0"

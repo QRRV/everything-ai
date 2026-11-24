@@ -677,9 +677,9 @@ lessons:
   module: neurale-nlp
   idea: "A small linear layer on BERT's output classifies a sentence (from its first token) or tags every word (from every token), and training the whole a little on labeled examples adapts it to the task."
   covers: [pretrained-encoders-en-encoderdecoders#4]
-  requires: [nlp-bert, torch-fine-tune, nlp-bio-tags]
+  requires: [nlp-bert, torch-fine-tune, nlp-span-f1, nlp-logistic-text]
   introduces: [c:token-classification]
-  data: [model-bert-tiny, uci-sentiment-sentences]
+  data: [model-bert-tiny, uci-sentiment-sentences, uner-english-ewt]
   ladder: [python, torch]
   needs: any
 

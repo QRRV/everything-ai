@@ -1,0 +1,44 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: nlp-fine-tune-bert
+minutes: 50
+title:
+  en: "Fine-tuning an encoder for a task"
+  nl: "Een encoder finetunen voor een taak"
+goal:
+  en: "put a head on BERT-Tiny that labels a sentence from its vector at [CLS], fine-tune it on review sentences, and give token classification its labels and read its tags, with -100 where the loss leaves a place out."
+  nl: "een head op BERT-Tiny zetten die een zin labelt vanuit de vector bij [CLS], het model finetunen op zinnen uit recensies, en token classification de labels geven en de tags laten lezen, met -100 waar de loss een plek overslaat."
+summary:
+  - en: "A new head turns an encoder into a model for a task: a layer on the vector at [CLS] gives the scores of a sentence, and in token classification a layer on every place gives the scores of the tags."
+    nl: "Een nieuwe head maakt van een encoder een model voor een taak: een layer op de vector bij [CLS] geeft de scores van een zin, en bij token classification geeft een layer op elke plek de scores van de tags."
+  - en: "A word of several pieces gets its tag at its first piece; [CLS], [SEP] and the later pieces get the label -100, which nn.CrossEntropyLoss leaves out. After training, a word gets the tag with the highest score at its first piece."
+    nl: "Een woord van meer stukjes krijgt de tag bij het eerste stukje; [CLS], [SEP] en de latere stukjes krijgen het label -100, dat nn.CrossEntropyLoss overslaat. Na de training krijgt een woord de tag met de hoogste score bij het eerste stukje."
+  - en: "On 600 held-out review sentences, a head on the frozen BERT-Tiny gets 430 to 449 right over 5 seeds, fewer than the 491 of logistic regression on words; fine-tuned, BERT-Tiny gets 496 to 502."
+    nl: "Op 600 achtergehouden zinnen uit recensies krijgt een head op de bevroren BERT-Tiny er over 5 seeds 430 tot 449 goed, minder dan de 491 van logistische regressie op woorden; gefinetuned haalt BERT-Tiny 496 tot 502."
+  - en: "For the names of Universal NER, the course's fine-tuned BERT-Tiny reaches a span F1 of 0.602, against 0.411 frozen and 0.551 for the tagger with word shapes."
+    nl: "Voor de namen van Universal NER haalt de gefinetunede BERT-Tiny van de course een span F1 van 0,602, tegen 0,411 bevroren en 0,551 voor de tagger met woordvormen."
+can_now:
+  - en: "give a head the vector at [CLS] of every sentence of a batch, after the last block"
+    nl: "een head de vector bij [CLS] van elke zin van een batch geven, na het laatste block"
+    by: classify
+  - en: "give every place of a sentence its label for token classification, with -100 where the loss leaves it out"
+    nl: "elke plek van een zin het label voor token classification geven, met -100 waar de loss de plek overslaat"
+    by: piece_labels
+  - en: "say why a later piece of a word gets the label -100"
+    nl: "zeggen waarom een later stukje van een woord het label -100 krijgt"
+    by: first-piece
+  - en: "read the tag of every word from the scores at its first piece"
+    nl: "de tag van elk woord lezen uit de scores bij het eerste stukje"
+    by: word_tags
+further_reading:
+  - en: "Daniel Jurafsky and James H. Martin, [*Speech and Language Processing*](https://web.stanford.edu/~jurafsky/slp3/), draft of August 19, 2026, the chapter *Masked Language Models*: fine-tuning for classification with the vector at [CLS], and for named entity recognition with a tag for every token"
+    nl: "Daniel Jurafsky en James H. Martin, [*Speech and Language Processing*](https://web.stanford.edu/~jurafsky/slp3/), conceptversie van 19 augustus 2026, het hoofdstuk *Masked Language Models*: fine-tuning om een tekst een label te geven met de vector bij [CLS], en voor named entity recognition met een tag voor elk token (in het Engels)"
+  - en: "Jacob Devlin, Ming-Wei Chang, Kenton Lee and Kristina Toutanova, [*BERT: Pre-training of Deep Bidirectional Transformers for Language Understanding*](https://aclanthology.org/N19-1423/), NAACL 2019: fine-tuning in section 3.2, the first sub-token for names in section 5.3, and the settings of fine-tuning in appendix A.3"
+    nl: "Jacob Devlin, Ming-Wei Chang, Kenton Lee en Kristina Toutanova, [*BERT: Pre-training of Deep Bidirectional Transformers for Language Understanding*](https://aclanthology.org/N19-1423/), NAACL 2019: fine-tuning in paragraaf 3.2, het eerste stukje van een woord voor namen in paragraaf 5.3, en de instellingen van fine-tuning in bijlage A.3 (in het Engels)"
+  - en: "Matthew E. Peters, Sebastian Ruder and Noah A. Smith, [*To Tune or Not to Tune? Adapting Pretrained Representations to Diverse Tasks*](https://arxiv.org/abs/1903.05987), 2019: frozen and fine-tuned BERT and ELMo side by side on seven tasks"
+    nl: "Matthew E. Peters, Sebastian Ruder en Noah A. Smith, [*To Tune or Not to Tune? Adapting Pretrained Representations to Diverse Tasks*](https://arxiv.org/abs/1903.05987), 2019: bevroren en gefinetunede BERT en ELMo naast elkaar op zeven taken (in het Engels)"
+  - en: "Marius Mosbach, Maksym Andriushchenko and Dietrich Klakow, [*On the Stability of Fine-tuning BERT: Misconceptions, Explanations, and Strong Baselines*](https://arxiv.org/abs/2006.04884), ICLR 2021: why some runs of fine-tuning fail, and how to make them fail less"
+    nl: "Marius Mosbach, Maksym Andriushchenko en Dietrich Klakow, [*On the Stability of Fine-tuning BERT: Misconceptions, Explanations, and Strong Baselines*](https://arxiv.org/abs/2006.04884), ICLR 2021: waarom sommige runs van fine-tuning mislukken, en hoe dat minder vaak gebeurt (in het Engels)"
+  - en: "Pieter Delobelle, Thomas Winters and Bettina Berendt, [*RobBERT: a Dutch RoBERTa-based Language Model*](https://aclanthology.org/2020.findings-emnlp.292/), Findings of EMNLP 2020: a Dutch model of the BERT family, fine-tuned on reviews, word classes and names"
+    nl: "Pieter Delobelle, Thomas Winters en Bettina Berendt, [*RobBERT: a Dutch RoBERTa-based Language Model*](https://aclanthology.org/2020.findings-emnlp.292/), Findings of EMNLP 2020: een Nederlands model uit de BERT-familie, gefinetuned op recensies, woordsoorten en namen (in het Engels)"
