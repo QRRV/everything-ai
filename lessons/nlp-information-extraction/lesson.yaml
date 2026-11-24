@@ -1,0 +1,33 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: nlp-information-extraction
+minutes: 45
+title:
+  en: "From text to a table"
+  nl: "Van tekst naar een tabel"
+goal:
+  en: "take the dates out of 2,067 paragraphs of Wikipedia as rows with a pattern, count the right, wrong and missed rows against the course's list of every date, and write the dates in one fixed form."
+  nl: "de datums uit 2.067 alinea's van Wikipedia halen als rijen met een patroon, de goede, foute en gemiste rijen tellen tegen de lijst van de course met elke datum, en de datums in één vaste vorm schrijven."
+summary:
+  - en: "Information extraction turns free text into structured data: rows with fixed fields, such as the slots of a template. A regular expression with a group for each field takes a fact apart, and each group becomes the value of its field: digits with int, a name with a dictionary."
+    nl: "Information extraction zet vrije tekst om in gestructureerde data: rijen met vaste velden, zoals de slots van een template. Een reguliere expressie met een groep voor elk veld haalt een feit uit elkaar, en elke groep wordt de waarde van het veld: cijfers met int, een naam met een dictionary."
+  - en: "A rule is judged against a gold standard, the list of right rows: precision is the share of the rows found that are right, and recall the share of the right rows that were found. A row with one wrong field counts as a false positive and as a false negative."
+    nl: "Je beoordeelt een regel tegen een gold standard, de lijst met goede rijen: precision is het deel van de gevonden rijen dat goed is, en recall het deel van de goede rijen dat gevonden is. Een rij met één fout veld telt als false positive en als false negative."
+  - en: "A pattern finds only the forms it describes: a date can be written day first or month first, and the names of people have no fixed form at all. Written as ISO 8601, YYYY-MM-DD, dates sort as text in the order of time."
+    nl: "Een patroon vindt alleen de vormen die het beschrijft: een datum kan met de dag eerst of met de maand eerst geschreven zijn, en de namen van mensen hebben helemaal geen vaste vorm. Geschreven als ISO 8601, YYYY-MM-DD, sorteren datums als tekst op volgorde van de tijd."
+can_now:
+  - en: "take facts out of a text with a regular expression, a group for each field, and turn the groups into the values of a row"
+    nl: "feiten uit een tekst halen met een reguliere expressie, een groep voor elk veld, en van de groepen de waarden van een rij maken"
+    by: date_rows
+  - en: "count the right, wrong and missed rows of an extraction against a gold standard, and work out its precision and recall"
+    nl: "de goede, foute en gemiste rijen van een regel tellen tegen een gold standard, en daaruit de precision en de recall halen"
+    by: score
+  - en: "write dates in the fixed form of ISO 8601, so that a program can compare and sort them"
+    nl: "datums in de vaste vorm van ISO 8601 schrijven, zodat een programma de datums kan vergelijken en sorteren"
+    by: iso_dates
+further_reading:
+  - en: "Daniel Jurafsky and James H. Martin, [*Speech and Language Processing*](https://web.stanford.edu/~jurafsky/slp3/), draft of August 19, 2026, the chapter *Information Extraction: Relations, Events, and Time*: relations, events, templates, and how systems find and normalize times and dates"
+    nl: "Daniel Jurafsky en James H. Martin, [*Speech and Language Processing*](https://web.stanford.edu/~jurafsky/slp3/), conceptversie van 19 augustus 2026, het hoofdstuk *Information Extraction: Relations, Events, and Time*: relaties, gebeurtenissen, templates, en hoe systemen tijden en datums vinden en in een vaste vorm zetten (in het Engels)"
+  - en: "Wikipedia, [*Manual of Style/Dates and numbers*](https://en.wikipedia.org/wiki/Wikipedia:Manual_of_Style/Dates_and_numbers): the rules by which the English Wikipedia writes its dates, one form per page"
+    nl: "Wikipedia, [*Manual of Style/Dates and numbers*](https://en.wikipedia.org/wiki/Wikipedia:Manual_of_Style/Dates_and_numbers): de regels waarmee de Engelse Wikipedia datums schrijft, één vorm per pagina (in het Engels)"

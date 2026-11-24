@@ -9,7 +9,8 @@ questions was corrected by people; the other paragraphs are machine translation 
 data/tools/make_xquad_nl.py).
 
 Each answer is a stretch of its paragraph: its text and the place of its first character. `counts(lang)` gives the
-document-term matrix of the paragraphs that the topic models of lesson nlp-topic-models start from."""
+document-term matrix of the paragraphs that the topic models of lesson nlp-topic-models start from, and `dates(lang)`
+the course's list of every date with a day, a month and a year in the paragraphs, for lesson nlp-information-extraction."""
 import collections
 import functools
 import gzip
@@ -26,6 +27,26 @@ LEAST = 5        # counts() keeps a word that is in at least this many paragraph
 MOST = 0.10      # and in at most this share of them
 
 
+MONTHS = {"en": ("January", "February", "March", "April", "May", "June", "July", "August", "September", "October",
+                  "November", "December"),
+          "nl": ("januari", "februari", "maart", "april", "mei", "juni", "juli", "augustus", "september", "oktober",
+                 "november", "december")}
+
+# The dates written in another way than the two forms of dates() below, found by going through every place in the
+# paragraphs where a day and a month stand together: (paragraph, the text that names the date, year, month, day). A
+# date counts when its text names the day, the month and the year, also when one year serves several days, as in
+# "6 to 10 July 2009"; "on September 27 of that year" names no year and does not count. Each text is in its paragraph
+# once.
+_OTHER_DATES = {
+    "en": ((152, "10 July [O.S. 28 June] 1856", 1856, 7, 10), (152, "[O.S. 28 June] 1856", 1856, 6, 28),
+           (371, "28 January to 25 May 1521", 1521, 1, 28), (566, "24 August – 3 October 1572", 1572, 8, 24),
+           (1493, "6 to 10 July 2009", 2009, 7, 6)),
+    "nl": ((152, "10 juli [O.S. 28 juni] 1856", 1856, 7, 10), (152, "[O.S. 28 juni] 1856", 1856, 6, 28),
+           (371, "28 januari tot 25 mei 1521", 1521, 1, 28), (566, "24 augustus - 3 oktober 1572", 1572, 8, 24),
+           (727, "9 november. 1967", 1967, 11, 9), (1493, "6 tot 10 juli 2009", 2009, 7, 6)),
+}
+
+
 class Paragraph(NamedTuple):
     article: int        # the place of its article, 0 to 47, in the order of SQuAD
     title: str          # the article's name in that language, such as "Warsaw" or "Warschau"
@@ -39,6 +60,16 @@ class Question(NamedTuple):
     id: str             # the id of SQuAD, the same in both languages
     question: str
     answers: tuple      # (text, start) for each answer, with text == paragraph[start:start + len(text)]
+
+
+class Date(NamedTuple):
+    paragraph: int      # the place of its paragraph in paragraphs(lang), 0 to 2,066
+    start: int          # where the text that names the date starts in the paragraph
+    end: int            # and where it ends: paragraph.text[start:end] is that text
+    form: str           # "dmy" for 7 February 2016, "mdy" for February 7, 2016, "other" for the dates of _OTHER_DATES
+    year: int
+    month: int          # 1 to 12
+    day: int
 
 
 def words(text: str) -> list:
@@ -116,3 +147,26 @@ def counts(lang: str) -> tuple:
     assert lang in LANGS, lang
     matrix, vocab = _counts(lang)
     return matrix.copy(), vocab
+
+
+@functools.cache
+def dates(lang: str) -> tuple:
+    """Every date with a day, a month and a year in the 2,067 paragraphs in English (en) or Dutch (nl), in the order of
+    the paragraphs and of their places in a paragraph: 245 in each language, the same dates in the same paragraphs. Most
+    are in one of two forms, day month year (7 February 2016, 7 februari 2016) or, in English only, month day, year
+    (February 7, 2016); the others were found by hand (_OTHER_DATES). The course's answer key for its rules."""
+    assert lang in LANGS, lang
+    names = "|".join(MONTHS[lang])
+    number = {name: k + 1 for k, name in enumerate(MONTHS[lang])}
+    out = []
+    for i, p in enumerate(paragraphs(lang)):
+        for m in re.finditer(r"\b(\d{1,2}) (" + names + r") (\d{4})\b", p.text):
+            out.append(Date(i, m.start(), m.end(), "dmy", int(m.group(3)), number[m.group(2)], int(m.group(1))))
+        for m in re.finditer(r"\b(" + names + r") (\d{1,2}), (\d{4})\b", p.text):
+            out.append(Date(i, m.start(), m.end(), "mdy", int(m.group(3)), number[m.group(1)], int(m.group(2))))
+    for i, text, year, month, day in _OTHER_DATES[lang]:
+        whole = paragraphs(lang)[i].text
+        assert whole.count(text) == 1, (lang, i, text)
+        start = whole.index(text)
+        out.append(Date(i, start, start + len(text), "other", year, month, day))
+    return tuple(sorted(out, key=lambda d: (d.paragraph, d.start, d.day)))

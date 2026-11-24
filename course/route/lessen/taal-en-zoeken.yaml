@@ -745,11 +745,12 @@ lessons:
   level: basis
   domein: taal
   module: taken
-  idea: "Information extraction turns free text into fields: regular expressions with groups take dates, amounts and names into rows, and you count how many the rules find and how many they get wrong."
+  idea: "Information extraction turns free text into fields: regular expressions with groups take dates into rows, you count how many the rules find, miss and get wrong, and names of people show where a pattern falls short."
   covers: [d15-informatie-extractie#0]
   requires: [nlp-regex, ml-confusion-matrix]
   introduces: [c:information-extraction]
-  data: []
+  mentions: [c:machine-translation]
+  data: [xquad-squad-nl, uner-english-ewt]
   ladder: [python]
   needs: any
 
