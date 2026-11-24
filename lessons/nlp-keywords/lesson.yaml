@@ -1,0 +1,31 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: nlp-keywords
+minutes: 45
+title:
+  en: "Keywords and terms"
+  nl: "Keywords en termen"
+goal:
+  en: "count the pairs of neighboring words in eight books, work out with pointwise mutual information how many times as often as chance each pair occurs, and find the terms of a book: the pairs with the highest PMI that occur often enough."
+  nl: "de paren naburige woorden in acht boeken tellen, met pointwise mutual information uitrekenen hoeveel keer zo vaak als bij toeval elk paar voorkomt, en de termen van een boek vinden: de paren met de hoogste PMI die vaak genoeg voorkomen."
+summary:
+  - en: "The keywords of a document are its words with the highest TF-IDF. Many terms are pairs of words, such as *mock turtle*: a collocation is a pair of words that occur together more often than chance."
+    nl: "De keywords van een document zijn de woorden met de hoogste TF-IDF. Veel termen zijn paren woorden, zoals *mock turtle*: een collocatie is een paar woorden dat vaker samen voorkomt dan bij toeval."
+  - en: "If two words were independent, their pair would occur about c(x) · c(y) / N times, by chance. Pointwise mutual information is log2 of the real count divided by that chance count: 0 for as often as chance, 1 for twice as often, below 0 for less often."
+    nl: "Als twee woorden onafhankelijk waren, zou het paar ongeveer c(x) · c(y) / N keer voorkomen, bij toeval. Pointwise mutual information is log2 van het echte aantal gedeeld door dat aantal bij toeval: 0 voor even vaak als bij toeval, 1 voor twee keer zo vaak, onder 0 voor minder vaak."
+  - en: "A pair whose two words occur once each, together, gets the highest PMI there is: log2 N. A minimum count keeps such accidents out: in *Alice*, the pairs with at least 10 occurrences and the highest PMI are *march hare*, *mock turtle*, *your majesty* and *white rabbit*."
+    nl: "Een paar waarvan de twee woorden elk één keer voorkomen, samen, krijgt de hoogste PMI die er is: log2 N. Een minimum aantal houdt zulke toevallen buiten de top: in *Alice* zijn de paren met minstens 10 keer en de hoogste PMI *march hare*, *mock turtle*, *your majesty* en *white rabbit*."
+can_now:
+  - en: "count the pairs of neighboring words of a text, in a dictionary with tuples as keys"
+    nl: "de paren naburige woorden van een tekst tellen, in een dictionary met tuples als keys"
+    by: pair_counts
+  - en: "work out the chance count and the pointwise mutual information of a pair of words"
+    nl: "het aantal bij toeval en de pointwise mutual information van een paar woorden uitrekenen"
+    by: pmi
+  - en: "find the collocations and terms of a text: the pairs with the highest PMI among those that occur often enough"
+    nl: "de collocaties en termen van een tekst vinden: de paren met de hoogste PMI van de paren die vaak genoeg voorkomen"
+    by: terms
+further_reading:
+  - en: "Kenneth Ward Church and Patrick Hanks, [*Word Association Norms, Mutual Information, and Lexicography*](https://aclanthology.org/J90-1003/), Computational Linguistics 16(1), 1990: the measure of this lesson, which they call the association ratio, with a window of five words and examples from the news of the Associated Press"
+    nl: "Kenneth Ward Church en Patrick Hanks, [*Word Association Norms, Mutual Information, and Lexicography*](https://aclanthology.org/J90-1003/), Computational Linguistics 16(1), 1990: de maat van deze les, in de paper association ratio genoemd, met een venster van vijf woorden en voorbeelden uit het nieuws van Associated Press (in het Engels)"
