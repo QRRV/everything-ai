@@ -1,0 +1,62 @@
+review	kind	review_label	sentence	label	en	nl
+1	product	1	1	1	Great headphones for the price.	Geweldige koptelefoon voor deze prijs.
+1	product	1	2	1	The sound is clear and the battery easily lasts a whole day.	Het geluid is helder en de batterij gaat makkelijk een hele dag mee.
+1	product	1	3	1	Very comfortable, even after hours.	Zit heel comfortabel, ook na uren.
+1	product	1	4	0	My only complaint: the cable is short.	Ik heb maar één klacht: de kabel is kort.
+2	product	0	1	1	The kettle looks beautiful on the counter.	De waterkoker staat prachtig op het aanrecht.
+2	product	0	2	1	It boils water fast.	Het water kookt snel.
+2	product	0	3	1	The handle stays cool.	Het handvat blijft koel.
+2	product	0	4	0	But after two weeks it started to leak, so I sent it back.	Maar na twee weken lekte de waterkoker al, dus ik heb het hele ding teruggestuurd.
+3	product	1	1	1	The case feels a bit thin, but it fits perfectly.	Het hoesje voelt wat dun, maar het past perfect.
+3	product	1	2	0	The color is a little darker than in the photo.	De kleur is iets donkerder dan op de foto.
+3	product	1	3	1	For this price, a great deal.	Voor deze prijs een topkoop.
+4	product	0	1	0	The charger stopped working after three days.	De oplader deed het na drie dagen al niet meer.
+4	product	0	2	0	Customer service never answered my emails.	De klantenservice heeft nooit op mijn mails gereageerd.
+4	product	0	3	0	A waste of money.	Zonde van het geld.
+5	product	0	1	1	Delivery took only two days.	De bezorging duurde maar twee dagen.
+5	product	0	2	0	The blender is very loud and the lid does not close well.	De blender maakt veel lawaai en het deksel sluit niet goed.
+5	product	0	3	0	I would not buy this blender again.	Ik zou deze blender niet nog eens kopen.
+6	product	1	1	0	Setting up the printer took me an hour.	Het installeren van de printer kostte me een uur.
+6	product	1	2	0	The manual is useless.	De handleiding is waardeloos.
+6	product	1	3	1	But once everything works, the prints are excellent and the machine is quiet.	Maar als alles eenmaal werkt, zijn de afdrukken uitstekend en is het apparaat stil.
+6	product	1	4	1	I am happy with it.	Ik ben er blij mee.
+7	film	1	1	1	A moving story with wonderful acting.	Een ontroerend verhaal met prachtig acteerwerk.
+7	film	1	2	1	The music fits every scene.	De muziek past bij elke scène.
+7	film	1	3	1	I would watch this film again tomorrow.	Ik zou deze film morgen zo weer kijken.
+8	film	0	1	1	The cast is excellent and the trailer looked promising.	De cast is uitstekend en de trailer zag er veelbelovend uit.
+8	film	0	2	1	The first half hour is funny.	Het eerste halfuur is grappig.
+8	film	0	3	0	But then the plot falls apart and the ending makes no sense.	Maar daarna valt het verhaal uit elkaar en slaat het einde nergens op.
+8	film	0	4	0	What a disappointment.	Wat een teleurstelling.
+9	film	1	1	1	The film is too long, but it never gets boring.	De film is te lang, maar verveelt geen moment.
+9	film	1	2	0	Some of the dialogue is clumsy.	Sommige dialogen zijn houterig.
+9	film	1	3	1	Still, the last scene is beautiful.	Toch is de laatste scène prachtig.
+9	film	1	4	1	Worth seeing on the big screen.	De moeite waard om op het grote doek te zien.
+10	film	0	1	0	Boring from start to finish.	Saai van begin tot eind.
+10	film	0	2	0	The jokes fall flat and the acting is wooden.	De grappen zijn flauw en het spel is stijf.
+10	film	0	3	0	I walked out halfway through.	Halverwege ben ik weggegaan.
+11	film	0	1	1	The camera work is beautiful.	Het camerawerk is prachtig.
+11	film	0	2	0	But the story is slow and predictable.	Maar het verhaal is traag en voorspelbaar.
+11	film	0	3	0	Two hours I will never get back.	Twee uur die ik nooit meer terugkrijg.
+12	film	1	1	0	The special effects look cheap.	De special effects zien er goedkoop uit.
+12	film	1	2	1	But the characters are so likable that I did not care.	Maar de personages zijn zo sympathiek dat het me niets kon schelen.
+12	film	1	3	1	A small film with a big heart.	Een kleine film met een groot hart.
+13	restaurant	1	1	1	The food was delicious and the staff were friendly.	Het eten was heerlijk en het personeel was vriendelijk.
+13	restaurant	1	2	1	We will definitely come back.	We komen zeker terug.
+13	restaurant	1	3	0	Parking is a pain, though.	Parkeren is wel een drama.
+14	restaurant	0	1	1	The terrace is lovely and the menu looks great.	Het terras is heerlijk en de kaart ziet er goed uit.
+14	restaurant	0	2	0	But we waited an hour for our food.	Maar we hebben een uur op ons eten gewacht.
+14	restaurant	0	3	0	The pasta was cold and the waiter was rude.	De pasta was koud en de ober was onbeleefd.
+14	restaurant	0	4	0	Never again.	Nooit meer.
+15	restaurant	1	1	0	The place is small and a bit noisy.	De zaak is klein en een beetje rumoerig.
+15	restaurant	1	2	1	But the pizza is the best in town.	Maar de pizza is de beste van de stad.
+15	restaurant	1	3	1	The service is quick and friendly.	De bediening is snel en vriendelijk.
+16	restaurant	0	1	0	The soup was salty and the fish was dry.	De soep was zout en de vis was droog.
+16	restaurant	0	2	0	The bill was far too high for what we got.	De rekening was veel te hoog voor wat we kregen.
+16	restaurant	0	3	0	Not recommended.	Geen aanrader.
+17	restaurant	1	1	0	Parking is hard to find.	Parkeren is lastig.
+17	restaurant	1	2	0	We had to wait twenty minutes for a table.	We moesten twintig minuten op een tafel wachten.
+17	restaurant	1	3	0	The dessert was nothing special.	Het dessert was niets bijzonders.
+17	restaurant	1	4	1	But the steak was perfect, and that is what we came for.	Maar de steak was perfect, en daar kwamen we voor.
+18	restaurant	0	1	1	The waiter was very kind.	De ober was heel aardig.
+18	restaurant	0	2	0	But the kitchen was out of half the menu.	Maar de keuken had de helft van de kaart niet meer.
+18	restaurant	0	3	0	The burger was okay, but the fries were soggy.	De burger was oké, maar de friet was slap.

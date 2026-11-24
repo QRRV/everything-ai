@@ -12,7 +12,9 @@ each with a Dutch translation (data/tools/make_tatoeba_pairs.py), and `language_
 Tatoeba in each of twelve languages in data/tatoeba-langs.tsv.gz (data/tools/make_tatoeba_langs.py). `stop_words(lang)` gives the stop words of Snowball
 for English or Dutch in data/snowball-stop-en.txt and data/snowball-stop-nl.txt (data/tools/make_snowball_stopwords.py).
 `review_sentences()` gives the 3,000 labelled review sentences of data/uci-sentiment.tsv.gz
-(data/tools/make_uci_sentiment.py). `english_chapters()` cuts the five English books into their 251 chapters, stories
+(data/tools/make_uci_sentiment.py), `dutch_review_sentences()` the course's Dutch translation of them in
+data/uci-sentiment-nl.tsv.gz, and `course_reviews()` the short reviews of a few sentences that the course wrote in
+English and Dutch, in data/course-reviews.tsv. `english_chapters()` cuts the five English books into their 251 chapters, stories
 and letters, so that a lesson can use them as documents."""
 import functools
 import gzip
@@ -26,6 +28,8 @@ TATOEBA_NL = paths.ROOT / "data" / "tatoeba-nl.tsv.gz"
 TATOEBA_PAIRS = paths.ROOT / "data" / "tatoeba-nl-pairs.tsv.gz"
 TATOEBA_LANGS = paths.ROOT / "data" / "tatoeba-langs.tsv.gz"
 UCI_SENTIMENT = paths.ROOT / "data" / "uci-sentiment.tsv.gz"
+UCI_SENTIMENT_NL = paths.ROOT / "data" / "uci-sentiment-nl.tsv.gz"
+COURSE_REVIEWS = paths.ROOT / "data" / "course-reviews.tsv"
 MASSIVE = paths.ROOT / "data" / "massive-en-nl.tsv.gz"
 STOP_WORDS = {"en": paths.ROOT / "data" / "snowball-stop-en.txt", "nl": paths.ROOT / "data" / "snowball-stop-nl.txt"}
 # a word: letters, with an apostrophe inside it as in "don't" or "Alice's"; digits, punctuation and the underscores
@@ -211,6 +215,31 @@ def review_sentences() -> tuple:
     assert lines[0] == "source\tline\tlabel\tshown\ttext"
     return tuple((source, int(line), int(label), int(shown), text)
                  for source, line, label, shown, text in (row.split("\t") for row in lines[1:] if row))
+
+
+@functools.cache
+def dutch_review_sentences() -> tuple:
+    """The course's Dutch translation of the 3,000 sentences of review_sentences(), in the same order and the same
+    form (source, line, label, shown, text): the same source, line, label and shown, with the Dutch sentence."""
+    with gzip.open(UCI_SENTIMENT_NL, "rt", encoding="utf-8") as f:
+        lines = f.read().split("\n")
+    assert lines[0] == "source\tline\tlabel\tshown\ttext"
+    return tuple((source, int(line), int(label), int(shown), text)
+                 for source, line, label, shown, text in (row.split("\t") for row in lines[1:] if row))
+
+
+@functools.cache
+def course_reviews() -> tuple:
+    """The 18 short reviews that the course wrote, each as (kind, label, sentences): product, film or restaurant, the
+    label of the whole review (1 positive, 0 negative), and its sentences as (label, English, Dutch), in their order."""
+    lines = COURSE_REVIEWS.read_text(encoding="utf-8").split("\n")
+    assert lines[0] == "review\tkind\treview_label\tsentence\tlabel\ten\tnl"
+    out = {}
+    for row in lines[1:]:
+        if row:
+            review, kind, review_label, _, label, en, nl = row.split("\t")
+            out.setdefault(int(review), (kind, int(review_label), []))[2].append((int(label), en, nl))
+    return tuple((kind, label, tuple(sentences)) for kind, label, sentences in out.values())
 
 
 @functools.cache

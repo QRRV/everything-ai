@@ -1,0 +1,39 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: nlp-sentiment
+minutes: 45
+title:
+  en: "Sentiment: positive or negative?"
+  nl: "Sentiment: positief of negatief?"
+goal:
+  en: "give a review a label from the labels of its sentences, or from all its words as one text, and give the words after *but* more say."
+  nl: "een recensie een label geven uit de labels van de zinnen, of uit alle woorden als één tekst, en de woorden na *maar* meer laten zeggen."
+summary:
+  - en: "Sentiment analysis decides whether a text is positive or negative: per sentence (the sentence level) or for a whole text such as a review (the document level). The two can disagree, since a review mixes praise and complaints."
+    nl: "Sentiment analysis bepaalt of een tekst positief of negatief is: per zin (het zinsniveau) of voor een hele tekst zoals een recensie (het documentniveau). De twee kunnen verschillen, omdat een recensie lof en klachten mengt."
+  - en: "Majority voting gives a review the label that most of its sentences have; the whole review as one text lets every word add to one z, so a sentence with heavy words can outweigh several light ones. On the course's 18 reviews, the majority vote gets 14 right and the whole text 16 (in Dutch, 15 and 16)."
+    nl: "Majority voting geeft een recensie het label dat de meeste zinnen hebben; de hele recensie als één tekst laat elk woord optellen bij één z, zodat een zin met zware woorden meer kan wegen dan een paar lichte zinnen. Op de 18 recensies van de course krijgt de meerderheid er 15 goed en de hele tekst 16 (in het Engels 14 en 16)."
+  - en: "Half weight before the last *but* brings the held-out sentences with *but* from 36 to 38 right out of 50, too few to call the rule better: it helps where the judgment comes after *but*, pulls the wrong way where it comes before, and can break a sentence where *but* turns nothing around. In Dutch, *maar* often means *only*, and the rule goes from 57 to 58 right out of 65."
+    nl: "Halve weight vóór de laatste *maar* brengt de achtergehouden zinnen met *maar* van 57 naar 58 goed van de 65, te weinig om de regel beter te noemen: de regel helpt waar het oordeel na *maar* komt, en trekt de verkeerde kant op waar het oordeel ervóór komt of waar *maar* niets omdraait. In het Nederlands betekent *maar* ook vaak slechts; in het Engels gaat de regel van 36 naar 38 goed van de 50."
+can_now:
+  - en: "give a review the label that most of its sentences have, with the last sentence deciding a tie"
+    nl: "een recensie het label geven dat de meeste zinnen hebben, met de laatste zin als beslisser bij een gelijke stand"
+    by: majority
+  - en: "give each word half its weight before the last *but*"
+    nl: "elk woord vóór de laatste *maar* de halve weight geven"
+    by: scales
+  - en: "say where the judgment of a sentence with *but* lies, and when weighing *but* helps"
+    nl: "zeggen waar het oordeel van een zin met *maar* staat, en wanneer het helpt om *maar* te laten wegen"
+    by: where-judgment
+further_reading:
+  - en: "Daniel Jurafsky and James H. Martin, [*Speech and Language Processing*](https://web.stanford.edu/~jurafsky/slp3/), draft of August 19, 2026, Appendix B *Naive Bayes, Text Classification, and Sentiment*: sentiment analysis as a task of two labels, and the words that give it away"
+    nl: "Daniel Jurafsky en James H. Martin, [*Speech and Language Processing*](https://web.stanford.edu/~jurafsky/slp3/), conceptversie van 19 augustus 2026, bijlage B *Naive Bayes, Text Classification, and Sentiment*: sentiment analysis als taak met twee labels, en de woorden die het oordeel verraden (in het Engels)"
+  - en: "Bing Liu, [*Sentiment Analysis and Opinion Mining*](https://www.cs.uic.edu/~liub/FBS/SentimentAnalysis-and-OpinionMining.pdf), 2012: the document, sentence and aspect levels in chapter 1, and words such as *but* in chapter 5"
+    nl: "Bing Liu, [*Sentiment Analysis and Opinion Mining*](https://www.cs.uic.edu/~liub/FBS/SentimentAnalysis-and-OpinionMining.pdf), 2012: het documentniveau, het zinsniveau en het niveau van onderdelen in hoofdstuk 1, en woorden als *but* in hoofdstuk 5 (in het Engels)"
+  - en: "Bo Pang, Lillian Lee and Shivakumar Vaithyanathan, [*Thumbs up? Sentiment Classification using Machine Learning Techniques*](https://aclanthology.org/W02-1011/), EMNLP 2002: film reviews sorted by machine, and the reviews that set up an expectation and then break it"
+    nl: "Bo Pang, Lillian Lee en Shivakumar Vaithyanathan, [*Thumbs up? Sentiment Classification using Machine Learning Techniques*](https://aclanthology.org/W02-1011/), EMNLP 2002: filmrecensies met de computer gesorteerd, en de recensies die eerst een verwachting opbouwen en de verwachting dan breken (in het Engels)"
+  - en: "Dimitrios Kotzias, Misha Denil, Nando de Freitas and Padhraic Smyth, [*From Group to Individual Labels using Deep Features*](https://doi.org/10.1145/2783258.2783380), KDD 2015: the 3,000 sentences of this lesson, and labels for sentences learned from labels for whole reviews"
+    nl: "Dimitrios Kotzias, Misha Denil, Nando de Freitas en Padhraic Smyth, [*From Group to Individual Labels using Deep Features*](https://doi.org/10.1145/2783258.2783380), KDD 2015: de 3.000 zinnen van deze les, en labels voor zinnen geleerd uit labels voor hele recensies (in het Engels)"
+  - en: "Richard Socher and colleagues, [*Recursive Deep Models for Semantic Compositionality Over a Sentiment Treebank*](https://aclanthology.org/D13-1170/), EMNLP 2013: a label for every phrase of a sentence, and what models make of *X but Y*"
+    nl: "Richard Socher en anderen, [*Recursive Deep Models for Semantic Compositionality Over a Sentiment Treebank*](https://aclanthology.org/D13-1170/), EMNLP 2013: een label voor elke woordgroep van een zin, en wat modellen maken van *X but Y* (in het Engels)"

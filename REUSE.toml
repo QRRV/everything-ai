@@ -521,6 +521,18 @@ SPDX-FileCopyrightText = "Dimitrios Kotzias, Sentiment Labelled Sentences (2015)
 SPDX-License-Identifier = "CC-BY-4.0"
 
 [[annotations]]
+path = "data/uci-sentiment-nl.tsv.gz"
+precedence = "override"
+SPDX-FileCopyrightText = ["Dimitrios Kotzias, Sentiment Labelled Sentences (2015), UCI Machine Learning Repository, https://doi.org/10.24432/C57604", "2026 Everything AI contributors (the Dutch translation)"]
+SPDX-License-Identifier = "CC-BY-4.0"
+
+[[annotations]]
+path = "data/course-reviews.tsv"
+precedence = "override"
+SPDX-FileCopyrightText = "2026 Everything AI contributors"
+SPDX-License-Identifier = "CC-BY-4.0"
+
+[[annotations]]
 path = "data/banking77-small.json"
 precedence = "override"
 SPDX-FileCopyrightText = "2020 PolyAI (BANKING77, Casanueva and others, https://arxiv.org/abs/2003.04807; a subset made for Everything AI)"
