@@ -1,0 +1,38 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: nlp-project-sentiment
+minutes: 45
+title:
+  en: "Project: sentiment in English and Dutch"
+  nl: "Project: sentiment in het Engels en het Nederlands"
+goal:
+  en: "put your own classifier and your own lexicon side by side on reviews in English and Dutch, with macro F1 when a label can be missing, and with the sentences each one gets wrong."
+  nl: "je eigen classifier en je eigen lexicon naast elkaar zetten op recensies in het Engels en het Nederlands, met macro F1 als een label kan ontbreken, en met de zinnen waarin elk van de twee de mist in gaat."
+summary:
+  - en: "The code of your spam filter learns sentiment without a line changed: only the words differ, in English and in Dutch. On these reviews, it ends up about as good as a lexicon built from counts in the same training sentences."
+    nl: "De code van je spamfilter leert sentiment zonder één regel te veranderen: alleen de woorden verschillen, in het Engels en in het Nederlands. Op deze recensies komt de classifier ongeveer even goed uit als een lexicon uit tellingen in dezelfde trainingszinnen."
+  - en: "A lexicon gives no label to a sentence whose sum is exactly 0. In macro F1, such a sentence counts as a false negative of its own label and as a false positive of none: it costs recall, not precision."
+    nl: "Een lexicon geeft geen label aan een zin met een som van precies 0. In macro F1 telt zo'n zin als false negative van het eigen label en voor geen enkel label als false positive: de zin kost recall, geen precision."
+  - en: "Two classifiers that work very differently share many more of their mistakes than chance would give. Those sentences are hard in themselves: a label the sentence does not explain, advice, or a word that means something else here."
+    nl: "Twee classifiers met een heel verschillende werking delen veel meer fouten dan toeval zou geven. Deze zinnen zijn op zichzelf moeilijk: een label dat de zin niet verklaart, een advies, of een woord dat hier iets anders betekent."
+can_now:
+  - en: "give each sentence a label from a lexicon, and no label where its sum is exactly 0"
+    nl: "elke zin een label geven uit een lexicon, en geen label waar de som precies 0 is"
+    by: lexicon_labels
+  - en: "work out macro F1 over two labels when a classifier can leave a sentence without a label"
+    nl: "macro F1 uitrekenen over twee labels als een classifier een zin zonder label kan laten"
+    by: macro_f1
+  - en: "find the sentences that two classifiers get wrong together and each alone"
+    nl: "de zinnen vinden die twee classifiers allebei fout hebben, en de zinnen die maar één van de twee fout heeft"
+    by: compare
+  - en: "say what shared mistakes tell about the sentences and about the methods"
+    nl: "zeggen wat gedeelde fouten vertellen over de zinnen en over de methodes"
+    by: shared-mistakes
+further_reading:
+  - en: "Dimitrios Kotzias, Misha Denil, Nando de Freitas and Padhraic Smyth, [*From Group to Individual Labels using Deep Features*](https://doi.org/10.1145/2783258.2783380), KDD 2015: the 3,000 sentences of this project, and labels for sentences learned from labels for whole reviews"
+    nl: "Dimitrios Kotzias, Misha Denil, Nando de Freitas en Padhraic Smyth, [*From Group to Individual Labels using Deep Features*](https://doi.org/10.1145/2783258.2783380), KDD 2015: de 3.000 zinnen van dit project, en labels voor zinnen geleerd uit labels voor hele recensies (in het Engels)"
+  - en: "Bo Pang, Lillian Lee and Shivakumar Vaithyanathan, [*Thumbs up? Sentiment Classification using Machine Learning Techniques*](https://aclanthology.org/W02-1011/), EMNLP 2002: lists of telling words picked by people against a list taken from the data, and classifiers that learn from all the words"
+    nl: "Bo Pang, Lillian Lee en Shivakumar Vaithyanathan, [*Thumbs up? Sentiment Classification using Machine Learning Techniques*](https://aclanthology.org/W02-1011/), EMNLP 2002: lijsten met veelzeggende woorden die mensen kozen, tegenover een lijst uit de data, en classifiers die van alle woorden leren (in het Engels)"
+  - en: "Daniel Jurafsky and James H. Martin, [*Speech and Language Processing*](https://web.stanford.edu/~jurafsky/slp3/), draft of August 19, 2026, chapter 23 *Lexicons for Sentiment, Affect, and Connotation*: how to classify with a lexicon, and when a lexicon helps beside a classifier that learns from every word"
+    nl: "Daniel Jurafsky en James H. Martin, [*Speech and Language Processing*](https://web.stanford.edu/~jurafsky/slp3/), conceptversie van 19 augustus 2026, hoofdstuk 23 *Lexicons for Sentiment, Affect, and Connotation*: hoe je met een lexicon labels geeft, en wanneer een lexicon helpt naast een classifier die van elk woord leert (in het Engels)"

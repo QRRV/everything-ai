@@ -291,6 +291,8 @@ def use_course_versions() -> list[tuple[str, str, str, str]]:
         st = state(package, module)
         if st == "yours":
             continue
+        provide(lesson)   # the course's version may import a file that lesson gives you, such as text/logistic.py
+        importlib.invalidate_caches()
         try:
             with contextlib.redirect_stdout(io.StringIO()):
                 pkg = with_time_limit(lambda: importlib.import_module(package))
