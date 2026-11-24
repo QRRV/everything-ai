@@ -30,6 +30,7 @@ TATOEBA_LANGS = paths.ROOT / "data" / "tatoeba-langs.tsv.gz"
 UCI_SENTIMENT = paths.ROOT / "data" / "uci-sentiment.tsv.gz"
 UCI_SENTIMENT_NL = paths.ROOT / "data" / "uci-sentiment-nl.tsv.gz"
 COURSE_REVIEWS = paths.ROOT / "data" / "course-reviews.tsv"
+PATTERN_SENTIMENT = paths.ROOT / "data" / "pattern-sentiment.tsv.gz"
 MASSIVE = paths.ROOT / "data" / "massive-en-nl.tsv.gz"
 STOP_WORDS = {"en": paths.ROOT / "data" / "snowball-stop-en.txt", "nl": paths.ROOT / "data" / "snowball-stop-nl.txt"}
 # a word: letters, with an apostrophe inside it as in "don't" or "Alice's"; digits, punctuation and the underscores
@@ -226,6 +227,18 @@ def dutch_review_sentences() -> tuple:
     assert lines[0] == "source\tline\tlabel\tshown\ttext"
     return tuple((source, int(line), int(label), int(shown), text)
                  for source, line, label, shown, text in (row.split("\t") for row in lines[1:] if row))
+
+
+@functools.cache
+def pattern_sentiment() -> tuple:
+    """The sentiment lexicons of Pattern (De Smedt and Daelemans, PDDL), one row per sense of a word, English first and
+    then Dutch, as (lang, form, pos, sense, polarity, subjectivity, intensity, shown): the three scores as floats, shown
+    0 for a row the course does not show."""
+    with gzip.open(PATTERN_SENTIMENT, "rt", encoding="utf-8") as f:
+        lines = f.read().split("\n")
+    assert lines[0] == "lang\tform\tpos\tsense\tpolarity\tsubjectivity\tintensity\tconfidence\twordnet_id\tshown"
+    return tuple((lang, form, pos, sense, float(p), float(s), float(i), int(shown))
+                 for lang, form, pos, sense, p, s, i, _, _, shown in (row.split("\t") for row in lines[1:] if row))
 
 
 @functools.cache

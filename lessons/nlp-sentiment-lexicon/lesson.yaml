@@ -1,0 +1,39 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: nlp-sentiment-lexicon
+minutes: 45
+title:
+  en: "A list of good and bad words"
+  nl: "Een lijst met goede en slechte woorden"
+goal:
+  en: "build a sentiment lexicon from labeled reviews, give a sentence the sum of its scores, and turn a score around after a negation."
+  nl: "een sentiment lexicon bouwen uit gelabelde recensies, een zin de som van de scores geven, en een score omdraaien na een ontkenning."
+summary:
+  - en: "A sentiment lexicon gives words a score for positive or negative. People make one by hand, such as Pattern's lists of adjectives, LIWC or VADER; you can also build one from labeled reviews, by comparing how often a word occurs in positive and in negative sentences."
+    nl: "Een sentiment lexicon geeft woorden een score voor positief of negatief. Mensen maken er een met de hand, zoals de lijsten met bijvoeglijke naamwoorden van Pattern, LIWC of VADER; je kunt er ook een bouwen uit gelabelde recensies, door te vergelijken hoe vaak een woord in positieve en in negatieve zinnen voorkomt."
+  - en: "Adding up the scores of a sentence gives a label: positive above 0, negative below 0. A list from the reviews themselves does about as well as the classifier of *Logistic regression on words*; Pattern's list, made partly by hand from other reviews, misses many words and says nothing about many sentences."
+    nl: "De scores van een zin optellen geeft een label: positief boven 0, negatief onder 0. Een lijst uit de recensies zelf doet het ongeveer even goed als de classifier van *Logistische regressie op woorden*; de lijst van Pattern, deels met de hand gemaakt uit andere recensies, mist veel woorden en zegt over veel zinnen niets."
+  - en: "A negation such as *not* turns the score of the words after it around. In this lesson that is the next two words: it helps Pattern's list, and hardly changes the list from the reviews, which already learned that *not* stands mostly in complaints."
+    nl: "Een ontkenning zoals *niet* draait de score van de woorden erna om. In deze les zijn dat de volgende twee woorden: dat helpt de lijst van Pattern, en verandert de lijst uit de recensies nauwelijks, want deze lijst leerde al dat *niet* vooral in klachten staat."
+can_now:
+  - en: "build a sentiment lexicon from labeled sentences, with a score per word from its counts in positive and negative sentences"
+    nl: "een sentiment lexicon bouwen uit gelabelde zinnen, met een score per woord uit de aantallen in positieve en negatieve zinnen"
+    by: lexicon
+  - en: "give a sentence the sum of its scores, with the score of the two words after a negation turned around"
+    nl: "een zin de som van de scores geven, met de score van de twee woorden na een ontkenning omgedraaid"
+    by: score
+  - en: "say where a list made by hand and a list from the reviews agree, and where they do not"
+    nl: "zeggen waar een lijst die met de hand is gemaakt en een lijst uit de recensies het eens zijn, en waar niet"
+    by: words-lists
+further_reading:
+  - en: "Daniel Jurafsky and James H. Martin, [*Speech and Language Processing*](https://web.stanford.edu/~jurafsky/slp3/), draft of August 19, 2026, chapter 23 *Lexicons for Sentiment, Affect, and Connotation*: lexicons made by hand, lexicons learned from labeled reviews, and how to classify with them"
+    nl: "Daniel Jurafsky en James H. Martin, [*Speech and Language Processing*](https://web.stanford.edu/~jurafsky/slp3/), conceptversie van 19 augustus 2026, hoofdstuk 23 *Lexicons for Sentiment, Affect, and Connotation*: lexicons die met de hand zijn gemaakt, lexicons geleerd uit gelabelde recensies, en hoe je er teksten een label mee geeft (in het Engels)"
+  - en: "Tom De Smedt and Walter Daelemans, [*“Vreselijk mooi!” (terribly beautiful): A Subjectivity Lexicon for Dutch Adjectives*](http://www.lrec-conf.org/proceedings/lrec2012/pdf/312_Paper.pdf), LREC 2012: how the Dutch list of Pattern was made, sense by sense, and what it gets right on book reviews"
+    nl: "Tom De Smedt en Walter Daelemans, [*“Vreselijk mooi!” (terribly beautiful): A Subjectivity Lexicon for Dutch Adjectives*](http://www.lrec-conf.org/proceedings/lrec2012/pdf/312_Paper.pdf), LREC 2012: hoe de Nederlandse lijst van Pattern is gemaakt, betekenis voor betekenis, en wat de lijst goed doet op boekrecensies (in het Engels)"
+  - en: "C.J. Hutto and Eric Gilbert, [*VADER: A Parsimonious Rule-based Model for Sentiment Analysis of Social Media Text*](https://ojs.aaai.org/index.php/ICWSM/article/view/14550), ICWSM 2014: a lexicon rated by ten people per word, and rules for *but*, negation and capital letters"
+    nl: "C.J. Hutto en Eric Gilbert, [*VADER: A Parsimonious Rule-based Model for Sentiment Analysis of Social Media Text*](https://ojs.aaai.org/index.php/ICWSM/article/view/14550), ICWSM 2014: een lexicon waarin tien mensen elk woord een cijfer gaven, en regels voor *but*, ontkenning en hoofdletters (in het Engels)"
+  - en: "Yla R. Tausczik and James W. Pennebaker, [*The Psychological Meaning of Words: LIWC and Computerized Text Analysis Methods*](https://doi.org/10.1177/0261927X09351676), Journal of Language and Social Psychology, 2010: a program that counts words in categories, from positive and negative emotion on"
+    nl: "Yla R. Tausczik en James W. Pennebaker, [*The Psychological Meaning of Words: LIWC and Computerized Text Analysis Methods*](https://doi.org/10.1177/0261927X09351676), Journal of Language and Social Psychology, 2010: een programma dat woorden in groepen telt, te beginnen met positieve en negatieve emotie (in het Engels)"
+  - en: "Peter D. Turney, [*Thumbs Up or Thumbs Down? Semantic Orientation Applied to Unsupervised Classification of Reviews*](https://aclanthology.org/P02-1053/), ACL 2002: why a word such as *unpredictable* can be good in one kind of review and bad in another"
+    nl: "Peter D. Turney, [*Thumbs Up or Thumbs Down? Semantic Orientation Applied to Unsupervised Classification of Reviews*](https://aclanthology.org/P02-1053/), ACL 2002: waarom een woord als *unpredictable* in de ene soort recensie goed kan zijn en in de andere slecht (in het Engels)"

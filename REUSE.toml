@@ -521,6 +521,12 @@ SPDX-FileCopyrightText = "Dimitrios Kotzias, Sentiment Labelled Sentences (2015)
 SPDX-License-Identifier = "CC-BY-4.0"
 
 [[annotations]]
+path = "data/pattern-sentiment.tsv.gz"
+precedence = "override"
+SPDX-FileCopyrightText = "Tom De Smedt and Walter Daelemans, CLiPS, University of Antwerp (the sentiment lexicons of Pattern, en-sentiment.xml and nl-sentiment.xml, https://github.com/clips/pattern, as a table for Everything AI)"
+SPDX-License-Identifier = "PDDL-1.0"
+
+[[annotations]]
 path = "data/uci-sentiment-nl.tsv.gz"
 precedence = "override"
 SPDX-FileCopyrightText = ["Dimitrios Kotzias, Sentiment Labelled Sentences (2015), UCI Machine Learning Repository, https://doi.org/10.24432/C57604", "2026 Everything AI contributors (the Dutch translation)"]
