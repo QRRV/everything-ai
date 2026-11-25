@@ -1,0 +1,33 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: nlp-qa-eval
+minutes: 35
+title:
+  en: "Scoring answers: exact match and F1"
+  nl: "Antwoorden scoren: exact match en F1"
+goal:
+  en: "score an answer against the reference answers of a question with exact match and token F1, take the best over the reference answers, and compare people, whole sentences and a reader on the questions of SQuAD."
+  nl: "een antwoord scoren tegen de referentieantwoorden van een vraag met exact match en token F1, de beste nemen over de referentieantwoorden, en mensen, hele zinnen en een reader vergelijken op de vragen van SQuAD."
+summary:
+  - en: "Exact match counts an answer as right when it is the same as one of the reference answers, once both are normalized: in small letters, without punctuation and without the articles."
+    nl: "Exact match rekent een antwoord goed als het gelijk is aan één van de referentieantwoorden, nadat beide genormaliseerd zijn: in kleine letters, zonder leestekens en zonder lidwoorden."
+  - en: "Token F1 gives partial credit: precision is the share of the words of the answer that a reference answer has too, recall the share of the words of the reference answer that the answer has, and F1 their harmonic mean. A word counts as often as it is in both."
+    nl: "Token F1 geeft een deel van de punten: precision is het deel van de woorden van het antwoord dat ook in een referentieantwoord staat, recall het deel van de woorden van het referentieantwoord dat in het antwoord staat, en F1 het harmonisch gemiddelde van de twee. Een woord telt zo vaak als het in beide staat."
+  - en: "SQuAD takes the best score over the reference answers of each question, and the mean over the questions. People differ mostly in how much they mark around an answer; a whole sentence holds the answer, but scores low, as most of its words are not part of it."
+    nl: "SQuAD neemt bij elke vraag de beste score over de referentieantwoorden, en het gemiddelde over de vragen. Mensen verschillen vooral in hoeveel tekst rond een antwoord erbij hoort; een hele zin bevat het antwoord, maar scoort laag, want de meeste woorden ervan horen er niet bij."
+can_now:
+  - en: "say whether an answer is the same as a reference answer, once both are normalized"
+    nl: "zeggen of een antwoord gelijk is aan een referentieantwoord, nadat beide genormaliseerd zijn"
+    by: exact_match
+  - en: "work out the token F1 of an answer against a reference answer"
+    nl: "de token F1 van een antwoord tegen een referentieantwoord uitrekenen"
+    by: token_f1
+  - en: "score many answers the way SQuAD does, with the best over the reference answers of each question"
+    nl: "veel antwoorden scoren zoals SQuAD dat doet, met de beste over de referentieantwoorden van elke vraag"
+    by: squad_scores
+further_reading:
+  - en: "Pranav Rajpurkar, Jian Zhang, Konstantin Lopyrev and Percy Liang, [*SQuAD: 100,000+ Questions for Machine Comprehension of Text*](https://aclanthology.org/D16-1264/), EMNLP 2016: how the extra answers were collected, the two scores, and how well people did on them"
+    nl: "Pranav Rajpurkar, Jian Zhang, Konstantin Lopyrev en Percy Liang, [*SQuAD: 100,000+ Questions for Machine Comprehension of Text*](https://aclanthology.org/D16-1264/), EMNLP 2016: hoe de extra antwoorden verzameld zijn, de twee scores, en hoe goed mensen erop scoorden (in het Engels)"
+  - en: "Wietse de Vries, Martijn Wieling and Malvina Nissim, [*DUMB: A Benchmark for Smart Evaluation of Dutch Models*](https://aclanthology.org/2023.emnlp-main.447/), EMNLP 2023: Dutch tasks for language models, with SQuAD-NL among them"
+    nl: "Wietse de Vries, Martijn Wieling en Malvina Nissim, [*DUMB: A Benchmark for Smart Evaluation of Dutch Models*](https://aclanthology.org/2023.emnlp-main.447/), EMNLP 2023: Nederlandse taken voor language models, met SQuAD-NL erbij (in het Engels)"
