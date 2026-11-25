@@ -1,0 +1,35 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: nlp-extractive-qa
+minutes: 40
+title:
+  en: "Finding the answer in a passage"
+  nl: "Het antwoord vinden in een passage"
+goal:
+  en: "read a question of SQuAD with its paragraph and the spans of its answers, find the sentence in which an answer starts, pick the sentence that shares the most words with a question, and measure that reader against simple baselines."
+  nl: "een vraag van SQuAD lezen met de alinea en de spans van de antwoorden, de zin vinden waarin een antwoord begint, de zin kiezen die de meeste woorden met een vraag deelt, en de reader meten tegen eenvoudige baselines."
+summary:
+  - en: "SQuAD gives a paragraph of Wikipedia, a question that people wrote in their own words, and the answer as a span of the paragraph: its text and answer_start, the place of its first character. XQuAD and SQuAD-NL have 240 of those paragraphs with their questions, in English and in Dutch."
+    nl: "SQuAD geeft een alinea van Wikipedia, een vraag die mensen in eigen woorden schreven, en het antwoord als span van de alinea: de tekst en answer_start, de plaats van het eerste teken. XQuAD en SQuAD-NL hebben 240 van deze alinea's met de vragen erbij, in het Engels en in het Nederlands."
+  - en: "A first reader picks the sentence that shares the most different words with the question, stop words left out. It beats a sentence picked at random and the first sentence of the paragraph by far."
+    nl: "Een eerste reader kiest de zin die de meeste verschillende woorden met de vraag deelt, zonder stop words. De reader verslaat een willekeurige zin en de eerste zin van de alinea ruim."
+  - en: "It goes wrong when another sentence shares more words with the question, when the sentence with the answer uses other words or points back to an earlier sentence, or when it ties with an earlier sentence. And the right sentence is not yet the answer: the span is about a tenth of it."
+    nl: "De reader gaat mis als een andere zin meer woorden met de vraag deelt, als de zin met het antwoord andere woorden gebruikt of terugwijst naar een eerdere zin, of als de zin gelijk eindigt met een eerdere zin. En de goede zin is nog niet het antwoord: de span is ongeveer een tiende ervan."
+can_now:
+  - en: "find the sentence of a paragraph in which an answer starts, from answer_start and the lengths of the sentences"
+    nl: "de zin van een alinea vinden waarin een antwoord begint, uit answer_start en de lengtes van de zinnen"
+    by: sentence_of
+  - en: "write a reader that picks the sentence sharing the most different words with a question, stop words left out"
+    nl: "een reader schrijven die de zin kiest die de meeste verschillende woorden met een vraag deelt, zonder stop words"
+    by: best_sentence
+  - en: "measure how often a reader picks the sentence with the answer, and compare it with simple baselines"
+    nl: "meten hoe vaak een reader de zin met het antwoord kiest, en dat vergelijken met eenvoudige baselines"
+    by: share_right
+further_reading:
+  - en: "Pranav Rajpurkar, Jian Zhang, Konstantin Lopyrev and Percy Liang, [*SQuAD: 100,000+ Questions for Machine Comprehension of Text*](https://aclanthology.org/D16-1264/), EMNLP 2016: how SQuAD was made, what reasoning its questions need, and a logistic regression beside a sliding window"
+    nl: "Pranav Rajpurkar, Jian Zhang, Konstantin Lopyrev en Percy Liang, [*SQuAD: 100,000+ Questions for Machine Comprehension of Text*](https://aclanthology.org/D16-1264/), EMNLP 2016: hoe SQuAD gemaakt is, welk soort redeneren de vragen nodig hebben, en een logistic regression naast een sliding window (in het Engels)"
+  - en: "Mikel Artetxe, Sebastian Ruder and Dani Yogatama, [*On the Cross-lingual Transferability of Monolingual Representations*](https://aclanthology.org/2020.acl-main.421/), ACL 2020: the paper that released XQuAD, 240 paragraphs of SQuAD translated into ten languages"
+    nl: "Mikel Artetxe, Sebastian Ruder en Dani Yogatama, [*On the Cross-lingual Transferability of Monolingual Representations*](https://aclanthology.org/2020.acl-main.421/), ACL 2020: het paper dat XQuAD uitbracht, 240 alinea's van SQuAD vertaald in tien talen (in het Engels)"
+  - en: "Wietse de Vries, Martijn Wieling and Malvina Nissim, [*DUMB: A Benchmark for Smart Evaluation of Dutch Models*](https://aclanthology.org/2023.emnlp-main.447/), EMNLP 2023: Dutch tasks for language models, with SQuAD-NL among them"
+    nl: "Wietse de Vries, Martijn Wieling en Malvina Nissim, [*DUMB: A Benchmark for Smart Evaluation of Dutch Models*](https://aclanthology.org/2023.emnlp-main.447/), EMNLP 2023: Nederlandse taken voor language models, met SQuAD-NL erbij (in het Engels)"
