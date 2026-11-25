@@ -832,7 +832,7 @@ lessons:
   covers: [d15-machinevertaling#0]
   requires: [nlp-dependencies]
   introduces: [c:machine-translation]
-  data: [tatoeba-sentences]
+  data: [tatoeba-sentences, course-dictionary-nl-en]
   ladder: [python]
   needs: any
 

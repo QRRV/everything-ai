@@ -503,6 +503,12 @@ SPDX-FileCopyrightText = "Tatoeba (https://tatoeba.org) and its contributors; 50
 SPDX-License-Identifier = "LicenseRef-CC-BY-2.0-FR"
 
 [[annotations]]
+path = "data/tatoeba-nl-en.tsv.gz"
+precedence = "override"
+SPDX-FileCopyrightText = "Tatoeba (https://tatoeba.org) and its contributors; the English translations of the Dutch sentences of data/tatoeba-nl.tsv.gz, of the export of November 21, 2026, for Everything AI"
+SPDX-License-Identifier = "LicenseRef-CC-BY-2.0-FR"
+
+[[annotations]]
 path = "data/wals-word-order.tsv.gz"
 precedence = "override"
 SPDX-FileCopyrightText = "Matthew S. Dryer and Martin Haspelmath (eds.), The World Atlas of Language Structures Online, Max Planck Institute for Evolutionary Anthropology (https://wals.info); four features of version v2020.6, https://doi.org/10.5281/zenodo.23010827, for Everything AI"
@@ -594,6 +600,12 @@ SPDX-License-Identifier = "Apache-2.0 AND CC-BY-SA-4.0 AND LicenseRef-CC-BY-2.0-
 
 [[annotations]]
 path = "data/course-sentence-pairs.tsv"
+precedence = "override"
+SPDX-FileCopyrightText = "2026 Everything AI contributors"
+SPDX-License-Identifier = "CC-BY-SA-4.0"
+
+[[annotations]]
+path = "data/course-dictionary-nl-en.tsv"
 precedence = "override"
 SPDX-FileCopyrightText = "2026 Everything AI contributors"
 SPDX-License-Identifier = "CC-BY-SA-4.0"

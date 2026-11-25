@@ -1,0 +1,35 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: nlp-classic-mt
+minutes: 35
+title:
+  en: "Translating by rules"
+  nl: "Vertalen met regels"
+goal:
+  en: "translate Dutch into English word for word with a dictionary, tell an exact translation from one with the right words in another order, and write a rule that moves a verb, measured on the sentences of Tatoeba."
+  nl: "Nederlands woord voor woord in het Engels vertalen met een woordenboek, een precieze vertaling onderscheiden van een vertaling met de goede woorden in een andere volgorde, en een regel schrijven die een werkwoord verplaatst, gemeten op de zinnen van Tatoeba."
+summary:
+  - en: "Machine translation by rules divides the work into analysis, transfer and generation. The Vauquois triangle shows three ways: direct translation, word for word with a dictionary; transfer, from a tree of the source language to a tree of the target language; and an interlingua, a way to write down meaning that belongs to no language."
+    nl: "Machinevertaling met regels verdeelt het werk in analyse, transfer en generatie. De driehoek van Vauquois toont drie manieren: directe vertaling, woord voor woord met een woordenboek; transfer, van een boom van de brontaal naar een boom van de doeltaal; en een interlingua, een manier om betekenis op te schrijven die bij geen enkele taal hoort."
+  - en: "Word for word gets short sentences right whose words line up one for one. It breaks on the order of the words, on words that one language needs and the other does not, and on idioms. Dutch puts the main verb at the end when there is a helping verb, and English right after it."
+    nl: "Woord voor woord vertaalt korte zinnen goed waarvan de woorden één op één overeenkomen. Het gaat mis op de volgorde van de woorden, op woorden die de ene taal nodig heeft en de andere niet, en op idiomen. Het Nederlands zet het hoofdwerkwoord aan het eind als er een hulpwerkwoord is, en het Engels direct na het hulpwerkwoord."
+  - en: "A rule that moves that verb puts some sentences right and breaks others, such as questions. Every rule needs exceptions, and a small system for teaching already had thousands of lines of grammar."
+    nl: "Een regel die dat werkwoord verplaatst, zet sommige zinnen goed en maakt andere fout, zoals vragen. Elke regel heeft uitzonderingen nodig, en een klein systeem voor het onderwijs had al duizenden programmaregels grammatica."
+can_now:
+  - en: "translate a list of words word for word with a dictionary"
+    nl: "een lijst met woorden woord voor woord vertalen met een woordenboek"
+    by: word_for_word
+  - en: "say whether a translation is exactly one of the translations by people, has their words in another order, or has other words"
+    nl: "zeggen of een vertaling precies een van de vertalingen door mensen is, de woorden ervan in een andere volgorde heeft, of andere woorden"
+    by: outcome
+  - en: "write a rule that moves a verb to right after its helping verb"
+    nl: "een regel schrijven die een werkwoord direct na het hulpwerkwoord zet"
+    by: verb_after_helper
+further_reading:
+  - en: "Warren Weaver, [*Translation*](https://aclanthology.org/www.mt-archive.info/Weaver-1949.pdf), 1949: the memorandum that asked whether computers could translate, with the letter to Norbert Wiener"
+    nl: "Warren Weaver, [*Translation*](https://aclanthology.org/www.mt-archive.info/Weaver-1949.pdf), 1949: het memorandum dat vroeg of computers konden vertalen, met de brief aan Norbert Wiener (in het Engels)"
+  - en: "W. John Hutchins, [*The Georgetown-IBM experiment demonstrated in January 1954*](https://aclanthology.org/www.mt-archive.info/00/AMTA-2004-Hutchins.pdf), AMTA 2004: the system of 250 words and six rules, and the expectations it raised"
+    nl: "W. John Hutchins, [*The Georgetown-IBM experiment demonstrated in January 1954*](https://aclanthology.org/www.mt-archive.info/00/AMTA-2004-Hutchins.pdf), AMTA 2004: het systeem van 250 woorden en zes regels, en de verwachtingen die het wekte (in het Engels)"
+  - en: "Bernard Vauquois and Christian Boitet, [*Automated Translation at Grenoble University*](https://aclanthology.org/www.mt-archive.info/CL-1985-Vauquois.pdf), Computational Linguistics 11(1), 1985: analysis, transfer and generation in the systems of Grenoble, and how large their grammars were"
+    nl: "Bernard Vauquois en Christian Boitet, [*Automated Translation at Grenoble University*](https://aclanthology.org/www.mt-archive.info/CL-1985-Vauquois.pdf), Computational Linguistics 11(1), 1985: analyse, transfer en generatie in de systemen van Grenoble, en hoe groot de grammatica's waren (in het Engels)"
