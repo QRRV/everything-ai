@@ -1,0 +1,33 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: nlp-post-editing
+minutes: 35
+title:
+  en: "Translators and machines together"
+  nl: "Vertalers en machines samen"
+goal:
+  en: "count the edits a translation needs with TER, shifts of blocks of words included, score fuzzy matches in a translation memory, and compare a small LLM and a translation memory as starting points for post-editing."
+  nl: "de bewerkingen die een vertaling nodig heeft tellen met TER, shifts van blokken woorden meegeteld, fuzzy matches in een vertaalgeheugen scoren, en een klein LLM en een vertaalgeheugen vergelijken als beginpunt voor post-editing."
+summary:
+  - en: "Post-editing is correcting a machine translation instead of translating from scratch. A translation memory offers the translation of the stored sentence that comes closest to a new one, a fuzzy match, scored here as 1 minus the edit distance divided by the length of the longer sentence."
+    nl: "Post-editing is een machinevertaling verbeteren in plaats van alles zelf te vertalen. Een vertaalgeheugen biedt de vertaling van de opgeslagen zin die het dichtst bij een nieuwe zin ligt, een fuzzy match, hier gescoord als 1 min de edit distance gedeeld door de lengte van de langste zin."
+  - en: "TER counts the fewest edits from a translation to the closest reference, with a shift of a block of words as one edit, found greedily, and divides by the average length of the references. HTER counts the edits to a reference that a person made by post-editing the translation itself, so a good translation in other words than the references costs nothing."
+    nl: "TER telt het kleinste aantal bewerkingen van een vertaling naar de dichtstbijzijnde referentie, met een shift van een blok woorden als één bewerking, greedy gevonden, en deelt door de gemiddelde lengte van de referenties. HTER telt de bewerkingen naar een referentie die iemand maakte door de vertaling zelf na te werken, dus een goede vertaling met andere woorden dan de referenties kost niets."
+  - en: "Which starting point is better depends on the match: a close match in the memory needs fewer edits than a translation by a small LLM, a distant one more. And one word can turn a close match into the opposite meaning."
+    nl: "Welk beginpunt beter is, hangt af van de match: een match die dichtbij ligt heeft minder bewerkingen nodig dan een vertaling van een klein LLM, een match die ver weg ligt meer. En één woord kan een match die dichtbij ligt de omgekeerde betekenis geven."
+can_now:
+  - en: "move a block of words to another place in a list, as a shift of TER does"
+    nl: "een blok woorden naar een andere plaats in een lijst verplaatsen, zoals een shift van TER"
+    by: shift
+  - en: "score a fuzzy match from the edit distance of two sentences"
+    nl: "een fuzzy match scoren uit de edit distance van twee zinnen"
+    by: fuzzy
+  - en: "find the best match for a new sentence in a translation memory"
+    nl: "de beste match voor een nieuwe zin in een vertaalgeheugen vinden"
+    by: best_match
+further_reading:
+  - en: "Matthew Snover, Bonnie Dorr, Richard Schwartz, Linnea Micciulla and John Makhoul, [*A Study of Translation Edit Rate with Targeted Human Annotation*](https://aclanthology.org/2006.amta-papers.25.pdf), AMTA 2006: TER with shifts, and HTER against references that people made by post-editing"
+    nl: "Matthew Snover, Bonnie Dorr, Richard Schwartz, Linnea Micciulla en John Makhoul, [*A Study of Translation Edit Rate with Targeted Human Annotation*](https://aclanthology.org/2006.amta-papers.25.pdf), AMTA 2006: TER met shifts, en HTER tegen referenties die mensen maakten door na te werken (in het Engels)"
+  - en: "Mirko Plitt and François Masselot, [*A Productivity Test of Statistical Machine Translation Post-Editing in a Typical Localisation Context*](https://ufal.mff.cuni.cz/pbml/93/art-plitt-masselot.pdf), The Prague Bulletin of Mathematical Linguistics 93, 2010: how much faster translators at Autodesk worked with machine translation"
+    nl: "Mirko Plitt en François Masselot, [*A Productivity Test of Statistical Machine Translation Post-Editing in a Typical Localisation Context*](https://ufal.mff.cuni.cz/pbml/93/art-plitt-masselot.pdf), The Prague Bulletin of Mathematical Linguistics 93, 2010: hoeveel sneller vertalers bij Autodesk werkten met machinevertaling (in het Engels)"

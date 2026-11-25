@@ -859,7 +859,8 @@ lessons:
   covers: [d15-machinevertaling#5]
   requires: [nlp-bleu, nlp-edit-distance]
   introduces: [c:post-editing, c:computer-assisted-translation]
-  data: [ntrex-128, model-qwen3-0.6b]
+  mentions: [c:chat-model]
+  data: [tatoeba-sentences, model-qwen3-0.6b, course-post-editing-qwen, course-post-edits, course-tm-matches]
   ladder: [python]
   needs: any
 
