@@ -1,0 +1,35 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: nlp-mt-with-llms
+minutes: 40
+title:
+  en: "Translating with an LLM"
+  nl: "Vertalen met een LLM"
+goal:
+  en: "let a chat model translate a text in three ways, each sentence alone, in one chat and as a whole, number the lines of the prompt, build the chat, and compute how consistently each way keeps a term."
+  nl: "een chat model een tekst op drie manieren laten vertalen, elke zin los, in één chat en als geheel, de regels van de prompt nummeren, de chat bouwen, en berekenen hoe consistent elke manier een term houdt."
+summary:
+  - en: "A chat model can translate with the rest of the text as context: in one chat, where each sentence is a message and the model sees the earlier sentences and its own translations, or with the whole text in one prompt on numbered lines. Each sentence alone, it has nothing else to go on."
+    nl: "Een chat model kan vertalen met de rest van de tekst als context: in één chat, waarin elke zin een bericht is en het model de eerdere zinnen en de eigen vertalingen ziet, of met de hele tekst in één prompt op genummerde regels. Met elke zin los heeft het model verder geen houvast."
+  - en: "With context, Qwen3-0.6B kept town names that are also words as names more often, and kept one word for a term through a text: the consistency of a term, the share of the pairs of its translations that are the same, went from 0.54 each sentence alone to 0.94 with the whole text."
+    nl: "Met context hield Qwen3-0.6B plaatsnamen die ook een woord zijn vaker als naam, en hield het model één woord voor een term aan door de hele tekst: de consistentie van een term, het deel van de paren vertalingen dat gelijk is, ging van 0,54 met elke zin los naar 0,94 met de hele tekst."
+  - en: "Consistent is not the same as right: a term translated wrong in the same way every time is fully consistent, and context helped Qwen3 far less with the meaning of a term than with keeping it the same. So check both."
+    nl: "Consistent is niet hetzelfde als goed: een term die elke keer met hetzelfde foute woord vertaald wordt, is helemaal consistent, en context hielp Qwen3 veel minder met de betekenis van een term dan met de term hetzelfde houden. Controleer dus allebei."
+can_now:
+  - en: "number the sentences of a text, so that a chat model can give back one line for each"
+    nl: "de zinnen van een tekst nummeren, zodat een chat model voor elke zin één regel kan teruggeven"
+    by: numbered
+  - en: "build the chat in which a model translates a text sentence by sentence, with its own translations so far"
+    nl: "de chat bouwen waarin een model een tekst zin voor zin vertaalt, met de eigen vertalingen tot nu toe"
+    by: chat_messages
+  - en: "compute the consistency of a term over a text, and keep it apart from whether the term is right"
+    nl: "de consistentie van een term over een tekst berekenen, en consistentie los zien van de vraag of de term goed is"
+    by: consistency
+further_reading:
+  - en: "Samuel Läubli, Rico Sennrich and Martin Volk, [*Has machine translation achieved human parity? A case for document-level evaluation*](https://aclanthology.org/D18-1512/), EMNLP 2018: professional translators prefer translations by people more clearly when they rate whole documents than when they rate single sentences"
+    nl: "Samuel Läubli, Rico Sennrich en Martin Volk, [*Has machine translation achieved human parity? A case for document-level evaluation*](https://aclanthology.org/D18-1512/), EMNLP 2018: professionele vertalers kiezen bij hele documenten duidelijker voor vertalingen door mensen dan bij losse zinnen (in het Engels)"
+  - en: "Longyue Wang, Chenyang Lyu, Tianbo Ji, Zhirui Zhang, Dian Yu, Shuming Shi and Zhaopeng Tu, [*Document-level machine translation with large language models*](https://aclanthology.org/2023.emnlp-main.1036/), EMNLP 2023: ChatGPT and GPT-4 translate whole documents, with several prompts and the consistency of terms among the measures"
+    nl: "Longyue Wang, Chenyang Lyu, Tianbo Ji, Zhirui Zhang, Dian Yu, Shuming Shi en Zhaopeng Tu, [*Document-level machine translation with large language models*](https://aclanthology.org/2023.emnlp-main.1036/), EMNLP 2023: ChatGPT en GPT-4 vertalen hele documenten, met een paar prompts en onder meer de consistentie van termen als maat (in het Engels)"
+  - en: "Elena Voita, Rico Sennrich and Ivan Titov, [*When a good translation is wrong in context: context-aware machine translation improves on deixis, ellipsis, and lexical cohesion*](https://aclanthology.org/P19-1116/), ACL 2019: test sets for the places where translations of single sentences do not fit together"
+    nl: "Elena Voita, Rico Sennrich en Ivan Titov, [*When a good translation is wrong in context: context-aware machine translation improves on deixis, ellipsis, and lexical cohesion*](https://aclanthology.org/P19-1116/), ACL 2019: testsets voor de plekken waar vertalingen van losse zinnen niet bij elkaar passen (in het Engels)"

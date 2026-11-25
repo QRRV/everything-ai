@@ -623,6 +623,12 @@ SPDX-FileCopyrightText = ["2026 Everything AI contributors (the post-edits; tran
 SPDX-License-Identifier = "CC-BY-4.0"
 
 [[annotations]]
+path = "data/course-mt-with-llms-qwen.json"
+precedence = "override"
+SPDX-FileCopyrightText = "2026 Everything AI contributors (the course's run and texts; translations written by Qwen3-0.6B of Alibaba Cloud, Apache-2.0)"
+SPDX-License-Identifier = "CC-BY-4.0"
+
+[[annotations]]
 path = "data/course-tm-matches.tsv"
 precedence = "override"
 SPDX-FileCopyrightText = "2026 Everything AI contributors (best matches computed from the sentences of Tatoeba, https://tatoeba.org)"

@@ -873,7 +873,7 @@ lessons:
   covers: [d15-machinevertaling#7]
   requires: [nlp-bleu, start-prompt-basics]
   introduces: [c:document-level-translation]
-  data: [ntrex-128, model-qwen3-0.6b]
+  data: [course-mt-with-llms-qwen, model-qwen3-0.6b]
   ladder: [python]
   needs: any
 

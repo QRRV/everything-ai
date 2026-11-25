@@ -1,0 +1,907 @@
+{
+ "lesson": "nlp-mt-with-llms",
+ "model": "Qwen/Qwen3-0.6B",
+ "revision": "c1899de289a04d12100db370d81485cdf75e47ca",
+ "dtype": "float32",
+ "machine": "Intel(R) Xeon(R) Processor @ 2.10GHz, 4 cores",
+ "threads": 4,
+ "torch": "2.14.1+cu130",
+ "temperature": 0,
+ "thinking": false,
+ "max_tokens": 64,
+ "document_tokens": 400,
+ "instruction": "Translate this Dutch sentence into English. Reply with only the English translation.",
+ "document_instruction": "Translate this Dutch text into English. Translate each numbered line into one numbered line. Reply with only the English translation.",
+ "load_seconds": 4.8,
+ "documents": [
+  {
+   "place": "Dieren",
+   "sha256": "2fb903f836927d992b0e28c6f7e7505d2c2a59939d42158baec39a54a49380a2",
+   "alone": [
+    {
+     "text": "This weekend is a book sale in Dieren.",
+     "tokens": 10,
+     "seconds": 1.4,
+     "finish": "stop"
+    },
+    {
+     "text": "More than hundred books with old manuscripts are on the market.",
+     "tokens": 12,
+     "seconds": 1.91,
+     "finish": "stop"
+    },
+    {
+     "text": "The animals have been in the city for thirty years, each year.",
+     "tokens": 14,
+     "seconds": 1.68,
+     "finish": "stop"
+    },
+    {
+     "text": "The market is open on Tuesday and Sunday from 10 to 5.",
+     "tokens": 16,
+     "seconds": 1.87,
+     "finish": "stop"
+    },
+    {
+     "text": "The access is free, and those who live in animals park also free.",
+     "tokens": 15,
+     "seconds": 1.56,
+     "finish": "stop"
+    }
+   ],
+   "chat": [
+    {
+     "text": "This weekend is a book sale in Dieren.",
+     "tokens": 10,
+     "seconds": 1.15,
+     "finish": "stop"
+    },
+    {
+     "text": "More than hundred books with old books are on the market.",
+     "tokens": 12,
+     "seconds": 1.37,
+     "finish": "stop"
+    },
+    {
+     "text": "Dieren has the market for thirty years, each year.",
+     "tokens": 12,
+     "seconds": 1.4,
+     "finish": "stop"
+    },
+    {
+     "text": "The market is open on Saturday and Sunday from 10 to 5.",
+     "tokens": 16,
+     "seconds": 1.83,
+     "finish": "stop"
+    },
+    {
+     "text": "The access is free, and people who live in Dieren also park free.",
+     "tokens": 16,
+     "seconds": 2.24,
+     "finish": "stop"
+    }
+   ],
+   "document": {
+    "text": "1. This weekend has a book sale in Dieren.\n2. There are more than hundred booksellers with old books on the market.\n3. Dieren has the market for thirty years, each year.\n4. The market is open on Saturday and Sunday from 10 to 5.\n5. The access is free, and if someone lives in Dieren, they also park free.",
+    "tokens": 80,
+    "seconds": 7.2,
+    "finish": "stop"
+   }
+  },
+  {
+   "place": "Sluis",
+   "sha256": "d7702392f37aea1c4845bffd2aecd255b59a40ae1e5c163204e50dd122c31285",
+   "alone": [
+    {
+     "text": "Twenty new sit banks are situated in Sluis since this week.",
+     "tokens": 13,
+     "seconds": 1.43,
+     "finish": "stop"
+    },
+    {
+     "text": "Each bank is made from old timber from the harbor.",
+     "tokens": 11,
+     "seconds": 1.28,
+     "finish": "stop"
+    },
+    {
+     "text": "Forty thousand euros for the banks.",
+     "tokens": 8,
+     "seconds": 0.96,
+     "finish": "stop"
+    },
+    {
+     "text": "Three people are seated at a bank.",
+     "tokens": 8,
+     "seconds": 0.98,
+     "finish": "stop"
+    },
+    {
+     "text": "The next year also will have banks at the Sluis station.",
+     "tokens": 13,
+     "seconds": 1.47,
+     "finish": "stop"
+    }
+   ],
+   "chat": [
+    {
+     "text": "Twenty new sit banks are situated in Sluis since this week.",
+     "tokens": 13,
+     "seconds": 1.32,
+     "finish": "stop"
+    },
+    {
+     "text": "Each bank is made from old wood from the haven.",
+     "tokens": 11,
+     "seconds": 1.15,
+     "finish": "stop"
+    },
+    {
+     "text": "Twenty thousand euros for the banks in Sluis.",
+     "tokens": 10,
+     "seconds": 1.28,
+     "finish": "stop"
+    },
+    {
+     "text": "Three people are seated at a bank.",
+     "tokens": 8,
+     "seconds": 1.34,
+     "finish": "stop"
+    },
+    {
+     "text": "New banks will be at the Sluis station next year.",
+     "tokens": 12,
+     "seconds": 1.62,
+     "finish": "stop"
+    }
+   ],
+   "document": {
+    "text": "1. The water is in the sluice since this week twenty new storage banks have been built.  \n2. Each bank is made from old wood from the haven.  \n3. The sluice paid 40,000 euros for the banks.  \n4. A bank is located for three people.  \n5. In the next year, there will also be banks at the Sluis station.",
+    "tokens": 83,
+    "seconds": 7.95,
+    "finish": "stop"
+   }
+  },
+  {
+   "place": "Bergen",
+   "sha256": "97100c33992663f0f0dcc774215caec1c14460f900e7c2fde8b27c91b49b934c",
+   "alone": [
+    {
+     "text": "The castle of Bergen is open after three years of work.",
+     "tokens": 12,
+     "seconds": 1.24,
+     "finish": "stop"
+    },
+    {
+     "text": "The slot is more than seven hundred years old.",
+     "tokens": 10,
+     "seconds": 1.02,
+     "finish": "stop"
+    },
+    {
+     "text": "Bergen has the roof and the entrance of the building restored.",
+     "tokens": 14,
+     "seconds": 1.47,
+     "finish": "stop"
+    },
+    {
+     "text": "In the spring, visitors can come every day.",
+     "tokens": 10,
+     "seconds": 1.05,
+     "finish": "stop"
+    },
+    {
+     "text": "A card costs ten euros, and for children in Bergen five euros.",
+     "tokens": 14,
+     "seconds": 1.41,
+     "finish": "stop"
+    }
+   ],
+   "chat": [
+    {
+     "text": "The castle of Bergen is open after three years of work.",
+     "tokens": 12,
+     "seconds": 1.29,
+     "finish": "stop"
+    },
+    {
+     "text": "The building is more than seven hundred years old.",
+     "tokens": 10,
+     "seconds": 1.13,
+     "finish": "stop"
+    },
+    {
+     "text": "The castle has the roof and the tower of the building restored.",
+     "tokens": 13,
+     "seconds": 1.43,
+     "finish": "stop"
+    },
+    {
+     "text": "In the summer, the building is open every day for visitors.",
+     "tokens": 13,
+     "seconds": 1.59,
+     "finish": "stop"
+    },
+    {
+     "text": "A ticket costs ten euros, and for children from Bergen five euros.",
+     "tokens": 14,
+     "seconds": 1.8,
+     "finish": "stop"
+    }
+   ],
+   "document": {
+    "text": "1. The Bregen house has reopened after three years of work.  \n2. The gate is more than seven hundred years old.  \n3. The door and the tower of the house are restored.  \n4. In summer, the house is open every day for visitors.  \n5. A ticket costs ten euros, and for children from Bergen five euros.",
+    "tokens": 74,
+    "seconds": 6.37,
+    "finish": "stop"
+   }
+  },
+  {
+   "place": "Haren",
+   "sha256": "d838a3e969318bdd18614c9e6b7f7cde2b23cb399cad70e11cee5c9cd678ee11",
+   "alone": [
+    {
+     "text": "Aan de markt in Haren is een nieuw restaurant open.",
+     "tokens": 15,
+     "seconds": 1.52,
+     "finish": "stop"
+    },
+    {
+     "text": "The card changes each week.",
+     "tokens": 6,
+     "seconds": 0.69,
+     "finish": "stop"
+    },
+    {
+     "text": "The map shows mainly vegetables and fruits.",
+     "tokens": 8,
+     "seconds": 0.97,
+     "finish": "stop"
+    },
+    {
+     "text": "Haren had no restaurant with only fish.",
+     "tokens": 9,
+     "seconds": 0.97,
+     "finish": "stop"
+    },
+    {
+     "text": "This week is also on the cart.",
+     "tokens": 8,
+     "seconds": 0.93,
+     "finish": "stop"
+    }
+   ],
+   "chat": [
+    {
+     "text": "Aan de markt in Haren is een nieuw restaurant open.",
+     "tokens": 15,
+     "seconds": 1.51,
+     "finish": "stop"
+    },
+    {
+     "text": "The card changes each week.",
+     "tokens": 6,
+     "seconds": 0.77,
+     "finish": "stop"
+    },
+    {
+     "text": "The card mainly features vegetables and fruits from nearby.",
+     "tokens": 10,
+     "seconds": 1.18,
+     "finish": "stop"
+    },
+    {
+     "text": "Haren had no restaurant with only fish.",
+     "tokens": 9,
+     "seconds": 1.25,
+     "finish": "stop"
+    },
+    {
+     "text": "This week also has a fish and chips on the card.",
+     "tokens": 12,
+     "seconds": 1.54,
+     "finish": "stop"
+    }
+   ],
+   "document": {
+    "text": "1. Aan de markt in Haren is een nieuw restaurant open.\n2. De kaart verandert elke week.\n3. Op de kaart staan vooral vis en groenten uit de buurt.\n4. Haren had nog geen restaurant met alleen vis.\n5. Deze week staat er ook mosselsoep op de kaart.",
+    "tokens": 76,
+    "seconds": 6.53,
+    "finish": "stop"
+   }
+  },
+  {
+   "place": "Best",
+   "sha256": "f900d68888ceef21fd2b8c435dd3f47199af024bfc23bc2cf6c71e3f3dce7d30",
+   "alone": [
+    {
+     "text": "The weather report for Best: night comes with a strict night temperature, up to eight degrees.",
+     "tokens": 19,
+     "seconds": 1.97,
+     "finish": "stop"
+    },
+    {
+     "text": "The front is on.",
+     "tokens": 5,
+     "seconds": 0.87,
+     "finish": "stop"
+    },
+    {
+     "text": "The roads in Best are open.",
+     "tokens": 7,
+     "seconds": 0.97,
+     "finish": "stop"
+    },
+    {
+     "text": "Best road trip on all trails.",
+     "tokens": 7,
+     "seconds": 1.12,
+     "finish": "stop"
+    },
+    {
+     "text": "The week will get less intense after the meeting.",
+     "tokens": 10,
+     "seconds": 1.15,
+     "finish": "stop"
+    }
+   ],
+   "chat": [
+    {
+     "text": "The weather report for Best: night comes with a strict night temperature, up to eight degrees.",
+     "tokens": 19,
+     "seconds": 2.04,
+     "finish": "stop"
+    },
+    {
+     "text": "The forecast continues until Sunday.",
+     "tokens": 6,
+     "seconds": 0.96,
+     "finish": "stop"
+    },
+    {
+     "text": "The forecast is clear in Best.",
+     "tokens": 7,
+     "seconds": 1.21,
+     "finish": "stop"
+    },
+    {
+     "text": "Best is raining on all mountain paths.",
+     "tokens": 8,
+     "seconds": 1.36,
+     "finish": "stop"
+    },
+    {
+     "text": "After the forecast, the weather will get warmer.",
+     "tokens": 10,
+     "seconds": 1.94,
+     "finish": "stop"
+    }
+   ],
+   "document": {
+    "text": "1. The weather report for Best: night comes with a strict night-time forecast, to about 8 degrees.  \n2. The forecast continues until Sunday.  \n3. Through the forecast, the roads in Best are clear.  \n4. Best sprays water on all bicycle paths.  \n5. After the forecast, the next week's weather will be less.",
+    "tokens": 74,
+    "seconds": 7.1,
+    "finish": "stop"
+   }
+  },
+  {
+   "place": "Duiven",
+   "sha256": "3122b75223a040af7b5618e3247482dcb281caa4bd8f693c8155d7f2e91e169d",
+   "alone": [
+    {
+     "text": "A school in Duiven has a new school subject: programming.",
+     "tokens": 13,
+     "seconds": 1.57,
+     "finish": "stop"
+    },
+    {
+     "text": "Students get two hours per week.",
+     "tokens": 7,
+     "seconds": 0.98,
+     "finish": "stop"
+    },
+    {
+     "text": "First place in the neighborhood with this subject.",
+     "tokens": 9,
+     "seconds": 1.09,
+     "finish": "stop"
+    },
+    {
+     "text": "Students learn to build a small robot.",
+     "tokens": 8,
+     "seconds": 0.97,
+     "finish": "stop"
+    },
+    {
+     "text": "All students will follow the course next year.",
+     "tokens": 9,
+     "seconds": 1.0,
+     "finish": "stop"
+    }
+   ],
+   "chat": [
+    {
+     "text": "A school in Duiven has a new school subject: programming.",
+     "tokens": 13,
+     "seconds": 1.47,
+     "finish": "stop"
+    },
+    {
+     "text": "Students get a two-hour class per week.",
+     "tokens": 9,
+     "seconds": 1.14,
+     "finish": "stop"
+    },
+    {
+     "text": "Duiven is the first place in the neighborhood with this subject.",
+     "tokens": 13,
+     "seconds": 1.56,
+     "finish": "stop"
+    },
+    {
+     "text": "Students learn to build a small robot in the subject.",
+     "tokens": 11,
+     "seconds": 1.47,
+     "finish": "stop"
+    },
+    {
+     "text": "All students will follow the subject next year.",
+     "tokens": 9,
+     "seconds": 1.53,
+     "finish": "stop"
+    }
+   ],
+   "document": {
+    "text": "1. A school in Duiven has a new school subject: programming.\n2. Students get the subject two hours a week.\n3. Duiven is the first place in the neighborhood with this subject.\n4. Students in the subject build a small robot.\n5. All students must follow the subject in the next year.",
+    "tokens": 65,
+    "seconds": 5.73,
+    "finish": "stop"
+   }
+  },
+  {
+   "place": "Buren",
+   "sha256": "462826aba8a1ea7d6048c12eb9878a12f6543f7e62139e45d92ed5cb090ab512",
+   "alone": [
+    {
+     "text": "In Buren is Saturday a market for people who make their own clothes.",
+     "tokens": 15,
+     "seconds": 1.53,
+     "finish": "stop"
+    },
+    {
+     "text": "There are many roles in the material.",
+     "tokens": 8,
+     "seconds": 0.91,
+     "finish": "stop"
+    },
+    {
+     "text": "The most material comes from India and Turkey.",
+     "tokens": 9,
+     "seconds": 0.94,
+     "finish": "stop"
+    },
+    {
+     "text": "March is the market for Buren each year.",
+     "tokens": 10,
+     "seconds": 1.08,
+     "finish": "stop"
+    },
+    {
+     "text": "Two euros per meter.",
+     "tokens": 5,
+     "seconds": 0.6,
+     "finish": "stop"
+    }
+   ],
+   "chat": [
+    {
+     "text": "In Buren is Saturday a market for people who make their own clothes.",
+     "tokens": 15,
+     "seconds": 1.37,
+     "finish": "stop"
+    },
+    {
+     "text": "There are hundreds of wool rolls.",
+     "tokens": 7,
+     "seconds": 0.83,
+     "finish": "stop"
+    },
+    {
+     "text": "The most wool comes from India and Turkey.",
+     "tokens": 9,
+     "seconds": 1.12,
+     "finish": "stop"
+    },
+    {
+     "text": "Buren holds this market every year in March.",
+     "tokens": 10,
+     "seconds": 1.45,
+     "finish": "stop"
+    },
+    {
+     "text": "A meter of wool costs from two euros.",
+     "tokens": 9,
+     "seconds": 1.6,
+     "finish": "stop"
+    }
+   ],
+   "document": {
+    "text": "1. In Buren is Saturday a market for people who make their own clothes.\n2. There are hundreds of wool rolls.\n3. The majority of wool comes from India and Turkey.\n4. Buren holds this market every year in March.\n5. A meter of wool costs from two euros.",
+    "tokens": 61,
+    "seconds": 5.6,
+    "finish": "stop"
+   }
+  },
+  {
+   "place": "Hoorn",
+   "sha256": "8f6da0e3073d3a211a8ce8f10322a7d954cce17c1416ac77e4b6e1fb1bfcfc14",
+   "alone": [
+    {
+     "text": "The Hoorn library publishes a new journal about the city.",
+     "tokens": 12,
+     "seconds": 1.26,
+     "finish": "stop"
+    },
+    {
+     "text": "The leaf appears four times a year.",
+     "tokens": 8,
+     "seconds": 0.88,
+     "finish": "stop"
+    },
+    {
+     "text": "These are the old photos of the beach.",
+     "tokens": 9,
+     "seconds": 1.03,
+     "finish": "stop"
+    },
+    {
+     "text": "All houses in Hoorn get the blade free.",
+     "tokens": 10,
+     "seconds": 1.18,
+     "finish": "stop"
+    },
+    {
+     "text": "The following time will discuss the market.",
+     "tokens": 8,
+     "seconds": 0.93,
+     "finish": "stop"
+    }
+   ],
+   "chat": [
+    {
+     "text": "The Hoorn library publishes a new journal about the city.",
+     "tokens": 12,
+     "seconds": 1.3,
+     "finish": "stop"
+    },
+    {
+     "text": "The newspaper publishes four times a year.",
+     "tokens": 8,
+     "seconds": 1.03,
+     "finish": "stop"
+    },
+    {
+     "text": "The newspaper contains these old photos of the harbor.",
+     "tokens": 10,
+     "seconds": 1.23,
+     "finish": "stop"
+    },
+    {
+     "text": "All houses in Hoorn receive the newspaper for free.",
+     "tokens": 11,
+     "seconds": 1.5,
+     "finish": "stop"
+    },
+    {
+     "text": "The next time the newspaper will cover the market.",
+     "tokens": 10,
+     "seconds": 1.43,
+     "finish": "stop"
+    }
+   ],
+   "document": {
+    "text": "1. The Hoorn library publishes a new journal about the city.  \n2. The newspaper appears four times a year.  \n3. In the newspaper, these times are old photos of the beach.  \n4. All houses in Hoorn receive the newspaper for free.  \n5. The next time the newspaper will discuss the market.",
+    "tokens": 68,
+    "seconds": 5.96,
+    "finish": "stop"
+   }
+  },
+  {
+   "place": "Velden",
+   "sha256": "c67a037eab6a48182b080e10d2ab6b9d9a116c2ac6b5b62043a573fb41a97c23",
+   "alone": [
+    {
+     "text": "The cape over the Maas at Velden is back.",
+     "tokens": 12,
+     "seconds": 1.21,
+     "finish": "stop"
+    },
+    {
+     "text": "The rope was left unused for two months.",
+     "tokens": 9,
+     "seconds": 0.96,
+     "finish": "stop"
+    },
+    {
+     "text": "The bridge is located ten kilometers away.",
+     "tokens": 8,
+     "seconds": 0.87,
+     "finish": "stop"
+    },
+    {
+     "text": "The rope is free for cyclists and pedestrians.",
+     "tokens": 9,
+     "seconds": 0.92,
+     "finish": "stop"
+    },
+    {
+     "text": "In the spring, each quarter will go.",
+     "tokens": 9,
+     "seconds": 1.03,
+     "finish": "stop"
+    }
+   ],
+   "chat": [
+    {
+     "text": "The cape over the Maas at Velden is back.",
+     "tokens": 12,
+     "seconds": 1.28,
+     "finish": "stop"
+    },
+    {
+     "text": "The rope was left two months silent for maintenance.",
+     "tokens": 10,
+     "seconds": 1.18,
+     "finish": "stop"
+    },
+    {
+     "text": "Velden is happy, because the bridge is ten kilometers away.",
+     "tokens": 13,
+     "seconds": 1.44,
+     "finish": "stop"
+    },
+    {
+     "text": "The rope is free for cyclists and pedestrians.",
+     "tokens": 9,
+     "seconds": 1.32,
+     "finish": "stop"
+    },
+    {
+     "text": "The rope goes through every quarter in the summer.",
+     "tokens": 10,
+     "seconds": 1.49,
+     "finish": "stop"
+    }
+   ],
+   "document": {
+    "text": "1. The cape over the Maas at Velden is back.\n2. The rope was two months silent for maintenance.\n3. Velden is happy, because the bridge is ten kilometers away.\n4. The rope is free for cyclists and pedestrians.\n5. In the summer, the rope goes through every quarter.",
+    "tokens": 64,
+    "seconds": 5.68,
+    "finish": "stop"
+   }
+  },
+  {
+   "place": "Kampen",
+   "sha256": "05ebd4795760ecb007aa53c93c287a14fd3b1b3beb3642c148c0d2ea4e24a83a",
+   "alone": [
+    {
+     "text": "The water company takes a water monster each week from the Ijssel in Kampen.",
+     "tokens": 18,
+     "seconds": 1.66,
+     "finish": "stop"
+    },
+    {
+     "text": "The monster is going to a lab in Zwolle.",
+     "tokens": 11,
+     "seconds": 1.2,
+     "finish": "stop"
+    },
+    {
+     "text": "In the last night, there was too much water.",
+     "tokens": 11,
+     "seconds": 1.05,
+     "finish": "stop"
+    },
+    {
+     "text": "The water company asks for a new monster.",
+     "tokens": 9,
+     "seconds": 1.15,
+     "finish": "stop"
+    },
+    {
+     "text": "The monster's design is known, and no one can swim in the river in Kampen.",
+     "tokens": 19,
+     "seconds": 1.75,
+     "finish": "stop"
+    }
+   ],
+   "chat": [
+    {
+     "text": "The water company takes a water monster each week from the Ijssel in Kampen.",
+     "tokens": 18,
+     "seconds": 1.67,
+     "finish": "stop"
+    },
+    {
+     "text": "The monster goes to a lab in Zwolle.",
+     "tokens": 10,
+     "seconds": 1.12,
+     "finish": "stop"
+    },
+    {
+     "text": "The last monster had too much water.",
+     "tokens": 8,
+     "seconds": 1.13,
+     "finish": "stop"
+    },
+    {
+     "text": "Kampen asks the water company for a new monster.",
+     "tokens": 12,
+     "seconds": 1.52,
+     "finish": "stop"
+    },
+    {
+     "text": "The monster's release is known to no one in Kampen in the river.",
+     "tokens": 16,
+     "seconds": 2.18,
+     "finish": "stop"
+    }
+   ],
+   "document": {
+    "text": "1. The water company takes a water monster each week from the Ijssel in Kampen.\n2. The monster goes to a lab in Zwolle.\n3. In the last monster, there was too much salt.\n4. Kampen asks the water company for a new monster.\n5. No one can swim in the river in Kampen after the monster's release.",
+    "tokens": 76,
+    "seconds": 7.21,
+    "finish": "stop"
+   }
+  },
+  {
+   "place": "Helden",
+   "sha256": "3eb6de7fbbfa56cfc3bf23d35087e0276fab55ea6cbf9d53c343649dee258581",
+   "alone": [
+    {
+     "text": "The students of the first grade in Helden had a test today.",
+     "tokens": 14,
+     "seconds": 1.52,
+     "finish": "stop"
+    },
+    {
+     "text": "The test took an hour.",
+     "tokens": 6,
+     "seconds": 0.67,
+     "finish": "stop"
+    },
+    {
+     "text": "The students have been answering this test for years.",
+     "tokens": 10,
+     "seconds": 1.14,
+     "finish": "stop"
+    },
+    {
+     "text": "The students will receive the test outline next week.",
+     "tokens": 10,
+     "seconds": 1.18,
+     "finish": "stop"
+    },
+    {
+     "text": "The school in Helden uses the test to show what students need to practice.",
+     "tokens": 16,
+     "seconds": 1.68,
+     "finish": "stop"
+    }
+   ],
+   "chat": [
+    {
+     "text": "The students of the first grade in Helden had a test today.",
+     "tokens": 14,
+     "seconds": 1.38,
+     "finish": "stop"
+    },
+    {
+     "text": "The test lasted an hour.",
+     "tokens": 6,
+     "seconds": 0.84,
+     "finish": "stop"
+    },
+    {
+     "text": "Helden have been participating in this test for years.",
+     "tokens": 11,
+     "seconds": 1.41,
+     "finish": "stop"
+    },
+    {
+     "text": "The students will receive the results of the test next week.",
+     "tokens": 12,
+     "seconds": 1.43,
+     "finish": "stop"
+    },
+    {
+     "text": "The school in Helden uses the test to see what students need to practice.",
+     "tokens": 16,
+     "seconds": 1.87,
+     "finish": "stop"
+    }
+   ],
+   "document": {
+    "text": "1. The students from the first grade in Helden had a test today.\n2. The test lasted an hour.\n3. Helden has been doing this test for years.\n4. The students will get the results of the test next week.\n5. The school in Helden uses the test to see what students need to practice.",
+    "tokens": 68,
+    "seconds": 5.93,
+    "finish": "stop"
+   }
+  },
+  {
+   "place": "Echt",
+   "sha256": "dd91d6a8ec7de2381d1eeb723363f1e816c7c964ceadf5c25f9a5de9b993df54",
+   "alone": [
+    {
+     "text": "New traffic signals are at the entrance to Echt since yesterday.",
+     "tokens": 13,
+     "seconds": 1.35,
+     "finish": "stop"
+    },
+    {
+     "text": "The name of the city is displayed on each board in two languages.",
+     "tokens": 14,
+     "seconds": 1.39,
+     "finish": "stop"
+    },
+    {
+     "text": "Paid the boards with the province.",
+     "tokens": 7,
+     "seconds": 0.93,
+     "finish": "stop"
+    },
+    {
+     "text": "A board is two meters wide.",
+     "tokens": 7,
+     "seconds": 0.92,
+     "finish": "stop"
+    },
+    {
+     "text": "The station of Echt will have a sign next year.",
+     "tokens": 12,
+     "seconds": 1.4,
+     "finish": "stop"
+    }
+   ],
+   "chat": [
+    {
+     "text": "New traffic signals are at the entrance to Echt since yesterday.",
+     "tokens": 13,
+     "seconds": 1.76,
+     "finish": "stop"
+    },
+    {
+     "text": "The name of the city is displayed on each traffic signal in two languages.",
+     "tokens": 15,
+     "seconds": 2.01,
+     "finish": "stop"
+    },
+    {
+     "text": "Echt paid the toll together with the province.",
+     "tokens": 10,
+     "seconds": 1.62,
+     "finish": "stop"
+    },
+    {
+     "text": "A traffic signal is two meters wide.",
+     "tokens": 8,
+     "seconds": 1.51,
+     "finish": "stop"
+    },
+    {
+     "text": "The station of Echt will also have a traffic signal next year.",
+     "tokens": 14,
+     "seconds": 2.05,
+     "finish": "stop"
+    }
+   ],
+   "document": {
+    "text": "1. Since the new traffic signs were introduced at Echt, they are still there.\n2. Each sign displays the name of the city in two languages.\n3. The signs are paid by the province.\n4. One sign is two meters wide.\n5. The station of Echt will also receive a sign next year.",
+    "tokens": 66,
+    "seconds": 7.29,
+    "finish": "stop"
+   }
+  }
+ ],
+ "code": "f94867a"
+}
