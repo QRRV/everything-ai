@@ -845,7 +845,8 @@ lessons:
   covers: [d15-evaluatie-van-tekstgeneratie#0]
   requires: [nlp-classic-mt, lm-bigram-counts, ml-confusion-matrix]
   introduces: [c:bleu, c:chrf]
-  data: [ntrex-128]
+  mentions: [c:correlation-coefficient]
+  data: [tatoeba-sentences]
   ladder: [python]
   needs: any
 

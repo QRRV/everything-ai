@@ -1,0 +1,35 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: nlp-bleu
+minutes: 35
+title:
+  en: "Scoring a translation: BLEU and chrF"
+  nl: "Een vertaling scoren: BLEU en chrF"
+goal:
+  en: "build BLEU from clipped counts of word n-grams, a geometric mean and a brevity penalty, count the character n-grams of chrF, and score the translations of Translating by rules and those of people with both."
+  nl: "BLEU bouwen uit afgetopte tellingen van n-grams van woorden, een meetkundig gemiddelde en een brevity penalty, de n-grams van tekens van chrF tellen, en de vertalingen van Vertalen met regels en van mensen met allebei scoren."
+summary:
+  - en: "BLEU counts the word n-grams of 1 to 4 words that a translation shares with its references, each at most as often as any single reference has it. It takes the geometric mean of the four precisions and multiplies it by a brevity penalty for a translation shorter than its reference. It adds up the counts of all sentences first: a single sentence often gets 0."
+    nl: "BLEU telt de n-grams van 1 tot 4 woorden die een vertaling met de referenties deelt, elk hoogstens zo vaak als één referentie het heeft. BLEU neemt het meetkundig gemiddelde van de vier precisions en vermenigvuldigt dat met een brevity penalty bij een vertaling die korter is dan de referentie. De tellingen van alle zinnen gaan eerst bij elkaar: een losse zin krijgt vaak 0."
+  - en: "chrF counts character n-grams of 1 to 6 letters, without spaces, and combines their precision and recall in an F-score that counts recall twice as much. A Dutch compound such as insectensoorten still shares most of its letters with insecten and soorten, where BLEU sees another word."
+    nl: "chrF telt n-grams van 1 tot 6 tekens, zonder spaties, en combineert precision en recall in een F-score die recall twee keer zo zwaar telt. Een Nederlandse samenstelling als insectensoorten deelt nog de meeste letters met insecten en soorten, waar BLEU een ander woord ziet."
+  - en: "Scores depend on choices: the rule of Translating by rules gives more exact translations but a lower BLEU, and two translations by people of one sentence often share few groups of words."
+    nl: "Scores hangen af van keuzes: de regel van Vertalen met regels geeft meer precieze vertalingen maar een lagere BLEU, en twee vertalingen door mensen van één zin delen vaak weinig groepjes woorden."
+can_now:
+  - en: "count the n-grams of a translation that a reference has, each at most as often as the reference has it"
+    nl: "de n-grams van een vertaling tellen die in een referentie staan, elk hoogstens zo vaak als de referentie het heeft"
+    by: clipped
+  - en: "compute BLEU from clipped counts with the geometric mean and the brevity penalty"
+    nl: "BLEU berekenen uit afgetopte tellingen met het meetkundig gemiddelde en de brevity penalty"
+    by: bleu
+  - en: "count the character n-grams of a text, as chrF does"
+    nl: "de n-grams van tekens van een tekst tellen, zoals chrF doet"
+    by: char_ngrams
+further_reading:
+  - en: "Kishore Papineni, Salim Roukos, Todd Ward and Wei-Jing Zhu, [*BLEU: a Method for Automatic Evaluation of Machine Translation*](https://aclanthology.org/P02-1040.pdf), ACL 2002: clipped n-gram precision, the brevity penalty, and how BLEU compares with the judgments of people"
+    nl: "Kishore Papineni, Salim Roukos, Todd Ward en Wei-Jing Zhu, [*BLEU: a Method for Automatic Evaluation of Machine Translation*](https://aclanthology.org/P02-1040.pdf), ACL 2002: afgetopte n-gram-precision, de brevity penalty, en hoe BLEU zich verhoudt tot het oordeel van mensen (in het Engels)"
+  - en: "Maja Popović, [*chrF: character n-gram F-score for automatic MT evaluation*](https://aclanthology.org/W15-3049.pdf), WMT 2015: the F-score of character n-grams, and why 6-grams correlate best"
+    nl: "Maja Popović, [*chrF: character n-gram F-score for automatic MT evaluation*](https://aclanthology.org/W15-3049.pdf), WMT 2015: de F-score van n-grams van tekens, en waarom 6-grams het best overeenkomen met mensen (in het Engels)"
+  - en: "Maja Popović, [*chrF deconstructed: β parameters and n-gram weights*](https://aclanthology.org/W16-2341.pdf), WMT 2016: why β = 2, which counts recall twice as much as precision"
+    nl: "Maja Popović, [*chrF deconstructed: β parameters and n-gram weights*](https://aclanthology.org/W16-2341.pdf), WMT 2016: waarom β = 2, dat recall twee keer zo zwaar telt als precision (in het Engels)"
