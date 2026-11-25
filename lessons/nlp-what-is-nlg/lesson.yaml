@@ -1,0 +1,38 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: nlp-what-is-nlg
+minutes: 30
+title:
+  en: "From data to text"
+  nl: "Van data naar tekst"
+goal:
+  en: "write a weather report from a table of numbers in the three steps of classic NLG: choose what to say, give days with the same weather one sentence, and write the days out the way the language does."
+  nl: "een weerbericht schrijven uit een tabel met getallen in de drie stappen van klassieke NLG: kiezen wat je zegt, dagen met hetzelfde weer één zin geven, en de dagen uitschrijven zoals de taal dat doet."
+summary:
+  - en: "Data-to-text generation turns data, such as a table of numbers, into text. Almost every applied NLG system takes three steps: content selection decides what to say, microplanning chooses the words and which facts share a sentence, and surface realization writes each sentence out by the rules of its language."
+    nl: "Data-to-text generation maakt tekst uit data, zoals een tabel met getallen. Bijna elk NLG-systeem in de praktijk zet drie stappen: content selection bepaalt wat je zegt, microplanning kiest de woorden en welke feiten een zin delen, en surface realization schrijft elke zin uit volgens de regels van de taal."
+  - en: "Content selection is a choice: with the course's limits, the three weeks keep 24 of their 105 numbers, and a day with a little rain below the limit and nothing else to report is called dry. Aggregation gives days in a row with the same weather one sentence, which turns 21 days into 15 sentences without changing a fact."
+    nl: "Content selection is een keuze: met de grenzen van de course blijven van de 105 getallen van de drie weken er 24 over, en een dag met een beetje regen onder de grens en verder niets om te melden heet droog. Aggregatie geeft dagen achter elkaar met hetzelfde weer één zin, en maakt zo van 21 dagen 15 zinnen zonder een feit te veranderen."
+  - en: "For a few kinds of sentences, a template with gaps, such as an f-string, is enough for surface realization. Each language needs a template of its own, with its own word order, capitals and word for *and*. Rules say only what someone put in them, which also makes their text easy to check."
+    nl: "Bij een paar soorten zinnen is een template met gaten, zoals een f-string, genoeg voor surface realization. Elke taal heeft een eigen template nodig, met een eigen volgorde van de woorden, eigen hoofdletters en een eigen woord voor *en*. Regels zeggen alleen wat iemand erin zette, en dat maakt de tekst ook makkelijk te controleren."
+can_now:
+  - en: "choose which facts of the data a text says, with a limit for each kind"
+    nl: "kiezen welke feiten uit de data een tekst noemt, met een grens voor elke soort"
+    by: select
+  - en: "give facts in a row that are alike one sentence"
+    nl: "feiten achter elkaar die gelijk zijn één zin geven"
+    by: aggregate
+  - en: "write a list of names out the way a sentence does, with commas and the word for *and*"
+    nl: "een lijst met namen uitschrijven zoals een zin dat doet, met komma's en het woord voor *en*"
+    by: join_names
+  - en: "tell which of the three steps of classic NLG makes a decision"
+    nl: "zeggen welke van de drie stappen van klassieke NLG een beslissing neemt"
+    by: steps
+further_reading:
+  - en: "Ehud Reiter, [*Building natural-language generation systems*](https://arxiv.org/abs/cmp-lg/9605002), 1996: the three tasks that almost every applied NLG system performs, and when templates are enough"
+    nl: "Ehud Reiter, [*Building natural-language generation systems*](https://arxiv.org/abs/cmp-lg/9605002), 1996: de drie taken die bijna elk NLG-systeem in de praktijk uitvoert, en wanneer templates genoeg zijn (in het Engels)"
+  - en: "Albert Gatt and Emiel Krahmer, [*Survey of the state of the art in natural language generation: core tasks, applications and evaluation*](https://arxiv.org/abs/1703.09902), Journal of Artificial Intelligence Research 2018: the six tasks of NLG, systems that write from data, and how to evaluate what they write"
+    nl: "Albert Gatt en Emiel Krahmer, [*Survey of the state of the art in natural language generation: core tasks, applications and evaluation*](https://arxiv.org/abs/1703.09902), Journal of Artificial Intelligence Research 2018: de zes taken van NLG, systemen die uit data schrijven, en hoe je de teksten van zulke systemen evalueert (in het Engels)"
+  - en: "Somayajulu Sripada, Ehud Reiter and Lezan Hawizy, [*Evaluation of an NLG system using post-edit data: lessons learnt*](https://aclanthology.org/W05-1615.pdf), ENLG 2005: what forecasters changed in the draft forecasts of SumTime-Mousam, and what that says about the system"
+    nl: "Somayajulu Sripada, Ehud Reiter en Lezan Hawizy, [*Evaluation of an NLG system using post-edit data: lessons learnt*](https://aclanthology.org/W05-1615.pdf), ENLG 2005: wat meteorologen veranderden in de conceptverwachtingen van SumTime-Mousam, en wat dat over het systeem zegt (in het Engels)"
