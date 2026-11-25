@@ -1,0 +1,40 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: nlp-summarize
+minutes: 35
+title:
+  en: "Summarizing: pick or write"
+  nl: "Samenvatten: kiezen of schrijven"
+goal:
+  en: "write a summarizer that picks the sentences of an abstract with the most title words, weighed by their idf, measure on 618 real abstracts how often it picks the sentence closest to the TLDRs, and measure how much of a written summary is new."
+  nl: "een samenvatter schrijven die de zinnen van een abstract kiest met de meeste titelwoorden, gewogen met de idf, op 618 echte abstracts meten hoe vaak de samenvatter de zin kiest die het dichtst bij de TLDR's ligt, en meten hoeveel van een geschreven samenvatting nieuw is."
+summary:
+  - en: "Summarization makes a text shorter and keeps its main content. An extractive summary picks sentences of the text and leaves them as they are; an abstractive summary writes sentences of its own, as a person writing an abstract does."
+    nl: "Samenvatten maakt een tekst korter en houdt de belangrijkste inhoud. Een extractieve samenvatting kiest zinnen uit de tekst en laat de zinnen ongewijzigd; een abstractieve samenvatting schrijft eigen zinnen, zoals iemand die een abstract schrijft."
+  - en: "An extractive summarizer gives each sentence a score and picks the highest, in the order of the text. Edmundson's title method scores a sentence by the words it shares with the title; weighed by their idf, it picks the sentence closest to the TLDRs in 35.9% of the 618 abstracts of SciTLDR, about twice as often as word weights alone."
+    nl: "Een extractieve samenvatter geeft elke zin een score en kiest de hoogste, in de volgorde van de tekst. De titelmethode van Edmundson geeft een zin een score op grond van de woorden die de zin met de titel deelt; met elk woord gewogen met de idf kiest de methode de zin die het dichtst bij de TLDR's ligt in 35,9% van de 618 abstracts van SciTLDR, ongeveer twee keer zo vaak als gewogen woorden alleen."
+  - en: "The novelty of a summary is the share of its different words that are not in the text. Qwen3-0.6B's summaries of the course's six abstracts have more new words on average than the TLDRs the course wrote, and four of the six make a claim that the abstract does not support."
+    nl: "De novelty van een samenvatting is het aandeel van de verschillende woorden dat niet in de tekst staat. De samenvattingen van Qwen3-0.6B van de zes abstracts van de course hebben gemiddeld meer nieuwe woorden dan de TLDR's die de course schreef, en vier van de zes doen een bewering die het abstract niet ondersteunt."
+can_now:
+  - en: "score the sentences of a text by the words they share with its title, weighed by their idf"
+    nl: "de zinnen van een tekst een score geven op grond van de woorden die de zinnen met de titel delen, gewogen met de idf"
+    by: title_score
+  - en: "pick the k best sentences of a text and keep them in the order of the text"
+    nl: "de k beste zinnen van een tekst kiezen en in de volgorde van de tekst houden"
+    by: pick
+  - en: "measure how much of a summary is written in words that are not in the text"
+    nl: "meten hoeveel van een samenvatting in woorden is geschreven die niet in de tekst staan"
+    by: novel_share
+  - en: "tell which risks come with picking sentences, and which with writing new ones"
+    nl: "zeggen welke risico's horen bij zinnen kiezen, en welke bij nieuwe zinnen schrijven"
+    by: risks
+further_reading:
+  - en: "H. P. Luhn, [*The automatic creation of literature abstracts*](https://courses.ischool.berkeley.edu/i256/f06/papers/luhn58.pdf), IBM Journal of Research and Development 1958: the first auto-abstracts, from word frequencies"
+    nl: "H. P. Luhn, [*The automatic creation of literature abstracts*](https://courses.ischool.berkeley.edu/i256/f06/papers/luhn58.pdf), IBM Journal of Research and Development 1958: de eerste auto-abstracts, uit woordfrequenties (in het Engels)"
+  - en: "H. P. Edmundson, [*New methods in automatic extracting*](https://courses.ischool.berkeley.edu/i256/f06/papers/edmonson69.pdf), Journal of the ACM 1969: cue words, title words and the place of a sentence, and why they beat frequency"
+    nl: "H. P. Edmundson, [*New methods in automatic extracting*](https://courses.ischool.berkeley.edu/i256/f06/papers/edmonson69.pdf), Journal of the ACM 1969: signaalwoorden, titelwoorden en de plaats van een zin, en waarom deze aanwijzingen beter werken dan frequentie (in het Engels)"
+  - en: "Isabel Cachola, Kyle Lo, Arman Cohan and Daniel S. Weld, [*TLDR: Extreme summarization of scientific documents*](https://arxiv.org/abs/2004.15011), Findings of EMNLP 2020: SciTLDR, and how abstractive TLDRs are"
+    nl: "Isabel Cachola, Kyle Lo, Arman Cohan en Daniel S. Weld, [*TLDR: Extreme summarization of scientific documents*](https://arxiv.org/abs/2004.15011), Findings of EMNLP 2020: SciTLDR, en hoe abstractief TLDR's zijn (in het Engels)"
+  - en: "Joshua Maynez, Shashi Narayan, Bernd Bohnet and Ryan McDonald, [*On faithfulness and factuality in abstractive summarization*](https://aclanthology.org/2020.acl-main.173), ACL 2020: intrinsic and extrinsic hallucinations in summaries of one sentence"
+    nl: "Joshua Maynez, Shashi Narayan, Bernd Bohnet en Ryan McDonald, [*On faithfulness and factuality in abstractive summarization*](https://aclanthology.org/2020.acl-main.173), ACL 2020: intrinsieke en extrinsieke hallucinaties in samenvattingen van één zin (in het Engels)"

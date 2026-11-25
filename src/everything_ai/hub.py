@@ -154,6 +154,15 @@ PINNED = {
         "sha256": "1587ea43e58e82b14ff1f5425c88e17f8496bfcdb67a583dbff9eefaf9963ce3",
         "size": 203_415,
     },
+    # The test set of SciTLDR-A (Apache-2.0, Cachola and others, 2020), from its repository at a fixed commit:
+    # nlp-summarize and the lessons after it (course/route/bronnen.yaml, scitldr; everything_ai.scitldr reads it). A text
+    # file of 618 lines, one JSON object each, read as text: nothing in it is ever run.
+    ("github.com/allenai/scitldr", "test.jsonl"): {
+        "url": "https://raw.githubusercontent.com/allenai/scitldr/5ccad9c00a60ad75c9e04abf7f27d0f53f983b20/SciTLDR-Data/SciTLDR-A/test.jsonl",
+        "revision": "5ccad9c00a60ad75c9e04abf7f27d0f53f983b20",
+        "sha256": "fb42dd6cd4f4a1928ae8a01a189456fbfe994a07e938bd49f68653933f6503c9",
+        "size": 1_204_107,
+    },
     # BERT-Tiny, the smallest BERT of Google's miniatures (Apache-2.0, Turc and others, released 2020), with the head that fills in
     # masked words, and its WordPiece vocabulary: nlp-static-vs-contextual and later lessons on BERT
     # (course/route/bronnen.yaml, model-bert-tiny; everything_ai.bert writes the model and the tokenizer out)

@@ -899,7 +899,8 @@ lessons:
   covers: [d15-tekstgeneratie-en-samenvatten#4]
   requires: [nlp-tf-idf, nlp-what-is-nlg]
   introduces: [c:summarization, c:extractive-summarization, c:abstractive-summarization]
-  data: [scitldr]
+  mentions: [c:chat-model, c:peer-review]
+  data: [scitldr, course-summarize-qwen, model-qwen3-0.6b]
   ladder: [python]
   needs: any
 
