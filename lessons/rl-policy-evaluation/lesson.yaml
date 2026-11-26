@@ -1,0 +1,33 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: rl-policy-evaluation
+minutes: 25
+title:
+  en: "What is a policy worth? Policy evaluation"
+  nl: "Wat is een policy waard? Policy evaluation"
+goal:
+  en: "work out what every state is worth under a given policy with sweeps of its Bellman equation, and decide when the sweeps have done enough."
+  nl: "met sweeps van de Bellman equation uitrekenen wat elke state waard is onder een gegeven policy, en beslissen wanneer de sweeps genoeg gedaan hebben."
+summary:
+  - en: "A policy can give a probability for every action, π(a | s). Its value function V_π(s) is the return to expect from s if you follow it; with a reward of −1 per step and γ = 1, that is minus the average number of steps to the end."
+    nl: "Een policy kan een kans geven voor elke action, π(a | s). De value function V_π(s) is de return die je vanuit s mag verwachten als je de policy volgt; met een reward van −1 per stap en γ = 1 is dat min het gemiddelde aantal stappen tot het eind."
+  - en: "Policy evaluation starts from V = 0 and sweeps: every state gets the average of its Q-values, each counted with π(a | s), from the old values. After k sweeps a value counts the first k steps, and the sweeps stop once the largest change of a sweep is below θ."
+    nl: "Policy evaluation begint met V = 0 en doet sweeps: elke state krijgt het gemiddelde van de Q-waarden, elk meegeteld met π(a | s), uit de oude waarden. Na k sweeps telt een waarde de eerste k stappen, en de sweeps stoppen zodra de grootste verandering in een sweep kleiner is dan θ."
+  - en: "A small last change does not mean the values are close to their end: on the robot's grid every sweep takes off only about 3% of what is left. With γ = 1, a policy that never reaches an end keeps lowering its values, so policy evaluation never stops. For one fixed policy, a sweep is also a matrix multiplication: V = R + γPV."
+    nl: "Een kleine laatste verandering betekent niet dat de waarden dicht bij de eindwaarden liggen: op het grid van de robot haalt elke sweep slechts ongeveer 3% van de rest eraf. Met γ = 1 blijft een policy zonder eind de waarden verlagen, dus stopt policy evaluation nooit. Voor één vaste policy is een sweep ook een matrixvermenigvuldiging: V = R + γPV."
+can_now:
+  - en: "work out the values of a given policy with sweeps of its Bellman equation"
+    nl: "de waarden van een gegeven policy uitrekenen met sweeps van de Bellman equation van de policy"
+    by: evaluate
+  - en: "stop policy evaluation once the largest change of a sweep is below θ, and explain why the values are then not yet at their end"
+    nl: "policy evaluation laten stoppen zodra de grootste verandering in een sweep kleiner is dan θ, en uitleggen waarom de waarden dan nog niet bij de eindwaarden zijn"
+    by: stable
+  - en: "explain why policy evaluation with γ = 1 needs a policy that reaches an end from every state"
+    nl: "uitleggen waarom policy evaluation met γ = 1 een policy nodig heeft waarmee elke state bij een eind uitkomt"
+    by: forever
+further_reading:
+  - en: "Richard S. Sutton and Andrew G. Barto (2018), *Reinforcement Learning: An Introduction*, 2nd edition, MIT Press, section 4.1, with a grid of the same kind, a random policy and a reward of −1 per step in example 4.1; free at incompleteideas.net"
+    nl: "Richard S. Sutton en Andrew G. Barto (2018), *Reinforcement Learning: An Introduction*, 2e editie, MIT Press, paragraaf 4.1, met een grid van dezelfde soort, een random policy en een reward van −1 per stap in voorbeeld 4.1; gratis op incompleteideas.net"
+  - en: "Richard Bellman (1957), *Dynamic Programming*, Princeton University Press: the book that made the Bellman equation and the name dynamic programming known"
+    nl: "Richard Bellman (1957), *Dynamic Programming*, Princeton University Press: het boek dat de Bellman equation en de naam dynamic programming bekend maakte"

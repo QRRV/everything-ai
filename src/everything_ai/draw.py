@@ -354,6 +354,8 @@ def grid_world(panels: list[dict], *, alt: str, cell: int = 50, decimal: str = "
                 stayed in its cell, into the edge, shows as a dot
       mark      one cell with a thick ink ring, such as where the agent is
       index     True: the row numbers on the left and the column numbers on top, as the code counts them
+      goal      the words on the goal (optional): "+1" unless the world gives another reward there, such as "0"
+                for a charger where every step before it cost −1
     Pits are data, a grey fill; the goal has a light grey one. `decimal` is the decimal mark: "," in Dutch. `alt` says
     what the figure shows, for a screen reader."""
     size = max(11, round(cell * 0.25))   # the text in a cell: a number of 4 signs leaves room for a triangle each side
@@ -399,7 +401,7 @@ def grid_world(panels: list[dict], *, alt: str, cell: int = 50, decimal: str = "
                 x, y = left + c * cell, top + r * cell
                 mx, my = x + cell / 2, y + cell / 2
                 if sign in "GX":
-                    words = "+1" if sign == "G" else "−1"
+                    words = p.get("goal", "+1") if sign == "G" else "−1"
                     ink = "var(--ea-ink)" if sign == "G" else "var(--ea-page)"
                     parts.append(f'<text x="{mx:.1f}" y="{my + size * 0.36:.1f}" style="font-size:{size + 1}px;font-weight:700;'
                                  f'fill:{ink};text-anchor:middle">{words}</text>')
