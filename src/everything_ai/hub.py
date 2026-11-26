@@ -163,6 +163,29 @@ PINNED = {
         "sha256": "fb42dd6cd4f4a1928ae8a01a189456fbfe994a07e938bd49f68653933f6503c9",
         "size": 1_204_107,
     },
+    # SciFact (Wadden and others, EMNLP 2020) in the copy of BEIR on the hub, at a fixed commit: 5,183 abstracts of biomedical
+    # papers, 1,109 claims and which abstracts are relevant to each, for ir-bm25 (course/route/bronnen.yaml, scifact;
+    # everything_ai.scifact reads them). Text files, read as text: nothing in them is ever run.
+    ("datasets/mteb/scifact", "corpus.jsonl"): {
+        "revision": "cf10ab6856b15b0e670ef8ae5dae4e266c12d035",
+        "sha256": "f0d32db0d156b526d75921ed7a76f2cb912902631c87248c5c97c617bad0b60c",
+        "size": 8_023_638,
+    },
+    ("datasets/mteb/scifact", "queries.jsonl"): {
+        "revision": "cf10ab6856b15b0e670ef8ae5dae4e266c12d035",
+        "sha256": "9db7df096f7414435d52bafcbacf814c30cea50eb565c1e8fa6d11440759bba8",
+        "size": 129_085,
+    },
+    ("datasets/mteb/scifact", "qrels/train.tsv"): {
+        "revision": "cf10ab6856b15b0e670ef8ae5dae4e266c12d035",
+        "sha256": "a53f2114831916c096b6c37d9e54da68cef4efdcdbd5ed46533601af972acf1d",
+        "size": 14_502,
+    },
+    ("datasets/mteb/scifact", "qrels/test.tsv"): {
+        "revision": "cf10ab6856b15b0e670ef8ae5dae4e266c12d035",
+        "sha256": "0864bb985e0ca2367ba217977e72004d549054b2b06666ed9d4825ac7c21284c",
+        "size": 5_389,
+    },
     # BERT-Tiny, the smallest BERT of Google's miniatures (Apache-2.0, Turc and others, released 2020), with the head that fills in
     # masked words, and its WordPiece vocabulary: nlp-static-vs-contextual and later lessons on BERT
     # (course/route/bronnen.yaml, model-bert-tiny; everything_ai.bert writes the model and the tokenizer out)

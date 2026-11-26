@@ -1005,7 +1005,7 @@ lessons:
   level: basis
   domein: taal
   module: zoeken
-  idea: "BM25 improves on TF-IDF: every repeat of a word adds less than the one before (k1) and long documents are scaled down (b); with its two settings tuned on one half of a test collection's queries and measured on the other, it is still hard to beat."
+  idea: "BM25 improves on TF-IDF: every repeat of a word adds less than the one before (k1) and long documents are scaled down (b); with its two settings tuned on the training queries of a test collection and measured on its test queries, it is still hard to beat."
   covers: [d15-retrievalmodellen-en-ranking#1]
   requires: [ir-vector-space]
   introduces: [c:bm25]

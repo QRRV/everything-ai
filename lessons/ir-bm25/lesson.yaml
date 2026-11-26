@@ -1,0 +1,40 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: ir-bm25
+minutes: 45
+title:
+  en: "BM25: the classic ranking"
+  nl: "BM25: de klassieke rangschikking"
+goal:
+  en: "make each repeat of a word in a document add less than the one before, scale that by the length of the document against the average, add the weights of the words of a query up to the BM25 score, rank documents by it, and tune its two settings on a test collection."
+  nl: "elke herhaling van een woord in een document minder laten toevoegen dan de vorige, dat schalen met de lengte van het document ten opzichte van het gemiddelde, de waarden van de woorden van een zoekvraag optellen tot de BM25-score, documenten daarop rangschikken, en de twee instellingen afstellen op een testcollectie."
+summary:
+  - en: "In a vector of TF-IDF weights, a word that a document holds four times weighs four times as much as a word it holds once, yet the document is not four times as much about it. BM25 uses the same two ingredients, how often each word of the query is in a document and the IDF of the word, and changes two things: each repeat of a word adds less than the one before, and a setting of its own decides how much the length of a document counts."
+    nl: "In een vector van TF-IDF-waarden weegt een woord dat vier keer in een document staat vier keer zo zwaar als een woord dat er één keer in staat, terwijl het document niet vier keer zoveel over het woord gaat. BM25 gebruikt dezelfde twee ingrediënten, hoe vaak elk woord van de zoekvraag in een document staat en de IDF van het woord, en verandert twee dingen: elke herhaling van een woord voegt minder toe dan de vorige, en een eigen instelling bepaalt hoeveel de lengte van een document meetelt."
+  - en: "The term weight is (k1 + 1) · tf / (k1 · ((1 − b) + b · L_d / L_ave) + tf): for a count of 1 in a document of average length it is exactly 1, and however often a word occurs, it stays below k1 + 1. With k1 = 0 every word adds its IDF once; with b = 0 the length does not count, with b = 1 it counts in full. BM25 does not divide the score by a length: the length only decides how fast the counts saturate."
+    nl: "De term weight is (k1 + 1) · tf / (k1 · ((1 − b) + b · L_d / L_ave) + tf): bij een aantal van 1 in een document van gemiddelde lengte precies 1, en hoe vaak een woord ook voorkomt, de waarde blijft onder k1 + 1. Met k1 = 0 voegt elk woord één keer de IDF toe; met b = 0 telt de lengte niet mee, met b = 1 helemaal. BM25 deelt de score niet door een lengte: de lengte bepaalt alleen hoe snel de aantallen verzadigen."
+  - en: "On the 2,067 paragraphs of XQuAD, BM25 with k1 = 1.2 and b = 0.75 puts the own paragraph first for more questions than the cosine, which managed 66.6%, most of all when the own paragraph is long, and each of the two settings helps. On SciFact, the settings tuned on the 809 training claims, k1 = 1.1 and b = 0.65, put the relevant abstract first for 53.7% of the 300 test claims, against 53.3% with the usual settings; every setting of the sliders beats the cosine, at 44.7%."
+    nl: "Op de 2.067 alinea's van XQuAD zet BM25 met k1 = 1,2 en b = 0,75 de eigen alinea bij meer vragen bovenaan dan de cosine similarity, die op 62,6% uitkwam, vooral als de eigen alinea lang is, en elk van de twee instellingen helpt. Op SciFact zetten de instellingen die zijn afgesteld op de 809 trainingsbeweringen, k1 = 1,1 en b = 0,65, het relevante abstract bovenaan bij 53,7% van de 300 testbeweringen, tegen 53,3% met de gebruikelijke instellingen; elke instelling van de sliders verslaat de cosine similarity, met 44,7%."
+can_now:
+  - en: "compute how a count saturates, so that each repeat of a word adds less than the one before"
+    nl: "uitrekenen hoe een aantal verzadigt, zodat elke herhaling van een woord minder toevoegt dan de vorige"
+    by: saturation
+  - en: "scale the saturation of a count by the length of a document against the average, with the setting b"
+    nl: "de verzadiging van een aantal schalen met de lengte van een document ten opzichte van het gemiddelde, met de instelling b"
+    by: term_weight
+  - en: "compute the BM25 score of a document for a query, and rank documents by it"
+    nl: "de BM25-score van een document voor een zoekvraag uitrekenen, en documenten daarop rangschikken"
+    by: bm25
+  - en: "tell what the setting k1 does and what the setting b does"
+    nl: "zeggen wat de instelling k1 doet en wat de instelling b doet"
+    by: settings
+further_reading:
+  - en: "Christopher D. Manning, Prabhakar Raghavan and Hinrich Schütze, [*Introduction to Information Retrieval*](https://nlp.stanford.edu/IR-book/), Cambridge University Press, 2008, chapter 11: section 11.4.3 on Okapi BM25, its settings k1 and b, and how to tune them"
+    nl: "Christopher D. Manning, Prabhakar Raghavan en Hinrich Schütze, [*Introduction to Information Retrieval*](https://nlp.stanford.edu/IR-book/), Cambridge University Press, 2008, hoofdstuk 11: paragraaf 11.4.3 over Okapi BM25, de instellingen k1 en b, en hoe je deze afstelt (in het Engels)"
+  - en: "Stephen Robertson and Hugo Zaragoza, [*The Probabilistic Relevance Framework: BM25 and Beyond*](https://staff.city.ac.uk/~sbrp622/papers/foundations_bm25_review.pdf), Foundations and Trends in Information Retrieval 3(4), 2009: where BM25 comes from, saturation, the two reasons why documents differ in length, and tuning the settings"
+    nl: "Stephen Robertson en Hugo Zaragoza, [*The Probabilistic Relevance Framework: BM25 and Beyond*](https://staff.city.ac.uk/~sbrp622/papers/foundations_bm25_review.pdf), Foundations and Trends in Information Retrieval 3(4), 2009: waar BM25 vandaan komt, verzadiging, de twee redenen waarom documenten verschillen in lengte, en het afstellen van de instellingen (in het Engels)"
+  - en: "David Wadden and colleagues, [*Fact or Fiction: Verifying Scientific Claims*](https://aclanthology.org/2020.emnlp-main.609/), Proceedings of EMNLP 2020: the paper behind SciFact, with how experts wrote the claims from sentences of papers that cite other papers"
+    nl: "David Wadden en anderen, [*Fact or Fiction: Verifying Scientific Claims*](https://aclanthology.org/2020.emnlp-main.609/), Proceedings of EMNLP 2020: het paper achter SciFact, met hoe experts de beweringen schreven bij zinnen uit papers die naar andere papers verwijzen (in het Engels)"
+  - en: "Nandan Thakur and colleagues, [*BEIR: A Heterogeneous Benchmark for Zero-shot Evaluation of Information Retrieval Models*](https://arxiv.org/abs/2104.08663), NeurIPS 2021 Datasets and Benchmarks: eighteen test collections, SciFact among them, on which newer ways of searching are measured against BM25"
+    nl: "Nandan Thakur en anderen, [*BEIR: A Heterogeneous Benchmark for Zero-shot Evaluation of Information Retrieval Models*](https://arxiv.org/abs/2104.08663), NeurIPS 2021 Datasets and Benchmarks: achttien testcollecties, waaronder SciFact, waarop nieuwere manieren van zoeken worden gemeten met BM25 als maatstaf (in het Engels)"
