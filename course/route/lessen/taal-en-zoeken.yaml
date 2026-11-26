@@ -926,7 +926,7 @@ lessons:
   covers: [d15-tekst-herschrijven#1]
   requires: [nlp-tokenize]
   introduces: [c:readability, c:text-simplification]
-  data: []
+  data: [gutenberg-books, tatoeba-sentences]
   ladder: [python]
   needs: any
 

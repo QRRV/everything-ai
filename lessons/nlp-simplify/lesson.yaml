@@ -1,0 +1,38 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: nlp-simplify
+minutes: 35
+title:
+  en: "Simple language and readability"
+  nl: "Eenvoudige taal en leesbaarheid"
+goal:
+  en: "count the syllables, words and sentences of a text, build Flesch's reading ease from them, score eight books, today's Dutch sentences and a letter in two versions, and see what a readability formula cannot see."
+  nl: "de lettergrepen, woorden en zinnen van een tekst tellen, daaruit het leesgemak van Flesch bouwen, acht boeken, de Nederlandse zinnen van nu en een brief in twee versies scoren, en ontdekken wat een leesbaarheidsformule niet kan zien."
+summary:
+  - en: "A readability formula estimates how hard a text is to read from things a program can count. Flesch's reading ease (1948) is 206.835, minus 1.015 times the words per sentence, minus 84.6 times the syllables per word: the longer the sentences and the words, the lower the score. Douma's version for Dutch (1960) has smaller weights, 0.93 and 77, because Douma assumed that Dutch words and sentences are about 10% longer."
+    nl: "Een leesbaarheidsformule schat hoe moeilijk een tekst te lezen is uit dingen die een programma kan tellen. Het leesgemak van Flesch (1948) is 206,835, min 1,015 keer de woorden per zin, min 84,6 keer de lettergrepen per woord: hoe langer de zinnen en de woorden, hoe lager de score. De versie van Douma voor het Nederlands (1960) heeft kleinere factoren, 0,93 en 77, omdat Douma aannam dat Nederlandse woorden en zinnen ongeveer 10% langer zijn."
+  - en: "A program counts syllables with a rule, such as one syllable for each group of vowels in a row and at least one per word, and sentences with a list of abbreviations; without the list, every Mr. ends a sentence. Simplifying a text, aimed at language level B1, means shorter sentences, common words and the main point first, with the same information and meaning."
+    nl: "Een programma telt lettergrepen met een regel, zoals één lettergreep voor elke groep klinkers op een rij en minstens één per woord, en zinnen met een lijst met afkortingen; zonder de lijst sluit elke Mr. een zin af. Een tekst eenvoudiger maken, met taalniveau B1 als doel, betekent kortere zinnen, gewone woorden en de hoofdzaak eerst, met dezelfde informatie en betekenis."
+  - en: "A formula sees only the length of words and sentences. Words in another order, a letter that now says the opposite or a letter that lost information can score just as high or higher, and a text rewritten to score better can get harder to follow."
+    nl: "Een formule ziet alleen de lengte van woorden en zinnen. Woorden in een andere volgorde, een brief die nu het omgekeerde zegt of een brief die informatie kwijt is, kunnen even hoog of hoger scoren, en een tekst die herschreven is om beter te scoren, kan moeilijker te volgen worden."
+can_now:
+  - en: "count the syllables of a word by its groups of vowels, and name the words where that rule fails"
+    nl: "de lettergrepen van een woord tellen aan de groepen klinkers, en woorden noemen waarbij deze regel faalt"
+    by: syllables
+  - en: "count the words, the sentences and the syllables of a text that is cut into sentences"
+    nl: "de woorden, de zinnen en de lettergrepen tellen van een tekst die in zinnen is geknipt"
+    by: counts
+  - en: "compute Flesch's reading ease from those three numbers, and read the score in Flesch's table"
+    nl: "het leesgemak van Flesch uitrekenen uit deze drie getallen, en de score aflezen in de tabel van Flesch"
+    by: flesch
+  - en: "tell which changes to a text raise a readability score, and which ones the formula cannot see"
+    nl: "zeggen welke veranderingen aan een tekst een leesbaarheidsscore verhogen, en welke de formule niet kan zien"
+    by: changes
+further_reading:
+  - en: "Rudolf Flesch, [*A new readability yardstick*](https://doi.org/10.1037/h0057532), Journal of Applied Psychology, 1948: the reading ease formula, how Flesch tested it, and the table of what the scores mean"
+    nl: "Rudolf Flesch, [*A new readability yardstick*](https://doi.org/10.1037/h0057532), Journal of Applied Psychology, 1948: de formule voor het leesgemak, hoe Flesch de formule toetste, en de tabel met wat de scores betekenen (in het Engels)"
+  - en: "W. H. Douma, [*De leesbaarheid van landbouwbladen*](https://edepot.wur.nl/276323), Landbouwhogeschool Wageningen, 1960: Flesch's formula adapted for Dutch, and why its weights are smaller (in Dutch)"
+    nl: "W. H. Douma, [*De leesbaarheid van landbouwbladen*](https://edepot.wur.nl/276323), Landbouwhogeschool Wageningen, 1960: de formule van Flesch aangepast voor het Nederlands, en waarom de factoren kleiner zijn"
+  - en: "Wei Xu, Chris Callison-Burch and Courtney Napoles, [*Problems in current text simplification research: New data can help*](https://aclanthology.org/Q15-1021), TACL 2015: why Simple English Wikipedia is not that simple, and a better set of simplified news texts"
+    nl: "Wei Xu, Chris Callison-Burch en Courtney Napoles, [*Problems in current text simplification research: New data can help*](https://aclanthology.org/Q15-1021), TACL 2015: waarom Simple English Wikipedia niet zo eenvoudig is, en een betere verzameling vereenvoudigde nieuwsteksten (in het Engels)"
