@@ -968,6 +968,7 @@ lessons:
   covers: [information-retrieval-en-zoekmachines#0, information-retrieval-en-zoekmachines#1]
   requires: [nlp-document-vectors]
   introduces: [c:information-retrieval, c:information-need, c:relevance, c:search-query]
+  mentions: [c:relevance-judgment, c:boolean-retrieval]
   data: []
   ladder: [python]
   needs: any
