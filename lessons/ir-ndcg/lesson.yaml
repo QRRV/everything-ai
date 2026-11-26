@@ -1,0 +1,40 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: ir-ndcg
+minutes: 45
+title:
+  en: "Graded relevance: nDCG"
+  nl: "Relevantie in gradaties: nDCG"
+goal:
+  en: "measure a ranking with graded relevance: turn the grades of its documents into gains, compute its DCG with the discount log₂(place + 1), divide by the DCG of the ideal order to get its nDCG, compute the DCG of many queries at once with NumPy, and tell what makes nDCG go up or down."
+  nl: "een rangschikking meten met relevantie in gradaties: van de cijfers van de documenten gains maken, de DCG berekenen met de discount log₂(plaats + 1), delen door de DCG van de ideale volgorde om de nDCG te krijgen, de DCG van veel zoekvragen tegelijk berekenen met NumPy, en zeggen waardoor nDCG stijgt of daalt."
+summary:
+  - en: "With graded relevance, a relevance judgment gives each document a grade, such as the four of the TREC Deep Learning track of 2019: 3 perfectly relevant, 2 highly relevant, 1 related and 0 irrelevant. Measured as relevant or not, the order 6, 7, 8, 10, 9 and the order 9, 7, 8, 10, 6 of the documents about red wine and the heart get the same average precision, 0.7; with grades, the document that answers the question head-on counts most at the top."
+    nl: "Bij relevantie in gradaties geeft een relevance judgment elk document een cijfer, zoals de vier van de Deep Learning-track van TREC in 2019: 3 perfect relevant, 2 zeer relevant, 1 verwant en 0 irrelevant. Gemeten als relevant of niet krijgen de volgorde 6, 7, 8, 10, 9 en de volgorde 9, 7, 8, 10, 6 van de documenten over rode wijn en het hart dezelfde average precision, 0,7; met cijfers telt het document dat de vraag rechtstreeks beantwoordt, bovenaan het zwaarst."
+  - en: "The DCG@k adds up the gains of the first k places, each divided by the discount log₂(place + 1), which grows fast over the first places and slowly after, so a lower place costs less than in the reciprocal rank. Divided by the DCG of the ideal order of all the grades of the query, also those of documents the ranking misses, it becomes the nDCG, from 0 to 1: 0.925 for the results of BM25 for red wine and the heart."
+    nl: "De DCG@k telt de gains van de eerste k plaatsen op, elk gedeeld door de discount log₂(plaats + 1); deze discount groeit snel over de eerste plaatsen en daarna langzaam, dus een lagere plaats kost minder dan bij de reciprocal rank. Gedeeld door de DCG van de ideale volgorde van alle cijfers van de zoekvraag, ook van documenten die de rangschikking mist, wordt dit de nDCG, van 0 tot 1: 0,763 voor de resultaten van BM25 bij rode wijn en het hart, waar document 9 ontbreekt."
+  - en: "With one relevant document, nDCG@k is 1 / log₂(place + 1), so on XQuAD the nDCG@10 of BM25, 0.886, lies a little above its MRR, 0.862. The gain of a grade is a choice: trec_eval and BEIR take the grade itself, Burges and colleagues 2 to the power of the grade, minus 1, which makes finding or missing a perfect document count for more. TREC, BEIR and the retrieval tasks of MTEB report nDCG@10."
+    nl: "Met één relevant document is nDCG@k gelijk aan 1 / log₂(plaats + 1), dus op XQuAD ligt de nDCG@10 van BM25, 0,830, iets boven de MRR, 0,804. De gain van een cijfer is een keuze: trec_eval en BEIR nemen het cijfer zelf, Burges en collega's 2 tot de macht het cijfer, min 1, waardoor het vinden of missen van een perfect document zwaarder telt. TREC, BEIR en de retrieval-taken van MTEB melden nDCG@10."
+can_now:
+  - en: "compute the DCG of a ranking: each gain divided by the log base 2 of its place plus 1, added up"
+    nl: "de DCG van een rangschikking berekenen: elke gain gedeeld door de log met grondtal 2 van de plaats plus 1, opgeteld"
+    by: dcg
+  - en: "compute the nDCG of a ranking against the ideal order of all the grades of its query"
+    nl: "de nDCG van een rangschikking berekenen tegen de ideale volgorde van alle cijfers van de zoekvraag"
+    by: ndcg
+  - en: "compute the DCG of many queries at once with NumPy"
+    nl: "de DCG van veel zoekvragen tegelijk berekenen met NumPy"
+    by: dcg_all
+  - en: "tell what makes the nDCG of a query go up, go down or stay the same"
+    nl: "zeggen waardoor de nDCG van een zoekvraag stijgt, daalt of gelijk blijft"
+    by: changes
+further_reading:
+  - en: "Kalervo Järvelin and Jaana Kekäläinen, [*Cumulated Gain-Based Evaluation of IR Techniques*](https://doi.org/10.1145/582415.582418), ACM Transactions on Information Systems 20(4), 2002: the paper of DCG and nDCG, with the ideal order and the log discount"
+    nl: "Kalervo Järvelin en Jaana Kekäläinen, [*Cumulated Gain-Based Evaluation of IR Techniques*](https://doi.org/10.1145/582415.582418), ACM Transactions on Information Systems 20(4), 2002: het paper van DCG en nDCG, met de ideale volgorde en de discount met de log (in het Engels)"
+  - en: "Nick Craswell, Bhaskar Mitra, Emine Yilmaz, Daniel Campos and Ellen M. Voorhees, [*Overview of the TREC 2019 Deep Learning Track*](https://arxiv.org/abs/2003.07820), 2020: the four grades of the passages, and why the track measured with nDCG@10"
+    nl: "Nick Craswell, Bhaskar Mitra, Emine Yilmaz, Daniel Campos en Ellen M. Voorhees, [*Overview of the TREC 2019 Deep Learning Track*](https://arxiv.org/abs/2003.07820), 2020: de vier cijfers van de passages, en waarom de track met nDCG@10 mat (in het Engels)"
+  - en: "Nandan Thakur, Nils Reimers, Andreas Rücklé, Abhishek Srivastava and Iryna Gurevych, [*BEIR: A Heterogeneous Benchmark for Zero-shot Evaluation of Information Retrieval Models*](https://arxiv.org/abs/2104.08663), NeurIPS 2021 Datasets and Benchmarks: 18 test collections, SciFact among them, each measured with nDCG@10"
+    nl: "Nandan Thakur, Nils Reimers, Andreas Rücklé, Abhishek Srivastava en Iryna Gurevych, [*BEIR: A Heterogeneous Benchmark for Zero-shot Evaluation of Information Retrieval Models*](https://arxiv.org/abs/2104.08663), NeurIPS 2021 Datasets and Benchmarks: 18 testcollecties, waaronder SciFact, elk gemeten met nDCG@10 (in het Engels)"
+  - en: "Chris Burges, Tal Shaked, Erin Renshaw, Ari Lazier, Matt Deeds, Nicole Hamilton and Greg Hullender, [*Learning to Rank using Gradient Descent*](https://doi.org/10.1145/1102351.1102363), ICML 2005: a model that learns to rank the results of a web search engine, measured with nDCG with the gain 2 to the power of the rating, minus 1"
+    nl: "Chris Burges, Tal Shaked, Erin Renshaw, Ari Lazier, Matt Deeds, Nicole Hamilton en Greg Hullender, [*Learning to Rank using Gradient Descent*](https://doi.org/10.1145/1102351.1102363), ICML 2005: een model dat de resultaten van een webzoekmachine leert te rangschikken, gemeten met nDCG met als gain 2 tot de macht de beoordeling, min 1 (in het Engels)"

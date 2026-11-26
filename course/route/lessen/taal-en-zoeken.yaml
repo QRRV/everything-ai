@@ -1050,6 +1050,7 @@ lessons:
   covers: [d15-evaluatie-en-interactief-zoeken#0]
   requires: [ir-precision-at-k]
   introduces: [c:ndcg]
+  mentions: [c:average-precision]
   data: []
   ladder: [python, numpy]
   needs: any
