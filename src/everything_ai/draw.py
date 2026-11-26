@@ -343,10 +343,12 @@ _TOWARDS = {"up": (0, -1), "down": (0, 1), "left": (-1, 0), "right": (1, 0)}
 def grid_world(panels: list[dict], *, alt: str, cell: int = 50, decimal: str = ".") -> mo.Html:
     """Grid worlds of reinforcement learning, one panel per world, side by side; in a narrow window they go one below
     the other before their text gets too small, as maze_grids does. Each panel is a dict:
-      rows      the world as strings: '.' a cell to stand on, 'S' the start, 'G' the goal and 'X' a pit; the goal and a
-                pit show their reward, +1 and −1, the start a small S in its corner
+      rows      the world as strings: '.' a cell to stand on, 'S' the start, 'G' the goal, 'X' a pit and 'W' a puddle,
+                a cell to stand on that costs more to step onto; the goal and a pit show their reward, +1 and −1, the
+                start a small S in its corner, a puddle what it costs in its corner
       title     the words above the panel (optional)
-      values    {cell: number} written in the middle of the cell with two decimals, in the text colour of `role`
+      values    {cell: number} written in the middle of the cell with `digits` decimals (two unless the panel says
+                otherwise), in the text colour of `role`
                 ("pred" for the values of value iteration, "param" for what Q-learning learned)
       arrows    {cell: [actions]}: for each action ("up", "down", "left", "right") a small ink triangle at that side of
                 the cell, the action of the policy there
@@ -356,8 +358,9 @@ def grid_world(panels: list[dict], *, alt: str, cell: int = 50, decimal: str = "
       index     True: the row numbers on the left and the column numbers on top, as the code counts them
       goal      the words on the goal (optional): "+1" unless the world gives another reward there, such as "0"
                 for a charger where every step before it cost −1
-    Pits are data, a grey fill; the goal has a light grey one. `decimal` is the decimal mark: "," in Dutch. `alt` says
-    what the figure shows, for a screen reader."""
+      wet       the words in the corner of a puddle (optional), "−10" unless the world says another cost
+    Pits are data, a gray fill; the goal and a puddle have a light gray one. `decimal` is the decimal mark: "," in
+    Dutch. `alt` says what the figure shows, for a screen reader."""
     size = max(11, round(cell * 0.25))   # the text in a cell: a number of 4 signs leaves room for a triangle each side
     halo = "paint-order:stroke;stroke:var(--ea-page);stroke-width:3px;stroke-linejoin:round"
     svgs, widest = [], 0
@@ -380,7 +383,7 @@ def grid_world(panels: list[dict], *, alt: str, cell: int = 50, decimal: str = "
         for r, row in enumerate(rows):
             for c, sign in enumerate(row):
                 x, y = left + c * cell, top + r * cell
-                fill = {"X": "var(--ea-data)", "G": "var(--ea-data-wash)"}.get(sign, "var(--ea-page)")
+                fill = {"X": "var(--ea-data)", "G": "var(--ea-data-wash)", "W": "var(--ea-data-wash)"}.get(sign, "var(--ea-page)")
                 parts.append(f'<rect x="{x}" y="{y}" width="{cell}" height="{cell}" style="fill:{fill};stroke:var(--ea-line);stroke-width:1"/>')
         path = p.get("path") or []
         low = cell * 0.28   # the way runs a little below the middle of each cell, so that it does not cross the number
@@ -408,6 +411,10 @@ def grid_world(panels: list[dict], *, alt: str, cell: int = 50, decimal: str = "
                     continue
                 if sign == "S":
                     parts.append(f'<text x="{x + 4}" y="{y + 12}" style="font-size:11px;font-weight:700;fill:var(--ea-ink-2)">S</text>')
+                if sign == "W":
+                    # tight in the corner, so that it stays clear of the triangle of "up" in the middle of the top edge
+                    parts.append(f'<text x="{x + 2}" y="{y + 11}" style="font-size:11px;font-weight:600;fill:var(--ea-ink-2)">'
+                                 f'{html.escape(p.get("wet", "−10"))}</text>')
                 for action in arrows.get((r, c), ()):
                     dx, dy = _TOWARDS[action]
                     tip = (mx + dx * (cell / 2 - 2), my + dy * (cell / 2 - 2))
@@ -417,7 +424,7 @@ def grid_world(panels: list[dict], *, alt: str, cell: int = 50, decimal: str = "
                     parts.append('<polygon points="' + " ".join(f"{px:.1f},{py:.1f}" for px, py in corners)
                                  + '" style="fill:var(--ea-ink-2)"/>')
                 if (r, c) in values:
-                    text = f"{values[(r, c)]:.2f}"
+                    text = f"{values[(r, c)]:.{p.get('digits', 2)}f}"
                     if float(text) == 0:
                         text = text.lstrip("-")
                     text = text.replace("-", "−").replace(".", decimal)

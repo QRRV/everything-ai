@@ -1,0 +1,33 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: rl-policy-iteration
+minutes: 25
+title:
+  en: "Better and better: policy iteration"
+  nl: "Steeds beter: policy iteration"
+goal:
+  en: "turn the values of a policy into a policy that is at least as good, and repeat evaluation and improvement until the policy is a best one."
+  nl: "de waarden van een policy omzetten in een policy die minstens zo goed is, en evaluatie en verbetering herhalen tot de policy een beste policy is."
+summary:
+  - en: "Policy improvement makes a new policy that takes in every state the action with the largest Q under the values of the old policy. In a state, the largest Q is at least the average of the Q-values, each counted with the probability the old policy gives it, and that average is the old value, so the new policy is at least as good in every state: the policy improvement theorem."
+    nl: "Policy improvement maakt een nieuwe policy die in elke state de action met de grootste Q neemt onder de waarden van de oude policy. In een state is de grootste Q minstens het gemiddelde van de Q-waarden, elk meegeteld met de kans die de oude policy erop zet, en dat gemiddelde is de oude waarde, dus is de nieuwe policy in elke state minstens zo goed: de policy improvement theorem."
+  - en: "Policy iteration evaluates and improves in turn, until the improvement gives back the policy it got; that policy is then a best policy. In the robot's room the policy is stable after 3 rounds. In a hall with puddles it takes 9, since a better way spreads only one tile per round."
+    nl: "Policy iteration evalueert en verbetert om de beurt, tot de verbetering de policy ongewijzigd teruggeeft; dat is dan een beste policy. In de kamer van de robot is de policy na 3 rondes stabiel. In een hal met plassen zijn het er 9, omdat een betere weg zich per ronde slechts één tegel verder verspreidt."
+  - en: "Of equally good actions, the improvement must take a fixed one, such as the first, or two equally good policies can keep taking turns. Value iteration is policy iteration with one sweep of evaluation per improvement, and generalized policy iteration is the name for every method in which values and a policy make each other better in turn."
+    nl: "Van even goede actions moet de verbetering een vaste nemen, zoals de eerste, anders kunnen twee even goede policies elkaar blijven afwisselen. Value iteration is policy iteration met één sweep evaluatie per verbetering, en generalized policy iteration is de naam voor elke methode waarin waarden en een policy elkaar om de beurt beter maken."
+can_now:
+  - en: "make a policy better by taking in every state the action with the largest Q under its values"
+    nl: "een policy beter maken door in elke state de action met de grootste Q onder de waarden van de policy te nemen"
+    by: improve
+  - en: "find a best policy with policy iteration, and say when it stops"
+    nl: "een beste policy vinden met policy iteration, en zeggen wanneer policy iteration stopt"
+    by: iteration
+  - en: "explain why the improvement must take a fixed one of equally good actions"
+    nl: "uitleggen waarom de verbetering van even goede actions een vaste moet nemen"
+    by: ties
+further_reading:
+  - en: "Richard S. Sutton and Andrew G. Barto (2018), *Reinforcement Learning: An Introduction*, 2nd edition, MIT Press, sections 4.2 and 4.3 on policy improvement and policy iteration, with equally good policies that take turns in exercise 4.4, and section 4.6 on generalized policy iteration; free at incompleteideas.net"
+    nl: "Richard S. Sutton en Andrew G. Barto (2018), *Reinforcement Learning: An Introduction*, 2e editie, MIT Press, paragrafen 4.2 en 4.3 over policy improvement en policy iteration, met even goede policies die elkaar afwisselen in opgave 4.4, en paragraaf 4.6 over generalized policy iteration; gratis op incompleteideas.net"
+  - en: "Ronald A. Howard (1960), *Dynamic Programming and Markov Processes*, MIT Press: the book that introduced policy iteration"
+    nl: "Ronald A. Howard (1960), *Dynamic Programming and Markov Processes*, MIT Press: het boek waarin policy iteration voor het eerst staat"
