@@ -163,7 +163,7 @@ def text_recipe():
     1. Bouw de index één keer: voeg voor elk document, op volgorde, het nummer één keer toe aan de postings list van elk woord in het document.
     2. Zoek elk woord van de zoekvraag op. Een woord zonder lijst staat in geen enkel document, en het antwoord is leeg.
     3. Sorteer de lijsten op lengte, de kortste eerst.
-    4. Wandel langs de eerste twee lijsten met een vinger in elke lijst: houd een getal dat in beide staat, en schuif de vinger bij het kleinste getal door.
+    4. Wandel langs de eerste twee lijsten met een vinger in elke lijst: bewaar een getal dat in beide staat, en schuif de vinger bij het kleinste getal door.
     5. Wandel met het antwoord tot nu toe langs elke volgende lijst, een voor een.
     """)
     return
@@ -341,7 +341,7 @@ def hints_search_and():
             "Het nieuwe antwoord is wat het antwoord tot nu toe en de volgende lijst allebei bevatten: roep de functie van oefening 2 aan met deze twee.",
             "`        answer = intersect(___)`",
         ],
-        why="`answer = intersect(answer, postings)`: elke ronde houdt de getallen die het antwoord tot nu toe en de volgende lijst allebei bevatten.",
+        why="`answer = intersect(answer, postings)`: elke ronde bewaart de getallen die het antwoord tot nu toe en de volgende lijst allebei bevatten.",
     )
     return
 
@@ -400,7 +400,7 @@ def text_connections():
     mo.md(r"""
     ## Afronding
 
-    **Samenhang.** [Zoeken: informatiebehoefte en relevantie](/course/open/ir-what-is-search?lang=nl) vond elk document met alle woorden van een zoekvraag door elk document te lezen; de index van deze les vindt dezelfde documenten met alleen de postings lists. De incidentiematrix is de document-term matrix van [Een document als vector](/course/open/nlp-document-vectors?lang=nl) met een 1 voor elke telling die niet 0 is, en de inverted index slaat de matrix sparse op: alleen de enen. De volgende les, *Rangschikken op cosine similarity: het vector space model*, zet de resultaten op volgorde, met per woord een telling; een index kan zo'n telling naast elke posting bewaren.
+    **Samenhang.** [Zoeken: informatiebehoefte en relevantie](/course/open/ir-what-is-search?lang=nl) vond elk document met alle woorden van een zoekvraag door elk document te lezen; de index van deze les vindt dezelfde documenten met alleen de postings lists. De incidentiematrix is de document-term matrix van [Een document als vector](/course/open/nlp-document-vectors?lang=nl) met een 1 voor elke telling die niet 0 is, en de inverted index slaat de matrix sparse op: alleen de enen. De volgende les, *Rangschikken met de cosine similarity: het vector space model*, zet de resultaten op volgorde, met per woord een telling; een index kan zo'n telling naast elke posting bewaren.
 
     **Een voorbeeld uit het dagelijks leven.** In de catalogus van een bibliotheek vind je elk boek van een schrijver zonder langs de kasten te lopen: je zoekt de naam op en krijgt een lijst met plaatsnummers.
     """)

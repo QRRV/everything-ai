@@ -1,0 +1,36 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: ir-vector-space
+minutes: 40
+title:
+  en: "Ranking by cosine: the vector space model"
+  nl: "Rangschikken met de cosine similarity: het vector space model"
+goal:
+  en: "turn documents and a query into vectors of TF-IDF weights, work out the length of such a vector, rank documents by their cosine with the query, divide by a mix of the length and a pivot instead, and tell what changes the cosine and what does not."
+  nl: "documenten en een zoekvraag omzetten in vectoren van TF-IDF-waarden, de lengte van zo'n vector uitrekenen, documenten rangschikken op de cosine similarity met de zoekvraag, in plaats daarvan delen door een mengsel van de lengte en een pivot, en zeggen wat de cosine similarity verandert en wat niet."
+summary:
+  - en: "Adding up the weights of the search words lets long documents win: for the 1,190 questions of XQuAD about 240 of 2,067 paragraphs of SQuAD, the longest fifth of the paragraphs holds the own paragraph of 25.2% of the questions and gets 52.9% of the first places. A search with AND finds the own paragraph for only 20 questions, because a question nearly always holds a word that its paragraph does not."
+    nl: "De waarden van de zoekwoorden optellen laat lange documenten winnen: bij de 1.183 Nederlandse vragen van XQuAD over 240 van de 2.067 alinea's van SQuAD bevat het langste vijfde deel van de alinea's de eigen alinea van 24,9% van de vragen, en krijgt het 52,9% van de eerste plaatsen. Een zoekopdracht met AND vindt de eigen alinea bij slechts 10 vragen, omdat een vraag bijna altijd een woord bevat dat niet in de eigen alinea staat."
+  - en: "The vector space model turns each document and the query into a vector of TF-IDF weights, one dimension for each word, and ranks the documents by the cosine: the dot product divided by the lengths of both vectors. A document written out twice keeps its cosine. Only the words of the query count in the dot product, so the postings lists of the query are enough."
+    nl: "Het vector space model maakt van elk document en van de zoekvraag een vector van TF-IDF-waarden, met één dimensie per woord, en rangschikt de documenten op de cosine similarity: het inproduct gedeeld door de lengtes van beide vectoren. Een document dat er twee keer achter elkaar staat, houdt dezelfde cosine similarity. Alleen de woorden van de zoekvraag tellen mee in het inproduct, dus de postings lists van de zoekvraag zijn genoeg."
+  - en: "Singhal, Buckley and Mitra (1996) found that the cosine retrieves long documents less often than they are relevant, and divided by a mix of the length and a fixed pivot instead, set by a slope. On the paragraphs, slope 0.8 gives the longest fifth 27.7% of the first places instead of 22.5%, and finds the own paragraph first for slightly fewer questions than the cosine."
+    nl: "Singhal, Buckley en Mitra (1996) zagen dat de cosine similarity lange documenten minder vaak vindt dan op grond van de relevantie te verwachten is, en deelden in plaats daarvan door een mengsel van de lengte en een vaste pivot, bepaald door een helling. Op de alinea's geeft helling 0,8 het langste vijfde deel 26,0% van de eerste plaatsen in plaats van 22,7%, en komt de eigen alinea bij iets minder vragen bovenaan dan met de cosine similarity."
+can_now:
+  - en: "work out the length of a vector of weights kept as a dictionary"
+    nl: "de lengte uitrekenen van een vector van waarden als dictionary"
+    by: norm
+  - en: "compute the cosine of a query and a document from their vectors, and rank documents by it"
+    nl: "de cosine similarity van een zoekvraag en een document uitrekenen uit de vectoren, en documenten erop rangschikken"
+    by: cosine
+  - en: "divide a dot product by a mix of the length of a document and a pivot, set by a slope"
+    nl: "een inproduct delen door een mengsel van de lengte van een document en een pivot, bepaald door een helling"
+    by: pivoted
+  - en: "tell which changes to a document or a query change the cosine, and which do not"
+    nl: "zeggen welke veranderingen aan een document of een zoekvraag de cosine similarity veranderen, en welke niet"
+    by: changes
+further_reading:
+  - en: "Christopher D. Manning, Prabhakar Raghavan and Hinrich Schütze, [*Introduction to Information Retrieval*](https://nlp.stanford.edu/IR-book/), Cambridge University Press, 2008, chapter 6: section 6.3 on the vector space model, the dot product, the cosine and queries as vectors, and section 6.4.4 on pivoted normalized document length"
+    nl: "Christopher D. Manning, Prabhakar Raghavan en Hinrich Schütze, [*Introduction to Information Retrieval*](https://nlp.stanford.edu/IR-book/), Cambridge University Press, 2008, hoofdstuk 6: paragraaf 6.3 over het vector space model, het inproduct, de cosine similarity en zoekvragen als vectoren, en paragraaf 6.4.4 over pivoted length normalization (in het Engels)"
+  - en: "Amit Singhal, Chris Buckley and Mandar Mitra, [*Pivoted document length normalization*](https://ir.webis.de/anthology/1996.sigirconf_conference-96.4), Proceedings of SIGIR 1996, pages 21 to 29: the paper behind the pivot, which compares how often documents of each length are relevant with how often they are retrieved"
+    nl: "Amit Singhal, Chris Buckley en Mandar Mitra, [*Pivoted document length normalization*](https://ir.webis.de/anthology/1996.sigirconf_conference-96.4), Proceedings of SIGIR 1996, pagina 21 tot 29: het paper achter de pivot, dat vergelijkt hoe vaak documenten van elke lengte relevant zijn met hoe vaak de zoekmachine deze documenten vindt (in het Engels)"

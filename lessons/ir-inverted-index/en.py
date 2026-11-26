@@ -163,7 +163,7 @@ def text_recipe():
     1. Build the index once: for each document, in order, add its number to the postings list of each word it holds, once.
     2. Look up each word of the query. A word without a list is in no document, and the answer is empty.
     3. Sort the lists by length, the shortest first.
-    4. Walk the first two lists with a finger in each: keep a number that both hold, and move on the finger at the smaller number.
+    4. Walk the first two lists with a finger in each: keep a number that both hold, and move the finger at the smaller number forward.
     5. Walk the answer so far with each next list in turn.
     """)
     return
