@@ -1023,7 +1023,7 @@ lessons:
   covers: [d15-webzoeken#8]
   requires: [ir-bm25]
   introduces: [c:vertical-search]
-  data: []
+  data: [xquad-squad-nl]
   ladder: [python]
   needs: any
 

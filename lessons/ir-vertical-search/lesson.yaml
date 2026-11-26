@@ -1,0 +1,38 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: ir-vertical-search
+minutes: 45
+title:
+  en: "Search engines for one domain"
+  nl: "Zoekmachines voor één domein"
+goal:
+  en: "search documents with fields, as a search engine for one domain does: weigh a match in the title more than a match in the text with BM25F, drop documents with filters on a price and a distance, let age and distance lower a score smoothly with a decay, and tell what search engines for news, products, places nearby, companies and law each need."
+  nl: "zoeken in documenten met velden, zoals een zoekmachine voor één domein doet: een treffer in de titel zwaarder laten wegen dan een treffer in de tekst met BM25F, documenten laten afvallen met filters op een prijs en een afstand, leeftijd en afstand een score zacht laten verlagen met een decay, en zeggen wat zoekmachines voor nieuws, producten, plekken in de buurt, bedrijven en recht elk nodig hebben."
+summary:
+  - en: "A search engine for one domain, a vertical search engine, knows the parts of its documents: a title, a text, a price, a date, a place. BM25 on a listing as one list of words puts a sleeping bag that says tent twice above the tent you want, which says tent once, in its title. BM25F gives each field a weight, adds up the counts of a word, each times the weight of its field, and lets only that total saturate, with the length added up in the same way; with the title three times, the tents come first."
+    nl: "Een zoekmachine voor één domein, een verticale zoekmachine, kent de delen van de documenten: een titel, een tekst, een prijs, een datum, een plek. BM25 op een advertentie als één lijst van woorden zet een slaapzak met twee keer tent boven de tent die je zoekt, met één keer tent, in de titel. BM25F geeft elk veld een weging, telt de aantallen van een woord op, elk maal de weging van het veld, en laat pas dit totaal verzadigen, met de lengte op dezelfde manier opgeteld; met de titel drie keer staan de tenten bovenaan."
+  - en: "A filter keeps a document or drops it by a value, such as a price of at most €100, without changing its score. A decay multiplies a score by 0.5 to the power of the distance divided by h: 1 at the best value, 0.5 at h, 0.25 at twice h, a smooth edge where a filter has a hard one. With h = 14 days and h = 25 km, the tent for four people, placed 3 days ago and 12 km away, comes first; with a decay that is too strong, the distance beats the words."
+    nl: "Een filter houdt een document of laat het afvallen op een waarde, zoals een prijs van hoogstens € 100, zonder de score te veranderen. Een decay vermenigvuldigt een score met 0,5 tot de macht van de afstand gedeeld door h: 1 bij de beste waarde, 0,5 bij h, 0,25 bij twee keer h, een zachte rand waar een filter een harde heeft. Met h = 14 dagen en h = 25 km staat de tent voor vier personen, 3 dagen geleden geplaatst en op 12 km, bovenaan; met een decay die te sterk is, wint de afstand van de woorden."
+  - en: "Each domain needs its own: news weighs freshness, a shop filters and weighs the fields of its products, a search for places nearby ranks by distance, a company shows only what a searcher may open, and legal search gets long, precise queries that should miss nothing. A title field helps most when it tells documents apart: on XQuAD, where each paragraph gets the title of its Wikipedia article, BM25 puts the own paragraph first a little more often, as the title tells only the article apart."
+    nl: "Elk domein vraagt iets anders: nieuws weegt versheid, een winkel filtert en weegt de velden van de producten, zoeken naar plekken in de buurt rangschikt op afstand, een bedrijf laat alleen zien wat de zoeker mag openen, en zoeken in het recht krijgt lange, precieze zoekvragen die niets mogen missen. Een titelveld helpt het meest als het documenten van elkaar onderscheidt: op XQuAD, waar elke alinea de titel van de pagina van Wikipedia krijgt, zet BM25 de eigen alinea iets vaker bovenaan, omdat de titel alleen de pagina's van elkaar onderscheidt."
+can_now:
+  - en: "add up the counts of a word in the fields of a document, each times the weight of its field, as BM25F does"
+    nl: "de aantallen van een woord in de velden van een document optellen, elk maal de weging van het veld, zoals BM25F doet"
+    by: combined_count
+  - en: "keep or drop a document with filters on a price and a distance"
+    nl: "een document houden of laten afvallen met filters op een prijs en een afstand"
+    by: keep
+  - en: "lower a score smoothly with a decay that halves it at a distance h"
+    nl: "een score zacht verlagen met een decay die de score halveert bij een afstand h"
+    by: decay
+  - en: "tell what search engines for news, products, places nearby, companies and law each need"
+    nl: "zeggen wat zoekmachines voor nieuws, producten, plekken in de buurt, bedrijven en recht elk nodig hebben"
+    by: domains
+further_reading:
+  - en: "Christopher D. Manning, Prabhakar Raghavan and Hinrich Schütze, [*Introduction to Information Retrieval*](https://nlp.stanford.edu/IR-book/), Cambridge University Press, 2008: chapter 1 on domain-specific search and Westlaw, section 4.6 on security in a company, and section 6.1 on fields and zones"
+    nl: "Christopher D. Manning, Prabhakar Raghavan en Hinrich Schütze, [*Introduction to Information Retrieval*](https://nlp.stanford.edu/IR-book/), Cambridge University Press, 2008: hoofdstuk 1 over zoeken in één domein en Westlaw, paragraaf 4.6 over beveiliging in een bedrijf, en paragraaf 6.1 over velden en zones (in het Engels)"
+  - en: "Stephen Robertson and Hugo Zaragoza, [*The Probabilistic Relevance Framework: BM25 and Beyond*](https://staff.city.ac.uk/~sbrp622/papers/foundations_bm25_review.pdf), Foundations and Trends in Information Retrieval 3(4), 2009: section 3.6 on BM25F, why a word should saturate once over all fields, and the weights tuned for web search"
+    nl: "Stephen Robertson en Hugo Zaragoza, [*The Probabilistic Relevance Framework: BM25 and Beyond*](https://staff.city.ac.uk/~sbrp622/papers/foundations_bm25_review.pdf), Foundations and Trends in Information Retrieval 3(4), 2009: paragraaf 3.6 over BM25F, waarom een woord één keer over alle velden moet verzadigen, en de wegingen afgesteld voor zoeken op het web (in het Engels)"
+  - en: "Elastic, [*Function score query*](https://www.elastic.co/docs/reference/query-languages/query-dsl/query-dsl-function-score-query), the documentation of Elasticsearch: decay functions on numbers, dates and places, and how their score is combined with the score of the query"
+    nl: "Elastic, [*Function score query*](https://www.elastic.co/docs/reference/query-languages/query-dsl/query-dsl-function-score-query), de documentatie van Elasticsearch: decay functions op getallen, datums en plekken, en hoe de score daarvan wordt gecombineerd met de score van de zoekvraag (in het Engels)"
