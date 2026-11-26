@@ -430,7 +430,7 @@ def text_connections():
     mo.md(r"""
     ## Wrap-up
 
-    **How this connects.** In [Learning from your own steps: Q-learning](/course/open/rl-q-learning?lang=en), the agent explored with ε-greedy in a grid of states, where a step also changes where it is. A bandit has one state, so the exploration-exploitation trade-off is all there is: your `estimates` gives the sample average of every machine, and your `best_share` shows how often each agent finds the best one. Q-learning moved $Q$ a step $\eta$ toward every new target instead of keeping totals and counts. In the next lesson, *Averaging as you go: step sizes and optimistic starts*, you see that a sample average can be kept up to date in the same way, one reward at a time.
+    **How this connects.** In [Learning from your own steps: Q-learning](/course/open/rl-q-learning?lang=en), the agent explored with ε-greedy in a grid of states, where a step also changes where it is. A bandit has one state, so the exploration-exploitation trade-off is all there is: your `estimates` gives the sample average of every machine, and your `best_share` shows how often each agent finds the best one. Q-learning moved $Q$ a step $\eta$ toward every new target instead of keeping totals and counts. In the next lesson, *Averaging as you go: drifting machines and optimistic starts*, you see that a sample average can be kept up to date in the same way, one reward at a time.
     """)
     return
 

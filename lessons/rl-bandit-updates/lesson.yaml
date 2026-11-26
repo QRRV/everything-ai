@@ -1,0 +1,31 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: rl-bandit-updates
+minutes: 25
+title:
+  en: "Averaging as you go: drifting machines and optimistic starts"
+  nl: "Gemiddelden bijhouden: verschuivende automaten en optimistische starts"
+goal:
+  en: "keep an estimate up to date one reward at a time, compare the sample average with a constant learning rate on bandits whose payouts drift, and make even a greedy agent try every machine by starting its estimates too high."
+  nl: "een schatting met één reward tegelijk bijhouden, het steekproefgemiddelde vergelijken met een vaste learning rate op bandits waarvan de uitbetaling verschuift, en zelfs een greedy agent elke automaat laten proberen door de schattingen te hoog te laten beginnen."
+summary:
+  - en: "An estimate can be kept up to date with one reward at a time: Q moves a step η toward each reward, the same update as in Q-learning. With η = 1/n, after the n-th reward of a machine, the estimate is exactly the sample average, without totals."
+    nl: "Een schatting is met één reward tegelijk bij te houden: Q schuift een stap η op naar elke reward, dezelfde update als bij Q-learning. Met η = 1/n, na de n-de reward van een automaat, is de schatting precies het steekproefgemiddelde, zonder totalen."
+  - en: "With a constant η, recent rewards count more: each update multiplies the part of every older reward by 1 − η. On a nonstationary problem, such as bandits whose means drift, that keeps the estimates close to what the machines pay now."
+    nl: "Met een vaste η tellen recente rewards zwaarder: elke update vermenigvuldigt het deel van elke oudere reward met 1 − η. Bij een nonstationary problem, zoals bandits waarvan de gemiddelden verschuiven, blijven de schattingen zo dicht bij wat de automaten nu geven."
+  - en: "Optimistic initial values start every estimate above what any machine pays: every reward disappoints, so even a greedy agent tries every machine before it settles. That costs reward at first and works only while the start value still counts."
+    nl: "Optimistic initial values laten elke schatting beginnen boven wat een automaat geeft: elke reward valt tegen, dus probeert zelfs een greedy agent elke automaat, voordat de agent er één blijft kiezen. Dat kost eerst reward, en werkt alleen zolang de startwaarde nog meetelt."
+can_now:
+  - en: "update an estimate with one reward at a time, with a learning rate of 1/n or a constant one"
+    nl: "een schatting bijwerken met één reward tegelijk, met een learning rate van 1/n of een vaste"
+    by: update
+  - en: "work out how much each earlier reward counts in an estimate with a constant learning rate"
+    nl: "uitrekenen hoeveel elke eerdere reward meetelt in een schatting met een vaste learning rate"
+    by: reward_shares
+  - en: "explain how optimistic initial values make a greedy agent explore"
+    nl: "uitleggen hoe optimistic initial values een greedy agent tot exploration brengen"
+    by: spike
+further_reading:
+  - en: "Richard S. Sutton and Andrew G. Barto (2018), *Reinforcement Learning: An Introduction*, 2nd edition, MIT Press, sections 2.4 to 2.6, with drifting bandits in exercise 2.5 and optimistic initial values in figure 2.3; free at incompleteideas.net"
+    nl: "Richard S. Sutton en Andrew G. Barto (2018), *Reinforcement Learning: An Introduction*, 2e editie, MIT Press, paragraaf 2.4 tot en met 2.6, met verschuivende bandits in opgave 2.5 en optimistic initial values in figuur 2.3; gratis op incompleteideas.net"

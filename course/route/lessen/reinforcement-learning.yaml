@@ -24,11 +24,11 @@ lessons:
   needs: any
 
 - id: rl-bandit-updates
-  title: "Averaging as you go: step sizes and optimistic starts"
+  title: "Averaging as you go: drifting machines and optimistic starts"
   level: basis
   domein: rl
   module: bandits
-  idea: "An average can be kept up to date one reward at a time, moving the estimate a step of 1/n towards each new reward; a constant step size weighs recent rewards more, which a bandit whose payouts drift needs, and estimates that start too high make even a greedy agent try every action."
+  idea: "An average can be kept up to date one reward at a time, moving the estimate a step of 1/n toward each new reward; a constant learning rate weighs recent rewards more, which a bandit whose payouts drift needs, and estimates that start too high make even a greedy agent try every action."
   covers: [bandits#0]
   requires: [rl-bandits]
   introduces: [c:incremental-update, c:nonstationary-problem, c:optimistic-initial-values]

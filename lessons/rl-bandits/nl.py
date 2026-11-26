@@ -430,7 +430,7 @@ def text_connections():
     mo.md(r"""
     ## Afronding
 
-    **Samenhang.** In [Leren van je eigen stappen: Q-learning](/course/open/rl-q-learning?lang=nl) exploreerde de agent met ε-greedy in een rooster van states, waar een stap ook verandert waar de agent is. Een bandit heeft één state, dus de exploration-exploitation trade-off is het hele probleem: je `estimates` geeft het steekproefgemiddelde van elke automaat, en je `best_share` laat zien hoe vaak elke agent de beste vindt. Q-learning schoof $Q$ een stap $\eta$ op naar elk nieuw target, in plaats van totalen en aantallen bij te houden. In de volgende les, *Gemiddelden bijhouden: stapgroottes en optimistische starts*, zie je dat een steekproefgemiddelde op dezelfde manier bij te houden is, één reward tegelijk.
+    **Samenhang.** In [Leren van je eigen stappen: Q-learning](/course/open/rl-q-learning?lang=nl) exploreerde de agent met ε-greedy in een rooster van states, waar een stap ook verandert waar de agent is. Een bandit heeft één state, dus de exploration-exploitation trade-off is het hele probleem: je `estimates` geeft het steekproefgemiddelde van elke automaat, en je `best_share` laat zien hoe vaak elke agent de beste vindt. Q-learning schoof $Q$ een stap $\eta$ op naar elk nieuw target, in plaats van totalen en aantallen bij te houden. In de volgende les, *Gemiddelden bijhouden: verschuivende automaten en optimistische starts*, zie je dat een steekproefgemiddelde op dezelfde manier bij te houden is, één reward tegelijk.
     """)
     return
 
