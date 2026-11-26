@@ -1,0 +1,46 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: ir-answer-engines
+minutes: 45
+title:
+  en: "From ten links to one answer"
+  nl: "Van tien links naar één antwoord"
+goal:
+  en: "tell whether a relevant document stands among the first k results, measure how often a page of ten links holds the own paragraph and how often one answer shows the answer, measure which sentences of an answer their citations support and which citations support their sentence, and tell what a page of links offers that one answer does not."
+  nl: "zeggen of er een relevant document bij de eerste k resultaten staat, meten hoe vaak een pagina met tien links de eigen alinea bevat en hoe vaak één antwoord het antwoord toont, meten welke zinnen van een antwoord door de citaties gesteund worden en welke citaties de zin erbij steunen, en zeggen wat een pagina met links biedt en één antwoord niet."
+summary:
+  - en: "An answer engine answers a question with one text and its sources instead of a page of links: most let an LLM write the answer from the first results of a search, with a citation after each sentence. The course's answer engine answers with the best sentence of the first results, by the query score of Tombros and Sanderson, and cites the result it comes from."
+    nl: "Een answer engine beantwoordt een vraag met één tekst en de bronnen van deze tekst in plaats van met een pagina met links: de meeste laten een LLM het antwoord schrijven uit de eerste resultaten van een zoekopdracht, met een citatie na elke zin. De answer engine van de course antwoordt met de beste zin van de eerste resultaten, volgens de query score van Tombros en Sanderson, en citeert het resultaat waar de zin vandaan komt."
+  - en: "success@k is the share of the questions with a relevant document among the first k results. On the 1,190 questions of XQuAD, the ten links of BM25 hold the own paragraph for 96.3% of the questions, and the course's answer engine that reads the first three results answers right for 68.1%; for 88.4% of its wrong answers, the own paragraph is among the ten links."
+    nl: "success@k is het deel van de vragen met een relevant document bij de eerste k resultaten. Op de 1.183 vragen van XQuAD bevatten de tien links van BM25 de eigen alinea bij 91,9% van de vragen, en antwoordt de answer engine van de course na de eerste drie resultaten bij 59,8% goed; bij 79,8% van de foute antwoorden staat de eigen alinea bij de tien links."
+  - en: "Citation recall is the share of the sentences of an answer that their citations support, and citation precision the share of the citations that support their sentence; in 2023, real answer engines reached 51.5% and 74.5% on average. Pages with an answer get fewer clicks on the sources, and a wrong answer arrives without the alternatives next to it."
+    nl: "Citation recall is het deel van de zinnen van een antwoord dat door de citaties gesteund wordt, en citation precision het deel van de citaties dat de zin erbij steunt; in 2023 haalden echte answer engines gemiddeld 51,5% en 74,5%. Pagina's met een antwoord krijgen minder klikken op de bronnen, en een fout antwoord komt zonder de alternatieven ernaast."
+can_now:
+  - en: "tell whether one of the first k results of a ranking is relevant"
+    nl: "zeggen of een van de eerste k resultaten van een rangschikking relevant is"
+    by: success_at_k
+  - en: "measure which share of the sentences of an answer one of their citations supports"
+    nl: "meten welk deel van de zinnen van een antwoord door een van de citaties gesteund wordt"
+    by: citation_recall
+  - en: "measure which share of the citations of an answer support their sentence"
+    nl: "meten welk deel van de citaties van een antwoord de zin erbij steunt"
+    by: citation_precision
+  - en: "tell what a page of ten links gives a reader, and what one answer gives"
+    nl: "zeggen wat een pagina met tien links een lezer geeft, en wat één antwoord geeft"
+    by: pages
+further_reading:
+  - en: "Nelson F. Liu, Tianyi Zhang and Percy Liang, [*Evaluating Verifiability in Generative Search Engines*](https://doi.org/10.18653/v1/2023.findings-emnlp.467), Findings of EMNLP 2023: citation recall and citation precision, measured on four answer engines"
+    nl: "Nelson F. Liu, Tianyi Zhang en Percy Liang, [*Evaluating Verifiability in Generative Search Engines*](https://doi.org/10.18653/v1/2023.findings-emnlp.467), Findings of EMNLP 2023: citation recall en citation precision, gemeten bij vier answer engines (in het Engels)"
+  - en: "Athena Chapekis and Anna Lieb, [*Google users are less likely to click on links when an AI summary appears in the results*](https://www.pewresearch.org/short-reads/2025/07/22/google-users-are-less-likely-to-click-on-links-when-an-ai-summary-appears-in-the-results/), Pew Research Center, 2025: the clicks of 900 people, with and without an AI summary"
+    nl: "Athena Chapekis en Anna Lieb, [*Google users are less likely to click on links when an AI summary appears in the results*](https://www.pewresearch.org/short-reads/2025/07/22/google-users-are-less-likely-to-click-on-links-when-an-ai-summary-appears-in-the-results/), Pew Research Center, 2025: de klikken van 900 mensen, met en zonder AI-samenvatting (in het Engels)"
+  - en: "Jane Li, Scott Huffman and Akihito Tokuda, [*Good abandonment in mobile and PC internet search*](https://doi.org/10.1145/1571941.1571951), SIGIR 2009: searches without a click that still found what was needed"
+    nl: "Jane Li, Scott Huffman en Akihito Tokuda, [*Good abandonment in mobile and PC internet search*](https://doi.org/10.1145/1571941.1571951), SIGIR 2009: zoekopdrachten zonder klik waarbij de gebruiker toch vond wat nodig was (in het Engels)"
+  - en: "Lydia B. Chilton and Jaime Teevan, [*Addressing people's information needs directly in a web search result page*](https://doi.org/10.1145/1963405.1963413), WWW 2011: short answers on the page of results, and the clicks they take"
+    nl: "Lydia B. Chilton en Jaime Teevan, [*Addressing people's information needs directly in a web search result page*](https://doi.org/10.1145/1963405.1963413), WWW 2011: korte antwoorden op de pagina met resultaten, en de klikken die deze antwoorden wegnemen (in het Engels)"
+  - en: "BBC, [*Representation of BBC News content in AI Assistants*](https://www.bbc.co.uk/aboutthebbc/documents/bbc-research-into-ai-assistants.pdf), 2025: 45 journalists review 362 answers of four AI assistants about the news"
+    nl: "BBC, [*Representation of BBC News content in AI Assistants*](https://www.bbc.co.uk/aboutthebbc/documents/bbc-research-into-ai-assistants.pdf), 2025: 45 journalisten beoordelen 362 antwoorden van vier AI-assistenten over het nieuws (in het Engels)"
+  - en: "Pranav Narayanan Venkit, Philippe Laban, Yilun Zhou, Yixin Mao and Chien-Sheng Wu, [*Search Engines in the AI Era: A Qualitative Understanding to the False Promise of Factual and Verifiable Source-Cited Responses in LLM-based Search*](https://doi.org/10.1145/3715275.3732089), FAccT 2025: how 21 people search with answer engines and with Google"
+    nl: "Pranav Narayanan Venkit, Philippe Laban, Yilun Zhou, Yixin Mao en Chien-Sheng Wu, [*Search Engines in the AI Era: A Qualitative Understanding to the False Promise of Factual and Verifiable Source-Cited Responses in LLM-based Search*](https://doi.org/10.1145/3715275.3732089), FAccT 2025: hoe 21 mensen zoeken met answer engines en met Google (in het Engels)"
+  - en: "Chirag Shah and Emily M. Bender, [*Situating Search*](https://doi.org/10.1145/3498366.3505816), CHIIR 2022: what a search engine that answers instead of pointing takes away"
+    nl: "Chirag Shah en Emily M. Bender, [*Situating Search*](https://doi.org/10.1145/3498366.3505816), CHIIR 2022: wat een zoekmachine wegneemt als de zoekmachine antwoordt in plaats van verwijst (in het Engels)"

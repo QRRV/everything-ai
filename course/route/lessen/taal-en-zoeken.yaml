@@ -1075,7 +1075,7 @@ lessons:
   module: zoeken
   idea: "Answer engines write one answer with sources instead of a list of links; that saves clicks, takes visits away from the sources, and an error now arrives without the alternatives next to it."
   covers: [d15-neurale-en-generatieve-retrieval#6]
-  requires: [ir-precision-at-k, nlp-summarize]
+  requires: [ir-precision-at-k, nlp-summarize, ir-snippets]
   introduces: [c:answer-engine]
   data: []
   ladder: [python]
