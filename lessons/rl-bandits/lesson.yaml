@@ -1,0 +1,33 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: rl-bandits
+minutes: 20
+title:
+  en: "Which machine pays most? The multi-armed bandit"
+  nl: "Welke automaat geeft het meest? De multi-armed bandit"
+goal:
+  en: "work out the sample average of every machine of a multi-armed bandit, and see over many random bandits why an agent with ε-greedy ends up with more reward than one that always takes the best estimate."
+  nl: "het steekproefgemiddelde van elke automaat van een multi-armed bandit uitrekenen, en over veel willekeurige bandits zien waarom een agent met ε-greedy uiteindelijk meer reward krijgt dan een agent die steeds de beste schatting neemt."
+summary:
+  - en: "A multi-armed bandit is reinforcement learning with one state: every machine pays a random reward around a mean of its own, which the agent does not know, and every pull is a choice of machine."
+    nl: "Een multi-armed bandit is reinforcement learning met één state: elke automaat geeft een willekeurige reward rond een eigen gemiddelde, dat de agent niet kent, en elke trek is een keuze van een automaat."
+  - en: "The agent estimates every machine with its sample average: the total of its rewards divided by its number of pulls, and 0 before its first pull."
+    nl: "De agent schat elke automaat met het steekproefgemiddelde: het totaal van de rewards gedeeld door het aantal keer trekken, en 0 zolang er nog nooit aan getrokken is."
+  - en: "Greedy stops trying machines once one estimate is above the others. Over 2,000 bandits, ε-greedy finds the best machine more often and gets more reward: the exploration-exploitation trade-off. A smaller ε finds the best machine later, but pulls a random machine less often."
+    nl: "Greedy stopt met automaten proberen zodra één schatting boven de andere ligt. Over 2.000 bandits vindt ε-greedy de beste automaat vaker en krijgt de agent meer reward: de exploration-exploitation trade-off. Met een kleinere ε vindt de agent de beste automaat later, maar trekt de agent minder vaak aan een willekeurige automaat."
+can_now:
+  - en: "work out the sample average of every action of a bandit"
+    nl: "het steekproefgemiddelde van elke action van een bandit uitrekenen"
+    by: estimates
+  - en: "measure over many runs how often an agent takes the best action"
+    nl: "over veel runs meten hoe vaak een agent de beste action neemt"
+    by: best_share
+  - en: "weigh exploring against exploiting over a long run"
+    nl: "exploration tegen exploitation afwegen over een lange run"
+    by: long-run
+further_reading:
+  - en: "Richard S. Sutton and Andrew G. Barto (2018), *Reinforcement Learning: An Introduction*, 2nd edition, MIT Press, sections 2.1 to 2.3, with the test of ten machines; free at incompleteideas.net"
+    nl: "Richard S. Sutton en Andrew G. Barto (2018), *Reinforcement Learning: An Introduction*, 2e editie, MIT Press, paragraaf 2.1 tot en met 2.3, met de test van tien automaten; gratis op incompleteideas.net"
+  - en: "Herbert Robbins (1952), *Some aspects of the sequential design of experiments*, Bulletin of the American Mathematical Society 58(5), 527–535, which sets out the problem for two machines"
+    nl: "Herbert Robbins (1952), *Some aspects of the sequential design of experiments*, Bulletin of the American Mathematical Society 58(5), 527–535, waarin het probleem met twee automaten beschreven staat"
