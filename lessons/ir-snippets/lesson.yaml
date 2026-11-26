@@ -1,0 +1,42 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: ir-snippets
+minutes: 45
+title:
+  en: "Snippets: showing the results"
+  nl: "Snippets: de resultaten laten zien"
+goal:
+  en: "count the query words in a text however they are written, find the window of a paragraph with the most query words, write it as a snippet with the query words in bold, measure how often a snippet shows the answer, and tell a static summary from a dynamic one."
+  nl: "de zoekwoorden in een tekst tellen, hoe de woorden ook geschreven staan, het venster van een alinea met de meeste zoekwoorden vinden, dit venster schrijven als snippet met de zoekwoorden in het vet, meten hoe vaak een snippet het antwoord toont, en een statische samenvatting onderscheiden van een dynamische."
+summary:
+  - en: "A page of results shows each result with its title and a snippet, a short summary from which a reader decides whether to open it. A static summary is the same for every query, such as the first sentences of a document; a dynamic or query-biased summary shows the places where the query words stand, and has to be made when the query comes in."
+    nl: "Een pagina met resultaten toont elk resultaat met de titel en een snippet, een korte samenvatting waarmee een lezer beslist of het resultaat de moeite van het openen waard is. Een statische samenvatting is bij elke zoekvraag hetzelfde, zoals de eerste zinnen van een document; een dynamische samenvatting (query-biased summary) toont de plekken waar de zoekwoorden staan, en wordt pas gemaakt als de zoekvraag binnenkomt."
+  - en: "A window snippet counts the query words in each run of words in a row, compared in small letters without punctuation, and shows the first run with the most, with the query words in bold. On the 1,190 questions of XQuAD, the window of 20 words of the own paragraph shows the answer for 51.2% of the questions, twice as often as its first 20 words, 25.6%."
+    nl: "Een venstersnippet telt de zoekwoorden in elke reeks woorden op een rij, vergeleken in kleine letters zonder leestekens, en toont de eerste reeks met de meeste, met de zoekwoorden in het vet. Op de 1.183 vragen van XQuAD toont het venster van 20 woorden van de eigen alinea het antwoord bij 47,9% van de vragen, bijna twee keer zo vaak als de eerste 20 woorden, 25,5%."
+  - en: "The best sentence by the query score of Tombros and Sanderson, the square of its different query words divided by the number of query words, shows the answer for 80.2%, with 30.9 words on average. Longer snippets help to find a fact and get in the way of finding a home page, and people prefer them without judging relevance better."
+    nl: "De beste zin volgens de query score van Tombros en Sanderson, het kwadraat van het aantal verschillende zoekwoorden gedeeld door het aantal zoekwoorden, toont het antwoord bij 75,2%, met gemiddeld 30,7 woorden. Langere snippets helpen om een feit te vinden en zitten in de weg bij het vinden van een homepage, en mensen hebben langere snippets liever, maar beoordelen de relevantie er niet beter mee."
+can_now:
+  - en: "count the words of a text that are query words, with their capitals and punctuation taken off"
+    nl: "de woorden van een tekst tellen die zoekwoorden zijn, vergeleken zonder hoofdletters en leestekens"
+    by: hits
+  - en: "find where the window of a given number of words with the most query words starts"
+    nl: "vinden waar het venster van een gegeven aantal woorden met de meeste zoekwoorden begint"
+    by: best_start
+  - en: "write a window as a snippet, with the query words in bold and an ellipsis where the text goes on"
+    nl: "een venster schrijven als snippet, met de zoekwoorden in het vet en een beletselteken waar de tekst verdergaat"
+    by: snippet
+  - en: "tell a static summary, the same for every query, from a dynamic summary made for the query"
+    nl: "een statische samenvatting, bij elke zoekvraag hetzelfde, onderscheiden van een dynamische samenvatting voor de zoekvraag"
+    by: kinds
+further_reading:
+  - en: "Christopher D. Manning, Prabhakar Raghavan and Hinrich Schütze, [*Results snippets*](https://nlp.stanford.edu/IR-book/html/htmledition/results-snippets-1.html), in *Introduction to Information Retrieval*, Cambridge University Press, 2008: static and dynamic summaries, windows with query words, and why snippets must be fast"
+    nl: "Christopher D. Manning, Prabhakar Raghavan en Hinrich Schütze, [*Results snippets*](https://nlp.stanford.edu/IR-book/html/htmledition/results-snippets-1.html), in *Introduction to Information Retrieval*, Cambridge University Press, 2008: statische en dynamische samenvattingen, vensters met zoekwoorden, en waarom snippets snel moeten zijn (in het Engels)"
+  - en: "Anastasios Tombros and Mark Sanderson, [*Advantages of query biased summaries in information retrieval*](https://doi.org/10.1145/290941.290947), SIGIR 1998: summaries from the sentences with the query words, the query score, and a study with 20 people"
+    nl: "Anastasios Tombros en Mark Sanderson, [*Advantages of query biased summaries in information retrieval*](https://doi.org/10.1145/290941.290947), SIGIR 1998: samenvattingen uit de zinnen met de zoekwoorden, de query score, en een onderzoek met 20 deelnemers (in het Engels)"
+  - en: "Andrew Turpin, Yohannes Tsegay, David Hawking and Hugh E. Williams, [*Fast generation of result snippets in web search*](https://doi.org/10.1145/1277741.1277766), SIGIR 2007: ranking the sentences of a document for a snippet, and how to make ten snippets per search fast"
+    nl: "Andrew Turpin, Yohannes Tsegay, David Hawking en Hugh E. Williams, [*Fast generation of result snippets in web search*](https://doi.org/10.1145/1277741.1277766), SIGIR 2007: de zinnen van een document rangschikken voor een snippet, en hoe tien snippets per zoekopdracht snel gaan (in het Engels)"
+  - en: "Edward Cutrell and Zhiwei Guan, [*What are you looking for?: An eye-tracking study of information usage in web search*](https://doi.org/10.1145/1240624.1240690), CHI 2007: snippets of one, two to three and six to seven lines, for facts and for home pages"
+    nl: "Edward Cutrell en Zhiwei Guan, [*What are you looking for?: An eye-tracking study of information usage in web search*](https://doi.org/10.1145/1240624.1240690), CHI 2007: snippets van één, twee tot drie en zes tot zeven regels, bij feiten en bij homepages (in het Engels)"
+  - en: "David Maxwell, Leif Azzopardi and Yashar Moshfeghi, [*A study of snippet length and informativeness*](https://doi.org/10.1145/3077136.3080824), SIGIR 2017: what 53 people preferred, and how well they judged relevance, with snippets of four lengths"
+    nl: "David Maxwell, Leif Azzopardi en Yashar Moshfeghi, [*A study of snippet length and informativeness*](https://doi.org/10.1145/3077136.3080824), SIGIR 2017: wat 53 deelnemers liever hadden, en hoe goed de deelnemers de relevantie beoordeelden, met snippets van vier lengtes (in het Engels)"
