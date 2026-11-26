@@ -1,0 +1,38 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: nlp-slot-filling
+minutes: 35
+title:
+  en: "Booking a train: frames and slots"
+  nl: "Een trein boeken: frames en slots"
+goal:
+  en: "build the steps of a system that books a train ticket the way GUS planned a trip in 1977: fill the slots of a frame from what the user says, keep the frame up to date, and ask for what is still missing, then run the first step on real commands to an assistant."
+  nl: "de stappen bouwen van een systeem dat een treinkaartje boekt zoals GUS in 1977 een reis plande: de slots van een frame vullen uit wat de gebruiker zegt, het frame bijhouden en vragen naar wat nog ontbreekt, en de eerste stap loslaten op echte opdrachten aan een assistent."
+summary:
+  - en: "A dialogue system holds a conversation over several turns; in task-oriented dialogue it helps the user with one task, such as booking a ticket. GUS (1977) kept the details of the task in a frame: a form with a slot for each thing the task needs. The frame of this lesson has three slots, to, from and date, each with its own question."
+    nl: "Een dialogue system voert een gesprek in meerdere beurten; bij task-oriented dialogue helpt het systeem de gebruiker met één taak, zoals een kaartje boeken. GUS (1977) bewaarde de details van de taak in een frame: een formulier met een slot voor elk gegeven dat de taak nodig heeft. Het frame van deze les heeft drie slots, naar, van en datum, elk met een eigen vraag."
+  - en: "Slot filling finds the values in what the user says; the simplest systems do it with a regular expression for each slot, whose group holds the value. After each turn, the new values go into the frame and every other slot keeps its value, so the user can correct one slot. The system asks the question of the first empty slot, and says what it understood: an implicit confirmation."
+    nl: "Slot filling vindt de waarden in wat de gebruiker zegt; de eenvoudigste systemen doen dat met een reguliere expressie voor elk slot, waarvan de groep de waarde bevat. Na elke beurt gaan de nieuwe waarden in het frame en houdt elk ander slot de waarde, dus de gebruiker kan één slot verbeteren. Het systeem stelt de vraag van het eerste lege slot, en zegt wat het begreep: een impliciete bevestiging."
+  - en: "When every slot is filled, the system asks whether to book: an explicit confirmation, which lets the user catch a wrong value. An assistant with many tasks first finds the intent of a command. On the ticket commands of MASSIVE, rules written by hand find most stations and days but miss what their writer did not think of, and most systems learn slot filling from marked examples."
+    nl: "Als elk slot gevuld is, vraagt het systeem of het moet boeken: een expliciete bevestiging, waarmee de gebruiker een verkeerde waarde kan opvangen. Een assistent met veel taken zoekt eerst de intent van een opdracht. Op de kaartjesopdrachten van MASSIVE vinden regels die met de hand geschreven zijn de meeste stations en dagen, maar missen deze regels wat de schrijver niet bedacht; de meeste systemen leren slot filling uit gemarkeerde voorbeelden."
+can_now:
+  - en: "fill the slots of a frame from a line with a regular expression for each slot, taking the text of its group"
+    nl: "de slots van een frame vullen uit een zin met een reguliere expressie voor elk slot, met de tekst van de groep"
+    by: find_slots
+  - en: "keep a frame up to date after a turn: new values in their slots, the other slots unchanged"
+    nl: "een frame bijhouden na een beurt: nieuwe waarden in het eigen slot, de andere slots ongewijzigd"
+    by: fill
+  - en: "pick the next question of a dialogue system: the first slot of the frame that is still empty"
+    nl: "de volgende vraag van een dialogue system kiezen: het eerste slot van het frame dat nog leeg is"
+    by: next_slot
+  - en: "tell which answers a rule-based system fills in rightly, which it fills in wrongly, and which it misses"
+    nl: "zeggen welke antwoorden een systeem met regels goed invult, welke verkeerd, en welke het mist"
+    by: what
+further_reading:
+  - en: "Dan Jurafsky and James H. Martin, [*Frame-Based Dialogue Systems*](https://web.stanford.edu/~jurafsky/slp3/K.pdf), appendix K of *Speech and Language Processing* (draft of 2026): frames, slot filling, dialogue state, dialogue policy and confirmation"
+    nl: "Dan Jurafsky en James H. Martin, [*Frame-Based Dialogue Systems*](https://web.stanford.edu/~jurafsky/slp3/K.pdf), bijlage K van *Speech and Language Processing* (versie van 2026): frames, slot filling, de toestand van het gesprek, de werkwijze van het systeem en bevestiging (in het Engels)"
+  - en: "Daniel G. Bobrow, Ronald M. Kaplan, Martin Kay, Donald A. Norman, Henry Thompson and Terry Winograd, [*GUS, a frame-driven dialog system*](https://doi.org/10.1016/0004-3702(77)90018-2), Artificial Intelligence, 1977: the paper of GUS"
+    nl: "Daniel G. Bobrow, Ronald M. Kaplan, Martin Kay, Donald A. Norman, Henry Thompson en Terry Winograd, [*GUS, a frame-driven dialog system*](https://doi.org/10.1016/0004-3702(77)90018-2), Artificial Intelligence, 1977: het paper van GUS (in het Engels)"
+  - en: "Jack FitzGerald and others, [*MASSIVE: A 1M-Example Multilingual Natural Language Understanding Dataset with 51 Typologically-Diverse Languages*](https://doi.org/10.18653/v1/2023.acl-long.235), ACL 2023: the dataset of the ticket commands, with intents and slots in 51 languages"
+    nl: "Jack FitzGerald en anderen, [*MASSIVE: A 1M-Example Multilingual Natural Language Understanding Dataset with 51 Typologically-Diverse Languages*](https://doi.org/10.18653/v1/2023.acl-long.235), ACL 2023: de dataset van de kaartjesopdrachten, met intents en slots in 51 talen (in het Engels)"

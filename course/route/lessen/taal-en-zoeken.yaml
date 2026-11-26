@@ -952,7 +952,7 @@ lessons:
   idea: "A task-oriented system fills a frame (from, to, date) from what the user says and asks for the slots still missing, as the GUS system did in 1977."
   covers: [d15-dialoogsystemen#1]
   requires: [nlp-eliza, nlp-information-extraction]
-  introduces: [c:dialogue-system, c:task-oriented-dialogue, c:slot-filling]
+  introduces: [c:dialogue-system, c:task-oriented-dialogue, c:slot-filling, c:frame, c:intent-detection]
   data: [massive-en-nl]
   ladder: [python]
   needs: any

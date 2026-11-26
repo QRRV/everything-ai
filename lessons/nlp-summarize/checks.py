@@ -367,11 +367,12 @@ def _note(text_: str) -> str:
 
 
 def _colors(w: dict, body: str) -> str:
-    """The note on the colors under a picture: gray always, blue and purple only when the picture draws them."""
+    """The note on the colors under a picture: gray always, blue and purple only when the picture draws them. A picture
+    without a color in `w` never draws it, even when text the learner typed spells out its style."""
     parts = [w["gray"]]
-    if "var(--ea-pred-text)" in body:
+    if "blue" in w and "var(--ea-pred-text)" in body:
         parts.append(w["blue"])
-    if "var(--ea-loss-text)" in body:
+    if "purple" in w and "var(--ea-loss-text)" in body:
         parts.append(w["purple"])
     return _note(" ".join(parts))
 
