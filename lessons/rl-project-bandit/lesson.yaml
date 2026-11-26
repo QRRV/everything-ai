@@ -1,0 +1,34 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: rl-project-bandit
+minutes: 35
+title:
+  en: "Project: your own bandit agent"
+  nl: "Project: je eigen bandit-agent"
+goal:
+  en: "build your first agent as a class in your own project, let it take turns with a bandit in a loop, and compare three versions of it on the same 200 drifting bandits by the mean reward and by how often each chooses the best machine."
+  nl: "je eerste agent bouwen als class in je eigen project, de agent in een loop om de beurt met een bandit laten spelen, en drie versies ervan vergelijken op dezelfde 200 verschuivende bandits, op de gemiddelde reward en op hoe vaak elke versie de beste automaat kiest."
+summary:
+  - en: "An agent can be an object: what it knows, an estimate and a count for every machine, stays in the object between pulls; `act` chooses a machine and `learn` takes the reward. The environment is an object too: `pull` pays and lets the means drift, and `best` names the best machine, only for measuring."
+    nl: "Een agent kan een object zijn: wat de agent weet, een schatting en een telling voor elke automaat, blijft tussen het trekken door in het object; `act` kiest een automaat en `learn` neemt de reward aan. De omgeving is ook een object: `pull` betaalt en laat de gemiddelden verschuiven, en `best` noemt de beste automaat, alleen om te meten."
+  - en: "The agent and the environment take turns in a loop: the agent acts, the environment pays, the agent learns. Every method in this course where an agent learns from experience runs in such a loop; in a grid world the environment also gives a new state."
+    nl: "De agent en de omgeving zijn om de beurt aan zet in een loop: de agent doet iets, de omgeving betaalt, de agent leert. Zo'n loop zit in elke methode van deze course waarbij een agent leert van ervaring; in een grid world geeft de omgeving ook een nieuwe state."
+  - en: "A fair comparison gives every agent the same bandits, with the same means, drift and noise, and averages over many runs: on a few bandits, luck can turn the order around. The mean reward and the share of best choices can rank agents differently, so a project measures both."
+    nl: "Een zuivere vergelijking geeft elke agent dezelfde bandits, met dezelfde gemiddelden, verschuiving en ruis, en middelt over veel runs: op een paar bandits kan geluk de volgorde omdraaien. De gemiddelde reward en het aandeel beste keuzes kunnen agents verschillend rangschikken, dus meet een project allebei."
+can_now:
+  - en: "write an agent as a class, with what it knows in its attributes and the methods act and learn"
+    nl: "een agent schrijven als class, met wat de agent weet in de attributes en de methods act en learn"
+    by: agent
+  - en: "write the loop in which an agent and an environment take turns, and keep what happened at every step"
+    nl: "de loop schrijven waarin een agent en een omgeving om de beurt aan zet zijn, en bijhouden wat er bij elke stap gebeurde"
+    by: run
+  - en: "average many runs at every step, to compare agents fairly"
+    nl: "veel runs bij elke stap middelen, om agents zuiver te vergelijken"
+    by: average
+  - en: "explain why the mean reward and the share of best choices can rank two agents differently"
+    nl: "uitleggen waarom de gemiddelde reward en het aandeel beste keuzes twee agents verschillend kunnen rangschikken"
+    by: measures
+further_reading:
+  - en: "Richard S. Sutton and Andrew G. Barto (2018), *Reinforcement Learning: An Introduction*, 2nd edition, MIT Press, section 2.3, the 10-armed testbed averaged over 2,000 bandits, and section 3.1, the agent and the environment; free at incompleteideas.net"
+    nl: "Richard S. Sutton en Andrew G. Barto (2018), *Reinforcement Learning: An Introduction*, 2e editie, MIT Press, paragraaf 2.3, het 10-armed testbed gemiddeld over 2.000 bandits, en paragraaf 3.1, de agent en de omgeving; gratis op incompleteideas.net"
