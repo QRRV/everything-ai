@@ -1,0 +1,314 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# Lessons of the domain rl (reinforcement learning: bandits, RL with a table, other settings and RL in practice), level
+# basis. The plan: docs/onderzoek/reports/Voorstel domein Reinforcement learning.md (besluit 1.18, advice 6). The route rl
+# in routes.yaml starts where the core ends and gives the order; the core already has what RL is, value iteration and
+# Q-learning (overige-takken.yaml). Every lesson runs on a CPU, in the course's own small environments or in Gymnasium.
+# Planning data; "introduces" is the plan and "uses" is filled in fully when a lesson is built. Format: ../FORMAT.md.
+map: v2.3
+lessons:
+
+# --- bandits: bandits and exploration ---------------------------------------------------------------------------------
+- id: rl-bandits
+  title: "Which machine pays most? The multi-armed bandit"
+  level: basis
+  domein: rl
+  module: bandits
+  idea: "A multi-armed bandit is RL with a single state: every action pays a random reward around an unknown mean, the agent estimates each mean as the average of what it got, and over many random bandits epsilon-greedy ends up above always taking the best estimate, because it keeps finding out which action is really best."
+  covers: [bandits#0]
+  requires: [rl-q-learning]
+  introduces: [c:multi-armed-bandit, c:sample-average, c:exploration-exploitation-trade-off]
+  mentions: [c:learning-curve]
+  data: []
+  ladder: [python, numpy]
+  needs: any
+
+- id: rl-bandit-updates
+  title: "Averaging as you go: step sizes and optimistic starts"
+  level: basis
+  domein: rl
+  module: bandits
+  idea: "An average can be kept up to date one reward at a time, moving the estimate a step of 1/n towards each new reward; a constant step size weighs recent rewards more, which a bandit whose payouts drift needs, and estimates that start too high make even a greedy agent try every action."
+  covers: [bandits#0]
+  requires: [rl-bandits]
+  introduces: [c:incremental-update, c:nonstationary-problem, c:optimistic-initial-values]
+  data: []
+  ladder: [python, numpy]
+  needs: any
+
+- id: rl-project-bandit
+  title: "Project: your own bandit agent"
+  level: basis
+  domein: rl
+  module: bandits
+  kind: project
+  project: agent
+  idea: "Your first agent, in your own project folder: it chooses an action, learns from the reward and keeps its estimates; you compare a greedy, an epsilon-greedy and an optimistic version on bandits whose payouts drift, over many runs, by the average reward and the share of best choices."
+  covers: []
+  requires: [rl-bandit-updates]
+  introduces: []
+  data: []
+  ladder: [python, numpy]
+  needs: any
+
+# --- tabel: RL with a table -------------------------------------------------------------------------------------------
+- id: rl-policy-evaluation
+  title: "What is a policy worth? Policy evaluation"
+  level: basis
+  domein: rl
+  module: tabel
+  idea: "Policy evaluation gives every state its value under one fixed policy by sweeping the Bellman equation of that policy over all states until the values stop changing; in a small grid the values of the random policy say how many steps it needs on average to reach an exit."
+  covers: [dynamic-programming#0]
+  requires: [rl-value-iteration]
+  introduces: [c:policy-evaluation]
+  mentions: [c:dynamic-programming]
+  data: []
+  ladder: [python, numpy]
+  needs: any
+
+- id: rl-policy-iteration
+  title: "Better and better: policy iteration"
+  level: basis
+  domein: rl
+  module: tabel
+  idea: "Acting greedily on the values of a policy gives a policy that is at least as good (the policy improvement theorem); alternating evaluation and improvement, policy iteration, reaches an optimal policy in a few rounds, and generalized policy iteration is the name for every method in which values and policy improve each other."
+  covers: [dynamic-programming#1]
+  requires: [rl-policy-evaluation]
+  introduces: [c:policy-improvement, c:policy-iteration, c:generalized-policy-iteration]
+  data: []
+  ladder: [python, numpy]
+  needs: any
+
+- id: rl-monte-carlo-prediction
+  title: "Learning from whole games: Monte Carlo prediction"
+  level: basis
+  domein: rl
+  module: tabel
+  idea: "Without a model of the environment, an agent can estimate values from whole episodes: Monte Carlo prediction averages the returns that followed each state, at its first visit or at every visit; each step is credited with the whole return after it, so which step earned a late reward only shows on average over many games."
+  covers: [monte-carlo-methoden#0, wat-rl-is#2]
+  requires: [rl-policy-evaluation, rl-q-learning]
+  introduces: [c:monte-carlo-method, c:first-visit-monte-carlo, c:credit-assignment]
+  data: []
+  ladder: [python, numpy]
+  needs: any
+
+- id: rl-monte-carlo-control
+  title: "Playing better from experience: Monte Carlo control"
+  level: basis
+  domein: rl
+  module: tabel
+  idea: "Monte Carlo control estimates Q(s, a) from episodes and makes the policy greedy after every episode; exploring starts or an epsilon-soft policy make sure every action keeps being tried, and in blackjack it finds when to take another card and when to stop."
+  covers: [monte-carlo-methoden#0]
+  requires: [rl-monte-carlo-prediction, rl-policy-iteration]
+  introduces: [c:monte-carlo-control, c:exploring-starts, c:epsilon-soft-policy]
+  data: []
+  ladder: [python, numpy]
+  needs: any
+
+- id: rl-td-prediction
+  title: "Learning after every step: TD(0)"
+  level: basis
+  domein: rl
+  module: tabel
+  idea: "TD(0) updates the value of a state after every step, towards the reward plus the discounted value of the next state: it learns from its own estimates (bootstrapping) while the episode is still going, and on a random walk it gets close to the true values with fewer episodes than Monte Carlo."
+  covers: [temporal-difference-learning#0]
+  requires: [rl-monte-carlo-prediction]
+  introduces: [c:temporal-difference-learning, c:td-error, c:bootstrapping]
+  mentions: [c:random-walk]
+  data: []
+  ladder: [python, numpy]
+  needs: any
+
+- id: rl-sarsa
+  title: "Careful or bold: SARSA and Q-learning"
+  level: basis
+  domein: rl
+  module: tabel
+  idea: "SARSA updates towards the action the agent will really take next, Q-learning towards the best action; next to a cliff, with epsilon-greedy exploration, SARSA learns the safe path and Q-learning the short path along the edge that it sometimes falls off, because SARSA learns on-policy and Q-learning off-policy."
+  covers: [temporal-difference-learning#1]
+  requires: [rl-td-prediction]
+  introduces: [c:sarsa, c:on-policy, c:off-policy]
+  data: []
+  ladder: [python, numpy]
+  needs: any
+
+- id: rl-kinds-of-rl
+  title: "A map of RL methods"
+  level: basis
+  domein: rl
+  module: tabel
+  idea: "RL methods differ in a few choices: with or without a model of the environment, learning values or the policy itself, learning about the policy they follow or about another one, and updating from whole episodes or from their own estimates; dynamic programming, Monte Carlo and TD are three corners of that map."
+  covers: [mdp-s-bellman-en-pomdp-s#2]
+  requires: [rl-sarsa, rl-monte-carlo-control]
+  introduces: [c:model-free-rl, c:model-based-rl, c:value-based-method, c:policy-based-method]
+  mentions: [c:dynamic-programming]
+  data: []
+  ladder: [python]
+  needs: any
+
+- id: rl-project-grid-agent
+  title: "Project: an agent for your own grid world"
+  level: basis
+  domein: rl
+  module: tabel
+  kind: project
+  project: agent
+  idea: "Your agent learns a grid world you design yourself: Monte Carlo control, SARSA and Q-learning on the same grid, each with its learning curve over several seeds and its greedy policy as arrows, saved next to your bandit agent."
+  covers: []
+  requires: [rl-kinds-of-rl, rl-project-bandit]
+  introduces: []
+  mentions: [c:learning-curve]
+  data: []
+  ladder: [python, numpy]
+  needs: any
+
+# --- settings: other settings -----------------------------------------------------------------------------------------
+- id: rl-behavior-cloning
+  title: "Copying an expert: behavior cloning"
+  level: basis
+  domein: rl
+  module: settings
+  idea: "Behavior cloning learns a policy as a classifier from the states and actions of an expert, without any reward; it works where the expert went, but one mistake can take the agent to states the expert never showed, where mistakes pile up."
+  covers: [imitation-learning-en-inverse-rl#0]
+  requires: [rl-sarsa, ml-knn]
+  introduces: [c:imitation-learning, c:behavior-cloning, c:demonstration, c:compounding-error]
+  mentions: [c:distribution-shift]
+  data: []
+  ladder: [python, numpy]
+  needs: any
+
+- id: rl-reward-design
+  title: "You get what you reward: reward misspecification"
+  level: basis
+  domein: rl
+  module: settings
+  idea: "An agent maximizes the reward that was written down, not the task that was meant: in a grid world a reward for every piece of dirt picked up teaches a cleaning robot to drop dirt and pick it up again; a reward for the result you want, checked by watching what the agent does, fixes it."
+  covers: [beloningsontwerp#0]
+  requires: [rl-sarsa]
+  introduces: [c:reward-misspecification]
+  mentions: [c:reward-hacking, c:specification-gaming]
+  data: []
+  ladder: [python, numpy]
+  needs: any
+
+- id: rl-many-agents
+  title: "When agents meet: emergent behavior and social dilemmas"
+  level: basis
+  domein: rl
+  module: settings
+  idea: "With two learning agents, the environment of each one changes while the other learns; in a repeated prisoner's dilemma two Q-learners often end up betraying each other although both would gain from working together, and in hide-and-seek agents found strategies nobody had programmed."
+  covers: [multi-agent-rl#0]
+  requires: [rl-sarsa]
+  introduces: [c:multi-agent-rl, c:prisoners-dilemma, c:social-dilemma, c:emergent-behavior]
+  data: []
+  ladder: [python, numpy]
+  needs: any
+
+# --- praktijk: RL in practice -----------------------------------------------------------------------------------------
+- id: rl-gymnasium
+  title: "One interface for every environment: Gymnasium"
+  level: basis
+  domein: rl
+  module: praktijk
+  idea: "Gymnasium gives every environment the same interface: reset gives the first observation, step takes an action and gives the observation, the reward, whether the episode ended or was cut off, and extra information; spaces say what observations and actions look like, so one agent runs on FrozenLake, Taxi and CliffWalking alike."
+  covers: [tooling-en-experimentele-praktijk#0]
+  requires: [rl-sarsa]
+  introduces: [c:gymnasium, c:observation-space, c:action-space, c:truncation]
+  mentions: [c:observation]
+  data: []
+  ladder: [python, numpy]
+  needs: any
+
+- id: rl-classic-environments
+  title: "CartPole, MountainCar and the benchmarks of RL"
+  level: basis
+  domein: rl
+  module: praktijk
+  idea: "Each classic benchmark tests something else: CartPole balancing from four numbers, MountainCar a reward that only comes at the goal, Atari games learning from pixels, MuJoCo and the DeepMind Control Suite moving bodies with continuous actions; for a table, the numbers of CartPole first have to be cut into bins."
+  covers: [tooling-en-experimentele-praktijk#1]
+  requires: [rl-gymnasium]
+  introduces: [c:benchmark-environment, c:cartpole, c:sparse-reward, c:discretization, c:mujoco]
+  mentions: [c:benchmark, c:pixel]
+  data: []
+  ladder: [python, numpy]
+  needs: any
+
+- id: rl-libraries
+  title: "Using an RL library: Stable-Baselines3"
+  level: basis
+  domein: rl
+  module: praktijk
+  idea: "An RL library holds tested versions of the algorithms: with Stable-Baselines3 a PPO agent learns CartPole in a few lines and a few minutes, judged over several seeds and many test episodes; CleanRL puts each algorithm in one file to read, and RLlib runs many environments at once."
+  covers: [tooling-en-experimentele-praktijk#4]
+  requires: [rl-classic-environments]
+  introduces: [c:stable-baselines3, c:cleanrl, c:rllib]
+  data: []
+  ladder: [python, numpy]
+  needs: any
+  compute_minutes: 3
+
+- id: rl-conditioning
+  title: "Pavlov's dogs and Thorndike's cats: conditioning"
+  level: basis
+  domein: rl
+  module: praktijk
+  idea: "Psychology studied learning from reward long before computers: in classical conditioning a signal comes to predict food (Pavlov), in instrumental conditioning an action followed by a reward becomes more likely (Thorndike's law of effect), which is what an RL agent does with its estimates."
+  covers: [d18-rl-psychologie-en-neurowetenschap#0]
+  requires: [rl-bandits]
+  introduces: [c:classical-conditioning, c:instrumental-conditioning, c:law-of-effect]
+  data: []
+  ladder: [python, numpy]
+  needs: any
+
+- id: rl-rescorla-wagner
+  title: "Learning from surprise: the Rescorla-Wagner model"
+  level: basis
+  domein: rl
+  module: praktijk
+  idea: "The Rescorla-Wagner model changes how strongly each signal predicts a reward by the surprise: the reward minus what all signals together predicted; it explains blocking, where a second signal learns nothing because the first already predicts the reward, and TD learning is the same rule spread out over time."
+  covers: [d18-rl-psychologie-en-neurowetenschap#1]
+  requires: [rl-conditioning, rl-td-prediction]
+  introduces: [c:rescorla-wagner-model, c:blocking]
+  mentions: [c:surprise]
+  data: []
+  ladder: [python, numpy]
+  needs: any
+
+- id: rl-dopamine
+  title: "Dopamine as a prediction error"
+  level: basis
+  domein: rl
+  module: praktijk
+  idea: "Dopamine neurons fire at an unexpected reward, after learning at the signal that predicts it, and fall silent when a predicted reward stays away: that is the TD error of a model that learns to predict the reward (Schultz, Dayan and Montague, 1997)."
+  covers: [d18-rl-psychologie-en-neurowetenschap#2]
+  requires: [rl-rescorla-wagner]
+  introduces: [c:reward-prediction-error, c:dopamine]
+  data: []
+  ladder: [python, numpy]
+  needs: any
+
+- id: rl-real-world
+  title: "RL outside games"
+  level: basis
+  domein: rl
+  module: praktijk
+  idea: "RL is used where actions can be tried cheaply or in a simulator: recommendations, cooling a data center, steering the plasma of a fusion reactor, placing the parts of a chip and finding faster algorithms; for each the questions are what the state, the actions and the reward are, and what a mistake costs."
+  covers: [rl-in-de-echte-wereld#0]
+  requires: [rl-classic-environments]
+  introduces: [c:simulator]
+  data: []
+  ladder: [python]
+  needs: any
+
+- id: rl-milestones
+  title: "From checkers to Go: milestones of RL"
+  level: basis
+  domein: rl
+  module: praktijk
+  idea: "Games made the milestones of RL: Samuel's checkers program, TD-Gammon, DQN on Atari, AlphaGo and AlphaZero, then StarCraft, Dota 2, racing and a robot hand; each combined learning from its own games with search or a great deal of computing, and Barto and Sutton received the 2024 Turing Award for the foundations of RL."
+  covers: [mijlpalen-als-casus#0, mijlpalen-als-casus#1]
+  requires: [rl-real-world]
+  introduces: [c:self-play, c:alphazero]
+  data: []
+  ladder: [python]
+  needs: any

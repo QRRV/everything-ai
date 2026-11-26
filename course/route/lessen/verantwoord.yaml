@@ -1368,6 +1368,7 @@ lessons:
   covers: [ai-veiligheid-als-vakgebied#1]
   requires: [rai-goodhart]
   introduces: [c:outer-alignment, c:inner-alignment]
+  mentions: [c:reward-misspecification]
   data: []
   ladder: [python]
   needs: any
@@ -1672,7 +1673,7 @@ lessons:
   covers: [misleidende-alignment-scheming-en-situational-awareness#0]
   requires: [rai-specification-gaming, rai-what-to-align-to]
   introduces: [c:corrigibility, c:power-seeking, c:safe-interruptibility]
-  mentions: [c:human-oversight, c:on-policy, c:system-prompt]
+  mentions: [c:human-oversight, c:on-policy, c:system-prompt, c:sarsa]
   data: []
   ladder: [python, numpy]
   needs: any

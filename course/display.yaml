@@ -92,6 +92,10 @@ modules:
   klassiek-ml/tijdreeksen: {en: "Time series", nl: "Tijdreeksen"}
   klassiek-ml/aanbevelen: {en: "Recommending and networks", nl: "Aanbevelen en netwerken"}
   klassiek-ml/praktijk: {en: "Tables in practice", nl: "Tabeldata in de praktijk"}
+  rl/bandits: {en: "Bandits and exploration", nl: "Bandits en exploratie"}
+  rl/tabel: {en: "RL with a table", nl: "RL met een tabel"}
+  rl/settings: {en: "Other settings", nl: "Andere settings"}
+  rl/praktijk: {en: "RL in practice", nl: "RL in de praktijk"}
   bouwen/werk: {en: "AI in your work", nl: "AI in je werk"}
   bouwen/apis: {en: "Calling models", nl: "Modellen aanroepen"}
   bouwen/prompts: {en: "Prompts for developers", nl: "Prompts voor ontwikkelaars"}

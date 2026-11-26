@@ -1008,6 +1008,45 @@ routes:
   # ---------- basis: taal/meertalig ----------
   - nlp-low-resource
   - nlp-dutch-models
+- id: rl
+  domein: rl
+  title: "Reinforcement learning: the basics"
+  title_nl: "Reinforcement learning: de basis"
+  short: "Reinforcement learning"
+  short_nl: "Reinforcement learning"
+  # The basics: docs/onderzoek/reports/Voorstel domein Reinforcement learning.md (besluit 1.18, advice 6). Its tasters are
+  # in the kern (rl-what-is-rl, rl-q-learning), and so is value iteration (rl-value-iteration).
+  milestones:
+    - after: rl-milestones
+      en: "Basics done: you built bandit agents and agents with a table that learn from whole games and from every step, saw careful and bold agents next to a cliff, copied an expert, caught an agent gaming its reward, ran your agent in Gymnasium and a library's agent on CartPole, and know what RL has to do with dopamine."
+      nl: "Basis af: je hebt bandit-agents gebouwd en agents met een tabel die leren van hele spellen en van elke stap, voorzichtige en brutale agents naast een klif gezien, een expert nagedaan, een agent betrapt die zijn beloning omzeilt, je agent in Gymnasium laten lopen en de agent van een library op CartPole, en je weet wat RL met dopamine te maken heeft."
+  steps:
+  # ---------- basis: rl/bandits ----------
+  - rl-bandits
+  - rl-bandit-updates
+  - rl-project-bandit
+  # ---------- basis: rl/tabel ----------
+  - rl-policy-evaluation
+  - rl-policy-iteration
+  - rl-monte-carlo-prediction
+  - rl-monte-carlo-control
+  - rl-td-prediction
+  - rl-sarsa
+  - rl-kinds-of-rl
+  - rl-project-grid-agent
+  # ---------- basis: rl/settings ----------
+  - rl-behavior-cloning
+  - rl-reward-design
+  - rl-many-agents
+  # ---------- basis: rl/praktijk ----------
+  - rl-gymnasium
+  - rl-classic-environments
+  - rl-libraries
+  - rl-conditioning
+  - rl-rescorla-wagner
+  - rl-dopamine
+  - rl-real-world
+  - rl-milestones
 goals:
 - {id: doel-attention, goal: attn-multi-head, title_nl: "Ik wil attention snappen"}
 - {id: doel-eigen-gpt, goal: gpt-generate, title_nl: "Ik wil zo snel mogelijk mijn eigen GPT"}

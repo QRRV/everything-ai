@@ -109,6 +109,8 @@ les_ok:
   reden: "wat NLP is, en het verschil tussen tekst begrijpen en tekst maken; de kaart zet die subonderwerpen bij de kern (module taalmodellen), omdat het bigrammodel erop leunt, maar de kern heeft er geen eigen les voor. Het domein taal opent ermee, omdat elke les daarna het woord NLP gebruikt."
 - les: nlp-why-language-is-hard
   reden: "ambiguïteit, variatie en context: net als nlp-what-is-nlp een subonderwerp dat de kaart bij de kern zet en waar de kern geen eigen les voor heeft. Het domein taal legt het uit als tweede les, omdat de taalkunde daarna op die drie woorden bouwt."
+- les: rl-sarsa
+  reden: "SARSA en Q-learning: de kaart zet dat subonderwerp bij de kern, omdat rl-q-learning er de helft van dekt. SARSA, en het verschil tussen on-policy en off-policy dat het naast Q-learning laat zien, krijgt een eigen les in het domein rl, na TD(0), omdat het op de TD-error van die les bouwt."
 
 fundament:
   id: fundament
@@ -210,7 +212,7 @@ fundament:
     kern: true
     titel: "Agents"
     onderwerpen: [agentraamwerk@basis, wat-een-agent-is, wat-rl-is, probleemformulering-en-zoekinfrastructuur#0+2, ongeinformeerd-zoeken#0, exploratie#0,
-                  heuristisch-zoeken#1, spellen-als-zoekprobleem#1, mdp-s-bellman-en-pomdp-s#1, dynamic-programming#2, temporal-difference-learning#1]
+                  heuristisch-zoeken#1, spellen-als-zoekprobleem#1+2, mdp-s-bellman-en-pomdp-s#0+1, dynamic-programming#2, temporal-difference-learning#1]
     tekst: "Wat een agent is, ook een LLM-agent, en wat reinforcement learning is; zoeken in een doolhof met BFS en A*, minimax, value iteration en Q-learning. Ook het voorproefje van klassieke AI en RL (besluit 1.13)."
 
   - id: taalmodellen

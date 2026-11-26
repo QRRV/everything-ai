@@ -809,7 +809,8 @@ lessons:
   idea: "Train DPO on your story model: a checker builds the preference pairs from whether the requested words appear, and the reference model is your model with the LoRA adapter switched off."
   covers: [dpo-en-varianten#2]
   requires: [llm-dpo-loss, llm-lora]
-  introduces: [c:on-policy, c:off-policy, py:torch-stack]
+  introduces: [py:torch-stack]
+  mentions: [c:on-policy, c:off-policy]
   uses: [c:dpo, c:reference-model, c:policy, c:lora, c:adapter, c:preference-pair, c:instruction-tuning, c:fine-tuning, c:freezing, c:reward-hacking, c:kl-penalty, c:loss, c:nat, c:logarithm, c:gradient, c:adamw, c:optimizer, c:learning-rate, c:mini-batch, c:update-step, c:test-set, c:token, c:token-id, c:end-of-text, c:language-model, c:model-parameter, c:parameter-count, c:mean, c:reward, c:rlhf, c:layer, c:transformer-block, c:low-rank, c:matrix-rank, c:matrix-multiplication, c:transpose, c:tensor, c:shape, c:training-loop, s:beta-kl, s:log, py:torch-tensor, py:no-grad, py:backward, py:zero-grad, py:optimizer-step, py:item, py:float, py:named-parameters, py:requires-grad, py:grad-attribute, py:manual-seed, py:indexing, py:slicing, py:matmul-operator, py:torch-transpose, py:set, py:strip-chars, py:lower, py:split, py:string-literal, py:arithmetic, py:dict, py:list, py:tuple, py:append, py:comprehension, py:bool, py:for, py:range, py:import, py:def, py:return, py:print, py:comment, py:underscore-name, q:predict, q:choice, q:exercise-with-check, q:run-cell]
   ladder: [torch]
   data: [tinystories, synthetic-story-prompts, course-dpo-answers, model-course-sft, model-course-dpo]
