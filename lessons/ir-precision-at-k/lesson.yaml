@@ -1,0 +1,38 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: ir-precision-at-k
+minutes: 45
+title:
+  en: "Did the search work? P@k, MAP and MRR"
+  nl: "Werkte het zoeken? P@k, MAP en MRR"
+goal:
+  en: "measure a ranking on a test collection: say what a test collection and its relevance judgments are, compute the precision at k, the reciprocal rank and the average precision of one ranking, take their means over the queries as MRR and MAP, and tell which measure fits which search."
+  nl: "een rangschikking meten op een testcollectie: zeggen wat een testcollectie en de relevance judgments zijn, de precision at k, de reciprocal rank en de average precision van één rangschikking berekenen, het gemiddelde over de zoekvragen nemen als MRR en MAP, en zeggen welke maat bij welke zoektaak past."
+summary:
+  - en: "Search is measured on a test collection: documents, queries and relevance judgments, which say for each query which documents are relevant. Measuring every system on the same fixed test is the Cranfield paradigm, after the Cranfield experiments of the late 1950s, and TREC works the same way. The judgments follow how the test collection was made: in XQuAD only the own paragraph counts, also where another paragraph holds the answer too, as it does for 34 of the 238 questions where BM25 puts another paragraph first."
+    nl: "Zoeken wordt gemeten op een testcollectie: documenten, zoekvragen en relevance judgments, die per zoekvraag zeggen welke documenten relevant zijn. Elk systeem meten op dezelfde vaste test is het Cranfield-paradigma, naar de Cranfield-experimenten van het eind van de jaren vijftig, en TREC werkt op dezelfde manier. De relevance judgments volgen de opzet van de testcollectie: in XQuAD telt alleen de eigen alinea, ook waar een andere alinea het antwoord ook bevat, zoals bij 27 van de 313 vragen waar BM25 een andere alinea bovenaan zet."
+  - en: "The precision at k is the share of relevant documents among the first k; with one relevant paragraph per question, it cannot be higher than 1 divided by k, so on XQuAD the precision at 10 says more about the test collection than about the ranking. The reciprocal rank is 1 divided by the place of the first relevant document, and its mean, the MRR, gives a second place half: 0.862 for BM25, against 0.800 for the first place alone."
+    nl: "De precision at k is het deel van de eerste k documenten dat relevant is; met één relevante alinea per vraag kan deze niet hoger worden dan 1 gedeeld door k, dus op XQuAD zegt de precision at 10 meer over de testcollectie dan over de rangschikking. De reciprocal rank is 1 gedeeld door de plaats van het eerste relevante document, en het gemiddelde, de MRR, geeft een tweede plaats de helft: 0,804 bij BM25, tegen 0,735 voor alleen de eerste plaats."
+  - en: "The average precision adds up the precision at the place of each relevant document and divides by the number of relevant documents, so a missing one counts as 0; its mean is the MAP. With one relevant document it is the reciprocal rank, so on XQuAD the MAP is the MRR. On SciFact, where a claim can have five relevant abstracts, the measures can disagree: for claim 133 both rankings put a relevant abstract first, and the cosine finds the others sooner: an average precision of 0.512 against 0.290 for BM25."
+    nl: "De average precision telt de precision op de plaats van elk relevant document op en deelt door het aantal relevante documenten, zodat een ontbrekend document als 0 telt; het gemiddelde is de MAP. Met één relevant document is de average precision de reciprocal rank, dus op XQuAD is de MAP gelijk aan de MRR. Op SciFact, waar een bewering vijf relevante abstracts kan hebben, kunnen de maten verschillen: bij bewering 133 zetten beide rangschikkingen een relevant abstract bovenaan, en de cosine similarity vindt de andere eerder: een average precision van 0,512 tegen 0,290 bij BM25."
+can_now:
+  - en: "compute the precision at k of a ranking: the share of relevant documents among its first k"
+    nl: "de precision at k van een rangschikking berekenen: het deel van de eerste k documenten dat relevant is"
+    by: precision_at_k
+  - en: "compute the reciprocal rank of a ranking: 1 divided by the place of its first relevant document"
+    nl: "de reciprocal rank van een rangschikking berekenen: 1 gedeeld door de plaats van het eerste relevante document"
+    by: reciprocal_rank
+  - en: "compute the average precision of a ranking, where a relevant document it misses counts as 0"
+    nl: "de average precision van een rangschikking berekenen, waarbij een gemist relevant document als 0 telt"
+    by: average_precision
+  - en: "tell when precision at k, MRR or MAP fits a search"
+    nl: "zeggen wanneer precision at k, MRR of MAP bij een zoektaak past"
+    by: measures
+further_reading:
+  - en: "Christopher D. Manning, Prabhakar Raghavan and Hinrich Schütze, [*Introduction to Information Retrieval*](https://nlp.stanford.edu/IR-book/), Cambridge University Press, 2008: chapter 8, on test collections, relevance judgments, the Cranfield and TREC collections, precision at k and MAP"
+    nl: "Christopher D. Manning, Prabhakar Raghavan en Hinrich Schütze, [*Introduction to Information Retrieval*](https://nlp.stanford.edu/IR-book/), Cambridge University Press, 2008: hoofdstuk 8, over testcollecties, relevance judgments, de collecties van Cranfield en TREC, precision at k en MAP (in het Engels)"
+  - en: "Ellen M. Voorhees and Dawn M. Tice, [*The TREC-8 Question Answering Track*](http://www.lrec-conf.org/proceedings/lrec2000/pdf/26.pdf), LREC 2000: how the track scored five answers per question with the reciprocal rank of the first correct one, and how much the assessors differed"
+    nl: "Ellen M. Voorhees en Dawn M. Tice, [*The TREC-8 Question Answering Track*](http://www.lrec-conf.org/proceedings/lrec2000/pdf/26.pdf), LREC 2000: hoe de taak vijf antwoorden per vraag een score gaf met de reciprocal rank van het eerste goede antwoord, en hoeveel de beoordelaars verschilden (in het Engels)"
+  - en: "Daniel Jurafsky and James H. Martin, [*Speech and Language Processing*](https://web.stanford.edu/~jurafsky/slp3/), third edition, draft: section 11.2 on evaluating ranked retrieval, with precision, recall and mean average precision; its average precision divides by the relevant documents that the ranking returns, not by all of them"
+    nl: "Daniel Jurafsky en James H. Martin, [*Speech and Language Processing*](https://web.stanford.edu/~jurafsky/slp3/), derde editie, concept: paragraaf 11.2 over het meten van gerangschikte resultaten, met precision, recall en mean average precision; de average precision deelt daar door de relevante documenten die de rangschikking geeft, niet door alle relevante documenten (in het Engels)"

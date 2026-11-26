@@ -1036,6 +1036,7 @@ lessons:
   covers: [d15-evaluatie-en-interactief-zoeken#0]
   requires: [ir-bm25, ml-confusion-matrix]
   introduces: [c:cranfield-paradigm, c:relevance-judgment, c:precision-at-k, c:mean-reciprocal-rank]
+  mentions: [c:question-answering]
   data: [xquad-squad-nl, scifact]
   ladder: [python]
   needs: any
