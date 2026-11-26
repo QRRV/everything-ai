@@ -1,0 +1,36 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: nlp-rouge
+minutes: 35
+title:
+  en: "Scoring a summary: ROUGE"
+  nl: "Een samenvatting scoren: ROUGE"
+goal:
+  en: "build ROUGE-N, the longest common subsequence of ROUGE-L and the skip-bigrams of ROUGE-S, score written and picked summaries against their references, and see which changes to a summary ROUGE cannot see."
+  nl: "ROUGE-N, de langste gemeenschappelijke deelrij van ROUGE-L en de skip-bigrams van ROUGE-S bouwen, geschreven en gekozen samenvattingen scoren tegen de referenties, en ontdekken welke veranderingen aan een samenvatting ROUGE niet ziet."
+summary:
+  - en: "ROUGE (Lin, 2004) scores a summary by how much of a reference summary that people wrote comes back in it. ROUGE-N is the recall of the n-grams of the reference, clipped as in BLEU; with more than one reference, the summary gets the best of its scores."
+    nl: "ROUGE (Lin, 2004) scoort een samenvatting op hoeveel van een referentiesamenvatting van mensen erin terugkomt. ROUGE-N is de recall van de n-grams van de referentie, afgetopt zoals bij BLEU; bij meer dan één referentie krijgt de samenvatting de beste van de scores."
+  - en: "ROUGE-L divides the length of the longest common subsequence, found with a table as the edit distance is, by the length of the reference; ROUGE-S counts skip-bigrams, pairs of words in their order with any gap. Both see the order of the words, which ROUGE-1 does not."
+    nl: "ROUGE-L deelt de lengte van de langste gemeenschappelijke deelrij, gevonden met een tabel zoals de edit distance, door de lengte van de referentie; ROUGE-S telt skip-bigrams, paren woorden in de volgorde van de zin met willekeurig veel woorden ertussen. Allebei zien de volgorde van de woorden; ROUGE-1 ziet de volgorde niet."
+  - en: "ROUGE compares words, not meaning: a word with the same meaning or another form of a word costs points, and a claim that the text does not support costs nothing. Recall alone rewards a long summary; the F-score also counts precision."
+    nl: "ROUGE vergelijkt woorden, geen betekenis: een woord met dezelfde betekenis of een andere vorm van een woord kost punten, en een bewering die de tekst niet ondersteunt, kost niets. Recall alleen beloont een lange samenvatting; de F-score telt ook precision mee."
+can_now:
+  - en: "compute ROUGE-N recall from the n-gram counts of a summary and a reference, clipped"
+    nl: "ROUGE-N-recall uitrekenen uit de tellingen van de n-grams van een samenvatting en een referentie, afgetopt"
+    by: rouge_n
+  - en: "find the length of the longest common subsequence of two lists of words with a table"
+    nl: "de lengte van de langste gemeenschappelijke deelrij van twee lijsten met woorden vinden met een tabel"
+    by: lcs
+  - en: "make the skip-bigrams of a sentence, every pair of words in their order"
+    nl: "de skip-bigrams van een zin maken, elk paar woorden in de volgorde van de zin"
+    by: skip_bigrams
+  - en: "tell which changes to a summary lower ROUGE-1 recall, and which it cannot see"
+    nl: "zeggen welke veranderingen aan een samenvatting ROUGE-1-recall verlagen, en welke ROUGE-1 niet ziet"
+    by: changes
+further_reading:
+  - en: "Chin-Yew Lin, [*ROUGE: A package for automatic evaluation of summaries*](https://aclanthology.org/W04-1013), Text Summarization Branches Out 2004: ROUGE-N, ROUGE-L, ROUGE-W and ROUGE-S, and how well each agrees with people"
+    nl: "Chin-Yew Lin, [*ROUGE: A package for automatic evaluation of summaries*](https://aclanthology.org/W04-1013), Text Summarization Branches Out 2004: ROUGE-N, ROUGE-L, ROUGE-W en ROUGE-S, en hoe goed elke maat overeenkomt met mensen (in het Engels)"
+  - en: "Wojciech Kryściński, Nitish Shirish Keskar, Bryan McCann, Caiming Xiong and Richard Socher, [*Neural text summarization: A critical evaluation*](https://arxiv.org/abs/1908.08960), EMNLP 2019: what ROUGE misses, and how often summaries contradict their text"
+    nl: "Wojciech Kryściński, Nitish Shirish Keskar, Bryan McCann, Caiming Xiong en Richard Socher, [*Neural text summarization: A critical evaluation*](https://arxiv.org/abs/1908.08960), EMNLP 2019: wat ROUGE mist, en hoe vaak samenvattingen de eigen tekst tegenspreken (in het Engels)"

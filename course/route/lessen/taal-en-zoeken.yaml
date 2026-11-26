@@ -913,7 +913,7 @@ lessons:
   covers: [d15-evaluatie-van-tekstgeneratie#1]
   requires: [nlp-summarize, nlp-bleu, nlp-edit-distance, ml-confusion-matrix]
   introduces: [c:rouge]
-  data: [scitldr]
+  data: [scitldr, course-summarize-qwen]
   ladder: [python]
   needs: any
 
