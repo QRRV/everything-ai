@@ -1,0 +1,38 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: nlp-eliza
+minutes: 35
+title:
+  en: "ELIZA: a chatbot from rules"
+  nl: "ELIZA: een chatbot met regels"
+goal:
+  en: "build the steps of Joseph Weizenbaum's ELIZA yourself, swapping words, picking the keyword and building the reply, run them on the conversation of 1966 with the rules of 1965, and see why a program without any understanding still seems to listen."
+  nl: "de stappen van ELIZA van Joseph Weizenbaum zelf bouwen, woorden omwisselen, het sleutelwoord kiezen en het antwoord opbouwen, ermee een gesprek voeren met een Nederlands script, en ontdekken waarom een programma zonder enig begrip toch lijkt te luisteren."
+summary:
+  - en: "A chatbot is a program you can have a conversation with in ordinary language. ELIZA (1966) keeps its rules in a script, apart from the program. For each line it keeps the first part with a keyword, swaps words such as my and your, picks the keyword with the highest rank, and cuts the text into parts with the keyword's first decomposition rule that fits, in which 0 stands for any number of words."
+    nl: "Een chatbot is een programma waarmee je in gewone taal een gesprek kunt voeren. ELIZA (1966) bewaart de regels in een script, los van het programma. Bij elke getypte regel houdt ELIZA het eerste deel met een sleutelwoord, wisselt woorden zoals mijn en jouw om, kiest het sleutelwoord met de hoogste rang, en knipt de tekst in delen met de eerste passende ontledingsregel van het sleutelwoord, waarin 0 staat voor een willekeurig aantal woorden."
+  - en: "A reassembly rule puts the words of the parts into a reply, and the reassembly rules of one decomposition rule take turns. Without a keyword, ELIZA says a fixed line or brings back a memory it made from an earlier line with my. The original program and its DOCTOR script of 1965 were found again in 2021 and run again on an emulated computer of the time."
+    nl: "Een opbouwregel zet de woorden van de delen in een antwoord, en de opbouwregels van één ontledingsregel wisselen elkaar af. Zonder sleutelwoord zegt ELIZA een vaste zin of haalt een herinnering terug, gemaakt van een eerdere zin met mijn. Het originele programma en het script DOCTOR van 1965 zijn in 2021 teruggevonden en draaien weer op een nagebootste computer van toen."
+  - en: "ELIZA works on words only: it does not know what they mean, does not check its grammar and does not ground anything. Still, people read understanding into its replies: the ELIZA effect. Rule-based chatbots written in AIML work the same way, with a pattern and a template for each reply."
+    nl: "ELIZA werkt alleen met woorden: het programma weet niet wat de woorden betekenen, controleert de grammatica niet en doet niets aan grounding. Toch lezen mensen begrip in de antwoorden: het ELIZA effect. Chatbots met regels in AIML werken op dezelfde manier, met een patroon en een template voor elk antwoord."
+can_now:
+  - en: "swap the words of a sentence with a dictionary of substitutes, each word once"
+    nl: "de woorden van een zin omwisselen met een dictionary van vervangers, elk woord één keer"
+    by: swap
+  - en: "pick the keyword with the highest rank from a list of words, the first one on a tie"
+    nl: "het sleutelwoord met de hoogste rang uit een lijst woorden kiezen, bij gelijke rang het eerste"
+    by: keyword
+  - en: "build a reply by putting the words of each part in place of its number in a reassembly rule"
+    nl: "een antwoord bouwen door de woorden van elk deel op de plaats van het nummer in een opbouwregel te zetten"
+    by: reassemble
+  - en: "tell what ELIZA does with words, and what it seems to do but does not"
+    nl: "zeggen wat ELIZA met woorden doet, en wat het programma lijkt te doen maar niet doet"
+    by: does
+further_reading:
+  - en: "Joseph Weizenbaum, [*ELIZA: a computer program for the study of natural language communication between man and machine*](https://doi.org/10.1145/365153.365168), Communications of the ACM, 1966: the paper with the conversation, the steps of the program and the DOCTOR script"
+    nl: "Joseph Weizenbaum, [*ELIZA: a computer program for the study of natural language communication between man and machine*](https://doi.org/10.1145/365153.365168), Communications of the ACM, 1966: het paper met het gesprek, de stappen van het programma en het script DOCTOR (in het Engels)"
+  - en: "Rupert Lane, Anthony Hay, Arthur Schwarz, David M. Berry and Jeff Shrager, [*ELIZA Reanimated*](https://arxiv.org/abs/2501.06707), 2025: how the printout of 1965 was found, typed in and brought back to life on an emulated IBM 7094"
+    nl: "Rupert Lane, Anthony Hay, Arthur Schwarz, David M. Berry en Jeff Shrager, [*ELIZA Reanimated*](https://arxiv.org/abs/2501.06707), 2025: hoe de uitdraai van 1965 gevonden, overgetypt en weer tot leven gebracht werd op een nagebootste IBM 7094 (in het Engels)"
+  - en: "[rupertl/eliza-ctss](https://github.com/rupertl/eliza-ctss): the code of 1965 with its DOCTOR script, the transcript of the paper's conversation, and how to run it yourself on CTSS"
+    nl: "[rupertl/eliza-ctss](https://github.com/rupertl/eliza-ctss): de code van 1965 met het script DOCTOR, het verslag van het gesprek uit het paper, en hoe je het programma zelf op CTSS draait (in het Engels)"

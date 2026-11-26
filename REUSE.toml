@@ -611,6 +611,18 @@ SPDX-FileCopyrightText = "2026 Everything AI contributors"
 SPDX-License-Identifier = "CC-BY-SA-4.0"
 
 [[annotations]]
+path = "data/eliza-doctor-1965.txt"
+precedence = "override"
+SPDX-FileCopyrightText = "1965 Joseph Weizenbaum (the DOCTOR script, released by Weizenbaum's estate; typed in from the printout for rupertl/eliza-ctss)"
+SPDX-License-Identifier = "CC0-1.0"
+
+[[annotations]]
+path = "data/course-eliza-nl.txt"
+precedence = "override"
+SPDX-FileCopyrightText = "2026 Everything AI contributors"
+SPDX-License-Identifier = "CC-BY-SA-4.0"
+
+[[annotations]]
 path = "data/course-post-editing-qwen.json"
 precedence = "override"
 SPDX-FileCopyrightText = ["2026 Everything AI contributors (the course's run; translations written by Qwen3-0.6B of Alibaba Cloud, Apache-2.0)", "Tatoeba (https://tatoeba.org) and its contributors (the Dutch sentences that were translated, CC BY 2.0 FR)"]

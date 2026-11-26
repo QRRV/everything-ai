@@ -939,7 +939,8 @@ lessons:
   covers: [d15-dialoogsystemen#0]
   requires: [nlp-regex, nlp-conversation]
   introduces: [c:chatbot, c:eliza, c:eliza-effect]
-  data: [eliza-doctor-1965]
+  mentions: [c:chat-model]
+  data: [eliza-doctor-1965, course-eliza-nl]
   ladder: [python]
   needs: any
 
