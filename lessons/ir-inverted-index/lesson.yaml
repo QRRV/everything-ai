@@ -1,0 +1,38 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: ir-inverted-index
+minutes: 35
+title:
+  en: "The inverted index"
+  nl: "De inverted index"
+goal:
+  en: "build an inverted index of a collection, walk two postings lists to find the documents that hold both words, answer a query with AND from the index alone, the shortest list first, and tell which queries such an index can answer."
+  nl: "een inverted index van een verzameling bouwen, langs twee postings lists wandelen om de documenten met beide woorden te vinden, een zoekvraag met AND alleen uit de index beantwoorden, de kortste lijst eerst, en zeggen welke zoekvragen zo'n index kan beantwoorden."
+summary:
+  - en: "Reading every document for every query, a linear scan, works for a small collection, not for the web. An inverted index keeps, for each word, its postings list: the numbers of the documents that hold the word, sorted. It is the table of 0s and 1s of words and documents with only the 1s kept, and in a real collection almost every cell of that table is 0."
+    nl: "Bij elke zoekvraag elk document lezen werkt voor een kleine verzameling, niet voor het web. Een inverted index bewaart voor elk woord de postings list: de nummers van de documenten met dat woord, gesorteerd. Het is de tabel met nullen en enen van woorden en documenten, waarvan alleen de enen bewaard blijven, en in een echte verzameling is bijna elke cel van deze tabel 0."
+  - en: "Building the index takes one pass: each document adds its number to the list of each word it holds, once. AND walks two sorted lists with a finger in each, keeps the numbers that both hold, and moves the finger at the smaller number forward. The walk takes at most as many steps as there are numbers in the two lists together, and never opens a document."
+    nl: "Voor de index ga je één keer door de documenten: voeg voor elk document het nummer één keer toe aan de lijst van elk woord erin. AND wandelt met een vinger in elke lijst langs twee gesorteerde lijsten, bewaart de getallen die in beide staan, en schuift de vinger bij het kleinste getal door. De wandeling doet hooguit zoveel stappen als er getallen in de twee lijsten samen staan, en opent nooit een document."
+  - en: "For more words, the lists are walked from the shortest, so the answer so far stays small. With OR and NOT, this is Boolean retrieval: a document matches or it does not, and the results are not ranked. A phrase, words near each other, or a ranking need more in the index: where each word stands, or how often it occurs."
+    nl: "Bij meer woorden gaan de wandelingen vanaf de kortste lijst, zodat het antwoord tot nu toe klein blijft. Met OR en NOT erbij is dit Boolean retrieval: een document voldoet of voldoet niet, en de resultaten krijgen geen volgorde. Een woordgroep, woorden dicht bij elkaar of een rangschikking vragen meer van de index: waar elk woord staat, of hoe vaak het voorkomt."
+can_now:
+  - en: "build the inverted index of a list of documents"
+    nl: "de inverted index van een lijst documenten bouwen"
+    by: build_index
+  - en: "find the intersection of two sorted postings lists in one walk along both"
+    nl: "de doorsnede van twee gesorteerde postings lists vinden met één wandeling langs beide"
+    by: intersect
+  - en: "answer a query with AND from an inverted index, the shortest list first"
+    nl: "een zoekvraag met AND beantwoorden uit een inverted index, de kortste lijst eerst"
+    by: search_and
+  - en: "tell which queries an index of document numbers answers, and which need positions or counts"
+    nl: "zeggen welke zoekvragen een index van documentnummers beantwoordt, en voor welke posities of tellingen nodig zijn"
+    by: answers
+further_reading:
+  - en: "Christopher D. Manning, Prabhakar Raghavan and Hinrich Schütze, [*Introduction to Information Retrieval*](https://nlp.stanford.edu/IR-book/), Cambridge University Press, 2008, chapter 1: the incidence matrix, the inverted index, the walk along two postings lists and Boolean retrieval; section 2.3 on skip pointers"
+    nl: "Christopher D. Manning, Prabhakar Raghavan en Hinrich Schütze, [*Introduction to Information Retrieval*](https://nlp.stanford.edu/IR-book/), Cambridge University Press, 2008, hoofdstuk 1: de incidentiematrix, de inverted index, de wandeling langs twee postings lists en Boolean retrieval; paragraaf 2.3 over skip pointers (in het Engels)"
+  - en: "Google, [*Organising information*](https://www.google.com/intl/en_uk/search/howsearchworks/how-search-works/organizing-information), part of How Search Works: the index of Google Search, and its comparison with the index at the back of a book"
+    nl: "Google, [*Organising information*](https://www.google.com/intl/en_uk/search/howsearchworks/how-search-works/organizing-information), uit How Search Works: de index van Google Search, en de vergelijking met het register achter in een boek (in het Engels)"
+  - en: "Justin Zobel and Alistair Moffat, [*Inverted files for text search engines*](https://people.eng.unimelb.edu.au/ammoffat/abstracts/zm06compsurv.html), ACM Computing Surveys 38(2), 2006: how search engines build, store and search inverted indexes"
+    nl: "Justin Zobel en Alistair Moffat, [*Inverted files for text search engines*](https://people.eng.unimelb.edu.au/ammoffat/abstracts/zm06compsurv.html), ACM Computing Surveys 38(2), 2006: hoe zoekmachines inverted indexes bouwen, opslaan en doorzoeken (in het Engels)"

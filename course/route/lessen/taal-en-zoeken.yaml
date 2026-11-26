@@ -982,6 +982,7 @@ lessons:
   covers: [information-retrieval-en-zoekmachines#2]
   requires: [ir-what-is-search]
   introduces: [c:inverted-index, c:postings-list, c:boolean-retrieval]
+  mentions: [c:zipfs-law]
   data: [xquad-squad-nl]
   ladder: [python]
   needs: any
