@@ -711,3 +711,9 @@ path = "data/xquad-topics.npz"
 precedence = "override"
 SPDX-FileCopyrightText = ["The contributors to English Wikipedia (the texts of the paragraphs)", "Pranav Rajpurkar, Jian Zhang, Konstantin Lopyrev and Percy Liang (SQuAD 1.1, the development set, from English Wikipedia)", "Wietse de Vries, Martijn Wieling and Malvina Nissim (SQuAD-NL v1.1, GroNLP/squad-nl-v1.1)", "2026 Everything AI contributors (the topic models)"]
 SPDX-License-Identifier = "CC-BY-SA-4.0"
+
+[[annotations]]
+path = "data/ntrex-token-counts.tsv"
+precedence = "override"
+SPDX-FileCopyrightText = ["Christian Federmann, Tom Kocmi and Ying Xin (NTREX-128, github.com/MicrosoftTranslator/NTREX)", "2026 Everything AI contributors (the counts)"]
+SPDX-License-Identifier = "CC-BY-SA-4.0"

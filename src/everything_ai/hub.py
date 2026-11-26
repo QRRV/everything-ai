@@ -211,6 +211,68 @@ PINNED = {
         "first": True,
     },
 }
+
+# NTREX-128 (CC BY-SA 4.0, Federmann, Kocmi and Xin 2022), from its repository at a fixed commit: 1,997 sentences of news
+# from WMT19 in English, translated by people into 128 languages, one sentence per line (course/route/bronnen.yaml,
+# ntrex-128; everything_ai.ntrex reads them). The English source and the Dutch whole; of the other languages only the
+# first 100 lines, which is all a lesson uses. Text files, read as text: nothing in them is ever run.
+NTREX = "468c6b69c7f6a75d31d4743d9daba2af566cc18d"
+for _code, _sha256, _size, _first in (   # the language's code in NTREX, and the SHA-256 and size of what is pinned
+    ("eng", "389e8f5796c66db4f646dfad33e1ec622d74767af5ef112b42a1f2cd814df3cc", 251_739, False),
+    ("afr", "2fc18c704f213c022a4b713c82d405f8ae8d7b7223e385e44e83ce989c786bdc", 14_182, True),
+    ("amh", "9c80f82734115e724bc09da2ddbeebf0ea5e37453b41c9952a6720b46f0fd43d", 23_694, True),
+    ("arb", "c08ca658d923e3d0c1a428e471d99060349947cc3d096ccae248495daea7310b", 22_297, True),
+    ("ben", "9d48413cafcdde1b132b700f743e7797736aa57745970397dd23fb82ffa03e6c", 34_853, True),
+    ("bod", "9111062b63327fe1c15b5e274f1de90d8fc1fc9bc42970d06007adee296e0e53", 43_519, True),
+    ("cym", "15424fb6f6d2fddf64835a60cb253f6cf4173d59c609ad722f894c61db14d735", 14_533, True),
+    ("deu", "c107af300b9809119f8b4ea647a7920493ab525dccee3ede64c2e573ed0a4de7", 16_153, True),
+    ("ell", "b06f3da80f67fe2e22655b651ccdfc5c63172ed6e4c712f91c7b590349e424c5", 28_203, True),
+    ("eus", "8a3907ade41c5d9c5571d43746621c20fe706e6e18a23363a8b3d92e00c2554a", 15_045, True),
+    ("ewe", "f1a77b50f3e9b4c4786978644d1eb4d374e08561310b42ee2b169a43e2c73bd7", 13_522, True),
+    ("fao", "bb303f978e210e89d14849ad2cf04088f48fce825eb1145ac7fff820fbe31f57", 14_468, True),
+    ("fas", "8181a92c0feba8a31ef2f279c93c894a8c76044d4b58f5093dfc161616e77fab", 22_694, True),
+    ("fin", "96afbd8ec885025cf2cc6f550b6396215c48e676bb096909db8cdc2341de0cf2", 14_558, True),
+    ("fra", "f7a1b318ca2392919db0c55ac9862eb6d3a325523e86c31ee0793ce3b4c237c8", 16_280, True),
+    ("gle", "ffff57a1acf0d824325860b936696dbe9622e75510ce7b3e993ee8ea65dea465", 16_481, True),
+    ("hau", "af1b6a8a93c6437c10ab5e007cbbb4e3c31237347e7484a6b19ce3291c544b63", 15_306, True),
+    ("heb", "db0c6a27fe1540f3f4cce3369af1746c21dd4326396690b059c8dc9bc147c309", 18_967, True),
+    ("hin", "f88d23d882a4822d9acf59f1f077426337e172acfac77639cf7fa1578aa16cda", 35_569, True),
+    ("hun", "835578f4a40f80126f3d358c8d2efa6d900a6204d8191240efa3f40cefd67597", 16_091, True),
+    ("hye", "b4c24cd27af70136a38e35548a37250accb832ba1ce8102a813a0b59ea5c35fc", 26_550, True),
+    ("ind", "ae480ae40cdcc09eae22faa0b86f7a217e1b197f740a2b450c7c8c40a9c5f822", 15_586, True),
+    ("isl", "6ec2ad38c6c7b04f6f50a78863c5d44090876532ca96ac3fdfadae59f4540280", 15_307, True),
+    ("jpn", "0412cf05906c0b7ccb6d4f864517c6d3c5e623a2eb9778d07565d937da9d25ca", 15_826, True),
+    ("kat", "54f58f6d4df8c919ed638d4f3468251d18b81e163839a2303ea6249b8e761872", 35_960, True),
+    ("khm", "fe90aec61b9f590ea451d567701161e8b4b2619b8a6604ae2e50a63d2955e4f6", 37_648, True),
+    ("kor", "0b1ff8ccb3e9800676036157d13b53b8d77269ce4f87168e27c26dcbd083f8fe", 15_958, True),
+    ("lao", "37e1be8aa68c569aa3e146ebb1d619f171c7994611aa5b455bf15638c4d5a762", 33_495, True),
+    ("ltz", "2dfa0364108bf9bc7c8f86df6841d69d2d05385384bd3ca3c3b006021fea794f", 14_947, True),
+    ("mri", "f7cebec0fb9bee1e5c647d77897f963e95e030c0e14fbf9a889217100b9482b6", 14_909, True),
+    ("nld", "dce60b592d410932cb369301d0506f1b3d0ae4f7bedf0369a3cdf870f462b4a5", 297_134, False),
+    ("pol", "21349681b8bc6302512152a50ffeae98b28046445374377c0f29f2d80e9a6100", 16_586, True),
+    ("rus", "9d38b4000d2fc7a7349971f37f492f17aacae60c67af4da8926cad4479dda2b0", 26_130, True),
+    ("smo", "1545d3b767f02882358a7e9f644a814c49cc74dc92a974e3c8b0fd7d8ba8b36f", 13_961, True),
+    ("som", "3bf3e059ca5b00179ce5d22bcca8de3f1a88b34224ff423b09dd4211922f897b", 14_644, True),
+    ("spa", "ebf51da7e645c67e66f9b5babe8b26d5b809403fe70df24293a9278351cd1694", 15_549, True),
+    ("swa", "93142d01e176c7b5140f143bc86b6b47d1908c2f073e09654b50d74bbc2661fd", 15_176, True),
+    ("tam", "b6169c97239967dd3c2f8d0255cd6e1c4e9ade0c8f433a88f856fecfecf4aefe", 39_878, True),
+    ("tel", "2360215c17d30afa79a31b27aaaedd1580ebf22ac3fb8295dd4ca69afe1eff67", 36_707, True),
+    ("tha", "57e85e4f22565432f5ff6299d28d08b57c6b40325363eceb75fb627b7140e9ac", 36_648, True),
+    ("tir", "5eaf522ffc38299f704ed2c6e02a3da26346dea981706be4e21533892627fa88", 23_135, True),
+    ("tur", "6a598f435e3d0d396a4b086f4c14e6a9a3b36524146f7409cd9ac42a731f4c56", 14_344, True),
+    ("urd", "63d19d6f3e2e35f4a90fd3f6a62f497cc9d6042c3c0da0fec32775384a79dc7f", 23_197, True),
+    ("vie", "935fb13ed0a55a61dc8117ba2b7fdccc861b5ba4079581d2a4c2ee7590e31ec2", 19_255, True),
+    ("wol", "11a8af1b5b9dad22ff128e3a7a57e4903afa92a1b061bc97dedafc2d03b99c3d", 12_881, True),
+    ("yor", "3f857b082aec9d0cfeba59a75c77df3b6f0bc661969c9f9603ad1bf8fd574a3e", 22_561, True),
+    ("zho-CN", "4e6bb20c79757dbf06fafaf8d174b09a53b1dd5ed4fcc64332825f2762d42693", 12_960, True),
+    ("zul", "d7f63f1f0ab923e6748de3e895a38d3352b7efb64d09006b735cd2137bd41ca4", 12_551, True),
+):
+    _name = "newstest2019-src.eng.txt" if _code == "eng" else f"newstest2019-ref.{_code}.txt"
+    PINNED[("github.com/MicrosoftTranslator/NTREX", _name)] = {
+        "url": f"https://raw.githubusercontent.com/MicrosoftTranslator/NTREX/{NTREX}/NTREX-128/{_name}",
+        "revision": NTREX, "sha256": _sha256, "size": _size, **({"first": True} if _first else {}),
+    }
+del _code, _sha256, _size, _first, _name
 CHUNK = 1 << 20   # bytes per read while downloading
 AGENT = "everything-ai-course"   # how a download introduces itself: some sources refuse Python's own name
 

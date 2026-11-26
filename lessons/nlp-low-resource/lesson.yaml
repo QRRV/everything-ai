@@ -1,0 +1,46 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: nlp-low-resource
+minutes: 45
+title:
+  en: "Languages with little data"
+  nl: "Talen met weinig data"
+goal:
+  en: "measure what the same text costs a tokenizer in a language other than English, with the premium, tokens per byte and the share of the words it cuts, compare the tokenizers of GPT-2 and Qwen3 on 48 languages, and tell what helps a language with little data get a model that works."
+  nl: "meten wat dezelfde tekst een tokenizer kost in een andere taal dan het Engels, met de premium, tokens per byte en het deel van de woorden dat de tokenizer knipt, de tokenizers van GPT-2 en Qwen3 vergelijken op 48 talen, en zeggen wat een taal met weinig data helpt aan een model dat werkt."
+summary:
+  - en: "A low-resource language has little text in digital form and few labeled examples: 2,191 of the 2,485 languages that Joshi and others sorted are in their bottom class, and Dutch is in class 4. A tokenizer learns its pieces from its training text, so a language it rarely saw costs more tokens for the same message: a higher price, less text in the context and slower answers."
+    nl: "Een low-resource language heeft weinig digitale tekst en weinig gelabelde voorbeelden: van de 2.485 talen in de indeling van Joshi en anderen zitten er 2.191 in de laagste groep, en het Nederlands zit in groep 4. Een tokenizer leert de stukjes uit de eigen trainingstekst, dus een zelden geziene taal kost meer tokens voor hetzelfde bericht: een hogere prijs, minder tekst in de context en tragere antwoorden."
+  - en: "The premium of a language is its tokens divided by the tokens of the same text in English; tokens per byte is close to 1 when the tokenizer learned almost no pieces of a language; tokenizer fertility and continued words count tokens per word and the words that are cut, and need spaces between the words. On the first 100 sentences of NTREX-128, Dutch costs GPT-2 1.98 times as many tokens as English and Qwen3 1.60 times; the premium follows the script of a language more than its class."
+    nl: "De premium van een taal is het aantal tokens gedeeld door de tokens van dezelfde tekst in het Engels; tokens per byte ligt dicht bij 1 als de tokenizer bijna geen stukjes van een taal leerde; tokenizer fertility en continued words tellen tokens per woord en de geknipte woorden, en hebben spaties tussen de woorden nodig. Op de eerste 100 zinnen van NTREX-128 kost het Nederlands GPT-2 1,98 keer zoveel tokens als het Engels en Qwen3 1,60 keer; de premium volgt meer het schrift van een taal dan de groep."
+  - en: "Cross-lingual transfer fine-tunes a multilingual model such as mBERT in one language and uses it in another: it works best between similar languages, and a few hundred labeled sentences of the language itself add a lot. A model of its own on the little text of a language does worse."
+    nl: "Cross-lingual transfer finetunet een meertalig model zoals mBERT in één taal en gebruikt het model in een andere taal: het werkt het best tussen talen die op elkaar lijken, en een paar honderd gelabelde zinnen uit de taal zelf voegen veel toe. Een eigen model op de weinige tekst van een taal doet het slechter."
+can_now:
+  - en: "work out the premium of a language: what the same sentences cost a tokenizer against English"
+    nl: "de premium van een taal uitrekenen: wat dezelfde zinnen een tokenizer kosten tegenover het Engels"
+    by: premium
+  - en: "measure tokens per byte, to see how much of a language a tokenizer learned"
+    nl: "tokens per byte meten, om te zien hoeveel een tokenizer van een taal leerde"
+    by: per_byte
+  - en: "measure which share of the words of a text a tokenizer cuts into more than one token"
+    nl: "meten welk deel van de woorden van een tekst een tokenizer in meer dan één token knipt"
+    by: continued
+  - en: "tell which ways help a language with little data get a model that works, and which fall short"
+    nl: "zeggen welke aanpakken een taal met weinig data helpen aan een model dat werkt, en welke tekortschieten"
+    by: helps
+further_reading:
+  - en: "Aleksandar Petrov, Emanuele La Malfa, Philip H.S. Torr and Adel Bibi, [*Language Model Tokenizers Introduce Unfairness Between Languages*](https://arxiv.org/abs/2305.15425), NeurIPS 2023: what the same sentences cost the tokenizers of many models in 200 languages"
+    nl: "Aleksandar Petrov, Emanuele La Malfa, Philip H.S. Torr en Adel Bibi, [*Language Model Tokenizers Introduce Unfairness Between Languages*](https://arxiv.org/abs/2305.15425), NeurIPS 2023: wat dezelfde zinnen de tokenizers van veel modellen kosten in 200 talen (in het Engels)"
+  - en: "Orevaoghene Ahia, Sachin Kumar, Hila Gonen, Jungo Kasai, David R. Mortensen, Noah A. Smith and Yulia Tsvetkov, [*Do All Languages Cost the Same? Tokenization in the Era of Commercial Language Models*](https://doi.org/10.18653/v1/2023.emnlp-main.614), EMNLP 2023: what the same text costs through an API, in 22 languages"
+    nl: "Orevaoghene Ahia, Sachin Kumar, Hila Gonen, Jungo Kasai, David R. Mortensen, Noah A. Smith en Yulia Tsvetkov, [*Do All Languages Cost the Same? Tokenization in the Era of Commercial Language Models*](https://doi.org/10.18653/v1/2023.emnlp-main.614), EMNLP 2023: wat dezelfde tekst via een API kost, in 22 talen (in het Engels)"
+  - en: "Phillip Rust, Jonas Pfeiffer, Ivan Vulić, Sebastian Ruder and Iryna Gurevych, [*How Good is Your Tokenizer? On the Monolingual Performance of Multilingual Language Models*](https://doi.org/10.18653/v1/2021.acl-long.243), ACL 2021: fertility, continued words, and what a tokenizer for one language adds"
+    nl: "Phillip Rust, Jonas Pfeiffer, Ivan Vulić, Sebastian Ruder en Iryna Gurevych, [*How Good is Your Tokenizer? On the Monolingual Performance of Multilingual Language Models*](https://doi.org/10.18653/v1/2021.acl-long.243), ACL 2021: fertility, continued words, en wat een tokenizer voor één taal toevoegt (in het Engels)"
+  - en: "Pratik Joshi, Sebastin Santy, Amar Budhiraja, Kalika Bali and Monojit Choudhury, [*The State and Fate of Linguistic Diversity and Inclusion in the NLP World*](https://doi.org/10.18653/v1/2020.acl-main.560), ACL 2020: six classes of languages by their data"
+    nl: "Pratik Joshi, Sebastin Santy, Amar Budhiraja, Kalika Bali en Monojit Choudhury, [*The State and Fate of Linguistic Diversity and Inclusion in the NLP World*](https://doi.org/10.18653/v1/2020.acl-main.560), ACL 2020: zes groepen talen, ingedeeld naar de beschikbare data (in het Engels)"
+  - en: "Telmo Pires, Eva Schlinger and Dan Garrette, [*How Multilingual is Multilingual BERT?*](https://doi.org/10.18653/v1/P19-1493), ACL 2019: fine-tuning mBERT in one language and testing it in another"
+    nl: "Telmo Pires, Eva Schlinger en Dan Garrette, [*How Multilingual is Multilingual BERT?*](https://doi.org/10.18653/v1/P19-1493), ACL 2019: mBERT finetunen in één taal en testen in een andere (in het Engels)"
+  - en: "Anne Lauscher, Vinit Ravishankar, Ivan Vulić and Goran Glavaš, [*From Zero to Hero: On the Limitations of Zero-Shot Language Transfer with Multilingual Transformers*](https://doi.org/10.18653/v1/2020.emnlp-main.363), EMNLP 2020: what a few labeled examples of the language itself add"
+    nl: "Anne Lauscher, Vinit Ravishankar, Ivan Vulić en Goran Glavaš, [*From Zero to Hero: On the Limitations of Zero-Shot Language Transfer with Multilingual Transformers*](https://doi.org/10.18653/v1/2020.emnlp-main.363), EMNLP 2020: wat een paar gelabelde voorbeelden uit de taal zelf toevoegen (in het Engels)"
+  - en: "Christian Federmann, Tom Kocmi and Ying Xin, [*NTREX-128 – News Test References for MT Evaluation of 128 Languages*](https://doi.org/10.18653/v1/2022.sumeval-1.4), SUMEval 2022: the sentences of this lesson"
+    nl: "Christian Federmann, Tom Kocmi en Ying Xin, [*NTREX-128 – News Test References for MT Evaluation of 128 Languages*](https://doi.org/10.18653/v1/2022.sumeval-1.4), SUMEval 2022: de zinnen van deze les (in het Engels)"

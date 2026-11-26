@@ -1090,9 +1090,9 @@ lessons:
   module: meertalig
   idea: "A tokenizer built mostly for English cuts other languages into more pieces per word (its fertility): Dutch already, and far more the languages with little digital text, on which models also do worse; the usual way in is transfer from a related language plus a small labeled set."
   covers: [meertaligheid-en-low-resource-talen#0]
-  requires: [nlp-languages-of-the-world, lm-tokens-outside]
+  requires: [nlp-languages-of-the-world, lm-tokens-outside, nlp-fine-tune-bert]
   introduces: [c:tokenizer-fertility, c:low-resource-language, c:cross-lingual-transfer]
-  data: [ntrex-128, tokenizer-gpt2-mit, model-qwen3-0.6b]
+  data: [ntrex-128, tokenizer-gpt2-mit, model-qwen3-0.6b-base]
   ladder: [python]
   needs: any
 
