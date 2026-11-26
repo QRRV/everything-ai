@@ -210,6 +210,30 @@ PINNED = {
         "size": 20_000_000,
         "first": True,
     },
+    # The tokenizers of models for Dutch, for the demo of nlp-dutch-models (course/route/bronnen.yaml): BERTje's WordPiece
+    # vocabulary (everything_ai.wordpiece reads it), and the tokenizer.json of Mistral 7B (under GEITje, Apache-2.0), of
+    # Fietje 2 (Phi-2's own, MIT) and of EuroLLM-1.7B (Apache-2.0), which everything_ai.bpe reads as data. RobBERT's
+    # is in data/ (robbert-v2-tokenizer.json.gz, MIT).
+    ("GroNLP/bert-base-dutch-cased", "vocab.txt"): {
+        "revision": "aeb2fedfdd322b3a22195f250a43cd59c40832d3",
+        "sha256": "b90a4502d937dd64647a54cd123f6bf985d6f83de2811dd19cd1979577cbc25a",
+        "size": 241_680,
+    },
+    ("mistralai/Mistral-7B-v0.1", "tokenizer.json"): {
+        "revision": "27d67f1b5f57dc0953326b2601d68371d40ea8da",
+        "sha256": "11c08db21487c885d8c792180f0be237f6a261b89a46f128a6a80a3aa4bd1720",
+        "size": 1_795_188,
+    },
+    ("BramVanroy/fietje-2", "tokenizer.json"): {
+        "revision": "9ca62700629e98d87f7eb54ffd286ac5454d09dc",
+        "sha256": "337da36be7a71a6e88aa9148967a7bc8736f4b47c7de8e19ba92b89e80734cfc",
+        "size": 2_114_924,
+    },
+    ("utter-project/EuroLLM-1.7B", "tokenizer.json"): {
+        "revision": "c730cd9b616799ace3c65e927d63191446f59374",
+        "sha256": "a25fe2b15ebf63338f3a9bda8655ea6ffbb7eafe719fdd891f42a0e468aae982",
+        "size": 8_175_769,
+    },
 }
 
 # NTREX-128 (CC BY-SA 4.0, Federmann, Kocmi and Xin 2022), from its repository at a fixed commit: 1,997 sentences of news

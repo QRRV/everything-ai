@@ -1105,6 +1105,6 @@ lessons:
   covers: [nederlandse-nlp#2, nederlandse-nlp#3, nederlandse-nlp#4]
   requires: [nlp-low-resource, nlp-dutch-tools, nlp-bert]
   introduces: [c:bertje, c:robbert, c:geitje, c:fietje, c:gpt-nl, c:eurollm]
-  data: []
+  data: [tokenizer-gpt2-mit, tokenizer-robbert-v2, tokenizer-bertje, tokenizer-mistral-7b, tokenizer-fietje-2, tokenizer-eurollm, model-qwen3-0.6b-base, ntrex-128]
   ladder: [python]
   needs: any

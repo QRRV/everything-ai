@@ -717,3 +717,15 @@ path = "data/ntrex-token-counts.tsv"
 precedence = "override"
 SPDX-FileCopyrightText = ["Christian Federmann, Tom Kocmi and Ying Xin (NTREX-128, github.com/MicrosoftTranslator/NTREX)", "2026 Everything AI contributors (the counts)"]
 SPDX-License-Identifier = "CC-BY-SA-4.0"
+
+[[annotations]]
+path = "data/robbert-v2-tokenizer.json.gz"
+precedence = "override"
+SPDX-FileCopyrightText = "2020 Pieter Delobelle, Thomas Winters and Bettina Berendt (RobBERT v2, pdelobelle/robbert-v2-dutch-base)"
+SPDX-License-Identifier = "MIT"
+
+[[annotations]]
+path = "data/dutch-tokenizer-counts.tsv"
+precedence = "override"
+SPDX-FileCopyrightText = ["Christian Federmann, Tom Kocmi and Ying Xin (NTREX-128, github.com/MicrosoftTranslator/NTREX)", "2026 Everything AI contributors (the counts)"]
+SPDX-License-Identifier = "CC-BY-SA-4.0"

@@ -1,0 +1,44 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: nlp-dutch-models
+minutes: 45
+title:
+  en: "Language models for Dutch"
+  nl: "Modellen voor het Nederlands"
+goal:
+  en: "tell the three ways the models for Dutch were made, measure what their tokenizers make of Dutch and of English, with the pieces of a word and the words that fit in a context, work out the share of Dutch in the training text of a model, and choose between an encoder and a decoder for a task."
+  nl: "de drie manieren noemen waarop de modellen voor het Nederlands ontstonden, meten wat de tokenizers van deze modellen van het Nederlands en het Engels maken, met de stukjes van een woord en de woorden die in een context passen, het aandeel van het Nederlands in de trainingstekst van een model uitrekenen, en kiezen tussen een encoder en een decoder voor een taak."
+summary:
+  - en: "Models for Dutch were made in three ways: from the start on Dutch, as the encoders BERTje (2019) and RobBERT (2020); trained further on Dutch from a model that learned mostly English, as GEITje (Mistral 7B, 2023) and Fietje (Phi-2, 2024); and from the start on many languages, as EuroLLM (35 languages) and GPT-NL."
+    nl: "Modellen voor het Nederlands ontstonden op drie manieren: vanaf het begin op het Nederlands, zoals de encoders BERTje (2019) en RobBERT (2020); verder getraind op het Nederlands vanuit een model dat vooral Engels leerde, zoals GEITje (Mistral 7B, 2023) en Fietje (Phi-2, 2024); en vanaf het begin op veel talen, zoals EuroLLM (35 talen) en GPT-NL."
+  - en: "A model trained further keeps its tokenizer, and with it the cost of Dutch: on the 1,997 Dutch sentences of NTREX-128, Mistral's tokenizer, which GEITje kept, needs 2.01 tokens per word, EuroLLM's 1.47 and RobBERT's, made for Dutch, 1.31. More tokens per word means fewer Dutch words in the context, slower writing and a higher price per word."
+    nl: "Een verder getraind model houdt de eigen tokenizer, en daarmee de kosten van het Nederlands: op de 1.997 Nederlandse zinnen van NTREX-128 heeft de tokenizer van Mistral, ook de tokenizer van GEITje, 2,01 tokens per woord nodig, de tokenizer van EuroLLM 1,47 en de tokenizer van RobBERT, gemaakt voor het Nederlands, 1,31. Meer tokens per woord betekent minder Nederlandse woorden in de context, trager schrijven en een hogere prijs per woord."
+  - en: "What a model learned from matters too: GEITje was taken offline in 2025 because part of its text came from an illegal source, and GPT-NL learned only from data obtained lawfully, about 10% of it Dutch. An encoder such as RobBERT is enough for a label per text or per word; new text needs a decoder."
+    nl: "Waarvan een model leerde telt ook mee: GEITje ging in 2025 offline omdat een deel van de tekst uit een illegale bron kwam, en GPT-NL leerde alleen van rechtmatig verkregen data, voor ongeveer 10% Nederlands. Een encoder zoals RobBERT volstaat voor een label per tekst of per woord; nieuwe tekst vraagt om een decoder."
+can_now:
+  - en: "show how a tokenizer cuts a word into pieces, and compare a tokenizer made for Dutch with an English one"
+    nl: "laten zien hoe een tokenizer een woord in stukjes knipt, en een tokenizer voor het Nederlands vergelijken met een Engelse"
+    by: pieces
+  - en: "work out how many words of a language fit in the context of a model"
+    nl: "uitrekenen hoeveel woorden van een taal in de context van een model passen"
+    by: words_in_context
+  - en: "work out the share of a language in the training text of a model"
+    nl: "het aandeel van een taal in de trainingstekst van een model uitrekenen"
+    by: share
+  - en: "tell which jobs an encoder such as RobBERT is enough for, and which need a decoder"
+    nl: "zeggen voor welke taken een encoder zoals RobBERT volstaat, en welke taken om een decoder vragen"
+    by: fits
+further_reading:
+  - en: "Wietse de Vries, Andreas van Cranenburgh, Arianna Bisazza, Tommaso Caselli, Gertjan van Noord and Malvina Nissim, [*BERTje: A Dutch BERT Model*](https://arxiv.org/abs/1912.09582), 2019: the data, the vocabulary and the results against mBERT"
+    nl: "Wietse de Vries, Andreas van Cranenburgh, Arianna Bisazza, Tommaso Caselli, Gertjan van Noord en Malvina Nissim, [*BERTje: A Dutch BERT Model*](https://arxiv.org/abs/1912.09582), 2019: de data, de vocabulary en de resultaten tegenover mBERT (in het Engels)"
+  - en: "Pieter Delobelle, Thomas Winters and Bettina Berendt, [*RobBERT: a Dutch RoBERTa-based Language Model*](https://aclanthology.org/2020.findings-emnlp.292), Findings of EMNLP 2020: a tokenizer made for Dutch, and the task with *die* and *dat*"
+    nl: "Pieter Delobelle, Thomas Winters en Bettina Berendt, [*RobBERT: a Dutch RoBERTa-based Language Model*](https://aclanthology.org/2020.findings-emnlp.292), Findings of EMNLP 2020: een tokenizer voor het Nederlands, en de taak met *die* en *dat* (in het Engels)"
+  - en: "Bram Vanroy, [*Fietje: An open, efficient LLM for Dutch*](https://arxiv.org/abs/2412.15450), 2024: training Phi-2 further on Dutch, and how it compares with GEITje and newer models"
+    nl: "Bram Vanroy, [*Fietje: An open, efficient LLM for Dutch*](https://arxiv.org/abs/2412.15450), 2024: Phi-2 verder trainen op het Nederlands, en de vergelijking met GEITje en nieuwere modellen (in het Engels)"
+  - en: "Pedro Henrique Martins and others, [*EuroLLM: Multilingual Language Models for Europe*](https://arxiv.org/abs/2409.16235), 2024: one model for 35 languages, and how its tokenizer was chosen"
+    nl: "Pedro Henrique Martins en anderen, [*EuroLLM: Multilingual Language Models for Europe*](https://arxiv.org/abs/2409.16235), 2024: één model voor 35 talen, en hoe de tokenizer gekozen werd (in het Engels)"
+  - en: "Edwin Rijgersberg, [*GEITje*](https://github.com/Rijgersberg/GEITje), on GitHub: how GEITje was trained, and why it was taken offline"
+    nl: "Edwin Rijgersberg, [*GEITje*](https://github.com/Rijgersberg/GEITje), op GitHub: hoe GEITje getraind werd, en waarom GEITje niet meer beschikbaar is"
+  - en: "[*GPT-NL*](https://gpt-nl.nl/), the site of TNO, SURF and the NFI: the data, the tokenizer and the state of the model (in Dutch)"
+    nl: "[*GPT-NL*](https://gpt-nl.nl/), de site van TNO, SURF en het NFI: de data, de tokenizer en de stand van het model"

@@ -12,10 +12,10 @@ what every token holds before the first block and after each block: from the sec
 depend on the whole sentence. The head that fills in a [MASK] turns the last numbers back into a score per piece of
 the vocabulary, with the token embedding as its weights (`piece_scores`, `fill`).
 
-The tokenizer is the course's own too, as Hugging Face's BertTokenizer of the model does it: it removes control
-characters, puts a space around every Chinese character, makes everything lowercase and drops accents, splits at
-spaces and punctuation, and cuts every word into the longest pieces of the vocabulary from left to right; a piece
-inside a word starts with ##. A word it cannot cut, or of more than 100 characters, becomes [UNK].
+The tokenizer is the course's own too (everything_ai.wordpiece), as Hugging Face's BertTokenizer of the model does it:
+it removes control characters, puts a space around every Chinese character, makes everything lowercase and drops
+accents, splits at spaces and punctuation, and cuts every word into the longest pieces of the vocabulary from left to
+right; a piece inside a word starts with ##. A word it cannot cut, or of more than 100 characters, becomes [UNK].
 
 The course does not ship it (17.7 MB): everything_ai.hub downloads model.safetensors and vocab.txt of
 google/bert_uncased_L-2_H-128_A-2 once, at a fixed commit (FILES). The model has short names of the course's own;
@@ -24,7 +24,6 @@ of Hugging Face's tokenizer and the numbers of its BertForMaskedLM to within 0.0
 this module only where the model is needed: it imports PyTorch."""
 import functools
 import math
-import unicodedata
 
 import numpy as np
 import torch
@@ -32,6 +31,7 @@ import torch.nn.functional as F
 from torch import nn
 
 from everything_ai import hub, models
+from everything_ai.wordpiece import LONGEST, SPECIAL, Tokenizer, _chinese, _clean, _punctuation, _words  # noqa: F401
 
 REPO = "google/bert_uncased_L-2_H-128_A-2"
 FILES = ["model.safetensors", "vocab.txt"]
@@ -39,106 +39,8 @@ VOCAB, D, HEADS, FFN, LAYERS = 30_522, 128, 2, 512, 2   # from the model's confi
 EPS = 1e-12   # of every layer normalization
 MAX = 512     # tokens at most, [CLS] and [SEP] included: the rest of a longer text is left out (truncation)
 PAD, UNK, CLS, SEP, MASK = 0, 100, 101, 102, 103   # [PAD], [UNK], [CLS], [SEP] and [MASK] in vocab.txt
-SPECIAL = ("[PAD]", "[UNK]", "[CLS]", "[SEP]", "[MASK]")   # found in the text as they are, before anything else
-LONGEST = 100   # characters of the longest word the tokenizer cuts into pieces; a longer one is [UNK]
 
-
-# --- the tokenizer ----------------------------------------------------------------------------------------------------
-
-def _chinese(cp: int) -> bool:
-    """A CJK ideograph, which gets a space on both sides: Chinese has no spaces between words."""
-    return (0x4E00 <= cp <= 0x9FFF or 0x3400 <= cp <= 0x4DBF or 0x20000 <= cp <= 0x2A6DF or 0x2A700 <= cp <= 0x2B73F
-            or 0x2B740 <= cp <= 0x2B81F or 0x2B820 <= cp <= 0x2CEAF or 0xF900 <= cp <= 0xFAFF
-            or 0x2F800 <= cp <= 0x2FA1F)
-
-
-def _punctuation(ch: str) -> bool:
-    """Punctuation, which becomes a word of its own: every ASCII sign that is not a letter, digit or space (also $, +
-    and ^), and every character that Unicode calls punctuation."""
-    return ch.isascii() and ch.isprintable() and not ch.isalnum() and ch != " " or unicodedata.category(ch)[0] == "P"
-
-
-def _clean(text: str) -> str:
-    """Normalize as BERT does: control characters out, every space a plain space, a space around every Chinese
-    character, lowercase, and no accents (NFD, then every combining mark out)."""
-    out = []
-    for ch in text:
-        cp = ord(ch)
-        if cp in (0, 0xFFFD) or unicodedata.category(ch)[0] == "C" and ch not in "\t\n\r":
-            continue
-        if ch.isspace():
-            out.append(" ")
-        elif _chinese(cp):
-            out.append(f" {ch} ")
-        else:
-            out.append(ch)
-    text = unicodedata.normalize("NFD", "".join(out))
-    return "".join(ch for ch in text if unicodedata.category(ch) != "Mn").lower()
-
-
-def _words(text: str) -> list[str]:
-    """The words of a cleaned text: split at spaces, and every punctuation sign a word of its own."""
-    words = []
-    for chunk in text.split():
-        current = ""
-        for ch in chunk:
-            if _punctuation(ch):
-                if current:
-                    words.append(current)
-                words.append(ch)
-                current = ""
-            else:
-                current += ch
-        if current:
-            words.append(current)
-    return words
-
-
-class Tokenizer:
-    """BERT's WordPiece tokenizer for vocab.txt: one piece per line, its line number its id."""
-
-    def __init__(self, vocab: list[str]):
-        self.vocab = list(vocab)
-        self.ids = {piece: i for i, piece in enumerate(self.vocab)}
-
-    def word(self, word: str) -> list[str]:
-        """The pieces of one word: from left to right the longest piece in the vocabulary, a piece inside the word
-        with ## in front. When some part has no piece, or the word is longer than 100 characters, it is [UNK]."""
-        if len(word) > LONGEST:
-            return ["[UNK]"]
-        pieces, start = [], 0
-        while start < len(word):
-            end = len(word)
-            while end > start:
-                piece = word[start:end] if start == 0 else "##" + word[start:end]
-                if piece in self.ids:
-                    break
-                end -= 1
-            else:
-                return ["[UNK]"]
-            pieces.append(piece)
-            start = end
-        return pieces
-
-    def pieces(self, text: str) -> list[str]:
-        """The pieces of a text, without [CLS] and [SEP]. [MASK] and the other special tokens stay as they are."""
-        out, rest = [], text
-        while rest:
-            found = [(rest.find(s), s) for s in SPECIAL if s in rest]
-            if not found:
-                break
-            at, special = min(found)
-            for w in _words(_clean(rest[:at])):
-                out += self.word(w)
-            out.append(special)
-            rest = rest[at + len(special):]
-        for w in _words(_clean(rest)):
-            out += self.word(w)
-        return out
-
-    def encode(self, text: str) -> list[int]:
-        """The token ids of a text, as Hugging Face's tokenizer of the model gives them: [CLS], the pieces, [SEP]."""
-        return [self.ids["[CLS]"]] + [self.ids[p] for p in self.pieces(text)][:MAX - 2] + [self.ids["[SEP]"]]
+# The tokenizer is in everything_ai.wordpiece (Tokenizer, and the steps before it), which needs no PyTorch.
 
 
 # --- the model --------------------------------------------------------------------------------------------------------
