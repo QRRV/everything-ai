@@ -1,0 +1,33 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: rl-monte-carlo-prediction
+minutes: 25
+title:
+  en: "Learning from whole games: Monte Carlo prediction"
+  nl: "Leren van hele potjes: Monte Carlo prediction"
+goal:
+  en: "estimate the values of a policy without the table, by averaging the returns that followed each state in episodes played with that policy."
+  nl: "de waarden van een policy schatten zonder de tabel, door het gemiddelde te nemen van de returns die in episodes met deze policy op elke state volgden."
+summary:
+  - en: "Monte Carlo prediction estimates V of a policy from episodes played with it: the value of a state is the return to expect from it, and every visit gives one return that really happened, so the average of many returns comes close to the value. The returns of an episode are quickest to work out backward: the return from a step is its reward plus γ times the return from the next step."
+    nl: "Monte Carlo prediction schat V van een policy uit episodes die met de policy gespeeld zijn: de waarde van een state is de return die je ervandaan kunt verwachten, en elk bezoek geeft één return die echt gebeurd is, dus het gemiddelde van veel returns komt dicht bij de waarde. De returns van een episode reken je het snelst achteruit uit: de return vanaf een stap is de reward van de stap plus γ keer de return vanaf de volgende stap."
+  - en: "First-visit Monte Carlo keeps per episode only the return after the first visit of a state, every-visit Monte Carlo the return after every visit; over many episodes both come close to the values of policy evaluation. Returns spread a lot, about 32 steps from the corner of the robot's room, and an average of n returns spreads √n times less, so precision costs many episodes."
+    nl: "First-visit Monte Carlo houdt per episode alleen de return na het eerste bezoek aan een state, every-visit Monte Carlo de return na elk bezoek; over veel episodes komen de twee methoden allebei dicht bij de waarden van policy evaluation. Returns liggen ver uiteen, zo'n 32 stappen vanuit de hoek van de kamer van de robot, en een gemiddelde van n returns heeft √n keer minder spreiding, dus kost een goede schatting veel episodes."
+  - en: "Every step gets the whole return after it, also what later steps did: which steps earned a late reward, the problem of credit assignment, shows only on average over many episodes."
+    nl: "Elke stap krijgt de hele return erna, ook wat latere stappen deden: welke stappen een late reward verdienden, het probleem van credit assignment, blijkt pas gemiddeld over veel episodes."
+can_now:
+  - en: "work out the return from every step of an episode, going backward"
+    nl: "de return vanaf elke stap van een episode uitrekenen, achteruit"
+    by: returns
+  - en: "estimate the values of a policy with first-visit Monte Carlo"
+    nl: "de waarden van een policy schatten met first-visit Monte Carlo"
+    by: first
+  - en: "explain why Monte Carlo gives a state the whole return after it, and what that costs"
+    nl: "uitleggen waarom Monte Carlo een state de hele return erna geeft, en wat dat kost"
+    by: credit
+further_reading:
+  - en: "Richard S. Sutton and Andrew G. Barto (2018), *Reinforcement Learning: An Introduction*, 2nd edition, MIT Press, section 5.1 on Monte Carlo prediction, first visit and every visit; free at incompleteideas.net"
+    nl: "Richard S. Sutton en Andrew G. Barto (2018), *Reinforcement Learning: An Introduction*, 2e editie, MIT Press, paragraaf 5.1 over Monte Carlo prediction, first visit en every visit; gratis op incompleteideas.net"
+  - en: "Nicholas Metropolis and Stanislaw Ulam (1949), *The Monte Carlo Method*, Journal of the American Statistical Association 44 (247), 335–341: the first published paper on the method under this name"
+    nl: "Nicholas Metropolis en Stanislaw Ulam (1949), *The Monte Carlo Method*, Journal of the American Statistical Association 44 (247), 335–341: de eerste gepubliceerde paper over de methode onder deze naam"
