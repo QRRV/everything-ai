@@ -34,14 +34,16 @@ class Live:
     this one against. `key` says under the chart what each line is, as (role, dashed, words), for lines whose names
     would sit in each other's way, such as a run and its test loss that end close together. `every` is how often the
     chart is drawn at most, in seconds; `look_every` how often `watch` looks at the model, by default as often: a
-    look that takes long, such as a model that writes a sentence, is spread out more than the chart."""
+    look that takes long, such as a model that writes a sentence, is spread out more than the chart. `xticks` fixes the
+    ticks of the x-axis, for a run whose last round tick would not fit at the right edge, such as 10000."""
 
     def __init__(self, labels: dict, steps: int, role: str = "loss", lang: str = "en", low: float | None = None,
                  high: float | None = None, window: int | None = None, every: float = 0.5, xlog: bool = False,
-                 key: list | None = None, look_every: float | None = None):
+                 key: list | None = None, look_every: float | None = None, xticks: list | None = None):
         self.labels, self.steps, self.role, self.lang = labels, max(int(steps), 1), role, lang
         self.key = key or []   # under the chart, what each line is: (role, dashed, words)
         self.low, self.high, self.every, self.xlog = low, high, every, xlog
+        self.xticks = xticks
         self.look_every = every if look_every is None else look_every
         self.window = window or max(1, self.steps // 50)
         self.xs: list = []
@@ -166,7 +168,7 @@ class Live:
         pad = 0.06 * (high - low)
         y = (low - pad if self.low is None else low, high + pad if self.high is None else high)
         p = chart.Panel((1 if self.xlog else 0, self.steps), y, title=self.labels["title"], xlabel=self.labels["x"],
-                        ylabel=self.labels["y"], xlog=self.xlog)
+                        ylabel=self.labels["y"], xlog=self.xlog, xticks=self.xticks)
         for points, label, role in self.others:                         # the runs to hold this one against
             p.line([x for x, _ in points], [v for _, v in points], role, 1.4, dashed=True)
             if not label:

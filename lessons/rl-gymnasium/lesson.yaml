@@ -1,0 +1,40 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: rl-gymnasium
+minutes: 35
+title:
+  en: "One interface for every environment: Gymnasium"
+  nl: "Eén interface voor elke environment: Gymnasium"
+goal:
+  en: "let one Q-learning agent learn three worlds of Gymnasium without changing a line, and write the target that tells an episode that ended from one that a time limit cut off."
+  nl: "één Q-learning-agent drie werelden van Gymnasium laten leren zonder een regel te veranderen, en het target schrijven dat een episode die eindigde onderscheidt van een episode die een tijdslimiet afkapte."
+summary:
+  - en: "Gymnasium gives every environment the same interface: reset starts an episode and gives the first observation, and step takes an action and gives the observation, the reward, terminated, truncated and info."
+    nl: "Gymnasium geeft elke environment dezelfde interface: reset begint een episode en geeft de eerste observation, en step neemt een action en geeft de observation, de reward, terminated, truncated en info."
+  - en: "The observation space and the action space say what observations and actions look like. With Discrete spaces, a Q-table gets a row per observation and a column per action, so one agent runs in every such world."
+    nl: "De observation space en de action space zeggen hoe observations en actions eruitzien. Met Discrete spaces krijgt een Q-table een rij per observation en een kolom per action, zodat één agent in elke zulke wereld werkt."
+  - en: "terminated means that the task ended, and the target of the last step is its reward alone. truncated means that a time limit cut the episode off: the world goes on, so the target keeps γ times the largest Q of the next state."
+    nl: "terminated betekent dat de taak eindigde, en het target van de laatste stap is alleen de reward. truncated betekent dat een tijdslimiet de episode afkapte: de wereld gaat door, dus houdt het target γ keer de grootste Q van de volgende state."
+can_now:
+  - en: "play an episode in any world of Gymnasium with reset and step"
+    nl: "een episode spelen in elke wereld van Gymnasium met reset en step"
+    by: play_random
+  - en: "work out the target of a step that ended and of a step that was cut off"
+    nl: "het target uitrekenen van een stap die eindigde en van een stap die werd afgekapt"
+    by: target
+  - en: "write one Q-learning agent that learns every world with Discrete spaces"
+    nl: "één Q-learning-agent schrijven die elke wereld met Discrete spaces leert"
+    by: q_episode
+  - en: "tell when a time limit should leave the future of a state in the target"
+    nl: "zien wanneer een tijdslimiet de toekomst van een state in het target moet laten"
+    by: cut_off
+further_reading:
+  - en: "Greg Brockman, Vicki Cheung, Ludwig Pettersson, Jonas Schneider, John Schulman, Jie Tang and Wojciech Zaremba (2016), *OpenAI Gym*, arXiv:1606.01540: the interface of reset and step, and why RL needs shared environments"
+    nl: "Greg Brockman, Vicki Cheung, Ludwig Pettersson, Jonas Schneider, John Schulman, Jie Tang en Wojciech Zaremba (2016), *OpenAI Gym*, arXiv:1606.01540: de interface van reset en step, en waarom RL gedeelde environments nodig heeft"
+  - en: "Mark Towers and colleagues (2024), *Gymnasium: A Standard Interface for Reinforcement Learning Environments*, arXiv:2407.17032: the library of this lesson, with terminated and truncated, and its versions"
+    nl: "Mark Towers en anderen (2024), *Gymnasium: A Standard Interface for Reinforcement Learning Environments*, arXiv:2407.17032: de library van deze les, met terminated en truncated, en de versies"
+  - en: "Fabio Pardo, Arash Tavakoli, Vitaly Levdik and Petar Kormushev (2018), *Time Limits in Reinforcement Learning*, ICML 2018, arXiv:1712.00378: what goes wrong when an agent takes a time limit for the end of its task"
+    nl: "Fabio Pardo, Arash Tavakoli, Vitaly Levdik en Petar Kormushev (2018), *Time Limits in Reinforcement Learning*, ICML 2018, arXiv:1712.00378: wat er misgaat als een agent een tijdslimiet ziet als het einde van de taak"
+  - en: "Thomas Dietterich (2000), *Hierarchical Reinforcement Learning with the MAXQ Value Function Decomposition*, Journal of Artificial Intelligence Research 13: where the taxi of Taxi comes from"
+    nl: "Thomas Dietterich (2000), *Hierarchical Reinforcement Learning with the MAXQ Value Function Decomposition*, Journal of Artificial Intelligence Research 13: waar de taxi van Taxi vandaan komt"

@@ -17,6 +17,7 @@ dependencies = [
   "torch==2.14.1",                   # fixed: 2.15 (28 Oct) drops older cards and changes CUDA (docs/techniek/installatie)
   "tiktoken==0.14.0",
   "pillow==12.3.0",                  # image files (lessons cv-*); matplotlib already needs it
+  "gymnasium==1.4.0",                # environments for RL (lessons rl-gymnasium and on); drawn by the course, so no pygame
 ]
 
 [project.scripts]
