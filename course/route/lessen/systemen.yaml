@@ -18,7 +18,7 @@ lessons:
   idea: "Speed is work divided by rate: count the multiplications and additions a forward pass needs (its FLOPs), measure how many your computer does per second (FLOP/s), and you can predict how long a step takes; tokens per second says the same for a language model, and a timer around each part shows where the time really goes."
   covers: [profiling-en-prestatiemetrics#0, profiling-en-prestatiemetrics#1]
   requires: [nn-why-backprop, torch-gpu, lm-bigram-neural]
-  introduces: [c:flop-per-second, c:tokens-per-second, c:throughput]
+  introduces: [c:flop-per-second, c:tokens-per-second, c:throughput, py:perf-counter]
   data: []
   ladder: [python, torch]
   needs: any

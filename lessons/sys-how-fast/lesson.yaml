@@ -1,0 +1,40 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: sys-how-fast
+minutes: 30
+title:
+  en: "How fast is your model? FLOPs, FLOP/s and tokens per second"
+  nl: "Hoe snel is je model? FLOPs, FLOP/s en tokens per seconde"
+goal:
+  en: "measure how many FLOPs per second your computer does on a matrix product and how many characters per second your bigram network writes, and say where the time of one character goes."
+  nl: "meten hoeveel FLOPs per seconde je computer doet bij een matrixproduct en hoeveel tekens per seconde je bigram-netwerk schrijft, en zeggen waar de tijd van één teken heen gaat."
+summary:
+  - en: "FLOPs count the work of a calculation and are the same on every computer; FLOP/s, FLOPs per second, is the rate at which a computer does them. The time of the work is the work divided by the rate you actually reach."
+    nl: "FLOPs tellen het werk van een berekening en zijn op elke computer hetzelfde; FLOP/s, FLOPs per seconde, is het tempo waarin een computer de FLOPs doet. De tijd van het werk is het werk gedeeld door het tempo dat je echt haalt."
+  - en: "To measure, read `time.perf_counter()` before and after the work, run the work once first, repeat a few times and keep the fastest. A product of two n × n matrices costs 2n³ FLOPs."
+    nl: "Om te meten lees je `time.perf_counter()` af voor en na het werk, draai je het werk eerst één keer, herhaal je een paar keer en houd je de snelste. Een product van twee n × n-matrices kost 2n³ FLOPs."
+  - en: "Small products are slow: every product has a fixed cost on top of its FLOPs, about a microsecond on the course's computer. There, an 8 × 8 product reaches about 0.9 billion FLOP/s, and a 1,024 × 1,024 product about 450 billion."
+    nl: "Kleine producten zijn traag: elk product heeft bovenop de FLOPs vaste kosten, ongeveer een microseconde op de computer van de course. Daar haalt een 8 × 8-product ongeveer 0,9 miljard FLOP/s, en een 1.024 × 1.024-product ongeveer 450 miljard."
+  - en: "For a model that writes, the rate is tokens per second. One character of the bigram network takes 20.5 µs on the course's computer, about 49,000 characters per second, and the product with the table takes less than a tenth of that time."
+    nl: "Voor een model dat schrijft, is het tempo tokens per seconde. Eén teken van het bigram-netwerk kost 20,5 µs op de computer van de course, ongeveer 49.000 tekens per seconde, en het product met de tabel neemt minder dan een tiende van deze tijd."
+  - en: "Throughput is the work done per second by everything together. Writing 100 texts at once makes a step about 9 times as long, and gives 11 times as many characters per second in all."
+    nl: "Throughput is het werk dat alles samen per seconde doet. 100 teksten tegelijk schrijven maakt een stap ongeveer 9 keer zo lang, en geeft in totaal 11 keer zoveel tekens per seconde."
+can_now:
+  - en: "work out the FLOP/s of matrix products from their sizes and measured times"
+    nl: "de FLOP/s van matrixproducten uitrekenen uit de groottes en de gemeten tijden"
+    by: flop-rate
+  - en: "measure the tokens per second of a model that writes, with a clock around one call"
+    nl: "de tokens per seconde meten van een model dat schrijft, met een klok om één aanroep"
+    by: tokens-rate
+  - en: "say how much faster a model gets when one of its parts gets faster"
+    nl: "zeggen hoeveel sneller een model wordt als één van de delen sneller wordt"
+    by: part-faster
+  - en: "explain why many texts at once raise the throughput"
+    nl: "uitleggen waarom veel teksten tegelijk de throughput verhogen"
+    by: many-texts
+further_reading:
+  - en: "Horace He (2022), [*Making Deep Learning Go Brrrr From First Principles*](https://horace.io/brrr_intro.html): where the time of a neural network goes, in FLOPs, in moving numbers around, and in the fixed cost of every operation"
+    nl: "Horace He (2022), [*Making Deep Learning Go Brrrr From First Principles*](https://horace.io/brrr_intro.html): waar de tijd van een neural network heen gaat, in FLOPs, in getallen verplaatsen, en in de vaste kosten van elke bewerking"
+  - en: "The Python documentation, [*time.perf_counter*](https://docs.python.org/3/library/time.html#time.perf_counter): the clock of this lesson, made for measuring short times"
+    nl: "De documentatie van Python, [*time.perf_counter*](https://docs.python.org/3/library/time.html#time.perf_counter): de klok van deze les, gemaakt om korte tijden te meten"
