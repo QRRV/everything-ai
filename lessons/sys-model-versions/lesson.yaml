@@ -1,0 +1,44 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: sys-model-versions
+minutes: 30
+title:
+  en: "Which model is this? Versions and a model registry"
+  nl: "Welk model is dit? Versies en een model registry"
+goal:
+  en: "give a model file a version from the SHA-256 hash of its bytes, keep versions in a registry that gives the same bytes the same number, and explain why Git gets a pointer instead of the model file."
+  nl: "een modelbestand een versie geven uit de SHA-256-hash van de bytes, versies bijhouden in een registry die dezelfde bytes hetzelfde nummer geeft, en uitleggen waarom Git een pointer krijgt in plaats van het modelbestand."
+summary:
+  - en: "A file name can lie: someone can save another model under the same name. A model version says exactly which model a file holds."
+    nl: "Een bestandsnaam kan liegen: iemand kan een ander model onder dezelfde naam opslaan. Een modelversie zegt precies welk model een bestand bevat."
+  - en: "SHA-256 turns any bytes into 64 hex characters: the same bytes always give the same hash, and one changed weight gives a completely different one. The first 12 characters of the hash of a model file make a short version."
+    nl: "SHA-256 maakt van elke reeks bytes 64 hextekens: dezelfde bytes geven altijd dezelfde hash, en één veranderde weight geeft een heel andere. De eerste 12 tekens van de hash van een modelbestand vormen een korte versie."
+  - en: "A model registry keeps per model its versions, numbered in the order they were registered, each with its hash and its run; an alias such as production points to the number the app loads, and moves only when someone moves it."
+    nl: "Een model registry bewaart per model de versies, genummerd in de volgorde van registreren, elk met de hash en de run; een alias zoals production wijst naar het nummer dat de app laadt, en verschuift alleen als iemand de alias verschuift."
+  - en: "Git keeps every version of every file, so a large model file stays out of it: DVC and Git LFS put a small pointer with the hash and the size in Git, and the file in storage."
+    nl: "Git bewaart elke versie van elk bestand, dus blijft een groot modelbestand erbuiten: DVC en Git LFS zetten een kleine pointer met de hash en de grootte in Git, en het bestand in opslag."
+can_now:
+  - en: "write a function that gives the version of a file from the SHA-256 hash of its bytes"
+    nl: "een functie schrijven die de versie van een bestand geeft uit de SHA-256-hash van de bytes"
+    by: version
+  - en: "register model versions so that the same bytes keep their number and a new model gets the next one"
+    nl: "modelversies registreren zodat dezelfde bytes het nummer houden en een nieuw model het volgende krijgt"
+    by: register
+  - en: "explain why a large model file gets a pointer in Git instead of the file itself"
+    nl: "uitleggen waarom een groot modelbestand een pointer in Git krijgt in plaats van het bestand zelf"
+    by: pointer
+  - en: "say which version an app loads by its alias after a new version is registered"
+    nl: "zeggen welke versie een app via de alias laadt nadat er een nieuwe versie is geregistreerd"
+    by: alias
+further_reading:
+  - en: "Jeremy Hermann and Mike Del Balso (2017), *Meet Michelangelo: Uber's Machine Learning Platform*, the Uber blog: versioned models, and a model found by its id and an alias"
+    nl: "Jeremy Hermann en Mike Del Balso (2017), *Meet Michelangelo: Uber's Machine Learning Platform*, de blog van Uber: modellen met versies, en een model gevonden via een id en een alias"
+  - en: "Eric Breck and others (2017), *The ML Test Score: A Rubric for ML Production Readiness and Technical Debt Reduction*, Google"
+    nl: "Eric Breck en anderen (2017), *The ML Test Score: A Rubric for ML Production Readiness and Technical Debt Reduction*, Google"
+  - en: "MLflow documentation, *MLflow Model Registry*: registered models, versions, aliases and `models:/name@alias`"
+    nl: "MLflow-documentatie, *MLflow Model Registry*: geregistreerde modellen, versies, aliassen en `models:/name@alias`"
+  - en: "DVC documentation, *dvc add* and *.dvc files*: the pointer with its MD5 hash, the cache and `dvc push`"
+    nl: "DVC-documentatie, *dvc add* en *.dvc files*: de pointer met de MD5-hash, de cache en `dvc push`"
+  - en: "Python documentation, *hashlib*: `sha256`, `hexdigest` and `file_digest` for large files"
+    nl: "Python-documentatie, *hashlib*: `sha256`, `hexdigest` en `file_digest` voor grote bestanden"

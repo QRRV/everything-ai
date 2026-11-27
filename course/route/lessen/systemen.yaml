@@ -143,7 +143,7 @@ lessons:
   covers: [ontwikkelomgeving-tracking-en-reproduceerbaarheid#3, packaging-testen-en-pipelines#1]
   requires: [sys-experiment-tracking, torch-checkpoints]
   introduces: [c:model-version, c:model-registry, c:dvc]
-  mentions: [c:hash]
+  mentions: [c:hash, py:hashlib]
   data: []
   ladder: [python]
   needs: any

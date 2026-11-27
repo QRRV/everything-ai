@@ -1522,6 +1522,7 @@ lessons:
   covers: [frontier-safety-frameworks#0, frontier-safety-frameworks#1]
   requires: [rai-open-weights]
   introduces: [c:frontier-safety-framework, c:capability-threshold, c:if-then-commitment]
+  mentions: [c:model-version]
   data: []
   ladder: [python]
   needs: any
