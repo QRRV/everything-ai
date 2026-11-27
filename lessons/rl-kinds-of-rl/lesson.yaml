@@ -1,0 +1,35 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: rl-kinds-of-rl
+minutes: 30
+title:
+  en: "A map of RL methods"
+  nl: "Een kaart van RL-methoden"
+goal:
+  en: "place an RL method with four questions: model-based or model-free, value-based or policy-based, on-policy or off-policy, whole episodes or its own estimates; and write a policy-based agent for three machines."
+  nl: "een RL-methode plaatsen met vier vragen: model-based of model-free, value-based of policy-based, on-policy of off-policy, hele episodes of de eigen schattingen; en een policy-based agent voor drie automaten schrijven."
+summary:
+  - en: "Model-based RL uses a model of the environment, given or learned: which next states follow an action, with what chance, and which reward. Model-free RL learns only from steps that happened."
+    nl: "Model-based RL gebruikt een model van de environment, gegeven of geleerd: welke volgende states op een action volgen, met welke kans, en welke reward. Model-free RL leert alleen van stappen die gebeurden."
+  - en: "A value-based method learns V or Q and chooses from them; a policy-based method learns the policy itself, as the chance of each action. Together with on-policy or off-policy, and whole episodes or its own estimates, four questions place a method."
+    nl: "Een value-based methode leert V of Q en kiest daaruit; een policy-based methode leert de policy zelf, als de kans op elke action. Samen met on-policy of off-policy, en hele episodes of de eigen schattingen, plaatsen vier vragen een methode."
+  - en: "Dynamic programming updates from all next states with the model, TD learning from one step that happened and its own estimate, and Monte Carlo from a whole episode that happened. The fourth corner, every path, is possible only for tiny tasks."
+    nl: "Dynamic programming werkt bij vanuit alle volgende states met het model, TD learning vanuit één stap die gebeurde en de eigen schatting, en Monte Carlo vanuit een hele episode die gebeurde. De vierde hoek, alle paden langsgaan, kan alleen bij heel kleine taken."
+can_now:
+  - en: "say whether an agent is model-based, with a model it was given or learned, or model-free"
+    nl: "zeggen of een agent model-based is, met een model dat de agent kreeg of leerde, of model-free"
+    by: kinds
+  - en: "write a policy-based agent that moves the chance of each action toward its target after a reward"
+    nl: "een policy-based agent schrijven die na een reward de kans op elke action richting het target schuift"
+    by: nudge
+  - en: "place a method from a paper on the map with four questions"
+    nl: "een methode uit een paper met vier vragen op de kaart plaatsen"
+    by: paper
+further_reading:
+  - en: "Richard S. Sutton and Andrew G. Barto (2018), *Reinforcement Learning: An Introduction*, 2nd edition, MIT Press, section 8.13, *Summary of Part I: Dimensions*, with the map of updates by their width and depth; free at incompleteideas.net"
+    nl: "Richard S. Sutton en Andrew G. Barto (2018), *Reinforcement Learning: An Introduction*, 2e editie, MIT Press, paragraaf 8.13, *Summary of Part I: Dimensions*, met de kaart van updates naar breedte en diepte; gratis op incompleteideas.net"
+  - en: "K. S. Narendra and M. A. L. Thathachar (1974), *Learning Automata: A Survey*, IEEE Transactions on Systems, Man, and Cybernetics SMC-4(4), 323–334: agents that learn the chance of each action directly, among them the update of this lesson's policy-based agent"
+    nl: "K. S. Narendra en M. A. L. Thathachar (1974), *Learning Automata: A Survey*, IEEE Transactions on Systems, Man, and Cybernetics SMC-4(4), 323–334: agents die de kans op elke action direct leren, met de update van de policy-based agent van deze les"
+  - en: "Volodymyr Mnih and others (2015), *Human-level control through deep reinforcement learning*, Nature 518, 529–533: the agent of exercise 3"
+    nl: "Volodymyr Mnih en anderen (2015), *Human-level control through deep reinforcement learning*, Nature 518, 529–533: de agent van oefening 3"
