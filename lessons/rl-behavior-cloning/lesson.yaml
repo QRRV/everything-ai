@@ -1,0 +1,38 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: rl-behavior-cloning
+minutes: 30
+title:
+  en: "Copying an expert: behavior cloning"
+  nl: "Een expert nadoen: behavior cloning"
+goal:
+  en: "learn a policy from an expert's demonstrations with k-nearest neighbors, without any reward, and see why the clone goes wrong on the states the expert never showed."
+  nl: "een policy leren uit de demonstraties van een expert met k-nearest neighbors, zonder enige reward, en zien waarom de kloon de mist in gaat op de states die de expert nooit liet zien."
+summary:
+  - en: "Behavior cloning is the simplest imitation learning: every step of the expert is an example, with the state as the features and the expert's action as the class, and a classifier learns the policy from those examples. The clone never sees a reward."
+    nl: "Behavior cloning is de eenvoudigste vorm van imitation learning: elke stap van de expert is een voorbeeld, met de state als features en de action van de expert als klasse, en een classifier leert de policy uit deze voorbeelden. De kloon ziet nooit een reward."
+  - en: "Where the expert stood, a clone with k = 1 does exactly what the expert did. A slip or a mistake takes it to states the expert never showed, where it makes more mistakes: compounding errors, caused by a distribution shift between the states of the expert and the states of the clone."
+    nl: "Waar de expert stond, doet een kloon met k = 1 precies wat de expert deed. Uitglijden of een fout brengt de kloon naar states die de expert nooit liet zien, waar de kloon nog meer fouten maakt: compounding errors, door een distribution shift tussen de states van de expert en de states van de kloon."
+  - en: "More demonstrations show more states, and the falls go down. Asking the expert for the states the clone itself reaches, as DAgger does, helps more for the same number of pairs. A larger k can make things worse, when the rare action is the one that matters."
+    nl: "Meer demonstraties laten meer states zien, en de kloon valt minder vaak. De expert vragen naar de states waar de kloon zelf komt, zoals DAgger doet, helpt meer voor hetzelfde aantal paren. Een grotere k kan het erger maken, als juist de zeldzame action telt."
+can_now:
+  - en: "record an expert's demonstrations as pairs of a state and an action"
+    nl: "de demonstraties van een expert opnemen als paren van een state en een action"
+    by: demonstrate
+  - en: "learn a policy from demonstrations with k-nearest neighbors"
+    nl: "een policy leren uit demonstraties met k-nearest neighbors"
+    by: clone
+  - en: "measure how often a clone does something other than the expert, on the expert's states and on its own"
+    nl: "meten hoe vaak een kloon iets anders doet dan de expert, op de states van de expert en op de eigen states"
+    by: mistakes
+  - en: "explain why a larger k can make a clone worse"
+    nl: "uitleggen waarom een grotere k een kloon slechter kan maken"
+    by: bigger-k
+further_reading:
+  - en: "Dean A. Pomerleau (1991), *Efficient training of artificial neural networks for autonomous navigation*, Neural Computation 3(1), 88–97: ALVINN learns to steer from a human driver, with extra images shifted to the side so that it learns to come back"
+    nl: "Dean A. Pomerleau (1991), *Efficient training of artificial neural networks for autonomous navigation*, Neural Computation 3(1), 88–97: ALVINN leert sturen van een menselijke bestuurder, met extra beelden die opzij geschoven zijn, zodat ALVINN leert terug te komen"
+  - en: "Stéphane Ross and J. Andrew Bagnell (2010), *Efficient reductions for imitation learning*, AISTATS: why the mistakes of behavior cloning can grow with the square of the length of the task"
+    nl: "Stéphane Ross en J. Andrew Bagnell (2010), *Efficient reductions for imitation learning*, AISTATS: waarom de fouten van behavior cloning kunnen groeien met het kwadraat van de lengte van de taak"
+  - en: "Stéphane Ross, Geoffrey J. Gordon and J. Andrew Bagnell (2011), *A reduction of imitation learning and structured prediction to no-regret online learning*, AISTATS: DAgger, which asks the expert about the states the learned policy reaches"
+    nl: "Stéphane Ross, Geoffrey J. Gordon en J. Andrew Bagnell (2011), *A reduction of imitation learning and structured prediction to no-regret online learning*, AISTATS: DAgger, dat de expert vraagt naar de states waar de geleerde policy komt"
