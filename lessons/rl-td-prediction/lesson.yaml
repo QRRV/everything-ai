@@ -1,0 +1,33 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: rl-td-prediction
+minutes: 35
+title:
+  en: "Learning after every step: TD(0)"
+  nl: "Leren na elke stap: TD(0)"
+goal:
+  en: "estimate the values of a policy after every step, by moving V(S) toward the reward plus the discounted estimate of the next state, and compare it with Monte Carlo on a random walk."
+  nl: "de waarden van een policy na elke stap schatten, door V(S) op te schuiven naar de reward plus de verdisconteerde schatting van de volgende state, en dat op een willekeurige wandeling vergelijken met Monte Carlo."
+summary:
+  - en: "Monte Carlo moves V(S) toward the return G, which is only known at the end of the episode. TD(0) moves it after every step toward R + γV(S′): the reward of the step plus its own estimate of the rest. The TD error is the difference between that target and V(S): δ = R + γV(S′) − V(S)."
+    nl: "Monte Carlo schuift V(S) op naar de return G, en G is pas bekend aan het einde van de episode. TD(0) schuift V(S) na elke stap op naar R + γV(S′): de reward van de stap plus de eigen schatting van de rest. De TD error is het verschil tussen dit target en V(S): δ = R + γV(S′) − V(S)."
+  - en: "Learning from your own estimate of the next state is bootstrapping. At first those estimates are wrong, but they change little from one step to the next, while a return of the random walk is 0 or 1: all or nothing. How close each method gets after a number of walks also depends on the learning rate η."
+    nl: "Leren van je eigen schatting van de volgende state heet bootstrapping. In het begin kloppen deze schattingen niet, maar van stap tot stap veranderen de schattingen weinig, terwijl een return van de willekeurige wandeling 0 of 1 is: alles of niets. Hoe dicht elke methode na een aantal wandelingen bij de echte waarden komt hangt ook af van de learning rate η."
+  - en: "From the same episodes, the two methods can learn different values: Monte Carlo fits the returns it saw, TD(0) what the steps say about each other. When a state seen once is followed by a state seen often, TD(0) gives the first state the reward of the step plus the value of the state after it."
+    nl: "Uit dezelfde episodes kunnen de twee methoden verschillende waarden leren: Monte Carlo volgt de returns die de agent zag, TD(0) wat de stappen over elkaar zeggen. Volgt op een state die één keer voorkwam een state die vaak voorkwam, dan geeft TD(0) de eerste state de reward van de stap plus de waarde van de state erna."
+can_now:
+  - en: "update V after one step with TD(0)"
+    nl: "V bijwerken na één stap met TD(0)"
+    by: td_update
+  - en: "update V after a whole episode with Monte Carlo and a fixed learning rate"
+    nl: "V bijwerken na een hele episode met Monte Carlo en een vaste learning rate"
+    by: mc_update
+  - en: "say which value TD(0) and Monte Carlo learn from the same few episodes, and why"
+    nl: "zeggen welke waarde TD(0) en Monte Carlo leren uit dezelfde paar episodes, en waarom"
+    by: predictor
+further_reading:
+  - en: "Richard S. Sutton and Andrew G. Barto (2018), *Reinforcement Learning: An Introduction*, 2nd edition, MIT Press, sections 6.1 to 6.3 on TD prediction, with example 6.2, the random walk, and example 6.4 on what TD and Monte Carlo learn from the same episodes; free at incompleteideas.net"
+    nl: "Richard S. Sutton en Andrew G. Barto (2018), *Reinforcement Learning: An Introduction*, 2e editie, MIT Press, paragrafen 6.1 tot en met 6.3 over TD prediction, met voorbeeld 6.2, de willekeurige wandeling, en voorbeeld 6.4 over wat TD en Monte Carlo leren uit dezelfde episodes; gratis op incompleteideas.net"
+  - en: "Richard S. Sutton (1988), *Learning to Predict by the Methods of Temporal Differences*, Machine Learning 3, 9–44: the paper that named TD learning and first compared it with learning from the final outcome"
+    nl: "Richard S. Sutton (1988), *Learning to Predict by the Methods of Temporal Differences*, Machine Learning 3, 9–44: het paper dat TD learning de naam gaf en het voor het eerst vergeleek met leren van de uitkomst aan het einde"
