@@ -1,0 +1,46 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: rl-libraries
+minutes: 35
+title:
+  en: "Using an RL library: Stable-Baselines3"
+  nl: "Een RL-library gebruiken: Stable-Baselines3"
+goal:
+  en: "train a PPO agent on CartPole with Stable-Baselines3 in a few lines, test it over several seeds and many test episodes, and tell what CleanRL and RLlib are for."
+  nl: "een agent met PPO op CartPole trainen met Stable-Baselines3 in een paar regels, de agent testen over meerdere seeds en veel testepisodes, en zien waar CleanRL en RLlib voor zijn."
+summary:
+  - en: "An RL library such as Stable-Baselines3 holds tested versions of the algorithms behind one interface: make a model from a policy and an environment, let it learn for a number of steps, and ask it to predict the action for an observation."
+    nl: "Een RL-library zoals Stable-Baselines3 heeft geteste versies van de algoritmen achter één interface: maak een model van een policy en een environment, laat het model een aantal stappen leren, en vraag het om de action voor een observation te voorspellen."
+  - en: "PPO learns a policy as a neural network that gives a chance for each action, with a second network as its value function. In training it draws its actions from those chances, which is how it explores; a test takes the most probable action every time."
+    nl: "PPO leert een policy als een neural network dat een kans geeft voor elke action, met een tweede netwerk als value function. Bij de training trekt PPO de actions uit deze kansen, en zo verkent PPO; een test neemt elke keer de waarschijnlijkste action."
+  - en: "One run of RL says little, since another seed learns faster or slower. A fair result trains several seeds, tests each one on many episodes, and reports every seed, or the median and the worst, never the best seed alone."
+    nl: "Eén run van RL zegt weinig, want een andere seed leert sneller of langzamer. Een betrouwbaar resultaat traint meerdere seeds, test elke seed op veel episodes, en meldt elke seed, of de mediaan en de slechtste, nooit alleen de beste seed."
+  - en: "CleanRL puts each algorithm in one file to read and change; RLlib spreads the environments and the learning over many processor cores or computers at once."
+    nl: "CleanRL zet elk algoritme in één bestand om te lezen en aan te passen; RLlib verdeelt de environments en het leren tegelijk over veel processorkernen of computers."
+can_now:
+  - en: "test a trained agent of Stable-Baselines3 in a loop of your own"
+    nl: "een getrainde agent van Stable-Baselines3 testen in een eigen loop"
+    by: play_test
+  - en: "summarize test returns over several seeds with the median and the worst seed"
+    nl: "testreturns over meerdere seeds samenvatten met de mediaan en de slechtste seed"
+    by: judge
+  - en: "tell a fair report of an RL result from one that picks its best run"
+    nl: "een goed verslag van een resultaat in RL onderscheiden van een verslag dat de beste run uitkiest"
+    by: fair
+  - en: "choose between Stable-Baselines3, CleanRL and RLlib for a task"
+    nl: "kiezen tussen Stable-Baselines3, CleanRL en RLlib voor een taak"
+    by: library
+further_reading:
+  - en: "Antonin Raffin, Ashley Hill, Adam Gleave, Anssi Kanervisto, Maximilian Ernestus and Noah Dormann (2021), *Stable-Baselines3: Reliable Reinforcement Learning Implementations*, Journal of Machine Learning Research 22(268): the library of this lesson"
+    nl: "Antonin Raffin, Ashley Hill, Adam Gleave, Anssi Kanervisto, Maximilian Ernestus en Noah Dormann (2021), *Stable-Baselines3: Reliable Reinforcement Learning Implementations*, Journal of Machine Learning Research 22(268): de library van deze les"
+  - en: "John Schulman, Filip Wolski, Prafulla Dhariwal, Alec Radford and Oleg Klimov (2017), *Proximal Policy Optimization Algorithms*, arXiv:1707.06347: PPO"
+    nl: "John Schulman, Filip Wolski, Prafulla Dhariwal, Alec Radford en Oleg Klimov (2017), *Proximal Policy Optimization Algorithms*, arXiv:1707.06347: PPO"
+  - en: "Peter Henderson, Riashat Islam, Philip Bachman, Joelle Pineau, Doina Precup and David Meger (2018), *Deep Reinforcement Learning that Matters*, AAAI 2018: how much results depend on seeds and on the code of an algorithm"
+    nl: "Peter Henderson, Riashat Islam, Philip Bachman, Joelle Pineau, Doina Precup en David Meger (2018), *Deep Reinforcement Learning that Matters*, AAAI 2018: hoeveel resultaten afhangen van seeds en van de code van een algoritme"
+  - en: "Rishabh Agarwal, Max Schwarzer, Pablo Samuel Castro, Aaron Courville and Marc Bellemare (2021), *Deep Reinforcement Learning at the Edge of the Statistical Precipice*, NeurIPS 2021: how to report results over a few seeds"
+    nl: "Rishabh Agarwal, Max Schwarzer, Pablo Samuel Castro, Aaron Courville en Marc Bellemare (2021), *Deep Reinforcement Learning at the Edge of the Statistical Precipice*, NeurIPS 2021: hoe je resultaten over een paar seeds meldt"
+  - en: "Shengyi Huang, Rousslan Fernand Julien Dossa, Chang Ye, Jeff Braga, Dipam Chakraborty, Kinal Mehta and João Araújo (2022), *CleanRL: High-quality Single-file Implementations of Deep Reinforcement Learning Algorithms*, Journal of Machine Learning Research 23(274)"
+    nl: "Shengyi Huang, Rousslan Fernand Julien Dossa, Chang Ye, Jeff Braga, Dipam Chakraborty, Kinal Mehta en João Araújo (2022), *CleanRL: High-quality Single-file Implementations of Deep Reinforcement Learning Algorithms*, Journal of Machine Learning Research 23(274)"
+  - en: "Eric Liang, Richard Liaw, Robert Nishihara, Philipp Moritz, Roy Fox, Ken Goldberg, Joseph Gonzalez, Michael Jordan and Ion Stoica (2018), *RLlib: Abstractions for Distributed Reinforcement Learning*, ICML 2018"
+    nl: "Eric Liang, Richard Liaw, Robert Nishihara, Philipp Moritz, Roy Fox, Ken Goldberg, Joseph Gonzalez, Michael Jordan en Ion Stoica (2018), *RLlib: Abstractions for Distributed Reinforcement Learning*, ICML 2018"

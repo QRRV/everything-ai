@@ -18,6 +18,7 @@ dependencies = [
   "tiktoken==0.14.0",
   "pillow==12.3.0",                  # image files (lessons cv-*); matplotlib already needs it
   "gymnasium==1.4.0",                # environments for RL (lessons rl-gymnasium and on); drawn by the course, so no pygame
+  "stable-baselines3==2.9.2",        # tested RL algorithms such as PPO (lessons rl-libraries and on); no extras, so no TensorBoard
 ]
 
 [project.scripts]
