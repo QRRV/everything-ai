@@ -242,7 +242,7 @@ def hints_predictions():
 @app.cell(hide_code=True)
 def text_after_predictions():
     mo.md(r"""
-    In de afbeelding je V over `pavlov`. V klimt eerst snel en bij 1 langzaam, en zodra het eten wegblijft, zakt V op dezelfde manier terug. Elke stap is η keer hoe ver de voorspelling ernaast zat: eten dat het geluid al goed voorspelt verandert V weinig, en een verrassing verandert V veel. De volgende les, *Leren van verrassing: het Rescorla-Wagner-model*, bouwt precies daarop voort, met meer dan één signaal tegelijk.
+    In de afbeelding je V over `pavlov`. V klimt eerst snel en bij 1 langzaam, en zodra het eten wegblijft, zakt V op dezelfde manier terug. Elke stap is η keer hoe ver de voorspelling ernaast zat: eten dat het geluid al goed voorspelt verandert V weinig, en een verrassing verandert V veel. De volgende les, *Leren van verrassing: het Rescorla-Wagner model*, bouwt precies daarop voort, met meer dan één signaal tegelijk.
     """)
     return
 
@@ -429,7 +429,7 @@ def text_connections():
     mo.md(r"""
     ## Afronding
 
-    **Samenhang.** In [Welke automaat geeft het meest? De multi-armed bandit](/course/open/rl-bandits?lang=nl) leerde een agent welke automaat het meest geeft; hier leerde een kat welke action de deur opent, met een regel die de psychologie in 1911 opschreef. De hond van Pavlov leert een voorspelling met de update van Q-learning; de kat van Thorndike leert een policy met de wet van het effect. RL brengt de twee samen: een agent leert values, en kiest daarmee de actions. De volgende les, *Leren van verrassing: het Rescorla-Wagner-model*, geeft de hond meer dan één signaal, en laat zien dat een signaal alleen leert voor zover het eten een verrassing is.
+    **Samenhang.** In [Welke automaat geeft het meest? De multi-armed bandit](/course/open/rl-bandits?lang=nl) leerde een agent welke automaat het meest geeft; hier leerde een kat welke action de deur opent, met een regel die de psychologie in 1911 opschreef. De hond van Pavlov leert een voorspelling met de update van Q-learning; de kat van Thorndike leert een policy met de wet van het effect. RL brengt de twee samen: een agent leert values, en kiest daarmee de actions. De volgende les, *Leren van verrassing: het Rescorla-Wagner model*, geeft de hond meer dan één signaal, en laat zien dat een signaal alleen leert voor zover het eten een verrassing is.
     """)
     return
 

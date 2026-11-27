@@ -1,0 +1,46 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: rl-rescorla-wagner
+minutes: 30
+title:
+  en: "Learning from surprise: the Rescorla-Wagner model"
+  nl: "Leren van verrassing: het Rescorla-Wagner model"
+goal:
+  en: "give every signal its own prediction and let the signals present share one surprise, as the Rescorla-Wagner model does, explain blocking with it, and see how TD learning uses the same rule."
+  nl: "elk signaal een eigen voorspelling geven en de aanwezige signalen één verrassing laten delen, zoals het Rescorla-Wagner model doet, daarmee blocking verklaren, en zien hoe TD learning dezelfde regel gebruikt."
+summary:
+  - en: "With more than one signal, the Rescorla-Wagner model (Rescorla and Wagner, 1972) gives every signal its own V. In a trial, the signals present predict the food together, ΣV, and the surprise is the food minus that prediction."
+    nl: "Met meer dan één signaal geeft het Rescorla-Wagner model (Rescorla en Wagner, 1972) elk signaal een eigen V. In een trial voorspellen de aanwezige signalen samen het eten, ΣV, en de verrassing is het eten min deze voorspelling."
+  - en: "Every signal present takes the same step, η times the surprise: V ← V + η(f − ΣV). A signal that is absent keeps its V. With one signal, this is the update of Pavlov's dog."
+    nl: "Elk aanwezig signaal zet dezelfde stap, η keer de verrassing: V ← V + η(f − ΣV). Een signaal dat ontbreekt houdt de eigen V. Met één signaal is dit de update van de hond van Pavlov."
+  - en: "Blocking (Kamin, 1969): when a sound already predicts the food, a light added to it learns almost nothing, since the food is hardly a surprise any more. With the sound and the light together from the start, the two share what there is to learn."
+    nl: "Blocking (Kamin, 1969): als een geluid het eten al voorspelt, leert een lamp die erbij komt bijna niets, omdat het eten nauwelijks nog een verrassing is. Met geluid en lamp samen vanaf het begin delen de twee wat er te leren valt."
+  - en: "A surprise below 0 pushes the V's down: a light that comes when the food stays away ends with a V below 0, a prediction that the food will not come."
+    nl: "Een verrassing onder 0 duwt de V's omlaag: een lamp die komt als het eten wegblijft eindigt met een V onder 0, een voorspelling dat het eten niet komt."
+  - en: "The model has limits: a signal seen often without anything following is learned more slowly later, which the model does not predict. TD learning carries the same rule from whole trials to the steps within them, with R + γV(S′) as the target, and the rule is also a step of gradient descent for a linear model."
+    nl: "Het model heeft grenzen: een signaal dat vaak kwam zonder dat er iets volgde wordt later langzamer geleerd, en het model voorspelt dat niet. TD learning brengt dezelfde regel van hele trials naar de stappen erbinnen, met R + γV(S′) als target, en de regel is ook een stap van gradient descent voor een lineair model."
+can_now:
+  - en: "compute one trial of the Rescorla-Wagner model, with one surprise for all signals present"
+    nl: "één trial van het Rescorla-Wagner model uitrekenen, met één verrassing voor alle aanwezige signalen"
+    by: rw_step
+  - en: "follow the predictions of two signals over an experiment, and see blocking happen"
+    nl: "de voorspellingen van twee signalen volgen over een experiment, en blocking zien gebeuren"
+    by: run
+  - en: "name a finding that the Rescorla-Wagner model cannot explain"
+    nl: "een bevinding noemen die het Rescorla-Wagner model niet kan verklaren"
+    by: latent
+  - en: "say which part of TD learning matches the food of the Rescorla-Wagner model"
+    nl: "zeggen welk deel van TD learning overeenkomt met het eten in het Rescorla-Wagner model"
+    by: td
+further_reading:
+  - en: "Robert A. Rescorla and Allan R. Wagner (1972), *A theory of Pavlovian conditioning: Variations in the effectiveness of reinforcement and nonreinforcement*, in A. H. Black and W. F. Prokasy (editors), *Classical Conditioning II: Current Research and Theory*, Appleton-Century-Crofts, pages 64 to 99: the model itself"
+    nl: "Robert A. Rescorla en Allan R. Wagner (1972), *A theory of Pavlovian conditioning: Variations in the effectiveness of reinforcement and nonreinforcement*, in A. H. Black en W. F. Prokasy (redactie), *Classical Conditioning II: Current Research and Theory*, Appleton-Century-Crofts, bladzijde 64 tot en met 99: het model zelf"
+  - en: "Leon J. Kamin (1969), *Predictability, surprise, attention, and conditioning*, in B. A. Campbell and R. M. Church (editors), *Punishment and Aversive Behavior*, Appleton-Century-Crofts, pages 279 to 296: blocking"
+    nl: "Leon J. Kamin (1969), *Predictability, surprise, attention, and conditioning*, in B. A. Campbell en R. M. Church (redactie), *Punishment and Aversive Behavior*, Appleton-Century-Crofts, bladzijde 279 tot en met 296: blocking"
+  - en: "Richard S. Sutton and Andrew G. Barto (1981), *Toward a modern theory of adaptive networks: Expectation and prediction*, Psychological Review 88(2), pages 135 to 170: the Rescorla-Wagner rule is the rule of Widrow and Hoff (1960) for a linear unit"
+    nl: "Richard S. Sutton en Andrew G. Barto (1981), *Toward a modern theory of adaptive networks: Expectation and prediction*, Psychological Review 88(2), bladzijde 135 tot en met 170: de regel van Rescorla en Wagner is de regel van Widrow en Hoff (1960) voor een lineaire eenheid"
+  - en: "Richard S. Sutton and Andrew G. Barto (1987), *A temporal-difference model of classical conditioning*, *Proceedings of the Ninth Annual Conference of the Cognitive Science Society*, pages 355 to 378: TD learning as a model of conditioning within a trial"
+    nl: "Richard S. Sutton en Andrew G. Barto (1987), *A temporal-difference model of classical conditioning*, *Proceedings of the Ninth Annual Conference of the Cognitive Science Society*, bladzijde 355 tot en met 378: TD learning als model van conditionering binnen een trial"
+  - en: "Richard S. Sutton and Andrew G. Barto (2018), *Reinforcement Learning: An Introduction*, 2nd edition, MIT Press, chapter 14, on the Rescorla-Wagner model and the TD model side by side; free at incompleteideas.net"
+    nl: "Richard S. Sutton en Andrew G. Barto (2018), *Reinforcement Learning: An Introduction*, 2e editie, MIT Press, hoofdstuk 14, over het Rescorla-Wagner model en het TD-model naast elkaar; gratis op incompleteideas.net"
