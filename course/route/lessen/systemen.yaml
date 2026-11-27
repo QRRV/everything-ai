@@ -73,7 +73,8 @@ lessons:
   idea: "A production system is judged on four requirements: it keeps working when things go wrong (reliability), it grows with the number of users (scalability), others can change it (maintainability) and it follows a changing world (adaptability); you turn each into a number you can check, such as minutes of downtime a year or requests a second."
   covers: [ml-systemen-in-productie#3]
   requires: [sys-what-is-an-ml-system]
-  introduces: [c:reliability, c:scalability, c:maintainability, c:adaptability, c:service-level-objective]
+  introduces: [c:reliability, c:scalability, c:maintainability, c:adaptability, c:service-level-indicator, c:service-level-objective, c:service-level-agreement, c:error-budget]
+  mentions: [c:availability, c:deployment]
   data: []
   ladder: [python]
   needs: any

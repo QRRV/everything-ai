@@ -1,0 +1,42 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: sys-requirements
+minutes: 25
+title:
+  en: "Reliable, scalable, maintainable, adaptable"
+  nl: "Betrouwbaar, schaalbaar, onderhoudbaar, aanpasbaar"
+goal:
+  en: "name the four requirements a system in production is judged on, and turn a requirement into a number with a target: an SLI, an SLO and the error budget it leaves."
+  nl: "de vier eisen benoemen waarop een systeem in productie beoordeeld wordt, en van een eis een getal met een doel maken: een SLI, een SLO en het error budget dat de SLO overlaat."
+summary:
+  - en: "Huyen names four requirements for ML systems in production: reliability (the right thing at the right level, even when something fails), scalability (keeping up with growth, and shrinking again), maintainability (others can change it) and adaptability (it follows a changing world)."
+    nl: "Huyen noemt vier eisen aan ML-systemen in productie: betrouwbaarheid (het juiste doen op het juiste niveau, ook als er iets misgaat), schaalbaarheid (groei bijhouden, en weer krimpen), onderhoudbaarheid (anderen kunnen het systeem veranderen) en aanpasbaarheid (het systeem volgt een veranderende wereld)."
+  - en: "Each requirement has gone wrong at a real company: Amazon's S3 in 2017, OpenAI's image generation in 2025, Knight Capital's deployment in 2012 and Zillow's price forecasts in 2021. An ML system can also fail silently: a worse model keeps answering."
+    nl: "Elke eis is bij een echt bedrijf misgegaan: S3 van Amazon in 2017, het maken van afbeeldingen bij OpenAI in 2025, de deployment van Knight Capital in 2012 en de prijsvoorspellingen van Zillow in 2021. Een ML-systeem kan ook stil falen: een slechter model blijft antwoorden."
+  - en: "An SLI is a number you measure, usually the good events divided by all events; an SLO is a target for it over a period; an SLA is a promise in a contract. The error budget is 100% minus the SLO: 99.9% over 30 days allows 43.2 minutes of downtime."
+    nl: "Een SLI is een getal dat je meet, meestal goede gebeurtenissen gedeeld door alle gebeurtenissen; een SLO is een doel voor de SLI over een periode; een SLA is een belofte in een contract. Het error budget is 100% min de SLO: 99,9% over 30 dagen staat 43,2 minuten downtime toe."
+  - en: "Scalability is about the busiest moment, not the average: on the course's busy day, the average minute needs less than 1 server, and 20 minutes of storm need 5 to meet the SLO."
+    nl: "Schaalbaarheid gaat over het drukste moment, niet over het gemiddelde: op de drukke dag van de course heeft de gemiddelde minuut minder dan 1 server nodig, en vragen 20 minuten storm er 5 om de SLO te halen."
+can_now:
+  - en: "measure an SLI as good events divided by all events"
+    nl: "een SLI meten als goede gebeurtenissen gedeeld door alle gebeurtenissen"
+    by: share
+  - en: "work out what is left of an error budget after outages"
+    nl: "uitrekenen wat er na storingen over is van een error budget"
+    by: budget
+  - en: "tell which of the four requirements a system fails"
+    nl: "zeggen aan welke van de vier eisen een systeem niet voldoet"
+    by: which
+  - en: "tell an SLO from a wish that nobody can check"
+    nl: "een SLO onderscheiden van een wens die niemand kan controleren"
+    by: slo
+further_reading:
+  - en: "Chip Huyen (2022), *Designing Machine Learning Systems*, O'Reilly, chapter 2: the four requirements for ML systems"
+    nl: "Chip Huyen (2022), *Designing Machine Learning Systems*, O'Reilly, hoofdstuk 2: de vier eisen aan ML-systemen"
+  - en: "Betsy Beyer, Chris Jones, Jennifer Petoff and Niall Richard Murphy (eds., 2016), *Site Reliability Engineering*, O'Reilly, free at sre.google: the chapters *Embracing Risk* and *Service Level Objectives*, and the table of allowed downtime in appendix A"
+    nl: "Betsy Beyer, Chris Jones, Jennifer Petoff en Niall Richard Murphy (red., 2016), *Site Reliability Engineering*, O'Reilly, gratis op sre.google: de hoofdstukken *Embracing Risk* en *Service Level Objectives*, en de tabel met toegestane downtime in bijlage A"
+  - en: "U.S. Securities and Exchange Commission (2013), *In the Matter of Knight Capital Americas LLC*, Release No. 70694: what went wrong on 1 August 2012"
+    nl: "U.S. Securities and Exchange Commission (2013), *In the Matter of Knight Capital Americas LLC*, Release No. 70694: wat er op 1 augustus 2012 misging"
+  - en: "Amazon Web Services (2017), *Summary of the Amazon S3 Service Disruption in the Northern Virginia (US-EAST-1) Region*: the outage of 28 February 2017"
+    nl: "Amazon Web Services (2017), *Summary of the Amazon S3 Service Disruption in the Northern Virginia (US-EAST-1) Region*: de storing van 28 februari 2017"

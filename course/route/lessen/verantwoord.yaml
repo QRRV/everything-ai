@@ -1438,7 +1438,7 @@ lessons:
   covers: [d25-safety-engineering#2]
   requires: [rai-risk-decomposition, prob-basics]
   introduces: [c:nines-of-reliability]
-  mentions: [c:time-horizon]
+  mentions: [c:time-horizon, c:error-budget, c:service-level-agreement]
   data: []
   ladder: [python]
   needs: any
