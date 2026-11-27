@@ -1,0 +1,46 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: sys-environments
+minutes: 25
+title:
+  en: "The same packages everywhere: environments and pinning"
+  nl: "Overal dezelfde packages: omgevingen en vaste versies"
+goal:
+  en: "give every project its own virtual environment, find the packages whose versions differ between two computers, and say why a lock file installs the same versions everywhere while a range does not."
+  nl: "elk project een eigen virtual environment geven, de packages vinden waarvan de versie verschilt tussen twee computers, en zeggen waarom een lock file overal dezelfde versies installeert en een bereik niet."
+summary:
+  - en: "On 16 June 2024, NumPy 2.0.0 came out, and a package compiled against NumPy 1.x stopped at its import. A project with the line numpy and no version got 2.0.0 from then on; the same code ran fine on a computer set up the week before."
+    nl: "Op 16 juni 2024 kwam NumPy 2.0.0 uit, en een package dat tegen NumPy 1.x gecompileerd was stopte al bij de import. Een project met de regel numpy zonder versie kreeg vanaf dat moment 2.0.0; dezelfde code draaide prima op een computer die een week eerder was ingericht."
+  - en: "A virtual environment is a folder with its own Python and its own packages for one project, so two projects can use two versions of pandas on one laptop. It stays out of git."
+    nl: "Een virtual environment is een map met een eigen Python en eigen packages voor één project, zodat twee projecten twee versies van pandas op één laptop kunnen gebruiken. De map blijft buiten git."
+  - en: "An installer takes the newest release a range allows, so a range gives a different version as new releases come out. Versions compare as tuples, part by part: as strings, 2.10.0 would come before 2.9.0."
+    nl: "Een installer neemt de nieuwste release die een bereik toestaat, dus geeft een bereik een andere versie zodra er nieuwe releases uitkomen. Versies vergelijk je als tuples, deel voor deel: als strings zou 2.10.0 eerder komen dan 2.9.0."
+  - en: "Pinning the packages you name is not enough, because they need packages of their own. A lock file such as uv.lock records the exact version of every package and is committed, and uv sync installs the same from it everywhere."
+    nl: "Vaste versies voor de packages die je noemt zijn niet genoeg, want deze packages hebben zelf packages nodig. Een lock file zoals uv.lock legt de exacte versie van elk package vast en gaat mee in git, en met uv sync krijgt elke computer dezelfde versies."
+can_now:
+  - en: "list the packages whose versions differ between two computers"
+    nl: "de packages opnoemen waarvan de versie verschilt tussen twee computers"
+    by: differences
+  - en: "find the newest version a range of versions allows"
+    nl: "de nieuwste versie vinden die een bereik van versies toestaat"
+    by: resolve
+  - en: "say why exact versions in pyproject.toml are not yet a lock file"
+    nl: "zeggen waarom exacte versies in pyproject.toml nog geen lock file zijn"
+    by: lock
+  - en: "run two projects that need different versions of a package on one computer"
+    nl: "twee projecten die verschillende versies van een package nodig hebben op één computer draaien"
+    by: projects
+further_reading:
+  - en: "Python documentation on the venv module, *Creation of virtual environments*, and PEP 405 (2011), which added virtual environments to Python 3.3"
+    nl: "Python-documentatie over de module venv, *Creation of virtual environments*, en PEP 405 (2011), waarmee virtual environments in Python 3.3 kwamen"
+  - en: "PEP 440, *Version Identification and Dependency Specification*: how versions and ranges such as >=1.24,<2 are written and compared"
+    nl: "PEP 440, *Version Identification and Dependency Specification*: hoe versies en bereiken zoals >=1.24,<2 geschreven en vergeleken worden"
+  - en: "uv documentation, *Structure and files*: pyproject.toml, the .venv folder and uv.lock, and why the lock file goes into version control"
+    nl: "uv-documentatie, *Structure and files*: pyproject.toml, de map .venv en uv.lock, en waarom de lock file in versiebeheer hoort"
+  - en: "NumPy, *NumPy 2.0.0 Release Notes* and the *NumPy 2.0 migration guide*: what changed, and why packages built for NumPy 1.x had to be rebuilt"
+    nl: "NumPy, *NumPy 2.0.0 Release Notes* en de *NumPy 2.0 migration guide*: wat er veranderde, en waarom packages voor NumPy 1.x opnieuw gebouwd moesten worden"
+  - en: "scikit-learn documentation, *Model persistence*: why a saved model belongs with the versions it was trained with"
+    nl: "scikit-learn-documentatie, *Model persistence*: waarom een opgeslagen model hoort bij de versies waarmee het getraind is"
+  - en: "PEP 751, accepted in 2025, *A file format to record Python dependencies for installation reproducibility*: pylock.toml, the standard lock file"
+    nl: "PEP 751, aangenomen in 2025, *A file format to record Python dependencies for installation reproducibility*: pylock.toml, de standaard lock file"
