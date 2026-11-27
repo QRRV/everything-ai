@@ -1,0 +1,44 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: sys-model-package
+minutes: 35
+title:
+  en: "Packing a model: weights, settings and a safe format"
+  nl: "Een model inpakken: weights, instellingen en een veilig formaat"
+goal:
+  en: "pack a model so that it can be handed over: write its weights as a safetensors file byte by byte, read one tensor back out of the bytes, and say what belongs in config.json beside it."
+  nl: "een model zo inpakken dat je het kunt doorgeven: de weights byte voor byte als safetensors-bestand schrijven, één tensor uit de bytes teruglezen, en zeggen wat er in config.json ernaast hoort."
+summary:
+  - en: "A model you hand over is more than its weights: someone also needs its class and settings, how an input goes in, what each output means and its version. A model package keeps the weights in one file and the rest in a config.json beside it."
+    nl: "Een model doorgeven is meer dan de weights doorgeven: iemand heeft ook de class en de instellingen nodig, hoe een input erin gaat, wat elke output betekent en de versie. Een modelpakket houdt de weights in één bestand en de rest in een config.json ernaast."
+  - en: "Serialization writes a value as bytes, so that another program can build it again. torch.save uses Python's pickle, which holds steps that can run any code while it loads; torch.load with weights_only=True refuses them."
+    nl: "Serialisatie schrijft een waarde als bytes, zodat een ander programma de waarde weer kan opbouwen. torch.save gebruikt de pickle van Python, met stappen die tijdens het laden willekeurige code kunnen uitvoeren; torch.load met weights_only=True weigert deze stappen."
+  - en: "A safetensors file holds 8 bytes with the length of the header, lowest byte first, a JSON header with the dtype, shape and data_offsets of each tensor, and then the raw numbers: reading it takes slices and runs nothing."
+    nl: "Een safetensors-bestand bevat 8 bytes met de lengte van de header, de laagste byte eerst, een JSON-header met het dtype, de shape en de data_offsets van elke tensor, en dan de onbewerkte getallen: lezen neemt slices en voert niets uit."
+  - en: "The offsets count bytes from the first byte after the header, 4 per float32 number, one tensor after another with no hole; the end of a tensor is the first byte after it, as in a slice."
+    nl: "De offsets tellen bytes vanaf de eerste byte na de header, 4 per float32-getal, de ene tensor na de andere zonder gat; het eind van een tensor is de eerste byte erna, zoals bij een slice."
+can_now:
+  - en: "give every tensor of a state_dict its place in the bytes of a safetensors file"
+    nl: "elke tensor van een state_dict een plek geven in de bytes van een safetensors-bestand"
+    by: header
+  - en: "read one tensor out of the bytes of a safetensors file, whatever the length of its header"
+    nl: "één tensor uit de bytes van een safetensors-bestand lezen, hoe lang de header ook is"
+    by: read-tensor
+  - en: "explain why loading a pickle from a stranger is a risk, and a safetensors file is not"
+    nl: "uitleggen waarom een pickle van een onbekende laden een risico is, en een safetensors-bestand niet"
+    by: pickle
+  - en: "say what a weights file does not tell, and so belongs in config.json beside it"
+    nl: "zeggen wat een bestand met weights niet vertelt, en dus in config.json ernaast hoort"
+    by: package
+further_reading:
+  - en: "safetensors, the README on GitHub: the format, its rules, and why it was made"
+    nl: "safetensors, de README op GitHub: het formaat, de regels, en waarom het gemaakt is"
+  - en: "Hugging Face (2023), *Audit shows that safetensors is safe and ready to become the default*: the audit by Trail of Bits"
+    nl: "Hugging Face (2023), *Audit shows that safetensors is safe and ready to become the default*: de audit door Trail of Bits"
+  - en: "Python documentation, *pickle*: the warning at the top, and how a pickle rebuilds objects"
+    nl: "Python-documentatie, *pickle*: de waarschuwing bovenaan, en hoe een pickle objecten opnieuw opbouwt"
+  - en: "PyTorch documentation, *Serialization semantics*: what torch.save writes, and weights_only"
+    nl: "PyTorch-documentatie, *Serialization semantics*: wat torch.save schrijft, en weights_only"
+  - en: "Hugging Face Hub documentation, *Pickle Scanning*: how a pickle runs code while it loads"
+    nl: "Hugging Face Hub-documentatie, *Pickle Scanning*: hoe een pickle tijdens het laden code uitvoert"
