@@ -50,6 +50,7 @@ modules:
   fundament/grafen-en-ruimte: {en: "Graphs and space", nl: "Grafen en ruimte"}
   fundament/taalmodellen: {en: "Language models", nl: "Language models"}
   fundament/onderzoek-basis: {en: "Research", nl: "Onderzoek"}
+  fundament/proeven: {en: "A taste of every domain", nl: "Proeven van elk domein"}
   # the shared modules of the foundation, also those without lessons yet: res-whats-next names what a domain borrows
   fundament/data-bronnen: {en: "Python, SQL and data, further", nl: "Python, SQL en data, verder"}
   fundament/wiskunde: {en: "Math, formally", nl: "Wiskunde, formeel"}
@@ -105,6 +106,8 @@ modules:
   systemen/hardware: {en: "Hardware", nl: "Hardware"}
   systemen/snel-trainen: {en: "Training fast", nl: "Snel trainen"}
   systemen/productie: {en: "ML in production", nl: "ML in productie"}
+  systemen/data: {en: "Data for ML", nl: "Data voor ML"}
+  systemen/inference: {en: "Inference", nl: "Inference"}
   verantwoord/ethiek: {en: "Ethics", nl: "Ethiek"}
   verantwoord/fairness: {en: "Fairness", nl: "Fairness"}
   verantwoord/uitleggen: {en: "Explaining models", nl: "Modellen uitleggen"}

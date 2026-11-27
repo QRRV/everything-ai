@@ -109,6 +109,8 @@ les_ok:
   reden: "wat NLP is, en het verschil tussen tekst begrijpen en tekst maken; de kaart zet die subonderwerpen bij de kern (module taalmodellen), omdat het bigrammodel erop leunt, maar de kern heeft er geen eigen les voor. Het domein taal opent ermee, omdat elke les daarna het woord NLP gebruikt."
 - les: nlp-why-language-is-hard
   reden: "ambiguïteit, variatie en context: net als nlp-what-is-nlp een subonderwerp dat de kaart bij de kern zet en waar de kern geen eigen les voor heeft. Het domein taal legt het uit als tweede les, omdat de taalkunde daarna op die drie woorden bouwt."
+- les: llm-model-card
+  reden: "een model card voor je eigen GPT, met de uitkomsten van de evaluaties en de red-team-test van het domein llm: de laatste stap van de route llm. Model cards zelf horen bij systemen, waar sys-model-card ze op basisniveau uitlegt; deze les past dat toe op het eigen chatmodel en staat daarom bij llm/evalueren."
 - les: rl-sarsa
   reden: "SARSA en Q-learning: de kaart zet dat subonderwerp bij de kern, omdat rl-q-learning er de helft van dekt. SARSA, en het verschil tussen on-policy en off-policy dat het naast Q-learning laat zien, krijgt een eigen les in het domein rl, na TD(0), omdat het op de TD-error van die les bouwt."
 
@@ -251,10 +253,9 @@ fundament:
     - {titel: "Samenwerken of verraden: een toernooi van strategieën in het prisoner's dilemma", proef: multi-agent}
     - {titel: "AI in een vakgebied: een echte vraag uit de wetenschap met open data", proef: toepassingen}
     - {titel: "Mens en machine: waar mensen goed in zijn en machines niet (Moravec), en wat de AI Act verbiedt", proef: mens}
-    - {titel: "Hoe snel is je model? FLOPs, FLOP/s, tokens per seconde en waar de tijd heen gaat", proef: systemen}
     - {titel: "Waarom kan een netwerk alles leren? De universele benaderingsstelling, en een netwerk dat zelfs willekeurige labels uit zijn hoofd leert", proef: dl-verdieping}
     - {titel: "Kies je domein: de kaart van alle domeinen, hun projecten en hoe ze samenhangen", proef: null}
-    tekst: "Acht korte proeflessen voor de domeinen die er nog geen goede in het fundament hebben, en een les waarin je je domein kiest. De andere domeinen hebben hun proefles al: beeld (afbeeldingen als getallen, convolutie), taal en LLM's (de taalmodellen), klassieke ML, klassieke AI en RL (meer modellen, zonder labels, agents), onzekerheid (Bayes, samenhang en oorzaak), verantwoord (wie er in de data zit), bouwen (AI-hulpmiddelen gebruiken) en onderzoek."
+    tekst: "Korte proeflessen voor de domeinen die er nog geen goede in het fundament hebben, en een les waarin je je domein kiest. De proefles van systemen staat in de route: hoe snel is je model (FLOPs, FLOP/s en tokens per seconde, sys-how-fast). Zeven komen nog. De andere domeinen hebben hun proefles al: beeld (afbeeldingen als getallen, convolutie), taal en LLM's (de taalmodellen), klassieke ML, klassieke AI en RL (meer modellen, zonder labels, agents), onzekerheid (Bayes, samenhang en oorzaak), verantwoord (wie er in de data zit), bouwen (AI-hulpmiddelen gebruiken) en onderzoek."
 
   # ---------------- gedeelde modules: binnengehaald door de domeinen die ze nodig hebben ----------------
   - id: data-bronnen
@@ -947,7 +948,7 @@ domeinen:
   titel_en: "ML systems, hardware and MLOps"
   kaart: [D23]
   doel: "Wat er nodig is om modellen snel te trainen, betrouwbaar te serveren en in productie te houden: hardware, kernels, parallellisme, MLOps en inference."
-  proef: nieuw
+  proef: [sys-how-fast]
   gebruikt: {basis: [wiskunde], gevorderd: [data-bronnen, signalen-en-meetkunde, trainen, klassieke-modellen-formeel, attention], expert: []}
   project:
     id: ops

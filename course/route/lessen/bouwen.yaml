@@ -20,7 +20,7 @@ lessons:
   requires: [start-using-ai-tools]
   introduces: [c:context-window, c:open-weights, p:privacy-hygiene]
   uses: [p:verify-ai-output, c:ai-assistant, q:choice, q:predict]
-  mentions: [c:program, c:model, c:language-model, c:token]
+  mentions: [c:program, c:model, c:language-model, c:token, c:data-center]
   warns: [window]
   data: []
   needs: any
@@ -222,7 +222,7 @@ lessons:
   requires: [build-tokens-prices, lm-base-vs-chat, py-json]
   introduces: [c:api, c:endpoint, c:http-request, c:openai-compatible-api, c:local-server, py:urllib-request]
   uses: [c:token, c:input-token, c:output-token, c:chat-model, c:base-model, c:message-role, c:json, c:byte, c:open-weights, py:json, py:dict, py:list, py:indexing, py:import, py:def, py:return, py:with, py:string-literal, q:choice, q:exercise-with-check, q:run-cell]
-  mentions: [c:max-tokens, c:embedding]
+  mentions: [c:max-tokens, c:embedding, c:data-center]
   data: [model-qwen3-0.6b, course-apis-qwen]
   ladder: [python]
   needs: any
@@ -313,7 +313,7 @@ lessons:
   requires: [build-choose-model]
   introduces: [c:local-runtime, c:inference-provider]
   uses: [c:api, c:endpoint, c:openai-compatible-api, c:local-server, c:llm-routing, c:open-weights, c:weight, c:model-parameter, c:inference, c:byte, py:urllib-request, py:json, py:dict, py:import, py:def, py:return, py:with, py:arithmetic, q:choice, q:exercise-with-check, q:run-cell]
-  mentions: [c:quantization, c:api-key]
+  mentions: [c:quantization, c:api-key, c:data-center, c:tokens-per-second]
   data: [model-qwen3-0.6b, course-apis-qwen]
   ladder: [python]
   needs: any

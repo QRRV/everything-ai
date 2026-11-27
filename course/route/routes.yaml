@@ -195,6 +195,8 @@ routes:
   - lm-nll
   - lm-smoothing
   - lm-bigram-neural
+  # ---------- basis: fundament/proeven ----------
+  - sys-how-fast
   # ---------- basis: taal/tekst-verwerken ----------
   - {id: lm-naive-bayes, extra: true}
   # ---------- basis: fundament/onderzoek-basis ----------
@@ -227,6 +229,16 @@ routes:
   - lm-hallucination
   - {id: lm-model-families, extra: true}
   - {id: lm-peek-real-llm, extra: true}
+  # ---------- basis: systemen/hardware ----------
+  - sys-memory-hierarchy
+  # ---------- basis: fundament/wiskunde ----------
+  - num-integers-floats
+  # ---------- basis: systemen/hardware ----------
+  - sys-bits-per-number
+  - sys-why-training-costs-millions
+  # ---------- basis: systemen/snel-trainen ----------
+  - sys-profiler
+  - sys-training-compute
   # ---------- gevorderd: fundament/wiskunde ----------
   - math-derivative-rules
   - math-partial-derivatives
@@ -341,7 +353,7 @@ routes:
   - llm-eval-chat
   # ---------- expert: verantwoord/security ----------
   - llm-safety-eval
-  # ---------- expert: systemen/productie ----------
+  # ---------- expert: llm/evalueren ----------
   - llm-model-card
   # ---------- expert: llm/redeneren ----------
   - {id: llm-reasoning-idea, extra: true}
@@ -389,6 +401,8 @@ routes:
   - cv-nms
   - cv-map
   - cv-pretrained-detector
+  # ---------- basis: fundament/wiskunde ----------
+  - num-integers-floats
   # ---------- gevorderd: fundament/wiskunde ----------
   - math-derivative-rules
   - math-partial-derivatives
@@ -469,7 +483,8 @@ routes:
   title_nl: "Onderzoek: van een paper lezen tot er een nabouwen"
   short: "Research"
   short_nl: "Onderzoek"
-  # The basis of research is in the kern (onderzoek-basis); this route starts at gevorderd. Until advice 5 of
+  # The basis of research is in the kern (onderzoek-basis); this route starts at gevorderd, after the basis lessons of
+  # systemen that its expert steps on GPUs build on. Until advice 5 of
   # besluit 1.18 is carried out, its experiments and the guided reproduction still build on the GPT of the domain llm.
   milestones:
     - after: res-figures
@@ -481,6 +496,16 @@ routes:
   steps:
   # ---------- basis: llm/gebruiken ----------
   - lm-temperature
+  # ---------- basis: systemen/hardware ----------
+  - sys-memory-hierarchy
+  # ---------- basis: fundament/wiskunde ----------
+  - num-integers-floats
+  # ---------- basis: systemen/hardware ----------
+  - sys-bits-per-number
+  - sys-why-training-costs-millions
+  # ---------- basis: systemen/snel-trainen ----------
+  - sys-profiler
+  - sys-training-compute
   # ---------- gevorderd: fundament/wiskunde ----------
   - math-derivative-rules
   - math-partial-derivatives
@@ -1047,6 +1072,129 @@ routes:
   - rl-dopamine
   - rl-real-world
   - rl-milestones
+- id: systemen
+  domein: systemen
+  title: "ML systems, hardware and MLOps"
+  title_nl: "ML-systemen, hardware en MLOps"
+  short: "ML systems"
+  short_nl: "ML-systemen"
+  # The basics: docs/onderzoek/reports/Voorstel domein ML-systemen.md (besluit 1.18, advice 6). Its taster is in the kern
+  # (sys-how-fast). After the basics come the expert lessons of the domain that were built earlier on the GPT of the
+  # domain llm, with the steps of llm and the shared modules they need, until the domain's own gevorderd and expert
+  # levels are planned.
+  milestones:
+    - after: sys-browser-inference
+      en: "Basics done: you tracked, packed, tested and served your own model and watched it drift, you know what a chip, a data center and a training run cost in money and energy, and you measured where the time goes, from a training step to the first token of an answer."
+      nl: "Basis af: je hebt je eigen model gevolgd, verpakt, getest en als dienst laten draaien en zien driften, je weet wat een chip, een datacenter en een training kosten aan geld en energie, en je hebt gemeten waar de tijd heen gaat, van een trainingsstap tot het eerste token van een antwoord."
+  steps:
+  # ---------- basis: systemen/productie ----------
+  - sys-what-is-an-ml-system
+  - sys-lifecycle
+  - sys-ml-teams
+  - sys-requirements
+  - sys-framing
+  - sys-environments
+  - sys-reproducibility
+  - sys-experiment-tracking
+  - sys-model-versions
+  - sys-model-package
+  - sys-project-tracked-model
+  - sys-code-tests
+  - sys-behavior-tests
+  - sys-model-card
+  - sys-project-tested-model
+  - sys-deployment-patterns
+  - sys-serving-api
+  - sys-serving-path
+  - sys-monitoring
+  - sys-ml-failures
+  - sys-drift
+  - sys-feedback-loops
+  - sys-project-service
+  - sys-cloud
+  - sys-containers
+  - sys-cloud-costs
+  - sys-mlops
+  # ---------- basis: systemen/data ----------
+  - sys-data-quality
+  - sys-data-validation
+  # ---------- basis: systemen/hardware ----------
+  - sys-why-training-costs-millions
+  - sys-moores-law
+  - sys-memory-hierarchy
+  - sys-gpu-generations
+  # ---------- basis: fundament/wiskunde ----------
+  - num-integers-floats
+  # ---------- basis: systemen/hardware ----------
+  - sys-bits-per-number
+  - sys-tpus-npus
+  - sys-chip-supply-chain
+  - sys-data-centers
+  - sys-benchmarks
+  - sys-energy-per-answer
+  - sys-measure-energy
+  - sys-tco
+  # ---------- basis: systemen/snel-trainen ----------
+  - sys-profiler
+  - sys-training-compute
+  # ---------- basis: systemen/inference ----------
+  - sys-latency-and-cost
+  - sys-prefill-decode
+  - sys-ttft-tpot
+  - sys-serving-engines
+  - sys-edge-iot
+  - sys-onnx
+  - sys-mobile-runtimes
+  - sys-browser-inference
+  # ---------- gevorderd: fundament/wiskunde ----------
+  - math-derivative-rules
+  - math-partial-derivatives
+  - math-matrix-calculus
+  - prob-distributions
+  - num-floats-stability
+  # ---------- gevorderd: fundament/trainen ----------
+  - nn-gradient-check
+  - nn-backprop-tensors
+  - nn-vanishing-exploding
+  - nn-initialization
+  - nn-activation-stats
+  - nn-batchnorm
+  - nn-residual
+  - nn-layernorm
+  - opt-momentum
+  - opt-adam
+  - opt-adamw
+  - opt-lr-schedules
+  - opt-gradient-clipping
+  - nn-dropout
+  - nn-embedding-layer
+  - nn-trainer
+  - nn-deep-net-project
+  # ---------- gevorderd: fundament/attention ----------
+  - lm-mlp-context
+  - attn-scores
+  - attn-qkv
+  - attn-scale
+  - attn-causal-mask
+  - attn-multi-head
+  - attn-positions
+  - attn-transformer-block
+  # ---------- gevorderd: llm/gpt ----------
+  - gpt-assemble
+  - gpt-count
+  - gpt-train-chars
+  # ---------- expert: systemen/hardware ----------
+  - sys-memory-roofline
+  - sys-number-formats
+  # ---------- expert: systemen/snel-trainen ----------
+  - sys-mixed-precision
+  - sys-memory-accounting
+  - sys-compute-6nd
+  - sys-profiling-mfu
+  - sys-triton-kernel
+  - {id: sys-flash-attention, extra: true}
+  - {id: sys-torch-compile, extra: true}
+  - {id: sys-gradient-checkpointing, extra: true}
 goals:
 - {id: doel-attention, goal: attn-multi-head, title_nl: "Ik wil attention snappen"}
 - {id: doel-eigen-gpt, goal: gpt-generate, title_nl: "Ik wil zo snel mogelijk mijn eigen GPT"}

@@ -410,7 +410,7 @@ lessons:
   requires: [rai-bias-in-data, ml-workflow]
   introduces: [c:historical-bias, c:representation-bias, c:measurement-bias, c:implicit-bias, c:in-group-bias, c:selection-bias]
   uses: [c:data-bias, c:harmful-bias, c:harm, c:model, c:feature, c:label, c:training, c:example, c:metric, c:prediction, py:dict, py:list, py:for, py:if, py:comparison, py:arithmetic, py:indexing, py:print, py:comment, py:variable, py:underscore-name, py:string-literal, py:int, q:predict, q:choice, q:exercise-with-check, q:run-cell]
-  mentions: [c:benchmark]
+  mentions: [c:benchmark, c:deployment]
   data: []
   ladder: [python]
   needs: any
@@ -622,7 +622,7 @@ lessons:
   requires: [rai-fairness-benchmarks]
   introduces: [c:fairness-review]
   uses: [c:fairness-benchmark, c:fairness, c:group-fairness, c:selection-rate, c:demographic-parity, c:bias-mitigation, c:reweighing, c:metric, c:harm, c:model, c:paper, py:dict, py:list, py:append, py:for, py:if, py:comparison, py:arithmetic, py:indexing, py:min-max, py:print, py:comment, py:variable, py:underscore-name, py:string-literal, py:float, py:int, q:predict, q:choice, q:exercise-with-check, q:run-cell]
-  mentions: [c:responsible-ai, c:algorithm-register, c:techno-solutionism, c:code-review]
+  mentions: [c:responsible-ai, c:algorithm-register, c:techno-solutionism, c:code-review, c:data-scientist]
   data: []
   ladder: [python]
   needs: any
@@ -777,7 +777,7 @@ lessons:
   covers: [model-agnostische-post-hoc-methoden#0]
   requires: [rai-global-surrogate]
   introduces: [c:lime]
-  mentions: [c:normal-distribution]
+  mentions: [c:normal-distribution, c:data-scientist]
   data: [uci-adult]
   ladder: [python, numpy]
   needs: any
@@ -1088,7 +1088,7 @@ lessons:
   covers: [dreigingsmodellering#2, dreigingsmodellering#3]
   requires: [rai-security-basics, ml-workflow]
   introduces: [c:evasion-attack, c:white-box, c:adversarial-example, c:fgsm, py:np-sign]
-  mentions: [c:black-box, c:misuse, c:privacy, c:pixel, c:data-poisoning, s:epsilon]
+  mentions: [c:black-box, c:misuse, c:privacy, c:pixel, c:data-poisoning, s:epsilon, c:ml-system]
   data: []
   ladder: [python]
   needs: any
@@ -1312,7 +1312,7 @@ lessons:
   covers: [ai-veiligheid-als-vakgebied#0, ai-veiligheid-als-vakgebied#3]
   requires: [rai-two-kinds-of-harm]
   introduces: [c:ai-safety, c:structural-risk, c:alignment, c:misuse, c:accident, c:loss-of-control, c:international-ai-safety-report]
-  mentions: [c:chat-model]
+  mentions: [c:chat-model, c:data-center]
   data: []
   ladder: [python]
   needs: any
@@ -1368,7 +1368,7 @@ lessons:
   covers: [ai-veiligheid-als-vakgebied#1]
   requires: [rai-goodhart]
   introduces: [c:outer-alignment, c:inner-alignment]
-  mentions: [c:reward-misspecification]
+  mentions: [c:reward-misspecification, c:ml-system]
   data: []
   ladder: [python]
   needs: any
@@ -1563,6 +1563,7 @@ lessons:
   covers: [d25-systemische-en-structurele-risicos#5]
   requires: [rai-race-and-selection]
   introduces: [c:systemic-safety, c:offense-defense-balance]
+  mentions: [c:ml-system]
   data: []
   ladder: [python]
   needs: any
@@ -1590,7 +1591,7 @@ lessons:
   covers: [het-debat-over-catastrofale-en-existentiele-risico-s#2]
   requires: [rai-xrisk-arguments]
   introduces: [c:accumulative-risk, c:value-lock-in]
-  mentions: [c:automation-bias]
+  mentions: [c:automation-bias, c:internet-of-things]
   data: []
   ladder: [python]
   needs: any
@@ -1701,7 +1702,7 @@ lessons:
   covers: [evaluaties-van-gevaarlijke-capabilities#0, evaluaties-van-gevaarlijke-capabilities#3, evaluaties-van-gevaarlijke-capabilities#6]
   requires: [rai-frontier-frameworks, rai-boxing-and-tool-ai]
   introduces: [c:dangerous-capability-evaluation]
-  mentions: [c:ai-safety-institute, c:false-positive-rate]
+  mentions: [c:ai-safety-institute, c:false-positive-rate, c:system-card]
   data: []
   ladder: [python]
   needs: any
@@ -1715,7 +1716,7 @@ lessons:
   covers: [evaluaties-van-gevaarlijke-capabilities#4]
   requires: [rai-dangerous-capabilities, ml-logistic-regression, math-log-scales]
   introduces: [c:time-horizon]
-  mentions: [c:computer-use]
+  mentions: [c:computer-use, c:doubling-time]
   data: []
   ladder: [python, numpy]
   needs: any

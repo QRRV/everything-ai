@@ -318,9 +318,9 @@ lessons:
   module: hardware
   idea: "Moving data from GPU memory is often slower than calculating with it; the roofline shows whether an operation is limited by memory or by compute."
   covers: [gpu-architectuur-geheugen-en-roofline#0, gpu-architectuur-geheugen-en-roofline#3]
-  requires: [torch-gpu, gpt-count]
-  introduces: [c:memory-hierarchy, c:arithmetic-intensity, c:roofline, c:bandwidth, c:ridge-point, c:memory-bound, c:compute-bound]
-  uses: [c:gpu, c:device, py:to-device, c:flops-per-token, c:parameter-count, c:flops, c:matrix-multiplication, py:nn-linear, c:layernorm, c:softmax, c:relu, c:residual-connection, c:mlp, c:batch-size, c:token, c:gpt, c:vocabulary, c:float32, py:def, py:return, py:if, py:print, py:comment, q:predict, q:choice, q:explain, q:exercise-with-check, q:run-cell]
+  requires: [torch-gpu, gpt-count, sys-memory-hierarchy]
+  introduces: [c:arithmetic-intensity, c:roofline, c:ridge-point, c:memory-bound, c:compute-bound]
+  uses: [c:memory-hierarchy, c:bandwidth, c:gpu, c:device, py:to-device, c:flops-per-token, c:parameter-count, c:flops, c:matrix-multiplication, py:nn-linear, c:layernorm, c:softmax, c:relu, c:residual-connection, c:mlp, c:batch-size, c:token, c:gpt, c:vocabulary, c:float32, py:def, py:return, py:if, py:print, py:comment, q:predict, q:choice, q:explain, q:exercise-with-check, q:run-cell]
   ladder: [python, torch]
   needs: any
 
@@ -331,9 +331,9 @@ lessons:
   module: hardware
   idea: "16-bit numbers halve memory and speed up tensor cores; BF16 keeps the range of FP32 at lower precision."
   covers: [getalformaten#0]
-  requires: [num-floats-stability, sys-memory-roofline]
-  introduces: [c:fp16, c:bf16, c:tf32, c:int8, c:mantissa, c:numerical-precision, c:number-range, c:tensor-core, py:torch-dtype]
-  uses: [c:floating-point, c:overflow, c:underflow, c:float32, c:memory-bound, c:roofline, c:bandwidth, c:gpu, c:gradient, c:weight, c:exponent, c:dtype, c:matrix-multiplication, py:torch-tensor, py:math-module, py:abs, py:for, py:list, py:def, py:return, py:import, py:print, py:comment, q:predict, q:choice, q:explain, q:exercise-with-check, q:run-cell]
+  requires: [num-floats-stability, sys-memory-roofline, sys-bits-per-number]
+  introduces: [c:tensor-core]
+  uses: [c:fp16, c:bf16, c:tf32, c:int8, c:mantissa, c:numerical-precision, c:number-range, py:torch-dtype, c:floating-point, c:overflow, c:underflow, c:float32, c:memory-bound, c:roofline, c:bandwidth, c:gpu, c:gradient, c:weight, c:exponent, c:dtype, c:matrix-multiplication, py:torch-tensor, py:math-module, py:abs, py:for, py:list, py:def, py:return, py:import, py:print, py:comment, q:predict, q:choice, q:explain, q:exercise-with-check, q:run-cell]
   mentions: [c:quantization, c:bit]
   warns: [precision]
   ladder: [python, torch]
@@ -374,9 +374,9 @@ lessons:
   module: snel-trainen
   idea: "Training costs about 6 FLOPs per parameter per token, so compute is roughly 6 times parameters times tokens; divide by your GPU's speed to get the time."
   covers: [compute-en-kostenramingen#0, compute-en-kostenramingen#1]
-  requires: [gpt-count, gpt-train-chars, sys-memory-roofline, sys-memory-accounting]
-  introduces: [c:six-nd-rule, c:gpu-hour]
-  uses: [c:flops-per-token, c:flops, c:parameter-count, c:model-parameter, c:token, c:run, c:epoch, c:attention, c:context-window, c:gpu, c:bf16, c:float32, c:mixed-precision, c:forward-pass, c:backward-pass, c:gradient, c:optimizer, c:adamw, c:mini-batch, c:gpt, c:memory-bound, c:checkpoint, py:def, py:return, py:print, py:comment, py:underscore-name, py:scientific-notation, py:arithmetic, py:float, q:predict, q:choice, q:explain, q:exercise-with-check, q:run-cell]
+  requires: [gpt-count, gpt-train-chars, sys-memory-roofline, sys-memory-accounting, sys-training-compute]
+  introduces: [c:attention-flops]
+  uses: [c:gpu-hour, c:six-nd-rule, c:flops-per-token, c:flops, c:parameter-count, c:model-parameter, c:token, c:run, c:epoch, c:attention, c:context-window, c:gpu, c:bf16, c:float32, c:mixed-precision, c:forward-pass, c:backward-pass, c:gradient, c:optimizer, c:adamw, c:mini-batch, c:gpt, c:memory-bound, c:checkpoint, py:def, py:return, py:print, py:comment, py:underscore-name, py:scientific-notation, py:arithmetic, py:float, q:predict, q:choice, q:explain, q:exercise-with-check, q:run-cell]
   mentions: [c:mfu, c:throughput]
   needs: any
 
@@ -387,9 +387,9 @@ lessons:
   module: snel-trainen
   idea: "Measure tokens per second and the fraction of the GPU's peak you use (MFU); the profiler shows where the time goes."
   covers: [profiling-en-prestatiemetrics#0, profiling-en-prestatiemetrics#1, profiling-en-prestatiemetrics#2, profiling-en-prestatiemetrics#3]
-  requires: [sys-compute-6nd, sys-memory-roofline]
-  introduces: [c:throughput, c:mfu, c:hfu, py:torch-profiler, py:cuda-synchronize]
-  uses: [c:six-nd-rule, c:flops, c:flops-per-token, c:parameter-count, c:model-parameter, c:token, c:gpu, c:memory-bound, c:compute-bound, c:ridge-point, c:roofline, c:mixed-precision, c:mlp, c:relu, c:adamw, c:optimizer, c:forward-pass, c:backward-pass, c:gpt, c:mini-batch, c:batch-size, c:training-loop, c:loss, c:cross-entropy, py:nn-linear, py:torch-randn, py:manual-seed, py:torch-optim, py:zero-grad, py:backward, py:optimizer-step, py:item, py:with, py:for, py:range, py:if, py:comprehension, py:def, py:return, py:print, py:comment, py:underscore-name, py:import, q:predict, q:choice, q:explain, q:exercise-with-check, q:run-cell]
+  requires: [sys-compute-6nd, sys-memory-roofline, sys-profiler]
+  introduces: [c:mfu, c:hfu, py:cuda-synchronize]
+  uses: [c:throughput, py:torch-profiler, c:six-nd-rule, c:flops, c:flops-per-token, c:parameter-count, c:model-parameter, c:token, c:gpu, c:memory-bound, c:compute-bound, c:ridge-point, c:roofline, c:mixed-precision, c:mlp, c:relu, c:adamw, c:optimizer, c:forward-pass, c:backward-pass, c:gpt, c:mini-batch, c:batch-size, c:training-loop, c:loss, c:cross-entropy, py:nn-linear, py:torch-randn, py:manual-seed, py:torch-optim, py:zero-grad, py:backward, py:optimizer-step, py:item, py:with, py:for, py:range, py:if, py:comprehension, py:def, py:return, py:print, py:comment, py:underscore-name, py:import, q:predict, q:choice, q:explain, q:exercise-with-check, q:run-cell]
   mentions: [c:operator-fusion]
   ladder: [torch]
   compute_minutes: 3
@@ -454,8 +454,8 @@ lessons:
 - id: llm-model-card
   title: "A model card for your model"
   level: expert
-  domein: systemen
-  module: productie
+  domein: llm
+  module: evalueren
   idea: "Write down what your model is for, what it was trained on, how it scored and where it fails, with the license of model and data."
   covers: [documentatie-platforms-en-llmops#0]
   requires: [llm-eval-chat, data-provenance, llm-safety-eval]

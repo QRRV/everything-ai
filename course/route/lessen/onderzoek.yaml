@@ -226,6 +226,7 @@ lessons:
   requires: [res-three-pass, math-matrix-calculus]
   introduces: [p:formula-to-code, c:label-smoothing, c:kronecker-delta, c:toy-example, py:torch-allclose, py:torch-eye]
   uses: [c:paper, c:cross-entropy, c:one-hot, c:softmax, c:logit, c:label, c:probability-distribution, c:batch-size, c:shape, c:gradient-checking, c:transformer, s:sigma-sum, py:nn-cross-entropy-loss, py:math-module, py:torch-tensor, py:dim, py:def, py:return, py:print, py:import, py:comment, py:underscore-name, q:predict, q:choice, q:explain, q:exercise-with-check, q:run-cell]
+  warns: [decode]
   needs: any
 
 - id: res-derivations

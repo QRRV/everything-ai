@@ -1,0 +1,736 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# Lessons of the domain systemen (ML systems: ML in production, data for ML, hardware, training fast and inference),
+# level basis. The plan: docs/onderzoek/reports/Voorstel domein ML-systemen.md (besluit 1.18, advice 6). The route systemen
+# in routes.yaml starts where the core ends and gives the order. Also here: the domain's taster in the kern (sys-how-fast)
+# and the basis lesson of the shared module wiskunde that the domain needs first (num-integers-floats). The expert lessons
+# of the domain, built earlier on the GPT of the domain llm, are in overige-takken.yaml. Every lesson here runs on a CPU.
+# Planning data; "introduces" is the plan and "uses" is filled in fully when a lesson is built. Format: ../FORMAT.md.
+map: v2.3
+lessons:
+
+# --- proeven: the taster of the domain, in the kern -----------------------------------------------------------------
+- id: sys-how-fast
+  title: "How fast is your model? FLOPs, FLOP/s and tokens per second"
+  level: basis
+  domein: fundament
+  module: proeven
+  idea: "Speed is work divided by rate: count the multiplications and additions a forward pass needs (its FLOPs), measure how many your computer does per second (FLOP/s), and you can predict how long a step takes; tokens per second says the same for a language model, and a timer around each part shows where the time really goes."
+  covers: [profiling-en-prestatiemetrics#0, profiling-en-prestatiemetrics#1]
+  requires: [nn-why-backprop, torch-gpu, lm-bigram-neural]
+  introduces: [c:flop-per-second, c:tokens-per-second, c:throughput]
+  data: []
+  ladder: [python, torch]
+  needs: any
+
+# --- productie: ML in production ------------------------------------------------------------------------------------
+- id: sys-what-is-an-ml-system
+  title: "More than a model: what an ML system is"
+  level: basis
+  domein: systemen
+  module: productie
+  idea: "An ML system is the model plus everything around it: the data coming in, features, training, serving, monitoring and the people who run it; in a real system the model is a small part of the code, and production asks for other things than research: quick answers for many users on data that keeps changing, instead of the best score on a fixed test set."
+  covers: [ml-systemen-in-productie#0, ml-systemen-in-productie#1]
+  requires: [ml-workflow, ml-pipelines]
+  introduces: [c:ml-system, c:technical-debt]
+  data: []
+  ladder: [python]
+  needs: any
+
+- id: sys-lifecycle
+  title: "From idea to retirement: the life cycle of an AI system"
+  level: basis
+  domein: systemen
+  module: productie
+  idea: "An AI system goes through stages, from scoping the problem through data, building, checking, deploying, operating and monitoring to retiring it, as ISO/IEC 22989 and 5338 describe; at each stage others are involved: the provider, the producer, the customer, partners, and the people the system decides about."
+  covers: [levenscyclus-en-stakeholderrollen#0, levenscyclus-en-stakeholderrollen#1, levenscyclus-en-stakeholderrollen#2]
+  requires: [sys-what-is-an-ml-system]
+  introduces: [c:ai-lifecycle, c:iso-iec-22989, c:ai-stakeholder, c:ai-subject]
+  data: []
+  ladder: [python]
+  needs: any
+
+- id: sys-ml-teams
+  title: "Who builds an ML system: roles and teams"
+  level: basis
+  domein: systemen
+  module: productie
+  idea: "Data scientists, ML engineers, MLOps engineers and platform engineers each own a part of the system; a company can put them together in one team per product, let one data scientist do everything from data to deployment, or give every team a shared platform, and each choice moves where the work gets stuck."
+  covers: [ml-systemen-in-productie#2, ml-systemen-in-productie#6]
+  requires: [sys-lifecycle]
+  introduces: [c:data-scientist, c:ml-engineer, c:ml-platform]
+  mentions: [c:deployment, c:mlops]
+  data: []
+  ladder: [python]
+  needs: any
+
+- id: sys-requirements
+  title: "Reliable, scalable, maintainable, adaptable"
+  level: basis
+  domein: systemen
+  module: productie
+  idea: "A production system is judged on four requirements: it keeps working when things go wrong (reliability), it grows with the number of users (scalability), others can change it (maintainability) and it follows a changing world (adaptability); you turn each into a number you can check, such as minutes of downtime a year or requests a second."
+  covers: [ml-systemen-in-productie#3]
+  requires: [sys-what-is-an-ml-system]
+  introduces: [c:reliability, c:scalability, c:maintainability, c:adaptability, c:service-level-objective]
+  data: []
+  ladder: [python]
+  needs: any
+
+- id: sys-framing
+  title: "Framing the problem for production"
+  level: basis
+  domein: systemen
+  module: productie
+  idea: "The same wish can become a classification, a regression or a ranking, and the choice decides what you can do later; when a system has two goals, such as relevant and safe, you train one model per goal and combine their scores with a weight, so you can change the balance without training again."
+  covers: [ml-systemen-in-productie#4]
+  requires: [sys-what-is-an-ml-system, ml-classification, ml-regression-metrics]
+  introduces: [c:problem-framing, c:decoupled-objectives]
+  data: []
+  ladder: [python]
+  needs: any
+
+- id: sys-environments
+  title: "The same packages everywhere: environments and pinning"
+  level: basis
+  domein: systemen
+  module: productie
+  idea: "Code that works on your computer can fail on another because a package has another version; a virtual environment keeps the packages of a project apart, and pinning every version, as this course does in pyproject.toml and uv.lock, makes the environment the same everywhere."
+  covers: [ontwikkelomgeving-tracking-en-reproduceerbaarheid#1]
+  requires: [sys-what-is-an-ml-system, py-own-modules, py-files]
+  introduces: [c:virtual-environment, c:dependency-pinning, c:lock-file]
+  warns: [environment]
+  data: []
+  ladder: [python]
+  needs: any
+
+- id: sys-reproducibility
+  title: "Same run, same result: seeds and determinism"
+  level: basis
+  domein: systemen
+  module: productie
+  idea: "A training run comes out the same again only when everything random has a seed, the data comes in the same order, and the same versions run on the same kind of hardware; you record all of it with the run, and you see how far apart runs with other seeds land."
+  covers: [ontwikkelomgeving-tracking-en-reproduceerbaarheid#4]
+  requires: [sys-environments, np-random, torch-mlp-digits]
+  introduces: [c:reproducibility]
+  mentions: [c:determinism, c:run-to-run-variance]
+  data: [qmnist]
+  ladder: [python, torch]
+  needs: any
+
+- id: sys-experiment-tracking
+  title: "Keeping track of your runs: experiment tracking"
+  level: basis
+  domein: systemen
+  module: productie
+  idea: "Every run writes its settings, its metrics per epoch and its result to a log, so you can compare runs later and find the best one; you write a small tracker yourself with log_param and log_metric, the same calls MLflow has."
+  covers: [ontwikkelomgeving-tracking-en-reproduceerbaarheid#2]
+  requires: [sys-reproducibility, py-json, torch-loss-curves]
+  introduces: [c:experiment-tracking, c:mlflow]
+  mentions: [c:json-lines]
+  data: [qmnist]
+  ladder: [python, torch]
+  needs: any
+
+- id: sys-model-versions
+  title: "Which model is this? Versions and a model registry"
+  level: basis
+  domein: systemen
+  module: productie
+  idea: "A model file gets its version from a hash of its contents, so one name can never hide two models; large files stay out of git with only a small pointer in it, as DVC does, and a model registry keeps per model its versions, which one is in production and how each was made."
+  covers: [ontwikkelomgeving-tracking-en-reproduceerbaarheid#3, packaging-testen-en-pipelines#1]
+  requires: [sys-experiment-tracking, torch-checkpoints]
+  introduces: [c:model-version, c:model-registry, c:dvc]
+  mentions: [c:hash]
+  data: []
+  ladder: [python]
+  needs: any
+
+- id: sys-model-package
+  title: "Packing a model: weights, settings and a safe format"
+  level: basis
+  domein: systemen
+  module: productie
+  idea: "A model you hand over is more than its weights: it needs its settings, its preprocessing and its version; the weights go in safetensors, a header in JSON followed by the raw numbers, which you write yourself, because a pickle file can run code while it loads."
+  covers: [packaging-testen-en-pipelines#0]
+  requires: [sys-model-versions, torch-pretrained]
+  introduces: [c:model-package, c:serialization]
+  mentions: [c:safetensors, c:insecure-deserialization]
+  data: []
+  ladder: [python, torch]
+  needs: any
+
+- id: sys-project-tracked-model
+  title: "Project: a demand model, tracked and packed"
+  level: basis
+  domein: systemen
+  module: productie
+  kind: project
+  project: ops
+  idea: "Your project starts with a model of how many bikes are rented per hour, trained on 2011: you train a few versions with your tracker, choose the best on the validation set, and pack it in safetensors with its settings and its version."
+  covers: []
+  requires: [sys-model-package, ml-validation-set, data-pandas]
+  introduces: []
+  mentions: [c:safetensors]
+  data: [bike-sharing]
+  ladder: [python, torch]
+  needs: any
+
+- id: sys-code-tests
+  title: "Tests for ML code"
+  level: basis
+  domein: systemen
+  module: productie
+  idea: "A unit test checks one function on an example where you know the answer, such as the preprocessing of one row; tests that check shapes and value ranges, and that the loss falls on one small batch, catch most bugs in training code before a long run, and a regression test keeps a fixed score from getting worse."
+  covers: [packaging-testen-en-pipelines#2]
+  requires: [sys-project-tracked-model, py-errors]
+  introduces: [c:model-assertion, c:overfit-one-batch]
+  mentions: [c:unit-test, c:regression-test, py:assert]
+  data: []
+  ladder: [python, torch]
+  needs: any
+
+- id: sys-behavior-tests
+  title: "Does the model behave? Behavioral tests"
+  level: basis
+  domein: systemen
+  module: productie
+  idea: "A model can score well and still fail in ways the test set never shows; behavioral tests check what it must do: a minimum it must get right, an answer that must not change when something unimportant changes (invariance), and one that must move the right way when something important changes (direction), as CheckList does."
+  covers: [packaging-testen-en-pipelines#2]
+  requires: [sys-code-tests]
+  introduces: [c:behavioral-testing, c:invariance-test, c:directional-test, c:minimum-functionality-test]
+  data: [bike-sharing]
+  ladder: [python]
+  needs: any
+
+- id: sys-model-card
+  title: "A model card for your model"
+  level: basis
+  domein: systemen
+  module: productie
+  idea: "A model card says what a model is for and not for, what data it learned from, how well it does per group and under which conditions, and what is known to go wrong; a system card does the same for a whole system around one or more models."
+  covers: [documentatie-platforms-en-llmops#0]
+  requires: [sys-what-is-an-ml-system, torch-pretrained, rai-bias-in-data]
+  introduces: [c:system-card, c:disaggregated-evaluation]
+  mentions: [c:intended-use]
+  data: []
+  ladder: [python]
+  needs: any
+
+- id: sys-project-tested-model
+  title: "Project: tests and a model card"
+  level: basis
+  domein: systemen
+  module: productie
+  kind: project
+  project: ops
+  idea: "Your demand model gets tests for its code and its behavior, such as more bikes in good weather and the same answer when only the row number changes, and a model card with its numbers, its limits and what it is not for."
+  covers: []
+  requires: [sys-behavior-tests, sys-model-card]
+  introduces: []
+  data: [bike-sharing]
+  ladder: [python, torch]
+  needs: any
+
+- id: sys-deployment-patterns
+  title: "Batch, online, streaming or on the device"
+  level: basis
+  domein: systemen
+  module: productie
+  idea: "A model can make its predictions in advance for everyone (batch), when a request comes in (online), on a stream of events as they happen, or on the user's own phone or laptop; batch is cheap but can be out of date, online is fresh but must be quick, and the choice follows from how soon an answer is needed and how many get used."
+  covers: [deployment-serving-en-release#0]
+  requires: [sys-what-is-an-ml-system]
+  introduces: [c:deployment, c:batch-inference, c:online-inference, c:streaming-inference]
+  warns: [streaming, device]
+  data: []
+  ladder: [python]
+  needs: any
+
+- id: sys-serving-api
+  title: "Your model behind an API"
+  level: basis
+  domein: systemen
+  module: productie
+  idea: "A model becomes a service when a program waits for requests: a request comes in over HTTP with the input as JSON, the server runs the model and sends the answer back as JSON with a status code; you write the handler, the course runs it on your own computer, and FastAPI, gRPC and Triton do the same at scale."
+  covers: [deployment-serving-en-release#1]
+  requires: [sys-deployment-patterns, sys-model-package, py-json, py-classes]
+  introduces: [c:model-serving, c:web-server, c:fastapi]
+  mentions: [c:http-request, c:http-status-code, c:endpoint, c:api]
+  data: []
+  ladder: [python]
+  needs: any
+
+- id: sys-serving-path
+  title: "Before and after the model: the serving path"
+  level: basis
+  domein: systemen
+  module: productie
+  idea: "Between a request and an answer, the input gets the same preprocessing as in training and the output becomes a decision, with a threshold and business rules; preprocessing that differs from training (training-serving skew) breaks a good model without a single error."
+  covers: [deployment-serving-en-release#2]
+  requires: [sys-serving-api, ml-feature-scaling, ml-confusion-matrix]
+  introduces: [c:training-serving-skew, c:business-rule]
+  data: []
+  ladder: [python]
+  needs: any
+
+- id: sys-monitoring
+  title: "Watching a running model: metrics, logs and alerts"
+  level: basis
+  domein: systemen
+  module: productie
+  idea: "A running model needs numbers about the service (requests a second, errors, latency and the slowest one percent) and about the model (what it predicts and how sure it is); you log every request as one structured line, and an alert goes off only when a number stays bad for a while, not on one spike."
+  covers: [monitoring-drift-en-hertraining#0]
+  requires: [sys-serving-api, stats-describe]
+  introduces: [c:model-monitoring, c:tail-latency, c:structured-logging, c:alert-rule]
+  mentions: [c:latency]
+  data: []
+  ladder: [python]
+  needs: any
+
+- id: sys-ml-failures
+  title: "How ML systems fail"
+  level: basis
+  domein: systemen
+  module: productie
+  idea: "Next to crashes and error messages, an ML system fails silently: it keeps answering, only worse, on inputs it never saw, on production data that differs from the training data, or because a step upstream changed a unit; a software monitor sees the first kind, and only the model's own numbers show the second."
+  covers: [monitoring-drift-en-hertraining#1]
+  requires: [sys-monitoring]
+  introduces: [c:silent-failure, c:edge-case]
+  data: []
+  ladder: [python]
+  needs: any
+
+- id: sys-drift
+  title: "When the world changes: drift"
+  level: basis
+  domein: systemen
+  module: productie
+  idea: "Production data moves away from the training data: the inputs change (feature drift), the true answers change (label drift) or what the model predicts changes (prediction drift); you compare the distribution of a feature now with the one in training, with a number such as the population stability index, and in the bike data of 2012 you see it happen."
+  covers: [monitoring-drift-en-hertraining#2]
+  requires: [sys-ml-failures]
+  introduces: [c:data-drift, c:prediction-drift, c:population-stability-index]
+  data: [bike-sharing]
+  ladder: [python, numpy]
+  needs: any
+
+- id: sys-feedback-loops
+  title: "When a model changes its own data: feedback loops"
+  level: basis
+  domein: systemen
+  module: productie
+  idea: "A model whose output decides what it later learns from can feed on itself: a recommender that shows what is already popular gets more clicks on it and recommends it even more; you simulate that loop, measure how the spread narrows, and try a little exploration against it."
+  covers: [monitoring-drift-en-hertraining#4]
+  requires: [sys-drift, np-random, rl-q-learning]
+  introduces: [c:degenerate-feedback-loop, c:popularity-bias]
+  mentions: [c:feedback-loop]
+  data: []
+  ladder: [python, numpy]
+  needs: any
+
+- id: sys-project-service
+  title: "Project: your model as a service, watched for drift"
+  level: basis
+  domein: systemen
+  module: productie
+  kind: project
+  project: ops
+  idea: "Your demand model answers requests from a server on your own computer, logs each request with its latency, and checks the incoming data of 2012 for drift month by month, so you see when it needs training again."
+  covers: []
+  requires: [sys-project-tested-model, sys-serving-path, sys-drift]
+  introduces: []
+  mentions: [c:latency]
+  data: [bike-sharing]
+  ladder: [python, torch]
+  needs: any
+
+- id: sys-cloud
+  title: "Someone else's computer: the cloud"
+  level: basis
+  domein: systemen
+  module: productie
+  idea: "The cloud rents out computers (IaaS), platforms (PaaS) and finished software (SaaS); for AI you rent GPUs, free in small amounts at Colab and Kaggle, by the hour at the large clouds and at GPU clouds, and where the data and the computers are, and under which law, is part of the choice (sovereign compute)."
+  covers: [cloud-en-platforms#0, cloud-en-platforms#1, cloud-en-platforms#3, cloud-en-platforms#6]
+  requires: [sys-what-is-an-ml-system, torch-gpu]
+  introduces: [c:cloud-computing, c:colab, c:gpu-cloud, c:sovereign-compute]
+  data: []
+  ladder: [python]
+  needs: any
+
+- id: sys-containers
+  title: "A box that runs anywhere: containers"
+  level: basis
+  domein: systemen
+  module: productie
+  idea: "A container packs a program with its packages and settings, so it runs the same on every computer; a Dockerfile builds it in layers from a base image, and putting what changes least at the top makes rebuilding quick."
+  covers: [cloud-en-platforms#2]
+  requires: [sys-cloud, sys-environments]
+  introduces: [c:container, c:docker, c:container-image, c:dockerfile]
+  data: []
+  ladder: [python]
+  needs: any
+
+- id: sys-cloud-costs
+  title: "What compute costs in the cloud"
+  level: basis
+  domein: systemen
+  module: productie
+  idea: "A cloud GPU costs most on demand, less when you reserve it for a year or more, and least as a spot instance that the cloud can take back at any moment, which works when you save checkpoints; serverless inference charges only per request, which wins when there are few and loses when there are many."
+  covers: [cloud-en-platforms#4, cloud-en-platforms#5]
+  requires: [sys-cloud, torch-checkpoints]
+  introduces: [c:on-demand-instance, c:reserved-instance, c:spot-instance, c:serverless-inference]
+  data: []
+  ladder: [python]
+  needs: any
+
+- id: sys-mlops
+  title: "MLOps: how far along is a team?"
+  level: basis
+  domein: systemen
+  module: productie
+  idea: "MLOps puts the steps of this module together in one loop that runs by itself: tracked training, tests, a registry, deployment, and monitoring that starts new training; maturity models describe the way from everything by hand to pipelines that train, test and deploy on their own, and show a team its next step."
+  covers: [ml-systemen-in-productie#5]
+  requires: [sys-project-service, sys-containers]
+  introduces: [c:mlops, c:mlops-maturity, c:ci-cd, c:continuous-training]
+  data: []
+  ladder: [python]
+  needs: any
+
+# --- data: data for ML ----------------------------------------------------------------------------------------------
+- id: sys-data-quality
+  title: "Is the data good? Four ways to look"
+  level: basis
+  domein: systemen
+  module: data
+  idea: "Data quality has dimensions you can measure: how much is missing (completeness), how much is right (accuracy), whether the same thing is written the same way everywhere (consistency) and how old it is (timeliness); you give a table a score on each and find where it breaks."
+  covers: [datakwaliteit-versiebeheer-en-feature-stores#0]
+  requires: [sys-what-is-an-ml-system, data-missing-values]
+  introduces: [c:data-quality, c:completeness, c:data-consistency, c:timeliness]
+  data: []
+  ladder: [python, numpy]
+  needs: any
+
+- id: sys-data-validation
+  title: "Rules for data: schemas and expectations"
+  level: basis
+  domein: systemen
+  module: data
+  idea: "A schema says per column what is allowed (a type, a range, a set of values), and expectations add rules about the whole table (no duplicate ids, about as many rows as yesterday); you check every new batch before it reaches training or the model, and stop it when it breaks a rule, as Great Expectations and Pandera do."
+  covers: [datakwaliteit-versiebeheer-en-feature-stores#1]
+  requires: [sys-data-quality]
+  introduces: [c:data-schema, c:data-validation, c:data-expectation]
+  data: [bike-sharing]
+  ladder: [python, numpy]
+  needs: any
+
+# --- hardware: hardware ---------------------------------------------------------------------------------------------
+- id: sys-why-training-costs-millions
+  title: "Why training costs millions"
+  level: basis
+  domein: systemen
+  module: hardware
+  idea: "A large model trains on thousands of GPUs for weeks or months: GPUs times hours times the price of a GPU-hour gives the bill, before power, people and failed runs; with the numbers companies published you compute it yourself."
+  covers: [compute-geletterdheid#2]
+  requires: [sys-how-fast]
+  introduces: [c:gpu-hour, c:training-cost]
+  data: []
+  ladder: [python]
+  needs: any
+
+- id: sys-moores-law
+  title: "Moore's law and the growth of compute"
+  level: basis
+  domein: systemen
+  module: hardware
+  idea: "The number of transistors on a chip doubled about every two years for decades, but chips stopped getting more efficient by shrinking alone (the end of Dennard scaling) and memory kept up less than compute (the memory wall); the compute used to train the largest models grew much faster still, and on a log scale you read the doubling time from a straight line."
+  covers: [compute-geletterdheid#3]
+  requires: [sys-why-training-costs-millions, math-log-scales]
+  introduces: [c:moores-law, c:dennard-scaling, c:memory-wall, c:doubling-time]
+  data: []
+  ladder: [python, numpy]
+  needs: any
+
+- id: sys-memory-hierarchy
+  title: "Close and fast, far and slow: the memory hierarchy"
+  level: basis
+  domein: systemen
+  module: hardware
+  idea: "A processor computes on numbers that sit close by, in registers and caches, and every step further away, to GPU memory and then to the computer's own RAM, is bigger and slower; you measure on your own computer how much faster a sum is when its data fits in the cache."
+  covers: [gpu-architectuur-geheugen-en-roofline#0]
+  requires: [sys-how-fast, np-vectorization]
+  introduces: [c:memory-hierarchy, c:bandwidth, c:cache-memory, c:hbm]
+  data: []
+  ladder: [python, numpy]
+  needs: any
+
+- id: sys-gpu-generations
+  title: "GPU generations: from Volta to Blackwell"
+  level: basis
+  domein: systemen
+  module: hardware
+  idea: "Each GPU generation brought more FLOP/s in fewer bits, more and faster memory and quicker links between GPUs; from the published numbers of NVIDIA's V100, A100, H100 and B200 and AMD's MI300X you compute what each step gained, and see that compute grew faster than memory bandwidth."
+  covers: [gpu-architectuur-geheugen-en-roofline#1]
+  requires: [sys-memory-hierarchy, sys-moores-law]
+  introduces: [c:gpu-generation, c:vram]
+  data: []
+  ladder: [python]
+  needs: any
+
+# --- wiskunde: the shared module Wiskunde formeel: numbers in bits --------------------------------------------------
+- id: num-integers-floats
+  title: "How a computer stores a number: integers and floats"
+  level: basis
+  domein: fundament
+  module: wiskunde
+  idea: "A computer stores a number in a fixed number of bits: an integer has a largest value it cannot go past, and a float is a sign, an exponent and a mantissa (IEEE 754), so it has a range and a fixed number of significant digits; that is why 0.1 + 0.2 is not exactly 0.3."
+  covers: [numerieke-wiskunde#0]
+  requires: [math-exp-log, np-arrays]
+  introduces: [c:floating-point, c:mantissa, c:integer-overflow, c:ieee-754]
+  mentions: [c:bit]
+  data: []
+  ladder: [python, numpy]
+  needs: any
+
+# --- hardware: hardware ---------------------------------------------------------------------------------------------
+- id: sys-bits-per-number
+  title: "How many bits per number: from FP32 to INT4"
+  level: basis
+  domein: systemen
+  module: hardware
+  idea: "Fewer bits per number make a model smaller and faster: FP16 and BF16 halve the memory of FP32, BF16 keeps its range and FP16 more of its precision, and INT8 or INT4 store each weight as a small integer with a scale; you see what each costs in memory and in error on a real layer."
+  covers: [getalformaten#0, getalformaten#1]
+  requires: [num-integers-floats, sys-memory-hierarchy, torch-mlp-digits]
+  introduces: [c:fp32, c:fp16, c:bf16, c:tf32, c:int8, c:int4, c:numerical-precision, c:number-range, py:torch-dtype]
+  mentions: [c:quantization]
+  data: [qmnist]
+  ladder: [python, torch]
+  needs: any
+
+- id: sys-tpus-npus
+  title: "Beyond the GPU: TPUs, NPUs and other chips"
+  level: basis
+  domein: systemen
+  module: hardware
+  idea: "A GPU can do far more than AI; chips built only for it, such as Google's TPU, the NPU in a phone or laptop and the own chips of the large clouds, multiply matrices in a grid of multiply-adders (a systolic array) and give up flexibility for speed per watt; you run a small systolic array in Python."
+  covers: [accelerators-interconnects-en-rack-scale#0, accelerators-interconnects-en-rack-scale#1]
+  requires: [sys-gpu-generations, sys-bits-per-number, math-matrix-multiply]
+  introduces: [c:tpu, c:npu, c:asic, c:systolic-array, c:accelerator]
+  data: []
+  ladder: [python, numpy]
+  needs: any
+
+- id: sys-chip-supply-chain
+  title: "Who makes the chips: the supply chain and the software around it"
+  level: basis
+  domein: systemen
+  module: hardware
+  idea: "An AI chip passes through few hands: designers such as NVIDIA and AMD, one main factory for the most advanced chips (TSMC), the packaging that puts chip and memory together (CoWoS) and a few makers of HBM; as a graph you find the links where one failure stops everything, and see why software such as CUDA binds customers as strongly as the chips do."
+  covers: [datacenters-toeleveringsketen-en-benchmarks#0, datacenters-toeleveringsketen-en-benchmarks#2]
+  requires: [sys-tpus-npus, math-graphs]
+  introduces: [c:chip-supply-chain, c:advanced-packaging, c:rocm, c:xla]
+  data: []
+  ladder: [python]
+  needs: any
+
+- id: sys-data-centers
+  title: "Power and cooling: the data center"
+  level: basis
+  domein: systemen
+  module: hardware
+  idea: "A data center uses power for its computers and more for cooling and losses; PUE divides all the power by what the computers use, WUE counts liters of water per kilowatt-hour, and with both you compute what a training run asks from the grid and from the water supply."
+  covers: [datacenters-toeleveringsketen-en-benchmarks#1]
+  requires: [sys-why-training-costs-millions]
+  introduces: [c:data-center, c:pue, c:wue, c:kilowatt-hour]
+  data: []
+  ladder: [python]
+  needs: any
+
+- id: sys-benchmarks
+  title: "Reading MLPerf and the TOP500"
+  level: basis
+  domein: systemen
+  module: hardware
+  idea: "MLPerf times how long systems take to train or serve fixed models to a fixed quality, the TOP500 ranks supercomputers by FLOP/s on one test and the Green500 by FLOP/s per watt; you read a table of results, divide by the number of chips, and see what a ranking does and does not say."
+  covers: [datacenters-toeleveringsketen-en-benchmarks#3]
+  requires: [sys-gpu-generations, res-figure-and-table]
+  introduces: [c:mlperf, c:top500, c:green500]
+  data: []
+  ladder: [python]
+  needs: any
+
+- id: sys-energy-per-answer
+  title: "How much energy does one answer cost?"
+  level: basis
+  domein: systemen
+  module: hardware
+  idea: "An answer from a chat model costs a fraction of a watt-hour by the estimates companies and researchers published, which differ more than tenfold with the model, the length and what is counted; you estimate it yourself from the FLOPs per token and the energy per FLOP, and compare it with things you know."
+  covers: [energie-kosten-en-duurzaamheid#0]
+  requires: [sys-data-centers]
+  introduces: [c:energy-per-query, c:energy-per-flop]
+  mentions: [c:flops-per-token, c:chat-model]
+  data: []
+  ladder: [python]
+  needs: any
+
+- id: sys-measure-energy
+  title: "Measuring the energy of your own run"
+  level: basis
+  domein: systemen
+  module: hardware
+  idea: "Energy is power times time: you measure how long your training takes and how much power your computer draws, or read it from the processor where that works, as CodeCarbon and Zeus do; per model you get the energy per point of accuracy, and the ML.ENERGY Leaderboard and the AI Energy Score compare models the same way."
+  covers: [energie-kosten-en-duurzaamheid#1]
+  requires: [sys-energy-per-answer, torch-mlp-digits]
+  introduces: [c:energy-measurement, c:carbon-intensity]
+  mentions: [c:leaderboard]
+  data: [qmnist]
+  ladder: [python, torch]
+  needs: any
+
+- id: sys-tco
+  title: "What a GPU really costs: total cost of ownership"
+  level: basis
+  domein: systemen
+  module: hardware
+  idea: "A GPU you buy costs more than its price: power, cooling, the server around it, the people who run it, and the years until it is outdated; spread over the hours it really computes, that gives a price per GPU-hour you can set beside renting one in the cloud."
+  covers: [energie-kosten-en-duurzaamheid#2]
+  requires: [sys-measure-energy, sys-cloud-costs]
+  introduces: [c:total-cost-of-ownership, c:gpu-utilization, c:depreciation]
+  data: []
+  ladder: [python]
+  needs: any
+
+# --- snel-trainen: training fast ------------------------------------------------------------------------------------
+- id: sys-profiler
+  title: "Where the time goes: a profiler"
+  level: basis
+  domein: systemen
+  module: snel-trainen
+  idea: "A profiler records how long each operation of a training step takes, so you see the few that take most of the time; you profile a step of your digit network with the PyTorch profiler, speed up the slowest part and measure again, and Nsight does the same on an NVIDIA GPU."
+  covers: [profiling-en-prestatiemetrics#2]
+  requires: [sys-how-fast, torch-mlp-digits]
+  introduces: [c:profiler, py:torch-profiler]
+  data: [qmnist]
+  ladder: [python, torch]
+  needs: any
+
+- id: sys-training-compute
+  title: "Counting the compute of a training run: 6ND"
+  level: basis
+  domein: systemen
+  module: snel-trainen
+  idea: "Training costs about 6 FLOPs per parameter per training token, 2 for the forward pass and 4 for the backward pass; with 6ND, the FLOP/s of a GPU and the share of it you really use, you estimate the days and the cost of a run before you start, and check the rule on a run of your own."
+  covers: [compute-en-kostenramingen#0, compute-en-kostenramingen#1]
+  requires: [sys-profiler, sys-why-training-costs-millions]
+  introduces: [c:six-nd-rule, c:compute-budget]
+  data: [qmnist]
+  ladder: [python, torch]
+  needs: any
+
+# --- inference: inference -------------------------------------------------------------------------------------------
+- id: sys-latency-and-cost
+  title: "Quick or cheap: the latency and the cost of an answer"
+  level: basis
+  domein: systemen
+  module: inference
+  idea: "Serving one user at a time is quick but leaves the GPU mostly idle; serving many at once in a batch lowers the cost per token and makes each answer a little slower, and from the price of a GPU-hour and its tokens per second you compute the cost per million tokens."
+  covers: [inference-fundamenten#0, inference-fundamenten#3]
+  requires: [sys-why-training-costs-millions]
+  introduces: [c:cost-per-token, c:inference-batching]
+  mentions: [c:latency]
+  data: []
+  ladder: [python]
+  needs: any
+
+- id: sys-prefill-decode
+  title: "Reading and writing: prefill and decode"
+  level: basis
+  domein: systemen
+  module: inference
+  idea: "A language model answers in two phases: it reads the whole prompt at once (prefill), which keeps the chip busy computing, and then writes one token at a time (decode), where every step reads all the weights for a single token; you time both on the course's chat model and see why a long prompt costs less per token than a long answer."
+  covers: [inference-fundamenten#1]
+  requires: [sys-latency-and-cost, sys-memory-hierarchy, lm-sampling, start-prompt-basics]
+  introduces: [c:prefill, c:decode]
+  mentions: [c:chat-model]
+  data: [model-qwen3-0.6b]
+  ladder: [python, torch]
+  needs: any
+
+- id: sys-ttft-tpot
+  title: "TTFT, TPOT, throughput and goodput"
+  level: basis
+  domein: systemen
+  module: inference
+  idea: "A user feels the time to the first token (TTFT) and the time between tokens (TPOT); a provider counts tokens per second over all users (throughput) and how many requests stay within the promised times (goodput); you measure the first two on a streamed answer and compute the other two for a busy server."
+  covers: [inference-fundamenten#2]
+  requires: [sys-prefill-decode, sys-monitoring]
+  introduces: [c:time-to-first-token, c:time-per-output-token, c:goodput]
+  data: [model-qwen3-0.6b]
+  ladder: [python]
+  needs: any
+
+- id: sys-serving-engines
+  title: "Serving engines: vLLM, SGLang, TensorRT-LLM and llama.cpp"
+  level: basis
+  domein: systemen
+  module: inference
+  idea: "A serving engine keeps a GPU busy with many users at once: instead of waiting until a whole batch is done, it lets a new request in as soon as another one finishes (continuous batching); you simulate both ways, compare throughput and waiting time, and see what vLLM, SGLang, TensorRT-LLM and llama.cpp are each for."
+  covers: [llm-serving#0]
+  requires: [sys-ttft-tpot]
+  introduces: [c:serving-engine, c:static-batching, c:continuous-batching]
+  data: []
+  ladder: [python, numpy]
+  needs: any
+
+- id: sys-edge-iot
+  title: "At the edge: devices, sensors and the cloud"
+  level: basis
+  domein: systemen
+  module: inference
+  idea: "A model can run in the cloud, on a gateway near the sensors, or on the device itself; on the device the data stays private, the answer comes without a network and costs nothing per call, but the model must fit in little memory and power; you compute when sending raw sensor data costs more than sending only the model's answer."
+  covers: [edge-on-device-en-browser#0, edge-on-device-en-browser#1]
+  requires: [sys-deployment-patterns, sys-latency-and-cost]
+  introduces: [c:edge-computing, c:internet-of-things, c:edge-gateway]
+  mentions: [c:on-device-ai]
+  data: []
+  ladder: [python]
+  needs: any
+
+- id: sys-onnx
+  title: "One file for every runtime: ONNX"
+  level: basis
+  domein: systemen
+  module: inference
+  idea: "ONNX describes a network as a graph of standard operations with its weights, so a model trained in PyTorch runs in other runtimes; you export your digit network, look at its graph, and run it with ONNX Runtime to the same answers."
+  covers: [edge-on-device-en-browser#2]
+  requires: [sys-edge-iot, sys-model-package, torch-mlp-digits]
+  introduces: [c:onnx-runtime, c:model-export]
+  mentions: [c:onnx]
+  data: [qmnist]
+  ladder: [python, torch]
+  needs: any
+
+- id: sys-mobile-runtimes
+  title: "On a phone: LiteRT, Core ML and ExecuTorch"
+  level: basis
+  domein: systemen
+  module: inference
+  idea: "A phone runs models with a runtime of its own: LiteRT on Android and many small devices, Core ML on Apple's devices, ExecuTorch for PyTorch models on both; each wants the model in its own file and uses the phone's NPU where it can, and you compute whether your model fits and how many answers a second it can give."
+  covers: [edge-on-device-en-browser#3]
+  requires: [sys-onnx, sys-bits-per-number, sys-tpus-npus]
+  introduces: [c:litert, c:core-ml, c:executorch]
+  data: []
+  ladder: [python, torch]
+  needs: any
+
+- id: sys-browser-inference
+  title: "In the browser: WebAssembly, WebGPU and WebNN"
+  level: basis
+  domein: systemen
+  module: inference
+  idea: "A browser can compute a model in three ways: WebAssembly runs compiled code on the processor, WebGPU uses the graphics card, and WebNN hands the work to whichever chip the system offers; you find out which of them your browser has, and time the same network in each one it supports."
+  covers: [edge-on-device-en-browser#4]
+  requires: [sys-mobile-runtimes]
+  introduces: [c:webassembly, c:webnn]
+  mentions: [c:webgpu]
+  data: []
+  ladder: [python]
+  needs: any

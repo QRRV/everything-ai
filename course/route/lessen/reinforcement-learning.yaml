@@ -296,6 +296,7 @@ lessons:
   covers: [rl-in-de-echte-wereld#0]
   requires: [rl-classic-environments]
   introduces: [c:simulator]
+  mentions: [c:data-center]
   data: []
   ladder: [python]
   needs: any

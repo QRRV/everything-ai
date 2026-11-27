@@ -118,9 +118,9 @@ lessons:
   module: wiskunde
   idea: "Computers store numbers with limited precision, which is why exp of a big logit overflows; the subtract-the-maximum trick from softmax also gives a stable log-sum-exp."
   covers: [numerieke-wiskunde#0, numerieke-wiskunde#3]
-  requires: [ml-cross-entropy, math-exp-log]
-  introduces: [c:floating-point, c:overflow, c:underflow, c:log-sum-exp]
-  uses: [p:subtract-max-before-exp, c:softmax, s:z-logits, c:logit, c:cross-entropy, c:loss, c:model, c:probability, c:class, c:classification, c:exponent, s:exp, c:logarithm, s:log, s:sigma-sum, s:l-loss, c:training, c:mean, c:array, c:vector, py:float, py:np-array, py:np-sum, py:min-max, py:indexing, py:np-indexing, py:def, py:return, py:import, py:import-as, py:arithmetic, py:comparison, py:bool, py:print, py:comment, py:underscore-name, q:predict, q:choice, q:exercise-with-check, q:run-cell]
+  requires: [ml-cross-entropy, math-exp-log, num-integers-floats]
+  introduces: [c:overflow, c:underflow, c:log-sum-exp]
+  uses: [c:floating-point, p:subtract-max-before-exp, c:softmax, s:z-logits, c:logit, c:cross-entropy, c:loss, c:model, c:probability, c:class, c:classification, c:exponent, s:exp, c:logarithm, s:log, s:sigma-sum, s:l-loss, c:training, c:mean, c:array, c:vector, py:float, py:np-array, py:np-sum, py:min-max, py:indexing, py:np-indexing, py:def, py:return, py:import, py:import-as, py:arithmetic, py:comparison, py:bool, py:print, py:comment, py:underscore-name, q:predict, q:choice, q:exercise-with-check, q:run-cell]
   mentions: [c:language-model, c:gpu, c:bit, c:float32, c:fp16, py:abs]
   ladder: [numpy]
   needs: any
