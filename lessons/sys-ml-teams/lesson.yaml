@@ -1,0 +1,44 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: sys-ml-teams
+minutes: 25
+title:
+  en: "Who builds an ML system: roles and teams"
+  nl: "Wie bouwt een ML-systeem: rollen en teams"
+goal:
+  en: "name the roles of the people who build and run a model, and say where the work gets stuck in four ways to organize them."
+  nl: "de rollen benoemen van de mensen die een model bouwen en draaiende houden, en zeggen waar het werk vastloopt bij vier manieren om het werk in te richten."
+summary:
+  - en: "Four roles build a model and keep it running: the data scientist turns a question into a model, the ML engineer turns the model into reliable software, the MLOps engineer builds the path to production, and the platform engineer builds the shared tools for every team. The lines between them differ per company."
+    nl: "Vier rollen bouwen een model en houden het draaiende: de data scientist maakt van een vraag een model, de ML engineer maakt van het model betrouwbare software, de MLOps engineer bouwt de weg naar productie, en de platform engineer bouwt de gedeelde tools voor elk team. De grenzen tussen de rollen verschillen per bedrijf."
+  - en: "At each handoff, the work waits and some knowledge stays behind. In the course's example, teams by function take 48 days for a new version, and the work waits for 20 of them."
+    nl: "Bij elke overdracht wacht het werk en blijft er kennis achter. In het voorbeeld van de course doen teams per functie 48 dagen over een nieuwe versie, en wacht het werk 20 van de 48 dagen."
+  - en: "Each way to organize moves the place where the work gets stuck: teams by function in the queues, one team per product in scarce specialists, one data scientist from start to finish in the steps outside their field, and a platform in what the platform cannot do yet."
+    nl: "Elke manier van inrichten verplaatst de plek waar het werk vastloopt: teams per functie in de wachtrijen, één team per product bij schaarse specialisten, één data scientist van begin tot eind in de stappen buiten het eigen vak, en een platform in wat het platform nog niet kan."
+  - en: "An ML platform costs months of work before it saves any, so it pays off only over many models: in the course's example, from the 18th model on. At Uber, dozens of teams used Michelangelo in 2017, and in 2024 Uber called a central platform team, with data scientists and ML engineers inside each product team, the best structure."
+    nl: "Een ML-platform kost maanden werk voordat het iets bespaart, dus betaalt het zich alleen terug over veel modellen: in het voorbeeld van de course vanaf het 18e model. Bij Uber gebruikten in 2017 tientallen teams Michelangelo, en in 2024 noemde Uber een centraal platformteam, met data scientists en ML engineers in elk productteam, de beste opzet."
+can_now:
+  - en: "count the handoffs in a plan, also when the work goes back and forth"
+    nl: "de overdrachten in een plan tellen, ook als het werk heen en weer gaat"
+    by: handoffs
+  - en: "work out after how many models a platform pays off"
+    nl: "uitrekenen na hoeveel modellen een platform zich terugbetaalt"
+    by: payoff
+  - en: "tell which role does a piece of work around a model"
+    nl: "zeggen welke rol een stuk werk rond een model doet"
+    by: role
+  - en: "say where the work gets stuck in a way of organizing it"
+    nl: "zeggen waar het werk vastloopt bij een manier van inrichten"
+    by: stuck
+further_reading:
+  - en: "Jeremy Hermann and Mike Del Balso (2017), *Meet Michelangelo: Uber's Machine Learning Platform*, Uber's blog: how Uber worked before its platform, and the six steps the platform covers"
+    nl: "Jeremy Hermann en Mike Del Balso (2017), *Meet Michelangelo: Uber's Machine Learning Platform*, blog van Uber: hoe Uber werkte voordat het platform er was, en de zes stappen die het platform dekt"
+  - en: "Eric Colson (2019), *Beware the Data Science Pin Factory: The Power of the Full-Stack Data Science Generalist and the Perils of Division of Labor Through Function*, Stitch Fix MultiThreaded blog: a version of the Harvard Business Review article *Why Data Science Teams Need Generalists, Not Specialists*"
+    nl: "Eric Colson (2019), *Beware the Data Science Pin Factory: The Power of the Full-Stack Data Science Generalist and the Perils of Division of Labor Through Function*, blog MultiThreaded van Stitch Fix: een versie van het stuk *Why Data Science Teams Need Generalists, Not Specialists* in de Harvard Business Review"
+  - en: "Dominik Kreuzberger, Niklas Kühl and Sebastian Hirschl (2023), *Machine Learning Operations (MLOps): Overview, Definition, and Architecture*, IEEE Access: the seven roles around MLOps"
+    nl: "Dominik Kreuzberger, Niklas Kühl en Sebastian Hirschl (2023), *Machine Learning Operations (MLOps): Overview, Definition, and Architecture*, IEEE Access: de zeven rollen rond MLOps"
+  - en: "Chip Huyen (2022), *Designing Machine Learning Systems*, O'Reilly, chapter 11, *The Human Side of Machine Learning*: team structures, with cross-functional teams and end-to-end data scientists"
+    nl: "Chip Huyen (2022), *Designing Machine Learning Systems*, O'Reilly, hoofdstuk 11, *The Human Side of Machine Learning*: teamstructuren, met cross-functionele teams en end-to-end data scientists"
+  - en: "Matthew Skelton and Manuel Pais (2019), *Team Topologies*, IT Revolution: four kinds of teams, among them the platform team, which makes the work of the other teams lighter"
+    nl: "Matthew Skelton en Manuel Pais (2019), *Team Topologies*, IT Revolution: vier soorten teams, waaronder het platformteam, dat het werk van de andere teams lichter maakt"
