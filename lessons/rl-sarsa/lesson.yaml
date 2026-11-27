@@ -1,0 +1,33 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: rl-sarsa
+minutes: 35
+title:
+  en: "Careful or bold: SARSA and Q-learning"
+  nl: "Voorzichtig of gedurfd: SARSA en Q-learning"
+goal:
+  en: "learn Q(s, a) after every step with SARSA, and see on a cliff why it learns a different way from Q-learning: on-policy against off-policy."
+  nl: "Q(s, a) na elke stap leren met SARSA, en op een klif zien waarom SARSA een andere weg leert dan Q-learning: on-policy tegenover off-policy."
+summary:
+  - en: "SARSA updates Q(S, A) after every step toward R + γQ(S′, A′), where A′ is the action the agent will really take next, chosen with ε-greedy before the update. Q-learning takes the largest Q of S′ instead, whatever the agent does next."
+    nl: "SARSA werkt Q(S, A) na elke stap bij richting R + γQ(S′, A′), met A′ de action die de agent echt als volgende neemt, gekozen met ε-greedy voordat Q wordt bijgewerkt. Q-learning neemt in plaats daarvan de grootste Q van S′, wat de agent ook als volgende doet."
+  - en: "SARSA learns the values of the policy it follows, random steps included: it is on-policy. Q-learning learns the values of always taking the best action, while it follows a different policy: it is off-policy."
+    nl: "SARSA leert de waarden van de policy die de agent volgt, willekeurige stappen meegeteld: SARSA is on-policy. Q-learning leert de waarden van altijd de beste action nemen, terwijl de agent een andere policy volgt: Q-learning is off-policy."
+  - en: "Next to a cliff, with ε-greedy, the target of SARSA sometimes holds the −100 of a random step down, so SARSA learns a way further from the edge; Q-learning learns the shortest way, right along the edge. Without random steps, the way of Q-learning is the better one."
+    nl: "Naast een klif bevat het target van SARSA met ε-greedy soms de −100 van een willekeurige stap omlaag, dus SARSA leert een weg verder van de rand; Q-learning leert de kortste weg, vlak langs de rand. Zonder willekeurige stappen is de weg van Q-learning de betere."
+can_now:
+  - en: "update Q after one step with SARSA"
+    nl: "Q bijwerken na één stap met SARSA"
+    by: sarsa_update
+  - en: "play an episode of SARSA in which the next action is chosen before the update"
+    nl: "een episode van SARSA spelen waarin de volgende action gekozen wordt voordat Q wordt bijgewerkt"
+    by: sarsa_episode
+  - en: "say whether a method is on-policy or off-policy, and which one fits a task"
+    nl: "zeggen of een methode on-policy of off-policy is, en welke bij een taak past"
+    by: robot
+further_reading:
+  - en: "Richard S. Sutton and Andrew G. Barto (2018), *Reinforcement Learning: An Introduction*, 2nd edition, MIT Press, sections 6.4 and 6.5 on SARSA and Q-learning, with example 6.6, the cliff; free at incompleteideas.net"
+    nl: "Richard S. Sutton en Andrew G. Barto (2018), *Reinforcement Learning: An Introduction*, 2e editie, MIT Press, paragrafen 6.4 en 6.5 over SARSA en Q-learning, met voorbeeld 6.6, het klif; gratis op incompleteideas.net"
+  - en: "G. A. Rummery and M. Niranjan (1994), *On-line Q-learning using connectionist systems*, technical report CUED/F-INFENG/TR 166, Cambridge University Engineering Department: where the update of SARSA first appeared, as a modified Q-learning; the name SARSA came later, from Richard Sutton"
+    nl: "G. A. Rummery en M. Niranjan (1994), *On-line Q-learning using connectionist systems*, technisch rapport CUED/F-INFENG/TR 166, Cambridge University Engineering Department: hier verscheen de update van SARSA voor het eerst, als aangepaste Q-learning; de naam SARSA kwam later, van Richard Sutton"
