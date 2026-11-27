@@ -439,6 +439,66 @@ def grid_world(panels: list[dict], *, alt: str, cell: int = 50, decimal: str = "
                    f'gap:0.5rem {gap}px;align-items:flex-start">{"".join(svgs)}</figure>')
 
 
+def policy_grids(panels: list[dict], *, alt: str, cell: int = 24) -> mo.Html:
+    """The policy of a card game such as blackjack, one panel per kind of hand, side by side; in a narrow window they go
+    one below the other, as grid_world does. Each panel is a dict:
+      title     the words above the panel (optional)
+      rows      the labels of the rows, top to bottom, such as the player's sums 21 down to 12
+      cols      the labels of the columns, left to right, such as the dealer's card A, 2 to 10
+      on        {(row, col)}: the cells where the policy takes the action that is filled in, in the colour of `role`
+                ("param" for a policy an agent learned, the default)
+      letters   (on, off): the letter in a filled cell and in an empty one, such as ("H", "S") for hit and stick
+      ring      {(row, col)}: cells with a thick ink ring, such as where the policy differs from the best one
+      xlabel    the words under the columns, ylabel the words beside the rows (optional)
+    `alt` says what the figure shows, for a screen reader."""
+    svgs, widest = [], 0
+    for p in panels:
+        rows, cols = p["rows"], p["cols"]
+        left, top = 40, (24 if p.get("title") else 0) + 16
+        W, H = left + len(cols) * cell + 2, top + len(rows) * cell + (34 if p.get("xlabel") else 4)
+        widest = max(widest, W)
+        role = p.get("role", "param")
+        on, ring = set(p.get("on", ())), set(p.get("ring", ()))
+        yes, no = p.get("letters", ("", ""))
+        size = max(10, round(cell * 0.46))
+        parts = []
+        if p.get("title"):
+            parts.append(f'<text x="1" y="15" style="font-size:13.5px;font-weight:600;fill:var(--ea-ink)">{html.escape(p["title"])}</text>')
+        for c, label in enumerate(cols):
+            parts.append(f'<text x="{left + c * cell + cell / 2:.1f}" y="{top - 4}" style="font-size:11px;fill:var(--ea-ink-3);'
+                         f'text-anchor:middle">{html.escape(str(label))}</text>')
+        for r, label in enumerate(rows):
+            parts.append(f'<text x="{left - 5}" y="{top + r * cell + cell / 2 + 4:.1f}" style="font-size:11px;fill:var(--ea-ink-3);'
+                         f'text-anchor:end">{html.escape(str(label))}</text>')
+        if p.get("ylabel"):
+            mid = top + len(rows) * cell / 2
+            parts.append(f'<text x="11" y="{mid:.1f}" transform="rotate(-90 11 {mid:.1f})" style="font-size:11.5px;'
+                         f'fill:var(--ea-ink-2);text-anchor:middle">{html.escape(p["ylabel"])}</text>')
+        if p.get("xlabel"):
+            parts.append(f'<text x="{left + len(cols) * cell / 2:.1f}" y="{top + len(rows) * cell + 20}" style="font-size:11.5px;'
+                         f'fill:var(--ea-ink-2);text-anchor:middle">{html.escape(p["xlabel"])}</text>')
+        for r in range(len(rows)):
+            for c in range(len(cols)):
+                x, y = left + c * cell, top + r * cell
+                filled = (r, c) in on
+                fill = f"var(--ea-{role}-wash)" if filled else "var(--ea-page)"
+                parts.append(f'<rect x="{x}" y="{y}" width="{cell}" height="{cell}" style="fill:{fill};stroke:var(--ea-line);stroke-width:1"/>')
+                letter = yes if filled else no
+                if letter:
+                    ink = f"var(--ea-{role}-text)" if filled else "var(--ea-ink-3)"
+                    parts.append(f'<text x="{x + cell / 2:.1f}" y="{y + cell / 2 + size * 0.36:.1f}" style="font-size:{size}px;'
+                                 f'font-weight:{700 if filled else 400};fill:{ink};text-anchor:middle">{html.escape(letter)}</text>')
+        for r, c in sorted(ring):
+            parts.append(f'<rect x="{left + c * cell + 1.5}" y="{top + r * cell + 1.5}" width="{cell - 3}" height="{cell - 3}" '
+                         f'style="fill:none;stroke:var(--ea-ink);stroke-width:2.4"/>')
+        svgs.append(f'<svg viewBox="0 0 {W} {H}" aria-hidden="true" style="flex:0 1 auto;width:{W}px;max-width:100%;'
+                    f'height:auto;{_FONT}">{"".join(parts)}</svg>')   # its own size, as boards: a chart beside it keeps its width
+    gap = 16
+    return mo.Html(f'<figure class="ea-figure" role="img" aria-label="{html.escape(alt)}" style="margin:0.25rem 0 0.75rem;'
+                   f'max-width:min(100%,{widest * len(panels) + gap * (len(panels) - 1)}px);display:flex;flex-wrap:wrap;'
+                   f'gap:0.5rem {gap}px;align-items:flex-start">{"".join(svgs)}</figure>')
+
+
 def next_word_bars(prefix: str, options: list[tuple[str, float]], *, picked: int | None = 0, picked_label: str = "",
                    title: str = "") -> mo.Html:
     """What a language model sees after some text: a bar per possible next word, as long as how likely

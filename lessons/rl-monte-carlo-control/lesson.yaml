@@ -1,0 +1,33 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: rl-monte-carlo-control
+minutes: 30
+title:
+  en: "Playing better from experience: Monte Carlo control"
+  nl: "Beter spelen door ervaring: Monte Carlo control"
+goal:
+  en: "learn a policy from the hands you play, by averaging the returns after each state and action and taking the action with the larger Q, while exploring starts or an ε-soft policy keep both actions in play."
+  nl: "een policy leren uit de handen die je speelt, door het gemiddelde te nemen van de returns na elke state en action en de action met de grotere Q te kiezen, terwijl exploring starts of een ε-soft policy beide actions in het spel houden."
+summary:
+  - en: "Without the table T, the values V of a policy cannot say which action is better, so Monte Carlo control estimates Q(s, a) itself: the average of the returns after action a in state s. Moving Q toward each new return by 1/n, for the n-th return, keeps it exactly the average. After every episode the policy takes the action with the larger Q: evaluation and improvement take turns, as in policy iteration."
+    nl: "Zonder de tabel T kunnen de waarden V van een policy niet zeggen welke action beter is, dus schat Monte Carlo control Q(s, a) zelf: het gemiddelde van de returns na action a in state s. Schuift Q bij de n-de return 1/n van de afstand op naar deze return, dan blijft Q precies het gemiddelde. Na elke episode kiest de policy de action met de grotere Q: evalueren en verbeteren wisselen elkaar af, zoals in policy iteration."
+  - en: "A policy that always takes the action with the larger Q never finds out what the other action brings. Exploring starts begin every episode in a random state with a random first action; an ε-soft policy gives every action a chance of at least ε divided by the number of actions, as ε-greedy does. In the course's blackjack, exploring starts reach the best policy in 500,000 hands."
+    nl: "Een policy die altijd de action met de grotere Q kiest komt nooit te weten wat de andere action oplevert. Exploring starts beginnen elke episode in een willekeurige state met een willekeurige eerste action; een ε-soft policy geeft elke action een kans van minstens ε gedeeld door het aantal actions, zoals ε-greedy doet. In de blackjack van de course bereiken exploring starts de beste policy in 500.000 handen."
+  - en: "Exploring starts need a game you can start anywhere. With an ε-soft policy the agent learns from real deals, but it keeps making random moves, pays for them, and learns the best way to play with them; the agent learns slowly in states that real deals rarely give."
+    nl: "Exploring starts vragen een spel dat je overal kunt beginnen. Met een ε-soft policy leert de agent met echt gedeelde kaarten, maar blijft de agent willekeurige zetten doen. Deze zetten kosten iets, en de agent leert de beste manier van spelen met deze zetten; in states die bij echt gedeelde kaarten zelden voorkomen leert de agent langzaam."
+can_now:
+  - en: "update Q(s, a) and the policy after an episode, with Q the average of the returns"
+    nl: "Q(s, a) en de policy bijwerken na een episode, met Q als gemiddelde van de returns"
+    by: update
+  - en: "give the chances of the actions under an ε-soft policy"
+    nl: "de kansen op de actions geven onder een ε-soft policy"
+    by: soft
+  - en: "explain when exploring starts can be used and what an ε-soft policy costs"
+    nl: "uitleggen wanneer exploring starts kunnen en wat een ε-soft policy kost"
+    by: casino
+further_reading:
+  - en: "Richard S. Sutton and Andrew G. Barto (2018), *Reinforcement Learning: An Introduction*, 2nd edition, MIT Press, sections 5.3 and 5.4 on Monte Carlo control with exploring starts and without, and example 5.1 on blackjack; free at incompleteideas.net"
+    nl: "Richard S. Sutton en Andrew G. Barto (2018), *Reinforcement Learning: An Introduction*, 2e editie, MIT Press, paragrafen 5.3 en 5.4 over Monte Carlo control met en zonder exploring starts, en voorbeeld 5.1 over blackjack; gratis op incompleteideas.net"
+  - en: "Roger R. Baldwin, Wilbert E. Cantey, Herbert Maisel and James P. McDermott (1956), *The Optimum Strategy in Blackjack*, Journal of the American Statistical Association 51 (275), 429–439: the first published best way to play blackjack, worked out with desk calculators"
+    nl: "Roger R. Baldwin, Wilbert E. Cantey, Herbert Maisel en James P. McDermott (1956), *The Optimum Strategy in Blackjack*, Journal of the American Statistical Association 51 (275), 429–439: de eerste gepubliceerde beste manier om blackjack te spelen, uitgerekend met rekenmachines"
