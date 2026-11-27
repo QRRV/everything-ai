@@ -1,0 +1,48 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: rl-real-world
+minutes: 30
+title:
+  en: "RL outside games"
+  nl: "RL buiten games"
+goal:
+  en: "put a real problem into RL by naming its state, actions and reward, and what a mistake costs; write the reward of a simulator, train an agent in it, and see what a safety rule catches when reality differs from the simulator."
+  nl: "een echt probleem in RL gieten door de state, de actions en de reward te benoemen, en wat een fout kost; de reward van een simulator schrijven, er een agent in trainen, en zien wat een veiligheidsregel opvangt als de werkelijkheid van de simulator afwijkt."
+summary:
+  - en: "RL runs outside games too: it recommends videos, cools data centers, holds the plasma of a fusion reactor in shape, places the parts of chips and found faster sorting routines. Every use answers the same questions: the state, the actions, the reward, and where the agent can try things out."
+    nl: "RL draait ook buiten games: RL raadt video's aan, koelt datacenters, houdt het plasma van een fusiereactor in vorm, plaatst de onderdelen van chips en vond snellere routines om te sorteren. Elke toepassing beantwoordt dezelfde vragen: de state, de actions, de reward, en waar de agent dingen kan uitproberen."
+  - en: "Outside games, one question comes on top: what does a mistake cost? In a game, a mistake costs a lost game. In a data center, it means servers that get too hot, and while an agent learns, ε-greedy makes such mistakes on purpose."
+    nl: "Buiten games komt er één vraag bij: wat kost een fout? In een game kost een fout een verloren partij. In een datacenter betekent een fout servers die te heet worden, en tijdens het leren maakt ε-greedy zulke fouten met opzet."
+  - en: "A simulator is a program that imitates a part of the world, so that an agent can make its mistakes there, faster and cheaper than in reality. The plasma of the TCV tokamak was steered by an agent that learned only in a simulator; other systems learn from data that earlier systems logged."
+    nl: "Een simulator is een programma dat een deel van de wereld nabootst, zodat een agent daar fouten kan maken, sneller en goedkoper dan in werkelijkheid. Het plasma van de TCV-tokamak werd gestuurd door een agent die alleen in een simulator had geleerd; andere systemen leren van data die eerdere systemen hebben vastgelegd."
+  - en: "In the lesson's data center, an agent that learned in a simulator cools at night, when electricity is cheap, and costs 39% less a day than a thermostat. But it only knows the states the simulator showed: on a warm night the simulator never had, its table still holds zeros."
+    nl: "In het datacenter van de les koelt een agent die in een simulator leerde 's nachts, als stroom goedkoop is, en kost de agent per dag 39% minder dan een thermostaat. Maar de agent kent alleen de states uit de simulator: in een warme nacht, een situatie die de simulator nooit liet zien, staan in de tabel nog nullen."
+  - en: "Real systems put limits on every action, keep a rule to fall back on, and let people take over. In the lesson, a safety rule that lets the thermostat decide in states the simulator never showed keeps the warm night below the limit."
+    nl: "Echte systemen zetten grenzen op elke action, houden een regel achter de hand om op terug te vallen, en laten mensen het overnemen. In de les houdt een veiligheidsregel de warme nacht onder de grens: in states die de simulator nooit liet zien, beslist de thermostaat."
+can_now:
+  - en: "write the reward of a simulator: minus the cost of a step, with a penalty for what must not happen"
+    nl: "de reward van een simulator schrijven: min de kosten van een stap, met een straf voor wat niet mag gebeuren"
+    by: step
+  - en: "add a safety rule that hands the states a simulator never showed to a fixed rule"
+    nl: "met een veiligheidsregel de states die een simulator nooit liet zien aan een vaste regel geven"
+    by: act
+  - en: "choose where an agent should learn when a mistake in the world is expensive"
+    nl: "kiezen waar een agent moet leren als een fout in de wereld duur is"
+    by: learn_where
+  - en: "say what an agent needs to go straight from a simulator to the real machine"
+    nl: "zeggen wat een agent nodig heeft om rechtstreeks van een simulator naar de echte machine te gaan"
+    by: zero_shot
+further_reading:
+  - en: "Jonas Degrave, Federico Felici, Jonas Buchli and colleagues (2022), *Magnetic control of tokamak plasmas through deep reinforcement learning*, Nature 602, pages 414 to 419: an agent trained in a simulator steers the plasma of the TCV tokamak with 19 coils"
+    nl: "Jonas Degrave, Federico Felici, Jonas Buchli en collega's (2022), *Magnetic control of tokamak plasmas through deep reinforcement learning*, Nature 602, bladzijde 414 tot en met 419: een agent getraind in een simulator stuurt het plasma van de TCV-tokamak met 19 spoelen"
+  - en: "Chris Gamble and Jim Gao (2018), *Safety-first AI for autonomous data centre cooling and industrial control*, Google DeepMind blog: the AI that cools data centers by itself, and its eight safety mechanisms"
+    nl: "Chris Gamble en Jim Gao (2018), *Safety-first AI for autonomous data centre cooling and industrial control*, blog van Google DeepMind: de AI die zelf datacenters koelt, en de acht veiligheidsmaatregelen"
+  - en: "Jerry Luo, Cosmin Paduraru and colleagues (2022), *Controlling commercial cooling systems using reinforcement learning*, arXiv 2211.07357: RL that cools two buildings of Trane, with limits and an off switch"
+    nl: "Jerry Luo, Cosmin Paduraru en collega's (2022), *Controlling commercial cooling systems using reinforcement learning*, arXiv 2211.07357: RL die twee gebouwen van Trane koelt, met grenzen en een uitknop"
+  - en: "Minmin Chen, Alex Beutel, Paul Covington, Sagar Jain, Francois Belletti and Ed H. Chi (2019), *Top-K Off-Policy Correction for a REINFORCE Recommender System*, WSDM 2019, pages 456 to 464: RL for YouTube's recommendations, learned from what earlier recommenders logged"
+    nl: "Minmin Chen, Alex Beutel, Paul Covington, Sagar Jain, Francois Belletti en Ed H. Chi (2019), *Top-K Off-Policy Correction for a REINFORCE Recommender System*, WSDM 2019, bladzijde 456 tot en met 464: RL voor de aanbevelingen van YouTube, geleerd uit wat eerdere systemen vastlegden"
+  - en: "Azalia Mirhoseini, Anna Goldie and colleagues (2021), *A graph placement methodology for fast chip design*, Nature 594, pages 207 to 212; and Chung-Kuan Cheng, Andrew B. Kahng and colleagues (2023), *Assessment of Reinforcement Learning for Macro Placement*, ISPD 2023: RL that places the parts of a chip, and a study that questions the results"
+    nl: "Azalia Mirhoseini, Anna Goldie en collega's (2021), *A graph placement methodology for fast chip design*, Nature 594, bladzijde 207 tot en met 212; en Chung-Kuan Cheng, Andrew B. Kahng en collega's (2023), *Assessment of Reinforcement Learning for Macro Placement*, ISPD 2023: RL die de onderdelen van een chip plaatst, en een studie die de resultaten betwijfelt"
+  - en: "Daniel J. Mankowitz, Andrea Michi and colleagues (2023), *Faster sorting algorithms discovered using deep reinforcement learning*, Nature 618, pages 257 to 263: AlphaDev, whose sorting routines are now in LLVM's C++ library"
+    nl: "Daniel J. Mankowitz, Andrea Michi en collega's (2023), *Faster sorting algorithms discovered using deep reinforcement learning*, Nature 618, bladzijde 257 tot en met 263: AlphaDev, waarvan de sorteerroutines nu in de C++-bibliotheek van LLVM zitten"
