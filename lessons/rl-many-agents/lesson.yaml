@@ -1,0 +1,40 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: rl-many-agents
+minutes: 30
+title:
+  en: "When agents meet: emergent behavior and social dilemmas"
+  nl: "Als agents elkaar ontmoeten: emergent behavior en sociale dilemma's"
+goal:
+  en: "let two Q-learners play the prisoner's dilemma, write their rewards and the test of a prisoner's dilemma yourself, and see how memory of one round decides whether they betray each other or cooperate."
+  nl: "twee Q-learners het prisoner's dilemma laten spelen, zelf de rewards en de test voor een prisoner's dilemma schrijven, en zien hoe geheugen van één ronde bepaalt of de agents elkaar verraden of samenwerken."
+summary:
+  - en: "In multi-agent reinforcement learning, several agents learn in one environment. For each agent the others are part of its world, and that world changes while they learn: the same action can pay well today and badly later."
+    nl: "Bij multi-agent reinforcement learning leren meerdere agents in één environment. Voor elke agent horen de andere agents bij de wereld, en deze wereld verandert terwijl de andere agents leren: dezelfde action kan vandaag veel opleveren en later weinig."
+  - en: "In the prisoner's dilemma, betraying pays more whatever the other does, yet both get more when both cooperate: a social dilemma. Two Q-learners without memory learn to betray each other."
+    nl: "In het prisoner's dilemma levert verraden meer op, wat de ander ook doet, terwijl beide meer krijgen als beide samenwerken: een sociaal dilemma. Twee Q-learners zonder geheugen leren elkaar te verraden."
+  - en: "With memory of the last round, an agent can learn that a betrayal gets answered. Many pairs then cooperate, with a rule that nobody gave them: emergent behavior. Whether a pair gets there depends on where it starts."
+    nl: "Met geheugen van de laatste ronde kan een agent leren dat een verraad beantwoord wordt. Veel paren werken dan samen, met een regel die niemand de agents gaf: emergent behavior. Of een paar zover komt, hangt af van het begin."
+can_now:
+  - en: "work out the rewards of both players in a round from one table"
+    nl: "de rewards van beide spelers in een ronde uit één tabel halen"
+    by: rewards
+  - en: "test whether a game is a prisoner's dilemma"
+    nl: "testen of een spel een prisoner's dilemma is"
+    by: is_dilemma
+  - en: "let two trained agents play, and count what the pair does"
+    nl: "twee getrainde agents laten spelen, en tellen wat het paar doet"
+    by: together
+  - en: "recognize cooperation that agents learn without talking to each other"
+    nl: "herkennen dat agents samenwerking leren zonder met elkaar te praten"
+    by: pricing
+further_reading:
+  - en: "Bowen Baker, Ingmar Kanitscheider, Todor Markov, Yi Wu, Glenn Powell, Bob McGrew and Igor Mordatch (2020), *Emergent Tool Use From Multi-Agent Autocurricula*, ICLR 2020, arXiv:1909.07528: hide-and-seek, with videos of every strategy in the OpenAI blog *Emergent tool use from multi-agent interaction* (2019)"
+    nl: "Bowen Baker, Ingmar Kanitscheider, Todor Markov, Yi Wu, Glenn Powell, Bob McGrew en Igor Mordatch (2020), *Emergent Tool Use From Multi-Agent Autocurricula*, ICLR 2020, arXiv:1909.07528: verstoppertje, met filmpjes van elke strategie in de OpenAI-blog *Emergent tool use from multi-agent interaction* (2019)"
+  - en: "Tuomas Sandholm and Robert Crites (1996), *Multiagent reinforcement learning in the Iterated Prisoner's Dilemma*, BioSystems: Q-learners that play the prisoner's dilemma again and again, as in this lesson"
+    nl: "Tuomas Sandholm en Robert Crites (1996), *Multiagent reinforcement learning in the Iterated Prisoner's Dilemma*, BioSystems: Q-learners die het prisoner's dilemma steeds opnieuw spelen, zoals in deze les"
+  - en: "Emilio Calvano, Giacomo Calzolari, Vincenzo Denicolò and Sergio Pastorello (2020), *Artificial Intelligence, Algorithmic Pricing, and Collusion*, American Economic Review 110(10): two pricing Q-learners that learn to keep their prices high"
+    nl: "Emilio Calvano, Giacomo Calzolari, Vincenzo Denicolò en Sergio Pastorello (2020), *Artificial Intelligence, Algorithmic Pricing, and Collusion*, American Economic Review 110(10): twee Q-learners die prijzen bepalen en leren de prijzen hoog te houden"
+  - en: "Joel Leibo, Vinicius Zambaldi, Marc Lanctot, Janusz Marecki and Thore Graepel (2017), *Multi-agent Reinforcement Learning in Sequential Social Dilemmas*, AAMAS 2017, arXiv:1702.03037: social dilemmas in small worlds in which agents gather apples or hunt together"
+    nl: "Joel Leibo, Vinicius Zambaldi, Marc Lanctot, Janusz Marecki en Thore Graepel (2017), *Multi-agent Reinforcement Learning in Sequential Social Dilemmas*, AAMAS 2017, arXiv:1702.03037: sociale dilemma's in kleine werelden waarin agents appels verzamelen of samen jagen"
