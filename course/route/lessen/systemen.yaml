@@ -127,9 +127,9 @@ lessons:
   module: productie
   idea: "Every run writes its settings, its metrics per epoch and its result to a log, so you can compare runs later and find the best one; you write a small tracker yourself with log_param and log_metric, the same calls MLflow has."
   covers: [ontwikkelomgeving-tracking-en-reproduceerbaarheid#2]
-  requires: [sys-reproducibility, py-json, torch-loss-curves]
+  requires: [sys-reproducibility, py-json, torch-loss-curves, py-comprehensions]
   introduces: [c:experiment-tracking, c:mlflow]
-  mentions: [c:json-lines]
+  mentions: [c:json-lines, py:open-write]
   data: [qmnist]
   ladder: [python, torch]
   needs: any

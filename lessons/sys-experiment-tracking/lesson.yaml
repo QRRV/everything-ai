@@ -1,0 +1,44 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: sys-experiment-tracking
+minutes: 30
+title:
+  en: "Keeping track of your runs: experiment tracking"
+  nl: "Je runs bijhouden: experiment tracking"
+goal:
+  en: "write a small tracker that logs the settings of a run once and its metrics after every epoch, keep each run as one JSON line in a log, and find the best run in a log by its lowest validation loss."
+  nl: "een kleine tracker schrijven die de instellingen van een run één keer en de metrics na elke epoch logt, elke run als één JSON-regel in een log bewaren, en in een log de run met de laagste validation loss vinden."
+summary:
+  - en: "In 2018, Pete Warden wrote that even the makers of a model sometimes could not train it again, and Databricks released MLflow because it is hard to track experiments. Experiment tracking means every run records its settings, its metrics and its result."
+    nl: "In 2018 schreef Pete Warden dat zelfs de makers van een model het soms niet opnieuw konden trainen, en Databricks bracht MLflow uit omdat experimenten bijhouden lastig is. Experiment tracking betekent dat elke run de instellingen, de metrics en de uitkomst vastlegt."
+  - en: "A param is a setting, logged once, before training; a metric is a measurement, logged after every epoch with its step. With every step in the log, you can still find the epoch with the lowest validation loss."
+    nl: "Een param is een instelling, één keer gelogd, voordat de training begint; een metric is een meting, na elke epoch gelogd met de step. Met elke step in het log vind je later nog de epoch met de laagste validation loss."
+  - en: "In the format JSON Lines, each line of the log is one run, written with json.dumps and added at the end with open(path, \"a\"), so a new run never touches the earlier ones; json.loads turns each line back into a dict."
+    nl: "In het formaat JSON Lines is elke regel van het log één run, geschreven met json.dumps en aan het eind toegevoegd met open(path, \"a\"), dus raakt een nieuwe run de eerdere nooit; json.loads maakt van elke regel weer een dict."
+  - en: "In the course's log of twelve runs, the best run by its lowest validation loss is not the best one by its last epoch. MLflow offers the same calls, log_param and log_metric, with a table of all runs in the browser."
+    nl: "In het log van de course met twaalf runs is de beste run volgens de laagste validation loss niet de beste volgens de laatste epoch. MLflow biedt dezelfde aanroepen, log_param en log_metric, met een tabel van alle runs in de browser."
+can_now:
+  - en: "write a log_metric that keeps every measurement of a run with its step"
+    nl: "een log_metric schrijven die elke meting van een run met de step bewaart"
+    by: log-metric
+  - en: "find the run with the lowest value of a metric in a log of runs"
+    nl: "in een log met runs de run met de laagste waarde van een metric vinden"
+    by: best-run
+  - en: "explain why a log adds one line per run instead of writing one list again"
+    nl: "uitleggen waarom een log één regel per run toevoegt in plaats van één lijst opnieuw te schrijven"
+    by: lines
+  - en: "say which params a run needs in its log to be trained again"
+    nl: "zeggen welke params een run in het log nodig heeft om opnieuw getraind te worden"
+    by: repeat
+further_reading:
+  - en: "MLflow documentation, *MLflow Tracking* and the Python API: log_param, log_metric with step, search_runs; the *REST API* reference says how often a param and a metric can be logged"
+    nl: "MLflow-documentatie, *MLflow Tracking* en de Python-API: log_param, log_metric met step, search_runs; de referentie van de *REST API* zegt hoe vaak je een param en een metric kunt loggen"
+  - en: "Matei Zaharia and Cyrielle Simeone (2018), *Introducing MLflow: an Open Source Machine Learning Platform*, the Databricks blog"
+    nl: "Matei Zaharia en Cyrielle Simeone (2018), *Introducing MLflow: an Open Source Machine Learning Platform*, de blog van Databricks"
+  - en: "Pete Warden (2018), *The Machine Learning Reproducibility Crisis*: why models are hard to train again"
+    nl: "Pete Warden (2018), *The Machine Learning Reproducibility Crisis*: waarom modellen moeilijk opnieuw te trainen zijn"
+  - en: "jsonlines.org, *JSON Lines*: the three rules of the format, and why it suits log files"
+    nl: "jsonlines.org, *JSON Lines*: de drie regels van het formaat, en waarom het formaat geschikt is voor logbestanden"
+  - en: "PyTorch documentation, *torch.utils.tensorboard*: SummaryWriter and add_scalar, the same idea for TensorBoard"
+    nl: "PyTorch-documentatie, *torch.utils.tensorboard*: SummaryWriter en add_scalar, hetzelfde idee voor TensorBoard"
