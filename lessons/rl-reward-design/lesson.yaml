@@ -1,0 +1,40 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: rl-reward-design
+minutes: 30
+title:
+  en: "You get what you reward: reward misspecification"
+  nl: "Je krijgt wat je beloont: reward misspecification"
+goal:
+  en: "write two rewards for a cleaning robot yourself, see how Q-learning exploits the one that pays for the wrong thing, and check what the robot really does, apart from the reward."
+  nl: "zelf twee rewards schrijven voor een schoonmaakrobot, zien hoe Q-learning de zwakke plek vindt in de reward die voor het verkeerde betaalt, en controleren wat de robot echt doet, los van de reward."
+summary:
+  - en: "An agent makes the return of the reward it gets as large as it can, not the task someone meant. When the two differ, that is reward misspecification; when the agent finds the gap and uses it, that is reward hacking, a form of specification gaming."
+    nl: "Een agent maakt de return van de reward die de agent krijgt zo groot mogelijk, niet de taak die iemand bedoelde. Verschillen de twee, dan is dat reward misspecification; vindt de agent het gat en gebruikt de agent het, dan is dat reward hacking, een vorm van specification gaming."
+  - en: "A reward for a step that can be repeated, such as picking up a piece of dirt, pays the robot to pick up the same piece again and again: the room stays dirty, and the reward is far higher than cleaning can give. A reward for the result, the dirt that leaves the room, pays only for what you want."
+    nl: "Een reward voor een stap die je kunt herhalen, zoals een stuk vuil oppakken, betaalt de robot om hetzelfde stuk steeds weer op te pakken: de kamer blijft vuil, en de reward is veel hoger dan schoonmaken kan geven. Een reward voor het resultaat, het vuil dat de kamer verlaat, betaalt alleen voor wat je wilt."
+  - en: "Check a reward by counting the result you want, apart from the reward, and by watching what the agent does. A reward that rises while the result does not, or that is higher than the task can give, pays for something you did not want."
+    nl: "Controleer een reward door het resultaat dat je wilt zelf te tellen, los van de reward, en door te kijken wat de agent doet. Stijgt de reward terwijl het resultaat dat niet doet, of is de reward hoger dan de taak kan geven, dan betaalt de reward voor iets wat je niet wilde."
+can_now:
+  - en: "write a reward that pays for one kind of step"
+    nl: "een reward schrijven die voor één soort stap betaalt"
+    by: pickup_reward
+  - en: "write a reward that pays for how much better a step made the result"
+    nl: "een reward schrijven die betaalt voor hoeveel beter een stap het resultaat maakte"
+    by: result_reward
+  - en: "check what a trained agent really does by counting the result, apart from the reward"
+    nl: "controleren wat een getrainde agent echt doet door het resultaat te tellen, los van de reward"
+    by: dirt_left
+  - en: "recognize reward hacking in a reward that comes from people"
+    nl: "reward hacking herkennen in een reward van mensen"
+    by: camera
+further_reading:
+  - en: "Jack Clark and Dario Amodei (2016), *Faulty reward functions in the wild*, OpenAI blog: the boat in CoastRunners that goes around in a lagoon instead of finishing the race"
+    nl: "Jack Clark en Dario Amodei (2016), *Faulty reward functions in the wild*, OpenAI blog: de boot die in CoastRunners rondjes vaart in een lagune in plaats van de race uit te varen"
+  - en: "Dario Amodei, Chris Olah, Jacob Steinhardt, Paul Christiano, John Schulman and Dan Mané (2016), *Concrete Problems in AI Safety*, arXiv:1606.06565: section 4 on reward hacking, with a cleaning robot as the example"
+    nl: "Dario Amodei, Chris Olah, Jacob Steinhardt, Paul Christiano, John Schulman en Dan Mané (2016), *Concrete Problems in AI Safety*, arXiv:1606.06565: hoofdstuk 4 over reward hacking, met een schoonmaakrobot als voorbeeld"
+  - en: "Dario Amodei, Paul Christiano and Alex Ray (2017), *Learning from human preferences*, OpenAI blog: a reward from people who compare two short videos, and the robot arm that held its hand in front of the camera"
+    nl: "Dario Amodei, Paul Christiano en Alex Ray (2017), *Learning from human preferences*, OpenAI blog: een reward van mensen die twee korte filmpjes vergelijken, en de robotarm die de hand voor de camera hield"
+  - en: "Victoria Krakovna and colleagues (2020), *Specification gaming: the flip side of AI ingenuity*, DeepMind blog: many more examples of agents that reach a goal as it is written, in a way nobody meant"
+    nl: "Victoria Krakovna en collega's (2020), *Specification gaming: the flip side of AI ingenuity*, DeepMind blog: veel meer voorbeelden van agents die een doel halen zoals het er staat, op een manier die niemand bedoelde"
