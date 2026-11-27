@@ -1,0 +1,42 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: sys-what-is-an-ml-system
+minutes: 25
+title:
+  en: "More than a model: what an ML system is"
+  nl: "Meer dan een model: wat een ML-systeem is"
+goal:
+  en: "name the parts of a small ML system around a model, count how much of its code the model is, and say what production asks for that research does not."
+  nl: "de delen van een klein ML-systeem rond een model benoemen, tellen welk deel van de code het model is, en zeggen wat productie vraagt en onderzoek niet."
+summary:
+  - en: "An ML system is the model together with everything that makes it useful in practice: collecting and checking the data, features, training, serving the answers, monitoring, feedback, and the people who look after it."
+    nl: "Een ML-systeem is het model samen met alles wat het in de praktijk bruikbaar maakt: de data verzamelen en controleren, features, trainen, de antwoorden serveren, monitoring, feedback, en de mensen die het onderhouden."
+  - en: "In a real system, the model is a small part of the code: in the course's spam service, 5 of 118 lines, since scikit-learn does the learning. Sculley and others drew the same picture of the systems at Google in 2015."
+    nl: "In een echt systeem is het model een klein deel van de code: in de spamdienst van de course 5 van de 118 regels, omdat scikit-learn het leren doet. Sculley en anderen tekenden in 2015 hetzelfde beeld van de systemen bij Google."
+  - en: "Technical debt is the cost later of shortcuts taken now. ML systems add their own kinds: a model mixes its features, so changing one changes how it uses all the others (CACE); and if a feature is made differently after training, the answers change without the model's code changing."
+    nl: "Technische schuld is wat shortcuts van nu later kosten. ML-systemen hebben er eigen vormen van: een model mengt de features, dus verandert één feature hoe het model alle andere gebruikt (CACE); en wordt een feature na het trainen anders gemaakt, dan veranderen de antwoorden zonder dat de code van het model verandert."
+  - en: "Research asks for the best score on a fixed test set; production asks for good answers for many users, quick and cheap enough, on data that keeps changing. The most accurate model is not always the one that fits."
+    nl: "Onderzoek vraagt de beste score op een vaste test set; productie vraagt goede antwoorden voor veel gebruikers, snel en goedkoop genoeg, op data die blijft veranderen. Het model met de hoogste accuracy is niet altijd het model dat past."
+can_now:
+  - en: "count how much of the code of a system is the model"
+    nl: "tellen welk deel van de code van een systeem het model is"
+    by: count-lines
+  - en: "choose a model under a time budget instead of by score alone"
+    nl: "een model kiezen binnen een tijdsbudget in plaats van alleen op score"
+    by: budget
+  - en: "explain how a change outside the model changes its answers"
+    nl: "uitleggen hoe een verandering buiten het model de antwoorden verandert"
+    by: cace
+  - en: "recognize a model that steers the data it learns from later"
+    nl: "een model herkennen dat de data stuurt waarvan het later leert"
+    by: loop
+further_reading:
+  - en: "D. Sculley and others (2015), *Hidden Technical Debt in Machine Learning Systems*, NeurIPS: the figure with the small box of ML code, and the kinds of technical debt of ML systems"
+    nl: "D. Sculley en anderen (2015), *Hidden Technical Debt in Machine Learning Systems*, NeurIPS: de figuur met het kleine blok ML-code, en de soorten technische schuld van ML-systemen"
+  - en: "Xavier Amatriain and Justin Basilico (2012), *Netflix Recommendations: Beyond the 5 stars (Part 1)*, Netflix Technology Blog: what Netflix did with the Netflix Prize, and why"
+    nl: "Xavier Amatriain en Justin Basilico (2012), *Netflix Recommendations: Beyond the 5 stars (Part 1)*, Netflix Technology Blog: wat Netflix deed met de Netflix Prize, en waarom"
+  - en: "Chip Huyen (2022), *Designing Machine Learning Systems*, chapter 1: machine learning in research and in production"
+    nl: "Chip Huyen (2022), *Designing Machine Learning Systems*, hoofdstuk 1: machine learning in onderzoek en in productie"
+  - en: "Ward Cunningham (1992), *The WyCash Portfolio Management System*, OOPSLA: where the comparison with a debt comes from"
+    nl: "Ward Cunningham (1992), *The WyCash Portfolio Management System*, OOPSLA: waar de vergelijking met een schuld vandaan komt"

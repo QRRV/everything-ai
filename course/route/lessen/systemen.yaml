@@ -33,6 +33,7 @@ lessons:
   covers: [ml-systemen-in-productie#0, ml-systemen-in-productie#1]
   requires: [ml-workflow, ml-pipelines]
   introduces: [c:ml-system, c:technical-debt]
+  mentions: [c:naive-bayes]
   data: []
   ladder: [python]
   needs: any
