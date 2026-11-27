@@ -1,0 +1,48 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: rl-dopamine
+minutes: 30
+title:
+  en: "Dopamine as a prediction error"
+  nl: "Dopamine als prediction error"
+goal:
+  en: "work out the error of a TD model at every step of a trial, watch it move from the juice to the signal that announces it, and see why dopamine neurons are said to send a reward prediction error."
+  nl: "de fout van een TD-model bij elke stap van een trial uitrekenen, zien hoe de fout van het sap naar het signaal schuift dat het sap aankondigt, en begrijpen waarom dopamineneuronen een reward prediction error zouden doorgeven."
+summary:
+  - en: "Wolfram Schultz measured dopamine neurons in monkeys that learned that a light means juice. At first the neurons fired when the juice came; once the monkeys had learned, they fired when the light came on, and when the juice stayed away, they went quiet at the moment it should have come."
+    nl: "Wolfram Schultz mat dopamineneuronen bij apen die leerden dat een lampje sap betekent. Eerst vuurden de neuronen als het sap kwam; toen de apen het geleerd hadden, vuurden de neuronen als het lampje aanging, en als het sap wegbleef, werden de neuronen stil op het moment dat het sap had moeten komen."
+  - en: "The TD model of conditioning gives every step after the light its own V: the juice that is still to come. The error at a step is the juice of that step plus γ times its V, minus the V of the step before."
+    nl: "Het TD-model van conditionering geeft elke stap na de lamp een eigen V: het sap dat nog komt. De fout bij een stap is het sap van deze stap plus γ keer de V van de stap, min de V van de vorige stap."
+  - en: "The error at a step teaches the step before, with a step of η times the error. Trial by trial, the error moves back from the juice to the light, the first moment that announces the juice, and juice that stays away gives an error of −1."
+    nl: "De fout bij een stap leert de vorige stap bij, met een stap van η keer de fout. Trial na trial schuift de fout terug van het sap naar de lamp, het eerste moment dat het sap aankondigt, en sap dat wegblijft geeft een fout van −1."
+  - en: "Schultz, Dayan and Montague (1997) concluded that dopamine neurons send this error, a reward prediction error: what counts is the surprise, not the juice. More juice than predicted gives a burst, less gives a dip."
+    nl: "Schultz, Dayan en Montague (1997) concludeerden dat dopamineneuronen deze fout doorgeven, een reward prediction error: wat telt is de verrassing, niet het sap. Meer sap dan voorspeld geeft een salvo, minder geeft een dip."
+  - en: "With γ below 1, juice further away counts for less, and the burst at the light is smaller, as Kobayashi and Schultz (2008) found. Dopamine neurons hardly fire at a blocked signal, and making them fire at the food undoes blocking (Steinberg and colleagues, 2013)."
+    nl: "Met γ onder 1 telt sap verder weg minder, en is het salvo bij de lamp kleiner, zoals Kobayashi en Schultz (2008) vonden. Dopamineneuronen vuren nauwelijks bij een geblokkeerd signaal, en als dopamineneuronen bij het eten aan het vuren worden gebracht, verdwijnt blocking (Steinberg en collega's, 2013)."
+can_now:
+  - en: "work out the error of a TD model at every step of a trial, from its V's and the juice"
+    nl: "de fout van een TD-model bij elke stap van een trial uitrekenen, uit de V's en het sap"
+    by: errors
+  - en: "let the V's of a trial learn from the error of the step after them, and watch the error move from the juice to the light"
+    nl: "de V's van een trial laten leren van de fout van de stap erna, en zien hoe de fout van het sap naar de lamp schuift"
+    by: learn
+  - en: "say what the error is when more juice comes than was predicted"
+    nl: "zeggen wat de fout is als er meer sap komt dan voorspeld was"
+    by: more
+  - en: "explain what happens to blocking when dopamine neurons fire at the food"
+    nl: "uitleggen wat er met blocking gebeurt als dopamineneuronen bij het eten vuren"
+    by: unblock
+further_reading:
+  - en: "Wolfram Schultz, Peter Dayan and P. Read Montague (1997), *A neural substrate of prediction and reward*, Science 275(5306), pages 1593 to 1599: the three trials of this lesson, and the TD model next to the recordings"
+    nl: "Wolfram Schultz, Peter Dayan en P. Read Montague (1997), *A neural substrate of prediction and reward*, Science 275(5306), bladzijde 1593 tot en met 1599: de drie trials van deze les, en het TD-model naast de metingen"
+  - en: "P. Read Montague, Peter Dayan and Terrence J. Sejnowski (1996), *A framework for mesencephalic dopamine systems based on predictive Hebbian learning*, Journal of Neuroscience 16(5), pages 1936 to 1947: the TD model as a model of dopamine neurons"
+    nl: "P. Read Montague, Peter Dayan en Terrence J. Sejnowski (1996), *A framework for mesencephalic dopamine systems based on predictive Hebbian learning*, *Journal of Neuroscience* 16(5), bladzijde 1936 tot en met 1947: het TD-model als model van dopamineneuronen"
+  - en: "Pascale Waelti, Anthony Dickinson and Wolfram Schultz (2001), *Dopamine responses comply with basic assumptions of formal learning theory*, Nature 412, pages 43 to 48: blocking in dopamine neurons"
+    nl: "Pascale Waelti, Anthony Dickinson en Wolfram Schultz (2001), *Dopamine responses comply with basic assumptions of formal learning theory*, Nature 412, bladzijde 43 tot en met 48: blocking in dopamineneuronen"
+  - en: "Elizabeth E. Steinberg, Ronald Keiflin, Josiah R. Boivin, Ilana B. Witten, Karl Deisseroth and Patricia H. Janak (2013), *A causal link between prediction errors, dopamine neurons and learning*, Nature Neuroscience 16(7), pages 966 to 973: dopamine neurons made to fire at the food undo blocking"
+    nl: "Elizabeth E. Steinberg, Ronald Keiflin, Josiah R. Boivin, Ilana B. Witten, Karl Deisseroth en Patricia H. Janak (2013), *A causal link between prediction errors, dopamine neurons and learning*, *Nature Neuroscience* 16(7), bladzijde 966 tot en met 973: dopamineneuronen die bij het eten aan het vuren worden gebracht heffen blocking op"
+  - en: "Shunsuke Kobayashi and Wolfram Schultz (2008), *Influence of reward delays on responses of dopamine neurons*, Journal of Neuroscience 28(31), pages 7837 to 7846: the later the reward, the smaller the burst at the signal"
+    nl: "Shunsuke Kobayashi en Wolfram Schultz (2008), *Influence of reward delays on responses of dopamine neurons*, *Journal of Neuroscience* 28(31), bladzijde 7837 tot en met 7846: hoe later de reward, hoe kleiner het salvo bij het signaal"
+  - en: "Richard S. Sutton and Andrew G. Barto (2018), *Reinforcement Learning: An Introduction*, 2nd edition, MIT Press, chapter 15, on the reward prediction error hypothesis of dopamine; free at incompleteideas.net"
+    nl: "Richard S. Sutton en Andrew G. Barto (2018), *Reinforcement Learning: An Introduction*, 2e editie, MIT Press, hoofdstuk 15, over de hypothese dat dopamine een reward prediction error doorgeeft; gratis op incompleteideas.net"
