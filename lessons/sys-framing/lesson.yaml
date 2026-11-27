@@ -1,0 +1,42 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: sys-framing
+minutes: 25
+title:
+  en: "Framing the problem for production"
+  nl: "Het probleem formuleren voor productie"
+goal:
+  en: "frame a wish as a classification, a regression or a ranking, and choose the framing that lets you change a threshold, the items or the balance between two goals in code."
+  nl: "een wens formuleren als classificatie, regressie of ranking, en de formulering kiezen waarmee je een threshold, de items of de balans tussen twee doelen in code kunt veranderen."
+summary:
+  - en: "Problem framing decides what a model predicts: a class, a number or an order. In 2016, YouTube's engineers wrote that ranking by clicks promoted clickbait, and they predicted minutes watched instead."
+    nl: "Probleemformulering bepaalt wat een model voorspelt: een klasse, een getal of een volgorde. In 2016 schreven de engineers van YouTube dat ranken op klikken clickbait bovenaan zette, en voorspelden de engineers in plaats daarvan kijkminuten."
+  - en: "A threshold built into the labels of a classification moves only with new labels and a new model; a regression predicts the number, and the threshold is one line of code, as Google's course on problem framing advises."
+    nl: "Zit een threshold in de labels van een classificatie, dan verschuift de threshold alleen met nieuwe labels en een nieuw model; een regressie voorspelt het getal, en de threshold is één regel code, zoals de cursus van Google over problem framing aanraadt."
+  - en: "With two goals, such as engagement and quality, decoupled objectives mean one model per goal, and the scores combined by a weight α in code. One model on one combined loss needs a new training run for every new balance."
+    nl: "Bij twee doelen, zoals engagement en kwaliteit, train je met ontkoppelde doelen één model per doel en voeg je de scores samen met een weging α in code. Eén model op één samengestelde loss heeft voor elke nieuwe balans een nieuwe trainingsrun nodig."
+  - en: "In the course's feed, from α = 0.4 on no misleading post is in the top 3, and no position of the slider costs any training. The weight is a choice the team makes, not something training finds."
+    nl: "In de feed van de course staat vanaf α = 0,4 geen misleidende post meer in de top 3, en kost geen enkele stand van de slider training. De weging is een keuze van het team, niet iets wat training vindt."
+can_now:
+  - en: "frame one wish as a classification, a regression or a ranking"
+    nl: "één wens formuleren als classificatie, regressie of ranking"
+    by: framing
+  - en: "pick the item with the highest score from one score per item"
+    nl: "uit één score per item het item met de hoogste score kiezen"
+    by: next
+  - en: "combine the scores of two models with a weight in code"
+    nl: "de scores van twee modellen samenvoegen met een weging in code"
+    by: combined
+  - en: "tell which setup lets a team change the balance between two goals without training"
+    nl: "zeggen met welke opzet een team de balans tussen twee doelen kan veranderen zonder training"
+    by: goals
+further_reading:
+  - en: "Chip Huyen (2022), *Designing Machine Learning Systems*, O'Reilly, chapter 2: framing ML problems, objective functions and decoupling objectives; the same examples are in the free notes of lecture 2 of the Stanford course CS 329S (2022)"
+    nl: "Chip Huyen (2022), *Designing Machine Learning Systems*, O'Reilly, hoofdstuk 2: ML-problemen formuleren, objective functions en doelen ontkoppelen; dezelfde voorbeelden staan in de gratis aantekeningen bij college 2 van het Stanford-vak CS 329S (2022)"
+  - en: "Google for Developers, *Introduction to ML Problem Framing*: the free course on framing a problem, with the video cache and its threshold"
+    nl: "Google for Developers, *Introduction to ML Problem Framing*: de gratis cursus over het formuleren van een probleem, met de videocache en de threshold"
+  - en: "Paul Covington, Jay Adams and Emre Sargin (2016), *Deep Neural Networks for YouTube Recommendations*, RecSys: why YouTube predicts minutes watched instead of clicks"
+    nl: "Paul Covington, Jay Adams en Emre Sargin (2016), *Deep Neural Networks for YouTube Recommendations*, RecSys: waarom YouTube kijkminuten voorspelt in plaats van klikken"
+  - en: "Zhe Zhao and others (2019), *Recommending What Video to Watch Next: A Multitask Ranking System*, RecSys: several goals in one ranking, combined with weights tuned by hand"
+    nl: "Zhe Zhao en anderen (2019), *Recommending What Video to Watch Next: A Multitask Ranking System*, RecSys: meerdere doelen in één ranking, samengevoegd met wegingen die met de hand ingesteld zijn"
