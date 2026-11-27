@@ -344,7 +344,7 @@ def demo_train(box_act, box_step, reality_choice, result_act, result_step, safet
             _out = _live.stopped("*Je `step` gaf een fout, of iets anders dan een temperatuur en een getal. Haalt je `step` de check nog?*")
         else:
             _out = mo.vstack([
-                L.explore("rewind", "day", lambda _v: C.rewind_frame(_run, int(_v), L.lang), start=C.DAYS,
+                L.explore("rewind", "dag", lambda _v: C.rewind_frame(_run, int(_v), L.lang), start=C.DAYS,
                           values=list(range(0, C.DAYS + 1, C.SNAP)), role="",
                           task="Ga terug naar dag 0, en dan vooruit: vanaf welke dag wordt de eigen dag van de agent niet meer te heet?"),
                 mo.Html(C.test_picture(_run, _reality, _safety, L.lang, _act)),

@@ -1,0 +1,58 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: rl-milestones
+minutes: 30
+title:
+  en: "From checkers to Go: milestones of RL"
+  nl: "Van checkers tot Go: mijlpalen van RL"
+goal:
+  en: "name the milestones of RL in games and what each program learned from; write how one table chooses a move and learns from the opponent's position, and watch the table learn a game by playing against itself."
+  nl: "de mijlpalen van RL in games noemen en waar elk programma van leerde; schrijven hoe één tabel een zet kiest en leert van de positie van de tegenstander, en zien hoe de tabel een spel leert door tegen zichzelf te spelen."
+summary:
+  - en: "Games made the milestones of RL: Samuel's checkers program in 1959, TD-Gammon in backgammon, DQN on 49 Atari games, AlphaGo against Lee Sedol in 2016, then AlphaGo Zero and AlphaZero, AlphaStar, OpenAI Five, GT Sophy and a robot hand that solved a Rubik's Cube."
+    nl: "Games leverden de mijlpalen van RL: het checkersprogramma van Samuel in 1959, TD-Gammon bij backgammon, DQN op 49 Atari-games, AlphaGo tegen Lee Sedol in 2016, en daarna AlphaGo Zero en AlphaZero, AlphaStar, OpenAI Five, GT Sophy en een robothand die een Rubiks kubus oploste."
+  - en: "Each program joined learning from its own games to search, to a neural network that judges positions it never saw, or to an enormous number of games. Most learned by self-play: playing against copies of itself, so that the opponent gets stronger as the player does."
+    nl: "Elk programma combineerde leren van de eigen partijen met zoeken, met een neural network dat ook nooit geziene posities beoordeelt, of met een enorm aantal partijen. De meeste programma's leerden door self-play: spelen tegen kopieën van zichzelf, zodat de tegenstander even hard sterker wordt als de speler."
+  - en: "AlphaGo learned from human games first; AlphaGo Zero and AlphaZero needed only the rules and games against themselves, and AlphaZero learned chess, shogi and Go with the same algorithm."
+    nl: "AlphaGo leerde eerst van menselijke partijen; AlphaGo Zero en AlphaZero hadden alleen de regels en partijen tegen zichzelf nodig, en AlphaZero leerde schaken, shogi en Go met dezelfde methode."
+  - en: "In the lesson's game of 21 sticks, one table plays both sides: it chooses the move that leaves the opponent the lowest value, and steps toward the opponent's value with its sign turned around. After 200 games against itself it plays every winnable position right, by a rule nobody gave it."
+    nl: "In het spel met 21 stokjes van de les speelt één tabel beide kanten: de tabel kiest de zet die de tegenstander de laagste waarde laat, en schuift op richting de waarde van de tegenstander met het teken omgedraaid. Na 200 partijen tegen zichzelf speelt de tabel elke winbare positie goed, met een regel die niemand de tabel gaf."
+  - en: "In 2025, Andrew Barto and Richard Sutton were named the winners of the 2024 Turing Award, for the foundations of RL."
+    nl: "In 2025 werden Andrew Barto en Richard Sutton bekendgemaakt als winnaars van de Turing Award van 2024, voor de basis van RL."
+can_now:
+  - en: "choose, with a table of values, the move that leaves the opponent the worst position"
+    nl: "met een tabel van waarden de zet kiezen die de tegenstander de slechtste positie laat"
+    by: choose
+  - en: "let one table learn both sides of a game, with the opponent's value as the target"
+    nl: "één tabel beide kanten van een spel laten leren, met de waarde van de tegenstander als target"
+    by: learn
+  - en: "say which milestones learned without human games, and what that takes"
+    nl: "zeggen welke mijlpalen zonder menselijke partijen leerden, en wat dat vraagt"
+    by: from_rules
+  - en: "explain why AlphaStar trained against a league, not only against its latest self"
+    nl: "uitleggen waarom AlphaStar tegen een league trainde en niet alleen tegen de nieuwste versie van zichzelf"
+    by: league
+further_reading:
+  - en: "Arthur L. Samuel (1959), *Some studies in machine learning using the game of checkers*, IBM Journal of Research and Development 3, pages 210 to 229: the checkers program that learned from games against a copy of itself"
+    nl: "Arthur L. Samuel (1959), *Some studies in machine learning using the game of checkers*, IBM Journal of Research and Development 3, bladzijde 210 tot en met 229: het checkersprogramma dat leerde van partijen tegen een kopie van zichzelf"
+  - en: "Gerald Tesauro (1995), *Temporal difference learning and TD-Gammon*, Communications of the ACM 38, pages 58 to 68: backgammon with TD learning and a neural network, from games against itself"
+    nl: "Gerald Tesauro (1995), *Temporal difference learning and TD-Gammon*, Communications of the ACM 38, bladzijde 58 tot en met 68: backgammon met TD learning en een neural network, uit partijen tegen zichzelf"
+  - en: "Volodymyr Mnih, Koray Kavukcuoglu, David Silver and colleagues (2015), *Human-level control through deep reinforcement learning*, Nature 518, pages 529 to 533: DQN, one network for 49 Atari games"
+    nl: "Volodymyr Mnih, Koray Kavukcuoglu, David Silver en collega's (2015), *Human-level control through deep reinforcement learning*, Nature 518, bladzijde 529 tot en met 533: DQN, één netwerk voor 49 Atari-games"
+  - en: "David Silver, Aja Huang and colleagues (2016), *Mastering the game of Go with deep neural networks and tree search*, Nature 529, pages 484 to 489: AlphaGo"
+    nl: "David Silver, Aja Huang en collega's (2016), *Mastering the game of Go with deep neural networks and tree search*, Nature 529, bladzijde 484 tot en met 489: AlphaGo"
+  - en: "David Silver, Julian Schrittwieser and colleagues (2017), *Mastering the game of Go without human knowledge*, Nature 550, pages 354 to 359: AlphaGo Zero, from games against itself only"
+    nl: "David Silver, Julian Schrittwieser en collega's (2017), *Mastering the game of Go without human knowledge*, Nature 550, bladzijde 354 tot en met 359: AlphaGo Zero, alleen uit partijen tegen zichzelf"
+  - en: "David Silver, Thomas Hubert, Julian Schrittwieser and colleagues (2018), *A general reinforcement learning algorithm that masters chess, shogi, and Go through self-play*, Science 362, pages 1140 to 1144: AlphaZero"
+    nl: "David Silver, Thomas Hubert, Julian Schrittwieser en collega's (2018), *A general reinforcement learning algorithm that masters chess, shogi, and Go through self-play*, Science 362, bladzijde 1140 tot en met 1144: AlphaZero"
+  - en: "Oriol Vinyals, Igor Babuschkin and colleagues (2019), *Grandmaster level in StarCraft II using multi-agent reinforcement learning*, Nature 575, pages 350 to 354: AlphaStar and its league"
+    nl: "Oriol Vinyals, Igor Babuschkin en collega's (2019), *Grandmaster level in StarCraft II using multi-agent reinforcement learning*, Nature 575, bladzijde 350 tot en met 354: AlphaStar en de league"
+  - en: "Christopher Berner, Greg Brockman and colleagues (2019), *Dota 2 with Large Scale Deep Reinforcement Learning*, arXiv 1912.06680: OpenAI Five"
+    nl: "Christopher Berner, Greg Brockman en collega's (2019), *Dota 2 with Large Scale Deep Reinforcement Learning*, arXiv 1912.06680: OpenAI Five"
+  - en: "Peter R. Wurman and colleagues (2022), *Outracing champion Gran Turismo drivers with deep reinforcement learning*, Nature 602, pages 223 to 228: GT Sophy, with a penalty for unsporting collisions"
+    nl: "Peter R. Wurman en collega's (2022), *Outracing champion Gran Turismo drivers with deep reinforcement learning*, Nature 602, bladzijde 223 tot en met 228: GT Sophy, met een straf voor onsportieve botsingen"
+  - en: "OpenAI, Ilge Akkaya and colleagues (2019), *Solving Rubik's Cube with a Robot Hand*, arXiv 1910.07113: a robot hand trained in a simulator that kept changing"
+    nl: "OpenAI, Ilge Akkaya en collega's (2019), *Solving Rubik's Cube with a Robot Hand*, arXiv 1910.07113: een robothand getraind in een simulator die steeds veranderde"
+  - en: "Richard S. Sutton and Andrew G. Barto (2018), *Reinforcement Learning: An Introduction*, second edition, MIT Press: the standard book on RL"
+    nl: "Richard S. Sutton en Andrew G. Barto (2018), *Reinforcement Learning: An Introduction*, tweede editie, MIT Press: het standaardboek over RL"
