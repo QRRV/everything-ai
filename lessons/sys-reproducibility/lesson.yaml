@@ -1,0 +1,44 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: sys-reproducibility
+minutes: 30
+title:
+  en: "Same run, same result: seeds and determinism"
+  nl: "Zelfde run, zelfde uitkomst: seeds en determinisme"
+goal:
+  en: "give the order of the examples a seeded generator of its own so a run comes out the same again, say why the same seed can still give another result on a GPU, and compare two settings by the spread of several seeds each."
+  nl: "de volgorde van de voorbeelden een eigen generator met een seed geven zodat een run opnieuw dezelfde uitkomst geeft, zeggen waarom dezelfde seed op een GPU toch een andere uitkomst kan geven, en twee instellingen vergelijken met de spreiding van meerdere seeds per instelling."
+summary:
+  - en: "In 2018, Henderson and colleagues trained one reinforcement learning method ten times with the same settings, and two groups of five seeds came out statistically different. One run per setting may be measuring luck."
+    nl: "In 2018 trainden Henderson en collega's één methode voor reinforcement learning tien keer met dezelfde instellingen, en twee groepen van vijf seeds kwamen statistisch verschillend uit. Eén run per instelling meet misschien geluk."
+  - en: "A training run uses random numbers for the weights at the start and for the order of the examples. torch.manual_seed gives them a seed, and a generator of its own for the DataLoader, passed with generator=, keeps the order apart, so one seed can change while the other stays."
+    nl: "Een training-run gebruikt willekeurige getallen voor de weights aan het begin en voor de volgorde van de voorbeelden. torch.manual_seed geeft deze getallen een seed, en met een eigen generator voor de DataLoader (generator=) blijft de volgorde apart, zodat één seed kan veranderen terwijl de andere blijft."
+  - en: "Adding floats depends on the order: (0.1 + 0.2) + 0.3 is not 0.1 + (0.2 + 0.3). A GPU may add in another order on every run, so runs that must be the same bit for bit also need torch.use_deterministic_algorithms(True), the same versions and the same hardware, written down with the run."
+    nl: "Optellen met floats hangt af van de volgorde: (0,1 + 0,2) + 0,3 is niet 0,1 + (0,2 + 0,3). Een GPU kan elke run in een andere volgorde optellen, dus hebben runs die bit voor bit gelijk moeten zijn ook torch.use_deterministic_algorithms(True), dezelfde versies en dezelfde hardware nodig, opgeschreven bij de run."
+  - en: "Runs with other seeds land apart: in this lesson, 64 and 128 neurons each win with five of ten seeds. Compare two settings by the spread of several seeds each, and call one better only when the two spreads do not overlap."
+    nl: "Runs met andere seeds komen uit elkaar te liggen: in deze les winnen 64 en 128 neuronen elk bij vijf van de tien seeds. Vergelijk twee instellingen met de spreiding van meerdere seeds per instelling, en noem er pas één beter als de twee spreidingen niet overlappen."
+can_now:
+  - en: "give the order of the examples a generator of its own, with a new order every epoch and the same orders every run"
+    nl: "de volgorde van de voorbeelden een eigen generator geven, met elke epoch een nieuwe volgorde en elke run dezelfde volgordes"
+    by: orders
+  - en: "decide from several seeds each whether one setting beats another"
+    nl: "met meerdere seeds per instelling beslissen of de ene instelling beter is dan de andere"
+    by: better
+  - en: "explain why the same seed can give another result on a GPU"
+    nl: "uitleggen waarom dezelfde seed op een GPU een andere uitkomst kan geven"
+    by: gpu
+  - en: "say what one run with one seed can and cannot show"
+    nl: "zeggen wat één run met één seed wel en niet kan laten zien"
+    by: one-seed
+further_reading:
+  - en: "PyTorch documentation, *Reproducibility*: torch.manual_seed, torch.use_deterministic_algorithms, cuDNN, and seeds for the workers of a DataLoader"
+    nl: "PyTorch-documentatie, *Reproducibility*: torch.manual_seed, torch.use_deterministic_algorithms, cuDNN, en seeds voor de workers van een DataLoader"
+  - en: "Henderson, Islam, Bachman, Pineau, Precup and Meger (2018), *Deep Reinforcement Learning that Matters*: two groups of five seeds of one method, statistically different"
+    nl: "Henderson, Islam, Bachman, Pineau, Precup en Meger (2018), *Deep Reinforcement Learning that Matters*: twee groepen van vijf seeds van één methode, statistisch verschillend"
+  - en: "David Picard (2021), *torch.manual_seed(3407) is all you need*: one small image network trained with 10,000 seeds"
+    nl: "David Picard (2021), *torch.manual_seed(3407) is all you need*: één klein netwerk voor afbeeldingen, getraind met 10.000 seeds"
+  - en: "Python documentation, *Floating-Point Arithmetic: Issues and Limitations*: why 0.1 + 0.1 + 0.1 is not 0.3"
+    nl: "Python-documentatie, *Floating-Point Arithmetic: Issues and Limitations*: waarom 0,1 + 0,1 + 0,1 niet 0,3 is"
+  - en: "NVIDIA cuDNN documentation, *Reproducibility (Determinism)*: which GPU routines give different results from run to run, and why"
+    nl: "NVIDIA cuDNN-documentatie, *Reproducibility (Determinism)*: welke GPU-routines van run tot run andere uitkomsten geven, en waarom"
