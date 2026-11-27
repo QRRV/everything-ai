@@ -498,7 +498,7 @@ def text_connections():
     mo.md(r"""
     ## Afronding
 
-    **Samenhang.** In [Leren van je eigen stappen: Q-learning](/course/open/rl-q-learning?lang=nl) en [Voorzichtig of gedurfd: SARSA en Q-learning](/course/open/rl-sarsa?lang=nl) kwam elke wereld met eigen code. Met Gymnasium leert dezelfde `q_episode` FrozenLake, Taxi en CliffWalking, en werkt elke methode uit dit domein in elke wereld die de interface volgt. De volgende les, *CartPole, MountainCar en de benchmarks van RL*, gaat naar werelden waarin een observation een lijst reële getallen is in plaats van een vakje, zodat een Q-table deze getallen eerst in bakjes moet verdelen.
+    **Samenhang.** In [Leren van je eigen stappen: Q-learning](/course/open/rl-q-learning?lang=nl) en [Voorzichtig of gedurfd: SARSA en Q-learning](/course/open/rl-sarsa?lang=nl) kwam elke wereld met eigen code. Met Gymnasium leert dezelfde `q_episode` FrozenLake, Taxi en CliffWalking, en werkt elke methode uit dit domein in elke wereld die de interface volgt. De volgende les, *CartPole, MountainCar en de benchmarks van RL*, gaat naar werelden waarin een observation een lijst reële getallen is in plaats van een vakje, zodat een Q-table deze getallen eerst in bins moet verdelen.
     """)
     return
 

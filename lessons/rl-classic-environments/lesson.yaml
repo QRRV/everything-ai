@@ -1,0 +1,44 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: rl-classic-environments
+minutes: 35
+title:
+  en: "CartPole, MountainCar and the benchmarks of RL"
+  nl: "CartPole, MountainCar en de benchmarks van RL"
+goal:
+  en: "play CartPole and MountainCar with fixed policies, cut their real numbers into bins so that a Q-table can learn them, and tell what each classic benchmark tests."
+  nl: "CartPole en MountainCar spelen met vaste policies, de reële getallen in bins verdelen zodat een Q-table deze werelden kan leren, en zien wat elke klassieke benchmark test."
+summary:
+  - en: "Each classic benchmark environment tests something else: CartPole balancing a pole from four numbers, MountainCar a sparse reward that says nothing until the flag, Atari games learning from pixels, and MuJoCo moving bodies with actions that are real numbers."
+    nl: "Elke klassieke benchmark environment test iets anders: CartPole een paal in evenwicht houden met vier getallen, MountainCar een sparse reward die tot de vlag niets zegt, Atari-spellen leren van pixels, en MuJoCo lichamen bewegen met actions die reële getallen zijn."
+  - en: "Discretization cuts each real number into bins: the bin of a number is how many edges lie below it, and the bins of all numbers together pick one row of the Q-table, like the digits of a number."
+    nl: "Discretization verdeelt elk reëel getal in bins: de bin van een getal is het aantal randen eronder, en de bins van alle getallen samen kiezen één rij van de Q-table, zoals de cijfers van een getal."
+  - en: "The bins decide what the table can learn: with too few, a row covers too much, and with too many, there are more rows to try. Pixels and continuous actions need a neural network instead of a table."
+    nl: "De bins bepalen wat de tabel kan leren: met te weinig beslaat een rij te veel, en met te veel zijn er meer rijen om te proberen. Pixels en continue actions vragen een neural network in plaats van een tabel."
+can_now:
+  - en: "write a fixed policy for CartPole from its four numbers"
+    nl: "een vaste policy voor CartPole schrijven met de vier getallen"
+    by: pole_policy
+  - en: "cut a real number into bins with edges"
+    nl: "een reëel getal met randen in bins verdelen"
+    by: bin_of
+  - en: "turn the bins of several numbers into one row of a Q-table"
+    nl: "de bins van meerdere getallen omzetten in één rij van een Q-table"
+    by: row_of
+  - en: "tell which classic benchmark tests a sparse reward, pixels or continuous actions"
+    nl: "zien welke klassieke benchmark een sparse reward, pixels of continue actions test"
+    by: sparse
+further_reading:
+  - en: "Andrew Barto, Richard Sutton and Charles Anderson (1983), *Neuronlike adaptive elements that can solve difficult learning control problems*, IEEE Transactions on Systems, Man, and Cybernetics 13(5): where CartPole comes from"
+    nl: "Andrew Barto, Richard Sutton en Charles Anderson (1983), *Neuronlike adaptive elements that can solve difficult learning control problems*, IEEE Transactions on Systems, Man, and Cybernetics 13(5): waar CartPole vandaan komt"
+  - en: "Andrew Moore (1990), *Efficient Memory-based Learning for Robot Control*, PhD thesis, University of Cambridge: where MountainCar comes from"
+    nl: "Andrew Moore (1990), *Efficient Memory-based Learning for Robot Control*, proefschrift, University of Cambridge: waar MountainCar vandaan komt"
+  - en: "Marc Bellemare, Yavar Naddaf, Joel Veness and Michael Bowling (2013), *The Arcade Learning Environment: An Evaluation Platform for General Agents*, Journal of Artificial Intelligence Research 47: the Atari games as environments"
+    nl: "Marc Bellemare, Yavar Naddaf, Joel Veness en Michael Bowling (2013), *The Arcade Learning Environment: An Evaluation Platform for General Agents*, Journal of Artificial Intelligence Research 47: de Atari-spellen als environments"
+  - en: "Volodymyr Mnih and colleagues (2015), *Human-level control through deep reinforcement learning*, Nature 518: DQN, which learned 49 Atari games from pixels"
+    nl: "Volodymyr Mnih en anderen (2015), *Human-level control through deep reinforcement learning*, Nature 518: DQN, dat 49 Atari-spellen leerde van pixels"
+  - en: "Emanuel Todorov, Tom Erez and Yuval Tassa (2012), *MuJoCo: A physics engine for model-based control*, IROS 2012: the simulator of Hopper and its kind"
+    nl: "Emanuel Todorov, Tom Erez en Yuval Tassa (2012), *MuJoCo: A physics engine for model-based control*, IROS 2012: de simulator van Hopper en dergelijke"
+  - en: "Yuval Tassa and colleagues (2018), *DeepMind Control Suite*, arXiv:1801.00690: tasks with bodies and continuous actions, built on MuJoCo"
+    nl: "Yuval Tassa en anderen (2018), *DeepMind Control Suite*, arXiv:1801.00690: taken met lichamen en continue actions, gebouwd op MuJoCo"
