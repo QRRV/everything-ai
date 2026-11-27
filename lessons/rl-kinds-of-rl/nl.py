@@ -400,7 +400,7 @@ def text_connections():
     mo.md(r"""
     ## Afronding
 
-    **Samenhang.** In dit deel van de course bouwde je dynamic programming in [Wat is een policy waard? Policy evaluation](/course/open/rl-policy-evaluation?lang=nl) en [Steeds beter: policy iteration](/course/open/rl-policy-iteration?lang=nl), Monte Carlo in [Beter spelen door ervaring: Monte Carlo control](/course/open/rl-monte-carlo-control?lang=nl), en TD learning in [Leren na elke stap: TD(0)](/course/open/rl-td-prediction?lang=nl) en [Voorzichtig of gedurfd: SARSA en Q-learning](/course/open/rl-sarsa?lang=nl). Deze les zet de methoden met vier vragen op één kaart, en voegt er een policy-based agent aan toe. De volgende les, *Project: een agent voor je eigen rooster*, laat Monte Carlo control, SARSA en Q-learning naast elkaar een rooster leren dat je zelf ontwerpt.
+    **Samenhang.** In dit deel van de course bouwde je dynamic programming in [Wat is een policy waard? Policy evaluation](/course/open/rl-policy-evaluation?lang=nl) en [Steeds beter: policy iteration](/course/open/rl-policy-iteration?lang=nl), Monte Carlo in [Beter spelen door ervaring: Monte Carlo control](/course/open/rl-monte-carlo-control?lang=nl), en TD learning in [Leren na elke stap: TD(0)](/course/open/rl-td-prediction?lang=nl) en [Voorzichtig of gedurfd: SARSA en Q-learning](/course/open/rl-sarsa?lang=nl). Deze les zet de methoden met vier vragen op één kaart, en voegt er een policy-based agent aan toe. De volgende les, *Project: een agent voor je eigen grid world*, laat Monte Carlo control, SARSA en Q-learning naast elkaar een grid world leren die je zelf ontwerpt.
     """)
     return
 

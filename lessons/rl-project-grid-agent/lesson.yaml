@@ -1,0 +1,36 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: rl-project-grid-agent
+minutes: 45
+title:
+  en: "Project: an agent for your own grid world"
+  nl: "Project: een agent voor je eigen grid world"
+goal:
+  en: "write a grid world with walls, puddles and pits, and one agent that learns it with the targets of Monte Carlo control, SARSA and Q-learning; compare the three over many runs on the course's world and on a world of your own."
+  nl: "een grid world met muren, plassen en putten schrijven, en één agent die de wereld leert met de targets van Monte Carlo control, SARSA en Q-learning; de drie over veel runs vergelijken op de wereld van de course en op een eigen wereld."
+summary:
+  - en: "An environment with states has the shape of your `GridWorld`: `reset` puts the agent on the start, and `step(action)` gives back the next state, the reward, and whether the episode is over. A loop lets agent and environment take turns, and stops an episode after a limit of steps."
+    nl: "Een environment met states heeft de vorm van je `GridWorld`: `reset` zet de agent op de start, en `step(action)` geeft de volgende state terug, de reward, en of de episode voorbij is. Een loop laat agent en environment elkaar afwisselen, en stopt een episode na een vast aantal stappen."
+  - en: "Monte Carlo control, SARSA and Q-learning differ only in the target that $Q(S, A)$ moves toward: the return that followed, $R + \\gamma Q(S', A')$, or $R + \\gamma \\max_{a'} Q(S', a')$. Monte Carlo changes nothing during an episode, so in a maze it can walk in circles until the limit."
+    nl: "Monte Carlo control, SARSA en Q-learning verschillen alleen in het target waar $Q(S, A)$ naartoe schuift: de return die volgde, $R + \\gamma Q(S', A')$, of $R + \\gamma \\max_{a'} Q(S', a')$. Monte Carlo verandert tijdens een episode niets, dus kan Monte Carlo in een doolhof rondjes lopen tot de limiet."
+  - en: "A fair comparison gives every method the same world and the same settings, and averages many runs with their own seeds into a learning curve. One run can tell a different story from ten, and the best method depends on the world."
+    nl: "Een zuivere vergelijking geeft elke methode dezelfde wereld en dezelfde instellingen, en middelt veel runs met eigen seeds tot een learning curve. Eén run kan een ander verhaal vertellen dan tien, en de beste methode hangt af van de wereld."
+can_now:
+  - en: "write an environment with states as a class with `reset` and `step`, with walls, puddles and pits"
+    nl: "een environment met states schrijven als class met `reset` en `step`, met muren, plassen en putten"
+    by: world
+  - en: "write one agent that learns with the target of Monte Carlo control, SARSA or Q-learning"
+    nl: "één agent schrijven die leert met het target van Monte Carlo control, SARSA of Q-learning"
+    by: agent
+  - en: "measure a method with a learning curve over many runs, each with a seed of its own"
+    nl: "een methode meten met een learning curve over veel runs, elk met een eigen seed"
+    by: curves
+  - en: "explain why Monte Carlo can get lost in a maze where SARSA and Q-learning find the way"
+    nl: "uitleggen waarom Monte Carlo in een doolhof kan verdwalen waar SARSA en Q-learning de weg vinden"
+    by: maze
+further_reading:
+  - en: "Richard S. Sutton and Andrew G. Barto (2018), *Reinforcement Learning: An Introduction*, 2nd edition, MIT Press, chapters 5 and 6, with the windy grid world of example 6.5 and the cliff of example 6.6; free at incompleteideas.net"
+    nl: "Richard S. Sutton en Andrew G. Barto (2018), *Reinforcement Learning: An Introduction*, 2e editie, MIT Press, hoofdstukken 5 en 6, met de winderige grid world van voorbeeld 6.5 en het klif van voorbeeld 6.6; gratis op incompleteideas.net"
+  - en: "Peter Henderson and others (2018), *Deep Reinforcement Learning That Matters*, AAAI 2018: how much results in RL depend on the seeds, and how to compare methods fairly"
+    nl: "Peter Henderson en anderen (2018), *Deep Reinforcement Learning That Matters*, AAAI 2018: hoeveel resultaten in RL van de seeds afhangen, en hoe je methoden zuiver vergelijkt"
