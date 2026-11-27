@@ -1,0 +1,42 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: sys-lifecycle
+minutes: 25
+title:
+  en: "From idea to retirement: the life cycle of an AI system"
+  nl: "Van idee tot afscheid: de levenscyclus van een AI-systeem"
+goal:
+  en: "name the stages an AI system goes through and the roles of the parties around it, and say when a system should go back to design or be retired."
+  nl: "de fasen benoemen die een AI-systeem doorloopt en de rollen van de partijen eromheen, en zeggen wanneer een systeem terug moet naar ontwerp of uitgefaseerd moet worden."
+summary:
+  - en: "ISO/IEC 22989 describes the life cycle of an AI system in eight stages: inception, design and development, verification and validation, deployment, operation and monitoring, continuous validation, re-evaluation and retirement."
+    nl: "ISO/IEC 22989 beschrijft de levenscyclus van een AI-systeem in acht fasen: idee, ontwerp en ontwikkeling, verificatie en validatie, deployment, gebruik en monitoring, doorlopende validatie, herbeoordeling en uitfasering."
+  - en: "The life cycle is not a straight line: a re-evaluation sends a system back to design when it is still needed but no longer good enough, and to retirement when it is not needed anymore. A system that keeps learning also needs continuous validation."
+    nl: "De levenscyclus is geen rechte lijn: een herbeoordeling stuurt een systeem terug naar ontwerp als het nog nodig is, alleen niet meer goed genoeg, en naar uitfasering als het niet meer nodig is. Een systeem dat blijft leren, heeft ook doorlopende validatie nodig."
+  - en: "Most of the life of a system comes after it is built: the course's spam service spent 23 of its 36 months in operation and monitoring, and Google Flu Trends went wrong in the years after its model was built."
+    nl: "Het grootste deel van het leven van een systeem komt na de bouw: de spamdienst van de course was 23 van de 36 maanden in gebruik en monitoring, en bij Google Flu Trends ging het mis in de jaren nadat het model gebouwd was."
+  - en: "ISO/IEC 22989 names the roles around a system: AI provider, AI producer, AI customer, AI partner, AI subject and relevant authorities. One party can have several roles, and an AI subject often never sees the system."
+    nl: "ISO/IEC 22989 geeft de rollen rond een systeem namen: AI-aanbieder, AI-producent, AI-klant, AI-partner, AI-subject en relevante autoriteiten. Eén partij kan meerdere rollen hebben, en een AI-subject ziet het systeem vaak nooit."
+can_now:
+  - en: "add up how much of the life of a system each stage takes"
+    nl: "optellen welk deel van het leven van een systeem elke fase kost"
+    by: months
+  - en: "find the moment monitoring calls for a re-evaluation"
+    nl: "het moment vinden waarop de monitoring om een herbeoordeling vraagt"
+    by: below
+  - en: "recognize a stage of the life cycle that a real system skipped"
+    nl: "een fase van de levenscyclus herkennen die een echt systeem oversloeg"
+    by: flu
+  - en: "name the roles of the parties around an AI system, also of those who never use it"
+    nl: "de rollen benoemen van de partijen rond een AI-systeem, ook van wie het systeem nooit gebruikt"
+    by: subject
+further_reading:
+  - en: "ISO/IEC 22989:2022, *Information technology, Artificial intelligence, Artificial intelligence concepts and terminology*: clause 5.19 on the roles of AI stakeholders, and clause 6 on the life cycle of an AI system"
+    nl: "ISO/IEC 22989:2022, *Information technology, Artificial intelligence, Artificial intelligence concepts and terminology*: paragraaf 5.19 over de rollen van AI-stakeholders, en hoofdstuk 6 over de levenscyclus van een AI-systeem"
+  - en: "ISO/IEC 5338:2023, *Information technology, Artificial intelligence, AI system life cycle processes*: the work of each stage, based on the standards for the life cycle of systems and software"
+    nl: "ISO/IEC 5338:2023, *Information technology, Artificial intelligence, AI system life cycle processes*: het werk in elke fase, op basis van de normen voor de levenscyclus van systemen en software"
+  - en: "David Lazer, Ryan Kennedy, Gary King and Alessandro Vespignani (2014), *The Parable of Google Flu: Traps in Big Data Analysis*, Science: what went wrong with Google Flu Trends"
+    nl: "David Lazer, Ryan Kennedy, Gary King en Alessandro Vespignani (2014), *The Parable of Google Flu: Traps in Big Data Analysis*, Science: wat er misging met Google Flu Trends"
+  - en: "Jeremy Ginsberg and others (2009), *Detecting influenza epidemics using search engine query data*, Nature: the model behind Google Flu Trends"
+    nl: "Jeremy Ginsberg en anderen (2009), *Detecting influenza epidemics using search engine query data*, Nature: het model achter Google Flu Trends"
