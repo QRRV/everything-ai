@@ -1,0 +1,44 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: rl-conditioning
+minutes: 30
+title:
+  en: "Pavlov's dogs and Thorndike's cats: conditioning"
+  nl: "De honden van Pavlov en de katten van Thorndike: conditionering"
+goal:
+  en: "model Pavlov's dog, which learns what a sound predicts, and Thorndike's cat, which learns which action opens its box, and tell which part of an RL agent each one matches."
+  nl: "een model maken van de hond van Pavlov, die leert wat een geluid voorspelt, en van de kat van Thorndike, die leert welke action de kooi opent, en zien met welk deel van een RL-agent elk van de twee overeenkomt."
+summary:
+  - en: "Psychology studied learning from reward long before computers, and reinforcement learning took its name from it: in the English translation of Pavlov's lectures, the food that follows a sound reinforces the reflex."
+    nl: "De psychologie bestudeerde leren van een reward al rond 1900, ruim voordat er computers waren, en reinforcement learning dankt de naam aan deze psychologie: in de Engelse vertaling van de lezingen van Pavlov versterkt (reinforces) het eten na een geluid de reflex."
+  - en: "In classical conditioning the food follows a signal whatever the animal does, and the animal learns what the signal predicts. The prediction V moves a step toward the food after every trial, V ← V + η(f − V): the update of Q-learning, with the food as the target. Without food, V drops back."
+    nl: "Bij klassieke conditionering volgt het eten op een signaal, wat het dier ook doet, en leert het dier wat het signaal voorspelt. De voorspelling V zet na elke trial een stap naar het eten toe, V ← V + η(f − V): de update van Q-learning, met het eten als target. Zonder eten zakt V terug."
+  - en: "In instrumental conditioning the food comes only after the right action. Thorndike's law of effect says that an action followed by something good becomes more likely in the same situation."
+    nl: "Bij instrumentele conditionering komt het eten alleen na de juiste action. De wet van het effect van Thorndike zegt dat een action waarop iets goeds volgt waarschijnlijker wordt in dezelfde situatie."
+  - en: "A model of the cat gives every action a strength and picks an action with its strength divided by all strengths together; every escape makes the action that opened the door stronger. An action with chance p takes 1/p tries on average, so the tries drop fast at first and then slowly, while a single cat stays noisy."
+    nl: "Een model van de kat geeft elke action een sterkte en kiest een action met de sterkte van de action gedeeld door alle sterktes samen; elke ontsnapping maakt de action die de deur opende sterker. Een action met kans p kost gemiddeld 1/p pogingen, dus het aantal pogingen daalt eerst snel en dan langzaam, terwijl één kat grillig blijft."
+  - en: "Classical conditioning matches the values of an RL agent, what a state predicts; instrumental conditioning matches its policy, which action to take."
+    nl: "Klassieke conditionering komt overeen met de values van een RL-agent, wat een state voorspelt; instrumentele conditionering met de policy, welke action de agent neemt."
+can_now:
+  - en: "follow what a signal predicts over a run of trials with the update of Q-learning"
+    nl: "met de update van Q-learning volgen wat een signaal voorspelt over een reeks trials"
+    by: predictions
+  - en: "let a model of an animal pick its actions in proportion to their strengths"
+    nl: "een model van een dier de actions laten kiezen naar verhouding van de sterktes"
+    by: choose
+  - en: "tell classical from instrumental conditioning in an example"
+    nl: "klassieke en instrumentele conditionering uit elkaar houden in een voorbeeld"
+    by: kind
+  - en: "say which part of an RL agent classical conditioning matches"
+    nl: "zeggen met welk deel van een RL-agent klassieke conditionering overeenkomt"
+    by: link
+further_reading:
+  - en: "Ivan Pavlov (1927), *Conditioned Reflexes: An Investigation of the Physiological Activity of the Cerebral Cortex*, translated by G. V. Anrep, Oxford University Press: Pavlov's own lectures on the dogs"
+    nl: "Ivan Pavlov (1927), *Conditioned Reflexes: An Investigation of the Physiological Activity of the Cerebral Cortex*, vertaald door G. V. Anrep, Oxford University Press: de lezingen van Pavlov zelf over de honden"
+  - en: "Edward Thorndike (1898), *Animal Intelligence: An Experimental Study of the Associative Processes in Animals*, Psychological Review Monograph Supplements 2(4): the cats in puzzle boxes"
+    nl: "Edward Thorndike (1898), *Animal Intelligence: An Experimental Study of the Associative Processes in Animals*, Psychological Review Monograph Supplements 2(4): de katten in puzzelkooien"
+  - en: "Edward Thorndike (1911), *Animal Intelligence: Experimental Studies*, Macmillan: the law of effect, on page 244"
+    nl: "Edward Thorndike (1911), *Animal Intelligence: Experimental Studies*, Macmillan: de wet van het effect, op bladzijde 244"
+  - en: "Richard S. Sutton and Andrew G. Barto (2018), *Reinforcement Learning: An Introduction*, 2nd edition, MIT Press, chapter 14, on psychology and RL side by side; free at incompleteideas.net"
+    nl: "Richard S. Sutton en Andrew G. Barto (2018), *Reinforcement Learning: An Introduction*, 2e editie, MIT Press, hoofdstuk 14, over psychologie en RL naast elkaar; gratis op incompleteideas.net"
