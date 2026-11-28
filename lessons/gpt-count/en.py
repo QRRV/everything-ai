@@ -213,7 +213,7 @@ def choice_flops_cell():
         why={
             "one": "Every parameter costs two FLOPs per token: a multiplication and an addition.",
             "six": "6 per parameter is training, forward and backward. Reading a token is the forward pass alone.",
-            "right": "2 × 10.8 million, and a little more for attention: 2 · 6 · 256 · 384, about 1.2 million, for windows of 256 tokens. Training costs three times that per token.",
+            "right": "2 × 10.8 million, and a little more for attention: 2 · 6 · 256 · 384, about 1.2 million, for windows of 256 tokens. Training takes three times that per token.",
         },
     )
     choice_flops

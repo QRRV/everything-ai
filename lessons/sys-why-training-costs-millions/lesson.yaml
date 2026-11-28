@@ -1,0 +1,40 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: sys-why-training-costs-millions
+minutes: 30
+title:
+  en: "Why training costs millions"
+  nl: "Waarom trainen miljoenen kost"
+goal:
+  en: "work out the cost and the time of a training from its GPU hours, and say what the published cost of a large model leaves out."
+  nl: "de kosten en de tijd van een training uitrekenen uit de GPU-uren, en zeggen wat de gepubliceerde kosten van een groot model weglaten."
+summary:
+  - en: "A GPU hour is one GPU used for one hour: 8 GPUs for 10 hours use 80 GPU hours. The makers of large models report their training in GPU hours, from 184,320 for Llama 2 7B to 30,840,000 for Llama 3.1 405B."
+    nl: "Een GPU-uur is één GPU die één uur wordt gebruikt: 8 GPU's van 10 uur gebruiken 80 GPU-uren. De makers van grote modellen melden de training in GPU-uren, van 184.320 voor Llama 2 7B tot 30.840.000 voor Llama 3.1 405B."
+  - en: "The training cost is the GPU hours times the price of one GPU hour. DeepSeek counted 2,788,000 H800 GPU hours for V3, in three parts, and at 2 dollars an hour that is 5,576,000 dollars."
+    nl: "De trainingskosten zijn de GPU-uren keer de prijs van één GPU-uur. DeepSeek telde voor V3 2.788.000 GPU-uren op de H800, in drie delen, en tegen 2 dollar per uur is dat 5.576.000 dollar."
+  - en: "The GPU hours divided by the number of GPUs and by 24 give the days a run takes. More GPUs make a run shorter, not cheaper: 3,000 GPUs for 10 days and 1,000 GPUs for 30 days pay for the same GPU hours."
+    nl: "De GPU-uren gedeeld door het aantal GPU's en door 24 geven de dagen die een run duurt. Meer GPU's maken een run korter, niet goedkoper: 3.000 GPU's voor 10 dagen en 1.000 GPU's voor 30 dagen betalen dezelfde GPU-uren."
+  - en: "A published cost is often the final run alone, at a rental price. The trial runs, the earlier research, the people, the runs that stopped and the GPUs themselves come on top: Meta's 405B run stopped 466 times in 54 days."
+    nl: "Gepubliceerde kosten zijn vaak alleen de laatste run, tegen een huurprijs. De proefruns, het eerdere onderzoek, de mensen, de runs die stopten en de GPU's zelf komen erbij: de run van Meta voor 405B stopte 466 keer in 54 dagen."
+can_now:
+  - en: "add up the bill of all the runs of a project from their GPUs, their days and the price of a GPU hour"
+    nl: "de rekening van alle runs van een project optellen uit de GPU's, de dagen en de prijs van een GPU-uur"
+    by: cost
+  - en: "work out how many days a run of a number of GPU hours takes on a cluster"
+    nl: "uitrekenen hoeveel dagen een run van een aantal GPU-uren duurt op een cluster"
+    by: days
+  - en: "say what a published training cost counts and what it leaves out"
+    nl: "zeggen wat gepubliceerde trainingskosten meetellen en wat erbuiten valt"
+    by: bill
+  - en: "see that more GPUs make a training shorter, not cheaper"
+    nl: "zien dat meer GPU's een training korter maken, niet goedkoper"
+    by: same
+further_reading:
+  - en: "DeepSeek-AI (2024), *DeepSeek-V3 Technical Report*, arXiv 2412.19437: table 1 gives the GPU hours of the three parts of the training, and the text says what the cost leaves out"
+    nl: "DeepSeek-AI (2024), *DeepSeek-V3 Technical Report*, arXiv 2412.19437: tabel 1 geeft de GPU-uren van de drie delen van de training, en de tekst zegt wat de kosten weglaten"
+  - en: "Hugo Touvron and others (2023), *Llama 2: Open Foundation and Fine-Tuned Chat Models*, arXiv 2307.09288: table 2 gives the GPU hours of each model on the A100"
+    nl: "Hugo Touvron en anderen (2023), *Llama 2: Open Foundation and Fine-Tuned Chat Models*, arXiv 2307.09288: tabel 2 geeft de GPU-uren van elk model op de A100"
+  - en: "The Llama team at Meta (2024), *The Llama 3 Herd of Models*, arXiv 2407.21783: section 3.3 on the cluster of 16,384 H100 GPUs, and how often the run stopped"
+    nl: "Het Llama-team van Meta (2024), *The Llama 3 Herd of Models*, arXiv 2407.21783: paragraaf 3.3 over het cluster van 16.384 H100-GPU's, en hoe vaak de run stopte"

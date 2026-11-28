@@ -433,7 +433,7 @@ lessons:
   level: basis
   domein: systemen
   module: hardware
-  idea: "A large model trains on thousands of GPUs for weeks or months: GPUs times hours times the price of a GPU-hour gives the bill, before power, people and failed runs; with the numbers companies published you compute it yourself."
+  idea: "A large model trains on thousands of GPUs for weeks or months: GPUs times hours times the price of a GPU hour gives the bill, before power, people and failed runs; with the numbers companies published you compute it yourself."
   covers: [compute-geletterdheid#2]
   requires: [sys-how-fast]
   introduces: [c:gpu-hour, c:training-cost]
