@@ -1,0 +1,38 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: sys-memory-hierarchy
+minutes: 30
+title:
+  en: "Close and fast, far and slow: the memory hierarchy"
+  nl: "Dichtbij en snel, ver weg en traag: de geheugenhiërarchie"
+goal:
+  en: "say where the numbers of a computation sit, from the registers to the SSD, work out how long reading them takes, and measure on your own computer how much faster a sum is when its numbers fit in the cache."
+  nl: "zeggen waar de getallen van een berekening staan, van de registers tot de SSD, uitrekenen hoe lang het lezen duurt, en op je eigen computer meten hoeveel sneller een optelling is als de getallen in de cache passen."
+summary:
+  - en: "The memory hierarchy is the ladder of memory in a computer: small and fast close to the cores, larger and slower further away. On an NVIDIA H100: registers and an L1 cache of 256 KB each in every one of its 132 groups of cores, an L2 cache of 50 MB, 80 GB of HBM3 next to the chip, and beyond that the RAM and the SSD of the computer."
+    nl: "De geheugenhiërarchie is de ladder van geheugen in een computer: klein en snel dicht bij de cores, groter en trager verder weg. Op een NVIDIA H100: registers en een L1-cache van elk 256 KB in elk van de 132 groepen cores, een L2-cache van 50 MB, 80 GB HBM3 naast de chip, en verder het RAM en de SSD van de computer."
+  - en: "The bandwidth of a memory or a connection is how many bytes per second it delivers, and reading takes the bytes divided by the bandwidth. The HBM3 of the H100 delivers 3.35 TB per second, PCIe Gen5 64 GB per second in each direction, a fast SSD 7.45 GB per second: a model of 16 GB takes 4.8 ms from the HBM and 2.1 seconds from the SSD."
+    nl: "De bandbreedte van een geheugen of een verbinding is hoeveel bytes per seconde er doorheen komen, en lezen duurt het aantal bytes gedeeld door de bandbreedte. Het HBM3 van de H100 levert 3,35 TB per seconde, PCIe Gen5 64 GB per seconde in elke richting, een snelle SSD 7,45 GB per seconde: een model van 16 GB duurt 4,8 ms uit het HBM en 2,1 seconde van de SSD."
+  - en: "A cache keeps copies of recently used data, together with its neighbors. The numbers of a NumPy array lie next to each other, so reading them in order is fast; on the course's computer, the same sum of 128 MB takes more than three times as long in a shuffled order."
+    nl: "Een cache bewaart kopieën van data die net gebruikt is, samen met de data ernaast. De getallen van een NumPy-array liggen naast elkaar, dus gaat lezen in volgorde snel; op de computer van de course duurt dezelfde optelling van 128 MB in een geschudde volgorde meer dan drie keer zo lang."
+  - en: "You measure a bandwidth with the bytes, `a.nbytes`, divided by the seconds of one read. On the course's computer, a sum of 512 KB reads 34 GB per second, and a sum of 512 MB 8.2: the large array does not fit in the caches and comes from RAM. HBM is stacked right next to the GPU chip, which makes it far faster than RAM."
+    nl: "Je meet een bandbreedte met de bytes, `a.nbytes`, gedeeld door de seconden van één keer lezen. Op de computer van de course leest een optelling van 512 KB 34 GB per seconde, en een optelling van 512 MB 8,2: de grote array past niet in de caches en komt uit het RAM. HBM is vlak naast de GPU-chip gestapeld, en daardoor veel sneller dan RAM."
+can_now:
+  - en: "work out how long it takes to read data from each layer of memory, from its bytes and the bandwidth"
+    nl: "uitrekenen hoe lang het lezen van data uit elke laag geheugen duurt, uit de bytes en de bandbreedte"
+    by: read
+  - en: "measure the bandwidth a sum reaches on your own computer"
+    nl: "meten welke bandbreedte een optelling op je eigen computer haalt"
+    by: rate
+  - en: "say where the registers, the caches, HBM, RAM and the SSD sit, from the GPU chip outward"
+    nl: "zeggen waar de registers, de caches, HBM, RAM en de SSD zitten, van de GPU-chip naar buiten"
+    by: where
+  - en: "explain why numbers read in order come faster than numbers read in a random order"
+    nl: "uitleggen waarom getallen in volgorde sneller binnenkomen dan getallen in een willekeurige volgorde"
+    by: order
+further_reading:
+  - en: "Michael Andersch and others (2022), *NVIDIA Hopper Architecture In-Depth*, NVIDIA Technical Blog: the groups of cores, the caches and the HBM3 of the H100"
+    nl: "Michael Andersch en anderen (2022), *NVIDIA Hopper Architecture In-Depth*, NVIDIA Technical Blog: de groepen cores, de caches en het HBM3 van de H100"
+  - en: "Ulrich Drepper (2007), *What Every Programmer Should Know About Memory*: how caches and RAM work, and why the order of reading matters"
+    nl: "Ulrich Drepper (2007), *What Every Programmer Should Know About Memory*: hoe caches en RAM werken, en waarom de volgorde van lezen uitmaakt"
