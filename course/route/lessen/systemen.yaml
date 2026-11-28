@@ -206,17 +206,16 @@ lessons:
   needs: any
 
 - id: sys-model-card
-  title: "A model card for your model"
+  title: "For whom does it work? Model and system cards"
   level: basis
   domein: systemen
   module: productie
   idea: "A model card says what a model is for and not for, what data it learned from, how well it does per group and under which conditions, and what is known to go wrong; a system card does the same for a whole system around one or more models."
   covers: [documentatie-platforms-en-llmops#0]
   requires: [sys-what-is-an-ml-system, torch-pretrained, rai-bias-in-data]
-  introduces: [c:system-card, c:disaggregated-evaluation]
-  mentions: [c:intended-use]
-  data: []
-  ladder: [python]
+  introduces: [c:system-card, c:disaggregated-evaluation, c:intended-use]
+  data: [qmnist, model-course-qmnist-cnn]
+  ladder: [torch]
   needs: any
 
 - id: sys-project-tested-model

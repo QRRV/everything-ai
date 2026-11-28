@@ -420,7 +420,7 @@ def text_connections():
     mo.md(r"""
     ## Wrap-up
 
-    **How this connects.** In [Tests for ML code](/course/open/sys-code-tests?lang=en) your tests looked at the code; here they looked at the model, from the outside, as CheckList does: a minimum it must get right, an answer that must not change, and an answer that must move the right way. Your project *ops* now has three more tests, `test_night.py`, `test_row_number.py` and `test_rain.py`, and `conftest.py` gives them your packed model. The failures that remain, such as fewer than 0 bikes at night and Saturday against Sunday, are what a model card writes down: *A model card for your model* shows how, and in *Project: tests and a model card* your demand model gets both. In *Project: your model as a service, watched for drift* it answers requests, and the hours of 2012, with many more riders than 2011, come back.
+    **How this connects.** In [Tests for ML code](/course/open/sys-code-tests?lang=en) your tests looked at the code; here they looked at the model, from the outside, as CheckList does: a minimum it must get right, an answer that must not change, and an answer that must move the right way. Your project *ops* now has three more tests, `test_night.py`, `test_row_number.py` and `test_rain.py`, and `conftest.py` gives them your packed model. The failures that remain, such as fewer than 0 bikes at night and Saturday against Sunday, are what a model card writes down: *For whom does it work? Model and system cards* shows how, and in *Project: tests and a model card* your demand model gets both. In *Project: your model as a service, watched for drift* it answers requests, and the hours of 2012, with many more riders than 2011, come back.
     """)
     return
 

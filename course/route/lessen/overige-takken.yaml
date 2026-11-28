@@ -459,7 +459,8 @@ lessons:
   idea: "Write down what your model is for, what it was trained on, how it scored and where it fails, with the license of model and data."
   covers: [documentatie-platforms-en-llmops#0]
   requires: [llm-eval-chat, data-provenance, llm-safety-eval]
-  introduces: [p:write-a-model-card, c:intended-use, c:metadata, c:yaml]
+  introduces: [p:write-a-model-card, c:metadata, c:yaml]
+  mentions: [c:intended-use]
   uses: [c:license, c:consent, c:model-card, c:model-hub, c:datasheet, c:data-provenance, c:red-teaming, c:jailbreak, c:over-refusal, p:verifiable-eval, c:verifiable-instruction, c:clean-subset, c:contamination, c:test-set, c:benchmark, c:chat-model, c:fine-tuning, c:dpo, s:beta-kl, c:lora, c:adapter, c:instruction-tuning, c:base-model, c:language-model, c:preference-pair, c:bpe, c:merge-rule, c:vocabulary, c:token, c:model-parameter, c:learning-rate, c:mini-batch, c:update-step, c:newline, py:def, py:return, py:for, py:if, py:or-operator, py:comparison, py:bool, py:list, py:append, py:dict, py:tuple, py:str-join, py:f-string, py:string-literal, py:arithmetic, py:float, py:indexing, py:print, py:comment, py:underscore-name, q:predict, q:choice, q:exercise-with-check, q:run-cell]
   data: [model-course-capstone, model-course-sft, model-course-dpo, course-dpo-answers, course-eval-chat, course-red-team-prompts, course-red-team-answers, model-course-qmnist-cnn, cosmopedia, tinystories]
   needs: any

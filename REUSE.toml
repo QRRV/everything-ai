@@ -59,6 +59,12 @@ SPDX-FileCopyrightText = "Copyright (c) Facebook, Inc. and its affiliates. All r
 SPDX-License-Identifier = "BSD-3-Clause"
 
 [[annotations]]
+path = "data/qmnist-writers.npz"
+precedence = "override"
+SPDX-FileCopyrightText = "Copyright (c) Facebook, Inc. and its affiliates. All rights reserved. (QMNIST; writers and a subset of its test set, made for Everything AI)"
+SPDX-License-Identifier = "BSD-3-Clause"
+
+[[annotations]]
 path = "data/qmnist-tsne-maps.npz"
 precedence = "override"
 SPDX-FileCopyrightText = "Copyright (c) Facebook, Inc. and its affiliates. All rights reserved. (QMNIST; t-SNE maps of its first 1,000 test images, made for Everything AI)"

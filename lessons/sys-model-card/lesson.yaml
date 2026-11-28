@@ -1,0 +1,37 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: sys-model-card
+minutes: 35
+title:
+  en: "For whom does it work? Model and system cards"
+  nl: "Voor wie werkt het? Model cards en system cards"
+goal:
+  en: "measure a model per group and per condition, as a model card should report it, turn those numbers into its limits, sort what belongs in each part of a card, and say what a system card adds."
+  nl: "een model per groep en per omstandigheid meten, zoals een model card het hoort te melden, van deze getallen de grenzen maken, indelen wat in elk deel van een card hoort, en zeggen wat een system card toevoegt."
+summary:
+  - en: "A model card says what a model is, what it is for and what not, which data it learned from and was tested on, how well it does, and what goes wrong. One score over a whole test set says little about that: the course's digit reader gets 929 of 1,000 test digits right, all written by high-school students."
+    nl: "Een model card zegt wat een model is, waarvoor het is en waarvoor niet, van welke data het leerde en waarop het getest is, hoe goed het het doet, en wat er misgaat. Eén score over een hele test set zegt daar weinig over: de cijferlezer van de course leest 929 van de 1.000 testcijfers goed, allemaal geschreven door scholieren."
+  - en: "Disaggregated evaluation measures the metric for each group and each condition apart. Turned 15° clockwise, the digit reader does worse on the employees' digits than on the students', the other way round from the digits as written."
+    nl: "Disaggregated evaluation meet de metric voor elke groep en elke omstandigheid apart. 15° met de klok mee gedraaid doet de cijferlezer het slechter op de cijfers van de medewerkers dan op de cijfers van de scholieren, andersom dan bij de cijfers zoals geschreven."
+  - en: "Give the number of examples behind each number: a number over 2 digits can only be 0%, 50% or 100%. The limits on a card are where the numbers fall below what the intended use asks for, and a card also says what was not tested."
+    nl: "Geef het aantal voorbeelden achter elk getal: een getal over 2 cijfers kan alleen 0%, 50% of 100% zijn. De grenzen op een card liggen waar de getallen zakken onder wat het beoogde gebruik vraagt, en een card zegt ook wat er niet getest is."
+  - en: "A system card does the same for a whole system: its models, the steps around them, and how well the whole does, tested as it is used."
+    nl: "Een system card doet hetzelfde voor een heel systeem: de modellen, de stappen eromheen, en hoe goed het geheel het doet, getest zoals het gebruikt wordt."
+can_now:
+  - en: "measure a model per group and per condition, with a mask per group"
+    nl: "een model per groep en per omstandigheid meten, met een mask per groep"
+    by: per-group
+  - en: "sort what a model card says into its parts: what it is for, what not, its data and its limits"
+    nl: "wat een model card zegt indelen in de delen: waarvoor het is, waarvoor niet, de data en de grenzen"
+    by: sections
+  - en: "say what belongs in a system card and not in a model card"
+    nl: "zeggen wat in een system card hoort en niet in een model card"
+    by: system-card
+further_reading:
+  - en: "Margaret Mitchell, Simone Wu, Andrew Zaldivar, Parker Barnes, Lucy Vasserman, Ben Hutchinson, Elena Spitzer, Inioluwa Deborah Raji and Timnit Gebru (2019), *Model Cards for Model Reporting*, FAT* 2019: the nine parts of a card, and results per group and per condition"
+    nl: "Margaret Mitchell, Simone Wu, Andrew Zaldivar, Parker Barnes, Lucy Vasserman, Ben Hutchinson, Elena Spitzer, Inioluwa Deborah Raji en Timnit Gebru (2019), *Model Cards for Model Reporting*, FAT* 2019: de negen delen van een card, en uitkomsten per groep en per omstandigheid"
+  - en: "Chhavi Yadav and Léon Bottou (2019), *Cold Case: The Lost MNIST Digits*, NeurIPS: how QMNIST recovered who wrote each digit of MNIST"
+    nl: "Chhavi Yadav en Léon Bottou (2019), *Cold Case: The Lost MNIST Digits*, NeurIPS: hoe QMNIST terugvond wie elk cijfer van MNIST schreef"
+  - en: "OpenAI (2023), *GPT-4 System Card*: the risks experts tested GPT-4 for, and the safeguards around the model"
+    nl: "OpenAI (2023), *GPT-4 System Card*: op welke risico's experts GPT-4 testten, en de maatregelen rond het model"
