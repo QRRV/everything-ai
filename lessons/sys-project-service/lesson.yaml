@@ -1,0 +1,42 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: sys-project-service
+minutes: 40
+title:
+  en: "Project: your model as a service, watched for drift"
+  nl: "Project: je model als service, bewaakt op drift"
+goal:
+  en: "let your demand model answer requests from a server on your own computer, log every request with its latency, check each month of what came in for drift against the same month of training, and let a rule on the real error say when the model needs training again."
+  nl: "je model van de vraag verzoeken laten beantwoorden vanaf een server op je eigen computer, elk verzoek loggen met de latency, elke maand van wat binnenkwam op drift checken tegen dezelfde maand van de training, en een regel op de echte fout laten zeggen wanneer het model opnieuw moet trainen."
+summary:
+  - en: "time.perf_counter() is a clock in seconds whose single reading means nothing: the difference between a reading right before and right after the answer is its latency. A service writes it in one line of JSON per request, with the answer and the request, in a file of JSON Lines such as requests.jsonl."
+    nl: "time.perf_counter() is een klok in seconden waarvan één stand alleen niets zegt: het verschil tussen een stand vlak voor en vlak na het antwoord is de latency. Een service schrijft de latency in één regel JSON per verzoek, met het antwoord en het verzoek, in een bestand met JSON Lines zoals requests.jsonl."
+  - en: "The log holds the inputs the model really got. A drift check compares each month of it with the same month of the training data, with the PSI of each input and of the answers: a month against a whole year would mostly measure the season."
+    nl: "De log bevat de inputs die het model echt kreeg. Een driftcheck vergelijkt elke maand daarvan met dezelfde maand van de training data, met de PSI van elke input en van de antwoorden: een maand tegen een heel jaar meet vooral het seizoen."
+  - en: "The real outcome often comes in later, and only then does it show how far off an answer was. Then the RMSE of a month is held against the RMSE of the package on its validation days, val_rmse in config.json, and a rule says to train again above LIMIT times val_rmse."
+    nl: "De echte uitkomst komt vaak later binnen, en pas dan blijkt hoe ver een antwoord ernaast zat. Dan staat de RMSE van een maand tegenover de RMSE van het pakket op de validatiedagen, val_rmse in config.json, en volgens een regel moet het model opnieuw trainen boven LIMIT keer val_rmse."
+  - en: "Drift of the inputs comes at once but is only a warning: in 2012 it went above 0.25 in seven months and did not follow the error. More riders pushed the model past LIMIT times val_rmse in every month from February on, and only the rentals showed it."
+    nl: "Drift van de inputs komt meteen maar is alleen een waarschuwing: in 2012 kwam de drift in zeven maanden boven 0,25 en volgde de fout niet. Door meer fietsers zat het model vanaf februari elke maand boven LIMIT keer val_rmse, en alleen de verhuurde fietsen lieten dat zien."
+can_now:
+  - en: "measure the latency of every answer of a service and write it in one line of JSON per request"
+    nl: "de latency van elk antwoord van een service meten en in één regel JSON per verzoek schrijven"
+    by: serve
+  - en: "check each month of a log for drift against the same month of the training data"
+    nl: "elke maand van een log op drift checken tegen dezelfde maand van de training data"
+    by: drift
+  - en: "say in code when a model needs training again, from its error per month and the RMSE of its package"
+    nl: "in code zeggen wanneer een model opnieuw moet trainen, uit de fout per maand en de RMSE van het pakket"
+    by: retrain
+  - en: "say what a project does once its rule says that the model needs training again"
+    nl: "zeggen wat een project doet zodra de regel zegt dat het model opnieuw moet trainen"
+    by: next
+further_reading:
+  - en: "The Python documentation of the module time: perf_counter, a clock with the highest resolution for short durations, and why time.time can jump"
+    nl: "De documentatie van Python over de module time: perf_counter, een klok met de hoogste resolutie voor korte tijden, en waarom time.time kan verspringen"
+  - en: "JSON Lines (jsonlines.org): the format of one JSON value per line, for logs and for data that a program reads line by line"
+    nl: "JSON Lines (jsonlines.org): het formaat met één JSON-waarde per regel, voor logs en voor data die een programma regel voor regel leest"
+  - en: "Chip Huyen, *Designing Machine Learning Systems* (O'Reilly, 2022): the chapter on monitoring, with the delay before the real outcomes come in and what a team watches meanwhile"
+    nl: "Chip Huyen, *Designing Machine Learning Systems* (O'Reilly, 2022): het hoofdstuk over monitoring, met de vertraging voordat de echte uitkomsten binnenkomen en wat een team in de tussentijd in de gaten houdt"
+  - en: "Hadi Fanaee-T and João Gama (2013), *Event labeling combining ensemble detectors and background knowledge*, Progress in Artificial Intelligence: the hourly counts of Capital Bikeshare that your project uses"
+    nl: "Hadi Fanaee-T en João Gama (2013), *Event labeling combining ensemble detectors and background knowledge*, Progress in Artificial Intelligence: de tellingen per uur van Capital Bikeshare: de data van je project"
