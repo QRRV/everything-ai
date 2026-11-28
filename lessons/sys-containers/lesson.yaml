@@ -1,0 +1,40 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: sys-containers
+minutes: 35
+title:
+  en: "A box that runs anywhere: containers"
+  nl: "Een doos die overal draait: containers"
+goal:
+  en: "say how many steps of a Dockerfile Docker builds again when a file changes, put the lines in an order that keeps builds quick, work out what a server downloads of a new image, and say what goes in an image and what is given when a container starts."
+  nl: "zeggen hoeveel stappen van een Dockerfile Docker opnieuw bouwt als een bestand verandert, de regels in een volgorde zetten waarmee builds snel blijven, uitrekenen wat een server van een nieuw image downloadt, en zeggen wat in een image hoort en wat je meegeeft als een container start."
+summary:
+  - en: "A container is a program that runs with its Python, packages, files and settings packed in. It shares the kernel of the computer it runs on, so unlike a virtual machine it brings no operating system of its own, and it starts in a second. It starts from an image, which does not change; from one image you can start many containers."
+    nl: "Een container is een programma dat draait met de eigen Python, packages, bestanden en instellingen ingepakt. Een container deelt de kernel van de computer waarop de container draait, dus brengt een container anders dan een virtuele machine geen eigen besturingssysteem mee, en start een container in een seconde. Een container start vanuit een image, en een image verandert niet; vanuit één image kun je veel containers starten."
+  - en: "A Dockerfile is the recipe of an image: FROM a base image, then COPY and RUN, and CMD for the start command. Every step gives a layer. Docker takes a layer from its build cache when the line and its files are the same; from the first step where something changed, it builds every step again."
+    nl: "Een Dockerfile is het recept van een image: FROM een base image, daarna COPY en RUN, en CMD voor de startopdracht. Elke stap geeft een laag. Docker haalt een laag uit de build cache als de regel en de bestanden hetzelfde zijn; vanaf de eerste stap waar iets veranderd is bouwt Docker elke stap opnieuw."
+  - en: "So what changes least goes at the top and your own code at the bottom. A change to the code then builds one small step again instead of installing every package again, and a server that has yesterday's image downloads only the layers with a new id: in the lesson's example, 0.02 MB instead of 383.05 MB."
+    nl: "Wat het minst verandert komt dus bovenaan en je eigen code onderaan. Een verandering in de code bouwt dan één kleine stap opnieuw in plaats van elk package opnieuw te installeren, en een server met het image van gisteren downloadt alleen de lagen met een nieuwe id: in het voorbeeld van de les 0,02 MB in plaats van 383,05 MB."
+  - en: "A secret, the port and folders for data are given when the container starts, and never put in the image, since anyone with the image can read every layer. An image holds programs for one kind of processor: build it for the processor of the server."
+    nl: "Een geheim, de poort en mappen voor data geef je mee als de container start, en nooit in het image, want iedereen met het image kan elke laag lezen. Een image bevat programma's voor één soort processor: bouw het image voor de processor van de server."
+can_now:
+  - en: "say how many steps of a Dockerfile Docker builds again when a file changes"
+    nl: "zeggen hoeveel stappen van een Dockerfile Docker opnieuw bouwt als een bestand verandert"
+    by: rebuilt
+  - en: "work out how much of a new image a server still has to download"
+    nl: "uitrekenen hoeveel van een nieuw image een server nog moet downloaden"
+    by: to_download
+  - en: "say what goes in an image, what comes from the server, and what you give when a container starts"
+    nl: "zeggen wat in een image hoort, wat van de server komt, en wat je meegeeft als een container start"
+    by: where
+  - en: "say why an image built on a laptop with an Apple chip may not run on a server, and what to do about it"
+    nl: "zeggen waarom een image dat op een laptop met een Apple-chip gebouwd is misschien niet op een server draait, en wat je eraan doet"
+    by: platform
+further_reading:
+  - en: "Docker, *Docker build cache*, in the Docker documentation: how the cache decides which steps run again, and how to order a Dockerfile"
+    nl: "Docker, *Docker build cache*, in de documentatie van Docker: hoe de cache bepaalt welke stappen opnieuw draaien, en hoe je een Dockerfile ordent"
+  - en: "Docker, *Dockerfile reference*, in the Docker documentation: every instruction of a Dockerfile, with examples"
+    nl: "Docker, *Dockerfile reference*, in de documentatie van Docker: elke instructie van een Dockerfile, met voorbeelden"
+  - en: "Open Container Initiative, *Image Format Specification*: what an image is, layer by layer, for every tool that builds or runs one"
+    nl: "Open Container Initiative, *Image Format Specification*: wat een image is, laag voor laag, zodat elke tool dezelfde images kan bouwen en draaien"
