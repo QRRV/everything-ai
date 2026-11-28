@@ -1,0 +1,40 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: sys-feedback-loops
+minutes: 35
+title:
+  en: "When a model changes its own data: feedback loops"
+  nl: "Als een model de eigen data verandert: feedback loops"
+goal:
+  en: "see how a model whose output decides its own data can lock onto one choice in a degenerate feedback loop; simulate an app that always shows the route with the most rides; rank the routes by rides per showing with a share of random showings instead; and tell which models have a feedback loop."
+  nl: "zien hoe een model dat met de eigen output de eigen data bepaalt kan vastlopen op één keuze in een degenerate feedback loop; een app simuleren die steeds de route met de meeste ritten toont; de routes in plaats daarvan rangschikken op ritten per keer getoond, met een aandeel willekeurige routes; en zeggen welke modellen een feedback loop hebben."
+summary:
+  - en: "In a feedback loop, a model's output changes the data it learns from later: what the app shows decides which route can get rides."
+    nl: "In een feedback loop verandert wat een model geeft de data waarvan het model later leert: wat de app toont bepaalt welke route ritten kan krijgen."
+  - en: "In a degenerate feedback loop, the loop narrows what the model shows until it shows almost one thing. An app that ranks by rides shows the route that led after its first week to every later visitor, however few visitors take it: popularity bias."
+    nl: "In een degenerate feedback loop maakt de loop steeds kleiner wat het model toont, tot het model vrijwel alleen nog één ding toont. Een app die op ritten rangschikt toont de route die na de eerste week voorlag aan elke latere bezoeker, hoe weinig bezoekers de route ook nemen: popularity bias."
+  - en: "Ranking by rides per showing does not reward a route for being shown. A small share of random showings, as in ε-greedy, keeps the app learning about every route, at a cost in rides now."
+    nl: "Rangschikken op ritten per keer getoond beloont een route niet voor het getoond worden. Een klein aandeel willekeurige routes, zoals bij ε-greedy, houdt de app aan het leren over elke route, en kost nu wat ritten."
+  - en: "Log what was shown next to what came back, and watch how often each choice is shown: a model in a degenerate feedback loop shows fewer and fewer different things."
+    nl: "Log wat er getoond werd naast wat er terugkwam, en houd in de gaten hoe vaak elke keuze getoond wordt: een model in een degenerate feedback loop toont steeds minder verschillende dingen."
+can_now:
+  - en: "simulate an app whose choice decides which data come back"
+    nl: "een app simuleren waarvan de keuze bepaalt welke data er terugkomen"
+    by: simulate
+  - en: "rank choices by rides per showing, with a share of random showings"
+    nl: "keuzes rangschikken op ritten per keer getoond, met een aandeel willekeurige routes"
+    by: choose
+  - en: "say why random showings do not help an app that ranks by count"
+    nl: "zeggen waarom willekeurige routes een app die op aantallen rangschikt niet helpen"
+    by: count-explore
+  - en: "tell which models have a feedback loop"
+    nl: "zeggen welke modellen een feedback loop hebben"
+    by: loops
+further_reading:
+  - en: "Chip Huyen, *Designing Machine Learning Systems* (O'Reilly, 2022): the chapter on monitoring, with degenerate feedback loops and how to find and break them"
+    nl: "Chip Huyen, *Designing Machine Learning Systems* (O'Reilly, 2022): het hoofdstuk over monitoring, met degenerate feedback loops en hoe je zo'n loop vindt en doorbreekt"
+  - en: "Allison Chaney, Brandon Stewart and Barbara Engelhardt, *How Algorithmic Confounding in Recommendation Systems Increases Homogeneity and Decreases Utility*, RecSys 2018: simulations in which a system that learns from its own recommendations makes what its users choose more and more alike, without making it more useful to them"
+    nl: "Allison Chaney, Brandon Stewart en Barbara Engelhardt, *How Algorithmic Confounding in Recommendation Systems Increases Homogeneity and Decreases Utility*, RecSys 2018: simulaties waarin een systeem dat van de eigen aanbevelingen leert de keuzes van de gebruikers steeds meer op elkaar laat lijken, zonder dat de gebruikers er meer aan hebben"
+  - en: "D. Sculley and others, *Hidden Technical Debt in Machine Learning Systems*, NeurIPS 2015: feedback loops, direct and hidden, among the hidden costs of ML systems"
+    nl: "D. Sculley en anderen, *Hidden Technical Debt in Machine Learning Systems*, NeurIPS 2015: feedback loops, direct en verborgen, als een van de verborgen kosten van ML-systemen"
