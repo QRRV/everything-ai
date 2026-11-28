@@ -1,0 +1,42 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: sys-project-tested-model
+minutes: 40
+title:
+  en: "Project: tests and a model card"
+  nl: "Project: tests en een model card"
+goal:
+  en: "run every test of your project ops with one command, mark a test your demand model fails as a known limit, measure its RMSE per group of hours, and let code write its model card beside the package."
+  nl: "elke test van je project ops uitvoeren met één opdracht, een test die je model van de vraag niet haalt markeren als bekende grens, de RMSE per groep uren meten, en code de model card naast het pakket laten schrijven."
+summary:
+  - en: "pytest finds every file whose name begins with test_ in a folder, reads conftest.py first for its fixtures, runs every test, and ends with one line that counts them. All the tests of a project together are its suite: green when every test does what it should, red as soon as one does not."
+    nl: "In een map vindt pytest elk bestand met een naam die begint met test_. pytest leest eerst conftest.py voor de fixtures, voert elke test uit, en eindigt met één regel die de tests telt. Alle tests van een project samen zijn de suite: groen als elke test doet wat de test moet doen, rood zodra één test dat niet doet."
+  - en: "A test the model fails, and that you will not fix now, gets the mark @pytest.mark.xfail with a reason. pytest still runs it and reports XFAIL, and the suite stays green. With strict=True, a pass counts as a failure, XPASS(strict), so the suite turns red when the limit is gone."
+    nl: "Haalt het model een test niet, en los je dat nu niet op, dan krijgt de test de markering @pytest.mark.xfail met een reden. pytest voert de test toch uit en meldt XFAIL, en de suite blijft groen. Met strict=True telt een geslaagde test als fout, XPASS(strict), zodat de suite rood wordt als de grens weg is."
+  - en: "For a regression model, a card gives the RMSE per group and per condition, such as per kind of day and per weather, with the hours behind each number. The RMSE of all hours is not the mean of the RMSEs per group, since the root comes only after the mean of all the squared errors."
+    nl: "Voor een regressiemodel geeft een card de RMSE per groep en per omstandigheid, zoals per soort dag en per weer, met de uren achter elk getal. De RMSE van alle uren is niet het gemiddelde van de RMSE's per groep, want de wortel komt pas na het gemiddelde van alle gekwadrateerde fouten."
+  - en: "A card written by hand goes out of date with the next version. Code writes it from config.json, the numbers per group and the known limits, as README.md beside the package, which the Hugging Face Hub shows as the model card. A group no validation hour falls in, such as heavy rain, goes on the card as not tested."
+    nl: "Met de hand geschreven raakt een card verouderd bij de volgende versie. Code schrijft de card uit config.json, de getallen per groep en de bekende grenzen, als README.md naast het pakket, en de Hugging Face Hub laat dat bestand zien als de model card. Een groep zonder validatie-uren, zoals zware regen, komt op de card als niet getest."
+can_now:
+  - en: "measure the RMSE of a model per value of a column, with the number of hours behind each number"
+    nl: "de RMSE van een model meten per waarde van een kolom, met het aantal uren achter elk getal"
+    by: per-group
+  - en: "mark a test the model fails as a known limit with xfail, a reason and strict=True"
+    nl: "een test die het model niet haalt markeren als bekende grens met xfail, een reden en strict=True"
+    by: weekend
+  - en: "let code write a model card in Markdown, with a table of the numbers per group and the known limits"
+    nl: "code een model card in Markdown laten schrijven, met een tabel van de getallen per groep en de bekende grenzen"
+    by: card
+  - en: "say what a card does with a group that no test hour falls in"
+    nl: "zeggen wat een card doet met een groep zonder testuren"
+    by: heavy-rain
+further_reading:
+  - en: "The pytest documentation, *How to use skip and xfail to deal with tests that cannot succeed*: the mark xfail with reason, raises and strict, and how pytest reports XFAIL and XPASS"
+    nl: "De documentatie van pytest, *How to use skip and xfail to deal with tests that cannot succeed*: de markering xfail met reason, raises en strict, en hoe pytest XFAIL en XPASS meldt"
+  - en: "Margaret Mitchell and others (2019), *Model Cards for Model Reporting*, FAT* 2019: results per group and per condition, with what was not tested"
+    nl: "Margaret Mitchell en anderen (2019), *Model Cards for Model Reporting*, FAT* 2019: uitkomsten per groep en per omstandigheid, met wat er niet getest is"
+  - en: "Hugging Face, *Model Cards*, in the documentation of the Hub: the file README.md of a model as its card, with the parts a card should have"
+    nl: "Hugging Face, *Model Cards*, in de documentatie van de Hub: het bestand README.md van een model als de card, met de delen die een card hoort te hebben"
+  - en: "Hadi Fanaee-T and João Gama (2013), *Event labeling combining ensemble detectors and background knowledge*, Progress in Artificial Intelligence: the hourly counts of Capital Bikeshare that your project uses"
+    nl: "Hadi Fanaee-T en João Gama (2013), *Event labeling combining ensemble detectors and background knowledge*, Progress in Artificial Intelligence: de tellingen per uur van Capital Bikeshare die je project gebruikt"
