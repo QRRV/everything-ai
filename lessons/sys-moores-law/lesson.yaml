@@ -1,0 +1,40 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: sys-moores-law
+minutes: 30
+title:
+  en: "Moore's law and the growth of compute"
+  nl: "De wet van Moore en de groei van compute"
+goal:
+  en: "measure how fast chips and trainings grew with a doubling time, and say where Dennard scaling stopped and where the memory wall began."
+  nl: "met een verdubbelingstijd meten hoe snel chips en trainingen groeiden, en zeggen waar Dennard scaling ophield en waar de memory wall begon."
+summary:
+  - en: "Moore's law is the prediction, from 1975, that the number of transistors on a chip doubles about every two years. From the Intel 4004 of 1971, with 2,300, to the NVIDIA H100 of 2022, with 80 billion, they doubled about 25 times."
+    nl: "De wet van Moore is de voorspelling, uit 1975, dat het aantal transistors op een chip ongeveer elke twee jaar verdubbelt. Van de Intel 4004 uit 1971, met 2.300, tot de NVIDIA H100 uit 2022, met 80 miljard, verdubbelde het aantal ongeveer 25 keer."
+  - en: "The doubling time is the years divided by the number of doublings, and the number of doublings is the log2 of how many times as large the end is. With many points, a straight line through the years and the log2 of the values gives it: one over its slope. Fifteen chips double every 2.04 years."
+    nl: "De verdubbelingstijd is het aantal jaren gedeeld door het aantal verdubbelingen, en het aantal verdubbelingen is de log2 van hoeveel keer zo groot het eind is. Bij veel punten geeft een rechte lijn door de jaren en de log2 van de waarden de verdubbelingstijd: één gedeeld door de helling. Vijftien chips verdubbelen elke 2,04 jaar."
+  - en: "Dennard scaling made smaller transistors faster on the same power, until around 2005. Since then, the extra transistors go into more cores rather than a higher clock speed."
+    nl: "Dennard scaling maakte kleinere transistors sneller bij dezelfde stroom, tot ongeveer 2005. Sindsdien gaan de extra transistors naar meer cores in plaats van naar een hogere kloksnelheid."
+  - en: "Over 20 years, peak FLOP/s grew 3.0 times every two years and the bandwidth of memory 1.6 times: the memory wall, where computing waits for data more and more. The compute of the largest trainings grew about 5 times a year, much faster than the chips, since trainings also use more chips, for longer."
+    nl: "Over 20 jaar groeiden de hoogste FLOP/s elke twee jaar 3,0 keer en de bandbreedte van het geheugen 1,6 keer: de memory wall, waarbij het rekenen steeds vaker op data wacht. De compute van de grootste trainingen groeide ongeveer 5 keer per jaar, veel sneller dan de chips, omdat trainingen ook meer chips gebruiken, en langer."
+can_now:
+  - en: "work out the doubling time of a growth from its start, its end and the years between them"
+    nl: "de verdubbelingstijd van een groei uitrekenen uit het begin, het eind en de jaren ertussen"
+    by: time
+  - en: "fit a straight line on a log scale to find one doubling time for many points"
+    nl: "een rechte lijn op een logaritmische schaal passen om één verdubbelingstijd voor veel punten te vinden"
+    by: fit
+  - en: "tell Moore's law, Dennard scaling and the memory wall apart"
+    nl: "de wet van Moore, Dennard scaling en de memory wall uit elkaar houden"
+    by: laws
+  - en: "work out how fast the gap between computing and memory grows over the years"
+    nl: "uitrekenen hoe snel het gat tussen rekenen en geheugen groeit over de jaren"
+    by: wall
+further_reading:
+  - en: "Gordon E. Moore (1965), *Cramming more components onto integrated circuits*, Electronics 38(8): the first prediction, a doubling every year"
+    nl: "Gordon E. Moore (1965), *Cramming more components onto integrated circuits*, Electronics 38(8): de eerste voorspelling, een verdubbeling per jaar"
+  - en: "Amir Gholami and others (2024), *AI and Memory Wall*, arXiv 2403.14123: peak FLOP/s, the bandwidth of memory and the bandwidth between chips over 20 years"
+    nl: "Amir Gholami en anderen (2024), *AI and Memory Wall*, arXiv 2403.14123: de hoogste FLOP/s, de bandbreedte van het geheugen en de bandbreedte tussen chips over 20 jaar"
+  - en: "Jaime Sevilla and Edu Roldán (2024), *Training compute of frontier AI models grows by 4-5x per year*, Epoch AI: how fast the compute of notable models grew from 2010 to May 2024"
+    nl: "Jaime Sevilla en Edu Roldán (2024), *Training compute of frontier AI models grows by 4-5x per year*, Epoch AI: hoe snel de compute van opvallende modellen groeide van 2010 tot mei 2024"
