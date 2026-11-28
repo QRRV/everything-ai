@@ -1,0 +1,42 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: sys-monitoring
+minutes: 35
+title:
+  en: "Watching a running model: metrics, logs and alerts"
+  nl: "Een draaiend model in de gaten houden: metrics, logs en alerts"
+goal:
+  en: "read a log in which a service writes every request as one structured line, take the median and the 99th percentile of the latency from such a log, write an alert rule that goes off when a number stays too high and not on one spike, and say which numbers watch the service and which watch the model."
+  nl: "een log lezen waarin een service elk verzoek als één gestructureerde regel schrijft, de mediaan en het 99e percentiel van de latency uit zo'n log halen, een alertregel schrijven die afgaat als een getal te hoog blijft en niet op één piek, en zeggen welke getallen de service in de gaten houden en welke het model."
+summary:
+  - en: "Model monitoring watches a model in use with two kinds of numbers: about the service, such as traffic, errors, latency and how full the server is, and about the model, such as what it answers, what goes in, and how far off it was once the truth is known."
+    nl: "Model monitoring houdt een model in gebruik in de gaten met twee soorten getallen: over de service, zoals verkeer, fouten, latency en hoe vol de server zit, en over het model, zoals wat het antwoordt, wat erin gaat, en hoe ver het ernaast zat zodra bekend is wat er echt gebeurde."
+  - en: "A service writes one structured line in JSON per request, with fixed fields such as the time, the status, the latency, the inputs and the answer, so that a program can read, count and group the log."
+    nl: "Een service schrijft per verzoek één gestructureerde regel in JSON, met vaste velden zoals de tijd, de status, de latency, de inputs en het antwoord, zodat een programma de log kan lezen, tellen en groeperen."
+  - en: "The mean latency hides the slow requests. The p50 is the median; the p99 is the latency below which 99 in 100 requests lie, and the tail latency above it is what the unluckiest users feel."
+    nl: "De gemiddelde latency verbergt de trage verzoeken. De p50 is de mediaan; de p99 is de latency met 99 van de 100 verzoeken eronder, en de tail latency daarboven is wat de gebruikers met de meeste pech merken."
+  - en: "An alert rule names a number, a limit and how long the number has to stay over it, such as a p99 above 300 ms for 5 minutes. Too low or too short, and it goes off for nothing until nobody looks; too high or too long, and a real problem goes unseen."
+    nl: "Een alertregel noemt een getal, een grens en hoe lang het getal erboven moet blijven, zoals een p99 boven 300 ms gedurende 5 minuten. Is de grens te laag of de tijd te kort, dan gaat de regel af voor niets, tot niemand meer kijkt; is de grens te hoog of de tijd te lang, dan blijft een echt probleem onopgemerkt."
+can_now:
+  - en: "take the median and the 99th percentile of the latency from a log of requests"
+    nl: "de mediaan en het 99e percentiel van de latency uit een log van verzoeken halen"
+    by: tail
+  - en: "write an alert rule that goes off when a number stays above a limit, and not on one spike"
+    nl: "een alertregel schrijven die afgaat als een getal boven een grens blijft, en niet op één piek"
+    by: alert
+  - en: "say which number in a log shows a model that answers fast and wrong"
+    nl: "zeggen welk getal in een log een model laat zien dat snel en fout antwoordt"
+    by: model
+  - en: "sort the numbers of a running model into numbers about the service and numbers about the model"
+    nl: "de getallen van een draaiend model indelen in getallen over de service en getallen over het model"
+    by: watch
+further_reading:
+  - en: "Betsy Beyer, Chris Jones, Jennifer Petoff and Niall Richard Murphy (eds.), *Site Reliability Engineering* (O'Reilly, 2016): chapter 6, *Monitoring Distributed Systems*, with the four golden signals: latency, traffic, errors and saturation"
+    nl: "Betsy Beyer, Chris Jones, Jennifer Petoff en Niall Richard Murphy (red.), *Site Reliability Engineering* (O'Reilly, 2016): hoofdstuk 6, *Monitoring Distributed Systems*, met de vier golden signals: latency, traffic, errors en saturation"
+  - en: "Jeffrey Dean and Luiz André Barroso, *The Tail at Scale*, Communications of the ACM 56(2), 2013: why the slowest 1 in 100 requests matters once one answer needs many requests"
+    nl: "Jeffrey Dean en Luiz André Barroso, *The Tail at Scale*, Communications of the ACM 56(2), 2013: waarom de traagste 1 op de 100 verzoeken ertoe doet zodra één antwoord veel verzoeken nodig heeft"
+  - en: "Prometheus documentation, *Alerting rules*, and *Histograms and summaries*: a rule with a `for` clause, and the 99th percentile of a latency with `histogram_quantile`"
+    nl: "Documentatie van Prometheus, *Alerting rules*, en *Histograms and summaries*: een regel met een `for`-clausule, en het 99e percentiel van een latency met `histogram_quantile`"
+  - en: "Chip Huyen, *Designing Machine Learning Systems* (O'Reilly, 2022): the chapter on data distribution shifts and monitoring"
+    nl: "Chip Huyen, *Designing Machine Learning Systems* (O'Reilly, 2022): het hoofdstuk over verschuivingen in de verdeling van data en over monitoring"
