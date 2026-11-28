@@ -422,7 +422,7 @@ lessons:
   idea: "A schema says per column what is allowed (a type, a range, a set of values), and expectations add rules about the whole table (no duplicate ids, about as many rows as yesterday); you check every new batch before it reaches training or the model, and stop it when it breaks a rule, as Great Expectations and Pandera do."
   covers: [datakwaliteit-versiebeheer-en-feature-stores#1]
   requires: [sys-data-quality]
-  introduces: [c:data-schema, c:data-validation, c:data-expectation]
+  introduces: [c:schema, c:data-validation, c:data-expectation]
   data: [bike-sharing]
   ladder: [python, numpy]
   needs: any

@@ -1,0 +1,40 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: sys-data-validation
+minutes: 30
+title:
+  en: "Rules for data: schemas and expectations"
+  nl: "Regels voor data: schema's en expectations"
+goal:
+  en: "write a schema and expectations for a batch of data, check every new batch with them before it reaches training, and hold back a batch that breaks a rule."
+  nl: "een schema en expectations voor een batch data schrijven, elke nieuwe batch ermee controleren voordat de batch bij de training komt, en een batch tegenhouden die een regel breekt."
+summary:
+  - en: "A schema says per column what is allowed: the type, a range, a set of values, and whether the column may be empty. It looks at one value at a time: an hour of 25 or a humidity of 0 is wrong on its own."
+    nl: "Een schema zegt per kolom wat mag: het type, een bereik, een set waarden, en of de kolom leeg mag zijn. Een schema kijkt naar één waarde tegelijk: een uur van 25 of een luchtvochtigheid van 0 is op zichzelf fout."
+  - en: "An expectation is a rule about many values together: the number of rows of a day, no hour twice, a column that must move during the day, a mean within a range. Great Expectations gave the word its meaning in data work."
+    nl: "Een expectation is een regel over veel waarden samen: het aantal rijen van een dag, geen uur twee keer, een kolom die over de dag moet bewegen, een gemiddelde binnen een bereik. Great Expectations gaf het woord de betekenis in het werk met data."
+  - en: "Data validation checks every new batch against the schema and the expectations before it reaches training or the model. A batch that breaks a rule is held back as a whole, training keeps the data of before, and a person looks."
+    nl: "Datavalidatie controleert elke nieuwe batch tegen het schema en de expectations, voordat de batch bij de training of het model komt. Een batch die een regel breekt wordt als geheel tegengehouden, de training houdt de data van eerder, en een mens kijkt."
+  - en: "A rule that breaks asks a question; the answer can be broken data or a true but unusual day. In the bike data of 2011 and 2012, the gate holds back 12 of 731 days: a broken humidity sensor, a value that sticks, and short days of snow and hurricanes, when the system was closed."
+    nl: "Een regel die breekt stelt een vraag; het antwoord kan kapotte data zijn of een echte maar ongewone dag. In de fietsdata van 2011 en 2012 houdt de poort 12 van de 731 dagen tegen: een kapotte sensor voor de luchtvochtigheid, een waarde die blijft hangen, en korte dagen van sneeuw en orkanen, toen het systeem dicht was."
+can_now:
+  - en: "list every value of a batch that lies outside the range its schema allows"
+    nl: "in een batch elke waarde buiten het bereik van het schema noemen"
+    by: broken
+  - en: "find with NumPy the columns that do not move during a day"
+    nl: "met NumPy vinden welke kolommen over een dag niet bewegen"
+    by: stuck
+  - en: "say whether a rule belongs in a schema or is an expectation"
+    nl: "zeggen of een regel in een schema hoort of een expectation is"
+    by: rules
+  - en: "decide what happens to a batch the gate holds back"
+    nl: "beslissen wat er gebeurt met een batch die de poort tegenhoudt"
+    by: storm
+further_reading:
+  - en: "Pandera documentation, *Lazy Validation*: a schema in Python for a pandas table, with every failure reported at once (version 0.36.0, November 2026)"
+    nl: "Documentatie van Pandera, *Lazy Validation*: een schema in Python voor een pandas-tabel, met elke fout in één keer gemeld (versie 0.36.0, november 2026)"
+  - en: "Great Expectations documentation, *Standard arguments for Expectations*: what `mostly` does, and the other arguments every expectation shares (GX Core 1.25.0, November 2026)"
+    nl: "Documentatie van Great Expectations, *Standard arguments for Expectations*: wat `mostly` doet, en de andere argumenten die elke expectation heeft (GX Core 1.25.0, november 2026)"
+  - en: "Eric Breck, Neoklis Polyzotis, Sudip Roy, Steven Euijong Whang and Martin Zinkevich (2019), *Data Validation for Machine Learning*, SysML: how Google checks the data of its training runs against a schema"
+    nl: "Eric Breck, Neoklis Polyzotis, Sudip Roy, Steven Euijong Whang en Martin Zinkevich (2019), *Data Validation for Machine Learning*, SysML: hoe Google de data van de eigen trainingsruns tegen een schema controleert"

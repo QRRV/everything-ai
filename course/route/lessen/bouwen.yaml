@@ -480,7 +480,7 @@ lessons:
   requires: [build-system-prompt, py-exceptions]
   introduces: [c:structured-output, c:json-schema, c:json-mode]
   uses: [c:api, c:endpoint, c:http-request, c:openai-compatible-api, c:local-server, c:message-role, c:chat-model, c:prompt, c:token, c:json, c:open-weights, c:system-prompt, c:response-prefill, py:urllib-request, py:json, py:dict, py:dict-items, py:list, py:append, py:for, py:range, py:if, py:comparison, py:indexing, py:import, py:def, py:return, py:with, py:string-literal, py:str-join, py:try-except, py:none, py:tuple, q:choice, q:exercise-with-check, q:run-cell]
-  mentions: [c:max-tokens, c:sampling]
+  mentions: [c:max-tokens, c:sampling, c:schema]
   data: [model-qwen3-0.6b, course-dev-prompts-qwen]
   ladder: [python]
   needs: any
@@ -948,7 +948,7 @@ lessons:
   covers: [protocollen-en-standaarden#0]
   requires: [build-tool-design]
   introduces: [c:model-context-protocol, c:json-rpc, c:mcp-server]
-  mentions: [c:temperature, c:prompt-injection, py:startswith]
+  mentions: [c:temperature, c:prompt-injection, py:startswith, c:schema]
   uses: [c:llm-agent, c:tool, c:tool-call, c:function-calling, c:client-side-tool, c:agent-computer-interface, c:json, c:json-schema, c:api, c:local-server, c:chat-model, c:prompt, c:message-role, c:token, py:def, py:return, py:if, py:none, py:dict, py:list, py:for, py:indexing, py:string-literal, py:str-join, py:comprehension, q:choice, q:exercise-with-check, q:run-cell]
   data: [model-qwen3-0.6b, course-agents-qwen]
   ladder: [python]
