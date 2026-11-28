@@ -1,0 +1,40 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: sys-mlops
+minutes: 35
+title:
+  en: "MLOps: how far along is a team?"
+  nl: "MLOps: hoe ver is een team?"
+goal:
+  en: "draw the steps of this module as one loop that runs by itself, say what CI/CD and continuous training add, place a team on a maturity model and name its next step, and count how many months a model serves above its limit when the new model comes some months after the alert."
+  nl: "de stappen van deze module tekenen als één kringloop die uit zichzelf draait, zeggen wat CI/CD en continuous training toevoegen, een team op een volwassenheidsmodel zetten en de volgende stap noemen, en tellen hoeveel maanden een model boven de grens draait als het nieuwe model een paar maanden na de alert komt."
+summary:
+  - en: "MLOps is the way of working, with its tools, that keeps a model good in production. At its heart is one loop: train tracked and reproducible, test the code and what the model does, release a version and an image, serve behind an API, watch the answers and the inputs, and train again when the model gets worse."
+    nl: "MLOps is de manier van werken die een model goed houdt in productie, met de tools erbij. De kern is één kringloop: bijgehouden en herhaalbaar trainen, de code en het gedrag van het model testen, een versie en een image uitrollen, draaien achter een API, de antwoorden en de inputs bewaken, en opnieuw trainen als het model slechter wordt."
+  - en: "CI/CD builds and tests every change to the code by itself and releases it when the tests pass; in ML, the tests check the data and the model too. Continuous training trains the model again by itself, on a schedule, on new data or on an alert, and releases the new model only when it passes the same tests and beats the model in production."
+    nl: "CI/CD bouwt en test elke wijziging in de code vanzelf en rolt de wijziging uit als de tests slagen; bij ML controleren de tests ook de data en het model. Continuous training traint het model vanzelf opnieuw, volgens een rooster, op nieuwe data of op een alert, en rolt het nieuwe model alleen uit als het model dezelfde tests haalt en beter is dan het model in productie."
+  - en: "A maturity model sets out the way from everything by hand to a loop that runs by itself. Google Cloud has three levels, from a manual process to CI/CD pipeline automation; Microsoft has five, from No MLOps to Full MLOps automated operations. Read simply, a team is at the highest level whose step, and every step below it, runs by itself, and its next step is the lowest step a person still does."
+    nl: "Een volwassenheidsmodel zet de weg uit van alles met de hand naar een kringloop die uit zichzelf draait. Google Cloud heeft drie niveaus, van een handmatig proces tot CI/CD pipeline automation; Microsoft heeft er vijf, van No MLOps tot Full MLOps automated operations. Eenvoudig gelezen staat een team op het hoogste niveau waarvan de stap, en elke stap eronder, vanzelf draait, en de volgende stap is de laagste stap die een mens nog doet."
+  - en: "Each month of waiting after an alert adds months in which a worse model answers: with a new model by the next month, a few months of two years are above the limit; with three months of waiting, half of them. Training on a fixed plan trains as often, but at moments the calendar picks, not the error."
+    nl: "Elke maand wachten na een alert voegt maanden toe waarin een slechter model antwoordt: met een nieuw model in de volgende maand liggen een paar maanden van twee jaar boven de grens; met drie maanden wachten de helft. Trainen volgens een vast plan traint even vaak, maar op momenten die de kalender kiest, niet de fout."
+can_now:
+  - en: "place a team on a maturity model by counting the steps that run by themselves, up to the first one a person does"
+    nl: "een team op een volwassenheidsmodel zetten door de automatische stappen te tellen, tot de eerste stap die een mens doet"
+    by: level
+  - en: "count how many months a model serves above its limit when the new model comes some months after the alert"
+    nl: "tellen hoeveel maanden een model boven de grens draait als het nieuwe model een paar maanden na de alert komt"
+    by: bad_months
+  - en: "say which step of the loop each practice of this module belongs to"
+    nl: "zeggen bij welke stap van de kringloop elke werkwijze van deze module hoort"
+    by: loop
+  - en: "name the next step of a team that a person still holds back"
+    nl: "de volgende stap noemen van een team dat nog op een mens wacht"
+    by: next
+further_reading:
+  - en: "Google Cloud, *MLOps: Continuous delivery and automation pipelines in machine learning*, in the Architecture Center: the three levels, and when continuous training starts"
+    nl: "Google Cloud, *MLOps: Continuous delivery and automation pipelines in machine learning*, in het Architecture Center: de drie niveaus, en wanneer continuous training start"
+  - en: "Microsoft, *MLOps maturity model*, in the Azure Architecture Center: the five levels, with what runs by itself at each"
+    nl: "Microsoft, *MLOps maturity model*, in het Azure Architecture Center: de vijf niveaus, met wat er op elk niveau vanzelf draait"
+  - en: "Dominik Kreuzberger, Niklas Kühl and Sebastian Hirschl (2023), *Machine Learning Operations (MLOps): Overview, Definition, and Architecture*, IEEE Access 11: what MLOps covers, from interviews and the literature"
+    nl: "Dominik Kreuzberger, Niklas Kühl en Sebastian Hirschl (2023), *Machine Learning Operations (MLOps): Overview, Definition, and Architecture*, IEEE Access 11: wat MLOps omvat, uit interviews en de literatuur"

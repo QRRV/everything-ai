@@ -395,6 +395,7 @@ lessons:
   covers: [ml-systemen-in-productie#5]
   requires: [sys-project-service, sys-containers]
   introduces: [c:mlops, c:mlops-maturity, c:ci-cd, c:continuous-training]
+  mentions: [c:data-scientist]
   data: []
   ladder: [python]
   needs: any
