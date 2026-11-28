@@ -311,7 +311,7 @@ lessons:
   idea: "Production data moves away from the training data: the inputs change (feature drift), the true answers change (label drift) or what the model predicts changes (prediction drift); you compare the distribution of a feature now with the one in training, with a number such as the population stability index, and in the bike data of 2012 you see it happen."
   covers: [monitoring-drift-en-hertraining#2]
   requires: [sys-ml-failures]
-  introduces: [c:data-drift, c:prediction-drift, c:population-stability-index]
+  introduces: [c:data-drift, c:prediction-drift, c:concept-drift, c:population-stability-index]
   data: [bike-sharing]
   ladder: [python, numpy]
   needs: any

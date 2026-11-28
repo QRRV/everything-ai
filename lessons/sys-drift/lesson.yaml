@@ -1,0 +1,40 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: sys-drift
+minutes: 35
+title:
+  en: "When the world changes: drift"
+  nl: "Als de wereld verandert: drift"
+goal:
+  en: "tell data drift, prediction drift and label drift apart, and say which shows at once and which only once the truth is in; count the share of values in each bin of training; compute the population stability index of two lists of shares; and compare a month with the same month in training, not with a whole year."
+  nl: "data drift, prediction drift en label drift onderscheiden, en zeggen welke meteen te zien is en welke pas als bekend is wat er echt gebeurde; het aandeel van de waarden in elke bin van de training tellen; de population stability index van twee lijsten met aandelen berekenen; en een maand vergelijken met dezelfde maand in de training, niet met een heel jaar."
+summary:
+  - en: "Drift is a change over time in the data a model meets in production, compared with the data it learned from. Data drift is a change in the inputs and prediction drift a change in the answers: both show at once. Label drift is a change in the true answers, which shows only once the truth is in."
+    nl: "Drift is een verandering in de loop van de tijd in de data die een model in productie tegenkomt, vergeleken met de data waarvan het model leerde. Data drift is een verandering in de inputs en prediction drift een verandering in de antwoorden: allebei meteen te zien. Label drift is een verandering in de echte antwoorden, en is pas te zien als bekend is wat er echt gebeurde."
+  - en: "In 2012, the weather and the model's answers look like those of 2011, while far more bikes are rented: the link between the inputs and the true answer changed, which is called concept drift. Checks on the inputs and on the answers cannot see it."
+    nl: "In 2012 lijken het weer en de antwoorden van het model op 2011, terwijl er veel meer fietsen verhuurd worden: het verband tussen de inputs en het echte antwoord veranderde, en dat heet concept drift. Checks op de inputs en op de antwoorden kunnen concept drift niet zien."
+  - en: "To compare two distributions, split the values of training into ten bins with the quantiles 0.1 to 0.9, and count the share of the values in each bin. The population stability index adds up, over the bins, the share now minus the share in training, times the log of the share now divided by the share in training: under 0.1 calm, above 0.25 serious drift."
+    nl: "Om twee verdelingen te vergelijken verdeel je de waarden van de training over tien bins met de kwantielen 0,1 tot en met 0,9, en tel je het aandeel van de waarden in elke bin. De population stability index neemt per bin het aandeel nu min het aandeel bij de training, keer de log van het aandeel nu gedeeld door het aandeel bij de training, en telt de delen op: onder 0,1 rustig, boven 0,25 serieuze drift."
+  - en: "Compare like with like: a month against the same month in training. Against a whole year, every summer month looks like drift, and a real drift in winter can hide."
+    nl: "Vergelijk gelijk met gelijk: een maand tegen dezelfde maand in de training. Tegen een heel jaar lijkt elke zomermaand op drift, en kan een echte drift in de winter uit beeld verdwijnen."
+can_now:
+  - en: "count the share of values that lands in each bin of training"
+    nl: "tellen welk aandeel van de waarden in elke bin van de training valt"
+    by: shares
+  - en: "compute the population stability index of two lists of shares"
+    nl: "de population stability index van twee lijsten met aandelen berekenen"
+    by: psi
+  - en: "say why a month should be compared with the same month in training"
+    nl: "zeggen waarom je een maand met dezelfde maand in de training vergelijkt"
+    by: season
+  - en: "tell data drift, prediction drift and label drift apart"
+    nl: "data drift, prediction drift en label drift onderscheiden"
+    by: kinds
+further_reading:
+  - en: "Chip Huyen, *Designing Machine Learning Systems* (O'Reilly, 2022): the chapter on data distribution shifts and monitoring, with the kinds of shift and how to detect them"
+    nl: "Chip Huyen, *Designing Machine Learning Systems* (O'Reilly, 2022): het hoofdstuk over verschuivingen in de verdeling van data en over monitoring, met de soorten verschuiving en hoe je een verschuiving opspoort"
+  - en: "Stephan Rabanser, Stephan Günnemann and Zachary Lipton, *Failing Loudly: An Empirical Study of Methods for Detecting Dataset Shift*, NeurIPS 2019: which tests catch a shift in the inputs, and with how many examples"
+    nl: "Stephan Rabanser, Stephan Günnemann en Zachary Lipton, *Failing Loudly: An Empirical Study of Methods for Detecting Dataset Shift*, NeurIPS 2019: welke tests een verschuiving in de inputs vangen, en met hoeveel voorbeelden"
+  - en: "João Gama, Indrė Žliobaitė, Albert Bifet, Mykola Pechenizkiy and Abdelhamid Bouchachia, *A Survey on Concept Drift Adaptation*, ACM Computing Surveys, 2014: the kinds of concept drift, sudden, gradual and recurring, and how models keep up with them"
+    nl: "João Gama, Indrė Žliobaitė, Albert Bifet, Mykola Pechenizkiy en Abdelhamid Bouchachia, *A Survey on Concept Drift Adaptation*, ACM Computing Surveys, 2014: de soorten concept drift, plotseling, geleidelijk en terugkerend, en hoe modellen ermee bijblijven"
