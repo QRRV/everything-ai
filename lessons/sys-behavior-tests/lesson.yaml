@@ -1,0 +1,40 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: sys-behavior-tests
+minutes: 40
+title:
+  en: "Does the model behave? Behavioral tests"
+  nl: "Doet het model wat het moet? Behavioral tests"
+goal:
+  en: "test what your packed demand model does, from the outside, with the three kinds of tests of CheckList: a minimum it must get right, an answer that must not change, and an answer that must move the right way; then read where the model fails."
+  nl: "testen wat je verpakte model van de vraag doet, van buitenaf, met de drie soorten tests van CheckList: een minimum dat goed moet, een antwoord dat niet mag veranderen, en een antwoord dat de goede kant op moet bewegen; en daarna lezen waar het model faalt."
+summary:
+  - en: "One score, such as a validation RMSE of 53.04 bikes per hour, says how far off a model is over many hours, not what it gets wrong. Behavioral tests check one ability at a time, from the outside, with cases you choose. They need no real answers, so they can also run on hours that never happened."
+    nl: "Eén score, zoals een validation RMSE van 53,04 fietsen per uur, zegt hoe ver een model over veel uren naast zit, niet wat het model fout doet. Behavioral tests controleren één vaardigheid tegelijk, van buitenaf, met gevallen die je zelf kiest. Zulke tests hebben geen echte antwoorden nodig, dus kunnen deze tests ook draaien op uren die nooit gebeurd zijn."
+  - en: "A minimum functionality test asks for simple cases any useful model must get right, such as few bikes at night. An invariance test changes something that must not matter, such as the row number, and asks for the same answer. A directional expectation test changes something that matters, such as rain, and asks the answer to move the known way."
+    nl: "Een minimum functionality test vraagt om eenvoudige gevallen die elk bruikbaar model goed moet doen, zoals weinig fietsen 's nachts. Een invariance test verandert iets wat niet mag uitmaken, zoals het rijnummer, en vraagt hetzelfde antwoord. Een directional expectation test verandert iets wat wel uitmaakt, zoals regen, en vraagt dat het antwoord de bekende kant op beweegt."
+  - en: "Change a copy of the table. A second name for the same table changes the original too, and a test that compares a table with itself passes for every model."
+    nl: "Verander een kopie van de tabel. Een tweede naam voor dezelfde tabel verandert het origineel ook, en een test die een tabel met zichzelf vergelijkt slaagt voor elk model."
+  - en: "Behavioral tests also catch bugs in the code around the model, such as the hour in UTC. A test that fails for many cases shows where the model itself is weak; count the failures per test, and write them down."
+    nl: "Behavioral tests vangen ook bugs in de code rond het model, zoals het uur in UTC. Een test die voor veel gevallen faalt laat zien waar het model zelf zwak is; tel per test hoeveel gevallen falen, en schrijf dat op."
+can_now:
+  - en: "write a minimum functionality test with a bound that every useful model meets and that fails when the code around the model has a bug"
+    nl: "een minimum functionality test schrijven met een grens waar elk bruikbaar model aan voldoet: een test die faalt als de code rond het model een bug heeft"
+    by: quiet-night
+  - en: "find why an invariance test passes for every version, and fix it with a copy of the table"
+    nl: "uitzoeken waarom een invariance test voor elke versie slaagt, en de test herstellen met een kopie van de tabel"
+    by: row-number
+  - en: "write a directional expectation test that compares what the model expects with rain and without"
+    nl: "een directional expectation test schrijven: een test die vergelijkt wat het model met en zonder regen verwacht"
+    by: rain
+  - en: "explain a failing invariance test from the way the model gets its inputs"
+    nl: "een falende invariance test verklaren uit de manier waarop het model de inputs krijgt"
+    by: weekend
+further_reading:
+  - en: "Marco Tulio Ribeiro, Tongshuang Wu, Carlos Guestrin and Sameer Singh (2020), *Beyond Accuracy: Behavioral Testing of NLP Models with CheckList*, ACL: the three kinds of tests, and how often models with a high accuracy fail them"
+    nl: "Marco Tulio Ribeiro, Tongshuang Wu, Carlos Guestrin en Sameer Singh (2020), *Beyond Accuracy: Behavioral Testing of NLP Models with CheckList*, ACL: de drie soorten tests, en hoe vaak modellen met een hoge accuracy toch zakken voor zulke tests"
+  - en: "Eric Breck, Shanqing Cai, Eric Nielsen, Michael Salib and D. Sculley (2017), *The ML Test Score: A Rubric for ML Production Readiness and Technical Debt Reduction*: its tests of the model, beside those of the data and the code"
+    nl: "Eric Breck, Shanqing Cai, Eric Nielsen, Michael Salib en D. Sculley (2017), *The ML Test Score: A Rubric for ML Production Readiness and Technical Debt Reduction*: de tests van het model, naast de tests van de data en de code"
+  - en: "The pytest documentation, *How to use fixtures*: how pytest gives a test the value of a fixture by the name of its argument"
+    nl: "De documentatie van pytest, *How to use fixtures*: hoe pytest een test de waarde van een fixture geeft via de naam van het argument"
