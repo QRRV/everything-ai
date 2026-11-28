@@ -1,0 +1,38 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: sys-deployment-patterns
+minutes: 35
+title:
+  en: "Batch, online, streaming or on the device"
+  nl: "Batch, online, streaming of op het apparaat"
+goal:
+  en: "name the four ways to put a model to use, count how many predictions of a batch anyone looks at and how old they are by then, count the events of a stream in a window of time, and choose a pattern by how soon an answer is needed."
+  nl: "de vier manieren noemen om een model in gebruik te nemen, tellen hoeveel voorspellingen van een batch iemand bekijkt en hoe oud de voorspellingen dan zijn, de gebeurtenissen van een stream in een tijdvenster tellen, en een patroon kiezen op basis van hoe snel een antwoord nodig is."
+summary:
+  - en: "Deployment is putting a model to use, where people or programs get its predictions. When the model makes a prediction decides much of the rest: what it costs, how fresh the answer is, and who waits for it."
+    nl: "Deployment is een model in gebruik nemen, waar mensen of programma's de voorspellingen krijgen. Wanneer het model een voorspelling maakt, bepaalt veel van de rest: wat het kost, hoe vers het antwoord is, en wie erop wacht."
+  - en: "Batch inference makes a prediction for everyone in advance, such as once a night, and stores it. It is cheap per prediction and nobody waits, but many predictions are never looked at, a prediction is hours old when it is seen, and whoever is new since the last run gets none."
+    nl: "Batch inference maakt vooraf een voorspelling voor iedereen, zoals één keer per nacht, en slaat de voorspellingen op. Per voorspelling is batch goedkoop en niemand wacht, maar veel voorspellingen worden nooit bekeken, een voorspelling is uren oud als iemand de voorspelling ziet, en wie nieuw is sinds de laatste run krijgt er geen."
+  - en: "Online inference makes a prediction the moment a request comes in, from the input of that moment, while someone waits: always fresh, even for a new user, but every answer must come quickly, at every hour of the day."
+    nl: "Online inference maakt een voorspelling op het moment dat er een verzoek binnenkomt, uit de invoer van dat moment, terwijl iemand wacht: altijd vers, ook voor een nieuwe gebruiker, maar elk antwoord moet snel komen, op elk uur van de dag."
+  - en: "Streaming inference makes a prediction after every event of a stream, such as every rental at a station, often from a count in a window of time, without anyone asking. On the device, the model runs on the user's own phone or laptop: it works without a network and the data stays with the user, but the model has to be small."
+    nl: "Streaming inference maakt een voorspelling na elke gebeurtenis van een stream, zoals elke verhuring bij een station, vaak uit een telling in een tijdvenster, zonder dat iemand iets vraagt. Op het apparaat draait het model op de eigen telefoon of laptop van de gebruiker: het werkt zonder netwerk en de data blijft bij de gebruiker, maar het model moet klein zijn."
+can_now:
+  - en: "count how many predictions of a batch nobody looks at, from who it was made for and who came"
+    nl: "tellen hoeveel voorspellingen van een batch niemand bekijkt, als je weet voor wie de batch gemaakt is en wie er kwam"
+    by: unused
+  - en: "count the events of a stream in a window of time that ends now"
+    nl: "de gebeurtenissen van een stream tellen in een tijdvenster dat nu eindigt"
+    by: recent
+  - en: "choose batch, online, streaming or on the device for a use of a model"
+    nl: "batch, online, streaming of op het apparaat kiezen voor een gebruik van een model"
+    by: patterns
+  - en: "say what running a batch more often costs, and what it does not solve"
+    nl: "zeggen wat het kost om een batch vaker te draaien, en wat dat niet oplost"
+    by: hourly
+further_reading:
+  - en: "Chip Huyen (2022), *Designing Machine Learning Systems*, O'Reilly, chapter 7, *Model Deployment and Prediction Service*: batch prediction and online prediction, streaming features, and machine learning on the device"
+    nl: "Chip Huyen (2022), *Designing Machine Learning Systems*, O'Reilly, hoofdstuk 7, *Model Deployment and Prediction Service*: batch prediction en online prediction, streaming features, en machine learning op het apparaat"
+  - en: "Jeremy Hermann and Mike Del Balso (2017), *Meet Michelangelo: Uber's Machine Learning Platform*, Uber's engineering blog: predictions in batches and online predictions in one platform"
+    nl: "Jeremy Hermann en Mike Del Balso (2017), *Meet Michelangelo: Uber's Machine Learning Platform*, de engineering-blog van Uber: voorspellingen in batches en online voorspellingen in één platform"
