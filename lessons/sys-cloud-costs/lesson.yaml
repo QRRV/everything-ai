@@ -1,0 +1,40 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: sys-cloud-costs
+minutes: 35
+title:
+  en: "What compute costs in the cloud"
+  nl: "Wat compute kost in de cloud"
+goal:
+  en: "tell on-demand, reserved and spot instances apart by price and by promise, work out how many hours a spot run pays for when stops throw away the work since the last checkpoint, find from how many requests a day serverless inference costs more than a fixed server, and choose how often to save a checkpoint."
+  nl: "on-demand, reserved en spot instances uit elkaar houden aan prijs en belofte, uitrekenen hoeveel uur een spot-run betaalt als onderbrekingen het werk sinds het laatste checkpoint weggooien, vinden vanaf hoeveel verzoeken per dag serverless inference meer kost dan een vaste server, en kiezen hoe vaak je een checkpoint opslaat."
+summary:
+  - en: "One GPU has more than one price. An on-demand instance is paid for each hour it runs, at the highest price. A reserved instance is paid for every hour of one or three years, used or not, at a lower price: with 40% off, it pays off from 60% of the hours. A spot instance runs on free capacity at a fraction of the price, and the cloud can take it back at any moment."
+    nl: "Eén GPU heeft meer dan één prijs. Een on-demand instance betaal je voor elk uur dat de instance draait, voor de hoogste prijs. Een reserved instance betaal je voor elk uur van een of drie jaar, gebruikt of niet, voor een lagere prijs: met 40% korting loont reserved vanaf 60% van de uren. Een spot instance draait op vrije capaciteit voor een fractie van de prijs, en de cloud kan de instance op elk moment terugnemen."
+  - en: "On spot, each stop throws away the work since the last checkpoint, with the state_dict of the model and of the optimizer and the epoch, saved to storage that stays. Saving often throws away less, but saving takes time too: the best interval lies in between, about every hour when a stop comes every 10 hours and saving takes 3 minutes."
+    nl: "Op spot gooit elke onderbreking het werk sinds het laatste checkpoint weg, met de state_dict van het model en van de optimizer en de epoch, opgeslagen in opslag die blijft. Vaak opslaan gooit minder weg, maar ook opslaan kost tijd: de beste afstand ligt daartussen, ongeveer elk uur als er elke 10 uur een onderbreking komt en opslaan 3 minuten duurt."
+  - en: "With serverless inference, the provider starts the model when requests arrive, and you pay per request or per second; without requests, nothing. A fixed server costs the same every hour. With few requests, serverless is cheaper, with many, a fixed server: the point lies where the requests of a day cost as much as 24 hours of the server."
+    nl: "Bij serverless inference start de aanbieder het model als er verzoeken binnenkomen, en betaal je per verzoek of per seconde; zonder verzoeken niets. Een vaste server kost elk uur hetzelfde. Bij weinig verzoeken is serverless goedkoper, bij veel een vaste server: het omslagpunt ligt waar de verzoeken van een dag even veel kosten als 24 uur van de server."
+  - en: "Discounts and warnings differ per provider and change: on 28 November 2026, AWS gave spot up to 90% off with a warning of two minutes, Google Cloud 60 to 91% off with 30 seconds, and AWS up to 72% off for three years reserved. A price always goes with its date."
+    nl: "Kortingen en waarschuwingen verschillen per aanbieder en veranderen: op 28 november 2026 gaf AWS spot tot 90% korting met een waarschuwing van twee minuten, Google Cloud 60 tot 91% met 30 seconden, en AWS tot 72% korting voor drie jaar reserved. Bij een prijs hoort altijd de datum."
+can_now:
+  - en: "work out how many hours a spot run pays for, given its stops and the hours between checkpoints"
+    nl: "uitrekenen hoeveel uur een spot-run betaalt, bij de onderbrekingen en de uren tussen checkpoints"
+    by: hours_paid
+  - en: "find from how many requests a day serverless costs more than a fixed server"
+    nl: "vinden vanaf hoeveel verzoeken per dag serverless meer kost dan een vaste server"
+    by: break_even
+  - en: "say for a job whether it fits on demand, reserved, spot or serverless"
+    nl: "bij een klus zeggen of on-demand, reserved, spot of serverless past"
+    by: fits
+  - en: "say what happens to a spot run whose checkpoints come more rarely than its stops"
+    nl: "zeggen wat er gebeurt met een spot-run waarvan de checkpoints zeldzamer zijn dan de onderbrekingen"
+    by: rhythm
+further_reading:
+  - en: "Amazon Web Services, *Best practices for Amazon EC2 Spot*, in the EC2 user guide: what spot is good for, the two-minute warning, and how to handle a stop"
+    nl: "Amazon Web Services, *Best practices for Amazon EC2 Spot*, in de handleiding van EC2: waar spot goed voor is, de waarschuwing van twee minuten, en hoe je een onderbreking opvangt"
+  - en: "Google Cloud, *Spot VMs*, in the Compute Engine documentation: the discount, the warning of 30 seconds, and what happens to the disk when a machine is taken back"
+    nl: "Google Cloud, *Spot VMs*, in de documentatie van Compute Engine: de korting, de waarschuwing van 30 seconden, en wat er met de schijf gebeurt als een machine wordt teruggenomen"
+  - en: "John W. Young (1974), *A first order approximation to the optimum checkpoint interval*, Communications of the ACM 17(9): a short paper on how often to save when a machine can stop"
+    nl: "John W. Young (1974), *A first order approximation to the optimum checkpoint interval*, Communications of the ACM 17(9): een kort paper over hoe vaak je opslaat als een machine kan stoppen"
