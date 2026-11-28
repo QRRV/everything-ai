@@ -1,0 +1,42 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: sys-ml-failures
+minutes: 35
+title:
+  en: "How ML systems fail"
+  nl: "Hoe ML-systemen falen"
+goal:
+  en: "tell a failure that a software monitor sees from a silent failure, in which a model keeps answering fast and wrong; check every request against the range that training saw; compute how far off a model was per day once the truth is in; and say which check sees which failure first."
+  nl: "een storing die een softwaremonitor ziet onderscheiden van een silent failure, waarbij een model snel en fout blijft antwoorden; elk verzoek controleren tegen het bereik dat de training zag; berekenen hoe ver een model per dag ernaast zat zodra bekend is wat er echt gebeurde; en zeggen welke check welke storing als eerste ziet."
+summary:
+  - en: "A software failure breaks the service or slows it down, and the numbers about the service show it. In a silent failure, the service keeps answering, fast and with status 200, while the answers get worse: only the model's own numbers show it."
+    nl: "Een softwarefout laat de service stukgaan of vertraagt de service, en de getallen over de service laten het zien. Bij een silent failure blijft de service antwoorden, snel en met status 200, terwijl de antwoorden slechter worden: alleen de eigen getallen van het model laten het zien."
+  - en: "Silent failures come from an input that breaks or changes upstream, such as a broken sensor or a unit that changed; from edge cases, inputs that are rare or missing in training, such as a heat wave or a holiday; from a world that moves away from the training data; and from a model that changes its own data."
+    nl: "Silent failures komen van een input die stroomopwaarts stukgaat of verandert, zoals een kapotte sensor of een eenheid die veranderde; van edge cases, inputs die zeldzaam zijn of ontbreken in de training, zoals een hittegolf of een feestdag; van een wereld die wegschuift van de training data; en van een model dat de eigen data verandert."
+  - en: "A check against training compares each input of a request with the lowest and the highest value that training saw. It works at once and catches a unit that changed, but it lets through a broken input inside the range, and an edge case such as a heat wave."
+    nl: "Een check tegen de training vergelijkt elke input van een verzoek met de laagste en de hoogste waarde die de training zag. De check werkt meteen en vangt een eenheid die veranderde, alleen laat de check een kapotte input binnen het bereik door, en een edge case zoals een hittegolf."
+  - en: "Once the truth is in, how far off the model was per day, compared with a usual day, shows whatever makes the answers worse. That number comes only afterwards, and for many models late or never."
+    nl: "Hoe ver het model per dag ernaast zat laat, vergeleken met een gewone dag, alles zien waardoor de antwoorden slechter worden. Dat getal komt pas achteraf, als bekend is wat er echt gebeurde, en bij veel modellen laat of nooit."
+can_now:
+  - en: "check whether each input of a request lies within the range that training saw"
+    nl: "controleren of elke input van een verzoek binnen het bereik ligt dat de training zag"
+    by: unseen
+  - en: "compute how far off a model was per hour on a day, too high or too low"
+    nl: "berekenen hoe ver een model op een dag per uur ernaast zat, te hoog of te laag"
+    by: "off"
+  - en: "say which check sees a unit that changed upstream first"
+    nl: "zeggen welke check een eenheid die stroomopwaarts veranderde als eerste ziet"
+    by: first
+  - en: "sort the failures of an ML service into failures that a software monitor sees and silent failures"
+    nl: "de storingen van een ML-service indelen in storingen die een softwaremonitor ziet en silent failures"
+    by: failures
+further_reading:
+  - en: "Chip Huyen, *Designing Machine Learning Systems* (O'Reilly, 2022): the chapter on data distribution shifts and monitoring, which starts with the causes of ML system failures"
+    nl: "Chip Huyen, *Designing Machine Learning Systems* (O'Reilly, 2022): het hoofdstuk over verschuivingen in de verdeling van data en over monitoring, dat begint met de oorzaken van storingen in ML-systemen"
+  - en: "Daniel Papasian and Todd Underwood, *How ML Breaks: A Decade of Outages for One Large ML Pipeline*, USENIX OpML 2020: most outages came from the machines and steps around the model"
+    nl: "Daniel Papasian en Todd Underwood, *How ML Breaks: A Decade of Outages for One Large ML Pipeline*, USENIX OpML 2020: de meeste storingen kwamen van de machines en stappen rond het model"
+  - en: "D. Sculley and others, *Hidden Technical Debt in Machine Learning Systems*, NeurIPS 2015: why the code around a model is most of an ML system, and how its inputs can change without a sound"
+    nl: "D. Sculley en anderen, *Hidden Technical Debt in Machine Learning Systems*, NeurIPS 2015: waarom de code rond een model het grootste deel van een ML-systeem is, en hoe de inputs ongemerkt kunnen veranderen"
+  - en: "Eric Breck, Neoklis Polyzotis, Sudip Roy, Steven Euijong Whang and Martin Zinkevich, *Data Validation for Machine Learning*, SysML 2019: a schema of what each feature may hold, checked on every new batch, as in TensorFlow Data Validation"
+    nl: "Eric Breck, Neoklis Polyzotis, Sudip Roy, Steven Euijong Whang en Martin Zinkevich, *Data Validation for Machine Learning*, SysML 2019: een schema van wat elke feature mag bevatten, gecontroleerd op elke nieuwe batch, zoals in TensorFlow Data Validation"

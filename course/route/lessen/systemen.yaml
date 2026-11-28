@@ -298,6 +298,7 @@ lessons:
   covers: [monitoring-drift-en-hertraining#1]
   requires: [sys-monitoring]
   introduces: [c:silent-failure, c:edge-case]
+  mentions: [c:data-validation]
   data: []
   ladder: [python]
   needs: any
