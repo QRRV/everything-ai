@@ -1,0 +1,40 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: sys-data-quality
+minutes: 30
+title:
+  en: "Is the data good? Four ways to look"
+  nl: "Is de data goed? Vier manieren om te kijken"
+goal:
+  en: "measure four dimensions of the quality of a table, completeness, correctness, consistency and timeliness, each as a share from 0 to 1, and find from the lowest score where the data breaks."
+  nl: "vier dimensies van de kwaliteit van een tabel meten, volledigheid, juistheid, consistentie en actualiteit, elk als aandeel van 0 tot 1, en aan de laagste score zien waar de data breekt."
+summary:
+  - en: "Data quality is how fit data is for its use, and it has dimensions you can measure. Completeness is the share of the cells that are filled; correctness, the share of the values that agree with a source you trust, within a tolerance; consistency, the share of the values written in the agreed way; timeliness, the share of the sources whose newest data is fresh enough."
+    nl: "Datakwaliteit is hoe geschikt data is voor het gebruik, en datakwaliteit heeft dimensies die je kunt meten. Volledigheid is het aandeel van de cellen dat gevuld is; juistheid het aandeel van de waarden dat klopt met een bron die je vertrouwt, binnen een tolerantie; consistentie het aandeel van de waarden dat op de afgesproken manier geschreven is; actualiteit het aandeel van de bronnen waarvan de nieuwste data vers genoeg is."
+  - en: "Each dimension counts over what it is about: consistency and correctness count only the filled values, since an empty cell counts for completeness. Measure completeness before anything fills the gaps, and repair data in a step of its own, not inside the check."
+    nl: "Elke dimensie telt wat bij de eigen vraag hoort: consistentie en juistheid tellen alleen de ingevulde waarden, want een lege cel telt bij de volledigheid. Meet de volledigheid voordat iets de gaten invult, en herstel data in een eigen stap, niet binnen de check."
+  - en: "A table gets a score on each dimension, and the lowest score shows where it breaks. Each problem moves its own score: a broken sensor moves completeness, a new spelling consistency, a warm thermometer correctness, and a stopped feed only timeliness, since old rows can be complete, true and consistent."
+    nl: "Een tabel krijgt een score op elke dimensie, en de laagste score laat zien waar de data breekt. Elk probleem beweegt een eigen score: een kapotte sensor de volledigheid, een nieuwe schrijfwijze de consistentie, een warme thermometer de juistheid, en een gestopte feed alleen de actualiteit, want oude rijen kunnen volledig, juist en consistent zijn."
+  - en: "Other lists have more dimensions: DAMA UK names six, adding uniqueness and validity, and ISO/IEC 25012 has 15 characteristics. One number for the whole table, such as the mean of the scores, can hide the one that broke."
+    nl: "Andere lijsten hebben meer dimensies: DAMA UK noemt er zes, met uniciteit en validiteit erbij, en ISO/IEC 25012 heeft 15 eigenschappen. Eén getal voor de hele tabel, zoals het gemiddelde van de scores, kan verbergen welke score brak."
+can_now:
+  - en: "count the share of the filled values in a column that are written in the agreed way"
+    nl: "het aandeel van de ingevulde waarden in een kolom tellen dat op de afgesproken manier geschreven is"
+    by: consistency
+  - en: "count with NumPy the share of the readings within a tolerance of a source you trust, below or above"
+    nl: "met NumPy het aandeel van de metingen tellen dat binnen een tolerantie van een vertrouwde bron ligt, eronder of erboven"
+    by: correctness
+  - en: "say which dimension of data quality measures a problem in a table"
+    nl: "zeggen welke dimensie van datakwaliteit een probleem in een tabel meet"
+    by: problems
+  - en: "read four scores and say where to look first"
+    nl: "vier scores lezen en zeggen waar je eerst kijkt"
+    by: first
+further_reading:
+  - en: "Government Data Quality Hub (2021), *Meet the data quality dimensions*, GOV.UK: the six dimensions of DAMA UK, each with what it measures"
+    nl: "Government Data Quality Hub (2021), *Meet the data quality dimensions*, GOV.UK: de zes dimensies van DAMA UK, elk met wat de dimensie meet"
+  - en: "ISO/IEC 25012:2008, *Data quality model*: 15 characteristics of data quality, inherent and system dependent; the standard itself is not free, and the ISO page gives its summary"
+    nl: "ISO/IEC 25012:2008, *Data quality model*: 15 eigenschappen van datakwaliteit, inherent en afhankelijk van het systeem; de norm zelf is niet gratis, en de pagina van ISO geeft een samenvatting"
+  - en: "Richard Y. Wang and Diane M. Strong (1996), *Beyond Accuracy: What Data Quality Means to Data Consumers*, Journal of Management Information Systems 12(4): the dimensions that the users of data name, from a survey"
+    nl: "Richard Y. Wang en Diane M. Strong (1996), *Beyond Accuracy: What Data Quality Means to Data Consumers*, Journal of Management Information Systems 12(4): de dimensies die gebruikers van data noemen, uit een enquête"

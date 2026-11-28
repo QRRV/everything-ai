@@ -409,7 +409,7 @@ lessons:
   idea: "Data quality has dimensions you can measure: how much is missing (completeness), how much is right (accuracy), whether the same thing is written the same way everywhere (consistency) and how old it is (timeliness); you give a table a score on each and find where it breaks."
   covers: [datakwaliteit-versiebeheer-en-feature-stores#0]
   requires: [sys-what-is-an-ml-system, data-missing-values]
-  introduces: [c:data-quality, c:completeness, c:data-consistency, c:timeliness]
+  introduces: [c:data-quality, c:data-completeness, c:data-correctness, c:data-consistency, c:timeliness]
   data: []
   ladder: [python, numpy]
   needs: any
