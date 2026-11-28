@@ -355,6 +355,7 @@ lessons:
   covers: [cloud-en-platforms#0, cloud-en-platforms#1, cloud-en-platforms#3, cloud-en-platforms#6]
   requires: [sys-what-is-an-ml-system, torch-gpu]
   introduces: [c:cloud-computing, c:colab, c:gpu-cloud, c:sovereign-compute]
+  mentions: [c:data-center, c:gpu-hour]
   data: []
   ladder: [python]
   needs: any

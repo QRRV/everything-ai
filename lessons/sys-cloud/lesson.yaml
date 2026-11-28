@@ -1,0 +1,40 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: sys-cloud
+minutes: 35
+title:
+  en: "Someone else's computer: the cloud"
+  nl: "De computer van een ander: de cloud"
+goal:
+  en: "tell IaaS, PaaS and SaaS apart by who looks after what, say what the free GPUs of Colab and Kaggle are good for, keep only the offers whose data center and company fit a rule about data, and pick the offer on which a whole job costs least."
+  nl: "IaaS, PaaS en SaaS uit elkaar houden aan wie voor wat zorgt, zeggen waar de gratis GPU's van Colab en Kaggle goed voor zijn, alleen de aanbiedingen houden waarvan het datacenter en het bedrijf bij een regel over data passen, en de aanbieding kiezen waarop een hele job het minst kost."
+summary:
+  - en: "The cloud is renting computers, storage and software over the internet from a provider, paying for what you use. NIST names three layers: IaaS rents bare computers, on which you install everything; PaaS runs your code or model on the provider's software; SaaS is finished software that you use."
+    nl: "De cloud is computers, opslag en software via internet huren bij een aanbieder, betaald naar wat je gebruikt. NIST noemt drie lagen: IaaS verhuurt kale computers, waarop je alles zelf installeert; PaaS draait je code of model op de software van de aanbieder; SaaS is kant-en-klare software die je gebruikt."
+  - en: "Colab and Kaggle lend a GPU for free in small amounts, with limits that change: a Colab session runs for at most 12 hours, and its files go with it. Good for learning and trying things; for a run that must finish, you rent a GPU, at a large cloud or at a GPU cloud that rents mostly GPUs."
+    nl: "Colab en Kaggle lenen gratis een GPU uit in kleine hoeveelheden, met grenzen die veranderen: een Colab-sessie draait hoogstens 12 uur, en daarna zijn de bestanden weg. Goed om te leren en dingen uit te proberen; voor een run die af moet huur je een GPU, bij een grote cloud of bij een GPU-cloud die vooral GPU's verhuurt."
+  - en: "What counts is the cost of the whole job, not of an hour: the hours on a GPU you know, divided by how many times as fast the rented GPU is, times its price per hour, on a GPU with enough memory. A dearer hour on a faster GPU can make a cheaper job. Prices change quickly, so a price always goes with its date."
+    nl: "Het gaat om de kosten van de hele job, niet van een uur: de uren op een GPU die je kent, gedeeld door hoeveel keer zo snel de gehuurde GPU is, keer de prijs per uur, op een GPU met genoeg geheugen. Een duurder uur op een snellere GPU kan een goedkopere job opleveren. Prijzen veranderen snel, dus hoort bij een prijs altijd de datum."
+  - en: "Where the data are and whose law applies are two questions: the country of the data center, and the country of the company, since the US CLOUD Act lets a US court order a US company to hand over data held abroad. Sovereign compute is compute that a country or region controls itself, on its own ground and under its own laws."
+    nl: "De plek van de data en de wet die geldt zijn twee vragen: het land van het datacenter, en het land van het bedrijf, want met de Amerikaanse CLOUD Act kan een Amerikaanse rechter een Amerikaans bedrijf bevelen om data in het buitenland af te geven. Soevereine compute is compute waarover een land of regio zelf de zeggenschap heeft, op eigen grondgebied en onder eigen wetten."
+can_now:
+  - en: "keep only the offers whose data center and company are both in the EU"
+    nl: "alleen de aanbiedingen houden waarvan het datacenter en het bedrijf allebei in de EU zitten"
+    by: allowed
+  - en: "work out what a whole job costs on each GPU, and pick the cheapest"
+    nl: "uitrekenen wat een hele job op elke GPU kost, en de goedkoopste kiezen"
+    by: cheapest
+  - en: "say for a way to run software whether it is your own, IaaS, PaaS or SaaS"
+    nl: "bij een manier om software te draaien zeggen of het eigen, IaaS, PaaS of SaaS is"
+    by: kinds
+  - en: "say what can happen to a long run in free Colab, and what to do about it"
+    nl: "zeggen wat er met een lange run in de gratis versie van Colab kan gebeuren, en wat je eraan doet"
+    by: colab
+further_reading:
+  - en: "Peter Mell and Timothy Grance (2011), *The NIST Definition of Cloud Computing*, NIST Special Publication 800-145: the five properties of the cloud, and IaaS, PaaS and SaaS, in a few pages"
+    nl: "Peter Mell en Timothy Grance (2011), *The NIST Definition of Cloud Computing*, NIST Special Publication 800-145: de vijf eigenschappen van de cloud, en IaaS, PaaS en SaaS, in een paar bladzijden"
+  - en: "Google, *Colab FAQ*, on research.google.com: what is free, what is not guaranteed, and how long a notebook can run; read it again when you need it, since the limits change"
+    nl: "Google, *Colab FAQ*, op research.google.com: wat gratis is, wat niet gegarandeerd is, en hoe lang een notebook kan draaien; lees de FAQ opnieuw als je de FAQ nodig hebt, want de grenzen veranderen"
+  - en: "The CLOUD Act, division V of the US Consolidated Appropriations Act, 2018 (H.R. 1625): the law under which a US court can ask a US company for data stored abroad"
+    nl: "De CLOUD Act, divisie V van de Amerikaanse Consolidated Appropriations Act, 2018 (H.R. 1625): de wet waaronder een Amerikaanse rechter een Amerikaans bedrijf om data in het buitenland kan vragen"
