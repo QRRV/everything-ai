@@ -1,0 +1,42 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: sys-code-tests
+minutes: 40
+title:
+  en: "Tests for ML code"
+  nl: "Tests voor ML-code"
+goal:
+  en: "write tests for the code of your project ops that fail when the code has a bug: a unit test of one row, a test that a fresh network learns 16 hours by heart, a model assertion on every prediction, and a regression test for the score."
+  nl: "tests schrijven die falen als de code van je project ops een bug heeft: een unit test van één rij, een test dat een nieuw netwerk 16 uren uit het hoofd leert, een model assertion op elke voorspelling, en een regression test voor de score."
+summary:
+  - en: "Most bugs in training code give no error: the code runs, the loss falls a little, and the model comes out worse than it could be. Tests find them in seconds, before a long run."
+    nl: "De meeste bugs in trainingscode geven geen foutmelding: de code draait, de loss daalt een beetje, en het model komt slechter uit dan mogelijk is. Tests vinden zulke bugs in seconden, nog voordat een lange run begint."
+  - en: "A unit test calls one function on an example whose answer you can work out by hand, such as one row, and asserts what must come out. A good test passes for the right code and fails for code with a bug, so try it on a bug you know."
+    nl: "Een unit test roept één functie aan op een voorbeeld waarvan je het antwoord met de hand kunt uitrekenen, zoals één rij, en legt met `assert` vast wat eruit moet komen. Een goede test slaagt voor de goede code en faalt voor code met een bug, dus probeer de test op een bug die je kent."
+  - en: "Overfit one batch: a fresh network trained on a few examples only must get its loss close to 0. If it does not, the code has a bug, such as targets of the wrong shape or gradients that are never set back to 0."
+    nl: "Overfit one batch: train een nieuw netwerk op alleen een paar voorbeelden, en de loss moet dicht bij 0 komen. Lukt dat niet, dan zit er een bug in de code, zoals targets met de verkeerde shape of gradients die nooit terug naar 0 gaan."
+  - en: "A regression test keeps a score below a fixed bound a little above the score you have, so that harmless changes pass and a worse model fails. A model assertion flags every prediction that cannot be right, such as fewer than 0 bikes or NaN, once the model is in use."
+    nl: "Een regression test houdt een score onder een vaste grens iets boven de score die je hebt, zodat onschuldige wijzigingen slagen en een slechter model faalt. Een model assertion markeert elke voorspelling die niet kan kloppen, zoals minder dan 0 fietsen of NaN, zodra het model in gebruik is."
+can_now:
+  - en: "write a unit test of one function on one row whose numbers you know, that fails for versions with a bug"
+    nl: "een unit test op één rij met bekende getallen schrijven, en de test laten falen voor versies met een bug"
+    by: one-row
+  - en: "flag predictions that cannot be right with a mask, combining comparisons with |"
+    nl: "voorspellingen die niet kunnen kloppen markeren met een mask, met vergelijkingen gecombineerd door |"
+    by: impossible
+  - en: "test training code by overfitting one small batch, with a bound on the loss that the right code passes and bugs fail"
+    nl: "trainingscode testen door één kleine batch te overfitten, met een grens op de loss waar de goede code onder komt en bugs niet"
+    by: overfit
+  - en: "choose the bound of a regression test for a score that moves a little from run to run"
+    nl: "de grens kiezen van een regression test voor een score die per run een beetje schuift"
+    by: regression
+further_reading:
+  - en: "Eric Breck, Shanqing Cai, Eric Nielsen, Michael Salib and D. Sculley (2017), *The ML Test Score: A Rubric for ML Production Readiness and Technical Debt Reduction*: 28 tests and checks for the data, the model, the code and the running system"
+    nl: "Eric Breck, Shanqing Cai, Eric Nielsen, Michael Salib en D. Sculley (2017), *The ML Test Score: A Rubric for ML Production Readiness and Technical Debt Reduction*: 28 tests en controles voor de data, het model, de code en het draaiende systeem"
+  - en: "Andrej Karpathy (2019), *A Recipe for Training Neural Networks*: overfit one batch, and more checks to run before a long training run"
+    nl: "Andrej Karpathy (2019), *A Recipe for Training Neural Networks*: overfit one batch, en meer controles voordat een lange training begint"
+  - en: "Daniel Kang, Deepti Raghavan, Peter Bailis and Matei Zaharia (2020), *Model Assertions for Monitoring and Improving ML Models*, MLSys: where the name model assertion comes from"
+    nl: "Daniel Kang, Deepti Raghavan, Peter Bailis en Matei Zaharia (2020), *Model Assertions for Monitoring and Improving ML Models*, MLSys: waar de naam model assertion vandaan komt"
+  - en: "The pytest documentation, *Get Started*: how pytest finds and runs the test functions of a project"
+    nl: "De documentatie van pytest, *Get Started*: hoe pytest de testfuncties van een project vindt en draait"

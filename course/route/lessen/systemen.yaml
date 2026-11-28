@@ -188,7 +188,7 @@ lessons:
   requires: [sys-project-tracked-model, py-errors]
   introduces: [c:model-assertion, c:overfit-one-batch]
   mentions: [c:unit-test, c:regression-test, py:assert]
-  data: []
+  data: [bike-sharing]
   ladder: [python, torch]
   needs: any
 
