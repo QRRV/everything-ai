@@ -1,0 +1,38 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: sys-gpu-generations
+minutes: 30
+title:
+  en: "GPU generations: from Volta to Blackwell"
+  nl: "GPU-generaties: van Volta tot Blackwell"
+goal:
+  en: "read the published numbers of five server GPUs from 2017 to 2024, compute what each new generation gained, see which number lags behind, and work out how many GPUs a model needs."
+  nl: "de gepubliceerde getallen van vijf server-GPU's van 2017 tot 2024 lezen, uitrekenen wat elke nieuwe generatie won, zien welk getal achterblijft, en uitrekenen hoeveel GPU's een model nodig heeft."
+summary:
+  - en: "A GPU generation is the GPUs of one design from one maker: NVIDIA's Volta (V100, 2017), Ampere (A100, 2020), Hopper (H100, 2022) and Blackwell (B200, 2024), and AMD's CDNA 3 (MI300X, 2023). Each brought more FLOP/s, more and faster memory, and faster links between GPUs."
+    nl: "Een GPU-generatie is de GPU's van één ontwerp van één maker: Volta (V100, 2017), Ampere (A100, 2020), Hopper (H100, 2022) en Blackwell (B200, 2024) van NVIDIA, en CDNA 3 (MI300X, 2023) van AMD. Elke generatie bracht meer FLOP/s, meer en sneller geheugen, en snellere verbindingen tussen GPU's."
+  - en: "VRAM is the memory of a GPU itself, on a server GPU the HBM next to the chip. A model with 70 billion parameters of 16 bits takes 140 GB: two H100s of 80 GB, or one MI300X or B200."
+    nl: "VRAM is het geheugen van een GPU zelf, op een server-GPU het HBM naast de chip. Een model met 70 miljard parameters van 16 bits neemt 140 GB in: twee H100's van 80 GB, of één MI300X of B200."
+  - en: "From the V100 to the B200, the FLOP/s at 16 bits grew 18 times, faster than the bandwidth of the memory: in the time it reads one byte, a V100 can do 139 FLOPs and a B200 281. A job that uses every byte it reads only once gains less than the FLOP/s promise."
+    nl: "Van de V100 naar de B200 groeiden de FLOP/s bij 16 bits 18 keer, sneller dan de bandbreedte van het geheugen: in de tijd van het lezen van één byte doet een V100 139 FLOPs en een B200 281. Een taak met slechts één gebruik per gelezen byte wint minder dan de FLOP/s beloven."
+  - en: "Datasheets like to print the FLOP/s for the fewest bits, often with sparsity, which doubles the number. Compare like with like: the same bits, and both with or both without sparsity."
+    nl: "Datasheets drukken graag de FLOP/s voor de minste bits af, vaak met sparsity, wat het getal verdubbelt. Vergelijk gelijk met gelijk: dezelfde bits, en allebei met of allebei zonder sparsity."
+can_now:
+  - en: "compute how many times each number of a GPU grew from one generation to the next"
+    nl: "uitrekenen hoeveel keer elk getal van een GPU groeide van de ene generatie naar de volgende"
+    by: gain
+  - en: "work out how many GPUs it takes to hold the parameters of a model"
+    nl: "uitrekenen hoeveel GPU's er nodig zijn om de parameters van een model te bevatten"
+    by: fit
+  - en: "say which jobs gain from more FLOP/s, more bandwidth, more VRAM or faster links"
+    nl: "zeggen welke taken winnen bij meer FLOP/s, meer bandbreedte, meer VRAM of snellere verbindingen"
+    by: helps
+  - en: "explain why writing tokens one at a time follows the bandwidth, not the FLOP/s"
+    nl: "uitleggen waarom tokens één voor één schrijven de bandbreedte volgt, niet de FLOP/s"
+    by: token
+further_reading:
+  - en: "Michael Andersch and others (2022), *NVIDIA Hopper Architecture In-Depth*, NVIDIA Technical Blog: the H100 next to the A100, number by number"
+    nl: "Michael Andersch en anderen (2022), *NVIDIA Hopper Architecture In-Depth*, NVIDIA Technical Blog: de H100 naast de A100, getal voor getal"
+  - en: "Amir Gholami and others (2024), *AI and Memory Wall*, IEEE Micro: why the FLOP/s of chips grew faster than the bandwidth of their memory"
+    nl: "Amir Gholami en anderen (2024), *AI and Memory Wall*, IEEE Micro: waarom de FLOP/s van chips sneller groeiden dan de bandbreedte van het geheugen"
