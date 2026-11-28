@@ -171,9 +171,9 @@ lessons:
   project: ops
   idea: "Your project starts with a model of how many bikes are rented per hour, trained on 2011: you train a few versions with your tracker, choose the best on the validation set, and pack it in safetensors with its settings and its version."
   covers: []
-  requires: [sys-model-package, ml-validation-set, data-pandas]
+  requires: [sys-model-package, ml-validation-set, ml-regression-metrics, data-pandas]
   introduces: []
-  mentions: [c:safetensors]
+  mentions: [c:safetensors, c:adam]
   data: [bike-sharing]
   ladder: [python, torch]
   needs: any

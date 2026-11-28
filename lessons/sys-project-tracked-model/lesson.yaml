@@ -1,0 +1,40 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: sys-project-tracked-model
+minutes: 45
+title:
+  en: "Project: a demand model, tracked and packed"
+  nl: "Project: een model van de vraag, bijgehouden en ingepakt"
+goal:
+  en: "start your project ops: split the hours of 2011 with whole days for validation, train versions of a model of bike demand as tracked runs, and pack the best one with the hash of its weights and its settings."
+  nl: "je project ops beginnen: de uren van 2011 splitsen met hele dagen voor validatie, versies van een model van de vraag naar fietsen trainen als bijgehouden runs, en de beste inpakken met de hash van de weights en de instellingen."
+summary:
+  - en: "A validation set should be like new data. The hours of one day share their weather and their busy moments, so the split goes by whole days: every fifth day, 73 days spread over the year, each with all its hours."
+    nl: "Een validation set hoort op nieuwe data te lijken. De uren van één dag delen het weer en de drukke momenten, dus gaat de splitsing per hele dag: elke vijfde dag, 73 dagen verspreid over het jaar, elk met alle uren."
+  - en: "A version is one set of hyperparameters. Each version is trained as a run with its name, its hyperparameters and its validation RMSE after every epoch, and kept as one line of JSON in runs.jsonl."
+    nl: "Een versie is één set hyperparameters. Elke versie wordt getraind als run met de naam, de hyperparameters en de validation RMSE na elke epoch, en bewaard als één regel JSON in runs.jsonl."
+  - en: "When you keep only the network after the last epoch, you choose by the last epoch: a lower value at an earlier epoch belongs to a network that is gone."
+    nl: "Bewaar je alleen het netwerk na de laatste epoch, dan kies je op de laatste epoch: een lagere waarde bij een eerdere epoch hoort bij een netwerk dat weg is."
+  - en: "A package holds the weights as safetensors and a config.json with the class and its settings, how the inputs are made with the means and standard deviations of the training hours, the run and its RMSE, and `version`: the first 12 characters of the sha256 of the weights file."
+    nl: "Een pakket bevat de weights als safetensors en een config.json met de class en de instellingen, hoe de inputs gemaakt worden met de gemiddelden en standaardafwijkingen van de trainingsuren, de run en de RMSE, en `version`: de eerste 12 tekens van de sha256 van het bestand met weights."
+can_now:
+  - en: "split hours into a training set and a validation set of whole days, with a mask on the day"
+    nl: "uren splitsen in een training set en een validation set van hele dagen, met een mask op de dag"
+    by: split
+  - en: "train a version as a tracked run, with its validation RMSE after every epoch, added to a file as one line of JSON"
+    nl: "een versie trainen als bijgehouden run, met de validation RMSE na elke epoch, als één regel JSON aan een bestand toegevoegd"
+    by: train
+  - en: "pack a model with the hash of its weights and the settings someone needs to use it"
+    nl: "een model inpakken met de hash van de weights en de instellingen die iemand nodig heeft om het model te gebruiken"
+    by: pack
+  - en: "explain why a service must make its inputs with the means and standard deviations of the training data"
+    nl: "uitleggen waarom een service de inputs moet maken met de gemiddelden en standaardafwijkingen van de trainingsdata"
+    by: scale
+further_reading:
+  - en: "Hadi Fanaee-T and João Gama (2013), *Event labeling combining ensemble detectors and background knowledge*, Progress in Artificial Intelligence: the paper behind the bike data"
+    nl: "Hadi Fanaee-T en João Gama (2013), *Event labeling combining ensemble detectors and background knowledge*, Progress in Artificial Intelligence: de paper achter de fietsdata"
+  - en: "UCI Machine Learning Repository, *Bike Sharing*: the table, and what each column means"
+    nl: "UCI Machine Learning Repository, *Bike Sharing*: de tabel, en wat elke kolom betekent"
+  - en: "D. Sculley and others (2015), *Hidden Technical Debt in Machine Learning Systems*: why the model is a small part of a system that runs it"
+    nl: "D. Sculley en anderen (2015), *Hidden Technical Debt in Machine Learning Systems*: waarom het model een klein deel is van een systeem dat het model draait"
