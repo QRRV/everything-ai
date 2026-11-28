@@ -1,0 +1,42 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: sys-serving-api
+minutes: 35
+title:
+  en: "Your model behind an API"
+  nl: "Je model achter een API"
+goal:
+  en: "put a model behind an API on your own computer: turn its output into JSON, answer a bad request before the model sees it, give every answer the right status code, and say who can reach a server on 127.0.0.1."
+  nl: "een model achter een API zetten op je eigen computer: de output omzetten naar JSON, een fout verzoek beantwoorden voordat het model het verzoek ziet, elk antwoord de juiste statuscode geven, en zeggen wie een server op 127.0.0.1 kan bereiken."
+summary:
+  - en: "Model serving is running a model as a service: a web server keeps the model loaded, waits on a port for requests over HTTP, and answers each one. Other programs only need to know what to send and what comes back: the API, and not the model."
+    nl: "Model serving is een model als dienst draaien: een webserver houdt het model geladen, wacht op een poort op verzoeken via HTTP, en beantwoordt elk verzoek. Andere programma's hoeven alleen te weten wat er heen moet en wat er terugkomt: de API, en niet het model."
+  - en: "An HTTP request has a method, a path, headers and a body, here the input as JSON; a path a server answers, with its method, is an endpoint, such as POST /predict. Every answer starts with a status code: 200 when it went well, 400 for a request the client must change, 404 for a path the server does not have, 500 when the server broke."
+    nl: "Een HTTP-request heeft een methode, een pad, headers en een body, hier de input als JSON; een pad dat een server beantwoordt, met de methode erbij, is een endpoint, zoals POST /predict. Elk antwoord begint met een statuscode: 200 als het goed ging, 400 voor een verzoek dat de client moet aanpassen, 404 voor een pad dat de server niet heeft, 500 als de server stukging."
+  - en: "The handler checks every request before the model sees it, and answers a missing field or an hour the model does not know with 400 and what is wrong; then it runs the model and turns its output into values JSON can hold, such as a whole number from a tensor with item()."
+    nl: "De handler controleert elk verzoek voordat het model het verzoek ziet, en beantwoordt een ontbrekend veld of een uur dat het model niet kent met 400 en wat er mis is; daarna voert de handler het model uit en maakt van de output waarden die JSON kan bevatten, zoals een heel getal uit een tensor met item()."
+  - en: "A server on 127.0.0.1 only takes requests from the same computer: right while you build. FastAPI does the work around the handler with a decorator per endpoint and checks the fields itself; gRPC and Triton Inference Server serve models at a larger scale, with the same idea."
+    nl: "Een server op 127.0.0.1 neemt alleen verzoeken aan van dezelfde computer: goed zolang je bouwt. FastAPI doet het werk rond de handler met een decorator per endpoint en controleert de velden zelf; gRPC en Triton Inference Server zijn er voor modellen op grotere schaal, met hetzelfde idee."
+can_now:
+  - en: "turn the output of a model into an answer JSON can hold"
+    nl: "de output van een model omzetten naar een antwoord dat JSON kan bevatten"
+    by: answer
+  - en: "answer a bad request with the right status code and what is wrong, before the model sees it"
+    nl: "een fout verzoek beantwoorden met de juiste statuscode en wat er mis is, voordat het model het verzoek ziet"
+    by: handle
+  - en: "choose the status code for a request that went well, a bad request, a path that does not exist and a server that broke"
+    nl: "de statuscode kiezen voor een verzoek dat goed ging, een fout verzoek, een pad dat niet bestaat en een server die stukging"
+    by: codes
+  - en: "say who can reach a server that listens on 127.0.0.1"
+    nl: "zeggen wie een server op 127.0.0.1 kan bereiken"
+    by: reach
+further_reading:
+  - en: "FastAPI documentation, *First Steps* and *Request Body*: an endpoint as a decorated function, and fields that FastAPI checks itself"
+    nl: "Documentatie van FastAPI, *First Steps* en *Request Body*: een endpoint als functie met een decorator, en velden die FastAPI zelf controleert"
+  - en: "MDN Web Docs, *HTTP response status codes*: what every status code means, by its first digit"
+    nl: "MDN Web Docs, *HTTP response status codes*: wat elke statuscode betekent, naar het eerste cijfer"
+  - en: "Python documentation, *http.server*: the server of this lesson, with the warning at the top that it is not meant for production"
+    nl: "Python-documentatie, *http.server*: de server van deze les, met bovenaan de waarschuwing dat de module niet bedoeld is voor productie"
+  - en: "NVIDIA, *Triton Inference Server* documentation: many models behind one server, over HTTP and gRPC, with requests put together in batches"
+    nl: "NVIDIA, documentatie van *Triton Inference Server*: veel modellen achter één server, via HTTP en gRPC, met verzoeken die in batches samenkomen"

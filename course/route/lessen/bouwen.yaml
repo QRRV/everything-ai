@@ -191,7 +191,7 @@ lessons:
   requires: [build-coding-workflow, py-errors]
   introduces: [c:unit-test, py:assert, c:code-review, c:static-analysis, c:randomized-controlled-trial]
   uses: [c:coding-agent, c:spec-driven-development, c:ai-assistant, c:bug, c:traceback, p:verify-ai-output, py:def, py:return, py:str, py:string-literal, py:int, py:bool, py:comparison, py:for, py:if, py:list, q:predict, q:choice, q:exercise-with-check, q:run-cell, q:find-the-bug]
-  mentions: [py:set, py:generator-expression]
+  mentions: [c:web-server, py:set, py:generator-expression]
   data: [course-work-qwen]
   ladder: [python]
   needs: any
