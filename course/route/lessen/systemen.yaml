@@ -270,6 +270,7 @@ lessons:
   covers: [deployment-serving-en-release#2]
   requires: [sys-serving-api, ml-feature-scaling, ml-confusion-matrix]
   introduces: [c:training-serving-skew, c:business-rule]
+  mentions: [c:data-validation, c:time-zone]
   data: []
   ladder: [python]
   needs: any

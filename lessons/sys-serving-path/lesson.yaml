@@ -1,0 +1,42 @@
+# SPDX-FileCopyrightText: 2026 Everything AI contributors
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# What this lesson says about itself, in both languages. Level, place and prerequisites come from the route data.
+id: sys-serving-path
+minutes: 35
+title:
+  en: "Before and after the model: the serving path"
+  nl: "Voor en na het model: het serving-pad"
+goal:
+  en: "prepare the input of a served model exactly as in training, turn its number into an answer with a business rule, choose a decision threshold from what each mistake costs, and say why a model that did well in validation can give wrong numbers without a single error."
+  nl: "de input van een model in productie precies zo voorbereiden als bij de training, het getal van het model omzetten in een antwoord met een bedrijfsregel, een decision threshold kiezen uit wat elke vergissing kost, en zeggen waarom een model dat goed was in de validatie foute getallen kan geven zonder één foutmelding."
+summary:
+  - en: "Between a request and an answer, a model is one step of a serving path: a check of the request, the preparation of the input, the model, and the steps that turn its number into an answer."
+    nl: "Tussen een verzoek en een antwoord is een model één stap van een serving-pad: een controle van het verzoek, de voorbereiding van de input, het model, en de stappen waarmee het getal een antwoord wordt."
+  - en: "Before the model, every input must be prepared exactly as in training: the same columns in the same order, the same units and time zone, and the mean and standard deviation saved from the training data, never computed again on the data of serving. A difference is training-serving skew: the model gives wrong numbers without a single error."
+    nl: "Naar het model toe moet elke input precies zo voorbereid worden als bij de training: dezelfde kolommen in dezelfde volgorde, dezelfde eenheden en tijdzone, en het gemiddelde en de standaardafwijking uit de trainingsdata, nooit opnieuw berekend op de data in productie. Een verschil is training-serving skew: het model geeft foute getallen zonder één foutmelding."
+  - en: "One function for the preparation, called by training and by serving, with the statistics saved next to the weights, prevents most skew; a test that compares both paths and a log of the inputs catch the rest. At scale, TensorFlow Transform and feature stores do the same."
+    nl: "Eén functie voor de voorbereiding, aangeroepen door de training en door de service, met de statistieken opgeslagen naast de weights, voorkomt de meeste skew; een test die beide paden vergelijkt en een log van de inputs vangen de rest. Op grote schaal doen TensorFlow Transform en feature stores hetzelfde."
+  - en: "After the model, business rules turn the number into an answer, such as whole bikes and never below 0. A decision threshold turns it into yes or no; it is chosen on the validation set from what each mistake costs, and need not lie where the business draws its own line."
+    nl: "Na het model maken bedrijfsregels van het getal een antwoord, zoals hele fietsen en nooit onder 0. Een decision threshold maakt er ja of nee van; de threshold wordt gekozen op de validation set uit wat elke vergissing kost, en hoeft niet te liggen waar het bedrijf de eigen grens trekt."
+can_now:
+  - en: "prepare a request for a model with the mean and standard deviation saved from training"
+    nl: "een verzoek voor een model voorbereiden met het gemiddelde en de standaardafwijking uit de training"
+    by: prepare
+  - en: "turn the number of a model into an answer with a business rule"
+    nl: "het getal van een model omzetten in een antwoord met een bedrijfsregel"
+    by: decide
+  - en: "choose a decision threshold from what each mistake costs"
+    nl: "een decision threshold kiezen uit wat elke vergissing kost"
+    by: threshold
+  - en: "say which steps of a serving path come before the model and which come after it"
+    nl: "zeggen welke stappen van een serving-pad naar het model toe gaan en welke na het model komen"
+    by: sides
+further_reading:
+  - en: "Martin Zinkevich, *Rules of Machine Learning: Best Practices for ML Engineering* (Google): rule 32, re-use code between training and serving, and rule 37, measure training-serving skew"
+    nl: "Martin Zinkevich, *Rules of Machine Learning: Best Practices for ML Engineering* (Google): regel 32, gebruik dezelfde code bij training en serving, en regel 37, meet training-serving skew"
+  - en: "TensorFlow documentation, *TensorFlow Transform* and *TensorFlow Data Validation*: statistics computed once over the training data, and a check for skew between training and serving"
+    nl: "Documentatie van TensorFlow, *TensorFlow Transform* en *TensorFlow Data Validation*: statistieken één keer berekend over de trainingsdata, en een controle op skew tussen training en serving"
+  - en: "scikit-learn documentation, *StandardScaler*: a scaler that learns the mean and standard deviation with `fit`, to be saved and used again on new data"
+    nl: "Documentatie van scikit-learn, *StandardScaler*: een scaler die het gemiddelde en de standaardafwijking leert met `fit`, om te bewaren en opnieuw te gebruiken op nieuwe data"
+  - en: "Chip Huyen, *Designing Machine Learning Systems* (O'Reilly, 2022): the chapters on deployment and on data distribution shifts"
+    nl: "Chip Huyen, *Designing Machine Learning Systems* (O'Reilly, 2022): de hoofdstukken over deployment en over verschuivingen in de verdeling van data"
